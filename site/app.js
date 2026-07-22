@@ -1,4 +1,10 @@
 const PAGE_SIZE = 60;
+const DEFAULT_LEFT_RATIO = 0.18;
+const DEFAULT_MIDDLE_RATIO = 0.25;
+const MIN_LEFT_WIDTH = 180;
+const MIN_MIDDLE_WIDTH = 260;
+const MIN_READER_WIDTH = 360;
+const RESIZE_STEP = 16;
 
 const state = {
   navigation: [],
@@ -27,6 +33,7 @@ const elements = {
   readerBody: document.querySelector("#reader-body"),
   placeholder: document.querySelector("#placeholder-template"),
   mobileTabs: [...document.querySelectorAll(".mobile-tab")],
+  resizers: [...document.querySelectorAll(".column-resizer")],
 };
 
 function nodeKey(node) {
@@ -34,10 +41,10 @@ function nodeKey(node) {
 }
 
 function formatDate(value) {
-  if (!value) return "日期未记录";
+  if (!value) return "Date unavailable";
   const date = new Date(value);
   if (Number.isNaN(date.valueOf())) return value;
-  return new Intl.DateTimeFormat("zh-CN", {
+  return new Intl.DateTimeFormat("en-US", {
     year: "numeric",
     month: "long",
     day: "numeric",
@@ -98,7 +105,7 @@ function renderCatalog() {
     const toggle = document.createElement("button");
     toggle.type = "button";
     toggle.className = "nav-toggle";
-    toggle.setAttribute("aria-label", `展开 ${item.title}`);
+    toggle.setAttribute("aria-label", `Expand ${item.title}`);
     toggle.setAttribute("aria-expanded", "false");
     toggle.innerHTML = "<span>▶</span>";
 
@@ -110,7 +117,7 @@ function renderCatalog() {
     toggle.addEventListener("click", () => {
       const expanded = toggle.getAttribute("aria-expanded") === "true";
       toggle.setAttribute("aria-expanded", String(!expanded));
-      toggle.setAttribute("aria-label", `${expanded ? "展开" : "收起"} ${item.title}`);
+      toggle.setAttribute("aria-label", `${expanded ? "Expand" : "Collapse"} ${item.title}`);
       sources.hidden = expanded;
     });
 
@@ -147,7 +154,7 @@ function renderArticles() {
   if (!shown.length) {
     const empty = document.createElement("div");
     empty.className = "empty-state";
-    empty.innerHTML = '<span class="empty-symbol">⌁</span><p>这个档案夹目前没有可展示的文章。</p>';
+    empty.innerHTML = '<span class="empty-symbol">⌁</span><p>No articles are available in this selection.</p>';
     elements.articleList.append(empty);
     return;
   }
@@ -169,7 +176,7 @@ function renderArticles() {
     title.textContent = article.title;
     const summary = document.createElement("p");
     summary.className = "card-summary";
-    summary.textContent = article.summary || "此条目没有提供摘要。";
+    summary.textContent = article.summary || "No summary was provided for this entry.";
     copy.append(source, title, summary);
     card.append(copy);
     card.addEventListener("click", () => openArticle(article));
@@ -184,7 +191,7 @@ async function selectNode(node) {
   state.visibleCount = PAGE_SIZE;
   elements.listTitle.textContent = node.title;
   elements.articleCount.textContent = "…";
-  elements.articleList.innerHTML = '<div class="loading-state"><p>正在抽取档案卡片…</p></div>';
+  elements.articleList.innerHTML = '<div class="loading-state"><p>Preparing article list…</p></div>';
   renderCatalog();
   setMobilePanel("list");
 
@@ -196,7 +203,7 @@ async function selectNode(node) {
     state.articles = Array.isArray(data.items) ? data.items : [];
     renderArticles();
   } catch (error) {
-    elements.articleList.innerHTML = `<div class="empty-state"><p>文章列表加载失败：${error.message}</p></div>`;
+    elements.articleList.innerHTML = `<div class="empty-state"><p>Unable to load articles: ${error.message}</p></div>`;
   }
 }
 
@@ -207,8 +214,8 @@ async function openArticle(article) {
   elements.readerContent.hidden = false;
   elements.readerSource.textContent = article.sourceTitle;
   elements.readerTitle.textContent = article.title;
-  elements.readerDate.textContent = "正在展开文章…";
-  elements.readerBody.innerHTML = '<div class="loading-state"><p>正在展开纸页…</p></div>';
+  elements.readerDate.textContent = "Opening article…";
+  elements.readerBody.innerHTML = '<div class="loading-state"><p>Opening page…</p></div>';
   elements.readerLink.hidden = !article.link;
   if (article.link) elements.readerLink.href = article.link;
   setMobilePanel("reader");
@@ -219,10 +226,10 @@ async function openArticle(article) {
     const detail = await response.json();
     if (state.activeArticleId !== article.id) return;
     elements.readerDate.textContent = formatDate(detail.publishedAt);
-    elements.readerBody.innerHTML = detail.content || `<p>${detail.summary || "此条目没有提供正文。"}</p>`;
+    elements.readerBody.innerHTML = detail.content || `<p>${detail.summary || "No article body was provided."}</p>`;
   } catch (error) {
     elements.readerDate.textContent = formatDate(article.publishedAt);
-    elements.readerBody.textContent = `文章加载失败：${error.message}`;
+    elements.readerBody.textContent = `Unable to load article: ${error.message}`;
   }
 }
 
@@ -238,12 +245,106 @@ async function initialize() {
     state.navigation = Array.isArray(navigation.items) ? navigation.items : [];
     renderCatalog();
     elements.archiveStatus.textContent = build
-      ? `${build.articleCount} 篇文章已编目${build.failedSourceCount ? ` · ${build.failedSourceCount} 个来源待修复` : ""}`
-      : "档案目录已就绪";
+      ? `${build.articleCount} articles indexed${build.failedSourceCount ? ` · ${build.failedSourceCount} sources need attention` : ""}`
+      : "Archive catalog ready";
   } catch (error) {
-    elements.archiveStatus.textContent = `Catalog 加载失败：${error.message}`;
-    elements.catalog.innerHTML = '<div class="empty-state"><p>暂时无法打开档案柜。</p></div>';
+    elements.archiveStatus.textContent = `Unable to load catalog: ${error.message}`;
+    elements.catalog.innerHTML = '<div class="empty-state"><p>The catalog is temporarily unavailable.</p></div>';
   }
+}
+
+function resizerWidth() {
+  return elements.resizers.reduce(
+    (total, resizer) => total + resizer.getBoundingClientRect().width,
+    0,
+  );
+}
+
+function currentColumnWidths() {
+  const styles = getComputedStyle(elements.desk);
+  const columns = styles.gridTemplateColumns.split(" ").map(Number.parseFloat);
+  return { left: columns[0], middle: columns[2] };
+}
+
+function applyColumnWidths(left, middle) {
+  const available = elements.desk.getBoundingClientRect().width - resizerWidth();
+  const safeLeft = Math.max(
+    MIN_LEFT_WIDTH,
+    Math.min(left, available - MIN_MIDDLE_WIDTH - MIN_READER_WIDTH),
+  );
+  const safeMiddle = Math.max(
+    MIN_MIDDLE_WIDTH,
+    Math.min(middle, available - safeLeft - MIN_READER_WIDTH),
+  );
+  elements.desk.style.setProperty("--left-width", `${safeLeft}px`);
+  elements.desk.style.setProperty("--middle-width", `${safeMiddle}px`);
+
+  const total = elements.desk.getBoundingClientRect().width;
+  elements.resizers[0]?.setAttribute("aria-valuenow", String(Math.round((safeLeft / total) * 100)));
+  elements.resizers[1]?.setAttribute("aria-valuenow", String(Math.round(((safeLeft + safeMiddle) / total) * 100)));
+}
+
+function resetColumnWidths() {
+  if (window.matchMedia("(max-width: 720px)").matches) return;
+  const available = elements.desk.getBoundingClientRect().width - resizerWidth();
+  applyColumnWidths(available * DEFAULT_LEFT_RATIO, available * DEFAULT_MIDDLE_RATIO);
+}
+
+function resizeFromKeyboard(resizer, direction) {
+  const widths = currentColumnWidths();
+  if (resizer.dataset.resizer === "left") {
+    applyColumnWidths(widths.left + direction * RESIZE_STEP, widths.middle);
+  } else {
+    applyColumnWidths(widths.left, widths.middle + direction * RESIZE_STEP);
+  }
+}
+
+for (const resizer of elements.resizers) {
+  resizer.setAttribute("aria-valuemin", "0");
+  resizer.setAttribute("aria-valuemax", "100");
+
+  resizer.addEventListener("pointerdown", (event) => {
+    if (event.button !== 0) return;
+    const startX = event.clientX;
+    const start = currentColumnWidths();
+    resizer.classList.add("is-dragging");
+    document.body.classList.add("is-resizing");
+    resizer.setPointerCapture(event.pointerId);
+
+    const move = (moveEvent) => {
+      const delta = moveEvent.clientX - startX;
+      if (resizer.dataset.resizer === "left") {
+        applyColumnWidths(start.left + delta, start.middle);
+      } else {
+        applyColumnWidths(start.left, start.middle + delta);
+      }
+    };
+
+    const stop = () => {
+      resizer.classList.remove("is-dragging");
+      document.body.classList.remove("is-resizing");
+      resizer.removeEventListener("pointermove", move);
+      resizer.removeEventListener("pointerup", stop);
+      resizer.removeEventListener("pointercancel", stop);
+    };
+
+    resizer.addEventListener("pointermove", move);
+    resizer.addEventListener("pointerup", stop);
+    resizer.addEventListener("pointercancel", stop);
+  });
+
+  resizer.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+      event.preventDefault();
+      resizeFromKeyboard(resizer, event.key === "ArrowLeft" ? -1 : 1);
+    }
+    if (event.key === "Home") {
+      event.preventDefault();
+      resetColumnWidths();
+    }
+  });
+
+  resizer.addEventListener("dblclick", resetColumnWidths);
 }
 
 elements.loadMore.addEventListener("click", () => {
@@ -255,4 +356,5 @@ for (const tab of elements.mobileTabs) {
   tab.addEventListener("click", () => setMobilePanel(tab.dataset.panel));
 }
 
+resetColumnWidths();
 initialize();

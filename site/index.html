@@ -1,63 +1,67 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="color-scheme" content="light">
-    <meta name="description" content="由 GitHub 持续归档的 RSS 与 AI 内容阅读室">
-    <title>Signal Archive · 信号档案室</title>
+    <meta name="description" content="A reading room for continuously archived RSS and AI feeds">
+    <title>Signal Archive</title>
     <link rel="stylesheet" href="./styles.css">
   </head>
   <body>
-    <div class="mobile-tabs" role="navigation" aria-label="阅读区域">
-      <button class="mobile-tab is-active" data-panel="catalog">目录</button>
-      <button class="mobile-tab" data-panel="list">文章</button>
-      <button class="mobile-tab" data-panel="reader">阅读</button>
+    <div class="mobile-tabs" role="navigation" aria-label="Reading areas">
+      <button class="mobile-tab is-active" data-panel="catalog">Catalog</button>
+      <button class="mobile-tab" data-panel="list">Articles</button>
+      <button class="mobile-tab" data-panel="reader">Reader</button>
     </div>
 
     <main class="archive-desk" data-mobile-panel="catalog">
-      <aside class="catalog-panel" aria-label="内容目录">
+      <aside class="catalog-panel" aria-label="Content catalog">
         <header class="brand-plate">
           <span class="brand-mark">SA</span>
           <div>
             <h1>Signal Archive</h1>
-            <p>信号档案室</p>
+            <p>Feed reading room</p>
           </div>
         </header>
         <div class="catalog-caption">
           <span>CATALOG · 001</span>
-          <span id="source-count">读取中</span>
+          <span id="source-count">LOADING</span>
         </div>
-        <nav id="catalog" class="catalog-tree" aria-label="Catalog"></nav>
+        <nav id="catalog" class="catalog-tree" aria-label="Feed catalog"></nav>
         <footer class="cabinet-footer">
           <span class="status-lamp" aria-hidden="true"></span>
-          <span id="archive-status">正在整理档案…</span>
+          <span id="archive-status">Preparing archive…</span>
         </footer>
       </aside>
 
-      <section class="list-panel" aria-label="文章列表">
+      <div class="column-resizer" data-resizer="left" role="separator" aria-label="Resize catalog and article columns" aria-orientation="vertical" tabindex="0"></div>
+
+      <section class="list-panel" aria-label="Article list">
         <header class="list-header">
           <div>
-            <p class="eyebrow">CURRENT DRAWER</p>
-            <h2 id="list-title">请选择一个目录</h2>
+            <p class="eyebrow">CURRENT SELECTION</p>
+            <h2 id="list-title">Select a category</h2>
           </div>
           <span id="article-count" class="count-stamp">0 ITEMS</span>
         </header>
         <div id="article-list" class="article-list" aria-live="polite">
           <div class="empty-state">
             <span class="empty-symbol">⌁</span>
-            <p>从左侧档案柜选择一个文件夹或来源。</p>
+            <p>Select a category or source from the catalog.</p>
           </div>
         </div>
-        <button id="load-more" class="load-more" type="button" hidden>翻阅更多</button>
+        <button id="load-more" class="load-more" type="button" hidden>Load more</button>
       </section>
 
-      <article class="reader-panel" aria-label="文章正文">
+      <div class="column-resizer" data-resizer="middle" role="separator" aria-label="Resize article and reader columns" aria-orientation="vertical" tabindex="0"></div>
+
+      <article class="reader-panel" aria-label="Article reader">
         <div id="reader-empty" class="reader-empty">
           <div class="paper-emblem">S·A</div>
           <p class="eyebrow">ARCHIVE READING ROOM</p>
-          <h2>选择一篇文章开始阅读</h2>
-          <p>文章将像一页从档案盒中取出的信纸，在这里展开。</p>
+          <h2>Select an article to begin</h2>
+          <p>The selected article will open here on a quiet sheet of paper.</p>
         </div>
         <div id="reader-content" class="reader-content" hidden>
           <header class="article-header">
@@ -65,7 +69,7 @@
             <h2 id="reader-title"></h2>
             <div class="article-meta">
               <time id="reader-date"></time>
-              <a id="reader-link" target="_blank" rel="noopener noreferrer">阅读原文 ↗</a>
+              <a id="reader-link" target="_blank" rel="noopener noreferrer">Read original ↗</a>
             </div>
           </header>
           <div id="reader-body" class="article-body"></div>
