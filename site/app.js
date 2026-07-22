@@ -1,10 +1,11 @@
 const PAGE_SIZE = 60;
 const DEFAULT_LEFT_RATIO = 0.18;
 const DEFAULT_MIDDLE_RATIO = 0.25;
-const MIN_LEFT_WIDTH = 180;
+const MIN_LEFT_WIDTH = 220;
 const MIN_MIDDLE_WIDTH = 260;
 const MIN_READER_WIDTH = 360;
 const RESIZE_STEP = 16;
+const THEME_STORAGE_KEY = "signal-archive-theme";
 
 const state = {
   navigation: [],
@@ -33,9 +34,42 @@ const elements = {
   readerLink: document.querySelector("#reader-link"),
   readerBody: document.querySelector("#reader-body"),
   placeholder: document.querySelector("#placeholder-template"),
+  themeToggle: document.querySelector("#theme-toggle"),
   mobileTabs: [...document.querySelectorAll(".mobile-tab")],
   resizers: [...document.querySelectorAll(".column-resizer")],
 };
+
+function preferredTheme() {
+  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+}
+
+function currentTheme() {
+  return document.documentElement.dataset.theme || preferredTheme();
+}
+
+function updateThemeButton(theme) {
+  const isDark = theme === "dark";
+  const label = isDark ? "Switch to light mode" : "Switch to dark mode";
+  elements.themeToggle.dataset.theme = theme;
+  elements.themeToggle.setAttribute("aria-pressed", String(isDark));
+  elements.themeToggle.setAttribute("aria-label", label);
+  elements.themeToggle.title = label;
+}
+
+function setTheme(theme, { persist = true } = {}) {
+  document.documentElement.dataset.theme = theme;
+  updateThemeButton(theme);
+  if (persist) localStorage.setItem(THEME_STORAGE_KEY, theme);
+}
+
+function initializeTheme() {
+  const storedTheme = localStorage.getItem(THEME_STORAGE_KEY);
+  if (storedTheme === "light" || storedTheme === "dark") {
+    setTheme(storedTheme, { persist: false });
+  } else {
+    updateThemeButton(preferredTheme());
+  }
+}
 
 function nodeKey(node) {
   return node.feedPath ?? node.listPath;
@@ -365,6 +399,14 @@ for (const resizer of elements.resizers) {
   resizer.addEventListener("dblclick", resetColumnWidths);
 }
 
+elements.themeToggle.addEventListener("click", () => {
+  setTheme(currentTheme() === "dark" ? "light" : "dark");
+});
+
+window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
+  if (!document.documentElement.dataset.theme) updateThemeButton(preferredTheme());
+});
+
 elements.loadMore.addEventListener("click", () => {
   state.visibleCount += PAGE_SIZE;
   renderArticles();
@@ -374,5 +416,6 @@ for (const tab of elements.mobileTabs) {
   tab.addEventListener("click", () => setMobilePanel(tab.dataset.panel));
 }
 
+initializeTheme();
 resetColumnWidths();
 initialize();

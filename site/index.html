@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="color-scheme" content="light">
+    <meta name="color-scheme" content="light dark">
     <meta name="description" content="A reading room for continuously archived RSS and AI feeds">
     <title>Signal Archive</title>
     <link rel="stylesheet" href="./styles.css">
@@ -23,6 +23,15 @@
             <h1>Signal Archive</h1>
             <p>Feed reading room</p>
           </div>
+          <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false" title="Switch to dark mode">
+            <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M20 15.2A8.4 8.4 0 0 1 8.8 4a8.4 8.4 0 1 0 11.2 11.2Z"></path>
+            </svg>
+            <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="3.5"></circle>
+              <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"></path>
+            </svg>
+          </button>
         </header>
         <div class="catalog-caption">
           <span>CATALOG · 001</span>
@@ -40,13 +49,12 @@
       <section class="list-panel" aria-label="Article list">
         <header class="list-header">
           <div>
-            <p class="eyebrow">CURRENT SELECTION</p>
             <h2>
               <span id="list-title">Select a category</span>
               <a id="list-source-link" class="list-source-link" target="_blank" rel="noopener noreferrer" hidden></a>
             </h2>
+            <span id="article-count" class="count-stamp">0 ITEMS</span>
           </div>
-          <span id="article-count" class="count-stamp">0 ITEMS</span>
         </header>
         <div id="article-list" class="article-list" aria-live="polite">
           <div class="empty-state">
