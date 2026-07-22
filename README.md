@@ -1,59 +1,151 @@
 # Signal Archive
 
-Signal Archive 是一个基于 GitHub Actions 运行的自动化内容采集与归档项目。它从标准订阅源和 AI 驱动的自定义订阅源中定期拉取内容，将结果保存为仓库内的文件，并通过 Git commit 保留每次归档的完整历史。
+Signal Archive 是一个基于 GitHub Actions 的自动化内容采集与归档项目。项目从标准 RSS/Atom 订阅源和 AI 驱动的自定义订阅源拉取内容，将结果保存到独立的 `archive` 分支，并使用 Git commit 记录每次归档的变化。
 
-## 背景
+## 分支职责
 
-需要长期关注的信息并不都能通过同一种方式获取：一部分内容以 RSS/Atom 等标准订阅格式发布，可以通过 OPML 统一管理；另一部分内容可能来自网站、社交媒体、API，或者需要根据特定主题进行检索和整理，无法直接放入传统订阅列表。
+### `main`
 
-本项目希望把这些不同来源统一为一套可自动运行、可追溯且便于版本管理的内容归档流程。
+保存项目配置和采集程序：
 
-## 项目目标
+```text
+main
+├── opml.xml
+├── scripts/
+├── tests/
+└── .github/workflows/
+```
 
-- 使用 OPML 文件管理并拉取 RSS/Atom 等标准订阅源。
-- 支持 AI 驱动的自定义订阅源：维护一个 Prompt 列表，每个 Prompt 描述需要拉取的内容及要求。
-- 根据自定义订阅配置调用指定 AI 服务的 API，尝试检索、整理并返回目标内容。
-- 将不同来源的拉取结果统一保存为仓库内的文件。
-- 每次任务运行后，将本轮新增或更新的全部内容合并到一个 commit 中。
-- 由 GitHub Actions 自动将 commit 推送到指定的远端分支。
-- 利用 Git 历史记录内容变化，使每次采集结果都可查询和追溯。
+### `archive`
+
+只保存供 Fread 读取的 Catalog 和归档后的 Feed 文档：
+
+```text
+archive
+├── catalog.json
+├── rss/
+│   ├── <feed-hash>.xml
+│   └── ...
+└── ai/
+    ├── <prompt-name>.xml
+    └── ...
+```
+
+`archive` 是独立的 orphan 分支，不需要包含 `opml.xml`、脚本或 GitHub Actions。
 
 ## 内容来源
 
-### OPML 订阅源
+### RSS/Atom
 
-标准订阅源记录在 [`opml.xml`](./opml.xml) 中，主要用于管理 RSS/Atom Feed。任务运行时读取该文件并逐一拉取内容。
+标准订阅源及其分类层级维护在 [`opml.xml`](./opml.xml) 中。归档任务只保存 RSS/Atom 文档本身，不下载或拆分其中的文章正文。
+
+RSS 文档使用规范化 Feed URL 的 SHA-256 哈希前 16 位命名，例如：
+
+```text
+rss/61b927a83d72e9f0.xml
+```
+
+因此，修改 OPML 中的分类或显示标题不会移动已经归档的 Feed 文件。
 
 ### AI 自定义订阅源
 
-自定义订阅源以 Prompt 列表的形式维护。每个 Prompt 对应一个内容采集需求，例如关注的主题、信息范围、时间范围、来源偏好和期望的输出格式。
+AI 订阅源将通过 Prompt 列表描述需要采集的主题、范围和输出要求，并调用指定 AI API 获取内容。AI 返回结果也会转换为标准 Feed 文档，使 Fread 能够用同一种方式读取 RSS 和 AI 内容。
 
-任务运行时会把 Prompt 发送给指定 AI API，由 AI 尝试完成内容检索与整理。AI 服务、模型和认证信息应通过项目配置及 GitHub Actions Secrets 管理，API Key 等敏感信息不得提交到仓库。
+API Key 等敏感信息必须通过 GitHub Actions Secrets 管理，不得提交到仓库。
 
-## 预期工作流程
+## Catalog
 
-```text
-OPML -> RSS/Atom 拉取 ---------+
-                              |
-Prompt 列表 -> 指定 AI API ----+-> 内容处理 -> 保存为文件
-                                                  |
-                                                  v
-                                      创建单个归档 commit
-                                                  |
-                                                  v
-                                        推送到远端分支
+`archive/catalog.json` 是由 OPML 自动生成的 Fread 导航文件。它保留 OPML 的分类层级，但不复制 OPML 文件，也不要求归档文件夹遵循分类层级。
+
+示例：
+
+```json
+{
+  "children": [
+    {
+      "type": "category",
+      "title": "技术",
+      "children": [
+        {
+          "type": "rss",
+          "title": "OpenAI News",
+          "feedPath": "rss/61b927a83d72e9f0.xml",
+          "originalUrl": "https://example.com/feed.xml",
+          "lastSuccessfulFetchAt": null,
+          "lastContentChangedAt": null
+        }
+      ]
+    }
+  ]
+}
 ```
 
-GitHub Actions 可以按计划定时执行，也可以手动触发。一次任务中的所有拉取结果应在文件保存完成后统一提交，避免为每一条内容分别创建 commit。
+节点分为两类：
 
-## 设计原则
+- `category`：显示一个分类，通过 `children` 包含下级分类或订阅源。
+- `rss`：显示一个 RSS/Atom 订阅源，通过 `feedPath` 指向归档文件。
 
-- **自动化**：内容拉取、文件保存、提交和推送均由 GitHub Actions 完成。
-- **可追溯**：归档内容作为仓库的一部分保存，并由 Git 记录变化历史。
-- **可扩展**：标准 Feed 与 AI 自定义订阅使用不同的采集方式，但共享后续的保存和提交流程。
-- **安全**：访问令牌和 AI API Key 只保存在 GitHub Actions Secrets 等安全环境中。
-- **可重复运行**：采集流程应尽量避免重复保存相同内容，并能安全处理部分来源拉取失败的情况。
+后续 AI 订阅源使用 `type: "ai"`，同样通过 `feedPath` 指向可读取的 Feed 文档。
 
-## 当前状态
+时间字段的含义：
 
-项目目前包含 OPML 订阅文件，GitHub Actions 自动采集流程及 AI 自定义订阅能力将围绕上述目标逐步实现。
+- `lastSuccessfulFetchAt`：最近一次成功拉取该来源的时间。
+- `lastContentChangedAt`：归档 Feed 内容最近一次实际变化的时间。
+
+首次生成时两个字段都是 `null`。重新生成 Catalog 时，脚本会根据稳定的 `feedPath` 继承已有时间，避免 OPML 分类或标题变化导致运行状态丢失。
+
+## 生成 Catalog
+
+本地运行：
+
+```bash
+python3 scripts/generate_catalog.py \
+  --input opml.xml \
+  --output catalog.json
+```
+
+如果需要从旧 Catalog 继承拉取状态：
+
+```bash
+python3 scripts/generate_catalog.py \
+  --input opml.xml \
+  --existing path/to/old/catalog.json \
+  --output path/to/new/catalog.json
+```
+
+运行测试：
+
+```bash
+python3 -m unittest discover -s tests -v
+```
+
+## 自动同步
+
+[`sync-catalog.yml`](./.github/workflows/sync-catalog.yml) 在以下文件被推送到 `main` 时自动运行：
+
+- `opml.xml`
+- `scripts/generate_catalog.py`
+- `tests/test_generate_catalog.py`
+- `.github/workflows/sync-catalog.yml`
+
+也可以从 GitHub Actions 页面手动触发。工作流会：
+
+1. 检出 `main` 并读取 OPML。
+2. 检出已有的 `archive`；如果不存在，则首次创建 orphan 分支。
+3. 生成 `archive/catalog.json`，同时继承已有时间字段。
+4. 仅在 Catalog 发生变化时创建 commit。
+5. 将 commit 推送到远端 `archive` 分支。
+
+所有会写入 `archive` 的工作流都应使用 `signal-archive-writer` 并发组，避免多个任务同时推送产生冲突。
+
+## 归档流程目标
+
+```text
+OPML ──> catalog.json ───────────────┐
+                                     │
+RSS/Atom URL ──> 原始 Feed 文档 ─────┼──> archive 分支单次 commit
+                                     │
+Prompt ──> 指定 AI API ──> Feed 文档 ┘
+```
+
+每轮采集完成后，本轮所有新增或更新内容合并为一个 commit 并推送到 `archive`。没有变化时不创建内容 commit。Git 历史负责保存 Feed 文档的历史版本。

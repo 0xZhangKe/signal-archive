@@ -1,0 +1,66 @@
+name: Sync catalog
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - opml.xml
+      - scripts/generate_catalog.py
+      - tests/test_generate_catalog.py
+      - .github/workflows/sync-catalog.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: signal-archive-writer
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Test catalog generator
+        run: python3 -m unittest discover -s tests -v
+
+      - name: Prepare archive worktree
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git ls-remote --exit-code --heads origin archive >/dev/null 2>&1; then
+            git fetch origin archive
+            git worktree add archive-worktree origin/archive
+          else
+            git worktree add --detach archive-worktree
+            git -C archive-worktree switch --orphan archive
+            git -C archive-worktree rm -rf --ignore-unmatch .
+          fi
+
+      - name: Generate catalog
+        run: |
+          python3 scripts/generate_catalog.py \
+            --input opml.xml \
+            --existing archive-worktree/catalog.json \
+            --output archive-worktree/catalog.json
+
+      - name: Commit catalog when changed
+        shell: bash
+        run: |
+          set -euo pipefail
+          git -C archive-worktree add catalog.json
+          if git -C archive-worktree diff --cached --quiet; then
+            echo "Catalog is already up to date."
+            exit 0
+          fi
+
+          git -C archive-worktree config user.name "github-actions[bot]"
+          git -C archive-worktree config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git -C archive-worktree commit -m "catalog: sync from main@${GITHUB_SHA::7}"
+          git -C archive-worktree push origin HEAD:archive
