@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>K.I.S.S</title>
+		<link>https://bigeagle.me/</link>
+		<description>Recent content on K.I.S.S</description>
+		<generator>Hugo</generator>
+		<language>zh-CN</language>
+		
+		
+		
+			<copyright>&lt;a href=&#34;https://github.com/bigeagle/bigeagle.me&#34;&gt; Justin Wong&lt;/a&gt;</copyright>
+		
+		
+			<lastBuildDate>Sun, 26 Nov 2023 00:00:00 +0000</lastBuildDate>
+		
+			<atom:link href="https://bigeagle.me/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>macOS 按域名切换 DNS 解析</title>
+				<link>https://bigeagle.me/2023/11/mac-dns-resolver/</link>
+				<pubDate>Sun, 26 Nov 2023 00:00:00 +0000</pubDate>
+				<guid>https://bigeagle.me/2023/11/mac-dns-resolver/</guid>
+				<description>&lt;p&gt;在工作用的电脑上，为了访问公司内网，需要让内网域名走公司的 DNS 服务器，而其他域名走公共 DNS 服务器。&lt;/p&gt;&#xA;&lt;p&gt;之前我一直使用 dnsmasq 实现按域名切换解析，这样的话有几个问题：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;dnsmasq 的默认上游是静态配置，并不是在所有网络环境中都能直接用 114 了事，尤其是在一些需要认证的环境中&lt;/li&gt;&#xA;&lt;li&gt;需要改系统的 DNS 配置，同时每次系统更新之后又要重新改一遍&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;直到昨天我才知道 BSD 系支持一个按域名设置 resolver 的功能 (&lt;a href=&#34;https://www.manpagez.com/man/5/resolver/&#34;&gt;&lt;code&gt;man 5 resolver&lt;/code&gt;&lt;/a&gt;)，直接用就好了。&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>为什么说 GPT 是无损压缩</title>
+				<link>https://bigeagle.me/2023/03/llm-is-compression/</link>
+				<pubDate>Sun, 26 Mar 2023 00:00:00 +0000</pubDate>
+				<guid>https://bigeagle.me/2023/03/llm-is-compression/</guid>
+				<description>&lt;p&gt;上周一从 &lt;a href=&#34;https://twitter.com/zxytim&#34;&gt;Tim&lt;/a&gt; 处听到一个“暴论”：大语言模型本质上是无损压缩。可惜聊天的时间太短了，Tim 说不完这个理论。经过一段时间的网上冲浪，我也从多个地方找到了这个理论的来源。&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>握着你的手训一个类GPT语言模型 (二)</title>
+				<link>https://bigeagle.me/2023/03/pico-gpt-2/</link>
+				<pubDate>Mon, 20 Mar 2023 00:00:00 +0000</pubDate>
+				<guid>https://bigeagle.me/2023/03/pico-gpt-2/</guid>
+				<description>&lt;p&gt;书接&lt;a href=&#34;https://bigeagle.me/2023/03/pico-gpt-1/&#34;&gt;上回&lt;/a&gt;，我们搞了个最简单的胡说八道机，距离GPT其实只差更科学的模型结构了。本文中公式较多，嚼不动的同学建议参看一些&lt;a href=&#34;https://theaisummer.com/transformer/&#34;&gt;图文并茂的科普文&lt;/a&gt;。&lt;/p&gt;&#xA;&lt;h2 id=&#34;上下文信息融合&#34;&gt;上下文信息融合&lt;/h2&gt;&#xA;&lt;p&gt;考虑一个张量 $\boldsymbol{x} \in \mathbb{R}^{T\times C}$，这个张量可以用来表示一个 “上下文特征 (context feature)” ，其中 $T$ 是上下文长度&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;，$C$ 是特征数。我们假定一种非常简单的，从上下文中整合信息的方式: 对于每一个位置 $t$，我们把所有 $t$ 之前的特征都取个平均值。写成数学公式就是:&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>握着你的手训一个类GPT语言模型 (一)</title>
+				<link>https://bigeagle.me/2023/03/pico-gpt-1/</link>
+				<pubDate>Sun, 12 Mar 2023 00:00:00 +0000</pubDate>
+				<guid>https://bigeagle.me/2023/03/pico-gpt-1/</guid>
+				<description>&lt;p&gt;这段时间 ChatGPT 大有 AI 奇点将至的势头，它展现的各种能力也的确很惊人，让人忍不住想要复刻一个。不过我从来没搞过 NLP 相关领域，机缘巧合在 youtube 上看见 Andrew Karpathy 的视频 &lt;a href=&#34;https://www.youtube.com/watch?v=kCc8FmEb1nY&#34;&gt;Let&amp;rsquo;s build GPT: from scratch, in code, spelled out&lt;/a&gt; ，非常详细地从零开始展示了如何实现一个 Decoder-Only 的 Transformer 语言模型。&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Rosetta in Linux Virtual Machine on Apple Silicon</title>
+				<link>https://bigeagle.me/2023/01/linux-vm-rosetta/</link>
+				<pubDate>Sun, 29 Jan 2023 00:00:00 +0000</pubDate>
+				<guid>https://bigeagle.me/2023/01/linux-vm-rosetta/</guid>
+				<description>&lt;p&gt;2021 年底我的主力设备换成 M1 Macbook Pro，整体上还是非常够用的，唯独就是一些 linux 开发搞不定了，所以被迫大小事情都得 ssh 到某个 linux 开发机解决。虽然可以跑 linux 虚拟机，但 linux x86_64 环境还是得用 qemu 跑，速度慢一大截，总是不太爽。&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Fit an Overfit with MegEngine</title>
+				<link>https://bigeagle.me/2021/02/megengine-intro-overfit/</link>
+				<pubDate>Fri, 19 Feb 2021 00:00:00 +0000</pubDate>
+				<guid>https://bigeagle.me/2021/02/megengine-intro-overfit/</guid>
+				<description>&lt;p&gt;本文为&lt;a href=&#34;https://bigeagle.me/tags/megengine/&#34;&gt;MegEngine系列&lt;/a&gt;开篇，难得有机会写一些能公开发出来，又和自己平时工作高度相关的内容，期望下次更新不要再鸽一年了。&lt;/p&gt;&#xA;&lt;p&gt;作为开篇，我会写一点点&lt;ruby&gt;深度学习&lt;rt&gt;炼丹&lt;/rt&gt;&lt;/ruby&gt;的基本概念，然后讲一个有意思的小实验: 如何用 MegEngine 拟合一个 &amp;ldquo;OVERFIT&amp;rdquo; 出来。&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>把 CUPS 扔进 docker 里 </title>
+				<link>https://bigeagle.me/2020/01/cupsd-in-docker/</link>
+				<pubDate>Tue, 28 Jan 2020 00:00:00 +0000</pubDate>
+				<guid>https://bigeagle.me/2020/01/cupsd-in-docker/</guid>
+				<description>&lt;h2 id=&#34;开头废话&#34;&gt;开头废话&lt;/h2&gt;&#xA;&lt;p&gt;看了一下我竟然整整 3 年没写过 blog 了！&#xA;有生之年能更新一下也是挺难得的。&lt;/p&gt;&#xA;&lt;p&gt;其实我这几年没少写东西，只是和工作重合度太高，都发在内网论坛里了。&lt;/p&gt;&#xA;&lt;p&gt;以下是正文。&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;p&gt;故事是这样的，某年某月滚了一把 Arch，然后打印机就不听话了，会在打印机开始打印的瞬间任务失败……&#xA;由于打印机不常用，也不知道具体是哪次滚动，哪个库的更新引起的问题，很长时间都没搞定。&lt;/p&gt;&#xA;&lt;p&gt;于是弃疗，把 &lt;code&gt;cups&lt;/code&gt; 扔进 docker 里，固定一个版本解决。&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>ASUS Chromebook Flip </title>
+				<link>https://bigeagle.me/2017/02/ASUS-chromebook-flip/</link>
+				<pubDate>Fri, 03 Feb 2017 00:35:00 +0000</pubDate>
+				<guid>https://bigeagle.me/2017/02/ASUS-chromebook-flip/</guid>
+				<description>&lt;p&gt;&lt;strong&gt;Update 2018-02-10: 我错了，速度实在太慢不给力，已经吃灰半年多。&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;从很早开始，我就一直想要一个方便携带的生产力工具，在任何我需要的时候，拿出来就能干活的那种；我尝试过随身背着笔记本，奈何Latitude 7440总还是太重，腰背受不了；尝试过 termux + 蓝牙键盘，但总还是不够给力。&lt;/p&gt;&#xA;&lt;p&gt;年初在&lt;a href=&#34;http://scateu.me/&#34;&gt;康哥&lt;/a&gt;的&lt;a href=&#34;http://scateu.me/2016/10/09/chromebook-rocks.html&#34;&gt;安利&lt;/a&gt;下，购入了 &lt;a href=&#34;https://www.amazon.com/Chromebook-10-1-Inch-Convertible-Touchscreen-Rockchip/dp/B00ZS4HK0Q/ref=sr_1_1?s=pc&amp;amp;ie=UTF8&amp;amp;qid=1474962276&amp;amp;sr=1-1&amp;amp;keywords=chromebook&amp;#43;flip&#34;&gt;ASUS Chromebook Flip&lt;/a&gt;，Amazon Prime 含税仅需 ￥2060 元，大约十天到货。10.1 英寸的 Flip，基本满足了我的需求:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;非常轻便，放在单肩包里走南闯北无压力，且9小时续航非常给力&lt;/li&gt;&#xA;&lt;li&gt;移动办公/写代码，yubikey, gpg, ssh, X 转发等各种我需要的都有了&#xA;&lt;ul&gt;&#xA;&lt;li&gt;通过 &lt;a href=&#34;https://github.com/dnschneid/crouton&#34;&gt;crouton&lt;/a&gt; 安装 chroot 的 Linux 环境，该有的都能有&lt;/li&gt;&#xA;&lt;li&gt;原生的 Google Play，兼容绝大多数 Android 应用&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;键盘虽然小点，但是还能用，没有 super 键，但 search 键 (caps lock) 可以重定义为 ctrl&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+			</item>
+			<item>
+				<title>GPG 与 SSH Agent 转发</title>
+				<link>https://bigeagle.me/2016/07/GPG-and-SSH-agent-forwarding/</link>
+				<pubDate>Fri, 29 Jul 2016 17:52:14 +0000</pubDate>
+				<guid>https://bigeagle.me/2016/07/GPG-and-SSH-agent-forwarding/</guid>
+				<description>&lt;p&gt;我一直有这样的问题，当我 SSH 到某个远程主机时，就很难进一步进行 SSH 和 GPG 相关操作，因为远端没有我的私钥，如果直接把私钥拷贝到远程，则非常不安全。&#xA;自从有了&lt;a href=&#34;https://bigeagle.me/2016/02/yubikey-4/&#34;&gt;yubikey&lt;/a&gt;之后，这个问题更加严重：私钥在 yubikey 里，根本不可能“拷贝到远程”。&lt;/p&gt;&#xA;&lt;p&gt;过去我的一些做法是使用 &lt;a href=&#34;http://usbip.sourceforge.net/&#34;&gt;usbip&lt;/a&gt;，相当于把 yubikey “挂载”到远程的机器上，这个太 hacky 了，并且配置麻烦，不灵活。&lt;/p&gt;&#xA;&lt;p&gt;直到我发现了 SSH 已经可以转发 UNIX Domain Socket。&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>使用 dnsmasq 和 ipset 的策略路由</title>
+				<link>https://bigeagle.me/2016/02/ipset-policy-routing/</link>
+				<pubDate>Fri, 19 Feb 2016 20:36:29 +0000</pubDate>
+				<guid>https://bigeagle.me/2016/02/ipset-policy-routing/</guid>
+				<description>&lt;p&gt;今天试了一把 dnsmasq 的 ipset 功能，配合 iptables 和 iproute2 即可实现基于域名的策略路由。&#xA;网上已有一些文章&lt;a href=&#34;https://blog.sorz.org/p/openwrt-outwall/&#34;&gt;介绍&lt;/a&gt;了这种方法，但多是面向 OpenWrt 在路由器上做，&#xA;我直接拿来则发现在本地跑其实有坑。&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>YubiKey 4 简介与配置</title>
+				<link>https://bigeagle.me/2016/02/yubikey-4/</link>
+				<pubDate>Mon, 08 Feb 2016 23:48:07 +0000</pubDate>
+				<guid>https://bigeagle.me/2016/02/yubikey-4/</guid>
+				<description>&lt;p&gt;2012 年我买了自己的&lt;a href=&#34;https://bigeagle.me/2012/05/yubikey/&#34;&gt;第一块 YubiKey&lt;/a&gt;, 当时功能还很少，后来&lt;a href=&#34;http://scateu.me/&#34;&gt;康哥&lt;/a&gt;在参加&#xA;&lt;a href=&#34;https://www.blackhat.com/eu-15/briefings.html#is-your-timespace-safe-time-and-position-spoofing-opensourcely&#34;&gt;BlackHat 会议 &lt;/a&gt;&#xA;时，参展的 yubico 公司直接送 &lt;a href=&#34;https://www.yubico.com/products/yubikey-hardware/yubikey-neo/&#34;&gt;Yubikey NEO&lt;/a&gt;，于是我免费得到&#xA;一个。&lt;/p&gt;&#xA;&lt;p&gt;Yubikey NEO 比早前的 Yubikey 增加了 OpenPGP Smartcard 和 &lt;a href=&#34;https://www.yubico.com/applications/fido/&#34;&gt;U2F&lt;/a&gt; 支持，还可以通过 NFC 获得&#xA;Yubico One-Time-Password。唯一遗憾的一点是它的 OpenPGP Smartcard 支持到 2048 位 RSA，而我本人的 GPG 密钥都是 4096 位的，所以为了&#xA;使用它我只好增加了一个 2048 位的签名子密钥。&lt;/p&gt;&#xA;&lt;p&gt;15 年 11 月 Yubico 又推出了 &lt;a href=&#34;https://www.yubico.com/2015/11/4th-gen-yubikey-4/&#34;&gt;YubiKey 4&lt;/a&gt;，增加了 4096 位 RSA 加密支持(貌似只有加密，没有签名)，&#xA;加上一些其他原因（后文），时间又正好赶上妹子回国，于是让妹子在 Amazon 买了帮我带了回来。&lt;/p&gt;&#xA;&#xA;&lt;figure class=&#39;center&#39;&gt;&#xA;  &lt;img src=&#34;https://bigeagle.me/2016/02/yubikey-4/yubikey-4.jpg&#34; /&gt;&#xA;&#xA;&lt;/figure&gt;</description>
+			</item>
+			<item>
+				<title>定制GH60机械键盘</title>
+				<link>https://bigeagle.me/2015/07/gh60/</link>
+				<pubDate>Thu, 02 Jul 2015 21:48:26 +0000</pubDate>
+				<guid>https://bigeagle.me/2015/07/gh60/</guid>
+				<description>&lt;p&gt;引: 年初时开源哥搞了个喜闻乐见的&lt;a href=&#34;http://z-shang.github.io/kbd-for-vim.html&#34;&gt;团购定制vim键盘的活动&lt;/a&gt;，&#xA;我饶有兴致地参团了，然而这事儿最后被厂家(TEX)放了鸽子，也就不了了之了。&lt;/p&gt;&#xA;&lt;p&gt;不过我对键盘的购买欲倒是被激活了，原有的FC660M是个好键盘，但是不能定制键位，切稍微比我的挎包长了那么一点点，&#xA;加之最近股市大跌，愈发觉得钱不花真不值钱（谁来打醒我），便总是想买个新的。&lt;/p&gt;&#xA;&lt;p&gt;挑了半天，poker2 和即将上市的 poker3 还是不够灵活，不能为所欲为…… 所以目光转向了硬件开源的 GH60。&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Debian 网络安装内核参数</title>
+				<link>https://bigeagle.me/2015/06/debian-netinstall-kernel-parameter/</link>
+				<pubDate>Mon, 22 Jun 2015 20:50:23 +0000</pubDate>
+				<guid>https://bigeagle.me/2015/06/debian-netinstall-kernel-parameter/</guid>
+				<description>&lt;p&gt;短文备忘。&lt;/p&gt;&#xA;&lt;p&gt;Debian 系网络安装使用 preseed 实现自动化，类似于 Red Hat 系的 kickstart。&#xA;preseed 的参数不一定需要通过 preseed 文件设定，可以直接通过 kernel cmdline 设置。&lt;/p&gt;&#xA;&lt;p&gt;比如 Debian 安装时设置 apt mirrors 的时候，不能改 debian-security 的 mirror，就可以通过 preseed 参数设置。&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>我的 Vim 配置</title>
+				<link>https://bigeagle.me/2015/05/vim-config/</link>
+				<pubDate>Mon, 11 May 2015 23:46:44 +0000</pubDate>
+				<guid>https://bigeagle.me/2015/05/vim-config/</guid>
+				<description>&lt;p&gt;我的 Vim 配置成型已经有不少时间了，过去也是看着 &lt;a href=&#34;http://lilydjwg.is-programmer.com&#34;&gt;依云&lt;/a&gt; 等人的配置综合而成的，&#xA;再加上有人黑我一年不写blog，一写果然就是 Arch 挂，因此决定多分享一些 &lt;a href=&#34;https://bigeagle.me/tags/super-user/&#34;&gt;super user&lt;/a&gt; 系列的内容。&lt;/p&gt;&#xA;&lt;p&gt;我的 vim 所有配置文件，均放在 &lt;a href=&#34;https://github.com/bigeagle/neovim-config&#34;&gt;GitHub&lt;/a&gt; 上，但它很可能不适合别人，因此&#xA;这篇文档主要讲我的配置文件组织方式、各个插件的用途等等，方便读者组织自己的配置文件。&lt;/p&gt;&#xA;&lt;p&gt;废话少说，先上王道。&lt;/p&gt;&#xA;&#xA;&lt;figure class=&#39;center&#39;&gt;&#xA;  &lt;img src=&#34;https://bigeagle.me/2015/05/vim-config/vim-screenshot.png&#34; /&gt;&#xA;&#xA;&lt;/figure&gt;</description>
+			</item>
+			<item>
+				<title>Libinput 与 Udev</title>
+				<link>https://bigeagle.me/2015/04/libinput-usage/</link>
+				<pubDate>Mon, 27 Apr 2015 00:21:13 +0000</pubDate>
+				<guid>https://bigeagle.me/2015/04/libinput-usage/</guid>
+				<description>&lt;p&gt;&lt;strong&gt;Update 2017.11.10&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;Linput 1.9 总算搞定了这个问题，选择采用硬件内建的加速方案，libinput 仅提供简单的线性映射。&#xA;如果需要自己调速度，除了设置 &lt;code&gt;xinput set-float-prop id=X &#39;libinput Accel Speed&#39; $speed&lt;/code&gt;&#xA;之外，更底层的方式是给 libinput 提供一个 &lt;code&gt;LIBINPUT_ATTR_TRACKPOINT_RANGE&lt;/code&gt; 属性。&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>给妹子看的 Arch Linux 桌面日常安装</title>
+				<link>https://bigeagle.me/2014/06/archlinux-install-for-beginners/</link>
+				<pubDate>Mon, 16 Jun 2014 13:24:16 +0000</pubDate>
+				<guid>https://bigeagle.me/2014/06/archlinux-install-for-beginners/</guid>
+				<description>&lt;p&gt;謝邀。&lt;/p&gt;&#xA;&lt;h1 id=&#34;准备工作&#34;&gt;准备工作&lt;/h1&gt;&#xA;&lt;p&gt;首先，准备一张你参加活动得到的 Ubuntu 或者 Deepin ，或者其他什么发行版的安装光盘，是的它有包装很漂亮，哦别急着找光驱，找个打火机把它烧掉，以示决心。&lt;/p&gt;&#xA;&lt;p&gt;然后，拿出你收藏多年的《鸟哥的Linux私房菜》，&lt;s&gt;不用翻开，啊烧掉有点可惜，把他送给你的冤家就好了。&lt;/s&gt;&#xA;鳥哥是 RedHat 玩家，而且内容太老了，作为新手的你用鳥哥指导 Arch Linux 安装只能误入歧途。 (鳥哥很萌哒，我不该黑他)&lt;/p&gt;&#xA;&lt;p&gt;洗个手，沐浴更衣，斋戒三天，挑选良辰吉日，面向紫禁城方向摆好计算机，准备迎接挑战。&lt;/p&gt;&#xA;&lt;p&gt;在开始之前，请在心中默念三遍:&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;Arch Linux是世界上最好的发行版，我一定能掌握它！&lt;/p&gt;&#xA;&lt;/blockquote&gt;</description>
+			</item>
+			<item>
+				<title>修复GTK3 CSD外观</title>
+				<link>https://bigeagle.me/2014/05/fix-gtk3-csd/</link>
+				<pubDate>Sat, 17 May 2014 13:53:46 +0000</pubDate>
+				<guid>https://bigeagle.me/2014/05/fix-gtk3-csd/</guid>
+				<description>&lt;p&gt;GTK3 3.12 之后强制开启了CSD(Client-Side Decoration)，其实这个feature挺好的，但是在平铺式窗口下，GTK3程序的窗口边缘出现了大块留白，极其难看:&lt;/p&gt;&#xA;&#xA;&lt;figure class=&#39;center&#39;&gt;&#xA;  &lt;img src=&#34;https://bigeagle.me/2014/05/fix-gtk3-csd/gtk3-csd.png&#34; /&gt;&#xA;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;貌似引起问题的原因是CSD接管了窗口阴影的渲染，窗口管理器就把阴影边缘包括在窗口之内了，&#xA;经 @xiaq 提醒，不开compton/xcompositor后由于直接不支持阴影了所以就没有这个问题。&#xA;但是这样的话窗口透明也就没有了。&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>握着你的手教你画哀女王</title>
+				<link>https://bigeagle.me/2013/07/ai_tee/</link>
+				<pubDate>Thu, 04 Jul 2013 23:12:00 +0000</pubDate>
+				<guid>https://bigeagle.me/2013/07/ai_tee/</guid>
+				<description>&lt;p&gt;炎炎夏日来到，去年的Tee不够潮了有木有，定制Tee的话，丝网印数量不够，热转印效果不好，于是决定手绘！&lt;/p&gt;&#xA;&lt;p&gt;去万能的淘宝搜一下「纺织颜料」即可，不需要用丙烯，亲测，这种颜料是不会轻易掉色的。&lt;/p&gt;&#xA;&lt;p&gt;于是我们来画个哀女王。&lt;/p&gt;&#xA;&lt;h3 id=&#34;第0步&#34;&gt;第0步&lt;/h3&gt;&#xA;&lt;p&gt;设计一下样式，用inkscape画了个。&lt;/p&gt;&#xA;&#xA;&lt;figure class=&#39;center&#39;&gt;&#xA;  &lt;img src=&#34;https://bigeagle.me/2013/07/ai_tee/ai_step0.png&#34; /&gt;&#xA;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;接下来我们开始画Tee。&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>R.I.P Google Reader</title>
+				<link>https://bigeagle.me/2013/06/bye-gr/</link>
+				<pubDate>Sun, 30 Jun 2013 00:00:00 +0000</pubDate>
+				<guid>https://bigeagle.me/2013/06/bye-gr/</guid>
+				<description>&lt;figure class=&#39;center&#39;&gt;&#xA;  &lt;img src=&#34;https://bigeagle.me/2013/06/bye-gr/google_reader2.png&#34; /&gt;&#xA;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;大约一个月前转向inoreader了，所以最近30天的阅读量很少。&lt;/p&gt;&#xA;&lt;p&gt;感谢Google Reader陪我走过的这四年，也就是我完全使用Linux的四年。没记错的话是被 @icaker 同学带入的这个圈子，Linux, Google, Mailing List, Twitter, etc.&lt;/p&gt;&#xA;&lt;p&gt;嘛，过几天 @icaker 也要去另一个城市鸟。&lt;/p&gt;&#xA;&lt;p&gt;略伤感了，再见Goole Reader，再见青春。&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Richard Stallman仍然是对的</title>
+				<link>https://bigeagle.me/2013/01/leave-google/</link>
+				<pubDate>Fri, 04 Jan 2013 18:59:00 +0000</pubDate>
+				<guid>https://bigeagle.me/2013/01/leave-google/</guid>
+				<description>&lt;p&gt;不要被这个标题吓到，这不是一篇有关自由软件的Blog。&lt;/p&gt;&#xA;&lt;p&gt;是的， &amp;ldquo;Open Source&amp;rdquo; 运动以来，不论是商业界还是技术界，都很少再提 &amp;ldquo;Free Software&amp;rdquo; 这个词了。即使是黑客界，大多数人都认为Richard Stallman这个极端主义者应该退出历史舞台, 尤其是前几天GNU sed维护者退出GNU的时候。&lt;/p&gt;&#xA;&lt;p&gt;Stallman的确是个偏执狂，极端主义者，他用着龙芯上网本(因为这是唯的BIOS, Driver, OS, App都完全自由的计算机)；他拒绝使用手机，使用某个品牌的手机，几乎等同于接受某家公司的控制[&lt;cite&gt;&lt;a href=&#34;http://www.ruanyifeng.com/blog/2012/01/richard_stallman_was_right_all_along.html&#34; title=&#34;理查德·斯托曼一直是对&#34;&gt;1&lt;/a&gt;&lt;/cite&gt;]。&lt;/p&gt;&#xA;&lt;p&gt;是的，Stallman不仅是个偏执狂，还是个暴君，他要求FSF的所有软件版权归他所有，他在Jobs去世的时候说「对于他的离开，我很高兴」等等等等。&lt;/p&gt;&#xA;&lt;p&gt;对于这个人，我不喜欢（是的我知道你们很多人「讨厌」他，但是「讨厌」这两个字我说不出口）。&lt;/p&gt;&#xA;&lt;p&gt;但是，他的观点，一直都是对的，现在&lt;strong&gt;仍然是对的&lt;/strong&gt;。&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Scala 自定义控制结构</title>
+				<link>https://bigeagle.me/2012/09/scala-new-control/</link>
+				<pubDate>Mon, 24 Sep 2012 16:44:00 +0000</pubDate>
+				<guid>https://bigeagle.me/2012/09/scala-new-control/</guid>
+				<description>&lt;p&gt;写了两年Python了想换换口味，正好在coursera上参加&lt;a href=&#34;http://daily-scala.blogspot.com/&#34;&gt;Functional Programming Principles in Scala&lt;/a&gt;课程，考虑到&lt;a href=&#34;http://en.wikipedia.org/wiki/Scala_%28programming_language%29&#34;&gt;Scala&lt;/a&gt;那一大票很诱人的特性就学Scala吧～ &lt;span style=&#34;color:#5989e0&#34;&gt;//golang 我对不起你&amp;hellip; &amp;hellip;&lt;/span&gt;&lt;/p&gt;&#xA;&lt;p&gt;话说Scala被定义为 &lt;em&gt;&lt;strong&gt;Sca&lt;/strong&gt;lable &lt;strong&gt;La&lt;/strong&gt;nguage&lt;/em&gt; ,其实解释一下不就是可以扩展自己的语法么，作为Pythoner感觉这种事情一点也不算稀奇，然而当我真的看/用到这种特性的时候的确感觉惊叹，这不是静态或动态语言的区别，这是函数式与非函数式语言的区别。&lt;/p&gt;&#xA;&lt;p&gt;虽然Python支持函数式的风格，但其编程思想终究是指令式为主的，所以有一些函数式特性并不能被真正发挥出来。&lt;/p&gt;&#xA;&lt;p&gt;在 &lt;em&gt;Programming in Scala&lt;/em&gt; 的第14章讲到 &lt;em&gt;断言与测试&lt;/em&gt; ，其中给出一个关于测试的例子:&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-scala&#34; data-lang=&#34;scala&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;ElementSuite&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;extends&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;FunSuite&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;test&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;elem result should have passed width&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;val&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ele&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;elem&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;sc&#34;&gt;&amp;#39;x&amp;#39;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;assert&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ele&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;width&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;    &#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+			</item>
+			<item>
+				<title>入手Wacom Bamboo CTL470</title>
+				<link>https://bigeagle.me/2012/09/new-wacom/</link>
+				<pubDate>Tue, 18 Sep 2012 18:17:00 +0000</pubDate>
+				<guid>https://bigeagle.me/2012/09/new-wacom/</guid>
+				<description>&lt;p&gt;前两天画瘾大发，于是一冲动就入了个Wacom Bamboo CTL470，为什么选这个？ &amp;ndash; 因为 &lt;em&gt;便宜&lt;/em&gt;! 550软妹币搞定。&lt;/p&gt;&#xA;&lt;p&gt;这一款数位笔是非常非常基础的配置，功能上其实就只是个压感笔，而且感应范围只有 4x6 英寸，不过用起来感觉也还不错。 压感方面体验很自然，很舒服～ 没有橡皮擦这一点略感功能欠缺，不过也不算大碍。&lt;/p&gt;&#xA;&lt;p&gt;Archlinux下装上 &lt;code&gt;xf86-input-wacom&lt;/code&gt;, &lt;code&gt;wacom-udev&lt;/code&gt;，&lt;code&gt;libwacom&lt;/code&gt; 即可驱动，KDE下装上&lt;code&gt;kcm-wacomtablet&lt;/code&gt;还可以在GUI里配置，可以说是开箱即用。&lt;/p&gt;&#xA;&lt;p&gt;比较令人郁闷的是&lt;code&gt;krita&lt;/code&gt;对其压感还不支持，这有点让我意外和遗憾，不过幸好我们也还有&lt;code&gt;MyPaint&lt;/code&gt;可以用，画些简单的画足够用了。&lt;/p&gt;&#xA;&lt;p&gt;好久不画画手有些生了，用了一个晚上时间画了个学姐，求轻拍。（内有亮点）&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>转个型？</title>
+				<link>https://bigeagle.me/2012/09/need-for-posts/</link>
+				<pubDate>Sun, 02 Sep 2012 00:13:00 +0000</pubDate>
+				<guid>https://bigeagle.me/2012/09/need-for-posts/</guid>
+				<description>&lt;p&gt;受twitter影響感覺自己快寫不出140字以上的東西了，這一點很不好，我要逼迫自己多寫些東西。&lt;/p&gt;&#xA;&lt;p&gt;然而顯然不是什麼事情都能寫出一篇長長的文章，每天遇到的大部分問題也多是幾句話能說清楚的小問題，然而這些問題確真真是很值得寫下來的，不然日子久了就會忘掉，到時候就不一定能google出答案咯～&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Wish List</title>
+				<link>https://bigeagle.me/2012/07/wish-list/</link>
+				<pubDate>Tue, 17 Jul 2012 13:00:00 +0000</pubDate>
+				<guid>https://bigeagle.me/2012/07/wish-list/</guid>
+				<description>&lt;p&gt;最近物欲膨胀啊，好多东西好像要……&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;del&gt;Galaxy Nexus&lt;/del&gt; 已入&lt;/li&gt;&#xA;&lt;li&gt;&lt;del&gt;Nexux 7&lt;/del&gt; &lt;del&gt;Galaxy Note 10.1 &lt;/del&gt; 入了iBad&lt;/li&gt;&#xA;&lt;li&gt;&lt;del&gt;SSD&lt;/del&gt; 已入ADATA SX900，体验甚好&lt;/li&gt;&#xA;&lt;li&gt;&lt;del&gt;Leopold FC660M 茶轴&lt;/del&gt; 已入&lt;/li&gt;&#xA;&lt;li&gt;&lt;del&gt;Thinkpad X1C&lt;/del&gt; 入了 Dell Latitude E7440&lt;/li&gt;&#xA;&lt;li&gt;&lt;del&gt;给母上买3G路由器和流量年卡&lt;/del&gt;&lt;/li&gt;&#xA;&lt;li&gt;电吉他，音箱，效果器&lt;/li&gt;&#xA;&lt;li&gt;电鼓&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;我要努力工作…&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>pulseaudio音量问题</title>
+				<link>https://bigeagle.me/2012/05/pulseaudio-threshold/</link>
+				<pubDate>Sun, 20 May 2012 04:07:00 +0000</pubDate>
+				<guid>https://bigeagle.me/2012/05/pulseaudio-threshold/</guid>
+				<description>&lt;p&gt;话说Pulseaudio一直有一个问题困扰着我，好几年了，就是 &lt;strong&gt;音量不连续&lt;/strong&gt; , 解释一下就是例如音量降到 16% 以下的时候会突然变成零，或者调整一下(下文解释)，那么 2%-16% 这一段虽然有声音但是几乎都是一个音量，然后 2%-0% 突变。&lt;/p&gt;&#xA;&lt;p&gt;p.s. 我对Linux的音频设备原理实在是一知半解，所以后文有好多 「俗」语，懂行的见到还请轻拍砖。&lt;/p&gt;&#xA;&lt;p&gt;准确的说这个更应该是我声卡(驱动)的问题，Alsa的主音量将到 16% 之后会突然没有声音，就好像有一个 threshold 一样。不过之前纯用Alsa的时候我可以通过调整 PCM 音量来解决，但是 Pulseaudio 所有都一块儿调整了，只有一个主音量， 所以再开终端调alsamixer什么的实在烦死人。&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>入手yubikey,一点小心得</title>
+				<link>https://bigeagle.me/2012/05/yubikey/</link>
+				<pubDate>Thu, 10 May 2012 20:15:00 +0000</pubDate>
+				<guid>https://bigeagle.me/2012/05/yubikey/</guid>
+				<description>&lt;p&gt;昨天从 &lt;a href=&#34;http://yegle.net/2010/08/29/yubikey-the-cheap-otp-resolution/&#34;&gt;@yeagle&lt;/a&gt; 那里买的 yubikey 终于到货，如果不知道 yubikey 是什么就看看 @yeagle 的广告好了，呵呵。&lt;/p&gt;&#xA;&lt;p&gt;去年 CSDN 事件现在还令人心有余悸，再加上早年安全意识不足，多个网站都是一套密码，想起来实在后怕，于是立马开始用 &lt;a href=&#34;http://lastpass.com/&#34;&gt;Lastpass&lt;/a&gt;，给大部份网站都换成随机密码， Google 帐户开两步认证，免得被 &lt;code&gt;Big Brother&lt;/code&gt; 翻邮箱什么的。&lt;/p&gt;&#xA;&lt;p&gt;但是 Google Authenticator 还是太不方便，登录的时候麻烦不少，需要敲完密码再摸出手机打开App然后再敲一遍 verify code，敲慢了还会过期还要再敲一遍，实在是影响 &lt;code&gt;用户体验&lt;/code&gt; 。&lt;/p&gt;&#xA;&lt;p&gt;另一方面，在不少场合下，公然敲密码都是一件比较尴尬的事情，怕别人看到，又不好意思遮遮掩掩什么的，所以只有锻炼手速，然而手速快了又容易敲错，噗呵呵… 还有的时候电脑需要给人用一下，但是又不方便告诉他密码什么的，这就很头疼。这两种情况之前我都是用 &lt;code&gt;pam_usb&lt;/code&gt; 解决的，把优盘搞成钥匙用，但是安全性就比较差了。&lt;/p&gt;&#xA;&lt;p&gt;所以我就买了yubikey，廉价的一次一密方案。&lt;/p&gt;&#xA;&lt;p&gt;其实主要想写的是 &lt;code&gt;pam_yubico&lt;/code&gt;, PAM 是Linux中的用户认证机制， pam_yubico 故名思义就是用 yubikey 进行 Linux 用户认证，login啊 unlock screeen啊，ssh啊什么的。 Arch的 &lt;a href=&#34;https://aur.archlinux.org/packages.php?ID=21528&#34;&gt;AUR&lt;/a&gt; 里已经有了，别的系统自己打个包也不麻烦，不过比较令我奇怪的是从 github 里 clone 下来的代码在运行 &lt;code&gt;automake&lt;/code&gt; 的时候竟然会报错说 &lt;code&gt;libykclient.la&lt;/code&gt; 不是符合 POSIX 要求的库……没办法只好下载 release 版了。&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>迁移到Octopress</title>
+				<link>https://bigeagle.me/2012/04/octopress/</link>
+				<pubDate>Sun, 15 Apr 2012 04:00:00 +0000</pubDate>
+				<guid>https://bigeagle.me/2012/04/octopress/</guid>
+				<description>&lt;p&gt;如题～  迁移工作比较顺利，使用&lt;a href=&#34;http://blog.fangjian.me/posts/2011/12/18/migrate-wordpress-to-octopress/&#34;&gt;这里&lt;/a&gt; 提供的方法就好。&lt;/p&gt;&#xA;&lt;p&gt;Disqus评论的导出花了一些心思，因为wordpress的disqus插件默认设定的&lt;code&gt;disqus_identifier&lt;/code&gt;是形如&lt;code&gt;123 http://example.org/?p=123&lt;/code&gt;这样的，&lt;code&gt;123&lt;/code&gt;是 wordpress 文章 id ，这样的话即使最后给每个文章的链接都一样也不能正确显示评论。&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>自动更新DNSPod记录</title>
+				<link>https://bigeagle.me/2012/02/dnspod/</link>
+				<pubDate>Thu, 23 Feb 2012 00:00:00 +0000</pubDate>
+				<guid>https://bigeagle.me/2012/02/dnspod/</guid>
+				<description>&lt;p&gt;今天将社区和个人的转移到了dnspod，原因是dnspod 提供免费的智能解析（电信、教育网什么的可以制定不同的IP地址），并且有丰富的API，可以用脚本更新记录，于是我就fork了dnspod官方的python脚本，写了个动态更新DNS记录的脚本。&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;比花生壳强大多啦！！！！&lt;/strong&gt;&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Linux 用作 IPv6 网关</title>
+				<link>https://bigeagle.me/2011/11/linux-as-ipv6-gateway/</link>
+				<pubDate>Fri, 25 Nov 2011 00:00:00 +0000</pubDate>
+				<guid>https://bigeagle.me/2011/11/linux-as-ipv6-gateway/</guid>
+				<description>&lt;p&gt;IPv6作为下一代互联网的核心技术，拥有众多新特性和优势，不仅解决了IPv4网络地址T 量不够的问题，还一并解决了很多其他问题。&#xA;本文将集中讨论在西电校园网环境下，将Linux PC作为IPv6网关，让局域网可以正常接入IPv6网络的解决方案。&lt;/p&gt;&#xA;&lt;h2 id=&#34;网络结构&#34;&gt;网络结构&lt;/h2&gt;&#xA;&lt;p&gt;本文中的网络结构如下：&lt;/p&gt;&#xA;&lt;pre&gt;&#xA;&lt;code&gt;&#xA;2001:250:1006:6151::1/64&#xA;     +--------+               +---------+ &#xA;     | 校园网  |          eth0 |  Linux  | &#xA;     |        +---------------+  局域网  | &#xA;     |  网关   |               |  网关    | &#xA;     +--------+               +----+----+ &#xA;                                   | eth1&#xA;                          +--------+--------+&#xA;                      +---+--------+--------+---+ &#xA;                      | +-+-+    +-+-+    +-+-+ | &#xA;                      | |   |    |   |    |   | | &#xA;                      | |   |    |   |    |   | | &#xA;                      | +---+    +---+    +---+ | &#xA;                      |      局   域   网        | &#xA;                      +-------------------------+ &#xA;&lt;/code&gt;&#xA;&lt;/pre&gt;</description>
+			</item>
+			<item>
+				<title>Conky从豆瓣获取MPD专辑封面</title>
+				<link>https://bigeagle.me/2011/10/conky_mpd_cover/</link>
+				<pubDate>Mon, 03 Oct 2011 00:00:00 +0000</pubDate>
+				<guid>https://bigeagle.me/2011/10/conky_mpd_cover/</guid>
+				<description>&lt;figure&gt;&lt;img src=&#34;https://bigeagle.me/images/conky&#34;&gt;&#xA;&lt;/figure&gt;&#xA;&#xA;&lt;p&gt;昨天回到Openbox了，GNOME 3.2 扩展不兼容让我这个不搞定不舒服司机的人实在太难受，又不想再去学gjs，所以干脆眼不见为净了。&lt;/p&gt;&#xA;&lt;p&gt;过去在OB下最爱折腾的东西莫过于conky，昨天除了恢复了一下过去的conky配置，就是further折腾… 看conky-colors又出新版本，的确很炫，所以也想把自己的改改，不过实际需求上，估计也就是比较想要一个音乐的CoverArt。&lt;/p&gt;&#xA;&lt;p&gt;我用的MPD，conky-colors里貌似不带mpd的cover脚本，google之，发现mpd的也&lt;a href=&#34;http://sunjack94.deviantart.com/art/Conky-Panel-Mpd-CoverArt-154331369?moodonly=178&#34;&gt;已经有人发明过啦&lt;/a&gt;~&lt;/p&gt;&#xA;&lt;p&gt;不过有一点不爽，这个脚本是从albumart下载封面，对中文支持有限，所以想从豆瓣获取封面，所以参考&lt;a href=&#34;http://www.gracecode.com/archives/3009/&#34;&gt;这个脚本&lt;/a&gt;做了一些更改。&lt;/p&gt;&#xA;&lt;p&gt;折腾控是不会喜欢压缩文件的，所以……直接贴代码吧&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>我和Linus大学时那些事儿</title>
+				<link>https://bigeagle.me/2011/10/linux-20-memories/</link>
+				<pubDate>Mon, 03 Oct 2011 00:00:00 +0000</pubDate>
+				<guid>https://bigeagle.me/2011/10/linux-20-memories/</guid>
+				<description>&lt;p&gt;原作 Lars Wirzenius，地址 &lt;a href=&#34;http://liw.fi/linux20/&#34;&gt;http://liw.fi/linux20/&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;特别感谢 &lt;a href=&#34;http://ggarlic.org/&#34;&gt;ggarlic&lt;/a&gt;，da chen, Jack Ma, ant_sz 对翻译的指正！&lt;/p&gt;&#xA;&lt;p&gt;这是一个冗长的故事，如果你现在没兴趣阅读它，可以试着等到卧病在床，脑袋里一团浆糊，把止疼药当糖吃时再读，希望您阅读时不要感到不适 :) 。当然，在无意识的状态下听语音合成器对你高语速的朗读是一个更好的选择。&lt;/p&gt;&#xA;&lt;p&gt;Linux 今年二十岁啦。这是一段很长的时光，因为参与了故事的开端，我想分享一些当年的回忆。&lt;/p&gt;&#xA;&lt;p&gt;1988年我高中毕业并进入赫尔辛基大学计算机科学专业。学校九月开学，同时我被邀请进入Spektrum俱乐部，成员是那些学习数学、物理、化学、地理和计算机科学的瑞典语使用者。&lt;/p&gt;&#xA;&lt;p&gt;Spektrum是一个不错的社交俱乐部，由于我曾一直很害羞，而俱乐部在我刚进入这个陌生城市时，给我一个轻松与人认识的途径。也就是在这里，我认识了另一个说瑞典语的同年级计算机专业学生，他叫 Linus Torvalds.&lt;/p&gt;&#xA;&lt;p&gt;第一年，我们选了相同的课，因为那些都是公共必修课，再加上我们在 Secktrum 认识，我们也有了一些友谊。&lt;/p&gt;&#xA;&lt;p&gt;那时候计算机很贵，学校提供了满是跑着MS-DOS的PC和少量Mac的机房，还有一些连接到VAX/VMS系统的终端。我从没很喜欢过MS-DOS，而且它们也常常被占用着。我也很难搞定那些Mac，因为过去没玩儿过图形界面的东西。于是我很自然地选择了那些终端，即使VAX/VMS实在是一个令人讨厌的系统。&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Micro$oft依然是那副老德行</title>
+				<link>https://bigeagle.me/2011/09/fk_ms/</link>
+				<pubDate>Wed, 28 Sep 2011 00:00:00 +0000</pubDate>
+				<guid>https://bigeagle.me/2011/09/fk_ms/</guid>
+				<description>&lt;p&gt;最近微软又火了一把，Windows 8发布，Windows Phone走向成熟，新一代的开发平台，无论是用户还是开发者都很&lt;a href=&#34;http://www.36kr.com/p/49358.html&#34; target=&#34;_blank&#34;&gt;关注&lt;/a&gt;。&lt;/p&gt;&#xA;&lt;h2 id=&#34;看似鲜美&#34;&gt;看似鲜美&lt;/h2&gt;&#xA;&lt;p&gt;从市场的角度说，我很看好win8，平板电脑很火，win8的UI做的也不错，再加上强大的宣传机器，这些足以让win8成为一款非常成功的操作系统。&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>用PulseAudio TCP Forwarding实现网络传声</title>
+				<link>https://bigeagle.me/2011/08/pulseaudio-tcp/</link>
+				<pubDate>Fri, 12 Aug 2011 00:00:00 +0000</pubDate>
+				<guid>https://bigeagle.me/2011/08/pulseaudio-tcp/</guid>
+				<description>&lt;p&gt;最近在实验室，同时用着自己的笔记本和实验室分配的台式机，双机工作的确很爽，计算能力基本没有障碍了。&lt;/p&gt;&#xA;&lt;p&gt;话说我是一个音乐迷恋者，也习惯于带着耳机写程序&lt;span style=&#34;color: #99cc00;&#34;&gt;/&lt;em&gt;需要高密度思维的时候还是得安静思考的&lt;/em&gt;/ &lt;/span&gt;，台式机的耳机口太远，于是就插在本本上。偶尔我也偷个懒，在台式机上看个视频什么的，这时候就需要换插耳机，很是麻烦。&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>利用tmpfs加速gnome-shell overview模式Applications索引</title>
+				<link>https://bigeagle.me/2011/07/gnome_shell_app/</link>
+				<pubDate>Fri, 29 Jul 2011 00:00:00 +0000</pubDate>
+				<guid>https://bigeagle.me/2011/07/gnome_shell_app/</guid>
+				<description>&lt;p&gt;gnome-shell的overview模式着实是个尤物，动态工作区和任务管理丝毫不输于Lion的Mission Control，而Applications与Lion的LaunchPad也是异曲同工。&lt;/p&gt;&#xA;&lt;p&gt;然而有一点不爽，每次加载Applications都很慢，而且硬盘狂转，搞的这个很美丽的功能几乎不被使用。有必要加速一下。&lt;/p&gt;&#xA;&lt;p&gt;考虑到速度瓶颈主要是磁盘读取 &lt;span style=&#34;color: #666699;&#34;&gt;/* 对MBA的SSD表示羡慕嫉妒恨 */ &lt;/span&gt;，想到如果能预先把Applications里的内容缓存到内存里就好了，Applications里其实是加载了/usr/share/applications里的文件，于是想到了把/usr/share/applications 挂载为 tmpfs 。 &lt;span style=&#34;color: #666699;&#34;&gt;//总共不过[0-9]M的文件，这点内存咱还是有的 &lt;/span&gt;&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;mkdir -p /tmp/app_temp&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;cp -aR /usr/share/applications/* /tmp/app_temp &lt;span class=&#34;c1&#34;&gt;#先把文件备份出来&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;mount -t tmpfs none /usr/share/applications&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;cp -aR /tmp/app_temp/* /usr/share/applications&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;现在试试，速度是不是快多了？&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>新的短网址</title>
+				<link>https://bigeagle.me/2011/06/xdl/</link>
+				<pubDate>Tue, 07 Jun 2011 00:00:00 +0000</pubDate>
+				<guid>https://bigeagle.me/2011/06/xdl/</guid>
+				<description>&lt;p&gt;今天开始启用xdlinux的短网址服务：&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;http://xdl.in/&#34;&gt;http://xdl.in/&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;用yourls搭建，原因是周边插件神马的比较全一些。&lt;/p&gt;&#xA;&lt;p&gt;当然，&lt;a href=&#34;http://xdl.in/ux&#34;&gt;http://xdl.in/ux&lt;/a&gt; 这个网址被第一个用掉~&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>紧张的一个月</title>
+				<link>https://bigeagle.me/2011/06/busy_month/</link>
+				<pubDate>Sun, 05 Jun 2011 00:00:00 +0000</pubDate>
+				<guid>https://bigeagle.me/2011/06/busy_month/</guid>
+				<description>&lt;p&gt;未来一个月的事情感觉压力好大啊！&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&#x9;&lt;li&gt;快期末考试了&lt;/li&gt;&#xA;&#x9;&lt;li&gt;论文7月1日deadline&lt;/li&gt;&#xA;&#x9;&lt;li&gt;保研问题，联系导师&lt;/li&gt;&#xA;&#x9;&lt;li&gt;社区这学期收尾活动&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;后面两个还好了，第一项压力最大，这个学期几乎没碰过课本，要考的有三门课：&#xA;&lt;ul&gt;&#xA;&#x9;&lt;li&gt;&lt;strong&gt;计算机通信网&lt;/strong&gt;:这个压力一般，内容好多，好在每节课都去了，复习主要是体力活&lt;/li&gt;&#xA;&#x9;&lt;li&gt;&lt;strong&gt;操作系统&lt;/strong&gt;:压力一般，考试内容基本都会了，复习也主要是体力活&lt;/li&gt;&#xA;&#x9;&lt;li&gt;&lt;strong&gt;交换原理&lt;/strong&gt;:压力山大呀，内容一点不会，课一点也没听过，作业也还要补上！&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;一个月能不能搞得定，哭…&#xA;&lt;p&gt;还有就是论文问题，早在3月底的时候就把仿真做完了，算法的最优性也不知道@lvzongting证明出来没有，这两天研究算法与PSO的相似性，把PSO算法收敛性证明给看了，没看懂，吐血中……&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>5月11日活动有感</title>
+				<link>https://bigeagle.me/2011/05/may11xdlinux/</link>
+				<pubDate>Thu, 12 May 2011 00:00:00 +0000</pubDate>
+				<guid>https://bigeagle.me/2011/05/may11xdlinux/</guid>
+				<description>&lt;p&gt;5月11日开源社区的活动，这么多年来第一次这么有感觉。&lt;/p&gt;&#xA;&lt;p&gt;Andy隐居山林好多年了，这次出来给大家分享Android相关信息。看到他穿着社区的老款Tee出现在活动室，记忆一下回到了几年前，还是西电Linux团队的时候。&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>西电开源社区2011年Tee 最终版</title>
+				<link>https://bigeagle.me/2011/04/xdosc-tee/</link>
+				<pubDate>Thu, 14 Apr 2011 00:00:00 +0000</pubDate>
+				<guid>https://bigeagle.me/2011/04/xdosc-tee/</guid>
+				<description>&lt;p&gt;经过社区讨论并与厂家协商，西电开源社区2011年Tee 设计定稿，总共有三款：&lt;/p&gt;&#xA;&lt;h2 id=&#34;开源社区主题-tee-简洁版&#34;&gt;开源社区主题 Tee 简洁版&lt;/h2&gt;&#xA;&lt;p&gt;{% img center /images/xdosc-front.png 300 300 %}&lt;/p&gt;&#xA;&lt;p&gt;{% img center /images/side.png 222 300 %}&lt;/p&gt;&#xA;&lt;p&gt;（@xdlinux 为赠送ID，每人可以个性定制，差价由社区补贴）&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>多头多尾的Linux</title>
+				<link>https://bigeagle.me/2011/04/multihead/</link>
+				<pubDate>Mon, 04 Apr 2011 00:00:00 +0000</pubDate>
+				<guid>https://bigeagle.me/2011/04/multihead/</guid>
+				<description>&lt;p&gt;人们常把一台主机(Host)比喻成一个人的身体，主体称为 &lt;strong&gt;身体&lt;/strong&gt; (&lt;em&gt;Body&lt;/em&gt;)，交互输出设备称为 &lt;strong&gt;头&lt;/strong&gt;( &lt;em&gt;Head&lt;/em&gt;) ，交互输入设备称为 &lt;strong&gt;尾&lt;/strong&gt;(&lt;em&gt;Tail&lt;/em&gt;) 。在大多数情况下，一个主机的“身体”总是完整的，但“头”与“尾”却多有变化，常见的，有这样一些变化：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&#x9;&lt;li&gt;单头单尾(Single Head Single Tail) - 这是个人计算机用户最常见的情况了，一台显示器，一套键盘鼠标&lt;/li&gt;&#xA;&#x9;&lt;li&gt;无头无尾(Headless and Tailess) - 系统管理员常常会遇到这样的计算机，常见的服务器，成群结队地呆在机柜里，组成集群(cluster)，这样的计算机总是没有独享的显示器和键鼠&lt;/li&gt;&#xA;&#x9;&lt;li&gt;多头单尾(Multihead) - 目前个人计算机的显卡常有多个输出接口，钱包比较充裕的同学有时会使用多个显示器&lt;/li&gt;&#xA;&#x9;&lt;li&gt;单头多尾(Multitail) - 大多数的笔记本电脑都配有触控板或指点杆，再加上一个外接的USB鼠标，就成为单头多尾的计算机&lt;/li&gt;&#xA;&#x9;&lt;li&gt;多头多尾(Multihead Multitail) - 多台显示器，多键鼠的计算机&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;\*nix系统总灵活多变著称，在各种头、尾情况下，都有令人惊讶的表现。  今天BigEagle主要就带大家玩一下多头和多尾的配置。</description>
+			</item>
+			<item>
+				<title>Linux的中文名称怎么翻译呢？</title>
+				<link>https://bigeagle.me/2011/02/linux-chinese-tran/</link>
+				<pubDate>Sat, 05 Feb 2011 00:00:00 +0000</pubDate>
+				<guid>https://bigeagle.me/2011/02/linux-chinese-tran/</guid>
+				<description>&lt;p&gt;今天看到袁萌的博文，里面提到Linux在中国推广过程中遇到的一个现实问题：Linux的中文名是什么？&lt;/p&gt;&#xA;&lt;h2 id=&#34;你牛叉&#34;&gt;你牛叉！&lt;/h2&gt;&#xA;&lt;p&gt;我立马想到的是Archwiki里的一系列文章（&lt;a href=&#34;https://wiki.archlinux.org/index.php/Arch_Compared_to_Other_Distributions_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)&#34; target=&#34;_blank&#34;&gt;传送门&lt;/a&gt;），Linux被翻译成“&lt;span style=&#34;color: #3366ff;&#34;&gt;你牛叉&lt;/span&gt;”，呵呵很有幽默感阿。&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>iPhone使用OpenVPN</title>
+				<link>https://bigeagle.me/2011/02/iphone_openvpn/</link>
+				<pubDate>Wed, 02 Feb 2011 00:00:00 +0000</pubDate>
+				<guid>https://bigeagle.me/2011/02/iphone_openvpn/</guid>
+				<description>&lt;p&gt;目田的互联网一直是我的梦想，之前在iPhone上一直使用WFGinterceptor（为保护小站，那三个字母是倒序的），但是不能存cookie是一个问题，而且它依赖于GAE，一个在前途未卜的网络。想来还是VPN或者SSH比较靠谱。&lt;/p&gt;&#xA;&lt;p&gt;前几日在Twitter上看到有人介绍&lt;a&#xA;href=&#34;https://twitter.com/#!/search?q=%23lolihosting&#34;&gt;#lolihosting&lt;/a&gt;（&lt;a&#xA;href=&#34;http://vpn.lolihosting.com/&#34;&gt;传送门&lt;/a&gt;），貌似很不错的样子，还支持ipv6，这对于&amp;quot;3G&amp;quot;时代的西电人是一个极大地利好。在计算机上测试一下，果然速度不凡，比之前在Linost上买的SSH快多了。&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>我的人人网敏感词</title>
+				<link>https://bigeagle.me/2011/01/renren/</link>
+				<pubDate>Sat, 08 Jan 2011 00:00:00 +0000</pubDate>
+				<guid>https://bigeagle.me/2011/01/renren/</guid>
+				<description>&lt;p&gt;人人网改造器有屏蔽带关键字的新鲜事功能，心想要是能支持正则表达就好了。&lt;/p&gt;&#xA;&lt;p&gt;站在开发者的角度想，如果是我，必然会选择用正则表达式实现敏感词过滤功能，常试后发现，果然支持js语法的正则表达式。&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>纪念钱立生老师</title>
+				<link>https://bigeagle.me/2010/12/qianlisheng/</link>
+				<pubDate>Sun, 26 Dec 2010 00:00:00 +0000</pubDate>
+				<guid>https://bigeagle.me/2010/12/qianlisheng/</guid>
+				<description>&lt;p&gt;在与病魔斗争两年后，先师钱立生先生于今日中午在家乡病逝。&lt;/p&gt;&#xA;&lt;p&gt;高中时钱老师没有带过我的课，但几乎每个学生都知道他的能力和为人。钱老师曾与母亲共事，故对我也关爱有加，高中的前两年我一直在混日子，钱老师在高二下学期找我谈了一次话，正是这次谈话让我改变了态度，努力学习，也才有了后来的成绩。&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>twitter键盘控：Twittperator</title>
+				<link>https://bigeagle.me/2010/12/twitterperator/</link>
+				<pubDate>Sat, 18 Dec 2010 00:00:00 +0000</pubDate>
+				<guid>https://bigeagle.me/2010/12/twitterperator/</guid>
+				<description>&lt;p&gt;最近Chrome很火，尤其是Chrome OS和Web Strore发布之后，连BigEagle这个忠实的Firefoxer都一个星期没有开Firefox。Chrome的确很漂亮，很快，很简洁，各种功能也都很齐全，插件质量也越来越高。但是BigEagle心中，Firefox仍然排在第一位，除了必不可少的Autoproxy之外，Vimperator也是重要原因。虽然chrome下vimium也能实现vim快捷键，但是功能比vimp相去甚远。&lt;/p&gt;&#xA;&lt;p&gt;&lt;span style=&#34;color: #339966;&#34;&gt;/* 此处略去10000字对vimperator的赞美 */&lt;/span&gt;&lt;/p&gt;&#xA;&lt;p&gt;今天在&lt;a href=&#34;http://twitter.com/Icaoxi&#34; target=&#34;_blank&#34;&gt;@Icaoxi&lt;/a&gt;处看见Twittperator这个名号，google之，原来是vimperator的twitter插件，用后感觉真是一个神器！&lt;/p&gt;&#xA;&lt;p&gt;{% img center /images/twittperator.png 500 %}&lt;/p&gt;&#xA;&lt;p&gt;一下子看不出来这是Firefox吧！&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>天生的暴力倾向？</title>
+				<link>https://bigeagle.me/2010/12/violence/</link>
+				<pubDate>Fri, 17 Dec 2010 00:00:00 +0000</pubDate>
+				<guid>https://bigeagle.me/2010/12/violence/</guid>
+				<description>&lt;p&gt;记得我大一那年的某年某月某日，回宿舍的路上看到一个小偷被抓的场景，偷车贼么，人人唾弃之，于是占据“道德”上风的保安就开始秀起了他们的功夫，在贼被铐住带走的一路上拳打脚踢，有些人可能觉得没踢爽，从旁边跑来踢一脚，左一脚，右一脚，好不热闹。不知道他们心里怎么想的，是觉得自己为民除害，干了一件大好事呢，还是自己抓了个猎物，可以任意处置？&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>The Open Source Spirit</title>
+				<link>https://bigeagle.me/2010/12/the-open-source-spirit/</link>
+				<pubDate>Sat, 11 Dec 2010 00:00:00 +0000</pubDate>
+				<guid>https://bigeagle.me/2010/12/the-open-source-spirit/</guid>
+				<description>&lt;p&gt;&lt;span style=&#34;color: #3366ff;&#34;&gt;#今天很有感触，想写点东西，有种，纪念一下的感觉。文章的标题起的不好，习惯用代码说话，所以文笔很烂，不能无失真的传输我想表达的信息，事实上，误码率也挺高，有兴趣的，纠错译码一下，试着猜猜我想说什么。开源的精神太广泛了，今天我只说一个方面。&lt;/span&gt; 曾几何时，世界上就没有“闭源”，软件都是开源的。大家分享着自己的智慧，自己的思想，自己的知识，自己的乐趣。一群痴迷技术的人，我们称之为黑客（不要把搞破坏的那些人与之相提并论），以技术为乐趣，创造了很多传世大作。&lt;/p&gt;&#xA;&lt;h2 id=&#34;创世纪&#34;&gt;创世纪&lt;/h2&gt;&#xA;&lt;p&gt;我总爱拿Unix的历史打比方，Ken Thompson和Dennis Ritchie为了好玩而开发了Unics，以及后来为了免去移植的麻烦用C语言重写Unix，如果你愿意继续了解一下unix的历史，你会发现，unix这个名字不过是一个joke。这一次有趣的折腾，造就了两个影响了整个计算机历史的作品，unix和C语言。  同样是黑客的精神：分享快乐。Ken Thompson不仅给每一个想要得到unix源码的人提供了完整的代码，还在每一封信里都附一张字条：&lt;span style=&#34;color: #3366ff;&#34;&gt;love Ken&lt;/span&gt;。  &lt;span style=&#34;color: #339966;&#34;&gt; //我相信，计算机是有生命的：图灵给了它灵魂，冯·诺依曼创造了它的身体，程序员们给了它们思想和精神，很难想象，没有爱的程序员，怎能写出伟大的作品呢。&lt;/span&gt; Ken寄出去的代码中，有一份代码来到了 伯克利，从这一份代码，衍生出了伟大的BSD，我毫不吝啬我的用词，因为有BSD，我们才有了TCP/IP技术，才有了今天给我们带来如此多便利的Internet。  这一切都来自于开源。&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Libreoffice</title>
+				<link>https://bigeagle.me/2010/11/libreoffice/</link>
+				<pubDate>Sat, 27 Nov 2010 00:00:00 +0000</pubDate>
+				<guid>https://bigeagle.me/2010/11/libreoffice/</guid>
+				<description>&lt;p&gt;{% img left /images/libreoffice.png 300 %}&lt;/p&gt;&#xA;&lt;p&gt;Oracle 收购Sun之后很快杀死了OpenSolaris，给原先Sun旗下的开源产品蒙上了一层阴影。好在开源软件可以fork，OpenSolaris里 fork出了OpenIndiana，换个名字，继续存在。OpenOffice社区也很担心遭遇OpenSolaris一样的命运，于是大量开发人员出逃，成立了Document Foundation的组织，同时还宣布建立了名为 Libreoffice的Openoffice 分支。&#xA;LibreOffice受到了许多重量级公司及组织的赞助与支持，比如 FSF，Google，Novell,Redhat,Canonical,The Gnome Fonundation等。&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Hello world！</title>
+				<link>https://bigeagle.me/2010/11/hello-world/</link>
+				<pubDate>Fri, 26 Nov 2010 00:00:00 +0000</pubDate>
+				<guid>https://bigeagle.me/2010/11/hello-world/</guid>
+				<description>&lt;h2 id=&#34;测试一下&#34;&gt;测试一下&lt;/h2&gt;&#xA;&lt;p&gt;$$&#xA;\int_0^{2\pi}\sin x \mathrm{d}x = 0&#xA;$$&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;ch&#34;&gt;#!/usr/bin/env python&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;vm&#34;&gt;__name__&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;__main__&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;Hello World!&amp;#34;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+			</item>
+			<item>
+				<title>Python 调用gnuplot的例子</title>
+				<link>https://bigeagle.me/2010/11/python-gnuplot/</link>
+				<pubDate>Fri, 26 Nov 2010 00:00:00 +0000</pubDate>
+				<guid>https://bigeagle.me/2010/11/python-gnuplot/</guid>
+				<description>&lt;p&gt;最近和lvzongting一块儿做一些仿真，不想用matlab了，原因有：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;商业软件，用破解版毕竟不好&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;难以实现分布式计算和并行计算&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;太慢&#xA;考虑之下决定用可爱的Python，因为&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>The Beginning</title>
+				<link>https://bigeagle.me/2010/11/the-beginning/</link>
+				<pubDate>Fri, 26 Nov 2010 00:00:00 +0000</pubDate>
+				<guid>https://bigeagle.me/2010/11/the-beginning/</guid>
+				<description>&lt;p&gt;心头一痒+一热就买了个域名+空间，前后两个小时搞定，效率还行。&lt;/p&gt;&#xA;&lt;p&gt;&lt;span style=&#34;text-decoration: line-through;&#34;&gt;找了个比较对眼的主题，虽然还是不满意，先凑合用着吧！还是觉得@localhost_8080用的主题漂亮…&lt;/span&gt;&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>About Me</title>
+				<link>https://bigeagle.me/about/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>https://bigeagle.me/about/</guid>
+				<description>&lt;p&gt;I am a member of technical staff at &lt;a href=&#34;https://moonshot.ai/&#34;&gt;Moonshot.AI&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;p&gt;Previously I was a research engineer at &lt;a href=&#34;https://research.megvii.com/&#34;&gt;Megvii Research&lt;/a&gt;, and a postdoctoral researcher at &lt;a href=&#34;http://www.cs.tsinghua.edu.cn/&#34;&gt;Dept. of CS&lt;/a&gt;, Tsinghua University.&#xA;I received my Ph.D. in Electronic Engineering at &lt;a href=&#34;https://nicsefc.ee.tsinghua.edu.cn/&#34;&gt;NICS lab&lt;/a&gt;, Tsinghua University in 2017,&#xA;supervised by Prof. &lt;a href=&#34;http://www.ee.tsinghua.edu.cn/publish/eeen/3784/2010/20101219112947324534327/20101219112947324534327_.html&#34;&gt;Huazhong Yang&lt;/a&gt; and Prof. &lt;a href=&#34;https://nicsefc.ee.tsinghua.edu.cn/people/yu-wang/&#34;&gt;Yu Wang&lt;/a&gt;. Before that, I received my&#xA;B.S. degree from Xidian University. Check my &lt;a href=&#34;https://scholar.google.com/citations?user=JzBbU18AAAAJ&#34;&gt;google scholar profile&lt;/a&gt; for my full publication list.&lt;/p&gt;&#xA;&lt;p&gt;My research interest at megvii includes Low-level Computer Vision, Image Signal Processing, Computational Photography&#xA;and Software-Hardware Co-Design in these applications. Our &lt;a href=&#34;https://zhuanlan.zhihu.com/p/315141462&#34;&gt;solutions on computational photography&lt;/a&gt; has been applied&#xA;to various smartphones since 2019.&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

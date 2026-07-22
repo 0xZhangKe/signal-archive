@@ -1,0 +1,2397 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Chris Hardie&#039;s Tech and Software Blog</title>
+	<atom:link href="https://tech.chrishardie.com/feed/" rel="self" type="application/rss+xml" />
+	<link>https://tech.chrishardie.com/</link>
+	<description>WordPress and Laravel tips, code examples, hardware and software reviews, APIs and integrations, and more</description>
+	<lastBuildDate>Tue, 23 Jun 2026 16:55:24 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=7.0.2</generator>
+
+<image>
+	<url>https://tech.chrishardie.com/wp-content/uploads/2020/06/cropped-web-icon-512x512-1-32x32.png</url>
+	<title>Chris Hardie&#039;s Tech and Software Blog</title>
+	<link>https://tech.chrishardie.com/</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+<site xmlns="com-wordpress:feed-additions:1">178420928</site>	<item>
+		<title>Monitor and alert about composer and npm package security vulnerabilities</title>
+		<link>https://tech.chrishardie.com/2026/monitor-alert-composer-npm-security-vulnerabilities/</link>
+					<comments>https://tech.chrishardie.com/2026/monitor-alert-composer-npm-security-vulnerabilities/#respond</comments>
+		
+		<dc:creator><![CDATA[Chris Hardie]]></dc:creator>
+		<pubDate>Tue, 23 Jun 2026 16:55:23 +0000</pubDate>
+				<category><![CDATA[Hardware and Software]]></category>
+		<category><![CDATA[Security and Privacy]]></category>
+		<category><![CDATA[composer]]></category>
+		<category><![CDATA[Node.js]]></category>
+		<category><![CDATA[npm]]></category>
+		<category><![CDATA[php]]></category>
+		<category><![CDATA[security]]></category>
+		<category><![CDATA[sysadmin]]></category>
+		<guid isPermaLink="false">https://tech.chrishardie.com/?p=657</guid>
+
+					<description><![CDATA[<p>This might be one of those itches that affects one person and one person alone, but I scratched it and now I&#8217;m sharing the result just in case someone else finds it helpful. There are some great tools out there already to tell you if you are running outdated and vulnerable composer dependencies in your &#8230; <a href="https://tech.chrishardie.com/2026/monitor-alert-composer-npm-security-vulnerabilities/" class="more-link">Continue reading <span class="screen-reader-text">Monitor and alert about composer and npm package security vulnerabilities</span></a></p>
+<p>The post <a href="https://tech.chrishardie.com/2026/monitor-alert-composer-npm-security-vulnerabilities/">Monitor and alert about composer and npm package security vulnerabilities</a> appeared first on <a href="https://tech.chrishardie.com">Chris Hardie&#039;s Tech and Software Blog</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p class="wp-block-paragraph">This might be one of those itches that affects one person and one person alone, but I scratched it and now I&#8217;m sharing the result just in case someone else finds it helpful.</p>
+
+
+
+<p class="wp-block-paragraph">There are some great tools out there already to tell you if you are running outdated and vulnerable composer dependencies in your Laravel app. GitHub&#8217;s <a href="https://docs.github.com/en/code-security/tutorials/secure-your-dependencies/dependabot-quickstart">Dependabot</a> is a common one. Freek Van der Herten&#8217;s &#8220;<a href="https://freek.dev/2892-how-to-protect-your-laravel-app-against-critical-vulnerabilities-like-livewires-recent-remote-code-execution-issue">How to monitor your Laravel app for critical vulnerabilities</a>&#8221; and the related &#8220;<a href="https://ohdear.app/news-and-updates/how-to-monitor-your-laravel-app-for-critical-vulnerabilities-using-oh-dear">Monitor your Laravel app for vulnerabilities with Oh Dear</a>&#8221; is another great example of a ready-to-go solution for this.</p>
+
+
+
+<p class="wp-block-paragraph">I wanted a system that would work independent of where my code repos are hosted, that didn&#8217;t assume a fully realized Laravel app, and that integrated in to my <a href="https://tech.chrishardie.com/2026/nagios-small-business-infrastructure-monitoring/">use of Nagios for infrastructure monitoring</a>. I wanted something that would be able to take a list of root directories of any kind of application using composer and/or npm packages on a given server, and alert me as if there are known security vulnerabilities to handle. </p>
+
+
+
+<p class="wp-block-paragraph">(For some reason, thinking about this as a server-level issue makes sense to me. If one package on one app on a server is vulnerable, the whole server is vulnerable to compromise.)</p>
+
+
+
+<p class="wp-block-paragraph">Thus was born <code><a href="https://github.com/ChrisHardie/package-vulnerability-audit">package-vulnerability-audit</a></code>, which combines a PHP scanning tool that runs the &#8220;audit&#8221; functions of both composer and npm on each application and outputs a JSON file with the results, and a Nagios NRPE script that checks the JSON file and returns an OK/WARNING/CRITICAL result to Nagios.</p>
+
+
+
+<figure class="wp-block-image size-large"><a href="https://github.com/ChrisHardie/package-vulnerability-audit"><img decoding="async" src="https://opengraph.githubassets.com/3bb7482364ae33f128edf5505b7e98980b14070d1cb5a2de165f237e39352e66/ChrisHardie/package-vulnerability-audit" alt="" /></a></figure>
+
+
+
+<p class="wp-block-paragraph"> </p>
+
+
+
+<p class="wp-block-paragraph">Once it&#8217;s set up, I can control the way I get alerted about these issues, and in theory give them a bit more urgency than an email notification.</p>
+
+
+
+<p class="wp-block-paragraph">The early reality is that I have some package updates to do, and I probably should have just spent time on that instead of building (with help from Claude) another tool. <img src="https://s.w.org/images/core/emoji/17.0.2/72x72/1f605.png" alt="😅" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+
+
+
+<figure class="wp-block-image size-large"><img fetchpriority="high" decoding="async" width="1024" height="707" src="https://tech.chrishardie.com/wp-content/uploads/2026/06/Screenshot-2026-06-23-at-12.48.37-1024x707.png" alt="" class="wp-image-659" srcset="https://tech.chrishardie.com/wp-content/uploads/2026/06/Screenshot-2026-06-23-at-12.48.37-1024x707.png 1024w, https://tech.chrishardie.com/wp-content/uploads/2026/06/Screenshot-2026-06-23-at-12.48.37-300x207.png 300w, https://tech.chrishardie.com/wp-content/uploads/2026/06/Screenshot-2026-06-23-at-12.48.37-768x530.png 768w, https://tech.chrishardie.com/wp-content/uploads/2026/06/Screenshot-2026-06-23-at-12.48.37.png 1196w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+<p>The post <a href="https://tech.chrishardie.com/2026/monitor-alert-composer-npm-security-vulnerabilities/">Monitor and alert about composer and npm package security vulnerabilities</a> appeared first on <a href="https://tech.chrishardie.com">Chris Hardie&#039;s Tech and Software Blog</a>.</p>]]></content:encoded>
+					
+					<wfw:commentRss>https://tech.chrishardie.com/2026/monitor-alert-composer-npm-security-vulnerabilities/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">657</post-id>	</item>
+		<item>
+		<title>Using Nagios for small business infrastructure monitoring</title>
+		<link>https://tech.chrishardie.com/2026/nagios-small-business-infrastructure-monitoring/</link>
+					<comments>https://tech.chrishardie.com/2026/nagios-small-business-infrastructure-monitoring/#respond</comments>
+		
+		<dc:creator><![CDATA[Chris Hardie]]></dc:creator>
+		<pubDate>Sat, 23 May 2026 21:03:05 +0000</pubDate>
+				<category><![CDATA[Hardware and Software]]></category>
+		<category><![CDATA[monitoring]]></category>
+		<category><![CDATA[nagios]]></category>
+		<category><![CDATA[software]]></category>
+		<category><![CDATA[tools]]></category>
+		<guid isPermaLink="false">https://tech.chrishardie.com/?p=648</guid>
+
+					<description><![CDATA[<p>There are a million tools out there for monitoring services and measuring application performance, and I&#8217;m sure many of them are awesome. When I went looking for a good service and infrastructure monitoring solution for our community newspaper&#8217;s one-person IT department (me), I came back to an open source tool that I&#8217;d probably first started &#8230; <a href="https://tech.chrishardie.com/2026/nagios-small-business-infrastructure-monitoring/" class="more-link">Continue reading <span class="screen-reader-text">Using Nagios for small business infrastructure monitoring</span></a></p>
+<p>The post <a href="https://tech.chrishardie.com/2026/nagios-small-business-infrastructure-monitoring/">Using Nagios for small business infrastructure monitoring</a> appeared first on <a href="https://tech.chrishardie.com">Chris Hardie&#039;s Tech and Software Blog</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p class="wp-block-paragraph">There are a million tools out there for monitoring services and measuring application performance, and I&#8217;m sure many of them are awesome.</p>
+
+
+
+<p class="wp-block-paragraph">When I went looking for a good service and infrastructure monitoring solution for our community newspaper&#8217;s one-person IT department (me), I came back to an open source tool that I&#8217;d probably first started using over 20 years ago: <a href="https://www.nagios.org" target="_blank" rel="noreferrer noopener">Nagios</a>.</p>
+
+
+
+<p class="wp-block-paragraph">It works great for us and only costs $4/month to self-host. I thought I&#8217;d share about how we&#8217;re using it in case others might find it helpful.</p>
+
+
+
+<p class="wp-block-paragraph">My needs were pretty straightforward.</p>
+
+
+
+<p class="wp-block-paragraph">I wanted to monitor 10 or so servers and network devices and various services hosted on them, the health of 20 or so web applications, and the status pages of about 20 external services/platforms we depend on.</p>
+
+
+
+<p class="wp-block-paragraph">When something gets slow or stops responding, I wanted to know about it in a reliable way.</p>
+
+
+
+<p class="wp-block-paragraph">We&#8217;d used Nagios extensively at the website development and hosting business I ran a long time ago, and it was great for this kind of thing. Highly configurable and flexible, low maintenance, and very reliable. </p>
+
+
+
+<p class="wp-block-paragraph">When looking at options more recently, Nagios didn&#8217;t seem to have changed much in all that time, and with its outdated web interface and arcane config file syntax, I convinced myself that someone had surely created a better tool by now. So, I spent a bunch of time researching alternatives, including Zabbix, Prometheus, Grafana, Datadog, New Relic, Pingdom, UptimeRobot, and a bunch of others. And we did start out using UptimeRobot for a brief while. </p>
+
+
+
+<p class="wp-block-paragraph">But when I looked at the amount of time I was going to spend learning and managing the complexity of those stacks, or the amount of money we would spend on SaaS tools along with some of the constraints and &#8220;per seat&#8221; or &#8220;per monitor&#8221; limits they imposed, the more I was ready to go with a tried and true, purpose-built option that could scale up without additional cost or complexity.</p>
+
+
+
+<p class="wp-block-paragraph">Nagios is not fun to set up initially — see my earlier comment about <a href="https://assets.nagios.com/downloads/nagioscore/docs/nagioscore/3/en/objectdefinitions.html#service">arcane config syntax</a>. It probably took me the equivalent of a full day to get everything just so. But once I did, it&#8217;s been humming along great, and brings significant peace of mind. </p>
+
+
+
+<figure class="wp-block-image size-large"><img decoding="async" width="922" height="1024" src="https://tech.chrishardie.com/wp-content/uploads/2026/05/Screenshot-2026-05-23-at-16.13.45-922x1024.png" alt="" class="wp-image-650" srcset="https://tech.chrishardie.com/wp-content/uploads/2026/05/Screenshot-2026-05-23-at-16.13.45-922x1024.png 922w, https://tech.chrishardie.com/wp-content/uploads/2026/05/Screenshot-2026-05-23-at-16.13.45-270x300.png 270w, https://tech.chrishardie.com/wp-content/uploads/2026/05/Screenshot-2026-05-23-at-16.13.45-768x853.png 768w, https://tech.chrishardie.com/wp-content/uploads/2026/05/Screenshot-2026-05-23-at-16.13.45.png 1137w" sizes="(max-width: 922px) 100vw, 922px" /></figure>
+
+
+
+<p class="wp-block-paragraph">We&#8217;re currently monitoring 54 hosts and 104 services. This is all on a $4/month droplet at Digital Ocean, 1 vCPU, 512 MB RAM, 10 GB Disk. We pay another $0.80/month for weekly droplet snapshots. We set our monitoring droplet up in a different physical region from the rest of our servers/droplets, on the other side of the continent.</p>
+
+
+
+<span id="more-648"></span>
+
+
+
+<p class="wp-block-paragraph">To get going, I started with <a href="https://edsonkimuli.medium.com/install-nagios-4-on-nginx-ubuntu-20-04-93a112208232">these instructions from Edson Kimuli</a>, which were very helpful. A few things I did during/after:</p>
+
+
+
+<ul class="wp-block-list">
+<li>Used a more modern PHP version </li>
+
+
+
+<li>Removed apache2</li>
+
+
+
+<li>Set up certbot for SSL usage</li>
+
+
+
+<li>Added a <a href="https://www.digitalocean.com/community/tutorials/how-to-add-swap-space-on-ubuntu-22-04">swap partition</a></li>
+
+
+
+<li>Installed and configured postfix for email sending, although I don&#8217;t think we&#8217;re really using it</li>
+
+
+
+<li>Installed Perl for using some Nagios plugins</li>
+
+
+
+<li>Locked down network access to the monitoring host</li>
+</ul>
+
+
+
+<h3 class="wp-block-heading">What we monitor</h3>
+
+
+
+<p class="wp-block-paragraph">Here are some of the things we&#8217;re monitoring:</p>
+
+
+
+<ul class="wp-block-list">
+<li>That a given host is up via ping</li>
+
+
+
+<li>Web server is available</li>
+
+
+
+<li>Web server responds to a given request via Server Name Indication (SNI)</li>
+
+
+
+<li>SSL certificate for web server is valid and not about to expire</li>
+
+
+
+<li>DNS servers respond with the expected IP addresses for given hostnames</li>
+
+
+
+<li>Domain expiration is not imminent for critical domains</li>
+
+
+
+<li>Droplet disk space, load, and memory usage is as expected</li>
+
+
+
+<li>Server backups have successfully run recently</li>
+
+
+
+<li>SSH services are available and listening</li>
+
+
+
+<li>Web applications provide an expected response at a health endpoint</li>
+
+
+
+<li><a href="https://tech.chrishardie.com/2026/simple-proxy-server-squid/">Squid proxy server</a> is running and accepting requests</li>
+
+
+
+<li>Proxy server serves up a PAC file with the expected contents</li>
+
+
+
+<li>Proxy server actually proxies requests, but doesn&#8217;t allow unauthenticated proxying</li>
+
+
+
+<li>Critical websites serve expected content at key pages, including their RSS feeds</li>
+
+
+
+<li>That our office networks are reachable from the public Internet</li>
+
+
+
+<li>VPN servers are accepting connections</li>
+</ul>
+
+
+
+<p class="wp-block-paragraph">For external status page monitoring, we basically check to make sure an &#8220;All Systems Operational&#8221; message is displayed according to whatever status page provider the SaaS tool we care about is using. This is a bit broad since many status pages display maintenance activities as an interruption to that all green status, but it works for now.</p>
+
+
+
+<p class="wp-block-paragraph">One thing I really like about Nagios is that if it doesn&#8217;t have a built in monitor for something, there&#8217;s probably a <a href="https://nagios-plugins.org">plugin</a> for it, or I can build one myself with a simple shell script. I don&#8217;t have to install heavy third-party applications on every server just to have them participate in monitoring.</p>
+
+
+
+<p class="wp-block-paragraph">One random example is that Google&#8217;s status page doesn&#8217;t display a simple way to tell if all services are up and running — the &#8220;no incidents&#8221; indicator is a bit separate, so I wrote a simple if slightly brittle script to check how many of its services are listed as available:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code"><pre class="brush: bash; title: ; notranslate">
+#!/bin/bash
+
+# Checks that the appropriate number of Google Workspace services are listed as available.
+
+# URL to check
+url=&quot;https://www.google.com/appsstatus/dashboard/&quot;
+
+# Run the command and store the output in a variable
+output=$(curl -sSf &quot;$url&quot; | grep -oh &#039;psd__available&#039;  | wc -l)
+
+# Check if the output is equal to 33
+if &#x5B; &quot;$output&quot; -eq 33 ]; then
+    echo &quot;OK - Expected output received: $output from $url&quot;
+    exit 0  # Nagios status code for OK
+else
+    echo &quot;CRITICAL - Unexpected output received: $output from $url&quot;
+    exit 2  # Nagios status code for Critical
+fi
+</pre></div>
+
+
+<p class="wp-block-paragraph">Then in Nagios, you can set that script up as a &#8220;check command&#8221; that can be used to determine the health/status of a host you are monitoring:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code"><pre class="brush: bash; title: ; notranslate">
+define command {
+    command_name    check-google-workspace
+    command_line    /usr/local/nagios/plugins/check_google_workspace.sh
+}
+</pre></div>
+
+
+<p class="wp-block-paragraph">Even though this is a bit weird and requires occasional changes when Google adds or removes services, it&#8217;s one of those things that I think would be harder to do than I wanted with some SaaS tools. </p>
+
+
+
+<p class="wp-block-paragraph">We do also use the <a href="https://github.com/NagiosEnterprises/nrpe">Nagios NRPE agent</a> for a lightweight service check harness that allows me to then set up custom checks on a given server. If you use it, make sure you set up a firewall rule to restrict access from only your Nagios monitor.</p>
+
+
+
+<h3 class="wp-block-heading">Alerting</h3>
+
+
+
+<p class="wp-block-paragraph">As an IT department of one, I need to make sure I don&#8217;t miss alerts, but I also don&#8217;t want to be overwhelmed by them.</p>
+
+
+
+<p class="wp-block-paragraph">So for now, I send all alerts to a dedicated Slack channel and important alerts to my mobile device using <a href="https://pushover.net">Pushover</a> (another classic service that has been around forever and just works). <a href="https://raw.githubusercontent.com/jedda/OSX-Monitoring-Tools/master/notify_by_pushover.sh">Here&#8217;s the Pushover notification script we use</a>. Alert payloads can be customized so that they do or don&#8217;t break through my &#8220;do not disturb&#8221; and sleep settings.</p>
+
+
+
+<p class="wp-block-paragraph">I also use the <a href="https://easynag.com">easyNag iOS app</a> to be able to quickly review and act on alerts. Although I can get to the Nagios web interface quickly, I&#8217;ve found having a native app to quickly acknowledge an outage or review host/service status gives me the fast and modern ops feel I want when there&#8217;s too much to do.</p>
+
+
+<div class="wp-block-image">
+<figure class="aligncenter size-large is-resized"><img decoding="async" width="471" height="1024" src="https://tech.chrishardie.com/wp-content/uploads/2026/05/IMG_82EBA2B82C36-1-471x1024.jpeg" alt="" class="wp-image-651" style="width:350px" srcset="https://tech.chrishardie.com/wp-content/uploads/2026/05/IMG_82EBA2B82C36-1-471x1024.jpeg 471w, https://tech.chrishardie.com/wp-content/uploads/2026/05/IMG_82EBA2B82C36-1-138x300.jpeg 138w, https://tech.chrishardie.com/wp-content/uploads/2026/05/IMG_82EBA2B82C36-1-768x1670.jpeg 768w, https://tech.chrishardie.com/wp-content/uploads/2026/05/IMG_82EBA2B82C36-1-706x1536.jpeg 706w, https://tech.chrishardie.com/wp-content/uploads/2026/05/IMG_82EBA2B82C36-1-942x2048.jpeg 942w, https://tech.chrishardie.com/wp-content/uploads/2026/05/IMG_82EBA2B82C36-1-scaled.jpeg 1177w" sizes="(max-width: 471px) 100vw, 471px" /></figure>
+</div>
+
+
+<h3 class="wp-block-heading">Monitoring the monitor</h3>
+
+
+
+<p class="wp-block-paragraph">What if Nagios goes down? It hasn&#8217;t happened for this installation yet, but just in case, I have a basic meta monitor in place using a free plan at <a href="https://healthchecks.io/">Healthchecks.io</a>. Nagios &#8220;checks&#8221; a Healthchecks.io endpoint every 5 minutes and if it hasn&#8217;t send a request within the expected window, Healthchecks.io will alert me via email, Slack and Pushover.</p>
+
+
+
+<h3 class="wp-block-heading">The relief of having good monitoring</h3>
+
+
+
+<p class="wp-block-paragraph">To perhaps state the obvious, I&#8217;ve found that monitoring the status of all the systems and services we depend on brings reassurance and faster resolutions.</p>
+
+
+
+<p class="wp-block-paragraph">If there are mumblings spreading among my team about an outage, I usually already know about it and pinpointing the cause.</p>
+
+
+
+<p class="wp-block-paragraph">When one of our office location ISPs experiences a fiber cut, I&#8217;m usually the one to tell them about it, after convincing them that rebooting our router is not going to help.</p>
+
+
+
+<p class="wp-block-paragraph">And when I&#8217;m making configuration changes or upgrading something, it&#8217;s nice to know that many kinds of critical errors would be caught quickly.</p>
+
+
+
+<p class="wp-block-paragraph">If you aren&#8217;t monitoring your small business infrastructure, I highly recommend it.</p>
+<p>The post <a href="https://tech.chrishardie.com/2026/nagios-small-business-infrastructure-monitoring/">Using Nagios for small business infrastructure monitoring</a> appeared first on <a href="https://tech.chrishardie.com">Chris Hardie&#039;s Tech and Software Blog</a>.</p>]]></content:encoded>
+					
+					<wfw:commentRss>https://tech.chrishardie.com/2026/nagios-small-business-infrastructure-monitoring/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">648</post-id>	</item>
+		<item>
+		<title>Apple Private Relay and network parental control</title>
+		<link>https://tech.chrishardie.com/2026/apple-private-relay-network-parental-control/</link>
+					<comments>https://tech.chrishardie.com/2026/apple-private-relay-network-parental-control/#respond</comments>
+		
+		<dc:creator><![CDATA[Chris Hardie]]></dc:creator>
+		<pubDate>Sat, 09 May 2026 16:56:51 +0000</pubDate>
+				<category><![CDATA[Security and Privacy]]></category>
+		<category><![CDATA[adguard home]]></category>
+		<category><![CDATA[dns]]></category>
+		<category><![CDATA[networking]]></category>
+		<category><![CDATA[parenting]]></category>
+		<category><![CDATA[private relay]]></category>
+		<guid isPermaLink="false">https://tech.chrishardie.com/?p=615</guid>
+
+					<description><![CDATA[<p>I&#8217;m jotting down a few things I&#8217;ve learned about Apple&#8217;s iCloud Private Relay network service and the implications of using it for having parental controls or other network allow/block settings in place. What is iCloud Private Relay? Apple describes iCloud Private Relay as a privacy-protecting service that hides the IP address and network activity (DNS &#8230; <a href="https://tech.chrishardie.com/2026/apple-private-relay-network-parental-control/" class="more-link">Continue reading <span class="screen-reader-text">Apple Private Relay and network parental control</span></a></p>
+<p>The post <a href="https://tech.chrishardie.com/2026/apple-private-relay-network-parental-control/">Apple Private Relay and network parental control</a> appeared first on <a href="https://tech.chrishardie.com">Chris Hardie&#039;s Tech and Software Blog</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p class="wp-block-paragraph">I&#8217;m jotting down a few things I&#8217;ve learned about Apple&#8217;s iCloud Private Relay network service and the implications of using it for having parental controls or other network allow/block settings in place.</p>
+
+
+
+<h3 class="wp-block-heading">What is iCloud Private Relay?</h3>
+
+
+
+<p class="wp-block-paragraph">Apple describes <a href="https://support.apple.com/en-us/102602">iCloud Private Relay</a> as a privacy-protecting service that hides the IP address and network activity (DNS lookups, sites visited, etc.) of an Apple device.</p>
+
+
+
+<p class="wp-block-paragraph">So, it&#8217;s basically a proxy service that forces all network traffic through a new connection, although Apple has taken steps to ensure it&#8217;s not as simple as &#8220;now Apple sees everything instead of your ISP&#8221;. You can read an article from Cloudflare about <a href="https://blog.cloudflare.com/icloud-private-relay/">their role in providing the separated ingress and egress proxy setup</a> that ostensibly ensures no one company has all of the details about what you&#8217;re doing in a private relay browsing session.</p>
+
+
+
+<p class="wp-block-paragraph">I think Apple introduced the service in 2022, and in many cases I think it was just turned on by default for a lot of devices/browsers.</p>
+
+
+
+<h3 class="wp-block-heading">How do you use it or turn it off?</h3>
+
+
+
+<p class="wp-block-paragraph">While Apple offers some UI settings that imply you can disable iCloud Private Relay, I&#8217;ve found it&#8217;s not that simple and that Apple&#8217;s presentation of the service can be misleading at times. </p>
+
+
+
+<span id="more-615"></span>
+
+
+
+<p class="wp-block-paragraph">I&#8217;ll take a moment to inventory the options because if you&#8217;re a network administrator or the parent/guardian of an Apple device user, this can get confusing quickly.</p>
+
+
+
+<p class="wp-block-paragraph">In theory you can tell Safari on a Mac or iOS device to turn off the &#8220;Hide IP from trackers&#8221; (under &#8220;Privacy&#8221;). It sounds great — &#8220;awesome, I can browse anonymously&#8221; — but the description of the option doesn&#8217;t really reveal the full implications for the user.</p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="503" src="https://tech.chrishardie.com/wp-content/uploads/2026/05/Screenshot-2026-05-09-at-11.08.47-1024x503.png" alt="" class="wp-image-617" srcset="https://tech.chrishardie.com/wp-content/uploads/2026/05/Screenshot-2026-05-09-at-11.08.47-1024x503.png 1024w, https://tech.chrishardie.com/wp-content/uploads/2026/05/Screenshot-2026-05-09-at-11.08.47-300x147.png 300w, https://tech.chrishardie.com/wp-content/uploads/2026/05/Screenshot-2026-05-09-at-11.08.47-768x378.png 768w, https://tech.chrishardie.com/wp-content/uploads/2026/05/Screenshot-2026-05-09-at-11.08.47-1536x755.png 1536w, https://tech.chrishardie.com/wp-content/uploads/2026/05/Screenshot-2026-05-09-at-11.08.47.png 1896w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p class="wp-block-paragraph">At the OS level, macOS offers the option to upgrade to &#8220;iCloud+&#8221; to turn on private relay to &#8220;protect browsing&#8221; (which I believe extends to other apps like Apple&#8217;s Mail) but it&#8217;s a bit confusing to offer that as a paid option under one name in one place and a free option under a different name in Safari.</p>
+
+
+
+<figure class="wp-block-image size-full"><img loading="lazy" decoding="async" width="962" height="426" src="https://tech.chrishardie.com/wp-content/uploads/2026/05/Screenshot-2026-05-09-at-11.10.29.png" alt="" class="wp-image-619" srcset="https://tech.chrishardie.com/wp-content/uploads/2026/05/Screenshot-2026-05-09-at-11.10.29.png 962w, https://tech.chrishardie.com/wp-content/uploads/2026/05/Screenshot-2026-05-09-at-11.10.29-300x133.png 300w, https://tech.chrishardie.com/wp-content/uploads/2026/05/Screenshot-2026-05-09-at-11.10.29-768x340.png 768w" sizes="auto, (max-width: 962px) 100vw, 962px" /></figure>
+
+
+
+<p class="wp-block-paragraph">I have also seen several reports of people having access to private relaying features after their iCloud+ subscription or trial has expired. So it seems like Apple doesn&#8217;t necessarily see this as a substantial selling point in the iCloud+ offering.</p>
+
+
+
+<p class="wp-block-paragraph">In iOS versions up through 18, there&#8217;s a system-level setting to &#8220;Limit IP Address Tracking&#8221; which turns on private relay usage:</p>
+
+
+<div class="wp-block-image">
+<figure class="aligncenter size-full is-resized"><img loading="lazy" decoding="async" width="1206" height="1161" src="https://tech.chrishardie.com/wp-content/uploads/2026/05/iphone-hide-ip.png" alt="" class="wp-image-620" style="aspect-ratio:1.0385456597916323;object-fit:cover;width:450px" srcset="https://tech.chrishardie.com/wp-content/uploads/2026/05/iphone-hide-ip.png 1206w, https://tech.chrishardie.com/wp-content/uploads/2026/05/iphone-hide-ip-300x289.png 300w, https://tech.chrishardie.com/wp-content/uploads/2026/05/iphone-hide-ip-1024x986.png 1024w, https://tech.chrishardie.com/wp-content/uploads/2026/05/iphone-hide-ip-768x739.png 768w" sizes="auto, (max-width: 1206px) 100vw, 1206px" /></figure>
+</div>
+
+
+<p class="wp-block-paragraph">Also in Safari&#8217;s iOS settings, there&#8217;s an option to &#8220;Hide IP Address&#8221;:</p>
+
+
+<div class="wp-block-image">
+<figure class="aligncenter size-full is-resized"><img loading="lazy" decoding="async" width="1206" height="1480" src="https://tech.chrishardie.com/wp-content/uploads/2026/05/ios-safari-privacy.png" alt="" class="wp-image-621" style="width:450px" srcset="https://tech.chrishardie.com/wp-content/uploads/2026/05/ios-safari-privacy.png 1206w, https://tech.chrishardie.com/wp-content/uploads/2026/05/ios-safari-privacy-244x300.png 244w, https://tech.chrishardie.com/wp-content/uploads/2026/05/ios-safari-privacy-834x1024.png 834w, https://tech.chrishardie.com/wp-content/uploads/2026/05/ios-safari-privacy-768x942.png 768w" sizes="auto, (max-width: 1206px) 100vw, 1206px" /></figure>
+</div>
+
+
+<p class="wp-block-paragraph">The interface seemingly gives you the option of choosing when you turn on private relay and who you chose to hide your IP address from, but it&#8217;s actually just an on/off thing:</p>
+
+
+<div class="wp-block-image">
+<figure class="aligncenter size-large is-resized"><img loading="lazy" decoding="async" width="1024" height="876" src="https://tech.chrishardie.com/wp-content/uploads/2026/05/ios-hide-from-who-1024x876.png" alt="" class="wp-image-622" style="width:450px" srcset="https://tech.chrishardie.com/wp-content/uploads/2026/05/ios-hide-from-who-1024x876.png 1024w, https://tech.chrishardie.com/wp-content/uploads/2026/05/ios-hide-from-who-300x257.png 300w, https://tech.chrishardie.com/wp-content/uploads/2026/05/ios-hide-from-who-768x657.png 768w, https://tech.chrishardie.com/wp-content/uploads/2026/05/ios-hide-from-who.png 1206w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /></figure>
+</div>
+
+
+<p class="wp-block-paragraph">There&#8217;s another Safari setting where I think private relay is in play, and that&#8217;s Apple&#8217;s advanced tracking and fingerprinting protection. Their available documentation says that it does things like inject noise into browser APIs that would allow a site to fingerprint your browser, and removes tracking query parameters that might do the same.</p>
+
+
+
+<p class="wp-block-paragraph">But from what I can tell in observing attempted outbound network connections during private browsing, if you have this feature enabled, the browser attempts to route at least some network activity through private relay, even if you have the &#8220;hide ip address&#8221; turned off.</p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="763" src="https://tech.chrishardie.com/wp-content/uploads/2026/05/Screenshot-2026-05-09-at-11.29.15-1024x763.png" alt="" class="wp-image-623" srcset="https://tech.chrishardie.com/wp-content/uploads/2026/05/Screenshot-2026-05-09-at-11.29.15-1024x763.png 1024w, https://tech.chrishardie.com/wp-content/uploads/2026/05/Screenshot-2026-05-09-at-11.29.15-300x223.png 300w, https://tech.chrishardie.com/wp-content/uploads/2026/05/Screenshot-2026-05-09-at-11.29.15-768x572.png 768w, https://tech.chrishardie.com/wp-content/uploads/2026/05/Screenshot-2026-05-09-at-11.29.15-1536x1144.png 1536w, https://tech.chrishardie.com/wp-content/uploads/2026/05/Screenshot-2026-05-09-at-11.29.15.png 1896w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p class="wp-block-paragraph">Lastly, there are reports of other installed apps on your system being able to request the use of iCloud Private Relay to make their own network connections. I haven&#8217;t spent a lot of time confirming this, but my experience is that private relay connection attempts happen plenty of times outside of Safari usage.</p>
+
+
+
+<h3 class="wp-block-heading">Isn&#8217;t this all a good thing?</h3>
+
+
+
+<p class="wp-block-paragraph">In general, I&#8217;m glad Apple is providing more options for its users to browse the web in a way that reduces fingerprinting and observability by malicious actors. They know firsthand the horrors of their device users just connecting to random wifi networks all over the world, clicking on random things sent to them by random people, and just generally practicing terrible security hygiene. It even makes sense to me that they would enable these things by default and allow users to turn them off when desired.</p>
+
+
+
+<p class="wp-block-paragraph">I also think it&#8217;s a big deal to all of the sudden have a huge percentage of the world&#8217;s Internet users routing their browsing and other network traffic through Apple and its partners` networks. This change comes with its own privacy and security implications, and I&#8217;m pretty sure the average user has not thought those through.</p>
+
+
+
+<p class="wp-block-paragraph">It&#8217;s one more imperceptible but significant shift in the architecture of our connected lives that might seem good for now but could turn out to be used against people in troubling ways later on.</p>
+
+
+
+<p class="wp-block-paragraph">It also just makes troubleshooting network issues harder. A few months ago I was trying to figure out an internal connectivity issues, and a ping that I was running from my iPhone to my router started getting intermittent responses from an Apple IP — just weird!</p>
+
+
+<div class="wp-block-image">
+<figure class="aligncenter size-large"><img loading="lazy" decoding="async" width="471" height="1024" src="https://tech.chrishardie.com/wp-content/uploads/2026/05/98fe8cb12f352319-471x1024.png" alt="" class="wp-image-642" srcset="https://tech.chrishardie.com/wp-content/uploads/2026/05/98fe8cb12f352319-471x1024.png 471w, https://tech.chrishardie.com/wp-content/uploads/2026/05/98fe8cb12f352319-138x300.png 138w, https://tech.chrishardie.com/wp-content/uploads/2026/05/98fe8cb12f352319-768x1670.png 768w, https://tech.chrishardie.com/wp-content/uploads/2026/05/98fe8cb12f352319-706x1536.png 706w, https://tech.chrishardie.com/wp-content/uploads/2026/05/98fe8cb12f352319-942x2048.png 942w, https://tech.chrishardie.com/wp-content/uploads/2026/05/98fe8cb12f352319-scaled.png 1177w" sizes="auto, (max-width: 471px) 100vw, 471px" /></figure>
+</div>
+
+
+<h3 class="wp-block-heading">Parental controls and network management</h3>
+
+
+
+<p class="wp-block-paragraph">The biggest implication of private relay in my life was when I realized that the tools I&#8217;d set up to block unwanted network connections on my family&#8217;s devices would be circumvented.</p>
+
+
+
+<p class="wp-block-paragraph">Most ad blocking and parental control tools rely on the use of DNS lists to decide which hostnames and website addresses should be considered okay or not okay for a given device to connect to. There are <a href="https://github.com/hagezi/dns-blocklists">myriad lists out there</a> updated by volunteers and commercial entities alike that, by injecting them into your local DNS service, allow you to make parts of the Internet just disappear for your users; advertisements, adult content, tracking and fingerprinting services, cooking blogs that share too much personal backstory before just giving you the darn recipe, etc.</p>
+
+
+
+<p class="wp-block-paragraph">So if &#8220;my.bad.site&#8221; is on a block list and a device user tries to visit it while connected to our local network, the network tells their device &#8220;sorry, my.bad.site doesn&#8217;t really exist, go find something else to do.&#8221; </p>
+
+
+
+<p class="wp-block-paragraph">With iCloud Private Relay in place, the device likely no longer asks any local network appliance about how to get to &#8220;my.bad.site,&#8221; it just asks Apple, and Apple sends the device user on their way to the intended destination via their proxy.</p>
+
+
+
+<p class="wp-block-paragraph">This breaks the network-level filtering I&#8217;ve set up for our household users. And while I&#8217;m fortunate to not (yet) have adversarial relationships with said users, I know filtering tech can only do so much when put up against the will of a teenager. I can imagine a day soon where my daughter or one of her friends says &#8220;oh hey, you can get around that stupid block your dad put in place by turning this one setting on&#8221; and I&#8217;d like for it to not be that easy. </p>
+
+
+
+<p class="wp-block-paragraph">Apple might offer its own block list or parental control settings, and surely this is an evolution of private relay that&#8217;s coming soon, possibly as a selling point for iCloud+. </p>
+
+
+
+<p class="wp-block-paragraph">But I&#8217;m personally not ready to hand over to Apple management of what websites and hosts my family&#8217;s devices can talk to. And I suspect there are various homelab geeks, network administrators at small businesses and schools and others out there who feel the same way.</p>
+
+
+
+<h3 class="wp-block-heading">Disabling iCloud Private Relay via AdGuard Home rules </h3>
+
+
+
+<p class="wp-block-paragraph">I use <a href="https://github.com/AdguardTeam/AdguardHome">AdGuard Home</a> as a local DNS server that facilitates fine-grained filtering and allowing. I use it at home and also on the <a href="https://amzn.to/4tnRtHG">GL.iNet Slate GL-AXT1800 Portable Travel Router</a> (affiliate link) that I use when our family travels. It&#8217;s an awesome open source software tool and it&#8217;s been a great way to make sure network clients can get to the stuff they&#8217;re supposed to while keeping annoying and potentially harmful stuff filtered out.</p>
+
+
+
+<p class="wp-block-paragraph">AdGuard Home has a way to turn on blocking of a wide range of services, and iCloud Private Relay is one of those:</p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="655" src="https://tech.chrishardie.com/wp-content/uploads/2026/05/Screenshot-2026-05-09-at-12.19.55-1024x655.png" alt="" class="wp-image-627" srcset="https://tech.chrishardie.com/wp-content/uploads/2026/05/Screenshot-2026-05-09-at-12.19.55-1024x655.png 1024w, https://tech.chrishardie.com/wp-content/uploads/2026/05/Screenshot-2026-05-09-at-12.19.55-300x192.png 300w, https://tech.chrishardie.com/wp-content/uploads/2026/05/Screenshot-2026-05-09-at-12.19.55-768x491.png 768w, https://tech.chrishardie.com/wp-content/uploads/2026/05/Screenshot-2026-05-09-at-12.19.55-1536x982.png 1536w, https://tech.chrishardie.com/wp-content/uploads/2026/05/Screenshot-2026-05-09-at-12.19.55-2048x1310.png 2048w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p class="wp-block-paragraph">Behind the scenes, checking this box <a href="https://github.com/AdguardTeam/HostlistsRegistry/blob/main/assets/services.json#L1742">introduces three filtering rules</a> using AdGuard Home&#8217;s <a href="https://adguard-dns.io/kb/general/dns-filtering-syntax/">special rule syntax</a>:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code"><pre class="brush: plain; title: ; notranslate">
+||mask.icloud.com^$dnsrewrite=NXDOMAIN;;
+||mask-h2.icloud.com^$dnsrewrite=NXDOMAIN;;
+||mask-canary.icloud.com^$dnsrewrite=NXDOMAIN;;
+</pre></div>
+
+
+<p class="wp-block-paragraph">Unfortunately, the rules don&#8217;t currently work in AdGuard Home as expected. Instead of redirecting DNS queries for those private relay hosts to show that no such domain exists (NXDOMAIN), they instead return a &#8220;NOERROR&#8221; response code and point to &#8220;0.0.0.0&#8221; as the resulting IP. </p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="558" src="https://tech.chrishardie.com/wp-content/uploads/2026/05/Screenshot-2026-05-09-at-12.24.29-1024x558.png" alt="" class="wp-image-629" srcset="https://tech.chrishardie.com/wp-content/uploads/2026/05/Screenshot-2026-05-09-at-12.24.29-1024x558.png 1024w, https://tech.chrishardie.com/wp-content/uploads/2026/05/Screenshot-2026-05-09-at-12.24.29-300x163.png 300w, https://tech.chrishardie.com/wp-content/uploads/2026/05/Screenshot-2026-05-09-at-12.24.29-768x418.png 768w, https://tech.chrishardie.com/wp-content/uploads/2026/05/Screenshot-2026-05-09-at-12.24.29-1536x837.png 1536w, https://tech.chrishardie.com/wp-content/uploads/2026/05/Screenshot-2026-05-09-at-12.24.29.png 1704w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p class="wp-block-paragraph">This in turn causes the client software (e.g. Safari) to try to connect to 0.0.0.0, or otherwise retry those lookups for a while longer, which can create <a href="https://developer.apple.com/icloud/prepare-your-network-for-icloud-private-relay/">noticeable (10 second or more) delays</a> in the experience of trying to visit a site before it gives up and stops trying to use private relay. (Again, this is often my experience on macOS with all of the official toggles for private relay turned off.)</p>
+
+
+
+<p class="wp-block-paragraph">Apparently this is <a href="https://github.com/AdguardTeam/AdGuardHome/issues/5286">a known bug in AdGuard Home</a> that is not receiving much attention.</p>
+
+
+
+<p class="wp-block-paragraph">The workaround is that instead of relying on the &#8220;block this service&#8221; option, you can set up a list of custom filter rules that, for whatever reason, actually return the NXDOMAIN response that quickly tells the client to give up on private relay usage.</p>
+
+
+<div class="wp-block-syntaxhighlighter-code"><pre class="brush: plain; title: ; notranslate">
+||mask.apple.com^$dnsrewrite=NXDOMAIN;;
+||mask-private-replay.apple.com^$dnsrewrite=NXDOMAIN;;
+||mask.icloud.com^$dnsrewrite=NXDOMAIN;;
+||mask-h2.icloud.com^$dnsrewrite=NXDOMAIN;;
+||mask-api.icloud.com^$dnsrewrite=NXDOMAIN;;
+||mask-t.apple-dns.net^$dnsrewrite=NXDOMAIN;;
+||mask-api.fe.apple-dns.net^$dnsrewrite=NXDOMAIN;;
+||mask.apple-dns.net^$dnsrewrite=NXDOMAIN;;
+||mask-canary.icloud.com^$dnsrewrite=NXDOMAIN;;
+||canary.mask.apple-dns.net^$dnsrewrite=NXDOMAIN;;
+||doh.dns.apple.com.v.aaplimg.com^$dnsrewrite=NXDOMAIN;;
+||doh.dns.apple.com^$dnsrewrite=NXDOMAIN;;
+||appleproxy.com^$dnsrewrite=NXDOMAIN;;
+||proxy.gslb.apple.com^$dnsrewrite=NXDOMAIN;;
+||relay.apple-dns.net^$dnsrewrite=NXDOMAIN;;
+||p13n-relay.apple.com^$dnsrewrite=NXDOMAIN;;
+||gsp85-ssl.Is.apple.com^$dnsrewrite=NXDOMAIN;;
+</pre></div>
+
+
+<p class="wp-block-paragraph">I got this list from <a href="https://github.com/DarkGames26/Apple-Relay-Blocklist/blob/main/filter_1.txt">a random GitHub repo</a> that was mentioned in the various bug reports and discussions I followed. There&#8217;s a <a href="https://github.com/hagezi/dns-blocklists/blob/main/share/apple-private-relay.txt">different and perhaps better list of hostnames associated with private relay here</a>, but it isn&#8217;t in the &#8220;NXDOMAIN&#8221; rewrite format and I haven&#8217;t explored the implications of blocking Apple Intelligence and Siri service hosts yet, so I&#8217;m not using it.</p>
+
+
+
+<p class="wp-block-paragraph">Here&#8217;s how the AdGuard Home query log looks now:</p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="691" src="https://tech.chrishardie.com/wp-content/uploads/2026/05/Screenshot-2026-05-09-at-12.31.41-1024x691.png" alt="" class="wp-image-631" srcset="https://tech.chrishardie.com/wp-content/uploads/2026/05/Screenshot-2026-05-09-at-12.31.41-1024x691.png 1024w, https://tech.chrishardie.com/wp-content/uploads/2026/05/Screenshot-2026-05-09-at-12.31.41-300x203.png 300w, https://tech.chrishardie.com/wp-content/uploads/2026/05/Screenshot-2026-05-09-at-12.31.41-768x518.png 768w, https://tech.chrishardie.com/wp-content/uploads/2026/05/Screenshot-2026-05-09-at-12.31.41-1536x1037.png 1536w, https://tech.chrishardie.com/wp-content/uploads/2026/05/Screenshot-2026-05-09-at-12.31.41.png 1656w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<h3 class="wp-block-heading">Getting tricky with firewall rules</h3>
+
+
+
+<p class="wp-block-paragraph">The other thing I do to make all this work is a LAN outbound firewall rule that redirects all port 53 DNS traffic that is headed to the Internet back to my local AdGuard Home powered DNS server.  Apart from any Apple-specific concerns, I found that plenty of devices on my home network were ignoring the DHCP-supplied DNS settings and just trying to talk to DNS servers of their choosing. </p>
+
+
+
+<p class="wp-block-paragraph">I should also be blocking DNS over TLS and DNS over QUIC (DoT/DoQ) traffic on port 853, but I&#8217;m not there yet.</p>
+
+
+
+<p class="wp-block-paragraph">And of course the trend is toward more clients having the option to use DNS over HTTP (DoH) where the DNS queries are mixed in with regular HTTPS traffic. The freedom, privacy and security advocate in me loves that this option exists for people who need it, but the parental controls network administrator in me is grumpy about it. I could block a list of known DoH resolvers, but then I need to get in to <a href="https://github.com/hagezi/dns-blocklists#bypass">blocking VPN services and other bypass options</a>,  I&#8217;m not there yet either.</p>
+
+
+
+<p class="wp-block-paragraph">I&#8217;m also guessing it&#8217;s not long before device makers like Apple just hardcode a bunch of entry points to private relay services that take a lot more than DNS filtering or firewall rules (e.g. enterprise device profiles) to untangle. &#8220;Oh, you want your fancy blue iMessages? Well, you&#8217;re going to get them through the same hostnames that private relay uses.&#8221; And of course there are already people setting up tools for allowing or blocking based on <a href="https://github.com/hroost/icloud-private-relay-iplist">known private relay egress IP addresses</a>.</p>
+
+
+
+<h3 class="wp-block-heading">Final thoughts</h3>
+
+
+
+<p class="wp-block-paragraph">Again, I don&#8217;t fault Apple for creating these privacy-enhancing options, but the fact that they could actually be used to make kids less safe online is a bit too much irony. We need clearer presentation and documentation for home network administrators, and we need a wider conversation about the importance of being able to understand and control what is going in and out of the networks that people are using.</p>
+
+
+
+<p class="wp-block-paragraph">If we just turn everything over to Apple or Amazon or Cloudflare and hope for the best, I fear that will not end well for the most vulnerable Internet users among us.</p>
+
+
+
+<p class="wp-block-paragraph"></p>
+<p>The post <a href="https://tech.chrishardie.com/2026/apple-private-relay-network-parental-control/">Apple Private Relay and network parental control</a> appeared first on <a href="https://tech.chrishardie.com">Chris Hardie&#039;s Tech and Software Blog</a>.</p>]]></content:encoded>
+					
+					<wfw:commentRss>https://tech.chrishardie.com/2026/apple-private-relay-network-parental-control/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">615</post-id>	</item>
+		<item>
+		<title>Simple small business proxy server using squid</title>
+		<link>https://tech.chrishardie.com/2026/simple-proxy-server-squid/</link>
+					<comments>https://tech.chrishardie.com/2026/simple-proxy-server-squid/#respond</comments>
+		
+		<dc:creator><![CDATA[Chris Hardie]]></dc:creator>
+		<pubDate>Tue, 14 Apr 2026 16:59:43 +0000</pubDate>
+				<category><![CDATA[Security and Privacy]]></category>
+		<category><![CDATA[networking]]></category>
+		<category><![CDATA[proxy]]></category>
+		<category><![CDATA[security]]></category>
+		<category><![CDATA[small business]]></category>
+		<category><![CDATA[software]]></category>
+		<guid isPermaLink="false">https://tech.chrishardie.com/?p=602</guid>
+
+					<description><![CDATA[<p>When I was figuring out how to enable our team at the newspaper to work in a more distributed fashion while maintaining network security, I looked at a variety of VPN and proxy options. In the end I settled on a simple proxy server setup using the squid open source proxy software. I needed a &#8230; <a href="https://tech.chrishardie.com/2026/simple-proxy-server-squid/" class="more-link">Continue reading <span class="screen-reader-text">Simple small business proxy server using squid</span></a></p>
+<p>The post <a href="https://tech.chrishardie.com/2026/simple-proxy-server-squid/">Simple small business proxy server using squid</a> appeared first on <a href="https://tech.chrishardie.com">Chris Hardie&#039;s Tech and Software Blog</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p class="wp-block-paragraph">When I was figuring out how to enable our team at the newspaper to work in a more distributed fashion while maintaining network security, I looked at a variety of VPN and proxy options. In the end I settled on a simple proxy server setup using the <a href="https://www.squid-cache.org/">squid</a> open source proxy software.</p>
+
+
+
+<p class="wp-block-paragraph">I needed a solution that would work not only for our staff, where I could have some significant control over the setup of their work computing devices, but also for our contractors, where they would be using devices that were not under our control and presumably used for a mix of other things. I didn&#8217;t want anything locked in to a hardware vendor or dependent on a specific physical office location having connectivity. I wanted something fast to set up for each individual user, and that wouldn&#8217;t require installation of special software, activating/monitoring connections, or worrying about variations in network rules about what VPN connections were allowed.</p>
+
+
+
+<p class="wp-block-paragraph">I settled on squid:</p>
+
+
+
+<ul class="wp-block-list">
+<li>We have a proxy auto-configuration file (PAC) that we serve publicly.</li>
+
+
+
+<li>We set up a squid username/password for every user that needs one</li>
+
+
+
+<li>Users tell their device the URL of the PAC file</li>
+
+
+
+<li>Their device uses our squid proxy for the hosts/IPs we specify in the PAC file, and otherwise uses their default network configuration.</li>
+
+
+
+<li>The first time their device attempts to connect via the proxy, they&#8217;re prompted to enter their username/password, and that typically is saved in their OS settings forever.</li>
+</ul>
+
+
+
+<p class="wp-block-paragraph">Using this approach we can ask network traffic bound for one of our internal services/servers to go through our proxy instead of over the public Internet. That in turn allows us to limit connection attempts to only trusted internal hosts (including the proxy), creating a kind of simple private network.</p>
+
+
+
+<span id="more-602"></span>
+
+
+
+<p class="wp-block-paragraph">(Hat tip to the Automattic systems team for this concept, which I saw successfully deployed for a much larger user base when I worked there.) </p>
+
+
+
+<p class="wp-block-paragraph">We use this setup for internal web application servers, file sharing, phone system endpoints, and restricting access to some third-party services that allow IP-based access rules. It&#8217;s working on laptops running various OSes, mobile devices and other devices.</p>
+
+
+
+<p class="wp-block-paragraph">Once it&#8217;s set up on a user&#8217;s system, they don&#8217;t have to think about it ever again. A user has to trust that we will not proxy traffic that they don&#8217;t want proxied, but in theory they can examine the PAC file at any time to see how things are routed.</p>
+
+
+
+<p class="wp-block-paragraph">I&#8217;m sure it&#8217;s not as powerful or flexible as some of the modern VPN solutions out there, but it&#8217;s been dead simple to set up and maintain. We run it on a $4/month Digital Ocean droplet with 1 CPU, 512MB of RAM and .5TB/month of bandwidth. It&#8217;s been humming along smoothly for several years now.</p>
+
+
+
+<p class="wp-block-paragraph">I mostly followed this <a href="https://www.digitalocean.com/community/tutorials/how-to-set-up-squid-proxy-on-ubuntu-22-04">guide from Digital Ocean on how to set up a squid proxy server on Ubuntu</a>. I used nginx instead of Apache for web server software.</p>
+
+
+
+<p class="wp-block-paragraph">For firewall ports, we allow HTTPS/443 for serving the PAC file, HTTP/80 for Let&#8217;s Encrypt certificate validation, and port 3128 for proxy access.</p>
+
+
+
+<p class="wp-block-paragraph">We use a Digital Ocean reserved IP address for the droplet so we could move it to another droplet or region if needed. To make sure the droplet&#8217;s outbound network traffic also originates from the reserved IP (needed for consistency in firewall rules), we followed <a href="https://docs.digitalocean.com/products/networking/reserved-ips/how-to/outbound-traffic/">these instructions from Digital Ocean</a>.</p>
+
+
+
+<p class="wp-block-paragraph">We use fail2ban to block IP addresses that are trying too hard to use our proxy without proper authentication. There are a lot of them!</p>
+
+
+
+<p class="wp-block-paragraph">Our monitoring tool checks to make sure the proxy is available for new connections, that the PAC file is being served, that the PAC file contents are what we expect them to be, that unauthenticated proxy requests are rejected, and that authenticated requests are successfully routed through the proxy.  I have a simple shell script with sqlite datastore monitor in place that alerts when someone authenticates to the proxy from an IP address that we&#8217;ve never seen before. And I receive a regular report of which users/IPs are connecting to the proxy the most with how much data is transferred.</p>
+
+
+
+<p class="wp-block-paragraph">Password management is handled old-school:<br><code>$ htpasswd /etc/squid/passwords user@example.com</code></p>
+
+
+
+<p class="wp-block-paragraph">I&#8217;ll automate that &#8220;some day.&#8221;</p>
+
+
+
+<p class="wp-block-paragraph">The <a href="https://en.wikipedia.org/wiki/Proxy_auto-config">proxy auto-configuration file</a> looks roughly like this:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code"><pre class="brush: bash; title: ; notranslate">
+function FindProxyForURL( url, host ) {
+        if ( isPlainHostName( host ) ) {
+                return &#039;DIRECT&#039;;
+        }
+
+        # Do not proxy requests to where the PAC file is hosted
+        if ( dnsDomainIs( host, &#039;our.proxy.hostname.com&#039; ) ) {
+                return &#039;DIRECT&#039;;
+        }
+
+        if ( url.substring(0, 4) == &quot;ssh:&quot; ) {
+                return &#039;DIRECT&#039;;
+        }
+
+        if ( dnsDomainIs( host, &#039;.local&#039; ) || dnsDomainIs( host, &#039;.test&#039; ) ) {
+                return &#039;DIRECT&#039;;
+        }
+
+        # Do not proxy connections when on a trusted company office subnet
+        if ( isInNet( myIpAddress(), &#039;192.168.100.0&#039;, &#039;255.255.255.0&#039; ) ) {
+                return &#039;DIRECT&#039;;
+        }
+
+        # Proxy connections to a restricted/internal host 
+        if ( &#039;private.host.example.com&#039; == host ) {
+                return &#039;PROXY 12.34.56.78:3128&#039;;
+        }
+
+        # Do not proxy connections to common private network hosts
+        var resolved_ip = dnsResolve( host );
+
+        if (
+                        isInNet( resolved_ip, &#039;10.0.0.0&#039;, &#039;255.0.0.0&#039; )
+        ||
+                        isInNet( resolved_ip, &#039;172.16.0.0&#039;,  &#039;255.240.0.0&#039; )
+        ||
+                        isInNet( resolved_ip, &#039;192.168.0.0&#039;, &#039;255.255.0.0&#039; )
+        ||
+                        isInNet( resolved_ip, &#039;127.0.0.0&#039;, &#039;255.255.255.0&#039;)
+        ) {
+                        return &#039;DIRECT&#039;;
+        }
+
+        return &#039;DIRECT&#039;;
+}
+</pre></div>
+
+
+<p class="wp-block-paragraph">I don&#8217;t like that this publicly available PAC file exposes some information about our network configuration and identifies some hosts that could be potential targets for attack. For now it&#8217;s a reasonable tradeoff.</p>
+
+
+
+<p class="wp-block-paragraph">One annoying thing is that some OSes do not support system-wide or multi-network PAC file configuration, and so each time one of those users connects to a new wireless network, ethernet connection, etc. their proxy configuration has to be set anew. I think we&#8217;re down to just one device in that situation, but maybe it would be a problem for a larger team with a more diverse range of devices.</p>
+
+
+
+<p class="wp-block-paragraph">Having this in place has simplified a lot of network security and maintenance things for me &#8211; it&#8217;s great!</p>
+<p>The post <a href="https://tech.chrishardie.com/2026/simple-proxy-server-squid/">Simple small business proxy server using squid</a> appeared first on <a href="https://tech.chrishardie.com">Chris Hardie&#039;s Tech and Software Blog</a>.</p>]]></content:encoded>
+					
+					<wfw:commentRss>https://tech.chrishardie.com/2026/simple-proxy-server-squid/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">602</post-id>	</item>
+		<item>
+		<title>Emoji form field creation and validation in Filament and Laravel</title>
+		<link>https://tech.chrishardie.com/2026/emoji-form-field-filament-laravel/</link>
+					<comments>https://tech.chrishardie.com/2026/emoji-form-field-filament-laravel/#respond</comments>
+		
+		<dc:creator><![CDATA[Chris Hardie]]></dc:creator>
+		<pubDate>Sun, 25 Jan 2026 16:45:50 +0000</pubDate>
+				<category><![CDATA[Hardware and Software]]></category>
+		<category><![CDATA[emoji]]></category>
+		<category><![CDATA[Filament]]></category>
+		<category><![CDATA[Laravel]]></category>
+		<category><![CDATA[php]]></category>
+		<guid isPermaLink="false">https://tech.chrishardie.com/?p=596</guid>
+
+					<description><![CDATA[<p>If you need a form field for picking an emoji to save as a resource/model attribute in Filament and Laravel, here&#8217;s how I did it: First, install a few packages: Set up your form field: And then profit! That&#8217;s pretty much it. Things I tried that didn&#8217;t work: Thank you to Javan Eskander for php-emoji-detector &#8230; <a href="https://tech.chrishardie.com/2026/emoji-form-field-filament-laravel/" class="more-link">Continue reading <span class="screen-reader-text">Emoji form field creation and validation in Filament and Laravel</span></a></p>
+<p>The post <a href="https://tech.chrishardie.com/2026/emoji-form-field-filament-laravel/">Emoji form field creation and validation in Filament and Laravel</a> appeared first on <a href="https://tech.chrishardie.com">Chris Hardie&#039;s Tech and Software Blog</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p class="wp-block-paragraph">If you need a form field for picking an emoji to save as a resource/model attribute in Filament and Laravel, here&#8217;s how I did it:</p>
+
+
+
+<p class="wp-block-paragraph">First, install a few packages:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code"><pre class="brush: plain; title: ; notranslate">
+$ composer require tangodev-it/filament-emoji-picker
+$ composer require steppinghat/emoji-detector
+</pre></div>
+
+
+<p class="wp-block-paragraph">Set up your form field:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code"><pre class="brush: php; title: ; notranslate">
+TextInput::make(&#039;emoji&#039;)
+	-&gt;label(&#039;Emoji&#039;)
+	-&gt;placeholder(&#039;🎉&#039;)
+	-&gt;suffixAction(EmojiPickerAction::make(&#039;emoji-title&#039;))
+	-&gt;rules(&#x5B;
+		&#039;nullable&#039;,
+		fn (): Closure =&gt; static function (string $attribute, mixed $value, Closure $fail): void {
+			$value = is_string($value) ? trim($value) : $value;
+
+			if ($value === null || $value === &#039;&#039;) {
+				return;
+			}
+
+			$detector = new EmojiDetector;
+
+			if (! $detector-&gt;isSingleEmoji((string) $value)) {
+				$fail(&#039;Please enter exactly one emoji.&#039;);
+			}
+		},
+	]),
+</pre></div>
+
+
+<p class="wp-block-paragraph">And then profit! That&#8217;s pretty much it.</p>
+
+
+
+<figure class="wp-block-image size-full"><img loading="lazy" decoding="async" width="367" height="488" src="https://tech.chrishardie.com/wp-content/uploads/2026/01/Screenshot-2026-01-25-at-11.41.40.png" alt="" class="wp-image-598" srcset="https://tech.chrishardie.com/wp-content/uploads/2026/01/Screenshot-2026-01-25-at-11.41.40.png 367w, https://tech.chrishardie.com/wp-content/uploads/2026/01/Screenshot-2026-01-25-at-11.41.40-226x300.png 226w" sizes="auto, (max-width: 367px) 100vw, 367px" /></figure>
+
+
+
+<p class="wp-block-paragraph">Things I tried that didn&#8217;t work:</p>
+
+
+
+<ul class="wp-block-list">
+<li>Setting the max length of the field to 1; as Unicode entities that might span multiple typical characters, this won&#8217;t work.</li>
+
+
+
+<li>Validating the emoji using regular expressions; the Unicode and emoji standards apparently evolve often enough that this will drive you insane.</li>
+</ul>
+
+
+
+<p class="wp-block-paragraph">Thank you to Javan Eskander for <a href="https://github.com/SteppingHat/php-emoji-detector">php-emoji-detector</a> and Emanuele Gandolfi for <a href="https://github.com/TangoDev-it/filament-emoji-picker">filament-emoji-picker</a>.</p>
+<p>The post <a href="https://tech.chrishardie.com/2026/emoji-form-field-filament-laravel/">Emoji form field creation and validation in Filament and Laravel</a> appeared first on <a href="https://tech.chrishardie.com">Chris Hardie&#039;s Tech and Software Blog</a>.</p>]]></content:encoded>
+					
+					<wfw:commentRss>https://tech.chrishardie.com/2026/emoji-form-field-filament-laravel/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">596</post-id>	</item>
+		<item>
+		<title>Setting up a landline phone for kids</title>
+		<link>https://tech.chrishardie.com/2025/landline-phone-kids/</link>
+					<comments>https://tech.chrishardie.com/2025/landline-phone-kids/#comments</comments>
+		
+		<dc:creator><![CDATA[Chris Hardie]]></dc:creator>
+		<pubDate>Tue, 17 Jun 2025 20:31:24 +0000</pubDate>
+				<category><![CDATA[Hardware and Software]]></category>
+		<category><![CDATA[parenting]]></category>
+		<category><![CDATA[phone]]></category>
+		<category><![CDATA[VOIP]]></category>
+		<guid isPermaLink="false">https://tech.chrishardie.com/?p=569</guid>
+
+					<description><![CDATA[<p>I recently set up a phone line for my 9-year-old. Why? I liked the idea of her being able to connect with others in a way she has control over, but with some of the natural limitations built in to a traditional landline and without the distractions of a smartphone. Okay, it also just seemed &#8230; <a href="https://tech.chrishardie.com/2025/landline-phone-kids/" class="more-link">Continue reading <span class="screen-reader-text">Setting up a landline phone for kids</span></a></p>
+<p>The post <a href="https://tech.chrishardie.com/2025/landline-phone-kids/">Setting up a landline phone for kids</a> appeared first on <a href="https://tech.chrishardie.com">Chris Hardie&#039;s Tech and Software Blog</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>I recently set up a phone line for my 9-year-old. Why? I liked the idea of her being able to connect with others in a way she has control over, but with some of the natural limitations built in to a traditional landline and without the distractions of a smartphone. Okay, it also just seemed like a fun thing to try.</p>
+<p>(Just today, a few days after I did this, <em>The Atlantic</em> came out with an article expanding on this thinking: <a href="https://www.theatlantic.com/family/archive/2025/06/landline-kids-smartphone-alternative/683203/">The Dumbest Phone Is Parenting Genius: Landlines encourage connection—without the downsides of smartphones.</a> Hat tip to Damon for sending me the link.)</p>
+<p>We&#8217;re referring to it as a landline since it has all the appearance and functionality of one — a single push-button phone connected to the wall with a cord — but behind the scenes it&#8217;s VOIP technology with some fun parental control features built in. It was relatively easy to set up as my home tech tinkering projects go, so I thought I&#8217;d share the details here.</p>
+<p>My costs for this project were $61.90 in set up costs and around $5/month or less to operate, depending on call volume. (If your kid talks on the phone a lot, the voip provider I&#8217;m recommending offers a flat $4.25/month plan for up to 3,500 minutes, instead of the $0.009 to $0.01 per-minute rate I&#8217;m set up with.)</p>
+<p>If you have more money than time, you could also look at <a href="https://tincan.kids/products/tin-can" target="_blank" rel="noopener">Tin Can</a>, as it seems to be a well-thought-out &#8220;landline for kids&#8221; product and service for $75 one time plus $10/month (first month free) and a few more polished parental control features. I haven&#8217;t tried it directly myself.</p>
+<h2>Requirements and Equipment</h2>
+<ul>
+<li>High speed home internet connection</li>
+<li>An ethernet port somewhere near where you want the phone to be set up, and/or <a href="https://amzn.to/3G1oUxe" target="_blank" rel="noopener">a really long phone cord</a></li>
+<li><a href="https://amzn.to/4462V02" target="_blank" rel="noopener">Grandstream 2-FXS Port Analog Telephone Adapter (HT802)</a> &#8211; $46 at Amazon</li>
+<li>A cheap, regular push-button phone, e.g. <a href="https://amzn.to/4n54G6s" target="_blank" rel="noopener">Slimline Black Colored Phone</a> &#8211; $14 at Amazon. Do not buy a VOIP phone, you don&#8217;t need it.</li>
+<li>A <a href="https://voip.ms/en/invite/NDY4Njk3" target="_blank" rel="noopener">Voip.ms account</a></li>
+</ul>
+<p><em>Some of the links above are affiliate links; I may receive a small commission if you purchase through them.</em></p>
+<h2>Get a phone number</h2>
+<p>Once your voip.ms account is created and you&#8217;ve enabled two-factor authentication, add some funds to your account via credit/debit card, maybe $10 to start with. You can also set the account up to auto-replenish your balance when the amount gets low.</p>
+<p>Order a phone number, referred to on the site as a &#8220;DID&#8221; (direct inward dialing) number. This will cost $0.40 one time and then be $0.85/month after. (If you have an existing number you want to use, you can <a href="https://wiki.voip.ms/article/Porting_FAQ">port it in to your voip.ms account</a>, a process that has several steps but is perfectly manageable.)</p>
+<p>When you&#8217;re asked to pick a registration server, pick one near where you live. I ran some ping tests on each nearby option, and the round trip times / latency were approximately similar, so I just picked the &#8220;first&#8221; server in a city&#8217;s available group.</p>
+<p>If this line will be available to your kids when you are not home and you live in the US, I also suggest paying for <a href="https://wiki.voip.ms/article/E911">E911 services</a>, which is a $1.50 one time fee and $1.50/month after. This allows your kid to call 911 and have emergency services dispatched to the correct residential address. (Depending on how you look at it, the ability to make emergency calls that depend on a working internet connection, power, etc. could be a bad idea to rely on!)</p>
+<h2>Configure your VOIP account</h2>
+<p><a href="https://wiki.voip.ms/article/Sub_Accounts">Create a sub-account</a> that will only be used for this phone number and line. This avoids having to use your main voip.ms account password in setting up the line configuration.</p>
+<p><a href="https://wiki.voip.ms/article/Voicemail">Create a voicemail account</a> that your kid can receive voicemail messages on. It&#8217;s no extra cost unless you add in fancy transcription features. You can have voicemail recordings emailed; consider using an alias/address that goes to both your kid and adults in the household, or just the adults. Your kid will still be able access the voicemails directly by the phone itself.</p>
+<p><img loading="lazy" decoding="async" class="aligncenter size-full wp-image-576" src="https://tech.chrishardie.com/wp-content/uploads/2025/06/Screenshot-2025-06-17-at-15.52.28.png" alt="Screenshot of voicemail config at voip.ms" width="2218" height="1408" srcset="https://tech.chrishardie.com/wp-content/uploads/2025/06/Screenshot-2025-06-17-at-15.52.28.png 2218w, https://tech.chrishardie.com/wp-content/uploads/2025/06/Screenshot-2025-06-17-at-15.52.28-300x190.png 300w, https://tech.chrishardie.com/wp-content/uploads/2025/06/Screenshot-2025-06-17-at-15.52.28-1024x650.png 1024w, https://tech.chrishardie.com/wp-content/uploads/2025/06/Screenshot-2025-06-17-at-15.52.28-768x488.png 768w, https://tech.chrishardie.com/wp-content/uploads/2025/06/Screenshot-2025-06-17-at-15.52.28-1536x975.png 1536w, https://tech.chrishardie.com/wp-content/uploads/2025/06/Screenshot-2025-06-17-at-15.52.28-2048x1300.png 2048w" sizes="auto, (max-width: 2218px) 100vw, 2218px" /></p>
+<p>Consider setting up &#8220;do not disturb&#8221; hours. This is done with the <a href="https://wiki.voip.ms/article/Time_Conditions">Time Conditions feature</a> at voip.ms.</p>
+<p><img loading="lazy" decoding="async" class="aligncenter size-full wp-image-577" src="https://tech.chrishardie.com/wp-content/uploads/2025/06/Screenshot-2025-06-17-at-15.51.52.png" alt="Screenshot of time conditions setup at voip.ms" width="2304" height="592" srcset="https://tech.chrishardie.com/wp-content/uploads/2025/06/Screenshot-2025-06-17-at-15.51.52.png 2304w, https://tech.chrishardie.com/wp-content/uploads/2025/06/Screenshot-2025-06-17-at-15.51.52-300x77.png 300w, https://tech.chrishardie.com/wp-content/uploads/2025/06/Screenshot-2025-06-17-at-15.51.52-1024x263.png 1024w, https://tech.chrishardie.com/wp-content/uploads/2025/06/Screenshot-2025-06-17-at-15.51.52-768x197.png 768w, https://tech.chrishardie.com/wp-content/uploads/2025/06/Screenshot-2025-06-17-at-15.51.52-1536x395.png 1536w, https://tech.chrishardie.com/wp-content/uploads/2025/06/Screenshot-2025-06-17-at-15.51.52-2048x526.png 2048w" sizes="auto, (max-width: 2304px) 100vw, 2304px" /></p>
+<p>Consider setting up <a href="https://wiki.voip.ms/article/CallerID_Filtering">CallerID filtering</a>. You can import a list of phone numbers that are allowed to call in to your kid&#8217;s phone, and block everything else.</p>
+<p><img loading="lazy" decoding="async" class="aligncenter size-full wp-image-578" src="https://tech.chrishardie.com/wp-content/uploads/2025/06/Screenshot-2025-06-17-at-15.56.54.png" alt="Screenshot of CallerID filtering at voip.ms" width="2276" height="462" srcset="https://tech.chrishardie.com/wp-content/uploads/2025/06/Screenshot-2025-06-17-at-15.56.54.png 2276w, https://tech.chrishardie.com/wp-content/uploads/2025/06/Screenshot-2025-06-17-at-15.56.54-300x61.png 300w, https://tech.chrishardie.com/wp-content/uploads/2025/06/Screenshot-2025-06-17-at-15.56.54-1024x208.png 1024w, https://tech.chrishardie.com/wp-content/uploads/2025/06/Screenshot-2025-06-17-at-15.56.54-768x156.png 768w, https://tech.chrishardie.com/wp-content/uploads/2025/06/Screenshot-2025-06-17-at-15.56.54-1536x312.png 1536w, https://tech.chrishardie.com/wp-content/uploads/2025/06/Screenshot-2025-06-17-at-15.56.54-2048x416.png 2048w" sizes="auto, (max-width: 2276px) 100vw, 2276px" /></p>
+<p>There are lots of other cool features that voip.ms offers for free as a part of having a DID number with them, so I encourage you to poke around their documentation and interface.</p>
+<p>I will eventually shift away from managing the line&#8217;s features on voip.ms directly and use <a href="https://www.freepbx.org/">FreePBX</a> running on a Raspberry Pi instead. This would expand the parental controls available (e.g. preventing outbound calls at certain times, limiting calls to certain numbers) also enable some cool additional integrations and fun features.</p>
+<h2>Set up the Grandstream device</h2>
+<p>This device will be the bridge between your traditional telephone and the VOIP.ms service. It&#8217;s what you will need to plug in to an ethernet port on your router or a switch connected to your router, and it&#8217;s also what your kids phone will be connected to. Again, a long phone cord may be the way to help them access the phone easily without needing to get to your home networking setup.</p>
+<p>I recommend following <a href="https://wiki.voip.ms/article/Grandstream_HandyTone_802_-_HT802">the steps in this guide from the voip.ms folks</a> to the letter. This is probably the most technical and potentially intimidating part of the process, but while some of the options on newer firmware versions of the Grandstream are labeled differently, it should be relatively straightforward.</p>
+<p>Make sure you use the sub-account username and password you created above, not your main voip.ms account info.</p>
+<p>I enabled encryption for calls, which involves <a href="https://wiki.voip.ms/article/Call_Encryption_-_TLS/SRTP#Configuration_on_SIP_Client">enabling it both on the SIP subaccount</a> and on the Grandstream device.</p>
+<p>I also enabled message waiting indication (MWI) which gives a stuttered dial tone when there&#8217;s a new voicemail message waiting.</p>
+<p>When everything is working correctly, you should see a blue light on the port 1 phone icon on the Grandstream device, and the subaccount should show as registered in your voip.ms account.</p>
+<p><img loading="lazy" decoding="async" class="aligncenter size-full wp-image-584" src="https://tech.chrishardie.com/wp-content/uploads/2025/06/Screenshot-2025-06-17-at-16.27.10.png" alt="A screenshot of a successful voip.ms registration." width="1548" height="776" srcset="https://tech.chrishardie.com/wp-content/uploads/2025/06/Screenshot-2025-06-17-at-16.27.10.png 1548w, https://tech.chrishardie.com/wp-content/uploads/2025/06/Screenshot-2025-06-17-at-16.27.10-300x150.png 300w, https://tech.chrishardie.com/wp-content/uploads/2025/06/Screenshot-2025-06-17-at-16.27.10-1024x513.png 1024w, https://tech.chrishardie.com/wp-content/uploads/2025/06/Screenshot-2025-06-17-at-16.27.10-768x385.png 768w, https://tech.chrishardie.com/wp-content/uploads/2025/06/Screenshot-2025-06-17-at-16.27.10-1536x770.png 1536w" sizes="auto, (max-width: 1548px) 100vw, 1548px" /></p>
+<h2>Plug in the phone and make calls!</h2>
+<p>After you plug in the phone to the port on the Grandstream device and pick it up, you should hear a dial tone, and you should be able to make and receive calls.</p>
+<p>Even though my daughter had talked to others on one of our smartphones many times, she was so delighted to make and receive her first calls on her own phone line.</p>
+<p>You can view the Call Detail Records (CDR) report in your voip.ms account to understand how much calls are costing, where calls are coming from and going to, etc.</p>
+<p>&nbsp;</p>
+<p>The post <a href="https://tech.chrishardie.com/2025/landline-phone-kids/">Setting up a landline phone for kids</a> appeared first on <a href="https://tech.chrishardie.com">Chris Hardie&#039;s Tech and Software Blog</a>.</p>]]></content:encoded>
+					
+					<wfw:commentRss>https://tech.chrishardie.com/2025/landline-phone-kids/feed/</wfw:commentRss>
+			<slash:comments>15</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">569</post-id>	</item>
+		<item>
+		<title>Using Laravel and an e-ink tablet to make a DIY digital sign for dynamic office window message display</title>
+		<link>https://tech.chrishardie.com/2025/laravel-eink-digital-sign-window-display/</link>
+					<comments>https://tech.chrishardie.com/2025/laravel-eink-digital-sign-window-display/#respond</comments>
+		
+		<dc:creator><![CDATA[Chris Hardie]]></dc:creator>
+		<pubDate>Tue, 04 Mar 2025 19:18:07 +0000</pubDate>
+				<category><![CDATA[Hardware and Software]]></category>
+		<category><![CDATA[Home Automation]]></category>
+		<category><![CDATA[digital sign]]></category>
+		<category><![CDATA[hardware]]></category>
+		<category><![CDATA[Laravel]]></category>
+		<category><![CDATA[sign]]></category>
+		<guid isPermaLink="false">https://tech.chrishardie.com/?p=545</guid>
+
+					<description><![CDATA[<p>I wanted a sign I could mount in the window at the front entrance of our newspaper&#8217;s office to display customizable information about our office&#8217;s current status and other useful info. If you&#8217;ve ever researched this category of products, you know there are many vendors out there who will happily sell you very expensive devices &#8230; <a href="https://tech.chrishardie.com/2025/laravel-eink-digital-sign-window-display/" class="more-link">Continue reading <span class="screen-reader-text">Using Laravel and an e-ink tablet to make a DIY digital sign for dynamic office window message display</span></a></p>
+<p>The post <a href="https://tech.chrishardie.com/2025/laravel-eink-digital-sign-window-display/">Using Laravel and an e-ink tablet to make a DIY digital sign for dynamic office window message display</a> appeared first on <a href="https://tech.chrishardie.com">Chris Hardie&#039;s Tech and Software Blog</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p class="wp-block-paragraph">I wanted a sign I could mount in the window at the front entrance of our newspaper&#8217;s office to display customizable information about our office&#8217;s current status and other useful info.</p>
+
+
+
+<p class="wp-block-paragraph">If you&#8217;ve ever researched this category of products, you know there are many vendors out there who will happily sell you very expensive devices and supporting accessories to make this happen. This is &#8220;call us for pricing&#8221; level product sales meant for hotels, convention centers, malls and large office buildings, not for a small community newspaper on a budget.</p>
+
+
+
+<p class="wp-block-paragraph">Even the few standalone products I was able to find for sale on Amazon and elsewhere seemed pretty janky. I&#8217;d have to download an app or install a hub with a proprietary communication technology or be constrained to a certain number of characters and layout, or some other limitation I wasn&#8217;t quite happy with.</p>
+
+
+
+<p class="wp-block-paragraph">I decided to ask the Fediverse:</p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="888" src="https://tech.chrishardie.com/wp-content/uploads/2025/03/Screenshot-2025-03-04-at-13.27.46-1024x888.png" alt="A Mastodon post that reads: &quot;A hardware product that seems like it should exist but that I'm having a hard time finding:* E-ink sign to go in a store window and display basic text (open/closed, etc)* Wifi connected, no hub or cloud subscription needed* Programmable via some kind of API or app, refresh delay is fine* Battery or plug-in is fineSuggestions? (Edited to add: Unfortunately I don't have time to assemble one from parts.)&quot;" class="wp-image-555" srcset="https://tech.chrishardie.com/wp-content/uploads/2025/03/Screenshot-2025-03-04-at-13.27.46-1024x888.png 1024w, https://tech.chrishardie.com/wp-content/uploads/2025/03/Screenshot-2025-03-04-at-13.27.46-300x260.png 300w, https://tech.chrishardie.com/wp-content/uploads/2025/03/Screenshot-2025-03-04-at-13.27.46-768x666.png 768w, https://tech.chrishardie.com/wp-content/uploads/2025/03/Screenshot-2025-03-04-at-13.27.46.png 1128w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p class="wp-block-paragraph"><em>(I learned while writing this that Mastodon posts do not seem to embed in WordPress seamlessly &#8211; tragic!)</em></p>
+
+
+
+<p class="wp-block-paragraph">At first, the responses were reinforcing how difficult this might be to find, but then my colleague Scott Evans made a comment that sparked the eventual solution:</p>
+
+
+
+<blockquote class="wp-block-quote is-layout-flow wp-block-quote-is-layout-flow">
+<p class="wp-block-paragraph">I feel like an e-ink reader of some kind might be your best bet (one that can run Android apps). Then you could install a kiosk style browser and update the page it&#8217;s pointing at. Something from Onyx?<br><a href="https://toot.scott.ee/@scott/statuses/01JKBE3QZWEZCMN2QZZH75R6BY" target="_blank" rel="noreferrer noopener">https://toot.scott.ee/@scott/statuses/01JKBE3QZWEZCMN2QZZH75R6BY</a> </p>
+</blockquote>
+
+
+
+<p class="wp-block-paragraph">After some searching I found this wonderful blog post by Jan Miksovsky, <a href="https://jan.miksovsky.com/posts/2024/11-12-momboard">MomBoard: E-ink display for a parent with amnesia</a>. Jan described using a BOOX Note Air2 Series e-ink device to create a dynamic sign display for Jan&#8217;s mom. They used a web browser to load a simple website that would display the latest customized messages based on details configured in web interface elsewhere, <a href="https://github.com/JanMiksovsky/momboard">source code here</a>. I love it!</p>
+
+
+
+<p class="wp-block-paragraph">I emailed Jan with some questions about the setup and Jan was kind enough to write back with a clarification that the original BOOX ability to launch a web browser on device restart appears to have been removed, but a request is in to restore this functionality. </p>
+
+
+
+<p class="wp-block-paragraph">Jan also had a helpful thought about how to launch the browser in to full-screen mode, which I haven&#8217;t tried yet: &#8220;<em>That’s controlled by whether a website has a web app manifest defined for it. If it does, then the browser “Add to Home Screen” command should allow you to add the site to your home screen. When launched, it should open in full screen mode.</em>&#8220;</p>
+
+
+
+<p class="wp-block-paragraph">I found a used Note Air2 device on eBay for $189 plus shipping and tax. A non-trivial expense, but far less expensive than any of the other options I was finding.</p>
+
+
+
+<p class="wp-block-paragraph">When it arrived I turned off all of the &#8220;auto-sleep&#8221; type settings so that the device would basically stay on all the time. I tested out having the web browser stay open on one page for days on end, and it worked! Now I just needed to figure out my own web interface to manage the sign message.</p>
+
+
+
+<span id="more-545"></span>
+
+
+
+<p class="wp-block-paragraph">Since I already have <a href="https://stumble.press/2024/newspaper-management-software-feature-list/">a Laravel-powered application that manages many functions of our newspaper business</a>, I thought it would make sense to build this functionality in to that. I created two new models, one for storing the current sign message on a given sign (yes, I&#8217;m over-engineering this a bit) and one to store templates that can be loaded to populate a sign message, either manually or on a schedule.</p>
+
+
+<div class="wp-block-syntaxhighlighter-code"><pre class="brush: php; title: ; notranslate">
+class SignMessage extends Model
+{
+    protected $fillable = &#x5B;
+        &#039;location&#039;,
+        &#039;message&#039;,
+        &#039;status&#039;,
+        &#039;last_loaded_at&#039;,
+        &#039;is_locked&#039;,
+    ];
+
+    protected $casts = &#x5B;
+        &#039;is_locked&#039; =&gt; &#039;boolean&#039;,
+        &#039;last_loaded_at&#039; =&gt; &#039;datetime&#039;,
+    ];
+}
+
+class SignTemplate extends Model
+{
+    protected $fillable = &#x5B;
+        &#039;location&#039;,
+        &#039;name&#039;,
+        &#039;message&#039;,
+        &#039;is_default&#039;,
+        &#039;sets_status&#039;,
+    ];
+
+    protected $casts = &#x5B;
+        &#039;is_default&#039; =&gt; &#039;boolean&#039;,
+    ];
+}
+</pre></div>
+
+
+<p class="wp-block-paragraph">Then, I made use of the always-amazing <a href="https://filamentphp.com/">Filament admin panel building package</a> to whip up an administrative interface to manage the data. Here&#8217;s managing and editing sign templates:</p>
+
+
+
+<figure data-wp-context="{&quot;imageId&quot;:&quot;6a608c3ea754f&quot;}" data-wp-interactive="core/image" data-wp-key="6a608c3ea754f" class="wp-block-image size-large wp-lightbox-container"><img loading="lazy" decoding="async" width="1024" height="674" data-wp-class--hide="state.isContentHidden" data-wp-class--show="state.isContentVisible" data-wp-init="callbacks.setButtonStyles" data-wp-on--click="actions.showLightbox" data-wp-on--load="callbacks.setButtonStyles" data-wp-on--pointerdown="actions.preloadImage" data-wp-on--pointerenter="actions.preloadImageWithDelay" data-wp-on--pointerleave="actions.cancelPreload" data-wp-on-window--resize="callbacks.setButtonStyles" src="https://tech.chrishardie.com/wp-content/uploads/2025/03/Screenshot-2025-03-04-at-13.20.14-1024x674.png" alt="A screenshot of a &quot;Sign Templates&quot; overview screen showing a list of existing templates in a table (fields are Location, Name, Is Default, Sets Status&quot; and action buttons are Edit and Delete) along with an action button for &quot;New sign template&quot;" class="wp-image-550" srcset="https://tech.chrishardie.com/wp-content/uploads/2025/03/Screenshot-2025-03-04-at-13.20.14-1024x674.png 1024w, https://tech.chrishardie.com/wp-content/uploads/2025/03/Screenshot-2025-03-04-at-13.20.14-300x197.png 300w, https://tech.chrishardie.com/wp-content/uploads/2025/03/Screenshot-2025-03-04-at-13.20.14-768x506.png 768w, https://tech.chrishardie.com/wp-content/uploads/2025/03/Screenshot-2025-03-04-at-13.20.14-1536x1011.png 1536w, https://tech.chrishardie.com/wp-content/uploads/2025/03/Screenshot-2025-03-04-at-13.20.14-2048x1348.png 2048w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /><button
+			class="lightbox-trigger"
+			type="button"
+			aria-haspopup="dialog"
+			data-wp-bind--aria-label="state.thisImage.triggerButtonAriaLabel"
+			data-wp-init="callbacks.initTriggerButton"
+			data-wp-on--click="actions.showLightbox"
+			data-wp-style--right="state.thisImage.buttonRight"
+			data-wp-style--top="state.thisImage.buttonTop"
+		>
+			<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewbox="0 0 12 12">
+				<path fill="#fff" d="M2 0a2 2 0 0 0-2 2v2h1.5V2a.5.5 0 0 1 .5-.5h2V0H2Zm2 10.5H2a.5.5 0 0 1-.5-.5V8H0v2a2 2 0 0 0 2 2h2v-1.5ZM8 12v-1.5h2a.5.5 0 0 0 .5-.5V8H12v2a2 2 0 0 1-2 2H8Zm2-12a2 2 0 0 1 2 2v2h-1.5V2a.5.5 0 0 0-.5-.5H8V0h2Z" />
+			</svg>
+		</button></figure>
+
+
+
+<figure data-wp-context="{&quot;imageId&quot;:&quot;6a608c3ea7dd2&quot;}" data-wp-interactive="core/image" data-wp-key="6a608c3ea7dd2" class="wp-block-image size-large wp-lightbox-container"><img loading="lazy" decoding="async" width="1024" height="674" data-wp-class--hide="state.isContentHidden" data-wp-class--show="state.isContentVisible" data-wp-init="callbacks.setButtonStyles" data-wp-on--click="actions.showLightbox" data-wp-on--load="callbacks.setButtonStyles" data-wp-on--pointerdown="actions.preloadImage" data-wp-on--pointerenter="actions.preloadImageWithDelay" data-wp-on--pointerleave="actions.cancelPreload" data-wp-on-window--resize="callbacks.setButtonStyles" src="https://tech.chrishardie.com/wp-content/uploads/2025/03/Screenshot-2025-03-04-at-13.22.03-1024x674.png" alt="" class="wp-image-551" srcset="https://tech.chrishardie.com/wp-content/uploads/2025/03/Screenshot-2025-03-04-at-13.22.03-1024x674.png 1024w, https://tech.chrishardie.com/wp-content/uploads/2025/03/Screenshot-2025-03-04-at-13.22.03-300x197.png 300w, https://tech.chrishardie.com/wp-content/uploads/2025/03/Screenshot-2025-03-04-at-13.22.03-768x506.png 768w, https://tech.chrishardie.com/wp-content/uploads/2025/03/Screenshot-2025-03-04-at-13.22.03-1536x1011.png 1536w, https://tech.chrishardie.com/wp-content/uploads/2025/03/Screenshot-2025-03-04-at-13.22.03-2048x1348.png 2048w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /><button
+			class="lightbox-trigger"
+			type="button"
+			aria-haspopup="dialog"
+			data-wp-bind--aria-label="state.thisImage.triggerButtonAriaLabel"
+			data-wp-init="callbacks.initTriggerButton"
+			data-wp-on--click="actions.showLightbox"
+			data-wp-style--right="state.thisImage.buttonRight"
+			data-wp-style--top="state.thisImage.buttonTop"
+		>
+			<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewbox="0 0 12 12">
+				<path fill="#fff" d="M2 0a2 2 0 0 0-2 2v2h1.5V2a.5.5 0 0 1 .5-.5h2V0H2Zm2 10.5H2a.5.5 0 0 1-.5-.5V8H0v2a2 2 0 0 0 2 2h2v-1.5ZM8 12v-1.5h2a.5.5 0 0 0 .5-.5V8H12v2a2 2 0 0 1-2 2H8Zm2-12a2 2 0 0 1 2 2v2h-1.5V2a.5.5 0 0 0-.5-.5H8V0h2Z" />
+			</svg>
+		</button></figure>
+
+
+
+<p class="wp-block-paragraph">Here&#8217;s managing the actual sign message:</p>
+
+
+
+<figure data-wp-context="{&quot;imageId&quot;:&quot;6a608c3ea85a1&quot;}" data-wp-interactive="core/image" data-wp-key="6a608c3ea85a1" class="wp-block-image size-large wp-lightbox-container"><img loading="lazy" decoding="async" width="1024" height="674" data-wp-class--hide="state.isContentHidden" data-wp-class--show="state.isContentVisible" data-wp-init="callbacks.setButtonStyles" data-wp-on--click="actions.showLightbox" data-wp-on--load="callbacks.setButtonStyles" data-wp-on--pointerdown="actions.preloadImage" data-wp-on--pointerenter="actions.preloadImageWithDelay" data-wp-on--pointerleave="actions.cancelPreload" data-wp-on-window--resize="callbacks.setButtonStyles" src="https://tech.chrishardie.com/wp-content/uploads/2025/03/Screenshot-2025-03-04-at-13.23.12-1024x674.png" alt="" class="wp-image-552" srcset="https://tech.chrishardie.com/wp-content/uploads/2025/03/Screenshot-2025-03-04-at-13.23.12-1024x674.png 1024w, https://tech.chrishardie.com/wp-content/uploads/2025/03/Screenshot-2025-03-04-at-13.23.12-300x197.png 300w, https://tech.chrishardie.com/wp-content/uploads/2025/03/Screenshot-2025-03-04-at-13.23.12-768x506.png 768w, https://tech.chrishardie.com/wp-content/uploads/2025/03/Screenshot-2025-03-04-at-13.23.12-1536x1011.png 1536w, https://tech.chrishardie.com/wp-content/uploads/2025/03/Screenshot-2025-03-04-at-13.23.12-2048x1348.png 2048w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /><button
+			class="lightbox-trigger"
+			type="button"
+			aria-haspopup="dialog"
+			data-wp-bind--aria-label="state.thisImage.triggerButtonAriaLabel"
+			data-wp-init="callbacks.initTriggerButton"
+			data-wp-on--click="actions.showLightbox"
+			data-wp-style--right="state.thisImage.buttonRight"
+			data-wp-style--top="state.thisImage.buttonTop"
+		>
+			<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewbox="0 0 12 12">
+				<path fill="#fff" d="M2 0a2 2 0 0 0-2 2v2h1.5V2a.5.5 0 0 1 .5-.5h2V0H2Zm2 10.5H2a.5.5 0 0 1-.5-.5V8H0v2a2 2 0 0 0 2 2h2v-1.5ZM8 12v-1.5h2a.5.5 0 0 0 .5-.5V8H12v2a2 2 0 0 1-2 2H8Zm2-12a2 2 0 0 1 2 2v2h-1.5V2a.5.5 0 0 0-.5-.5H8V0h2Z" />
+			</svg>
+		</button></figure>
+
+
+
+<p class="wp-block-paragraph">Since my sign template management suggests defining a sign message that should be the default for certain statuses (open and closed), I needed a way to activate those on a schedule. Here&#8217;s the Laravel command that handles that and sends a message to a Slack channel with the result:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code"><pre class="brush: php; title: ; notranslate">
+&lt;?php
+
+namespace App\Console\Commands;
+
+use App\Models\SignMessage;
+use App\Models\SignTemplate;
+use Illuminate\Console\Command;
+use Spatie\SlackAlerts\Facades\SlackAlert;
+
+class SetSignMessageCommand extends Command
+{
+    /**
+     * The name and signature of the console command.
+     *
+     * @var string
+     */
+    protected $signature = &#039;wwn:set-sign-message
+        { --location=ccfront : Location of the sign }
+        { --status= : Status to set for the sign }&#039;;
+
+    /**
+     * The console command description.
+     *
+     * @var string
+     */
+    protected $description = &#039;Set the status and message of a sign at a certain location.&#039;;
+
+    /**
+     * Execute the console command.
+     */
+    public function handle()
+    {
+        // If current message can be auto-updated / not locked
+        $currentMessage = SignMessage::where(&#039;location&#039;, $this-&gt;option(&#039;location&#039;))-&gt;first();
+        if ($currentMessage &amp;&amp; $currentMessage-&gt;is_locked) {
+            return Command::SUCCESS;
+        }
+
+        // Get first message that is default status
+        $newMessage = SignTemplate::where(&#039;location&#039;, $this-&gt;option(&#039;location&#039;))
+            -&gt;where(&#039;is_default&#039;, true)
+            -&gt;where(&#039;sets_status&#039;, $this-&gt;option(&#039;status&#039;))
+            -&gt;first();
+
+        // Set message and status
+        if ($newMessage) {
+            if ($currentMessage) {
+                $currentMessage-&gt;update(&#x5B;
+                    &#039;message&#039; =&gt; $newMessage-&gt;message,
+                    &#039;status&#039; =&gt; $this-&gt;option(&#039;status&#039;),
+                ]);
+            } else {
+                SignMessage::create(&#x5B;
+                    &#039;location&#039; =&gt; $this-&gt;option(&#039;location&#039;),
+                    &#039;status&#039; =&gt; $this-&gt;option(&#039;status&#039;),
+                    &#039;message&#039; =&gt; $newMessage-&gt;message,
+                    &#039;is_locked&#039; =&gt; false,
+                ]);
+            }
+
+            if (! empty(config(&#039;wwn.signs.slack_channels&#039;)&#x5B;$this-&gt;option(&#039;location&#039;)])) {
+                SlackAlert::to(&#039;ops&#039;)
+                    -&gt;toChannel(config(&#039;wwn.signs.slack_channels&#039;)&#x5B;$this-&gt;option(&#039;location&#039;)])
+                    -&gt;message(&quot;Sign at {$this-&gt;option(&#039;location&#039;)} set to {$this-&gt;option(&#039;status&#039;)} with new message.&quot;);
+            }
+        }
+
+        return Command::SUCCESS;
+    }
+}
+
+</pre></div>
+
+
+<p class="wp-block-paragraph">Then, I can run that command on a schedule according to our office hours:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code"><pre class="brush: php; title: ; notranslate">
+        /**
+         * Sign changes
+         */
+        // T-F, open at 9 am
+        $schedule-&gt;command(&#039;wwn:set-sign-message --status=open&#039;)
+            -&gt;timezone(config(&#039;wwn.timezone&#039;))
+            -&gt;days(&#x5B;Schedule::TUESDAY, Schedule::WEDNESDAY, Schedule::THURSDAY, Schedule::FRIDAY])
+            -&gt;at(&#039;09:00&#039;);
+        // M, T, W, F close at 5 pm
+        $schedule-&gt;command(&#039;wwn:set-sign-message --status=closed&#039;)
+            -&gt;timezone(config(&#039;wwn.timezone&#039;))
+            -&gt;days(&#x5B;Schedule::MONDAY, Schedule::TUESDAY, Schedule::WEDNESDAY, Schedule::FRIDAY])
+            -&gt;at(&#039;17:00&#039;);
+        // Th close at 12 noon
+        $schedule-&gt;command(&#039;wwn:set-sign-message --status=closed&#039;)
+            -&gt;timezone(config(&#039;wwn.timezone&#039;))
+            -&gt;days(&#x5B;Schedule::THURSDAY])
+            -&gt;at(&#039;12:00&#039;);
+
+</pre></div>
+
+
+<p class="wp-block-paragraph">Finally, I needed to render the sign message at a URL where the BOOX device could load it, and in a way that would refresh automatically when the message changed.</p>
+
+
+
+<p class="wp-block-paragraph">I used a simple Laravel blade file with a Livewire component that would poll for updates on a regular basis. Here&#8217;s the blade file, with messy CSS courtesy of ChatGPT:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code"><pre class="brush: xml; title: ; notranslate">
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta http-equiv=&quot;refresh&quot; content=&quot;86400&quot;&gt;
+    &lt;title&gt;Sign for {{ $signMessage-&gt;location }}&lt;/title&gt;
+    &lt;style&gt;
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start; /* Reduce excess top margin */
+            align-items: center;
+        }
+
+        h1 {
+            text-transform: uppercase;
+            font-size: 20vh; /* Fill top 1/4th of screen */
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: clip;
+            width: 100%;
+            line-height: 1;
+            margin: 2vh 0;
+            text-align: center;
+            flex: 0 0 auto;
+        }
+
+        #message {
+            flex: 1; /* Fill remaining space */
+            font-size: 6vh;
+            max-width: 90%;
+            max-height: 75vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start; /* Reduce excess space at top */
+            align-items: flex-start; /* Align message content to the left */
+            text-align: left;
+            word-wrap: break-word;
+            padding: 0 5%;
+            margin-top: 3vh; /* Add spacing between status and message */
+        }
+
+        #message p {
+            margin: 1.5vh 0; /* Slightly more spacing between paragraphs */
+            max-width: 100%;
+            word-wrap: break-word;
+        }
+
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    @livewire(&#039;sign-display&#039;, &#x5B;&#039;location&#039; =&gt; $signMessage-&gt;location])
+&lt;/body&gt;
+&lt;/html&gt;
+</pre></div>
+
+
+<p class="wp-block-paragraph">Here&#8217;s the Livewire component:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code"><pre class="brush: xml; title: ; notranslate">
+&lt;div id=&quot;sign-display&quot; wire:poll.{{ config(&#039;wwn.signs.refresh_rate.default_ms&#039;) }}ms=&quot;updateSignData&quot;&gt;
+    @if($signMessage-&gt;status)
+        &lt;h1 id=&quot;status&quot;&gt;{{ $signMessage-&gt;status_label }}&lt;/h1&gt;
+    @endif
+    &lt;div id=&quot;message&quot;&gt;
+        {!! $signMessage-&gt;message !!}
+    &lt;/div&gt;
+&lt;/div&gt;
+
+</pre></div>
+
+
+<p class="wp-block-paragraph">You&#8217;ll notice that there are actually two refresh mechanisms in use, one in the HTML header to refresh the entire page once per day, and one in the Livewire component to refresh its content at a configurable rate, currently every 5 minutes. This ended up being necessary because I discovered that even for anonymous/logged-out web requests, Laravel still sets a CSRF token that expires after a few days, and so the Livewire component would eventually stop working. The whole-page refresh solves this.</p>
+
+
+
+<p class="wp-block-paragraph">I did try for a while to have the Livewire component dynamically set its polling interval, as there are some hours of the day where the message is almost certain not to change and a longer wait time would be fine, and others where a faster refresh would be ideal, but this was more trouble than it was worth given the technical complexity it added. So for now, our office staff is content to know that from the time you change the message in the web interface to the time it refreshes on the device may be as much as five minutes. If you need to change it more urgently than that&#8230;use a paper sign? 😅 </p>
+
+
+
+<p class="wp-block-paragraph">Here&#8217;s the Livewire component code:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code"><pre class="brush: php; title: ; notranslate">
+&lt;?php
+
+namespace App\Livewire;
+
+use App\Models\SignMessage;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Log;
+use Livewire\Component;
+
+class SignDisplay extends Component
+{
+    public $signMessage;
+    public $location;
+
+    public function mount(string $location)
+    {
+        $this-&gt;location = $location;
+        $this-&gt;loadSignMessage();
+    }
+
+    public function updateSignData(): void
+    {
+        $this-&gt;loadSignMessage();
+    }
+
+    public function loadSignMessage(): void
+    {
+        $this-&gt;signMessage = SignMessage::where(&#039;location&#039;, $this-&gt;location)-&gt;first();
+
+        if (! $this-&gt;signMessage) {
+            abort(404);
+        }
+
+        $this-&gt;signMessage-&gt;touch(&#039;last_loaded_at&#039;);
+    }
+
+    public function render()
+    {
+        return view(&#039;livewire.sign-display&#039;);
+    }
+}
+
+</pre></div>
+
+
+<p class="wp-block-paragraph">Finally, I needed a Laravel HTTP controller to serve up the sign message:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code"><pre class="brush: php; title: ; notranslate">
+&lt;?php
+
+namespace App\Http\Controllers;
+
+use App\Models\SignMessage;
+use Illuminate\Http\Request;
+
+class SignMessageController extends Controller
+{
+    /**
+     * Handle the incoming request.
+     */
+    public function __invoke(Request $request, string $location)
+    {
+        $signMessage = SignMessage::where(&#039;location&#039;, $location)-&gt;first();
+
+        abort_if(! $signMessage, 404);
+
+        $signMessage-&gt;touch(&#039;last_loaded_at&#039;);
+
+        return view(&#039;signs.sign-message&#039;, compact(&#039;signMessage&#039;));
+    }
+}
+</pre></div>
+
+
+<p class="wp-block-paragraph">and a web route to point to it:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code"><pre class="brush: php; title: ; notranslate">
+    // Office signs
+    Route::get(&#039;/signs/{location}&#039;, \App\Http\Controllers\SignMessageController::class);
+</pre></div>
+
+
+<p class="wp-block-paragraph">The web route is a part of a middleware group that ensures requests can only come from known IP addresses of our office locations, as one form of authentication.</p>
+
+
+
+<p class="wp-block-paragraph">I use the &#8220;last_loaded_at&#8221; model attribute as a quick way to confirm that the sign is successfully loading the latest message, even if I can&#8217;t put my eyes on it. In theory I will set up monitoring and alerting for when this value becomes scale; in reality I will not.</p>
+
+
+
+<p class="wp-block-paragraph">I set the device&#8217;s browser&#8217;s home tab to the desired URL, launched the browser, and it worked!</p>
+
+
+
+<p class="wp-block-paragraph">I went looking for a way to securely mount the BOOX device to the window and it was actually kind of hard to find something suitable since most people apparently don&#8217;t mount their e-readers to windows. In the end I found <a href="https://amzn.to/3DdCqfZ">a $30 mounting kit designed to mount a satellite communications device to your vehicle&#8217;s sunroof for mobile internet access</a> (affiliate link). Again, way over-engineered but it&#8217;s going to hold that sucker in place through a lot.</p>
+
+
+
+<p class="wp-block-paragraph">The end result? It&#8217;s beautiful!</p>
+
+
+
+<figure data-wp-context="{&quot;imageId&quot;:&quot;6a608c3ea97d6&quot;}" data-wp-interactive="core/image" data-wp-key="6a608c3ea97d6" class="wp-block-image size-large wp-lightbox-container"><img loading="lazy" decoding="async" width="1024" height="768" data-wp-class--hide="state.isContentHidden" data-wp-class--show="state.isContentVisible" data-wp-init="callbacks.setButtonStyles" data-wp-on--click="actions.showLightbox" data-wp-on--load="callbacks.setButtonStyles" data-wp-on--pointerdown="actions.preloadImage" data-wp-on--pointerenter="actions.preloadImageWithDelay" data-wp-on--pointerleave="actions.cancelPreload" data-wp-on-window--resize="callbacks.setButtonStyles" src="https://tech.chrishardie.com/wp-content/uploads/2025/03/20250304-window-sign-1024x768.jpeg" alt="A photo of a BOOX Note Air2 Series mounted in a window as a sign, with the text &quot;OPEN: Welcome! We're glad you're here.&quot; on the screen." class="wp-image-559" srcset="https://tech.chrishardie.com/wp-content/uploads/2025/03/20250304-window-sign-1024x768.jpeg 1024w, https://tech.chrishardie.com/wp-content/uploads/2025/03/20250304-window-sign-300x225.jpeg 300w, https://tech.chrishardie.com/wp-content/uploads/2025/03/20250304-window-sign-768x576.jpeg 768w, https://tech.chrishardie.com/wp-content/uploads/2025/03/20250304-window-sign.jpeg 1280w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /><button
+			class="lightbox-trigger"
+			type="button"
+			aria-haspopup="dialog"
+			data-wp-bind--aria-label="state.thisImage.triggerButtonAriaLabel"
+			data-wp-init="callbacks.initTriggerButton"
+			data-wp-on--click="actions.showLightbox"
+			data-wp-style--right="state.thisImage.buttonRight"
+			data-wp-style--top="state.thisImage.buttonTop"
+		>
+			<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewbox="0 0 12 12">
+				<path fill="#fff" d="M2 0a2 2 0 0 0-2 2v2h1.5V2a.5.5 0 0 1 .5-.5h2V0H2Zm2 10.5H2a.5.5 0 0 1-.5-.5V8H0v2a2 2 0 0 0 2 2h2v-1.5ZM8 12v-1.5h2a.5.5 0 0 0 .5-.5V8H12v2a2 2 0 0 1-2 2H8Zm2-12a2 2 0 0 1 2 2v2h-1.5V2a.5.5 0 0 0-.5-.5H8V0h2Z" />
+			</svg>
+		</button></figure>
+
+
+
+<p class="wp-block-paragraph">I&#8217;ve used it a few times now to post special messages welcoming certain office visitors. If I have time I may add in an announcement about when the latest issue of the paper has arrived for sale, breaking news headlines, etc. What dreams may come.</p>
+
+
+
+<p class="wp-block-paragraph">I&#8217;m glad for any feedback or suggestions, especially if you try your own version of this. Thanks again to Jan Miksovsky and Scott Evans for the breakthrough ideas, and to others on Mastodon who helped with ideas and details.</p>
+<p>The post <a href="https://tech.chrishardie.com/2025/laravel-eink-digital-sign-window-display/">Using Laravel and an e-ink tablet to make a DIY digital sign for dynamic office window message display</a> appeared first on <a href="https://tech.chrishardie.com">Chris Hardie&#039;s Tech and Software Blog</a>.</p>]]></content:encoded>
+					
+					<wfw:commentRss>https://tech.chrishardie.com/2025/laravel-eink-digital-sign-window-display/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">545</post-id>	</item>
+		<item>
+		<title>How far I&#8217;ll go to make an RSS feed of your website</title>
+		<link>https://tech.chrishardie.com/2025/rss-feed-of-your-website/</link>
+					<comments>https://tech.chrishardie.com/2025/rss-feed-of-your-website/#comments</comments>
+		
+		<dc:creator><![CDATA[Chris Hardie]]></dc:creator>
+		<pubDate>Sun, 02 Mar 2025 21:32:08 +0000</pubDate>
+				<category><![CDATA[Open Web]]></category>
+		<category><![CDATA[open-web]]></category>
+		<category><![CDATA[RSS]]></category>
+		<category><![CDATA[software]]></category>
+		<category><![CDATA[web scraping]]></category>
+		<guid isPermaLink="false">https://tech.chrishardie.com/?p=503</guid>
+
+					<description><![CDATA[<p>So you&#8217;ve decided to publish timely content on the Internet but your website does not have an RSS feed. Or even worse, you have played some role in designing or building a tool or service that other people use to publish timely content on the Internet, and you unforgivably allowed it to ship without support &#8230; <a href="https://tech.chrishardie.com/2025/rss-feed-of-your-website/" class="more-link">Continue reading <span class="screen-reader-text">How far I&#8217;ll go to make an RSS feed of your website</span></a></p>
+<p>The post <a href="https://tech.chrishardie.com/2025/rss-feed-of-your-website/">How far I&#8217;ll go to make an RSS feed of your website</a> appeared first on <a href="https://tech.chrishardie.com">Chris Hardie&#039;s Tech and Software Blog</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p class="wp-block-paragraph">So you&#8217;ve decided to publish timely content on the Internet but your website does not have an RSS feed.</p>
+
+
+
+<p class="wp-block-paragraph">Or even worse, you have played some role in designing or building a tool or service that other people use to publish timely content on the Internet, and you unforgivably allowed it to ship without support for RSS feeds.</p>
+
+
+
+<p class="wp-block-paragraph">And you probably just assume that a few remaining RSS feed nerds out there are just quietly backing away in defeat. &#8220;They&#8217;ll just have to manually visit the site every day if they want updates,&#8221; you rationalize. &#8220;They can download our app and get push notifications instead,&#8221; you somehow say with a straight face.</p>
+
+
+
+<p class="wp-block-paragraph">No.</p>
+
+
+
+<p class="wp-block-paragraph">I don&#8217;t know who you are. I don&#8217;t know what you want. If you are looking for clicks, I can tell you I don&#8217;t have any clicks left to give.</p>
+
+
+<div class="wp-block-image">
+<figure class="alignright size-full is-resized"><img loading="lazy" decoding="async" width="1024" height="512" src="https://tech.chrishardie.com/wp-content/uploads/2025/03/Particular_set_of_skills_.original.jpg" alt="Screen capture from the movie Taken where Liam Neeson's character gives a version of the &quot;special skills&quot; speech." class="wp-image-540" style="width:368px;height:auto" srcset="https://tech.chrishardie.com/wp-content/uploads/2025/03/Particular_set_of_skills_.original.jpg 1024w, https://tech.chrishardie.com/wp-content/uploads/2025/03/Particular_set_of_skills_.original-300x150.jpg 300w, https://tech.chrishardie.com/wp-content/uploads/2025/03/Particular_set_of_skills_.original-768x384.jpg 768w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /></figure>
+</div>
+
+
+<p class="wp-block-paragraph">But what I do have are a very particular set of skills, skills I have acquired over a very long career. Skills that make me a nightmare for people like you.</p>
+
+
+
+<p class="wp-block-paragraph">If you publish your content in an RSS feed now, that&#8217;ll be the end of it. I will not look for you, I will not pursue you, I will simply subscribe to your feed.</p>
+
+
+
+<p class="wp-block-paragraph">But if you don&#8217;t, I will look for you, I will find you, and I will make an RSS feed of your website.</p>
+
+
+
+<p class="wp-block-paragraph">And here&#8217;s how I&#8217;ll do it.</p>
+
+
+
+<p class="wp-block-paragraph"><em>(Psst, this last bit is a playful reference to the movie </em>Taken<em>, I am a nice person IRL and don&#8217;t actually tend to threaten or intimidate people around their technology choices. But my impersonation of a militant RSS advocate continues herein&#8230;)</em></p>
+
+
+
+<p class="wp-block-paragraph">Jump straight to a scenario and solution:</p>
+
+
+
+<ul class="wp-block-list">
+<li><a href="#hiding">You&#8217;re just hiding your RSS feed</a></li>
+
+
+
+<li><a href="#hiding-2">You&#8217;re hiding your RSS feed URL structure in documentation or forum responses</a></li>
+
+
+
+<li><a href="#special">You forgot that feeds are special URLs</a></li>
+
+
+
+<li><a href="#malformed">Your feed is malformed</a></li>
+
+
+
+<li><a href="#structured">You have no feed but your content is structured</a></li>
+
+
+
+<li><a href="#async">You use asynchronous requests to fetch JSON and render your content</a></li>
+
+
+
+<li><a href="#blocked">You block requests from hosted servers</a></li>
+
+
+
+<li><a href="#newsletters">You&#8217;re super in to email newsletters</a></li>
+
+
+
+<li><a href="#newsletters-2">Your email newsletter has no RSS feed</a></li>
+
+
+
+<li><a href="#mobileapp">Your mobile app is where you put all the good stuff</a></li>
+</ul>
+
+
+
+<h3 class="wp-block-heading" id="hiding">You&#8217;re just hiding your RSS feed</h3>
+
+
+
+<p class="wp-block-paragraph">Okay, heh, simple misunderstanding, you actually DO have an RSS feed but you do not mention or link to it anywhere obvious on your home page or content index. You know what, you&#8217;re using a <code>&lt;link rel="alternate" type="application/rss+xml" href="..." /&gt;</code> tag, so good for you. </p>
+
+
+
+<p class="wp-block-paragraph">I found it, I&#8217;m subscribing, we&#8217;re moving on, but for crying out loud please also throw a link in the footer or something to help the next person out.</p>
+
+
+
+<details class="wp-block-details is-layout-flow wp-block-details-is-layout-flow"><summary>Further reading and resources</summary>
+<ul class="wp-block-list">
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/link">&lt;link&gt;: The External Resource Link element</a></li>
+
+
+
+<li><a href="https://www.rssboard.org/rss-autodiscovery">RSS Autodiscovery</a></li>
+
+
+
+<li><a href="https://www.petefreitag.com/blog/rss-autodiscovery/">How to add RSS Autodiscovery to your site</a></li>
+</ul>
+</details>
+
+
+
+<h3 class="wp-block-heading" id="hiding-2">You&#8217;re hiding your RSS feed URL structure in documentation or forum responses</h3>
+
+
+
+<p class="wp-block-paragraph">Oh so you don&#8217;t have an advertised RSS feed or  <code>&lt;link&gt;</code> tag but you do still support RSS feeds after all, it&#8217;s just that you tucked that fact away in some kind of obscure knowledgebase article or a customer support rep&#8217;s response in a community forum? </p>
+
+
+
+<p class="wp-block-paragraph">Fine. I would like you to feel a bit bad about this and I briefly considered writing a strongly worded email to that end, but instead I&#8217;m using the documented syntax to grab the link, subscribe and move on. Just&#8230;do better.</p>
+
+
+
+<details class="wp-block-details is-layout-flow wp-block-details-is-layout-flow"><summary>Further reading and resources</summary>
+<ul class="wp-block-list">
+<li><a href="https://www.rsslookup.com">RSS Lookup &#8211; Find RSS feeds on any URL</a></li>
+
+
+
+<li><a href="https://www.feedotter.com/blog/find-an-rss-feed-url/">How to Easily Find An RSS Feed URL for Any Website</a></li>
+
+
+
+<li><a href="https://zapier.com/blog/how-to-find-rss-feed-url/">How to find the RSS feed URL for almost any site</a></li>
+</ul>
+</details>
+
+
+
+<h3 class="wp-block-heading" id="special">You forgot that feeds are special URLs</h3>
+
+
+
+<p class="wp-block-paragraph">You decided to put your RSS feed behind a Cloudflare access check. Or you aggressively cached it. Or your web application firewall is blocking repeated accesses to the URL from strange network locations and user agents, which is exactly the profile of feed readers.</p>
+
+
+
+<p class="wp-block-paragraph">I understand, we can&#8217;t always remember to give every URL special attention.</p>
+
+
+
+<p class="wp-block-paragraph">But I will email your site administrator or tech support team about it, and you will open a low-priority ticket or send my request to your junk folder, and I will keep following up until you treat your RSS feed URLs with the respect they deserve. </p>
+
+
+
+<details class="wp-block-details is-layout-flow wp-block-details-is-layout-flow"><summary>Further reading and resources</summary>
+<ul class="wp-block-list">
+<li><a href="https://openrss.org/blog/using-cloudflare-on-your-website-could-be-blocking-rss-users">Using Cloudflare on your website could be blocking RSS users</a></li>
+
+
+
+<li><a href="https://cloudflare.zendesk.com/hc/en-us/articles/200172316-How-do-I-include-or-exclude-a-specific-URL-from-Cloudflare-s-page-rules">How do I include or exclude a specific URL from Cloudflare&#8217;s page rules?</a></li>
+</ul>
+</details>
+
+
+
+<h3 class="wp-block-heading" id="malformed">Your feed is malformed</h3>
+
+
+
+<p class="wp-block-paragraph">You somehow ended up with some terrible, custom, non-standard implementation of RSS feed publishing and you forgot to handle character encoding or media formats or timestamps or weird HTML tags or some other thing that every other established XML parsing and publishing library has long since dealt with and now you have an RSS feed that does not validate.</p>
+
+
+
+<p class="wp-block-paragraph">Guess what, RSS feeds that don&#8217;t validate might as well be links to a Rick Astley video on YouTube given how picky most RSS feed readers are. It&#8217;s just not going to work.</p>
+
+
+
+<p class="wp-block-paragraph">But I will work with that. I will write a cron job that downloads your feed every hour and republishes it with fixes needed to make it valid.</p>
+
+
+<div class="wp-block-syntaxhighlighter-code"><pre class="brush: bash; title: ; notranslate">
+#!/bin/sh
+
+# Define variables for URLs, file paths, and the fix to apply
+RSS_FEED_URL=&quot;https://example.com/rss.xml&quot;
+TEMP_FILE=&quot;/tmp/rss_feed.broken&quot;
+OUTPUT_FILE=&quot;/path/to/feeds/rss_feed.xml&quot;
+SEARCH_STRING=&quot;Parks &amp; Recreation&quot;
+REPLACEMENT_STRING=&quot;Parks &amp;amp; Recreation&quot;
+
+# Download the RSS feed
+curl -s -L -o &quot;$TEMP_FILE&quot; &quot;$RSS_FEED_URL&quot;
+
+# Fix invalid characters or strings in the RSS feed
+perl -pi -e &quot;s/$SEARCH_STRING/$REPLACEMENT_STRING/gi;&quot; &quot;$TEMP_FILE&quot;
+
+# Move the fixed file to the desired output location
+cp &quot;$TEMP_FILE&quot; &quot;$OUTPUT_FILE&quot;
+
+# Clean up the temporary file
+rm &quot;$TEMP_FILE&quot;
+</pre></div>
+
+
+<p class="wp-block-paragraph">If I want to embarrass you in front of your friends I will announce the new, valid feed URL publicly and let others use it too. But really, you should just fix your feed and use a standard library.</p>
+
+
+
+<details class="wp-block-details is-layout-flow wp-block-details-is-layout-flow"><summary>Further reading and resources</summary>
+<ul class="wp-block-list">
+<li><a href="https://www.rssboard.org/rss-specification">RSS 2.0 Specification</a></li>
+
+
+
+<li><a href="https://www.rssboard.org/rss-validator/">RSS Validator</a></li>
+
+
+
+<li><a href="https://validator.w3.org/feed/">W3C Feed Validation Service</a></li>
+
+
+
+<li><a href="https://dev.to/whitep4nth3r/how-to-fix-error-invalid-character-in-entity-name-in-rss-feeds-3op8">How to fix error: invalid character in entity name in RSS feeds</a></li>
+</ul>
+</details>
+
+
+
+<h3 class="wp-block-heading" id="structured">You have no feed but your content is structured</h3>
+
+
+
+<p class="wp-block-paragraph">You programmatically publish your timely content in a structured format from a structured source but offer no RSS feed? What a terrible decision you&#8217;ve made for the distribution of your information, for your readers, for your stakeholders, and for the whole world.</p>
+
+
+
+<p class="wp-block-paragraph">But &#8217;tis no matter, I&#8217;ll have an RSS feed of your site up and running shortly using a DOM crawler (e.g. <a href="https://symfony.com/doc/current/components/dom_crawler.html">Symfony&#8217;s DomCralwer component in PHP</a>) that can navigate HTML and XML documents using XPath, HTML tags or CSS selectors to get me what I want.</p>
+
+
+
+<p class="wp-block-paragraph">Your stuff&#8217;s generated using an HTML/CSS template with a loop? Great? Or it&#8217;s even just in a plain HTML table? Let&#8217;s do this.</p>
+
+
+<div class="wp-block-syntaxhighlighter-code"><pre class="brush: php; title: ; notranslate">
+$nodes = $crawler-&gt;filter(&#039;.post_content table tr&#039;);
+
+foreach ($nodes as $node) {
+	$tr = new Crawler($node);
+	$date         = $tr-&gt;filter(&#039;td&#039;)-&gt;eq(0)-&gt;text();
+	$title_column = $tr-&gt;filter(&#039;td&#039;)-&gt;eq(1);
+	$title        = $title_column-&gt;text();
+	$links        = $title_column-&gt;filter(&#039;a&#039;);
+	if ($links-&gt;count()) {
+		$url = $this-&gt;resolveUrl($source, $links-&gt;first()-&gt;attr(&#039;href&#039;));
+	} else {
+		continue;
+	}
+	$items&#x5B;] = array(
+		&#039;pubDate&#039; =&gt; Carbon::createFromFormat(&#039;!m-d-Y&#039;, $date),
+		&#039;title&#039; =&gt; ucwords(strtolower($title)),
+		&#039;url&#039; =&gt; $url,
+	);
+}
+</pre></div>
+
+
+<p class="wp-block-paragraph">My software will programmatically visit your site every hour to see what it finds and publish an RSS feed of the latest.</p>
+
+
+
+<details class="wp-block-details is-layout-flow wp-block-details-is-layout-flow"><summary>Further reading and resources</summary>
+<ul class="wp-block-list">
+<li><a href="https://www.w3schools.com/xml/xpath_intro.asp">XPath Tutorial</a></li>
+
+
+
+<li><a href="https://www.freecodecamp.org/news/css-selectors-cheat-sheet/">CSS Selectors Cheat Sheet</a></li>
+
+
+
+<li><a href="https://www.w3schools.com/cssref/css_selectors.php">CSS Selectors Reference</a></li>
+
+
+
+<li><a href="https://symfony.com/doc/current/components/dom_crawler.html">The DomCrawler Component</a></li>
+</ul>
+</details>
+
+
+
+<h3 class="wp-block-heading" id="async">You use asynchronous requests to fetch JSON and render your content</h3>
+
+
+
+<p class="wp-block-paragraph">You were right there at the finish line, buddy, and you choked.</p>
+
+
+
+<p class="wp-block-paragraph">You had everything you need — structured data storage, knowledge of how to convey data from one place to another in a structured format, probably some API endpoints that already serve up exactly what you need — all so you can dynamically render your webpage with a fancy pagination system or a super fast search/filter feature. </p>
+
+
+
+<p class="wp-block-paragraph">And yet, still, you somehow left out publishing your content in one of the most commonly used structured data formats on the web. (<em>Psst, that&#8217;s RSS that I&#8217;m talking about. Pay attention, this whole thing is an RSS thing!</em>)</p>
+
+
+
+<p class="wp-block-paragraph">So I will come for your asynchronous requests. I will use my browser&#8217;s dev tools to inspect the network requests made when you render your search results, and I will pick apart the GET or POST query issued and the headers and data that are passed with it, and I will strip out the unnecessary stuff so that we have the simplest query possible.</p>
+
+
+
+<p class="wp-block-paragraph">If it&#8217;s GraphQL, I will still wade through that nonsense. If it uses a referring URL check as some kind of weak authentication, I will emulate that. If you set an obscurely named cookie on first page visit that is required to get the content on page visit two, be assured that I will find and eat and regurgitate that cookie.</p>
+
+
+
+<p class="wp-block-paragraph">And then I will set up a regularly running script to ingest the JSON response and create a corresponding RSS feed that you could have been providing all along. I can do this all day long.</p>
+
+
+<div class="wp-block-syntaxhighlighter-code"><pre class="brush: php; title: ; notranslate">
+public function generateRssItems(Source $source): RssItemCollection
+{
+	$response = HTTP::withUserAgent($userAgent)
+		-&gt;get($source-&gt;source_url);
+	$this-&gt;searchResultsToArray($response-&gt;json(), $source);
+
+	return RssItemCollection::make($this-&gt;feedItems);
+}
+
+private function searchResultsToArray(array $results, Source $source): void
+{
+	if (! empty($results&#x5B;&#039;combined_feeds&#039;])) {
+		foreach ($results&#x5B;&#039;combined_feeds&#039;] as $result) {
+			$this-&gt;feedItems&#x5B;] = array(
+				&#039;pubDate&#039; =&gt; $this-&gt;getPubDate($result),
+				&#039;title&#039; =&gt; $this-&gt;getTitle($result),
+				&#039;url&#039; =&gt; $this-&gt;getArticleUrl($result, $source),
+				&#039;description&#039; =&gt; $this-&gt;getArticleContent($result),
+			);
+		}
+		return;
+	}
+}
+</pre></div>
+
+
+<details class="wp-block-details is-layout-flow wp-block-details-is-layout-flow"><summary>Further reading and resources</summary>
+<ul class="wp-block-list">
+<li><a href="https://docs.scrapy.org/en/latest/topics/developer-tools.html">Using your browser’s Developer Tools for scraping</a></li>
+
+
+
+<li><a href="https://sammie1999.medium.com/webscraping-101-how-to-find-the-right-apis-using-chrome-developer-tools-and-postman-79bfd06e64b2">Webscraping 101 — How to find the right APIs using Chrome Developer Tools and Postman</a></li>
+
+
+
+<li><a href="https://developer.chrome.com/blog/async-call-stack/">Debugging asynchronous JavaScript with Chrome DevTools</a></li>
+</ul>
+</details>
+
+
+
+<h3 class="wp-block-heading" id="blocked">You block requests from hosted servers</h3>
+
+
+
+<p class="wp-block-paragraph">Even though I build my content fetching tools to be good citizens on the web — at most checking once per hour, exponential backoff if there are problems, etc. — you may still decide to block random web requests for random reasons. Maybe it&#8217;s the number of queries to a certain URL, maybe it&#8217;s the user agent, or maybe it&#8217;s because they&#8217;re coming from the IP address of a VPS in a data center that you assume is attacking you.</p>
+
+
+<div class="wp-block-image">
+<figure class="alignright size-large is-resized"><img loading="lazy" decoding="async" width="1024" height="484" src="https://tech.chrishardie.com/wp-content/uploads/2025/03/taylow-swift-look-what-you-made-me-do-video-99fa8ad0-b7d5-4e1c-bcd2-03a1dd923120-1024x484.jpg" alt="An image from Taylor Swift's &quot;Look What You Made Me Do&quot; music video" class="wp-image-541" style="width:422px;height:auto" srcset="https://tech.chrishardie.com/wp-content/uploads/2025/03/taylow-swift-look-what-you-made-me-do-video-99fa8ad0-b7d5-4e1c-bcd2-03a1dd923120-1024x484.jpg 1024w, https://tech.chrishardie.com/wp-content/uploads/2025/03/taylow-swift-look-what-you-made-me-do-video-99fa8ad0-b7d5-4e1c-bcd2-03a1dd923120-300x142.jpg 300w, https://tech.chrishardie.com/wp-content/uploads/2025/03/taylow-swift-look-what-you-made-me-do-video-99fa8ad0-b7d5-4e1c-bcd2-03a1dd923120-768x363.jpg 768w, https://tech.chrishardie.com/wp-content/uploads/2025/03/taylow-swift-look-what-you-made-me-do-video-99fa8ad0-b7d5-4e1c-bcd2-03a1dd923120-1536x725.jpg 1536w, https://tech.chrishardie.com/wp-content/uploads/2025/03/taylow-swift-look-what-you-made-me-do-video-99fa8ad0-b7d5-4e1c-bcd2-03a1dd923120-2048x967.jpg 2048w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /></figure>
+</div>
+
+
+<p class="wp-block-paragraph">Fine. Whatever. I used to spend time trying to work around individual fingerprinting and blocking mechanisms, but I got tired of that. So now I pay about $25/year for access to rotating residential IP addresses to serve as proxies for my requests. </p>
+
+
+
+<p class="wp-block-paragraph">I don&#8217;t like supporting these providers but when I come to make an RSS feed of your content, it will look like it&#8217;s from random Jane Doe&#8217;s home computer in some Virginia suburb instead of a VPS in a data center.</p>
+
+
+
+<p class="wp-block-paragraph">Look what you made me do.</p>
+
+
+
+<details class="wp-block-details is-layout-flow wp-block-details-is-layout-flow"><summary>Further reading and resources</summary>
+<ul class="wp-block-list">
+<li><a href="https://captchaforum.com/threads/how-to-choose-a-reliable-residential-proxy-provider.4480/">How to Choose a Reliable Residential Proxy Provider</a></li>
+
+
+
+<li><a href="https://www.spamhaus.org/resource-hub/compromised/lets-talk-about-the-danger-of-residential-proxy-networks/">Let&#8217;s talk about the danger of residential proxy networks</a></li>
+
+
+
+<li><a href="https://blog.cloudflare.com/residential-proxy-bot-detection-using-machine-learning/">Using machine learning to detect bot attacks that leverage residential proxies</a></li>
+</ul>
+</details>
+
+
+
+<h3 class="wp-block-heading" id="newsletters">You&#8217;re super in to email newsletters</h3>
+
+
+
+<p class="wp-block-paragraph">You don&#8217;t put timely new content on your website, but you sure do love your fancy email newsletters with the timely updates your audience is looking for. You like them so much that you favor them over every other possible content distribution channel, including a website with an RSS feed.</p>
+
+
+
+<p class="wp-block-paragraph">That&#8217;s okay. Fortunately, many email newsletter platforms have figured out that offering a web-based archive of past newsletter campaigns is a valuable service they can provide to, um, people like you, and many of those have figured out that including an RSS feed of said campaigns is worthwhile too.</p>
+
+
+
+<p class="wp-block-paragraph">Mailchimp puts a link to right there in the header of their web-based view of an individual campaign send unless (boo) a list owner has turned off public archives, which you should seriously NOT do unless your list really needs to be private/subscribers only.</p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="289" src="https://tech.chrishardie.com/wp-content/uploads/2025/01/Screenshot-2025-01-22-at-16.57.47-1024x289.png" alt="A screenshot of a Safari browser window visiting a Mailchimp email campaign archive, which includes a header bar with buttons &quot;Subscribe&quot;, &quot;Past Issues&quot;, &quot;Translate&quot; and &quot;RSS&quot;." class="wp-image-519" srcset="https://tech.chrishardie.com/wp-content/uploads/2025/01/Screenshot-2025-01-22-at-16.57.47-1024x289.png 1024w, https://tech.chrishardie.com/wp-content/uploads/2025/01/Screenshot-2025-01-22-at-16.57.47-300x85.png 300w, https://tech.chrishardie.com/wp-content/uploads/2025/01/Screenshot-2025-01-22-at-16.57.47-768x217.png 768w, https://tech.chrishardie.com/wp-content/uploads/2025/01/Screenshot-2025-01-22-at-16.57.47-1536x433.png 1536w, https://tech.chrishardie.com/wp-content/uploads/2025/01/Screenshot-2025-01-22-at-16.57.47.png 1988w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<details class="wp-block-details is-layout-flow wp-block-details-is-layout-flow"><summary>Further reading and resources</summary>
+<ul class="wp-block-list">
+<li><a href="https://www.kryogenix.org/days/2025/02/08/use-rss-to-read-newsletters/">Use RSS to read newsletters</a></li>
+</ul>
+</details>
+
+
+
+<h3 class="wp-block-heading" id="newsletters-2">Your email newsletter has no RSS feed</h3>
+
+
+
+<p class="wp-block-paragraph">You&#8217;re using an email newsletter platform that doesn&#8217;t have RSS feeds built in?</p>
+
+
+
+<p class="wp-block-paragraph">Please, allow me to make one for you. I will subscribe to your email newsletter with a special address that routes messages to a WordPress site I set up just for the purpose of creating public posts with your newsletter content. Once that&#8217;s done, the RSS part is easy given that WordPress has that support built right in.</p>
+
+
+
+<p class="wp-block-paragraph">I&#8217;ve detailed the technical pieces of that particular puzzle in a separate post:</p>
+
+
+
+<figure class="wp-block-embed is-type-wp-embed is-provider-chris-hardie-039-s-tech-and-software-blog wp-block-embed-chris-hardie-039-s-tech-and-software-blog"><div class="wp-block-embed__wrapper">
+<blockquote class="wp-embedded-content" data-secret="5EFr8CL8uv"><a href="https://tech.chrishardie.com/2022/unlocking-email-rss-feeds-wordpress-postie/">Unlocking email content into RSS feeds redux with WordPress and Postie</a></blockquote><iframe loading="lazy" class="wp-embedded-content" sandbox="allow-scripts" security="restricted"  title="&#8220;Unlocking email content into RSS feeds redux with WordPress and Postie&#8221; &#8212; Chris Hardie&#039;s Tech and Software Blog" src="https://tech.chrishardie.com/2022/unlocking-email-rss-feeds-wordpress-postie/embed/#?secret=FUORIbvpFQ#?secret=5EFr8CL8uv" data-secret="5EFr8CL8uv" width="600" height="338" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+</div></figure>
+
+
+
+<h3 class="wp-block-heading" id="mobileapp">Your mobile app is where you put all the good stuff</h3>
+
+
+
+<p class="wp-block-paragraph">No RSS feed. No email newsletter. The timely content updates are locked up in your mobile app where the developers involved have absolutely no incentive to provide alternative channels you didn&#8217;t ask for.</p>
+
+
+
+<p class="wp-block-paragraph">No hope? This is probably where a reasonable person would say &#8220;nah, I&#8217;m out.&#8221; Me? I&#8217;m still here.</p>
+
+
+
+<p class="wp-block-paragraph">The nice thing is that if a mobile app is reasonably well designed and supports any kind of information feed, push notifications, etc. then it almost has to have some kind of API driving that. Sometimes the APIs are gloriously rich in the information they make available, but of course usually also completely undocumented and private.</p>
+
+
+
+<p class="wp-block-paragraph">I&#8217;ve found <a href="https://proxyman.com" target="_blank" rel="noreferrer noopener">Proxyman</a> to be an indispensable tool for what I need to do next:</p>
+
+
+
+<ol class="wp-block-list">
+<li>Intercept all web traffic from my mobile device and route it through my laptop</li>
+
+
+
+<li>Install a new certificate authority SSL certificate on my mobile device that tells it to trust my laptop as a source of truth when verifying the validity of SSL certificates for certain domains.</li>
+
+
+
+<li>Start making requests from your mobile app that loads the information I want to be in an RSS feed.</li>
+
+
+
+<li>Review the HTTP traffic being proxied through my laptop and look for a request that has a good chance of being what I want.</li>
+
+
+
+<li>Tell my laptop to intercept not only the traffic meta data but the secure SSL-encrypted traffic to the URL I care about.</li>
+
+
+
+<li>Inspect the request and response payload of the HTTPS request and learn what I need to know about how the API powering that mobile app feed operates.</li>
+</ol>
+
+
+
+<p class="wp-block-paragraph">It&#8217;s an amazing and beautiful process, and if it&#8217;s wrong I don&#8217;t want to be right.</p>
+
+
+
+<p class="wp-block-paragraph">If too many mobile app developers get wind of this kind of thing happening, they&#8217;ll start using SSL certificate pinning more, which builds in to the app the list of certificates/certificate authorities that can be trusted, removing the ability to intercept by installing a new one. So, you know, shhh. (Joking aside, secure all the things, use certificate pinning&#8230;but then also publish an RSS feed!)</p>
+
+
+
+<p class="wp-block-paragraph">Once I have your mobile app&#8217;s API information, it&#8217;s back to the mode of parsing a JSON response noted above, and generating my own RSS feed from it.</p>
+
+
+
+<details class="wp-block-details is-layout-flow wp-block-details-is-layout-flow"><summary>Further reading and resources</summary>
+<ul class="wp-block-list">
+<li><a href="https://proxyman.com/iphone-device">Capture HTTP(s) traffic from iPhone/iPad</a></li>
+
+
+
+<li><a href="https://proxyman.com/posts/2019-11-15-Can-we-bypass-ssl-pinning">Can we bypass certificate pinning?</a></li>
+</ul>
+</details>
+
+
+
+<h3 class="wp-block-heading">Escalations</h3>
+
+
+
+<p class="wp-block-paragraph">There are other escalations possible, of course. Taking unstructured data and feeding it to an LLM to generate structured data. Recording and replaying all the keystrokes, mouse moves and clicks of a web browsing session. Convincing an unsuspecting IT department worker to build a special export process without really mentioning it to anyone. Scraping data from social media platforms.</p>
+
+
+
+<p class="wp-block-paragraph">I&#8217;ve done it all, none of it is fun, and none of it should be necessary.</p>
+
+
+
+<p class="wp-block-paragraph">Publish your info in a structured, standard way.</p>
+
+
+
+<h3 class="wp-block-heading">What do I do with all of these feeds?</h3>
+
+
+
+<p class="wp-block-paragraph">Thanks for asking. I own a newspaper. We publish in print and online. Our job is to be aware of what&#8217;s happening in the community so we can distill what&#8217;s most important and useful in to reporting that benefits our readers. We have a very small staff tasked with keeping up with a lot of information. Aggregating at least some of it through RSS feeds has made a huge difference in our work.</p>
+
+
+
+<p class="wp-block-paragraph">Oh, you meant at the technical level? I have one Laravel app that is just a bunch of custom classes doing the stuff above and outputting standard RSS feeds. I have another Laravel app that <a href="https://waynecounty.info/">aggregates all of the sources of community information I can find</a>, including my custom feeds, in to a useful, free website and a corresponding useful, free daily email summary. I also read a lot of it in my own feed reader as a part of my personal news and information consumption habits.</p>
+
+
+
+<h3 class="wp-block-heading">Related writings</h3>
+
+
+
+<p class="wp-block-paragraph">I&#8217;ve written a lot of stuff elsewhere about how to unlock information from one online source or another, and the general concepts of working on a more open, interoperable, standards-based web. If you enjoyed the above, you might like these:</p>
+
+
+
+<ul class="wp-block-list">
+<li><a href="https://chrishardie.com/2018/04/rebuilding-open-web/">In rebuilding the open web, it&#8217;s up to technologists to make sure it&#8217;s also the best version of the web</a></li>
+
+
+
+<li><a href="https://chrishardie.com/2018/05/scoring-open-web/">A proposed rubric for scoring sites on their commitment to the open web</a></li>
+
+
+
+<li><a href="https://chrishardie.com/2015/09/digital-homes/">The importance of owning instead of renting our digital homes</a></li>
+
+
+
+<li><a href="https://tech.chrishardie.com/2022/rss-useful-important/">An example of why RSS is useful and important</a></li>
+
+
+
+<li><a href="https://tech.chrishardie.com/2020/personal-banking-needs-an-api/">Personal banking needs an API</a></li>
+
+
+
+<li><a href="https://chrishardie.com/2019/10/unlocking-community-events-facebook/">Unlocking community event information from Facebook</a></li>
+</ul>
+
+
+
+<p class="wp-block-paragraph"><strong>Updated March 3, 2025 at 10 a.m. Eastern</strong> to note: <a href="https://news.ycombinator.com/item?id=43241093">Hacker News discussion</a></p>
+<p>The post <a href="https://tech.chrishardie.com/2025/rss-feed-of-your-website/">How far I&#8217;ll go to make an RSS feed of your website</a> appeared first on <a href="https://tech.chrishardie.com">Chris Hardie&#039;s Tech and Software Blog</a>.</p>]]></content:encoded>
+					
+					<wfw:commentRss>https://tech.chrishardie.com/2025/rss-feed-of-your-website/feed/</wfw:commentRss>
+			<slash:comments>4</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">503</post-id>	</item>
+		<item>
+		<title>Script to remove all asterisk call agents from all phone queues</title>
+		<link>https://tech.chrishardie.com/2024/asterisk-remove-agents-from-queues/</link>
+					<comments>https://tech.chrishardie.com/2024/asterisk-remove-agents-from-queues/#comments</comments>
+		
+		<dc:creator><![CDATA[Chris Hardie]]></dc:creator>
+		<pubDate>Wed, 03 Jan 2024 16:02:02 +0000</pubDate>
+				<category><![CDATA[Hardware and Software]]></category>
+		<category><![CDATA[asterisk]]></category>
+		<category><![CDATA[FreePBX]]></category>
+		<category><![CDATA[phone]]></category>
+		<category><![CDATA[script]]></category>
+		<guid isPermaLink="false">https://tech.chrishardie.com/?p=491</guid>
+
+					<description><![CDATA[<p>At the newspaper we make heavy use of FreePBX and Asterisk to power our phone system. That includes the use of the call queue feature, where a caller interested in subscriptions or advertising or placing an obituary can be routed to the right place via a phone menu, hear an appropriate message, and then ring &#8230; <a href="https://tech.chrishardie.com/2024/asterisk-remove-agents-from-queues/" class="more-link">Continue reading <span class="screen-reader-text">Script to remove all asterisk call agents from all phone queues</span></a></p>
+<p>The post <a href="https://tech.chrishardie.com/2024/asterisk-remove-agents-from-queues/">Script to remove all asterisk call agents from all phone queues</a> appeared first on <a href="https://tech.chrishardie.com">Chris Hardie&#039;s Tech and Software Blog</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p class="wp-block-paragraph">At the newspaper we make heavy use of FreePBX and Asterisk to power our phone system. That includes the use of the call queue feature, where a caller interested in subscriptions or advertising or placing an obituary can be routed to the right place via a phone menu, hear an appropriate message, and then ring through to one of the staff members trained to help with that particular topic, or leave a voicemail in the right place if no one is available. We&#8217;re a small paper and our phone system is mostly quiet, but I have seen days where multiple calls are being handled simultaneously, and queues are very helpful.</p>
+
+
+
+<p class="wp-block-paragraph">One aspect of our setup that has taken some figuring out is having staff log in and out of the phone system so that they can be available to answer those queue calls at the right time.</p>
+
+
+
+<p class="wp-block-paragraph">Remembering to log in at the start of the day is fairly straightforward, though is still a habit all of us our developing. Remembering to log out at the end of the day is for some reason a bit more hit and miss; when my brain has decided it&#8217;s time to leave the office or stop working, for some reason logging out of the phone is frequently not top of mind, and apparently that&#8217;s often true for my coworkers as well.</p>
+
+
+
+<p class="wp-block-paragraph">It may not seem like it would be a big deal to just let folks stay logged in all the time, but it can mean the difference between a caller sitting on hold for an extra minute or two as the phone system rings the phones of folks who have left for the day, or the caller more quickly getting a useful message and the option to leave a voicemail. We could address this through more complex conditional logic in our phone system set up, but for now I&#8217;m trying to address it in a way that mostly maintains user-level control.</p>
+
+
+
+<p class="wp-block-paragraph">So, based on some other bits and pieces of scripts found on Stackoverflow and elsewhere (<a href="https://www.3cx.com/community/threads/logout-all-users-from-queue-at-night.94435/">#</a> <a href="http://www.asteriskdocs.org/en/3rd_Edition/asterisk-book-html-chunk/ACD_id289508.html">#</a>), I put together this Bash script that logs everyone out of all queues:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code"><pre class="brush: bash; title: ; notranslate">
+#!/usr/bin/bash
+
+# Remove an Asterisk agent from queues, or all agents from all queues
+
+Help()
+{
+   # Display Help
+   echo &quot;Remove Asterisk dynamic agents from queues.&quot;
+   echo
+   echo &quot;Syntax: remove_from_queue.sh &#x5B;-a|eh]&quot;
+   echo &quot;options:&quot;
+   echo &quot;a         Remove all members from all queues.&quot;
+   echo &quot;e &lt;123&gt;   Specify an extension to be removed .&quot;
+   echo &quot;h         Print this help.&quot;
+   echo
+}
+
+while getopts &quot;:ahe:&quot; option; do
+   case $option in
+      h) # display Help
+         Help
+         exit;;
+      e) # Enter a specific extension to be removed
+         member=$OPTARG;;
+      a) # set all queue members to be removed
+         all=true;;
+      \?) # Invalid option
+         echo &quot;Error: Invalid option&quot;
+         exit;;
+   esac
+done
+
+## all queues
+declare -a queues=(`asterisk -rx &quot;queue show&quot; | cut -d &quot; &quot; -f1`  )
+
+for q in &quot;${queues&#x5B;@]}&quot;
+do
+    ## all agents in queue
+    declare -a members=(`asterisk -rx &quot;queue show $q&quot; | grep &quot;/&quot; | cut -d&quot;(&quot; -f2 | cut -d&quot; &quot; -f1`)
+
+    for m in &quot;${members&#x5B;@]}&quot;
+    do
+       if &#x5B; ! -z $member ]; then
+          if &#x5B;&#x5B; $m == *&quot;$member&quot;* ]]; then
+              echo &quot;Removing member Local/$member@from-queue/n from $q&quot;
+              cmd=&quot;queue remove member Local/$member@from-queue/n from $q&quot;
+              asterisk -rx &quot;$cmd&quot;
+          fi
+       else
+         if &#x5B; &quot;$all&quot; = &quot;true&quot; ]; then
+             echo &quot;Removing member $m from $q&quot;
+              cmd=&quot;queue remove member $m from $q&quot;
+              asterisk -rx &quot;$cmd&quot;
+         fi
+       fi
+    done
+done
+</pre></div>
+
+
+<p class="wp-block-paragraph"> I run it via cron like so:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code"><pre class="brush: bash; title: ; notranslate">
+# Remove all asterisk queue agents from all queues at the end of the day
+0 18  *  *  *  root       /usr/local/bin/remove_from_queue.sh -a
+</pre></div><p>The post <a href="https://tech.chrishardie.com/2024/asterisk-remove-agents-from-queues/">Script to remove all asterisk call agents from all phone queues</a> appeared first on <a href="https://tech.chrishardie.com">Chris Hardie&#039;s Tech and Software Blog</a>.</p>]]></content:encoded>
+					
+					<wfw:commentRss>https://tech.chrishardie.com/2024/asterisk-remove-agents-from-queues/feed/</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">491</post-id>	</item>
+		<item>
+		<title>Cloudflare helper scripts for nginx and ufw</title>
+		<link>https://tech.chrishardie.com/2024/cloudflare-helper-scripts-nginx-ufw/</link>
+					<comments>https://tech.chrishardie.com/2024/cloudflare-helper-scripts-nginx-ufw/#comments</comments>
+		
+		<dc:creator><![CDATA[Chris Hardie]]></dc:creator>
+		<pubDate>Tue, 02 Jan 2024 19:28:24 +0000</pubDate>
+				<category><![CDATA[Security and Privacy]]></category>
+		<category><![CDATA[Cloudflare]]></category>
+		<category><![CDATA[fail2ban]]></category>
+		<category><![CDATA[firewall]]></category>
+		<category><![CDATA[hosting]]></category>
+		<category><![CDATA[networking]]></category>
+		<category><![CDATA[nginx]]></category>
+		<category><![CDATA[ufw]]></category>
+		<guid isPermaLink="false">https://tech.chrishardie.com/?p=484</guid>
+
+					<description><![CDATA[<p>I&#8217;ve been making more use of Cloudflare as a DNS and proxy/DoS protection service. I tend to use it by default now when I set up any kind of public-facing web application that might attract non-trivial traffic, store sensitive information, or where performance is a factor. When spinning up a new server on an infrastructure &#8230; <a href="https://tech.chrishardie.com/2024/cloudflare-helper-scripts-nginx-ufw/" class="more-link">Continue reading <span class="screen-reader-text">Cloudflare helper scripts for nginx and ufw</span></a></p>
+<p>The post <a href="https://tech.chrishardie.com/2024/cloudflare-helper-scripts-nginx-ufw/">Cloudflare helper scripts for nginx and ufw</a> appeared first on <a href="https://tech.chrishardie.com">Chris Hardie&#039;s Tech and Software Blog</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p class="wp-block-paragraph">I&#8217;ve been making more use of Cloudflare as a DNS and proxy/DoS protection service. I tend to use it by default now when I set up any kind of public-facing web application that might attract non-trivial traffic, store sensitive information, or where performance is a factor.</p>
+
+
+
+<p class="wp-block-paragraph">When spinning up a new server on an infrastructure platform like Digital Ocean, it&#8217;s almost certain that the IP address assigned to it is going to immediately see traffic from bad actors using automated attempts to find a web-based exploit. Even if you put Cloudflare in front of a web service and lock things down, connection attempts directly to the IP address will bypass their proxy and get through.</p>
+
+
+
+<p class="wp-block-paragraph">That&#8217;s where this first script comes in handy. Instead of allowing all tcp network activity to ports 80 and 443 to get through, I want to only allow traffic from known Cloudflare IP addresses. We can do this using the Ubuntu ufw firewall and Cloudflare&#8217;s published IP address blocks.</p>
+
+
+
+<p class="wp-block-paragraph">GadElKareem <a href="https://gadelkareem.com/2019/06/11/allow-cloudflare-ips-on-port-80-and-443-using-ufw/">shared a script</a> that I&#8217;ve adapted a bit to make use of ufw&#8217;s application profiles:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code"><pre class="brush: bash; title: ; notranslate">
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# lock it
+PIDFILE=&quot;/tmp/$(basename &quot;${BASH_SOURCE&#x5B;0]%.*}.pid&quot;)&quot;
+exec 200&gt;${PIDFILE}
+flock -n 200 || ( echo &quot;${BASH_SOURCE&#x5B;0]} script is already running. Aborting . .&quot; &amp;&amp; exit 1 )
+PID=$$
+echo ${PID} 1&gt;&amp;200
+
+cd &quot;$(dirname $(readlink -f &quot;${BASH_SOURCE&#x5B;0]}&quot;))&quot;
+CUR_DIR=&quot;$(pwd)&quot;
+
+wget -q https://www.cloudflare.com/ips-v4 -O /tmp/cloudflare-ips-v4
+wget -q https://www.cloudflare.com/ips-v6 -O /tmp/cloudflare-ips-v6
+
+for cfip in `cat /tmp/cloudflare-ips-v4`; do /usr/sbin/ufw allow from $cfip to any app &quot;Nginx Full&quot; comment &quot;cloudflare&quot;; done
+for cfip in `cat /tmp/cloudflare-ips-v6`; do /usr/sbin/ufw allow from $cfip to any app &quot;Nginx Full&quot; comment &quot;cloudflare&quot;; done
+</pre></div>
+
+
+<p class="wp-block-paragraph">It basically downloads known Cloudflare IPv4 and IPv6 addresses and then adds ufw rules to allow traffic from those addresses. I run this on a cron job like so:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code"><pre class="brush: bash; title: ; notranslate">
+# Refresh cloudflare IPs in ufw
+0 7 * * * /root/bin/cloudflare-only-web-ports-ufw.sh &gt;/dev/null 2&gt;&amp;1
+</pre></div>
+
+
+<p class="wp-block-paragraph">The final step is to remove any ufw rules that allow traffic through to ports 80 and 443 for any source IP. This kind of rule may or may not be in place as a part of your existing server configuration.</p>
+
+
+
+<p class="wp-block-paragraph">The end result is that any web connection attempts not from Cloudflare will not be allowed through.</p>
+
+
+
+<p class="wp-block-paragraph">A second challenge with Cloudflare is making sure anything you do with visitor IP addresses found in access logs is using the actual original visitor IP instead of the Cloudflare proxy IP. An example would be using <a href="https://github.com/fail2ban/fail2ban">fail2ban</a> to block accesses from a host that has tried too many times to gain unauthorized access to a server.</p>
+
+
+
+<p class="wp-block-paragraph">Fortunately, Cloudflare passes through the original visitor IP as a header, so we just have to make use of that in our logs. This script, originally <a href="https://github.com/ergin/nginx-cloudflare-real-ip">shared by ergin on GitHub</a>, will download the published Cloudflare IP addresses and generate an nginx-friendly configuration file that adjusts the &#8220;real IP&#8221; of the visitor for logging and other purposes:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code"><pre class="brush: plain; title: ; notranslate">
+#!/bin/bash
+
+CLOUDFLARE_FILE_PATH=/etc/nginx/conf.d/cloudflare-realips.conf
+
+echo &quot;#Cloudflare&quot; &amp;gt; $CLOUDFLARE_FILE_PATH;
+echo &quot;&quot; &amp;gt;&amp;gt; $CLOUDFLARE_FILE_PATH;
+
+echo &quot;# - IPv4&quot; &amp;gt;&amp;gt; $CLOUDFLARE_FILE_PATH;
+for i in `curl -s https://www.cloudflare.com/ips-v4/`; do
+    echo &quot;set_real_ip_from $i;&quot; &amp;gt;&amp;gt; $CLOUDFLARE_FILE_PATH;
+done
+
+echo &quot;&quot; &amp;gt;&amp;gt; $CLOUDFLARE_FILE_PATH;
+echo &quot;# - IPv6&quot; &amp;gt;&amp;gt; $CLOUDFLARE_FILE_PATH;
+for i in `curl -s https://www.cloudflare.com/ips-v6/`; do
+    echo &quot;set_real_ip_from $i;&quot; &amp;gt;&amp;gt; $CLOUDFLARE_FILE_PATH;
+done
+
+echo &quot;&quot; &amp;gt;&amp;gt; $CLOUDFLARE_FILE_PATH;
+echo &quot;real_ip_header CF-Connecting-IP;&quot; &amp;gt;&amp;gt; $CLOUDFLARE_FILE_PATH;
+
+#test configuration and reload nginx
+nginx -t &amp;amp;&amp;amp; systemctl reload nginx
+</pre></div>
+
+
+<p class="wp-block-paragraph">I run this on cron like so:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code"><pre class="brush: bash; title: ; notranslate">
+# Refresh cloudflare IPs and reload nginx
+30 4 * * * /root/bin/cloudflare-ip-whitelist-sync.sh &gt;/dev/null 2&gt;&amp;1
+</pre></div>
+
+
+<p class="wp-block-paragraph">Because the config file is output in the <code>/conf.d/</code> directory in the nginx main directory, the default nginx config will pick up its contents without further action. </p>
+
+
+
+<p class="wp-block-paragraph">Continuing with the example of using fail2ban to block unwanted traffic from abusive hosts, you can set up a set of custom Cloudflare ban/unban actions in a file like <code>/etc/fail2ban/action.d/cloudflare.conf</code>, using this version adapted from the <a href="https://github.com/fail2ban/fail2ban/blob/master/config/action.d/cloudflare.conf">original by Mike Rushton</a>:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code"><pre class="brush: bash; title: ; notranslate">
+&#x5B;Definition]
+actionstart =
+actionstop =
+actioncheck =
+
+actionban = curl -s -X POST -H &#039;X-Auth-Email: &lt;cfuser&gt;&#039; -H &#039;X-Auth-Key: &lt;cftoken&gt;&#039; \
+            -H &#039;Content-Type: application/json&#039; -d &#039;{ &quot;mode&quot;: &quot;block&quot;, &quot;configuration&quot;: { &quot;target&quot;: &quot;ip&quot;, &quot;value&quot;: &quot;&lt;ip&gt;&quot; } }&#039; \
+            https://api.cloudflare.com/client/v4/user/firewall/access_rules/rules
+
+actionunban = curl -s -o /dev/null -X DELETE -H &#039;X-Auth-Email: &lt;cfuser&gt;&#039; -H &#039;X-Auth-Key: &lt;cftoken&gt;&#039; \
+              https://api.cloudflare.com/client/v4/user/firewall/access_rules/rules/$(curl -s -X GET -H &#039;X-Auth-Email: &lt;cfuser&gt;&#039; -H &#039;X-Auth-Key: &lt;cftoken&gt;&#039; \
+              &#039;https://api.cloudflare.com/client/v4/user/firewall/access_rules/rules?mode=block&amp;configuration_target=ip&amp;configuration_value=&lt;ip&gt;&amp;page=1&amp;per_page=1&#039; | tr -d &#039;\n&#039; | cut -d&#039;&quot;&#039; -f6)
+
+&#x5B;Init]
+cftoken =
+cfuser =
+</pre></div>
+
+
+<p class="wp-block-paragraph">and then in the <code>jail.local</code> file you can set this up as the default action:</p>
+
+
+<div class="wp-block-syntaxhighlighter-code"><pre class="brush: bash; title: ; notranslate">
+cfemail=&lt;your cloudflare@email here.com&gt;
+cfapikey=&lt;your cloudflare API key here&gt;
+
+# Define CF ban action without mailing
+action_cf = cloudflare&#x5B;cfuser=&quot;%(cfemail)s&quot;, cftoken=&quot;%(cfapikey)s&quot;]
+
+# Set default action to Cloudflare ban/unban
+action = %(action_cf)s
+</pre></div>
+
+
+<p class="wp-block-paragraph">The end result is that bad actors never get past Cloudflare&#8217;s proxy protection to attempt additional foolishness directly on your server.</p>
+
+
+
+<p class="wp-block-paragraph">Thanks to all of the folks who created the original version of these scripts. If you have suggestions for improvement or your own fun Cloudflare tooling, please share!</p>
+<p>The post <a href="https://tech.chrishardie.com/2024/cloudflare-helper-scripts-nginx-ufw/">Cloudflare helper scripts for nginx and ufw</a> appeared first on <a href="https://tech.chrishardie.com">Chris Hardie&#039;s Tech and Software Blog</a>.</p>]]></content:encoded>
+					
+					<wfw:commentRss>https://tech.chrishardie.com/2024/cloudflare-helper-scripts-nginx-ufw/feed/</wfw:commentRss>
+			<slash:comments>2</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">484</post-id>	</item>
+	</channel>
+</rss>

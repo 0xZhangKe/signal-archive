@@ -1,0 +1,411 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Philosophical Hacker</title>
+    <link>https://www.philosophicalhacker.com/</link>
+    <description>Recent content on Philosophical Hacker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 26 Apr 2026 07:01:12 -0500</lastBuildDate>
+    
+        <atom:link href="https://www.philosophicalhacker.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Anthropic&#39;s Argument for Mythos SWE-bench &lt;br&gt;improvement contains a fatal error</title>
+      <link>https://www.philosophicalhacker.com/post/anthropic-error/</link>
+      <pubDate>Sun, 26 Apr 2026 07:01:12 -0500</pubDate>
+      
+      <guid>https://www.philosophicalhacker.com/post/anthropic-error/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://www-cdn.anthropic.com/08ab9158070959f88f296514c21b7facce6f52bc.pdf&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;Mythos&amp;rsquo; system card&lt;/a&gt; contains the following graph to support its argument that Mythos performs better on SWE-bench:&lt;/p&gt;
+&lt;p&gt;&lt;img  src=&#34;./swebench.png&#34;
+        alt/&gt;&lt;/p&gt;
+&lt;p&gt;Anthropic and others are worried LLMs are memorizing SWE-bench, so they asked an LLM to estimate the probability that a solution is memorized. Next, they calculated the pass rate if they only included solutions an LLM judged to be memorized with less than 5% confidence, 10% confidence, and so on.&lt;/p&gt;
+&lt;p&gt;Picking a point on the graph for example: if they include ~400 out of 500 solutions because an LLM has judged them as memorized with a probability &amp;lt;= 60%, Mythos&amp;rsquo; success rate is ~92% while Opus 4.6&amp;rsquo;s is ~82%. This is a hard graph. Read the full caption&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt; if you need to. Take your time. I stared at it for a long time.&lt;/p&gt;
+&lt;p&gt;After presenting this graph, they conclude:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Our detectors are imperfect, but this result is robust to the choice of threshold and
+consistent with Claude Mythos Preview’s gains on internal benchmarks not present in any
+training corpus. We conclude that memorization does not explain its SWE-bench
+improvements.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Gains on internal benchmarks count for something, but does an imperfect memorization detector&amp;rsquo;s consistent judgment that Mythos has genuine gains on SWE-bench support their claim at all?&lt;/p&gt;
+&lt;p&gt;It doesn&amp;rsquo;t. It is perfectly possible to have an imperfect cheating detector consistently misjudge a model whose gains are entirely explained by cheating as making genuine gains. Here&amp;rsquo;s a short python program proving it.&lt;/p&gt;
+&lt;p&gt;Let&amp;rsquo;s start by modeling an LLM like Opus 4.6 that gets the right answer 80% of the time and has an equally likely chance of cheating between 5% and 90%. These bounds are chosen here because according to the above graph, it looks like LLMs don&amp;rsquo;t like giving probability estimates below 5% and above 90%.&lt;/p&gt;
+&lt;p&gt;We&amp;rsquo;ll do this by simply generating an array of pairs where the first item has an 80% of being 1 to represent a successfully solved problem and the second item is a probability the LLM would give for the solution being memorized:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;opus_4_6 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    (&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, random&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;uniform(&lt;span style=&#34;color:#ae81ff&#34;&gt;.05&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;.9&lt;/span&gt;))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; random&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;random() &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0.8&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, random&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;uniform(&lt;span style=&#34;color:#ae81ff&#34;&gt;.05&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;.9&lt;/span&gt;))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;500&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Next, we model a cheating Mythos whose 10% performance gain is &amp;mdash; by hypothesis &amp;mdash; entirely explained by cheating. In this array, half the time &lt;code&gt;opus_4_6&lt;/code&gt; got the answer wrong, we give &lt;code&gt;mythos&lt;/code&gt; a 50% chance of getting the right answer, and when it does, we increment the probability of cheating with a random value somewhere between 10% and 65% with a cap at 90%. (again, since in Anthropic&amp;rsquo;s data we see LLMs don&amp;rsquo;t like to give estimates above ~90%). This is meant to model how Anthropic&amp;rsquo;s cheating detection is imprefect. It&amp;rsquo;s also assuming that the probability of memorization is strictly higher in Mythos. This is reasonable given its a bigger model w/ more training data.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mythos &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    (&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, min(&lt;span style=&#34;color:#ae81ff&#34;&gt;.9&lt;/span&gt;, og[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; random&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;uniform(&lt;span style=&#34;color:#ae81ff&#34;&gt;.1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;.65&lt;/span&gt;)))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; random&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;random() &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0.5&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; og[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; og &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; og &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; opus_4_6
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If you graph this data, you can get something that looks very similar to the graph above:&lt;/p&gt;
+&lt;p&gt;&lt;img  src=&#34;output.png&#34;
+        alt/&gt;&lt;/p&gt;
+&lt;p&gt;Obviously, a perfect cheating detector wouldn&amp;rsquo;t have this problem, but Anthropic admits their detection isn&amp;rsquo;t perfect. Until we quantify the degree of their detector&amp;rsquo;s imperfection, citing it as evidence of Mythos&amp;rsquo; performance gains should hold zero weight.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://gist.github.com/kmdupr33/c61593d040234d50533a80d0ed7507a4&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;Here&amp;rsquo;s&lt;/a&gt; all the code if you want to try it yourself. h/t to Claude for figuring out the visualization code and a few other things. h/t to Antrhopic for making Claude.&lt;/p&gt;
+&lt;section class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;The full caption is on page 186 of &lt;a href=&#34;https://www-cdn.anthropic.com/08ab9158070959f88f296514c21b7facce6f52bc.pdf&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;the system card&lt;/a&gt;&amp;#160;&lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>LLMs and the Russellian Inversion</title>
+      <link>https://www.philosophicalhacker.com/post/llms-russellian-inversion/</link>
+      <pubDate>Sat, 23 Aug 2025 22:38:44 -0400</pubDate>
+      
+      <guid>https://www.philosophicalhacker.com/post/llms-russellian-inversion/</guid>
+      <description>&lt;p&gt;Bertrand Russell, the 20th century philosohper and mathematician, once said:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The fundamental cause of the trouble is that in the modern world the stupid are cocksure while the intelligent are full of doubt.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;LLMs are introducing something like this dynamic into programming. The programming version of the statement is:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The fundamental cause of the trouble is that in the modern world the less experienced programmers are writing much more code than the more experienced ones.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I&amp;rsquo;m a part of the problem. I&amp;rsquo;ve only been programming professionally for a decade and I&amp;rsquo;m writing a lot more code with LLMs. Future me will hate the AI-slop that I&amp;rsquo;m slinging.&lt;/p&gt;
+&lt;p&gt;Until I get future me&amp;rsquo;s wisdom, all I can do is pass on what I&amp;rsquo;ve learned so far. We have learn to say &amp;ldquo;no&amp;rdquo; to some of the code LLMs try to sell us on.&lt;/p&gt;
+&lt;p&gt;No. We don&amp;rsquo;t need 5k lines of code &lt;a href=&#34;https://www.philosophicalhacker.com/post/libraries-llms/&#34;&gt;solving a problem better handled by a library&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;No. We don&amp;rsquo;t need a third implementation of the same-ish React component.&lt;/p&gt;
+&lt;p&gt;No. We don&amp;rsquo;t need that tautological test.&lt;/p&gt;
+&lt;p&gt;No. We don&amp;rsquo;t need 1000 lines of test code with 0 abstraction.&lt;/p&gt;
+&lt;p&gt;No. We don&amp;rsquo;t need this code stuffed into this already massive object/function.&lt;/p&gt;
+&lt;p&gt;No. We don&amp;rsquo;t need domain logic inside our http route handler.&lt;/p&gt;
+&lt;p&gt;Saying &amp;ldquo;no&amp;rdquo; is slower than hitting TAB. When we say &amp;ldquo;no,&amp;rdquo; we&amp;rsquo;ll write less code, but we have do it anyway. If we don&amp;rsquo;t learn how to say &amp;ldquo;no,&amp;rdquo; we&amp;rsquo;ll wind up with a code base so voluminous that we won&amp;rsquo;t be able to make sense of it, even with the help of LLMs.&lt;/p&gt;
+&lt;p&gt;Many code bases get to the point where it&amp;rsquo;s so difficult to make progress that feature work stops and teams work on tidying, but if LLMs get much better than us at navigating a messy codebase, when our mess maxes out their capacity, no one &amp;mdash; human or otherwise &amp;mdash; will be able to save the codebase.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Libraries are under-used. LLMs make this problem worse.</title>
+      <link>https://www.philosophicalhacker.com/post/libraries-llms/</link>
+      <pubDate>Wed, 30 Jul 2025 23:31:50 -0500</pubDate>
+      
+      <guid>https://www.philosophicalhacker.com/post/libraries-llms/</guid>
+      <description>&lt;p&gt;Libraries are under-used. Why? Briefly:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Writing code is more fun than reading documentation.&lt;/li&gt;
+&lt;li&gt;We tend to understimate the complexity of problems we don&amp;rsquo;t understand well, so we undervalue libraries that solve these poorly understood problems.&lt;/li&gt;
+&lt;li&gt;Perverse incentives: libraries compete with big internal engineering projects that look good in a promo packet.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;LLMs make this problem worse. Why? Less briefly:&lt;/p&gt;
+&lt;p&gt;Vibe coding is more fun than reading documentation. Shit, vibe-coding can be more fun than ordinary coding. You write a small prompt, get a ton of output, and get to revel in how long writing all of that code manually would have taken. You get to feel like we&amp;rsquo;re on the cusp of a new era.&lt;/p&gt;
+&lt;p&gt;The problem is that the LLM&amp;rsquo;s output just isn&amp;rsquo;t as good as a battle-tested library. As we all know, LLMs don&amp;rsquo;t follow our prompts perfectly, but even if they did, our prompts comes from our niave view of our problems. Niave prompt in, niave code out.&lt;/p&gt;
+&lt;p&gt;By contrast, library creators know the problem better than us. They have better prompts and the experience to shape an LLM&amp;rsquo;s output into solid library code. For many complex problems, we should use their library, not an LLM directly.&lt;/p&gt;
+&lt;p&gt;Perverse incentives push us the wrong way here too. An engineer who uses an LLM to generate thousands of lines of code is a innovative leader who will help the company win in the new age of AI. &amp;ldquo;Promote them!,&amp;rdquo; the managers say. I&amp;rsquo;m not saying that engineers consciously choose to use LLMs over libraries because of the hype. Just saying the incentives are there.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Generated Union Types from Go Structs with Static Analysis</title>
+      <link>https://www.philosophicalhacker.com/talk/union-types-golang/</link>
+      <pubDate>Wed, 23 Jul 2025 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.philosophicalhacker.com/talk/union-types-golang/</guid>
+      <description>&lt;iframe width=&#34;560&#34; height=&#34;315&#34; src=&#34;https://www.youtube.com/embed/RMVdhkolpV0?si=F3y8A5GmkpaaxxTx&#34; title=&#34;YouTube video player&#34; frameborder=&#34;0&#34; allow=&#34;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&#34; referrerpolicy=&#34;strict-origin-when-cross-origin&#34; allowfullscreen&gt;&lt;/iframe&gt;
+&lt;iframe src=&#34;https://www.slideshare.net/slideshow/embed_code/key/hbvucmRbpVI30Z?hostedIn=slideshare&amp;page=upload&#34; width=&#34;476&#34; height=&#34;400&#34; frameborder=&#34;0&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; scrolling=&#34;no&#34;&gt;&lt;/iframe&gt;</description>
+    </item>
+    
+    <item>
+      <title>LLM Proofing Our Takehome Challenge</title>
+      <link>https://www.philosophicalhacker.com/post/llm-proofing-our-takehome/</link>
+      <pubDate>Fri, 20 Jun 2025 15:16:06 -0500</pubDate>
+      
+      <guid>https://www.philosophicalhacker.com/post/llm-proofing-our-takehome/</guid>
+      <description>&lt;p&gt;Our original idea for our coding challenge was to ask candidates to build a tic-tac-toe game in React with a few curve balls thrown in around making the solution more general for larger game boards and play modes. We scrapped that idea when we discovered ChatGPT could trivially do this.&lt;/p&gt;
+&lt;p&gt;Here are some things we did to &amp;ldquo;LLM-proof&amp;rdquo; our new challenge.&lt;/p&gt;
+&lt;p&gt;But first, why the scare quotes around &amp;ldquo;LLM-proof.&amp;rdquo; Because I&amp;rsquo;m sure someone could get an LLM to solve the new challenge, but the quality of prompting that would be necessary to pull this off would be an indication of a strong engineer. The point of an interview process is to find strong engineers, not to find ones who don&amp;rsquo;t use LLMs.&lt;/p&gt;
+&lt;p&gt;First, we focused the challenge on a product-specific feature instead of a toy problem. Products need to be differentiated to exist at all, so starting the challenge w/ a unique product feature already sets us up well for finding a task that&amp;rsquo;s different from what was in the LLM&amp;rsquo;s training dataset.&lt;/p&gt;
+&lt;p&gt;Second, we made abstraction and good design a core part of the challenge. Again, this is something that LLMs aren&amp;rsquo;t particularly great at. This shouldn&amp;rsquo;t be surprising since most code that LLMs are trained on is a mess.&lt;/p&gt;
+&lt;p&gt;Third, we asked candidates to post a 30 minute video of them solving the challenge. This helped us get a sense of how much they were leaning on an LLM while they were solving the challenge. If it looked like they didn&amp;rsquo;t understand basic language concepts, we didn&amp;rsquo;t move forward with them.&lt;/p&gt;
+&lt;p&gt;Finally, we playtested the challenge with LLM assistance. The LLM was able to come up with a basic implementation with one or two prompts. However, trying to get the LLM to refactor its code to be more flexible was a lot harder. We gave up after 90 minutes of trying.&lt;/p&gt;
+&lt;p&gt;Without giving away too much of the challenge, all we wanted was the LLM to introduce a new Typescript inteface that would DRY up the React code it generated and enable additional implementations of the interface. I couldn&amp;rsquo;t get ChatGPT 4o to do it.&lt;/p&gt;
+&lt;p&gt;If some LLM whisperer could get an LLM make the refactor, great. Welcome to the team, but for the dozens of solutions seen since implementing the new challenge, the hires we&amp;rsquo;ve made wrote the solution the old fashioned way.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Value-based pricing can be a trap for early startups</title>
+      <link>https://www.philosophicalhacker.com/post/value-based-pricing-is-a-trap/</link>
+      <pubDate>Thu, 03 Oct 2024 11:10:12 -0500</pubDate>
+      
+      <guid>https://www.philosophicalhacker.com/post/value-based-pricing-is-a-trap/</guid>
+      <description>&lt;p&gt;Founders are often told to price based on the value they are providing to their customers. For example, if you&amp;rsquo;re saving your customer 1 million dollars, charge a 10th of that. &lt;a href=&#34;https://www.ycombinator.com/library/6h-startup-pricing-101&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;Here&amp;rsquo;s&lt;/a&gt; Kevin Hale at YC advocating for this approach:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;In startups, and almost pretty consistently across all businesses, everyone will tell you, you should strive for value-based pricing. It allows you to charge a whole lot more. It allows you to manipulate this incentive to buy.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;If we&amp;rsquo;re just talking about the short-term, this is good advice. Over the long-term, the situation is more complicated.&lt;/p&gt;
+&lt;p&gt;First, if you don&amp;rsquo;t have strong network effects, high switching costs, or economies of scale, then the increased margin you get from value-based pricing is &amp;mdash; to paraphase Jeff Bezos &amp;mdash; someone else&amp;rsquo;s opportunity to disrupt you. A high-margin business can get fat and slow and unable to muster the will to do the deep cuts to compete with an upstart on price.&lt;/p&gt;
+&lt;p&gt;Second, the relative power of your economies of scale, network effects, and switching costs are a function of your market share. When you use value-based pricing early on in your startup&amp;rsquo;s journey, you&amp;rsquo;re hamstringing your growth and your ability to gain these important sources of sustainable competitive advantage. All other things equal, a more savy startup that sticks to cost+ pricing to penetrate the market more quickly will get these competitive advantages faster and win.&lt;/p&gt;
+&lt;p&gt;Now, some caveats.&lt;/p&gt;
+&lt;p&gt;Investors like to see big margins, and you may need to prove that you can sustain high margins in a subset of your deals to make them happy and raise another round, but applying value-based pricing to every deal is overkill.&lt;/p&gt;
+&lt;p&gt;Moreover,you may be selling a very price-inelastic product in which case higher prices won&amp;rsquo;t meaningfully slow your growth rate. Value-based pricing is fine here, but unless your first to market &amp;mdash; something that is increasingly difficult to do after decades of VC being dumped into software &amp;mdash; this probably isn&amp;rsquo;t you.&lt;/p&gt;
+&lt;p&gt;But what the hell do I know? I&amp;rsquo;m currently in the process of winding down a failed startup, so I might be full of shit. Here&amp;rsquo;s a more certain truth: Josh Shroyer, our founding engineer is a hell of a catch, and you should hire him if you can. I wrote about why he&amp;rsquo;s great &lt;a href=&#34;https://www.linkedin.com/feed/update/urn:li:activity:7247249132187172866/&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;here&lt;/a&gt;. Feel free to email me with any questions (&lt;a href=&#34;mailto:kmatthew.dupree@gmail.com&#34;&gt;kmatthew.dupree@gmail.com&lt;/a&gt;) or contact &lt;a href=&#34;https://www.linkedin.com/in/jshroyer/&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;him on LinkedIn&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Reading Sqlite Schema Tables the Hard Way</title>
+      <link>https://www.philosophicalhacker.com/post/reading-sqlite-schema-tables-the-hard-way/</link>
+      <pubDate>Wed, 25 Sep 2024 14:57:58 -0500</pubDate>
+      
+      <guid>https://www.philosophicalhacker.com/post/reading-sqlite-schema-tables-the-hard-way/</guid>
+      <description>&lt;p&gt;Parsing a Sqlite database file is a nice way to brush up on data structures, bit manipulation, and recursion. I know this because I recently implemented the &lt;code&gt;read_schema_tables&lt;/code&gt; function below such that the following test passes:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; sqlite3
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;test_read_table_names&lt;/span&gt;(db_file):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    con &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; sqlite3&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;connect(db_file)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;assert&lt;/span&gt; list(con&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;execute(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;SELECT * FROM sqlite_schema;&amp;#34;&lt;/span&gt;)) &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; list(read_schema_tables(db_file))
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;read_schema_tables&lt;/code&gt; doesn&amp;rsquo;t use the &lt;code&gt;sqlite3&lt;/code&gt; python package. That&amp;rsquo;d make for a trivial test case and would be too easy. For comp sci fun, we have to do it the hard way.&lt;/p&gt;
+&lt;h2 id=&#34;recursing-through-sqlite-btree-pages&#34;&gt;Recursing through Sqlite btree pages&lt;/h2&gt;
+&lt;p&gt;Sqlite stores data in pages. These pages are arranged in a generalization of a binary tree called a &amp;ldquo;btree&amp;rdquo; where nodes can have more than 2 children. The docs call non-leaf pages &amp;ldquo;internal pages.&amp;rdquo; All pages have cells, but cells of internal pages merely point to child pages. The cells of leaf pages, on the other hand, actually contain data.&lt;/p&gt;
+&lt;p&gt;Sometimes the tables from &lt;code&gt;sqlite_schema&lt;/code&gt; fit on a single page. Sometimes they don&amp;rsquo;t. My calling code shouldn&amp;rsquo;t care:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Sqlitedatabase&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;@property&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;table_names&lt;/span&gt;(self):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; Page&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;from_number(
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;file, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#75715e&#34;&gt;# &amp;lt;-- page # ...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        )&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;leaf_cells
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;An abstract class gives us a nice way of&amp;hellip;well&amp;hellip;abstracting this:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Page&lt;/span&gt;(ABC):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;@property&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;@abstractmethod&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;leaf_cells&lt;/span&gt;(self):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#f92672&#34;&gt;...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Internal pages merely get child pages and recursively call &lt;code&gt;Page.leaf_cells&lt;/code&gt; on their children:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;InternalPage&lt;/span&gt;(Page):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;@property&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;leaf_cells&lt;/span&gt;(self):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; itertools&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;chain&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;from_iterable(
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            [
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get_page(page_num)&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;leaf_cells
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; page_num &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;page_nums
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            ]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        )
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Leaf pages, on the other hand, actually have to read data:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;LeafPage&lt;/span&gt;(Page):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;@property&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;leaf_cells&lt;/span&gt;(self):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        result &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; cell_idx &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;num_cells):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;_seek_to_cell_contents(cell_idx)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#75715e&#34;&gt;# Skip # of bytes for now. We arent handling page overflow&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            _ &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;_varintreader&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;read()                
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#75715e&#34;&gt;# Skip the rowid for now&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            _ &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;_varintreader&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;read()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            header_size &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;_varintreader&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;read()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            record &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#75715e&#34;&gt;# subtract 1 because header_size is the number of bytes in the header including a size byte&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; type &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;_read_col_types(header_size &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                record&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;_read_col(type))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            result&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(tuple(record))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; result
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Up until this point, reading data from the Sqlite file is relatively straight-forward. There are some unexpected indirections and pointers to pointers, but it can all be handled by carefully reading the spec and seeking around the file. Reading table data, however, requires us to parse variable length integers called &amp;ldquo;varints&amp;rdquo; (as indicated by the above calls to &lt;code&gt;self._varintreader.read()&lt;/code&gt;)&lt;/p&gt;
+&lt;h2 id=&#34;parsing-sqlite-varints&#34;&gt;Parsing Sqlite varints&lt;/h2&gt;
+&lt;p&gt;Varints are a clever way of saving space in the database. Here are the docs on how they work:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;A varint is between 1 and 9 bytes in length. The varint consists of either zero or more bytes which have the high-order bit set followed by a single byte with the high-order bit clear, or nine bytes, whichever is shorter. The lower seven bits of each of the first eight bytes and all 8 bits of the ninth byte are used to reconstruct the 64-bit twos-complement integer.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Here&amp;rsquo;s an example test case:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;test_read_varint_reads_128&lt;/span&gt;():
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;assert&lt;/span&gt; read_varint(to_int_list(&lt;span style=&#34;color:#ae81ff&#34;&gt;0b1000_0001_0000_0000&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;to_bytes(length&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;))) &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;128&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;128 can&amp;rsquo;t fit in a single byte varint because the first bit is reserved for indicating that there is another byte whose bits make up the integer. So, to say &amp;ldquo;128&amp;rdquo; in varint, we have&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;a single byte with a continuation bit set and another bit set at the end of the byte which maps to 2^7 (even though its the 8th bit in the byte string)&lt;/li&gt;
+&lt;li&gt;a byte with the continuation bit clear followed by 7 0s&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Since we don&amp;rsquo;t want to assume the Sqlite database can fit in memory, we can create a generator function that reads through the file byte by byte:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;byte_by_byte&lt;/span&gt;(file: BufferedReader):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    byte &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; file&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;read(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; byte:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;yield&lt;/span&gt; byte
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        byte &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; file&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;read(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;We can iterate over that generator until we reach a byte without a continuation bit set:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;get_varint_bytes&lt;/span&gt;(bytes: Generator) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; List[int]:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    result_bytes &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; byte &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; bytes:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        byte_as_int &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; int&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;from_bytes(byte)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        result_bytes&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(byte_as_int)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; byte_as_int &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0b1000_0000&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; result_bytes
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If we have a list of bytes (as ints) that make up our varint, then converting it to a number can be done like this:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;read_varint&lt;/span&gt;(bytes: List[int]) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; int:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    num &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i, byte &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; enumerate(bytes):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#75715e&#34;&gt;# clear continuation bit if needed&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        byte &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; byte &lt;span style=&#34;color:#f92672&#34;&gt;^&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0b1000_0000&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; len(bytes) &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; byte 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#75715e&#34;&gt;# shift bits to the correct position&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        byte &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; byte &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;7&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; (len(bytes) &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        num &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; byte &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; num
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; num
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;I&amp;rsquo;ve ommitted a bunch of relatively uninteresting code here, but my working implementation was less than 500 LoC including tests. Its a fun exercise. Try it. You don&amp;rsquo;t need anyting fancy like &lt;a href=&#34;https://codecrafters.io/&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;Code Crafters&lt;/a&gt; to do this, and writing your own test harness can be a plus for getting deep on your test framework.&lt;/p&gt;
+&lt;h2 id=&#34;appendix-a-how-does-openais-o1-fare-at-this-task&#34;&gt;Appendix A: How does OpenAI&amp;rsquo;s o1 fare at this task?&lt;/h2&gt;
+&lt;p&gt;o1 produced code that looked reasonable, but didn&amp;rsquo;t work initially. Here was the initial prompt:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;give me a script that’ll return the result of executing “SELECT * FROM sqlite_master;” without using the sqlite3 package&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Running the initial code gave me the following output:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mattdupree@matts-air sqlite_python % pipenv run python ai_main.py
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Unsupported page type: &lt;span style=&#34;color:#ae81ff&#34;&gt;83&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;type | name | tbl_name | rootpage | sql
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Then I asked it to fix the bug. Here&amp;rsquo;s its explanation for the bug:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;I&amp;rsquo;m sorry about the error you&amp;rsquo;re encountering. The issue arises because the script doesn&amp;rsquo;t account for the 100-byte database header in SQLite database files. SQLite files begin with a 100-byte header, and the actual page data starts immediately after this header.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The new code gave the following output:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mattdupree@matts-air sqlite_python % pipenv run python ai_main.py
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;type | name | tbl_name | rootpage | sql
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; | None |  |  |  | b&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;\x00&amp;#39;&lt;/span&gt; | b&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt; | b&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt; |  |  | b&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt; |  | b&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt; |  |  | b&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt; |  | b&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt; |  | b&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt; | b&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt; | b&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt; |  | b&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt; |  |  |  | b&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt; | b&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt; |  | None | b&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt; | b&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt; | None | None | None | None | b&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt; |  | None | b&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt; | b&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt; | b&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt; | b&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt; | b&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt; | b&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt; |  | b&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt; | b&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt; | b&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt; |  | b&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt; | b&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt; | b&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt; |  | None | None | None | None | None | None | None | None | None | None | None | None | None | None | None | None | None | None | None | None | None | None | None | None
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;After an hour or so with the debuggger, I found two errors that enabled the script to work for files where the sqlite_schema tables existed on a leaf page:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;         for ptr in cell_pointers:
+             cell_offset = ptr
+-            payload_size, offset = read_varint(page, cell_offset)
++            payload_size, offset = read_varint(page, cell_offset - 100)
+             cell_offset = offset
+             rowid, offset = read_varint(page, cell_offset)
+             cell_offset = offset
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Here the code doesn&amp;rsquo;t account for that fact that in cases where you&amp;rsquo;re parsing a leaf page that happens to be the first page the page&amp;rsquo;s cell pointers are relative to the start of the file, not the start of the page data. I made this same mistake when coding manually. Subtracting 100 happened to work here since the database header is 100 bytes long.&lt;/p&gt;
+&lt;p&gt;Here&amp;rsquo;s the next bug fix:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt; 
+             header_start = cell_offset
+             types = []
+-            while cell_offset &amp;lt; header_start + header_size_varint:
++            while cell_offset &amp;lt; header_start + header_size_varint - 1:
+                 serial_type, offset = read_varint(page, cell_offset)
+                 types.append(serial_type)
+                 cell_offset = offset
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This is an off-by-one error. The code doesn&amp;rsquo;t account for the fact that the header size varint &amp;ldquo;is the size of the header in bytes including the size varint itself.&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;Running the AI genreated script on a file where the sqlite_schema table is spread across multiple pages didn&amp;rsquo;t work:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mattdupree@matts-air sqlite_python % pipenv run python ai_main.py
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Page number &lt;span style=&#34;color:#ae81ff&#34;&gt;987407&lt;/span&gt; is out of range.
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Page number &lt;span style=&#34;color:#ae81ff&#34;&gt;987407&lt;/span&gt; is out of range.
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Unsupported page type: &lt;span style=&#34;color:#ae81ff&#34;&gt;50&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;No entries found in sqlite_master.
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;I couldn&amp;rsquo;t bring myself to track down the bug within &lt;a href=&#34;https://gist.github.com/kmdupr33/27c1232cbb7e580f44098b33f27a620a&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;the AI-generated yucky code&lt;/a&gt;. I told ChatGPT to rewrite the code so that it was more readable. I generated broken code again.&lt;/p&gt;
+&lt;h2 id=&#34;appendix-b-hire-josh&#34;&gt;Appendix B: Hire Josh&lt;/h2&gt;
+&lt;p&gt;While I have your attention, I&amp;rsquo;m winding down a startup I&amp;rsquo;ve been working on, which means that Josh, an awesome engineer, person, and friend &amp;ndash; is on the market. I met Josh 8 years ago while working at another startup. It was immediately clear to me that he was a brilliant engineer. Software was a craft that he cared deeply about and he studied with a fervor that I&amp;rsquo;ve haven&amp;rsquo;t seen in anyone else in my decade long career.&lt;/p&gt;
+&lt;p&gt;I wrote more about him &lt;a href=&#34;https://www.linkedin.com/posts/k-matthew-dupree-44672178_opentowork-activity-7247249132187172866-DV5D?utm_source=share&amp;amp;utm_medium=member_desktop&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;here&lt;/a&gt;. If you have any questions about him, feel free to email me at &lt;a href=&#34;mailto:kmatthew.dupree@gmail.com&#34;&gt;kmatthew.dupree@gmail.com&lt;/a&gt;. If you&amp;rsquo;d like to contact him directly, here&amp;rsquo;s &lt;a href=&#34;https://www.linkedin.com/in/jshroyer/?lipi=urn%3Ali%3Apage%3Ad_flagship3_detail_base%3BH%2BUA4AVIRz6P2RlJBEjsFA%3D%3D&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;his LinkedIn&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Which developers care most about security?</title>
+      <link>https://www.philosophicalhacker.com/post/which-devs-security/</link>
+      <pubDate>Tue, 06 Aug 2024 09:35:59 -0500</pubDate>
+      
+      <guid>https://www.philosophicalhacker.com/post/which-devs-security/</guid>
+      <description>&lt;p&gt;We’re thinking about building a product for developers that enables them to build applications that operate on encrypted data via homomorphic encryption. We think developers have seen enough data leaks to want a product like this, but we’re worried we’re wrong.&lt;/p&gt;
+&lt;p&gt;Even if we’re right, we’re worried about finding specific devs who can be early adopters. Where do these devs live? What languages do they use? What kind of companies do they work for?&lt;/p&gt;
+&lt;p&gt;To assuage these worries, we analyzed data from ~6000 Github profiles listed in a &lt;a href=&#34;https://appleprivacyletter.com/&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;2021 open letter to Apple&lt;/a&gt; expressing concern over their proposed content scanning technology &lt;a href=&#34;https://www.wired.com/story/apple-csam-scanning-heat-initiative-letter/&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;they nearly introduced to iCloud&lt;/a&gt;. We also ran &lt;a href=&#34;https://x.com/philosohacker/status/1819060102906720455&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;a promoted Twitter poll&lt;/a&gt; with 39 responses.&lt;/p&gt;
+&lt;p&gt;Here are our results.&lt;/p&gt;
+&lt;h2 id=&#34;do-b2c-devs-care-more-about-privacy-than-b2b-ones&#34;&gt;Do B2C devs care more about privacy than B2B ones?&lt;/h2&gt;
+&lt;blockquote class=&#34;twitter-tweet&#34;&gt;&lt;p lang=&#34;en&#34; dir=&#34;ltr&#34;&gt;Trying to get a sense of developer attitudes about data privacy. Please pick the option that best fills in the blanks in the sentence below:  &lt;br&gt;&lt;br&gt;I am building a (B2B | B2C) product and am (happy | unhappy) with our privacy practices.  &lt;br&gt;&lt;br&gt;e.g., pick choice 1 if you&amp;#39;re working on a…&lt;/p&gt;&amp;mdash; Matt Dupree (@philosohacker) &lt;a href=&#34;https://twitter.com/philosohacker/status/1819060102906720455?ref_src=twsrc%5Etfw&#34;&gt;August 1, 2024&lt;/a&gt;&lt;/blockquote&gt;
+&lt;script async src=&#34;https://platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;
+
+
+&lt;p&gt;B2C devs seem unhappier about their company’s privacy practices than B2B devs. Is the difference statistically significant? The p-value, according to R’s prop.test, function is &lt;code&gt;0.05417&lt;/code&gt;&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;. Good enough for me.&lt;/p&gt;
+&lt;h2 id=&#34;where-do-privacy-conscious-devs-tend-to-live&#34;&gt;Where do privacy-conscious devs tend to live?&lt;/h2&gt;
+&lt;p&gt;&lt;img  src=&#34;./where.webp&#34;
+        alt/&gt;&lt;/p&gt;
+&lt;p&gt;Most of the devs who signed the letter are in the USA. Good. We are too.&lt;/p&gt;
+&lt;h2 id=&#34;what-languages-do-privacy-conscious-devs-tend-to-use&#34;&gt;What languages do privacy-conscious devs tend to use?&lt;/h2&gt;
+&lt;p&gt;&lt;img  src=&#34;./language.webp&#34;
+        alt/&gt;&lt;/p&gt;
+&lt;p&gt;“Usage Count” on the x-axis here is 10s of trillions of bytes written in the programming language across the public repositories of all the users who signed the letter. Some signatories had no public repositories. Some didn’t write as much code. We think they are appropriately penalized in this measure and are comfortable saying, for example, that we’re better off starting with C(++), Python, and JS devs than Rust and Scala devs.&lt;/p&gt;
+&lt;h2 id=&#34;data-analysis-code&#34;&gt;Data analysis code&lt;/h2&gt;
+&lt;p&gt;I grabbed the list of Github profiles by executing a little JS&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt; on the Apple open letter website and pasting the result into &lt;a href=&#34;https://gist.github.com/kmdupr33/8219a0e54d0907821b378495564e0ada#file-appleprivacyopenlettersignatories-json&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;a json file&lt;/a&gt;. &lt;a href=&#34;https://gist.github.com/kmdupr33/8219a0e54d0907821b378495564e0ada#file-index-js&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;Here’s&lt;/a&gt; the node code written to hit the Github API, and &lt;a href=&#34;https://chatgpt.com/share/80277926-c921-46ef-a267-d34962e21d69&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;here’s&lt;/a&gt; the ChatGPT convo that generated python and data vis code. The code looks reasonable to me, but happy to hear critiques of the analysis and code given that I’ve been a CEO instead of a engineer/data practitioner for a couple years now and given that these days I can barely turn on a computer without asking my CTO for help.&lt;/p&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;Based on these results, seems like we’d be well served by start talking with C(++), JS, and Python devs at B2C companies.&lt;/p&gt;
+&lt;p&gt;If you’re a dev unsatisfied with your company’s privacy practices or if you’re founder looking to assuage security concerns of prospects by getting a SOC2 report, shoot me an email. I’d love to hear how you think about privacy and security. This is not a veiled attempt at starting a sales conversation. We have nothing to sell. We’re just trying to understand how founders and devs think about the problem.&lt;/p&gt;
+&lt;section class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Don’t be fooled by the fact that the same number of people are unhappy with the privacy practices across B2B vs. B2C. What matters is the proportion. The function call forces us to consider this: prop.test(c(16, 3), c(26, 13))&amp;#160;&lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:2&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Here it is: &lt;code&gt;Array.from($$(&#39;#individuals &amp;gt; li &amp;gt; a&#39;)).map(a =&amp;gt; a.href)&lt;/code&gt;&amp;#160;&lt;a href=&#34;#fnref:2&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>We Need Another Code Copilot</title>
+      <link>https://www.philosophicalhacker.com/post/we-need-another-copilot/</link>
+      <pubDate>Fri, 21 Jun 2024 10:01:48 -0500</pubDate>
+      
+      <guid>https://www.philosophicalhacker.com/post/we-need-another-copilot/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;ve been an programmer for a decade, and I can&amp;rsquo;t believe how much wasteful code we write. Even more unbelievably, many of us &amp;ldquo;justify&amp;rdquo; our waste with vague appeals to &amp;ldquo;clean code&amp;rdquo; or &amp;ldquo;best practices.&amp;rdquo; I used to do this all the time.&lt;/p&gt;
+&lt;p&gt;These vague appeals — and the religious fervor that often accompanies them — betray a common lack of serious thinking about what makes code useful vs. wasteful. Instead, we have lots of shouting:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Every function needs a test! No wait. Only write end to end tests! You classes must be SOLID! Functions must be less than 15 LoC! DRY up your code! No wait. Actually, WET (write everything twice), then deduplicate! Leave the code better than you found it!&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;These are cute heuristics that fit in a Tweet, but they&amp;rsquo;ll never take us beyond &amp;ldquo;best practice&amp;rdquo; holy wars. If we want to ship valuable software quickly and consistently, we need deeper thinking.&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;Deeper thinking isn&amp;rsquo;t enough, however. Many of the heuristics I poked fun at above can be traced back to careful, tome-sized texts on how to write good code. The authors are horrified at how their views have been caricatured and twisted,&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt; but this watering down of ideas is inevitable given that we prefer hot takes on Twitter over reading books.&lt;/p&gt;
+&lt;p&gt;To avoid this unfortunate dynamic, we need to take our best thinking about what code is useful vs. wasteful and bake that thinking into our editors. Our editor should nudge us into making better decisions about what code to write.&lt;/p&gt;
+&lt;p&gt;We need this kind of copilot more than we need the code generating kind.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;What could this look like?&lt;/p&gt;
+&lt;p&gt;My editor could tell me that the test code I&amp;rsquo;m currently fixing has been broken 27 times and has never caught a single regression. I could take that stat and tell the TDD zealot on my team that automated tests are often helpful but we should delete this one.&lt;sup id=&#34;fnref:3&#34;&gt;&lt;a href=&#34;#fn:3&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;On the other hand, my editor could tell me when the TDD zealot is right. It could show me data on which files tend to produce the most bugs and give us a data-driven answer for which files would benefit the most from TDD zealotry:&lt;/p&gt;
+&lt;p&gt;&lt;img  src=&#34;data.webp&#34;
+        alt/&gt;&lt;/p&gt;
+&lt;p&gt;When I was a TDD zealot, I would have benefitted from seeing graphs like this.&lt;/p&gt;
+&lt;p&gt;Maybe these specific ideas are bad, but they&amp;rsquo;re not worse than what we&amp;rsquo;re doing now:&lt;/p&gt;
+&lt;p&gt;&lt;img  src=&#34;this-is-fine.webp&#34;
+        alt/&gt;&lt;/p&gt;
+&lt;section class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Example of the need for deeper thinking: the principle of single responsibility — one of the most commonly cited programming principles — falls apart under minor scrutiny. My cofounder and I have written about this here and here.&amp;#160;&lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:2&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Dave Thomas — one of the OG agile manifesto signatories — said agile is dead because the common understanding of agile is so far from what he intended. In the same talk, he says he doesn’t actually write tests for the most part. Both Kent Beck and Martin Fowler talked about how their ideas are often twisted in “Is TDD dead?” conversation with DHH&amp;#160;&lt;a href=&#34;#fnref:2&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:3&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;TDD zealots will point out that just because a test doesn’t catch defects doesn’t mean they’re completely useless and should be deleted. They’ll say that tests are also valuable because they document the exercised code and because they lead us to write more flexible code. Sometimes these benefits are real and sometimes they’re worth the cost of maintaining the test. Sometimes neither of these things are true. Data can help us answer this question better than religion.&amp;#160;&lt;a href=&#34;#fnref:3&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>On OpenAI&#39;s supposed &#34;scientific certainty&#34; that GPT-5 will be better than GPT-4</title>
+      <link>https://www.philosophicalhacker.com/post/openai-scientific-certainty/</link>
+      <pubDate>Mon, 13 May 2024 10:11:06 -0500</pubDate>
+      
+      <guid>https://www.philosophicalhacker.com/post/openai-scientific-certainty/</guid>
+      <description>&lt;p&gt;When we were raising money for ATLAS, I often told investors that my cofounder and I were probably the most skeptical GenAI founders they would meet. Sam Altman&amp;rsquo;s recent hyperbolic claim that Open AI has &amp;ldquo;scientific certainty that GPT-5 will be better than GPT-4&amp;rdquo; at Stanford University fuels this skepticism:&lt;/p&gt;
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;https://www.youtube.com/embed/GLKoDkbS1Cg&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; allowfullscreen title=&#34;YouTube Video&#34;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;p&gt;I&amp;rsquo;m impressed by OpenAI, we use their models, and I&amp;rsquo;m sure Sam is a nice guy, but I cannot imagine that whatever evidence they have to think GPT-5 will be better than GPT-4 would be enough for &amp;ldquo;scientific certainty.&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m not even sure what he means by &amp;ldquo;scientific certainty,&amp;rdquo; but here&amp;rsquo;s a guess: OpenAI has previously discussed how they&amp;rsquo;ve modeled the relationship between parameter count and LLM performance and have successfully predicted LLM performance using this model. Here&amp;rsquo;s the thing: the prior usefulness of this model says very little about it&amp;rsquo;s predictive power as they scale parameter count.&lt;/p&gt;
+&lt;p&gt;The problem of extrapolating from existing data like this is as old as David Hume and it&amp;rsquo;s something that thoughtful scientists and philosophers of science have thought about since then. In some ways, being &amp;ldquo;certain&amp;rdquo; about this kind of extrapolation feels unscientific.&lt;/p&gt;
+&lt;p&gt;Regardless of whatever OpenAI&amp;rsquo;s fancy curve predicts, at the end of the day, GPT-5 is just another data point that new versions of their curve will have to fit. It&amp;rsquo;s an experiment, not a &amp;ldquo;scientific certainty,&amp;rdquo; and the use of that term makes me worried that &amp;ldquo;science&amp;rdquo; is being pressed into the service of marketing for OpenAI.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

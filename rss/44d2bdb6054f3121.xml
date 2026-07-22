@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:webfeeds="http://webfeeds.org/rss/1.0" xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>Kaushik Gopal</title>
+    <description>Public posts from @kaush@hachyderm.io</description>
+    <link>https://hachyderm.io/@kaush</link>
+    <image>
+      <url>https://media.hachyderm.io/accounts/avatars/109/787/867/044/352/863/original/d3ef8d5a9f338d08.png</url>
+      <title>Kaushik Gopal</title>
+      <link>https://hachyderm.io/@kaush</link>
+    </image>
+    <lastBuildDate>Wed, 01 Jul 2026 23:53:54 +0000</lastBuildDate>
+    <webfeeds:icon>https://media.hachyderm.io/accounts/avatars/109/787/867/044/352/863/original/d3ef8d5a9f338d08.png</webfeeds:icon>
+    <generator>Mastodon v4.6.3</generator>
+    <item>
+      <guid isPermaLink="true">https://hachyderm.io/@kaush/116847413476284683</guid>
+      <link>https://hachyderm.io/@kaush/116847413476284683</link>
+      <pubDate>Wed, 01 Jul 2026 23:53:54 +0000</pubDate>
+      <description>&lt;p&gt;Everyone says they&amp;#39;re building an AI-native company. But what does that mean?&lt;/p&gt;&lt;p&gt;Automating what you&amp;#39;re already doing with AI is not enough. A truly AI-native company rethinks every role and tears down the walls between them.&lt;/p&gt;&lt;p&gt;- QA doesn&amp;#39;t just file bugs: they point agents at them and file the fixes too&lt;br /&gt;- PMs don&amp;#39;t just ship a 70%-done PRD and wait for eng to hit the edge cases: they point agents to walk the real code, surface those cases, and flush them out with test cases&lt;br /&gt;- - Designers don&amp;#39;t just land up with Figma mocks: they prototype on real Android 12 devices 😜 to test how those animations and UX actually hold up&lt;br /&gt;- Data scientists don&amp;#39;t just wait for real data: they run simulations up front, generate synthetic data, and build intuition around which A/B option wins&lt;/p&gt;&lt;p&gt;So what&amp;#39;s left for engineers? Plenty.&lt;/p&gt;&lt;p&gt;I wrote a sketch of what that might look like, in detail, here: &lt;a href="https://kau.sh/blog/ai-native-company/" target="_blank" rel="nofollow noopener" translate="no"&gt;&lt;span class="invisible"&gt;https://&lt;/span&gt;&lt;span class=""&gt;kau.sh/blog/ai-native-company/&lt;/span&gt;&lt;span class="invisible"&gt;&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <guid isPermaLink="true">https://hachyderm.io/@kaush/116845865757584302</guid>
+      <link>https://hachyderm.io/@kaush/116845865757584302</link>
+      <pubDate>Wed, 01 Jul 2026 17:20:18 +0000</pubDate>
+      <description>&lt;p&gt;in an effort to prove that i&amp;#39;m not just an AI tip dispensing bot, here&amp;#39;s a palate cleanser of one my (&amp;amp; the 90s&amp;#39;) all time favorite songs, from a podcast that does some of the best song breakdowns:&lt;/p&gt;&lt;p&gt;&lt;a href="https://songexploder.net/goo-goo-dolls" target="_blank" rel="nofollow noopener" translate="no"&gt;&lt;span class="invisible"&gt;https://&lt;/span&gt;&lt;span class=""&gt;songexploder.net/goo-goo-dolls&lt;/span&gt;&lt;span class="invisible"&gt;&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <guid isPermaLink="true">https://hachyderm.io/@kaush/116836352352870755</guid>
+      <link>https://hachyderm.io/@kaush/116836352352870755</link>
+      <pubDate>Tue, 30 Jun 2026 01:00:55 +0000</pubDate>
+      <description>&lt;p&gt;if you work at a slightly larger company and you&amp;#39;re not already playing with open models, building a sense for when to reach for which, you&amp;#39;re going to have a lot of catching up to do soon...&lt;/p&gt;&lt;p&gt;3-4 times now I&amp;#39;ve liked GLM 5.2&amp;#39;s answer more than 5.5 xhigh or Opus 4.8.&lt;/p&gt;&lt;p&gt;bonkers! even if the bar were just 80% as good as the leading models, the cost alone makes open models an easy call, especially as they build out their loops. approaching better results?&lt;/p&gt;&lt;p&gt;the tide, &amp;#39;tis a-shifting, friends...&lt;/p&gt;</description>
+    </item>
+    <item>
+      <guid isPermaLink="true">https://hachyderm.io/@kaush/116808928304987427</guid>
+      <link>https://hachyderm.io/@kaush/116808928304987427</link>
+      <pubDate>Thu, 25 Jun 2026 04:46:37 +0000</pubDate>
+      <description>&lt;p&gt;I spent sometime on loop engineering. Some notes...&lt;/p&gt;&lt;p&gt;Two types of loops: 1️⃣ one-shot loops (solved) and 2️⃣ autonomous&lt;/p&gt;&lt;p&gt;I (personally) don&amp;#39;t think &amp;quot;let the agent merge&amp;quot; is the right bar yet. Loops are better at producing reviewable stuff you still sign off on.&lt;/p&gt;&lt;p&gt;Every loop I&amp;#39;ve built so far ended up being a little bespoke. It&amp;#39;s hard to find a single template for all the types of loops.&lt;/p&gt;&lt;p&gt;I think that&amp;#39;s actually good. It&amp;#39;s probably going to be the work software engineers have to actually spend time &amp;quot;engineering&amp;quot;.&lt;/p&gt;&lt;p&gt;Loops need bounds (a loop with no max turns is ~= a while(true) in prod) and agents need to be told &amp;quot;do not absorb uncertainty.&amp;quot;&lt;/p&gt;&lt;p&gt;To make this all financially feasible - tier your models. Cheap local for the always-on stuff, frontier only when it counts.&lt;/p&gt;&lt;p&gt;Lastly, a new practice that&amp;#39;s been really working well for me is &amp;quot;HTML workpads&amp;quot; to do all my review. Each task maintains context/logs/progress etc. in a visual HTML. &lt;/p&gt;&lt;p&gt;More in my post: &lt;a href="https://kau.sh/blog/responsible-loop-engineering/" target="_blank" rel="nofollow noopener" translate="no"&gt;&lt;span class="invisible"&gt;https://&lt;/span&gt;&lt;span class="ellipsis"&gt;kau.sh/blog/responsible-loop-e&lt;/span&gt;&lt;span class="invisible"&gt;ngineering/&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;</description>
+      <media:content url="https://media.hachyderm.io/media_attachments/files/116/808/926/893/938/330/original/abaf60430594bd0f.webp" type="image/webp" fileSize="60826" medium="image">
+        <media:rating scheme="urn:simple">nonadult</media:rating>
+        <media:description type="plain">Loop engineering architecture</media:description>
+      </media:content>
+    </item>
+    <item>
+      <guid isPermaLink="true">https://hachyderm.io/@kaush/116692265114575684</guid>
+      <link>https://hachyderm.io/@kaush/116692265114575684</link>
+      <pubDate>Thu, 04 Jun 2026 14:17:38 +0000</pubDate>
+      <description>&lt;p&gt;I don&amp;#39;t want to paint myself into any single major AI lab corner yet, so I&amp;#39;ve been kicking the tires on open source agent harnesses.&lt;/p&gt;&lt;p&gt;OpenCode has become my daily driver. I took some time to write up intermediate+ user tips that show where it really shines.&lt;/p&gt;&lt;p&gt;Really hoping open source harnesses get more traction and push the competition forward. I know I&amp;#39;m super happy with OpenCode + OpenChamber right now, and it&amp;#39;ll be hard to move away from it at this point.&lt;/p&gt;&lt;p&gt;Full Post - &lt;a href="https://kau.sh/blog/opencode-power-user-tips/" target="_blank" rel="nofollow noopener" translate="no"&gt;&lt;span class="invisible"&gt;https://&lt;/span&gt;&lt;span class="ellipsis"&gt;kau.sh/blog/opencode-power-use&lt;/span&gt;&lt;span class="invisible"&gt;r-tips/&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <guid isPermaLink="true">https://hachyderm.io/@kaush/116686638347819570</guid>
+      <link>https://hachyderm.io/@kaush/116686638347819570</link>
+      <pubDate>Wed, 03 Jun 2026 14:26:40 +0000</pubDate>
+      <description>&lt;p&gt;maybe it’s the optimist in me but i feel there’s a reckoning coming where engineers are going to be evaluated by how effectively they use AI and it’s an actual trait companies start to look for in interviews. &lt;/p&gt;&lt;p&gt;tokensculpting = !tokenmaxxing&lt;/p&gt;</description>
+    </item>
+    <item>
+      <guid isPermaLink="true">https://hachyderm.io/@kaush/116621281517869396</guid>
+      <link>https://hachyderm.io/@kaush/116621281517869396</link>
+      <pubDate>Sat, 23 May 2026 01:25:34 +0000</pubDate>
+      <description>&lt;p&gt;prompt engineering → context engineering → harness engineering&lt;/p&gt;&lt;p&gt;but harness engineering finally feels like &amp;quot;real engineering&amp;quot;. no more woo woo stuff as @iurysouza.dev says 😅.&lt;/p&gt;&lt;p&gt;Episode 307 is one of our most useful ones, on how to think about AI-assisted engineering.&lt;/p&gt;&lt;p&gt;Listen to the full episode!&lt;/p&gt;&lt;p&gt;Youtube &lt;a href="https://youtu.be/fmbbelimwfk?si=vsiwg3BupGUxJTWq&amp;amp;t=893" target="_blank" rel="nofollow noopener" translate="no"&gt;&lt;span class="invisible"&gt;https://&lt;/span&gt;&lt;span class="ellipsis"&gt;youtu.be/fmbbelimwfk?si=vsiwg3&lt;/span&gt;&lt;span class="invisible"&gt;BupGUxJTWq&amp;amp;t=893&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Spotify &lt;a href="https://open.spotify.com/episode/150VMJDqUfLQ9GdhPjZfOO?si=O1Khk4AmQKiCVQ013NxufQ" target="_blank" rel="nofollow noopener" translate="no"&gt;&lt;span class="invisible"&gt;https://&lt;/span&gt;&lt;span class="ellipsis"&gt;open.spotify.com/episode/150VM&lt;/span&gt;&lt;span class="invisible"&gt;JDqUfLQ9GdhPjZfOO?si=O1Khk4AmQKiCVQ013NxufQ&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;a href="https://fragmentedpodcast.com/episodes/307/?t=14:53" target="_blank" rel="nofollow noopener" translate="no"&gt;&lt;span class="invisible"&gt;https://&lt;/span&gt;&lt;span class="ellipsis"&gt;fragmentedpodcast.com/episodes&lt;/span&gt;&lt;span class="invisible"&gt;/307/?t=14:53&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;</description>
+      <media:content url="https://media.hachyderm.io/media_attachments/files/116/621/281/259/465/125/original/1732b3c5d1f6d2a0.mp4" type="video/mp4" fileSize="2972271" medium="video">
+        <media:rating scheme="urn:simple">nonadult</media:rating>
+      </media:content>
+    </item>
+    <item>
+      <guid isPermaLink="true">https://hachyderm.io/@kaush/116534576786312927</guid>
+      <link>https://hachyderm.io/@kaush/116534576786312927</link>
+      <pubDate>Thu, 07 May 2026 17:55:25 +0000</pubDate>
+      <description>&lt;p&gt;/btw is one of the most under-rated claude code commands, that other harnesses should straight up steal&lt;/p&gt;</description>
+    </item>
+    <item>
+      <guid isPermaLink="true">https://hachyderm.io/@kaush/116520565123375598</guid>
+      <link>https://hachyderm.io/@kaush/116520565123375598</link>
+      <pubDate>Tue, 05 May 2026 06:32:04 +0000</pubDate>
+      <description>&lt;p&gt;when generating code is cheap, the spec starts to feel more valuable. &lt;/p&gt;&lt;p&gt;i keep thinking about my own tools: usbi went from shell → Go → Rust → .kts. Podsync went from Python → Rust.&lt;/p&gt;&lt;p&gt;implementation changed rapidly but spec stayed the same&lt;/p&gt;&lt;p&gt;feels like the shape of a lot more software...&lt;/p&gt;&lt;p&gt;Agents are the new compilers. Specs are the new code.&lt;/p&gt;&lt;p&gt;&lt;a href="https://kau.sh/blog/agent-compilers/" target="_blank" rel="nofollow noopener" translate="no"&gt;&lt;span class="invisible"&gt;https://&lt;/span&gt;&lt;span class=""&gt;kau.sh/blog/agent-compilers/&lt;/span&gt;&lt;span class="invisible"&gt;&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;</description>
+      <media:content url="https://media.hachyderm.io/media_attachments/files/116/520/564/893/364/808/original/717c3815769ba7ca.webp" type="image/webp" fileSize="47100" medium="image">
+        <media:rating scheme="urn:simple">nonadult</media:rating>
+      </media:content>
+    </item>
+    <item>
+      <guid isPermaLink="true">https://hachyderm.io/@kaush/116474621944530788</guid>
+      <link>https://hachyderm.io/@kaush/116474621944530788</link>
+      <pubDate>Mon, 27 Apr 2026 03:48:07 +0000</pubDate>
+      <description>&lt;p&gt;Love how Mitchell said of the current AI hypsters: If there&amp;#39;s all this great value being created with AI... where are the actual products?&lt;/p&gt;&lt;p&gt;For the full episode:&lt;/p&gt;&lt;p&gt;Youtube: &lt;a href="https://youtu.be/pKrsF3eQQnQ?si=4flNBqaVwFer8UkF" target="_blank" rel="nofollow noopener" translate="no"&gt;&lt;span class="invisible"&gt;https://&lt;/span&gt;&lt;span class="ellipsis"&gt;youtu.be/pKrsF3eQQnQ?si=4flNBq&lt;/span&gt;&lt;span class="invisible"&gt;aVwFer8UkF&lt;/span&gt;&lt;/a&gt;&lt;br /&gt;Website: &lt;a href="https://fragmentedpodcast.com/episodes/310" target="_blank" rel="nofollow noopener" translate="no"&gt;&lt;span class="invisible"&gt;https://&lt;/span&gt;&lt;span class="ellipsis"&gt;fragmentedpodcast.com/episodes&lt;/span&gt;&lt;span class="invisible"&gt;/310&lt;/span&gt;&lt;/a&gt;&lt;br /&gt;Spotify: &lt;a href="https://open.spotify.com/episode/0zhtEuDpvxyi2hnlcEj522?si=lO6FWFk3SSCx15QtlNpGmw" target="_blank" rel="nofollow noopener" translate="no"&gt;&lt;span class="invisible"&gt;https://&lt;/span&gt;&lt;span class="ellipsis"&gt;open.spotify.com/episode/0zhtE&lt;/span&gt;&lt;span class="invisible"&gt;uDpvxyi2hnlcEj522?si=lO6FWFk3SSCx15QtlNpGmw&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;</description>
+      <media:content url="https://media.hachyderm.io/media_attachments/files/116/474/621/696/065/665/original/9dc68a230846d220.mp4" type="video/mp4" fileSize="2139858" medium="video">
+        <media:rating scheme="urn:simple">nonadult</media:rating>
+      </media:content>
+    </item>
+    <item>
+      <guid isPermaLink="true">https://hachyderm.io/@kaush/116403259019185985</guid>
+      <link>https://hachyderm.io/@kaush/116403259019185985</link>
+      <pubDate>Tue, 14 Apr 2026 13:19:35 +0000</pubDate>
+      <description>&lt;p class="quote-inline"&gt;RE: &lt;a href="https://mas.to/@fragmented/116401629824250206" target="_blank" rel="nofollow noopener" translate="no"&gt;&lt;span class="invisible"&gt;https://&lt;/span&gt;&lt;span class="ellipsis"&gt;mas.to/@fragmented/11640162982&lt;/span&gt;&lt;span class="invisible"&gt;4250206&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;I look up to &lt;span class="h-card" translate="no"&gt;&lt;a href="https://hachyderm.io/@mitchellh" class="u-url mention"&gt;@&lt;span&gt;mitchellh&lt;/span&gt;&lt;/a&gt;&lt;/span&gt; as one of the best developer voices today.this ep. nearly broke me to edit-every 10s was a 💡 moment and I kept going &amp;quot;nope, can&amp;#39;t cut that either.&amp;quot;&lt;/p&gt;&lt;p&gt;Can&amp;#39;t thank him enough for being so gracious with his time.proud &lt;span class="h-card" translate="no"&gt;&lt;a href="https://mas.to/@fragmented" class="u-url mention"&gt;@&lt;span&gt;fragmented&lt;/span&gt;&lt;/a&gt;&lt;/span&gt; moment for me &amp;amp; &lt;span class="h-card" translate="no"&gt;&lt;a href="https://androiddev.social/@iurysza" class="u-url mention"&gt;@&lt;span&gt;iurysza&lt;/span&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <guid isPermaLink="true">https://hachyderm.io/@kaush/116335521216829806</guid>
+      <link>https://hachyderm.io/@kaush/116335521216829806</link>
+      <pubDate>Thu, 02 Apr 2026 14:12:58 +0000</pubDate>
+      <description>&lt;p class="quote-inline"&gt;RE: &lt;a href="https://mas.to/@fragmented/116333355868122694" target="_blank" rel="nofollow noopener" translate="no"&gt;&lt;span class="invisible"&gt;https://&lt;/span&gt;&lt;span class="ellipsis"&gt;mas.to/@fragmented/11633335586&lt;/span&gt;&lt;span class="invisible"&gt;8122694&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;So you’re an android dev and got 4 worktrees going, with gradle daemons roaring and frying your machine … wdyd? &lt;/p&gt;&lt;p&gt;you go to the ☁️ with background agents ! listen to the newest episode to find out more.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <guid isPermaLink="true">https://hachyderm.io/@kaush/116261678561161550</guid>
+      <link>https://hachyderm.io/@kaush/116261678561161550</link>
+      <pubDate>Fri, 20 Mar 2026 13:13:49 +0000</pubDate>
+      <description>&lt;p&gt;Lots of &amp;quot;I built this with AI&amp;quot; posts lately. Here&amp;#39;s one where I actually enjoyed the building part.&lt;/p&gt;&lt;p&gt;Introducing PodSync (for editors): a podcast alignment tool (uses VAD, MFCC fingerprinting, x-correlation).&lt;/p&gt;&lt;p&gt;AI helped me 👨‍💻 it in Rust but yrs of aligning tracks 👂helped with the algo!&lt;/p&gt;&lt;p&gt;Wrote up the full approach with an interactive demo:&lt;/p&gt;&lt;p&gt;- &lt;a href="https://kau.sh/blog/podsync" target="_blank" rel="nofollow noopener" translate="no"&gt;&lt;span class="invisible"&gt;https://&lt;/span&gt;&lt;span class=""&gt;kau.sh/blog/podsync&lt;/span&gt;&lt;span class="invisible"&gt;&lt;/span&gt;&lt;/a&gt;&lt;br /&gt;- &lt;a href="https://github.com/kaushikgopal/podsync" target="_blank" rel="nofollow noopener" translate="no"&gt;&lt;span class="invisible"&gt;https://&lt;/span&gt;&lt;span class=""&gt;github.com/kaushikgopal/podsync&lt;/span&gt;&lt;span class="invisible"&gt;&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;</description>
+      <media:content url="https://media.hachyderm.io/media_attachments/files/116/257/266/150/154/393/original/9cb1b30554d9c7ea.webp" type="image/webp" fileSize="54836" medium="image">
+        <media:rating scheme="urn:simple">nonadult</media:rating>
+      </media:content>
+    </item>
+    <item>
+      <guid isPermaLink="true">https://hachyderm.io/@kaush/116217929836101406</guid>
+      <link>https://hachyderm.io/@kaush/116217929836101406</link>
+      <pubDate>Thu, 12 Mar 2026 19:47:56 +0000</pubDate>
+      <description>&lt;p&gt;i like a lot of the new tmux-ish emulators like cmux but the smoothest workflow i&amp;#39;ve found is just using ghostty &amp;amp; one main tmux session.&lt;/p&gt;&lt;p&gt;☝️ one window for each task i&amp;#39;m working on with name &amp;quot;i&amp;quot; recognize quickly.&lt;/p&gt;&lt;p&gt;then use fzf to search the tmux window list pane &amp;amp; switch ⚡&lt;/p&gt;</description>
+      <media:content url="https://media.hachyderm.io/media_attachments/files/116/217/929/392/746/384/original/35a7b3fbabae56a2.webp" type="image/webp" fileSize="140854" medium="image">
+        <media:rating scheme="urn:simple">nonadult</media:rating>
+      </media:content>
+      <media:content url="https://media.hachyderm.io/media_attachments/files/116/217/929/639/369/231/original/a644c073d594726d.webp" type="image/webp" fileSize="198902" medium="image">
+        <media:rating scheme="urn:simple">nonadult</media:rating>
+      </media:content>
+    </item>
+    <item>
+      <guid isPermaLink="true">https://hachyderm.io/@kaush/116127272751859656</guid>
+      <link>https://hachyderm.io/@kaush/116127272751859656</link>
+      <pubDate>Tue, 24 Feb 2026 19:32:39 +0000</pubDate>
+      <description>&lt;p class="quote-inline"&gt;RE: &lt;a href="https://mas.to/@fragmented/116126821033957142" target="_blank" rel="nofollow noopener" translate="no"&gt;&lt;span class="invisible"&gt;https://&lt;/span&gt;&lt;span class="ellipsis"&gt;mas.to/@fragmented/11612682103&lt;/span&gt;&lt;span class="invisible"&gt;3957142&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;This was fun for both of us!&lt;/p&gt;&lt;p&gt;We share some of how the fragmented 🌭 is made + Tips from &lt;span class="h-card" translate="no"&gt;&lt;a href="https://androiddev.social/@iurysza" class="u-url mention"&gt;@&lt;span&gt;iurysza&lt;/span&gt;&lt;/a&gt;&lt;/span&gt; and me, and a crazy way we used AI to solve very real audio problems 😉.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <guid isPermaLink="true">https://hachyderm.io/@kaush/116107573834451662</guid>
+      <link>https://hachyderm.io/@kaush/116107573834451662</link>
+      <pubDate>Sat, 21 Feb 2026 08:02:57 +0000</pubDate>
+      <description>&lt;p&gt;opencode is basically openclaw for coding.&lt;/p&gt;&lt;p&gt;an interesting focus area in the world of agent orchestration is &amp;quot;access fluidity&amp;quot;.&lt;/p&gt;&lt;p&gt;how easy is it to reach the agents doing the work on your machine - from your phone, terminal, IDE, or browser?&lt;/p&gt;&lt;p&gt;it&amp;#39;s tempting to think of it as just an open-source Claude Code/Codex variant.&lt;/p&gt;&lt;p&gt;it&amp;#39;s def. more ! built on a server-client architecture, it makes hopping between mobile, desktop, and web super easy.&lt;/p&gt;&lt;p&gt;&lt;a href="https://kau.sh/blog/opencode-openclaw/" target="_blank" rel="nofollow noopener" translate="no"&gt;&lt;span class="invisible"&gt;https://&lt;/span&gt;&lt;span class=""&gt;kau.sh/blog/opencode-openclaw/&lt;/span&gt;&lt;span class="invisible"&gt;&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <guid isPermaLink="true">https://hachyderm.io/@kaush/116086622387440839</guid>
+      <link>https://hachyderm.io/@kaush/116086622387440839</link>
+      <pubDate>Tue, 17 Feb 2026 15:14:43 +0000</pubDate>
+      <description>&lt;p class="quote-inline"&gt;RE: &lt;a href="https://mas.to/@fragmented/116084718264714391" target="_blank" rel="nofollow noopener" translate="no"&gt;&lt;span class="invisible"&gt;https://&lt;/span&gt;&lt;span class="ellipsis"&gt;mas.to/@fragmented/11608471826&lt;/span&gt;&lt;span class="invisible"&gt;4714391&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;new episode is out! spot the easter 🥚?&lt;/p&gt;&lt;p&gt;recent models have shown massive improvement owing to clever use of &amp;quot;modes&amp;quot; and subagent dispatch. it really clicked for me after chatting with &lt;span class="h-card" translate="no"&gt;&lt;a href="https://androiddev.social/@iurysza" class="u-url mention"&gt;@&lt;span&gt;iurysza&lt;/span&gt;&lt;/a&gt;&lt;/span&gt; &lt;/p&gt;&lt;p&gt;listen to improve your fundamentals! (not just tactics)&lt;/p&gt;</description>
+    </item>
+    <item>
+      <guid isPermaLink="true">https://hachyderm.io/@kaush/116050575644967288</guid>
+      <link>https://hachyderm.io/@kaush/116050575644967288</link>
+      <pubDate>Wed, 11 Feb 2026 06:27:34 +0000</pubDate>
+      <description>&lt;p&gt;I used to love Keynote for my slide decks but I&amp;#39;ve since become a full &lt;span class="h-card" translate="no"&gt;&lt;a href="https://bird.makeup/users/iapresenter" class="u-url mention"&gt;@&lt;span&gt;iapresenter&lt;/span&gt;&lt;/a&gt;&lt;/span&gt;  convert (from the folks &lt;span class="h-card" translate="no"&gt;&lt;a href="https://mastodon.online/@ia" class="u-url mention"&gt;@&lt;span&gt;ia&lt;/span&gt;&lt;/a&gt;&lt;/span&gt; ). tastefully chosen constraints and display, all with the power of markdown.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <guid isPermaLink="true">https://hachyderm.io/@kaush/116049525087493971</guid>
+      <link>https://hachyderm.io/@kaush/116049525087493971</link>
+      <pubDate>Wed, 11 Feb 2026 02:00:24 +0000</pubDate>
+      <description>&lt;p class="quote-inline"&gt;RE: &lt;a href="https://mas.to/@fragmented/116039415103907028" target="_blank" rel="nofollow noopener" translate="no"&gt;&lt;span class="invisible"&gt;https://&lt;/span&gt;&lt;span class="ellipsis"&gt;mas.to/@fragmented/11603941510&lt;/span&gt;&lt;span class="invisible"&gt;3907028&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;agent skills are the most powerful construct for AI coding today. it&amp;#39;s the quickest way to get better results with less context bloat.&lt;/p&gt;&lt;p&gt;but with great power comes responsibility... they can become a prompt injection vector. &lt;/p&gt;&lt;p&gt;this episode is a crash course on agent skills! 🎧&lt;/p&gt;</description>
+    </item>
+    <item>
+      <guid isPermaLink="true">https://hachyderm.io/@kaush/116019986844654565</guid>
+      <link>https://hachyderm.io/@kaush/116019986844654565</link>
+      <pubDate>Thu, 05 Feb 2026 20:48:26 +0000</pubDate>
+      <description>&lt;p&gt;PSA: the official Anthropic GitHub org is github.com/anthropics (plural &amp;quot;s&amp;quot;)&lt;/p&gt;&lt;p&gt;not the lucky but slightly disturbing zombie shooter  github.com/anthropic&lt;/p&gt;&lt;p&gt;if you&amp;#39;re installing official Claude plugins or skills and 404ing... now you know. &amp;#39;s&amp;#39; doing some heavy lifting there.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

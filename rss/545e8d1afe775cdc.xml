@@ -1,0 +1,2434 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="https://www.sligocki.com//feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.sligocki.com//" rel="alternate" type="text/html" /><updated>2025-09-15T22:37:15+00:00</updated><id>https://www.sligocki.com//feed.xml</id><title type="html">sligocki</title><subtitle></subtitle><author><name>Shawn Ligocki</name></author><entry><title type="html">Lucy’s Moonlight: The 5% Champion</title><link href="https://www.sligocki.com//2025/04/21/lucys-moonlight.html" rel="alternate" type="text/html" title="Lucy’s Moonlight: The 5% Champion" /><published>2025-04-21T00:00:00+00:00</published><updated>2025-04-21T00:00:00+00:00</updated><id>https://www.sligocki.com//2025/04/21/lucys-moonlight</id><content type="html" xml:base="https://www.sligocki.com//2025/04/21/lucys-moonlight.html"><![CDATA[<p>There is a 5% chance that we have a new BB(6) champion! It’s a machine discovered by Racheline which she’s named “Lucy’s Moonlight”. It is a <a href="https://wiki.bbchallenge.org/wiki/Probvious">probviously</a> halting tetrational <a href="https://wiki.bbchallenge.org/wiki/Cryptids">Cryptid</a>. In other words, it’s a machine that we believe will eventually halt (with 100% chance via a probabilistic approximation), yet proving it requires either solving a Collatz-like problem or simulating it for a “tetrational” number of steps. This is very similar to the <a href="/2022/04/03/mother-of-giants.html">Mother of Giants</a> with the exception that if the Mother of Giants TMs (quasi-)halt, then they are known to beat the current BBB(5) champion, whereas if Lucy’s Moonlight halts there is only a 5% chance that it beats the current <a href="/2022/06/21/bb-6-2-t15.html">10↑↑15 BB(6) champion</a>, in the other 95% cases it will halt in fewer steps.</p>
+
+<h2 id="machine">Machine</h2>
+
+<p>The machine is <code class="language-plaintext highlighter-rouge">1RB0RD_0RC1RE_1RD0LA_1LE1LC_1RF0LD_1RZ0RA</code>:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"> </th>
+      <th style="text-align: center">0</th>
+      <th style="text-align: center">1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">A</td>
+      <td style="text-align: center">1RB</td>
+      <td style="text-align: center">0RD</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">B</td>
+      <td style="text-align: center">0RC</td>
+      <td style="text-align: center">1RE</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">C</td>
+      <td style="text-align: center">1RD</td>
+      <td style="text-align: center">0LA</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">D</td>
+      <td style="text-align: center">1LE</td>
+      <td style="text-align: center">1LC</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">E</td>
+      <td style="text-align: center">1RF</td>
+      <td style="text-align: center">0LD</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">F</td>
+      <td style="text-align: center">1RZ</td>
+      <td style="text-align: center">0RA</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>It was discovered by Racheline on 1 Mar 2025 on the bbchallenge Discord (<a href="https://discord.com/channels/960643023006490684/1239205785913790465/1345551751016878272">Discord link</a>) and has bbchallenge wiki page: <a href="https://wiki.bbchallenge.org/wiki/Lucy%27s_Moonlight">Lucy’s Moonlight</a>.</p>
+
+<h2 id="analysis">Analysis</h2>
+
+<p>Let</p>
+
+\[C(a, b) = 0^\infty \;\; 1011^a \;\; 1^b \;\; 10 \;\; \text{ C&gt; } \;\; 0^\infty\]
+
+<p>then, it can be proven that</p>
+
+\[\begin{array}{l}
+  \text{Start} &amp; &amp; \xrightarrow{2} &amp; C(0, 0) \\
+  \\
+  C(a+1, &amp; 3k)   &amp; \to &amp; C(a, 8k+6) \\
+  C(a+2, &amp; 3k+1) &amp; \to &amp; C(a, 8k+16) \\
+  C(a+2, &amp; 3k+2) &amp; \to &amp; C(a, 8k+22) \\
+  \\
+  C(0,   &amp; 3k+1) &amp; \to &amp; C(0, 8k+5) \\
+  C(0,   &amp; 3k+2) &amp; \to &amp; C(0, 8k+5) \\
+  \\
+  C(0,   &amp; 3k)   &amp; \to &amp; C(2k,   8) \\
+  C(1,   &amp; 3k+2) &amp; \to &amp; C(2k+4, 8) \\
+  \\
+  C(1,   &amp; 3k+1) &amp; \to &amp; \text{Halt}(6k+14) \\
+\end{array}\]
+
+<p>Where, as usual, these rules apply for all non-negative integer variable assignments (\(a,k \ge 0\)) and Halt(n) means that the TM halts with \(n\) non-zero symbols on the tape.</p>
+
+<p>I’ve split these rules up into blocks to emphasize the different phases or types of rules:</p>
+
+<p>Main Phase:</p>
+
+\[\begin{array}{l}
+  C(a+1, &amp; 3k)   &amp; \to &amp; C(a, 8k+6) \\
+  C(a+2, &amp; 3k+1) &amp; \to &amp; C(a, 8k+16) \\
+  C(a+2, &amp; 3k+2) &amp; \to &amp; C(a, 8k+22) \\
+\end{array}\]
+
+<p>This repeatedly applies a Collatz-like iteration, reducing \(a\) at each step until \(a\) is too small.</p>
+
+<p>Reset Rules:</p>
+
+\[\begin{array}{l}
+  C(0,   &amp; 3k)   &amp; \to &amp; C(2k,   8) \\
+  C(1,   &amp; 3k+2) &amp; \to &amp; C(2k+4, 8) \\
+\end{array}\]
+
+<p>If \(a,b\) match either of these two patterns then the TM resets back to a new main phase.</p>
+
+<p>Zero Phase:</p>
+
+\[\begin{array}{l}
+  C(0,   &amp; 3k+1) &amp; \to &amp; C(0, 8k+5) \\
+  C(0,   &amp; 3k+2) &amp; \to &amp; C(0, 8k+5) \\
+\end{array}\]
+
+<p>If \(a = 0\) and \(3 \nmid b\) then the TM iterates a different Collatz-like function until it reaches a config where \(3 \mid b\) and then resets.</p>
+
+<p>Halt Rule:</p>
+
+\[\begin{array}{l}
+  C(1,   &amp; 3k+1) &amp; \to &amp; \text{Halt}(6k+14) \\
+\end{array}\]
+
+<p>Finally, if it hits this specific configuration, the TM halts.</p>
+
+<h2 id="trajectory">Trajectory</h2>
+
+<p>Note that after each reset, we end up in a config \(C(a, 8)\). Let’s call each of these configs “checkpoints”. Following each checkpoint, the Lucy’s Moonlight will either Halt, Reset or (theoretically) get stuck forever iterating Zero Phase.</p>
+
+<p>Starting from a blank tape, the TM enters config \(C(0,0)\) after 2 steps and then follows the trajectory:</p>
+
+\[\begin{array}{l}
+  C(0, 0) &amp; \to &amp; C(    0, 8) &amp; \to &amp; C(0, 21) \\
+          &amp; \to &amp; C(   14, 8) &amp; \to &amp; \cdots &amp; \to &amp; C(1, 16934) \\
+          &amp; \to &amp; C(11292, 8) &amp; \to &amp; \cdots &amp; \to &amp; C(0, \approx 10^{2902.09}) \\
+          &amp; \to &amp; C(\approx 10^{2901.92}, 8) &amp; \to &amp; \cdots \\
+\end{array}\]
+
+<p>So, the first four checkpoints occur with \(a\) values:</p>
+
+\[\begin{array}{lcr}
+  c_0 &amp; = &amp; 0 \\
+  c_1 &amp; = &amp; 14 \\
+  c_2 &amp; = &amp; 11\,292 \\
+  c_3 &amp; \approx &amp; 10^{2901.92} \\
+\end{array}\]
+
+<details>
+  <summary>Exact value for c3</summary>
+  8 282 581 182 265 963 777 660 116 067 041 084 396 825 871 729 769 475 063 015 437 507 606 888 488 657 640 984 741 410 755 868 651 202 413 557 949 100 792 150 345 468 805 096 096 950 985 621 014 344 543 514 277 244 259 988 659 130 143 328 155 990 590 108 709 713 794 583 253 323 686 355 356 512 219 061 229 636 197 885 927 258 835 226 571 319 297 308 352 230 934 484 006 197 639 625 592 087 971 234 386 001 742 614 119 317 946 288 524 516 349 575 343 597 522 485 283 906 000 542 032 088 582 043 646 950 532 639 630 385 985 319 217 159 379 913 000 142 879 141 905 099 969 565 530 694 702 807 960 713 276 894 845 659 927 803 312 770 155 623 893 892 127 451 599 296 902 730 174 376 009 710 735 758 161 389 656 270 797 836 582 256 488 031 353 066 716 635 172 987 950 448 854 471 226 597 449 927 236 184 172 841 640 111 209 332 317 049 722 869 659 569 874 196 714 141 959 835 401 796 418 444 068 891 026 981 841 656 732 128 708 017 637 486 218 786 090 173 524 036 425 924 718 502 564 851 924 717 340 390 259 248 282 032 112 075 387 681 859 362 344 399 913 313 735 645 684 525 131 229 468 282 784 360 728 881 748 147 372 112 747 036 418 378 308 364 410 128 040 328 676 209 420 026 633 482 346 143 509 117 105 276 670 245 493 297 604 407 287 182 199 289 609 254 900 080 171 095 368 953 306 931 467 191 729 590 199 363 109 109 618 828 683 456 945 716 771 345 293 252 204 756 902 270 830 478 266 505 243 340 324 828 877 091 406 917 371 244 363 787 314 164 920 400 219 556 757 173 398 748 668 149 395 792 060 530 400 633 872 912 079 249 392 256 126 285 748 793 796 259 657 854 699 829 517 626 609 309 417 076 213 461 174 150 922 612 299 942 658 509 909 739 815 101 078 137 303 456 289 178 147 820 849 027 886 955 738 533 503 625 157 087 287 391 831 669 455 397 075 444 062 908 165 633 623 616 230 849 011 917 173 994 535 718 598 409 770 737 638 239 724 998 256 861 644 166 630 982 723 063 781 225 891 358 955 048 633 229 232 741 851 699 498 876 266 677 026 907 578 098 686 784 323 407 335 765 343 701 077 746 445 802 114 304 942 791 377 887 303 588 107 097 550 867 703 017 440 867 027 391 593 474 985 628 594 939 344 739 091 341 577 631 399 711 011 114 031 231 392 355 268 858 286 239 590 222 739 798 802 836 719 470 359 138 334 346 097 704 505 528 574 751 020 940 898 407 003 617 333 219 550 156 008 932 231 022 648 658 161 473 903 774 681 072 952 056 320 551 244 912 271 864 381 014 835 634 282 966 523 463 985 953 949 176 576 786 408 020 337 836 220 233 538 960 379 978 664 849 564 796 907 967 238 406 785 655 383 464 715 057 232 716 549 617 630 853 473 306 701 852 904 885 606 863 527 445 121 198 511 795 947 547 473 084 736 520 465 867 328 457 114 967 373 145 664 842 684 299 186 357 472 668 934 663 435 131 859 827 025 004 311 417 517 867 339 721 854 899 421 107 496 540 906 158 691 502 108 225 108 606 878 323 722 157 711 420 937 080 640 504 487 833 073 951 122 223 191 857 376 281 164 771 129 574 147 051 021 933 227 085 689 827 336 672 385 780 462 357 440 219 398 403 103 894 053 177 742 661 833 002 598 347 813 276 596 599 779 500 262 101 470 481 321 560 131 349 255 581 918 937 061 811 724 247 415 920 101 784 002 187 650 019 023 113 164 778 491 907 065 101 691 880 663 970 914 566 257 787 660 257 139 627 941 284 081 248 034 057 979 564 419 991 961 345 637 080 391 063 343 278 659 875 006 722 945 435 258 511 750 736 395 209 297 602 991 695 886 580 794 249 759 902 536 380 055 710 080 977 728 337 952 498 718 259 606 078 790 355 738 625 858 597 516 649 364 990 083 397 742 948 406 390 695 711 840 139 170 928 984 527 396 432 236 103 181 667 418 006 635 667 189 873 871 634 905 950 683 958 299 923 219 653 264 060 399 588 571 782 767 511 747 924 043 969 623 045 308 763 567 170 166 295 093 013 227 497 346 173 854 101 964 306 147 690 034 349 284 712 163 842 269 859 435 320 408 715 901 523 168 064 489 459 605 434 861 066 611 056 209 626 985 578 507 010 825 633 753 454
+</details>
+<p> </p>
+
+<p>At this point it would require simulating more than \(10^{2901}\) iterations of Main Phase in order to compute what happens next.</p>
+
+<h2 id="probabilistic-argument">Probabilistic Argument</h2>
+
+<p>As with previous Collatz-like TMs, we will now consider a probabilistic model where we basically assume that the Collatz iterations operate like a (pseudo-)random number generator which has an equal chance of choosing any remainder modulo 3 for \(b\) at each step.</p>
+
+<p>So,</p>
+<ul>
+  <li>When \(a \ge 2\), there will be a 1/3 chance of reducing \(a\) by 1, and 2/3 chance of reducing \(a\) by 2.</li>
+  <li>When \(a = 1\), there is a 1/3 chance of each: Halting immediately, resetting, entering Zero phase.</li>
+  <li>When \(a = 0\), Zero Phase will always eventually end, leading to a reset.</li>
+</ul>
+
+<p>In this model, after every checkpoint, there are only two options: reset or halt. Probability of halt is 1/3 times the probability that we reach the \(a = 1\) case (i.e. that it wasn’t skipped by a Main Phase jump). Let \(P(n)\) be the probability that starting from some config \(C(a, b)\) (for any \(a&gt;n\)) it reaches \(C(a-n, b^\prime)\) (via Main Phase rules alone). Well, the only way for this iteration to not reach \(C(a-n, b^\prime)\) is if it skipped over this \(a\) value. In other words:</p>
+
+\[P(n) = 1 - \frac{2}{3} P(n-1)\]
+
+<p>This recurrence has its only fixed point at \(\frac{3}{5}\) and if \(P(n) = \frac{3}{5} + \epsilon\) then \(P(n+1) = \frac{3}{5} - \frac{2}{3} \epsilon\) so the probabilities approach this fixed point exponentially quickly: \(|P(n) - \frac{3}{5}| = \frac{2}{5} \left(\frac{2}{3}\right)^n\). This is already tiny by \(n=20\) (\(\left|P(14) - \frac{3}{5}\right| &lt; 0.0002\)), by the time you get to \(n \approx 10^{2901.92}\) the discrepancy is minute.</p>
+
+<p>Therefore, starting at any large checkpoint, there is a \(\frac{1}{5}\) chance of halting this iteration (\(\frac{3}{5}\) chance of reaching \(a=1\) and \(\frac{1}{3}\) chance to halt if reaching \(a=1\)) and a \(\frac{4}{5}\) chance of resetting. And thus, the chance that it resets at least \(r\) times starting from a given checkpoint is \(\left(\frac{4}{5}\right)^r\)</p>
+
+<h3 id="champion-chance">Champion Chance</h3>
+
+<p>How many resets do we need to beat the current champion?</p>
+
+<p>First note that both the reset rules produce a checkpoint config with even first parameter. So, without loss of generality, we can consider two sequential checkpoints as:</p>
+
+\[C(2 a_n, 8) \to C(2 a_{n+1}, 8)\]
+
+<p>In order to reset we know that this included <strong>at least</strong> \(a_n\) iterations of Main Phase and so</p>
+
+\[a_{n+1} \ge \frac{8}{3} \left(\frac{8}{3}\right)^{a_n}\]
+
+<p>If \(C(2 a_n, 8) \to Halt(x)\) then there is similar growth:</p>
+
+\[x \ge 16 \left(\frac{8}{3}\right)^{a_n}\]
+
+<p>If we let \(b_k = \frac{3}{8} a_k\) then</p>
+
+\[b_{n+1} \ge \left(\frac{8}{3}\right)^{\frac{8}{3} b_n} &gt; 10^{b_n}\]
+
+<p>Starting from \(C(c_3, 8)\) with \(c_3 &gt; 8 \times 10^{2901}\) we get \(b_3 = \frac{3}{16} c_3 &gt; 10^{2901} &gt; 10 \uparrow\uparrow 2.5\) (using <a href="/2022/06/25/ext-up-notation.html">fractional up-arrow notation</a>). If this is followed by \(r\) resets, then we will reach</p>
+
+\[b_{r+3} &gt; 10 \uparrow\uparrow (r+2.5)\]
+
+<p>and when it halts there will be \(&gt; 10 \uparrow\uparrow (r+3.5)\) ones on the tape. The current champion writes \(&lt; 10 \uparrow\uparrow 15.60466\) ones, so if \(r \ge 13\), Lucy’s Moonlight will beat it.<sup id="fnref:precise-resets" role="doc-noteref"><a href="#fn:precise-resets" class="footnote" rel="footnote">1</a></sup></p>
+
+<p>Therefore, in this probabilistic model, knowing that it reaches checkpoint \(C(&gt; 8 \times 10^{2901}, 8)\), the chance that Lucy’s Moonlight will write more ones than than Pavel’s current champion is:</p>
+
+\[\left(\frac{4}{5}\right)^{13} \approx 5.50\%\]
+
+<p>If we could somehow accelerate the simulation and demonstrate that it reset at least once more, then that probability would increase slightly to:</p>
+
+\[\left(\frac{4}{5}\right)^{12} \approx 6.87\%\]
+
+<h2 id="footnotes">Footnotes</h2>
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:precise-resets" role="doc-endnote">
+      <p>It appears that \(r=12\) resets followed by a halt will not be quite enough to snatch the championship, since it would have \(\approx 10 \uparrow\uparrow 15.54\) ones, just shy of the \(10 \uparrow\uparrow 15.60466\) needed for victory. But you’d have to be a little more careful with the analysis to ensure this is true. <a href="#fnref:precise-resets" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>]]></content><author><name>Shawn Ligocki</name></author><category term="busy-beaver" /><category term="collatz" /><category term="cryptid" /><summary type="html"><![CDATA[There is a 5% chance that we have a new BB(6) champion! It’s a machine discovered by Racheline which she’s named “Lucy’s Moonlight”. It is a probviously halting tetrational Cryptid. In other words, it’s a machine that we believe will eventually halt (with 100% chance via a probabilistic approximation), yet proving it requires either solving a Collatz-like problem or simulating it for a “tetrational” number of steps. This is very similar to the Mother of Giants with the exception that if the Mother of Giants TMs (quasi-)halt, then they are known to beat the current BBB(5) champion, whereas if Lucy’s Moonlight halts there is only a 5% chance that it beats the current 10↑↑15 BB(6) champion, in the other 95% cases it will halt in fewer steps.]]></summary></entry><entry><title type="html">One Collatz Coincidence</title><link href="https://www.sligocki.com//2024/09/20/collatz-coincidence.html" rel="alternate" type="text/html" title="One Collatz Coincidence" /><published>2024-09-20T00:00:00+00:00</published><updated>2024-09-20T00:00:00+00:00</updated><id>https://www.sligocki.com//2024/09/20/collatz-coincidence</id><content type="html" xml:base="https://www.sligocki.com//2024/09/20/collatz-coincidence.html"><![CDATA[<p>A common question people have about Busy Beaver champions is: “What are they doing?” This question sounds sort of objective, but is really a subjective philosophical question. Objectively, the TM is repeatedly evaluating the specific transition table rules until it halts, that’s all. In a sense, this is the “simplest” (smallest) explanation because these champions are literally the ones that “do the most” based on the smallest description.</p>
+
+<p>But this is not a very satisfying answer. The real meaning of this question is not to get the “smallest” explanation, but one that is more coherent or insightful to us as humans. However, must there be a more insightful description of behavior of these champion machines? Before getting into Busy Beaver analysis, I would have expected that they would not generally have such an insightful description. And I was not alone here: In his 2020 survey <a href="https://scottaaronson.blog/?p=4916">“The Busy Beaver Frontier”</a> Scott Aaronson conjectures:</p>
+
+<blockquote>
+  <p>A related intuition, though harder to formalize, is that Busy Beavers shouldn’t be “cleanly factorizable” into main routines and subroutines—but rather, that the way to maximize runtime should be via “spaghetti code,” or a single n-state amorphous mass.</p>
+</blockquote>
+
+<p>And yet, as many readers of this blog will be well aware, we can actually describe the behavior of most known Busy Beaver champions in a way that seems relatively simple mathematically. In fact, <a href="https://doi.org/10.1007/BF01409968">Pascal Michel discovered</a> in 1993 that many of the top BB(5) TMs simulate iterations of relatively simple Collatz-like functions and he has extended this analysis to many other champions with different numbers of states and symbols on his <a href="https://bbchallenge.org/~pascal.michel/beh">Behavior of busy beavers</a> website. This result led Nick Drozd to claim that <a href="https://nickdrozd.github.io/2021/09/25/spaghetti-code-conjecture-false.html">Maybe the Spaghetti Code Conjecture is False</a> in 2021.</p>
+
+<p>But is this just the <a href="https://en.wikipedia.org/wiki/Streetlight_effect">streetlight effect</a>? Presumably we are biased towards discovering Turing machines and proving they halt when they have simpler abstractions.<sup id="fnref:bias" role="doc-noteref"><a href="#fn:bias" class="footnote" rel="footnote">1</a></sup> With the recent solution of <a href="https://discuss.bbchallenge.org/t/july-2nd-2024-we-have-proved-bb-5-47-176-870/237">BB(5)</a> and <a href="/2024/08/27/bb-2-4-proven.html">BB(2,4)</a> problems, we now know with certainty that the S(5) and S(2,4) champions are both described by Collatz-like trajectories.</p>
+
+<p>… or perhaps I should say Collatz-like <strong>trajectory</strong>. Because fellow Discord user Racheline discovered on 4 Sep 2024 (<a href="https://discord.com/channels/960643023006490684/1260977480316092527/1280966930395828348">Discord</a>) that they are both effectively simulating the same Collatz-like trajectory! In fact, this Collatz-like trajectory appears to be ubiquitous among Turing machines around this size.</p>
+
+<h2 id="collatz-analyses">Collatz Analyses</h2>
+<h3 id="s5-champion">S(5) Champion</h3>
+
+<p>The S(5) champion <code class="language-plaintext highlighter-rouge">1RB1LC_1RC1RB_1RD0LE_1LA1LD_1RZ0LA</code> runs for 47,176,870 steps and leaves 4098 marks on the tape.<sup id="fnref:bb5_marks" role="doc-noteref"><a href="#fn:bb5_marks" class="footnote" rel="footnote">2</a></sup> It was discovered by Heiner Marxen and Jürgen Buntrock in 1989. Pascal Michel <a href="https://bbchallenge.org/~pascal.michel/beh#tm52a">provided the following analysis</a> in 1993:</p>
+
+<p>Let</p>
+
+\[M(n) = 0^\infty \; \text{&lt;A} \; 1^n \; 0^\infty\]
+
+<p>then</p>
+
+\[\begin{array}{lcl}
+  0^\infty \; \text{&lt;A} \; 0^\infty &amp; = &amp; M(0) \\
+  M(3k)   &amp; \to &amp; M(5k+6) \\
+  M(3k+1) &amp; \to &amp; M(5k+9) \\
+  M(3k+2) &amp; \to &amp; 0^\infty \;\; 1 \;\; \text{Z&gt;} \;\; 01 \;\; {(001)}^{k+1} \;\; 1 \;\; 0^\infty  \\
+\end{array}\]
+
+<p>The full trajectory from M(0) is:</p>
+
+\[\begin{array}{l}
+  M(0)    &amp; \to &amp; M(6)    &amp; \to &amp; M(16)   &amp; \to &amp; M(34)   &amp; \to &amp; M(64)    &amp; \to &amp; \\
+  M(114)  &amp; \to &amp; M(196)  &amp; \to &amp; M(334)  &amp; \to &amp; M(564)  &amp; \to &amp; M(946)   &amp; \to &amp; \\
+  M(1584) &amp; \to &amp; M(2646) &amp; \to &amp; M(4416) &amp; \to &amp; M(7366) &amp; \to &amp; M(12284) &amp; \to &amp; \text{HALT}
+\end{array}\]
+
+<h3 id="s5-runner-up">S(5) Runner Up</h3>
+
+<p>The second longest running BB(5) TM <code class="language-plaintext highlighter-rouge">1RB0LD_1LC1RD_1LA1LC_1RZ1RE_1RA0RB</code> runs for 23,554,764 steps and leaves 4097 marks on the tape. It was also discovered by Marxen and Buntrock in 1989. Pascal Michel also <a href="https://bbchallenge.org/~pascal.michel/beh#tm52b">provided the following analysis</a> in 1993:</p>
+
+<p>Let</p>
+
+\[B(n) = 0^\infty \; \text{&lt;A} \; 1^n \; 0^\infty\]
+
+<p>then</p>
+
+\[\begin{array}{lcl}
+  0^\infty \; \text{&lt;A} \; 0^\infty &amp; = &amp; B(0) \\
+  B(3k)   &amp; \to &amp; B(5k+3) \\
+  B(3k+1) &amp; \to &amp; 0^\infty \;\; 1 \;\; {(110)}^k \;\; 11 \;\; \text{Z&gt;} \;\; 0^\infty  \\
+  B(3k+2) &amp; \to &amp; B(5k+7) \\
+\end{array}\]
+
+<p>The full trajectory from B(0) is:</p>
+
+\[\begin{array}{l}
+  B(0)    &amp; \to &amp; B(3)    &amp; \to &amp; B(8)    &amp; \to &amp; B(17)   &amp; \to &amp; B(32)    &amp; \to &amp; \\
+  B(57)   &amp; \to &amp; B(98)   &amp; \to &amp; B(167)  &amp; \to &amp; B(282)  &amp; \to &amp; B(473)   &amp; \to &amp; \\
+  B(792)  &amp; \to &amp; B(1323) &amp; \to &amp; B(2208) &amp; \to &amp; B(3683) &amp; \to &amp; B(6142)  &amp; \to &amp; \text{HALT}
+\end{array}\]
+
+<p>If you compare this with the M trajectory, a pattern immediately jumps out. You can directly convert between these trajectories by replacing \(B(n)\) with \(M(2n)\)! And, in fact, we can prove this:</p>
+
+\[\begin{array}{lcl}
+  M(2(3k))     &amp; = &amp; M(3(2k))       &amp; \to &amp; M(5(2k) + 6) &amp; = &amp; M(2(5k + 3)) \\
+  M(2(3k + 1)) &amp; = &amp; M(3(2k) + 2)   &amp; \to &amp; \text{Halt} \\
+  M(2(3k + 2)) &amp; = &amp; M(3(2k+1) + 1) &amp; \to &amp; M(5(2k+1) + 9) &amp; = &amp; M(2(5k + 7)) \\
+\end{array}\]
+
+<p>Therefore:</p>
+
+\[\begin{array}{lcl}
+  M(2a) \to M(2b)       &amp; \iff &amp; B(a) \to B(b) \\
+  M(2a) \to \text{Halt} &amp; \iff &amp; B(a) \to \text{Halt} \\
+\end{array}\]
+
+<p>But wait, there’s more! In fact, there is actually a giant clump of <a href="https://wiki.bbchallenge.org/wiki/BB(5)#Enumeration">19 distinct BB(5) TMs</a> that run &gt; 10 million steps and all leave between 4096-4098 marks on the tape!  Pascal analyzed the other Σ(5) champion (<code class="language-plaintext highlighter-rouge">1RB1RA_1LC1LB_1RA1LD_1RA1LE_1RZ0LC</code>) in his 1993 paper and showed that it simulates the exact same function. I haven’t analyzed the rest of them, but I’d guess that they are all taking advantage of equivalent Collatz-like trajectories as well (since they are clumped so tightly).</p>
+
+<h3 id="bbb4-champion">BBB(4) Champion</h3>
+
+<p>The current 4-state <a href="https://wiki.bbchallenge.org/wiki/Beeping_Busy_Beaver">Beeping Busy Beaver</a> (and also <a href="https://nickdrozd.github.io/2021/02/14/blanking-beavers.html">Blanking Beaver</a>) champion <code class="language-plaintext highlighter-rouge">1RB1LD_1RC1RB_1LC1LA_0RC0RD</code> runs 32,779,478 steps before becoming a trivial <a href="https://wiki.bbchallenge.org/wiki/Translated_Cycler">Translated Cycler</a> with period 1. It was <a href="https://nickdrozd.github.io/2021/07/11/self-cleaning-turing-machine.html">discovered</a> by Nick Drozd in 2021. I first <a href="/2021/07/17/bb-collatz.html">analyzed</a> it way back as my second Busy Beaver related blog post here. I actually forgot about that analysis (oops) and <a href="https://wiki.bbchallenge.org/wiki/1RB1LD_1RC1RB_1LC1LA_0RC0RD">re-analyzed</a> it last week! Racheline discovered the connection with the S(5) champion’s iteration.</p>
+
+<p>Let</p>
+
+\[D(n) = 0^\infty \; 1^n \; 0^4 \; \text{D&gt;} \; 0^\infty\]
+
+<p>then</p>
+
+\[\begin{array}{lcl}
+  0^\infty \; \text{&lt;A} \; 0^\infty &amp; \xrightarrow{19} &amp; D(2) \\
+  D(3k)   &amp; \to &amp; 0^\infty \; \text{&lt;C} \; 0^\infty  &amp; \text{(Quasihalt)} \\
+  D(3k+1) &amp; \to &amp; D(5k+6) \\
+  D(3k+2) &amp; \to &amp; D(5k+7) \\
+\end{array}\]
+
+<p>the full trajectory from D(2) is:</p>
+
+\[\begin{array}{l}
+          &amp;     &amp; D(2)    &amp; \to &amp; D(7)    &amp; \to &amp; D(16)   &amp; \to &amp; D(31)    &amp; \to &amp; \\
+  D(56)   &amp; \to &amp; D(97)   &amp; \to &amp; D(166)  &amp; \to &amp; D(281)  &amp; \to &amp; D(472)   &amp; \to &amp; \\
+  D(791)  &amp; \to &amp; D(1322) &amp; \to &amp; D(2207) &amp; \to &amp; D(3682) &amp; \to &amp; D(6141)  &amp; \to &amp; \text{HALT}
+\end{array}\]
+
+<p>and finally, compare this to the \(B(n)\) trajectory and the pattern becomes clear, just replace each \(D(n)\) with \(B(n+1)\)! And once again, it’s not too hard to prove this (once you see the pattern):</p>
+
+\[\begin{array}{lcl}
+  B(3k     &amp; + 1) &amp; \to &amp; \text{Halt} \\
+  B(3k + 1 &amp; + 1) &amp; \to &amp; B(5k+6 &amp; + 1) \\
+  B(3k + 2 &amp; + 1) &amp; \to &amp; B(5k+7 &amp; + 1) \\
+\end{array}\]
+
+<p>so</p>
+
+\[\begin{array}{lcl}
+  D(a) \to D(b)        &amp; \iff &amp; B(a+1) \to B(b+1) \\
+  D(a) \to \text{Quasihalt} &amp; \iff &amp; B(a+1) \to \text{Halt} \\
+\end{array}\]
+
+<h3 id="s24-champion">S(2,4) Champion</h3>
+
+<p>The S(2,4) champion <code class="language-plaintext highlighter-rouge">1RB2LA1RA1RA_1LB1LA3RB1RZ</code> runs for 3,932,964 steps and leaves 2050 marks on the tape. It was discovered by my dad, Terry, and I in 2005. Racheline discovered the connection with the S(5) champion’s iteration. The analysis here will require a little more work to connect the dots.</p>
+
+<p>Let</p>
+
+\[L(a, b, c) = 0^\infty \; 1 \; 3^a \; \text{&lt;A} \; 2^b \; 1^c \; 0^\infty\]
+
+<p>then</p>
+
+\[\begin{array}{lcl}
+  0^\infty \; \text{&lt;A} \; 0^\infty &amp; \xrightarrow{5} &amp; L(0, 0, 2) \\
+  L(a+1, b, c+1) &amp; \to &amp; L(a, b+2, c) \\
+  L(a+1, b, 0)   &amp; \to &amp; L(a, b+1, 2) \\
+  L(0,   b, c+1) &amp; \to &amp; L(b+1, 0, c+1) \\
+  L(0,   b, 0)   &amp; \to &amp; \text{Halt} \\
+\end{array}\]
+
+<p>At this point it might not be obvious that there is any connection. Racheline discovered that the trick is to transform the configuration a bit. Let</p>
+
+\[R(a, 3k+r) = L(a, k, r)\]
+
+<p>then, it turns out that</p>
+
+\[\begin{array}{lcl}
+  0^\infty \; \text{&lt;A} \; 0^\infty &amp; \xrightarrow{5} &amp; R(0, 2) \\
+  R(a+1, b) &amp; \to &amp; R(a, b+5) \\
+  R(0, 3k) &amp; \to &amp; \text{Halt} \\
+  R(0, 3k+r) &amp; \to &amp; R(k+1, r) &amp; \text{if } r &gt; 0 \\
+\end{array}\]
+
+<p>This second rule is where the magic is! Note that the \(R(a+1, b)\) rule effectively combines the two \(L(a+1, b, c)\) cases above. Now, we can simplify this to:</p>
+
+\[\begin{array}{lcl}
+  R(0, 3k) &amp; \to &amp; \text{Halt} \\
+  R(0, 3k+r) &amp; \to &amp; R(0, 5k+5+r) &amp; \text{if } r &gt; 0 \\
+\end{array}\]
+
+<p>let \(R(n) = R(0, n)\) then</p>
+
+\[\begin{array}{lcl}
+  0^\infty \; \text{&lt;A} \; 0^\infty &amp; \xrightarrow{5} &amp; R(2) \\
+  R(3k)   &amp; \to &amp; \text{Halt} \\
+  R(3k+1) &amp; \to &amp; R(5k+6) \\
+  R(3k+2) &amp; \to &amp; R(5k+7) \\
+\end{array}\]
+
+<p>and we can see that these \(R(n)\) rules are identical to the \(D(n)\) rules above (and also starts at the same point), so it will also follow an equivalent trajectory.</p>
+
+<h1 id="the-collatz-coincidence">The Collatz Coincidence</h1>
+
+<p>Why are all of these champion TMs following equivalent Collatz-like trajectories? Well, this specific Collatz-like trajectory is unusually “lucky”. Let’s focus on the \(B(n)\) trajectory:</p>
+
+\[\begin{array}{l}
+  B(0)    &amp; \to &amp; B(3)    &amp; \to &amp; B(8)    &amp; \to &amp; B(17)   &amp; \to &amp; B(32)    &amp; \to &amp; \\
+  B(57)   &amp; \to &amp; B(98)   &amp; \to &amp; B(167)  &amp; \to &amp; B(282)  &amp; \to &amp; B(473)   &amp; \to &amp; \\
+  B(792)  &amp; \to &amp; B(1323) &amp; \to &amp; B(2208) &amp; \to &amp; B(3683) &amp; \to &amp; B(6142)  &amp; \to &amp; \text{HALT}
+\end{array}\]
+
+<p>This avoids the halt transition 14 times before finally halting. If we treat each transition as having a uniform random chance of hitting each of the 3 rules, then the chance of avoiding halt 14 times in a row is \((\frac{2}{3})^{14} \approx 0.0034 \approx \frac{1}{300}\). So, it seems like this is pretty rare. Perhaps rare enough that any TM which can (just barely) simulate it out-competes all others of it’s size?</p>
+
+<h2 id="footnotes">Footnotes</h2>
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:bias" role="doc-endnote">
+      <p>In fact, I expect that this is the case with BB(6) where the current champion runs for so long that we cannot even write the number using standard scientific notation and need to use Knuth up-arrows. The only reason we could find this champion, was because we were able to find patterns which allowed accelerating the simulation enough to prove it halts. <a href="#fnref:bias" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:bb5_marks" role="doc-endnote">
+      <p>Note: <code class="language-plaintext highlighter-rouge">1RB1RA_1LC1LB_1RA1LD_1RA1LE_1RZ0LC</code> also leaves 4098 marks so technically there are actually two Σ(5) champions. <a href="#fnref:bb5_marks" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>]]></content><author><name>Shawn Ligocki</name></author><category term="busy-beaver" /><category term="champion" /><category term="collatz" /><summary type="html"><![CDATA[A common question people have about Busy Beaver champions is: “What are they doing?” This question sounds sort of objective, but is really a subjective philosophical question. Objectively, the TM is repeatedly evaluating the specific transition table rules until it halts, that’s all. In a sense, this is the “simplest” (smallest) explanation because these champions are literally the ones that “do the most” based on the smallest description.]]></summary></entry><entry><title type="html">S(2,4) = 3932964</title><link href="https://www.sligocki.com//2024/08/27/bb-2-4-proven.html" rel="alternate" type="text/html" title="S(2,4) = 3932964" /><published>2024-08-27T00:00:00+00:00</published><updated>2024-08-27T00:00:00+00:00</updated><id>https://www.sligocki.com//2024/08/27/bb-2-4-proven</id><content type="html" xml:base="https://www.sligocki.com//2024/08/27/bb-2-4-proven.html"><![CDATA[<p>We now know definitively that</p>
+
+\[\begin{array}{lcr}
+  S(2,4)      &amp; = &amp; 3\,932\,964 \\
+  \Sigma(2,4) &amp; = &amp;      2\,050 \\
+\end{array}\]
+
+<p>So, all 2-state, 4-symbol Turing machines either halt within the first 4 million steps or run forever. Both of these records are set by a single TM (<code class="language-plaintext highlighter-rouge">1RB2LA1RA1RA_1LB1LA3RB1RZ</code>) the champion that my dad and I found in 2005  that <a href="/2022/05/14/adjacent-tms.html">started my Busy Beaver journey</a>.</p>
+
+<h2 id="proof">Proof</h2>
+
+<p>The \(S(2,4)\) bound was proven by <code class="language-plaintext highlighter-rouge">@mxdys</code> using a subset of methods that were used to prove the \(S(5) = 47\,176\,870\) <a href="https://discuss.bbchallenge.org/t/july-2nd-2024-we-have-proved-bb-5-47-176-870/237">result</a>. See <a href="https://github.com/ccz181078/Coq-BB5/blob/main/BB24Theorem.v">Coq-BB5/BB24Theorem.v</a> for the self-contained Coq proof. The proof uses only the following deciders:</p>
+
+<ol>
+  <li>Translated Cycler (<a href="https://github.com/ccz181078/Coq-BB5/tree/main?tab=readme-ov-file#loop1_decider"><code class="language-plaintext highlighter-rouge">loop1_decider</code></a>)</li>
+  <li><a href="https://github.com/ccz181078/Coq-BB5/tree/main?tab=readme-ov-file#ngramcps-decider">Ngram CPS</a> (<code class="language-plaintext highlighter-rouge">NGramCPS_decider_impl1</code>, <code class="language-plaintext highlighter-rouge">NGramCPS_decider_impl2</code>, <code class="language-plaintext highlighter-rouge">NGramCPS_LRU_decider</code>)</li>
+  <li><a href="https://github.com/ccz181078/Coq-BB5/tree/main?tab=readme-ov-file#repwl_es_decider"><code class="language-plaintext highlighter-rouge">RepWL_ES_decider</code></a> (a CTL method)</li>
+</ol>
+
+<p>You can check the proof for yourself by:</p>
+
+<ol>
+  <li>Cloning the <a href="https://github.com/ccz181078/Coq-BB5">Coq-BB5 repo</a></li>
+  <li>Installing Coq version 8.18 or newer</li>
+  <li>Running <code class="language-plaintext highlighter-rouge">coqc -Q . BusyCoq BB24Theorem.v</code></li>
+</ol>
+
+<p>On my Mac laptop it compiles within 20 minutes:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>time coqc -Q . BusyCoq BB24Theorem.v
+...
+Axioms:
+functional_extensionality_dep
+  : forall (A : Type) (B : A -&gt; Type) (f g : forall x : A, B x),
+    (forall x : A, f x = g x) -&gt; f = g
+coqc -Q . BusyCoq BB24Theorem.v  1170.85s user 2.78s system 99% cpu 19:37.42 total
+</code></pre></div></div>
+
+<p>There are a couple of small caveats to note about this proof:</p>
+
+<ol>
+  <li>It depends on one assumption/axiom: functional extensionality. I don’t think this is very controversial it basically just defines what it means for two functions to be equal (that for all inputs they produce the same outputs) and is a very common axiom to use in many proofs.</li>
+  <li>Technically, the way that <code class="language-plaintext highlighter-rouge">@mxdys</code> defined TMs in this library they do not actually have halting states, but instead undefined transitions. The idea is that the TM halts once it reaches an undefined transition. This is a very minor difference with the standard TM definition used by Rado for Busy Beavers, but completely equivalent. However, you will notice in the code that they refer to the BB value as 3932963 (one less than the official value) because this is the number of steps until you reach an undefined transition.</li>
+  <li>The Coq proof does not prove the \(\Sigma(2,4)\) value. Instead for that we depend upon the slightly less rigorous process of manually running all 2-state, 4-symbol TMs for \(S(2,4)\) steps and noting by inspection that the champion indeed leaves the most non-zero symbols on the tape.</li>
+</ol>
+
+<p>These caveats apply to the previous BB(5) proof as well.</p>
+
+<h2 id="deciders">Deciders</h2>
+
+<p>The heart of this proof computation is a <a href="https://wiki.bbchallenge.org/wiki/Tree_Normal_Form">TNF enumeration</a> of all 2-state, 4-symbol TMs each of which is run through a series of 21 decider parameterizations:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(
+  (loop1_decider 107 (1::2::4::8::16::32::64::128::256::512::nil))::
+  (NGramCPS_decider_impl2 1 1 400)::
+  (NGramCPS_decider_impl2 2 2 800)::
+  (NGramCPS_decider_impl2 3 3 400)::
+  (NGramCPS_decider_impl2 4 4 800)::
+  (loop1_decider 4100 (1::2::4::8::16::32::64::128::256::512::1024::2048::4096::nil))::
+  (RepWL_ES_decider 2 3 320 400)::
+  (NGramCPS_LRU_decider 2 2 1000)::
+  (NGramCPS_decider_impl1 2 2 2 3000)::
+  (NGramCPS_decider_impl1 2 3 3 1600)::
+  (NGramCPS_decider_impl1 4 2 2 600)::
+  (NGramCPS_decider_impl1 4 3 3 1600)::
+  (NGramCPS_decider_impl1 6 2 2 3200)::
+  (NGramCPS_decider_impl1 6 3 3 3200)::
+  (NGramCPS_decider_impl1 8 2 2 1600)::
+  (NGramCPS_decider_impl1 8 3 3 1600)::
+  (NGramCPS_LRU_decider 3 3 20000)::
+  (RepWL_ES_decider 4 2 320 2000)::
+  (RepWL_ES_decider 6 2 320 2000)::
+  (NGramCPS_decider_impl2 4 4 20000)::
+  (halt_decider 3932964)::
+  nil
+)
+</code></pre></div></div>
+
+<p>These are run in order. I expect that the order here is meant to roughly correspond to the most “efficient” order. In other words, the decider parameterizations near the top presumably decide more TMs more quickly than the ones further down the list. However, I don’t know how optimal this order is or if a tweak to it would allow the proof to run more quickly.</p>
+
+<p>The deciders used here fall into 3 broad groups as I mentioned earlier:</p>
+
+<ol>
+  <li>Translated Cycle (<code class="language-plaintext highlighter-rouge">loop1_decider</code>)</li>
+  <li>Ngram CPS (<code class="language-plaintext highlighter-rouge">NGramCPS_decider_impl1</code>, <code class="language-plaintext highlighter-rouge">NGramCPS_decider_impl2</code>, <code class="language-plaintext highlighter-rouge">NGramCPS_LRU_decider</code>)</li>
+  <li>CTL (<code class="language-plaintext highlighter-rouge">RepWL_ES_decider</code>)</li>
+</ol>
+
+<p>A natural question to ask is how important are each of these deciders? For example, how many TMs are decided by each? Coq code does not make it easy to add instrumentation, however, I was able to extract a little bit of information. If you comment out all of the <code class="language-plaintext highlighter-rouge">RepWL_ES_decider</code>s, then it leaves 102 holdout TMs. So we can see that Translated Cycler + Ngram CPS is almost strong enough to solve BB(2,4), but not quite.</p>
+
+<h2 id="regular-tms">Regular TMs</h2>
+
+<p>One interesting result here is that all deciders used to prove the BB(2,4) result are “regular” deciders. In other words, every non-halting BB(2,4) TM can be proven infinite using <a href="/2022/06/10/ctl.html">CTL</a> using Regular Expressions. This was not true for BB(5) where it was discovered that there were approximately 30 5-state, 2-symbol TMs which appear to be “irregular” (i.e. unable to be proven infinite via CTL using Regular Expressions) and at least some of them were <a href="https://discuss.bbchallenge.org/t/10756090-is-irregular/137">proven irregular</a>.</p>
+
+<p>When paired with the result that we have found <a href="https://wiki.bbchallenge.org/wiki/Cryptids">Crypids</a> in <a href="/2024/07/06/bb-6-2-is-hard.html">BB(6,2)</a>, <a href="/2023/10/16/bb-3-3-is-hard.html">BB(3,3)</a> and <a href="/2024/05/10/bb-2-5-is-hard.html">BB(2,5)</a> we see that BB(5) has the surprisingly unique experience of being the only domain in which there are irregular TMs, but no Cryptids. In other words, that there are TMs which are “hard” to prove (requiring deciders more powerful than regular languages) but not too hard (requiring solving a Collatz-like problem). This was first noted by <code class="language-plaintext highlighter-rouge">@mxdys</code> on Discord where he posted the following image to demonstrate:</p>
+
+<p><img src="/assets/images/regular_cryptid_curves.png" alt="Regular / Cryptid Curves" title="Regular / Cryptid Curves" /></p>
+
+<p>Here the green line bounds domains where all TMs are regular (CTLable) and the red line bounds all domains that don’t contain Cryptids. The only deviation is BB(5).</p>
+
+<p>Is this mathematically meaningful? I think the answer is no, it’s basically a coincidence of the precise way that we define TMs for the Busy Beaver problem. If you were to use a slightly different definition of computation (TMs with semi-infinite tape, 4-tuple TMs, lambda calculus, etc.) I think you’d end up with a completely different result. But from a social point of view, it’s quite intriguing. We at <a href="http://bbchallenge.org">http://bbchallenge.org</a> ended up focusing our efforts on this unique BB(5) case which turned out to be solvable but did require a bit of uniquely challenging ingenuity.</p>
+
+<h2 id="history">History</h2>
+
+<blockquote>
+  <p>Note: All Discord links are for the <a href="https://bbchallenge.org/">https://bbchallenge.org/</a> Discord server.</p>
+</blockquote>
+
+<p>BB(2,4) was first informally decided through a collaboration between myself and <code class="language-plaintext highlighter-rouge">@Iijil</code> in 2023:</p>
+
+<ul>
+  <li>On 10 Apr 2023, <code class="language-plaintext highlighter-rouge">@Iijil</code> shared a list of 27 BB(2,4) holdout TMs (<a href="https://discord.com/channels/960643023006490684/960643023530762341/1095010742144618536">Discord</a>).</li>
+  <li>The same day, I shared my list of 31 holdouts (<a href="https://discord.com/channels/960643023006490684/960643023530762341/1095032415824658443">Discord</a>).</li>
+  <li>There were only 2 TMs in both lists: <code class="language-plaintext highlighter-rouge">1RB3LA1LA1RA_2LB2RA---0RB</code> and <code class="language-plaintext highlighter-rouge">1RB3LA1LA2RA_2LB3RA---0RB</code>. In other words, only 2 TMs that neither of us had proven infinite yet.</li>
+  <li><code class="language-plaintext highlighter-rouge">@Iijil</code> ran their <code class="language-plaintext highlighter-rouge">MITMWFAR</code> decider to higher parameters (14 non-dead transitions) and was able to decide the last 2 TMs (<a href="https://discord.com/channels/960643023006490684/960643023530762341/1095045729858363498">Discord</a>).</li>
+  <li>Last week, Andrew Ducharme and my dad reproduced this result (<a href="https://discord.com/channels/960643023006490684/1084047886494470185/1276236289548750889">Discord</a>).</li>
+  <li>On 22 Aug 2024, <code class="language-plaintext highlighter-rouge">@mxdys</code> announced that they had successfully compiled the Coq proof of BB(2,4) (<a href="https://discord.com/channels/960643023006490684/1218877181321678928/1276336329218854984">Discord</a>).</li>
+</ul>]]></content><author><name>Shawn Ligocki</name></author><category term="busy-beaver" /><category term="champion" /><summary type="html"><![CDATA[We now know definitively that]]></summary></entry><entry><title type="html">BB(6) is Hard (Antihydra)</title><link href="https://www.sligocki.com//2024/07/06/bb-6-2-is-hard.html" rel="alternate" type="text/html" title="BB(6) is Hard (Antihydra)" /><published>2024-07-06T00:00:00+00:00</published><updated>2024-07-06T00:00:00+00:00</updated><id>https://www.sligocki.com//2024/07/06/bb-6-2-is-hard</id><content type="html" xml:base="https://www.sligocki.com//2024/07/06/bb-6-2-is-hard.html"><![CDATA[<blockquote>
+  <p>Note: All Discord links are for the <a href="https://bbchallenge.org/">https://bbchallenge.org/</a> Discord server.</p>
+</blockquote>
+
+<p>Consider the Collatz-like function:</p>
+
+\[\begin{array}{l}
+  f(2n)   &amp; = &amp; 3n   \\
+  f(2n+1) &amp; = &amp; 3n+1 \\
+\end{array}\]
+
+<p>or equivalently defined as</p>
+
+\[f(n) = n + \left\lfloor \frac{n}{2} \right\rfloor\]
+
+<p>Starting from 8 and repeatedly applying \(f\) we get the infinite sequence:</p>
+
+\[8 \xrightarrow{E} 12 \xrightarrow{E} 18 \xrightarrow{E} 27 \xrightarrow{O} 40 \xrightarrow{E} 60 \xrightarrow{E} 90 \xrightarrow{E} 135 \xrightarrow{O} 202 \cdots\]
+
+<p>where the <code class="language-plaintext highlighter-rouge">O</code>s and <code class="language-plaintext highlighter-rouge">E</code>s above each arrow represent whether we chose the Odd or Even rule to apply (i.e. whether or not the previous value was odd or even).</p>
+
+<p>Starting from 8, will you ever reach a point where the cumulative number of <code class="language-plaintext highlighter-rouge">O</code>s applied is greater than twice the number of <code class="language-plaintext highlighter-rouge">E</code>s applied?</p>
+
+<p>Solving the 6-state, 2-symbol Busy Beaver problem requires solving this Collatz-like problem! Yes, that’s right, we have our first BB(6) <a href="https://wiki.bbchallenge.org/wiki/Cryptids">Cryptid</a>, the “<a href="https://wiki.bbchallenge.org/wiki/Antihydra">Antihydra</a>”.</p>
+
+<p>For returning visitors who may be feeling a sense of Deja-Vu: Yes, this is almost identical to the <a href="/2024/05/10/bb-2-5-is-hard.html">Hydra</a> rules! In fact, the only difference is that Antihydra starts at 8 instead of 3 and that the halting condition is “reversed” (\(O &gt; 2E\) instead of \(E &gt; 2O\)).</p>
+
+<h2 id="antihydra">Antihydra</h2>
+
+<p><code class="language-plaintext highlighter-rouge">1RB1RA_0LC1LE_1LD1LC_1LA0LB_1LF1RE_---0RA</code> (<a href="https://bbchallenge.org/1RB1RA_0LC1LE_1LD1LC_1LA0LB_1LF1RE_---0RA">on bbchallenge</a>)</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"> </th>
+      <th style="text-align: center">0</th>
+      <th style="text-align: center">1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">A</td>
+      <td style="text-align: center">1RB</td>
+      <td style="text-align: center">1RA</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">B</td>
+      <td style="text-align: center">0LC</td>
+      <td style="text-align: center">1LE</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">C</td>
+      <td style="text-align: center">1LD</td>
+      <td style="text-align: center">1LC</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">D</td>
+      <td style="text-align: center">1LA</td>
+      <td style="text-align: center">0LB</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">E</td>
+      <td style="text-align: center">1LF</td>
+      <td style="text-align: center">1RE</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">F</td>
+      <td style="text-align: center">—</td>
+      <td style="text-align: center">0RA</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>This TM was discovered and shared by @mxdys on 28 June 2024 <a href="https://discord.com/channels/960643023006490684/1026577255754903572/1256223215206924318">on Discord</a> with the message: “This TM looks like a random [walk] like hydra”. Shortly afterwards, Racheline (@rae) discovered and shared the precise rules described below.</p>
+
+<h2 id="analysis">Analysis</h2>
+
+<p>Let</p>
+
+\[E(a, b) = 0^\infty \; 1^b \; 0 \; 1^a \; \text{E&gt;} \; 0^\infty\]
+
+<p>Then the following rules apply:</p>
+
+\[\begin{array}{l}
+  \text{Start} &amp; &amp; \xrightarrow{11} &amp; E(4, 0) \\
+  E(2n,   &amp; b)   &amp; \to &amp; E(3n+2, b+2)       &amp; \text{ if } n \ge 1 \\
+  E(2n+1, &amp; 0)   &amp; \to &amp; \text{Halt}(3n+3)  &amp; \text{ if } n \ge 1 \\
+  E(2n+1, &amp; b+1) &amp; \to &amp; E(3n+3, b)         &amp; \text{ if } n \ge 1 \\
+\end{array}\]
+
+<p>Where “Start” is the TM in state <code class="language-plaintext highlighter-rouge">A</code> on a blank tape and “Halt(x)” means the TM halts with \(x\) non-zero symbols on the tape.</p>
+
+<h3 id="alternative-collatz-map">Alternative Collatz map</h3>
+
+<p>Like with Hydra, we can shift this map to produce a more familiar mapping.</p>
+
+<p>Let</p>
+
+\[A(a, b) = E(a-4, b)\]
+
+<p>then for all \(n \ge 3\) and \(b \ge 0\) we have:</p>
+
+\[\begin{array}{l}
+  \text{Start} &amp; &amp; \xrightarrow{11} &amp; A(8, 0) \\
+  A(2n,   &amp; b)   &amp; \to &amp; A(3n, b+2) \\
+  A(2n+1, &amp; 0)   &amp; \to &amp; \text{Halt}(3n-3) \\
+  A(2n+1, &amp; b+1) &amp; \to &amp; A(3n+1, b) \\
+\end{array}\]
+
+<p>which is (as previously stated) the same as the Hydra map, but starting from 8 and with the reverse halting condition.</p>
+
+<p>Note that the \(n \ge 3\) conditions does not cause any trouble since this iteration starts at \(a = 8\) and \(a\) strictly increases after each iteration (for all \(a \ge 2\)).</p>
+
+<h3 id="trajectory">Trajectory</h3>
+
+<p>@mxdys has simulated this iteration out to \(2^{31} = 2\,147\,483\,648\) steps at which point \(b = 1\,073\,720\,884\) (only 20940 below the expected value if this were a random walk) (<a href="https://discord.com/channels/960643023006490684/1026577255754903572/1258509066196746351">Discord link</a>). As with Hydra and Bigfoot, if we treat this iteration as a random walk, it has a miniscule chance of ever returning to \(b = 0\) and thus of ever halting.</p>
+
+<h2 id="the-future-of-busy-beaver">The Future of Busy Beaver</h2>
+
+<p>On Tuesday, we at bbchallenge.org <a href="https://discuss.bbchallenge.org/t/july-2nd-2024-we-have-proved-bb-5-47-176-870/237">announced a Coq proof of the BB(5) problem</a> (and Ben Brubaker at Quanta wrote a <a href="https://www.quantamagazine.org/amateur-mathematicians-find-fifth-busy-beaver-turing-machine-20240702">lovely article</a> describing the 60 year journey!). And within a week before that, we have also found this first BB(6) Cryptid. This combination of events leaves me with some sadness alongside my joy. One of the things I’ve long talked about loving when it comes to the Busy Beaver problem, is the idea that we will never be done with it. Nobody can ever find all Busy Beaver values, so there will always be one more puzzle to solve, one more mystery to explore.</p>
+
+<p>But with this discovery of Cryptids in BB(6), we now know (in an especially concrete way) how the next puzzle will be quite hard. Scott Aaronson is quoted in Ben’s article saying “It’s conceivable that this is the last busy beaver number that we will ever know.” Is this the end of the Busy Beaver problem? Instead of an end I think it is a sharp turn on the racecourse. Up until now, our goal has been to find new Busy Beaver champions and prove that all other TMs run forever. Now, it feels, that our goal has changed slightly: in addition to finding new champions, we are also looking for new Cryptids and trying to explain them in as simple a way as possible.</p>
+
+<p>Solving BB(6) feels out of reach in my lifetime, but solving BB(6) modulo a handful of Cryptids feels possible. As Busy Beaver hunters in a changing world, we must adapt to the new conditions and consider new prey. Let us also hunt Cryptids!</p>]]></content><author><name>Shawn Ligocki</name></author><category term="busy-beaver" /><category term="collatz" /><category term="cryptid" /><summary type="html"><![CDATA[Note: All Discord links are for the https://bbchallenge.org/ Discord server.]]></summary></entry><entry><title type="html">TM Transcripts</title><link href="https://www.sligocki.com//2024/06/12/tm-transcripts.html" rel="alternate" type="text/html" title="TM Transcripts" /><published>2024-06-12T00:00:00+00:00</published><updated>2024-06-12T00:00:00+00:00</updated><id>https://www.sligocki.com//2024/06/12/tm-transcripts</id><content type="html" xml:base="https://www.sligocki.com//2024/06/12/tm-transcripts.html"><![CDATA[<style>
+  .center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+</style>
+
+<p>When we think about interpreting a Turing Machine’s behavior, we often think about visualizing the configuration history, for example in a space-time diagram like:</p>
+
+<figure class="center">
+  <img src="/assets/images/spacetime_rtm.png" class="center" />
+  <figcaption>
+    A <a href="http://skelet.ludost.net/bb/RTM.htm">Reversal Turing Machine</a> with fractal behavior.<br />
+    <a href="https://bbchallenge.org/1RB0RF_1LC0RB_1RD0LC_1LE0RD_1RA0LE_1LD---">
+      <code>1RB0RF_1LC0RB_1RD0LC_1LE0RD_1RA0LE_1LD---</code>
+    </a><br />
+    Images courtesy of @mxdys on bbchallenge Discord.
+  </figcaption>
+</figure>
+
+<p>These visual representation can give a lot of hints about the large-scale behavior of the machines over long times, but they can also obscure the details of low-level behavior. In these large images we cannot even see where the TM head is, let alone what transitions it is following. What if instead of watching a TM, we listened?</p>
+
+<p>If we closed our eyes or turned off the lights in the presence of a physical Turing Machine, we could not see these grand visual patterns, but instead, maybe with a little practice, we could learn to pick out the different sounds it made when executing different transitions?</p>
+
+<h2 id="transcripts">Transcripts</h2>
+
+<p>You close your eyes and you hear <code class="language-plaintext highlighter-rouge">A0 B0 C0 A1 B1 C0 A0 B0 C0 A1 B1 C0 A0 B0 C0 A1 B1 C0 ...</code>. Let’s call this the <strong>Transcript</strong> of the Turing Machine. This name has a double meaning, both the metaphorical meaning that it a transcription of the “sounds” of the TM, but also the literal meaning that it is a <strong>script</strong> of <strong>trans</strong>itions. Am I leaning too much into this metaphor? If you want a more straightforward name, I believe that @mxdys calls this the <strong>Transition History</strong> of the TM.</p>
+
+<p>Precisely, a Transcript is the sequence of <code class="language-plaintext highlighter-rouge">(current state, read symbol)</code> pairs over all steps of execution. We will use our standard notation of letters for states and digits for symbols so that one pair looks like <code class="language-plaintext highlighter-rouge">C1</code> for example.</p>
+
+<p>If a TM halts, then it has a finite transcript. For example, the BB(2) champion <a href="https://bbchallenge.org/1RB1LB_1LA1RZ"><code class="language-plaintext highlighter-rouge">1RB1LB_1LA1RZ</code></a> has transcript <code class="language-plaintext highlighter-rouge">A0 B0 A1 B0 A0 B1</code> and the BB(3) shift champion <a href="https://bbchallenge.org/1RB1RZ_1LB0RC_1LC1LA"><code class="language-plaintext highlighter-rouge">1RB1RZ_1LB0RC_1LC1LA</code></a> has transcript <code class="language-plaintext highlighter-rouge">A0 B0 B1 C1 A0 B1 C0 C0 C1 A0 B1 C1 A0 B1 C1 A0 B1 C0 C0 C1 A1</code>.</p>
+
+<h3 id="repeated-motifs">Repeated Motifs</h3>
+
+<p>If you were listening to this transcript played out as musical notes, you might notice the repeated sequence (or “<a href="https://en.wikipedia.org/wiki/Motif_(music)">motif</a>”) <code class="language-plaintext highlighter-rouge">C1 A0 B1</code> repeating several times throughout the BB(3) transcript. In fact, <code class="language-plaintext highlighter-rouge">C1 A0 B1</code> corresponds to the rule:</p>
+
+\[0 \; \text{C&gt;} \; 1 \xrightarrow{3} 1 \; 0 \; \text{C&gt;}\]
+
+<p>and consecutive repeats of this motif correspond to the <a href="https://wiki.bbchallenge.org/wiki/Shift_rule">shift rule</a>:</p>
+
+\[0 \; \text{C&gt;} \; 1^n \to 1^n \; 0 \; \text{C&gt;}\]
+
+<p>Is this a coincidence?</p>
+
+<p>Well, it turns out that every sequence of transitions from a transcript corresponds to some transition rule. For example, <code class="language-plaintext highlighter-rouge">B1 C0 C0 C1</code> corresponds to the rule:<sup id="fnref:notation" role="doc-noteref"><a href="#fn:notation" class="footnote" rel="footnote">1</a></sup></p>
+
+\[1 (B1) 0 \xrightarrow{4} \text{&lt;A} \;  111\]
+
+<p>and <code class="language-plaintext highlighter-rouge">A0 B0 B1 C1</code> corresponds to the rule:</p>
+
+\[(A0) 0 \xrightarrow{4} (A0) 1\]
+
+<p>but neither of these sequences can be repeated since there is no way for the configuration afterward to match that before.</p>
+
+<p>However, if we ever have a motif which repeats immediately, that means the end configuration is compatible with the start configuration (same state, no conflicting symbol context). In that case, either the rule is cycling in place or it is a shift rule.</p>
+
+<h2 id="hearing-translated-cyclers">Hearing Translated Cyclers</h2>
+
+<p>What do Translated Cyclers sound like? Well a translated cycler is, by definition, a situation where the TM is repeating the same finite sequence of transitions forever. Basically, translated cyclers are fancy shift rules that are trying to shift across the infinite blanks at one edge of the tape. We know what this sounds like, a motif repeated forever. But is it possible to know (just by listening) that this motif will repeat forever? For example, the transcript I mentioned first (<code class="language-plaintext highlighter-rouge">A0 B0 C0 A1 B1 C0 A0 B0 C0 A1 B1 C0 A0 B0 C0 A1 B1 C0 ...</code>) clearly has a repeated motif <code class="language-plaintext highlighter-rouge">A0 B0 C0 A1 B1 C0</code>, but will it repeat for the rest of time? In this case, this motif corresponds to the transition</p>
+
+\[00 \; \text{A&gt;} \; 00 \xrightarrow{6} 01 \; 00 \; \text{A&gt;}\]
+
+<p>and just liked we discovered in the last section, this corresponds to the shift rule</p>
+
+\[00 \; \text{A&gt;} \; 00^n \xrightarrow{6n} 01^n \; 00 \; \text{A&gt;}\]
+
+<p>and this rule would be infinite if we were at the edge of the tape looking off into an infinite field of blank symbols (\(00 \; \text{A&gt;} \; 0^\infty\)). But if we cannot see, and only hear there’s no way to know that we are not instead slowly running toward a wall, like</p>
+
+\[00 \; \text{A&gt;} \; 00^{1000} \; 11 \; 0^\infty\]
+
+<p>until we hit it … unless we make one small tweak to our transcript definition: the ability to distinguish the sound of an untouched blank symbol from that of a <code class="language-plaintext highlighter-rouge">0</code> previously written by the TM! Let us use the symbol <code class="language-plaintext highlighter-rouge">_</code> to refer to the untouched blanks that the tape starts with and <code class="language-plaintext highlighter-rouge">0</code> to refer to the symbols written by a TM (including if the TM replaces a <code class="language-plaintext highlighter-rouge">_</code> with a <code class="language-plaintext highlighter-rouge">0</code>!). The TM cannot tell the difference between these, but with your finely tuned ear you can make out a slight difference in pitch.</p>
+
+<p>Using your newly attuned ears you realize that the motif is actually <code class="language-plaintext highlighter-rouge">A_ B0 C0 A1 B1 C_</code> and after examining the transition table you see that this corresponds to the rule</p>
+
+\[00 \; \text{A&gt;} \; \_ \, \_ \xrightarrow{6} 01 \; 00 \; \text{A&gt;}\]
+
+<p>but now that you know that there were <code class="language-plaintext highlighter-rouge">_</code>s on the right, that means you know exactly what is to the right after this rule applies: blanks off to infinity, so this rule can be applied repeatedly forever and we have discovered a Translated Cycler! (Specifically <a href="https://bbchallenge.org/1LB1RB_1LC0RC_0RA---"><code class="language-plaintext highlighter-rouge">1LB1RB_1LC0RC_0RA---</code></a>)</p>
+
+<h3 id="deciding-by-ear">Deciding by Ear</h3>
+
+<p>We can see that in the previous example, we were able (with the help of the transition table) to deduce that this repeating motif was actually evidence of a translated cycle. But can we do this in general? It turns out that the answer is Yes! In fact, we do not even need access to the transition table! Furthermore, we can start listening whenever we want (it doesn’t have to be from the very start of the transcript). And even more-so, we can confidently declare it decided as soon as we hear the repeating motif twice in a row!</p>
+
+<p>How can this be? Well, first let me describe the condition precisely: If any sequence of transitions in a transcript contains at least one <code class="language-plaintext highlighter-rouge">_</code> and repeats itself exactly back-to-back, you can confidently declare that this is a Translated Cycler after only the second time through the sequence. We know from the “Repeated Motifs” section that any repeated motif must correspond to a shift rule (or cycle in place). But we also know that this motif contains a <code class="language-plaintext highlighter-rouge">_</code> (notably also on the second time through) which means that (A) the TM is not cycling in place and (B) the shift rule is moving in the direction of new, untouched <code class="language-plaintext highlighter-rouge">_</code>s. Any shift rule which consumes <code class="language-plaintext highlighter-rouge">_</code>s is guaranteed to run forever, so this is a Translated Cycler!</p>
+
+<h2 id="acknowledgements">Acknowledgements</h2>
+
+<p>I learned about this method for detecting Translated Cyclers via Transition History from bbchallenge Discord user @mxdys who shared it in a post on 11 June 2024 (<a href="https://discord.com/channels/960643023006490684/1095740122139480195/1250188993572634767">Discord link</a>):</p>
+
+<blockquote>
+  <p>Add a basic step to represent extending the tape edge. If we detect a non-nested for loop that has executed twice and contain a step for extending tape edge, then it’s a translated cycler.</p>
+</blockquote>
+
+<p>This is one of the simpler cases of a broader class of TMs they call <a href="https://wiki.bbchallenge.org/wiki/History_linear">history-linear</a> which involves finding various patterns in the transition history (what I call the transcript here). There is currently some discussion on the <code class="language-plaintext highlighter-rouge">#inductive</code> channel about whether more complex behavior, such as Bouncers can also be similarly “decided by ear”.</p>
+
+<p>The listening metaphor is my own. Do y’all enjoy it when I make playful metaphors like this? Or does it confuse the idea?</p>
+
+<p>@star mentions that they independently proved this “ages ago”. I do not know the history here, please share in the comments if you know more about the origins of this technique!</p>
+
+<h2 id="footnotes">Footnotes</h2>
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:notation" role="doc-endnote">
+      <p>Note: Here I am using \((A0)\) to mean that the TM is in state <code class="language-plaintext highlighter-rouge">A</code> on symbol <code class="language-plaintext highlighter-rouge">0</code>. I choose not to use directed head notation here since this rule could apply equally well no matter which direction the head moved to reach this spot. <a href="#fnref:notation" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>]]></content><author><name>Shawn Ligocki</name></author><category term="busy-beaver" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">BB(3, 4) &amp;gt; Ack(14)</title><link href="https://www.sligocki.com//2024/05/22/bb-3-4-a14.html" rel="alternate" type="text/html" title="BB(3, 4) &amp;gt; Ack(14)" /><published>2024-05-22T00:00:00+00:00</published><updated>2024-05-22T00:00:00+00:00</updated><id>https://www.sligocki.com//2024/05/22/bb-3-4-a14</id><content type="html" xml:base="https://www.sligocki.com//2024/05/22/bb-3-4-a14.html"><![CDATA[<p>Pavel has found a new 3-state 4-symbol Busy Beaver champion which can compute an “Ackermann-level” function and halts with exactly</p>
+
+\[(2 \uparrow^{15} 5) + 14\]
+
+<p>non-zero symbols on the tape. With a number this large, Knuth up-arrow format is becoming a bit awkward, so we can approximate this bound as:</p>
+
+\[BB(3, 4) &gt; Ack(14)\]
+
+<p>where \(Ack(14)\) is the 14th <a href="https://mathworld.wolfram.com/AckermannNumber.html">Ackermann number</a> defined as:</p>
+
+\[Ack(n) = n \uparrow^n n\]
+
+<p>As far as I know, this is the first TM found “in the wild” that is able to simulate an Ackermann-level function.</p>
+
+<h2 id="the-machine">The Machine</h2>
+
+<p><code class="language-plaintext highlighter-rouge">1RB3LB1RZ2RA_2LC3RB1LC2RA_3RB1LB3LC2RC</code></p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"> </th>
+      <th style="text-align: center">0</th>
+      <th style="text-align: center">1</th>
+      <th style="text-align: center">2</th>
+      <th style="text-align: center">3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">A</td>
+      <td style="text-align: center">1RB</td>
+      <td style="text-align: center">3LB</td>
+      <td style="text-align: center">1RZ</td>
+      <td style="text-align: center">2RA</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">B</td>
+      <td style="text-align: center">2LC</td>
+      <td style="text-align: center">3RB</td>
+      <td style="text-align: center">1LC</td>
+      <td style="text-align: center">2RA</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">C</td>
+      <td style="text-align: center">3RB</td>
+      <td style="text-align: center">1LB</td>
+      <td style="text-align: center">3LC</td>
+      <td style="text-align: center">2RC</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>It halts with final configuration</p>
+
+\[0^\infty \;\; 3^{2 g_{15}^{3}(0) + 1} \;\; 2^{16} \;\; 1 \;\; \text{ Z&gt; } \;\; 0^\infty\]
+
+<p>which leaves exactly</p>
+
+\[\sigma = 2 g_{15}^{3}(0) + 18 = (2 \uparrow^{15} 5) + 14\]
+
+<p>non-zero symbols on the tape. (The function \(g_k(m)\) will be defined below).</p>
+
+<h3 id="attribution">Attribution</h3>
+
+<p>This TM was discovered by Pavel Kropitz (@uni) and shared <a href="https://discord.com/channels/960643023006490684/1095740122139480195/1233140768768524358">on Discord</a> on 25 Apr 2024. His code was not able to specify a human-readable bound on the TM score and it was simply specified as <code class="language-plaintext highlighter-rouge">Halt(SuperPowers(13))</code> indicating 13 layers of inductive rules needed to prove it. He began a validation of this result using my new “Inductive Proof Validator” (see discussion at end of article).</p>
+
+<p>I completed this validation and was able to extract the precise definition of \(g_k^n(m)\) on 20 May 2024 (<a href="https://discord.com/channels/960643023006490684/1095740122139480195/1242186781672341514">Discord link</a>) and used that to get a bound of \(\sigma &gt; 2 \uparrow^{15} 3\).</p>
+
+<p>Matthew House (@LegionMammal978) discovered on 22 May 2024 (<a href="https://discord.com/channels/960643023006490684/1095740122139480195/1242864786379771985">Discord link</a>) the remarkably simple closed form evaluation:</p>
+
+\[g_k^n(0) = \frac{ 2 \uparrow^k (n+2) }{2} - 2\]
+
+<p>which led me to rewrite this article with exact values for \(\sigma\)!</p>
+
+<h2 id="analysis">Analysis</h2>
+
+<p>Let</p>
+
+\[B(k, n, m) = 0^\infty \;\; 3^{2m+1} \;\; 2^k \;\; \text{ A&gt; } \;\; 1^n\]
+
+<p>then we can prove that</p>
+
+\[\begin{array}{lcl}
+  0^\infty \;\; \text{A&gt;} \;\; 0^\infty &amp; \xrightarrow{241} &amp; B(16, 3, 0) \;\; 2 \;\; 0^\infty \\
+  B(k, n, m) &amp; \to &amp; B(k, 0, g_{k-1}^n(m)) &amp; \text{if } k \ge 1 \\
+  B(k, 0, m) \;\; 2 &amp; \xrightarrow{1} &amp; 0^\infty \;\; 3^{2m+1} \;\; 2^k \;\; 1 \;\; \text{Z&gt;} \\
+\end{array}\]
+
+<p>where</p>
+
+\[\begin{array}{l}
+  g_0(m) &amp; = &amp; m + 1 \\
+  g_{k+1}(m) &amp; = &amp; g_k^{2m+2}(0) \\
+\end{array}\]
+
+<h3 id="proof-by-double-induction">Proof by Double Induction</h3>
+
+<p>This TM is remarkably simple in the sense that its behavior can be almost completely described by one single rule:</p>
+
+\[B(k, n, m) \to B(k, 0, g_{k-1}^n(m))\]
+
+<p>but that rule is a whopper requiring double induction to prove!</p>
+
+<hr />
+
+<p>Lemma 1: For all \(k \ge 1\):</p>
+
+\[3 \;\; 2^k \;\; \text{&lt;B} \;\; \xrightarrow{2k+1} \;\; 2^k \;\; \text{&lt;B} \;\; 1\]
+
+<p>Corollary 2: For all \(k \ge 1, m \ge 0\):</p>
+
+\[3^m \;\; 2^k \;\; \text{&lt;B} \;\; \xrightarrow{(2k+1)m} \;\; 2^k \;\; \text{&lt;B} \;\; 1^m\]
+
+<p>Proofs left as an exercise to the reader.</p>
+
+<hr />
+
+<p>Theorem 3: For all \(k \ge 1, n \ge 0, m \ge 0\):</p>
+
+\[B(k, n, m) \to B(k, 0, g_{k-1}^n(m))\]
+
+<p>Proof by Induction on \(k\):</p>
+
+<ul>
+  <li>Base Case (\(k = 1\))
+    <ul>
+      <li>Goal: \(\forall n,m \ge 0: B(1, n+1, m) \to B(1, 0, g_0^{n+1}(m))\)</li>
+      <li>Proof by induction on \(n\). Left as an exercise to the reader.</li>
+    </ul>
+  </li>
+  <li>Induction Case
+    <ul>
+      <li>Assume \(H_k: \forall n,m \ge 0: B(k, n, m) \to B(k, 0, g_{k-1}^n(m))\)</li>
+      <li>Goal: \(\forall n,m \ge 0: B(k+1, n, m) \to B(k+1, 0, g_k^n(m))\)</li>
+      <li>
+        <p>Proof by induction on \(n\):</p>
+
+        <ul>
+          <li>Base Case (\(n = 0\))
+            <ul>
+              <li>Trivially true because \(g_{k-1}^0(m) = m\), so \(B(k, n, m) = B(k, 0, g_{k-1}^n(m))\)</li>
+            </ul>
+          </li>
+          <li>Induction Case
+            <ul>
+              <li>Assume \(H_n: \forall m \ge 0: B(k+1, n, m) \to B(k+1, 0, g_{k}^n(m))\)</li>
+              <li>Goal: \(\forall m \ge 0: B(k+1, n+1, m) \to B(k+1, 0, g_{k}^{n+1}(m))\)</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+\[\begin{array}{lcl}
+B(k+1, n+1, m) &amp; = &amp;
+  0^\infty \;\; 3^{2m+1} \;\; 2^{k+1} \;\; \text{A&gt;} \;\; 1^{n+1} \\
+&amp; \xrightarrow{1} &amp;
+  0^\infty \;\; 3^{2m+1} \;\; 2^{k+1} \;\; \text{&lt;B} \;\; 3 \;\; 1^n \\
+&amp; \xrightarrow{(2k+3)(2m+1)} &amp;
+  0^\infty \;\; 2^{k+1} \;\; \text{&lt;B} \;\; 1^{2m+1} \;\; 3 \;\; 1^n
+    &amp; \text{by Corollary 2} \\
+&amp; \xrightarrow{2k+2} &amp;
+  0^\infty \;\; 3 \;\; 2^k \;\; \text{A&gt;} \;\; 1^{2m+2} \;\; 3 \;\; 1^n \\
+&amp; = &amp; B(k, 2m+2, 0) \;\; 3 \;\; 1^n \\
+&amp; \to &amp; B(k, 0, g_{k-1}^{2m+2}(0)) \;\; 3 \;\; 1^n
+    &amp; \text{by Ind. Hyp. } H_k \\
+&amp; = &amp;
+  0^\infty \;\; 3^{g_{k-1}^{2m+2}(0)} \;\; 2^k \;\; \text{A&gt;} \;\; 3 \;\; 1^n \\
+&amp; \xrightarrow{1} &amp;
+  0^\infty \;\; 3^{g_{k-1}^{2m+2}(0)} \;\; 2^{k+1} \;\; \text{A&gt;} \;\; 1^n \\
+&amp; = &amp; B(k+1, n, g_{k-1}^{2m+2}(0)) = B(k+1, n, g_{k}(m)) \\
+&amp; \to &amp; B(k+1, 0, g_{k}^n(g_{k}(m)))
+    &amp; \text{by Ind. Hyp. } H_n \\
+&amp; = &amp; B(k+1, 0, g_{k}^{n+1}(m)) \\
+\end{array}\]
+
+<p>QED</p>
+
+<h3 id="exact-values">Exact Values</h3>
+
+<p>Through what appears to be a remarkable series of coincidences, there is a relatively simple closed form evaluation of \(g_k\) using only Knuth up-arrows and arithmetic:</p>
+
+<p>Theorem: For all \(k \ge 0, m \ge 0\):</p>
+
+\[2 g_{k+1}(m) + 4 = 2 \uparrow^k (2m+4)\]
+
+<p>(where we define \(a \uparrow^0 b = ab\))</p>
+
+<p>Proof by Induction on \(k\):</p>
+
+<ul>
+  <li>Base case (\(k = 0\)):</li>
+</ul>
+
+\[\begin{array}{l}
+  g_1(m)        &amp; = &amp; g_0^{2m+2}(0) &amp; = &amp; 2m+2 \\
+  2 g_1(m) + 4  &amp; = &amp; 2 (2m+2) + 4 &amp; = &amp; 4m + 8 &amp; = &amp; 2 \uparrow^0 (2m+4) \\
+\end{array}\]
+
+<ul>
+  <li>Inductive case: Assume \(\forall m \ge 0: 2 g_{k+1}(m) + 4 = 2 \uparrow^k (2m+4)\):</li>
+</ul>
+
+\[\begin{array}{l}
+  2 g_{k+1}(m) + 4    &amp; = &amp; 2 \uparrow^k (2m+4) \\
+  2 g_{k+1}^n(m) + 4  &amp; = &amp; (2 \uparrow^k)^n (2m+4) \\
+  2 g_{k+2}(m) + 4    &amp; = &amp; g_{k+1}^{2m+2}(0) = (2 \uparrow^k)^{2m+2} 4 = (2 \uparrow^k)^{2m+2} (2 \uparrow^k 2) \\
+                      &amp; = &amp; 2 \uparrow^{k+1} (2m+4) \\
+\end{array}\]
+
+<p>QED</p>
+
+<p>Note: This depends upon the coincidence that \(2 \uparrow^k 2 = 4\) for all \(k\). If the parameters had been slightly different and we’d ended up with \((2 \uparrow^k)^{2m+2} 5\) above, I don’t think it would have been possible to get a closed form expression.</p>
+
+<p>Corollary: For all \(k \ge 0, n \ge 0\):</p>
+
+\[2 g_k^n(0) + 4 = 2 \uparrow^k (n+2)\]
+
+<p>From which it follows directly that:</p>
+
+\[\sigma = 2 g_{15}^{3}(0) + 18 = (2 \uparrow^{15} 5) + 14\]
+
+<h2 id="permutations">Permutations</h2>
+
+\[\begin{array}{lcl}
+  0^\infty \;\; \text{B&gt;} \;\; 0^\infty &amp; \xrightarrow{86} &amp; B(7, 3, 0) \;\; 2 \;\; 0^\infty \\
+  0^\infty \;\; \text{C&gt;} \;\; 0^\infty &amp; \xrightarrow{20} &amp; B(1, 3, 0) \;\; 2 \;\; 0^\infty \\
+\end{array}\]
+
+<p>Therefore, we can see that if we switch to:</p>
+<ul>
+  <li>Starting in state <code class="language-plaintext highlighter-rouge">B</code>, the TM halts with a score of \(\sigma_B = 2 g_6^3(0) + 9 = (2 \uparrow^6 5) + 5\)</li>
+  <li>Starting in state <code class="language-plaintext highlighter-rouge">C</code>, the TM halts with a score of \(\sigma_C = 2 g_0^3(0) + 3 = (2 \uparrow^0 5) - 1 = 9\) (which it does at step 72).</li>
+</ul>
+
+<p>This first permutation (start state <code class="language-plaintext highlighter-rouge">B</code>) is another top BB(3, 4) TM. Converted into TNF it is:</p>
+
+<p><code class="language-plaintext highlighter-rouge">1RB3RB1LC2LA_2LA2RB1LB3RA_3LA1RZ1LC2RA</code></p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"> </th>
+      <th style="text-align: center">0</th>
+      <th style="text-align: center">1</th>
+      <th style="text-align: center">2</th>
+      <th style="text-align: center">3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">A</td>
+      <td style="text-align: center">1RB</td>
+      <td style="text-align: center">3RB</td>
+      <td style="text-align: center">1LC</td>
+      <td style="text-align: center">2LA</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">B</td>
+      <td style="text-align: center">2LA</td>
+      <td style="text-align: center">2RB</td>
+      <td style="text-align: center">1LB</td>
+      <td style="text-align: center">3RA</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">C</td>
+      <td style="text-align: center">3LA</td>
+      <td style="text-align: center">1RZ</td>
+      <td style="text-align: center">1LC</td>
+      <td style="text-align: center">2RA</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="not-collatz">Not Collatz</h2>
+
+<p>One interesting thing about this TM is how surprisingly simple it is. For example, the fact that it does not have any Collatz-like rules (rules which act differently depending on the remainder of some value). Is this the end of the domination of Collatz-like TMs? It is far too early to know, but my guess is that there are Collatz-like Ackermann-level TMs waiting for us, but we are not seeing them right away because of selection bias. Perhaps this was the first Ackermann-level TM found because it is simple enough to be proven halting without having to implement modular arithmetic on Ackermann-level functions.</p>
+
+<h2 id="inductive-proof-validator">Inductive Proof Validator</h2>
+
+<p>This TM was the perfect test case for an “inductive proof” validator I am currently developing. The goal of this project is to develop a standardized certificate format for “inductive proofs” (an umbrella term for all the sort of forward-reasoning, rule-based analyses that are ubiquitous on this blog). The idea is that anyone with an “inductive decider” could write out their rules in this format and then this validator can check these proofs. The system is still very clunky and not ready for prime time, but I have been able (with a little elbow grease) to use it to prove the behavior of many TMs including <a href="https://github.com/sligocki/busy-beaver/blob/49864afd99263b6f18bec0dee028a3b56aa70936/rust/src/validator.rs#L978">this one</a>.</p>]]></content><author><name>Shawn Ligocki</name></author><category term="busy-beaver" /><category term="record" /><category term="analysis" /><summary type="html"><![CDATA[Pavel has found a new 3-state 4-symbol Busy Beaver champion which can compute an “Ackermann-level” function and halts with exactly]]></summary></entry><entry><title type="html">BB(2, 5) is Hard (Hydra)</title><link href="https://www.sligocki.com//2024/05/10/bb-2-5-is-hard.html" rel="alternate" type="text/html" title="BB(2, 5) is Hard (Hydra)" /><published>2024-05-10T00:00:00+00:00</published><updated>2024-05-10T00:00:00+00:00</updated><id>https://www.sligocki.com//2024/05/10/bb-2-5-is-hard</id><content type="html" xml:base="https://www.sligocki.com//2024/05/10/bb-2-5-is-hard.html"><![CDATA[<p>Consider the Collatz-like function:</p>
+
+\[\begin{array}{l}
+  f(2n)   &amp; = &amp; 3n   \\
+  f(2n+1) &amp; = &amp; 3n+1 \\
+\end{array}\]
+
+<p>Starting from 3 and repeatedly applying \(f\) we get the infinite sequence:</p>
+
+\[3 \xrightarrow{O} 4 \xrightarrow{E} 6\xrightarrow{E} 9 \xrightarrow{O} 13 \xrightarrow{O} 19 \xrightarrow{O} 28 \xrightarrow{E} 42 \xrightarrow{E} 63 \cdots\]
+
+<p>where the <code class="language-plaintext highlighter-rouge">O</code>s and <code class="language-plaintext highlighter-rouge">E</code>s above each arrow represent whether we chose the Odd or Even rule to apply.</p>
+
+<p>Starting from 3, will you ever reach a point where the cumulative number of <code class="language-plaintext highlighter-rouge">E</code>s applied is greater than twice the number of <code class="language-plaintext highlighter-rouge">O</code>s applied?</p>
+
+<p>Solving the 2 state, 5 symbol Busy Beaver problem requires solving this Collatz-like problem! Specifically, we have a new <a href="/2023/10/16/bb-3-3-is-hard.html">Cryptid</a>, the “Hydra”.</p>
+
+<h2 id="hydra">Hydra</h2>
+
+<blockquote>
+  <p>See also <a href="https://wiki.bbchallenge.org/wiki/Hydra">Hydra</a> on the bbchallenge wiki.</p>
+</blockquote>
+
+<p>Daniel Yuan (@dyuan01) first reported this TM <a href="https://discord.com/channels/960643023006490684/1084047886494470185/1231110668288135208">on Discord</a> on 20 Apr 2024. He named it “Hydra” after the famous Greek mythological beast. The machine definition is:</p>
+
+<p><code class="language-plaintext highlighter-rouge">1RB3RB---3LA1RA_2LA3RA4LB0LB0LA</code> (<a href="https://bbchallenge.org/1RB3RB---3LA1RA_2LA3RA4LB0LB0LA">on bbchallenge</a>)</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"> </th>
+      <th style="text-align: center">0</th>
+      <th style="text-align: center">1</th>
+      <th style="text-align: center">2</th>
+      <th style="text-align: center">3</th>
+      <th style="text-align: center">4</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">A</td>
+      <td style="text-align: center">1RB</td>
+      <td style="text-align: center">3RB</td>
+      <td style="text-align: center">—</td>
+      <td style="text-align: center">3LA</td>
+      <td style="text-align: center">1RA</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">B</td>
+      <td style="text-align: center">2LA</td>
+      <td style="text-align: center">3RA</td>
+      <td style="text-align: center">4LB</td>
+      <td style="text-align: center">0LB</td>
+      <td style="text-align: center">0LA</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>It is one of the remaining 902 informal \(BB(2, 5)\) holdouts that Justin Blanchard recently shared <a href="https://discord.com/channels/960643023006490684/1084047886494470185/1234365269594476554">on Discord</a> which in turn was filtered down from my list of 23k holdouts.</p>
+
+<h2 id="analysis">Analysis</h2>
+
+<p>Let</p>
+
+\[A(a, b) = 0^\infty \; \text{ &lt;B } \; 0^a \; 3^b \; 2 \; 0^\infty\]
+
+<p>Then the following rules apply:</p>
+
+\[\begin{array}{l}
+  \text{Start} &amp; &amp; \xrightarrow{19} &amp; A(3, 0) \\
+  A(2n,   &amp; 0)   &amp; \to &amp; \text{Halt}(3n+3) \\
+  A(2n,   &amp; b+1) &amp; \to &amp; A(3n+3, b) \\
+  A(2n+1, &amp; b)   &amp; \to &amp; A(3n+3, b+2) \\
+\end{array}\]
+
+<p>Where these rules apply for any values \(n, b \ge 0\), “Start” is the TM in state <code class="language-plaintext highlighter-rouge">A</code> on a blank tape and “Halt(x)” means the TM halts with \(x\) non-zero symbols on the tape.</p>
+
+<h3 id="alternative-collatz-maps">Alternative Collatz maps</h3>
+
+<p>One detail that jumps out to me about the Collatz-like behavior above, specifically that \(a\) is always divisible by 3. So we can rewrite this relation a bit:</p>
+
+<p>Let</p>
+
+\[B(a, b) = A(3a, b) = 0^\infty \; \text{ &lt;B } \; 0^{3a} \; 3^b \; 2 \; 0^\infty\]
+
+<p>Then:</p>
+
+\[\begin{array}{l}
+  \text{Start} &amp; &amp; \xrightarrow{19} &amp; B(1, 0) \\
+  B(2n,   &amp; 0)   &amp; \to &amp; \text{Halt}(9n+3) \\
+  B(2n,   &amp; b+1) &amp; \to &amp; B(3n+1, b) \\
+  B(2n+1, &amp; b)   &amp; \to &amp; B(3n+2, b+2) \\
+\end{array}\]
+
+<p>Furthermore, if you let</p>
+
+\[C(a, b) = B(a-2, b) = 0^\infty \; \text{ &lt;B } \; 0^{3(a - 2)} \; 3^b \; 2 \; 0^\infty\]
+
+<p>then:</p>
+
+\[\begin{array}{l}
+  \text{Start} &amp; &amp; \xrightarrow{19} &amp; C(3, 0) \\
+  C(2n,   &amp; 0)   &amp; \to &amp; \text{Halt}(9n-6) \\
+  C(2n,   &amp; b+1) &amp; \to &amp; C(3n,   &amp; b) \\
+  C(2n+1, &amp; b)   &amp; \to &amp; C(3n+1, &amp; b+2) \\
+\end{array}\]
+
+<p>For all \(n \ge 1\).</p>
+
+<p>This recurrence has the elegant properties that</p>
+
+\[C(n, b) \to C(n + \left\lfloor \frac{n}{2} \right\rfloor, b^\prime)\]
+
+<p>and</p>
+
+\[\begin{array}{l}
+  C(2^k,     &amp; b+k) &amp; \to &amp; C(3^k,     &amp; b)    \\
+  C(2^k + 1, &amp; b)   &amp; \to &amp; C(3^k + 1, &amp; b+2k) \\
+\end{array}\]
+
+<h3 id="pseudo-random-walk">Pseudo-random Walk</h3>
+
+<p>Much like <a href="/2023/10/16/bb-3-3-is-hard.html">Bigfoot</a>, Hydra performs a pseudo-random walk using the parity from a Collatz-like function to determine which direction to walk. And like Bigfoot, that walk is biased so that after simulating for a while the apparent “probability” of halting is vanishingly small.</p>
+
+<p>Specifically, we can see that the <code class="language-plaintext highlighter-rouge">C</code> rules above are simulating the Collatz-like function I described in the intro:</p>
+
+\[\begin{array}{l}
+  f(2n)   &amp; = &amp; 3n   \\
+  f(2n+1) &amp; = &amp; 3n+1 \\
+\end{array}\]
+
+<p>on it’s <code class="language-plaintext highlighter-rouge">a</code> parameter while keeping a sort of counter in the <code class="language-plaintext highlighter-rouge">b</code> parameter. Every time you apply an Odd rule, \(b \to b+2\). Every time you apply an Even rule, \(b \to b-1\). Hydra only halts if you ever end up with \(b &lt; 0\).</p>
+
+<p>If you simulate this recurrence for 4 million steps you get a value:</p>
+
+\[C(&gt; 10^{704\,365}, 2\,005\,373)\]
+
+<h3 id="probviously-not-halting">Probviously Not Halting</h3>
+
+<blockquote>
+  <p>Updated 17 Feb 2025: I originally wrote that the chance of ever reaching \(b &lt; 0\) was \((\frac{1}{2})^{n+1}\) like it is for Bigfoot. However, this biased random walk is slightly different and has a different equation.</p>
+</blockquote>
+
+<p>Like with Bigfoot, we can use Markov Chain methods to solve for the probability that we can ever reach \(b &lt; 0\) assuming this were a truly random biased walk. In this case the probability of ever reaching \(b &lt; 0\) when starting from \(b = n\) is \((\frac{1}{\phi})^{n+1}\) where \(\phi = \frac{\sqrt{5} + 1}{2} \approx 1.618\) is the famous <a href="https://en.wikipedia.org/wiki/Golden_ratio">golden ratio</a>.</p>
+
+<p>So, the chance of coming back from \(b = 2\,005\,373\) would be the minute fraction \((\frac{1}{\phi})^{2\,005\,374} &lt; (\frac{1}{2})^{1\,000\,000}\).</p>
+
+<p>Thus Hydra “probviously” never halts. But to prove it you would have to prove a Collatz-like problem.</p>
+
+<h2 id="comparison-to-bigfoot">Comparison to Bigfoot</h2>
+
+<p>Hydra’s behavior is quite similar to Bigfoot’s as described already in this article. The main difference is that Hydra computes a much simpler (and I would say more elegant) Collatz-like function. In fact it is almost the simplest possible Collatz-like function!</p>
+
+<p>My article about Bigfoot actually got quite a bit of attention being posted to <a href="https://news.ycombinator.com/item?id=37910297">Hacker News</a> and <a href="https://www.reddit.com/r/math/comments/17ai73o/bb3_3_is_hard/">Reddit r/math</a> where it got over 100 comments! Among these there was a reasonably common theme summed up well by this comment:</p>
+
+<blockquote>
+  <p><a href="https://news.ycombinator.com/item?id=37910942">nneonneo</a>: Probably more accurate to say that BB(3, 3) looks hard; that is, it encodes a Collatz-type problem, and many Collatz-type problems are very hard to solve (including, of course, the classic Collatz conjecture).
+However, this instance might not necessarily be hard. For one, the behaviour seems to be heavily biased; for another, we only have to consider a single trajectory instead of the trajectories for all integers (as with the classic Collatz problem).</p>
+</blockquote>
+
+<p>Which is totally true! These Cryptids simulate problems that appear (subjectively) to be hard. But maybe they are not. Perhaps these specific Collatz-like questions have a clever solution. Hydra helps to remove at least one of nneonneo’s caveats: Hydra’s Collatz-like function is extremely simple and does not follow any specific pattern (like the odd, odd, even, even pattern that Bigfoot followed).</p>
+
+<h2 id="a-bonus-cryptid">A Bonus Cryptid</h2>
+
+<blockquote>
+  <p>See also <a href="https://wiki.bbchallenge.org/wiki/1RB3RB---3LA1RA_2LA3RA4LB0LB1LB">1RB3RB—3LA1RA_2LA3RA4LB0LB1LB</a> on the bbchallenge wiki.</p>
+</blockquote>
+
+<p>A few days after discovering Hydra, Daniel found another BB(2, 5) Cryptid:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1RB3RB---3LA1RA_2LA3RA4LB0LB1LB
+
+Define
+A(a, b) = 0^inf &lt;B 0^a 3^b 2 0^inf
+
+The rules are
+A(3n, 0) -&gt; Halt
+A(3n, b+1) -&gt; A(4n+3, b)
+A(3n+1, b) -&gt; A(4n+3, b+3)
+A(3n+2, 0) -&gt; ?
+A(3n+2, b+1) -&gt; A(4n+5, b)
+
+Starts: A(3, 1)
+</code></pre></div></div>
+
+<p>I have not looked into analyzing this one yet, but wanted to share it since AFAIK it is only the 3rd Cryptid discovered (after Bigfoot and Hydra).</p>]]></content><author><name>Shawn Ligocki</name></author><category term="busy-beaver" /><category term="collatz" /><category term="cryptid" /><summary type="html"><![CDATA[Consider the Collatz-like function:]]></summary></entry><entry><title type="html">Green’s Machines</title><link href="https://www.sligocki.com//2023/10/19/greens-machines.html" rel="alternate" type="text/html" title="Green’s Machines" /><published>2023-10-19T00:00:00+00:00</published><updated>2023-10-19T00:00:00+00:00</updated><id>https://www.sligocki.com//2023/10/19/greens-machines</id><content type="html" xml:base="https://www.sligocki.com//2023/10/19/greens-machines.html"><![CDATA[<p>In 1964 (only 2 years after Tibor Radó first described the Busy Beaver game), Milton W. Green of the Stanford Research Institute hand-crafted a family of fast-growing Turing Machines with \(n\) states, 2 symbols for all \(n \ge 4\).<sup id="fnref:green64" role="doc-noteref"><a href="#fn:green64" class="footnote" rel="footnote">1</a></sup> At the time of publication, Green’s Machines were the Busy Beaver champions for \(BB(n)\) for all \(n \ge 6\). This family grows roughly as fast as the <a href="https://en.wikipedia.org/wiki/Ackermann_function">Ackermann function</a></p>
+
+\[BB_{2n} \approx 3 \uparrow^{n-2} 3\]
+
+<p>and (as far as I can tell) some of them have not been beaten to this day.</p>
+
+<p>Green’s Machines are still referenced often in discussion about Busy Beavers. However, I have not seen much discussion about the machines themselves. Even reading the original paper is a bit of a challenge. In it Green defines 4 different families of Turing Machines (\(M_N, G_N, B_N, BB_N\)) and I find the subtleties of how each is defined and extended to the other families to be quite confusing every time I read it. In order to support more widespread understanding of the details of Green’s constructions, this post will describe Green’s Machines and their scores in modern notation.</p>
+
+<blockquote>
+  <p>Note: I use names in this article that are adapted from Green’s names, but are not quite identical. The difference is somewhat subtle.</p>
+</blockquote>
+
+<h2 id="the-machines">The Machines</h2>
+
+<p>The Green Machines are made up of two components, split up by states. These components will be a setup component \(S_k\) and a compute component \(G_n\).</p>
+
+<h3 id="g-component">G Component</h3>
+
+<p>The main workhorse is the \(G_n\) component. For every odd \(n\), \(G_n\) defined by the transition table:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">State</th>
+      <th style="text-align: center">0</th>
+      <th style="text-align: center">1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">\(Q_n\)</td>
+      <td style="text-align: center">\(1 L T_n\)</td>
+      <td style="text-align: center">\(1 R Q_{n+2}\)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">\(T_n\)</td>
+      <td style="text-align: center">\(0 L Q_{n-2}\)</td>
+      <td style="text-align: center">\(0 L T_n\)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">…</td>
+      <td style="text-align: center">…</td>
+      <td style="text-align: center">…</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">\(Q_k\)</td>
+      <td style="text-align: center">\(1 L T_k\)</td>
+      <td style="text-align: center">\(1 R Q_{k+2}\)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">\(T_k\)</td>
+      <td style="text-align: center">\(0 L Q_{k-2}\)</td>
+      <td style="text-align: center">\(0 L T_k\)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">…</td>
+      <td style="text-align: center">…</td>
+      <td style="text-align: center">…</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">\(Q_1\)</td>
+      <td style="text-align: center">\(1 R Q_1\)</td>
+      <td style="text-align: center">\(1 R Q_3\)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Where the \(Q_k, T_k\) are defined this way for all odd \(3 \le k \le n\).</p>
+
+<p>This component has a single entry state (\(Q_n\)) which the setup component should transition into when it wants to run the \(G_n\) component and a single exit state (\(Q_{n+2}\)) which the component will transition out to when it is done with it’s computation.</p>
+
+<p>These compute a series of fast-growing functions \(G_n(k)\) that I will describe in detail below.</p>
+
+<h3 id="setup-components">Setup Components</h3>
+
+<p>There are two different setup components \(S_3\) and \(S_4\) (with 3 and 4 states respectively). Either can be added to any \(G_n\) component in order to make a Green Machine of either even or odd number of states (respectively).</p>
+
+<h4 id="three-state-setup">Three-State Setup</h4>
+
+<p>The \(S_3\) component is defined by:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">State</th>
+      <th style="text-align: center">0</th>
+      <th style="text-align: center">1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">\(A = Q_{n+2}\)</td>
+      <td style="text-align: center">\(1LB\)</td>
+      <td style="text-align: center">\(1RZ\)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">\(B\)</td>
+      <td style="text-align: center">\(0LT\)</td>
+      <td style="text-align: center">\(1LT\)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">\(T\)</td>
+      <td style="text-align: center">\(0 L Q_n\)</td>
+      <td style="text-align: center">\(0LT\)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>where \(Q_n\) is the entry state and \(A = Q_{n+2}\) is the exit state of the \(G_n\) component.</p>
+
+<p>When attached to \(G_{2k+1}\), this produces an even state \(BB_{2k+4}\) Green Machine (with start state <code class="language-plaintext highlighter-rouge">A</code> and halt state <code class="language-plaintext highlighter-rouge">Z</code>).</p>
+
+<h4 id="four-state-setup">Four-State Setup</h4>
+
+<p>The \(S_4\) component is defined by:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">State</th>
+      <th style="text-align: center">0</th>
+      <th style="text-align: center">1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">\(A\)</td>
+      <td style="text-align: center">\(1LT\)</td>
+      <td style="text-align: center">\(1LB\)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">\(B\)</td>
+      <td style="text-align: center">\(1LZ\)</td>
+      <td style="text-align: center">\(1LA\)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">\(C = Q_{n+2}\)</td>
+      <td style="text-align: center">\(0LB\)</td>
+      <td style="text-align: center">\(1LT\)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">\(T\)</td>
+      <td style="text-align: center">\(0 L Q_n\)</td>
+      <td style="text-align: center">\(0LT\)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>where \(Q_n\) is the entry state and \(C = Q_{n+2}\) is the exit state of the \(G_n\) component.</p>
+
+<p>which, when attached to \(G_{2k+1}\), this produces an odd state \(BB_{2k+5}\) Green Machine (with start state <code class="language-plaintext highlighter-rouge">A</code> and halt state <code class="language-plaintext highlighter-rouge">Z</code>).</p>
+
+<h2 id="example-machines">Example Machines</h2>
+
+<p>Putting this all together and converting into <a href="/2022/10/09/standard-tm-format.html">Standard Text format</a> we get for example:</p>
+
+<ul>
+  <li>\(BB_7\): <code class="language-plaintext highlighter-rouge">1LD1LB_1LZ1LA_0LB1LD_0LE0LD_1LF1RC_0LG0LF_1RG1RE</code> (<a href="https://bbchallenge.org/1LD1LB_1LZ1LA_0LB1LD_0LE0LD_1LF1RC_0LG0LF_1RG1RE">on bbchallenge</a>)</li>
+  <li>\(BB_8\): <code class="language-plaintext highlighter-rouge">1LB1RZ_0LC1LC_0LD0LC_1LE1RA_0LF0LE_1LG1RD_0LH0LG_1RH1RF</code> (<a href="https://bbchallenge.org/1LB1RZ_0LC1LC_0LD0LC_1LE1RA_0LF0LE_1LG1RD_0LH0LG_1RH1RF">on bbchallenge</a>)</li>
+  <li>\(BB_9\): <code class="language-plaintext highlighter-rouge">1LD1LB_1LZ1LA_0LB1LD_0LE0LD_1LF1RC_0LG0LF_1LH1RE_0LI0LH_1RI1RG</code> (<a href="https://bbchallenge.org/1LD1LB_1LZ1LA_0LB1LD_0LE0LD_1LF1RC_0LG0LF_1LH1RE_0LI0LH_1RI1RG">on bbchallenge</a>)</li>
+  <li>\(BB_{10}\): <code class="language-plaintext highlighter-rouge">1LB1RZ_0LC1LC_0LD0LC_1LE1RA_0LF0LE_1LG1RD_0LH0LG_1LI1RF_0LJ0LI_1RJ1RH</code> (<a href="https://bbchallenge.org/1LB1RZ_0LC1LC_0LD0LC_1LE1RA_0LF0LE_1LG1RD_0LH0LG_1LI1RF_0LJ0LI_1RJ1RH">on bbchallenge</a>)</li>
+</ul>
+
+<p>Note:</p>
+
+<ol>
+  <li>I have not normalized these to TNF. Instead I’ve left them with the same directions and state order as Green described them for ease of comparison.</li>
+  <li>I am using state <code class="language-plaintext highlighter-rouge">Z</code> in all of these as the halt state. <code class="language-plaintext highlighter-rouge">H</code> is not a halt state, but instead the 8th state.</li>
+</ol>
+
+<h2 id="class-g-machines">Class G Machines</h2>
+
+<p>In order to motivate the \(G_n\) component, Green defines a general specification for TMs: <strong>Class G Machines</strong>. A TM, <code class="language-plaintext highlighter-rouge">M</code>, as a Class G Machine (with entry state \(M_{in}\) and exit state \(M_{out}\)) if it conforms to the following behavioral specification:</p>
+
+\[\begin{array}{l}
+  0^\infty &amp; 1^k &amp; M_{in} &gt; &amp; 0 &amp; \to &amp; 0^\infty &amp; 1^m &amp; M_{in} &gt; \\
+           &amp;     &amp; M_{in} &gt; &amp; 1 &amp; \to &amp;          &amp; 1   &amp; M_{out} &gt; \\
+\end{array}\]
+
+<p>In words:</p>
+<ul>
+  <li>When started in its entry state (\(M_{in}\)) on a <code class="language-plaintext highlighter-rouge">0</code>
+    <ul>
+      <li>with a string on \(k \ge 0\) <code class="language-plaintext highlighter-rouge">1</code>s to its left (and nothing else),</li>
+      <li>it performs some computation without ever traveling to the right of the initial location</li>
+      <li>until it eventually leaves to the right in the same state (\(M_{in}\))</li>
+      <li>with a string <code class="language-plaintext highlighter-rouge">1</code>s to its left (and nothing else).</li>
+    </ul>
+  </li>
+  <li>When started in its entry state (\(M_{in}\)) on a <code class="language-plaintext highlighter-rouge">1</code>,
+    <ul>
+      <li>it moves immediately to the right and enters the exit state (\(M_{out}\)).</li>
+    </ul>
+  </li>
+</ul>
+
+<p>We will say that <code class="language-plaintext highlighter-rouge">M</code> computes the function \(M(k) = m\).</p>
+
+<h3 id="recurrence">Recurrence</h3>
+
+<p>Note: An immediate consequence of the above specification is that:</p>
+
+\[\begin{array}{l}
+  0^\infty &amp; 1^k &amp; M_{in} &gt; &amp; 0^r &amp; 1 &amp; \to &amp; 0^\infty &amp; 1^{M^r(k) + 1} &amp; M_{out} &gt; \\
+\end{array}\]
+
+<h3 id="g-components">G Components</h3>
+
+<p>Each \(G_n\) component is a Class G Machine (with entry state \(Q_n\) and exit state \(Q_{n+2}\)). We can see this via induction.</p>
+
+<h4 id="base-case">Base Case</h4>
+
+<p>We can see directly that \(G_1\)</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">State</th>
+      <th style="text-align: center">0</th>
+      <th style="text-align: center">1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">\(Q_1\)</td>
+      <td style="text-align: center">\(1 R Q_1\)</td>
+      <td style="text-align: center">\(1 R Q_3\)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>is a Class G Machine (with entry state \(Q_1\), exit state \(Q_3\)) which computes the function:</p>
+
+\[G_1(k) = k + 1\]
+
+<h4 id="inductive-step">Inductive Step</h4>
+
+<p>We can build \(G_{n}\) by simply adding two states to \(G_{n-2}\):</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">State</th>
+      <th style="text-align: center">0</th>
+      <th style="text-align: center">1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">\(Q_n\)</td>
+      <td style="text-align: center">\(1 L T_n\)</td>
+      <td style="text-align: center">\(1 R Q_{n+2}\)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">\(T_n\)</td>
+      <td style="text-align: center">\(0 L Q_{n-2}\)</td>
+      <td style="text-align: center">\(0 L T_n\)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Now, assuming that \(G_{n-2}\) is a Class G Machine (with entry state \(Q_{n-2}\), exit state \(Q_{n}\)), we will prove that \(G_{n}\) is a Class G Machine (with entry state \(Q_{n}\), exit state \(Q_{n+2}\)):</p>
+
+<p>First, the easy part:</p>
+
+\[\begin{array}{l}
+  Q_n &gt; &amp; 1 &amp; \to &amp; 1 &amp; Q_{n+2} &gt; \\
+\end{array}\]
+
+<p>in a single step.</p>
+
+<p>Second, we will use the inductive assumption which tells us that</p>
+
+\[\begin{array}{l}
+  0^\infty &amp; 1^k &amp; Q_{n-2} &gt; &amp; 0^r &amp; 1 &amp; \to &amp; 0^\infty &amp; 1^{G_{n-2}^r(k) + 1} &amp; Q_n &gt; \\
+\end{array}\]
+
+<p>in order to prove:</p>
+
+\[\begin{array}{l}
+  0^\infty &amp; 1^k &amp; Q_n &gt; &amp; 0 &amp; \to &amp; 0^\infty &amp; 1^k &amp; &lt; T_n &amp; &amp; 1 \\
+           &amp;     &amp;       &amp;   &amp; \to &amp; 0^\infty &amp;     &amp; &lt; T_n &amp; 0^k &amp; 1 \\
+           &amp;     &amp;       &amp;   &amp; \to &amp; 0^\infty &amp;     &amp; &lt; Q_{n-2} &amp; 0^{k+1} &amp; 1 \\
+           &amp;     &amp;       &amp;   &amp;  =  &amp; 0^\infty &amp;     &amp; Q_{n-2} &gt; &amp; 0^{k+2} &amp; 1 \\
+           &amp;     &amp;       &amp;   &amp; \to &amp; 0^\infty &amp; 1^{G_{n-2}^{k+2}(0) + 1} &amp; Q_n &gt; \\
+\end{array}\]
+
+<p>thus proving that \(G_n\) is a Class G Machine and also that</p>
+
+\[G_n(k) = G_{n-2}^{k+2}(0) + 1\]
+
+<h3 id="fast-growing-hierarchy">Fast-growing Hierarchy</h3>
+
+<p>Thus we can see that \(G_n\) are all Class G Machines which compute a <a href="https://en.wikipedia.org/wiki/Fast-growing_hierarchy">fast-growing hierarchy</a> of functions. The sequence begins with:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"> </th>
+      <th style="text-align: center"># States</th>
+      <th style="text-align: left">Function</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">\(G_1\)</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: left">\(G_1(k) = k + 1\)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">\(G_3\)</td>
+      <td style="text-align: center">3</td>
+      <td style="text-align: left">\(G_3(k) = G_1^{k+2}(0) + 1 = k + 3\)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">\(G_5\)</td>
+      <td style="text-align: center">5</td>
+      <td style="text-align: left">\(G_5(k) = G_3^{k+2}(0) + 1 = 3k + 7\)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">\(G_7\)</td>
+      <td style="text-align: center">7</td>
+      <td style="text-align: left">\(G_7(k) = G_5^{k+2}(0) + 1 = \frac{7 \cdot 3^{k+2} - 5}{2} &gt; 3^k\)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">\(G_9\)</td>
+      <td style="text-align: center">9</td>
+      <td style="text-align: left">\(G_9(k) = G_7^{k+2}(0) + 1 &gt; 3 \uparrow\uparrow k\)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="setup-components-1">Setup Components</h2>
+
+<p>While the sequence of \(G_n\) machines above compute impressively large functions, they need a little help when starting from a blank tape. This is where the Setup Components \(S_3\) and \(S_4\) come in. These setup components are very clever, they find a way to efficiently use the \(G_n\) components to initialize the tape for themselves.</p>
+
+<h3 id="three-state-setup-1">Three-State Setup</h3>
+
+<p>Starting from any \(G_n\), we can produce the \(n+3\) state Green Machine \(BB_{n+3}\) by adding the \(S_3\) component:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">State</th>
+      <th style="text-align: center">0</th>
+      <th style="text-align: center">1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">\(A = Q_{n+2}\)</td>
+      <td style="text-align: center">\(1LB\)</td>
+      <td style="text-align: center">\(1RZ\)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">\(B\)</td>
+      <td style="text-align: center">\(0LT\)</td>
+      <td style="text-align: center">\(1LT\)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">\(T\)</td>
+      <td style="text-align: center">\(0 L Q_n\)</td>
+      <td style="text-align: center">\(0LT\)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Then we can see, that, starting in state <code class="language-plaintext highlighter-rouge">A</code> on a blank tape we get the trajectory:</p>
+
+\[\begin{array}{l}
+  0^\infty &amp; &lt;A &amp; 0^\infty &amp; \to &amp; 0^\infty &amp; &amp; &lt; Q_n &amp; 001 &amp; 0^\infty \\
+           &amp;    &amp;          &amp;  =  &amp; 0^\infty &amp; &amp; Q_n &gt; &amp; 0001 &amp; 0^\infty \\
+           &amp;    &amp;          &amp; \to &amp; 0^\infty &amp; 1^{G_n^3(0) + 1} &amp; Q_{n+2} &gt; &amp; 0^\infty \\
+           &amp;    &amp;          &amp; \to &amp; 0^\infty &amp; 1^{G_n^3(0) + 1} &amp; &lt;B &amp; 1 &amp; 0^\infty \\
+           &amp;    &amp;          &amp; \to &amp; 0^\infty &amp; 1^{G_n^3(0)} &amp; &lt;T &amp; 11 &amp; 0^\infty \\
+           &amp;    &amp;          &amp; \to &amp; 0^\infty &amp; &amp; &lt;T &amp; 0^{G_n^3(0)} &amp; 11 &amp; 0^\infty \\
+           &amp;    &amp;          &amp; \to &amp; 0^\infty &amp; &amp; &lt; Q_n &amp; 0^{G_n^3(0) + 1} &amp; 11 &amp; 0^\infty \\
+           &amp;    &amp;          &amp;  =  &amp; 0^\infty &amp; &amp; Q_n &gt; &amp; 0^{G_n^3(0) + 2} &amp; 11 &amp; 0^\infty \\
+           &amp;    &amp;          &amp; \to &amp; 0^\infty &amp; 1^{G_n^{G_n^3(0) + 2}(0) + 1} &amp; Q_{n+2} &gt; &amp; 1 &amp; 0^\infty \\
+           &amp;    &amp;          &amp; \to &amp; 0^\infty &amp; 1^{G_n^{G_n^3(0) + 2}(0) + 2} &amp; Z&gt; &amp; 0^\infty \\
+\end{array}\]
+
+<p>Which halts with exactly \(BB_{n+3} = G_n^{G_n^3(0) + 2}(0) + 2\) <code class="language-plaintext highlighter-rouge">1</code>s on the tape (this TMs “score”).</p>
+
+<p>Note that:</p>
+
+\[G_{n+2}(k) = G_n^{k+2}(0) + 1\]
+
+<p>so we can rewrite these scores as</p>
+
+\[BB_{n+3} = G_n^{G_n^3(0) + 2}(0) + 2 = G_n^{G_{n+2}(1) + 1}(0) + 2 = G_{n+2}(G_{n+2}(1) - 1) + 1\]
+
+<h3 id="four-state-setup-1">Four-State Setup</h3>
+
+<p>Starting from any \(G_n\), we can produce the \(n+4\) state Green Machine \(BB_{n+4}\) by adding the \(S_4\) component:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">State</th>
+      <th style="text-align: center">0</th>
+      <th style="text-align: center">1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">\(A\)</td>
+      <td style="text-align: center">\(1LT\)</td>
+      <td style="text-align: center">\(1LB\)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">\(B\)</td>
+      <td style="text-align: center">\(1LZ\)</td>
+      <td style="text-align: center">\(1LA\)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">\(C = Q_{n+2}\)</td>
+      <td style="text-align: center">\(0LB\)</td>
+      <td style="text-align: center">\(1LT\)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">\(T\)</td>
+      <td style="text-align: center">\(0 L Q_n\)</td>
+      <td style="text-align: center">\(0LT\)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="prerequisites">Prerequisites</h4>
+
+<p>This setup is more subtle to prove. It actually depends upon the fact that \(G_n(k)\) is a “parity swapping function”, in other words that:</p>
+
+\[\begin{array}{l}
+  G_n(2k)   &amp; \equiv &amp; 1 &amp; \pmod{2} \\
+  G_n(2k+1) &amp; \equiv &amp; 0 &amp; \pmod{2} \\
+\end{array}\]
+
+<p>This turns out to be true for all \(G_n(k)\) (which can be proven easily by induction).</p>
+
+<p>Specifically, we use this fact below in the following transitions:</p>
+
+\[\begin{array}{l}
+  1^{G_{n+2}(0)} &amp; &lt;B &amp; \to &amp; &lt;A &amp; 1^{G_{n+2}(0)} \\
+  1^{G_{n+2}^{G_{n+2}(0)}(G_{n+2}(0))} &amp; &lt;B &amp; \to &amp; &lt;B &amp; 1^{G_{n+2}^{G_{n+2}(0)}(G_{n+2}(0))} \\
+\end{array}\]
+
+<p>Since \(G_{n+2}(0)\) is odd and \(G_{n+2}^{G_{n+2}(0)}(G_{n+2}(0))\) is even.</p>
+
+<p>We also need to prove a general rule first:</p>
+
+\[\begin{array}{l}
+  0^\infty &amp; 1^k &amp; C&gt; &amp; 1 &amp; \to &amp; 0^\infty &amp; 1^k &amp; &lt;T &amp; 1 \\
+           &amp;     &amp;    &amp;   &amp; \to &amp; 0^\infty &amp; &lt;T &amp; 0^k &amp; 1 \\
+           &amp;     &amp;    &amp;   &amp; \to &amp; 0^\infty &amp; &lt; Q_n &amp; 0^{k+1} &amp; 1 \\
+           &amp;     &amp;    &amp;   &amp;  =  &amp; 0^\infty &amp; Q_n &gt; &amp; 0^{k+2} &amp; 1 \\
+           &amp;     &amp;    &amp;   &amp; \to &amp; 0^\infty &amp; 1^{G_n^{k+2}(0) + 1} &amp; Q_{n+2} &gt; \\
+           &amp;     &amp;    &amp;   &amp;  =  &amp; 0^\infty &amp; 1^{G_{n+2}(k)} &amp; C&gt; \\
+\end{array}\]
+
+<p>Applying this recursively we get:</p>
+
+\[\begin{array}{l}
+  0^\infty &amp; 1^k &amp; C&gt; &amp; 1^r &amp; \to &amp; 0^\infty &amp; 1^{G_{n+2}^r(k)} &amp; C&gt; \\
+\end{array}\]
+
+<h4 id="behavior">Behavior</h4>
+
+<p>Finally, we can see, that, starting this TM in state <code class="language-plaintext highlighter-rouge">A</code> on a blank tape we get the trajectory:</p>
+
+\[\begin{array}{l}
+  0^\infty &amp; &lt;A &amp; 0^\infty &amp; \to &amp; 0^\infty &amp; &amp; &lt; Q_n &amp; 01 &amp; 0^\infty \\
+           &amp;    &amp;          &amp;  =  &amp; 0^\infty &amp; &amp; Q_n &gt; &amp; 001 &amp; 0^\infty \\
+           &amp;    &amp;          &amp; \to &amp; 0^\infty &amp; 1^{G_{n+2}(0)} &amp; C&gt; &amp; 0^\infty \\
+           &amp;    &amp;          &amp; \to &amp; 0^\infty &amp; 1^{G_{n+2}(0)} &amp; &lt;B &amp; 0^\infty \\
+           &amp;    &amp;          &amp; \to &amp; 0^\infty &amp; &amp; &lt;A &amp; 1^{G_{n+2}(0)} &amp; 0^\infty \\
+           &amp;    &amp;          &amp; \to &amp; 0^\infty &amp; &amp; &lt; Q_n &amp; 0 &amp; 1^{G_{n+2}(0) + 1} &amp; 0^\infty \\
+           &amp;    &amp;          &amp;  =  &amp; 0^\infty &amp; &amp; Q_n &gt; &amp; 00 &amp; 1^{G_{n+2}(0) + 1} &amp; 0^\infty \\
+           &amp;    &amp;          &amp; \to &amp; 0^\infty &amp; 1^{G_{n+2}(0)} &amp; C&gt; &amp; &amp; 1^{G_{n+2}(0)} &amp; 0^\infty \\
+           &amp;    &amp;          &amp; \to &amp; 0^\infty &amp; 1^{G_{n+2}^{G_{n+2}(0)}(G_{n+2}(0))} &amp; C&gt; &amp; 0^\infty \\
+           &amp;    &amp;          &amp; \to &amp; 0^\infty &amp; 1^{G_{n+2}^{G_{n+2}(0)}(G_{n+2}(0))} &amp; &lt;B &amp; 0^\infty \\
+           &amp;    &amp;          &amp; \to &amp; 0^\infty &amp; &amp; &lt;B &amp; 1^{G_{n+2}^{G_{n+2}(0)}(G_{n+2}(0))} &amp; 0^\infty \\
+           &amp;    &amp;          &amp; \to &amp; 0^\infty &amp; &amp; &lt;Z &amp; 1^{G_{n+2}^{G_{n+2}(0)}(G_{n+2}(0)) + 1} &amp; 0^\infty \\
+\end{array}\]
+
+<p>Which halts with exactly \(BB_{n+4} = G_{n+2}^{G_{n+2}(0)}(G_{n+2}(0)) + 1\) <code class="language-plaintext highlighter-rouge">1</code>s on the tape (this TMs “score”).</p>
+
+<p>Once again, we can simplify:</p>
+
+\[BB_{n+4} = G_{n+2}^{G_{n+2}(0)}(G_{n+2}(0)) + 1 = G_{n+2}^{G_{n+2}(0) + 1}(0) + 1 = G_{n+4}(G_{n+2}(0) - 1)\]
+
+<h2 id="summary">Summary</h2>
+
+<p>Putting this all together, Green defined components \(G_n\) which compute a fast growing hierarchy of functions and two different setup components \(S_3\) and \(S_4\) which can be added on top in order to produce a sequence of TMs \(BB_n\) which start on a blank tape and leave large numbers of <code class="language-plaintext highlighter-rouge">1</code>s upon halting. Precisely,</p>
+
+\[\begin{array}{l}
+  G_1(k) &amp; = &amp; k + 1 \\
+  G_n(k) &amp; = &amp; G_{n-2}^{k+2}(0) + 1 \\
+  \\
+  BB_{2n} &amp; = &amp; G_{2n-1}(G_{2n-1}(1) - 1) + 1 \\
+  BB_{2n+1} &amp; = &amp; G_{2n+1}(G_{2n-1}(0) - 1) \\
+\end{array}\]
+
+<h2 id="values-and-bounds">Values and Bounds</h2>
+
+<p>We can compute the following exact values and (reasonably tight) bounds using Knuth up-arrow notation:</p>
+
+\[\begin{array}{l}
+  G_1(k) &amp; = &amp; k + 1        &amp;&amp; G_1(0) =  1 &amp; G_1(1) =  2 \\
+  G_3(k) &amp; = &amp; k + 3        &amp;&amp; G_3(0) =  3 &amp; G_3(1) =  4 \\
+  G_5(k) &amp; = &amp; 3k + 7       &amp;&amp; G_5(0) =  7 &amp; G_5(1) = 10 \\
+  G_7(k) &amp; = &amp; \frac{7 \cdot 3^{k+2} - 5}{2} &gt; 3^{k+3}
+                            &amp;&amp; G_7(0) = 29 &amp; G_7(1) = 92 \\
+  G_9(k) &amp; &gt; &amp; 3 \uparrow\uparrow (k + 3)
+      &amp;&amp; G_9(0) = \frac{7 \cdot 3^{31} - 3}{2} \\
+  G_{11}(k) &amp; &gt; &amp; 3 \uparrow\uparrow\uparrow (k + 3) \\
+
+    &amp; \vdots \\
+
+  G_{2n+5}(k) &amp; &gt; &amp; 3 \uparrow^n (k + 3) \\
+\end{array}\]
+
+<p>And similarly for \(BB_n\) values:</p>
+
+\[\begin{array}{lcrcl}
+  BB_{ 4} &amp; = &amp;       7 \\
+  BB_{ 5} &amp; = &amp;      13 \\
+  BB_{ 6} &amp; = &amp;      35 \\
+  BB_{ 7} &amp; = &amp; 22\,961
+          &amp; &gt; &amp; 3^{ 9} &amp; = &amp; 3^{3^2} \\
+  BB_{ 8} &amp; = &amp; \frac{7 \cdot 3^{93} - 3}{2}
+          &amp; &gt; &amp; 3^{94} &amp; &gt; &amp; 3^{3^4} \\
+  BB_{ 9} &amp; = &amp; G_9(28)
+          &amp; &gt; &amp; 3 \uparrow\uparrow 31
+          &amp; &gt; &amp; 3 \uparrow\uparrow 3 \uparrow\uparrow 2 \\
+  BB_{10} &amp; &gt; &amp; G_9(3 \uparrow\uparrow 4)
+          &amp;&amp;
+          &amp; &gt; &amp; 3 \uparrow\uparrow 3 \uparrow\uparrow 4 \\
+
+    &amp; \vdots \\
+
+  BB_{2n+5} &amp; &gt; &amp; G_{2n+5}(3 \uparrow^{n-1} 3)
+            &amp; &gt; &amp; 3 \uparrow^n (3 \uparrow^{n-1} 3)
+            &amp; = &amp; 3 \uparrow^n 3 \uparrow^n 2 \\
+  BB_{2n+6} &amp; &gt; &amp; G_{2n+5}(3 \uparrow^n 4)
+            &amp;&amp;
+            &amp; &gt; &amp; 3 \uparrow^n 3 \uparrow^n 4 \\
+\end{array}\]
+
+<h2 id="greens-champions">Green’s Champions</h2>
+
+<blockquote>
+  <p>Update: As of 13 May 2025, none of Green’s machines remain champions due to Pavel Kropitz’s discovery of <a href="https://wiki.bbchallenge.org/wiki/1RB0RA_1LC1LF_1RD0LB_1RA1LE_1RZ0LC_1RG1LD_0RG0RF">an Ackermann-level BB(7) TM</a> demonstrating \(\Sigma(7) &gt; 2 \uparrow^{11} 2 \uparrow^{11} 3\).</p>
+</blockquote>
+
+<p>When Green published his paper in 1964, all \(BB_n\) for \(n \ge 6\) were Busy Beaver champions. However, over the years several have been slowly chipped away. According to Pascal Michel’s <a href="https://bbchallenge.org/~pascal.michel/ha.html">Historical survey of Busy Beavers</a>:</p>
+
+<ul>
+  <li>\(BB_6\) was surpassed in 1972 by Donald Lynn: \(\Sigma(6) \ge 42\)</li>
+  <li>\(BB_7\) was surpassed in 1990 by Marxen and Buntrock: \(\Sigma(6) \ge 136\,612\) and</li>
+  <li>\(BB_8\) was surpassed in 2000 by Marxen and Buntrock: \(\Sigma(6) &gt; 1.4 \times 10^{60}\)</li>
+</ul>
+
+<p>Yet, beyond this I do not know of any TMs beating Green’s Machines until finally, they are eclipsed by <a href="/2022/07/11/bb-16-graham.html">Daniel Nagaj’s massive BB(16) &gt; Graham champion</a> (since \(BB_{16} \ll g_2 \ll G\)).</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Green Machine</th>
+      <th style="text-align: left">Busy Beaver Bound</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">\(BB_{ 9}\)</td>
+      <td style="text-align: left">\(\Sigma(9) &gt; 3 \uparrow\uparrow 31 &gt; 10 \uparrow\uparrow 30\)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">\(BB_{10}\)</td>
+      <td style="text-align: left">\(\Sigma(10) &gt; 3 \uparrow\uparrow 3 \uparrow\uparrow 4 &gt; 10 \uparrow\uparrow 10^{10^{12}}\)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">\(BB_{11}\)</td>
+      <td style="text-align: left">\(\Sigma(11) &gt; 3 \uparrow\uparrow\uparrow 3 \uparrow\uparrow\uparrow 2 &gt; 10 \uparrow\uparrow\uparrow 10^{12}\)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">\(BB_{12}\)</td>
+      <td style="text-align: left">\(\Sigma(12) &gt; 3 \uparrow\uparrow\uparrow 3 \uparrow\uparrow\uparrow 4\)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">\(BB_{13}\)</td>
+      <td style="text-align: left">\(\Sigma(13) &gt; 3 \uparrow^4 3 \uparrow^4 2\)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">\(BB_{14}\)</td>
+      <td style="text-align: left">\(\Sigma(14) &gt; 3 \uparrow^4 3 \uparrow^4 4\)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">\(BB_{15}\)</td>
+      <td style="text-align: left">\(\Sigma(15) &gt; 3 \uparrow^5 3 \uparrow^5 2\)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Do any of you know of any better results in this range? Let me know in the new comments system below (just set up today!).</p>
+
+<h2 id="footnotes">Footnotes</h2>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:green64" role="doc-endnote">
+      <p>Milton W. Green. “A Lower Bound on Rado’s Sigma Function for Binary Turing Machines”, <em>Proceedings of the IEEE Fifth Annual Symposium on Switching Circuits Theory and Logical Design</em>, 1964, pages 91–94, doi: <a href="https://doi.org/10.1109%2FSWCT.1964.3">10.1109/SWCT.1964.3</a>. <a href="#fnref:green64" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>]]></content><author><name>Shawn Ligocki</name></author><category term="busy-beaver" /><summary type="html"><![CDATA[In 1964 (only 2 years after Tibor Radó first described the Busy Beaver game), Milton W. Green of the Stanford Research Institute hand-crafted a family of fast-growing Turing Machines with \(n\) states, 2 symbols for all \(n \ge 4\).1 At the time of publication, Green’s Machines were the Busy Beaver champions for \(BB(n)\) for all \(n \ge 6\). This family grows roughly as fast as the Ackermann function Milton W. Green. “A Lower Bound on Rado’s Sigma Function for Binary Turing Machines”, Proceedings of the IEEE Fifth Annual Symposium on Switching Circuits Theory and Logical Design, 1964, pages 91–94, doi: 10.1109/SWCT.1964.3. &#8617;]]></summary></entry><entry><title type="html">BB(3, 3) is Hard (Bigfoot)</title><link href="https://www.sligocki.com//2023/10/16/bb-3-3-is-hard.html" rel="alternate" type="text/html" title="BB(3, 3) is Hard (Bigfoot)" /><published>2023-10-16T00:00:00+00:00</published><updated>2023-10-16T00:00:00+00:00</updated><id>https://www.sligocki.com//2023/10/16/bb-3-3-is-hard</id><content type="html" xml:base="https://www.sligocki.com//2023/10/16/bb-3-3-is-hard.html"><![CDATA[<p>I’m excited to share a 3 state, 3 symbol Turing Machine that cannot be proven to halt or not (when starting on a blank tape) without solving a Collatz-like problem. Therefore, solving the \(BB(3, 3)\) problem is at least as hard as solving this Collatz-like problem, a class of problem for which Paul Erdős famously said: “Mathematics may not be ready for such problems.”</p>
+
+<p>Last year, in <a href="/2022/04/03/mother-of-giants.html">Mother of Giants</a>, I described a family of TMs which require efficient simulation or complete solution of a Collatz-like problem in order to prove if they “quasihalt” or not. These were found in the search for <a href="/2021/03/06/beeping-busy-beaver/">“Beeping” Busy Beavers</a>, a variant of the Busy Beavers introduced by Scott Aaronson in his 2020 <a href="https://www.scottaaronson.com/blog/?p=4916">Busy Beaver survey article</a>. Since then I have been looking for an example in the normal Busy Beaver game.</p>
+
+<p>There have been many wonderful TMs produced by hand over the years which provide such results for the Busy Beaver game. For example, proving:</p>
+<ul>
+  <li>\(BB(745)\) <a href="https://www.ingo-blechschmidt.eu/assets/bachelor-thesis-undecidability-bb748.pdf">requires</a> proving the consistency of ZFC</li>
+  <li>\(BB(27)\) <a href="https://gist.github.com/anonymous/a64213f391339236c2fe31f8749a0df6">requires</a> proving the Goldbach Conjecture</li>
+  <li>\(BB(15)\) and \(BB(5, 4)\) <a href="https://dna.hamilton.ie/2021-08-10-busy-beaver-15.html">require</a> proving an Erdős conjecture (that for all \(n &gt; 8\), the base 3 representation of \(2^n\) has at least one digit 2).</li>
+</ul>
+
+<p>However, none of these Busy Beaver values are really within reach of us mere mortals yet. In the last 60 years, we have only been able to prove values \(BB(2), BB(3), BB(4)\) and \(BB(2, 3)\) and it is known that <a href="https://www.sligocki.com/2022/06/21/bb-6-2-t15.html">\(BB(6) &gt; 10 \uparrow\uparrow 15\)</a>. Until I analyzed this TM, I thought that we might have a chance to prove \(BB(3, 3)\)!</p>
+
+<h2 id="the-machine">The Machine</h2>
+
+<p>I’ll call this TM “Bigfoot” (I’ll explain the name at the end of the article). It is defined by the transition table:</p>
+
+<p><code class="language-plaintext highlighter-rouge">1RB2RA1LC_2LC1RB2RB_---2LA1LA</code> (<a href="https://bbchallenge.org/1RB2RA1LC_2LC1RB2RB_---2LA1LA">on bbchallenge</a>)</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"> </th>
+      <th style="text-align: center">0</th>
+      <th style="text-align: center">1</th>
+      <th style="text-align: center">2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">A</td>
+      <td style="text-align: center">1RB</td>
+      <td style="text-align: center">2RA</td>
+      <td style="text-align: center">1LC</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">B</td>
+      <td style="text-align: center">2LC</td>
+      <td style="text-align: center">1RB</td>
+      <td style="text-align: center">2RB</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">C</td>
+      <td style="text-align: center">—</td>
+      <td style="text-align: center">2LA</td>
+      <td style="text-align: center">1LA</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>It is one of the remaining 160 informal \(BB(3, 3)\) holdouts that Justin Blanchard recently <a href="https://discord.com/channels/960643023006490684/1084047886494470185/1162781523402043402">shared</a> on the bbchallenge.org Discord channel. This specific TM was first <a href="https://discord.com/channels/960643023006490684/1084047886494470185/1163168233445130270">shared</a> by @savask on 14 Oct 2023 on that same Discord channel with a low level description of it’s behavior. I built on top of that analysis to discover the Collatz-like nature and biased random walk described below.</p>
+
+<h2 id="analysis">Analysis</h2>
+
+<p>Consider the general configuration:</p>
+
+\[A(a, b, c) = 0^\infty \; 12^a \; 11^b \; \text{ &lt;A } \; 11^c \; 0^\infty\]
+
+<p>We can prove the following rules:</p>
+
+\[\begin{array}{l}
+  A(a, &amp; 6k,   &amp; c) &amp; \to &amp; A(a,   &amp; 8k+c-1, &amp; 2)   &amp; \text{if} &amp; 8k+c \ge 1 \\
+  A(a, &amp; 6k+1, &amp; c) &amp; \to &amp; A(a+1, &amp; 8k+c-1, &amp; 3)   &amp; \text{if} &amp; 8k+c \ge 1 \\
+  A(a, &amp; 6k+2, &amp; c) &amp; \to &amp; A(a-1, &amp; 8k+c+3, &amp; 2)   &amp; \text{if} &amp; a \ge 1 \\
+  A(a, &amp; 6k+3, &amp; c) &amp; \to &amp; A(a,   &amp; 8k+c+1, &amp; 5)   \\
+  A(a, &amp; 6k+4, &amp; c) &amp; \to &amp; A(a+1, &amp; 8k+c+3, &amp; 2)   \\
+  A(a, &amp; 6k+5, &amp; c) &amp; \to &amp; A(a,   &amp; 8k+c+5, &amp; 3)   \\
+\end{array}\]
+
+\[A(0, 6k+2, c) \to \text{Halt}(16k+2c+7)\]
+
+<p>In fact, these rules are exhaustive. Once Bigfoot enters such a \(A(a, b, c)\) config (with \(c \ge 1\)), these rules describe the exact behavior it will follow forever (or until it halts).</p>
+
+<p>Looking at the rules above we can see that they are iterating a Collatz-like function on parameters \(b\) and \(c\) while \(a\) keeps a sort of running total. Every time \(b \equiv 1 \pmod{6}\) or \(b \equiv 4 \pmod{6}\), \(a\) is incremented and every time \(b \equiv 2 \pmod{6}\), \(a\) is decremented. Bigfoot only ever halts if \(a\) would be decremented below 0.</p>
+
+<h3 id="trajectory-from-blank-tape">Trajectory from Blank Tape</h3>
+
+<p>Starting from a blank tape, Bigfoot reaches config \(A(2, 1, 2)\) at step 69. Simulating this forward, \(a\) appears to grow steadily over time. After 24 million iterations, we have \(a = 3\,999\,888\).</p>
+
+<h3 id="pseudo-random-walk">Pseudo-Random Walk</h3>
+
+<p>Let’s consider the sequence of remainders of \(b\) mod 6. If we imagine that this sequence is uniformly randomly distributed, then this process is simulating a biased random walk on the number line where (for each step) the chance of stepping right is \(\frac{2}{3}\) and the chance of stepping left is \(\frac{1}{3}\).</p>
+
+<p>This is a famous problem in the theory of <a href="https://en.wikipedia.org/wiki/Markov_chain">Markov chains</a> and it can be proven that if you are at position \(a = n\), there is a \((\frac{1}{2})^{n+1}\) chance you will ever reach the position \(a = -1\) in the future.</p>
+
+<p>Of course, the sequence of remainders of \(b\) are not random, they are completely deterministic. (In fact, they even follow the consistent pattern of odd, odd, even, even, …) However, on a broad scale they do appear to follow a trajectory roughly like the random Markov chain. We can see that in the trajectory listed above where after 24 million steps, the Markov chain would be expected to move to the right 8 million times and to the left 4 million leading to a value very close to the actual \(a\) around 4 million.</p>
+
+<h3 id="probviously-not-halting">Probviously Not Halting</h3>
+
+<p>As mentioned above, the random Markov chain would have about a \((\frac{1}{2})^{4\,000\,000}\) chance of ever reaching \(a = -1\) at this point which is a number so small that any scientist would happily declare this guaranteed to fail. Likewise, this is where I will say that Bigfoot “probviously” never halts (using the <a href="https://doi.org/10.4169/amer.math.monthly.120.03.192">words of John Conway</a>). Meaning that if it operates anything close to the Markov Chain it will never halt.</p>
+
+<p>Of course, this sort of statement says nothing in a rigorous Mathematical sense. Instead it is sort of an experimental heuristic which I am using to guide my intuition in this case. There is always the chance that after a googolplex iterations Bigfoot will halt. In fact, Conway coined this term to describe the heuristic argument for why the Collatz conjecture should be “probviously” true and yet a proof of Collatz is nowhere in sight.</p>
+
+<h2 id="two-worlds">Two Worlds</h2>
+
+<p>We live in one of two worlds, either Bigfoot halts or it runs forever. If it halts, then that could be proven by accelerating iterations of this Collatz-like function enough that it is tractable to simulate it to completion. If it runs forever, then proving that requires proving that this Collatz-like function will never reach the \(a = 0\) halting transition.</p>
+
+<p>Based on the Markov chain argument above, I believe we are living in this second world and it seems to me that this is the much harder case to prove.</p>
+
+<h2 id="cryptids">Cryptids</h2>
+
+<p>What do we call these sorts of machines? Ones whose behavior has been distilled into a relatively simple Mathematical rule that falls into a class of open Mathematical problems. These machines seem to be a sort of legendary creature, rumors have it that they either halt or do not, but nobody has been able to provide any concrete evidence to support either conclusion. I propose calling them <a href="https://en.wikipedia.org/wiki/List_of_cryptids">“Cryptids”</a>, drawing parallels to the legendary creatures like the Loch Ness Monster or Chupacabra. And well, since this TM appears to randomly walk about, I thought Bigfoot would be an apt name.</p>
+
+<h2 id="is-this-collatz-like-behavior-really-hard">Is This Collatz-like Behavior Really Hard?</h2>
+
+<p>I imagine that some of you might be wondering: Is the behavior of this specific Collatz-like function really hard to analyze? Am I overselling this behavior simply by it’s association with the famously difficult Collatz problem? I think it is safe to say that nobody aside from me has ever looked at the dynamics of this specific problem. So perhaps with a little bit of number theory and elbow grease, someone will be able to find a clever Mathematical property that applies to this problem (but not to the broader set of Collatz-like problems). This is certainly possible and I am excited to hear if anyone has any ideas as to how to attack this problem. It would be lovely to know that proving \(BB(3, 3)\) remains within reach!</p>
+
+<p>However, in my (limited) experience analyzing and reading about Collatz-like problems there seem to be only two types of questions that one can ask: (1) Ones that are relatively trivial to prove and (2) Ones which no Mathematician knows how to prove. In the first category we have patterns like the fact that \(b\) repeats consistently through the pattern (odd, odd, even, even, …) in Bigfoot’s Collatz iterations or that every time you apply the traditional \(3n+1\) Collatz rule you always end up with an even number which will then be divided by 2 on the next step. Examples of the second category include basically all other questions we might ask about the behavior of these Collatz systems.</p>
+
+<h2 id="alternative-representation">Alternative Representation</h2>
+
+<blockquote>
+  <p>This section was added on 18 Oct 2023</p>
+</blockquote>
+
+<p>The Collatz-like behavior I described above has a few annoying characteristics:</p>
+<ol>
+  <li>It interweaves \(b\) and \(c\) parameters,</li>
+  <li>The input modulo (6) and output modulo (8) share a common factor (of 2) and</li>
+  <li>The \(b\) parameter follows a consistent repeating pattern odd-odd-even-even.</li>
+</ol>
+
+<p>Shortly after I posted this article, Matthew House (@LegionMammal978 on Discord) pointed out that if you define a new configuration as:</p>
+
+\[B(a, b) = A(a, 2b+1, 2)\]
+
+<p>consider \(b = 81k + r\) and apply 4 of the original transitions as one transition, then you can derive the following alternative representation of the Collatz-like behavior of this TM:</p>
+
+<details>
+  <summary>Full 81 Cases</summary>
+
+  $$ \begin{array}{l}
+    B(a, &amp; 81k +  0) &amp; \to &amp; B(a + 1, &amp; 256k +   4) \\
+    B(a, &amp; 81k +  1) &amp; \to &amp; B(a    , &amp; 256k +   8) \\
+    B(a, &amp; 81k +  2) &amp; \to &amp; B(a + 1, &amp; 256k +  10) \\
+    B(a, &amp; 81k +  3) &amp; \to &amp; B(a    , &amp; 256k +  14) \\
+    B(a, &amp; 81k +  4) &amp; \to &amp; B(a - 1, &amp; 256k +  18) \\
+    B(a, &amp; 81k +  5) &amp; \to &amp; B(a - 2, &amp; 256k +  22) \\
+    B(a, &amp; 81k +  6) &amp; \to &amp; B(a + 2, &amp; 256k +  22) \\
+    B(a, &amp; 81k +  7) &amp; \to &amp; B(a + 1, &amp; 256k +  26) \\
+    B(a, &amp; 81k +  8) &amp; \to &amp; B(a    , &amp; 256k +  30) \\
+    B(a, &amp; 81k +  9) &amp; \to &amp; B(a + 4, &amp; 256k +  30) \\
+    B(a, &amp; 81k + 10) &amp; \to &amp; B(a - 2, &amp; 256k +  38) \\
+    B(a, &amp; 81k + 11) &amp; \to &amp; B(a + 2, &amp; 256k +  38) \\
+    B(a, &amp; 81k + 12) &amp; \to &amp; B(a + 1, &amp; 256k +  42) \\
+    B(a, &amp; 81k + 13) &amp; \to &amp; B(a    , &amp; 256k +  46) \\
+    B(a, &amp; 81k + 14) &amp; \to &amp; B(a + 1, &amp; 256k +  48) \\
+    B(a, &amp; 81k + 15) &amp; \to &amp; B(a    , &amp; 256k +  52) \\
+    B(a, &amp; 81k + 16) &amp; \to &amp; B(a + 2, &amp; 256k +  54) \\
+    B(a, &amp; 81k + 17) &amp; \to &amp; B(a    , &amp; 256k +  58) \\
+    B(a, &amp; 81k + 18) &amp; \to &amp; B(a + 2, &amp; 256k +  60) \\
+    B(a, &amp; 81k + 19) &amp; \to &amp; B(a + 1, &amp; 256k +  64) \\
+    B(a, &amp; 81k + 20) &amp; \to &amp; B(a    , &amp; 256k +  68) \\
+    B(a, &amp; 81k + 21) &amp; \to &amp; B(a + 1, &amp; 256k +  70) \\
+    B(a, &amp; 81k + 22) &amp; \to &amp; B(a    , &amp; 256k +  74) \\
+    B(a, &amp; 81k + 23) &amp; \to &amp; B(a - 1, &amp; 256k +  78) \\
+    B(a, &amp; 81k + 24) &amp; \to &amp; B(a + 3, &amp; 256k +  78) \\
+    B(a, &amp; 81k + 25) &amp; \to &amp; B(a    , &amp; 256k +  84) \\
+    B(a, &amp; 81k + 26) &amp; \to &amp; B(a + 1, &amp; 256k +  86) \\
+    B(a, &amp; 81k + 27) &amp; \to &amp; B(a    , &amp; 256k +  90) \\
+    B(a, &amp; 81k + 28) &amp; \to &amp; B(a - 1, &amp; 256k +  94) \\
+    B(a, &amp; 81k + 29) &amp; \to &amp; B(a + 3, &amp; 256k +  94) \\
+    B(a, &amp; 81k + 30) &amp; \to &amp; B(a + 2, &amp; 256k +  98) \\
+    B(a, &amp; 81k + 31) &amp; \to &amp; B(a + 1, &amp; 256k + 102) \\
+    B(a, &amp; 81k + 32) &amp; \to &amp; B(a    , &amp; 256k + 106) \\
+    B(a, &amp; 81k + 33) &amp; \to &amp; B(a + 1, &amp; 256k + 108) \\
+    B(a, &amp; 81k + 34) &amp; \to &amp; B(a + 3, &amp; 256k + 110) \\
+    B(a, &amp; 81k + 35) &amp; \to &amp; B(a - 1, &amp; 256k + 116) \\
+    B(a, &amp; 81k + 36) &amp; \to &amp; B(a + 3, &amp; 256k + 116) \\
+    B(a, &amp; 81k + 37) &amp; \to &amp; B(a    , &amp; 256k + 122) \\
+    B(a, &amp; 81k + 38) &amp; \to &amp; B(a + 1, &amp; 256k + 124) \\
+    B(a, &amp; 81k + 39) &amp; \to &amp; B(a    , &amp; 256k + 128) \\
+    B(a, &amp; 81k + 40) &amp; \to &amp; B(a - 1, &amp; 256k + 132) \\
+    B(a, &amp; 81k + 41) &amp; \to &amp; B(a    , &amp; 256k + 134) \\
+    B(a, &amp; 81k + 42) &amp; \to &amp; B(a - 1, &amp; 256k + 138) \\
+    B(a, &amp; 81k + 43) &amp; \to &amp; B(a + 1, &amp; 256k + 140) \\
+    B(a, &amp; 81k + 44) &amp; \to &amp; B(a + 2, &amp; 256k + 142) \\
+    B(a, &amp; 81k + 45) &amp; \to &amp; B(a + 1, &amp; 256k + 146) \\
+    B(a, &amp; 81k + 46) &amp; \to &amp; B(a    , &amp; 256k + 150) \\
+    B(a, &amp; 81k + 47) &amp; \to &amp; B(a - 1, &amp; 256k + 154) \\
+    B(a, &amp; 81k + 48) &amp; \to &amp; B(a + 3, &amp; 256k + 154) \\
+    B(a, &amp; 81k + 49) &amp; \to &amp; B(a + 2, &amp; 256k + 158) \\
+    B(a, &amp; 81k + 50) &amp; \to &amp; B(a + 1, &amp; 256k + 162) \\
+    B(a, &amp; 81k + 51) &amp; \to &amp; B(a + 2, &amp; 256k + 164) \\
+    B(a, &amp; 81k + 52) &amp; \to &amp; B(a - 1, &amp; 256k + 170) \\
+    B(a, &amp; 81k + 53) &amp; \to &amp; B(a    , &amp; 256k + 172) \\
+    B(a, &amp; 81k + 54) &amp; \to &amp; B(a + 2, &amp; 256k + 174) \\
+    B(a, &amp; 81k + 55) &amp; \to &amp; B(a + 1, &amp; 256k + 178) \\
+    B(a, &amp; 81k + 56) &amp; \to &amp; B(a + 2, &amp; 256k + 180) \\
+    B(a, &amp; 81k + 57) &amp; \to &amp; B(a + 1, &amp; 256k + 184) \\
+    B(a, &amp; 81k + 58) &amp; \to &amp; B(a    , &amp; 256k + 188) \\
+    B(a, &amp; 81k + 59) &amp; \to &amp; B(a - 1, &amp; 256k + 192) \\
+    B(a, &amp; 81k + 60) &amp; \to &amp; B(a    , &amp; 256k + 194) \\
+    B(a, &amp; 81k + 61) &amp; \to &amp; B(a + 2, &amp; 256k + 196) \\
+    B(a, &amp; 81k + 62) &amp; \to &amp; B(a - 2, &amp; 256k + 202) \\
+    B(a, &amp; 81k + 63) &amp; \to &amp; B(a + 2, &amp; 256k + 202) \\
+    B(a, &amp; 81k + 64) &amp; \to &amp; B(a - 1, &amp; 256k + 208) \\
+    B(a, &amp; 81k + 65) &amp; \to &amp; B(a    , &amp; 256k + 210) \\
+    B(a, &amp; 81k + 66) &amp; \to &amp; B(a - 1, &amp; 256k + 214) \\
+    B(a, &amp; 81k + 67) &amp; \to &amp; B(a - 2, &amp; 256k + 218) \\
+    B(a, &amp; 81k + 68) &amp; \to &amp; B(a + 2, &amp; 256k + 218) \\
+    B(a, &amp; 81k + 69) &amp; \to &amp; B(a + 1, &amp; 256k + 222) \\
+    B(a, &amp; 81k + 70) &amp; \to &amp; B(a    , &amp; 256k + 226) \\
+    B(a, &amp; 81k + 71) &amp; \to &amp; B(a + 1, &amp; 256k + 228) \\
+    B(a, &amp; 81k + 72) &amp; \to &amp; B(a + 3, &amp; 256k + 230) \\
+    B(a, &amp; 81k + 73) &amp; \to &amp; B(a + 2, &amp; 256k + 234) \\
+    B(a, &amp; 81k + 74) &amp; \to &amp; B(a + 1, &amp; 256k + 238) \\
+    B(a, &amp; 81k + 75) &amp; \to &amp; B(a + 2, &amp; 256k + 240) \\
+    B(a, &amp; 81k + 76) &amp; \to &amp; B(a + 1, &amp; 256k + 244) \\
+    B(a, &amp; 81k + 77) &amp; \to &amp; B(a    , &amp; 256k + 248) \\
+    B(a, &amp; 81k + 78) &amp; \to &amp; B(a + 1, &amp; 256k + 250) \\
+    B(a, &amp; 81k + 79) &amp; \to &amp; B(a + 1, &amp; 256k + 254) \\
+    B(a, &amp; 81k + 80) &amp; \to &amp; B(a - 1, &amp; 256k + 258) \\
+  \end{array}$$
+</details>
+<p />
+
+<p>Note: Some of these rules depend upon \(a \ge 2\).</p>
+
+<p>This representation addresses all 3 of the listed characteristics of \(A\) and appears more akin to the classic Collatz problem. But, of course, it is also a bit unwieldy with its 81 cases!</p>]]></content><author><name>Shawn Ligocki</name></author><category term="busy-beaver" /><category term="collatz" /><category term="cryptid" /><summary type="html"><![CDATA[I’m excited to share a 3 state, 3 symbol Turing Machine that cannot be proven to halt or not (when starting on a blank tape) without solving a Collatz-like problem. Therefore, solving the \(BB(3, 3)\) problem is at least as hard as solving this Collatz-like problem, a class of problem for which Paul Erdős famously said: “Mathematics may not be ready for such problems.”]]></summary></entry><entry><title type="html">Sing me a song, you’re the Collatz man</title><link href="https://www.sligocki.com//2023/08/24/collatz-songs.html" rel="alternate" type="text/html" title="Sing me a song, you’re the Collatz man" /><published>2023-08-24T00:00:00+00:00</published><updated>2023-08-24T00:00:00+00:00</updated><id>https://www.sligocki.com//2023/08/24/collatz-songs</id><content type="html" xml:base="https://www.sligocki.com//2023/08/24/collatz-songs.html"><![CDATA[<p>I just enjoyed an excellent YouTube video, <a href="https://www.youtube.com/watch?v=8iJOTKMg5-k">My honest attempt at the Collatz Conjecture</a>, made by Fernando Franco Félix (Fer / @Highly Entropic Mind) as part of the <a href="https://3blue1brown.substack.com/p/some3-begins">third Summer of Math (#SoME3)</a>. He also <a href="https://drive.google.com/file/d/1iydESf21HKPdSWggDgPs5IKb-iOc9xe-/view">wrote it up as a PDF</a>. This blog post is a response to that video and paper.</p>
+
+<p>In the video, Fer takes us on a journey that we rarely get to see: Inside the process of exploration that he himself took while trying his hand at the Collatz Conjecture. And the journey is a wild and exciting one, transforming this from a number problem into a Game of Thrones tile game, leading up to what seems like it might be a proof of the Collatz Conjecture itself, only to be followed by a sober self-analysis of how much his own “proof” fails Scott Aaronson’s <a href="https://scottaaronson.blog/?p=304">heuristic crackpot test</a>. It reminds me of Donald Knuth’s novelette: <a href="https://www.google.com/books/edition/Surreal_Numbers/ZUkwDc3FokgC?hl=en">Surreal Numbers: How Two Ex-students Turned on to Pure Mathematics and Found Total Happiness</a> (which I highly recommend to anyone reading this blog) except with more drama!</p>
+
+<p>As a long-time Collatz enthusiast, I really enjoyed seeing someone share their authentic journey in grappling with this famous problem. In this blog post, I would like to share an abstraction that is similar to Fer’s, but I think you might find simpler to work with. My hope here is to give another tool to folks who might have been inspired by Fer’s approach to pursuing Collatz.</p>
+
+<h2 id="collatz-by-my-name">Collatz by My Name</h2>
+
+<p>Let me start by laying out an alternative way of thinking about the Collatz problem. It is similar to Fer’s, but I think it is simpler and easier to reason about. First, some definitions:</p>
+
+<p>The Collatz function is often written as:</p>
+
+\[C(n) = \begin{cases}
+  n/2   &amp; \text{if } n \equiv 0 \pmod{2} \\
+  3n+1  &amp; \text{if } n \equiv 1 \pmod{2} \\
+\end{cases}\]
+
+<p>However, since the \(3n+1\) case is guaranteed to be even, it is often convenient to use the reduced version that automatically divides that result by 2:</p>
+
+\[D(n) = \begin{cases}
+  \frac{n}{2}     &amp; \text{if } n \equiv 0 \pmod{2} \\
+  \frac{3n+1}{2}  &amp; \text{if } n \equiv 1 \pmod{2} \\
+\end{cases}\]
+
+<p>Note that this function can also be expressed as:</p>
+
+\[\begin{array}{l}
+  D &amp; : &amp; 2k   &amp; \mapsto &amp;  k \\
+    &amp;   &amp; 2k+1 &amp; \mapsto &amp; 3k+2 \\
+\end{array}\]
+
+<p>And this is the version that we will find most useful.</p>
+
+<h3 id="songs-of-ice-and-fire">Songs of Ice and Fire</h3>
+
+<p>Let us call \(2k \mapsto k\) an <code class="language-plaintext highlighter-rouge">I</code>ce transition and \(2k+1 \mapsto 3k+2\) a <code class="language-plaintext highlighter-rouge">F</code>ire transition (since they lower or raise the “temperature” respectively). Starting at any initial number, repeatedly applying \(D\) will produce a sequence of these transitions. For example, starting at 13, we get the sequence:</p>
+
+\[13 \overset{F} \mapsto 20 \overset{I} \mapsto 10 \overset{I} \mapsto 5 \overset{F} \mapsto 8 \overset{I} \mapsto 4 \overset{I} \mapsto 2 \overset{I} \mapsto 1\]
+
+<p>Looking only at the types of transitions this simplifies to the sequence <code class="language-plaintext highlighter-rouge">FIIFIII</code>. Let us call a sequence of <code class="language-plaintext highlighter-rouge">I</code>s and <code class="language-plaintext highlighter-rouge">F</code>s like this a “Song” (These are analogous to what Fer calls a “Constellation”, but I am too invested in my Game of Thrones pun to use that term!) and furthermore, let’s say that a song is “sung” by a number if that number follows the transitions from that song. So 13 sings <code class="language-plaintext highlighter-rouge">FIIFIII</code> (and it also sings <code class="language-plaintext highlighter-rouge">FIIF</code> and <code class="language-plaintext highlighter-rouge">FIIFIIIFIFI</code>, etc.).</p>
+
+<p>This inspires a few questions: Is every song sung by some number? Given a song, can we find which numbers sing it?</p>
+
+<h3 id="the-songs-that-are-sung">The Songs That Are Sung</h3>
+
+<p>Let’s consider what happens when we apply \(D\) twice:</p>
+
+\[\begin{array}{l}
+  D^2 &amp; : &amp; 4k   &amp; \overset{I} \mapsto &amp; 2k   &amp; \overset{I} \mapsto &amp;  k \\
+      &amp;   &amp; 4k+1 &amp; \overset{F} \mapsto &amp; 6k+2 &amp; \overset{I} \mapsto &amp; 3k+1 \\
+      &amp;   &amp; 4k+2 &amp; \overset{I} \mapsto &amp; 2k+1 &amp; \overset{F} \mapsto &amp; 3k+2 \\
+      &amp;   &amp; 4k+3 &amp; \overset{F} \mapsto &amp; 6k+5 &amp; \overset{F} \mapsto &amp; 9k+8 \\
+\end{array}\]
+
+<p>Therefore, we can see that every possible 2 letter song is sung and we have characterized exactly which numbers sing those songs. For example, every number \(4k+3\) sings the song <code class="language-plaintext highlighter-rouge">FF</code>.</p>
+
+<p>Extending one further we get:</p>
+
+\[\begin{array}{l}
+  D^3 &amp; : &amp; 8k   &amp; \overset{I} \mapsto &amp;  4k    &amp; \overset{I} \mapsto &amp;  2k    &amp; \overset{I} \mapsto &amp;   k \\
+      &amp;   &amp; 8k+1 &amp; \overset{F} \mapsto &amp; 12k+ 2 &amp; \overset{I} \mapsto &amp;  6k+ 1 &amp; \overset{F} \mapsto &amp;  9k+ 2 \\
+      &amp;   &amp; 8k+2 &amp; \overset{I} \mapsto &amp;  4k+ 1 &amp; \overset{F} \mapsto &amp;  6k+ 2 &amp; \overset{I} \mapsto &amp;  3k+ 1 \\
+      &amp;   &amp; 8k+3 &amp; \overset{F} \mapsto &amp; 12k+ 5 &amp; \overset{F} \mapsto &amp; 18k+ 8 &amp; \overset{I} \mapsto &amp;  9k+ 4 \\
+      &amp;   &amp; 8k+4 &amp; \overset{I} \mapsto &amp;  4k+ 2 &amp; \overset{I} \mapsto &amp;  2k+ 1 &amp; \overset{F} \mapsto &amp;  3k+ 2 \\
+      &amp;   &amp; 8k+5 &amp; \overset{F} \mapsto &amp; 12k+ 8 &amp; \overset{I} \mapsto &amp;  6k+ 4 &amp; \overset{I} \mapsto &amp;  3k+ 2 \\
+      &amp;   &amp; 8k+6 &amp; \overset{I} \mapsto &amp;  4k+ 3 &amp; \overset{F} \mapsto &amp;  6k+ 5 &amp; \overset{F} \mapsto &amp;  9k+ 8 \\
+      &amp;   &amp; 8k+7 &amp; \overset{F} \mapsto &amp; 12k+11 &amp; \overset{F} \mapsto &amp; 18k+17 &amp; \overset{F} \mapsto &amp; 27k+26 \\
+\end{array}\]
+
+<p>Therefore, every possible 3 letter song is also sung by infinitely many numbers. It turns out that this pattern continues and so for any song of length \(m\), there exists a \(0 \le r &lt; 2^m\) such that all numbers \(n \equiv r \pmod{2^m}\) sing that song.</p>
+
+<h3 id="who-sings-a-song">Who Sings a Song</h3>
+
+<p>In fact, given a song, we can directly compute the set of numbers which sing it using the following method:</p>
+
+<p>Start with the empty song \(\epsilon\), which does nothing:</p>
+
+\[k_0 \overset{\epsilon} \mapsto k_0\]
+
+<p>For each letter (<code class="language-plaintext highlighter-rouge">I</code> or <code class="language-plaintext highlighter-rouge">F</code>) in the song, starting from the beginning, update \(k\) by making it either even (\(k_n = 2 k_{n+1}\)) or odd (\(k_n = 2 k_{n+1} + 1\)) whichever will lead to the right side of the expression being even (if the letter is <code class="language-plaintext highlighter-rouge">I</code>) or odd (if the letter is <code class="language-plaintext highlighter-rouge">F</code>).</p>
+
+<p>For example, let’s consider the song <code class="language-plaintext highlighter-rouge">FFFIFI</code>. We start with</p>
+
+\[k_0 \overset{\epsilon} \mapsto k_0\]
+
+<p>The first letter is <code class="language-plaintext highlighter-rouge">F</code>, so \(k_0 = 2 k_1 + 1\) must be odd and we get:</p>
+
+\[2 k_1 + 1 \overset{\epsilon} \mapsto 2 k_1 + 1 \overset{F} \mapsto 3 k_1 + 2\]
+
+<p>The second letter is also <code class="language-plaintext highlighter-rouge">F</code>, so \(3 k_1 + 2\) must be odd, meaning \(k_1 = 2 k_2 + 1\) also must be odd.</p>
+
+\[4 k_2 + 3 = 2 (2 k_2 + 1) + 1 \overset{F} \mapsto 3 (2 k_2 + 1) + 2 = 2 (3 k_2 + 2) + 1 \overset{F} \mapsto 3 (3 k_2 + 2) + 2 = 9 k_2 + 8\]
+
+\[4 k_2 + 3 \overset{FF} \mapsto 9 k_2 + 8\]
+
+<p>Next, another <code class="language-plaintext highlighter-rouge">F</code>, so \(9 k_2 + 8\) must be odd, meaning \(k_2 = 2 k_3 + 1\) must be odd as well.</p>
+
+\[8 k_3 + 7 = 4 (2 k_3 + 1) + 3 \overset{FF} \mapsto 9 (2 k_3 + 1) + 8 = 2 (9 k_3 + 8) + 1 \overset{F} \mapsto 3 (9 k_3 + 8) + 2 = 27 k_3 + 26\]
+
+\[8 k_3 + 7 \overset{FFF} \mapsto 27 k_3 + 26\]
+
+<p>The fourth letter is <code class="language-plaintext highlighter-rouge">I</code>, so \(27 k_3 + 26\) must be even, meaning \(k_3 = 2 k_4\) must be even as well.</p>
+
+\[16 k_4 + 7 = 4 (2 k_4) + 7 \overset{FFF} \mapsto 27 (2 k_4) + 26 \overset{I} \mapsto 27 k_4 + 13\]
+
+\[16 k_4 + 7 \overset{FFFI} \mapsto 27 k_4 + 13\]
+
+<p>Next is <code class="language-plaintext highlighter-rouge">F</code>, so \(27 k_4 + 13\) must be odd, so \(k_4 = 2 k_5\) must be even.</p>
+
+\[2^5 k_5 + 7 = 16 (2 k_5) + 7 \overset{FFFI} \mapsto 27 (2 k_5) + 13 = 2 (27 k_5 + 6) + 1 \overset{F} \mapsto 3 (27 k_5 + 6) + 2 = 3^4 k_5 + 20\]
+
+\[2^5 k_5 + 7 \overset{FFFIF} \mapsto 3^4 k_5 + 20\]
+
+<p>Finally, the last letter is <code class="language-plaintext highlighter-rouge">I</code>, so \(3^4 k_5 + 20\) must be even, meaning that \(k_5 = 2 k_6\) must be even as well.</p>
+
+\[2^6 k_6 + 7 = 2^5 (2 k_6) + 7 \overset{FFFIF} \mapsto 3^4 (2 k_5) + 20 \overset{I} \mapsto 3^4 k_5 + 10\]
+
+<p>So, in conclusion, for all integers \(k\):</p>
+
+\[2^6 k + 7 \xmapsto{FFFIFI} 3^4 k + 10\]
+
+<p>In other words, the song <code class="language-plaintext highlighter-rouge">FFFIFI</code> is sung by all numbers of the form \(2^6 k + 7\), and after being sung, those reach the numbers \(3^4 k + 10\).</p>
+
+<h3 id="songs-and-binary-representation">Songs and Binary Representation</h3>
+
+<p>Note that numbers like \(2^6 k + 7\) correspond to numbers which end in a specific sequence in base 2 (\(000111_2\) in this case). So, thinking about these numbers in binary we can say simply that all numbers \(\dots 000111_2\) sing the song <code class="language-plaintext highlighter-rouge">FFFIFI</code> and we can summarize this derivation with the following table:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: right">Numbers</th>
+      <th style="text-align: left">Song</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: right">…1</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">F</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: right">…11</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">FF</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: right">…111</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">FFF</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: right">…0111</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">FFFI</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: right">…00111</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">FFFIF</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: right">…000111</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">FFFIFI</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Each letter added to a song refines the set of numbers that sing it by constraining one more bit (base-2 digit) in it’s binary representation.</p>
+
+<h3 id="infinite-songs">Infinite Songs</h3>
+
+<p>Every number sings an infinite song since you can keep applying the \(D\) function forever. But not all infinite songs are sung! In fact, the Collatz conjecture could be alternatively stated as: For any number \(n &gt; 0\), it’s infinite song ends in <code class="language-plaintext highlighter-rouge">IF</code> repeated forever.</p>
+
+<p>One example of a song that is never sung is <code class="language-plaintext highlighter-rouge">FFFFF...</code>. To see why, notice that the finite song \(F^m\) is sung by numbers \(n \equiv 2^m - 1 \pmod{2^m}\) (proof is left as an exercise to the reader). In order for a number to sing the infinite song \(F^\infty\), it would have to sing all the finite songs \(F^m\). But there is no positive number \(n \equiv 2^m - 1 \pmod{2^m}\) for all \(m\) since that would require \(n \ge 2^m - 1\) which diverges. (However, if we extend ourselves to the negative integers as well, then in fact -1 does sing the infinite <code class="language-plaintext highlighter-rouge">FFFFF...</code> song!)</p>
+
+<h3 id="which-infinite-songs-are-sung">Which Infinite Songs are Sung?</h3>
+
+<p>So, if you have a specific infinite song, how can we tell if it is ever sung? Well, let’s consider the infinite song \(S_\infty\) and all of it’s finite prefixes \(S_m\) of length \(m\). In order for a number \(n\) to sing \(S_\infty\) it must sing all \(S_m\). As we saw above, the numbers which sing \(S_m\) are the numbers with a specific fixed \(m\) bit suffix in their binary representation and by extending the song to \(S_{m+1}\) that fixes one more bit.</p>
+
+<p>As we continue this process, increasing the length of the finite songs, we fix more and more bits in the binary representation of numbers which sing that song. And so we can see, that eventually every bit becomes fixed and the infinite song \(S_\infty\) corresponds to an infinite binary sequence \(\{0, 1\}^\infty\). For a number to sing \(S_\infty\), it’s binary representation must have exactly that sequence.</p>
+
+<p>But that binary sequence must have a very specific property in order for it to represent a finite integer: It must be eventually all <code class="language-plaintext highlighter-rouge">0</code>s! Because the binary sequence \((b_0, b_1, \dots)\) corresponds to the number \(\sum_{k=0}^\infty b_k 2^k\) which only converges if, eventually, for all \(k &gt; K\), \(b_k = 0\).</p>
+
+<p>So, the infinite songs that are actually sung are exactly the infinite songs whose corresponding binary sequence is eventually all <code class="language-plaintext highlighter-rouge">0</code>s.</p>
+
+<p>Of course, proving that a song’s binary sequence is (or is not) eventually all <code class="language-plaintext highlighter-rouge">0</code>s is no easy task. AFAIK, there is no general method for doing this, all we can do is compute one more bit at a time.</p>
+
+<p>As an aside: There does exist a number system in which all infinite binary sequences correspond to a “number”. These are the <a href="https://en.wikipedia.org/wiki/P-adic_number">2-adic numbers</a> and if you extend the Collatz problem to them, then all infinite songs are sung by a 2-adic number!</p>
+
+<h2 id="collatz-by-fers-name">Collatz by Fer’s Name</h2>
+
+<p>We are finally ready to discuss Fer’s abstraction. He focusses on numbers which he calls “nodes”. These are the numbers \(x = C(a) = C(b)\) for \(a \ne b\). It turns out that these are exactly the numbers of the form \(x = C(2n+1) = 6n + 4\).</p>
+
+<p>Note that since \(6n + 4\) is always even, it will always be followed by \(3n + 2\). In fact, if you use the \(D\) function it will skip right over the \(6n+4\) values straight to the \(3n + 2\) ones (at least coming from odd values). Therefore, in order to work more clearly with my abstraction I will consider the \(n\)-th node to be \(3n+2\). These nodes are bijective to Fer’s, just multiply them by two to get back to his.</p>
+
+<p>He classifies nodes into three categories based on how it reaches the next node:</p>
+
+<ul>
+  <li>Stark: \(n = 2k + 1\), so \(3(2k+1) + 2 = 6k + 5 \overset{F} \mapsto 9k + 8 = 3 (3k+2) + 2\)</li>
+  <li>Lannister: \(n = 4k\), so \(3(4k) + 2 = 12k + 2 \overset{I} \mapsto 6k + 1 \overset{F} \mapsto 9k + 2 = 3 (3k) + 2\)</li>
+  <li>Targaryen: \(n = 4k + 2\), so \(3(4k+2) + 2 = 12k + 8 \overset{I} \mapsto 6k + 4 \overset{I} \mapsto 3k + 2\)</li>
+</ul>
+
+<p>Using my terminology above:</p>
+
+<ul>
+  <li>Stark nodes sing the song <code class="language-plaintext highlighter-rouge">F</code></li>
+  <li>Lannister nodes sing the song <code class="language-plaintext highlighter-rouge">IF</code></li>
+  <li>Targaryen nodes sing the song <code class="language-plaintext highlighter-rouge">II</code></li>
+</ul>
+
+<p>(I know, ironic that the Starks sing only of Fire and Targaryen’s only of Ice! What sort of world is this?)</p>
+
+<h3 id="constellations">Constellations</h3>
+
+<p>Fer defines a constellation as a sequence of Stark, Lannister and Targaryen tiles. So we can now see that every constellation corresponds directly to a song.</p>
+
+<p>For example, the constellation <code class="language-plaintext highlighter-rouge">SSSLLLL</code> corresponds to the song <code class="language-plaintext highlighter-rouge">FFFIFIFIFIF</code>. And this song is sung by all numbers \(2^{11} k + 455\) with</p>
+
+\[2^{11} k + 455 \xmapsto{FFFIFIFIFIF} 3^7 k + 488\]
+
+<p>If we force the starting point to be a “node” (of form \(3n + 2\)) then we can rewrite this as:</p>
+
+\[3 (2^{11} k + 151) + 2 = 2^{11} (3k) + 455 \xmapsto{FFFIFIFIFIF} 3^7 (3k) + 488 = 3 (3^7 k + 162) + 2\]
+
+<p>In other words: This constellation/song maps nodes \(2^{11} k + 151\) to nodes \(3^7 k + 162\). (Remember we are calling node \(n\) the number \(3n + 2\))</p>
+
+<h3 id="streaks">Streaks</h3>
+
+<p>Fer defines a streak as a constellation with only one repeated tile. So the streaks are \(S^m\), \(L^m\) and \(T^m\) for various lengths \(m\). These correspond to the songs \(S^m = F^m\), \(L^m = (IF)^m\) and \(T^m = I^{2m}\). Using my song of ice and fire terminology, we can see that a natural extention of the idea of a streak would be any repeated song, ex: \((FFI)^m\). I’ll call these generalized streaks.</p>
+
+<p>Streaks seem to mostly be of interest because they can allow us to specify the behavior of an entire class of constellations/songs. So:</p>
+
+<ul>
+  <li>Targaryen streaks are easy to describe:</li>
+</ul>
+
+\[2^m k \overset{I^m} \mapsto k\]
+
+<ul>
+  <li>Stark streaks are also, once you notice that \(2k - 1 \overset{F} \mapsto 3k  - 1\):</li>
+</ul>
+
+\[2^m k - 1 \overset{F^m} \mapsto 3^m k - 1\]
+
+<ul>
+  <li>Lannister streaks are also solved by similarly noting that \(4k + 2 \overset{IF} \mapsto 3k + 2\):</li>
+</ul>
+
+\[4^m k + 2 \overset{(IF)^m} \mapsto 3^m k + 2\]
+
+<p>And we can use the same sort of tricks for some generalized streaks, like:</p>
+
+\[8^m k - 5 \overset{(FFI)^m} \mapsto 9^m k - 5\]
+
+<h4 id="streaks-on-nodes">Streaks on nodes</h4>
+
+<p>To compare these formulas to Fer’s, we need to constrain ourselves to nodes again, then we get:</p>
+
+<ul>
+  <li>Lannister streaks (\(L^m\)) send Node \(4^m k \to 3^m k\) since:</li>
+</ul>
+
+\[3 (4^m k) + 2 = 4^m (3k) + 2 \overset{(IF)^m} \mapsto 3^m (3k) + 2 = 3 (3^m k) + 2\]
+
+<ul>
+  <li>Stark streaks (\(S^m\)) send Node \(2^m k - 1 \to 3^m k - 1\) since:</li>
+</ul>
+
+\[3 (2^m k - 1) + 2 = 2^m (3k) - 1 \overset{F^m} \mapsto 3^m (3k) - 1 = 3 (3^m k - 1) + 2\]
+
+<p>Fer writes this as \(a_0 = 2^m b + 2^m - 1\) and \(a_m = 3^m b + 3^m - 1\) which is the same equation, just with \(k = b + 1\) (presumably he chose this version so that all values \(b \ge 0\) result in valid \(a &gt; 0\)).</p>
+
+<ul>
+  <li>Targaryen streaks (\(T^m\)) send Node \(4^m k + \frac{2}{3} (4^m - 1) \to k\) since</li>
+</ul>
+
+\[3 (4^m k + \frac{2}{3} (4^m - 1)) + 2 = 4^m (3k + 2) \overset{I^{2m}} \mapsto 3k + 2\]
+
+<p>Both my Lannister and Targaryen streak notations are the same as Fer’s. As Fer notes, you do not need to be afraid of the \(\frac{2}{3}\) factor in the Targaryen streak since \(4^m - 1\) is always a multiple of 3!</p>
+
+<p>Finally, if we consider these rules to all take \(a_0 \to a_m\), Fer writes these equations out for \(a_m\) in terms of \(a_0\) (removing the \(k\)). So (note that the \(\lambda, \sigma, \tau\) superscripts are just labels here, not exponents):</p>
+
+<ul>
+  <li>Lannister streaks: \(a_m^\lambda = (\frac{3}{4})^m a_0^\lambda\)</li>
+  <li>Stark streaks: \(a_m^\sigma = (\frac{2}{3})^m (a_0^\sigma + 1) - 1\)</li>
+  <li>Targaryen streaks: \(a_m^\tau = (\frac{1}{4})^m (a_0^\tau + \frac{2}{3}) - \frac{2}{3}\)</li>
+</ul>
+
+<p>Using this notation seems useful since it allows you to calculate the results of “multi streak drifting”. So we can see what happens when we apply \(S^m L^r\) by setting the \(a_0^\lambda = a_m^\sigma\), resulting in:</p>
+
+\[a_r^\lambda = (\frac{3}{4})^r [ (\frac{2}{3})^m (a_0^\sigma + 1) - 1 ]\]
+
+<h3 id="fers-fallacies">Fer’s Fallacies</h3>
+
+<p>We have now come to a dramatic moment in Fer’s argument: Section 4.2 in the paper or minute 29 in the video: “Infinite multi-streaks constellations require convergence for infinite
+sums of integers”. This is the part where Fer claims to have found a proof that we cannot have infinite constellations!</p>
+
+<p>Now, let’s start by saying that infinite constellations correspond to infinite songs and as we discussed above: there are infinite songs that are sung. In fact every starting number leads to an infinite song (because you can always apply the function \(D\) again). Likewise, starting at every node, you get an infinite constellation simply by repeatedly applying the Stark, Lannister and Targaryen rules. So we know that infinite constellations exist.</p>
+
+<p>As far as I can tell, Fer’s argument goes like this: Let’s say we have an infinite constellation and let’s evaluate the equations for all the finite prefixes of that constellation. So as we discussed in the last section, let’s say that the infinite constellation starts with  \(S^m L^r \dots\), then we know that the equation for this prefix is:</p>
+
+\[a_{m+r} = (\frac{3}{4})^r [ (\frac{2}{3})^m (a_0 + 1) - 1 ] = e^{r(\ln 3 - 2 \ln 2) + m(\ln 2 - \ln 3)} a_0 + \beta\]
+
+<p>then \(\lim_{m \to \infty} a_m\) cannot converge because this would require an infinite series of integers to converge. But we already know that \(\lim_{m \to \infty} a_m\) won’t converge. This is a sequence of integers, so the only way for it to converge is if it becomes eventually constant. And to be eventually constant, it would mean that it reached a fixed point of \(D\) and the only two fixed points of \(D\) are \(D(0) = 0\) and \(D(-1) = -1\) which cannot be reached from positive numbers.</p>
+
+<p>Instead, there are two possibilities, either the sequence \(a_m\) eventually cycles or it grows forever. In both cases the sequence doesn’t converge.</p>
+
+<h4 id="starting-point-divergence">Starting Point Divergence?</h4>
+
+<p>At this point, I must admit that I cannot exactly put my finger on what Fer’s argument is. I have made a good faith effort here to try and understand it and show the fallacy, but it is possible that I am missing what Fer really meant. As an example, rather than looking at \(a_m\) which (as we discussed) clearly doesn’t converge. We could look at what values \(a_0\) can take as we increase the size of the prefix. As I discussed in the “Which Infinite Songs are Sung?” section, for some infinite songs, the starting point will diverge. Or, in other words, there will be no finite number which sings all the finite prefixes of this infinite song. But this is not true for all songs, as mentioned in that section, the songs which convert to binary sequences which are eventually all 0 each correspond to an infinite song that is sung.</p>
+
+<h3 id="westeros-function">Westeros Function</h3>
+
+<p>One way to think about Fer’s abstraction is that it defines a new Collatz-like function. I will call it the Westeros function:</p>
+
+\[\begin{array}{l}
+  W &amp; : &amp; 2k+1 &amp; \mapsto &amp; 3k+2 \\
+    &amp; : &amp; 4k   &amp; \mapsto &amp; 3k   \\
+    &amp; : &amp; 4k+2 &amp; \mapsto &amp;  k   \\
+\end{array}\]
+
+<p>These three cases are exactly the three tiles:</p>
+
+<ul>
+  <li>Stark: \(2k+1 \mapsto 3k+2\)</li>
+  <li>Lannister: \(4k \mapsto 3k\)</li>
+  <li>Targaryen: \(4k+2 \mapsto k\)</li>
+</ul>
+
+<p>and the new conjecture is: starting at all \(n \ge 0\), does \(W^m(n) = 0\). In other words, if you keep applying \(W\) do you eventually reach 0.</p>
+
+<p>Now it should be clear the analogy between my “Songs of Ice and Fire” and Fer’s “Constellations of Stark, Lannister and Targaryen”. They are the same concept applied to a different Collatz-like function.</p>
+
+<p>Is it helpful to abstract to the Westeros function? As far as I can tell, it is not. This is a more complicated function, it requires three different cases (instead of the two from the \(D\) function) and I think that in general it makes most of the equations more complicated as well. And furthermore, I have not seen any advantages that compensate for this complexity. If you are interested in following this line of reasoning with respect to the Collatz, I’d recommend using the “Songs of Ice and Fire” abstraction instead as I’ve described throughout this article. But I look forward to being proven wrong when someone makes a great discovery using the Westeros function abstraction :)</p>
+
+<h2 id="finding-cycles">Finding Cycles</h2>
+
+<p>Finally, I thought it would be nice to end this post with a fun result. Specifically about how we can use the “Song of Ice and Fire” abstraction to find all cycles of a given length.</p>
+
+<p>A number \(n\) starts a cycle of length \(k\) if and only if \(D^k(n) = n\). So we can find all cycles of length \(k\) by computing \(D^k\) (like we did above for \(D^2\) and \(D^3\)) and solve the linear equations. For example, the cycles of length 1 are:</p>
+
+\[\begin{array}{l}
+  n = 2k   &amp; = D(2k)   &amp; = k    &amp; \to &amp; k = 0  &amp; \to &amp; n = 0 \\
+  n = 2k+1 &amp; = D(2k+1) &amp; = 3k+2 &amp; \to &amp; k = -1 &amp; \to &amp; n = -1 \\
+\end{array}\]
+
+<p>Which are the \(0 \overset{I} \mapsto 0\) and \(-1 \overset{F} \mapsto -1\) cycles.</p>
+
+<p>Remember that</p>
+
+\[\begin{array}{l}
+  D^2 &amp; : &amp; 4k   &amp; \mapsto &amp;  k \\
+      &amp;   &amp; 4k+1 &amp; \mapsto &amp; 3k+1 \\
+      &amp;   &amp; 4k+2 &amp; \mapsto &amp; 3k+2 \\
+      &amp;   &amp; 4k+3 &amp; \mapsto &amp; 9k+8 \\
+\end{array}\]
+
+<p>so the cycles of length 2 are:</p>
+
+\[\begin{array}{l}
+  n = 4k   &amp; = D(4k)   &amp; = k    &amp; \to &amp; k = 0  &amp; \to &amp; n = 0 \\
+  n = 4k+1 &amp; = D(4k+1) &amp; = 3k+1 &amp; \to &amp; k = 0  &amp; \to &amp; n = 1 \\
+  n = 4k+2 &amp; = D(4k+2) &amp; = 3k+2 &amp; \to &amp; k = 0  &amp; \to &amp; n = 2 \\
+  n = 4k+3 &amp; = D(4k+3) &amp; = 9k+8 &amp; \to &amp; k = -1 &amp; \to &amp; n = -1 \\
+\end{array}\]
+
+<p>So, here we find the only known positive integer cycle:</p>
+
+\[1 \overset{F} \mapsto 2 \overset{I} \mapsto 1\]
+
+<p>which also shows up starting at 2:</p>
+
+\[2 \overset{I} \mapsto 1 \overset{F} \mapsto 2\]
+
+<p>and for cycles of length 3 we get:</p>
+
+\[\begin{array}{l}
+  n = 8k   &amp; = D(8k)   &amp; = k    &amp; \to &amp; k = 0  &amp; \to &amp; n = 0 \\
+  n = 8k+1 &amp; = D(8k+1) &amp; = 9k+2 &amp; \to &amp; k = -1 &amp; \to &amp; n = -7 \\
+  n = 8k+2 &amp; = D(8k+2) &amp; = 3k+1 &amp; \to &amp; k = -\frac{1}{5} \\
+  n = 8k+3 &amp; = D(8k+3) &amp; = 9k+4 &amp; \to &amp; k = -1 &amp; \to &amp; n = -5 \\
+  n = 8k+4 &amp; = D(8k+4) &amp; = 3k+2 &amp; \to &amp; k = -\frac{2}{5} \\
+  n = 8k+5 &amp; = D(8k+5) &amp; = 3k+2 &amp; \to &amp; k = -\frac{3}{5} \\
+  n = 8k+6 &amp; = D(8k+6) &amp; = 9k+8 &amp; \to &amp; k = -2 &amp; \to &amp; n = -10 \\
+  n = 8k+7 &amp; = D(8k+7) &amp; = 27k+26 &amp; \to &amp; k = -1 &amp; \to &amp; n = -1 \\
+\end{array}\]
+
+<p>which finds the known negative cycle of length 3 (3 times):</p>
+
+\[-5 \overset{F} \mapsto -7 \overset{F} \mapsto -10 \overset{I} \mapsto -5\]
+
+<p>Note that the rows where \(k\) is not an integer mean that those cycles are impossible.</p>
+
+<p>Of course, this search is rather inefficient since you must compute \(D^k\) and consider each of its \(2^k\) cases separately.</p>]]></content><author><name>Shawn Ligocki</name></author><category term="collatz" /><summary type="html"><![CDATA[I just enjoyed an excellent YouTube video, My honest attempt at the Collatz Conjecture, made by Fernando Franco Félix (Fer / @Highly Entropic Mind) as part of the third Summer of Math (#SoME3). He also wrote it up as a PDF. This blog post is a response to that video and paper.]]></summary></entry></feed>

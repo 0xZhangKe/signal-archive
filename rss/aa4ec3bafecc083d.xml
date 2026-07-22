@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><rss version="2.0">
+<channel>
+<title>Critical MAS | - Feed </title>
+<link>https://criticalmas.org</link>
+<description>Better Living, Risk Adjusted </description>
+<language/><generator>https://wordpress.org/?v=6.8.1</generator>
+<xhtml:meta content="noindex" name="robots" xmlns:xhtml="http://www.w3.org/1999/xhtml"/><item>		
+	<pubDate>Fri, 04 Jul 2025 20:02:19 +0000</pubDate>
+	<guid>https://criticalmas.org/2025/07/feeding-the-ai-bots/</guid>
+	<title>Feeding the AI Bots</title>
+	<link>https://criticalmas.org/2025/07/feeding-the-ai-bots/</link>
+	<description><![CDATA[<p>Cloudflare released a new feature that blocks AI bots from scraping your website. Will I turn it on? Absolutely, not. I want to feed the AI bots. I don&#8217;t need to be compensated. This blog has always been about sharing ideas.</p>
+<p>If the AI would like to train on my posts here or on my other sites, that would be awesome. This might be the one point in history when the models were trained on human-generated data. We are approaching a point where AI generates most of the internet&#8217;s content. You can already see it in comments, articles, and, increasingly, in videos. The <a href="https://en.wikipedia.org/wiki/Dead_Internet_theory">dead internet theory</a> suggests we passed that point in 2016-2017.</p>
+<p>When I first started this blog 25 years ago, a handful of friends knew about it. Then, the search engines found me. Then, other bloggers would link to me. Although I don&#8217;t post as frequently as I did a decade ago, I still average 55,000 unique visitors each month.</p>
+<p>That&#8217;s cool, but those numbers are going to collapse in the coming years. It will be too easy to crank out thousands of pieces of content in minutes or seconds with AI. Although there will be a handful of human winners in the future, most indie content producers will be outworked by AI.</p>
+<p>As a user, I no longer seek out blogs. I don&#8217;t even use search engines. I go straight to Perplexity, Claude, ChatGPT, CoPilot, Grok, and Gemini. As a contributor to the internet, I&#8217;d love to know that my writing on the Potato Diet or High Intensity Training made it into the models and was able to communicate that information to the next person seeking out those topics. These AI models will outlive me and this blog.</p>
+<p><img loading="lazy" decoding="async" class="alignnone wp-image-27973 size-full" style="border-width: 1px;" src="https://criticalmas.org/wp-content/uploads/2025/07/ai-bots.png" alt="" width="465" height="367" srcset="https://criticalmas.org/wp-content/uploads/2025/07/ai-bots.png 465w, https://criticalmas.org/wp-content/uploads/2025/07/ai-bots-300x237.png 300w" sizes="auto, (max-width: 465px) 100vw, 465px" /></p>
+]]></description>
+			</item>	
+<item>		
+	<pubDate>Fri, 13 Jun 2025 21:51:55 +0000</pubDate>
+	<guid>https://criticalmas.org/2025/06/vibe-coding-fitness-calculators/</guid>
+	<title>Vibe Coding Fitness Calculators</title>
+	<link>https://criticalmas.org/2025/06/vibe-coding-fitness-calculators/</link>
+	<description><![CDATA[<p>For years, I&#8217;ve run into the same problem: I link to an online fitness calculator, and after a few years, the link stops working. I update it, but eventually, it breaks again, and the cycle repeats.</p>
+<p>One day, I would code my own fitness calculator site.</p>
+<p>Not only would the links on my site not break, but I could create calculators with a better user interface that weren&#8217;t dumb. By not dumb, I mean that if I enter my height on one calculator, it should also be remembered by a second calculator. If I come back months later, it should remember my height.</p>
+<p>Another thing I dislike about most online calculators is that you need to hit submit for each numerical change. Formula-based forms should be dynamic.</p>
+<p>Well, I finally coded my own set of fitness calculators. I haven&#8217;t seen anything as good as these. It features Light/Dark mode, values persist across sessions, and calculators. You can also download the entire site as a progressive web app to your desktop.</p>
+<p>Instead of buying another domain, I set up a subdomain on potatohack.com and named the collection &#8220;Potato Hack Fitness Calculators.&#8221; Users looking to calculate their BMI or BMR may take an extra click and learn about the <a href="https://potatohack.com/">Potato Hack</a>.</p>
+<h4><a href="https://calc.potatohack.com">calc.potatohack.com</a></h4>
+<p><img loading="lazy" decoding="async" class="alignnone size-large wp-image-27947" src="https://criticalmas.org/wp-content/uploads/2025/06/og-image-1024x538.png" alt="" width="672" height="353" srcset="https://criticalmas.org/wp-content/uploads/2025/06/og-image-1024x538.png 1024w, https://criticalmas.org/wp-content/uploads/2025/06/og-image-300x158.png 300w, https://criticalmas.org/wp-content/uploads/2025/06/og-image-768x403.png 768w, https://criticalmas.org/wp-content/uploads/2025/06/og-image-800x420.png 800w, https://criticalmas.org/wp-content/uploads/2025/06/og-image.png 1200w" sizes="auto, (max-width: 672px) 100vw, 672px" /></p>
+<p><em>Potato Hack Fitness Calculators is hosted as a static site built with Astro and hosted for free on Netlify.</em></p>
+<h3>Vibe Coding</h3>
+<p>Vibe coding is a new term that involves directing a coding AI to create what you want, rather than entering code directly yourself. I pay for GitHub Copilot, which hosts most of the major AI models. For this project, I mostly used Claude 4.0 in Agent mode. Agent mode means I hand over control to my IDE (VS Code) to the AI Agent, and it does the work with minimal input from me.</p>
+<p>The first step was to visit Claude.ai and have it create a Project Requirement Document.</p>
+<blockquote><p>Help me create a Project Requirement document for a web app I want to create. Interview me.</p></blockquote>
+<p>At this point, I was prompted with many questions, which I answered, and the requirements document was created. I took this document back to VS Code and fed it to GitHub CoPilot, and it started generating code.</p>
+<p>I went back and forth with coding requests, saving my code to GitHub as new features or changes were added. I had most of the site finished in under three hours. I later had it add some more calculators.</p>
+<h3>Feedback?</h3>
+<p>The <a href="https://github.com/digitalcolony/cruxcalc">code is available on GitHub</a> for anyone to use or modify. There are no ads or pop-up windows. Post any feedback you have, including additional calculator ideas.</p>
+]]></description>
+			</item>	
+<item>		
+	<pubDate>Sun, 01 Jun 2025 15:01:41 +0000</pubDate>
+	<guid>https://criticalmas.org/2025/06/thoughts-on-cold-exposure/</guid>
+	<title>Thoughts on Cold Exposure</title>
+	<link>https://criticalmas.org/2025/06/thoughts-on-cold-exposure/</link>
+	<description><![CDATA[<p>Cold exposure is a hot topic again.</p>
+<p>Like most health topics, a predictable pattern has emerged. Some people experiment with an idea. They experience benefits. They share the benefits. Others join in and see benefits, and then they start exaggerating and overclaiming the benefits received. This is when the debunkers arrive. They pick off and destroy the weakest points of the movement, declaring victory over the entire topic.</p>
+<p>I have a mixed view on the claims regarding cold exposure. Before I dive in, I&#8217;ll share my background.</p>
+<p>I first started exploring cold exposure in 2008. I had moved to Seattle from San Diego and was experiencing cold again for the first time in years, and I was not happy. I came across the writings of Art De Vany, an early Paleo thought leader, who discussed intentional cold exposure as a means of building resiliency.</p>
+<p>I spent years experimenting and put together a <a href="https://criticalmas.org/best-of/cold-weather-training/">collection of posts on cold exposure</a>.</p>
+<p>The three reasons I see cited the most in support of cold exposure are:</p>
+<ol>
+<li>Faster recovery post-workout.</li>
+<li>Fat loss</li>
+<li>Longevity</li>
+</ol>
+<h3>Faster Recovery</h3>
+<p>It is simply not practical for most people to set up an ice bath. I&#8217;ve done cryotherapy a few times and enjoyed it, but it wasn&#8217;t practical to make part of any routine. Outdoor cold exposure and cold showers are likely insufficient to achieve the recovery benefits.</p>
+<p>Does it work? Probably, but I&#8217;m skeptical that it is a huge lever in recovery. If you&#8217;ve already dialed in your diet, sleep, and are getting older, and have the resources, then sure, go for it.</p>
+<p>The debunkers for this category claim cold will kill your muscle gains. It takes about 5 minutes of research to learn that one should wait an hour after lifting before doing cold exposure. Problem solved.</p>
+<h3>Fat Loss</h3>
+<p>Cold exposure is not magical for fat loss. There are some very popular health influencers making ridiculous claims on this point. Cold exposure builds brown fat. Brown fat burns a lot of calories. Therefore, cold exposure is helpful for fat loss, right? Nope. That only looks at the short term. Brown fat drives appetite.</p>
+<p>My post <a href="https://criticalmas.org/2023/10/temperature-and-appetite/">Temperature and Appetite</a> goes into detail about why cold exposure is more likely to cause weight gain (in the long run) than fat loss. Heat is the lever for fat loss, not cold.</p>
+<p>There are also fans of saunas who feel the need to attack the cold exposure fans. Both can be valuable tools—no need to pick a camp.</p>
+<h3>Longevity via Lower Body Temperature</h3>
+<p>Bryan Johnson has shared his experience with using ice baths to lower his body temperature to 94°F. By reducing his body temperature, he believes that it will extend his lifespan. I think this stems from animal studies where rodents with lower body temperatures lived longer.</p>
+<p>The oldest people tend to have lower body temperatures. There are several ways to think about this, and I don&#8217;t know the answer. Did they live longer because they preserved their life by &#8220;running their battery&#8221; more efficiently, or is it that we aren&#8217;t seeing the data from the people who didn&#8217;t reach old age? Did the people who died earlier die with a lower or higher body temperature? If the slope is downward for all of us, does it make sense to force the slope downwards faster? Could forcing it lower result in having an infection take us out earlier in our senior years?</p>
+<p>Rodents kept in labs would not have to deal with infections if they were free-living. They would need to mount a fever to fight off an illness. So naturally, their body could become more efficient. Is this what is happening?</p>
+<p>My body temperature increased over the years. I don&#8217;t know exactly why, but I suppose it was due to either <a href="https://criticalmas.org/2024/08/body-temps-on-severe-seed-oil-restriction-n1/">seed oil restriction or frequent blood donations</a>.</p>
+<p>FireInTheBottle has written about how body temperatures have dropped across society. This could be a good thing if it means we live in a cleaner environment with fewer pathogens. Alternatively, this could be a negative consequence if it drives down metabolic rates, thereby increasing the likelihood of obesity. Both could also be true.</p>
+<p>I&#8217;m undecided on this point. The debunkers have challenged all the longevity claims, but that doesn&#8217;t mean they are correct; it simply means the experiment is still ongoing and has a plausible explanation. We may not find out for a few decades, but we need to try to discover the answer.</p>
+<h3>Resilience</h3>
+<p>I don&#8217;t see much discussion on this point, but I think this is the best reason for cold exposure.</p>
+<p>I think there is a longevity benefit that is not related to cold exposure. It was an idea from Art De Vany. We can use cold safely to induce stress on our body at a time of our choosing. Then we warm up. We train our body and mind to become more resilient. We survive these daily micro-stressors so that we don&#8217;t go through life unchallenged.</p>
+<p>If we can demonstrate resilience regularly, we will be better equipped to handle more serious health challenges later in life. Fasting, cold exposure, and exercise are three levers for resilience.</p>
+<p>Fasting taught me to be okay with hunger, and a few years ago, when our water heater broke in the middle of winter for several days, I was fine taking ice-cold showers.</p>
+<p>Although I&#8217;m unsure how this could be tested, having a resilient mindset, I&#8217;m certain, would provide a longevity benefit.</p>
+<p><img loading="lazy" decoding="async" class="alignnone wp-image-27936 size-large" src="https://criticalmas.org/wp-content/uploads/2025/06/cold-man-rick-morty-683x1024.png" alt="" width="672" height="1008" srcset="https://criticalmas.org/wp-content/uploads/2025/06/cold-man-rick-morty-683x1024.png 683w, https://criticalmas.org/wp-content/uploads/2025/06/cold-man-rick-morty-200x300.png 200w, https://criticalmas.org/wp-content/uploads/2025/06/cold-man-rick-morty-768x1152.png 768w, https://criticalmas.org/wp-content/uploads/2025/06/cold-man-rick-morty-800x1200.png 800w, https://criticalmas.org/wp-content/uploads/2025/06/cold-man-rick-morty.png 1024w" sizes="auto, (max-width: 672px) 100vw, 672px" /></p>
+<h3>Your Thoughts</h3>
+<p>What is your current view of cold exposure?</p>
+]]></description>
+			</item>	
+<item>		
+	<pubDate>Sat, 24 May 2025 22:37:34 +0000</pubDate>
+	<guid>https://criticalmas.org/2025/05/archiving-ineedcoffee/</guid>
+	<title>Archiving INeedCoffee</title>
+	<link>https://criticalmas.org/2025/05/archiving-ineedcoffee/</link>
+	<description><![CDATA[<p>After 26 years, I decided to archive my main coffee site, <a href="https://ineedcoffee.com">INeedCoffee.com</a>. I started it in April 1999 and actively posted new content until a few years ago.</p>
+<p>Each year, I would get my hosting bill from SiteGround to keep the site online, and I&#8217;d pull out my credit card and pay for the top plan because the site still gets 50,000 unique monthly visitors. However, since the site was not being updated, I converted everything to a static website.</p>
+<p>Static sites are wonderful. No databases, no plugins, no themes, and no security concerns. Just raw HTML and CSS.</p>
+<p>I found a script on GitHub to convert all my posts, categories, and authors to Markdown files. Thankfully, INeedCoffee did not have comments, which would have made the move more difficult. I had GitHub CoPilot modify the script to add front matter to the pages. From there, I built a static Astro site and deployed it to Netlify, where I can host it for free, even at my traffic levels.</p>
+<p>I maintained the same link structure, so all inbound links to the site will resolve correctly.</p>
+<p>If you have a WordPress site you aren&#8217;t maintaining but wish to preserve for free, look into building a static site. AI tools can guide you.</p>
+<p>This will be my last WordPress site. I love the idea of moving this blog to SubStack, but it can&#8217;t handle importing comments. I consider the 12,306 comments on this blog as valuable as the 1,705 posts. I&#8217;ll at least be able to move to a cheaper hosting plan.</p>
+]]></description>
+			</item>	
+<item>		
+	<pubDate>Mon, 17 Mar 2025 15:12:15 +0000</pubDate>
+	<guid>https://criticalmas.org/2025/03/bro-lifting-in-the-nfl/</guid>
+	<title>Bro-lifting in the NFL</title>
+	<link>https://criticalmas.org/2025/03/bro-lifting-in-the-nfl/</link>
+	<description><![CDATA[<p>Tim Ferriss recently had an excellent show related to injuries and recovery.</p>
+<p><a href="https://tim.blog/2025/02/26/dr-keith-baar/"><em>Dr. Keith Baar, UC Davis — Simple Exercises That Can Repair Tendons (Tennis Elbow, etc.), Collagen Fact vs. Fiction, Isometrics vs. Eccentrics, JAK Inhibitors, Growth Hormone vs. IGF-1, The Anti-RICE Protocol, and How to Use Load as an Anti-Inflammatory (#797).</em></a></p>
+<p>Although much of the podcast focused on practical methods for using isometric loads to enhance strength and speed up injury recovery, Dr. Baar shared an insightful observation about NFL players, highlighting their approach to strength training and risk management.</p>
+<blockquote><p>I’ve done lots of NFL consulting, and I always go into the weight room and I always see the rookies and the second-year players are over in the squat racks doing all kinds of dynamic movements. All pro veterans, they’re all over in the machines because they know that those machines are going to keep them healthy. Those machines are going to get them that $30 million contract.</p>
+<p>Yeah, you might get a half a step faster by being over there, but for the veteran, they know that if they’re available for 16 games of the year, they’re going to get their next contract because they’re going to perform at a high level.</p></blockquote>
+<p>Sorry bros. Even the NFL doesn&#8217;t believe you MUST SQUAT to be strong and elite. Minimizing injury risk is the path to a longer career.</p>
+<p><img loading="lazy" decoding="async" class="alignnone size-full wp-image-27887" src="https://criticalmas.org/wp-content/uploads/2025/03/must-squat.jpg" alt="" width="600" height="700" srcset="https://criticalmas.org/wp-content/uploads/2025/03/must-squat.jpg 600w, https://criticalmas.org/wp-content/uploads/2025/03/must-squat-257x300.jpg 257w" sizes="auto, (max-width: 600px) 100vw, 600px" /></p>
+]]></description>
+			</item>	
+<item>		
+	<pubDate>Sat, 15 Mar 2025 15:29:20 +0000</pubDate>
+	<guid>https://criticalmas.org/2025/03/cringe/</guid>
+	<title>Cringe</title>
+	<link>https://criticalmas.org/2025/03/cringe/</link>
+	<description><![CDATA[<p>Running a broken link checker is one of my tasks for this blog. The short version is that when something breaks, I give it a few days to clear up. If it doesn&#8217;t, I go back and fix the link. Usually, I remove the link if it is not needed or find a replacement link. One day, I might go into greater detail on this process.</p>
+<p>While fixing these broken links, my Grammarly plugin detects spelling and grammar errors. I&#8217;ll fix them. Some errors have been on this blog for over a decade. Yikes!</p>
+<p>In addition to the writing errors, I see nutritional opinions I wrote that I no longer agree with. It&#8217;s ok to be wrong, and it would be futile to go back and fix hundreds of posts because who knows what my views might be in another five or ten years.</p>
+<p><img loading="lazy" decoding="async" class="alignnone size-full wp-image-27869" src="https://criticalmas.org/wp-content/uploads/2025/03/office-cringe.jpg" alt="" width="600" height="379" srcset="https://criticalmas.org/wp-content/uploads/2025/03/office-cringe.jpg 600w, https://criticalmas.org/wp-content/uploads/2025/03/office-cringe-300x190.jpg 300w" sizes="auto, (max-width: 600px) 100vw, 600px" /><em>Me reading one of my posts from 15 years ago trashing soy and carbs with the confidence of an NBA All-Star.</em></p>
+<p>Worse than my &#8220;no longer current&#8221; nutritional view is the confidence that I had when I wrote those posts. I was so sure. Grammarly will often critique my current writing style as lacking a confident tone. Confident writing is considered better. But there is a reason I changed the way I write. It is because I have a history of 1,700+ posts where things I was sure about are now things I know are wrong.</p>
+<p>Today, I installed an old post plugin to notify readers that my views may have changed. I used the 7-year mark to define old.</p>
+<p><img loading="lazy" decoding="async" class="alignnone wp-image-27872" src="https://criticalmas.org/wp-content/uploads/2025/03/Screenshot-2025-03-15-at-08-05-15-Ranking-the-Paleo-Books-March-2011-Critical-MAS.png" alt="" width="500" height="251" srcset="https://criticalmas.org/wp-content/uploads/2025/03/Screenshot-2025-03-15-at-08-05-15-Ranking-the-Paleo-Books-March-2011-Critical-MAS.png 700w, https://criticalmas.org/wp-content/uploads/2025/03/Screenshot-2025-03-15-at-08-05-15-Ranking-the-Paleo-Books-March-2011-Critical-MAS-300x151.png 300w" sizes="auto, (max-width: 500px) 100vw, 500px" /></p>
+<p><em>Here is a cringy reading list &#8211; now with a warning!</em></p>
+<p>This solves half the problem. The other half is that I no longer care to defend my current nutritional views like I did years ago when I was less wise and more certain. I stepped away from debating the bro-lifters in fitness a long time ago. For most lifters, the only teacher is injury. <em>Keep back squatting, bro.</em></p>
+<p>As for nutrition, I can share my current diet and my results. There are many paths to good health. I found one path that is working for me. I don&#8217;t want to debate protein, cholesterol, or calories. Go to an AI agent and have that debate. I do it often.</p>
+]]></description>
+			</item>	
+<item>		
+	<pubDate>Mon, 03 Feb 2025 23:31:20 +0000</pubDate>
+	<guid>https://criticalmas.org/2025/02/tracking-my-meals-for-a-month/</guid>
+	<title>Tracking My Meals for a Month</title>
+	<link>https://criticalmas.org/2025/02/tracking-my-meals-for-a-month/</link>
+	<description><![CDATA[<p>For the first time in my life, I tracked all the food I ate for a full month. I did not weigh the food. I started January at the weight of 183 and ended at 183, which is a BMI of 23.2 (Normal).</p>
+<p>I used the Day One app, which is supposed to be for journaling, to jot down whatever foods I consumed. Then I exported the entries to a JSON file and asked ChatGPT to summarize the data. I consumed no soft drinks, juice, or alcohol.</p>
+<p>This was a one month only experiment. A time capsule. Maybe I&#8217;ll do a new one periodically, as I have a long history of changing my diet.</p>
+<h3><strong>Common Foods and Patterns:</strong></h3>
+<ul>
+<li><strong>Frequent Foods:</strong>
+<ul>
+<li><strong>Chia seeds:</strong> Consumed almost daily.</li>
+<li><strong>Fat-Free Greek yogurt with hemp seeds, blueberries, flaxseed:</strong> A regular combination.</li>
+<li><strong>Apples:</strong> Appeared frequently, often as a snack.</li>
+<li><strong>Kimchi:</strong> Often paired with sprouts or other vegetables.</li>
+<li><strong>Cooled potatoes:</strong> Eaten both plain and with proteins like herring or tempeh.</li>
+<li><strong>Tempeh tacos:</strong> Recurring with variations like Korean-style with onions and cabbage.</li>
+<li><strong>Chickpea soup:</strong> Included spinach, carrots, onions, garlic, and tomatoes.</li>
+</ul>
+</li>
+</ul>
+<h3><strong>Protein Sources:</strong></h3>
+<ul>
+<li>Plant-based: Tofu, tempeh, natto, chickpeas, lentils, cannellini beans, black-eyed peas.</li>
+<li>Fish (canned): Sardines, herring, wild salmon.</li>
+<li>Dairy: Fat-free Greek yogurt.</li>
+<li>Occasional eggs (noted in a few entries).</li>
+</ul>
+<h3><strong>Vegetables:</strong></h3>
+<ul>
+<li>Brussels sprouts, carrots (often raw), beets (canned), broccoli sprouts, cabbage, kale, spinach, artichokes.</li>
+</ul>
+<h3><strong>Grains and Legumes:</strong></h3>
+<ul>
+<li>Steel-cut oats (with flaxseed and whey protein), brown rice, buckwheat groats, hominy, pinto beans, lentils, black beans, adzuki beans.</li>
+</ul>
+<h3><strong>Snacks/Extras:</strong></h3>
+<ul>
+<li>Nuts &amp; seeds: pumpkin seeds, hemp seeds, flaxseed, walnuts.</li>
+<li>Fruits: oranges, blueberries, apples.</li>
+</ul>
+<h3><strong>Observations:</strong></h3>
+<ul>
+<li>You seem to follow a nutrient-dense, plant-focused diet with occasional fish.</li>
+<li>Regular intake of fermented foods (kimchi, natto) and high-fiber vegetables.</li>
+<li>Balanced macronutrients with a good mix of proteins, healthy fats, and complex carbs.</li>
+</ul>
+<p><img loading="lazy" decoding="async" class="alignnone size-full wp-image-27822" src="https://criticalmas.org/wp-content/uploads/2025/02/buckwheat-tofu.jpg" alt="" width="650" height="472" srcset="https://criticalmas.org/wp-content/uploads/2025/02/buckwheat-tofu.jpg 650w, https://criticalmas.org/wp-content/uploads/2025/02/buckwheat-tofu-300x218.jpg 300w" sizes="auto, (max-width: 650px) 100vw, 650px" /></p>
+<p><em>Buckwheat groats with air-fried tofu covered with green onions and hot sauce.</em></p>
+]]></description>
+			</item>	
+<item>		
+	<pubDate>Sun, 02 Feb 2025 17:40:49 +0000</pubDate>
+	<guid>https://criticalmas.org/2025/02/optimal-omega-3-levels-no-fish-oil-needed/</guid>
+	<title>Optimal Omega-3 Levels (No Fish Oil Needed)</title>
+	<link>https://criticalmas.org/2025/02/optimal-omega-3-levels-no-fish-oil-needed/</link>
+	<description><![CDATA[<p>Time to take a victory lap.</p>
+<p>I had my first Omega-3 test done and the numbers look good.</p>
+<p><img loading="lazy" decoding="async" class="alignnone size-full wp-image-27806" src="https://criticalmas.org/wp-content/uploads/2025/02/omega3.jpg" alt="" width="650" height="153" srcset="https://criticalmas.org/wp-content/uploads/2025/02/omega3.jpg 650w, https://criticalmas.org/wp-content/uploads/2025/02/omega3-300x71.jpg 300w" sizes="auto, (max-width: 650px) 100vw, 650px" /><img loading="lazy" decoding="async" class="alignnone size-full wp-image-27807" src="https://criticalmas.org/wp-content/uploads/2025/02/ratio.jpg" alt="" width="650" height="323" srcset="https://criticalmas.org/wp-content/uploads/2025/02/ratio.jpg 650w, https://criticalmas.org/wp-content/uploads/2025/02/ratio-300x149.jpg 300w" sizes="auto, (max-width: 650px) 100vw, 650px" /><img loading="lazy" decoding="async" class="alignnone size-full wp-image-27808" src="https://criticalmas.org/wp-content/uploads/2025/02/transfat.jpg" alt="" width="650" height="169" srcset="https://criticalmas.org/wp-content/uploads/2025/02/transfat.jpg 650w, https://criticalmas.org/wp-content/uploads/2025/02/transfat-300x78.jpg 300w" sizes="auto, (max-width: 650px) 100vw, 650px" /></p>
+<p>I gave my numbers to ChatGPT and asked it to compare them to the American average.</p>
+<h3><strong>Related Averages in the U.S.:</strong></h3>
+<ol>
+<li><strong>Omega-6:Omega-3 Ratio:</strong>
+<ul>
+<li><strong>Typical American Diet:</strong> <strong>15:1 to 20:1</strong></li>
+<li><strong>Your Ratio:</strong> <span style="color: #008000;"><strong>3.91:1</strong></span> (much healthier than average)</li>
+</ul>
+</li>
+<li><strong>Omega-3 Index:</strong>
+<ul>
+<li><strong>U.S. Average:</strong> <strong>4–6%</strong></li>
+<li><strong>Your Index:</strong> <span style="color: #008000;"><strong>9.36%</strong></span> (excellent and well above average)</li>
+</ul>
+</li>
+<li><strong>AA:EPA Ratio:</strong>
+<ul>
+<li><strong>U.S. Average:</strong> <strong>10:1 to 20:1</strong></li>
+<li><strong>Your Ratio:</strong> <span style="color: #008000;"><strong>3.4:1</strong></span> (significantly better, indicating a more anti-inflammatory profile)</li>
+</ul>
+</li>
+</ol>
+<h3>Paleo Was Wrong</h3>
+<p>Why the victory lap? Let&#8217;s go back to 2013 and read my post <a href="https://criticalmas.org/2013/12/quantifying-pufa-expert-opinion/">Quantifying PUFA, Expert Opinion, and My Conclusion</a>.</p>
+<p>Paleo was the rage and despite massive evidence that many traditional cultures ate diets rich in complex carbs, they had embraced all the low-carb lies. They recognized modern diets were too high in Omega-6 fats, so they said to remove seed oils. This was a good first step, but they kept demonizing carbs and preaching MOAR meat &#8211; both pork and chicken can be high in Omega-6.</p>
+<p>The math never made sense to me.</p>
+<blockquote><p>&#8230;the real problem might be what is already stored in our fat tissues. We not only need to minimize the PUFA we eat but get rid of years of eating excess PUFA to optimize metabolism. According to Ray Peat, this process can take four years.</p>
+<p>That is four years of eating very low PUFA while the body processes the PUFA stored in fat.</p>
+<p>When I ran the numbers, I concluded that to get to optimal low PUFA levels, a higher carb and lower fat diet made the most sense. You could construct a low-carb diet with low PUFA levels, but it would be challenging and quite restrictive. Restrictive diets are fine for a month or two, but a year or more? No thanks.</p></blockquote>
+<p>I&#8217;d love to go back to my old Paleo and Weston A Price groups and have them get tested. I bet my mostly SMASH* carb-rich/lower fat diet would destroy their numbers.</p>
+<p><em>* SMASH stands for salmon, mackerel, anchovies, sardines and herring.</em></p>
+<h3>But Fish Oil?</h3>
+<p>I&#8217;ve been a fish oil skeptic for 15 years. Assuming you get a fish oil that isn&#8217;t rancid, does fish oil fix a problem or mask one? Or maybe it does both?</p>
+<p>From my post <a href="https://criticalmas.org/2013/08/fish-oil-2010/">Fish Oil is so 2010</a>:</p>
+<blockquote><p>A lot of the early logic behind supplementing with fish oil, which is rich in Omega-3, was to improve our Omega-6 to Omega-3 ratio. The higher the ratio, the worse your health outcome. There are two ways to lower that ratio. Either work at reducing Omega-6 or increase Omega-3. There is no profit motive in the first suggestion and plenty in the second. An industry was born and fish oil was their product.</p>
+<p>There were a few problems, though. Simply increasing Omega-3 doesn’t address the excess Omega 6, which is likely the actual problem. In other words, this is a numerator problem, not a denominator one.</p></blockquote>
+<p>It&#8217;s easy to pop a few fish oil tablets. It takes planning and effort to avoid Omega-6 fats in modern society. I suppose if I ate a crappy diet, I would take fish oil and hope that the brand that I &#8220;researched&#8221; was legit. But because my diet strictly limits seed oils and processed foods, I don&#8217;t need fish oil. Plus, I eat fish.</p>
+<p>To deal with heavy metals and environmental toxins in seafood, I donate blood every 70 days. I&#8217;ll get my 6-gallon pin in April.</p>
+<p>After putting this post together, I discovered that I bought the <em>Omega-3 Index Plus Report</em> and not the <em>Omega-3 Complete Report</em>, which has even more data. Next time.</p>
+]]></description>
+			</item>	
+<item>		
+	<pubDate>Sat, 04 Jan 2025 23:30:22 +0000</pubDate>
+	<guid>https://criticalmas.org/2025/01/2024-fitness-results/</guid>
+	<title>2024 Fitness Results</title>
+	<link>https://criticalmas.org/2025/01/2024-fitness-results/</link>
+	<description><![CDATA[<p>My <a href="https://criticalmas.org/2022/12/my-fitness-results-2022/">last fitness results</a> post was from 2022. I didn&#8217;t do one last year, because I was recovering from my hernia surgery. Here is my 2024 health and fitness update:</p>
+<h3>Diet and Weight</h3>
+<p>Another year has passed since 2019 and I am still locked in at 182 pounds. I&#8217;ve effortlessly kept off the 40 pounds I lost via various versions of the <a href="https://potatohack.com">Potato Diet/Potato Hack</a> and <a href="https://criticalmas.org/2018/12/potatoes-and-protein-a-no-hunger-template-for-fat-loss/">Potatoes and Protein</a>.</p>
+<p>Although I still eat a decent amount of cooked and cooled potatoes, my diet is mostly vegan plus some SMASH seafood and fat-free Greek yogurt.</p>
+<p><em>* SMASH stands for salmon, mackerel, anchovies, sardines and herring.</em></p>
+<p>In prior years, I would eat more clean meat in the winter and be more plant-based the rest of the year. Cycle between the two options to capture the benefits of each approach. Each year that meat window gets smaller.</p>
+<p>Now I feel best on a high-protein mostly whole food plant-based diet. Given the high levels of pollution in seafood, I stick to the SMASH options, but I also regularly donate blood to purge heavy metals and environmental toxins. There is no perfect answer, but this is working best for me now.</p>
+<p>I can explore this topic more in a separate post if there is interest.</p>
+<p><img loading="lazy" decoding="async" class="alignnone size-full wp-image-27788" src="https://criticalmas.org/wp-content/uploads/2025/01/potato-viking.jpg" alt="" width="650" height="650" srcset="https://criticalmas.org/wp-content/uploads/2025/01/potato-viking.jpg 650w, https://criticalmas.org/wp-content/uploads/2025/01/potato-viking-300x300.jpg 300w, https://criticalmas.org/wp-content/uploads/2025/01/potato-viking-150x150.jpg 150w, https://criticalmas.org/wp-content/uploads/2025/01/potato-viking-200x200.jpg 200w" sizes="auto, (max-width: 650px) 100vw, 650px" /></p>
+<h3>New Gym</h3>
+<p>My old small gym closed this year, and now I am at LA Fitness. Much bigger. More equipment plus a sauna. As much as I liked my old gym, I&#8217;m liking the new setup even more.</p>
+<p>I&#8217;m lifting and using the sauna on average 3 times a week. So far, the sauna han&#8217;t <a href="https://criticalmas.org/2019/01/regular-sauna-use-the-good-the-bad-and-the-ugly/">destroyed my skin</a> like it did years ago when I went every single day.</p>
+<h3>Still No Cardio</h3>
+<p>Every year I post about how I didn&#8217;t do enough cardio and that this will be the year that I turn it all around. Well, I won&#8217;t make that promise again. I know the problem. I start something and then I get knee pain or hip pain or something else. Then I quit, get better, let months pass, and then start up again only to repeat the cycle.</p>
+<p>I need to tackle the root problem first. I need to build strength and balance equally in the core region. Hips, glutes, groin, abs, etc. Years of injuries have made my left side weaker than my right. When I try to jog or use an elliptical machine, this imbalance catches up with me quickly.</p>
+<p>Solving this problem will be a top priority in 2024. Until then, I won&#8217;t repeat the cardio injury loop.</p>
+<h3>Odds and Ends</h3>
+<p>My average daily steps were 9,922. So close to 10,000. I need to lock in a few more steps in the summer before the November rains arrive.</p>
+<p>I still stretch every morning and evening, but I avoid yoga moves where I twist with my abs stretched. I believe this triggered my right-side hernia, which I explained in my <a href="https://criticalmas.org/2023/08/i-got-a-hernia/">I Got a Hernia</a> post.</p>
+<p>I still do <a href="https://criticalmas.org/2023/06/perfect-posture-progress/">shoulder hangs daily</a>. This could be the greatest 1-minute health hack ever.</p>
+<p>I hope I didn&#8217;t miss anything.</p>
+]]></description>
+			</item>	
+<item>		
+	<pubDate>Sun, 08 Dec 2024 18:02:29 +0000</pubDate>
+	<guid>https://criticalmas.org/2024/12/what-huberman-missed-on-microplastics/</guid>
+	<title>What Huberman Missed on Microplastics</title>
+	<link>https://criticalmas.org/2024/12/what-huberman-missed-on-microplastics/</link>
+	<description><![CDATA[<p>Recently, The Huberman Lab did a show devoted to microplastics. The show was good, and I learned some things, but I think he missed some details.</p>
+<p><a href="https://www.hubermanlab.com/episode/the-effects-of-microplastics-on-your-health-how-to-reduce-them">The Effects of Microplastics on Your Health &amp; How to Reduce Them</a></p>
+<p>I&#8217;ll start this post with some show notes, followed by my thoughts.</p>
+<h3>Overview</h3>
+<p>The podcast episode covered a wide range of potential health problems associated with microplastics and nanoplastics, emphasizing that research in this area is still developing, and much remains unclear about the long-term consequences for human health.</p>
+<p>It is important to note that the sources primarily discuss correlative data, meaning that the presence of microplastics is observed alongside certain health conditions, but a direct cause-and-effect relationship hasn&#8217;t been definitively established in humans.</p>
+<p><strong>Endocrine Disruption:</strong> Microplastics and nanoplastics often contain or carry endocrine-disrupting chemicals like BPA, BPS, and phthalates. These chemicals can mimic or block hormones like estrogen and testosterone, potentially interfering with hormone-sensitive processes throughout the body.</p>
+<p><strong>Reproductive Health:</strong> Studies have linked phthalate exposure to decreased testosterone levels in men, women, and children. The strongest associations were observed in women and men aged 40-60. This age range coincides with perimenopause and menopause in women, a period already marked by hormonal shifts and potential vulnerability to endocrine disruptors. Additionally, microplastics have been detected in human testes and semen, correlating with lower sperm counts and motility.</p>
+<p><strong>Hormone-Dependent Cancers:</strong> Endocrine disruption raises concerns about potential increases in hormone-dependent cancers, particularly in tissues with high cell turnover rates like the ovaries, testes, and breasts.</p>
+<p><strong>Gastrointestinal Issues:</strong> A study found higher microplastic levels in stool samples from people with irritable bowel syndrome (IBS) compared to those without IBS.</p>
+<p><strong>Cardiovascular Disease:</strong> Polyethylene, a common plastic component, has been found in arterial plaques from patients with cardiovascular disease. While their role in plaque formation needs further investigation, these microplastic particles could contribute to the blockage of blood flow in arteries.</p>
+<p><strong>Liver Damage:</strong> Microplastics can accumulate in the liver, potentially impacting its detoxification processes. Additionally, &#8220;forever chemicals&#8221; like PFAS, often associated with microplastics, are known to cause liver damage.</p>
+<p><strong>Immune System Dysfunction:</strong> Exposure to microplastics and associated chemicals, like PFAS, could potentially disrupt the immune system&#8217;s function, making the body more susceptible to infections and diseases.</p>
+<p><strong>Neurodevelopmental Concerns:</strong> While a direct link hasn&#8217;t been established, the presence of microplastics in the placenta and babies&#8217; first stool raises concerns about potential impacts on brain development.</p>
+<h3>Advice</h3>
+<p>Avoid drinking water from plastic bottles, especially those exposed to heat. Also, the linings of paper cups designed to hold hot liquids, such as coffee or tea, typically contain BPA and BPS, even if the cup itself doesn&#8217;t have a plastic lid,</p>
+<p>Limit consumption of canned soup and other foods packaged in plastic.</p>
+<p>Choose alternatives to single-use plastics whenever possible.</p>
+<p>Incorporate cruciferous vegetables like broccoli and cauliflower into your diet, as they contain sulforaphane, a compound that can enhance liver detoxification.</p>
+<p>Consume sufficient dietary fiber from fruits, vegetables, and whole grains to help bind and excrete toxins.</p>
+<p>Opt for pink Himalayan salt or other non-marine salts instead of sea salt, which can contain microplastics.</p>
+<p>Engage in activities that promote sweating, such as sauna use, hot baths, or exercise, to potentially aid in toxin removal.</p>
+<p>Reduce clothing purchases and reuse clothes to minimize microfiber shedding.</p>
+<p>Use cast iron or ceramic cookware instead of non-stick options.</p>
+<p>Choose glass or steel containers over plastic for food storage and microwaving.</p>
+<h3>What Huberman Missed</h3>
+<p>Huberman never once mentioned donating blood or plasma. There have been a number of stories on how donating blood and especially plasma have on purging the body of these toxins.</p>
+<p><a href="https://theswaddle.com/regular-blood-donations-can-reduce-toxic-forever-chemicals-in-the-bloodstream-study/">Regular Blood Donations Can Reduce Toxic Forever Chemicals in the Bloodstream: Study</a></p>
+<p>I&#8217;ve donated around 6 gallons of blood since 2010. My guess is I&#8217;ve purged quite a bit of these potentially dangerous particles.</p>
+<p>This next part is speculation, but I believe it is probably true.</p>
+<p>Huberman mentioned how these particles can end up in the brain, testes, liver, lungs, and placenta. But they also can be stored in fat tissue. Not just our fat tissues, but the fat tissues of the animals we consume.</p>
+<p>From Gemini:</p>
+<blockquote><p>Animals, especially those higher up the food chain, can accumulate PFAS through their diet. This is known as bioaccumulation. As animals consume plants or other animals that have absorbed PFAS, the concentration of these chemicals can increase in their tissues.</p></blockquote>
+<p>How much of these microplastics and PFAS are in animal fat? How does it compare with plastic water bottles and other known sources? We don&#8217;t know. It may be alarmist or I might be spot on. Someone will need to do the research.</p>
+<p>In the meantime, I&#8217;ll continue to donate blood, follow the tips Huberman outlined, and minimize my intake of animal fat.</p>
+<p><img loading="lazy" decoding="async" class="alignnone size-full wp-image-27759" src="https://criticalmas.org/wp-content/uploads/2024/11/cow-smoke.jpg" alt="" width="650" height="650" srcset="https://criticalmas.org/wp-content/uploads/2024/11/cow-smoke.jpg 650w, https://criticalmas.org/wp-content/uploads/2024/11/cow-smoke-300x300.jpg 300w, https://criticalmas.org/wp-content/uploads/2024/11/cow-smoke-150x150.jpg 150w, https://criticalmas.org/wp-content/uploads/2024/11/cow-smoke-200x200.jpg 200w" sizes="auto, (max-width: 650px) 100vw, 650px" /></p>
+<p><em>No thanks. Pass the lentils.</em></p>
+]]></description>
+			</item>	
+</channel>
+</rss>

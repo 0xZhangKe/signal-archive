@@ -1,0 +1,2375 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?xml-stylesheet type="text/xsl" href="/css/rss-zh.xsl"?>
+<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/">
+<channel>
+  <title>Lynan&#39;s Page</title>
+  <link>https://lynan.cn</link>
+  <description>Hi👋, 我是 Lynan, 一名前端开发工程师。这是我的博客空间，记录一些生活上或是软件开发的内容。</description>
+  <lastBuildDate>Thu, 16 Jul 2026 12:27:57 GMT</lastBuildDate>
+  <follow_challenge>
+    <feedId>87515885886472192</feedId>
+    <userId>42003325751014400</userId>
+  </follow_challenge>
+  <image>
+      <url>https://lynan.cn/favicon.svg</url>
+      <title>Lynan&#39;s Page</title>
+      <link>https://lynan.cn</link>
+    </image>
+  
+    <item>
+      <title>写了一个嵌入式 Mock 工具</title>
+      <link>https://lynan.cn/embedded-mock-tools/</link>
+      <guid>https://lynan.cn/embedded-mock-tools/</guid>
+      <pubDate>7 月 15 日，2026</pubDate>
+      <media:thumbnail url="https://r2-assets.lynan.cn/am/photo-1607799279861-4dd421887fb3.jpg"/>
+      <description><![CDATA[<p>最近写了一个小工具：<a href="https://lynanbreeze.github.io/embedded-mock-tools/">embedded-mock-tools</a>，很直接地说，100% 由 AI 完成的 Coding 工作，我只是不断地告诉它我要实现什么需求，从结果来看，它对我的需求实现得很好。</p>
+<a href="https://github.com/LynanBreeze/embedded-mock-tools" class="github-link">
+  <img loading="lazy" class="preview-img" no-link src="https://opengraph.githubassets.com/922f329f643d9c708a9b7f21391b7366ba465054d804e8aeea7260ae1ef90c13/LynanBreeze/embedded-mock-tools" style="aspect-ratio: 1200/600;">
+  <span class="title">LynanBreeze/embedded-mock-tools: An embedded network request interception and mock panel prototype with Service Worker support.</span>
+</a>
+
+<p>简单来说，就是一个可以嵌入页面的 Mock 面板。引入一个 <code>devtools-panel.js</code>，页面上会出现一个浮动按钮，展开后可以看到请求列表、请求详情和 Mock 规则编辑器。它现在支持拦截 <code>fetch</code> 和 <code>XMLHttpRequest</code>，也可以通过 Service Worker 让 Mock 请求出现在浏览器原生 Network 面板中。</p>
+<h2 id="流程图"><a href="#流程图" class="headerlink" title="流程图"></a>流程图</h2><div class="diagram-scroll">
+  <img loading="lazy" no-lazy src="https://r2-assets.lynan.cn/am/mermaid-diagram.svg" />
+</div>
+
+<h2 id="为什么写"><a href="#为什么写" class="headerlink" title="为什么写"></a>为什么写</h2><p>Mock 接口这件事并不新鲜，也不难，已经有大把大把的工具可以使用。比较麻烦的是，很多时候我只是想快速验证一个页面状态，但需要绕很远。</p>
+<p>比如：</p>
+<ol>
+<li>接口还没好，但页面要先写</li>
+<li>想看空列表、500、超时、字段缺失等异常状态</li>
+<li>测试环境的数据今天有，明天可能就被别人改掉了</li>
+<li>项目不是自己完全控制的，不方便改代理或启动额外服务</li>
+<li>有些页面只是一个 demo 或者嵌在别的系统里，不想为了它搭一套 Mock Server</li>
+<li>Mock Server 和真实请求混搭可能会遇到麻烦</li>
+</ol>
+<p>之前通常会有几种做法。一种是在业务代码里临时写：</p>
+<pre><code class="language-javascript">if (IS_MOCK) {
+  return {
+    users: []
+  };
+}
+</code></pre>
+<p>这种方式最快，但也最容易忘记删。另一种是用代理工具或者 Mock Server。这种更正规，但每次都要单独配置路径、启动服务、同步规则。如果只是想临时看一个 UI 状态，会显得有点重。</p>
+<p>所以我想做一个更简单的方案：让 Mock 工具直接跟着页面走。只要页面可以加载一个脚本，就可以看到请求，也可以改响应。</p>
+<pre><code class="language-html">&lt;script src=&quot;./devtools-panel.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+  window.MockTools.init();
+&lt;/script&gt;
+</code></pre>
+<p>这样就够了。</p>
+<h2 id="为啥不用-Chrome-Overrides"><a href="#为啥不用-Chrome-Overrides" class="headerlink" title="为啥不用 Chrome Overrides"></a>为啥不用 Chrome Overrides</h2><p>为啥不用 Chrome Overrides，这我有话说了，我是真的用了很久的 Chrome Overrides。在此之前也用过 Charles （主要用来抓包）等 HTTP 请求拦截工具。写这个工具的时候，也会想 Chrome DevTools 里已经有 <a href="https://developer.chrome.com/docs/devtools/overrides/">Local Overrides</a>，它的缺点是什么？怎么补齐？</p>
+<p>Chrome Overrides 可以在本地覆盖网页资源和 HTTP response headers，也可以对 XHR&#x2F;fetch 请求的返回内容做修改。好处很明显：不需要改项目代码，也不用启动额外服务，直接在 DevTools 里对某个请求右键 <code>Override content</code> 就可以改返回。对于很多场景，Chrome Overrides 已经够用了。</p>
+<p>比如：</p>
+<ol>
+<li>临时改一个接口返回，甚至是线上页面的接口，直接都可以改，看页面是否正常</li>
+<li>修改某个静态资源，比如 CSS、JS、HTML</li>
+<li>本地调试 response headers，比如 CORS 或 Permissions-Policy</li>
+<li>希望修改跨刷新保留，但不想动项目代码</li>
+</ol>
+<p>但它也有一些地方不是特别适合我想解决的问题：</p>
+<h3 id="只有总开关"><a href="#只有总开关" class="headerlink" title="只有总开关"></a>只有总开关</h3><p>Chrome Overrides 开关在 Sources 面板里，对于添加过 Override 配置的 URL 来说，要么全部开，要么全部关，无法只开某一个，除非把不需要开的 Override 配置删除，但是删除以后下次还想用，就得重新创建。</p>
+<h3 id="规则不是很好复用"><a href="#规则不是很好复用" class="headerlink" title="规则不是很好复用"></a>规则不是很好复用</h3><p>Chrome Overrides 更像是“把某一次请求的返回保存成一个本地文件”。它适合改具体资源，但如果我想维护一组 Mock 规则，并且按 method、URL pattern、状态码、delay、headers 来管理，Overrides 就没那么直观。embedded-mock-tools 里更像是维护规则列表，并且可以给规则加上别名，在 Mock Rules 列表里显而易见。</p>
+<pre><code class="language-javascript">{
+  method: &quot;GET&quot;,
+  pattern: &quot;/api/users&quot;,
+  status: 500,
+  delay: 800
+}
+</code></pre>
+<p>对我来说，这种形式更接近 Mock 配置。</p>
+<h3 id="操作起来不算简单"><a href="#操作起来不算简单" class="headerlink" title="操作起来不算简单"></a>操作起来不算简单</h3><p>Chrome Overrides 是浏览器里的能力。它适合我自己调试，但如果我要把一个 demo 发给别人，对方也需要打开 DevTools、设置 Overrides 目录、允许文件访问，再保存对应的覆盖文件。如果只是技术同事还好，如果是给产品、测试或者其他不熟悉 DevTools 的人，就有点麻烦。embedded-mock-tools 的思路是把工具嵌到页面里。对方打开页面就能看到面板，不需要提前配置 Chrome。</p>
+<h3 id="不方便做状态流转"><a href="#不方便做状态流转" class="headerlink" title="不方便做状态流转"></a>不方便做状态流转</h3><p>有些接口不是固定返回一份 JSON，又或者是比如我在做某个深层次功能的开发，但是也想开发时就能串联起来整个流程，那么我保存成为 Snapshot 就可以在开发环境直接地、符合直觉地、符合最终流程的开发与调试。</p>
+<h3 id="和项目的关系不同"><a href="#和项目的关系不同" class="headerlink" title="和项目的关系不同"></a>和项目的关系不同</h3><p>Chrome Overrides 是个人浏览器配置，比较适合临时调试。embedded-mock-tools 更像是项目里的开发辅助脚本，可以随着 demo 页面或测试页面一起提交，也可以通过导入导出 JSON 分享一组 Mock 配置。所以它们不是替代关系。</p>
+<p>我自己大概会这样选：</p>
+<div class="table-wrap">
+
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>选择</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>临时改线上页面里的一个文件</td>
+<td>Chrome Overrides</td>
+</tr>
+<tr>
+<td>临时改某个接口返回</td>
+<td>Chrome Overrides</td>
+</tr>
+<tr>
+<td>需要维护一组 Mock 规则</td>
+<td>embedded-mock-tools</td>
+</tr>
+<tr>
+<td>需要给别人一个可直接打开的 demo</td>
+<td>embedded-mock-tools</td>
+</tr>
+<tr>
+<td>需要按顺序回放多次接口响应</td>
+<td>embedded-mock-tools</td>
+</tr>
+<tr>
+<td>需要调试 response headers</td>
+<td>Chrome Overrides 或 embedded-mock-tools</td>
+</tr>
+</tbody></table>
+</div>
+
+<p>Chrome Overrides 更像是 DevTools 的一个高级功能。embedded-mock-tools 则更偏项目内工具。</p>
+<h2 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h2><h3 id="请求列表"><a href="#请求列表" class="headerlink" title="请求列表"></a>请求列表</h3><p>面板左侧是请求列表，可以查看页面中的请求记录，实时更新。包括请求方式、URL、状态码、耗时、请求头、请求体、响应头和响应内容。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/am/Screenshot_2026-07-15_at_9.54.39PM.jpg" alt="请求列表和响应详情"></p>
+<p>我最开始只想做一个简化版 Network 面板，至少不用在业务代码里到处 <code>console.log</code>。请求数量做了限制，目前最多保留 200 条，避免开着页面调试一段时间以后列表无限增长。</p>
+<h3 id="Mock-规则"><a href="#Mock-规则" class="headerlink" title="Mock 规则"></a>Mock 规则</h3><p>右侧是 Mock 规则编辑区，一条规则大概长这样：</p>
+<pre><code class="language-javascript">{
+  enabled: true,
+  method: &quot;GET&quot;,
+  pattern: &quot;/api/users&quot;,
+  status: 200,
+  delay: 200,
+  headers: { &quot;content-type&quot;: &quot;application/json&quot; },
+  body: JSON.stringify({ users: [] }, null, 2)
+}
+</code></pre>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/am/Screenshot_2026-07-15_at_9.56.19PM.jpg" alt="Mock 规则列表和编辑区"></p>
+<p>目前 <code>pattern</code> 支持两种写法。普通字符串：</p>
+<pre><code class="language-text">/api/users
+</code></pre>
+<p>简单正则：</p>
+<pre><code class="language-text">/\/api\/users\/\d+/
+</code></pre>
+<p>没有做得太复杂。因为对这个工具来说，规则写起来越复杂，排查时就越不直观。大部分情况下，URL 包含匹配已经够用了。</p>
+<p>一个 Rule 可以配置多个 Config，可添加多个 Config，只允许一个 Config 开启（当然了，一个接口一次怎么可能返回两个不同的 Response 呢）。</p>
+<h3 id="快照"><a href="#快照" class="headerlink" title="快照"></a>快照</h3><p>后来又加了 Snapshot，普通 Mock 比较适合“这个接口一直返回这个结果”的场景。</p>
+<p>但是经常会有但是，情景如下：</p>
+<blockquote>
+<p>开发: 这啥 Bug，这么难复现，号借我登一下<br>测试: 好哦，但是等下要还我，我还要测试<br>开发: 好，我看个 Bug 就还你<br>测试: 不要改东西哦，我好不容易造的数据<br>开发: 好的，哥</p>
+</blockquote>
+<p>很难说作为一个开发（特别是前端）没有遇到过这种场景。例如一个任务状态接口，第一次返回 <code>pending</code>，咔咔一番操作以后，第二次返回 <code>processing</code>，咔咔第二番操作以后，第三次返回 <code>done</code>。如果只有一份静态 JSON，就很难模拟这个过程。</p>
+<p>Snapshot 里可以保存一组 Responses，然后按顺序回放。超过长度以后，可以重复最后一条，也可以循环。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/am/Screenshot_2026-07-15_at_9.57.50PM.jpg" alt="从请求记录中选择多次响应并保存为 Snapshot"></p>
+<p>这个功能对轮询、分页、状态流转一类场景会比较有用。</p>
+<h3 id="持久化"><a href="#持久化" class="headerlink" title="持久化"></a>持久化</h3><p>Mock 规则刷新后不能丢，所以配置优先保存到 IndexedDB。如果 IndexedDB 不可用，就退回到 <code>localStorage</code>。之前老版本保存在 <code>localStorage</code> 里的数据，也会在初始化时迁移到 IndexedDB。另外也做了导入导出，因为浏览器存储不适合当备份，清理站点数据后就没了。导出成 JSON 后，可以从它恢复备份，也可以把某个问题的复现配置发给别人。</p>
+<h2 id="为什么引入-Service-Worker"><a href="#为什么引入-Service-Worker" class="headerlink" title="为什么引入 Service Worker"></a>为什么引入 Service Worker</h2><p>最开始只靠 JavaScript hook 就可以做。拦截 <code>fetch</code> 时，可以替换 <code>window.fetch</code>；拦截 <code>XMLHttpRequest</code> 时，可以包装原始 XHR 对象，覆写 <code>open</code>、<code>send</code>、<code>setRequestHeader</code>，在命中规则时模拟 <code>readyState</code>、<code>status</code>、<code>responseText</code> 和相关事件。这种方式的好处是简单，而且兼容 <code>file://</code>，直接打开 <code>index.html</code> 也能用。</p>
+<p>问题是，它不会真的走浏览器网络栈。也就是说，在页面里的面板能看到请求，但浏览器 DevTools 的 Network 面板里不一定能看到完整记录。所以又加了 Service Worker。</p>
+<p>在 <code>http://localhost</code> 或 <code>https</code> 环境下，工具会尝试注册 <code>mocktools-sw.js</code>。命中规则后，由 Service Worker 在 <code>fetch</code> 事件里返回 Mock Response，这样浏览器原生 Network 面板也可以看到这些请求。</p>
+<p>但是 Service Worker 也不是万能的。</p>
+<ul>
+<li>不能在 <code>file://</code> 下使用</li>
+<li>它要求安全上下文，通常是 <code>https</code> 或 <code>localhost</code></li>
+<li>第一次注册后，当前页面不一定立刻被 controller 接管</li>
+<li>页面和 worker 之间要同步规则</li>
+</ul>
+<p>所以现在工具里同时保留了两套方案。能用 Service Worker 时，让它来处理请求；不能用时，就退回到 JS hook。</p>
+<h2 id="难点"><a href="#难点" class="headerlink" title="难点"></a>难点</h2><p>这个工具的代码没有复杂依赖，但里面有不少细节。</p>
+<h3 id="fetch-的响应只能读一次"><a href="#fetch-的响应只能读一次" class="headerlink" title="fetch 的响应只能读一次"></a><code>fetch</code> 的响应只能读一次</h3><p><code>Response</code> body 是流。读取响应内容用于展示时，如果直接读原始 response，会影响业务代码后续读取。所以在拦截真实请求时，需要先 <code>response.clone()</code>，读取 clone 出来的响应文本，再把原始 response 返回给业务代码。这点很重要，调试工具不能因为自己要展示内容，就改变业务代码的行为。</p>
+<h3 id="XHR-的模拟比较麻烦"><a href="#XHR-的模拟比较麻烦" class="headerlink" title="XHR 的模拟比较麻烦"></a>XHR 的模拟比较麻烦</h3><p><code>XMLHttpRequest</code> 比 <code>fetch</code> 麻烦。<code>fetch</code> 命中 Mock 后返回一个新的 <code>Response</code> 就可以了，但 XHR 有自己的状态机和事件模型。</p>
+<p>业务代码可能监听：</p>
+<ul>
+<li><code>readystatechange</code></li>
+<li><code>load</code></li>
+<li><code>loadend</code></li>
+</ul>
+<p>也可能读取：</p>
+<ul>
+<li><code>status</code></li>
+<li><code>statusText</code></li>
+<li><code>response</code></li>
+<li><code>responseText</code></li>
+<li><code>getAllResponseHeaders()</code></li>
+</ul>
+<p>所以命中 XHR Mock 时，不能只是返回一段字符串，还要补齐这些状态和事件。</p>
+<h3 id="Service-Worker-状态同步"><a href="#Service-Worker-状态同步" class="headerlink" title="Service Worker 状态同步"></a>Service Worker 状态同步</h3><p>Mock 规则是在页面面板里编辑的，但真正拦截请求的可能是 Service Worker。因此每次规则变化、全局开关变化、snapshot 变化，都要通过 <code>postMessage</code> 同步给 worker。另外 worker 可能处于 <code>installing</code>、<code>waiting</code>、<code>active</code>，也可能已经是 <code>controller</code>，所以同步时不能只找一个固定对象。</p>
+<h3 id="UI-状态"><a href="#UI-状态" class="headerlink" title="UI 状态"></a>UI 状态</h3><p>一开始只是请求列表和详情，写着写着状态就多了。</p>
+<ul>
+<li>面板展开或收起</li>
+<li>当前选中的请求</li>
+<li>当前选中的 Mock 规则</li>
+<li>请求搜索和排序</li>
+<li>分组 tab</li>
+<li>snapshot 列表、选中项和编辑草稿</li>
+<li>详情区域布局</li>
+<li>存储状态和错误提示</li>
+<li>Service Worker 是否可用</li>
+</ul>
+<p>现在这个工具还是原生 JavaScript 写的，没有引入 React&#x2F;Vue 和其他 Dependency。好处是拷贝文件引入一下就能用，体积也不大，坏处是状态管理要自己收敛。</p>
+<h3 id="持久化降级"><a href="#持久化降级" class="headerlink" title="持久化降级"></a>持久化降级</h3><p>IndexedDB 也不是永远可用。隐私模式、浏览器限制、异常环境，都可能导致读取或写入失败。所以写入失败时会退到 <code>localStorage</code>，如果两者都失败，至少要保证当前内存状态还能继续用。</p>
+<h2 id="适合什么"><a href="#适合什么" class="headerlink" title="适合什么"></a>适合什么</h2><p>我觉得它比较适合这些场景：</p>
+<ul>
+<li>快速调试前端页面的接口状态</li>
+<li>做 UI demo 时预置一组接口响应</li>
+<li>在没有完整后端环境时继续开发交互</li>
+<li>给测试或产品复现某个异常状态</li>
+<li>在静态页面、嵌入式页面、WebView 或第三方容器里做轻量调试</li>
+<li>把某组 Mock 配置导出后分享给其他人</li>
+</ul>
+<p>它不是为了替代所有 Mock 方案。如果项目已经有成熟的 Mock Server、接口平台、契约测试，那还是继续用那些方案更合适。这个工具更像是一个临时但好用的小面板，需要的时候打开，不需要的时候关掉。</p>
+<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2><p>目前先这样，至少在需要快速改接口返回、复现异常状态的时候，它已经能解决我的问题。</p>
+]]></description>
+    </item>
+    <item>
+      <title>四川旅行(2026)</title>
+      <link>https://lynan.cn/sichuan-travel-journal-2026/</link>
+      <guid>https://lynan.cn/sichuan-travel-journal-2026/</guid>
+      <pubDate>6 月 21 日，2026</pubDate>
+      <media:thumbnail url="https://r2-assets.lynan.cn/am/DSC087451_1.jpg"/>
+      <description><![CDATA[<h2 id="to-page-top" style="opacity: 0; height: 0; margin: 0;">前言</h2>
+
+<p>2023 年离开上一份工作，待业休息，年末去了川西旅行，也是我的第一次真正意义上的旅行。</p>
+<p>当时旅行结束，写了我的第一篇游记。后来去了多个地方旅行，慢慢有了这个旅行系列，现在已经是第 21 篇游记了，很高兴一直在收到正向反馈，也希望我的游记能给读者带来些许好心情。</p>
+<p><a href="https://lynan.cn/the-journey-in-sichuan-2023/">川西旅行</a><br>从上海出发到成都，开始 成都-&gt;毕棚沟-&gt;达古冰川-&gt;九寨沟-&gt;黄龙 的旅行社团旅行。</p>
+
+<p>那次报旅行团，去了很多景点，第一次看到巍峨的雪山，还有秀丽的九寨沟。略显遗憾是去九寨沟的时候是阴天，去过就想着第二年夏天天气好的时候要再来一次，结果一直到 3 年后的今天，才再次到访，果然不失所望，真是太美了！</p>
+<p>本次旅行主要目的：</p>
+<ol>
+<li>游览九寨沟 ✅</li>
+<li>看大熊猫 ✅</li>
+</ol>
+<h2 id="行程"><a href="#行程" class="headerlink" title="行程"></a>行程</h2><table>
+<thead>
+<tr>
+<th><div style="width: 95px;">日期</div></th>
+<th>行程(当地时间)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="#Day-1-前往九寨沟">Day 1 06&#x2F;12 <span class="break-on-mobile">星期五</span></a></td>
+<td><strong>上海</strong> -&gt; <strong>绵阳</strong> -&gt; <strong>九寨沟</strong> 在路上</td>
+</tr>
+<tr>
+<td><a href="#Day-2-九寨沟">Day 2 06&#x2F;13 <span class="break-on-mobile">星期六</span></a></td>
+<td><strong>九寨沟</strong> 景区游玩</td>
+</tr>
+<tr>
+<td><a href="#Day-3-成都大熊猫基地">Day 3 06&#x2F;14 <span class="break-on-mobile">星期天</span></a></td>
+<td><strong>九寨沟</strong> -&gt; <strong>成都</strong> 大熊猫基地看熊猫</td>
+</tr>
+<tr>
+<td><a href="#Day-4-成都-绵阳-返程">Day 4 06&#x2F;15 <span class="break-on-mobile">星期一</span></a></td>
+<td><strong>成都</strong> 文殊院、浣花溪公园 -&gt; <strong>绵阳</strong> 圣水寺、罗汉寺 -&gt; <strong>上海</strong> 返程</td>
+</tr>
+</tbody></table>
+<h2 id="Day-1-前往九寨沟"><a href="#Day-1-前往九寨沟" class="headerlink" title="Day 1 前往九寨沟"></a>Day 1 前往九寨沟</h2><p>坐顺风车去浦东机场。</p>
+<p>值机，安检，起飞，航行，11 点 20 到达绵阳南郊机场。</p>
+<p><span class="image-grid r73"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/IMG_2511.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/IMG_2513.jpg"></span><br></span></p>
+<p>机场很小，出来就可以直接打车去平政汽车站。滴滴司机大哥问我从哪儿飞来的，我说从上海。他问我现在机票贵不贵，以前可贵了要一两千。我说这个时候还没到旺季吧，比较便宜，700 块。一路上看到很多“通力”字眼，查了一下通力应该是当地比较大的企业了。本次乘坐的班车就是通力的。绵阳的街道旁种了很多榕树。</p>
+<p>我在 12306 上买了 8 点到 14:30 的流水班次汽车票，到车站才 12 点，正在等发车的是 8 点到 12:30 的班次，司机大哥说要看看他车坐没坐满，他要让 8 点到 12:30 这个班次的人先坐，如果没坐满他会喊我，大哥人还是挺好的。</p>
+<p>重新回到候车大厅坐会儿，临 12 点半大哥让我上了另一辆车，都是车站发的车应该没什么坑吧😂这个车坐起来很舒服，今天这是一辆新车，座椅空调都合适，不累人。司机头上有摄像头，还有限速，看着蛮正规的。</p>
+<p>下午 3 点半到了九寨沟新县城，一路畅通无阻，几乎没什么车，很不错。我订了沟口的酒店，其他乘客都在新县城下车了，就剩我一个。这车的司机说待会儿让我去坐绵阳车站那个大哥的车，他就不用单独再跑一趟沟口了。挺合理。</p>
+<p>九寨沟县城到九寨沟口这一段车稍微多一些。到沟口客运中心下车，走路到酒店（约 1 公里）。中午也没吃饭，点了个肯德基（最爱还是肯德基🥹）。23 年在九寨沟吃的那个牦牛火锅是苦的导致我不想再尝试了，还是吃点保险一些的食物。</p>
+<p><span class="image-grid r73"><br><img loading="lazy" src="https://r2-assets.lynan.cn/livePhoto/img_2519-2-mz1-mu.jpg" alt=""><br><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/IMG_2526.jpg"><br></span></p>
+<p>奔波了一天，今天早点休息，明早赶第一波进景区，爽玩一整天！</p>
+<h2 id="Day-2-九寨沟"><a href="#Day-2-九寨沟" class="headerlink" title="Day 2 九寨沟"></a>Day 2 九寨沟</h2><p>6 点多起床，洗漱。</p>
+<p>7 点到酒店餐厅吃早饭。吐司不好吃，不过黄油是安佳的，配一下还好。多吃点，今天要暴走一整天。</p>
+<p>吃完打车去九寨沟门口，差不多 7 点 40 不到，这个时候排队的人还不算特别多，都是准备 8 点第一批进景区的😄接近 8 点，人越来越多了。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/IMG_2530.jpg"></p>
+<p>队伍移动很快，8 点 10 分不到我坐上了观光车，还坐到了想坐的左边靠窗位置，沿途欣赏了中线的各个景点。</p>
+<p>九寨沟的观光车是随景区调度分配路线，今天我这车是去原始森林。车上会有一个工作人员介绍景区情况以及推荐路线还有注意事项，很不错。路过镜海，早晨还没起风，确实像镜子一样平静，倒影在水面清晰可见。</p>
+<h3 id="原始森林"><a href="#原始森林" class="headerlink" title="原始森林"></a>原始森林</h3><p>到原始森林站下车，我准备徒步从原始森林经过草海走到天鹅海。</p>
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08676.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08681.jpg"></span><br></span></p>
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08686.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08685.jpg"></span><br></span></p>
+<p>今早天气晴朗，阳光下的一草一木，甚至连影子都是那么美丽。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08690.jpg"></p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08692.jpg"></p>
+<p><span class="image-grid r73"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08694.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08695.jpg"></span><br></span></p>
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08701.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08705.jpg"></span><br></span></p>
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08702.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08703.jpg"></span><br></span></p>
+<p>这座石头山还有积雪覆盖的时候估计会更壮观。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08711.jpg"></p>
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08714.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08716.jpg"></span><br></span></p>
+<p><span class="image-grid r73"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/IMG_2534.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08717.jpg"></span><br></span></p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08718.jpg"></p>
+<p>还有杜鹃花正在盛开。</p>
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08719.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08720.jpg"></span><br></span></p>
+<h3 id="芳草海"><a href="#芳草海" class="headerlink" title="芳草海"></a>芳草海</h3><p>芳草海，阳光照在绿草上，露珠都在闪闪发光。</p>
+<p><span class="image-grid r37"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08722.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08723.jpg"></span><br></span></p>
+<p><span class="image-grid r73"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08724.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08725.jpg"></span><br></span></p>
+<p>好有层次的美！</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08728.jpg"></p>
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08730.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08732.jpg"></span><br></span></p>
+<p><span class="image-grid r73"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08733.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08734.jpg"></span><br></span></p>
+<br><img loading="lazy" src="https://r2-assets.lynan.cn/livePhoto/dji_export_20260615_215711_1781531831928_compose_0-DoOt0Z.jpg" alt=""><br>
+
+<p>遇到两只小鸭子，真美好的画面。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08738.jpg"></p>
+<br><img loading="lazy" src="https://r2-assets.lynan.cn/livePhoto/img_2558-h3vVKm.jpg" alt=""><br>
+
+<br><img loading="lazy" src="https://r2-assets.lynan.cn/livePhoto/dji_export_20260615_215056_1781531456880_compose_0-0aLkl_.jpg" alt=""><br>
+
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08739.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08741.jpg"></span><br></span></p>
+<p><span class="image-grid r73"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08745.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08744.jpg"></span><br></span></p>
+<h3 id="天鹅海"><a href="#天鹅海" class="headerlink" title="天鹅海"></a>天鹅海</h3><p>走到天鹅海。在下车前车上的工作人员介绍说是因为冬天大雪覆盖在草上像天鹅的羽毛而得名。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08747.jpg"></p>
+<p><span class="image-grid r73"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08748.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08751.jpg"></span><br></span></p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08752.jpg" alt="鹰爪洞"></p>
+<h3 id="箭竹海"><a href="#箭竹海" class="headerlink" title="箭竹海"></a>箭竹海</h3><p>坐观光车到箭竹海。箭竹我倒是没看到，只看到满池的木贼（节节草）。</p>
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08755.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08758.jpg"></span><br></span></p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08763.jpg"></p>
+<br><img loading="lazy" src="https://r2-assets.lynan.cn/livePhoto/temp_video_for_share-4-Lg4rn9.jpg" alt=""><br>
+
+<h3 id="箭竹海瀑布"><a href="#箭竹海瀑布" class="headerlink" title="箭竹海瀑布"></a>箭竹海瀑布</h3><p>箭竹海下面有个小瀑布。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08765.jpg"></p>
+<br><img loading="lazy" src="https://r2-assets.lynan.cn/livePhoto/temp_video_for_share-3-y9foTt.jpg" alt=""><br>
+
+<h3 id="熊猫海"><a href="#熊猫海" class="headerlink" title="熊猫海"></a>熊猫海</h3><p>继续步行到熊猫海。</p>
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08770.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08771.jpg"></span><br></span></p>
+<p>在上面往下看能看到好多鱼。</p>
+<br><img loading="lazy" src="https://r2-assets.lynan.cn/livePhoto/temp_video_for_share-2-zAE6me.jpg" alt=""><br>
+
+<p>这里有卖烤肠，不感兴趣。</p>
+<h3 id="五花海"><a href="#五花海" class="headerlink" title="五花海"></a>五花海</h3><p>坐观光车到五花海。我感觉网上看到比较有代表性的九寨沟照片都是拍自五花海。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08773.jpg"></p>
+<p><span class="image-grid r73"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08776.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08777.jpg"></span><br></span></p>
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08784.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08786.jpg"></span><br></span></p>
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08794.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08797.jpg"></span><br></span></p>
+<p>湖面长藻了，有点影响观感。</p>
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08796.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08798.jpg"></span><br></span></p>
+<p>继续往下游走一点点水面就没有这些“脏东西”了。</p>
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08801.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08817.jpg"></span><br></span></p>
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08806.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08818.jpg"></span><br></span></p>
+<p>这里湖里有很多已经钙化的树木。有个大妈很奇怪，我才站在护栏边 1 秒，就走过来在我耳边一直念好了吗好了吗好了吗</p>
+<p><span class="image-grid r73"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08822.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08821.jpg"></span><br></span></p>
+<p><span class="image-grid r73"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08833.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08851.jpg"></span><br></span></p>
+<p><span class="image-grid landscape"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08853.jpg"></span></p>
+<br><img loading="lazy" src="https://r2-assets.lynan.cn/livePhoto/img_2666-vwb5uT.jpg" alt=""><br>
+</span>
+
+<p><span class="image-grid landscape"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08857.jpg"></span></p>
+<br><img loading="lazy" src="https://r2-assets.lynan.cn/livePhoto/img_2669-EnHUdj.jpg" alt=""><br>
+</span>
+
+<p>深邃的蓝色。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08861.jpg"></p>
+<h3 id="珍珠滩"><a href="#珍珠滩" class="headerlink" title="珍珠滩"></a>珍珠滩</h3><p><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08866.jpg"></p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08880.jpg"></p>
+<br><img loading="lazy" src="https://r2-assets.lynan.cn/livePhoto/img_2705-dyIJCh.jpg" alt=""><br>
+
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08882.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08886.jpg"></span><br></span></p>
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08890.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08891.jpg"></span><br></span></p>
+<br><img loading="lazy" src="https://r2-assets.lynan.cn/livePhoto/dji_export_20260621_164301_1782031381060_compose_0-Cp-2Wo.jpg" alt=""><br>
+
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08893.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08895.jpg"></span><br></span></p>
+<p>坐观光车到镜海。</p>
+<h3 id="镜海"><a href="#镜海" class="headerlink" title="镜海"></a>镜海</h3><p>中午已经起风了，看起来平平无奇的一个海子。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/IMG_2746.jpg"></p>
+<br><img loading="lazy" src="https://r2-assets.lynan.cn/livePhoto/img_2747-2-oL2kP8.jpg" alt=""><br>
+
+<p>坐观光车回到诺日朗中心，换乘长海的观光车。这里可以吃午饭，买奶茶&#x2F;咖啡。</p>
+<h3 id="长海"><a href="#长海" class="headerlink" title="长海"></a>长海</h3><p>到长海以后，云层又厚起来，在长海边，景色因为天空不晴的原因稍微逊色了一些些。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08898.jpg"></p>
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08905.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08910.jpg"></span><br></span></p>
+<p><span class="image-grid r73"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08916.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08902.jpg"></span><br></span></p>
+<p>野蔷薇开得正好。</p>
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08918.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08919.jpg"></span><br></span></p>
+<p>长海到五彩池，官方路牌说是 820 米，实际上走起来应该是不止的。</p>
+<h3 id="五彩池"><a href="#五彩池" class="headerlink" title="五彩池"></a>五彩池</h3><p><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08920.jpg"></p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08927.jpg"></p>
+<p>枯水期，五彩池水量比较少，但是不妨碍它是九寨沟最清澈透明的。风吹过水面，看起来就像玻璃一样。</p>
+<br><img loading="lazy" src="https://r2-assets.lynan.cn/livePhoto/img_2764-4LVtm1.jpg" alt=""><br>
+
+<p>五彩池看完坐观光车回到诺日朗中心站。步行前往诺日朗瀑布，上一次来只在瀑布下面看了看，这次一定要去上面的观景平台看看瀑布全貌。</p>
+<h3 id="诺日朗瀑布"><a href="#诺日朗瀑布" class="headerlink" title="诺日朗瀑布"></a>诺日朗瀑布</h3><p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08928.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08929.jpg"></span><br></span></p>
+<p>阶梯不算多，10 分钟可以爬到观景平台。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08931.jpg"></p>
+<p>在这里可以看到瀑布上方的海子，瀑布的蓄水池。</p>
+<p><span class="image-grid r73"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08932.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08944.jpg"></span><br></span></p>
+<p>从观景平台下来，步行前往观光车上车点。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08950.jpg"></p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08953.jpg"></p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08954.jpg"></p>
+<p><span class="image-grid r73"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08956.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08955.jpg"></span><br></span></p>
+<h3 id="犀牛海"><a href="#犀牛海" class="headerlink" title="犀牛海"></a>犀牛海</h3><p>这里看起来和长海有点点像。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08957.jpg"></p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08963.jpg"></p>
+<h3 id="老虎海"><a href="#老虎海" class="headerlink" title="老虎海"></a>老虎海</h3><p>步行前往老虎海。这里有流水经幡。</p>
+<p><span class="image-grid r73"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08979.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08980.jpg"></span><br></span></p>
+<br><img loading="lazy" src="https://r2-assets.lynan.cn/livePhoto/img_2818-cpVyaF.jpg" alt=""><br>
+
+<p>从云里透射出来的阳光，美极了。</p>
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08967.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08972.jpg"></span><br></span></p>
+<p>好多小鱼。</p>
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08973.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08975.jpg"></span><br></span></p>
+<h3 id="树正瀑布"><a href="#树正瀑布" class="headerlink" title="树正瀑布"></a>树正瀑布</h3><p>步行往下走是树正瀑布，很美。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08982.jpg"></p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08992.jpg"></p>
+<br><img loading="lazy" src="https://r2-assets.lynan.cn/livePhoto/temp_video_for_share-2-zLrS7V.jpg" alt=""><br>
+
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08994.jpg"></p>
+<br><img loading="lazy" src="https://r2-assets.lynan.cn/livePhoto/temp_video_for_share-mFUZ6w.jpg" alt=""><br>
+
+<p>继续走到了树正寨门口，下方是树正群海。在路边看不了全貌，爬到树正寨上方的观景平台看看。</p>
+<p><span class="image-grid r73"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC08999.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC09000.jpg"></span><br></span></p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC09001.jpg"></p>
+<h3 id="树正群海"><a href="#树正群海" class="headerlink" title="树正群海"></a>树正群海</h3><p>视野不错。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC09006.jpg"></p>
+<p>下来继续步行前往火花海。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC09009.jpg"></p>
+<p><span class="image-grid r73"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC09017.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC09012.jpg"></span><br></span></p>
+<h3 id="火花海"><a href="#火花海" class="headerlink" title="火花海"></a>火花海</h3><p>这里几个海子明显感觉水非常深，只看见蓝色，无法看清水底。</p>
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC09022.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC09026.jpg"></span><br></span></p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC09032.jpg"></p>
+<p>太阳已经快落山了，所以看不到阳光洒在湖水上像跳动的火花一般的场景。</p>
+<p>快 6 点了，坐观光车前往最后一个站点——盆景滩。</p>
+<h3 id="盆景滩"><a href="#盆景滩" class="headerlink" title="盆景滩"></a>盆景滩</h3><p><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC09038.jpg"></p>
+<p>双龙海略过了。盆景滩得名自河里一棵一棵树木像盆景。</p>
+<h3 id="芦苇海"><a href="#芦苇海" class="headerlink" title="芦苇海"></a>芦苇海</h3><p>往回走 600 米到芦苇海。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC09041.jpg"></p>
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC09043.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC09051.jpg"></span><br></span></p>
+<p>从芦苇海再走回盆景滩，坐车出景区。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/DSC09067.jpg"></p>
+<p>打个滴滴回酒店，今天已经走太多路，不想再走了。景区门口很多的士，2023 年吃过亏现在还记得。</p>
+<p>滴滴也没便宜几块钱，但那至少是我接受了的价格而不是被坑的价格。滴滴司机大哥问我打了多久打到的车，我说得有好一会儿吧，有点不好打车哦。我装作第一次来的样子，问司机说这还不是旺季吧，旺季难以想象得多拥挤哟。</p>
+<p>路程很短，不到 2 公里，一会儿就到酒店了。本来想点肯德基，结果发现大部分菜单都显示售罄，转头点了麦当劳。</p>
+<p>今晚有点不好睡，白天走太多，身体有点轻微发热，脸也有点红。9 点多开始睡，一直到 12 点体温才降下来睡着。</p>
+<h2 id="Day-3-成都大熊猫基地"><a href="#Day-3-成都大熊猫基地" class="headerlink" title="Day 3 成都大熊猫基地"></a>Day 3 成都大熊猫基地</h2><h3 id="前往成都"><a href="#前往成都" class="headerlink" title="前往成都"></a>前往成都</h3><p>今早是 6 点 30 的大巴去黄龙九寨站，国大上车点离酒店很近，10 分钟不到的脚程。</p>
+<p>5 点多起床，洗漱整理书包，简单吃了个小面包，退房去坐大巴。</p>
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/IMG_2923.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/IMG_2925.jpg"></span><br></span></p>
+<p>今天天气有点阴，还好昨天已经去过九寨沟看了天气比较好的美景。大巴车全程实际约 2 小时，走国道。路上有点小雨。</p>
+<p>到黄龙九寨站时发现离我买的车次还有 2 个多小时，赶紧打开 12306 改签了早一班车，丝滑上车。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/IMG_2934.jpg"></p>
+<p>不到 2 个小时的车程，到成都。温度上升很明显，雾霾也比较严重，很闷热。</p>
+<p>到达成都东站。</p>
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/IMG_2938.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/IMG_2940.jpg"></span><br></span></p>
+<p>成都的雾霾很明显，现在天气也很闷热。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/IMG_2942.jpg"></p>
+<p>出东站，到附近吃了一碗老妈蹄花。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/IMG_2943.jpg"></p>
+<p>下午打算去看大熊猫。高德导航显示有一个大熊猫直通车 4 号线，但是找不到上车点（高德定位上车点在广场中间，但是巴士怎么可能开到广场上呢，真找不到），于是坐地铁前往。</p>
+<p>出地铁还要坐 2 站公交，在地铁口有很多揽客的黑车。公交车两块而且是点对点运行的，黑车竟然要 10 块，真就逮着外地人薅啊……</p>
+<h3 id="大熊猫基地"><a href="#大熊猫基地" class="headerlink" title="大熊猫基地"></a>大熊猫基地</h3><p>到熊猫基地，在美团上买了门票，刷身份证进入园区。园区入口有很多“导游”揽客，说走最佳路线什么的。</p>
+<p>园区西门这里的步道是露天的，比较晒（两边的树都还很矮）。天气热，熊猫都回室内了。这个点有的熊猫还在午睡，有的已经睡醒。</p>
+<p>今天看到的第一只大熊猫，也是这辈子看到的第一只😊。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/IMG_2955.jpg"></p>
+<p>室内馆有空调，可以在里面休息。室外有很多竹子，不知道是不是天气比较凉爽的话熊猫可以直接啃它们。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/IMG_2960.jpg"></p>
+<p>感觉睡醒了，又好像没睡醒，思考熊生中。</p>
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/IMG_2964.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/IMG_2967.jpg"></span><br></span></p>
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/IMG_2971.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/IMG_3024.jpg"></span><br></span></p>
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/IMG_3018.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/IMG_3037.jpg"></span><br></span></p>
+<br><img loading="lazy" src="https://r2-assets.lynan.cn/livePhoto/img_3084-9MjACr.jpg" alt=""><br>
+
+<p>看了几个熊猫馆以后去了金丝猴馆。这里的空调更给力，很凉快。</p>
+<p><span class="image-grid"><br><img loading="lazy" src="https://r2-assets.lynan.cn/livePhoto/img_3014-qp0VO7.jpg" alt=""><br></p>
+<br><img loading="lazy" src="https://r2-assets.lynan.cn/livePhoto/img_2979-JR1UBg.jpg" alt=""><br>
+</span>
+
+<p>接下来去了星星产房，里面有出生不久的熊猫。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/IMG_3061.jpg"></p>
+<p>出来到了熊猫步行街。吃个肯德基下午茶，休息会儿，太热了。</p>
+<p>出来继续去了月亮产房，今天里面很多房间都拉上窗帘了，没看到熊猫。</p>
+<p>再去了小熊猫 2 号活动场。</p>
+<p>有小熊猫趴在树上睡觉，真可爱。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/IMG_3093.jpg"></p>
+<p>天气太热，园区在喷雾，小熊猫好像在用这个喷雾乘凉。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/IMG_3103.jpg"></p>
+<p>猛兽出没请注意！嗷呜！</p>
+<br><img loading="lazy" src="https://r2-assets.lynan.cn/livePhoto/img_3101-24_I-e.jpg" alt=""><br>
+
+<p>继续到了熊猫别墅区。这里是早期的熊猫基地区，树林和竹林都比较茂盛，比西门那边更凉快一些。</p>
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/IMG_3106.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/IMG_3146.jpg"></span><br></span></p>
+<p>继续逛了几个熊猫馆，去了小熊猫 2 号活动场。</p>
+<p>看完小熊猫准备出园区了。</p>
+<p>从南门出来坐公交到地铁口，再坐地铁前往酒店。酒店在天府广场旁。到天府广场，在里面吃了一碗肥肠粉，粉是地瓜粉，不喜欢（还是米粉比较好吃）。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/IMG_3150.jpg"></p>
+<p>吃完米粉到茶百道买了一杯柠檬水（2 块，好便宜）。</p>
+<p>到酒店入住，洗澡洗衣服，休息了。</p>
+<h2 id="Day-4-成都-绵阳-返程"><a href="#Day-4-成都-绵阳-返程" class="headerlink" title="Day 4 成都-绵阳-返程"></a>Day 4 成都-绵阳-返程</h2><p>昨晚睡得蛮好。起床，收拾好东西，吃早餐，这家海友的早餐比较简单，豆浆菜包花卷茶叶蛋。</p>
+<p>退房，坐公交前往文殊院。</p>
+<h3 id="文殊院"><a href="#文殊院" class="headerlink" title="文殊院"></a>文殊院</h3><p>这条街很多卖茉莉花手串嬢嬢。</p>
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/IMG_3155.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/IMG_3163.jpg"></span><br></span></p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/IMG_3179.jpg"></p>
+<p>文殊院是免费参观，好像有赠香可以点，我没点，简单逛了一圈。</p>
+<p>到文殊阁参观了一下，里面摆了很多菩萨。</p>
+<h3 id="浣花溪公园"><a href="#浣花溪公园" class="headerlink" title="浣花溪公园"></a>浣花溪公园</h3><p>出来以后坐地铁想到杜甫草堂。这个地铁站可能是考虑到换乘步行距离比较远，甚至安装了传送带。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/IMG_3185.jpg"></p>
+<p>什么？杜甫草堂门票要 50 块？不进去了，在外面的浣花溪公园逛一下。</p>
+<p>感觉很悠闲的样子，很不错。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/IMG_3190.jpg"></p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/29F8DD85-BF5D-40A3-8ABF-989C9AB808ED_1_102_o.jpg"></p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/IMG_3196.jpg" alt="夜师傅"></p>
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/IMG_3201.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/IMG_3202.jpg"></span><br></span></p>
+<p>逛完公园出来在对面吃了跷脚牛肉，好吃的。牛肉汤味道和客家的牛肉汤挺像的。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/IMG_3204.jpg"></p>
+<p>吃完坐地铁到成都东站，坐动车前往绵阳。</p>
+<p>第一次见到这种座位布局的地铁车厢，坐起来很凉快。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/IMG_3207.jpg"></p>
+<h3 id="圣水寺"><a href="#圣水寺" class="headerlink" title="圣水寺"></a>圣水寺</h3><blockquote>
+<p>圣水寺位于四川省绵阳市涪城区长虹大道北段，涪江右岸塔子山南端，宝成铁路、成绵高铁从寺前经过，占地 10 余万平方米，由圣水寺和罗汉寺组成。寺院始建于唐永徽年间（650-655 年），初名甘泉寺，明正统元年（1436 年）以山泉”圣水”更名，现存观音殿后崖壁下的”龙湫”清泉常年充盈。寺内建筑群沿中轴线分布天王殿、大雄宝殿、大悲殿等主体建筑，两侧配有玉佛殿、伽蓝殿、祖师殿等附属建筑，歇山式屋顶与鎏金屋檐展现汉传佛教寺庙风格。<br><a href="https://baike.baidu.com/item/%E5%9C%A3%E6%B0%B4%E5%AF%BA/9733">https://baike.baidu.com/item/圣水寺/9733</a></p>
+</blockquote>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/IMG_3212.jpg"></p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/IMG_3214.jpg"></p>
+<p>一整条长廊全是雕塑，很威严。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/IMG_3219.jpg"></p>
+<p>在天桥上可以看火车，这条可能是货运轨道，只看到这种集装箱货车。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/IMG_3228.jpg"></p>
+<p>从这里拐过去就到了旁边的罗汉寺。</p>
+<h3 id="罗汉寺"><a href="#罗汉寺" class="headerlink" title="罗汉寺"></a>罗汉寺</h3><blockquote>
+<p>绵阳罗汉寺位于四川省绵阳市城郊乡圣水村，地处涪江右岸塔子山南端，毗邻宝成铁路与绵江高速公路。寺院由果清法师自筹资金筹建，历经二十余年建设，主体建筑沿中轴线分布韦陀殿、天王殿、七佛殿与大雄宝殿，两侧建有万佛圣城、罗汉堂、钟鼓楼及灵鹫山等建筑群，融合北传佛教庄严风格与江南园林特色。</p>
+<p>寺内万佛圣城供奉一万两千余尊小佛像及四十余尊九米以上佛菩萨像，罗汉堂 1250 尊罗汉像姿态各异，灵鹫山内 500 尼僧像神态安详。寺院核心仿清建筑大雄宝殿雕梁画栋，藏经楼外观古雅而内部设施现代，卧佛长 42 米造型恬静。全寺依山势布局，260 级石梯两侧饰以罗汉群像，绿荫掩映间形成错落有致的建筑群落。<br><a href="https://baike.baidu.com/item/%E7%BB%B5%E9%98%B3%E7%BD%97%E6%B1%89%E5%AF%BA//15826469">https://baike.baidu.com/item/绵阳罗汉寺//15826469</a></p>
+</blockquote>
+<p>这个阶梯挺陡的，爬上去得休息一会儿。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/IMG_3233.jpg"></p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/IMG_3235.jpg"></p>
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/IMG_3248.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/IMG_3250.jpg"></span><br></span></p>
+<p>出来打车到万达，吃了本地的菜馆-六月雪干锅。很好吃！</p>
+<br><img loading="lazy" src="https://r2-assets.lynan.cn/livePhoto/img_3260-IIt_Li.jpg" alt=""><br>
+
+<h3 id="返程"><a href="#返程" class="headerlink" title="返程"></a>返程</h3><p>天色渐暗。</p>
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/IMG_3263.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/IMG_3265.jpg"></span><br></span></p>
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/IMG_3273.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/sichuan-2026/sdr/IMG_3284.jpg"></span><br></span></p>
+<p>落地，打了个顺风车回家，美美结束旅行。</p>
+<h2 id="花费"><a href="#花费" class="headerlink" title="花费"></a>花费</h2><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>金额（元）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>机票</td>
+<td>1460</td>
+</tr>
+<tr>
+<td>酒店</td>
+<td>690</td>
+</tr>
+<tr>
+<td>交通</td>
+<td>515</td>
+</tr>
+<tr>
+<td>餐食</td>
+<td>437</td>
+</tr>
+<tr>
+<td>旅行保险</td>
+<td>24</td>
+</tr>
+<tr>
+<td><strong>总计</strong></td>
+<td><strong>3126</strong></td>
+</tr>
+</tbody></table>
+<h2 id="感受"><a href="#感受" class="headerlink" title="感受"></a>感受</h2><ul>
+<li><p><strong>几乎逛完了九寨沟的所有景点</strong><br>步行距离约 20 公里，因为景点特别多，很分散，所以没有累晕的感觉</p>
+</li>
+<li><p><strong>晴天的九寨沟真美</strong><br>最美的水，TOP 1</p>
+</li>
+<li><p><strong>成都蛮热的</strong><br>其实现在气温还不算特别高，但是很闷热，比较难受</p>
+</li>
+<li><p><strong>去九寨沟的新方式</strong><br>从绵阳去体验不错，绵阳到九寨沟县城全程高速，3 小时车程</p>
+</li>
+</ul>
+<script src="/js/replace-emoji.js"></script>
+]]></description>
+    </item>
+    <item>
+      <title>北疆旅行(2026)</title>
+      <link>https://lynan.cn/north-xinjiang-travel-journal-2026/</link>
+      <guid>https://lynan.cn/north-xinjiang-travel-journal-2026/</guid>
+      <pubDate>5 月 24 日，2026</pubDate>
+      <media:thumbnail url="https://r2-assets.lynan.cn/am/DSC08400.jpg"/>
+      <description><![CDATA[<h2 id="to-page-top" style="opacity: 0; height: 0; margin: 0;">前言</h2>
+
+<p>五一放假从老家出来上海已经开始感觉到夏天的气息，是时候去春暖花开的北疆了😄</p>
+<p>去年 9 月和 10 月分别去了北疆和南疆赏秋，当时就想着赛里木湖开满鲜花的时候一定要再来一次，于是乎，我来啦！</p>
+<p>周四安排好工作交接，请了两天假，加上周末两天，以下是我的本次行程：</p>
+<ol>
+<li><a href="#Day1-上海-博乐">Day1 星期五</a>上海飞乌鲁木齐，乌鲁木齐坐动车前往博乐</li>
+<li><a href="#Day2-赛里木湖">Day2 星期六</a>博乐早起出发前往<strong>赛里木湖</strong>，晚上坐车前往伊宁</li>
+<li><a href="#Day3-那拉提草原">Day3 星期日</a>伊宁往返<strong>那拉提草原</strong>一日游团</li>
+<li><a href="#Day4-伊宁-乌鲁木齐-上海">Day4 星期一</a>伊宁早起坐动车前往乌鲁木齐，乌鲁木齐吃饭小逛，飞上海</li>
+</ol>
+<h2 id="Day1-上海-博乐"><a href="#Day1-上海-博乐" class="headerlink" title="Day1 上海-博乐"></a>Day1 上海-博乐</h2><p>昨天晚上约了顺风车，车主是个中年男人，问我几点的航班，我说 6 点半的国内航班，他说 5点一刻来接我准来得及。确实来得及，但是有点赶，到机场已经开始登机了。</p>
+<p>5 个小时的飞机，睡了 1 个半小时左右就再睡不着了，我好像个毛毛虫一样时不时扭一下，不然感觉坐太久浑身都不得劲。今天都是多云天气，大部分时间窗外只看见厚厚的云层。</p>
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/IMG_1726.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/IMG_1749.jpg"></span><br></span></p>
+<p>落地乌鲁木齐，气温约 8 °C。在机场把厚外套拿出来穿上防止着凉。坐机场巴士去高铁站，车票 20 元。车上还是有点热的。到高铁站上楼上肯德基吃了一个午餐，其实在飞机上我已经吃了早午餐了，但是下午要坐很久的车，还是再填一下肚子比较好。</p>
+<p>在肯德基买了一杯咖啡，下来刚好开始检票上车。沿路大部分时间都能看到天山山脉延绵的雪山和山脚下的戈壁滩。</p>
+<p>坐在靠窗位置，阳光透过窗户照进来一瞬间有点恍惚，忘记了现在是梦境还是现实。</p>
+<br><img loading="lazy" src="https://r2-assets.lynan.cn/livePhoto/img_1770-XhvVrc.jpg" alt=""><br>
+
+<p>到博乐啦，打个车到了酒店。时间还早但是花了一个白天的时间在路上，已经没有精力再去逛了。今晚的房间在 16 楼，视野很不错，朝西的窗户正好可以欣赏日落。</p>
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/PhotonCam_20260515_214137.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/IMG_1794.jpg"></span><br></span></p>
+<p>新疆的时间比上海晚 3 个小时左右，约 21:30 才日落。点了个外卖，洗澡洗衣服，在微信上约了去年坐过的赛里木湖专线小车。</p>
+<p>夕阳，美。</p>
+<h2 id="Day2-赛里木湖"><a href="#Day2-赛里木湖" class="headerlink" title="Day2 赛里木湖"></a>Day2 赛里木湖</h2><p>早起，小哥来接了。车上有 3 个人是坐乌鲁木齐出发到博乐的过夜火车来的（我去年也是）。副驾竟然没人坐，哈哈，和去年一样，又坐上这个位置。真的要恍惚了。</p>
+<p>小哥问我我们要不要去吃早餐，我说好呀，时间太早，酒店的早餐吃不上。后面的乘客有些迟疑（和我去年一样，怕被拉到黑店被坑），哈哈。完全不用担心，我吃了比平常早餐还更多的东西，只花了 10 块钱。提一下新疆这边早餐的奶茶，是咸的，喝不惯😄。</p>
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/IMG_1799.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/IMG_1802.jpg"></span><br></span></p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/IMG_1804.jpg" alt="看到大风车就是快到了"></p>
+<p>到赛里木湖小哥问我们要不要自驾环湖，150 一个人。其实价格还可以的，但是我比较喜欢自己走走停停，到游客中心坐观光车出发了。</p>
+<p>第二次来赛里木湖，有些去年没下车玩的景点想看看。</p>
+<h3 id="三台古驿"><a href="#三台古驿" class="headerlink" title="三台古驿"></a>三台古驿</h3><p>第一站三台古驿。</p>
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/IMG_1806.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/IMG_1811.jpg"></span><br></span></p>
+<p>早晨顺光，也还没起雾，能看到清澈透明的湖水，远处的雪山也超级清晰。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/IMG_1815.jpg"></p>
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/IMG_1809.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/IMG_1810.jpg"></span><br></span></p>
+<h3 id="松树头"><a href="#松树头" class="headerlink" title="松树头"></a>松树头</h3><p>松树头。去年走了左侧栈道爬到顶去看了果子沟大桥，今年不爬了，去另一侧欣赏湖景。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/DSC08189.jpg"></p>
+<p><span class="image-grid r73"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/DSC08195.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/DSC08208.jpg"></span><br></span></p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/DSC08211.jpg"></p>
+<p>这里山坡上的黄色小花开满了，非常有春天的感觉，满满的生命力。阳光、雪山、鲜花、湖泊，超级美。</p>
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/DSC08218.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/DSC08263.jpg"></span><br></span></p>
+<p>从观景平台下来买了个馕，好吃的。在湖边坐了一会儿，这个时候湖面有些起雾了。</p>
+<p><span class="image-grid r73"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/DSC08297.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/DSC08300.jpg"></span><br></span></p>
+<h3 id="金花紫卉"><a href="#金花紫卉" class="headerlink" title="金花紫卉"></a>金花紫卉</h3><p>坐区间车到了金花紫卉，这里是网红灯塔所在的景点。不过在这里没有看到紫色花呢，可能是时间还没到吧。</p>
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/DSC08306.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/DSC08307.jpg"></span><br></span></p>
+<h3 id="克勒涌珠"><a href="#克勒涌珠" class="headerlink" title="克勒涌珠"></a>克勒涌珠</h3><p>下一站去了克勒涌珠，这里有很多天鹅。有些游客在拿馕喂鹅。除了天鹅，还有看到鸭子（会飞）。去年秋天来的时候只看见海鸥没有天鹅，现在只有天鹅不见海鸥了。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/DSC08320.jpg"></p>
+<p>抬头看到一只大天鹅，感觉飞得很费劲呢。</p>
+<br><img loading="lazy" src="https://r2-assets.lynan.cn/livePhoto/a001_05161356_c086_lut-m511RU.jpg" alt=""><br>
+
+<p>大鹅降落</p>
+<br><img loading="lazy" src="https://r2-assets.lynan.cn/livePhoto/a001_05161357_c087_lut-j4R7_6.jpg" alt=""><br>
+
+<p>赛里木湖的水很冷的，真佩服这些天鹅和鸭子。</p>
+<h3 id="西海草原"><a href="#西海草原" class="headerlink" title="西海草原"></a>西海草原</h3><p>西海草原。有一只小狗在睡觉，我啧啧啧了一下，他抬起头看了一眼，继续躺下睡觉了。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/DSC08330.jpg" alt="谁喊我？"></p>
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/DSC08333.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/DSC08342.jpg"></span><br></span></p>
+<h3 id="天鹅乐水"><a href="#天鹅乐水" class="headerlink" title="天鹅乐水"></a>天鹅乐水</h3><p>到天鹅乐水。这里没有天鹅，但是马路另一侧离雪山比较近，视野开阔，很美很壮观。</p>
+<p><span class="image-grid r73"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/DSC08375.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/IMG_1960.jpg"></span><br></span></p>
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/IMG_1938.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/IMG_1961.jpg"></span><br></span><br>湖边有一座“雪山”。</p>
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/DSC08404.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/DSC08405.jpg"></span><br></span></p>
+<h3 id="点将台"><a href="#点将台" class="headerlink" title="点将台"></a>点将台</h3><p>到点将台。爬上去也是俯瞰赛里木湖，视野很好，湖水超蓝。这里有德克士和游船。</p>
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/DSC08410.jpg" alt="湖边"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/DSC08408.jpg" alt="点将台"></span><br></span></p>
+<p>天上有人在跳伞。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/IMG_1970.jpg"></p>
+<p><span class="image-grid r64"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/IMG_1974.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/IMG_1976.jpg"></span><br></span></p>
+<h3 id="亲水滩"><a href="#亲水滩" class="headerlink" title="亲水滩"></a>亲水滩</h3><p>下一站去了亲水滩。在湖边沙（石头）滩坐着，和从湖北来的大学生聊了一会儿，这里真的很适合发呆。</p>
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/DSC08443.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/DSC08444.jpg"></span><br></span></p>
+<p>蓝色的赛里木湖，像大海。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/DSC08461.jpg"></p>
+<br><img loading="lazy" src="https://r2-assets.lynan.cn/livePhoto/a001_05161756_c099_lut-fb95DP.jpg" alt=""><br>
+
+<p>接下来没有去景点了，回游客中心。赛里木湖东门游客中心附近酒店很多，已经初具小镇规模。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/IMG_1986.jpg"></p>
+<p>今晚我打算去伊宁，官方大巴车满座了，坐的商务车拼车。</p>
+<p>路上途径果子沟大桥，有一段路在修路有点堵车，好长一段路都是在峡谷里，可以欣赏峡谷景色，还有牧民和山上的牛羊。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/IMG_1987.jpg"></p>
+<p>到伊宁已经快 10 点了，第二天打算去伊犁的某个草原。想看有小溪的草原，简单看看网友的图，决定报个去那拉提草原的一日游旅行团。</p>
+<p>旅行团可以选择伊宁火车站或者汽车站出发，为了方便今晚我在火车站附近入住了一家当地非连锁酒店。实际入住体验很不错，休息得很好。</p>
+<h2 id="Day3-那拉提草原"><a href="#Day3-那拉提草原" class="headerlink" title="Day3 那拉提草原"></a>Day3 那拉提草原</h2><p>早起，酒店的早餐没到时间，简单吃点小面包，去火车站等旅行团的巴士。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/IMG_2003.jpg"></p>
+<p>我报的是 50 人的大团，实际今天是 17 人，旅社给我们换了中巴车。</p>
+<p>前往那拉提的路上也有很美的景色。一开始大家都比较困，睡了 2 小时左右。在车上听到有几个人在说方言，越听越耳熟，才发现是在讲客家话（我也是客家人），问了一下发现是老家隔壁市的，哈哈挺巧。又问了一下吃不吃芋饺，她们说吃的，看来客家人的饮食习惯也是差不多的，何况我们距离不算很远。</p>
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/IMG_2012.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/IMG_2017.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/IMG_2031.jpg"></span><br></span></p>
+<p>到木斯服务区小作休息，继续赶路。</p>
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/IMG_2023.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/IMG_2027.jpg"></span><br></span></p>
+<p>导游和我们讲了一下今天的行程安排和注意事项，然后和其他旅客聊聊天，气氛很好。</p>
+<p>到那拉提镇先去吃午餐，我对这个团餐的预期是 0，因为没有预期所以吃了发现其实还好，没有那么糟糕。</p>
+<p>吃完就去那拉提景区了，导游帮我们买好票。我们一团人大部分是去 河谷草原，我和另外 3 人是去 空中草原。</p>
+<p>坐景区观光车到第一个景点，车上有喇叭在播放那拉提景区的介绍。</p>
+<p>在车上就能看到满山的草甸了，绿油油的。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/IMG_2041.jpg"></p>
+<blockquote>
+<p>那拉提养蜂女的故事是一段凄美的新疆爱情传说，源自现象级网络歌曲《可可托海的牧羊人》及其衍生回应《那拉提的养蜂女》。这个故事讲述了两个漂泊的灵魂在新疆相遇、相爱，却因现实无奈而错过的动人虐恋。<br><a href="http://grassland.china.com.cn/2021-01/08/content_41420710.html">http://grassland.china.com.cn/2021-01/08/content_41420710.html</a></p>
+</blockquote>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/IMG_2058.jpg"></p>
+<h3 id="天界台"><a href="#天界台" class="headerlink" title="天界台"></a>天界台</h3><p>第一个景点是一个观景平台，俯瞰那拉提草原，很广阔很壮观。可以坐缆车上来（今天没开放）和在这里游玩滑草项目（今天没开放）。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/DSC08492.jpg"></p>
+<p>这里可以俯瞰那拉提镇。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/DSC08505.jpg"></p>
+<h3 id="天牧台"><a href="#天牧台" class="headerlink" title="天牧台"></a>天牧台</h3><p>第二个景点是草原。这里距离雪山更近了。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/DSC08525.jpg" alt="天上的云好像羽毛"></p>
+<br><img loading="lazy" src="https://r2-assets.lynan.cn/livePhoto/a001_05171423_c106_lut-en-Rl3.jpg" alt=""><br>
+
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/DSC08547.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/DSC08556.jpg"></span><br></span></p>
+<h3 id="游牧人家"><a href="#游牧人家" class="headerlink" title="游牧人家"></a>游牧人家</h3><p>第三个景点是游牧人家。这里有奶茶、热食。可以另外花钱坐观光车前往雪莲谷。我没打算去，只打算沿着小溪走一走。</p>
+<p><span class="image-grid r73"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/DSC08565.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/DSC08587.jpg"></span><br></span></p>
+<br><img loading="lazy" src="https://r2-assets.lynan.cn/livePhoto/a001_05171515_c111_lut-eRrxy2.jpg" alt=""><br>
+
+<p><span class="image-grid r37"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/DSC08591.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/DSC08589.jpg"></span><br></span></p>
+<p>这里有一座网红桥，很多人排队拍照。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/IMG_2159.jpg"></p>
+<p>沿着小溪越往上走人越少，小溪、蓝天、松树、雪山，很美！</p>
+<br><img loading="lazy" src="https://r2-assets.lynan.cn/livePhoto/a001_05171559_c125_lut-8XKO_R.jpg" alt=""><br>
+
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/DSC08609.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/DSC08625.jpg"></span><br></span></p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/DSC08633.jpg"></p>
+<br><img loading="lazy" src="https://r2-assets.lynan.cn/livePhoto/a001_05171615_c136_lut-X-CqG8.jpg" alt=""><br>
+
+<p>小花开了特别多，天空还有盘旋的鹰。</p>
+<br><img loading="lazy" src="https://r2-assets.lynan.cn/livePhoto/a001_05171611_c132_lut-kGzJzg.jpg" alt=""><br>
+
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/DSC08605.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/DSC08654.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/DSC08628.jpg"></span><br></span></p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/IMG_2198.jpg"></p>
+<p><video controls controlsList="nodownload" src="https://r2-assets.lynan.cn/video/IMG_2199.mp4" style="aspect-ratio: 1280/720" preload="metadata" poster="https://r2-assets.lynan.cn/video/img_2199-jn4rWt-thumbnail.jpg" playsinline></video></p>
+<p>4 点 20 往回走，到游牧人家站点坐上观光车回游客中心。导游给我们预期的回游客中心时间是 5 点半，我刚好 5 点半到。想起在游客中心看到有肯德基，于是打开 App 看看有什么吃的。嘿猜我看到了啥？是大神卡 10 元下午茶！我会永远爱肯德基的🥹 点了一个鸡块和三柠茶，备注 25 分钟后取。到游客中心肯德基，鸡块是临时给我装的，好好好，特别好👍！</p>
+<h3 id="返回伊宁"><a href="#返回伊宁" class="headerlink" title="返回伊宁"></a>返回伊宁</h3><p>空中草原比河谷草原更远，导游以为我们会更晚回到游客中心结果我们 4 人是最早回来的，在车上等了一会儿，差不多 6 点 20 人齐了，返程。</p>
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/IMG_2202.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/IMG_2203.jpg"></span><br></span></p>
+<p>一路我都在欣赏沿途的草原，河谷，景色也很美，看着牛羊马儿吃着草，整个人都感觉很轻松。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/IMG_2220.jpg"></p>
+<br><img loading="lazy" src="https://r2-assets.lynan.cn/livePhoto/a001_05172014_c141_output-y8BSE9.jpg" alt=""><br>
+
+<p>快到伊宁，路边的草原慢慢变成了戈壁滩。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/IMG_2232.jpg"></p>
+<p>在服务区看到了美丽的日落。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/IMG_2258.jpg"></p>
+<p>今天还是住昨晚的酒店，本来打算去附近的夜市逛一下，考虑到明早要坐车，今天也花了很多精力坐车，还是早点休息吧。</p>
+<p>今晚入住时前台给升级了房间，全屋智能，很不错。</p>
+<h2 id="Day4-伊宁-乌鲁木齐-上海"><a href="#Day4-伊宁-乌鲁木齐-上海" class="headerlink" title="Day4 伊宁-乌鲁木齐-上海"></a>Day4 伊宁-乌鲁木齐-上海</h2><p>起床洗漱，吃早餐。步行到伊宁站，坐约 5 个小时的动车前往乌鲁木齐。</p>
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/IMG_2282.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/IMG_2283.jpg"></span><br></span></p>
+<p>到乌鲁木齐已经下午 2 点多了，不过这边 2 点多刚好是午饭饭点。今天天气很好，我打算去看看红光山大佛，从火车站出来打车到红光山附近的餐厅吃了午餐。</p>
+<p>这是一家很“新疆”的餐厅，我点了羊肉抓饭、酸奶、两串羊肉串共计 49 元，都很好吃啊！吃得好饱！</p>
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/IMG_2298.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/IMG_2295.jpg"></span><br></span></p>
+<p>羊肉抓饭我感觉比去年在和田二街吃的还更好吃，价格也不错，我看旁边的人点的过油肉拌面，肉超级多，看得我都馋了。</p>
+<h3 id="红光山"><a href="#红光山" class="headerlink" title="红光山"></a>红光山</h3><p>吃饱了，步行到红光山。门口有个观光电瓶车大爷在拉客，问了下是 5 块钱，还可以省得走了，坐上车直接到了大佛寺门口。</p>
+<p>门口就能看到大佛和雪山同框。今天是大晴天，大佛金光闪闪的，走近看很雄伟。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/IMG_2310.jpg"></p>
+<p><span class="image-grid r64"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/IMG_2318.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/IMG_2326.jpg"></span><br></span></p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/IMG_2337.jpg"></p>
+<p>买了两个钥匙串。打车前往机场。</p>
+<p>不远，很快就到了。打车 20 多块，很不错，毕竟机场大巴都要 20 了，坐地铁的话就太折腾了，虽然不是很赶时间但也不至于闲的😂</p>
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/IMG_2358.jpg" alt="候机大厅"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/IMG_2360.jpg" alt="我的博客"></span><br></span></p>
+<p>过安检，买杯奶茶带飞机上喝，还有天润酸奶，好喝不贵。</p>
+<p>坐一会儿登机了。今天天气不错，特意选了靠窗座位，离开前还可以再看看雪山。飞西北千万不要错过窗外的景色，简直是国家地理（肉眼可见版）。</p>
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/IMG_2396.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/IMG_2397.jpg"></span><br></span></p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/IMG_2410.jpg" alt="博格达峰"></p>
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/IMG_2413.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/north-xinjiang-2026/sdr/IMG_2416.jpg"></span><br></span></p>
+<h2 id="感受"><a href="#感受" class="headerlink" title="感受"></a>感受</h2><ul>
+<li><p><strong>新疆很大</strong><br>花了很多时间在路上</p>
+</li>
+<li><p><strong>空气很干</strong><br>千万不要突然张大嘴巴，嘴唇大概率会裂开😂多涂护手霜，真的很干很干很干</p>
+</li>
+<li><p><strong>阳光很强烈，很晃眼</strong><br>做好防晒，最好再带个墨镜</p>
+</li>
+<li><p><strong>早晚添衣</strong><br>昼夜温差大，注意穿衣避免着凉</p>
+</li>
+<li><p><strong>没有踩坑</strong><br>西北这边的旅行团我个人来说体验很棒的，没有带去购物，也没有让买什么奇奇怪怪的东西，很单纯的旅游团，导游给的建议也很实用</p>
+</li>
+</ul>
+<h2 id="花费"><a href="#花费" class="headerlink" title="花费"></a>花费</h2><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>金额（元）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>机票</td>
+<td>往返 2580</td>
+</tr>
+<tr>
+<td>酒店</td>
+<td>3 晚约 500</td>
+</tr>
+<tr>
+<td>交通</td>
+<td>457</td>
+</tr>
+<tr>
+<td>餐饮</td>
+<td>约 250</td>
+</tr>
+<tr>
+<td>门票</td>
+<td>129</td>
+</tr>
+<tr>
+<td>购物</td>
+<td>696（主要买牛肉干了）</td>
+</tr>
+<tr>
+<td>合计</td>
+<td>约 4612</td>
+</tr>
+</tbody></table>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>虽然时间不充裕，也花了很多很多时间在路上，身体可能累趴了，但是心情却是无比放松。天气也是非常好，都是晴朗的好天气。</p>
+<p>今年不知道还有多少机会去旅行，因为机票的机建燃油费用涨了很多，不划算了。</p>
+<p>下一篇游记见👋</p>
+]]></description>
+    </item>
+    <item>
+      <title>丽江旅行</title>
+      <link>https://lynan.cn/lijiang-travel-journal-2026/</link>
+      <guid>https://lynan.cn/lijiang-travel-journal-2026/</guid>
+      <pubDate>5 月 9 日，2026</pubDate>
+      <media:thumbnail url="https://r2-assets.lynan.cn/am/IMG_1588.jpg"/>
+      <description><![CDATA[<h2 id="to-page-top" style="opacity: 0; height: 0; margin: 0;">前言</h2>
+
+<p>其实去年也计划过到丽江旅行，无奈碰到丽江那几天都是下雨，想要看玉龙雪山的话估计看不着，于是退了机票转头去了新疆（北疆）。今年终于有机会去到丽江。最近属实是有点忙，虽然有现在有各种聪明的 AI 帮忙，但是需求也排了不少。不好意思请太多天，就只请了 1 天假，早出晚归，共三天两夜，本次旅行体验总体来说我觉得还 ok。</p>
+<p>预想的行程（超级无敌特种兵版本）：</p>
+<ul>
+<li>Day1 丽江古城</li>
+<li>Day2 泸沽湖（不是大晴天再加上太远，从丽江往返要 8 小时，这次先不去了）</li>
+<li>Day3 虎跳峡（骑马骑得屁股还疼，现在水量也不是很多，这次先不去了）</li>
+</ul>
+<h2 id="行程"><a href="#行程" class="headerlink" title="行程"></a>行程</h2><table>
+<thead>
+<tr>
+<th><div style="width: 80px;">日期</div></th>
+<th>行程</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="#Day1-玉湖村">2026&#x2F;04&#x2F;24 <span class="break-on-mobile">星期五</span></a></td>
+<td>上海飞丽江，前往 <strong>玉湖村</strong></td>
+</tr>
+<tr>
+<td><a href="#Day2-玉龙雪山">2026&#x2F;04&#x2F;25 <span class="break-on-mobile">星期六</span></a></td>
+<td><strong>玉龙雪山</strong> 云杉坪、蓝月谷</td>
+</tr>
+<tr>
+<td><a href="#Day3-丽江古城">2026&#x2F;04&#x2F;26 <span class="break-on-mobile">星期日</span></a></td>
+<td><strong>丽江古城</strong> 大水车、大石桥，返回上海</td>
+</tr>
+</tbody></table>
+<h2 id="日程"><a href="#日程" class="headerlink" title="日程"></a>日程</h2><h3 id="Day1-玉湖村"><a href="#Day1-玉湖村" class="headerlink" title="Day1 玉湖村"></a>Day1 玉湖村</h3><p>早起坐顺风车前往浦东机场。今天拼车加上我满满当当共 4 个乘客，一上车就一股臭味扑面而来😅。</p>
+<p>到机场，在值机柜台选了一个前排靠窗座位，前往安检。现在不过 6 点而已，安检已经大排长龙。</p>
+<p>飞机 8:55 起飞，太困了睡了会儿。快到丽江的时候看到地面的金沙江，远处的贡嘎雪山（拍不到），今天天气很好，落地前能看到玉龙雪山，非常清晰。</p>
+<p><span class="image-grid r64"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/IMG_1412.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/IMG_1418.jpg"></span><br></span></p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/IMG_1431.jpg" alt="玉龙雪山"></p>
+<p>远处香格里拉的梅里雪山也依稀可见。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/IMG_1436.jpg"></p>
+<p>落地丽江三义机场，我没有托运行李所以直接出门坐巴士前往市区。机场巴士 20 元&#x2F;人，30 分钟一班。</p>
+<p>巴士上有一个“工作人员”以下简称巴士姐，介绍丽江的地理位置、历史文化和一些注意事项。巴士姐说在丽江最方便划算的是“拼车”，说游客想要了解拼车信息的话可以在巴士下车点的游客中心咨询。还说今天天气不错，很适合去距离玉龙雪山最近的玉湖村游玩，花都开了，景色很美。</p>
+<p>正好我也不懂今天下午去哪里好，在丽江古城南门站下车就去游客中心问怎么拼车去玉湖村。问了才发现工作人员其实是旅社人员，是否“官方”未可知。工作人员说去玉湖村没有单纯的拼车，只有套票，包含景点游览、骑马和划船，还有一顿午餐，价格是 148 元。我寻思着也不贵，就购买了该套餐去玉湖村。</p>
+<p>其实这个时候我已经有点点预感不妙了。我们是坐 7 座小车到达玉湖村的，到玉湖村直接去骑马处（看起来像一个村民家里）。骑马之前先给我们吃了腊排骨火锅，不好吃也不难吃，没什么味道，煮火锅连蘸水也无，感觉是为了推销他们的酱。</p>
+<p>吃完午餐我们就去骑马了。我以前没骑过，挺新奇的。骑马是到上山上，骑一圈下来回到起点。一路上很多马粪，马儿也会边走边拉，味道很勉强还能接受（食草动物的粪便不至于把人臭晕）。骑马过程约 50 分钟，马鞍不够软，就像直接坐在马的脊梁骨上，屁股坐得很疼（第二天还是隐隐作痛😅）。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/IMG_1450.jpg"></p>
+<p>骑马回来，马主人邀请我们品茶。尝了尝他们的山茶（和我家乡的藤茶有点像，有回甘）。50 元一小袋或者 200 元一罐。</p>
+<p>院子下方还挖了一个池塘，套餐里说的划船项目就是在这个池塘里。骑马我觉得还能接受，这个划船我实在是绷不住。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/IMG_1452.jpg"></p>
+<p>骑马时有另外的人给我们拍照，骑马回来会让我们买，20 元一张。我嫌贵没要（他说 10 块 10 块我还是不要），还好没有发生什么事情。</p>
+<p>我们一行人有人去池塘划船了，划船回来导游带我们去玉湖村。到玉湖村游客中心，让我们购买景区电瓶车票，往返共 40 元。</p>
+<p>这段路都没有多少远，几分钟就到村子里了。村子里还在开发，很多房子都搭着脚手架。</p>
+<p><span class="image-grid landscape"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC07853.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC07857.jpg"></span><br></span></p>
+<p><span class="image-grid landscape"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC07858.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC07861.jpg"></span><br></span></p>
+<p>我们穿过村子的石头路，继续做第二段电瓶车去龙女湖。</p>
+<p><span class="image-grid r73"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC07739.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC07742.jpg"></span><br></span></p>
+<p>这段路也没多远，到龙女湖时我的内心：？</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC07754.jpg"></p>
+<p>这不是另一个池塘吗😅说好的森林呢？蓝色湖水呢？</p>
+<p>云南的云看起来比较低，很好看。</p>
+<p><span class="image-grid landscape"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC07783.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC07788.jpg"></span><br></span></p>
+<p>好在今天天气不算太令人寒心，虽然下午雪山逆光起云起雾，但是阳光穿透云层，洒下来照在草坪上的画面很美。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC07767.jpg"></p>
+<p><span class="image-grid landscape"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC07781.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC07752.jpg"></span><br></span></p>
+<br><img loading="lazy" src="https://r2-assets.lynan.cn/livePhoto/05051-SIkgN_.jpg" alt=""><br>
+
+<p><span class="image-grid landscape"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC07804.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC07821.jpg" alt="一匹马和一只小狗"></span><br></span></p>
+<p>让我看看是什么个狗。小狗可开心，在地上滚来滚去。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC07824.jpg"></p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC07834.jpg" alt="小脸黑黢黢的"></p>
+<p>湖边有一棵枯树。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC07851.jpg"></p>
+<p><span class="image-grid landscape"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC07841.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC07852.jpg"></span><br></span></p>
+<p>导游让我们 6 点回到游客中心集合返程回丽江市区，往回走，5 点多坐上景交车。</p>
+<p><span class="image-grid landscape"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC07862.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC07863.jpg"></span><br></span></p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC07865.jpg" alt="本地村咪"></p>
+<p>回程实在是困了在车上睡了一会儿。</p>
+<p>回到丽江市区已经 7 点多，天还没黑，不过也应该是这边的晚餐时间了。</p>
+<br><img loading="lazy" src="https://r2-assets.lynan.cn/livePhoto/--dK_wnP.jpg" alt=""><br>
+
+<p>晚餐在丽江国际购物中心楼上吃了一碗小锅米线，好吃。之前在盒马买过预制的小锅米线，味道和这个也有 8 分相似了。在吃饭的时候还有遇到一行来自台湾的游客。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/IMG_1466.jpg" alt="小锅米线"></p>
+<p>吃完米线我从地下通道去到了丽江古城的“大水车”。</p>
+<br><img loading="lazy" src="https://r2-assets.lynan.cn/livePhoto/05053-Q9NJXl.jpg" alt=""><br>
+
+<p>就一普通地标，没啥新奇的。</p>
+<p>今天这里空地搭了一个舞台，有歌曲表演。</p>
+<p>对夜市不感兴趣，回酒店入住休息了，明天还得早起坐车去玉龙雪山。</p>
+<h3 id="Day2-玉龙雪山"><a href="#Day2-玉龙雪山" class="headerlink" title="Day2 玉龙雪山"></a>Day2 玉龙雪山</h3><p>前一天在南门游客中心约了今天的玉龙雪山“日照金山拼车”团。5 点就起了，5 点半到司机指定的地方上车前往玉龙雪山。</p>
+<p>路上司机小嘴儿叭叭说跑一趟赚不了多少钱，现在淡季钱更少，然后又继续说日照金山很难得，一般在冬天，现在就不要想了。</p>
+<p>进山时会有工作人员上车检查进山票，临时购买也可以。到达停车场停好车以后，司机又开始卖葡萄糖口服液，40 元一支（我反正没买）。今早云挺厚，想看日照金山确实是不能了。到甘海子游客中心以后，司机把我们交给另一个“工作人员”，工作人员简单讲了一下注意事项然后带我们到了祭台，铺垫一会儿带到购买经幡的地方。经幡不是直接购买，工作人员让游客把手放到放经幡的台子上（这样的话很自然的游客拿了经幡需要去付钱），然后又让前排的游客往后排发放黄色经幡。我在人群中间，没有拿经幡。拿到经幡的人在房间另一侧付款。</p>
+<p>接下来工作人员带我们到祭台前，做进山前的祈祷。有东巴祭司敲鼓洒圣水（说是取自海拔 5000 米上的雪山融水，十分难得），被滴到了一滴。虽然我没有买经幡，但是也希望能获得好运🍀。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/IMG_1488_1.jpg" alt="祭坛"></p>
+<p>总之被硬控一小时，早餐都没吃😅。这个时候有一丢丢阳光透光云层照在云龙雪山上，雪山前有一些云彩，很美！司机让我们现在不要拍，说中午回来拍更好，总之我拍到了很好看的照片。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/IMG_1490.jpg" alt="有点像优胜美地"></p>
+<p>我的索道票是 8:00-8:29 的票，按照规则我可以在 9 点前检票，9:30 分前坐上索道。在游客中心排队坐大巴到蓝月谷索道站。</p>
+<p>到蓝月谷站，距离玉龙雪山很近了。抬头看雪山，顶峰被云层遮住了。</p>
+<p><span class="image-grid landscape"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC07866.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC07867.jpg"></span><br></span></p>
+<p>司机又在和我们说蓝月谷游览路程单程 4.8 公里，如果没买观光车需要走双程共 9.6 公里，没有几个小时走不下来。还说到达云杉坪下了索道以后要步行 3 公里，总之就是让我们买观光车票，共计 60 元。<mark>（别买，有钱的话可以买）</mark></p>
+<p>排队上云杉坪，上去以后买观光车的地方说路程是 2 公里，往里面走就会看到实际步行路程是 900 米。这个观光电瓶车完全是来搞笑的。</p>
+<p>上来以后云层变得更厚了，雪山高处更是完全被遮住。景点如其名是一个大草坪，围绕着杉树林。</p>
+<p><span class="image-grid landscape"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC07869.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC07873.jpg"></span><br></span></p>
+<p><span class="image-grid landscape"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC07876.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC07877.jpg"></span><br></span></p>
+<p>我环绕草坪走了一大圈，有一圈老栈道和一圈更小的新栈道，我走的是老栈道。</p>
+<p><span class="image-grid landscape"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC07878.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC07882.jpg"></span><br></span></p>
+<p>草坪里面很多新人拍婚纱照。（真的这辈子第一次到这么多人拍婚纱照的地方）</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC07880.jpg"></p>
+<p>这里还是有点冷的，鼻子不受控制一直流鼻涕。草坪里面很多小羊，地面现在开了很多黄色的小菊花，小羊一口一朵。</p>
+<p><span class="image-grid r64"><br><img loading="lazy" src="https://r2-assets.lynan.cn/livePhoto/a001_04250954_c015_lut-_Bhp21.jpg" alt=""><br><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC07902.jpg" alt="小花长这样"><br></span></p>
+<p>这里的森林蛮好看的，和在九寨沟看到的森林有点像，树干上有很多苔藓，但是到处都看得到拍婚纱留下的垃圾（没拍进照片里）。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC07903.jpg"></p>
+<p>这个时候草还不是很绿。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC07907.jpg"></p>
+<p>走了一圈坐索道下山。在半程俯瞰到蓝月谷的湖水就像宝石一样，这个时候有点阳光了，照在湖面上很美。在索道站 10 元买了 4 个小笼包垫垫肚子（不好吃）。</p>
+<p>吃完去坐观光车前往蓝月谷的湖边。蓝月谷的主要景点是从高处往下一级一级若干个湖泊组成。</p>
+<p><span class="image-grid r73"><br><img loading="lazy" src="https://r2-assets.lynan.cn/livePhoto/a001_04251049_c017_lut-4WRXek.jpg" alt=""><br><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC07927.jpg"><br></span></p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC07929.jpg" alt="溪水很清澈"></p>
+<p>瀑布，看着是人工的，瀑布后面是水泥，看起来假假的。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC07953.jpg"></p>
+<p>一棵枯树。这里的水有的看起来蓝蓝的，有的绿绿的，可能和水滴石穿的藻类&#x2F;沉积物反光有关吧。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/IMG_1499.jpg"></p>
+<p><span class="image-grid landscape"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC07931.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC07935.jpg"></span><br></span></p>
+<br><img loading="lazy" src="https://r2-assets.lynan.cn/livePhoto/a001_04251100_c021_lut-xqIj8u.jpg" alt=""><br>
+
+<p><span class="image-grid r73"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC07941.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC07938.jpg"></span><br></span></p>
+<p><span class="image-grid r37"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC07952.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC07950.jpg"></span><br></span></p>
+<p>有点九寨沟的感觉，水虽然很清澈，但是有一些藻类。</p>
+<br><img loading="lazy" src="https://r2-assets.lynan.cn/livePhoto/a001_04251100_c023_lut-N1dDBV.jpg" alt=""><br>
+
+<p>雪山上的云还在。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC07955.jpg"></p>
+<p>一只鸭子，好像在吃鱼。</p>
+<br><img loading="lazy" src="https://r2-assets.lynan.cn/livePhoto/a001_04251104_c026_lut-atfp9W.jpg" alt=""><br>
+
+<p>平静的湖面像镜子一般倒映着玉龙雪山。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC07958.jpg"></p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC07964.jpg"></p>
+<p>虹鳟鱼。这里好像是叫“雪山鱼”。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC07966.jpg"></p>
+<br><img loading="lazy" src="https://r2-assets.lynan.cn/livePhoto/a001_04251138_c031_lut-_stXIm.jpg" alt=""><br>
+
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC07973.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC07980.jpg"></span><br></span></p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC07979.jpg"></p>
+<p>蓝月谷游览结束，坐巴士回到甘海子游客中心。我报的这个“拼车团”有提供午餐，司机说这个餐食很一般，自行决定要不要吃。我没吃，去吃了 KFC。</p>
+<p>吃完在楼上早晨拍照的位置看了会儿雪山，前往停车场上车等待回丽江市区。</p>
+<p><span class="image-grid landscape"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC07982.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC07984.jpg"></span><br></span></p>
+<p>这张用 iPhone 拍的（因为我带的相机镜头最长只到 70 mm，比 iPhone 的 100 mm 短一点），很雄伟很震撼。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/IDG_20260425_132415_490.jpg"></p>
+<p>回市区约 1 小时吧，下车时气温挺高的。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC08006.jpg" alt="在玉缘桥上"></p>
+<p>下车去了黑龙潭公园，今天没什么人，公园里有标志性机位可以看到雪山和五孔桥同框。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC08022.jpg" alt="黑龙潭公园"></p>
+<p><span class="image-grid landscape"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC08012.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC08025.jpg"></span><br></span></p>
+<p>出来在门口的库迪买了一杯饮料，步行到酒店入住休息下。路过一家水果店，看起来像两父子在店里。我问老板释迦果多少钱一斤，老板说 25，我看这些释迦表皮都有点磕就没买，我又问老板蛇皮果多少钱一斤，老板说 15 块两个。我刚刚路过另一家水果店蛇皮果 10 块钱 3 个，我就和老板说刚刚一家店是 10 块 3 个，老板没好气的回复：那你怎么不在那家店买？我：🙄 这老板真不会做生意。</p>
+<p>回到酒店入住休息，今天的房间能看到雪山一角。这里位置很方便，门口可以走地下通道直接到古城内。晚餐不懂吃什么，也懒得出去了，点了个外卖吃了牛肝菌焖饭和拌丝瓜尖。都是没吃过的东西，牛肝菌焖饭很大一碗，吃不完。丝瓜尖里面有酱油，有点咸。总体不算雷，但也没有惊艳。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/IMG_1538.jpg"></p>
+<p>连着两晚没有睡够，手表已经提示3个异常了（心跳、血氧和睡眠时间）。明天也不打算去路程远的地方了，就在古城附近逛逛。</p>
+<h3 id="Day3-丽江古城"><a href="#Day3-丽江古城" class="headerlink" title="Day3 丽江古城"></a>Day3 丽江古城</h3><p>睡到自然醒，吃早餐。吃完还是不想动，在床上刷手机又给我刷困了。又睡了一个回笼觉。</p>
+<p>中午退房去了大水车，在这里有两个机位拍雪山挺不错的。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC08102.jpg"></p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC08105.jpg"></p>
+<p><span class="image-grid r73"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC08036.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC08040.jpg"></span><br></span></p>
+<p>步行去了大石桥。沿着河边有很多鲜花，清澈的溪水就躺在中间，很美。</p>
+<p><span class="image-grid landscape"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC08113.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC08115.jpg"></span><br></span></p>
+<br><img loading="lazy" src="https://r2-assets.lynan.cn/livePhoto/a001_04261422_c042_lut-IWo5dN.jpg" alt=""><br>
+
+<p><span class="image-grid landscape"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC08119.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC08120.jpg"></span><br></span></p>
+<br><img loading="lazy" src="https://r2-assets.lynan.cn/livePhoto/a001_04261420_c039_lut-CxorzJ.jpg" alt=""><br>
+
+<p>小溪，流水，音乐。</p>
+<br><img loading="lazy" src="https://r2-assets.lynan.cn/livePhoto/a001_04261421_c040_lut-pRmO2o.jpg" alt=""><br>
+
+<p><span class="image-grid landscape"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC08125.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC08129.jpg"></span><br></span></p>
+<p>大石桥有两个出片人在那凹了 10 分钟造型，我在旁边有点尴尬。</p>
+<p><span class="image-grid landscape"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC08126.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC08138.jpg"></span><br></span></p>
+<br><img loading="lazy" src="https://r2-assets.lynan.cn/livePhoto/a001_04261424_c043_lut-6Vm55U.jpg" alt=""><br>
+
+<br><img loading="lazy" src="https://r2-assets.lynan.cn/livePhoto/a001_04261436_c044-2_lut-l3vtp8.jpg" alt=""><br>
+
+<p>我往回走，到大水车这边的霸王茶姬买了一杯奶茶解解渴。</p>
+<p>我在小红书上看到有两个机位能拍到“雪山下的古城”，很吸引我，看了一下导航步行才 500 米，决定前往。</p>
+<p>路过<strong>文昌宫</strong>。</p>
+<p><span class="image-grid landscape"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC08052.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC08054.jpg"></span><br></span></p>
+<p><span class="image-grid r73"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC08055.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC08062.jpg"></span><br></span></p>
+<p>俯瞰丽江古城。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC08065.jpg"></p>
+<p>街景。</p>
+<p><span class="image-grid landscape"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC08077.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC08079.jpg"></span><br></span></p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC08067.jpg"></p>
+<p>第一个机位在“山咖咖”门口。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/DSC08074.jpg"></p>
+<p>第二个机位在“在山也”门口，这张是本文封面。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/IMG_1589.jpg"></p>
+<p>今天雪山顶部有一圈云，没有显露真容。这两个机位确实很好！</p>
+<p>我的返程飞机是 18:20 的航班，约了 3 点 40 分 顺风车预期提前两小时到达机场。在路上司机小哥问我要不要走高速，我觉得还是稳妥一些为妙选择走高速，另外付了 10 元高速费。</p>
+<p>到机场，值机安检很快，只排了几分钟。时间还早，吃了一碗黑骨鸡米粉，好吃，鲜鲜的。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/IMG_1590.jpg"></p>
+<p>起飞看到光影中的山，很美。特地选的左侧靠窗位置，想在离开时再看看空中视角的玉龙雪山，云太多了没看着。</p>
+<br><img loading="lazy" src="https://r2-assets.lynan.cn/livePhoto/img_1594-dMKGSS.jpg" alt=""><br>
+
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/IMG_1609.jpg" alt="达利园（划掉，丁达尔）效应"></p>
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/IMG_1619.jpg" alt="金沙江"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/IMG_1617.jpg"></span><br></span></p>
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/IMG_1644.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/lijiang-2026/sdr/IMG_1635.jpg"></span><br></span></p>
+<p>到上海啦，打了个顺风车回家，收拾收拾心情好好休息，明天上班了。</p>
+<h2 id="花费"><a href="#花费" class="headerlink" title="花费"></a>花费</h2><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>金额（元）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>机票</td>
+<td>春秋航空 <br> 上海 –&gt; 丽江 830 <br> 丽江 –&gt; 上海 1280</td>
+</tr>
+<tr>
+<td>酒店</td>
+<td>汉庭丽江古城七星街酒店 210 <br> 汉庭丽江古城大水车酒店 220</td>
+</tr>
+<tr>
+<td>交通</td>
+<td>滴滴顺风车 63 <br> 丽江交通 283 <br> 滴滴顺风车 66 <br></td>
+</tr>
+<tr>
+<td>门票</td>
+<td>玉龙雪山 100 <br> 索道 60 <br> 景交车 100 <br></td>
+</tr>
+<tr>
+<td>餐食</td>
+<td>约 200</td>
+</tr>
+<tr>
+<td>保险</td>
+<td>18</td>
+</tr>
+<tr>
+<td>合计</td>
+<td>约 3430</td>
+</tr>
+</tbody></table>
+<h2 id="感受"><a href="#感受" class="headerlink" title="感受"></a>感受</h2><ul>
+<li><p><strong>花草树木都修理得很干净</strong><br>街道都打理得很好很利落</p>
+</li>
+<li><p><strong>景交车是小坑</strong><br>明明没多远距离</p>
+</li>
+<li><p><strong>所谓的拼车体验不是很好</strong><br>还是自己打车或者是乘坐公共交通比较好，去年在大西北（新疆和甘肃）的小团体验都很好让我放松了警惕</p>
+</li>
+<li><p><strong>高反？</strong><br>没遇到</p>
+</li>
+<li><p><strong>被耍了的感觉</strong><br>虽然没有多少钱，但是有点影响游玩心情</p>
+</li>
+<li><p><strong>蓝月谷：九寨沟平替？</strong><br>我一直认为各种所谓的“平替”，都完全无法代替本尊。如果冲着“平替”而来那么一定会失望，但是如果不当成平替，去看它自己的特色，就会觉得还不错</p>
+</li>
+</ul>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>下一篇游记见👋</p>
+]]></description>
+    </item>
+    <item>
+      <title>关东旅行</title>
+      <link>https://lynan.cn/kanto-travel-journal-2026/</link>
+      <guid>https://lynan.cn/kanto-travel-journal-2026/</guid>
+      <pubDate>4 月 12 日，2026</pubDate>
+      <media:thumbnail url="https://r2-assets.lynan.cn/am/DSC07660.jpg"/>
+      <description><![CDATA[<h2 id="to-page-top" style="opacity: 0; height: 0; margin: 0;">前言</h2>
+
+<p>从 2023 年开始，到日本旅行好几次了，但是一直没有去到关东地区旅行，想看一眼富士山的模样，在元旦的时候就在计划樱花季来一趟。看了一下往年樱花季大概就是清明左右的时间，请 2 天假加上清明 3 天，也不算太匆忙。订下了机票，特地选了红眼航班，这样可以充分利用我往返当日的白天时间。</p>
+<p>本次旅行想要看两个景色：</p>
+<ol>
+<li>盛开的樱花 ✅</li>
+<li>带着雪顶的富士山 ✅</li>
+</ol>
+<h2 id="出发前"><a href="#出发前" class="headerlink" title="出发前"></a>出发前</h2><table>
+<thead>
+<tr>
+<th>事项</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>购买往返机票</td>
+<td>美团</td>
+</tr>
+<tr>
+<td>预定酒店</td>
+<td>美团&#x2F;携程</td>
+</tr>
+<tr>
+<td>购买旅行保险</td>
+<td>微保</td>
+</tr>
+<tr>
+<td>入境登记</td>
+<td><a href="https://www.vjw.digital.go.jp/">Visit Japan Web</a></td>
+</tr>
+<tr>
+<td>SIM 卡（eSIM）</td>
+<td>Klook</td>
+</tr>
+<tr>
+<td>少量现金（2 万円）</td>
+<td>购汇取现</td>
+</tr>
+</tbody></table>
+<h2 id="行程"><a href="#行程" class="headerlink" title="行程"></a>行程</h2><table>
+<thead>
+<tr>
+<th><div style="width: 80px;">日期</div></th>
+<th>行程(当地时间)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="#Day1-东京">2026&#x2F;04&#x2F;02<span class="break-on-mobile">星期四</span></a></td>
+<td><strong>上海</strong> -&gt; <strong>东京</strong> 神田川、宿河源、新宿御苑、河口湖</td>
+</tr>
+<tr>
+<td><a href="#Day2-富士山">2026&#x2F;04&#x2F;03<span class="break-on-mobile">星期五</span></a></td>
+<td><strong>富士山</strong> 河口湖、山中湖</td>
+</tr>
+<tr>
+<td><a href="#Day3-镰仓、东京">2026&#x2F;04&#x2F;04<span class="break-on-mobile">星期六</span></a></td>
+<td><strong>镰仓、东京</strong> 建长寺、千鸟渊夜樱</td>
+</tr>
+<tr>
+<td><a href="#Day4-东京">2026&#x2F;04&#x2F;05<span class="break-on-mobile">星期日</span></a></td>
+<td><strong>东京</strong> 御茶ノ水、浅草寺</td>
+</tr>
+<tr>
+<td><a href="#Day5-返程">2026&#x2F;04&#x2F;06<span class="break-on-mobile">星期一</span></a></td>
+<td><strong>关西机场</strong> -&gt; <strong>上海</strong> 返程</td>
+</tr>
+</tbody></table>
+<h2 id="日程"><a href="#日程" class="headerlink" title="日程"></a>日程</h2><h3 id="Day1-东京"><a href="#Day1-东京" class="headerlink" title="Day1 东京"></a>Day1 东京</h3><p>首日是凌晨 1:50 的飞机，我前一天晚上 11 点出头就到机场了。因为我没带行李箱，所以直接自助值机即可，免去了排长队的烦恼。这个时候已经没什么人，安检也很快，到 230 号登机口附近的椅子躺了一下，没睡着。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/IDG_20260401_231137_739.jpg"></p>
+<p>登机起飞，在飞机上还是没睡着。半夜也有餐食，终于有各式饮料可以选择了，要了一杯苹果汁，配着咖喱饭好吃。感慨一下，30 岁才坐上大飞机，吃还算不错的飞机餐，这已经是我坐过的最高级的航班。</p>
+<p>飞机上屏幕有一些交互功能，可以看电影也可以看飞机摄像头画面（但是半夜太黑了啥也看不着）。这个航司飞机全程有免费 WiFi，看视频不流畅但是看图文还 OK。在飞机上可以给手机充电，挺好。</p>
+<p>一直到差不多 5 点才眯了会儿。5 点 45 分降落羽田机场，6 点开始排队入关，好多人，差不多 45 分钟入境。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/IMG_0145.jpg"></p>
+<p>今天东京上午下雨，下午会放晴（这也是我下午就要前往富士山河口湖的重要因素）。</p>
+<h4 id="神田川"><a href="#神田川" class="headerlink" title="神田川"></a>神田川</h4><p>坐上电车到高田马场，去神田川。到神田川以后下着小雨，行走在雨中好浪漫。脑海里浮现出一些新海诚电影的画面，哇我终于到东京啦。</p>
+<p><span class="image-grid scroll"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/DSC07098.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/DSC07130.jpg"></span><br></span></p>
+<p>神田川上 <strong>户田平桥</strong> 到 <strong>面影桥</strong> 这一段河两边都种了不少樱花，我这个时候来正好赶上满开，有一部分因为吹风和下雨已经飘落到了水面上。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/am/Jietu20260412-103820_1.jpg"></p>
+<p><span class="image-grid landscape"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/DSC07089.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/DSC07112.jpg"></span><br></span></p>
+<p>也许是因为今天是工作日的缘故，在路上没有见到一个游客，享受着这份惬意。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/DSC07109.jpg"></p>
+<p>继续前往宿河原。</p>
+<h4 id="宿河原"><a href="#宿河原" class="headerlink" title="宿河原"></a>宿河原</h4><p>我坐电车到了宿河原站下车，然后想着樱花应该是种在河边，就往河边方向走了。穿过马路上到河堤的小路上，脑海里又浮现出了小新他们经常玩的地方也是这个样子。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/DSC07158.jpg"></p>
+<p>看远处河面上还有许多白鹭（应该是吧）。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/DSC07183.jpg"></p>
+<p>经过一个神社，几棵樱花树在鸟居旁显出一副很纯洁的画面。有几个少年骑着自行车来到这里，我想这就是现实中的“野比大雄”们吧。</p>
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/DSC07179.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/DSC07184.jpg"></span><br></span></p>
+<p>继续走走到一个路口，从桥面顺着小河往下看看到许多樱花，我才反应过来我的“目的地”应该是这里才对。从这个路口往下走沿着河岸的木步道都是在盛开的樱花之下，很明艳很仙。依旧没有看到什么游客。</p>
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/DSC07190.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/DSC07278.jpg"></span><br></span></p>
+<p>刚好一辆火车从樱花从中驶过。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/DSC07269.jpg"></p>
+<p>如果，樱花落下的速度是秒速五厘米，那么…</p>
+<br><img loading="lazy" src="https://r2-assets.lynan.cn/livePhoto/c0391-Hgo0Dp.jpg" alt=""><br>
+
+<p>从宿河原出来，下一站前往新宿御苑。</p>
+<h4 id="新宿御苑"><a href="#新宿御苑" class="headerlink" title="新宿御苑"></a>新宿御苑</h4><p>新海诚的电影《言叶之庭》在新宿御苑有不少取景处。新宿御苑里面有很多品种的樱花，不同品种的樱花开放时间先后不同，所以新宿御苑大约有长达一个月的赏花期。</p>
+<p>新宿御苑里的树木很高大。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/DSC07298.jpg" alt="NTT Docomo 代代木大厦（NTTドコモ代々木ビル）"></p>
+<p>日式庭园也很美。</p>
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/DSC07304.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/DSC07334.jpg"></span><br></span></p>
+<p>下雨了，暂避一下。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/DSC07358.jpg"></p>
+<p>一群飞鸟在空中飞着，太有氛围啦！</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/DSC07381.jpg"></p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/DSC07388.jpg"></p>
+<p>站在樱花树林中，头上是满开樱花，好像到了阿凡达的圣树下。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/DSC07389.jpg"></p>
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/DSC07393.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/DSC07354.jpg"></span><br></span></p>
+<p>里面有一片枫树林，等秋天的时候赏红叶很不错。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/DSC07356.jpg"></p>
+<p>从新宿御苑出来，天空逐渐放晴了。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/DSC07400.jpg"></p>
+<p>午餐在便利店解决了。下午到新宿站坐上了 14:37 到大月的 JR 列车。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/DSC07401.jpg"></p>
+<p>为什么只到大月呢，因为我今晚住东横INN河口湖大桥店，这家店提供富士山附近的几个点的免费接驳巴士，其中就包括大月站到酒店的往返巴士，非常方便，很棒！</p>
+<p>在到大月的JR列车上往外看，能看到很多乡村小镇的景色。在车上几度睡着，算补一补觉了。到达大月，接驳巴士还有一会儿才来，我在车站周边简单逛了一下。车站前有一棵樱花树，也满开了，微风吹动，好美。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/DSC07403.jpg"></p>
+<br><img loading="lazy" src="https://r2-assets.lynan.cn/livePhoto/img_0236-2-DjZIuq.jpg" alt=""><br>
+
+<br><img loading="lazy" src="https://r2-assets.lynan.cn/livePhoto/img_0234-2-WNRSix.jpg" alt=""><br>
+
+<p>4点半，坐上了东横的接驳巴士，上车时司机确认乘客信息，今天只有我一个人预约了这班车，有点出乎我的预料，我想着樱花季应该是满满的游客吧😄</p>
+<p>司机不会说英语，用翻译软件询问我是否可以顺路去加油，我说OK。差不多半小时车程到了河口湖，我望向窗外，见到了富士山露出的山腰（面被云挡住了）。</p>
+<h4 id="河口湖"><a href="#河口湖" class="headerlink" title="河口湖"></a>河口湖</h4><p>到达酒店，自助办理入住。我的房间在顶楼，但是不是面向富士山的那一栋楼，所以也没有办法从窗户直接看到富士山。入住后简单坐了一会儿，前往河口湖大桥（很近），那里有很好的观景位置。</p>
+<br><img loading="lazy" src="https://r2-assets.lynan.cn/livePhoto/img_0311-EWG8WN.jpg" alt=""><br>
+
+<p>路过一个罗森，这里也有很不错的拍照位置。走到桥边已经感觉到妖风大作。还好外套是防风的，但是头戴一个鸭舌帽属实不够保暖，还得把帽子扣到最紧，不然一阵风就会把帽子吹下桥了。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/DSC07416.jpg"></p>
+<p>桥不算很长，富士山雪顶处的云始终没有散开，我在犹豫是否要继续到对岸湖边等一等，毕竟有点冷，我带的羽绒背心也没穿在身上，想了想还是去了。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/DSC07444.jpg"></p>
+<p>在湖边等到天黑，云还在，今天就到这吧，实在是太冷了，回去洗洗睡了。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/DSC07439.jpg"></p>
+<p>便利店买点水。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/DSC07450.jpg"></p>
+<h3 id="Day2-富士山"><a href="#Day2-富士山" class="headerlink" title="Day2 富士山"></a>Day2 富士山</h3><p>一早，在酒店一楼吃早餐。我放眼望去，只看到米饭、咖喱、嫩嫩的酱酱的鸡蛋，还有小香肠，烤鸡肉，拿了一些差点给我吃呕了（都是滑滑的油油的食物），还好在咖啡机弄了一杯咖啡就着喝，不然实在吃不下去。早晨我还是喜欢吃面包配牛奶。</p>
+<p>今天天气无敌，正如天气预报那样，富士山满分能见度，随手一拍都好看。</p>
+<p>再次路过罗森，今天拍到了满意的照片。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/DSC07457.jpg"></p>
+<h4 id="河口湖逆富士"><a href="#河口湖逆富士" class="headerlink" title="河口湖逆富士"></a>河口湖逆富士</h4><p>继续到河口湖大桥，也拍到了很美的照片。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/DSC07462_2.jpg"></p>
+<p>到湖边，富士山倒影在水面上形成“逆富士”景色。</p>
+<blockquote>
+<p>逆富士是指在天气晴朗、无风的清晨，富士山倒映在平静的河口湖面上，形成上下对称、如镜面般清晰的“双重富士山”奇景。</p>
+</blockquote>
+<p><span class="image-grid rLeftWide"><br><img loading="lazy" src="https://r2-assets.lynan.cn/livePhoto/img_0702-e78OER.jpg" alt=""><br><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/IMG_0686.jpg"><br></span></p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/IMG_0713.jpg"></p>
+<p>河口湖好像也有白天鹅，不过我没看到，只看到黑鸭子（丑小鸭：嘎嘎嘎？）。</p>
+<p>沿着湖边继续走，遇见一棵满开的樱花。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/DSC07524.jpg"></p>
+<p>途经一个观景台。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/DSC07532.jpg" alt="河口湖大桥"></p>
+<h4 id="天上山公园"><a href="#天上山公园" class="headerlink" title="天上山公园"></a>天上山公园</h4><p>10点，到达天上山公园缆车站，前往山上一览更高视角的富士山。</p>
+<br><img loading="lazy" src="https://r2-assets.lynan.cn/livePhoto/img_0733-2-CalsKB.jpg" alt=""><br>
+
+<p>山上观景台一侧看富士山，另一侧可以俯瞰河口湖。晴朗的天气湖面也反射着天空的颜色。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/DSC07550.jpg"></p>
+<p>向远处望去，能看到<strong>南阿尔卑斯山脉</strong>。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/DSC07573.jpg"></p>
+<p>另一侧是富士山。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/DSC07540.jpg"></p>
+<p>这个视角看上去有一种 清冷感。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/DSC07564.jpg"></p>
+<p>坐缆车下山，步行前往河口湖车站准备前往山中湖。在车站旁无意中走到了网购罗森的马路对面。有很多年轻小情侣在罗森门口排队拍照。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/DSC07598.jpg"></p>
+<p>坐巴士前往山中湖，距离不算远，但是时间花了蛮久。</p>
+<h4 id="山中湖"><a href="#山中湖" class="headerlink" title="山中湖"></a>山中湖</h4><p>到达富士山山中湖巴士站。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/DSC07601.jpg"></p>
+<p>先去了<strong>长池亲水公园</strong>。这里的湖畔正对富士山，没有遮挡。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/DSC07620.jpg"></p>
+<p>拍了一些富士山照片我准备前往另一处景点——平野之滨。看了一下导航，最快的交通得回到富士山山中湖站坐往另一侧方向运行的巴士。于是乎我又开始了“健走”2公里，回去坐巴士。</p>
+<p>坐上巴士到达<strong>平野之滨</strong>，太阳已经升到比较高的高度了，顶光下的富士山显得没有那么清晰。在平野之滨简单逛了一下去到了观光案内所门口等公交回河口湖。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/DSC07655.jpg"></p>
+<br><img loading="lazy" src="https://r2-assets.lynan.cn/livePhoto/img_0796-vdndph-zH9O5G.jpg" alt=""><br>
+
+<p>回到河口湖，离出发去大月还有一个多小时，我又去了河口湖大桥附近转悠。这个时候天上有些云，更好看了。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/DSC07660.jpg"></p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/DSC07662.jpg" alt="河口湖大桥"></p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/IMG_0806.jpg"></p>
+<p>时间差不多了，回酒店大堂休息下，等车。</p>
+<p>到大月，离我要坐的车还有40分钟，在站前的小店吃了一碗拉面。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/IMG_0816.jpg"></p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/IMG_0819.jpg"></p>
+<br><img loading="lazy" src="https://r2-assets.lynan.cn/livePhoto/img_0822-2-0kEPxI.jpg" alt=""><br>
+
+<p>8点多到了新宿。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/IMG_0825.jpg"></p>
+<p>站前很多抽烟的人，地上也有很多烟头。</p>
+<p>这是街头艺人吗？唱得很不错呀！</p>
+<p><video controls controlsList="nodownload" src="https://r2-assets.lynan.cn/livePhoto/IMG_0828.MOV" style="aspect-ratio: 1920/1080" preload="metadata" poster="https://r2-assets.lynan.cn/livePhoto/img_0828-LuN2_h-thumbnail.jpg" playsinline></video></p>
+<p>到酒店办理完入住，去附近的 <strong>新宿中央公园</strong> 看看。</p>
+<p>路过东京市政厅，有几棵樱花树开得正好。</p>
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/IMG_0842.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/IMG_0847.jpg"></span><br></span></p>
+<p>今天周五，公园里很热闹，到处都是欢声笑语。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/IMG_0863.jpg"></p>
+<br><img loading="lazy" src="https://r2-assets.lynan.cn/livePhoto/img_0855-2-LNXX_b.jpg" alt=""><br>
+
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/IMG_0864.jpg"></p>
+<p>真是充实的一天呐！回酒店洗洗睡了。</p>
+<h3 id="Day3-镰仓、东京"><a href="#Day3-镰仓、东京" class="headerlink" title="Day3 镰仓、东京"></a>Day3 镰仓、东京</h3><p>昨晚睡得挺好。</p>
+<p>早起，洗漱吃早饭，退房。本来计划今天前往日光去看华严瀑布，但是看天气不太好日光下大雨不方便出行，转头南下去镰仓。</p>
+<p>坐JR前往镰仓。根据Google maps导航在大船站换乘巴士前往建长寺。</p>
+<p>出大船站在楼上能看见一尊很大的观音像。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/IMG_0872.jpg"></p>
+<p>这种吊着运行的列车好像还没坐过。下面这个巴士车的司机很年轻，感觉年纪比我还小，这时看到他从驾驶舱出来，拿了一块布，擦车轮咕噜（我内心：这么干净的吗？？？）。</p>
+<br><img loading="lazy" src="https://r2-assets.lynan.cn/livePhoto/img_0876-2-W2TWOl.jpg" alt=""><br>
+
+<p>上巴士的时候司机会问你要去哪里，他输入了金额后再刷卡。这里我听不懂司机大叔在说什么（后来反应过来他在问我是不是去建长寺 Ken-chō Ji），我就把我手机屏幕上的导航信息给他看了（站点名称是日文），顺利上了车。阿里嘎多匝一马斯。</p>
+<p>今天也是下雨天。</p>
+<h4 id="建长寺"><a href="#建长寺" class="headerlink" title="建长寺"></a>建长寺</h4><p>到达。一进门就看到一条樱花大道。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/DSC07716.jpg"></p>
+<br><img loading="lazy" src="https://r2-assets.lynan.cn/livePhoto/img_0878-2-jeNcjb.jpg" alt=""><br>
+
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/DSC07710.jpg"></p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/DSC07713.jpg"></p>
+<p>里面也有庭园。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/DSC07675.jpg"></p>
+<p>往后山走去看看。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/DSC07685.jpg"></p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/DSC07687.jpg"></p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/DSC07694.jpg"></p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/DSC07696.jpg"></p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/DSC07697.jpg"></p>
+<p>继续上山。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/DSC07701.jpg"></p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/DSC07705.jpg"></p>
+<p>山上有一个展望台，天气好的时候可以看见富士山。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/DSC07706.jpg" alt="今天看不见富士山"></p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/DSC07709.jpg" alt="眺望镰仓海边"></p>
+<p>下山。</p>
+<p>差不多到午饭时间了，去找点东西吃。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/DSC07719.jpg"></p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/DSC07720.jpg"></p>
+<p>一直走到小町通，雨更大了。这里有一个<strong>八幡宫</strong>，雨太大我就没去逛。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/DSC07735.jpg"></p>
+<br><img loading="lazy" src="https://r2-assets.lynan.cn/livePhoto/img_0887-2-bv8y_c.jpg" alt=""><br>
+
+<p>中午饭在镰仓车站前的 KFC 解决了。原本计划今天还要去江之岛，但是看现在的天气属实不适宜，留给下次吧。</p>
+<p>坐车去池袋。坐车的时候旁边有个人穿洞洞鞋，一只脚把鞋子脱了露在外面，差点把我臭晕 <span style="display: inline-block; width: 20px; height: 20px; background-image: url('https://r2-assets.lynan.cn/uPic/3zffxN_1700142351761.png'); background-size: cover;"></span></p>
+<p>今晚住池袋站附近的东横INN。到池袋以后在车站里面看到一家奶茶店还挺多人排队的（差不多有 10 个人），我也排队买了一杯，味道一般（不如国内的奶茶口味）。</p>
+<p>到酒店办理入住在房间里面休息了一会儿。</p>
+<p>这个天桥视角不错，火车迷会很喜欢这里吧！</p>
+<br><img loading="lazy" src="https://r2-assets.lynan.cn/livePhoto/img_0905-2-eOe4bV.jpg" alt=""><br>
+
+<p>晚餐吃了一碗一兰，还点了一个杏仁豆腐，之前没吃过，杏仁的味道吃起来感觉毒毒的。</p>
+<h4 id="千鸟渊夜樱"><a href="#千鸟渊夜樱" class="headerlink" title="千鸟渊夜樱"></a>千鸟渊夜樱</h4><p>坐地铁前往<strong>九段下</strong>站，出站就是赏樱步道。</p>
+<br><img loading="lazy" src="https://r2-assets.lynan.cn/livePhoto/img_0919-ae9_sn.jpg" alt=""><br>
+
+<p>河里本该会有游客划船，可能是今天下雨，暂停了。</p>
+<br><img loading="lazy" src="https://r2-assets.lynan.cn/livePhoto/img_0944-O07a5V.jpg" alt=""><br>
+
+<p>樱花树下有不同颜色的灯光投射到樱花上，有个颜色不好看（很阴间），有的颜色很美。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/IMG_0951.jpg"></p>
+<p><video controls controlsList="nodownload" src="https://r2-assets.lynan.cn/video/IMG_0932.MOV" style="aspect-ratio: 1920/1080" preload="metadata" poster="https://r2-assets.lynan.cn/video/img_0932-AcnG79-thumbnail.jpg" playsinline></video></p>
+<p>很美很梦幻。</p>
+<h3 id="Day4-东京"><a href="#Day4-东京" class="headerlink" title="Day4 东京"></a>Day4 东京</h3><p>本次旅行的主要目的地都已经去过了，今天没有特地安排什么景点行程，先睡到自然醒。池袋这家东横的早餐有面包，终于不用吃到呕了😁 滑滑的食物早晨真的吃不来。</p>
+<h4 id="御茶ノ水"><a href="#御茶ノ水" class="headerlink" title="御茶ノ水"></a>御茶ノ水</h4><p>这里是《铃芽之旅》电影里的一个场景取景地。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/IMG_1243.jpg"></p>
+<br><img loading="lazy" src="https://r2-assets.lynan.cn/livePhoto/img_1258-2-eXPyX4.jpg" alt=""><br>
+
+<h4 id="浅草寺"><a href="#浅草寺" class="headerlink" title="浅草寺"></a>浅草寺</h4><p>好多人啊！感觉类似京都的清水寺，到东京的游客都会来看一看。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/IMG_1262.jpg"></p>
+<p><span class="image-grid landscape"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/IMG_1270.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/IMG_1278.jpg"></span><br></span></p>
+<p>抽了一个凶😅。</p>
+<p>雷门对面有一个游客中心，上 8 楼可以俯瞰浅草寺，可以看晴空塔。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/IMG_1296.jpg"></p>
+<h4 id="晴空塔"><a href="#晴空塔" class="headerlink" title="晴空塔"></a>晴空塔</h4><p>去附近吃午饭，顺便拍一下晴空塔。</p>
+<p><span class="image-grid r64"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/IMG_1298.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/IMG_1306.jpg"></span><br></span></p>
+<h4 id="涩谷"><a href="#涩谷" class="headerlink" title="涩谷"></a>涩谷</h4><p>真是非常繁忙的十字路口呢！拍摄位置在 Shibuya Scramble Square 12楼（免费）。</p>
+<br><img loading="lazy" src="https://r2-assets.lynan.cn/livePhoto/img_1308-VJtVoH.jpg" alt=""><br>
+
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/IMG_1332.jpg"></p>
+<p>时间还早，但是没什么想去的地方了。到涩谷站楼上的星巴克休息了会儿。</p>
+<p>晚餐在品川站前吃了一顿烤肉。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/IMG_1334.jpg"></p>
+<p>晚上 9 点的飞机飞关西机场，今晚先睡一晚，明早出发回上海。当时买机票的时候是有 10 点从东京直飞上海的选项，但是我想着到上海都半夜了，我还得打车回家，到那个点我也休息不好了，不如先睡一晚再走，整好也能体验一下日本国内线航班。</p>
+<p>执飞飞机是熟悉的 A320。</p>
+<br><img loading="lazy" src="https://r2-assets.lynan.cn/livePhoto/img_1344-INQ9Z3.jpg" alt=""><br>
+
+<h3 id="Day5-返程"><a href="#Day5-返程" class="headerlink" title="Day5 返程"></a>Day5 返程</h3><p>起床洗漱，坐酒店的送机班车去关西机场（又省了 530 日元，嘿嘿），约 15 分钟就到 T1 了，很快。</p>
+<p>安检也挺快，时间还早，坐航站楼内的小火车到 11 号登机口附近的便利店买点东西吃。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/IMG_1345.jpg"></p>
+<p><span class="image-grid r64"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/IMG_1349.jpg" alt="好吃"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/kanto-2026/sdr/IMG_1347.jpg" alt="好喝"></span><br></span></p>
+<p>今天雾霾有点厉害，途径的地方都不是很能看清地面。回到上海，本次旅程结束～</p>
+<h2 id="花费"><a href="#花费" class="headerlink" title="花费"></a>花费</h2><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>金额（元）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>机票</td>
+<td>全日空航空 往返 2076</td>
+</tr>
+<tr>
+<td>酒店</td>
+<td>富士河口湖大桥东横INN 876 <br> 新宿华盛顿酒店 806 <br> 东横INN 东京池袋北口第2号店 680 <br> 泉佐野中心酒店 260</td>
+</tr>
+<tr>
+<td>交通</td>
+<td>滴滴顺风车 60 <br> 关东地区交通 538 <br> 滴滴顺风车 64 <br></td>
+</tr>
+<tr>
+<td>餐食 + 购物</td>
+<td>约 1283</td>
+</tr>
+<tr>
+<td>eSIM</td>
+<td>24</td>
+</tr>
+<tr>
+<td>保险</td>
+<td>45</td>
+</tr>
+<tr>
+<td>合计</td>
+<td>约 6712</td>
+</tr>
+</tbody></table>
+<h2 id="感受"><a href="#感受" class="headerlink" title="感受"></a>感受</h2><ul>
+<li><p><strong>赏樱花</strong></p>
+<p>樱花的赏花期实在是短，春季雨水多更是缩短了这个时间。它最美丽的时刻是盛开但见花不见叶，我来的时候已经有些许新芽，但是依然是超级美丽。</p>
+</li>
+<li><p><strong>大飞机</strong></p>
+<p>确实比小飞机更稳。第一次在飞机上用 Wi-Fi，感觉很好。全日空的餐食也挺好吃。</p>
+</li>
+<li><p><strong>河口湖</strong></p>
+<p>这里看富士山的视角很不错，富士山呈现比较对称的锥形。富士山四周很多地方都能看，但是景色大致都不如河口湖（比如能看到山腰的火山口所以整体形状不完美或是有遮挡）。交通也很方便，缺点是公交差不多半小时一班的样子。</p>
+<p>日本都市外非常适合自驾（如果条件允许）。关注的一个视频创作者 <a href="https://www.youtube.com/@laosong_channel">老宋CHANNEL</a> 经常到日本各种小地方旅行，视频风格也非常喜欢。</p>
+</li>
+<li><p><strong>AI 翻车</strong></p>
+<p>我本次旅行有使用微软的 Copilot App 进行一些查询，有时它给的答案不正确。</p>
+<p>比如我在池袋站的时候，我问它星巴克在几楼，它说 1 楼和 2 楼，实际上是在 3 楼。</p>
+<p>再比如我问它镰仓是否会下雨（我看天气预报大概是下雨的天气），然后它用信誓旦旦的语气告诉我放心去，绝对不会下雨，然后中午差点被淋成落汤鸡（我的伞比较小，赶紧到街边躲雨）。我被气笑了（是真的笑了，人无语的时候真的会笑出声）。</p>
+</li>
+<li><p><strong>大都市</strong></p>
+<p>东京真的是个大都市。在上海生活好几年了，感觉上海已经是个大都市的模样。去过大阪感觉也就那样，但是到了东京以后有一种刘姥姥进大观园的感觉。东京在城建、绿化、交通上都很好。</p>
+</li>
+<li><p><strong>好潮</strong></p>
+<p>有点像《天气之子》电影里面那样，最近下雨，空气也是湿度很高，春天回暖，感觉身上一点都不干爽，有点不喜欢。</p>
+</li>
+<li><p><strong>迷路</strong></p>
+<p>在 <strong>新宿站</strong> 和 <strong>池袋站</strong> 都差点晃晕。<br><small>新宿站真不愧是亚洲第一大车站，甚至是“全世界最繁忙的车站”，日均使用人数 300 多万。</small></p>
+</li>
+<li><p><strong>大陆游客</strong></p>
+<p>明显少了很多，和去年年底去关西的情况差不多，在街上&#x2F;路上&#x2F;景区几乎没怎么听到大陆口音的普通话。</p>
+</li>
+<li><p><strong>iPhone 17</strong></p>
+<p>这代的 iPhone 散热改进确实是十分明显。充电、拍照时的发热情况好了很多，续航也可以踏实地用一整天了。</p>
+</li>
+<li><p><strong>物价</strong></p>
+<p>酒店比关西地区的贵很多，其他的感觉没有什么差别。</p>
+</li>
+<li><p><strong>小遗憾</strong></p>
+<p>没有去高处看东京夜景，我想下次还会有机会的，如果一次旅行完全不留遗憾，那么大概很长一段时间内不会再去这个地方了。</p>
+</li>
+</ul>
+<h2 id="Q-A"><a href="#Q-A" class="headerlink" title="Q&amp;A"></a>Q&amp;A</h2><ul>
+<li><p><strong>交通 PASS</strong></p>
+<p>现在的 PASS 涨价了，如果不是特种兵行程且都是去比较远的地方，无法回本，不划算。</p>
+</li>
+</ul>
+<h2 id="一些链接"><a href="#一些链接" class="headerlink" title="一些链接"></a>一些链接</h2><ul>
+<li>富士山能见度预报 <a href="https://fuji-san.info/zh-cn/index.html">https://fuji-san.info/zh-cn/index.html</a></li>
+<li>火车班次查询 <a href="https://japantravel.navitime.com/zh-cn/area/jp/depArrTimeList">https://japantravel.navitime.com/zh-cn/area/jp/depArrTimeList</a></li>
+<li>东横INN 接驳巴士预定 <a href="https://reserve.toyoko-inn-bus.com/">https://reserve.toyoko-inn-bus.com/</a></li>
+</ul>
+<h2 id="彩蛋"><a href="#彩蛋" class="headerlink" title="彩蛋"></a>彩蛋</h2><p>我的博客主题 <a href="https://github.com/LynanBreeze/hexo-theme-linen">hexo-theme-linen</a> 终于开源啦！</p>
+<a href="https://github.com/LynanBreeze/hexo-theme-linen" class="github-link">
+  <img loading="lazy" class="preview-img" no-lazy no-link src="https://opengraph.githubassets.com/b1330d2c1ce09a9be1c10994129f537498cf40c686e5df762a58b187eea59e11/LynanBreeze/hexo-theme-linen" style="aspect-ratio: 1200/600;">
+  <span class="title">LynanBreeze/hexo-theme-linen: A clean Hexo theme.</span>
+</a>
+
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>感谢你读到这里，希望你能收到一点好心情，我们下一篇游记再见吧👋！</p>
+<script src="/js/replace-emoji.js"></script>
+]]></description>
+    </item>
+    <item>
+      <title>澳门旅行(mini)</title>
+      <link>https://lynan.cn/a-mini-trip-in-macau/</link>
+      <guid>https://lynan.cn/a-mini-trip-in-macau/</guid>
+      <pubDate>3 月 20 日，2026</pubDate>
+      <media:thumbnail url="https://r2-assets.lynan.cn/am/DSC07006.jpg"/>
+      <description><![CDATA[<h2 id="to-page-top" style="opacity: 0; height: 0; margin: 0;">前言</h2>
+
+<p>2023 年就办了港澳通行证，但是一次也没去过，随证一起办理的港澳签注一直放到了过期。最近有便宜机票，决定来个周末 mini 旅行。</p>
+<p>周五下班回家，在哈啰上约了第二天一早的顺风车去机场，第二天大早出了意料之外的情况，车主爽约了，前一天和我打电话说推迟 20 分钟来接我，到点没看到车主出发，平台和电话都联系不上。还好我起得早，多留了一些时间，重新打车完全来得及，顺利到达机场。</p>
+<p>到机场值机时工作人员问我是不是用护照买的票，我回忆了一下确实是的。她说到旁边转角柜台修改一下乘客信息为通行证即可，5 分钟解决了“危机”。还好去年飞了好多次升级了金卡，免去了排队顺利值上机了。</p>
+<p>本次旅行主要目的：</p>
+<ol>
+<li>购买一台 iPhone ✅</li>
+<li>吃澳门小吃，特别是葡挞 ✅</li>
+</ol>
+<p>澳门特别行政区由澳门半岛和氹（dàng）仔、路环二岛以及路氹城（路氹填海区）组成，有400多年的中西文化交流历史，形成了“以中为主，中葡结合”的多元化色彩的共融文化， 并存在有不少中西合璧的景点和文物古迹。</p>
+<h2 id="周六"><a href="#周六" class="headerlink" title="周六"></a>周六</h2><p>感觉在飞机上往下看总是灰蒙蒙的。</p>
+<p><span class="image-grid landscape"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/macau-2026/sdr/IMG_3611.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/macau-2026/sdr/IMG_3619.jpg" alt="俯瞰香港"></span><br></span></p>
+<p>老实说香港看起来比上海的上空更壮观，有山有海。</p>
+<p><span class="image-grid r64"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/macau-2026/sdr/IMG_3621.jpg" alt="深圳湾公路大桥"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/macau-2026/sdr/IMG_3624.jpg" alt="港珠澳大桥"></span><br></span></p>
+<p>11 点多抵达澳门国际机场，丝滑入关，到机场旁的巴士站，坐上了发财车前往澳门银河。</p>
+<p>路程很短，不过几公里，10 多分钟就到了。下车点在“水晶大堂”（可能是因为这个大堂里面有特别夸张的水晶吊灯吧），进入以后在室内导航基本失灵，在里面转了一会儿才找到 Apple 直营店的位置。</p>
+<p>问了一下天才说现在没货，下午可能会补货，可以下午再来看看。</p>
+<p>现在是午饭时间，还是先解决一下肚子的危机。中午在<strong>翠华餐厅</strong>吃了一个牛肚捞面+奶茶。牛肚很大片很好吃，面条默认是方便面也好吃（菜单上写着即食面，我没想到就是方便面啊😂）。奶茶的茶味太重了，报喝。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/macau-2026/sdr/IMG_3634.jpg"></p>
+<h3 id="半岛闲逛"><a href="#半岛闲逛" class="headerlink" title="半岛闲逛"></a>半岛闲逛</h3><p>从澳门银河水晶大堂门口坐发财车前往<strong>星际酒店</strong>。</p>
+<p>下车就看到香港影视剧里风格的街道。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/macau-2026/sdr/DSC06945.jpg"></p>
+<p>附近正好有一家中国电信澳门，过去看看有没有 iPhone 现货。还真让我买到了，嘿嘿。店员说刚好还有 1 台（白色 512G），询问了下是否可以分开成两笔支付，这样的话我可以使用两张优惠券，得到肯定的答复，愉快地完成了购买，还送了一个DIY手机壳，直接在店里打印即可。</p>
+<p>买完手机准备前往半岛“最知名”的景点–大三巴牌坊。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/macau-2026/sdr/DSC06947.jpg" alt="东方拱门"></p>
+<p>过完天桥上楼梯旁是<strong>松山市政公园</strong>，有灯塔、炮台和瞭望台，上去看看。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/macau-2026/sdr/DSC06949.jpg"></p>
+<p><span class="image-grid landscape"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/macau-2026/sdr/DSC06956.jpg" alt="东望洋灯塔"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/macau-2026/sdr/DSC06961.jpg"></span><br></span></p>
+<p>天气挺热，外套脱掉只穿短袖完全合适。</p>
+<p>继续步行前往大三巴，还剩 900 米左右。第二天一早才发现今晚的酒店就在旁边。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/macau-2026/sdr/DSC06963.jpg" alt="华士古达嘉马花园"></p>
+<p><span class="image-grid r37"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/macau-2026/sdr/DSC06965.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/macau-2026/sdr/DSC06966.jpg"></span><br></span></p>
+<p>喜欢这个阳光和树影。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/macau-2026/sdr/DSC06967.jpg"></p>
+<p>到大三巴了，好多人啊！</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/macau-2026/sdr/DSC06994.jpg"></p>
+<blockquote>
+<p>大三巴牌坊（葡萄牙语：Ruínas de São Paulo）是澳门圣安多尼堂区的一座17世纪天主教建筑群的遗迹，包括最初的圣保禄学院和圣保禄教堂（Igreja de São Paulo），又称天主之母教堂（Mater Dei），这是一座17世纪的葡萄牙教堂，主保圣人为圣保禄，亦是澳门的标志性建筑物之一。教堂正面前壁的遗址，属于教堂遗址（大三巴牌坊、前地及石阶）的组成部分之一。“大三巴”一名为华人对圣保禄学院及教堂的称呼，出自圣保禄的葡萄牙文“São Paulo”的汉语译音[1][2]。台风名称三巴来源于此，在台风珍珠造成严重灾情后三巴通过入选取代之。</p>
+</blockquote>
+<p>大三巴旁有电梯可以上到公园顶部，里面是澳门博物馆，门票 15 澳门元（我没进去）。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/macau-2026/sdr/DSC06980.jpg"></p>
+<p>顶部平台可以眺望新葡京酒店。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/macau-2026/sdr/DSC06984.jpg"></p>
+<p>我觉得造型很像这个：</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/am/image.jpg" alt="妖魔鬼怪快离开，妖魔鬼怪快离开，妖魔鬼怪快离开"></p>
+<p>一位街头艺人正在唱张震岳的歌。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/macau-2026/sdr/DSC06988.jpg"></p>
+<p>从大三巴下面的小巷子走过。前面一段人超多，全是游客。继续走就还好了。</p>
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/macau-2026/sdr/DSC06995.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/macau-2026/sdr/DSC07002.jpg"></span><br></span></p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/macau-2026/sdr/DSC07004.jpg" alt="玫瑰圣母堂"></p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/macau-2026/sdr/DSC07006.jpg" alt="议事亭前地"></p>
+<p>在 unsplash 上看到这张照片-&gt; <small><a href="https://unsplash.com/photos/a-group-of-people-walking-down-a-street-next-to-tall-buildings-8GIsOVL_rlY" target="_blank">https://unsplash.com/photos/a-group-of-people-walking-down-a-street-next-to-tall-buildings-8GIsOVL_rlY</a></small>，翻看自己的照片时才发现我也走过了这个街道。</p>
+<p><span class="image-grid landscape"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/macau-2026/sdr/DSC07010.jpg" alt="市政署大楼"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/macau-2026/sdr/DSC07009.jpg" alt="仁慈堂大楼"></span><br></span></p>
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/macau-2026/sdr/DSC07020.jpg" alt="新葡京酒店"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/macau-2026/sdr/DSC07028.jpg" alt="葡京娱乐场"></span><br></span></p>
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/macau-2026/sdr/DSC07019.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/macau-2026/sdr/DSC07029.jpg"></span><br></span></p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/macau-2026/sdr/DSC07031.jpg" alt="南湾湖"></p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/macau-2026/sdr/DSC07032.jpg" alt="澳门旅游塔"></p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/macau-2026/sdr/DSC07036.jpg" alt="永利娱乐场"></p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/macau-2026/sdr/DSC07038.jpg" alt="西湾大桥"></p>
+<p>吃了一份荣记牛杂，小份 50 澳门元，很好吃。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/macau-2026/sdr/DSC07043.jpg" alt="荣记牛杂"></p>
+<p>吃完去买了荟真集奶茶喝，好喝。</p>
+<p>然后到星际酒店门口做发财车到银河，步行前往巴黎人去看铁塔。</p>
+<h3 id="巴黎人夜景"><a href="#巴黎人夜景" class="headerlink" title="巴黎人夜景"></a>巴黎人夜景</h3><p>路过，不知道什么娱乐场。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/macau-2026/sdr/DSC07056.jpg"></p>
+<p>又路过一家不认识的娱乐场，不关心这个。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/macau-2026/sdr/DSC07059.jpg"></p>
+<p>到了，四舍五入是不是我也看过巴黎埃菲尔铁塔了😊，不知道原版有多高呢🤔（后来查了下，原版 330 米，澳门这座是 162 米）</p>
+<p><span class="image-grid r37"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/macau-2026/sdr/DSC07060.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/macau-2026/sdr/DSC07063.jpg"></span><br></span></p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/macau-2026/sdr/DSC07064.jpg"></p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/macau-2026/sdr/DSC07069.jpg"></p>
+<p>看完铁塔也懒得再逛了，坐公交回酒店休息。</p>
+<p>巷子很窄，但大型公交车依然开得很稳。人行横道不多，穿马路需要过天桥。</p>
+<br><img loading="lazy" src="https://r2-assets.lynan.cn/livePhoto/img_3658-Y_2Y_L.jpg" alt=""><br>
+
+<h2 id="周日"><a href="#周日" class="headerlink" title="周日"></a>周日</h2><p>今天相机都收在包里没拿出来，随便逛逛，不追求“出片”了。早晨起床，退房，坐公交前往官也街。</p>
+<h3 id="官也街"><a href="#官也街" class="headerlink" title="官也街"></a>官也街</h3><p>入口有一棵非常漂亮的大树，旁边是一个小广场。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/macau-2026/sdr/IMG_0011.jpg"></p>
+<p><span class="image-grid r46"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/macau-2026/sdr/IMG_0012.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/macau-2026/sdr/IMG_0013.jpg"></span><br></span></p>
+<p>我来得比较早，大部分店铺都还没开门。</p>
+<p><span class="image-grid landscape"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/macau-2026/sdr/IMG_0016.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/macau-2026/sdr/IMG_0015.jpg"></span><br></span></p>
+<p>官也街的安德鲁饼店早上 9 点开门营业，买了蛋挞、巧克力饼干，奶茶，非常好吃。</p>
+<h3 id="湿地公园"><a href="#湿地公园" class="headerlink" title="湿地公园"></a>湿地公园</h3><p><img loading="lazy" src="https://r2-assets.lynan.cn/post/macau-2026/sdr/IMG_0043.jpg"></p>
+<p>一只白鹭。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/macau-2026/sdr/IMG_0038.jpg"></p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/post/macau-2026/sdr/IMG_0017_1.jpg"></p>
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/macau-2026/sdr/IMG_0019.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/macau-2026/sdr/IMG_0020.jpg"></span><br></span></p>
+<p>一只快乐翻滚的小猫。</p>
+<br><img loading="lazy" src="https://r2-assets.lynan.cn/am/IMG_0023.jpg" alt=""><br>
+
+<h3 id="前往机场"><a href="#前往机场" class="headerlink" title="前往机场"></a>前往机场</h3><p>官也街出来到银河亚洲美食街买了一杯内地菜单没有的喜茶饮品。</p>
+<p><span class="image-grid landscape"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/macau-2026/sdr/IMG_0051.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/macau-2026/sdr/IMG_0050.jpg" alt="水晶大堂的水晶灯"></span><br></span></p>
+<p>水晶大堂出门左转就是轻轨车站-排角站。</p>
+<p><span class="image-grid landscape"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/macau-2026/sdr/IMG_0049.jpg"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/macau-2026/sdr/IMG_0053.jpg"></span><br></span></p>
+<p>排角 → 机场：15 分钟，车票 8 澳门元，可用微信&#x2F;支付宝在窗口购买。</p>
+<p><span class="image-grid r46"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/macau-2026/sdr/IMG_0056.jpg" alt="香港机场"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/macau-2026/sdr/IMG_0057.jpg"></span><br></span></p>
+<p>马上降落了。</p>
+<p><span class="image-grid"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/macau-2026/sdr/IMG_0065.jpg" alt="长江大桥"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/macau-2026/sdr/IMG_0064.jpg" alt="南通"></span><br></span></p>
+<p>打了个顺风车回家，美美结束快闪一日游。</p>
+<h2 id="花费"><a href="#花费" class="headerlink" title="花费"></a>花费</h2><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>金额（元）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>机票</td>
+<td>春秋航空 往 550 + 返 783</td>
+</tr>
+<tr>
+<td>酒店</td>
+<td>澳门皇都酒店 593</td>
+</tr>
+<tr>
+<td>交通</td>
+<td>顺风车 60 <br> 公交 10 <br> 轻轨 6 <br> 顺风车 60 <br></td>
+</tr>
+<tr>
+<td>餐食</td>
+<td>约 270</td>
+</tr>
+<tr>
+<td>合计</td>
+<td>约 2332</td>
+</tr>
+</tbody></table>
+<h2 id="感受"><a href="#感受" class="headerlink" title="感受"></a>感受</h2><ul>
+<li><p><strong>花草树木都修理得很干净</strong><br>街道都打理得很好很利落</p>
+</li>
+<li><p><strong>建筑外墙玻璃也很干净</strong><br>干净到反光</p>
+</li>
+<li><p><strong>出行便利</strong><br>免费的发财车、公交巴士、轻轨等足够去到澳门的大部分地方。厕所也很容易找，休息的座椅也很多。</p>
+</li>
+</ul>
+<h2 id="小-Tips"><a href="#小-Tips" class="headerlink" title="小 Tips"></a>小 Tips</h2><ul>
+<li>巴士支持：澳门通 &#x2F; 银联闪付 &#x2F; 微信乘车码</li>
+<li>酒店接驳车免费、不需房卡</li>
+<li>路氹区域步行非常方便</li>
+</ul>
+<h3 id="交通方式"><a href="#交通方式" class="headerlink" title="交通方式"></a>交通方式</h3><ul>
+<li><strong>发财车</strong><br><small>免费，在各大酒店-机场-关口之间运行，需要排队，班次间隔约 10 - 15 分钟。</small></li>
+<li><strong>公交巴士</strong><br><small>6 澳门元&#x2F;次，约合人民币 5 元。可以用高德App寻找巴士路线。</small></li>
+<li><strong>轻轨列车</strong><br><small>轨道在马路上方，车站也是。有点像厦门的 BRT。</small><br><img loading="lazy" src="https://r2-assets.lynan.cn/am/Jietu20260316-213352.jpg"><br><small>图片来源：<a href="https://www.mlm.com.mo/tc/route.html">https://www.mlm.com.mo/tc/route.html</a></small></li>
+</ul>
+<h3 id="购买-iPhone"><a href="#购买-iPhone" class="headerlink" title="购买 iPhone"></a>购买 iPhone</h3><p>澳门的 iPhone 是免税价，比内地便宜一些。机器是港版机器，除 iPhone Air 是纯 eSIM 其它款都是单实体 SIM + 1 eSIM 芯片（可添加多张 eSIM 卡）。</p>
+<p>如果使用招商银行信用卡可以在掌上生活App领取汇率补贴优惠券更划算。</p>
+<p>我所购买的 iPhone 17 Pro Max 512 GB 售价 12399 澳门元（约 10615 元人民币）， 实付人民币 10067.7 元：</p>
+<table>
+<thead>
+<tr>
+<th>说明</th>
+<th>费用（元）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>第一笔 9500 澳门元</td>
+<td>8132.95</td>
+</tr>
+<tr>
+<td>第二笔 2899 澳门元</td>
+<td>2481.83</td>
+</tr>
+<tr>
+<td>优惠券 <small>满 8000 - 200</small></td>
+<td>-200</td>
+</tr>
+<tr>
+<td>优惠券 <small>满 2000 - 60</small></td>
+<td>-60</td>
+</tr>
+<tr>
+<td>Apple Pay 返现 1%<small>（单笔封顶50元）</small></td>
+<td>-50</td>
+</tr>
+<tr>
+<td>Apple Pay 返现 1%</td>
+<td>-24.82</td>
+</tr>
+<tr>
+<td>信用卡返现 1%</td>
+<td>-106.13</td>
+</tr>
+<tr>
+<td>港澳刷卡返现 1%</td>
+<td>-106.13</td>
+</tr>
+<tr>
+<td><b style="font-family: AvenirNext-Bold">合计</b></td>
+<td><b style="font-family: AvenirNext-Bold">10067.7</b></td>
+</tr>
+</tbody></table>
+<p>澳门有两家 Apple 直营店，它们都不支持线上下单，只能线下购买。分别是：</p>
+<details open>
+<summary>Apple 澳门银河 Galaxy Macau</b></summary>
+
+<p><a href="https://www.apple.com/mo/retail/galaxymacau/">澳門, 澳門銀河</a><br>路氹城澳門銀河™時尚匯<br><a href="tel:87919000">87919000</a></p>
+</details>
+
+<details open>
+<summary>Apple 路氹金光大道 Cotai Strip</b></summary>
+
+<p><a href="https://www.apple.com/mo/retail/cotaistrip/">澳門, 路氹金光大道</a><br>路氹城倫敦人購物中心<br><a href="tel:87917000">87917000</a></p>
+</details>
+
+<p>还可前往 中国电信澳门 门店选购。</p>
+<script src="/js/replace-emoji.js"></script>
+]]></description>
+    </item>
+    <item>
+      <title>自定义的显示器休眠模式</title>
+      <link>https://lynan.cn/a-custom-monitor-rest-mode/</link>
+      <guid>https://lynan.cn/a-custom-monitor-rest-mode/</guid>
+      <pubDate>1 月 27 日，2026</pubDate>
+      <media:thumbnail url="https://r2-assets.lynan.cn/am/ayush-kumar-HfooQORazN4-unsplash.jpg"/>
+      <description><![CDATA[<p>去年购买了新的 Mac mini 和 红米 G Pro 27U 显示器。</p>
+<p>这款显示器还算不错，2000 元的价格在各方面都表现良好，对我来说有两个小不足：</p>
+<ol>
+<li>唤醒有点慢，通过键盘唤醒约需 5 s</li>
+<li>休眠以后无法使用“小爱同学”语音指令</li>
+</ol>
+<p>研究了一下显示器的设置，没有保持待机不休眠的地方，只能自己动手了。</p>
+<p><strong>基本思路</strong>：这是一款 miniLED 显示器，在 Mac 系统开启 HDR 模式时，可以通过 Mac 系统调节显示器亮度（SDR 模式不可，只能通过显示器自身调整亮度）。miniLED 的分区控光特性决定了当亮度设置为 0 时，整块面板都不发光。<br>那么我需要做的就是在我不使用电脑时，把亮度设置为 0。如此的话显示器面板关闭（节能），但是系统还在运行，可以随时响应小爱同学指令。</p>
+<h2 id="前提条件"><a href="#前提条件" class="headerlink" title="前提条件"></a>前提条件</h2><ol>
+<li>miniLED 显示器，且已在 Mac OS - 设置 - 显示 - HDR <strong>开启</strong></li>
+<li>One Switch - Keep Awake</li>
+<li><a href="https://www.hammerspoon.org/">Hammerspoon 软件</a></li>
+</ol>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><h3 id="1-安装-Hammerspoon"><a href="#1-安装-Hammerspoon" class="headerlink" title="1. 安装 Hammerspoon"></a>1. 安装 Hammerspoon</h3><ol>
+<li>去<a href="https://www.hammerspoon.org/">官网</a>下载安装 Hammerspoon</li>
+<li>打开后，在菜单栏点 Hammerspoon → Open Config</li>
+<li>会打开 <code>~/.hammerspoon/init.lua</code></li>
+</ol>
+<p>也可以直接用 VS Code 等编辑器打开 <code>~/.hammerspoon/init.lua</code></p>
+<h3 id="2-配置-init-lua"><a href="#2-配置-init-lua" class="headerlink" title="2. 配置 init.lua"></a>2. 配置 <code>init.lua</code></h3><p>把下面的代码贴进 <code>init.lua</code></p>
+<pre><code class="language-lua">-- 屏保渐暗模式：锁定屏幕/进入屏保后，经过设定延迟开始逐渐降低亮度至 0
+-- 退出屏保/解锁屏幕（例如按键、移动鼠标唤醒）后恢复原亮度
+
+local brightness = require(&quot;hs.brightness&quot;)
+local caffeinate = require(&quot;hs.caffeinate&quot;)
+local timer = require(&quot;hs.timer&quot;)
+local eventtap = require(&quot;hs.eventtap&quot;)
+local host = require(&quot;hs.host&quot;)
+local distributednotifications = require(&quot;hs.distributednotifications&quot;)
+local pathwatcher = require(&quot;hs.pathwatcher&quot;)
+
+-- 日志函数
+local function logToFile(msg)
+    local f = io.open(os.getenv(&quot;HOME&quot;) .. &quot;/.hammerspoon/dim_debug.log&quot;, &quot;a&quot;)
+    if f then
+        f:write(os.date(&quot;%Y-%m-%d %H:%M:%S&quot;) .. &quot; - &quot; .. msg .. &quot;\n&quot;)
+        f:close()
+    end
+end
+logToFile(&quot;------ Init lua loaded / Config reloaded ------&quot;)
+
+-- 允许 CLI 工具安装
+hs.ipc.cliInstall()
+
+-- 自动重载配置
+local function reloadConfig(files)
+    local doReload = false
+    for _,file in ipairs(files) do
+        if file:sub(-4) == &quot;.lua&quot; then
+            doReload = true
+        end
+    end
+    if doReload then
+        logToFile(&quot;Auto-reloading config due to file change...&quot;)
+        hs.reload()
+    end
+end
+-- 注意：必须将 watcher 对象存为全局变量，否则会被 Lua 垃圾回收机制 (GC) 回收，导致监听失效！
+configWatcher = pathwatcher.new(os.getenv(&quot;HOME&quot;) .. &quot;/.hammerspoon/&quot;, reloadConfig):start()
+
+-- 配置参数
+local delayBeforeDim = 0 * 60      -- 进入屏保后等待开始降亮度的延迟时间（秒）
+local dimDuration    = 5     -- 从当前亮度降到 0 的总时长（秒）
+local steps          = 2          -- 分多少步降完（越大越平滑）
+local originalBrightness = nil
+local dimTimer = nil
+local delayTimer = nil
+local idleTimer = nil
+local lastIdleTime = nil
+local lastLockTime = 0
+local isLocked = false
+
+-- 不同 Hammerspoon 版本可用的唤醒屏幕 API 不一样；没有就跳过，避免 timer callback 中断
+local function wakeDisplayIfAvailable()
+    if caffeinate.wakeDisplay then
+        caffeinate.wakeDisplay()
+    elseif caffeinate.wakeSystem then
+        caffeinate.wakeSystem()
+    end
+end
+
+-- 停止所有计时器并恢复亮度
+local function restoreBrightness(reason)
+    logToFile(&quot;restoreBrightness called. Reason: &quot; .. tostring(reason) .. &quot;, originalBrightness: &quot; .. tostring(originalBrightness))
+    if delayTimer then
+        delayTimer:stop()
+        delayTimer = nil
+    end
+    if dimTimer then
+        dimTimer:stop()
+        dimTimer = nil
+    end
+    if idleTimer then
+        idleTimer:stop()
+        idleTimer = nil
+        lastIdleTime = nil
+    end
+    if originalBrightness then
+        brightness.set(originalBrightness)
+        originalBrightness = nil
+    end
+end
+
+-- 锁屏界面收不到按键事件，改用 idle time 变化判断是否有键盘/鼠标活动
+local function startIdleWakeWatcher()
+    if idleTimer then
+        idleTimer:stop()
+    end
+
+    lastIdleTime = host.idleTime()
+    idleTimer = timer.doEvery(0.25, function()
+        local idleTime = host.idleTime()
+
+        -- 按键或鼠标活动会把 idle time 重置为较小的值
+        if lastIdleTime and idleTime + 0.5 &lt; lastIdleTime then
+            logToFile(&quot;Idle timer wake detected. idleTime: &quot; .. tostring(idleTime) .. &quot;, lastIdleTime: &quot; .. tostring(lastIdleTime))
+            -- 唤醒时重置锁屏状态
+            isLocked = false
+            restoreBrightness(&quot;idleWake&quot;)
+            wakeDisplayIfAvailable()
+            return
+        end
+
+        lastIdleTime = idleTime
+    end)
+end
+
+-- 开始渐暗
+local function startDimming()
+    -- 如果已经在渐暗，就不重复
+    if dimTimer ~= nil then
+        logToFile(&quot;startDimming: already dimming, skipping&quot;)
+        return
+    end
+
+    originalBrightness = brightness.get()
+    logToFile(&quot;startDimming: originalBrightness is &quot; .. tostring(originalBrightness))
+    if not originalBrightness or originalBrightness &lt;= 0 then
+        return
+    end
+
+    local currentStep = 0
+    local stepInterval = dimDuration / steps
+    local stepDelta = originalBrightness / steps
+
+    dimTimer = timer.doEvery(stepInterval, function()
+        currentStep = currentStep + 1
+        local newValue = originalBrightness - stepDelta * currentStep
+        if newValue &lt; 0 then newValue = 0 end
+        brightness.set(math.floor(newValue + 0.5))
+        logToFile(&quot;dimTimer step &quot; .. tostring(currentStep) .. &quot;/&quot; .. tostring(steps) .. &quot;, brightness set to: &quot; .. tostring(brightness.get()))
+
+        if currentStep &gt;= steps then
+            dimTimer:stop()
+            dimTimer = nil
+            startIdleWakeWatcher()
+        end
+    end)
+end
+
+-- 进入屏保时：根据延迟配置启动渐暗逻辑
+local function onScreensaverStart(triggerSource)
+    logToFile(&quot;onScreensaverStart triggered by &quot; .. tostring(triggerSource))
+
+    if isLocked then
+        logToFile(&quot;onScreensaverStart ignored: already locked&quot;)
+        return
+    end
+    isLocked = true
+    lastLockTime = timer.secondsSinceEpoch()
+
+    -- 防止重复
+    restoreBrightness(&quot;onScreensaverStart&quot;)
+
+    if delayBeforeDim &lt;= 0 then
+        startDimming()
+    else
+        delayTimer = timer.doAfter(delayBeforeDim, function()
+            startDimming()
+        end)
+    end
+end
+
+-- 退出屏保时：立刻恢复亮度
+local function onScreensaverStop(triggerSource)
+    logToFile(&quot;onScreensaverStop triggered by &quot; .. tostring(triggerSource))
+    if not isLocked then
+        logToFile(&quot;onScreensaverStop ignored: not locked&quot;)
+        return
+    end
+    isLocked = false
+    restoreBrightness(&quot;onScreensaverStop&quot;)
+end
+
+caffeinateWatcher = caffeinate.watcher.new(function(event)
+    local eventMap = {
+        [caffeinate.watcher.screensaverDidStart] = &quot;screensaverDidStart&quot;,
+        [caffeinate.watcher.screensaverDidStop] = &quot;screensaverDidStop&quot;,
+        [caffeinate.watcher.screensDidLock] = &quot;screensDidLock&quot;,
+        [caffeinate.watcher.screensDidUnlock] = &quot;screensDidUnlock&quot;,
+        [caffeinate.watcher.systemDidWake] = &quot;systemDidWake&quot;,
+        [caffeinate.watcher.screensDidWake] = &quot;screensDidWake&quot;
+    }
+    local eventStr = eventMap[event] or tostring(event)
+    logToFile(&quot;caffeinate.watcher event received: &quot; .. eventStr)
+
+    if event == caffeinate.watcher.screensaverDidStart then
+        -- 进入屏保
+        onScreensaverStart(&quot;caffeinate_screensaverDidStart&quot;)
+
+    elseif event == caffeinate.watcher.screensaverDidStop then
+        -- 退出屏保（一般是你按键/移动鼠标触发）
+        onScreensaverStop(&quot;caffeinate_screensaverDidStop&quot;)
+
+    elseif event == caffeinate.watcher.screensDidLock then
+        -- 屏幕被锁定（手动锁屏或自动锁屏）
+        onScreensaverStart(&quot;caffeinate_screensDidLock&quot;)
+
+    elseif event == caffeinate.watcher.screensDidUnlock then
+        -- 解锁成功（输入密码/Touch ID 后）
+        onScreensaverStop(&quot;caffeinate_screensDidUnlock&quot;)
+
+    elseif event == caffeinate.watcher.systemDidWake or event == caffeinate.watcher.screensDidWake then
+        -- 忽略锁屏后 3 秒内的伪唤醒事件，防止锁屏过渡期间的伪唤醒事件打断降亮度
+        local diff = timer.secondsSinceEpoch() - lastLockTime
+        if isLocked and diff &lt; 3 then
+            logToFile(&quot;caffeinate watcher wake event ignored (spurious lock transition): &quot; .. eventStr)
+        else
+            -- 唤醒时重置锁屏状态
+            isLocked = false
+            restoreBrightness(&quot;caffeinate_&quot; .. eventStr)
+        end
+    end
+end)
+
+-- Cmd + Control + Q 锁屏时，caffeinate.watcher 在部分系统上不会稳定发 screensDidLock。
+-- 直接监听 macOS 的锁屏/解锁通知，让快捷键锁屏也能触发降亮度。
+screenLockWatcher = distributednotifications.new(function()
+    logToFile(&quot;com.apple.screenIsLocked notification received&quot;)
+    onScreensaverStart(&quot;dist_screenIsLocked&quot;)
+end, &quot;com.apple.screenIsLocked&quot;)
+
+screenUnlockWatcher = distributednotifications.new(function()
+    logToFile(&quot;com.apple.screenIsUnlocked notification received&quot;)
+    onScreensaverStop(&quot;dist_screenIsUnlocked&quot;)
+end, &quot;com.apple.screenIsUnlocked&quot;)
+
+wakeTap = eventtap.new({
+    eventtap.event.types.keyDown,
+    eventtap.event.types.leftMouseDown,
+    eventtap.event.types.rightMouseDown,
+    eventtap.event.types.otherMouseDown,
+    eventtap.event.types.scrollWheel,
+    eventtap.event.types.mouseMoved,
+}, function(ev)
+    local evType = ev:getType()
+    local evStr = &quot;unknown&quot;
+    if evType == eventtap.event.types.keyDown then evStr = &quot;keyDown&quot;
+    elseif evType == eventtap.event.types.leftMouseDown then evStr = &quot;leftMouseDown&quot;
+    elseif evType == eventtap.event.types.rightMouseDown then evStr = &quot;rightMouseDown&quot;
+    elseif evType == eventtap.event.types.otherMouseDown then evStr = &quot;otherMouseDown&quot;
+    elseif evType == eventtap.event.types.scrollWheel then evStr = &quot;scrollWheel&quot;
+    elseif evType == eventtap.event.types.mouseMoved then evStr = &quot;mouseMoved&quot;
+    end
+
+    -- 如果是脚本把亮度降到 0，任意键盘/鼠标活动都恢复亮度
+    if isLocked and originalBrightness ~= nil then
+        local diff = timer.secondsSinceEpoch() - lastLockTime
+        logToFile(&quot;wakeTap event: &quot; .. evStr .. &quot;, timeSinceLock: &quot; .. tostring(diff))
+        -- 避免锁屏瞬间的按键释放或鼠标微调等事件与锁屏降亮度逻辑竞争（忽略锁屏后 1.5 秒内的事件）
+        if diff &gt; 1.5 then
+            isLocked = false
+            restoreBrightness(&quot;wakeTap_&quot; .. evStr)
+            wakeDisplayIfAvailable()
+        else
+            logToFile(&quot;wakeTap event ignored because timeSinceLock &lt;= 1.5&quot;)
+        end
+    end
+
+    return false
+end)
+
+wakeTap:start()
+caffeinateWatcher:start()
+screenLockWatcher:start()
+screenUnlockWatcher:start()
+</code></pre>
+<p>保存。</p>
+<h3 id="3-Reload-Config"><a href="#3-Reload-Config" class="headerlink" title="3. Reload Config"></a>3. Reload Config</h3><p>在菜单栏点 Hammerspoon → Reload Config。</p>
+<p>设置完成，可以按 Control + Command + Q 进入锁屏测试效果。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>通过这个自定义脚本实现了我想要的显示器休眠模式。</p>
+<p><strong>不足：</strong></p>
+<ol>
+<li>没有进入真正意义上的休眠，可能会更耗电些（没有进行测试，大抵是不高的）</li>
+</ol>
+<p><strong>优点：</strong></p>
+<ol>
+<li>不用唤醒，也不用担心烧屏之类的问题</li>
+<li>小爱同学随时待命（昨晚半夜喊小爱给我开空调）</li>
+</ol>
+]]></description>
+    </item>
+    <item>
+      <title>京都往返天桥立‑伊根一日游攻略</title>
+      <link>https://lynan.cn/kyoto-amanohashidate-ine-day-trip-guide/</link>
+      <guid>https://lynan.cn/kyoto-amanohashidate-ine-day-trip-guide/</guid>
+      <pubDate>1 月 19 日，2026</pubDate>
+      <media:thumbnail url="https://r2-assets.lynan.cn/am/DSC01358.jpg"/>
+      <description><![CDATA[<p>Hi 朋友，如果你在京都，也有想去天桥立观光旅行的想法，这篇攻略可能对你会有些许帮助。</p>
+<p>天桥立位于京都府北部日本海宫津湾，与陆奥的松岛和安艺的宫岛并称为日本三景。</p>
+<p>什么是日本三景？→ <a href="https://www.nihonsankei.jp/about.html">https://www.nihonsankei.jp/about.html</a></p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/am/nihonsankei.jpg" alt="日本三景"></p>
+
+
+<h2 id="用周游券👍"><a href="#用周游券👍" class="headerlink" title="用周游券👍"></a>用周游券👍</h2><p>JR 关西广域周游券 + 天桥立-伊根 2 日券</p>
+<p>klook 链接：<a href="https://s.klook.com/c/awRZzp_v1B">https://s.klook.com/c/awRZzp_v1B</a></p>
+<p>选择 5 日券 + 加购项目 下的 <strong>5 日券 + 京都天桥立伊根观光 2 日通票</strong></p>
+<p><a href="https://s.klook.com/c/awRZzp_v1B"><img loading="lazy" src="https://r2-assets.lynan.cn/am/amanohashidate-pass.jpg"></a></p>
+<p>相当于只需要 39 元人民币即可购买价值 3500 円的天桥立伊根观光2日通票。</p>
+<h2 id="时间安排"><a href="#时间安排" class="headerlink" title="时间安排"></a>时间安排</h2><table>
+<thead>
+<tr>
+<th><div style="width: 85px;">时间段</div></th>
+<th><div style="width: 100px;">地点</div></th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>8:38 AM <span class="break-on-mobile">-</span> 10:40 AM</td>
+<td>京都站<span class="break-on-mobile">→</span>天桥立站</td>
+<td>JR 指定席，可用 JR 关西广域周游券</td>
+</tr>
+<tr>
+<td>10:57 AM <span class="break-on-mobile">-</span> 11:27 AM</td>
+<td>天桥立站<span class="break-on-mobile">→</span>伊根日出</td>
+<td>特快巴士，注意上车后拍照记一下今日班次时刻</td>
+</tr>
+<tr>
+<td>11:30 AM <span class="break-on-mobile">-</span> 12:00 PM</td>
+<td>乘坐观光船</td>
+<td></td>
+</tr>
+<tr>
+<td>12:35 PM <span class="break-on-mobile">-</span> 12:40 PM</td>
+<td>伊根日出<span class="break-on-mobile">→</span>伊根</td>
+<td>巴士</td>
+</tr>
+<tr>
+<td>约 2:25 PM <span class="break-on-mobile">-</span> 约 2:48 PM</td>
+<td>伊根<span class="break-on-mobile">→</span>元伊勢籠神社</td>
+<td>巴士</td>
+</tr>
+<tr>
+<td>约 5 PM <span class="break-on-mobile">-</span> 约 5:30 PM</td>
+<td>元伊勢籠神社<span class="break-on-mobile">→</span>天桥立站</td>
+<td>巴士</td>
+</tr>
+<tr>
+<td>6:09 PM <span class="break-on-mobile">-</span> 8:21 PM</td>
+<td>天桥立站<span class="break-on-mobile">→</span>京都站</td>
+<td>JR 指定席，可用JR 关西广域周游券</td>
+</tr>
+</tbody></table>
+<p>天桥立伊根观光 2 日通票可以乘坐普通巴士和特快巴士（停靠站比普通巴士少，更快到达伊根）。</p>
+<p>如果没有购买通票，则需使用现金支付车票，不支持 Suica&#x2F;Icoca。普通巴士按距离计费，特快巴士固定车票 1000 円。</p>
+<h2 id="京都往返"><a href="#京都往返" class="headerlink" title="京都往返"></a>京都往返</h2><h3 id="火车"><a href="#火车" class="headerlink" title="火车"></a>火车</h3><p>从京都出发，乘坐 JR 列车抵达天桥立站。</p>
+<p><strong>直达的火车（推荐）</strong>：JR桥立特快列车班次较少，可直达京都和天桥立（单程约 2 小时，票价 4800 - 5400 日元，具体价格取决于出行日期）。</p>
+<p><mark>请注意：JR 列车前往天桥立全程指定席（必须预约座位）。建议出发前一天在京都站一楼大厅机器上预约往返座位。</mark></p>
+<p>在京都站用 PASS 进站，到达天桥立站出站时将 PASS + 座位票 给工作人员检票出站。</p>
+<details>
+<summary><b>转车的火车（不推荐）</b></summary>
+
+<p>或者，您可以从京都乘坐 JR 城崎特快列车前往福知山（车程约 75 分钟，票价约 3050 - 3650 日元，每小时一班），然后换乘京都丹后铁道前往天桥立（车程 40 - 60 分钟，票价 800 - 1750 日元，具体价格取决于您乘坐的是普通列车还是特快列车）。请注意，乘坐桥立和城崎特快列车均需提前预订座位。</p>
+<p>全程可使用<a href="https://www.japan-guide.com/e/e2361_08.html"><strong>JR 关西广域周游券（强烈推荐👍）</strong></a>、<a href="https://www.japan-guide.com/e/e2361_kansai_hokuriku.html">JR 关西北陆地区周游券</a>、<a href="https://www.japan-guide.com/e/e2361_kansai_hiroshima.html">JR 关西广岛地区周游券</a>以及JR 西日本的其他一些铁路周游券；但是，<a href="https://www.japan-guide.com/e/e2361.html">全国通用的日本铁路周游券</a>在福知山至天桥立之间的京都丹后铁道上无效。</details></p>
+<h3 id="巴士"><a href="#巴士" class="headerlink" title="巴士"></a>巴士</h3><p>短海巴士每天有多班高速巴士往返于京都站和天桥立之间。单程车程约两小时，票价根据出行日期不同，为 3200 日元或 3400 日元。可通过 Willer 网站进行在线预订。</p>
+<p><a href="https://willerexpress.com/en/bus_search/kyoto/kyoto/kyoto/miyazu/?utm_source=web&utm_medium=ad&utm_campaign=af01&aid=184"><strong>在线预订</strong></a></p>
+<h3 id="抵达天桥立"><a href="#抵达天桥立" class="headerlink" title="抵达天桥立"></a>抵达天桥立</h3><p>在天桥立车站内天橋立駅観光案内所(天橋立観光協会)Amanohashidate Information Centre兑换天桥立-伊根2日PASS。还可以获取英语&#x2F;日语观光手册。</p>
+<p>京都天桥立伊根观光连续2日通票 涵盖以下内容：</p>
+<ul>
+<li>成相寺门票</li>
+<li>成相寺登山巴士往返票</li>
+<li>伞松公园投掷陶器兑换券</li>
+<li>天桥立观光船：宫津栈桥 ~ 天桥立栈桥 ~ 一之宫栈桥之间【往返】</li>
+<li>天桥立伞松公园 – 缆车与吊椅：府中站 ~ 伞松站【往返】</li>
+<li>伊根湾观光游船（Hikaribune）：伊根湾观光船【登船】</li>
+<li>丹海路线巴士：宫津市、京丹后市、伊根町和与谢野町内的路线巴士（不包括社区巴士）</li>
+<li>成相寺穿梭巴士：伞松站 - 成相寺【往返】</li>
+</ul>
+<h2 id="游玩路线"><a href="#游玩路线" class="headerlink" title="游玩路线"></a>游玩路线</h2><p>乘坐伊根方向的巴士前往这些地点。</p>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/am/Jietu20260119-214330.jpg"></p>
+<p>巴士站点：</p>
+<ol>
+<li><strong>天橋立駅</strong><br>推荐乘坐特快巴士（车票 1000 円，巴士费用可由天桥立-伊根 2 日 PASS 涵盖，上车出示 PASS 即可。）</li>
+<li><strong>伊根湾めぐり・日出 &#x2F; 伊根日出</strong><br>在这里乘坐观光船（船费 1200 円，可由天桥立-伊根 2 日 PASS 涵盖，出示 PASS 即可，游览时间约 30 分钟，可以在码头购买薯条，上船以后喂食海鸥。</li>
+<li><strong>伊根</strong><br>在这里游览伊根舟屋群，感受海边小村的宁静。还可登山至サツキ公園（道の駅 舟屋の里伊根）俯瞰伊根景色。伊根海边有多家咖啡馆，小坐休息。</li>
+<li><strong>天橋立元伊勢籠神社 &#x2F; 天桥立元伊势龙神社</strong><br>从这里下车，步行前往伞松公园缆车站。可由天桥立-伊根 2 日 PASS 涵盖缆车费用，出示 PASS 即可。缆车有座椅和车厢两种，自由选择。需要注意的一点是座椅式缆车傍晚停运时间比车厢式更早。<br>到达伞松公园观景台后，可以在观景台乘坐成相寺巴士（费用可由天桥立-伊根 2 日 PASS 涵盖，出示 PASS 即可）直达成相寺景区内（巴士单程约 5 分钟）。请注意在上车前找工作人员拿一张巴士时刻表来确认下山巴士时间。成相寺内有一座 5 重塔，很雄伟。也有观景台可以俯瞰天桥立。</li>
+</ol>
+<p>相关景色图片可以参考：<a href="/the-journey-in-kansai-2025/#Day8-%E5%A4%A9%E6%A1%A5%E7%AB%8B-%E4%BC%8A%E6%A0%B9">关西旅行(2025)#Day8-天桥立-伊根</a></p>
+<p><span class="image-grid landscape"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/kansai-2025/sdr/DSC01090.jpg" alt="伊根日出观光船"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/kansai-2025/sdr/DSC01259.jpg" alt="伊根舟屋群"></span><br></span></p>
+<p><span class="image-grid landscape"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/kansai-2025/sdr/DSC01307.jpg" alt="伞松公园观景台"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/kansai-2025/sdr/DSC01343.jpg" alt="成相寺五重塔"></span><br></span></p>
+<p>这篇攻略仅供参考，对于只有一天时间预算且需要乘坐公共交通的朋友会比较适用。如果时间足够&amp;可以自驾，非常推荐自驾观光，天桥立的海滩也非常美！</p>
+<blockquote>
+<p>无需害怕错过别人曾看到的美丽风景，最美丽的瞬间不过在你不经意抬头之时。</p>
+</blockquote>
+<p>祝你旅途愉快！旅途中车窗外的景色也很美哦！</p>
+]]></description>
+    </item>
+    <item>
+      <title>业余摄影 2 年，我最常用什么焦段？</title>
+      <link>https://lynan.cn/my-fav-focus-length/</link>
+      <guid>https://lynan.cn/my-fav-focus-length/</guid>
+      <pubDate>1 月 13 日，2026</pubDate>
+      <media:thumbnail url="https://r2-assets.lynan.cn/am/claudio-schwarz-MSFsffYYWHc-unsplash.jpg"/>
+      <description><![CDATA[<p>今天突发奇想，想看看我博客里分享的照片的焦段数据，跑了一下脚本，得到如下结果：</p>
+<p>统计的照片共 1986 张（仅统计含有 exif 数据的照片）</p>
+<table>
+<thead>
+<tr>
+<th>焦距（段）</th>
+<th>数量</th>
+<th>占比</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&lt;24mm</td>
+<td>59</td>
+<td>2.97%</td>
+</tr>
+<tr>
+<td><strong>24mm</strong></td>
+<td>219</td>
+<td>11.03%</td>
+</tr>
+<tr>
+<td><strong>25mm–34mm</strong></td>
+<td>427</td>
+<td>21.50%</td>
+</tr>
+<tr>
+<td><strong>35mm</strong></td>
+<td>398</td>
+<td>20.04%</td>
+</tr>
+<tr>
+<td>36mm–50mm</td>
+<td>162</td>
+<td>8.16%</td>
+</tr>
+<tr>
+<td>51mm–119mm</td>
+<td>302</td>
+<td>15.20%</td>
+</tr>
+<tr>
+<td>120mm</td>
+<td>100</td>
+<td>5.03%</td>
+</tr>
+<tr>
+<td>120mm–199mm</td>
+<td>81</td>
+<td>4.08%</td>
+</tr>
+<tr>
+<td><strong>200mm</strong></td>
+<td>224</td>
+<td>11.28%</td>
+</tr>
+<tr>
+<td>&gt;200mm</td>
+<td>14</td>
+<td>0.71%</td>
+</tr>
+</tbody></table>
+<p>其中，来自 iPhone 的照片为 425 张（约 21.40%），其余为索尼 A7C2 相机拍摄。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p><mark>24mm-35mm的照片占比最高，约占 52.57%。</mark></p>
+<h2 id="我的镜头"><a href="#我的镜头" class="headerlink" title="我的镜头"></a>我的镜头</h2><ol>
+<li>腾龙 E 28-200mm F2.8-5.6 A071</li>
+<li>森养 AF 35mm F1.8</li>
+<li>森养 AF 75mm F1.8</li>
+<li>唯卓仕 AF 20mm F2.8</li>
+</ol>
+<h2 id="数据分析"><a href="#数据分析" class="headerlink" title="数据分析"></a>数据分析</h2><p>虽然这些数据有点像是针对答案来出题目（因为大部分照片都是来自腾龙 28-200 这枚镜头。不过正是因为这枚变焦镜头，才能统计出一些我的拍摄喜好。</p>
+<p>CoPilot 总结：</p>
+<p>焦段分布呈现非常明显的“两极”：</p>
+<ul>
+<li>广角端（24–35mm）极高</li>
+<li>长焦端（200mm）极高</li>
+<li>中间焦段（50–120mm）使用量低</li>
+</ul>
+<h3 id="“走进世界的人”"><a href="#“走进世界的人”" class="headerlink" title="“走进世界的人”"></a>“走进世界的人”</h3><p>——广角人格（24–35mm 超高占比）</p>
+<p>24mm、28mm、35mm 加起来超过 52%。</p>
+<p>这说明你是一个：</p>
+<ul>
+<li>喜欢靠近被摄体</li>
+<li>喜欢进入环境</li>
+<li>喜欢真实、自然、不做作的画面</li>
+<li>喜欢记录生活、城市、旅行、街头<br>你不是“站远远拍”的人，你是那种会走进人群、走进故事里的人。</li>
+</ul>
+<h2 id="摄影人格总结"><a href="#摄影人格总结" class="headerlink" title="摄影人格总结"></a>摄影人格总结</h2><ul>
+<li>✔ 走进世界的人（广角）</li>
+<li>✔ 远距离观察者（长焦）</li>
+<li>✔ 不喜欢中庸焦段（中焦）</li>
+<li>✔ 不追求传统虚化人像（85mm）</li>
+<li>✔ 喜欢真实、故事、空间感、压缩感</li>
+</ul>
+<h2 id="样片"><a href="#样片" class="headerlink" title="样片"></a>样片</h2><h3 id="超广角"><a href="#超广角" class="headerlink" title="超广角"></a>超广角</h3><p><span class="image-grid landscape"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/kansai-2025/sdr/IMG_8445.jpg" alt="13mm"><br><img loading="lazy" src="https://r2-assets.lynan.cn/u/6588f6fec458853aefec07a6.jpg" alt="20mm"></span><br></span></p>
+<h3 id="广角"><a href="#广角" class="headerlink" title="广角"></a>广角</h3><p><span class="image-grid landscape"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/south-xinjiang-2025/sdr/IDG_20251017_095519_619.jpg" alt="24mm"><br><img loading="lazy" src="https://r2-assets.lynan.cn/u/65532b94c458853aefb4be26.jpg" alt="24mm"></span><br></span></p>
+<p><span class="image-grid landscape"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/2025dalian/DSC06925.JPG" alt="28mm"><br><img loading="lazy" src="https://r2-assets.lynan.cn/2024kansai/sdr/DSC04085.jpg" alt="35mm"></span><br></span></p>
+<h3 id="中焦"><a href="#中焦" class="headerlink" title="中焦"></a>中焦</h3><p><span class="image-grid r73"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/u/DSC02208-8G4IWT.jpeg" alt="75mm"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/2025dalian/DSC06879.JPG" alt="71mm"></span><br></span></p>
+<h3 id="长焦"><a href="#长焦" class="headerlink" title="长焦"></a>长焦</h3><p><span class="image-grid landscape"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/south-xinjiang-2025/sdr/IMG_2467.jpg" alt="120mm"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/lanzhou-2025/sdr/DSC09042.jpg" alt="127mm"></span><br></span></p>
+<h3 id="超长焦"><a href="#超长焦" class="headerlink" title="超长焦"></a>超长焦</h3><p><span class="image-grid landscape"><span class="grid-item"><img loading="lazy" src="https://r2-assets.lynan.cn/post/lanzhou-2025/sdr/DSC09044.jpg" alt="200mm"><br><img loading="lazy" src="https://r2-assets.lynan.cn/post/2025dalian/DSC06575.JPG" alt="300mm"></span><br></span></p>
+]]></description>
+    </item>
+    <item>
+      <title>我的 2025</title>
+      <link>https://lynan.cn/my-2025/</link>
+      <guid>https://lynan.cn/my-2025/</guid>
+      <pubDate>12 月 31 日，2025</pubDate>
+      <media:thumbnail url="https://r2-assets.lynan.cn/am/my2025.jpg"/>
+      <description><![CDATA[<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><span style="font-size: 30px; font-weight: bold; color: #777;">2</span>025 关键词：<strong>旅行达人</strong>。</p>
+<p>2<span style="font-size: 30px; font-weight: bold; color: #777;">0</span>25 上半年没有任何水花，工作不算很忙，也没有什么新奇事儿发生。上海的春天是那么短暂，仿佛刚过完冬天马上就进入夏天。冬天不想出门，夏天更不想出门。</p>
+<p>20<span style="font-size: 30px; font-weight: bold; color: #777;">2</span>5 下半年，似乎每个月都有一段旅行，本来只计划了冬天前往北海道的旅行，结果没有去北海道，而是东南西北好多地方，太充实啦！</p>
+<p>202<span style="font-size: 30px; font-weight: bold; color: #777;">5</span> 年末，我 30 岁了！我曾经设想过是否会在 30 岁迎来一些转机，比如开始从事不同领域的工作。虽然没转行，但是现在处于一种工作-生活平衡的状态中，我再满意不过了。虽然收入不高，但是终于可以认真生活 😊。</p>
+<h2 id="关于金钱"><a href="#关于金钱" class="headerlink" title="关于金钱"></a>关于金钱</h2><h3 id="赚钱"><a href="#赚钱" class="headerlink" title="赚钱"></a>赚钱</h3><p>我的收入来源：工资。</p>
+<p>一笔意料之外的收入：外汇差价。2024 年曾购买了一笔欧元外汇，结果在 2025 年欧元汇率水涨船高，在最高点换回了人民币，好运气 🍀。</p>
+<h3 id="省钱"><a href="#省钱" class="headerlink" title="省钱"></a>省钱</h3><h4 id="存钱"><a href="#存钱" class="headerlink" title="存钱"></a>存钱</h4><p>加入了公司的 ESPP 计划，每个月从月薪中扣取 10% 用于购买公司股票，我把当作它存钱来看。</p>
+<h4 id="春秋航空想飞就飞秋冬套票"><a href="#春秋航空想飞就飞秋冬套票" class="headerlink" title="春秋航空想飞就飞秋冬套票"></a>春秋航空想飞就飞秋冬套票</h4><ul>
+<li><p>2025 秋冬套票</p>
+<p>套票价格：2999 元</p>
+<table>
+<thead>
+<tr>
+<th>日期</th>
+<th>地点</th>
+<th>请假天数</th>
+<th>支付价格</th>
+<th>票面价格</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>09&#x2F;08 周一</td>
+<td>大连-上海</td>
+<td>1</td>
+<td>70</td>
+<td>550</td>
+</tr>
+<tr>
+<td>09&#x2F;20 周六</td>
+<td>上海-乌鲁木齐</td>
+<td></td>
+<td>70</td>
+<td>1430</td>
+</tr>
+<tr>
+<td>09&#x2F;23 周二</td>
+<td>乌鲁木齐-上海</td>
+<td>2</td>
+<td>70</td>
+<td>1110</td>
+</tr>
+<tr>
+<td>10&#x2F;17 周五</td>
+<td>上海-乌鲁木齐</td>
+<td>1</td>
+<td>70</td>
+<td>780</td>
+</tr>
+<tr>
+<td>10&#x2F;20 周一</td>
+<td>乌鲁木齐-上海</td>
+<td>1</td>
+<td>70</td>
+<td>890</td>
+</tr>
+<tr>
+<td>11&#x2F;14 周五</td>
+<td>上海-兰州</td>
+<td>1</td>
+<td>70</td>
+<td>210</td>
+</tr>
+<tr>
+<td>11&#x2F;16 周日</td>
+<td>兰州-上海</td>
+<td></td>
+<td>70</td>
+<td>460</td>
+</tr>
+<tr>
+<td>11&#x2F;22 周六</td>
+<td>上海-厦门</td>
+<td></td>
+<td>70</td>
+<td>380</td>
+</tr>
+<tr>
+<td><strong>合计</strong></td>
+<td></td>
+<td>6</td>
+<td><strong>560</strong></td>
+<td><strong>5810</strong></td>
+</tr>
+</tbody></table>
+<p>2999 &#x2F; 5810 计算下来这些行程的机票<em>约省 50%。</em></p>
+</li>
+<li><p>2026 冬春套票</p>
+<p>套票价格：299 元（2025 秋冬套票购买用户特惠价格）</p>
+<table>
+<thead>
+<tr>
+<th>地点</th>
+<th>支付价格</th>
+<th>票面价格</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>上海-常德</td>
+<td>70</td>
+<td>540</td>
+</tr>
+<tr>
+<td>常德-上海</td>
+<td>70</td>
+<td>370</td>
+</tr>
+<tr>
+<td>上海-厦门</td>
+<td>70</td>
+<td>380</td>
+</tr>
+<tr>
+<td>厦门-上海</td>
+<td>70</td>
+<td>840</td>
+</tr>
+<tr>
+<td>上海-澳门</td>
+<td>160</td>
+<td>390</td>
+</tr>
+<tr>
+<td>澳门-上海</td>
+<td>193</td>
+<td>590</td>
+</tr>
+<tr>
+<td><strong>合计</strong></td>
+<td><strong>633</strong></td>
+<td><strong>3110</strong></td>
+</tr>
+</tbody></table>
+<p>299 &#x2F; 3110 计算下来这些行程的机票<em>约省 90%。</em></p>
+</li>
+</ul>
+<h4 id="华住会酒店券"><a href="#华住会酒店券" class="headerlink" title="华住会酒店券"></a>华住会酒店券</h4><ul>
+<li>358 元 2 晚券</li>
+<li>578 元 2 晚券</li>
+<li>528 元 2 晚券</li>
+</ul>
+<p><em>约省 50%。</em></p>
+<h4 id="日本旅行的各种-PASS"><a href="#日本旅行的各种-PASS" class="headerlink" title="日本旅行的各种 PASS"></a>日本旅行的各种 PASS</h4><ul>
+<li>南海电铁 2 日 PASS</li>
+<li>大阪地铁 26 小时 PASS</li>
+<li>京都公交地铁一日 PASS</li>
+<li>JR 关西广域 5 日 PASS</li>
+<li>天桥立-伊根 2 日 PASS</li>
+</ul>
+<p>每张 PASS 都回本了！</p>
+<h3 id="花钱"><a href="#花钱" class="headerlink" title="花钱"></a>花钱</h3><ul>
+<li>吃了好多蛋糕</li>
+<li>喝了好多咖啡&#x2F;奶茶</li>
+<li>偶尔下馆子</li>
+</ul>
+<h4 id="新购数码产品"><a href="#新购数码产品" class="headerlink" title="新购数码产品"></a>新购数码产品</h4><p>买了：</p>
+<ul>
+<li>Mac mini <strong>¥7599</strong></li>
+<li>红米 G Pro 27U 显示器 <strong>¥2000</strong></li>
+<li>任天堂 Switch 2 游戏机 <strong>¥2749</strong>、塞尔达游戏卡带 <strong>¥280</strong></li>
+<li>烽火 5G CPE <strong>¥1549</strong></li>
+<li>腾龙 28-200 镜头 <strong>¥4500</strong></li>
+</ul>
+<h2 id="关于健康"><a href="#关于健康" class="headerlink" title="关于健康"></a>关于健康</h2><h3 id="年度体检"><a href="#年度体检" class="headerlink" title="年度体检"></a>年度体检</h3><p>没有什么异常，挺好。</p>
+<h3 id="年度复查"><a href="#年度复查" class="headerlink" title="年度复查"></a>年度复查</h3><p>今年的复查报告和去年几乎一致，B 超医生说看起来似乎比去年的还要稍好一些，让我放宽心。今年续上了大病医保，后续复查可以减少不少费用。</p>
+<h2 id="关于生活"><a href="#关于生活" class="headerlink" title="关于生活"></a>关于生活</h2><h3 id="吃肯德基"><a href="#吃肯德基" class="headerlink" title="吃肯德基"></a>吃肯德基</h3><p>没想到一年吃了 2500+ 元的肯德基，成为了肯德基“挚友”，获得 2026 年的挚友卡（每日都可插队一次）。</p>
+<p>最爱的单品：</p>
+<ul>
+<li>葡式蛋挞</li>
+<li>吮指原味鸡</li>
+</ul>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/am/IMG_2495.jpg"></p>
+<h3 id="吃大米先生"><a href="#吃大米先生" class="headerlink" title="吃大米先生"></a>吃大米先生</h3><p>工作日的午餐几乎都是在大米先生吃的，大米先生的菜单不经常换，已经有点吃腻了。</p>
+<h3 id="很棒的旅行"><a href="#很棒的旅行" class="headerlink" title="很棒的旅行"></a>很棒的旅行</h3><p>今年的旅程真的是很丰富！为它们单独开了一个系列 <a href="/series/%E6%97%85%E8%A1%8C/"><strong>Lynan 的旅行</strong></a>。</p>
+<p>很高兴每一篇游记都有得到非常棒的反馈，感谢来自读者的支持。</p>
+<ul>
+<li><a href="/a-mini-trip-in-hangzhou/">杭州旅行(mini)</a></li>
+<li><a href="/a-mini-trip-in-changde/">常德旅行(mini)</a></li>
+<li><a href="/the-journey-in-kansai-2025/">关西旅行(2025)</a></li>
+<li><a href="/the-journey-in-lanzhou/">兰州旅行</a></li>
+<li><a href="/the-journey-in-south-xinjiang-2025/">新疆旅行(南疆)</a></li>
+<li><a href="/the-journey-in-north-xinjiang-2025/">新疆旅行(北疆)</a></li>
+<li><a href="/the-journey-in-dalian/">大连旅行</a></li>
+<li><a href="/the-journey-in-hangzhou/">杭州旅行</a></li>
+<li><a href="/a-one-day-trip-in-suzhou-2/">苏州漫步 2</a></li>
+<li><a href="/a-one-day-trip-in-suzhou/">苏州漫步</a></li>
+</ul>
+<p><img loading="lazy" src="https://r2-assets.lynan.cn/am/ops-coffee-1767169897373.jpg"></p>
+<p>拼图使用<strong>好拼</strong>：<a href="https://img.ops-coffee.com/photo/">https://img.ops-coffee.com/photo/</a></p>
+<h3 id="博客网站"><a href="#博客网站" class="headerlink" title="博客网站"></a>博客网站</h3><p>今年的博客在技术文章上没有什么新点子，但是对于博客网站本身，更新了不少功能。</p>
+<p>例如：</p>
+<ul>
+<li><strong>系列</strong> 其实分类&#x2F;标签已经能满足“系列”文章的需求，但是我想要在阅读时能直观地感受到这篇文章还有一系列相关内容可供阅读，用便捷的入口进行跳转。</li>
+<li><strong>国内加速</strong> 网站本身托管于 Cloudflare Pages，使用阿里云新推出的 ESA 进行国内加速。</li>
+<li><strong>修复了一些 bug</strong> 这个博客主题从 2025 年初开始搓，自己在使用过程中也发现不少 bug。好在已经慢慢修复啦。</li>
+<li><strong>照片元数据</strong> 其实并不是原始的元数据，而是我用 swift 脚本获取并保存到照片数据库里的一行字符串。</li>
+</ul>
+<p>对于主题开源的进展，我想要做：</p>
+<ul>
+<li>主题 figma 设计稿</li>
+<li>主题配置文档网站，指引如何配置置顶文章、系列文章、图片排版</li>
+</ul>
+<p>其实已经完成大半，但是因为最近周末时间都在旅行，所以耽搁了。其实最大的问题在于，这个主题我搓的时候全是各种个性化配置，现在得将这些逻辑拆出来。</p>
+<h2 id="那么"><a href="#那么" class="headerlink" title="那么"></a>那么</h2><p>不立 flag 了，想做的事情默默开始行动，2026 见！</p>
+]]></description>
+    </item>
+</channel>
+</rss>

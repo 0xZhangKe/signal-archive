@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+xmlns:content="http://purl.org/rss/1.0/modules/content/"
+xmlns:dc="http://purl.org/dc/elements/1.1/"
+xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+xmlns:atom="http://www.w3.org/2005/Atom"
+xmlns:wfw="http://wellformedweb.org/CommentAPI/">
+<channel>
+<title>怕刺</title>
+<link>https://pa.ci/</link>
+<atom:link href="https://pa.ci/feed/" rel="self" type="application/rss+xml" />
+<language>zh-CN</language>
+<description>你好，陌生人。</description>
+<lastBuildDate>Wed, 08 Apr 2026 06:43:57 +0000</lastBuildDate>
+<pubDate>Wed, 08 Apr 2026 06:43:57 +0000</pubDate>
+<item>
+<title>OpenWrt代理下split-horizon DNS导致的DNS分流失效</title>
+<link>https://pa.ci/448.html</link>
+<guid>https://pa.ci/448.html</guid>
+<pubDate>Wed, 08 Apr 2026 06:43:57 +0000</pubDate>
+<dc:creator>怕刺</dc:creator>
+<category><![CDATA[技术]]></category>
+<description><![CDATA[公司网站采用了split-horizon DNS，内网接入的时候DNS解析返回内网IPv4地址，外网接入的时候DNS解析返回公网IPv4地址和IPv6地址。再使用OpenWrt安装某些代理之后，...]]></description>
+<content:encoded xml:lang="zh-CN"><![CDATA[
+<p>公司网站采用了split-horizon DNS，内网接入的时候DNS解析返回内网IPv4地址，外网接入的时候DNS解析返回公网IPv4地址和IPv6地址。<br>再使用OpenWrt安装某些代理之后，会导致所有的DNS查询都返回IPv6地址，而本地没有IPv6致使无法正常使用。<br>本质上是：接入 OpenWrt 后，DNS 没走内网 DNS，而走了外部 DNS / 代理接管的 DNS，于是 split-horizon DNS 被破坏了。</p><p>解决方法也很简单，进入OpenWrt后：</p><ol><li>在代理软件中，关闭<code>DNS 重定向</code></li><li>在<code>接口</code>&gt;<code>WAN</code>中，关闭<code>自动获取 DNS 服务器</code>，勾选<code>使用自定义的 DNS 服务器</code>，填入<code>223.5.5.5</code>等国内的DNS。</li><li>重启OpenWrt和电脑。</li></ol><p>之后，DNS将返回公网IPv4和IPv6地址，至此正常连接。</p>
+]]></content:encoded>
+<slash:comments>0</slash:comments>
+<comments>https://pa.ci/448.html#comments</comments>
+<wfw:commentRss>https://pa.ci/feed/448.html</wfw:commentRss>
+</item>
+<item>
+<title>PowerPoint修改默认字体</title>
+<link>https://pa.ci/447.html</link>
+<guid>https://pa.ci/447.html</guid>
+<pubDate>Mon, 09 Feb 2026 12:29:46 +0000</pubDate>
+<dc:creator>怕刺</dc:creator>
+<category><![CDATA[技术]]></category>
+<description><![CDATA[PowerPoint修改默认字体需要修改模板，以下是Windows 11和office 365的版本，理论上对office 2016及以后都有效。新建一个空白演示文稿。单击工具栏上的"视图"，然...]]></description>
+<content:encoded xml:lang="zh-CN"><![CDATA[
+<p>PowerPoint修改默认字体需要修改模板，以下是Windows 11和office 365的版本，理论上对office 2016及以后都有效。</p><ol><li>新建一个空白演示文稿。</li><li>单击工具栏上的"视图"，然后单击"幻灯片母版"。</li><li>找到"字体"，在下拉选项框中选择"自定义字体"。</li><li>修改中文和西文字体，保存，然后关闭母版视图。</li><li>关闭母版视图，不然新建的PPT是母版样式。</li><li>单击"文件"&gt;"另存为"，将文件名改为"blank"，保存类型改为"PowerPoint模板"。注意：文件名一定是"blank"和保存类型一定是"PowerPoint模板"。</li><li>再打开"资源管理器"，<code>查看→显示→勾选</code>隐藏的项目“。（别关闭第6步的窗口）</li><li>看回第6步的"另存为"的界面，手动更改保存的路径：C:\Users\&lt;用户名&gt;\AppData\Roaming\Microsoft\Templates ，然后单击保存完成默认字体的设置。</li></ol><p>随意打开一个新的演示文稿，会看到默认字体已变为微软雅黑。</p><p>在开始菜单中会多一个名为"Default Theme"的ppt模板，以后新建ppt就单击这个就可以。</p><p>参考：<br><a href="https://zhuanlan.zhihu.com/p/556010400">https://zhuanlan.zhihu.com/p/556010400</a></p>
+]]></content:encoded>
+<slash:comments>0</slash:comments>
+<comments>https://pa.ci/447.html#comments</comments>
+<wfw:commentRss>https://pa.ci/feed/447.html</wfw:commentRss>
+</item>
+<item>
+<title>使用 Cloudflare Zero Trust 实现内网服务外网访问</title>
+<link>https://pa.ci/446.html</link>
+<guid>https://pa.ci/446.html</guid>
+<pubDate>Wed, 28 Jan 2026 07:52:27 +0000</pubDate>
+<dc:creator>怕刺</dc:creator>
+<category><![CDATA[技术]]></category>
+<description><![CDATA[前言家中有一台运行在内网的服务器（没有公网 IP），上面运行着一些服务（Home Assistant等），想要从外网访问，但又不希望所有人都能访问，于是选择使用 Cloudflare Zero ...]]></description>
+<content:encoded xml:lang="zh-CN"><![CDATA[
+<h2>前言</h2><p>家中有一台运行在内网的服务器（没有公网 IP），上面运行着一些服务（Home Assistant等），想要从外网访问，但又不希望所有人都能访问，于是选择使用 Cloudflare Zero Trust 实现内网穿透。注：如果有独立IP的服务器，也可以直接<a href="https://pa.ci/375.html">使用easytier实现内网穿透</a>，更方便但限制于中转服务器的网速。</p><p>本文将详细介绍如何在 Debian 13 Linux 服务器上配置 Cloudflare Zero Trust，实现：</p><ul><li>内网服务暴露到公网</li><li>通过身份验证控制访问权限</li><li>无需公网 IP 或路由器端口转发</li></ul><h2>什么是 Cloudflare Zero Trust？</h2><p>Cloudflare Zero Trust 是 Cloudflare 提供的零信任网络访问解决方案，包括：</p><ul><li><strong>Cloudflare Tunnel</strong>：安全地将内网服务暴露到互联网</li><li><strong>Access</strong>：身份验证和访问控制策略</li><li><strong>Gateway</strong>：网络安全和流量过滤</li></ul><p>对于个人用户，最常用的是 Tunnel + Access 组合，可以实现安全的远程访问。</p><h2>环境要求</h2><ul><li>一台 Linux 服务器（本文以 Debian 13 为例）</li><li>服务器上运行的服务（本文以 8188 端口为例）</li><li>一个域名（需要使用 Cloudflare DNS）</li><li>Cloudflare 账号（免费）</li></ul><h2>第一部分：安装和配置</h2><h3>1. 安装 cloudflared</h3><p>在你的 Debian 服务器上安装 cloudflared 客户端：</p><pre><code class="lang-bash"># 下载最新版本的 cloudflared
+wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb
+
+# 安装
+sudo dpkg -i cloudflared-linux-amd64.deb
+
+# 验证安装
+cloudflared --version</code></pre><h3>2. 登录 Cloudflare 账户</h3><pre><code class="lang-bash">cloudflared tunnel login</code></pre><p>执行后会出现以下情况之一：</p><ul><li><strong>有桌面环境</strong>：自动打开浏览器进行授权</li><li><strong>无桌面环境</strong>：显示一个 URL，需要在其他设备上打开这个 URL 完成授权</li></ul><p>授权成功后，会在 <code>~/.cloudflared/</code> 目录下生成证书文件。</p><h3>3. 创建 Tunnel</h3><pre><code class="lang-bash"># 创建一个 tunnel（名称可以自定义）
+cloudflared tunnel create my-app-tunnel</code></pre><p>执行成功后，会返回类似以下信息：</p><pre><code>Tunnel credentials written to /home/xxx/.cloudflared/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx.json # 这里的xxx是用户名
+Created tunnel my-app-tunnel with id xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx</code></pre><p><strong>重要</strong>：记录返回的 Tunnel ID，后续配置需要用到。</p><h3>4. 配置 Tunnel</h3><p>创建配置文件 <code>/etc/cloudflared/config.yml</code>：</p><pre><code class="lang-bash">sudo mkdir -p /etc/cloudflared
+sudo nano /etc/cloudflared/config.yml</code></pre><p>添加以下内容：</p><pre><code class="lang-yaml">tunnel: &lt;你的Tunnel-ID&gt;
+credentials-file: /home/xxx/.cloudflared/&lt;你的Tunnel-ID&gt;.json
+
+ingress:
+  - hostname: your-app.yourdomain.com
+    service: http://localhost:8188
+  - service: http_status:404</code></pre><p><strong>配置说明</strong>：</p><ul><li><code>tunnel</code>：填写步骤 3 中获得的 Tunnel ID</li><li><code>credentials-file</code>：凭证文件路径（使用步骤 3 中显示的路径）</li><li><code>hostname</code>：你想使用的域名（需要提前在 Cloudflare 添加域名）</li><li><code>service</code>：本地服务地址（本文是 <code>http://localhost:8188</code>）</li><li>最后一行 <code>service: http_status:404</code> 是必需的，用于处理未匹配的请求</li></ul><h3>5. 配置 DNS</h3><pre><code class="lang-bash">cloudflared tunnel route dns &lt;你的Tunnel-ID&gt; your-app.yourdomain.com</code></pre><p>这个命令会自动在 Cloudflare DNS 中创建一条 CNAME 记录，指向你的 Tunnel。</p><p>你也可以手动在 Cloudflare 控制台添加：</p><ul><li>类型：CNAME</li><li>名称：your-app</li><li>内容：<code>&lt;Tunnel-ID&gt;.cfargotunnel.com</code></li><li>代理状态：已代理（橙色云朵）</li></ul><h3>6. 设置为系统服务</h3><p>将 cloudflared 设置为开机自启动的系统服务：</p><pre><code class="lang-bash"># 安装服务
+sudo cloudflared service install
+
+# 启动服务
+sudo systemctl start cloudflared
+
+# 设置开机自启
+sudo systemctl enable cloudflared
+
+# 查看服务状态
+sudo systemctl status cloudflared</code></pre><p>如果一切正常，状态应该显示 <code>active (running)</code>。</p><h3>7. 测试 Tunnel 连接</h3><p>此时，你应该可以通过域名访问你的服务：</p><pre><code>https://your-app.yourdomain.com</code></pre><p><strong>注意</strong>：由于还没有配置访问策略，此时任何人都可以访问。接下来我们将配置身份验证。</p><h2>第二部分：配置访问控制</h2><h3>1. 访问 Cloudflare Zero Trust 控制台</h3><p>打开浏览器，访问：<a href="https://one.dash.cloudflare.com/">https://one.dash.cloudflare.com/</a></p><p>首次使用需要设置团队名称（Team name），这个名称会成为你的 Zero Trust 域名的一部分。</p><h3>2. 创建应用程序</h3><ol><li>在左侧菜单中，进入 <strong>Access</strong> → <strong>Applications</strong></li><li>点击 <strong>Add an application</strong></li><li>选择 <strong>Self-hosted</strong>（自托管应用）</li></ol><h3>3. 配置应用信息</h3><p>在应用配置页面填写以下信息：</p><p><strong>Basic information（基本信息）</strong>：</p><ul><li><strong>Application name</strong>：应用名称（如 <code>comfyui</code>）</li><li><strong>Session Duration</strong>：会话持续时间（如 <code>24 hours</code>）</li><li><p><strong>Application domain</strong>：</p><ul><li>Subdomain: <code>your-app</code></li><li>Domain: <code>yourdomain.com</code></li></ul></li></ul><h3>4. 创建访问策略</h3><p>在同一页面向下滚动到 <strong>Policies</strong> 部分：</p><p><strong>创建策略的常用方式</strong>：</p><h4>方式 1：基于邮箱地址（推荐用于个人）</h4><ul><li><strong>Policy name</strong>：策略名称（如 <code>allow-specific-users</code>）</li><li><strong>Action</strong>：选择 <code>Allow</code></li><li><p><strong>Configure rules</strong>：</p><ul><li><p><strong>Include</strong>：</p><ul><li>选择 <code>Emails</code></li><li>输入允许访问的邮箱地址（可以添加多个）</li><li>例如：<code>user1@example.com</code>, <code>user2@example.com</code></li></ul></li></ul></li></ul><h4>方式 2：基于邮箱域名（适合团队）</h4><ul><li><p><strong>Include</strong>：</p><ul><li>选择 <code>Email domains</code></li><li>输入允许的邮箱域名</li><li>例如：<code>@yourcompany.com</code>（允许所有该域名下的邮箱）</li></ul></li></ul><h4>方式 3：基于 IP 地址</h4><ul><li><p><strong>Include</strong>：</p><ul><li>选择 <code>IP ranges</code></li><li>输入允许的 IP 地址或 IP 段</li><li>例如：<code>192.168.1.100</code> 或 <code>203.0.113.0/24</code></li></ul></li></ul><h4>方式 4：组合多个条件</h4><p>你可以添加多个 Include 规则，用户满足任一条件即可访问。也可以添加 Exclude 规则来排除特定用户。</p><h3>5. 配置登录方式</h3><p>在应用配置页面，点击 <strong>Login methods</strong> 标签：</p><ul><li><strong>One-time PIN</strong>：通过邮件发送验证码（<strong>默认启用，如果没有启用需要在编辑状态下手动启用</strong>）</li><li><strong>Google</strong>、<strong>GitHub</strong> 等：OAuth 登录方式</li><li><strong>SAML</strong>、<strong>OIDC</strong>：企业级单点登录</li></ul><p>对于个人用户，推荐使用 <strong>One-time PIN</strong>（邮件验证码）或 <strong>Google</strong> 登录。</p><h3>6. 保存配置</h3><p>点击 <strong>Save application</strong> 完成配置。</p><h2>第三部分：测试访问</h2><h3>1. 访问你的应用</h3><p>打开浏览器，访问：<code>https://your-app.yourdomain.com</code></p><h3>2. 登录流程</h3><p>系统会重定向到 Cloudflare Access 登录页面：</p><ol><li>输入你在策略中配置的邮箱地址</li><li>点击 <strong>Send me a code</strong></li><li>查收邮件中的验证码（6 位数字）</li><li>输入验证码</li><li>验证成功后，会重定向回你的应用</li></ol><h3>3. 会话管理</h3><p>登录成功后，在设置的会话时间内（如 24 小时）无需重复登录。会话过期后需要重新验证。</p><h2>第四部分：故障排查</h2><h3>问题 1：收不到验证邮件</h3><p><strong>可能原因和解决方法</strong>：</p><h4>1.1 邮件被拦截</h4><ul><li>检查<strong>垃圾邮件文件夹</strong>（最常见）</li><li>检查<strong>推广邮件</strong>或其他分类文件夹</li><li>在邮箱中搜索发件人：<code>noreply@cloudflareaccess.com</code> 或 <code>@cloudflare.com</code></li></ul><h4>1.2 策略未关联到应用</h4><p>这是<strong>最常见的问题</strong>。确认方法：</p><ol><li>进入 <strong>Access</strong> → <strong>Applications</strong></li><li>点击你的应用</li><li>查看 <strong>Overview</strong> 页面</li><li>确认 <strong>Used by applications</strong> 字段不是 <code>--</code></li></ol><p>如果策略未关联：</p><ol><li>编辑应用</li><li>进入 <strong>Policies</strong> 标签</li><li>确认你创建的策略已添加到应用中</li></ol><h4>1.3 One-time PIN 未启用</h4><ol><li>访问 <strong>Settings</strong> → <strong>Authentication</strong></li><li>查看 <strong>Login methods</strong></li><li>确认 <strong>One-time PIN</strong> 已启用（绿色）</li><li>如果未启用，点击 <strong>Add new</strong> 添加</li></ol><h4>1.4 Outlook/Hotmail 邮箱特殊问题</h4><p>Outlook/Hotmail 有时会严格拦截 Cloudflare 邮件：</p><ul><li>尝试使用 Gmail 等其他邮箱测试</li><li>检查 Outlook 的 <strong>"其他"文件夹</strong></li><li>将 <code>noreply@cloudflareaccess.com</code> 添加到白名单</li></ul><h4>1.5 测试策略配置</h4><p>使用 Policy Tester 功能：</p><ol><li>在应用的 <strong>Policies</strong> 标签页</li><li>点击 <strong>Test policies</strong></li><li>输入测试邮箱</li><li>查看是否匹配策略</li></ol><h3>问题 2：Tunnel 连接失败</h3><h4>2.1 检查服务状态</h4><pre><code class="lang-bash"># 查看服务状态
+sudo systemctl status cloudflared
+
+# 查看实时日志
+sudo journalctl -u cloudflared -f
+
+# 查看最近 50 条日志
+sudo journalctl -u cloudflared -n 50</code></pre><h4>2.2 常见错误和解决方法</h4><p><strong>错误：<code>failed to connect to the edge</code></strong></p><ul><li>检查服务器网络连接</li><li>确认防火墙未阻止 cloudflared 出站连接</li><li>尝试重启服务：<code>sudo systemctl restart cloudflared</code></li></ul><p><strong>错误：<code>config validation error</code></strong></p><ul><li>检查 <code>/etc/cloudflared/config.yml</code> 格式</li><li>确认 Tunnel ID 正确</li><li>确认凭证文件路径存在</li></ul><p><strong>错误：<code>connection refused</code></strong></p><ul><li>确认本地服务（如 8188 端口）正在运行</li><li>测试本地访问：<code>curl http://localhost:8188</code></li></ul><h4>2.3 重新配置 Tunnel</h4><p>如果问题持续，可以删除并重新创建：</p><pre><code class="lang-bash"># 停止服务
+sudo systemctl stop cloudflared
+
+# 删除 tunnel
+cloudflared tunnel delete my-app-tunnel
+
+# 重新创建（从步骤 3 开始）
+cloudflared tunnel create my-app-tunnel</code></pre><h3>问题 3：DNS 解析失败</h3><h4>3.1 检查 DNS 记录</h4><pre><code class="lang-bash"># Linux/macOS
+nslookup your-app.yourdomain.com
+
+# 或使用 dig
+dig your-app.yourdomain.com</code></pre><p>应该返回类似 <code>xxxx.cfargotunnel.com</code> 的 CNAME 记录。</p><h4>3.2 DNS 传播延迟</h4><p>DNS 更改可能需要几分钟到几小时才能全球生效。可以：</p><ul><li>等待 5-10 分钟后重试</li><li>使用在线工具检查 DNS 传播：<a href="https://dnschecker.org/">https://dnschecker.org/</a></li></ul><h4>3.3 手动添加 DNS 记录</h4><p>如果 <code>cloudflared tunnel route dns</code> 命令失败，可以手动添加：</p><ol><li>登录 Cloudflare 控制台</li><li>选择你的域名</li><li>进入 <strong>DNS</strong> → <strong>Records</strong></li><li><p>点击 <strong>Add record</strong>：</p><ul><li>Type: <code>CNAME</code></li><li>Name: <code>your-app</code></li><li>Target: <code>&lt;Tunnel-ID&gt;.cfargotunnel.com</code></li><li>Proxy status: Proxied（橙色云朵）</li></ul></li></ol><h3>问题 4：策略配置问题</h3><h4>4.1 查看访问日志</h4><ol><li>进入 <strong>Logs</strong> → <strong>Access</strong></li><li>查看最近的认证尝试</li><li>检查是否有错误信息</li></ol><h4>4.2 使用 IP 白名单临时测试</h4><p>如果邮件验证一直有问题，可以临时改用 IP 白名单：</p><ol><li>访问 <a href="https://ip.sb">https://ip.sb</a> 或 <a href="https://ifconfig.me">https://ifconfig.me</a> 查看你的公网 IP</li><li>编辑应用策略</li><li><p>修改 <strong>Include</strong> 规则：</p><ul><li>删除 Emails 规则（或保留）</li><li>添加 <strong>IP ranges</strong></li><li>输入你的公网 IP</li></ul></li></ol><h4>4.3 添加其他登录方式</h4><p>如果 One-time PIN 持续有问题，可以添加其他登录方式：</p><ol><li>在应用的 <strong>Login methods</strong> 中</li><li>点击 <strong>Add new</strong></li><li>选择 <strong>Google</strong>、<strong>GitHub</strong> 等 OAuth 提供商</li><li>按提示完成配置</li></ol><h3>问题 5：服务访问慢或不稳定</h3><h4>5.1 检查本地服务性能</h4><pre><code class="lang-bash"># 测试本地访问速度
+curl -w &quot;@-&quot; -o /dev/null -s http://localhost:8188 &lt;&lt;&#039;EOF&#039;
+time_namelookup: %{time_namelookup}\n
+time_connect: %{time_connect}\n
+time_total: %{time_total}\n
+EOF</code></pre><h4>5.2 优化 Tunnel 配置</h4><p>在 <code>/etc/cloudflared/config.yml</code> 中添加：</p><pre><code class="lang-yaml">tunnel: &lt;你的Tunnel-ID&gt;
+credentials-file: /root/.cloudflared/&lt;你的Tunnel-ID&gt;.json
+
+# 添加以下优化配置
+protocol: quic
+no-autoupdate: true
+
+ingress:
+  - hostname: your-app.yourdomain.com
+    service: http://localhost:8188
+    originRequest:
+      noTLSVerify: true
+      connectTimeout: 30s
+      keepAliveTimeout: 90s
+  - service: http_status:404</code></pre><p>修改后重启服务：</p><pre><code class="lang-bash">sudo systemctl restart cloudflared</code></pre><h2>第五部分：安全建议</h2><h3>1. 限制本地访问</h3><p>既然已经通过 Cloudflare Zero Trust 控制访问，建议将本地服务改为只监听 <code>127.0.0.1</code>，避免本地网络直接访问绕过认证。</p><p>例如，如果你的服务支持配置监听地址：</p><pre><code># 从
+0.0.0.0:8188
+
+# 改为
+127.0.0.1:8188</code></pre><h3>2. 使用强会话策略</h3><p>根据安全需求调整会话时长：</p><ul><li><strong>高安全</strong>：1 小时或更短</li><li><strong>日常使用</strong>：24 小时</li><li><strong>低敏感服务</strong>：1 周</li></ul><h3>3. 启用审计日志</h3><p>在 Zero Trust 控制台，你可以查看所有访问记录：</p><ul><li>谁在什么时间访问了应用</li><li>使用了哪种认证方式</li><li>访问是否成功</li></ul><h3>4. 定期更新 cloudflared</h3><pre><code class="lang-bash"># 更新到最新版本
+wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb
+sudo dpkg -i cloudflared-linux-amd64.deb
+sudo systemctl restart cloudflared</code></pre><h3>5. 使用不同策略管理不同应用</h3><p>如果你有多个内网服务，可以为每个服务创建独立的应用和策略：</p><pre><code class="lang-yaml">ingress:
+  - hostname: app1.yourdomain.com
+    service: http://localhost:8188
+  - hostname: app2.yourdomain.com
+    service: http://localhost:3000
+  - hostname: app3.yourdomain.com
+    service: http://localhost:8080
+  - service: http_status:404</code></pre><p>然后在 Zero Trust 控制台为每个域名创建单独的应用，设置不同的访问策略。</p><h2>第六部分：高级配置</h2><h3>1. 使用 Cloudflare Access 组</h3><p>如果需要管理多个用户，可以创建组：</p><ol><li>进入 <strong>Settings</strong> → <strong>Account</strong> → <strong>Users</strong></li><li>创建用户组（如 <code>developers</code>, <code>admins</code>）</li><li>在策略中使用组而不是单独的邮箱</li></ol><h3>2. 配置 WARP 客户端</h3><p>对于需要频繁访问的用户，可以使用 WARP 客户端实现更好的体验：</p><ol><li>下载 Cloudflare WARP 客户端</li><li>使用 Zero Trust 模式连接</li><li>无需每次打开浏览器都登录</li></ol><h3>3. 使用 Service Auth</h3><p>对于 API 或自动化访问，可以使用 Service Token：</p><ol><li>进入 <strong>Access</strong> → <strong>Service Auth</strong></li><li>创建 Service Token</li><li>在请求头中使用 Token 访问</li></ol><h3>4. 配置设备信任</h3><p>可以要求设备安装 WARP 客户端并满足特定条件才能访问：</p><ol><li>进入 <strong>Settings</strong> → <strong>Devices</strong></li><li>配置设备策略（如要求操作系统更新、防火墙开启等）</li><li>在应用策略中添加设备信任要求</li></ol><h2>常见使用场景</h2><h3>场景 1：个人 ComfyUI 服务器</h3><pre><code class="lang-yaml"># /etc/cloudflared/config.yml
+tunnel: abc123...
+credentials-file: /root/.cloudflared/abc123...json
+
+ingress:
+  - hostname: comfyui.example.com
+    service: http://localhost:8188
+  - service: http_status:404</code></pre><p>访问策略：只允许你自己的邮箱</p><h3>场景 2：团队内部工具</h3><pre><code class="lang-yaml"># /etc/cloudflared/config.yml
+tunnel: abc123...
+credentials-file: /root/.cloudflared/abc123...json
+
+ingress:
+  - hostname: tools.company.com
+    service: http://localhost:8080
+  - service: http_status:404</code></pre><p>访问策略：允许 <code>@company.com</code> 域名下的所有邮箱</p><h3>场景 3：多个服务</h3><pre><code class="lang-yaml"># /etc/cloudflared/config.yml
+tunnel: abc123...
+credentials-file: /root/.cloudflared/abc123...json
+
+ingress:
+  - hostname: jupyter.example.com
+    service: http://localhost:8888
+  - hostname: grafana.example.com
+    service: http://localhost:3000
+  - hostname: portainer.example.com
+    service: https://localhost:9443
+    originRequest:
+      noTLSVerify: true
+  - service: http_status:404</code></pre><p>为每个服务在 Zero Trust 控制台创建独立应用和策略。</p><h2>总结</h2><p>通过 Cloudflare Zero Trust，我们可以：</p><p>✅ <strong>无需公网 IP</strong>：内网服务器也能对外提供服务  <br>✅ <strong>安全访问控制</strong>：通过邮箱、IP、设备等多种方式控制访问  <br>✅ <strong>免费使用</strong>：个人用户可以免费使用（有一定的使用限制）  <br>✅ <strong>易于管理</strong>：图形化界面，配置简单  <br>✅ <strong>高可用性</strong>：依托 Cloudflare 全球网络  </p><p>希望本文能帮助你成功配置 Cloudflare Zero Trust，安全地远程访问你的内网服务！</p><h2>参考资源</h2><ul><li><a href="https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/">Cloudflare Tunnel 官方文档</a></li><li><a href="https://developers.cloudflare.com/cloudflare-one/policies/access/">Cloudflare Access 官方文档</a></li><li><a href="https://github.com/cloudflare/cloudflared">cloudflared GitHub 仓库</a></li></ul><h2>更新日志</h2><ul><li>2026-01-28：初始版本发布</li></ul>
+]]></content:encoded>
+<slash:comments>2</slash:comments>
+<comments>https://pa.ci/446.html#comments</comments>
+<wfw:commentRss>https://pa.ci/feed/446.html</wfw:commentRss>
+</item>
+<item>
+<title>Rime/雾凇拼音：敏感词/NSFW词屏蔽</title>
+<link>https://pa.ci/444.html</link>
+<guid>https://pa.ci/444.html</guid>
+<pubDate>Tue, 27 Jan 2026 12:39:00 +0000</pubDate>
+<dc:creator>怕刺</dc:creator>
+<category><![CDATA[技术]]></category>
+<description><![CDATA[此前写过切换到了RIME/雾凇拼音输入法，但是出于种种原因，雾凇拼音中包含的敏感词/NSFW词语总是会在各种场合下出现，不适合工作中长期使用。所以使用Golang写了一个简洁易用的NSFW词屏蔽...]]></description>
+<content:encoded xml:lang="zh-CN"><![CDATA[
+<p>此前写过切换到了<a href="https://pa.ci/370.html">RIME/雾凇拼音输入法</a>，但是出于种种原因，雾凇拼音中包含的敏感词/NSFW词语总是会在各种场合下出现，不适合工作中长期使用。所以使用Golang写了一个简洁易用的NSFW词屏蔽软件。</p><p><a href="https://github.com/uselibrary/iceminus">IceMinus/冰减</a>：<a href="https://github.com/uselibrary/iceminus"><a href="https://github.com/uselibrary/iceminus">https://github.com/uselibrary/iceminus</a></a> 一个用于屏蔽Rime/雾凇拼音（iDvel/rime-ice） 字典中敏感词（NSFW）的命令行工具。</p><p>以下是简要的使用说明，更多详细内容可以前往GitHub查看。</p><h2>使用说明</h2><h3>安装</h3><p><strong>推荐在<a href="https://github.com/uselibrary/iceminus/releases">release页面</a>下载预编译的二进制文件。</strong></p><p>或自行编译，例如：</p><pre><code class="lang-bash">git clone https://github.com/uselibrary/iceminus.git
+cd iceminus
+# 编译Windows版本
+env GOOS=windows GOARCH=amd64 go build -o bin/iceminus_windows_amd64.exe .</code></pre><h3>使用说明</h3><p>下载后运行iceminus，指定要处理的目录，以Windows为例：</p><pre><code>./iceminus.exe --path C:\Users\USERNAME\AppData\Roaming\Rime\cn_dicts # USERNAME替换为你的用户名</code></pre><p>程序将扫描该目录下的所有YAML文件，查找包含敏感词的行，并在行首添加注释符号 <code># </code> 以屏蔽这些条目。</p><p><strong>随后，请执行Rime的<code>重新部署</code>以应用更改。</strong></p>
+]]></content:encoded>
+<slash:comments>0</slash:comments>
+<comments>https://pa.ci/444.html#comments</comments>
+<wfw:commentRss>https://pa.ci/feed/444.html</wfw:commentRss>
+</item>
+<item>
+<title>OpenWrt 25.12 快速预览</title>
+<link>https://pa.ci/443.html</link>
+<guid>https://pa.ci/443.html</guid>
+<pubDate>Fri, 23 Jan 2026 05:52:05 +0000</pubDate>
+<dc:creator>怕刺</dc:creator>
+<category><![CDATA[技术]]></category>
+<description><![CDATA[时间买入2026年，OpenWrt也例行大版本更新，从OpenWrt 24.10更新至OpenWrt 25.12，当前（2026-01-23）已经发布了两个RC版本。主要改动软件包管理器从 op...]]></description>
+<content:encoded xml:lang="zh-CN"><![CDATA[
+<p>时间买入2026年，OpenWrt也例行大版本更新，从OpenWrt 24.10更新至OpenWrt 25.12，当前（2026-01-23）已经发布了两个RC版本。</p><h2>主要改动</h2><ol><li><strong>软件包管理器从 opkg 切换到 apk</strong> <br>这是本次更新中最具变革性的。opkg因为功能陈旧、性能难以适应现代化软件体系，且维护人员有限，已经制约了OpenWrt的发展。因此，OpenWrt社区决定采用源自Alpine Linux的现代化轻量级包管理器apk（Alpine Package Keeper）。虽然在24.10版本周期内就已在主开发分支的快照（nightly）版本中开始测试，但出于系统性限制和兼容性考虑，直到现在才正式将其作为默认的包管理器。</li><li><strong>交互式系统升级（Attended Sysupgrade）功能集成到默认的 LuCI 安装中</strong> <br>现在可以直接通过Web界面将设备从24.10升级到25.12，并自动保留配置，直接简化升级流程，对于部分不方便的设备不再需要各种半手动操作了。</li><li><strong>Shell 命令历史记录存储在内存中，直到下次重启</strong> <br>OpenWrt可以有类似现代化Linux桌面系统的终端体验了。</li><li><strong>集成视频流（Video Feed）功能</strong> <br>OpenWrt 25.12默认集成了基于Qt5的视频流应用，这为路由器在家庭监控、视频网关等新应用场景上打开了大门。</li><li><strong>Wi-Fi 脚本已转换为 ucode 格式</strong> <br>这项底层改动旨在提高Wi-Fi配置的效率和一致性。</li></ol><h2>组件与软件更新</h2><ul><li>Linux kernel 更新到了 6.12</li><li><p>工具链也对应更新：</p><ul><li>musl libc 1.2.5</li><li>glibc 2.41</li><li>gcc 14.3.0</li><li>binutils 2.44</li></ul></li><li><p>核心包例行更新：</p><ul><li>hostapd 2025年8月版本</li><li>dnsmasq 2.91</li><li>dropbear 2025.89</li><li>busybox 1.37.0</li></ul></li></ul>
+]]></content:encoded>
+<slash:comments>0</slash:comments>
+<comments>https://pa.ci/443.html#comments</comments>
+<wfw:commentRss>https://pa.ci/feed/443.html</wfw:commentRss>
+</item>
+<item>
+<title>gocar：一个Golang的cargo</title>
+<link>https://pa.ci/442.html</link>
+<guid>https://pa.ci/442.html</guid>
+<pubDate>Mon, 15 Dec 2025 07:25:14 +0000</pubDate>
+<dc:creator>怕刺</dc:creator>
+<category><![CDATA[技术]]></category>
+<description><![CDATA[经常在Go和Rust之间切换，很喜欢Rust的Cargo带来的优秀项目初始化和构建体验：cargo new &lt;appName&gt; # 一键创建标准项目cargo build # 统一构...]]></description>
+<content:encoded xml:lang="zh-CN"><![CDATA[
+<p>经常在<code>Go</code>和<code>Rust</code>之间切换，很喜欢<code>Rust</code>的<code>Cargo</code>带来的优秀项目初始化和构建体验：</p><pre><code>cargo new &lt;appName&gt; # 一键创建标准项目
+cargo build # 统一构建流程</code></pre><p>但回到<code>Go</code>时，虽然<code>go mod</code>很好，但项目初始化、结构规范、构建优化这些事，总是要手动操作。<br>于是，通过将<code>Cargo</code>的部分理念带到<code>Go</code>生态中。通过<strong>倒反天罡</strong>，写了<strong><code>gocar</code></strong>：简化<code>Go</code>项目“创建-构建”流程的命令行工具。它不替代<code>go</code>命令，而是作为补充，提供更一致、更便捷的起点。</p><p>项目已开源：<a href="https://github.com/uselibrary/gocar"><a href="https://github.com/uselibrary/gocar">https://github.com/uselibrary/gocar</a></a></p><p>以下是当前的示例，欢迎PR/issue：</p><h2>快速开始</h2><pre><code class="lang-bash"># 创建新项目（简洁模式）
+gocar new myapp
+
+# 进入项目目录
+cd myapp
+
+# 构建项目
+gocar build
+
+# 运行项目
+gocar run
+
+# 清理构建产物
+gocar clean</code></pre><h2>命令</h2><h3><code>gocar new &lt;name&gt; [--mode simple|project]</code></h3><p>创建新的 Go 项目。</p><p><strong>参数：</strong></p><ul><li><code>&lt;name&gt;</code> - 项目名称，同时作为目录名和输出的可执行文件名</li><li><code>--mode</code> - 项目模式，可选 <code>simple</code>（默认）或 <code>project</code></li></ul><p><strong>项目名规则：</strong></p><ul><li>必须以字母开头</li><li>只能包含字母、数字、下划线 <code>_</code> 或连字符 <code>-</code></li><li>不能使用保留名称：<code>test</code>、<code>main</code>、<code>init</code>、<code>internal</code>、<code>vendor</code></li></ul><p><strong>示例：</strong></p><pre><code class="lang-bash"># 创建简洁模式项目（默认）
+gocar new myapp
+
+# 创建项目模式项目
+gocar new myserver --mode project</code></pre><h3><code>gocar build [--release]</code></h3><p>构建当前项目。</p><p><strong>参数：</strong></p><ul><li><code>--release</code> 可选，使用之后即以CGO=0模式构建并优化体积</li></ul><p><strong>构建行为：</strong></p><table><thead><tr><th>模式</th><th>命令等价</th></tr></thead><tbody><tr><td>Debug（默认）</td><td><code>go build -o bin/&lt;appName&gt; ./main.go</code></td></tr><tr><td>Release</td><td><code>CGO_ENABLED=0 go build -ldflags=&quot;-s -w&quot; -trimpath -o bin/&lt;appName&gt; ./main.go</code></td></tr></tbody></table><blockquote>项目模式下入口为 <code>./cmd/server/main.go</code></blockquote><p><strong>示例：</strong></p><pre><code class="lang-bash"># Debug 构建
+gocar build
+
+# Release 构建（CGO=0模式构建并优化体积）
+gocar build --release</code></pre><h3><code>gocar run [args...]</code></h3><p>直接运行当前项目（使用 <code>go run</code>）。</p><p><strong>示例：</strong></p><pre><code class="lang-bash"># 运行项目
+gocar run
+
+# 传递参数给应用
+gocar run --port 8080</code></pre><h3><code>gocar clean</code></h3><p>清理 <code>bin/</code> 目录中的构建产物。</p><p><strong>示例：</strong></p><pre><code class="lang-bash">gocar clean
+# Cleaned build artifacts for &#039;myapp&#039;</code></pre><h3><code>gocar help</code></h3><p>显示帮助信息。</p><h3><code>gocar version</code></h3><p>显示版本信息。</p><hr><h2>项目模式</h2><h3>简洁模式（Simple）</h3><p>适用于小型项目、脚本、CLI 工具等。</p><pre><code>myapp/
+├── go.mod
+├── main.go
+├── README.md
+├── bin/
+├── .gitignore
+└── .git/</code></pre><p><strong>main.go 模板：</strong></p><pre><code class="lang-go">package main
+
+import (
+    &quot;fmt&quot;
+    &quot;time&quot;
+)
+
+func main() {
+    fmt.Println(&quot;Hello, gocar! A golang package manager.&quot;)
+    fmt.Println(time.Now().Format(&quot;2006-01-02 15:04:05&quot;))
+}</code></pre><h3>项目模式（Project）</h3><p>适用于大型项目、Web 服务、微服务等，遵循 Go 标准项目布局。</p><pre><code>myapp/
+├── cmd/
+│   └── server/
+│       └── main.go      # 应用入口
+├── internal/            # 私有代码（不可被外部导入）
+├── pkg/                 # 公共库代码
+├── test/                # 集成测试
+├── bin/                 # 构建输出
+├── go.mod
+├── README.md
+├── .gitignore
+└── .git/</code></pre><p><strong>cmd/server/main.go 模板：</strong></p><pre><code class="lang-go">package main
+
+import (
+    &quot;fmt&quot;
+    &quot;time&quot;
+)
+
+func main() {
+    fmt.Println(&quot;Hello, gocar! A golang package manager.&quot;)
+    fmt.Println(time.Now().Format(&quot;2006-01-02 15:04:05&quot;))
+}</code></pre><p><strong>目录说明：</strong></p><ul><li><code>cmd/</code> - 应用程序入口</li><li><code>internal/</code> - 私有代码，仅本模块内部使用（Go 编译器强制）</li><li><code>pkg/</code> - 可被外部项目导入的公共库</li><li><code>test/</code> - 集成测试、端到端测试</li></ul><hr><h2>特性</h2><ul><li><strong>自动 Git 初始化</strong> - 创建项目时自动执行 <code>git init -b main</code> 并生成 <code>.gitignore</code>，需要已经安装<code>git</code></li><li><strong>项目名验证</strong> - 确保项目名符合 Go 规范</li><li><strong>Release 优化</strong> - 使用 <code>-ldflags=&quot;-s -w&quot; -trimpath</code> 减小二进制体积</li><li><strong>跨平台支持</strong> - AMD64及aarch64的Windows、Linux 和 macOS</li><li><strong>清理命令</strong> - 一键清理构建产物</li></ul>
+]]></content:encoded>
+<slash:comments>0</slash:comments>
+<comments>https://pa.ci/442.html#comments</comments>
+<wfw:commentRss>https://pa.ci/feed/442.html</wfw:commentRss>
+</item>
+<item>
+<title>Golang和Rust常见编译命令速记</title>
+<link>https://pa.ci/440.html</link>
+<guid>https://pa.ci/440.html</guid>
+<pubDate>Fri, 28 Nov 2025 02:48:00 +0000</pubDate>
+<dc:creator>怕刺</dc:creator>
+<category><![CDATA[技术]]></category>
+<description><![CDATA[Golang编译命令CGO_ENABLED=0 go build -ldflags=&quot;-s -w&quot; -trimpath -o myappCGO_ENABLED=0:纯静态二进...]]></description>
+<content:encoded xml:lang="zh-CN"><![CDATA[
+<h1>Golang</h1><p>编译命令</p><pre><code>CGO_ENABLED=0 go build -ldflags=&quot;-s -w&quot; -trimpath -o myapp</code></pre><ul><li><code>CGO_ENABLED=0</code>:纯静态二进制，避免动态库依赖</li><li><code>-s</code>:strip symbol table 去除符号表</li><li><code>-w</code>:strip DWARF debug info 去除调试信息</li><li><code>-trimpath</code>：去除路径信息</li></ul><h1>Rust</h1><p>musl静态编译命令</p><pre><code>cargo build --target x86_64-unknown-linux-musl --release</code></pre><p>首次编译，需要安装<code>musl</code></p><pre><code>rustup target add x86_64-unknown-linux-musl</code></pre><p>编辑<code>Cargo.toml</code>文件，剥离调试和符号信息，类似Golang的<code>-s -w</code></p><pre><code>[profile.release]
+strip = &quot;symbols&quot;</code></pre><p>编辑<code>.cargo/config.toml</code>文件，移除路径信息</p><pre><code>[build]
+rustflags = [
+  &quot;--remap-path-prefix&quot;,
+  &quot;--remap-path-prefix-from=${CARGO_MANIFEST_DIR}&quot;,
+  &quot;--remap-path-prefix-to=.&quot;
+]</code></pre><h1>推荐的 Go 项目结构（基于 Go Modules）</h1><pre><code>my-project/                     # 项目根目录（包含 go.mod）
+├── go.mod                      # Go 模块声明（必需）
+├── go.sum                      # 依赖校验和（自动生成）
+├── README.md
+├── Makefile                    # （可选）构建/测试脚本
+├── .gitignore
+├── .golangci.yml               # （可选）golangci-lint 配置
+├── cmd/                        # 入口点（main 函数所在）
+│   └── server/                 # 每个可执行程序一个子目录
+│       └── main.go             # package main，调用 internal/app
+├── internal/                   # 私有代码（不能被外部项目 import）
+│   ├── app/                    # 应用核心逻辑（业务层）
+│   │   └── server.go
+│   ├── config/                 # 配置加载
+│   ├── handler/                # HTTP/gRPC 处理器
+│   ├── service/                # 业务服务（如 UserService）
+│   ├── repository/             # 数据访问层（DB、缓存等）
+│   └── middleware/             # 中间件
+├── pkg/                        # 可公开复用的库（可被其他项目 import）
+│   └── utils/                  # 通用工具（如字符串处理、时间格式等）
+├── api/                        # OpenAPI/Swagger 定义、gRPC .proto 文件
+│   └── v1/
+│       └── api.swagger.json
+├── scripts/                    # 部署、数据库迁移等脚本
+│   └── migrate.sh
+├── test/                       # 端到端测试、集成测试（非 *_test.go）
+│   └── e2e_test.go
+├── deployments/                # Dockerfile、K8s 配置等
+│   ├── Dockerfile
+│   └── k8s/
+└── docs/                       # 项目文档</code></pre><h1>最小可行结构（小型项目）</h1><pre><code>my-simple-app/
+├── go.mod
+├── main.go                # 包含 handler + 业务逻辑（仅限 demo）
+├── handler/
+│   └── user.go
+└── README.md</code></pre>
+]]></content:encoded>
+<slash:comments>0</slash:comments>
+<comments>https://pa.ci/440.html#comments</comments>
+<wfw:commentRss>https://pa.ci/feed/440.html</wfw:commentRss>
+</item>
+<item>
+<title>Windows 11 通知中心导致 VSCode、thunderbird卡死的原因和解决方法</title>
+<link>https://pa.ci/438.html</link>
+<guid>https://pa.ci/438.html</guid>
+<pubDate>Thu, 13 Nov 2025 13:07:00 +0000</pubDate>
+<dc:creator>怕刺</dc:creator>
+<category><![CDATA[技术]]></category>
+<description><![CDATA[垃圾微软/阿三又开始作妖了，砍了测试人员，bug又出现了。自从更新Windows 11 25H2之后，又出现了一堆严重的问题，其中一个困扰了我好多天，我一直以为是VSCode或者thunderb...]]></description>
+<content:encoded xml:lang="zh-CN"><![CDATA[
+<p>垃圾微软/阿三又开始作妖了，砍了测试人员，bug又出现了。自从更新Windows 11 25H2之后，又出现了一堆严重的问题，其中一个困扰了我好多天，我一直以为是VSCode或者thunderbird的问题，甚至还重装了系统也没用，今天灵机一动，发现是通知中心的问题。</p><h2>场景</h2><ul><li>系统：Windows 11 25H2</li><li>软件：后台正在运行GitHub copilot的VSCode；或者最小化到系统托盘的thunderbird，即：任意会发送toast notification的软件</li><li>操作：上述软件工作的时候，桌面前台全屏另外一个软件，比如word</li><li>bug：程序（VSCode/thunderbird）冻结卡死，只能通过任务管理器强制关闭；右侧通知栏彻底失效，不会展示新内容，无法操作</li></ul><p><strong>原因</strong>：本质上是系统损坏，至于原因，估计连微软自己都不知道。</p><h3>1. 重置通知中心</h3><ul><li>按 <code>Win + R</code> 打开运行</li><li>输入以下命令并回车：</li></ul><pre><code>PowerShell -ExecutionPolicy Unrestricted -Command &quot;&amp; {Get-AppxPackage *ShellExperienceHost* | Reset-AppxPackage}&quot;</code></pre><h3>2. 清除通知数据库</h3><ul><li>按 <code>Win + R</code> 输入：<code>%LocalAppData%\Microsoft\Windows\Notifications</code></li><li>删除该文件夹中的所有文件（数据库本身无法删除，跳过/忽略即可）</li><li>重启电脑</li></ul><h3>3. 重新注册通知组件</h3><p>以管理员身份打开PowerShell，依次运行：</p><pre><code class="lang-powershell">Get-AppxPackage -allusers Microsoft.Windows.ShellExperienceHost | Foreach {Add-AppxPackage -DisableDevelopmentMode -Register &quot;$($_.InstallLocation)\AppXManifest.xml&quot;}
+
+Get-AppxPackage -allusers windows.immersivecontrolpanel | Foreach {Add-AppxPackage -DisableDevelopmentMode -Register &quot;$($_.InstallLocation)\AppXManifest.xml&quot;}</code></pre><pre><code>DISM /Online /Cleanup-Image /RestoreHealth # 如果卡在62.3%也无所谓，直接重启电脑即可
+sfc /scannow</code></pre><p>重启系统时，会出现<code>系统更新</code>等内容，请等待系统完成。</p><h3>4. 执行清理操作</h3><p>以管理员身份打开PowerShell，依次运行：</p><pre><code>DISM /Online /Cleanup-Image /StartComponentCleanup
+DISM /Online /Cleanup-Image /AnalyzeComponentStore</code></pre><hr><p>以下内容已经失效</p><h2>场景</h2><ul><li>系统：Windows 11 25H2</li><li>软件：后台正在运行GitHub copilot的VSCode；或者最小化到系统托盘的thunderbird</li><li>操作：上述软件工作的时候，桌面前台全屏另外一个软件，比如word</li><li>bug：程序（VSCode/thunderbird）冻结卡死，只能通过任务管理器强制关闭</li><li>原因：通知功能的<code>自动启用“请勿打扰”</code>，默认勾选了<code>在全屏模式下使用应用时(优先级通知横幅也会隐藏)</code></li></ul><p><strong>现象</strong>：垃圾微软的垃圾阿三程序员，不知道写了什么bug，导致前台全屏的时候，后台所有消息都会被<strong>截断</strong>，不是接收了消息但是不提醒，而是<strong>截断</strong>消息。这一垃圾设计，导致VSCode/thunderbird等通过Toast notifications发现提醒的软件被强制阻断了，程序等待不到反馈，只能陷入卡死。关键是切换到VSCode/thunderbird后，即使没有其他程序在前台全屏了，这个bug也继续发光发热，彻底卡死通知中心本身。至此，后续所有的通知都无法接收并提醒，只能重启系统。</p><p><strong>解决方法</strong>：很简单，如下图，<code>设置&gt;通知</code>中直接取消勾选<code>在全屏模式下使用应用时(优先级通知横幅也会隐藏)</code>即可。</p><p><img src="https://pa.ci/usr/uploads/2025/11/2098798475.png" alt="2025-11-13T12:58:34.png" title="2025-11-13T12:58:34.png"></p>
+]]></content:encoded>
+<slash:comments>0</slash:comments>
+<comments>https://pa.ci/438.html#comments</comments>
+<wfw:commentRss>https://pa.ci/feed/438.html</wfw:commentRss>
+</item>
+<item>
+<title>Thunderbird黑屏/卡死的解决方案</title>
+<link>https://pa.ci/437.html</link>
+<guid>https://pa.ci/437.html</guid>
+<pubDate>Fri, 07 Nov 2025 10:56:12 +0000</pubDate>
+<dc:creator>怕刺</dc:creator>
+<category><![CDATA[技术]]></category>
+<description><![CDATA[此前一直用的outlook客户端，因为微软的技术原因，新版本的outlook已经不是一个合格的邮箱客户端，因此切换到了Thunderbird，即mozilla基于Firefox浏览器制作的邮箱客...]]></description>
+<content:encoded xml:lang="zh-CN"><![CDATA[
+<p>此前一直用的outlook客户端，因为微软的技术原因，新版本的outlook已经不是一个合格的邮箱客户端，因此切换到了Thunderbird，即mozilla基于Firefox浏览器制作的邮箱客户端。</p><p>使用2年有余，发现一个bug：最小化后再打开，界面会黑屏、程序完全卡死，只能在任务管理器中强制关闭。再次启动后则正常，但是一旦最小化之后，又会继续卡死。</p><p>实际上是缓存冲突，在界面中，使用<code>ctrl+shift+delete</code>，清理所有的缓存，随后重启程序即可。</p>
+]]></content:encoded>
+<slash:comments>0</slash:comments>
+<comments>https://pa.ci/437.html#comments</comments>
+<wfw:commentRss>https://pa.ci/feed/437.html</wfw:commentRss>
+</item>
+<item>
+<title>多GitHub并存在git提交方式</title>
+<link>https://pa.ci/436.html</link>
+<guid>https://pa.ci/436.html</guid>
+<pubDate>Sun, 12 Oct 2025 02:02:00 +0000</pubDate>
+<dc:creator>怕刺</dc:creator>
+<category><![CDATA[技术]]></category>
+<description><![CDATA[日常使用VSCode，并且有多个GitHub账号。希望不在VSCode中用特定GitHub账号登录的情况下正常推送代码。最可靠且稳定的方法是使用 SSH Key（每个账号独立）或 HTTPS+P...]]></description>
+<content:encoded xml:lang="zh-CN"><![CDATA[
+<p>日常使用VSCode，并且有多个GitHub账号。希望不在VSCode中用特定GitHub账号登录的情况下正常推送代码。最可靠且稳定的方法是使用 SSH Key（每个账号独立）或 HTTPS+PAT（个人访问令牌）。推荐使用 SSH Key方式。</p><h3>为每个 GitHub 账号生成独立 SSH Key，并用 SSH Host 别名绑定到仓库</h3><ul><li><p>生成 Key（示例为 work 账号）：</p><pre><code>ssh-keygen -t ed25519 -C &quot;you@work.com&quot; -f ~/.ssh/id_ed25519_work
+eval &quot;$(ssh-agent -s)&quot;
+ssh-add ~/.ssh/id_ed25519_work</code></pre></li><li>把 ~/.ssh/id_ed25519_work.pub 的内容复制到对应 GitHub 账号的 Settings → SSH and GPG keys。</li><li><p>在 ~/.ssh/config 添加 Host 别名：</p><pre><code>Host github-work
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/id_ed25519_work
+  IdentitiesOnly yes</code></pre></li><li><p>在本地 repo 使用别名作为 remote，注意改成实际的<code>work-username/repo</code>，某些情况下，<code>set-url origin</code>可能需要改成<code>add origin</code></p><pre><code>cd /path/to/program
+git remote add origin git@github-work:work-username.git
+# 或者
+git remote set-url origin git@github-work:work-username/repo.git</code></pre></li><li><p>测试连接：</p><pre><code>ssh -T git@github-work
+git remote -v # 检查远端状态</code></pre></li><li><p>设置本仓库的提交作者（只影响 commit 作者信息）：</p><pre><code>git config user.name &quot;Work Name&quot;
+git config user.email &quot;you@work.com&quot;</code></pre></li></ul><p>此时在 VSCode 中不需要登录对应 GitHub 账户，VSCode 会使用系统的 SSH key 进行 push/pull。</p>
+]]></content:encoded>
+<slash:comments>2</slash:comments>
+<comments>https://pa.ci/436.html#comments</comments>
+<wfw:commentRss>https://pa.ci/feed/436.html</wfw:commentRss>
+</item>
+</channel>
+</rss>

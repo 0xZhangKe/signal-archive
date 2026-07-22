@@ -1,0 +1,2966 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>四火的唠叨</title>
+	<atom:link href="https://www.raychase.net/feed" rel="self" type="application/rss+xml" />
+	<link>https://www.raychase.net</link>
+	<description>一个纯正程序员的啰嗦</description>
+	<lastBuildDate>Sat, 04 Jul 2026 16:34:36 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.0.12</generator>
+	<item>
+		<title>笔记：在 Mac Mini 本地跑 LLM 大模型</title>
+		<link>https://www.raychase.net/8180</link>
+					<comments>https://www.raychase.net/8180#respond</comments>
+		
+		<dc:creator><![CDATA[四火]]></dc:creator>
+		<pubDate>Mon, 01 Jun 2026 04:03:31 +0000</pubDate>
+				<category><![CDATA[Machine Learning and Artificial Intelligence]]></category>
+		<category><![CDATA[LLM]]></category>
+		<category><![CDATA[Mac]]></category>
+		<category><![CDATA[Ollama]]></category>
+		<category><![CDATA[大模型]]></category>
+		<category><![CDATA[爬虫]]></category>
+		<guid isPermaLink="false">https://www.raychase.net/?p=8180</guid>
+
+					<description><![CDATA[<!-- wp:paragraph -->
+<p>这些笔记是在自己的Mac Mini上面折腾了一些记录，主要是安装一些重要的大模型工具，把这些工具连接起来，建立自己的私有本地知识库等等，以备查阅。后续不定时更新。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>安装OrbStack</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>OrbStack是专门为MacOS设计的快速、轻量级的虚拟化工具，可以作为本地Docker、K8s和Linux VM的超容易替代品。因为它丢掉了跨平台的包袱，直接在系统内核级别支持虚拟机指令，动态分配内存等等做法，让它变得超快。就以Docker为例，它可以把冷启动速度从几十秒优化到一两秒。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>我是在Apple M4芯片的Mac mini上面折腾的，首先要保证我的应用全部都是M4芯片直接支持的，而不是通过Rosetta 2兼容性转换过来的。在检查Homebrew的时候，发现brew命令的路径在<code>/usr/local/bin/brew</code>，这就是说brew在Intel CPU的模拟路径上，因此重新安装了Homebrew，修改PATH以后检测发现brew已经在ARM的原生路径上了：<code>/opt/homebrew/bin/brew</code>。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>这再安装OrbStack就行了：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>brew install --cask orbstack</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>使用<code>orb</code>命令启动的时候，OrbStack列出了三大核心功能：Docker、K8s和Linux VM，基本上足以完成我日常折腾的最核心需要了。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>安装以后，docker的命令就完全支持了，启动一下看看：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>docker run -p 80:80 docker/getting-started</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:heading -->
+<h2>安装Cursor</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>我在公司里代码编辑器使用的是Intellij和Windsurf，后者是真正的AI原生IDE。不过现在打算安装Cursor，作为Windsurf的竞品，它有更优秀的综合体验。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>安装Miniforge</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>首先要安装Conda，有很多其他的库管理系统，但因为Conda是一个更通用的环境管家，不仅限于Python，包括Python库底层的C++一并搞定。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Miniforge把Conda工具包装了一下，并且针对Mac定制化了一下。Conda的定制化有很多，Miniforge是其中之一，开源免费，支持原生ARM。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>安装Ollama</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Ollama是一个可以在本地电脑上运行LLM的工具。然后可以跑Llama模型了：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>ollama run llama3.2</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>用Cursor写一段小程序来调用它：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.time.Duration;
+
+public class LocalLLMClient {
+
+    public static void main(String&#91;] args) {
+        String endpoint = "http://localhost:11434/api/generate";
+
+        String jsonPayload = "{"
+            + "\"model\": \"llama3.2\","
+            + "\"prompt\": \"Who are you?\","
+            + "\"stream\": false"
+            + "}";
+
+        HttpClient client = HttpClient.newBuilder()
+                .connectTimeout(Duration.ofSeconds(10))
+                .build();
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(endpoint))
+                .header("Content-Type", "application/json")
+                .POST(HttpRequest.BodyPublishers.ofString(jsonPayload))
+                .build();
+
+        try {
+            HttpResponse&#60;String&#62; response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            System.out.println("HTTP status code: " + response.statusCode());
+            System.out.println(response.body());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>运行它，可以得到：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>HTTP status code: 200
+{"model":"llama3.2","created_at":"2026-03-29T23:54:11.011864Z","response":"I'm an artificial intelligence model known as Llama. Llama stands for \"Large Language Model Meta AI.\"","done":true,"done_reason":"stop","context":&#91;128006,9125,128007,271,38766,1303,33025,2696,25,6790,220,2366,18,271,128009,128006,882,128007,271,15546,527,499,30,128009,128006,78191,128007,271,40,2846,459,21075,11478,1646,3967,439,445,81101,13,445,81101,13656,369,330,35353,11688,5008,16197,15592,1210],"total_duration":868990167,"load_duration":99794167,"prompt_eval_count":29,"prompt_eval_duration":263381208,"eval_count":23,"eval_duration":497184294}</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>Ollama这个工具是最核心的部分，其他很多工具都需要连接在Ollama上面跑的大模型来完成。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>安装LM Studio</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>LM Studio基本上就是本地的大模型图形化工具，和Ollama在功能上是有重叠的。一般说来，Ollama可以用作后台程序运行和工程化调用，但是LM Studio适合选型和调试。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>模型文件都比较大，已经使用Ollama下载了的，就不需要LM Studio再下载一遍了。模型都被下载到了<code>~/.ollama/models/blobs/sha256-xxx</code>，根据文件大小可以找到那个实际的模型文件。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>然后创建gguf的软链接，比如：<code>ln -s ~/.ollama/models/blobs/sha256-3e4cb14174460404e7a233e531675303b2fbf7749c02f91864fe311ab6344e4f ~/AI/models/LM_Models/Ollama/qwen3-4b/model.gguf</code>，这样在加载以后，这个文件就能够被识别了：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":8182,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="/wp-content/uploads/2026/03/Snip20260329_9.png" alt="" class="wp-image-8182"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:heading -->
+<h2>安装Claude</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>我们可以配置 <code>/Users/ray/Library/Application Support/Claude</code> 来允许Ollama来访问Claude的MCP接口：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>{
+  "preferences": {
+    "coworkWebSearchEnabled": true,
+    "coworkScheduledTasksEnabled": false,
+    "ccdScheduledTasksEnabled": false
+  },
+  "mcpServers": {
+    "local_ollama": {
+      "command": "/usr/local/bin/npx",
+      "args": &#91;
+        "-y",
+        "ollama-mcp-server",
+        "http://localhost:11434"
+      ]
+    }
+  }
+}</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>再去问Claude的时候，它就能访问Ollama并得到安装的模型了：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":8199,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="/wp-content/uploads/2026/05/image.png" alt="" class="wp-image-8199"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>它的这个操作，其实是和本地运行 <code>curl http://localhost:11434/api/tags</code> 或者 <code>ollama list</code> 是一样的。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>为了能更方便地使用，最好打开语音操作支持。在Mac的设置里面，找到keyboard，语言列表里面需要把中文英文都勾上：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":8200,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="/wp-content/uploads/2026/05/image-1.png" alt="" class="wp-image-8200"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>并且还可以设置为双击Command按键就可以调出语音输入。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>在general的语言和地区设置里面，加上中文：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":8201,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="/wp-content/uploads/2026/05/image-2.png" alt="" class="wp-image-8201"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>再配置好Gmail的connector，就可以让Claude做一些更有意义的工作了。比如，我让它分析最近看的房子，生成一份详细的报告发到家人的邮箱里。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":8243,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="https://www.raychase.net/wp-content/uploads/2026/05/image-12.png" alt="" class="wp-image-8243"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:heading -->
+<h2>安装AnythingLLM</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>下载安装<a rel="noreferrer noopener" href="https://anythingllm.com/desktop" target="_blank">AnythingLLM</a>，下面使用它来选择本地模型，选择远程网站或者本地文件，并进行本地RAG（检索增强生成，Retrieval-Augmented Generation），生成属于自己的私有/本地知识库。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>设置里面，先选择推理模型（LLM Preference）：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":8246,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="https://www.raychase.net/wp-content/uploads/2026/05/image-13.png" alt="" class="wp-image-8246"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>再选择嵌入模型（Embedding Preference）：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":8248,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="https://www.raychase.net/wp-content/uploads/2026/05/image-14.png" alt="" class="wp-image-8248"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>最后选择向量数据库 (Vector Database)，保持默认。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>使用Bulk Link Scraper这个Data Connector可以去扒拉网站上的内容：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":8250,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="https://www.raychase.net/wp-content/uploads/2026/05/image-15.png" alt="" class="wp-image-8250"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>运行<code>tail -f ~/Library/Application\ Support/anythingllm-desktop/storage/logs/collector*.log</code>可以看到抓取的详细信息。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>抓取完成后，回到Documents页就可以把抓到的内容加到Workspace里面去：Move to Workspace -&#62; Save and Embed。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>除了抓取网页，也可以上传一些本地的文件给它。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>不过，文件较多的时候，它的可用性就比较差了。我们需要一些其他的工具。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>搭建Dify环境</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>为了解决前述问题，下面搭建搭建 Dify + 本地 Ollama 的组合。Dify 是一个“Agentic Workflow Builder”，它底层集成了非结构化数据解析引擎，可以把各种格式的文件转成文本。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>首先修改 Ollama 的环境变量，使其监听所有网卡：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>launchctl setenv OLLAMA_HOST "0.0.0.0"</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>这一步需要重启Ollama。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>现在本地有的qwen3和llama3都是chat模型，还需要专属的 Embedding 向量模型：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>ollama pull nomic-embed-text</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>Dify 官方提供了完整的 Docker 编排文件，包含前端、后端、PostgreSQL 数据库、Redis 缓存以及向量索引组件。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>git clone https://github.com/langgenius/dify.git
+cd dify/docker
+cp .env.example .env</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>再把上面.env文件的EXPOSE_NGINX_PORT这一项端口从80改成8080，以避免冲突。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>还需要加上这样的配置以放宽文件上传限制：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>UPLOAD_FILE_SIZE_LIMIT=10000
+UPLOAD_FILE_BATCH_LIMIT=20000</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>环境配置文件准备好以后，就可以启动所有容器组件了。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>docker compose up -d</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>于是乎，pull了一大堆image：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":8251,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="https://www.raychase.net/wp-content/uploads/2026/05/image-16.png" alt="" class="wp-image-8251"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>启动了一堆container。以后要启动和停止，以及看日志，使用：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>docker compose down
+docker compose up -d
+docker compose logs -f</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>访问 http://localhost:8080/ 并创建用户。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>接着Settings里面添加Ollama的plugin，</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":8252,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="https://www.raychase.net/wp-content/uploads/2026/05/image-17.png" alt="" class="wp-image-8252"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>先配置LLM的llama3模型，再配置Text Embedded的nomic-embed-text模型。这其中的Base URL不能用localhost，而是要使用host.docker.internal，因为Dify 在 Docker 内部运行。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":8253,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="https://www.raychase.net/wp-content/uploads/2026/05/image-18.png" alt="" class="wp-image-8253"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>之后，就选中一个知识库，然后分批追加文件。因为软件一次性没法导入一个太大的文件夹，否则页面会卡死，所以这一点需要注意。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":8254,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="https://www.raychase.net/wp-content/uploads/2026/05/image-19.png" alt="" class="wp-image-8254"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>之后，还可以把网站等其它形式的数据导进来，这样自己的知识库就会更加全面。如果是爬网站的话，可以去<a rel="noreferrer noopener" href="https://www.firecrawl.dev/" target="_blank">Firecrawl</a>注册一个账号，得到一个API Key（免费版好像是最多只有2 active browsers一起工作，单月1000个credit，不过对我来说也够了），填到Dify的Firecrawl插件配置中：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":8256,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="https://www.raychase.net/wp-content/uploads/2026/05/image-21.png" alt="" class="wp-image-8256"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>然后就可以去爬网站了。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>最后，在 Studio 菜单里创建一个Chatbot或 Agent，在右侧的“上下文”中关联这个知识库。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":8255,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="https://www.raychase.net/wp-content/uploads/2026/05/image-20.png" alt="" class="wp-image-8255"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>这样，后续问它任何问题，都可以从这个具备个人信息的知识库中进行检索。</p>
+<!-- /wp:paragraph -->]]></description>
+										<content:encoded><![CDATA[
+<p>这些笔记是在自己的 Mac Mini 上面折腾了一些记录，主要是安装一些重要的大模型工具，把这些工具连接起来，建立自己的私有本地知识库等等，以备查阅。后续不定时更新。</p>
+
+
+
+<h2>安装 OrbStack</h2>
+
+
+
+<p>OrbStack 是专门为 MacOS 设计的快速、轻量级的虚拟化工具，可以作为本地 Docker、K8s 和 Linux VM 的超容易替代品。因为它丢掉了跨平台的包袱，直接在系统内核级别支持虚拟机指令，动态分配内存等等做法，让它变得超快。就以 Docker 为例，它可以把冷启动速度从几十秒优化到一两秒。</p>
+
+
+
+<p>我是在 Apple M4 芯片的 Mac mini 上面折腾的，首先要保证我的应用全部都是 M4 芯片直接支持的，而不是通过 Rosetta 2 兼容性转换过来的。在检查 Homebrew 的时候，发现 brew 命令的路径在<code>/usr/local/bin/brew</code>，这就是说 brew 在 Intel CPU 的模拟路径上，因此重新安装了 Homebrew，修改 PATH 以后检测发现 brew 已经在 ARM 的原生路径上了：<code>/opt/homebrew/bin/brew</code>。</p>
+
+
+
+<p>这再安装 OrbStack 就行了：</p>
+
+
+
+<pre class="wp-block-code"><code>brew install --cask orbstack</code></pre>
+
+
+
+<p>使用 <code>orb</code> 命令启动的时候，OrbStack 列出了三大核心功能：Docker、K8s 和 Linux VM，基本上足以完成我日常折腾的最核心需要了。</p>
+
+
+
+<p>安装以后，docker 的命令就完全支持了，启动一下看看：</p>
+
+
+
+<pre class="wp-block-code"><code>docker run -p 80:80 docker/getting-started</code></pre>
+
+
+
+<h2>安装 Cursor</h2>
+
+
+
+<p>我在公司里代码编辑器使用的是 Intellij 和 Windsurf，后者是真正的 AI 原生 IDE。不过现在打算安装 Cursor，作为 Windsurf 的竞品，它有更优秀的综合体验。</p>
+
+
+
+<h2>安装 Miniforge</h2>
+
+
+
+<p>首先要安装 Conda，有很多其他的库管理系统，但因为 Conda 是一个更通用的环境管家，不仅限于 Python，包括 Python 库底层的 C++一并搞定。</p>
+
+
+
+<p>Miniforge 把 Conda 工具包装了一下，并且针对 Mac 定制化了一下。Conda 的定制化有很多，Miniforge 是其中之一，开源免费，支持原生 ARM。</p>
+
+
+
+<h2>安装 Ollama</h2>
+
+
+
+<p>Ollama 是一个可以在本地电脑上运行 LLM 的工具。然后可以跑 Llama 模型了：</p>
+
+
+
+<pre class="wp-block-code"><code>ollama run llama3.2</code></pre>
+
+
+
+<p>用 Cursor 写一段小程序来调用它：</p>
+
+
+
+<pre class="wp-block-code"><code>import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.time.Duration;
+
+public class LocalLLMClient {
+
+    public static void main(String&#91;] args) {
+        String endpoint = "http://localhost:11434/api/generate";
+
+        String jsonPayload = "{"
+            + "\"model\": \"llama3.2\","
+            + "\"prompt\": \"Who are you?\","
+            + "\"stream\": false"
+            + "}";
+
+        HttpClient client = HttpClient.newBuilder()
+                .connectTimeout(Duration.ofSeconds(10))
+                .build();
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(endpoint))
+                .header("Content-Type", "application/json")
+                .POST(HttpRequest.BodyPublishers.ofString(jsonPayload))
+                .build();
+
+        try {
+            HttpResponse&lt;String&gt; response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            System.out.println("HTTP status code: " + response.statusCode());
+            System.out.println(response.body());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+
+
+
+<p>运行它，可以得到：</p>
+
+
+
+<pre class="wp-block-code"><code>HTTP status code: 200
+{"model":"llama3.2","created_at":"2026-03-29T23:54:11.011864Z","response":"I'm an artificial intelligence model known as Llama. Llama stands for \"Large Language Model Meta AI.\"","done":true,"done_reason":"stop","context":&#91;128006,9125,128007,271,38766,1303,33025,2696,25,6790,220,2366,18,271,128009,128006,882,128007,271,15546,527,499,30,128009,128006,78191,128007,271,40,2846,459,21075,11478,1646,3967,439,445,81101,13,445,81101,13656,369,330,35353,11688,5008,16197,15592,1210],"total_duration":868990167,"load_duration":99794167,"prompt_eval_count":29,"prompt_eval_duration":263381208,"eval_count":23,"eval_duration":497184294}</code></pre>
+
+
+
+<p>Ollama 这个工具是最核心的部分，其他很多工具都需要连接在 Ollama 上面跑的大模型来完成。</p>
+
+
+
+<h2>安装 LM Studio</h2>
+
+
+
+<p>LM Studio 基本上就是本地的大模型图形化工具，和 Ollama 在功能上是有重叠的。一般说来，Ollama 可以用作后台程序运行和工程化调用，但是 LM Studio 适合选型和调试。</p>
+
+
+
+<p>模型文件都比较大，已经使用 Ollama 下载了的，就不需要 LM Studio 再下载一遍了。模型都被下载到了<code>~/.ollama/models/blobs/sha256-xxx</code>，根据文件大小可以找到那个实际的模型文件。</p>
+
+
+
+<p>然后创建 gguf 的软链接，比如：<code>ln -s ~/.ollama/models/blobs/sha256-3e4cb14174460404e7a233e531675303b2fbf7749c02f91864fe311ab6344e4f ~/AI/models/LM_Models/Ollama/qwen3-4b/model.gguf</code>，这样在加载以后，这个文件就能够被识别了：</p>
+
+
+
+<figure class="wp-block-image size-full"><img width="1020" height="354" src="/wp-content/uploads/2026/03/Snip20260329_9.png" alt="" class="wp-image-8182" srcset="https://www.raychase.net/wp-content/uploads/2026/03/Snip20260329_9.png 1020w, https://www.raychase.net/wp-content/uploads/2026/03/Snip20260329_9-300x104.png 300w, https://www.raychase.net/wp-content/uploads/2026/03/Snip20260329_9-768x267.png 768w, https://www.raychase.net/wp-content/uploads/2026/03/Snip20260329_9-850x295.png 850w" sizes="(max-width: 1020px) 100vw, 1020px" /></figure>
+
+
+
+<h2>安装 Claude</h2>
+
+
+
+<p>我们可以配置 <code>/Users/ray/Library/Application Support/Claude</code> 来允许 Ollama 来访问 Claude 的 MCP 接口：</p>
+
+
+
+<pre class="wp-block-code"><code>{
+  "preferences": {
+    "coworkWebSearchEnabled": true,
+    "coworkScheduledTasksEnabled": false,
+    "ccdScheduledTasksEnabled": false
+  },
+  "mcpServers": {
+    "local_ollama": {
+      "command": "/usr/local/bin/npx",
+      "args": &#91;
+        "-y",
+        "ollama-mcp-server",
+        "http://localhost:11434"
+      ]
+    }
+  }
+}</code></pre>
+
+
+
+<p>再去问 Claude 的时候，它就能访问 Ollama 并得到安装的模型了：</p>
+
+
+
+<figure class="wp-block-image size-full"><img loading="lazy" width="783" height="521" src="/wp-content/uploads/2026/05/image.png" alt="" class="wp-image-8199" srcset="https://www.raychase.net/wp-content/uploads/2026/05/image.png 783w, https://www.raychase.net/wp-content/uploads/2026/05/image-300x200.png 300w, https://www.raychase.net/wp-content/uploads/2026/05/image-768x511.png 768w" sizes="(max-width: 783px) 100vw, 783px" /></figure>
+
+
+
+<p>它的这个操作，其实是和本地运行 <code>curl http://localhost:11434/api/tags</code> 或者 <code>ollama list</code> 是一样的。</p>
+
+
+
+<p>为了能更方便地使用，最好打开语音操作支持。在 Mac 的设置里面，找到 keyboard，语言列表里面需要把中文英文都勾上：</p>
+
+
+
+<figure class="wp-block-image size-full"><img loading="lazy" width="566" height="620" src="/wp-content/uploads/2026/05/image-1.png" alt="" class="wp-image-8200" srcset="https://www.raychase.net/wp-content/uploads/2026/05/image-1.png 566w, https://www.raychase.net/wp-content/uploads/2026/05/image-1-274x300.png 274w, https://www.raychase.net/wp-content/uploads/2026/05/image-1-300x329.png 300w" sizes="(max-width: 566px) 100vw, 566px" /></figure>
+
+
+
+<p>并且还可以设置为双击 Command 按键就可以调出语音输入。</p>
+
+
+
+<p>在 general 的语言和地区设置里面，加上中文：</p>
+
+
+
+<figure class="wp-block-image size-full"><img loading="lazy" width="494" height="229" src="/wp-content/uploads/2026/05/image-2.png" alt="" class="wp-image-8201" srcset="https://www.raychase.net/wp-content/uploads/2026/05/image-2.png 494w, https://www.raychase.net/wp-content/uploads/2026/05/image-2-300x139.png 300w" sizes="(max-width: 494px) 100vw, 494px" /></figure>
+
+
+
+<p>再配置好 Gmail 的 connector，就可以让 Claude 做一些更有意义的工作了。比如，我让它分析最近看的房子，生成一份详细的报告发到家人的邮箱里。</p>
+
+
+
+<figure class="wp-block-image size-full"><img loading="lazy" width="623" height="426" src="https://www.raychase.net/wp-content/uploads/2026/05/image-12.png" alt="" class="wp-image-8243" srcset="https://www.raychase.net/wp-content/uploads/2026/05/image-12.png 623w, https://www.raychase.net/wp-content/uploads/2026/05/image-12-300x205.png 300w" sizes="(max-width: 623px) 100vw, 623px" /></figure>
+
+
+
+<h2>安装 AnythingLLM</h2>
+
+
+
+<p>下载安装 <a rel="noreferrer noopener" href="https://anythingllm.com/desktop" target="_blank">AnythingLLM</a>，下面使用它来选择本地模型，选择远程网站或者本地文件，并进行本地 RAG（检索增强生成，Retrieval-Augmented Generation），生成属于自己的私有/本地知识库。</p>
+
+
+
+<p>设置里面，先选择推理模型（LLM Preference）：</p>
+
+
+
+<figure class="wp-block-image size-full"><img loading="lazy" width="1023" height="682" src="https://www.raychase.net/wp-content/uploads/2026/05/image-13.png" alt="" class="wp-image-8246" srcset="https://www.raychase.net/wp-content/uploads/2026/05/image-13.png 1023w, https://www.raychase.net/wp-content/uploads/2026/05/image-13-300x200.png 300w, https://www.raychase.net/wp-content/uploads/2026/05/image-13-768x512.png 768w, https://www.raychase.net/wp-content/uploads/2026/05/image-13-850x567.png 850w" sizes="(max-width: 1023px) 100vw, 1023px" /></figure>
+
+
+
+<p>再选择嵌入模型（Embedding Preference）：</p>
+
+
+
+<figure class="wp-block-image size-full"><img loading="lazy" width="1018" height="499" src="https://www.raychase.net/wp-content/uploads/2026/05/image-14.png" alt="" class="wp-image-8248" srcset="https://www.raychase.net/wp-content/uploads/2026/05/image-14.png 1018w, https://www.raychase.net/wp-content/uploads/2026/05/image-14-300x147.png 300w, https://www.raychase.net/wp-content/uploads/2026/05/image-14-768x376.png 768w, https://www.raychase.net/wp-content/uploads/2026/05/image-14-850x417.png 850w" sizes="(max-width: 1018px) 100vw, 1018px" /></figure>
+
+
+
+<p>最后选择向量数据库 (Vector Database)，保持默认。</p>
+
+
+
+<p>使用 Bulk Link Scraper 这个 Data Connector 可以去扒拉网站上的内容：</p>
+
+
+
+<figure class="wp-block-image size-full"><img loading="lazy" width="756" height="660" src="https://www.raychase.net/wp-content/uploads/2026/05/image-15.png" alt="" class="wp-image-8250" srcset="https://www.raychase.net/wp-content/uploads/2026/05/image-15.png 756w, https://www.raychase.net/wp-content/uploads/2026/05/image-15-300x262.png 300w" sizes="(max-width: 756px) 100vw, 756px" /></figure>
+
+
+
+<p>运行 <code>tail -f ~/Library/Application\ Support/anythingllm-desktop/storage/logs/collector*.log</code> 可以看到抓取的详细信息。</p>
+
+
+
+<p>抓取完成后，回到 Documents 页就可以把抓到的内容加到 Workspace 里面去：Move to Workspace -&gt; Save and Embed。</p>
+
+
+
+<p>除了抓取网页，也可以上传一些本地的文件给它。</p>
+
+
+
+<p>不过，文件较多的时候，它的可用性就比较差了。我们需要一些其他的工具。</p>
+
+
+
+<h2>搭建 Dify 环境</h2>
+
+
+
+<p>为了解决前述问题，下面搭建搭建 Dify + 本地 Ollama 的组合。Dify 是一个 “Agentic Workflow Builder”，它底层集成了非结构化数据解析引擎，可以把各种格式的文件转成文本。</p>
+
+
+
+<p>首先修改 Ollama 的环境变量，使其监听所有网卡：</p>
+
+
+
+<pre class="wp-block-code"><code>launchctl setenv OLLAMA_HOST "0.0.0.0"</code></pre>
+
+
+
+<p>这一步需要重启 Ollama。</p>
+
+
+
+<p>现在本地有的 qwen3 和 llama3 都是 chat 模型，还需要专属的 Embedding 向量模型：</p>
+
+
+
+<pre class="wp-block-code"><code>ollama pull nomic-embed-text</code></pre>
+
+
+
+<p>Dify 官方提供了完整的 Docker 编排文件，包含前端、后端、PostgreSQL 数据库、Redis 缓存以及向量索引组件。</p>
+
+
+
+<pre class="wp-block-code"><code>git clone https://github.com/langgenius/dify.git
+cd dify/docker
+cp .env.example .env</code></pre>
+
+
+
+<p>再把上面.env 文件的 EXPOSE_NGINX_PORT 这一项端口从 80 改成 8080，以避免冲突。</p>
+
+
+
+<p>还需要加上这样的配置以放宽文件上传限制：</p>
+
+
+
+<pre class="wp-block-code"><code>UPLOAD_FILE_SIZE_LIMIT=10000
+UPLOAD_FILE_BATCH_LIMIT=20000</code></pre>
+
+
+
+<p>环境配置文件准备好以后，就可以启动所有容器组件了。</p>
+
+
+
+<pre class="wp-block-code"><code>docker compose up -d</code></pre>
+
+
+
+<p>于是乎，pull 了一大堆 image：</p>
+
+
+
+<figure class="wp-block-image size-full"><img loading="lazy" width="206" height="208" src="https://www.raychase.net/wp-content/uploads/2026/05/image-16.png" alt="" class="wp-image-8251" srcset="https://www.raychase.net/wp-content/uploads/2026/05/image-16.png 206w, https://www.raychase.net/wp-content/uploads/2026/05/image-16-150x150.png 150w, https://www.raychase.net/wp-content/uploads/2026/05/image-16-120x120.png 120w" sizes="(max-width: 206px) 100vw, 206px" /></figure>
+
+
+
+<p>启动了一堆 container。以后要启动和停止，以及看日志，使用：</p>
+
+
+
+<pre class="wp-block-code"><code>docker compose down
+docker compose up -d
+docker compose logs -f</code></pre>
+
+
+
+<p>访问 http://localhost:8080/ 并创建用户。</p>
+
+
+
+<p>接着 Settings 里面添加 Ollama 的 plugin，</p>
+
+
+
+<figure class="wp-block-image size-full"><img loading="lazy" width="606" height="631" src="https://www.raychase.net/wp-content/uploads/2026/05/image-17.png" alt="" class="wp-image-8252" srcset="https://www.raychase.net/wp-content/uploads/2026/05/image-17.png 606w, https://www.raychase.net/wp-content/uploads/2026/05/image-17-288x300.png 288w, https://www.raychase.net/wp-content/uploads/2026/05/image-17-300x312.png 300w" sizes="(max-width: 606px) 100vw, 606px" /></figure>
+
+
+
+<p>先配置 LLM 的 llama3 模型，再配置 Text Embedded 的 nomic-embed-text 模型。这其中的 Base URL 不能用 localhost，而是要使用 host.docker.internal，因为 Dify 在 Docker 内部运行。</p>
+
+
+
+<figure class="wp-block-image size-full"><img loading="lazy" width="785" height="248" src="https://www.raychase.net/wp-content/uploads/2026/05/image-18.png" alt="" class="wp-image-8253" srcset="https://www.raychase.net/wp-content/uploads/2026/05/image-18.png 785w, https://www.raychase.net/wp-content/uploads/2026/05/image-18-300x95.png 300w, https://www.raychase.net/wp-content/uploads/2026/05/image-18-768x243.png 768w" sizes="(max-width: 785px) 100vw, 785px" /></figure>
+
+
+
+<p>之后，就选中一个知识库，然后分批追加文件。因为软件一次性没法导入一个太大的文件夹，否则页面会卡死，所以这一点需要注意。</p>
+
+
+
+<figure class="wp-block-image size-full"><img loading="lazy" width="836" height="327" src="https://www.raychase.net/wp-content/uploads/2026/05/image-19.png" alt="" class="wp-image-8254" srcset="https://www.raychase.net/wp-content/uploads/2026/05/image-19.png 836w, https://www.raychase.net/wp-content/uploads/2026/05/image-19-300x117.png 300w, https://www.raychase.net/wp-content/uploads/2026/05/image-19-768x300.png 768w" sizes="(max-width: 836px) 100vw, 836px" /></figure>
+
+
+
+<p>之后，还可以把网站等其它形式的数据导进来，这样自己的知识库就会更加全面。如果是爬网站的话，可以去 <a rel="noreferrer noopener" href="https://www.firecrawl.dev/" target="_blank">Firecrawl</a> 注册一个账号，得到一个 API Key（免费版好像是最多只有 2 active browsers 一起工作，单月 1000 个 credit，不过对我来说也够了），填到 Dify 的 Firecrawl 插件配置中：</p>
+
+
+
+<figure class="wp-block-image size-full"><img loading="lazy" width="621" height="488" src="https://www.raychase.net/wp-content/uploads/2026/05/image-21.png" alt="" class="wp-image-8256" srcset="https://www.raychase.net/wp-content/uploads/2026/05/image-21.png 621w, https://www.raychase.net/wp-content/uploads/2026/05/image-21-300x236.png 300w" sizes="(max-width: 621px) 100vw, 621px" /></figure>
+
+
+
+<p>然后就可以去爬网站了。</p>
+
+
+
+<p>最后，在 Studio 菜单里创建一个 Chatbot 或 Agent，在右侧的 “上下文” 中关联这个知识库。</p>
+
+
+
+<figure class="wp-block-image size-full"><img loading="lazy" width="555" height="385" src="https://www.raychase.net/wp-content/uploads/2026/05/image-20.png" alt="" class="wp-image-8255" srcset="https://www.raychase.net/wp-content/uploads/2026/05/image-20.png 555w, https://www.raychase.net/wp-content/uploads/2026/05/image-20-300x208.png 300w" sizes="(max-width: 555px) 100vw, 555px" /></figure>
+
+
+
+<p>这样，后续问它任何问题，都可以从这个具备个人信息的知识库中进行检索。</p>
+<p><strong><font color="#ff0000">文章未经特殊标明皆为本人原创，未经许可不得用于任何商业用途，转载请保持完整性并注明来源链接 <a href="https://www.raychase.net/8180">《四火的唠叨》</a></font></strong></p><div class='yarpp yarpp-related yarpp-related-rss yarpp-template-list'>
+<!-- YARPP List -->
+<p>你可能也喜欢看：</p><ol>
+<li><a href="https://www.raychase.net/886" rel="bookmark" title="动手实现随机验证码">动手实现随机验证码</a></li>
+<li><a href="https://www.raychase.net/7260" rel="bookmark" title="学习 OpenAPI 的一点记录">学习 OpenAPI 的一点记录</a></li>
+<li><a href="https://www.raychase.net/1532" rel="bookmark" title="Memcached 调优">Memcached 调优</a></li>
+<li><a href="https://www.raychase.net/174" rel="bookmark" title="EasyMock、EasyMock Class Extension 和 PowerMock">EasyMock、EasyMock Class Extension 和 PowerMock</a></li>
+<li><a href="https://www.raychase.net/4881" rel="bookmark" title="从 Mac 下的包管理和安装工具说起">从 Mac 下的包管理和安装工具说起</a></li>
+</ol>
+</div>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.raychase.net/8180/feed</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>笔记：把新域名应用到 Blog 和 Email 上</title>
+		<link>https://www.raychase.net/8205</link>
+					<comments>https://www.raychase.net/8205#respond</comments>
+		
+		<dc:creator><![CDATA[四火]]></dc:creator>
+		<pubDate>Mon, 25 May 2026 00:04:10 +0000</pubDate>
+				<category><![CDATA[Tools Frameworks and Libs]]></category>
+		<category><![CDATA[DNS]]></category>
+		<category><![CDATA[Resend]]></category>
+		<category><![CDATA[Squarespace]]></category>
+		<category><![CDATA[域名]]></category>
+		<category><![CDATA[邮件]]></category>
+		<guid isPermaLink="false">https://www.raychase.net/?p=8205</guid>
+
+					<description><![CDATA[<!-- wp:paragraph -->
+<p><a rel="noreferrer noopener" href="https://www.raychase.net/" target="_blank">raychase.net</a> 这个域名是好些年前申请的，最近申请了个更适合作为我个人标签的 <a rel="noreferrer noopener" href="https://rayxiong.me/" target="_blank">rayxiong.me</a>，简单记录下我把新域名应用到blog（新、老域名都可以访问blog），以及创建并使用新域名的邮件地址收发邮件的操作。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>Blog 配置</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>在Squarespace上面配置好DNS的两个A记录：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":8206,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="/wp-content/uploads/2026/05/image-3-1024x618.png" alt="" class="wp-image-8206"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>其中@表示不带任何前缀，它和www前缀这样被视为两条独立的记录。没法再简单了，不过需要等几个钟头生效。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>在网站的Nginx配置文件上面添加：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>server_name www.rayxiong.me rayxiong.me;
+</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>以及：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>    if ($host = rayxiong.me) {
+        return 301 https://$host$request_uri;
+    }
+    if ($host = www.rayxiong.me) {
+        return 301 https://$host$request_uri;
+    }
+</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>做完之后检查一下有没有语法错误：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>/usr/local/nginx/sbin/nginx -t</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>我已经忘记之前证书怎么处理的了，重新安装acme.sh：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>curl https://get.acme.sh &#124; sh -s email=raychase.net@gmail.com</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>使用acme.sh来申请多域名证书：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>~/.acme.sh/acme.sh --issue --nginx -d raychase.net -d www.raychase.net -d rayxiong.me -d www.rayxiong.me -w /home/www.raychase.net</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>如果不想牵扯Nginx的瓜葛，因为已经指定了网站根目录，也可以使用letsencrypt的server来完成：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>~/.acme.sh/acme.sh --issue \
+-d raychase.net -d www.raychase.net \
+-d rayxiong.me -d www.rayxiong.me \
+-w /home/www.raychase.net \
+--server letsencrypt --force</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>再把证书部署一下：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>~/.acme.sh/acme.sh --install-cert -d raychase.net -d rayxiong.me\
+--key-file /etc/letsencrypt/live/www.raychase.net/privkey.pem \
+--fullchain-file /etc/letsencrypt/live/www.raychase.net/fullchain.pem \
+--reloadcmd "/usr/local/nginx/sbin/nginx -s reload"</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>完工。访问网站看看证书的情况，再检查一下定时任务是不是已经顺利加上了：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>crontab -l</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>Blog的文章里面，不能有写死域名的链接，全部要使用相对路径。接着就是给wp-config.php添加动态设置Home和SiteURL，否则首页到不同栏目的链接都还是老地址：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>if (isset($_SERVER&#91;'HTTP_HOST'])) {<br />    define('WP_HOME', 'https://' . $_SERVER&#91;'HTTP_HOST']);<br />    define('WP_SITEURL', 'https://' . $_SERVER&#91;'HTTP_HOST']);<br />}</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>设置了之后，WordPress的管理台的General Settings里面，这两个变量会置灰：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":8236,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="https://rayxiong.me/wp-content/uploads/2026/05/image-11.png" alt="" class="wp-image-8236"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>此外，考虑到两个域名包含相同的内容，需要告诉搜索引擎谁才是canonical的版本，否则搜索引擎可能会做出负面的判定。在Wordpress菜单的Apperance-&#62;Theme File Editor-&#62;Theme Functions (functions.php)的尾部，写上：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>remove_action( 'wp_head', 'rel_canonical' );
+
+add_action( 'wp_head', function() {
+echo '&#60;link rel="canonical" href="https://www.raychase.net' . esc_url( $_SERVER&#91;'REQUEST_URI'] ) . '" /&#62;' . "\n";
+});</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:heading -->
+<h2>Email 配置</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>有了新的域名，打算搞一个个人标识鲜明的邮件地址<a rel="noreferrer noopener" href="mailto:me@rayxiong.me" target="_blank">me@rayxiong.me</a>。但是我打算只是创建一个邮件地址，邮箱服务依然使用Gmail。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>先配置收信，收信比较简单，保证email转发到原有邮件地址：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":8209,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="/wp-content/uploads/2026/05/image-4-1024x568.png" alt="" class="wp-image-8209"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>得花些时间生效，测试一下，发送到这个新邮件地址一旦成功，那收信路径就通了。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>接着是发送。这需要<a rel="noreferrer noopener" href="https://resend.com/" target="_blank">Resend</a>这样的工具。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>建立一个rayxiong.me的domain，然后添加如下的DNS记录：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list {"ordered":true} -->
+<ol><li>DKIM：Domain Keys Identified Mail，用以防止email冒用和伪造，有了这个发送的邮件就不会被直接标记为垃圾邮件。</li><li>SPF：Sender Policy Framework，两条记录，一条是TXT记录，它来申明email从Amazon SES走的渠道是合法认证的；还有一条是MX记录，用来接受回执，以得知邮件是否发送成功。</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:image {"id":8231,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://rayxiong.me/wp-content/uploads/2026/05/image-5-1024x710.png" alt="" class="wp-image-8231"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>把这些records拷贝到Squarespace的DNS设置里面，然后再回到Resend上面来验证，确保验证通过。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":8232,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="https://rayxiong.me/wp-content/uploads/2026/05/image-6.png" alt="" class="wp-image-8232"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>如果失败了，可以去Logs页面看错误信息。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>现在，去Sender的API keys里面，给配一个Gmail-SMTP的 API Key：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":8233,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="https://rayxiong.me/wp-content/uploads/2026/05/image-9.png" alt="" class="wp-image-8233"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>接着就可以给Google邮箱配置这个新的email地址了：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":8213,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="/wp-content/uploads/2026/05/image-7-1024x291.png" alt="" class="wp-image-8213"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>SMTP服务器是smtp.resend.com，这里需要使用到前面配置的API key：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":8214,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="/wp-content/uploads/2026/05/image-8.png" alt="" class="wp-image-8214"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>手机上面配置起来有点麻烦，需要创建一个新账户。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>收邮件的部分，host name写imap.gmail.com，用户名写原本的gmail邮箱名，密码的话需要去Google的App passwords创建一个只能查看一次的密码，填在这里。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>发邮件的部分，配置SMTP为smtp.resend.com，用户名是resend，密码就是前面的API key。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":8235,"width":237,"height":512,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large is-resized"><img src="/wp-content/uploads/2026/05/11f2ebfcebc5e8745219856af5d05988-473x1024.jpg" alt="configuration" class="wp-image-8235" width="237" height="512"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>此外，Resend的DNS records目前只配置了sending，并没有receiving。因为现在邮件的receiving是通过Squarespace的Mailgun forwarding来实现的，如果要配置Resend的receiving，那是用于把邮件内容转成JSON数据并根据配置的Webhook来调用API只用了，目前不需要。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>除了blog和email，对于这样一个个人标签浓厚的域名，不知道还有哪些有趣的事情可以做。我想到的几个包括：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul><li>我已经在我的Apple mini M4上面部署了本地运行的大模型，也许可以把界面部署到chat.rayxiong.me这样的地址上来；</li><li>把一些个人标签浓厚的资源，比如简历、课程之类的放到一个rayxiong.me的直接子域名上；</li><li>还有就是加上自己的一些文档、材料管理，甚至家里面的各种智能控制系统查看等等，这样访问也比较方便。</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>只是我的一些想法，不知道还有什么有意思的主意。</p>
+<!-- /wp:paragraph -->]]></description>
+										<content:encoded><![CDATA[
+<p><a rel="noreferrer noopener" href="https://www.raychase.net/" target="_blank">raychase.net</a> 这个域名是好些年前申请的，最近申请了个更适合作为我个人标签的 <a rel="noreferrer noopener" href="https://rayxiong.me/" target="_blank">rayxiong.me</a>，简单记录下我把新域名应用到 blog（新、老域名都可以访问 blog），以及创建并使用新域名的邮件地址收发邮件的操作。</p>
+
+
+
+<h2>Blog 配置</h2>
+
+
+
+<p>在 Squarespace 上面配置好 DNS 的两个 A 记录：</p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" width="1024" height="618" src="/wp-content/uploads/2026/05/image-3-1024x618.png" alt="" class="wp-image-8206" srcset="https://www.raychase.net/wp-content/uploads/2026/05/image-3-1024x618.png 1024w, https://www.raychase.net/wp-content/uploads/2026/05/image-3-300x180.png 300w, https://www.raychase.net/wp-content/uploads/2026/05/image-3-768x464.png 768w, https://www.raychase.net/wp-content/uploads/2026/05/image-3-850x513.png 850w, https://www.raychase.net/wp-content/uploads/2026/05/image-3.png 1267w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p>其中 @表示不带任何前缀，它和 www 前缀这样被视为两条独立的记录。没法再简单了，不过需要等几个钟头生效。</p>
+
+
+
+<p>在网站的 Nginx 配置文件上面添加：</p>
+
+
+
+<pre class="wp-block-code"><code>server_name www.rayxiong.me rayxiong.me;
+</code></pre>
+
+
+
+<p>以及：</p>
+
+
+
+<pre class="wp-block-code"><code>    if ($host = rayxiong.me) {
+        return 301 https://$host$request_uri;
+    }
+    if ($host = www.rayxiong.me) {
+        return 301 https://$host$request_uri;
+    }
+</code></pre>
+
+
+
+<p>做完之后检查一下有没有语法错误：</p>
+
+
+
+<pre class="wp-block-code"><code>/usr/local/nginx/sbin/nginx -t</code></pre>
+
+
+
+<p>我已经忘记之前证书怎么处理的了，重新安装 acme.sh：</p>
+
+
+
+<pre class="wp-block-code"><code>curl https://get.acme.sh | sh -s email=raychase.net@gmail.com</code></pre>
+
+
+
+<p>使用 acme.sh 来申请多域名证书：</p>
+
+
+
+<pre class="wp-block-code"><code>~/.acme.sh/acme.sh --issue --nginx -d raychase.net -d www.raychase.net -d rayxiong.me -d www.rayxiong.me -w /home/www.raychase.net</code></pre>
+
+
+
+<p>如果不想牵扯 Nginx 的瓜葛，因为已经指定了网站根目录，也可以使用 letsencrypt 的 server 来完成：</p>
+
+
+
+<pre class="wp-block-code"><code>~/.acme.sh/acme.sh --issue \
+-d raychase.net -d www.raychase.net \
+-d rayxiong.me -d www.rayxiong.me \
+-w /home/www.raychase.net \
+--server letsencrypt --force</code></pre>
+
+
+
+<p>再把证书部署一下：</p>
+
+
+
+<pre class="wp-block-code"><code>~/.acme.sh/acme.sh --install-cert -d raychase.net -d rayxiong.me\
+--key-file /etc/letsencrypt/live/www.raychase.net/privkey.pem \
+--fullchain-file /etc/letsencrypt/live/www.raychase.net/fullchain.pem \
+--reloadcmd "/usr/local/nginx/sbin/nginx -s reload"</code></pre>
+
+
+
+<p>完工。访问网站看看证书的情况，再检查一下定时任务是不是已经顺利加上了：</p>
+
+
+
+<pre class="wp-block-code"><code>crontab -l</code></pre>
+
+
+
+<p>Blog 的文章里面，不能有写死域名的链接，全部要使用相对路径。接着就是给 wp-config.php 添加动态设置 Home 和 SiteURL，否则首页到不同栏目的链接都还是老地址：</p>
+
+
+
+<pre class="wp-block-code"><code>if (isset($_SERVER&#91;'HTTP_HOST'])) {<br />    define('WP_HOME', 'https://' . $_SERVER&#91;'HTTP_HOST']);<br />    define('WP_SITEURL', 'https://' . $_SERVER&#91;'HTTP_HOST']);<br />}</code></pre>
+
+
+
+<p>设置了之后，WordPress 的管理台的 General Settings 里面，这两个变量会置灰：</p>
+
+
+
+<figure class="wp-block-image size-full"><img loading="lazy" width="612" height="127" src="https://rayxiong.me/wp-content/uploads/2026/05/image-11.png" alt="" class="wp-image-8236" srcset="https://www.raychase.net/wp-content/uploads/2026/05/image-11.png 612w, https://www.raychase.net/wp-content/uploads/2026/05/image-11-300x62.png 300w" sizes="(max-width: 612px) 100vw, 612px" /></figure>
+
+
+
+<p>此外，考虑到两个域名包含相同的内容，需要告诉搜索引擎谁才是 canonical 的版本，否则搜索引擎可能会做出负面的判定。在 WordPress 菜单的 Apperance-&gt;Theme File Editor-&gt;Theme Functions (functions.php) 的尾部，写上：</p>
+
+
+
+<pre class="wp-block-code"><code>remove_action( 'wp_head', 'rel_canonical' );
+
+add_action( 'wp_head', function() {
+echo '&lt;link rel="canonical" href="https://www.raychase.net' . esc_url( $_SERVER&#91;'REQUEST_URI'] ) . '" /&gt;' . "\n";
+});</code></pre>
+
+
+
+<h2>Email 配置</h2>
+
+
+
+<p>有了新的域名，打算搞一个个人标识鲜明的邮件地址 <a rel="noreferrer noopener" href="mailto:me@rayxiong.me" target="_blank">me@rayxiong.me</a>。但是我打算只是创建一个邮件地址，邮箱服务依然使用 Gmail。</p>
+
+
+
+<p>先配置收信，收信比较简单，保证 email 转发到原有邮件地址：</p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" width="1024" height="568" src="/wp-content/uploads/2026/05/image-4-1024x568.png" alt="" class="wp-image-8209" srcset="https://www.raychase.net/wp-content/uploads/2026/05/image-4-1024x568.png 1024w, https://www.raychase.net/wp-content/uploads/2026/05/image-4-300x166.png 300w, https://www.raychase.net/wp-content/uploads/2026/05/image-4-768x426.png 768w, https://www.raychase.net/wp-content/uploads/2026/05/image-4-850x471.png 850w, https://www.raychase.net/wp-content/uploads/2026/05/image-4.png 1100w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p>得花些时间生效，测试一下，发送到这个新邮件地址一旦成功，那收信路径就通了。</p>
+
+
+
+<p>接着是发送。这需要 <a rel="noreferrer noopener" href="https://resend.com/" target="_blank">Resend</a> 这样的工具。</p>
+
+
+
+<p>建立一个 rayxiong.me 的 domain，然后添加如下的 DNS 记录：</p>
+
+
+
+<ol><li>DKIM：Domain Keys Identified Mail，用以防止 email 冒用和伪造，有了这个发送的邮件就不会被直接标记为垃圾邮件。</li><li>SPF：Sender Policy Framework，两条记录，一条是 TXT 记录，它来申明 email 从 Amazon SES 走的渠道是合法认证的；还有一条是 MX 记录，用来接受回执，以得知邮件是否发送成功。</li></ol>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" width="1024" height="710" src="https://rayxiong.me/wp-content/uploads/2026/05/image-5-1024x710.png" alt="" class="wp-image-8231" srcset="https://www.raychase.net/wp-content/uploads/2026/05/image-5-1024x710.png 1024w, https://www.raychase.net/wp-content/uploads/2026/05/image-5-300x208.png 300w, https://www.raychase.net/wp-content/uploads/2026/05/image-5-768x532.png 768w, https://www.raychase.net/wp-content/uploads/2026/05/image-5-850x589.png 850w, https://www.raychase.net/wp-content/uploads/2026/05/image-5.png 1306w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p>把这些 records 拷贝到 Squarespace 的 DNS 设置里面，然后再回到 Resend 上面来验证，确保验证通过。</p>
+
+
+
+<figure class="wp-block-image size-full"><img loading="lazy" width="941" height="560" src="https://rayxiong.me/wp-content/uploads/2026/05/image-6.png" alt="" class="wp-image-8232" srcset="https://www.raychase.net/wp-content/uploads/2026/05/image-6.png 941w, https://www.raychase.net/wp-content/uploads/2026/05/image-6-300x180.png 300w, https://www.raychase.net/wp-content/uploads/2026/05/image-6-768x457.png 768w, https://www.raychase.net/wp-content/uploads/2026/05/image-6-850x506.png 850w" sizes="(max-width: 941px) 100vw, 941px" /></figure>
+
+
+
+<p>如果失败了，可以去 Logs 页面看错误信息。</p>
+
+
+
+<p>现在，去 Sender 的 API keys 里面，给配一个 Gmail-SMTP 的 API Key：</p>
+
+
+
+<figure class="wp-block-image size-full"><img loading="lazy" width="889" height="315" src="https://rayxiong.me/wp-content/uploads/2026/05/image-9.png" alt="" class="wp-image-8233" srcset="https://www.raychase.net/wp-content/uploads/2026/05/image-9.png 889w, https://www.raychase.net/wp-content/uploads/2026/05/image-9-300x106.png 300w, https://www.raychase.net/wp-content/uploads/2026/05/image-9-768x272.png 768w, https://www.raychase.net/wp-content/uploads/2026/05/image-9-850x301.png 850w" sizes="(max-width: 889px) 100vw, 889px" /></figure>
+
+
+
+<p>接着就可以给 Google 邮箱配置这个新的 email 地址了：</p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" width="1024" height="291" src="/wp-content/uploads/2026/05/image-7-1024x291.png" alt="" class="wp-image-8213" srcset="https://www.raychase.net/wp-content/uploads/2026/05/image-7-1024x291.png 1024w, https://www.raychase.net/wp-content/uploads/2026/05/image-7-300x85.png 300w, https://www.raychase.net/wp-content/uploads/2026/05/image-7-768x219.png 768w, https://www.raychase.net/wp-content/uploads/2026/05/image-7-850x242.png 850w, https://www.raychase.net/wp-content/uploads/2026/05/image-7.png 1114w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p>SMTP 服务器是 smtp.resend.com，这里需要使用到前面配置的 API key：</p>
+
+
+
+<figure class="wp-block-image size-full"><img loading="lazy" width="484" height="283" src="/wp-content/uploads/2026/05/image-8.png" alt="" class="wp-image-8214" srcset="https://www.raychase.net/wp-content/uploads/2026/05/image-8.png 484w, https://www.raychase.net/wp-content/uploads/2026/05/image-8-300x175.png 300w" sizes="(max-width: 484px) 100vw, 484px" /></figure>
+
+
+
+<p>手机上面配置起来有点麻烦，需要创建一个新账户。</p>
+
+
+
+<p>收邮件的部分，host name 写 imap.gmail.com，用户名写原本的 gmail 邮箱名，密码的话需要去 Google 的 App passwords 创建一个只能查看一次的密码，填在这里。</p>
+
+
+
+<p>发邮件的部分，配置 SMTP 为 smtp.resend.com，用户名是 resend，密码就是前面的 API key。</p>
+
+
+
+<figure class="wp-block-image size-large is-resized"><img loading="lazy" src="/wp-content/uploads/2026/05/11f2ebfcebc5e8745219856af5d05988-473x1024.jpg" alt="configuration" class="wp-image-8235" width="237" height="512" srcset="https://www.raychase.net/wp-content/uploads/2026/05/11f2ebfcebc5e8745219856af5d05988-473x1024.jpg 473w, https://www.raychase.net/wp-content/uploads/2026/05/11f2ebfcebc5e8745219856af5d05988-139x300.jpg 139w, https://www.raychase.net/wp-content/uploads/2026/05/11f2ebfcebc5e8745219856af5d05988-768x1662.jpg 768w, https://www.raychase.net/wp-content/uploads/2026/05/11f2ebfcebc5e8745219856af5d05988-710x1536.jpg 710w, https://www.raychase.net/wp-content/uploads/2026/05/11f2ebfcebc5e8745219856af5d05988-946x2048.jpg 946w, https://www.raychase.net/wp-content/uploads/2026/05/11f2ebfcebc5e8745219856af5d05988-300x649.jpg 300w, https://www.raychase.net/wp-content/uploads/2026/05/11f2ebfcebc5e8745219856af5d05988-850x1839.jpg 850w, https://www.raychase.net/wp-content/uploads/2026/05/11f2ebfcebc5e8745219856af5d05988.jpg 1170w" sizes="(max-width: 237px) 100vw, 237px" /></figure>
+
+
+
+<p>此外，Resend 的 DNS records 目前只配置了 sending，并没有 receiving。因为现在邮件的 receiving 是通过 Squarespace 的 Mailgun forwarding 来实现的，如果要配置 Resend 的 receiving，那是用于把邮件内容转成 JSON 数据并根据配置的 Webhook 来调用 API 只用了，目前不需要。</p>
+
+
+
+<p>除了 blog 和 email，对于这样一个个人标签浓厚的域名，不知道还有哪些有趣的事情可以做。我想到的几个包括：</p>
+
+
+
+<ul><li>我已经在我的 Apple mini M4 上面部署了本地运行的大模型，也许可以把界面部署到 chat.rayxiong.me 这样的地址上来；</li><li>把一些个人标签浓厚的资源，比如简历、课程之类的放到一个 rayxiong.me 的直接子域名上；</li><li>还有就是加上自己的一些文档、材料管理，甚至家里面的各种智能控制系统查看等等，这样访问也比较方便。</li></ul>
+
+
+
+<p>只是我的一些想法，不知道还有什么有意思的主意。</p>
+<p><strong><font color="#ff0000">文章未经特殊标明皆为本人原创，未经许可不得用于任何商业用途，转载请保持完整性并注明来源链接 <a href="https://www.raychase.net/8205">《四火的唠叨》</a></font></strong></p><div class='yarpp yarpp-related yarpp-related-rss yarpp-template-list'>
+<!-- YARPP List -->
+<p>你可能也喜欢看：</p><ol>
+<li><a href="https://www.raychase.net/5318" rel="bookmark" title="HTTPS 升级">HTTPS 升级</a></li>
+<li><a href="https://www.raychase.net/672" rel="bookmark" title="多年前的一封邮件">多年前的一封邮件</a></li>
+<li><a href="https://www.raychase.net/4620" rel="bookmark" title="Blog 安全问题小记">Blog 安全问题小记</a></li>
+<li><a href="https://www.raychase.net/2731" rel="bookmark" title="写在 Gmail 被墙后">写在 Gmail 被墙后</a></li>
+<li><a href="https://www.raychase.net/5790" rel="bookmark" title="VPS 迁移和网站备案">VPS 迁移和网站备案</a></li>
+</ol>
+</div>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.raychase.net/8205/feed</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>写在暗黑 2 术士资料片发售一个多月之际</title>
+		<link>https://www.raychase.net/8168</link>
+					<comments>https://www.raychase.net/8168#respond</comments>
+		
+		<dc:creator><![CDATA[四火]]></dc:creator>
+		<pubDate>Sun, 22 Mar 2026 23:38:30 +0000</pubDate>
+				<category><![CDATA[Video Games]]></category>
+		<category><![CDATA[微软]]></category>
+		<category><![CDATA[暗黑破坏神]]></category>
+		<category><![CDATA[暴雪]]></category>
+		<category><![CDATA[术士]]></category>
+		<guid isPermaLink="false">https://www.raychase.net/?p=8168</guid>
+
+					<description><![CDATA[<!-- wp:paragraph -->
+<p><img class="wp-image-8169" style="float: right; width: 320px;" src="/wp-content/uploads/2026/03/image-1024x576.png" alt=""/>作为一个老暗黑粉，二十年前，写过一点关于它的<a rel="noreferrer noopener" href="/2059" target="_blank">碎文</a>。那时候我还在读书，《暗黑破坏神2》应该是对我影响最大的一款游戏。还记得第一次接触到暗黑的那天——在家乡暑假的某个阴沉的下午，窗外雨绵绵，一进入游戏，第一幕的罗格营地，就被呼应的下雨细节打动，音乐、雨滴声，还有可以追随地散布的鸡，一切都让我觉得有巨大的沉浸感。于是我一遍又一遍地杀到城外去，杀到地下洞穴去。暗黑游戏的视觉效果我相信不是最好的，但是游戏性和耐玩度却是顶级的。在这以后，也玩过不少类暗黑的游戏，比如《流放之路》（那时候还写过一点<a rel="noreferrer noopener" href="/4071" target="_blank">关于它游戏中通货膨胀的思考</a>），再没有一款能给我带来那样的体验。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>后来我慢慢知道，原来有这样感受的不止我一人。《暗黑破坏神2》是整个电子游戏历史上具里程碑意义的作品，它几乎凭借一己之力奠定了整个ARPG的游戏框架和标准，如今的ARPG砍杀的游戏方式，就是从它开始的。暗黑2的装备系统、技能树，还有怪物系统等等，在当时都是首创，并且都引领了后来的游戏发展方向。比方说，从暗黑2开始，装备的颜色分级制和词缀系统开始流行开来，也是从暗黑2开始，一类被称为“刷子游戏”的游戏类型，也开始被玩家逐渐认识；再比方说，技能树和后来资料片引入的技能加成系统，也逐渐演化出了游戏角色流派构建的理论。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>暴雪的暗黑3、暗黑4，尤其是暗黑手游版，口碑时好时坏，但拿暗黑2的标准来比，可真是不怎么样。其实，对于一款过于成功的游戏，推出续作总是充满挑战，甚至可以说凶多吉少。不过，暗黑2之后的续作充满故事的张力——暗黑3一开始是糟糕的，尤其是那个著名的拍卖行，彻底让游戏失去了原有的平衡，之后《夺魂之镰》的资料片，挽回了一定的名声。再是暗黑4，一开始黑暗压抑的美术风格获得了好评，但在游戏性，尤其是可重复玩性上大不如前几作，后来才在装备系统的改革等变更中逐步挽回名声。但无论如何，我觉得和暗黑2的那种哥特式氛围，装备驱动的打怪逻辑，还有高自由度的角色培养系统这些方面比起来，如若拿巅峰之作和优秀作品类比一样，这两者完全不可同日而语。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>说起来，2021年，暗黑2曾出了高清重制版，让那些二十年前的充满情怀的老玩家，得已不借助非官方的高清分辨率补丁，在如今的高配置机器上重温暗黑2。回想起来，其实这样炒冷饭的做法也不算特别，印象中不少以前一样感动一票玩家的游戏，比如《最终幻想》系列的好几款游戏，都出过重制版。不过，在暗黑2发售的将近25年后，居然再推出一个完整的新角色“术士”——《术士君临》资料片，却是真正让所有人都大吃一惊。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>从商业上看，这次试一次非常精明的商业决策，整个过程保密性做得非常好，间隔超过25年的产品营销，这冷饭炒得也可以说登峰造极了。同时，也算对玩家社区给足情面了，之前暴雪被微软收购，微软是下了一步绝好的棋，但是玩家群体之间的口碑需要建立起来，这次看起来是一次非常成功的操作。无论如何，从数据上看，日活玩家增长超过了50%，这是一个非常正面的信号，这些玩家的粘性可比一般游戏高得多。别忘了，这个资料片只是增加了一个角色，它并没有增加任何主线故事情节上的内容，它卖得并不能算便宜。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>现在，我好奇的是暴雪下一步会如何打算。如果往回倒退几年，你问暗黑2还会出资料片吗，那一定会被喷痴人说梦。但是现在随着术士资料片的上线，我觉得暗黑2再续写下去，看起来完全合理。如果我们再回想到25年前，很明显暗黑2的第四幕是明显缩短的，有一种讲故事草草收尾的感觉，而且分辨率那时候也只有640x480，于是一年之后的2001年，暗黑2资料片《毁灭之王》就以一个内容足量的第五幕弥补了玩家的遗憾，并且带来了更高分辨率、引入技能加成、引入符文和宝石系统等等巨量变更。可是想一想，一款成功到载入史册的游戏，从游戏内容上看，有什么理由会只出这么两部资料片，尤其是只有第一部是有“主线剧情”的，无论是从商业上考量还是情怀上考量，完全可以制作第六幕啊。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>如果是一个新玩家接触暗黑2，他的视角会是怎样的？我觉得暗黑2的视觉效果肯定不算好，虽说重制版让它和当年相比有了改进——可是话说回来，暗黑2从来都不是一个以画面取胜的游戏，它的可重复玩的游戏性无可匹敌，它的社区有一群坚持原教旨主义的硬核支持者，它在这个游戏史上写下了独一无二、浓墨重彩的一笔，而我觉得，二十五年过去了，这一笔却还远没有写完。</p>
+<!-- /wp:paragraph -->]]></description>
+										<content:encoded><![CDATA[
+<p><img loading="lazy" width="1024" height="576" class="wp-image-8169" style="float: right; width: 320px;" src="/wp-content/uploads/2026/03/image-1024x576.png" alt="" srcset="https://www.raychase.net/wp-content/uploads/2026/03/image-1024x576.png 1024w, https://www.raychase.net/wp-content/uploads/2026/03/image-300x169.png 300w, https://www.raychase.net/wp-content/uploads/2026/03/image-768x432.png 768w, https://www.raychase.net/wp-content/uploads/2026/03/image-1536x864.png 1536w, https://www.raychase.net/wp-content/uploads/2026/03/image-850x478.png 850w, https://www.raychase.net/wp-content/uploads/2026/03/image.png 1920w" sizes="(max-width: 1024px) 100vw, 1024px" />作为一个老暗黑粉，二十年前，写过一点关于它的<a rel="noreferrer noopener" href="/2059" target="_blank">碎文</a>。那时候我还在读书，《暗黑破坏神 2》应该是对我影响最大的一款游戏。还记得第一次接触到暗黑的那天——在家乡暑假的某个阴沉的下午，窗外雨绵绵，一进入游戏，第一幕的罗格营地，就被呼应的下雨细节打动，音乐、雨滴声，还有可以追随地散布的鸡，一切都让我觉得有巨大的沉浸感。于是我一遍又一遍地杀到城外去，杀到地下洞穴去。暗黑游戏的视觉效果我相信不是最好的，但是游戏性和耐玩度却是顶级的。在这以后，也玩过不少类暗黑的游戏，比如《流放之路》（那时候还写过一点<a rel="noreferrer noopener" href="/4071" target="_blank">关于它游戏中通货膨胀的思考</a>），再没有一款能给我带来那样的体验。</p>
+
+
+
+<p>后来我慢慢知道，原来有这样感受的不止我一人。《暗黑破坏神 2》是整个电子游戏历史上具里程碑意义的作品，它几乎凭借一己之力奠定了整个 ARPG 的游戏框架和标准，如今的 ARPG 砍杀的游戏方式，就是从它开始的。暗黑 2 的装备系统、技能树，还有怪物系统等等，在当时都是首创，并且都引领了后来的游戏发展方向。比方说，从暗黑 2 开始，装备的颜色分级制和词缀系统开始流行开来，也是从暗黑 2 开始，一类被称为 “刷子游戏” 的游戏类型，也开始被玩家逐渐认识；再比方说，技能树和后来资料片引入的技能加成系统，也逐渐演化出了游戏角色流派构建的理论。</p>
+
+
+
+<p>暴雪的暗黑 3、暗黑 4，尤其是暗黑手游版，口碑时好时坏，但拿暗黑 2 的标准来比，可真是不怎么样。其实，对于一款过于成功的游戏，推出续作总是充满挑战，甚至可以说凶多吉少。不过，暗黑 2 之后的续作充满故事的张力——暗黑 3 一开始是糟糕的，尤其是那个著名的拍卖行，彻底让游戏失去了原有的平衡，之后《夺魂之镰》的资料片，挽回了一定的名声。再是暗黑 4，一开始黑暗压抑的美术风格获得了好评，但在游戏性，尤其是可重复玩性上大不如前几作，后来才在装备系统的改革等变更中逐步挽回名声。但无论如何，我觉得和暗黑 2 的那种哥特式氛围，装备驱动的打怪逻辑，还有高自由度的角色培养系统这些方面比起来，如若拿巅峰之作和优秀作品类比一样，这两者完全不可同日而语。</p>
+
+
+
+<p>说起来，2021 年，暗黑 2 曾出了高清重制版，让那些二十年前的充满情怀的老玩家，得已不借助非官方的高清分辨率补丁，在如今的高配置机器上重温暗黑 2。回想起来，其实这样炒冷饭的做法也不算特别，印象中不少以前一样感动一票玩家的游戏，比如《最终幻想》系列的好几款游戏，都出过重制版。不过，在暗黑 2 发售的将近 25 年后，居然再推出一个完整的新角色 “术士”——《术士君临》资料片，却是真正让所有人都大吃一惊。</p>
+
+
+
+<p>从商业上看，这次试一次非常精明的商业决策，整个过程保密性做得非常好，间隔超过 25 年的产品营销，这冷饭炒得也可以说登峰造极了。同时，也算对玩家社区给足情面了，之前暴雪被微软收购，微软是下了一步绝好的棋，但是玩家群体之间的口碑需要建立起来，这次看起来是一次非常成功的操作。无论如何，从数据上看，日活玩家增长超过了 50%，这是一个非常正面的信号，这些玩家的粘性可比一般游戏高得多。别忘了，这个资料片只是增加了一个角色，它并没有增加任何主线故事情节上的内容，它卖得并不能算便宜。</p>
+
+
+
+<p>现在，我好奇的是暴雪下一步会如何打算。如果往回倒退几年，你问暗黑 2 还会出资料片吗，那一定会被喷痴人说梦。但是现在随着术士资料片的上线，我觉得暗黑 2 再续写下去，看起来完全合理。如果我们再回想到 25 年前，很明显暗黑 2 的第四幕是明显缩短的，有一种讲故事草草收尾的感觉，而且分辨率那时候也只有 640&#215;480，于是一年之后的 2001 年，暗黑 2 资料片《毁灭之王》就以一个内容足量的第五幕弥补了玩家的遗憾，并且带来了更高分辨率、引入技能加成、引入符文和宝石系统等等巨量变更。可是想一想，一款成功到载入史册的游戏，从游戏内容上看，有什么理由会只出这么两部资料片，尤其是只有第一部是有 “主线剧情” 的，无论是从商业上考量还是情怀上考量，完全可以制作第六幕啊。</p>
+
+
+
+<p>如果是一个新玩家接触暗黑 2，他的视角会是怎样的？我觉得暗黑 2 的视觉效果肯定不算好，虽说重制版让它和当年相比有了改进——可是话说回来，暗黑 2 从来都不是一个以画面取胜的游戏，它的可重复玩的游戏性无可匹敌，它的社区有一群坚持原教旨主义的硬核支持者，它在这个游戏史上写下了独一无二、浓墨重彩的一笔，而我觉得，二十五年过去了，这一笔却还远没有写完。</p>
+<p><strong><font color="#ff0000">文章未经特殊标明皆为本人原创，未经许可不得用于任何商业用途，转载请保持完整性并注明来源链接 <a href="https://www.raychase.net/8168">《四火的唠叨》</a></font></strong></p><div class='yarpp yarpp-related yarpp-related-rss yarpp-template-list'>
+<!-- YARPP List -->
+<p>你可能也喜欢看：</p><ol>
+<li><a href="https://www.raychase.net/4071" rel="bookmark" title="游戏中的货币和通货膨胀">游戏中的货币和通货膨胀</a></li>
+<li><a href="https://www.raychase.net/4825" rel="bookmark" title="为什么云计算服务是亚马逊先做出来？">为什么云计算服务是亚马逊先做出来？</a></li>
+<li><a href="https://www.raychase.net/2512" rel="bookmark" title="十年&mdash;&mdash; 时光君，走慢点">十年&mdash;&mdash; 时光君，走慢点</a></li>
+<li><a href="https://www.raychase.net/206" rel="bookmark" title="大楼扔鸡蛋问题的求解">大楼扔鸡蛋问题的求解</a></li>
+<li><a href="https://www.raychase.net/4265" rel="bookmark" title="继续说说 “在家办公”">继续说说 “在家办公”</a></li>
+</ol>
+</div>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.raychase.net/8168/feed</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>AI 到底会怎样取代我们的工作</title>
+		<link>https://www.raychase.net/8155</link>
+					<comments>https://www.raychase.net/8155#comments</comments>
+		
+		<dc:creator><![CDATA[四火]]></dc:creator>
+		<pubDate>Mon, 16 Feb 2026 05:09:33 +0000</pubDate>
+				<category><![CDATA[Machine Learning and Artificial Intelligence]]></category>
+		<category><![CDATA[AI]]></category>
+		<category><![CDATA[SaaS]]></category>
+		<category><![CDATA[程序员]]></category>
+		<category><![CDATA[软件工程师]]></category>
+		<guid isPermaLink="false">https://www.raychase.net/?p=8155</guid>
+
+					<description><![CDATA[<!-- wp:paragraph -->
+<p><img class="wp-image-8156" style="width: 320px; float: right" src="/wp-content/uploads/2026/02/jannonivergall-worker-5736096_1920-1024x683.jpg" alt=""/>这是一个很多人都讨论的大问题。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>我一直在思考，也一直没有一个足够确信的答案。去年这个时候，写了<a href="/7928" target="_blank" rel="noreferrer noopener">一点体会</a>，如今的体会更深了。但是我觉得，我可以把凌乱的内容整理出来。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>一些事件</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>在一两周前，Google Genie 3出来的时候，因为demo展示了它可以很容易地生成一整个可以游玩的世界，游戏引擎Unity的投资者就被吓坏了，疯狂抛售，一天就跌了二、三成。Unity的CEO<a rel="noreferrer noopener" href="https://x.com/mbromberg/status/2017275495696540149?s=46&#38;t=Uil31pDu16ONN3enRv0cqg" target="_blank">站出来喊话</a>，核心观点还是——<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">AI再强大它也是概率性的，而Unity程序员的工作，却是追求确定性的</mark></strong>。因此AI应该是软件开发的加速器，帮助提升创作的真实性和速度，而非替代者。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>朋友推荐我这篇<a rel="noreferrer noopener" href="https://generativeai.pub/the-eternal-return-of-abstraction-why-programming-was-never-about-code-18412033b517" target="_blank">《The Eternal Return of Abstraction: Why Programming Was Never About Code》</a>，这篇读起来有些费劲，不过它的核心思想大概是，<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">编程一直以来的本质是什么？它的本质是把人的意图转化为机器可以理解的形式</mark></strong>。它的意义比代码高多了，因为代码只不过是表达这个意图的一种形式而已，还有什么形式？有了AI，自然语言就可以是这个新的形式。大语言模型的一个功绩在于提升了抽象级别，以前我们必须要准确地使用编程语法来告诉机器应该怎么做，现在不是了，自然语言就是基于概率的描述，这个不确定性的问题是从根上就有的。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>今年初的SaaS软件板块抛售潮，伴随着一系列事件，被称为SaaSpocalypse，所谓的SaaS末日。它缘起于市场突然意识到AI不再仅仅是程序员的工具，而是可能称为自主运行整个SaaS程序编写，并完成复杂流程的“数字员工”。这其中包括Anthropic发布的Claude Cowork，它可以直接操作软件界面，这被认为很多SaaS的按人头付费的模式崩塌；Klarna公开宣布，决定停止使用Salesforce和Workday这样的SaaS服务，因为他们启用了AI，这让市场怀疑起SaaS的护城河硬度；再有早些时候的Chegg，使用率锐减，主要是AI都可以直接、免费地获取答案了，学生们不再需要它了；还有Adobe因为Sora的发布而受到质疑，虽然专业用户的门槛不好说，但是大众用户的视频和图像生成似乎已经可以通过说几句话就完成了。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>如果看看SaaS公司的财报，似乎是另一番光景。比如ServiceNow，Q4的营收增长超过了20%。似乎，能看得到的事情是，面对科技行业的大幅裁员，更少的程序员可以做更多的事情，这也是市场担心的一个主要由来。那么反过来想，如果是按照按人头卖的形式，显然SaaS的收入会大幅下降。不过，如果定价按照解决的问题、feature使用的次数和使用AI能力的token来收钱，这也许就完全不是那么回事了。我们目前能看到一些收费方式的变化（也看到了一些抵触，比如很多企业不喜欢这样的新方式，因为缺乏财务上的可预测性），但是市场需要看到更多。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>对SaaS行业的影响</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>好，现在冷静下来想想，到底哪些SaaS商业模式会出局？</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>首先想到的，知识库似乎会出局，因为AI可以非常方便地给出结论；其次，是文字组织和润色类工具，因为AI的文字能力比一般人都出色；再次，就是一些数据、声音、视频分析类的工具，这种把数据可视化，让人更容易从中找规律的软件，AI也基本可以比较容易地代替。如果尝试泛化一些，似乎容易出局的软件模式是：需要的答案已经有了，只是要把它们从大量的内容中找出来，这种为了寻找答案而使用的专业工具，可能会被AI这种能够接受人类语言的特性所替代。换言之，<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">如果提供的服务，没有硬核的、实质上的不可替代性，只有“便捷性”，那就可能被踢出局</mark></strong>。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>那么，哪些SaaS商业模式很难被踢出局？</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">第一种，大概是拥有不可替代的数据。</mark></strong>这样的SaaS软件拥有私有的、历史的和被视作宝贵资源的数据，而不是公开的、简单的和比较容易获得的数据。前面说的Chegg拥有的其实就是公开的数据，比如所谓的习题，还有像是LeetCode题解这样的也差不多；而ServiceNow、Salesforce，以及Atlassian等等，这些企业专有的数据，让你没有办法直接使用一个公有的AI服务来直接替代掉。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">第二种，就是高度复杂化和专业性的，AI可以充当一个外行，但是没有办法触及最核心的精确性的。</mark></strong>这包括某些媒体内容的制作，AI可以提供丰富的素材，动画的画师可以使用AI，但是主干必须要手动主导和干预，AI可能能够生成关键帧之间的连接。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">第三种，大概就是脱离软件的虚拟世界，和真实世界有着紧密的连接。</mark></strong>比方说，对于很多IoT应用，通过各种各样的特定传感器来获知状态并连接。这些硬件的“眼睛”、“耳朵”和“嘴”需要特定的驱动程序，或是说，特定的软件才能工作。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>还有一些SaaS应用，居于二者之间——可能能够暂时活一段时间，但是长远看，护城河也会被侵蚀。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>第一种，复杂流程已经根植入企业人事流程的。这种只是代价高，但并非有那么强的不可替代性。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>第二种，已经发展出专业技能的。有些学校里面都会教。比如Unity的技能和Adobe的技能等等。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>第三种，那就是生态。比如Jira就有插件生态等等，生态意味着有很多为了方便提供某些特性而做出的定制化。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>对软件工程师的影响</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>在说软件工程师之前，先跳出来想一下，哪些行业更容易被AI革命？</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">初级（简单劳动）的白领，是最容易被革命的。</mark></strong>“简单劳动”很容易理解，但是“白领”被淘汰是AI时代的特殊之处。如果说工业革命初期受到最大影响的是“蓝领”，那AI革命初期受到最大影响的就是“白领”了。这一类初级白领，就是看似坐在电脑前工作，但是工作却是一些复制粘贴、流程安排和文字组织等等简单的活动，比方说翻译、秘书等等。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>相应地，我记得李开复的《AI·未来》书上也讲到的，需要和真实世界的人交互的行业，影响可能是最小的。比如养老护理，体育竞技等等。还有一些行业，是蓝领，但是目前的AI和硬件设备的结合还要慢一步，比如汽车修理等等——AI又没有手，因此这样的行业暂时也算安全，只不过随着机器人等强烈依赖硬件行业跟上来，这些也依然有被淘汰的风险。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>好，接着再来看软件工程师。软件工程师，算是白领，但是算是“初级”白领吗？</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>其实，大家似乎比较容易能够达成共识的是，单纯编码，就是一个很容易就被AI淘汰的工种了。想起来其实也很容易理解，编码，说到底和英语或者任何其他人类语言的“翻译”到底有多大区别？可能区别也不过是，交流的对象从活生生的人变成了冷冰冰的机器，还是需要语义、语法，还是需要语言逻辑。如果从这样的角度来看，似乎“编码员”（coder）可替代性真的太高了。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>再深入一步，是用的更为广泛的“程序员”（programmer）。这意味着，再代码的基础上，程序员设计逻辑、算法，从而把一个具体问题实现为程序代码。程序员也会关心程序员生命周期的其他活动，比如bug修改、feature添加等等，但是核心依然是代码。程序员似乎比编码员好一点，但是AI的可替代性依然很高。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>再来，就是软件工程师。我认为软件工程师是一群能够利用一定系统和规范的方法，来把软件工程化的专业人员。这就意味着他们解决的问题是实际世界的问题，需要把问题抽象成为软件可解的问题，以工程的方式实现，并且维护整个软件生命周期。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>渐渐地，整个行业会有更加成熟的方法来知道AI实现需求，但是软件工程师依然会需要“亲自阅卷”，他们也许会大大减少亲自实现的代码量，但会花更多时间评审AI的代码实现，寻找其中的问题，评估其中的风险等等。在整个软件工程流程上，也需要分析和思考用户的需求，敲定大体的方案，把大块复杂的任务拆分成小块的任务，交给AI来实现等等。总而言之，AI成为了助手，或者是团队中的“初级程序员”。传统观念上软件工程师的核心能力有了些许区别，比如说，如何提问AI的表述能力会被放到更加重要的位置。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>这么看来，“初级软件工程师”似乎非常容易被替代。比如说，初级软件工程师，经常会拿到设计方案，然后去实现。这在如今的互联网大厂是常态，大的feature或者系统，不太会完全丢给一个没什么经验的新兵来实现，这样的角色确实是比较容易被AI替代的。<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">可是，成长是要有过程的，如果这个阶段不给足时间，那么初级软件工程师就不能成长为高级软件工程师，如果AI替代了这个阶段，势必会造成人才的断层。</mark></strong>从长远来看，这才是让我最为忧心的。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>如果我们仔细思考AI的擅长与不擅长，AI目前还是有很大的局限性的。比方说，AI还是更适合做具体的、明确的工作，对于一个复杂系统，对于用户的痛点感知，还是需要软件工程师开动大脑来分析思考，基本上这种活动都需要比较长的时间和比较丰富的积累。<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">再有一个，AI现在的两大问题，一个是hallucination，就是“一本正经说瞎话”；另一个是sycophancy，就是在一些决策上面没有啥backbone，很容易倒向谄媚的一侧。</mark></strong>我可以想象，几年以后，AI做更多的执行和辅助，然后把信息提炼、分析以后交给软件工程师，而软件工程师会做更多的思考和决策，并为结果负责。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>我们还在这个时代变革的开头，这些观念只能说是目前的思考，两三年之后，它们还有效吗，我可以说完全没有什么信心。不过我确定的是，我们不能回避，要拥抱这个时代；既然选择了这一行，就要尽量保持开放，去倾听和接触新鲜事物，持续学习，那种抱着自认为“经得起考验”的过往成功的经验不放的自称“老派”的家伙，可能会吃大亏。</p>
+<!-- /wp:paragraph -->]]></description>
+										<content:encoded><![CDATA[
+<p><img loading="lazy" width="1024" height="683" class="wp-image-8156" style="width: 320px; float: right" src="/wp-content/uploads/2026/02/jannonivergall-worker-5736096_1920-1024x683.jpg" alt="" srcset="https://www.raychase.net/wp-content/uploads/2026/02/jannonivergall-worker-5736096_1920-1024x683.jpg 1024w, https://www.raychase.net/wp-content/uploads/2026/02/jannonivergall-worker-5736096_1920-300x200.jpg 300w, https://www.raychase.net/wp-content/uploads/2026/02/jannonivergall-worker-5736096_1920-768x512.jpg 768w, https://www.raychase.net/wp-content/uploads/2026/02/jannonivergall-worker-5736096_1920-1536x1024.jpg 1536w, https://www.raychase.net/wp-content/uploads/2026/02/jannonivergall-worker-5736096_1920-850x567.jpg 850w, https://www.raychase.net/wp-content/uploads/2026/02/jannonivergall-worker-5736096_1920.jpg 1920w" sizes="(max-width: 1024px) 100vw, 1024px" />这是一个很多人都讨论的大问题。</p>
+
+
+
+<p>我一直在思考，也一直没有一个足够确信的答案。去年这个时候，写了<a href="/7928" target="_blank" rel="noreferrer noopener">一点体会</a>，如今的体会更深了。但是我觉得，我可以把凌乱的内容整理出来。</p>
+
+
+
+<h2>一些事件</h2>
+
+
+
+<p>在一两周前，Google Genie 3 出来的时候，因为 demo 展示了它可以很容易地生成一整个可以游玩的世界，游戏引擎 Unity 的投资者就被吓坏了，疯狂抛售，一天就跌了二、三成。Unity 的 CEO <a rel="noreferrer noopener" href="https://x.com/mbromberg/status/2017275495696540149?s=46&amp;t=Uil31pDu16ONN3enRv0cqg" target="_blank">站出来喊话</a>，核心观点还是——<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">AI 再强大它也是概率性的，而 Unity 程序员的工作，却是追求确定性的</mark></strong>。因此 AI 应该是软件开发的加速器，帮助提升创作的真实性和速度，而非替代者。</p>
+
+
+
+<p>朋友推荐我这篇 <a rel="noreferrer noopener" href="https://generativeai.pub/the-eternal-return-of-abstraction-why-programming-was-never-about-code-18412033b517" target="_blank">《The Eternal Return of Abstraction: Why Programming Was Never About Code》</a>，这篇读起来有些费劲，不过它的核心思想大概是，<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">编程一直以来的本质是什么？它的本质是把人的意图转化为机器可以理解的形式</mark></strong>。它的意义比代码高多了，因为代码只不过是表达这个意图的一种形式而已，还有什么形式？有了 AI，自然语言就可以是这个新的形式。大语言模型的一个功绩在于提升了抽象级别，以前我们必须要准确地使用编程语法来告诉机器应该怎么做，现在不是了，自然语言就是基于概率的描述，这个不确定性的问题是从根上就有的。</p>
+
+
+
+<p>今年初的 SaaS 软件板块抛售潮，伴随着一系列事件，被称为 SaaSpocalypse，所谓的 SaaS 末日。它缘起于市场突然意识到 AI 不再仅仅是程序员的工具，而是可能称为自主运行整个 SaaS 程序编写，并完成复杂流程的 “数字员工”。这其中包括 Anthropic 发布的 Claude Cowork，它可以直接操作软件界面，这被认为很多 SaaS 的按人头付费的模式崩塌；Klarna 公开宣布，决定停止使用 Salesforce 和 Workday 这样的 SaaS 服务，因为他们启用了 AI，这让市场怀疑起 SaaS 的护城河硬度；再有早些时候的 Chegg，使用率锐减，主要是 AI 都可以直接、免费地获取答案了，学生们不再需要它了；还有 Adobe 因为 Sora 的发布而受到质疑，虽然专业用户的门槛不好说，但是大众用户的视频和图像生成似乎已经可以通过说几句话就完成了。</p>
+
+
+
+<p>如果看看 SaaS 公司的财报，似乎是另一番光景。比如 ServiceNow，Q4 的营收增长超过了 20%。似乎，能看得到的事情是，面对科技行业的大幅裁员，更少的程序员可以做更多的事情，这也是市场担心的一个主要由来。那么反过来想，如果是按照按人头卖的形式，显然 SaaS 的收入会大幅下降。不过，如果定价按照解决的问题、feature 使用的次数和使用 AI 能力的 token 来收钱，这也许就完全不是那么回事了。我们目前能看到一些收费方式的变化（也看到了一些抵触，比如很多企业不喜欢这样的新方式，因为缺乏财务上的可预测性），但是市场需要看到更多。</p>
+
+
+
+<h2>对 SaaS 行业的影响</h2>
+
+
+
+<p>好，现在冷静下来想想，到底哪些 SaaS 商业模式会出局？</p>
+
+
+
+<p>首先想到的，知识库似乎会出局，因为 AI 可以非常方便地给出结论；其次，是文字组织和润色类工具，因为 AI 的文字能力比一般人都出色；再次，就是一些数据、声音、视频分析类的工具，这种把数据可视化，让人更容易从中找规律的软件，AI 也基本可以比较容易地代替。如果尝试泛化一些，似乎容易出局的软件模式是：需要的答案已经有了，只是要把它们从大量的内容中找出来，这种为了寻找答案而使用的专业工具，可能会被 AI 这种能够接受人类语言的特性所替代。换言之，<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">如果提供的服务，没有硬核的、实质上的不可替代性，只有 “便捷性”，那就可能被踢出局</mark></strong>。</p>
+
+
+
+<p>那么，哪些 SaaS 商业模式很难被踢出局？</p>
+
+
+
+<p><strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">第一种，大概是拥有不可替代的数据。</mark></strong>这样的 SaaS 软件拥有私有的、历史的和被视作宝贵资源的数据，而不是公开的、简单的和比较容易获得的数据。前面说的 Chegg 拥有的其实就是公开的数据，比如所谓的习题，还有像是 LeetCode 题解这样的也差不多；而 ServiceNow、Salesforce，以及 Atlassian 等等，这些企业专有的数据，让你没有办法直接使用一个公有的 AI 服务来直接替代掉。</p>
+
+
+
+<p><strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">第二种，就是高度复杂化和专业性的，AI 可以充当一个外行，但是没有办法触及最核心的精确性的。</mark></strong>这包括某些媒体内容的制作，AI 可以提供丰富的素材，动画的画师可以使用 AI，但是主干必须要手动主导和干预，AI 可能能够生成关键帧之间的连接。</p>
+
+
+
+<p><strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">第三种，大概就是脱离软件的虚拟世界，和真实世界有着紧密的连接。</mark></strong>比方说，对于很多 IoT 应用，通过各种各样的特定传感器来获知状态并连接。这些硬件的 “眼睛”、“耳朵” 和 “嘴” 需要特定的驱动程序，或是说，特定的软件才能工作。</p>
+
+
+
+<p>还有一些 SaaS 应用，居于二者之间——可能能够暂时活一段时间，但是长远看，护城河也会被侵蚀。</p>
+
+
+
+<p>第一种，复杂流程已经根植入企业人事流程的。这种只是代价高，但并非有那么强的不可替代性。</p>
+
+
+
+<p>第二种，已经发展出专业技能的。有些学校里面都会教。比如 Unity 的技能和 Adobe 的技能等等。</p>
+
+
+
+<p>第三种，那就是生态。比如 Jira 就有插件生态等等，生态意味着有很多为了方便提供某些特性而做出的定制化。</p>
+
+
+
+<h2>对软件工程师的影响</h2>
+
+
+
+<p>在说软件工程师之前，先跳出来想一下，哪些行业更容易被 AI 革命？</p>
+
+
+
+<p><strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">初级（简单劳动）的白领，是最容易被革命的。</mark></strong>“简单劳动” 很容易理解，但是 “白领” 被淘汰是 AI 时代的特殊之处。如果说工业革命初期受到最大影响的是 “蓝领”，那 AI 革命初期受到最大影响的就是 “白领” 了。这一类初级白领，就是看似坐在电脑前工作，但是工作却是一些复制粘贴、流程安排和文字组织等等简单的活动，比方说翻译、秘书等等。</p>
+
+
+
+<p>相应地，我记得李开复的《AI·未来》书上也讲到的，需要和真实世界的人交互的行业，影响可能是最小的。比如养老护理，体育竞技等等。还有一些行业，是蓝领，但是目前的 AI 和硬件设备的结合还要慢一步，比如汽车修理等等——AI 又没有手，因此这样的行业暂时也算安全，只不过随着机器人等强烈依赖硬件行业跟上来，这些也依然有被淘汰的风险。</p>
+
+
+
+<p>好，接着再来看软件工程师。软件工程师，算是白领，但是算是 “初级” 白领吗？</p>
+
+
+
+<p>其实，大家似乎比较容易能够达成共识的是，单纯编码，就是一个很容易就被 AI 淘汰的工种了。想起来其实也很容易理解，编码，说到底和英语或者任何其他人类语言的 “翻译” 到底有多大区别？可能区别也不过是，交流的对象从活生生的人变成了冷冰冰的机器，还是需要语义、语法，还是需要语言逻辑。如果从这样的角度来看，似乎 “编码员”（coder）可替代性真的太高了。</p>
+
+
+
+<p>再深入一步，是用的更为广泛的 “程序员”（programmer）。这意味着，再代码的基础上，程序员设计逻辑、算法，从而把一个具体问题实现为程序代码。程序员也会关心程序员生命周期的其他活动，比如 bug 修改、feature 添加等等，但是核心依然是代码。程序员似乎比编码员好一点，但是 AI 的可替代性依然很高。</p>
+
+
+
+<p>再来，就是软件工程师。我认为软件工程师是一群能够利用一定系统和规范的方法，来把软件工程化的专业人员。这就意味着他们解决的问题是实际世界的问题，需要把问题抽象成为软件可解的问题，以工程的方式实现，并且维护整个软件生命周期。</p>
+
+
+
+<p>渐渐地，整个行业会有更加成熟的方法来知道 AI 实现需求，但是软件工程师依然会需要 “亲自阅卷”，他们也许会大大减少亲自实现的代码量，但会花更多时间评审 AI 的代码实现，寻找其中的问题，评估其中的风险等等。在整个软件工程流程上，也需要分析和思考用户的需求，敲定大体的方案，把大块复杂的任务拆分成小块的任务，交给 AI 来实现等等。总而言之，AI 成为了助手，或者是团队中的 “初级程序员”。传统观念上软件工程师的核心能力有了些许区别，比如说，如何提问 AI 的表述能力会被放到更加重要的位置。</p>
+
+
+
+<p>这么看来，“初级软件工程师” 似乎非常容易被替代。比如说，初级软件工程师，经常会拿到设计方案，然后去实现。这在如今的互联网大厂是常态，大的 feature 或者系统，不太会完全丢给一个没什么经验的新兵来实现，这样的角色确实是比较容易被 AI 替代的。<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">可是，成长是要有过程的，如果这个阶段不给足时间，那么初级软件工程师就不能成长为高级软件工程师，如果 AI 替代了这个阶段，势必会造成人才的断层。</mark></strong>从长远来看，这才是让我最为忧心的。</p>
+
+
+
+<p>如果我们仔细思考 AI 的擅长与不擅长，AI 目前还是有很大的局限性的。比方说，AI 还是更适合做具体的、明确的工作，对于一个复杂系统，对于用户的痛点感知，还是需要软件工程师开动大脑来分析思考，基本上这种活动都需要比较长的时间和比较丰富的积累。<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">再有一个，AI 现在的两大问题，一个是 hallucination，就是 “一本正经说瞎话”；另一个是 sycophancy，就是在一些决策上面没有啥 backbone，很容易倒向谄媚的一侧。</mark></strong>我可以想象，几年以后，AI 做更多的执行和辅助，然后把信息提炼、分析以后交给软件工程师，而软件工程师会做更多的思考和决策，并为结果负责。</p>
+
+
+
+<p>我们还在这个时代变革的开头，这些观念只能说是目前的思考，两三年之后，它们还有效吗，我可以说完全没有什么信心。不过我确定的是，我们不能回避，要拥抱这个时代；既然选择了这一行，就要尽量保持开放，去倾听和接触新鲜事物，持续学习，那种抱着自认为 “经得起考验” 的过往成功的经验不放的自称 “老派” 的家伙，可能会吃大亏。</p>
+<p><strong><font color="#ff0000">文章未经特殊标明皆为本人原创，未经许可不得用于任何商业用途，转载请保持完整性并注明来源链接 <a href="https://www.raychase.net/8155">《四火的唠叨》</a></font></strong></p><div class='yarpp yarpp-related yarpp-related-rss yarpp-template-list'>
+<!-- YARPP List -->
+<p>你可能也喜欢看：</p><ol>
+<li><a href="https://www.raychase.net/7965" rel="bookmark" title="初涉 ML Workflow 系统：Kubeflow Pipelines、Flyte 和 Metaflow">初涉 ML Workflow 系统：Kubeflow Pipelines、Flyte 和 Metaflow</a></li>
+<li><a href="https://www.raychase.net/359" rel="bookmark" title="程序员看法上的几个典型错误">程序员看法上的几个典型错误</a></li>
+<li><a href="https://www.raychase.net/571" rel="bookmark" title="程序员学英语">程序员学英语</a></li>
+<li><a href="https://www.raychase.net/807" rel="bookmark" title="编程的未来">编程的未来</a></li>
+<li><a href="https://www.raychase.net/1183" rel="bookmark" title="进阶过程：程序员做项目的独立性">进阶过程：程序员做项目的独立性</a></li>
+</ol>
+</div>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.raychase.net/8155/feed</wfw:commentRss>
+			<slash:comments>6</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>聊聊商业模式——迪士尼</title>
+		<link>https://www.raychase.net/8140</link>
+					<comments>https://www.raychase.net/8140#respond</comments>
+		
+		<dc:creator><![CDATA[四火]]></dc:creator>
+		<pubDate>Sun, 01 Feb 2026 05:22:59 +0000</pubDate>
+				<category><![CDATA[Business and Investment]]></category>
+		<category><![CDATA[Disney]]></category>
+		<category><![CDATA[IP]]></category>
+		<category><![CDATA[商业模式]]></category>
+		<category><![CDATA[护城河]]></category>
+		<guid isPermaLink="false">https://www.raychase.net/?p=8140</guid>
+
+					<description><![CDATA[<!-- wp:paragraph -->
+<p><img class="wp-image-8142" style="width: 320px; float: right" src="/wp-content/uploads/2026/01/Walt_Disney_Animation-1024x640.png" alt=""/>打算把我相对能看得懂的公司商业模式捋一遍，今次讲讲迪士尼。老规矩，内容都是来着我自己这个老股东的理解，从开始建仓到现在，核心仓位拿了很多年了，也是我较大仓位长持的公司中整体回报率最低的一家。我一直奉行只买自己熟悉和（相对能）看得懂的公司这样一个基本原则，因此职业的关系手里大部分持仓都是科技股，像迪士尼这样的公司显得比较另类。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>迪士尼是一家传统媒体公司，核心就是内容创作和内容分发，不过和它的竞争对手比起来，它也是向科技激进转型（并且挣扎的）的“新媒体”。如果说传统媒体有Comcast或者Paramount，纯粹的新媒体像是Netflix，那么迪士尼就好像是夹在中间。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>就像<a href="/8126" target="_blank" rel="noreferrer noopener">之前分析阿里巴巴</a>这艘商业巨轮一样，要去理解迪士尼的商业模式，可以从这样三个部分来分别审视：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul><li>第一版图：娱乐。它贡献了不到一半的营收和不到三成的利润，包括流媒体和电视网络，以及内容授权。</li><li>第二版图：体验。略微不到四成的营收，却贡献了接近六成的利润，这其实就是乐园和游轮了，也包括一些周边商品和服务。</li><li>第三版图：体育。营收和利润都占小头，基本就是ESPN。</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2>护城河</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>迪士尼大概是地球上护城河最宽的非必须消费类公司之一，它的乐园、游轮，还有流媒体，都是护城河，但是一切护城河的核心在于IP。所有的乐园、游轮、电影、商品，全都是围绕IP来运作的，没有IP，就没有百年迪士尼。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>比方说，现在有环球影城这样的主题乐园，发展很快，但是它们始终没法威胁到迪士尼的乐园。原因很简单，因为其它的主题乐园它们再豪华，也不是迪士尼认证的，没有迪士尼那些孩子们心中卡通人物的乐园。你也可以建造最刺激的过山车，但是它肯定不是星球大战过山车，也肯定不是冰雪奇缘过山车。你还可以生产便宜的玩具，但它肯定不是正版的米奇和他的朋友们，也不会是钢铁侠、绿巨人，或者朱迪或者尼克。所以，一句话，<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">IP就是护城河，IP就是溢价。</mark></strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>从这个角度来说，<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">IP的推广，占据用户心智，才是迪士尼的根基。这也是我后来慢慢理解为什么迪士尼要自己做流媒体，砸钱做，即便一年一年亏钱还要继续砸。</mark></strong>这里并不是一个简单的自己做流媒体远期能够提高利润率等方面的问题，这是一个生死存亡的问题。如果继续使用Netflix的平台，那么哪一天Netflix决定掐住迪士尼的喉咙，不让电视上继续播放迪士尼的的卡通形象，这些IP不能深入新一代孩子们的内心，无论这个过程有多缓慢，那最终迪士尼的这个经典的盈利的飞轮就彻底转不起来了。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>前面说的体验部分和娱乐部分，基本都是围绕着迪士尼那些著名IP展开的，这是迪士尼最根基的商业模式。在此之上，也能看到一些其它次要一点的护城河，比如乐园、游轮也好，度假区也罢，<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">都具备一个完整的消费环境，衣食住行，全部都在这个密闭的环境里面完成，结果就是，请把美好回忆带走，但务必把钱留下</mark></strong>，这也是它第二重要的商业模式。通常来说，我是不太喜欢重资产的商业模式的，不过它的商业模式和护城河太经典和强悍了，我觉得可以为迪士尼开一个例外。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>不过迪士尼的体育板块，还是和上面的略有区别，它的护城河主要是长期锁定的直播权。这部分逻辑上比较简单，并且是租来的，成本肯定没有完全自有的护城河那么可控，也没有那么强悍。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>三大版图：娱乐、体验和体育</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>先说娱乐版图，它包含传统电视、流媒体和占比较小的内容销售。传统电视已经基本上是夕阳产业，现在在娱乐部分依然是贡献大头的利润，但是这部分没有成长性，逐渐萎缩。流媒体是“转型的主力”和“全村的希望”，其实也可以说是刚刚转盈利，但是毕竟开始赚钱了，希望它是一个真正的困境反转。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>流媒体伴随着盈利逐渐改善，有一个变化，就是不再纠结于用户数量的提升，而是通过涨价提升ARPU和增加广告收入。市场是很乐于看到涨价的，涨价也说明了用户粘性和护城河。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>接着是体验版图，这有点像是阿里巴巴的传统电商部分，营收最高并且利润率低于娱乐部分，但能够不断提供源源不断的现金流来发展新业务（特别是前几年持续支持流媒体烧钱）。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>美国的本土乐园其实保持低速增长就不错，但是国际乐园还是有很大的空间。只要没有疫情这样的黑天鹅，游轮业务也能逐渐缓慢扩张。总之，这部分通常比较稳定，这部分也是较重的资产和员工人数的主要来源。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>最后是体育版图，ESPN是盈利的，但是面临体育版权费越来越贵的压力。从内容上看，Hulu和ESPN最初似乎都和Disney的背景格格不入，但是这是迪士尼扩展用户群的一着棋。ESPN曾经是非常赚钱的，包括联盟费和广告费等等，但是现在因为有线电视的衰退，这部分有点往鸡肋方向靠拢。然而，无论利润率如何，ESPN有它的战略地位，ESPN是Disney和Netflix竞争的重要筹码。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>失去的十年</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>和很多巨头不一样的是，从2015年到现在（2026年），差不多十年了，迪士尼的股价一直在一个范围内波动，没能获得突破。这挺让人感慨，然而看似卡住的股价背后，发生了天翻地覆的变化。这个转身对于如此传统的一家媒体巨头来说，实属不易。这让我想起了微软Office上云的商业模式迁移。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>首先，710亿天价收购Fox，主要目的是扩充IP库。Fox收购是伤筋动骨的（别忘了当时的净利润只有120多亿），为此背负了巨额债务。但是老Bob（Bob Iger）还真的是既有眼光，又有魄力，如果没有这笔收购，没有内容怎么做流媒体，只有那米老鼠和漫威等等几十部电影。而且除了内容，还拿到了Hulu的控制权，这不但从儿童动画拓展到成人剧集，而且技术和运营上它的经验对于做Disney+是很有帮助的。这笔收购的战略意义太过重大，<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">要是没有Fox收购，就没有今天的阿凡达，就没有X战警，也没有辛普森和冰河世纪；要是没有Fox收购，迪士尼就没法做流媒体，IP和品牌就会慢慢衰落</mark></strong>，前面已经说到了。看看Paramount，它也是传统媒体，也有海绵宝宝和Paw Patrol之类的一堆IP，但是现在呢，被Oracle CEO拉里埃里森的儿子收购和合并。所以，从今天的角度看，这把操作代价是巨大的，但是整体看来还是正确而重要的一步。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>然后就是做Disney+烧钱，跟Netflix正面刚。就像一个退休了的老头重新出山来和年轻人在科技领域竞争，学习怎么玩互联网，很不容易，直到现在也谈不上“擅长”——现在Netflix的利润率接近三成，而Disney+只有个位数。但是因为传统的电视领域的衰落，这是它没有退路的一步棋。从这个角度看，百年老店迪士尼还是非常值得尊敬的，我相信大多数企业都抗不过这个时代的变革。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>之后再加上疫情的打击（这类非必须消费而且是重资产，疫情打击是非常大的），分红被迫暂停，股本也一路膨胀，一直到2023年结束。之后因为财务状况改善，才慢慢通过回购好起来，现在大致还算处于一个变革期，但是从回购恢复和分红增长来看，最艰难的时间可能已经过去了。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>风险与未来</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>如今，市场关心Bob Iger二次出山之后，他需要再次隐退，那谁来接班呢？这可能是短期内迪士尼最大的风险，想起之前CEO Bob Chapek被认为把财务放在艺术和传统之上，得了大罪，于是Bob Iger被迫重新出山。其次，是袭来的AI革命，对于传统动画制作门槛的降低，那么多不确定性都等待尘埃落定。再一个，就和很多重资产的经营一样，这一类生意的脆弱性——疫情也好，衰退也好，一旦出现，它就会受到直接的打击。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>再来说说和Netflix的竞争，市场迫切希望看到Disney+能将迪士尼的增长带出来。在我看来，如果要去和Netflix拼内容宽度，是没有胜算的。Netflix在流媒体这块的统治力太足了，无论是内容库的丰富程度还是技术的成熟度，都是迪士尼无法望其项背的。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>那么，迪士尼还是要靠自己的IP，也许用户量没法和Netflix比，但是用户心智对于IP的深度要培养起来。如果流媒体搞成功了，迪士尼的未来可以打八十分往上，但是如果没搞成功呢？也未必是世界末日，如果我们换个角度思考，<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">和流媒体起着生死攸关作用的Netflix不同，对于迪士尼来说，或许流媒体未必非得要有多少盈利，它完全可以只扮演一个“药引子”</mark></strong>——流媒体本身只是渠道，用户看了Netflix的动画，整个消费场景就结束了；而用户看了迪士尼的动画，消费场景才刚刚开始，之后他会去乐园、去游轮，去买周边等等。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>最后，在这个竞争上，迪士尼还有一个优势，就是Disney+的动画、Hulu的神剧和ESPN的体育直播捆绑起来的优势，这里面有很多Netflix完全没法竞争的内容。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>我们在比护城河的时候，主要是在比商业模式。Netflix呢，它虽然成长很快，但它只有单纯的流媒体和相应的内容，全球用户已经到3.25亿了，往上的空间不大，增长很快会遇到天花板（从它最近要收购华纳兄弟来看，也许管理层觉得这一天已经到来了）。因此把时间放长来看，除非它有了新的业务拓展曲线，否则我认为Netflix的护城河和Disney是完全没法比的。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>总之，迪士尼是一家成熟，但在努力转型以根上时代的公司，成长性看起来没有很多互联网公司那么强，但是我还是相信它在这些经典IP上的积累，相信它的商业模式，也相信它能平安度过科技转型和困境反转的阶段，价值得到回归。百年迪士尼为我们童年带来过美好的回忆，我真心希望它可以再继续创造经典的角色，陪更多的孩子们度过童年。</p>
+<!-- /wp:paragraph -->]]></description>
+										<content:encoded><![CDATA[
+<p><img loading="lazy" width="1024" height="640" class="wp-image-8142" style="width: 320px; float: right" src="/wp-content/uploads/2026/01/Walt_Disney_Animation-1024x640.png" alt="" srcset="https://www.raychase.net/wp-content/uploads/2026/01/Walt_Disney_Animation-1024x640.png 1024w, https://www.raychase.net/wp-content/uploads/2026/01/Walt_Disney_Animation-300x188.png 300w, https://www.raychase.net/wp-content/uploads/2026/01/Walt_Disney_Animation-768x480.png 768w, https://www.raychase.net/wp-content/uploads/2026/01/Walt_Disney_Animation-850x531.png 850w, https://www.raychase.net/wp-content/uploads/2026/01/Walt_Disney_Animation.png 1440w" sizes="(max-width: 1024px) 100vw, 1024px" />打算把我相对能看得懂的公司商业模式捋一遍，今次讲讲迪士尼。老规矩，内容都是来着我自己这个老股东的理解，从开始建仓到现在，核心仓位拿了很多年了，也是我较大仓位长持的公司中整体回报率最低的一家。我一直奉行只买自己熟悉和（相对能）看得懂的公司这样一个基本原则，因此职业的关系手里大部分持仓都是科技股，像迪士尼这样的公司显得比较另类。</p>
+
+
+
+<p>迪士尼是一家传统媒体公司，核心就是内容创作和内容分发，不过和它的竞争对手比起来，它也是向科技激进转型（并且挣扎的）的 “新媒体”。如果说传统媒体有 Comcast 或者 Paramount，纯粹的新媒体像是 Netflix，那么迪士尼就好像是夹在中间。</p>
+
+
+
+<p>就像<a href="/8126" target="_blank" rel="noreferrer noopener">之前分析阿里巴巴</a>这艘商业巨轮一样，要去理解迪士尼的商业模式，可以从这样三个部分来分别审视：</p>
+
+
+
+<ul><li>第一版图：娱乐。它贡献了不到一半的营收和不到三成的利润，包括流媒体和电视网络，以及内容授权。</li><li>第二版图：体验。略微不到四成的营收，却贡献了接近六成的利润，这其实就是乐园和游轮了，也包括一些周边商品和服务。</li><li>第三版图：体育。营收和利润都占小头，基本就是 ESPN。</li></ul>
+
+
+
+<h2>护城河</h2>
+
+
+
+<p>迪士尼大概是地球上护城河最宽的非必须消费类公司之一，它的乐园、游轮，还有流媒体，都是护城河，但是一切护城河的核心在于 IP。所有的乐园、游轮、电影、商品，全都是围绕 IP 来运作的，没有 IP，就没有百年迪士尼。</p>
+
+
+
+<p>比方说，现在有环球影城这样的主题乐园，发展很快，但是它们始终没法威胁到迪士尼的乐园。原因很简单，因为其它的主题乐园它们再豪华，也不是迪士尼认证的，没有迪士尼那些孩子们心中卡通人物的乐园。你也可以建造最刺激的过山车，但是它肯定不是星球大战过山车，也肯定不是冰雪奇缘过山车。你还可以生产便宜的玩具，但它肯定不是正版的米奇和他的朋友们，也不会是钢铁侠、绿巨人，或者朱迪或者尼克。所以，一句话，<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">IP 就是护城河，IP 就是溢价。</mark></strong></p>
+
+
+
+<p>从这个角度来说，<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">IP 的推广，占据用户心智，才是迪士尼的根基。这也是我后来慢慢理解为什么迪士尼要自己做流媒体，砸钱做，即便一年一年亏钱还要继续砸。</mark></strong>这里并不是一个简单的自己做流媒体远期能够提高利润率等方面的问题，这是一个生死存亡的问题。如果继续使用 Netflix 的平台，那么哪一天 Netflix 决定掐住迪士尼的喉咙，不让电视上继续播放迪士尼的的卡通形象，这些 IP 不能深入新一代孩子们的内心，无论这个过程有多缓慢，那最终迪士尼的这个经典的盈利的飞轮就彻底转不起来了。</p>
+
+
+
+<p>前面说的体验部分和娱乐部分，基本都是围绕着迪士尼那些著名 IP 展开的，这是迪士尼最根基的商业模式。在此之上，也能看到一些其它次要一点的护城河，比如乐园、游轮也好，度假区也罢，<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">都具备一个完整的消费环境，衣食住行，全部都在这个密闭的环境里面完成，结果就是，请把美好回忆带走，但务必把钱留下</mark></strong>，这也是它第二重要的商业模式。通常来说，我是不太喜欢重资产的商业模式的，不过它的商业模式和护城河太经典和强悍了，我觉得可以为迪士尼开一个例外。</p>
+
+
+
+<p>不过迪士尼的体育板块，还是和上面的略有区别，它的护城河主要是长期锁定的直播权。这部分逻辑上比较简单，并且是租来的，成本肯定没有完全自有的护城河那么可控，也没有那么强悍。</p>
+
+
+
+<h2>三大版图：娱乐、体验和体育</h2>
+
+
+
+<p>先说娱乐版图，它包含传统电视、流媒体和占比较小的内容销售。传统电视已经基本上是夕阳产业，现在在娱乐部分依然是贡献大头的利润，但是这部分没有成长性，逐渐萎缩。流媒体是 “转型的主力” 和 “全村的希望”，其实也可以说是刚刚转盈利，但是毕竟开始赚钱了，希望它是一个真正的困境反转。</p>
+
+
+
+<p>流媒体伴随着盈利逐渐改善，有一个变化，就是不再纠结于用户数量的提升，而是通过涨价提升 ARPU 和增加广告收入。市场是很乐于看到涨价的，涨价也说明了用户粘性和护城河。</p>
+
+
+
+<p>接着是体验版图，这有点像是阿里巴巴的传统电商部分，营收最高并且利润率低于娱乐部分，但能够不断提供源源不断的现金流来发展新业务（特别是前几年持续支持流媒体烧钱）。</p>
+
+
+
+<p>美国的本土乐园其实保持低速增长就不错，但是国际乐园还是有很大的空间。只要没有疫情这样的黑天鹅，游轮业务也能逐渐缓慢扩张。总之，这部分通常比较稳定，这部分也是较重的资产和员工人数的主要来源。</p>
+
+
+
+<p>最后是体育版图，ESPN 是盈利的，但是面临体育版权费越来越贵的压力。从内容上看，Hulu 和 ESPN 最初似乎都和 Disney 的背景格格不入，但是这是迪士尼扩展用户群的一着棋。ESPN 曾经是非常赚钱的，包括联盟费和广告费等等，但是现在因为有线电视的衰退，这部分有点往鸡肋方向靠拢。然而，无论利润率如何，ESPN 有它的战略地位，ESPN 是 Disney 和 Netflix 竞争的重要筹码。</p>
+
+
+
+<h2>失去的十年</h2>
+
+
+
+<p>和很多巨头不一样的是，从 2015 年到现在（2026 年），差不多十年了，迪士尼的股价一直在一个范围内波动，没能获得突破。这挺让人感慨，然而看似卡住的股价背后，发生了天翻地覆的变化。这个转身对于如此传统的一家媒体巨头来说，实属不易。这让我想起了微软 Office 上云的商业模式迁移。</p>
+
+
+
+<p>首先，710 亿天价收购 Fox，主要目的是扩充 IP 库。Fox 收购是伤筋动骨的（别忘了当时的净利润只有 120 多亿），为此背负了巨额债务。但是老 Bob（Bob Iger）还真的是既有眼光，又有魄力，如果没有这笔收购，没有内容怎么做流媒体，只有那米老鼠和漫威等等几十部电影。而且除了内容，还拿到了 Hulu 的控制权，这不但从儿童动画拓展到成人剧集，而且技术和运营上它的经验对于做 Disney+是很有帮助的。这笔收购的战略意义太过重大，<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">要是没有 Fox 收购，就没有今天的阿凡达，就没有 X 战警，也没有辛普森和冰河世纪；要是没有 Fox 收购，迪士尼就没法做流媒体，IP 和品牌就会慢慢衰落</mark></strong>，前面已经说到了。看看 Paramount，它也是传统媒体，也有海绵宝宝和 Paw Patrol 之类的一堆 IP，但是现在呢，被 Oracle CEO 拉里埃里森的儿子收购和合并。所以，从今天的角度看，这把操作代价是巨大的，但是整体看来还是正确而重要的一步。</p>
+
+
+
+<p>然后就是做 Disney+烧钱，跟 Netflix 正面刚。就像一个退休了的老头重新出山来和年轻人在科技领域竞争，学习怎么玩互联网，很不容易，直到现在也谈不上 “擅长”——现在 Netflix 的利润率接近三成，而 Disney+只有个位数。但是因为传统的电视领域的衰落，这是它没有退路的一步棋。从这个角度看，百年老店迪士尼还是非常值得尊敬的，我相信大多数企业都抗不过这个时代的变革。</p>
+
+
+
+<p>之后再加上疫情的打击（这类非必须消费而且是重资产，疫情打击是非常大的），分红被迫暂停，股本也一路膨胀，一直到 2023 年结束。之后因为财务状况改善，才慢慢通过回购好起来，现在大致还算处于一个变革期，但是从回购恢复和分红增长来看，最艰难的时间可能已经过去了。</p>
+
+
+
+<h2>风险与未来</h2>
+
+
+
+<p>如今，市场关心 Bob Iger 二次出山之后，他需要再次隐退，那谁来接班呢？这可能是短期内迪士尼最大的风险，想起之前 CEO Bob Chapek 被认为把财务放在艺术和传统之上，得了大罪，于是 Bob Iger 被迫重新出山。其次，是袭来的 AI 革命，对于传统动画制作门槛的降低，那么多不确定性都等待尘埃落定。再一个，就和很多重资产的经营一样，这一类生意的脆弱性——疫情也好，衰退也好，一旦出现，它就会受到直接的打击。</p>
+
+
+
+<p>再来说说和 Netflix 的竞争，市场迫切希望看到 Disney+能将迪士尼的增长带出来。在我看来，如果要去和 Netflix 拼内容宽度，是没有胜算的。Netflix 在流媒体这块的统治力太足了，无论是内容库的丰富程度还是技术的成熟度，都是迪士尼无法望其项背的。</p>
+
+
+
+<p>那么，迪士尼还是要靠自己的 IP，也许用户量没法和 Netflix 比，但是用户心智对于 IP 的深度要培养起来。如果流媒体搞成功了，迪士尼的未来可以打八十分往上，但是如果没搞成功呢？也未必是世界末日，如果我们换个角度思考，<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">和流媒体起着生死攸关作用的 Netflix 不同，对于迪士尼来说，或许流媒体未必非得要有多少盈利，它完全可以只扮演一个 “药引子”</mark></strong>——流媒体本身只是渠道，用户看了 Netflix 的动画，整个消费场景就结束了；而用户看了迪士尼的动画，消费场景才刚刚开始，之后他会去乐园、去游轮，去买周边等等。</p>
+
+
+
+<p>最后，在这个竞争上，迪士尼还有一个优势，就是 Disney+的动画、Hulu 的神剧和 ESPN 的体育直播捆绑起来的优势，这里面有很多 Netflix 完全没法竞争的内容。</p>
+
+
+
+<p>我们在比护城河的时候，主要是在比商业模式。Netflix 呢，它虽然成长很快，但它只有单纯的流媒体和相应的内容，全球用户已经到 3.25 亿了，往上的空间不大，增长很快会遇到天花板（从它最近要收购华纳兄弟来看，也许管理层觉得这一天已经到来了）。因此把时间放长来看，除非它有了新的业务拓展曲线，否则我认为 Netflix 的护城河和 Disney 是完全没法比的。</p>
+
+
+
+<p>总之，迪士尼是一家成熟，但在努力转型以根上时代的公司，成长性看起来没有很多互联网公司那么强，但是我还是相信它在这些经典 IP 上的积累，相信它的商业模式，也相信它能平安度过科技转型和困境反转的阶段，价值得到回归。百年迪士尼为我们童年带来过美好的回忆，我真心希望它可以再继续创造经典的角色，陪更多的孩子们度过童年。</p>
+<p><strong><font color="#ff0000">文章未经特殊标明皆为本人原创，未经许可不得用于任何商业用途，转载请保持完整性并注明来源链接 <a href="https://www.raychase.net/8140">《四火的唠叨》</a></font></strong></p><div class='yarpp yarpp-related yarpp-related-rss yarpp-template-list'>
+<!-- YARPP List -->
+<p>你可能也喜欢看：</p><ol>
+<li><a href="https://www.raychase.net/8063" rel="bookmark" title="聊聊商业模式——拼多多">聊聊商业模式——拼多多</a></li>
+<li><a href="https://www.raychase.net/8126" rel="bookmark" title="聊聊商业模式——阿里巴巴">聊聊商业模式——阿里巴巴</a></li>
+<li><a href="https://www.raychase.net/8115" rel="bookmark" title="聊聊商业模式——Atlassian">聊聊商业模式——Atlassian</a></li>
+<li><a href="https://www.raychase.net/7365" rel="bookmark" title="闲聊投资：亲自体验和护城河">闲聊投资：亲自体验和护城河</a></li>
+<li><a href="https://www.raychase.net/5047" rel="bookmark" title="写在曼联主教练又一次更迭之际">写在曼联主教练又一次更迭之际</a></li>
+</ol>
+</div>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.raychase.net/8140/feed</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>聊聊商业模式——阿里巴巴</title>
+		<link>https://www.raychase.net/8126</link>
+					<comments>https://www.raychase.net/8126#comments</comments>
+		
+		<dc:creator><![CDATA[四火]]></dc:creator>
+		<pubDate>Mon, 26 Jan 2026 05:18:29 +0000</pubDate>
+				<category><![CDATA[Business and Investment]]></category>
+		<category><![CDATA[AI]]></category>
+		<category><![CDATA[云]]></category>
+		<category><![CDATA[商业模式]]></category>
+		<category><![CDATA[投资]]></category>
+		<category><![CDATA[电子商务]]></category>
+		<category><![CDATA[阿里巴巴]]></category>
+		<guid isPermaLink="false">https://www.raychase.net/?p=8126</guid>
+
+					<description><![CDATA[<!-- wp:paragraph -->
+<p><img class="wp-image-8128" style="width:320px; float: right" src="/wp-content/uploads/2026/01/alibaba.png" alt=""/>之前聊到过<a rel="noreferrer noopener" href="/8063" target="_blank">拼多多</a>，今天聊一下阿里巴巴。阿里巴巴作为中概元老，很多人都讨论过，我只发表从我的角度浅显的看法。作为利益相关者，我持有阿里巴巴个股，且在中国科技相关的ETF和基金中的被动持有仓位。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>首先，要理解阿里巴巴，需要从它的五块构成来分别理解：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul><li>国内电商：现金流的奶牛，大概占阿里巴巴营收的一半，增速回暖。基本上属于竞争激烈，并且市场份额逐渐被吞噬的部分。</li><li>阿里云：营收占比大概只有15%左右，但是增速超过三成，而且站在AI风口。</li><li>电商出海：营收目前占比比阿里略低，增长能到两位数，属于第二曲线。</li><li>其它业务：包括菜鸟、饿了么和优酷等等，占到百分之十几的营收，处于亏钱状态。</li><li>投资和现金：包括最重要的蚂蚁集团。</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2>国内电商</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>这是我对阿里最初的印象。中国是互联网电商发展最快的国家之一，阿里巴巴作为时代的开拓者，当然也吃到了其中的红利。不过，现在看起来要守住市场份额也开始烧钱了，一旦一家公司要在某个成熟的业务上大手笔地烧钱，我认为这可能就是一个极其危险的信号。<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">凡是进行价格战的生意，基本都很难说是好生意，真正有护城河的生意，是不屑于降价的。</mark></strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>这个烧钱，说到底，主要是为了和拼多多抗衡，打出了百亿补贴的牌。但是阿里的降价不仅关乎到陡降的利润率，也打击了天猫上商户的品牌形象。到了去年，尤其是下半年，又开始大干特干即时零售。这种烧掉利润来稳住市场份额的行为，有点像是医疗上的激素冲击，是最“简单粗暴”的方式，却也终究是不可持续的。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>其实我又想起了京东几年前的一波降价，之后股价就被打到地板上了，如今基本上作为一家重资产的PE在个位数的电商，可以作为烟蒂股了。说到底，那件事和如今阿里巴巴做的事情也没有什么本质区别，零售业就是一门苦生意。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>张勇作为CEO，战略上畏手畏脚，思维圈子也似乎跳不出一个CFO的局限，虽说没像百度一样把一副好牌完全打烂，却也做错了很多事情。比如一开始对下沉市场彻底放弃，后来再搞淘特，发现根本打不过拼多多；比如低效率的中台战略，让阿里巴巴变成了一家看起来有着严重大公司病的企业。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>蔡崇信（董事会主席）和吴泳铭（CEO）的组合上任以后，情况终于有了转机，阿里终于从一大堆业务当中分清主次，只有两个核心业务：电子商务和云计算，其它都靠边站。阿里一直以来都为流量入口的事情烦恼，这两年它做对的一件事情就是接入微信支付。第二件就是它搞清楚了对它最大价值的人是谁（这是它和拼多多商业模式不一样的地方，我在分析<a rel="noreferrer noopener" href="/8063" target="_blank">拼多多</a>的文章里面谈到过），是商家还是消费者，它选择没有跟风拼多多的“仅退款”跟到底，而是给高信用的商家一定的申诉通道。还有就是卖掉那些实体零售，利润率低，或者就是亏钱的重资产，像什么大润发和苏宁易购等等。这些都是这两年做对了的事情，虽说这些目前还没有从根本上改变电商基本盘的所处格局。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>阿里云和AI</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>阿里云和AI基本就是阿里增长的最大希望，市场认可的估值弹性得有好大一部分是来自于它（差不多一半？）。这也是2025年阿里市值回弹比很多对手快得多的原因之一。<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">如果没有这部分，阿里就基本是查理芒格说的“该死的零售商”而已了。</mark></strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>云计算在近年来增速加快的同时，盈利也终于在电商疲软的时候撑起了一片天。其实中国的云计算整体起步并不算晚，由于企业数字化和需求各异性太强等问题，盈利一直是一个问题。现在市场希望的是，阿里能像当年的AWS一样，把阿里云做成增长和利润的大头来源。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>想起来移动互联网最火的时期，阿里云的增速是能够超过50%的，后来掉下来了，一方面是TikTok跑了，另一方面是在线教育等多个行业遭受寒冬，需求减少了。不过2025年以来，借助AI的东风，云计算增速重启（这部分差异全是AI带来的，传统云服务增速依然只有个位数）。但是这个趋势能够维持多久，就决定了从目前的角度看，阿里的估值能维持多久。这个答案对我而言是不确定的。相对来说，腾讯的估值倍数和阿里差不多，但是它的利润和增长，或者说到护城河，都要稳健得多。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>阿里当年是差点要拆分阿里云出去单独上市的，如果真那么做了。如今的阿里云就要弱小得多，发展基本肯定不如现在，而阿里集团就会因为电商的侵蚀被打到地板上，那就可以说是双输的结果。还好，这一步险棋没有走出去。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>说到AI模型，就要提到阿里的通义千问，它的API几乎要成为中国国内的标准了，我也看到它把阿里旗下的各个业务串起来的潜力。阿里卖模型API的时候，也就把模型本身和AI算力都一起卖出去了。阿里还有一件事做得很对，就是把模型开源，这样开发者使用了模型，会更愿意部署在阿里云上。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>中国AI云市场接下去好几年年均增长都可以超过四成，<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">阿里云既包括云基础设施，又包括模型服务，两个细分领域都是龙头，属于高增长板块中的龙头，也就难怪市场愿意给相对的高估值了</mark></strong>。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>要说这部分的风险，主要有两个方面。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>一个是老生常谈的芯片卡脖子问题，但是这部分市场盯得紧，而且后果未必有想象得那么严重，可能高端芯片缺乏，较低端的芯片会降低计算效率。对于自研芯片，阿里的平头哥可能会独立融资，但是芯片不像电动车，商业地位上要产生实质性竞争力，需要走的路还远得很。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>另一个是，现在属于烧钱抢市场阶段可以理解，但<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">等AI大模型慢慢成熟以后，利润率到底还能不能保持高位是一个问题，或者说，到时AI大模型会不会又会变成零售一样，卷到天上去</mark></strong>。现在的大模型属于百花齐放期，但是我认为这里的护城河没有很多人想象得宽，就像大多数领域一样，最后只能剩下几家大的玩家，并且很可能大部分钱都会被最大的一家赚走。总之，届时对于大多数用户来说，不同大模型的质量差异也可能并不大，那种情况下鉴于可替代性，利润率就不可能挺得住。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>电商出海、其他业务和投资</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>2025年经历了一波大甩卖，无底洞都摆脱了，剩下的都还是比较不错的业务。阿里出海基本上breakeven了，结合菜鸟物流，阿里速卖通就能够用配送时间去和Temu竞争。电商出海的营收规模接近阿里云，从营收看，淘宝、天猫是阿里的身体，那阿里云和电商出海就是走路的两条腿。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>对于其他业务，除去菜鸟，大部分还是亏损的。2025年大卖特卖的也都是这部分的业务。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>再说投资，阿里之前的投资水准实在不能算好。不过，阿里在蔡、吴二人上任后卖掉了很多移动互联网时期开始投资的股权，一种是战略关联性低的业务，比如小鹏汽车、B站和快狗打车等等；另一种是重资产业务，比如大润发和苏宁易购等等。并且，很多卖出都是止损而非止盈，这些为了打云计算和AI的战役筹备了弹药。看起来撑面子的营收规模下降了，但这让阿里聚焦核心业务，变得更加轻资产，最实质的利润率却是提升的。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>现在阿里主要的投资，首先是蚂蚁集团，不知道什么时候还能再上市，但是目前盈利能力不容置疑，大概是这里面最值钱的资产。其它投资还包括中国国内AI的独角兽们，几大物流公司，还有媒体领域的微博，基本上都是具备战略地位的。阿里对投资人的回报也在改进。阿里开始提供一定的分红，并且大量回购，把自己定位为一个开始偏向成熟的企业。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>总体来看，阿里的投资，从张勇时代的重资产，开始逐渐转向新时代的轻资产和科技。从过往张勇时期的记录来看，看看腾讯的投资能力，比一比就能发现，阿里差远了。有句话叫做“腾讯投资是把半条命交给合作伙伴，而阿里巴巴则是想要对方的整条命”。<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">腾讯投资给对方资金和流量（京东、美团、拼多多，还有无数游戏公司），而阿里则是把对方买回来阿里化（饿了么、优酷、土豆等），全部融入进来管，结果还往往管不好。</mark></strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>我的逻辑</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>基本上，中国的企业当中，大概阿里巴巴就是能看懂一些的少数几家之一。它最初的牌兴许比腾讯还好，但是后来打烂了，但是又没有像百度那样彻底烂掉。如今的它还是给了市场很多正面的回馈，不过，现在这个价格，我认为确定性是要低于腾讯的。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>我认为阿里的电商护城河还将继续持续被侵蚀，而AI对于阿里就相当于“全村的希望”，这基本是阿里最大的希望，如果AI能够做成，它会是一笔很好的投资，但是风险上看，显然是高于腾讯的。我目前还继续持有阿里巴巴的仓位，但是conviction没有那么强烈，因此仓位也不很大。如今考虑进去地缘政治因素，阿里巴巴已经不再严重低估，但也不能算有多贵，但是我更关心的是我操作上的逻辑，只要哪天我确认阿里云的增速下来了，或者AI并没有预期的那么强大，我清仓个股的逻辑就会确立。在当前的价格，如果未来我找到优质得多的标的，我也许也会换出去。当然，我依然相信中国的科技，依然会持有中国科技的基金和ETF，这部分中阿里巴巴的被动持有会依然存在。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>阿里巴巴记录了中国科技一个又一个时代，从电子商务到云再到AI，衷心希望阿里巴巴能够巨人苏醒，王者归来。</p>
+<!-- /wp:paragraph -->]]></description>
+										<content:encoded><![CDATA[
+<p><img loading="lazy" width="1024" height="682" class="wp-image-8128" style="width:320px; float: right" src="/wp-content/uploads/2026/01/alibaba.png" alt="" srcset="https://www.raychase.net/wp-content/uploads/2026/01/alibaba.png 1024w, https://www.raychase.net/wp-content/uploads/2026/01/alibaba-300x200.png 300w, https://www.raychase.net/wp-content/uploads/2026/01/alibaba-768x512.png 768w, https://www.raychase.net/wp-content/uploads/2026/01/alibaba-850x566.png 850w" sizes="(max-width: 1024px) 100vw, 1024px" />之前聊到过<a rel="noreferrer noopener" href="/8063" target="_blank">拼多多</a>，今天聊一下阿里巴巴。阿里巴巴作为中概元老，很多人都讨论过，我只发表从我的角度浅显的看法。作为利益相关者，我持有阿里巴巴个股，且在中国科技相关的 ETF 和基金中的被动持有仓位。</p>
+
+
+
+<p>首先，要理解阿里巴巴，需要从它的五块构成来分别理解：</p>
+
+
+
+<ul><li>国内电商：现金流的奶牛，大概占阿里巴巴营收的一半，增速回暖。基本上属于竞争激烈，并且市场份额逐渐被吞噬的部分。</li><li>阿里云：营收占比大概只有 15% 左右，但是增速超过三成，而且站在 AI 风口。</li><li>电商出海：营收目前占比比阿里略低，增长能到两位数，属于第二曲线。</li><li>其它业务：包括菜鸟、饿了么和优酷等等，占到百分之十几的营收，处于亏钱状态。</li><li>投资和现金：包括最重要的蚂蚁集团。</li></ul>
+
+
+
+<h2>国内电商</h2>
+
+
+
+<p>这是我对阿里最初的印象。中国是互联网电商发展最快的国家之一，阿里巴巴作为时代的开拓者，当然也吃到了其中的红利。不过，现在看起来要守住市场份额也开始烧钱了，一旦一家公司要在某个成熟的业务上大手笔地烧钱，我认为这可能就是一个极其危险的信号。<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">凡是进行价格战的生意，基本都很难说是好生意，真正有护城河的生意，是不屑于降价的。</mark></strong></p>
+
+
+
+<p>这个烧钱，说到底，主要是为了和拼多多抗衡，打出了百亿补贴的牌。但是阿里的降价不仅关乎到陡降的利润率，也打击了天猫上商户的品牌形象。到了去年，尤其是下半年，又开始大干特干即时零售。这种烧掉利润来稳住市场份额的行为，有点像是医疗上的激素冲击，是最 “简单粗暴” 的方式，却也终究是不可持续的。</p>
+
+
+
+<p>其实我又想起了京东几年前的一波降价，之后股价就被打到地板上了，如今基本上作为一家重资产的 PE 在个位数的电商，可以作为烟蒂股了。说到底，那件事和如今阿里巴巴做的事情也没有什么本质区别，零售业就是一门苦生意。</p>
+
+
+
+<p>张勇作为 CEO，战略上畏手畏脚，思维圈子也似乎跳不出一个 CFO 的局限，虽说没像百度一样把一副好牌完全打烂，却也做错了很多事情。比如一开始对下沉市场彻底放弃，后来再搞淘特，发现根本打不过拼多多；比如低效率的中台战略，让阿里巴巴变成了一家看起来有着严重大公司病的企业。</p>
+
+
+
+<p>蔡崇信（董事会主席）和吴泳铭（CEO）的组合上任以后，情况终于有了转机，阿里终于从一大堆业务当中分清主次，只有两个核心业务：电子商务和云计算，其它都靠边站。阿里一直以来都为流量入口的事情烦恼，这两年它做对的一件事情就是接入微信支付。第二件就是它搞清楚了对它最大价值的人是谁（这是它和拼多多商业模式不一样的地方，我在分析<a rel="noreferrer noopener" href="/8063" target="_blank">拼多多</a>的文章里面谈到过），是商家还是消费者，它选择没有跟风拼多多的 “仅退款” 跟到底，而是给高信用的商家一定的申诉通道。还有就是卖掉那些实体零售，利润率低，或者就是亏钱的重资产，像什么大润发和苏宁易购等等。这些都是这两年做对了的事情，虽说这些目前还没有从根本上改变电商基本盘的所处格局。</p>
+
+
+
+<h2>阿里云和 AI</h2>
+
+
+
+<p>阿里云和 AI 基本就是阿里增长的最大希望，市场认可的估值弹性得有好大一部分是来自于它（差不多一半？）。这也是 2025 年阿里市值回弹比很多对手快得多的原因之一。<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">如果没有这部分，阿里就基本是查理芒格说的 “该死的零售商” 而已了。</mark></strong></p>
+
+
+
+<p>云计算在近年来增速加快的同时，盈利也终于在电商疲软的时候撑起了一片天。其实中国的云计算整体起步并不算晚，由于企业数字化和需求各异性太强等问题，盈利一直是一个问题。现在市场希望的是，阿里能像当年的 AWS 一样，把阿里云做成增长和利润的大头来源。</p>
+
+
+
+<p>想起来移动互联网最火的时期，阿里云的增速是能够超过 50% 的，后来掉下来了，一方面是 TikTok 跑了，另一方面是在线教育等多个行业遭受寒冬，需求减少了。不过 2025 年以来，借助 AI 的东风，云计算增速重启（这部分差异全是 AI 带来的，传统云服务增速依然只有个位数）。但是这个趋势能够维持多久，就决定了从目前的角度看，阿里的估值能维持多久。这个答案对我而言是不确定的。相对来说，腾讯的估值倍数和阿里差不多，但是它的利润和增长，或者说到护城河，都要稳健得多。</p>
+
+
+
+<p>阿里当年是差点要拆分阿里云出去单独上市的，如果真那么做了。如今的阿里云就要弱小得多，发展基本肯定不如现在，而阿里集团就会因为电商的侵蚀被打到地板上，那就可以说是双输的结果。还好，这一步险棋没有走出去。</p>
+
+
+
+<p>说到 AI 模型，就要提到阿里的通义千问，它的 API 几乎要成为中国国内的标准了，我也看到它把阿里旗下的各个业务串起来的潜力。阿里卖模型 API 的时候，也就把模型本身和 AI 算力都一起卖出去了。阿里还有一件事做得很对，就是把模型开源，这样开发者使用了模型，会更愿意部署在阿里云上。</p>
+
+
+
+<p>中国 AI 云市场接下去好几年年均增长都可以超过四成，<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">阿里云既包括云基础设施，又包括模型服务，两个细分领域都是龙头，属于高增长板块中的龙头，也就难怪市场愿意给相对的高估值了</mark></strong>。</p>
+
+
+
+<p>要说这部分的风险，主要有两个方面。</p>
+
+
+
+<p>一个是老生常谈的芯片卡脖子问题，但是这部分市场盯得紧，而且后果未必有想象得那么严重，可能高端芯片缺乏，较低端的芯片会降低计算效率。对于自研芯片，阿里的平头哥可能会独立融资，但是芯片不像电动车，商业地位上要产生实质性竞争力，需要走的路还远得很。</p>
+
+
+
+<p>另一个是，现在属于烧钱抢市场阶段可以理解，但<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">等 AI 大模型慢慢成熟以后，利润率到底还能不能保持高位是一个问题，或者说，到时 AI 大模型会不会又会变成零售一样，卷到天上去</mark></strong>。现在的大模型属于百花齐放期，但是我认为这里的护城河没有很多人想象得宽，就像大多数领域一样，最后只能剩下几家大的玩家，并且很可能大部分钱都会被最大的一家赚走。总之，届时对于大多数用户来说，不同大模型的质量差异也可能并不大，那种情况下鉴于可替代性，利润率就不可能挺得住。</p>
+
+
+
+<h2>电商出海、其他业务和投资</h2>
+
+
+
+<p>2025 年经历了一波大甩卖，无底洞都摆脱了，剩下的都还是比较不错的业务。阿里出海基本上 breakeven 了，结合菜鸟物流，阿里速卖通就能够用配送时间去和 Temu 竞争。电商出海的营收规模接近阿里云，从营收看，淘宝、天猫是阿里的身体，那阿里云和电商出海就是走路的两条腿。</p>
+
+
+
+<p>对于其他业务，除去菜鸟，大部分还是亏损的。2025 年大卖特卖的也都是这部分的业务。</p>
+
+
+
+<p>再说投资，阿里之前的投资水准实在不能算好。不过，阿里在蔡、吴二人上任后卖掉了很多移动互联网时期开始投资的股权，一种是战略关联性低的业务，比如小鹏汽车、B 站和快狗打车等等；另一种是重资产业务，比如大润发和苏宁易购等等。并且，很多卖出都是止损而非止盈，这些为了打云计算和 AI 的战役筹备了弹药。看起来撑面子的营收规模下降了，但这让阿里聚焦核心业务，变得更加轻资产，最实质的利润率却是提升的。</p>
+
+
+
+<p>现在阿里主要的投资，首先是蚂蚁集团，不知道什么时候还能再上市，但是目前盈利能力不容置疑，大概是这里面最值钱的资产。其它投资还包括中国国内 AI 的独角兽们，几大物流公司，还有媒体领域的微博，基本上都是具备战略地位的。阿里对投资人的回报也在改进。阿里开始提供一定的分红，并且大量回购，把自己定位为一个开始偏向成熟的企业。</p>
+
+
+
+<p>总体来看，阿里的投资，从张勇时代的重资产，开始逐渐转向新时代的轻资产和科技。从过往张勇时期的记录来看，看看腾讯的投资能力，比一比就能发现，阿里差远了。有句话叫做 “腾讯投资是把半条命交给合作伙伴，而阿里巴巴则是想要对方的整条命”。<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">腾讯投资给对方资金和流量（京东、美团、拼多多，还有无数游戏公司），而阿里则是把对方买回来阿里化（饿了么、优酷、土豆等），全部融入进来管，结果还往往管不好。</mark></strong></p>
+
+
+
+<h2>我的逻辑</h2>
+
+
+
+<p>基本上，中国的企业当中，大概阿里巴巴就是能看懂一些的少数几家之一。它最初的牌兴许比腾讯还好，但是后来打烂了，但是又没有像百度那样彻底烂掉。如今的它还是给了市场很多正面的回馈，不过，现在这个价格，我认为确定性是要低于腾讯的。</p>
+
+
+
+<p>我认为阿里的电商护城河还将继续持续被侵蚀，而 AI 对于阿里就相当于 “全村的希望”，这基本是阿里最大的希望，如果 AI 能够做成，它会是一笔很好的投资，但是风险上看，显然是高于腾讯的。我目前还继续持有阿里巴巴的仓位，但是 conviction 没有那么强烈，因此仓位也不很大。如今考虑进去地缘政治因素，阿里巴巴已经不再严重低估，但也不能算有多贵，但是我更关心的是我操作上的逻辑，只要哪天我确认阿里云的增速下来了，或者 AI 并没有预期的那么强大，我清仓个股的逻辑就会确立。在当前的价格，如果未来我找到优质得多的标的，我也许也会换出去。当然，我依然相信中国的科技，依然会持有中国科技的基金和 ETF，这部分中阿里巴巴的被动持有会依然存在。</p>
+
+
+
+<p>阿里巴巴记录了中国科技一个又一个时代，从电子商务到云再到 AI，衷心希望阿里巴巴能够巨人苏醒，王者归来。</p>
+<p><strong><font color="#ff0000">文章未经特殊标明皆为本人原创，未经许可不得用于任何商业用途，转载请保持完整性并注明来源链接 <a href="https://www.raychase.net/8126">《四火的唠叨》</a></font></strong></p><div class='yarpp yarpp-related yarpp-related-rss yarpp-template-list'>
+<!-- YARPP List -->
+<p>你可能也喜欢看：</p><ol>
+<li><a href="https://www.raychase.net/8063" rel="bookmark" title="聊聊商业模式——拼多多">聊聊商业模式——拼多多</a></li>
+<li><a href="https://www.raychase.net/8115" rel="bookmark" title="聊聊商业模式——Atlassian">聊聊商业模式——Atlassian</a></li>
+<li><a href="https://www.raychase.net/8140" rel="bookmark" title="聊聊商业模式——迪士尼">聊聊商业模式——迪士尼</a></li>
+<li><a href="https://www.raychase.net/7567" rel="bookmark" title="谈谈拼多多和品牌">谈谈拼多多和品牌</a></li>
+<li><a href="https://www.raychase.net/7965" rel="bookmark" title="初涉 ML Workflow 系统：Kubeflow Pipelines、Flyte 和 Metaflow">初涉 ML Workflow 系统：Kubeflow Pipelines、Flyte 和 Metaflow</a></li>
+</ol>
+</div>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.raychase.net/8126/feed</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>聊聊商业模式——Atlassian</title>
+		<link>https://www.raychase.net/8115</link>
+					<comments>https://www.raychase.net/8115#comments</comments>
+		
+		<dc:creator><![CDATA[四火]]></dc:creator>
+		<pubDate>Sat, 17 Jan 2026 23:24:55 +0000</pubDate>
+				<category><![CDATA[Business and Investment]]></category>
+		<category><![CDATA[AI]]></category>
+		<category><![CDATA[Atlassian]]></category>
+		<category><![CDATA[GitHub]]></category>
+		<category><![CDATA[Jira]]></category>
+		<category><![CDATA[投资]]></category>
+		<guid isPermaLink="false">https://www.raychase.net/?p=8115</guid>
+
+					<description><![CDATA[<!-- wp:paragraph -->
+<p>所谓投资，就是好公司+好价格，仅此而已。作为普通人，和基金和机构比起来，优势之一便是拥有自己独特的认知，这些认知，无论是多么小众，还是听起来多么“常识”，如果用得好的话就是优势，是能够帮助投资变现的。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><img class="wp-image-8116" style="width: 320px; float: right" src="/wp-content/uploads/2026/01/atlassiandevops-1024x576.png" alt=""/>就我自己而言，符合这一条件的，我可能也能找出个别几家公司来，而Atlassian便是其中之一。我相信大多数人，特别是那些所谓的金融分析师对它未必了解，而作为软件工程师的我，则一直以来都使用它的产品，有的时间段内甚至是重度用户，自然对它我有我自己的认识。这支股票一直在我的列表上，截止本周五，Atlassian的股价（TEAM）跌到一个非常诱人的程度（120刀以下），我认为是一个非常好的机会。本来我一直就想写一些我对不同公司商业模式的看法，那正好这是一个很好的机会，就来聊一聊Atlassian。这些都是我自己的观点，未必正确。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>我对Atlassian产品的使用</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>将近十年前离开Amazon以后，我经历的每家公司都使用Atlassian的产品，尤其是Jira和Confluence，有时还有BigBucket。尤其是在Oracle工作期间，我是真正的重度用户，每天接触大量的Jira tickets，备受Jira系统的折磨，参与Jira稳定性的问题讨论，甚至还开发系统大量调用Jira的API，我们自己实现的工作流引擎就支持复杂的Jira交互。当时有个戏谑的说法就是，Oracle Cloud从上往下一层一层，什么SaaS、PaaS、IaaS，其实下面还有最底下的一层，而这一层就是Jira。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>云迁移的意义</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>一直以来，Atlassian在推动客户从本地私有部署进化成为云托管的（也有一些数据安全要求高的可能是其它数据中心的）。我觉得这个思路是非常正确的。本来，本地且不说支持服务的难度更高，<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">营收的天花板才是最大的问题，客户上云之后，连带服务、新产品（包括AI的新特性）推送等等都可以很容易地进行</mark></strong>，这比单纯的卖软件授权要有多得多的盈利可能性。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>本地部署的情况下，费用收取可以采用按人头的方式，但是这种方法比较落后，上限很低，而且在AI时代要减少用工的短期趋势下，这是非常不利的。因此<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">上云可以带来质量更高的订阅制收费模式，以及基于feature、插件，甚至AI token（配额）等等的收费模式。单客户的价值可以进一步提升</mark></strong>。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>Atlassian的护城河</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>从公开的数据来看，上云后，大客户流失率小于2%，基本上这可以抹平一些人对于上云会丢失客户的担心了。这其实也体现出了产品的护城河。就拿Jira为例，很多人可能会觉得Jira是一个非常好用的跟踪问题的工具，不过我看到一种说法很有道理，完全相反，Jira其实是一个很难用的工具，但是它的难用恰恰把你给绑住了。它可能用起来不是那么友好，但是它提供的复杂功能，加上历史数据，让你很难离开它。除去数据，Jira本身也支持复杂的自定义工作流，整个流程（以及涉及到的部门和人）都被捆住了之后——<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">想想看，功能、数据、流程和人，面对这样的强耦合，要想迁移开去，是非常难的</mark></strong>，我想不是它真正的用户，是很难体会到这一点的。换言之，一旦上了贼船，要想下船岂是那么容易的？在上云之后，我相信Atlassian的定价权会进一步加强。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>除去最核心的护城河——迁移成本以外，还有其它一些特性也构成了护城河，比如它的插件生态。生态的建立和谁先进入市场来培育用户有关，就像是Amazon的Echo从技术上也许不如Google Home，但是它的生态建立起来了，各种应用和设备都和Echo整合起来了，其他厂商很难再进入了。Jira有超过5000个插件，这让其他公司很难快速地做出一个替代品来。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>AI到底会把它怎么了</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>最近一段时间，软件股、SaaS股都被市场抛售，而且是不分青红皂白地抛售。对于Atlassian，市场大致的逻辑是，AI可以让写代码变得非常高效，那么软件流程管理工具Jira和Confluence这样的知识库工具就可能变得没有那么大的价值。可是，真的是这样吗？</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>其实，市场的担心不无道理。首先，按照人头收费的方式，在软件开发不需要那么多人的时候，就面临着自然而然的市场规模的收缩；其次，Jira这种传统的数据存储的方式是结构化的，好处是schema清晰，便于处理，但是却不是最自然的人类记录数据的方式，而LLM才是能够“理解”和“记忆”非结构化数据的；最后，<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">正是因为机器、流程、规则等等都喜欢结构化的数据，也正是因为它们的程序具备单一目的时才容易写出来，于是我们才创建了那么多工具和交互界面，因此实际上这些繁杂的工具和界面都是“反人类”的</mark></strong>——当我们真正使用一个聊天输入框来使用纯自然语言进行交互的时候，这些工具似乎都显得没那么必要了……顺带提一句，这就像手机上无数的app一样，我想未来的手机应该是一套统一的交互界面搞定一切的，app就算有，也应该是工程师考虑的东西，不应是用户考虑的东西，用户不应该花费时间精力在app的安装和切换上面。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>我的想法是，这个方向兴许是没错的，但是这需要时间一点一点地来证明。我想起了2000年的互联网泡沫，市场也许想的方向都是对的，但是它太心急了一些，仿佛一夜之间所有坐电脑前的白领都可以下岗一样。从目前而言，我认为你不能指望做出分析决策的大多数人都具备软件工程师的背景，事实上，从目前的情况来看，AI在这方面被显著地高估了，并且我认为Jira和Confluence这样的工具其实并不会受到显著的影响。我自己也用Windsurf等等工具协助写代码，但是短期内AI的代码能力和如此大程度地替代软件工程师，还差得很远，这一点，我相信很多非专业的人是很难理解的。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>另一方面，在相当长的时间内，系统出现的问题，还是会通过Jira的ticket来跟踪，而无论这是人还是AI造成的问题；而数据，无论是人来使用还是AI来使用，作用依然是举足轻重的。逐渐地，Jira和Confluence这样的系统也会逐渐革新，以将AI的能力逐渐集成进来（比如Rovo，它尝试提供一层代理，正如前面提到的统一了的输入框一样，封装底下复杂的工具和功能，让交互变得简单）。同时，前面说到的护城河，依然会让向替代品的迁移变得困难。总之，<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">就像早在十九世纪初George Carley就提出了现代飞行的原理，但是直到一百年后的1903年，莱特兄弟才让飞机上天，工程的问题的难度往往被人低估</mark></strong>——我认为这个过程可能确实会发生，但它需要花费大量的时间和投入。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>尝试看懂收购</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Atlassian这几年做了不少收购，大致路线我还是能够大概看懂的，主要是围绕他们要解决的问题，收购一些相关的公司，他们的产品可以作为整个解决方案工具集的一部分。比如，Loom则是一个很好用的屏幕录制和视频分享工具，可以用来帮助会议纪要和内容管理，视频可以和现有的Jira等等工具集成。Atlassian的最终目标，可能是想跳出这个作为单一“工具”提供商的圈子，变成一个提供统一开发工作平台的厂商。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>但也有一些很难看懂，比如去年收购了The Browser Company（Arc和Dia浏览器的开发商），因为这个浏览器是AI原生浏览器，可以直接理解屏幕上渲染的内容。我想可能他们是要抢占用户使用的入口，这很像互联网公司抢流量入口一样，但是最后的用户体验会是怎样的，让用户抛弃掉现有的浏览器来使用这个新的入口吗？这很难让人信服。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>竞争和风险</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>谈过AI之后，再来看看Atlassian同一领域的竞争对手。整体来看，主要就是GitHub和GitLab。虽说还有一些轻量级和更现代的解决方案，但是从竞争对手来说，我觉得最大的威胁还是来自于GitHub，因为<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">GitHub的最大优势就是深度整合的全家桶（一体化），GitHub可以带来项目管理和代码管理的流量</mark></strong>。从我的角度看，对于开发者来说，GitHub有天然的优势，但是对于非技术人员来说，Jira和Confluence反而占有一个更好的位置；另外一个方面，是GitHub在DevOps这个圈里面负责的范围还是太小，而Atlassian的解决方案可以覆盖更大的部分，包括代码之后的运维等等。当然，这是一个价值千金的问题，我其实很想知道Atlassian的管理层有怎样的想法，从长远看打算做什么来应对。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>[Updated on 2/8/2026] 另外一个，Atlassian的SBC（股权激励）也吸人眼球，<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">它一年35%~40%的营收被拿来用作股权激励</mark></strong>发给工程师，明面上是说，它就是不想走传统的销售雇佣的方式，而是“产品驱动增长”。这种方法本身没什么问题，但是SBC不控制是很吓人的，为了不让股权稀释过快，现在基本上每个季度的利润全部都被拿去回购，可是这样的一个问题是，这需要保证增长不要掉下来，否则肯定是不可持续的，并且，上面提到的2025年的收购反而加剧了这个风险。在刚结束的Q2财报会议上，管理层说要把回购提速2-3倍，并且创始人停止抛售，但这依然不是一个从根上的解决方案。</p>
+<!-- /wp:paragraph -->]]></description>
+										<content:encoded><![CDATA[
+<p>所谓投资，就是好公司+好价格，仅此而已。作为普通人，和基金和机构比起来，优势之一便是拥有自己独特的认知，这些认知，无论是多么小众，还是听起来多么 “常识”，如果用得好的话就是优势，是能够帮助投资变现的。</p>
+
+
+
+<p><img loading="lazy" width="1024" height="576" class="wp-image-8116" style="width: 320px; float: right" src="/wp-content/uploads/2026/01/atlassiandevops-1024x576.png" alt="" srcset="https://www.raychase.net/wp-content/uploads/2026/01/atlassiandevops-1024x576.png 1024w, https://www.raychase.net/wp-content/uploads/2026/01/atlassiandevops-300x169.png 300w, https://www.raychase.net/wp-content/uploads/2026/01/atlassiandevops-768x432.png 768w, https://www.raychase.net/wp-content/uploads/2026/01/atlassiandevops-850x478.png 850w, https://www.raychase.net/wp-content/uploads/2026/01/atlassiandevops.png 1200w" sizes="(max-width: 1024px) 100vw, 1024px" />就我自己而言，符合这一条件的，我可能也能找出个别几家公司来，而 Atlassian 便是其中之一。我相信大多数人，特别是那些所谓的金融分析师对它未必了解，而作为软件工程师的我，则一直以来都使用它的产品，有的时间段内甚至是重度用户，自然对它我有我自己的认识。这支股票一直在我的列表上，截止本周五，Atlassian 的股价（TEAM）跌到一个非常诱人的程度（120 刀以下），我认为是一个非常好的机会。本来我一直就想写一些我对不同公司商业模式的看法，那正好这是一个很好的机会，就来聊一聊 Atlassian。这些都是我自己的观点，未必正确。</p>
+
+
+
+<h2>我对 Atlassian 产品的使用</h2>
+
+
+
+<p>将近十年前离开 Amazon 以后，我经历的每家公司都使用 Atlassian 的产品，尤其是 Jira 和 Confluence，有时还有 BigBucket。尤其是在 Oracle 工作期间，我是真正的重度用户，每天接触大量的 Jira tickets，备受 Jira 系统的折磨，参与 Jira 稳定性的问题讨论，甚至还开发系统大量调用 Jira 的 API，我们自己实现的工作流引擎就支持复杂的 Jira 交互。当时有个戏谑的说法就是，Oracle Cloud 从上往下一层一层，什么 SaaS、PaaS、IaaS，其实下面还有最底下的一层，而这一层就是 Jira。</p>
+
+
+
+<h2>云迁移的意义</h2>
+
+
+
+<p>一直以来，Atlassian 在推动客户从本地私有部署进化成为云托管的（也有一些数据安全要求高的可能是其它数据中心的）。我觉得这个思路是非常正确的。本来，本地且不说支持服务的难度更高，<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">营收的天花板才是最大的问题，客户上云之后，连带服务、新产品（包括 AI 的新特性）推送等等都可以很容易地进行</mark></strong>，这比单纯的卖软件授权要有多得多的盈利可能性。</p>
+
+
+
+<p>本地部署的情况下，费用收取可以采用按人头的方式，但是这种方法比较落后，上限很低，而且在 AI 时代要减少用工的短期趋势下，这是非常不利的。因此<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">上云可以带来质量更高的订阅制收费模式，以及基于 feature、插件，甚至 AI token（配额）等等的收费模式。单客户的价值可以进一步提升</mark></strong>。</p>
+
+
+
+<h2>Atlassian 的护城河</h2>
+
+
+
+<p>从公开的数据来看，上云后，大客户流失率小于 2%，基本上这可以抹平一些人对于上云会丢失客户的担心了。这其实也体现出了产品的护城河。就拿 Jira 为例，很多人可能会觉得 Jira 是一个非常好用的跟踪问题的工具，不过我看到一种说法很有道理，完全相反，Jira 其实是一个很难用的工具，但是它的难用恰恰把你给绑住了。它可能用起来不是那么友好，但是它提供的复杂功能，加上历史数据，让你很难离开它。除去数据，Jira 本身也支持复杂的自定义工作流，整个流程（以及涉及到的部门和人）都被捆住了之后——<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">想想看，功能、数据、流程和人，面对这样的强耦合，要想迁移开去，是非常难的</mark></strong>，我想不是它真正的用户，是很难体会到这一点的。换言之，一旦上了贼船，要想下船岂是那么容易的？在上云之后，我相信 Atlassian 的定价权会进一步加强。</p>
+
+
+
+<p>除去最核心的护城河——迁移成本以外，还有其它一些特性也构成了护城河，比如它的插件生态。生态的建立和谁先进入市场来培育用户有关，就像是 Amazon 的 Echo 从技术上也许不如 Google Home，但是它的生态建立起来了，各种应用和设备都和 Echo 整合起来了，其他厂商很难再进入了。Jira 有超过 5000 个插件，这让其他公司很难快速地做出一个替代品来。</p>
+
+
+
+<h2>AI 到底会把它怎么了</h2>
+
+
+
+<p>最近一段时间，软件股、SaaS 股都被市场抛售，而且是不分青红皂白地抛售。对于 Atlassian，市场大致的逻辑是，AI 可以让写代码变得非常高效，那么软件流程管理工具 Jira 和 Confluence 这样的知识库工具就可能变得没有那么大的价值。可是，真的是这样吗？</p>
+
+
+
+<p>其实，市场的担心不无道理。首先，按照人头收费的方式，在软件开发不需要那么多人的时候，就面临着自然而然的市场规模的收缩；其次，Jira 这种传统的数据存储的方式是结构化的，好处是 schema 清晰，便于处理，但是却不是最自然的人类记录数据的方式，而 LLM 才是能够 “理解” 和 “记忆” 非结构化数据的；最后，<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">正是因为机器、流程、规则等等都喜欢结构化的数据，也正是因为它们的程序具备单一目的时才容易写出来，于是我们才创建了那么多工具和交互界面，因此实际上这些繁杂的工具和界面都是 “反人类” 的</mark></strong>——当我们真正使用一个聊天输入框来使用纯自然语言进行交互的时候，这些工具似乎都显得没那么必要了……顺带提一句，这就像手机上无数的 app 一样，我想未来的手机应该是一套统一的交互界面搞定一切的，app 就算有，也应该是工程师考虑的东西，不应是用户考虑的东西，用户不应该花费时间精力在 app 的安装和切换上面。</p>
+
+
+
+<p>我的想法是，这个方向兴许是没错的，但是这需要时间一点一点地来证明。我想起了 2000 年的互联网泡沫，市场也许想的方向都是对的，但是它太心急了一些，仿佛一夜之间所有坐电脑前的白领都可以下岗一样。从目前而言，我认为你不能指望做出分析决策的大多数人都具备软件工程师的背景，事实上，从目前的情况来看，AI 在这方面被显著地高估了，并且我认为 Jira 和 Confluence 这样的工具其实并不会受到显著的影响。我自己也用 Windsurf 等等工具协助写代码，但是短期内 AI 的代码能力和如此大程度地替代软件工程师，还差得很远，这一点，我相信很多非专业的人是很难理解的。</p>
+
+
+
+<p>另一方面，在相当长的时间内，系统出现的问题，还是会通过 Jira 的 ticket 来跟踪，而无论这是人还是 AI 造成的问题；而数据，无论是人来使用还是 AI 来使用，作用依然是举足轻重的。逐渐地，Jira 和 Confluence 这样的系统也会逐渐革新，以将 AI 的能力逐渐集成进来（比如 Rovo，它尝试提供一层代理，正如前面提到的统一了的输入框一样，封装底下复杂的工具和功能，让交互变得简单）。同时，前面说到的护城河，依然会让向替代品的迁移变得困难。总之，<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">就像早在十九世纪初 George Carley 就提出了现代飞行的原理，但是直到一百年后的 1903 年，莱特兄弟才让飞机上天，工程的问题的难度往往被人低估</mark></strong>——我认为这个过程可能确实会发生，但它需要花费大量的时间和投入。</p>
+
+
+
+<h2>尝试看懂收购</h2>
+
+
+
+<p>Atlassian 这几年做了不少收购，大致路线我还是能够大概看懂的，主要是围绕他们要解决的问题，收购一些相关的公司，他们的产品可以作为整个解决方案工具集的一部分。比如，Loom 则是一个很好用的屏幕录制和视频分享工具，可以用来帮助会议纪要和内容管理，视频可以和现有的 Jira 等等工具集成。Atlassian 的最终目标，可能是想跳出这个作为单一 “工具” 提供商的圈子，变成一个提供统一开发工作平台的厂商。</p>
+
+
+
+<p>但也有一些很难看懂，比如去年收购了 The Browser Company（Arc 和 Dia 浏览器的开发商），因为这个浏览器是 AI 原生浏览器，可以直接理解屏幕上渲染的内容。我想可能他们是要抢占用户使用的入口，这很像互联网公司抢流量入口一样，但是最后的用户体验会是怎样的，让用户抛弃掉现有的浏览器来使用这个新的入口吗？这很难让人信服。</p>
+
+
+
+<h2>竞争和风险</h2>
+
+
+
+<p>谈过 AI 之后，再来看看 Atlassian 同一领域的竞争对手。整体来看，主要就是 GitHub 和 GitLab。虽说还有一些轻量级和更现代的解决方案，但是从竞争对手来说，我觉得最大的威胁还是来自于 GitHub，因为<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">GitHub 的最大优势就是深度整合的全家桶（一体化），GitHub 可以带来项目管理和代码管理的流量</mark></strong>。从我的角度看，对于开发者来说，GitHub 有天然的优势，但是对于非技术人员来说，Jira 和 Confluence 反而占有一个更好的位置；另外一个方面，是 GitHub 在 DevOps 这个圈里面负责的范围还是太小，而 Atlassian 的解决方案可以覆盖更大的部分，包括代码之后的运维等等。当然，这是一个价值千金的问题，我其实很想知道 Atlassian 的管理层有怎样的想法，从长远看打算做什么来应对。</p>
+
+
+
+[Updated on 2/8/2026] 另外一个，Atlassian 的 SBC（股权激励）也吸人眼球，<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">它一年 35%~40% 的营收被拿来用作股权激励</mark></strong>发给工程师，明面上是说，它就是不想走传统的销售雇佣的方式，而是 “产品驱动增长”。这种方法本身没什么问题，但是 SBC 不控制是很吓人的，为了不让股权稀释过快，现在基本上每个季度的利润全部都被拿去回购，可是这样的一个问题是，这需要保证增长不要掉下来，否则肯定是不可持续的，并且，上面提到的 2025 年的收购反而加剧了这个风险。在刚结束的 Q2 财报会议上，管理层说要把回购提速 2-3 倍，并且创始人停止抛售，但这依然不是一个从根上的解决方案。</p>
+<p><strong><font color="#ff0000">文章未经特殊标明皆为本人原创，未经许可不得用于任何商业用途，转载请保持完整性并注明来源链接 <a href="https://www.raychase.net/8115">《四火的唠叨》</a></font></strong></p><div class='yarpp yarpp-related yarpp-related-rss yarpp-template-list'>
+<!-- YARPP List -->
+<p>你可能也喜欢看：</p><ol>
+<li><a href="https://www.raychase.net/8126" rel="bookmark" title="聊聊商业模式——阿里巴巴">聊聊商业模式——阿里巴巴</a></li>
+<li><a href="https://www.raychase.net/8063" rel="bookmark" title="聊聊商业模式——拼多多">聊聊商业模式——拼多多</a></li>
+<li><a href="https://www.raychase.net/8140" rel="bookmark" title="聊聊商业模式——迪士尼">聊聊商业模式——迪士尼</a></li>
+<li><a href="https://www.raychase.net/1512" rel="bookmark" title="Issue record: &#8220;No thread for socket&#8221; about Memcached">Issue record: &#8220;No thread for socket&#8221; about Memcached</a></li>
+<li><a href="https://www.raychase.net/7365" rel="bookmark" title="闲聊投资：亲自体验和护城河">闲聊投资：亲自体验和护城河</a></li>
+</ol>
+</div>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.raychase.net/8115/feed</wfw:commentRss>
+			<slash:comments>2</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>回国感悟</title>
+		<link>https://www.raychase.net/8072</link>
+					<comments>https://www.raychase.net/8072#comments</comments>
+		
+		<dc:creator><![CDATA[四火]]></dc:creator>
+		<pubDate>Tue, 06 Jan 2026 04:20:44 +0000</pubDate>
+				<category><![CDATA[Life Experience and Thoughts]]></category>
+		<category><![CDATA[出行]]></category>
+		<category><![CDATA[回国]]></category>
+		<category><![CDATA[投资]]></category>
+		<category><![CDATA[环境]]></category>
+		<category><![CDATA[美食]]></category>
+		<guid isPermaLink="false">https://www.raychase.net/?p=8072</guid>
+
+					<description><![CDATA[<!-- wp:paragraph -->
+<p><img class="wp-image-8075" style="width: 320px; float: right" src="/wp-content/uploads/2026/01/arrival.png" alt=""/>自我上次2018年回国已经过去超过7年了，这次回国呆了超过两周，感触还是很丰富的，整理得不够系统，简单把它们罗列下来。我虽然长期不生活在国内，但是我始终是中国人，也始终用简单的“国内”两字替代“中国国内”，我非常热切地想了解中国国内的变化。当然，时间关系，我的观察不会很深刻，因此我的观点未必都是正确的。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>关于出行</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>中国的基建搞得真的很棒，要说出行恐怕中国是最便捷的国家了。期间坐了公交、高铁、卧铺、游轮、出租、网约车，或者是干脆步行……都很方便。我想，这应该是得益于中国超强的基建能力。这是让我无比自豪的一点，虽说以前在国内待着的时候并没有深刻体会。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>关于网约车，我的记忆还停留在那个滴滴和快滴烧钱拉客的年代。后来我知道的是，滴滴独打天下了。如今我看到的是，滴滴也似乎未必能玩得过竞争对手了。因为它的竞争对手早就变了，已经是高德地图这样的流量入口。当年阿里下错了很多步棋，但是阿里没有下错高德地图这步棋，这是少有的流量入口应用。我拿高德地图搜网约车，就会显示一堆可选项，来自不同的网约车公司，接着直接对接支付宝，这个平台把端到端做得真是不错。说起高德地图，想起那时候百度地图是通配，再想想百度的其它业务，顺便叹息一下它的没落——真是拿了一手好牌，打得稀烂（比如搜索和地图）；好容易盼走了对手（Google），却输给了时代（比如移动互联网）；起了个大早，赶了个晚集（比如AI）。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>关于中国的铁路客运，效率依旧是没得说。从浙江的一个小城到广西桂林旅游，去程高铁，回城动车软卧，前者要快四成。两种不同的体验，但是共同点一句话说就是很快速、舒适。小时候绿皮火车的记忆慢慢淡忘，那时候车厢里挤满的人群，无比酸爽的味道，还有在铁路上行驶咯噔咯噔的响声，以及卫生间不可描述的卫生状况……而现在，整个过程都很舒适。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>关于消费</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>中国经济的三驾马车投资、消费和出口里面，回国后我最先感觉到的是，消费力普遍不足。不只是大宗商品，比如我家乡海边大量的空置房屋，甚至烂尾楼，就说一些普通的步行街，没有什么人气，当然，大城市的情况会好一些。消费这个东西是和经济密切相关的，而经济又是和信心密切相关的。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>我问了问家人都使用什么电商平台，得到的答案各异。我是使用京东的，主要还是因为货品普遍靠得住，并且配送比较迅速，大部分两三天内就能收到，还有不少当日达，这在美国还是比较难做到的。现在成本的因素还是占据大头，但我相信如果中国的经济能慢慢地稳住回升，老百姓手里有钱的话，京东的配送优势就能更好地发挥出来了。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>这个时代已经变成了一个普遍忧虑的时代，但是忧虑的主线还是老的三座大山：住房、教育和医疗。住房是如今这其中最大的问题，我想上一辈人借着改革开放、人口爆炸以及居民加杠杆的多重优势，获得了相当大的收益，但是这种收益我认为有很大一部分是时代的红利，而非个人能力。如今这个接力棒传不下去了，八零九零后就被迫成为了最后一棒的接盘侠。住房的问题每个人都在说，而教育方面，除去反内卷，我能看到的是一些幼儿园也开始公费化，这是整个社会的进步；医疗方面，我留意到药品价格被打下来了，但是没有医疗保险足够的覆盖，很多人还是因为一病返贫的忧虑而不敢花钱。一些思维开化一些的年轻人，在挣扎无效之后选择躺平，这些都是时代特有的烙印，我觉得舆论媒体需要包容，而非打压这样想法的人，毕竟从长远看，都是社会的进步。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>关于投资</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>我一直看好中国的发展，趁这次回来，想用人民币买一点基金。但是这个过程挺坎坷，折腾了我不少时间。这个恰好是和前面说的出行和基建完全相反。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>银行就像一头大象，似乎笨重得难以跟上这个时代。举个例子，我想在国内买一点基金，通过工商银行的渠道，有无数的限制和烦人的手续。我连着跑了两趟银行也没有彻底搞定。这期间我的感觉就是，我的钱根本就不是我的钱——我取不出来，转不出去，买不了东西，做不了投资，全都有很烦人的上限，而且这个上限还很不容易改，做什么改动还要看流水，还要解释原因……</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>投资经理笑呵呵地服务，但是申购费居然要1.2%，而互联网平台（我用的财付通）只有它的1/10，一开始我得知这个还觉得是不是搞错了，差那么多钱，那银行还搞个屁？果断选择后者，果然整个流程非常顺利。当然，我因为不想开股票账户，就直接买基金，这个申购基金的流程要麻烦得多，连购入价都要等两天才能看到。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>从长期投资的角度看，国内我置信程度最高的互联网公司就是腾讯，这次更坚定了我的想法。我经常说的一句话是，在港股市场如果有一笔闲置的钱，而且不知道买哪家公司，那就买腾讯。腾讯已经深入人们的生活，它的护城河可以说看不到边。阿里作为第二梯队，要差一些，尤其是在流量入口方面；当然，电商业务我觉得它是很难打赢拼多多的。除去它们，作为第三梯队，我觉得我能看得懂一些的还有携程。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>关于医疗</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>我本身有克罗恩病，这次因为肠梗阻被迫住了几天医院，有这么几个感受：一个是整体费用比较低，特别是药价，前面已经谈到了；第二个是医生上来就给用了大杀器的药物，比如针对中到重度感染的联合抗生素等等，对于我的轻度感染有杀鸡用牛刀的感觉。当然，我毕竟不是医生，但是我了解到大家都是谨慎为上，目标就是最快速度缓解症状、治疗疾病，这和我过往所理解的在医疗上权衡利弊的理念有所区别。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>再有一些病房里的规定，让我觉得不太舒服。比如对于我这样一个血糖正常的年轻人，一天查六次血糖，每四小时一次，结果就是我睡觉也睡不好，我觉得也是似乎有点过度医疗了。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>关于环境</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>可能很多人已经忘记了当年雾霾的天空，PM2.5仿佛已经是一个遥远的回忆。这次回国，从下飞机开始空气质量就让人惊艳。能源结构的大换血和产业升级的效果有目共睹。除此以外，马路上的垃圾和随地吐痰等等情况也少了很多。不过来到郊区野外，还是能见到不少垃圾。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>我是在小红书上面找的桂林本地旅行中介，没有任何购物环节，纯是跟车景点一个一个地玩，我们包车游览了完整的五个白天。桂林山水甲天下，我的桂林之行的过程也很顺利，感受非常好。和导游聊了聊，这两年内地和香港游客增加，但外国游客减少。希望国家之间的关系能够更健康和平稳，这样中国的旅游资源能够在世界范围内受到更多的欢迎。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>关于美食</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>中国文化的一个根基就是美食，我相信无论出国多少年，无论接受多少各个国家的食物，我始终是那个要归家的少年，而我的胃始终是中国胃。踏上中国的土地，敞开吃的第一顿不是大鱼大肉、山珍海味，而是油条、小笼包、稀饭和茶叶蛋。在美国也能吃到口味各异的中餐，但时隔七年能够吃到家乡的味道，仿佛旅程的仆仆风尘和满身疲惫都被瞬间治愈了。</p>
+<!-- /wp:paragraph -->]]></description>
+										<content:encoded><![CDATA[
+<p><img loading="lazy" width="800" height="450" class="wp-image-8075" style="width: 320px; float: right" src="/wp-content/uploads/2026/01/arrival.png" alt="" srcset="https://www.raychase.net/wp-content/uploads/2026/01/arrival.png 800w, https://www.raychase.net/wp-content/uploads/2026/01/arrival-300x169.png 300w, https://www.raychase.net/wp-content/uploads/2026/01/arrival-768x432.png 768w" sizes="(max-width: 800px) 100vw, 800px" />自我上次 2018 年回国已经过去超过 7 年了，这次回国呆了超过两周，感触还是很丰富的，整理得不够系统，简单把它们罗列下来。我虽然长期不生活在国内，但是我始终是中国人，也始终用简单的 “国内” 两字替代 “中国国内”，我非常热切地想了解中国国内的变化。当然，时间关系，我的观察不会很深刻，因此我的观点未必都是正确的。</p>
+
+
+
+<h2>关于出行</h2>
+
+
+
+<p>中国的基建搞得真的很棒，要说出行恐怕中国是最便捷的国家了。期间坐了公交、高铁、卧铺、游轮、出租、网约车，或者是干脆步行……都很方便。我想，这应该是得益于中国超强的基建能力。这是让我无比自豪的一点，虽说以前在国内待着的时候并没有深刻体会。</p>
+
+
+
+<p>关于网约车，我的记忆还停留在那个滴滴和快滴烧钱拉客的年代。后来我知道的是，滴滴独打天下了。如今我看到的是，滴滴也似乎未必能玩得过竞争对手了。因为它的竞争对手早就变了，已经是高德地图这样的流量入口。当年阿里下错了很多步棋，但是阿里没有下错高德地图这步棋，这是少有的流量入口应用。我拿高德地图搜网约车，就会显示一堆可选项，来自不同的网约车公司，接着直接对接支付宝，这个平台把端到端做得真是不错。说起高德地图，想起那时候百度地图是通配，再想想百度的其它业务，顺便叹息一下它的没落——真是拿了一手好牌，打得稀烂（比如搜索和地图）；好容易盼走了对手（Google），却输给了时代（比如移动互联网）；起了个大早，赶了个晚集（比如 AI）。</p>
+
+
+
+<p>关于中国的铁路客运，效率依旧是没得说。从浙江的一个小城到广西桂林旅游，去程高铁，回城动车软卧，前者要快四成。两种不同的体验，但是共同点一句话说就是很快速、舒适。小时候绿皮火车的记忆慢慢淡忘，那时候车厢里挤满的人群，无比酸爽的味道，还有在铁路上行驶咯噔咯噔的响声，以及卫生间不可描述的卫生状况……而现在，整个过程都很舒适。</p>
+
+
+
+<h2>关于消费</h2>
+
+
+
+<p>中国经济的三驾马车投资、消费和出口里面，回国后我最先感觉到的是，消费力普遍不足。不只是大宗商品，比如我家乡海边大量的空置房屋，甚至烂尾楼，就说一些普通的步行街，没有什么人气，当然，大城市的情况会好一些。消费这个东西是和经济密切相关的，而经济又是和信心密切相关的。</p>
+
+
+
+<p>我问了问家人都使用什么电商平台，得到的答案各异。我是使用京东的，主要还是因为货品普遍靠得住，并且配送比较迅速，大部分两三天内就能收到，还有不少当日达，这在美国还是比较难做到的。现在成本的因素还是占据大头，但我相信如果中国的经济能慢慢地稳住回升，老百姓手里有钱的话，京东的配送优势就能更好地发挥出来了。</p>
+
+
+
+<p>这个时代已经变成了一个普遍忧虑的时代，但是忧虑的主线还是老的三座大山：住房、教育和医疗。住房是如今这其中最大的问题，我想上一辈人借着改革开放、人口爆炸以及居民加杠杆的多重优势，获得了相当大的收益，但是这种收益我认为有很大一部分是时代的红利，而非个人能力。如今这个接力棒传不下去了，八零九零后就被迫成为了最后一棒的接盘侠。住房的问题每个人都在说，而教育方面，除去反内卷，我能看到的是一些幼儿园也开始公费化，这是整个社会的进步；医疗方面，我留意到药品价格被打下来了，但是没有医疗保险足够的覆盖，很多人还是因为一病返贫的忧虑而不敢花钱。一些思维开化一些的年轻人，在挣扎无效之后选择躺平，这些都是时代特有的烙印，我觉得舆论媒体需要包容，而非打压这样想法的人，毕竟从长远看，都是社会的进步。</p>
+
+
+
+<h2>关于投资</h2>
+
+
+
+<p>我一直看好中国的发展，趁这次回来，想用人民币买一点基金。但是这个过程挺坎坷，折腾了我不少时间。这个恰好是和前面说的出行和基建完全相反。</p>
+
+
+
+<p>银行就像一头大象，似乎笨重得难以跟上这个时代。举个例子，我想在国内买一点基金，通过工商银行的渠道，有无数的限制和烦人的手续。我连着跑了两趟银行也没有彻底搞定。这期间我的感觉就是，我的钱根本就不是我的钱——我取不出来，转不出去，买不了东西，做不了投资，全都有很烦人的上限，而且这个上限还很不容易改，做什么改动还要看流水，还要解释原因……</p>
+
+
+
+<p>投资经理笑呵呵地服务，但是申购费居然要 1.2%，而互联网平台（我用的财付通）只有它的 1/10，一开始我得知这个还觉得是不是搞错了，差那么多钱，那银行还搞个屁？果断选择后者，果然整个流程非常顺利。当然，我因为不想开股票账户，就直接买基金，这个申购基金的流程要麻烦得多，连购入价都要等两天才能看到。</p>
+
+
+
+<p>从长期投资的角度看，国内我置信程度最高的互联网公司就是腾讯，这次更坚定了我的想法。我经常说的一句话是，在港股市场如果有一笔闲置的钱，而且不知道买哪家公司，那就买腾讯。腾讯已经深入人们的生活，它的护城河可以说看不到边。阿里作为第二梯队，要差一些，尤其是在流量入口方面；当然，电商业务我觉得它是很难打赢拼多多的。除去它们，作为第三梯队，我觉得我能看得懂一些的还有携程。</p>
+
+
+
+<h2>关于医疗</h2>
+
+
+
+<p>我本身有克罗恩病，这次因为肠梗阻被迫住了几天医院，有这么几个感受：一个是整体费用比较低，特别是药价，前面已经谈到了；第二个是医生上来就给用了大杀器的药物，比如针对中到重度感染的联合抗生素等等，对于我的轻度感染有杀鸡用牛刀的感觉。当然，我毕竟不是医生，但是我了解到大家都是谨慎为上，目标就是最快速度缓解症状、治疗疾病，这和我过往所理解的在医疗上权衡利弊的理念有所区别。</p>
+
+
+
+<p>再有一些病房里的规定，让我觉得不太舒服。比如对于我这样一个血糖正常的年轻人，一天查六次血糖，每四小时一次，结果就是我睡觉也睡不好，我觉得也是似乎有点过度医疗了。</p>
+
+
+
+<h2>关于环境</h2>
+
+
+
+<p>可能很多人已经忘记了当年雾霾的天空，PM2.5 仿佛已经是一个遥远的回忆。这次回国，从下飞机开始空气质量就让人惊艳。能源结构的大换血和产业升级的效果有目共睹。除此以外，马路上的垃圾和随地吐痰等等情况也少了很多。不过来到郊区野外，还是能见到不少垃圾。</p>
+
+
+
+<p>我是在小红书上面找的桂林本地旅行中介，没有任何购物环节，纯是跟车景点一个一个地玩，我们包车游览了完整的五个白天。桂林山水甲天下，我的桂林之行的过程也很顺利，感受非常好。和导游聊了聊，这两年内地和香港游客增加，但外国游客减少。希望国家之间的关系能够更健康和平稳，这样中国的旅游资源能够在世界范围内受到更多的欢迎。</p>
+
+
+
+<h2>关于美食</h2>
+
+
+
+<p>中国文化的一个根基就是美食，我相信无论出国多少年，无论接受多少各个国家的食物，我始终是那个要归家的少年，而我的胃始终是中国胃。踏上中国的土地，敞开吃的第一顿不是大鱼大肉、山珍海味，而是油条、小笼包、稀饭和茶叶蛋。在美国也能吃到口味各异的中餐，但时隔七年能够吃到家乡的味道，仿佛旅程的仆仆风尘和满身疲惫都被瞬间治愈了。</p>
+<p><strong><font color="#ff0000">文章未经特殊标明皆为本人原创，未经许可不得用于任何商业用途，转载请保持完整性并注明来源链接 <a href="https://www.raychase.net/8072">《四火的唠叨》</a></font></strong></p><div class='yarpp yarpp-related yarpp-related-rss yarpp-template-list'>
+<!-- YARPP List -->
+<p>你可能也喜欢看：</p><ol>
+<li><a href="https://www.raychase.net/6470" rel="bookmark" title="美股市场上学到的道理">美股市场上学到的道理</a></li>
+<li><a href="https://www.raychase.net/6846" rel="bookmark" title="我的美股投资原则">我的美股投资原则</a></li>
+<li><a href="https://www.raychase.net/7365" rel="bookmark" title="闲聊投资：亲自体验和护城河">闲聊投资：亲自体验和护城河</a></li>
+<li><a href="https://www.raychase.net/195" rel="bookmark" title="Good Surrounding For Programmers">Good Surrounding For Programmers</a></li>
+<li><a href="https://www.raychase.net/6827" rel="bookmark" title="2021 年旅行的简单回顾">2021 年旅行的简单回顾</a></li>
+</ol>
+</div>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.raychase.net/8072/feed</wfw:commentRss>
+			<slash:comments>2</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>聊聊商业模式——拼多多</title>
+		<link>https://www.raychase.net/8063</link>
+					<comments>https://www.raychase.net/8063#comments</comments>
+		
+		<dc:creator><![CDATA[四火]]></dc:creator>
+		<pubDate>Mon, 24 Nov 2025 03:30:38 +0000</pubDate>
+				<category><![CDATA[Business and Investment]]></category>
+		<category><![CDATA[商业模式]]></category>
+		<category><![CDATA[拼多多]]></category>
+		<category><![CDATA[阿里巴巴]]></category>
+		<guid isPermaLink="false">https://www.raychase.net/?p=8063</guid>
+
+					<description><![CDATA[<!-- wp:paragraph -->
+<p><img width="320" class="wp-image-8064" style="float:right" src="/wp-content/uploads/2025/11/pdd-1024x683.jpg" alt=""/>作为业余爱好，一直很喜欢研究企业的商业模式。我以往觉得电子商务这个赛道竞争很激烈，生意很难做，尤其是中国当前的环境下，近些年在商业模式上也没有太多有意思的创新。快两年前，<a rel="noreferrer noopener" href="/7567" target="_blank">写过一点</a>关于拼多多的，但主要是批评，我不喜欢它的生意模式，我觉得它的壮大会打压中国的品牌成长。这个观点至今依然成立，不过，除此以外，那个时候我对于拼多多的理解还是比较浅薄的。随着这两年拼多多的成功，我觉得我看到了它越来越多以前没有看到的东西。这些东西让我越来越觉得，黄峥，真的是个眼光很长远，执行上也很厉害的人。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>最早的时候，我以为拼多多的核心就是低质量、低价的策略。后来我渐渐明白，所谓的低价策略，只是最肤浅的一个表象。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>如果退到十年以前，应该很少有人能同意，在如此激烈的电子商务赛道上，已经有了老牌的阿里巴巴，还有重供应链的京东，拼多多能够挤进来，分到一杯羹。而如今，不仅如此，它的增长居然已经让这两家都难以望其项背。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>说到阿里巴巴，如今看，它还是犯了一个企业扩张以后变得局限、傲慢的通病。早些时候马云就评论京东说这种重资产玩不转，到后来张勇则认为拼多多只会帮助阿里巴巴教育用户和开拓市场，阿里巴巴错过了太多的机会。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>拼多多的核心商业模式是什么，招股书中讲是中国的Costco+Disney，零售+娱乐。但是它没有对比阿里巴巴和京东，来进一步细致地说明它是打算怎么赚钱的。看起来这些零售电商很接近，其实很不一样。<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">阿里最值钱的是什么，是商家；但是拼多多呢，是消费者。</mark></strong>就连对于“砍一刀”这样的基于社交的病毒式营销，也是基于消费者这个核心。<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">拼多多教育用户，你要关心你买的产品和价格，但不要关心是什么品牌、是谁生产的。</mark></strong>拼多多不在乎丢失商家，而是推行白牌商品，达到极致的性价比，以最简单的低价方式来留住用户。所以说，传统电商那套基于流量变现的策略在拼多多这里行不通了，拼多多更关心的是单一性价比高的商品，谁来拿订单？很简单，价低者得。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Costco玩法的其中一个核心就是由它来代替用户选择性价比高的品牌，利用巨大的订单量，来和生产的商家谈价格。在同样具备规模效应的情况下，这是它和沃尔玛这种靠商品品类之全而获得用户的商业模式来说，最大的优势之一。比方说，在Costco买衣服，你不会找到很多的品类，每种衣服的类型可能就那么一两种衣服，但是衣服的质量可以，而且性价比没的说。一句话概括，单一的种类，巨大的订单量。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>阿里也好，京东也好，它们都可以把消费者直接对接到商家，砍掉中间环节，但是这样的消费者依然是没有议价能力的，因为消费多少不能提前确定，每一单的规模又小得可怜。但是类似于Costco，拼多多的做法是什么？<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">把大量消费者的需求捆绑起来，它们出动去和生产产品的商家谈，这就让商家愿意去用一个更低价格来换取很早就可以确定的大订单。</mark></strong>商家被迫报低价来抢单，商家和商家之间抢拼多多这个大客户，这种模式和白牌商品有着最天然的契合。可以认为，<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">这是团购的升级版，我觉得这才是拼多多最核心的玩法。</mark></strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>提到了Costco，再来说Disney，这主要说的是娱乐和社交。<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">和传统电商个人选择和购买的模式不同，拼多多可以利用团购的本质来强化社交这个行为。</mark></strong>因为团购需要多人参与，拼多多就可以提供一个可以游戏的平台，这也是其它传统电商很难和它竞争的一个方面。无论是养成类的多多果园（这个真是一个提高日活的绝招）还是社交裂变类的砍一刀，还有那些对于很多人来说看起来并不高级的幸运转盘……购物变成了只是游戏过程中的一个环节。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>再来看看拼多多扩张的过程当中，那些成功而重要的决策。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>首先是“砍一刀”这样的病毒式营销，这可能是像我这样的人最早听说拼多多的时间。那段时间，恰好是微信摇一摇春晚大肆撒钱的事情发生之后。众所周知，腾讯的这一方面的眼光总是很独到，藉由微信等等流量平台，他们也有非常大的用户数据和这方面的经验。腾讯投资了拼多多，或许这盘大棋中，也告知了拼多多这样一个事实——<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">大量的网民们，他们的微信账户有着红包摇来的钱，这是最好的建立拼多多性价比消费心智的时间</mark></strong>。配合“砍一刀”，拼多多的初始的大规模获客就这样做到了。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>第二件火爆的事情可以说是拼多多玩的“仅退款”，阿里和京东根本当时根本就没法快速跟进。因为他们需要考虑这些极度便利消费者的措施，对于品牌相当负面的摧残和打压。<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">品牌就意味着溢价，有了溢价就没法极度地考虑性价比。</mark></strong>从这个角度来说，长期看，拼多多的市场很大，并且阿里和京东根本没有办法去抢，无论是国内还是海外。阿里也许能把很多第二产业、第三产业做成，能把阿里云做成，甚至能把芯片也搞起来，但是传统电商，对于大多数人来说，考虑到目前大多数人的消费习惯和能力，我觉得它长期下来是不可能搞得过拼多多的。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>再有，拼多多对于资金的分配，也是极致的典范。想想阿里什么都要投钱，铺开来如此之大的摊子，什么都搞，拼多多非常本分，就做自己风格的电子商务，就是扎根于农村下沉市场，和阿里、京东比起来极少的员工数，尽可能地避免重资产，连办公楼都是租的。每次财报，都是不分红，并且低调地强调未来的风险，最近火爆的AI，拼多多也似乎尽量去避免接触，这样的管理层，在如今这个习惯于画大饼的世界似乎真是独一无二。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>接着，我想到了微博和小红书。微博是大V、名流为核心的玩法，无名人士的发声微不足道；小红书呢，则是基于草根的玩法，它的推荐系统是最核心的资产，它可以让一个无名之辈的帖子出现在感兴趣的用户的眼前。我觉得这是小红书和微博最大的区别，这也是微博已经是上一代互联网产品，逐渐衰落的原因之一。以此类比，<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">阿里巴巴上的品牌企业，就是大V和名流；拼多多上的无数白牌商家，就像是不知名的草根</mark></strong>。单一草根势单力薄，但是拼多多这样的平台把他们的力量汇聚起来，消费者买到东西的时候兴许不知道是哪家草根商家生产了他的货品，但是千千万万的草根商家就能够借助这个平台，靠着生产白牌产品，把自己的小小生意做下去。这样看，其中的历史意义显而易见。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>最后，事物还是要从两面看。拼多多的商业模式风险也非常显著，我觉得这可能也是市场不愿意给它一个足够溢价的原因之一。最大的风险还是在监管和地缘政治方面的，比如美国“小额豁免”漏洞的利用，最近已经补上了，且看它在美国市场上之后的表现。还有就是一些合规调查，包括仿冒商品等等方面，其实有很大程度上也是要限制中国商品在其它市场上低价的倾销。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>总之，这林林总总的事情，无论是战略还是实施，都让我觉得拼多多真是一家非常厉害的企业，黄峥真的是一个很厉害的人。黄峥受到段永平影响很大，他要“做对的事情，并把事情做对”，但我不知道对于他来说，什么样的事情是对的事情。当然，我觉得我还是没有很深刻地读懂拼多多，以上只是我现在的思考，这真是一家太有意思的企业。</p>
+<!-- /wp:paragraph -->]]></description>
+										<content:encoded><![CDATA[
+<p><img width="320" class="wp-image-8064" style="float:right" src="/wp-content/uploads/2025/11/pdd-1024x683.jpg" alt="" srcset="https://www.raychase.net/wp-content/uploads/2025/11/pdd-1024x683.jpg 1024w, https://www.raychase.net/wp-content/uploads/2025/11/pdd-300x200.jpg 300w, https://www.raychase.net/wp-content/uploads/2025/11/pdd-768x512.jpg 768w, https://www.raychase.net/wp-content/uploads/2025/11/pdd-850x567.jpg 850w, https://www.raychase.net/wp-content/uploads/2025/11/pdd.jpg 1050w" sizes="(max-width: 1024px) 100vw, 1024px" />作为业余爱好，一直很喜欢研究企业的商业模式。我以往觉得电子商务这个赛道竞争很激烈，生意很难做，尤其是中国当前的环境下，近些年在商业模式上也没有太多有意思的创新。快两年前，<a rel="noreferrer noopener" href="/7567" target="_blank">写过一点</a>关于拼多多的，但主要是批评，我不喜欢它的生意模式，我觉得它的壮大会打压中国的品牌成长。这个观点至今依然成立，不过，除此以外，那个时候我对于拼多多的理解还是比较浅薄的。随着这两年拼多多的成功，我觉得我看到了它越来越多以前没有看到的东西。这些东西让我越来越觉得，黄峥，真的是个眼光很长远，执行上也很厉害的人。</p>
+
+
+
+<p>最早的时候，我以为拼多多的核心就是低质量、低价的策略。后来我渐渐明白，所谓的低价策略，只是最肤浅的一个表象。</p>
+
+
+
+<p>如果退到十年以前，应该很少有人能同意，在如此激烈的电子商务赛道上，已经有了老牌的阿里巴巴，还有重供应链的京东，拼多多能够挤进来，分到一杯羹。而如今，不仅如此，它的增长居然已经让这两家都难以望其项背。</p>
+
+
+
+<p>说到阿里巴巴，如今看，它还是犯了一个企业扩张以后变得局限、傲慢的通病。早些时候马云就评论京东说这种重资产玩不转，到后来张勇则认为拼多多只会帮助阿里巴巴教育用户和开拓市场，阿里巴巴错过了太多的机会。</p>
+
+
+
+<p>拼多多的核心商业模式是什么，招股书中讲是中国的 Costco+Disney，零售+娱乐。但是它没有对比阿里巴巴和京东，来进一步细致地说明它是打算怎么赚钱的。看起来这些零售电商很接近，其实很不一样。<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">阿里最值钱的是什么，是商家；但是拼多多呢，是消费者。</mark></strong>就连对于 “砍一刀” 这样的基于社交的病毒式营销，也是基于消费者这个核心。<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">拼多多教育用户，你要关心你买的产品和价格，但不要关心是什么品牌、是谁生产的。</mark></strong>拼多多不在乎丢失商家，而是推行白牌商品，达到极致的性价比，以最简单的低价方式来留住用户。所以说，传统电商那套基于流量变现的策略在拼多多这里行不通了，拼多多更关心的是单一性价比高的商品，谁来拿订单？很简单，价低者得。</p>
+
+
+
+<p>Costco 玩法的其中一个核心就是由它来代替用户选择性价比高的品牌，利用巨大的订单量，来和生产的商家谈价格。在同样具备规模效应的情况下，这是它和沃尔玛这种靠商品品类之全而获得用户的商业模式来说，最大的优势之一。比方说，在 Costco 买衣服，你不会找到很多的品类，每种衣服的类型可能就那么一两种衣服，但是衣服的质量可以，而且性价比没的说。一句话概括，单一的种类，巨大的订单量。</p>
+
+
+
+<p>阿里也好，京东也好，它们都可以把消费者直接对接到商家，砍掉中间环节，但是这样的消费者依然是没有议价能力的，因为消费多少不能提前确定，每一单的规模又小得可怜。但是类似于 Costco，拼多多的做法是什么？<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">把大量消费者的需求捆绑起来，它们出动去和生产产品的商家谈，这就让商家愿意去用一个更低价格来换取很早就可以确定的大订单。</mark></strong>商家被迫报低价来抢单，商家和商家之间抢拼多多这个大客户，这种模式和白牌商品有着最天然的契合。可以认为，<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">这是团购的升级版，我觉得这才是拼多多最核心的玩法。</mark></strong></p>
+
+
+
+<p>提到了 Costco，再来说 Disney，这主要说的是娱乐和社交。<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">和传统电商个人选择和购买的模式不同，拼多多可以利用团购的本质来强化社交这个行为。</mark></strong>因为团购需要多人参与，拼多多就可以提供一个可以游戏的平台，这也是其它传统电商很难和它竞争的一个方面。无论是养成类的多多果园（这个真是一个提高日活的绝招）还是社交裂变类的砍一刀，还有那些对于很多人来说看起来并不高级的幸运转盘……购物变成了只是游戏过程中的一个环节。</p>
+
+
+
+<p>再来看看拼多多扩张的过程当中，那些成功而重要的决策。</p>
+
+
+
+<p>首先是 “砍一刀” 这样的病毒式营销，这可能是像我这样的人最早听说拼多多的时间。那段时间，恰好是微信摇一摇春晚大肆撒钱的事情发生之后。众所周知，腾讯的这一方面的眼光总是很独到，藉由微信等等流量平台，他们也有非常大的用户数据和这方面的经验。腾讯投资了拼多多，或许这盘大棋中，也告知了拼多多这样一个事实——<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">大量的网民们，他们的微信账户有着红包摇来的钱，这是最好的建立拼多多性价比消费心智的时间</mark></strong>。配合 “砍一刀”，拼多多的初始的大规模获客就这样做到了。</p>
+
+
+
+<p>第二件火爆的事情可以说是拼多多玩的 “仅退款”，阿里和京东根本当时根本就没法快速跟进。因为他们需要考虑这些极度便利消费者的措施，对于品牌相当负面的摧残和打压。<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">品牌就意味着溢价，有了溢价就没法极度地考虑性价比。</mark></strong>从这个角度来说，长期看，拼多多的市场很大，并且阿里和京东根本没有办法去抢，无论是国内还是海外。阿里也许能把很多第二产业、第三产业做成，能把阿里云做成，甚至能把芯片也搞起来，但是传统电商，对于大多数人来说，考虑到目前大多数人的消费习惯和能力，我觉得它长期下来是不可能搞得过拼多多的。</p>
+
+
+
+<p>再有，拼多多对于资金的分配，也是极致的典范。想想阿里什么都要投钱，铺开来如此之大的摊子，什么都搞，拼多多非常本分，就做自己风格的电子商务，就是扎根于农村下沉市场，和阿里、京东比起来极少的员工数，尽可能地避免重资产，连办公楼都是租的。每次财报，都是不分红，并且低调地强调未来的风险，最近火爆的 AI，拼多多也似乎尽量去避免接触，这样的管理层，在如今这个习惯于画大饼的世界似乎真是独一无二。</p>
+
+
+
+<p>接着，我想到了微博和小红书。微博是大 V、名流为核心的玩法，无名人士的发声微不足道；小红书呢，则是基于草根的玩法，它的推荐系统是最核心的资产，它可以让一个无名之辈的帖子出现在感兴趣的用户的眼前。我觉得这是小红书和微博最大的区别，这也是微博已经是上一代互联网产品，逐渐衰落的原因之一。以此类比，<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">阿里巴巴上的品牌企业，就是大 V 和名流；拼多多上的无数白牌商家，就像是不知名的草根</mark></strong>。单一草根势单力薄，但是拼多多这样的平台把他们的力量汇聚起来，消费者买到东西的时候兴许不知道是哪家草根商家生产了他的货品，但是千千万万的草根商家就能够借助这个平台，靠着生产白牌产品，把自己的小小生意做下去。这样看，其中的历史意义显而易见。</p>
+
+
+
+<p>最后，事物还是要从两面看。拼多多的商业模式风险也非常显著，我觉得这可能也是市场不愿意给它一个足够溢价的原因之一。最大的风险还是在监管和地缘政治方面的，比如美国 “小额豁免” 漏洞的利用，最近已经补上了，且看它在美国市场上之后的表现。还有就是一些合规调查，包括仿冒商品等等方面，其实有很大程度上也是要限制中国商品在其它市场上低价的倾销。</p>
+
+
+
+<p>总之，这林林总总的事情，无论是战略还是实施，都让我觉得拼多多真是一家非常厉害的企业，黄峥真的是一个很厉害的人。黄峥受到段永平影响很大，他要 “做对的事情，并把事情做对”，但我不知道对于他来说，什么样的事情是对的事情。当然，我觉得我还是没有很深刻地读懂拼多多，以上只是我现在的思考，这真是一家太有意思的企业。</p>
+<p><strong><font color="#ff0000">文章未经特殊标明皆为本人原创，未经许可不得用于任何商业用途，转载请保持完整性并注明来源链接 <a href="https://www.raychase.net/8063">《四火的唠叨》</a></font></strong></p><div class='yarpp yarpp-related yarpp-related-rss yarpp-template-list'>
+<!-- YARPP List -->
+<p>你可能也喜欢看：</p><ol>
+<li><a href="https://www.raychase.net/8126" rel="bookmark" title="聊聊商业模式——阿里巴巴">聊聊商业模式——阿里巴巴</a></li>
+<li><a href="https://www.raychase.net/8115" rel="bookmark" title="聊聊商业模式——Atlassian">聊聊商业模式——Atlassian</a></li>
+<li><a href="https://www.raychase.net/7567" rel="bookmark" title="谈谈拼多多和品牌">谈谈拼多多和品牌</a></li>
+<li><a href="https://www.raychase.net/4015" rel="bookmark" title="谈谈月饼事件">谈谈月饼事件</a></li>
+<li><a href="https://www.raychase.net/7365" rel="bookmark" title="闲聊投资：亲自体验和护城河">闲聊投资：亲自体验和护城河</a></li>
+</ol>
+</div>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.raychase.net/8063/feed</wfw:commentRss>
+			<slash:comments>3</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>OAuth2.0 的几种授权流程</title>
+		<link>https://www.raychase.net/8015</link>
+					<comments>https://www.raychase.net/8015#respond</comments>
+		
+		<dc:creator><![CDATA[四火]]></dc:creator>
+		<pubDate>Sun, 27 Jul 2025 02:55:18 +0000</pubDate>
+				<category><![CDATA[Authentication and Authorization]]></category>
+		<category><![CDATA[auth]]></category>
+		<category><![CDATA[OAuth]]></category>
+		<category><![CDATA[Secret]]></category>
+		<category><![CDATA[授权]]></category>
+		<guid isPermaLink="false">https://www.raychase.net/?p=8015</guid>
+
+					<description><![CDATA[<!-- wp:paragraph -->
+<p><img class="wp-image-8026" style="width: 360px; float: right" src="/wp-content/uploads/2025/07/auth.jpg" alt=""/>首先，从高维度看，OAuth是要解决什么问题？</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>OAuth要解决的是客户端在不知道和不使用用户密码的情况下，怎么样安全访问并获取用户所拥有的资源的问题。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>顺带说一句，经常和OAuth一起谈到的OIDC则是解决了用户信息（profile）获取的问题。简单说，OAuth解决了Authorization的问题，OIDC解决了Authentication的问题。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>OAuth有几种角色：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul><li>Resource Owner：资源的拥有者，比方说终端用户；</li><li>Resource Server：资源服务器，比如用户想要调用的API；</li><li>Client：就是用户来进行鉴权和资源操作的客户端，比方说浏览器或者CLI；</li><li>Authorization Server：就是专门授权的服务器。</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>所以OAuth就是用户想通过某种机制，通过Client和Authorization Server交互来获得能够访问资源的token。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>对于OAuth2.0的授权流程，可以根据<a href="https://oauth.net/2/grant-types/" data-type="URL" data-id="https://oauth.net/2/grant-types/" target="_blank" rel="noreferrer noopener">grant type</a>来做个归类。下面的图示全部都来自Auth0的<a href="https://auth0.com/docs/get-started/authentication-and-authorization-flow">官方文档</a>。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">1. Authorization Code</mark></strong>：用户访问web app，web app的后端请求auth server，于是重定向到登录页面，用户输入登录信息，auth server就给web app一个授权码，这个授权码通过callback URL返回，而这个参数一般放在这个url的参数中，比如：http://.../callback?token=TOKEN。之后web app就可以拿着授权码去取token了。这种方式不需要用户这边存放任何secret，但是需要用户参与consent，并且具备web app的后端，因为和auth server的交互主要都是web app后端完成的。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":8017,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="/wp-content/uploads/2025/07/image-1024x641.png" alt="" class="wp-image-8017"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>但是这种方法存在一些concern，比如说，这个code如果在返回途中被截获怎么办，截获者就可以使用这个code来获取token了。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">2. PKCE</mark></strong>：对于上述问题，有一个改进的办法，就是使用PKCE（Proof Key for Code Exchange）来给它增强。基本原理是，客户端生成一个随机字符串code verifier，根据一个算法code challenge method来生成它的hash（challenge），获取授权码code的时候需要把这个method和challenge带过去；接着，code正常返回，但之后客户端拿着code去获取token的时候，需要带上这个code verifier，这样auth server就可以根据之前拿到的method和challenge，以及刚得到的code和code verifier，来校验用户是不是可以得到这个token。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>在这种情况下，如果code被劫持，那么对方拿到了code，却没有code verifier，也就没什么用。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":8020,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="/wp-content/uploads/2025/07/image-3-1024x833.png" alt="" class="wp-image-8020"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>这种方法是比较推荐的，对于一些CLI登录使用这种方法的时候，重定向URL可以是一个带有code的指向localhost的地址以被CLI捕获。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">3. Device Code</mark></strong>：前面说到的Authorization Code这种方法还有一个变体，就是对于一些需要用户参与，但是又没有浏览器（或者自动打开浏览器）的场景下，这个重定向到浏览器来获取用户consent的过程，被其它方式来取代，这种变体可看做名为Device Authorization的流程：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":8022,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="/wp-content/uploads/2025/07/image-5-995x1024.png" alt="" class="wp-image-8022"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>可以看到，上面的浏览器重定向的过程被替换成了返回code和verification url，然后用户使用verification URL加上这个user code来完成consent的过程，在这个过程完成之后，这个device才被授权。在这个过程完成之前，需要app不断去poll检查是不是device已经被授权了。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">4. Client Credential</mark></strong>：前面说到的Authorization Code虽然好用，但是需要用户手动登录确认的过程，对于一些没有人参与的M2M（machine-to-machine）系统而言，这是不现实的。因此在client id的基础上，再加上一个client secret，一样可以完成auth的流程。这种场景其实就相当于是client和resource owner是同一个了：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":8021,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="/wp-content/uploads/2025/07/image-4-1024x611.png" alt="" class="wp-image-8021"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">5. Implicit</mark></strong>：这种其实就是上面Authorization Code的简化版，去掉了code的环节，直接发code。这种方式在app只有前端的场景下（比如SPA）使用，因为它没法进行后端和Auth Server的通信。但是这种方式因为安全性低，因而不推荐，因为即便是SPA，还是可以用前面说的那种PKCE增强的Authorization Code方式来实现。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":8018,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="/wp-content/uploads/2025/07/image-1-1024x486.png" alt="" class="wp-image-8018"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>再来看这个callback的URL，和前面提到的Authorization Code流程不一样的是，它返回的token放在URL的fragment里面，而不是query里面，比如：http://.../callback#token=TOKEN，这样做的好处是这个TOKEN不会在浏览器跳转的时候送到服务器，就不容易泄露。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">6. Password</mark></strong>：这种方式其实就是让client获知用户的用户名和密码，属于风险比较大的做法，要求这个app是用户百分百信任的——这也就是说，它没有解决OAuth本身应该解决的问题，因此很少使用。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":8019,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="/wp-content/uploads/2025/07/image-2-1024x610.png" alt="" class="wp-image-8019"/></figure>
+<!-- /wp:image -->]]></description>
+										<content:encoded><![CDATA[
+<p><img loading="lazy" width="612" height="344" class="wp-image-8026" style="width: 360px; float: right" src="/wp-content/uploads/2025/07/auth.jpg" alt="" srcset="https://www.raychase.net/wp-content/uploads/2025/07/auth.jpg 612w, https://www.raychase.net/wp-content/uploads/2025/07/auth-300x169.jpg 300w" sizes="(max-width: 612px) 100vw, 612px" />首先，从高维度看，OAuth 是要解决什么问题？</p>
+
+
+
+<p>OAuth 要解决的是客户端在不知道和不使用用户密码的情况下，怎么样安全访问并获取用户所拥有的资源的问题。</p>
+
+
+
+<p>顺带说一句，经常和 OAuth 一起谈到的 OIDC 则是解决了用户信息（profile）获取的问题。简单说，OAuth 解决了 Authorization 的问题，OIDC 解决了 Authentication 的问题。</p>
+
+
+
+<p>OAuth 有几种角色：</p>
+
+
+
+<ul><li>Resource Owner：资源的拥有者，比方说终端用户；</li><li>Resource Server：资源服务器，比如用户想要调用的 API；</li><li>Client：就是用户来进行鉴权和资源操作的客户端，比方说浏览器或者 CLI；</li><li>Authorization Server：就是专门授权的服务器。</li></ul>
+
+
+
+<p>所以 OAuth 就是用户想通过某种机制，通过 Client 和 Authorization Server 交互来获得能够访问资源的 token。</p>
+
+
+
+<p>对于 OAuth2.0 的授权流程，可以根据 <a href="https://oauth.net/2/grant-types/" data-type="URL" data-id="https://oauth.net/2/grant-types/" target="_blank" rel="noreferrer noopener">grant type</a> 来做个归类。下面的图示全部都来自 Auth0 的<a href="https://auth0.com/docs/get-started/authentication-and-authorization-flow">官方文档</a>。</p>
+
+
+
+<p><strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">1. Authorization Code</mark></strong>：用户访问 web app，web app 的后端请求 auth server，于是重定向到登录页面，用户输入登录信息，auth server 就给 web app 一个授权码，这个授权码通过 callback URL 返回，而这个参数一般放在这个 url 的参数中，比如：http://&#8230;/callback?token=TOKEN。之后 web app 就可以拿着授权码去取 token 了。这种方式不需要用户这边存放任何 secret，但是需要用户参与 consent，并且具备 web app 的后端，因为和 auth server 的交互主要都是 web app 后端完成的。</p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" width="1024" height="641" src="/wp-content/uploads/2025/07/image-1024x641.png" alt="" class="wp-image-8017" srcset="https://www.raychase.net/wp-content/uploads/2025/07/image-1024x641.png 1024w, https://www.raychase.net/wp-content/uploads/2025/07/image-300x188.png 300w, https://www.raychase.net/wp-content/uploads/2025/07/image-768x481.png 768w, https://www.raychase.net/wp-content/uploads/2025/07/image-850x532.png 850w, https://www.raychase.net/wp-content/uploads/2025/07/image.png 1400w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p>但是这种方法存在一些 concern，比如说，这个 code 如果在返回途中被截获怎么办，截获者就可以使用这个 code 来获取 token 了。</p>
+
+
+
+<p><strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">2. PKCE</mark></strong>：对于上述问题，有一个改进的办法，就是使用 PKCE（Proof Key for Code Exchange）来给它增强。基本原理是，客户端生成一个随机字符串 code verifier，根据一个算法 code challenge method 来生成它的 hash（challenge），获取授权码 code 的时候需要把这个 method 和 challenge 带过去；接着，code 正常返回，但之后客户端拿着 code 去获取 token 的时候，需要带上这个 code verifier，这样 auth server 就可以根据之前拿到的 method 和 challenge，以及刚得到的 code 和 code verifier，来校验用户是不是可以得到这个 token。</p>
+
+
+
+<p>在这种情况下，如果 code 被劫持，那么对方拿到了 code，却没有 code verifier，也就没什么用。</p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" width="1024" height="833" src="/wp-content/uploads/2025/07/image-3-1024x833.png" alt="" class="wp-image-8020" srcset="https://www.raychase.net/wp-content/uploads/2025/07/image-3-1024x833.png 1024w, https://www.raychase.net/wp-content/uploads/2025/07/image-3-300x244.png 300w, https://www.raychase.net/wp-content/uploads/2025/07/image-3-768x625.png 768w, https://www.raychase.net/wp-content/uploads/2025/07/image-3-850x691.png 850w, https://www.raychase.net/wp-content/uploads/2025/07/image-3.png 1500w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p>这种方法是比较推荐的，对于一些 CLI 登录使用这种方法的时候，重定向 URL 可以是一个带有 code 的指向 localhost 的地址以被 CLI 捕获。</p>
+
+
+
+<p><strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">3. Device Code</mark></strong>：前面说到的 Authorization Code 这种方法还有一个变体，就是对于一些需要用户参与，但是又没有浏览器（或者自动打开浏览器）的场景下，这个重定向到浏览器来获取用户 consent 的过程，被其它方式来取代，这种变体可看做名为 Device Authorization 的流程：</p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" width="995" height="1024" src="/wp-content/uploads/2025/07/image-5-995x1024.png" alt="" class="wp-image-8022" srcset="https://www.raychase.net/wp-content/uploads/2025/07/image-5-995x1024.png 995w, https://www.raychase.net/wp-content/uploads/2025/07/image-5-292x300.png 292w, https://www.raychase.net/wp-content/uploads/2025/07/image-5-768x790.png 768w, https://www.raychase.net/wp-content/uploads/2025/07/image-5-1493x1536.png 1493w, https://www.raychase.net/wp-content/uploads/2025/07/image-5-300x309.png 300w, https://www.raychase.net/wp-content/uploads/2025/07/image-5-850x874.png 850w, https://www.raychase.net/wp-content/uploads/2025/07/image-5.png 1500w" sizes="(max-width: 995px) 100vw, 995px" /></figure>
+
+
+
+<p>可以看到，上面的浏览器重定向的过程被替换成了返回 code 和 verification url，然后用户使用 verification URL 加上这个 user code 来完成 consent 的过程，在这个过程完成之后，这个 device 才被授权。在这个过程完成之前，需要 app 不断去 poll 检查是不是 device 已经被授权了。</p>
+
+
+
+<p><strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">4. Client Credential</mark></strong>：前面说到的 Authorization Code 虽然好用，但是需要用户手动登录确认的过程，对于一些没有人参与的 M2M（machine-to-machine）系统而言，这是不现实的。因此在 client id 的基础上，再加上一个 client secret，一样可以完成 auth 的流程。这种场景其实就相当于是 client 和 resource owner 是同一个了：</p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" width="1024" height="611" src="/wp-content/uploads/2025/07/image-4-1024x611.png" alt="" class="wp-image-8021" srcset="https://www.raychase.net/wp-content/uploads/2025/07/image-4-1024x611.png 1024w, https://www.raychase.net/wp-content/uploads/2025/07/image-4-300x180.png 300w, https://www.raychase.net/wp-content/uploads/2025/07/image-4-768x458.png 768w, https://www.raychase.net/wp-content/uploads/2025/07/image-4-850x507.png 850w, https://www.raychase.net/wp-content/uploads/2025/07/image-4.png 1399w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p><strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">5. Implicit</mark></strong>：这种其实就是上面 Authorization Code 的简化版，去掉了 code 的环节，直接发 code。这种方式在 app 只有前端的场景下（比如 SPA）使用，因为它没法进行后端和 Auth Server 的通信。但是这种方式因为安全性低，因而不推荐，因为即便是 SPA，还是可以用前面说的那种 PKCE 增强的 Authorization Code 方式来实现。</p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" width="1024" height="486" src="/wp-content/uploads/2025/07/image-1-1024x486.png" alt="" class="wp-image-8018" srcset="https://www.raychase.net/wp-content/uploads/2025/07/image-1-1024x486.png 1024w, https://www.raychase.net/wp-content/uploads/2025/07/image-1-300x142.png 300w, https://www.raychase.net/wp-content/uploads/2025/07/image-1-768x365.png 768w, https://www.raychase.net/wp-content/uploads/2025/07/image-1-850x403.png 850w, https://www.raychase.net/wp-content/uploads/2025/07/image-1.png 1500w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p>再来看这个 callback 的 URL，和前面提到的 Authorization Code 流程不一样的是，它返回的 token 放在 URL 的 fragment 里面，而不是 query 里面，比如：http://&#8230;/callback#token=TOKEN，这样做的好处是这个 TOKEN 不会在浏览器跳转的时候送到服务器，就不容易泄露。</p>
+
+
+
+<p><strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">6. Password</mark></strong>：这种方式其实就是让 client 获知用户的用户名和密码，属于风险比较大的做法，要求这个 app 是用户百分百信任的——这也就是说，它没有解决 OAuth 本身应该解决的问题，因此很少使用。</p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" width="1024" height="610" src="/wp-content/uploads/2025/07/image-2-1024x610.png" alt="" class="wp-image-8019" srcset="https://www.raychase.net/wp-content/uploads/2025/07/image-2-1024x610.png 1024w, https://www.raychase.net/wp-content/uploads/2025/07/image-2-300x180.png 300w, https://www.raychase.net/wp-content/uploads/2025/07/image-2-768x457.png 768w, https://www.raychase.net/wp-content/uploads/2025/07/image-2-1536x914.png 1536w, https://www.raychase.net/wp-content/uploads/2025/07/image-2-2048x1219.png 2048w, https://www.raychase.net/wp-content/uploads/2025/07/image-2-850x506.png 850w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+<p><strong><font color="#ff0000">文章未经特殊标明皆为本人原创，未经许可不得用于任何商业用途，转载请保持完整性并注明来源链接 <a href="https://www.raychase.net/8015">《四火的唠叨》</a></font></strong></p><div class='yarpp yarpp-related yarpp-related-rss yarpp-template-list'>
+<!-- YARPP List -->
+<p>你可能也喜欢看：</p><ol>
+<li><a href="https://www.raychase.net/1512" rel="bookmark" title="Issue record: &#8220;No thread for socket&#8221; about Memcached">Issue record: &#8220;No thread for socket&#8221; about Memcached</a></li>
+<li><a href="https://www.raychase.net/967" rel="bookmark" title="Study Notes Of Mason">Study Notes Of Mason</a></li>
+<li><a href="https://www.raychase.net/2839" rel="bookmark" title="A page widgetization practice">A page widgetization practice</a></li>
+<li><a href="https://www.raychase.net/6439" rel="bookmark" title="常见分布式应用系统设计图解（十一）：数据监控系统">常见分布式应用系统设计图解（十一）：数据监控系统</a></li>
+<li><a href="https://www.raychase.net/7724" rel="bookmark" title="本地部署 Minikube + Docker 记录">本地部署 Minikube + Docker 记录</a></li>
+</ol>
+</div>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.raychase.net/8015/feed</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

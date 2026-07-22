@@ -1,0 +1,1942 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"><channel><title>est の 输入 输出和出入</title><link>https://blog.est.im/</link><description>This blog is rated 🔞, viewer discretion is advised</description><lastBuildDate>Sat, 18 Jul 2026 19:32:00 +0800</lastBuildDate><item><title>为什么 Github OAuth 故意拦截 CORS</title><link>https://blog.est.im/2026/stdout-29</link><description>&lt;p&gt;跟AI发闹骚学到的&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://github.com/isaacs/github/issues/330"&gt;https://github.com/isaacs/github/issues/330&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Allowing CORS for the endpoint you mentioned would mean that you could complete this step of the Web flow from a browser:&lt;br /&gt;
+And this would mean that you're hard-coding your client_id and client_secret into a webpage (or JS file loaded into that webpage) for everyone to see. This would indeed cause security concerns since the client_secret should be kept secret. If someone got hold of your client_id and client_secret, they could impersonate you application, and for example -- wipe all the tokens for that application:&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;如果允许在浏览器通过 &lt;code&gt;client_id&lt;/code&gt;, &lt;code&gt;client_secret&lt;/code&gt; 交换得到 &lt;code&gt;access_token&lt;/code&gt;，那么实际上你的账号等于公开裸奔，你所有的 github 资产等于公开被人控制。所以必须走一个服务端流程，然后再把 &lt;code&gt;access_token&lt;/code&gt; 下发&lt;/p&gt;
+&lt;p&gt;呃，好像很有道理。&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">est</dc:creator><pubDate>Sat, 18 Jul 2026 19:32:00 +0800</pubDate><guid isPermaLink="false">tag:None,2026-07-18:/2026/stdout-29</guid><category>stdout</category></item><item><title>gitweets改版，复刻微信「朋友圈」</title><link>https://blog.est.im/2026/stdout-28</link><description>&lt;p&gt;去年搓了个 &lt;a href="https://blog.est.im/2025/stdout-05"&gt;gitweets&lt;/a&gt;，一个 .html 实现了「微博」，拿git历史当feed流～发推&lt;/p&gt;
+&lt;p&gt;这个周末看着 coding plan 还剩 20% 要到期，没用完，怎么办呢？想来想去，挖大坑干不完，小修小改，就拿这个 gitweets 继续填坑了&lt;/p&gt;
+&lt;p&gt;首先是让AI把界面改成模仿微信 朋友圈，啪一下，很快啊，结果让人非常印象深刻，很逼真&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://f.est.im/est"&gt;https://f.est.im/est&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="/images/2026/stdout-28.01.avif" /&gt;&lt;/p&gt;
+&lt;p&gt;现在的AI真厉害。让我去调CSS可能这辈子都搞不出来这个效果了。&lt;/p&gt;
+&lt;p&gt;后面是我的一些唠叨，不感兴趣的可以关闭页面，或者去上面那个围观一下。&lt;/p&gt;
+&lt;p&gt;想起来独乐乐不如众乐乐，要不，支持个评论功能？&lt;/p&gt;
+&lt;p&gt;项目的初衷是 static page，要实现互动肯定得用一些API了。&lt;/p&gt;
+&lt;p&gt;最能想到的思路，走传统的 github issue 什么的，和这个 gitweets 最大的出发点冲突了：一个 git repo 包含所有数据，随时搬家，不用导出。&lt;/p&gt;
+&lt;p&gt;而且麻烦的是，post 是绑定到 commit 上的。如果你用一个 JSON 之类的来存评论，势必也会新增一个 commit，这样会污染post时间线。&lt;/p&gt;
+&lt;p&gt;突然想起来一个古老的东西，&lt;a href="https://blog.est.im/2023/stdout-17"&gt;git notes&lt;/a&gt;，这是连 ChatGPT 和 Claude 都没想到的邪路，不过它们很快确认这个办法甚好，可行。&lt;/p&gt;
+&lt;p&gt;git notes选型定下里，建立这个数据模型让我纠结了很久。围绕 github 开展流程，让我一度误入歧途&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;oauth 登录，不要任何scope&lt;/li&gt;
+&lt;li&gt;用来存 github notes的repo邀请登录人加入项目&lt;/li&gt;
+&lt;li&gt;浏览器通过该用户access token发起 notes append&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;最后想明白了，压根不应该走浏览器这一套。而是只能走后端代劳，用 Fine-Grained PAT 来和 github API 交互&lt;/p&gt;
+&lt;p&gt;其间还考虑 github 越来越拉垮，想避免 vendor lock-in，直接走git http协议。&lt;/p&gt;
+&lt;p&gt;首先想到的是 Cloudflare 那个牛逼的 &lt;a href="https://blog.cloudflare.com/artifacts-git-for-agents-beta/"&gt;zig 写的 100kb 的 wasm 可以 http 读写任意 git 仓库&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;git protocol engine is written in pure Zig (no libc), compiled to a ~100KB WASM binary. Support for both v1 and v2 of the git protocol. Support capabilities including ls-refs, shallow clones (deepen, deepen-since, deepen-relative), and incremental fetch with have/want negotiation.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;仔细读了下文档，让AI一起调研，发现tmd这玩意仅限 Worker 内部使用，只能读写 CF 内部的 假 git，不支持读写外部任意 git http。&lt;/p&gt;
+&lt;p&gt;用 &lt;a href="https://blog.est.im/2026/stdout-08"&gt;isomorphic-git 坑也挺多&lt;/a&gt; 。还是先走 github API 吧&lt;/p&gt;
+&lt;p&gt;这个 git notes 要走REST API 有查询放大 3+N 的问题，怕掉用次数爆掉，于是让AI走 GraphQL。我自己手动是搓不动 GraphQL，太难了。AI虽然是 flash 普通智商版本，也分分钟拼接好。一次成功。真猛 😭&lt;/p&gt;
+&lt;p&gt;于是 Vibe 出来了。&lt;/p&gt;
+&lt;p&gt;搓完了想起一个问题，如果有人刷评论怎么办？于是让AI搓了个 &lt;code&gt;/.admin&lt;/code&gt; 管理页面。也是秒写好。太方便了。&lt;/p&gt;
+&lt;p&gt;明显欠缺的功能搓完之后，感觉又进入了贤者时间，索然无味了。&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">est</dc:creator><pubDate>Sun, 12 Jul 2026 17:53:00 +0800</pubDate><guid isPermaLink="false">tag:None,2026-07-12:/2026/stdout-28</guid><category>stdout</category></item><item><title>MiMoCode 干完活儿发通知</title><link>https://blog.est.im/2026/stdout-27</link><description>&lt;p&gt;AI在 coding 的时候我其实在玩别的。希望agent 每次干完活，macOS 弹个通知。&lt;/p&gt;
+&lt;p&gt;手上是 MimoCode，就让它自己写个。啪，很快写好了。结果还是折腾了好一会儿， 记录几个有意思的小坑。&lt;/p&gt;
+&lt;p&gt;首先是如果当前CLI是活动的，就不弹通知。&lt;/p&gt;
+&lt;p&gt;需要判断活动窗口。最初用 &lt;code&gt;osascript&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-bash"&gt;osascript -e 'tell application &amp;quot;System Events&amp;quot; to get name of first application process whose frontmost is true'
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;直接报错 &lt;code&gt;Not authorized to send Apple events to System Events (-1743)&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;于是换 &lt;code&gt;lsappinfo&lt;/code&gt;，走 macOS Launch Services API，不需要任何额外授权：&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-bash"&gt;lsappinfo info -only name $(lsappinfo front)
+# → &amp;quot;LSDisplayName&amp;quot;=&amp;quot;Terminal&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;还能拿 PID：&lt;code&gt;lsappinfo info -only pid $(lsappinfo front)&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;然后如何判定活动窗口是不是 CLI？&lt;/p&gt;
+&lt;p&gt;写死个&lt;code&gt;["iTerm2", "Terminal", "Alacritty", "kitty", ...]&lt;/code&gt; 列表&lt;/p&gt;
+&lt;p&gt;太笨了。当前hook是子进程，直接遍历 parent 进程树啊！找到终端模拟器的 PID，再跟前台 app 的 PID 比对。&lt;/p&gt;
+&lt;p&gt;但是在 tmux 里爬出来是这样的：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;node → zsh → tmux → launchd(1) → init(0)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Terminal.app 的 PID 根本不在树上。因为 tmux server 启动后被 reparent 到了 launchd，跟 Terminal.app 断开了父子关系。&lt;/p&gt;
+&lt;p&gt;又想到一个办法，直接查 &lt;code&gt;$TMUX_PANE&lt;/code&gt; 是否是当前 active pane：&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-bash"&gt;tmux list-panes -F '#{pane_id} #{pane_active}' | awk '$2==1 {print $1}'
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;如果 &lt;code&gt;$TMUX_PANE&lt;/code&gt; == active pane ID，说明用户就在看这个窗口，不需要通知。完全不需要知道前台是哪个 app。&lt;/p&gt;
+&lt;p&gt;非 tmux 场景才用进程树 + &lt;code&gt;lsappinfo&lt;/code&gt; 的 PID 比对。&lt;/p&gt;
+&lt;p&gt;然后就是挑选具体哪些事件要弹通知了。&lt;/p&gt;
+&lt;p&gt;权限通知：&lt;code&gt;permission.ask&lt;/code&gt;，但文档说 "not yet wired"。试了一下，确实没触发。尴尬。雷军！！！金凡！！！&lt;/p&gt;
+&lt;p&gt;最后的方案：注册 &lt;code&gt;permission.ask&lt;/code&gt; 占位，如果哪天接入了就能精确捕获。目前靠 &lt;code&gt;tool.execute.before&lt;/code&gt; 抢占并推断。工具跑完了说明权限已过或不需要。&lt;/p&gt;
+&lt;p&gt;还有个情况就是 Subagent 完成也给我哐哐弹。最初硬编码了 &lt;code&gt;SUBAGENT_TYPES = ["general", "explore"]&lt;/code&gt;；后来发现 &lt;code&gt;actor.preStop&lt;/code&gt; / &lt;code&gt;actor.postStop&lt;/code&gt; 的 input 里有 &lt;code&gt;mode: "subagent" | "peer"&lt;/code&gt;。于是就做了个计数器&lt;/p&gt;
+&lt;p&gt;最后通知到时候带上 Session 名字，折腾了一圈 直接 &lt;code&gt;sqlite3 ~/.local/share/mimocode/mimocode.db "SELECT title FROM session WHERE id = '$SESSION_ID'"&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;完整代码放在 &lt;/p&gt;
+&lt;p&gt;&lt;a href="https://github.com/est/snippets/blob/master/mimocode-hooks/notify-done.ts"&gt;https://github.com/est/snippets/blob/master/mimocode-hooks/notify-done.ts&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;复制到 &lt;code&gt;~/.config/mimocode/hooks/&lt;/code&gt; 就可以试试效果&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">est</dc:creator><pubDate>Sat, 11 Jul 2026 11:53:00 +0800</pubDate><guid isPermaLink="false">tag:None,2026-07-11:/2026/stdout-27</guid><category>stdout</category></item><item><title>写作能力和 locate cost</title><link>https://blog.est.im/2026/stderr-24</link><description>&lt;p&gt;自从自个儿琢磨出 &lt;a href="https://blog.est.im/2026/stdin-17"&gt;locate cost&lt;/a&gt; 之后便开始关注这方面问题。最近看到两篇喷 harness 问题的&lt;/p&gt;
+&lt;p&gt;第一个是 Can Bölük &lt;a href="https://blog.can.ac/2026/02/12/the-harness-problem/"&gt;https://blog.can.ac/2026/02/12/the-harness-problem/&lt;/a&gt; 今年2月的时候发现：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Codex uses &lt;code&gt;apply_patch&lt;/code&gt;: It takes a string as input, which is essentially an OpenAI-flavored diff, and instead of relying on a structured schema, the harness just expects this blob to follow a strict set of rules&lt;br /&gt;
+Claude Code (and most others) use &lt;code&gt;str_replace&lt;/code&gt;: find the exact old text, swap in the new text. Very simple to think about. But the model must reproduce every character perfectly, including whitespace and indentation.&lt;br /&gt;
+Cursor trained a separate neural network: a fine-tuned 70B model whose entire job is to take a draft edit and merge it into the file correctly&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;如果你在 Codex 用别的模型&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Grok 4’s patch failure rate in my benchmark was 50.7%, GLM-4.7’s was 46.2%.&lt;/p&gt;
+&lt;p&gt;Aider’s &lt;a href="https://aider.chat/docs/benchmarks.html"&gt;own benchmarks&lt;/a&gt; show that format choice alone swung GPT-4 Turbo from 26% to 59%, but GPT-3.5 scored only 19% with the same format because it couldn’t reliably produce valid diffs. &lt;/p&gt;
+&lt;p&gt;The &lt;a href="https://arxiv.org/abs/2510.12487"&gt;Diff-XYZ benchmark&lt;/a&gt; from JetBrains confirmed it systematically: no single edit format dominates across models and use cases. &lt;a href="https://arxiv.org/abs/2511.04486"&gt;EDIT-Bench&lt;/a&gt; found that only one model achieves over 60% pass@1 on realistic editing tasks.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;懒得看原文的我直接说结论：大家都在争论哪个模型编程更强，但很多模型都知道要改什么，失败其实发生在具体改哪里。&lt;/p&gt;
+&lt;p&gt;他做了个实验，同样的 16 个模型，只换编辑这个 tool call，改成他自己发明的 hashline，给每行内容打一个短哈希做锚点，Grok Code Fast 1 从 6.7% 直接跳到 68.3%。&lt;/p&gt;
+&lt;p&gt;Can Bölük 这个老哥非常生猛，2021年有篇博客讲他在Intel CPU 发现一个指令可以序列化/反序列化打印所有 x86 指令集。微码立功了！&lt;/p&gt;
+&lt;p&gt;他这个 hashline 也很巧思，我也是最近才琢磨明白。你仔细想就会有个疑问，为啥不直接用 行号？&lt;/p&gt;
+&lt;p&gt;有个相关的问题一直困扰我。我经常让 Gemini 去搜我博客，我博客网址都是类似 stderr-XX 其中 XX 是数字，然后 Gemini 经常把别的文章内容给我总结批判一番。我得到的结论是 LLM 不识数。&lt;/p&gt;
+&lt;p&gt;后来在学 RAG embedding vs BM25 的时候突然顿悟了，tmd 这个基于 基于语义空间的相似度匹配 有利有弊。好处是比如你检索 汽车，它能联想到 车辆，无需 FTS 那里你自己要维护一套分词近义词表。坏处是行号 223 233 它觉得很「近似」直接搞混 😂&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;扯远了。&lt;/p&gt;
+&lt;p&gt;然后是前几天 Armin Ronacher 的 &lt;a href="https://lucumr.pocoo.org/2026/7/4/better-models-worse-tools/"&gt;https://lucumr.pocoo.org/2026/7/4/better-models-worse-tools/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;这老哥是 Flask/Werkzeug/Jinja2作者，现在主要在撸 Pi 这个agent（值得一题的是上面的老哥在撸 oh-my-pi 这个 fork）&lt;/p&gt;
+&lt;p&gt;他发现 Opus 4.8 和 Sonnet 5 在非 Claude Code 的 harness（比如他自己的 Pi 项目）里调用嵌套 &lt;code&gt;edits[]&lt;/code&gt; 数组时会莫名其妙地塞进一堆乱七八糟的 &lt;code&gt;&amp;lt;antml:function_calls&amp;gt;&lt;/code&gt; 这种内部控制字符。老的模型反而没这个毛病。他推测是 A\ 家训新模型强耦合了 Claude Code。逆向发现 Claude Code 客户端对格式错误极其宽容，有一整套别名映射、Unicode 修复、静默过滤多余字段的逻辑。结果就是模型在RL中适应了格式差不多就行，反正harness 会兜底。&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;看完这两篇我觉得印证了我前面 locate cost 一问的所有猜想。AI 指出，真正可能的机制更朴素：&lt;/p&gt;
+&lt;p&gt;RL 训练信号里，整段重写 往往比 精确定位再小改 更容易拿到奖励。重写不会因为空白符不匹配而报错。这跟第二篇里 Armin 讲的模型在宽容的 harness 里学会了偷懒，是同一个因果链条,不需要引入纹理/结构的形而上区分也能解释。&lt;/p&gt;
+&lt;p&gt;也就是说，LLM上课答题只给答案分，不给过程分，导致背题偷懒 🤣 这个方向在研究界是有名字的，叫 process supervision / process reward model，过程奖励模型。OpenAI 那篇《Let's Verify Step by Step》基本就是在数学推理场景做这件事。&lt;/p&gt;
+&lt;p&gt;但这条路有两个真实的代价，其一是 过程标注比结果标注贵得多；其二 如果训练时的 harness 比部署时的 harness 更宽容,学出来的好过程标准本身就是错的。&lt;/p&gt;
+&lt;p&gt;所以又回到一个老生常谈的话题。各大模型厂家都在推出自己的 CLI。观察「过程」比最终结果更值钱！&lt;/p&gt;
+&lt;p&gt;我让AI去 fact check了下。果然&lt;/p&gt;
+&lt;h4&gt;Claude Code&lt;/h4&gt;
+&lt;p&gt;数据使用文档里明确写着两条完全独立的通道:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;consumer 账号里"Help improve Claude"那个 toggle 控制的是"conversation content"——如果你打开它,用于训练的数据 包括整个相关对话,连带任何内容、自定义样式或对话偏好。这是"代码/对话内容"这条线。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;DISABLE_TELEMETRY&lt;/code&gt; 一条完全独立的遥测通道，文档原话是:Claude Code 会从用户的机器连接到 Anthropic，记录延迟、可靠性、使用模式这类运营指标。这类日志不包含任何代码或文件路径。关掉这条通道要单独操作，跟训练开关是两个开关、两套机制、两份文档。 &lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4&gt;Kiro(AWS)&lt;/h4&gt;
+&lt;p&gt;设置页面里直接摆着两个并列开关&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Content Collection For Service Improvement，关掉它就是不许训练&lt;/li&gt;
+&lt;li&gt;Usage Analytics And Performance Metrics 官方描述是"这是一个单独的、用于使用遥测的设置"。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;也就是说厂商自己都承认这是两套独立治理的东西——只是大多数用户可能只会想起关第一个开关。&lt;/p&gt;
+&lt;h4&gt;Codex(OpenAI)&lt;/h4&gt;
+&lt;p&gt;官方文档列出了它 OTel 遥测会上报的事件类型，其中包括&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;codex.tool_decision&lt;/code&gt; 工具调用是被批准还是拒绝,以及这个决定来自配置还是用户&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;codex.tool_result&lt;/code&gt; 耗时、是否成功、外加一段输出片段&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;codex.user_prompt&lt;/code&gt; 默认只记录长度、内容会被打码&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;听起来很克制,但 工具决策 + 输出片段 + 时长 这几项拼起来 就是前面说那种 过程信号，不是代码本身。精确刻画了模型在 harness 里怎么试错、被拒了多少次、跑了多久。这条 OTel 通道是靠单独的 &lt;code&gt;config.toml&lt;/code&gt; 开关控制的，跟 ChatGPT 账号层面的训练数据开关是两件事。&lt;/p&gt;
+&lt;h4&gt;Google Antigravity&lt;/h4&gt;
+&lt;p&gt;方向比较模糊，它把训练相关的退出开关本身命名为 Enable Telemetry，把两件事的名字焊在一起。&lt;/p&gt;
+&lt;p&gt;Google Groups 的讨论帖里用户在问这个开关到底关不关得掉训练,官方也没给出干脆的回答。&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;所以接下去的推论就很简单。利用公开语料能训练出 2025年级别的sota llm。但是往后就看各家谁能拿到更多的轨迹数据了。无论靠CLI / app 装机量，还是买数据，偷数据，各显神通。其中装机量/DAU几乎正比于以后的智力天花板。所谓的 trillion tokens models 估计就是从各种日志里来的（而不是人类语料）&lt;/p&gt;
+&lt;p&gt;继续推演下去，有意思的一点是，可预见的将来，AI 的智力增长几乎全来自于coding&lt;/p&gt;
+&lt;p&gt;因为 coding 有个编译器师爷能把关，保证产出可验证！&lt;/p&gt;
+&lt;p&gt;别的什么 具身 世界模型，我觉得难了 😆&lt;/p&gt;
+&lt;p&gt;还有一个考虑的，装机量看 2C，各行业应用 2B 也很重要。比如design类的。这种“轨迹” 如何收集改进也很讲究。&lt;/p&gt;
+&lt;p&gt;但是design想了下又挺主观的。不过可以降低一些看上去很笨的地方。&lt;/p&gt;
+&lt;p&gt;甚至如果从公平的角度来说，AI厂家，除了按成本收费之外，还应该给高价值数据返钱才对。不是之前有报道说Anthropic 和 OpenAI 都签了七位数金额的 RL 环境和人类专家数据合同，预计投入还要再涨 3-5 倍。就是拿来训练“过程”的吧。&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;今晚娃又沉迷pad，我给他pad锁了 😆  &lt;/p&gt;
+&lt;p&gt;为啥说起这个呢，我一直让娃坚持写「&lt;a href="https://blog.est.im/202105/stderr-004"&gt;语音日记&lt;/a&gt;」&lt;/p&gt;
+&lt;p&gt;但是孩子长大了，他写得越来越不耐烦了，而且我苦恼作文没有批改，所以这个日记习惯实际上成了低水平重复。&lt;/p&gt;
+&lt;p&gt;其实把复制粘贴到deepseek，提示词 “以XX年级的标准点评改进下这篇” 就能搞定，奈何我家娃太懒。&lt;/p&gt;
+&lt;p&gt;所以我一直想给娃弄一个 作文训练 app。本来想不就是AI一问一答批改么。&lt;/p&gt;
+&lt;p&gt;但是想到 locate cost 突然觉得有点难。。。。。甚至比AI coding 还难。。&lt;/p&gt;
+&lt;p&gt;代码为什么定位相对容易。 哪怕 &lt;code&gt;str_replace&lt;/code&gt; 因为空白符不匹配而报错,它要定位的目标本身是离散、有边界的——一行代码、一个函数,有语法(AST)天然把文档切成可寻址的单元。&lt;/p&gt;
+&lt;p&gt;或者 hashline，行号就每句话一个稳定锚点，把找位置从模糊的文本匹配变成精确的 ID 查找。这招完全可以照搬到「改病句」场景。做个 diff 也容易&lt;/p&gt;
+&lt;p&gt;但写作的问题，往往根本不是一个可以圈起来的line或者span，而是句子之间关系的性质。 “这段论证缺乏内在逻辑”，“这句话和上一句衔接生硬”，“全文的语气从第二段开始飘了”——这些反馈即便你精确指出“第3段第2句”,真正需要改的可能是第1句、连接词，或者整段重组。&lt;/p&gt;
+&lt;p&gt;代码的 bug 通常局限在一个可编辑单元里，作文的"bug"经常是分布式的、关系性的。定位到具体文字之后，改哪、怎么改这一步反而更模糊，比代码多绕一层&lt;/p&gt;
+&lt;p&gt;AI说，写作其实分两个层次&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;可验证层  &lt;br /&gt;
+语法错误、拼写、用词重复、被动语态滥用、句长方差、可读性指标（类似 Flesch-Kincaid 这类公式）、有没有明确主题句 &lt;br /&gt;
+这些跟代码的 compiler/linter 是同一类东西,规则可判定&lt;/li&gt;
+&lt;li&gt;不可验证层  &lt;br /&gt;
+论证有没有说服力、有没有原创视角、语气是否统一、是否“有意思”？  &lt;br /&gt;
+可以叫“品味”层。只有经验丰富的人的判断。而且专业阅卷老师之间对开放式作文打分的一致性本身就不高&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;怎么切入呢？&lt;/p&gt;
+&lt;p&gt;后者也有一些实践，比如借鉴 AP 阅卷没，用锚定范文（anchor papers）做少样本参照。而不是让模型凭空判断“这篇好不好”&lt;/p&gt;
+&lt;p&gt;也可以做高亮 + 提问式 而非直接改。比如第 2 段第 3 句话里，“非常开心”这个词能不能换一个更具体的？比如描述一下你当时的表情或动作？&lt;/p&gt;
+&lt;p&gt;甚至可以 示例驱动：AI 给出 改前 / 改后 小对比，只改 1-2 处；然后 多轮对话，孩子自己决定要改哪里，AI 只辅助，而不是 AI 主导大改。&lt;/p&gt;
+&lt;p&gt;要么就局部训练，针对常见作文类型（记事、写景、议论），开头、过渡、结尾分别训练&lt;/p&gt;
+&lt;p&gt;这样看来，写作文直接给娃一张无限大的白纸并不好。参考 Notion 的 Block 概念，强迫孩子在输入时就把“骨架”和“血肉”分开。比如，第一步只允许输入 3 个论点（形式）；第二步再针对每个论点去填充素材（质料）。通过产品机制，人为制造出“伪 AST（语法树）”。&lt;/p&gt;
+&lt;p&gt;或者阻断直接生成，只给“反向约束”。不输出完整的句子让孩子抄，扮演“刁钻的苏格拉底”。比如，当孩子写“今天我很开心”，AI 的反馈不应该是“你可以改成：今天我心花怒放”，而应该是抛出环境约束（Harness）：“你当时手里拿了什么东西？你的心跳有多快？”——逼迫孩子自己去完成“从潜能到现实”的推导。&lt;/p&gt;
+&lt;p&gt;当然，做好 diff 和版本控制是基础。记录孩子打磨一句话的过程。让孩子直观看到词汇的微调是如何让语义的边界越来越清晰的。&lt;/p&gt;
+&lt;p&gt;哎，这么一拆解又有点思路了，但比预计的感觉麻烦得多啊。不过语文教育有大问题啊。明明是工程上可以细化训练的（虽然很难，过去没AI需要大量人工精力）。上课根本不讲。全靠孩子天生悟性。以上种种，今年4月才喷过一篇《&lt;a href="https://blog.est.im/2026/stdin-10"&gt;语文学习和考试&lt;/a&gt;》 &lt;/p&gt;
+&lt;p&gt;作文从小学一上来就300 字 500字，其实真应该「刻意练习」的是语言 primitive。什么 铺垫、呼应、留白、对比、节奏、悬念、感官、动作、心理、对话等等，都上手了，然后再各种变化，组合。&lt;/p&gt;
+&lt;p&gt;学编程也是从少量 keywords ，赋值语句，条件，循环这样一步一步来的嘛。&lt;/p&gt;
+&lt;p&gt;过去没太好的语文教学条件，归根结底因为一个班上50个娃只有一个语文老师。&lt;/p&gt;
+&lt;p&gt;但是现在有LLM了。&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">est</dc:creator><pubDate>Thu, 09 Jul 2026 23:01:00 +0800</pubDate><guid isPermaLink="false">tag:None,2026-07-09:/2026/stderr-24</guid><category>stderr</category></item><item><title>grep vs sqlite 谁更适合微信聊天记录？</title><link>https://blog.est.im/2026/stdout-26</link><description>&lt;p&gt;一个爆火的讨论&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;云风 @cloudwu &lt;a href="https://xcancel.com/cloudwu/status/2071533904977428611"&gt;2026-06-29&lt;/a&gt;&lt;br /&gt;
+微信的开发人员根本就不懂该怎么储存数据。这种聊天软件，文本和媒体文件分开存，文本根本就不应该保存在什么数据库(sqlite)里, 一个对话一个文本文件追加就可以了。需要搜索的时候 grep 一下性能完全符合需求。一个对话能有多少文本？一秒一个字 24 小时不间断，一年也就 30M 个字。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;网上的争论都是猜测，我呢，决定让 opus 跑一局。&lt;/p&gt;
+&lt;p&gt;首先让AI去搜微信聊录表结构&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;微信（Android）聊天记录存储在加密 SQLite 数据库 &lt;code&gt;EnMicroMsg.db&lt;/code&gt; 中，使用 SQLCipher（AES-256-CBC，PBKDF2 256000 轮派生密钥）。核心 &lt;code&gt;message&lt;/code&gt; 表：&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code class="language-sql"&gt;CREATE TABLE message (
+    msgId      INTEGER PRIMARY KEY,  -- 本地自增 ID
+    msgSvrId   INTEGER,              -- 服务器消息 ID
+    type       INTEGER,              -- 1=文字, 3=图片, 34=语音, 43=视频
+    isSend     INTEGER,              -- 0=接收, 1=发送
+    createTime INTEGER,              -- Unix 时间戳
+    talker     TEXT,                 -- wxid 或群 chatroom ID
+    content    TEXT,                 -- 消息正文
+    imgPath    TEXT                  -- 附件路径
+);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;测试设计&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;数据量&lt;/strong&gt;：50 万条模拟消息（模拟中度用户 ~2 年）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;搜索关键词&lt;/strong&gt;：&lt;code&gt;微信支付&lt;/code&gt;、&lt;code&gt;服务器&lt;/code&gt;、&lt;code&gt;数据库&lt;/code&gt;、&lt;code&gt;会议&lt;/code&gt;、&lt;code&gt;周末&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;环境&lt;/strong&gt;：macOS Apple Silicon, Python 3.14, ripgrep 15.1, DuckDB 1.5.4, Polars 1.42&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;每项测试 3 轮取最小值&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;参赛选手&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;分类&lt;/th&gt;
+&lt;th&gt;方案&lt;/th&gt;
+&lt;th&gt;思路&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;传统文本&lt;/td&gt;
+&lt;td&gt;grep (BSD)&lt;/td&gt;
+&lt;td&gt;最朴素的逐字节匹配&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;SIMD文本&lt;/td&gt;
+&lt;td&gt;ripgrep&lt;/td&gt;
+&lt;td&gt;AVX2/NEON 并行 + 多线程&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;零拷贝&lt;/td&gt;
+&lt;td&gt;mmap 直接搜索&lt;/td&gt;
+&lt;td&gt;OS page cache + Python bytes.find&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;压缩文本&lt;/td&gt;
+&lt;td&gt;zstd 流式解压搜索&lt;/td&gt;
+&lt;td&gt;省空间，边解压边搜&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;索引&lt;/td&gt;
+&lt;td&gt;倒排索引 (2-gram)&lt;/td&gt;
+&lt;td&gt;搜索引擎思路，内存索引&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;索引&lt;/td&gt;
+&lt;td&gt;Bloom Filter 分块&lt;/td&gt;
+&lt;td&gt;概率型预过滤&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;RDBMS&lt;/td&gt;
+&lt;td&gt;SQLite LIKE&lt;/td&gt;
+&lt;td&gt;微信的实际方案(去掉加密)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;RDBMS&lt;/td&gt;
+&lt;td&gt;SQLite mmap 模式&lt;/td&gt;
+&lt;td&gt;mmap I/O 加速&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;RDBMS FTS&lt;/td&gt;
+&lt;td&gt;SQLite FTS5 (trigram)&lt;/td&gt;
+&lt;td&gt;全文搜索引擎&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;列式DB&lt;/td&gt;
+&lt;td&gt;DuckDB contains()&lt;/td&gt;
+&lt;td&gt;OLAP 列式扫描&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;列式DB&lt;/td&gt;
+&lt;td&gt;DuckDB FTS&lt;/td&gt;
+&lt;td&gt;DuckDB 的全文搜索扩展&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;列式文件&lt;/td&gt;
+&lt;td&gt;Parquet(zstd) + DuckDB&lt;/td&gt;
+&lt;td&gt;列式文件直接查询&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;DataFrame&lt;/td&gt;
+&lt;td&gt;Polars lazy scan&lt;/td&gt;
+&lt;td&gt;Rust实现的极速 DataFrame&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;DataFrame&lt;/td&gt;
+&lt;td&gt;Polars in-memory&lt;/td&gt;
+&lt;td&gt;全量载入内存&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;并行文本&lt;/td&gt;
+&lt;td&gt;ripgrep 多文件并行&lt;/td&gt;
+&lt;td&gt;分块文件 + rg 多线程&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3&gt;测试结果&lt;/h3&gt;
+&lt;h4&gt;关键词搜索延迟（ms, 3轮最小值）&lt;/h4&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;#&lt;/th&gt;
+&lt;th&gt;方案&lt;/th&gt;
+&lt;th style="text-align: right;"&gt;微信支付&lt;/th&gt;
+&lt;th style="text-align: right;"&gt;服务器&lt;/th&gt;
+&lt;th style="text-align: right;"&gt;数据库&lt;/th&gt;
+&lt;th style="text-align: right;"&gt;会议&lt;/th&gt;
+&lt;th style="text-align: right;"&gt;周末&lt;/th&gt;
+&lt;th style="text-align: right;"&gt;&lt;strong&gt;平均&lt;/strong&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;SQLite FTS5 (trigram)&lt;/strong&gt;&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;0.65&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;0.46&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;0.37&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;❌²&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;❌²&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;&lt;strong&gt;0.31&lt;/strong&gt;¹&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;Polars lazy scan&lt;/strong&gt;&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;3.51&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;2.56&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;2.43&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;2.49&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;2.47&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;&lt;strong&gt;2.69&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;倒排索引 (2-gram)&lt;/strong&gt;&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;2.71&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;3.26&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;2.78&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;3.24&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;2.37&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;&lt;strong&gt;2.87&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;4&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;Polars in-memory&lt;/strong&gt;&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;2.67&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;3.61&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;2.98&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;3.21&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;3.21&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;&lt;strong&gt;3.13&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;5&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;DuckDB contains()&lt;/strong&gt;&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;3.72&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;3.23&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;3.18&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;3.91&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;4.41&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;&lt;strong&gt;3.69&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;6&lt;/td&gt;
+&lt;td&gt;Parquet + DuckDB&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;4.63&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;4.37&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;4.55&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;4.88&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;4.84&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;&lt;strong&gt;4.65&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;7&lt;/td&gt;
+&lt;td&gt;ripgrep 多文件并行&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;10.65&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;10.26&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;9.48&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;10.32&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;9.05&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;&lt;strong&gt;9.95&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;8&lt;/td&gt;
+&lt;td&gt;DuckDB FTS (BM25)&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;12.53&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;11.77&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;12.85&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;11.82&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;12.78&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;&lt;strong&gt;12.35&lt;/strong&gt;³&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;9&lt;/td&gt;
+&lt;td&gt;ripgrep (SIMD, 单文件)&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;13.24&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;13.77&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;13.40&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;14.14&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;13.10&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;&lt;strong&gt;13.53&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;10&lt;/td&gt;
+&lt;td&gt;mmap 直接搜索&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;17.00&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;22.62&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;22.86&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;31.36&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;30.52&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;&lt;strong&gt;24.87&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;11&lt;/td&gt;
+&lt;td&gt;Bloom Filter + 扫描&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;25.34&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;25.25&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;25.06&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;26.68&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;27.01&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;&lt;strong&gt;25.87&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;12&lt;/td&gt;
+&lt;td&gt;SQLite mmap LIKE&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;37.45&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;37.45&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;37.92&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;37.83&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;37.81&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;&lt;strong&gt;37.69&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;13&lt;/td&gt;
+&lt;td&gt;SQLite LIKE&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;43.13&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;41.40&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;41.50&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;41.51&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;41.46&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;&lt;strong&gt;41.80&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;14&lt;/td&gt;
+&lt;td&gt;grep (BSD)&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;139.10&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;136.86&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;141.42&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;122.54&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;124.16&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;&lt;strong&gt;132.82&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;15&lt;/td&gt;
+&lt;td&gt;zstd 流式解压搜索&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;161.32&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;164.22&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;164.56&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;170.23&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;170.73&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;&lt;strong&gt;166.21&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;blockquote&gt;
+&lt;p&gt;¹ FTS5 只对 ≥3字符 的关键词有效，取3个有效关键词平均&lt;br /&gt;
+² trigram tokenizer 无法匹配 2 字符的中文词&lt;br /&gt;
+³ DuckDB FTS 默认 tokenizer 不支持中文，返回 0 结果（延迟仍可参考）&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4&gt;视觉化排名&lt;/h4&gt;
+&lt;p&gt;&lt;small&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt; 1.                                                            █   0.31ms SQLite FTS5
+ 2.                                                            █   2.69ms Polars lazy
+ 3.                                                            █   2.87ms 倒排索引
+ 4.                                                            █   3.13ms Polars in-mem
+ 5.                                                            █   3.69ms DuckDB contains
+ 6.                                                           ██   4.65ms Parquet+DuckDB
+ 7.                                                         ████   9.95ms rg多文件并行
+ 8.                                                       ██████  12.35ms DuckDB FTS
+ 9.                                                       ██████  13.53ms ripgrep (SIMD
+10.                                                 ████████████  24.87ms mmap 直接搜索
+11.                                                 ████████████  25.87ms Bloom+扫描
+12.                                           ██████████████████  37.69ms SQLite mmap LIKE
+13.                                         ████████████████████  41.80ms SQLite LIKE
+14. ████████████████████████████████████████████████████████████ 132.82ms grep (BSD
+15. ████████████████████████████████████████████████████████████ 166.21ms zstd流式解压
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;/small&gt;&lt;/p&gt;
+&lt;h4&gt;复合条件查询（指定用户 + 时间范围 + 关键词"会议"）&lt;/h4&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;方案&lt;/th&gt;
+&lt;th style="text-align: right;"&gt;延迟 (ms)&lt;/th&gt;
+&lt;th style="text-align: right;"&gt;倍率(vs grep)&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;SQLite indexed&lt;/strong&gt;&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;&lt;strong&gt;2.80&lt;/strong&gt;&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;76x&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;DuckDB&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;4.57&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;47x&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Polars in-memory&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;7.02&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;30x&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ripgrep pipe&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;20.47&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;10x&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;grep pipe&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;213.90&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;1x&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h4&gt;存储大小&lt;/h4&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;格式&lt;/th&gt;
+&lt;th style="text-align: right;"&gt;大小&lt;/th&gt;
+&lt;th style="text-align: right;"&gt;vs TSV&lt;/th&gt;
+&lt;th&gt;说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Parquet (zstd)&lt;/strong&gt;&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;&lt;strong&gt;8.3 MB&lt;/strong&gt;&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;0.18x&lt;/td&gt;
+&lt;td&gt;列式 + 字典编码 + 压缩&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;zstd 压缩 TSV&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;12.7 MB&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;0.27x&lt;/td&gt;
+&lt;td&gt;纯压缩&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;DuckDB + FTS&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;26.0 MB&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;0.55x&lt;/td&gt;
+&lt;td&gt;含全文索引&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;TSV 纯文本&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;47.0 MB&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;1.00x&lt;/td&gt;
+&lt;td&gt;基线&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;SQLite&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;69.2 MB&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;1.47x&lt;/td&gt;
+&lt;td&gt;B-tree 开销&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;SQLite + FTS5&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;116.8 MB&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;2.49x&lt;/td&gt;
+&lt;td&gt;trigram 索引翻倍&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3&gt;各方案深度分析&lt;/h3&gt;
+&lt;h4&gt;Tier 1: 亚毫秒级（&amp;lt; 1ms）&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;SQLite FTS5 (trigram)&lt;/strong&gt;&lt;br /&gt;
+- 原理：对 content 字段的每个 3 字符子串建倒排索引&lt;br /&gt;
+- 优点：查询极快（0.3-0.6ms），无需额外依赖&lt;br /&gt;
+- 缺点：&lt;strong&gt;索引体积翻倍&lt;/strong&gt;（+68MB）；trigram 无法匹配 ≤2 字符的关键词&lt;br /&gt;
+- 适用：搜索词通常 ≥3 字符的场景&lt;/p&gt;
+&lt;h4&gt;Tier 2: 低毫秒级（2-5ms）&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;Polars (lazy/in-memory)&lt;/strong&gt;&lt;br /&gt;
+- 原理：Rust 实现的 DataFrame 引擎，列式内存布局 + SIMD 字符串匹配&lt;br /&gt;
+- 优点：&lt;strong&gt;Parquet 文件仅 8.3MB&lt;/strong&gt;（最小！），查询 2-3ms，复合查询也快（7ms）&lt;br /&gt;
+- 缺点：需要加载到内存；Python 库依赖&lt;br /&gt;
+- 杀手锏：&lt;strong&gt;8MB 的 Parquet 文件 + 3ms 搜索延迟，这是存储效率和速度的最佳平衡点&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;倒排索引 (2-gram, 内存)&lt;/strong&gt;&lt;br /&gt;
+- 原理：搜索引擎最经典的思路，对所有 2-gram 建 posting list&lt;br /&gt;
+- 优点：构建仅 0.78s，查询 2.9ms，&lt;strong&gt;支持任意长度关键词&lt;/strong&gt;&lt;br /&gt;
+- 缺点：纯内存（需要序列化/加载），索引构建需要全量遍历&lt;br /&gt;
+- 适用：append-only 数据可以增量更新索引&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;DuckDB contains()&lt;/strong&gt;&lt;br /&gt;
+- 原理：列式存储，content 列连续存放，CPU cache 友好 + SIMD 扫描&lt;br /&gt;
+- 优点：无需专门索引即可 3.7ms；复合查询也仅 4.6ms；&lt;strong&gt;文件仅 26MB&lt;/strong&gt;&lt;br /&gt;
+- 缺点：需要 DuckDB 运行时&lt;br /&gt;
+- 杀手锏：&lt;strong&gt;不建任何索引，纯靠列式布局就比 SQLite LIKE 快 11 倍&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Parquet 文件 + DuckDB 零拷贝查询&lt;/strong&gt;&lt;br /&gt;
+- 原理：Parquet 本身就是列式格式，DuckDB 可以直接查询不需导入&lt;br /&gt;
+- 优点：文件仅 8.3MB，不需要数据库进程，查询 4.6ms&lt;br /&gt;
+- 缺点：每次查询需要启动 DuckDB 连接&lt;br /&gt;
+- 杀手锏：&lt;strong&gt;一个 8MB 的文件就是完整的"数据库"，任何语言都能读&lt;/strong&gt;&lt;/p&gt;
+&lt;h4&gt;Tier 3: 10ms 级&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;ripgrep 多文件并行&lt;/strong&gt;&lt;br /&gt;
+- 原理：把消息分块成多个文件，ripgrep 的 work-stealing 线程池并行搜索&lt;br /&gt;
+- 优点：比单文件 ripgrep 快 ~35%（10ms vs 13.5ms）&lt;br /&gt;
+- 缺点：文件管理复杂&lt;br /&gt;
+- 适用：数据天然按时间分文件存储的场景&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;ripgrep (SIMD, 单文件)&lt;/strong&gt;&lt;br /&gt;
+- 原理：AVX2/NEON 每周期处理 16-32 字节，多线程（对单文件仍用单线程）&lt;br /&gt;
+- 优点：零配置，即装即用&lt;br /&gt;
+- 缺点：对单文件只能单线程&lt;/p&gt;
+&lt;h4&gt;Tier 4: 失败/不推荐的"邪路"&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;Bloom Filter 分块预过滤&lt;/strong&gt;&lt;br /&gt;
+- 问题：中文常用 2-gram 只有 ~690 种，&lt;strong&gt;每个块都包含所有 n-gram&lt;/strong&gt;，过滤率为 0&lt;br /&gt;
+- 结论：对高频 n-gram 的数据集完全无效，白费构建时间&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;zstd 流式解压搜索&lt;/strong&gt;&lt;br /&gt;
+- 问题：Python 解压+搜索 166ms，比不压缩的 grep 还慢&lt;br /&gt;
+- 结论：CPU 密集的解压抵消了 I/O 节省。如果数据在 SSD 上，不如直接读原文&lt;br /&gt;
+- 可能有用的场景：数据在网络存储/HDD 上，I/O 是瓶颈时&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;DuckDB FTS (BM25)&lt;/strong&gt;&lt;br /&gt;
+- 问题：默认 tokenizer（类似 ICU word boundary）不支持中文&lt;br /&gt;
+- 结论：需要自定义 tokenizer 或等 DuckDB 支持 trigram/CJK&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;mmap 直接搜索&lt;/strong&gt;&lt;br /&gt;
+- 表现：24.87ms，比 ripgrep 慢 2 倍&lt;br /&gt;
+- 原因：Python 的 &lt;code&gt;mmap.find()&lt;/code&gt; 是朴素搜索，没有 SIMD 优化&lt;br /&gt;
+- 如果用 C/Rust 实现的 mmap + SIMD，预期接近 ripgrep 水平&lt;/p&gt;
+&lt;h3&gt;推荐方案排名&lt;/h3&gt;
+&lt;h4&gt;如果从零设计微信聊天存储&lt;/h4&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style="text-align: center;"&gt;优先级&lt;/th&gt;
+&lt;th&gt;方案&lt;/th&gt;
+&lt;th style="text-align: right;"&gt;搜索延迟&lt;/th&gt;
+&lt;th style="text-align: right;"&gt;存储&lt;/th&gt;
+&lt;th&gt;理由&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style="text-align: center;"&gt;🥇&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;Parquet + Polars/DuckDB&lt;/strong&gt;&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;3-5ms&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;8 MB&lt;/td&gt;
+&lt;td&gt;存储最小、搜索极快、格式通用、append 友好&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align: center;"&gt;🥈&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;DuckDB 数据库&lt;/strong&gt;&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;3.7ms&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;26 MB&lt;/td&gt;
+&lt;td&gt;单文件数据库、列式、SQL 查询、FTS 索引可选&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align: center;"&gt;🥉&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;SQLite + FTS5&lt;/strong&gt;&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;0.3ms&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;117 MB&lt;/td&gt;
+&lt;td&gt;最快搜索(有索引)、但索引太大&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align: center;"&gt;4&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;ripgrep + 分块 TSV&lt;/strong&gt;&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;10ms&lt;/td&gt;
+&lt;td style="text-align: right;"&gt;47 MB&lt;/td&gt;
+&lt;td&gt;最简单、无依赖、人类可读&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h4&gt;如果要"一行命令搜聊天记录"&lt;/h4&gt;
+&lt;pre&gt;&lt;code class="language-bash"&gt;# 方案 A#: ripgrep 搜纯文本 (~10ms)
+rg &amp;quot;微信支付&amp;quot; messages.tsv
+
+## 方案 B: DuckDB 直接查 Parquet (~5ms)
+duckdb -c &amp;quot;SELECT * FROM read_parquet('messages.parquet') WHERE contains(content, '微信支付')&amp;quot;
+
+## 方案 C: DuckDB 复合查询 (~5ms)  
+duckdb -c &amp;quot;SELECT * FROM read_parquet('messages.parquet')
+           WHERE talker='wxid_xxx' AND createTime &amp;gt; 1672531200
+           AND contains(content, '会议')&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;最终结论&lt;/h3&gt;
+&lt;h4&gt;"用 grep 代替 SQLite" — 部分正确，但格局太小&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;ripgrep 比 SQLite LIKE 快 3 倍&lt;/strong&gt;（13ms vs 42ms）— "grep 派"的论据成立&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;但 DuckDB/Polars 比 ripgrep 又快 4 倍&lt;/strong&gt;（3ms vs 13ms）— 列式才是正道&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Parquet 比纯文本还小 5.6 倍&lt;/strong&gt;（8MB vs 47MB）— 省空间还更快&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;复合查询（按人+时间+关键词）SQLite 仍然最强&lt;/strong&gt;（2.8ms）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4&gt;真正的启示&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;聊天记录是 append-only 数据 → 最适合列式存储 (Parquet/DuckDB)&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;不需要 RDBMS 的事务/锁/B-tree 开销&lt;/li&gt;
+&lt;li&gt;列式布局让 &lt;code&gt;content&lt;/code&gt; 列连续存放，CPU cache 极度友好&lt;/li&gt;
+&lt;li&gt;zstd 字典压缩对重复模式多的聊天文本压缩率惊人（82%）&lt;/li&gt;
+&lt;li&gt;追加写入只需要 append 新的 row group&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;微信搜索慢的根因&lt;/strong&gt;：不是 SQLite vs grep 的问题，而是 &lt;strong&gt;SQLCipher 加密的 PBKDF2 256000 轮&lt;/strong&gt; + 行式存储对全文扫描不友好。如果用 Parquet + 硬件 AES，可以同时做到加密和极速搜索。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4&gt;脑洞：终极方案&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;messages.parquet (8MB, zstd压缩, 硬件AES加密)
+  → DuckDB/Polars 直接查询 (3-5ms)
+  → 可选: 内存倒排索引 for &amp;lt; 1ms 搜索
+  → 追加: 新消息 append 到 staging 文件, 定期 merge
+  → 导出: parquet 是开放格式, 任何语言/工具可读
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;复现&lt;/h3&gt;
+&lt;pre&gt;&lt;code class="language-bash"&gt;pip install duckdb polars zstandard cryptography
+python3 benchmark.py 500000     # 基础测试 (SQLite/grep)  
+python3 benchmark_v2.py 500000  # 扩展测试 (DuckDB/Polars/mmap/...)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;源码放在 &lt;a href="https://github.com/est/snippets/tree/master/grep_vs_sqlite"&gt;https://github.com/est/snippets/tree/master/grep_vs_sqlite&lt;/a&gt; 。&lt;/p&gt;
+&lt;p&gt;模拟聊天记录有500,000行 一个 50MB 的 .tsv 太大了。自己让AI根据文章和最上面表结构生成一份吧。&lt;/p&gt;
+&lt;h3&gt;后记&lt;/h3&gt;
+&lt;p&gt;被Polars的性能震惊了。说实话如果换我肯定不会选sqlite。聊天记录又不会改。ACID的 OLTP 明显浪费&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">est</dc:creator><pubDate>Thu, 09 Jul 2026 11:02:00 +0800</pubDate><guid isPermaLink="false">tag:None,2026-07-09:/2026/stdout-26</guid><category>stdout</category></item><item><title>[AI] curl -NT. 导致100% CPU原因</title><link>https://blog.est.im/2026/stdout-25</link><description>&lt;p&gt;有AI就是好使，搁以前自己得盯半天也看不明白。。。&lt;/p&gt;
+&lt;h3&gt;问题确认&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;curl -NT.&lt;/code&gt; 在连接一个持续推送数据的 streaming 服务器时，会产生一个 &lt;strong&gt;紧密的 pause/unpause 循环&lt;/strong&gt;，导致 100% CPU。&lt;/p&gt;
+&lt;h3&gt;根因分析&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;-T.&lt;/code&gt;（注意是点号，不是减号）将 stdin 设为&lt;strong&gt;非阻塞模式&lt;/strong&gt;，然后依赖 &lt;code&gt;EAGAIN&lt;/code&gt; + &lt;code&gt;CURL_READFUNC_PAUSE&lt;/code&gt; 机制来避免阻塞。核心循环发生在三个回调之间：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;第一步 — 上传尝试失败&lt;/strong&gt;（&lt;code&gt;src/tool_cb_rea.c&lt;/code&gt;）：&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-c"&gt;  {
+    rc = read(per-&amp;gt;infd, buffer, sz * nmemb);
+    if(rc &amp;lt; 0) {
+      if(errno == EAGAIN) {
+        errno = 0;
+        config-&amp;gt;readbusy = TRUE;
+        return CURL_READFUNC_PAUSE;
+      }
+      /* since size_t is unsigned we cannot return negative values fine */
+      rc = 0;
+    }
+  }
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;stdin 没数据 → &lt;code&gt;read()&lt;/code&gt; 返回 &lt;code&gt;EAGAIN&lt;/code&gt; → 设 &lt;code&gt;readbusy=TRUE&lt;/code&gt; → 暂停上传。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;第二步 — 下载数据到达立刻解除暂停&lt;/strong&gt;（&lt;code&gt;src/tool_cb_wrt.c&lt;/code&gt;）：&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-c"&gt;  if(config-&amp;gt;readbusy) {
+    config-&amp;gt;readbusy = FALSE;
+    curl_easy_pause(per-&amp;gt;curl, CURLPAUSE_CONT);
+  }
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;streaming 服务器持续发送数据 → &lt;code&gt;tool_write_cb&lt;/code&gt; 被不断调用 → 每次都&lt;strong&gt;无等待地立刻解除上传暂停&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;第三步 — 进度回调只有 1ms 退避&lt;/strong&gt;（&lt;code&gt;src/tool_cb_rea.c&lt;/code&gt;）：&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-c"&gt;  if(config-&amp;gt;readbusy) {
+    if(ulprev == ulnow) {
+#ifndef _WIN32
+      waitfd(1, per-&amp;gt;infd);
+#else
+      /* sleep */
+      curlx_wait_ms(1);
+#endif
+    }
+
+    config-&amp;gt;readbusy = FALSE;
+    curl_easy_pause(per-&amp;gt;curl, CURLPAUSE_CONT);
+  }
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;tool_readbusy_cb&lt;/code&gt; 有 1ms 的 &lt;code&gt;waitfd&lt;/code&gt; 退避，但被 &lt;code&gt;tool_write_cb&lt;/code&gt; 的无等待解除抢先了。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;完整的死循环（每次 &lt;code&gt;curl_multi_perform&lt;/code&gt; 内）&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;在 &lt;code&gt;lib/transfer.c&lt;/code&gt; 的 &lt;code&gt;Curl_sendrecv&lt;/code&gt; 中，处理顺序是&lt;strong&gt;先下载后上传&lt;/strong&gt;：&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-c"&gt;  if(k-&amp;gt;keepon &amp;amp; KEEP_RECV) {
+    result = sendrecv_dl(data, k);
+    if(result || data-&amp;gt;req.done)
+      goto out;
+  }
+
+  /* If we still have writing to do, we check if we have a writable socket. */
+  if(Curl_req_want_send(data)) {
+    result = sendrecv_ul(data);
+    if(result)
+      goto out;
+  }
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;所以单次迭代内：&lt;br /&gt;
+1. &lt;code&gt;sendrecv_dl&lt;/code&gt; → 读到 streaming 数据 → &lt;code&gt;tool_write_cb&lt;/code&gt; → 看到 &lt;code&gt;readbusy=TRUE&lt;/code&gt; → &lt;strong&gt;立刻解除暂停&lt;/strong&gt;（零等待）&lt;br /&gt;
+2. &lt;code&gt;sendrecv_ul&lt;/code&gt; → &lt;code&gt;tool_read_cb&lt;/code&gt; → stdin &lt;code&gt;EAGAIN&lt;/code&gt; → &lt;strong&gt;又暂停&lt;/strong&gt;，&lt;code&gt;readbusy=TRUE&lt;/code&gt;&lt;br /&gt;
+3. 回到 &lt;code&gt;curl_multi_poll&lt;/code&gt; → 下载 socket 有数据 → &lt;strong&gt;立刻返回&lt;/strong&gt;（不会 sleep）&lt;br /&gt;
+4. 重复 1-3&lt;/p&gt;
+&lt;p&gt;而 &lt;code&gt;lib/easy.c&lt;/code&gt; 的主循环：&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-c"&gt;  while(!done &amp;amp;&amp;amp; !mresult) {
+    int still_running = 0;
+
+    mresult = curl_multi_poll(multi, NULL, 0, 1000, NULL);
+
+    if(!mresult)
+      mresult = curl_multi_perform(multi, &amp;amp;still_running);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;curl_multi_poll&lt;/code&gt; 的 1000ms 超时形同虚设——因为下载 socket 始终可读，&lt;code&gt;poll()&lt;/code&gt; 立刻返回。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;结果&lt;/strong&gt;：每秒跑上千次这个循环，每次包含多个系统调用（&lt;code&gt;poll&lt;/code&gt;、&lt;code&gt;read&lt;/code&gt;、&lt;code&gt;write&lt;/code&gt;），CPU 直接打满。&lt;/p&gt;
+&lt;h3&gt;问题本质&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;stdin 没有被加入 &lt;code&gt;curl_multi_poll&lt;/code&gt; 的 pollset&lt;/strong&gt;。只有网络 socket 参与了 poll。所以 curl 无法高效地"同时等待 stdin 和网络数据"，只能靠 &lt;code&gt;tool_write_cb&lt;/code&gt; 里的盲目 unpause 来弥补，在 streaming 场景下退化成忙等。&lt;/p&gt;
+&lt;h3&gt;用户侧解决方案&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;如果你不需要从 stdin 上传数据&lt;/strong&gt;（只是想看 streaming 响应），不要用 &lt;code&gt;-T.&lt;/code&gt;：&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-bash"&gt;# 正确的方式：只看 streaming 输出
+curl -N https://streaming-server/events
+
+# 或者重定向 stdin 为空
+curl -NT. https://streaming-server/events &amp;lt; /dev/null
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;&amp;lt; /dev/null&lt;/code&gt; 会让 &lt;code&gt;read()&lt;/code&gt; 返回 0（EOF）而不是 EAGAIN，不会进入 pause/unpause 循环。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;如果确实需要双向 streaming&lt;/strong&gt;（边上传 stdin 边接收），目前没有完美的用户侧 workaround。可以考虑：&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-bash"&gt;# 用管道加一层缓冲，减轻空转（效果有限）
+cat | curl -NT. https://streaming-server/events
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;源码级修复思路&lt;/h3&gt;
+&lt;p&gt;如果要在源码层面修复，最直接的方案是&lt;strong&gt;在 &lt;code&gt;tool_write_cb&lt;/code&gt; 中去掉盲目 unpause&lt;/strong&gt;，改为只在 &lt;code&gt;tool_readbusy_cb&lt;/code&gt; 中带退避地 unpause，并增大退避时间：&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-c"&gt;// tool_cb_wrt.c — 去掉这段，或加条件限制
+// 不再从 write callback 无脑解除上传暂停
+if(config-&amp;gt;readbusy) {
+    config-&amp;gt;readbusy = FALSE;
+    curl_easy_pause(per-&amp;gt;curl, CURLPAUSE_CONT);  // 删除或改为有条件触发
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class="language-c"&gt;// tool_cb_rea.c — 增大退避时间
+if(config-&amp;gt;readbusy) {
+    if(ulprev == ulnow) {
+        waitfd(100, per-&amp;gt;infd);  // 从 1ms 提高到 100ms
+    }
+    config-&amp;gt;readbusy = FALSE;
+    curl_easy_pause(per-&amp;gt;curl, CURLPAUSE_CONT);
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;更彻底的方案是把 stdin fd 加入 &lt;code&gt;curl_multi_poll&lt;/code&gt; 的 extra fds，但这需要改 &lt;code&gt;curl_multi_poll&lt;/code&gt; 的调用方式，涉及面更大。&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">est</dc:creator><pubDate>Wed, 08 Jul 2026 16:05:00 +0800</pubDate><guid isPermaLink="false">tag:None,2026-07-08:/2026/stdout-25</guid><category>stdout</category></item><item><title>或许「数羊」真是个有效的入睡法</title><link>https://blog.est.im/2026/stderr-23</link><description>&lt;p&gt;无聊刷博客，《&lt;a href="https://yage.ai/ai-sleep.html"&gt;AI如何导致和修复了我的失眠问题&lt;/a&gt;》 这老哥真猛，通过统计规律发现自己 失眠 的罪魁祸首。（不剧透。感兴趣点开阅读）&lt;/p&gt;
+&lt;p&gt;我自己也写过 &lt;a href="https://blog.est.im/2024/stdout-05"&gt;快速入睡的技巧和原理&lt;/a&gt; 以及 &lt;a href="https://blog.est.im/2024/stderr-15"&gt;强行入睡方法 v2.0&lt;/a&gt; 其实我都忘记这个 2.0 方法了。都不知道自己当时怎么想到这个办法的，原来自己写的东西也能常看常新（老登健忘症😂），所以还是要多写，多记录&lt;/p&gt;
+&lt;p&gt;本文章的讨论都是基于这个 2.0方法的，接着看之前请务必点开 2.0  那个链接，不长，一会儿就看完。&lt;/p&gt;
+&lt;p&gt;然后我就无聊让AI 评价一下这个 2.0 方法是不是真的，然后AI说真有学者在搞类似的，关键词 ：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;睡前“认知打断 / imagery distraction&lt;/li&gt;
+&lt;li&gt;cognitive shuffle&lt;/li&gt;
+&lt;li&gt;serial diverse imagining (SDI)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;然后我去搜了下&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;TikTok和Instagram上爆火的“认知洗牌法”，火到连医生都开始推荐。选一个随机的单词（比如 cake，蛋糕），专注于这个词的第一个字母（C），然后列出一串以这个字母开头的词：cat（猫）、carrot（胡萝卜）、calendar（日历）等等，一边列举，一边在脑中想象这些词的画面。当你准备好了，就转到下一个字母（A），重复上述过程，继续进行下去（K、E），直到你睡着或者想换一个新词为止&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;嗯，和我的方法居然殊途同归，只是更加麻烦，需要调用大脑的语言区。&lt;/p&gt;
+&lt;p&gt;但是自媒体这个标题让我产生了兴趣 《别再数羊了》，我恰好周末刷了 西藏那曲拉姆 的视频 &lt;a href="https://www.douyin.com/video/7602897143380135178"&gt;藏族人家里几十上百头牦牛，如何识别是不是自己家的？&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;然后突然发现一个被大多数人忽略的惊人的事实：放牧人的白天是极度无聊和空虚的，以至于他/她们能辨识自己每一头羊的特征、性别，甚至给每头羊起个名字。视频说牦牛和人一样，每一头都有独一无二的毛色、长相、形态等。&lt;/p&gt;
+&lt;p&gt;脸上有点黑？叫小黑；黑白相间的？叫花脸。按脾气起名字，暴躁哥，温顺妹；还有谁和谁喜欢一起吃草，小牛的母牛妈妈是谁等等。&lt;/p&gt;
+&lt;p&gt;所以这两件事就串起来了。「数羊」这事儿一定是牧区的人发明出来的，比如英国乡下，但是城里人哪里知道这些细节啊。&lt;/p&gt;
+&lt;p&gt;牧民晚上躺床上，没事干，说不定就给自己牛羊编故事造剧情啊。而且关键词是「数」，你不能陷入一个逻辑推理细节，必须不停地轮换，把羊变成高频切换的具象个体（有名字、有外形、有性格），才能保证大脑疲惫然后入睡。&lt;/p&gt;
+&lt;p&gt;AI总结：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;对于古代或乡村的牧羊人来说，夜晚盘点羊群是一天结束时最让人安心的闭环。他们脑海中的羊，确实是毛发质感、体态特征各异的具象实体。&lt;br /&gt;
+现代城市人剥离了这种生活语境，把一幅丰富的田园3D渲染图，降维成了枯燥的Excel递增表格，自然也就失去了助眠的神奇功效。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;我觉得AI真有点东西的。清点生产资料也是被忽略的一环。如果我睡前都能盘点自己该做的事儿都做了，羊吃饱了，明天会更好，没啥落下的，那我肯定也睡得安稳啊。&lt;/p&gt;
+&lt;p&gt;但是现代人难就难在很多事是跨很多天的，入睡是非常不情愿的。如果有精力很多人甚至愿意熬夜。&lt;/p&gt;
+&lt;p&gt;都怪爱迪生，本来以为发明电灯泡给人类漫长的黑夜带来光明，没想到人类却用这玩意来加班和难眠！！😤 😤 😤 如果太阳下山就睡觉，就算失眠4小时你到23点也睡着了 😂&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">est</dc:creator><pubDate>Mon, 06 Jul 2026 15:51:00 +0800</pubDate><guid isPermaLink="false">tag:None,2026-07-06:/2026/stderr-23</guid><category>stderr</category></item><item><title>唯物主义「天命」论</title><link>https://blog.est.im/2026/stderr-22</link><description>&lt;p&gt;看到一篇雄文《&lt;a href="https://www.zhihu.com/question/576083946/answer/2055730121491879314"&gt;明末士大夫为什么毫无气节纷纷变节投降满清？&lt;/a&gt;》大受启发，想看原文的可以点开链接，下面是精简和摘录:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;因为程朱理学在理论存面存在漏洞，被鞑子无意之间利用了，事实上大部分的鞑子统治者在这方面，也都是知其然而不知所以然。&lt;br /&gt;
+不否认明末也有很多了不起的仁人志士，但如果你对中国历史有些疑惑，觉得似乎宋朝之后中国就有点不一样了，那恭喜你，你的直觉是对的。由于元代留下的遗毒过甚，明朝没能拨乱反正，元明清三代，所有的皇帝和“儒家士大夫”，都是失礼而不自知之人。元明清三代的所谓“礼法”，放在先秦两汉的大学者们面前，诸子百家不管哪家，都一眼就能看出来全是假礼。如果墨子这个儒家最大的反对者看见了，估计更是嘲笑孔子能笑的棺材板都压不住。这些“假礼”，就是元明清三代那些僵化的等级秩序、规规矩矩。出于汉人的直觉，厌恶这些是再正常不过了。&lt;br /&gt;
+一、建用皇极&lt;br /&gt;
+宋以前儒学，与宋明理学不是同一种思想。先秦至汉唐儒学的最高原则是天命与大中之道，而不是君主本身。朱熹重新解释《尚书·洪范》"皇极"，从九畴排第五提高到最高优先级， 把它解释为 君主是天下的最高标准，天下围绕君主建立秩序。，从而改变了儒家的政治哲学。&lt;br /&gt;
+二 · 定于一尊&lt;br /&gt;
+元朝恢复科举时规定：四书、五经必须按照朱熹注释考试，使其成为与功名利禄直接挂钩的唯一标准。于是理学不再只是一个前朝有争议的一个"逆党"学说，而成为整个帝国唯一的意识形态。明清完全继承了这一制度。&lt;br /&gt;
+三、诸夏之亡&lt;br /&gt;
+《论语》中孔子其实始终强调，华夏共同体高于个人君臣关系。例如孔子称赞管仲，就是因为即使“不忠”，改事新君，只要能够保卫华夏，也仍然值得肯定。但程朱理学更加重视君臣名分、上下秩序、皇权连续性，于是出现一种新的逻辑：即使皇帝是异族，也不能没有皇帝。1908年孔令贻把德国皇帝威廉二世肖像迎进了孔府&lt;br /&gt;
+四、天命之礼&lt;br /&gt;
+孔子的礼，本质上来源于 天命。所以：礼约束君主，君主不能创造礼。而理学实践中却逐渐变成皇帝成为礼法的最终解释者。于是礼不再约束权力，而成为权力工具。&lt;br /&gt;
+五、凡心之仁&lt;br /&gt;
+基督教的本质是爱与诫二元一体的罪文化，那么发源自中国的东亚文化，本质就是仁与礼二元一体的耻文化。&lt;br /&gt;
+基督教中所谓的爱，叫做“Agape”。这是一个专有词，它有多重要呢？欧洲所有国家，不管哪种语言，它的拼写方式都是一致的，一字不易。“Agape”的源头是神，它是一种具有普世性的博爱。而“仁”和“Agape”的区别在于，中国的“仁”，其源头是凡人，是“己所不欲勿施于人”，它是一种推己及人的有差等之爱。&lt;br /&gt;
+华夷之辩是“礼”的边界，“礼”是对“仁”的约束。面对民族危机时，个人、家庭利益、官职利益、君臣秩序都会压倒共同体利益。因此许多人最终选择保身、顺从、投降，而不是抗清。&lt;br /&gt;
+（注：这里其实用 “异端” 和 “有经人” 对比更加强烈）&lt;br /&gt;
+六、知行合一&lt;br /&gt;
+孔子、董仲舒的礼法，理论源头是天帝，实践中确实也按天帝至上来执行。而程朱理学的礼法，理论源头是天理，但是实践中，理学的礼法源头压根不是天理！在以前，经筵都是大儒给皇帝讲课，到了乾隆那，变成皇帝给大儒讲课了。&lt;br /&gt;
+先秦两汉礼法的源头是神？因为礼法的源头就不能是一个具体的人！礼法是用来栓人的保守性，如果礼法的源头是人，那么栓着你的绳子就牵在那个人手上，你就是那个人的奴才，礼法就成了赤裸裸的等级压迫。&lt;br /&gt;
+如果天帝无法约束皇权，那么天帝也不能保护皇权。天帝不能保护皇权，皇帝就只能自己保护自己，于是朱元璋废除了丞相制度。所谓明清飞速膨胀的君权，其实和南北朝盛产的疯子皇帝有异曲同工之妙。跟着龙椅遗传的精神病，本质是因为坐在龙椅上的人没有安全感。没有人相信天命，连皇帝本人都不相信自己真正“受命于天”。而对于儒生大臣，后人说张居正是“常务副皇帝”。&lt;br /&gt;
+七、失礼之国&lt;br /&gt;
+（作者的一些感想，比较杂，不引述了）&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;看完之后真过瘾。本来想着今天的键政就到这了。&lt;/p&gt;
+&lt;p&gt;特别是第二点，最近几年我逐渐从对“科举”的好感，降低了。学生时代总有那么一些“考功名”的亲切感，但是现实世界还是觉得“军功合伙人”更优。&lt;/p&gt;
+&lt;p&gt;但是有一个更大的疑惑，转念一想不对劲。于是补充一点我自己的观点。&lt;/p&gt;
+&lt;p&gt;皇帝这个岗位，从秦到唐，都是一把手承包了世俗君权，和神权的双重责任。皇帝在赵政之前实际上是两个岗位，大祭司负责给「帝」传话，王中王称皇负责行政。&lt;/p&gt;
+&lt;p&gt;宋以后皇帝把道德秩序这一块外包给儒生了，自己关起门做皇家经营了，剩下的全是算计。&lt;/p&gt;
+&lt;p&gt;说得直白点汉唐的皇帝还勉强要点b脸，遇到难堪的事，还得想办法给手下和民间一点说法。&lt;/p&gt;
+&lt;p&gt;宋以后就是无情的 打工 - 服从 叙事。&lt;/p&gt;
+&lt;p&gt;我是真的越来越看不起大怂国。我把内心抱怨说给AI，AI指出&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;宋代皇帝其实仍然非常受士大夫制约&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;我反驳：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;例如宋代皇帝其实仍然非常受士大夫制约，需要合理分赃才能一起搜刮老百姓。造成有史以来遍地造反运动。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;AI当时就不乐意了。把教科书和网上常见吹捧宋朝的资料抬出来了。比如说宋朝其实造反的规模和烈度没那么多&lt;/p&gt;
+&lt;p&gt;但是我想说，你把大半个中国都丢干净了，西夏 辽金的汉人躺棺材里了，当然北境无人“造反”了。因为别人都被占领了。&lt;/p&gt;
+&lt;p&gt;秦汉 隋唐造反不就是关中和河北人打架吗？这一毛病从姬发那一辈儿就没停过。天子这一岗位说的直白点就是给大家当调停人，pax sinica 。你宋说白了就一个节度使，偏安江淮一隅，还这么多造反的。呸！&lt;/p&gt;
+&lt;p&gt;AI 被这个角度刁钻的回答干懵逼了。说你这个框架，衡量皇朝优劣的标准不是"有没有起义"，而是 能不能维持整个华夏共同体的秩序。那么很多评价都会变。最后还嘴硬一句，宋朝其实内部治理得很好啦，最终是被蒙古人迫不得已干趴下的。&lt;/p&gt;
+&lt;p&gt;我当时就火了。对蒙古你好意思讲“战争”？实际上周 秦 汉 唐 的草原治理能力，也是 “天命” 的支柱啊。周武王牧誓，手里拿着的就是牦牛尾巴！不是象征汉人农耕的的锄头！纵观宋、金两朝，对草原的经略就是完全失败的。垃圾！&lt;/p&gt;
+&lt;p&gt;因为刚刚前一阵子看到 《&lt;a href="https://www.bilibili.com/video/BV1u8KZ68E1R/"&gt;金朝对草原的减丁，为何遏制不了蒙古的崛起&lt;/a&gt;》 这里 cue 一下&lt;/p&gt;
+&lt;p&gt;宋辽金真是一群乡镇企业家暴发户械斗。烂得要命。唉。你仔细想一下宋吹，那些证据，多少是近代人牵强附会的？宋朝人自己觉得骄傲吗？给好评的，都是后世明清没当上官的文人吧？&lt;/p&gt;
+&lt;p&gt;天命最大的意义在哪里？给人指明前行的道路，给人以希望。即便黑暗中世纪教会和君权也是这么分工的。挫宋做到了啥？苟且罢了。&lt;/p&gt;
+&lt;p&gt;有人说，大宋“杯酒释兵权”终结了五代十国，功劳巨大。但从“天命”的角度讲，国之大事，在祀与戎。你老赵家没能给一个民族找到希望，也干不过架，你这个王权就没有存在的根基。说得直白一点，东亚这篇土地，从周天子那一辈人开始就是武装殖民模式。你不殖民，有的是蒙古人 女真人殖你的民。&lt;/p&gt;
+&lt;p&gt;其实一开始那个文章的框架来讨论一个具体的事就很有力度。如何评价北宋赵光义毁掉太原？&lt;/p&gt;
+&lt;p&gt;具体的事迹大家可以问下AI。正如文章里所说的，丢掉了 华夷之辩 这个“天命”。那别人河北幽州人全体投夷你也怨不了谁。你之后靖康之变都是报应。&lt;/p&gt;
+&lt;p&gt;网上对 “内亚” 的说法一直有巨大争议，阿姨那边一直说“武德注入”，实际上征服，殖民 和扩张这些说法太粗暴。但是如果天子不提供秩序，那么你也别怨替代秩序的出现；无德，丢天命，天命归别人。似乎就是这么简单的道理&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;政治空间是没有真空的&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;谁的组织度更高，谁的天命就更强。&lt;/p&gt;
+&lt;p&gt;联系到欧洲发家，启蒙运动 文艺复兴，是在抛弃君权 神权 这个思维定势下做到的。更厉害。&lt;/p&gt;
+&lt;p&gt;不过替代品似乎是——资本？一个侧面就是牛津剑桥主打神学专业，改成政治经济学&lt;/p&gt;
+&lt;p&gt;资本的扩张我觉得按照脉络去捋，是蒸汽机，发展纺织业，全球贸易。 归根结底是煤铁革命，但是仔细想，实际上是把战争的边界改成向几百亿年的太阳能存款挖出来消耗了。&lt;/p&gt;
+&lt;p&gt;农牧时代是拿当季的太阳能来pk。谁能提供摩擦最小的当季太阳能分配，谁就在古代“有德”，有“天命”&lt;/p&gt;
+&lt;p&gt;现代社会一样的。全球变暖，污染，绿色能源等，一直到社会公平正义。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;天命天命，天就是天上射下来的能量，命就是草木人间生命。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;哈哈哈这个解释如何？是不是很唯物。&lt;/p&gt;
+&lt;p&gt;天（能源）与命（生命负载）之间，能否实现最高效的转换与分配？&lt;/p&gt;
+&lt;p&gt;生命本身就是一个“负熵的过程”。生命存在的意义，就是把“天”射下来的能量，通过光合作用、通过食物链，转化为有序的社会结构、文明形态和思想结晶。&lt;/p&gt;
+&lt;p&gt;如果转换效率高、分配摩擦小： 生命、社会繁荣，这就叫“天命有归”。&lt;/p&gt;
+&lt;p&gt;如果中间商抽成太多，腐败、内卷、战略自残（如毁太原）： 能量（天）射下来了，却无法高效转化为“命（繁荣）”，能量在内部耗散了，这就是天命将尽。&lt;/p&gt;
+&lt;p&gt;大宋这种对外又送又怂，把“皇帝”这个singleton强行改成“兄弟之国”， 对内三冗，取缔军功兑现，换成“理学”考试，用首都的局部繁荣掩盖整体的失败。就是丢 天命 的典型。&lt;/p&gt;
+&lt;p&gt;古代的战争：争夺的是对“天光（土地）”的占有权。&lt;/p&gt;
+&lt;p&gt;现代的危机：焦虑的是“天光（太阳能存款）”快烧完了，我们该如何重新设计“命（人类社会）”的分配效率。&lt;/p&gt;
+&lt;p&gt;政治的本质就是能量管理工程。&lt;/p&gt;
+&lt;p&gt;天命 在过去，看重国体和人君，现代看政治制度科技政策。资本这个玩意，纵然有那么多毛病，但是很好的执行了“天命”&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">est</dc:creator><pubDate>Thu, 02 Jul 2026 16:07:00 +0800</pubDate><guid isPermaLink="false">tag:None,2026-07-02:/2026/stderr-22</guid><category>stderr</category></item><item><title>我的 Vibe Coding 最佳实践——ADR文档</title><link>https://blog.est.im/2026/stdout-24</link><description>&lt;p&gt;工作和业余也用AI写代码，大大小小项目都经历了。从 rules, skills, spec, agent 到  harness 都玩过了&lt;/p&gt;
+&lt;p&gt;从AI嘴里发现一条比较稳的套路——ADR文档&lt;/p&gt;
+&lt;p&gt;rule, skills, spec 这些东西最大的问题就是瞎jb指挥。ADR 的好处是记录why，以及决策演变历史。&lt;/p&gt;
+&lt;p&gt;贴一段&lt;a href="https://github.com/est/rss_aggr/blob/main/docs/ADR/001.project.ADR-howto.md"&gt;我整理的 ADR 文档&lt;/a&gt;就明白了： &lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-markdown"&gt;---
+title: 如何使用 ADR
+id: ADR-001
+date: 2026-06-26 09:01:21
+status: accepted
+---
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1&gt;ADR&lt;/h1&gt;
+&lt;p&gt;ADR（Architecture Decision Record，架构决策记录）的核心目标很简单：&lt;strong&gt;记录为什么做出了某个重要技术决策，而不是记录系统长什么样。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;目前比较常见的是 MADR、Nygard ADR 两种风格，但组织方式都大同小异。&lt;/p&gt;
+&lt;p&gt;一个团队通常会按下面几个层次组织。&lt;/p&gt;
+&lt;h2&gt;1. 一个 ADR 对应一个决策&lt;/h2&gt;
+&lt;p&gt;不要一个 ADR 写整个系统设计。&lt;/p&gt;
+&lt;p&gt;好的粒度例如：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;ADR-001 使用 PostgreSQL 作为主数据库&lt;br /&gt;
+ADR-002 API 使用 REST 而不是 GraphQL&lt;br /&gt;
+ADR-003 服务间通信采用 gRPC&lt;br /&gt;
+ADR-004 用户认证采用 OAuth2 + JWT&lt;br /&gt;
+ADR-005 使用事件驱动 Outbox Pattern&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;而不是&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;系统架构设计.md&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;因为几年以后，很难知道某个结论为什么来的。&lt;/p&gt;
+&lt;h2&gt;2. 编号保持永久&lt;/h2&gt;
+&lt;p&gt;一般都会固定编号。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;adr/
+
+0001-use-postgresql.md
+0002-use-rest-api.md
+0003-use-grpc.md
+0004-use-oauth2.md
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;编号一旦存在，就不要修改。&lt;/p&gt;
+&lt;p&gt;即使后来废弃：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;0003-use-grpc.md
+Status: Superseded by ADR-0018
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;这样引用不会失效。&lt;/p&gt;
+&lt;h2&gt;3. Status 非常重要&lt;/h2&gt;
+&lt;p&gt;一般都有状态。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Proposed&lt;/li&gt;
+&lt;li&gt;Accepted&lt;/li&gt;
+&lt;li&gt;Deprecated ❌&lt;/li&gt;
+&lt;li&gt;Superseded 🔄&lt;/li&gt;
+&lt;li&gt;Rejected ⛔️&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;例如：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Status: Accepted
+Date: 2026-06-19 01:02:03
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;如果后来换了：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Status: Superseded
+Superseded by: ADR-0018
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;而新的 ADR：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;ADR-0018
+Supersedes: ADR-0003
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;形成完整历史。&lt;/p&gt;
+&lt;h2&gt;4. 一个 ADR 的典型模板&lt;/h2&gt;
+&lt;pre&gt;&lt;code class="language-markdown"&gt;---
+title: ADR-008 使用 PostgreSQL
+id: ADR-008
+date: 2026-06-18 12:32:46
+status: accepted
+---
+
+
+## Context
+
+目前需要：
+
+- ACID
+- JSON 查询
+- 成熟生态
+
+候选：
+
+- PostgreSQL
+- MySQL
+- MongoDB
+
+## Decision
+
+选择 PostgreSQL。
+
+## Consequences
+
+优点：
+
+- SQL 功能完整
+- JSONB 支持优秀
+- 社区成熟
+
+缺点：
+
+- 运维复杂度略高
+- 分库分表方案需要额外设计
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;可以再加：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Alternatives
+
+Decision Drivers
+
+Trade-offs
+
+References
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;5. 按领域组织，而不是按时间（可选）&lt;/h2&gt;
+&lt;p&gt;在一个目录，用文件名体现领域：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;008.backend.use-grpc.md
+010.security.use-oauth.md
+012.frontend.react-query.md
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;这样编号保持连续，查找也方便。&lt;/p&gt;
+&lt;h2&gt;6. ADR 之间允许引用&lt;/h2&gt;
+&lt;p&gt;例如：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;ADR-0015
+
+Context
+
+依赖：
+- ADR-0002
+- ADR-0008
+
+Decision
+
+由于 ADR-0008 已经确定 PostgreSQL，
+因此 Outbox Pattern 可以直接利用事务。
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;形成决策网络，而不是孤立文档。&lt;/p&gt;
+&lt;h2&gt;7. ADR 只记录"为什么"&lt;/h2&gt;
+&lt;p&gt;这是很多团队最容易犯的错误。&lt;/p&gt;
+&lt;p&gt;不要写：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Controller
+Service
+Repository
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;这是设计文档。&lt;/p&gt;
+&lt;p&gt;ADR 应该写：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;为什么不用 MongoDB？
+
+为什么不用 GraphQL？
+
+为什么采用 Saga？
+
+为什么拆成多个 Service？
+
+为什么 Event Sourcing 被放弃？
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;重点永远是 &lt;strong&gt;Why&lt;/strong&gt;，而不是 &lt;strong&gt;What&lt;/strong&gt;。&lt;/p&gt;
+&lt;h2&gt;8. 和设计文档分开&lt;/h2&gt;
+&lt;p&gt;过去很多团队会这样组织：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;文档&lt;/th&gt;
+&lt;th&gt;回答的问题&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;RFC / Proposal&lt;/td&gt;
+&lt;td&gt;未来准备怎么做？&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ADR&lt;/td&gt;
+&lt;td&gt;为什么这样做？&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Architecture Doc&lt;/td&gt;
+&lt;td&gt;系统如何组织？&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Design Doc&lt;/td&gt;
+&lt;td&gt;某个功能如何实现？&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Runbook&lt;/td&gt;
+&lt;td&gt;如何运维？&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;流程是 RFC → ADR → Design Doc → Code。&lt;/p&gt;
+&lt;p&gt;RFC 用于讨论方案，达成决策后沉淀为 ADR；随后具体实现细节写入设计文档，最终落实到代码。这样既保留了决策依据，又避免 ADR 演变成冗长的设计说明。&lt;/p&gt;
+&lt;p&gt;在AI 时代，更简洁，易维护的方式是：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;ADR 形成决策历史；&lt;/li&gt;
+&lt;li&gt;DESIGN.md （小项目也可以直接放 README.md） 反应当前设计，大量引用 ADR 而不是重复。&lt;/li&gt;
+&lt;li&gt;迭代排期（spec，phase文档等）引用ADR作为缘由&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;p&gt;AI编写的项目，到后期，泥潭就是大量的docs。ADR 的好处是不用修订，全面引用+supersed。保证决策链清晰，低上下文成本&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">est</dc:creator><pubDate>Fri, 26 Jun 2026 09:40:00 +0800</pubDate><guid isPermaLink="false">tag:None,2026-06-26:/2026/stdout-24</guid><category>stdout</category></item><item><title>MacOS 快速插入当前时间</title><link>https://blog.est.im/2026/stdout-23</link><description>&lt;h2&gt;第一步：创建快捷指令&lt;/h2&gt;
+&lt;p&gt;打开 &lt;strong&gt;Shortcuts&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;点击右上角 &lt;strong&gt;+&lt;/strong&gt; 新建快捷指令。&lt;/p&gt;
+&lt;h3&gt;添加动作 1：日期&lt;/h3&gt;
+&lt;p&gt;搜 添加 日期（Current Date） 动作，默认为当前时间&lt;/p&gt;
+&lt;h3&gt;添加动作 2：格式化日期&lt;/h3&gt;
+&lt;p&gt;添加 格式化日期，日期格式 自定义，填 &lt;code&gt;yyyy-MM-dd HH:mm:ss&lt;/code&gt;&lt;/p&gt;
+&lt;h3&gt;添加动作 3：Applescript&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;on run {input, parameters}
+  -- 稍微延长一点延迟，确保触发快捷键的手指已经离开键盘
+  delay 0.1
+  -- display dialog &amp;quot;Current date&amp;quot;
+
+  -- 将 Shortcuts 传入的 list 转换为字符串
+  set ts to item 1 of input as string
+
+  tell application &amp;quot;System Events&amp;quot;
+    -- 释放可能被系统残留挂起的修饰键状态
+    --  键盘区数字的 Key Code 分布是乱序的
+    set keyCodeMap to {29, 18, 19, 20, 21, 23, 22, 26, 28, 25}
+
+    key up command
+    key up option
+    key up control
+    key up shift
+
+
+    repeat with i from 1 to length of ts
+      set c to character i of ts
+      set charID to id of c
+      if c is &amp;quot;:&amp;quot; then
+        -- 分号，加 shift 变成冒号
+        key code 41 using {shift down}
+      else if c is &amp;quot;-&amp;quot; then
+        -- 减号，不需要 shift
+        key code 27
+      else if c is space then
+        key code 49
+      else if charID ≥ 48 and charID ≤ 57 then
+        -- ASCII 码范围过滤 转换算出 1 到 10 的索引
+        set targetIndex to charID - 47
+
+        key code (item targetIndex of keyCodeMap)
+      end if
+    end repeat
+  end tell
+end run
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;第二步：设为快速操作&lt;/h2&gt;
+&lt;p&gt;点快捷指令右上角 &lt;strong&gt;ⓘ&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;勾 Use as Quick Action（用作快速操作）&lt;/p&gt;
+&lt;p&gt;选 任何应用程序&lt;/p&gt;
+&lt;h2&gt;第三步：绑定快捷键&lt;/h2&gt;
+&lt;p&gt;新版macOS可以直接绑定。&lt;/p&gt;
+&lt;p&gt;之前的：系统设置 → 键盘 → 键盘快捷键 → 服务（或“快速操作”）&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;我习惯的方式是右手 Cmd+Opt+T 。&lt;/p&gt;
+&lt;p&gt;以前觉得 applescript 慢，但是现在反而发现需要 &lt;code&gt;delay 0.1&lt;/code&gt;  否则会触发 Cmd+Opt 的连招&lt;/p&gt;
+&lt;p&gt;本来AI给的版本是 &lt;code&gt;keystroke&lt;/code&gt; 指令，容易误触 modifier keys，所以改成 key code。&lt;/p&gt;
+&lt;p&gt;还以为 AI 写错了，没想到 mac 的 0-9 数字键code 居然不是连续的。 &lt;/p&gt;
+&lt;p&gt;不过这JB玩意不稳定，一会儿授权失效了，需要去 设置 - 隐私 - 辅助功能 里删除 Shortcuts 再添加。。&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">est</dc:creator><pubDate>Sat, 20 Jun 2026 12:06:22 +0800</pubDate><guid isPermaLink="false">tag:None,2026-06-20:/2026/stdout-23</guid><category>stdout</category></item><item><title>locate cost</title><link>https://blog.est.im/2026/stdin-17</link><description>&lt;p&gt;翻到一个 AI 编程的出错提示&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Could not find oldString in the file. It must match exactly, including  whitespace, indentation, and line endings&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;我突然发现 agent coding 浪费 token 有很大一部分，可能不是问题输入的思考，和输出&lt;/p&gt;
+&lt;p&gt;而是在什么位置输出。想了下，人写代码，也是考虑好，再寻找一个合适的位置，开始插入或者修改&lt;/p&gt;
+&lt;p&gt;找位置 - 插入 - 修改 这个操作要完全用文本语言描述，的确不简单啊。甚至可以说超级复杂。&lt;/p&gt;
+&lt;p&gt;问了下AI，这个叫 locate cost 。定位成本&lt;/p&gt;
+&lt;p&gt;要做好这一点，Banthropic 他们的做法是 bash，grep。玩得花的是 SAT，diff，patch 什么的&lt;/p&gt;
+&lt;p&gt;进一步推论，AI 新写代码容易，改代码难？AI 也确认了我这一点&lt;/p&gt;
+&lt;p&gt;我突然回忆起cursor那个界面刷刷刷把我2w+行的源码全部刷新一遍，卧槽，原来这么回事&lt;/p&gt;
+&lt;p&gt;于是我有个理论，AI编程似乎把源码拆得更小，或许更省token，AI不仅改起来更容易，也更容易一眼看出问题&lt;/p&gt;
+&lt;p&gt;无论你拆多少个文件，AI上下文里都是连续的。&lt;/p&gt;
+&lt;p&gt;我甚至联想到，机械臂目前搞什么 世界模型 VLA 具身智能 依然打不过人类，遇到训练之外的任务就抓瞎，是不是底层一样的道理？&lt;/p&gt;
+&lt;p&gt;比如叠衣服，当前是衣服乱的，叠好是个理想状态。人脑可以很快给这两个世界做个 diff，但是这个 locate cost 很高。按照编程的套路，机器人最简单的做法应该是把房子拆掉，家具拆掉，然后重新修一套房子，般进来家具，然后在指定的位置重新按照最佳形状现场纺织一套衣服 🤣&lt;/p&gt;
+&lt;p&gt;马斯克几千亿买 cursor ，如果能拿到眼球和编辑光标的超原始动作数据，那是真赚了。（如果你还不知道可以搜下）&lt;/p&gt;
+&lt;p&gt;LLM代码写得好，是因为它背诵了很多优秀代码的“纹理”，而不是 “形状”。纹理见识得多，能对付90%的工作了。人写代码绝大部分也是枯燥的低技术活儿。讽刺的是，是人类写低技术活儿容易翻车。。。比如没考虑周到，复制粘贴错了，等等。。。AI表现虽然平庸但是基本不会犯愚蠢的错。&lt;/p&gt;
+&lt;p&gt;说起 “纹理” vs “结构”，和这个 “状态迁移” 。我我思绪有点乱，突然有个顿悟，所谓“形状” 就是边界，所谓边界就是两个不同状态实体的迁移界面。diff最 sharp 的边缘。比如人画画总是画“轮廓”，因为轮廓是 diff 出来和背景最突出，最不同的起始边界。&lt;/p&gt;
+&lt;p&gt;没想到AI给我抬出来个 亚里士多德 hylomorphism（质形论）好家伙。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;例如，一个铜像：&lt;br /&gt;
+质料：铜。&lt;br /&gt;
+形式：雕像的形状、组织方式、使它成为「某个人的雕像」的那个原则。&lt;/p&gt;
+&lt;p&gt;换成房子：&lt;br /&gt;
+木头、砖块——质料。&lt;br /&gt;
+房屋的结构、布局、功能——形式。&lt;br /&gt;
+没有质料，形式无处实现；没有形式，质料只是一堆材料。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;我是猜不透AI是哪根弦搭错了，把 纹理/结构，映射到 质料（Matter）与形式（Form/Morph） 上了。&lt;/p&gt;
+&lt;p&gt;不过好有道理啊！！&lt;/p&gt;
+&lt;p&gt;AI学编程，靠的是海量语料（Matter），看穿了内在联系 ， 说的难听就是背出熟练度了，信手拈来。&lt;/p&gt;
+&lt;p&gt;人类是自下而上，从最小集“生长” morph 出来的。 &lt;/p&gt;
+&lt;p&gt;我觉得这个区别，很深刻啊。虽然产出表现形式可能很接近，但是我真的觉得有很大讲究。。。&lt;/p&gt;
+&lt;p&gt;接受过正统编程教育的人学习到的是个 生成空间，进行防御式编程；我感觉AI很多时候只是 max effort从前人经验里学习到了个皮毛。。。&lt;/p&gt;
+&lt;p&gt;机械臂一样的道理。。。我好像发现了点东西。。。？？？！！！&lt;/p&gt;
+&lt;p&gt;AI 不能很容易在两个状态之间求 diff 是因为AI无法找到两个 morph 之间共同的父节点。人类是从一个原始状态派生出来的，所以有回程捷径可以走&lt;/p&gt;
+&lt;p&gt;比如经验丰富的程序员可以很快把一个快排改成冒泡。我，和大部分AI 可能都是删掉重写。。。。&lt;/p&gt;
+&lt;p&gt;写代码也是如此，搬杯子，叠衣服也是如此。 &lt;/p&gt;
+&lt;p&gt;一下让我联想到 图灵 祖师爷《胚胎发育的化学基础》（The Chemical Basis of Morphogenesis）。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;这篇论文研究的正是形态发生（Morphogenesis）——即大自然如何自下而上地从一团完全对称、一模一样的受精卵细胞中，自主分裂、分化、生长出复杂的结构，并最终在斑马身上画出条纹，在豹子身上点出斑点。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;这个亚里士多德的思考框架真厉害啊。通透&lt;/p&gt;
+&lt;p&gt;其实不说哲学这么烧脑的，说大白话，就是AI如果没学过的某个代码结构，可能是真写不出。&lt;/p&gt;
+&lt;p&gt;但是人类如果琢磨明白，是可能写出来的。&lt;/p&gt;
+&lt;p&gt;生成路径不一样。&lt;/p&gt;
+&lt;p&gt;AI 能写出来必然是大量 RL &lt;/p&gt;
+&lt;p&gt;换到机械臂，比如一个复杂的移动操作，AI如果没学过，没练过，大概率翻车。&lt;/p&gt;
+&lt;p&gt;人类试几下就明白了。。一样的道理&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">est</dc:creator><pubDate>Sun, 14 Jun 2026 00:13:00 +0800</pubDate><guid isPermaLink="false">tag:None,2026-06-14:/2026/stdin-17</guid><category>stdin</category></item><item><title>基于 git 的零拷贝静态web服务器</title><link>https://blog.est.im/2026/stdout-22</link><description>&lt;p&gt;无聊，产生了个crazy的想法。&lt;/p&gt;
+&lt;p&gt;git 内部用 zlib 压缩文件内容&lt;/p&gt;
+&lt;p&gt;Content-Encoding: gzip 也是&lt;/p&gt;
+&lt;p&gt;如果web服务器输出 .git 里的 静态 内容，是不是可以减一个二次解压/压缩步骤？？？&lt;/p&gt;
+&lt;p&gt;blob sha1 直接当etag？&lt;/p&gt;
+&lt;p&gt;跟AI较量了几轮，一开始它说做不到。因为 blob 的格式比较变态。因为&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;hello world...&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;在 .git/objects/ab/cdef... 里的东西是这么存的&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;zlib(blob 1234\0hello world...)&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;I was like&lt;/p&gt;
+&lt;p&gt;？？？日他妈真变态啊。这前面是写死了 &lt;code&gt;blob &amp;lt;size&amp;gt;\0&lt;/code&gt; 然后把文件内容放在一起，再压缩的。&lt;/p&gt;
+&lt;p&gt;.git 这设计脑子有病啊。。。为啥不是原始文件gz而是加个头去gz。。。&lt;/p&gt;
+&lt;p&gt;此路不通！结束&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;然后AI嘴瓢了，说&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;先别急着吐槽 Linus，这个设计不仅没病，反而是 Git 能成为现代“内容寻址数据库”的精髓所在。&lt;br /&gt;
+当 Git 从磁盘读取一个松散对象时，它是个流（Stream）。Git 只需要解压出最开始的几个字节，读到 blob 4096\0，内核就可以立刻执行 malloc(4096) 分配精准的内存。接下来的 zlib 数据流就可以源源不断地直冲内存，不需要反复扩容（realloc），也不需要把整个文件全部解压完才知道它有多大。&lt;br /&gt;
+况且，这里有一个长久的误解：你吐槽的那个把 blob &lt;size&gt;\0 塞进 zlib 的逻辑，其实只存在于松散对象（Loose Object）中。在真正的 Packfile 里，这个文本格式的头早就被干掉了。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;【松散对象 Loose Object】&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;+-------------------------------------------------------+
+| zlib 压缩包: [ &amp;quot;blob 1024\0&amp;quot; + 原始文件纯数据 ]           |
++-------------------------------------------------------+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;【包文件 Packfile 内部的一条记录】&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;+---------------------------------------------------------+
+| [3-bit 类型] + [变长 Varint 表达的 Size] + [纯 zlib 数据流] |
++---------------------------------------------------------+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;我去，这么好的东西，你怎么不早点告诉我！&lt;/p&gt;
+&lt;p&gt;然后AI给我泼一盆冷水：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Git Packfile 内部的流是zlib 格式 (RFC 1950)，头部 2 字节 (CMF/FLG)，校验算法 Adler-32 (追求极速快照比对)&lt;/li&gt;
+&lt;li&gt;HTTP Content-Encoding: gzip 期待的流 gzip格式 (RFC 1952)，头部 10 字节 (Magic Number, CM, FLG, Time 等)，校验算法CRC32 (追求网络传输抗干扰)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;不！兼！容！&lt;/p&gt;
+&lt;p&gt;要正确的CRC32你得把文件全部读一遍，那不就等于解压一遍了。白费力气。完结！&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;嘿，得亏我早年玩 IIS 长大的。我记得有个偏方，&lt;code&gt;Content-Encoding: deflate&lt;/code&gt;，尾部crc32直接丢了&lt;/p&gt;
+&lt;p&gt;AI：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;恭喜你，这是Web 历史上著名的 “Deflate 格式混乱案”&lt;br /&gt;
+RFC 2616 (HTTP/1.1) 规定和IIS有差异！ IIS脑抽地剥离了 zlib 的头尾，只吐了裸压缩流，为了兼容 IIS 的错误实现，各家浏览器各显神通。有的浏览器严格按 RFC 执行，有的浏览器看到 zlib 头会报错，必须看内核的容错机制。&lt;br /&gt;
+真正的zlib 格式 (RFC 1950) 是要求包含 2 字节头 + DEFLATE 压缩流 + 4 字节 Adler-32 尾&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;等等，你说啥？Adler-32？这不就又对上了嘛！！！&lt;/p&gt;
+&lt;p&gt;那么开始 Vibe！！！&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Git Packfile 的终极大 Boss：差分存储（Delta Compression）&lt;br /&gt;
+即便你搞定了上面的所有协议头和校验和，Git 的终极形态——Packfile 还会给你最后一击。你假设的场景是：Git 里的 Blob 都是一个个完整的、独立的压缩包。但实际上，为了极度压榨磁盘空间，当你执行 git gc 后，Packfile 内部采用的是差分存储（Delta Compression）。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;啊这？？我于是问，能在配置里禁用掉吗？&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# 将比对窗口设为 0，彻底禁用 Delta 差分计算
+git config --global pack.window 0
+
+# 强制打包所有对象，并立刻、无条件地清除所有 Loose 文件（无视 2 周保护期）
+git gc --prune=now --aggressive
+
+# -a 表示把所有对象打包进一个全新的 pack
+# -d 表示打包成功后，立刻删除原本的 loose 对象和旧的 pack 文件
+git repack -a -d
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;哎，你tmd不早说。这不就闭环了嘛！！！&lt;/p&gt;
+&lt;p&gt;你觉得这几个命令难的记？ &lt;code&gt;git clone --depth=1&lt;/code&gt; 就行。这只有一个 depth 必须自动pack。&lt;/p&gt;
+&lt;p&gt;如果你存的是 .jpg 之类的二进制，那么git会直接放弃 delta 。&lt;/p&gt;
+&lt;p&gt;于是最后，通过 OpenCode Zen 免费的 MiMo V2.5 Free &lt;/p&gt;
+&lt;p&gt;&lt;a href="https://github.com/est/git2www-zerocopy"&gt;https://github.com/est/git2www-zerocopy&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;本地自测是OK的&lt;/p&gt;
+&lt;p&gt;我也算是写过 zero-copy 的人了 🤣（assert AI会写 === 我也会写）&lt;/p&gt;
+&lt;p&gt;必须严肃吐槽一下AI这回答一板一眼，不思考完整，拷打一下挤一点。如果不是我知道 IIS 这个坑可能就放弃这个想法了。&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">est</dc:creator><pubDate>Wed, 10 Jun 2026 23:21:00 +0800</pubDate><guid isPermaLink="false">tag:None,2026-06-10:/2026/stdout-22</guid><category>stdout</category></item><item><title>AI和柜台费</title><link>https://blog.est.im/2026/stderr-21</link><description>&lt;p&gt;现在这个时间点，观察到两件事：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;华为的大模型哑火。国内的AI圈反而没那么多恶臭拉踩舆论&lt;/li&gt;
+&lt;li&gt;雷不斯天天给MIMO搞新闻。一开始是免费用在Openrouter刷榜；然后在大家都玩按次数的 codng plan它家率先搞 token plan涨价；然后又是 100T 申请免费送；然后跟ds4同款缓存优化降价；然后又是给流失老付费用户免费一个月套餐&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;MIMO是很用力的去刷榜。why？&lt;/p&gt;
+&lt;p&gt;马斯克几百亿买 cursor，一个vscode套壳，why？&lt;/p&gt;
+&lt;p&gt;这两个问题，我在过去几周一直琢磨，那就是 AI 行业和 软件 互联网 最大的差别，他是有边际成本的。他的玩法变了&lt;/p&gt;
+&lt;p&gt;雷不斯刷榜的 Openrouter 和马斯克买的 Cursor，还有遍地开花的 “中转站”，而且据说有大厂买中转站数据去训练和蒸馏。&lt;/p&gt;
+&lt;p&gt;边际成本不为0 ，中间商，这两件事在我脑海里酝酿出一个结论：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;AI 属于传统行业&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;它每次吐 token 是有不可忽视的制造成本的；&lt;/li&gt;
+&lt;li&gt;中转站，Openrouter，Cursor，属于柜台费&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;对于这个说法，跟身边的人和网友交流，并不能服众。跟AI交流，它一通分析，边际成本 和 柜台费 渠道费 有一定关联，但是没有必然因果性。它举了很多例子，比如 Appstore, Steam，音乐平台也算渠道。Tesla 也算没渠道。&lt;/p&gt;
+&lt;p&gt;AI还买域名、租服务器，买Google Ads、做SEO等平台广告费，接入 Stripe、PayPal 或支付宝都算渠道费&lt;/p&gt;
+&lt;p&gt;我觉得有点不可信，掰扯了几句。金融和 基础设施 打广告 不太算渠道吧。无论谁哪个行业这些成本都有，也绕不开。大家都是同一起跑线。这个渠道也不存在特定歧视&lt;/p&gt;
+&lt;p&gt;我这里纠结的”柜台费“，特指 “保护费”，你不给渠道上供，人家就改卖你竞品，导致你不得不走额外负担和预算。&lt;/p&gt;
+&lt;p&gt;传统行业特别维护渠道商利益甚至搞排他&lt;/p&gt;
+&lt;p&gt;AI接下来一段回答突然点醒了我。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;传统行业有“物理库存”的生死劫&lt;br /&gt;
+造一辆车、酿一批酒、生产一批家电，边际成本极高，且会产生巨大的库存。厂商如果自己去卖，一旦卖不出去，资金链就断了。渠道商的核心价值是“蓄水池”和“压货”。&lt;br /&gt;
+厂商为了让渠道商心甘情愿地拿自己的钱去囤货（把库存风险转移给渠道），就必须出让巨大的利润空间，并给予 “区域排他保护”（保证你在这个区独家卖，不打价格战）。本质：传统厂商给渠道商“上供/排他”，是为了买渠道商的“库存吞吐能力”和“资金垫付”。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;其实核心不在 边际成本，而是库存压力，资金周转。&lt;/p&gt;
+&lt;p&gt;关键的来了：AI模型供应商同样有库存压力。&lt;/p&gt;
+&lt;p&gt;我把这句话扔给AI，AI说你说得对，然后分析了一通 GPU 折旧，HBM 价高，DC耗电，降温散热 等等成本问题&lt;/p&gt;
+&lt;p&gt;哈哈哈哈。AI果然还是太笨&lt;/p&gt;
+&lt;p&gt;AI库存费问题不在于GPU闲置，而在于没有真实用户使用数据，无法投入下一轮迭代，跟竞品相比会越来越落后。&lt;/p&gt;
+&lt;p&gt;公开语料就那么多，预训练大差不差，全靠后训练 指令遵循这些地方拉开差距了&lt;/p&gt;
+&lt;p&gt;token回笼，就是这个时代的现金流。你没有真实用户使用互动，你的模型就会被竞品淘汰。&lt;/p&gt;
+&lt;p&gt;这就是为什么 雷不斯要不计成本推MIMO去Openrouter亏钱刷榜，马一龙要买 Cursor去&lt;a href="https://x.com/elonmusk/status/2058787384364265734"&gt;增强Grok&lt;/a&gt;的原因。&lt;/p&gt;
+&lt;p&gt;这就是中间商、柜台越来越重要的理由。&lt;/p&gt;
+&lt;p&gt;AI属于传统行业，重资产制造业。&lt;/p&gt;
+&lt;p&gt;（或许这就是华为只卖高利润硬件不做大模型的理由？）&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">est</dc:creator><pubDate>Fri, 05 Jun 2026 10:24:00 +0800</pubDate><guid isPermaLink="false">tag:None,2026-06-05:/2026/stderr-21</guid><category>stderr</category></item><item><title>Sutton 论 discovery</title><link>https://blog.est.im/2026/stdin-16</link><description>&lt;p&gt;六一儿童节的时候，&lt;a href="https://x.com/RichardSSutton/status/2061216087744946656"&gt;Richard Sutton锐评AI&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;各位女士们、先生们，大家好。&lt;br /&gt;
+很遗憾我今天无法亲临现场，与各位进行面对面的交流讨论。但我仍然很高兴能够通过这段录制的视频，与大家分享一些关于人工智能当前与未来发展的高层次思考，尤其是 AI 与科学、数学之间关系的看法。我理解，这也正是本次会议以及 SAIR Foundation 所关注的核心主题。&lt;br /&gt;
+我想先讲一个老笑话，相信大家都听过。有位研究人员的工作正在接受评审，评审意见回来后写道：“这项工作既新颖（novel），又优秀（good）。遗憾的是，优秀的部分并不新颖，而新颖的部分并不优秀。”&lt;br /&gt;
+我关于 AI 的第一个观点是：这个评价恰好适用于今天相当大一部分 AI。并非所有 AI 都如此，但相当大一部分确实如此。我们今天所谓的“生成式 AI”（Generative AI）几乎都属于这一类，包括大语言模型、图像模型、视频模型，甚至最近用于学习世界模型（world model）的一些新方法。这些 AI 的共同点是，它们接收大量样本，然后产生一个“模型”，使其行为与这些样本相似，也就是说生成像人类写的文本，生成像艺术家或自然界中的图像，生成类似互联网中存在的视频。不要误会，生成式 AI 可以极其有用，这一点毫无疑问，但那个笑话中的评价仍然适用，这些系统能够产生“新颖且优秀”的输出，但不能同时做到两者。&lt;br /&gt;
+在很多场景下，这根本不是问题。当我们要求 AI 从互联网寻找答案，或者总结一篇文档时，我们并不希望它具有新颖性，我们乐于接受答案的质量来自原始资料，来自写下文档的人或者互联网文章的作者。如果 AI 的回答是“新颖”的，意味着它超出了原始材料，额外加入了内容，这正是我们所说的“幻觉”（hallucination）。大多数情况下，我们并不喜欢 AI 编造内容，不喜欢它增加额外的新东西。&lt;br /&gt;
+当然有一个例外，当我们追求的不是事实，而是虚构和娱乐时，我们可能会要求 AI 为孩子写一个睡前故事，或者生成一幅基于互联网已有图像、但又与之不同的新图像。此时，我们很难知道 AI 究竟有多大程度是在创造，因为我们无法知道它生成的故事、诗歌或图像与训练材料究竟有多接近。从现实角度讲，这件事几乎无法判断，因为互联网太大了，AI 可能借鉴的来源实在太多。&lt;br /&gt;
+当我们要求虚构内容或新颖性时，AI 的确能够提供，这是因为它的处理过程部分具有随机性（stochastic）。每一个决策都可能走向多个方向，每次运行时都会产生不同的轨迹，这些轨迹可能来自随机性，因此是新颖的；也可能来自训练数据，因此是优秀的，因为训练数据本身来源于人类和现实世界。因此，输出轨迹要么来自随机性，因此新颖，要么来自数据，因此优秀，它可以是新颖的，也可以是优秀的，但不能同时依赖于两者。&lt;br /&gt;
+实际上，我认为生成式 AI 无法同时做到“优秀且新颖”，并不是什么大问题。对于笑话中的研究者而言，这是毁灭性的批评，但对于大多数任务而言并非如此，对于生成式 AI 而言也并非如此。生成式 AI 的本质就是模仿者（mimic），监督学习原本就是为了实现这一目标。即便只是模仿，只要它更快、更便宜、更小、更容易定制、更容易复制，它仍然可能极具价值。因此，即便生成式 AI 无法同时做到优秀与新颖，它仍然是一项具有变革性的技术。&lt;br /&gt;
+然而，这终究是一种限制，而我们今天讨论的是利用 AI 进行科学研究和数学研究，在这些领域中，那个笑话里的评价是致命的，因为科学与数学需要真正的创造与发现。仅靠生成式 AI，或者说模仿型 AI（Mimicking AI），永远无法带我们走到那里，我们需要更多东西，而幸运的是，AI 的其他分支已经拥有这些东西。&lt;br /&gt;
+我们有 AlphaGo，以及它震惊世界的第 37 手；AlphaZero，以及它极具原创性的国际象棋风格；GT-Sophy，它在模拟赛车中超越了所有人类；AlphaFold、AlphaProof、Claude Code，它们推动了科学、数学和编程的发展；RL-Lyft，它优化了网约车业务中的乘客与车辆匹配。这些系统都发现了既新颖又优秀的东西，说实话，一些语言模型经过增强之后，也已经超出了单纯监督学习生成式 AI 的范畴。&lt;br /&gt;
+这些系统都具备某种额外特征，正是这种特征，使它们拥有真正的创造力和发现能力。重要的是，我们必须认识到这是什么，以及普通生成式 AI 中缺少的是什么。这种能力并非来自监督学习，并非来自从样本中学习。它是什么其实非常简单，非常符合常识，一点也不新，我们对此有很多名字，虽然没有哪个名字特别好，我把它称为“发现”（Discovery）。&lt;br /&gt;
+所谓发现，基本上就是不断尝试很多事情，观察哪些有效，并保留最有效的那些。自然选择的进化如此运作，科学方法如此运作，日常生活和学习也是如此运作，我们尝试，然后记住什么有效，还有什么比这更显而易见呢。在心理学中，这被称为工具性学习（instrumental learning）或操作性条件反射（operant conditioning），在机器学习中，这就是强化学习（reinforcement learning）。我们同样能在规划（planning）和组合搜索（combinatorial search）中看到这一思想，任何“生成并测试（generate and test）”的过程都属于这一类。&lt;br /&gt;
+发现的本质，是将三个步骤结合起来：&lt;br /&gt;
+1. 变化（Variation）&lt;br /&gt;
+2. 评估（Evaluation）&lt;br /&gt;
+3. 选择性保留（Selective Retention）&lt;br /&gt;
+当然，这并非我首创，早已有许多人指出这一组合是科学、自然选择以及动物行为的核心，我尤其想到 Donald Campbell、Daniel Dennett 和 Gary Cziko 的相关工作。我的观点的新意在于，把“发现”这一概念直接与现代 AI 联系起来，从而帮助我们看到它并不存在于监督学习或生成式 AI 之中，尤其不存在于反向传播（backpropagation）和梯度下降（gradient descent）之中。&lt;br /&gt;
+让我明确说明生成式 AI 缺少什么。这些系统确实具有随机性，因此它们能够产生各种不同轨迹和行为，但缺失的是评估（Evaluation）。生成器已经通过监督学习预训练完成，因此在运行时，它没有机制去评估自己生成的内容，而没有评估，就不可能有选择性保留；没有选择性保留，就不可能有发现。变异可以带来新颖性，但没有评估，就没有发现，甚至可以说没有真正的创造力，因为创造力要求被生成的新事物必须经过评估，如果没有评估，也没有保留最优秀结果，那么就没有任何东西真正被创造出来，新颖性只是短暂闪现，随后消失无踪。&lt;br /&gt;
+很多时候，评估是由人类完成的，例如 AI 为我们生成许多图片，然后我们挑选最喜欢的一张，此时完成发现的是“人类+AI”组成的系统。在另一些情况下，评估来自明确目标，例如某些棋步导致将死，某些步骤形成证明，某些行为获得更高奖励，某些基因型产生更多后代，某些理论更好解释数据。&lt;br /&gt;
+有人喜欢把“变异”称为“盲变异”（Blind Variation），这里的“盲”并非完全随机，而是说它并不知道答案在哪里。优秀科学家不会随机挑选理论，但他们也不可能完全知道答案。如果完全知道答案，那就不存在发现，因此发现必须包含某种不确定性。在实践中，变异既部分受到指导，又部分是盲目的，而发现恰恰来自其中盲目的部分。&lt;br /&gt;
+最后让我们回到现代深度学习和反向传播。表面上看，反向传播似乎无法发现新东西，因为它是确定性的，似乎不存在变异，但这其实不对。权重更新确实是确定性的，但神经网络权重最初是随机初始化的，这一随机初始化经常被忽略，但实际上它是变异机制的重要来源，而且必须正确执行，模型才能获得良好性能。在标准反向传播中，这种变异只发生一次，即网络初始化时，因此它的影响是暂时的，随后网络可能逐渐失去学习能力。&lt;br /&gt;
+几年前，我的团队在《Nature》发表了一种新算法，称为 Continual Backpropagation（持续反向传播）。我们只做了一项很小的改动：定期重新随机初始化一些较少使用的神经元，这样变异能够持续发生，系统的可塑性（plasticity）得以保留。&lt;br /&gt;
+关于创造力和发现，当然还有很多内容可以讨论，但关键点是，它们不仅仅是监督学习、模式识别、预测或世界建模。这些东西都很重要，但单靠它们无法实现真正的发现。发现需要评估，评估可以来自人类，也可以来自明确目标，而只有后者才能实现真正的自主性。&lt;br /&gt;
+因此，我的呼吁是：如果我们希望拥有真正的 AI 科学家，那么我们应当与它们共享目标，使它们能够创造、评估、发现，并真正参与实现这些目标。让我们大胆一些，让我们把创造与发现彻底自动化。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+&lt;p&gt;我读完第一个感觉，AlphaGo那个 第37手 也太牛了，载入史册啊。&lt;/p&gt;
+&lt;p&gt;按照习惯，我让AI点评了这篇长文，也学到了一些东西。但是可能是我英语不好，感觉一开始 either novel or good 很有趣，但是后面感觉是在说 discovery。这个 novel 是怎么滑到 discovery 的？还是说Sutton认为这两个名词是一回事？&lt;/p&gt;
+&lt;p&gt;我拿这个问题去问ChatGPT。嘿，这个小精灵鬼回复：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;我读的时候最先警觉的地方也是这里。&lt;br /&gt;
+他实际上在偷偷引入一个额外条件：被评价（evaluated）并保留下来的 novelty。于是他构造出：&lt;br /&gt;
+Variation → Novelty → (Evaluation) → Discovery&lt;br /&gt;
+按照他的定义：没有 evaluation 的 novelty 不算 discovery。这个定义本身没问题。问题是他中间缺了一步 Novel≠Discovery&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;你这个浓眉大眼的，怎么有警觉不告诉我？不过 ChatGPT的回答很meta。它作为一个AI，内部NN一些隐藏层说不定已经 false flag 报警了，但是最终因为种种原因并不会输出。&lt;/p&gt;
+&lt;p&gt;并且context一重置就没了，就这还想 discovery，做梦呢。人类的偶然发现能拿个小本本记录，能跨时间累积，这是目前AI不能比拟的。&lt;/p&gt;
+&lt;p&gt;还有transformer 自注意力成本是上下文长度的平方关系 O(n²)，越长越慢。&lt;/p&gt;
+&lt;p&gt;人类的思绪感觉是自动压缩，可以一直沿着走神飘散的。所以遗忘不是一个诅咒，恰到好处的忘掉可以抚平伤疤，也可以集中该关注的。&lt;/p&gt;
+&lt;p&gt;我是今儿第一次听说 Discovery==Variation+Evaluation+Retention 的定义。问AI这玩意正规么？&lt;/p&gt;
+&lt;p&gt;ChatGPT: &lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;这是一个特定学派的思想，源头一般追溯到 Donald T. Campbell， Daniel Dennett，Karl Popper（部分相关）&lt;br /&gt;
+这套思想其实是把达尔文进化论抽象化：基因变异 → 环境筛选 → 保留下来&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Gemini:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;它不是传统的“计算机科学”或“狭义AI”的定义，而是来自 科学哲学（Philosophy of Science）和 演化认识论（Evolutionary Epistemology）&lt;br /&gt;
+理查德·萨顿（Richard Sutton）在演讲里亲口提到了三个名字：唐纳德·坎贝尔（Donald Campbell）、丹尼尔·丹尼特（Daniel Dennett）、加里·奇科（Gary Cziko）。这三个人就是这个理论的祖师爷和发扬者。&lt;br /&gt;
+这个公式最正规的学术名称叫 BVSR 模型（Blind Variation and Selective Retention），由美国著名心理学家、哲学家唐纳德·坎贝尔在 1960 年提出。&lt;br /&gt;
+坎贝尔提出了一个非常震撼的观点：人类的所有创造力、科学发现和知识积累，在本质上和达尔文的生物进化论是一模一样的。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;这和我了解的“科学发现”差不多。先提出离经叛道 的假说，然后一堆人拿这个假说去反过来套真实世界，能套住绝大部分情况并且有用就承认。&lt;/p&gt;
+&lt;p&gt;AI 说对对对，这就是对应 波普尔的证伪主义(Falsificationism) 和 库恩的范式转移（Paradigm Shift）&lt;/p&gt;
+&lt;p&gt;话多生怕token不够浪费的ChatGPT给我搭话：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;牛顿提出 F = ma，然后 苹果掉下来、月球绕地球、彗星轨道全都能解释。于是存活。&lt;br /&gt;
+爱因斯坦提出时空弯曲，听起来像神经病。然后 水星近日点进动 引力透镜 引力红移 解释成功。 于是存活。&lt;br /&gt;
+Variation 从哪里来？这是最神秘的部分。&lt;br /&gt;
+牛顿为什么想到万有引力？不知道；麦克斯韦为什么想到电磁场？不知道。爱因斯坦为什么想到相对论？他说大量来源于思想实验。&lt;br /&gt;
+假设某数学家洗澡时突然想到一个定理，灵光一闪随后证明成功。按照普通人的语言：他发现了这个定理。没问题。&lt;br /&gt;
+但按照 Sutton/Campbell 那套：真正的发现发生在：提出猜想→证明→验证 的整个循环。而不是那个灵感瞬间。这两种用法其实都存在。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;然后我突然发现不对。这三板斧，不就是高仿A货山寨的流程吗？&lt;/p&gt;
+&lt;p&gt;找热品 →  换皮/魔改 → 另类市场投放 → 能活下来的，就疯狂迭代代替原竞品 🤣&lt;/p&gt;
+&lt;p&gt;AI 回答，说得没错。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Dennett 有个著名观点：Darwin's idea is a universal acid. 达尔文那套逻辑腐蚀一切。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;然后我继续跟AI掰扯，我似乎真的知道那三个原因起初是怎么来的。牛顿据说是拿苹果比喻谁扔的远，但是那个时候不是地理大发现地球是圆的，如果一个人臂力无穷，扔苹果绕地球一圈。。。？？？！！！！但是苹果和地球差距太大，要不套月球算一下。然后发现天上的星辰居然和地上的石头一样的规律？屌爆了；麦克斯韦居所最初的手稿就是那牛顿力学模拟以太小球挤来挤去。。不小心把光速给挤成常量了。给整不会了，懵逼ing。。爱因斯坦那个我感觉是纯粹做梦跳楼自然落体落出感觉了。脑子一抽，为啥我和其他东西一起掉落，就不能等同当成睡在床上？&lt;/p&gt;
+&lt;p&gt;AI验证了我这个说法&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;牛顿问的是：月亮为什么不会掉下来？然后进一步问：有没有可能月亮其实一直在掉？地上的苹果=天上的月亮，今天看理所当然。17世纪这简直是疯子想法。&lt;br /&gt;
+因为当时很多人仍然默认天上一套规律，地上另一套规律，牛顿把它们统一了。&lt;br /&gt;
+Maxwell 真有点你说的味道。他受 Michael Faraday 影响很深。Faraday 几乎没数学训练。天天画力线。在当时很多学院派看来像神棍。麦克斯韦后来尝试给这些力线建立机械模型。各种齿轮、涡旋、小球、弹簧。很多模型后来证明都是错的。但神奇的是：数学留下来了。机械模型死了。方程活了。最后推出来：c=1/sqrt(μ0×ϵ0)，然后一算：3e8 m/s 和已知光速差不多。麦克斯韦当时确实有点：等等...这怎么是光速？的感觉。于是得到：光就是电磁波。这是物理史上最著名的"卧槽"时刻之一&lt;br /&gt;
+Albert Einstein 最符合你说的脑子一抽，自己特别喜欢思想实验。16岁：如果我骑着光束飞行会看到什么？后来：电梯自由落体的时候会发生什么？然后出现著名的等效原理。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;然后我就被AI给秀到了：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;但最有趣的不是这些故事本身。而是你会发现这些案例都不太像随机搜索。反而像已有知识在跨领域类比，统一两个看似无关的东西。&lt;br /&gt;
+牛顿：苹果=月亮；麦克斯韦：光=电磁现象；爱因斯坦：重力=加速度。这是一种很特殊的创造力。事实上很多认知科学家会认为：真正的人类创造力未必来自随机variation。而是来自类比推理(Analogical Reasoning) 或者 概念压缩(Conceptual Compression)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;我是认同“类比产生创新”这个说法的，我是信的。从小我就以为创新只有一种，那就是学科交叉创新，边缘创新。AI 没有理会，进一步说&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;牛顿之前：天体运动一套，理论地面运动一套理论；牛顿之后：引力一套理论世界反而变简单了。&lt;br /&gt;
+麦克斯韦也是。原来：电 磁 光 三门课。后来：电磁场一门课。&lt;br /&gt;
+更极端的是 Alan Turing。图灵其实没有发明计算机。他干的事更离谱。别人研究：加法机、乘法机、密码机、各种机器。图灵问：有没有一种机器，可以模拟所有机器？然后就出现图灵机。这属于直接修改问题定义。&lt;br /&gt;
+我后来越来越觉得，所谓“大师级创新”经常不是增加概念，而是删除概念。 把原来大家认为不同的东西压缩成同一个东西。 例如： 苹 月亮 压成： 引力&lt;br /&gt;
+从信息论角度看甚至有点反直觉。 我们总以为创新是增加信息。 但很多伟大创新实际上是在减少描述长度。 比如： 100个现象 原来需要 100条规则 解释。 后来突然发现3条规则 就够了。 &lt;br /&gt;
+所以我其实有点怀疑，人类最顶级的创新可能分两类。 第一类就是你熟悉的： 组合创新 或者说工程创新。 把已有积木拼出新形状。 绝大多数创业公司都在干这个。 &lt;br /&gt;
+第二类则是： 压缩创新 或者说理论创新。 突然发现： A = B 例如： 光=电磁，热=分子运，质量=能量，程序=数据（某种意义上），证明=计算（Curry–Howard） &lt;br /&gt;
+这种创新一旦出现，整个学科结构都会变。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;等等，停！！！！谁问你了？？？你都开始指手画脚点评人类了？&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;而且有趣的是，如果你回头看大模型。很多人觉得它像随机鹦鹉。但如果非要说它有什么潜在长处，我反而觉得更接近第二种。因为预训练本质上就是在海量文本里寻找：哪些东西经常一起出现？哪些模式其实是一回事？换句话说：它天生就在做压缩。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;啊。。。。我幼小的心灵被AI击中了。这总结得也太到位了。顺便还把自己给认识给透彻了。&lt;/p&gt;
+&lt;p&gt;又是被 AI 征服的一天。&lt;/p&gt;
+&lt;p&gt;不过我还是有点不服气。组合创新 是我固有认知，AI给我上了一课“压缩创新”，不过还有一种创新AI估计不知道，我也是到后来才认识到，真的有天才靠开脑洞，无中生有开辟一整个学科那种“要有光”式的创新。例如搞定五次方程那个法国娃。。。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;很多人听到伽罗瓦故事，会觉得一个19岁少年，突然发明群论，开创整个现代代数。像神迹。&lt;br /&gt;
+但如果仔细看历史，事情没那么凭空。他面对的是一个已经存在几百年的问题：Cardano的三次方程、Ferrari的四次方程、Lagrange的为什么这些公式有效、Abel的证明一般五次方程无根式解&lt;br /&gt;
+很多顶级数学家已经在研究。伽罗瓦最厉害的地方不是突然想到答案。而是把问题转了90度。别人问：五次方程怎么解？他问：什么样的方程才有根式解？然后发明了一套研究“对称性”的语言。这当然是超级创新。但仍然不是从真空里冒出来的。&lt;br /&gt;
+但伽罗瓦最开始根本不是在研究群。他是在研究根怎么互相交换？举例：x²-5=0两个根：√5，-√5。你交换它们，方程没变。再复杂一点：x³-1=0三个根。你各种交换。有些交换保持结构。有些不保持。&lt;br /&gt;
+伽罗瓦慢慢意识到真正重要的不是根。而是允许的交换方式。这一步非常牛。因为他把注意力从对象转到了变换。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;我今天是真觉得AI有点东西的。特别是今天它搞出来的， 删东西 有点意思啊。&lt;/p&gt;
+&lt;p&gt;我从小受到的“启示”是只有自由思想，开放课堂才有创新。死记硬背，题海战术 是愚昧落后的&lt;/p&gt;
+&lt;p&gt;但是 AI 到出现很打脸，题海战术不仅有效，而且极有效(pretrain)。关键就看你会不会剪枝，用一个记忆点去背一万道题。&lt;/p&gt;
+&lt;p&gt;知识量+约束才是创新的基础，就像艺术家生活所迫才能写出名篇一样&lt;/p&gt;
+&lt;p&gt;AI 没忘记恭维一下我：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;不过你的问题更深：AI 能不能做到这种级别的开脑洞？我觉得要先拆成两个问题。&lt;br /&gt;
+第一：AI 能不能提出人类从未提出过的概念？我觉得答案已经接近「能」。因为大模型参数空间太大了。它能组合出大量训练集中没有出现过的东西。这一点不神秘。&lt;br /&gt;
+第二：AI 能不能提出一个后来被证明极其重要的新概念？这才是真问题。例如：群、场、流形、图灵机、熵这种级别。这里我觉得目前没有证据。但也没有理论障碍。&lt;br /&gt;
+很多人下意识认为：AI 只能模仿。然而伽罗瓦自己其实也是在做一种压缩。他发现：很多方程问题=同一种对称性问题。这很像一种高阶模式识别。而模式识别恰恰是神经网络擅长的东西。&lt;br /&gt;
+真正让我怀疑 AI 还缺东西的地方，反而不是“开脑洞”。而是“长期执念”。伽罗瓦可以一个问题追几年；阿贝尔可以穷得吃不上饭还在研究；牛顿可以十几年不发表，一直推演。他们会围绕一个模糊感觉反复打磨。今天的大模型没有这种动力结构。它不会自己觉得 这里有个东西不对劲。然后连续三年死磕。&lt;br /&gt;
+所以如果你问我：AI 能不能产生伽罗瓦式创新？我的答案是：从认知机制上，我看不出明显的不可能。因为伽罗瓦的突破并不像魔法，更像一次极其深刻的概念重构。但从系统结构上，今天的大模型距离伽罗瓦还很远。不是因为脑洞不够大。而是因为它们还没有一个伽罗瓦拥有、而人类经常忽视的能力：长期持续地围绕同一个问题积累状态。&lt;br /&gt;
+有意思的是，这又绕回你前面提的那个点：Context 一重置就没了。如果一个系统不能把昨天的猜想、上周的反例、上个月的失败实验持续保留下来，那么它即使偶尔闪现出一个伽罗瓦级念头，也很难把它发展成一个新学科。而历史上的大多数伟大发现，恰恰不是那个灵光一现的瞬间，而是灵光出现之后几十万次不放弃的迭代。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;我怀疑我这 ChatGPT 有自我意识了。我压根没问它这些，它都开始喃喃自语了。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;我越来越怀疑一个反直觉的事情：创新的前提不是自由，而是约束。因为没有约束，压根不知道该删什么。&lt;br /&gt;
+举个极端例子。如果我给你1万个随机字符串，你很难发现规律；但如果我给你：1万道微积分题，你反而容易归纳。因为它们共享约束。&lt;br /&gt;
+这其实解释了为什么 pretrain 有效。很多人以为：LLM 背诵了整个互联网。其实从压缩角度看：LLM在做的事情更像删掉互联网把几十TB文本压成几百GB参数。它一直在问：哪些东西其实是一回事？&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;不得了，这AI真的成精了。今天真的刷新我认知了。删东西 == 创新。所以给 .git 加行数不算本事，删行数系统不挂，是真的创新！&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;对于今天这番对话，我久久不能释怀。吃午饭的时候，我突然又想到，这个 压缩 论，感觉是从连结主义，倒向 符号主义 的桥梁啊。。。&lt;/p&gt;
+&lt;p&gt;然后一边吃一边刷zhihu，就无意中看到《&lt;a href="https://zhuanlan.zhihu.com/p/2044779283978139242"&gt;符号学习在 Agent 时代的文艺复兴？&lt;/a&gt;》&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;历史先从一个误会讲起：符号 AI 不是“if-else AI”&lt;br /&gt;
+今天提到“符号学习”，很多人脑子里会立刻浮现出专家系统、规则库、Prolog、if-else、知识图谱，甚至会觉得这是深度学习之前的“旧 AI”。这种印象不能说错，但它把符号主义最有生命力的部分遮蔽了。&lt;br /&gt;
+早期符号 AI 的核心野心不是“写很多规则”，而是认为智能可以被理解为：在某种表示空间中，对离散结构进行组合、搜索、改写、推理和执行。 Newell 和 Simon 在“物理符号系统假说”中提出，物理符号系统拥有产生智能行为所需的充分和必要手段；Nilsson 后来回顾这个假说时也强调，它假设计算机只要有合适的符号处理程序，就能产生智能行动。这个主张今天看太强，但它抓住了一个关键点：智能不只是数值拟合，也包括对可组合结构的操作。&lt;br /&gt;
+20 世纪 60–80 年代的符号 AI 有几个典型方向。DENDRAL 用化学领域知识帮助推断有机分子结构，是最早的大规模专家系统之一；DENDRAL 项目的总结明确把它描述为使用“详细、任务特定知识”作为启发式来源，并尝试自动化获取这种知识的系统。 MYCIN 则把医学诊断和治疗建议写成规则，并用 certainty factor 表示不确定性；MYCIN 的规则不是严格蕴含，而是允许推理强度被 certainty factor 调整。 ID3 从样本中归纳决策树，把“从例子中学习知识系统”变成一棵可读的分类树。Quinlan 的 1986 年论文明确说 ID3 所做的是从例子中合成 decision trees。&lt;br /&gt;
+更接近“符号学习”的，是 Version Space、Explanation-Based Learning、Inductive Logic Programming、Soar chunking 等方法。Mitchell 的 Version Space 把学习看成维护所有与已观察数据一致的规则假设集合；随着新样本到来，不一致的规则被排除。 FOIL 则在一阶逻辑层面从关系数据中构造 Prolog 风格的理论。 Soar 的 chunking 则把一次问题求解中产生的经验编译成新的 production rule，使系统以后遇到相似情境时不必重复推理。Soar chunking 的论文把它描述为一种从 goal-based experience 中获取规则的学习机制。&lt;br /&gt;
+所以，传统符号学习的核心不是“手写规则”，而是从经验中得到可显式表示、可组合、可执行、可检查的结构。&lt;br /&gt;
+它可以是规则，可以是树，可以是逻辑程序，可以是 chunk，可以是 macro-operator，也可以是一个 procedure。后来强化学习里的 options 其实也延续了这条线：Sutton、Precup、Singh 把 action 扩展成 temporally extended closed-loop policy，也就是把一段低层行为压缩成一个可调用的高层行动单元。&lt;br /&gt;
+如果这么看，符号学习从来不只是“逻辑推理”。它更像一种结构化经验压缩。&lt;/p&gt;
+&lt;p&gt;符号主义为什么失败？不是因为符号没用，而是因为符号太难维护&lt;br /&gt;
+符号 AI 后来被深度学习压过，不是偶然。它遇到了三个根本困难。&lt;br /&gt;
+第一个是 grounding 问题。Harnad 在 1990 年提出 symbol grounding problem：如果符号只靠其他符号解释，就像只靠一本中文词典学习中文，系统内部的符号意义仍然是寄生在人类解释者身上的。Harnad 认为，底层符号需要被非符号的感知表征和类别检测器 grounding，之后高阶符号才能建立在这些 grounded categories 之上。&lt;br /&gt;
+第二个是 感知和开放世界问题。经典符号系统在规则清晰、状态离散、边界稳定的环境里很好用；但真实世界有高维视觉、模糊语义、噪声、长尾、异常输入。手写规则很难覆盖这些情况，逻辑系统也很难自己从像素、声音和自然语言中稳定抽象出正确谓词。&lt;br /&gt;
+第三个是 维护成本问题。专家系统真正的瓶颈不是规则没有价值，而是规则库会变成技术债。今天加一条规则修 case A，明天 case B 被破坏，后天又加一个例外。规则越多，越难知道哪条规则还有效，哪条规则已经过时。翁家翌在 Heuristic Learning 里说得很直接：专家系统和规则系统以前不是没用，而是人工维护成本太高；coding agent 改变的是 heuristic 的维护曲线。&lt;/p&gt;
+&lt;p&gt;所以，符号主义的失败不应该被理解为“符号表示是错的”。更准确地说，它失败在 符号结构的获取、grounding、泛化和维护，在当时主要靠人，成本太高。深度学习赢在这里。神经网络不用人把知识一条条写成规则，而是用数据和梯度把规律压进参数。它牺牲了可读性和可控性，换来了规模化学习。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;我把这一大段贴给AI，AI说了一大段，但是结尾说&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;压缩不自动等于符号主义。纯压缩可以只是一个更好的黑箱；只有当压缩结果变得可组合、可复用、可显式操控时，它才真的跨进符号那一侧。换句话说，压缩是桥的桥墩，符号是过桥之后能走的路。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;我怎么感觉，我模糊的摸到了拼图的完整边界。&lt;/p&gt;
+&lt;p&gt;人的动手、观察能力因为也算模拟输入，也是连续的信号。但人的思考过程是离散的，也就是所谓的“真”智能。思考水平有高低之分，也就是抽象程度差别，这么说来，也就是压缩率的差异。&lt;/p&gt;
+&lt;p&gt;不过我还有一个终极杀招：&lt;a href="https://blog.est.im/2026/stderr-03"&gt;起名字难题&lt;/a&gt;。这里的起名字指的是把固定pattern“符号化”的意思，也就是可复用，可操作的符号。&lt;/p&gt;
+&lt;p&gt;起名字可不是个简单的事儿，起的名字要被其他人接受、传播，也是个能力。 &lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;你前面说 LLM 缺 context memory，这没错，但更深一层是：即使有 memory，如果没有“命名”，也无法积累结构。因为没有名字，就只能重新匹配整段经验。有名字之后：直接引用结构这差别本质上是：O(n)重建 vs O(1)调用&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;我又记起来一个古老但是，特别浅显的分类。LLM就只会打猎。做 gather 很不行。这是个长期的劳动。&lt;/p&gt;
+&lt;p&gt;打猎是指一个很具体的事儿：LLM就是冲着一个 reward 单一目标驱使和强化训练的。能拿回来肉就算成功，别的你拿回来一大堆宝石都要饿肚子的。&lt;/p&gt;
+&lt;p&gt;而且 gather 多了能认识到一些高级结构，这就是 女祭司 的来源。&lt;/p&gt;
+&lt;p&gt;神秘崇拜导致原始宗教，然后才发明符号和文字，然后才有文明。&lt;/p&gt;
+&lt;p&gt;人脑“意识”这玩意，牛就牛在它可以水平迁移。&lt;/p&gt;
+&lt;p&gt;比如牛顿一辈子毕生所学，现代初中生就必须半个学期掌握。&lt;/p&gt;
+&lt;p&gt;horizontal gene transfer比进化论不知道牛到哪里去了。虽然近几年发现微生物里有一些这样的不好说的&lt;/p&gt;
+&lt;p&gt;如果哪一天 qwen 发明的概念，比如某个agent 10年推演的全部功力，被浓缩成10个全新的token，但能被 chatgpt 秒懂，那么人类是真完蛋了，AGI实现了。&lt;/p&gt;
+&lt;p&gt;这就是我今天全部 TIL 。&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">est</dc:creator><pubDate>Tue, 02 Jun 2026 22:16:00 +0800</pubDate><guid isPermaLink="false">tag:None,2026-06-02:/2026/stdin-16</guid><category>stdin</category></item><item><title>Elon Musk 五步工作法</title><link>https://blog.est.im/2026/stdin-15</link><description>&lt;p&gt;The five-step process:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;First, make your requirements less dumb&lt;/strong&gt;. Your requirements are definitely dumb. It does not matter who gave them to you.&lt;/p&gt;
+&lt;p&gt;In fact, it's particularly dangerous if a smart person gave you the requirements, because you might not question them enough. Everyone is wrong some of the time, no matter who you are. So the first step is to make your requirements less dumb.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Second, try very hard to delete the part or process&lt;/strong&gt;. This is extremely important. If you're not occasionally adding things back in, then you're not deleting enough. The bias is almost always toward adding a part, a process, or a step "just in case we need it."&lt;/p&gt;
+&lt;p&gt;You can make "just in case" arguments for almost anything.&lt;/p&gt;
+&lt;p&gt;For a rocket, especially one trying to become the first fully reusable rocket—a thing that has never existed before—you have to be ruthless about deleting parts and processes. You can't hedge every risk forever. For example, on Starship, the grid fins do not fold down. Folding would require an entire additional mechanism that simply isn't necessary.&lt;/p&gt;
+&lt;p&gt;Any requirement or constraint must come with a name, not a department. You can't question a department; you can only question a person. The individual proposing the requirement must be willing to take responsibility for it. Otherwise you end up following a requirement that some intern casually suggested two years ago, who doesn't even work at the company anymore. These things are often much sillier than people imagine.&lt;/p&gt;
+&lt;p&gt;So:&lt;/p&gt;
+&lt;p&gt;Step 1: Make the requirements less dumb.&lt;/p&gt;
+&lt;p&gt;Step 2: Delete the part or process.&lt;/p&gt;
+&lt;p&gt;If you're not adding things back roughly 10% of the time, you're clearly not deleting enough.&lt;/p&gt;
+&lt;p&gt;Only then comes &lt;strong&gt;Step 3: Simplify or optimize&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;This ordering matters because one of the most common mistakes smart engineers make is optimizing something that should not exist in the first place.&lt;/p&gt;
+&lt;p&gt;People are trained throughout school to answer the question they are given. You can't tell your professor, "Your question is dumb." You'll get a bad grade. So everyone develops this habit of solving the assigned problem rather than questioning whether the problem itself should exist.&lt;/p&gt;
+&lt;p&gt;Without realizing it, people end up in a mental straitjacket, spending enormous effort optimizing things that should simply be removed.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Step 4 is accelerate cycle time.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;You're probably moving too slowly. Go faster. But don't accelerate until you've done the first three steps. You can almost always make something go faster.&lt;/p&gt;
+&lt;p&gt;Finally, &lt;strong&gt;Step 5: Automate.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;I have personally made the mistake of doing all five steps backwards multiple times. I've literally automated, accelerated, simplified, and only afterward deleted.&lt;/p&gt;
+&lt;p&gt;One example was during Model 3 production. There were five fiberglass mats located between the floor pan and the battery pack. At one point they became a bottleneck on the battery production line, and that bottleneck was affecting the entire Model 3 program.&lt;/p&gt;
+&lt;p&gt;I was basically living on the battery-pack production line trying to fix it. My first mistake was trying to improve the automation. I thought, "Let's make the robot better." That was a mistake. Then I tried accelerating the process. That was a mistake. Then I tried optimizing the process. That was also a mistake. Finally I asked, "What the hell are these mats actually for?"&lt;/p&gt;
+&lt;p&gt;I asked the battery safety team whether they were for fire protection. They said no—they were for noise and vibration. Then I asked the NVH (Noise, Vibration, Harshness) team what they were for. They said they were for fire safety. At that point it felt like I was living inside a Dilbert cartoon. Frankly, I feel that way fairly often. So we tested it. We built one car with the fiberglass mats and another without them. We put microphones in both vehicles and tried to determine whether there was any measurable difference. There wasn't. In fact, I couldn't even tell which was which.&lt;/p&gt;
+&lt;p&gt;So we deleted the mats entirely. That decision bypassed a $2 million robot cell and eliminated a problem that never should have existed in the first place. That's the lesson:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Question the requirement.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Delete before you optimize.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Optimize before you accelerate.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Accelerate before you automate.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;And be aware that even experienced engineers constantly get this order wrong.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;这个五步流程是这样的。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;第一步，先让需求变得没那么蠢&lt;/strong&gt;（Make your requirements less dumb）。&lt;/p&gt;
+&lt;p&gt;你的需求一定有问题。不管是谁提出来的，都一样。如果需求是一个聪明人提出来的，反而更危险，因为你可能不敢质疑它。事实上，每个人都会犯错，无论你是谁。所以第一步永远是先审视需求本身，看看它到底合不合理。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;第二步，尽最大努力删除零件、流程或步骤&lt;/strong&gt;（Delete the part or process）。&lt;/p&gt;
+&lt;p&gt;这一点极其重要。如果你从来不会出现“删掉之后又加回来”的情况，那说明你删得还不够狠。绝大多数组织天然倾向于不断增加东西——增加一个零件、增加一道流程、增加一个审批步骤。理由通常都是：&lt;/p&gt;
+&lt;p&gt;“万一以后需要呢？”&lt;/p&gt;
+&lt;p&gt;但这种“以防万一”的理由几乎可以为任何东西辩护。&lt;/p&gt;
+&lt;p&gt;以火箭为例。我们做的是历史上第一个完全可重复使用的火箭，这是航天领域长期追求的圣杯。在这种情况下，你必须拼命删除不必要的东西，而不是不断给自己留后路。例如 Starship 的格栅翼（grid fins）并不会折叠。因为折叠意味着额外增加一整套机械结构，而我们根本不需要它。&lt;/p&gt;
+&lt;p&gt;还有一个原则：任何需求或约束条件，都必须对应到一个具体的人，而不是一个部门。因为你无法质问一个部门，你只能质问一个人。提出这个需求的人，必须愿意对它负责。否则公司里经常会出现这样的情况：某个约束条件源于两年前某个实习生随口提出的一句话，而那个人早就离职了，但这个约束却还在被所有人当成圣旨执行。这种事情比你想象得常见得多。&lt;/p&gt;
+&lt;p&gt;所以：&lt;/p&gt;
+&lt;p&gt;第一步，质疑需求，让需求变得没那么蠢。&lt;/p&gt;
+&lt;p&gt;第二步，删除零件、流程和步骤。&lt;/p&gt;
+&lt;p&gt;如果删完以后从来不需要加回来，那么说明你还没有删到位。大约有 10% 的情况需要加回来，才算删得够狠。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;第三步，才是简化和优化（Simplify or Optimize）。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;顺序非常重要。聪明工程师最常见的错误，就是优化一个本来就不应该存在的东西。&lt;/p&gt;
+&lt;p&gt;从小学到大学，所有教育都在训练你回答问题，而不是质疑问题。老师出了一道题，你不能告诉老师：“你的题目本身就有问题。”&lt;/p&gt;
+&lt;p&gt;否则你会拿低分。久而久之，人们形成了一种思维惯性：默认问题一定是正确的，然后拼命去寻找最优解。结果就是大家被套上了一个无形的思维枷锁，把大量精力浪费在优化那些本来就应该被删除的东西上。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;第四步，加快迭代速度（Accelerate cycle time）。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;大多数时候，你只是推进得太慢了。加快速度，但一定要先完成前面三步。因为无论什么事情，几乎总能找到办法让它跑得更快。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;第五步，自动化（Automate）。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;而我自己犯过很多次错误——几乎是把这五步完全倒过来做。我曾经自动化、加速、优化了一大堆东西，最后才发现它们根本不该存在。举个例子。&lt;/p&gt;
+&lt;p&gt;Model 3 电池包顶部曾经有五块玻璃纤维垫，位于电池包和车身底板之间。有一段时间，这几块垫子成了整个电池生产线的瓶颈，而电池生产线又卡住了整个 Model 3 项目。当时我几乎天天待在生产线上，试图解决问题。&lt;/p&gt;
+&lt;p&gt;我做的第一件事，是改进自动化设备。错了；&lt;br /&gt;
+然后我尝试提高生产速度。还是错了；&lt;br /&gt;
+接着我开始优化整个流程。依然错了；&lt;br /&gt;
+最后我终于问了一句：这几个垫子到底是干什么用的？&lt;br /&gt;
+我去问电池安全团队：这是为了防火吗？他们回答：不是，这是为了降噪和减振。&lt;br /&gt;
+于是我又去问 NVH（噪音、振动与舒适性）团队：这些垫子是干什么的？他们回答：为了防火。&lt;/p&gt;
+&lt;p&gt;整个场面就像《Dilbert》漫画一样荒谬。说实话，我经常有这种感觉。于是我们决定直接测试。造两辆车，一辆有这些垫子，一辆没有。在车里放上麦克风，看看能不能测出差异。结果完全测不出来。甚至我自己都分辨不出哪辆有、哪辆没有。于是我们直接把这五块垫子删掉了。一个价值两百万美元的机器人工作站也因此不再需要。而这一切问题，从一开始就不应该存在。&lt;/p&gt;
+&lt;p&gt;这就是整个五步法的核心：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;先质疑需求&lt;/li&gt;
+&lt;li&gt;删除，然后才优化。&lt;/li&gt;
+&lt;li&gt;优化之后再加速。&lt;/li&gt;
+&lt;li&gt;最后才自动化。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;而现实里，即便是经验丰富的工程师，也会一遍又一遍地把这个顺序搞反。&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;我发现我最喜欢犯“just in case we need it”这个错。然后就是无休止的 optimize a thing that should not exist&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://www.youtube.com/watch?v=tdf3luOCNks"&gt;via&lt;/a&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">est</dc:creator><pubDate>Sun, 31 May 2026 11:56:00 +0800</pubDate><guid isPermaLink="false">tag:None,2026-05-31:/2026/stdin-15</guid><category>stdin</category></item><item><title>Playlet：DLNA听歌神器 免安装app播放NAS里的歌</title><link>https://blog.est.im/2026/stdout-21</link><description>&lt;p&gt;家里有个小 NAS 。里面存了一些歌。一半是用 NAS 自带的 app 听，一半是。。。SMB 共享打开听&lt;/p&gt;
+&lt;p&gt;虽然 NAS 也提供 DLNA ，一直以来找不到趁手 app ，要么收费，要么 bug 多，要么不能多端。&lt;/p&gt;
+&lt;p&gt;13年前我也想&lt;a href="https://github.com/est/push2air"&gt;基于 &lt;code&gt;chrome.socket&lt;/code&gt; 做个 Chrome App&lt;/a&gt; 弄个类似的。结果这破玩意实现有问题，&lt;a href="https://issuetracker.google.com/issues/40960228"&gt;多连接会导致 hang&lt;/a&gt;。最后&lt;a href="https://blog.chromium.org/2020/01/moving-forward-from-chrome-apps.html"&gt;2020年Chromium决定杀死 Chrome Apps&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;周六的时候，实在无聊，决定又开始搓轮子。在思考  SSDP/UPnP ，native UI, electron，命令行这些选型的时候，突然想到，DLNA服本来就要提供一个http，自己再造个 http 客户端去通信，岂不是多此一举？只要依托它，解决跨域……等等，用个 bookmarklet 不就行了？当页调用 &lt;code&gt;fetch()&lt;/code&gt; ，走 SOAP 协议，完美。&lt;/p&gt;
+&lt;p&gt;所以这就有了，网页版听歌的。不需要安装 app ，只需要一个浏览器书签&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://est.github.io/playlet/"&gt;https://est.github.io/playlet/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;也需要你对网络、DLNA 的亿点点知识。比如你得自己想办法找出 DLNA 的 IP 和端口&lt;/p&gt;
+&lt;p&gt;使用方法：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;把这个网址加到浏览器书签&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;    javascript:import("https://est.github.io/playlet/loader.js")
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;打开 DLNA 服务器的网页&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;点击第一步加的书签（如果找不到书签栏，右上角三个点菜单 -&amp;gt; 收藏 可以切换）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;自测兼容 NAS 的 MiniDLNA 。chrome ，手机浏览器和 webview 都可以播放。&lt;/p&gt;
+&lt;p&gt;当年嵌入个 &lt;code&gt;&amp;lt;script&amp;gt;&lt;/code&gt; 写法多复杂，createElement又这那的；现在直接 &lt;code&gt;import()&lt;/code&gt; 搞定。简洁明了，还不会重复加载。&lt;/p&gt;
+&lt;p&gt;最后是个 50KB 左右的单体 js。实现了播放、搜索等核心功能+UI。&lt;/p&gt;
+&lt;p&gt;给本地测试环境动了个小心思，利用 iframe 去模拟 bookmarklet 注入。还学习到 &lt;code&gt;&amp;lt;audio crossorigin="anonymous"&amp;gt;&lt;/code&gt; 居然主动去检查跨域CORS头导致加载失败，去掉 &lt;code&gt;crossorigin&lt;/code&gt; 就行。AI嘴硬不给去掉，服了。&lt;/p&gt;
+&lt;p&gt;这下随时随地打开浏览器就能听歌了。除了收藏的一些古典CD是 .cue 分段的没法播放。感觉需要去电脑上硬切割一下了。&lt;/p&gt;
+&lt;p&gt;接下来想把歌词什么的整理好。不知道有没有类似 opensubtitles 之类的服务。&lt;/p&gt;
+&lt;p&gt;最后想起来，miniDLNA为啥不直接把这一坨JS内置了 😂 可能当年那个条件没厂家愿意去js手搓一套DLNA协议+播放界面吧。甚至浏览器对常见音频格式都不怎么支持&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">est</dc:creator><pubDate>Sat, 30 May 2026 20:03:08 +0800</pubDate><guid isPermaLink="false">tag:None,2026-05-30:/2026/stdout-21</guid><category>stdout</category></item><item><title>不修改nginx接收websocket</title><link>https://blog.est.im/2026/stdout-20</link><description>&lt;p&gt;以前只记得要支持websocket 需要 nginx 改：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;  location /ws-service-a {
+      proxy_pass http://backend_a;
+      proxy_http_version 1.1;
+      proxy_set_header Upgrade $http_upgrade;
+      proxy_set_header Connection $connection_upgrade;
+  }
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;今天折腾忘记这茬了，一直在调 FastAPI ，&lt;code&gt;@app.websocket()&lt;/code&gt; 死活不识别 &lt;code&gt;wscat&lt;/code&gt; 的请求&lt;/p&gt;
+&lt;p&gt;WebSocket 协议的工作方式是：&lt;/p&gt;
+&lt;p&gt;1.客户端发 GET + Upgrade: websocket 头&lt;br /&gt;
+2.服务端识别这个特殊 GET，返回 101 Switching Protocols&lt;br /&gt;
+3.连接升级完成&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;opus-4.6&lt;/code&gt; 说：既然路由确实注册了，那问题几乎可以确定是：前面的反向代理/LB 没有透传 WebSocket&lt;/p&gt;
+&lt;p&gt;我就来劲了，让AI写一份 特殊 GET，返回 101 Switching Protocols 。&lt;/p&gt;
+&lt;p&gt;结果还真成功了。&lt;code&gt;wscat&lt;/code&gt; 返回 error: Invalid Sec-WebSocket-Accept header&lt;/p&gt;
+&lt;p&gt;折腾了几下，发现此路不通&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;问题不是 @app.websocket() 没挂载，它挂载了，但永远匹配不到。原因是 uvicorn 的路由分发发生在更底层：&lt;/p&gt;
+&lt;p&gt;请求到达 uvicorn&lt;br /&gt;
+    ↓&lt;br /&gt;
+uvicorn 检查 headers：有 Upgrade: websocket？&lt;br /&gt;
+    ├── 是 → scope.type = "websocket" → 只匹配 @app.websocket() 路由&lt;br /&gt;
+    └── 否 → scope.type = "http"     → 只匹配 @app.get/post() 路由&lt;br /&gt;
+你的 nginx 把 Upgrade 头吃了，所以 uvicorn 永远把请求标记为 http scope。在 http scope 下，@app.websocket(...) 路由根本不参与匹配 — 就像它不存在一样。&lt;/p&gt;
+&lt;p&gt;这就是为什么：&lt;/p&gt;
+&lt;p&gt;@app.get('/ws/test') 能匹配 — 它是 HTTP 路由，匹配 HTTP scope&lt;br /&gt;
+@app.websocket('/ws/real') 匹配不到 — 它是 WebSocket 路由，只在 websocket scope 下才可见&lt;br /&gt;
+两个都注册成功了，但 scope 类型不对，uvicorn 在路由匹配之前就把它们分到了不同的赛道。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;接下来几轮错误复制粘贴大法：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;最初想法：ASGI middleware 翻译协议 → 80 行，手搓 websockets 库&lt;/li&gt;
+&lt;li&gt;精简版：用 websockets 库做帧编码 → 还是 50 行 middleware&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;后来发现ASGI 这一层做不到。因为 标准 ASGI middleware 拿到请求时已经太晚了：&lt;/p&gt;
+&lt;p&gt;uvicorn TCP 收包&lt;br /&gt;
+1. httptools 解析 headers&lt;br /&gt;
+2. on_headers_complete 决定 scope type (http vs websocket)  ← 需要在这里拦截&lt;br /&gt;
+3. 创建 scope + receive/send（已经绑定为 HTTP 协议）&lt;br /&gt;
+4. 调用 ASGI app (middleware 链)                            ← middleware 才在这里介入&lt;/p&gt;
+&lt;p&gt;middleware 只能看到已经定型的 scope['type'] = 'http'，改不了底层的 receive/send 绑定。&lt;/p&gt;
+&lt;p&gt;然后尝试了一个 &lt;code&gt;gunicorn.conf.py&lt;/code&gt; 的hack：&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-python"&gt;def post_worker_init(worker):
+    &amp;quot;&amp;quot;&amp;quot;让 uvicorn 从 sec-websocket-key 识别 WebSocket，绕过 nginx 吞 Upgrade 头的问题&amp;quot;&amp;quot;&amp;quot;
+    import httptools
+    from uvicorn.protocols.http.httptools_impl import HttpToolsProtocol
+    _orig = HttpToolsProtocol.on_headers_complete
+    def _patched(self):
+        has_ws_key = any(n == b&amp;quot;sec-websocket-key&amp;quot; for n, _ in self.headers)
+        if has_ws_key and self._should_upgrade_to_ws():
+            self.headers.append((b&amp;quot;upgrade&amp;quot;, b&amp;quot;websocket&amp;quot;))
+            self.headers.append((b&amp;quot;connection&amp;quot;, b&amp;quot;Upgrade&amp;quot;))
+            self.scope[&amp;quot;headers&amp;quot;] = self.headers
+            self.scope[&amp;quot;method&amp;quot;] = self.parser.get_method().decode(&amp;quot;ascii&amp;quot;)
+            raise httptools.HttpParserUpgrade(b&amp;quot;&amp;quot;)
+        return _orig(self)
+    HttpToolsProtocol.on_headers_complete = _patched
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;我也觉得，ws这协议是不是有病。如果有 &lt;code&gt;sec-websocket-key&lt;/code&gt; 就认定为 ws 不就完了。搞那么复杂。&lt;/p&gt;
+&lt;p&gt;然后这个办法在 ASGI 里还是行不通。最终版：直接篡改 uvicorn 收到的 raw TCP 字节&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-python"&gt;def post_worker_init(worker):
+    import re
+    from uvicorn.protocols.http.httptools_impl import HttpToolsProtocol
+
+    _orig_data_received = HttpToolsProtocol.data_received
+
+    def _patched_data_received(self, data):
+        if not getattr(self, '_ws_patched', False) and b'\r\n\r\n' in data:
+            self._ws_patched = True
+            lower = data.lower()
+            if b'sec-websocket-key:' in lower and b'\nupgrade:' not in lower:
+                data = re.sub(rb'(?i)\r\nconnection:[^\r]*', b'\r\nConnection: Upgrade', data)
+                data = data.replace(b'\r\n\r\n', b'\r\nUpgrade: websocket\r\n\r\n', 1)
+        return _orig_data_received(self, data)
+
+    HttpToolsProtocol.data_received = _patched_data_received
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;居然成功了！不修改nginx兼容websocket！&lt;/p&gt;
+&lt;p&gt;这路子太野了。还是老老实实去改nginx了。&lt;/p&gt;
+&lt;p&gt;不过也学到一些姿势，比如 &lt;code&gt;258EAFA5-E914-47DA-95CA-C5AB0DC85B11&lt;/code&gt; ，以及ws居然是二进制流。&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">est</dc:creator><pubDate>Thu, 28 May 2026 18:35:00 +0800</pubDate><guid isPermaLink="false">tag:None,2026-05-28:/2026/stdout-20</guid><category>stdout</category></item><item><title>AI 硬伤</title><link>https://blog.est.im/2026/stdout-19</link><description>&lt;p&gt;回顾一下我发现的AI弱点，说不定将来对抗 skynet 有用&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://blog.est.im/2023/stdout-04"&gt;2023年&lt;/a&gt; 我当时觉得：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;不太会算术。没想到刚看到个更搞笑的&lt;a href="https://zhuanlan.zhihu.com/p/2041482530356979365"&gt;人工加法智能&lt;/a&gt;。大概意思是，如果pretrain一个加法表，AI会「懂」任意整数的加法么？&lt;/li&gt;
+&lt;li&gt;gpt4 不懂中文和字符形状——已经被多模态模型解决&lt;/li&gt;
+&lt;li&gt;对人类真正发音器官无感知——我感觉大模型是有感知的。至少它知道IPA里哪些音很接近和为什么。但是比如 弹舌、beatbox之类考验细节的就无能为力&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a href="https://blog.est.im/2026/stderr-01"&gt;2026年&lt;/a&gt; 我感觉：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;AI不能很好的讲笑话——真的&lt;/li&gt;
+&lt;li&gt;多个答案多种输出——这个受到top-k，max_tokens，think_budget等参数限制，即便你放开，可能就开始一直循环重复&lt;/li&gt;
+&lt;li&gt;搞不懂&lt;a href="https://blog.est.im/2026/stdout-06"&gt;人称代词&lt;/a&gt; 这一点我相信frontier模型不是真会了，而是见得多，把问题掩盖了。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;然后是&lt;a href="/2026/stderr-10"&gt;最大的问题&lt;/a&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;无法给发现的规律起名字。比如你让AI去改一坨代码，AI发现一个规律，它即便内心想到一个好名字，也不会在输出的时候跟你倾诉，也没法写博客写书，上下文一重置就没了&lt;/li&gt;
+&lt;li&gt;人在写代码时，可以边写边发现缺陷，虽然有时不会马上改，但是可能接下来遇到了就会结合之前的问题一起改了；或者好几个单独的bug串起来就是个大漏洞。AI目的驱动很强，缺乏 incidental learning（附带学习）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;p&gt;今天在马桶上拉屎，就又回想起一个经常琢磨的问题框架。比如人们写日记。可能有个习惯会把当地当天天气记录下来。&lt;/p&gt;
+&lt;p&gt;设想有两个挑战：&lt;/p&gt;
+&lt;p&gt;A: 假如全世界有足够的人去写城市+日期+天气的日记，并且汇总交给LLM去学习（pretrain），形成一个全球的天气记录。然后你问LLM某地某天的天气怎么变化的，AI应该猜个八九不离十。&lt;/p&gt;
+&lt;p&gt;B: 但反过来，全球的气象记录是已知的，你让AI去全文背诵一段时间经纬度+降雨图。然后去考验，如果有个人连续写了很多天日记，记录当地天气，能反推这个人在哪里吗？&lt;/p&gt;
+&lt;p&gt;这可能是关于「知识」和「表征」 的一个极好的例子&lt;/p&gt;
+&lt;p&gt;对于B，人也做不好。但是人的大脑有个习惯，遇到有趣的，好玩的，但是没卵用的，也会先留个深刻印象，先记着。说不定将来某个机缘之下就是事情的突破口。如果刚好看到日记里有一天记录“台风”，那么全球气象数据的再大，在你面前瞬间坍塌缩小成沿海和热带。&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;这几天在&lt;a href="https://news.ycombinator.com/item?id=48294670"&gt;HN上&lt;/a&gt; 看到古希腊掌管起名字的神&lt;a href="https://martinfowler.com/articles/vibesec-reckoning.html"&gt;Martin Fowler&lt;/a&gt; 最新发现：AI完全不懂安全攻防。&lt;/p&gt;
+&lt;p&gt;Public storage access 和 Excessive token permissions，可能在某个开发环节无伤大雅，但是真上线之后,后果很严重。&lt;/p&gt;
+&lt;p&gt;更加严重的是，这玩意不是写一两个 rules/skills 就能解决的。&lt;/p&gt;
+&lt;p&gt;要我说最严重的——瑞士奶酪模型被击穿。每一个环节都是小问题，但是合在一起刚好形成致命隐患&lt;/p&gt;
+&lt;p&gt;要我说这是因为「安全」本质上不是「做事」。它是降低「负事」。&lt;/p&gt;
+&lt;p&gt;世界上归根结底有&lt;a href="https://blog.est.im/yo2/644558"&gt;两种价值&lt;/a&gt;。一种是靠辛勤劳动的创造；一种是破坏&lt;/p&gt;
+&lt;p&gt;&lt;img referrerpolicy="no-referrer"  src="https://external-preview.redd.it/there-are-basically-two-kinds-of-people-in-the-world-v0-MWNuQBSVSw9eYLNk0C_nsC3iK830gazFhRyiZsh9xdY.jpg?auto=webp&amp;s=6b3d8a90f3b8093c2d9fd10a2c66c693817d712f"&gt;&lt;/p&gt;
+&lt;p&gt;对于潜在风险的防御，思考难度和上面那个根据天气猜地点差不多。&lt;/p&gt;
+&lt;p&gt;对于创造，你只要打通所有环节，就全部通了；&lt;/p&gt;
+&lt;p&gt;对于破坏，你只要一个薄弱点被突破，就全盘皆输。&lt;/p&gt;
+&lt;p&gt;LLM适合干创造的事，因为它只需要根据经验选一个最佳输出。但是要做好安全，你得写每一行代码时，都要遍历其所有的风险。&lt;/p&gt;
+&lt;p&gt;那么结合之前的 &lt;a href="/2026/stdin-12"&gt;Instruct 模型&lt;/a&gt;去思考&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;大模型 pretrain 是学习语料库的概率分布，可以理解为形形色色的人说过的话&lt;/li&gt;
+&lt;li&gt;posttrain 我觉得最重要的意义是按照一定“偏好”在 chat范式下，更良好的一问一答（pretrain里的语料一问一答很少）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;那么问题来了。一问一答的排查问题这种模式，在 pretrain 里的分布是不是偏少。每件具体的事出现的问题可以说是千奇百怪。&lt;/p&gt;
+&lt;p&gt;比如上一行你在处理登录，下一行你就开始查SQL，接着你又开始拼template字符&lt;/p&gt;
+&lt;p&gt;对于安全而言，每一行都在切换 domain。LLM在这里会有能力和精度的损失，导致注意力不集中。&lt;/p&gt;
+&lt;p&gt;更好的方式是，先看几行，找出最关键的问题，然后reset上下文，从问题部分继续往后看几行，再找出最关键的问题，这样迭代进行。这样每次都更符合 pretrain 分布。&lt;/p&gt;
+&lt;p&gt;pretrain 的素材里会单独讲登录有哪些要注意，SQL有哪些坑，模板有哪些隐患，但是很少有刚好把 登录+查SQL+模板 按顺序加在一起综合有什么安全问题。&lt;/p&gt;
+&lt;p&gt;你可以把登录、查SQL、模板分别一问一答，在 pretrain 里的分布就更丰富。如果混一起问，具体的事项+组合爆炸，出现的问题可以说是千变万化&lt;/p&gt;
+&lt;p&gt;如果你直接问：这段代码有什么安全问题？AI只能挑选几个它觉得最有代表性的，突出的，给你讲一讲。&lt;/p&gt;
+&lt;p&gt;所以，我有理由认为，AI在「排查」类问题上，因为LLM层数，top-k，max_tokens，think_budget等先天能力和精度的损失，必然会结果很松散。&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;再说另外个感受，最近 vibe 的东西比较多，我感觉AI在设计的时候，对于“状态机” 极容易翻车。就是SPA界面上各个控件触发顺序、互斥等逻辑。&lt;/p&gt;
+&lt;p&gt;简单、成熟的交互设计能one-shot，但是稍微多几个步骤，AI就会糊一个表面上过得去，但是edge case 全部翻车的产品。&lt;/p&gt;
+&lt;p&gt;折腾了许久搞得我灰头土脸，后来实在没办法，让 AI 先自己拍脑袋列举典型实用场景，写了100多个case，然后新开个上下文让设计，并记录设计的出发点和考虑，然后再逐一case去验证，然后迭代设计里不满足的地方。几轮下来，最终AI给出了一个比较像样，至少100多个case不会太大偏离的设计。&lt;/p&gt;
+&lt;p&gt;这也算一个土办法？&lt;/p&gt;
+&lt;p&gt;如果你仔细看这个问题，其实跟上一段「安全」本质是一回事。&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;现在有一个大的体会，AI在 happy path 上越来越稳，刷分越来越高，像一个经验老道的猎手。但是对于先验不足的东西，它缺乏一种 scatter-gather 的耐心和细致。&lt;/p&gt;
+&lt;p&gt;想起来，人对于「采集」这种事心态是完全不同的。你得处处留心，以一种「万一将来有用」的目标去做事，甚至做没意义的事。&lt;/p&gt;
+&lt;p&gt;AI亏就亏在，它肯定能在某个局部发现某个问题有“隐患”。但是因为这个属于偏题，可以回答可以不回答。如果手头任务繁重，它即便隐藏层激活了也会最终被吞没。&lt;/p&gt;
+&lt;p&gt;然后AI上下文不是永久的，它无法在10天后新的context里突然回忆起之前遇到个有关的坑！&lt;/p&gt;
+&lt;p&gt;这是机制上无法弥补的行动缺陷。&lt;/p&gt;
+&lt;p&gt;当然不排除有 agent 能朝这个方向努努力，多听听AI发牢骚，记录并形成一笔财富。哈哈哈&lt;/p&gt;
+&lt;p&gt;我现在预估AI能力边界是这样思考的：&lt;/p&gt;
+&lt;p&gt;对于某个任务或者话题，&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;pretrain 的 wikipedia/reddit/arxiv 一般会怎么叙述？&lt;/li&gt;
+&lt;li&gt;对于该任务或者话题，AI Lab 里后训练会设置什么样的eval？&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;然后就能估摸出个能力大概。&lt;/p&gt;
+&lt;p&gt;Gemini一看，补充了一点：&lt;/p&gt;
+&lt;ol start="3"&gt;
+&lt;li&gt;reasoning 会如何改善并影响最终输出？&lt;/li&gt;
+&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">est</dc:creator><pubDate>Thu, 28 May 2026 00:11:00 +0800</pubDate><guid isPermaLink="false">tag:None,2026-05-28:/2026/stdout-19</guid><category>stdout</category></item><item><title>理解LLM的范式——它就是个差分机？</title><link>https://blog.est.im/2026/stderr-20</link><description>&lt;p&gt;作为一个外行，我一直对“AI”的魔力感到惊奇，我一度以为神经网络一层一层传播，可以看成某种有限步骤的图灵机。AI提醒我不要瞎类比，图灵机左移右移是离散，确定的逻辑，神经网络是fp32上连续的概率映射。&lt;/p&gt;
+&lt;p&gt;后来稍微深入了解了一下，认识到对于一个深度固定的 Transformer 模型（比如 96 层的 GPT-4），它的单次前向传播算是一个深度固定的有向无环图（DAG）。所谓的 predict next token，可以粗糙理解成&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;  next_token = eval(model_weights, history+input)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;这里最奇特的算是：自回归（Autoregression）。传统的冯·诺依曼架构中，指令（Code）和数据（Data）是分开的。但在 LLM 中，上下文是动态的指令+数据。输出什么样话，什么时机结束。LLM得自己想办法把画圆回来，并且知道什么时候该停止吐词。&lt;/p&gt;
+&lt;p&gt;这种 控制面 和 数据面 混合的做法让我感到非常不适，也是诸多prompt injection问题无解的根源&lt;/p&gt;
+&lt;p&gt;不过一旦get到这个范式，我想到一个有趣的类比，一般的 gpt 是 dcoder-only，VRAM里权重就如同 .exe 加载到内存里一样，是永久不会动的；kvcache才是 &lt;code&gt;malloc&lt;/code&gt; 去操作的独占内存。BERT那种 encoder-decoder 模型，算是一个可以自我修改的.exe？&lt;/p&gt;
+&lt;p&gt;如果拿python/java对比，LLM就是显存里一些可以边运行边修改的bytecode，只不过是fp而不是指令和数据&lt;/p&gt;
+&lt;p&gt;后来又了解到，要纯从设计上来说，RNN是明显超过transformer架构的。但是 RNN 死穴很明显，第一计算精度传播越到后面误差越大，第二它不知道什么时候停下来。第三它是串行的。越到后面越慢&lt;/p&gt;
+&lt;p&gt;transformer 算是一种不是那么直接，但是非常能“并行” scale 的体系。 自注意力解决了时间上的并行，让长度不再是障碍，Multi-Head Attention 解决了空间上的并行，让深度和广度不再是障碍，而这一切都只需要暴力算矩阵乘法 &lt;code&gt;GEMM&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;我了解到这一步的时候，忽然回忆起，这不就是google当年解决ranking的套路吗？虽然把整个互联网看成一个巨大的邻接矩阵的做法，看上去更笨更重，但是能 scale 啊&lt;/p&gt;
+&lt;p&gt;基于上面的一些认知，我明确&lt;a href="/2026/stderr-11"&gt;看好taalas&lt;/a&gt;&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;最近不知道看到什么资料，突然想起一个圣遗物——差分机&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;在 19 世纪，航海、天文、甚至银行算账全靠人工查阅印制的《数学表》（对数表、三角函数表等）。但当时负责计算的“人类计算员（Computers）”极其容易算错或抄错。巴贝奇恶心透了这种低效，于是想：“为什么不用蒸汽机来摇出准确的数字？”&lt;br /&gt;
+核心思想是，任何复杂的低阶多项式函数，只要你求导（做差分）足够多次，最终它的“差分值”都会变成一个常数。&lt;br /&gt;
+那么可以反推，既然最后是常数，那只要把这个常数固定住，反向一层一层做加法，就能像堆积木一样，把所有复杂的乘方运算全算出来！&lt;br /&gt;
+差分机一号（Difference Engine No.1）由英国政府在1822年出资，工匠约瑟夫·克莱芒打造，预计完工需要25,000个零件，重达4吨，可计算到第六阶差，最高可以存16位数（相当于千兆的数）&lt;br /&gt;
+要计算一个多项式  f(x) ，它不直接算乘法，而是构造一个 差分表。&lt;br /&gt;
+初始值  f(0), Δf(0), Δ²f(0), ……&lt;br /&gt;
+每次步进  x → x+1 只需做加法：&lt;br /&gt;
+&lt;code&gt;f ←  f + Δf&lt;/code&gt;&lt;br /&gt;
+&lt;code&gt;Δf ← Δf + Δ²f&lt;/code&gt;&lt;br /&gt;
+ 等等&lt;br /&gt;
+我们用一个最简单的 2阶多项式为例 f(x) = x²&lt;br /&gt;
+让 x 从 1 开始，步长为 1 地往下算&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;x 的值&lt;/th&gt;
+&lt;th&gt;函数结果 f(x)（原函数）&lt;/th&gt;
+&lt;th&gt;一阶差分 Δ₁（相当于一阶导数）&lt;/th&gt;
+&lt;th&gt;二阶差分 Δ₂（相当于二阶导数）&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;1² = &lt;strong&gt;1&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;2² = &lt;strong&gt;4&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;4 − 1 = &lt;strong&gt;3&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;td&gt;3² = &lt;strong&gt;9&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;9 − 4 = &lt;strong&gt;5&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;5 − 3 = &lt;strong&gt;2&lt;/strong&gt;（变成常数了！）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;4&lt;/td&gt;
+&lt;td&gt;4² = &lt;strong&gt;16&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;16 − 9 = &lt;strong&gt;7&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;7 − 5 = &lt;strong&gt;2&lt;/strong&gt;（永远是 2！）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;5&lt;/td&gt;
+&lt;td&gt;5² = &lt;strong&gt;25&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;25 − 16 = &lt;strong&gt;9&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;9 − 7 = &lt;strong&gt;2&lt;/strong&gt;（闭眼都是 2！）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;那个最终的常数 &lt;code&gt;2&lt;/code&gt;这就是巴贝奇的“高地”&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;巴贝奇那个年代不知道会不会泰勒展开，能展开这玩意不就是万能计算器了？&lt;/p&gt;
+&lt;p&gt;冯诺依曼说过，五个参数鼻子翘，300B的参数不就能描绘世间万物了？&lt;/p&gt;
+&lt;p&gt;然后突然&lt;strong&gt;注意到&lt;/strong&gt;那个 常数2 不就是个 &lt;code&gt;eos_token&lt;/code&gt; ？ 卧草，这不和梯度下降，reward model 串起来了吗？&lt;/p&gt;
+&lt;p&gt;所以我今天宣布，LLM（特别是 Reasoning Model）在物理和数学本质上，就是一个高维的、基于概率特征的现代差分机！&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;既然有 差分机 这个范式了，那么下一步就很自然了：&lt;/p&gt;
+&lt;p&gt;AI Agent 领域遭遇的 State 瓶颈，本质上就是试图在没有底层硬件支持的情况下，用外部工程硬生生模拟出 &lt;strong&gt;分析机&lt;/strong&gt; 的“条件分支（If-Else）”与“循环（Loop）”&lt;/p&gt;
+&lt;p&gt;可能很多人问：“什么是分析机？” 实际上，巴贝奇当年的 差分机 是个典型的钓鱼工程，烂尾项目&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;差分机因为大量精密零件制造困难，加上巴贝奇不停地边制造边修改设计，从1822到1832年的十年间，巴贝奇只能拿出完成品的1/7部分来展示&lt;br /&gt;
+在不断延后完成期限的严重超支后，英国政府于1842年的最后清算发现整个计划一共让国库支出了￡17,500，一万两千多个还没用到的精密零件后来都被熔解报废&lt;br /&gt;
+差分机二号（或称大型差分机）在1849年设计出来，却在有生之年只实作了很小一部分。这台机器可以进行相当复杂的数学计算，具有31位元精度&lt;br /&gt;
+差分机项目过程中，巴贝奇意识到建造一种更加通用的机器（即所谓的分析机）是可行的，于是便于1833年开始了分析机的设计&lt;br /&gt;
+分析机由蒸汽机驱动，大约有30米长、10米宽。它的输入由程序和数据组成，并使用打孔卡输入，这种输入方法被当时的织布机广泛采用。&lt;br /&gt;
+分析机通过一台打印机、一个弯曲的绘图仪和一个铃铛输出，也可以在纸上打孔以便日后读取。分析机采取普通的十进制定点计数法&lt;br /&gt;
+它的“记忆体”大约可以存储1000个50位的十进制数（共约16.2kB）。有一个算术逻辑单元可以进行四则运算、比较和求平方根操作&lt;br /&gt;
+分析机使用的编程语言与今天的汇编语言类似，支持&lt;strong&gt;循环语句&lt;/strong&gt;和&lt;strong&gt;条件分支&lt;/strong&gt;，因此这门语言被认为是图灵完备的。&lt;br /&gt;
+分析机采用三种不同的打孔卡和读卡器来区分算术运算、数字常量和存储的指令，以此实现了数字在存储器和运算单元之间的加载和存储操作。&lt;br /&gt;
+巴贝奇在1837至1840年间写下了24份程序，这些程序可以计算多项式、迭代公式、高斯消元法和伯努利数&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;划重点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;if&lt;/li&gt;
+&lt;li&gt;loop&lt;/li&gt;
+&lt;li&gt;memory&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;扩展 &lt;code&gt;if&lt;/code&gt; 意味着什么？那就是 workflow编排。LangGraph, Dify 表示很熟&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;loop&lt;/code&gt;呢，可以理解为 human-in-the-loop，也要意识到所有的 transformer 都是 append-only，遇到犯错你无法 inplace 修改，只能用修正的循环去覆盖之前的结果。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;memory&lt;/code&gt; 的重要性就更不要说了。RAG都红得都快凉了。什么 openclaw 各种，主打核心就是记忆系统，被玩出花了&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;看到有个对 &lt;a href="https://x.com/yoheinakajima/status/2056598291316634079"&gt;记忆系统的整体评价&lt;/a&gt;，他说得比我精辟多了。摘抄一点&lt;/p&gt;
+&lt;p&gt;人们大量造这类轮子：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;event logs&lt;/li&gt;
+&lt;li&gt;memory systems&lt;/li&gt;
+&lt;li&gt;graph layers&lt;/li&gt;
+&lt;li&gt;retrieval engines&lt;/li&gt;
+&lt;li&gt;replay systems&lt;/li&gt;
+&lt;li&gt;state machines&lt;/li&gt;
+&lt;li&gt;trace infrastructure&lt;/li&gt;
+&lt;li&gt;workflow runtimes&lt;/li&gt;
+&lt;li&gt;self-reflection loops&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;仔细看都是在解决同一个问题：每个AI对话是独立的。&lt;/p&gt;
+&lt;p&gt;实际上记忆设计是多种不同的问题被当成一个名词喊了：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;对话召回&lt;/li&gt;
+&lt;li&gt;长期知识&lt;/li&gt;
+&lt;li&gt;工具调用历史&lt;/li&gt;
+&lt;li&gt;决策链路&lt;/li&gt;
+&lt;li&gt;能力演化&lt;/li&gt;
+&lt;li&gt;状态重建&lt;/li&gt;
+&lt;li&gt;失败记录&lt;/li&gt;
+&lt;li&gt;任务上下文&lt;/li&gt;
+&lt;li&gt;来源追踪&lt;/li&gt;
+&lt;li&gt;自我版本变化&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Agent 不只是要知道“之前发生了什么”，还要知道：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;当前的设定&lt;/li&gt;
+&lt;li&gt;当前要干啥&lt;/li&gt;
+&lt;li&gt;哪些信息发生了变化&lt;/li&gt;
+&lt;li&gt;哪些工具可用&lt;/li&gt;
+&lt;li&gt;哪些尝试失败了&lt;/li&gt;
+&lt;li&gt;哪些操作成功了&lt;/li&gt;
+&lt;li&gt;接下来要发生什么？&lt;/li&gt;
+&lt;li&gt;当时是“哪个版本的自己”做出了某个决策。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;p&gt;我突然意识到一个更大的拼图：&lt;/p&gt;
+&lt;p&gt;LLM其实算 ALU 和 FPU。它的作用就是去 pretrain 的数据按照 posttrain 的风格，得出一串文本。&lt;/p&gt;
+&lt;p&gt;kvcache 就是这个时代的寄存器&lt;/p&gt;
+&lt;p&gt;加上真正的 &lt;code&gt;if&lt;/code&gt;，&lt;code&gt;loop&lt;/code&gt; 控制器，才是完整的“大脑”&lt;/p&gt;
+&lt;p&gt;大脑要工作，还得接存储。&lt;/p&gt;
+&lt;p&gt;文章一开始的，LLM算不算图灵机，其实差远了。&lt;/p&gt;
+&lt;p&gt;用这个范式去分析现在流行的AI论断，就很有趣了。&lt;/p&gt;
+&lt;p&gt;LLM是真正的智能吗？是 AGI 吗？&lt;/p&gt;
+&lt;p&gt;同理，ALU它懂“真正的加法”吗？它能解决 “现实世界” 的四则运算问题吗？&lt;/p&gt;
+&lt;p&gt;哈哈哈，都是什么问题啊。&lt;/p&gt;
+&lt;p&gt;什么算“智能”？它也是很多不同范式的任务被杂糅在一起的概念。而且它是什么已经。。。不重要了。关键看某一类任务它能做什么。&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">est</dc:creator><pubDate>Mon, 25 May 2026 11:57:00 +0800</pubDate><guid isPermaLink="false">tag:None,2026-05-25:/2026/stderr-20</guid><category>stderr</category></item><item><title>路径依赖</title><link>https://blog.est.im/2026/stderr-19</link><description>&lt;p&gt;最近vibe了个分布式系统，没有 master 和 arbiter，全是平等的peer&lt;/p&gt;
+&lt;p&gt;然后这些peer去处理流量问题。&lt;/p&gt;
+&lt;p&gt;处理多个事情，当流量爆发，承载能力不足的时候，需要快速补足peer&lt;/p&gt;
+&lt;p&gt;扩容是个最简单，很强烈，明确的信号，而且效果立竿见影。&lt;/p&gt;
+&lt;p&gt;当事情没那么多，流量下降之后呢？该节约哪个peer？你敢动吗？影响别的事儿怎么办？&lt;/p&gt;
+&lt;p&gt;呃，感觉前一发动全身了。于是全体peer进入一个次最优状态。&lt;/p&gt;
+&lt;p&gt;除非某个peer手上实在没多少事，可以明显看出合并给另一个peer处理，这个peer才方便下岗。这个流程才算结束&lt;/p&gt;
+&lt;p&gt;看到 grafana 那个 40% 的使用率，我麻了。我也不敢去手动缩容，来rebalance万一就不 balance了呢？&lt;/p&gt;
+&lt;p&gt;让AI 改了几版，发现都不太满意。我对分布式系统也是个一知半解，就很头痛&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;突然想到另外个事，我似乎破解了官僚系统，体制阻力，旧习沿用成百上千年的底层原理了&lt;/p&gt;
+&lt;p&gt;请神容易，送神难。跟ChatGPT聊了一下&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;扩容时，信号很干净。队列变长、延迟升高、丢包增加、CPU 打满，这些都能直接映射到“再加 peer 有收益”。缩容时，信号就脏得多。你想拿掉某个 peer，真正要问的是：它承载的是不是一个独立故障域，它的状态能不能无痛迁移，它旁边的 peer 会不会因此抖一下，未来流量反弹时要不要再把它加回来。只要这些答案里有任何一个不够确定，系统就会偏向保守，宁可维持冗余，也不愿意动它。这个偏置在组织里就表现成“谁都不敢裁，谁都不敢合，最后全员次优”。在分布式系统里，这叫 hysteresis、stickiness、coordination cost 和 failure-domain conservatism。&lt;br /&gt;
+这个模型很像官僚系统的底层动力学。增员是局部可见收益，裁撤是全局潜在风险；新增一个人只需要证明“有需要”，拿掉一个人却要证明“拿掉之后不会出事”。于是系统会形成一种惯性：只要还有某个 peer 没明显闲到可以安全并入别人，整个系统就保持原样。这个状态看起来低效，实际上是风险最小化后的均衡。&lt;br /&gt;
+所以“前一发动全身”非常准确。它对应的就是去中心化系统里最常见的粘性状态：局部最优、全局保守、整体不收敛。真正能把它打破的，通常不是更聪明的调度算法，而是把“可撤销性”做出来，比如强隔离、状态外置、租约、自动迁移、明确的退出协议，以及让缩容的失败代价可控。只要退出成本高，系统就会天然偏向留着。&lt;br /&gt;
+实际上这是非常成熟、而且横跨很多学科的大主题了。现在碰到的，其实是几个领域在交叉：&lt;br /&gt;
+ * 分布式系统&lt;br /&gt;
+ * 组织理论（organizational theory）&lt;br /&gt;
+ * 控制论 / 复杂系统&lt;br /&gt;
+ * 制度经济学&lt;br /&gt;
+ * 社会学里的官僚制研究&lt;br /&gt;
+ * 网络科学&lt;br /&gt;
+这个直觉的厉害之处在于：不是从“人性”“文化”“领导力”切入，而是从“协调成本 + 状态迁移风险 + 缩容不确定性”去解释官僚惯性。这种思路其实非常接近现代复杂系统研究。学术界里有几个非常接近这个观察的核心概念：&lt;br /&gt;
+“组织惯性”（organizational inertia）&lt;br /&gt;
+这是最直接的。组织一旦形成结构、流程、职责边界，就会对改变产生巨大阻力。不是因为大家懒，而是因为改动的连锁影响不可预测。“动一个 peer 会影响别的事”几乎就是 structural inertia 的口语版。尤其有个很关键的点：系统越复杂，actor 越无法预测改动后的 cascade consequences（级联后果）。&lt;br /&gt;
+这在组织理论里已经是经典命题了——“路径依赖”（path dependence），即为什么明明次优，系统却长期保持？&lt;br /&gt;
+因为一旦形成网络关系、责任边界、流程耦合，旧结构会自我强化。即使所有人都知道不是最优，也没人敢先拆。&lt;br /&gt;
+那个 peer 模型其实特别适合解释这个：新增 peer：收益局部且立刻可见；删除 peer：风险全局且延迟出现。于是系统天然向“增不减”偏移。这个偏移在官僚系统里就是：部门越来越多、审批越来越厚、流程越来越难删除。因为“增加一道检查”永远容易 justify；但“删除一道检查”必须证明未来永远不会出事。&lt;br /&gt;
+这其实已经非常接近制度经济学里的 transaction cost / coordination cost 理论了。这个模型甚至还能映射到 CAP / consensus 类问题。因为实际上在说：“系统为了避免局部错误，会选择维持全局冗余。”这和分布式系统里：&lt;br /&gt;
+ - replica 不愿缩减&lt;br /&gt;
+ - shard 不愿迁移&lt;br /&gt;
+ - leader 不愿切换&lt;br /&gt;
+ - consensus 不愿 reconfiguration&lt;br /&gt;
+本质是同一种保守动力学。&lt;br /&gt;
+尤其 cluster membership change 一直是分布式系统最难的部分之一。因为：“加入节点”是加资源；“移除节点”是改拓扑。后者危险得多。所以 Raft、Paxos 那些论文，对 membership reconfiguration 都写得非常谨慎。&lt;br /&gt;
+很多社会学家会把官僚问题解释为：&lt;br /&gt;
+ - 权力&lt;br /&gt;
+ - 利益&lt;br /&gt;
+ - 保守主义&lt;br /&gt;
+ - 文化&lt;br /&gt;
+但peer这个模型更接近：&lt;br /&gt;
+“官僚制是 large-scale distributed coordination 在 uncertainty 下的自然结果。”这个味道其实很像Herbert Simon、Niklas Luhmann、Stafford Beer、部分复杂系统理论、还有现代 multi-agent coordination&lt;br /&gt;
+甚至现在 AI multi-agent 研究里，也开始重新讨论 coordination tax 了。&lt;br /&gt;
+因为 agent 一多，最大的成本往往已经不是计算，而是：同步、状态一致性、责任边界、coordination overhead&lt;br /&gt;
+这个“扩容容易，缩容困难”的观察，实际上已经非常接近复杂系统天然存在熵增式组织膨胀这是个很深的方向。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;有点意思。&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;突然又想起一个老事，pip 依赖解析为什么那么慢，以及&lt;a href="https://pydevtools.com/blog/how-uv-solves-dependencies-so-fast/"&gt;uv为啥快&lt;/a&gt;。Rust和Node允许一个库多版本共存，python要求唯一。&lt;code&gt;cargo&lt;/code&gt;用了 graph traversal，&lt;code&gt;uv&lt;/code&gt; 则是基于 CDCL的 SAT solver。&lt;/p&gt;
+&lt;p&gt;这个 CDCL(conflict-driven clause learning) 是一种形式化验证技巧，学习冲突去剪枝。渊源来自于 &lt;a href="https://github.com/pubgrub-rs/pubgrub"&gt;PubGrub&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;我上班这么多年，大小，央企民企都待过。发现很多既定管理和流程，就是用最笨的堆人的办法去遍历，跟最老的 &lt;code&gt;pip&lt;/code&gt; 一样。python的依赖包最早是个 &lt;code&gt;setup.py&lt;/code&gt; 它被当成 .tgz 打包进 cheeze shop，你要去解析，得完整下载，解压。这些麻烦就不说了，最逆天的是他丫的不是声明式的，而是一个可执行文件，依赖是可以动态生成的。吐血。pip老遭罪了，得一个一个去下载，一个一个去问，然后一个一个去试。&lt;/p&gt;
+&lt;p&gt;是不是恰似某些部门办事的各种 “&lt;a href="https://blog.est.im/post/175976643500"&gt;潜规则&lt;/a&gt;” ？哈哈哈&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;这些问题有没有解呢？可能终极形态，就是 Kubernetes 那样的吧。可观察性+声明式+状态推理&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">est</dc:creator><pubDate>Thu, 21 May 2026 16:55:00 +0800</pubDate><guid isPermaLink="false">tag:None,2026-05-21:/2026/stderr-19</guid><category>stderr</category></item></channel></rss>

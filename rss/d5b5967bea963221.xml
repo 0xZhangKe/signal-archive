@@ -1,0 +1,1571 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.5">Jekyll</generator><link href="https://owenou.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://owenou.com/" rel="alternate" type="text/html" /><updated>2024-05-21T21:57:33+00:00</updated><id>https://owenou.com/feed.xml</id><title type="html">Owen Ou’s blog</title><subtitle>Owen Ou's tech blog.</subtitle><author><name>Owen Ou</name></author><entry><title type="html">Goup - Elegant Go Version Manager</title><link href="https://owenou.com/goup/" rel="alternate" type="text/html" title="Goup - Elegant Go Version Manager" /><published>2020-10-08T00:00:00+00:00</published><updated>2020-10-08T00:00:00+00:00</updated><id>https://owenou.com/goup</id><content type="html" xml:base="https://owenou.com/goup/"><![CDATA[<p><a href="https://github.com/owenthereal/goup">Goup</a> (pronounced Go Up) is an elegant solution to install Go and manage Go versions.</p>
+
+<p>It is notorious that an operating system’s package manager takes time to update Go to the latest version, particularly on Linux distros.
+At the time of this writing in October 2020, Fedora 32’s Go version from <a href="https://fedoraproject.org/wiki/DNF">dnf</a> is 1.14.9, while the latest Go version is 1.15.2.</p>
+
+<p>There are a bunch of solutions to install Go or manage Go versions outside of a package manager:
+<a href="https://github.com/golang/dl">dl</a>, <a href="https://github.com/golang/tools/tree/master/cmd/getgo">getgo</a>, <a href="https://github.com/moovweb/gvm">gvm</a>, <a href="https://github.com/syndbg/goenv">goenv</a>, to name a few.
+All of them either do not work well on all Linux distros (I ran into errors with <code class="language-plaintext highlighter-rouge">gvm</code> and <code class="language-plaintext highlighter-rouge">goenv</code> on Fedora) or do not provide the developer experience that I like (<code class="language-plaintext highlighter-rouge">dl</code> requires a Go compiler to pre-exist; <code class="language-plaintext highlighter-rouge">getgo</code> can only install the latest Go)</p>
+
+<p>I want a Go version manager that:</p>
+
+<ul>
+  <li>Has a minimum prerequisite to install, e.g., does not need a Go compiler to pre-exist.</li>
+  <li>Is installed with a one-liner.</li>
+  <li>Runs well on all operating systems (at least runs well on *uix as a start).</li>
+  <li>Installs any version of Go (any version from <a href="https://golang.org/dl">golang.org/dl</a> or tip) and switches to it.</li>
+  <li>Does not inject magic into your shell.</li>
+  <li>Is written in Go.</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">goup</code> is an attempt to fulfill the above features and is heavily inspired by <a href="https://rustup.rs/">Rustup</a>, <a href="https://github.com/golang/dl">golang/dl</a> and <a href="https://github.com/golang/tools/tree/master/cmd/getgo">getgo</a></p>
+
+<p>You can install <code class="language-plaintext highlighter-rouge">goup</code> with one line:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -sSf https://raw.githubusercontent.com/owenthereal/goup/master/install.sh | sh
+</code></pre></div></div>
+
+<p>You can install the latest Go and switch to it:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ goup install
+Downloaded   0.0% (    32768 / 121149509 bytes) ...
+Downloaded  12.4% ( 15007632 / 121149509 bytes) ...
+Downloaded  30.2% ( 36634352 / 121149509 bytes) ...
+Downloaded  47.6% ( 57703440 / 121149509 bytes) ...
+Downloaded  65.9% ( 79855008 / 121149509 bytes) ...
+Downloaded  84.2% (101972672 / 121149509 bytes) ...
+Downloaded 100.0% (121149509 / 121149509 bytes)
+INFO[0030] Unpacking /home/owen/.go/go1.15.2/go1.15.2.linux-amd64.tar.gz ...
+INFO[0043] Success: go1.15.2 downloaded in /home/owen/.go/go1.15.2
+INFO[0043] Default Go is set to 'go1.15.2'
+</code></pre></div></div>
+
+<p>You can check the currently active Go version:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ goup show
+go1.15.2
+</code></pre></div></div>
+
+<p>You can install <a href="https://tip.golang.org">tip</a> and switch to it.
+Go tip means the tip of the Go development tree.
+The following compiles Go from the latest source:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ goup install tip
+Cloning into '/home/owen/.go/gotip'...
+remote: Counting objects: 10041, done
+remote: Finding sources: 100% (10041/10041)
+remote: Total 10041 (delta 1347), reused 6538 (delta 1347)
+Receiving objects: 100% (10041/10041), 23.83 MiB | 3.16 MiB/s, done.
+Resolving deltas: 100% (1347/1347), done.
+Updating files: 100% (9212/9212), done.
+INFO[0078] Updating the go development tree...
+From https://go.googlesource.com/go
+ * branch            master     -&gt; FETCH_HEAD
+HEAD is now at 5d13781 cmd/cgo: add more architectures to size maps
+Building Go cmd/dist using /home/owen/.go/go1.15.2. (go1.15.2 linux/amd64)
+Building Go toolchain1 using /home/owen/.go/go1.15.2.
+Building Go bootstrap cmd/go (go_bootstrap) using Go toolchain1.
+Building Go toolchain2 using go_bootstrap and Go toolchain1.
+Building Go toolchain3 using go_bootstrap and Go toolchain2.
+Building packages and commands for linux/amd64.
+---
+Installed Go for linux/amd64 in /home/owen/.go/gotip
+Installed commands in /home/owen/.go/gotip/bin
+INFO[0297] Default Go is set to 'gotip'
+</code></pre></div></div>
+
+<p>If you want to learn more, the soruce is <a href="https://github.com/owenthereal/goup">here</a>.</p>
+
+<p>Happy Go Uping!</p>]]></content><author><name>Owen Ou</name></author><category term="goup" /><category term="go" /><summary type="html"><![CDATA[Goup (pronounced Go Up) is an elegant solution to install Go and manage Go versions.]]></summary></entry><entry><title type="html">Upterm - Secure Terminal Sharing</title><link href="https://owenou.com/upterm/" rel="alternate" type="text/html" title="Upterm - Secure Terminal Sharing" /><published>2020-07-11T00:00:00+00:00</published><updated>2020-07-11T00:00:00+00:00</updated><id>https://owenou.com/upterm</id><content type="html" xml:base="https://owenou.com/upterm/"><![CDATA[<p><a href="https://github.com/owenthereal/upterm">Upterm</a> is an open-sourced solution for sharing terminal sessions instantly over the public internet via SSH tunnels.
+It is good for</p>
+
+<ul>
+  <li>Remote pair programming</li>
+  <li>Access remote computers behind NATs and firewalls</li>
+  <li>Remote debugging</li>
+</ul>
+
+<p>Upterm is written in Go and is open-sourced at <a href="https://github.com/owenthereal/upterm">https://github.com/owenthereal/upterm</a>.</p>
+
+<h2 id="how-it-works">How it works</h2>
+
+<p>You run the <code class="language-plaintext highlighter-rouge">upterm</code> program by hosting a terminal session.
+Upterm starts an SSH server on your machine and connects to an Upterm server (a.k.a. uptermd) via reverse SSH tunnel.
+Your friends connect to your terminal session using ssh via the same Upterm server.</p>
+
+<p>Here is a diagram on the technical details:</p>
+
+<p><img src="https://raw.githubusercontent.com/owenthereal/upterm/gh-pages/upterm-flowchart.svg?sanitize=true" alt="diagram" /></p>
+
+<h2 id="demo">Demo</h2>
+
+<p><a href="https://asciinema.org/a/LTwpMqvvV98eo3ueZHoifLHf7"><img src="https://asciinema.org/a/LTwpMqvvV98eo3ueZHoifLHf7.svg" alt="asciicast" /></a></p>
+
+<h2 id="quickstart">Quickstart</h2>
+
+<p>Install <code class="language-plaintext highlighter-rouge">upterm</code> by following <a href="https://github.com/owenthereal/upterm#installation">this guide</a>.</p>
+
+<p>On your machine, host a terminal session by specifying a command:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ upterm host -- bash
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">upterm</code> will start the command and pop up an ssh connection string that one can connect.
+In case you miss the connection string, display it with:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ upterm session current
+=== IQKSFOICLSNNXQZTDKOJ
+Command:                bash
+Force Command:          n/a
+Host:                   ssh://uptermd.upterm.dev:22
+SSH Session:            ssh IqKsfoiclsNnxqztDKoj:MTAuMC40OS4xNjY6MjI=@uptermd.upterm.dev
+</code></pre></div></div>
+
+<p>Open a new terminal and connect to the session:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ssh IqKsfoiclsNnxqztDKoj:MTAuMC40OS4xNjY6MjI=@uptermd.upterm.dev
+</code></pre></div></div>
+
+<p>You should see the input and output of both terminals are linked!</p>
+
+<p>If you want only authorized clients to connect to your session, you can specify the clients’ authorized keys with</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ upterm host --authorized-key PATH_TO_PUBLIC_KEY -- bash
+</code></pre></div></div>
+
+<p>If you are looking for a <a href="https://tmate.io">Tmate</a>-like experience, create a <a href="https://github.com/tmux/tmux">Tmux</a> session, and “force” clients to attach to the Tmux session:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ upterm host --force-command 'tmux attach -t pair-programming' -- tmux new -t pair-programming
+</code></pre></div></div>
+
+<p>The above creates a Tmux session by running <code class="language-plaintext highlighter-rouge">tmux new -t pair-programming</code>.
+After a client connects, Upterm will attach the client’s input and output to the input and output of the Tmux session “pair-programming”.</p>
+
+<p>If you are concerned with others accessing your root file system, wrap the terminal session in a Docker container:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ upterm host -- docker run --rm -ti ubuntu bash
+</code></pre></div></div>
+
+<p>I will write another blog post in the future to share how I securely host a terminal session using containers.</p>
+
+<h2 id="how-is-upterm-compared-to-prior-arts">How is Upterm compared to prior arts?</h2>
+
+<p>Upterm is an alternative to <a href="https://tmate.io">Tmate</a>.</p>
+
+<p>Tmate is a fork of an older version of Tmux. It adds terminal sharing capability on top of Tmux 2.x.
+Tmate doesn’t intend to catch up with the latest Tmux (at this time of the post, the latest Tmux is 3.x), so any Tmate &amp; Tmux users must maintain two versions of the configuration.
+For example, you must <a href="https://github.com/tmate-io/tmate/issues/108">bind the same keys twice with a condition</a>.</p>
+
+<p>Upterm is designed from the group up not to be a fork of anything.
+It builds around the concept of linking the input &amp; output of any shell command between a host and its clients.
+As you see above, you can share any command besides <code class="language-plaintext highlighter-rouge">tmux</code>.
+This opens up a door for securely sharing a terminal session using containers (I will explain more in a future post).</p>
+
+<p>Upterm is written in Go.
+It is more friendly hackable than Tmate that is written in C because Tmux is C.
+The Upterm CLI and server (<code class="language-plaintext highlighter-rouge">uptermd</code>) are compiled into a single binary.
+You can quickly <a href="https://github.com/owenthereal/upterm#deploy-uptermd">spawn up your pairing server</a> in any cloud environment with zero dependencies.</p>
+
+<h2 id="tips">Tips</h2>
+
+<h3 id="why-doesnt-upterm-show-the-current-terminal-session-in-tmux">Why doesn’t upterm show the current terminal session in Tmux?</h3>
+
+<p><code class="language-plaintext highlighter-rouge">upterm session current</code> shows the connection info of the current terminal session.
+It needs the <code class="language-plaintext highlighter-rouge">UPTERM_ADMIN_SOCKET</code> environment variable to function.
+By default, Tmux doesn’t carry over environment variables that are not in its <a href="http://man.openbsd.org/i386/tmux.1#GLOBAL_AND_SESSION_ENVIRONMENT">default list</a> to a Tmux session unless you tell it.
+So add the following line to your <code class="language-plaintext highlighter-rouge">~/.tmux.conf</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>set-option -ga update-environment " UPTERM_ADMIN_SOCKET"
+</code></pre></div></div>
+
+<h3 id="how-to-make-it-obvious-that-i-am-in-an-upterm-session">How to make it obvious that I am in an upterm session?</h3>
+
+<p>It can be confusing whether your terminal session is an upterm session or not.
+As an example, I add an emoji to my prompt to identify an upterm session:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># in your ~/.bashrc or ~/.zshrc </span>
+<span class="nb">export </span><span class="nv">PS1</span><span class="o">=</span><span class="s2">"</span><span class="si">$(</span><span class="o">[[</span> <span class="o">!</span> <span class="nt">-z</span> <span class="s2">"</span><span class="k">${</span><span class="nv">UPTERM_ADMIN_SOCKET</span><span class="k">}</span><span class="s2">"</span>  <span class="o">]]</span> <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="nt">-e</span> <span class="s1">'\xF0\x9F\x86\x99 '</span><span class="si">)</span><span class="nv">$PS1</span><span class="s2">"</span> <span class="c"># Add an emoji</span>
+</code></pre></div></div>
+
+<p>This is what it looks like :-):</p>
+
+<p><img src="/assets/images/posts/upterm_prompt.png" alt="upterm_prompt" /></p>
+
+<h2 id="deploy-uptermd">Deploy Uptermd</h2>
+
+<p>Upterm needs an Upterm server (a.k.a. <code class="language-plaintext highlighter-rouge">uptermd</code>) to expose terminal sessions securely.
+There is a community server running at <code class="language-plaintext highlighter-rouge">uptermd.upterm.dev</code> for your convenience (please put it into good use!).
+However, if you want to host your pairing server on <a href="https://kubernetes.io/">Kubernetes</a> or <a href="https://heroku.com">Heroku</a>, follow <a href="https://github.com/owenthereal/upterm#how-it-works">this deployment guide</a>.
+You are welcome to contribute one for your favorite cloud platforms.
+I am pleased to review it if you shoot me a <a href="https://github.com/owenthereal/upterm/pulls">PR</a> :-).</p>
+
+<p>To talk to a different uptermd server other than the community server, you specify with the <code class="language-plaintext highlighter-rouge">--server</code> flag:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Use your Uptermd server via SSH on TCP
+$ upterm host --server ssh://YOUR_SERVER -- YOUR_COMMAND
+
+# Use your Uptermd server via SSH on WebSocket
+$ upterm host --server wss://YOUR_SERVER -- YOUR_COMMAND
+
+# Client connects to the host session via SSH on WebSocket
+$ ssh -o ProxyCommand='upterm proxy wss://TOKEN@YOUR_SERVER' TOKEN@YOUR_SERVER:443
+</code></pre></div></div>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>I am super excited about <code class="language-plaintext highlighter-rouge">upterm</code>, and I dogfood it daily to pair program with my coworkers (Disclaimer: I work remotely for Heroku).
+If you like what you see here, give upterm a shot.
+I am looking forward to your valuable feedback and contributions: <a href="https://github.com/owenthereal/upterm/issues">https://github.com/owenthereal/upterm/issues</a> :-).</p>]]></content><author><name>Owen Ou</name></author><category term="upterm" /><category term="go" /><summary type="html"><![CDATA[Upterm is an open-sourced solution for sharing terminal sessions instantly over the public internet via SSH tunnels. It is good for]]></summary></entry><entry><title type="html">My Lightening Talk On Godzilla At GopherCon 2017</title><link href="https://owenou.com/me-at-gophercon-2017/" rel="alternate" type="text/html" title="My Lightening Talk On Godzilla At GopherCon 2017" /><published>2017-07-24T00:00:00+00:00</published><updated>2017-07-24T00:00:00+00:00</updated><id>https://owenou.com/me-at-gophercon-2017</id><content type="html" xml:base="https://owenou.com/me-at-gophercon-2017/"><![CDATA[<p>I gave a lightening talk on <a href="https://github.com/owenthereal/godzilla">Godzilla</a> at <a href="http://www.gophercon.com/">GopherCon</a> 2017. Enjoy :-)</p>
+
+<div>
+<iframe width="1280" height="720" src="https://www.youtube.com/embed/zSW0nKArIvU?rel=0" frameborder="0" allowfullscreen=""></iframe>
+</div>]]></content><author><name>Owen Ou</name></author><category term="go" /><summary type="html"><![CDATA[I gave a lightening talk on Godzilla at GopherCon 2017. Enjoy :-)]]></summary></entry><entry><title type="html">My Lightening Talk At GopherCon 2015</title><link href="https://owenou.com/me-at-gophercon-2015/" rel="alternate" type="text/html" title="My Lightening Talk At GopherCon 2015" /><published>2015-09-18T00:00:00+00:00</published><updated>2015-09-18T00:00:00+00:00</updated><id>https://owenou.com/me-at-gophercon-2015</id><content type="html" xml:base="https://owenou.com/me-at-gophercon-2015/"><![CDATA[<p>I demoed <a href="https://github.com/owenthereal/ccat">ccat</a> at <a href="http://www.gophercon.com/">GopherCon</a> 2015. Enjoy :-)</p>
+
+<div>
+<iframe width="1280" height="720" src="https://www.youtube.com/embed/dvtmDUKnLfg?rel=0" frameborder="0" allowfullscreen=""></iframe>
+</div>]]></content><author><name>Owen Ou</name></author><category term="go" /><summary type="html"><![CDATA[I demoed ccat at GopherCon 2015. Enjoy :-)]]></summary></entry><entry><title type="html">Fast GitHub Command Line Client Written in Go</title><link href="https://owenou.com/fast-github-command-line-client-written-in-go/" rel="alternate" type="text/html" title="Fast GitHub Command Line Client Written in Go" /><published>2013-12-22T00:00:00+00:00</published><updated>2013-12-22T00:00:00+00:00</updated><id>https://owenou.com/fast-github-command-line-client-written-in-go</id><content type="html" xml:base="https://owenou.com/fast-github-command-line-client-written-in-go/"><![CDATA[<p>About <a href="https://github.com/owenthereal/gh/commit/d5615fcb6f9c983fbf5d1297700a26531ddf1173">nine months ago</a>, I started <a href="https://github.com/owenthereal/gh">gh</a>,
+a fast command line wrapper around git with extra features and commands that make working with GitHub easier.
+Today, I’m very glad to announce its <a href="https://github.com/owenthereal/gh/releases/tag/v1.0.0">1.0.0</a> release has landed!</p>
+
+<h2 id="what-is-gh">What is gh?</h2>
+
+<p><code class="language-plaintext highlighter-rouge">gh</code> is a command line client to GitHub.
+It’s designed to run as fast as possible with easy installation across operating systems.
+Here is a typical workflow of contributing to OSS on GitHub by cloning a repository, forking it and making a pull request with <code class="language-plaintext highlighter-rouge">gh</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ gh clone rails/rails
+$ gh fork
+
+# make some changes
+
+$ gh pull-request -m "Implemented feature X" -b rails:master -h owenthereal:feature
+</code></pre></div></div>
+
+<h2 id="hub-in-go">Hub in Go</h2>
+
+<p>The Ruby <a href="https://github.com/github/hub">hub</a> has been one of my long-time favorite tools in my toolbox.
+It has been an indispensable part of my open source journey.
+The brains of <code class="language-plaintext highlighter-rouge">hub</code>, <a href="https://github.com/defunkt">@defunkt</a> and <a href="https://github.com/mislav">@mislav</a>, are also top on my programming heroes list.
+My passion for <code class="language-plaintext highlighter-rouge">hub</code> kept me thinking what I could do to help make one of my favorite tools better.
+I ended up building <code class="language-plaintext highlighter-rouge">gh</code>, by referring to the implementation of the Ruby <code class="language-plaintext highlighter-rouge">hub</code>, but in Go.</p>
+
+<h2 id="native-vs-vm">Native vs. VM</h2>
+
+<p>It’s pretty exciting that VM technology is getting more and more mature and code runs faster and faster on a VM.
+However, for a command line tool whose running cycle is usually short, there’s no need for a VM:
+the command line program exits before the <a href="http://en.wikipedia.org/wiki/Just-in-time_compilation">JIT compiler</a> can kick in.
+Besides, a command line tool built with a VM-based language means an extra piece of software (the VM itself) needs to be installed in order to run it.
+A command line program doesn’t gain much advantage from a VM but bear the cost of it.
+Therefore, implementing a command line tool in a native language is not only of great benefit to performance, but also to the ease of distribution.
+The Go programming language, with its runtime, systems access, and its capability of compiling to a single, statically linked binary with no
+dependencies, is a very appealing platform for building command line tools. Let’s take a look what <code class="language-plaintext highlighter-rouge">gh</code> offers with the power of Go :-).</p>
+
+<h2 id="faster">Faster</h2>
+
+<p>For <strong>equivalent functionalities</strong>, <code class="language-plaintext highlighter-rouge">gh</code> performs in general 5 to 10 times better than <code class="language-plaintext highlighter-rouge">hub</code>.
+Here’s the result of comparing <code class="language-plaintext highlighter-rouge">gh</code> version <code class="language-plaintext highlighter-rouge">1.0.0</code> with <code class="language-plaintext highlighter-rouge">hub</code> version <code class="language-plaintext highlighter-rouge">1.11.0</code> on my machine:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ time hub version &gt; /dev/null
+hub version &gt; /dev/null  0.13s user 0.05s system 95% cpu 0.183 total
+
+$ time gh version &gt; /dev/null
+gh version &gt; /dev/null  0.01s user 0.01s system 83% cpu 0.016 total
+
+$ time hub browse &gt; /dev/null
+hub browse &gt; /dev/null  0.15s user 0.08s system 90% cpu 0.250 total
+
+$ time gh browse &gt; /dev/null
+gh browse &gt; /dev/null  0.02s user 0.02s system 84% cpu 0.051 total
+</code></pre></div></div>
+
+<p>Note that there’s almost no perfect benchmark, especially for a command line program like <code class="language-plaintext highlighter-rouge">gh</code>.
+The numbers above is to show <code class="language-plaintext highlighter-rouge">gh</code> is in general more responsive.</p>
+
+<h2 id="muti-platforms--easy-installation">Muti-platforms &amp; Easy Installation</h2>
+
+<p><code class="language-plaintext highlighter-rouge">gh</code> is fully implemented in the Go language and is designed to run across operating systems.
+By making use of <a href="http://dave.cheney.net/2012/09/08/an-introduction-to-cross-compilation-with-go">cross-compilation</a>,
+<code class="language-plaintext highlighter-rouge">gh</code> can be easily compiled to binaries for any major operating systems.
+There’re no pre-requirements to install <code class="language-plaintext highlighter-rouge">gh</code> (no VMs!). Download the <a href="https://github.com/owenthereal/gh/releases">binary</a> and go!</p>
+
+<h2 id="compatibility-with-hub">Compatibility with Hub</h2>
+
+<p>I’ve tried very hard to make <code class="language-plaintext highlighter-rouge">gh</code> a drop-in replacement to <code class="language-plaintext highlighter-rouge">hub</code>.
+I’ve pulled in all the <a href="https://github.com/owenthereal/gh/tree/master/features">cucumber tests</a> from <code class="language-plaintext highlighter-rouge">hub</code> and 90% of them are passing now.
+I’ll continuously put efforts on making <code class="language-plaintext highlighter-rouge">gh</code> fully compatible with <code class="language-plaintext highlighter-rouge">hub</code>.</p>
+
+<h2 id="more-features">More Features</h2>
+
+<p><code class="language-plaintext highlighter-rouge">gh</code> has features like <a href="https://github.com/owenthereal/gh#autoupdate">autoupdate</a>, <a href="https://github.com/owenthereal/gh#gh-release-beta">releases</a> and <a href="https://github.com/owenthereal/gh#gh-issues-beta">issues</a> that are not available in <code class="language-plaintext highlighter-rouge">hub</code>.
+There’re plans to add more features in the upcoming releases, for example, the support of <a href="https://github.com/owenthereal/gh/pull/129">creating releases</a>.</p>
+
+<h2 id="thanks">Thanks</h2>
+
+<p>It’s been nine months of hard work on <code class="language-plaintext highlighter-rouge">gh</code>.
+I would like to thank all the <a href="https://github.com/owenthereal/gh/graphs/contributors">contributors</a>,
+especially <a href="https://github.com/calavera">@calavera</a>, <a href="https://github.com/dgryski">@dgryski</a> and <a href="https://github.com/tgkokk">@tgkokk</a>.
+I would also like to thank all the early adopters of <code class="language-plaintext highlighter-rouge">gh</code>.
+If you have any suggestions to <code class="language-plaintext highlighter-rouge">gh</code>,
+feel free to fire us a <a href="https://github.com/owenthereal/gh/issues?state=open">GitHub issue</a>.
+If you’re interested in helping out, shoot me an email.
+I’m very excited to see more great stuff coming to <code class="language-plaintext highlighter-rouge">gh</code> in the new year!</p>
+
+<p>May <code class="language-plaintext highlighter-rouge">gh</code> be with you!</p>]]></content><author><name>Owen Ou</name></author><category term="go" /><summary type="html"><![CDATA[About nine months ago, I started gh, a fast command line wrapper around git with extra features and commands that make working with GitHub easier. Today, I’m very glad to announce its 1.0.0 release has landed!]]></summary></entry><entry><title type="html">Write Build Tasks in Go with Gotask</title><link href="https://owenou.com/writing-build-tasks-in-go-with-gotask/" rel="alternate" type="text/html" title="Write Build Tasks in Go with Gotask" /><published>2013-11-27T00:00:00+00:00</published><updated>2013-11-27T00:00:00+00:00</updated><id>https://owenou.com/writing-build-tasks-in-go-with-gotask</id><content type="html" xml:base="https://owenou.com/writing-build-tasks-in-go-with-gotask/"><![CDATA[<p>One of the things that I miss a lot when programming in Go is being able to write build tasks in Go itself.
+The de facto build tool for Go is <a href="http://www.gnu.org/software/make/">make</a>.
+Make is simple, classic and gets the work done. But it falls when build tasks are becoming complex.
+Another drawback with make is that it’s completely isolated from the host language: there’s no way to import and make use of any Go code.
+Build tools like <a href="http://ant.apache.org/">ant</a> or <a href="http://maven.apache.org/what-is-maven.html">maven</a> also suffer for similar reasons.</p>
+
+<h2 id="external-dsl-vs-internal-dsl">External DSL vs. Internal DSL</h2>
+
+<p>The problems with these build tools come from the fact that they use an external <a href="http://en.wikipedia.org/wiki/Domain_Specific_Language">Domain Specific Language</a> (DSL) to describe build tasks.
+Programming languages like Ruby, on the other hand, adopt an internal DSL approach, à la <a href="http://rake.rubyforge.org/">rake</a>.
+It allows you to express build tasks in the host language.
+For reference, <a href="http://martinfowler.com/">Martin Fowler</a> has a very good <a href="http://martinfowler.com/bliki/DomainSpecificLanguage.html">article</a> on internal DSL and external DSL.</p>
+
+<h2 id="idiomatic-build-tool-in-go">Idiomatic Build Tool in Go</h2>
+
+<p>Go, as a statically-typed language, is not designed to write good DSLs.
+<a href="https://twitter.com/remogatto">Andrea Fazzi</a> has written a <a href="http://freecella.blogspot.ca/2010/03/is-go-suitable-for-building-dsl.html">blog post</a> on whether Go is suitable for building DSL by comparing it to Ruby.
+The conclusion, without surprise, was Go is not good at building complex and general purpose DSLs.
+However, we don’t necessary need to bend the Go syntax in order to make an idiomatic build tool.
+An everyday Go example is <a href="http://golang.org/pkg/testing/"><code class="language-plaintext highlighter-rouge">go test</code></a>. Consider the following test function in a file called <code class="language-plaintext highlighter-rouge">time_test.go</code>:</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">func</span> <span class="n">TestTimeConsuming</span><span class="p">(</span><span class="n">t</span> <span class="o">*</span><span class="n">testing</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="n">testing</span><span class="o">.</span><span class="n">Short</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">t</span><span class="o">.</span><span class="n">Skip</span><span class="p">(</span><span class="s">"skipping test in short mode."</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="o">...</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Running <code class="language-plaintext highlighter-rouge">go test</code> will pick up this test file and execute the test function.
+It feels very DSLish yet we’re not bending the syntax like we usually do for internal DSLs.
+The trick behind <code class="language-plaintext highlighter-rouge">go test</code> is convention over confication:
+if you create a file called <code class="language-plaintext highlighter-rouge">xxx_test.go</code> and name the test function <code class="language-plaintext highlighter-rouge">TestXxx</code>, where <code class="language-plaintext highlighter-rouge">xxx</code> is the test name,
+your test will be run.</p>
+
+<p>We could do something similar for an idiomatic build tool in Go: introducing <a href="https://github.com/owenthereal/gotask">gotask</a>.</p>
+
+<h2 id="gotask">Gotask</h2>
+
+<p>Consider the following task function in a file called <code class="language-plaintext highlighter-rouge">sayhello_task.go</code>:</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">// +build gotask</span>
+
+<span class="k">package</span> <span class="n">main</span>
+
+<span class="k">import</span> <span class="p">(</span>
+    <span class="s">"github.com/owenthereal/gotask/tasking"</span>
+    <span class="s">"os/user"</span>
+    <span class="s">"time"</span>
+<span class="p">)</span>
+
+<span class="c">// NAME</span>
+<span class="c">//    say-hello - Say hello to current user</span>
+<span class="c">//</span>
+<span class="c">// DESCRIPTION</span>
+<span class="c">//    Print out hello to current user</span>
+<span class="c">//</span>
+<span class="c">// OPTIONS</span>
+<span class="c">//    --verbose, -v</span>
+<span class="c">//        run in verbose mode</span>
+<span class="k">func</span> <span class="n">TaskSayHello</span><span class="p">(</span><span class="n">t</span> <span class="o">*</span><span class="n">tasking</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">user</span><span class="p">,</span> <span class="n">_</span> <span class="o">:=</span> <span class="n">user</span><span class="o">.</span><span class="n">Current</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">t</span><span class="o">.</span><span class="n">Flags</span><span class="o">.</span><span class="n">Bool</span><span class="p">(</span><span class="s">"v"</span><span class="p">)</span> <span class="o">||</span> <span class="n">t</span><span class="o">.</span><span class="n">Flags</span><span class="o">.</span><span class="n">Bool</span><span class="p">(</span><span class="s">"verbose"</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">t</span><span class="o">.</span><span class="n">Logf</span><span class="p">(</span><span class="s">"Hello %s, the time now is %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">user</span><span class="o">.</span><span class="n">Name</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">Now</span><span class="p">())</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">t</span><span class="o">.</span><span class="n">Logf</span><span class="p">(</span><span class="s">"Hello %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">user</span><span class="o">.</span><span class="n">Name</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Running <code class="language-plaintext highlighter-rouge">gotask -h</code> will display all the tasks:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ gotask -h
+NAME:
+   gotask - Build tool in Go
+
+USAGE:
+   gotask [global options] command [command options] [arguments...]
+
+VERSION:
+   0.8.0
+
+COMMANDS:
+   say-hello    Say hello to current user
+   help, h      Shows a list of commands or help for one command
+
+GLOBAL OPTIONS:
+   --generate, -g       generate a task scaffold named pkg_task.go
+   --compile, -c        compile the task binary to pkg.task but do not run it
+   --debug              run in debug mode
+   --version            print the version
+   --help, -h           show help
+</code></pre></div></div>
+
+<p>Running <code class="language-plaintext highlighter-rouge">gotask say-hello -h</code> will display usage for a task:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ gotask say-hello -h
+NAME:
+   say-hello - Say hello to current user
+
+USAGE:
+   command say-hello [command options] [arguments...]
+
+DESCRIPTION:
+   Print out hello to current user
+
+OPTIONS:
+   --verbose, -v        run in verbose mode
+   --debug              run in debug mode
+</code></pre></div></div>
+
+<p>To execute the task, type:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ gotask say-hello
+Hello Owen Ou
+</code></pre></div></div>
+<p>To execute the task in verbose mode, type:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ gotask say-hello -v
+Hello Owen Ou, the time now is 2013-11-20 15:32:00.73771438 -0800 PST
+</code></pre></div></div>
+
+<p>Yes, that’s <a href="https://github.com/owenthereal/gotask">gotask</a>, an idiomatic way of writing build tasks in Go.</p>
+
+<h3 id="convention-over-configuration">Convention over Configuration</h3>
+
+<p>Similar to defining a Go test, you follow the <code class="language-plaintext highlighter-rouge">gotask</code> convention to describe your build tasks.
+You create a file called <code class="language-plaintext highlighter-rouge">TASK_NAME_task.go</code> and name the task function in the format of</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">// +build gotask</span>
+
+<span class="k">package</span> <span class="n">main</span>
+
+<span class="k">import</span> <span class="s">"github.com/owenthereal/gotask/tasking"</span>
+
+<span class="c">// NAME</span>
+<span class="c">//    The name of the task - a one-line description of what it does</span>
+<span class="c">//</span>
+<span class="c">// DESCRIPTION</span>
+<span class="c">//    A textual description of the task function</span>
+<span class="c">//</span>
+<span class="c">// OPTIONS</span>
+<span class="c">//    Definition of what command line options it takes</span>
+<span class="k">func</span> <span class="n">TaskXxx</span><span class="p">(</span><span class="n">t</span> <span class="o">*</span><span class="n">tasking</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="p">{</span>
+  <span class="o">...</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>where <code class="language-plaintext highlighter-rouge">Xxx</code> can be any alphanumeric string (but the first letter must not be in [a-z]) and serves to identify the task name.
+By default, <code class="language-plaintext highlighter-rouge">gotask</code> will dasherize the <code class="language-plaintext highlighter-rouge">Xxx</code> part of the task function name and use it as the task name.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">// +build gotask</code> build tag constraints task functions to <code class="language-plaintext highlighter-rouge">gotask</code> build only. Without the build tag, task functions will be available to
+application build which may not be desired.</p>
+
+<h3 id="comments-as-man-page">Comments as Man Page™</h3>
+
+<p>It’s a good practice to document tasks in a sensible way.
+In <code class="language-plaintext highlighter-rouge">gotask</code>, the comments for the task function are parsed as the task’s man page by
+following the <a href="http://en.wikipedia.org/wiki/Man_page#Layout">man page layout</a>:
+Section NAME contains the name of the task and a one-line description of what it does, separated by a “-“;
+Section DESCRIPTION contains the textual description of the task function;
+Section OPTIONS contains the definition of the command line flags it takes.</p>
+
+<h3 id="task-scaffolding">Task Scaffolding</h3>
+
+<p><code class="language-plaintext highlighter-rouge">gotask</code> is able to generate a task scaffolding to quickly get you started for writing build tasks by using the <code class="language-plaintext highlighter-rouge">--generate</code> or <code class="language-plaintext highlighter-rouge">-g</code> flag.
+The generated task is named as <code class="language-plaintext highlighter-rouge">pkg_task.go</code> where <code class="language-plaintext highlighter-rouge">pkg</code> is the name of the package that <code class="language-plaintext highlighter-rouge">gotask</code> is run:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// in a folder where package example is defined
+$ gotask -g
+create example_task.go
+</code></pre></div></div>
+
+<h3 id="compiling-tasks">Compiling Tasks</h3>
+
+<p><code class="language-plaintext highlighter-rouge">gotask</code> is able to compile defined tasks into an executable using <code class="language-plaintext highlighter-rouge">go build</code>.
+This is useful when you need to distribute your build executables.
+For the above <code class="language-plaintext highlighter-rouge">say-hello</code> task, you can compile it into a binary using <code class="language-plaintext highlighter-rouge">--compile</code> or <code class="language-plaintext highlighter-rouge">-c</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ gotask -c
+$ ./examples.task say-hello
+Hello Owen Ou
+</code></pre></div></div>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>With <code class="language-plaintext highlighter-rouge">gotask</code>, you’re able to write idiomatic Go code for build tasks.
+In the future, I would hope <code class="language-plaintext highlighter-rouge">gotask</code> can be part of the <a href="http://golang.org/src/cmd/go">Go toolchain</a>, so that you can simply type <code class="language-plaintext highlighter-rouge">go task</code> without installing another tool.
+If you’re a Go committer reading this blog post and are convinced that <code class="language-plaintext highlighter-rouge">gotask</code> worths being port to the Go toolchain, feel free to ping me. I’m happy to help out with the integration :).
+If you’re a user of <code class="language-plaintext highlighter-rouge">gotask</code> and would like to help out with the development, the project page is <a href="https://github.com/owenthereal/gotask">here</a>.</p>
+
+<p>Happy tasking!</p>]]></content><author><name>Owen Ou</name></author><category term="go" /><summary type="html"><![CDATA[One of the things that I miss a lot when programming in Go is being able to write build tasks in Go itself. The de facto build tool for Go is make. Make is simple, classic and gets the work done. But it falls when build tasks are becoming complex. Another drawback with make is that it’s completely isolated from the host language: there’s no way to import and make use of any Go code. Build tools like ant or maven also suffer for similar reasons.]]></summary></entry><entry><title type="html">Ten Things You Didn’t Know Git And GitHub Could Do</title><link href="https://owenou.com/ten-things-you-didnt-know-git-and-github-could-do/" rel="alternate" type="text/html" title="Ten Things You Didn’t Know Git And GitHub Could Do" /><published>2012-01-13T00:00:00+00:00</published><updated>2012-01-13T00:00:00+00:00</updated><id>https://owenou.com/ten-things-you-didnt-know-git-and-github-could-do</id><content type="html" xml:base="https://owenou.com/ten-things-you-didnt-know-git-and-github-could-do/"><![CDATA[<p>Git and GitHub are powerful tools. Even if you have worked with them for
+a long time, it’s likely that you haven’t stumbled across everything
+yet. I collect 10 common tricks for both Git and GitHub that potentially
+increase your day-to-day productivity.</p>
+
+<!--more-->
+
+<h2 id="github">GitHub</h2>
+
+<h3 id="keyboard-shortcut-t--w">keyboard shortcut: t &amp; w</h3>
+
+<p>On your source code browsing page, press <strong>t</strong> to enter the fuzzy file
+finder mode:</p>
+
+<p><img src="/assets/images/posts/github_shortcut_file_finder.png" alt="GitHub Shortcuts File Finder" class="align-center" /></p>
+
+<p>On your repository’s home page, press <strong>w</strong> to quickly filter
+branches:</p>
+
+<p><img src="/assets/images/posts/github_shortcut_filter_branch.png" alt="GitHub Shortcuts Filter Branch" class="align-center" /></p>
+
+<p>On any GitHub page, press <strong>?</strong> to show the list of shortcuts applied to a particular page:</p>
+
+<p><img src="/assets/images/posts/github_shortcuts.png" alt="GitHub Shortcuts" class="align-center" /></p>
+
+<h3 id="ignoring-whitespace-w1">ignoring whitespace: ?w=1</h3>
+
+<p>Add <strong>?w=1</strong> any diff URL to trim whitespace:</p>
+
+<p><img src="/assets/images/posts/github_trim_whitespace.png" alt="GitHub Trim Whitespace" class="align-center" /></p>
+
+<h3 id="commits-by-range-mastertimemaster">commits by range: master@{time}..master</h3>
+
+<p>You can create a compare view in GitHub by using the URL
+<strong>github.com/user/repo/compare/{range}</strong>. Range can be two SHAs like
+<strong>sha1…sha2</strong> or two branches’ name like <strong>master…my-branch</strong>. Range
+is also smart enough to take time into consideration. For example, you can filter a list
+of commits since yesterday by using format like <strong>master@{1.day.ago}…master</strong>. The link
+<a href="https://github.com/rails/rails/compare/master@{1.day.ago}...master">https://github.com/rails/rails/compare/master@{1.day.ago}…master</a>,
+for example, gets all commits since yesterday for the Rails project:</p>
+
+<p><img src="/assets/images/posts/github_advanced_compare_view.png" alt="GitHub Advanced Compare View" class="align-center" /></p>
+
+<h3 id="commits-by-author-authorgithub_handle">commits by author: ?author=github_handle</h3>
+
+<p>You can filter commits by author in the commit view by appending param
+<strong>?author=github_handle</strong>. For exmaple, the link
+<a href="https://github.com/dynjs/dynjs/commits/master?author=owenthereal">https://github.com/dynjs/dynjs/commits/master?author=owenthereal</a>
+shows a list of my commits to the <a href="http://dynjs.org/">Dynjs</a> project:</p>
+
+<p><img src="/assets/images/posts/github_filter_by_author.png" alt="GitHub Filter Commits By Author" class="align-center" /></p>
+
+<h3 id="diff--patch">.diff &amp; .patch</h3>
+
+<p>Add <strong>.diff</strong> or <strong>.patch</strong> to the URLs of compare view, pull request or
+commit page to get the diff or patch in text format. For example, the
+link <a href="https://github.com/rails/rails/compare/master@{1.day.ago}...master.patch">https://github.com/rails/rails/compare/master@{1.day.ago}…master.patch</a>
+gets the patch for all the commits since yesterday in the Rails
+project:</p>
+
+<p><img src="/assets/images/posts/github_diff_patch.png" alt="GitHub Diff Patch" class="align-center" /></p>
+
+<h3 id="email-reply">email reply</h3>
+
+<p>You can comment directly by replying to the email received from GitHub
+instead of commenting on the website. GitHub will route your reply correctly:</p>
+
+<p><img src="/assets/images/posts/github_email_reply.png" alt="GitHub Reply Email" class="align-center" /></p>
+
+<h3 id="line-linking">line linking</h3>
+
+<p>In any file view, when you click one line or multiple lines by pressing
+<strong>SHIFT</strong>, the URL will change to reflect your selections. This is very
+handy for sharing the link to a chunk of code with your teammates:</p>
+
+<p><img src="/assets/images/posts/github_line_linking.png" alt="GitHub Line Linking" class="align-center" /></p>
+
+<h3 id="subscribing-peoples">subscribing peoples</h3>
+
+<p>Mentioning users in pull requests, issues or any comment will subscribe them to all
+subsequent notifications:</p>
+
+<p><img src="/assets/images/posts/github_subscribe_peoples.png" alt="GitHub Subscribe Peoples" class="align-center" /></p>
+
+<h3 id="autolink">autolink</h3>
+
+<p>In pull requests, issues or any comment, sha and issue number
+(#1 for example) will be automatically linked. Besides, you can link sha
+or issue number from another repository with the format of
+<strong>user/repo@sha1</strong> or <strong>user/repo#1</strong> respectively. The following is an
+example of autolinking a sha in a comment:</p>
+
+<p><img src="/assets/images/posts/github_auto_link.png" alt="GitHub Auto Link" class="align-center" /></p>
+
+<h3 id="hub">hub</h3>
+
+<p><a href="https://github.com/defunkt/hub">Hub</a> is the command line GitHub. It
+provides integration between Git and GitHub in command line. One of
+the most useful commands is creating pull request by just typing “<strong>hub pull-request</strong>” in your terminal.
+Detail of all other commands is available on its project
+<a href="https://github.com/defunkt/hub#commands">readme</a>.</p>
+
+<h2 id="git">Git</h2>
+
+<h3 id="git-log--p-file">git log -p FILE</h3>
+
+<p>To view changes in history for README.md, for example, type</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; git log -p README.md
+</code></pre></div></div>
+
+<h3 id="git-log--spattern">git log -S’PATTERN’</h3>
+
+<p>To search for changes that matches the pattern “stupid” in history, for example, type</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; git log -S'stupid'
+</code></pre></div></div>
+
+<p>Combining with “-p” shows the changes with the search pattern.</p>
+
+<h3 id="git-add--p">git add -p</h3>
+
+<p>To interactively stage and unstage changes, type</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; git add -p
+</code></pre></div></div>
+
+<p>Updated 2013-01-18: From <a href="https://twitter.com/tjwallace">@tjwallace</a>, git checkout and git reset also support the –patch (-p)
+option for the interactive mode.</p>
+
+<p>Updated 2013-03-17: From
+<a href="http://owenou.com/2012/01/13/ten-things-you-didnt-know-git-and-github-could-do.html#comment-832473162">jasherai</a>, git stash also supports the –patch (-p) option.</p>
+
+<h3 id="git-rm-cached-file">git rm –cached FILE</h3>
+
+<p>This command removes remote file copy only. For example, typing</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; git rm --cached database.yml
+</code></pre></div></div>
+
+<p>removes database.yml that is already checked in but leaving the local copy untouched.
+This is intensively handy for removing ignored files that are already pushed without removing the local copies.</p>
+
+<h3 id="git-log-branch">git log ..BRANCH</h3>
+
+<p>This command returns all the commits in a branch that are not in HEAD. For example,
+assuming you are on a feature branch, typing</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; git log ..master
+</code></pre></div></div>
+
+<p>gets all commits that are in master but not merged into the current
+feature branch yet.</p>
+
+<h3 id="git-branch-merged--git-branch-no-merged">git branch –merged &amp; git branch –no-merged</h3>
+
+<p>This command returns a list of branches that are merged or not yet merged
+to current branch. It’s a useful check before any merging happens. For
+example, on a featrue branch, typing</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; git branch --no-merged
+</code></pre></div></div>
+
+<p>returns a list of branchs that are not yet merged to the feature branch.</p>
+
+<h3 id="git-branch-contains-sha">git branch –contains SHA</h3>
+
+<p>This returns which branch contains a specified sha key, for example, typing</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; git branch --contains 2f8e2b
+</code></pre></div></div>
+
+<p>shows all branches containing the commit 2f832b. It is very helpful for
+verifying whether a git cherry-pick is done correctly for instance.</p>
+
+<h3 id="git-status--s">git status -s</h3>
+
+<p>It returns a less verbose version of git status. I setup this command as
+my default when running git status to reduce noise.</p>
+
+<h3 id="git-reflog">git reflog</h3>
+
+<p>It shows a list of operations you have done to your local git
+repository. It’s very helpful for restoring lost commits for example
+since it returns the complete history of all git operations with commit
+SHAs.</p>
+
+<h3 id="git-shortlog--sn">git shortlog -sn</h3>
+
+<p>This shows a list of contributors ordered by number of commits. Similar
+to the contributors view of GitHub.</p>
+
+<h2 id="summary">Summary</h2>
+
+<p>Git is a well engineered tool. Understanding it will definitely make you a
+more productive and capable programmer. GitHub, on the other hand,
+provides handy team collaboration features on top of Git. Being able to use
+GitHub well also increases your day-to-day efficiency.</p>
+
+<p>To further deepen your Git and GitHub skills, I recommend the following
+materials:</p>
+
+<ul>
+  <li><a href="http://git-scm.com/book">ProGit</a>, the best book on Git</li>
+  <li><a href="https://peepcode.com/products/advanced-git">Advanced Git</a> serials by <a href="https://peepcode.com/">Peepcode</a></li>
+  <li><a href="http://zachholman.com/talk/git-github-secrets/">Git and GitHub Secrets</a> talk by <a href="https://twitter.com/holman">Zach Holman</a></li>
+</ul>]]></content><author><name>Owen Ou</name></author><category term="git" /><category term="github" /><summary type="html"><![CDATA[Git and GitHub are powerful tools. Even if you have worked with them for a long time, it’s likely that you haven’t stumbled across everything yet. I collect 10 common tricks for both Git and GitHub that potentially increase your day-to-day productivity.]]></summary></entry><entry><title type="html">PoEAA on Rails</title><link href="https://owenou.com/poeaa-on-rails/" rel="alternate" type="text/html" title="PoEAA on Rails" /><published>2011-09-24T00:00:00+00:00</published><updated>2011-09-24T00:00:00+00:00</updated><id>https://owenou.com/poeaa-on-rails</id><content type="html" xml:base="https://owenou.com/poeaa-on-rails/"><![CDATA[<p>The book <a href="http://www.amazon.com/Patterns-Enterprise-Application-Architecture-Martin/dp/0321127420">Patterns of Enterprise Application Architecture</a> (PoEAA) laid the blueprints for Rails’ architecture.
+When choosing which enterprise design patterns to encode into the framework, Rails picked, to name a few, <a href="http://martinfowler.com/eaaCatalog/activeRecord.html">Active Record</a>, <a href="http://martinfowler.com/eaaCatalog/templateView.html">Template View</a>, <a href="http://martinfowler.com/eaaCatalog/applicationController.html">Application Controller</a>, etc.
+By covering these patterns with a sweet coating of convention-over-configuration, Rails simplifies pattern analysis a lot.</p>
+
+<p>These design assumptions were absolutely pragmatic for the type of applications that Rails was targeting at.
+However, as applications growing more and more complex, developers are starting to realize these
+default architectural patterns may not scale very well. Typically,
+four main areas are overloaded in an enterprise application:</p>
+
+<ol>
+  <li>high coupling between domain model and data source,</li>
+  <li>bloated domain model with a mix of domain logic and application
+logic,</li>
+  <li>presentation behaviour leaked into views, and</li>
+  <li>high coupling between view data and template</li>
+</ol>
+
+<p>To understand these problems better as well as to figure out possible
+solutions, I would like to walk you through some enterprise patterns
+from the same book that Rails’ architecture heavily bases upon.</p>
+
+<p>Note that the patterns I am mentioning here will benefit more for
+complex applications, for example, an e-commerce web application selling
+digital goods.
+There’s clearly some overhead to use these patterns for simple projects
+where the default Rails patterns shine. Most importantly, you should
+only apply these patterns where they make sense. I am a strong believer in
+contextual solution and these patterns are definitely not the only way
+to go.</p>
+
+<h2 id="data-mapper">Data Mapper</h2>
+
+<p><a href="http://martinfowler.com/eaaCatalog/dataMapper.html">Data Mapper</a> is a layer that transfers data between objects
+and a database. It typically creates <a href="http://martinfowler.com/eaaCatalog/domainModel.html">Domain Model</a> objects by populating
+their attributes from the database.</p>
+
+<p><img src="/assets/images/posts/data_mapper.png" alt="Data Mapper" class="align-center" /></p>
+
+<p>Assuming we are building an e-commerce platform, we get a store object by
+going through the store mapper which connects to the database:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># app/controllers/stores_controller.rb</span>
+
+<span class="k">class</span> <span class="nc">StoreController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+  <span class="k">def</span> <span class="nf">show</span>
+    <span class="vi">@store</span> <span class="o">=</span> <span class="no">StoreMapper</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="ss">:id</span><span class="p">])</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>The difference between <a href="http://martinfowler.com/eaaCatalog/activeRecord.html">Active Record</a> and Data Mapper is actually that
+in the Active Record implementation, Domain Model not only encapsulates business logic,
+but also takes responsibility of database access, while in the Data Mapper implementation,
+Domain Model is ignorant of database and become Plain Old Ruby
+Object with business logic. Data Mapper allows database logic and the object model to evolve independently.</p>
+
+<p>Note that the Active Record pattern and the Data Mapper pattern
+mentioned are not the Ruby libraries these patterns inspire.
+The <a href="http://rubygems.org/gems/activerecord">active_record</a> gem is an implementation of the Active Record pattern.
+The <a href="http://datamapper.org/">data_mapper</a> gem is also a “Active Record”-ish implementation, although
+it has elements of the Data Mapper pattern. For those who are interested
+in seeing the implementation difference between these two gems, I created a <a href="https://gist.github.com/1244351">gist</a> for you.</p>
+
+<p>Here is <a href="http://martinfowler.com/">Martin Fowler</a> on the choice of Active Record or Data Mapper for Domain Model:</p>
+
+<blockquote>
+  <p>An OO domain model will often look similar to a database model, yet it will still have a lot of differences. A Domain Model mingles data and process, has multivalued attributes and a complex web of associations, and uses inheritance.</p>
+
+  <p>As a result I see two styles of Domain Model in the field. A simple Domain Model looks very much like the database design with mostly one domain object for each database table. A rich Domain Model can look different from the database design, with inheritance, strategies, and other [Gang of Four] patterns, and complex webs of interconnected objects. A rich Domain Model is better for more complex logic, but is harder to map to the database. <strong>A simple Domain Model can use Active Record, whereas a rich Domain Model requires Data Mapper</strong>.</p>
+</blockquote>
+
+<p>In an enterprise Rails application, it’s not rare to see complex domain models stuffed with
+associations, validations, scopes and business logics.
+It has become a growing pain to deal with such “fat models”.
+We need to separate the database concerns out into a new dedicated
+layer: the data mappers.
+However, as far as I know, there’s no ORM in Ruby giving us such separation yet,
+although it’s been said the upcoming 2.0 release of the data_mapper gem will <a href="https://github.com/datamapper/dm-core/wiki/Roadmap">fully
+implement the Data Mapper pattern</a>. Before we are able to consume
+the new data_mapper gem, is there a way to mitigate existing overloaded Rails models?
+Besides, switching an ORM for existing code is not effortless.</p>
+
+<p>[Updated 01/10 2012] <a href="http://solnic.eu/">Piotr Solnica</a> from the data_mapper gem made an official announcement saying they are actively working on Data Mapper 2.0. Announcement goes <a href="http://solnic.eu/2012/01/10/ruby-datamapper-status.html">here</a>.</p>
+
+<p>As a compromised solution, I would extract database related logic for each <em>ActiveRecord::Base</em> model (e.g., validations and scopes)
+out into a module and then mix it in:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># app/mappers/store_mapper.rb</span>
+
+<span class="k">module</span> <span class="nn">StoreMapper</span>
+  <span class="kp">extend</span> <span class="no">ActiveSupport</span><span class="o">::</span><span class="no">Concern</span>
+
+  <span class="n">included</span> <span class="k">do</span>
+    <span class="c1"># validations</span>
+    <span class="n">validates_presence_of</span> <span class="ss">:name</span>
+    <span class="o">...</span>
+
+    <span class="c1"># scopes</span>
+    <span class="n">scope</span> <span class="ss">:disabled</span><span class="p">,</span> <span class="n">where</span><span class="p">(</span><span class="ss">:disabled</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">)</span>
+    <span class="o">...</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># app/models/store.rb</span>
+
+<span class="k">class</span> <span class="nc">Store</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+  <span class="kp">include</span> <span class="no">StoreMapper</span>
+
+  <span class="c1"># associations</span>
+  <span class="n">has_many</span> <span class="ss">:products</span>
+  <span class="n">belongs_to</span> <span class="ss">:company</span>
+  <span class="o">...</span>
+
+  <span class="c1"># business logics</span>
+  <span class="k">def</span> <span class="nf">calculate_sells</span><span class="p">(</span><span class="n">from_date</span><span class="p">,</span> <span class="n">to_date</span><span class="p">)</span>
+    <span class="c1"># calculate sells from date to date</span>
+  <span class="k">end</span>
+  <span class="o">...</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>This half-baked solution, although not migrating to the Data Mapper pattern,
+cleanly isolates the definitions of database logic with the ones of business logic.
+Of course, it’s recommended to use the Data Mapper pattern where
+possible.</p>
+
+<h2 id="service-layer">Service Layer</h2>
+
+<p>Layering is one of the most common techniques to break apart a complex
+software system. The higher layer uses service defined by the lower
+layer, but the lower layer is unaware of the higher layer. Each layer
+usually hides its lower layers from the layers above. A Rails
+project is typically divided into three layers:</p>
+
+<ol>
+  <li>presentation layer, including views and controllers,</li>
+  <li>domain layer, including models, and</li>
+  <li>data source layer, which is hidden behind models extending from <em>ActiveRecord::Base</em>.</li>
+</ol>
+
+<p>It’s not difficult to understand the Data Mapper pattern is an effort to break
+down #3 into another layer to lower the complexity of models. However,
+in the context of enterprise application, models are still overwhelmed by complicated business logic.
+As Fowler pointed out, business logic can be further divided into “domain logic” and
+“application logic”, and <a href="http://martinfowler.com/eaaCatalog/serviceLayer.html">Service Layer</a> is a pattern to encapsulate
+model’s “application logic” by establishing a boundary where the presentation layers interact with the application:</p>
+
+<blockquote>
+  <p>… Service Layer is a pattern for organization business logic. Many
+Designers, including me, like to divide “business logic” into two
+kinds: “domain logic”, having to do purely with the problem domain
+(such as strategies for calculating revenue recognition on a
+contract), and “application logic”, having to do with application
+responsibilities [Cockburn UC] (such as notifying contract
+administrators, and integrated applications, of revenue recognition
+calculations). Application logic is sometimes referred to as “workflow
+logic”, although different people have different interpretations of
+“workflow”.</p>
+</blockquote>
+
+<p>He also pointed out, Service Layer is a good fit for coordinating operations among multiple models,
+as well as for talking to multiple presentation layers:</p>
+
+<blockquote>
+  <p>The benefit of Service Layer is that it defines a common set of
+application operations available to many kinds of clients and it
+coordinates an application’s response in each operation. …</p>
+
+  <p>The easier question to answer is probably when not to use it. You
+probably don’t need a Service Layer if your application’s business
+logic will only have one kind of client - say, a user interface - and
+its use case responses don’t involve multiple transactional resources.</p>
+</blockquote>
+
+<p>To translate this into a code example, let’s assume in an e-commerce
+platform, we need to email monthly sells report to the store owner.
+In this example, <em>StoreService</em> acts as a coordinator of multiple models for the “mailing sells report” workflow:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># app/services/store_service.rb</span>
+
+<span class="k">class</span> <span class="nc">StoreService</span>
+  <span class="k">def</span> <span class="nf">mail_sells_report</span><span class="p">(</span><span class="n">store_id</span><span class="p">,</span> <span class="n">from_date</span><span class="p">,</span> <span class="n">to_date</span><span class="p">)</span>
+    <span class="n">store</span> <span class="o">=</span> <span class="no">StoreMapper</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="n">store_id</span><span class="p">)</span>
+    <span class="n">store_sells</span> <span class="o">=</span> <span class="n">store</span><span class="p">.</span><span class="nf">calculate_sells</span><span class="p">(</span><span class="n">from_date</span><span class="p">,</span> <span class="n">to_date</span><span class="p">)</span>
+    <span class="n">store_report</span> <span class="o">=</span> <span class="no">SellsReport</span><span class="p">.</span><span class="nf">generate</span><span class="p">(</span><span class="n">store_sells</span><span class="p">)</span>
+    <span class="no">SellsReportMailer</span><span class="p">.</span><span class="nf">report_mailer</span><span class="p">(</span><span class="n">store</span><span class="p">.</span><span class="nf">owner</span><span class="p">,</span> <span class="n">store_report</span><span class="p">).</span><span class="nf">deliver</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>Another place where Service Layer shines is reusing workflows for different
+controllers, for example, the same workflow in the above example is used in the <em>Storefront::StoresController</em> for store front
+and in the <em>Api::StoresController</em> for REST API calls. Service Layer becomes a <a href="http://en.wikipedia.org/wiki/Facade_pattern">Facade</a> in this case.</p>
+
+<h2 id="presentation-model">Presentation Model</h2>
+
+<p>It’s not uncommon to present multiple models in a view. Most
+importantly, not all attributes of a model are needed for a certain
+presentation.
+In a complex system where there are lots of screens, views become a very busy place for extracting state and behavior from models.
+The <a href="http://martinfowler.com/eaaDev/PresentationModel.html">Presentation Model</a> comes to ease the pain:</p>
+
+<blockquote>
+  <p>Presentation Model pulls the state and behavior of the view out into a model class that is part of the presentation. The Presentation Model coordinates with the domain layer and provides an interface to the view that minimizes decision making in the view. The view either stores all its state in the Presentation Model or synchronizes its state with Presentation Model frequently.</p>
+</blockquote>
+
+<p>As an example, let’s build a view for the scenario “creating a store for a user”:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># app/presenters/create_store_presenter.rb</span>
+
+<span class="k">class</span> <span class="nc">CreateStorePresenter</span>
+  <span class="nb">attr_reader</span> <span class="ss">:store</span><span class="p">,</span> <span class="ss">:user</span>
+
+  <span class="n">delegate</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="ss">:store</span><span class="p">,</span> <span class="ss">:prefix</span> <span class="o">=&gt;</span> <span class="kp">true</span>
+  <span class="n">delegate</span> <span class="ss">:email</span><span class="p">,</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="ss">:user</span><span class="p">,</span> <span class="ss">:prefix</span> <span class="o">=&gt;</span> <span class="kp">true</span>
+
+  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+    <span class="vi">@store</span> <span class="o">=</span> <span class="no">Store</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="ss">:store</span><span class="p">])</span>
+    <span class="vi">@user</span> <span class="o">=</span> <span class="vi">@store</span><span class="p">.</span><span class="nf">build_user</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="ss">:user</span><span class="p">])</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">valid?</span>
+    <span class="vi">@user</span><span class="p">.</span><span class="nf">valid?</span> <span class="o">&amp;&amp;</span> <span class="vi">@store</span><span class="p">.</span><span class="nf">valid?</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">save</span>
+    <span class="vi">@store</span><span class="p">.</span><span class="nf">save</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<div class="language-erb highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- app/views/stores/create_store.html.erb --&gt;</span>
+
+<span class="nt">&lt;h1&gt;</span>Create a store<span class="nt">&lt;/h1&gt;</span>
+
+<span class="cp">&lt;%=</span> <span class="n">form_for</span><span class="p">(</span><span class="vi">@create_store_presenter</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span> <span class="cp">%&gt;</span>
+  <span class="nt">&lt;p&gt;</span>
+    <span class="cp">&lt;%=</span> <span class="n">f</span><span class="p">.</span><span class="nf">label</span> <span class="ss">:store_name</span> <span class="cp">%&gt;</span><span class="nt">&lt;br/&gt;</span>
+    <span class="cp">&lt;%=</span> <span class="n">f</span><span class="p">.</span><span class="nf">text_field</span> <span class="ss">:store_name</span> <span class="cp">%&gt;</span>
+  <span class="nt">&lt;/p&gt;</span>
+
+  <span class="nt">&lt;p&gt;</span>
+    <span class="cp">&lt;%=</span> <span class="n">f</span><span class="p">.</span><span class="nf">label</span> <span class="ss">:user_email</span> <span class="cp">%&gt;</span><span class="nt">&lt;br/&gt;</span>
+    <span class="cp">&lt;%=</span> <span class="n">f</span><span class="p">.</span><span class="nf">text_field</span> <span class="ss">:user_email</span> <span class="cp">%&gt;</span>
+  <span class="nt">&lt;/p&gt;</span>
+
+  <span class="nt">&lt;p&gt;</span>
+    <span class="cp">&lt;%=</span> <span class="n">f</span><span class="p">.</span><span class="nf">submit</span> <span class="s2">"Create"</span> <span class="cp">%&gt;</span>
+  <span class="nt">&lt;/p&gt;</span>
+<span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
+</code></pre></div></div>
+
+<p>In the example, we wrap two models (<em>Store</em> and <em>User</em>) into a presenter and
+extract only the attributes needed (<em>Store#name</em> and <em>User#email</em>) for the “create store” screen.
+To summarize this pattern, I would like to once again consult Fowler:</p>
+
+<blockquote>
+  <p>Presentation Model is a pattern that pulls presentation behavior from a view. … It’s useful for allowing you to test without the UI, support for some form of multiple view and a separation of concerns which may make it easier to develop the user interface.</p>
+
+  <p>… Presentation Model allows you to write logic that is completely independent of the views used for display. You also do not need to rely on the view to store state. …</p>
+</blockquote>
+
+<h2 id="two-step-views">Two Step Views</h2>
+
+<p>Rails comes with a neat templating system that allows you to quickly create
+dynamic pages. However, this <a href="http://martinfowler.com/eaaCatalog/templateView.html">Template View</a> pattern has drawbacks as
+Fowler pointed out, especially in a situation where the view is very
+complex:</p>
+
+<blockquote>
+  <p>… the common implementations make it too easy to put complicated logic in the page,
+thus making it hard to maintain, particularly by nonprogrammers. You
+need good discipline to keep the page simple and display oriented,
+putting logic in the helper. …</p>
+</blockquote>
+
+<p>What’s worse, if the display of a view is based on conditions,
+for example in a multi-appearance application,
+you will find logic that determines which template to render leaked into many places in views or controllers.
+Again, this is fine for a simple Rails application.
+But it becomes unmanageable as the application growing more complex.</p>
+
+<p>Let’s think about an example: an e-commerce platform supports multiple
+stores and each store has its own storefront to display a product.
+It’s common to see the following solution:</p>
+
+<div class="language-erb highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- app/views/products/_product.html.erb --&gt;</span>
+
+<span class="cp">&lt;%</span> <span class="k">if</span> <span class="n">store</span><span class="p">.</span><span class="nf">amazon_store?</span> <span class="cp">%&gt;</span>
+  <span class="cp">&lt;%=</span> <span class="n">render</span> <span class="ss">:partial</span> <span class="o">=&gt;</span> <span class="s1">'/amazon/products/_product.html.erb'</span><span class="p">,</span> <span class="ss">:object</span> <span class="o">=&gt;</span> <span class="n">product</span> <span class="cp">%&gt;</span>
+<span class="cp">&lt;%</span> <span class="k">elsif</span> <span class="n">store</span><span class="p">.</span><span class="nf">apple_store?</span> <span class="cp">%&gt;</span>
+  <span class="cp">&lt;%=</span> <span class="n">render</span> <span class="ss">:partial</span> <span class="o">=&gt;</span> <span class="s1">'/apple/products/_product.html.erb'</span><span class="p">,</span> <span class="ss">:object</span> <span class="o">=&gt;</span> <span class="n">product</span> <span class="cp">%&gt;</span>
+<span class="cp">&lt;%</span> <span class="k">else</span> <span class="cp">%&gt;</span>
+  <span class="cp">&lt;%=</span> <span class="n">render</span> <span class="ss">:partial</span> <span class="o">=&gt;</span> <span class="s1">'/default/products/_product.html.erb'</span><span class="p">,</span> <span class="ss">:object</span> <span class="o">=&gt;</span> <span class="n">product</span> <span class="cp">%&gt;</span>
+<span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
+</code></pre></div></div>
+
+<p>The determination logic for displaying a product based on store is leaked into the product partial.
+Apparently, to build the whole multi-appearance application, this approach does not
+scale. Thankfully, Fowler has something good for us - the <a href="http://martinfowler.com/eaaCatalog/twoStepView.html">Two Step View</a>
+pattern:</p>
+
+<blockquote>
+  <p>… You may also want to make global changes to the appearance of the site easily, but common approaches using Template View or Transform View make this difficult because presentation decisions are often duplicated across multiple pages or transform modules. A global change can force you to change several files.</p>
+
+  <p>Two Step View deals with this problem by splitting the transformation into two stages. The first transforms the model data into a logical presentation without any special formatting; the second converts that logical presentation with the actual formatting needed. …</p>
+</blockquote>
+
+<p><img src="/assets/images/posts/two_step_view.png" alt="Two Step View" class="align-center" /></p>
+
+<p>From the above diagram, the multi-storefront example can be reimplemented with the Two Step
+View pattern. The process is in two steps. The first step is to
+transform the product data into a logical presentation. The second step
+is to convert this logical presentation into different HTML.</p>
+
+<p>Note that in the implementation, a gem called <a href="https://github.com/apotonick/cells">cells</a> is used to
+help define logical presentation. The cells gem
+is very helpful in this respect although it was originally designed for
+other purposes.</p>
+
+<p>For the logical presentation, we define it to display name, description, price and
+reviews of a product for every store:</p>
+
+<div class="language-erb highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- app/views/products/_product.html.erb --&gt;</span>
+
+<span class="cp">&lt;%=</span> <span class="n">render_cell</span> <span class="ss">:product</span><span class="p">,</span> <span class="ss">:name</span><span class="p">,</span> <span class="n">product</span><span class="p">.</span><span class="nf">name</span> <span class="cp">%&gt;</span>
+<span class="cp">&lt;%=</span> <span class="n">render_cell</span> <span class="ss">:product</span><span class="p">,</span> <span class="ss">:description</span><span class="p">,</span> <span class="n">product</span><span class="p">.</span><span class="nf">description</span> <span class="cp">%&gt;</span>
+<span class="cp">&lt;%=</span> <span class="n">render_cell</span> <span class="ss">:product</span><span class="p">,</span> <span class="ss">:price</span><span class="p">,</span> <span class="n">product</span><span class="p">.</span><span class="nf">price</span> <span class="cp">%&gt;</span>
+<span class="cp">&lt;%=</span> <span class="n">render_cell</span> <span class="ss">:product</span><span class="p">,</span> <span class="ss">:reviews</span><span class="p">,</span> <span class="n">product</span><span class="p">.</span><span class="nf">reviews</span> <span class="cp">%&gt;</span>
+</code></pre></div></div>
+
+<p>We then define three strategies (<em>ProductCell</em>, <em>Amazon::ProductCell</em>, and
+<em>Apple::ProductCell</em>) to convert the logical presentation to different HTML.
+We make use of cells’ strategy builder to return strategy class based on current store in session:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># app/cells/product_cell.rb</span>
+
+<span class="k">class</span> <span class="nc">ProductCell</span> <span class="o">&lt;</span> <span class="no">Cell</span><span class="o">::</span><span class="no">Rails</span>
+  <span class="c1"># return strategy class based on current store in session</span>
+  <span class="n">build</span> <span class="p">{</span> <span class="s2">"</span><span class="si">#{</span><span class="n">current_store</span><span class="p">.</span><span class="nf">name</span><span class="si">}</span><span class="s2">::ProductCell"</span><span class="p">.</span><span class="nf">classify</span><span class="p">.</span><span class="nf">constantize</span> <span class="k">rescue</span> <span class="kp">nil</span> <span class="p">}</span>
+
+  <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
+    <span class="n">content_tag</span><span class="p">(</span><span class="ss">:h1</span><span class="p">,</span> <span class="nb">name</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="o">...</span>
+
+  <span class="k">def</span> <span class="nf">reviews</span><span class="p">(</span><span class="n">reviews</span><span class="p">)</span>
+    <span class="c1"># display reviews</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># app/cells/amazon/product_cell.rb</span>
+
+<span class="k">module</span> <span class="nn">Amazon</span>
+  <span class="k">class</span> <span class="nc">ProductCell</span> <span class="o">&lt;</span> <span class="o">::</span><span class="no">ProductCell</span>
+    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
+      <span class="n">content_tag</span><span class="p">(</span><span class="ss">:p</span><span class="p">,</span> <span class="nb">name</span><span class="p">)</span>
+    <span class="k">end</span>
+
+    <span class="o">...</span>
+
+    <span class="k">def</span> <span class="nf">reviews</span><span class="p">(</span><span class="n">reviews</span><span class="p">)</span>
+      <span class="c1"># display reviews for Amazon store</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># app/cells/apple/product_cell.rb</span>
+
+<span class="k">module</span> <span class="nn">Apple</span>
+  <span class="k">class</span> <span class="nc">ProductCell</span> <span class="o">&lt;</span> <span class="o">::</span><span class="no">ProductCell</span>
+    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
+      <span class="n">content_tag</span><span class="p">(</span><span class="ss">:div</span><span class="p">,</span> <span class="nb">name</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="s1">'title'</span><span class="p">)</span>
+    <span class="k">end</span>
+
+    <span class="o">...</span>
+
+    <span class="k">def</span> <span class="nf">reviews</span><span class="p">(</span><span class="n">reviews</span><span class="p">)</span>
+      <span class="c1"># display reviews for Apple store</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>As you may see, the Two Step View pattern makes multi-appearance implementation manageable in a way that
+different appearance implementations are organized in a set of strategy classes to parse a common logial presentation.</p>
+
+<h2 id="summary">Summary</h2>
+
+<p>The default enterprise design patterns encoded into Rails are perfect matches for small/medium size projects.
+They are light weight and easy to understand. However, as the application growing more mature,
+these patterns do not scale well due to layers taking too much responsibility.
+That said, a “fat” layer need to be broken into smaller ones:</p>
+
+<ol>
+  <li>Data Mapper is an effort to extract out data source layer from Domain
+Model that implements Active Record,</li>
+  <li>Service Layer is an endeavor to extract out application logic from
+Domain Model,</li>
+  <li>Presentation Model is an attempt to extract out presentation logic
+from a single or multiple Domain Model, and</li>
+  <li>Two Step View is a try to break down presentation logic into two
+processing steps so that a view can be generated in different formats.</li>
+</ol>
+
+<p>In return for breaking apart a system into smaller layers, each layer
+becomes easier to maintain, reuse, test and scale.</p>
+
+<p>Last but not least, I would like to thank Martin Fowler for his awesome book and would love
+to hear any feedback for you.</p>]]></content><author><name>Owen Ou</name></author><category term="patterns" /><category term="rails" /><summary type="html"><![CDATA[The book Patterns of Enterprise Application Architecture (PoEAA) laid the blueprints for Rails’ architecture. When choosing which enterprise design patterns to encode into the framework, Rails picked, to name a few, Active Record, Template View, Application Controller, etc. By covering these patterns with a sweet coating of convention-over-configuration, Rails simplifies pattern analysis a lot.]]></summary></entry><entry><title type="html">Automatic Testing of REST Web Services Client with Rails</title><link href="https://owenou.com/testing-rest-web-services-with-rails/" rel="alternate" type="text/html" title="Automatic Testing of REST Web Services Client with Rails" /><published>2011-07-20T00:00:00+00:00</published><updated>2011-07-20T00:00:00+00:00</updated><id>https://owenou.com/testing-rest-web-services-with-rails</id><content type="html" xml:base="https://owenou.com/testing-rest-web-services-with-rails/"><![CDATA[<p>Testing REST web services client has never been easy. It requires a running web
+server, multiple threads, network conection and complex transaction management.</p>
+
+<p>Ideally, REST web service client test should have the following characteristics:</p>
+
+<ol>
+  <li>The experience of testing REST resource is similar to that of
+testing a ActiveRecord model</li>
+  <li>Start up and shut down web server for the purpose of running REST web services</li>
+  <li>Rollback test data after each test</li>
+  <li>Control fixture creation for REST web services</li>
+  <li>All tests are automatic</li>
+</ol>
+
+<p>In this article, I demonstrate solutions to each of those mentioned.</p>
+
+<p>As an example throughout the article, let’s assume we have web services for
+a model called <em>Task</em> and we are testing its corresponding client code.
+Here is a sample action in the <em>TasksController</em> of the web server:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># server/app/controllers/tasks_controller.rb</span>
+
+<span class="k">def</span> <span class="nf">index</span>
+  <span class="vi">@tasks</span> <span class="o">=</span> <span class="no">Task</span><span class="p">.</span><span class="nf">all</span>
+  <span class="n">render</span> <span class="ss">:status</span> <span class="o">=&gt;</span> <span class="ss">:ok</span><span class="p">,</span> <span class="ss">:json</span> <span class="o">=&gt;</span> <span class="vi">@tasks</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>We render <em>@tasks</em> as the JSON format where <em>to_json</em> is
+called on the object. When you run “<em>curl http://localhost:3000/tasks.json</em>”, you will
+get the following result:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl http://localhost:3000/tasks.json
+<span class="o">[{</span><span class="s2">"id"</span>:1,<span class="s2">"name"</span>:<span class="s2">"Write a blog post"</span>,<span class="s2">"created_at"</span>:<span class="s2">"2011-07-20T04:05:41Z"</span>,<span class="s2">"updated_at"</span>:<span class="s2">"2011-07-20T04:05:41Z"</span>,<span class="s2">"ends_at"</span>:<span class="s2">"2011-08-20T03:15:00Z"</span><span class="o">}]</span>
+</code></pre></div></div>
+
+<h2 id="activeresource">ActiveResource</h2>
+
+<p>In order to test our REST web services, we need a HTTP client. There
+are <a href="http://ruby-toolbox.com/categories/http_clients.html">lots of them</a> out there, but I found <a href="http://api.rubyonrails.org/classes/ActiveResource/Base.html">ActiveResource</a> the most
+enjoyable to use in a less complex situation. ActiveResource provides ActiveRecord
+compatible APIs, so when writing web service client tests, we feel like we are
+writing unit tests for a ActiveRecord model.</p>
+
+<p>To start with, we just need to extend it from ActiveResource::Base and
+give it the web server URL and representation format. That’s it!</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># client/app/models/task.rb</span>
+
+<span class="k">class</span> <span class="nc">Task</span> <span class="o">&lt;</span> <span class="no">ActiveResource</span><span class="o">::</span><span class="no">Base</span>
+  <span class="nb">self</span><span class="p">.</span><span class="nf">site</span> <span class="o">=</span> <span class="s2">"http://localhost:3000"</span>
+  <span class="nb">self</span><span class="p">.</span><span class="nf">format</span> <span class="o">=</span> <span class="ss">:json</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>And we are using it as if you are using an ActiveRecord object:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># client/spec/models/task_spec.rb</span>
+
+<span class="n">describe</span> <span class="no">Task</span> <span class="k">do</span>
+  <span class="n">it</span> <span class="s2">"should return all the tasks"</span> <span class="k">do</span>
+    <span class="vi">@tasks</span> <span class="o">=</span> <span class="no">Task</span><span class="p">.</span><span class="nf">all</span>
+    <span class="vi">@tasks</span><span class="p">.</span><span class="nf">size</span><span class="p">.</span><span class="nf">should</span> <span class="o">==</span> <span class="mi">1</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<h2 id="web-server">Web Server</h2>
+
+<p>To maintain a zero-setup test environment, we’ll have our test control the stratup and shutdown of
+a web server. By having the tests start and stop the web server, they can be easily run with
+no external dependencies.</p>
+
+<p>To control the startup and shutdown of a web server before and after all
+suites run, it’s as simple as having something like this:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># client/spec_helper.rb</span>
+
+<span class="no">RSpec</span><span class="p">.</span><span class="nf">configure</span> <span class="k">do</span> <span class="o">|</span><span class="n">config</span><span class="o">|</span>
+  <span class="n">config</span><span class="p">.</span><span class="nf">before</span> <span class="ss">:suite</span> <span class="k">do</span>
+    <span class="vi">@server</span> <span class="o">=</span> <span class="no">Server</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">server_path</span><span class="p">)</span>
+    <span class="vi">@server</span><span class="p">.</span><span class="nf">start</span>
+  <span class="k">end</span>
+
+  <span class="n">config</span><span class="p">.</span><span class="nf">after</span> <span class="ss">:suite</span> <span class="k">do</span>
+    <span class="vi">@server</span><span class="p">.</span><span class="nf">stop</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>The implementation of <em>Server</em> is also dead simple. Execute “script/rails server -d” to
+daemonize the server and issue a kill to stop it:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># client/lib/server.rb</span>
+
+<span class="k">class</span> <span class="nc">Server</span>
+  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">server_path</span><span class="p">)</span>
+    <span class="vi">@server_path</span> <span class="o">=</span> <span class="n">server_path</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">start</span>
+    <span class="sb">`</span><span class="si">#{</span><span class="n">rails_script</span><span class="si">}</span><span class="sb"> server -d -e test`</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">stop</span>
+    <span class="n">pid</span> <span class="o">=</span> <span class="no">File</span><span class="p">.</span><span class="nf">read</span><span class="p">(</span><span class="n">pidfile</span><span class="p">)</span>
+    <span class="sb">`kill -9 </span><span class="si">#{</span><span class="n">pid</span><span class="si">}</span><span class="sb">`</span>
+  <span class="k">end</span>
+
+  <span class="kp">private</span>
+
+  <span class="k">def</span> <span class="nf">rails_script</span>
+    <span class="no">File</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="vi">@server_path</span><span class="p">,</span> <span class="s1">'script'</span><span class="p">,</span> <span class="s1">'rails'</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">pidfile</span>
+    <span class="no">File</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="vi">@server_path</span><span class="p">,</span> <span class="s1">'tmp'</span><span class="p">,</span> <span class="s1">'pids'</span><span class="p">,</span> <span class="s1">'server.pid'</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<h2 id="transaction-rollback">Transaction Rollback</h2>
+
+<p>For testing strategies of web services, most people recommend to
+either truncate test data on each run or to mock out the request and response.
+These approaches are less ideal since they’re either less effective or
+they’re not testing full stack of the targeted web services.</p>
+
+<p>Would it be possible to wrap web services calls in a transaction
+and rollback data after each test, like what Rails’s <a href="http://ar.rubyonrails.org/classes/Fixtures.html">transactional fixture</a> does?</p>
+
+<p>Of course! But let’s first try to understand why making transaction rollback
+for web service calls is difficult:</p>
+
+<ul>
+  <li>
+    <p>Tests and web server are running in two separate threads, web server’s
+transactional boundary can’t expand to tests</p>
+  </li>
+  <li>
+    <p>Web service calls may commit its transaction</p>
+  </li>
+  <li>
+    <p>Web server doesn’t know when to rollback the test data</p>
+  </li>
+</ul>
+
+<p>To overcome these problems, we’ll need to fully control the lifecycle of web server’s
+database connection in the client tests. But how are we able to do this in a client-server architecture?</p>
+
+<p><a href="http://www.ruby-doc.org/stdlib/libdoc/drb/rdoc/classes/DRb.html">dRuby</a> to rescue!</p>
+
+<p>For those who are not familiar with it, dRuby is as the <strong>Remote Method Invocation</strong> to Java as to Ruby.
+It allows methods to be called in one Ruby process upon a Ruby object located in another Ruby process.
+<a href="http://segment7.net/projects/ruby/drb/introduction.html">Here</a> is a good introduction to brush you up.</p>
+
+<p>We’ll make use of dRuby to directly control the lifecycle of web service’s
+database connection (<a href="http://ar.rubyonrails.org/classes/ActiveRecord/Base.html#M000431">ActiveRecord::Base.connection</a>) in our web
+services client tests.
+To do that, we add the following code to web server’s “<em>config/environments/test.rb</em>”:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># server/config/environments/test.rb</span>
+
+<span class="n">config</span><span class="p">.</span><span class="nf">after_initialize</span> <span class="k">do</span>
+  <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">ConnectionAdapters</span><span class="o">::</span><span class="no">ConnectionPool</span><span class="p">.</span><span class="nf">class_eval</span> <span class="k">do</span>
+    <span class="kp">alias_method</span> <span class="ss">:old_checkout</span><span class="p">,</span> <span class="ss">:checkout</span>
+
+    <span class="k">def</span> <span class="nf">checkout</span>
+      <span class="vi">@cached_connection</span> <span class="o">||=</span> <span class="n">old_checkout</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+  <span class="nb">require</span> <span class="s1">'drb'</span>
+  <span class="no">DRb</span><span class="p">.</span><span class="nf">start_service</span><span class="p">(</span><span class="s2">"druby://localhost:8000"</span><span class="p">,</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>The above code snippet does two things:</p>
+
+<ol>
+  <li>Patch <em>ActiveRecord::ConnectionAdapters::ConnectionPool#checkout</em> to make sure only one connection is shared
+across threads</li>
+  <li>Start a dRuby service for ActiveRecord::Base to be used in
+tests</li>
+</ol>
+
+<p>In case you are wondering why it’s necessary to share one database
+connection across threads: <a href="https://github.com/rails/rails/blob/master/activerecord/lib/active_record/connection_adapters/abstract/connection_pool.rb#L160">ActiveRecord creates one database connection for each thread</a> in its connection pool.
+Our web service client tests run in a separate thread from the server’s so it’s impossible to track which connection to
+rollback data for the web services calls.
+What we are doing here is to make sure there is only one connection created and we always rollback data for this connection.</p>
+
+<p>After the aforementioned setup, we are able to expand the transaction boundary to
+tests:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># client/spec/models/task_spec.rb</span>
+
+<span class="n">describe</span> <span class="no">Task</span> <span class="k">do</span>
+  <span class="n">before</span> <span class="ss">:all</span> <span class="k">do</span>
+    <span class="vi">@semaphore</span> <span class="o">=</span> <span class="no">Mutex</span><span class="p">.</span><span class="nf">new</span>
+    <span class="no">DRb</span><span class="p">.</span><span class="nf">start_service</span>
+    <span class="vi">@remote_base</span> <span class="o">=</span> <span class="no">DRbObject</span><span class="p">.</span><span class="nf">new</span> <span class="kp">nil</span><span class="p">,</span> <span class="s2">"druby://localhost:8000"</span>
+  <span class="k">end</span>
+
+  <span class="n">before</span> <span class="ss">:each</span> <span class="k">do</span>
+    <span class="n">begin_remote_transaction</span>
+  <span class="k">end</span>
+
+  <span class="n">after</span> <span class="ss">:each</span> <span class="k">do</span>
+    <span class="n">rollback_remote_transaction</span>
+  <span class="k">end</span>
+
+  <span class="n">it</span> <span class="s2">"creates a task through web serices"</span> <span class="k">do</span>
+    <span class="n">task</span> <span class="o">=</span> <span class="no">Task</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s2">"Write a blog post"</span><span class="p">,</span> <span class="ss">:ends_at</span> <span class="o">=&gt;</span> <span class="no">Date</span><span class="p">.</span><span class="nf">tomorrow</span><span class="p">)</span>
+    <span class="no">Task</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="n">task</span><span class="p">.</span><span class="nf">id</span><span class="p">).</span><span class="nf">should</span> <span class="o">==</span> <span class="n">task</span>
+  <span class="k">end</span>
+
+  <span class="kp">private</span>
+
+  <span class="k">def</span> <span class="nf">begin_remote_transaction</span>
+    <span class="vi">@semaphore</span><span class="p">.</span><span class="nf">lock</span>
+    <span class="vi">@remote_base</span><span class="p">.</span><span class="nf">connection</span><span class="p">.</span><span class="nf">increment_open_transactions</span>
+    <span class="vi">@remote_base</span><span class="p">.</span><span class="nf">connection</span><span class="p">.</span><span class="nf">transaction_joinable</span> <span class="o">=</span> <span class="kp">false</span>
+    <span class="vi">@remote_base</span><span class="p">.</span><span class="nf">connection</span><span class="p">.</span><span class="nf">begin_db_transaction</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">rollback_remote_transaction</span>
+    <span class="vi">@remote_base</span><span class="p">.</span><span class="nf">connection</span><span class="p">.</span><span class="nf">rollback_db_transaction</span>
+    <span class="vi">@remote_base</span><span class="p">.</span><span class="nf">connection</span><span class="p">.</span><span class="nf">decrement_open_transactions</span>
+    <span class="vi">@remote_base</span><span class="p">.</span><span class="nf">clear_active_connections!</span>
+    <span class="vi">@semaphore</span><span class="p">.</span><span class="nf">unlock</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>Voila! With dRuby, we use begin+rollback to isolate changes of web services calls to the database,
+instead of having to delete+insert for every test case. A huge performance boost!</p>
+
+<p>Note that the Mutex lock in the code is to make sure that multiple web service
+client tests can run concurrently, for exmaple, using the <a href="https://github.com/grosser/parallel_tests">parallel_tests</a> gem.
+Without this lock, while the remote ActiveRecord connection is shared, the tests will
+behavior strangely in a multi-threads environment. You can ignore those
+lines if your web service client tests never run concurrently.</p>
+
+<p>We can easily refactor out the <em>begin_remote_transaction</em> method and the
+<em>rollback_remote_transaction</em> method to <em>spec_helper.rb</em>,
+so that our web services client tests have little difference from usual ActiveRecord unit tests.</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># client/spec_helper.rb</span>
+
+<span class="no">RSpec</span><span class="p">.</span><span class="nf">configure</span> <span class="k">do</span> <span class="o">|</span><span class="n">config</span><span class="o">|</span>
+  <span class="n">config</span><span class="p">.</span><span class="nf">before</span> <span class="ss">:all</span> <span class="k">do</span>
+    <span class="vi">@semaphore</span> <span class="o">=</span> <span class="no">Mutex</span><span class="p">.</span><span class="nf">new</span>
+    <span class="no">DRb</span><span class="p">.</span><span class="nf">start_service</span>
+    <span class="vi">@remote_base</span> <span class="o">=</span> <span class="no">DRbObject</span><span class="p">.</span><span class="nf">new</span> <span class="kp">nil</span><span class="p">,</span> <span class="s2">"druby://localhost:8000"</span>
+  <span class="k">end</span>
+
+  <span class="n">config</span><span class="p">.</span><span class="nf">before</span> <span class="ss">:each</span> <span class="k">do</span>
+    <span class="vi">@semaphore</span><span class="p">.</span><span class="nf">lock</span>
+    <span class="vi">@remote_base</span><span class="p">.</span><span class="nf">connection</span><span class="p">.</span><span class="nf">increment_open_transactions</span>
+    <span class="vi">@remote_base</span><span class="p">.</span><span class="nf">connection</span><span class="p">.</span><span class="nf">transaction_joinable</span> <span class="o">=</span> <span class="kp">false</span>
+    <span class="vi">@remote_base</span><span class="p">.</span><span class="nf">connection</span><span class="p">.</span><span class="nf">begin_db_transaction</span>
+  <span class="k">end</span>
+
+  <span class="n">config</span><span class="p">.</span><span class="nf">after</span> <span class="ss">:each</span> <span class="k">do</span>
+    <span class="vi">@remote_base</span><span class="p">.</span><span class="nf">connection</span><span class="p">.</span><span class="nf">rollback_db_transaction</span>
+    <span class="vi">@remote_base</span><span class="p">.</span><span class="nf">connection</span><span class="p">.</span><span class="nf">decrement_open_transactions</span>
+    <span class="vi">@remote_base</span><span class="p">.</span><span class="nf">clear_active_connections!</span>
+    <span class="vi">@semaphore</span><span class="p">.</span><span class="nf">unlock</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># client/spec/models/task_spec.rb</span>
+
+<span class="n">describe</span> <span class="no">Task</span> <span class="k">do</span>
+  <span class="n">it</span> <span class="s2">"creates a task through web serices"</span> <span class="k">do</span>
+    <span class="n">task</span> <span class="o">=</span> <span class="no">Task</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s2">"Write a blog post"</span><span class="p">,</span> <span class="ss">:ends_at</span> <span class="o">=&gt;</span> <span class="no">Date</span><span class="p">.</span><span class="nf">tomorrow</span><span class="p">)</span>
+    <span class="no">Task</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="n">task</span><span class="p">.</span><span class="nf">id</span><span class="p">).</span><span class="nf">should</span> <span class="o">==</span> <span class="n">task</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<h2 id="fixture-creation">Fixture Creation</h2>
+
+<p>Most of the time, we create test fixtures to quickly define prototypes for each
+of the models and ask for instances with properties that are important to the test at hand. But in the context
+of REST web services, we can’t create fixtures unless there is a REST API defined.
+To break this constraint, we use dRuby to open up another channel to directly interact with fixture data on web server.</p>
+
+<p>Assuming we are using the <a href="https://github.com/thoughtbot/factory_girl/">factory_girl</a> gem for fixture creation,
+We create a dRuby service for port discovery and a dRuby service for each fixture instance:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># server/lib/drb_active_record_instance_factory.rb</span>
+
+<span class="nb">require</span> <span class="s1">'factory_girl'</span>
+
+<span class="k">class</span> <span class="nc">DRbActiveRecordInstanceFactory</span>
+  <span class="k">def</span> <span class="nf">get_port_for_fixture_instance</span><span class="p">(</span><span class="n">factory_instance</span><span class="p">)</span>
+    <span class="n">port</span> <span class="o">=</span> <span class="n">create_port</span>
+    <span class="n">inst</span> <span class="o">=</span> <span class="no">Factory</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="n">factory_instance</span><span class="p">)</span>
+    <span class="no">DRb</span><span class="p">.</span><span class="nf">start_service</span><span class="p">(</span><span class="s2">"druby://localhost:</span><span class="si">#{</span><span class="n">port</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="n">inst</span><span class="p">)</span>
+    <span class="n">port</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">create_port</span>
+    <span class="c1"># create a random port</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="no">DRb</span><span class="p">.</span><span class="nf">start_service</span><span class="p">(</span><span class="s1">'druby://localhost:9000'</span><span class="p">,</span> <span class="no">DRbActiveRecordInstanceFactory</span><span class="p">.</span><span class="nf">new</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>In tests, we ask for the port of the fixture instance and query its corresponding remote reference:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># client/spec/models/task_spec.rb</span>
+
+<span class="n">describe</span> <span class="no">Task</span> <span class="k">do</span>
+  <span class="n">before</span> <span class="ss">:all</span> <span class="k">do</span>
+    <span class="vi">@drb_factory</span> <span class="o">=</span> <span class="no">DRbObject</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="kp">nil</span><span class="p">,</span> <span class="s1">'druby://localhost:9000'</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="n">before</span> <span class="k">do</span>
+    <span class="n">remote_task_port</span> <span class="o">=</span> <span class="vi">@drb_factory</span><span class="p">.</span><span class="nf">get_port_for_fixture_instance</span><span class="p">(</span><span class="ss">:task</span><span class="p">)</span>
+    <span class="vi">@remote_task</span> <span class="o">=</span> <span class="no">DRbObject</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="kp">nil</span><span class="p">,</span> <span class="s2">"druby://localhost:</span><span class="si">#{</span><span class="n">remote_task_port</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="n">it</span> <span class="s2">"should ..."</span>
+    <span class="c1"># test REST web services calls with @remote_task</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<h2 id="summary">Summary</h2>
+
+<p>Testing REST web services client can be less complex if we have full control over objects on the web server. ActiveResource and dRuby
+stand out to help! They make writing web service client tests feel like writing local unit tests.</p>]]></content><author><name>Owen Ou</name></author><category term="testing" /><category term="rails" /><category term="web_service" /><summary type="html"><![CDATA[Testing REST web services client has never been easy. It requires a running web server, multiple threads, network conection and complex transaction management.]]></summary></entry><entry><title type="html">Git Up Perforce with git-p4</title><link href="https://owenou.com/git-up-perforce-with-git-p4/" rel="alternate" type="text/html" title="Git Up Perforce with git-p4" /><published>2011-03-23T00:00:00+00:00</published><updated>2011-03-23T00:00:00+00:00</updated><id>https://owenou.com/git-up-perforce-with-git-p4</id><content type="html" xml:base="https://owenou.com/git-up-perforce-with-git-p4/"><![CDATA[<p><a href="http://en.wikipedia.org/wiki/Distributed_revision_control">Distributed version control systems</a> open up lots of flexibility and provide lots of efficiency in work-flow than their centralized cousins (e.g. <a href="http://www.perforce.com/">Perforce</a>). There’s often value to use DVCS in the team.</p>
+
+<p>However, the case that I run into frequently is where there is a corporate standard for a deficient VCS, but the team wish to work efficiently by using a more powerful VCS. In that case, there are many successful stories of using <a href="http://martinfowler.com/bliki/VersionControlTools.html">multiple VCS</a>: DVCS for local version control and committing to a shared centralized VCS with a DVCS-to-VCS bridge.</p>
+
+<p>Git is particularly good at this aspect which provides tons of <a href="https://github.com/git/git/tree/master/contrib">bridges</a> to other VCS (That’s another good reason for preferring Git over Mercurial :-)). Lately I have been using the <a href="https://github.com/git/git/blob/master/git-p4.py">git-p4</a> bridge to synchronize codes between a centralized Perforce repository and a local Git repository. This post is a tutorial on how to set this up.</p>
+
+<p><img src="/assets/images/posts/git-p4.jpeg" alt="git-p4 bridge" class="align-center" /></p>
+
+<h2 id="setting-up-the-perforce-command-line-client">Setting up the Perforce command line client</h2>
+
+<p>The git-p4 bridge requires the <a href="http://www.perforce.com/perforce/products/p4.html">p4 command line client</a> properly set up. There is a <a href="http://www.perforce.com/perforce/doc.current/manuals/p4guide/02_config.html">lengthy tutorial</a> on Perforce’s documentation website. The following is a short sums-up:</p>
+
+<ol>
+  <li>Install the p4 command line client (use <a href="http://www.macports.org/">MacPort</a> or <a href="http://mxcl.github.com/homebrew/">Homebrew</a> if you are a Mac guy :-))</li>
+  <li>Create a .p4settings file in your home directory with the global <a href="http://www.perforce.com/perforce/doc.current/manuals/cmdref/_env.html#1045283">environment settings</a> for your Perforce repository. And in your .bashrc, export P4CONFIG=/path/to/your/.p4settings. For example, here is what my settings look like:</li>
+</ol>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>P4PORT=repo_url:repo_port
+P4USER=user_name
+P4PASSWD=password
+P4CLIENT=client_workspace_name
+P4EDITOR=vim
+</code></pre></div></div>
+
+<ol>
+  <li>Run “p4 client” to define the workspace mappings</li>
+  <li>Run “p4 info” to verify the settings</li>
+</ol>
+
+<p>After you have done all these, don’t forget to issue “p4 sync repo_url” to test whether you are able to checkout stuff from your repository.</p>
+
+<h2 id="installing-git-p4-bridge">Installing git-p4 bridge</h2>
+
+<p><strong>update 2014-02-25</strong> <a href="https://github.com/git/git/blob/master/contrib/fast-import/git-p4.README">git-p4 bridge has been moved to the top level git command</a>. Use it as <code class="language-plaintext highlighter-rouge">git p4</code> instead of <code class="language-plaintext highlighter-rouge">git-p4</code>.</p>
+
+<p>The <a href="https://github.com/git/git/tree/master/contrib/fast-import">git-p4</a> bridge is a Python script to enable bidirectional operation between a Perforce depot and Git. It doesn’t come with the Git distribution by default. To make it invokable in your system, you need to download the script and put it into your system path. For me, I clone the Git source code from GitHub and make a soft-link to the script:</p>
+
+<ol>
+  <li>Clone the Git repository to somewhere</li>
+</ol>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/git/git.git git_source_path
+</code></pre></div></div>
+
+<ol>
+  <li>Create a soft-link to the git-p4 script in one of your system paths</li>
+</ol>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ln -s git_source_path/contrib/fast-import/git-p4 /usr/bin/git-p4
+</code></pre></div></div>
+
+<p>Windows users need to include the <a href="https://github.com/git/git/blob/master/contrib/fast-import/git-p4.bat">git-p4.bat</a> file in the system path.</p>
+
+<h2 id="commands">Commands</h2>
+
+<p>Four things to remember when using git-p4:</p>
+
+<ul>
+  <li>Instead of using “git push” to push local commits to remote repository, use “git-p4 submit”</li>
+  <li>Instead of using “git fetch” to fetch changes from remote repository to local, use “git-p4 sync”</li>
+  <li>Instead of using “git pull” to fetch and merge changes from remote repository to local, use “git-p4 rebase”</li>
+  <li>Instead of using “git merge” to merge local branches, use “git rebase”</li>
+</ul>
+
+<p>For the last one, the reason is that when you run “git merge”, Git creates an extra commit on top of the stack for the merging. This is not something we wanna show in the remote non-git repository. So we merge code with “git rebase”. Detailed explanation of the difference between git-merge and git-rebase goes <a href="http://www.jarrodspillers.com/2009/08/19/git-merge-vs-git-rebase-avoiding-rebase-hell/">here</a>.</p>
+
+<h2 id="workflow">Workflow</h2>
+
+<p>There is a <a href="https://github.com/git/git/blob/master/contrib/fast-import/git-p4.txt">detailed explanation</a> on the usage of git-p4 in Git’s source. Here is an example almost covering daily usage:</p>
+
+<ol>
+  <li>Login with “p4 login” and clone a Perforce project:</li>
+</ol>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git-p4 clone //depot/path/project
+</code></pre></div></div>
+
+<ol>
+  <li>Make some changes to the project and commit locally to Git:</li>
+</ol>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git commit changed_file
+</code></pre></div></div>
+
+<ol>
+  <li>In the meantime somebody in the team submitted changes to the remote Perforce repository. Merge it to your local repository:</li>
+</ol>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git-p4 rebase
+</code></pre></div></div>
+
+<ol>
+  <li>Submit your local changes back to Perforce:</li>
+</ol>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git-p4 submit
+</code></pre></div></div>
+
+<h2 id="ignoring-the-gitignore-file">Ignoring the .gitignore file</h2>
+
+<p>Normally we check in a .gitignore file to ignore files that we don’t want to check into the remote repository for each project. However, since the remote repository is not Git, it’s meaningless to check in this .gitignore file. To ignore this file, simply add an entry to .git/info/exclude.</p>
+
+<h2 id="under-the-hook">Under the hook</h2>
+
+<p>There is no magic happening with git-p4. What it does is simply invoking the p4 command line tool to download sources to local, and then clone a Git repository out of it. You can simply verify this by typing “git branch -a”:</p>
+
+<p><img src="/assets/images/posts/Terminal.jpeg" alt="under the hook of git-p4" class="align-center" /></p>
+
+<p>You may be amazed once again by how flexible the design of Git is which makes it possible to bridge to multiple VCS!</p>
+
+<h2 id="summary">Summary</h2>
+
+<p>To quote <a href="http://martinfowler.com">Martin Fowler</a>’s <a href="http://martinfowler.com/bliki/VersionControlTools.html">opinions</a> on dual VCS, “a lot of teams can benefit from this dual-VCS working style, particularly if there’s a lot of corporate ceremony enforced by their corporate VCS. Using dual-VCS can often make both the local development team happier and the corporate controllers happier as their motivations for VCS are often different”.</p>]]></content><author><name>Owen Ou</name></author><category term="git" /><category term="perforce" /><summary type="html"><![CDATA[Distributed version control systems open up lots of flexibility and provide lots of efficiency in work-flow than their centralized cousins (e.g. Perforce). There’s often value to use DVCS in the team.]]></summary></entry></feed>

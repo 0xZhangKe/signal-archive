@@ -1,0 +1,101 @@
+<?xml version="1.0" standalone="yes" ?>
+<?xml-stylesheet href="prettyfeed.xsl" type="text/xsl"?>
+<rss version="2.0" xmlns:source="http://source.scripting.com/" xmlns:byline="https://bylinespec.org/1.0">
+<channel>
+<title>Colin Walker - Daily Feed</title>
+<description>Daily feed from colinwalker.blog</description>
+<byline:contributors>
+<byline:person id="colin">
+<byline:name>Colin Walker</byline:name>
+<byline:context>Blogger, hobby coder, creator of acid music.</byline:context>
+<byline:url>https://colinwalker.blog</byline:url>
+<byline:avatar>https://colinwalker.blog/images/colinwalker-thumb.jpg</byline:avatar>
+<byline:profile href="https://github.com/colin-walker" rel="github"/>
+<byline:profile href="https://bsky.app/profile/colinwalker.blog" rel="bluesky"/>
+<byline:profile href="https://randomelements.bandcamp.com/" rel="bandcamp"/>
+<byline:theme color="#333333" accent="#FFB029" style="light"/>
+</byline:person>
+</byline:contributors>
+<category>Writing</category>
+<category>Custom CMS</category>
+<category>Acid</category>
+<category>Music</category>
+<category>Mental Health</category>
+<link>https://colinwalker.blog</link>
+<source:self>https://colinwalker.blog/dailyfeed.xml</source:self>
+<lastBuildDate>Wed, 22 Jul 2026 00:05:02 GMT</lastBuildDate>
+<cloud domain="rsscloud.colinwalker.blog" port="443" path="/pleaseNotify/" registerProcedure="" protocol="http-post"/>
+<source:blogroll>https://colinwalker.blog/feeds.opml</source:blogroll>
+<generator>(b)log-In</generator>
+<source:account service="colinwalker.blog">Colin Walker</source:account>
+<language>en-GB</language>
+<item>
+<title>Monday, July 20th, 2026</title>
+<link>https://colinwalker.blog/?date=2026-07-20</link>
+<guid isPermaLink="false">3613</guid>
+<pubDate>Wed, 22 Jul 2026 00:00:00 GMT</pubDate>
+<description><![CDATA[<p><a href="https://colinwalker.blog/?date=2026-07-20#p1" style="text-decoration: none; margin-right: 8px;">#</a> Congratulations to our daughter who has just got her university results and has passed her degree with a first!</p>
+<p>She can now officially use BSc after her name. 🎉</p>
+]]></description>
+</item>
+<item>
+<title>Saturday, July 18th, 2026</title>
+<link>https://colinwalker.blog/?date=2026-07-18</link>
+<guid isPermaLink="false">3612</guid>
+<pubDate>Tue, 21 Jul 2026 00:00:00 GMT</pubDate>
+<description><![CDATA[<p><a href="https://colinwalker.blog/?date=2026-07-18#p1" style="text-decoration: none; margin-right: 8px;">#</a> What an amazing couple of days!</p>
+<p>It was our 31<sup>st</sup> wedding anniversary on Wednesday (15<sup>th</sup>) so we went out for a nice meal.</p>
+<p>My wife booked a night away on Thursday — we stayed in Pontefract — so didn't have to waste time travelling yesterday, my birthday.</p>
+<p>We went to Pontefract Castle and did some exploring before checking in. Yesterday we headed for York and had a great time at the Minster. I love the architecture and history, and York Minster has <em>a lot</em> of both to explore.</p>
+<p>We were having such a good time that it felt like we'd been away for ages, not just one night.</p>
+]]></description>
+</item>
+<item>
+<title>Wednesday, July 15th, 2026</title>
+<link>https://colinwalker.blog/?date=2026-07-15</link>
+<guid isPermaLink="false">3611</guid>
+<pubDate>Mon, 20 Jul 2026 00:00:00 GMT</pubDate>
+<description><![CDATA[<p><a href="https://colinwalker.blog/?date=2026-07-15#p1" style="text-decoration: none; margin-right: 8px;">#</a> <em>Reply to: <a class="u-in-reply-to" href="https://colinwalker.blog/blog/?date=2026-07-14#p1">Colin Walker - Jul 14, 2026</a>...</em></p>
+<p><a href="https://colinwalker.blog/?date=2026-07-15#p2" style="text-decoration: none; margin-right: 8px;">#</a> I have now added an on-the-fly RSS feed for post comments. If there are any comments for a particular post, the link gets added to the live RSS feed using the <code>&lt;source:comments&gt;</code> attribute, e.g.</p>
+<pre><code>&lt;source:comments&gt;https://colinwalker.blog/blog/comments-feed.php?post=2426&lt;/source:comments&gt;</code></pre>
+<p>The post ID is passed to a new page which builds and returns the specific feed.</p>
+]]></description>
+</item>
+<item>
+<title>Tuesday, July 14th, 2026</title>
+<link>https://colinwalker.blog/?date=2026-07-14</link>
+<guid isPermaLink="false">3601</guid>
+<pubDate>Sun, 19 Jul 2026 00:00:00 GMT</pubDate>
+<description><![CDATA[<p><a href="https://colinwalker.blog/?date=2026-07-14#p1" style="text-decoration: none; margin-right: 8px;">#</a> Back in November 2023, <a href="http://scripting.com/2023/11/05.html#a214724">Dave Winer wrote</a>: <em>"I have an itch to make a simple chat program for a workgroup whose only output is a simple RSS 2.0 feed."</em></p>
+<p>If that sounds familiar, <a href="https://colinwalker.blog/?date=2023-11-05#p2">I mentioned it</a> in the context of the <a href="https://github.com/andysylvester/MyStatusToolDemo">MyStatusTool</a> (MST) created by Andy Sylvester, of which I made a test PHP version.</p>
+<p>Dave is now scratching that itch by building (and testing) <a href="https://rss.chat/">rss.chat</a>:</p>
+<blockquote>
+<p><em>We don't need anything more than RSS 2.0, OPML, Markdown, SQL and WebSocket. All very established in the web world, and remarkably only one was developed by a standards body.</em></p>
+</blockquote>
+<p>Every user has an RSS feed, as does the whole community, and an OPML file lists everyone using it.</p>
+<p>Obviously, any RSS reader can subscribe to any of the feeds but you would need to be using a  client to post and reply.</p>
+<p>On that topic, Dave has extended the <code>source</code> namespace with a couple of extra attributes:</p>
+<ul>
+<li><a href="https://source.scripting.com/#1778941955000">source:inReplyTo</a> — an optional item level element that contains the URL of the parent post, and</li>
+<li><a href="https://source.scripting.com/#1783601707000">source:comments</a> — an optional item level element that holds the number of comments and the URL of the comment feed.</li>
+</ul>
+<p><code>source:inReplyTo</code> acts in exactly the same way as <code>mst:reply</code> attribute I proposed in the <a href="https://github.com/colin-walker/mst-namespace">MST namespace</a>.</p>
+<p>The parallels with blogging are obvious and I am looking at implementing both of these in my feed. This will, however, involve bringing back the live feed in addition to the daily.</p>
+<p>I envisage external blogs being first class citizens in RSS networks in a similar way to how they are with micro.blog. I could also see the /blog &amp; /reader integration becoming an rss.chat client.</p>
+<p>I'm looking forward to seeing where this goes and exactly how far interop can be taken.</p>
+]]></description>
+</item>
+<item>
+<title>Monday, July 13th, 2026</title>
+<link>https://colinwalker.blog/?date=2026-07-13</link>
+<guid isPermaLink="false">3600</guid>
+<pubDate>Sat, 18 Jul 2026 00:00:00 GMT</pubDate>
+<description><![CDATA[<p><a href="https://colinwalker.blog/?date=2026-07-13#p1" style="text-decoration: none; margin-right: 8px;">#</a> Happy Monday!</p>
+<p>It's been a while since I've said (or felt) that.</p>
+<p>Following on from <a href="https://colinwalker.blog/post.php?date=2026-07-10&amp;p=1">last week</a>, it feels so freeing to decline and delete whole series of meetings this morning.</p>
+<p>Friday saw me finally catch up with all messages and emails — the first time in the five weeks I've been back at work — so having nothing outstanding when I logged on today was so refreshing. Just being able to start the week with nothing hanging over me makes such a difference; not having that dread build up during the latter part of the weekend.</p>
+<p>It's on me now to keep up to date and not let things build up. Only doing the one role will certainly help.</p>
+]]></description>
+</item>
+</channel>
+</rss>

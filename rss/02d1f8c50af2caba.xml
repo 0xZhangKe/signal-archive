@@ -1,0 +1,635 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Kartik Agaram</title>
+    <link>https://akkartik.name</link>
+    <description></description>
+    <language>en-us</language>
+    <item>
+      <title>Updating a mantra from 2007</title>
+      <link>http://akkartik.name/post/tmol</link>
+      <pubDate>19 May 2026 09:14:25 PDT</pubDate>
+      <guid isPermaLink="false">http://akkartik.name/post/tmol</guid>
+      <description><![CDATA[
+<p>
+<a href='/post/1451852'>Me in 2007</a>: Building something is easy. Evaluating what you build is hard. Iterate between the two as fast as you can.
+
+<p>
+<a href='https://stefanlesser.substack.com/p/finding-meaning-in-the-nature-of'>Stefan Lesser in 2023</a> (paraphrased): Building helps understand ourselves through the world, and <a href='http://johnsalvatier.org/blog/2017/reality-has-a-surprising-amount-of-detail'>understand the world</a> through ourselves.
+
+<p>
+Me now: Building things is easy. Evaluating what you build is hard. It requires lots of <a href='https://www.henrikkarlsson.xyz/p/attention'>attention</a>. Therefore, build things that you want to pay lots of attention to.
+]]></description>
+    </item>
+    <item>
+      <title>A markup language and hypertext browser in 600 lines of code</title>
+      <link>http://akkartik.name/post/luaML2</link>
+      <pubDate>29 Mar 2025 12:03:28 PDT</pubDate>
+      <guid isPermaLink="false">http://akkartik.name/post/luaML2</guid>
+      <description><![CDATA[
+<p>
+Here's a document containing a line of text:
+
+<pre style='font-family: fixed; font-size:16px; margin-left:2em'>
+{type='text', data={'hello, world'}}
+</pre>
+
+<p>
+I'm building in Lua, so I'm reusing Lua syntax. Here's how it looks:
+
+<img style='float:none' width='80%' src='/images/20250329-luaML2/1.png'>
+
+<p>
+Such <code>text</code> boxes are the workhorse of this markup language. There are 3 other kinds of boxes: <code>rows</code>, <code>cols</code> and <code>filler</code>. Rows and cols can nest other boxes. But let's focus on text boxes for a bit.
+
+<!-- more -->
+
+<p>
+Here's a text box containing two lines of text:
+
+<table><tr>
+  <td width='30%'>
+    <pre style='font-family: fixed; font-size:16px'>
+    {type='text', data={
+      'hello',
+      'world'}}
+    </pre>
+  </td>
+  <td width='70%'>
+    <img style='float:none' width='100%' src='/images/20250329-luaML2/2.png'>
+  </td>
+</tr></table>
+
+<p>
+Since it's hypertext, you get a few attributes. You can set <code>color</code>, <code>bg</code> (background color) and <code>border</code> (also color). Each of these is a Lua array of 3 or 4 elements for red, green, blue and transparency.
+
+<table><tr>
+  <td width='30%'>
+    <pre style='font-family: fixed; font-size:16px'>
+    {type='text', data={'hello, world'},
+      bg={1,0.6,0.4},
+      border={0,0,0},
+      color={0,0.2,0.8}}
+    </pre>
+  </td>
+  <td width='70%'>
+    <img style='float:none' width='100%' src='/images/20250329-luaML2/3.png'>
+  </td>
+</tr></table>
+
+<p>
+Notice that the text is not centered vertically. The browser doesn't know details about the font like how far down the baseline is. You have to center manually using <code>line_height</code>.
+
+<table><tr>
+  <td width='30%'>
+    <pre style='font-family: fixed; font-size:16px'>
+      {type='text', data={'hello, world'},
+        bg={1,0.6,0.4},
+        border={0,0,0},
+        color={0,0.2,0.8},
+        line_height=25}
+    </pre>
+  </td>
+  <td width='70%'>
+    <img style='float:none' width='100%' src='/images/20250329-luaML2/4.png'>
+  </td>
+</tr></table>
+
+<p>
+I imagine this sort of thing will get old fast. Probably best to use <code>bg</code> and <code>border</code> sparingly.
+
+<p>
+Since this is a <em>hypertext</em> browser, the main attribute of course is hyperlinks. To turn a text box into a link you can click on, use the <tt>target</tt> attribute.
+
+<table><tr>
+  <td width='30%'>
+    <pre style='font-family: fixed; font-size:16px'>
+      {type='text', data={'hello, world'},
+        target='x'}
+    </pre>
+  </td>
+  <td width='70%'>
+    <img style='float:none' width='100%' src='/images/20250329-luaML2/5.png'>
+  </td>
+</tr></table>
+
+<p>
+Links get some default colors if you don't override them. The target is a file path that will open when you click on it; there's no networking here. Press <kbd>alt+left</kbd> to go back.
+
+<p>
+What else. The one remaining attribute text boxes support is <code>font</code>. You can use any font as long as it's Vera Sans (or you're welcome to open up my program and put more fonts in). But you can adjust the font size and select bold and italic faces. However, before we can see them in action I should discuss <em>inline styles</em>.
+
+<p>
+A text box contains lines. Each line so far has been a string. But it can also be a string augmented with attributes. Here's a line with an inline 'tag':
+
+<table><tr>
+  <td width='30%'>
+    <pre style='font-family: fixed; font-size:16px'>
+      {type='text', data={
+        {'hello, style1@{world}',
+          attrs={
+            style1={font={italic=true}},
+          }},
+      }}
+    </pre>
+  </td>
+  <td width='70%'>
+    <img style='float:none' width='100%' src='/images/20250329-luaML2/6.png'>
+  </td>
+</tr></table>
+
+<p>
+(So many irritating silly curly brackets! But I hope you'll stick with me here. The goal is a simple markup language that is easy to implement while still providing some basic graphical niceties.)
+
+<p>
+Inline segments of text are surrounded in <code>@{...}</code> and prefixed with an alphanumeric name. (So they have to begin at the start of a word, after whitespace or punctuation.) The name gets connected up with attributes inside a block called <code>attrs</code>.
+
+<p>
+To stretch our legs, here's a text box with two lines, each containing inline markup for font and color.
+
+<table><tr>
+  <td width='30%'>
+    <pre style='font-family: fixed; font-size:16px'>
+      {type='text', data={
+        {'hello, style1@{world}',
+          attrs={
+            style1={font={italic=true}},
+          }},
+        {'style1@{hello}, style2@{world}',
+          attrs={
+            style1={font={bold=true}, color={1,0,0}},
+            style2={font={italic=true}, bg={1,0,1}},
+          }},
+      }}
+    </pre>
+  </td>
+  <td width='70%'>
+    <img style='float:none' width='100%' src='/images/20250329-luaML2/7.png'>
+  </td>
+</tr></table>
+
+<p>
+Each line's attributes are independent. So far you can't change font size or add borders inline, because it complicates matters to change line height within a line, and also seldom looks nice.
+
+<p>
+Inline <code>attrs</code> should arguably be used sparingly. The pattern I've been using more is to give each text block a uniform font and mix and match combinations of text boxes. There are 2 ways to combine text boxes: <code>rows</code> and <code>cols</code>. Here's a vertical array of text boxes:
+
+<table><tr>
+  <td width='30%'>
+    <pre style='font-family: fixed; font-size:16px'>
+      {type='rows', data={
+        {type='text',
+          data={'hello, world'}},
+        {type='text',
+          data={'goodbye, cruel world'}},
+      }}
+    </pre>
+  </td>
+  <td width='70%'>
+    <img style='float:none' width='100%' src='/images/20250329-luaML2/8.png'>
+  </td>
+</tr></table>
+
+And here's a horizontal array:
+
+<table><tr>
+  <td width='30%'>
+    <pre style='font-family: fixed; font-size:16px'>
+      {type='cols', data={
+        {type='text',
+          data={'hello, world'}},
+        {type='text',
+          data={'goodbye, cruel world'}},
+      }}
+    </pre>
+  </td>
+  <td width='70%'>
+    <img style='float:none' width='100%' src='/images/20250329-luaML2/9.png'>
+  </td>
+</tr></table>
+
+<p>
+It's hard to see, so let's make the border more obvious. You can add attributes to <code>rows</code> and <code>cols</code> just like to <code>text</code>.
+
+<table><tr>
+  <td width='50%'>
+    <pre style='font-family: fixed; font-size:16px'>
+      {type='cols', bg={0.8,0.8,1}, data={
+        {type='text', bg={1,0.8,0.8},
+          data={'hello, world'}},
+        {type='text',
+          data={'goodbye, cruel world'}},
+      }}
+    </pre>
+  </td>
+  <td width='50%'>
+    <img style='float:none' width='100%' src='/images/20250329-luaML2/10.png'>
+  </td>
+</tr></table>
+
+<p>
+All children of <code>rows</code> share a width, and all children of <code>cols</code> share a height. Children can also share other attributes when specified in a <code>default</code> attribute:
+
+<table><tr>
+  <td width='50%'>
+    <pre style='font-family: fixed; font-size:16px'>
+      {type='rows',
+          default={color={0.8,0,0}},
+        data={
+          {type='text',
+            data={'hello, world'}},
+          {type='text',
+            data={'goodbye, cruel world'}},
+      }}
+    </pre>
+  </td>
+  <td width='50%'>
+    <img style='float:none' width='100%' src='/images/20250329-luaML2/11.png'>
+  </td>
+</tr></table>
+
+<p>
+Widths and heights will grow and shrink depending on what you put in them, but you can also fix a width in <code>rows</code> and <code>text</code> boxes, and lines will wrap as needed.
+
+<table><tr>
+  <td width='50%'>
+    <pre style='font-family: fixed; font-size:16px'>
+      {type='rows', width=200, data={
+        {type='text', data={
+          'This is a long sentence.'}},
+        {type='text', data={
+          'This is a second long sentence.'}},
+      }}
+    </pre>
+  </td>
+  <td width='50%'>
+    <img style='float:none' width='100%' src='/images/20250329-luaML2/11-2.png'>
+  </td>
+</tr></table>
+
+<p>
+Notice that it'll try to wrap at word boundaries if it can. But it'll chop mid-word if a line would be too empty without the entire word.
+
+<p>
+For completeness, here's a <code>filler</code> box. All it does is add padding within <code>rows</code> and <code>cols</code>. Within <code>rows</code>, <code>filler</code> needs to specify a <code>height</code>, and within <code>cols</code>, a <code>width</code>. The other dimension will resize as needed.
+
+<table><tr>
+  <td width='50%'>
+    <pre style='font-family: fixed; font-size:16px'>
+      {type='rows',
+          default={color={0.8,0,0}},
+        data={
+          {type='text',
+            data={'hello, world'}},
+          {type='filler', height=50},
+          {type='text',
+            data={'goodbye, cruel world'}},
+      }}
+    </pre>
+  </td>
+  <td width='50%'>
+    <img style='float:none' width='100%' src='/images/20250329-luaML2/12.png'>
+  </td>
+</tr></table>
+
+<p>
+Putting it all together, here's a table:
+
+<table><tr>
+  <td width='50%'>
+    <pre style='font-family: fixed; font-size:16px'>
+      {type='rows', border={0,0,0},
+          default={border={1,1,1}},
+        data={
+          {type='cols',
+              default={
+                font={size=21, bold=true}},
+            data={
+              {type='text',
+                data={'widgets'}},
+              {type='text',
+                data={'quantity'}}}},
+          {type='cols', data={
+            {type='text', data={'foo'}},
+            {type='text', data={'34'}}}},
+          {type='cols', data={
+            {type='text', data={'bar'}},
+            {type='text', data={'7'}}}},
+      }}
+    </pre>
+  </td>
+  <td width='50%'>
+    <img style='float:none' width='100%' src='/images/20250329-luaML2/13.png'>
+  </td>
+</tr></table>
+
+<p>
+No wait, that's not right:
+
+<table><tr>
+  <td width='50%'>
+    <pre style='font-family: fixed; font-size:16px'>
+      {type='cols', border={0,0,0},
+          default={border={1,1,1}},
+        data={
+          {type='rows', data={
+            {type='text', font={bold=true},
+              data={'widgets'}},
+            {type='text', data={'foo'}},
+            {type='text', data={'bar'}}}},
+          {type='rows', data={
+            {type='text', font={bold=true},
+              data={'quantity'}},
+            {type='text', data={'34'}},
+            {type='text', data={'7'}}}},
+      }}
+    </pre>
+  </td>
+  <td width='50%'>
+    <img style='float:none' width='100%' src='/images/20250329-luaML2/14.png'>
+  </td>
+</tr></table>
+
+<p>
+That's annoying! You have to specify columns before rows, or you're stuck manually sizing widths. <em>But</em>, 600 lines of code! <a href='/images/20250329-browser.love'>Here it is.</a> You'll need <a href='https://love2d.org'>LÖVE</a>, but the code should be easy to port to other graphics toolkits, the markup to JSON literals, etc. The program is a zip file containing the source code.
+]]></description>
+    </item>
+    <item>
+      <title>Practicing graphical debugging using too many visualizations of the Hilbert curve</title>
+      <link>http://akkartik.name/post/debugUIs</link>
+      <pubDate>31 Jan 2025 09:06:44 PST</pubDate>
+      <guid isPermaLink="false">http://akkartik.name/post/debugUIs</guid>
+      <description><![CDATA[
+<p>
+Sorry, this article is too wide for my current website design so you'll need to <a href='/debugUIs.html'>go to it &rarr;</a>
+
+<p>
+<img src='/images/20250129-debugUIs/v1.png' alt='A single blue continuous fractal space-filling Hilbert curve made of straight lines bending in perpendicular corners' style='float:none; margin-left:2em; width:80%'>
+
+<p>
+]]></description>
+    </item>
+    <item>
+      <title>How I program in 2024</title>
+      <link>http://akkartik.name/post/programming-2024</link>
+      <pubDate>31 Jul 2024 11:52:44 PDT</pubDate>
+      <guid isPermaLink="false">http://akkartik.name/post/programming-2024</guid>
+      <description><![CDATA[
+<p>
+I talk a lot here about <a href='https://akkartik.name/freewheeling'>using computers freely</a>, how to select programs to use, how to decide if a program is trustworthy infrastructure one can safely depend on in the long term. I also spend my time building such infrastructure, because there isn't a lot of it out there. As I do so, I'm always acutely aware that <em>I'm just not very good at it.</em> At best I can claim I try to compensate for limited means with good, transparent intentions.
+
+<p>
+I just spent <a href='https://akkartik.name/post/2024-06-05-devlog'>a month</a> of my free time, off and on, <a href='https://akkartik.name/post/2024-07-22-devlog'>rewriting the core</a> of a program I've been using and incrementally modifying for 2 years. I've been becalmed since. Partly this is the regular cadence of my subconscious reflecting on what just happened, what I learned from it, taking some time to decide where to go next. But I'm also growing aware this time of a broader arc in my life:
+
+<!-- more -->
+
+<ul>
+
+<li> Back in 2015 I was suspicious of abstractions and big on tests and version control. Code seemed awash in bad abstractions, while tests and versions seemed like the key advances of the 2000s. I thought our troubles stemmed from bad incentives, using abstractions too much, and not using tests and versions enough. <a href='https://github.com/akkartik/mu1'>Mu1</a> was an attempt at designing a platform with tests and <a href='https://akkartik.name/post/wart-layers'>layers</a> (more like versions, less like abstractions) as foundational constraints influencing everything else.
+
+<p>
+<li> In 2017 I started reworking Mu1 into the current <a href='https://github.com/akkartik/mu'>Mu</a>. <a href='https://github.com/akkartik/mu/tree/main/linux/bootstrap#readme'>At the start</a> I used all my new ideas for tests and layers. But over time I stopped using them. Mu today has tons of tests, but they are conventional tests, and I never got around to porting over my infrastructure for layers.
+
+<p>
+<li> In 2022 I started working on <a href='https://akkartik.name/freewheeling-apps'>Freewheeling Apps</a>. I started out with no tests, got frustrated at some point and wrote thorough tests for a core piece, the text editor. But I struggled to find ways to test the rest, and also found I was getting by fine anyway.
+
+<p>
+<li> Now it's 2024, and a month ago I deleted all my tests. I also started radically reworking my text editor, in a way that would have made me worried about merge conflicts with other Freewheeling Apps. In effect I stopped thinking about version control. Giving up tests and versions, I ended up with a much better program. The cognitive dissonance is now impossible to ignore.
+
+</ul>
+
+<p>
+After mulling it over for a few days, I think my current synthesis on <a href='https://akkartik.name/freewheeling'>programming durable things</a> is:
+
+<ol>
+
+<li> Building durably for lots of people is too hard, just don't even try. Be ruled by what you know well, who you know well and <a href='https://en.wikipedia.org/wiki/Dunbar%27s_number'>Dunbar's number</a>.
+<li> Most software out there is incurably infected by incentives to serve lots of people in the short term. Focus as far as possible on software without lots of logos on the website, stuff that is easy to build, has few dependencies, definitely doesn't auto-update. Once you filter by these restrictions, the amount of durable software humanity has created so far is tiny.
+<li> Small changes in context (people/places/features you want to support) often radically change how well a program fits its context. Our dominant milieu of short-termism doesn't prepare us for this fact.
+<li> Given this tiny body of past work and low coverage per program, any new program you decide to build is quite likely striking out into the unknown in some way or other. You often won't know <em>quite</em> what you're doing in some direction or other. (In my example above, I was trying to insert special "drawing lines" in a text editor. Questions that raised: can the cursor lie on a drawing? Can I try to draw in one line while the cursor is on another? Drawings are taller than text lines. Can a drawing be partially visible at top of screen? Can I draw on a partially visible drawing? My answers to these questions were sub-optimal for a long time, leading to hacks piled on hacks.)
+<li> Types, abstractions, tests, versions, state machines, immutability, formal analysis, all these are tools available to us in unfamiliar terrain. Use them to taste.
+<li> You'll inevitably end up over-using some of these tools, the ones you gravitate towards. The ideal quantity to use these tools is tiny, much more miniscule than any of us is trained to think by our dominant milieu of short-termism. The excess is <em>tech debt.</em> It keeps us from noticing that a program is unnecessarily complex, less durable than it could be, harder to change when the context shifts.
+<li> When your understanding of the context stabilizes, there's value in throwing away vast swathes of a program, and redoing it from scratch.
+<li> Before you set out to rewrite, you have to spend some time importing everything into your brain at once. Everything you want from the program, all the scenarios the program has to cater to. This is hard. The goal is to get to a point where you can build everything all at once.
+<li> Build everything all at once.
+
+</ol>
+
+<p>
+In my case, tests and versions actively hindered getting to the end of this evolution. Tests let me forget concerns. Version control kept me attached to the past. Both were counter-productive. It took a major reorientation to let go of them.
+
+<p>
+All the software I've written in my life &mdash; and all my Freewheeling Apps so far &mdash; are at level 6 in this trajectory. Only <a href='https://akkartik.name/post/2024-07-22-devlog'>the output of the past month</a> feels like it might have gotten to level 9. We'll see.
+
+<p>
+It seems likely that a program can grow so complex it becomes impossible to import into memory in level 8. That seems to describe most software so far, certainly most software written by more than a couple of people. Even my text editor, small as it is, was daunting enough I spent much of the month girding myself to face the terror.
+
+<p>
+Not all software necessarily <em>needs</em> to get to level 9. I think many of my Freewheeling Apps are simple enough and evolve slowly enough that they would stabilize to a bug-free state with just a handful of people using them, regardless of my initial design choices. Particularly now that I know how to streamline one complex piece at their core. Still, it's good to be aware of how things <em>might</em> be improved, if it becomes worthwhile.
+
+<p>
+One thing that feels definitely useful in getting to level 9 is <a href='https://www.youtube.com/watch?v=rX0ItVEVjHc'>data-oriented design</a>. It's not a tool you can blindly apply but a way of thinking you have to grow into, to look past immediate data structure choices at the big picture of how your program accesses data. Just don't let tools like <a href='https://en.wikipedia.org/wiki/Entity_component_system'>ECS</a> blind you to the essential intellectual activity.
+
+<p>
+These levels are probably not quite right. I'm probably under-estimating tools I have less experience with.
+
+<p>
+I wonder what levels lie beyond these.
+
+<p>
+(I last wrote some thoughts on how I program <a href='https://akkartik.name/post/four-repos'>back in 2019</a>. It's nice to see signs of evolution.)
+]]></description>
+    </item>
+    <item>
+      <title>Sokoban</title>
+      <link>http://akkartik.name/post/sokoban</link>
+      <pubDate>13 Mar 2024 00:00:00 PDT</pubDate>
+      <guid isPermaLink="false">http://akkartik.name/post/sokoban</guid>
+      <description><![CDATA[
+<p>
+The kids have been enjoying <a href='https://hempuli.itch.io/baba'>Baba is
+You</a>, and watching them brought back pleasant memories for me of playing
+the classic crate-pushing game <a
+href='https://en.wikipedia.org/wiki/Sokoban'>Sokoban</a>. So I went looking
+and found <a href='https://lcamtuf.coredump.cx/sir-box-a-lot'>a very nice
+project</a> that has collected 300 classic publicly available Sokoban puzzles.
+Then of course I had to get it on my phone so I could play it anywhere. The
+result is the <a href='https://akkartik.itch.io/sokoban'>sokoban.love</a>
+client.
+
+<p>
+<a href='https://akkartik.name/images/20240313-sokoban-solver.webm'>
+  <video style='width:80%; margin-left:10%; border:2px solid #aaaaff'>
+    <source src='https://akkartik.name/images/20240313-sokoban-solver.webm'>
+  </video>
+</a>
+<div class='btw' style='text-align:right'>
+  video; 1 minute
+</div>
+
+<!-- more -->
+
+<p>
+On a technical level, with <a href='https://git.sr.ht/~akkartik/sokoban.love'>sokoban</a>.love
+I've finally managed to figure out how to scale modifying programs on my phone
+beyond the tiny scripts <a href='https://akkartik.name/post/carousel'>Lua Carousel</a> supports.
+Carousel treats each 'page' of the carousel as a separate script, and shares
+the screen between the code for the page and the drawings the page makes. When
+you switch between pages, Carousel saves and restores code for you so the
+script currently on screen is always the one currently drawing.
+
+<p>
+sokoban.love comes bundled with multiple pages of code (including 7000 lines
+for all the levels; those would be a pain to copy paste into Carousel). The
+pages all collaborate to create the app; switching pages changes nothing about
+the code that is running. The screen is also no longer shared between the app
+and its code editing environment. When you run the app the Carousel menu
+disappears, replaced by a single button to exit the app and edit its code.
+
+<p>
+This approach works well for editing on a phone. The trade-off I made is to
+jettison the live-editing experience. You can still get that with
+sokoban.love, but you'll need to get on a computer and connect driver.love to
+it like all my Freewheeling Apps.
+
+<p>
+As a bonus, sokoban.love includes a simple solver to eliminate some gruntwork
+for moving the player on touchscreens that you can see in action in this video.
+Tapping on the buttons along the edges moves the player a single square.
+Tapping on an empty square moves the player there if that is possible without
+moving any crates. Tapping on a crate and then an empty square will try to get
+the crate there if that is possible without moving any <em>other</em> crates.
+]]></description>
+    </item>
+    <item>
+      <title>rabbot.love</title>
+      <link>http://akkartik.name/post/rabbot</link>
+      <pubDate>20 Feb 2024 00:00:00 PDT</pubDate>
+      <guid isPermaLink="false">http://akkartik.name/post/rabbot</guid>
+      <description><![CDATA[
+<p>
+<a href='https://akkartik.itch.io/rabbot-run'>rabbot.love</a> is
+a little helper I whipped up to check the programs the kids were writing for
+<a href='https://www.kiwico.com/us/store/dp/robot-coder-starter-kit/5555'>a
+neat little paper computer</a>.
+
+<p>
+<a href='https://akkartik.name/images/20240220-rabbot.webm'>
+  <video style='width:80%; margin-left:10%; border:2px solid #aaaaff'>
+    <source src='https://akkartik.name/images/20240220-rabbot.webm'>
+  </video>
+</a>
+<div class='btw' style='text-align:right'>
+  video; 25 seconds
+</div>
+]]></description>
+    </item>
+    <item>
+      <title>Lua Carousel</title>
+      <link>http://akkartik.name/post/carousel</link>
+      <pubDate>23 Nov 2023 00:00:00 PDT</pubDate>
+      <guid isPermaLink="false">http://akkartik.name/post/carousel</guid>
+      <description><![CDATA[
+<p>
+I finally decided to hang up a shingle on itch.io. My first app there is not a
+game. <a href='https://akkartik.itch.io/carousel'>Lua Carousel</a> is a
+lightweight environment for writing small, throwaway Lua and LÖVE programs.
+With many thanks to Mike Stein who helped me figure out how to get it working
+on iOS, this is my first truly cross-platform app, working on Windows, Mac,
+Linux, iOS and Android.
+
+<p>
+<img src='https://akkartik.name/images/20231123-lua-carousel.png' alt='screenshot' style='width:100%'>
+
+<!-- more -->
+
+<p>
+<a href='https://git.sr.ht/~akkartik/carousel.love'>repo</a>
+
+<p>
+Carousel has its own devlog/notebook. I try to post little scripts that are
+easy for someone to copy to their clipboard, paste into Carousel and run. Some
+examples:
+<ul>
+<li> <a href='https://akkartik.itch.io/carousel/devlog/645189/version-av-one-bugfix-support-for-lve-115'>Hilbert curve and Lindenmayer tree fractal</a> (70 lines each)
+<li> <a href='https://akkartik.itch.io/carousel/devlog/647054/2-days-um-no-0-days-since-last-bug'>rectangle art</a> (40 lines)
+<li> <a href='https://akkartik.itch.io/carousel/devlog/647726/playing-with-lves-physics-engine-for-the-first-time'>simple example using the physics engine.</a> (100 lines)
+<li> <a href='https://akkartik.itch.io/carousel/devlog/651711/new-version-after-9-days'>Chromacline: a war between colors in Game of Life world</a> (100 lines)
+<li> <a href='https://akkartik.itch.io/carousel/devlog/653245/the-lua-carousel-productivity-suite'>simple UI examples; simple voice recorder</a> (<50 lines each)
+<li> <a href='https://akkartik.itch.io/carousel/devlog/656473/building-an-equation-plotter'>sprite editor</a> (100 lines)
+<li> <b><a href='https://akkartik.itch.io/carousel/devlog/673935/pong-wars'>Pong wars</a></b> (70 lines)
+<li> <a href='https://akkartik.itch.io/carousel/devlog/678890/new-version-after-51-days'>equation plotting over an infinite surface with pan and pinch-zoom</a> (150 lines)
+<li> <a href='https://akkartik.itch.io/carousel/devlog/686788/lots-of-charts'>Lots of different kinds of charts</a> (200 lines)
+</ul>
+]]></description>
+    </item>
+    <item>
+      <title>sum-grid.love</title>
+      <link>http://akkartik.name/post/sum-grid</link>
+      <pubDate>16 Nov 2023 00:00:00 PDT</pubDate>
+      <guid isPermaLink="false">http://akkartik.name/post/sum-grid</guid>
+      <description><![CDATA[
+<p>
+<a href='https://git.sr.ht/~akkartik/sum-grid.love'>A little sudoku-like app
+for helping first-graders practice addition.</a> This attempt at situated
+software for schooling got a little more use than <a href='https://akkartik.name/post/spell-cards'>spell-cards.love</a>.
+
+<p>
+<a href='https://akkartik.name/images/20231116-sum-grid-fixed.webm'>
+  <video style='width:80%; margin-left:10%; border:2px solid #aaaaff'>
+    <source src='https://akkartik.name/images/20231116-sum-grid-fixed.webm'>
+  </video>
+</a>
+<div class='btw' style='text-align:right'>
+  video; 25 seconds
+</div>
+]]></description>
+    </item>
+    <item>
+      <title>crosstable.love</title>
+      <link>http://akkartik.name/post/crosstable</link>
+      <pubDate>18 Oct 2023 00:00:00 PDT</pubDate>
+      <guid isPermaLink="false">http://akkartik.name/post/crosstable</guid>
+      <description><![CDATA[
+<p>
+<a href='https://git.sr.ht/~akkartik/crosstable.love'>crosstable.love</a> is a
+little app I whipped up for tracking standings during the Cricket World Cup,
+just to avoid the drudgery of resorting rows as new results come in.
+
+<p>
+<a href='https://akkartik.name/images/20231018-crosstable.webm'>
+  <video style='width:80%; margin-left:10%; border:2px solid #aaaaff'>
+    <source src='https://akkartik.name/images/20231018-crosstable.webm'>
+  </video>
+</a>
+<div class='btw' style='text-align:right'>
+  video; 20 seconds
+</div>
+]]></description>
+    </item>
+    <item>
+      <title>Quickly make any LÖVE app programmable from within the app</title>
+      <link>http://akkartik.name/post/love-repl</link>
+      <pubDate>Tue, 22 Aug 2023 11:51:16 PDT</pubDate>
+      <guid isPermaLink="false">http://akkartik.name/post/love-repl</guid>
+      <description><![CDATA[
+<p>
+It's a very common workflow. Type out a <a href='https://love2d.org'>LÖVE</a>
+app. Try running it. Get an error, go back to the source code.
+
+<p>
+How can we do this <em>from within the LÖVE app</em>? So there's nothing to
+install?
+
+<p>
+This is a story about a hundred lines of code that do it. I'm probably not the
+first to discover the trick, but I hadn't seen it before and it feels a bit
+magical.
+
+<p>
+<a href='https://forum.malleable.systems/t/adding-malleability-to-any-love-app/90'>Read more</a>
+]]></description>
+    </item>
+
+  </channel>
+</rss>

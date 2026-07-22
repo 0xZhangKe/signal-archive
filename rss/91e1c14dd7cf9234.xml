@@ -1,0 +1,1147 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="https://code.cash.app/feed.xml" rel="self" type="application/atom+xml" /><link href="https://code.cash.app/" rel="alternate" type="text/html" /><updated>2025-11-21T20:16:50+00:00</updated><id>https://code.cash.app/feed.xml</id><title type="html">Cash App Code Blog</title><subtitle>Cash App Code Blog</subtitle><entry><title type="html">Cash Android Moves to Metro</title><link href="https://code.cash.app/cash-android-moves-to-metro" rel="alternate" type="text/html" title="Cash Android Moves to Metro" /><published>2025-11-18T00:00:00+00:00</published><updated>2025-11-18T00:00:00+00:00</updated><id>https://code.cash.app/cash-android-moves-to-metro</id><content type="html" xml:base="https://code.cash.app/cash-android-moves-to-metro"><![CDATA[<p>Cash Android has officially migrated to <a href="https://zacsweers.github.io/metro/latest/">Metro</a> - a modern dependency injection framework developed by Zac 
+Sweers (read Zac’s <a href="https://www.zacsweers.dev/introducing-metro/">Introducing Metro</a> blog post). In this article, we’ll discuss the reasoning 
+behind this change, explain how we approached the migration and tackled the technical challenges we faced, and share 
+the results.</p>
+
+<p>But before we start…</p>
+
+<h1 id="a-trip-down-memory-lane">A trip down memory lane</h1>
+
+<p>Android teams at Block have a long history of using and building dependency injection frameworks.</p>
+
+<p>Back in 2012 Square released <a href="https://dagger.dev/">Dagger</a>. Over time, Dagger became the industry standard, and in 2018 it 
+transitioned under Google’s stewardship to become the officially recommended dependency injection solution for Android. 
+Dagger 2 has compile-time dependency graph validation, which proved extremely valuable as Cash Android grew.</p>
+
+<p>2020 was the birth year of <a href="https://github.com/square/anvil">Anvil</a>, a Kotlin compiler plugin and a suite of annotations to make it easier to 
+extend and manage large Dagger graphs. The Cash Android team happily adopted Anvil, which helped us keep our 
+ever-growing DI graph in check and improved our build speeds.</p>
+
+<p>Fast forward to 2025, and our dependency injection setup still felt pretty solid: we could iterate with confidence, our 
+build speeds were fine, so…</p>
+
+<h1 id="why-change">Why change?</h1>
+
+<p>The industry is moving fast.</p>
+
+<p>Today, Cash Android codebase is almost 100% Kotlin. Dagger, our main dependency injection solution, is still very much 
+a Java library: its annotation processor requires kapt to process Kotlin code, and it generates Java code that needs to 
+be compiled with javac. The whole build pipeline is complex which slows down our builds.</p>
+
+<p>Kotlin 2.0 was released back in 2024, with K2 - the next version of the compiler with improved performance and IDE 
+integration - reaching stability. While we’ve upgraded to Kotlin 2.0 a while ago, we weren’t able to upgrade to K2 and 
+had to keep the language version setting at 1.9, as Anvil didn’t support K2 yet. Since Anvil is a compiler plugin, 
+adding K2 support required significant effort. As the Anvil team worked on adding support, Metro started gaining 
+traction. Evaluations done by Cash and Square teams convinced us that Metro is well aligned with our long term vision 
+for dependency injection, and therefore we decided to adopt it. As a result of this decision, 
+<a href="https://github.com/square/anvil/issues/1149">Anvil transitioned to maintenance mode</a>.</p>
+
+<h1 id="so-what-is-metro">So what is Metro?</h1>
+
+<p>According to Metro’s <a href="https://zacsweers.github.io/metro/latest/">documentation</a>:</p>
+
+<blockquote>
+  <p>Metro is a compile-time dependency injection framework that draws heavy inspiration from Dagger, Anvil, and 
+Kotlin-Inject. It seeks to unify their best features under one, cohesive solution while adding a few new features and 
+implemented as a compiler plugin.</p>
+</blockquote>
+
+<p>As a compiler plugin, Metro adds minimal build time overhead, noticeably improving performance. It ships with 
+comprehensive interoperability tooling: while Metro has its own DI annotations, such as <code class="language-plaintext highlighter-rouge">@Inject</code> and <code class="language-plaintext highlighter-rouge">@Provides</code>, 
+it can be configured to “understand” similar annotations from Dagger and Anvil, meaning we wouldn’t need to change 
+every single file that uses those annotations during migration. And the fact that Metro is a Kotlin-first framework 
+built for K2 means it can leverage modern language features to offer better API and developer experience. There was a 
+lot to be excited about, and so we embarked on the journey to gradually and safely migrate Cash Android to Metro.</p>
+
+<h1 id="what-did-the-migration-look-like">What did the migration look like?</h1>
+
+<p>Today, Cash Android is a huge 1500-module Android project serving tens of millions of customers every month, so we knew 
+we couldn’t just YOLO rewrite everything and push the “ship” button - we needed a plan to ensure the migration is 
+performed and rolled out as safely as technically possible.</p>
+
+<h2 id="metro-interop">Metro interop</h2>
+
+<p>We knew that Metro’s interop functionality will be the key to success, and we theorized that if we’re lucky, we should 
+be able to get our code to a state where it can be built with both Dagger/Anvil and Metro, gated by a Gradle property. 
+And so we introduced a Gradle property:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// gradle.properties
+
+mad.di=AnvilDagger // Or Metro. Why "mad.di"? Don't ask!
+</code></pre></div></div>
+
+<p>Building the app would then look like this, which would allow us to set up CI shards building the app in both modes, to 
+catch any potential regressions:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./gradlew app:assembleDebug -Pmad.di=AnvilDagger
+
+// or
+
+./gradlew app:assembleDebug -Pmad.di=Metro
+</code></pre></div></div>
+
+<h2 id="convention-plugin-changes">Convention plugin changes</h2>
+
+<p>Cash Android engineers love convention plugins! They allow us to consolidate our project-specific build logic and share 
+it between all Gradle modules, without having to copy paste configuration code. <code class="language-plaintext highlighter-rouge">BaseDependencyInjectionPlugin</code> is the 
+convention plugin responsible for setting up dependency injection-related plugins and dependencies, and that’s where we 
+would read the value of our Gradle property to decide which plugin to apply:</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">BaseDependencyInjectionPlugin</span> <span class="p">:</span> <span class="nc">Plugin</span><span class="p">&lt;</span><span class="nc">Project</span><span class="p">&gt;</span> <span class="p">{</span>
+  <span class="k">override</span> <span class="k">fun</span> <span class="nf">apply</span><span class="p">(</span><span class="n">target</span><span class="p">:</span> <span class="nc">Project</span><span class="p">):</span> <span class="nc">Unit</span> <span class="p">=</span> <span class="nf">with</span><span class="p">(</span><span class="n">target</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">val</span> <span class="py">diImplementation</span> <span class="p">=</span> <span class="n">providers</span><span class="p">.</span><span class="nf">gradleProperty</span><span class="p">(</span><span class="s">"mad.di"</span><span class="p">)</span>
+      <span class="p">.</span><span class="nf">getOrElse</span><span class="p">(</span><span class="s">"AnvilDagger"</span><span class="p">)</span>
+    <span class="kd">val</span> <span class="py">libs</span> <span class="p">=</span> <span class="n">extensions</span><span class="p">.</span><span class="nf">getByName</span><span class="p">(</span><span class="s">"libs"</span><span class="p">)</span> <span class="k">as</span> <span class="nc">LibrariesForLibs</span>
+
+    <span class="k">when</span> <span class="p">(</span><span class="n">diImplementation</span><span class="p">)</span> <span class="p">{</span>
+      <span class="s">"AnvilDagger"</span> <span class="p">-&gt;</span> <span class="p">{</span>
+        <span class="n">pluginManager</span><span class="p">.</span><span class="nf">apply</span><span class="p">(</span><span class="nc">ANVIL_PLUGIN</span><span class="p">)</span>
+        <span class="n">dependencies</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="s">"api"</span><span class="p">,</span> <span class="n">libs</span><span class="p">.</span><span class="n">dagger</span><span class="p">.</span><span class="n">runtime</span><span class="p">)</span>
+      <span class="p">}</span>
+      <span class="s">"Metro"</span> <span class="p">-&gt;</span> <span class="p">{</span>
+        <span class="n">pluginManager</span><span class="p">.</span><span class="nf">apply</span><span class="p">(</span><span class="nc">METRO_PLUGIN</span><span class="p">)</span>
+
+        <span class="nf">with</span><span class="p">(</span><span class="n">extensions</span><span class="p">.</span><span class="nf">getByType</span><span class="p">(</span><span class="nc">MetroPluginExtension</span><span class="o">::</span><span class="k">class</span><span class="p">.</span><span class="n">java</span><span class="p">))</span> <span class="p">{</span>
+          <span class="c1">// We only had this option enabled during migration to debug build failures. It's not needed during normal</span>
+          <span class="c1">// development as it produces very verbose reports and can have a slight effect on build speeds.  </span>
+          <span class="n">reportsDestination</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="n">layout</span><span class="p">.</span><span class="n">buildDirectory</span><span class="p">.</span><span class="nf">dir</span><span class="p">(</span><span class="s">"metro/reports"</span><span class="p">))</span>
+
+          <span class="n">interop</span><span class="p">.</span><span class="nf">includeDagger</span><span class="p">(</span>
+            <span class="n">includeJavax</span> <span class="p">=</span> <span class="k">true</span><span class="p">,</span> 
+            <span class="n">includeJakarta</span> <span class="p">=</span> <span class="k">false</span><span class="p">,</span>
+          <span class="p">)</span>
+          <span class="n">interop</span><span class="p">.</span><span class="nf">includeAnvil</span><span class="p">(</span>
+            <span class="n">includeDaggerAnvil</span> <span class="p">=</span> <span class="k">true</span><span class="p">,</span> 
+            <span class="n">includeKotlinInjectAnvil</span> <span class="p">=</span> <span class="k">false</span><span class="p">,</span>
+          <span class="p">)</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Another important change, which we made in our <code class="language-plaintext highlighter-rouge">BasePlugin</code>, was to conditionally disable Kotlin language version 
+override if we’re building with Metro:</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">tasks</span><span class="p">.</span><span class="nf">withType</span><span class="p">(</span><span class="nc">KotlinCompilationTask</span><span class="o">::</span><span class="k">class</span><span class="p">.</span><span class="n">java</span><span class="p">).</span><span class="nf">configureEach</span> <span class="p">{</span> <span class="n">task</span> <span class="p">-&gt;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">diImplementation</span> <span class="p">==</span> <span class="s">"AnvilDagger"</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">task</span><span class="p">.</span><span class="n">compilerOptions</span><span class="p">.</span><span class="n">languageVersion</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="nc">KotlinVersion</span><span class="p">.</span><span class="nc">KOTLIN_1_9</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Once we started building in K2 mode, we needed to fix up a few minor method deprecations here and there (like renaming 
+<code class="language-plaintext highlighter-rouge">toUpperCase()</code> and <code class="language-plaintext highlighter-rouge">toLowerCase()</code> method calls to <code class="language-plaintext highlighter-rouge">uppercase()</code> and <code class="language-plaintext highlighter-rouge">lowercase()</code>), which was pretty straightforward.</p>
+
+<h2 id="adjusting-our-code-for-metro">Adjusting our code for Metro</h2>
+
+<p>At this point, in the best case scenario we would’ve been able to just build our project with Metro, but unsurprisingly 
+it hadn’t been the case - there was more work to do to adjust our dependency graph to Metro.</p>
+
+<h3 id="removing-module-includes">Removing Module includes</h3>
+
+<p>Anvil allows <code class="language-plaintext highlighter-rouge">@Module</code>s to be annotated with <code class="language-plaintext highlighter-rouge">@ContributesTo(Scope::class)</code>, which is an alternative to the 
+<code class="language-plaintext highlighter-rouge">@Module(includes = ...)</code> construct that scales better for large dependency graphs like ours. As we adopted Anvil, we 
+added <code class="language-plaintext highlighter-rouge">@ContributesTo</code> annotations to all our modules, but in some cases forgot to remove them from the <code class="language-plaintext highlighter-rouge">includes</code> 
+clauses of aggregator modules. Metro’s validation logic turned out to be stricter than Anvil’s, which led to errors 
+about modules being added to the DI graph twice. Luckily, this was easy to fix - we simply removed unnecessary 
+<code class="language-plaintext highlighter-rouge">includes</code> clauses and kept the <code class="language-plaintext highlighter-rouge">@ContributesTo</code> annotations.</p>
+
+<h3 id="converting-componentbuilder-to-componentfactory">Converting @Component.Builder to @Component.Factory</h3>
+
+<p>We had a bunch of <code class="language-plaintext highlighter-rouge">@Component</code>s with <code class="language-plaintext highlighter-rouge">@Component.Builder</code>s that looked like this:</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Component</span>
+<span class="kd">interface</span> <span class="nc">AppComponent</span> <span class="p">{</span>
+  <span class="nd">@Component</span><span class="p">.</span><span class="nc">Builder</span>
+  <span class="kd">interface</span> <span class="nc">Builder</span> <span class="p">{</span>
+    <span class="nd">@BindsInstance</span> <span class="k">fun</span> <span class="nf">refWatcher</span><span class="p">(</span><span class="n">refWatcher</span><span class="p">:</span> <span class="nc">RefWatcher</span><span class="p">):</span> <span class="nc">Builder</span>
+    
+    <span class="nd">@BindsInstance</span> <span class="k">fun</span> <span class="nf">application</span><span class="p">(</span><span class="n">app</span><span class="p">:</span> <span class="nc">Application</span><span class="p">):</span> <span class="nc">Builder</span>
+    
+    <span class="k">fun</span> <span class="nf">build</span><span class="p">():</span> <span class="nc">AppComponent</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Metro’s interop turns Dagger <code class="language-plaintext highlighter-rouge">@Component</code>s into <a href="https://zacsweers.github.io/metro/latest/api/runtime/dev.zacsweers.metro/-dependency-graph/index.html"><code class="language-plaintext highlighter-rouge">@DependencyGraph</code>s</a>, but there’s no construct 
+similar to <code class="language-plaintext highlighter-rouge">@Component.Builder</code> in Metro. However, there’s <a href="https://zacsweers.github.io/metro/latest/api/runtime/dev.zacsweers.metro/-dependency-graph/-factory/index.html"><code class="language-plaintext highlighter-rouge">@DependencyGraph.Factory</code></a>, 
+which maps perfectly to <code class="language-plaintext highlighter-rouge">@Component.Factory</code>. Converting builders to factories was trivial!</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Component</span>
+<span class="kd">interface</span> <span class="nc">AppComponent</span> <span class="p">{</span>
+  <span class="nd">@Component</span><span class="p">.</span><span class="nc">Factory</span>
+  <span class="k">fun</span> <span class="nf">interface</span> <span class="nc">Factory</span> <span class="p">{</span>
+    <span class="k">fun</span> <span class="nf">create</span><span class="p">(</span>
+      <span class="nd">@BindsInstance</span> <span class="n">refWatcher</span><span class="p">:</span> <span class="nc">RefWatcher</span><span class="p">,</span>
+      <span class="nd">@BindsInstance</span> <span class="n">app</span><span class="p">:</span> <span class="nc">Application</span><span class="p">,</span>
+    <span class="p">):</span> <span class="nc">AppComponent</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="moving-scoping-annotations-from-binds-bindings-to-type-declarations">Moving scoping annotations from @Binds bindings to type declarations</h3>
+
+<p>We had a number of bindings that looked like this:</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Module</span>
+<span class="nd">@ContributesTo</span><span class="p">(</span><span class="nc">AppScope</span><span class="o">::</span><span class="k">class</span><span class="p">)</span>
+<span class="k">abstract</span> <span class="kd">class</span> <span class="nc">SettingsStoreModule</span> <span class="p">{</span>
+  <span class="nd">@Binds</span>
+  <span class="nd">@SingleIn</span><span class="p">(</span><span class="nc">AppScope</span><span class="o">::</span><span class="k">class</span><span class="p">)</span>
+  <span class="k">fun</span> <span class="nf">bindSettingsStore</span><span class="p">(</span><span class="n">real</span><span class="p">:</span> <span class="nc">RealSettingsStore</span><span class="p">):</span> <span class="nc">SettingsStore</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Here, we’re binding <code class="language-plaintext highlighter-rouge">RealSettingsStore</code> implementation to the <code class="language-plaintext highlighter-rouge">SettingsStore</code> interface, at the same time marking 
+<code class="language-plaintext highlighter-rouge">RealSettingsStore</code> as <code class="language-plaintext highlighter-rouge">@SingleIn(AppScope::class)</code>. While this is a valid construct in Anvil and Dagger, 
+<a href="https://github.com/ZacSweers/metro/commit/d19c1f7885c87516fa24c085e382ff7e6843f1ab">Metro disallows scoping annotations on <code class="language-plaintext highlighter-rouge">@Binds</code> declarations</a>, and for a good reason: these 
+declarations are supposed to simply map one type (implementation) to another (interface) and shouldn’t carry any 
+additional information. The scoping annotation should be placed on the implementation type declaration instead:</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@SingleIn</span><span class="p">(</span><span class="nc">AppScope</span><span class="o">::</span><span class="k">class</span><span class="p">)</span>
+<span class="kd">class</span> <span class="nc">RealSettingsStore</span> <span class="nd">@Inject</span> <span class="k">constructor</span><span class="p">():</span> <span class="nc">SettingsStore</span>
+</code></pre></div></div>
+
+<p>We simply had to move our scoping annotations to where they belong. Note that both annotation sites work in the exact 
+same way in Anvil and Dagger whenever <code class="language-plaintext highlighter-rouge">SettingsStore</code> is injected, and since we always inject our interface types and 
+never inject implementation types directly, we were confident this change would not cause any regressions in behavior.</p>
+
+<h3 id="splitting-up-mergemodules">Splitting up @MergeModules</h3>
+
+<p>This one was tricky: we had a number of Anvil’s <code class="language-plaintext highlighter-rouge">@MergeModule</code>s used to aggregate <code class="language-plaintext highlighter-rouge">@Module</code>s contributed to a specific 
+<em>secondary</em> scope, which would then be added to a <code class="language-plaintext highlighter-rouge">@MergeComponent</code> with the <em>primary</em> scope:</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Module</span>
+<span class="nd">@ContributesTo</span><span class="p">(</span><span class="nc">ProductionAppScope</span><span class="o">::</span><span class="k">class</span><span class="p">)</span>
+<span class="kd">object</span> <span class="nc">ProductionEndpointsModule</span>
+
+<span class="nd">@Module</span>
+<span class="nd">@ContributesTo</span><span class="p">(</span><span class="nc">ProductionAppScope</span><span class="o">::</span><span class="k">class</span><span class="p">)</span>
+<span class="kd">object</span> <span class="nc">ProductionDbModule</span>
+
+<span class="nd">@MergeModules</span><span class="p">(</span><span class="n">scope</span> <span class="p">=</span> <span class="nc">ProductionAppScope</span><span class="o">::</span><span class="k">class</span><span class="p">)</span>
+<span class="kd">class</span> <span class="nc">ProductionAppScopeMergeModule</span>
+
+<span class="nd">@MergeComponent</span><span class="p">(</span>
+  <span class="n">scope</span> <span class="p">=</span> <span class="nc">AppScope</span><span class="o">::</span><span class="k">class</span><span class="p">,</span>
+  <span class="n">modules</span> <span class="p">=</span> <span class="p">[</span><span class="nc">ProductionAppScopeMergeModule</span><span class="o">::</span><span class="k">class</span><span class="p">],</span>
+<span class="p">)</span>
+<span class="kd">interface</span> <span class="nc">AppComponent</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">@MergeComponent</code> can only aggregate modules for a single scope, so this approach was necessary to support secondary 
+scopes. Metro does support multiple scopes per <code class="language-plaintext highlighter-rouge">@DependencyGraph</code>, so we could simply convert our <code class="language-plaintext highlighter-rouge">@MergeComponent</code> 
+like so:</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@DependencyGraph</span><span class="p">(</span>
+  <span class="n">scope</span> <span class="p">=</span> <span class="nc">AppScope</span><span class="o">::</span><span class="k">class</span><span class="p">,</span>
+  <span class="n">additionalScopes</span> <span class="p">=</span> <span class="p">[</span><span class="nc">ProductionAppScope</span><span class="o">::</span><span class="k">class</span><span class="p">],</span>
+<span class="p">)</span>
+<span class="kd">interface</span> <span class="nc">AppComponent</span>
+</code></pre></div></div>
+
+<p>This, unfortunately, would’ve prevented our codebase from being built with Anvil and Dagger, which was one of the main 
+requirements for the migration. So we had to resort to Dagger-style module includes, which is much less elegant than 
+<code class="language-plaintext highlighter-rouge">@MergeModules</code>, but does the job. And we knew we’ll be able to come back and clean this up once we’ve finished rolling 
+out the migration!</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@MergeComponent</span><span class="p">(</span>
+  <span class="n">scope</span> <span class="p">=</span> <span class="nc">AppScope</span><span class="o">::</span><span class="k">class</span><span class="p">,</span>
+  <span class="n">modules</span> <span class="p">=</span> <span class="p">[</span>
+    <span class="nc">ProductionEndpointsModule</span><span class="o">::</span><span class="k">class</span><span class="p">,</span>
+    <span class="nc">ProductionDbModule</span><span class="o">::</span><span class="k">class</span><span class="p">,</span>
+  <span class="p">],</span>
+<span class="p">)</span>
+<span class="kd">interface</span> <span class="nc">AppComponent</span>
+</code></pre></div></div>
+
+<h3 id="removing-direct-calls-to-provides-methods">Removing direct calls to @Provides methods</h3>
+
+<p>There were a number of instances of <code class="language-plaintext highlighter-rouge">@Provides</code>-annotated bindings called directly from non-DI, mostly test, code:</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">object</span> <span class="nc">NetworkingModule</span> <span class="p">{</span>
+  <span class="nd">@Provides</span> <span class="k">fun</span> <span class="nf">provideOkHttpClient</span><span class="p">():</span> <span class="nc">OkHttpClient</span> <span class="p">=</span> <span class="o">..</span><span class="p">.</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nc">PaymentsIntegrationTest</span> <span class="p">{</span>
+  <span class="k">private</span> <span class="kd">val</span> <span class="py">okHttpClient</span> <span class="p">=</span> <span class="nc">NetworkingModule</span><span class="p">.</span><span class="nf">provideOkHttpClient</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Metro doesn’t allow this, which makes sense: a dependency injection framework built as a compiler plugin should be able 
+to rewrite DI definitions for optimization purposes, and having external code access those definitions would make it 
+impossible. The fix we came up with was to simply split bindings into two methods, one that contains the actual binding 
+logic and the other that calls the first one and is annotated with <code class="language-plaintext highlighter-rouge">@Provides</code>. The former is perfectly safe for 
+external code to call!</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">object</span> <span class="nc">NetworkingModule</span> <span class="p">{</span>
+  <span class="k">fun</span> <span class="nf">okHttpClient</span><span class="p">():</span> <span class="nc">OkHttpClient</span> <span class="p">=</span> <span class="o">..</span><span class="p">.</span>
+  
+  <span class="nd">@Provides</span> <span class="k">fun</span> <span class="nf">provideOkHttpClient</span><span class="p">():</span> <span class="nc">OkHttpClient</span> <span class="p">=</span> <span class="nf">okHttpClient</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nc">PaymentsIntegrationTest</span> <span class="p">{</span>
+  <span class="k">private</span> <span class="kd">val</span> <span class="py">okHttpClient</span> <span class="p">=</span> <span class="nc">NetworkingModule</span><span class="p">.</span><span class="nf">okHttpClient</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="fixing-nullability-issues-on-injected-types">Fixing nullability issues on injected types</h3>
+
+<p>We had a surprisingly large number of bindings that returned nullable types for non-nullable injection sites and vice 
+versa. Dagger, being a Java framework, does not distinguish between Kotlin’s nullable and non-nullable types, so this 
+all worked fine at build time, but was definitely opening us up for potential <code class="language-plaintext highlighter-rouge">NullPointerException</code>s. Metro does honor 
+nullable types, so we had to decide exactly what types we wanted in our bindings. This is a great example where Metro’s 
+stricter validation helped us make our dependency graph more robust!</p>
+
+<h3 id="replacing-classkey-with-custom-map-keys">Replacing @ClassKey with custom map keys</h3>
+
+<p>A small number of our features relied on <code class="language-plaintext highlighter-rouge">@IntoMap</code> injections with <code class="language-plaintext highlighter-rouge">@ClassKey</code>s:</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Module</span>
+<span class="k">abstract</span> <span class="kd">class</span> <span class="nc">LendingActivityItemModule</span> <span class="p">{</span>
+  <span class="nd">@Binds</span>
+  <span class="nd">@IntoMap</span>
+  <span class="nd">@ClassKey</span><span class="p">(</span><span class="nc">LendingActivityItem</span><span class="o">::</span><span class="k">class</span><span class="p">)</span>
+  <span class="k">abstract</span> <span class="k">fun</span> <span class="nf">bindLendingActivityItemPresenterFactory</span><span class="p">():</span> <span class="nc">LendingActivityItemPresenter</span><span class="p">.</span><span class="nc">Factory</span> <span class="p">=</span> <span class="o">..</span><span class="p">.</span>
+<span class="p">}</span>
+
+<span class="nd">@Module</span>
+<span class="k">abstract</span> <span class="kd">class</span> <span class="nc">TaxesActivityItemModule</span> <span class="p">{</span>
+  <span class="nd">@Binds</span>
+  <span class="nd">@IntoMap</span>
+  <span class="nd">@ClassKey</span><span class="p">(</span><span class="nc">TaxesActivityItem</span><span class="o">::</span><span class="k">class</span><span class="p">)</span>
+  <span class="k">abstract</span> <span class="k">fun</span> <span class="nf">bindTaxesActivityItemPresenterFactory</span><span class="p">():</span> <span class="nc">TaxesActivityItemPresenter</span><span class="p">.</span><span class="nc">Factory</span> <span class="p">=</span> <span class="o">..</span><span class="p">.</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nc">PresenterFactory</span> <span class="nd">@Inject</span> <span class="k">constructor</span><span class="p">(</span>
+  <span class="k">private</span> <span class="kd">val</span> <span class="py">activityItemPresenterFactories</span><span class="p">:</span> <span class="nc">Map</span><span class="p">&lt;</span><span class="nc">Class</span><span class="p">&lt;</span><span class="err">*</span><span class="p">&gt;,</span> <span class="nc">ActivityItemPresenter</span><span class="p">.</span><span class="nc">Factory</span><span class="p">&gt;,</span>
+<span class="p">)</span> 
+</code></pre></div></div>
+
+<p>While Metro does interop with <code class="language-plaintext highlighter-rouge">@ClassKey</code>, since it’s a Kotlin framework, it would generate a map with <code class="language-plaintext highlighter-rouge">KClass</code> keys, 
+while Anvil/Dagger generated a map with <code class="language-plaintext highlighter-rouge">Class</code> keys. We couldn’t support both, as that would again break our 
+requirement to be able to build the project in both modes, so we decided to introduce a custom map key:</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">enum</span> <span class="kd">class</span> <span class="nc">ActivityItemType</span> <span class="p">{</span>
+  <span class="nc">LENDING</span><span class="p">,</span>
+  <span class="nc">TAXES</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="nd">@Retention</span><span class="p">(</span><span class="nc">AnnotationRetention</span><span class="p">.</span><span class="nc">RUNTIME</span><span class="p">)</span>
+<span class="nd">@Target</span><span class="p">(</span>
+  <span class="nc">AnnotationTarget</span><span class="p">.</span><span class="nc">FUNCTION</span><span class="p">,</span>
+  <span class="nc">AnnotationTarget</span><span class="p">.</span><span class="nc">TYPE</span><span class="p">,</span>
+  <span class="nc">AnnotationTarget</span><span class="p">.</span><span class="nc">FIELD</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="nd">@MapKey</span>
+<span class="k">annotation</span> <span class="kd">class</span> <span class="nc">ActivityItemTypeKey</span><span class="p">(</span><span class="kd">val</span> <span class="py">type</span><span class="p">:</span> <span class="nc">ActivityItemType</span><span class="p">)</span>
+
+<span class="nd">@Module</span>
+<span class="k">abstract</span> <span class="kd">class</span> <span class="nc">LendingActivityItemModule</span> <span class="p">{</span>
+  <span class="nd">@Binds</span>
+  <span class="nd">@IntoMap</span>
+  <span class="nd">@ActivityItemTypeKey</span><span class="p">(</span><span class="nc">LENDING</span><span class="p">)</span>
+  <span class="k">abstract</span> <span class="k">fun</span> <span class="nf">bindLendingActivityItemPresenterFactory</span><span class="p">():</span> <span class="nc">LendingActivityItemPresenter</span><span class="p">.</span><span class="nc">Factory</span> <span class="p">=</span> <span class="o">..</span><span class="p">.</span>
+<span class="p">}</span>
+
+<span class="nd">@Module</span>
+<span class="k">abstract</span> <span class="kd">class</span> <span class="nc">TaxesActivityItemModule</span> <span class="p">{</span>
+  <span class="nd">@Binds</span>
+  <span class="nd">@IntoMap</span>
+  <span class="nd">@ActivityItemTypeKey</span><span class="p">(</span><span class="nc">TAXES</span><span class="p">)</span>
+  <span class="k">abstract</span> <span class="k">fun</span> <span class="nf">bindTaxesActivityItemPresenterFactory</span><span class="p">():</span> <span class="nc">TaxesActivityItemPresenter</span><span class="p">.</span><span class="nc">Factory</span> <span class="p">=</span> <span class="o">..</span><span class="p">.</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nc">PresenterFactory</span> <span class="nd">@Inject</span> <span class="k">constructor</span><span class="p">(</span>
+  <span class="k">private</span> <span class="kd">val</span> <span class="py">activityItemPresenterFactories</span><span class="p">:</span> <span class="nc">Map</span><span class="p">&lt;</span><span class="nc">ActivityItemType</span><span class="p">,</span> <span class="nc">ActivityItemPresenter</span><span class="p">.</span><span class="nc">Factory</span><span class="p">&gt;,</span>
+<span class="p">)</span> 
+</code></pre></div></div>
+
+<p>While this version is somewhat more verbose, it comes with additional type safety, as it ensures the number of injected 
+keys is bounded by the <code class="language-plaintext highlighter-rouge">ActivityItemType</code> enum, so that’s another small win that the migration to Metro helped us 
+unlock.</p>
+
+<h3 id="deleting-unused-dependency-injection-code">Deleting unused dependency injection code</h3>
+
+<p>Last but not least, we stumbled upon a bunch of unused modules, bindings, components, etc., which we happily deleted. 
+The takeaway here is that dead code, if not deleted, will at some point require non-trivial maintenance, which is a 
+complete waste of effort. It’s always better to simply delete something that’s not used than to keep maintaining it - 
+dead code will live in your git history forever anyway!</p>
+
+<h2 id="one-last-thing---instantiating-dependency-graphs">One last thing - instantiating dependency graphs</h2>
+
+<p>While we managed to get almost the same codebase building with two distinct dependency injection configurations, there 
+was one specific set of API calls that had to be different - the actual graph instantiation calls. With Dagger, we used 
+to call <code class="language-plaintext highlighter-rouge">DaggerAppComponent.factory().create(...)</code> inside our application class to instantiate the app component, and 
+with Metro, we had to migrate to the <code class="language-plaintext highlighter-rouge">createGraphFactory&lt;AppComponent&gt;().create(...)</code> API. Here’s what we did:</p>
+
+<ol>
+  <li>
+    <p>We introduced two new custom source sets in our <code class="language-plaintext highlighter-rouge">:app</code> module, conditionally added to the build based on that same 
+Gradle property:</p>
+
+    <div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c1">// app/build.gradle</span>
+    
+ <span class="n">sourceSets</span> <span class="o">{</span>
+   <span class="kt">def</span> <span class="n">diFramework</span> <span class="o">=</span> <span class="n">providers</span><span class="o">.</span><span class="na">gradleProperty</span><span class="o">(</span><span class="s1">'mad.di'</span><span class="o">).</span><span class="na">getOrElse</span><span class="o">(</span><span class="s1">'AnvilDagger'</span><span class="o">)</span>
+   <span class="k">if</span> <span class="o">(</span><span class="n">diFramework</span> <span class="o">==</span> <span class="s1">'Metro'</span><span class="o">)</span> <span class="o">{</span>
+     <span class="n">main</span><span class="o">.</span><span class="na">kotlin</span><span class="o">.</span><span class="na">srcDir</span> <span class="s1">'src/metro/kotlin'</span>
+   <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+     <span class="n">main</span><span class="o">.</span><span class="na">kotlin</span><span class="o">.</span><span class="na">srcDir</span> <span class="s1">'src/anvilDagger/kotlin'</span>
+   <span class="o">}</span>
+ <span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>We added methods returning <code class="language-plaintext highlighter-rouge">AppComponent.Factory</code> with the exact same signature to both source sets:</p>
+
+    <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c1">// src/metro/kotlin/.../factories.kt</span>
+    
+ <span class="k">import</span> <span class="nn">dev.zacsweers.metro.createGraphFactory</span>
+    
+ <span class="k">internal</span> <span class="k">fun</span> <span class="nf">appComponentFactory</span><span class="p">():</span> <span class="nc">AppComponent</span><span class="p">.</span><span class="nc">Factory</span> <span class="p">{</span>
+   <span class="k">return</span> <span class="nf">createGraphFactory</span><span class="p">()</span>
+ <span class="p">}</span>
+    
+ <span class="c1">// src/anvilDagger/kotlin/.../factories.kt</span>
+    
+ <span class="k">internal</span> <span class="k">fun</span> <span class="nf">appComponentFactory</span><span class="p">():</span> <span class="nc">AppComponent</span><span class="p">.</span><span class="nc">Factory</span> <span class="p">{</span>
+   <span class="k">return</span> <span class="nc">DaggerAppComponent</span><span class="p">.</span><span class="nf">factory</span><span class="p">()</span>
+ <span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>We replaced the direct reference to <code class="language-plaintext highlighter-rouge">DaggerAppComponent.Factory</code> inside our application class with a reference to 
+the <code class="language-plaintext highlighter-rouge">appComponentFactory()</code> method. And that’s it - the Gradle config ensured our code would always call the right 
+version of the method based on the build property.</p>
+  </li>
+</ol>
+
+<p>After a few weeks of iterative code modifications we were finally able to build our project with both frameworks with 
+no code changes in between - that felt like magic!</p>
+
+<h1 id="the-rollout">The rollout</h1>
+
+<p>Once we did enough regression testing to ensure there were no runtime issues, we started preparing for the rollout. We 
+knew this would be a tricky one as there’s no way to protect the change with a runtime feature flag - the decision for 
+which DI framework to use happens at build time.</p>
+
+<p>We decided that we’ll continue building the app in both modes up until we’ve fully rolled out, just in case we’d have 
+to revert back to the Anvil + Dagger version. We actually managed to temporarily introduce regressions caused by overly 
+eager post-K2 migration cleanup, so we set up separate CI shards that built the app in each mode, independent of what 
+the state of the Gradle property was.</p>
+
+<p>Finally, when everything was ready, we flipped the default value of the Gradle property and submitted the Metro flavor 
+of the app build to the Play store. The rollout went smoothly and we were officially on Metro!</p>
+
+<h1 id="the-results">The results</h1>
+
+<p>So what did we achieve with this migration?</p>
+
+<ul>
+  <li>We were able to turn on K2 mode to benefit from the latest Kotlin compiler improvements.</li>
+  <li>We managed to modernize our dependency injection stack:
+    <ul>
+      <li>We no longer use kapt.</li>
+      <li>We don’t use Anvil and Dagger compilers anymore.</li>
+      <li>Our dependency injection codegen now runs during Kotlin compilation, which is significantly simpler and faster 
+than what we had before.</li>
+    </ul>
+  </li>
+  <li>According to our benchmarks, by migrating to Metro and K2 we managed to improve clean build speeds by over 16% and 
+incremental build speeds by almost 60%! 🎉</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th><strong>Scenario</strong></th>
+      <th><strong>Anvil/Dagger (seconds)</strong></th>
+      <th><strong>Metro (seconds)</strong></th>
+      <th><strong>Change (%)</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ABI Change</td>
+      <td>28.77s</td>
+      <td>11.93s</td>
+      <td>-58.5% ⬇️</td>
+    </tr>
+    <tr>
+      <td>Non-ABI Change</td>
+      <td>17.45s</td>
+      <td>7.15s</td>
+      <td>-59.0% ⬇️</td>
+    </tr>
+    <tr>
+      <td>Raw Compilation Performance</td>
+      <td>242.97s</td>
+      <td>202.49s</td>
+      <td>-16.7% ⬇️</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>So what’s next?</p>
+
+<ul>
+  <li>We’re gradually migrating to Metro’s native annotations so we can disable interop.</li>
+  <li>We’re eager to adopt Metro-specific features to simplify our DI graph even further.</li>
+  <li>We’re committed to contributing back to Metro by reporting and fixing bugs, sharing design feedback and feature 
+requests, to help the framework thrive.</li>
+</ul>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>Migrating Cash Android to Metro was a significant undertaking only made possible thanks to the collaboration between a 
+large number of engineers from different teams at Block and the help of the open source community. We’re very happy 
+with the results and really excited about adopting more of Metro’s features and seeing what the future holds. We hope 
+this article will help your team migrate your app to Metro - a modern dependency injection stack and fast builds are 
+well worth the effort!</p>]]></content><author><name>Egor Andreevich</name></author><category term="[&quot;android&quot;]" /><summary type="html"><![CDATA[The Cash Android team have completed the migration to Metro.]]></summary></entry><entry><title type="html">Kotlin Multiplatform test interceptors with Burst</title><link href="https://code.cash.app/burst-test-interceptors" rel="alternate" type="text/html" title="Kotlin Multiplatform test interceptors with Burst" /><published>2025-09-04T00:00:00+00:00</published><updated>2025-09-04T00:00:00+00:00</updated><id>https://code.cash.app/burst-test-interceptors</id><content type="html" xml:base="https://code.cash.app/burst-test-interceptors"><![CDATA[<p>Last year we <a href="https://code.cash.app/burst">announced Burst</a>, our Kotlin Multiplatform library for parameterized tests.</p>
+
+<p>I recently needed another JUnit feature that’s absent on Kotlin/Multiplatform: test rules! They offer a simple way to reuse behavior across tests. Here’s some of my favorites:</p>
+
+<ul>
+  <li><a href="https://github.com/cashapp/paparazzi">Paparazzi</a> is Cash App’s snapshot testing for Android. The library’s main entry point is a test rule.</li>
+  <li><a href="https://github.com/square/okhttp/tree/master/mockwebserver-junit4">MockWebServer</a> is an HTTP server focused on testing HTTP clients. A major contributor to OkHttp’s stability is its MockWebServer-powered test suite!</li>
+  <li><a href="https://github.com/junit-team/junit4/wiki/timeout-for-tests">JUnit’s Timeout rule</a> lets me write difficult integration tests without the risk of hanging my test suite.</li>
+</ul>
+
+<p>JUnit rules don’t work on non-JVM platforms, so with Burst 2.8 we’re introducing a Kotlin Multiplatform alternative called <code class="language-plaintext highlighter-rouge">TestInterceptor</code>. It’s straightforward to create one:</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">TemporaryDirectory</span> <span class="p">:</span> <span class="nc">TestInterceptor</span> <span class="p">{</span>
+  <span class="k">lateinit</span> <span class="kd">var</span> <span class="py">path</span><span class="p">:</span> <span class="nc">Path</span>
+    <span class="k">private</span> <span class="k">set</span>
+
+  <span class="k">override</span> <span class="k">fun</span> <span class="nf">intercept</span><span class="p">(</span><span class="n">testFunction</span><span class="p">:</span> <span class="nc">TestFunction</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">path</span> <span class="p">=</span> <span class="nf">createTemporaryDirectory</span><span class="p">(</span><span class="n">testFunction</span><span class="p">)</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="nf">testFunction</span><span class="p">()</span>
+    <span class="p">}</span> <span class="k">finally</span> <span class="p">{</span>
+      <span class="nf">deleteTemporaryDirectory</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Use <code class="language-plaintext highlighter-rouge">@InterceptTest</code> to apply it:</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">DocumentStorageTest</span> <span class="p">{</span>
+  <span class="nd">@InterceptTest</span>
+  <span class="kd">val</span> <span class="py">temporaryDirectory</span> <span class="p">=</span> <span class="nc">TemporaryDirectory</span><span class="p">()</span>
+
+  <span class="nd">@Test</span>
+  <span class="k">fun</span> <span class="nf">happyPath</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nc">DocumentWriter</span><span class="p">().</span><span class="nf">write</span><span class="p">(</span><span class="nc">SampleData</span><span class="p">.</span><span class="n">document</span><span class="p">,</span> <span class="n">temporaryDirectory</span><span class="p">.</span><span class="n">path</span><span class="p">)</span>
+    <span class="kd">val</span> <span class="py">decoded</span> <span class="p">=</span> <span class="nc">DocumentReader</span><span class="p">().</span><span class="nf">read</span><span class="p">(</span><span class="n">temporaryDirectory</span><span class="p">.</span><span class="n">path</span><span class="p">)</span>
+    <span class="nf">assertThat</span><span class="p">(</span><span class="n">decoded</span><span class="p">).</span><span class="nf">isEqualTo</span><span class="p">(</span><span class="nc">SampleData</span><span class="p">.</span><span class="n">document</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Burst can also intercept suspending tests with <code class="language-plaintext highlighter-rouge">CoroutineTestInterceptor</code>. JUnit rules can’t do that!</p>
+
+<p><a href="https://github.com/cashapp/burst">Get Burst on GitHub</a>.</p>]]></content><author><name>Jesse Wilson</name></author><category term="[&quot;kotlin&quot;, &quot;android&quot;]" /><summary type="html"><![CDATA[Interceptors are like JUnit rules, but for every Kotlin platform]]></summary></entry><entry><title type="html">Re-introducing Paparazzi’s Accessibility Snapshots</title><link href="https://code.cash.app/paparazzi-accessibility-snapshots" rel="alternate" type="text/html" title="Re-introducing Paparazzi’s Accessibility Snapshots" /><published>2025-07-14T00:00:00+00:00</published><updated>2025-07-14T00:00:00+00:00</updated><id>https://code.cash.app/paparazzi-accessibility-snapshots</id><content type="html" xml:base="https://code.cash.app/paparazzi-accessibility-snapshots"><![CDATA[<h2 id="overview">Overview</h2>
+
+<p>As some of you may know, <a href="https://github.com/cashapp/paparazzi">Paparazzi</a> is an open source snapshot testing library allowing you to render your Android screens without a physical device or emulator. A feature of Paparazzi that may be less well known is its ability to take <a href="https://cashapp.github.io/paparazzi/accessibility/">accessibility snapshots</a>. While this feature has existed for quite a while, Paparazzi’s accessibility snapshotting capabilities have expanded dramatically in recent months, so I wanted to dive into what accessibility snapshots are, how Paparazzi captures them and why you might want to use this tool to help improve the accessibility of your application.</p>
+
+<h2 id="accessibility-snapshots">Accessibility snapshots?</h2>
+
+<p>Accessibility snapshots provide a way to visually inspect the semantic accessibility properties applied to each element of your view under test. Similar to Paparazzi’s regular snapshots, this allows you to create baseline images and verify any future changes against them to ensure that no regressions occur to your app’s accessibility support.</p>
+
+<p>As shown in the example snapshot image below, a legend is drawn on the right side where each UI element is mapped (via colour coding) to its accessibility properties. These properties are what would be read out by screen readers your customers might use (i.e. TalkBack).</p>
+
+<p><img src="/assets/2025-07/accessibility%20snapshot%20example.png" alt="accessibility snapshot example" /></p>
+
+<h2 id="paparazzis-accessibilityrenderextension">Paparazzi’s AccessibilityRenderExtension</h2>
+
+<p>Paparazzi creates accessibility snapshots through the use of the <a href="https://github.com/cashapp/paparazzi/blob/master/paparazzi/src/main/java/app/cash/paparazzi/accessibility/AccessibilityRenderExtension.kt"><code class="language-plaintext highlighter-rouge">AccessibilityRenderExtension</code></a>. The <code class="language-plaintext highlighter-rouge">AccessibilityRenderExtension</code> works by iterating over the <code class="language-plaintext highlighter-rouge">View</code> tree or <code class="language-plaintext highlighter-rouge">SemanticsNode</code> tree, for legacy Android views and Compose UI respectively. On each element, the accessibility semantics are extracted to display them in the legend that will be drawn alongside the UI snapshot. Additionally, the layout bounds of each element are captured to create the coloured boxes that map the elements in the UI to the text in the legend.</p>
+
+<p>To create an accessibility snapshot test, the only change needed compared to a regular Paparazzi test is to add the <code class="language-plaintext highlighter-rouge">AccessibilityRenderExtension</code> to the <code class="language-plaintext highlighter-rouge">renderExtensions</code> set in your Paparazzi configuration, as follows:</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">@</span><span class="k">get</span><span class="p">:</span><span class="nc">Rule</span>
+<span class="kd">val</span> <span class="py">paparazzi</span> <span class="p">=</span> <span class="nc">Paparazzi</span><span class="p">(</span>
+    <span class="c1">// ...</span>
+    <span class="n">renderExtensions</span> <span class="p">=</span> <span class="nf">setOf</span><span class="p">(</span><span class="nc">AccessibilityRenderExtension</span><span class="p">()),</span>
+    <span class="c1">// ...</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p>Recording and verifying accessibility snapshot tests works identically to regular Paparazzi tests.</p>
+
+<h2 id="interpreting-accessibility-snapshots">Interpreting accessibility snapshots</h2>
+
+<p>While Paparazzi’s accessibility snapshots provide valuable information, you cannot rely on these screenshots alone to determine UI accessibility compliance. The snapshots require careful interpretation to verify that the set properties match your screen’s expectations, and should be used as one of several tools in a comprehensive accessibility testing strategy. When interpreting the accessibility snapshots, the top things you should look for are that all of the visually available context (e.g. text, icons that convey meaning) in the UI snapshot are represented in the legend, that elements that relate to each are grouped together (e.g. content in a row is represented as single item in the legend) and that the correct role or state is represented for each element (button, header, selected, disabled, etc). <a href="https://cashapp.github.io/paparazzi/accessibility/#interpreting-accessibility-snapshots">The Paparazzi docs have some additional content explaining in more detail how to ensure your UI is accessible</a>.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p><img src="/assets/2025-07/paparazzi%20accessibility%20properties%20word%20cloud.png" alt="accessibility properties added word cloud" /></p>
+
+<p>As I mentioned at the start of this blog post, the capabilities of the <code class="language-plaintext highlighter-rouge">AccessibilityRenderExtension</code> have grown dramatically in recent months. Shown above is the big increase in supported semantic properties we have had (14 new properties!), many of which came from open source community feature requests!</p>
+
+<p>I want to end off this blog post by encouraging anyone reading to try out Paparazzi’s accessibility snapshots in your projects! The <a href="https://cashapp.github.io/paparazzi/">Paparazzi docs</a> and <a href="https://github.com/cashapp/paparazzi">Github repo</a> are great places to check out if you want any additional help getting started or if you find any issues or feature requests you would like to submit!</p>]]></content><author><name>Colin Marsch</name></author><category term="[&quot;android&quot;]" /><summary type="html"><![CDATA[Overview]]></summary></entry><entry><title type="html">New Maven Central signing key and snapshot location</title><link href="https://code.cash.app/new-maven-central-signing-key-and-snapshot-location" rel="alternate" type="text/html" title="New Maven Central signing key and snapshot location" /><published>2025-06-13T00:00:00+00:00</published><updated>2025-06-13T00:00:00+00:00</updated><id>https://code.cash.app/new-maven-central-signing-key-and-snapshot-location</id><content type="html" xml:base="https://code.cash.app/new-maven-central-signing-key-and-snapshot-location"><![CDATA[<p>In response to <a href="https://central.sonatype.org/news/20250326_ossrh_sunset/">Sonatype announcing the end-of-life for OSSRH</a>, we have migrated to their new publishing platform for our open source artifacts. This is otherwise a transparent change for those who consume these artifacts from Maven Central, but there are two related changes which might affect your builds.</p>
+
+<p>First, the GPG key used to sign our artifacts has changed. Previously the keys varied across projects depending on how and who were publishing. Now, a company-wide shared key is used for all projects. A copy of the public key is available at <a href="/block.gpg">code.cash.app/block.gpg</a> for verification.</p>
+
+<p>Second, projects which publish “snapshot” builds (i.e., builds from the latest commit on their integration branch) are now available in the Central Portal Snapshot repository at <a href="https://central.sonatype.com/repository/maven-snapshots/">central.sonatype.com/repository/maven-snapshots/</a>. Snapshot builds will also be signed with the same key as release builds.</p>]]></content><author><name>Jake Wharton</name></author><category term="[&quot;server&quot;, &quot;android&quot;]" /><summary type="html"><![CDATA[In response to Sonatype announcing the end-of-life for OSSRH, we have migrated to their new publishing platform for our open source artifacts. This is otherwise a transparent change for those who consume these artifacts from Maven Central, but there are two related changes which might affect your builds.]]></summary></entry><entry><title type="html">Project Teleport: Cost-Effective and Scalable Kafka Data Processing at Block</title><link href="https://code.cash.app/project-teleport" rel="alternate" type="text/html" title="Project Teleport: Cost-Effective and Scalable Kafka Data Processing at Block" /><published>2025-03-20T00:00:00+00:00</published><updated>2025-03-20T00:00:00+00:00</updated><id>https://code.cash.app/project-teleport</id><content type="html" xml:base="https://code.cash.app/project-teleport"><![CDATA[<h2 id="introduction">Introduction</h2>
+<p>In February 2022, Block acquired Australian fintech Afterpay. This acquisition necessitated the convergence of Afterpay’s Data Lake, originally hosted in the Sydney cloud region, into the Block ecosystem based in the US regions. Project “<strong>Teleport</strong>”, as the name suggests, was developed by the Afterpay data team to tackle this large-scale, cross-region data processing challenge. Built using Delta Lake and Spark on Databricks, Teleport ensures efficient, reliable, and lossless inter-region data transfer, utilizing object storage for transient data.</p>
+
+<p>By incorporating a nuanced checkpoint migration technique, we performed seamless migration of legacy pipelines without reprocessing historical data. With Teleport, Afterpay data team <strong>reduced cloud egress costs by USD 540,000/annum</strong>, with zero impact on downstream user experience.</p>
+
+<h3 id="history-of-kafka-data-archival-and-ingestion-at-afterpay">History of Kafka data archival and ingestion at Afterpay</h3>
+
+<p><img src="/assets/2025-03/teleport-kafka-architecture.png" alt="" width="625" /></p>
+
+<p>Afterpay archives Kafka data using Confluent Sink Connectors that land hourly topic records as Avro files in the Sydney region (APSE2) of S3. Before Teleport, Spark batch jobs running on Amazon EMR processed these Avro files in the same region into Hive-partitioned Parquet tables which were then presented into Redshift via Glue catalog. The Parquet tables were written as one-to-one or one-to-many projections of Kafka-topics, with Spark transformations handling normalization and decryption.</p>
+
+<p>Kafka pipelines managed by the Afterpay data team process over <strong>9 TB</strong> of data daily and deliver data to critical business domains such as Risk Decisioning, Business Intelligence and Financial Reporting via <strong>~200</strong> datasets. In the legacy design, <strong>duplicate events</strong> from Kafka’s “at least once” delivery required downstream cleansing by Data Lake consumers and <strong>late-arriving records</strong> added substantial re-processing overheads.</p>
+
+<p>Evolution of Afterpay’s legacy Kafka pipelines to Teleport happened in <strong>three phases</strong>. Each phase was executed in response to business requirements and optimisation opportunities.</p>
+
+<h2 id="phase-i-converging-afterpay-frameworks-into-blocks-data-ecosystem">Phase I: Converging Afterpay Frameworks into Block’s Data Ecosystem</h2>
+<p>Afterpay aligned its Data Lake architecture with Block by adopting Databricks as the primary compute platform and Delta Lake on S3 as the storage layer. As part of this transition, all Parquet tables living in APSE2 S3 were migrated to us-west-2 (USW2) S3 as <a href="https://docs.delta.io/latest/quick-start.html">Delta</a> tables, colocating data with downstream compute.</p>
+
+<p>Databricks offers the following out-of-the-box features that address some of the challenges in Kafka processing, eliminating the need to <em>reinvent the wheel</em>:</p>
+
+<p><strong><a href="https://docs.databricks.com/aws/en/ingestion/cloud-object-storage/auto-loader">Autoloader</a></strong> handles late-arriving records with fault tolerance and exactly-once processing through checkpoint management, offers scalability to discover a large number of files, and supports schema inference and evolution.</p>
+
+<p><strong><a href="https://www.databricks.com/product/data-engineering/dlt">Delta Live Tables (DLT)</a></strong> provides:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">apply_changes</code> <a href="https://docs.databricks.com/aws/en/dlt/cdc">API</a> that handle Kafka data deduplication efficiently by merging incremental records into target tables; and</li>
+  <li>In-memory and in-line <a href="https://docs.databricks.com/aws/en/dlt/expectations">Data Quality</a> (DQ) checks.</li>
+</ul>
+
+<p>Leveraging the above capabilities, we developed <strong>Kafka Orion Ingest (KOI)</strong> – a fully meta-programmed framework for processing Kafka archives. Pipelines in KOI comprise:</p>
+<ul>
+  <li>A DLT job for transformations deployed in USW2;</li>
+  <li>Dynamically rendered Airflow DAG for orchestration; and</li>
+  <li>SLA alerting and in-line DQ checks.</li>
+</ul>
+
+<p>All of these components are instantiated by simple metadata entries, simplifying deployments and maintenance.</p>
+
+<p>As shown in the figure, KOI reads incremental Avro files via Autoloader, applies transformations and DQ checks, and writes <em>external</em> Delta tables to S3. These Delta tables are added to consumer catalogs and published to downstream services.</p>
+
+<p><img src="/assets/2025-03/teleport-koi-usw2-compute.png" alt="" width="525" /></p>
+
+<h3 id="alternate-approaches-considered-for-kafka-archival-and-ingestion">Alternate approaches considered for Kafka archival and ingestion</h3>
+<p>In an ideal, cost-effective architecture, source data, compute and the target tables would reside in the same cloud region. However, Afterpay’s practice of event archival in APSE2 S3 presented two key challenges in the convergence towards Block’s USW2 based Data Lake:</p>
+
+<ul>
+  <li>
+    <p>Migration of historical S3 objects and Kafka connectors from APSE2 to USW2 projected a huge one-time cost and engineering overhead.</p>
+  </li>
+  <li>
+    <p>Maintaining records for the same topics across two regions would add complexity to backfill operations<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">1</a></sup> and data reconciliation.</p>
+  </li>
+</ul>
+
+<p>As a trade-off, Afterpay data team adopted a <strong>hybrid</strong> approach:</p>
+
+<ul>
+  <li>Existing Kafka topics continued to land in the APSE2 region, preserving historical archival patterns.</li>
+  <li>New topics were directly landed into USW2, inline with cost effective architectural practices.</li>
+</ul>
+
+<h2 id="phase-ii-egress-reduction-by-data-compression">Phase II: Egress Reduction by Data Compression</h2>
+<p>Empirical analysis of Afterpay Kafka data showed that Avro to Parquet conversion achieves compression ratios close to 50% on average. This observation suggests that Parquet format is a better candidate for cross-region egress.</p>
+
+<p>As <strong>Phase II</strong>, we added new clusters in APSE2 so that transformed records are moved across regions as Parquet files. This change reduced APSE2 - USW2 egress cost by <strong>~50%</strong>.</p>
+
+<h3 id="merge-cost-problem">Merge cost problem</h3>
+
+<p><img src="/assets/2025-03/teleport-koi-apse2-compute.png" alt="" width="550" /></p>
+
+<p>While APSE2 egress cost was substantially reduced by Phase II, we now had a new cost challenge resulting from cross-region merges!</p>
+
+<p>Delta Lake merge operations compare key columns to update or insert only necessary rows and leverage deletion vectors to track changes without rewriting files. Incremental merges into the target tables thus require the key columns to be loaded into the compute memory. With the target tables in USW2, and the compute in APSE2, each merge operation triggered costly data transfers from USW2  to APSE2 – moving huge numbers of parquet data.</p>
+
+<p>At its peak, these merges incurred <strong>over $1,500 per day</strong> in S3 egress — an unsustainable expense as our data volumes continued to grow.</p>
+
+<h2 id="phase-iii-optimal-cross-region-merge-using-teleport">Phase III: Optimal Cross-Region Merge Using Teleport</h2>
+
+<p><img src="/assets/2025-03/teleport-koi-teleport-workflow.png" alt="" width="625" /></p>
+
+<p>Teleport workflow consists of three major components split into <strong>two</strong> stages of execution. Between the two stages, a “<strong>streaming interface</strong>”, implemented as a Delta table in APSE2 S3, maintains the latest records from the Avro files within a moving window. The stages involved in Teleport are:</p>
+
+<p><strong>Stage 1</strong>. <strong>DeltaSync</strong> jobs read incremental Avro files for each topic and append them to the corresponding streaming interfaces.</p>
+
+<p><strong>Stage 2</strong>. <strong>DLT jobs deployed to USW2</strong> use Spark streaming APIs to read new records from the streaming interfaces, apply transformations, and perform incremental merging into the target tables in USW2.</p>
+
+<p>Teleport achieves <strong>optimal cross-region merge</strong> as a result of:</p>
+<ul>
+  <li>Transferring compressed Parquet files (format used by Delta) from APSE2 to USW2 compute, retaining the advantages of Phase II;</li>
+  <li>Performing merge operations entirely within USW2; and</li>
+  <li>Ensuring minimal and predictable S3 storage costs by keeping the streaming interfaces transient.</li>
+</ul>
+
+<p>These steps are orchestrated using Airflow that uses metadata configurations to determine whether to use a Phase II workflow or Teleport.</p>
+
+<h3 id="design-considerations">Design considerations</h3>
+
+<p><strong>Catalogue-free streaming interface</strong>. By implementing the streaming interfaces as Delta tables on S3, we eliminate any need to rely on a catalogue for table maintenance operations such as creation, deletion, and vacuum.</p>
+
+<p><strong>Localised auto compaction</strong>. In Databricks environments, auto compaction jobs execute asynchronously after a Delta table is successfully written. As an additional optimization, interface tables are placed in APSE2 – allowing Databricks auto compaction to run locally.</p>
+
+<p><strong>Open source commitment</strong>. In line with Block’s <a href="https://block.xyz/open-source">commitment to open source</a>, all the <em>additional</em> elements introduced by Teleport use the open source Delta format and native spark APIs. A highly available and scalable implementation of Airflow (also open source) is our standard orchestrator.</p>
+
+<h3 id="sliding-window-implementation">Sliding window implementation</h3>
+<p>The sliding window logic used to implement streaming interfaces (as Delta tables) ensures that only a fixed amount of recent records are retained while older ones are automatically deleted (and vacuumed) once all dependent target tables are refreshed.</p>
+
+<p><strong>Benefits of a sliding window approach:</strong></p>
+<ul>
+  <li>Prevents accidental data loss due to <strong>race</strong> conditions arising from the concurrent executions of DeltaSync and DLT jobs.</li>
+  <li>Despite the use of a transient interface, <strong>late arriving</strong> records are guaranteed to be processed as long as they arrive within a defined window length.</li>
+  <li>Facilitates reconciliation and data validation, keeping recent records available for ad hoc queries and DQ checks.</li>
+</ul>
+
+<p>The following figure demonstrates how the window moves dynamically based on refresh frequencies across three target tables: <em>Table1</em>, <em>Table2</em>, and <em>Table3</em>.</p>
+
+<p><img src="/assets/2025-03/teleport-sliding-window.png" alt="" width="580" /></p>
+
+<h2 id="a-strategy-for-seamless-migration-to-teleport">A Strategy for Seamless Migration to Teleport</h2>
+<p>A Spark application periodically saves its state and metadata as <strong>streaming checkpoints</strong> to a specified prefix in fault-tolerant storage systems like HDFS or S3. These checkpoints enable a Spark application to recover and resume processing seamlessly after failures or interruptions.</p>
+
+<p>Phase II DLT jobs use Autoloaders in <a href="https://docs.databricks.com/aws/en/ingestion/cloud-object-storage/auto-loader/directory-listing-mode">directory listing</a> mode to incrementally process landing Avro files, with each target table maintaining checkpoints to track successfully processed files. Migration of Phase II DLT jobs to Teleport <strong>without preserving the checkpoints would trigger a full re-listing</strong> of Avro objects in S3. This would cause significant delays and substantial compute costs.</p>
+
+<p>To mitigate the above challenges, we devised a “hard cut over” migration strategy that transfers the existing checkpoints from Phase II DLT jobs to the DeltaSync job, ensuring zero impact to the downstream user experience.</p>
+
+<h3 id="avoiding-history-reprocessing-using-a-checkpoint-transfer-job">Avoiding history reprocessing using a “Checkpoint Transfer” job</h3>
+
+<p><img src="/assets/2025-03/teleport-checkpoint-transfer-job.png" alt="" width="700" /></p>
+
+<p>Transitioning of Phase II DLT jobs to the Teleport workflow was carried out by a <em>separate</em> “Checkpoint Transfer” job in three steps:</p>
+
+<p><strong>Step 1</strong>. Initialise the streaming interface by creating an empty Delta table, replicating the source Dataframe structure.</p>
+
+<p><strong>Step 2</strong>. Migrate Phase II DLT Autoloader checkpoints to the Teleport interface table checkpoint<sup id="fnref:2" role="doc-noteref"><a href="#fn:2" class="footnote" rel="footnote">2</a></sup> location. At this point, the interface Delta table remains <em>empty</em>, but the migrated checkpoints “trick” the DeltaSync job to think that all historical records have been processed.</p>
+
+<p>After the checkpoints are migrated, the DeltaSync job is executed, loading <em>only</em> the newly landed Avro records into the streaming interface.</p>
+
+<p><strong>Step 3</strong>. Once the interface Delta table is populated, trigger the initial execution of Phase III DLT job in USW2. Before its initial run, the DLT job in USW2 does not have any checkpoints and treats the interface table as a new source. During this first run:</p>
+
+<ul>
+  <li>Records from the streaming interfaces are read and merged into the target tables in USW2.</li>
+  <li>Processed records are then checkpointed ensuring DLT jobs can resume incremental updates moving forward.</li>
+</ul>
+
+<p>Using this technique, DeltaSync and DLT checkpoints were adjusted to enable uninterrupted incremental processing of target tables during migrations.</p>
+
+<h3 id="reconciliation-of-records-post-migration">Reconciliation of records post migration</h3>
+<p>A <strong>reconciliation job</strong> compares Avro files in the landing S3 with the target Delta tables to ensure that no data was lost during the migration. This validation job runs after each migration and checks the last seven days of records for completeness.</p>
+
+<p>Using the migration strategy discussed above, <strong>a total of ~120 topics</strong> were migrated in batches with <strong>negligible cost overhead and zero downtime</strong>.</p>
+
+<h2 id="the-outcome--usd-540000annum-in-savings">The Outcome : USD 540,000/annum in Savings</h2>
+<p>Bulk migrations to Teleport commenced in November 2024, with a planned completion by March 2025. The reduction in transfer costs measured by mid-March amounts to an annual savings of <strong>~USD 540,000</strong>.</p>
+
+<p>Figure below shows the change in transfer cost averaged over a <em>14 day</em> rolling window for preserving data privacy.</p>
+
+<p><img src="/assets/2025-03/teleport-cost-savings.png" alt="" width="800" /></p>
+
+<p>To further assess Teleport’s impact on reducing transfer costs, we analyzed S3 CloudTrail event logs, which track the total bytes transferred from USW2 to APSE2 for each S3 object. Once a table is migrated to Teleport, cross-region transfers from USW2 to APSE2 stop completely. Hence, the monthly savings for each migrated table corresponds to its pre-migration cross-region transfer cost.
+Our findings confirm that the cloud cost <strong>reductions can be directly attributed to Teleport migrations</strong>.</p>
+
+<p><strong>Project Teleport reinforces our commitment to agnostic engineering and open source, leveraging Airflow for orchestration and Spark APIs on cloud compute.</strong></p>
+
+<hr />
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>Databricks Autoloader performs periodic <a href="https://docs.databricks.com/aws/en/ingestion/cloud-object-storage/auto-loader/options#common-auto-loader-options">backfills</a> by doing a full directory listing. Backfills may also be performed by engineers to refresh the records on a case-to-case basis. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:2" role="doc-endnote">
+      <p>Note that, due to structural differences between DLT and Spark Streaming checkpoint directories, modifications to the checkpoint files are required for this transfer mechanism to work. <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>]]></content><author><name>Unni Krishnan</name></author><summary type="html"><![CDATA[Teleport achieves efficient and reliable cross-region Kafka data processing at scale. Using this approach, Afterpay data team reduced cloud egress costs by USD 540,000 per year.]]></summary></entry><entry><title type="html">Cash App on PlanetScale Metal</title><link href="https://code.cash.app/planetscale-metal" rel="alternate" type="text/html" title="Cash App on PlanetScale Metal" /><published>2025-03-11T00:00:00+00:00</published><updated>2025-03-11T00:00:00+00:00</updated><id>https://code.cash.app/planetscale-metal</id><content type="html" xml:base="https://code.cash.app/planetscale-metal"><![CDATA[<h1 id="intro">Intro</h1>
+
+<p>At Cash App, we have a few gigantic databases that we ask a lot of. Our solution to managing this kind of capacity has been to utilize Vitess, as a piece of middleware that sits in front of hundreds of otherwise normal MySQL instances, handling the hard work of figuring out what query traffic routes where.</p>
+
+<p>We historically ran this in our own datacenters for many years, however alongside a larger cloud migration effort we elected to work with PlanetScale to move to their cloud managed product. This utilized their standard configuration of each VTTablet and MySQL instance cohabiting the same Kubernetes pod container, backed by a volume mount. VTTablet is Vitess’ middleware that fronts a single MySQL instance, which you can think of as the contact point for the SQL proxy. In this setup we can think of individual shards as essentially fairly normal MySQL servers.</p>
+
+<p>Moving to PlanetScale was a game changer for the team, as we historically run pretty light, and time previously spent maintaining a fairly large bespoke architecture can now be spent on developer experience tooling that makes current and future developers’ lives easier. Over the course of the last few months Cash App and PlanetScale have been working together to migrate our fleet to their new product, PlanetScale Metal, and I wanted to dig in a bit into the whys and hows of this change.</p>
+
+<h1 id="problems-with-volume-storage">Problems with Volume Storage</h1>
+
+<p>Over time after the migration we started noticing issues with our storage volumes. Periodically the volumes would slowly degrade, with performance draining over several minutes, before eventually recovering or dying completely. These events were happening often enough to generate some pager noise and thrash as we dug into the problem. Additionally, as we were in the final phases of cleaning up the cloud lift, we were unable to turn on PlanetScale’s Orc autofailover mechanism, meaning a person had to log in and failover the shard manually.</p>
+
+<p>After consulting with our cloud provider, we decided to switch to a more advanced class of volume temporarily, which cost quite a bit more, but offered much higher availability guarantees. This did mitigate the waves of degradation, however, we ran into another issue: sometimes shards would fail to accept writes, at times for up to 15 minutes. During these periods write traffic would queue up in MySQL, making calls involving that shard much slower than usual. We unfortunately have a decent amount of cross-shard traffic, so this was problematic.</p>
+
+<p>Talking with our cloud provider, it looked like what was happening was we were hitting our IOPS (input/output operations per second) limits with occasionally spiky traffic, leading to this unexpected failure mode. The advice was to increase our limit, however this was frustrating as this would be another bump in cost, and our traffic is generally fairly predictable in most cases.</p>
+
+<h1 id="what-is-metal-anyway">What is Metal anyway?</h1>
+
+<p>Given all these challenges, PlanetScale proposed utilizing their new Metal product on our workload. Metal is unique in the way it utilizes our cloud provider’s instance compute, running on the fastest NVMe (nonvolatile memory express). Rather than utilize separate storage and compute, the machines instead have their own physical storage. This is intended for high throughput data loads such as MySQL, cutting down on hops to get to your data and providing a more consistent failure path when things go wrong.</p>
+
+<p>This, of course, comes with the tradeoff of your machine and data being tied to each other. With traditional volume storage, if the machine goes down, you simply mount it to a different one and are back in business. With instance storage this scenario requires rebuilding the replica. This is a big part of why enabling semi-sync replication is a prerequisite for using Metal, as you have confidence that writes won’t drop on the floor. Additionally, PlanetScale’s backup restore system is very well exercised; it’s a normal part of verifying the backup process every time it’s run.</p>
+
+<h1 id="managing-costs">managing costs</h1>
+
+<p>The other big difference is Metal bundles up the components you need to run a database shard into a single machine, potentially providing  savings compared to a traditional standalone compute + volume storage setup. The two components in that setup are billed separately, with the quota of IOPS required for storage coming at a premium for our needs. When we move to instances the compute and storage come at a single cost, and with Metal, there is virtually no limit on the max amount of IOPS. Thus by using the local storage built into Metal we remove the unbounded risk of costs associated with buying more IOPS from cloud providers.</p>
+
+<h1 id="p99-off-a-cliff">p99 off a cliff</h1>
+
+<p>The cost savings are nice to be sure, however day-to-day the real wins come from the stability and power of running on this kind of setup. Since moving, we’ve seen much more predictable failure modes, where write buffering is a thing of the past. Additionally, the changes to p99 latency were dramatic, cutting our main workload by 50%.</p>
+
+<p>Additionally, during a recent event we saw query traffic double beyond normal values for a period, and while this was happening response times and metrics were very comfortably nominal, something we certainly haven’t been able to say in the past.</p>
+
+<p><img src="/assets/2025-03/planetscale-metal-img-1.png" alt="" />
+<img src="/assets/2025-03/planetscale-metal-img-2.png" alt="" /></p>
+
+<p>We are very happy with our decision to migrate to PlanetScale Metal which enabled us to achieve the rare outcome of improvements in performance, cost, and reliability – a win for our customers and our business.</p>]]></content><author><name>Aaron Young</name></author><summary type="html"><![CDATA[Cash App moves to PlanetScale to drive efficiencies]]></summary></entry><entry><title type="html">Data Safety Levels Framework: The foundation of how we look at data in Block</title><link href="https://code.cash.app/dsl-framework" rel="alternate" type="text/html" title="Data Safety Levels Framework: The foundation of how we look at data in Block" /><published>2025-01-16T00:00:00+00:00</published><updated>2025-01-16T00:00:00+00:00</updated><id>https://code.cash.app/dsl-framework</id><content type="html" xml:base="https://code.cash.app/dsl-framework"><![CDATA[<p>One of our foundational principles at Block is incorporating privacy and the protection of customer data into every layer of our software systems. This commitment goes beyond meeting the numerous regulatory requirements for how we process and manage customer data that we face as a financial technology company: we believe protecting this customer data is essential to building and maintaining our customers’ trust in us.</p>
+
+<p>One of the biggest challenges in protecting customer data turns out to be devising a system for thinking about data sensitivity that lends itself to engineering scalable solutions that can be automated and built transparently into our systems so they simply <strong>work</strong>. Data itself is complex and sensitivity can vary based on context. Solutions often either ignore the sensitivity variance or overly simplify this complexity, resulting in under-protection of the data for the customer or overly rigid systems that hinder innovation and limit our ability to serve customers effectively.</p>
+
+<p>In this post, we introduce the <strong>Data Safety Levels (DSL) Framework</strong> that we initially built for Cash App and have since extended across the rest of our diverse product ecosystem, including Square and TIDAL. The DSL framework forms the foundation of the way we understand data.  It acknowledges the complexities of data by recognizing that data:</p>
+
+<ul>
+  <li><strong>Exists as part of a larger set</strong>, with sensitivity being an emergent property of the set rather than individual elements.</li>
+  <li><strong>Is contextual</strong>, requiring us to consider context when determining its management and usage policies.</li>
+</ul>
+
+<p>This framework has created a strong foundation for us to build guidelines and policies on top of which allow us to better show not just our compliance with our regulatory requirements but also our commitment to customer trust.</p>
+
+<h1 id="our-origin-story">Our Origin Story</h1>
+
+<p>We had long had an internal policy around classifying and handling sensitive data, especially PCI-relevant data and Personally Identifying Information (PII). This framework, for the most part, classified each semantic type of data as being either Public, Confidential, Basic PII, or Secret PII. Over time, it grew increasingly complicated with specific requirements around particular data being covered by either a PCI standard, SOX, PII, or MNPI. This policy made engineering increasingly complicated as it required both service and platform engineers to be aware of the nuances of various standards and regulations when their underlying questions were really: <em>“can Security sign-off on my design doc yet?”</em>. It also resulted in many questions to security teams like, <em>“is this particular data type PII?”</em> for which the answer was always (frustratingly), <em>“well, it depends.”</em></p>
+
+<p>Coincidentally or not, with a lot of extra time to read things on the Internet during a global pandemic, we learned about the US Centers for Disease Control and Prevention (CDC) <a href="https://en.wikipedia.org/wiki/Biosafety_level">Biosafety Level</a> system for rating the risk levels of biological agents and approving facilities for storing and handling them. The World Health Organization also publishes laboratory biosafety manuals with more elements of this framework including the risk assessment methodology that assigns one of four levels to particular biological agents as well as laboratory safety requirements for handling biological agents at each level. The framework of assigned risk levels and increasing control requirements made sense to us as inspiration for another type of thing that we did not want to accidentally expose to people: regulated and sensitive data.</p>
+
+<h1 id="why-a-dataset-oriented-approach">Why a Dataset-Oriented Approach?</h1>
+
+<p>In practice data usually exists as part of a larger set, where the relationships between elements can impact their overall sensitivity. A phone number on its own may not be as sensitive as a phone number combined with a precise home address and transaction history. The DSL framework allows us to reason about such combinations and ensure that data is classified appropriately based on its aggregate sensitivity, not just on the sensitivity of individual elements.</p>
+
+<p>For example, in our Cash App Investing operations, the DSL classification for customer data doesn’t just consider individual components like an account number or government-issued ID—it considers how these pieces combine to potentially elevate the risk of exposure. Thus, each dataset’s DSL is determined by considering the highest level of sensitivity found within its components, ensuring that we adopt the strictest safeguards when necessary.</p>
+
+<h1 id="problems-dsl-framework-addresses">Problems DSL Framework Addresses</h1>
+
+<p>The DSL Framework was developed to address these needs. It provides:</p>
+
+<ul>
+  <li><strong>Actionable Guidance for Teams:</strong> The framework translates data sensitivity into clear data safety levels that dictate the required policies for handling specific data sets, from consumer information to merchant financials.</li>
+  <li><strong>Consistency Across the Organization:</strong> By using a unified framework, all teams across the various products at Block Inc. (Cash App, Square, TIDAL) have a common language and understanding of how to secure data. This consistency is crucial for ensuring we meet the highest security standards globally.</li>
+  <li><strong>Compliance Across Jurisdictions:</strong> Block operates in multiple jurisdictions, each with its own set of regulatory requirements for data security and privacy. The DSL Framework is an effective tool for mapping these regulatory requirements to our internal security practices. By using the DSLs as the benchmark, we can ensure that we meet or exceed the data security obligations in regions like the U.S., Europe, and Asia.  Our DSL rubrics and guidelines help streamline product development by providing a uniform and self-service framework for engineering teams to ensure that all data meets the necessary standards.</li>
+  <li><strong>Incremental Security Controls:</strong> With four Data Safety Levels ranging on a numerical scale from DSL-1 to DSL-4 (lowest to highest sensitivity), each DSL builds on the preceding level with additional controls to ensure the security measures we apply are calibrated to the risks involved. For example, highly sensitive data, such as tax return information, is classified at DSL-4, meaning it requires stringent protections like application-layer encryption and multi-party authorization.</li>
+</ul>
+
+<h1 id="key-components-of-the-dsl-framework">Key Components of the DSL Framework</h1>
+
+<p>The DSL framework at Block is actionable for both automated and manual processes, providing a clear roadmap for platform and product development teams to understand what protections they must implement based on the data they are handling. Here are some of its critical components:</p>
+
+<ul>
+  <li><strong>Data Classification Rubrics:</strong> To determine a dataset’s DSL requirement, we apply specific rubrics designed for different data domains to perform a risk assessment of the data set to determine the appropriate DSL requirement. We have rubrics for Consumer Personal Data, Payment Card Data, Merchant Data, and more. These rubrics standardize how we assess sensitivity, ensuring that each dataset receives a consistent and accurate classification.</li>
+  <li><strong>Data Safety Guidelines:</strong> The DSL framework is complemented by our Data Safety Guidelines, which define the minimum protections that systems must implement based on their DSL rating. These guidelines include measures like access controls, encryption standards, auditability, and more. Systems approved at a particular DSL must meet all the prescribed security controls for that level and any lower levels, ensuring a robust baseline of security.</li>
+  <li><strong>Automation and Manual Processes:</strong> The DSL framework is designed to integrate seamlessly into our workflows, leveraging automation to classify data and verify that proper protections are in place. At the same time, manual reviews ensure that our systems comply with specific regulatory requirements and address any nuanced security needs that automation alone cannot handle.</li>
+  <li><strong>Access and Usage Controls:</strong> The framework’s effectiveness also relies on enforcing appropriate access controls. For example, datasets classified at DSL-4 or higher are generally protected with multi-party authorization (MPA), ensuring that no single individual can access sensitive data without additional oversight. This prevents unilateral actions that could jeopardize data security and demonstrates our commitment to upholding customer privacy.</li>
+</ul>
+
+<h1 id="real-world-examples-of-the-dsl-framework-at-work">Real-World Examples of the DSL Framework at Work</h1>
+
+<h2 id="tokenized-payment-data">Tokenized Payment Data</h2>
+
+<p>Payment card data, such as Primary Account Numbers (PANs) and Card Verification Codes, are highly sensitive and classified as DSL-4. By applying our DSL Framework, we require this data to be encrypted at the application layer before it is stored or transmitted. Fidelius, our tokenization service, manages such data to ensure it remains secure during payment processing and at rest. The DSL Framework allows downstream systems, with lower safety level capabilities, to process this data without compromising on security, as long as strict encryption standards are upheld.</p>
+
+<h2 id="cash-app-investing-data">Cash App Investing Data</h2>
+
+<p>Cash App Investing (CAI) data, such as trading patterns or Social Security Numbers (SSNs), also falls into higher DSLs—typically DSL-3 or DSL-4, depending on the specifics. The DSL classification ensures that appropriate access controls and encryption are in place, including requiring employee fingerprinting for access to the most sensitive records. This not only adheres to regulatory requirements, such as FINRA rules, but also demonstrates our commitment to proactively protecting customer data.</p>
+
+<h2 id="tax-return-information">Tax Return Information</h2>
+
+<p>Tax Return Information (TRI) collected through Cash App Taxes is classified as DSL-4, given its highly sensitive nature. Compliance with IRS requirements and ensuring privacy of TRI is a non-negotiable part of our operations. The DSL Framework supports this by enforcing strict encryption, auditability, and access controls—all designed to minimize the likelihood of unauthorized disclosure or misuse.</p>
+
+<h1 id="dsl-is-just-the-start">DSL is just the Start</h1>
+
+<p>The DSL framework is live and has expanded steadily over the years of its adoption. New products as well as feedback loops from internal audits, security incidents, and regulatory changes have translated to identification of new semantic types and classification rubrics as well as new mapping of data to safety levels.</p>
+
+<p>Developing our perspective on data has been a collaborative effort between Security, Governance and Compliance and most importantly, Product. Starting from our inspiration in WHO’s biosafety levels, we have intentionally challenged ourselves to understand data, its lifecycle and its requirements in a holistic and systematic manner, with the knowledge that automation is a must given the scale of the data we deal with.</p>
+
+<p>This framework is also just the beginning of the story. Now that we have a systematic way of conceptualizing our data, we need to complement it by our Data Safety Guidelines and the implementation of these guidelines in a scalable, automated and transparent way that seamlessly integrates into our systems.</p>
+
+<p>This blog is also the first in its series as we describe some of the challenges and solutions we have encountered in this space.</p>
+
+<h1 id="data-safety-is-for-everyone">Data Safety is for Everyone</h1>
+
+<p>Block is committed to improving Data Safety in our community. In the coming months, we hope to open source the DSL framework and allow others to not just use and adopt this foundation but also build upon it and enhance the protection of customer data across the industry. We look forward to hearing from you.</p>]]></content><author><name>John Rogers</name></author><category term="[&quot;security&quot;, &quot;governance&quot;]" /><summary type="html"><![CDATA[Block uses the Data Safety Levels (DSL) Framework to evaluate data sensitivity.]]></summary></entry><entry><title type="html">Dispatchers.Unconfined and why you actually want EmptyCoroutineContext</title><link href="https://code.cash.app/dispatchers-unconfined" rel="alternate" type="text/html" title="Dispatchers.Unconfined and why you actually want EmptyCoroutineContext" /><published>2025-01-15T00:00:00+00:00</published><updated>2025-01-15T00:00:00+00:00</updated><id>https://code.cash.app/dispatchers-unconfined</id><content type="html" xml:base="https://code.cash.app/dispatchers-unconfined"><![CDATA[<p><code class="language-plaintext highlighter-rouge">Dispatchers.Unconfined</code> is one of <code class="language-plaintext highlighter-rouge">kotlinx.coroutines</code>’ built in <code class="language-plaintext highlighter-rouge">CoroutineDispatcher</code>s. It’s different from other built in dispatchers as it’s not backed by a thread pool or other asynchronous primitive. Instead, <code class="language-plaintext highlighter-rouge">Dispatchers.Unconfined</code> is hardcoded to never change threads when entering its context (this is called “dispatching”). It’s pretty easy to verify this from its (simplified) implementation:</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">object</span> <span class="nc">Unconfined</span> <span class="p">:</span> <span class="nc">CoroutineDispatcher</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">override</span> <span class="k">fun</span> <span class="nf">isDispatchNeeded</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="nc">CoroutineContext</span><span class="p">)</span> <span class="p">=</span> <span class="k">false</span>
+
+  <span class="k">override</span> <span class="k">fun</span> <span class="nf">dispatch</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="nc">CoroutineContext</span><span class="p">,</span> <span class="n">block</span><span class="p">:</span> <span class="nc">Runnable</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="nc">UnsupportedOperationException</span><span class="p">()</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>This behavior is different from <code class="language-plaintext highlighter-rouge">Dispatchers.Main</code> or <code class="language-plaintext highlighter-rouge">Dispatchers.Default</code>, which will change threads if you’re not already on one of their preferred thread(s). As a result, code using <code class="language-plaintext highlighter-rouge">Dispatchers.Unconfined</code> will always execute synchronously when entering its context.</p>
+
+<p>In practice, this means that any code inside of the <code class="language-plaintext highlighter-rouge">Dispatchers.Unconfined</code> has no guarantees about what thread it will run on. This can create subtle bugs as dispatching occurs both when entering a new context and when returning from it. Consider this example where we read some text on the IO dispatcher then update the main thread with the result:</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Pretend these dispatchers are injected.</span>
+<span class="kd">val</span> <span class="py">ioDispatcher</span> <span class="p">=</span> <span class="nc">Dispatchers</span><span class="p">.</span><span class="nc">IO</span>
+<span class="kd">val</span> <span class="py">mainDispatcher</span> <span class="p">=</span> <span class="nc">Dispatchers</span><span class="p">.</span><span class="nc">Main</span>
+
+<span class="nf">withContext</span><span class="p">(</span><span class="n">ioDispatcher</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">val</span> <span class="py">firstText</span> <span class="p">=</span> <span class="nf">readFile</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+  <span class="kd">val</span> <span class="py">secondText</span> <span class="p">=</span> <span class="nf">readFile</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+  <span class="nf">withContext</span><span class="p">(</span><span class="n">mainDispatcher</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">textView</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="n">firstText</span>
+    <span class="nf">delay</span><span class="p">(</span><span class="mi">1</span><span class="p">.</span><span class="n">seconds</span><span class="p">)</span>
+    <span class="n">textView</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="n">secondText</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>If we’re testing this function, say in a screenshot test, and we know our test starts on the main thread we may want to avoid dispatching entirely so our test executes synchronously on the calling dispatcher. We can do this by injecting <code class="language-plaintext highlighter-rouge">Dispatchers.Unconfined</code> for our IO and main dispatchers:</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">ioDispatcher</span> <span class="p">=</span> <span class="nc">Dispatchers</span><span class="p">.</span><span class="nc">Unconfined</span>
+<span class="kd">val</span> <span class="py">mainDispatcher</span> <span class="p">=</span> <span class="nc">Dispatchers</span><span class="p">.</span><span class="nc">Unconfined</span>
+
+<span class="nf">withContext</span><span class="p">(</span><span class="n">ioDispatcher</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">val</span> <span class="py">firstText</span> <span class="p">=</span> <span class="nf">readFile</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+  <span class="kd">val</span> <span class="py">secondText</span> <span class="p">=</span> <span class="nf">readFile</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+  <span class="nf">withContext</span><span class="p">(</span><span class="n">mainDispatcher</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">textView</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="n">firstText</span>
+    <span class="nf">delay</span><span class="p">(</span><span class="mi">1</span><span class="p">.</span><span class="n">seconds</span><span class="p">)</span>
+    <span class="n">textView</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="n">secondText</span> <span class="c1">// This line will crash!</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>However, this change introduces a crash as <code class="language-plaintext highlighter-rouge">delay</code> changes the context to <code class="language-plaintext highlighter-rouge">Dispatchers.Default</code> internally and because we’re using <code class="language-plaintext highlighter-rouge">Dispatchers.Unconfined</code> we never dispatch back to the main thread. When we try to update <code class="language-plaintext highlighter-rouge">textView</code>’s text it will throw a <code class="language-plaintext highlighter-rouge">CalledFromWrongThreadException</code>.</p>
+
+<p>This example also shows how  <code class="language-plaintext highlighter-rouge">Dispatchers.Unconfined</code> breaks one of coroutines’ best features: making threading a local consideration. When we use <code class="language-plaintext highlighter-rouge">Dispatchers.Main</code> or <code class="language-plaintext highlighter-rouge">Dispatchers.Default</code> we don’t have to worry about dispatching back to the right thread after calling another <code class="language-plaintext highlighter-rouge">suspend fun</code> - it’s handled for us.</p>
+
+<h2 id="theres-a-better-way">There’s a better way</h2>
+
+<p>Typically we use <code class="language-plaintext highlighter-rouge">withContext</code> to change the <code class="language-plaintext highlighter-rouge">CoroutineDispatcher</code>, but <code class="language-plaintext highlighter-rouge">withContext</code> actually accepts a <code class="language-plaintext highlighter-rouge">CoroutineContext</code>. You can think of <code class="language-plaintext highlighter-rouge">CoroutineContext</code> as equivalent to <code class="language-plaintext highlighter-rouge">Map&lt;CoroutineContext.Key, CoroutineContext.Element&gt;</code>. When we invoke <code class="language-plaintext highlighter-rouge">withContext(Dispatchers.Unconfined)</code> we’re overwriting the current context’s <code class="language-plaintext highlighter-rouge">CoroutineDispatcher</code> key with <code class="language-plaintext highlighter-rouge">Dispatchers.Unconfined</code>.</p>
+
+<p>Instead, we should use <code class="language-plaintext highlighter-rouge">EmptyCoroutineContext</code> as it doesn’t update the current context’s <code class="language-plaintext highlighter-rouge">CoroutineDispatcher</code>. This means we don’t dispatch when calling <code class="language-plaintext highlighter-rouge">withContext(EmptyCoroutineContext)</code> as the coroutine context doesn’t change but we’ll still dispatch back to the right thread if another function like <code class="language-plaintext highlighter-rouge">delay</code> changes the context. Let’s reexamine the above example using <code class="language-plaintext highlighter-rouge">EmptyCoroutineContext</code> instead of <code class="language-plaintext highlighter-rouge">Dispatchers.Unconfined</code>:</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">ioDispatcher</span> <span class="p">=</span> <span class="nc">EmptyCoroutineContext</span>
+<span class="kd">val</span> <span class="py">mainDispatcher</span> <span class="p">=</span> <span class="nc">EmptyCoroutineContext</span>
+
+<span class="nf">withContext</span><span class="p">(</span><span class="n">ioDispatcher</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">val</span> <span class="py">firstText</span> <span class="p">=</span> <span class="nf">readFile</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+  <span class="kd">val</span> <span class="py">secondText</span> <span class="p">=</span> <span class="nf">readFile</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+  <span class="nf">withContext</span><span class="p">(</span><span class="n">mainDispatcher</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">textView</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="n">firstText</span>
+    <span class="nf">delay</span><span class="p">(</span><span class="mi">1</span><span class="p">.</span><span class="n">seconds</span><span class="p">)</span>
+    <span class="n">textView</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="n">secondText</span> <span class="c1">// Does not crash.</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Using <code class="language-plaintext highlighter-rouge">EmptyCoroutineContext</code> lets us continue executing synchronously on the main thread and avoids crashing as we correctly dispatch back to the main thread after <code class="language-plaintext highlighter-rouge">delay</code>. It’s for these reasons that at Cash App we inject all our dispatchers as <code class="language-plaintext highlighter-rouge">CoroutineContext</code>s and inject <code class="language-plaintext highlighter-rouge">EmptyCoroutineContext</code> in our tests:</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">MoneyPresenter</span> <span class="nd">@Inject</span> <span class="k">constructor</span><span class="p">(</span>
+    <span class="nd">@IoDispatcher</span> <span class="k">private</span> <span class="kd">val</span> <span class="py">ioDispatcher</span><span class="p">:</span> <span class="nc">CoroutineContext</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p>In fact, there are actually very few cases where you need to reference the <code class="language-plaintext highlighter-rouge">CoroutineDispatcher</code> class at all.  <code class="language-plaintext highlighter-rouge">CoroutineScope()</code>, <code class="language-plaintext highlighter-rouge">withContext</code>, and <code class="language-plaintext highlighter-rouge">CoroutineContext.plus</code> all accept a <code class="language-plaintext highlighter-rouge">CoroutineContext</code>. <code class="language-plaintext highlighter-rouge">CoroutineContext</code> is also more flexible as there are other elements you can add like <a href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-name/"><code class="language-plaintext highlighter-rouge">CoroutineName</code></a> for debugging purposes. I’d recommend replacing all your references to <code class="language-plaintext highlighter-rouge">CoroutineDispatcher</code> with <code class="language-plaintext highlighter-rouge">CoroutineContext</code> - especially if you maintain a public API. Coil <a href="https://coil-kt.github.io/coil/api/coil-core/coil3/-image-loader/-builder/decoder-coroutine-context.html?query=fun%20decoderCoroutineContext(context:%20CoroutineContext):%20ImageLoader.Builder">updated its public API</a> to accept <code class="language-plaintext highlighter-rouge">CoroutineContext</code> instead of <code class="language-plaintext highlighter-rouge">CoroutineDispatcher</code> in 3.0. Thanks to Bill Phillips for suggesting this change!</p>
+
+<p>Also thanks to Bill Phillips, Jesse Wilson, and Raheel Naz for reviewing this blog post.</p>]]></content><author><name>Colin White</name></author><category term="[&quot;kotlin&quot;]" /><summary type="html"><![CDATA[Use EmptyCoroutineContext instead of Dispatchers.Unconfined.]]></summary></entry><entry><title type="html">Encryption using data-specific keys</title><link href="https://code.cash.app/encryption-using-data-keys" rel="alternate" type="text/html" title="Encryption using data-specific keys" /><published>2024-12-12T00:00:00+00:00</published><updated>2024-12-12T00:00:00+00:00</updated><id>https://code.cash.app/encryption-using-data-keys</id><content type="html" xml:base="https://code.cash.app/encryption-using-data-keys"><![CDATA[<p>At Cash App, securing our customers’ data is not just a priority - it’s a responsibility.
+One cornerstone of our approach to achieve that is encryption. We’re obsessed with it.
+We’ve been using encryption at the application layer so much that our security team’s motto is
+“encrypt everything”. Application layer encryption specifically has been our bread and butter 
+because it removes the data storage tier from the compliance scope and security threat model, 
+allows granular access control over who can decrypt the data, enables easy integration with 
+privacy regulations, and much more.</p>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>In the last blog post we wrote about <a href="https://code.cash.app/app-layer-encryption">Application Layer Encryption in AWS</a> 
+back in **<em>checks notes</em>**… 2020, we discussed how we’re creating KMS instances and Tink 
+keysets for Cash App services running in the cloud.<br />
+Here’s a quick reminder of the general layout of how it works:</p>
+
+<p><img src="/assets/2024-12/data-keys-img-1.png" alt="" /></p>
+
+<ul>
+  <li>Each service in our cloud backend has its own KMS Customer Managed Key (CMK) instance associated with it.</li>
+  <li>To create a new service encryption key, we’ll generate a <a href="https://developers.google.com/tink">Tink</a> 
+keyset and then call the necessary CMK to encrypt it (using envelope encryption).</li>
+  <li>The encrypted Tink keyset is then persisted in the service’s resource folder; and committed to Git.</li>
+  <li>When the service starts up, it calls the CMK to decrypt the Tink keyset, and then store it 
+in-memory to encrypt/decrypt data as needed.</li>
+</ul>
+
+<p>Things have changed quite a bit in our app-layer encryption setup from that original design.
+Our initial approach was tailored to secure the data managed and stored by individual services.
+In that design, encryption keys were tightly coupled with the services using them, aligning well with our early needs.
+However, as we expanded app-layer encryption to encompass our data transport infrastructure—spanning 
+gRPC and our Kafka event bus—this service-centric model began to show its limitations. 
+The tight coupling made the system less flexible and more challenging to scale. 
+To address these challenges, we evolved our encryption strategy.
+The next generation of app-layer encryption shifted from a service-centric model to a data-centric model, 
+decoupling encryption keys from individual services and instead associating them directly with the data itself. 
+This change enabled us to maintain robust security while enhancing flexibility and scalability across our infrastructure. 
+We refer to this latest evolution of our encryption infrastructure as “Data Keys”.</p>
+
+<p>There are 2 main differences between these approaches.
+First of all and most importantly, we switched from having a map of (CMK instance → service) 
+to a (CMK instance → encryption key). That might seem like a minor detail, but it is very significant; 
+it means that encryption keys can be associated with their own independent CMK.
+This makes it possible to have <strong>multiple services access the same key</strong>.</p>
+
+<p>Secondly, moving away from service-centric keys also affects where encrypted key material may be stored, 
+such as in a more accessible S3 bucket instead of in the service’s resources directory.</p>
+
+<h2 id="key-access-controls-with-iam">Key Access Controls With IAM</h2>
+
+<p>When an encryption key has its own CMK, an AWS IAM policy can be attached to the CMK 
+defining which roles can access it, and what APIs they can use.</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"Version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2012-10-17"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"Statement"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"Effect"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Allow"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"Principal"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"AWS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"arn:aws:sts::&lt;data-keys-roles-account-id&gt;:assumed-role/key-name/session-name"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"Action"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"kms:Decrypt"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"Resource"</span><span class="p">:</span><span class="w"> </span><span class="s2">"*"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>When specifying the AWS Principals in the IAM policy, <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-role-session">assumed-role session principals</a>
+can be used to ensure that <strong>only</strong> roles assumed via AWS STS are allowed access. 
+When clients rely on short-lived, dynamically generated access via STS, it reduces the risk of
+long-term credential exposure and limits the impact of compromised access.</p>
+
+<p>A relevant IAM Role can be defined for each encryption key in a dedicated AWS account.
+The AWS account <code class="language-plaintext highlighter-rouge">data-keys-roles</code> has a role for each data key (AKA “bastion role” or “access role”)
+that grants permission to decrypt that data key.
+This access role’s trust policy allows a role in other consumer accounts to assume the access role.
+identified by the isolation of the role(s) in question. Thus, enabling access to our encryption keys
+The “bastion role” pattern is one implementation of <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html#id_roles_terms-and-concepts:~:text=Role%20chaining,the%20operation%20fails">AWS’ “IAM Role Chaining” concept</a>, 
+from different AWS accounts and business units in Block.</p>
+
+<p><img src="/assets/2024-12/data-keys-img-2.png" alt="" /></p>
+
+<h2 id="key-storage-in-s3">Key Storage In S3</h2>
+
+<p>Since encryption keys are no longer tied to a single service, it becomes impractical to store
+encrypted Tink keysets in the service’s resources directory or commit them to Git.
+To address this, encrypted Tink keysets can be stored in a dedicated S3 bucket within the
+same AWS account as the CMKs. This approach not only centralizes key management but also
+leverages S3’s built-in versioning, enabling the recovery of keysets in case of accidental deletion or overwrites. 
+Security remains intact because the Tink keysets are encrypted, and access to the corresponding 
+CMKs is strictly governed by IAM roles, ensuring that only authorized services can decrypt them.</p>
+
+<h2 id="provisioning-data-keys">Provisioning Data Keys</h2>
+
+<p>So far, we’ve described the following resources needed in this design:</p>
+
+<ul>
+  <li>CMK per encrypted Tink keyset in the data-keys account</li>
+  <li>IAM Role for each KMS instance in the data-keys account</li>
+  <li>Encrypted Tink keyset stored in an S3 bucket in the data-keys account</li>
+  <li>IAM policy for each CMK specifying the role above as the principal in the data-keys account</li>
+  <li>IAM Role for role chaining in the data-keys-roles account</li>
+  <li>IAM policy specifying which principals can assume the role in the data-keys-roles account</li>
+</ul>
+
+<p>Provisioning these AWS resources should be easily accomplished using Terraform.
+Creating and encrypting the Tink keysets is straightforward with tools like <a href="https://developers.google.com/tink/tinkey-overview">Tinkey</a>.
+And the last remaining step is to upload the encrypted keyset to the dedicated S3 bucket.</p>
+
+<p>All of the above tasks are easily accomplished in a simple bash script, and executed via most CI platforms.
+Which means that now, key provisioning and management is completely <strong>self-served, fully audited, and automated</strong>.</p>
+
+<p><img src="/assets/2024-12/data-keys-img-3.png" alt="" /></p>
+
+<h2 id="lessons-learned">Lessons Learned</h2>
+
+<p>The main improvement with this design is the de-coupling of encryption keys and services.
+The ability to share encryption keys between services and workloads, and even other cloud accounts 
+and consumers naturally led to the situation that keys became associated with the data they protect.</p>
+
+<p>For example, encryption keys can be created per Kafka topic.
+Any workload or service that needs to produce or consume data from a specific topic, must have access
+to that topic’s encryption key. In fact, this change in how keys are being provisioned and used was
+so much easier and friendlier for engineers to use, that it led to a big spike in adoption of data
+encryption and keys being created that we’re now <strong>encrypting on average more than 8TB of data a day</strong>.</p>
+
+<p><img src="/assets/2024-12/data-keys-img-4.png" alt="" /></p>
+
+<p>The same happened with protocol-buffer messages (to be continued)…</p>]]></content><author><name>Yoav Amit</name></author><category term="[&quot;server&quot;, &quot;security&quot;, &quot;encryption&quot;]" /><summary type="html"><![CDATA[Associating encryption keys with the data they protect]]></summary></entry><entry><title type="html">KotlinPoet 2.0 is here!</title><link href="https://code.cash.app/kotlinpoet-2-is-here" rel="alternate" type="text/html" title="KotlinPoet 2.0 is here!" /><published>2024-11-05T00:00:00+00:00</published><updated>2024-11-05T00:00:00+00:00</updated><id>https://code.cash.app/kotlinpoet-2-is-here</id><content type="html" xml:base="https://code.cash.app/kotlinpoet-2-is-here"><![CDATA[<blockquote>
+  <p>Lo! KotlinPoet 2.0 doth grace our realm!</p>
+
+  <p><del>William Shakespeare</del> ChatGPT</p>
+</blockquote>
+
+<p>KotlinPoet is an ergonomic Kotlin and Java API for generating Kotlin source files. Source code 
+generation is a useful technique in scenarios that involve annotation processing or interacting with 
+metadata files: popular libraries, such as <a href="https://github.com/sqldelight/sqldelight">SQLDelight</a> and <a href="https://github.com/square/moshi">Moshi</a>, use 
+KotlinPoet to generate source code.</p>
+
+<p>After originally releasing KotlinPoet 1.0 in 2018, today we’re announcing the next major version of 
+the library - KotlinPoet 2.0!</p>
+
+<p>We decided to keep KotlinPoet 2.0 source- and binary-compatible with 1.0 to make the migration as 
+seamless as possible. That said, 2.0 ships with an important behavior change:</p>
+
+<h2 id="spaces-dont-wrap-by-default">Spaces don’t wrap by default</h2>
+
+<p>KotlinPoet 1.x was designed to replace space characters with newline characters whenever a given 
+line of code exceeded the length limit, so the following <code class="language-plaintext highlighter-rouge">FunSpec</code>:</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">funSpec</span> <span class="p">=</span> <span class="nc">FunSpec</span><span class="p">.</span><span class="nf">builder</span><span class="p">(</span><span class="s">"foo"</span><span class="p">)</span>
+  <span class="p">.</span><span class="nf">addStatement</span><span class="p">(</span><span class="s">"return (100..10000).map { number -&gt; number * number }.map { number -&gt; number.toString() }.also { string -&gt; println(string) }"</span><span class="p">)</span>
+  <span class="p">.</span><span class="nf">build</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>Would be generated as follows, honoring the line length limit:</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">fun</span> <span class="nf">foo</span><span class="p">():</span> <span class="nc">Unit</span> <span class="p">=</span> <span class="p">(</span><span class="mi">100</span><span class="o">..</span><span class="mi">10000</span><span class="p">).</span><span class="nf">map</span> <span class="p">{</span> <span class="n">number</span> <span class="p">-&gt;</span> <span class="n">number</span> <span class="p">*</span> <span class="n">number</span> <span class="p">}.</span><span class="nf">map</span> <span class="p">{</span> <span class="n">number</span> <span class="p">-&gt;</span>
+  <span class="n">number</span><span class="p">.</span><span class="nf">toString</span><span class="p">()</span> <span class="p">}.</span><span class="nf">also</span> <span class="p">{</span> <span class="n">string</span> <span class="p">-&gt;</span> <span class="nf">println</span><span class="p">(</span><span class="n">string</span><span class="p">)</span> <span class="p">}</span>
+</code></pre></div></div>
+
+<p>This usually led to slightly better code formatting, but could also lead to compilation errors in 
+generated code. Depending on where this function occurred in the generated code, it could be printed 
+out as follows:</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">fun</span> <span class="nf">foo</span><span class="p">():</span> <span class="nc">Unit</span> <span class="p">=</span> <span class="p">(</span><span class="mi">100</span><span class="o">..</span><span class="mi">10000</span><span class="p">).</span><span class="nf">map</span> <span class="p">{</span> <span class="n">number</span> <span class="p">-&gt;</span> <span class="n">number</span> <span class="p">*</span> <span class="n">number</span> <span class="p">}.</span><span class="nf">map</span> <span class="p">{</span> <span class="n">number</span> <span class="p">-&gt;</span> <span class="n">number</span><span class="p">.</span><span class="nf">toString</span><span class="p">()</span> <span class="p">}.</span><span class="nf">also</span>
+  <span class="p">{</span> <span class="n">string</span> <span class="p">-&gt;</span> <span class="nf">println</span><span class="p">(</span><span class="n">string</span><span class="p">)</span> <span class="p">}</span> <span class="c1">// Doesn't compile, "also {" has to be on one line!</span>
+</code></pre></div></div>
+
+<p>Developers could mark spaces that aren’t safe to wrap with the <code class="language-plaintext highlighter-rouge">·</code> character, but the 
+discoverability of this feature wasn’t great:</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">funSpec</span> <span class="p">=</span> <span class="nc">FunSpec</span><span class="p">.</span><span class="nf">builder</span><span class="p">(</span><span class="s">"foo"</span><span class="p">)</span>
+  <span class="p">.</span><span class="nf">addStatement</span><span class="p">(</span><span class="s">"return (100..10000).map·{ number -&gt; number * number }.map·{ number -&gt; number.toString() }.also·{ string -&gt; println(string) }"</span><span class="p">)</span>
+  <span class="p">.</span><span class="nf">build</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>KotlinPoet 2.0 does not wrap spaces, even if the line of code they occur in exceeds the length 
+limit. The newly introduced <code class="language-plaintext highlighter-rouge">♢</code> character can be used to mark spaces that are safe to wrap, which
+can improve code formatting:</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">funSpec</span> <span class="p">=</span> <span class="nc">FunSpec</span><span class="p">.</span><span class="nf">builder</span><span class="p">(</span><span class="s">"foo"</span><span class="p">)</span>
+  <span class="p">.</span><span class="nf">addStatement</span><span class="p">(</span><span class="s">"return (100..10000).map { number -&gt;♢number * number♢}.map { number -&gt;♢number.toString()♢}.also { string -&gt;♢println(string)♢}"</span><span class="p">)</span>
+  <span class="p">.</span><span class="nf">build</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>The generated code here is similar to the original example:</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">fun</span> <span class="nf">foo</span><span class="p">():</span> <span class="nc">Unit</span> <span class="p">=</span> <span class="p">(</span><span class="mi">100</span><span class="o">..</span><span class="mi">10000</span><span class="p">).</span><span class="nf">map</span> <span class="p">{</span> <span class="n">number</span> <span class="p">-&gt;</span> <span class="n">number</span> <span class="p">*</span> <span class="n">number</span> <span class="p">}.</span><span class="nf">map</span> <span class="p">{</span> <span class="n">number</span> <span class="p">-&gt;</span>
+  <span class="n">number</span><span class="p">.</span><span class="nf">toString</span><span class="p">()</span> <span class="p">}.</span><span class="nf">also</span> <span class="p">{</span> <span class="n">string</span> <span class="p">-&gt;</span> <span class="nf">println</span><span class="p">(</span><span class="n">string</span><span class="p">)</span> <span class="p">}</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">·</code> character has been preserved for compatibility, but its behavior is now equivalent to the 
+regular space character.</p>
+
+<p>Please let us know if you’re experiencing any issues with the new release by opening an issue in our 
+<a href="https://github.com/square/kotlinpoet/issues">issue tracker</a>, or <a href="https://github.com/square/kotlinpoet/discussions">starting a discussion</a> if you’d like to provide general 
+feedback or are looking for help on using the library.</p>
+
+<p>Get KotlinPoet 2.0 on <a href="https://github.com/square/kotlinpoet">GitHub</a> today!</p>]]></content><author><name>Egor Andreevich</name></author><category term="[&quot;kotlin&quot;]" /><summary type="html"><![CDATA[KotlinPoet 2.0 is the next, source- and binary-compatible major release of the library, that has important behavior changes.]]></summary></entry></feed>

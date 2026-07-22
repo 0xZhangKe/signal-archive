@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:media="http://search.yahoo.com/mrss/"><channel><title><![CDATA[Public Object]]></title><description><![CDATA[Jesse Wilson on programming.]]></description><link>https://publicobject.com/</link><image><url>https://publicobject.com/favicon.png</url><title>Public Object</title><link>https://publicobject.com/</link></image><generator>Ghost 3.18</generator><lastBuildDate>Wed, 22 Jul 2026 09:27:50 GMT</lastBuildDate><atom:link href="https://publicobject.com/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[Test & Set]]></title><description><![CDATA[<p>Working with threads always feels hazardous to me.</p><p>Non-determinism limits how much we can exercise with simple tests. Stress tests can shake out some bugs, but they’re slow and potentially flaky. <a href="https://publicobject.com/2022/03/14/uncertainty-in-tests/">I don’t like flaky tests</a>.</p><p>So I have a few concurrency patterns that I trust, and I</p>]]></description><link>https://publicobject.com/2026/07/13/test-set/</link><guid isPermaLink="false">6a5558e572c073324f0c782f</guid><dc:creator><![CDATA[Jesse Wilson]]></dc:creator><pubDate>Mon, 13 Jul 2026 22:22:27 GMT</pubDate><content:encoded><![CDATA[<p>Working with threads always feels hazardous to me.</p><p>Non-determinism limits how much we can exercise with simple tests. Stress tests can shake out some bugs, but they’re slow and potentially flaky. <a href="https://publicobject.com/2022/03/14/uncertainty-in-tests/">I don’t like flaky tests</a>.</p><p>So I have a few concurrency patterns that I trust, and I use ’em a lot. <code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/concurrent/atomic/AtomicReference.html">AtomicReference</a></code> is one of them. It’s got a lot of concurrency power and a easy-enough API. I can make sense of programs that use <code>AtomicReference</code>.</p><p>The drawback of <code>AtomicReference</code> is that I usually need a while loop to update it. The atomic <code>compareAndSet()</code> function returns false if my thread loses a race and must retry. After writing a whole bunch of these tricky loops yesterday, I factored out a helper <code>testAndSet()</code> function in order to split difficult business logic from difficult concurrency code.</p><p>In one situation, my code sets a <code>state</code> variable to <code>Canceled</code>, but only if the current state is cancelable. It must also tell the task it has been canceled.</p><pre><code class="language-kotlin">private val state = AtomicReference&lt;State&gt;(State.Idle)
+
+override fun cancel() {
+  while (true) {
+    val previous = state.get()
+    if (previous is State.Running || previous == State.Idle) {
+      if (!state.compareAndSet(previous, State.Canceled)) {
+        continue // Lost a race.
+      }
+      (previous as? State.Running)
+        ?.callback
+        ?.onFailure(this, IOException("canceled"))
+    }
+    return
+  }
+}</code></pre><p>That loop really complicates this code! And it’s an ugly loop, with a <code>return</code> break out at the bottom. </p><p>Here’s the cleaned up version that uses <code>testAndSet()</code>:</p><pre><code class="language-kotlin">override fun cancel() {
+  val previous = state.testAndSet(
+    condition = { it is State.Running || it == State.Idle },
+    newValue = State.Canceled,
+  )
+  (previous as? State.Running)
+    ?.callback
+    ?.onFailure(this, IOException("canceled"))
+}</code></pre><p>Getting the signature for this was difficult! Once I realized that the function should return the previous value (and not a Boolean), everything snapped into place.</p><p>The <code>testAndSet()</code> code is a tad bit fancy ’cause I’m using <code>tailrec</code> instead of a conventional loop.</p><pre><code class="language-kotlin">/**
+ * Updates this reference to [newValue] if the previous value matches
+ * [condition].
+ *
+ * It is possible that a [condition] is invoked multiple times in a
+ * single call to this function. This will occur if this state object
+ * is updated between fetching previous value and replacing it.
+ *
+ * Returns the previous value. This will always be the replaced value
+ * if the value was updated.
+ */
+internal tailrec fun &lt;T&gt; AtomicReference&lt;T&gt;.testAndSet(
+  newValue: T,
+  condition: (T) -&gt; Boolean,
+): T {
+  val previous = get()
+  if (!condition(previous)) return previous
+  if (compareAndSet(previous, newValue)) return previous
+  return testAndSet(newValue, condition) // Lost a race, retry.
+}
+</code></pre><p>I’m particularly proud of how this small function successfully separates business logic and concurrency logic.</p><p>Programming. It’s fun.</p>]]></content:encoded></item><item><title><![CDATA[Deconstructing OkHttp]]></title><description><![CDATA[<p>I presented this at <a href="https://kotlinconf.com/">KotlinConf</a> on May 22, 2026.</p><figure class="kg-card kg-image-card"><img src="https://publicobject.com/content/images/2026/07/20260522-deconstructing-okhttp.png" class="kg-image"></figure><p>Also available on <a href="https://cdn.publicobject.com/20260522-deconstructing-okhttp.pdf">slides</a>, <a href="https://www.youtube.com/watch?v=dmOrYzS_AKM">YouTube</a>, and <a href="https://speakerdeck.com/swankjesse/deconstructing-okhttp">Speaker Deck</a>.</p><!--kg-card-begin: html--><video controls width="600">
+  <source src="https://cdn.publicobject.com/20260522-deconstructing-okhttp.mp4" type="video/mp4">
+</video>
+<!--kg-card-end: html--><!--kg-card-begin: html--><object width="600" height="500" type="application/pdf" data="https://cdn.publicobject.com/20260522-deconstructing-okhttp.pdf#scrollbar=0&toolbar=0&navpanes=0">
+</object><!--kg-card-end: html--><p>OkHttp is a popular library for making network calls. You might use it directly, or with Ktor, Retrofit, Coil, or gRPC.</p><p>But this is not a talk on how to use OkHttp. Instead,</p>]]></description><link>https://publicobject.com/2026/05/22/deconstructing-okhttp/</link><guid isPermaLink="false">6a47bf3372c073324f0c77fd</guid><category><![CDATA[Presentation]]></category><dc:creator><![CDATA[Jesse Wilson]]></dc:creator><pubDate>Fri, 22 May 2026 12:00:00 GMT</pubDate><content:encoded><![CDATA[<p>I presented this at <a href="https://kotlinconf.com/">KotlinConf</a> on May 22, 2026.</p><figure class="kg-card kg-image-card"><img src="https://publicobject.com/content/images/2026/07/20260522-deconstructing-okhttp.png" class="kg-image"></figure><p>Also available on <a href="https://cdn.publicobject.com/20260522-deconstructing-okhttp.pdf">slides</a>, <a href="https://www.youtube.com/watch?v=dmOrYzS_AKM">YouTube</a>, and <a href="https://speakerdeck.com/swankjesse/deconstructing-okhttp">Speaker Deck</a>.</p><!--kg-card-begin: html--><video controls width="600">
+  <source src="https://cdn.publicobject.com/20260522-deconstructing-okhttp.mp4" type="video/mp4">
+</video>
+<!--kg-card-end: html--><!--kg-card-begin: html--><object width="600" height="500" type="application/pdf" data="https://cdn.publicobject.com/20260522-deconstructing-okhttp.pdf#scrollbar=0&toolbar=0&navpanes=0">
+</object><!--kg-card-end: html--><p>OkHttp is a popular library for making network calls. You might use it directly, or with Ktor, Retrofit, Coil, or gRPC.</p><p>But this is not a talk on how to use OkHttp. Instead, we’ll open up the code and look at its weird and clever implementation details. We’ll see connection lifecycles, cache state machines, and URL decoders. We’ll learn:</p><ul><li>How OkHttp’s own architecture is a stack of interceptors. </li><li>How you can generate certificates for testing HTTPS. </li><li>The extreme effort OkHttp makes for great performance. </li><li>Three different ways to extend OkHttp.</li></ul><p>If you’d like to see some capable and efficient code in Kotlin, this talk is for you.</p>]]></content:encoded></item><item><title><![CDATA[‘Humans use Energy and Water too’]]></title><description><![CDATA[<p>An engineer I admire was lamenting about AI. He said that his new programming agent is excellent at fixing bugs! And all that it costs is a bunch of energy and many litres of water.</p><p>He said that he could also have fixed those same bugs, and that he also</p>]]></description><link>https://publicobject.com/2026/03/07/humanity/</link><guid isPermaLink="false">69ab9d3472c073324f0c7640</guid><dc:creator><![CDATA[Jesse Wilson]]></dc:creator><pubDate>Sat, 07 Mar 2026 04:29:40 GMT</pubDate><content:encoded><![CDATA[<p>An engineer I admire was lamenting about AI. He said that his new programming agent is excellent at fixing bugs! And all that it costs is a bunch of energy and many litres of water.</p><p>He said that he could also have fixed those same bugs, and that he also consumes a bunch of energy and many litres of water.</p><h3 id="wait-what">Wait, What</h3><p>What are we doing here? Like in the most philosophical, why exist? Is it to love? To serve each other? To nurture and grow?</p><p>I promise you you’re not here on earth to provide fucking shareholder value. Providing shareholder value is a capitalist’s euphemism for transferring power from labour to capital.</p><p>If anything, we’re here to enjoy ourselves, enjoy each other, and to pay it forward if we’re given the opportunity. Find people who are disempowered and empower them.</p><h3 id="humanity">Humanity</h3><p>A person’s value is not economic. A bus driver is not measured by the kilometers driven subtract the sandwiches consumed. The energy and water we each consume aren’t the inputs into a organic machine from which we demand commensurate outputs.</p><p>Being alive and getting a human experience alone justifies the use of those resources.</p><p><em>It’s a surplus</em> if we also fix some software bugs, drive a bus, or raise a family.</p><h3 id="but-capitalism-">But Capitalism!</h3><p>Yes, I admit these are grand ideas in our capitalistic hellscape. Markets want bugs fixed cheap, and software engineers ain’t that. I don’t have new insights here.</p><p>But I do have a request for the participants in the AI discourse. Let’s not dehumanize each other by treating our desire for food &amp; shelter as a liability.</p>]]></content:encoded></item><item><title><![CDATA[Keep Android Open]]></title><description><![CDATA[<p>Google is building a digital lock into Android. It's a very bad idea and I hate it.</p><p>The excellent organizers at <a href="https://keepandroidopen.org">keepandroidopen.org</a> encouraged me to complain to the Competition Bureau of Canada.</p><p>What I sent wasn't well edited but it captures my anger. Please send your own!</p><hr><p>I found</p>]]></description><link>https://publicobject.com/2026/02/21/keep-android-open/</link><guid isPermaLink="false">6999a20bba399d3df623998a</guid><dc:creator><![CDATA[Jesse Wilson]]></dc:creator><pubDate>Sat, 21 Feb 2026 12:29:24 GMT</pubDate><content:encoded><![CDATA[<p>Google is building a digital lock into Android. It's a very bad idea and I hate it.</p><p>The excellent organizers at <a href="https://keepandroidopen.org">keepandroidopen.org</a> encouraged me to complain to the Competition Bureau of Canada.</p><p>What I sent wasn't well edited but it captures my anger. Please send your own!</p><hr><p>I found this website on the Keep Android Open petition site.<br><a href="https://keepandroidopen.org/">https://keepandroidopen.org/</a></p><p>Google built Android as an open platform, and used the promise of that openness to built an ecosystem that had a expectation of the openness continuing. During the critical period where Android was gaining market share, people and companies chose to purchase Android devices and build Android software because this openness gave them agency.</p><p>Google has announced that they are altering the deal. And telling us that we should pray that they don't alter it further. They're requiring Canadians send our IDs and pay fees to them to develop software for the platform we invested in specifically because we didn't have that obligation.</p><p>I would like an intervention where this process change is blocked for Canadian developers and users. In particular Google has the capacity to not enforce this policy on Canadians (either users or developers) and we need to demand that. All it takes is telling Google that this policy change is anti-competitive, and that they must not apply it in Canada.</p><p>It is anti-competitive because it gives Google a technical capacity to block Canadian individuals from using software that Google dislikes, and also the capacity to stop distribution of software that Google doesn't like.</p><p>As one example, they will be vulnerable to being strong-armed by the US government into blocking products that distribute generic pharmaceutical products in Canada to Canadians. Or they may block comedy products that hurt the feelings of their leadership, such as the Beaverton. Or they might block products that speak truth to power.</p><p>They will also have the capacity to block Canadian-made software for defence systems to favour either US alternatives, or more corrupt alternatives. Google is a vendor to the US military and will respond swiftly to financial demands.</p><p>Block this policy change now before they wrap their cold metal hands around our necks.</p>]]></content:encoded></item><item><title><![CDATA[Flattening my Dependency Graph]]></title><description><![CDATA[<p>Rounds has a Kotlin server that integrates a few things:</p><ul><li>PostgreSQL persistence via <a href="https://sqldelight.github.io/sqldelight/latest/">SQLDelight</a> (hosted on <a href="https://planetscale.com/">PlanetScale</a>!)</li><li><a href="https://github.com/webauthn4j/webauthn4j">WebAuthn4J</a> for Passkeys</li><li><a href="https://github.com/Kotlin/kotlinx.html">kotlinx.html</a> for dynamic web pages</li><li><a href="https://ktor.io/">Ktor</a> for HTTP binding</li></ul><p>The service uses six database tables. The business domain tables are <code>Game</code> and <code>GameEvent</code>. Support for auth, sessions, and collaborative</p>]]></description><link>https://publicobject.com/2026/02/03/flattening-my-dependency-graph/</link><guid isPermaLink="false">698145c5ba399d3df6239601</guid><dc:creator><![CDATA[Jesse Wilson]]></dc:creator><pubDate>Tue, 03 Feb 2026 05:28:50 GMT</pubDate><content:encoded><![CDATA[<p>Rounds has a Kotlin server that integrates a few things:</p><ul><li>PostgreSQL persistence via <a href="https://sqldelight.github.io/sqldelight/latest/">SQLDelight</a> (hosted on <a href="https://planetscale.com/">PlanetScale</a>!)</li><li><a href="https://github.com/webauthn4j/webauthn4j">WebAuthn4J</a> for Passkeys</li><li><a href="https://github.com/Kotlin/kotlinx.html">kotlinx.html</a> for dynamic web pages</li><li><a href="https://ktor.io/">Ktor</a> for HTTP binding</li></ul><p>The service uses six database tables. The business domain tables are <code>Game</code> and <code>GameEvent</code>. Support for auth, sessions, and collaborative editing adds <code>Account</code>, <code>Cookie</code>, <code>Passkey</code>, and <code>GameAccess</code>.</p><h2 id="how-many-modules-should-a-program-have">How many modules should a program have?</h2><p>Decomposing code into modules is something I’ve struggled with for a long time.</p><p>One some projects I’ve screwed up by putting too much responsibility into a single module. Big modules are slow to build and test. Their size means they’ll change more frequently and will be rebuilt more frequently. Decomposing them into smaller modules is difficult because it requires introducing abstraction boundaries where there aren’t any. Consumers of big modules also suffer because they drag in unwanted behavior.</p><p>On other projects I’ve made the opposite mistake by having too many modules. Each module requires its own build file, where I paste repetitive configuration. I get particularly frustrated when a new feature depends on multiple too-small modules: do I introduce a new dependency between these modules? Or do I introduce yet another module that depends on the others? Consumers of my modules choose what they want à la carte, but must write verbose build files in the process.</p><h2 id="ralf-s-scheme">Ralf’s Scheme</h2><p>Ralf Wondratschek <a href="https://ralf-wondratschek.com/presentation/android-at-scale-at-square.html">presented a pattern</a> that was critical in decomposing the Square POS Android app. Each feature starts with three modules: </p><ul><li><code>public</code>: the feature’s public API interfaces and value objects.</li><li><code>impl</code>: the feature’s implementation classes. It provides service objects that implement the public API.</li><li><code>impl-wiring</code>: dependency injection glue that binds the interfaces in <code>public</code> to their implementations in <code>impl</code>.</li></ul><p>The full set of features are assembled together into an executable by an <code>app</code> module that depends on all of the <code>impl-wiring</code> modules. </p><p>Ralf also introduced a strict rule: projects can’t depend on each other’s <code>impl</code> and <code>impl-wiring</code> modules; they may only depend on each other’s <code>public</code> modules. </p><p>This scheme requires a lot of setup! But it yields compelling benefits: </p><ul><li>All <code>impl</code> modules can build in parallel! </li><li>Changes to one <code>impl</code> module never causes other <code>impl</code> modules to rebuild. The build caches get lots of hits!</li></ul><p>It’s simple and scalable and I wish I’d come up with it. Here’s what the scheme looks like for Rounds’ server. I’m using different words ’cause I dislike the word <em>impl, </em>and I put my wiring in the implementation module. I’m not using a dependency injection framework yet!</p><pre><code>server
+ |-- accounts
+ |   |-- api
+ |   '-- real
+ |-- games
+ |   |-- api
+ |   '-- real
+ |-- passkeys
+ |   |-- api
+ |   '-- real
+ |-- server-development
+ |-- server-staging
+ '-- server-production</code></pre><p>The last 3 <code>server-*</code> modules build executables for each environment that Rounds runs in. Each depends on all of the <code>real</code> modules.</p><p>The <code>games/api</code> module depends on <code>accounts/api</code> because each <code>GameAccess</code> entity has an associated <code>AccountId</code>. Similarly, <code>accounts/api</code> depends on <code>passkeys/api</code> for <code>PasskeyId</code>.</p><h2 id="must-go-flatter">Must Go Flatter</h2><p>Most of the code is in <code>real</code> modules, and most of the code can build in parallel. </p><p>But I dislike dependencies between <code>api</code> modules. They build sequentially because there’s a dependency chain spanning them. I also have to carefully avoid creating a dependency cycle between these: it’s arbitrary that <code>accounts/api</code> depends on <code>passkeys/api</code> and not vice-versa!</p><p>When I look closer, the dependencies between my <code>api</code> modules is limited: I’ve got typesafe ID classes (<code>AccountId</code>, <code>PasskeyId</code>, etc.) and I reference these in my service interfaces. The fix is simple: introduce a new <code>identifiers</code> module with just that stuff:</p><pre><code>server
+ |-- accounts
+ |   |-- api
+ |   '-- real
+ |-- games
+ |   |-- api
+ |   '-- real
+ |-- identifiers
+ |-- passkeys
+ |   |-- api
+ |   '-- real
+ |-- server-development
+ |-- server-staging
+ '-- server-production</code></pre><p>Now the various <code>*-api</code> modules depend on <code>identifiers</code>, and it defines simple value objects for all of my features:</p><pre><code class="language-kotlin">package app.rounds.identifiers
+
+data class AccountId(val id: Long)
+
+data class CookieId(val id: Long)
+
+data class GameAccessId(val id: Long)
+
+data class GameEventId(val id: Long)
+
+data class GameId(val id: Long)
+
+data class PasskeyId(val id: Long)</code></pre><p>The net result is a module dependency graph with nice symmetry and practical benefits.</p>]]></content:encoded></item><item><title><![CDATA[Dynamic Tints with CSS and Kotlin/JS]]></title><description><![CDATA[<p>I’ve been trying to build a <em>remarkable</em> UI for <a href="https://rounds.app">Rounds.app</a>. One feature that turned out quite well is tinting the game name &amp; menu bar icons when the winner changes.</p><p>In this recording you can see colors change when I toggle the win condition:</p><figure class="kg-card kg-image-card kg-card-hascaption"><img src="https://publicobject.com/content/images/2026/01/tints.gif" class="kg-image"><figcaption>The title color changes</figcaption></figure>]]></description><link>https://publicobject.com/2026/01/30/css-tints/</link><guid isPermaLink="false">697d30cfba399d3df62394f5</guid><dc:creator><![CDATA[Jesse Wilson]]></dc:creator><pubDate>Fri, 30 Jan 2026 23:12:23 GMT</pubDate><content:encoded><![CDATA[<p>I’ve been trying to build a <em>remarkable</em> UI for <a href="https://rounds.app">Rounds.app</a>. One feature that turned out quite well is tinting the game name &amp; menu bar icons when the winner changes.</p><p>In this recording you can see colors change when I toggle the win condition:</p><figure class="kg-card kg-image-card kg-card-hascaption"><img src="https://publicobject.com/content/images/2026/01/tints.gif" class="kg-image"><figcaption>The title color changes when the winner changes</figcaption></figure><p>I’ve got a two CSS classes, <code>tinted</code> and <code>tintedDefault</code> for the game name. I’m using a CSS transition to animate color changes:</p><pre><code class="language-css">.tinted {
+  transition: color 300ms linear;
+}
+
+.tintedDefault {
+  color: #ffffff;
+}
+</code></pre><p>By using a CSS class, any element that’s declared as tinted will automatically receive tints. For example, the title:</p><pre><code class="language-html">  &lt;div class="title tinted tintedDefault"&gt;Calico&lt;/div&gt;</code></pre><p>Next I need to dynamically add a CSS rule. I’m using Kotlin/JS so it’s easy to hook up the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/adoptedStyleSheets">adoptedStyleSheets</a> API:</p><pre><code class="language-kotlin">private var adoptedStyleSheet: CSSStyleSheet? = null
+  set(value) {
+    field = value
+    val array = js("[]")
+    if (value != null) {
+      array.push(value)
+    }
+    document.asDynamic().adoptedStyleSheets = array
+  }</code></pre><p>To call it, I build a stylesheet rule from a string:</p><pre><code class="language-kotlin">val colorOrDefault = color ?: Colors.DefaultThemeColor
+val cssStyleSheet: CSSStyleSheet = js("""new CSSStyleSheet()""")
+cssStyleSheet.insertRule(
+  rule = """
+    .tinted {
+      color: ${colorOrDefault.css()} !important;
+      opacity: 1 !important;
+    }
+    """,
+  index = 0,
+)
+adoptedStyleSheet = cssStyleSheet</code></pre><p>Using <code>!important</code> is important here; it ensures the dynamic tint takes precedent over the default one.</p><p>I remove the tint after a 1,500 ms delay:</p><pre><code class="language-kotlin">resetJob = scope.launch {
+  delay(duration)
+  adoptedStyleSheet = null
+}</code></pre><p>That’s enough to tint the text, but I need another trick to tint the SVG icons. The easiest way I found to recolor an SVG file was a CSS <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/mask">mask</a>. Thankfully my icons are single-color.</p><pre><code class="language-html">&lt;div 
+  class="imageButton tintedBackground tintedBackgroundDefault"
+  style="mask: url('/assets/bottle40x64.svg'); width: 40px; height: 64px"&gt;
+&lt;/div&gt;</code></pre><p>Annoyingly, the dynamic color for masks is the <em>background,</em> so I need a second pair of CSS rules:</p><pre><code class="language-css">.tintedBackground {
+  transition: background-color 300ms linear;
+}
+
+.tintedBackgroundDefault {
+  background-color: #ffffff;
+}
+</code></pre><p>And a second dynamic CSS rule:</p><pre><code class="language-kotlin">cssStyleSheet.insertRule(
+  rule = """
+    .tintedBackground {
+      background-color: ${colorOrDefault.css()} !important;
+      opacity: 1 !important;
+    }
+    """,
+  index = 1,
+)</code></pre><p>The most difficult part of the whole exercise is using restraint. I’m inclined to color everything in bright colors all the time, but that yields a very ugly UI!</p><p>Rounds is my free web app for scoring in-person games. Try it out at <a href="https://rounds.app/">rounds.app</a>.</p>]]></content:encoded></item><item><title><![CDATA[Don’t Block Suspend Functions]]></title><description><![CDATA[<p>Here’s a program that launches 3 jobs. The first runs forever and the other two exchange a value.</p><pre><code class="language-kotlin">@Test
+fun test() = runTest {
+  val channel = Channel&lt;String&gt;()
+
+  val deferredA = async {
+    while (isActive) {
+      delay(1_000)
+    }
+  }
+  val deferredB = async {
+    channel.send("hello")
+  }
+  val deferredC = async {
+    channel.receive()
+  }
+
+  deferredB.await(</code></pre>]]></description><link>https://publicobject.com/2026/01/22/dont-block-suspend-functions/</link><guid isPermaLink="false">69717a3bba399d3df623912c</guid><dc:creator><![CDATA[Jesse Wilson]]></dc:creator><pubDate>Thu, 22 Jan 2026 04:32:49 GMT</pubDate><content:encoded><![CDATA[<p>Here’s a program that launches 3 jobs. The first runs forever and the other two exchange a value.</p><pre><code class="language-kotlin">@Test
+fun test() = runTest {
+  val channel = Channel&lt;String&gt;()
+
+  val deferredA = async {
+    while (isActive) {
+      delay(1_000)
+    }
+  }
+  val deferredB = async {
+    channel.send("hello")
+  }
+  val deferredC = async {
+    channel.receive()
+  }
+
+  deferredB.await()
+  deferredC.await()
+  deferredA.cancel()
+}
+</code></pre><p>Once the useful jobs <em>B</em> and <em>C</em> finish, it cancels job <em>A</em>. The program completes in about 50 milliseconds on my laptop.</p><p>Programs like this are why I adore Kotlin’s coroutines API. I can orchestrate a lot of behaviour with a small amount of code.</p><p>Coroutines are powerful, but they aren’t magic! Jobs achieve concurrency by suspending when they aren’t executing. The whole mechanism can break down if jobs don’t suspend.</p><p>Here’s that program with <code>delay()</code> replaced with <code>sleep()</code>. The two functions have similar semantics but <code>sleep()</code> doesn’t suspend:</p><pre><code class="language-kotlin">@Test
+fun test() = runTest {
+  val channel = Channel&lt;String&gt;()
+
+  val deferredA = async {
+    while (isActive) {
+      Thread.sleep(1_000)
+    }
+  }
+  val deferredB = async {
+    channel.send("hello")
+  }
+  val deferredC = async {
+    channel.receive()
+  }
+
+  deferredB.await()
+  deferredC.await()
+  deferredA.cancel()
+}
+</code></pre><p>This program never finishes! Jobs <em>B</em> and <em>C</em> don’t get a chance to execute and so the <code>await()</code> calls never return.</p><h2 id="preemptive-vs-cooperative-concurrency">Preemptive vs. Cooperative Concurrency</h2><p>Threads implement a preemptive concurrency model. When one thread blocks, the operating system takes the CPU back (it <em>preempts</em> the thread) and gives it to another thread. Such context switches are expensive and so it’s conventional to do coarse-grained concurrency with threads.</p><p>Coroutines implement a cooperative concurrency model. When a coroutine suspends, the dispatcher immediately runs the next coroutine. It’s no problem to have thousands of coroutines so it’s conventional to do fine-grained concurrency in this model.</p><p>Mixing and matching models is bad. When a coroutine blocks, it’s being selfish in a model that requires cooperation. A single blocked coroutine can prevent thousands of other coroutines from executing.</p><p>When I’ve made this mistake, it blows up like a time bomb:</p><ul><li>My server is running smoothly serving thousands of requests per second.</li><li>Some blocking I/O thing that my server uses temporarily slows down. Perhaps my server calls an auth service to check credentials, and that service is redeployed.</li><li>All of my coroutines dispatchers stall, waiting on blocking calls that accumulate faster than they complete. </li><li>My server is wrecked and times out on thousands of requests per second.</li></ul><p>I can mix-and-match models without problems for months, and then a small event can trigger a collapse. There’s a <a href="https://careersatdoordash.com/blog/migrating-from-python-to-kotlin-for-our-backend-services/">DoorDash blog post</a> with details of how this hazard impacted them.</p><h2 id="what-i-m-doing">What I’m Doing</h2><p>Here’s the rules I follow when I use coroutines:</p><ol><li>Never call a blocking function from a suspending function.</li><li>Use <code>Dispatchers.IO</code> to escape the limitations of rule 1. (Making blocking calls on the I/O dispatcher is fine).</li><li>Never call <code>runBlocking()</code>. This rule is much easier to follow now that we can put <code>suspend</code> on <code>main</code>.</li></ol><p>It’s possible to write correct programs that are less strict than this! But I dislike the fragility of code that makes assumptions about the caller’s <code>CoroutineDispatcher</code>.</p><p>Coroutines are rad and you should use ’em.</p>]]></content:encoded></item><item><title><![CDATA[Rounds.app]]></title><description><![CDATA[<p><a href="https://publicobject.com/2012/07/11/rounds-1-9/">In 2012</a>, I published an Android score pad app named Rounds to the Play Store. I was quite proud of it! It used an iPod click wheel-style score entry UI and balanced capability with simplicity.</p><figure class="kg-card kg-image-card kg-card-hascaption"><img src="https://publicobject.com/content/images/2026/01/menu.gif" class="kg-image"><figcaption>Rounds’ animated action bar in 2012</figcaption></figure><p>I joined Square, did a bunch of open source,</p>]]></description><link>https://publicobject.com/2026/01/15/rounds-app/</link><guid isPermaLink="false">696840a2ba399d3df6239050</guid><dc:creator><![CDATA[Jesse Wilson]]></dc:creator><pubDate>Thu, 15 Jan 2026 01:57:01 GMT</pubDate><content:encoded><![CDATA[<p><a href="https://publicobject.com/2012/07/11/rounds-1-9/">In 2012</a>, I published an Android score pad app named Rounds to the Play Store. I was quite proud of it! It used an iPod click wheel-style score entry UI and balanced capability with simplicity.</p><figure class="kg-card kg-image-card kg-card-hascaption"><img src="https://publicobject.com/content/images/2026/01/menu.gif" class="kg-image"><figcaption>Rounds’ animated action bar in 2012</figcaption></figure><p>I joined Square, did a bunch of open source, had a bunch of kids, and got generally busy. Rounds wasn’t broken and I neglected it. But eventually Google kicked it out of the Play Store for lack of updates. I never felt like I had the time to bring it back to life.</p><p>Until now. After 13 years (!) I left Square, and have spent the last two months rebuilding Rounds.</p><figure class="kg-card kg-image-card kg-card-hascaption"><img src="https://publicobject.com/content/images/2026/01/spin-the-bottle.gif" class="kg-image"><figcaption>Rounds’ spin the bottle in 2026</figcaption></figure><p>The old Rounds was an Android app. The new one is a website: <a href="https://rounds.app/">Rounds.app</a>.</p><p>It’s a work in progress:</p><ul><li>The UI only works on mobile</li><li>You can’t delete games</li><li>There are bugs!</li></ul><p>But you can create games, add scores, and share ’em with your people. I’m simultaneously proud of what I’ve got working and enthusiastic to make it better.</p><p>Please give it a try, follow <a href="https://bsky.app/profile/rounds.app">Rounds.app on Bluesky</a>, and send feedback to <a href="mailto:jesse@rounds.app">jesse@rounds.app</a>.</p>]]></content:encoded></item><item><title><![CDATA[Inside Burst’s Test Interceptors]]></title><description><![CDATA[<p>I <a href="https://code.cash.app/burst-test-interceptors">recently posted on the Cash Code Blog</a> announcing Burst’s new test interceptors feature. They are similar to JUnit rules in API and capability.</p><h3 id="a-small-api">A Small API</h3><p>A typical use case is connecting some lifecycle to a test’s execution. Perhaps we want a chess engine to be available</p>]]></description><link>https://publicobject.com/2025/09/06/inside-bursts-test-interceptors/</link><guid isPermaLink="false">68bb9ed3ba399d3df6238dee</guid><dc:creator><![CDATA[Jesse Wilson]]></dc:creator><pubDate>Sat, 06 Sep 2025 04:27:03 GMT</pubDate><content:encoded><![CDATA[<p>I <a href="https://code.cash.app/burst-test-interceptors">recently posted on the Cash Code Blog</a> announcing Burst’s new test interceptors feature. They are similar to JUnit rules in API and capability.</p><h3 id="a-small-api">A Small API</h3><p>A typical use case is connecting some lifecycle to a test’s execution. Perhaps we want a chess engine to be available while a test is running:</p><pre><code class="language-kotlin">class ChessEngineTest {
+  @InterceptTest
+  val chessEngineInterceptor = ChessEngineInterceptor()
+  
+  val chessEngine: ChessEngine
+    get() = chessEngineInterceptor.chessEngine
+
+  @Test
+  fun moveValidation() {
+    assertThat(chessEngine.isLegalMove(E2, E4)).isTrue
+  }
+}</code></pre><p>Writing an interceptor is straightforward:</p><pre><code class="language-kotlin">class ChessEngineInterceptor : TestInterceptor {
+  lateinit var chessEngine: ChessEngine
+
+  override fun intercept(testFunction: TestFunction) {
+    stockfish = StockfishChessEngine()
+    try {
+      testFunction()
+    } finally {
+      stockfish.close()
+    }
+  }
+}</code></pre><p>Critically, the interceptor calls <code>testFunction()</code> to execute the test body. This gives it lots of power:</p><ul><li>It can differentiate test successes (<code>testFunction()</code> returns normally) from test failures (<code>testFunction()</code> throws)</li><li>It can skip tests by not calling <code>testFunction()</code></li><li>It can repeat tests by calling <code>testFunction()</code> in a loop</li><li>It can collect timing metrics by calling <code>testFunction()</code> inside a <code>measureTime()</code> block</li></ul><p>JUnit rules have the same capabilities. JUnit rules are implemented with Java reflection, which is a great fit for both simplicity and capability.</p><h3 id="one-possible-implementation">One Possible Implementation</h3><p>But Burst implements the same behavior without reflection. Burst is a Kotlin Multiplatform library and uses a  compiler plugin to connect interceptors to the tests they execute.</p><p>Here’s a sketch of how Burst could have transformed <code>ChessEngineTest</code> to hook up its single interceptor:</p><pre><code class="language-kotlin">class ChessEngineTest {
+  @InterceptTest
+  val chessEngineInterceptor = ChessEngineInterceptor()
+
+  val chessEngine: ChessEngine
+    get() = chessEngineInterceptor.chessEngine
+
+  @Test
+  fun moveValidation() {
+    chessEngineInterceptor.intercept(
+      object : TestFunction(
+        packageName = "com.publicobject.chess",
+        className = "ChessEngineTest",
+        functionName = "moveValidation",
+      ) {
+        override fun invoke() {
+          assertThat(chessEngine.isLegalMove(E2, E4)).isTrue
+        }
+      }
+    )
+  }
+}
+</code></pre><p>But this isn’t how Burst does it...</p><h3 id="implementation-challenges">Implementation Challenges</h3><p>One test function and one interceptor is no sweat! But we’re building Burst to power a <a href="https://github.com/cashapp/redwood/blob/1ac32fffaa97f69afc14a6f5d7c086ca9b4f5570/redwood-layout-shared-test/src/commonMain/kotlin/app/cash/redwood/layout/AbstractFlexContainerTest.kt#L138">particularly thorough set of tests</a> that have more requirements.</p><p><strong>Multiple interceptors. </strong>We want these to execute in declaration order.</p><p><strong>Inheritance.</strong> We can have interceptors in the base class, and in each subclass. When a test function runs we want to execute<em> </em>all the interceptors. Different subclasses could declare different interceptors!</p><pre><code class="language-kotlin">abstract class AbstractChessEngineTest {
+  @InterceptTest
+  abstract val engineInterceptor: ChessEngineInterceptor
+
+  val chessEngine: ChessEngine
+    get() = engineInterceptor.chessEngine
+
+  @Test
+  fun moveValidation() {
+    assertThat(chessEngine.isLegalMove(E2, E4)).isTrue
+  }
+}
+
+class StockfishChessEngineTest : AbstractChessEngineTest() {
+  override val engineInterceptor = StockfishEngineInterceptor()
+}
+
+class GenerativeAiChessEngineTest : AbstractChessEngineTest() {
+  override val engineInterceptor = StockfishEngineInterceptor()
+
+  @InterceptTest
+  private val flakyTestInterceptor = FlakyTestInterceptor()
+}
+</code></pre><p>In this example, <code>moveValidation()</code> runs with one interceptor in <code>StockfishChessEngineTest</code>, and two in <code>GenerativeAiChessEngineTest</code>.</p><p><strong>Module isolation.</strong> Each file in our test’s class hierarchy can be compiled independently. We can introduce a new interceptor in the base class without recompiling the subclass, or vice-versa.</p><h3 id="the-actual-implementation">The Actual Implementation</h3><p>Each test that defines interceptors aggregates those interceptors up into its own <code>intercept()</code> function, that calls them in the appropriate order.</p><p>If the superclass has interceptors, we call its <code>intercept</code> first, passing the subclass stuff as an argument.</p><p>The net effect is that we get to apply a chain-of-responsibility pattern for each interceptor in a test, and apply that pattern again for each class in the type hierarchy.</p><h3 id="check-it-out">Check it out</h3><p>I had a lot of fun finding a way to build this thing that’d have ‘reflection-like behavior’ without any reflection.</p><p><a href="https://github.com/cashapp/burst">Get Burst on GitHub</a>.</p>]]></content:encoded></item><item><title><![CDATA[Coroutines Party Tricks]]></title><description><![CDATA[<p>I presented this at Droidcon NYC on June 25, 2025.</p><figure class="kg-card kg-image-card"><img src="https://publicobject.com/content/images/2025/07/20250625-coroutines-party-tricks.png" class="kg-image"></figure><p>Available as <a href="https://github.com/swankjesse/coroutines-party-tricks">code</a>, <a href="https://cdn.publicobject.com/20250625-coroutines-party-tricks.mp4">video</a>, <a href="https://cdn.publicobject.com/20250625-coroutines-party-tricks.pdf">slides</a>, <a href="https://www.droidcon.com/2025/07/23/coroutines-party-tricks/">Droidtube</a>, &amp; <a href="https://speakerdeck.com/swankjesse/coroutines-party-tricks">Speaker Deck</a>.</p><!--kg-card-begin: html--><video controls width="600">
+  <source src="https://cdn.publicobject.com/20250625-coroutines-party-tricks.mp4" type="video/mp4">
+</video>
+
+<!--kg-card-end: html--><hr><!--kg-card-begin: html--><object width="600" height="500" type="application/pdf" data="https://cdn.publicobject.com/20250625-coroutines-party-tricks.pdf#scrollbar=0&toolbar=0&navpanes=0">
+</object>
+<!--kg-card-end: html--><hr><p>Coroutines are an important tool in the Android developer’s toolbox. We use 'em to background our tasks, to parallelize our work, and to gracefully cancel operations.</p><p>This is not a</p>]]></description><link>https://publicobject.com/2025/06/25/coroutines-party-tricks/</link><guid isPermaLink="false">688b5825ba399d3df6238dba</guid><category><![CDATA[Presentation]]></category><dc:creator><![CDATA[Jesse Wilson]]></dc:creator><pubDate>Wed, 25 Jun 2025 12:00:00 GMT</pubDate><content:encoded><![CDATA[<p>I presented this at Droidcon NYC on June 25, 2025.</p><figure class="kg-card kg-image-card"><img src="https://publicobject.com/content/images/2025/07/20250625-coroutines-party-tricks.png" class="kg-image"></figure><p>Available as <a href="https://github.com/swankjesse/coroutines-party-tricks">code</a>, <a href="https://cdn.publicobject.com/20250625-coroutines-party-tricks.mp4">video</a>, <a href="https://cdn.publicobject.com/20250625-coroutines-party-tricks.pdf">slides</a>, <a href="https://www.droidcon.com/2025/07/23/coroutines-party-tricks/">Droidtube</a>, &amp; <a href="https://speakerdeck.com/swankjesse/coroutines-party-tricks">Speaker Deck</a>.</p><!--kg-card-begin: html--><video controls width="600">
+  <source src="https://cdn.publicobject.com/20250625-coroutines-party-tricks.mp4" type="video/mp4">
+</video>
+
+<!--kg-card-end: html--><hr><!--kg-card-begin: html--><object width="600" height="500" type="application/pdf" data="https://cdn.publicobject.com/20250625-coroutines-party-tricks.pdf#scrollbar=0&toolbar=0&navpanes=0">
+</object>
+<!--kg-card-end: html--><hr><p>Coroutines are an important tool in the Android developer’s toolbox. We use 'em to background our tasks, to parallelize our work, and to gracefully cancel operations.</p><p>This is not a talk about that reasonable coroutines use.</p><p>Instead, we’ll do unreasonable, forbidden things. We’ll study the implementation details of coroutines, scopes, and contexts. Once that foundation is established, we’ll start ‘thinking in coroutines’ and break our brains a bit!</p><p>We’ll cover:</p><p>💣 Making I/O slower with <code>suspend</code><br>💣 Turning code inside-out<br>💣 Using reflection with coroutines<br>💣 Treating the user as a function</p><p>If you're willing to suspend disbelief, this talk is for you.</p>]]></content:encoded></item><item><title><![CDATA[UIViewPropertyAnimator is Too Cute]]></title><description><![CDATA[<p>I was using the old <code>UIView</code> APIs when I found some code that broke my brain. Here’s Swift code to animates a <code>UIButton</code> from opaque to transparent over one second.</p><pre><code class="language-Swift">let button = ...
+let animateOut = UIViewPropertyAnimator(duration: 1.0, curve: .easeInOut) {
+  print("2 alpha=\(button.alpha)")
+  button.alpha = 0.0</code></pre>]]></description><link>https://publicobject.com/2025/01/26/uiviewpropertyanimator/</link><guid isPermaLink="false">679680f27cfbdb168acd4440</guid><dc:creator><![CDATA[Jesse Wilson]]></dc:creator><pubDate>Sun, 26 Jan 2025 21:04:55 GMT</pubDate><content:encoded><![CDATA[<p>I was using the old <code>UIView</code> APIs when I found some code that broke my brain. Here’s Swift code to animates a <code>UIButton</code> from opaque to transparent over one second.</p><pre><code class="language-Swift">let button = ...
+let animateOut = UIViewPropertyAnimator(duration: 1.0, curve: .easeInOut) {
+  print("2 alpha=\(button.alpha)")
+  button.alpha = 0.0
+  print("3 alpha=\(button.alpha)")
+}
+
+print("1 alpha=\(button.alpha)")
+animateOut.startAnimation()
+print("4 alpha=\(button.alpha)")</code></pre><p>It prints the button’s <code>alpha</code> four times:</p><ol><li>Before starting the animation</li><li>Before setting <code>alpha</code> to <code>0.0</code></li><li>After setting <code>alpha</code> to <code>0.0</code></li><li>After starting the animation</li></ol><p>Here’s the output:</p><pre><code>1 alpha=1.0
+2 alpha=1.0
+3 alpha=0.0
+4 alpha=0.0</code></pre><p>And here’s it all running in the simulator:</p><!--kg-card-begin: html--><video controls width="600">
+  <source src="https://cdn.publicobject.com/20250126-animate-out.mp4" type="video/mp4">
+</video>
+<!--kg-card-end: html--><p></p><h3 id="the-pixels-don-t-match-the-properties">The pixels don’t match the properties</h3><p>The value of <code>button.alpha</code> is 0.0 when <code>startAnimation()</code> returns, and remains at 0.0 forever. But the actual drawn pixels are different! Over the one-second animation the pixels smoothly transition from 1.0 to 0.0.</p><p>I added code to print <code>button.alpha</code> on every frame: it printed 0.0 each time.</p><p>It’s bananas that the <code>alpha</code> property doesn’t match the drawn pixels!</p><h3 id="state-capture">State capture</h3><p>I’m more familiar with Android’s animation code. Instead of directly assigning properties to their target values as above (<code>button.alpha = 0.0</code>), Android requires me to use <code>Property</code> objects, like <code>View.ALPHA</code>:</p><pre><code>val animateOut = ObjectAnimator.ofFloat(button, View.ALPHA, 0f)</code></pre><p>For each property I want to animate, I need to find its <code>Property</code> object or create one. Android uses it to read the initial value and to write an update for each frame.</p><p>But hang on a sec... how does iOS do capture the initial value? Somehow <code>UIViewPropertyAnimator</code> figures out the initial value of each animated property. It also keeps track of those values somewhere. I don’t know how this works.</p><h3 id="the-pixels-don-t-match-the-properties-again">The pixels don’t match the properties, again</h3><p>This whole API is such a curiosity! What happens if I change the property while it’s being animated?</p><pre><code class="language-Swift">...
+animateOut.startAnimation()
+print("4 alpha=\(button.alpha)")
+button.alpha = 1.0
+print("5 alpha=\(button.alpha)")</code></pre><!--kg-card-begin: html--><video controls width="600">
+  <source src="https://cdn.publicobject.com/20250126-animate-out-back-again.mp4" type="video/mp4">
+</video>
+<!--kg-card-end: html--><p></p><p>So when the animation completes, the value I set takes effect. I suspect the animation <em>overrides</em> the actual property while it’s running.</p><h3 id="only-certain-properties">Only certain properties</h3><p>What happens if I animate the tint color too?</p><pre><code>...
+let animateOut = UIViewPropertyAnimator(duration: 1.0, curve: .easeInOut) {
+  print("2 alpha=\(button.alpha)")
+  button.alpha = 0.0
+  button.tintColor = .red
+  print("3 alpha=\(button.alpha)")
+}
+...</code></pre><!--kg-card-begin: html--><video controls width="600">
+  <source src="https://cdn.publicobject.com/20250126-animate-out-back-red.mp4" type="video/mp4">
+</video>
+<!--kg-card-end: html--><p></p><p>The color changes instantly, and the alpha animates over a second. Yuck.</p><h3 id="too-cute">Too Cute</h3><p>The <code>UIViewPropertyAnimator</code> API can do amazing and powerful things! But it’s built on mechanisms that I can’t use. And because there’s no source code to browse, I can’t study it to learn how it works.</p><h3 id="update-an-hour-later">UPDATE, AN HOUR LATER</h3><p>Khaos Tian, who knows iOS better than I do, read this post and <a href="https://mastodon.tz.is/@khaost/113897021837820912">referred me</a> to <a href="https://developer.apple.com/documentation/quartzcore/calayer/presentation()">CALayer.presentation()</a>. That API holds properties during an animation. Super cool!</p><p>(I’m still trying to figure out how the accessing <code>alpha</code> inside a <code>UIViewPropertyAnimator</code> block creates a property animation.)</p>]]></content:encoded></item><item><title><![CDATA[Try Something Simpler]]></title><description><![CDATA[<p>The late <a href="https://joearms.github.io/">Joe Armstrong</a> had a <a href="https://www.youtube.com/watch?v=TTM_b7EJg5E">great rule</a> for error handling that stuck with me.</p><blockquote>‘If you can’t do what you want to do try to do something simpler’</blockquote><p>I was thinking about this recently. I was writing code to embed resource files in an iOS application binary. Here’</p>]]></description><link>https://publicobject.com/2025/01/05/try-something-simpler/</link><guid isPermaLink="false">6779b4257cfbdb168acd4140</guid><dc:creator><![CDATA[Jesse Wilson]]></dc:creator><pubDate>Sun, 05 Jan 2025 05:38:25 GMT</pubDate><content:encoded><![CDATA[<p>The late <a href="https://joearms.github.io/">Joe Armstrong</a> had a <a href="https://www.youtube.com/watch?v=TTM_b7EJg5E">great rule</a> for error handling that stuck with me.</p><blockquote>‘If you can’t do what you want to do try to do something simpler’</blockquote><p>I was thinking about this recently. I was writing code to embed resource files in an iOS application binary. Here’s my first draft:</p><pre><code class="language-swift">let embeddedDir = OkioPath.companion.toPath(
+  Bundle.pizzaResources.resourcePath!, 
+  normalize: false
+)</code></pre><p>The <code>!</code> in this sample applies Armstrong’s rule:</p><ol><li>Attempt what I want: Try to load the resource path.</li><li>I can’t, because the <code>resourcePath</code> is nil.</li><li>Try to do something simpler: crash the app.</li></ol><p>The iOS developers I work with don’t like <code>!</code>, or anything else that could crash the app. When I get my Swift experts to review code that uses <code>!</code>, they always recommended I replace <code>!</code> with <code>if let</code> for a graceful recovery.</p><pre><code class="language-swift">let embeddedDir: OkioPath
+if let resourcePath = Bundle.pizzaResources.resourcePath {
+  embeddedDir = OkioPath.companion.toPath(resourcePath, normalize: false)
+} else {
+  // Fail silently. We won't find the resources, but we'll keep going.
+  embeddedDir = OkioFileSystem.Companion.shared.SYSTEM_TEMPORARY_DIRECTORY
+}</code></pre><p>My peers and I value different things.</p><p><strong>I want code that fails fast.</strong> Not being able to load resources should never happen. If it does the system is in an unexpected &amp; untested state. We should not silently recover.</p><p><strong>They want code that doesn’t crash.</strong> Every day as a software engineer I see things that are never supposed to happen. Why should I have the hubris to claim something will never happen?</p><p>A hazard of mobile apps is that deploying fixes takes forever. I’ll be in big trouble if Apple ships an iOS update that changes the API. I have to fix the bug, an app reviewer has to approve it, and each of my users needs to get the update.</p><p>Ugh.</p>]]></content:encoded></item><item><title><![CDATA[Testing safe area insets on iOS]]></title><description><![CDATA[<p>I’m adding edge-to-edge UI support in Redwood. My code asks the host platform how much of the screen is consumed by system bars and notches and things, and it returns us a measurement like ‘40 pixels at the top + 10 pixels at the bottom’.</p><p>The iOS code to handle</p>]]></description><link>https://publicobject.com/2024/11/20/testing-safe-area-insets-on-ios/</link><guid isPermaLink="false">673e37927cfbdb168acd4048</guid><dc:creator><![CDATA[Jesse Wilson]]></dc:creator><pubDate>Wed, 20 Nov 2024 20:04:48 GMT</pubDate><content:encoded><![CDATA[<p>I’m adding edge-to-edge UI support in Redwood. My code asks the host platform how much of the screen is consumed by system bars and notches and things, and it returns us a measurement like ‘40 pixels at the top + 10 pixels at the bottom’.</p><p>The iOS code to handle this is simple:</p><pre><code class="language-kotlin">class RedwoodUIView : UIStackView(cValue { CGRectZero }) {
+  init {
+    this.setInsetsLayoutMarginsFromSafeArea(false) // Handle insets manually.
+  }
+
+  override fun safeAreaInsetsDidChange() {
+    super.safeAreaInsetsDidChange()
+    handleNewInsets(safeAreaInsets)
+  }
+  
+  private fun handleNewInsets(safeAreaInsets: CValue&lt;UIEdgeInsets&gt;) {
+    ...
+  }
+}</code></pre><p>But writing the test was difficult. It took me two days to figure this out.</p><pre><code class="language-kotlin">  @Test
+  fun testSafeArea() {
+    val redwoodUIView = RedwoodUIView()
+    val viewController = object : UIViewController(null, null) {
+      override fun loadView() {
+        view = redwoodUIView
+      }
+    }
+
+    val window = UIWindow(
+      CGRectMake(0.0, 0.0, 390.0, 844.0), // iPhone 14.
+    )
+    window.setHidden(false) // Necessary to propagate additionalSafeAreaInsets.
+    window.rootViewController = viewController
+
+    viewController.additionalSafeAreaInsets =
+      UIEdgeInsetsMake(10.0, 20.0, 30.0, 40.0)
+  }</code></pre><p>To populate <code>safeAreaInsets</code> on a <code>UIView</code>:</p><ul><li>The <code>UIView</code> must be in a <code>UIViewController</code>. There isn’t a direct way to manipulate its <code>safeAreaInsets</code>.</li><li>That <code>ViewController</code> must also be in a visible <code>UIWindow</code>. The <code>UIViewController</code> won’t propagate insets unless it’s in a view hierarchy with a visible window.</li></ul><p>I spent so long trying and failing to get it working with a standalone <code>UIViewController</code>. That was so frustrating! Eventually I found <a href="https://stackoverflow.com/a/55620009">this StackOverflow sample</a> that happened to have a <code>UIWindow</code>, and I tried that and it worked.</p><pre><code class="language-Swift">func test_presentationOfViewController() {
+  let window = UIWindow(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
+  window.rootViewController = sut
+  window.makeKeyAndVisible()
+
+  ...
+}</code></pre><p>Well, it <em>kind of</em> worked. It worked locally. But when I pushed my test to run on GitHub actions, it failed hard:</p><pre><code>:sample:iosSimulatorArm64Test: Test running process exited unexpectedly.
+Current test: testSafeArea
+Process output:
+  Child process terminated with signal 5: Trace/BPT trap</code></pre><p>What the heck is a <code>Trace/BPT trap</code>?! I couldn’t find more details on what broke.</p><p>With more grinding and experimentation I found that my tests pass on CI once I replaced <code>window.makeKeyAndVisible()</code> with <code>window.setHidden(false)</code>.</p><p>The whole exercise reminds me that I value testability, and that the iOS platform engineers... don’t.</p><h3 id="update-a-few-hours-later">UPDATE, A FEW HOURS LATER</h3><p><a href="https://github.com/tylerwbell">Tyler Bell</a>, a colleague who knows iOS better than I do, read this post and shared a simpler solution. Override the superview’s <code>safeAreaInsets()</code> function and request a layout:</p><pre><code class="language-kotlin">  class InsetsContainer : UIView(cValue { CGRectZero }) {
+    var subviewSafeAreaInsets = cValue { UIEdgeInsetsZero }
+      set(value) {
+        field = value
+        setNeedsLayout()
+        layoutIfNeeded()
+      }
+
+    override fun safeAreaInsets() = subviewSafeAreaInsets
+  }
+
+  @Test
+  fun testSafeArea() {
+    val insetsContainer = InsetsContainer()
+    val redwoodUIView = RedwoodUIView()
+    insetsContainer.addSubview(redwoodUIView)
+
+    insetsContainer.subviewSafeAreaInsets =
+      UIEdgeInsetsMake(10.0, 20.0, 30.0, 40.0)
+  }</code></pre><p>Yay!</p>]]></content:encoded></item><item><title><![CDATA[Bad Luck Tickets]]></title><description><![CDATA[<p>My son’s swim meet is coming up. If he’s healthy, he’ll compete.</p><p>My daughter’s hockey team has a game coming up. League rules say they must forfeit if they have fewer than 10 players. There’s only 10 girls on the roster so they need everyone</p>]]></description><link>https://publicobject.com/2024/11/13/bad-luck-tickets/</link><guid isPermaLink="false">673414e67cfbdb168acd3d90</guid><dc:creator><![CDATA[Jesse Wilson]]></dc:creator><pubDate>Wed, 13 Nov 2024 05:08:26 GMT</pubDate><content:encoded><![CDATA[<p>My son’s swim meet is coming up. If he’s healthy, he’ll compete.</p><p>My daughter’s hockey team has a game coming up. League rules say they must forfeit if they have fewer than 10 players. There’s only 10 girls on the roster so they need everyone to be healthy to compete.</p><p>In either situation, a single failure will fail the lot. With swimming there’s just one chance to get unlucky, whereas with hockey there’s ten. I’ve been thinking of these ‘opportunities to get unlucky’ as <em>bad luck tickets</em>.</p><h3 id="i-see-bad-luck-tickets-everywhere-">I see bad luck tickets everywhere.</h3><p>When I was working on smaller teams, the leadership was very open and transparent with their plans and decisions. On larger teams, internal news often leaks externally! Share your plans with 1,000 people and you’ve got 1,000 chances to get unlucky.</p><p>I was impressed – but not surprised – by this year’s <a href="https://arstechnica.com/security/2024/04/what-we-know-about-the-xz-utils-backdoor-that-almost-infected-the-world/">xz supply chain attack</a>. If our software depends on 10 open source libraries, that’s 10 chances to be compromised by a rogue maintainer. Depend on 1,000 libraries and we’ve got 1,000 bad luck tickets.</p><p>One of the backend services at my job does <a href="https://code.cash.app/cross-shard-queries-lookup-tables">fan-out queries</a> on its sharded database. Suppose you’d like to know how much money it transferred yesterday:</p><pre><code class="language-SQL">SELECT SUM(amount_cents)
+FROM transactions
+WHERE DATE(sent_at) = DATE('2024-11-11');</code></pre><p>On a database with 64 shards, the query is executed on each shard and then aggregated. Each shard has an opportunity to fail.</p><h3 id="the-math-is-weird-">The math is weird.</h3><p>Our database executes fan-out queries in parallel. That’s rad! But the latency of the aggregate query is the <em>maximum</em> latency of the 64 individual shard queries. If one shard is hot because the traffic isn’t balanced, that’ll degrade all of the aggregate queries.</p><p>Suppose an action fails on 1 in 1,000,000 attempts. If we attempt it 1,000 times, there’s a 0.1% chance of at least one failure within those attempts<a href="https://www.wolframalpha.com/input?i=1+-+%28%281000000-1%29%2F1000000%29%5E1000">¹</a>.</p><p>Failures will probably correlate (and the successes will too). Hockey players don’t get sick independently! They exhaust themselves at the same tournaments. And they share their water bottles even though I keep telling them it’s gross and they should cut it out.</p><h3 id="limit-your-bad-luck-">Limit your bad luck.</h3><p>It’s difficult to build robust systems with fallible parts, but fallible parts is all there is. I aspire to do more with less.</p>]]></content:encoded></item><item><title><![CDATA[Writing For Me]]></title><description><![CDATA[<p>I’ve been posting on this website throughout my career. Many posts are motivated by my own suffering! These go like this:</p><ol><li>I learned a thing.</li><li>The hard way.</li><li>It sucked.</li><li>Please avoid making the same mistake.</li></ol><p>In other posts, there’s a discussion on something and I feel compelled</p>]]></description><link>https://publicobject.com/2024/11/07/writing-for-me/</link><guid isPermaLink="false">672c32647cfbdb168acd3c8a</guid><dc:creator><![CDATA[Jesse Wilson]]></dc:creator><pubDate>Thu, 07 Nov 2024 04:29:08 GMT</pubDate><content:encoded><![CDATA[<p>I’ve been posting on this website throughout my career. Many posts are motivated by my own suffering! These go like this:</p><ol><li>I learned a thing.</li><li>The hard way.</li><li>It sucked.</li><li>Please avoid making the same mistake.</li></ol><p>In other posts, there’s a discussion on something and I feel compelled to broadcast my opinion! Here’s a 2008 post about <a href="https://publicobject.com/2008/07/01/strict_vs_forgiving_apis/">strict vs. forgiving APIs</a>, where I declare my preference for strict APIs.</p><p><strong>I didn’t anticipate being bound by my own posts.</strong></p><p>But when I <em>wrote it down</em> that I prefer strict APIs, that fleeting preference became more of a principle. Now when I write code that doesn’t reject bad inputs, I hear younger me saying tisk-tisk.</p><p>When I code up something and I don’t want to write a test because it’ll be annoying, the <a href="https://publicobject.com/2019/02/17/toehold-test/">Toehold Test</a> haunts me into compliance.</p><p>The worst one is this old <a href="https://publicobject.com/2018/11/17/developer-identity-multiplatform/">Developer Identity &amp; Multiplatform</a> post. In it I obnoxiously claimed that <em>Android Engineers</em> should shed that identity, and replace it with <em>Mobile Engineer</em>. So today I mumble <em>fuuuuck me</em> as I’m using Xcode and Android Studio side-by-side, as I seem to do a lot these days.</p><p>You should write some blog posts.</p>]]></content:encoded></item></channel></rss>
