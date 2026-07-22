@@ -41,12 +41,14 @@ jobs:
             --archive-root archive-worktree
 
       - name: Commit fetched documents when changed
+        id: commit
         shell: bash
         run: |
           set -euo pipefail
           git -C archive-worktree add catalog.json rss/
           if git -C archive-worktree diff --cached --quiet; then
             echo "RSS documents and fetch timestamps are already up to date."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
 
@@ -54,3 +56,13 @@ jobs:
           git -C archive-worktree config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git -C archive-worktree commit -m "archive: fetch RSS feeds"
           git -C archive-worktree push origin HEAD:archive
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Trigger Pages deployment
+        if: steps.commit.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api "repos/${GITHUB_REPOSITORY}/dispatches" \
+            --method POST \
+            --field event_type=archive_updated

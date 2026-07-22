@@ -110,6 +110,28 @@ API Key 等敏感信息必须通过 GitHub Actions Secrets 管理，不得提交
 
 各阅读端共享同一份 Catalog 和 Feed 文档，可以采用不同的页面结构、交互方式和本地状态管理。已读状态、收藏等客户端专属数据不写入公共归档文件。
 
+## GitHub Pages
+
+[`deploy-pages.yml`](./.github/workflows/deploy-pages.yml) 将 `main` 分支的 `site/` 静态页面和 `archive` 分支的数据组合为 GitHub Pages Artifact：
+
+```text
+main/site/ + archive/catalog.json + archive/rss/ + archive/ai/
+                              ↓
+                         Pages Artifact
+                              ↓
+                         GitHub Pages
+```
+
+RSS 拉取工作流成功更新 `archive` 后会发送 `archive_updated` 事件并自动部署 Pages。人工修改 `archive` 后可以从 GitHub Actions 页面手动运行 `Deploy GitHub Pages`。
+
+首次使用时，需要在仓库中选择：
+
+```text
+Settings → Pages → Build and deployment → Source → GitHub Actions
+```
+
+Pages Artifact 是 Workflow 运行期间生成的部署产物，不提交到 `main`、`archive` 或额外的发布分支。
+
 ## 生成 Catalog
 
 本地运行：

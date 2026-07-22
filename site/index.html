@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    <title>Signal Archive</title>
+    <style>
+      :root {
+        font-family: ui-sans-serif, system-ui, sans-serif;
+        color: #202124;
+        background: #f7f8fa;
+      }
+      body {
+        display: grid;
+        min-height: 100vh;
+        margin: 0;
+        place-items: center;
+      }
+      main {
+        width: min(38rem, calc(100% - 3rem));
+        padding: 2rem;
+        border: 1px solid #dfe1e5;
+        border-radius: 1rem;
+        background: #fff;
+        box-shadow: 0 1rem 3rem rgb(0 0 0 / 8%);
+      }
+      h1 { margin-top: 0; }
+      p { line-height: 1.7; }
+      code { overflow-wrap: anywhere; }
+      @media (prefers-color-scheme: dark) {
+        :root { color: #e8eaed; background: #171717; }
+        main { border-color: #3c4043; background: #202124; }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Signal Archive</h1>
+      <p>归档数据已通过 GitHub Pages 发布。</p>
+      <p id="status">正在读取 Catalog…</p>
+    </main>
+    <script>
+      const status = document.querySelector("#status");
+
+      fetch("./data/catalog.json")
+        .then((response) => {
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          return response.json();
+        })
+        .then((catalog) => {
+          const countSources = (nodes) => nodes.reduce(
+            (total, node) => total + (
+              node.type === "category" ? countSources(node.children ?? []) : 1
+            ),
+            0,
+          );
+          status.textContent = `Catalog 已就绪，共包含 ${countSources(catalog.children ?? [])} 个内容源。`;
+        })
+        .catch((error) => {
+          status.textContent = `Catalog 加载失败：${error.message}`;
+        });
+    </script>
+  </body>
+</html>

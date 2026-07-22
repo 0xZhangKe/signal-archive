@@ -1,0 +1,72 @@
+name: Deploy GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - site/**
+      - .github/workflows/deploy-pages.yml
+  repository_dispatch:
+    types:
+      - archive_updated
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v6
+        with:
+          ref: main
+
+      - name: Check out archive
+        uses: actions/checkout@v6
+        with:
+          ref: archive
+          path: archive-data
+
+      - name: Build Pages artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f archive-data/catalog.json
+          mkdir -p _site/data
+          cp -R site/. _site/
+          cp archive-data/catalog.json _site/data/catalog.json
+
+          if [[ -d archive-data/rss ]]; then
+            cp -R archive-data/rss _site/data/rss
+          fi
+          if [[ -d archive-data/ai ]]; then
+            cp -R archive-data/ai _site/data/ai
+          fi
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
