@@ -1,0 +1,56 @@
+name: Fetch RSS
+
+on:
+  repository_dispatch:
+    types:
+      - catalog_updated
+  schedule:
+    - cron: "0 2,8,14,20 * * *"
+      timezone: Asia/Shanghai
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: signal-archive-writer
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Test RSS fetcher
+        run: python3 -m unittest discover -s tests -v
+
+      - name: Check out archive
+        run: |
+          set -euo pipefail
+          git fetch origin archive
+          git worktree add archive-worktree origin/archive
+
+      - name: Fetch RSS documents
+        run: |
+          python3 scripts/fetch_rss.py \
+            --catalog archive-worktree/catalog.json \
+            --archive-root archive-worktree
+
+      - name: Commit fetched documents when changed
+        shell: bash
+        run: |
+          set -euo pipefail
+          git -C archive-worktree add catalog.json rss/
+          if git -C archive-worktree diff --cached --quiet; then
+            echo "RSS documents and fetch timestamps are already up to date."
+            exit 0
+          fi
+
+          git -C archive-worktree config user.name "github-actions[bot]"
+          git -C archive-worktree config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git -C archive-worktree commit -m "archive: fetch RSS feeds"
+          git -C archive-worktree push origin HEAD:archive
