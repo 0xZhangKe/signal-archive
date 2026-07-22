@@ -57,6 +57,8 @@ AI 订阅源将通过 Prompt 列表描述需要采集的主题、范围和输出
 
 API Key 等敏感信息必须通过 GitHub Actions Secrets 管理，不得提交到仓库。
 
+由于 `rss/` 和 `ai/` 保存未经改写的第三方公开内容，其中的示例代码可能包含与凭据格式相似的字符串。项目通过 [`.github/secret_scanning.yml`](./.github/secret_scanning.yml) 将这两个自动生成目录排除在 Secret Scanning 和 push protection 之外，避免归档任务被误报阻断。项目代码、Workflow、OPML 和 Catalog 不在排除范围内，仍接受正常的凭据扫描。
+
 ## Catalog
 
 `archive/catalog.json` 是由 OPML 自动生成的内容导航与来源索引。它保留 OPML 的分类层级，但不复制 OPML 文件，也不要求归档文件夹遵循分类层级。阅读端通过 Catalog 构建导航，再通过 `feedPath` 获取相应的 Feed 文档。
