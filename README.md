@@ -1,6 +1,6 @@
 # Signal Archive
 
-Signal Archive 是一个基于 GitHub Actions 的自动化内容采集与归档项目。项目从标准 RSS/Atom 订阅源和 AI 驱动的自定义订阅源拉取内容，将结果保存到独立的 `archive` 分支，并使用 Git commit 记录每次归档的变化。
+Signal Archive 是一个基于 GitHub Actions 的自动化内容采集与归档项目。项目从标准 RSS/Atom 订阅源和 AI 驱动的自定义订阅源拉取内容，将结果保存到独立的 `archive` 分支，并使用 Git commit 记录每次归档的变化。归档数据可以被 Fread、GitHub Pages 以及其他阅读端共同使用。
 
 ## 分支职责
 
@@ -18,7 +18,7 @@ main
 
 ### `archive`
 
-只保存供 Fread 读取的 Catalog 和归档后的 Feed 文档：
+保存供不同阅读端使用的 Catalog 和归档后的 Feed 文档：
 
 ```text
 archive
@@ -49,13 +49,13 @@ rss/61b927a83d72e9f0.xml
 
 ### AI 自定义订阅源
 
-AI 订阅源将通过 Prompt 列表描述需要采集的主题、范围和输出要求，并调用指定 AI API 获取内容。AI 返回结果也会转换为标准 Feed 文档，使 Fread 能够用同一种方式读取 RSS 和 AI 内容。
+AI 订阅源将通过 Prompt 列表描述需要采集的主题、范围和输出要求，并调用指定 AI API 获取内容。AI 返回结果也会转换为标准 Feed 文档，使不同阅读端能够用统一方式读取 RSS 和 AI 内容。
 
 API Key 等敏感信息必须通过 GitHub Actions Secrets 管理，不得提交到仓库。
 
 ## Catalog
 
-`archive/catalog.json` 是由 OPML 自动生成的 Fread 导航文件。它保留 OPML 的分类层级，但不复制 OPML 文件，也不要求归档文件夹遵循分类层级。
+`archive/catalog.json` 是由 OPML 自动生成的内容导航与来源索引。它保留 OPML 的分类层级，但不复制 OPML 文件，也不要求归档文件夹遵循分类层级。阅读端通过 Catalog 构建导航，再通过 `feedPath` 获取相应的 Feed 文档。
 
 示例：
 
@@ -93,6 +93,16 @@ API Key 等敏感信息必须通过 GitHub Actions Secrets 管理，不得提交
 - `lastContentChangedAt`：归档 Feed 内容最近一次实际变化的时间。
 
 首次生成时两个字段都是 `null`。重新生成 Catalog 时，脚本会根据稳定的 `feedPath` 继承已有时间，避免 OPML 分类或标题变化导致运行状态丢失。
+
+## 阅读端
+
+`archive` 分支提供与具体 UI 无关的数据层，不绑定某一种阅读方式。计划支持的阅读端包括：
+
+- Fread：读取 Catalog 构建分类和订阅源列表，并解析对应 Feed 文档。
+- GitHub Pages：将 Catalog 和 Feed 文档渲染为可以直接浏览的静态网站。
+- 其他客户端或服务：按照相同的数据结构读取、搜索或聚合归档内容。
+
+各阅读端共享同一份 Catalog 和 Feed 文档，可以采用不同的页面结构、交互方式和本地状态管理。已读状态、收藏等客户端专属数据不写入公共归档文件。
 
 ## 生成 Catalog
 
