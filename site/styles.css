@@ -17,6 +17,8 @@
 
 * { box-sizing: border-box; }
 
+[hidden] { display: none !important; }
+
 html,
 body {
   width: 100%;
@@ -285,6 +287,20 @@ a { -webkit-tap-highlight-color: transparent; }
   font-size: 1.25rem;
   font-weight: 600;
   line-height: 1.2;
+}
+
+.list-source-link {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px dashed rgb(41 39 31 / 55%);
+  text-underline-offset: 0.2rem;
+}
+
+.list-source-link:hover,
+.list-source-link:focus-visible {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+  outline: 0;
 }
 
 .count-stamp {

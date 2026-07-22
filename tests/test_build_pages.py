@@ -61,6 +61,7 @@ class BuildPagesTest(unittest.TestCase):
         category = navigation["items"][0]
         self.assertEqual("Technology", category["title"])
         self.assertEqual(["First", "Second"], [item["title"] for item in category["sources"]])
+        self.assertEqual("https://example.com/rss/first.xml", category["sources"][0]["originalUrl"])
         self.assertEqual(2, len(sources))
 
     def test_builds_navigation_lists_and_article_details(self) -> None:

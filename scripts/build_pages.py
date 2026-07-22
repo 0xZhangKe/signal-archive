@@ -94,7 +94,7 @@ def build_navigation(catalog: dict[str, Any]) -> tuple[dict[str, Any], dict[str,
             raise ValueError(f"source {node_title(source)!r} is missing feedPath")
         unique_sources.setdefault(feed_path, source)
         key = short_hash(feed_path)
-        return {
+        view = {
             "type": source.get("type", "rss"),
             "title": node_title(source),
             "feedPath": feed_path,
@@ -102,6 +102,10 @@ def build_navigation(catalog: dict[str, Any]) -> tuple[dict[str, Any], dict[str,
             "lastSuccessfulFetchAt": source.get("lastSuccessfulFetchAt"),
             "lastContentChangedAt": source.get("lastContentChangedAt"),
         }
+        original_url = source.get("originalUrl")
+        if isinstance(original_url, str) and original_url:
+            view["originalUrl"] = original_url
+        return view
 
     for child in children:
         if not isinstance(child, dict):

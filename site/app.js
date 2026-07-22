@@ -21,6 +21,7 @@ const elements = {
   sourceCount: document.querySelector("#source-count"),
   archiveStatus: document.querySelector("#archive-status"),
   listTitle: document.querySelector("#list-title"),
+  listSourceLink: document.querySelector("#list-source-link"),
   articleCount: document.querySelector("#article-count"),
   articleList: document.querySelector("#article-list"),
   loadMore: document.querySelector("#load-more"),
@@ -184,16 +185,30 @@ function renderArticles() {
   }
 }
 
-async function selectNode(node) {
+function updateListTitle(node) {
+  const sourceUrl = node.type !== "category" ? node.originalUrl : null;
+  elements.listTitle.hidden = Boolean(sourceUrl);
+  elements.listSourceLink.hidden = !sourceUrl;
+  if (sourceUrl) {
+    elements.listSourceLink.textContent = node.title;
+    elements.listSourceLink.href = sourceUrl;
+    elements.listSourceLink.title = `Open original feed: ${sourceUrl}`;
+  } else {
+    elements.listTitle.textContent = node.title;
+    elements.listSourceLink.removeAttribute("href");
+  }
+}
+
+async function selectNode(node, { showList = true } = {}) {
   state.activeNode = node;
   state.activeKey = nodeKey(node);
   state.activeArticleId = null;
   state.visibleCount = PAGE_SIZE;
-  elements.listTitle.textContent = node.title;
+  updateListTitle(node);
   elements.articleCount.textContent = "…";
   elements.articleList.innerHTML = '<div class="loading-state"><p>Preparing article list…</p></div>';
   renderCatalog();
-  setMobilePanel("list");
+  if (showList) setMobilePanel("list");
 
   try {
     const response = await fetch(`./${node.listPath}`);
@@ -247,6 +262,9 @@ async function initialize() {
     elements.archiveStatus.textContent = build
       ? `${build.articleCount} articles indexed${build.failedSourceCount ? ` · ${build.failedSourceCount} sources need attention` : ""}`
       : "Archive catalog ready";
+    if (state.navigation.length) {
+      await selectNode(state.navigation[0], { showList: false });
+    }
   } catch (error) {
     elements.archiveStatus.textContent = `Unable to load catalog: ${error.message}`;
     elements.catalog.innerHTML = '<div class="empty-state"><p>The catalog is temporarily unavailable.</p></div>';
