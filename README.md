@@ -1,6 +1,59 @@
-## Signal Archive
-Automatically collect, normalize, and archive information from RSS feeds and AI-powered sources.
+# Signal Archive
 
-## Goal
-Use Github Actions to auto pull content from source where from opml and other source(website\social media\api etc.).
-This content will be saved as files and commit to this repo.
+Signal Archive 是一个基于 GitHub Actions 运行的自动化内容采集与归档项目。它从标准订阅源和 AI 驱动的自定义订阅源中定期拉取内容，将结果保存为仓库内的文件，并通过 Git commit 保留每次归档的完整历史。
+
+## 背景
+
+需要长期关注的信息并不都能通过同一种方式获取：一部分内容以 RSS/Atom 等标准订阅格式发布，可以通过 OPML 统一管理；另一部分内容可能来自网站、社交媒体、API，或者需要根据特定主题进行检索和整理，无法直接放入传统订阅列表。
+
+本项目希望把这些不同来源统一为一套可自动运行、可追溯且便于版本管理的内容归档流程。
+
+## 项目目标
+
+- 使用 OPML 文件管理并拉取 RSS/Atom 等标准订阅源。
+- 支持 AI 驱动的自定义订阅源：维护一个 Prompt 列表，每个 Prompt 描述需要拉取的内容及要求。
+- 根据自定义订阅配置调用指定 AI 服务的 API，尝试检索、整理并返回目标内容。
+- 将不同来源的拉取结果统一保存为仓库内的文件。
+- 每次任务运行后，将本轮新增或更新的全部内容合并到一个 commit 中。
+- 由 GitHub Actions 自动将 commit 推送到指定的远端分支。
+- 利用 Git 历史记录内容变化，使每次采集结果都可查询和追溯。
+
+## 内容来源
+
+### OPML 订阅源
+
+标准订阅源记录在 [`opml.xml`](./opml.xml) 中，主要用于管理 RSS/Atom Feed。任务运行时读取该文件并逐一拉取内容。
+
+### AI 自定义订阅源
+
+自定义订阅源以 Prompt 列表的形式维护。每个 Prompt 对应一个内容采集需求，例如关注的主题、信息范围、时间范围、来源偏好和期望的输出格式。
+
+任务运行时会把 Prompt 发送给指定 AI API，由 AI 尝试完成内容检索与整理。AI 服务、模型和认证信息应通过项目配置及 GitHub Actions Secrets 管理，API Key 等敏感信息不得提交到仓库。
+
+## 预期工作流程
+
+```text
+OPML -> RSS/Atom 拉取 ---------+
+                              |
+Prompt 列表 -> 指定 AI API ----+-> 内容处理 -> 保存为文件
+                                                  |
+                                                  v
+                                      创建单个归档 commit
+                                                  |
+                                                  v
+                                        推送到远端分支
+```
+
+GitHub Actions 可以按计划定时执行，也可以手动触发。一次任务中的所有拉取结果应在文件保存完成后统一提交，避免为每一条内容分别创建 commit。
+
+## 设计原则
+
+- **自动化**：内容拉取、文件保存、提交和推送均由 GitHub Actions 完成。
+- **可追溯**：归档内容作为仓库的一部分保存，并由 Git 记录变化历史。
+- **可扩展**：标准 Feed 与 AI 自定义订阅使用不同的采集方式，但共享后续的保存和提交流程。
+- **安全**：访问令牌和 AI API Key 只保存在 GitHub Actions Secrets 等安全环境中。
+- **可重复运行**：采集流程应尽量避免重复保存相同内容，并能安全处理部分来源拉取失败的情况。
+
+## 当前状态
+
+项目目前包含 OPML 订阅文件，GitHub Actions 自动采集流程及 AI 自定义订阅能力将围绕上述目标逐步实现。
