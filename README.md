@@ -2,6 +2,8 @@
 
 Signal Archive 是一个基于 GitHub Actions 的自动化内容采集与归档项目。项目从标准 RSS/Atom 订阅源和 AI 驱动的自定义订阅源拉取内容，将结果保存到独立的 `archive` 分支，并使用 Git commit 记录每次归档的变化。归档数据可以被 Fread、GitHub Pages 以及其他阅读端共同使用。
 
+[https://0xzhangke.github.io/signal-archive/](https://0xzhangke.github.io/signal-archive/)
+
 ## 分支职责
 
 ### `main`
