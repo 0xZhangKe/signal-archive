@@ -112,7 +112,7 @@ API Key 等敏感信息必须通过 GitHub Actions Secrets 管理，不得提交
 
 ## GitHub Pages
 
-[`deploy-pages.yml`](./.github/workflows/deploy-pages.yml) 将 `main` 分支的 `site/` 静态页面和 `archive` 分支的数据组合为 GitHub Pages Artifact：
+[`deploy-pages.yml`](./.github/workflows/deploy-pages.yml) 使用 [`build_pages.py`](./scripts/build_pages.py) 解析 `archive` 中的 Catalog 与 Feed，并与 `main` 分支的 `site/` 静态页面组合为 GitHub Pages Artifact：
 
 ```text
 main/site/ + archive/catalog.json + archive/rss/ + archive/ai/
@@ -131,6 +131,15 @@ Settings → Pages → Build and deployment → Source → GitHub Actions
 ```
 
 Pages Artifact 是 Workflow 运行期间生成的部署产物，不提交到 `main`、`archive` 或额外的发布分支。
+
+构建阶段会把深层 Category 拍平到所属的一级 Category，并提前生成：
+
+- 一级文件夹及其来源导航。
+- 每个一级文件夹的聚合文章列表。
+- 每个 RSS/AI 来源的文章列表。
+- 经过安全清理的文章详情。
+
+因此，阅读页面选择大型文件夹时不需要在浏览器中临时下载和解析大量 XML。
 
 ## 生成 Catalog
 

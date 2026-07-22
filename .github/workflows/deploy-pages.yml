@@ -6,6 +6,8 @@ on:
       - main
     paths:
       - site/**
+      - scripts/build_pages.py
+      - tests/test_build_pages.py
       - .github/workflows/deploy-pages.yml
   repository_dispatch:
     types:
@@ -36,21 +38,16 @@ jobs:
           ref: archive
           path: archive-data
 
-      - name: Build Pages artifact
-        shell: bash
-        run: |
-          set -euo pipefail
-          test -f archive-data/catalog.json
-          mkdir -p _site/data
-          cp -R site/. _site/
-          cp archive-data/catalog.json _site/data/catalog.json
+      - name: Test Pages builder
+        run: python3 -m unittest discover -s tests -v
 
-          if [[ -d archive-data/rss ]]; then
-            cp -R archive-data/rss _site/data/rss
-          fi
-          if [[ -d archive-data/ai ]]; then
-            cp -R archive-data/ai _site/data/ai
-          fi
+      - name: Build Pages artifact
+        run: |
+          python3 scripts/build_pages.py \
+            --catalog archive-data/catalog.json \
+            --archive-root archive-data \
+            --site-root site \
+            --output _site
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5

@@ -3,63 +3,83 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="color-scheme" content="light dark">
-    <title>Signal Archive</title>
-    <style>
-      :root {
-        font-family: ui-sans-serif, system-ui, sans-serif;
-        color: #202124;
-        background: #f7f8fa;
-      }
-      body {
-        display: grid;
-        min-height: 100vh;
-        margin: 0;
-        place-items: center;
-      }
-      main {
-        width: min(38rem, calc(100% - 3rem));
-        padding: 2rem;
-        border: 1px solid #dfe1e5;
-        border-radius: 1rem;
-        background: #fff;
-        box-shadow: 0 1rem 3rem rgb(0 0 0 / 8%);
-      }
-      h1 { margin-top: 0; }
-      p { line-height: 1.7; }
-      code { overflow-wrap: anywhere; }
-      @media (prefers-color-scheme: dark) {
-        :root { color: #e8eaed; background: #171717; }
-        main { border-color: #3c4043; background: #202124; }
-      }
-    </style>
+    <meta name="color-scheme" content="light">
+    <meta name="description" content="由 GitHub 持续归档的 RSS 与 AI 内容阅读室">
+    <title>Signal Archive · 信号档案室</title>
+    <link rel="stylesheet" href="./styles.css">
   </head>
   <body>
-    <main>
-      <h1>Signal Archive</h1>
-      <p>归档数据已通过 GitHub Pages 发布。</p>
-      <p id="status">正在读取 Catalog…</p>
-    </main>
-    <script>
-      const status = document.querySelector("#status");
+    <div class="mobile-tabs" role="navigation" aria-label="阅读区域">
+      <button class="mobile-tab is-active" data-panel="catalog">目录</button>
+      <button class="mobile-tab" data-panel="list">文章</button>
+      <button class="mobile-tab" data-panel="reader">阅读</button>
+    </div>
 
-      fetch("./data/catalog.json")
-        .then((response) => {
-          if (!response.ok) throw new Error(`HTTP ${response.status}`);
-          return response.json();
-        })
-        .then((catalog) => {
-          const countSources = (nodes) => nodes.reduce(
-            (total, node) => total + (
-              node.type === "category" ? countSources(node.children ?? []) : 1
-            ),
-            0,
-          );
-          status.textContent = `Catalog 已就绪，共包含 ${countSources(catalog.children ?? [])} 个内容源。`;
-        })
-        .catch((error) => {
-          status.textContent = `Catalog 加载失败：${error.message}`;
-        });
-    </script>
+    <main class="archive-desk" data-mobile-panel="catalog">
+      <aside class="catalog-panel" aria-label="内容目录">
+        <header class="brand-plate">
+          <span class="brand-mark">SA</span>
+          <div>
+            <h1>Signal Archive</h1>
+            <p>信号档案室</p>
+          </div>
+        </header>
+        <div class="catalog-caption">
+          <span>CATALOG · 001</span>
+          <span id="source-count">读取中</span>
+        </div>
+        <nav id="catalog" class="catalog-tree" aria-label="Catalog"></nav>
+        <footer class="cabinet-footer">
+          <span class="status-lamp" aria-hidden="true"></span>
+          <span id="archive-status">正在整理档案…</span>
+        </footer>
+      </aside>
+
+      <section class="list-panel" aria-label="文章列表">
+        <header class="list-header">
+          <div>
+            <p class="eyebrow">CURRENT DRAWER</p>
+            <h2 id="list-title">请选择一个目录</h2>
+          </div>
+          <span id="article-count" class="count-stamp">0 ITEMS</span>
+        </header>
+        <div id="article-list" class="article-list" aria-live="polite">
+          <div class="empty-state">
+            <span class="empty-symbol">⌁</span>
+            <p>从左侧档案柜选择一个文件夹或来源。</p>
+          </div>
+        </div>
+        <button id="load-more" class="load-more" type="button" hidden>翻阅更多</button>
+      </section>
+
+      <article class="reader-panel" aria-label="文章正文">
+        <div id="reader-empty" class="reader-empty">
+          <div class="paper-emblem">S·A</div>
+          <p class="eyebrow">ARCHIVE READING ROOM</p>
+          <h2>选择一篇文章开始阅读</h2>
+          <p>文章将像一页从档案盒中取出的信纸，在这里展开。</p>
+        </div>
+        <div id="reader-content" class="reader-content" hidden>
+          <header class="article-header">
+            <p id="reader-source" class="source-label"></p>
+            <h2 id="reader-title"></h2>
+            <div class="article-meta">
+              <time id="reader-date"></time>
+              <a id="reader-link" target="_blank" rel="noopener noreferrer">阅读原文 ↗</a>
+            </div>
+          </header>
+          <div id="reader-body" class="article-body"></div>
+        </div>
+      </article>
+    </main>
+
+    <template id="placeholder-template">
+      <div class="image-placeholder" aria-hidden="true">
+        <span>SA</span>
+        <i></i>
+      </div>
+    </template>
+
+    <script src="./app.js" defer></script>
   </body>
 </html>
