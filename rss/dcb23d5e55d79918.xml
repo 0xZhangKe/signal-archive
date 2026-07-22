@@ -1,0 +1,2376 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>张可的博客</title>
+	<atom:link href="https://zhangke.space/feed/" rel="self" type="application/rss+xml" />
+	<link>https://zhangke.space</link>
+	<description></description>
+	<lastBuildDate>Wed, 15 Jul 2026 15:04:45 +0000</lastBuildDate>
+	<language>zh-Hans</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	
+
+<image>
+	<url>https://zhangke.space/wp-content/uploads/2024/04/cropped-c7b0611472c5849e-32x32.webp</url>
+	<title>张可的博客</title>
+	<link>https://zhangke.space</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>人类如何利用超长上下文与 AI 协作</title>
+		<link>https://zhangke.space/%e4%ba%ba%e7%b1%bb%e5%a6%82%e4%bd%95%e5%88%a9%e7%94%a8%e8%b6%85%e9%95%bf%e4%b8%8a%e4%b8%8b%e6%96%87%e4%b8%8e-ai-%e5%8d%8f%e4%bd%9c/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=%25e4%25ba%25ba%25e7%25b1%25bb%25e5%25a6%2582%25e4%25bd%2595%25e5%2588%25a9%25e7%2594%25a8%25e8%25b6%2585%25e9%2595%25bf%25e4%25b8%258a%25e4%25b8%258b%25e6%2596%2587%25e4%25b8%258e-ai-%25e5%258d%258f%25e4%25bd%259c</link>
+					<comments>https://zhangke.space/%e4%ba%ba%e7%b1%bb%e5%a6%82%e4%bd%95%e5%88%a9%e7%94%a8%e8%b6%85%e9%95%bf%e4%b8%8a%e4%b8%8b%e6%96%87%e4%b8%8e-ai-%e5%8d%8f%e4%bd%9c/#respond</comments>
+		
+		<dc:creator><![CDATA[kezhang404@gmail.com]]></dc:creator>
+		<pubDate>Wed, 15 Jul 2026 15:04:44 +0000</pubDate>
+				<category><![CDATA[Computer Science]]></category>
+		<category><![CDATA[互联网]]></category>
+		<guid isPermaLink="false">https://zhangke.space/?p=1103</guid>
+
+					<description><![CDATA[<p>时至今日，LLM 的发展仍然深受 Scaling Laws 的影响，OpenAI、Anthropic 每隔一段 [&#8230;]</p>
+<p>The post <a href="https://zhangke.space/%e4%ba%ba%e7%b1%bb%e5%a6%82%e4%bd%95%e5%88%a9%e7%94%a8%e8%b6%85%e9%95%bf%e4%b8%8a%e4%b8%8b%e6%96%87%e4%b8%8e-ai-%e5%8d%8f%e4%bd%9c/">人类如何利用超长上下文与 AI 协作</a> first appeared on <a href="https://zhangke.space">张可的博客</a>.</p>]]></description>
+										<content:encoded><![CDATA[<p class="wp-block-paragraph">时至今日，LLM 的发展仍然深受 <strong>Scaling Laws</strong> 的影响，OpenAI、Anthropic 每隔一段时间都会发布更强大模型，AI 取代人类的声音越来越多，难道 LLM 会一直这样发展下去？人类应该处在何种地位？这些问题在今天变得尤为重要，LLM 的特殊之处在于它已经逐渐具备了复杂系统的特性，智慧从复杂中涌现，人类无法准确的预测它的上限。</p>
+
+
+
+<p class="wp-block-paragraph">一个具备人类智慧的 AI 天然带着迷人的魅力，我们可以畅想这如何改变人类的生活、推动社会的进步，谁不想拥有一个有正子脑的机器人或者 HAL 呢？</p>
+
+
+
+<p class="wp-block-paragraph">虽然我认为 LLM 已经在某些方面超越了人类并且短时间内仍会继续进化，但我同样也认为在很多方面人类都能保持绝对的优势，甚至按照目前 LLM 的架构可能永远也无法超越人类。</p>
+
+
+
+<h1 class="wp-block-heading">LLM 的基本运行原理</h1>
+
+
+
+<p class="wp-block-paragraph">目前 LLM 的运行仍然是无状态的，它不会记住任何关于用户的信息，每次对话对它来说都是一个全新的开始，现有产品关于记忆方面的功能也都是工程上的优化。</p>
+
+
+
+<p class="wp-block-paragraph">比如跟 ChatGPT 聊天时虽然它能回忆起用户之前的对话内容以及用户的一些信息，但这不意味着模型记住了你，只是 ChatGPT 在将你的对话发给模型之前会检索跟本轮对话相关的内容，然后整理出一份最终的 prompt 交给模型。</p>
+
+
+
+<p class="wp-block-paragraph">或者在跟 CC/Codex 对话时，即使是在同一个 Thread 内对话，用户发送的每一条消息也仍然是独立的，只不过 Codex 会将这个 Thread 内的历史对话和本轮对话一起整理成一个最终的 prompt 交给模型。</p>
+
+
+
+<p class="wp-block-paragraph">当然模型很多时候自行检索互联网内容或者本地文件，但这也都是模型利用 tool call 来丰富最终的 prompt 从而提高回答的准确率。</p>
+
+
+
+<p class="wp-block-paragraph">模型是没有记忆的，每轮对话都是独立的，所以 Context Window（上下文窗口）就变得尤为重要。</p>
+
+
+
+<h2 class="wp-block-heading">Context Window/Stateless</h2>
+
+
+
+<p class="wp-block-paragraph">实际上今天我们看到的许多 LLM 工程实践都是在弥补 context-window limitations 以及模型无状态（Stateless）的缺陷，比如 Memory、RAG、Context Engineering 等等。</p>
+
+
+
+<p class="wp-block-paragraph">Context Window 是指 LLM 单次输入可接受的最大 Token 数量，不同模型的 Context Window 都有所不同，token 计数方式也有区别，一般来说一个英文单词约等于 1.5 个 Token，一个汉字是一个 Token。GPT5.6 的 Context Window 现在长到了 353k tokens。</p>
+
+
+
+<p class="wp-block-paragraph">LLM 的 Stateless（无状态）是指模型本身是一个无状态系统，输入的 prompt 不会改变其内部状态，有点像纯函数，但模型也具备一些复杂系统的特征，简而言之就是模型并没有任何关于用户或者历史对话的信息，每次输入都是一个全新的开始。</p>
+
+
+
+<h2 class="wp-block-heading">使用 LoRA 提高领域知识</h2>
+
+
+
+<p class="wp-block-paragraph">LoRA（Low-Rank Adaptation）是一种参数微调技术，可以在不重新训练原有模型的基础上使其附加一些特定领域的知识、能力或者行为模式，本质上是新增了少量的参数，从而改变模型的行为。</p>
+
+
+
+<p class="wp-block-paragraph">理论上我们可以将代码仓库、知识文档、需求文档、业务文档等内容整理成训练数据并训练一个 LoRA 然后再交给模型，使模型具备项目的一些基本知识，从而更好的帮助我们解决问题。</p>
+
+
+
+<p class="wp-block-paragraph">不过实际情况是目前主流的模型提供商（比如OpenAI、Anthropic）都不支持 LoRA，未来会不会支持也很难说，目前这些并不是他们的重心。一些开源模型一般是支持的，但是需要自己部署，有一定的使用成本，而且开源模型的性能目前还达不到顶尖水准。</p>
+
+
+
+<p class="wp-block-paragraph">另外训练 LoRA 也是需要成本的，而且有点麻烦的是业务和代码是一直在变化的，所以 LoRA 需要持续更新和训练，LoRA 和模型也是强绑定的，这意味着换了模型就要重新训练新的 LoRA。</p>
+
+
+
+<p class="wp-block-paragraph">如果未来模型能力达到了天花板，开源模型的水平也追了上来，自部署模型很可能会成为很多公司的选择，而那个时候使用 LoRA 技术来解决上下文限制和模型无状态问题或许是个不错的办法。</p>
+
+
+
+<h1 class="wp-block-heading">复杂任务仍需更长的上下文</h1>
+
+
+
+<p class="wp-block-paragraph">在很多商业公司中，软件的代码质量和开发效率都持续处在漫长的拉锯战中，业务的快速迭代是主要目标，代码质量的价值要如何体现？</p>
+
+
+
+<p class="wp-block-paragraph">Uncle Bob 在整洁架构中说过代码质量的核心价值是降低未来的维护成本，这也是行业共识，但“未来的维护成本”难以被量化，放在 OKR 中也不够亮眼。</p>
+
+
+
+<p class="wp-block-paragraph">有意思的是，前段时间<a href="https://arxiv.org/abs/2605.20049">有篇论文</a>将代码质量是否会影响 Coding Agents 作为课题进行了深入研究。得出的结果和人类几乎一致：无论代码质量如何，Agents 都可以准确的完成工作，但对于代码质量较差的仓库消耗的 Token 显著增加。因此降低维护成本这件事情即使放到 Agents 上也是完全成立的。</p>
+
+
+
+<p class="wp-block-paragraph">现在我们可以光明正大的说，重构是为了省钱了。</p>
+
+
+
+<p class="wp-block-paragraph">言归正传，一个大型代码仓库都包含着复杂的业务逻辑，代码之间有着千丝万缕的联系，历史抉择和未来规划隐藏在代码的细节和人类的大脑之中，所以对于代码仓库中的每个决策都应该尽可能慎重。</p>
+
+
+
+<p class="wp-block-paragraph">我在使用 Agents 做复杂任务时经常会遇到撑爆上下文的情况，很多情况下要解决任务A时发现需要先解决任务B，然后 Agents 就会像个 ADHD 一样开始忘记初心，然后随着上下文压缩彻底失控，即使用了 sub-agents 也不能解决所有的问题。因此我现在几乎只会在边界清晰的特定任务上使用 Agents。</p>
+
+
+
+<p class="wp-block-paragraph">这也意味着软件开发还是要人类参与的，人类要做的就是解决这些复杂性以及做出正确的选择。</p>
+
+
+
+<p class="wp-block-paragraph">正确的选择不仅包括历史问题，也包括未来规划，历史问题往往不会出现在文档中，可能表现只是一段奇怪的代码。未来的规划就更加虚无缥缈了，可能会有一些 roadmap，也可能只有产品经理才知道。</p>
+
+
+
+<h1 class="wp-block-heading">人类与 AI 协同工作</h1>
+
+
+
+<p class="wp-block-paragraph">我目前写代码其实主要还是手工编程比较多，Agents 给我打辅助。</p>
+
+
+
+<p class="wp-block-paragraph">很多时候有个悖论是，如果我希望 Agents 完全按照要求实现某个逻辑，那么我就需要输入包含了全部逻辑的 prompt，那么这个 prompt 就会巨长，并且自然语言的信息密度低于代码，那我不如直接写代码。</p>
+
+
+
+<p class="wp-block-paragraph">但有一些情况我很喜欢用 Agents，比如具备固定模式的任务、复杂但目标清晰的函数、独立的小模块或者组件、完全不在乎质量的一次性代码、我不擅长的任务、简单的脚本等等。总的来说，这些都是不需要很多上下文的任务。</p>
+
+
+
+<p class="wp-block-paragraph">架构设计包含很多方面，不管是一个简单的页面还是一个业务模块都值得仔细斟酌，不同的业务、历史、现状、工期、规划都会对决策有所影响，想要让 Agents 搞清楚这些还是没这么容易的，反而是人类来做比较好。不过在设计阶段我也可能会和 GPT 聊天，主要目的还是查漏补缺，或者找出更好的方案。</p>
+
+
+
+<p class="wp-block-paragraph">另外对于客户端开发来说，UI/UX 的验证要复杂一点，目前还没有合适的工具帮助 Agents 验证效果，比如一些动画效果需要分析连续帧，也就意味着需要分析视频，如果要追求细节的话 Agents 就有点力不从心了。</p>
+
+
+
+<p class="wp-block-paragraph">人类的上下文管理还有一个优势是人类大脑具备时间参数，软件的演化过程本身也是很重要的信息，而 Agents 更像是从某个时间切片开始工作。而且大脑会持续内化所有的信息，但 LLM 在这方面是静态的。</p>
+
+
+
+<h2 class="wp-block-heading">ADR 文档</h2>
+
+
+
+<p class="wp-block-paragraph">ADR(Architecture Decision Record) 文档是指架构决策记录，用于记录某个架构或设计的决策原因和背景。</p>
+
+
+
+<p class="wp-block-paragraph">ADR 文档并不是为了 Agents 开发而出现的技术，但它可以很好的解决上面说的问题。如果能建立起一个完善的 ADR 文档系统确实能很好的帮助 Agents 开发出优质代码。</p>
+
+
+
+<p class="wp-block-paragraph">目前关于 ADR 文档并没有一个统一的标准，有些仓库会选择把所有的决策都放在一个 decisions.md 文件内，但我之前看过<a href="https://blog.est.im/2026/stdout-24">一篇博客</a>的 ADR 实践感觉也挺不错。</p>
+
+
+
+<p class="wp-block-paragraph">我觉得 ADR 文档确实可以解决很多决策类问题，但是给一个老项目建设 ADR 系统也是很麻烦的，如果设计得当确实能让 Agents 工作的更出色。</p>
+
+
+
+<hr class="wp-block-separator has-alpha-channel-opacity"/>
+
+
+
+<p class="wp-block-paragraph">现在 GPT 有着出色的上下文压缩能力，Claude Code 有着 1M 的上下文，未来可能仍然会继续增加，但我觉得这仍然不能解决根本问题。</p>
+
+
+
+<p class="wp-block-paragraph">但随着 Context Window 的堆积，真正与当前任务相关的信息占比会越来越低，干扰噪音越来越多，这些因素会导致 LLM 的推理更加困难。Transformer 的 self-attention 机制使 token 之间可以建立全局关联，但随着 Context Window 增大，需要处理的 Token 关系数量快速增长，在更大的 Attention 空间中定位与任务相关的信息会变得更加困难。</p>
+
+
+
+<p class="wp-block-paragraph">所以这是个机制问题，短时间内很难有什么有效的解决办法，而这个问题也是我们作为人类的优势，我们可以充分利用人类大脑的超长上下文和 LLM 的超绝推理一起完成更加出色的任务。</p>
+
+
+
+<p class="wp-block-paragraph"></p><p>The post <a href="https://zhangke.space/%e4%ba%ba%e7%b1%bb%e5%a6%82%e4%bd%95%e5%88%a9%e7%94%a8%e8%b6%85%e9%95%bf%e4%b8%8a%e4%b8%8b%e6%96%87%e4%b8%8e-ai-%e5%8d%8f%e4%bd%9c/">人类如何利用超长上下文与 AI 协作</a> first appeared on <a href="https://zhangke.space">张可的博客</a>.</p>]]></content:encoded>
+					
+					<wfw:commentRss>https://zhangke.space/%e4%ba%ba%e7%b1%bb%e5%a6%82%e4%bd%95%e5%88%a9%e7%94%a8%e8%b6%85%e9%95%bf%e4%b8%8a%e4%b8%8b%e6%96%87%e4%b8%8e-ai-%e5%8d%8f%e4%bd%9c/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>拍摄一次彗星</title>
+		<link>https://zhangke.space/%e6%8b%8d%e6%91%84%e4%b8%80%e6%ac%a1%e5%bd%97%e6%98%9f/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=%25e6%258b%258d%25e6%2591%2584%25e4%25b8%2580%25e6%25ac%25a1%25e5%25bd%2597%25e6%2598%259f</link>
+					<comments>https://zhangke.space/%e6%8b%8d%e6%91%84%e4%b8%80%e6%ac%a1%e5%bd%97%e6%98%9f/#comments</comments>
+		
+		<dc:creator><![CDATA[kezhang404@gmail.com]]></dc:creator>
+		<pubDate>Sun, 17 May 2026 13:27:43 +0000</pubDate>
+				<category><![CDATA[生活]]></category>
+		<guid isPermaLink="false">https://zhangke.space/?p=1096</guid>
+
+					<description><![CDATA[<p>最近 2025 R3 彗星逐渐进入可以观测的范围，四月中下旬星等甚至可以达到 4 左右，环境好的话甚至可以肉眼 [&#8230;]</p>
+<p>The post <a href="https://zhangke.space/%e6%8b%8d%e6%91%84%e4%b8%80%e6%ac%a1%e5%bd%97%e6%98%9f/">拍摄一次彗星</a> first appeared on <a href="https://zhangke.space">张可的博客</a>.</p>]]></description>
+										<content:encoded><![CDATA[<p class="wp-block-paragraph">最近 2025 R3 彗星逐渐进入可以观测的范围，四月中下旬星等甚至可以达到 4 左右，环境好的话甚至可以肉眼观测到，不过拖尾亮度没这么高，需要用望远镜。</p>
+
+
+
+<p class="wp-block-paragraph">天文摄影至少需要考虑天气和光害这二者的因素，最终选择在一个晴朗的周末去安吉江南天池拍摄。</p>
+
+
+
+<p class="wp-block-paragraph">江南天池是暗夜保护区，博特尔光害等级4-5，在一个山顶上，海拔九百多米，天池旁边有个小山头，上面是一个天文台，长三角星空大会的举办地就是在这里。用 App 看了下当晚的高空云量也不多，基本上在10%以下，条件也很好。</p>
+
+
+
+<p class="wp-block-paragraph">景区自带一个酒店，有很多房间，其中大部分是在景区的外面，但是还有一栋楼是在景区内部，价格要贵一点，六百多一晚，不过住在里面就不需要购买景区门票了。里面的酒店房间观星条件更好，晚上没什么灯光，而且可以去天文台或者天池这些地方拍摄，视野更好和光污染更低，所以我们选择住在里面。</p>
+
+
+
+<p class="wp-block-paragraph">但后来证明住在里面也并不好，因为里面的房间东方正好是天池，大坝远高于酒店，而彗星就在东方，所以要去大坝上看才比较好，但真到了大坝上会发现大坝的东方有个水电站，灯火通明。。。</p>
+
+
+
+<p class="wp-block-paragraph">但总之最后还是拍到了，就出门在酒店门口，把智能望远镜放在车顶，只曝光了四分钟彗星的大拖尾就出现了，非常漂亮。</p>
+
+
+
+<figure class="wp-block-image aligncenter size-large is-resized"><img fetchpriority="high" decoding="async" width="639" height="1024" src="https://zhangke.space/wp-content/uploads/2026/05/image-639x1024.png" alt="" class="wp-image-1097" style="width:463px;height:auto" srcset="https://zhangke.space/wp-content/uploads/2026/05/image-639x1024.png 639w, https://zhangke.space/wp-content/uploads/2026/05/image-187x300.png 187w, https://zhangke.space/wp-content/uploads/2026/05/image-768x1230.png 768w, https://zhangke.space/wp-content/uploads/2026/05/image-959x1536.png 959w, https://zhangke.space/wp-content/uploads/2026/05/image-1279x2048.png 1279w, https://zhangke.space/wp-content/uploads/2026/05/image.png 1440w" sizes="(max-width: 639px) 100vw, 639px" /></figure>
+
+
+
+<p class="wp-block-paragraph">可以看到下半部分明显有些发红了，因为此时距离太阳出来只剩下不到一小时，R3 的高度角很低，所以能拍摄的时间窗口其实很短暂。</p>
+
+
+
+<figure class="wp-block-image aligncenter size-large is-resized"><img decoding="async" width="637" height="1024" src="https://zhangke.space/wp-content/uploads/2026/05/image-1-637x1024.png" alt="" class="wp-image-1098" style="width:413px;height:auto" srcset="https://zhangke.space/wp-content/uploads/2026/05/image-1-637x1024.png 637w, https://zhangke.space/wp-content/uploads/2026/05/image-1-187x300.png 187w, https://zhangke.space/wp-content/uploads/2026/05/image-1-768x1234.png 768w, https://zhangke.space/wp-content/uploads/2026/05/image-1-956x1536.png 956w, https://zhangke.space/wp-content/uploads/2026/05/image-1-1274x2048.png 1274w, https://zhangke.space/wp-content/uploads/2026/05/image-1.png 1440w" sizes="(max-width: 637px) 100vw, 637px" /></figure>
+
+
+
+<p class="wp-block-paragraph">这张曝光时间短一点，位置也跑偏了，不过拍到了星链。</p>
+
+
+
+<p class="wp-block-paragraph">这两张曝光时间都在2-4分钟，很短，因为当时的位置不好，我打算换个地方去大坝上拍，结果到了大坝上天空更亮了，而且凌晨的大坝一个人都没有，我自己也很害怕，最后也没拍成。</p>
+
+
+
+<p class="wp-block-paragraph">前一天晚上还拍到了狮子座三胞胎，还是很漂亮的，曝光了25分钟左右。</p>
+
+
+
+<figure class="wp-block-image aligncenter size-large is-resized"><img decoding="async" width="654" height="1024" src="https://zhangke.space/wp-content/uploads/2026/05/image-2-654x1024.png" alt="" class="wp-image-1099" style="width:477px;height:auto" srcset="https://zhangke.space/wp-content/uploads/2026/05/image-2-654x1024.png 654w, https://zhangke.space/wp-content/uploads/2026/05/image-2-192x300.png 192w, https://zhangke.space/wp-content/uploads/2026/05/image-2-768x1203.png 768w, https://zhangke.space/wp-content/uploads/2026/05/image-2-981x1536.png 981w, https://zhangke.space/wp-content/uploads/2026/05/image-2-1308x2048.png 1308w, https://zhangke.space/wp-content/uploads/2026/05/image-2.png 1440w" sizes="(max-width: 654px) 100vw, 654px" /></figure>
+
+
+
+<p class="wp-block-paragraph">还有木星和它的卫星：</p>
+
+
+
+<figure class="wp-block-image aligncenter size-large is-resized"><img decoding="async" width="966" height="1024" src="https://zhangke.space/wp-content/uploads/2026/05/0cd28e899d75cf0af04b16585a900db3-966x1024.jpg" alt="" class="wp-image-1100" style="aspect-ratio:0.943359862950141;width:532px;height:auto" srcset="https://zhangke.space/wp-content/uploads/2026/05/0cd28e899d75cf0af04b16585a900db3-966x1024.jpg 966w, https://zhangke.space/wp-content/uploads/2026/05/0cd28e899d75cf0af04b16585a900db3-283x300.jpg 283w, https://zhangke.space/wp-content/uploads/2026/05/0cd28e899d75cf0af04b16585a900db3-768x814.jpg 768w, https://zhangke.space/wp-content/uploads/2026/05/0cd28e899d75cf0af04b16585a900db3.jpg 1279w" sizes="(max-width: 966px) 100vw, 966px" /></figure>
+
+
+
+<p class="wp-block-paragraph">江南天池虽然很适合天文摄影，但对于 R3 来说其实并不合适，因为 R3 高度角很低，而且出现的的位置正好会被其他的山挡住，我提前转了一圈也没找到合适的位置，不过天文台上可能会有地方，但我没上去，我很确信凌晨四点我不敢一个人爬到天文台上。</p>
+
+
+
+<p class="wp-block-paragraph">拍摄彗星的过程倒是很简单，首先选择合适的地点和天气，天气信息主要是看云量，云太多就没办法拍摄。地点主要是看光害，城市光害8级左右，但是江南天池这种地方可以到4-5级，条件就好多了。此外还要看具体的拍摄地点的情况，比如是否有路灯或者其他灯光干扰，是否会被建筑物或者山体遮挡，蚊子多不多等等。</p>
+
+
+
+<p class="wp-block-paragraph">拍摄设备我用的是 <a href="https://www.seestar.com/" title="">Seestar</a> 50，只能天文望远镜，没有目镜，手机连接拍摄，设备体积很小很便携，也不需要其他设备。</p>
+
+
+
+<p class="wp-block-paragraph">话说很多年前我就对天文摄影很感兴趣，最终了解下来发现要购买的设备实在是太多了，比如改机单反、望远镜、赤道仪、三脚架、导星镜等等一大堆设备，买下来至少要几万块，最重要的是你至少得有辆车带着这些设备吧，然后就放弃了，最终只买了三脚架和相机随便拍怕。</p>
+
+
+
+<p class="wp-block-paragraph">但现在时代不同了，上面所有的设备的功能最终都可以用一台 Seestar 设备来实现，不仅便携而且功能强大，比我的电脑还要小，甚至包含了一定程度上的后期处理，虽然最终成像效果不一定比得了大口径望远镜，但是对于很多天体的拍摄已经够用了，毕竟价格比一台相机还要低。</p>
+
+
+
+<p class="wp-block-paragraph">Seestar 之所以能做到保持口径小的前提下拍摄深空天体，根本原因在于内置的叠加功能，比如我拍摄狮子座三胞胎时曝光了25分钟，实际上是连续单张十秒钟+机内叠加，内置的算法会自动处理叠加流程，所以最终成片效果非常棒。</p>
+
+
+
+<p class="wp-block-paragraph">当然如果有时间可以叠加的更久，那最终效果肯定也更出色，而且还有智能降噪可以移除噪点，提高画面质量，可以说非常方便了。</p>
+
+
+
+<p class="wp-block-paragraph">至于操作上也很简单，Seestar 会 host 一个Wifi，手机打开app后连接上就行了，在app里可以选择要拍摄的目标天体，然后seestar就会根据角度自动寻找天体，找到后自动开始拍摄。</p>
+
+
+
+<p class="wp-block-paragraph">不过这次拍摄也不算成功，主要是起的晚了点，时间窗口太短了，虽然日出时间是五点半，但是四点钟就已经有曙光出现了，我差不多比预计晚起床十分钟，然后就错过了最佳拍摄时间，后面曙光出现后变亮的速度非常快，争分夺秒，我还在犹豫拍摄位置时就彻底失去了机会，只剩下最开始尝试拍摄时的照片还不错了。</p>
+
+
+
+<p class="wp-block-paragraph"></p><p>The post <a href="https://zhangke.space/%e6%8b%8d%e6%91%84%e4%b8%80%e6%ac%a1%e5%bd%97%e6%98%9f/">拍摄一次彗星</a> first appeared on <a href="https://zhangke.space">张可的博客</a>.</p>]]></content:encoded>
+					
+					<wfw:commentRss>https://zhangke.space/%e6%8b%8d%e6%91%84%e4%b8%80%e6%ac%a1%e5%bd%97%e6%98%9f/feed/</wfw:commentRss>
+			<slash:comments>5</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>奇怪的社会偏离感</title>
+		<link>https://zhangke.space/%e5%a5%87%e6%80%aa%e7%9a%84%e7%a4%be%e4%bc%9a%e5%81%8f%e7%a6%bb%e6%84%9f/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=%25e5%25a5%2587%25e6%2580%25aa%25e7%259a%2584%25e7%25a4%25be%25e4%25bc%259a%25e5%2581%258f%25e7%25a6%25bb%25e6%2584%259f</link>
+					<comments>https://zhangke.space/%e5%a5%87%e6%80%aa%e7%9a%84%e7%a4%be%e4%bc%9a%e5%81%8f%e7%a6%bb%e6%84%9f/#comments</comments>
+		
+		<dc:creator><![CDATA[kezhang404@gmail.com]]></dc:creator>
+		<pubDate>Wed, 15 Apr 2026 15:39:57 +0000</pubDate>
+				<category><![CDATA[生活]]></category>
+		<guid isPermaLink="false">https://zhangke.space/?p=1093</guid>
+
+					<description><![CDATA[<p>这几年我逐渐发现自己有个比较奇怪的心理活动，而且最近我发现这种心理在很多人身上都会出现。 一个典型的表现是，当 [&#8230;]</p>
+<p>The post <a href="https://zhangke.space/%e5%a5%87%e6%80%aa%e7%9a%84%e7%a4%be%e4%bc%9a%e5%81%8f%e7%a6%bb%e6%84%9f/">奇怪的社会偏离感</a> first appeared on <a href="https://zhangke.space">张可的博客</a>.</p>]]></description>
+										<content:encoded><![CDATA[<p class="wp-block-paragraph">这几年我逐渐发现自己有个比较奇怪的心理活动，而且最近我发现这种心理在很多人身上都会出现。</p>
+
+
+
+<p class="wp-block-paragraph">一个典型的表现是，当我跟一个群体中的某个人吵架之后我更希望获得这个群体中的其它人的认可，此时我会下意识的选择使用更友善的态度沟通，迫切的希望这个群体仍然是接纳我的，我仍然继续属于着这个群体。</p>
+
+
+
+<p class="wp-block-paragraph">不仅仅是吵架，也可能只是说了不合时宜的话，甚至是得到了超出群体的荣誉，都会下意识的出现这种情绪。</p>
+
+
+
+<p class="wp-block-paragraph">进一步说，当我做出任何偏离这个群体的事情时，我的潜意识似乎会产生一种警惕和焦虑，这种心理会使我想要重新回到这个群体内。</p>
+
+
+
+<p class="wp-block-paragraph">曾经在很长的一段时间内我很排斥这种莫名其妙的情感，我觉得一个理性人不应该被任何情感左右，但同时要做到不被影响又很困难，这种情感毫无理由的出现，深深的扎根在大脑之中，挥之不去。</p>
+
+
+
+<p class="wp-block-paragraph">以前这种矛盾经常会给我造成一些困扰，但好在我现在不会这么想了，不同之处在于，现在我的理性会给情感留出余地，这是作为人类无法抛开的一部分，既然这种情感无法避免，那就尽量用认识和控制它们。</p>
+
+
+
+<p class="wp-block-paragraph">另一方面，我认为我也应该接纳这些情感，抛弃归属感其实也没什么意义，我又不是什么冷酷的杀手🥷，既然和人在一起可以让我幸福，那我就幸福点不好吗？</p>
+
+
+
+<p class="wp-block-paragraph">当然更重要的是，归属感具备一定的生物学基础。有研究显示，急性社交隔离会诱发类似饥饿的社会渴求反应，因此这是我们无法抛弃的，就像我们没吃饭就会饿一样，饥饿感和归属感都是生理需求。</p>
+
+
+
+<p class="wp-block-paragraph"><strong>那么归属感是如何作为生理需求的一部分进而影响我们？</strong></p>
+
+
+
+<p class="wp-block-paragraph">首先我们人类的大脑在进化的时候就是朝着群居生物的方向进化的，社交行为和大脑的奖励机制有关，也就是多巴胺也会参与到这个过程中，社会活动本身会影响多巴胺分泌，如果我们参与了一场愉快的社交活动，那么大脑可能会分泌多巴胺来奖励我们。反过来也一样，孤独的生活也会抑制多巴胺的分泌。</p>
+
+
+
+<p class="wp-block-paragraph">不仅如此，长期孤独/社会隔离与脑功能和脑结构改变、认知下降风险增加有关，甚至心脏病和免疫力下降也和缺乏社交有关。长期的孤独还会引发炎症，损害脑细胞并阻碍神经通讯。2015 年发表在《美国国家科学院院刊》上的一项研究表明，持续的孤独与炎症标志物升高有关。这些标志物会显著加重阿尔茨海默病。对记忆至关重要的海马体也会受到严重影响。长期孤独会导致海马体体积缩小，并常常导致记忆力减退。</p>
+
+
+
+<figure class="wp-block-embed is-type-wp-embed is-provider-lone-star-neurology wp-block-embed-lone-star-neurology"><div class="wp-block-embed__wrapper">
+<blockquote class="wp-embedded-content" data-secret="rPVOGPckmv"><a href="https://lonestarneurology.net/others/can-loneliness-impact-brain-health-the-neurological-effects-of-social-isolation/">Can Loneliness Impact Brain Health? The Neurological Effects of Social Isolation</a></blockquote><iframe class="wp-embedded-content" sandbox="allow-scripts" security="restricted"  title="&#8220;Can Loneliness Impact Brain Health? The Neurological Effects of Social Isolation&#8221; &#8212; Lone Star Neurology" src="https://lonestarneurology.net/others/can-loneliness-impact-brain-health-the-neurological-effects-of-social-isolation/embed/#?secret=Crafag5mxv#?secret=rPVOGPckmv" data-secret="rPVOGPckmv" width="500" height="282" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+</div></figure>
+
+
+
+<p class="wp-block-paragraph">说到这里，我突然想到以前在杭州工作的时候，我住的地方很偏僻，小区几乎是建在山里的，周围连个超市都没有，时间久了就会产生浓烈的孤独感，所以当时周末的时候我很喜欢去一个公园，公园里面全是打牌跳舞下棋的中老年人们，我只是坐在那里都会觉得好像在给我的人类模块充电。</p>
+
+
+
+<p class="wp-block-paragraph">还有些时候，比如下午自己在家睡觉睡到晚上，醒来后感觉全世界就剩下我一个人了，我就会选择立即出门去城市里骑行，这同样也是在给我的人类模块充电。</p>
+
+
+
+<p class="wp-block-paragraph">比较有意思的是，我曾经极度排斥自身的这些情感，倒也不是某种理性至上的想法，只是觉得我是一个自由人，这些情感是导致我不自由的枷锁，我成长的过程就是逐渐移出这些冗余的部分。但现在我开始学会控制这些情感，有时候可以享受这些情感带来的快乐，有时候也可以规避这些情感带来的负面影响。（所以人类自由意志中的一部分现在又有了生物学的解释了吗？）</p>
+
+
+
+<p class="wp-block-paragraph">想清楚这些后，很多事情似乎都得到了合理的解释，比如我生活在很多不同的社会圈子内，比如同事、技术社区、日常摸鱼社区、亲人、不同的朋友、某些爱好圈子等等，我至少需要得到其中某些圈子的认可才能保证我没有偏离这个社会。</p>
+
+
+
+<p class="wp-block-paragraph">社会认可本身也随着圈子的变化而变化，比如一个要想在学术氛围浓厚的圈子内得到认可需要有一些学术性强的内容来给你背书，那么你的学术模块的身份认可得到了满足，但这种认可同时也会带来社交压力，因为此时认可本身潜在的含义包含了对比，对比意味着压力。</p>
+
+
+
+<p class="wp-block-paragraph">还有一些人充当着社会中的心理缓冲区，他们不会根据你的成就和社会地位进行任何评价，而是近乎无条件的接纳你，那么与这些人相处就会很放松。</p><p>The post <a href="https://zhangke.space/%e5%a5%87%e6%80%aa%e7%9a%84%e7%a4%be%e4%bc%9a%e5%81%8f%e7%a6%bb%e6%84%9f/">奇怪的社会偏离感</a> first appeared on <a href="https://zhangke.space">张可的博客</a>.</p>]]></content:encoded>
+					
+					<wfw:commentRss>https://zhangke.space/%e5%a5%87%e6%80%aa%e7%9a%84%e7%a4%be%e4%bc%9a%e5%81%8f%e7%a6%bb%e6%84%9f/feed/</wfw:commentRss>
+			<slash:comments>6</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>使用 Codex 进行一次上万行代码的重构</title>
+		<link>https://zhangke.space/%e4%bd%bf%e7%94%a8-codex-%e8%bf%9b%e8%a1%8c%e4%b8%80%e6%ac%a1%e4%b8%8a%e4%b8%87%e8%a1%8c%e7%9a%84%e9%87%8d%e6%9e%84/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=%25e4%25bd%25bf%25e7%2594%25a8-codex-%25e8%25bf%259b%25e8%25a1%258c%25e4%25b8%2580%25e6%25ac%25a1%25e4%25b8%258a%25e4%25b8%2587%25e8%25a1%258c%25e7%259a%2584%25e9%2587%258d%25e6%259e%2584</link>
+					<comments>https://zhangke.space/%e4%bd%bf%e7%94%a8-codex-%e8%bf%9b%e8%a1%8c%e4%b8%80%e6%ac%a1%e4%b8%8a%e4%b8%87%e8%a1%8c%e7%9a%84%e9%87%8d%e6%9e%84/#comments</comments>
+		
+		<dc:creator><![CDATA[kezhang404@gmail.com]]></dc:creator>
+		<pubDate>Tue, 03 Feb 2026 02:35:15 +0000</pubDate>
+				<category><![CDATA[Android]]></category>
+		<category><![CDATA[Fread]]></category>
+		<category><![CDATA[Kotlin]]></category>
+		<category><![CDATA[OpenSource]]></category>
+		<guid isPermaLink="false">https://zhangke.space/?p=1087</guid>
+
+					<description><![CDATA[<p>最近使用 Codex 给 Fread 进行了一次大规模的重构工作，累计改动了一万多行代码，如果人工重构可能要持 [&#8230;]</p>
+<p>The post <a href="https://zhangke.space/%e4%bd%bf%e7%94%a8-codex-%e8%bf%9b%e8%a1%8c%e4%b8%80%e6%ac%a1%e4%b8%8a%e4%b8%87%e8%a1%8c%e7%9a%84%e9%87%8d%e6%9e%84/">使用 Codex 进行一次上万行代码的重构</a> first appeared on <a href="https://zhangke.space">张可的博客</a>.</p>]]></description>
+										<content:encoded><![CDATA[<p class="wp-block-paragraph">最近使用 Codex 给 Fread 进行了一次大规模的重构工作，累计改动了一万多行代码，如果人工重构可能要持续一个多月的工作现在几天就完成了，现在回顾一下 Codex 工作的整体感受和一些使用技巧。</p>
+
+
+
+<figure class="wp-block-image aligncenter size-full"><img decoding="async" width="432" height="206" src="https://zhangke.space/wp-content/uploads/2026/02/image.png" alt="" class="wp-image-1088" srcset="https://zhangke.space/wp-content/uploads/2026/02/image.png 432w, https://zhangke.space/wp-content/uploads/2026/02/image-300x143.png 300w" sizes="(max-width: 432px) 100vw, 432px" /></figure>
+
+
+
+<p class="wp-block-paragraph">本次任务主要涉及两个方面，一是把依赖注入框架从原本的 <code>kotlin-inject</code> 改为 <code>koin</code>，二是项目中的导航框架用 <code>navigation3</code> 替换现有的 <code>Voyager</code>。</p>
+
+
+
+<p class="wp-block-paragraph">使用 koin 的原因是我个人更偏向于 DSL 的方式来管理依赖注入，这样的代码更清晰，理解成本更低。此外，因为依赖注入涉及到的类非常多，注解不仅对这些类具有侵入性，也会生成太多的辅助类，其中的代码无法被直观的看到，使得整体注入流程像一个黑盒。</p>
+
+
+
+<p class="wp-block-paragraph">导航框架选择 nav3 是因为 Voyager 已经一年多没更新了，基本属于放弃状态，而且 nav3 的设计非常优雅，对于预测性返回以及 Shared Element 支持的也很棒，根本没有理由不用它。</p>
+
+
+
+<p class="wp-block-paragraph">所以可想而知，这是个非常大的工作，基本上所有的页面都要改，所有依赖注入也都要改。当然最终主要靠着 Codex 帮我解决了这个问题，据不可靠统计，差不多有 70% 的代码都是由 Codex 完成，本文就介绍一下使用 Codex 重构的整个过程。</p>
+
+
+
+<p class="wp-block-paragraph">这是本次改动的 PR：<a href="https://github.com/0xZhangKe/Fread/pull/86">https://github.com/0xZhangKe/Fread/pull/86</a></p>
+
+
+
+<h2 class="wp-block-heading">充分利用 AI 的模仿能力</h2>
+
+
+
+<p class="wp-block-paragraph">我目前觉得 AI Coding 最大的能力就是模仿，对于一个给定的模式，Codex 可以模仿的非常出色，即使在模仿的过程中偶尔出现一些例外情况 Codex 也可以随手解决。</p>
+
+
+
+<p class="wp-block-paragraph">所以本次重构我作为人类的主要任务实际上是找出所有不同类型的变更，然后将其分类处理，也就是说使用 kotlin-inject 依赖注入存在有限的几种使用方式，我针对这几种情况分别使用 koin 来替换重构，这样就存在了有限的特定场景下 kotlin-inject 与 koin 一一对应的情况，处理好这个问题后，我直接让 AI 分别模仿这几种情况下我写的重构代码，然后逐一修改。</p>
+
+
+
+<p class="wp-block-paragraph">这样做可以大大降低 Codex 面临的问题的复杂度，它只需要模仿我的代码，按部就班的解决剩下的问题即可，对于越复杂的问题 Codex 越容易出现错误，最开始我直接让 Codex 来重构依赖注入时它先跑了 1.5 小时，不仅耗光了好几轮的 Context，也耗光了五小时的用量，然后问题依然没有被解决，因为依赖关系实在是很复杂，它也几乎被绕晕了。</p>
+
+
+
+<figure class="wp-block-image aligncenter size-full"><img decoding="async" width="570" height="328" src="https://zhangke.space/wp-content/uploads/2026/02/893f009e8b44d8f9c5edaffcab23381b.png" alt="" class="wp-image-1089" srcset="https://zhangke.space/wp-content/uploads/2026/02/893f009e8b44d8f9c5edaffcab23381b.png 570w, https://zhangke.space/wp-content/uploads/2026/02/893f009e8b44d8f9c5edaffcab23381b-300x173.png 300w" sizes="(max-width: 570px) 100vw, 570px" /></figure>
+
+
+
+<p class="wp-block-paragraph">其次是这样的代码更加可控，因为至少我对于软件整体的理解比它要更深入，架构能力比它强，我知道正确的演进方向，所以我要发挥我的专长把复杂的问题先解决掉，剩下大量的重复性工作再交给它，咱们各司其职。</p>
+
+
+
+<p class="wp-block-paragraph">目前我使用 Codex 时，如果是一个比较大的任务，我基本上都会给它提供一个最佳实践的代码，让它参照最佳实践来工作。</p>
+
+
+
+<h2 class="wp-block-heading">特殊情况特殊处理</h2>
+
+
+
+<p class="wp-block-paragraph">因为 Fread 是一个跨平台的 KMP 项目，依赖注入不涉及通用代码层，也存在很多平台实现层，这些情况叠加在一起问题就变得更加复杂了。</p>
+
+
+
+<p class="wp-block-paragraph">很多时候特殊情况我们自己只需要几行代码或者很短的时间内就能解决，但是 AI 则需要考虑很长时间，并且对于它来说复杂度会成倍增加。</p>
+
+
+
+<p class="wp-block-paragraph">Codex 一方面对于 KMP 项目了解的不多，另一方面对于平台实现层如何正确处理也不能提供一个很好的解决方案。对于这种特殊情况我的解决办法仍然是逐步解决问题，先人工编写部分代码，然后交给 Codex 解决剩下的部分问题，然后人工继续编写部分代码，Codex 再继续解决剩下的问题。</p>
+
+
+
+<p class="wp-block-paragraph">具体而言，对于每个存在依赖注入的模块，我都会声明一个如下的 expect 函数，并且在注册到当前的 koin 模块中。</p>
+
+
+
+<pre class="wp-block-code"><code>expect fun Module.createPlatformModule()
+
+val commonModule = module {
+    createPlatformModule()    
+}
+</code></pre>
+
+
+
+<p class="wp-block-paragraph">然后再 Android/iOS 平台创建具体的实现：</p>
+
+
+
+<pre class="wp-block-code"><code>actual fun Module.createPlatformModule() {
+}
+</code></pre>
+
+
+
+<p class="wp-block-paragraph">我先做完这一步，然后让 Codex 把所有模块都添加一个这样的改动。</p>
+
+
+
+<p class="wp-block-paragraph">上面的步骤完成后，就需要往这些平台实现的依赖注入模块内注册原有的 kotlin-inject 类。这样问题就简单多了，我只需要指导 Codex 把 kotlin-inject 模块中的声明同步到这个 koin 的平台级的模块内即可，这样的事情 Codex 可以完成的很出色。</p>
+
+
+
+<p class="wp-block-paragraph">然后重复上述步骤，完成所有模块的相关重构。</p>
+
+
+
+<h2 class="wp-block-heading">任务拆分很重要</h2>
+
+
+
+<p class="wp-block-paragraph">由于 Codex 的上下文有限，解决一些复杂的任务时很容易会逐渐丧失初心，甚至给代码做一些奇怪的改动。</p>
+
+
+
+<p class="wp-block-paragraph">拆分任务的逻辑是对于复杂的任务，架构相关的工作仍然是交给人类完成，这部分工作完成后就可以继续拆分出独立且简单的子任务，这些交给 Codex 来完成，这样即使 Codex 犯错影响也不会很大。回滚代码时也更省 Token。</p>
+
+
+
+<p class="wp-block-paragraph">AI 生成的代码我个人习惯是一定会全部 review 之后再 accept，如果不做任务拆分那 review 的任务量就太大了，我自己的大脑怕是也难以承受。</p>
+
+
+
+<h2 class="wp-block-heading">复杂问题使用 SKILL</h2>
+
+
+
+<p class="wp-block-paragraph">对于用 nav3 替换 Voyager 这个任务改动的代码非常多，其中包含了大量的重复性工作，就算是完全让 AI 来模仿我写好的最佳实践但是由于代码太多，任务比较复杂 Codex 仍然有可能出错，这时候我们就可以通过创建 SKILL 来解决这个复杂的问题了。</p>
+
+
+
+<pre class="wp-block-code"><code>---
+name: screen2navkey
+description: convert Voyager Screen to navigation 3
+---
+
+## 任务背景
+目前项目中使用了 Voyager(cafe.adriel.voyager:voyager-navigator) 作为导航框架，现在我希望将 Voyager 替换成 navigation3(androidx.navigation3:navigation3-runtime).
+
+## 任务内容
+目前 nav3 我已经集成并且完成了部分代码的重构，现在你需要帮我做一件事情，将一些 Screen 替换成 一个 Composable 函数 + NavKey。
+
+你的目的是把继承自 cafe.adriel.voyager.core.screen.Screen 或者 com.zhangke.fread.common.page.BaseScreen 的类改成 androix.navigaton3 的一个 NavKey + 对应的 Composable 函数。
+
+比如现在有这样的一个 Screen：
+
+class ProfileScreen : BaseScreen() {
+
+    @Composable
+    override fun Content() {
+        super.Content()
+        val viewModel = getViewModel&lt;ProfileHomeViewModel>()
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(MaterialTheme.colors.background),
+        ) {
+            Text(text = "Profile Screen")
+        }
+    }
+}
+
+
+那么你需要改成如下方式，并且新增一个 NavKey:
+
+
+object ProfileScreenKey: NavKey
+
+@Composable
+fun ProfileScreen(viewModel: ProfileHomeViewModel){
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colors.background),
+    ) {
+        Text(text = "Profile Screen")
+    }
+}
+
+但如果这个页面有参数，那么 key 也应该带一个参数：
+
+data class DetailScreenKey(val itemId: String) : NavKey
+
+@Composable
+fun DetailScreen(viewModel: DetailViewModel){
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colors.background),
+    ) {
+        Text(text = "Detail Screen for item: $itemId")
+    }
+}
+
+
+然后你需要把这个新增的 NavKey 注册到当前模块的 NavEntryProvider 中，比如：
+
+class ProfileNavEntryProvider : NavEntryProvider {
+
+    override fun EntryProviderScope&lt;NavKey>.build() {
+        entry&lt;ProfileScreenKey> {
+            ProfileScreen(koinViewModel())
+        }
+        entry&lt;CreatePlanScreenNavKey> { key ->
+            // with parameters
+            CreatePlanScreen(koinViewModel { parametersOf(key.lexicon) })
+        }
+    }
+
+    override fun PolymorphicModuleBuilder&lt;NavKey>.polymorph() {
+        subclass(ProfileScreenKey::class)
+        subclass(CreatePlanScreenNavKey::class)
+    }
+}
+
+
+## 工作流程
+你需要 Follow 以下工作流程：
+1. 首先找到给定模块中所有符合如下条件的 Screen：
+    a. 继承自 cafe.adriel.voyager.core.screen.Screen 或者 com.zhangke.fread.common.page.BaseScreen
+    b. 不包含任何嵌套 **Navigator**
+2. 将这些符合条件的 Screen 列出并输出到控制台
+3. 逐个重构这些 Screen
+4. 对于每个 Screen，首先创建该 Screen 的 NavKey，比如给 ProfileScreen 创建一个 ProfileScreenNavKey.
+5. 将 ProfileScreen 改为 @Composable 函数。
+6. 对于使用了 navigationResult 的地方请保持不动，不要试图修改相关的代码，即使有编译报错也不用管，保留原样。
+7. 将 ProfileScreenNavKey 以及这个 @Composable 函数 注册到该模块的 NavEntryProvider 中。
+8. 找到这个 Screen 的相关引用，并将跳转处改为这个 Screen 的 NavKey
+9. 结束这个 Screen 重构并进入下一个 Screen。
+10. 直到所有重构完所有满足条件的 Screen。
+
+## 绝对禁止
+一下内容为绝对禁止修改的规则：
+1. 对于已经修改完成的类请不要再改
+2. 你只应该修改 Screen 和 navigation3 相关的代码，其他的代码不要改，即使你觉得有问题也不要改
+3. 不要做任何超出我要求的事情
+4. 遇到不属于上述情况的页面请直接忽略，不要自己想办法解决
+5. 不要求改任何嵌套的 Navigator 页面，遇到嵌套的情况直接跳过
+6. 不要修改任何已经使用 navigation3 的页面
+7. 不要通过代码引用的方式找某个页面的引用并且试图修改其引用点
+8. 不要修改任何超出要求的代码</code></pre>
+
+
+
+<p class="wp-block-paragraph">在这个 SKILL 中我写了一些绝对禁止的行为，其实就是在规避特殊情况，也就是上面提到的特殊情况特殊处理，这样可以极大的降低任务复杂度。</p>
+
+
+
+<p class="wp-block-paragraph">如果我们定义了具体的工作流程，并且要求 Codex 必须遵守，那么 Codex 出错的可能性就会小很多。</p>
+
+
+
+<h2 class="wp-block-heading">单元测试验证</h2>
+
+
+
+<p class="wp-block-paragraph">我们也可以先让 AI 针对任务编写足够多的单元测试，并且使重构前的代码全部通过单测，然后进行大规模的重构后再次运行单元测试，以此保证软件稳定性。不过 Fread 本次重构涉及到了很多 UI 代码，单测比较麻烦就没做。</p>
+
+
+
+<h2 class="wp-block-heading">提交并 Review</h2>
+
+
+
+<p class="wp-block-paragraph">根据我们上面的步骤，每次一个小的任务完成后都可以创建一个提交，然后创建一个新的对话任务来 review 这个提交，创建新的 Threads 是因为要丢掉原本的 Context，作为一个全新的任务交给 AI，否则它可能为自己的问题自圆其说。</p><p>The post <a href="https://zhangke.space/%e4%bd%bf%e7%94%a8-codex-%e8%bf%9b%e8%a1%8c%e4%b8%80%e6%ac%a1%e4%b8%8a%e4%b8%87%e8%a1%8c%e7%9a%84%e9%87%8d%e6%9e%84/">使用 Codex 进行一次上万行代码的重构</a> first appeared on <a href="https://zhangke.space">张可的博客</a>.</p>]]></content:encoded>
+					
+					<wfw:commentRss>https://zhangke.space/%e4%bd%bf%e7%94%a8-codex-%e8%bf%9b%e8%a1%8c%e4%b8%80%e6%ac%a1%e4%b8%8a%e4%b8%87%e8%a1%8c%e7%9a%84%e9%87%8d%e6%9e%84/feed/</wfw:commentRss>
+			<slash:comments>4</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>成为父亲的这一年</title>
+		<link>https://zhangke.space/%e6%88%90%e4%b8%ba%e7%88%b6%e4%ba%b2%e7%9a%84%e8%bf%99%e4%b8%80%e5%b9%b4/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=%25e6%2588%2590%25e4%25b8%25ba%25e7%2588%25b6%25e4%25ba%25b2%25e7%259a%2584%25e8%25bf%2599%25e4%25b8%2580%25e5%25b9%25b4</link>
+					<comments>https://zhangke.space/%e6%88%90%e4%b8%ba%e7%88%b6%e4%ba%b2%e7%9a%84%e8%bf%99%e4%b8%80%e5%b9%b4/#comments</comments>
+		
+		<dc:creator><![CDATA[kezhang404@gmail.com]]></dc:creator>
+		<pubDate>Thu, 20 Nov 2025 05:39:39 +0000</pubDate>
+				<category><![CDATA[生活]]></category>
+		<guid isPermaLink="false">https://zhangke.space/?p=1085</guid>
+
+					<description><![CDATA[<p>2024 年真的发生了好多事情，我们搬到了属于自己的家、我过了三十岁生日以及我们有了一个孩子。宝宝是在冬天的出 [&#8230;]</p>
+<p>The post <a href="https://zhangke.space/%e6%88%90%e4%b8%ba%e7%88%b6%e4%ba%b2%e7%9a%84%e8%bf%99%e4%b8%80%e5%b9%b4/">成为父亲的这一年</a> first appeared on <a href="https://zhangke.space">张可的博客</a>.</p>]]></description>
+										<content:encoded><![CDATA[<p class="wp-block-paragraph">2024 年真的发生了好多事情，我们搬到了属于自己的家、我过了三十岁生日以及我们有了一个孩子。宝宝是在冬天的出生的，临近元旦，赶上了龙年的最后一个月。</p>
+
+
+
+<h3 class="wp-block-heading">为什么要生孩子？</h3>
+
+
+
+<p class="wp-block-paragraph">乐观的说，我决定生孩子的原因之一就是我很好奇我最终会培养出来一个什么样的孩子，我也很期待有一天能和孩子一起聊天，一起学习，陪伴他成长的过程应该会很快乐。费曼学习法的核心就是你要把你学到的知识向别人表达出来，那么教育孩子这件事情就是要把我的人生向孩子表达出来。</p>
+
+
+
+<p class="wp-block-paragraph">当然还有一点，我不确定，但我总觉得如果有一天我老了，随着激素水平的下降和身体日渐衰弱，我会逐渐感觉到世界的虚无，因为我一直是一个热爱生活热爱这个世界的人，但如果真的有那么一天，我感受到了这种虚无和空洞，我完全不知道要如何接受这一切。但孩子至少会是我和这个世界的一个连接，支撑着我继续活下去。</p>
+
+
+
+<p class="wp-block-paragraph">但是生孩子这件事情还能有什么更高尚的原因吗？我好像没想到，生孩子是自私的，因为做出生孩子决定的时候孩子并不存在，我们无法寻求他的意见，所以他无论如何没办法在主观上希望我把他生下来，既然有了这层因果关系存在，那么选择生孩子这件事情上就一定存在道德瑕疵。所以我也不会通过什么我给了你生命养育你长大之类的观点来给他加上一层原罪好让他以后孝敬我。</p>
+
+
+
+<h3 class="wp-block-heading">教育</h3>
+
+
+
+<p class="wp-block-paragraph">好在目前为止我们仍然没有要鸡娃的打算，我们也不会给娃的未来抱有某些功利的期望，不过养娃仍然是一件困难的事情，主要原因在于，一方面我们自己成长过程中已经习得了很多不好的习惯，包括性格缺陷种种，我们不希望在孩子面前继续表现出来，不然孩子也会自然的学到。另一方面来源于外部，东亚国家尤其是咱们这里，社会环境和学校教育也都存在相当多的问题，这些问题和我们的教育之间必然会产生矛盾，如何让孩子在这其中保持平衡我觉得应该很困难。</p>
+
+
+
+<p class="wp-block-paragraph">其实我们对孩子的期望非常简单，就是身体健康和精神健康。身体健康花钱解决，精神健康是我们作为家长要认真研究的事情，我觉得作为一个健全的人要学会正确的思考，要有同理心，要有一定的知识，其他的就按照他自己的意愿吧。</p>
+
+
+
+<p class="wp-block-paragraph">好在现在孩子才一岁，刚刚说的这些都是未来需要考虑的事情，但现阶段也有现阶段的难题。得益于移动互联网的发展，商业公司无时无刻不在考虑如何掠夺用户的注意力而不考虑后果，现在即使是三岁小孩也可以刷抖音和玩王者荣耀，这种产品对孩子的大脑是会产生物理上的损伤，以及为了应对婴幼儿没有产品可以抢夺注意力的缺口自然也有商家发明了各种声光电玩具，总之它们希望孩子的注意力越短越好。我不太能接受的是孩子会失去作为一个人类应有的思考能力，不管是知识的获取还是复杂的思考注意力都是前提，现在我们也尽可能培养孩子独立玩耍独立探索的能力，尽可能减少声光电玩具。</p>
+
+
+
+<h3 class="wp-block-heading">变化</h3>
+
+
+
+<p class="wp-block-paragraph">有了孩子之后人生会发生巨大的变化，即使已经过了快一年了我们还是没有习惯这样的生活。</p>
+
+
+
+<p class="wp-block-paragraph">首先这是我们身份的巨大转变，我们现在是绝对意义上的中年人了，一点也没办法再以年轻人自居了，社会不会像对待年轻人一样对待中年人，而且中年人有中年人的行事风格，有中年人的压力和焦虑，好像过了三十岁，有了孩子之后突然就变成了中年人，毕竟不得不考虑孩子带来的责任感。</p>
+
+
+
+<p class="wp-block-paragraph">当然随之而来的还有人生的重点，什么人生的意义个人价值自我实现在养孩子面前都得往后稍稍，我们深刻的明白养孩子意味着什么，因此我们得完全承担起这个重大的责任，不仅要保证孩子身体健康，还要保证精神的健康，还要尽可能的为他的未来考虑，这是一件没有上限的事情。</p>
+
+
+
+<p class="wp-block-paragraph">实际一点的变化就是个人时间消失殆尽，我差不多每天六到七点左右下班到家，然后到晚上十二点还有五个多小时，以前这个时间完全属于我自己，可以看两部电影，或者写点代码看点书。但有了孩子之后情况就不一样了，首先要带娃直到晚上八点多他睡觉，然后中间他可能会醒，我们就得去冲奶粉，不仅如此，还有一些孩子的家务活比如洗衣服洗奶瓶之类的。然后因为孩子醒得早，差不多早上六点多就醒了所以我就要在十点左右睡觉。所以晚上差不多只有一个多小时自己的时间了，还不够看个电影的。</p>
+
+
+
+<p class="wp-block-paragraph">前三个月孩子只能在小区里推着婴儿车转转，公园都不太能去，因为要睡觉喝奶换尿不湿。再稍微大一点的时候可以坐车了，然后我们才能去车程三小时内的地方玩玩，但仍然要带一大堆东西。现在快一岁了，我们终于可以带他爬山，我用个背带背在我胸前，他可以直接在我怀里睡觉或者看看风景，我俩这才算喘口气，不过这样出去玩也是很累，毕竟背着一个快二十斤重的宝宝爬山。</p>
+
+
+
+<p class="wp-block-paragraph">小婴儿对父母是非常依赖的，尤其是在前三个月妈妈几乎是寸步不离，直到现在晚上基本上也只能妈妈哄睡，偶尔可以让奶奶哄睡，我俩出去找点夜生活。好在现在周末白天基本上可以让奶奶带着我们俩在苏州玩玩，所以十全街观前街这种人挤人的地方我们也还是去了，附近的商场和公园也都去了很多次，算是苦中作乐。</p>
+
+
+
+<h3 class="wp-block-heading">好处</h3>
+
+
+
+<p class="wp-block-paragraph">好处的话也是有的，生孩子会带来一些全新的前所未有的体验，可能所有的家长都一样，真的完全没办法客观评价自家孩子的颜值，虽然我的孩子眼袋很大但我仍然觉得他是最可爱的宝宝，他的一举一动都太可爱了，是那种发自内心的无法控制的可爱，就算单纯的看着他坐在那里也会感觉虽然不知道为什么但就是很可爱。</p>
+
+
+
+<p class="wp-block-paragraph">然后也会多出来很多作为家长才会有的情感吧，孩子对父母的依赖也会让父母产生幸福和成就感，有时候我们俩想单独出去玩不带孩子但是刚到楼下就已经开始想他了，然后会觉得愧疚，不应该把他留在家里，但孩子也要学会长大，不得不面对这样的情况。</p>
+
+
+
+<p class="wp-block-paragraph">写到这里我突然想到，未来人类总会逐渐脱离碳基生物这个设定的吧？总会不需要怀孕这么久才分娩然后养十八年才成人吧？那时可能就有了生化人或者意识上传，人类实现了永生，那我们现在死的这波人岂不是太可惜了？眼看着马上就能永生结果死在了门口。</p><p>The post <a href="https://zhangke.space/%e6%88%90%e4%b8%ba%e7%88%b6%e4%ba%b2%e7%9a%84%e8%bf%99%e4%b8%80%e5%b9%b4/">成为父亲的这一年</a> first appeared on <a href="https://zhangke.space">张可的博客</a>.</p>]]></content:encoded>
+					
+					<wfw:commentRss>https://zhangke.space/%e6%88%90%e4%b8%ba%e7%88%b6%e4%ba%b2%e7%9a%84%e8%bf%99%e4%b8%80%e5%b9%b4/feed/</wfw:commentRss>
+			<slash:comments>8</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>梦中的两次濒死体验</title>
+		<link>https://zhangke.space/%e6%a2%a6%e4%b8%ad%e7%9a%84%e4%b8%a4%e6%ac%a1%e6%bf%92%e6%ad%bb%e4%bd%93%e9%aa%8c/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=%25e6%25a2%25a6%25e4%25b8%25ad%25e7%259a%2584%25e4%25b8%25a4%25e6%25ac%25a1%25e6%25bf%2592%25e6%25ad%25bb%25e4%25bd%2593%25e9%25aa%258c</link>
+					<comments>https://zhangke.space/%e6%a2%a6%e4%b8%ad%e7%9a%84%e4%b8%a4%e6%ac%a1%e6%bf%92%e6%ad%bb%e4%bd%93%e9%aa%8c/#comments</comments>
+		
+		<dc:creator><![CDATA[kezhang404@gmail.com]]></dc:creator>
+		<pubDate>Tue, 28 Oct 2025 05:49:01 +0000</pubDate>
+				<category><![CDATA[生活]]></category>
+		<guid isPermaLink="false">https://zhangke.space/?p=1083</guid>
+
+					<description><![CDATA[<p>我做过很多稀奇古怪的梦，其中很多都和现实关联不大，但是我的噩梦和现实世界一般都有很强的关联。我因为身体健康的原 [&#8230;]</p>
+<p>The post <a href="https://zhangke.space/%e6%a2%a6%e4%b8%ad%e7%9a%84%e4%b8%a4%e6%ac%a1%e6%bf%92%e6%ad%bb%e4%bd%93%e9%aa%8c/">梦中的两次濒死体验</a> first appeared on <a href="https://zhangke.space">张可的博客</a>.</p>]]></description>
+										<content:encoded><![CDATA[<p class="wp-block-paragraph">我做过很多稀奇古怪的梦，其中很多都和现实关联不大，但是我的噩梦和现实世界一般都有很强的关联。我因为身体健康的原因，一直有着很大的心理负担，有时候压力很大。也可能是因为死亡焦虑，我最近做了两次和死亡有关的噩梦，这也应该是我距离死亡最近的两次。</p>
+
+
+
+<p class="wp-block-paragraph">梦中的世界有个奇怪的设定，这里的人可以自由的选择安乐死，不管是因为疾病还是别的原因，你可以轻易的选择死亡。社会上也因此提供了执行死亡的机构，自愿安乐死的人都要到这里来排队取号，这个机构有点像体育馆或者音乐馆，建筑物中间是一个很大的空地，大约两个篮球场这么大？周围是一些办公室小房间，在进入场馆之前需要签署一系列的协议，然后携带好身份证和协议进入场馆。</p>
+
+
+
+<p class="wp-block-paragraph">进入场馆意味着你将会彻底和这个世界断绝联系，所有人都会扔掉所有的随身物品包括手机，换上统一的白色服装，你也可以选择进入后直接安乐死，也可以选择在馆内住几天，周围的小房间就是给人睡觉用的，这个场馆就像是死亡和活着的中间地带，你不能与外界进行任何联系，等待你的也只有死亡。</p>
+
+
+
+<p class="wp-block-paragraph">我不知道什么原因也选择了安乐死，签署完协议后我就开始排队进入场馆，我前面是一个中年男人，带着一个洗脸盆，里面放了毛巾牙刷之类的，他有家庭和孩子，因为进入后就不能带手机了，所以这个男人在打电话给她的老婆，大概内容是孩子的书白天被扔到桌子下面了，记得捡起来之类的，总之就是很日常的交流，丝毫不像马上就要死的人。</p>
+
+
+
+<p class="wp-block-paragraph">但我在此时产生了巨大的恐惧，我突然意识到我马上就要死了，彻底与这个世界断绝联系，一切全都要消失了，我面前的男人肯定也是这样，但此时他仍然在交代这些日常琐事，但这些琐事是我们和这个世界最紧密的联系，我们在乎着这个世界的每一处细节，但问题是我们马上就要死了，彻底的消失，我非常恐惧，我害怕死亡，害怕消失，害怕与这个世界断绝联系，然后我就被巨大的恐惧惊醒了，过了好一会才缓过来。</p>
+
+
+
+<hr class="wp-block-separator has-alpha-channel-opacity"/>
+
+
+
+<p class="wp-block-paragraph">另一个是这几天的噩梦，梦中不知道什么原因我被人追杀，我疯狂逃命，没有任何能安全的地方，中间找到了一个角落我躲在那里终于才有了喘口气的机会，此时我突然想到我为什么不反杀回去呢？最好的防守就是攻击，于是我找到了追杀我的人，一刀杀死了他。</p>
+
+
+
+<p class="wp-block-paragraph">然后我整个人变得很轻松，很开心，我就骑上我新买的公路车出去玩，骑了一会突然觉得不对，我毕竟刚刚杀了人啊，这完全是犯法的行为，我应该立即去自首，表现好的话可以少判几年，我就去自首，警察当着我的老婆孩子的面宣判我要监禁三十到四十年左右。</p>
+
+
+
+<p class="wp-block-paragraph">这时候我想到了我刚出生的孩子，我的老婆，以及他们后面该怎么活下去这一切，然后想到了我几乎再也见不到她们了，也将彻底从她们的生活中离开，也无法对她们的生活提供任何帮助，想着想着我开始害怕，我想这和死亡有什么区别，这对我来说就是死亡，我害怕他们没法好好的生活，我也害怕我进入了监狱就意味着要离开这个世界，但是我马上就要进监狱了，我也做不了任何改变，这是无法改变的事实，这是确定的未来，我真的非常恐惧。</p>
+
+
+
+<p class="wp-block-paragraph">也大概就在这个时候我从梦中惊醒，现实世界的情况逐渐回到我的大脑，我开始意识到这是个梦，心情才逐渐平复。第二晚我甚至有点害怕入睡，害怕继续做噩梦。</p>
+
+
+
+<p class="wp-block-paragraph">这两次梦带给我很大的冲击，也是我目前遭受到的最接近死亡的情况，只是我还年轻，现在还没办法平静的看待死亡这个事情，或许等我老了就可以了吧。</p>
+
+
+
+<p class="wp-block-paragraph"></p><p>The post <a href="https://zhangke.space/%e6%a2%a6%e4%b8%ad%e7%9a%84%e4%b8%a4%e6%ac%a1%e6%bf%92%e6%ad%bb%e4%bd%93%e9%aa%8c/">梦中的两次濒死体验</a> first appeared on <a href="https://zhangke.space">张可的博客</a>.</p>]]></content:encoded>
+					
+					<wfw:commentRss>https://zhangke.space/%e6%a2%a6%e4%b8%ad%e7%9a%84%e4%b8%a4%e6%ac%a1%e6%bf%92%e6%ad%bb%e4%bd%93%e9%aa%8c/feed/</wfw:commentRss>
+			<slash:comments>6</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Fread 最新版功能介绍</title>
+		<link>https://zhangke.space/fread-%e6%9c%80%e6%96%b0%e7%89%88%e5%8a%9f%e8%83%bd%e4%bb%8b%e7%bb%8d/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=fread-%25e6%259c%2580%25e6%2596%25b0%25e7%2589%2588%25e5%258a%259f%25e8%2583%25bd%25e4%25bb%258b%25e7%25bb%258d</link>
+					<comments>https://zhangke.space/fread-%e6%9c%80%e6%96%b0%e7%89%88%e5%8a%9f%e8%83%bd%e4%bb%8b%e7%bb%8d/#respond</comments>
+		
+		<dc:creator><![CDATA[kezhang404@gmail.com]]></dc:creator>
+		<pubDate>Wed, 22 Oct 2025 14:18:36 +0000</pubDate>
+				<category><![CDATA[Fread]]></category>
+		<category><![CDATA[OpenSource]]></category>
+		<guid isPermaLink="false">https://zhangke.space/?p=1075</guid>
+
+					<description><![CDATA[<p>距离 Fread 上架已经一年多了，上架后一直在不断的优化产品体验和提供更加丰富的功能，近期也有一些比较大的改 [&#8230;]</p>
+<p>The post <a href="https://zhangke.space/fread-%e6%9c%80%e6%96%b0%e7%89%88%e5%8a%9f%e8%83%bd%e4%bb%8b%e7%bb%8d/">Fread 最新版功能介绍</a> first appeared on <a href="https://zhangke.space">张可的博客</a>.</p>]]></description>
+										<content:encoded><![CDATA[<p class="wp-block-paragraph">距离 Fread 上架已经一年多了，上架后一直在不断的优化产品体验和提供更加丰富的功能，近期也有一些比较大的改动，所以这里介绍一下目前 Fread 最新版本的主要功能。</p>
+
+
+
+<p class="wp-block-paragraph">目前 Fread 对于长毛象的支持已经比较完善了，大部分的功能都已经实现，Bluesky 方面主要是缺少消息推送和私信功能，对于发布帖子以及浏览交互方面基本都已经支持，RSS 的协议比较简单所以支持起来不麻烦，只不过缺少自动拉取的功能，未来会考虑加上这个功能，也可能会提供后台服务用于加速获取内容。</p>
+
+
+
+<p class="wp-block-paragraph">主要的功能和改动如下：</p>
+
+
+
+<ul class="wp-block-list">
+<li>Onboarding 流程优化</li>
+
+
+
+<li>添加未登录的 Mastodon 内容</li>
+
+
+
+<li>Pixelfed 支持</li>
+
+
+
+<li>混合 Feeds（RSS+Bluesky+Mastodon）</li>
+
+
+
+<li>Profile Tab UI 大改版</li>
+
+
+
+<li>搜索自己或别人发布过的帖子</li>
+
+
+
+<li>用户详情页改版</li>
+
+
+
+<li>同一个实例登录多账号</li>
+
+
+
+<li>多 Tab 选中账号自动同步</li>
+
+
+
+<li>将一个帖子同时发布到多个账号</li>
+
+
+
+<li>Mastodon 引用帖子</li>
+
+
+
+<li>消息通知改版</li>
+
+
+
+<li>通过其他账号打开帖子</li>
+
+
+
+<li>默认打开的时间线位置</li>
+
+
+
+<li>帖子内容大小设置</li>
+
+
+
+<li>动态颜色</li>
+
+
+
+<li>更多的本地化支持</li>
+
+
+
+<li>新增捐赠渠道</li>
+
+
+
+<li>Roadmap</li>
+</ul>
+
+
+
+<h1 class="wp-block-heading">Onboarding 流程</h1>
+
+
+
+<p class="wp-block-paragraph">近期做的比较大的改动是在添加内容时提供三个内容类型让用户选择，选择完成后进入下一步开始添加具体的内容信息，以前是只需要用户输入任意的内容，Fread 根据用户的输入来判断进入哪种内容的添加流程，虽然这样的操作更简单但是我发现很容易给用户造成困惑，很多人并不知道应该如何添加自己期望的内容类型，因此 Fread 直接提供了选择类型的页面，这样更容易理解，也就是下图这个页面。</p>
+
+
+
+<figure class="wp-block-image aligncenter size-large is-resized"><img decoding="async" width="602" height="1024" src="https://zhangke.space/wp-content/uploads/2025/10/Weixin_Image_20251021220001_172_16-602x1024.jpg" alt="" class="wp-image-1076" style="width:368px;height:auto" srcset="https://zhangke.space/wp-content/uploads/2025/10/Weixin_Image_20251021220001_172_16-602x1024.jpg 602w, https://zhangke.space/wp-content/uploads/2025/10/Weixin_Image_20251021220001_172_16-176x300.jpg 176w, https://zhangke.space/wp-content/uploads/2025/10/Weixin_Image_20251021220001_172_16-768x1307.jpg 768w, https://zhangke.space/wp-content/uploads/2025/10/Weixin_Image_20251021220001_172_16-902x1536.jpg 902w, https://zhangke.space/wp-content/uploads/2025/10/Weixin_Image_20251021220001_172_16-1203x2048.jpg 1203w, https://zhangke.space/wp-content/uploads/2025/10/Weixin_Image_20251021220001_172_16.jpg 1440w" sizes="(max-width: 602px) 100vw, 602px" /></figure>
+
+
+
+<p class="wp-block-paragraph">另外在内容的添加页面中的搜索功能也做了完善，现在你可以在输入框中输入用户名或者用户的 Handle、WebFinger、Home Page URL 都可以搜索到用户，也可以直接输入实例名搜索实例。</p>
+
+
+
+<h2 class="wp-block-heading">未登录内容的支持</h2>
+
+
+
+<p class="wp-block-paragraph">Fread 还有个功能得到了一些用户的喜爱，也就是可以在不登录的情况下浏览一个 Mastodon 实例的内容，虽然不同的实例对登录状态都有不同的限制，但是很多实例允许在未登录的情况下浏览本地时间轴和跨站时间轴，对于不想注册更多账号但同时又希望浏览其他实例内容的用户来说这很有用。</p>
+
+
+
+<p class="wp-block-paragraph">使用方式也很简单，在添加实例的最后一步时不要点击下面的登录按钮直接返回即可，因为当你看到 Fread 提示添加成功时就表示实例已经被添加到 Fread 中了，此时不登录也是可以在首页的抽屉栏中看到的。</p>
+
+
+
+<h1 class="wp-block-heading">Pixelfed 支持</h1>
+
+
+
+<p class="wp-block-paragraph">因为 Pixelfed 也是支持 ActivityPub 协议的，所以兼容起来比较容易，只不过 Pixelfed 对 ActivityPub 的协议是部分支持，所以刚开始遇到了一些问题，但很快就解决了。</p>
+
+
+
+<p class="wp-block-paragraph">目前 Fread 是已经可以当作 Pixelfed 客户端来使用了，未来会考虑支持 Pixelfed 视图模式，也就是 Timeline 中的帖子显示方式会按照 Pixelfed 的 UI 来做。</p>
+
+
+
+<h1 class="wp-block-heading">混合 Feeds</h1>
+
+
+
+<p class="wp-block-paragraph">从一开始 Fread 的设计目标之一就是打通各个平台的内容壁垒，所以 Fread 一直都是支持创建混合 Feeds 流的，在添加内容时选择 Mixed Content，然后就可以添加不同的内容源，不仅仅是 RSS，也可以是 Mastodon 的用户或者 Bluesky 的用户，创建完成后 Fread 会打造一条包含了所有源的 Feeds。</p>
+
+
+
+<h1 class="wp-block-heading">Profile 模块</h1>
+
+
+
+<p class="wp-block-paragraph">Fread 一个主要的特色功能就是对多账号的支持更加友好，这主要体现在交互方面，所以用户不需要进行任何切换账号的操作，既然如此，那么所有已登录的账号实际上都是平等的，都会平铺显示在 Profile Tab 内。</p>
+
+
+
+<p class="wp-block-paragraph">Profile 作为首页的四个 Tab 之一也做了很大的改动，主要是对 UI 的优化，首先是移除了每个账号底部的几个快捷操作按钮，主要是这些按钮放在这里有点意义不明，并且也不是高频操作，这些功能直接进入用户详情页同样可以做到。</p>
+
+
+
+<p class="wp-block-paragraph">另外就是对账号卡片样式的优化，新增了 Banner 的显示和关注信息，改动后的样子如下图所示。</p>
+
+
+
+<figure class="wp-block-image aligncenter size-large is-resized"><img decoding="async" width="492" height="1024" src="https://zhangke.space/wp-content/uploads/2025/10/dc6961289e96b2bb05f726ed05ea627f-492x1024.jpg" alt="" class="wp-image-1077" style="width:378px;height:auto" srcset="https://zhangke.space/wp-content/uploads/2025/10/dc6961289e96b2bb05f726ed05ea627f-492x1024.jpg 492w, https://zhangke.space/wp-content/uploads/2025/10/dc6961289e96b2bb05f726ed05ea627f-144x300.jpg 144w, https://zhangke.space/wp-content/uploads/2025/10/dc6961289e96b2bb05f726ed05ea627f-768x1600.jpg 768w, https://zhangke.space/wp-content/uploads/2025/10/dc6961289e96b2bb05f726ed05ea627f-737x1536.jpg 737w, https://zhangke.space/wp-content/uploads/2025/10/dc6961289e96b2bb05f726ed05ea627f-983x2048.jpg 983w, https://zhangke.space/wp-content/uploads/2025/10/dc6961289e96b2bb05f726ed05ea627f-scaled.jpg 1229w" sizes="(max-width: 492px) 100vw, 492px" /></figure>
+
+
+
+<h2 class="wp-block-heading">多 Tab 选中账号自动同步</h2>
+
+
+
+<p class="wp-block-paragraph">仔细看的话你会发现上图中间账号的用户名后面有一个绿色的点，这也是最近新增的功能。</p>
+
+
+
+<p class="wp-block-paragraph">在首页的前三个 Tab 中用户都可以通过滑动或者 Popup 内切换内容或账号，比如你在首页查看账号 A 的内容时可以右滑切换到账号 B 的内容，或者点击左侧抽屉栏切换内容，那么此时也就意味着你当前正在浏览的账号主体发生了变化，那么相应的其它 Tab 现在也会切换到对应的账号主体。而 Profile Tab 中的绿点就表示当前的账号主体。</p>
+
+
+
+<h2 class="wp-block-heading">搜索指定用户帖子功能</h2>
+
+
+
+<p class="wp-block-paragraph">现在在用户详情页的顶部新增了一个搜索按钮，可以用于搜索这个用户发布过的帖子（包括自己），不过由于 Mastodon 本身的限制，搜索别人的帖子时有可能无法全部搜索出来。</p>
+
+
+
+<h2 class="wp-block-heading">用户详情页改版</h2>
+
+
+
+<p class="wp-block-paragraph">用户详情页现在主要的改动是移除了原本的“关于”Tab，“关于”部分的内容上移到头部显示。然后新增了点赞和收藏 Tab。</p>
+
+
+
+<figure class="wp-block-image aligncenter size-large is-resized"><img decoding="async" width="490" height="1024" src="https://zhangke.space/wp-content/uploads/2025/10/71bdacfae0468031389ed5923763ec04-490x1024.jpg" alt="" class="wp-image-1078" style="width:362px;height:auto" srcset="https://zhangke.space/wp-content/uploads/2025/10/71bdacfae0468031389ed5923763ec04-490x1024.jpg 490w, https://zhangke.space/wp-content/uploads/2025/10/71bdacfae0468031389ed5923763ec04-144x300.jpg 144w, https://zhangke.space/wp-content/uploads/2025/10/71bdacfae0468031389ed5923763ec04-768x1605.jpg 768w, https://zhangke.space/wp-content/uploads/2025/10/71bdacfae0468031389ed5923763ec04-735x1536.jpg 735w, https://zhangke.space/wp-content/uploads/2025/10/71bdacfae0468031389ed5923763ec04-980x2048.jpg 980w, https://zhangke.space/wp-content/uploads/2025/10/71bdacfae0468031389ed5923763ec04-scaled.jpg 1225w" sizes="(max-width: 490px) 100vw, 490px" /></figure>
+
+
+
+<h2 class="wp-block-heading">同一个实例登录多个账号</h2>
+
+
+
+<p class="wp-block-paragraph">如果你在一个实例有多个账号，那么现在可以同时登录 Fread 了。</p>
+
+
+
+<p class="wp-block-paragraph">最初的版本不支持主要是因为架构设计上为了方便就当做这种情况不存在，但后面发现有一些用户确实存在这种需求（包括我自己），所以花了点时间给账号系统做了一些重构。</p>
+
+
+
+<h1 class="wp-block-heading">发布帖子</h1>
+
+
+
+<p class="wp-block-paragraph">发帖部分一个重要的改动是支持了多账号同时发帖，也就是说你可以把一条帖子同时通过多个账号发布，页面入口在发帖页面的右上角，有一个添加用户的 icon button，点击后进入如下页面。</p>
+
+
+
+<figure class="wp-block-image aligncenter size-large is-resized"><img decoding="async" width="526" height="1024" src="https://zhangke.space/wp-content/uploads/2025/10/e850522fd25a31fbd2e2913dff3412b2-526x1024.jpg" alt="" class="wp-image-1079" style="width:316px;height:auto" srcset="https://zhangke.space/wp-content/uploads/2025/10/e850522fd25a31fbd2e2913dff3412b2-526x1024.jpg 526w, https://zhangke.space/wp-content/uploads/2025/10/e850522fd25a31fbd2e2913dff3412b2-154x300.jpg 154w, https://zhangke.space/wp-content/uploads/2025/10/e850522fd25a31fbd2e2913dff3412b2-768x1495.jpg 768w, https://zhangke.space/wp-content/uploads/2025/10/e850522fd25a31fbd2e2913dff3412b2-789x1536.jpg 789w, https://zhangke.space/wp-content/uploads/2025/10/e850522fd25a31fbd2e2913dff3412b2-1052x2048.jpg 1052w, https://zhangke.space/wp-content/uploads/2025/10/e850522fd25a31fbd2e2913dff3412b2-scaled.jpg 1315w" sizes="(max-width: 526px) 100vw, 526px" /></figure>
+
+
+
+<p class="wp-block-paragraph">你可以在此处选择多个账号，发帖的配置（字数、语言、媒体）会根据你选择的账号列表而有所不同。</p>
+
+
+
+<p class="wp-block-paragraph">未来我还想支持添加 X 账号，因为 X 的发帖接口似乎是免费的，如果能添加进来至少对我来说是个很好用的功能。</p>
+
+
+
+<p class="wp-block-paragraph">另外还有一个变化是对于 Mastodon 发帖来说，当你选择了图片之后并不会立即开始上传，而是点击发布后开始上传，这个主要是为了未来新功能做打算，未来计划点击发帖按钮后直接退出当前页面，在后台请求网络。</p>
+
+
+
+<h1 class="wp-block-heading">引用帖子</h1>
+
+
+
+<p class="wp-block-paragraph">虽然引用帖子功能在毛象内被反复讨论了很多次，但最终 Mastodon 还是支持了引用帖子的功能，由于 Bluesky 本来就支持引用功能，所以 Fread 实际上在显示引用贴和发布引用贴方面都是已经有了的，所以现在很迅速的支持上了这个能力。</p>
+
+
+
+<p class="wp-block-paragraph">首先在发帖页面，如果账号所在的实例支持引用功能，那么发帖页面会有一个设置引用权限的设置按钮用来设置这个帖子的引用权限范围。</p>
+
+
+
+<p class="wp-block-paragraph">在引用其它帖子方面，如果当前账号主体所在实例支持引用功能，那么点击帖子的转发按钮将会出现一个弹窗用于选择转发或是引用，对于你不具备引用权限或者该帖子所在实例不支持引用的情况，引用按钮将置为不可点击状态。</p>
+
+
+
+<figure class="wp-block-image aligncenter size-large is-resized"><img decoding="async" width="498" height="1024" src="https://zhangke.space/wp-content/uploads/2025/10/1a7124dfd250e5ab2317bfad2945c2f2-498x1024.jpg" alt="" class="wp-image-1080" style="width:380px;height:auto" srcset="https://zhangke.space/wp-content/uploads/2025/10/1a7124dfd250e5ab2317bfad2945c2f2-498x1024.jpg 498w, https://zhangke.space/wp-content/uploads/2025/10/1a7124dfd250e5ab2317bfad2945c2f2-146x300.jpg 146w, https://zhangke.space/wp-content/uploads/2025/10/1a7124dfd250e5ab2317bfad2945c2f2-768x1579.jpg 768w, https://zhangke.space/wp-content/uploads/2025/10/1a7124dfd250e5ab2317bfad2945c2f2-747x1536.jpg 747w, https://zhangke.space/wp-content/uploads/2025/10/1a7124dfd250e5ab2317bfad2945c2f2-996x2048.jpg 996w, https://zhangke.space/wp-content/uploads/2025/10/1a7124dfd250e5ab2317bfad2945c2f2-scaled.jpg 1245w" sizes="(max-width: 498px) 100vw, 498px" /></figure>
+
+
+
+<h1 class="wp-block-heading">通知改版</h1>
+
+
+
+<p class="wp-block-paragraph">通知页面的 UI 也做了一些改动。</p>
+
+
+
+<p class="wp-block-paragraph">一是移除了未知消息类型，由于 Mastodon/Bluesky 的接口变化，时常会出现一些新的消息类型，以前是直接把接口返回的 Json 显示出来，虽然有一定的作用但是看起来很丑陋，所以现在去掉了，未知类型消息不显示，取而代之的是我会定期看接口文档加上新增的消息类型。</p>
+
+
+
+<p class="wp-block-paragraph">二是通知 UI 的改动，主要是对于新增关注用户的通知，现在卡片样式更加丰富，与 Profile Tab 的账号卡片类似，同时新增了 Follow Back 按钮。</p>
+
+
+
+<p class="wp-block-paragraph">此外还新增了引用相关的通知类型。</p>
+
+
+
+<h1 class="wp-block-heading">帖子</h1>
+
+
+
+<p class="wp-block-paragraph">帖子的样式其实已经不太会出现很大的改动了，主体基本保持不变，细节上做了一些优化，对于回复贴新增了 Thread Label。顶部的 Label 位置做了改动，字体、边距、颜色这些都有一些调整。</p>
+
+
+
+<h2 class="wp-block-heading">通过其他账号打开帖子</h2>
+
+
+
+<p class="wp-block-paragraph">对于任意一个帖子，用户可以通过点击更多按钮选择“通过其他账号打开”，然后会出现一个包含了当前登录用户列表的弹窗，用户选择其中一个用户后 Fread 会以该用户为主体打开这个帖子的详情页，这样可以快速的以多个身份对同一个帖子进行交互操作。</p>
+
+
+
+<h2 class="wp-block-heading">默认打开的时间线位置</h2>
+
+
+
+<p class="wp-block-paragraph">以前 Fread 的逻辑是每次打开首页时间线时定位到用户看过的最新的那条帖子，但实际使用下来体验并不好，现在在设置中提供了选项用于设置这个默认行为，其中包含两个选项：最新位置和上次阅读位置。</p>
+
+
+
+<p class="wp-block-paragraph">对于本站时间轴跨站时间轴和趋势榜都是会打开最新的帖子，这里的设置是应用在首页时间轴的。</p>
+
+
+
+<h2 class="wp-block-heading">帖子内容大小设置</h2>
+
+
+
+<p class="wp-block-paragraph">Fread 提供了三种帖子内容的尺寸，用户可以在设置中选择合适的大小，这里的大小不仅会应用到文本，也会应用到图片，边距等方面，以此保持相对合适的视觉体验。</p>
+
+
+
+<h1 class="wp-block-heading">动态颜色</h1>
+
+
+
+<p class="wp-block-paragraph">前段时间 Fread 提供了对动态颜色的支持。</p>
+
+
+
+<p class="wp-block-paragraph">Android 12 中新增的“动态配色”功能可让用户根据个人壁纸的配色方案或通过壁纸选择器中的所选颜色，对设备进行个性化设置，以实现色调一致。</p>
+
+
+
+<p class="wp-block-paragraph">现在用户可以在设置中点击 Theme color 选择 Follow system，这样 Fread 的配色就会跟随系统配色，从而保持整体色调的一致性。我自己体验下来效果还是不错的，比固定的颜色要漂亮。</p>
+
+
+
+<p class="wp-block-paragraph">不过 Fread 中的主色调和 <code>tertiary</code> 色调是固定的，不会随着设置而发生变化。</p>
+
+
+
+<h1 class="wp-block-heading">本地化</h1>
+
+
+
+<p class="wp-block-paragraph">目前 Fread 已经支持了 10 种语言，支持的语言如下：</p>
+
+
+
+<ol class="wp-block-list">
+<li>英语</li>
+
+
+
+<li>简体中文</li>
+
+
+
+<li>繁体中文-台湾</li>
+
+
+
+<li>繁体中文-香港</li>
+
+
+
+<li>德语</li>
+
+
+
+<li>西班牙语</li>
+
+
+
+<li>法语</li>
+
+
+
+<li>日语</li>
+
+
+
+<li>葡萄牙语</li>
+
+
+
+<li>俄语</li>
+</ol>
+
+
+
+<h1 class="wp-block-heading">内容拖动排序</h1>
+
+
+
+<p class="wp-block-paragraph">防止有人不知道，Fread 首页左侧的抽屉栏中的内容列表是可以拖动排序的。</p>
+
+
+
+<figure class="wp-block-image aligncenter size-full is-resized"><img decoding="async" width="692" height="374" src="https://zhangke.space/wp-content/uploads/2025/10/image.png" alt="" class="wp-image-1081" style="width:378px;height:auto" srcset="https://zhangke.space/wp-content/uploads/2025/10/image.png 692w, https://zhangke.space/wp-content/uploads/2025/10/image-300x162.png 300w" sizes="(max-width: 692px) 100vw, 692px" /></figure>
+
+
+
+<p class="wp-block-paragraph">另外点击内容右侧的设置按钮进入内容设置页面也是可以拖动排序的。</p>
+
+
+
+<p class="wp-block-paragraph">如果内容是 Bluesky 的话设置页面仍然可以拖动排序，这里的体验要比 Bluesky 官方 App 好很多。</p>
+
+
+
+<p class="wp-block-paragraph">不过 Mastodon 和 Tab 拖动排序和 Bluesky 的 Tab 拖动排序有个区别，Mastodon 因为官方并未提供排序的能力，因此这里的排序是保存在本地的，而 Bluesky 官方提供了针对 Tab 的排序能力，所以这里的排序会调用 Bluesky 的接口进行排序，也就是说会影响到网页端和官方 App。</p>
+
+
+
+<h1 class="wp-block-heading">开源</h1>
+
+
+
+<p class="wp-block-paragraph">Fread 在今年变为开源项目了，项目地址是：</p>
+
+
+
+<p class="wp-block-paragraph"><a href="https://github.com/0xZhangKe/Fread">https://github.com/0xZhangKe/Fread</a></p>
+
+
+
+<h1 class="wp-block-heading">Roadmap</h1>
+
+
+
+<p class="wp-block-paragraph">目前虽然没有什么明确的规划，但短期内会有一些要做的事情，但是也不能确定具体的时间和排序。</p>
+
+
+
+<ol class="wp-block-list">
+<li>帖子列表翻译，借助第三方翻译接口。</li>
+
+
+
+<li>支持通过 Deep Link 打开 Bluesky 或 Mastodon 链接。</li>
+
+
+
+<li>本地 AI 生成图片替代文本（其实已经做了，但是我没有测试设备就一直没上）。</li>
+
+
+
+<li>后台发帖。</li>
+
+
+
+<li>发帖图片手动设置压缩。</li>
+
+
+
+<li>全屏播放视频页面默认是否静音设置。</li>
+</ol>
+
+
+
+<p class="wp-block-paragraph">远期一点的规划：</p>
+
+
+
+<ol class="wp-block-list">
+<li>iOS 版本，因为用了 KMP 所以 iOS 版本支持起来并不会很复杂，但目前肉眼可见的有不少需要适配的工作量，就一直懒得搞了。</li>
+
+
+
+<li>登录 X 账号用于联合发帖。</li>
+
+
+
+<li>加速 RSS 内容或者混合内容获取。</li>
+</ol>
+
+
+
+<h1 class="wp-block-heading">新增捐赠渠道</h1>
+
+
+
+<p class="wp-block-paragraph">真的有 0 个人在意这一点吧。。不过我还是说一下，现在捐赠渠道新增了国内爱发电了。</p><p>The post <a href="https://zhangke.space/fread-%e6%9c%80%e6%96%b0%e7%89%88%e5%8a%9f%e8%83%bd%e4%bb%8b%e7%bb%8d/">Fread 最新版功能介绍</a> first appeared on <a href="https://zhangke.space">张可的博客</a>.</p>]]></content:encoded>
+					
+					<wfw:commentRss>https://zhangke.space/fread-%e6%9c%80%e6%96%b0%e7%89%88%e5%8a%9f%e8%83%bd%e4%bb%8b%e7%bb%8d/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Kotlin 函数式编程思想</title>
+		<link>https://zhangke.space/kotlin-%e5%87%bd%e6%95%b0%e5%bc%8f%e7%bc%96%e7%a8%8b%e6%80%9d%e6%83%b3/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=kotlin-%25e5%2587%25bd%25e6%2595%25b0%25e5%25bc%258f%25e7%25bc%2596%25e7%25a8%258b%25e6%2580%259d%25e6%2583%25b3</link>
+					<comments>https://zhangke.space/kotlin-%e5%87%bd%e6%95%b0%e5%bc%8f%e7%bc%96%e7%a8%8b%e6%80%9d%e6%83%b3/#respond</comments>
+		
+		<dc:creator><![CDATA[kezhang404@gmail.com]]></dc:creator>
+		<pubDate>Fri, 05 Sep 2025 01:04:06 +0000</pubDate>
+				<category><![CDATA[Android]]></category>
+		<category><![CDATA[Kotlin]]></category>
+		<guid isPermaLink="false">https://zhangke.space/?p=1070</guid>
+
+					<description><![CDATA[<p>作为一个使用了很多年 Java 的开发者☕️，面向对象思想早已深入人心，但 Kotlin 语言本身是天然支持函 [&#8230;]</p>
+<p>The post <a href="https://zhangke.space/kotlin-%e5%87%bd%e6%95%b0%e5%bc%8f%e7%bc%96%e7%a8%8b%e6%80%9d%e6%83%b3/">Kotlin 函数式编程思想</a> first appeared on <a href="https://zhangke.space">张可的博客</a>.</p>]]></description>
+										<content:encoded><![CDATA[<p class="wp-block-paragraph">作为一个使用了很多年 Java 的开发者☕️，面向对象思想早已深入人心，但 Kotlin 语言本身是天然支持函数式编程的，如果你对此没什么感觉，那么请多用 Compose 。</p>
+
+
+
+<p class="wp-block-paragraph">但是 Kotlin 的函数式编程思想并不是仅仅可以在 Compose 上发挥作用，我们在任何地方都可以使用函数式编程来解决问题。相对于面向对象，函数式在很多时候都具有独特的优势，我们可以灵活的在合适的地方用合适的方式来编写代码。</p>
+
+
+
+<p class="wp-block-paragraph">倒不是说面向对象不好，面向对象是用来解决特定问题的，它可以很好的对事物做抽象和建模，但我们也不能陷入面向对象的条条框框之中。</p>
+
+
+
+<p class="wp-block-paragraph">在 Android 开发中的函数式也有一些特有的问题需要解决，本文主要就是来介绍 Kotlin 函数式编程以及 Android 开发中的函数式编程。</p>
+
+
+
+<figure class="wp-block-image aligncenter size-large is-resized"><img decoding="async" width="1024" height="492" src="https://zhangke.space/wp-content/uploads/2025/09/image-1024x492.png" alt="" class="wp-image-1073" style="width:574px;height:auto" srcset="https://zhangke.space/wp-content/uploads/2025/09/image-1024x492.png 1024w, https://zhangke.space/wp-content/uploads/2025/09/image-300x144.png 300w, https://zhangke.space/wp-content/uploads/2025/09/image-768x369.png 768w, https://zhangke.space/wp-content/uploads/2025/09/image-1536x739.png 1536w, https://zhangke.space/wp-content/uploads/2025/09/image.png 1626w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p class="wp-block-paragraph">函数式最早可以追溯到一百多年前，数学家希尔伯特提出了著名的希尔伯特计划：希望建立一种严格的数学基础，保证所有数学问题都能通过形式化方法解决。其中的关键问题之一就是<strong>可判定性问题</strong>（Entscheidungsproblem）。 这个问题在 1936 年被两个人同时解决，其中一个人是图灵，另一个人就是阿隆佐·邱奇。</p>
+
+
+
+<p class="wp-block-paragraph">邱奇在 1930 年代开发的 <strong>λ 演算</strong>，是建造自函数应用的一种计算形式系统。在 1937 年，艾伦·图灵证明了 λ 演算和图灵机是等价的计算模型，展示了 λ 演算是图灵完备性的。λ 演算形成了所有函数式编程语言的基础。</p>
+
+
+
+<figure class="wp-block-image aligncenter size-full"><img decoding="async" width="205" height="246" src="https://zhangke.space/wp-content/uploads/2025/09/Weixin-Image_20250905090219_187_21.jpg" alt="" class="wp-image-1071"/></figure>
+
+
+
+<p class="wp-block-paragraph">Kotlin 并不像 Haskell 一样是纯函数式编程语言，而是混合式的，其语法层面上是都支持的，我们可以灵活的切换编程方式，扬长避短。</p>
+
+
+
+<h2 class="wp-block-heading">函数式编程的概念</h2>
+
+
+
+<p class="wp-block-paragraph">函数式编程是一种编程范式，将<strong>函数作为一等公民（first-class citizen）</strong>，避免使用程序的状态和定义对象及变量，函数可以作为参数也可以作为返回值，程序的运行则是利用若干简单的函数计算逐级推导至复杂运算，最终完成计算过程，返回计算结果。</p>
+
+
+
+<h2 class="wp-block-heading">顶级函数</h2>
+
+
+
+<p class="wp-block-paragraph">在 Kotlin 中我们会有个顶级函数的概念，也就是在一个 kt 文件中直接声明函数，而不是将函数声明在类的内部。这意味着我们可以直接把函数当作一段逻辑计算的入口，不需要通过类创建对象这样的方式，这也是函数式中的重要概念，也可以说是一个支持函数式编程语言的必备特性。</p>
+
+
+
+<h3 class="wp-block-heading">依赖注入怎么办？</h3>
+
+
+
+<p class="wp-block-paragraph">如果都使用函数，那么就要解决依赖注入的问题，不过我知道的有些依赖注入框架是支持函数注入的，你可以直接在函数中加上参数，然后依赖注入框架会直接帮你注入。</p>
+
+
+
+<pre class="wp-block-code"><code>typealias myFunction = () -&gt; Unit
+
+@Inject
+fun myFunction(dep: Dep) {
+}
+</code></pre>
+
+
+
+<p class="wp-block-paragraph">当然我们的目的并不是打造一个纯函数式编程程序，既然是混合，那么类是完全可以接受的，我们仍然可以在类中使用依赖注入。</p>
+
+
+
+<p class="wp-block-paragraph">不过 Kotlin 似乎也考虑到了这一点，所以提供了 invoke 运算符重载，用过 UseCase 的人都知道这是怎么回事。</p>
+
+
+
+<pre class="wp-block-code"><code>class UpdateActivityPubUserListUseCase @Inject constructor(
+    private val contentRepo: FreadContentRepo,
+) {
+    suspend operator fun invoke(
+        content: ActivityPubContent,
+        allUserCreatedList: List&lt;ListTimeline&gt;
+    ) {
+        // do something
+    }
+}
+</code></pre>
+
+
+
+<p class="wp-block-paragraph">看起来就是个普通的类，可以通过依赖注入在构造器内注入参数，区别在于使用了 <code>operator</code> 修饰符，重点是使用的时候可以像一个函数一样使用。</p>
+
+
+
+<pre class="wp-block-code"><code>class XXXViewModel @Inject constructor(
+    private val updateActivityPubUserList: UpdateActivityPubUserListUseCase,   
+): ViewModel(){
+    
+    init {
+        viewModelScope.launch { 
+		        // It’s actually calling the invoke method.
+            updateActivityPubUserList()
+        }
+    }
+}
+</code></pre>
+
+
+
+<h2 class="wp-block-heading">函数类型</h2>
+
+
+
+<p class="wp-block-paragraph">函数作为一等公民的意思是函数可以<strong>作为一种变量的类型而存在</strong>，它并不会因为是函数而有什么特别之处，函数可以作为变量存储、作为参数传递、作为返回值。</p>
+
+
+
+<pre class="wp-block-code"><code>val add: (Int, Int) -&gt; Int = { x, y -&gt; x + y }
+println(add(2, 3)) // 5
+</code></pre>
+
+
+
+<p class="wp-block-paragraph">函数也可以接收其他函数作为参数。</p>
+
+
+
+<pre class="wp-block-code"><code>fun operate(x: Int, y: Int, f: (Int, Int) -&gt; Int): Int = f(x, y)
+println(operate(2, 3, { a, b -&gt; a * b })) // 6
+</code></pre>
+
+
+
+<p class="wp-block-paragraph">总之在 Kotlin 中使用函数非常灵活，虽然 Kotlin for JVM 也会把函数编译成类对象，但这毕竟是 JVM 的限制，而 Kotlin 本身是跨平台的，只要在源码层面可以将函数视为一等公民那就没什么问题了。</p>
+
+
+
+<h2 class="wp-block-heading">纯函数与幂等函数</h2>
+
+
+
+<p class="wp-block-paragraph">幂等函数和纯函数都是函数式编程中的重要概念。<strong>幂等函数是指同样的输入多次执行结果保持不变。纯函数是指输入相同的参数输出的结果必然保持一致，并且没有副作用。</strong></p>
+
+
+
+<p class="wp-block-paragraph">一个干净整洁的函数对于函数式编程来说非常重要，因为在函数式中函数的定义是一段特定的逻辑计算，它只接受函数的入参作为计算的依赖项，然后返回计算结果，通过连续地函数调用来完成整个复杂任务。除此之外不应该有任何其他的操作。既不应该依赖外部的状态，也不应该修改外部的状态。</p>
+
+
+
+<h3 class="wp-block-heading">副作用（Side Effect）</h3>
+
+
+
+<p class="wp-block-paragraph">写过 Compose 或者 React 的开发者应该对副作用的概念很清楚，在声明式 UI 框架中，UI 部分一般都是通过幂等函数来实现，但实际上我们总有一些 UI 之外的事情要做，或者我们总希望能获取到某些 UI 的信息或者时机，但是作为幂等函数我们是不能修改外部变量的，因此提供了专门的 API 来管理副作用。</p>
+
+
+
+<p class="wp-block-paragraph">也就是说，<strong>副作用可以理解为幂等函数运行过程中的一些额外的影响</strong>，为了保持幂等性，我们需要通过副作用 API 将本次运行函数的影响暴露出来。</p>
+
+
+
+<pre class="wp-block-code"><code>@Composable
+fun UserDetailPage(viewModel: UserDeailViewModel){
+    LaunchedEffect(Unit){
+        viewModel.onPageResume()
+    }
+    Scaffold { 
+        // ...
+    }
+}
+</code></pre>
+
+
+
+<p class="wp-block-paragraph">不过，严格来说，Composable 其实并不能算是纯函数或者幂等函数，他们只是在设计上尽可能按照这个方向来设计，思想上保持一定程度的一致性。因为，首先将 UI 绘制到屏幕上本身就是一种副作用，所以 composable 的目的本来就是为了产生副作用。其次，composable 并没有返回值，不存在相同的输入就有相同的输出，可以说绘制 UI 就是 composable 的输出。只不过我们先了解了函数式编程后再来理解 composable 就容易多了。</p>
+
+
+
+<h2 class="wp-block-heading">不可变性(<strong>Immutability</strong>)</h2>
+
+
+
+<p class="wp-block-paragraph">函数式编程中的 <strong>不可变性 (Immutability)</strong> 指的是：<strong>一旦数据（属性、对象、集合）被创建，就不能被修改</strong>。如果数据发生变化那么应该创建一个新的数据，而不是在原值上改动。这样保证了函数调用之间不会“互相污染”，也避免了一些隐藏的副作用。</p>
+
+
+
+<p class="wp-block-paragraph">这样我们很自然的就想到了 Kotlin 中的 <code>val</code> 和 <code>data class</code> ，通过 val 声明的属性是不可变的，一般来说 data clas 也是不可变的，Kotlin 虽然没有严格的要求，但是强烈推荐 data class 中的所有属性都必须使用 val 声明，否则会出现一些奇怪的问题。</p>
+
+
+
+<p class="wp-block-paragraph">并且 data class 提供了 <code>copy</code> 方法用于复制一个对象副本，在复制的时候可以修改其中的某些属性，这也符合函数式编程中的不可变性。</p>
+
+
+
+<p class="wp-block-paragraph">此外 Kotlin 中的集合默认也都是不可变集合，像 <code>*arrayOf*()</code> , <code>*listOf*()</code> , <code>*mapOf*()</code> 这种方式创建的集合都是不可变集合，考虑到方便的创建不可变集合，Kotlin 还贴心的提供了 <code>buildList{ }</code> 这样的函数防止我们为了省事创建了可变集合。</p>
+
+
+
+<p class="wp-block-paragraph">所以我现在在开发过程中已经很少使用变量了，如果看到某个地方声明了一堆 <code>var</code> 真的会引起生理不适🤮。这样的好处就是心智负担很低，不用担心这么多变量组合出千变万化的状态，整个程序逻辑变得异常清晰。</p>
+
+
+
+<p class="wp-block-paragraph">毕竟，多个变量共同作用组合出的状态可以说是指数级增加的，整个系统也会变的更加难以理解难以测试，实际上函数式思想就是将软件变成对数据的计算过程，如果合理的设计函数，那么可读性也会大大提高。</p>
+
+
+
+<p class="wp-block-paragraph">当然了，我们开发软件大部分使用的仍然是面向对象，函数式还是作为面向对象的补充，并且其中的一些思想完全可以借鉴，比如我们虽然还是要创建一个类，但是其中的属性可以尽量不可变，也不必排斥顶级函数，这不是什么语法糖🍬，这是函数式编程的体现。不用坚持某些教条主义，在实践中灵活的改变编程范式或许能让代码更优雅更简洁。</p><p>The post <a href="https://zhangke.space/kotlin-%e5%87%bd%e6%95%b0%e5%bc%8f%e7%bc%96%e7%a8%8b%e6%80%9d%e6%83%b3/">Kotlin 函数式编程思想</a> first appeared on <a href="https://zhangke.space">张可的博客</a>.</p>]]></content:encoded>
+					
+					<wfw:commentRss>https://zhangke.space/kotlin-%e5%87%bd%e6%95%b0%e5%bc%8f%e7%bc%96%e7%a8%8b%e6%80%9d%e6%83%b3/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>在 Voyager 中使用 SharedElement 共享元素动画</title>
+		<link>https://zhangke.space/%e5%9c%a8-voyager-%e4%b8%ad%e4%bd%bf%e7%94%a8-sharedelement-%e5%85%b1%e4%ba%ab%e5%85%83%e7%b4%a0%e5%8a%a8%e7%94%bb/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=%25e5%259c%25a8-voyager-%25e4%25b8%25ad%25e4%25bd%25bf%25e7%2594%25a8-sharedelement-%25e5%2585%25b1%25e4%25ba%25ab%25e5%2585%2583%25e7%25b4%25a0%25e5%258a%25a8%25e7%2594%25bb</link>
+					<comments>https://zhangke.space/%e5%9c%a8-voyager-%e4%b8%ad%e4%bd%bf%e7%94%a8-sharedelement-%e5%85%b1%e4%ba%ab%e5%85%83%e7%b4%a0%e5%8a%a8%e7%94%bb/#comments</comments>
+		
+		<dc:creator><![CDATA[kezhang404@gmail.com]]></dc:creator>
+		<pubDate>Tue, 05 Aug 2025 01:42:02 +0000</pubDate>
+				<category><![CDATA[Android]]></category>
+		<category><![CDATA[Kotlin]]></category>
+		<guid isPermaLink="false">https://zhangke.space/?p=1067</guid>
+
+					<description><![CDATA[<p>Jetpack Compose Animation 前段时间终于支持了共享元素动画，这很大程度上提高了 And [&#8230;]</p>
+<p>The post <a href="https://zhangke.space/%e5%9c%a8-voyager-%e4%b8%ad%e4%bd%bf%e7%94%a8-sharedelement-%e5%85%b1%e4%ba%ab%e5%85%83%e7%b4%a0%e5%8a%a8%e7%94%bb/">在 Voyager 中使用 SharedElement 共享元素动画</a> first appeared on <a href="https://zhangke.space">张可的博客</a>.</p>]]></description>
+										<content:encoded><![CDATA[<p class="wp-block-paragraph">Jetpack Compose Animation 前段时间终于支持了共享元素动画，这很大程度上提高了 Android 应用的用户体验，也降低了开发门槛，以前通过布局计算实现的方案既不优雅也很麻烦。</p>
+
+
+
+<p class="wp-block-paragraph">共享元素动画虽然和导航框架没关系，但是由于其使用上的一些限制，所以导航框架如果能直接支持是最方便的，目前在 Jetpack Navigation 中是已经支持的了，但是 Voyager 没有官方支持，好在 Voyager 的接口足够灵活，我们可以通过一些自定义的方式使其支持共享元素动画。</p>
+
+
+
+<p class="wp-block-paragraph">首先简单介绍一下共享元素动画。共享元素动画是指在不同的布局或者屏幕切换时共享其中的部分 UI 元素，被共享的元素会通过动画随着布局/页面切换过去，从而在视觉上提供一个很漂亮的专场。</p>
+
+
+
+<figure class="wp-block-image size-full"><img decoding="async" width="304" height="676" src="https://zhangke.space/wp-content/uploads/2025/08/basic_shared_element_jetsnack.gif" alt="" class="wp-image-1068"/></figure>
+
+
+
+<p class="wp-block-paragraph">在 Compose 中，有几个高级 API 可以帮助你创建共享元素：</p>
+
+
+
+<ul class="wp-block-list">
+<li><strong>SharedTransitionLayout</strong>：实现共享元素转换所需的最外层布局，它提供了一个 <code>SharedTransitionScope</code> ，Composable 需要在 <code>SharedTransitionScope</code> 中才能使用共享元素修饰符。</li>
+
+
+
+<li><strong>Modifier.sharedElement()</strong>：这个修饰符用于向 <code>SharedTransitionScope</code> 标记该 Composable 应该与另一个 Composable 进行匹配。</li>
+
+
+
+<li><strong>Modifier.sharedBounds()</strong>：这个修饰符用于向 <code>SharedTransitionScope</code> 标记该 Composable 的边界应该作为转换发生的容器边界。与 <code>sharedElement()</code> 不同，<code>sharedBounds()</code> 是为视觉上不同的内容而设计的。</li>
+</ul>
+
+
+
+<p class="wp-block-paragraph">使用方式如下：</p>
+
+
+
+<pre class="wp-block-code"><code>var showDetails by remember { mutableStateOf(false) }
+SharedTransitionLayout {
+    AnimatedContent(
+        showDetails,
+        label = "basic_transition"
+    ) { targetState -&gt;
+        if (!targetState) {
+            MainContent(
+                onShowDetails = {
+                    showDetails = true
+                },
+                animatedVisibilityScope = this@AnimatedContent,
+                sharedTransitionScope = this@SharedTransitionLayout
+            )
+        } else {
+            DetailsContent(
+                onBack = {
+                    showDetails = false
+                },
+                animatedVisibilityScope = this@AnimatedContent,
+                sharedTransitionScope = this@SharedTransitionLayout
+            )
+        }
+    }
+}
+
+@Composable
+private fun MainContent(
+    onShowDetails: () -&gt; Unit,
+    modifier: Modifier = Modifier,
+    sharedTransitionScope: SharedTransitionScope,
+    animatedVisibilityScope: AnimatedVisibilityScope
+) {
+    Row {
+        with(sharedTransitionScope) {
+            Image(
+                painter = painterResource(id = R.drawable.cupcake),
+                contentDescription = "Cupcake",
+                modifier = Modifier
+                    .sharedElement(
+                        rememberSharedContentState(key = "image"),
+                        animatedVisibilityScope = animatedVisibilityScope
+                    )
+                    .size(100.dp)
+                    .clip(CircleShape),
+                contentScale = ContentScale.Crop
+            )
+        }
+    }
+}
+
+@Composable
+private fun DetailsContent(
+    modifier: Modifier = Modifier,
+    onBack: () -&gt; Unit,
+    sharedTransitionScope: SharedTransitionScope,
+    animatedVisibilityScope: AnimatedVisibilityScope
+) {
+    Column {
+        with(sharedTransitionScope) {
+            Image(
+                painter = painterResource(id = R.drawable.cupcake),
+                contentDescription = "Cupcake",
+                modifier = Modifier
+                    .sharedElement(
+                        rememberSharedContentState(key = "image"),
+                        animatedVisibilityScope = animatedVisibilityScope
+                    )
+                    .size(200.dp)
+                    .clip(CircleShape),
+                contentScale = ContentScale.Crop
+            )
+        }
+    }
+}
+</code></pre>
+
+
+
+<h2 class="wp-block-heading">如何在 Voyager 中使用？</h2>
+
+
+
+<p class="wp-block-paragraph">首先需要解决如何传递 <code>SharedTransitionScope</code> 以及 <code>AnimatedVisibilityScope</code> 的问题。因为 <code>sharedElement</code> 动画需要用到这两个 scope，如果一路传递下去很麻烦，因此我们可以通过过 <code>CompositionLocalProvider</code> 将其传递下去。</p>
+
+
+
+<pre class="wp-block-code"><code>val LocalAnimatedVisibilityScope = compositionLocalOf&lt;AnimatedVisibilityScope?&gt; { null }
+
+val LocalSharedTransitionScope = compositionLocalOf&lt;SharedTransitionScope?&gt; { null }
+</code></pre>
+
+
+
+<p class="wp-block-paragraph">因为 <code>sharedElement</code> 必须发生在 <code>SharedTransitionLayout</code> 内部，即使是不同的页面也需要这样，所以还需要在 <code>Navigator</code> 外层包一个 <code>SharedTransitionLayout</code>。</p>
+
+
+
+<pre class="wp-block-code"><code>SharedTransitionLayout {
+    CompositionLocalProvider(
+        LocalSharedTransitionScope provides this
+    ) {
+        Navigator(
+            screen = remember { FreadScreen() },
+        ) { navigator -&gt;
+            CurrentAnimatedScreen(navigator)
+        }
+    }
+}
+</code></pre>
+
+
+
+<p class="wp-block-paragraph">剩下的问题就是如何提供 <code>AnimatedVisibilityScope</code> ，我们可以使用 <code>AnimatedContent</code> composable 来解决这个问题，并且 Voyager 的 <code>Navigator</code> 可以自定义 <code>content</code>，那么我们可以在自定义 <code>content</code> 内加上 <code>AnimatedContent</code>。</p>
+
+
+
+<pre class="wp-block-code"><code>@Composable
+fun CurrentAnimatedScreen(navigator: Navigator) {
+    val currentScreen = navigator.lastItem
+    AnimatedContent(
+        targetState = currentScreen.key,
+    ) { targetScreenKey -&gt;
+        CompositionLocalProvider(
+            LocalAnimatedVisibilityScope provides this
+        ) {
+            val targetScreen = navigator.items.lastOrNull { it.key == targetScreenKey }
+            if (targetScreen != null) {
+                navigator.saveableState("currentScreen", screen = targetScreen) {
+                    targetScreen.Content()
+                }
+            }
+        }
+    }
+}
+</code></pre>
+
+
+
+<p class="wp-block-paragraph">这样我们就可以在给任意一个 composable 加上 sharedElement transitions 了。</p>
+
+
+
+<p class="wp-block-paragraph">当然，为了方便使用，我们还可以提供一个这样的扩展函数。</p>
+
+
+
+<pre class="wp-block-code"><code>@Composable
+fun Modifier.sharedBoundsBetweenScreen(key: String): Modifier {
+    val animatedVisibilityScope = LocalAnimatedVisibilityScope.current
+    val sharedTransitionScope = LocalSharedTransitionScope.current
+    if (animatedVisibilityScope == null || sharedTransitionScope == null) return this
+    return with(sharedTransitionScope) {
+        sharedBounds(
+            sharedContentState = rememberSharedContentState(key),
+            animatedVisibilityScope = animatedVisibilityScope,
+        )
+    }
+}
+</code></pre>
+
+
+
+<p class="wp-block-paragraph">不过目前还发现了一个问题，在进入新的页面时动画是正常的，但是推出动画却不起作用，目测是 Voyager 本身 pop screen 的机制导致的，composition 没有捕获到退出前的那个 element，因此无法完成动画，这个问题不太容易解决，我试几个方案都不是很好。</p><p>The post <a href="https://zhangke.space/%e5%9c%a8-voyager-%e4%b8%ad%e4%bd%bf%e7%94%a8-sharedelement-%e5%85%b1%e4%ba%ab%e5%85%83%e7%b4%a0%e5%8a%a8%e7%94%bb/">在 Voyager 中使用 SharedElement 共享元素动画</a> first appeared on <a href="https://zhangke.space">张可的博客</a>.</p>]]></content:encoded>
+					
+					<wfw:commentRss>https://zhangke.space/%e5%9c%a8-voyager-%e4%b8%ad%e4%bd%bf%e7%94%a8-sharedelement-%e5%85%b1%e4%ba%ab%e5%85%83%e7%b4%a0%e5%8a%a8%e7%94%bb/feed/</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>一个KMP/CMP项目的组织结构和集成方式</title>
+		<link>https://zhangke.space/%e4%b8%80%e4%b8%aakmp-cmp%e9%a1%b9%e7%9b%ae%e7%9a%84%e7%bb%84%e7%bb%87%e7%bb%93%e6%9e%84%e5%92%8c%e9%9b%86%e6%88%90%e6%96%b9%e5%bc%8f/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=%25e4%25b8%2580%25e4%25b8%25aakmp-cmp%25e9%25a1%25b9%25e7%259b%25ae%25e7%259a%2584%25e7%25bb%2584%25e7%25bb%2587%25e7%25bb%2593%25e6%259e%2584%25e5%2592%258c%25e9%259b%2586%25e6%2588%2590%25e6%2596%25b9%25e5%25bc%258f</link>
+					<comments>https://zhangke.space/%e4%b8%80%e4%b8%aakmp-cmp%e9%a1%b9%e7%9b%ae%e7%9a%84%e7%bb%84%e7%bb%87%e7%bb%93%e6%9e%84%e5%92%8c%e9%9b%86%e6%88%90%e6%96%b9%e5%bc%8f/#respond</comments>
+		
+		<dc:creator><![CDATA[kezhang404@gmail.com]]></dc:creator>
+		<pubDate>Tue, 15 Jul 2025 13:29:25 +0000</pubDate>
+				<category><![CDATA[Android]]></category>
+		<category><![CDATA[Kotlin]]></category>
+		<guid isPermaLink="false">https://zhangke.space/?p=1051</guid>
+
+					<description><![CDATA[<p>本文主要介绍一下 KMP/CMP 项目的组织结构和集成方式，从而概览整个技术架构，对其有个总体上的认知。 对于 [&#8230;]</p>
+<p>The post <a href="https://zhangke.space/%e4%b8%80%e4%b8%aakmp-cmp%e9%a1%b9%e7%9b%ae%e7%9a%84%e7%bb%84%e7%bb%87%e7%bb%93%e6%9e%84%e5%92%8c%e9%9b%86%e6%88%90%e6%96%b9%e5%bc%8f/">一个KMP/CMP项目的组织结构和集成方式</a> first appeared on <a href="https://zhangke.space">张可的博客</a>.</p>]]></description>
+										<content:encoded><![CDATA[<p class="wp-block-paragraph">本文主要介绍一下 KMP/CMP 项目的组织结构和集成方式，从而概览整个技术架构，对其有个总体上的认知。</p>
+
+
+
+<p class="wp-block-paragraph">对于如何创建 KMP 项目可以直接使用官方的工具：</p>
+
+
+
+<p class="wp-block-paragraph"><a href="https://kmp.jetbrains.com">https://kmp.jetbrains.com</a></p>
+
+
+
+<p class="wp-block-paragraph">具体的调试步骤和环境可以看官方文档：<a href="https://www.jetbrains.com/help/kotlin-multiplatform-dev/quickstart.html">https://www.jetbrains.com/help/kotlin-multiplatform-dev/quickstart.html</a></p>
+
+
+
+<p class="wp-block-paragraph">官方的项目结构文档：<a href="https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-discover-project.html">https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-discover-project.html</a></p>
+
+
+
+<p class="wp-block-paragraph">KMP/CMP 参考项目 Fread：https://github.com/0xZhangKe/Fread</p>
+
+
+
+<h2 class="wp-block-heading">基本结构</h2>
+
+
+
+<p class="wp-block-paragraph">首先 KMP 项目目前仍然使用 Gradle 构建，因此项目结构和我们的 Android 项目大体上类似，但是源码文件夹有所不同，毕竟是跨平台项目，肯定存在一些代码是各端独自实现的情况，那么肯定也需要不同的平台文件夹存放该平台特有的代码及实现。</p>
+
+
+
+<p class="wp-block-paragraph">所以一个 KMP 项目的模块结构如下：</p>
+
+
+
+<figure class="wp-block-image aligncenter size-full"><img decoding="async" width="329" height="431" src="https://zhangke.space/wp-content/uploads/2025/07/image.png" alt="" class="wp-image-1052" srcset="https://zhangke.space/wp-content/uploads/2025/07/image.png 329w, https://zhangke.space/wp-content/uploads/2025/07/image-229x300.png 229w" sizes="(max-width: 329px) 100vw, 329px" /></figure>
+
+
+
+<p class="wp-block-paragraph">目标平台有 Android 和 iOS，commonMain 则表示所有平台的共享代码。</p>
+
+
+
+<h2 class="wp-block-heading">commonCode</h2>
+
+
+
+<p class="wp-block-paragraph">上图中的 <code>commonMain</code> 中存放的就是<strong>通用代码</strong>，这里的代码<strong>可以被所有平台使用</strong>，也会参与所有平台的构建流程。</p>
+
+
+
+<p class="wp-block-paragraph">其中的代码与平台无关，也不可以使用任何平台独有的 Api，只能使用其它模块或者支持 KMP 的依赖库中的 common code。当然目前也是好起来了，越来越多的<a href="https://klibs.io/">三方库</a>都在已经支持了 KMP，大部分情况下都有现成的库直接用。</p>
+
+
+
+<p class="wp-block-paragraph">对于不同的编译目标平台，<code>commonMain</code> 中的代码也会编译成不同的产物，这一切都是 Kotlin 编译器的功劳。</p>
+
+
+
+<figure class="wp-block-image aligncenter size-full"><img decoding="async" width="706" height="265" src="https://zhangke.space/wp-content/uploads/2025/07/image-1.png" alt="" class="wp-image-1053" srcset="https://zhangke.space/wp-content/uploads/2025/07/image-1.png 706w, https://zhangke.space/wp-content/uploads/2025/07/image-1-300x113.png 300w" sizes="(max-width: 706px) 100vw, 706px" /></figure>
+
+
+
+<h2 class="wp-block-heading">Targets</h2>
+
+
+
+<p class="wp-block-paragraph">目标平台定义了 common code 将会被编译到哪些平台。对于不同的平台编译的产物也不同，比如 <code>androidTarget</code> 产物是 aar，iOS 产物是 <code>framework</code>。</p>
+
+
+
+<p class="wp-block-paragraph">另外 <code>Target</code> 本身只是一个标识符，用于标识不同的目标平台，编译器将会根据这些目标平台的不同来编译出不同的产物。包括依赖包管理也是通过 <code>Target</code> 标识的。</p>
+
+
+
+<p class="wp-block-paragraph">我们可以通过在 gradle 的 <code>kotlin</code> 块内管理 target：</p>
+
+
+
+<pre class="wp-block-code"><code>kotlin {
+    jvm() // Declares a JVM target
+    iosArm64() // Declares a target that corresponds to 64-bit iPhones
+}
+</code></pre>
+
+
+
+<p class="wp-block-paragraph">通过声明 <code>jvm</code> 和 <code>iosArm64</code>目标，<code>commonMain</code> 中的代码将被编译为这些目标：</p>
+
+
+
+<figure class="wp-block-image aligncenter size-full"><img decoding="async" width="706" height="272" src="https://zhangke.space/wp-content/uploads/2025/07/image-2.png" alt="" class="wp-image-1054" srcset="https://zhangke.space/wp-content/uploads/2025/07/image-2.png 706w, https://zhangke.space/wp-content/uploads/2025/07/image-2-300x116.png 300w" sizes="(max-width: 706px) 100vw, 706px" /></figure>
+
+
+
+<p class="wp-block-paragraph">Target 还提供了 Gradle DSL 用于一些配置，其中包括通用配置和平台独有的配置。</p>
+
+
+
+<h3 class="wp-block-heading">通用配置</h3>
+
+
+
+<p class="wp-block-paragraph">通用配置是指在任何 target 内都可以使用的配置。</p>
+
+
+
+<figure class="wp-block-table"><table class="has-fixed-layout"><thead><tr><th>name</th><th>Description</th></tr></thead><tbody><tr><td><code>platformType</code></td><td>目标平台类型，取值范围：<code>jvm</code>、<code>androidJvm</code>、<code>js</code>、<code>wasm</code>、<code>native</code>、<code>common</code></td></tr><tr><td><code>artifactsTaskName</code></td><td>构建此目标的最终产物的任务名称</td></tr><tr><td><code>components</code></td><td>用于设置 Gradle 发布内容的组件</td></tr><tr><td><code>compilerOptions</code></td><td>用于该目标的编译器选项，此声明会覆盖在顶层配置的任何&nbsp;<code>compilerOptions {}</code>&nbsp;设置。</td></tr></tbody></table></figure>
+
+
+
+<p class="wp-block-paragraph">此外还有一些平台独有的配置。</p>
+
+
+
+<pre class="wp-block-code"><code>kotlin {
+    wasmWasi {
+        nodejs()
+        binaries.executable()
+    }
+    js().browser {
+        webpackTask { /* ... */ }
+    }
+    linuxX64 {
+        binaries {
+            executable {
+                // Binary configuration.
+            }
+        }
+    }
+    androidTarget {
+        publishLibraryVariants("release")
+    }
+}
+</code></pre>
+
+
+
+<p class="wp-block-paragraph">具体配置可以看官方文档：<a href="https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-dsl-reference.html">https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-dsl-reference.html</a></p>
+
+
+
+<h2 class="wp-block-heading">Source sets</h2>
+
+
+
+<p class="wp-block-paragraph"><em><strong>Kotlin Source set</strong></em> 是<strong>一组具有各自 Target、依赖项和编译器选项的源文件</strong>。它是在 KMP 项目中共享代码的主要方式。</p>
+
+
+
+<p class="wp-block-paragraph">Source Set 的特性：</p>
+
+
+
+<ul class="wp-block-list">
+<li>对于给定的项目具有唯一的名称。</li>
+
+
+
+<li>包含一组源文件和资源，通常存储在与源集同名的目录中。</li>
+
+
+
+<li>指定此 Source set 中的代码编译为的一组目标。这些目标会影响此源集中可用的语言结构和依赖项。</li>
+
+
+
+<li>定义其自己的依赖项和编译器选项。</li>
+</ul>
+
+
+
+<p class="wp-block-paragraph">Kotlin 提供了一系列预定义的源集。其中之一是 <code>commonMain</code>，它存在于所有 KMP 项目中，并编译为所有声明的目标。</p>
+
+
+
+<p class="wp-block-paragraph">在 Gradle 脚本中，我们可以通过 <code>kotlin.sourceSets {}</code> 块内的名称访问 Source set：</p>
+
+
+
+<pre class="wp-block-code"><code>kotlin {
+    sourceSets {
+        commonMain {
+            // Configure the commonMain source set
+        }
+    }
+}
+</code></pre>
+
+
+
+<p class="wp-block-paragraph">这里的 commonMain 对应的就是我们上面第一张截图中的那个 commonMain 文件夹，一般来说每个常规的 source set 都会有一个自己的代码文件夹，不同模块中的相同的 source set 文件夹中的代码可以互相调用，因为他们最终都会被编译到同一个产物内。</p>
+
+
+
+<p class="wp-block-paragraph">因此 source set 主要是用来管理该 Target 下的代码集合的，比如为该 Target 添加某些依赖库，设置源码路径等。</p>
+
+
+
+<h3 class="wp-block-heading">Platform-specific source sets</h3>
+
+
+
+<p class="wp-block-paragraph">跟 Target 类似的是，source set 也提供了针对平台特有的设置。</p>
+
+
+
+<p class="wp-block-paragraph">在设置依赖库的时候我们经常会用到这个功能，比如我们现在需要一个视频播放器，但是没有找到适合业务的跨平台播放器组件，以此需要各端独自实现，那么我们在 Android 端需要依赖 media3，iOS 端需要依赖另外一个视频播放器的组件，那么就可以通过 source set 设置不同的依赖。</p>
+
+
+
+<pre class="wp-block-code"><code>kotlin {
+    sourceSets {
+        androidMain {
+            dependencies {
+	            implementation(libs.media3)
+            }
+        }
+        iosMain {
+            dependencies {
+                implementation(libs.ios.video.player)
+            }
+        }
+    }
+}
+</code></pre>
+
+
+
+<p class="wp-block-paragraph">通过这样的方式，我们就可以针对不同的平台添加不同的依赖，这些依赖可以在各自的文件夹中依赖到，比如我们可以在 <code>androidMain</code> 文件夹中直接使用 <code>media3</code>，在 <code>iosMain</code> 中使用 <code>iosVideoPlayer</code>。</p>
+
+
+
+<h3 class="wp-block-heading">Compilation to a specific target</h3>
+
+
+
+<p class="wp-block-paragraph">在编译阶段，编译器会针对当前编译的 Target 选择使用不同的 source set，比如编译到 Android 平台，那么会选择 <code>commonMain</code>+<code>androidMain</code> 的代码和依赖库进行编译。</p>
+
+
+
+<h3 class="wp-block-heading">Intermediate source sets（中间源集）</h3>
+
+
+
+<p class="wp-block-paragraph">除了上述我们说到的普通 source set 之外，还有一种叫做中间源集。</p>
+
+
+
+<p class="wp-block-paragraph">中间源集的概念其实很简单，比如我们现在的 KMP 项目同时支持了 Android、 iOS 和 macOS，现在我们需要一个用于生成 UUID 的函数，这个函数各端各自实现。但实际上 iOS 和 macOS 的实现是一致的，我们总不能同样的代码在 <code>iosMain</code> 和 <code>macosMain</code> 中各写一份吧，这样很容易出错。</p>
+
+
+
+<p class="wp-block-paragraph">于是 KMP 提供了中间源集用于解决这个问题，在上述情况中，我们可以直接将代码写在 <code>appleMain</code> 中，<code>appleMain</code> 可以使用 Apple 平台的能力，并且在 <code>iosMain</code> 和 <code>macosMain</code> 中都可以依赖到其中的代码。</p>
+
+
+
+<p class="wp-block-paragraph">完整的层次结构如下，其中彩色的部分可以理解为 Intermediate source sets.</p>
+
+
+
+<figure class="wp-block-image aligncenter size-full"><img decoding="async" width="706" height="757" src="https://zhangke.space/wp-content/uploads/2025/07/image-3.png" alt="" class="wp-image-1055" srcset="https://zhangke.space/wp-content/uploads/2025/07/image-3.png 706w, https://zhangke.space/wp-content/uploads/2025/07/image-3-280x300.png 280w" sizes="(max-width: 706px) 100vw, 706px" /></figure>
+
+
+
+<h3 class="wp-block-heading">测试</h3>
+
+
+
+<p class="wp-block-paragraph">从上面的示例和截图中可以看出来，source set 源码文件夹都带了一个 Main/Test 后缀，Main 包含生产代码，Test 后缀就表示该 source set 的测试代码，他们之间会自动建立关联，Test 可以直接依赖到 Main 中的代码。</p>
+
+
+
+<p class="wp-block-paragraph">Kotlin 也提供了支持 KMP 的默认<a href="https://kotlinlang.org/api/core/kotlin-test/">测试框架</a>，其中包含<code>@kotlin.Test</code>注解以及各种断言方法，例如<code>assertEquals</code>和<code>assertTrue</code>。</p>
+
+
+
+<p class="wp-block-paragraph">当然我们也可以像常规测试一样，为每个平台在其各自的 source set 中编写平台特定的测试。也可以为每个 source set 设置平台特定的依赖项，例如 <code>JUnit</code> 针对 JVM 和 <code>XCTest</code> iOS 的依赖项。要针对特定目标运行测试，请使用<code>&lt;targetName&gt;Test</code>任务。</p>
+
+
+
+<h3 class="wp-block-heading">依赖关系-dependsOn</h3>
+
+
+
+<p class="wp-block-paragraph"><code>dependsOn</code> 是两个 source sets 之间的特定关系，通过 <code>dependsOn</code> 将整个 source sets 关系设置为一个树状结构，不过一般来说我们并不需要手动设置。</p>
+
+
+
+<pre class="wp-block-code"><code>kotlin {
+    // Targets declaration
+    sourceSets {
+        // Example of configuring the dependsOn relation
+        iosArm64Main.dependsOn(commonMain)
+    }
+}
+</code></pre>
+
+
+
+<figure class="wp-block-image aligncenter size-full"><img decoding="async" width="706" height="435" src="https://zhangke.space/wp-content/uploads/2025/07/image-4.png" alt="" class="wp-image-1056" srcset="https://zhangke.space/wp-content/uploads/2025/07/image-4.png 706w, https://zhangke.space/wp-content/uploads/2025/07/image-4-300x185.png 300w" sizes="(max-width: 706px) 100vw, 706px" /></figure>
+
+
+
+<h3 class="wp-block-heading">自定义 source sets</h3>
+
+
+
+<p class="wp-block-paragraph">在某些情况下，我们可能需要在项目中设置自定义中间源集。假设有一个项目会编译到 JVM、JS 和 Linux，并且只想在 JVM 和 JS 之间共享一些源。在这种情况下，我们应该为这对目标找到一个特定的源集。</p>
+
+
+
+<p class="wp-block-paragraph">Kotlin 不会自动创建这样的源集，但我们可以使用 <code>by creating</code> 手动创建它：</p>
+
+
+
+<pre class="wp-block-code"><code>kotlin {
+    jvm()
+    js()
+    linuxX64()
+
+    sourceSets {
+        // Create a source set named "jvmAndJs"
+        val jvmAndJsMain by creating {
+            // …
+        }
+    }
+}
+</code></pre>
+
+
+
+<p class="wp-block-paragraph">但此时我们自己创建的 <code>jvmAndJsMain</code> 的依赖关系是独立的，因为我们并未手动指定任何依赖关系，此时就需要使用上面说的 <code>dependsOn</code> 了。</p>
+
+
+
+<pre class="wp-block-code"><code>kotlin {
+    jvm()
+    js()
+    linuxX64()
+
+    sourceSets {
+        val jvmAndJsMain by creating {
+            // Don't forget to add dependsOn to commonMain
+            dependsOn(commonMain.get())
+        }
+
+        jvmMain {
+            dependsOn(jvmAndJsMain)
+        }
+
+        jsMain {
+            dependsOn(jvmAndJsMain)
+        }
+    }
+}
+</code></pre>
+
+
+
+<p class="wp-block-paragraph">现在，该项目的依赖关系如下：</p>
+
+
+
+<figure class="wp-block-image aligncenter size-full"><img decoding="async" width="706" height="379" src="https://zhangke.space/wp-content/uploads/2025/07/image-5.png" alt="" class="wp-image-1057" srcset="https://zhangke.space/wp-content/uploads/2025/07/image-5.png 706w, https://zhangke.space/wp-content/uploads/2025/07/image-5-300x161.png 300w" sizes="(max-width: 706px) 100vw, 706px" /></figure>
+
+
+
+<h3 class="wp-block-heading">依赖库的 KMP 兼容性</h3>
+
+
+
+<p class="wp-block-paragraph">首先，我们可以通过如下方式给不同的 source set 添加不同的依赖库：</p>
+
+
+
+<pre class="wp-block-code"><code>kotlin {
+    sourceSets {
+        commonMain.dependencies {
+            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
+        }
+        jvmMain.dependencies {
+            implementation("com.google.guava:guava:32.1.2-jre")
+        }
+    }
+}
+</code></pre>
+
+
+
+<p class="wp-block-paragraph">被添加到 <code>commonMain</code> 中的依赖库会被传递到所有 Target 中，而添加到 <code>jvmMain</code> 中的依赖库只会在 <code>jvmMain</code> 文件夹中可见。</p>
+
+
+
+<p class="wp-block-paragraph"><strong>Kotlin 会把每个依赖关系解析为一组 source sets，而这组 source sets 中的每一个都必须和当前使用它的源集（consumer source set）在目标平台上兼容。</strong></p>
+
+
+
+<p class="wp-block-paragraph">也就是说你添加的依赖库的 target 列表必须<strong>包含</strong>你的项目的 target 列表，缺少一个都会被视为不兼容。</p>
+
+
+
+<p class="wp-block-paragraph">举例来说，如果你当前的项目 target 中包含了 jsMain，但是你打算添加的依赖库的 target 中未包含 jsMain，那么就会被视为不兼容，那么就无法使用这个库。</p>
+
+
+
+<h3 class="wp-block-heading">对齐不同 source sets 依赖库版本</h3>
+
+
+
+<p class="wp-block-paragraph">Kotlin Multiplatform 的 common 源集（<code>commonMain</code>）会被编译多次（为不同 Target），因此依赖库版本必须一致。</p>
+
+
+
+<p class="wp-block-paragraph">为什么要对齐版本（align versions）？</p>
+
+
+
+<ul class="wp-block-list">
+<li><code>commonMain</code> 会参与多个目标（如 Android、iOS 等）的构建。</li>
+
+
+
+<li>如果在不同目标中，<code>commonMain</code> 使用的依赖版本不一致，会导致编译出来的 .klib 不一致，从而出问题。</li>
+
+
+
+<li>Kotlin Gradle 插件会自动统一这些版本，确保<strong>所有使用 <code>commonMain</code> 的地方依赖的库版本相同</strong>。</li>
+</ul>
+
+
+
+<p class="wp-block-paragraph">举个例子：</p>
+
+
+
+<p class="wp-block-paragraph">首先 <code>commonMain</code> 中声明了如下依赖：</p>
+
+
+
+<pre class="wp-block-code"><code>implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
+</code></pre>
+
+
+
+<p class="wp-block-paragraph">同时 <code>androidMain</code> 中又声明了如下依赖：</p>
+
+
+
+<pre class="wp-block-code"><code>implementation("androidx.navigation:navigation-compose:2.7.7")
+</code></pre>
+
+
+
+<p class="wp-block-paragraph">但是这个 <code>navigation</code> 库内部依赖了 <code>coroutines 1.8.0</code> 。</p>
+
+
+
+<p class="wp-block-paragraph">那么问题来了：</p>
+
+
+
+<ul class="wp-block-list">
+<li><code>androidMain</code> 和 <code>commonMain</code> 是要一起编译的</li>
+
+
+
+<li>Gradle 会发现冲突（1.7.3 vs 1.8.0），它会<strong>选择更高的版本：1.8.0</strong></li>
+
+
+
+<li>所以 <code>commonMain</code> <strong>也会用 1.8.0 的 coroutines</strong></li>
+
+
+
+<li>iOS 同样也使用了 <code>commonMain</code> 的代码</li>
+
+
+
+<li>所以 Gradle 会<strong>自动把 coroutines 1.8.0 应用到</strong> <code>iosMain</code> <strong>等所有平台</strong></li>
+</ul>
+
+
+
+<p class="wp-block-paragraph">Kotlin Multiplatform 项目中，只要有任何 source set 引入了较高版本的共享依赖，Gradle 就会自动将这个版本同步到所有需要它的 source set 上，以确保生成的 common 代码在所有平台上都是一致的。</p>
+
+
+
+<h2 class="wp-block-heading">iOS 集成</h2>
+
+
+
+<p class="wp-block-paragraph">对于 iOS 平台来说，<strong>KMP 项目的代码会直接编译成 framework 产物给到 iOS 项目集成继续参与 Xcode 的编译流程</strong>。那么具体来说是如何集成的呢？比如我们直接 clone 一个 KMP/CMP 项目到本地然后直接用 Xcode 打开可以直接运行，那么 Kotlin 代码如何开始编译？</p>
+
+
+
+<p class="wp-block-paragraph">Xcode 构建阶段（Build Phase）可以添加一些自定义脚本，对于一个默认支持了 KMP 的 Xcode 项目来说，构建阶段会被添加一行自定义脚本，该脚本用于执行一个 gradle 命令以此生成 Xcode 需要的 framework 文件。</p>
+
+
+
+<p class="wp-block-paragraph">我们可以打开 Xcode 项目视图中的 Build Phase 看到这个脚本：</p>
+
+
+
+<figure class="wp-block-image aligncenter size-large"><img decoding="async" width="1024" height="323" src="https://zhangke.space/wp-content/uploads/2025/07/image-6-1024x323.png" alt="" class="wp-image-1058" srcset="https://zhangke.space/wp-content/uploads/2025/07/image-6-1024x323.png 1024w, https://zhangke.space/wp-content/uploads/2025/07/image-6-300x95.png 300w, https://zhangke.space/wp-content/uploads/2025/07/image-6-768x242.png 768w, https://zhangke.space/wp-content/uploads/2025/07/image-6-1536x484.png 1536w, https://zhangke.space/wp-content/uploads/2025/07/image-6-2048x646.png 2048w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p class="wp-block-paragraph">其实我们也可以自己运行这个脚本，运行完成后会看到 build 文件夹下生成了 framework 文件。</p>
+
+
+
+<figure class="wp-block-image aligncenter size-full is-resized"><img decoding="async" width="734" height="772" src="https://zhangke.space/wp-content/uploads/2025/07/image-7.png" alt="" class="wp-image-1059" style="width:358px;height:auto" srcset="https://zhangke.space/wp-content/uploads/2025/07/image-7.png 734w, https://zhangke.space/wp-content/uploads/2025/07/image-7-285x300.png 285w" sizes="(max-width: 734px) 100vw, 734px" /></figure>
+
+
+
+<p class="wp-block-paragraph">好了现在 frameworks 已经生成了，剩下的就是如何把这这个文件添加到 Xcode 项目的依赖中去。</p>
+
+
+
+<p class="wp-block-paragraph">我们接着打开 Xcode 的项目视图中的 Build Settings 往下找到 Search Paths 栏，可以看到 gradle build 目录中的 frameworks 路径已经被添加到项目中了。</p>
+
+
+
+<figure class="wp-block-image aligncenter size-large"><img decoding="async" width="1024" height="283" src="https://zhangke.space/wp-content/uploads/2025/07/image-8-1024x283.png" alt="" class="wp-image-1060" srcset="https://zhangke.space/wp-content/uploads/2025/07/image-8-1024x283.png 1024w, https://zhangke.space/wp-content/uploads/2025/07/image-8-300x83.png 300w, https://zhangke.space/wp-content/uploads/2025/07/image-8-768x212.png 768w, https://zhangke.space/wp-content/uploads/2025/07/image-8-1536x424.png 1536w, https://zhangke.space/wp-content/uploads/2025/07/image-8-2048x566.png 2048w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p class="wp-block-paragraph">这样整个 Xcode 的构建环节就搞明白了，首先通过自定义编译脚本调用 gradle 编译出 framework 文件，并且预先将该路径添加到了 Xcode 构建依赖中，然后 Xcode 内就可以把 KMP 模块当作一个普通的 framework 依赖库使用了。</p>
+
+
+
+<p class="wp-block-paragraph">当然这些配置也可以根据自己的项目需要修改，具体的配置也可以在 project.pbxproj 文件内看到。</p>
+
+
+
+<h3 class="wp-block-heading">现有项目集成 KMP/CMP</h3>
+
+
+
+<p class="wp-block-paragraph">首选还是直接看官方文档：<a href="https://developer.android.com/kotlin/multiplatform/migrate">https://developer.android.com/kotlin/multiplatform/migrate</a></p>
+
+
+
+<p class="wp-block-paragraph">因为 Kotlin for iOS 代码最终会编译成 framework，所以如果现有的 Xcode 项目如果想集成 KMP 其实也可以不必设置编译脚本，也不必对现有项目做其他的更改，只需要像依赖普通的库一样依赖这个 Kotlin 的产物即可。</p>
+
+
+
+<p class="wp-block-paragraph"></p><p>The post <a href="https://zhangke.space/%e4%b8%80%e4%b8%aakmp-cmp%e9%a1%b9%e7%9b%ae%e7%9a%84%e7%bb%84%e7%bb%87%e7%bb%93%e6%9e%84%e5%92%8c%e9%9b%86%e6%88%90%e6%96%b9%e5%bc%8f/">一个KMP/CMP项目的组织结构和集成方式</a> first appeared on <a href="https://zhangke.space">张可的博客</a>.</p>]]></content:encoded>
+					
+					<wfw:commentRss>https://zhangke.space/%e4%b8%80%e4%b8%aakmp-cmp%e9%a1%b9%e7%9b%ae%e7%9a%84%e7%bb%84%e7%bb%87%e7%bb%93%e6%9e%84%e5%92%8c%e9%9b%86%e6%88%90%e6%96%b9%e5%bc%8f/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>
