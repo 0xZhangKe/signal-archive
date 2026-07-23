@@ -1,4 +1,3 @@
-const PAGE_SIZE = 60;
 const DEFAULT_LEFT_RATIO = 0.18;
 const DEFAULT_MIDDLE_RATIO = 0.25;
 const MIN_LEFT_WIDTH = 220;
@@ -12,8 +11,12 @@ const state = {
   activeNode: null,
   activeKey: null,
   articles: [],
+  pages: [],
+  nextPageIndex: 0,
+  loadingPage: false,
+  pageError: null,
+  selectionVersion: 0,
   activeArticleId: null,
-  visibleCount: PAGE_SIZE,
 };
 
 const elements = {
@@ -72,7 +75,19 @@ function initializeTheme() {
 }
 
 function nodeKey(node) {
-  return node.feedPath ?? node.listPath;
+  return node.originalUrl ?? node.pages?.[0] ?? `${node.type}:${node.title}`;
+}
+
+function countUniqueSources(nodes) {
+  const keys = new Set();
+  for (const node of nodes) {
+    if (node.type === "category") {
+      for (const source of node.children ?? []) keys.add(nodeKey(source));
+    } else {
+      keys.add(nodeKey(node));
+    }
+  }
+  return keys.size;
 }
 
 function formatDate(value) {
@@ -106,11 +121,9 @@ function makeSourceButton(source) {
 
 function renderCatalog() {
   elements.catalog.replaceChildren();
-  let sourceCount = 0;
 
   for (const item of state.navigation) {
     if (item.type !== "category") {
-      sourceCount += 1;
       const row = document.createElement("div");
       row.className = "nav-row";
       row.classList.toggle("is-active", state.activeKey === nodeKey(item));
@@ -124,7 +137,7 @@ function renderCatalog() {
       continue;
     }
 
-    sourceCount += item.sources.length;
+    const childSources = Array.isArray(item.children) ? item.children : [];
     const group = document.createElement("div");
     group.className = "nav-group";
     const row = document.createElement("div");
@@ -147,7 +160,7 @@ function renderCatalog() {
     const sources = document.createElement("div");
     sources.className = "source-list";
     sources.hidden = true;
-    for (const source of item.sources) sources.append(makeSourceButton(source));
+    for (const source of childSources) sources.append(makeSourceButton(source));
 
     toggle.addEventListener("click", () => {
       const expanded = toggle.getAttribute("aria-expanded") === "true";
@@ -161,7 +174,7 @@ function renderCatalog() {
     elements.catalog.append(group);
   }
 
-  elements.sourceCount.textContent = `${sourceCount} SOURCES`;
+  elements.sourceCount.textContent = `${countUniqueSources(state.navigation)} SOURCES`;
 }
 
 function renderPlaceholder() {
@@ -182,19 +195,27 @@ function articleImage(article) {
 
 function renderArticles() {
   elements.articleList.replaceChildren();
-  const shown = state.articles.slice(0, state.visibleCount);
-  elements.articleCount.textContent = `${state.articles.length} ITEMS`;
-  elements.loadMore.hidden = state.visibleCount >= state.articles.length;
+  const hasMore = state.nextPageIndex < state.pages.length;
+  elements.articleCount.textContent = `${state.articles.length}${hasMore ? "+" : ""} ITEMS`;
+  elements.loadMore.hidden = !hasMore;
+  elements.loadMore.disabled = state.loadingPage;
 
-  if (!shown.length) {
+  if (!state.articles.length) {
     const empty = document.createElement("div");
     empty.className = "empty-state";
-    empty.innerHTML = '<span class="empty-symbol">⌁</span><p>No articles are available in this selection.</p>';
+    const symbol = document.createElement("span");
+    symbol.className = "empty-symbol";
+    symbol.textContent = "⌁";
+    const message = document.createElement("p");
+    message.textContent = state.pageError
+      ? `Unable to load articles: ${state.pageError}`
+      : "No articles are available in this selection.";
+    empty.append(symbol, message);
     elements.articleList.append(empty);
     return;
   }
 
-  for (const article of shown) {
+  for (const article of state.articles) {
     const card = document.createElement("button");
     card.type = "button";
     card.className = "article-card";
@@ -236,23 +257,53 @@ function updateListTitle(node) {
 async function selectNode(node, { showList = true } = {}) {
   state.activeNode = node;
   state.activeKey = nodeKey(node);
+  state.selectionVersion += 1;
   state.activeArticleId = null;
-  state.visibleCount = PAGE_SIZE;
+  state.articles = [];
+  state.pages = Array.isArray(node.pages) ? node.pages : [];
+  state.nextPageIndex = 0;
+  state.loadingPage = false;
+  state.pageError = null;
   updateListTitle(node);
   elements.articleCount.textContent = "…";
   elements.articleList.innerHTML = '<div class="loading-state"><p>Preparing article list…</p></div>';
   renderCatalog();
   if (showList) setMobilePanel("list");
 
+  if (!state.pages.length) {
+    renderArticles();
+    return;
+  }
+  await loadNextPage();
+}
+
+async function loadNextPage() {
+  if (state.loadingPage || state.nextPageIndex >= state.pages.length) return;
+  const activeKey = state.activeKey;
+  const selectionVersion = state.selectionVersion;
+  const pagePath = state.pages[state.nextPageIndex];
+  state.loadingPage = true;
+  state.pageError = null;
+  elements.loadMore.disabled = true;
+
   try {
-    const response = await fetch(`./${node.listPath}`);
+    const response = await fetch(`./data/${pagePath}`);
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     const data = await response.json();
-    if (state.activeKey !== nodeKey(node)) return;
-    state.articles = Array.isArray(data.items) ? data.items : [];
-    renderArticles();
+    if (state.activeKey !== activeKey || state.selectionVersion !== selectionVersion) return;
+    const nextItems = Array.isArray(data.items) ? data.items : [];
+    const knownIds = new Set(state.articles.map((article) => article.id));
+    state.articles.push(...nextItems.filter((article) => !knownIds.has(article.id)));
+    state.nextPageIndex += 1;
   } catch (error) {
-    elements.articleList.innerHTML = `<div class="empty-state"><p>Unable to load articles: ${error.message}</p></div>`;
+    if (state.activeKey === activeKey && state.selectionVersion === selectionVersion) {
+      state.pageError = error.message;
+    }
+  } finally {
+    if (state.activeKey === activeKey && state.selectionVersion === selectionVersion) {
+      state.loadingPage = false;
+      renderArticles();
+    }
   }
 }
 
@@ -270,7 +321,7 @@ async function openArticle(article) {
   setMobilePanel("reader");
 
   try {
-    const response = await fetch(`./${article.detailPath}`);
+    const response = await fetch(`./data/${article.detailPath}`);
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     const detail = await response.json();
     if (state.activeArticleId !== article.id) return;
@@ -284,18 +335,13 @@ async function openArticle(article) {
 
 async function initialize() {
   try {
-    const [navigationResponse, buildResponse] = await Promise.all([
-      fetch("./data/navigation.json"),
-      fetch("./data/build.json"),
-    ]);
-    if (!navigationResponse.ok) throw new Error(`HTTP ${navigationResponse.status}`);
-    const navigation = await navigationResponse.json();
-    const build = buildResponse.ok ? await buildResponse.json() : null;
-    state.navigation = Array.isArray(navigation.items) ? navigation.items : [];
+    const response = await fetch("./data/rendered.json");
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const rendered = await response.json();
+    state.navigation = Array.isArray(rendered.children) ? rendered.children : [];
     renderCatalog();
-    elements.archiveStatus.textContent = build
-      ? `${build.articleCount} articles indexed${build.failedSourceCount ? ` · ${build.failedSourceCount} sources need attention` : ""}`
-      : "Archive catalog ready";
+    const sourceCount = countUniqueSources(state.navigation);
+    elements.archiveStatus.textContent = `${sourceCount} sources ready`;
     if (state.navigation.length) {
       await selectNode(state.navigation[0], { showList: false });
     }
@@ -407,10 +453,7 @@ window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () 
   if (!document.documentElement.dataset.theme) updateThemeButton(preferredTheme());
 });
 
-elements.loadMore.addEventListener("click", () => {
-  state.visibleCount += PAGE_SIZE;
-  renderArticles();
-});
+elements.loadMore.addEventListener("click", loadNextPage);
 
 for (const tab of elements.mobileTabs) {
   tab.addEventListener("click", () => setMobilePanel(tab.dataset.panel));

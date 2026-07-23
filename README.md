@@ -118,9 +118,11 @@ API Key 等敏感信息必须通过 GitHub Actions Secrets 管理，不得提交
 [`deploy-pages.yml`](./.github/workflows/deploy-pages.yml) 使用 [`build_pages.py`](./scripts/build_pages.py) 解析 `archive` 中的 Catalog 与 Feed，并与 `main` 分支的 `site/` 静态页面组合为 GitHub Pages Artifact：
 
 ```text
-main/site/ + archive/catalog.json + archive/rss/ + archive/ai/
+archive/catalog.json + archive/rss/*.xml + archive/source_state.json
                               ↓
-                         Pages Artifact
+                    deploy-pages 渲染阶段
+                              ↓
+main/site/ + rendered.json + categories/**/*.json + articles/*.json
                               ↓
                          GitHub Pages
 ```
@@ -135,12 +137,69 @@ Settings → Pages → Build and deployment → Source → GitHub Actions
 
 Pages Artifact 是 Workflow 运行期间生成的部署产物，不提交到 `main`、`archive` 或额外的发布分支。
 
-构建阶段会把深层 Category 拍平到所属的一级 Category，并提前生成：
+构建阶段不会改写 `archive/rss/*.xml`，也不会把原始 `catalog.json` 复制到 Pages Artifact。页面只使用渲染后的 JSON：
 
-- 一级文件夹及其来源导航。
-- 每个一级文件夹的聚合文章列表。
-- 每个 RSS/AI 来源的文章列表。
-- 经过安全清理的文章详情。
+```text
+data/
+├── rendered.json
+├── source_state.json
+├── categories/
+│   ├── <source-id>/
+│   │   ├── page-001.json
+│   │   └── ...
+│   └── folder-<title-hash>/
+│       ├── page-001.json
+│       └── ...
+└── articles/
+    ├── <article-id>.json
+    └── ...
+```
+
+`rendered.json` 保留一级文件夹和 source 导航。深层 Category 会拍平到所属的一级 Category。每个文件夹和 source 都通过 `pages` 指向自己的分页文章列表，每页最多 60 篇。source 目录使用 Catalog 中 `feedPath` 的文件名部分；文件夹目录使用规范化标题的 SHA-256 前 16 位，并添加 `folder-` 前缀。OPML 中的文件夹标题必须全局唯一。
+
+示例：
+
+```json
+{
+  "children": [
+    {
+      "type": "category",
+      "title": "中文博客",
+      "pages": [
+        "categories/folder-08f18aa4658e8149/page-001.json"
+      ],
+      "children": [
+        {
+          "pages": [
+            "categories/05ada84875558017/page-001.json"
+          ],
+          "lastContentChangedAt": "2026-07-22T09:27:38Z",
+          "lastSuccessfulFetchAt": "2026-07-23T02:01:17Z",
+          "originalUrl": "https://blog.solazy.me/feed",
+          "title": "So!azy",
+          "type": "rss"
+        }
+      ]
+    }
+  ]
+}
+```
+
+分页文件只保存列表展示所需的摘要信息，并通过 `detailPath` 指向 `articles/<article-id>.json`。文章详情包含经过安全清理的 HTML，只有打开文章时才会加载。
+
+```json
+{
+  "id": "ab01cd23ef45ab01cd23ef45",
+  "title": "Article title",
+  "summary": "A short plain-text summary.",
+  "content": "<p>Sanitized article HTML...</p>",
+  "image": null,
+  "publishedAt": "2026-07-23T02:01:17Z",
+  "sourceId": "05ada84875558017",
+  "sourceTitle": "So!azy",
+  "link": "https://blog.solazy.me/posts/example"
+}
+```
 
 因此，阅读页面选择大型文件夹时不需要在浏览器中临时下载和解析大量 XML。
 

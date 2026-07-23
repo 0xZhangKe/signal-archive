@@ -3,7 +3,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from scripts.build_pages import build_navigation, build_pages, sanitize_html
+from scripts.build_pages import build_pages, build_rendered, folder_id, sanitize_html
 
 
 RSS = """<?xml version="1.0"?>
@@ -41,11 +41,28 @@ def rss_node(title: str, path: str) -> dict:
     }
 
 
+def rss_with_items(count: int) -> str:
+    items = "".join(
+        f"""
+        <item>
+          <title>Article {index:03d}</title>
+          <link>https://example.com/{index}</link>
+          <guid>article-{index}</guid>
+          <description>Summary {index}</description>
+        </item>
+        """
+        for index in range(count)
+    )
+    return f'<?xml version="1.0"?><rss version="2.0"><channel>{items}</channel></rss>'
+
+
 class BuildPagesTest(unittest.TestCase):
     def test_flattens_nested_categories_and_deduplicates_sources(self) -> None:
-        first = rss_node("First", "rss/first.xml")
-        duplicate = rss_node("First duplicate", "rss/first.xml")
-        second = rss_node("Second", "rss/second.xml")
+        first_path = "rss/1111111111111111.xml"
+        second_path = "rss/2222222222222222.xml"
+        first = rss_node("First", first_path)
+        duplicate = rss_node("First duplicate", first_path)
+        second = rss_node("Second", second_path)
         catalog = {"children": [{
             "type": "category",
             "title": "Technology",
@@ -56,15 +73,19 @@ class BuildPagesTest(unittest.TestCase):
             }],
         }]}
 
-        navigation, sources = build_navigation(catalog)
+        rendered, sources, folders = build_rendered(catalog)
 
-        category = navigation["items"][0]
+        category = rendered["children"][0]
         self.assertEqual("Technology", category["title"])
-        self.assertEqual(["First", "Second"], [item["title"] for item in category["sources"]])
-        self.assertEqual("https://example.com/rss/first.xml", category["sources"][0]["originalUrl"])
+        self.assertEqual(["First", "Second"], [item["title"] for item in category["children"]])
+        self.assertEqual(f"https://example.com/{first_path}", category["children"][0]["originalUrl"])
+        self.assertEqual(
+            [first_path, second_path],
+            folders[folder_id("Technology")],
+        )
         self.assertEqual(2, len(sources))
 
-    def test_builds_navigation_lists_and_article_details(self) -> None:
+    def test_builds_rendered_pages_and_article_details(self) -> None:
         with tempfile.TemporaryDirectory() as temporary_directory:
             root = Path(temporary_directory)
             archive = root / "archive"
@@ -73,14 +94,16 @@ class BuildPagesTest(unittest.TestCase):
             (archive / "rss").mkdir(parents=True)
             site.mkdir()
             (site / "index.html").write_text("reader", encoding="utf-8")
-            (archive / "rss/first.xml").write_text(RSS, encoding="utf-8")
-            (archive / "rss/second.xml").write_text(ATOM, encoding="utf-8")
+            first_path = "rss/1111111111111111.xml"
+            second_path = "rss/2222222222222222.xml"
+            (archive / first_path).write_text(RSS, encoding="utf-8")
+            (archive / second_path).write_text(ATOM, encoding="utf-8")
             catalog = {"children": [{
                 "type": "category",
                 "title": "Technology",
                 "children": [
-                    rss_node("First", "rss/first.xml"),
-                    {"type": "category", "title": "Nested", "children": [rss_node("Second", "rss/second.xml")]},
+                    rss_node("First", first_path),
+                    {"type": "category", "title": "Nested", "children": [rss_node("Second", second_path)]},
                 ],
             }]}
             catalog_path = archive / "catalog.json"
@@ -96,18 +119,78 @@ class BuildPagesTest(unittest.TestCase):
             summary = build_pages(catalog_path, archive, site, output)
 
             self.assertEqual({"sources": 2, "articles": 2, "failures": 0}, summary)
-            navigation = json.loads((output / "data/navigation.json").read_text())
-            category_list = output / navigation["items"][0]["listPath"]
-            items = json.loads(category_list.read_text())["items"]
+            rendered = json.loads((output / "data/rendered.json").read_text())
+            category = rendered["children"][0]
+            self.assertEqual(2, len(category["children"]))
+            self.assertEqual(
+                [f"categories/{folder_id('Technology')}/page-001.json"],
+                category["pages"],
+            )
+            category_page = output / "data" / category["pages"][0]
+            items = json.loads(category_page.read_text())["items"]
             self.assertEqual(["Atom article", "First article"], [item["title"] for item in items])
-            detail = json.loads((output / items[1]["detailPath"]).read_text())
+            detail = json.loads((output / "data" / items[1]["detailPath"]).read_text())
             self.assertIn("Full article", detail["content"])
             self.assertNotIn("script", detail["content"])
             self.assertEqual("https://example.com/a.jpg", detail["image"])
+            self.assertEqual("1111111111111111", detail["sourceId"])
+            self.assertNotIn("detailPath", detail)
+            self.assertNotIn("feedPath", detail)
+            self.assertEqual(
+                ["categories/1111111111111111/page-001.json"],
+                category["children"][0]["pages"],
+            )
             self.assertEqual(
                 source_state,
                 json.loads((output / "data/source_state.json").read_text()),
             )
+            self.assertFalse((output / "data/catalog.json").exists())
+            self.assertFalse((output / "data/navigation.json").exists())
+            self.assertFalse((output / "data/lists").exists())
+            self.assertFalse((output / "data/build.json").exists())
+
+    def test_paginates_source_and_folder_articles_by_sixty(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            archive = root / "archive"
+            site = root / "site"
+            output = root / "output"
+            (archive / "rss").mkdir(parents=True)
+            site.mkdir()
+            (site / "index.html").write_text("reader", encoding="utf-8")
+            feed_path = "rss/3333333333333333.xml"
+            (archive / feed_path).write_text(rss_with_items(61), encoding="utf-8")
+            catalog = {"children": [{
+                "type": "category",
+                "title": "Many",
+                "children": [rss_node("Many source", feed_path)],
+            }]}
+            catalog_path = archive / "catalog.json"
+            catalog_path.write_text(json.dumps(catalog), encoding="utf-8")
+
+            build_pages(catalog_path, archive, site, output)
+
+            rendered = json.loads((output / "data/rendered.json").read_text())
+            folder = rendered["children"][0]
+            source = folder["children"][0]
+            self.assertEqual(2, len(folder["pages"]))
+            self.assertEqual(2, len(source["pages"]))
+            self.assertEqual(
+                60,
+                len(json.loads((output / "data" / source["pages"][0]).read_text())["items"]),
+            )
+            self.assertEqual(
+                1,
+                len(json.loads((output / "data" / source["pages"][1]).read_text())["items"]),
+            )
+
+    def test_rejects_duplicate_folder_titles(self) -> None:
+        catalog = {"children": [
+            {"type": "category", "title": "Same", "children": []},
+            {"type": "category", "title": "Same", "children": []},
+        ]}
+        with self.assertRaisesRegex(ValueError, "globally unique"):
+            build_rendered(catalog)
 
     def test_sanitizes_dangerous_html(self) -> None:
         rendered = sanitize_html('<p onclick="bad()">Safe</p><script>bad()</script><iframe/><a href="javascript:bad()">link</a>')

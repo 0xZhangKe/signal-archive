@@ -10,6 +10,7 @@ import json
 import re
 import shutil
 import sys
+import unicodedata
 import xml.etree.ElementTree as ET
 from datetime import datetime, timezone
 from email.utils import parsedate_to_datetime
@@ -36,6 +37,7 @@ SAFE_ATTRS = {
     "td": {"colspan", "rowspan"},
     "th": {"colspan", "rowspan"},
 }
+PAGE_SIZE = 60
 
 
 def local_name(tag: str) -> str:
@@ -44,6 +46,20 @@ def local_name(tag: str) -> str:
 
 def short_hash(value: str, length: int = 20) -> str:
     return hashlib.sha256(value.encode("utf-8")).hexdigest()[:length]
+
+
+def source_id(feed_path: str) -> str:
+    identifier = PurePosixPath(feed_path).stem
+    if not identifier:
+        raise ValueError(f"cannot derive source ID from feedPath: {feed_path!r}")
+    return identifier
+
+
+def folder_id(title: str) -> str:
+    normalized = unicodedata.normalize("NFC", title.strip())
+    if not normalized:
+        raise ValueError("cannot derive folder ID from an empty title")
+    return f"folder-{short_hash(normalized, 16)}"
 
 
 def safe_archive_path(archive_root: Path, feed_path: str) -> Path:
@@ -80,51 +96,69 @@ def flatten_sources(nodes: Iterable[Any]) -> list[dict[str, Any]]:
     return flattened
 
 
-def build_navigation(catalog: dict[str, Any]) -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
+def build_rendered(
+    catalog: dict[str, Any],
+    source_pages: dict[str, list[str]] | None = None,
+    folder_pages: dict[str, list[str]] | None = None,
+) -> tuple[dict[str, Any], dict[str, dict[str, Any]], dict[str, list[str]]]:
     children = catalog.get("children")
     if not isinstance(children, list):
         raise ValueError("catalog must contain a children array")
 
+    source_pages = source_pages or {}
+    folder_pages = folder_pages or {}
     items: list[dict[str, Any]] = []
     unique_sources: dict[str, dict[str, Any]] = {}
+    folders: dict[str, list[str]] = {}
+    category_titles: set[str] = set()
+
+    def validate_category_titles(nodes: Iterable[Any]) -> None:
+        for node in nodes:
+            if not isinstance(node, dict) or node.get("type") != "category":
+                continue
+            title = node_title(node)
+            normalized = unicodedata.normalize("NFC", title)
+            if normalized in category_titles:
+                raise ValueError(f"category titles must be globally unique: {title!r}")
+            category_titles.add(normalized)
+            validate_category_titles(node.get("children", []))
+
+    validate_category_titles(children)
 
     def source_view(source: dict[str, Any]) -> dict[str, Any]:
         feed_path = source.get("feedPath")
         if not isinstance(feed_path, str) or not feed_path:
             raise ValueError(f"source {node_title(source)!r} is missing feedPath")
         unique_sources.setdefault(feed_path, source)
-        key = short_hash(feed_path)
+        identifier = source_id(feed_path)
         view = {
-            "type": source.get("type", "rss"),
-            "title": node_title(source),
-            "feedPath": feed_path,
-            "listPath": f"data/lists/source-{key}.json",
-            "lastSuccessfulFetchAt": source.get("lastSuccessfulFetchAt"),
+            "pages": source_pages.get(identifier, []),
             "lastContentChangedAt": source.get("lastContentChangedAt"),
+            "lastSuccessfulFetchAt": source.get("lastSuccessfulFetchAt"),
+            "originalUrl": source.get("originalUrl"),
+            "title": node_title(source),
+            "type": source.get("type", "rss"),
         }
-        original_url = source.get("originalUrl")
-        if isinstance(original_url, str) and original_url:
-            view["originalUrl"] = original_url
         return view
 
     for child in children:
         if not isinstance(child, dict):
             continue
         if child.get("type") == "category":
-            sources = [source_view(source) for source in flatten_sources(child.get("children", []))]
-            category_identity = node_title(child) + "\0" + "\0".join(
-                source["feedPath"] for source in sources
-            )
+            flattened = flatten_sources(child.get("children", []))
+            identifier = folder_id(node_title(child))
+            feed_paths = [source["feedPath"] for source in flattened]
+            folders[identifier] = feed_paths
             items.append({
+                "pages": folder_pages.get(identifier, []),
+                "children": [source_view(source) for source in flattened],
                 "type": "category",
                 "title": node_title(child),
-                "listPath": f"data/lists/category-{short_hash(category_identity)}.json",
-                "sources": sources,
             })
         else:
             items.append(source_view(child))
 
-    return {"items": items}, unique_sources
+    return {"children": items}, unique_sources, folders
 
 
 def element_text(element: ET.Element | None) -> str:
@@ -301,6 +335,7 @@ def parse_feed(path: Path, source: dict[str, Any]) -> list[dict[str, Any]]:
         raise ValueError(f"unsupported feed root <{root.tag}> in {path}")
 
     feed_path = source["feedPath"]
+    identifier = source_id(feed_path)
     source_title = node_title(source)
     articles: list[dict[str, Any]] = []
     for position, item in enumerate(elements):
@@ -321,7 +356,7 @@ def parse_feed(path: Path, source: dict[str, Any]) -> list[dict[str, Any]]:
         summary = plain_text(summary_html, 360)
         identity = guid or link or f"{title}\0{date_value}\0{position}"
         article_id = short_hash(feed_path + "\0" + identity, 24)
-        detail_path = f"data/articles/{article_id}.json"
+        detail_path = f"articles/{article_id}.json"
         articles.append({
             "id": article_id,
             "title": title,
@@ -329,8 +364,9 @@ def parse_feed(path: Path, source: dict[str, Any]) -> list[dict[str, Any]]:
             "image": item_image(item, content or summary_html),
             "publishedAt": published_at,
             "sortTime": sort_time,
-            "link": link or None,
+            "sourceId": identifier,
             "sourceTitle": source_title,
+            "link": link or None,
             "feedPath": feed_path,
             "detailPath": detail_path,
             "content": safe_content or f"<p>{html.escape(summary)}</p>",
@@ -343,8 +379,54 @@ def write_json(path: Path, value: Any) -> None:
     path.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
-def public_item(article: dict[str, Any]) -> dict[str, Any]:
-    return {key: value for key, value in article.items() if key not in {"content", "sortTime"}}
+def list_item(article: dict[str, Any]) -> dict[str, Any]:
+    return {
+        key: article.get(key)
+        for key in (
+            "id",
+            "title",
+            "summary",
+            "image",
+            "publishedAt",
+            "sourceId",
+            "sourceTitle",
+            "link",
+            "detailPath",
+        )
+    }
+
+
+def article_detail(article: dict[str, Any]) -> dict[str, Any]:
+    return {
+        key: article.get(key)
+        for key in (
+            "id",
+            "title",
+            "summary",
+            "content",
+            "image",
+            "publishedAt",
+            "sourceId",
+            "sourceTitle",
+            "link",
+        )
+    }
+
+
+def write_article_pages(
+    data_root: Path,
+    identifier: str,
+    articles: list[dict[str, Any]],
+) -> list[str]:
+    paths: list[str] = []
+    for offset in range(0, len(articles), PAGE_SIZE):
+        page_number = offset // PAGE_SIZE + 1
+        relative_path = f"categories/{identifier}/page-{page_number:03d}.json"
+        write_json(data_root / relative_path, {
+            "items": [list_item(article) for article in articles[offset:offset + PAGE_SIZE]],
+        })
+        paths.append(relative_path)
+    return paths
 
 
 def build_pages(catalog_path: Path, archive_root: Path, site_root: Path, output: Path) -> dict[str, int]:
@@ -359,7 +441,6 @@ def build_pages(catalog_path: Path, archive_root: Path, site_root: Path, output:
         shutil.rmtree(output)
     shutil.copytree(site_root, output)
     data_root = output / "data"
-    write_json(data_root / "catalog.json", catalog)
     source_state_path = archive_root / "source_state.json"
     if source_state_path.exists():
         try:
@@ -372,7 +453,7 @@ def build_pages(catalog_path: Path, archive_root: Path, site_root: Path, output:
         source_state = []
     write_json(data_root / "source_state.json", source_state)
 
-    navigation, sources = build_navigation(catalog)
+    _, sources, folders = build_rendered(catalog)
     articles_by_source: dict[str, list[dict[str, Any]]] = {}
     failures: list[dict[str, str]] = []
     article_details: dict[str, dict[str, Any]] = {}
@@ -391,37 +472,27 @@ def build_pages(catalog_path: Path, archive_root: Path, site_root: Path, output:
             article_details.setdefault(article["id"], article)
 
     for article in article_details.values():
-        write_json(data_root / "articles" / f"{article['id']}.json", {
-            **public_item(article),
-            "content": article["content"],
-        })
+        write_json(
+            data_root / "articles" / f"{article['id']}.json",
+            article_detail(article),
+        )
 
+    source_pages: dict[str, list[str]] = {}
     for feed_path, articles in articles_by_source.items():
-        key = short_hash(feed_path)
-        write_json(data_root / "lists" / f"source-{key}.json", {
-            "items": [public_item(article) for article in articles],
-        })
+        identifier = source_id(feed_path)
+        source_pages[identifier] = write_article_pages(data_root, identifier, articles)
 
-    for nav_item in navigation["items"]:
-        if nav_item["type"] != "category":
-            continue
+    folder_pages: dict[str, list[str]] = {}
+    for identifier, feed_paths in folders.items():
         merged: dict[str, dict[str, Any]] = {}
-        for source in nav_item["sources"]:
-            for article in articles_by_source.get(source["feedPath"], []):
+        for feed_path in feed_paths:
+            for article in articles_by_source.get(feed_path, []):
                 merged.setdefault(article["id"], article)
         category_articles = sorted(merged.values(), key=lambda article: article["sortTime"], reverse=True)
-        list_name = PurePosixPath(nav_item["listPath"]).name
-        write_json(data_root / "lists" / list_name, {
-            "items": [public_item(article) for article in category_articles],
-        })
+        folder_pages[identifier] = write_article_pages(data_root, identifier, category_articles)
 
-    write_json(data_root / "navigation.json", navigation)
-    write_json(data_root / "build.json", {
-        "sourceCount": len(sources),
-        "articleCount": len(article_details),
-        "failedSourceCount": len(failures),
-        "failures": failures,
-    })
+    rendered, _, _ = build_rendered(catalog, source_pages, folder_pages)
+    write_json(data_root / "rendered.json", rendered)
     return {
         "sources": len(sources),
         "articles": len(article_details),
