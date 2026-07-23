@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "a09d6f56f5d2d8dbf4cf9861",
+      "title": "无标题文章",
+      "summary": "有时候，你读到一本书，它会让你充满一种奇特的传道热情，你深信除非所有活着的人都读过这本书，否则这个破碎的世界永远无法重归完整。",
+      "image": null,
+      "publishedAt": "2025-04-21T06:17:00Z",
+      "sourceId": "74bd1a0c7196fd9e",
+      "sourceTitle": "Owen的博客",
+      "link": "https://www.owenyoung.com/john-green-the-fault-in-our-stars",
+      "detailPath": "articles/a09d6f56f5d2d8dbf4cf9861.json"
+    },
+    {
       "id": "cab33b3a23794924dd35ac6f",
       "title": "随礼",
       "summary": "这几天感冒，嗓子是哑的，细菌性的，吃了3天抗生素了，傍晚看到朋友圈的一个小姐妹，在晒聊天记录鞭尸，大致内容是她在三五年前给对方两口子随了800块钱的礼金，最近发现对方俩人都把她微信删了，于是她就重新加对方微信要求把礼金还回来，不要有来往了，就发生了如下截图的事件： 从聊天记录可以看出，两口子是直接耍赖皮，不还人情往来的理由是「谁让你结婚晚的」，再聊下去就是「随你便，就是不给你」。 坦白说我生平未曾见过如此厚颜无耻的人，这几百块钱拿着也不怕烫手，这些年我和x基本上不随礼，之前x会给身边朋友随，后来在我的劝说下也改为了送份伴手礼那种。我是很不喜欢随礼来往的那种人，合得来，愿意多见见，就多聚聚，随不随礼无所谓，合不来为什么要去随，所以基于以上，基本没有来往。 随礼≠持续交集 随礼这件事，在中国人的生活中几乎无处不在…",
@@ -648,17 +659,6 @@
       "sourceTitle": "蒙奇日记",
       "link": "https://luffy.cc/a/20250325",
       "detailPath": "articles/f03cf230d20f6a8a250bc610.json"
-    },
-    {
-      "id": "4e8b3b4096a061edd135cb55",
-      "title": "Future 的大小对性能的影响",
-      "summary": "在 Rust 异步编程中，有一种观点认为： Future 的大小显著影响性能 。你是否怀疑过这个说法的真实性？如果是真的，这种性能差异的根源又是什么？今天，我翻阅了一些源码，并编写实验代码来一探究竟。 Future 的大小如何计算？ 为了验证“Future 大小影响性能”这一说法是否成立，我们先从一些简单代码入手。首要任务是弄清楚一个 Future 的大小是如何确定的。毕竟，在编译器眼里，Future 只是一个 trait： pub trait Future { type Output ; fn poll ( self : Pin < & mut Self > , cx : & mut Context < ' _ > ) -> Poll < Self :: Output > ; } 那么，其大小取决于实现这个…",
-      "image": null,
-      "publishedAt": "2025-03-24T10:21:03Z",
-      "sourceId": "82c4bcb6bba028cf",
-      "sourceTitle": "程序员的喵",
-      "link": "http://catcoding.me/p/future-size-perf/",
-      "detailPath": "articles/4e8b3b4096a061edd135cb55.json"
     }
   ]
 }

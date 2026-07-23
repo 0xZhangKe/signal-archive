@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "4e8b3b4096a061edd135cb55",
+      "title": "Future 的大小对性能的影响",
+      "summary": "在 Rust 异步编程中，有一种观点认为： Future 的大小显著影响性能 。你是否怀疑过这个说法的真实性？如果是真的，这种性能差异的根源又是什么？今天，我翻阅了一些源码，并编写实验代码来一探究竟。 Future 的大小如何计算？ 为了验证“Future 大小影响性能”这一说法是否成立，我们先从一些简单代码入手。首要任务是弄清楚一个 Future 的大小是如何确定的。毕竟，在编译器眼里，Future 只是一个 trait： pub trait Future { type Output ; fn poll ( self : Pin < & mut Self > , cx : & mut Context < ' _ > ) -> Poll < Self :: Output > ; } 那么，其大小取决于实现这个…",
+      "image": null,
+      "publishedAt": "2025-03-24T10:21:03Z",
+      "sourceId": "82c4bcb6bba028cf",
+      "sourceTitle": "程序员的喵",
+      "link": "http://catcoding.me/p/future-size-perf/",
+      "detailPath": "articles/4e8b3b4096a061edd135cb55.json"
+    },
+    {
       "id": "a1755cf5fcff57c11751b9aa",
       "title": "你不是一定要有个老板",
       "summary": "什么是为一家大公司工作时最不自然的呢？问题根源是，人类就不适合在一个大集体中工作。 \"根据我阅读的有关狩猎采集社会的内容、关于组织的研究以及我的个人经验，理想的团队大小应该是这样：8人团队可以工作得很好；当达到20人时，团队就变得难以管理；而一个50人的团队就已经十分笨重。\" \"如果你不被允许去实现新想法，你就会逐渐失去新想法。反过来也是，当你可以做任何自己想做的事情时，你就会产生更多与之相关的想法。\"",
@@ -648,17 +659,6 @@
       "sourceTitle": "Prologue 序章",
       "link": "https://prologue.dev/blog/land-finance-and-the-financing-dilemma-of-public-goods",
       "detailPath": "articles/8c1765348b7ae71443aa8631.json"
-    },
-    {
-      "id": "25dd58deabf498093f785f46",
-      "title": "当我旅游时我在……(3)",
-      "summary": "现在回头看当时的茫然，可能是已经挣脱了一部分锁链——我那时非常清楚知道自己并不想过社会给大家规定好的模版化生活，但不知道自己的路在哪里，所以横冲直撞，让自己的小宇宙再变大一点。",
-      "image": null,
-      "publishedAt": "2025-02-14T19:28:02Z",
-      "sourceId": "88a1fc290dd0b8a7",
-      "sourceTitle": "沉默之沙",
-      "link": "https://yukieyun.net/roam/on-the-journey-03/",
-      "detailPath": "articles/25dd58deabf498093f785f46.json"
     }
   ]
 }
