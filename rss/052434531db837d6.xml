@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-07-22T23:59:01+00:00</updated><author><name>Simon Willison</name></author><entry><title>Quoting Thomas Ptacek</title><link href="https://simonwillison.net/2026/Jul/22/thomas-ptacek/#atom-everything" rel="alternate"/><published>2026-07-22T23:59:01+00:00</published><updated>2026-07-22T23:59:01+00:00</updated><id>https://simonwillison.net/2026/Jul/22/thomas-ptacek/#atom-everything</id><summary type="html">
+<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-07-23T04:50:36+00:00</updated><author><name>Simon Willison</name></author><entry><title>Quoting Seth Larson</title><link href="https://simonwillison.net/2026/Jul/23/seth-larson/#atom-everything" rel="alternate"/><published>2026-07-23T04:50:36+00:00</published><updated>2026-07-23T04:50:36+00:00</updated><id>https://simonwillison.net/2026/Jul/23/seth-larson/#atom-everything</id><summary type="html">
+    &lt;blockquote cite="https://blog.pypi.org/posts/2026-07-22-releases-now-reject-new-files-after-14-days/"&gt;&lt;p&gt;The Python Package Index (PyPI) now rejects new files being uploaded to releases that are older than 14 days. This restriction was &lt;a href="https://github.com/pypi/warehouse/pull/19727"&gt;put in place&lt;/a&gt; to prevent old and long-stable releases from being poisoned in case publishing tokens or workflows of PyPI projects were compromised. As far as we are aware this has not yet been abused, but there is no technical reason beyond that attackers weren't aware it was possible.&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p class="cite"&gt;&amp;mdash; &lt;a href="https://blog.pypi.org/posts/2026-07-22-releases-now-reject-new-files-after-14-days/"&gt;Seth Larson&lt;/a&gt;, PyPI blog&lt;/p&gt;
+
+    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/packaging"&gt;packaging&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/python"&gt;python&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/supply-chain"&gt;supply-chain&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/pypi"&gt;pypi&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/seth-michael-larson"&gt;seth-michael-larson&lt;/a&gt;&lt;/p&gt;
+
+
+
+</summary><category term="packaging"/><category term="python"/><category term="supply-chain"/><category term="pypi"/><category term="seth-michael-larson"/></entry><entry><title>Quoting Thomas Ptacek</title><link href="https://simonwillison.net/2026/Jul/22/thomas-ptacek/#atom-everything" rel="alternate"/><published>2026-07-22T23:59:01+00:00</published><updated>2026-07-22T23:59:01+00:00</updated><id>https://simonwillison.net/2026/Jul/22/thomas-ptacek/#atom-everything</id><summary type="html">
     &lt;blockquote cite="https://twitter.com/tqbf/status/2080045032162173329"&gt;&lt;p&gt;I genuinely believe that if you took an open weights model from 2025 and built a pentest harness for it, it could do this kind of sandbox escape and scan/hack in most networks. This is only surprising because you assume OpenAI has sounder sandboxes.&lt;/p&gt;&lt;/blockquote&gt;
 &lt;p class="cite"&gt;&amp;mdash; &lt;a href="https://twitter.com/tqbf/status/2080045032162173329"&gt;Thomas Ptacek&lt;/a&gt;, doesn't think &lt;a href="https://simonwillison.net/2026/Jul/22/openai-cyberattack/#resist-the-temptation-to-write-this-off-as-a-stunt"&gt;this even needs&lt;/a&gt; a frontier model&lt;/p&gt;
 
@@ -856,21 +864,4 @@ Clearly I wasn't paying attention when these were &lt;a href="https://twitter.co
 
 
 
-</summary><category term="ai"/><category term="prompt-engineering"/><category term="generative-ai"/><category term="llms"/><category term="text-to-image"/><category term="pelican-riding-a-bicycle"/><category term="codex"/></entry><entry><title>lobste.rs is now running on SQLite</title><link href="https://simonwillison.net/2026/Jul/14/lobsters-sqlite/#atom-everything" rel="alternate"/><published>2026-07-14T19:44:11+00:00</published><updated>2026-07-14T19:44:11+00:00</updated><id>https://simonwillison.net/2026/Jul/14/lobsters-sqlite/#atom-everything</id><summary type="html">
-    
-&lt;p&gt;&lt;strong&gt;&lt;a href="https://lobste.rs/s/ko1ji1/lobste_rs_is_now_running_on_sqlite"&gt;lobste.rs is now running on SQLite&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
-Community site &lt;a href="https://lobste.rs"&gt;Lobsters&lt;/a&gt; has been planning a migration away from MariaDB &lt;a href="https://github.com/lobsters/lobsters/issues/539#issuecomment-4959857588"&gt;since August 2018&lt;/a&gt; - originally targeting PostgreSQL, but last year they decided to &lt;a href="https://github.com/lobsters/lobsters/issues/539#issuecomment-2964114295"&gt;investigate SQLite&lt;/a&gt; instead.&lt;/p&gt;
-&lt;p&gt;This weekend they completed the migration, and now consider it stable enough that it looks like this is the permanent architecture for the site going forward:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;SQLite seems to have passed with flying colors: cpu usage is down, memory usage is down, site seems to be snappier at least for me, 1/2 the vps cost once mariadb vps is taken down&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;The Lobsters Rails application now runs on a single VPS, with a primary content SQLite database file that's around 3.8GB. &lt;a href="https://lobste.rs/s/ko1ji1/lobste_rs_is_now_running_on_sqlite#c_c9ydhs"&gt;There's also&lt;/a&gt; a 1.1GB cache database, a 218MB queue database, and a still growing 555MB rack_attack database used by the &lt;a href="https://github.com/rack/rack-attack"&gt;Rack::Attack&lt;/a&gt; middleware for blocking and throttling abusive requests.&lt;/p&gt;
-&lt;p&gt;There are plenty more details in both the linked thread and this &lt;a href="https://github.com/lobsters/lobsters/pull/1927"&gt;SQLite migration PR&lt;/a&gt; by Thomas Dziedzic, which added 735 lines and removed 593 lines across 30 commits and 188 files. That PR built on top of previous PRs &lt;a href="https://github.com/lobsters/lobsters/pull/1705"&gt;#1705&lt;/a&gt;, &lt;a href="https://github.com/lobsters/lobsters/pull/1871"&gt;#1871&lt;/a&gt;, and &lt;a href="https://github.com/lobsters/lobsters/pull/1924"&gt;#1924&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;This is a really useful case study, and a great reminder that you can get a whole lot done with a single server and SQLite in 2026.
-
-
-    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/migrations"&gt;migrations&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ops"&gt;ops&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/rails"&gt;rails&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/sqlite"&gt;sqlite&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/lobsters"&gt;lobsters&lt;/a&gt;&lt;/p&gt;
-
-
-
-</summary><category term="migrations"/><category term="ops"/><category term="rails"/><category term="sqlite"/><category term="lobsters"/></entry></feed>
+</summary><category term="ai"/><category term="prompt-engineering"/><category term="generative-ai"/><category term="llms"/><category term="text-to-image"/><category term="pelican-riding-a-bicycle"/><category term="codex"/></entry></feed>
