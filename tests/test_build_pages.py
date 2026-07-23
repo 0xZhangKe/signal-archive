@@ -85,6 +85,13 @@ class BuildPagesTest(unittest.TestCase):
             }]}
             catalog_path = archive / "catalog.json"
             catalog_path.write_text(json.dumps(catalog), encoding="utf-8")
+            source_state = [{
+                "startedAt": "2026-07-22T08:00:00Z",
+                "finishedAt": "2026-07-22T08:01:00Z",
+                "durationSeconds": 60,
+                "failed": ["first"],
+            }]
+            (archive / "source_state.json").write_text(json.dumps(source_state), encoding="utf-8")
 
             summary = build_pages(catalog_path, archive, site, output)
 
@@ -97,6 +104,10 @@ class BuildPagesTest(unittest.TestCase):
             self.assertIn("Full article", detail["content"])
             self.assertNotIn("script", detail["content"])
             self.assertEqual("https://example.com/a.jpg", detail["image"])
+            self.assertEqual(
+                source_state,
+                json.loads((output / "data/source_state.json").read_text()),
+            )
 
     def test_sanitizes_dangerous_html(self) -> None:
         rendered = sanitize_html('<p onclick="bad()">Safe</p><script>bad()</script><iframe/><a href="javascript:bad()">link</a>')

@@ -360,6 +360,17 @@ def build_pages(catalog_path: Path, archive_root: Path, site_root: Path, output:
     shutil.copytree(site_root, output)
     data_root = output / "data"
     write_json(data_root / "catalog.json", catalog)
+    source_state_path = archive_root / "source_state.json"
+    if source_state_path.exists():
+        try:
+            source_state = json.loads(source_state_path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError) as error:
+            raise ValueError(f"cannot read source state {source_state_path}: {error}") from error
+        if not isinstance(source_state, list):
+            raise ValueError("source_state.json must contain a JSON array")
+    else:
+        source_state = []
+    write_json(data_root / "source_state.json", source_state)
 
     navigation, sources = build_navigation(catalog)
     articles_by_source: dict[str, list[dict[str, Any]]] = {}

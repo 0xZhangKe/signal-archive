@@ -1,8 +1,16 @@
+import json
 import tempfile
 import unittest
 from pathlib import Path
 
-from scripts.fetch_rss import collect_sources, fetch_catalog, safe_feed_file, validate_feed
+from scripts.fetch_rss import (
+    collect_sources,
+    fetch_catalog,
+    safe_feed_file,
+    source_identifier,
+    update_source_state,
+    validate_feed,
+)
 
 
 RSS_A = b'<?xml version="1.0"?><rss version="2.0"><channel><title>A</title></channel></rss>'
@@ -110,6 +118,44 @@ class FetchRssTest(unittest.TestCase):
         validate_feed(RSS_B, "https://example.com/atom")
         with self.assertRaisesRegex(ValueError, "not an RSS/Atom"):
             validate_feed(b"<html><body>Not a feed</body></html>", "https://example.com")
+
+    def test_source_identifier_uses_feed_filename(self) -> None:
+        self.assertEqual("05ada84875558017", source_identifier("rss/05ada84875558017.xml"))
+
+    def test_source_state_keeps_only_the_latest_fifteen_days(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            path = Path(temporary_directory) / "source_state.json"
+            path.write_text(json.dumps([
+                {
+                    "startedAt": "2026-07-07T00:00:00Z",
+                    "finishedAt": "2026-07-07T00:01:00Z",
+                    "durationSeconds": 60,
+                    "failed": ["old"],
+                },
+                {
+                    "startedAt": "2026-07-08T00:00:00Z",
+                    "finishedAt": "2026-07-08T00:02:00Z",
+                    "durationSeconds": 120,
+                    "failed": [],
+                },
+            ]), encoding="utf-8")
+
+            records = update_source_state(
+                path,
+                started_at="2026-07-23T00:00:00Z",
+                finished_at="2026-07-23T00:01:30Z",
+                duration_seconds=90,
+                failed=["9a41b0d6fa07d21e", "05ada84875558017", "05ada84875558017"],
+            )
+
+            self.assertEqual(2, len(records))
+            self.assertEqual("2026-07-08T00:02:00Z", records[0]["finishedAt"])
+            self.assertEqual(90, records[1]["durationSeconds"])
+            self.assertEqual(
+                ["05ada84875558017", "9a41b0d6fa07d21e"],
+                records[1]["failed"],
+            )
+            self.assertEqual(records, json.loads(path.read_text(encoding="utf-8")))
 
 
 if __name__ == "__main__":

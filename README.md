@@ -29,6 +29,7 @@ main
 ```text
 archive
 ├── catalog.json
+├── source_state.json
 ├── rss/
 │   ├── <feed-hash>.xml
 │   └── ...
@@ -198,6 +199,23 @@ python3 -m unittest discover -s tests -v
 - 从 GitHub Actions 页面手动触发。
 
 单个来源拉取失败不会丢弃其他来源已经成功拉取的结果。成功的来源会更新 `lastSuccessfulFetchAt`；只有 Feed 文档内容变化时才更新 `lastContentChangedAt`。
+
+每轮拉取完成后还会更新 `archive/source_state.json`，保存最近 15 天的运行状态：
+
+```json
+[
+  {
+    "startedAt": "2026-07-23T00:00:00Z",
+    "finishedAt": "2026-07-23T00:03:18Z",
+    "durationSeconds": 198,
+    "failed": [
+      "05ada84875558017"
+    ]
+  }
+]
+```
+
+`failed` 只保存失败来源的 16 位 URL 哈希，对应 Catalog 中 `feedPath` 的文件名部分。全部成功时仍保留该轮记录，并使用空数组。Pages Artifact 会包含 `data/source_state.json`，供阅读页面展示运行状态。
 
 本地运行拉取器时，需要提供一个包含 Catalog 的归档目录：
 

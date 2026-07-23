@@ -8,11 +8,12 @@ import json
 import os
 import sys
 import tempfile
+import time
 import urllib.request
 import xml.etree.ElementTree as ET
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path, PurePosixPath
 from typing import Any, Callable
 
@@ -33,6 +34,12 @@ class FetchResult:
     source: Source
     content: bytes | None
     error: str | None = None
+
+
+@dataclass(frozen=True)
+class FetchFailure:
+    source: Source
+    error: str
 
 
 def utc_now() -> str:
@@ -151,10 +158,10 @@ def fetch_catalog(
     *,
     workers: int,
     now: Callable[[], str] = utc_now,
-) -> tuple[int, int, int, list[str]]:
+) -> tuple[int, int, int, list[FetchFailure]]:
     sources = collect_sources(catalog)
     successful = changed = 0
-    errors: list[str] = []
+    errors: list[FetchFailure] = []
 
     with ThreadPoolExecutor(max_workers=workers) as executor:
         futures = {executor.submit(fetch_one, source, fetcher): source for source in sources}
@@ -162,7 +169,7 @@ def fetch_catalog(
             result = future.result()
             source = result.source
             if result.error is not None or result.content is None:
-                errors.append(f"{source.original_url}: {result.error or 'empty response'}")
+                errors.append(FetchFailure(source, result.error or "empty response"))
                 continue
 
             fetched_at = now()
@@ -187,6 +194,57 @@ def write_catalog(path: Path, catalog: dict[str, Any]) -> None:
     atomic_write(path, rendered)
 
 
+def parse_timestamp(value: str) -> datetime:
+    try:
+        parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+    except ValueError as error:
+        raise ValueError(f"invalid source state timestamp: {value!r}") from error
+    if parsed.tzinfo is None:
+        parsed = parsed.replace(tzinfo=timezone.utc)
+    return parsed.astimezone(timezone.utc)
+
+
+def source_identifier(feed_path: str) -> str:
+    return PurePosixPath(feed_path).stem
+
+
+def update_source_state(
+    path: Path,
+    *,
+    started_at: str,
+    finished_at: str,
+    duration_seconds: int,
+    failed: list[str],
+    retention_days: int = 15,
+) -> list[dict[str, Any]]:
+    records: list[Any] = []
+    if path.exists():
+        try:
+            records = json.loads(path.read_text(encoding="utf-8"))
+        except json.JSONDecodeError as error:
+            raise ValueError(f"cannot parse source state {path}: {error}") from error
+        if not isinstance(records, list):
+            raise ValueError(f"source state {path} must contain a JSON array")
+
+    cutoff = parse_timestamp(finished_at) - timedelta(days=retention_days)
+    retained: list[dict[str, Any]] = []
+    for record in records:
+        if not isinstance(record, dict) or not isinstance(record.get("finishedAt"), str):
+            raise ValueError(f"source state {path} contains an invalid record")
+        if parse_timestamp(record["finishedAt"]) >= cutoff:
+            retained.append(record)
+
+    retained.append({
+        "startedAt": started_at,
+        "finishedAt": finished_at,
+        "durationSeconds": max(0, int(duration_seconds)),
+        "failed": sorted(set(failed)),
+    })
+    rendered = (json.dumps(retained, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
+    atomic_write(path, rendered)
+    return retained
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--catalog", type=Path, required=True)
@@ -199,6 +257,8 @@ def main() -> int:
     if args.workers < 1 or args.timeout <= 0 or args.max_bytes < 1:
         parser.error("workers, timeout and max-bytes must be positive")
 
+    started_at = utc_now()
+    started_monotonic = time.monotonic()
     try:
         catalog = json.loads(args.catalog.read_text(encoding="utf-8"))
         if not isinstance(catalog, dict):
@@ -210,16 +270,21 @@ def main() -> int:
             workers=args.workers,
         )
         write_catalog(args.catalog, catalog)
+        finished_at = utc_now()
+        update_source_state(
+            args.archive_root / "source_state.json",
+            started_at=started_at,
+            finished_at=finished_at,
+            duration_seconds=round(time.monotonic() - started_monotonic),
+            failed=[source_identifier(failure.source.feed_path) for failure in errors],
+        )
     except (OSError, ValueError, json.JSONDecodeError) as error:
         print(f"error: {error}", file=sys.stderr)
         return 1
 
     print(f"RSS fetch complete: total={total} successful={successful} changed={changed} failed={len(errors)}")
-    for error in errors:
-        print(f"::warning::{error}")
-    if total > 0 and successful == 0:
-        print("error: all RSS fetches failed", file=sys.stderr)
-        return 1
+    for failure in errors:
+        print(f"::warning::{failure.source.original_url}: {failure.error}")
     return 0
 
 

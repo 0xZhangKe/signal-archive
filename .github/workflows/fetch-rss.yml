@@ -45,7 +45,10 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          git -C archive-worktree add catalog.json rss/
+          git -C archive-worktree add catalog.json source_state.json
+          if [[ -d archive-worktree/rss ]]; then
+            git -C archive-worktree add rss/
+          fi
           if git -C archive-worktree diff --cached --quiet; then
             echo "RSS documents and fetch timestamps are already up to date."
             echo "changed=false" >> "$GITHUB_OUTPUT"
