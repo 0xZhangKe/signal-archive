@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "14baaddd7402ef3c2b0e6b93",
+      "title": "iosevka字体让中文 ASCII diagram 图表对齐",
+      "summary": "@font-face { font-family: \"iosevka\"; src: url(\"https://iosevka-webfonts.github.io/iosevka-term/woff2/iosevka-term-regular.woff2\") format(\"woff2\"); } 对齐前： ┌──────────────┐ ┌──────────────┐ │ 用户请求 │────▶│ 网关服务 │ │ User Req │ │ Gateway │ └──────┬───────┘ └──────┬───────┘ │ │ ▼ ▼ ┌──────────────┐ ┌──────────────┐ │ 认证服务 │ │ 业务逻辑 │ │ Auth Svc │ │ BizLogic │ └───…",
+      "image": null,
+      "publishedAt": "2026-07-23T10:24:00Z",
+      "sourceId": "a864c53722a17b19",
+      "sourceTitle": "est's blog",
+      "link": "https://blog.est.im/2026/stdout-30",
+      "detailPath": "articles/14baaddd7402ef3c2b0e6b93.json"
+    },
+    {
       "id": "3ba089115307edbe9a8b17e0",
       "title": "为什么 Github OAuth 故意拦截 CORS",
       "summary": "跟AI发闹骚学到的 https://github.com/isaacs/github/issues/330 Allowing CORS for the endpoint you mentioned would mean that you could complete this step of the Web flow from a browser: And this would mean that you're hard-coding your client_id and client_secret into a webpage (or JS file loaded into that webpage) for everyone to see. This would indeed cause security…",
@@ -208,17 +219,6 @@
       "sourceTitle": "est's blog",
       "link": "https://blog.est.im/2026/stderr-20",
       "detailPath": "articles/e3aaaf24b47d6b1fc2b565ea.json"
-    },
-    {
-      "id": "55facd403a09665f1d43588a",
-      "title": "路径依赖",
-      "summary": "最近vibe了个分布式系统，没有 master 和 arbiter，全是平等的peer 然后这些peer去处理流量问题。 处理多个事情，当流量爆发，承载能力不足的时候，需要快速补足peer 扩容是个最简单，很强烈，明确的信号，而且效果立竿见影。 当事情没那么多，流量下降之后呢？该节约哪个peer？你敢动吗？影响别的事儿怎么办？ 呃，感觉前一发动全身了。于是全体peer进入一个次最优状态。 除非某个peer手上实在没多少事，可以明显看出合并给另一个peer处理，这个peer才方便下岗。这个流程才算结束 看到 grafana 那个 40% 的使用率，我麻了。我也不敢去手动缩容，来rebalance万一就不 balance了呢？ 让AI 改了几版，发现都不太满意。我对分布式系统也是个一知半解，就很头痛 突然想到另外…",
-      "image": null,
-      "publishedAt": "2026-05-21T08:55:00Z",
-      "sourceId": "a864c53722a17b19",
-      "sourceTitle": "est's blog",
-      "link": "https://blog.est.im/2026/stderr-19",
-      "detailPath": "articles/55facd403a09665f1d43588a.json"
     }
   ]
 }

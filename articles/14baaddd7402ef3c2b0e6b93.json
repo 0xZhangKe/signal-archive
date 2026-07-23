@@ -1,0 +1,11 @@
+{
+  "id": "14baaddd7402ef3c2b0e6b93",
+  "title": "iosevka字体让中文 ASCII diagram 图表对齐",
+  "summary": "@font-face { font-family: \"iosevka\"; src: url(\"https://iosevka-webfonts.github.io/iosevka-term/woff2/iosevka-term-regular.woff2\") format(\"woff2\"); } 对齐前： ┌──────────────┐ ┌──────────────┐ │ 用户请求 │────▶│ 网关服务 │ │ User Req │ │ Gateway │ └──────┬───────┘ └──────┬───────┘ │ │ ▼ ▼ ┌──────────────┐ ┌──────────────┐ │ 认证服务 │ │ 业务逻辑 │ │ Auth Svc │ │ BizLogic │ └───…",
+  "content": "<pre><code>\n\n</code></pre>\n\n<p>对齐前：</p>\n<pre><code>┌──────────────┐     ┌──────────────┐\n│  用户请求    │────▶│  网关服务    │\n│  User Req    │     │  Gateway     │\n└──────┬───────┘     └──────┬───────┘\n       │                    │\n       ▼                    ▼\n┌──────────────┐     ┌──────────────┐\n│  认证服务    │     │  业务逻辑    │\n│  Auth Svc    │     │  BizLogic    │\n└──────────────┘     └──────┬───────┘\n                            │\n                            ▼\n                     ┌──────────────┐\n                     │  数据存储    │\n                     │  Database    │\n                     └──────────────┘\n</code></pre>\n<p>对齐后：</p>\n<pre><code>\n\n</code></pre>\n\n<p></p>\n<pre><code>┌──────────────┐     ┌──────────────┐\n│  用户请求    │────▶│  网关服务    │\n│  User Req    │     │  Gateway     │\n└──────┬───────┘     └──────┬───────┘\n       │                    │\n       ▼                    ▼\n┌──────────────┐     ┌──────────────┐\n│  认证服务    │     │  业务逻辑    │\n│  Auth Svc    │     │  BizLogic    │\n└──────────────┘     └──────┬───────┘\n                            │\n                            ▼\n                     ┌──────────────┐\n                     │  数据存储    │\n                     │  Database    │\n                     └──────────────┘\n</code></pre>\n<p></p>\n<p>AI 的解释：</p>\n<blockquote>\n<p>Iosevka 的作者 be5invis 当年做这个字体时明确说过：因为他和很多朋友生活在中国、日本，所以他把这款字体做成严格的 1/2 em 宽，专门用来跟汉字对齐——面向亚洲用户，用这个就能保住完美对齐。也就是说 Iosevka 的西文字形宽度天生就是 0.5em，不需要任何 CSS 补偿或 size-adjust 魔法，配任何满格 1em 的 CJK 字体（Hiragino、PingFang、Source Han Sans 等）都是精确 2:1。而且它的构建系统是声明式的，用 TOML 配置文件驱动，可以精细控制粗细、宽度、每个字形的风格变体。</p>\n</blockquote>\n<p>中英混合是搞定了，emoji 这个我暂时没找到好的办法。</p>",
+  "image": null,
+  "publishedAt": "2026-07-23T10:24:00Z",
+  "sourceId": "a864c53722a17b19",
+  "sourceTitle": "est's blog",
+  "link": "https://blog.est.im/2026/stdout-30"
+}
