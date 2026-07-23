@@ -108,20 +108,37 @@ class BuildPagesTest(unittest.TestCase):
             }]}
             catalog_path = archive / "catalog.json"
             catalog_path.write_text(json.dumps(catalog), encoding="utf-8")
-            source_state = [{
-                "startedAt": "2026-07-22T08:00:00Z",
-                "finishedAt": "2026-07-22T08:01:00Z",
-                "durationSeconds": 60,
-                "failed": ["first"],
-            }]
+            source_state = [
+                {
+                    "startedAt": "2026-07-22T02:00:00Z",
+                    "finishedAt": "2026-07-22T02:01:00Z",
+                    "durationSeconds": 60,
+                    "failed": [],
+                },
+                {
+                    "startedAt": "2026-07-22T08:00:00Z",
+                    "finishedAt": "2026-07-22T08:01:00Z",
+                    "durationSeconds": 60,
+                    "failed": ["1111111111111111"],
+                },
+            ]
             (archive / "source_state.json").write_text(json.dumps(source_state), encoding="utf-8")
 
             summary = build_pages(catalog_path, archive, site, output)
 
             self.assertEqual({"sources": 2, "articles": 2, "failures": 0}, summary)
             rendered = json.loads((output / "data/rendered.json").read_text())
+            self.assertEqual("2026-07-22T08:00:00Z", rendered["startedAt"])
+            self.assertEqual("2026-07-22T08:01:00Z", rendered["finishedAt"])
+            self.assertEqual(60, rendered["durationSeconds"])
             category = rendered["children"][0]
             self.assertEqual(2, len(category["children"]))
+            self.assertEqual(2, category["articleCount"])
+            self.assertEqual(1, category["failed_count"])
+            self.assertEqual(1, category["children"][0]["articleCount"])
+            self.assertEqual(1, category["children"][1]["articleCount"])
+            self.assertEqual(0.5, category["children"][0]["state"])
+            self.assertEqual(1.0, category["children"][1]["state"])
             self.assertEqual(
                 [f"categories/{folder_id('Technology')}/page-001.json"],
                 category["pages"],
@@ -173,6 +190,10 @@ class BuildPagesTest(unittest.TestCase):
             rendered = json.loads((output / "data/rendered.json").read_text())
             folder = rendered["children"][0]
             source = folder["children"][0]
+            self.assertEqual(61, folder["articleCount"])
+            self.assertEqual(61, source["articleCount"])
+            self.assertEqual(0, folder["failed_count"])
+            self.assertEqual(1.0, source["state"])
             self.assertEqual(2, len(folder["pages"]))
             self.assertEqual(2, len(source["pages"]))
             self.assertEqual(
@@ -191,6 +212,31 @@ class BuildPagesTest(unittest.TestCase):
         ]}
         with self.assertRaisesRegex(ValueError, "globally unique"):
             build_rendered(catalog)
+
+    def test_deduplicates_repeated_article_ids_within_a_source(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            archive = root / "archive"
+            site = root / "site"
+            output = root / "output"
+            (archive / "rss").mkdir(parents=True)
+            site.mkdir()
+            (site / "index.html").write_text("reader", encoding="utf-8")
+            feed_path = "rss/4444444444444444.xml"
+            item_fragment = RSS[RSS.index("<item>"):RSS.index("</channel>")]
+            duplicate_rss = RSS.replace("</channel>", item_fragment + "</channel>")
+            (archive / feed_path).write_text(duplicate_rss, encoding="utf-8")
+            catalog = {"children": [rss_node("Repeated", feed_path)]}
+            catalog_path = archive / "catalog.json"
+            catalog_path.write_text(json.dumps(catalog), encoding="utf-8")
+
+            build_pages(catalog_path, archive, site, output)
+
+            rendered = json.loads((output / "data/rendered.json").read_text())
+            source = rendered["children"][0]
+            items = json.loads((output / "data" / source["pages"][0]).read_text())["items"]
+            self.assertEqual(1, source["articleCount"])
+            self.assertEqual(1, len(items))
 
     def test_sanitizes_dangerous_html(self) -> None:
         rendered = sanitize_html('<p onclick="bad()">Safe</p><script>bad()</script><iframe/><a href="javascript:bad()">link</a>')

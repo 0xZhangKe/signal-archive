@@ -79,6 +79,9 @@ API Key 等敏感信息必须通过 GitHub Actions Secrets 管理，不得提交
 
 ```json
 {
+  "startedAt": "2026-07-23T02:00:00Z",
+  "finishedAt": "2026-07-23T02:03:18Z",
+  "durationSeconds": 198,
   "children": [
     {
       "type": "category",
@@ -175,11 +178,15 @@ data/
     {
       "type": "category",
       "title": "中文博客",
+      "articleCount": 2607,
+      "failed_count": 2,
       "pages": [
         "categories/folder-08f18aa4658e8149/page-001.json"
       ],
       "children": [
         {
+          "articleCount": 83,
+          "state": 0.933333,
           "pages": [
             "categories/05ada84875558017/page-001.json"
           ],
@@ -194,6 +201,12 @@ data/
   ]
 }
 ```
+
+每个 folder 和 source 节点都包含 `articleCount`。source 使用对应 Feed 的文章数量；folder 使用所有后代 source 按文章 ID 去重后的聚合数量。
+
+RSS 节点还包含 `state`，取值范围为 `0.0` 到 `1.0`，计算方式为最近 15 天 `source_state.json` 中的成功次数除以总拉取次数，保留 6 位小数。没有拉取记录时使用 `1.0`。Category 节点的 `failed_count` 表示最近一轮拉取中，其后代 source 失败的数量。
+
+`rendered.json` 根节点的 `startedAt`、`finishedAt` 和 `durationSeconds` 来自 `source_state.json` 中完成时间最新的一轮拉取。Pages 左栏只使用 `startedAt` 显示最近一轮开始拉取的时间。RSS 成功率低于 `1.0` 时，左栏标题前显示从陶土红到赭黄色变化的状态点；成功率为 `1.0` 时不显示。二栏会在文章总数前显示当前 Category 的失败数，或当前 RSS 的成功率。
 
 分页文件只保存列表展示所需的摘要信息，并通过 `detailPath` 指向 `articles/<article-id>.json`。文章详情包含经过安全清理的 HTML，只有打开文章时才会加载。
 
@@ -212,6 +225,22 @@ data/
 ```
 
 因此，阅读页面选择大型文件夹时不需要在浏览器中临时下载和解析大量 XML。
+
+### 本地 UI 预览
+
+运行本地 mock 预览：
+
+```bash
+python3 scripts/preview_pages.py
+```
+
+然后打开 [http://127.0.0.1:4173/](http://127.0.0.1:4173/)。Mock 数据覆盖 folder 展开、成功率、最近失败数、长标题、有图与无图文章、富文本正文以及超过 60 篇文章的分页场景。预览服务直接读取 `site/`，修改 HTML、CSS 或 JavaScript 后刷新页面即可看到结果。
+
+如果只需要重新生成 `_mock_preview/` 数据而不启动服务：
+
+```bash
+python3 scripts/preview_pages.py --build-only
+```
 
 ## 生成 Catalog
 

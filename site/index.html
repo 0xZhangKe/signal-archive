@@ -34,7 +34,9 @@
           </button>
         </header>
         <div class="catalog-caption">
-          <span>CATALOG · 001</span>
+          <div class="fetch-update">
+            <time id="fetch-window">Waiting for fetch data…</time>
+          </div>
           <span id="source-count">LOADING</span>
         </div>
         <nav id="catalog" class="catalog-tree" aria-label="Feed catalog"></nav>
@@ -48,7 +50,7 @@
 
       <section class="list-panel" aria-label="Article list">
         <header class="list-header">
-          <div>
+          <div class="list-heading">
             <h2>
               <span id="list-title">Select a category</span>
               <a id="list-source-link" class="list-source-link" target="_blank" rel="noopener noreferrer" hidden></a>
@@ -62,7 +64,6 @@
             <p>Select a category or source from the catalog.</p>
           </div>
         </div>
-        <button id="load-more" class="load-more" type="button" hidden>Load more</button>
       </section>
 
       <div class="column-resizer" data-resizer="middle" role="separator" aria-label="Resize article and reader columns" aria-orientation="vertical" tabindex="0"></div>

@@ -100,6 +100,11 @@ def build_rendered(
     catalog: dict[str, Any],
     source_pages: dict[str, list[str]] | None = None,
     folder_pages: dict[str, list[str]] | None = None,
+    source_article_counts: dict[str, int] | None = None,
+    folder_article_counts: dict[str, int] | None = None,
+    source_success_rates: dict[str, float] | None = None,
+    folder_failed_counts: dict[str, int] | None = None,
+    latest_source_state: dict[str, Any] | None = None,
 ) -> tuple[dict[str, Any], dict[str, dict[str, Any]], dict[str, list[str]]]:
     children = catalog.get("children")
     if not isinstance(children, list):
@@ -107,6 +112,10 @@ def build_rendered(
 
     source_pages = source_pages or {}
     folder_pages = folder_pages or {}
+    source_article_counts = source_article_counts or {}
+    folder_article_counts = folder_article_counts or {}
+    source_success_rates = source_success_rates or {}
+    folder_failed_counts = folder_failed_counts or {}
     items: list[dict[str, Any]] = []
     unique_sources: dict[str, dict[str, Any]] = {}
     folders: dict[str, list[str]] = {}
@@ -131,14 +140,18 @@ def build_rendered(
             raise ValueError(f"source {node_title(source)!r} is missing feedPath")
         unique_sources.setdefault(feed_path, source)
         identifier = source_id(feed_path)
-        view = {
+        source_type = source.get("type", "rss")
+        view: dict[str, Any] = {
             "pages": source_pages.get(identifier, []),
+            "articleCount": source_article_counts.get(identifier, 0),
             "lastContentChangedAt": source.get("lastContentChangedAt"),
             "lastSuccessfulFetchAt": source.get("lastSuccessfulFetchAt"),
             "originalUrl": source.get("originalUrl"),
             "title": node_title(source),
-            "type": source.get("type", "rss"),
+            "type": source_type,
         }
+        if source_type == "rss":
+            view["state"] = source_success_rates.get(identifier, 1.0)
         return view
 
     for child in children:
@@ -151,6 +164,8 @@ def build_rendered(
             folders[identifier] = feed_paths
             items.append({
                 "pages": folder_pages.get(identifier, []),
+                "articleCount": folder_article_counts.get(identifier, 0),
+                "failed_count": folder_failed_counts.get(identifier, 0),
                 "children": [source_view(source) for source in flattened],
                 "type": "category",
                 "title": node_title(child),
@@ -158,7 +173,72 @@ def build_rendered(
         else:
             items.append(source_view(child))
 
-    return {"children": items}, unique_sources, folders
+    latest_source_state = latest_source_state or {}
+    return {
+        "startedAt": latest_source_state.get("startedAt"),
+        "finishedAt": latest_source_state.get("finishedAt"),
+        "durationSeconds": latest_source_state.get("durationSeconds"),
+        "children": items,
+    }, unique_sources, folders
+
+
+def source_state_metrics(
+    records: list[Any],
+    source_identifiers: Iterable[str],
+    folders: dict[str, list[str]],
+) -> tuple[dict[str, float], dict[str, int], dict[str, Any] | None]:
+    failed_counts: dict[str, int] = {}
+    latest_record: dict[str, Any] | None = None
+    latest_finished_at = ""
+
+    for record in records:
+        if not isinstance(record, dict):
+            raise ValueError("source_state.json contains a non-object record")
+        started_at = record.get("startedAt")
+        finished_at = record.get("finishedAt")
+        duration_seconds = record.get("durationSeconds")
+        failed = record.get("failed")
+        if (
+            not isinstance(started_at, str)
+            or not isinstance(finished_at, str)
+            or not isinstance(duration_seconds, int)
+            or isinstance(duration_seconds, bool)
+            or not isinstance(failed, list)
+        ):
+            raise ValueError("source_state.json contains an invalid record")
+        if not all(isinstance(identifier, str) for identifier in failed):
+            raise ValueError("source_state.json failed entries must be strings")
+        for identifier in set(failed):
+            failed_counts[identifier] = failed_counts.get(identifier, 0) + 1
+        if latest_record is None or finished_at >= latest_finished_at:
+            latest_record = record
+            latest_finished_at = finished_at
+
+    total_runs = len(records)
+    success_rates = {
+        identifier: (
+            round((total_runs - failed_counts.get(identifier, 0)) / total_runs, 6)
+            if total_runs
+            else 1.0
+        )
+        for identifier in source_identifiers
+    }
+    latest_failed = set(latest_record["failed"]) if latest_record else set()
+    folder_failed_counts = {
+        folder_identifier: len({
+            source_id(feed_path)
+            for feed_path in feed_paths
+        } & latest_failed)
+        for folder_identifier, feed_paths in folders.items()
+    }
+    latest_summary = None
+    if latest_record:
+        latest_summary = {
+            "startedAt": latest_record["startedAt"],
+            "finishedAt": latest_record["finishedAt"],
+            "durationSeconds": latest_record["durationSeconds"],
+        }
+    return success_rates, folder_failed_counts, latest_summary
 
 
 def element_text(element: ET.Element | None) -> str:
@@ -456,6 +536,11 @@ def build_pages(catalog_path: Path, archive_root: Path, site_root: Path, output:
     write_json(data_root / "source_state.json", source_state)
 
     _, sources, folders = build_rendered(catalog)
+    source_success_rates, folder_failed_counts, latest_source_state = source_state_metrics(
+        source_state,
+        (source_id(feed_path) for feed_path in sources),
+        folders,
+    )
     articles_by_source: dict[str, list[dict[str, Any]]] = {}
     failures: list[dict[str, str]] = []
     article_details: dict[str, dict[str, Any]] = {}
@@ -468,6 +553,10 @@ def build_pages(catalog_path: Path, archive_root: Path, site_root: Path, output:
         except ValueError as error:
             failures.append({"feedPath": feed_path, "error": str(error)})
             articles = []
+        unique_articles: dict[str, dict[str, Any]] = {}
+        for article in articles:
+            unique_articles.setdefault(article["id"], article)
+        articles = list(unique_articles.values())
         articles.sort(key=lambda article: article["sortTime"], reverse=True)
         articles_by_source[feed_path] = articles
         for article in articles:
@@ -480,11 +569,14 @@ def build_pages(catalog_path: Path, archive_root: Path, site_root: Path, output:
         )
 
     source_pages: dict[str, list[str]] = {}
+    source_article_counts: dict[str, int] = {}
     for feed_path, articles in articles_by_source.items():
         identifier = source_id(feed_path)
         source_pages[identifier] = write_article_pages(data_root, identifier, articles)
+        source_article_counts[identifier] = len(articles)
 
     folder_pages: dict[str, list[str]] = {}
+    folder_article_counts: dict[str, int] = {}
     for identifier, feed_paths in folders.items():
         merged: dict[str, dict[str, Any]] = {}
         for feed_path in feed_paths:
@@ -492,8 +584,18 @@ def build_pages(catalog_path: Path, archive_root: Path, site_root: Path, output:
                 merged.setdefault(article["id"], article)
         category_articles = sorted(merged.values(), key=lambda article: article["sortTime"], reverse=True)
         folder_pages[identifier] = write_article_pages(data_root, identifier, category_articles)
+        folder_article_counts[identifier] = len(category_articles)
 
-    rendered, _, _ = build_rendered(catalog, source_pages, folder_pages)
+    rendered, _, _ = build_rendered(
+        catalog,
+        source_pages,
+        folder_pages,
+        source_article_counts,
+        folder_article_counts,
+        source_success_rates,
+        folder_failed_counts,
+        latest_source_state,
+    )
     write_json(data_root / "rendered.json", rendered)
     return {
         "sources": len(sources),
