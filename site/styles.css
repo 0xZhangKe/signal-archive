@@ -16,7 +16,7 @@
   --placeholder: #e5ded1;
   --placeholder-ink: #928a7d;
   --placeholder-rule: #d1c8b9;
-  --reader-link: #874b39;
+  --reader-link: var(--ink);
   --quote-ink: #625d4d;
   --scrollbar: rgb(105 93 56 / 34%);
   --panel-header-height: 6.6rem;
@@ -43,7 +43,6 @@
   --placeholder: #2a2824;
   --placeholder-ink: #8d877d;
   --placeholder-rule: #45413a;
-  --reader-link: #d49a7b;
   --quote-ink: #b8b1a6;
   --scrollbar: rgb(170 163 152 / 34%);
   color-scheme: dark;
@@ -62,7 +61,6 @@
     --placeholder: #2a2824;
     --placeholder-ink: #8d877d;
     --placeholder-rule: #45413a;
-    --reader-link: #d49a7b;
     --quote-ink: #b8b1a6;
     --scrollbar: rgb(170 163 152 / 34%);
     color-scheme: dark;
@@ -704,6 +702,13 @@ a { -webkit-tap-highlight-color: transparent; }
 .article-meta a {
   color: var(--accent);
   text-underline-offset: 0.2rem;
+}
+
+.article-meta a,
+.article-body a {
+  text-decoration-line: underline;
+  text-decoration-style: dashed;
+  text-decoration-thickness: 1px;
 }
 
 .article-body {
