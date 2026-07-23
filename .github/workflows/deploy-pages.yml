@@ -15,13 +15,13 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
 concurrency:
-  group: github-pages
-  cancel-in-progress: true
+  group: signal-archive-writer
+  cancel-in-progress: false
 
 jobs:
   build:
@@ -48,6 +48,26 @@ jobs:
             --archive-root archive-data \
             --site-root site \
             --output _site
+
+      - name: Sync rendered data to archive
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp _site/data/rendered.json archive-data/rendered.json
+          mkdir -p archive-data/categories archive-data/articles
+          rsync -a --delete _site/data/categories/ archive-data/categories/
+          rsync -a --delete _site/data/articles/ archive-data/articles/
+
+          git -C archive-data add -A -- rendered.json categories articles
+          if git -C archive-data diff --cached --quiet; then
+            echo "Rendered data is already up to date."
+            exit 0
+          fi
+
+          git -C archive-data config user.name "github-actions[bot]"
+          git -C archive-data config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git -C archive-data commit -m "archive: render Pages data"
+          git -C archive-data push origin HEAD:archive
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5

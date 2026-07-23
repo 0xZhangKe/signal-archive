@@ -441,6 +441,8 @@ def build_pages(catalog_path: Path, archive_root: Path, site_root: Path, output:
         shutil.rmtree(output)
     shutil.copytree(site_root, output)
     data_root = output / "data"
+    (data_root / "categories").mkdir(parents=True, exist_ok=True)
+    (data_root / "articles").mkdir(parents=True, exist_ok=True)
     source_state_path = archive_root / "source_state.json"
     if source_state_path.exists():
         try:
