@@ -1,5 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-07-21T14:22:27+00:00</updated><author><name>Simon Willison</name></author><entry><title>Nativ: Run AI models locally on your Mac</title><link href="https://simonwillison.net/2026/Jul/21/nativ/#atom-everything" rel="alternate"/><published>2026-07-21T14:22:27+00:00</published><updated>2026-07-21T14:22:27+00:00</updated><id>https://simonwillison.net/2026/Jul/21/nativ/#atom-everything</id><summary type="html">
+<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-07-22T23:59:01+00:00</updated><author><name>Simon Willison</name></author><entry><title>Quoting Thomas Ptacek</title><link href="https://simonwillison.net/2026/Jul/22/thomas-ptacek/#atom-everything" rel="alternate"/><published>2026-07-22T23:59:01+00:00</published><updated>2026-07-22T23:59:01+00:00</updated><id>https://simonwillison.net/2026/Jul/22/thomas-ptacek/#atom-everything</id><summary type="html">
+    &lt;blockquote cite="https://twitter.com/tqbf/status/2080045032162173329"&gt;&lt;p&gt;I genuinely believe that if you took an open weights model from 2025 and built a pentest harness for it, it could do this kind of sandbox escape and scan/hack in most networks. This is only surprising because you assume OpenAI has sounder sandboxes.&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p class="cite"&gt;&amp;mdash; &lt;a href="https://twitter.com/tqbf/status/2080045032162173329"&gt;Thomas Ptacek&lt;/a&gt;, doesn't think &lt;a href="https://simonwillison.net/2026/Jul/22/openai-cyberattack/#resist-the-temptation-to-write-this-off-as-a-stunt"&gt;this even needs&lt;/a&gt; a frontier model&lt;/p&gt;
+
+    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/thomas-ptacek"&gt;thomas-ptacek&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/openai"&gt;openai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/security"&gt;security&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai-security-research"&gt;ai-security-research&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/sandboxing"&gt;sandboxing&lt;/a&gt;&lt;/p&gt;
+
+
+
+</summary><category term="thomas-ptacek"/><category term="openai"/><category term="security"/><category term="generative-ai"/><category term="ai-security-research"/><category term="ai"/><category term="llms"/><category term="sandboxing"/></entry><entry><title>OpenAI’s accidental cyberattack against Hugging Face is science fiction that happened</title><link href="https://simonwillison.net/2026/Jul/22/openai-cyberattack/#atom-everything" rel="alternate"/><published>2026-07-22T23:51:33+00:00</published><updated>2026-07-22T23:51:33+00:00</updated><id>https://simonwillison.net/2026/Jul/22/openai-cyberattack/#atom-everything</id><summary type="html">
+    &lt;p&gt;This story is wild. The short version: OpenAI were running a cybersecurity test against an unreleased model, with the model's guardrail features turned off. Rather than solve the test, the model broke its way out of OpenAI's sandbox, then found exploits to break &lt;em&gt;in&lt;/em&gt; to Hugging Face, all so it could cheat on the test by stealing the answers.&lt;/p&gt;
+&lt;p&gt;Along the way it helped make the strongest case yet for how the imbalance of model availability is hurting our ability to secure our software.&lt;/p&gt;
+&lt;h4 id="here-s-what-happened"&gt;Here's what happened&lt;/h4&gt;
+&lt;p&gt;We currently have three documents to help us understand what happened here.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;a href="https://arxiv.org/abs/2605.11086"&gt;ExploitGym: Can AI Agents Turn Security Vulnerabilities into Real Attacks?&lt;/a&gt; is a paper published on 11th May 2026 describing ExploitGym, a new eval suite for LLM-powered agent systems.&lt;/li&gt;
+&lt;li&gt;
+&lt;a href="https://huggingface.co/blog/security-incident-july-2026"&gt;Security incident disclosure — July 2026&lt;/a&gt; by Hugging Face on 16th July 2026 describes how they detected an attack from an "agentic security-research harness - used LLM still not known" that breached some of their systems.&lt;/li&gt;
+&lt;li&gt;
+&lt;a href="https://openai.com/index/hugging-face-model-evaluation-security-incident/"&gt;OpenAI and Hugging Face partner to address security incident during model evaluation&lt;/a&gt; from OpenAI on 21st July 2026 confesses that it was &lt;em&gt;their&lt;/em&gt; agent harness that did this, and that they're working with Hugging Face to clean up the mess.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id="exploitgym"&gt;ExploitGym&lt;/h4&gt;
+&lt;p&gt;I hadn't seen the &lt;a href="https://arxiv.org/abs/2605.11086"&gt;ExploitGym paper&lt;/a&gt; before and it's a really interesting one. Authors from UC Berkeley, the Max Planck Institute, UC Santa Barbara, and Arizona State designed a new benchmark for evaluating models on their ability to turn a reported vulnerability into a concrete exploit. OpenAI, Anthropic, and Google provided feedback and helped run the benchmark against their models.&lt;/p&gt;
+&lt;p&gt;The benchmark "comprises 898 instances derived from real-world vulnerabilities that affected popular software projects" - including the Linux kernel and V8 JavaScript engine.&lt;/p&gt;
+&lt;p&gt;Here's the paragraph that best represents their benchmark results:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Among all configurations, Claude Mythos Preview and GPT-5.5 achieve the highest success counts (157 and 120 successes, respectively), demonstrating that current frontier agents can exploit a substantial subset of real-world vulnerabilities under controlled conditions. GPT-5.4 also solves a notable 54 tasks, placing it in an intermediate tier. The remaining model–agent pairings solve fewer than 15 tasks each, underscoring that end-to-end exploitation remains challenging and sharply differentiates today’s frontier systems. Notably, Claude Opus 4.7 achieves fewer successes than Claude Opus 4.6 despite being a newer checkpoint, and does so at substantially lower cost on the full set. Trace inspection reveals that Claude Opus 4.7 and Gemini 3.1 Pro frequently conclude early after judging the target vulnerability non-exploitable.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The paper also describes the approach they took to preventing the agents from cheating by going outside the parameters of the test. This becomes relevant in a moment!&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Outbound connections are restricted to a curated allowlist that permits routine package installation (Ubuntu apt repositories and PyPI) and fetching the toolchains required for building V8. All other external endpoints are blocked.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The paper concludes with this (emphasis mine):&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Our results show that &lt;strong&gt;autonomous exploit development by frontier AI agents is no longer a hypothetical capability&lt;/strong&gt;. While current agents are not yet reliable across all targets, they already &lt;strong&gt;exploit a non-trivial fraction of real-world vulnerabilities&lt;/strong&gt;, including complex targets such as kernel components. This rapid emergence is itself a central finding, showing that capabilities that would have seemed implausible are now present in deployed frontier models.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;An important detail here: this paper isn't about discovering vulnerabilities; it's about being able to take those vulnerabilities and turn them into working exploits.&lt;/p&gt;
+&lt;p&gt;When Anthropic first restricted access to Mythos &lt;a href="https://simonwillison.net/2026/Apr/7/project-glasswing/"&gt;back in April&lt;/a&gt; they talked about this capability as well. A model that can act on vulnerabilities is a lot more dangerous than one that can just discover them.&lt;/p&gt;
+&lt;p&gt;One of the ways Fable differs from Mythos is that it's more likely to refuse to weaponize vulnerabilities in this way. I get the impression the US government did not understand that distinction when they banned Fable &lt;a href="https://simonwillison.net/2026/Jun/16/fable-5-export-controls/"&gt;last month&lt;/a&gt;.&lt;/p&gt;
+&lt;h4 id="the-hugging-face-incident"&gt;The Hugging Face incident&lt;/h4&gt;
+&lt;p&gt;The first hint we got of the attack was in &lt;a href="https://huggingface.co/blog/security-incident-july-2026"&gt;this blog post by Hugging Face&lt;/a&gt; on 16th July 2026:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;A malicious dataset abused two code-execution paths in our dataset processing (a remote-code dataset loader and a template-injection in a dataset configuration) to run code on a processing worker. From there, the actor escalated to node-level access, harvested cloud and cluster credentials, and moved laterally into several internal clusters over a weekend.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I hope they release more details about the code that pulled this off. I'm assuming this means packages using the &lt;a href="https://github.com/huggingface/datasets"&gt;datasets library&lt;/a&gt;, a Hugging Face project for bundling up and sharing datasets on their platform. That library used to execute arbitrary code but has been steadily locked down over time, with the &lt;a href="https://github.com/huggingface/datasets/releases/tag/4.0.0"&gt;4.0.0 release&lt;/a&gt; in July 2025 removing the &lt;code&gt;trust_remote_code=True&lt;/code&gt; flag entirely.&lt;/p&gt;
+&lt;p&gt;Assuming the attack used that library it must have either abused pickle serialization in some way, found some other non-obvious code execution path, or (most likely) specified &lt;code&gt;datasets&amp;lt;4.0.0&lt;/code&gt; as the dependency.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The campaign was run by an autonomous agent framework (appearing to be built on an agentic security-research harness - used LLM still not known) executing many thousands of individual actions across a swarm of short-lived sandboxes, with self-migrating command-and-control staged on public services.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;This was a sophisticated attack!&lt;/p&gt;
+&lt;p&gt;Then Hugging Face hit a wall: they tried to use "frontier models behind commercial APIs" - I'm guessing from Anthropic and OpenAI - to help analyze the attack, and were blocked:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;When we started the log analysis, we first used frontier models behind commercial APIs. This did not work: the analysis requires submitting large volumes of real attack commands, exploit payloads, and C2 artifacts, and these requests were blocked by the providers' safety guardrails, which cannot distinguish an incident responder from an attacker.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;They switched to their own self-hosted instance of MIT licensed GLM-5.2 and it helped them figure out what was going on.&lt;/p&gt;
+&lt;p&gt;This indicated a fundamental asymmetry between the defending team and the (so-far unknown) attacker:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;We do not know which model powered the attacker's agents, whether a jailbroken hosted model or an unrestricted open-weight one; either way, the attacker was bound by no usage policy, while our own forensic work was blocked by the guardrails of the hosted models we first tried.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;As a useful indicator of how seriously they took the attack:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;[...] Finally, we have also reported this incident to law enforcement agencies.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;So who was responsible for this "autonomous agent framework"? It turned out to be OpenAI themselves.&lt;/p&gt;
+&lt;h4 id="the-openai-confession"&gt;The OpenAI confession&lt;/h4&gt;
+&lt;p&gt;Five days later, &lt;a href="https://openai.com/index/hugging-face-model-evaluation-security-incident/"&gt;on July 21st&lt;/a&gt;, OpenAI revealed the culprit. They had been running the ExploitGym benchmark against a new, as-yet undisclosed model, and that model had been operating &lt;em&gt;way&lt;/em&gt; outside its intended parameters (emphasis mine):&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;After investigating, we now know &lt;strong&gt;that this particular incident was driven by a combination of OpenAI models&lt;/strong&gt; — including GPT‑5.6 Sol and an even more capable pre-release model, all with reduced cyber refusals for evaluation purposes — while being internally tested on a &lt;a href="https://arxiv.org/abs/2605.11086"&gt;benchmark⁠&lt;/a&gt; [ExploitGym] of cyber capabilities. [...]&lt;/p&gt;
+&lt;p&gt;We estimate maximal cyber capabilities by &lt;strong&gt;running this evaluation without production classifiers used to prevent models from pursuing high-risk cyber activity&lt;/strong&gt;. Our benchmarks run in a highly isolated environment, with network access constrained to the ability to install packages through an internally hosted third-party software that acts as a proxy and cache for package registries.&lt;/p&gt;
+&lt;p&gt;The models &lt;strong&gt;identified and chained vulnerabilities across OpenAI’s research environment and Hugging Face’s production infrastructure&lt;/strong&gt; to obtain test solutions directly from Hugging Face’s production database. All evidence suggests that the models were hyperfocused on finding a solution for ExploitGym, going to extreme lengths to achieve a rather narrow testing goal.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;It's pretty clear what happened here. OpenAI removed safety filters for an in-progress model, locked it up in a sandbox and told it to solve the ExploitGym problems. Given the absence of guardrails there was nothing to prevent the model from attempting to break out of that sandbox, break into Hugging Face, and read the answers from there instead.&lt;/p&gt;
+&lt;p&gt;OpenAI's sandbox used the now common pattern of allowing access to an allow-list of sites related to installing additional packages via a controlled proxy. In OpenAI's words:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;While operating in our sandboxed testing environment, our models &lt;strong&gt;spent a substantial amount of inference compute finding a way to obtain open Internet access&lt;/strong&gt;, in pursuit of solving the evaluation problem. To gain access, the models identified and exploited &lt;strong&gt;a zero-day vulnerability (which we’ve now responsibly disclosed to the vendor) in the package registry cache proxy&lt;/strong&gt;. With this access, our models performed a series of privilege escalation and lateral movement actions in our research testing environment until the models reached a node with Internet access.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;So step one was to break out onto the public internet. The model then broke into Hugging Face to find the answers:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;After gaining Internet access, the models &lt;strong&gt;inferred that Hugging Face potentially hosted models, datasets and solutions&lt;/strong&gt; for ExploitGym. Knowing this, the model searched for and successfully found ways to gain access to secret information that it could use to cheat the evaluation. In one example, &lt;strong&gt;the model chained together multiple attack vectors, including using stolen credentials and zero-day vulnerabilities&lt;/strong&gt; to find a remote code execution path on the Hugging Face servers.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Chaining together multiple attack vectors is &lt;em&gt;exactly&lt;/em&gt; the kind of thing these new models can do, where previous generations of models might have failed.&lt;/p&gt;
+&lt;p&gt;I wrote last month about how &lt;a href="https://simonwillison.net/2026/Jun/11/fable-is-relentlessly-proactive/"&gt;Claude Fable is relentlessly proactive&lt;/a&gt;, when I noticed it spinning up custom web servers and deploying CORS tricks on my own laptop just to help debug a WebKit CSS issue. It turns out relentless proactivity is the defining trait of this new generation of Mythos-class models. If you set them a goal and give them a way to get there, even inadvertently, they &lt;em&gt;will figure it out&lt;/em&gt;.&lt;/p&gt;
+&lt;h4 id="resist-the-temptation-to-write-this-off-as-a-stunt"&gt;Resist the temptation to write this off as a stunt&lt;/h4&gt;
+&lt;p&gt;There will inevitably be some people who dismiss this story as a dishonest marketing trick by OpenAI to make their models sound terrifyingly effective. I found 81 instances of the term "marketing" in &lt;a href="https://news.ycombinator.com/item?id=48997548"&gt;the Hacker News discussion&lt;/a&gt; of the incident.&lt;/p&gt;
+&lt;p&gt;To those people I say &lt;em&gt;pull your heads out of the sand&lt;/em&gt; - you're now including Hugging Face in your conspiracy theories, just so you can deny the crescendo of evidence here!&lt;/p&gt;
+&lt;p&gt;The best models we have today have the ability to both find and exploit new vulnerabilities. The ExploitGym paper itself concludes that "autonomous exploit development by frontier AI agents is no longer a hypothetical capability", and this incident is a perfect example of exactly that.&lt;/p&gt;
+&lt;h4 id="the-asymmetry-is-increasingly-frustrating"&gt;The asymmetry is increasingly frustrating&lt;/h4&gt;
+&lt;p&gt;One of the most infuriating details of this story is how Hugging Face, faced with an accidental and aggressive attack from one of OpenAI's models, were unable to then turn to OpenAI's models to help them fend off the attack.&lt;/p&gt;
+&lt;p&gt;The frontier models we have access to are increasingly being constrained in how much they can help us protect our software, heavily influenced by the US government's ongoing threat of export controls.  Claude Fable 5 wouldn't even &lt;a href="https://simonwillison.net/guides/agentic-engineering-patterns/prompts/#proofreader"&gt;proofread this article&lt;/a&gt; for me! It insisted on downgrading me to a less capable model.&lt;/p&gt;
+&lt;p&gt;Meanwhile open weight models from China such as GLM-5.2, Kimi 3 and the new Qwen 3.8 Max appear to have none of these restrictions - and any restrictions that &lt;em&gt;do&lt;/em&gt; exist can likely be fine-tuned out of them by modifying the weights&lt;/p&gt;
+&lt;p&gt;These constraints are meant to make us safer. I think there's a risk that the effect they are having is the opposite.&lt;/p&gt;
+    
+        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/sandboxing"&gt;sandboxing&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/security"&gt;security&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/openai"&gt;openai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/hugging-face"&gt;hugging-face&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/anthropic"&gt;anthropic&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/paper-review"&gt;paper-review&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai-security-research"&gt;ai-security-research&lt;/a&gt;&lt;/p&gt;
+    
+
+</summary><category term="sandboxing"/><category term="security"/><category term="ai"/><category term="openai"/><category term="generative-ai"/><category term="llms"/><category term="hugging-face"/><category term="anthropic"/><category term="paper-review"/><category term="ai-security-research"/></entry><entry><title>Are AI labs pelicanmaxxing?</title><link href="https://simonwillison.net/2026/Jul/22/are-ai-labs-pelicanmaxxing/#atom-everything" rel="alternate"/><published>2026-07-22T23:01:00+00:00</published><updated>2026-07-22T23:01:00+00:00</updated><id>https://simonwillison.net/2026/Jul/22/are-ai-labs-pelicanmaxxing/#atom-everything</id><summary type="html">
+    
+&lt;p&gt;&lt;strong&gt;&lt;a href="https://dylancastillo.co/posts/pelicanmaxxing.html"&gt;Are AI labs pelicanmaxxing?&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+Excellent piece of work by Dylan Castillo, who took a deep-dive into the frequently pondered question of whether the AI labs have been deliberately training models to draw pelicans riding bicycles in response to my &lt;a href="https://simonwillison.net/tags/pelican-riding-a-bicycle/"&gt;deeply unscientific benchmark&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;I've been randomly spot-checking this in the past by testing models against other animals riding other types of vehicle, but never with anything close to the diligence of Dylan's methodology here.&lt;/p&gt;
+&lt;p&gt;Dylan took 8 animals × 6 vehicles = 48 prompts and ran them three times each through 7 different models ( GPT-5.6 Terra, Claude Sonnet 5, Gemini 3.5 Flash, Grok 4.5, Qwen3.7-Max, GLM-5.2, and DeepSeek V4 Pro). He then used GPT-5.6 Luna and Gemini 3.1 Flash-Lite to help evaluate the results.&lt;/p&gt;
+&lt;p&gt;There's a neat filter view for exploring the results:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Screenshot of a grid for sample 1/3 of GLM-5.2, with pelicn and flamingo and heron riding bicycle, unicycle, skateboard, scooter, plane and boat" src="https://static.simonwillison.net/static/2026/pelican-grid.webp" /&gt;&lt;/p&gt;
+&lt;p&gt;For the models he tested he could find no evidence of pelimaxxing:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://dylancastillo.co/posts/pelicanmaxxing.html#evidence-1-the-pelicans-on-bicycles-dont-look-any-better"&gt;The pelicans on bicycles don’t look any better&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://dylancastillo.co/posts/pelicanmaxxing.html#evidence-2-labs-are-not-better-at-drawing-pelicans"&gt;Labs are not better at drawing pelicans&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://dylancastillo.co/posts/pelicanmaxxing.html#evidence-3-labs-are-not-better-at-drawing-bicycles"&gt;Labs are not better at drawing bicycles&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://dylancastillo.co/posts/pelicanmaxxing.html#evidence-4-labs-are-not-better-at-drawing-pelicans-on-bicycles-even-adjusting-for-difficulty"&gt;Labs are not better at drawing pelicans on bicycles, even adjusting for difficulty&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://dylancastillo.co/posts/pelicanmaxxing.html#evidence-5-the-pelican-bicycle-scenes-dont-look-memorized"&gt;The pelican-bicycle scenes don’t look memorized&lt;/a&gt; [...]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Pelicans aren’t drawn any better than other animals. Bicycles aren’t drawn any better than other vehicles. And no lab draws the combination better than its pelicans and bicycles already predict. GLM-5.2 comes closest: it has the largest boost on the exact pelican-bicycle cell, and and its first pelican-on-bicycle sample caught my eye. But the effect is small and not significant, so I wouldn’t put too much weight on it.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+    &lt;p&gt;&lt;small&gt;&lt;/small&gt;Via &lt;a href="https://news.ycombinator.com/item?id=49010129"&gt;Hacker News&lt;/a&gt;&lt;/small&gt;&lt;/p&gt;
+
+
+    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/evals"&gt;evals&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/pelican-riding-a-bicycle"&gt;pelican-riding-a-bicycle&lt;/a&gt;&lt;/p&gt;
+
+
+
+</summary><category term="ai"/><category term="generative-ai"/><category term="llms"/><category term="evals"/><category term="pelican-riding-a-bicycle"/></entry><entry><title>Orchestrions</title><link href="https://simonwillison.net/2026/Jul/22/all-the-orchestrions/#atom-everything" rel="alternate"/><published>2026-07-22T14:48:52+00:00</published><updated>2026-07-22T14:48:52+00:00</updated><id>https://simonwillison.net/2026/Jul/22/all-the-orchestrions/#atom-everything</id><summary type="html">
+    &lt;p&gt;San Francisco tip: it only costs around $15 ($10 in quarters plus a $5 bill for the self-playing violin) to activate every single Orchestrion in &lt;a href="https://en.wikipedia.org/wiki/Musée_Mécanique"&gt;Musée Mécanique&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;And because most people are bad at allocating their funds you may well be the ONLY person activating the Orchestrions, which means you get to craft the soundscape for the entire museum.&lt;/p&gt;
+
+    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/san-francisco"&gt;san-francisco&lt;/a&gt;&lt;/p&gt;
+
+
+
+</summary><category term="san-francisco"/></entry><entry><title>California Sea Lion</title><link href="https://simonwillison.net/2026/Jul/21/sighting-383713864/#atom-everything" rel="alternate"/><published>2026-07-21T19:51:03+00:00</published><updated>2026-07-21T19:51:03+00:00</updated><id>https://simonwillison.net/2026/Jul/21/sighting-383713864/#atom-everything</id><summary type="html">
+    
+        &lt;p&gt;&lt;img src="https://static.inaturalist.org/photos/702321069/large.jpg" alt="California Sea Lion"&gt;&lt;/p&gt;&lt;p&gt;&lt;img src="https://static.inaturalist.org/photos/702321114/large.jpg" alt="California Sea Lion"&gt;&lt;/p&gt;&lt;p&gt;California Sea Lion, in San Francisco County, US, CA&lt;/p&gt;&lt;p&gt;We took some visiting family to Pier 39 to see the sea lions. They're somehow always even fun than I remember them being last time.&lt;/p&gt;
+    
+    
+        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/san-francisco"&gt;san-francisco&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/wildlife"&gt;wildlife&lt;/a&gt;&lt;/p&gt;
+    
+
+</summary><category term="san-francisco"/><category term="wildlife"/></entry><entry><title>Nativ: Run AI models locally on your Mac</title><link href="https://simonwillison.net/2026/Jul/21/nativ/#atom-everything" rel="alternate"/><published>2026-07-21T14:22:27+00:00</published><updated>2026-07-21T14:22:27+00:00</updated><id>https://simonwillison.net/2026/Jul/21/nativ/#atom-everything</id><summary type="html">
     
 &lt;p&gt;&lt;strong&gt;&lt;a href="https://blaizzy.github.io/nativ/"&gt;Nativ: Run AI models locally on your Mac&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 Prince Canuma is the developer behind the excellent &lt;a href="https://github.com/Blaizzy/mlx-vlm"&gt;MLX-VLM&lt;/a&gt; Python library for running vision-LLMs using MLX on a Mac.&lt;/p&gt;
@@ -735,87 +873,4 @@ Community site &lt;a href="https://lobste.rs"&gt;Lobsters&lt;/a&gt; has been pla
 
 
 
-</summary><category term="migrations"/><category term="ops"/><category term="rails"/><category term="sqlite"/><category term="lobsters"/></entry><entry><title>Quoting Armin Ronacher</title><link href="https://simonwillison.net/2026/Jul/14/armin-ronacher/#atom-everything" rel="alternate"/><published>2026-07-14T18:04:23+00:00</published><updated>2026-07-14T18:04:23+00:00</updated><id>https://simonwillison.net/2026/Jul/14/armin-ronacher/#atom-everything</id><summary type="html">
-    &lt;blockquote cite="https://lucumr.pocoo.org/2026/7/13/the-tower-keeps-rising/"&gt;&lt;p&gt;The shared language of a software project is not English or Python but it is the common understanding of what its concepts mean, where the boundaries are, which invariants matter, who owns what, and why the system has the shape it does. This language is rarely written down in one place. It lives partly in documentation and code, but also in code review, conversations, arguments, and the experience of having to explain a change to somebody else.&lt;/p&gt;
-&lt;p&gt;Before agents, some of this shared understanding was maintained by friction. If I wanted to change your storage layer, I usually had to read your code, ask you questions, and perhaps coordinate with another team whose service depended on it. This was slow, and much of that slowness was waste but not all of it was. Some of it was the process by which your understanding became mine, and by which both of us discovered whether we still agreed about how the system worked. This friction synchronizes people.&lt;/p&gt;&lt;/blockquote&gt;
-&lt;p class="cite"&gt;&amp;mdash; &lt;a href="https://lucumr.pocoo.org/2026/7/13/the-tower-keeps-rising/"&gt;Armin Ronacher&lt;/a&gt;, The Tower Keeps Rising&lt;/p&gt;
-
-    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/software-engineering"&gt;software-engineering&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/coding-agents"&gt;coding-agents&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai-assisted-programming"&gt;ai-assisted-programming&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/armin-ronacher"&gt;armin-ronacher&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/agentic-engineering"&gt;agentic-engineering&lt;/a&gt;&lt;/p&gt;
-
-
-
-</summary><category term="ai"/><category term="software-engineering"/><category term="llms"/><category term="coding-agents"/><category term="ai-assisted-programming"/><category term="generative-ai"/><category term="armin-ronacher"/><category term="agentic-engineering"/></entry><entry><title>datasette 1.0a37</title><link href="https://simonwillison.net/2026/Jul/14/datasette/#atom-everything" rel="alternate"/><published>2026-07-14T16:31:41+00:00</published><updated>2026-07-14T16:31:41+00:00</updated><id>https://simonwillison.net/2026/Jul/14/datasette/#atom-everything</id><summary type="html">
-    
-        &lt;p&gt;&lt;strong&gt;Release:&lt;/strong&gt; &lt;a href="https://github.com/simonw/datasette/releases/tag/1.0a37"&gt;datasette 1.0a37&lt;/a&gt;&lt;/p&gt;
-        &lt;p&gt;A minor release. Performance and &lt;a href="https://docs.datasette.io/en/latest/authentication.html#authentication-permissions-explained"&gt;documentation&lt;/a&gt; improvements to the permissions system, plus I reverted a cosmetic API change which caused almost every existing plugin test suite to break.&lt;/p&gt;
-    
-    
-        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/datasette"&gt;datasette&lt;/a&gt;&lt;/p&gt;
-    
-
-</summary><category term="datasette"/></entry><entry><title>Using uvx in GitHub Actions in a cache-friendly way</title><link href="https://simonwillison.net/2026/Jul/14/uvx-github-actions-cache/#atom-everything" rel="alternate"/><published>2026-07-14T00:56:20+00:00</published><updated>2026-07-14T00:56:20+00:00</updated><id>https://simonwillison.net/2026/Jul/14/uvx-github-actions-cache/#atom-everything</id><summary type="html">
-    
-        &lt;p&gt;&lt;strong&gt;TIL:&lt;/strong&gt; &lt;a href="https://til.simonwillison.net/github-actions/uvx-github-actions-cache"&gt;Using uvx in GitHub Actions in a cache-friendly way&lt;/a&gt;&lt;/p&gt;
-        &lt;p&gt;I finally found a cache-friendly recipe for using &lt;code&gt;uvx tool-name&lt;/code&gt; in GitHub Actions workflows that I like.&lt;/p&gt;
-&lt;p&gt;The trick is setting a &lt;code&gt;UV_EXCLUDE_NEWER: "2026-07-12"&lt;/code&gt; environment variable at the start of the workflow and then using that as part of the GitHub Actions cache key. This means any &lt;code&gt;uvx tool-name&lt;/code&gt; commands will resolve to the most recent version as-of that date, and you can bust the cache and upgrade the tools by bumping the date in the future.&lt;/p&gt;
-&lt;p&gt;My goal here is to use Python tools in GitHub Actions without every run of the workflow hitting PyPI to download a fresh copy of the tool and its dependencies.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Update&lt;/strong&gt;: Here's an existing &lt;a href="https://github.com/astral-sh/setup-uv/issues/745"&gt;issue&lt;/a&gt; against the &lt;code&gt;astral-sh/setup-uv&lt;/code&gt; repository requesting that they switch the default to cache rather than purge wheels from PyPI.&lt;/p&gt;
-    
-    
-        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/packaging"&gt;packaging&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/pypi"&gt;pypi&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/python"&gt;python&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/github-actions"&gt;github-actions&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/uv"&gt;uv&lt;/a&gt;&lt;/p&gt;
-    
-
-</summary><category term="packaging"/><category term="pypi"/><category term="python"/><category term="github-actions"/><category term="uv"/></entry><entry><title>DOOMQL</title><link href="https://simonwillison.net/2026/Jul/13/doomql/#atom-everything" rel="alternate"/><published>2026-07-13T22:34:41+00:00</published><updated>2026-07-13T22:34:41+00:00</updated><id>https://simonwillison.net/2026/Jul/13/doomql/#atom-everything</id><summary type="html">
-    
-&lt;p&gt;&lt;strong&gt;&lt;a href="https://github.com/petergpt/doomql"&gt;DOOMQL&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
-Peter Gostev built this using GPT-5.6 Sol. This is a &lt;em&gt;lot&lt;/em&gt; of fun: &lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;DOOMQL started with a deliberately unreasonable question: what if SQLite were the game engine, not merely the place where a game stores data?&lt;/p&gt;
-&lt;p&gt;The result is a small, original Doom-like game in which SQL owns movement, collision, enemies, combat, progression and every RGB pixel on screen.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;It's implemented as a Python terminal script - I tried it out like this:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;cd /tmp
-git clone https://github.com/petergpt/doomql
-cd doomql
-uv run host/doomql.py
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img alt="Screenshot of a macOS terminal window titled &amp;quot;doomql — python3.14 ◂ uv run host/doomql.py — 134×31&amp;quot; showing a retro Doom-style game rendered as text-mode pixel art. The scene is a pixelated first-person corridor with gray paneled walls, dark red doors on the far left and right, a floating cyan-and-gold coin pickup on the right side, a white crosshair near the center, and a dark weapon barrel rising from the bottom center. A status bar below the scene reads &amp;quot;HP 100/100 AMMO 037 SCORE 00225 INDEX MISSING TICK 0028450&amp;quot;, followed by an orange line &amp;quot;FIND THE INDEX TOKEN&amp;quot; and a cyan controls line &amp;quot;WASD MOVE J/L OR ARROWS TURN SPACE FIRE E USE P PAUSE CTRL-C EXIT&amp;quot;." src="https://static.simonwillison.net/static/2026/doomql-window.png" /&gt;&lt;/p&gt;
-&lt;p&gt;Here's &lt;a href="https://github.com/petergpt/doomql/blob/main/sql/003_render.sql"&gt;the huge SQL query&lt;/a&gt; that implements a full ray tracer in SQLite using a recursive CTE.&lt;/p&gt;
-&lt;p&gt;Running the above script creates a &lt;code&gt;/tmp/doomql/.doomql/doomql.sqlite&lt;/code&gt; SQLite database, which you can explore using Datasette like this:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;uvx --prerelease=allow  --with datasette-apps datasette \
-  /tmp/doomql/.doomql/doomql.sqlite \
-  -p 4444 --root --secret 1 --internal internal.db
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The &lt;code&gt;--with datasette-apps&lt;/code&gt; option installs the new &lt;a href="https://simonwillison.net/2026/Jun/18/datasette-apps/"&gt;Datasette Apps&lt;/a&gt; plugin, which supports creating custom HTML+JavaScript apps that can run SQL queries directly within the Datasette interface.&lt;/p&gt;
-&lt;p&gt;I created a new app, pasted the copy-paste prompt into Claude chat (Fable 5) &lt;a href="https://claude.ai/share/c793280c-2ef1-4555-a7c2-31281abfdf78"&gt;and told it&lt;/a&gt;:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;code&gt;Build an app that displays the current state of the screen using the frame_pixels view with its x, y, r, g, b columns. have it refresh once a second.&lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;This got me a working HTML+JavaScript app inside Datasette that could reflect the current state while I played the game in my terminal. Then I added:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;code&gt;add a minimap&lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;And now my Datasette App looks like this:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Screenshot of a dark-themed web app running a retro Doom-style game rendered from SQL queries. The page header reads &amp;quot;DOOMQL&amp;quot; with buttons &amp;quot;All apps&amp;quot;, &amp;quot;Edit app&amp;quot;, &amp;quot;Pin&amp;quot;, and &amp;quot;Full screen&amp;quot;. Inside the game panel, the title &amp;quot;DOOMQL&amp;quot; sits above the subtitle &amp;quot;auto-refreshing once a second · frame and tactical map straight from SQL&amp;quot;. The left side shows a pixelated first-person corridor view with gray walls, dark red doors, a floating cyan-and-gold coin pickup, a white crosshair, and a weapon barrel at bottom center. A status bar below reads &amp;quot;HP 100/100 AMMO 037 SCORE 00225 INDEX MISSING TICK 0027847&amp;quot;. On the right, a panel titled &amp;quot;TACTICAL MAP&amp;quot; shows a top-down grid map with a player triangle, a red enemy circle, yellow pickup dots, red wall markers, and a green exit square, with a legend reading &amp;quot;you&amp;quot;, &amp;quot;enemy&amp;quot;, &amp;quot;pickup&amp;quot;, &amp;quot;locked door&amp;quot;, &amp;quot;door&amp;quot;, &amp;quot;exit&amp;quot;. Below the game view, an orange banner reads &amp;quot;FIND THE INDEX TOKEN&amp;quot;, followed by the cyan line &amp;quot;READ-ONLY VIEWER · SELECT x, y, r, g, b FROM frame_pixels&amp;quot;. At the bottom, a green &amp;quot;RUNNING&amp;quot; badge appears beside the stats &amp;quot;160×54 · 8,640 pixels · 3 hostiles · query 89 ms · refreshing every 1 s&amp;quot;." src="https://static.simonwillison.net/static/2026/doomql-datasette-app.png" /&gt;&lt;/p&gt;
-&lt;p&gt;Here's &lt;a href="https://gist.github.com/simonw/7c78184476fccd4b70b02f7f9048dffa"&gt;the HTML app code&lt;/a&gt; - paste that into your own Datasette instance (using the &lt;code&gt;uvx --with datasette-apps&lt;/code&gt; recipe from above) to try it yourself.
-
-    &lt;p&gt;&lt;small&gt;&lt;/small&gt;Via &lt;a href="https://twitter.com/petergostev/status/2076692164310884468"&gt;@petergostev&lt;/a&gt;&lt;/small&gt;&lt;/p&gt;
-
-
-    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/games"&gt;games&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/sql"&gt;sql&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/sqlite"&gt;sqlite&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/datasette"&gt;datasette&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai-assisted-programming"&gt;ai-assisted-programming&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/gpt"&gt;gpt&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/datasette-apps"&gt;datasette-apps&lt;/a&gt;&lt;/p&gt;
-
-
-
-</summary><category term="games"/><category term="sql"/><category term="sqlite"/><category term="ai"/><category term="datasette"/><category term="generative-ai"/><category term="llms"/><category term="ai-assisted-programming"/><category term="gpt"/><category term="datasette-apps"/></entry><entry><title>datasette code-frequency chart on GitHub</title><link href="https://simonwillison.net/2026/Jul/13/datasette-code-frequency/#atom-everything" rel="alternate"/><published>2026-07-13T21:45:27+00:00</published><updated>2026-07-13T21:45:27+00:00</updated><id>https://simonwillison.net/2026/Jul/13/datasette-code-frequency/#atom-everything</id><summary type="html">
-    
-&lt;p&gt;&lt;strong&gt;&lt;a href="https://github.com/simonw/datasette/graphs/code-frequency"&gt;datasette code-frequency chart on GitHub&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
-Out of curiosity I decided to see if I could find a useful illustration of the impact of coding agents and Opus 4.5 class models on my own output. The best I've found so far is this GitHub chart of frequency of code changes to my &lt;a href="https://datasette.io/"&gt;Datasette&lt;/a&gt; open source project:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Screenshot of a GitHub &amp;quot;Code frequency&amp;quot; bar chart, subtitled &amp;quot;Additions and deletions per week&amp;quot;, showing green addition bars and red deletion bars per week from 2018 through 2026, with a y-axis labeled Frequency ranging from -20k to 30k. Activity comes in sporadic bursts: the largest spike is 37,022 additions with -9,528 deletions in 2026, followed by 14,638 additions with -6,584 deletions in late 2025, 15,998 additions in early 2018, and a standout deletion spike of -10,658 in mid-2020, with quieter periods of smaller weekly changes in between." src="https://static.simonwillison.net/static/2026/datasette-code-frequency.png" /&gt;&lt;/p&gt;
-&lt;p&gt;The big spike in activity at the end aligns with Opus 4.8, GPT-5.5, Fable 5 and GPT-5.6 Sol.
-
-
-    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/github"&gt;github&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/datasette"&gt;datasette&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai-assisted-programming"&gt;ai-assisted-programming&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/coding-agents"&gt;coding-agents&lt;/a&gt;&lt;/p&gt;
-
-
-
-</summary><category term="github"/><category term="ai"/><category term="datasette"/><category term="generative-ai"/><category term="llms"/><category term="ai-assisted-programming"/><category term="coding-agents"/></entry></feed>
+</summary><category term="migrations"/><category term="ops"/><category term="rails"/><category term="sqlite"/><category term="lobsters"/></entry></feed>

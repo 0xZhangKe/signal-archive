@@ -14,7 +14,7 @@
     <link rel="alternate" href="https://fly.io/blog/building-agents-that-dont-break-themselves/"/>
     <id>https://fly.io/blog/building-agents-that-dont-break-themselves/</id>
     <published>2026-06-08T00:00:00+00:00</published>
-    <updated>2026-07-07T15:05:09+00:00</updated>
+    <updated>2026-06-21T20:15:34+00:00</updated>
     <media:thumbnail url="https://fly.io/blog/building-agents-that-dont-break-themselves/assets/building-agents-that-dont-break-themselves.png"/>
     <content type="html">&lt;div class="lead"&gt;&lt;p&gt;Building agents is fun. Rebuilding agents that break themselves… less so. A lot of Fly people are building agents with less of a penchant for self-destruction by teaching their agents to do anything risky in a Sprite. You get an agent that stays alive long enough to actually use its snazzy self-improvement features, and you can allow your agent to try things that would otherwise be battleship-scale footguns. Here’s how to do it.&lt;/p&gt;
 &lt;/div&gt;&lt;h2 id='brains-vs-hands' class='group flex items-start whitespace-pre-wrap relative mt-14 sm:mt-16 mb-4 text-navy-950 font-heading'&gt;&lt;a class='inline-block align-text-top relative top-[.15em] w-6 h-6 -ml-6 after:hash opacity-0 group-hover:opacity-100 transition-all' href='#brains-vs-hands' aria-label='Anchor'&gt;&lt;/a&gt;&lt;span class='plain-code'&gt;Brains vs Hands&lt;/span&gt;&lt;/h2&gt;
@@ -57,7 +57,7 @@
   &lt;button 
     type="button"
     class="bubble-wrap z-20 absolute right-9 -mr-0.5 top-1.5 text-transparent group-hover:text-gray-400 group-hover:hocus:text-white focus:text-white bg-transparent group-hover:bg-gray-900 group-hover:hocus:bg-gray-700 focus:bg-gray-700 transition-colors grid place-items-center w-7 h-7 rounded-lg outline-none focus:outline-none"
-    data-wrap-target="#code-skzr92k0"
+    data-wrap-target="#code-ej8vb110"
   &gt;
     &lt;svg class="w-4 h-4 pointer-events-none" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;g buffered-rendering="static"&gt;&lt;path d="M9.912 8.037h2.732c1.277 0 2.315-.962 2.315-2.237a2.325 2.325 0 00-2.315-2.31H2.959m10.228 9.01H2.959M6.802 8H2.959" /&gt;&lt;path d="M11.081 6.466L9.533 8.037l1.548 1.571" /&gt;&lt;/g&gt;&lt;/svg&gt;
     &lt;span class="bubble-sm bubble-tl [--offset-l:-9px] tail text-navy-950"&gt;
@@ -75,7 +75,7 @@
     &lt;/span&gt;
   &lt;/button&gt;
   &lt;div class='highlight relative group'&gt;
-    &lt;pre class='highlight '&gt;&lt;code id="code-skzr92k0"&gt;$ ls /root/app/migrations
+    &lt;pre class='highlight '&gt;&lt;code id="code-ej8vb110"&gt;$ ls /root/app/migrations
 001_init.sql
 002_add_users.sql
 &lt;/code&gt;&lt;/pre&gt;
@@ -92,7 +92,7 @@
   &lt;button 
     type="button"
     class="bubble-wrap z-20 absolute right-9 -mr-0.5 top-1.5 text-transparent group-hover:text-gray-400 group-hover:hocus:text-white focus:text-white bg-transparent group-hover:bg-gray-900 group-hover:hocus:bg-gray-700 focus:bg-gray-700 transition-colors grid place-items-center w-7 h-7 rounded-lg outline-none focus:outline-none"
-    data-wrap-target="#code-54d85fx0"
+    data-wrap-target="#code-2jqlypdi"
   &gt;
     &lt;svg class="w-4 h-4 pointer-events-none" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;g buffered-rendering="static"&gt;&lt;path d="M9.912 8.037h2.732c1.277 0 2.315-.962 2.315-2.237a2.325 2.325 0 00-2.315-2.31H2.959m10.228 9.01H2.959M6.802 8H2.959" /&gt;&lt;path d="M11.081 6.466L9.533 8.037l1.548 1.571" /&gt;&lt;/g&gt;&lt;/svg&gt;
     &lt;span class="bubble-sm bubble-tl [--offset-l:-9px] tail text-navy-950"&gt;
@@ -110,7 +110,7 @@
     &lt;/span&gt;
   &lt;/button&gt;
   &lt;div class='highlight relative group'&gt;
-    &lt;pre class='highlight '&gt;&lt;code id="code-54d85fx0"&gt;$ rm -rf /root/app /usr/bin/python3 /usr/bin/git
+    &lt;pre class='highlight '&gt;&lt;code id="code-2jqlypdi"&gt;$ rm -rf /root/app /usr/bin/python3 /usr/bin/git
 $ ls /root/app/migrations
 cannot access '/root/app/migrations': No such file or directory
 $ git version
@@ -123,7 +123,7 @@ executable file `git` not found in $PATH
   &lt;button 
     type="button"
     class="bubble-wrap z-20 absolute right-9 -mr-0.5 top-1.5 text-transparent group-hover:text-gray-400 group-hover:hocus:text-white focus:text-white bg-transparent group-hover:bg-gray-900 group-hover:hocus:bg-gray-700 focus:bg-gray-700 transition-colors grid place-items-center w-7 h-7 rounded-lg outline-none focus:outline-none"
-    data-wrap-target="#code-c3es2whg"
+    data-wrap-target="#code-wn9lv4qs"
   &gt;
     &lt;svg class="w-4 h-4 pointer-events-none" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;g buffered-rendering="static"&gt;&lt;path d="M9.912 8.037h2.732c1.277 0 2.315-.962 2.315-2.237a2.325 2.325 0 00-2.315-2.31H2.959m10.228 9.01H2.959M6.802 8H2.959" /&gt;&lt;path d="M11.081 6.466L9.533 8.037l1.548 1.571" /&gt;&lt;/g&gt;&lt;/svg&gt;
     &lt;span class="bubble-sm bubble-tl [--offset-l:-9px] tail text-navy-950"&gt;
@@ -141,7 +141,7 @@ executable file `git` not found in $PATH
     &lt;/span&gt;
   &lt;/button&gt;
   &lt;div class='highlight relative group'&gt;
-    &lt;pre class='highlight '&gt;&lt;code id="code-c3es2whg"&gt;$ ls /root/app/migrations
+    &lt;pre class='highlight '&gt;&lt;code id="code-wn9lv4qs"&gt;$ ls /root/app/migrations
 001_init.sql
 002_add_users.sql
 $ git version
@@ -159,7 +159,7 @@ git version 2.51.0
     <link rel="alternate" href="https://fly.io/blog/unfortunately-mcp/"/>
     <id>https://fly.io/blog/unfortunately-mcp/</id>
     <published>2026-03-10T00:00:00+00:00</published>
-    <updated>2026-03-18T15:19:17+00:00</updated>
+    <updated>2026-03-18T10:35:43+00:00</updated>
     <media:thumbnail url="https://fly.io/blog/unfortunately-mcp/assets/whack.webp"/>
     <content type="html">&lt;div class="lead"&gt;&lt;p&gt;Sprites are disposable cloud computers. They appear instantly, always include durable filesystems, and cost practically nothing when idle. They’re the best and safest place on the Internet to run agents and we want you to &lt;a href="https://sprites.dev/" title=""&gt;create dozens of them&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
@@ -219,7 +219,7 @@ git version 2.51.0
     <link rel="alternate" href="https://fly.io/blog/litestream-writable-vfs/"/>
     <id>https://fly.io/blog/litestream-writable-vfs/</id>
     <published>2026-01-29T00:00:00+00:00</published>
-    <updated>2026-02-10T19:28:18+00:00</updated>
+    <updated>2026-02-09T19:32:29+00:00</updated>
     <media:thumbnail url="https://fly.io/blog/litestream-writable-vfs/assets/litestream-writable-vfs.jpg"/>
     <content type="html">&lt;div class="lead"&gt;&lt;p&gt;&lt;strong class="font-semibold text-navy-950"&gt;I’m Ben Johnson, and I work on Litestream at Fly.io. Litestream is the missing backup/restore system for SQLite. It’s free, open-source software that should run anywhere, and&lt;/strong&gt; &lt;a href="/blog/litestream-v050-is-here/" title=""&gt;&lt;strong class="font-semibold text-navy-950"&gt;you can read more about it here&lt;/strong&gt;&lt;/a&gt;&lt;strong class="font-semibold text-navy-950"&gt;.&lt;/strong&gt;&lt;/p&gt;
 &lt;/div&gt;
@@ -254,7 +254,7 @@ git version 2.51.0
   &lt;button 
     type="button"
     class="bubble-wrap z-20 absolute right-9 -mr-0.5 top-1.5 text-transparent group-hover:text-gray-400 group-hover:hocus:text-white focus:text-white bg-transparent group-hover:bg-gray-900 group-hover:hocus:bg-gray-700 focus:bg-gray-700 transition-colors grid place-items-center w-7 h-7 rounded-lg outline-none focus:outline-none"
-    data-wrap-target="#code-9bo4dbor"
+    data-wrap-target="#code-f8yl5esx"
   &gt;
     &lt;svg class="w-4 h-4 pointer-events-none" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;g buffered-rendering="static"&gt;&lt;path d="M9.912 8.037h2.732c1.277 0 2.315-.962 2.315-2.237a2.325 2.325 0 00-2.315-2.31H2.959m10.228 9.01H2.959M6.802 8H2.959" /&gt;&lt;path d="M11.081 6.466L9.533 8.037l1.548 1.571" /&gt;&lt;/g&gt;&lt;/svg&gt;
     &lt;span class="bubble-sm bubble-tl [--offset-l:-9px] tail text-navy-950"&gt;
@@ -272,7 +272,7 @@ git version 2.51.0
     &lt;/span&gt;
   &lt;/button&gt;
   &lt;div class='highlight relative group'&gt;
-    &lt;pre class='highlight '&gt;&lt;code id="code-9bo4dbor"&gt;sqlite&amp;gt; .open file:///my.db?vfs&lt;span class="o"&gt;=&lt;/span&gt;litestream
+    &lt;pre class='highlight '&gt;&lt;code id="code-f8yl5esx"&gt;sqlite&amp;gt; .open file:///my.db?vfs&lt;span class="o"&gt;=&lt;/span&gt;litestream
 sqlite&amp;gt; PRAGMA litestream_time &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'5 minutes ago'&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; 
 sqlite&amp;gt; SELECT &lt;span class="k"&gt;*&lt;/span&gt; FROM sandwich_ratings ORDER BY RANDOM&lt;span class="o"&gt;()&lt;/span&gt; LIMIT 3 &lt;span class="p"&gt;;&lt;/span&gt; 
 22|Veggie Delight|New York|4
@@ -336,7 +336,7 @@ sqlite&amp;gt; SELECT &lt;span class="k"&gt;*&lt;/span&gt; FROM sandwich_ratings
     <link rel="alternate" href="https://fly.io/blog/design-and-implementation/"/>
     <id>https://fly.io/blog/design-and-implementation/</id>
     <published>2026-01-14T00:00:00+00:00</published>
-    <updated>2026-02-10T19:28:18+00:00</updated>
+    <updated>2026-01-27T19:11:39+00:00</updated>
     <media:thumbnail url="https://fly.io/blog/design-and-implementation/assets/starry-containers.webp"/>
     <content type="html">&lt;div class="lead"&gt;&lt;p&gt;We’re Fly.io, and this is the place in the post where we’d normally tell you that our job is to &lt;a href="https://fly.io/blog/docker-without-docker/" title=""&gt;take your containers and run them on our own hardware&lt;/a&gt; all around the world. But last week, we &lt;a href="https://sprites.dev/" title=""&gt;launched Sprites&lt;/a&gt;, and they don’t work that way at all. Sprites are something new: Docker without Docker without Docker. This post is about how they work.&lt;/p&gt;
 &lt;/div&gt;
@@ -382,7 +382,7 @@ sqlite&amp;gt; SELECT &lt;span class="k"&gt;*&lt;/span&gt; FROM sandwich_ratings
       &lt;/a&gt;
   &lt;/figcaption&gt;
   &lt;div class="image-container"&gt;
-    &lt;img src="/static/images/cta-cat.webp" srcset="/static/images/cta-cat@2x.webp 2x" alt=""&gt;
+    &lt;img src="/static/images/cta-turtle.webp" srcset="/static/images/cta-turtle@2x.webp 2x" alt=""&gt;
   &lt;/div&gt;
 &lt;/figure&gt;
 
@@ -460,7 +460,7 @@ sqlite&amp;gt; SELECT &lt;span class="k"&gt;*&lt;/span&gt; FROM sandwich_ratings
     <link rel="alternate" href="https://fly.io/blog/code-and-let-live/"/>
     <id>https://fly.io/blog/code-and-let-live/</id>
     <published>2026-01-09T00:00:00+00:00</published>
-    <updated>2026-02-10T19:28:18+00:00</updated>
+    <updated>2026-01-27T19:11:39+00:00</updated>
     <media:thumbnail url="https://fly.io/blog/code-and-let-live/assets/sprites.jpg"/>
     <content type="html">&lt;div class="lead"&gt;&lt;p&gt;The state of the art in agent isolation is a read-only sandbox. At Fly.io, we’ve been selling that story for years, and we’re calling it: ephemeral sandboxes are obsolete. Stop killing your sandboxes every time you use them.&lt;/p&gt;
 &lt;/div&gt;
@@ -471,7 +471,7 @@ sqlite&amp;gt; SELECT &lt;span class="k"&gt;*&lt;/span&gt; FROM sandwich_ratings
   &lt;button 
     type="button"
     class="bubble-wrap z-20 absolute right-9 -mr-0.5 top-1.5 text-transparent group-hover:text-gray-400 group-hover:hocus:text-white focus:text-white bg-transparent group-hover:bg-gray-900 group-hover:hocus:bg-gray-700 focus:bg-gray-700 transition-colors grid place-items-center w-7 h-7 rounded-lg outline-none focus:outline-none"
-    data-wrap-target="#code-5z4pge2l"
+    data-wrap-target="#code-e4gw3kq0"
   &gt;
     &lt;svg class="w-4 h-4 pointer-events-none" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;g buffered-rendering="static"&gt;&lt;path d="M9.912 8.037h2.732c1.277 0 2.315-.962 2.315-2.237a2.325 2.325 0 00-2.315-2.31H2.959m10.228 9.01H2.959M6.802 8H2.959" /&gt;&lt;path d="M11.081 6.466L9.533 8.037l1.548 1.571" /&gt;&lt;/g&gt;&lt;/svg&gt;
     &lt;span class="bubble-sm bubble-tl [--offset-l:-9px] tail text-navy-950"&gt;
@@ -489,7 +489,7 @@ sqlite&amp;gt; SELECT &lt;span class="k"&gt;*&lt;/span&gt; FROM sandwich_ratings
     &lt;/span&gt;
   &lt;/button&gt;
   &lt;div class='highlight relative group'&gt;
-    &lt;pre class='highlight '&gt;&lt;code id="code-5z4pge2l"&gt;✓ Created demo-123 sprite &lt;span class="k"&gt;in &lt;/span&gt;1.0s
+    &lt;pre class='highlight '&gt;&lt;code id="code-e4gw3kq0"&gt;✓ Created demo-123 sprite &lt;span class="k"&gt;in &lt;/span&gt;1.0s
 ● Connecting to console...
 sprite@sprite:~#
 &lt;/code&gt;&lt;/pre&gt;
@@ -504,7 +504,7 @@ sprite@sprite:~#
   &lt;button 
     type="button"
     class="bubble-wrap z-20 absolute right-9 -mr-0.5 top-1.5 text-transparent group-hover:text-gray-400 group-hover:hocus:text-white focus:text-white bg-transparent group-hover:bg-gray-900 group-hover:hocus:bg-gray-700 focus:bg-gray-700 transition-colors grid place-items-center w-7 h-7 rounded-lg outline-none focus:outline-none"
-    data-wrap-target="#code-nem8fljo"
+    data-wrap-target="#code-9qmaba4o"
   &gt;
     &lt;svg class="w-4 h-4 pointer-events-none" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;g buffered-rendering="static"&gt;&lt;path d="M9.912 8.037h2.732c1.277 0 2.315-.962 2.315-2.237a2.325 2.325 0 00-2.315-2.31H2.959m10.228 9.01H2.959M6.802 8H2.959" /&gt;&lt;path d="M11.081 6.466L9.533 8.037l1.548 1.571" /&gt;&lt;/g&gt;&lt;/svg&gt;
     &lt;span class="bubble-sm bubble-tl [--offset-l:-9px] tail text-navy-950"&gt;
@@ -522,7 +522,7 @@ sprite@sprite:~#
     &lt;/span&gt;
   &lt;/button&gt;
   &lt;div class='highlight relative group'&gt;
-    &lt;pre class='highlight '&gt;&lt;code id="code-nem8fljo"&gt;&lt;span class="nb"&gt;sudo &lt;/span&gt;apt-get &lt;span class="nb"&gt;install&lt;/span&gt; &lt;span class="nt"&gt;-y&lt;/span&gt; ffmpeg &lt;span class="o"&gt;&amp;gt;&lt;/span&gt;/dev/null 2&amp;gt;&amp;amp;1
+    &lt;pre class='highlight '&gt;&lt;code id="code-9qmaba4o"&gt;&lt;span class="nb"&gt;sudo &lt;/span&gt;apt-get &lt;span class="nb"&gt;install&lt;/span&gt; &lt;span class="nt"&gt;-y&lt;/span&gt; ffmpeg &lt;span class="o"&gt;&amp;gt;&lt;/span&gt;/dev/null 2&amp;gt;&amp;amp;1
 &lt;/code&gt;&lt;/pre&gt;
   &lt;/div&gt;
 &lt;/div&gt;
@@ -531,7 +531,7 @@ sprite@sprite:~#
   &lt;button 
     type="button"
     class="bubble-wrap z-20 absolute right-9 -mr-0.5 top-1.5 text-transparent group-hover:text-gray-400 group-hover:hocus:text-white focus:text-white bg-transparent group-hover:bg-gray-900 group-hover:hocus:bg-gray-700 focus:bg-gray-700 transition-colors grid place-items-center w-7 h-7 rounded-lg outline-none focus:outline-none"
-    data-wrap-target="#code-qq8kvp47"
+    data-wrap-target="#code-242pulph"
   &gt;
     &lt;svg class="w-4 h-4 pointer-events-none" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;g buffered-rendering="static"&gt;&lt;path d="M9.912 8.037h2.732c1.277 0 2.315-.962 2.315-2.237a2.325 2.325 0 00-2.315-2.31H2.959m10.228 9.01H2.959M6.802 8H2.959" /&gt;&lt;path d="M11.081 6.466L9.533 8.037l1.548 1.571" /&gt;&lt;/g&gt;&lt;/svg&gt;
     &lt;span class="bubble-sm bubble-tl [--offset-l:-9px] tail text-navy-950"&gt;
@@ -549,7 +549,7 @@ sprite@sprite:~#
     &lt;/span&gt;
   &lt;/button&gt;
   &lt;div class='highlight relative group'&gt;
-    &lt;pre class='highlight '&gt;&lt;code id="code-qq8kvp47"&gt;sprite@sprite:~# sprite-env checkpoints create
+    &lt;pre class='highlight '&gt;&lt;code id="code-242pulph"&gt;sprite@sprite:~# sprite-env checkpoints create
 &lt;span class="c"&gt;# ...&lt;/span&gt;
 &lt;span class="o"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;"type"&lt;/span&gt;:&lt;span class="s2"&gt;"complete"&lt;/span&gt;,&lt;span class="s2"&gt;"data"&lt;/span&gt;:&lt;span class="s2"&gt;"Checkpoint v1 created successfully"&lt;/span&gt;,
 &lt;span class="s2"&gt;"time"&lt;/span&gt;:&lt;span class="s2"&gt;"2025-12-22T22:50:48.60423809Z"&lt;/span&gt;&lt;span class="o"&gt;}&lt;/span&gt;
@@ -563,7 +563,7 @@ sprite@sprite:~#
   &lt;button 
     type="button"
     class="bubble-wrap z-20 absolute right-9 -mr-0.5 top-1.5 text-transparent group-hover:text-gray-400 group-hover:hocus:text-white focus:text-white bg-transparent group-hover:bg-gray-900 group-hover:hocus:bg-gray-700 focus:bg-gray-700 transition-colors grid place-items-center w-7 h-7 rounded-lg outline-none focus:outline-none"
-    data-wrap-target="#code-g06bjhx6"
+    data-wrap-target="#code-utyhhhar"
   &gt;
     &lt;svg class="w-4 h-4 pointer-events-none" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;g buffered-rendering="static"&gt;&lt;path d="M9.912 8.037h2.732c1.277 0 2.315-.962 2.315-2.237a2.325 2.325 0 00-2.315-2.31H2.959m10.228 9.01H2.959M6.802 8H2.959" /&gt;&lt;path d="M11.081 6.466L9.533 8.037l1.548 1.571" /&gt;&lt;/g&gt;&lt;/svg&gt;
     &lt;span class="bubble-sm bubble-tl [--offset-l:-9px] tail text-navy-950"&gt;
@@ -581,7 +581,7 @@ sprite@sprite:~#
     &lt;/span&gt;
   &lt;/button&gt;
   &lt;div class='highlight relative group'&gt;
-    &lt;pre class='highlight '&gt;&lt;code id="code-g06bjhx6"&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="nv"&gt;$ &lt;/span&gt;sprite console 
+    &lt;pre class='highlight '&gt;&lt;code id="code-utyhhhar"&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="nv"&gt;$ &lt;/span&gt;sprite console 
 sprite@sprite:~# ffmpeg
 ffmpeg version 7.1.1-1ubuntu1.3 Copyright &lt;span class="o"&gt;(&lt;/span&gt;c&lt;span class="o"&gt;)&lt;/span&gt; 2000-2025 the FFmpeg developers
 Use &lt;span class="nt"&gt;-h&lt;/span&gt; to get full &lt;span class="nb"&gt;help &lt;/span&gt;or, even better, run &lt;span class="s1"&gt;'man ffmpeg'&lt;/span&gt;
@@ -596,7 +596,7 @@ sprite@sprite:~#
   &lt;button 
     type="button"
     class="bubble-wrap z-20 absolute right-9 -mr-0.5 top-1.5 text-transparent group-hover:text-gray-400 group-hover:hocus:text-white focus:text-white bg-transparent group-hover:bg-gray-900 group-hover:hocus:bg-gray-700 focus:bg-gray-700 transition-colors grid place-items-center w-7 h-7 rounded-lg outline-none focus:outline-none"
-    data-wrap-target="#code-iyr2ncg8"
+    data-wrap-target="#code-4efqt09j"
   &gt;
     &lt;svg class="w-4 h-4 pointer-events-none" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;g buffered-rendering="static"&gt;&lt;path d="M9.912 8.037h2.732c1.277 0 2.315-.962 2.315-2.237a2.325 2.325 0 00-2.315-2.31H2.959m10.228 9.01H2.959M6.802 8H2.959" /&gt;&lt;path d="M11.081 6.466L9.533 8.037l1.548 1.571" /&gt;&lt;/g&gt;&lt;/svg&gt;
     &lt;span class="bubble-sm bubble-tl [--offset-l:-9px] tail text-navy-950"&gt;
@@ -614,7 +614,7 @@ sprite@sprite:~#
     &lt;/span&gt;
   &lt;/button&gt;
   &lt;div class='highlight relative group'&gt;
-    &lt;pre class='highlight '&gt;&lt;code id="code-iyr2ncg8"&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="nv"&gt;$ &lt;/span&gt;sprite checkpoint restore v1
+    &lt;pre class='highlight '&gt;&lt;code id="code-4efqt09j"&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="nv"&gt;$ &lt;/span&gt;sprite checkpoint restore v1
 Restoring from checkpoint v1...
 Container components started successfully
 Restore from v1 &lt;span class="nb"&gt;complete&lt;/span&gt;
@@ -707,7 +707,7 @@ sprite@sprite:~#
       &lt;/a&gt;
   &lt;/figcaption&gt;
   &lt;div class="image-container"&gt;
-    &lt;img src="/static/images/cta-dog.webp" srcset="/static/images/cta-dog@2x.webp 2x" alt=""&gt;
+    &lt;img src="/static/images/cta-cat.webp" srcset="/static/images/cta-cat@2x.webp 2x" alt=""&gt;
   &lt;/div&gt;
 &lt;/figure&gt;
 
@@ -726,7 +726,7 @@ sprite@sprite:~#
     <link rel="alternate" href="https://fly.io/blog/litestream-vfs/"/>
     <id>https://fly.io/blog/litestream-vfs/</id>
     <published>2025-12-11T00:00:00+00:00</published>
-    <updated>2025-12-23T19:07:09+00:00</updated>
+    <updated>2025-12-18T10:32:15+00:00</updated>
     <media:thumbnail url="https://fly.io/blog/litestream-vfs/assets/litestream-vfs.jpg"/>
     <content type="html">&lt;div class="lead"&gt;&lt;p&gt;&lt;strong class="font-semibold text-navy-950"&gt;I’m Ben Johnson, and I work on Litestream at Fly.io. Litestream is the missing backup/restore system for SQLite. It’s free, open-source software that should run anywhere, and&lt;/strong&gt; &lt;a href="/blog/litestream-v050-is-here/" title=""&gt;&lt;strong class="font-semibold text-navy-950"&gt;you can read more about it here&lt;/strong&gt;&lt;/a&gt;&lt;strong class="font-semibold text-navy-950"&gt;.&lt;/strong&gt;&lt;/p&gt;
 &lt;/div&gt;
@@ -737,7 +737,7 @@ sprite@sprite:~#
   &lt;button 
     type="button"
     class="bubble-wrap z-20 absolute right-9 -mr-0.5 top-1.5 text-transparent group-hover:text-gray-400 group-hover:hocus:text-white focus:text-white bg-transparent group-hover:bg-gray-900 group-hover:hocus:bg-gray-700 focus:bg-gray-700 transition-colors grid place-items-center w-7 h-7 rounded-lg outline-none focus:outline-none"
-    data-wrap-target="#code-x8c2cdnh"
+    data-wrap-target="#code-crw8qzqt"
   &gt;
     &lt;svg class="w-4 h-4 pointer-events-none" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;g buffered-rendering="static"&gt;&lt;path d="M9.912 8.037h2.732c1.277 0 2.315-.962 2.315-2.237a2.325 2.325 0 00-2.315-2.31H2.959m10.228 9.01H2.959M6.802 8H2.959" /&gt;&lt;path d="M11.081 6.466L9.533 8.037l1.548 1.571" /&gt;&lt;/g&gt;&lt;/svg&gt;
     &lt;span class="bubble-sm bubble-tl [--offset-l:-9px] tail text-navy-950"&gt;
@@ -755,7 +755,7 @@ sprite@sprite:~#
     &lt;/span&gt;
   &lt;/button&gt;
   &lt;div class='highlight relative group'&gt;
-    &lt;pre class='highlight '&gt;&lt;code id="code-x8c2cdnh"&gt;$ sqlite3
+    &lt;pre class='highlight '&gt;&lt;code id="code-crw8qzqt"&gt;$ sqlite3
 SQLite version 3.50.4 2025-07-30 19:33:53
 sqlite&amp;gt; .load litestream.so
 sqlite&amp;gt; .open file:///my.db?vfs=litestream
@@ -767,7 +767,7 @@ sqlite&amp;gt; .open file:///my.db?vfs=litestream
   &lt;button 
     type="button"
     class="bubble-wrap z-20 absolute right-9 -mr-0.5 top-1.5 text-transparent group-hover:text-gray-400 group-hover:hocus:text-white focus:text-white bg-transparent group-hover:bg-gray-900 group-hover:hocus:bg-gray-700 focus:bg-gray-700 transition-colors grid place-items-center w-7 h-7 rounded-lg outline-none focus:outline-none"
-    data-wrap-target="#code-sn0xi84q"
+    data-wrap-target="#code-qu83tt9l"
   &gt;
     &lt;svg class="w-4 h-4 pointer-events-none" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;g buffered-rendering="static"&gt;&lt;path d="M9.912 8.037h2.732c1.277 0 2.315-.962 2.315-2.237a2.325 2.325 0 00-2.315-2.31H2.959m10.228 9.01H2.959M6.802 8H2.959" /&gt;&lt;path d="M11.081 6.466L9.533 8.037l1.548 1.571" /&gt;&lt;/g&gt;&lt;/svg&gt;
     &lt;span class="bubble-sm bubble-tl [--offset-l:-9px] tail text-navy-950"&gt;
@@ -785,7 +785,7 @@ sqlite&amp;gt; .open file:///my.db?vfs=litestream
     &lt;/span&gt;
   &lt;/button&gt;
   &lt;div class='highlight relative group'&gt;
-    &lt;pre class='highlight '&gt;&lt;code id="code-sn0xi84q"&gt;sqlite&amp;gt; SELECT * FROM sandwich_ratings ORDER BY RANDOM() LIMIT 3 ; 
+    &lt;pre class='highlight '&gt;&lt;code id="code-qu83tt9l"&gt;sqlite&amp;gt; SELECT * FROM sandwich_ratings ORDER BY RANDOM() LIMIT 3 ; 
 22|Veggie Delight|New York|4
 30|Meatball|Los Angeles|5
 168|Chicken Shawarma Wrap|Detroit|5
@@ -801,7 +801,7 @@ sqlite&amp;gt; .open file:///my.db?vfs=litestream
   &lt;button 
     type="button"
     class="bubble-wrap z-20 absolute right-9 -mr-0.5 top-1.5 text-transparent group-hover:text-gray-400 group-hover:hocus:text-white focus:text-white bg-transparent group-hover:bg-gray-900 group-hover:hocus:bg-gray-700 focus:bg-gray-700 transition-colors grid place-items-center w-7 h-7 rounded-lg outline-none focus:outline-none"
-    data-wrap-target="#code-pu0b67z4"
+    data-wrap-target="#code-6trsx4h6"
   &gt;
     &lt;svg class="w-4 h-4 pointer-events-none" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;g buffered-rendering="static"&gt;&lt;path d="M9.912 8.037h2.732c1.277 0 2.315-.962 2.315-2.237a2.325 2.325 0 00-2.315-2.31H2.959m10.228 9.01H2.959M6.802 8H2.959" /&gt;&lt;path d="M11.081 6.466L9.533 8.037l1.548 1.571" /&gt;&lt;/g&gt;&lt;/svg&gt;
     &lt;span class="bubble-sm bubble-tl [--offset-l:-9px] tail text-navy-950"&gt;
@@ -819,7 +819,7 @@ sqlite&amp;gt; .open file:///my.db?vfs=litestream
     &lt;/span&gt;
   &lt;/button&gt;
   &lt;div class='highlight relative group'&gt;
-    &lt;pre class='highlight '&gt;&lt;code id="code-pu0b67z4"&gt;sqlite&amp;gt; UPDATE sandwich_ratings SET stars = 1 ;
+    &lt;pre class='highlight '&gt;&lt;code id="code-6trsx4h6"&gt;sqlite&amp;gt; UPDATE sandwich_ratings SET stars = 1 ;
 &lt;/code&gt;&lt;/pre&gt;
   &lt;/div&gt;
 &lt;/div&gt;
@@ -828,7 +828,7 @@ sqlite&amp;gt; .open file:///my.db?vfs=litestream
   &lt;button 
     type="button"
     class="bubble-wrap z-20 absolute right-9 -mr-0.5 top-1.5 text-transparent group-hover:text-gray-400 group-hover:hocus:text-white focus:text-white bg-transparent group-hover:bg-gray-900 group-hover:hocus:bg-gray-700 focus:bg-gray-700 transition-colors grid place-items-center w-7 h-7 rounded-lg outline-none focus:outline-none"
-    data-wrap-target="#code-gqx0bqh4"
+    data-wrap-target="#code-hjmvugsp"
   &gt;
     &lt;svg class="w-4 h-4 pointer-events-none" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;g buffered-rendering="static"&gt;&lt;path d="M9.912 8.037h2.732c1.277 0 2.315-.962 2.315-2.237a2.325 2.325 0 00-2.315-2.31H2.959m10.228 9.01H2.959M6.802 8H2.959" /&gt;&lt;path d="M11.081 6.466L9.533 8.037l1.548 1.571" /&gt;&lt;/g&gt;&lt;/svg&gt;
     &lt;span class="bubble-sm bubble-tl [--offset-l:-9px] tail text-navy-950"&gt;
@@ -846,7 +846,7 @@ sqlite&amp;gt; .open file:///my.db?vfs=litestream
     &lt;/span&gt;
   &lt;/button&gt;
   &lt;div class='highlight relative group'&gt;
-    &lt;pre class='highlight '&gt;&lt;code id="code-gqx0bqh4"&gt;sqlite&amp;gt; SELECT * FROM sandwich_ratings ORDER BY RANDOM() LIMIT 3 ; 
+    &lt;pre class='highlight '&gt;&lt;code id="code-hjmvugsp"&gt;sqlite&amp;gt; SELECT * FROM sandwich_ratings ORDER BY RANDOM() LIMIT 3 ; 
 97|French Dip|Los Angeles|1
 140|Bánh Mì|San Francisco|1
 62|Italian Beef|Chicago|1
@@ -860,7 +860,7 @@ sqlite&amp;gt; .open file:///my.db?vfs=litestream
   &lt;button 
     type="button"
     class="bubble-wrap z-20 absolute right-9 -mr-0.5 top-1.5 text-transparent group-hover:text-gray-400 group-hover:hocus:text-white focus:text-white bg-transparent group-hover:bg-gray-900 group-hover:hocus:bg-gray-700 focus:bg-gray-700 transition-colors grid place-items-center w-7 h-7 rounded-lg outline-none focus:outline-none"
-    data-wrap-target="#code-d38k6tn8"
+    data-wrap-target="#code-wiwn13bw"
   &gt;
     &lt;svg class="w-4 h-4 pointer-events-none" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;g buffered-rendering="static"&gt;&lt;path d="M9.912 8.037h2.732c1.277 0 2.315-.962 2.315-2.237a2.325 2.325 0 00-2.315-2.31H2.959m10.228 9.01H2.959M6.802 8H2.959" /&gt;&lt;path d="M11.081 6.466L9.533 8.037l1.548 1.571" /&gt;&lt;/g&gt;&lt;/svg&gt;
     &lt;span class="bubble-sm bubble-tl [--offset-l:-9px] tail text-navy-950"&gt;
@@ -878,7 +878,7 @@ sqlite&amp;gt; .open file:///my.db?vfs=litestream
     &lt;/span&gt;
   &lt;/button&gt;
   &lt;div class='highlight relative group'&gt;
-    &lt;pre class='highlight '&gt;&lt;code id="code-d38k6tn8"&gt;sqlite&amp;gt; PRAGMA litestream_time = '5 minutes ago'; 
+    &lt;pre class='highlight '&gt;&lt;code id="code-wiwn13bw"&gt;sqlite&amp;gt; PRAGMA litestream_time = '5 minutes ago'; 
 sqlite&amp;gt; select * from sandwich_ratings ORDER BY RANDOM() LIMIT 3 ; 
 30|Meatball|Los Angeles|5
 33|Ham &amp;amp; Swiss|Los Angeles|2
@@ -955,7 +955,7 @@ sqlite&amp;gt; select * from sandwich_ratings ORDER BY RANDOM() LIMIT 3 ;
     <link rel="alternate" href="https://fly.io/blog/everyone-write-an-agent/"/>
     <id>https://fly.io/blog/everyone-write-an-agent/</id>
     <published>2025-11-06T00:00:00+00:00</published>
-    <updated>2025-11-07T03:04:10+00:00</updated>
+    <updated>2025-11-10T19:06:18+00:00</updated>
     <media:thumbnail url="https://fly.io/blog/everyone-write-an-agent/assets/agents-cover.webp"/>
     <content type="html">&lt;div class="lead"&gt;&lt;p&gt;Some concepts are easy to grasp in the abstract. Boiling water: apply heat and wait. Others you really need to try. You only think you understand how a bicycle works, until you learn to ride one.&lt;/p&gt;
 &lt;/div&gt;
@@ -974,7 +974,7 @@ sqlite&amp;gt; select * from sandwich_ratings ORDER BY RANDOM() LIMIT 3 ;
   &lt;button 
     type="button"
     class="bubble-wrap z-20 absolute right-9 -mr-0.5 top-1.5 text-transparent group-hover:text-gray-400 group-hover:hocus:text-white focus:text-white bg-transparent group-hover:bg-gray-900 group-hover:hocus:bg-gray-700 focus:bg-gray-700 transition-colors grid place-items-center w-7 h-7 rounded-lg outline-none focus:outline-none"
-    data-wrap-target="#code-4b9hn738"
+    data-wrap-target="#code-1277rek4"
   &gt;
     &lt;svg class="w-4 h-4 pointer-events-none" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;g buffered-rendering="static"&gt;&lt;path d="M9.912 8.037h2.732c1.277 0 2.315-.962 2.315-2.237a2.325 2.325 0 00-2.315-2.31H2.959m10.228 9.01H2.959M6.802 8H2.959" /&gt;&lt;path d="M11.081 6.466L9.533 8.037l1.548 1.571" /&gt;&lt;/g&gt;&lt;/svg&gt;
     &lt;span class="bubble-sm bubble-tl [--offset-l:-9px] tail text-navy-950"&gt;
@@ -992,7 +992,7 @@ sqlite&amp;gt; select * from sandwich_ratings ORDER BY RANDOM() LIMIT 3 ;
     &lt;/span&gt;
   &lt;/button&gt;
   &lt;div class='highlight relative group'&gt;
-    &lt;pre class='highlight '&gt;&lt;code id="code-4b9hn738"&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;openai&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;OpenAI&lt;/span&gt;
+    &lt;pre class='highlight '&gt;&lt;code id="code-1277rek4"&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;openai&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;OpenAI&lt;/span&gt;
 
 &lt;span class="n"&gt;client&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;OpenAI&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 &lt;span class="n"&gt;context&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
@@ -1011,7 +1011,7 @@ sqlite&amp;gt; select * from sandwich_ratings ORDER BY RANDOM() LIMIT 3 ;
 &lt;/div&gt;
 &lt;p&gt;This is a trivial engine for an LLM app using the &lt;a href='https://platform.openai.com/docs/api-reference/responses' title=''&gt;OpenAI Responses API&lt;/a&gt;. It implements ChatGPT. You&amp;rsquo;d drive it with the &lt;button toggle="#readline"&gt;the  obvious  loop&lt;/button&gt;. It&amp;rsquo;ll do what you&amp;rsquo;d expect: the same thing ChatGPT would, but in your terminal.&lt;/p&gt;
 &lt;div id="readline" toggle-content="" aria-label="show very boring code"&gt;&lt;div class="highlight-wrapper group relative python"&gt;
-  &lt;button type="button" class="bubble-wrap z-20 absolute right-9 -mr-0.5 top-1.5 text-transparent group-hover:text-gray-400 group-hover:hocus:text-white focus:text-white bg-transparent group-hover:bg-gray-900 group-hover:hocus:bg-gray-700 focus:bg-gray-700 transition-colors grid place-items-center w-7 h-7 rounded-lg outline-none focus:outline-none" data-wrap-target="#code-aij69u12"&gt;
+  &lt;button type="button" class="bubble-wrap z-20 absolute right-9 -mr-0.5 top-1.5 text-transparent group-hover:text-gray-400 group-hover:hocus:text-white focus:text-white bg-transparent group-hover:bg-gray-900 group-hover:hocus:bg-gray-700 focus:bg-gray-700 transition-colors grid place-items-center w-7 h-7 rounded-lg outline-none focus:outline-none" data-wrap-target="#code-wr6ij6v6"&gt;
     &lt;svg class="w-4 h-4 pointer-events-none" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;g buffered-rendering="static"&gt;&lt;path d="M9.912 8.037h2.732c1.277 0 2.315-.962 2.315-2.237a2.325 2.325 0 00-2.315-2.31H2.959m10.228 9.01H2.959M6.802 8H2.959"&gt;&lt;/path&gt;&lt;path d="M11.081 6.466L9.533 8.037l1.548 1.571"&gt;&lt;/path&gt;&lt;/g&gt;&lt;/svg&gt;
     &lt;span class="bubble-sm bubble-tl [--offset-l:-9px] tail text-navy-950"&gt;
       Wrap text
@@ -1024,7 +1024,7 @@ sqlite&amp;gt; select * from sandwich_ratings ORDER BY RANDOM() LIMIT 3 ;
     &lt;/span&gt;
   &lt;/button&gt;
   &lt;div class="highlight relative group"&gt;
-    &lt;pre class="highlight "&gt;&lt;code id="code-aij69u12"&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;pre class="highlight "&gt;&lt;code id="code-wr6ij6v6"&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
     &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
         &lt;span class="n"&gt;line&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;input&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;"&amp;amp;gt; "&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
         &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;process&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -1037,7 +1037,7 @@ sqlite&amp;gt; select * from sandwich_ratings ORDER BY RANDOM() LIMIT 3 ;
   &lt;button 
     type="button"
     class="bubble-wrap z-20 absolute right-9 -mr-0.5 top-1.5 text-transparent group-hover:text-gray-400 group-hover:hocus:text-white focus:text-white bg-transparent group-hover:bg-gray-900 group-hover:hocus:bg-gray-700 focus:bg-gray-700 transition-colors grid place-items-center w-7 h-7 rounded-lg outline-none focus:outline-none"
-    data-wrap-target="#code-lhbgtj5"
+    data-wrap-target="#code-jhkoks7x"
   &gt;
     &lt;svg class="w-4 h-4 pointer-events-none" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;g buffered-rendering="static"&gt;&lt;path d="M9.912 8.037h2.732c1.277 0 2.315-.962 2.315-2.237a2.325 2.325 0 00-2.315-2.31H2.959m10.228 9.01H2.959M6.802 8H2.959" /&gt;&lt;path d="M11.081 6.466L9.533 8.037l1.548 1.571" /&gt;&lt;/g&gt;&lt;/svg&gt;
     &lt;span class="bubble-sm bubble-tl [--offset-l:-9px] tail text-navy-950"&gt;
@@ -1055,7 +1055,7 @@ sqlite&amp;gt; select * from sandwich_ratings ORDER BY RANDOM() LIMIT 3 ;
     &lt;/span&gt;
   &lt;/button&gt;
   &lt;div class='highlight relative group'&gt;
-    &lt;pre class='highlight '&gt;&lt;code id="code-lhbgtj5"&gt;&lt;span class="n"&gt;client&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;OpenAI&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;pre class='highlight '&gt;&lt;code id="code-jhkoks7x"&gt;&lt;span class="n"&gt;client&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;OpenAI&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 &lt;span class="n"&gt;context_good&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;context_bad&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[{&lt;/span&gt;
     &lt;span class="s"&gt;"role"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s"&gt;"system"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;"content"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s"&gt;"you're Alph and you only tell the truth"&lt;/span&gt;
 &lt;span class="p"&gt;}],&lt;/span&gt; &lt;span class="p"&gt;[{&lt;/span&gt;
@@ -1083,7 +1083,7 @@ sqlite&amp;gt; select * from sandwich_ratings ORDER BY RANDOM() LIMIT 3 ;
   &lt;button 
     type="button"
     class="bubble-wrap z-20 absolute right-9 -mr-0.5 top-1.5 text-transparent group-hover:text-gray-400 group-hover:hocus:text-white focus:text-white bg-transparent group-hover:bg-gray-900 group-hover:hocus:bg-gray-700 focus:bg-gray-700 transition-colors grid place-items-center w-7 h-7 rounded-lg outline-none focus:outline-none"
-    data-wrap-target="#code-hh1cjm6y"
+    data-wrap-target="#code-je6zty5d"
   &gt;
     &lt;svg class="w-4 h-4 pointer-events-none" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;g buffered-rendering="static"&gt;&lt;path d="M9.912 8.037h2.732c1.277 0 2.315-.962 2.315-2.237a2.325 2.325 0 00-2.315-2.31H2.959m10.228 9.01H2.959M6.802 8H2.959" /&gt;&lt;path d="M11.081 6.466L9.533 8.037l1.548 1.571" /&gt;&lt;/g&gt;&lt;/svg&gt;
     &lt;span class="bubble-sm bubble-tl [--offset-l:-9px] tail text-navy-950"&gt;
@@ -1101,7 +1101,7 @@ sqlite&amp;gt; select * from sandwich_ratings ORDER BY RANDOM() LIMIT 3 ;
     &lt;/span&gt;
   &lt;/button&gt;
   &lt;div class='highlight relative group'&gt;
-    &lt;pre class='highlight '&gt;&lt;code id="code-hh1cjm6y"&gt;&amp;gt; hey there. who are you?
+    &lt;pre class='highlight '&gt;&lt;code id="code-je6zty5d"&gt;&amp;gt; hey there. who are you?
 &amp;gt;&amp;gt;&amp;gt; I’m not Ralph.
 &amp;gt; are you Alph?
 &amp;gt;&amp;gt;&amp;gt; Yes—I’m Alph. How can I help?
@@ -1121,7 +1121,7 @@ sqlite&amp;gt; select * from sandwich_ratings ORDER BY RANDOM() LIMIT 3 ;
   &lt;button 
     type="button"
     class="bubble-wrap z-20 absolute right-9 -mr-0.5 top-1.5 text-transparent group-hover:text-gray-400 group-hover:hocus:text-white focus:text-white bg-transparent group-hover:bg-gray-900 group-hover:hocus:bg-gray-700 focus:bg-gray-700 transition-colors grid place-items-center w-7 h-7 rounded-lg outline-none focus:outline-none"
-    data-wrap-target="#code-2zpiwgee"
+    data-wrap-target="#code-cgxuqjcx"
   &gt;
     &lt;svg class="w-4 h-4 pointer-events-none" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;g buffered-rendering="static"&gt;&lt;path d="M9.912 8.037h2.732c1.277 0 2.315-.962 2.315-2.237a2.325 2.325 0 00-2.315-2.31H2.959m10.228 9.01H2.959M6.802 8H2.959" /&gt;&lt;path d="M11.081 6.466L9.533 8.037l1.548 1.571" /&gt;&lt;/g&gt;&lt;/svg&gt;
     &lt;span class="bubble-sm bubble-tl [--offset-l:-9px] tail text-navy-950"&gt;
@@ -1139,7 +1139,7 @@ sqlite&amp;gt; select * from sandwich_ratings ORDER BY RANDOM() LIMIT 3 ;
     &lt;/span&gt;
   &lt;/button&gt;
   &lt;div class='highlight relative group'&gt;
-    &lt;pre class='highlight '&gt;&lt;code id="code-2zpiwgee"&gt;&lt;span class="n"&gt;tools&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[{&lt;/span&gt;
+    &lt;pre class='highlight '&gt;&lt;code id="code-cgxuqjcx"&gt;&lt;span class="n"&gt;tools&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[{&lt;/span&gt;
    &lt;span class="s"&gt;"type"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s"&gt;"function"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;"name"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s"&gt;"ping"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
    &lt;span class="s"&gt;"description"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s"&gt;"ping some host on the internet"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
    &lt;span class="s"&gt;"parameters"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
@@ -1169,7 +1169,7 @@ sqlite&amp;gt; select * from sandwich_ratings ORDER BY RANDOM() LIMIT 3 ;
   &lt;button 
     type="button"
     class="bubble-wrap z-20 absolute right-9 -mr-0.5 top-1.5 text-transparent group-hover:text-gray-400 group-hover:hocus:text-white focus:text-white bg-transparent group-hover:bg-gray-900 group-hover:hocus:bg-gray-700 focus:bg-gray-700 transition-colors grid place-items-center w-7 h-7 rounded-lg outline-none focus:outline-none"
-    data-wrap-target="#code-vqlsyx3"
+    data-wrap-target="#code-aitfxzjt"
   &gt;
     &lt;svg class="w-4 h-4 pointer-events-none" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;g buffered-rendering="static"&gt;&lt;path d="M9.912 8.037h2.732c1.277 0 2.315-.962 2.315-2.237a2.325 2.325 0 00-2.315-2.31H2.959m10.228 9.01H2.959M6.802 8H2.959" /&gt;&lt;path d="M11.081 6.466L9.533 8.037l1.548 1.571" /&gt;&lt;/g&gt;&lt;/svg&gt;
     &lt;span class="bubble-sm bubble-tl [--offset-l:-9px] tail text-navy-950"&gt;
@@ -1187,7 +1187,7 @@ sqlite&amp;gt; select * from sandwich_ratings ORDER BY RANDOM() LIMIT 3 ;
     &lt;/span&gt;
   &lt;/button&gt;
   &lt;div class='highlight relative group'&gt;
-    &lt;pre class='highlight '&gt;&lt;code id="code-vqlsyx3"&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;call&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;tools&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;        &lt;span class="c1"&gt;# now takes an arg
+    &lt;pre class='highlight '&gt;&lt;code id="code-aitfxzjt"&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;call&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;tools&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;        &lt;span class="c1"&gt;# now takes an arg
 &lt;/span&gt;    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;responses&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;model&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;"gpt-5"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;tools&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;tools&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;input&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;context&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
 &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;tool_call&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;item&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;    &lt;span class="c1"&gt;# just handles one tool
@@ -1223,7 +1223,7 @@ sqlite&amp;gt; select * from sandwich_ratings ORDER BY RANDOM() LIMIT 3 ;
   &lt;button 
     type="button"
     class="bubble-wrap z-20 absolute right-9 -mr-0.5 top-1.5 text-transparent group-hover:text-gray-400 group-hover:hocus:text-white focus:text-white bg-transparent group-hover:bg-gray-900 group-hover:hocus:bg-gray-700 focus:bg-gray-700 transition-colors grid place-items-center w-7 h-7 rounded-lg outline-none focus:outline-none"
-    data-wrap-target="#code-qixubc7u"
+    data-wrap-target="#code-xbg3sqf7"
   &gt;
     &lt;svg class="w-4 h-4 pointer-events-none" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;g buffered-rendering="static"&gt;&lt;path d="M9.912 8.037h2.732c1.277 0 2.315-.962 2.315-2.237a2.325 2.325 0 00-2.315-2.31H2.959m10.228 9.01H2.959M6.802 8H2.959" /&gt;&lt;path d="M11.081 6.466L9.533 8.037l1.548 1.571" /&gt;&lt;/g&gt;&lt;/svg&gt;
     &lt;span class="bubble-sm bubble-tl [--offset-l:-9px] tail text-navy-950"&gt;
@@ -1241,7 +1241,7 @@ sqlite&amp;gt; select * from sandwich_ratings ORDER BY RANDOM() LIMIT 3 ;
     &lt;/span&gt;
   &lt;/button&gt;
   &lt;div class='highlight relative group'&gt;
-    &lt;pre class='highlight '&gt;&lt;code id="code-qixubc7u"&gt;&amp;gt; describe our connectivity to google
+    &lt;pre class='highlight '&gt;&lt;code id="code-xbg3sqf7"&gt;&amp;gt; describe our connectivity to google
 &amp;gt;&amp;gt;&amp;gt; Here’s a quick snapshot of connectivity to Google from my vantage point:
 - DNS resolution: Working (google.com and www.google.com resolved successfully).
 - Reachability: 0% packet loss to all tested endpoints.
@@ -1258,7 +1258,7 @@ sqlite&amp;gt; select * from sandwich_ratings ORDER BY RANDOM() LIMIT 3 ;
   &lt;button 
     type="button"
     class="bubble-wrap z-20 absolute right-9 -mr-0.5 top-1.5 text-transparent group-hover:text-gray-400 group-hover:hocus:text-white focus:text-white bg-transparent group-hover:bg-gray-900 group-hover:hocus:bg-gray-700 focus:bg-gray-700 transition-colors grid place-items-center w-7 h-7 rounded-lg outline-none focus:outline-none"
-    data-wrap-target="#code-2r2nnvdi"
+    data-wrap-target="#code-o1se7web"
   &gt;
     &lt;svg class="w-4 h-4 pointer-events-none" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;g buffered-rendering="static"&gt;&lt;path d="M9.912 8.037h2.732c1.277 0 2.315-.962 2.315-2.237a2.325 2.325 0 00-2.315-2.31H2.959m10.228 9.01H2.959M6.802 8H2.959" /&gt;&lt;path d="M11.081 6.466L9.533 8.037l1.548 1.571" /&gt;&lt;/g&gt;&lt;/svg&gt;
     &lt;span class="bubble-sm bubble-tl [--offset-l:-9px] tail text-navy-950"&gt;
@@ -1276,7 +1276,7 @@ sqlite&amp;gt; select * from sandwich_ratings ORDER BY RANDOM() LIMIT 3 ;
     &lt;/span&gt;
   &lt;/button&gt;
   &lt;div class='highlight relative group'&gt;
-    &lt;pre class='highlight '&gt;&lt;code id="code-2r2nnvdi"&gt;&amp;gt; describe our connectivity to google
+    &lt;pre class='highlight '&gt;&lt;code id="code-o1se7web"&gt;&amp;gt; describe our connectivity to google
 tool call: ping google.com
 tool call: ping www.google.com
 tool call: ping 8.8.8.8
@@ -1345,7 +1345,7 @@ tool call: ping 8.8.8.8
     <link rel="alternate" href="https://fly.io/blog/corrosion/"/>
     <id>https://fly.io/blog/corrosion/</id>
     <published>2025-10-22T00:00:00+00:00</published>
-    <updated>2025-10-23T19:59:21+00:00</updated>
+    <updated>2025-10-30T19:05:57+00:00</updated>
     <media:thumbnail url="https://fly.io/blog/corrosion/assets/sqlite-cover.webp"/>
     <content type="html">&lt;div class="lead"&gt;&lt;p&gt;Fly.io transmogrifies Docker containers into Fly Machines: micro-VMs running on our own hardware all over the world. The hardest part of running this platform isn’t managing the servers, and it isn’t operating the network; it’s gluing those two things together.&lt;/p&gt;
 &lt;/div&gt;
@@ -1445,7 +1445,7 @@ tool call: ping 8.8.8.8
     <link rel="alternate" href="https://fly.io/blog/kurt-got-got/"/>
     <id>https://fly.io/blog/kurt-got-got/</id>
     <published>2025-10-08T00:00:00+00:00</published>
-    <updated>2025-12-23T19:07:09+00:00</updated>
+    <updated>2025-12-18T10:32:15+00:00</updated>
     <media:thumbnail url="https://fly.io/blog/kurt-got-got/assets/Kurt_Got_Got.jpg"/>
     <content type="html">&lt;div class="lead"&gt;&lt;p&gt;The $FLY Airdrop is live!  Claim your share of &lt;a href="https://fly.io/blog/macaroons-escalated-quickly/" title=""&gt;the token powering Fly.io’s global network&lt;/a&gt; of 3M+ apps and (🤮) own a piece of the sky!&lt;/p&gt;
 &lt;/div&gt;
@@ -1525,7 +1525,7 @@ tool call: ping 8.8.8.8
     <link rel="alternate" href="https://fly.io/blog/litestream-v050-is-here/"/>
     <id>https://fly.io/blog/litestream-v050-is-here/</id>
     <published>2025-10-02T00:00:00+00:00</published>
-    <updated>2025-10-23T19:59:21+00:00</updated>
+    <updated>2025-10-16T21:08:46+00:00</updated>
     <media:thumbnail url="https://fly.io/blog/litestream-v050-is-here/assets/litestream-v050-is-here.jpg"/>
     <content type="html">&lt;div class="lead"&gt;&lt;p&gt;&lt;strong class="font-semibold text-navy-950"&gt;I’m Ben Johnson, and I work on Litestream at Fly.io. Litestream makes it easy to build SQLite-backed full-stack applications  with resilience to server failure. It’s open source, runs anywhere, and&lt;/strong&gt; &lt;a href="https://litestream.io/" title=""&gt;&lt;strong class="font-semibold text-navy-950"&gt;it’s easy to get started&lt;/strong&gt;&lt;/a&gt;&lt;strong class="font-semibold text-navy-950"&gt;.&lt;/strong&gt;&lt;/p&gt;
 &lt;/div&gt;
@@ -1550,7 +1550,7 @@ tool call: ping 8.8.8.8
   &lt;button 
     type="button"
     class="bubble-wrap z-20 absolute right-9 -mr-0.5 top-1.5 text-transparent group-hover:text-gray-400 group-hover:hocus:text-white focus:text-white bg-transparent group-hover:bg-gray-900 group-hover:hocus:bg-gray-700 focus:bg-gray-700 transition-colors grid place-items-center w-7 h-7 rounded-lg outline-none focus:outline-none"
-    data-wrap-target="#code-91eglwmb"
+    data-wrap-target="#code-gq18ftcy"
   &gt;
     &lt;svg class="w-4 h-4 pointer-events-none" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;g buffered-rendering="static"&gt;&lt;path d="M9.912 8.037h2.732c1.277 0 2.315-.962 2.315-2.237a2.325 2.325 0 00-2.315-2.31H2.959m10.228 9.01H2.959M6.802 8H2.959" /&gt;&lt;path d="M11.081 6.466L9.533 8.037l1.548 1.571" /&gt;&lt;/g&gt;&lt;/svg&gt;
     &lt;span class="bubble-sm bubble-tl [--offset-l:-9px] tail text-navy-950"&gt;
@@ -1568,7 +1568,7 @@ tool call: ping 8.8.8.8
     &lt;/span&gt;
   &lt;/button&gt;
   &lt;div class='highlight relative group'&gt;
-    &lt;pre class='highlight '&gt;&lt;code id="code-91eglwmb"&gt;&lt;span class="k"&gt;CREATE&lt;/span&gt; &lt;span class="k"&gt;TABLE&lt;/span&gt; &lt;span class="n"&gt;sandwiches&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;pre class='highlight '&gt;&lt;code id="code-gq18ftcy"&gt;&lt;span class="k"&gt;CREATE&lt;/span&gt; &lt;span class="k"&gt;TABLE&lt;/span&gt; &lt;span class="n"&gt;sandwiches&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
     &lt;span class="n"&gt;id&lt;/span&gt; &lt;span class="nb"&gt;INTEGER&lt;/span&gt; &lt;span class="k"&gt;PRIMARY&lt;/span&gt; &lt;span class="k"&gt;KEY&lt;/span&gt; &lt;span class="n"&gt;AUTOINCREMENT&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
     &lt;span class="n"&gt;description&lt;/span&gt; &lt;span class="nb"&gt;TEXT&lt;/span&gt; &lt;span class="k"&gt;NOT&lt;/span&gt; &lt;span class="k"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
     &lt;span class="n"&gt;star_rating&lt;/span&gt; &lt;span class="nb"&gt;INTEGER&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; 
@@ -1647,7 +1647,7 @@ tool call: ping 8.8.8.8
     <link rel="alternate" href="https://fly.io/blog/build-better-agents-with-morphllm/"/>
     <id>https://fly.io/blog/build-better-agents-with-morphllm/</id>
     <published>2025-08-25T00:00:00+00:00</published>
-    <updated>2025-10-23T19:59:21+00:00</updated>
+    <updated>2025-09-05T09:05:52+00:00</updated>
     <media:thumbnail url="https://fly.io/blog/build-better-agents-with-morphllm/assets/morphllm.webp"/>
     <content type="html">&lt;p&gt;I&amp;rsquo;m an audiophile, which is a nice way to describe someone who spends their children&amp;rsquo;s college fund on equipment that yields no audible improvement in sound quality. As such, I refused to use wireless headphones for the longest time. The fun thing about wired headphones is when you forget they&amp;rsquo;re on and you stand up, you simultaneously cause irreparable neck injuries and extensive property damage. This eventually prompted me to buy good wireless headphones and, you know what, I break fewer things now. I can also stand up from my desk and not be exposed to the aural horrors of the real world. &lt;/p&gt;
 
@@ -1692,7 +1692,7 @@ tool call: ping 8.8.8.8
     <link rel="alternate" href="https://fly.io/blog/trust-calibration-for-ai-software-builders/"/>
     <id>https://fly.io/blog/trust-calibration-for-ai-software-builders/</id>
     <published>2025-08-18T00:00:00+00:00</published>
-    <updated>2025-10-23T19:59:21+00:00</updated>
+    <updated>2025-09-05T09:05:52+00:00</updated>
     <media:thumbnail url="https://fly.io/blog/trust-calibration-for-ai-software-builders/assets/trust_calibration.webp"/>
     <content type="html">&lt;div class="lead"&gt;&lt;p&gt;Trust calibration is a concept from the world of human-machine interaction design, one that is super relevant to AI software builders. Trust calibration is the practice of aligning the level of trust that users have in our products with its actual capabilities. &lt;/p&gt;
 &lt;/div&gt;
@@ -1817,7 +1817,7 @@ tool call: ping 8.8.8.8
     <link rel="alternate" href="https://fly.io/blog/games-as-model-eval/"/>
     <id>https://fly.io/blog/games-as-model-eval/</id>
     <published>2025-08-11T00:00:00+00:00</published>
-    <updated>2025-10-23T19:59:21+00:00</updated>
+    <updated>2025-08-11T09:31:38+00:00</updated>
     <media:thumbnail url="https://fly.io/blog/games-as-model-eval/assets/Fly_Man.webp"/>
     <content type="html">&lt;div class="lead"&gt;&lt;p&gt;Recently, I suggested that &lt;a href="https://fly.io/blog/the-future-isn-t-model-agnostic/" title=""&gt;The Future Isn’t Model Agnostic&lt;/a&gt;, that it’s better to pick one model that works for your project and build around it, rather than engineering for model flexibility. If you buy that, you also have to acknowledge how important comprehensive model evaluation becomes. &lt;/p&gt;
 &lt;/div&gt;
@@ -1848,7 +1848,7 @@ Just like I&amp;rsquo;ve told my mom a thousand times, games are great at testin
     <link rel="alternate" href="https://fly.io/blog/the-future-isn-t-model-agnostic/"/>
     <id>https://fly.io/blog/the-future-isn-t-model-agnostic/</id>
     <published>2025-08-08T00:00:00+00:00</published>
-    <updated>2025-10-23T19:59:21+00:00</updated>
+    <updated>2025-08-13T19:57:06+00:00</updated>
     <media:thumbnail url="https://fly.io/blog/the-future-isn-t-model-agnostic/assets/Whack_A_Mole_.webp"/>
     <content type="html">&lt;div class="lead"&gt;&lt;p&gt;Your users don’t care that your AI project is model 
 agnostic. &lt;/p&gt;
@@ -1891,7 +1891,7 @@ agnostic. &lt;/p&gt;
     <link rel="alternate" href="https://fly.io/blog/phoenix-new-the-remote-ai-runtime/"/>
     <id>https://fly.io/blog/phoenix-new-the-remote-ai-runtime/</id>
     <published>2025-06-20T00:00:00+00:00</published>
-    <updated>2025-10-23T19:59:21+00:00</updated>
+    <updated>2025-06-24T18:17:10+00:00</updated>
     <media:thumbnail url="https://fly.io/blog/phoenix-new-the-remote-ai-runtime/assets/phoenixnew-thumb.png"/>
     <content type="html">&lt;div class="lead"&gt;&lt;p&gt;I’m Chris McCord, the creator of Elixir’s Phoenix framework. For the past several months, I’ve been working on a skunkworks project at Fly.io, and it’s time to show it off.&lt;/p&gt;
 &lt;/div&gt;
@@ -1971,7 +1971,7 @@ agnostic. &lt;/p&gt;
     <link rel="alternate" href="https://fly.io/blog/mcps-everywhere/"/>
     <id>https://fly.io/blog/mcps-everywhere/</id>
     <published>2025-06-12T00:00:00+00:00</published>
-    <updated>2025-10-23T19:59:21+00:00</updated>
+    <updated>2025-06-19T19:26:23+00:00</updated>
     <media:thumbnail url="https://fly.io/blog/mcps-everywhere/assets/mcps-everywhere.jpg"/>
     <content type="html">&lt;div class="lead"&gt;&lt;div&gt;&lt;p&gt;With Fly.io, &lt;a href="https://fly.io/docs/speedrun/" title=""&gt;you can get your app running globally in a matter of minutes&lt;/a&gt;, and with MCP servers you can integrate with Claude, VSCode, Cursor and &lt;a href="https://modelcontextprotocol.io/clients"&gt;many more AI clients&lt;/a&gt;.  &lt;a href="https://fly.io/docs/mcp/" title=""&gt;Try it out for yourself&lt;/a&gt;!&lt;/p&gt;
 &lt;/div&gt;&lt;/div&gt;
@@ -2023,7 +2023,7 @@ agnostic. &lt;/p&gt;
       &lt;/a&gt;
   &lt;/figcaption&gt;
   &lt;div class="image-container"&gt;
-    &lt;img src="/static/images/cta-dog.webp" srcset="/static/images/cta-dog@2x.webp 2x" alt=""&gt;
+    &lt;img src="/static/images/cta-cat.webp" srcset="/static/images/cta-cat@2x.webp 2x" alt=""&gt;
   &lt;/div&gt;
 &lt;/figure&gt;
 
@@ -2058,7 +2058,7 @@ agnostic. &lt;/p&gt;
     <link rel="alternate" href="https://fly.io/blog/youre-all-nuts/"/>
     <id>https://fly.io/blog/youre-all-nuts/</id>
     <published>2025-06-02T00:00:00+00:00</published>
-    <updated>2025-10-23T19:59:21+00:00</updated>
+    <updated>2025-06-19T19:26:23+00:00</updated>
     <media:thumbnail url="https://fly.io/blog/youre-all-nuts/assets/whoah.png"/>
     <content type="html">&lt;div class="lead"&gt;&lt;p&gt;A heartfelt provocation about AI-assisted programming.&lt;/p&gt;
 &lt;/div&gt;
@@ -2209,7 +2209,7 @@ agnostic. &lt;/p&gt;
     <link rel="alternate" href="https://fly.io/blog/kamal-in-production/"/>
     <id>https://fly.io/blog/kamal-in-production/</id>
     <published>2025-05-29T00:00:00+00:00</published>
-    <updated>2025-10-23T19:59:21+00:00</updated>
+    <updated>2025-06-02T19:05:25+00:00</updated>
     <media:thumbnail url="https://fly.io/blog/kamal-in-production/assets/production.jpg"/>
     <content type="html">&lt;p&gt;&lt;a href='https://pragprog.com/titles/rails8/agile-web-development-with-rails-8/' title=''&gt;Agile Web Development with Rails 8&lt;/a&gt; is off to production, where they do things like editing, indexing, pagination, and printing. In researching the chapter on Deployment and Production, I became very dissatisfied with the content available on Kamal. I ended up writing my own, and it went well beyond the scope of the book. I then extracted what I needed from the result and put it in the book.&lt;/p&gt;
 
@@ -2239,7 +2239,7 @@ agnostic. &lt;/p&gt;
     <link rel="alternate" href="https://fly.io/blog/parking-lot-ffffffffffffffff/"/>
     <id>https://fly.io/blog/parking-lot-ffffffffffffffff/</id>
     <published>2025-05-28T00:00:00+00:00</published>
-    <updated>2025-10-23T19:59:21+00:00</updated>
+    <updated>2025-06-02T19:05:25+00:00</updated>
     <media:thumbnail url="https://fly.io/blog/parking-lot-ffffffffffffffff/assets/ffff-cover.webp"/>
     <content type="html">&lt;div class="lead"&gt;&lt;p&gt;We’re Fly.io, a public cloud that runs apps in a bunch of locations all over the world. This is a post about a gnarly bug in our Anycast router, the largest Rust project in our codebase. You won’t need much of any Rust to follow it.&lt;/p&gt;
 &lt;/div&gt;
@@ -2298,7 +2298,7 @@ agnostic. &lt;/p&gt;
   &lt;button 
     type="button"
     class="bubble-wrap z-20 absolute right-9 -mr-0.5 top-1.5 text-transparent group-hover:text-gray-400 group-hover:hocus:text-white focus:text-white bg-transparent group-hover:bg-gray-900 group-hover:hocus:bg-gray-700 focus:bg-gray-700 transition-colors grid place-items-center w-7 h-7 rounded-lg outline-none focus:outline-none"
-    data-wrap-target="#code-o9cfadki"
+    data-wrap-target="#code-q106y7gw"
   &gt;
     &lt;svg class="w-4 h-4 pointer-events-none" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;g buffered-rendering="static"&gt;&lt;path d="M9.912 8.037h2.732c1.277 0 2.315-.962 2.315-2.237a2.325 2.325 0 00-2.315-2.31H2.959m10.228 9.01H2.959M6.802 8H2.959" /&gt;&lt;path d="M11.081 6.466L9.533 8.037l1.548 1.571" /&gt;&lt;/g&gt;&lt;/svg&gt;
     &lt;span class="bubble-sm bubble-tl [--offset-l:-9px] tail text-navy-950"&gt;
@@ -2316,7 +2316,7 @@ agnostic. &lt;/p&gt;
     &lt;/span&gt;
   &lt;/button&gt;
   &lt;div class='highlight relative group'&gt;
-    &lt;pre class='highlight '&gt;&lt;code id="code-o9cfadki"&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="k"&gt;let&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;Some&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nn"&gt;Load&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="nf"&gt;Local&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;load&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="k"&gt;self&lt;/span&gt;&lt;span class="py"&gt;.load&lt;/span&gt;&lt;span class="nf"&gt;.read&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="nf"&gt;.get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;...&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;pre class='highlight '&gt;&lt;code id="code-q106y7gw"&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="k"&gt;let&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;Some&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nn"&gt;Load&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="nf"&gt;Local&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;load&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="k"&gt;self&lt;/span&gt;&lt;span class="py"&gt;.load&lt;/span&gt;&lt;span class="nf"&gt;.read&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="nf"&gt;.get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;...&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
     &lt;span class="c1"&gt;// do a bunch of stuff with `load`&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
     &lt;span class="k"&gt;self&lt;/span&gt;&lt;span class="nf"&gt;.init_for&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;...&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
@@ -2455,7 +2455,7 @@ That’s doesn’t prove anything, of course, as a thread holding catalog write 
   &lt;button 
     type="button"
     class="bubble-wrap z-20 absolute right-9 -mr-0.5 top-1.5 text-transparent group-hover:text-gray-400 group-hover:hocus:text-white focus:text-white bg-transparent group-hover:bg-gray-900 group-hover:hocus:bg-gray-700 focus:bg-gray-700 transition-colors grid place-items-center w-7 h-7 rounded-lg outline-none focus:outline-none"
-    data-wrap-target="#code-drvwifm"
+    data-wrap-target="#code-ikc7rzkf"
   &gt;
     &lt;svg class="w-4 h-4 pointer-events-none" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;g buffered-rendering="static"&gt;&lt;path d="M9.912 8.037h2.732c1.277 0 2.315-.962 2.315-2.237a2.325 2.325 0 00-2.315-2.31H2.959m10.228 9.01H2.959M6.802 8H2.959" /&gt;&lt;path d="M11.081 6.466L9.533 8.037l1.548 1.571" /&gt;&lt;/g&gt;&lt;/svg&gt;
     &lt;span class="bubble-sm bubble-tl [--offset-l:-9px] tail text-navy-950"&gt;
@@ -2473,7 +2473,7 @@ That’s doesn’t prove anything, of course, as a thread holding catalog write 
     &lt;/span&gt;
   &lt;/button&gt;
   &lt;div class='highlight relative group'&gt;
-    &lt;pre class='highlight '&gt;&lt;code id="code-drvwifm"&gt;&lt;span class="k"&gt;let&lt;/span&gt; &lt;span class="n"&gt;state&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;self&lt;/span&gt;&lt;span class="py"&gt;.state&lt;/span&gt;&lt;span class="nf"&gt;.fetch_add&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;pre class='highlight '&gt;&lt;code id="code-ikc7rzkf"&gt;&lt;span class="k"&gt;let&lt;/span&gt; &lt;span class="n"&gt;state&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;self&lt;/span&gt;&lt;span class="py"&gt;.state&lt;/span&gt;&lt;span class="nf"&gt;.fetch_add&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
    &lt;span class="n"&gt;prev_value&lt;/span&gt;&lt;span class="nf"&gt;.wrapping_sub&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;WRITER_BIT&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="n"&gt;WRITER_PARKED_BIT&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
                            &lt;span class="nn"&gt;Ordering&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="n"&gt;Relaxed&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
@@ -2484,7 +2484,7 @@ That’s doesn’t prove anything, of course, as a thread holding catalog write 
   &lt;button 
     type="button"
     class="bubble-wrap z-20 absolute right-9 -mr-0.5 top-1.5 text-transparent group-hover:text-gray-400 group-hover:hocus:text-white focus:text-white bg-transparent group-hover:bg-gray-900 group-hover:hocus:bg-gray-700 focus:bg-gray-700 transition-colors grid place-items-center w-7 h-7 rounded-lg outline-none focus:outline-none"
-    data-wrap-target="#code-k35jsbs8"
+    data-wrap-target="#code-kqscqcwb"
   &gt;
     &lt;svg class="w-4 h-4 pointer-events-none" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;g buffered-rendering="static"&gt;&lt;path d="M9.912 8.037h2.732c1.277 0 2.315-.962 2.315-2.237a2.325 2.325 0 00-2.315-2.31H2.959m10.228 9.01H2.959M6.802 8H2.959" /&gt;&lt;path d="M11.081 6.466L9.533 8.037l1.548 1.571" /&gt;&lt;/g&gt;&lt;/svg&gt;
     &lt;span class="bubble-sm bubble-tl [--offset-l:-9px] tail text-navy-950"&gt;
@@ -2502,7 +2502,7 @@ That’s doesn’t prove anything, of course, as a thread holding catalog write 
     &lt;/span&gt;
   &lt;/button&gt;
   &lt;div class='highlight relative group'&gt;
-    &lt;pre class='highlight '&gt;&lt;code id="code-k35jsbs8"&gt;&lt;span class="k"&gt;let&lt;/span&gt; &lt;span class="n"&gt;state&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;self&lt;/span&gt;&lt;span class="py"&gt;.state&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="o"&gt;~&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;WRITER_BIT&lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="n"&gt;WRITER_PARKED_BIT&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;pre class='highlight '&gt;&lt;code id="code-kqscqcwb"&gt;&lt;span class="k"&gt;let&lt;/span&gt; &lt;span class="n"&gt;state&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;self&lt;/span&gt;&lt;span class="py"&gt;.state&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="o"&gt;~&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;WRITER_BIT&lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="n"&gt;WRITER_PARKED_BIT&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
   &lt;/div&gt;
 &lt;/div&gt;
@@ -2559,7 +2559,7 @@ That’s doesn’t prove anything, of course, as a thread holding catalog write 
     <link rel="alternate" href="https://fly.io/blog/litestream-revamped/"/>
     <id>https://fly.io/blog/litestream-revamped/</id>
     <published>2025-05-20T00:00:00+00:00</published>
-    <updated>2025-10-23T19:59:21+00:00</updated>
+    <updated>2025-05-23T14:20:22+00:00</updated>
     <media:thumbnail url="https://fly.io/blog/litestream-revamped/assets/litestream-revamped.png"/>
     <content type="html">&lt;div class="lead"&gt;&lt;p&gt;&lt;a href="https://litestream.io/" title=""&gt;Litestream&lt;/a&gt; is an open-source tool that makes it possible to run many kinds of full-stack applications on top of SQLite by making them reliably recoverable from object storage. This is a post about the biggest change we’ve made to it since I launched it.&lt;/p&gt;
 &lt;/div&gt;
@@ -2626,7 +2626,7 @@ That’s doesn’t prove anything, of course, as a thread holding catalog write 
       &lt;/a&gt;
   &lt;/figcaption&gt;
   &lt;div class="image-container"&gt;
-    &lt;img src="/static/images/cta-dog.webp" srcset="/static/images/cta-dog@2x.webp 2x" alt=""&gt;
+    &lt;img src="/static/images/cta-kitty.webp" srcset="/static/images/cta-kitty@2x.webp 2x" alt=""&gt;
   &lt;/div&gt;
 &lt;/figure&gt;
 
@@ -2649,7 +2649,7 @@ That’s doesn’t prove anything, of course, as a thread holding catalog write 
     <link rel="alternate" href="https://fly.io/blog/mcp-launch/"/>
     <id>https://fly.io/blog/mcp-launch/</id>
     <published>2025-05-19T00:00:00+00:00</published>
-    <updated>2025-10-23T19:59:21+00:00</updated>
+    <updated>2025-05-19T19:42:19+00:00</updated>
     <media:thumbnail url="https://fly.io/blog/mcp-launch/assets/fly-mcp-launch.png"/>
     <content type="html">&lt;div class="lead"&gt;&lt;p&gt;This is a blog post. Part showing off. Part opinion. Plan accordingly.&lt;/p&gt;
 &lt;/div&gt;
@@ -2682,7 +2682,7 @@ That’s doesn’t prove anything, of course, as a thread holding catalog write 
   &lt;button 
     type="button"
     class="bubble-wrap z-20 absolute right-9 -mr-0.5 top-1.5 text-transparent group-hover:text-gray-400 group-hover:hocus:text-white focus:text-white bg-transparent group-hover:bg-gray-900 group-hover:hocus:bg-gray-700 focus:bg-gray-700 transition-colors grid place-items-center w-7 h-7 rounded-lg outline-none focus:outline-none"
-    data-wrap-target="#code-4uzl2mlw"
+    data-wrap-target="#code-me39tdnc"
   &gt;
     &lt;svg class="w-4 h-4 pointer-events-none" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;g buffered-rendering="static"&gt;&lt;path d="M9.912 8.037h2.732c1.277 0 2.315-.962 2.315-2.237a2.325 2.325 0 00-2.315-2.31H2.959m10.228 9.01H2.959M6.802 8H2.959" /&gt;&lt;path d="M11.081 6.466L9.533 8.037l1.548 1.571" /&gt;&lt;/g&gt;&lt;/svg&gt;
     &lt;span class="bubble-sm bubble-tl [--offset-l:-9px] tail text-navy-950"&gt;
@@ -2700,7 +2700,7 @@ That’s doesn’t prove anything, of course, as a thread holding catalog write 
     &lt;/span&gt;
   &lt;/button&gt;
   &lt;div class='highlight relative group'&gt;
-    &lt;pre class='highlight '&gt;&lt;code id="code-4uzl2mlw"&gt;npx &lt;span class="nt"&gt;-y&lt;/span&gt; @modelcontextprotocol/server-slack
+    &lt;pre class='highlight '&gt;&lt;code id="code-me39tdnc"&gt;npx &lt;span class="nt"&gt;-y&lt;/span&gt; @modelcontextprotocol/server-slack
 &lt;/code&gt;&lt;/pre&gt;
   &lt;/div&gt;
 &lt;/div&gt;
@@ -2713,7 +2713,7 @@ That’s doesn’t prove anything, of course, as a thread holding catalog write 
   &lt;button 
     type="button"
     class="bubble-wrap z-20 absolute right-9 -mr-0.5 top-1.5 text-transparent group-hover:text-gray-400 group-hover:hocus:text-white focus:text-white bg-transparent group-hover:bg-gray-900 group-hover:hocus:bg-gray-700 focus:bg-gray-700 transition-colors grid place-items-center w-7 h-7 rounded-lg outline-none focus:outline-none"
-    data-wrap-target="#code-umg29q7e"
+    data-wrap-target="#code-y7cbxyuu"
   &gt;
     &lt;svg class="w-4 h-4 pointer-events-none" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;g buffered-rendering="static"&gt;&lt;path d="M9.912 8.037h2.732c1.277 0 2.315-.962 2.315-2.237a2.325 2.325 0 00-2.315-2.31H2.959m10.228 9.01H2.959M6.802 8H2.959" /&gt;&lt;path d="M11.081 6.466L9.533 8.037l1.548 1.571" /&gt;&lt;/g&gt;&lt;/svg&gt;
     &lt;span class="bubble-sm bubble-tl [--offset-l:-9px] tail text-navy-950"&gt;
@@ -2731,7 +2731,7 @@ That’s doesn’t prove anything, of course, as a thread holding catalog write 
     &lt;/span&gt;
   &lt;/button&gt;
   &lt;div class='highlight relative group'&gt;
-    &lt;pre class='highlight '&gt;&lt;code id="code-umg29q7e"&gt;fly mcp launch &lt;span class="se"&gt;\&lt;/span&gt;
+    &lt;pre class='highlight '&gt;&lt;code id="code-y7cbxyuu"&gt;fly mcp launch &lt;span class="se"&gt;\&lt;/span&gt;
   &lt;span class="s2"&gt;"npx -y @modelcontextprotocol/server-slack"&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
   &lt;span class="nt"&gt;--claude&lt;/span&gt; &lt;span class="nt"&gt;--server&lt;/span&gt; slack &lt;span class="se"&gt;\&lt;/span&gt;
   &lt;span class="nt"&gt;--secret&lt;/span&gt; &lt;span class="nv"&gt;SLACK_BOT_TOKEN&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;xoxb-your-bot-token &lt;span class="se"&gt;\&lt;/span&gt;
@@ -2777,7 +2777,7 @@ It is about the depth of support that we are rapidly bringing online, including:
     <link rel="alternate" href="https://fly.io/blog/mcp-provisioning/"/>
     <id>https://fly.io/blog/mcp-provisioning/</id>
     <published>2025-05-07T00:00:00+00:00</published>
-    <updated>2025-10-23T19:59:21+00:00</updated>
+    <updated>2025-05-16T22:19:55+00:00</updated>
     <media:thumbnail url="https://fly.io/blog/mcp-provisioning/assets/Hello.webp"/>
     <content type="html">&lt;div class="lead"&gt;&lt;p&gt;Today’s state of the art is K8S, Terraform, web based UIs, and CLIs.  Those days are numbered.&lt;/p&gt;
 &lt;/div&gt;
@@ -2833,7 +2833,7 @@ A few hours later, and with the assistance of GitHub Copilot, i added support fo
   &lt;button 
     type="button"
     class="bubble-wrap z-20 absolute right-9 -mr-0.5 top-1.5 text-transparent group-hover:text-gray-400 group-hover:hocus:text-white focus:text-white bg-transparent group-hover:bg-gray-900 group-hover:hocus:bg-gray-700 focus:bg-gray-700 transition-colors grid place-items-center w-7 h-7 rounded-lg outline-none focus:outline-none"
-    data-wrap-target="#code-y3mdouzi"
+    data-wrap-target="#code-dbyqage"
   &gt;
     &lt;svg class="w-4 h-4 pointer-events-none" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;g buffered-rendering="static"&gt;&lt;path d="M9.912 8.037h2.732c1.277 0 2.315-.962 2.315-2.237a2.325 2.325 0 00-2.315-2.31H2.959m10.228 9.01H2.959M6.802 8H2.959" /&gt;&lt;path d="M11.081 6.466L9.533 8.037l1.548 1.571" /&gt;&lt;/g&gt;&lt;/svg&gt;
     &lt;span class="bubble-sm bubble-tl [--offset-l:-9px] tail text-navy-950"&gt;
@@ -2851,7 +2851,7 @@ A few hours later, and with the assistance of GitHub Copilot, i added support fo
     &lt;/span&gt;
   &lt;/button&gt;
   &lt;div class='highlight relative group'&gt;
-    &lt;pre class='highlight '&gt;&lt;code id="code-y3mdouzi"&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;pre class='highlight '&gt;&lt;code id="code-dbyqage"&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
   &lt;/span&gt;&lt;span class="nl"&gt;"mcpServers"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
     &lt;/span&gt;&lt;span class="nl"&gt;"fly.io"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
       &lt;/span&gt;&lt;span class="nl"&gt;"command"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"/Users/rubys/.fly/bin/flyctl"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
@@ -2869,7 +2869,7 @@ A few hours later, and with the assistance of GitHub Copilot, i added support fo
   &lt;button 
     type="button"
     class="bubble-wrap z-20 absolute right-9 -mr-0.5 top-1.5 text-transparent group-hover:text-gray-400 group-hover:hocus:text-white focus:text-white bg-transparent group-hover:bg-gray-900 group-hover:hocus:bg-gray-700 focus:bg-gray-700 transition-colors grid place-items-center w-7 h-7 rounded-lg outline-none focus:outline-none"
-    data-wrap-target="#code-4ypanong"
+    data-wrap-target="#code-vs2xa5e1"
   &gt;
     &lt;svg class="w-4 h-4 pointer-events-none" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;g buffered-rendering="static"&gt;&lt;path d="M9.912 8.037h2.732c1.277 0 2.315-.962 2.315-2.237a2.325 2.325 0 00-2.315-2.31H2.959m10.228 9.01H2.959M6.802 8H2.959" /&gt;&lt;path d="M11.081 6.466L9.533 8.037l1.548 1.571" /&gt;&lt;/g&gt;&lt;/svg&gt;
     &lt;span class="bubble-sm bubble-tl [--offset-l:-9px] tail text-navy-950"&gt;
@@ -2887,7 +2887,7 @@ A few hours later, and with the assistance of GitHub Copilot, i added support fo
     &lt;/span&gt;
   &lt;/button&gt;
   &lt;div class='highlight relative group'&gt;
-    &lt;pre class='highlight '&gt;&lt;code id="code-4ypanong"&gt;fly mcp server -i
+    &lt;pre class='highlight '&gt;&lt;code id="code-vs2xa5e1"&gt;fly mcp server -i
 &lt;/code&gt;&lt;/pre&gt;
   &lt;/div&gt;
 &lt;/div&gt;
@@ -2925,7 +2925,7 @@ A few hours later, and with the assistance of GitHub Copilot, i added support fo
     <link rel="alternate" href="https://fly.io/blog/30-minute-mcp/"/>
     <id>https://fly.io/blog/30-minute-mcp/</id>
     <published>2025-04-10T00:00:00+00:00</published>
-    <updated>2025-10-23T19:59:21+00:00</updated>
+    <updated>2025-04-13T18:44:33+00:00</updated>
     <media:thumbnail url="https://fly.io/blog/30-minute-mcp/assets/robots-chatting.webp"/>
     <content type="html">&lt;div class="lead"&gt;&lt;p&gt;I wrote this post on our internal message board, and then someone asked, “why is this an internal post and not on our blog”, so now it is.&lt;/p&gt;
 &lt;/div&gt;&lt;div class="right-sidenote"&gt;&lt;p&gt;well, Cursor built&lt;/p&gt;
@@ -2952,7 +2952,7 @@ A few hours later, and with the assistance of GitHub Copilot, i added support fo
   &lt;button 
     type="button"
     class="bubble-wrap z-20 absolute right-9 -mr-0.5 top-1.5 text-transparent group-hover:text-gray-400 group-hover:hocus:text-white focus:text-white bg-transparent group-hover:bg-gray-900 group-hover:hocus:bg-gray-700 focus:bg-gray-700 transition-colors grid place-items-center w-7 h-7 rounded-lg outline-none focus:outline-none"
-    data-wrap-target="#code-6rt1bxdy"
+    data-wrap-target="#code-guy2fyyf"
   &gt;
     &lt;svg class="w-4 h-4 pointer-events-none" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;g buffered-rendering="static"&gt;&lt;path d="M9.912 8.037h2.732c1.277 0 2.315-.962 2.315-2.237a2.325 2.325 0 00-2.315-2.31H2.959m10.228 9.01H2.959M6.802 8H2.959" /&gt;&lt;path d="M11.081 6.466L9.533 8.037l1.548 1.571" /&gt;&lt;/g&gt;&lt;/svg&gt;
     &lt;span class="bubble-sm bubble-tl [--offset-l:-9px] tail text-navy-950"&gt;
@@ -2970,7 +2970,7 @@ A few hours later, and with the assistance of GitHub Copilot, i added support fo
     &lt;/span&gt;
   &lt;/button&gt;
   &lt;div class='highlight relative group'&gt;
-    &lt;pre class='highlight '&gt;&lt;code id="code-6rt1bxdy"&gt;**App Name**: unpkg       
+    &lt;pre class='highlight '&gt;&lt;code id="code-guy2fyyf"&gt;**App Name**: unpkg       
 **Status**: Deployed and running
 **URL**: unpkg.fly.dev
 **Organization**: unpkg
@@ -3036,7 +3036,7 @@ Several machines show “oom_killed: true” in their event history, indicating 
     <link rel="alternate" href="https://fly.io/blog/fuckin-robots/"/>
     <id>https://fly.io/blog/fuckin-robots/</id>
     <published>2025-04-08T00:00:00+00:00</published>
-    <updated>2025-10-23T19:59:21+00:00</updated>
+    <updated>2025-04-13T18:44:33+00:00</updated>
     <media:thumbnail url="https://fly.io/blog/fuckin-robots/assets/robot-chef.webp"/>
     <content type="html">&lt;div class="lead"&gt;&lt;p&gt;We’re Fly.io, a developer-focused public cloud. We turn Docker containers into hardware-isolated virtual machines running on our own metal around the world. We spent years coming up with &lt;a href="https://fly.io/speedrun" title=""&gt;a developer experience we were proud of&lt;/a&gt;. But now the robots are taking over, and they don’t care.&lt;/p&gt;
 &lt;/div&gt;
@@ -3114,7 +3114,7 @@ Several machines show “oom_killed: true” in their event history, indicating 
     <link rel="alternate" href="https://fly.io/blog/operationalizing-macaroons/"/>
     <id>https://fly.io/blog/operationalizing-macaroons/</id>
     <published>2025-03-27T00:00:00+00:00</published>
-    <updated>2025-10-23T19:59:21+00:00</updated>
+    <updated>2025-04-13T18:44:33+00:00</updated>
     <media:thumbnail url="https://fly.io/blog/operationalizing-macaroons/assets/occult-circle.jpg"/>
     <content type="html">&lt;div class="lead"&gt;&lt;p&gt;We’re Fly.io, a security bearer token company with a public cloud problem. You can read more about what our platform does (Docker container goes in, virtual machine in Singapore comes out), but this is just an engineering deep-dive into how we make our security tokens work. It’s a tokens nerd post.&lt;/p&gt;
 &lt;/div&gt;&lt;h2 id='1' class='group flex items-start whitespace-pre-wrap relative mt-14 sm:mt-16 mb-4 text-navy-950 font-heading'&gt;&lt;a class='inline-block align-text-top relative top-[.15em] w-6 h-6 -ml-6 after:hash opacity-0 group-hover:opacity-100 transition-all' href='#1' aria-label='Anchor'&gt;&lt;/a&gt;&lt;span class='plain-code'&gt;1&lt;/span&gt;&lt;/h2&gt;
@@ -3170,7 +3170,7 @@ Several machines show “oom_killed: true” in their event history, indicating 
   &lt;button 
     type="button"
     class="bubble-wrap z-20 absolute right-9 -mr-0.5 top-1.5 text-transparent group-hover:text-gray-400 group-hover:hocus:text-white focus:text-white bg-transparent group-hover:bg-gray-900 group-hover:hocus:bg-gray-700 focus:bg-gray-700 transition-colors grid place-items-center w-7 h-7 rounded-lg outline-none focus:outline-none"
-    data-wrap-target="#code-bfybdmkt"
+    data-wrap-target="#code-qdys16bt"
   &gt;
     &lt;svg class="w-4 h-4 pointer-events-none" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;g buffered-rendering="static"&gt;&lt;path d="M9.912 8.037h2.732c1.277 0 2.315-.962 2.315-2.237a2.325 2.325 0 00-2.315-2.31H2.959m10.228 9.01H2.959M6.802 8H2.959" /&gt;&lt;path d="M11.081 6.466L9.533 8.037l1.548 1.571" /&gt;&lt;/g&gt;&lt;/svg&gt;
     &lt;span class="bubble-sm bubble-tl [--offset-l:-9px] tail text-navy-950"&gt;
@@ -3188,7 +3188,7 @@ Several machines show “oom_killed: true” in their event history, indicating 
     &lt;/span&gt;
   &lt;/button&gt;
   &lt;div class='highlight relative group'&gt;
-    &lt;pre class='highlight '&gt;&lt;code id="code-bfybdmkt"&gt;        CREATE TABLE IF NOT EXISTS blacklist ( 
+    &lt;pre class='highlight '&gt;&lt;code id="code-qdys16bt"&gt;        CREATE TABLE IF NOT EXISTS blacklist ( 
         nonce               BLOB NOT NULL UNIQUE, 
         required_until      DATETIME,
         created_at          DATETIME DEFAULT CURRENT_TIMESTAMP
@@ -3255,7 +3255,7 @@ Several machines show “oom_killed: true” in their event history, indicating 
     <link rel="alternate" href="https://fly.io/blog/taming-rust-proxy/"/>
     <id>https://fly.io/blog/taming-rust-proxy/</id>
     <published>2025-02-26T00:00:00+00:00</published>
-    <updated>2025-10-23T19:59:21+00:00</updated>
+    <updated>2025-03-20T20:04:44+00:00</updated>
     <media:thumbnail url="https://fly.io/blog/taming-rust-proxy/assets/happy-crab-cover.jpg"/>
     <content type="html">&lt;div class="lead"&gt;&lt;p&gt;Here’s a fun bug.&lt;/p&gt;
 &lt;/div&gt;
@@ -3296,7 +3296,7 @@ So, this is fuckin&amp;rsquo; weird: a huge chunk of the profile is dominated by
   &lt;button 
     type="button"
     class="bubble-wrap z-20 absolute right-9 -mr-0.5 top-1.5 text-transparent group-hover:text-gray-400 group-hover:hocus:text-white focus:text-white bg-transparent group-hover:bg-gray-900 group-hover:hocus:bg-gray-700 focus:bg-gray-700 transition-colors grid place-items-center w-7 h-7 rounded-lg outline-none focus:outline-none"
-    data-wrap-target="#code-i5auiyf5"
+    data-wrap-target="#code-x5fu4p2n"
   &gt;
     &lt;svg class="w-4 h-4 pointer-events-none" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;g buffered-rendering="static"&gt;&lt;path d="M9.912 8.037h2.732c1.277 0 2.315-.962 2.315-2.237a2.325 2.325 0 00-2.315-2.31H2.959m10.228 9.01H2.959M6.802 8H2.959" /&gt;&lt;path d="M11.081 6.466L9.533 8.037l1.548 1.571" /&gt;&lt;/g&gt;&lt;/svg&gt;
     &lt;span class="bubble-sm bubble-tl [--offset-l:-9px] tail text-navy-950"&gt;
@@ -3314,7 +3314,7 @@ So, this is fuckin&amp;rsquo; weird: a huge chunk of the profile is dominated by
     &lt;/span&gt;
   &lt;/button&gt;
   &lt;div class='highlight relative group'&gt;
-    &lt;pre class='highlight '&gt;&lt;code id="code-i5auiyf5"&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="k"&gt;mut&lt;/span&gt; &lt;span class="nn"&gt;fp_io&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="nn"&gt;copy&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="n"&gt;Duplex&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;amp;&lt;/span&gt;&lt;span class="k"&gt;mut&lt;/span&gt; &lt;span class="nn"&gt;fp_io&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="nn"&gt;reusable_reader&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="n"&gt;ReusableReader&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nn"&gt;fp_tcp&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="nn"&gt;peek&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="n"&gt;PeekableReader&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nn"&gt;tokio_rustls&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="nn"&gt;server&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="n"&gt;TlsStream&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nn"&gt;fp_tcp_metered&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="n"&gt;MeteredIo&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nn"&gt;fp_tcp&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="nn"&gt;peek&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="n"&gt;PeekableReader&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nn"&gt;fp_tcp&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="nn"&gt;permitted&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="n"&gt;PermittedTcpStream&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nn"&gt;connect&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="nn"&gt;conn&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="n"&gt;Conn&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nn"&gt;tokio&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="nn"&gt;net&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="nn"&gt;tcp&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="nn"&gt;stream&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="n"&gt;TcpStream&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+    &lt;pre class='highlight '&gt;&lt;code id="code-x5fu4p2n"&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="k"&gt;mut&lt;/span&gt; &lt;span class="nn"&gt;fp_io&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="nn"&gt;copy&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="n"&gt;Duplex&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;amp;&lt;/span&gt;&lt;span class="k"&gt;mut&lt;/span&gt; &lt;span class="nn"&gt;fp_io&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="nn"&gt;reusable_reader&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="n"&gt;ReusableReader&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nn"&gt;fp_tcp&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="nn"&gt;peek&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="n"&gt;PeekableReader&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nn"&gt;tokio_rustls&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="nn"&gt;server&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="n"&gt;TlsStream&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nn"&gt;fp_tcp_metered&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="n"&gt;MeteredIo&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nn"&gt;fp_tcp&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="nn"&gt;peek&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="n"&gt;PeekableReader&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nn"&gt;fp_tcp&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="nn"&gt;permitted&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="n"&gt;PermittedTcpStream&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nn"&gt;connect&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="nn"&gt;conn&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="n"&gt;Conn&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nn"&gt;tokio&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="nn"&gt;net&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="nn"&gt;tcp&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="nn"&gt;stream&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="n"&gt;TcpStream&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
   &lt;/div&gt;
 &lt;/div&gt;
@@ -3351,7 +3351,7 @@ So, this is fuckin&amp;rsquo; weird: a huge chunk of the profile is dominated by
     <link rel="alternate" href="https://fly.io/blog/wrong-about-gpu/"/>
     <id>https://fly.io/blog/wrong-about-gpu/</id>
     <published>2025-02-14T00:00:00+00:00</published>
-    <updated>2025-10-23T19:59:21+00:00</updated>
+    <updated>2025-02-17T14:23:34+00:00</updated>
     <media:thumbnail url="https://fly.io/blog/wrong-about-gpu/assets/choices-choices-cover.webp"/>
     <content type="html">&lt;div class="lead"&gt;&lt;p&gt;We’re building a public cloud, on hardware we own. We raised money to do that, and to place some bets; one of them: GPU-enabling our customers. A progress report: GPUs aren’t going anywhere, but: GPUs aren’t going anywhere.&lt;/p&gt;
 &lt;/div&gt;
@@ -3428,7 +3428,7 @@ So, this is fuckin&amp;rsquo; weird: a huge chunk of the profile is dominated by
     <link rel="alternate" href="https://fly.io/blog/the-exit-interview-jp/"/>
     <id>https://fly.io/blog/the-exit-interview-jp/</id>
     <published>2025-02-12T00:00:00+00:00</published>
-    <updated>2025-10-23T19:59:21+00:00</updated>
+    <updated>2025-02-12T19:06:05+00:00</updated>
     <media:thumbnail url="https://fly.io/blog/the-exit-interview-jp/assets/bye-bye-little-sebastian-cover.webp"/>
     <content type="html">&lt;div class="lead"&gt;&lt;p&gt;JP Phillips is off to greener, or at least calmer, pastures. He joined us 4 years ago to build the next generation of our orchestration system, and has been one of the anchors of our engineering team. His last day is today. We wanted to know what he was thinking, and figured you might too.&lt;/p&gt;
 &lt;/div&gt;
@@ -3636,7 +3636,7 @@ So, this is fuckin&amp;rsquo; weird: a huge chunk of the profile is dominated by
     <link rel="alternate" href="https://fly.io/blog/semgrep-but-for-real-now/"/>
     <id>https://fly.io/blog/semgrep-but-for-real-now/</id>
     <published>2025-02-10T00:00:00+00:00</published>
-    <updated>2025-10-23T19:59:21+00:00</updated>
+    <updated>2025-02-12T19:06:05+00:00</updated>
     <media:thumbnail url="https://fly.io/blog/semgrep-but-for-real-now/assets/ci-cd-cover.webp"/>
     <content type="html">&lt;div class="right-sidenote"&gt;&lt;p&gt;This whole paragraph is just one long sentence. God I love &lt;a href="https://fly.io/blog/a-blog-if-kept/" title=""&gt;just random-ass blogging&lt;/a&gt; again.&lt;/p&gt;
 &lt;/div&gt;
@@ -3672,7 +3672,7 @@ So, this is fuckin&amp;rsquo; weird: a huge chunk of the profile is dominated by
     <link rel="alternate" href="https://fly.io/blog/a-blog-if-kept/"/>
     <id>https://fly.io/blog/a-blog-if-kept/</id>
     <published>2025-02-10T00:00:00+00:00</published>
-    <updated>2025-10-23T19:59:21+00:00</updated>
+    <updated>2025-02-19T13:19:44+00:00</updated>
     <media:thumbnail url="https://fly.io/blog/a-blog-if-kept/assets/keep-blog.webp"/>
     <content type="html">&lt;div class="lead"&gt;&lt;p&gt;A boldfaced lede like this was a sure sign you were reading a carefully choreographed EffortPost from our team at Fly.io. We’re going to do less of those. Or the same amount but more of a different kind of post. Either way: launch an app on Fly.io today!&lt;/p&gt;
 &lt;/div&gt;
@@ -3705,7 +3705,7 @@ So, this is fuckin&amp;rsquo; weird: a huge chunk of the profile is dominated by
     <link rel="alternate" href="https://fly.io/blog/vscode-ssh-wtf/"/>
     <id>https://fly.io/blog/vscode-ssh-wtf/</id>
     <published>2025-02-07T00:00:00+00:00</published>
-    <updated>2025-10-23T19:59:21+00:00</updated>
+    <updated>2025-02-12T19:06:05+00:00</updated>
     <media:thumbnail url="https://fly.io/static/images/default-post-thumbnail.webp"/>
     <content type="html">&lt;p&gt;We’re interested in getting integrated into the flow VSCode uses to do remote editing over SSH, because everybody is using VSCode now, and, in particular, they’re using forks of VSCode that generate code with LLMs. &lt;/p&gt;
 &lt;div class="right-sidenote"&gt;&lt;p&gt;”hallucination” is what we call it when LLMs get code wrong; “engineering” is what we call it when people do.&lt;/p&gt;
@@ -3747,7 +3747,7 @@ So, this is fuckin&amp;rsquo; weird: a huge chunk of the profile is dominated by
     <link rel="alternate" href="https://fly.io/blog/ai-gpu-clusters-from-your-laptop-livebook/"/>
     <id>https://fly.io/blog/ai-gpu-clusters-from-your-laptop-livebook/</id>
     <published>2024-09-24T00:00:00+00:00</published>
-    <updated>2025-10-23T19:59:21+00:00</updated>
+    <updated>2025-01-30T19:43:24+00:00</updated>
     <media:thumbnail url="https://fly.io/blog/ai-gpu-clusters-from-your-laptop-livebook/assets/ai-gpu-livebook-thumb.webp"/>
     <content type="html">&lt;div class="lead"&gt;&lt;p&gt;Livebook, FLAME, and the Nx stack: three Elixir components that are easy to describe, more powerful than they look, and intricately threaded into the Elixir ecosystem. A few weeks ago, Chris McCord (👋) and Chris Grainger showed them off at ElixirConf 2024. We thought the talk was worth a recap.&lt;/p&gt;
 &lt;/div&gt;
@@ -3875,7 +3875,7 @@ So, this is fuckin&amp;rsquo; weird: a huge chunk of the profile is dominated by
       &lt;/a&gt;
   &lt;/figcaption&gt;
   &lt;div class="image-container"&gt;
-    &lt;img src="/static/images/cta-rabbit.webp" srcset="/static/images/cta-rabbit@2x.webp 2x" alt=""&gt;
+    &lt;img src="/static/images/cta-turtle.webp" srcset="/static/images/cta-turtle@2x.webp 2x" alt=""&gt;
   &lt;/div&gt;
 &lt;/figure&gt;
 
@@ -3886,7 +3886,7 @@ So, this is fuckin&amp;rsquo; weird: a huge chunk of the profile is dominated by
     <link rel="alternate" href="https://fly.io/blog/accident-forgiveness/"/>
     <id>https://fly.io/blog/accident-forgiveness/</id>
     <published>2024-08-21T00:00:00+00:00</published>
-    <updated>2025-10-23T19:59:21+00:00</updated>
+    <updated>2025-01-30T19:43:24+00:00</updated>
     <media:thumbnail url="https://fly.io/blog/accident-forgiveness/assets/money-for-mistakes-blog-thumb.webp"/>
     <content type="html">&lt;div class="lead"&gt;&lt;p&gt;We’re Fly.io, a new public cloud with simple, developer-friendly ergonomics. &lt;a href="https://fly.io/speedrun" title=""&gt;Try it out; you’ll be deployed in just minutes&lt;/a&gt;, and, as you’re about to read, with less financial risk.&lt;/p&gt;
 &lt;/div&gt;
@@ -3972,7 +3972,7 @@ So, this is fuckin&amp;rsquo; weird: a huge chunk of the profile is dominated by
     <link rel="alternate" href="https://fly.io/blog/cutting-prices-for-l40s-gpus-in-half/"/>
     <id>https://fly.io/blog/cutting-prices-for-l40s-gpus-in-half/</id>
     <published>2024-08-15T00:00:00+00:00</published>
-    <updated>2025-10-23T19:59:21+00:00</updated>
+    <updated>2025-01-30T19:43:24+00:00</updated>
     <media:thumbnail url="https://fly.io/blog/cutting-prices-for-l40s-gpus-in-half/assets/gpu-ga-thumb.webp"/>
     <content type="html">&lt;div class="lead"&gt;&lt;p&gt;We’re Fly.io, a new public cloud with simple, developer-friendly ergonomics. And as of today, cheaper GPUs. &lt;a href="https://fly.io/speedrun" title=""&gt;Try it out; you’ll be deployed in just minutes&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
@@ -4049,7 +4049,7 @@ So, this is fuckin&amp;rsquo; weird: a huge chunk of the profile is dominated by
     <link rel="alternate" href="https://fly.io/blog/machine-migrations/"/>
     <id>https://fly.io/blog/machine-migrations/</id>
     <published>2024-07-30T00:00:00+00:00</published>
-    <updated>2025-10-23T19:59:21+00:00</updated>
+    <updated>2025-01-30T19:43:24+00:00</updated>
     <media:thumbnail url="https://fly.io/blog/machine-migrations/assets/migrations-thumb.webp"/>
     <content type="html">&lt;div class="lead"&gt;&lt;p&gt;We’re Fly.io, a global public cloud with simple, developer-friendly ergonomics. If you’ve got a working Docker image, we’ll transmogrify it into a Fly Machine: a VM running on our hardware anywhere in the world. &lt;a href="https://fly.io/speedrun" title=""&gt;Try it out; you’ll be deployed in just minutes&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
@@ -4092,7 +4092,7 @@ So, this is fuckin&amp;rsquo; weird: a huge chunk of the profile is dominated by
   &lt;button 
     type="button"
     class="bubble-wrap z-20 absolute right-9 -mr-0.5 top-1.5 text-transparent group-hover:text-gray-400 group-hover:hocus:text-white focus:text-white bg-transparent group-hover:bg-gray-900 group-hover:hocus:bg-gray-700 focus:bg-gray-700 transition-colors grid place-items-center w-7 h-7 rounded-lg outline-none focus:outline-none"
-    data-wrap-target="#code-u9yqs328"
+    data-wrap-target="#code-tcmrlcc7"
   &gt;
     &lt;svg class="w-4 h-4 pointer-events-none" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;g buffered-rendering="static"&gt;&lt;path d="M9.912 8.037h2.732c1.277 0 2.315-.962 2.315-2.237a2.325 2.325 0 00-2.315-2.31H2.959m10.228 9.01H2.959M6.802 8H2.959" /&gt;&lt;path d="M11.081 6.466L9.533 8.037l1.548 1.571" /&gt;&lt;/g&gt;&lt;/svg&gt;
     &lt;span class="bubble-sm bubble-tl [--offset-l:-9px] tail text-navy-950"&gt;
@@ -4110,7 +4110,7 @@ So, this is fuckin&amp;rsquo; weird: a huge chunk of the profile is dominated by
     &lt;/span&gt;
   &lt;/button&gt;
   &lt;div class='highlight relative group'&gt;
-    &lt;pre class='highlight '&gt;&lt;code id="code-u9yqs328"&gt;&lt;span class="k"&gt;enum&lt;/span&gt; &lt;span class="n"&gt;req_opf&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;pre class='highlight '&gt;&lt;code id="code-tcmrlcc7"&gt;&lt;span class="k"&gt;enum&lt;/span&gt; &lt;span class="n"&gt;req_opf&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
     &lt;span class="cm"&gt;/* read sectors from the device */&lt;/span&gt;
     &lt;span class="n"&gt;REQ_OP_READ&lt;/span&gt;     &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
     &lt;span class="cm"&gt;/* write sectors to the device */&lt;/span&gt;
@@ -4139,7 +4139,7 @@ Good news! The Linux block system is organized as if your computer was a network
   &lt;button 
     type="button"
     class="bubble-wrap z-20 absolute right-9 -mr-0.5 top-1.5 text-transparent group-hover:text-gray-400 group-hover:hocus:text-white focus:text-white bg-transparent group-hover:bg-gray-900 group-hover:hocus:bg-gray-700 focus:bg-gray-700 transition-colors grid place-items-center w-7 h-7 rounded-lg outline-none focus:outline-none"
-    data-wrap-target="#code-pjtxa6a8"
+    data-wrap-target="#code-r3y9t6de"
   &gt;
     &lt;svg class="w-4 h-4 pointer-events-none" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;g buffered-rendering="static"&gt;&lt;path d="M9.912 8.037h2.732c1.277 0 2.315-.962 2.315-2.237a2.325 2.325 0 00-2.315-2.31H2.959m10.228 9.01H2.959M6.802 8H2.959" /&gt;&lt;path d="M11.081 6.466L9.533 8.037l1.548 1.571" /&gt;&lt;/g&gt;&lt;/svg&gt;
     &lt;span class="bubble-sm bubble-tl [--offset-l:-9px] tail text-navy-950"&gt;
@@ -4157,7 +4157,7 @@ Good news! The Linux block system is organized as if your computer was a network
     &lt;/span&gt;
   &lt;/button&gt;
   &lt;div class='highlight relative group'&gt;
-    &lt;pre class='highlight '&gt;&lt;code id="code-pjtxa6a8"&gt;&lt;span class="cm"&gt;/*
+    &lt;pre class='highlight '&gt;&lt;code id="code-r3y9t6de"&gt;&lt;span class="cm"&gt;/*
  * main unit of I/O for the block layer and lower layers (ie drivers and
  * stacking drivers)
  */&lt;/span&gt;
@@ -4184,7 +4184,7 @@ Good news! The Linux block system is organized as if your computer was a network
   &lt;button 
     type="button"
     class="bubble-wrap z-20 absolute right-9 -mr-0.5 top-1.5 text-transparent group-hover:text-gray-400 group-hover:hocus:text-white focus:text-white bg-transparent group-hover:bg-gray-900 group-hover:hocus:bg-gray-700 focus:bg-gray-700 transition-colors grid place-items-center w-7 h-7 rounded-lg outline-none focus:outline-none"
-    data-wrap-target="#code-em4yfi34"
+    data-wrap-target="#code-kg4dp6t2"
   &gt;
     &lt;svg class="w-4 h-4 pointer-events-none" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;g buffered-rendering="static"&gt;&lt;path d="M9.912 8.037h2.732c1.277 0 2.315-.962 2.315-2.237a2.325 2.325 0 00-2.315-2.31H2.959m10.228 9.01H2.959M6.802 8H2.959" /&gt;&lt;path d="M11.081 6.466L9.533 8.037l1.548 1.571" /&gt;&lt;/g&gt;&lt;/svg&gt;
     &lt;span class="bubble-sm bubble-tl [--offset-l:-9px] tail text-navy-950"&gt;
@@ -4202,7 +4202,7 @@ Good news! The Linux block system is organized as if your computer was a network
     &lt;/span&gt;
   &lt;/button&gt;
   &lt;div class='highlight relative group'&gt;
-    &lt;pre class='highlight '&gt;&lt;code id="code-em4yfi34"&gt;    &lt;span class="cm"&gt;/* ... */&lt;/span&gt; 
+    &lt;pre class='highlight '&gt;&lt;code id="code-kg4dp6t2"&gt;    &lt;span class="cm"&gt;/* ... */&lt;/span&gt; 
     &lt;span class="n"&gt;region_nr&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;bio_to_region&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;clone&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;bio&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 
     &lt;span class="c1"&gt;// we have the data&lt;/span&gt;
@@ -4320,7 +4320,7 @@ Good news! The Linux block system is organized as if your computer was a network
     <link rel="alternate" href="https://fly.io/blog/oidc-cloud-roles/"/>
     <id>https://fly.io/blog/oidc-cloud-roles/</id>
     <published>2024-06-19T00:00:00+00:00</published>
-    <updated>2025-10-23T19:59:21+00:00</updated>
+    <updated>2025-01-30T19:43:24+00:00</updated>
     <media:thumbnail url="https://fly.io/blog/oidc-cloud-roles/assets/spooky-security-skeleton-thumb.webp"/>
     <content type="html">&lt;div class="lead"&gt;&lt;p&gt;It’s dangerous to go alone. Fly.io runs full-stack apps by transmuting Docker containers into Fly Machines: ultra-lightweight hardware-backed VMs. You can run all your dependencies on Fly.io, but sometimes, you’ll need to work with other clouds, and we’ve made that pretty simple. Try Fly.io out for yourself; your Rails or Node app &lt;a href="https://fly.io/speedrun" title=""&gt;can be up and running in just minutes&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
@@ -4377,7 +4377,7 @@ Good news! The Linux block system is organized as if your computer was a network
   &lt;button 
     type="button"
     class="bubble-wrap z-20 absolute right-9 -mr-0.5 top-1.5 text-transparent group-hover:text-gray-400 group-hover:hocus:text-white focus:text-white bg-transparent group-hover:bg-gray-900 group-hover:hocus:bg-gray-700 focus:bg-gray-700 transition-colors grid place-items-center w-7 h-7 rounded-lg outline-none focus:outline-none"
-    data-wrap-target="#code-uo2ciswb"
+    data-wrap-target="#code-sjsla3kq"
   &gt;
     &lt;svg class="w-4 h-4 pointer-events-none" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;g buffered-rendering="static"&gt;&lt;path d="M9.912 8.037h2.732c1.277 0 2.315-.962 2.315-2.237a2.325 2.325 0 00-2.315-2.31H2.959m10.228 9.01H2.959M6.802 8H2.959" /&gt;&lt;path d="M11.081 6.466L9.533 8.037l1.548 1.571" /&gt;&lt;/g&gt;&lt;/svg&gt;
     &lt;span class="bubble-sm bubble-tl [--offset-l:-9px] tail text-navy-950"&gt;
@@ -4395,7 +4395,7 @@ Good news! The Linux block system is organized as if your computer was a network
     &lt;/span&gt;
   &lt;/button&gt;
   &lt;div class='highlight relative group'&gt;
-    &lt;pre class='highlight '&gt;&lt;code id="code-uo2ciswb"&gt;{
+    &lt;pre class='highlight '&gt;&lt;code id="code-sjsla3kq"&gt;{
   "app_id": "3671581",
   "app_name": "weather-cat",
   "aud": "sts.amazonaws.com",
@@ -4460,7 +4460,7 @@ Good news! The Linux block system is organized as if your computer was a network
   &lt;button 
     type="button"
     class="bubble-wrap z-20 absolute right-9 -mr-0.5 top-1.5 text-transparent group-hover:text-gray-400 group-hover:hocus:text-white focus:text-white bg-transparent group-hover:bg-gray-900 group-hover:hocus:bg-gray-700 focus:bg-gray-700 transition-colors grid place-items-center w-7 h-7 rounded-lg outline-none focus:outline-none"
-    data-wrap-target="#code-tda2hlcf"
+    data-wrap-target="#code-ayzuz2zq"
   &gt;
     &lt;svg class="w-4 h-4 pointer-events-none" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;g buffered-rendering="static"&gt;&lt;path d="M9.912 8.037h2.732c1.277 0 2.315-.962 2.315-2.237a2.325 2.325 0 00-2.315-2.31H2.959m10.228 9.01H2.959M6.802 8H2.959" /&gt;&lt;path d="M11.081 6.466L9.533 8.037l1.548 1.571" /&gt;&lt;/g&gt;&lt;/svg&gt;
     &lt;span class="bubble-sm bubble-tl [--offset-l:-9px] tail text-navy-950"&gt;
@@ -4478,7 +4478,7 @@ Good news! The Linux block system is organized as if your computer was a network
     &lt;/span&gt;
   &lt;/button&gt;
   &lt;div class='highlight relative group'&gt;
-    &lt;pre class='highlight '&gt;&lt;code id="code-tda2hlcf"&gt;{
+    &lt;pre class='highlight '&gt;&lt;code id="code-ayzuz2zq"&gt;{
     "Version": "2012-10-17",
     "Statement": [
         {
@@ -4512,7 +4512,7 @@ Good news! The Linux block system is organized as if your computer was a network
       &lt;/a&gt;
   &lt;/figcaption&gt;
   &lt;div class="image-container"&gt;
-    &lt;img src="/static/images/cta-rabbit.webp" srcset="/static/images/cta-rabbit@2x.webp 2x" alt=""&gt;
+    &lt;img src="/static/images/cta-kitty.webp" srcset="/static/images/cta-kitty@2x.webp 2x" alt=""&gt;
   &lt;/div&gt;
 &lt;/figure&gt;
 
@@ -4529,7 +4529,7 @@ Good news! The Linux block system is organized as if your computer was a network
     <link rel="alternate" href="https://fly.io/blog/llm-image-description/"/>
     <id>https://fly.io/blog/llm-image-description/</id>
     <published>2024-05-09T00:00:00+00:00</published>
-    <updated>2025-10-23T19:59:21+00:00</updated>
+    <updated>2025-01-30T19:43:24+00:00</updated>
     <media:thumbnail url="https://fly.io/blog/llm-image-description/assets/image-description-thumb.webp"/>
     <content type="html">&lt;div class="lead"&gt;&lt;p&gt;I’m Nolan, and I work on Fly Machines here at Fly.io. We’re building a new public cloud—one where you can spin up CPU and GPU workloads, around the world, in a jiffy. &lt;a href="https://fly.io/speedrun/" title=""&gt;Try us out&lt;/a&gt;; you can be up and running in minutes. This is a post about LLMs being really helpful, and an extensible project you can build with open source on a weekend.&lt;/p&gt;
 &lt;/div&gt;
@@ -4592,7 +4592,7 @@ Get the model with the Ollama CLI:&lt;/p&gt;
   &lt;button 
     type="button"
     class="bubble-wrap z-20 absolute right-9 -mr-0.5 top-1.5 text-transparent group-hover:text-gray-400 group-hover:hocus:text-white focus:text-white bg-transparent group-hover:bg-gray-900 group-hover:hocus:bg-gray-700 focus:bg-gray-700 transition-colors grid place-items-center w-7 h-7 rounded-lg outline-none focus:outline-none"
-    data-wrap-target="#code-5q5gefrj"
+    data-wrap-target="#code-1gmqx2ry"
   &gt;
     &lt;svg class="w-4 h-4 pointer-events-none" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;g buffered-rendering="static"&gt;&lt;path d="M9.912 8.037h2.732c1.277 0 2.315-.962 2.315-2.237a2.325 2.325 0 00-2.315-2.31H2.959m10.228 9.01H2.959M6.802 8H2.959" /&gt;&lt;path d="M11.081 6.466L9.533 8.037l1.548 1.571" /&gt;&lt;/g&gt;&lt;/svg&gt;
     &lt;span class="bubble-sm bubble-tl [--offset-l:-9px] tail text-navy-950"&gt;
@@ -4610,7 +4610,7 @@ Get the model with the Ollama CLI:&lt;/p&gt;
     &lt;/span&gt;
   &lt;/button&gt;
   &lt;div class='highlight relative group'&gt;
-    &lt;pre class='highlight cmd'&gt;&lt;code id="code-5q5gefrj"&gt;ollama pull llava:34b
+    &lt;pre class='highlight cmd'&gt;&lt;code id="code-1gmqx2ry"&gt;ollama pull llava:34b
 &lt;/code&gt;&lt;/pre&gt;
   &lt;/div&gt;
 &lt;/div&gt;&lt;div class="callout"&gt;&lt;p&gt;If you have hardware that can handle it, you could run this on your computer at home. If you run AI models on a cloud provider, be aware that GPU compute is expensive! &lt;strong class="font-semibold text-navy-950"&gt;It’s important to take steps to ensure you’re not paying for a massive GPU 24/7.&lt;/strong&gt;&lt;/p&gt;
@@ -4659,7 +4659,7 @@ anyway, I just &lt;code&gt;pip install&lt;/code&gt;ed the library so my client c
   &lt;button 
     type="button"
     class="bubble-wrap z-20 absolute right-9 -mr-0.5 top-1.5 text-transparent group-hover:text-gray-400 group-hover:hocus:text-white focus:text-white bg-transparent group-hover:bg-gray-900 group-hover:hocus:bg-gray-700 focus:bg-gray-700 transition-colors grid place-items-center w-7 h-7 rounded-lg outline-none focus:outline-none"
-    data-wrap-target="#code-npechvfh"
+    data-wrap-target="#code-parvm7pt"
   &gt;
     &lt;svg class="w-4 h-4 pointer-events-none" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;g buffered-rendering="static"&gt;&lt;path d="M9.912 8.037h2.732c1.277 0 2.315-.962 2.315-2.237a2.325 2.325 0 00-2.315-2.31H2.959m10.228 9.01H2.959M6.802 8H2.959" /&gt;&lt;path d="M11.081 6.466L9.533 8.037l1.548 1.571" /&gt;&lt;/g&gt;&lt;/svg&gt;
     &lt;span class="bubble-sm bubble-tl [--offset-l:-9px] tail text-navy-950"&gt;
@@ -4677,7 +4677,7 @@ anyway, I just &lt;code&gt;pip install&lt;/code&gt;ed the library so my client c
     &lt;/span&gt;
   &lt;/button&gt;
   &lt;div class='highlight relative group'&gt;
-    &lt;pre class='highlight cmd'&gt;&lt;code id="code-npechvfh"&gt;pip install pocketbase
+    &lt;pre class='highlight cmd'&gt;&lt;code id="code-parvm7pt"&gt;pip install pocketbase
 &lt;/code&gt;&lt;/pre&gt;
   &lt;/div&gt;
 &lt;/div&gt;
@@ -4720,7 +4720,7 @@ charming wildlife in Russia.&lt;/p&gt;
   &lt;button 
     type="button"
     class="bubble-wrap z-20 absolute right-9 -mr-0.5 top-1.5 text-transparent group-hover:text-gray-400 group-hover:hocus:text-white focus:text-white bg-transparent group-hover:bg-gray-900 group-hover:hocus:bg-gray-700 focus:bg-gray-700 transition-colors grid place-items-center w-7 h-7 rounded-lg outline-none focus:outline-none"
-    data-wrap-target="#code-kkc7jw9z"
+    data-wrap-target="#code-acm3graq"
   &gt;
     &lt;svg class="w-4 h-4 pointer-events-none" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;g buffered-rendering="static"&gt;&lt;path d="M9.912 8.037h2.732c1.277 0 2.315-.962 2.315-2.237a2.325 2.325 0 00-2.315-2.31H2.959m10.228 9.01H2.959M6.802 8H2.959" /&gt;&lt;path d="M11.081 6.466L9.533 8.037l1.548 1.571" /&gt;&lt;/g&gt;&lt;/svg&gt;
     &lt;span class="bubble-sm bubble-tl [--offset-l:-9px] tail text-navy-950"&gt;
@@ -4738,7 +4738,7 @@ charming wildlife in Russia.&lt;/p&gt;
     &lt;/span&gt;
   &lt;/button&gt;
   &lt;div class='highlight relative group'&gt;
-    &lt;pre class='highlight '&gt;&lt;code id="code-kkc7jw9z"&gt;$ python __init__.py
+    &lt;pre class='highlight '&gt;&lt;code id="code-acm3graq"&gt;$ python __init__.py
 The image depicts a serene winter scene. There is a small stream of water flowing through the center, with patches of snow on its surface and along the banks. The surrounding area appears to be a mix of bare trees and shrubs, suggesting it's late in the season or possibly early spring when some plants have started to grow again but haven't yet leafed out.
 
 The sky is clear and blue, indicating good weather conditions at the time the photo was taken. The sunlight seems to be coming from the left side of the image, casting a warm glow on the scene and creating reflections in the water. There are no visible texts or distinguishing marks that provide additional context about the location or the photographer.
@@ -4754,7 +4754,7 @@ The overall atmosphere is peaceful and natural, with the quiet beauty of the lan
   &lt;button 
     type="button"
     class="bubble-wrap z-20 absolute right-9 -mr-0.5 top-1.5 text-transparent group-hover:text-gray-400 group-hover:hocus:text-white focus:text-white bg-transparent group-hover:bg-gray-900 group-hover:hocus:bg-gray-700 focus:bg-gray-700 transition-colors grid place-items-center w-7 h-7 rounded-lg outline-none focus:outline-none"
-    data-wrap-target="#code-49jr2z9m"
+    data-wrap-target="#code-ilirm9e0"
   &gt;
     &lt;svg class="w-4 h-4 pointer-events-none" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;g buffered-rendering="static"&gt;&lt;path d="M9.912 8.037h2.732c1.277 0 2.315-.962 2.315-2.237a2.325 2.325 0 00-2.315-2.31H2.959m10.228 9.01H2.959M6.802 8H2.959" /&gt;&lt;path d="M11.081 6.466L9.533 8.037l1.548 1.571" /&gt;&lt;/g&gt;&lt;/svg&gt;
     &lt;span class="bubble-sm bubble-tl [--offset-l:-9px] tail text-navy-950"&gt;
@@ -4772,7 +4772,7 @@ The overall atmosphere is peaceful and natural, with the quiet beauty of the lan
     &lt;/span&gt;
   &lt;/button&gt;
   &lt;div class='highlight relative group'&gt;
-    &lt;pre class='highlight '&gt;&lt;code id="code-49jr2z9m"&gt;Enter your followup question, or 'quit' to quit: What types of trees are in the image?
+    &lt;pre class='highlight '&gt;&lt;code id="code-ilirm9e0"&gt;Enter your followup question, or 'quit' to quit: What types of trees are in the image?
 Sending followup question
 It's difficult to determine the exact species of trees in the image without more specific details, as many deciduous trees lose their leaves during winter and look quite similar. However, based on the general appearance of the bare branches and the fact that they are leafless, it is likely that these are common deciduous trees such as oaks, maples, or elms.
 
@@ -4800,7 +4800,7 @@ I run it on Fly.io, unsurprisingly, and the &lt;a href='https://github.com/super
     <link rel="alternate" href="https://fly.io/blog/jit-wireguard-peers/"/>
     <id>https://fly.io/blog/jit-wireguard-peers/</id>
     <published>2024-03-12T00:00:00+00:00</published>
-    <updated>2025-10-23T19:59:21+00:00</updated>
+    <updated>2025-01-30T19:43:24+00:00</updated>
     <media:thumbnail url="https://fly.io/blog/jit-wireguard-peers/assets/network-thumbnail.webp"/>
     <content type="html">&lt;div class="lead"&gt;&lt;p&gt;We’re Fly.io and we transmute containers into VMs, running them on our hardware around the world with the power of Firecracker alchemy. We do a lot of stuff with WireGuard, which has become a part of our customer API. This is a quick story about some tricks we played to make WireGuard faster and more scalable for the hundreds of thousands of people who now use it here.&lt;/p&gt;
 &lt;/div&gt;
@@ -4885,7 +4885,7 @@ I run it on Fly.io, unsurprisingly, and the &lt;a href='https://github.com/super
       &lt;/a&gt;
   &lt;/figcaption&gt;
   &lt;div class="image-container"&gt;
-    &lt;img src="/static/images/cta-kitty.webp" srcset="/static/images/cta-kitty@2x.webp 2x" alt=""&gt;
+    &lt;img src="/static/images/cta-cat.webp" srcset="/static/images/cta-cat@2x.webp 2x" alt=""&gt;
   &lt;/div&gt;
 &lt;/figure&gt;
 
@@ -4904,7 +4904,7 @@ I run it on Fly.io, unsurprisingly, and the &lt;a href='https://github.com/super
     <link rel="alternate" href="https://fly.io/blog/fks-beta-live/"/>
     <id>https://fly.io/blog/fks-beta-live/</id>
     <published>2024-03-07T00:00:00+00:00</published>
-    <updated>2025-10-23T19:59:21+00:00</updated>
+    <updated>2025-01-30T19:43:24+00:00</updated>
     <media:thumbnail url="https://fly.io/blog/fks-beta-live/assets/fks-thumb.webp"/>
     <content type="html">&lt;div class="lead"&gt;&lt;p&gt;Eons ago, we &lt;a href="https://fly.io/blog/fks/" title=""&gt;announced&lt;/a&gt; we were working on &lt;a href="https://fly.io/docs/kubernetes/" title=""&gt;Fly Kubernetes&lt;/a&gt;. It drummed up enough excitement to prove we were heading in the right direction. So, we got hard to work to get from barebones “early access” to a beta release. We’ll be onboarding customers to the closed beta over the next few weeks. Email us at &lt;a href="mailto:sales@fly.io"&gt;sales@fly.io&lt;/a&gt; and we’ll hook you up.&lt;/p&gt;
 &lt;/div&gt;
@@ -4948,7 +4948,7 @@ I run it on Fly.io, unsurprisingly, and the &lt;a href='https://github.com/super
   &lt;button 
     type="button"
     class="bubble-wrap z-20 absolute right-9 -mr-0.5 top-1.5 text-transparent group-hover:text-gray-400 group-hover:hocus:text-white focus:text-white bg-transparent group-hover:bg-gray-900 group-hover:hocus:bg-gray-700 focus:bg-gray-700 transition-colors grid place-items-center w-7 h-7 rounded-lg outline-none focus:outline-none"
-    data-wrap-target="#code-kdp6llep"
+    data-wrap-target="#code-rinvzo97"
   &gt;
     &lt;svg class="w-4 h-4 pointer-events-none" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;g buffered-rendering="static"&gt;&lt;path d="M9.912 8.037h2.732c1.277 0 2.315-.962 2.315-2.237a2.325 2.325 0 00-2.315-2.31H2.959m10.228 9.01H2.959M6.802 8H2.959" /&gt;&lt;path d="M11.081 6.466L9.533 8.037l1.548 1.571" /&gt;&lt;/g&gt;&lt;/svg&gt;
     &lt;span class="bubble-sm bubble-tl [--offset-l:-9px] tail text-navy-950"&gt;
@@ -4966,7 +4966,7 @@ I run it on Fly.io, unsurprisingly, and the &lt;a href='https://github.com/super
     &lt;/span&gt;
   &lt;/button&gt;
   &lt;div class='highlight relative group'&gt;
-    &lt;pre class='highlight cmd'&gt;&lt;code id="code-kdp6llep"&gt;fly ext k8s create --name hello --org personal --region iad
+    &lt;pre class='highlight cmd'&gt;&lt;code id="code-rinvzo97"&gt;fly ext k8s create --name hello --org personal --region iad
 &lt;/code&gt;&lt;/pre&gt;
   &lt;/div&gt;
 &lt;/div&gt;
@@ -4975,7 +4975,7 @@ I run it on Fly.io, unsurprisingly, and the &lt;a href='https://github.com/super
   &lt;button 
     type="button"
     class="bubble-wrap z-20 absolute right-9 -mr-0.5 top-1.5 text-transparent group-hover:text-gray-400 group-hover:hocus:text-white focus:text-white bg-transparent group-hover:bg-gray-900 group-hover:hocus:bg-gray-700 focus:bg-gray-700 transition-colors grid place-items-center w-7 h-7 rounded-lg outline-none focus:outline-none"
-    data-wrap-target="#code-uxd4plsq"
+    data-wrap-target="#code-aliizhsd"
   &gt;
     &lt;svg class="w-4 h-4 pointer-events-none" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;g buffered-rendering="static"&gt;&lt;path d="M9.912 8.037h2.732c1.277 0 2.315-.962 2.315-2.237a2.325 2.325 0 00-2.315-2.31H2.959m10.228 9.01H2.959M6.802 8H2.959" /&gt;&lt;path d="M11.081 6.466L9.533 8.037l1.548 1.571" /&gt;&lt;/g&gt;&lt;/svg&gt;
     &lt;span class="bubble-sm bubble-tl [--offset-l:-9px] tail text-navy-950"&gt;
@@ -4993,14 +4993,14 @@ I run it on Fly.io, unsurprisingly, and the &lt;a href='https://github.com/super
     &lt;/span&gt;
   &lt;/button&gt;
   &lt;div class='highlight relative group'&gt;
-    &lt;pre class='highlight cmd'&gt;&lt;code id="code-uxd4plsq"&gt;kubectl get ns default --show-labels
+    &lt;pre class='highlight cmd'&gt;&lt;code id="code-aliizhsd"&gt;kubectl get ns default --show-labels
 &lt;/code&gt;&lt;/pre&gt;
   &lt;/div&gt;
 &lt;/div&gt;&lt;div class="highlight-wrapper group relative output"&gt;
   &lt;button 
     type="button"
     class="bubble-wrap z-20 absolute right-9 -mr-0.5 top-1.5 text-transparent group-hover:text-gray-400 group-hover:hocus:text-white focus:text-white bg-transparent group-hover:bg-gray-900 group-hover:hocus:bg-gray-700 focus:bg-gray-700 transition-colors grid place-items-center w-7 h-7 rounded-lg outline-none focus:outline-none"
-    data-wrap-target="#code-l4zvcw9v"
+    data-wrap-target="#code-18govxhs"
   &gt;
     &lt;svg class="w-4 h-4 pointer-events-none" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;g buffered-rendering="static"&gt;&lt;path d="M9.912 8.037h2.732c1.277 0 2.315-.962 2.315-2.237a2.325 2.325 0 00-2.315-2.31H2.959m10.228 9.01H2.959M6.802 8H2.959" /&gt;&lt;path d="M11.081 6.466L9.533 8.037l1.548 1.571" /&gt;&lt;/g&gt;&lt;/svg&gt;
     &lt;span class="bubble-sm bubble-tl [--offset-l:-9px] tail text-navy-950"&gt;
@@ -5018,7 +5018,7 @@ I run it on Fly.io, unsurprisingly, and the &lt;a href='https://github.com/super
     &lt;/span&gt;
   &lt;/button&gt;
   &lt;div class='highlight relative group'&gt;
-    &lt;pre class='highlight output whitespace-pre'&gt;&lt;code id="code-l4zvcw9v"&gt;NAME      STATUS   AGE   LABELS
+    &lt;pre class='highlight output whitespace-pre'&gt;&lt;code id="code-18govxhs"&gt;NAME      STATUS   AGE   LABELS
 default   Active   20d   fly.io/app=fks-default-7zyjm3ovpdxmd0ep,kubernetes.io/metadata.name=default
 &lt;/code&gt;&lt;/pre&gt;
   &lt;/div&gt;
@@ -5030,7 +5030,7 @@ default   Active   20d   fly.io/app=fks-default-7zyjm3ovpdxmd0ep,kubernetes.io/m
   &lt;button 
     type="button"
     class="bubble-wrap z-20 absolute right-9 -mr-0.5 top-1.5 text-transparent group-hover:text-gray-400 group-hover:hocus:text-white focus:text-white bg-transparent group-hover:bg-gray-900 group-hover:hocus:bg-gray-700 focus:bg-gray-700 transition-colors grid place-items-center w-7 h-7 rounded-lg outline-none focus:outline-none"
-    data-wrap-target="#code-kmvwtwf7"
+    data-wrap-target="#code-pxy5aog7"
   &gt;
     &lt;svg class="w-4 h-4 pointer-events-none" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;g buffered-rendering="static"&gt;&lt;path d="M9.912 8.037h2.732c1.277 0 2.315-.962 2.315-2.237a2.325 2.325 0 00-2.315-2.31H2.959m10.228 9.01H2.959M6.802 8H2.959" /&gt;&lt;path d="M11.081 6.466L9.533 8.037l1.548 1.571" /&gt;&lt;/g&gt;&lt;/svg&gt;
     &lt;span class="bubble-sm bubble-tl [--offset-l:-9px] tail text-navy-950"&gt;
@@ -5048,7 +5048,7 @@ default   Active   20d   fly.io/app=fks-default-7zyjm3ovpdxmd0ep,kubernetes.io/m
     &lt;/span&gt;
   &lt;/button&gt;
   &lt;div class='highlight relative group'&gt;
-    &lt;pre class='highlight cmd'&gt;&lt;code id="code-kmvwtwf7"&gt;kubectl run \
+    &lt;pre class='highlight cmd'&gt;&lt;code id="code-pxy5aog7"&gt;kubectl run \
   --image=ghcr.io/jipperinbham/kuard-amd64:blue \
   --labels="app=kuard-fks" \
   kuard
@@ -5060,7 +5060,7 @@ default   Active   20d   fly.io/app=fks-default-7zyjm3ovpdxmd0ep,kubernetes.io/m
   &lt;button 
     type="button"
     class="bubble-wrap z-20 absolute right-9 -mr-0.5 top-1.5 text-transparent group-hover:text-gray-400 group-hover:hocus:text-white focus:text-white bg-transparent group-hover:bg-gray-900 group-hover:hocus:bg-gray-700 focus:bg-gray-700 transition-colors grid place-items-center w-7 h-7 rounded-lg outline-none focus:outline-none"
-    data-wrap-target="#code-kki3qi3o"
+    data-wrap-target="#code-nc9o8peq"
   &gt;
     &lt;svg class="w-4 h-4 pointer-events-none" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;g buffered-rendering="static"&gt;&lt;path d="M9.912 8.037h2.732c1.277 0 2.315-.962 2.315-2.237a2.325 2.325 0 00-2.315-2.31H2.959m10.228 9.01H2.959M6.802 8H2.959" /&gt;&lt;path d="M11.081 6.466L9.533 8.037l1.548 1.571" /&gt;&lt;/g&gt;&lt;/svg&gt;
     &lt;span class="bubble-sm bubble-tl [--offset-l:-9px] tail text-navy-950"&gt;
@@ -5078,14 +5078,14 @@ default   Active   20d   fly.io/app=fks-default-7zyjm3ovpdxmd0ep,kubernetes.io/m
     &lt;/span&gt;
   &lt;/button&gt;
   &lt;div class='highlight relative group'&gt;
-    &lt;pre class='highlight cmd'&gt;&lt;code id="code-kki3qi3o"&gt;fly machine list --app fks-default-7zyjm3ovpdxmd0ep
+    &lt;pre class='highlight cmd'&gt;&lt;code id="code-nc9o8peq"&gt;fly machine list --app fks-default-7zyjm3ovpdxmd0ep
 &lt;/code&gt;&lt;/pre&gt;
   &lt;/div&gt;
 &lt;/div&gt;&lt;div class="highlight-wrapper group relative output"&gt;
   &lt;button 
     type="button"
     class="bubble-wrap z-20 absolute right-9 -mr-0.5 top-1.5 text-transparent group-hover:text-gray-400 group-hover:hocus:text-white focus:text-white bg-transparent group-hover:bg-gray-900 group-hover:hocus:bg-gray-700 focus:bg-gray-700 transition-colors grid place-items-center w-7 h-7 rounded-lg outline-none focus:outline-none"
-    data-wrap-target="#code-8ka4neci"
+    data-wrap-target="#code-6ajor4dz"
   &gt;
     &lt;svg class="w-4 h-4 pointer-events-none" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;g buffered-rendering="static"&gt;&lt;path d="M9.912 8.037h2.732c1.277 0 2.315-.962 2.315-2.237a2.325 2.325 0 00-2.315-2.31H2.959m10.228 9.01H2.959M6.802 8H2.959" /&gt;&lt;path d="M11.081 6.466L9.533 8.037l1.548 1.571" /&gt;&lt;/g&gt;&lt;/svg&gt;
     &lt;span class="bubble-sm bubble-tl [--offset-l:-9px] tail text-navy-950"&gt;
@@ -5103,7 +5103,7 @@ default   Active   20d   fly.io/app=fks-default-7zyjm3ovpdxmd0ep,kubernetes.io/m
     &lt;/span&gt;
   &lt;/button&gt;
   &lt;div class='highlight relative group'&gt;
-    &lt;pre class='highlight output whitespace-pre'&gt;&lt;code id="code-8ka4neci"&gt;ID              NAME        STATE   REGION  IMAGE                           IP ADDRESS                      VOLUME  CREATED                 LAST UPDATED            APP PLATFORM    PROCESS GROUP   SIZE
+    &lt;pre class='highlight output whitespace-pre'&gt;&lt;code id="code-6ajor4dz"&gt;ID              NAME        STATE   REGION  IMAGE                           IP ADDRESS                      VOLUME  CREATED                 LAST UPDATED            APP PLATFORM    PROCESS GROUP   SIZE
 1852291c46ded8  kuard       started iad     jipperinbham/kuard-amd64:blue   fdaa:0:48c8:a7b:228:4b6d:6e20:2         2024-03-05T18:54:41Z    2024-03-05T18:54:44Z                                    shared-cpu-1x:256MB
 &lt;/code&gt;&lt;/pre&gt;
   &lt;/div&gt;
@@ -5117,7 +5117,7 @@ default   Active   20d   fly.io/app=fks-default-7zyjm3ovpdxmd0ep,kubernetes.io/m
   &lt;button 
     type="button"
     class="bubble-wrap z-20 absolute right-9 -mr-0.5 top-1.5 text-transparent group-hover:text-gray-400 group-hover:hocus:text-white focus:text-white bg-transparent group-hover:bg-gray-900 group-hover:hocus:bg-gray-700 focus:bg-gray-700 transition-colors grid place-items-center w-7 h-7 rounded-lg outline-none focus:outline-none"
-    data-wrap-target="#code-934ufx7s"
+    data-wrap-target="#code-laa68np6"
   &gt;
     &lt;svg class="w-4 h-4 pointer-events-none" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;g buffered-rendering="static"&gt;&lt;path d="M9.912 8.037h2.732c1.277 0 2.315-.962 2.315-2.237a2.325 2.325 0 00-2.315-2.31H2.959m10.228 9.01H2.959M6.802 8H2.959" /&gt;&lt;path d="M11.081 6.466L9.533 8.037l1.548 1.571" /&gt;&lt;/g&gt;&lt;/svg&gt;
     &lt;span class="bubble-sm bubble-tl [--offset-l:-9px] tail text-navy-950"&gt;
@@ -5135,7 +5135,7 @@ default   Active   20d   fly.io/app=fks-default-7zyjm3ovpdxmd0ep,kubernetes.io/m
     &lt;/span&gt;
   &lt;/button&gt;
   &lt;div class='highlight relative group'&gt;
-    &lt;pre class='highlight cmd'&gt;&lt;code id="code-934ufx7s"&gt;kubectl expose pod kuard \
+    &lt;pre class='highlight cmd'&gt;&lt;code id="code-laa68np6"&gt;kubectl expose pod kuard \
   --name=kuard \
   --port=8080 \
   --target-port=8080 \
@@ -5150,7 +5150,7 @@ default   Active   20d   fly.io/app=fks-default-7zyjm3ovpdxmd0ep,kubernetes.io/m
   &lt;button 
     type="button"
     class="bubble-wrap z-20 absolute right-9 -mr-0.5 top-1.5 text-transparent group-hover:text-gray-400 group-hover:hocus:text-white focus:text-white bg-transparent group-hover:bg-gray-900 group-hover:hocus:bg-gray-700 focus:bg-gray-700 transition-colors grid place-items-center w-7 h-7 rounded-lg outline-none focus:outline-none"
-    data-wrap-target="#code-gz00rnda"
+    data-wrap-target="#code-ugqftfiv"
   &gt;
     &lt;svg class="w-4 h-4 pointer-events-none" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;g buffered-rendering="static"&gt;&lt;path d="M9.912 8.037h2.732c1.277 0 2.315-.962 2.315-2.237a2.325 2.325 0 00-2.315-2.31H2.959m10.228 9.01H2.959M6.802 8H2.959" /&gt;&lt;path d="M11.081 6.466L9.533 8.037l1.548 1.571" /&gt;&lt;/g&gt;&lt;/svg&gt;
     &lt;span class="bubble-sm bubble-tl [--offset-l:-9px] tail text-navy-950"&gt;
@@ -5168,14 +5168,14 @@ default   Active   20d   fly.io/app=fks-default-7zyjm3ovpdxmd0ep,kubernetes.io/m
     &lt;/span&gt;
   &lt;/button&gt;
   &lt;div class='highlight relative group'&gt;
-    &lt;pre class='highlight cmd'&gt;&lt;code id="code-gz00rnda"&gt;kubectl describe svc kuard
+    &lt;pre class='highlight cmd'&gt;&lt;code id="code-ugqftfiv"&gt;kubectl describe svc kuard
 &lt;/code&gt;&lt;/pre&gt;
   &lt;/div&gt;
 &lt;/div&gt;&lt;div class="highlight-wrapper group relative output"&gt;
   &lt;button 
     type="button"
     class="bubble-wrap z-20 absolute right-9 -mr-0.5 top-1.5 text-transparent group-hover:text-gray-400 group-hover:hocus:text-white focus:text-white bg-transparent group-hover:bg-gray-900 group-hover:hocus:bg-gray-700 focus:bg-gray-700 transition-colors grid place-items-center w-7 h-7 rounded-lg outline-none focus:outline-none"
-    data-wrap-target="#code-gdpmxayd"
+    data-wrap-target="#code-rqlwz1r0"
   &gt;
     &lt;svg class="w-4 h-4 pointer-events-none" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;g buffered-rendering="static"&gt;&lt;path d="M9.912 8.037h2.732c1.277 0 2.315-.962 2.315-2.237a2.325 2.325 0 00-2.315-2.31H2.959m10.228 9.01H2.959M6.802 8H2.959" /&gt;&lt;path d="M11.081 6.466L9.533 8.037l1.548 1.571" /&gt;&lt;/g&gt;&lt;/svg&gt;
     &lt;span class="bubble-sm bubble-tl [--offset-l:-9px] tail text-navy-950"&gt;
@@ -5193,7 +5193,7 @@ default   Active   20d   fly.io/app=fks-default-7zyjm3ovpdxmd0ep,kubernetes.io/m
     &lt;/span&gt;
   &lt;/button&gt;
   &lt;div class='highlight relative group'&gt;
-    &lt;pre class='highlight output'&gt;&lt;code id="code-gdpmxayd"&gt;Name:              kuard
+    &lt;pre class='highlight output'&gt;&lt;code id="code-rqlwz1r0"&gt;Name:              kuard
 Namespace:         default
 Labels:            app=kuard-fks
 Annotations:       fly.io/clusterip-allocator: configured
@@ -5223,7 +5223,7 @@ Events:            &amp;lt;none&amp;gt;
     &lt;p&gt;Email us at sales@fly.io&lt;/p&gt;
   &lt;/figcaption&gt;
   &lt;div class="image-container"&gt;
-    &lt;img src="/static/images/cta-kitty.webp" srcset="/static/images/cta-kitty@2x.webp 2x" alt=""&gt;
+    &lt;img src="/static/images/cta-rabbit.webp" srcset="/static/images/cta-rabbit@2x.webp 2x" alt=""&gt;
   &lt;/div&gt;
 &lt;/figure&gt;
 
@@ -5242,7 +5242,7 @@ Events:            &amp;lt;none&amp;gt;
     <link rel="alternate" href="https://fly.io/blog/tigris-public-beta/"/>
     <id>https://fly.io/blog/tigris-public-beta/</id>
     <published>2024-02-15T00:00:00+00:00</published>
-    <updated>2025-10-23T19:59:21+00:00</updated>
+    <updated>2025-01-30T19:43:24+00:00</updated>
     <media:thumbnail url="https://fly.io/blog/tigris-public-beta/assets/tigris-public-beta-thumb.webp"/>
     <content type="html">&lt;div class="lead"&gt;&lt;p&gt;We’re Fly.io and we transmute containers into VMs, running them on our hardware around the world with the power of Firecracker alchemy. That’s pretty cool, but we want to talk about something someone else built, that &lt;a href="https://fly.io/docs/reference/tigris/" title=""&gt;you can use today&lt;/a&gt; to build applications.&lt;/p&gt;
 &lt;/div&gt;
@@ -5306,7 +5306,7 @@ Events:            &amp;lt;none&amp;gt;
   &lt;button 
     type="button"
     class="bubble-wrap z-20 absolute right-9 -mr-0.5 top-1.5 text-transparent group-hover:text-gray-400 group-hover:hocus:text-white focus:text-white bg-transparent group-hover:bg-gray-900 group-hover:hocus:bg-gray-700 focus:bg-gray-700 transition-colors grid place-items-center w-7 h-7 rounded-lg outline-none focus:outline-none"
-    data-wrap-target="#code-b83kro8r"
+    data-wrap-target="#code-xsbxz8uv"
   &gt;
     &lt;svg class="w-4 h-4 pointer-events-none" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;g buffered-rendering="static"&gt;&lt;path d="M9.912 8.037h2.732c1.277 0 2.315-.962 2.315-2.237a2.325 2.325 0 00-2.315-2.31H2.959m10.228 9.01H2.959M6.802 8H2.959" /&gt;&lt;path d="M11.081 6.466L9.533 8.037l1.548 1.571" /&gt;&lt;/g&gt;&lt;/svg&gt;
     &lt;span class="bubble-sm bubble-tl [--offset-l:-9px] tail text-navy-950"&gt;
@@ -5324,7 +5324,7 @@ Events:            &amp;lt;none&amp;gt;
     &lt;/span&gt;
   &lt;/button&gt;
   &lt;div class='highlight relative group'&gt;
-    &lt;pre class='highlight '&gt;&lt;code id="code-b83kro8r"&gt;$ fly storage create
+    &lt;pre class='highlight '&gt;&lt;code id="code-xsbxz8uv"&gt;$ fly storage create
 Choose a name, use the default, or leave blank to generate one: xe-foo-images
 Your Tigris project (xe-foo-images) is ready. See details and next steps with: https://fly.io/docs/reference/tigris/
 
