@@ -1,0 +1,11 @@
+{
+  "id": "f9363455aa2a6c0245ff42f5",
+  "title": "Upgraded my Mac Studio",
+  "summary": "An upgrade story from Acer N7000 to Samsung 990 EVO external SSD for Mac Studio, resolving Finder freezes and enabling Apple Intelligence via the XcodeLLMEligible workaround for external drive users.",
+  "content": "<p>一年多之前我买了一台 Mac Studio 2022 (M1 Max)，在当时看来是一个很不错的价格 $1199。配置为 32G Memory + 512G SSD。</p>\n<p>由于我的数据太多，512G 是显然不够的，因此当时我就外挂硬盘盒，使用 Acer N7000 4TB，硬盘盒则是来自 ITGZ 的 ASM2464PD。（当然在今天看来这也许不是一个明智的选择）</p>\n<p>当时是看了很多 YouTuber 推荐 ITGZ 的硬盘盒，看了一下价格也比较便宜就直接买了。而至于为什么选择 Acer N7000，原因是当时在 JD 上别的 4TB 且无缓存的选择不多，知名大品牌价格也都不便宜。Acer N7000 购入的价格为 CN¥1392 = $192。</p>\n<p>其实使用了很长一段时间也没有发现有任何问题，直到一两个月之前，出现了频繁卡死的情况，连鼠标指针都没法动，再加上很多次 Finder 甚至几分钟都加载不出任何文件。我以为是 ASM2464PD 主控的问题，于是我买了 JHL7440 主控的硬盘盒进行测试，结果无济于事。甚至，一周之后 JHL7440 主控的硬盘盒还直接挂了。</p>\n<h2>升级</h2>\n<p>这一次选择了 SAMSUNG 990 EVO 2TB，Amazon 含税 $107。换上了 JHL7440 主控的 ACASIS。根据我的实际测试，来自 Intel 的 JHL7440 比 ASM2464PD 至少在发热方面的表现有显著的差距。用手摸硬盘盒，JHL7440 几乎感觉不到温度，仅仅只是比体温高一点点而已，大概常年保持在 42°C 左右。</p>\n<p><img src=\"https://i.uid.si/img/20250224yN0DzF.png\" alt=\"20250224yN0DzF\"></p>\n<p>速度表现还不错，几乎和内置硬盘的体验完全一致。</p>\n<p>之前因为一直使用外置硬盘，导致一直在 Mac Studio 上没法体验 Apple Intelligence。这一次换上新的硬盘，迁移完数据之后。想到能不能有办法骗过检测来启用。</p>\n<p><a href=\"https://github.com/Kyle-Ye/XcodeLLMEligible\" target=\"_blank\" rel=\"noopener noreferrer\">https://github.com/Kyle-Ye/XcodeLLMEligible</a></p>\n<p>最后发现 Kyle Ye 的项目可用，我使用的是不需要关闭 SIP 的 override file 的方式。不确定在 macOS 15.4 Beta 1 是否仍然可用，目前的测试结果是 China SKU 的设备是无法启用的，对于我这样的 US 版本外置硬盘用户就不确定了。</p>\n<p><img src=\"https://i.uid.si/img/20250224yivSes.png\" alt=\"20250224yivSes\"></p>",
+  "image": "https://i.uid.si/img/20250224yN0DzF.png",
+  "publishedAt": "2025-02-24T08:09:20Z",
+  "sourceId": "1dc4dbdb701e1314",
+  "sourceTitle": "Vincent's Notes",
+  "link": "https://missuo.me/posts/upgrade-mac-studio/"
+}

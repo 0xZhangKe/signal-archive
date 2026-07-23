@@ -1,0 +1,11 @@
+{
+  "id": "97af7a8946c554edfe416637",
+  "title": "Is your Blocking Queue... Blocking?",
+  "summary": "Table of Contents Emitting Custom Events Filtering \"Thread Park\" Events Towards Real-Time Analysis of JFR Events Java’s BlockingQueue hierarchy is widely used for coordinating work between different producer and consumer threads. When set up with a maximum capacity (i.e. a bounded queue ), no more elements can be added by producers to the queue once it is f…",
+  "content": "<div>\n<div>Table of Contents</div>\n<ul>\n<li><a target=\"_blank\" rel=\"noopener noreferrer\">Emitting Custom Events</a></li>\n<li><a target=\"_blank\" rel=\"noopener noreferrer\">Filtering &quot;Thread Park&quot; Events</a></li>\n<li><a target=\"_blank\" rel=\"noopener noreferrer\">Towards Real-Time Analysis of JFR Events</a></li>\n</ul>\n</div>\n<div>\n<p>Java’s <a href=\"https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/BlockingQueue.html\" target=\"_blank\" rel=\"noopener noreferrer\"><code>BlockingQueue</code></a> hierarchy is widely used for coordinating work between different producer and consumer threads.\nWhen set up with a maximum capacity (i.e. a <em>bounded queue</em>), no more elements can be added by producers to the queue once it is full, until a consumer has taken at least one element.\nFor scenarios where new work may arrive more quickly than it can be consumed, this applies means of back-pressure,\nensuring the application doesn’t run out of memory eventually, while enqueuing more and more work items.</p>\n</div>",
+  "image": null,
+  "publishedAt": "2023-01-03T21:10:00Z",
+  "sourceId": "d159169f81b06175",
+  "sourceTitle": "morling.dev -- Blog",
+  "link": "https://www.morling.dev/blog/is-your-blocking-queue-blocking/"
+}

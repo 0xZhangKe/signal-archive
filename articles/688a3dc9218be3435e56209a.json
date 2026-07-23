@@ -1,0 +1,11 @@
+{
+  "id": "688a3dc9218be3435e56209a",
+  "title": "Linux 下 Node Source 安装的 npm 权限问题",
+  "summary": "前言 近期安装了 Linux 系统作为主力机器的第二系统，双启动引导。 系统是 Pop!OS 20.04 LTS ，基于 Ubuntu 20.04 由于前端开发及部署需求，需要安装 node.js，于是使用 node source 提供的 node 发行版。 由于安装完成后，npm 存储包的目录为 /usr ，使用时必须加 sudo ，为了避免这种情况和权限安全问题，需要将 npm 的包存储到用户目录下，并且强烈不建议使用 sudo 来全局安装包到 /usr 目录下 方法 检查当前 npm 安装的包路径前缀 1 npm config get prefix 如果返回 /usr 则执行以下命令 1 2 3 mkdir ~/.npm-global export NPM_CONFIG_PREFIX = ~/.npm-…",
+  "content": "<h2>前言\n</h2><p>近期安装了 Linux 系统作为主力机器的第二系统，双启动引导。</p>\n<p>系统是 <code>Pop!OS 20.04 LTS</code>，基于 <code>Ubuntu 20.04</code></p>\n<p>由于前端开发及部署需求，需要安装 node.js，于是使用 node source 提供的 node 发行版。</p>\n<p>由于安装完成后，npm 存储包的目录为 <code>/usr</code>，使用时必须加 <code>sudo</code>，为了避免这种情况和权限安全问题，需要将 npm 的包存储到用户目录下，并且强烈不建议使用 sudo 来全局安装包到 <code>/usr</code> 目录下</p>\n<h2>方法\n</h2><p>检查当前 <code>npm</code> 安装的包路径前缀</p>\n<div><div>\n<table><tr><td>\n<pre><code><span>1\n</span></code></pre></td>\n<td>\n<pre><code><span><span>npm config get prefix\n</span></span></code></pre></td></tr></table>\n</div>\n</div><p>如果返回 <code>/usr</code> 则执行以下命令</p>\n<div><div>\n<table><tr><td>\n<pre><code><span>1\n</span><span>2\n</span><span>3\n</span></code></pre></td>\n<td>\n<pre><code><span><span>mkdir ~/.npm-global\n</span></span><span><span><span>export</span> <span>NPM_CONFIG_PREFIX</span><span>=</span>~/.npm-global\n</span></span><span><span><span>export</span> <span>PATH</span><span>=</span><span>$PATH</span>:~/.npm-global/bin\n</span></span></code></pre></td></tr></table>\n</div>\n</div><p>这个步骤创建了一个 npm 目录在用户主目录下并且令 <code>npm</code> 指向这里</p>\n<p>想要永久生效，执行以下命令将其导出至用户 Shell 的配置文件</p>\n<div><div>\n<table><tr><td>\n<pre><code><span>1\n</span></code></pre></td>\n<td>\n<pre><code><span><span><span>echo</span> -e <span>&quot;export NPM_CONFIG_PREFIX=~/.npm-global\\nexport PATH=\\$PATH:~/.npm-global/bin&quot;</span> &gt;&gt; ~/.bashrc\n</span></span></code></pre></td></tr></table>\n</div>\n</div>",
+  "image": null,
+  "publishedAt": "2022-03-20T17:16:02Z",
+  "sourceId": "3220115c042340a7",
+  "sourceTitle": "TaurusXin 的独立博客",
+  "link": "https://www.taurusxin.com/npm-prefix/"
+}

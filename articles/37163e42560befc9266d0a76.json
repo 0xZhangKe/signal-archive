@@ -1,0 +1,11 @@
+{
+  "id": "37163e42560befc9266d0a76",
+  "title": "Proxmox VE smooth upgrade",
+  "summary": "A quick guide to upgrading Proxmox VE without an enterprise subscription by adding the no-subscription repository and running apt dist-upgrade.",
+  "content": "<p>Recently, PVE released version 8.4.0, while I am still using 8.3.0 and plan to upgrade to the latest version.</p>\n<ol>\n<li>\n<p>Open the PVE management backend, select <code>pve</code>, and click <code>Shell</code>. This will open the command line for PVE.</p>\n</li>\n<li>\n<p>By default, if there is no enterprise subscription, updates cannot be checked, so you need to add a no-subscription source.list.</p>\n</li>\n</ol>\n<pre><code>nano /etc/apt/sources.list.d/pve-no-subscription.list\n# Enter the following line\ndeb http://download.proxmox.com/debian/pve bookworm pve-no-subscription\n</code></pre>\n<ol>\n<li>Update the PVE source and upgrade the PVE.</li>\n</ol>\n<pre><code>apt update\napt list --upgradable\napt dist-upgrade\nreboot\n</code></pre>\n<ol>\n<li>After the upgrade is complete, check the PVE version.</li>\n</ol>\n<pre><code>pveversion -v\n</code></pre>",
+  "image": null,
+  "publishedAt": "2025-04-10T17:38:10Z",
+  "sourceId": "1dc4dbdb701e1314",
+  "sourceTitle": "Vincent's Notes",
+  "link": "https://missuo.me/posts/pve-upgrade/"
+}

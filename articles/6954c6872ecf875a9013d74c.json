@@ -1,0 +1,11 @@
+{
+  "id": "6954c6872ecf875a9013d74c",
+  "title": "Leader Election With S3 Conditional Writes",
+  "summary": "Table of Contents The Algorithm Obtaining the Lock Expiring a Lock Lock Validity Fencing Off Zombies In distributed systems, for instance when scaling out some workload to multiple compute nodes, it is a common requirement to select a leader for performing a given task: only one of the nodes should process the records from a Kafka topic partition, write to…",
+  "content": "<div>\n<div>Table of Contents</div>\n<ul>\n<li><a target=\"_blank\" rel=\"noopener noreferrer\">The Algorithm</a></li>\n<li><a target=\"_blank\" rel=\"noopener noreferrer\">Obtaining the Lock</a></li>\n<li><a target=\"_blank\" rel=\"noopener noreferrer\">Expiring a Lock</a></li>\n<li><a target=\"_blank\" rel=\"noopener noreferrer\">Lock Validity</a></li>\n<li><a target=\"_blank\" rel=\"noopener noreferrer\">Fencing Off Zombies</a></li>\n</ul>\n</div>\n<div>\n<p>In distributed systems, for instance when scaling out some workload to multiple compute nodes,\nit is a common requirement to select a <em>leader</em> for performing a given task:\nonly one of the nodes should process the records from a Kafka topic partition, write to a file system, call a remote API, etc.\nOtherwise, multiple workers may end up doing the same task twice, overwriting each other’s data, and worse.</p>\n</div>",
+  "image": null,
+  "publishedAt": "2024-08-26T08:15:00Z",
+  "sourceId": "d159169f81b06175",
+  "sourceTitle": "morling.dev -- Blog",
+  "link": "https://www.morling.dev/blog/leader-election-with-s3-conditional-writes/"
+}

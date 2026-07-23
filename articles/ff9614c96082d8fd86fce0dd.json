@@ -1,0 +1,11 @@
+{
+  "id": "ff9614c96082d8fd86fce0dd",
+  "title": "The Anatomy of ct.sym — How javac Ensures Backwards Compatibility",
+  "summary": "One of the ultimate strengths of Java is its strong notion of backwards compatibility: Java applications and libraries built many years ago oftentimes run without problems on current JVMs, and the compiler of current JDKs can produce byte code, that is executable with earlier Java versions. For instance, JDK 16 supports byte code levels going back as far as…",
+  "content": "<div>\n<p>One of the ultimate strengths of Java is its strong notion of backwards compatibility:\nJava applications and libraries built many years ago oftentimes run without problems on current JVMs,\nand the compiler of current JDKs can produce byte code, that is executable with earlier Java versions.</p>\n</div>\n<div>\n<p>For instance, JDK 16 supports byte code levels going back as far as to Java 1.7;\nBut: <em>hic sunt dracones</em>.\nThe emitted byte code level is just one part of the story.\nIt’s equally important to consider which APIs of the JDK are used by the compiled code,\nand whether they are available in the targeted Java runtime version.\nAs an example, let’s consider this simple &quot;Hello World&quot; program:</p>\n</div>",
+  "image": null,
+  "publishedAt": "2021-04-26T17:45:00Z",
+  "sourceId": "d159169f81b06175",
+  "sourceTitle": "morling.dev -- Blog",
+  "link": "https://www.morling.dev/blog/the-anatomy-of-ct-sym-how-javac-ensures-backwards-compatibility/"
+}

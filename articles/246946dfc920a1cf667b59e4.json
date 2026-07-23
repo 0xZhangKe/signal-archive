@@ -1,0 +1,11 @@
+{
+  "id": "246946dfc920a1cf667b59e4",
+  "title": "Fix for Slow Open and Save Dialog on MacOS",
+  "summary": "My open/save dialog became really laggy the past week so I went looking for a fix",
+  "content": "<p>Since I updated to MacOS Tahoe 26.1 the open/save dialog of Finder became unbearably slow, like five seconds for every navigation step. I found <a href=\"https://www.reddit.com/r/MacOS/comments/1op1vn0/slowness_when_opening_finder_windows_from_browsers/\" target=\"_blank\" rel=\"noopener noreferrer\">this thread on Reddit</a> that suggested turning off iCloud Drive documents and desktop syncing but I&#x27;ve never had that turned on. It also suggested turning off iCloud drive all together but I was not about to do that.</p>\n<p>Someone in that thread linked to <a href=\"https://www.reddit.com/r/MacOS/comments/1oqb1lf/comment/nocqk2h/\" target=\"_blank\" rel=\"noopener noreferrer\">this solution</a> which is an easy one: delete the plist file that keeps track of recent folder locations.</p>\n<blockquote>\n<p>I deleted <code>com.apple.appkit.xpc.openAndSavePanelService.plist</code> and restarted, now the Open/Save panel opens quickly.</p>\n</blockquote>\n<p>To delete this file navigate to <code>~/Library/Preferences/</code> in Finder (<kbd>⌘</kbd> <kbd>⇧</kbd> + <kbd>G</kbd> or <code>Go</code> &gt; <code>Go to Folder</code>) then delete <code>com.apple.appkit.xpc.openAndSavePanelService.plist</code>. I didn&#x27;t even need to restart like the person on Reddit did and this immediately fixed it.</p>\n<p>Why am I making a blog post with the same information as the Reddit thread? The reasons are twofold:</p>\n<ol>\n<li>I&#x27;ll probably need to reference this in the future.</li>\n<li>I can&#x27;t rely on a random Reddit thread (or two in this case) still existing in a months time, let alone a year or more.</li>\n</ol>",
+  "image": null,
+  "publishedAt": "2025-12-10T08:59:41Z",
+  "sourceId": "99310985b3738c4e",
+  "sourceTitle": "rknight.me",
+  "link": "https://rknight.me/blog/fix-for-slow-open-and-save-dialog-macos/"
+}

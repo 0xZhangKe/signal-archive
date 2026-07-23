@@ -1,0 +1,11 @@
+{
+  "id": "6d478c1dbd7b2cddc9d73c7b",
+  "title": "一夜爆火的小工具 - 给你的头像加上圣诞帽",
+  "summary": "欢迎！ 如果你是从我的「圣诞帽🎄 By TaurusXin」站点过来的，那么非常欢迎你也点进了我的博客，这里是我创作和分享灵感与生活日常的地方，希望你能够喜欢这里！ 如果你不知道，那么可以 点击这里 去看看，这是一个非常有意思的小工具，用于给你的社交媒体头像戴上一顶圣诞帽。 起因 12 月 8 日早上，我收到了十几封来自腾讯云 EdgeOne 与 Cloudflare 的邮件，均提示我的 CDN 流量与请求数量异常高，已经接近我设定的阈值上限而被关停。 开始认为是 PCDN 又在刷流量，后面登上 EdgeOne 的控制台发现都是正常的流量访问，来源是遍布全球的地址。 此时 EdgeOne CDN 已经自动关停，而 Cloudflare 也提示我 Worker 与 Pages 的访问数即将达到阈值 扩容 到公司…",
+  "content": "<h2>欢迎！\n</h2><p>如果你是从我的「圣诞帽🎄 By TaurusXin」站点过来的，那么非常欢迎你也点进了我的博客，这里是我创作和分享灵感与生活日常的地方，希望你能够喜欢这里！</p>\n<p>如果你不知道，那么可以<a href=\"https://tools.taurusxin.com/hat/\" target=\"_blank\" rel=\"noopener noreferrer\">点击这里</a>去看看，这是一个非常有意思的小工具，用于给你的社交媒体头像戴上一顶圣诞帽。</p>\n<h2>起因\n</h2><p>12 月 8 日早上，我收到了十几封来自腾讯云 EdgeOne 与 Cloudflare 的邮件，均提示我的 CDN 流量与请求数量异常高，已经接近我设定的阈值上限而被关停。</p>\n<p>开始认为是 PCDN 又在刷流量，后面登上 EdgeOne 的控制台发现都是正常的流量访问，来源是遍布全球的地址。</p>\n<p><img alt=\"EdgeOne 控制台\" height=\"1666\" src=\"https://cdn.taurusxin.com/hugo/2025/12/08/edgeone.png\" width=\"3420\"></p>\n<p>此时 EdgeOne CDN 已经自动关停，而 Cloudflare 也提示我 Worker 与 Pages 的访问数即将达到阈值</p>\n<p><img alt=\"Cloudflare\" height=\"1169\" src=\"https://cdn.taurusxin.com/hugo/2025/12/08/image-20251208235559914.png\" width=\"1527\"></p>\n<h2>扩容\n</h2><p>到公司后，我立马开始着手流量激增的问题，好在我现在部署的服务器完全能够承载住此次流量，多亏了腾讯云的锐驰服务器。200M的带宽让资源非常轻松地就能够迅速加载。</p>\n<p>分析 Nginx 日志后，最高峰的访问次数来到了 8 日的下午 15:25 分左右，此时 HTTPS QPS 来到了近 100 q/s，流量一度在几十分钟内跑满了 200M 的服务器 BGP 带宽。</p>\n<p>紧急加上了 Umami 分析，大约一小时后，后台反馈的数据是，大多数的访问来源为 bing 搜索以及 QQ 空间</p>\n<p><img alt=\"Umami 来源域名\" height=\"670\" src=\"https://cdn.taurusxin.com/hugo/2025/12/09/image-20251209000434150.png\" width=\"956\"></p>\n<p>此时 bing 搜索的排名已经来到了相关关键词的第一位。</p>\n<p><img alt=\"Bing 搜索\" height=\"1880\" src=\"https://cdn.taurusxin.com/hugo/2025/12/09/image-20251209000227555.png\" width=\"2142\"></p>\n<h2>结语\n</h2><p>不管怎么说，这也是我制作的内容第一次出圈，也希望您能喜欢这里！</p>\n<p>另外附上项目的开源地址：<a href=\"https://github.com/taurusxin/ChristmasHat\" target=\"_blank\" rel=\"noopener noreferrer\">https://github.com/taurusxin/ChristmasHat</a></p>\n<p>有兴趣的可以自己去部署玩一玩！</p>\n<p>提前预祝所有阅读到这篇文章的伙伴圣诞快乐！</p>",
+  "image": "https://cdn.taurusxin.com/hugo/2025/12/08/edgeone.png",
+  "publishedAt": "2025-12-08T15:51:00Z",
+  "sourceId": "3220115c042340a7",
+  "sourceTitle": "TaurusXin 的独立博客",
+  "link": "https://www.taurusxin.com/christmas-hat/"
+}

@@ -1,0 +1,11 @@
+{
+  "id": "a120d0e6aa50908e2a42b41c",
+  "title": "Remove National Anti-Fraud Center on MIUI",
+  "summary": "A tutorial on removing the pre-installed National Anti-Fraud Center app from MIUI devices using ADB commands or a Magisk module for rooted phones.",
+  "content": "<h2>Uninstall Directly(Recommended)</h2>\n<blockquote>\n<p>ROOT is not required, but it may be reinstalled after updating the system.</p>\n</blockquote>\n<ol>\n<li>\n<p>Connect your phone to your computer and turn on <code>ADB</code> debugging.</p>\n</li>\n<li>\n<p>Install <code>ADB</code> CLI tools on your computer.</p>\n</li>\n</ol>\n<pre><code># macOS\nbrew install android-platform-tools\nor\nhttps://dl.google.com/android/repository/platform-tools-latest-darwin.zip\n\n# Windows\nhttps://dl.google.com/android/repository/platform-tools-latest-windows.zip\n</code></pre>\n<ol>\n<li>Execute the following code.</li>\n</ol>\n<pre><code>adb shell pm list package | grep com.miui.guardprovider\nadb uninstall --user 0 com.miui.guardprovider\nadb shell pm list users\n\n# if you find other users on your phone, please execute the following command.\nadb uninstall --user [USERID] com.miui.guardprovider\n</code></pre>\n<p><img src=\"https://i.uid.si/img/20230204UJZpcM.png\" alt=\"20230204UJZpcM\"></p>\n<h2>Install Magisk Module</h2>\n<blockquote>\n<p>ROOT is required, but updating the system works just as well.</p>\n</blockquote>\n<p><a href=\"https://github.com/MinaMichita/AntiAntiDefraud/\" target=\"_blank\" rel=\"noopener noreferrer\">MinaMichita/AntiAntiDefraud/</a></p>",
+  "image": "https://i.uid.si/img/20230204UJZpcM.png",
+  "publishedAt": "2023-02-04T00:01:04Z",
+  "sourceId": "1dc4dbdb701e1314",
+  "sourceTitle": "Vincent's Notes",
+  "link": "https://missuo.me/posts/fuck-miui/"
+}

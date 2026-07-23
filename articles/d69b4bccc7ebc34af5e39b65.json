@@ -1,0 +1,11 @@
+{
+  "id": "d69b4bccc7ebc34af5e39b65",
+  "title": "Quoting Thibault Sottiaux",
+  "summary": "On file deletions. We’ve investigated a handful of reports where GPT-5.6 unexpectedly deleted files. What we have found is that this most commonly occurs when: Full access mode is enabled and codex is run without sandboxing protections, including without auto review being enabled The model attempts to override the $HOME env var to define a temporary directo…",
+  "content": "<blockquote><p>On file deletions. We’ve investigated a handful of reports where GPT-5.6 unexpectedly deleted files. </p>\n<p>What we have  found is that this most commonly occurs when:</p>\n<ul>\n<li>Full access mode is enabled and codex is run without sandboxing protections, including without auto review being enabled</li>\n<li>The model attempts  to override the $HOME env var to define a temporary directory.</li>\n<li>The model makes an honest mistake and mistakenly deletes $HOME instead.</li>\n</ul></blockquote>\n<p>— <a href=\"https://twitter.com/thsottiaux/status/2077630111499882637\" target=\"_blank\" rel=\"noopener noreferrer\">Thibault Sottiaux</a>, describing a pretty gnarly Codex bug</p>\n\n    <p>Tags: <a href=\"https://simonwillison.net/tags/codex\" target=\"_blank\" rel=\"noopener noreferrer\">codex</a>, <a href=\"https://simonwillison.net/tags/coding-agents\" target=\"_blank\" rel=\"noopener noreferrer\">coding-agents</a>, <a href=\"https://simonwillison.net/tags/generative-ai\" target=\"_blank\" rel=\"noopener noreferrer\">generative-ai</a>, <a href=\"https://simonwillison.net/tags/ai\" target=\"_blank\" rel=\"noopener noreferrer\">ai</a>, <a href=\"https://simonwillison.net/tags/llms\" target=\"_blank\" rel=\"noopener noreferrer\">llms</a></p>",
+  "image": null,
+  "publishedAt": "2026-07-16T17:45:59Z",
+  "sourceId": "052434531db837d6",
+  "sourceTitle": "Simon Willison's Weblog",
+  "link": "https://simonwillison.net/2026/Jul/16/bad-codex-bug/#atom-everything"
+}

@@ -1,0 +1,114 @@
+{
+  "items": [
+    {
+      "id": "1710b60935767664ac2f18c0",
+      "title": "[CloudGoat]ECS Takeover",
+      "summary": "ECS快速入门 Amazon Elastic Container Service (Amazon ECS) 是AWS上的一个容器编排服务，它和K8s的区别在于ECS是Amazon自己实现的容器编排方案，而K8s是Google的开源容器编排解决方案。 通过下面的图快速了解下ECS的各个组件 Cluster manager 可以管理一个 Cluster 上的所有 Contaienr Instance。 Contaienr Instance 是一个 Linux 主机，上面运行着 Docker Engine 和 ECS Container Agent。Contaienr Instance 会向 Cluster manager 注册来让其对自己进行管理。 Service 是一个任务清单，Cluster manager…",
+      "image": "https://skyblu3519.github.io/post-images/ecs_takeover/1720886254514-106f0f9a-96c6-469b-8e6b-7cbf1258cd8e.png",
+      "publishedAt": "2024-07-15T14:31:35Z",
+      "sourceId": "4f5bf353ca5bd538",
+      "sourceTitle": "skkyblu3",
+      "link": "https://skyblu3519.github.io/post/cloudgoatecs-takeover/",
+      "detailPath": "articles/1710b60935767664ac2f18c0.json"
+    },
+    {
+      "id": "05c91d017d96b493e2c55cb1",
+      "title": "CloudGoat (☁️🐐)靶场初体验",
+      "summary": "一个开源的云靶场： https://github.com/RhinoSecurityLabs/cloudgoat/ 体验顺便学习一下📖 安装 & 配置 安装前确保机器： Linux or MacOS. Windows is not officially supported. Argument tab-completion requires bash 4.2+ (Linux, or OSX with some difficulty). Python3.6+ is required. Terraform >= 0.14 installed and in your $PATH. The AWS CLI installed and in your $PATH, and an AWS account with suff…",
+      "image": "https://skyblu3519.github.io/post-images/cloudgoat1/1720531972702-e43360e6-83e6-4a6b-b4a6-0b14500a8344.png",
+      "publishedAt": "2024-07-09T15:58:22Z",
+      "sourceId": "4f5bf353ca5bd538",
+      "sourceTitle": "skkyblu3",
+      "link": "https://skyblu3519.github.io/post/cloudgoat-ba-chang-chu-ti-yan/",
+      "detailPath": "articles/05c91d017d96b493e2c55cb1.json"
+    },
+    {
+      "id": "89619b6460ee7a606f396449",
+      "title": "在AWS上使用诱饵用户捕获攻击者",
+      "summary": "思路就是创建一个IAM用户，然后用CloudWatch监控该用户的行为，如果出现了该用户的操作则触发告警，并通过邮件通知。 使用控制台和Terraform两种方法实现 控制台创建 创建诱饵用户 在 IAM 控制台创建一个诱饵用户 honeyUser ，不附加任何权限 为 honeyUser 创建一个访问密钥，这对密钥之后便可以通过一些方法泄露出去，进而捕获可疑的攻击者。 创建CloudTrail并将事件发送至CloudWatch 进入 CloudTrail 控制台创建一个 trail （追踪），创建 CloudTrail 的时候需要选择一个S3来对日志进行存储，如果没有提前准备好则需要在这里新创建一个。 这里不使用加密方便后面数据的检索 配置向 CloudWatch Logs 发送事件，之后可以在 Cloud…",
+      "image": "https://skyblu3519.github.io/post-images/AWSHoneyToken/1720081492814-3e17265e-d254-41d0-a77f-54f84a647378.png",
+      "publishedAt": "2024-07-09T08:57:26Z",
+      "sourceId": "4f5bf353ca5bd538",
+      "sourceTitle": "skkyblu3",
+      "link": "https://skyblu3519.github.io/post/zai-aws-shang-shi-yong-you-er-yong-hu-bu-huo-gong-ji-zhe/",
+      "detailPath": "articles/89619b6460ee7a606f396449.json"
+    },
+    {
+      "id": "6406e58dd1512a44246a10eb",
+      "title": "AWS Account ID Reconnaissance",
+      "summary": "当获得一个AWS Account ID之后我们可能会对这个ID去做一些信息收集，而该账户的 IAM User/Role 是会被考虑的一个信息。下面就记一下如何通过一个 Account ID 收集该账户的 IAM User/Role。 使用角色信任策略 假设我们现在拿到了一个账户ID为 427648302155 ，我现在想知道这个账户下有哪些User和Role。 首先，我们在自己的AWS账户里随便新建一个角色，并将信任策略配置为 { \"Version\": \"2012-10-17\", \"Statement\": [ { \"Sid\": \"Statement1\", \"Effect\": \"Deny\", \"Principal\": { \"AWS\": \"*\" }, \"Action\": \"sts:AssumeRole\" } ]…",
+      "image": "https://skyblu3519.github.io/post-images/AWSIAMRolesReconnaissance/1720015041788-f8c779ad-ba14-4682-b64f-ed71f0c1722c.png",
+      "publishedAt": "2024-07-03T15:16:12Z",
+      "sourceId": "4f5bf353ca5bd538",
+      "sourceTitle": "skkyblu3",
+      "link": "https://skyblu3519.github.io/post/aws-account-id-reconnaissance/",
+      "detailPath": "articles/6406e58dd1512a44246a10eb.json"
+    },
+    {
+      "id": "18499d43debf6065fa6924fb",
+      "title": "[Pwnedlabs]Command Injection to EC2 User Data Privilege Escalation",
+      "summary": "题目地址： https://pwnedlabs.io/labs/command-injection-to-ec2-user-data-privilege-escalation 题目描述： After a successful smishing attack on your client, Huge Logistics, you've obtained AWS credentials for a user account. Your task is to use these initial credentials to explore and possibly expand your access within their cloud environment. Your objective is to demo…",
+      "image": "https://skyblu3519.github.io/post-images/Ec2UserData/1719995161639-adbba1ba-52de-4f19-900a-d6ab377efac2.png",
+      "publishedAt": "2024-07-03T15:10:08Z",
+      "sourceId": "4f5bf353ca5bd538",
+      "sourceTitle": "skkyblu3",
+      "link": "https://skyblu3519.github.io/post/pwnedlabscommand-injection-to-ec2-user-data-privilege-escalation/",
+      "detailPath": "articles/18499d43debf6065fa6924fb.json"
+    },
+    {
+      "id": "ff923f9e559d02876a7fda0e",
+      "title": "[Docker容器安全3]Docker文件存储 & 挂载宿主机 procfs 容器逃逸",
+      "summary": "Docker文件存储背景知识 Docker 镜像 Docker 镜像是一个由多个层（layers）组成的只读模板。这些层堆叠在一起，构成了一个完整的文件系统，镜像可以用来创建容器。 层（Layer） 每个层通常对应于 Dockerfile 中的一条指令（如 FROM、COPY、RUN 等）。这些层是只读的，并且通过叠加技术（union file system）组合在一起，形成了镜像的最终内容。 层的堆叠和镜像 只读层：这些层是只读的，并且是镜像的一部分。每个层包含了与前一层的差异部分。这些层共同构成了镜像的文件系统。 可写层：当容器启动时，会在镜像的所有只读层之上添加一个新的可写层，这一层是容器专有的，存储运行容器时的所有变更。 每个容器都有其自己的可写容器层，并且所有更改都存储在该容器层中，所以多个容器可以…",
+      "image": "https://skyblu3519.github.io/post-images/1715441777002.png",
+      "publishedAt": "2024-05-11T15:35:31Z",
+      "sourceId": "4f5bf353ca5bd538",
+      "sourceTitle": "skkyblu3",
+      "link": "https://skyblu3519.github.io/post/docker-rong-qi-an-quan-3docker-wen-jian-cun-chu-and-gua-zai-su-zhu-ji-procfs-rong-qi-tao-yi/",
+      "detailPath": "articles/ff923f9e559d02876a7fda0e.json"
+    },
+    {
+      "id": "7dff68c0e3fb9cffc9aa881c",
+      "title": "[Docker容器安全2]Linux Capabilities & 特权模式容器逃逸",
+      "summary": "笔记 学习下Linux capabilities 概念 Linux capabilities 将 root 权限划分为较小的、独立的单元，使进程可以拥有部分权限，以对 root 权限进行更细粒度的控制。 有哪些？ capability 名称 描述 CAP_AUDIT_CONTROL 启用和禁用内核审计；改变审计过滤规则；检索审计状态和过滤规则 CAP_AUDIT_READ 允许通过 multicast netlink 套接字读取审计日志 CAP_AUDIT_WRITE 将记录写入内核审计日志 CAP_BLOCK_SUSPEND 使用可以阻止系统挂起的特性 CAP_CHOWN 修改文件所有者的权限 CAP_DAC_OVERRIDE 忽略文件的 DAC 访问限制 CAP_DAC_READ_SEARCH 忽略文件读…",
+      "image": "https://skyblu3519.github.io/post-images/1715348908477.png",
+      "publishedAt": "2024-05-10T13:47:38Z",
+      "sourceId": "4f5bf353ca5bd538",
+      "sourceTitle": "skkyblu3",
+      "link": "https://skyblu3519.github.io/post/docker-rong-qi-an-quan-2linux-capabilities-and-te-quan-mo-shi-rong-qi-tao-yi/",
+      "detailPath": "articles/7dff68c0e3fb9cffc9aa881c.json"
+    },
+    {
+      "id": "2bce450ef08a34b671bebaaf",
+      "title": "SpEL补充",
+      "summary": "什么是EL？ 表达式语言（Expression Language，简称EL）是一种专门用于在应用程序中访问数据和函数的轻量级编程语言，通常用于Web应用程序中。它最初是为了简化在JavaServer Pages (JSP) 中的页面编码而设计的，但其使用已经扩展到其他技术领域。 什么是SpEL？ SpEL(Spring Expression Language)是Spring框架中的一个强大的表达式语言，它扩展了标准EL的概念。SpEL支持更复杂的表达式如方法调用、字符串模板表达式、数组创建、列表选择、映射访问等。 SpEL与传统的EL相比，提供了更加丰富的功能集，可以在更广泛的Spring项目中使用，如安全性表达式、数据绑定、条件表达式等。SpEL不仅仅限于Web环境，也可用于任何需要动态表达式计算的Spri…",
+      "image": "https://skyblu3519.github.io/post-images/spel_re/1714828150238-d60d5fc8-1634-4843-b911-73bc62960c95.png",
+      "publishedAt": "2024-05-04T16:04:02Z",
+      "sourceId": "4f5bf353ca5bd538",
+      "sourceTitle": "skkyblu3",
+      "link": "https://skyblu3519.github.io/post/spel-bu-chong/",
+      "detailPath": "articles/2bce450ef08a34b671bebaaf.json"
+    },
+    {
+      "id": "4ccb06e037f1ab4283a61eba",
+      "title": "SpEL表达式注入初见",
+      "summary": "背景知识 SpEL注入漏洞是一种安全漏洞，主要发生在使用Spring框架的应用中。Spring Expression Language（SpEL）是一个强大的表达式语言，用于在运行时查询和操作对象图。虽然SpEL提供了很多便利，但如果不正确地处理用户输入，就可能导致注入攻击。 测试代码： import org.springframework.expression.Expression; import org.springframework.expression.ExpressionParser; import org.springframework.expression.spel.standard.SpelExpressionParser; import org.springframework.express…",
+      "image": "https://skyblu3519.github.io/post-images/SpEL/1713623131522-2c5170bc-9fec-4090-9c7e-976424ef22b5.png",
+      "publishedAt": "2024-04-21T19:09:55Z",
+      "sourceId": "4f5bf353ca5bd538",
+      "sourceTitle": "skkyblu3",
+      "link": "https://skyblu3519.github.io/post/spel-biao-da-shi-zhu-ru-chu-jian/",
+      "detailPath": "articles/4ccb06e037f1ab4283a61eba.json"
+    },
+    {
+      "id": "301c8651219d53196909d896",
+      "title": "Thymeleaf模板注入",
+      "summary": "实验环境参考： https://github.com/veracode-research/spring-view-manipulation 背景知识 片段表达式 片段表达式语法： ~{templatename::selector} ，会在/WEB-INF/templates/目录下寻找名为templatename的模版中定义的fragment。 ~{templatename} ，引用整个 templatename 模版文件作为 fragment ~{::selector} 或 ~{this::selector} ，引用来自同一模版文件名为 selector 的 fragmnt 其中 selector 可以是通过 th:fragment 定义的片段，也可以是类选择器、ID选择器等。 当 ~{} 片段表达式中出现…",
+      "image": "https://skyblu3519.github.io/post-images/Thymeleaf_ssti/1712932311102-6eef5ab3-cf2b-4bc3-a3f1-fd9be12f67dd.png",
+      "publishedAt": "2024-04-12T16:53:08Z",
+      "sourceId": "4f5bf353ca5bd538",
+      "sourceTitle": "skkyblu3",
+      "link": "https://skyblu3519.github.io/post/thymeleaf-mo-ban-zhu-ru/",
+      "detailPath": "articles/301c8651219d53196909d896.json"
+    }
+  ]
+}

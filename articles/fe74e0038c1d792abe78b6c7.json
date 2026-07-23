@@ -1,0 +1,11 @@
+{
+  "id": "fe74e0038c1d792abe78b6c7",
+  "title": "Daily Driver: Makefile",
+  "summary": "During the shadow rendering changes I was generating new sprites quite frequently, and I quickly realised that my mess of shell scripts just wasn’t a good enough system to be used in anger. I would have to call my scripts manually, with a variety of parameters, and remember a bunch of stuff unique to each script. So I spent a day converting the script syste…",
+  "content": "<p>During the shadow rendering changes I was generating new sprites quite frequently, and I quickly realised that my mess of shell scripts just wasn’t a good enough system to be used in anger. I would have to call my scripts manually, with a variety of parameters, and remember a bunch of stuff unique to each script.</p>\n\n<p>So I spent a day converting the script system into a Makefile, with rules for:</p>\n\n<ul>\n  <li>rendering</li>\n  <li>stitching</li>\n  <li>post-processing</li>\n  <li>copying</li>\n  <li>cleaning</li>\n</ul>\n\n<p>I also improved the scripts to make them touch all their output files with the last-modified timestamp of the original 3D model, meaning the scripts could become self-aware and know which output files are up-to-date and which need re-rendering.</p>\n\n<p>With this system I can generate a full set of renders of all vehicles in ~minutes, or render just a single car in ~seconds. This is such a huge time saver and has enabled me to iterate on car designs more quickly and easily than ever before. I’m already seeing the gains in much better sprites.</p>\n\n<p>Believe it or not this was the first Makefile I’ve ever needed to write from scratch. I knew enough about them to know that they would be a good fit for this task, and it was fun to learn more about something I only knew in passing.</p>",
+  "image": null,
+  "publishedAt": "2021-05-19T00:00:00Z",
+  "sourceId": "625f69e92fbd1d94",
+  "sourceTitle": "⌘I",
+  "link": "https://blog.gingerbeardman.com/2021/05/19/makefile/"
+}

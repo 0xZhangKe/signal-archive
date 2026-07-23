@@ -1,0 +1,11 @@
+{
+  "id": "b975f20b1aebaec610e59ae7",
+  "title": "jlink's Missing Link: API Signature Validation",
+  "summary": "Table of Contents The Example The API Signature Check jlink Plug-in Summary Discussions around Java’s jlink tool typically center around savings in terms of (disk) space. Instead of shipping an entire JDK, a custom runtime image created with jlink contains only those JDK modules which an application actually requires, resulting in smaller distributables and…",
+  "content": "<div>\n<div>Table of Contents</div>\n<ul>\n<li><a target=\"_blank\" rel=\"noopener noreferrer\">The Example</a></li>\n<li><a target=\"_blank\" rel=\"noopener noreferrer\">The API Signature Check jlink Plug-in</a></li>\n<li><a target=\"_blank\" rel=\"noopener noreferrer\">Summary</a></li>\n</ul>\n</div>\n<div>\n<p>Discussions around Java’s <a href=\"https://openjdk.java.net/jeps/282\" target=\"_blank\" rel=\"noopener noreferrer\">jlink</a> tool typically center around savings in terms of (disk) space.\nInstead of shipping an entire JDK,\na custom runtime image created with jlink contains only those JDK modules which an application actually requires,\nresulting in smaller distributables and <a target=\"_blank\" rel=\"noopener noreferrer\">container images</a>.</p>\n</div>\n<div>\n<p>But the contribution of jlink — as a part of the Java module system at large — to the development of Java application’s is bigger than that:\nwith the notion of <em>link time</em> it defines an optional complement to the well known phases <em>compile time</em> and application <em>run-time</em>:</p>\n</div>\n<div>\n<blockquote>\n<div>\n<p>Link time is an opportunity to do whole-world optimizations that are otherwise difficult at compile time or costly at run-time. An example would be to optimize a computation when all its inputs become constant (i.e., not unknown). A follow-up optimization would be to remove code that is no longer reachable.</p>\n</div>\n</blockquote>\n</div>",
+  "image": null,
+  "publishedAt": "2020-12-28T11:20:00Z",
+  "sourceId": "d159169f81b06175",
+  "sourceTitle": "morling.dev -- Blog",
+  "link": "https://www.morling.dev/blog/jlinks-missing-link-api-signature-validation/"
+}

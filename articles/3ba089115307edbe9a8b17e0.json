@@ -1,0 +1,11 @@
+{
+  "id": "3ba089115307edbe9a8b17e0",
+  "title": "为什么 Github OAuth 故意拦截 CORS",
+  "summary": "跟AI发闹骚学到的 https://github.com/isaacs/github/issues/330 Allowing CORS for the endpoint you mentioned would mean that you could complete this step of the Web flow from a browser: And this would mean that you're hard-coding your client_id and client_secret into a webpage (or JS file loaded into that webpage) for everyone to see. This would indeed cause security…",
+  "content": "<p>跟AI发闹骚学到的</p>\n<p><a href=\"https://github.com/isaacs/github/issues/330\" target=\"_blank\" rel=\"noopener noreferrer\">https://github.com/isaacs/github/issues/330</a></p>\n<blockquote>\n<p>Allowing CORS for the endpoint you mentioned would mean that you could complete this step of the Web flow from a browser:<br>\nAnd this would mean that you&#x27;re hard-coding your client_id and client_secret into a webpage (or JS file loaded into that webpage) for everyone to see. This would indeed cause security concerns since the client_secret should be kept secret. If someone got hold of your client_id and client_secret, they could impersonate you application, and for example -- wipe all the tokens for that application:</p>\n</blockquote>\n<p>如果允许在浏览器通过 <code>client_id</code>, <code>client_secret</code> 交换得到 <code>access_token</code>，那么实际上你的账号等于公开裸奔，你所有的 github 资产等于公开被人控制。所以必须走一个服务端流程，然后再把 <code>access_token</code> 下发</p>\n<p>呃，好像很有道理。</p>",
+  "image": null,
+  "publishedAt": "2026-07-18T11:32:00Z",
+  "sourceId": "a864c53722a17b19",
+  "sourceTitle": "est's blog",
+  "link": "https://blog.est.im/2026/stdout-29"
+}

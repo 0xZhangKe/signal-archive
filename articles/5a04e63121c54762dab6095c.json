@@ -1,0 +1,11 @@
+{
+  "id": "5a04e63121c54762dab6095c",
+  "title": "大幅度优化你的 VPS 网速",
+  "summary": "网速优化脚本 我在买到手一台新的独立服务器或者是虚拟服务器(VPS)时，第一件事情就是先对服务器的网络进行优化，尤其是海外的服务器到国内的速度，将会大幅度提升。 我将要做的内容全都整合进一个脚本，使用以下命令行即可执行。 1 wget https://gist.githubusercontent.com/taurusxin/a9fc3ad039c44ab66fca0320045719b0/raw/3906efed227ee14fc5b4ac8eb4eea8855021ef19/optimize.sh && sudo bash optimize.sh 具体做的事情，有以下几点： 更新软件源和软件包。 安装 haveged 优化 Linux 随机数生成器，可以解决在某些情况下，系统熵过低的问题。 最关键的，内核网…",
+  "content": "<h2>网速优化脚本\n</h2><p>我在买到手一台新的独立服务器或者是虚拟服务器(VPS)时，第一件事情就是先对服务器的网络进行优化，尤其是海外的服务器到国内的速度，将会大幅度提升。</p>\n<p>我将要做的内容全都整合进一个脚本，使用以下命令行即可执行。</p>\n<div><div>\n<table><tr><td>\n<pre><code><span>1\n</span></code></pre></td>\n<td>\n<pre><code><span><span>wget https://gist.githubusercontent.com/taurusxin/a9fc3ad039c44ab66fca0320045719b0/raw/3906efed227ee14fc5b4ac8eb4eea8855021ef19/optimize.sh <span>&amp;&amp;</span> sudo bash optimize.sh\n</span></span></code></pre></td></tr></table>\n</div>\n</div><p>具体做的事情，有以下几点：</p>\n<ol>\n<li>更新软件源和软件包。</li>\n<li>安装 <code>haveged</code> 优化 Linux 随机数生成器，可以解决在某些情况下，系统熵过低的问题。</li>\n<li>最关键的，内核网络参数优化，具体就是对一些 IPv4 的 TCP 参数做了调整，另外还启用了 Linux 原版 BBR 拥塞控制算法，这个算法是 Google 开发的，可以大幅度提升网络速度。</li>\n</ol>\n<h3>具体测速\n</h3><p>如图所示是我的一台位于香港的 VPS，在使用脚本之前的速度如下</p>\n<p><img alt=\"before\" height=\"366\" src=\"https://cdn.taurusxin.com/hugo/2023/05/22/before.jpg\" width=\"796\"></p>\n<p>安装脚本后，测速如下</p>\n<p><img alt=\"after\" height=\"334\" src=\"https://cdn.taurusxin.com/hugo/2023/05/22/after.jpg\" width=\"790\"></p>",
+  "image": "https://cdn.taurusxin.com/hugo/2023/05/22/before.jpg",
+  "publishedAt": "2023-05-21T23:59:00Z",
+  "sourceId": "3220115c042340a7",
+  "sourceTitle": "TaurusXin 的独立博客",
+  "link": "https://www.taurusxin.com/linux-network-optimize/"
+}

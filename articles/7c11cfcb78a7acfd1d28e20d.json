@@ -1,0 +1,11 @@
+{
+  "id": "7c11cfcb78a7acfd1d28e20d",
+  "title": "利用tmpfs加速gnome-shell overview模式Applications索引",
+  "summary": "gnome-shell的overview模式着实是个尤物，动态工作区和任务管理丝毫不输于Lion的Mission Control，而Applications与Lion的LaunchPad也是异曲同工。 然而有一点不爽，每次加载Applications都很慢，而且硬盘狂转，搞的这个很美丽的功能几乎不被使用。有必要加速一下。 考虑到速度瓶颈主要是磁盘读取 /* 对MBA的SSD表示羡慕嫉妒恨 */ ，想到如果能预先把Applications里的内容缓存到内存里就好了，Applications里其实是加载了/usr/share/applications里的文件，于是想到了把/usr/share/applications 挂载为 tmpfs 。 //总共不过[0-9]M的文件，这点内存咱还是有的 mkdir -p /…",
+  "content": "<p>gnome-shell的overview模式着实是个尤物，动态工作区和任务管理丝毫不输于Lion的Mission Control，而Applications与Lion的LaunchPad也是异曲同工。</p>\n<p>然而有一点不爽，每次加载Applications都很慢，而且硬盘狂转，搞的这个很美丽的功能几乎不被使用。有必要加速一下。</p>\n<p>考虑到速度瓶颈主要是磁盘读取 <span>/* 对MBA的SSD表示羡慕嫉妒恨 */ </span>，想到如果能预先把Applications里的内容缓存到内存里就好了，Applications里其实是加载了/usr/share/applications里的文件，于是想到了把/usr/share/applications 挂载为 tmpfs 。 <span>//总共不过[0-9]M的文件，这点内存咱还是有的 </span></p>\n<div><pre><code><span><span>mkdir -p /tmp/app_temp\n</span></span><span><span>cp -aR /usr/share/applications/* /tmp/app_temp <span>#先把文件备份出来</span>\n</span></span><span><span>mount -t tmpfs none /usr/share/applications\n</span></span><span><span>cp -aR /tmp/app_temp/* /usr/share/applications\n</span></span></code></pre></div><p>现在试试，速度是不是快多了？</p>",
+  "image": null,
+  "publishedAt": "2011-07-29T00:00:00Z",
+  "sourceId": "1a53726dacd05db7",
+  "sourceTitle": "K.I.S.S",
+  "link": "https://bigeagle.me/2011/07/gnome_shell_app/"
+}

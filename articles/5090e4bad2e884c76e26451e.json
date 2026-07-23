@@ -1,0 +1,11 @@
+{
+  "id": "5090e4bad2e884c76e26451e",
+  "title": "Daily Driver: Automation",
+  "summary": "In preparation for regenerating my many cars with x3 the number of sprites, I thought I’d try to sort the rendered frames automatically into named folders because this is fiddly manual work I really don’t enjoy, and a bit of a bottleneck in my asset generation. For each pose I have to render the frames then group the new image files into a folder that descr…",
+  "content": "<p>In preparation for regenerating my many cars with x3 the number of sprites, I thought I’d try to sort the rendered frames automatically into named folders because this is fiddly manual work I really don’t enjoy, and a bit of a bottleneck in my asset generation. For each pose I have to render the frames then group the new image files into a folder that describes that pose, as these multiple folders are later be used for batch processing.</p>\n\n<p>I could use macOS Folder Actions for this, but I’ve been using an app called <a href=\"https://www.noodlesoft.com/\" target=\"_blank\" rel=\"noopener noreferrer\">Hazel</a> for many years to do this sort of thing, so that was my first choice.</p>\n\n<p>The hard work is done with a shell script, as I’m quite comfortable writing those.</p>\n\n<h2>Flow</h2>\n\n<ol>\n  <li>get most recently saved .scad file</li>\n  <li>parse filename to capture car name</li>\n  <li>parse file contents for left/right/forward/backward tilt values</li>\n  <li>concatenate all this information as our new folder name</li>\n  <li>create new folder</li>\n  <li>move matching file into new folder</li>\n</ol>\n\n<p>This means that the folder name will change based on the render settings in the file—perfect!</p>\n\n<p>I still have to make 9 small sets of manual text changes to render each car pose, so that’s the next thing I’ll try to automate by running OpenSCAD from the command line.</p>\n\n<p><img src=\"https://cdn.gingerbeardman.com/images/posts/daily-driver-automation.png\" alt=\"PNG\"></p>",
+  "image": "https://cdn.gingerbeardman.com/images/posts/daily-driver-automation.png",
+  "publishedAt": "2020-10-07T00:00:00Z",
+  "sourceId": "625f69e92fbd1d94",
+  "sourceTitle": "⌘I",
+  "link": "https://blog.gingerbeardman.com/2020/10/07/automation/"
+}

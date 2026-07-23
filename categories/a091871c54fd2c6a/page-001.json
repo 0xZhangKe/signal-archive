@@ -1,0 +1,147 @@
+{
+  "items": [
+    {
+      "id": "3bc25a2bd7b9e65bf6032bea",
+      "title": "Turning Billions of Strings into Integers Every Second Without Collisions",
+      "summary": "I’ve recently started building a POC of a Redis RESP3 Wire Compatible Key/Value Database built on FoundationDB with @calabro.io and though it’s rather early, it’s already spawned a fun distributed systems problem that I thought would be interesting to share. Previously I’ve written about how I implemented a Graph DB via Roaring Bitmaps, representing relatio…",
+      "image": null,
+      "publishedAt": "2025-09-26T00:00:00Z",
+      "sourceId": "a091871c54fd2c6a",
+      "sourceTitle": "Jaz's Blog",
+      "link": "https://jazco.dev/2025/09/26/interning/",
+      "detailPath": "articles/3bc25a2bd7b9e65bf6032bea.json"
+    },
+    {
+      "id": "68b2f26b48a050e295dc8155",
+      "title": "When Imperfect Systems are Good, Actually: Bluesky's Lossy Timelines",
+      "summary": "Often when designing systems, we aim for perfection in things like consistency of data, availability, latency, and more. The hardest part of system design is that it’s difficult (if not impossible) to design systems that have perfect consistency, perfect availability, incredibly low latency, and incredibly high throughput, all at the same time. Instead, whe…",
+      "image": null,
+      "publishedAt": "2025-02-19T00:00:00Z",
+      "sourceId": "a091871c54fd2c6a",
+      "sourceTitle": "Jaz's Blog",
+      "link": "https://jazco.dev/2025/02/19/imperfection/",
+      "detailPath": "articles/68b2f26b48a050e295dc8155.json"
+    },
+    {
+      "id": "b26ba191a18c348634a4b737",
+      "title": "Jetstream: Shrinking the AT Proto Firehose by >99%",
+      "summary": "Bluesky recently saw a massive spike in activity in response to Brazil’s ban of Twitter. As a result, the AT Proto event firehose provided by Bluesky’s Relay at bsky.network has increased in volume by a huge amount. The average event rate during this surge increased by ~1,300%. Before this new surge in activity, the firehose would produce around 24 GB/day o…",
+      "image": null,
+      "publishedAt": "2024-09-24T00:00:00Z",
+      "sourceId": "a091871c54fd2c6a",
+      "sourceTitle": "Jaz's Blog",
+      "link": "https://jazco.dev/2024/09/24/jetstream/",
+      "detailPath": "articles/b26ba191a18c348634a4b737.json"
+    },
+    {
+      "id": "8c900e4694e1121b9afef03f",
+      "title": "How HLS Works",
+      "summary": "Over the past few weeks, I’ve been building out server-side short video support for Bluesky . The major aim of this feature is to support short (90 second max) video streaming at a quality that doesn’t cost an arm and a leg for us to provide for free. In order to stay within these constraints, we’re considering making use of a video CDN that can bear the br…",
+      "image": null,
+      "publishedAt": "2024-07-05T00:00:00Z",
+      "sourceId": "a091871c54fd2c6a",
+      "sourceTitle": "Jaz's Blog",
+      "link": "https://jazco.dev/2024/07/05/hls/",
+      "detailPath": "articles/8c900e4694e1121b9afef03f.json"
+    },
+    {
+      "id": "1b6855a22025a57a032dc1ca",
+      "title": "An entire Social Network in 1.6GB (GraphD Part 2)",
+      "summary": "In Part 1 of this series, we tried to answer the question “who do you follow who also follows user B” in Bluesky , a social network with millions of users and hundreds of millions of follow relationships. At the conclusion of the post, we’d developed an in-memory graph store for the network that uses HashMaps and HashSets to keep track of the followers of e…",
+      "image": null,
+      "publishedAt": "2024-04-20T00:00:00Z",
+      "sourceId": "a091871c54fd2c6a",
+      "sourceTitle": "Jaz's Blog",
+      "link": "https://jazco.dev/2024/04/20/roaring-bitmaps/",
+      "detailPath": "articles/1b6855a22025a57a032dc1ca.json"
+    },
+    {
+      "id": "c6dff8b01b2aa44bc813d6dd",
+      "title": "Your Data Fits in Memory (GraphD Part 1)",
+      "summary": "I recently shipped a new revision of Bluesky’s global AppView at the start of February and things have been going very well. The system scales and handles millions of users without breaking a sweat, the ScyllaDB-backed Data Plane service sits at under 5% DB load in the most intense production workloads, and things are going great. You know what that means,…",
+      "image": null,
+      "publishedAt": "2024-04-15T00:00:00Z",
+      "sourceId": "a091871c54fd2c6a",
+      "sourceTitle": "Jaz's Blog",
+      "link": "https://jazco.dev/2024/04/15/in-memory-graphs/",
+      "detailPath": "articles/c6dff8b01b2aa44bc813d6dd.json"
+    },
+    {
+      "id": "ce308660726f97ef36e248f3",
+      "title": "Scaling Go to 192 Cores with Heavy I/O",
+      "summary": "For the past few months I’ve been working alongside Why , Jacob , Dan , and Divy on a new revision of Bluesky’s global AppView. The AppView is a piece of infrastructure that aggregates posts, likes, follows, etc. from all across ATProto and merges them into a consistent view of the network, allowing users to fetch their timelines, notifications, custom feed…",
+      "image": null,
+      "publishedAt": "2024-01-10T00:00:00Z",
+      "sourceId": "a091871c54fd2c6a",
+      "sourceTitle": "Jaz's Blog",
+      "link": "https://jazco.dev/2024/01/10/golang-and-epoll/",
+      "detailPath": "articles/ce308660726f97ef36e248f3.json"
+    },
+    {
+      "id": "eb949d34890ec26aef99de11",
+      "title": "Solving Thundering Herds with Request Coalescing in Go",
+      "summary": "Caches are a wonderful way to make your most frequent operations cheaper. If you’ve got a resource somewhere on disk (or a network hop away) that is accessed often, changes infrequently, and fits in memory, you’ve got an excellent candidate for a cache! Caching Celebrity Posts For example, consider a social media post from a famous celebrity. This celebrity…",
+      "image": null,
+      "publishedAt": "2023-09-28T00:00:00Z",
+      "sourceId": "a091871c54fd2c6a",
+      "sourceTitle": "Jaz's Blog",
+      "link": "https://jazco.dev/2023/09/28/request-coalescing/",
+      "detailPath": "articles/eb949d34890ec26aef99de11.json"
+    },
+    {
+      "id": "f7226726c1e5eb6bbe4698d4",
+      "title": "Speeding Up Massive PostgreSQL Joins with Common Table Expressions",
+      "summary": "I’ve been continuing to work on a growing series of services that archive, analyze, and represent data from a social network. This network creates text-based posts at a rate of around 400,000 posts per day, and I’ve been feeding the posts through different ML models to try and gauge the broad sentiment of the network and help find posters that spread good v…",
+      "image": null,
+      "publishedAt": "2023-08-10T00:00:00Z",
+      "sourceId": "a091871c54fd2c6a",
+      "sourceTitle": "Jaz's Blog",
+      "link": "https://jazco.dev/2023/08/10/query-optimization/",
+      "detailPath": "articles/f7226726c1e5eb6bbe4698d4.json"
+    },
+    {
+      "id": "e2c14575a87189f83b5df4ec",
+      "title": "Speeding up Postgres Queries by 200x with Analyze",
+      "summary": "I’ve been working on a growing series of services that archive, analyze, and represent data from a social network. Part of this process involves archiving every post on a social network, running Computer Vision models on every image posted to the network, and running sentiment analysis on the text of every post on the network. Exposition: Custom Feeds I’ve…",
+      "image": null,
+      "publishedAt": "2023-05-20T00:00:00Z",
+      "sourceId": "a091871c54fd2c6a",
+      "sourceTitle": "Jaz's Blog",
+      "link": "https://jazco.dev/2023/05/20/postgres-analyze/",
+      "detailPath": "articles/e2c14575a87189f83b5df4ec.json"
+    },
+    {
+      "id": "0507f74f874e4c0c905dd34d",
+      "title": "How to use ChatGPT to Write Good Code Faster",
+      "summary": "There’s been a lot of hype about Large Language Models (LLMs) lately with lots of cool examples of people using tools like ChatGPT to draft Python scripts, Go code, and all sorts of other useful things. Okay, so how do I use ChatGPT effectively? How do I Use ChatGPT Effectively? To use ChatGPT effectively for writing code, I’ve found it’s useful to treat it…",
+      "image": null,
+      "publishedAt": "2023-04-19T00:00:00Z",
+      "sourceId": "a091871c54fd2c6a",
+      "sourceTitle": "Jaz's Blog",
+      "link": "https://jazco.dev/2023/04/19/using-chatgpt-to-write-good-code-faster/",
+      "detailPath": "articles/0507f74f874e4c0c905dd34d.json"
+    },
+    {
+      "id": "03ece561f5ff382df6c12070",
+      "title": "Workload Agnosticism in Large Language Models: The Foundation for the Next Generation of Computing",
+      "summary": "As discussed in my previous post , LLMs such as OpenAI’s ChatGPT and GPT-4, Google’s Bard, and Meta’s LLaMA have risen seemingly out of nowhere, poised to disrupt the future of computing. Cloud Compute changed the landscape drastically when it was introduced by Amazon in the mid 2000’s, lowering the barriers to entry for new software-based businesses by sim…",
+      "image": null,
+      "publishedAt": "2023-03-29T00:00:00Z",
+      "sourceId": "a091871c54fd2c6a",
+      "sourceTitle": "Jaz's Blog",
+      "link": "https://jazco.dev/2023/03/29/llms-and-workload-agnosticism/",
+      "detailPath": "articles/03ece561f5ff382df6c12070.json"
+    },
+    {
+      "id": "bf68a4c4f0b206cd4b56d663",
+      "title": "A Tale of Two Technologies: Why Large Language Models are the Future and the Metaverse Isn't",
+      "summary": "In the digital landscape of recent years, two major technologies have vied for the spotlight: the Metaverse and Large Language Models (LLMs). Though the Metaverse, a virtual reality-based universe, initially garnered significant attention and expectations, it ultimately failed to revolutionize the digital world. Meanwhile, LLMs such as OpenAI’s ChatGPT and…",
+      "image": null,
+      "publishedAt": "2023-03-26T00:00:00Z",
+      "sourceId": "a091871c54fd2c6a",
+      "sourceTitle": "Jaz's Blog",
+      "link": "https://jazco.dev/2023/03/26/metaverse-vs-llms/",
+      "detailPath": "articles/bf68a4c4f0b206cd4b56d663.json"
+    }
+  ]
+}

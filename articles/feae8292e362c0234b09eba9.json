@@ -1,0 +1,11 @@
+{
+  "id": "feae8292e362c0234b09eba9",
+  "title": "GPG 与 SSH Agent 转发",
+  "summary": "我一直有这样的问题，当我 SSH 到某个远程主机时，就很难进一步进行 SSH 和 GPG 相关操作，因为远端没有我的私钥，如果直接把私钥拷贝到远程，则非常不安全。 自从有了 yubikey 之后，这个问题更加严重：私钥在 yubikey 里，根本不可能“拷贝到远程”。 过去我的一些做法是使用 usbip ，相当于把 yubikey “挂载”到远程的机器上，这个太 hacky 了，并且配置麻烦，不灵活。 直到我发现了 SSH 已经可以转发 UNIX Domain Socket。",
+  "content": "<p>我一直有这样的问题，当我 SSH 到某个远程主机时，就很难进一步进行 SSH 和 GPG 相关操作，因为远端没有我的私钥，如果直接把私钥拷贝到远程，则非常不安全。\n自从有了<a href=\"https://bigeagle.me/2016/02/yubikey-4/\" target=\"_blank\" rel=\"noopener noreferrer\">yubikey</a>之后，这个问题更加严重：私钥在 yubikey 里，根本不可能“拷贝到远程”。</p>\n<p>过去我的一些做法是使用 <a href=\"http://usbip.sourceforge.net/\" target=\"_blank\" rel=\"noopener noreferrer\">usbip</a>，相当于把 yubikey “挂载”到远程的机器上，这个太 hacky 了，并且配置麻烦，不灵活。</p>\n<p>直到我发现了 SSH 已经可以转发 UNIX Domain Socket。</p>",
+  "image": null,
+  "publishedAt": "2016-07-29T17:52:14Z",
+  "sourceId": "1a53726dacd05db7",
+  "sourceTitle": "K.I.S.S",
+  "link": "https://bigeagle.me/2016/07/GPG-and-SSH-agent-forwarding/"
+}

@@ -1,0 +1,11 @@
+{
+  "id": "ab2441720f07b5b53f4324fb",
+  "title": "How to squash commits in a GitHub pull request",
+  "summary": "So you’ve contributed some code to an open source project, say, Rails. And they’d like you to squash all of the commits in your pull request. But you’re not a git wizard; how do you make this happen? Normally, you’d do something like this. I’m assuming upstream is a git remote…",
+  "content": "<p>So you’ve contributed some code to an open source project, say, Rails. And they’d like you to squash all of the commits in your pull request. But you’re not a git wizard; how do you make this happen?</p>\n<p>Normally, you’d do something like this. I’m assuming <code>upstream</code> is a git remote that is pointing at the official project repository, and that your changes are in your ‘omgpull’ branch:</p>\n<pre><code><span><span>$ git fetch upstream</span></span>\n<span><span>$ git checkout omgpull </span></span>\n<span><span>$ git rebase -i upstream/master</span></span>\n<span><span></span></span>\n<span><span>&lt; choose squash for all of your commits, except the first one &gt;</span></span>\n<span><span>&lt; Edit the commit message to make sense, and describe all your changes &gt;</span></span>\n<span><span></span></span>\n<span><span>$ git push origin omgpull -f</span></span></code></pre>\n<p>GitHub will then automatically update your pull request with the new commits. Super easy!</p>",
+  "image": null,
+  "publishedAt": "2012-11-08T00:00:00Z",
+  "sourceId": "9a41b0d6fa07d21e",
+  "sourceTitle": "Steve Klabnik",
+  "link": "https://steveklabnik.com/writing/how-to-squash-commits-in-a-github-pull-request/"
+}

@@ -1,0 +1,224 @@
+{
+  "items": [
+    {
+      "id": "d3c35dc613dbd3544814ecf6",
+      "title": "优化日志：给自建图床 PicImpact 做一次大范围性能优化",
+      "summary": "和 Debug 日志、SRE 日志一个系列，优化日志用来复盘一些可以公开的折腾经历。 这一篇的主角是 PicImpact——我自己在用的那个开源图床，跑在 photos.manjusaka.me 上，托管着我这几年拍的猫猫狗狗。去年年终总结里我写过一句「把自建图床项目的代码拾掇了很多」，这篇就算是那句话的注脚。前后断断续续修了一轮，修复点其实都不大，但中间冒出来的几个回归是真的有意思，尤其是最后那个 WebGL 的坑，我愿称之为本年度最佳。",
+      "image": null,
+      "publishedAt": "2026-05-31T16:30:00Z",
+      "sourceId": "a6add2003c9627a9",
+      "sourceTitle": "Manjusaka",
+      "link": "https://www.manjusaka.blog/posts/2026/05/31/optimize-picimpact-self-hosted-gallery/",
+      "detailPath": "articles/d3c35dc613dbd3544814ecf6.json"
+    },
+    {
+      "id": "0c61375a0b84e51c7f8b0406",
+      "title": "Pydantic 不是免费的——聊聊数据校验的边界",
+      "summary": "最近给一个后端服务做 perf，跑了一发 py-spy 出来火焰图，盯着看了一会儿，发现 pydantic.main.__init__ 这一条在主热路径上占了一个让人挺难绷的比例。做了几轮调整之后顺手把这件事记一下——核心想说的是： 对一个 web 服务来说，数据校验从来不是免费的，pydantic 也一样。它有它的边界，越界使用就要付出对应的代价。",
+      "image": null,
+      "publishedAt": "2026-03-23T14:30:00Z",
+      "sourceId": "a6add2003c9627a9",
+      "sourceTitle": "Manjusaka",
+      "link": "https://www.manjusaka.blog/posts/2026/03/23/the-boundary-of-pydantic/",
+      "detailPath": "articles/0c61375a0b84e51c7f8b0406.json"
+    },
+    {
+      "id": "bdd7efb372438d9cfed2aede",
+      "title": "当我们在维护模型 API 服务时我们在维护什么",
+      "summary": "过去这一年我们团队陆陆续续做了几个 AI Service——大多是拿 FastAPI 包一个模型，再对外出 API。做到第三四个的时候我意识到一个尴尬的事实：每个项目长得都差不多，但每次起新项目还是在从零开始复制粘贴，而且不同的人写出来的目录结构、配置方式、metrics 命名都不太一样。一个新人接手第二个服务的时候，几乎要把第一个服务的认知全部重学一遍。 这篇文章想聊的不是某个具体框架，而是把这几个项目踩过的坑、迭代下来的设计、留下来的规范集中讲一遍——也算是给”维护一个模型 API 服务”这件事做一次复盘。",
+      "image": null,
+      "publishedAt": "2026-03-15T14:00:00Z",
+      "sourceId": "a6add2003c9627a9",
+      "sourceTitle": "Manjusaka",
+      "link": "https://www.manjusaka.blog/posts/2026/03/15/what-we-maintain-when-maintaining-model-api/",
+      "detailPath": "articles/bdd7efb372438d9cfed2aede.json"
+    },
+    {
+      "id": "ccd9c1edcc0afb4de1a50b13",
+      "title": "怎么样 tracing 你的 SQL？",
+      "summary": "过年是个好时候，可以猛猛干活或者看论文。不过上了几天磨，看了几天论文后觉得还是需要整点活 所以这篇文章来聊聊一个经典话题，How to trace your SQL？",
+      "image": null,
+      "publishedAt": "2026-02-22T10:49:00Z",
+      "sourceId": "a6add2003c9627a9",
+      "sourceTitle": "Manjusaka",
+      "link": "https://www.manjusaka.blog/posts/2026/02/22/how-to-tracing-your-sql/",
+      "detailPath": "articles/ccd9c1edcc0afb4de1a50b13.json"
+    },
+    {
+      "id": "47c6a74cce06ec0a3e55d502",
+      "title": "笑ってほしくて",
+      "summary": "每年都会选一句话作为年终总结的标题，去年是“本当の僕らをありがとう”，今年我选择“笑ってほしくて”。 这句话出自 《葬送的芙莉莲》的片尾曲《Anytime anywhere》。 愿你露出笑容 可能是我想对逝去之人，逝去的猫说的，可能也是他们想对我说的 也是我想对所有看到这篇文章的人说的",
+      "image": null,
+      "publishedAt": "2026-01-01T15:00:00Z",
+      "sourceId": "a6add2003c9627a9",
+      "sourceTitle": "Manjusaka",
+      "link": "https://www.manjusaka.blog/posts/2026/01/01/at-the-end-of-2025/",
+      "detailPath": "articles/47c6a74cce06ec0a3e55d502.json"
+    },
+    {
+      "id": "f93a53fa88babad9be9eeaa5",
+      "title": "成为榜样，但不要成为偶像",
+      "summary": "最近刚把空轨 1st 打通关。差不多国庆假期也要结束了，要开始准备接下来的学习和工作了。趁着这个机会，写点东西，当个迟到的 PyCon China 2025 的总结吧",
+      "image": null,
+      "publishedAt": "2025-10-02T20:00:00Z",
+      "sourceId": "a6add2003c9627a9",
+      "sourceTitle": "Manjusaka",
+      "link": "https://www.manjusaka.blog/posts/2025/10/02/be-a-good-example-not-be-an-idol/",
+      "detailPath": "articles/f93a53fa88babad9be9eeaa5.json"
+    },
+    {
+      "id": "7c6714420263b57f3a35ac88",
+      "title": "Further Performance Evolution in Python 3.14: Tail Call Interpreter",
+      "summary": "I’ve been overwhelmed by security work lately, so let me switch to something lighter to relax my mind. Python 3.14 has officially introduced a new mechanism called Tail Call Interpreter (Made by Ken Jin), which is undoubtedly another major milestone that lays the foundation for the future.",
+      "image": null,
+      "publishedAt": "2025-07-02T15:49:00Z",
+      "sourceId": "a6add2003c9627a9",
+      "sourceTitle": "Manjusaka",
+      "link": "https://www.manjusaka.blog/posts/2025/07/02/tail-call-in-3-14-interpreter-en/",
+      "detailPath": "articles/7c6714420263b57f3a35ac88.json"
+    },
+    {
+      "id": "58f964cb741acecb44f57683",
+      "title": "Python 3.14 的进一步性能进化: Tail Call Interpreter",
+      "summary": "最近做安全做的我头晕脑胀，来点轻松的换换脑子，让自己放松下 Python 3.14 正式引入了一个新的机制叫作 Tail Call Interpreter（Made by Ken Jin），这无疑又是一个奠定未来基础的重大工作",
+      "image": null,
+      "publishedAt": "2025-07-02T15:49:00Z",
+      "sourceId": "a6add2003c9627a9",
+      "sourceTitle": "Manjusaka",
+      "link": "https://www.manjusaka.blog/posts/2025/07/02/tail-call-in-3-14-interpreter/",
+      "detailPath": "articles/58f964cb741acecb44f57683.json"
+    },
+    {
+      "id": "5a93e329e12e64ec34ef855e",
+      "title": "Python 3.14: Python 世界的一大步",
+      "summary": "Python 3.14 目前主要的一些主要的特性其实已经固定了，在我看来，Python 3.14 是一个未来很多年的一个核心版本。因为其确定了是时代的 Python 调试生态的基准，这篇文章将会来聊聊这个 Python 世界中的史诗级改进",
+      "image": null,
+      "publishedAt": "2025-04-26T14:49:00Z",
+      "sourceId": "a6add2003c9627a9",
+      "sourceTitle": "Manjusaka",
+      "link": "https://www.manjusaka.blog/posts/2025/04/26/3-14-is-one-of-the-best-python-version/",
+      "detailPath": "articles/5a93e329e12e64ec34ef855e.json"
+    },
+    {
+      "id": "93f1f5b7cc12d6a985858a8c",
+      "title": "简单聊聊常见的负载均衡算法",
+      "summary": "这篇文章鸽了很久，最终决定还是老老实实写完，来介绍一下常见的一些负载均衡算法实现。本文的代码最终都会放在 load-balancer-algorithm 1 这个 repo 中 我从来没有觉得写博客快乐过",
+      "image": "https://user-images.githubusercontent.com/7054676/82696622-f73b2800-9c99-11ea-8d14-08f67487f3b9.png",
+      "publishedAt": "2025-03-23T12:00:00Z",
+      "sourceId": "a6add2003c9627a9",
+      "sourceTitle": "Manjusaka",
+      "link": "https://www.manjusaka.blog/posts/2025/03/23/a-simple-introduction-about-load-balance-algorithm/",
+      "detailPath": "articles/93f1f5b7cc12d6a985858a8c.json"
+    },
+    {
+      "id": "8e57281967f54ac73043ddf2",
+      "title": "简单吐槽一下摇曳露营的台配",
+      "summary": "看了一下台配摇曳露营的 PV 放松，有些地方很想吐槽，写个短文聊一下",
+      "image": null,
+      "publishedAt": "2025-02-03T18:00:00Z",
+      "sourceId": "a6add2003c9627a9",
+      "sourceTitle": "Manjusaka",
+      "link": "https://www.manjusaka.blog/posts/2025/02/03/a-little-thought-about-translation-about-yuru-camp/",
+      "detailPath": "articles/8e57281967f54ac73043ddf2.json"
+    },
+    {
+      "id": "45f525fe134587a915d9f924",
+      "title": "Saka 馬鹿",
+      "summary": "这篇博客是我在刷题群内的 2025 年的第一次分享整理的演讲稿。主要是完整复盘了过去几年里我犯下的两个比较典型的低级错误。 希望大家能看的开心",
+      "image": "https://i.imgur.com/4nVkyxt.png",
+      "publishedAt": "2025-01-04T18:30:00Z",
+      "sourceId": "a6add2003c9627a9",
+      "sourceTitle": "Manjusaka",
+      "link": "https://www.manjusaka.blog/posts/2025/01/04/saka-is-baka/",
+      "detailPath": "articles/45f525fe134587a915d9f924.json"
+    },
+    {
+      "id": "fb48b19cfc3c969edea8499a",
+      "title": "本当の僕らをありがとう",
+      "summary": "每年都会选择一句话来总结自己这一年，前年是“但行好事，莫问前程”，去年是 “Per aspera, Ad astra”。那么今年我选择是 “本当の僕らをありがとう”。 这句出自 《Angel Beats!》的片尾曲《My Song》。含义为“向最真实的我们致谢”",
+      "image": "https://i.imgur.com/RERVPbH.png",
+      "publishedAt": "2024-12-31T15:00:00Z",
+      "sourceId": "a6add2003c9627a9",
+      "sourceTitle": "Manjusaka",
+      "link": "https://www.manjusaka.blog/posts/2024/12/31/at-the-end-of-2024/",
+      "detailPath": "articles/fb48b19cfc3c969edea8499a.json"
+    },
+    {
+      "id": "40e9f5db081f940dfe3fa64c",
+      "title": "OpenDAL 0.51 版本代号 “本当の僕らをありがとう。” 背后的故事",
+      "summary": "Apache OpenDAL v0.51.0 第一个 RC 版本发布了，这个大版本有些特殊，是我第三个负责 Release 的版本，也是第一个带有 Subtitle 的版本 这个版本的副标题为 “本当の僕らをありがとう” ，意为 “向真实的我们致谢” 聊聊这个版本背后的一些故事吧",
+      "image": null,
+      "publishedAt": "2024-12-14T18:30:00Z",
+      "sourceId": "a6add2003c9627a9",
+      "sourceTitle": "Manjusaka",
+      "link": "https://www.manjusaka.blog/posts/2024/12/14/the-story-behind-the-opendal-0.51/",
+      "detailPath": "articles/40e9f5db081f940dfe3fa64c.json"
+    },
+    {
+      "id": "37a32aa87d7e51aceed2230c",
+      "title": "好了，现在你的知识也是我的了.jpg",
+      "summary": "最近给朋友介绍了一下我对于一些外部资料的吸收的经验。我想了想整理了下聊天记录，将我整个思路以博客的形式展现出来。希望能帮到看这篇博客的人。",
+      "image": null,
+      "publishedAt": "2024-12-06T18:00:00Z",
+      "sourceId": "a6add2003c9627a9",
+      "sourceTitle": "Manjusaka",
+      "link": "https://www.manjusaka.blog/posts/2024/12/06/ok-I-got-all-you-know/",
+      "detailPath": "articles/37a32aa87d7e51aceed2230c.json"
+    },
+    {
+      "id": "cd5cc72bdbe12a0b8e1a8c8f",
+      "title": "如何使用 WASMTIME 来运行 CPython for WASI，然后利用 Python 实现的 HostFunction 来扩展它？",
+      "summary": "国庆节搞了一个活，利用 wasmtime 来执行编译成 WASM/WASI 字节码的 CPython 虚拟机，并在宿主机一侧利用 Python 实现的 Host Function 来扩展它。 再次声明一下，这个只是我个人想搞的活，没有再任何生产环境中得到验证，just for fun（XDDD",
+      "image": null,
+      "publishedAt": "2024-10-02T13:00:00Z",
+      "sourceId": "a6add2003c9627a9",
+      "sourceTitle": "Manjusaka",
+      "link": "https://www.manjusaka.blog/posts/2024/10/02/how-to-extend-the-wasi-python-by-using-host-function-cn/",
+      "detailPath": "articles/cd5cc72bdbe12a0b8e1a8c8f.json"
+    },
+    {
+      "id": "68d5b454523e4e61190ebf82",
+      "title": "How to Run CPython for WASI Using WASMTIME and Extend It with Python-Implemented Host Functions?",
+      "summary": "During the National Day holiday, I worked on a project to use wasmtime to execute CPython virtual machine compiled into WASM/WASI bytecode, and extend it with Host Functions implemented in Python on the host side. I’d like to clarify again that this is just a personal project I wanted to work on, without any validation in production environments, just for f…",
+      "image": null,
+      "publishedAt": "2024-10-02T13:00:00Z",
+      "sourceId": "a6add2003c9627a9",
+      "sourceTitle": "Manjusaka",
+      "link": "https://www.manjusaka.blog/posts/2024/10/02/how-to-extend-the-wasi-python-by-using-host-function-en/",
+      "detailPath": "articles/68d5b454523e4e61190ebf82.json"
+    },
+    {
+      "id": "988cdd1eccd74e5506a75a8e",
+      "title": "Debug 日志：eCapture GH-604",
+      "summary": "Debug 日志系列第二篇，eCapture 的 GH-604， 一个和 Go， Glibc，静态编译相关的问题 太长不看版：在 eCapture 中，由于在静态链接时 glibc 版本的差异，导致在 Ubuntu 下编译的二进制会在特定发行版上 Segment fault",
+      "image": null,
+      "publishedAt": "2024-09-18T14:00:00Z",
+      "sourceId": "a6add2003c9627a9",
+      "sourceTitle": "Manjusaka",
+      "link": "https://www.manjusaka.blog/posts/2024/09/18/a-live-debug-ecapture-gh-604/",
+      "detailPath": "articles/988cdd1eccd74e5506a75a8e.json"
+    },
+    {
+      "id": "20c299f959f1039073fe42d1",
+      "title": "2024 年了，是 Gevent 还是选择 asyncio Part 1？",
+      "summary": "Gevent 还是 asyncio 这一直是个经典的问题，在这里我们直接用数据来帮助大家做一下决策",
+      "image": "https://i.imgur.com/Jk2ubDY.png",
+      "publishedAt": "2024-08-19T17:00:00Z",
+      "sourceId": "a6add2003c9627a9",
+      "sourceTitle": "Manjusaka",
+      "link": "https://www.manjusaka.blog/posts/2024/08/19/benchmark-for-python-web-framework-2024-part1-cn/",
+      "detailPath": "articles/20c299f959f1039073fe42d1.json"
+    },
+    {
+      "id": "012d30bcdc7a8c44ae75632d",
+      "title": "In 2024, Gevent or asyncio? Part 1",
+      "summary": "The choice between Gevent and asyncio has always been a classic question. Here, we’ll use data to help you make a decision.",
+      "image": "https://i.imgur.com/Jk2ubDY.png",
+      "publishedAt": "2024-08-19T17:00:00Z",
+      "sourceId": "a6add2003c9627a9",
+      "sourceTitle": "Manjusaka",
+      "link": "https://www.manjusaka.blog/posts/2024/08/19/benchmark-for-python-web-framework-2024-part1-en/",
+      "detailPath": "articles/012d30bcdc7a8c44ae75632d.json"
+    }
+  ]
+}

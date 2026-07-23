@@ -1,0 +1,11 @@
+{
+  "id": "fc80da6b04ce96c623b64f3c",
+  "title": "A Zipping Gatherer",
+  "summary": "The other day, I was looking for means of zipping two Java streams : connecting them element by element—​essentially a join based on stream offset position—​and emitting an output stream with the results. Unfortunately, there is no zip() method offered by the Java Streams API itself. While it was considered for inclusion in early preview versions, the metho…",
+  "content": "<div>\n<p>The other day, I was looking for means of <a href=\"https://twitter.com/gunnarmorling/status/1764305703047438361\" target=\"_blank\" rel=\"noopener noreferrer\">zipping two Java streams</a>:\nconnecting them element by element—​essentially a join based on stream offset position—​and emitting an output stream with the results.\nUnfortunately, there is no <code>zip()</code> method offered by the Java Streams API itself.\nWhile it was considered for inclusion in early preview versions,\nthe method was removed before the API went GA with Java 8 and you have to resort to 3rd party libraries such as <a href=\"https://guava.dev/releases/snapshot-jre/api/docs/com/google/common/collect/Streams.html#zip(java.util.stream.Stream,java.util.stream.Stream,java.util.function.BiFunction)\" target=\"_blank\" rel=\"noopener noreferrer\">Google Guava</a> if you need this functionality.</p>\n</div>",
+  "image": null,
+  "publishedAt": "2024-03-18T17:12:00Z",
+  "sourceId": "d159169f81b06175",
+  "sourceTitle": "morling.dev -- Blog",
+  "link": "https://www.morling.dev/blog/zipping-gatherer/"
+}

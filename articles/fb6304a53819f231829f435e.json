@@ -1,0 +1,11 @@
+{
+  "id": "fb6304a53819f231829f435e",
+  "title": "Daily Driver: Automation Improvements",
+  "summary": "The recent automation was really just help with organisation. As soon as I started looking at running OpenSCAD from the shell/command-line it became obvious that I could do the rendering and organisation in one step without having to use external apps like Hazel. So, that’s now done. I render all the frames, with more sensible filenames, to a single folder.…",
+  "content": "<p>The recent automation was really just help with organisation. As soon as I started looking at running OpenSCAD from the shell/command-line it became obvious that I could do the rendering and organisation in one step without having to use external apps like Hazel.</p>\n\n<p>So, that’s now done. I render all the frames, with more sensible filenames, to a single folder.</p>\n\n<p>If I run all the renders one after the other, maxing out a single CPU core (99% CPU usage), time taken:</p>\n\n<p><strong>~17 seconds 🐢</strong></p>\n\n<p>But, using the <code>&amp;</code> directive and <code>wait</code> command, I can run the renders in parallel (well, technically it’s one process each; and batches of 32 works best) using all 6 CPU cores (~485% CPU usage), time taken:</p>\n\n<p><strong>~10 seconds 🐇</strong></p>\n\n<p>…the beauty of the command line!</p>\n\n<blockquote>\n  <p>Note to self: don’t publish a post about an automation breakthrough until the dust has settled.</p>\n</blockquote>",
+  "image": null,
+  "publishedAt": "2020-10-09T00:00:00Z",
+  "sourceId": "625f69e92fbd1d94",
+  "sourceTitle": "⌘I",
+  "link": "https://blog.gingerbeardman.com/2020/10/09/automation-improvements/"
+}

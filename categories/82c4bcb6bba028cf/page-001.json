@@ -1,0 +1,224 @@
+{
+  "items": [
+    {
+      "id": "97ed8c0963f2563d6e5e99a2",
+      "title": "Obr: a Web UI for My Obsidian Vault",
+      "summary": "A few years ago I built a tiny personal tool called Obweb . Its purpose was dead simple: open a browser, type a quick thought, and append it to my Obsidian notes. Then one day the VPS was shutdown for some reasons, I need to redeploy it on another VPS and it involve some extra boring stuff, such as rebind a sub-domain and configing on VPS. I’m too lazy for…",
+      "image": "http://catcoding.me/images/ob_635f0d6d5fc60528afc8c5892738a70c.jpg",
+      "publishedAt": "2026-06-22T20:51:12Z",
+      "sourceId": "82c4bcb6bba028cf",
+      "sourceTitle": "程序员的喵",
+      "link": "http://catcoding.me/p/obr-intro/",
+      "detailPath": "articles/97ed8c0963f2563d6e5e99a2.json"
+    },
+    {
+      "id": "26ef4921103575d1b0f207f5",
+      "title": "ghr：把开源维护工作搬进终端",
+      "summary": "五一期间我看到 dhh 发的一个帖子推荐 GitHub TUI: ghui ，我安装试了一下，发现还需要安装 bun，另外功能看起来也不太够用。 我也看过 gh-dash ，这东西是 gh 的一个 extension，我试了一下同样感觉体验不好，于是手痒开始让 AI 帮我用 Rust 重新写一个。 最近在工作中也写过一个 Rust 的 TUI 工具，感觉 Rust 的生态已经很成熟了，写起来也很顺手。于是就有了 ghr 这个项目。 它的目标一开始很简单：我想少在 GitHub 网页里来回点。作为一个经常看 PR、review 代码、处理 notification 的人，我每天会重复很多小动作：打开 inbox，看谁 @ 了我，扫一眼 assigned PR，点进 diff，读评论，偶尔 checkout 到本…",
+      "image": "http://catcoding.me/images/ob_pasted-image-20260508001332.png",
+      "publishedAt": "2026-05-08T00:44:46Z",
+      "sourceId": "82c4bcb6bba028cf",
+      "sourceTitle": "程序员的喵",
+      "link": "http://catcoding.me/p/ghr-dev/",
+      "detailPath": "articles/26ef4921103575d1b0f207f5.json"
+    },
+    {
+      "id": "93e51e5999d3860e6b6ab3ee",
+      "title": "GitHeron：把网页标注写到 GitHub",
+      "summary": "最近写了一个 Chrome 插件，叫 GitHeron 。它想解决的问题很简单： Web highlights and clippings, synced to GitHub as Markdown. 我一直使用 Hypothesis 来同步冲浪记录，然后使用一个 Obsidian 插件 来同步到我的知识库。但 hypothesis 的浏览器插件体验不佳，时不时需要登录，选中文字打算做备注时又偶尔无法激活，我就想自己写个插件来解决这个问题。 GitHeron 的思路是直接使用 Github token 访问私有 repo，通过 API 把数据写入仓库。GitHub 当然不是传统意义上的数据库。但对个人工具来说，它已经提供了很多“数据库”才有的能力：同步、历史、权限、备份、API、跨设备访问。更重要的是，这些都…",
+      "image": "http://catcoding.me/images/ob_pasted-image-20260428224559.png",
+      "publishedAt": "2026-05-01T13:08:26Z",
+      "sourceId": "82c4bcb6bba028cf",
+      "sourceTitle": "程序员的喵",
+      "link": "http://catcoding.me/p/githeron/",
+      "detailPath": "articles/93e51e5999d3860e6b6ab3ee.json"
+    },
+    {
+      "id": "408d3ae6d7e991044477ea79",
+      "title": "开发 Runnel 的一些记录",
+      "summary": "最近断断续续 Vibe Coding 写了一个小工具，叫 Runnel 。因为我之前用的两个机场都跪了 (虽然后来又逐渐恢复了)，于是萌生了自己写个工具来翻墙的想法，顺便把一些网络相关的东西重新摸一遍。 Runnel 有“小河流”的意思，我觉得还挺贴切：不是要做一个很宏大的网络基础设施，就是在本机和远端之间挖一条能用、能看、能调试的小通道。 先让 AI 快速撸了一个车 native-http 版本的，然后又加了多路复用的 native-mux 模式。后来又想到一个同事说他一直用自己写的代理工具叫做 daze ，所以立马让 AI 用 Rust 重写了一份跑了起来。 于是它现在支持几种模式： native-http 、 native-mux 、几个 daze 风格的模式，以及后来主要投入精力做的 wg 模式。 前…",
+      "image": null,
+      "publishedAt": "2026-04-23T19:15:24Z",
+      "sourceId": "82c4bcb6bba028cf",
+      "sourceTitle": "程序员的喵",
+      "link": "http://catcoding.me/p/runnel-dev-notes/",
+      "detailPath": "articles/408d3ae6d7e991044477ea79.json"
+    },
+    {
+      "id": "669c46d04b9c0d7de641d9c9",
+      "title": "macOS 奇怪的安全扫码机制",
+      "summary": "今天跑 Rust 编译器测试的时候又发现非常地慢，CPU 资源根本无法利用起来，我记得几年前碰到过这个问题，当时我写了篇 文章 分享出来，并发现很多人都有同样的困扰。 而我今天碰到的这个问题虽然现象一样，但解决方法又不同了。我不确定是 macOS 系统更新，亦或是我更新了 VS Code 造成的。 问题 复现脚本很简单，循环创建随机命名的 shell 脚本，然后对比首次和再次执行的耗时： # !/bin/bash rm - rf /tmp/speed_test mkdir - p /tmp/speed_test for i in { 1..10 } ; do FILENAME = $ ( openssl rand - hex 10 ) echo $' #!/bin/sh \\n echo Hello ' > \"…",
+      "image": null,
+      "publishedAt": "2026-02-12T16:55:52Z",
+      "sourceId": "82c4bcb6bba028cf",
+      "sourceTitle": "程序员的喵",
+      "link": "http://catcoding.me/p/apple-gatekeeper-scan/",
+      "detailPath": "articles/669c46d04b9c0d7de641d9c9.json"
+    },
+    {
+      "id": "70dbb12116592d29fa18e3e3",
+      "title": "hexo-rs：玩 Vibe Coding",
+      "summary": "月底升级了 Copilot Pro+，月初额度重置，这几天可以放开用，想到什么就 vibe 一把。 我的博客跑在 Hexo 上很多年了。其实没什么大问题，就是每次看到那几百 MB 的 node_modules，心里总有点膈应——生成几百个静态 HTML，真的需要这么多依赖吗？但迁移到别的博客系统又懒得折腾，所以一直拖着。 这次干脆试试：能不能用 AI 一个下午撸一个 Rust 版的 Hexo？我的目标比较简单：生成跟原来一样的静态文件，兼容我现在用的主题就行。 我用的是 OpenCode + Opus 4.5。陆陆续续聊了一下午，产出了 hexo-rs 。能用，但还有些边边角角的问题。 Vibe Coding 的工具和体会以后再写，这篇主要聊 hexo-rs 的实现和踩过的坑。 技术选型 EJS 模板引擎 H…",
+      "image": null,
+      "publishedAt": "2026-01-30T23:00:00Z",
+      "sourceId": "82c4bcb6bba028cf",
+      "sourceTitle": "程序员的喵",
+      "link": "http://catcoding.me/p/hexo-rs/",
+      "detailPath": "articles/70dbb12116592d29fa18e3e3.json"
+    },
+    {
+      "id": "adaab7cfca946f971e04b62f",
+      "title": "How Fiber Network Works",
+      "summary": "I just got back from CKCon in beautiful Chiang Mai 🌴, where I gave a talk on the Fiber Network. To help everyone wrap their heads around how Fiber (CKB’s Lightning Network) actually moves assets, I hacked a visual simulation with AI. To my surprise, people didn’t just understand it—they loved it! 🎉 Here is the “too long; didn’t read” version. But first, go…",
+      "image": "http://catcoding.me/images/ob_pasted-image-20251204113415.png",
+      "publishedAt": "2025-12-09T17:05:59Z",
+      "sourceId": "82c4bcb6bba028cf",
+      "sourceTitle": "程序员的喵",
+      "link": "http://catcoding.me/p/how-fiber-works/",
+      "detailPath": "articles/adaab7cfca946f971e04b62f.json"
+    },
+    {
+      "id": "3f18bba70618445f8d215a0b",
+      "title": "在开源中使用 LLM",
+      "summary": "越来越多的开发者开始使用 LLM 等 AI 工具，过去半年我看到不少相关讨论：有人非常反感使用 LLM 工具，有人保持中立，但确实有相当数量的 AI 生成 PR 给开源项目维护者带来了负担和困扰。 现在出现了一些新苗头，比如 GitHub 账号也开始“养号”。我推测大概有以下几个原因： 为了加密货币空投 2023–2024 年类似的情况比较多，有些加密货币项目会根据开发者的 GitHub 公开提交记录进行空投。如果一个账号给项目方关注的项目提过 PR，就更容易获得。例如 Rust 在区块链领域用得比较多，所以 Rust compiler 项目是比较容易获得空投的。我自己也因为一些开源记录拿到过空投，当时兑换了 1 万多人民币。我看到不少 Rust 社区维护者也得到了空投，不过他们对加密货币普遍不感兴趣；也有个…",
+      "image": "http://catcoding.me/images/ob_pasted-image-20251126091545.png",
+      "publishedAt": "2025-11-26T10:15:38Z",
+      "sourceId": "82c4bcb6bba028cf",
+      "sourceTitle": "程序员的喵",
+      "link": "http://catcoding.me/p/llm-in-open-source/",
+      "detailPath": "articles/3f18bba70618445f8d215a0b.json"
+    },
+    {
+      "id": "031a7377c4555b03de4e1f05",
+      "title": "Rust 背锅了：Cloudflare 故障分析",
+      "summary": "这两天都在讨论 Cloudflare 的安全事故 Cloudflare outage on November 18, 2025 ，我也写点自己的想法。 这个事故当然引起的范围特别广，我当时正在用 ChatGPT，突然再打开总是提示正在加载，我还以为是自己的 VPN 出了问题，第二天起来才知道 Cloudflare 跪了好久。 没多久 Cloudflare 就发出来了一个非常详细的事故说明。我对里面的场景非常熟悉，因为我之前因为类似的原因把大疆的大部分流量都给搞挂了，具体请看 谈谈工作中的犯错 中的配置错误。 这次事故里 Cloudflare 给出了一段 Rust 代码，所以讨论自然会集中在 Rust 上。但把事故归咎于 Rust 本身就不太合理。从他们的场景来看和我之前在 Kong 上做流量分发是非常类似的，…",
+      "image": "http://catcoding.me/images/ob_pasted-image-20251120062013.png",
+      "publishedAt": "2025-11-20T07:07:23Z",
+      "sourceId": "82c4bcb6bba028cf",
+      "sourceTitle": "程序员的喵",
+      "link": "http://catcoding.me/p/rust-in-cloudflare-incident/",
+      "detailPath": "articles/031a7377c4555b03de4e1f05.json"
+    },
+    {
+      "id": "ebbd3adbf7fa5001407a858c",
+      "title": "零知识证明入门",
+      "summary": "无论是在聊 L2、隐私还是下一代 Web 技术，零知识证明都是经常会碰到的技术术语，听起来就像是科幻小说里的东西： 向你证明我知道一个秘密，但绝不透露这个秘密本身 ，这简直是程序员的终极浪漫。 大多数人粗看都会觉得这东西是密码学博士们的专属玩具，我花了一段时间学习后，发现这条通往魔法世界的路似乎有迹可循，希望这篇入门介绍能帮助到更多这方向的学习者。 魔法洞穴 忘掉所有数学，我们先从一个故事开始——“阿里巴巴洞穴”，这是理解 ZKP 最经典的例子，最早由 Jean-Jacques Quisquater 等人于 1990 年在他们的论文《如何向你的孩子解释零知识协议》中发表。 想象一个环形洞穴，A、B 两个入口在前方，深处有一扇只有知道咒语才能打开的魔法门。Alice 知道咒语，现在，Alice 想向 Bob 证…",
+      "image": "http://catcoding.me/images/ob_pasted-image-20250915175921.png",
+      "publishedAt": "2025-09-26T16:49:47Z",
+      "sourceId": "82c4bcb6bba028cf",
+      "sourceTitle": "程序员的喵",
+      "link": "http://catcoding.me/p/zero-knowledge-proof/",
+      "detailPath": "articles/ebbd3adbf7fa5001407a858c.json"
+    },
+    {
+      "id": "a3d0a7438295eb5e8d02a106",
+      "title": "RISC-V from Scratch: Building a Virtual Machine",
+      "summary": "I’ve always wanted to learn RISC-V. A few days ago, I finally got my hands dirty with it now. This post will guide you through the process of building a simple RISC-V VM from the ground up, using Rust as our implementation language. Understanding the Core Concepts Before writing any code, I need to grasp the fundamentals of RISC-V. RISC vs. CISC : RISC (Red…",
+      "image": "http://catcoding.me/images/ob_pasted-image-20251117091305.png",
+      "publishedAt": "2025-09-23T00:54:14Z",
+      "sourceId": "82c4bcb6bba028cf",
+      "sourceTitle": "程序员的喵",
+      "link": "http://catcoding.me/p/riscv-vm/",
+      "detailPath": "articles/a3d0a7438295eb5e8d02a106.json"
+    },
+    {
+      "id": "c2b6caba73999167735029e3",
+      "title": "Rust Week 2025 杂记",
+      "summary": "5 月中旬我参加了在荷兰 Utrecht 举行的 Rust Week，想来可以写篇文章记录下所见所闻。 我年初和 Rust 基金会邮件确认参加，但直到 4 月 9 日才开始动手申请签证。在深圳办理荷兰签证流程简单，只需提交材料并录指纹，但我嫌麻烦找了中介帮忙。据说大概也就两周多就会有结果，但直到五一查询还是没结果，中介说可以加 600 元加急。看到官网解释近期审批延迟，我便花钱加急，第二周拿到了签证。不知道这其中是否有猫腻，但确实有华为的朋友同样卡在那个节点审批，结果没有如期下来。 从广州白云机场有直飞阿姆斯特丹的航班，只是起飞时间大概是凌晨 1 点多。飞机上座位空间狭小，难以入睡，趴着或躺着都不舒服，到了阿姆斯特丹是早晨 6 点多。通过海关后，我因不熟悉荷兰语而有些迷茫。由于未携带 Visa 卡，只能使用现…",
+      "image": "http://catcoding.me/images/ob_pasted-image-20250607184354.png",
+      "publishedAt": "2025-06-11T10:23:14Z",
+      "sourceId": "82c4bcb6bba028cf",
+      "sourceTitle": "程序员的喵",
+      "link": "http://catcoding.me/p/rust-week-notes/",
+      "detailPath": "articles/c2b6caba73999167735029e3.json"
+    },
+    {
+      "id": "e40cd9f5cbe1cb7c64ad394a",
+      "title": "从椭圆曲线到 secp256k",
+      "summary": "区块链这行经常会和椭圆曲线密码算法打交道，我也在尝试理解这其中的数学原理，这里记录一下。 什么是椭圆曲线 (elliptic curve) 先想象一个普通的曲线，比如抛物线（抛个球的轨迹）。椭圆曲线不是椭圆（名字有点误导），而是一种长得像“对称小山丘”或者“歪歪扭扭的环”的数学图形。 椭圆曲线通常表示为： $$ y^2 = x^3 + ax + b$$ 通过这个方程我们可以看到椭圆曲线是上下对称的，其中 (a) 和 (b) 是曲线参数，比如下面这些曲线就是 b = 1 的情况下，a 从 2 变到 -3 的情况： 我们通常使用的椭圆曲线必须满足 非奇异 的特征，这些参数必须满足判别式： $$4a^3 + 27b^2 \\neq 0$$ “非奇异”什么意思？在数学上，椭圆曲线要是“非奇异”（non-singular…",
+      "image": "http://catcoding.me/images/ob_pasted-image-20250401152936.png",
+      "publishedAt": "2025-06-08T18:20:12Z",
+      "sourceId": "82c4bcb6bba028cf",
+      "sourceTitle": "程序员的喵",
+      "link": "http://catcoding.me/p/elliptic-curve/",
+      "detailPath": "articles/e40cd9f5cbe1cb7c64ad394a.json"
+    },
+    {
+      "id": "4e8b3b4096a061edd135cb55",
+      "title": "Future 的大小对性能的影响",
+      "summary": "在 Rust 异步编程中，有一种观点认为： Future 的大小显著影响性能 。你是否怀疑过这个说法的真实性？如果是真的，这种性能差异的根源又是什么？今天，我翻阅了一些源码，并编写实验代码来一探究竟。 Future 的大小如何计算？ 为了验证“Future 大小影响性能”这一说法是否成立，我们先从一些简单代码入手。首要任务是弄清楚一个 Future 的大小是如何确定的。毕竟，在编译器眼里，Future 只是一个 trait： pub trait Future { type Output ; fn poll ( self : Pin < & mut Self > , cx : & mut Context < ' _ > ) -> Poll < Self :: Output > ; } 那么，其大小取决于实现这个…",
+      "image": null,
+      "publishedAt": "2025-03-24T10:21:03Z",
+      "sourceId": "82c4bcb6bba028cf",
+      "sourceTitle": "程序员的喵",
+      "link": "http://catcoding.me/p/future-size-perf/",
+      "detailPath": "articles/4e8b3b4096a061edd135cb55.json"
+    },
+    {
+      "id": "9d6396241040b7f0b55bbcf3",
+      "title": "Fiber Network: 基于 CKB 实现的闪电网络",
+      "summary": "最近一年我在做 Fiber Network 这个新的开源项目，上个月底刚好 主网第一个版本发布 ： 这个项目的挑战还是挺大的，上主网只是一个新的开始。我在开发过程中学到了很多东西，这是我前段时间写的一篇关于 Fiber 的大致介绍。 Fiber 简介 Fiber 是基于 CKB 构建的闪电网络协议，旨在实现快速、安全且高效的链下支付解决方案。借鉴了比特币闪电网络的核心理念，Fiber 针对 CKB 的独特架构进行了深度优化，提供低延迟、高吞吐量的支付通道，适用于微支付和高频交易等场景。与传统的闪电网络不同，Fiber 拥有多项关键特性： 多资产支持 ：不再局限于单一币种，能够处理多种资产交易，为复杂的跨链金融应用铺平道路。 可编程性 ：基于 CKB 的图灵完备智能合约，支持更复杂的条件执行和业务逻辑，拓展了支…",
+      "image": "http://catcoding.me/images/ob_pasted-image-20250316084708.png",
+      "publishedAt": "2025-03-16T08:53:04Z",
+      "sourceId": "82c4bcb6bba028cf",
+      "sourceTitle": "程序员的喵",
+      "link": "http://catcoding.me/p/fiber-network-on-ckb/",
+      "detailPath": "articles/9d6396241040b7f0b55bbcf3.json"
+    },
+    {
+      "id": "93469a85c44558166ff1c3fd",
+      "title": "2024：简单的理想生活",
+      "summary": "2024 年快结束了，在这最后的一两个小时里我写着这篇年终总结准备跨年了，顺着大致时间线来回顾一下就好了。 年初就起了个好头，众多加密货币开始上涨。总体而言，2024 年是个加密货币和区块链的大年。有那么一小段时间我每天都在关注涨跌，渐渐地我发现这个领域涨跌都是太频繁了，而过多关注除了浪费时间并没有什么大的用处。因为两年前开始在这个领域工作，所以我自然也会投资一些加密货币。刚开始我稍微接触了一下合约，但很快亏掉了几千元，算是交了学费。然后很快理智地退出了，合约本质上来说和赌博有点类似，钱来得也快亏得也快，但大概率是要亏钱的。 我听从了一些行业老鸟的建议，拿住比特币就行，其他的看着买点。我从 2023 年开始陆续买入了一些比特币，当时的价格不算高，到今年年底看来也有不少涨幅了。我抱着长期拿住的心态在买入，打算至…",
+      "image": "http://catcoding.me/images/ob_pasted-image-20241228233657.png",
+      "publishedAt": "2025-01-01T00:03:41Z",
+      "sourceId": "82c4bcb6bba028cf",
+      "sourceTitle": "程序员的喵",
+      "link": "http://catcoding.me/p/2024-summary/",
+      "detailPath": "articles/93469a85c44558166ff1c3fd.json"
+    },
+    {
+      "id": "c5837f25696110828ca2083f",
+      "title": "CKB new script verification with VM pause",
+      "summary": "CKB 相关技术文章第三篇。 背景 CKB 的每一个交易在提交到交易池之前都会经过一个 script verification 的过程，本质上就是通过 CKB-VM 把交易里的 script 跑一遍，如果失败了则直接 reject，如果通过了才会继续后面的流程。 这里的 script 就是一种可以在链上执行的二进制可执行文件，也可以称之为 CKB 上的合约。它是图灵完备的，我们通常可以通过 C、Rust 来实现这些 script，比如 nervosnetwork/ckb-system-scripts 就是 CKB 上的一些常用的系统合约。用户在发起交易的时候就设置好相关的 script，比如 lock script 是用来作为资产才所有权的鉴定，而 type script 通常用来定义 cell 转换的条件，…",
+      "image": "http://catcoding.me/images/ob_what-is-verification.png",
+      "publishedAt": "2024-11-07T12:03:24Z",
+      "sourceId": "82c4bcb6bba028cf",
+      "sourceTitle": "程序员的喵",
+      "link": "http://catcoding.me/p/ckb-new-verify/",
+      "detailPath": "articles/c5837f25696110828ca2083f.json"
+    },
+    {
+      "id": "1f14ee758141b8c9bc3b8a37",
+      "title": "CKB RBF 设计和实现",
+      "summary": "CKB 相关技术文章第二篇。 Replace by fee 问题 如果一个交易成功发送到交易池，但可能出现因为费用较低而一直得不到处理。之前 CKB 没有其他措施来处理这种情况。 例如 Dotbit 4 位域名注册拥堵 这个事故发生过程中， CKB 的应用方无法使用任何方式来尽快让自己的交易被打包，这就是引入 Replace-by-fee（RBF) 的原因，我们需要一个机制来提高已经在交易池里交易的费用，替换掉旧的交易，让新的交易尽快被打包。 在新的 multi_index_map 重构后，交易在 pending 阶段也会按照交易的 score 来优先处理 (通常费用高的交易 score 也会高)，这会避免高费用的交易被阻塞住，所以理论上述需要手动提高费用的情况会减少，但我们还是需要 RBF 来手动提高交易的…",
+      "image": "http://catcoding.me/images/ob_pasted-image-20241031103004.png",
+      "publishedAt": "2024-11-06T11:55:13Z",
+      "sourceId": "82c4bcb6bba028cf",
+      "sourceTitle": "程序员的喵",
+      "link": "http://catcoding.me/p/ckb-rbf/",
+      "detailPath": "articles/1f14ee758141b8c9bc3b8a37.json"
+    },
+    {
+      "id": "550cd72c31b35cca2f06117f",
+      "title": "CKB 交易池重构",
+      "summary": "在 11.9 号清迈的 CKCON 会议上我会做一个关于 CKB 交易池的演讲，这是我准备的 slides Key Upgrades of the CKB Core 。所以这段时间在整理之前做项目的时候写的一些文档，顺便分享到自己的博客上。既然我们整个项目的源码都是公开的，这些文档其实也是可以分享的。 第一次听说 CKB 的读者可以参考这个文档以了解什么是 CKB 以及如何工作的： How CKB Works | Nervos CKB 。 我加入 Cryptape 之后一年内做的主要工作，涉及到交易池重构、Replace-by-fee 功能、以及 new-verify。这是第一篇关于交易池重构的文章。 什么是交易池 在 bitcoin 中交易池叫作 mempool，比如 mempool - Bitcoin E…",
+      "image": "http://catcoding.me/images/ob_pasted-image-20250221102123.png",
+      "publishedAt": "2024-11-06T11:39:21Z",
+      "sourceId": "82c4bcb6bba028cf",
+      "sourceTitle": "程序员的喵",
+      "link": "http://catcoding.me/p/ckb-txpool-refactor/",
+      "detailPath": "articles/550cd72c31b35cca2f06117f.json"
+    },
+    {
+      "id": "eb5678950fbd5de86a38333e",
+      "title": "xz-backdoor 观感",
+      "summary": "写写最近一周的大瓜 xz-backdoor，该事件可能成为开源供应链安全的一个分水岭，从技术角度看，这里面的社工和混淆也是精彩。 简单介绍一下背景，xz 是一个开源的无损压缩工具，在出事之前可能很少有人注意到这个压缩库使用如此之广，几乎任何一个 Unix-Like 的操作系统里面都有 xz-utils。在两年多的时间里，一个名为 Jia Tan 的程序员勤奋而高效地给 xz 项目做贡献，最终获得了该项目的直接提交权和维护权。之后他在 libzma 中加入了一个非常隐蔽的后门，该后门可以让攻击者在 SSH 会话开始时发送隐藏命令，使攻击者能够跳过鉴权远程执行命令。 Timeline of the xz open source attack 总结了该事件的主要时间点，这里我挑一些关键节点： 潜伏 2005 ~ 2…",
+      "image": "http://catcoding.me/images/ob_pasted-image-20240403114716.png",
+      "publishedAt": "2024-04-04T18:04:33Z",
+      "sourceId": "82c4bcb6bba028cf",
+      "sourceTitle": "程序员的喵",
+      "link": "http://catcoding.me/p/xz-backdoor/",
+      "detailPath": "articles/eb5678950fbd5de86a38333e.json"
+    }
+  ]
+}

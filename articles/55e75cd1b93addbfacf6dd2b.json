@@ -1,0 +1,11 @@
+{
+  "id": "55e75cd1b93addbfacf6dd2b",
+  "title": "Rime/雾凇拼音：敏感词/NSFW词屏蔽",
+  "summary": "此前写过切换到了RIME/雾凇拼音输入法，但是出于种种原因，雾凇拼音中包含的敏感词/NSFW词语总是会在各种场合下出现，不适合工作中长期使用。所以使用Golang写了一个简洁易用的NSFW词屏蔽...",
+  "content": "<p>此前写过切换到了<a href=\"https://pa.ci/370.html\" target=\"_blank\" rel=\"noopener noreferrer\">RIME/雾凇拼音输入法</a>，但是出于种种原因，雾凇拼音中包含的敏感词/NSFW词语总是会在各种场合下出现，不适合工作中长期使用。所以使用Golang写了一个简洁易用的NSFW词屏蔽软件。</p><p><a href=\"https://github.com/uselibrary/iceminus\" target=\"_blank\" rel=\"noopener noreferrer\">IceMinus/冰减</a>：<a href=\"https://github.com/uselibrary/iceminus\" target=\"_blank\" rel=\"noopener noreferrer\"><a href=\"https://github.com/uselibrary/iceminus\" target=\"_blank\" rel=\"noopener noreferrer\">https://github.com/uselibrary/iceminus</a></a> 一个用于屏蔽Rime/雾凇拼音（iDvel/rime-ice） 字典中敏感词（NSFW）的命令行工具。</p><p>以下是简要的使用说明，更多详细内容可以前往GitHub查看。</p><h2>使用说明</h2><h3>安装</h3><p><strong>推荐在<a href=\"https://github.com/uselibrary/iceminus/releases\" target=\"_blank\" rel=\"noopener noreferrer\">release页面</a>下载预编译的二进制文件。</strong></p><p>或自行编译，例如：</p><pre><code>git clone https://github.com/uselibrary/iceminus.git\ncd iceminus\n# 编译Windows版本\nenv GOOS=windows GOARCH=amd64 go build -o bin/iceminus_windows_amd64.exe .</code></pre><h3>使用说明</h3><p>下载后运行iceminus，指定要处理的目录，以Windows为例：</p><pre><code>./iceminus.exe --path C:\\Users\\USERNAME\\AppData\\Roaming\\Rime\\cn_dicts # USERNAME替换为你的用户名</code></pre><p>程序将扫描该目录下的所有YAML文件，查找包含敏感词的行，并在行首添加注释符号 <code># </code> 以屏蔽这些条目。</p><p><strong>随后，请执行Rime的<code>重新部署</code>以应用更改。</strong></p>",
+  "image": null,
+  "publishedAt": "2026-01-27T12:39:00Z",
+  "sourceId": "d87239607d14c88c",
+  "sourceTitle": "怕刺",
+  "link": "https://pa.ci/444.html"
+}

@@ -1,0 +1,11 @@
+{
+  "id": "9403a0b349048ab677ae53f7",
+  "title": "Building a Native Binary for Apache Kafka on macOS",
+  "summary": "Table of Contents KIP-974: Docker Image for GraalVM based Native Kafka Broker With help of the GraalVM configuration developed for KIP-974 (Docker Image for GraalVM based Native Kafka Broker), you can easily build a self-contained native binary for Apache Kafka. Read on to learn how you can build a native Kafka executable yourself, starting in milli-seconds…",
+  "content": "<div>\n<div>Table of Contents</div>\n<ul>\n<li><a target=\"_blank\" rel=\"noopener noreferrer\">KIP-974: Docker Image for GraalVM based Native Kafka Broker</a></li>\n</ul>\n</div>\n<div>\n<p>With help of the GraalVM configuration developed for KIP-974 (Docker Image for GraalVM based Native Kafka Broker),\nyou can easily build a self-contained native binary for Apache Kafka.\nRead on to learn how you can build a native Kafka executable yourself,\nstarting in milli-seconds, making it a perfect fit for development and testing purposes.</p>\n</div>\n<div>\n<p>When I wrote about <a href=\"https://www.morling.dev/blog/jep-483-aot-class-loading-linking/\" target=\"_blank\" rel=\"noopener noreferrer\">ahead-of-time class loading and linking in Java 24</a> recently,\nI also published the start-up time for Apache Kafka as a native binary for comparison.\nThis was done via Docker, as there’s no pre-built native binary of Kafka available for the operating system I’m running on, macOS.\nBut there is a native Kafka container image, so this is what I chose for the sake of convenience.</p>\n</div>\n<div>\n<p>Now, running in a container adds a little bit of overhead of course,\nso it wasn’t a surprise when Thomas Würthinger, lead of the GraalVM project at Oracle,\n<a href=\"https://bsky.app/profile/thomaswue.dev/post/3lloypreatk2s\" target=\"_blank\" rel=\"noopener noreferrer\">brought up the question</a> what the value would be when running Kafka natively on macOS.\nNeedless to say I can’t leave this kind of nice nerd snipe pass,\nso I set out to learn how to build a native Kafka binary on macOS, using GraalVM.</p>\n</div>",
+  "image": null,
+  "publishedAt": "2025-04-07T10:25:00Z",
+  "sourceId": "d159169f81b06175",
+  "sourceTitle": "morling.dev -- Blog",
+  "link": "https://www.morling.dev/blog/building-native-binary-for-apache-kafka-macos/"
+}

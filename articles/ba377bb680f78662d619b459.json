@@ -1,0 +1,11 @@
+{
+  "id": "ba377bb680f78662d619b459",
+  "title": "如何方便地查看 Github Actions secrets",
+  "summary": "在 GitHub 仓库 Settings 页面中设置的 Actions secrets and variables 是只能重新填写的。同时，在 Action 执行的 log 里所有 secrets 都会被星号打码。不过，可以通过创建一个 Action 来方便地查看我们设置的 token。",
+  "content": "<p>在 GitHub 仓库 Settings 页面中设置的 Actions secrets and variables 是只能重新填写的。同时，在 Action 执行的 log 里所有 secrets 都会被星号打码。不过，可以通过创建一个 Action 来方便地查看我们设置的 token。</p>\n<figure><pre><code><span><span>name</span><span>:</span><span> View GitHub Actions secrets</span></span>\n<span><span>on</span><span>:</span></span>\n<span><span>  push</span><span>:</span></span>\n<span><span>    branches</span><span>:</span><span> [</span><span>master</span><span>]</span></span>\n<span><span>  workflow_dispatch</span><span>:</span></span>\n<span><span>  # 可以在仓库的 Actions 页面中手动触发</span></span>\n<span> </span>\n<span><span>jobs</span><span>:</span></span>\n<span><span>  github-actions-environment-variables-ubuntu</span><span>:</span></span>\n<span><span>    runs-on</span><span>:</span><span> ubuntu-latest</span></span>\n<span><span>    steps</span><span>:</span></span>\n<span><span>      -</span><span> name</span><span>:</span><span> Get env</span></span>\n<span><span>        run</span><span>:</span><span> env</span></span>\n<span><span>      -</span><span> name</span><span>:</span><span> Transfer secrets</span></span>\n<span><span>        run</span><span>:</span><span> &quot;</span><span>echo &#x27;Token XXXX: ${{secrets.XXXX}}&#x27; | curl -T - https://ppng.io/自己设定的一段口令</span><span>&quot;</span></span></code></pre></figure>\n<p>在你的设备上运行 <code>curl https://ppng.io/自己设定的一段口令</code> 后再运行上述 action 就可以看到啦。</p>",
+  "image": null,
+  "publishedAt": "2023-02-02T20:38:42Z",
+  "sourceId": "4f3f8eb9d72c3840",
+  "sourceTitle": "新世界的大门",
+  "link": "https://blog.xinshijiededa.men/github-actions-secrets/"
+}

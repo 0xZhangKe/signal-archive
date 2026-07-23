@@ -1,0 +1,11 @@
+{
+  "id": "c3e62a137f472b0e66b62583",
+  "title": "图床从又拍云迁移到Cloudflare R2",
+  "summary": "晚上花了点时间把博客图床从又拍云迁移到了Cloudflare R2，共3458个文件（图片为主），约2.3G。用Gemini调研了方案，最终选择了rclone工具，配置又拍云的ftp参数 + C...",
+  "content": "<p>晚上花了点时间把博客图床从又拍云迁移到了Cloudflare R2，共3458个文件（图片为主），约2.3G。</p><p>用Gemini调研了方案，最终选择了rclone工具，配置又拍云的ftp参数 + Cloudflare R2的S3参数，10几分钟便完成了迁移。</p><p>当初<a href=\"https://www.skyue.com/25070821.html\" target=\"_blank\" rel=\"noopener noreferrer\">又拍云被刷量</a>造成经济损失时就想迁移，但总觉得这事挺麻烦，一直拖着。今天也是心血来潮，研究了一下，居然如此简单。</p><p>又拍云被刷量后，我设置了极其严格的访问控制，导致RSS阅读器无法显示本博客图片，因此我关闭了RSS的全文输出。Cloudflare R2无流量费，不用担心被刷，所以我重新打开了博客RSS全文输出。</p><p>然后，用Gemini修改了<a href=\"https://www.skyue.com/20082317.html\" target=\"_blank\" rel=\"noopener noreferrer\">博客发布脚本</a>，保留所有流程习惯。</p><p>这个古法脚本已经用了6年，当初没有AI，写脚本还挺费劲。谁能想到6年后写代码的门槛如此之低。</p><p>最后，附一张梗图，大家帮忙观测一下国内图片加载速度如何。</p><p><figure><img title=\"\" src=\"https://skyue-static.com/blog_static/2026/image-20260515-224624.webp\"></figure></p>",
+  "image": "https://skyue-static.com/blog_static/2026/image-20260515-224624.webp",
+  "publishedAt": "2026-05-15T14:51:00Z",
+  "sourceId": "ed576c7c0e7c6773",
+  "sourceTitle": "SKYue's Home",
+  "link": "https://www.skyue.com/26051522.html"
+}

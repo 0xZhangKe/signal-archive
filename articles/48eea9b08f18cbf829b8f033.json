@@ -1,0 +1,11 @@
+{
+  "id": "48eea9b08f18cbf829b8f033",
+  "title": "Loom and Thread Fairness",
+  "summary": "Table of Contents Project Loom Scheduling Discussion Project Loom ( JEP 425 ) is probably amongst the most awaited feature additions to Java ever; its implementation of virtual threads (or \"green threads\") promises developers the ability to create highly concurrent applications, for instance with hundreds of thousands of open HTTP connections, sticking to t…",
+  "content": "<div>\n<div>Table of Contents</div>\n<ul>\n<li><a target=\"_blank\" rel=\"noopener noreferrer\">Project Loom</a></li>\n<li><a target=\"_blank\" rel=\"noopener noreferrer\">Scheduling</a></li>\n<li><a target=\"_blank\" rel=\"noopener noreferrer\">Discussion</a></li>\n</ul>\n</div>\n<div>\n<p>Project Loom (<a href=\"https://openjdk.java.net/jeps/425\" target=\"_blank\" rel=\"noopener noreferrer\">JEP 425</a>) is probably amongst the most awaited feature additions to Java ever;\nits implementation of virtual threads (or &quot;green threads&quot;) promises developers the ability to create highly concurrent applications,\nfor instance with hundreds of thousands of open HTTP connections,\nsticking to the well-known thread-per-request programming model,\nwithout having to resort to less familiar and often more complex to use reactive approaches.</p>\n</div>\n<div>\n<p>Having been in the workings for several years, Loom got merged into the mainline of OpenJDK <a href=\"https://github.com/openjdk/jdk/commit/9583e3657e43cc1c6f2101a64534564db2a9bd84\" target=\"_blank\" rel=\"noopener noreferrer\">just recently</a> and is available as a preview feature in the latest <a href=\"https://jdk.java.net/19/\" target=\"_blank\" rel=\"noopener noreferrer\">Java 19 early access builds</a>.\nI.e. it’s the perfect time to get your hands onto virtual threads and explore the new feature.\nIn this post I’m going to share an interesting aspect I learned about thread scheduling fairness for CPU-bound workloads running on Loom.</p>\n</div>",
+  "image": null,
+  "publishedAt": "2022-05-27T08:20:00Z",
+  "sourceId": "d159169f81b06175",
+  "sourceTitle": "morling.dev -- Blog",
+  "link": "https://www.morling.dev/blog/loom-and-thread-fairness/"
+}

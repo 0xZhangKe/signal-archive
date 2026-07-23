@@ -1,0 +1,11 @@
+{
+  "id": "c1a0b0f93f5de42949461b36",
+  "title": "Postgres Replication Slots: Confirmed Flush LSN vs. Restart LSN",
+  "summary": "Table of Contents confirmed_flush_sn: Tracking Consumer Progress restart_lsn: Handling Concurrent Transactions Mid-Transaction Recovery Looking Forward: Streaming In-Progress Transactions Replication slots in Postgres keep track of how far consumers have read a replication stream. After a restart, consumers—​either Postgres read replicas or external tools f…",
+  "content": "<div>\n<div>Table of Contents</div>\n<ul>\n<li><a target=\"_blank\" rel=\"noopener noreferrer\">confirmed_flush_sn: Tracking Consumer Progress</a></li>\n<li><a target=\"_blank\" rel=\"noopener noreferrer\">restart_lsn: Handling Concurrent Transactions</a></li>\n<li><a target=\"_blank\" rel=\"noopener noreferrer\">Mid-Transaction Recovery</a></li>\n<li><a target=\"_blank\" rel=\"noopener noreferrer\">Looking Forward: Streaming In-Progress Transactions</a></li>\n</ul>\n</div>\n<div>\n<p>Replication slots in Postgres keep track of how far consumers have read a replication stream.\nAfter a restart, consumers—​either Postgres read replicas or external tools for change data capture (CDC), like <a href=\"https://debezium.io/\" target=\"_blank\" rel=\"noopener noreferrer\">Debezium</a>—resume reading from the last confirmed log sequence number (LSN) of their replication slot. The slot prevents the database from disposing of required log segments, allowing safe resumption after downtime.</p>\n</div>\n<div>\n<p>In this post, we are going to take a look at why Postgres replication slots don’t have one but two LSN-related attributes: <code>restart_lsn</code> and <code>confirmed_flush_lsn</code>.\nUnderstanding the difference between the two is crucial for troubleshooting replication issues, optimizing WAL retention, and avoiding common pitfalls in production environments.</p>\n</div>",
+  "image": null,
+  "publishedAt": "2025-08-05T11:55:00Z",
+  "sourceId": "d159169f81b06175",
+  "sourceTitle": "morling.dev -- Blog",
+  "link": "https://www.morling.dev/blog/postgres-replication-slots-confirmed-flush-lsn-vs-restart-lsn/"
+}

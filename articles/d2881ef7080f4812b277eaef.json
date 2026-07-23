@@ -1,0 +1,11 @@
+{
+  "id": "d2881ef7080f4812b277eaef",
+  "title": "多GitHub并存在git提交方式",
+  "summary": "日常使用VSCode，并且有多个GitHub账号。希望不在VSCode中用特定GitHub账号登录的情况下正常推送代码。最可靠且稳定的方法是使用 SSH Key（每个账号独立）或 HTTPS+P...",
+  "content": "<p>日常使用VSCode，并且有多个GitHub账号。希望不在VSCode中用特定GitHub账号登录的情况下正常推送代码。最可靠且稳定的方法是使用 SSH Key（每个账号独立）或 HTTPS+PAT（个人访问令牌）。推荐使用 SSH Key方式。</p><h3>为每个 GitHub 账号生成独立 SSH Key，并用 SSH Host 别名绑定到仓库</h3><ul><li><p>生成 Key（示例为 work 账号）：</p><pre><code>ssh-keygen -t ed25519 -C &quot;you@work.com&quot; -f ~/.ssh/id_ed25519_work\neval &quot;$(ssh-agent -s)&quot;\nssh-add ~/.ssh/id_ed25519_work</code></pre></li><li>把 ~/.ssh/id_ed25519_work.pub 的内容复制到对应 GitHub 账号的 Settings → SSH and GPG keys。</li><li><p>在 ~/.ssh/config 添加 Host 别名：</p><pre><code>Host github-work\n  HostName github.com\n  User git\n  IdentityFile ~/.ssh/id_ed25519_work\n  IdentitiesOnly yes</code></pre></li><li><p>在本地 repo 使用别名作为 remote，注意改成实际的<code>work-username/repo</code>，某些情况下，<code>set-url origin</code>可能需要改成<code>add origin</code></p><pre><code>cd /path/to/program\ngit remote add origin git@github-work:work-username.git\n# 或者\ngit remote set-url origin git@github-work:work-username/repo.git</code></pre></li><li><p>测试连接：</p><pre><code>ssh -T git@github-work\ngit remote -v # 检查远端状态</code></pre></li><li><p>设置本仓库的提交作者（只影响 commit 作者信息）：</p><pre><code>git config user.name &quot;Work Name&quot;\ngit config user.email &quot;you@work.com&quot;</code></pre></li></ul><p>此时在 VSCode 中不需要登录对应 GitHub 账户，VSCode 会使用系统的 SSH key 进行 push/pull。</p>",
+  "image": null,
+  "publishedAt": "2025-10-12T02:02:00Z",
+  "sourceId": "d87239607d14c88c",
+  "sourceTitle": "怕刺",
+  "link": "https://pa.ci/436.html"
+}

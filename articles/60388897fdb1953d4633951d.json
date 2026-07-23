@@ -1,0 +1,11 @@
+{
+  "id": "60388897fdb1953d4633951d",
+  "title": "Git Enable Commit Signing",
+  "summary": "A quick guide to setting up GPG commit signing for Git and GitHub, including key generation, export, Git configuration, and VSCode integration.",
+  "content": "<h3>Generate GPG key</h3>\n<pre><code>$ gpg --full-generate-key\n</code></pre>\n<p>Choose <code>RSA and RS</code> and <code>4096</code>. Please make sure the email is the same as your Git.</p>\n<h3>Export GPG Key</h3>\n<pre><code>$ gpg --list-secret-keys --keyid-format LONG\ngpg: checking the trustdb\ngpg: marginals needed: 3  completes needed: 1  trust model: pgp\ngpg: depth: 0  valid:   2  signed:   0  trust: 0-, 0q, 0n, 0m, 0f, 2u\n/Users/vincent/.gnupg/pubring.kbx\n---------------------------------\nsec   rsa3072/A035553B8A2F45A2 2022-09-10 [SC]\n      21B1DADC35757E3C1680ABF0A035553B8A2F45A2\nuid                 [ultimate] Vincent Yang &lt;i@yyt.moe&gt;\nssb   rsa3072/FDE12D34BDBDE80E 2022-09-10 [E]\n\nsec   rsa4096/84A0830C90354A56 2023-03-06 [SC]\n      7BF3AA3C919F20EA1A36CCD984A0830C90354A56\nuid                 [ultimate] Vincent Yang (Git) &lt;missuo@pm.me&gt;\nssb   rsa4096/D611020AF7422B8D 2023-03-06 [E]\n\n$ gpg --armor --export 84A0830C90354A56\n-----BEGIN PGP PUBLIC KEY BLOCK-----\n...\n-----END PGP PUBLIC KEY BLOCK-----\n</code></pre>\n<h3>Fill in your GitHub</h3>\n<p><a href=\"https://github.com/settings/gpg/new\" target=\"_blank\" rel=\"noopener noreferrer\">Add new GPG Key</a></p>\n<h3>Configure Git</h3>\n<pre><code>$ git config --global user.signingkey 84A0830C90354A56\n$ git config --global commit.gpgsign true\n\n# Avoid entering your password every time\nbrew install gpg-suite --cask\n</code></pre>\n<h3>Configure VSCode</h3>\n<p>Check the box in the settings <code>Git: Enable Commit Signing</code>.</p>\n<p><img src=\"https://i.uid.si/img/20230307sUo8Vy.png\" alt=\"20230307sUo8Vy\"></p>",
+  "image": "https://i.uid.si/img/20230307sUo8Vy.png",
+  "publishedAt": "2023-03-06T20:12:33Z",
+  "sourceId": "1dc4dbdb701e1314",
+  "sourceTitle": "Vincent's Notes",
+  "link": "https://missuo.me/posts/git-commit-enable-signing/"
+}

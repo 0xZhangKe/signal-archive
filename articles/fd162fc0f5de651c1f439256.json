@@ -1,0 +1,11 @@
+{
+  "id": "fd162fc0f5de651c1f439256",
+  "title": "New Null Checks in Inner Class Constructors",
+  "summary": "The Java compiler will now inject null checks for the outer instance into the constructor of inner classes",
+  "content": "<p>The Java compiler will now inject null checks for the outer instance into the constructor of inner classes</p><h2>Null Enclosing Instance</h2>\n<p>The Java Language Specification prescribes that various <em>use sites</em> of inner class constructors should include null checks of the immediately enclosing instance and from then on assumes that the reference is non-null.\nHowever it does not mandate such checks of the incoming instance at the <em>declaration site</em> of these constructors and so core reflection, method handles, and direct bytecode invocation can pass <code><span>null</span></code> as enclosing instance, which can lead to <code><span>NullPointerException</span></code>s down the road.</p>\n<p>Since a <code><span>null</span></code> enclosing instance is outside of the JLS and the future evolution of inner classes may lead to unexpected NPEs, Java 25 will start ensuring that references to the immediately enclosing instance are always non-null.</p>\n<h2>Emitted Null Checks</h2>\n<p>Starting with JDK 25, when javac is targeting release 25 or higher, it will emit null checks for the enclosing instances in inner class constructors.</p>\n<p>This behavioral change will lead to new NPEs in code that uses core reflection, method handles, or direct bytecode invocation to pass <code><span>null</span></code> as enclosing instance.\nSuch code is rare and usually found in libraries or frameworks (as opposed to in applications).\nIt should be changed to no longer pass a null reference.</p>\n<p>In case these additional checks lead to issues, their emission can be prevented with a flag: <code>-XDnullCheckOuterThis=(true|false)</code>.\nThis should be seen as a temporary workaround and no guarantees are made for how long this flag will be available.</p>\n<p>For more details, check <a href=\"https://bugs.openjdk.org/browse/JDK-8351274\" target=\"_blank\" rel=\"noopener noreferrer\">JDK-8351274</a>.</p>",
+  "image": null,
+  "publishedAt": "2025-04-04T00:00:00Z",
+  "sourceId": "c31f4842c93c4e8e",
+  "sourceTitle": "nipafx",
+  "link": "https://nipafx.dev/inner-null-checks"
+}

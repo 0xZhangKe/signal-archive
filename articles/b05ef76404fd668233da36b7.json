@@ -1,0 +1,11 @@
+{
+  "id": "b05ef76404fd668233da36b7",
+  "title": "Automatically update Homebrew versions using Action",
+  "summary": "A tutorial on automating Homebrew formula updates using GitHub Actions, with shell scripts that fetch latest release versions and update SHA256 hashes automatically after each release.",
+  "content": "<p>Homebrew 可以说是 Mac 上必装的命令行工具之一。它真的太好用太方便的。但是你在维护一个 Homebrew Tap 的时候，如果你的程序有新的 Release 发布时，需要在对应的 <code>.rb</code> 文件中修改版本号以及对应的二进制文件的 sha256，这显然会有些繁琐，或者说不太优雅。</p>\n<p>我习惯使用 GitHub Action 去交叉编译各种 Release，重要的是 Action 可以帮助我自动发布。其实在每一次 Action 发布之后，可以添加一个 Step，去更新 Casks 或者 Formula 的 <code>.rb</code>。为了方便，你可以创建一个 <code>.sh</code> 文件来做这件事。</p>\n<h2>部分代码（以 DeepL X 为例）</h2>\n<h4>更新版本号</h4>\n<pre><code>Get the latest version of Deeplx\nlast_version=$(curl -Ls &quot;https://api.github.com/repos/OwO-Network/DeepLX/releases/latest&quot; | grep &#x27;&quot;tag_name&quot;:&#x27; | sed -E &#x27;s/.*&quot;([^&quot;]+)&quot;.*/\\1/&#x27; | sed &#x27;s/v//g&#x27;)\n\n# Update the version number in the formula\nsed -i &quot;s/version \\&quot;.*/version \\&quot;${last_version}\\&quot;/g&quot; Formula/deeplx.rb\n</code></pre>\n<h4>更新 sha256</h4>\n<pre><code> # Download the new binaries\nwget -O deeplx_darwin_amd64 https://github.com/OwO-Network/DeepLX/releases/download/v${last_version}/deeplx_darwin_amd64\nwget -O deeplx_darwin_arm64 https://github.com/OwO-Network/DeepLX/releases/download/v${last_version}/deeplx_darwin_arm64\n\n# Calculate the SHA256 hash for the new binaries\namd64_sha256=$(sha256sum deeplx_darwin_amd64 | cut -d &#x27; &#x27; -f 1)\narm64_sha256=$(sha256sum deeplx_darwin_arm64 | cut -d &#x27; &#x27; -f 1)\n\n# Update the SHA256 hashes in the formula\nsed -i &quot;8s/.*/    sha256 \\&quot;${arm64_sha256}\\&quot;/&quot; Formula/deeplx.rb\nsed -i &quot;11s/.*/    sha256 \\&quot;${amd64_sha256}\\&quot;/&quot; Formula/deeplx.rb\n\n# Delete the new binaries\nrm -f deeplx_darwin*\n</code></pre>\n<p>在 Action 发布到 Release 之后，触发这个 shell 文件就可以啦。这样的话，当你有新的 Release 发布的时候，无需去维护 Homebrew Tap。用户可以直接获取到最新的版本。</p>",
+  "image": null,
+  "publishedAt": "2023-03-03T18:42:51Z",
+  "sourceId": "1dc4dbdb701e1314",
+  "sourceTitle": "Vincent's Notes",
+  "link": "https://missuo.me/posts/brew-version-update/"
+}

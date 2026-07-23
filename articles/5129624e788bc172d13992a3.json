@@ -1,0 +1,11 @@
+{
+  "id": "5129624e788bc172d13992a3",
+  "title": "握着你的手训一个类GPT语言模型 (二)",
+  "summary": "书接 上回 ，我们搞了个最简单的胡说八道机，距离GPT其实只差更科学的模型结构了。本文中公式较多，嚼不动的同学建议参看一些 图文并茂的科普文 。 上下文信息融合 考虑一个张量 $\\boldsymbol{x} \\in \\mathbb{R}^{T\\times C}$，这个张量可以用来表示一个 “上下文特征 (context feature)” ，其中 $T$ 是上下文长度 1 ，$C$ 是特征数。我们假定一种非常简单的，从上下文中整合信息的方式: 对于每一个位置 $t$，我们把所有 $t$ 之前的特征都取个平均值。写成数学公式就是:",
+  "content": "<p>书接<a href=\"https://bigeagle.me/2023/03/pico-gpt-1/\" target=\"_blank\" rel=\"noopener noreferrer\">上回</a>，我们搞了个最简单的胡说八道机，距离GPT其实只差更科学的模型结构了。本文中公式较多，嚼不动的同学建议参看一些<a href=\"https://theaisummer.com/transformer/\" target=\"_blank\" rel=\"noopener noreferrer\">图文并茂的科普文</a>。</p>\n<h2>上下文信息融合</h2>\n<p>考虑一个张量 $\\boldsymbol{x} \\in \\mathbb{R}^{T\\times C}$，这个张量可以用来表示一个 “上下文特征 (context feature)” ，其中 $T$ 是上下文长度<sup><a target=\"_blank\" rel=\"noopener noreferrer\">1</a></sup>，$C$ 是特征数。我们假定一种非常简单的，从上下文中整合信息的方式: 对于每一个位置 $t$，我们把所有 $t$ 之前的特征都取个平均值。写成数学公式就是:</p>",
+  "image": null,
+  "publishedAt": "2023-03-20T00:00:00Z",
+  "sourceId": "1a53726dacd05db7",
+  "sourceTitle": "K.I.S.S",
+  "link": "https://bigeagle.me/2023/03/pico-gpt-2/"
+}

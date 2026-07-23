@@ -1,0 +1,11 @@
+{
+  "id": "eb6e24731494a130f9ed7a94",
+  "title": "Backfilling Postgres TOAST Columns in Debezium Data Change Events",
+  "summary": "Table of Contents Debezium Reselect Postprocessor Flink DataStream API Flink SQL With OVER Aggregation Flink Process Table Functions Summary and Discussion Postgres logical replication, while powerful for capturing real-time data changes, presents challenges with TOAST columns, whose values can be absent from data change events in specific situations. This…",
+  "content": "<div>\n<div>Table of Contents</div>\n<ul>\n<li><a target=\"_blank\" rel=\"noopener noreferrer\">Debezium Reselect Postprocessor</a></li>\n<li><a target=\"_blank\" rel=\"noopener noreferrer\">Flink DataStream API</a></li>\n<li><a target=\"_blank\" rel=\"noopener noreferrer\">Flink SQL With OVER Aggregation</a></li>\n<li><a target=\"_blank\" rel=\"noopener noreferrer\">Flink Process Table Functions</a></li>\n<li><a target=\"_blank\" rel=\"noopener noreferrer\">Summary and Discussion</a></li>\n</ul>\n</div>\n<div>\n<p>Postgres logical replication, while powerful for capturing real-time data changes, presents challenges with TOAST columns,\nwhose values can be absent from data change events in specific situations.\nThis post discusses how Debezium addresses this through its built-in reselect post processor,\nthen explores more robust solutions leveraging Apache Flink’s capabilities for stateful stream processing,\nincluding Flink SQL and the brand-new process table functions (PTFs) in Flink 2.1.</p>\n</div>",
+  "image": null,
+  "publishedAt": "2025-05-26T14:40:00Z",
+  "sourceId": "d159169f81b06175",
+  "sourceTitle": "morling.dev -- Blog",
+  "link": "https://www.morling.dev/blog/backfilling-postgres-toast-columns-debezium-change-events/"
+}

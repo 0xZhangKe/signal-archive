@@ -1,0 +1,169 @@
+{
+  "items": [
+    {
+      "id": "6689995d7d37c5342e9841f1",
+      "title": "Test & Set",
+      "summary": "Working with threads always feels hazardous to me. Non-determinism limits how much we can exercise with simple tests. Stress tests can shake out some bugs, but they’re slow and potentially flaky. I don’t like flaky tests . So I have a few concurrency patterns that I trust, and I",
+      "image": null,
+      "publishedAt": "2026-07-13T22:22:27Z",
+      "sourceId": "c12f29ba8e9a36cd",
+      "sourceTitle": "Public Object",
+      "link": "https://publicobject.com/2026/07/13/test-set/",
+      "detailPath": "articles/6689995d7d37c5342e9841f1.json"
+    },
+    {
+      "id": "12ff01068748552919b59f1c",
+      "title": "Deconstructing OkHttp",
+      "summary": "I presented this at KotlinConf on May 22, 2026. Also available on slides , YouTube , and Speaker Deck . OkHttp is a popular library for making network calls. You might use it directly, or with Ktor, Retrofit, Coil, or gRPC. But this is not a talk on how to use OkHttp. Instead,",
+      "image": "https://publicobject.com/content/images/2026/07/20260522-deconstructing-okhttp.png",
+      "publishedAt": "2026-05-22T12:00:00Z",
+      "sourceId": "c12f29ba8e9a36cd",
+      "sourceTitle": "Public Object",
+      "link": "https://publicobject.com/2026/05/22/deconstructing-okhttp/",
+      "detailPath": "articles/12ff01068748552919b59f1c.json"
+    },
+    {
+      "id": "de97e9fe71baab6921367c07",
+      "title": "‘Humans use Energy and Water too’",
+      "summary": "An engineer I admire was lamenting about AI. He said that his new programming agent is excellent at fixing bugs! And all that it costs is a bunch of energy and many litres of water. He said that he could also have fixed those same bugs, and that he also",
+      "image": null,
+      "publishedAt": "2026-03-07T04:29:40Z",
+      "sourceId": "c12f29ba8e9a36cd",
+      "sourceTitle": "Public Object",
+      "link": "https://publicobject.com/2026/03/07/humanity/",
+      "detailPath": "articles/de97e9fe71baab6921367c07.json"
+    },
+    {
+      "id": "49415f3369a261ffe23e279d",
+      "title": "Keep Android Open",
+      "summary": "Google is building a digital lock into Android. It's a very bad idea and I hate it. The excellent organizers at keepandroidopen.org encouraged me to complain to the Competition Bureau of Canada. What I sent wasn't well edited but it captures my anger. Please send your own! I found",
+      "image": null,
+      "publishedAt": "2026-02-21T12:29:24Z",
+      "sourceId": "c12f29ba8e9a36cd",
+      "sourceTitle": "Public Object",
+      "link": "https://publicobject.com/2026/02/21/keep-android-open/",
+      "detailPath": "articles/49415f3369a261ffe23e279d.json"
+    },
+    {
+      "id": "05dd78b41b24bb826081b7e0",
+      "title": "Flattening my Dependency Graph",
+      "summary": "Rounds has a Kotlin server that integrates a few things: PostgreSQL persistence via SQLDelight (hosted on PlanetScale !) WebAuthn4J for Passkeys kotlinx.html for dynamic web pages Ktor for HTTP binding The service uses six database tables. The business domain tables are Game and GameEvent . Support for auth, sessions, and collaborative",
+      "image": null,
+      "publishedAt": "2026-02-03T05:28:50Z",
+      "sourceId": "c12f29ba8e9a36cd",
+      "sourceTitle": "Public Object",
+      "link": "https://publicobject.com/2026/02/03/flattening-my-dependency-graph/",
+      "detailPath": "articles/05dd78b41b24bb826081b7e0.json"
+    },
+    {
+      "id": "f86dd958a3ae8ee550091e07",
+      "title": "Dynamic Tints with CSS and Kotlin/JS",
+      "summary": "I’ve been trying to build a remarkable UI for Rounds.app . One feature that turned out quite well is tinting the game name & menu bar icons when the winner changes. In this recording you can see colors change when I toggle the win condition: The title color changes",
+      "image": "https://publicobject.com/content/images/2026/01/tints.gif",
+      "publishedAt": "2026-01-30T23:12:23Z",
+      "sourceId": "c12f29ba8e9a36cd",
+      "sourceTitle": "Public Object",
+      "link": "https://publicobject.com/2026/01/30/css-tints/",
+      "detailPath": "articles/f86dd958a3ae8ee550091e07.json"
+    },
+    {
+      "id": "9992fee154256bb4b4d4ca06",
+      "title": "Don’t Block Suspend Functions",
+      "summary": "Here’s a program that launches 3 jobs. The first runs forever and the other two exchange a value. @Test fun test() = runTest { val channel = Channel<String>() val deferredA = async { while (isActive) { delay(1_000) } } val deferredB = async { channel.send(\"hello\") } val deferredC = async { channel.receive() } deferredB.await(",
+      "image": null,
+      "publishedAt": "2026-01-22T04:32:49Z",
+      "sourceId": "c12f29ba8e9a36cd",
+      "sourceTitle": "Public Object",
+      "link": "https://publicobject.com/2026/01/22/dont-block-suspend-functions/",
+      "detailPath": "articles/9992fee154256bb4b4d4ca06.json"
+    },
+    {
+      "id": "25e580a5c00416a0b903118d",
+      "title": "Rounds.app",
+      "summary": "In 2012 , I published an Android score pad app named Rounds to the Play Store. I was quite proud of it! It used an iPod click wheel-style score entry UI and balanced capability with simplicity. Rounds’ animated action bar in 2012 I joined Square, did a bunch of open source,",
+      "image": "https://publicobject.com/content/images/2026/01/menu.gif",
+      "publishedAt": "2026-01-15T01:57:01Z",
+      "sourceId": "c12f29ba8e9a36cd",
+      "sourceTitle": "Public Object",
+      "link": "https://publicobject.com/2026/01/15/rounds-app/",
+      "detailPath": "articles/25e580a5c00416a0b903118d.json"
+    },
+    {
+      "id": "887d6078521deaa54e57bdb6",
+      "title": "Inside Burst’s Test Interceptors",
+      "summary": "I recently posted on the Cash Code Blog announcing Burst’s new test interceptors feature. They are similar to JUnit rules in API and capability. A Small API A typical use case is connecting some lifecycle to a test’s execution. Perhaps we want a chess engine to be available",
+      "image": null,
+      "publishedAt": "2025-09-06T04:27:03Z",
+      "sourceId": "c12f29ba8e9a36cd",
+      "sourceTitle": "Public Object",
+      "link": "https://publicobject.com/2025/09/06/inside-bursts-test-interceptors/",
+      "detailPath": "articles/887d6078521deaa54e57bdb6.json"
+    },
+    {
+      "id": "73c5b6167b6936a22fcab812",
+      "title": "Coroutines Party Tricks",
+      "summary": "I presented this at Droidcon NYC on June 25, 2025. Available as code , video , slides , Droidtube , & Speaker Deck . Coroutines are an important tool in the Android developer’s toolbox. We use 'em to background our tasks, to parallelize our work, and to gracefully cancel operations. This is not a",
+      "image": "https://publicobject.com/content/images/2025/07/20250625-coroutines-party-tricks.png",
+      "publishedAt": "2025-06-25T12:00:00Z",
+      "sourceId": "c12f29ba8e9a36cd",
+      "sourceTitle": "Public Object",
+      "link": "https://publicobject.com/2025/06/25/coroutines-party-tricks/",
+      "detailPath": "articles/73c5b6167b6936a22fcab812.json"
+    },
+    {
+      "id": "2eeae04beeb4cadce184e740",
+      "title": "UIViewPropertyAnimator is Too Cute",
+      "summary": "I was using the old UIView APIs when I found some code that broke my brain. Here’s Swift code to animates a UIButton from opaque to transparent over one second. let button = ... let animateOut = UIViewPropertyAnimator(duration: 1.0, curve: .easeInOut) { print(\"2 alpha=\\(button.alpha)\") button.alpha = 0.0",
+      "image": null,
+      "publishedAt": "2025-01-26T21:04:55Z",
+      "sourceId": "c12f29ba8e9a36cd",
+      "sourceTitle": "Public Object",
+      "link": "https://publicobject.com/2025/01/26/uiviewpropertyanimator/",
+      "detailPath": "articles/2eeae04beeb4cadce184e740.json"
+    },
+    {
+      "id": "56f3f92d80d1fc0036d756ab",
+      "title": "Try Something Simpler",
+      "summary": "The late Joe Armstrong had a great rule for error handling that stuck with me. ‘If you can’t do what you want to do try to do something simpler’ I was thinking about this recently. I was writing code to embed resource files in an iOS application binary. Here’",
+      "image": null,
+      "publishedAt": "2025-01-05T05:38:25Z",
+      "sourceId": "c12f29ba8e9a36cd",
+      "sourceTitle": "Public Object",
+      "link": "https://publicobject.com/2025/01/05/try-something-simpler/",
+      "detailPath": "articles/56f3f92d80d1fc0036d756ab.json"
+    },
+    {
+      "id": "3e057214f295717d656a2996",
+      "title": "Testing safe area insets on iOS",
+      "summary": "I’m adding edge-to-edge UI support in Redwood. My code asks the host platform how much of the screen is consumed by system bars and notches and things, and it returns us a measurement like ‘40 pixels at the top + 10 pixels at the bottom’. The iOS code to handle",
+      "image": null,
+      "publishedAt": "2024-11-20T20:04:48Z",
+      "sourceId": "c12f29ba8e9a36cd",
+      "sourceTitle": "Public Object",
+      "link": "https://publicobject.com/2024/11/20/testing-safe-area-insets-on-ios/",
+      "detailPath": "articles/3e057214f295717d656a2996.json"
+    },
+    {
+      "id": "01d0094c00a0f8609d5d814e",
+      "title": "Bad Luck Tickets",
+      "summary": "My son’s swim meet is coming up. If he’s healthy, he’ll compete. My daughter’s hockey team has a game coming up. League rules say they must forfeit if they have fewer than 10 players. There’s only 10 girls on the roster so they need everyone",
+      "image": null,
+      "publishedAt": "2024-11-13T05:08:26Z",
+      "sourceId": "c12f29ba8e9a36cd",
+      "sourceTitle": "Public Object",
+      "link": "https://publicobject.com/2024/11/13/bad-luck-tickets/",
+      "detailPath": "articles/01d0094c00a0f8609d5d814e.json"
+    },
+    {
+      "id": "c73fd756a27d940a9760e07e",
+      "title": "Writing For Me",
+      "summary": "I’ve been posting on this website throughout my career. Many posts are motivated by my own suffering! These go like this: I learned a thing. The hard way. It sucked. Please avoid making the same mistake. In other posts, there’s a discussion on something and I feel compelled",
+      "image": null,
+      "publishedAt": "2024-11-07T04:29:08Z",
+      "sourceId": "c12f29ba8e9a36cd",
+      "sourceTitle": "Public Object",
+      "link": "https://publicobject.com/2024/11/07/writing-for-me/",
+      "detailPath": "articles/c73fd756a27d940a9760e07e.json"
+    }
+  ]
+}

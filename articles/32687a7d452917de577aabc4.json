@@ -1,0 +1,11 @@
+{
+  "id": "32687a7d452917de577aabc4",
+  "title": "入手yubikey,一点小心得",
+  "summary": "昨天从 @yeagle 那里买的 yubikey 终于到货，如果不知道 yubikey 是什么就看看 @yeagle 的广告好了，呵呵。 去年 CSDN 事件现在还令人心有余悸，再加上早年安全意识不足，多个网站都是一套密码，想起来实在后怕，于是立马开始用 Lastpass ，给大部份网站都换成随机密码， Google 帐户开两步认证，免得被 Big Brother 翻邮箱什么的。 但是 Google Authenticator 还是太不方便，登录的时候麻烦不少，需要敲完密码再摸出手机打开App然后再敲一遍 verify code，敲慢了还会过期还要再敲一遍，实在是影响 用户体验 。 另一方面，在不少场合下，公然敲密码都是一件比较尴尬的事情，怕别人看到，又不好意思遮遮掩掩什么的，所以只有锻炼手速，然而手速快了又…",
+  "content": "<p>昨天从 <a href=\"http://yegle.net/2010/08/29/yubikey-the-cheap-otp-resolution/\" target=\"_blank\" rel=\"noopener noreferrer\">@yeagle</a> 那里买的 yubikey 终于到货，如果不知道 yubikey 是什么就看看 @yeagle 的广告好了，呵呵。</p>\n<p>去年 CSDN 事件现在还令人心有余悸，再加上早年安全意识不足，多个网站都是一套密码，想起来实在后怕，于是立马开始用 <a href=\"http://lastpass.com/\" target=\"_blank\" rel=\"noopener noreferrer\">Lastpass</a>，给大部份网站都换成随机密码， Google 帐户开两步认证，免得被 <code>Big Brother</code> 翻邮箱什么的。</p>\n<p>但是 Google Authenticator 还是太不方便，登录的时候麻烦不少，需要敲完密码再摸出手机打开App然后再敲一遍 verify code，敲慢了还会过期还要再敲一遍，实在是影响 <code>用户体验</code> 。</p>\n<p>另一方面，在不少场合下，公然敲密码都是一件比较尴尬的事情，怕别人看到，又不好意思遮遮掩掩什么的，所以只有锻炼手速，然而手速快了又容易敲错，噗呵呵… 还有的时候电脑需要给人用一下，但是又不方便告诉他密码什么的，这就很头疼。这两种情况之前我都是用 <code>pam_usb</code> 解决的，把优盘搞成钥匙用，但是安全性就比较差了。</p>\n<p>所以我就买了yubikey，廉价的一次一密方案。</p>\n<p>其实主要想写的是 <code>pam_yubico</code>, PAM 是Linux中的用户认证机制， pam_yubico 故名思义就是用 yubikey 进行 Linux 用户认证，login啊 unlock screeen啊，ssh啊什么的。 Arch的 <a href=\"https://aur.archlinux.org/packages.php?ID=21528\" target=\"_blank\" rel=\"noopener noreferrer\">AUR</a> 里已经有了，别的系统自己打个包也不麻烦，不过比较令我奇怪的是从 github 里 clone 下来的代码在运行 <code>automake</code> 的时候竟然会报错说 <code>libykclient.la</code> 不是符合 POSIX 要求的库……没办法只好下载 release 版了。</p>",
+  "image": null,
+  "publishedAt": "2012-05-10T20:15:00Z",
+  "sourceId": "1a53726dacd05db7",
+  "sourceTitle": "K.I.S.S",
+  "link": "https://bigeagle.me/2012/05/yubikey/"
+}

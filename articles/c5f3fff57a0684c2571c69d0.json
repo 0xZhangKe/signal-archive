@@ -1,0 +1,11 @@
+{
+  "id": "c5f3fff57a0684c2571c69d0",
+  "title": "It took me several hours to switch to a 2.5G modem",
+  "summary": "A troubleshooting guide for replacing a China Unicom modem with a 2.5G ZXHN F7015TV3 unit, detailing DNS hijacking issues caused by incomplete ITMS registration and the solution to force registration status via Telnet commands.",
+  "content": "<blockquote>\n<p>由于中国联通给的光猫是千兆的，我的带宽又刚好是千兆的，所以永远跑不满千兆，我就想着换个 2.5G 的光猫，在联系联通客服多次之后，联通表示不给换，所以我自己在小黄鱼上买一个 ZXHN F7015TV3，花费 130 元人民币。</p>\n</blockquote>\n<p>收到光猫之后，顺利地填写了 LOID，注册 OLT 成功，测试了一下，路由器拨号成功，获取到了公网 IP。本以为这就结束了。结果疑难杂症这就来了，我可以使用部分不需要 DNS 解析的服务，但是涉及到 DNS 解析的服务都不行。</p>\n<p>一开始以为是联通那边做了验证，我换了光猫，设备的 SN 和 MAC 地址都变了，联通阻止了我的连接，我又通过 Telnet 修改了新光猫的 SN 和 MAC 地址，伪装成和老光猫完全一直，但是还是存在一样的问题。</p>\n<p>最后我发现，<code>nslookup baidu.com</code> 和 <code>nslookup bilibili.com</code> 都是由 <strong>119.29.29.29#53</strong> 解析的，但是返回的 IP 却永远是 <code>192.168.1.1</code>，我的网络环境是光猫桥接，路由器拨号，路由器的 DHCP 服务器分配的是 <code>119.29.29.29</code> 和 <code>223.6.6.6</code>。奇怪的是，为什么会被 DNS 劫持解析成 <code>192.168.1.1</code> 呢？</p>\n<p>后来在 Google 搜索之后，恩山论坛也有类似的情况。原来是在设备注册的时候，到 30% 卡住了。</p>\n<pre><code>到 ITMS 的通道不通，请联系客户经理或拨打 10000。\n</code></pre>\n<p>我当时在网上搜索和咨询卖家之后，发现这个 ITMS 只是电信用来远程管理光猫的，加上我是联通宽带，我并不希望 ITMS 注册成功，而且并不会影响桥接使用。结果，恶心的事情是，如果光猫的 ITMS 是“未注册”的状态，DNS 解析就会被劫持，不管你访问任何的网站理论上都会跳转到“设备注册”的页面。</p>\n<p>解决方案只能强行写死注册的状态为“注册成功”。</p>\n<pre><code>sendcmd 1 DB set PDTCTUSERINFO 0 Status 0\nsendcmd 1 DB set PDTCTUSERINFO 0 Result 1\nsendcmd 1 DB save\n</code></pre>\n<p>最后，顺利用上 2.5G 光猫，接下来考虑换上 2.5G 交换机。F7015TV3 电信版的性价比还是可以的，非常小巧，不占地方，支持全国移动联通电信的宽带。</p>",
+  "image": null,
+  "publishedAt": "2024-06-21T16:28:45Z",
+  "sourceId": "1dc4dbdb701e1314",
+  "sourceTitle": "Vincent's Notes",
+  "link": "https://missuo.me/posts/25g-modem/"
+}

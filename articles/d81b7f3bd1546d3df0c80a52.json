@@ -1,0 +1,11 @@
+{
+  "id": "d81b7f3bd1546d3df0c80a52",
+  "title": "Grafana Plugin Tip",
+  "summary": "Have Grafana deployed? Going crazy trying to figure out why your apps and extensions aren't working? It's an easy fix. Under the [security] section, add angular_support_enabled = true . Now for the longer explanation. I was trying to integrate the Zabbix Grafana app . For the instructions, I had to go to the \"config\" tab of the plugin. Issue was, nothing wa…",
+  "content": "<p>Have Grafana deployed? Going crazy trying to figure out why your apps and extensions aren&#x27;t working? It&#x27;s an easy fix. Under the <code>[security]</code> section, add <code>angular_support_enabled = true</code>.</p>\n\n<p>Now for the longer explanation. I was trying to integrate the <a href=\"https://grafana.com/grafana/plugins/alexanderzobnin-zabbix-app\" target=\"_blank\" rel=\"noopener noreferrer\">Zabbix Grafana app</a>. For the instructions, I had to go to the &quot;config&quot; tab of the plugin. Issue was, nothing was there. The config tab was missing. Unfortunate.</p>\n<p>Seems like other plugins have this issue too, like the <a href=\"https://grafana.com/grafana/plugins/cloudflare-app\" target=\"_blank\" rel=\"noopener noreferrer\">Cloudflare Zabbix app</a>. This issue was caused by Grafana <a href=\"https://grafana.com/docs/grafana/latest/developers/angular_deprecation\" target=\"_blank\" rel=\"noopener noreferrer\">phasing out Angular plugin support</a>. By Grafana 10, Angular plugins will no longer be supported and will stop working, even if you have that configuration option set.</p>\n<p>Anyway, time to make more fancy graphs :)</p>",
+  "image": null,
+  "publishedAt": "2024-12-27T07:19:04Z",
+  "sourceId": "3bdb78ed4280c0bc",
+  "sourceTitle": "Ersei 'n Stuff",
+  "link": "https://ersei.net/en/blog/grafana-tip"
+}

@@ -1,0 +1,11 @@
+{
+  "id": "c2c41eedda07b54dab652dac",
+  "title": "Gravatar 头像镜像站已上线",
+  "summary": "停止公告 2024年5月3日，因CDN运营问题，终止 gravatar.taurusxin.com 全球头像镜像服务，镜像站已于当日停止解析，以下内容仅留作存档。 由于官方 https 站均被屏蔽，目前本站使用的是自建的 gravatar 镜像站，使用 Cachefly 全球 CDN 进行分发 说明地址： https://gravatar.taurusxin.com/ 镜像地址： https://gravatar.taurusxin.com/avatar/ 将你的博客中的头像地址改为 https://gravatar.taurusxin.com/avatar/ 即可 缓存规则如下 对 200、301 或者 302 等有效代码缓存的时间长度，特定参数 any 表示对任何响应都缓存一定时间长度 HTTP Stat…",
+  "content": "<h2>停止公告\n</h2>\n <blockquote>\n <p>2024年5月3日，因CDN运营问题，终止 gravatar.taurusxin.com 全球头像镜像服务，镜像站已于当日停止解析，以下内容仅留作存档。</p>\n\n </blockquote>\n<hr>\n<p>由于官方 https 站均被屏蔽，目前本站使用的是自建的 gravatar 镜像站，使用 Cachefly 全球 CDN 进行分发</p>\n<p>说明地址：<a href=\"https://gravatar.taurusxin.com/\" target=\"_blank\" rel=\"noopener noreferrer\">https://gravatar.taurusxin.com/</a></p>\n<p>镜像地址：<a href=\"https://gravatar.taurusxin.com/avatar/\" target=\"_blank\" rel=\"noopener noreferrer\">https://gravatar.taurusxin.com/avatar/</a></p>\n<p>将你的博客中的头像地址改为 <a href=\"https://gravatar.taurusxin.com/avatar/\" target=\"_blank\" rel=\"noopener noreferrer\">https://gravatar.taurusxin.com/avatar/</a> 即可</p>\n<p>缓存规则如下</p>\n<p>对 200、301 或者 302 等有效代码缓存的时间长度，特定参数 any 表示对任何响应都缓存一定时间长度</p>\n<table>\n\t<thead>\n\t\t\t<tr>\n\t\t\t\t\t<th>HTTP Status Code</th>\n\t\t\t\t\t<th>缓存时长</th>\n\t\t\t</tr>\n\t</thead>\n\t<tbody>\n\t\t\t<tr>\n\t\t\t\t\t<td>200 304</td>\n\t\t\t\t\t<td>7 天</td>\n\t\t\t</tr>\n\t\t\t<tr>\n\t\t\t\t\t<td>301</td>\n\t\t\t\t\t<td>1 天</td>\n\t\t\t</tr>\n\t\t\t<tr>\n\t\t\t\t\t<td>500 502 503 504</td>\n\t\t\t\t\t<td>不缓存</td>\n\t\t\t</tr>\n\t\t\t<tr>\n\t\t\t\t\t<td>any</td>\n\t\t\t\t\t<td>1 天</td>\n\t\t\t</tr>\n\t</tbody>\n</table>\n<p>镜像站测试\n<img alt=\"默认头像\" height=\"300\" src=\"https://weavatar.com/avatar/feaf84106b961c37594cc19ba9f6d1fd?d=mm&amp;s=300\" width=\"300\"></p>\n<p>若默认头像显示正确，则镜像站工作正常</p>",
+  "image": "https://weavatar.com/avatar/feaf84106b961c37594cc19ba9f6d1fd?d=mm&s=300",
+  "publishedAt": "2021-10-27T00:23:00Z",
+  "sourceId": "3220115c042340a7",
+  "sourceTitle": "TaurusXin 的独立博客",
+  "link": "https://www.taurusxin.com/gravatar/"
+}

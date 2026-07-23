@@ -1,0 +1,103 @@
+{
+  "items": [
+    {
+      "id": "bf633219d8bc66130def6d12",
+      "title": "Clickjacking Chrome Extensions",
+      "summary": "Some webpages embed resources from other domains. Because of the web browser's storied and sordid history, it's possible for those resources to carry invisible, ambient authority without their creators' knowledge. One concrete example is Cross-Site Request Forgery: the JavaScript on a particular webpage can make an XMLHttpRequest to a resource on another do…",
+      "image": null,
+      "publishedAt": "2018-07-18T19:04:00Z",
+      "sourceId": "5e4db476da32a0bc",
+      "sourceTitle": "lizzie",
+      "link": "https://blog.lizzie.io/clickjacking-privacy-badger.html",
+      "detailPath": "articles/bf633219d8bc66130def6d12.json"
+    },
+    {
+      "id": "fd89b5930a5e93be534b00f2",
+      "title": "Preventing USB Attacks with Linux-Hardened",
+      "summary": "In December 2016 I wrote a piece about using Grsecurity to prevent new USB devices from being loaded. Grsecurity has, unfortunately, left this world , but the linux-hardened project has taken on some of the patches and updates. I thought it would be worth a minor update to that post now that linux-hardened has ported the deny_new_usb patches , and uses a ma…",
+      "image": null,
+      "publishedAt": "2018-07-13T19:06:00Z",
+      "sourceId": "5e4db476da32a0bc",
+      "sourceTitle": "lizzie",
+      "link": "https://blog.lizzie.io/preventing-usb-attacks-with-linux-hardened.html",
+      "detailPath": "articles/fd89b5930a5e93be534b00f2.json"
+    },
+    {
+      "id": "62e6b079ad0341282102be1c",
+      "title": "Breaking KASLR with perf",
+      "summary": "Before Linux 4.6, the default value of /proc/sys/kernel/perf_event_paranoid was 1, and so any Linux process could sample kernel addresses with perf_event_open 's PERF_SAMPLE_IP . So you can break KASLR by sampling the addresses and taking the mininum. Listing 59: perf_rip_find.c /* -*- compile-command: \"gcc -Wall perf_rip_find.c -o perf_rip_find\" -*- */ #in…",
+      "image": null,
+      "publishedAt": "2017-03-28T03:35:00Z",
+      "sourceId": "5e4db476da32a0bc",
+      "sourceTitle": "lizzie",
+      "link": "https://blog.lizzie.io/kaslr-and-perf.html",
+      "detailPath": "articles/62e6b079ad0341282102be1c.json"
+    },
+    {
+      "id": "6afd69a2c4964c3117d1eaf2",
+      "title": "Preventing USB Attacks with Grsecurity: BadUSB, poisontap, et al.",
+      "summary": "An update to this post using the linux-hardened project is available here . USB has some surprising security implications: when a device is plugged in, the operating system generally loads the appropriate driver and initializes it. For example, plugging a device into an unlocked computer can execute code, since the device can act as a USB keyboard. This is…",
+      "image": null,
+      "publishedAt": "2016-12-12T12:46:00Z",
+      "sourceId": "5e4db476da32a0bc",
+      "sourceTitle": "lizzie",
+      "link": "https://blog.lizzie.io/preventing-usb-attacks-with-grsecurity.html",
+      "detailPath": "articles/6afd69a2c4964c3117d1eaf2.json"
+    },
+    {
+      "id": "17643a079b90291b9356857d",
+      "title": "CVE-2016-6321 notes: \"pointyfeather\", a logic bug in GNU tar.",
+      "summary": "I read this document but had a little trouble understanding it at first: \"Vulnerability: POINTYFEATHER aka Tar extract pathname bypass\" : Tar will happily extract files & directories into an arbitrary location when supplied with a suitably crafted archive file. If a target system is extracting an attacker supplied file, the vulnerability can be exploited to…",
+      "image": null,
+      "publishedAt": "2016-11-04T04:09:00Z",
+      "sourceId": "5e4db476da32a0bc",
+      "sourceTitle": "lizzie",
+      "link": "https://blog.lizzie.io/cve-2016-6321-notes.html",
+      "detailPath": "articles/17643a079b90291b9356857d.json"
+    },
+    {
+      "id": "22ff31ff66e9750bf8a1c720",
+      "title": "Using userfaultfd: sample code!",
+      "summary": "userfaultfd is being used in kernel exploits to temporarily stop kernel execution . I had trouble finding out how to use it, so I wrote a little program. Some notes: If you don't include O_NONBLOCK in the userfaultfd flags argument, poll will always return a POLLERR . The API is complicated by a backwards-compatibility mechanism. You're supposed to issue so…",
+      "image": null,
+      "publishedAt": "2016-10-22T23:49:00Z",
+      "sourceId": "5e4db476da32a0bc",
+      "sourceTitle": "lizzie",
+      "link": "https://blog.lizzie.io/using-userfaultfd.html",
+      "detailPath": "articles/22ff31ff66e9750bf8a1c720.json"
+    },
+    {
+      "id": "e143967a0adc12faf4e7bacd",
+      "title": "Linux Containers in 500 Lines of Code",
+      "summary": "I've used Linux containers directly and indirectly for years, but I wanted to become more familiar with them. So I wrote some code. This used to be 500 lines of code, I swear, but I've revised it some since publishing; I've ended up with about 70 lines more. I wanted specifically to find a minimal set of restrictions to run untrusted code. This isn't how yo…",
+      "image": null,
+      "publishedAt": "2016-10-17T11:51:00Z",
+      "sourceId": "5e4db476da32a0bc",
+      "sourceTitle": "lizzie",
+      "link": "https://blog.lizzie.io/linux-containers-in-500-loc.html",
+      "detailPath": "articles/e143967a0adc12faf4e7bacd.json"
+    },
+    {
+      "id": "1bb3e49ea8ccea9a6d173c45",
+      "title": "Exploiting CVE-2016-8606: a cross-protocol attack from browsers to Guile Scheme repls!",
+      "summary": "I saw this recently: Listing 55: CVE request: GNU Guile <= 2.0.12: REPL server GNU Guile, an implementation of the Scheme language, provides a “REPL server” which is a command prompt that developers can connect to for live coding and debugging purposes. The REPL server is started by the ‘--listen’ command-line option or equivalent API. Christopher Allan Web…",
+      "image": null,
+      "publishedAt": "2016-10-15T20:11:00Z",
+      "sourceId": "5e4db476da32a0bc",
+      "sourceTitle": "lizzie",
+      "link": "https://blog.lizzie.io/exploiting-CVE-2016-8606.html",
+      "detailPath": "articles/1bb3e49ea8ccea9a6d173c45.json"
+    },
+    {
+      "id": "9b78b1694795b803e75cd213",
+      "title": "Notes about CVE-2016-7117: a use-after-free in the Linux kernel, in recvmmsg.",
+      "summary": "I saw this recently: Listing 57: CVE request: GNU Guile <= 2.0.12: REPL server GNU Guile, an implementation of the Scheme language, provides a “REPL server” which is a command prompt that developers can connect to for live coding and debugging purposes. The REPL server is started by the ‘--listen’ command-line option or equivalent API. Christopher Allan Web…",
+      "image": null,
+      "publishedAt": "2016-10-15T20:11:00Z",
+      "sourceId": "5e4db476da32a0bc",
+      "sourceTitle": "lizzie",
+      "link": "https://blog.lizzie.io/notes-about-cve-2016-7117.html",
+      "detailPath": "articles/9b78b1694795b803e75cd213.json"
+    }
+  ]
+}

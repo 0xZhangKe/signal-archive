@@ -1,0 +1,224 @@
+{
+  "items": [
+    {
+      "id": "e7351c422fde967ff945a866",
+      "title": "读完 Bun 用 Rust 重写：1 个人 11 天重写 50 万行代码是怎么做到的",
+      "summary": "前两天发了一篇 Rewriting Bun in Rust 原文的翻译，内容有点多，这次我自己整理了一份精简版。 背景 一开始是因为在 X 上刷到 Bun 官方博客一篇 《Rewriting Bun in Rust》 ，作者是 Jarred Sumner。看完挺震撼的——1 个工程师，用 CC（Claude Code）+ Claude Fable 5（重写那会儿还是预发布，现在订阅用户已经能正常用了），11 天把整个 Bun 从 Zig 重写成 Rust，落地 diff +100 万行，6,778 个 commit。 这篇是我读完之后按自己的理解整理的笔记，分几个部分讲清楚： 为什么要扔掉 Zig、 为什么选 Rust、 整个工作流是怎么搭的、 作者和 CC 各自干了什么、 怎么保证质量， 以及烧了多少钱。…",
+      "image": "https://cdn.jsdelivr.net/gh/crossoverJie/images@main/images/images20260712160208850.png",
+      "publishedAt": "2026-07-12T00:00:00Z",
+      "sourceId": "126e6f369677b760",
+      "sourceTitle": "crossoverJie's Blog",
+      "link": "http://crossoverjie.top/2026/07/12/AI/bun-rewrite-rust-reading-notes/",
+      "detailPath": "articles/e7351c422fde967ff945a866.json"
+    },
+    {
+      "id": "ecc88de65b070b1640ec10cf",
+      "title": "我的 Claude Code 常用 SKILLS 和工具",
+      "summary": "背景 已经高强度的使用 claude code 大半年的时间了，积累了不少好用的 SKILLS 和工具，今天来整理一下分享给大家。 我安装了大约 70 几个 SKILLS，但常用的其实也不太多，下面介绍一些我个人觉得效果不错的。推荐使用我开发的 skilldeck 来管理本地的 SKILLS： 1 2 brew tap crossoverJie/skilldeck && brew install --cask skilldeck xattr -cr /Applications/SkillDeck.app",
+      "image": "https://cdn.jsdelivr.net/gh/crossoverJie/images@main/images/images20260629162029387.png",
+      "publishedAt": "2026-06-29T00:00:00Z",
+      "sourceId": "126e6f369677b760",
+      "sourceTitle": "crossoverJie's Blog",
+      "link": "http://crossoverjie.top/2026/06/29/AI/claudecode-skills-tools/",
+      "detailPath": "articles/ecc88de65b070b1640ec10cf.json"
+    },
+    {
+      "id": "01f014895b5f0a39e9011a0a",
+      "title": "AI Coding Agent 时代，我自己最常用的 4 个终端工具",
+      "summary": "背景 以前学 linux 命令行，常见路线是记住一堆 grep 、 find 、 sed 、 awk ，然后自己在代码库里定位问题、筛选文件、拼接命令。 但进入 Coding Agent 时代后，我觉得人和终端的分工变了。 代码搜索、读取配置、分析调用链、运行测试，这些工作本来就是 Agent 擅长的。面对一个仓库，Claude Code、Codex 之类的 Agent 会自己判断该用 rg 、 git diff 、 jq 还是别的工具；我不需要为了”指挥 Agent”而把这些命令全学一遍。 我更常用的，是另一类命令： 快速进入正确项目； 把准确的文件路径交给 Agent； 从大量文件里选出我想让它看的那个； 跑长任务时，避免 Mac 睡眠导致 Agent 中断。 下面是我目前最常用的一套。",
+      "image": "https://cdn.jsdelivr.net/gh/crossoverJie/images@main/images/images20260623181109.png",
+      "publishedAt": "2026-06-22T00:00:00Z",
+      "sourceId": "126e6f369677b760",
+      "sourceTitle": "crossoverJie's Blog",
+      "link": "http://crossoverjie.top/2026/06/22/AI/terminal-tools-for-ai-coding-agent/",
+      "detailPath": "articles/01f014895b5f0a39e9011a0a.json"
+    },
+    {
+      "id": "c6d2d46f708bfea015aef350",
+      "title": "从 Warp 换到 cmux：一个更适合 AI Agent 的终端",
+      "summary": "背景 最近将终端从 Warp 切换到了 cmux，用了一段时间后，现在已经基本上满足我的所有需求，所以才有这篇安利的文章。 开始之前先回顾下自己的终端使用历史。刚开始工作那时候使用的是 Windows，用得最多的终端就是 xshell，后面切换到 macOS 之后自然就切换到了 mac 上用的最多的 iTerm2。",
+      "image": "https://cdn.jsdelivr.net/gh/crossoverJie/images@main/images/images20260617113149.png",
+      "publishedAt": "2026-06-17T17:56:51Z",
+      "sourceId": "126e6f369677b760",
+      "sourceTitle": "crossoverJie's Blog",
+      "link": "http://crossoverjie.top/2026/06/17/AI/cmux-introduce/",
+      "detailPath": "articles/c6d2d46f708bfea015aef350.json"
+    },
+    {
+      "id": "23544b4d2eb93e55d3f63042",
+      "title": "I Built an AI-Powered StarRocks Upgrade Risk Scanner — And It Caught a Real Risk",
+      "summary": "Background I’ve been working on a cross-version upgrade of StarRocks (3.3 → 3.5) and hit quite a few pitfalls along the way. I previously wrote a post on StarRocks Upgrade Considerations documenting the manual upgrade process, but that was only for minor version upgrades (3.3.3 → 3.3.9). Cross-major-version upgrades are an entirely different beast — between…",
+      "image": "https://cdn.jsdelivr.net/gh/crossoverJie/images@main/images/images202606181026011.png",
+      "publishedAt": "2026-06-14T17:00:00Z",
+      "sourceId": "126e6f369677b760",
+      "sourceTitle": "crossoverJie's Blog",
+      "link": "http://crossoverjie.top/2026/06/14/starrocks/StarRocks-upgrade-skill-principle-en/",
+      "detailPath": "articles/23544b4d2eb93e55d3f63042.json"
+    },
+    {
+      "id": "bd5943429b493bc4238e1e75",
+      "title": "我做了一个 AI 版的 StarRocks 升级风险扫描工具，直接帮我定位到一个风险",
+      "summary": "背景 最近在搞 StarRocks 的跨版本升级（3.3 → 3.5），中间踩了不少坑。我之前也写过一篇 StarRocks 升级注意事项 记录了手动升级的流程，但那只是针对小版本（3.3.3 → 3.3.9）的升级。 跨大版本升级完全是另一回事——3.3 到 3.5 中间有 6000+ 个 commit，里面藏着各种不兼容变更：配置默认值变了、Session Variable 改了、Protocol 字段删了……人工逐个审查根本不现实，漏一个关键变更就可能导致生产事故。 于是我就想：能不能用 AI 来帮我干这活？经过一段时间的迭代，我用 Claude Code 手搓了一个 StarRocks 升级风险扫描工具（ starrocks-upgrade skill ），这篇文章就来聊聊它的设计原理。 现在升级之前…",
+      "image": "https://cdn.jsdelivr.net/gh/crossoverJie/images@main/images/images20260614235018.png",
+      "publishedAt": "2026-06-14T17:00:00Z",
+      "sourceId": "126e6f369677b760",
+      "sourceTitle": "crossoverJie's Blog",
+      "link": "http://crossoverjie.top/2026/06/14/starrocks/StarRocks-upgrade-skill-principle/",
+      "detailPath": "articles/bd5943429b493bc4238e1e75.json"
+    },
+    {
+      "id": "5a452d866140a44dfb5121e6",
+      "title": "[送码] 用 AI Coding 做了一个 App，谈谈 AI Coding 的真实体验",
+      "summary": "背景 相信现在 AI Coding 已经占据工作中大部分代码了，甚至很多人就直接交给 AI 来写，自己只做 review。 再有甚者 review 都不做了，直接全面交给 AI，自己只做产品经理提需求、验证功能逻辑是否正确——也就是现在很流行的 Vibe Coding。 前段时间我自己用 Vibe Coding 写了一个 macOS 原生的 APP ，以此来判断 Vibe Coding 是否能让我在一个完全不熟悉的领域解决一个特定的问题。 项目地址： https://github.com/crossoverJie/SkillDeck/ SkillDeck 是一个 macOS 原生的 AI Agent Skills 管理工具，提供了统一仪表盘、Skills 市场浏览、一键安装更新、Agent 分配（symlin…",
+      "image": "https://cdn.jsdelivr.net/gh/crossoverJie/images@main/images/images20260526215455.png",
+      "publishedAt": "2026-05-26T21:00:00Z",
+      "sourceId": "126e6f369677b760",
+      "sourceTitle": "crossoverJie's Blog",
+      "link": "http://crossoverjie.top/2026/05/26/clipshelf/clipshelf-introduce/",
+      "detailPath": "articles/5a452d866140a44dfb5121e6.json"
+    },
+    {
+      "id": "f84449e72e16971319aa207e",
+      "title": "手搓一个 Agent 驱动的项目 Wiki 生成方案",
+      "summary": "背景 最近我一直在折腾项目文档生成的事情。之前写过两篇关于 deepwiki 的文章：",
+      "image": "https://cdn.jsdelivr.net/gh/crossoverJie/images@main/images/images20260518180243.png",
+      "publishedAt": "2026-05-18T00:00:00Z",
+      "sourceId": "126e6f369677b760",
+      "sourceTitle": "crossoverJie's Blog",
+      "link": "http://crossoverjie.top/2026/05/18/AI/cc-generate-wiki/",
+      "detailPath": "articles/f84449e72e16971319aa207e.json"
+    },
+    {
+      "id": "dc1aae4a83c79e76a2583c29",
+      "title": "从企业版 Istio 迁移到社区版：一场给高速行驶汽车换轮胎的实践",
+      "summary": "背景 最近我们在做一件非常危险的大事——把用了好几年的腾讯云企业版 Istio 服务网格迁移到社区开源版。 事情的起因是腾讯云突然宣布不再维护 Istio 服务网格了，后续也不会推出新版本。这就导致我们的网格一直停留在旧版本，进而连带着 k8s 这些基础组件也很难升级。可以说是血的教训：用托管服务一时爽，一旦厂商放弃维护，迁移成本还是得自己扛。",
+      "image": "https://cdn.jsdelivr.net/gh/crossoverJie/images@main/images/images20260414170958.png",
+      "publishedAt": "2026-04-15T14:30:00Z",
+      "sourceId": "126e6f369677b760",
+      "sourceTitle": "crossoverJie's Blog",
+      "link": "http://crossoverjie.top/2026/04/15/istio-enterprise-to-community-migration/",
+      "detailPath": "articles/dc1aae4a83c79e76a2583c29.json"
+    },
+    {
+      "id": "bc07d7e5ba7b74c06ee8fec8",
+      "title": "企业大模型应用与 Vibe Coding 实战",
+      "summary": "背景 上周末参加了一个我们重庆本地的一个 AI 分享会，分享了一些企业大模型与 Vibe Coding 的实战经验，现在把它整理成一篇 blog。",
+      "image": "https://cdn.jsdelivr.net/gh/crossoverJie/images@main/images/images20260324160917.png",
+      "publishedAt": "2026-03-24T00:00:00Z",
+      "sourceId": "126e6f369677b760",
+      "sourceTitle": "crossoverJie's Blog",
+      "link": "http://crossoverjie.top/2026/03/24/AI/%E4%BC%81%E4%B8%9A%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8%E4%B8%8E-Vibe-Coding-%E5%AE%9E%E6%88%98/",
+      "detailPath": "articles/bc07d7e5ba7b74c06ee8fec8.json"
+    },
+    {
+      "id": "7d6302e2564d29b85b826678",
+      "title": "DeepWiki 优化实战：代码行号与确定性目录生成",
+      "summary": "背景 最近在用 deepwiki-open 给内部的 Java 项目生成 wiki，发现一个很明显的问题： 生成的 wiki 页面里引用的代码行号经常不准确 ，看起来是 LLM 根据上下文自己推算的。 比如一个函数明明在第 503 行，生成出来的 wiki 里可能标注成第 510 行甚至更离谱的数字。 之前我在 DeepWiki 一个常用 RAG 应用的开发流程 里分析过它的整体流程，本文主要聊聊我们在实际使用中遇到的两个问题以及对应的优化方案。",
+      "image": null,
+      "publishedAt": "2026-03-17T18:00:00Z",
+      "sourceId": "126e6f369677b760",
+      "sourceTitle": "crossoverJie's Blog",
+      "link": "http://crossoverjie.top/2026/03/17/AI/deepwiki-optimize-line-number/",
+      "detailPath": "articles/7d6302e2564d29b85b826678.json"
+    },
+    {
+      "id": "724b7e09a3c261c1e6faedcc",
+      "title": "SkillDeck 支持 OpenClaw 了，顺便聊聊小龙虾",
+      "summary": "背景 最近 OpenClaw 突然爆火，我的 SkillDeck 也乘热打铁支持了 OpenClaw 的 Skills 管理和 ClawHub 市场浏览安装功能。 这篇文章一方面介绍下 SkillDeck 的更新内容 ，另一方面也聊聊我对 OpenClaw 这波热度的一些看法。 安装命令： 1 brew tap crossoverJie/skilldeck && brew install --cask skilldeck",
+      "image": "https://cdn.jsdelivr.net/gh/crossoverJie/images@main/images/images20260311110446.png",
+      "publishedAt": "2026-03-11T22:00:00Z",
+      "sourceId": "126e6f369677b760",
+      "sourceTitle": "crossoverJie's Blog",
+      "link": "http://crossoverjie.top/2026/03/11/AI/skilldeck-openclaw-support/",
+      "detailPath": "articles/724b7e09a3c261c1e6faedcc.json"
+    },
+    {
+      "id": "3e1e656c8074c366d51dd27a",
+      "title": "全程用 Claude Code 搓了一个 macOS 原生应用：SkillDeck",
+      "summary": "背景 最近在同时用多个 AI coding agent的过程中，Skills 管理起来比较麻烦， 我日常在 Claude Code、Codex、Copilot CLI 之间切换，每个 Agent 的 Skills 存放在不同的目录下（ ~/.claude/skills/ 、 ~/.agents/skills/ 、 ~/.gemini/skills/ 、 ~/.copilot/skills/ ），安装一个 Skill 的流程大概是这样的： 找到 Skill 的 GitHub 仓库 git clone 到本地 手动创建 symlink 到对应 Agent 的 Skills 目录 如果要装到多个 Agent，以上步骤重复 N 遍 卸载的时候也一样繁琐：删目录、清 symlink，漏了哪步就会留下残留。 当然也可以用…",
+      "image": "https://jsd.cdn.zzko.cn/gh/crossoverJie/images@main/images/images20260213123118.png",
+      "publishedAt": "2026-02-24T23:00:00Z",
+      "sourceId": "126e6f369677b760",
+      "sourceTitle": "crossoverJie's Blog",
+      "link": "http://crossoverjie.top/2026/02/24/AI/skilldeck-intro/",
+      "detailPath": "articles/3e1e656c8074c366d51dd27a.json"
+    },
+    {
+      "id": "ea70035ae8336897e9eeec14",
+      "title": "别再傻等了，给 Claude Code 装个通知铃铛",
+      "summary": "背景 最近用 Claude Code、Copilot CLI 这类 AI Agent 工具的时候，有一个挺烦人的问题：让 AI 在后台跑任务，我总是会忍不住去查看他的执行状态，有时候比较复杂的任务可能会耗时十来分钟，每次来回切换非常浪费时间。 更惨的是有时候 AI 需要我授权某个操作（比如执行 shell 命令），我没注意到，它就一直卡在那里等。 所以我一直想找一个靠谱的通知方案。 灵感来源于播客「 枫言枫语 」，主播自力提到可以用 Hook 来实现 Agent 通知。 不过一开始我偷了个懒，让 AI 自己给方案。AI 给出的方案很”AI”：在 ~/.claude/CLAUDE.md 里加一段系统提示词，指示 LLM 任务完成后用 afplay 播放一个提示音。 1 2 3 ## Task Completio…",
+      "image": "https://cdn.jsdelivr.net/gh/crossoverJie/images@main/images/images20260210161908.png",
+      "publishedAt": "2026-02-09T14:00:00Z",
+      "sourceId": "126e6f369677b760",
+      "sourceTitle": "crossoverJie's Blog",
+      "link": "http://crossoverjie.top/2026/02/09/AI/agent-notifier-skill/",
+      "detailPath": "articles/ea70035ae8336897e9eeec14.json"
+    },
+    {
+      "id": "c799c21d7fe39585548d320d",
+      "title": "一行代码没写，用 AI 搓出三个实用 SKILLS",
+      "summary": "背景 最近上一篇文章里答应过要分享下我那三个 SKILLS 的创建过程，乘热打铁赶紧写出来。 上篇提到过我写博客的一个痛点：每次写完文章都要手动找封面图 → 上传图床 → 粘贴链接，这套流程走下来虽然不复杂，但每次都要做一遍确实烦。 所以我就想着把这个流程自动化掉，而且全程一行代码没写，完全和 AI 对话搞定。",
+      "image": null,
+      "publishedAt": "2026-02-07T17:56:51Z",
+      "sourceId": "126e6f369677b760",
+      "sourceTitle": "crossoverJie's Blog",
+      "link": "http://crossoverjie.top/2026/02/07/AI/create-skills/",
+      "detailPath": "articles/c799c21d7fe39585548d320d.json"
+    },
+    {
+      "id": "628d7339c093a22cafbcd869",
+      "title": "从 Function Call 到 MCP-> SKILLS：AI Agent 能力扩展的演进之路",
+      "summary": "背景 最近 Claude 的 SKILLS 很火，忍不住也来体验了一下，发现确实是有些东西的；但也发现身边的一些同事对这些新出的概念总是很懵逼，所以便有了这篇文章。 从最早的 Function Call，到 MCP 协议，再到如今的 Agent Skills。 本文将从技术演进的角度，带你理解这些概念之间的关系，以及它们如何让 AI 从一个”只会说话的聊天机器人”变成真正能”动手做事”的智能助手。",
+      "image": null,
+      "publishedAt": "2026-02-03T17:56:51Z",
+      "sourceId": "126e6f369677b760",
+      "sourceTitle": "crossoverJie's Blog",
+      "link": "http://crossoverjie.top/2026/02/03/AI/MCP-Skills-intro/",
+      "detailPath": "articles/628d7339c093a22cafbcd869.json"
+    },
+    {
+      "id": "f4bf2615972062b18dff10c6",
+      "title": "对 AI 更友好的代码分割算法分析",
+      "summary": "背景 因为最近在基于 RAG 对我们的 code repo 做 AI 分析，其中有一个非常核心的流程就是需要将我们的代码库里的源码进行分割，分割之后会作为 chunk 供 RAG 查询；然后再将查询到的 chunk 提交给 LLM 做分析。",
+      "image": "https://s2.loli.net/2026/01/13/WZuvxgBJw5MSC8E.png",
+      "publishedAt": "2026-01-14T17:56:51Z",
+      "sourceId": "126e6f369677b760",
+      "sourceTitle": "crossoverJie's Blog",
+      "link": "http://crossoverjie.top/2026/01/14/AI/splitter-Algorithm-analyse/",
+      "detailPath": "articles/f4bf2615972062b18dff10c6.json"
+    },
+    {
+      "id": "80c4eec34253e3b1d215414c",
+      "title": "AI 如何用 AST 每天对 200 万+ 文件做高质量分块（用于代码搜索）",
+      "summary": "原文链接： https://github.com/sweepai/sweep/blob/main/docs/pages/blogs/chunking-2m-files.mdx 最近在研究 Code Splitter 的算法，发现 llama_index 的代码分割使用的是 sweepai 的代码分割算法，同时还提供了一篇博客，也就有了这篇文章。",
+      "image": "https://s2.loli.net/2025/12/29/4WHveihZ6utrx9O.png",
+      "publishedAt": "2025-12-29T17:56:51Z",
+      "sourceId": "126e6f369677b760",
+      "sourceTitle": "crossoverJie's Blog",
+      "link": "http://crossoverjie.top/2025/12/29/AI/chunking-2m-files/",
+      "detailPath": "articles/80c4eec34253e3b1d215414c.json"
+    },
+    {
+      "id": "a034bbcebf71c24dcbfbf1d8",
+      "title": "DeepWiki 一个常用 RAG 应用的开发流程",
+      "summary": "上一篇文章： 大模型应用开发必需了解的基本概念 分享了关于 LLM 大模型应用开发的一些基础知识，本文乘热打铁，借助一个真实的大模型应用",
+      "image": "https://s2.loli.net/2025/12/24/uaLBwngDf5cyQMo.png",
+      "publishedAt": "2025-12-25T17:56:51Z",
+      "sourceId": "126e6f369677b760",
+      "sourceTitle": "crossoverJie's Blog",
+      "link": "http://crossoverjie.top/2025/12/25/AI/deepwiki-rag-principle/",
+      "detailPath": "articles/a034bbcebf71c24dcbfbf1d8.json"
+    },
+    {
+      "id": "7df28f80f7b07229bc1e5505",
+      "title": "大模型应用开发必需了解的基本概念",
+      "summary": "背景 AI/LLM 大模型最近几年毋庸置疑的是热度第一，虽然我日常一直在用 AI 提效，但真正使用大模型做一个应用的机会还是少。 最近正好有这么个机会，需要将公司内部的代码 repo 转换为一个 wiki，同时还可以基于项目内容进行对话了解更具体的内容。 实际效果大概和上半年很火的 deepwiki 类似。 而我们是想基于开源的 deepwiki-open 进行开发，提供的功能都是类似的。 在这个过程中我也从一个大模型应用开发的小白逐步理解了其中的一些关键概念，以及了解了一个大模型应用的运行原理。",
+      "image": "https://s2.loli.net/2025/12/22/wq5hNKEHzGSDUQY.png",
+      "publishedAt": "2025-12-23T17:56:51Z",
+      "sourceId": "126e6f369677b760",
+      "sourceTitle": "crossoverJie's Blog",
+      "link": "http://crossoverjie.top/2025/12/23/AI/LLM-app-concept/",
+      "detailPath": "articles/7df28f80f7b07229bc1e5505.json"
+    }
+  ]
+}

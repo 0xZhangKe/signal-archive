@@ -1,0 +1,11 @@
+{
+  "id": "bba1d2f37968ce273dd30e0d",
+  "title": "\"C is how the computer works\" is a dangerous mindset for C programmers",
+  "summary": "A long time ago, I wrote “Should you learn C to “learn how the computer works”?” . This was part 1 in a three part series. A year later, I got around to part 2, ““C is not how the computer works” can lead to inefficient code” . It’s been five more months. I don’t think I really…",
+  "content": "<p>A long time ago, I wrote <a href=\"https://words.steveklabnik.com/should-you-learn-c-to-learn-how-the-computer-works\" target=\"_blank\" rel=\"noopener noreferrer\">“Should you learn C to “learn how the computer works”?”</a>. This was part 1 in a three part series. A year later, I got around to part 2, <a href=\"https://words.steveklabnik.com/c-is-not-how-the-computer-works-can-lead-to-inefficient-code\" target=\"_blank\" rel=\"noopener noreferrer\">““C is not how the computer works” can lead to inefficient code”</a>.</p>\n<p>It’s been five more months. I don’t think I really want to write out the third part; I expected this to be a quick series of blog posts, not something that was on my plate for a year and a half. Here’s the thesis of part 3:</p>\n<blockquote>\n<p>Part three is going to show what happens if you make a mistake with the ideas from part two. If you incorrectly assume that C’s abstract model maps directly to hardware, you can make mistakes. This is where UB gets dangerous. While you can take advantages of some properties of the machine you’re relying on, you have to know which ones fit within C’s model and which ones don’t.</p>\n</blockquote>\n<p>I honestly don’t feel like writing more than that, so I’m just gonna leave it there. Basically, the overall thrust of this series has been this: C is not the hardware, it’s an abstract machine. But that machine runs on real hardware, and abstractions are leaky. If you go too far into “purely only the abstract machine,” you may not be able to accomplish your tasks. If you go too far into “C runs directly on the hardware,” you may be surprised when a compiler does something that you didn’t expect.</p>",
+  "image": null,
+  "publishedAt": "2020-03-31T00:00:00Z",
+  "sourceId": "9a41b0d6fa07d21e",
+  "sourceTitle": "Steve Klabnik",
+  "link": "https://steveklabnik.com/writing/c-is-how-the-computer-works-is-a-dangerous-mindset-for-c-programmers/"
+}

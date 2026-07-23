@@ -1,0 +1,11 @@
+{
+  "id": "f9737cb447909b9bf3ed92be",
+  "title": "ByteGo：一个基于 Cloudflare 的文件上传工具",
+  "summary": "之前把博客迁到了 Hugo，但有个小问题一直没解决好：写文章的时候，偶尔需要贴张图或者分享个文件，没有一个顺手的地方放。 于是 vibe 了一个小工具出来，取名叫 ByteGo 。它是一个部署在 Cloudflare Workers 上的极简文件上传工具。只需要打开浏览器，拖个文件进去，它帮你存到 R2，然后给你一个公开链接。你可以直接复制直链，也可以一键复制 Markdown 或 HTML 格式的引用代码。写博客贴图的时候特别方便。",
+  "content": "<p>之前把博客迁到了 Hugo，但有个小问题一直没解决好：写文章的时候，偶尔需要贴张图或者分享个文件，没有一个顺手的地方放。</p>\n<p>于是 vibe 了一个小工具出来，取名叫 <strong>ByteGo</strong>。它是一个部署在 Cloudflare Workers 上的极简文件上传工具。只需要打开浏览器，拖个文件进去，它帮你存到 R2，然后给你一个公开链接。你可以直接复制直链，也可以一键复制 Markdown 或 HTML 格式的引用代码。写博客贴图的时候特别方便。</p>\n<p>相较于市面上的工具，ByteGo 更简单：</p>\n<ul>\n<li>不依赖任何第三方服务，跑在自己的 Cloudflare 账号下面。</li>\n<li>不需要数据库。不需要服务端文件列表，上传历史存浏览器本地就够了。</li>\n<li>不需要前端框架。一个 HTML 页面、一点原生 JS，直接塞进 Worker 返回。</li>\n<li>部署简单。最好就是改个配置文件、跑几条命令就能上线。</li>\n</ul>\n<p>整个项目只有一个 Worker、一个 R2 Bucket，没有数据库、没有前端打包系统、没有 CI/CD 流水线。填写好<code>wrangler.toml</code> 之后， <code>wrangler deploy</code> 一下就能跑。日常使用就是一个网页。支持拖拽上传、粘贴上传、批量上传。上传完自动生成链接，点一下就能复制。网页鉴权用的是 Bearer token，浏览器端把 key 存在 localStorage 里，用起来基本无感。</p>\n<p>上传路径也是支持自定义的，默认设成了按日期分目录的结构：</p>\n<div><pre><code><span><span>{year}/{month}/{day}/{randomkey16}{ext}\n</span></span></code></pre></div><p>这个工具刻意保持得很「小」。比如不做文件管理后台、不做缩略图预览、不做多用户、不做跨设备同步。上传历史只存在当前浏览器的 IndexedDB 里，换了设备就看不到。主要是我觉得保持简单比功能多更重要。</p>\n<p>目前用了一段时间，整体感觉还不错。贴图的摩擦力降到了很低，写东西的时候不用再为&quot;图放哪儿&quot;这种问题分心。代码放在 GitHub 上，有需要的朋友可以自己部署一个。</p>\n<blockquote>\n<p>项目地址：<a href=\"https://github.com/zopiya/bytego\" target=\"_blank\" rel=\"noopener noreferrer\">\n github.com/zopiya/bytego\n</a>\n</p>\n</blockquote>",
+  "image": null,
+  "publishedAt": "2026-05-21T16:00:00Z",
+  "sourceId": "4d4703a4269e59b7",
+  "sourceTitle": "救赎之路",
+  "link": "https://blog.zopiya.com/bytego-afdcf2f6/"
+}

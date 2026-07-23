@@ -1,0 +1,114 @@
+{
+  "items": [
+    {
+      "id": "6eb62c0c12b597e87281a646",
+      "title": "笔记：在 Mac Mini 本地跑 LLM 大模型",
+      "summary": "这些笔记是在自己的Mac Mini上面折腾了一些记录，主要是安装一些重要的大模型工具，把这些工具连接起来，建立自己的私有本地知识库等等，以备查阅。后续不定时更新。 安装OrbStack OrbStack是专门为MacOS设计的快速、轻量级的虚拟化工具，可以作为本地Docker、K8s和Linux VM的超容易替代品。因为它丢掉了跨平台的包袱，直接在系统内核级别支持虚拟机指令，动态分配内存等等做法，让它变得超快。就以Docker为例，它可以把冷启动速度从几十秒优化到一两秒。 我是在Apple M4芯片的Mac mini上面折腾的，首先要保证我的应用全部都是M4芯片直接支持的，而不是通过Rosetta 2兼容性转换过来的。在检查Homebrew的时候，发现brew命令的路径在 /usr/local/bin/bre…",
+      "image": "https://www.raychase.net/wp-content/uploads/2026/05/image-12.png",
+      "publishedAt": "2026-06-01T04:03:31Z",
+      "sourceId": "ed6c79eba03be7d3",
+      "sourceTitle": "四火的唠叨",
+      "link": "https://www.raychase.net/8180",
+      "detailPath": "articles/6eb62c0c12b597e87281a646.json"
+    },
+    {
+      "id": "f25102ee58b03a083019c4a8",
+      "title": "笔记：把新域名应用到 Blog 和 Email 上",
+      "summary": "raychase.net 这个域名是好些年前申请的，最近申请了个更适合作为我个人标签的 rayxiong.me ，简单记录下我把新域名应用到blog（新、老域名都可以访问blog），以及创建并使用新域名的邮件地址收发邮件的操作。 Blog 配置 在Squarespace上面配置好DNS的两个A记录： 其中@表示不带任何前缀，它和www前缀这样被视为两条独立的记录。没法再简单了，不过需要等几个钟头生效。 在网站的Nginx配置文件上面添加： server_name www.rayxiong.me rayxiong.me; 以及： if ($host = rayxiong.me) { return 301 https://$host$request_uri; } if ($host = www.rayxiong.…",
+      "image": "https://rayxiong.me/wp-content/uploads/2026/05/image-11.png",
+      "publishedAt": "2026-05-25T00:04:10Z",
+      "sourceId": "ed6c79eba03be7d3",
+      "sourceTitle": "四火的唠叨",
+      "link": "https://www.raychase.net/8205",
+      "detailPath": "articles/f25102ee58b03a083019c4a8.json"
+    },
+    {
+      "id": "26bcb3fc0d491b5da6374797",
+      "title": "写在暗黑 2 术士资料片发售一个多月之际",
+      "summary": "作为一个老暗黑粉，二十年前，写过一点关于它的 碎文 。那时候我还在读书，《暗黑破坏神2》应该是对我影响最大的一款游戏。还记得第一次接触到暗黑的那天——在家乡暑假的某个阴沉的下午，窗外雨绵绵，一进入游戏，第一幕的罗格营地，就被呼应的下雨细节打动，音乐、雨滴声，还有可以追随地散布的鸡，一切都让我觉得有巨大的沉浸感。于是我一遍又一遍地杀到城外去，杀到地下洞穴去。暗黑游戏的视觉效果我相信不是最好的，但是游戏性和耐玩度却是顶级的。在这以后，也玩过不少类暗黑的游戏，比如《流放之路》（那时候还写过一点 关于它游戏中通货膨胀的思考 ），再没有一款能给我带来那样的体验。 后来我慢慢知道，原来有这样感受的不止我一人。《暗黑破坏神2》是整个电子游戏历史上具里程碑意义的作品，它几乎凭借一己之力奠定了整个ARPG的游戏框架和标准，如今…",
+      "image": null,
+      "publishedAt": "2026-03-22T23:38:30Z",
+      "sourceId": "ed6c79eba03be7d3",
+      "sourceTitle": "四火的唠叨",
+      "link": "https://www.raychase.net/8168",
+      "detailPath": "articles/26bcb3fc0d491b5da6374797.json"
+    },
+    {
+      "id": "a35f0f75cd654bd95f27e1fa",
+      "title": "AI 到底会怎样取代我们的工作",
+      "summary": "这是一个很多人都讨论的大问题。 我一直在思考，也一直没有一个足够确信的答案。去年这个时候，写了 一点体会 ，如今的体会更深了。但是我觉得，我可以把凌乱的内容整理出来。 一些事件 在一两周前，Google Genie 3出来的时候，因为demo展示了它可以很容易地生成一整个可以游玩的世界，游戏引擎Unity的投资者就被吓坏了，疯狂抛售，一天就跌了二、三成。Unity的CEO 站出来喊话 ，核心观点还是—— AI再强大它也是概率性的，而Unity程序员的工作，却是追求确定性的 。因此AI应该是软件开发的加速器，帮助提升创作的真实性和速度，而非替代者。 朋友推荐我这篇 《The Eternal Return of Abstraction: Why Programming Was Never About Code》…",
+      "image": null,
+      "publishedAt": "2026-02-16T05:09:33Z",
+      "sourceId": "ed6c79eba03be7d3",
+      "sourceTitle": "四火的唠叨",
+      "link": "https://www.raychase.net/8155",
+      "detailPath": "articles/a35f0f75cd654bd95f27e1fa.json"
+    },
+    {
+      "id": "7b74d09aa413ea9fe3cc9c18",
+      "title": "聊聊商业模式——迪士尼",
+      "summary": "打算把我相对能看得懂的公司商业模式捋一遍，今次讲讲迪士尼。老规矩，内容都是来着我自己这个老股东的理解，从开始建仓到现在，核心仓位拿了很多年了，也是我较大仓位长持的公司中整体回报率最低的一家。我一直奉行只买自己熟悉和（相对能）看得懂的公司这样一个基本原则，因此职业的关系手里大部分持仓都是科技股，像迪士尼这样的公司显得比较另类。 迪士尼是一家传统媒体公司，核心就是内容创作和内容分发，不过和它的竞争对手比起来，它也是向科技激进转型（并且挣扎的）的“新媒体”。如果说传统媒体有Comcast或者Paramount，纯粹的新媒体像是Netflix，那么迪士尼就好像是夹在中间。 就像 之前分析阿里巴巴 这艘商业巨轮一样，要去理解迪士尼的商业模式，可以从这样三个部分来分别审视： 第一版图：娱乐。它贡献了不到一半的营收和不到三…",
+      "image": null,
+      "publishedAt": "2026-02-01T05:22:59Z",
+      "sourceId": "ed6c79eba03be7d3",
+      "sourceTitle": "四火的唠叨",
+      "link": "https://www.raychase.net/8140",
+      "detailPath": "articles/7b74d09aa413ea9fe3cc9c18.json"
+    },
+    {
+      "id": "a6f90aa109b9d385b9ead0e5",
+      "title": "聊聊商业模式——阿里巴巴",
+      "summary": "之前聊到过 拼多多 ，今天聊一下阿里巴巴。阿里巴巴作为中概元老，很多人都讨论过，我只发表从我的角度浅显的看法。作为利益相关者，我持有阿里巴巴个股，且在中国科技相关的ETF和基金中的被动持有仓位。 首先，要理解阿里巴巴，需要从它的五块构成来分别理解： 国内电商：现金流的奶牛，大概占阿里巴巴营收的一半，增速回暖。基本上属于竞争激烈，并且市场份额逐渐被吞噬的部分。 阿里云：营收占比大概只有15%左右，但是增速超过三成，而且站在AI风口。 电商出海：营收目前占比比阿里略低，增长能到两位数，属于第二曲线。 其它业务：包括菜鸟、饿了么和优酷等等，占到百分之十几的营收，处于亏钱状态。 投资和现金：包括最重要的蚂蚁集团。 国内电商 这是我对阿里最初的印象。中国是互联网电商发展最快的国家之一，阿里巴巴作为时代的开拓者，当然也吃…",
+      "image": null,
+      "publishedAt": "2026-01-26T05:18:29Z",
+      "sourceId": "ed6c79eba03be7d3",
+      "sourceTitle": "四火的唠叨",
+      "link": "https://www.raychase.net/8126",
+      "detailPath": "articles/a6f90aa109b9d385b9ead0e5.json"
+    },
+    {
+      "id": "d1a777ae5e94c36f60205523",
+      "title": "聊聊商业模式——Atlassian",
+      "summary": "所谓投资，就是好公司+好价格，仅此而已。作为普通人，和基金和机构比起来，优势之一便是拥有自己独特的认知，这些认知，无论是多么小众，还是听起来多么“常识”，如果用得好的话就是优势，是能够帮助投资变现的。 就我自己而言，符合这一条件的，我可能也能找出个别几家公司来，而Atlassian便是其中之一。我相信大多数人，特别是那些所谓的金融分析师对它未必了解，而作为软件工程师的我，则一直以来都使用它的产品，有的时间段内甚至是重度用户，自然对它我有我自己的认识。这支股票一直在我的列表上，截止本周五，Atlassian的股价（TEAM）跌到一个非常诱人的程度（120刀以下），我认为是一个非常好的机会。本来我一直就想写一些我对不同公司商业模式的看法，那正好这是一个很好的机会，就来聊一聊Atlassian。这些都是我自己的观点…",
+      "image": null,
+      "publishedAt": "2026-01-17T23:24:55Z",
+      "sourceId": "ed6c79eba03be7d3",
+      "sourceTitle": "四火的唠叨",
+      "link": "https://www.raychase.net/8115",
+      "detailPath": "articles/d1a777ae5e94c36f60205523.json"
+    },
+    {
+      "id": "bbcfcda1a57334599118c3b8",
+      "title": "回国感悟",
+      "summary": "自我上次2018年回国已经过去超过7年了，这次回国呆了超过两周，感触还是很丰富的，整理得不够系统，简单把它们罗列下来。我虽然长期不生活在国内，但是我始终是中国人，也始终用简单的“国内”两字替代“中国国内”，我非常热切地想了解中国国内的变化。当然，时间关系，我的观察不会很深刻，因此我的观点未必都是正确的。 关于出行 中国的基建搞得真的很棒，要说出行恐怕中国是最便捷的国家了。期间坐了公交、高铁、卧铺、游轮、出租、网约车，或者是干脆步行……都很方便。我想，这应该是得益于中国超强的基建能力。这是让我无比自豪的一点，虽说以前在国内待着的时候并没有深刻体会。 关于网约车，我的记忆还停留在那个滴滴和快滴烧钱拉客的年代。后来我知道的是，滴滴独打天下了。如今我看到的是，滴滴也似乎未必能玩得过竞争对手了。因为它的竞争对手早就变了…",
+      "image": null,
+      "publishedAt": "2026-01-06T04:20:44Z",
+      "sourceId": "ed6c79eba03be7d3",
+      "sourceTitle": "四火的唠叨",
+      "link": "https://www.raychase.net/8072",
+      "detailPath": "articles/bbcfcda1a57334599118c3b8.json"
+    },
+    {
+      "id": "1b58a8729ff9f7418f64e3d5",
+      "title": "聊聊商业模式——拼多多",
+      "summary": "作为业余爱好，一直很喜欢研究企业的商业模式。我以往觉得电子商务这个赛道竞争很激烈，生意很难做，尤其是中国当前的环境下，近些年在商业模式上也没有太多有意思的创新。快两年前， 写过一点 关于拼多多的，但主要是批评，我不喜欢它的生意模式，我觉得它的壮大会打压中国的品牌成长。这个观点至今依然成立，不过，除此以外，那个时候我对于拼多多的理解还是比较浅薄的。随着这两年拼多多的成功，我觉得我看到了它越来越多以前没有看到的东西。这些东西让我越来越觉得，黄峥，真的是个眼光很长远，执行上也很厉害的人。 最早的时候，我以为拼多多的核心就是低质量、低价的策略。后来我渐渐明白，所谓的低价策略，只是最肤浅的一个表象。 如果退到十年以前，应该很少有人能同意，在如此激烈的电子商务赛道上，已经有了老牌的阿里巴巴，还有重供应链的京东，拼多多能够…",
+      "image": null,
+      "publishedAt": "2025-11-24T03:30:38Z",
+      "sourceId": "ed6c79eba03be7d3",
+      "sourceTitle": "四火的唠叨",
+      "link": "https://www.raychase.net/8063",
+      "detailPath": "articles/1b58a8729ff9f7418f64e3d5.json"
+    },
+    {
+      "id": "eaf3c8d7109fbcb36fdc0cbc",
+      "title": "OAuth2.0 的几种授权流程",
+      "summary": "首先，从高维度看，OAuth是要解决什么问题？ OAuth要解决的是客户端在不知道和不使用用户密码的情况下，怎么样安全访问并获取用户所拥有的资源的问题。 顺带说一句，经常和OAuth一起谈到的OIDC则是解决了用户信息（profile）获取的问题。简单说，OAuth解决了Authorization的问题，OIDC解决了Authentication的问题。 OAuth有几种角色： Resource Owner：资源的拥有者，比方说终端用户； Resource Server：资源服务器，比如用户想要调用的API； Client：就是用户来进行鉴权和资源操作的客户端，比方说浏览器或者CLI； Authorization Server：就是专门授权的服务器。 所以OAuth就是用户想通过某种机制，通过Client和A…",
+      "image": null,
+      "publishedAt": "2025-07-27T02:55:18Z",
+      "sourceId": "ed6c79eba03be7d3",
+      "sourceTitle": "四火的唠叨",
+      "link": "https://www.raychase.net/8015",
+      "detailPath": "articles/eaf3c8d7109fbcb36fdc0cbc.json"
+    }
+  ]
+}

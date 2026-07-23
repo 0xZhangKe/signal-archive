@@ -1,0 +1,11 @@
+{
+  "id": "d84f67525e71477af005ee4d",
+  "title": "1.10.2",
+  "summary": "Fixed the kotlinx-coroutines-debug JAR file including the module-info.class file twice, resulting in failures in various tooling ( #4314 ). Thanks, @RyuNen344 ! Fixed Flow.stateIn hanging when the scope is cancelled in advance or the flow is empty ( #4322 ). Thanks, @francescotescari ! Improved handling of dispatcher failures in .limitedParallelism ( #4330…",
+  "content": "<ul>\n<li>Fixed the <code>kotlinx-coroutines-debug</code> JAR file including the <code>module-info.class</code> file twice, resulting in failures in various tooling (<a href=\"https://github.com/Kotlin/kotlinx.coroutines/pull/4314\" target=\"_blank\" rel=\"noopener noreferrer\">#4314</a>). Thanks, <a href=\"https://github.com/RyuNen344\" target=\"_blank\" rel=\"noopener noreferrer\">@RyuNen344</a>!</li>\n<li>Fixed <code>Flow.stateIn</code> hanging when the scope is cancelled in advance or the flow is empty (<a href=\"https://github.com/Kotlin/kotlinx.coroutines/issues/4322\" target=\"_blank\" rel=\"noopener noreferrer\">#4322</a>). Thanks, <a href=\"https://github.com/francescotescari\" target=\"_blank\" rel=\"noopener noreferrer\">@francescotescari</a>!</li>\n<li>Improved handling of dispatcher failures in <code>.limitedParallelism</code> (<a href=\"https://github.com/Kotlin/kotlinx.coroutines/pull/4330\" target=\"_blank\" rel=\"noopener noreferrer\">#4330</a>) and during flow collection (<a href=\"https://github.com/Kotlin/kotlinx.coroutines/pull/4272\" target=\"_blank\" rel=\"noopener noreferrer\">#4272</a>).</li>\n<li>Fixed <code>runBlocking</code> failing to run its coroutine to completion in some cases if its JVM thread got interrupted (<a href=\"https://github.com/Kotlin/kotlinx.coroutines/pull/4399\" target=\"_blank\" rel=\"noopener noreferrer\">#4399</a>).</li>\n<li>Small tweaks, fixes, and documentation improvements.</li>\n</ul>",
+  "image": "https://avatars.githubusercontent.com/u/52952525?s=60&v=4",
+  "publishedAt": "2025-04-08T08:29:27Z",
+  "sourceId": "f37990d11af953d7",
+  "sourceTitle": "Release notes from kotlinx.coroutines",
+  "link": "https://github.com/Kotlin/kotlinx.coroutines/releases/tag/1.10.2"
+}

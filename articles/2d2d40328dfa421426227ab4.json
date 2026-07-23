@@ -1,0 +1,11 @@
+{
+  "id": "2d2d40328dfa421426227ab4",
+  "title": "Libinput 与 Udev",
+  "summary": "Update 2017.11.10 Linput 1.9 总算搞定了这个问题，选择采用硬件内建的加速方案，libinput 仅提供简单的线性映射。 如果需要自己调速度，除了设置 xinput set-float-prop id=X 'libinput Accel Speed' $speed 之外，更底层的方式是给 libinput 提供一个 LIBINPUT_ATTR_TRACKPOINT_RANGE 属性。",
+  "content": "<p><strong>Update 2017.11.10</strong></p>\n<p>Linput 1.9 总算搞定了这个问题，选择采用硬件内建的加速方案，libinput 仅提供简单的线性映射。\n如果需要自己调速度，除了设置 <code>xinput set-float-prop id=X &#x27;libinput Accel Speed&#x27; $speed</code>\n之外，更底层的方式是给 libinput 提供一个 <code>LIBINPUT_ATTR_TRACKPOINT_RANGE</code> 属性。</p>",
+  "image": null,
+  "publishedAt": "2015-04-27T00:21:13Z",
+  "sourceId": "1a53726dacd05db7",
+  "sourceTitle": "K.I.S.S",
+  "link": "https://bigeagle.me/2015/04/libinput-usage/"
+}

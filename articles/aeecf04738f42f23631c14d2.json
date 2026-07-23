@@ -1,0 +1,11 @@
+{
+  "id": "aeecf04738f42f23631c14d2",
+  "title": "1.8.1",
+  "summary": "Remove the @ExperimentalTime annotation from usages of TimeSource ( #4046 ). Thanks, @hfhbd ! Introduce a workaround for an Android bug that caused an occasional NullPointerException when setting the StateFlow value on old Android devices ( #3820 ). No longer use kotlin.random.Random as part of Dispatchers.Default and Dispatchers.IO initialization ( #4051 )…",
+  "content": "<ul>\n<li>Remove the <code>@ExperimentalTime</code> annotation from usages of <code>TimeSource</code> (<a href=\"https://github.com/Kotlin/kotlinx.coroutines/pull/4046\" target=\"_blank\" rel=\"noopener noreferrer\">#4046</a>). Thanks, <a href=\"https://github.com/hfhbd\" target=\"_blank\" rel=\"noopener noreferrer\">@hfhbd</a>!</li>\n<li>Introduce a workaround for an Android bug that caused an occasional <code>NullPointerException</code> when setting the <code>StateFlow</code> value on old Android devices (<a href=\"https://github.com/Kotlin/kotlinx.coroutines/issues/3820\" target=\"_blank\" rel=\"noopener noreferrer\">#3820</a>).</li>\n<li>No longer use <code>kotlin.random.Random</code> as part of <code>Dispatchers.Default</code> and <code>Dispatchers.IO</code> initialization (<a href=\"https://github.com/Kotlin/kotlinx.coroutines/issues/4051\" target=\"_blank\" rel=\"noopener noreferrer\">#4051</a>).</li>\n<li><code>Flow.timeout</code> throws the exception with which the channel was closed (<a href=\"https://github.com/Kotlin/kotlinx.coroutines/issues/4071\" target=\"_blank\" rel=\"noopener noreferrer\">#4071</a>).</li>\n<li>Small tweaks and documentation fixes.</li>\n</ul>",
+  "image": "https://avatars.githubusercontent.com/u/52952525?s=60&v=4",
+  "publishedAt": "2024-05-10T10:43:18Z",
+  "sourceId": "f37990d11af953d7",
+  "sourceTitle": "Release notes from kotlinx.coroutines",
+  "link": "https://github.com/Kotlin/kotlinx.coroutines/releases/tag/1.8.1"
+}

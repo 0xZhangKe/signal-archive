@@ -1,0 +1,11 @@
+{
+  "id": "4a8d30838241d2b37db97a06",
+  "title": "Finding Java Thread Leaks With JDK Flight Recorder and a Bit Of SQL",
+  "summary": "The other day at work, we had a situation where we suspected a thread leak in one particular service, i.e. code which continuously starts new threads, without taking care of ever stopping them again. Each thread requires a bit of memory for its stack space, so starting an unbounded number of threads can be considered as a form of memory leak, causing your a…",
+  "content": "<div>\n<p>The other day at work, we had a situation where we suspected a thread leak in one particular service,\ni.e. code which continuously starts new threads, without taking care of ever stopping them again.\nEach thread requires a bit of memory for its stack space,\nso starting an unbounded number of threads can be considered as a form of memory leak, causing your application to run out of memory eventually.\nIn addition, the more threads there are, the more overhead the operating system incurs for scheduling them,\nuntil the scheduler itself will consume most of the available CPU resources.\nThus it’s vital to detect and fix this kind of problem early on.</p>\n</div>",
+  "image": null,
+  "publishedAt": "2023-02-28T21:16:10Z",
+  "sourceId": "d159169f81b06175",
+  "sourceTitle": "morling.dev -- Blog",
+  "link": "https://www.morling.dev/blog/finding-java-thread-leaks-with-jdk-flight-recorder-and-bit-of-sql/"
+}

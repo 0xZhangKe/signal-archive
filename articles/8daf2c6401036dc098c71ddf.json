@@ -1,0 +1,11 @@
+{
+  "id": "8daf2c6401036dc098c71ddf",
+  "title": "Sony Reader “Exceptional internal memory state: formatting” workaround",
+  "summary": "I get a strange error from time-to-time on my Sony Reader (PRS-650). After the Reader powers up, or comes out of transfer mode, it does the busy spinner and then says: +---------------------------------------+ | Exceptional internal memory state | | Formatting | | [ OK ] | +---------------------------------------+ At this point pressing OK will format the d…",
+  "content": "<p>I get a strange error from time-to-time on my Sony Reader (PRS-650).</p>\n\n<p>After the Reader powers up, or comes out of transfer mode, it does the busy spinner and then says:</p>\n\n<div><div><pre><code>+---------------------------------------+\n| Exceptional internal memory state     |\n| Formatting                            |\n|                              [  OK  ] |\n+---------------------------------------+\n</code></pre></div></div>\n\n<p>At this point pressing <code>OK</code> will format the device. Yikes!</p>\n\n<h2>Short Workaround</h2>\n\n<ol>\n  <li><strong>Do not press</strong> <code>OK</code> on the format warning</li>\n  <li>Press hardware <code>RESET</code> button with paperclip</li>\n</ol>\n\n<p>If this does not work, try the following:</p>\n\n<h2>Longer Workaround</h2>\n\n<ol>\n  <li><strong>Do not press</strong> <code>OK</code> on the format warning</li>\n  <li>Instead, plug device into your computer</li>\n  <li>Backup <code>READER</code> partition (optional, but recommended)</li>\n  <li>Press hardware <code>RESET</code> button with paperclip</li>\n  <li>Wait for Reader to reboot (no PRS+ features when booting with USB connected)</li>\n  <li>Unplug from computer</li>\n  <li>Shutdown/restart reader (PRS+ features will be re-enabled)</li>\n  <li>Problem is gone!</li>\n</ol>\n\n<h2>Cause</h2>\n\n<p>My theory: PRS+ doesn’t like the device being “dirty” when it is unmounted or ejected improperly.</p>",
+  "image": null,
+  "publishedAt": "2018-05-05T00:00:00Z",
+  "sourceId": "625f69e92fbd1d94",
+  "sourceTitle": "⌘I",
+  "link": "https://blog.gingerbeardman.com/2018/05/05/sony-reader-exceptional-internal-memory-state-formatting-workaround/"
+}

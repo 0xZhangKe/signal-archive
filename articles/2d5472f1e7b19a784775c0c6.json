@@ -1,0 +1,11 @@
+{
+  "id": "2d5472f1e7b19a784775c0c6",
+  "title": "Unlock ChatGPT with Cloudflare WARP",
+  "summary": "A technical guide to bypassing ChatGPT IP restrictions using Cloudflare WARP as an IPv6 proxy, with XrayR/V2Ray configuration examples for routing OpenAI traffic through WARP.",
+  "content": "<h2>原理分析</h2>\n<p><strong>Cloudflare WARP</strong> 拥有很多 IP，而 ChatGPT 的 CDN 又是 Cloudflare 提供的，也就是说，能不能访问完全取决于 Cloudflare。因此使用 Cloudflare 自己的 IP 大概率不会被 Ban。除了 WARP 之外，iCloud Private Relay 也是 Cloudflare 的 IP 哦。</p>\n<h2>具体步骤</h2>\n<p><strong>本文的方案仅改变 IPv6 出口 IP，不会改变 IPv4 出口 IP，更不会改变路由。</strong></p>\n<ol>\n<li>准备一台 VPS，需要是 OpenGPT 支持的 161 个国家之一。因为你的网络在哪里，WARP 就会使用你所在地的 IP。比如香港就不行。</li>\n</ol>\n<p><a href=\"https://platform.openai.com/docs/supported-countries\" target=\"_blank\" rel=\"noopener noreferrer\">Supported countries and territories</a></p>\n<ol>\n<li>使用以下命令安装 WARP。</li>\n</ol>\n<pre><code>bash &lt;(curl -fsSL git.io/warp.sh) proxy\n</code></pre>\n<ol>\n<li>配置 XrayR/V2Ray 的出站规则和路由。（以 XrayR 为例，XrayR/V2Ray 的使用本文略过）</li>\n</ol>\n<pre><code># custom_outbound.json\n{\n    &quot;tag&quot;: &quot;socks5-warp&quot;,\n    &quot;protocol&quot;: &quot;socks&quot;,\n    &quot;settings&quot;: {\n        &quot;servers&quot;: [{\n            &quot;address&quot;: &quot;127.0.0.1&quot;,\n            &quot;port&quot;: 40000\n        }]\n    }\n}\n# route.json\n{\n    &quot;type&quot;: &quot;field&quot;,\n    &quot;outboundTag&quot;: &quot;socks5-warp&quot;,\n    &quot;ip&quot;: [&quot;::/0&quot;]\n}\n</code></pre>\n<p>简单解释一下，出站规则是指出站走 40000 端口的 SOCKS 代理。路由规则是指所有 IPv6 出站均走 SOCKS 代理。</p>\n<ol>\n<li>如果你只是想让 OpenAI 走 WARP 的 IPv6，可以这样写。</li>\n</ol>\n<pre><code># route.json\n{\n    &quot;type&quot;: &quot;field&quot;,\n    &quot;outboundTag&quot;: &quot;socks5-warp&quot;,\n    &quot;domain&quot;: [&quot;openai.com&quot;]\n}\n</code></pre>",
+  "image": null,
+  "publishedAt": "2023-02-11T05:33:35Z",
+  "sourceId": "1dc4dbdb701e1314",
+  "sourceTitle": "Vincent's Notes",
+  "link": "https://missuo.me/posts/cloudflare-warp-chatgpt/"
+}

@@ -1,0 +1,11 @@
+{
+  "id": "784338f8abdb1dd07f52085f",
+  "title": "Rust-y Scraps: iterating with a step",
+  "summary": "This blog post works with Rust v 0.6, and may change in the future :). A common need in various algorithms is to iterate with some sort of step. A simple way to do this in Rust is with unit::range_step : let nums = [1,2,3,4,5,6,7]; for uint::range_step(0, bytes.len() - 1, 2) |i|…",
+  "content": "<p>This blog post works with <a href=\"http://rust-lang.org/\" target=\"_blank\" rel=\"noopener noreferrer\">Rust</a> v 0.6, and may change in the future :).</p>\n<p>A common need in various algorithms is to iterate with some sort of step. A simple way to do this in Rust is with <code>unit::range_step</code>:</p>\n<pre><code><span><span>let nums = [1,2,3,4,5,6,7];</span></span>\n<span><span>for uint::range_step(0, bytes.len() - 1, 2) |i| {</span></span>\n<span><span>    println(fmt!(&quot;%d &amp; %d&quot;, nums[i], nums[i+1]));</span></span>\n<span><span>}</span></span></code></pre>\n<p>This yields</p>\n<pre><code><span><span>1 &amp; 2</span></span>\n<span><span>3 &amp; 4</span></span>\n<span><span>5 &amp; 6</span></span>\n<span><span></span></span></code></pre>\n<p>Of course, this is awkward: I wish I had some code to do something like:</p>\n<pre><code><span><span>let nums = [1,2,3,4,5,6,7];</span></span>\n<span><span></span></span>\n<span><span>for nums.in_groups |i, j| {</span></span>\n<span><span>  println(fmt!(&quot;%d &amp; %d&quot;, i, j));</span></span>\n<span><span>}</span></span></code></pre>\n<p>But I think this is just out of my abilities. The issue is that the closure needs to take the same number of arguments as the step, and I’m not sure that I have the Rust-fu to make it work yet.</p>\n<p>After a discussion in the IRC room, Rust doesn’t have the Rust-fu yet either; varargs aren’t there, so this style is a no-go for now.</p>\n<hr>\n<p>Oh, and since there were no examples of this yet, <a href=\"https://github.com/mozilla/rust/pull/6841\" target=\"_blank\" rel=\"noopener noreferrer\">I added some to the docs</a>.</p>",
+  "image": null,
+  "publishedAt": "2013-05-30T00:00:00Z",
+  "sourceId": "9a41b0d6fa07d21e",
+  "sourceTitle": "Steve Klabnik",
+  "link": "https://steveklabnik.com/writing/rust--y-scraps--iterating-with-a-step/"
+}

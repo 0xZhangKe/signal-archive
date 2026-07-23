@@ -1,0 +1,11 @@
+{
+  "id": "0ce2f8c70e410a69669ee2cc",
+  "title": "Palworld Dedicated Server Setup",
+  "summary": "A quick guide to deploying a Palworld dedicated server using Docker with a simple compose.yaml configuration, including port forwarding requirements.",
+  "content": "<blockquote>\n<p>今天朋友问我能不能用我家的服务器搭建一个 Palworld，我看了一下网上的教程，用 Linux 还挺麻烦。直到我找到了 GitHub 的 Docker 版本。</p>\n</blockquote>\n<h2>准备工作</h2>\n<ul>\n<li>性能还不错的 Linux 服务器 （我这边是家里的服务器）</li>\n<li>安装了 Docker</li>\n</ul>\n<h2>启动</h2>\n<pre><code>mkdir palworld &amp;&amp; cd palworld\nnano compose.yaml\n</code></pre>\n<pre><code>services:\n   palworld:\n      image: thijsvanloef/palworld-server-docker:latest\n      restart: unless-stopped\n      container_name: palworld-server\n      ports:\n        - 8211:8211/udp\n        - 27015:27015/udp\n      environment:\n         - PUID=1000\n         - PGID=1000\n         - PORT=8211 # Optional but recommended\n         - PLAYERS=16 # Optional but recommended\n         - MULTITHREADING=true\n         - RCON_ENABLED=true\n         - RCON_PORT=25575\n         - ADMIN_PASSWORD=&quot;adminPasswordHere&quot;\n         - COMMUNITY=false  # Enable this if you want your server to show up in the community servers tab, USE WITH SERVER_PASSWORD!\n         # Enable the environment variables below if you have COMMUNITY=true\n         # - SERVER_PASSWORD=&quot;worldofpals&quot;\n         # - SERVER_NAME=&quot;World of Pals&quot;\n      volumes:\n         - ./palworld:/palworld/\n</code></pre>\n<p>复制粘贴上面的内容，可以修改一下 <strong>ADMIN_PASSWORD</strong>。</p>\n<pre><code>docker compose up -d\n</code></pre>\n<p>最后记得开放一下 8211 和 27015 端口，记得开启 UDP。</p>\n<p>PS: 美国东部的朋友可以用我搭建的服务器。</p>\n<h2>Reference</h2>\n<ul>\n<li><a href=\"https://github.com/thijsvanloef/palworld-server-docker\" target=\"_blank\" rel=\"noopener noreferrer\">https://github.com/thijsvanloef/palworld-server-docker</a></li>\n<li><a href=\"https://github.com/jammsen/docker-palworld-dedicated-server\" target=\"_blank\" rel=\"noopener noreferrer\">https://github.com/jammsen/docker-palworld-dedicated-server</a></li>\n</ul>",
+  "image": null,
+  "publishedAt": "2024-01-24T01:25:20Z",
+  "sourceId": "1dc4dbdb701e1314",
+  "sourceTitle": "Vincent's Notes",
+  "link": "https://missuo.me/posts/palworld-server/"
+}

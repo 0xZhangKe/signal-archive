@@ -1,0 +1,11 @@
+{
+  "id": "0e77994f0609a05a6d8dcf20",
+  "title": "New Maven Central signing key and snapshot location",
+  "summary": "In response to Sonatype announcing the end-of-life for OSSRH, we have migrated to their new publishing platform for our open source artifacts. This is otherwise a transparent change for those who consume these artifacts from Maven Central, but there are two related changes which might affect your builds.",
+  "content": "<p>In response to <a href=\"https://central.sonatype.org/news/20250326_ossrh_sunset/\" target=\"_blank\" rel=\"noopener noreferrer\">Sonatype announcing the end-of-life for OSSRH</a>, we have migrated to their new publishing platform for our open source artifacts. This is otherwise a transparent change for those who consume these artifacts from Maven Central, but there are two related changes which might affect your builds.</p>\n\n<p>First, the GPG key used to sign our artifacts has changed. Previously the keys varied across projects depending on how and who were publishing. Now, a company-wide shared key is used for all projects. A copy of the public key is available at <a target=\"_blank\" rel=\"noopener noreferrer\">code.cash.app/block.gpg</a> for verification.</p>\n\n<p>Second, projects which publish “snapshot” builds (i.e., builds from the latest commit on their integration branch) are now available in the Central Portal Snapshot repository at <a href=\"https://central.sonatype.com/repository/maven-snapshots/\" target=\"_blank\" rel=\"noopener noreferrer\">central.sonatype.com/repository/maven-snapshots/</a>. Snapshot builds will also be signed with the same key as release builds.</p>",
+  "image": null,
+  "publishedAt": "2025-06-13T00:00:00Z",
+  "sourceId": "91e1c14dd7cf9234",
+  "sourceTitle": "Cash App Code Blog",
+  "link": "https://code.cash.app/new-maven-central-signing-key-and-snapshot-location"
+}

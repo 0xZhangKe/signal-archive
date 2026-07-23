@@ -1,0 +1,11 @@
+{
+  "id": "265526c9aabec64266460814",
+  "title": "OpenWrt代理下split-horizon DNS导致的DNS分流失效",
+  "summary": "公司网站采用了split-horizon DNS，内网接入的时候DNS解析返回内网IPv4地址，外网接入的时候DNS解析返回公网IPv4地址和IPv6地址。再使用OpenWrt安装某些代理之后，...",
+  "content": "<p>公司网站采用了split-horizon DNS，内网接入的时候DNS解析返回内网IPv4地址，外网接入的时候DNS解析返回公网IPv4地址和IPv6地址。<br>再使用OpenWrt安装某些代理之后，会导致所有的DNS查询都返回IPv6地址，而本地没有IPv6致使无法正常使用。<br>本质上是：接入 OpenWrt 后，DNS 没走内网 DNS，而走了外部 DNS / 代理接管的 DNS，于是 split-horizon DNS 被破坏了。</p><p>解决方法也很简单，进入OpenWrt后：</p><ol><li>在代理软件中，关闭<code>DNS 重定向</code></li><li>在<code>接口</code>&gt;<code>WAN</code>中，关闭<code>自动获取 DNS 服务器</code>，勾选<code>使用自定义的 DNS 服务器</code>，填入<code>223.5.5.5</code>等国内的DNS。</li><li>重启OpenWrt和电脑。</li></ol><p>之后，DNS将返回公网IPv4和IPv6地址，至此正常连接。</p>",
+  "image": null,
+  "publishedAt": "2026-04-08T06:43:57Z",
+  "sourceId": "d87239607d14c88c",
+  "sourceTitle": "怕刺",
+  "link": "https://pa.ci/448.html"
+}

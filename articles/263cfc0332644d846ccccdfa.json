@@ -1,0 +1,11 @@
+{
+  "id": "263cfc0332644d846ccccdfa",
+  "title": "On Idempotency Keys",
+  "summary": "Table of Contents UUIDs Monotonically Increasing Sequences Deriving Idempotency Keys From the Transaction Log Discussion In distributed systems, there’s a common understanding that it is not possible to guarantee exactly-once delivery of messages. What is possible though is exactly-once processing . By adding a unique idempotency key to each message, you ca…",
+  "content": "<div>\n<div>Table of Contents</div>\n<ul>\n<li><a target=\"_blank\" rel=\"noopener noreferrer\">UUIDs</a></li>\n<li><a target=\"_blank\" rel=\"noopener noreferrer\">Monotonically Increasing Sequences</a></li>\n<li><a target=\"_blank\" rel=\"noopener noreferrer\">Deriving Idempotency Keys From the Transaction Log</a></li>\n<li><a target=\"_blank\" rel=\"noopener noreferrer\">Discussion</a></li>\n</ul>\n</div>\n<div>\n<p>In distributed systems, there’s a common understanding that it is not possible to guarantee exactly-once delivery of messages.\n<a href=\"https://medium.com/@jaykreps/exactly-once-support-in-apache-kafka-55e1fdd0a35f\" target=\"_blank\" rel=\"noopener noreferrer\">What is possible</a> though is <em>exactly-once processing</em>. By adding a unique idempotency key to each message, you can enable consumers to recognize and ignore duplicate messages, i.e. messages which they have received and successfully processed before.</p>\n</div>",
+  "image": null,
+  "publishedAt": "2025-11-25T12:10:00Z",
+  "sourceId": "d159169f81b06175",
+  "sourceTitle": "morling.dev -- Blog",
+  "link": "https://www.morling.dev/blog/on-idempotency-keys/"
+}

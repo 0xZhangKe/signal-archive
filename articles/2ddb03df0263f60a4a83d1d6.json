@@ -1,0 +1,11 @@
+{
+  "id": "2ddb03df0263f60a4a83d1d6",
+  "title": "Ember Data: ‘DS’ is not defined",
+  "summary": "I’m doing a little Ember app, and if there’s one thing I’ve learned from writing software, it’s to blog about error messages. Two-years-later me has ended up finding my own posts when searching for help! So today, when getting started with Ember Data 1.13, I was trying to use the…",
+  "content": "<p>I’m doing a little Ember app, and if there’s one thing I’ve learned from writing software, it’s to blog about error messages. Two-years-later me has ended up finding my own posts when searching for help!</p>\n<p>So today, when getting started with Ember Data 1.13, I was trying to use the new <code>JSONAPIAdapter</code>. I saw this code snippet:</p>\n<pre><code><span><span>App.ApplicationAdapter </span><span>=</span><span> DS</span><span>.JSONAPIAdapter.</span><span>extend</span><span>({</span></span>\n<span><span>    namespace: </span><span>&#x27;v1&#x27;</span><span>,</span></span>\n<span><span>});</span></span></code></pre>\n<p>Using that gave me an error when <code>ember serve</code>-ing, though:</p>\n<pre><code><span><span>app.js: line 16, col 26, ‘DS’ is not defined.</span></span></code></pre>\n<p>Turns out, <code>DS</code> isn’t in scope by default, even though <code>ember-cli</code> installs Ember Data by default.</p>\n<p>Fixing this just means importing it at the top of <code>app/app.js</code>:</p>\n<pre><code><span><span>import</span><span> DS </span><span>from</span><span> &#x27;ember-data&#x27;</span><span>;</span></span></code></pre>\n<p>Easy enough!</p>",
+  "image": null,
+  "publishedAt": "2015-07-05T00:00:00Z",
+  "sourceId": "9a41b0d6fa07d21e",
+  "sourceTitle": "Steve Klabnik",
+  "link": "https://steveklabnik.com/writing/ember-data--ds-is-not-defined/"
+}

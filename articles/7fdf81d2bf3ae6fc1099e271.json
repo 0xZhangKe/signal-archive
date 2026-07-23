@@ -1,0 +1,11 @@
+{
+  "id": "7fdf81d2bf3ae6fc1099e271",
+  "title": "OpenWrt 25.12 快速预览",
+  "summary": "时间买入2026年，OpenWrt也例行大版本更新，从OpenWrt 24.10更新至OpenWrt 25.12，当前（2026-01-23）已经发布了两个RC版本。主要改动软件包管理器从 op...",
+  "content": "<p>时间买入2026年，OpenWrt也例行大版本更新，从OpenWrt 24.10更新至OpenWrt 25.12，当前（2026-01-23）已经发布了两个RC版本。</p><h2>主要改动</h2><ol><li><strong>软件包管理器从 opkg 切换到 apk</strong> <br>这是本次更新中最具变革性的。opkg因为功能陈旧、性能难以适应现代化软件体系，且维护人员有限，已经制约了OpenWrt的发展。因此，OpenWrt社区决定采用源自Alpine Linux的现代化轻量级包管理器apk（Alpine Package Keeper）。虽然在24.10版本周期内就已在主开发分支的快照（nightly）版本中开始测试，但出于系统性限制和兼容性考虑，直到现在才正式将其作为默认的包管理器。</li><li><strong>交互式系统升级（Attended Sysupgrade）功能集成到默认的 LuCI 安装中</strong> <br>现在可以直接通过Web界面将设备从24.10升级到25.12，并自动保留配置，直接简化升级流程，对于部分不方便的设备不再需要各种半手动操作了。</li><li><strong>Shell 命令历史记录存储在内存中，直到下次重启</strong> <br>OpenWrt可以有类似现代化Linux桌面系统的终端体验了。</li><li><strong>集成视频流（Video Feed）功能</strong> <br>OpenWrt 25.12默认集成了基于Qt5的视频流应用，这为路由器在家庭监控、视频网关等新应用场景上打开了大门。</li><li><strong>Wi-Fi 脚本已转换为 ucode 格式</strong> <br>这项底层改动旨在提高Wi-Fi配置的效率和一致性。</li></ol><h2>组件与软件更新</h2><ul><li>Linux kernel 更新到了 6.12</li><li><p>工具链也对应更新：</p><ul><li>musl libc 1.2.5</li><li>glibc 2.41</li><li>gcc 14.3.0</li><li>binutils 2.44</li></ul></li><li><p>核心包例行更新：</p><ul><li>hostapd 2025年8月版本</li><li>dnsmasq 2.91</li><li>dropbear 2025.89</li><li>busybox 1.37.0</li></ul></li></ul>",
+  "image": null,
+  "publishedAt": "2026-01-23T05:52:05Z",
+  "sourceId": "d87239607d14c88c",
+  "sourceTitle": "怕刺",
+  "link": "https://pa.ci/443.html"
+}

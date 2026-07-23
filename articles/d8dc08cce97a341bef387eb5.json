@@ -1,0 +1,11 @@
+{
+  "id": "d8dc08cce97a341bef387eb5",
+  "title": "Create query API for 500 million Weibo data",
+  "summary": "A technical guide to building a high-performance query API for the 500 million Weibo data leak using ClickHouse with dual tables indexed by UID and phone number for fast lookups.",
+  "content": "<h2>Preparation</h2>\n<ul>\n<li>Clickhouse Database</li>\n<li>Linux/Windows/macOS Server</li>\n</ul>\n<h2>Data Import</h2>\n<ol>\n<li>First you need to deploy Clickhouse and finish creating a brand new database.</li>\n<li>Create two tables.</li>\n</ol>\n<p>Table For Query Weibo Uid.</p>\n<pre><code>CREATE TABLE wb_uid(\nuid String,\nmobile String\n)ENGINE = MergeTree()\n    ORDER BY  (uid)\n    PRIMARY KEY (uid);\n</code></pre>\n<p>Table For Query Mobile Phone Number</p>\n<pre><code>CREATE TABLE wb_mobile(\nuid String,\nmobile String\n)ENGINE = MergeTree()\n    ORDER BY  (mobile)\n    PRIMARY KEY (mobile);\n</code></pre>\n<h2>Query Data</h2>\n<p><a href=\"https://github.com/OwO-Network/WeiboSearcher\" target=\"_blank\" rel=\"noopener noreferrer\">WeiboSearcher</a> is an API program written in Golang. But he is not out of the box, because there is no configuration file that allows you to modify the database information, which will be supported in the future. But you can modify some of the configuration code and recompile it yourself.</p>\n<pre><code>./weibo_linux_amd64\n</code></pre>\n<h2>Q&amp;A</h2>\n<ul>\n<li>Why not use a MySQL database?</li>\n</ul>\n<blockquote>\n<p>Because even after building indexes, sorting, and splitting tables, MySQL data is much worse than Clickhouse, I gave up on optimizing MySQL query speed.</p>\n</blockquote>\n<ul>\n<li>Why use two tables?</li>\n</ul>\n<blockquote>\n<p>Because two tables are used and the indexes are different fields. It can greatly speed up the query efficiency.</p>\n</blockquote>\n<ul>\n<li>Where is the data downloaded from?</li>\n</ul>\n<blockquote>\n<p>We do not provide any data, and we do not keep any data. Please find your own data sources.</p>\n</blockquote>",
+  "image": null,
+  "publishedAt": "2023-02-08T19:32:33Z",
+  "sourceId": "1dc4dbdb701e1314",
+  "sourceTitle": "Vincent's Notes",
+  "link": "https://missuo.me/posts/weibo-data-searcher/"
+}

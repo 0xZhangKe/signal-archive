@@ -1,0 +1,11 @@
+{
+  "id": "da39efab08fc6edc3c9f06b1",
+  "title": "cw-json 0.4.0",
+  "summary": "cw-json now supports dot notation for navigating JSON, in addition to official JSON Pointer",
+  "content": "<p>The <a href=\"https://codeberg.org/commonsguy/cw-json\" target=\"_blank\" rel=\"noopener noreferrer\">cw-json repository</a> now has version <code>0.4.0</code> of <code>kmp-jsonpointer</code> and <code>kmp-jsonpointer-kxs</code>.</p>\n\n<p>In addition to the official JSON Pointer means of navigating JSON, this release adds unofficial-but-popular <a href=\"https://codeberg.org/commonsguy/cw-json/src/branch/main/kmp-jsonpointer/README.md#dot-notation\" target=\"_blank\" rel=\"noopener noreferrer\">dot notation</a>. It is the sort of syntax you see in template languages like Mustache, Handlebars, and Liquid. <code>foo.bar.goo</code> in dot notation is equivalent to <code>/foo/bar/goo</code> in official JSON Pointer syntax.</p>\n\n<p><code>JsonPointer.from()</code> now accepts all three core syntaxes:</p>\n\n<ul>\n  <li>JSON Pointer</li>\n  <li>JSON Pointer as <a href=\"https://codeberg.org/commonsguy/cw-json/src/branch/main/kmp-jsonpointer/README.md#uri-fragment-identifiers\" target=\"_blank\" rel=\"noopener noreferrer\">encoded in URI fragment identifiers</a></li>\n  <li>Dot notation</li>\n</ul>\n\n<p>There are dedicated functions like <code>JsonPointer.fromDotNotation()</code> for cases where you know the exact syntax that you want to support.</p>\n\n<p>There is also a <code>toDotNotation()</code> function on <code>JsonPointer</code> instances that will give you the dot notation form of the pointer.</p>\n\n<p>The <a href=\"https://docs.commonsware.com/cw-json/index.html\" target=\"_blank\" rel=\"noopener noreferrer\">Dokka documentation</a> has been updated for <code>0.4.0</code>.</p>",
+  "image": null,
+  "publishedAt": "2026-06-08T21:51:04Z",
+  "sourceId": "c3217ec4b22d554e",
+  "sourceTitle": "The CommonsBlog",
+  "link": "https://commonsware.com/blog/2026/06/08/cw-json-0-4-0.html"
+}

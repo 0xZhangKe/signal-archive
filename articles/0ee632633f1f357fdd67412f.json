@@ -1,0 +1,11 @@
+{
+  "id": "0ee632633f1f357fdd67412f",
+  "title": "The Insatiable Postgres Replication Slot",
+  "summary": "Table of Contents The Observation The Solution Take Away While working on a demo for processing change events from Postgres with Apache Flink, I noticed an interesting phenomenon: A Postgres database which I had set up for that demo on Amazon RDS, ran out of disk space. The machine had a disk size of 200 GiB which was fully used up in the course of less tha…",
+  "content": "<div>\n<div>Table of Contents</div>\n<ul>\n<li><a target=\"_blank\" rel=\"noopener noreferrer\">The Observation</a></li>\n<li><a target=\"_blank\" rel=\"noopener noreferrer\">The Solution</a></li>\n<li><a target=\"_blank\" rel=\"noopener noreferrer\">Take Away</a></li>\n</ul>\n</div>\n<div>\n<p>While working on a demo for processing change events from Postgres with Apache Flink,\nI noticed an interesting phenomenon:\nA Postgres database which I had set up for that demo on Amazon RDS, ran out of disk space.\nThe machine had a disk size of 200 GiB which was fully used up in the course of less than two weeks.</p>\n</div>\n<div>\n<p>Now a common cause for this kind of issue are replication slots which are not advanced:\nin that case, Postgres will hold on to all WAL segments after the latest log sequence number (<a href=\"https://pgpedia.info/l/LSN-log-sequence-number.html\" target=\"_blank\" rel=\"noopener noreferrer\">LSN</a>) which was confirmed for that slot.\nIndeed I had set up a replication slot (via the <a href=\"https://www.decodable.co/connectors/postgres-cdc\" target=\"_blank\" rel=\"noopener noreferrer\">Decodable CDC source connector for Postgres</a>, which is based on <a href=\"https://debezium.io\" target=\"_blank\" rel=\"noopener noreferrer\">Debezium</a>).\nI then had stopped that connector, causing the slot to become inactive.\nThe problem was though that I was really sure that there was no traffic in that database whatsoever!\nWhat could cause a WAL growth of ~18 GB/day then?</p>\n</div>",
+  "image": null,
+  "publishedAt": "2022-11-30T13:00:00Z",
+  "sourceId": "d159169f81b06175",
+  "sourceTitle": "morling.dev -- Blog",
+  "link": "https://www.morling.dev/blog/insatiable-postgres-replication-slot/"
+}

@@ -1,0 +1,11 @@
+{
+  "id": "94f53f41c04eaf5a5a3eb8f2",
+  "title": "macOS 按域名切换 DNS 解析",
+  "summary": "在工作用的电脑上，为了访问公司内网，需要让内网域名走公司的 DNS 服务器，而其他域名走公共 DNS 服务器。 之前我一直使用 dnsmasq 实现按域名切换解析，这样的话有几个问题： dnsmasq 的默认上游是静态配置，并不是在所有网络环境中都能直接用 114 了事，尤其是在一些需要认证的环境中 需要改系统的 DNS 配置，同时每次系统更新之后又要重新改一遍 直到昨天我才知道 BSD 系支持一个按域名设置 resolver 的功能 ( man 5 resolver )，直接用就好了。",
+  "content": "<p>在工作用的电脑上，为了访问公司内网，需要让内网域名走公司的 DNS 服务器，而其他域名走公共 DNS 服务器。</p>\n<p>之前我一直使用 dnsmasq 实现按域名切换解析，这样的话有几个问题：</p>\n<ol>\n<li>dnsmasq 的默认上游是静态配置，并不是在所有网络环境中都能直接用 114 了事，尤其是在一些需要认证的环境中</li>\n<li>需要改系统的 DNS 配置，同时每次系统更新之后又要重新改一遍</li>\n</ol>\n<p>直到昨天我才知道 BSD 系支持一个按域名设置 resolver 的功能 (<a href=\"https://www.manpagez.com/man/5/resolver/\" target=\"_blank\" rel=\"noopener noreferrer\"><code>man 5 resolver</code></a>)，直接用就好了。</p>",
+  "image": null,
+  "publishedAt": "2023-11-26T00:00:00Z",
+  "sourceId": "1a53726dacd05db7",
+  "sourceTitle": "K.I.S.S",
+  "link": "https://bigeagle.me/2023/11/mac-dns-resolver/"
+}

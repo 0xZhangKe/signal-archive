@@ -1,0 +1,11 @@
+{
+  "id": "5d9567974d36d5db3f0e2c1f",
+  "title": "Announcing request_store",
+  "summary": "Last night I had some insomnia, so I wrote a gem. Here it is: https://github.com/steveklabnik/request_store . TL;DR: If you’re using Thread.current in your Rails app to store global-ish data, don’t do it! If you use Thin or Puma or a threaded web server, it won’t get reset…",
+  "content": "<p>Last night I had some insomnia, so I wrote a gem.</p>\n<p>Here it is: <a href=\"https://github.com/steveklabnik/request_store\" target=\"_blank\" rel=\"noopener noreferrer\">https://github.com/steveklabnik/request_store</a>.</p>\n<p>TL;DR:</p>\n<p>If you’re using <code>Thread.current</code> in your Rails app to store global-ish data, don’t do it! If you use Thin or Puma or a threaded web server, it won’t get reset between requests, and you’ll end up with subtle bugs. So do this instead:</p>\n<pre><code><span><span>gem </span><span>&quot;request_store&quot;</span></span></code></pre>\n<p>and replace</p>\n<pre><code><span><span>Thread</span><span>.</span><span>current</span><span>[</span><span>:foo</span><span>] </span><span>=</span><span> 1</span></span></code></pre>\n<p>with</p>\n<pre><code><span><span>RequestStore</span><span>.</span><span>store</span><span>[</span><span>:foo</span><span>] </span><span>=</span><span> 1</span></span></code></pre>\n<p>And things will be peachy keen.</p>\n<h3>No Rails?</h3>\n<p>If you’re not using Rails, <code>use RequestStore::Middleware</code> to make it work. If you are using Rails, a Railtie takes care of it for you.</p>",
+  "image": null,
+  "publishedAt": "2012-12-17T00:00:00Z",
+  "sourceId": "9a41b0d6fa07d21e",
+  "sourceTitle": "Steve Klabnik",
+  "link": "https://steveklabnik.com/writing/announcing-requeststore/"
+}

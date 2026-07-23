@@ -1,0 +1,169 @@
+{
+  "items": [
+    {
+      "id": "4f36f78ec6d37817b8723945",
+      "title": "GC shape stenciling in Go generics",
+      "summary": "How Go's compiler shares generic function bodies by GC shape and uses dictionaries for the concrete types.",
+      "image": null,
+      "publishedAt": "2026-07-11T00:00:00Z",
+      "sourceId": "064c0d77cd613f57",
+      "sourceTitle": "Redowan's Reflections",
+      "link": "https://rednafi.com/go/gc-shape-stenciling/",
+      "detailPath": "articles/4f36f78ec6d37817b8723945.json"
+    },
+    {
+      "id": "45c4d3f06c9781e70d6e761a",
+      "title": "Modernizers & go fix",
+      "summary": "Go 1.26 rebuilt go fix on the analysis framework. It modernizes your code and respects the Go version your module declares. The post covers the modernizers, the bigger x/tools suite, and what //go:fix inline can and can't migrate.",
+      "image": null,
+      "publishedAt": "2026-07-04T00:00:00Z",
+      "sourceId": "064c0d77cd613f57",
+      "sourceTitle": "Redowan's Reflections",
+      "link": "https://rednafi.com/go/gofix/",
+      "detailPath": "articles/45c4d3f06c9781e70d6e761a.json"
+    },
+    {
+      "id": "80a7fc8e86bf8579c0508e57",
+      "title": "Request coalescing with Go singleflight",
+      "summary": "A hot cache key expires and a hundred requests issue the same query at once, saturating the database. Go's singleflight package coalesces those duplicate calls into one. How to wire it up, how to measure whether it's firing, and why per-pod coalescing is usually enough.",
+      "image": null,
+      "publishedAt": "2026-06-27T00:00:00Z",
+      "sourceId": "064c0d77cd613f57",
+      "sourceTitle": "Redowan's Reflections",
+      "link": "https://rednafi.com/go/request-coalescing/",
+      "detailPath": "articles/80a7fc8e86bf8579c0508e57.json"
+    },
+    {
+      "id": "94895915f3740f5f247a48be",
+      "title": "Channel iteration and goroutine leak",
+      "summary": "A for-range over a channel that's never closed leaks the receiver. Why a fixed number of receives is safe, why a range isn't, and how to catch it with Go 1.27's leak profile.",
+      "image": null,
+      "publishedAt": "2026-06-21T00:00:00Z",
+      "sourceId": "064c0d77cd613f57",
+      "sourceTitle": "Redowan's Reflections",
+      "link": "https://rednafi.com/go/channel-iteration-goroutine-leak/",
+      "detailPath": "articles/94895915f3740f5f247a48be.json"
+    },
+    {
+      "id": "3466ef3ec951505bdfe75416",
+      "title": "Accepted proposal: a goroutine leak profile in the Go standard library",
+      "summary": "Notes on Go's accepted goroutine leak profile and how it reuses the GC to find them.",
+      "image": null,
+      "publishedAt": "2026-06-18T00:00:00Z",
+      "sourceId": "064c0d77cd613f57",
+      "sourceTitle": "Redowan's Reflections",
+      "link": "https://rednafi.com/shards/2026/06/go-goroutine-leak-profile/",
+      "detailPath": "articles/3466ef3ec951505bdfe75416.json"
+    },
+    {
+      "id": "a6216a61fa2273b7a1ec428c",
+      "title": "Reading your own writes with WAIT FOR LSN in Postgres 19",
+      "summary": "PostgreSQL 19's new WAIT FOR LSN command lets a replica block until it has replayed your write. The read-after-write problem it solves, the workarounds it replaces, and what the timeout, status, and mode options are actually for.",
+      "image": null,
+      "publishedAt": "2026-06-13T00:00:00Z",
+      "sourceId": "064c0d77cd613f57",
+      "sourceTitle": "Redowan's Reflections",
+      "link": "https://rednafi.com/system/wait-for-lsn/",
+      "detailPath": "articles/a6216a61fa2273b7a1ec428c.json"
+    },
+    {
+      "id": "48c5a3403cfca64b352bdd6a",
+      "title": "Migrating from GNU stow to chezmoi",
+      "summary": "Why I swapped GNU stow's symlink farm for chezmoi: one command to bootstrap a Mac with Homebrew packages and macOS settings, a small daily sync loop, and agent skills shared between Claude Code and Codex.",
+      "image": null,
+      "publishedAt": "2026-06-11T22:00:00Z",
+      "sourceId": "064c0d77cd613f57",
+      "sourceTitle": "Redowan's Reflections",
+      "link": "https://rednafi.com/misc/chezmoi/",
+      "detailPath": "articles/48c5a3403cfca64b352bdd6a.json"
+    },
+    {
+      "id": "9f29ce55262d8993d9159f48",
+      "title": "Putting this blog on ATProto with standard.site",
+      "summary": "Mirroring a static Hugo blog onto ATProto with standard.site and Sequoia, plus the GitHub Actions wiring that republishes the records on every push without any manual steps.",
+      "image": "https://blob.rednafi.com/misc/standard-site/image-03-d67bfdc6d73e.png",
+      "publishedAt": "2026-06-07T00:00:00Z",
+      "sourceId": "064c0d77cd613f57",
+      "sourceTitle": "Redowan's Reflections",
+      "link": "https://rednafi.com/misc/standard-site/",
+      "detailPath": "articles/9f29ce55262d8993d9159f48.json"
+    },
+    {
+      "id": "0ed16b03489584bf112cfc04",
+      "title": "If you won't carry the pager, maybe don't push to mainline",
+      "summary": "Drive-by AI changes break the shared model a team builds around its code, and the ICs end up cleaning up the mess. Why pushing to mainline should come with the pager.",
+      "image": "https://blob.rednafi.com/zephyr/carry-the-pager/image-01-287c03215d4c.jpg",
+      "publishedAt": "2026-05-30T00:00:00Z",
+      "sourceId": "064c0d77cd613f57",
+      "sourceTitle": "Redowan's Reflections",
+      "link": "https://rednafi.com/zephyr/carry-the-pager/",
+      "detailPath": "articles/0ed16b03489584bf112cfc04.json"
+    },
+    {
+      "id": "132d40e56576386ba570f720",
+      "title": "Testing Go CLIs with testscript",
+      "summary": "How cmd/go's script tests led me to testscript, and how to use it for CLI tests that exercise argv, stdout, stderr, exit codes, and scratch files.",
+      "image": null,
+      "publishedAt": "2026-05-18T00:00:00Z",
+      "sourceId": "064c0d77cd613f57",
+      "sourceTitle": "Redowan's Reflections",
+      "link": "https://rednafi.com/go/testscript-cli/",
+      "detailPath": "articles/132d40e56576386ba570f720.json"
+    },
+    {
+      "id": "9f678db311f59c6242ba4013",
+      "title": "A tour of txtar",
+      "summary": "txtar is a tiny plain-text archive format Russ Cox introduced in 2018 for multi-file test fixtures. The Go Playground, cmd/go's script tests, gopls's marker tests, and rsc.io/rf all reach for it.",
+      "image": null,
+      "publishedAt": "2026-05-10T00:00:00Z",
+      "sourceId": "064c0d77cd613f57",
+      "sourceTitle": "Redowan's Reflections",
+      "link": "https://rednafi.com/go/txtar/",
+      "detailPath": "articles/9f678db311f59c6242ba4013.json"
+    },
+    {
+      "id": "6aa46138837581cd3b532948",
+      "title": "Type-safe slogging",
+      "summary": "The default slog API is loose enough that a careless line ships broken JSON to production. Pin it down with Attr constructors, LogAttrs, a context-borne logger, and sloglint.",
+      "image": null,
+      "publishedAt": "2026-05-09T00:00:00Z",
+      "sourceId": "064c0d77cd613f57",
+      "sourceTitle": "Redowan's Reflections",
+      "link": "https://rednafi.com/go/typesafe-slogging/",
+      "detailPath": "articles/6aa46138837581cd3b532948.json"
+    },
+    {
+      "id": "882cc4dc0e4a3bea7a9533a6",
+      "title": "Hoisting wire plumbing out of your Go handlers",
+      "summary": "Four of the five steps in every unary RPC handler are wire plumbing. Pin the service function signature and they fit in one generic adapter per transport.",
+      "image": null,
+      "publishedAt": "2026-05-02T00:00:00Z",
+      "sourceId": "064c0d77cd613f57",
+      "sourceTitle": "Redowan's Reflections",
+      "link": "https://rednafi.com/go/hoist-wire-plumb/",
+      "detailPath": "articles/882cc4dc0e4a3bea7a9533a6.json"
+    },
+    {
+      "id": "1a3ff8dced7f970fd3ff0949",
+      "title": "Go quirks: function closures capturing mutable references",
+      "summary": "A Go closure holds a live reference to whatever it captures, not a snapshot. Real examples of where this trips people up, and how to keep it boring.",
+      "image": null,
+      "publishedAt": "2026-04-25T00:00:00Z",
+      "sourceId": "064c0d77cd613f57",
+      "sourceTitle": "Redowan's Reflections",
+      "link": "https://rednafi.com/go/closure-mutable-refs/",
+      "detailPath": "articles/1a3ff8dced7f970fd3ff0949.json"
+    },
+    {
+      "id": "daf4ea86ac754cafdc4146c6",
+      "title": "Accepted proposal: UUID in the Go standard library",
+      "summary": "Notes on Go's newly accepted uuid proposal and the tradeoffs behind the API.",
+      "image": null,
+      "publishedAt": "2026-04-19T00:00:00Z",
+      "sourceId": "064c0d77cd613f57",
+      "sourceTitle": "Redowan's Reflections",
+      "link": "https://rednafi.com/shards/2026/04/go-uuid/",
+      "detailPath": "articles/daf4ea86ac754cafdc4146c6.json"
+    }
+  ]
+}

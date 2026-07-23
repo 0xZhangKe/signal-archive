@@ -1,0 +1,11 @@
+{
+  "id": "a09e3bb91c5bc57b3073fd48",
+  "title": "A Fast Path for Fixed-Length Lists in Parquet",
+  "summary": "Table of Contents Parquet’s Dremel Encoding Reading Effectively-Fixed-Length Lists Faster Performance Gains Summary In its current form Apache Parquet isn’t a great fit for storing fixed-length lists, such as coordinates, RGB(A) colors, or—​an increasingly common case—​vector embeddings driving search and retrieval workloads. A 768-dimensional embedding is…",
+  "content": "<div>\n<div>Table of Contents</div>\n<ul>\n<li><a target=\"_blank\" rel=\"noopener noreferrer\">Parquet’s Dremel Encoding</a></li>\n<li><a target=\"_blank\" rel=\"noopener noreferrer\">Reading Effectively-Fixed-Length Lists Faster</a></li>\n<li><a target=\"_blank\" rel=\"noopener noreferrer\">Performance Gains</a></li>\n<li><a target=\"_blank\" rel=\"noopener noreferrer\">Summary</a></li>\n</ul>\n</div>\n<div>\n<p>In its current form Apache Parquet isn’t a great fit for storing fixed-length lists, such as coordinates, RGB(A) colors, or—​an increasingly common case—​vector embeddings driving search and retrieval workloads.\nA 768-dimensional embedding is just a list of floats that always has the same length,\nyet Parquet’s Dremel machinery encodes it as if that length could vary from row to row, spelling out and reconstructing each vector’s structure on read.\nThat costs roughly 3× more than a purely flat columnar representation of the same data (see <a href=\"https://github.com/apache/arrow/issues/34510\" target=\"_blank\" rel=\"noopener noreferrer\">apache/arrow#34510</a>).</p>\n</div>",
+  "image": null,
+  "publishedAt": "2026-07-22T05:30:00Z",
+  "sourceId": "d159169f81b06175",
+  "sourceTitle": "morling.dev -- Blog",
+  "link": "https://www.morling.dev/blog/fast-path-for-fixed-length-lists-in-parquet/"
+}

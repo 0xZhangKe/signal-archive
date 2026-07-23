@@ -1,0 +1,11 @@
+{
+  "id": "05e1084c00c6f54f9b141d71",
+  "title": "「太坑了！」优雅地解决安装Windows过程中出现提示缺少驱动的问题",
+  "summary": "起因 最近在教朋友装系统，正常流程就是用U盘做一个官方镜像的启动盘，然后进BIOS，用U盘启动来安装。 但碰到了一个棘手的问题，安装工具识别不到硬盘。 起因是他手头的 Windows 笔电坏了，没法用微软官方工具或者 Rufus 这类写盘软件来烧录镜像，但是他有 Mac。 问题复现 于是我就想到了Mac下好用的写盘工具 Etcher ，安装好，下载镜像，写盘一气呵成。 问题来了，U盘插到电脑上，能正确引导进去到安装界面，但是一上来就提示“Install Driver to Show Hardware”（24H2） 然后就在想，哈？！装个系统要毛线硬盘驱动，NVME驱动不该都自带了吗又不是什么新的技术，然后就想到了是不是24H2新版本Bug，于是用 Etcher又烧录了一次 Win11 23H2，提示变了，但本…",
+  "content": "<h2>起因\n</h2><p>最近在教朋友装系统，正常流程就是用U盘做一个官方镜像的启动盘，然后进BIOS，用U盘启动来安装。</p>\n<p>但碰到了一个棘手的问题，安装工具识别不到硬盘。</p>\n<p>起因是他手头的 Windows 笔电坏了，没法用微软官方工具或者 Rufus 这类写盘软件来烧录镜像，但是他有 Mac。</p>\n<h2>问题复现\n</h2><p>于是我就想到了Mac下好用的写盘工具 <code>Etcher</code>，安装好，下载镜像，写盘一气呵成。</p>\n<p>问题来了，U盘插到电脑上，能正确引导进去到安装界面，但是一上来就提示“Install Driver to Show Hardware”（24H2）</p>\n<p><img alt=\"Win11 24H2提示缺少驱动\" height=\"1848\" src=\"https://cdn.taurusxin.com/hugo/2024/10/27/24h2-missing-driver.jpg\" width=\"4000\"></p>\n<p>然后就在想，哈？！装个系统要毛线硬盘驱动，NVME驱动不该都自带了吗又不是什么新的技术，然后就想到了是不是24H2新版本Bug，于是用 Etcher又烧录了一次 Win11 23H2，提示变了，但本质还是一样，缺少驱动。</p>\n<p><img alt=\"Win11 23H2提示缺少驱动\" height=\"810\" src=\"https://cdn.taurusxin.com/hugo/2024/10/27/23h2-missing-driver.png\" width=\"1440\"></p>\n<p>这也不太可能啊，于是搜了一圈，有说VMD技术开着的，把它关掉，有说RST快速存储技术开着，也要关掉。</p>\n<p>甚至还有说换到USB2.0，这根本就不搭噶的好伐！</p>\n<p>试了一圈都不行。</p>\n<p>这时候我突然看到U盘的盘符，我就明白了一切。</p>\n<h2>原因\n</h2><p>Etcher 在写盘时会将U盘格式化成特殊的分区格式，然而Windows的安装本质上依赖于ISO镜像目录下的install.wim文件，而安装器能识别到了一个分区，然而又不支持读取这个分区格式，所以提示缺少驱动…</p>\n<p>安装器提示缺少的并不是你要安装系统的硬盘的驱动，而是你U盘的分区格式的驱动。</p>\n<p>所以如果在没有 Win 电脑的情况下，要制作一个 Windows 的安装U盘，千万别用 Etcher！</p>\n<p>如果是macOS下，可以用 <a href=\"https://github.com/TechUnRestricted/WinDiskWriter\" target=\"_blank\" rel=\"noopener noreferrer\">WinDiskWritter</a> 来写盘。</p>\n<p>于是想尽办法找来了一台 Windows 电脑，用 Rufus 重新写盘，再引导，就能顺利的看到硬盘了。（BIOS 里 VMD还是要关掉的，不然能进去安装指引，但认不到硬盘）</p>\n<p>祝各位顺利…</p>",
+  "image": "https://cdn.taurusxin.com/hugo/2024/10/27/24h2-missing-driver.jpg",
+  "publishedAt": "2024-10-27T02:12:00Z",
+  "sourceId": "3220115c042340a7",
+  "sourceTitle": "TaurusXin 的独立博客",
+  "link": "https://www.taurusxin.com/win-install-missing-driver/"
+}
