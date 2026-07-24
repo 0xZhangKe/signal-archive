@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>est の 输入 输出和出入</title><link>https://blog.est.im/</link><description>This blog is rated 🔞, viewer discretion is advised</description><lastBuildDate>Thu, 23 Jul 2026 18:24:00 +0800</lastBuildDate><item><title>iosevka字体让中文 ASCII diagram 图表对齐</title><link>https://blog.est.im/2026/stdout-30</link><description>&lt;p&gt;对齐前：&lt;/p&gt;
+<rss version="2.0"><channel><title>est の 输入 输出和出入</title><link>https://blog.est.im/</link><description>This blog is rated 🔞, viewer discretion is advised</description><lastBuildDate>Fri, 24 Jul 2026 01:37:03 +0800</lastBuildDate><item><title>iosevka字体让中文 ASCII diagram 图表对齐</title><link>https://blog.est.im/2026/stdout-30</link><description>&lt;p&gt;对齐前：&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;┌──────────────┐     ┌──────────────┐
-│  用户请求😆  │────▶│  网关服务    │
+│  用户请求     │────▶ │  网关服务     │
 │  User Req    │     │  Gateway     │
 └──────┬───────┘     └──────┬───────┘
        │                    │
        ▼                    ▼
 ┌──────────────┐     ┌──────────────┐
-│  认证服务    │     │  业务逻辑    │
+│  认证服务     │      │  业务逻辑     │
 │  Auth Svc    │     │  BizLogic    │
 └──────────────┘     └──────┬───────┘
                             │
                             ▼
                      ┌──────────────┐
-                     │  数据存储    │
-                     │  Database    │
+                     │  数据存储😆   │
+                     │  Database😂  │
                      └──────────────┘
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;对齐后：&lt;/p&gt;
@@ -32,7 +32,7 @@
 
 &lt;p&gt;&lt;font id="after"&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;┌──────────────┐     ┌──────────────┐
-│  用户请求😆  │────▶│  网关服务    │
+│  用户请求    │────▶│  网关服务    │
 │  User Req    │     │  Gateway     │
 └──────┬───────┘     └──────┬───────┘
        │                    │
@@ -44,8 +44,8 @@
                             │
                             ▼
                      ┌──────────────┐
-                     │  数据存储    │
-                     │  Database    │
+                     │  数据存储😆  │
+                     │  Database😂  │
                      └──────────────┘
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;/font&gt;&lt;/p&gt;
@@ -53,11 +53,13 @@
 &lt;blockquote&gt;
 &lt;p&gt;Iosevka 的作者 be5invis 当年做这个字体时明确说过：因为他和很多朋友生活在中国、日本，所以他把这款字体做成严格的 1/2 em 宽，专门用来跟汉字对齐——面向亚洲用户，用这个就能保住完美对齐。也就是说 Iosevka 的西文字形宽度天生就是 0.5em，不需要任何 CSS 补偿或 size-adjust 魔法，配任何满格 1em 的 CJK 字体（Hiragino、PingFang、Source Han Sans 等）都是精确 2:1。而且它的构建系统是声明式的，用 TOML 配置文件驱动，可以精细控制粗细、宽度、每个字形的风格变体。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;中英混合是搞定了，emoji 有的时候手动调整下。case是：&lt;/p&gt;
+&lt;p&gt;中英混合是搞定了，最后那个 数据存储 Database 带emoji错位了。&lt;/p&gt;
+&lt;p&gt;emoji 还有个zwj的问题：&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;农民 emoji 🧑‍🌾 其实是"人"+ 零宽连接符（ZWJ）+ "农作物"两个 emoji 码位拼成的&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;在 wcwidth 计算，会分别得到宽度 2、0、2，加起来变成 4 列宽导致错位&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">est</dc:creator><pubDate>Thu, 23 Jul 2026 18:24:00 +0800</pubDate><guid isPermaLink="false">tag:None,2026-07-23:/2026/stdout-30</guid><category>stdout</category></item><item><title>为什么 Github OAuth 故意拦截 CORS</title><link>https://blog.est.im/2026/stdout-29</link><description>&lt;p&gt;跟AI发闹骚学到的&lt;/p&gt;
+&lt;p&gt;在 wcwidth 计算，会分别得到宽度 2、0、2，加起来变成 4 列宽导致错位&lt;/p&gt;
+&lt;p&gt;目前暂时无解&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">est</dc:creator><pubDate>Thu, 23 Jul 2026 18:24:00 +0800</pubDate><guid isPermaLink="false">tag:None,2026-07-23:/2026/stdout-30</guid><category>stdout</category></item><item><title>为什么 Github OAuth 故意拦截 CORS</title><link>https://blog.est.im/2026/stdout-29</link><description>&lt;p&gt;跟AI发闹骚学到的&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://github.com/isaacs/github/issues/330"&gt;https://github.com/isaacs/github/issues/330&lt;/a&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Allowing CORS for the endpoint you mentioned would mean that you could complete this step of the Web flow from a browser:&lt;br /&gt;
