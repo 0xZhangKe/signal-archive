@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "1619b3f79a0420091b591e86",
+      "title": "grep vs sqlite 谁更适合微信聊天记录？",
+      "summary": "一个爆火的讨论 云风 @cloudwu 2026-06-29 微信的开发人员根本就不懂该怎么储存数据。这种聊天软件，文本和媒体文件分开存，文本根本就不应该保存在什么数据库(sqlite)里, 一个对话一个文本文件追加就可以了。需要搜索的时候 grep 一下性能完全符合需求。一个对话能有多少文本？一秒一个字 24 小时不间断，一年也就 30M 个字。 网上的争论都是猜测，我呢，决定让 opus 跑一局。 首先让AI去搜微信聊录表结构 微信（Android）聊天记录存储在加密 SQLite 数据库 EnMicroMsg.db 中，使用 SQLCipher（AES-256-CBC，PBKDF2 256000 轮派生密钥）。核心 message 表： CREATE TABLE message ( msgId INTE…",
+      "image": null,
+      "publishedAt": "2026-07-09T03:02:00Z",
+      "sourceId": "a864c53722a17b19",
+      "sourceTitle": "est's blog",
+      "link": "https://blog.est.im/2026/stdout-26",
+      "detailPath": "articles/1619b3f79a0420091b591e86.json"
+    },
+    {
       "id": "57fa55d6a2d101486980cfd2",
       "title": "摘：《微笑偷盗者》",
       "summary": "「牙科史。」",
@@ -648,17 +659,6 @@
       "sourceTitle": "crossoverJie's Blog",
       "link": "http://crossoverjie.top/2026/06/29/AI/claudecode-skills-tools/",
       "detailPath": "articles/ecc88de65b070b1640ec10cf.json"
-    },
-    {
-      "id": "0a64f2f3fee8f485fa0f392a",
-      "title": "在 AI 浪潮下，如何留在牌桌上",
-      "summary": "往原址览之： https://innei.in/notes/216",
-      "image": null,
-      "publishedAt": "2026-06-28T15:51:02Z",
-      "sourceId": "f5c4d2cfb45a5bf1",
-      "sourceTitle": "静かな森",
-      "link": "https://innei.in/notes/216",
-      "detailPath": "articles/0a64f2f3fee8f485fa0f392a.json"
     }
   ]
 }
