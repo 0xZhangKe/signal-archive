@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "688a3dc9218be3435e56209a",
+      "title": "Linux 下 Node Source 安装的 npm 权限问题",
+      "summary": "前言 近期安装了 Linux 系统作为主力机器的第二系统，双启动引导。 系统是 Pop!OS 20.04 LTS ，基于 Ubuntu 20.04 由于前端开发及部署需求，需要安装 node.js，于是使用 node source 提供的 node 发行版。 由于安装完成后，npm 存储包的目录为 /usr ，使用时必须加 sudo ，为了避免这种情况和权限安全问题，需要将 npm 的包存储到用户目录下，并且强烈不建议使用 sudo 来全局安装包到 /usr 目录下 方法 检查当前 npm 安装的包路径前缀 1 npm config get prefix 如果返回 /usr 则执行以下命令 1 2 3 mkdir ~/.npm-global export NPM_CONFIG_PREFIX = ~/.npm-…",
+      "image": null,
+      "publishedAt": "2022-03-20T17:16:02Z",
+      "sourceId": "3220115c042340a7",
+      "sourceTitle": "TaurusXin 的独立博客",
+      "link": "https://www.taurusxin.com/npm-prefix/",
+      "detailPath": "articles/688a3dc9218be3435e56209a.json"
+    },
+    {
       "id": "5f34ad74b791516d6e6030d1",
       "title": "Kubernetes、集群联邦和资源分发",
       "summary": "",
@@ -648,17 +659,6 @@
       "sourceTitle": "Elizen's Blog",
       "link": "https://elizen.me/posts/2021/11/links-to-page/",
       "detailPath": "articles/d6bf7d1d1f4249b9390e5fba.json"
-    },
-    {
-      "id": "70f3066f3621849ea5d49220",
-      "title": "叁拾一周：No.20",
-      "summary": "这是「叁拾一周」第二十期，感谢这周新增的邮件订阅读者，目前订阅人数达到了 181 位。我的下一个目标是 234。 连我自己都没想到，我能写到 20 期，更没想到，20 期会有接近 200 个人订阅，感谢你的不离不弃。这个通讯目前没有在任何地方做过主动推荐，因为写出来的东西还没有到及格线，关于写的内容和结构，我也一直在思考，小步快跑吧，一点一点来，一点一点改。它有一些自发生长起来的意思，有时候不是我想写什么，而是要写的东西自己冒出来让我写，这种说法很玄妙，不可理解，但确实是这样。 20 期的内容，很松散，但其实有一个主线， 我们如何能生活得更幸福 。这是个很大的话题，可以从无数视角观察，回答，所以也很难，几乎每一期都是我的一个视角，我希望画出一个大框框，至少保证自己在航道上。如果你有时候不知道我想说什么，那可以…",
-      "image": null,
-      "publishedAt": "2021-11-17T00:00:00Z",
-      "sourceId": "fc41292f8a54624e",
-      "sourceTitle": "Elizen's Blog",
-      "link": "https://elizen.me/newsletter/2021/11/newsletter-020/",
-      "detailPath": "articles/70f3066f3621849ea5d49220.json"
     }
   ]
 }
