@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "f03cf230d20f6a8a250bc610",
+      "title": "20250325",
+      "summary": "不得不说，官大一级压死人，这句话不是没有道理的。 最近开发的一个项目，已经到了测试阶段。 结果说改就改，开发、测试、PM在一起争论了一个小时。 都不如上一级的一句话：“那就改吧”。 那就改吧。",
+      "image": null,
+      "publishedAt": "2025-03-24T16:00:00Z",
+      "sourceId": "511a941174e52a33",
+      "sourceTitle": "蒙奇日记",
+      "link": "https://luffy.cc/a/20250325",
+      "detailPath": "articles/f03cf230d20f6a8a250bc610.json"
+    },
+    {
       "id": "4e8b3b4096a061edd135cb55",
       "title": "Future 的大小对性能的影响",
       "summary": "在 Rust 异步编程中，有一种观点认为： Future 的大小显著影响性能 。你是否怀疑过这个说法的真实性？如果是真的，这种性能差异的根源又是什么？今天，我翻阅了一些源码，并编写实验代码来一探究竟。 Future 的大小如何计算？ 为了验证“Future 大小影响性能”这一说法是否成立，我们先从一些简单代码入手。首要任务是弄清楚一个 Future 的大小是如何确定的。毕竟，在编译器眼里，Future 只是一个 trait： pub trait Future { type Output ; fn poll ( self : Pin < & mut Self > , cx : & mut Context < ' _ > ) -> Poll < Self :: Output > ; } 那么，其大小取决于实现这个…",
@@ -648,17 +659,6 @@
       "sourceTitle": "HerBlue 她的蓝",
       "link": "https://her.blue/wei-shi-yao-wo-men-xi-huan-xiao-pian/",
       "detailPath": "articles/3a342490094c715f5eb860fa.json"
-    },
-    {
-      "id": "8c1765348b7ae71443aa8631",
-      "title": "土地财政与公共产品的融资困境",
-      "summary": "房地产软着陆已经是最好的结局。",
-      "image": null,
-      "publishedAt": "2025-02-15T00:00:00Z",
-      "sourceId": "757145dcc77dee94",
-      "sourceTitle": "Prologue 序章",
-      "link": "https://prologue.dev/blog/land-finance-and-the-financing-dilemma-of-public-goods",
-      "detailPath": "articles/8c1765348b7ae71443aa8631.json"
     }
   ]
 }
