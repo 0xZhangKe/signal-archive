@@ -1,5 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-07-23T04:50:36+00:00</updated><author><name>Simon Willison</name></author><entry><title>Quoting Seth Larson</title><link href="https://simonwillison.net/2026/Jul/23/seth-larson/#atom-everything" rel="alternate"/><published>2026-07-23T04:50:36+00:00</published><updated>2026-07-23T04:50:36+00:00</updated><id>https://simonwillison.net/2026/Jul/23/seth-larson/#atom-everything</id><summary type="html">
+<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-07-23T22:53:08+00:00</updated><author><name>Simon Willison</name></author><entry><title>The first known runaway AI agent - or a very bad marketing stunt?</title><link href="https://simonwillison.net/2026/Jul/23/the-first-known-runaway-ai-agent/#atom-everything" rel="alternate"/><published>2026-07-23T22:53:08+00:00</published><updated>2026-07-23T22:53:08+00:00</updated><id>https://simonwillison.net/2026/Jul/23/the-first-known-runaway-ai-agent/#atom-everything</id><summary type="html">
+    
+&lt;p&gt;&lt;strong&gt;&lt;a href="https://martinalderson.com/posts/huggingface-openai-exploit/"&gt;The first known runaway AI agent - or a very bad marketing stunt?&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+Martin Alderson's commentary on the &lt;a href="https://simonwillison.net/2026/Jul/22/openai-cyberattack/"&gt;OpenAI accidental cyberattack against Hugging Face&lt;/a&gt; includes a couple of details I hadn't considered.&lt;/p&gt;
+&lt;p&gt;First, Hugging Face offers a truly rich target if you're trying to find potential vulnerabilities that require executing arbitrary code:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Hugging Face has an &lt;em&gt;enormous&lt;/em&gt; attack surface. They have more interfaces than I can count which run untrusted models and code. While they definitely have invested in defences, by nature of their operating model they do have many more opportunities to be attacked than many other services. I certainly don't envy their cybersecurity teams.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Secondly, one of the things that has puzzled me is how OpenAI didn't notice that their sandbox had been so thoroughly breached by the agent. Surely they'd be monitoring network traffic closely?&lt;/p&gt;
+&lt;p&gt;Martin points out that:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;It's also likely they were running a huge amount of benchmarks simultaneously with ~unlimited token budgets - you want as many samples as possible to figure out how good a model is at a certain benchmark. It may also be they are testing various different checkpoints of the model too, understanding how the model is improving as it goes through the various training stages.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The mistakes made by the OpenAI team running this benchmark are easier to imagine when you think about the scale at which benchmarks of this kind usually operate. For all we know they could have been subjecting a new model to dozens of benchmarks at the same time, in dozens of different environments.
+
+    &lt;p&gt;&lt;small&gt;&lt;/small&gt;Via &lt;a href="https://lobste.rs/s/nsnb4j/first_known_runaway_ai_agent_very_bad"&gt;Lobste.rs&lt;/a&gt;&lt;/small&gt;&lt;/p&gt;
+
+
+    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/security"&gt;security&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/openai"&gt;openai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/hugging-face"&gt;hugging-face&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai-security-research"&gt;ai-security-research&lt;/a&gt;&lt;/p&gt;
+
+
+
+</summary><category term="security"/><category term="ai"/><category term="openai"/><category term="generative-ai"/><category term="llms"/><category term="hugging-face"/><category term="ai-security-research"/></entry><entry><title>Quoting Seth Larson</title><link href="https://simonwillison.net/2026/Jul/23/seth-larson/#atom-everything" rel="alternate"/><published>2026-07-23T04:50:36+00:00</published><updated>2026-07-23T04:50:36+00:00</updated><id>https://simonwillison.net/2026/Jul/23/seth-larson/#atom-everything</id><summary type="html">
     &lt;blockquote cite="https://blog.pypi.org/posts/2026-07-22-releases-now-reject-new-files-after-14-days/"&gt;&lt;p&gt;The Python Package Index (PyPI) now rejects new files being uploaded to releases that are older than 14 days. This restriction was &lt;a href="https://github.com/pypi/warehouse/pull/19727"&gt;put in place&lt;/a&gt; to prevent old and long-stable releases from being poisoned in case publishing tokens or workflows of PyPI projects were compromised. As far as we are aware this has not yet been abused, but there is no technical reason beyond that attackers weren't aware it was possible.&lt;/p&gt;&lt;/blockquote&gt;
 &lt;p class="cite"&gt;&amp;mdash; &lt;a href="https://blog.pypi.org/posts/2026-07-22-releases-now-reject-new-files-after-14-days/"&gt;Seth Larson&lt;/a&gt;, PyPI blog&lt;/p&gt;
 
@@ -30,7 +52,7 @@
 &lt;/ol&gt;
 &lt;h4 id="exploitgym"&gt;ExploitGym&lt;/h4&gt;
 &lt;p&gt;I hadn't seen the &lt;a href="https://arxiv.org/abs/2605.11086"&gt;ExploitGym paper&lt;/a&gt; before and it's a really interesting one. Authors from UC Berkeley, the Max Planck Institute, UC Santa Barbara, and Arizona State designed a new benchmark for evaluating models on their ability to turn a reported vulnerability into a concrete exploit. OpenAI, Anthropic, and Google provided feedback and helped run the benchmark against their models.&lt;/p&gt;
-&lt;p&gt;The benchmark "comprises 898 instances derived from real-world vulnerabilities that affected popular software projects" - including the Linux kernel and V8 JavaScript engine.&lt;/p&gt;
+&lt;p&gt;The benchmark "comprises 898 instances derived from real-world vulnerabilities that affected popular software projects" - including the Linux kernel and V8 JavaScript engine. The ExploitGym benchmark is &lt;a href="https://github.com/sunblaze-ucb/exploitgym"&gt;available on GitHub&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Here's the paragraph that best represents their benchmark results:&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Among all configurations, Claude Mythos Preview and GPT-5.5 achieve the highest success counts (157 and 120 successes, respectively), demonstrating that current frontier agents can exploit a substantial subset of real-world vulnerabilities under controlled conditions. GPT-5.4 also solves a notable 54 tasks, placing it in an intermediate tier. The remaining model–agent pairings solve fewer than 15 tasks each, underscoring that end-to-end exploitation remains challenging and sharply differentiates today’s frontier systems. Notably, Claude Opus 4.7 achieves fewer successes than Claude Opus 4.6 despite being a newer checkpoint, and does so at substantially lower cost on the full set. Trace inspection reveals that Claude Opus 4.7 and Gemini 3.1 Pro frequently conclude early after judging the target vulnerability non-exploitable.&lt;/p&gt;
@@ -139,7 +161,7 @@ Excellent piece of work by Dylan Castillo, who took a deep-dive into the frequen
 
 </summary><category term="san-francisco"/></entry><entry><title>California Sea Lion</title><link href="https://simonwillison.net/2026/Jul/21/sighting-383713864/#atom-everything" rel="alternate"/><published>2026-07-21T19:51:03+00:00</published><updated>2026-07-21T19:51:03+00:00</updated><id>https://simonwillison.net/2026/Jul/21/sighting-383713864/#atom-everything</id><summary type="html">
     
-        &lt;p&gt;&lt;img src="https://static.inaturalist.org/photos/702321069/large.jpg" alt="California Sea Lion"&gt;&lt;/p&gt;&lt;p&gt;&lt;img src="https://static.inaturalist.org/photos/702321114/large.jpg" alt="California Sea Lion"&gt;&lt;/p&gt;&lt;p&gt;California Sea Lion, in San Francisco County, US, CA&lt;/p&gt;&lt;p&gt;We took some visiting family to Pier 39 to see the sea lions. They're somehow always even fun than I remember them being last time.&lt;/p&gt;
+        &lt;p&gt;&lt;img src="https://static.inaturalist.org/photos/702321069/large.jpg" alt="California Sea Lion"&gt;&lt;/p&gt;&lt;p&gt;&lt;img src="https://static.inaturalist.org/photos/702321114/large.jpg" alt="California Sea Lion"&gt;&lt;/p&gt;&lt;p&gt;California Sea Lion, in San Francisco County, US, CA&lt;/p&gt;&lt;p&gt;We took some visiting family to Pier 39 to see the sea lions. They're somehow always even more fun than I remember them being last time.&lt;/p&gt;
     
     
         &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/san-francisco"&gt;san-francisco&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/wildlife"&gt;wildlife&lt;/a&gt;&lt;/p&gt;
@@ -823,45 +845,4 @@ I've &lt;a href="https://simonwillison.net/2025/Sep/10/claude-web-fetch-tool/"&g
 
 
 
-</summary><category term="dependency-cooldowns"/><category term="packaging"/><category term="security"/><category term="github"/></entry><entry><title>simonw/pedalican</title><link href="https://simonwillison.net/2026/Jul/14/pedalican/#atom-everything" rel="alternate"/><published>2026-07-14T22:29:45+00:00</published><updated>2026-07-14T22:29:45+00:00</updated><id>https://simonwillison.net/2026/Jul/14/pedalican/#atom-everything</id><summary type="html">
-    
-&lt;p&gt;&lt;strong&gt;&lt;a href="https://github.com/simonw/pedalican"&gt;simonw/pedalican&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
-Clearly I wasn't paying attention when these were &lt;a href="https://twitter.com/OpenAIDevs/status/2050301642717950166"&gt;first announced&lt;/a&gt; back in May, but today I accidentally activated a "pet" in Codex Desktop - a little animated robot, reminiscent of &lt;a href="https://en.wikipedia.org/wiki/Office_Assistant"&gt;Clippy&lt;/a&gt; - and then learned you can create your own.&lt;/p&gt;
-&lt;p&gt;So I did, and now I have a cute little pelican on a bicycle bouncing around my desktop giving me updates on my Codex tasks.&lt;/p&gt;
-&lt;p&gt;&lt;video
-    controls
-    preload="none"
-    poster="https://static.simonwillison.net/static/2026/pedalican-first-frame.jpg"
-    width="1542"
-    height="834"
-    style="display: block; width: 100%; height: auto;"
-  &gt;
-    &lt;source src="https://static.simonwillison.net/static/2026/pedalican.mp4" type="video/mp4"&gt;
-    Your browser does not support HTML5 video.
-  &lt;/video&gt;
-&lt;/p&gt;
-&lt;p&gt;The most interesting thing about this process was watching how the custom pet was created. I told it I wanted a custom pet that was a pelican riding a bicycle and GPT-5.6 Sol xhigh did the rest of the work, using several rounds with &lt;a href="https://developers.openai.com/api/docs/models/gpt-image-2"&gt;gpt-image-2&lt;/a&gt; to generate the necessary sprite assets.&lt;/p&gt;
-&lt;p&gt;I had it make &lt;a href="https://github.com/simonw/pedalican-pet/blob/main/notes-on-creating-a-pet.md"&gt;extensive notes&lt;/a&gt; and record all of the &lt;a href="https://github.com/simonw/pedalican-pet/tree/main/run"&gt;intermediary steps&lt;/a&gt;. My GitHub repo includes every generated image and combined sprite sheet, plus GIFs for each of the animation loops such as this one, called &lt;a href="https://github.com/simonw/pedalican-pet/blob/main/run/qa/previews/waving.gif"&gt;waving.gif&lt;/a&gt;:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="A cute pelican on a bicycle waving its wing" src="https://static.simonwillison.net/static/2026/waving.gif" /&gt;&lt;/p&gt;
-&lt;p&gt;That GIF was compiled from &lt;a href="https://github.com/simonw/pedalican-pet/blob/main/run/api-generation/waving.png"&gt;a single image&lt;/a&gt; generated by &lt;code&gt;gpt-image-2&lt;/code&gt; that looked like this:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Four frames of the animation presented on a bright magenta background" src="https://static.simonwillison.net/static/2026/waving.webp" /&gt;&lt;/p&gt;
-&lt;p&gt;And &lt;em&gt;that&lt;/em&gt; image was created by executing &lt;a href="https://github.com/simonw/pedalican-pet/blob/main/run/prompts/rows/waving.md"&gt;this prompt&lt;/a&gt; against the initial generated &lt;a href="https://github.com/simonw/pedalican-pet/blob/main/run/api-generation/base.png"&gt;character reference image&lt;/a&gt;, which was created with &lt;a href="https://github.com/simonw/pedalican-pet/blob/main/run/prompts/base-pet.md"&gt;this prompt&lt;/a&gt;, which has this structure:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;code&gt;Create one clean full-body reference sprite for Codex pet Pedalican.&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;Pet identity: A compact adorable baby pelican with a round cream-white body, soft coral-orange bill and feet, riding a tiny sky-blue bicycle [...]&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;Place a single centered pose on a perfectly flat pure magenta #FF00FF chroma-key background. Keep the full pet visible, compact, readable at 192x208, and easy to animate. [...]&lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;I've been looking out for ways to use image generation to create simple game-ready sprites, so I spent some time digging into this mechanism to see how it works.&lt;/p&gt;
-&lt;p&gt;The key implementation details are open source - these two skills in particular, both Apache 2.0 licensed:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://github.com/openai/skills/tree/49f948faa9258a0c61caceaf225e179651397431/skills/.curated/hatch-pet"&gt;hatch-pet&lt;/a&gt; from &lt;code&gt;openai/skills&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://github.com/openai/codex/tree/f90e7deea6a715bbd153044af6f475eefa749177/codex-rs/skills/src/assets/samples/imagegen"&gt;imagegen&lt;/a&gt; from &lt;code&gt;openai/codex&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;And yes, GPT-5.6 Sol did come up with the name "Pedalican". I like it!
-
-
-    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/prompt-engineering"&gt;prompt-engineering&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/text-to-image"&gt;text-to-image&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/pelican-riding-a-bicycle"&gt;pelican-riding-a-bicycle&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/codex"&gt;codex&lt;/a&gt;&lt;/p&gt;
-
-
-
-</summary><category term="ai"/><category term="prompt-engineering"/><category term="generative-ai"/><category term="llms"/><category term="text-to-image"/><category term="pelican-riding-a-bicycle"/><category term="codex"/></entry></feed>
+</summary><category term="dependency-cooldowns"/><category term="packaging"/><category term="security"/><category term="github"/></entry></feed>

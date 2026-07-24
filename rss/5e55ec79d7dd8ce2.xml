@@ -23,12 +23,30 @@
 <category>Mental Health</category>
 <link>https://colinwalker.blog</link>
 <source:self>https://colinwalker.blog/dailyfeed.xml</source:self>
-<lastBuildDate>Thu, 23 Jul 2026 00:05:03 GMT</lastBuildDate>
+<lastBuildDate>Fri, 24 Jul 2026 00:05:03 GMT</lastBuildDate>
 <cloud domain="rsscloud.colinwalker.blog" port="443" path="/pleaseNotify/" registerProcedure="" protocol="http-post"/>
 <source:blogroll>https://colinwalker.blog/feeds.opml</source:blogroll>
 <generator>(b)log-In</generator>
 <source:account service="colinwalker.blog">Colin Walker</source:account>
 <language>en-GB</language>
+<item>
+<title>Thursday, July 23rd, 2026</title>
+<link>https://colinwalker.blog/?date=2026-07-23</link>
+<guid isPermaLink="false">3616</guid>
+<pubDate>Fri, 24 Jul 2026 00:00:00 GMT</pubDate>
+<description><![CDATA[<p><a href="https://colinwalker.blog/?date=2026-07-23#p1" style="text-decoration: none; margin-right: 8px;">#</a> I disappeared to the studio for about an hour-and-a-half last night. As is the way when I'm struggling,<sup id="fnref1:s"><a href="#fn:s" class="footnote-ref">1</a></sup> I started something new rather than returning to the couple of works in progress.</p>
+<p>I kept to the approach of only having a few things connected at any one time. Last night it was the LM Drum (with the 505 kit), both TD-3s, and the Kobol Expander. I resisted the 'new shiny' temptation of hooking up the Spice and trying to force it into what I was doing. It will, no doubt, become a workhorse in certain situations, but I want to get more familiar with it first.</p>
+<p>The Expander has rapidly become a mainstay, finding its way onto almost everything. Luckily, it is versatile enough for things to not get boring or sounding too samey. Maybe that's a little ironic considering everything I make (bar the odd ambient piece) is acid in one form or another.</p>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn:s">
+<p>and I have been stuck on a couple of tracks: one where the idea I had no longer seems to fit; another where I've just not felt like being back in the studio and lost the flow&#160;<a href="#fnref1:s" rev="footnote" class="footnote-backref">&#8617;</a></p>
+</li>
+</ol>
+</div></p>
+]]></description>
+</item>
 <item>
 <title>Wednesday, July 22nd, 2026</title>
 <link>https://colinwalker.blog/?date=2026-07-22</link>
@@ -73,30 +91,6 @@
 <p><a href="https://colinwalker.blog/?date=2026-07-15#p2" style="text-decoration: none; margin-right: 8px;">#</a> I have now added an on-the-fly RSS feed for post comments. If there are any comments for a particular post, the link gets added to the live RSS feed using the <code>&lt;source:comments&gt;</code> attribute, e.g.</p>
 <pre><code>&lt;source:comments&gt;https://colinwalker.blog/blog/comments-feed.php?post=2426&lt;/source:comments&gt;</code></pre>
 <p>The post ID is passed to a new page which builds and returns the specific feed.</p>
-]]></description>
-</item>
-<item>
-<title>Tuesday, July 14th, 2026</title>
-<link>https://colinwalker.blog/?date=2026-07-14</link>
-<guid isPermaLink="false">3601</guid>
-<pubDate>Sun, 19 Jul 2026 00:00:00 GMT</pubDate>
-<description><![CDATA[<p><a href="https://colinwalker.blog/?date=2026-07-14#p1" style="text-decoration: none; margin-right: 8px;">#</a> Back in November 2023, <a href="http://scripting.com/2023/11/05.html#a214724">Dave Winer wrote</a>: <em>"I have an itch to make a simple chat program for a workgroup whose only output is a simple RSS 2.0 feed."</em></p>
-<p>If that sounds familiar, <a href="https://colinwalker.blog/?date=2023-11-05#p2">I mentioned it</a> in the context of the <a href="https://github.com/andysylvester/MyStatusToolDemo">MyStatusTool</a> (MST) created by Andy Sylvester, of which I made a test PHP version.</p>
-<p>Dave is now scratching that itch by building (and testing) <a href="https://rss.chat/">rss.chat</a>:</p>
-<blockquote>
-<p><em>We don't need anything more than RSS 2.0, OPML, Markdown, SQL and WebSocket. All very established in the web world, and remarkably only one was developed by a standards body.</em></p>
-</blockquote>
-<p>Every user has an RSS feed, as does the whole community, and an OPML file lists everyone using it.</p>
-<p>Obviously, any RSS reader can subscribe to any of the feeds but you would need to be using a  client to post and reply.</p>
-<p>On that topic, Dave has extended the <code>source</code> namespace with a couple of extra attributes:</p>
-<ul>
-<li><a href="https://source.scripting.com/#1778941955000">source:inReplyTo</a> — an optional item level element that contains the URL of the parent post, and</li>
-<li><a href="https://source.scripting.com/#1783601707000">source:comments</a> — an optional item level element that holds the number of comments and the URL of the comment feed.</li>
-</ul>
-<p><code>source:inReplyTo</code> acts in exactly the same way as <code>mst:reply</code> attribute I proposed in the <a href="https://github.com/colin-walker/mst-namespace">MST namespace</a>.</p>
-<p>The parallels with blogging are obvious and I am looking at implementing both of these in my feed. This will, however, involve bringing back the live feed in addition to the daily.</p>
-<p>I envisage external blogs being first class citizens in RSS networks in a similar way to how they are with micro.blog. I could also see the /blog &amp; /reader integration becoming an rss.chat client.</p>
-<p>I'm looking forward to seeing where this goes and exactly how far interop can be taken.</p>
 ]]></description>
 </item>
 </channel>
