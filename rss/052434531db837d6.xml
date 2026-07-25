@@ -1,5 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-07-23T22:53:08+00:00</updated><author><name>Simon Willison</name></author><entry><title>The first known runaway AI agent - or a very bad marketing stunt?</title><link href="https://simonwillison.net/2026/Jul/23/the-first-known-runaway-ai-agent/#atom-everything" rel="alternate"/><published>2026-07-23T22:53:08+00:00</published><updated>2026-07-23T22:53:08+00:00</updated><id>https://simonwillison.net/2026/Jul/23/the-first-known-runaway-ai-agent/#atom-everything</id><summary type="html">
+<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-07-24T23:48:50+00:00</updated><author><name>Simon Willison</name></author><entry><title>Introducing Claude Opus 5</title><link href="https://simonwillison.net/2026/Jul/24/introducing-claude-opus-5/#atom-everything" rel="alternate"/><published>2026-07-24T23:48:50+00:00</published><updated>2026-07-24T23:48:50+00:00</updated><id>https://simonwillison.net/2026/Jul/24/introducing-claude-opus-5/#atom-everything</id><summary type="html">
+    
+&lt;p&gt;&lt;strong&gt;&lt;a href="https://www.anthropic.com/news/claude-opus-5"&gt;Introducing Claude Opus 5&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+I've been offline &lt;a href="https://en.wikipedia.org/wiki/Elkhorn_Slough"&gt;kayaking with sea otters&lt;/a&gt; for much of today so I haven't had a chance to put Anthropic's new model Claude Opus 5 through its paces yet. The buzz is positive, and Anthropic's description of it as a "thoughtful and proactive model that comes close to the frontier intelligence of Claude Fable 5 at half the price" sounds promising. It's currently &lt;a href="https://twitter.com/artificialanlys/status/2080777718933995967"&gt;leading the Artificial Analysis leaderboard&lt;/a&gt;, in front of even Fable 5.&lt;/p&gt;
+&lt;p&gt;It's priced the same as Opus 4.8, and continues to offer a "fast mode" at twice the cost of the base model.&lt;/p&gt;
+&lt;p&gt;Based on this anecdote in the release post it sounds like it might be &lt;a href="https://simonwillison.net/2026/Jun/11/fable-is-relentlessly-proactive/"&gt;relentlessly proactive&lt;/a&gt;:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;On one Frontier-Bench task, Opus 5 was given a drawing of a machine part and asked to write code to rebuild it as a 3D FreeCAD model. However, in this task, the model was intentionally given no way to directly viewthe drawing. Opus 5 responded by writing its own computer vision pipeline to pull the geometry from the raw pixels, then reconstructed the full machine part.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;It's better at finding vulnerabilities but has deliberately not been trained on how to exploit them. Hopefully this means the US government won't shut it down!&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;As with its predecessor, Opus 4.8, we’ve intentionally avoided training Opus 5 on cyber tasks. The model has nevertheless improved substantially on these tasks as a result of becoming more generally capable, and it comes close to Mythos 5 at &lt;em&gt;finding&lt;/em&gt; cybersecurity vulnerabilities. However, it remains substantially behind Mythos 5 on the &lt;em&gt;exploitation&lt;/em&gt; of those vulnerabilities—that is, in turning vulnerabilities into material cyber threats.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Anthropic have published a &lt;a href="https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5"&gt;prompting guide for Claude Opus 5&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The &lt;a href="https://tools.simonwillison.net/markdown-svg-renderer#url=https%3A%2F%2Fraw.githubusercontent.com%2Fsimonw%2Fllm-anthropic%2F8272dfee5bdb65d5c88eef083da3ad885539b7df%2Flog.md"&gt;first pelican I got&lt;/a&gt; was missing the bicycle wheels; the &lt;a href="https://tools.simonwillison.net/markdown-svg-renderer#url=https%3A%2F%2Fraw.githubusercontent.com%2Fsimonw%2Fllm-anthropic%2Ffeaab840ea20eb15e29d8f72a9e42feceb23876a%2Flog.md"&gt;second attempt&lt;/a&gt; was better.
+
+
+    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/anthropic"&gt;anthropic&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/claude"&gt;claude&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llm-release"&gt;llm-release&lt;/a&gt;&lt;/p&gt;
+
+
+
+</summary><category term="ai"/><category term="generative-ai"/><category term="llms"/><category term="anthropic"/><category term="claude"/><category term="llm-release"/></entry><entry><title>The first known runaway AI agent - or a very bad marketing stunt?</title><link href="https://simonwillison.net/2026/Jul/23/the-first-known-runaway-ai-agent/#atom-everything" rel="alternate"/><published>2026-07-23T22:53:08+00:00</published><updated>2026-07-23T22:53:08+00:00</updated><id>https://simonwillison.net/2026/Jul/23/the-first-known-runaway-ai-agent/#atom-everything</id><summary type="html">
     
 &lt;p&gt;&lt;strong&gt;&lt;a href="https://martinalderson.com/posts/huggingface-openai-exploit/"&gt;The first known runaway AI agent - or a very bad marketing stunt?&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 Martin Alderson's commentary on the &lt;a href="https://simonwillison.net/2026/Jul/22/openai-cyberattack/"&gt;OpenAI accidental cyberattack against Hugging Face&lt;/a&gt; includes a couple of details I hadn't considered.&lt;/p&gt;
@@ -837,12 +858,4 @@ I've &lt;a href="https://simonwillison.net/2025/Sep/10/claude-web-fetch-tool/"&g
 
 
 
-</summary><category term="security"/><category term="ai"/><category term="prompt-injection"/><category term="generative-ai"/><category term="llms"/><category term="anthropic"/><category term="claude"/><category term="exfiltration-attacks"/><category term="lethal-trifecta"/></entry><entry><title>Quoting GitHub Changelog</title><link href="https://simonwillison.net/2026/Jul/14/github-changeling/#atom-everything" rel="alternate"/><published>2026-07-14T22:43:35+00:00</published><updated>2026-07-14T22:43:35+00:00</updated><id>https://simonwillison.net/2026/Jul/14/github-changeling/#atom-everything</id><summary type="html">
-    &lt;blockquote cite="https://github.blog/changelog/2026-07-14-dependabot-version-updates-introduce-default-package-cooldown/"&gt;&lt;p&gt;Dependabot now waits until a new release has been available on its registry for at least three days before opening a version update pull request. This cooldown is now the default and requires no configuration.&lt;/p&gt;&lt;/blockquote&gt;
-&lt;p class="cite"&gt;&amp;mdash; &lt;a href="https://github.blog/changelog/2026-07-14-dependabot-version-updates-introduce-default-package-cooldown/"&gt;GitHub Changelog&lt;/a&gt;, embracing &lt;a href="https://simonwillison.net/tags/dependency-cooldowns/"&gt;dependency cooldowns&lt;/a&gt;&lt;/p&gt;
-
-    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/dependency-cooldowns"&gt;dependency-cooldowns&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/packaging"&gt;packaging&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/security"&gt;security&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/github"&gt;github&lt;/a&gt;&lt;/p&gt;
-
-
-
-</summary><category term="dependency-cooldowns"/><category term="packaging"/><category term="security"/><category term="github"/></entry></feed>
+</summary><category term="security"/><category term="ai"/><category term="prompt-injection"/><category term="generative-ai"/><category term="llms"/><category term="anthropic"/><category term="claude"/><category term="exfiltration-attacks"/><category term="lethal-trifecta"/></entry></feed>
