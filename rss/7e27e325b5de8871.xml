@@ -1,4 +1,195 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><?xml-stylesheet type="text/xsl" href="/atom.xsl.xml"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>极客死亡计划 ｜ 極客死亡計劃</title><link>https://www.geedea.pro/</link><description>極客死亡計劃：在「极客死亡计划」分区下的最新内容</description><generator>Hugo</generator><language>zh-CN</language><managingEditor>hi@eltr.ac (Eltrac)</managingEditor><webMaster>hi@eltr.ac (Eltrac)</webMaster><lastBuildDate>Mon, 20 Jul 2026 07:59:10 +0800</lastBuildDate><atom:link href="https://www.geedea.pro/index.xml" rel="self" type="application/rss+xml"/><item><title>大脑充血 Vol.90</title><link>https://www.geedea.pro/weekly/90/</link><pubDate>Mon, 20 Jul 2026 07:59:10 +0800</pubDate><author>hi@eltr.ac (Eltrac)</author><guid>https://www.geedea.pro/weekly/90/</guid><description>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><?xml-stylesheet type="text/xsl" href="/atom.xsl.xml"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>极客死亡计划 ｜ 極客死亡計劃</title><link>https://www.geedea.pro/</link><description>極客死亡計劃：在「极客死亡计划」分区下的最新内容</description><generator>Hugo</generator><language>zh-CN</language><managingEditor>hi@eltr.ac (Eltrac)</managingEditor><webMaster>hi@eltr.ac (Eltrac)</webMaster><lastBuildDate>Sat, 25 Jul 2026 11:27:21 +0800</lastBuildDate><atom:link href="https://www.geedea.pro/index.xml" rel="self" type="application/rss+xml"/><item><title>什么是工程问题？</title><link>https://www.geedea.pro/article/engineering-perspective/</link><pubDate>Sat, 25 Jul 2026 11:27:21 +0800</pubDate><author>hi@eltr.ac (Eltrac)</author><guid>https://www.geedea.pro/article/engineering-perspective/</guid><description>
+&lt;p&gt;据我对自己过去的总结，以及对比我更晚进入软件领域的人的观察，我发现新来者更容易陷入对技术问题的纠结，工程问题则被忽略了。我并不是说技术问题不如工程问题重要，我仅仅是指出，有不少人并不区分这两类问题，工程问题甚至不在他们的认知范围内，更别提去思考它了。本文我想来总结我对这两类问题的认识，并试图总结一些方法论。我也不是专家，所以肯定会有疏漏和错误，还请不吝赐教。&lt;/p&gt;
+&lt;div class="text-5 md:text-6 font-italic text-center
+ my-12 md:my-20 mx-4 md:mx-12 p-4
+ border border-solid border-gray-300 rounded-4 shadow-lg
+ rotate-[3deg] bg-[rgba(255,255,255,0.35)] backdrop-blur-md"
+ style="background: linear-gradient(rgba(255,255,255,0.1), rgba(255,255,255,0.1)),
+ repeating-radial-gradient(rgba(255,255,255,0.25) 0 0.0001%, rgba(255,255,255,0.04) 0 0.0002%) 50% 0 / 2500px 2500px,
+ repeating-conic-gradient(rgba(255,255,255,0.25) 0 0.0001%, rgba(255,255,255,0.04) 0 0.0002%) 60% 60% / 2500px 2500px;
+ background-blend-mode: normal, difference;"
+ &gt;
+ The central question in how to improve the software art centers, as it always has, on people.
+&lt;/div&gt;
+
+&lt;div class="text-sm text-secondary text-right"&gt;提升软件之道的中心问题，一直都是，以人为中心。&lt;/div&gt;
+&lt;p style="text-align: right"&gt;——Frederick Brooks《No Silver Bullet》&lt;/p&gt;
+
+
+&lt;h2
+ id="接地气"
+ class="text-[1.25em] font-extrabold "&gt;接地气&lt;/h2&gt;
+&lt;p&gt;技术的定义或许更接近科学原则和科学事实，比方说，Go 语言中有缓冲的 &lt;code&gt;channel&lt;/code&gt; 会在缓冲区满的时候阻塞试图向其中写入新数据的协程&lt;sup id="fnref:1"&gt;&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref"&gt;1&lt;/a&gt;&lt;/sup&gt;。倘若这个表述变成「需要严格控制并发的场合，应该使用带缓冲的 &lt;code&gt;channel&lt;/code&gt;」，那么我们就更接近工程的范畴了，但这依旧更像是技术细节。如果说的是「尽管协程很轻量，但这个项目里每个协程的任务都占用 100MB，而每个实例运行在 1C1G 的服务器上，再加上操作系统和程序本身占用的内存，应该用带缓冲的 &lt;code&gt;channel&lt;/code&gt; 把并发数控制在 8 以下」，这显然就是工程问题了，尽管依旧是局部的细节。&lt;/p&gt;
+&lt;p&gt;如此看来，技术和工程的区别之一可能是接地气与否，也就是该问题是否涉及真实的软件需求、限制和外部环境。我们再来考量一下「工程化」这个词。过去人们常谈「前端工程化」这个问题，如今有不少人痛骂越来越臃肿的 Web，怒吼「
+
+ &lt;a href="https://motherfuckingwebsite.com/" class="external-link" target="_blank" rel="noopener noreferrer"&gt;手写 HTML 难道他妈的不就是个网站了吗？&lt;/a&gt;
+
+」。前端的过度工程当然是个问题，但后者的愤怒也有失公正。主流的前端库 
+
+ &lt;a href="https://react.dev/" class="external-link" target="_blank" rel="noopener noreferrer"&gt;React&lt;/a&gt;
+
+，尽管我不太喜欢，但它在刚推出时的确解决了不少问题。组件（Components）在 HTML 之上增加了一层抽象，很好地包装并隔离了大型 Web 应用的复杂度。手写 HTML 当然能用，但用老三件套手写 Facebook 的用户界面实在强人所难——团队不方便分工，太多的细节都被挤在一起，所有人都有可能不小心碰到别人的代码。如果一个 HTML 页面冗长得不可理喻，要修改根本无从下手，这就使得工程无法进行下去。我从来不觉得 React 等前端库的出现是「技术进步」，它们只是「工程优化」。&lt;/p&gt;
+&lt;p&gt;真正的问题是，某些网站根本不能算得上是 Web 应用，竟然也要用一大堆 NPM 依赖写 SPA，这反而是对工程问题没有思考导致的——由于没有明确问题的规模（以及考虑未来是否有可能扩大规模），甚至根本没有考虑规模问题，就使用流行的、过度抽象的前端框架，消耗过多的计算资源。&lt;mark&gt;在过度抽象和极端简化的两边，都能观察到对工程考量的缺失。&lt;/mark&gt;&lt;/p&gt;
+&lt;p&gt;接地气要考虑的东西其实很多，而技术问题顶多关乎设计和实现。我不得不说，尽管我很讨厌 Java 这门语言，但在具体工程中使用 Java 有明显优势：会 Java 的人实在是&lt;em&gt;太多了&lt;/em&gt;，招人和组建团队非常容易；同时，遇到问题也更容易搜索到已有的解决方案；生态更成熟，JVM 也是很稳定的运行环境。当然也不能只看好处，选用 Java 的代价就是：JVM 启动需要时间，如果需要频繁停启，就会成为瓶颈；Java 的语法很啰唆，不仅如此，语言本身也有诸多限制，不够灵活，需要编写和维护的代码量很多，结构复杂，详见《
+
+ &lt;a href="https://www.geedea.pro/article/clos/"&gt;从 CLOS 审视 Java 面向对象编程&lt;/a&gt;
+
+》；&lt;del&gt;会被 Eltrac 嘲讽&lt;/del&gt;；Java 的内存占用不小，尤其是线程本身的体积，在高并发场景下表现远不如 Go 语言。如果服务跑起来就很少停止，不排斥 Java 的语法并能使用清晰的分层设计，业务逻辑大部分都是增删改查，并不消耗多少资源，那选择 Java 就是合理的，没必要花钱雇佣熟悉其他技术栈的软件工程师。&lt;/p&gt;
+&lt;p&gt;很丑陋，不是吗？没办法，现实世界就是丑陋的。我在以前很容易陷入某种精神洁癖（或许现在也是），我不允许丑陋的东西出现在我构造的软件中，二进制文件就一定比 &lt;code&gt;.jar&lt;/code&gt; 好，Lambda 表达式就一定比函数指针好，一切都应该语义化，以至于我总是在思考软件本身，而不是软件应该要解决的问题。同样的精神洁癖也出现在年轻的作家当中：&lt;/p&gt;
+
+
+
+ &lt;blockquote class="quoted p-0 m-0 mx-[1em]"&gt;
+ &lt;p&gt;当我在二十多岁开始写作时，我认为文学的目的是改变现实的样貌，剥离其物质层面的东西，无论如何都不应该写人们所经历过的事情。比如，那时我认为我的家庭环境和我父母作为咖啡杂货店店主的职业，以及我所居住的平民街区的生活，都是“低于文学”的。&lt;/p&gt;
+
+ &lt;/blockquote&gt;
+
+&lt;p style="text-align: right"&gt;——安妮·埃尔诺《写作是把刀》&lt;/p&gt;
+
+&lt;p&gt;软件不能是纯粹的软件（至少那些要写出来给人用的不是），就像文学很难是纯粹的文学（文学总是和社会现实、历史环境、哲学思想和真实的人的情感纠缠在一起，没有办法把人的事情剥离得只剩文字）。有很多人试图把软件变得不像软件，把文学变得不像文学，但另一个极端也同样值得批评。&lt;/p&gt;
+
+&lt;h2
+ id="无银弹"
+ class="text-[1.25em] font-extrabold "&gt;无银弹&lt;/h2&gt;
+&lt;p&gt;接地气其实是面对真实业务场景的权衡取舍，对此，图灵奖得主 Frederick Brooks 在上世纪八十年代就写文探讨过。《
+
+ &lt;a href="https://www.cs.unc.edu/techreports/86-020.pdf" class="external-link" target="_blank" rel="noopener noreferrer"&gt;No Silver Bullet&lt;/a&gt;
+
+》在软件工程领域也算是经典之作了。银弹（Silver bullet）源自欧洲民间神话，在很多故事里，用银制成的子弹是对付狼人、吸血鬼和女巫等超自然生物的唯一手段&lt;sup id="fnref:2"&gt;&lt;a href="#fn:2" class="footnote-ref" role="doc-noteref"&gt;2&lt;/a&gt;&lt;/sup&gt;，如今用于指代应对复杂问题的简单且万能的答案。《No Silver Bullet》说的是：开发软件没有简单且万能的解决方案。&lt;/p&gt;
+&lt;p&gt;（一种尖细、刻意、做作的声音）“现在‘AI’时代不一样了，什么都能用‘AI’写！”“上 K8S 就好了，用 Kafka 就好了！”“我必须要用 Vue / React / Hono / Ember.js / Modern.js / HTMX 写这个网站！”“你他妈就不能用纯 HTML？你看我这他妈不是个网站吗？”“你他妈的就不能用 Go 写吗？”“我们要燃烧几百美元的 Token 把这个能跑的玩意儿用 Rust 重写一遍！”&lt;/p&gt;
+&lt;p&gt;等一下，让我再确认一遍…… 嗯，没错，Brooks 的那篇论文是 1986 年发的，那个时候 Taylor Swift 还没有出生。现在…… 是的，我没记错，已经是 2026 年了，而 Taylor Swift 已经发了十五张专辑……&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;吸气四秒，屏息七秒，吐气八秒。&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;呼，我们继续。&lt;/p&gt;
+&lt;p&gt;Brooks 在文中引用了亚里士多德在《物理学》&lt;sup id="fnref:3"&gt;&lt;a href="#fn:3" class="footnote-ref" role="doc-noteref"&gt;3&lt;/a&gt;&lt;/sup&gt;中提出的偶然性（accidents）和自发性（essence）&lt;sup id="fnref:4"&gt;&lt;a href="#fn:4" class="footnote-ref" role="doc-noteref"&gt;4&lt;/a&gt;&lt;/sup&gt;两个概念，这篇论文的副标题就叫作 &lt;em&gt;Essence and Accidents of Software Engineering&lt;/em&gt;（软件工程的自发性和偶然性）。他认为软件工程无银弹的事实是由软件的内在属性决定的，这种内在属性源于软件的本质：一种抽象的概念构造。&lt;/p&gt;
+
+
+
+ &lt;blockquote class="quoted p-0 m-0 mx-[1em]"&gt;
+ &lt;p&gt;I believe the hard part of building software to be the specification, design, and testing of this conceptual construct, not the labor of representing it and testing the fidelity of the representation. We still make syntax errors, to be sure; but they are fuzz compared to the conceptual errors in most systems.&lt;/p&gt;
+&lt;p&gt;If this is true, building software will always be hard. There is. inherently no silver bullet.&lt;/p&gt;
+
+ &lt;/blockquote&gt;
+
+&lt;details&gt;
+ &lt;summary&gt;参考译文&lt;/summary&gt;
+
+
+
+ &lt;blockquote class="quoted p-0 m-0 mx-[1em]"&gt;
+ &lt;p&gt;我相信构建软件的难点在于为这种概念构造制定规格、设计和测试，而不是将它表示出来并测试这种表示是否准确所需的劳动。&lt;/p&gt;
+&lt;p&gt;如果这是真的，构建软件永远都会很难。软件在本质上，就是没有银弹。&lt;/p&gt;
+
+ &lt;/blockquote&gt;
+
+&lt;/details&gt;
+&lt;p&gt;在 Brooks 眼中，软件工程的自发性问题无法得到解决，这些问题主要有四个：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;复杂性（complexity）：对同等大小的人类构造物而言，软件要明显更复杂，因为软件中几乎没有两部分长得一样。就算有，我们也习惯写成一个，以便代码复用。任何人都很难清晰地纵观一整个软件的样貌，考虑到所有的细节。软件的复杂性随着时间非线性增长，很难预测，这不仅造成了技术问题，还有管理问题，管理人员永远也不知道什么时候软件的开发成本（人力和时间）会突然上涨。软件可从来没有过摩尔定律。&lt;/li&gt;
+&lt;li&gt;遵从性（conformity）：爱因斯坦相信一切都有简化的自然解释，因为自然（或者说上帝）绝非是随机的&lt;sup id="fnref:5"&gt;&lt;a href="#fn:5" class="footnote-ref" role="doc-noteref"&gt;5&lt;/a&gt;&lt;/sup&gt;。软件则不同，软件所面对的接口往往早已存在，不能改变。软件必须遵从这些接口，因为软件是最容易通过改变自身来遵从其他东西的。软件的许多复杂性往往来源于对其他接口的遵从，比方说某个硬件数据源返回的是 A 格式，那软件就无法使用可能更简易的 B 格式，因为硬件不如软件容易变更。&lt;/li&gt;
+&lt;li&gt;易变性（changeability）：其他人类构造物也会改变，但往往是设计并生产新模型、召回、重做，而且变更的频率远远不如软件。此外，不少成功软件的寿命往往比其他人造物更长，它们不会经历磨损，可以一直存在，还需要随着技术变迁适应新的硬盘、显示器和打印机等等。&lt;/li&gt;
+&lt;li&gt;不可见性（invisibility）：建筑地基、硅基芯片、机械结构都可以画图表示，但软件的图只能表示控制流、数据流、数据结构之间的关联、依赖模式和时序等等，是软件的一个切片。很难通过看这些图对软件整体的结构有精细的把握。软件在大体上是不可见的。这不仅影响了一个人的设计，还使得多个人之间的沟通变得困难。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;以上是软件内在的自发性问题，而那些偶然性问题，据 Brooks 称，已经被解决了。高级编程语言屏蔽了底层细节，消除了低级的复杂性；分时系统极大减少了软件的编译和执行时间，总的来说是缩短了系统响应时间；统一的编程环境使得人们可以一起使用、集成和复用相同的软件库&lt;sup id="fnref:6"&gt;&lt;a href="#fn:6" class="footnote-ref" role="doc-noteref"&gt;6&lt;/a&gt;&lt;/sup&gt;。这些解决方案我们已经习以为常，不觉得是问题，以至于我们看到新问题的新解决方案时，以为他们是银弹，而实际上它们仅仅针对偶然性问题。&lt;/p&gt;
+&lt;p&gt;近乎每次考古计算机软件领域的论文时，都会忍不住再次引用安德烈·纪德：一切被言说之物都已经被说过了，而人们会忘记，所以一切都必须再次言说。Brooks 在接下来的一章里讨论了「银弹的希望」（Hopes for the silver），其中涉及人工智能、专家系统和自动化编程。上世纪人们对 &lt;em&gt;Artificial Intelligence&lt;/em&gt; 这个词的印象和现在当然完全不同，此处的 AI 有两种定义，而 Brooks 采用的是第一种定义「使用计算机解决在以往只有人类智能才能解决的问题」，第二种定义的 AI 被它称作「专家系统」，也就是启发式的基于规则的计算机程序，本质上是通过观察现实中专家的行为方式在总结并抽象成的一套规则集。那个时候神经网络算法其实已经出现了，也被应用到了计算机中，但大模型还没有影子，所以文中没有提及。不过他的一些建议放在如今的 LLM 辅助编程背景下，也依然成立。&lt;/p&gt;
+&lt;p&gt;Brooks 没能想象能自己设计软件并自己写代码的编程智能体（Coding agents）的出现，但文中的「专家系统」和「自动化编程」，若是组合起来，就和如今的 Agents 很相似了。专家系统是对软件设计和完整工程进行总结后，用于给软件开发给出指导建议的系统；自动化编程则顾名思义，即输入软件规格的描述，然后从已有的代码库中选择使用，加速开发。如果把专家系统的输出直接喂给自动化编程系统，我们就得到了如今会自己做计划、写 ToDo，然后写代码实现，甚至还会自己做测试和验证的编程智能体，尽管结构上很不一样。&lt;/p&gt;
+&lt;p&gt;对于专家系统，或者说 LLM 给建议和制定设计方案的功能，在 Brooks 看来也不是银弹。他写道，这种系统可以帮助没有经验的程序员积累经验，分发好的软件开发实践。他认为开发这种系统的前提是要有这样的专家存在，而从如今 LLM 训练的方式来看，激进的爬虫从互联网各个角落扒拉下来的内容很难说得上是可靠的。我们也知道 LLM 生成的代码不一定是最佳实践。即便是理想中的，能够给出最佳建议的专家系统，帮助也非常有限。&lt;/p&gt;
+&lt;p&gt;对于自动化编程，Brooks 表示在 40 年前（换算到现代，应该有 80 年了）人们就开始想象能够自动编程的系统，对此，他引用了 David Parnas（另一位软件工程领域的先锋人物）的话：&lt;/p&gt;
+
+
+
+ &lt;blockquote class="quoted p-0 m-0 mx-[1em]"&gt;
+ &lt;p&gt;In short, automatic programming always has been a euphemism for programming with a higher-level language than was presently available to the programmer.&lt;/p&gt;
+&lt;p&gt;简单来说，自动化编程一直是对用比程序员如今可以用到的语言更高层次的语言编程的委婉语。&lt;/p&gt;
+
+ &lt;/blockquote&gt;
+
+&lt;p&gt;Brooks 给“自动化”打了引号，因为编程不可能是自动化的。哪怕是如今的 LLM 编程，程序员也需要用自然语言（或许是软件领域里抽象层次最高的一种语言）输入指令。只要程序员还需要思考和输入，就不可能解放双手。软件的内在属性（一种概念构造）就意味着开发软件永远不可能不思考和描述。&lt;/p&gt;
+
+
+
+ &lt;blockquote class="quoted p-0 m-0 mx-[1em]"&gt;
+ &lt;p&gt;If, as I believe, the conceptual components of the task are now taking most of the time, then no amount of activity on the task components that are merely the expression of the concepts can give large productivity gains.&lt;/p&gt;
+&lt;p&gt;只要任务的概念部分是眼下最消耗时间的（我也这么相信），那么无论在仅仅是表达这种概念的部分上费多少时间精力，都不能产生巨大的生产力提升。&lt;/p&gt;
+
+ &lt;/blockquote&gt;
+
+&lt;p&gt;也就是说，无论怎写代码上费多少心思，都无法影响软件在需求和设计阶段所耗费的时间，而这些时间才是真正的瓶颈。在真实软件开发中，人们可能花费数日甚至数周敲定一个所有人都挑不出毛病的方案，即便他们使用了 LLM 辅助设计。如果软件有明确的客户，那么在与客户的沟通上会出现更复杂的问题，LLM 对此唯一有用的帮助，就是快速生成原型产品（Prototype）并多次迭代，以确认用户的需求，或者验证技术方案的可行性。&lt;/p&gt;
+&lt;p&gt;Brooks 认为为数不多有可能直击软件工程的自发性问题的东西有几个：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;不重复造轮子。原文的表述是 &lt;em&gt;Buy versus Build&lt;/em&gt;，他认为购买已有的软件库能很大程度上消除自己构造软件所带来的难题。那时开源运动还没有深入人心，没有免费的开源库可用，这和如今的「不重复造轮子」是一回事儿。&lt;/li&gt;
+&lt;li&gt;需求精进和快速原型。即通过快速开发用于验证需求的原型软件，尽早且尽可能准确地确认用户的需求，避免大量投入精力过后发现软件不符合需求。&lt;/li&gt;
+&lt;li&gt;增量开发。软件应该慢慢生长，而不是一次性建成。&lt;/li&gt;
+&lt;li&gt;优秀设计师。遵从良好的设计实践可以避免制造出很差的软件，但无法保证优秀的软件。好的设计实践可以被教授，如今或许也能通过 LLM 直接生成，但优秀的设计只会来自优秀的设计师。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;前面三条或多或少成为了行业共识，但最后一条是最重要的。&lt;/p&gt;
+
+
+
+ &lt;blockquote class="quoted p-0 m-0 mx-[1em]"&gt;
+ &lt;p&gt;A little retrospection shows that although many fine, useful software systems have been designed by committees and built by multipart projects, those software systems that have excited passionate fans are those which are the products of one or a few designing minds, great designers. Consider Unix, APL, Pascal, Modula, the Smalltalk interface, even Fortran; and contrast with Cobol, PL/I, Algol, MVS/370, and MS-DOS.&lt;/p&gt;
+&lt;p&gt;稍微回顾历史就能发现，尽管许多良好、有用的软件系统是由委员会设计并由多部分项目构建的，但那些令富有激情的粉丝为之激动的软件，是一位或几位懂设计的头脑的产物，那些优秀的设计师。想想 Unix、APL、Pascal、Modula、Smalltalk 接口，甚至 Fortran；反例是 Cobol、PL/I、Algol、MVS/370 和 MS-DOS。&lt;sup id="fnref:7"&gt;&lt;a href="#fn:7" class="footnote-ref" role="doc-noteref"&gt;7&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+
+ &lt;/blockquote&gt;
+
+&lt;p&gt;段落的最后出现了一些如今人们已经不熟悉的概念，或许现代的版本是这样的：想想 Linux、Lisp、Go、Rust、WebAssembly，甚至 Python；反例是 Java、JavaScript、PowerShell 和 Windows。&lt;/p&gt;
+&lt;p&gt;Brooks 认为软件工程领域能做的最重要的事情，就是培育更多优秀的设计师，从目前的大学教育和行业现状来看，大概没人把他的话当回事儿。&lt;/p&gt;
+
+&lt;h2
+ id="谁都写得出来"
+ class="text-[1.25em] font-extrabold "&gt;谁都写得出来&lt;/h2&gt;
+&lt;p&gt;软件工程的自发性问题或许与工程问题相关，而技术细节仅仅是偶然性问题。当人们在不断迭代技术方案时，他们就能同时体会到软件的复杂性、遵从性、易变性和不可见性——必须花很多时间描述系统的设计，并在沟通交流中确认彼此的意思，因为软件系统很复杂；必须考虑到外部的硬件限制和使用场景，保证某项技术的选用是合理的，因为软件需要遵从外部环境；技术方案要考虑到后续软件变更的难易程度，以及可扩缩性（scalability），因为软件一定是易变的；架构层次图、时序图和数据流图都很难描述清楚软件的实际结构，UML 仅仅是作为沟通工具存在，因为软件在本质上是不可见的。这些软件工程的自发性问题（或者说本质问题）都是工程问题。&lt;/p&gt;
+&lt;p&gt;在设计阶段不会考虑或者很少考虑的具体实现和技术细节，往往都是偶然性问题，找到现成的解决方案很容易，就算没有，也可以花时间找到解决方案（而之后遇到相同的问题时，还可以复用这个方案）。比方说，一个并发系统有多个线程执行数据库写入操作，频繁等待锁使得 CPU 的利用率下降。这看起来是工程问题，但实际上只是容易解决的技术细节，引入一个专门的线程用来写入数据，其他线程把写入操作放进消息队列就好，只有一个写者就不用等待锁了。这些技术细节往往不需要在设计阶段被考虑，几乎不会影响整体项目的进展。&lt;/p&gt;
+&lt;p&gt;前些日子和朋友闲聊，他看到有人用 “AI” “一句话”生成了完整的游戏，他感到非常震撼。我其实有很多想要细讲的，但想着还是不要破坏轻松的氛围，所以就把这些思考写进博客里。我想说，LLM 编程并没有解决工程问题和自发性问题。软件的复杂性并没有被消除，只是不再被 Vibe-coders 关心。软件的易变性依旧存在，而容易改变不代表改变起来很容易，倘若设计者本人都不理解软件的复杂性（数据结构、模块划分和各个局部的设计细节），那变更时只会塞满 LLM 的上下文、消耗更多的 Token，直到那一整块奇形怪状的软件结构已经没办法被他的 “AI” 理解。&lt;/p&gt;
+&lt;p&gt;在 LLM 之前，编写游戏程序早就不是难事。游戏的难点一直是玩法设计和所有软件都要考虑的架构设计。就像 Parnas 说的，“自动化”编程仅仅是用更高层次的语言编程而已，在不能用自然语言编程的年代，高级编程语言和游戏引擎也达成了某种“自动化”。事实是，谁都写得出来，但不是谁都写得下去。想想《僵尸毁灭工程》这个历经十五年还处在 Beta 阶段的游戏吧。&lt;/p&gt;
+&lt;p&gt;React 写起来并不难，任何编程基础到位的人，都能在不借助 LLM 的情况下写一个简易的虚拟 DOM 引擎，但不是所有人都能统筹大量的开源贡献、与开发团队紧密沟通、收集用户反馈，并且维护一个代码库十三年。好的软件应该是被长期维护的，而这意味着在软件的整个生命周期里，软件工程师都要与复杂性、遵从性、易变性和不可见性作对。无论用手写还是用 LLM 写，扔下一段能跑的代码并为自己感到骄傲，实际上相当幼稚。这段代码再有用，也只是解决了偶然性问题，搞清除了某个技术细节，对工程和软件的自发性问题做出的贡献微乎其微。&lt;/p&gt;
+
+&lt;h2
+ id="软件工程师的娱乐与职责"
+ class="text-[1.25em] font-extrabold "&gt;软件工程师的娱乐与职责&lt;/h2&gt;
+&lt;p&gt;我在《
+
+ &lt;a href="https://www.geedea.pro/article/no-ai-for-my-joy/"&gt;我（不）想让 AI 帮我做&lt;/a&gt;
+
+》一文中简略地提及过几类程序员的差别：一类只想要完成和交付他被分配的任务，如果能减少工作量，用什么工具都行；另一类更富有热情，但比起写代码，他们更喜欢创造的感觉，不写代码也能获得成就感；最后一类是我所属的一类，喜欢写代码，理解软件的复杂性本身就是一种智识锻炼和享受。&lt;/p&gt;
+&lt;p&gt;让我们忽略第一类，他们大多只想谋得生计，对软件工程本身的兴趣不大。后两类尽管有差异，但在某一点上殊途同归：我们都觉得创造软件令人愉悦，只不过一边更在意结果，另一边重视过程和体验。在这层意义上，用一个周末 Vibe code 了一个给自己用的 RSS 阅读器并为自己感到骄傲的开发者，和用几个晚上手写写出了一个已经有更成熟解决方案的软件或算法并为自己感到骄傲的开发者，创造的价值都为 0。后者可能有值得称赞的点，比方说他没有使用大量昂贵的计算资源，也没有给 “AI” 公司花钱，促使他们去消耗更多的土地资源、矿物资源、电力和水资源建造数据中心、把硬件价格炒得没人买得起，而且他完全理解他的软件，要整合到其他系统里就相对容易。可我们不能比烂，事实就是，两者都没有为整个软件生态做出任何贡献。&lt;/p&gt;
+&lt;p&gt;我不是说没有贡献就是坏的。总所周知，程序员十分热衷于重复造轮子，尽管共识与之矛盾。所有人都需要娱乐，编写软件对我们提到的两类人而言的确是很好的娱乐。如果要把娱乐的体验和经验应用在真实的软件开发中，就要三思后而行了。Vibe code 的确很快，但若是不理解软件的结构，要维护起来就很困难，所以不能在没有任何设计的情况下用几句提示词编写软件，更不能完全不读代码；重复造轮子的确很爽，反复重构和优化代码结构也很爽，但在实际工程中，若是有现成且合适的方案却不用，在影响项目继续推进的情况下过早优化，也不明智。&lt;/p&gt;
+&lt;p&gt;在我的观察中，有不少程序员是完全无法与彼此沟通的。一个在谈论他的私人项目中使用的新鲜技术，另一个则思考这种技术在实际工程中会遇到的问题；一个在思考某个项目更适合用哪个模型开发，另一个在思考使用什么样的架构和设计模式；一个试图说服对方用 Rust，另一个试图解释自己的团队里没人会 Rust，还有一个半路杀过来让他用 LLM 写 Rust…… 为了更好地沟通和相互理解，也为了更清晰地认识软件工程本身，必须要区分工程问题和技术问题，区分自发性问题和偶然性问题，区分娱乐与职责。&lt;/p&gt;
+&lt;p&gt;当然，这最多也只能是一种自律罢了。&lt;/p&gt;
+&lt;div class="footnotes" role="doc-endnotes"&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id="fn:1"&gt;
+&lt;p&gt;协程指代 &lt;code&gt;goroutine&lt;/code&gt;，是用户态的、轻量级、装载到系统线程上的并发单元。&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink"&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id="fn:2"&gt;
+&lt;p&gt;参见：
+
+ &lt;a href="https://en.wikipedia.org/wiki/Silver_bullet" class="external-link" target="_blank" rel="noopener noreferrer"&gt;Silver bullet - Wikipedia&lt;/a&gt;
+
+&amp;#160;&lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink"&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id="fn:3"&gt;
+&lt;p&gt;这里的 &lt;em&gt;Physics&lt;/em&gt; 译作物理学可能不够准确，读者只需明白这是个形而上学概念就好。我印象中物理学这个译名貌似是个错译，又或者是误会，我没深究。&amp;#160;&lt;a href="#fnref:3" class="footnote-backref" role="doc-backlink"&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id="fn:4"&gt;
+&lt;p&gt;偶然性和自发性两个译名参照这篇中国的
+
+ &lt;a href="https://www.sinoss.net/uploadfile/2021/0121/20210121103400205.pdf" class="external-link" target="_blank" rel="noopener noreferrer"&gt;论文&lt;/a&gt;
+
+。不过，&lt;em&gt;essence&lt;/em&gt; 译作「内在性」或许更容易理解。&amp;#160;&lt;a href="#fnref:4" class="footnote-backref" role="doc-backlink"&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id="fn:5"&gt;
+&lt;p&gt;「随机的」原文为 arbitary，这个词其实很难翻译成中文，它对应的中文翻译还有「武断的」「偶然的」「随心所欲的」。我对 arbitary 的理解是：如果某个现象没有更深层次的解释，没有理由地存在着，换成别的东西似乎也合理，不一定非得是它，那它就是 arbitary 的。&amp;#160;&lt;a href="#fnref:5" class="footnote-backref" role="doc-backlink"&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id="fn:6"&gt;
+&lt;p&gt;顺带一提，Brooks 在这里举的例子是 Unix 和 Interlisp，后者是围绕 Lisp 语言构建的编程环境。&amp;#160;&lt;a href="#fnref:6" class="footnote-backref" role="doc-backlink"&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id="fn:7"&gt;
+&lt;p&gt;我貌似还没有见过不批评微软的优秀软件工程师。&amp;#160;&lt;a href="#fnref:7" class="footnote-backref" role="doc-backlink"&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;div style="text-align:right;"&gt;&lt;a href="https://www.geedea.pro/article/engineering-perspective/#action-menu"&gt;读完啦？来坐坐吧&lt;/a&gt;&lt;/div&gt;</description></item><item><title>大脑充血 Vol.90</title><link>https://www.geedea.pro/weekly/90/</link><pubDate>Mon, 20 Jul 2026 07:59:10 +0800</pubDate><author>hi@eltr.ac (Eltrac)</author><guid>https://www.geedea.pro/weekly/90/</guid><description>
 &lt;p&gt;上班的生活，貌似没有那么糟糕？兴许是因为作为刚入职的实习生，我的工作强度并不高吧。总之，本周我在忙入职和租房的事情，事件之间的空隙也有些喘息和四处游走的时间，生活还不错。&lt;/p&gt;
 &lt;p&gt;不过我的文化体力还没能恢复，本周打开了加缪的《第一个人》，没怎么读得进去。也写了一两篇文，但都成了废稿，其中一篇的题目叫作《The Only Truth Is Binary》，其实也就名字很酷而已。希望下周能恢复平衡。&lt;/p&gt;
 &lt;hr&gt;
@@ -255,8 +446,8 @@
 &lt;/ul&gt;
 
 &lt;h3
- id="九月十四日"
- class="text-[1.125em] font-bold "&gt;九月十四日&lt;/h3&gt;
+ id="七月十四日"
+ class="text-[1.125em] font-bold "&gt;七月十四日&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;飞到济南啦，落地之后的感受是：好平…… 为什么道路旁边一座山也没有？第二印象是：我的麻辣香锅为什么没有辣味？！&lt;/p&gt;
@@ -268,8 +459,8 @@
 &lt;/ul&gt;
 
 &lt;h3
- id="九月十五日"
- class="text-[1.125em] font-bold "&gt;九月十五日&lt;/h3&gt;
+ id="七月十五日"
+ class="text-[1.125em] font-bold "&gt;七月十五日&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;早上起来收到一封垃圾邮件，大概是面向网站主的，爬了我网站上所有的邮箱地址一起发送，搞笑的是联邦宇宙用户名和 XMPP 用户名也被当作邮箱地址发送了，显示在收件人里。另外这个服务商真有点没边界感，发送邮件里直接把登录密码和用户名给我了，在我不知情的情况下用我的信息创建了账户吗？&lt;/p&gt;
@@ -285,8 +476,8 @@
 &lt;/ul&gt;
 
 &lt;h3
- id="九月十六日"
- class="text-[1.125em] font-bold "&gt;九月十六日&lt;/h3&gt;
+ id="七月十六日"
+ class="text-[1.125em] font-bold "&gt;七月十六日&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;上班第一天，进门时非常局促，一个人也不认识，找了最近的一个同事问运维坐哪儿，因为要找他安排设备和工位。后来发现他也是实习生。运维当时应该是在忙，就给我指了下位置，我以为他只是让我临时坐一下，所以就焦虑地原地刷起手机来了……&lt;/p&gt;
@@ -299,8 +490,8 @@
 &lt;/ul&gt;
 
 &lt;h3
- id="九月十七日"
- class="text-[1.125em] font-bold "&gt;九月十七日&lt;/h3&gt;
+ id="七月十七日"
+ class="text-[1.125em] font-bold "&gt;七月十七日&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;团建，依旧不认识人（是的，入职第二天就赶上团建了，而且还是周五团建），于是闷头干饭。路上被同事误认成其他同事的家属，以为是谁带了个弟弟过来。&lt;/p&gt;
@@ -309,8 +500,8 @@
 &lt;/ul&gt;
 
 &lt;h3
- id="九月十八日"
- class="text-[1.125em] font-bold "&gt;九月十八日&lt;/h3&gt;
+ id="七月十八日"
+ class="text-[1.125em] font-bold "&gt;七月十八日&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;交房后花两百多块钱在美团上找了家政，预订了六个小时的深度清洁，回来验收的时候发现各个角落还有明显的灰尘，貌似也就收拾了厨房、擦了玻璃和地板。其实只过了三个小时阿姨就打电话说做完了，走的时候还念叨着已经超时了，由于当时出门在外干别的事情，再加上阿姨口音太重实在听不清楚，人走了之后我才反应过来。&lt;/p&gt;
@@ -320,8 +511,8 @@
 &lt;/ul&gt;
 
 &lt;h3
- id="九月十九日"
- class="text-[1.125em] font-bold "&gt;九月十九日&lt;/h3&gt;
+ id="七月十九日"
+ class="text-[1.125em] font-bold "&gt;七月十九日&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;住惯了带密码锁的房子，交房后拿到钥匙就开始焦虑起来。不想花钱换密码锁（主要是不想社交，换锁的话要和房东商量），又担心自己丢三落四弄丢钥匙，于是连夜下单了 AirTag…… 我知道，性价比很低的选择，但确实好用。&lt;/p&gt;
@@ -1653,506 +1844,4 @@
 &lt;/ol&gt;
 &lt;/div&gt;
 
-&lt;div style="text-align:right;"&gt;&lt;a href="https://www.geedea.pro/article/all-human-condition/#action-menu"&gt;读完啦？来坐坐吧&lt;/a&gt;&lt;/div&gt;</description></item><item><title>大脑充血 Vol.87</title><link>https://www.geedea.pro/weekly/87/</link><pubDate>Mon, 29 Jun 2026 09:44:41 +0800</pubDate><author>hi@eltr.ac (Eltrac)</author><guid>https://www.geedea.pro/weekly/87/</guid><description>
-&lt;p&gt;水分很多的一期周刊，读完三篇为数不多的文评之后你将发现，这个页面有一半都是我的碎碎念…… 嗯，我或许该思考要不要单独开一个日常系列了。&lt;/p&gt;
-&lt;hr&gt;
-
-&lt;h2
- id="止语"
- class="text-[1.25em] font-extrabold "&gt;止语&lt;/h2&gt;
-
-
-
-
-
-
-
-
-&lt;div class="flex flex-col md:flex-row md:justify-between md:items-center gap-2"&gt;
- 
- &lt;div class="flex gap-5 items-center"&gt;
- &lt;div class="relative flex-shrink-0"&gt;
- &lt;img class="w-15 h-15 rd-lg shadow-lg m-0!"
- alt="Undertale Soundtrack music cover"
- src="https://img.eltr.ac/geedeapro/weekly/87/16b76fd769-d8c5-4a3b-bf64-5071d896ec19.jpg" loading="lazy" /&gt;
- 
- &lt;div class="w-13 h-13 rd-md bg-neutral-400 dark:bg-neutral-600 absolute top-1 left-3 -z-1"&gt;&lt;/div&gt;
- 
- &lt;/div&gt;
- &lt;div&gt;
- &lt;h4 class="m-0 text-size-base flex items-center gap-2 leading-tight"&gt;
- &lt;span&gt;Undertale Soundtrack&lt;/span&gt;
- 
- &lt;span class="font-mono bg-neutral-700 text-white
- px-1 rd text-xs leading-relaxed hidden sm:inline-block"
- &gt;专辑&lt;/span&gt;
- 
- &lt;/h4&gt;
- &lt;p class="m-0! text-size-sm text-secondary"&gt;Toby Fox&lt;/p&gt;
- &lt;/div&gt;
- &lt;/div&gt;
- 
- &lt;div class="flex gap-2 items-center"&gt;
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- &lt;a href="https://neodb.social/album/169Vzl0BTKadvTAAFlF3bU"
- class="block rounded-full px-3 md:p-4 bg-neutral-200/50 dark:bg-neutral-600/50 hover:bg-neutral-200 dark:hover:bg-neutral-600 transition-colors no-underline! text-size-xs inline-flex gap-1 items-center"
- target="_blank"
- title="在 NeoDB 中打开"
- data-tooltip
- &gt;
- &lt;img src="https://www.geedea.pro/icons/music/neodb.png"
- alt="NeoDB"
- loading="lazy" class="block w-3 h-3 md:w-5 md:h-5 m-0!" /&gt;
- &lt;span class="md:hidden"&gt;NeoDB&lt;/span&gt;
- &lt;/a&gt;
- 
- 
- 
- 
- 
- 
- 
- &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;p&gt;如果有人偷窥我的 
-
- &lt;a href="https://www.last.fm/user/eltrac" class="external-link" target="_blank" rel="noopener noreferrer"&gt;last.fm&lt;/a&gt;
-
- 记录的话，就会发现我这几天老是在听《Spear of Justice》和《Death by Glamour》，因为不想听能跟唱的，还想要思考。&lt;/p&gt;
-&lt;p&gt;另外，游戏原声带貌似都很容易让人集中注意力呢。&lt;/p&gt;
-&lt;hr&gt;
-
-&lt;h2
- id="连接"
- class="text-[1.25em] font-extrabold "&gt;连接&lt;/h2&gt;
-
-&lt;h3
- id="在时间中瘫痪"
- class="text-[1.125em] font-bold "&gt;在时间中瘫痪&lt;/h3&gt;
-
-
-
- &lt;blockquote class="rounded-1 leading-[1.75] mx-0 px-5
- flex gap-3 my-2 alert-note"
- style="background-color: oklch(from var(--block-background-color) l c h / calc(alpha - 0.5))"
- &gt;
- &lt;div class="py-5"&gt;
- 
- 📜
- 
- &lt;/div&gt;
- &lt;div&gt;
- &lt;p&gt;
-
- &lt;a href="https://theconversation.com/do-you-lose-your-whole-day-to-one-appointment-waiting-mode-may-be-why-280608" class="external-link" target="_blank" rel="noopener noreferrer"&gt;Do you lose your whole day to one appointment? ‘Waiting mode’ may be why&lt;/a&gt;
-
-&lt;/p&gt;
- &lt;/div&gt;
- &lt;/blockquote&gt;
-
-&lt;p&gt;不少神经特异者（尤其是 ADHD、读写困难和自闭症）感受时间的方式有所不同，如果有某件事情即将发生，他们可能会陷入「等待模式」——坐立难安，一直在脑中估算时间和预演可能发生的事情，什么也做不了。这种现象在临床上的名称是「时盲」（Time blindness）和「时间扩张」（Time Dilation）等等，不过指代的对象更广。&lt;/p&gt;
-&lt;p&gt;触发等待模式的时间不一定重要、令人压力山大，可能只是一件小事。如果事件的具体时间不确定，那么等待模式就会加剧。如果安排改变，时间被推迟，感受也可能加重。如果以一天下午有安排，那么整个上午可能都会在等待模式中度过；等待模式也可能持续几天。&lt;/p&gt;
-&lt;p&gt;这种现象我也深受其扰！我的情况可能不算特别严重，但在约好的时间之前的一两个小时，我几乎没办法做任何事情，除非是为这件事情做准备（有时候事情不需要提前准备，那我很有可能会在网上搜索其他人的经验，预想待会儿可能发生的事情）。如果这件事是几天后甚至半个月后发生的，那更糟，我会忧心忡忡好几天。还没拿到正式 Offer（但已经估算好入职时间）时，我就在搜索工作地点附近的酒店、小区、交通情况。我还开始打包行李，把暂时用不到的东西全部装起来，提前半个月寄了回去。至少有两三天，我的注意力都没办法从这件事情上转移。后来，我缓解这种情况的方法与文中提到的解决方案一致——做计划。&lt;/p&gt;
-&lt;p&gt;我列了一个时间轴，上面写明了从下个月初到入职前后两三天我要做的事情，包括打包行李的时间节点、机票和酒店信息、下了飞机之后到酒店的地铁路线、入职后的周末看房等等。全部写下来之后状态的确好了很多，不过后遗症也很大，后面的几天我也没有做什么事情。&lt;/p&gt;
-&lt;p&gt;说起来，我有一篇关于神经多样性的草稿从上个月初就躺在草稿箱里。我一直觉得自己不符合 ADHD 的描述，比方说很多 ADHD 患者容易迟到或忘记安排，但我总是在事件开始之前焦虑得没法移开注意力，一般都会提前到。某个可靠程度未知的问卷显示我是 AuDHD（自闭者和 ADHD 的结合），一部分的描述也的确能对得上，比起没办法集中注意力，我更难移开注意力，尤其是在我感兴趣的事情上，常常一做就是一整天。这也是为什么我觉得时间管理方法里的 FROG 法（花里胡哨的名字，其实就是一天只专注三件重要的事情）不适合我，我要么一天只能做一件事情，要么被琐事打断，可以做很多件小事。另外，我也愈发感觉到，对不少人来说时间管理是锦上添花的事情，但对我和不少人来说必不可少，否则根本无法完成任何事情。&lt;/p&gt;
-
-&lt;h3
- id="为什么有人只会说教"
- class="text-[1.125em] font-bold "&gt;为什么有人只会说教？&lt;/h3&gt;
-
-
-
- &lt;blockquote class="rounded-1 leading-[1.75] mx-0 px-5
- flex gap-3 my-2 alert-note"
- style="background-color: oklch(from var(--block-background-color) l c h / calc(alpha - 0.5))"
- &gt;
- &lt;div class="py-5"&gt;
- 
- 📻
- 
- &lt;/div&gt;
- &lt;div&gt;
- &lt;p&gt;
-
- &lt;a href="https://www.xiaoyuzhoufm.com/episode/6a39f61f2e335a35a807c565" class="external-link" target="_blank" rel="noopener noreferrer"&gt;《独树不成林》347 - 到底为啥有些傻蛋只会以说教的方式沟通&lt;/a&gt;
-
-&lt;/p&gt;
- &lt;/div&gt;
- &lt;/blockquote&gt;
-
-&lt;p&gt;本期亮点：“属牛的不能吃牛肉。”&lt;/p&gt;
-&lt;p&gt;树老师观察并总结，不少老登喜欢说教，并不是他们坏，而是他们缺少自我意识。没有自我意识，又想要和人交流（毕竟所有人都有跟人说话的需求），他们交流的方式就自然而然变成了说教。他们不会聊自己感兴趣的，也不会关心你感兴趣的（毕竟他们没有自我意识），他们只会想尽办法来教教你，这就是他们最熟悉，甚至是唯一了解的交流方式。&lt;/p&gt;
-&lt;p&gt;本周，在我被等待模式困扰的同时，我的母亲突然在我回复 Offer、订好机票和酒店之后，劝我不要走那么远，而这件事情他几周前就知道了，&lt;em&gt;她非得选这个时间点跟我说这些糟心的话吗？&lt;/em&gt; 她还跟我说某个亲戚是做人事的，另一个亲戚的单位也在招人，让我告诉她们我的需求，留在这个小县城。我试图跟她理论，说我找了几个月了，根本找不到我想要的岗位，这份工作是我深思熟虑后感到满意的，结果这只是引来了她更多的说教。哦对了，这段对话是这么开始的：她跟我转发了一个短视频，标题叫作「养熟即杀：东南亚专盯大学生」——&lt;em&gt;我去的是山东啊！&lt;/em&gt; 见说不过我，她让我走之前认真学习这个视频，我只能嬉皮笑脸地答应。&lt;/p&gt;
-&lt;p&gt;树老师还说她观察到，没有自我意识的父母容易养出自我意识很强的孩子，比方说她的小表妹就很担心自己做不好、很在乎别人的看法。我要补充，这种亲子关系对我而言非常痛苦，我都忘记了我还是个完全无法理论和反抗的小孩子时，生活有多么糟糕，我无力控制身边的一切。&lt;/p&gt;
-&lt;hr&gt;
-
-&lt;h2
- id="茶歇"
- class="text-[1.25em] font-extrabold "&gt;茶歇&lt;/h2&gt;
-
-&lt;h3
- id="steam-machine-发布"
- class="text-[1.125em] font-bold "&gt;Steam Machine 发布&lt;/h3&gt;
-
-
-
- &lt;blockquote class="rounded-1 leading-[1.75] mx-0 px-5
- flex gap-3 my-2 alert-note"
- style="background-color: oklch(from var(--block-background-color) l c h / calc(alpha - 0.5))"
- &gt;
- &lt;div class="py-5"&gt;
- 
- ℹ️
- 
- &lt;/div&gt;
- &lt;div&gt;
- &lt;p&gt;
-
- &lt;a href="https://store.steampowered.com/news/group/45479024/view/685257114654870245" class="external-link" target="_blank" rel="noopener noreferrer"&gt;Steam Machine launches today!&lt;/a&gt;
-
-&lt;/p&gt;
- &lt;/div&gt;
- &lt;/blockquote&gt;
-
-&lt;p&gt;万众瞩目的 Steam Machine 终于发布了，这是 Valve 推出的一台 PC 硬件设备，预装了 SteamOS（貌似是基于 Arch Linux 和 KDE 的），也可以安装其他系统。看起来是配置不错的设备，只不过价格…… 不可能不受到&lt;em&gt;那个东西&lt;/em&gt;的影响的。&lt;/p&gt;
-
-
-
- &lt;blockquote class="quoted p-0 m-0 mx-[1em]"&gt;
- &lt;p&gt;在 2023 年我们一开始为 Steam Machine 采购组件时，本以为自己对组件成本会如何随时间流逝而变化已经有了很好的了解。 这种了解源自于我们多年来掌握的 PC 硬件价格变化数据，主要说来就是价格会随着新技术的出现而日渐降低。&lt;/p&gt;
-&lt;p&gt;然而在过去大概一年的时间里，这种情况发生了快速而显著的变化，最明显的就是 RAM 及存储组件的变化。 造成这种局面的原因有很多，而这对世界各地的硬件产品都造成了影响， 并最终导致了我们当初为 Steam Machine 制定的目标定价不再可行。 因此，我们今天公布的价格反映了全球制造业的现状，或者更准确地说，反映了我们在过去 6 个月里确保能获得的组件的价格。&lt;/p&gt;
-&lt;p&gt;而价格并不是受到影响的唯一方面：供货情况亦是如此。 有段时间，我们发现无论开出什么价格都完全没有办法采购到部分组件。 更为严重的是，这影响到了我们的首发产量。&lt;/p&gt;
-
- &lt;/blockquote&gt;
-
-&lt;hr&gt;
-
-&lt;h2
- id="星群"
- class="text-[1.25em] font-extrabold "&gt;星群&lt;/h2&gt;
-
-&lt;h3
- id="open-heart-protocol"
- class="text-[1.125em] font-bold "&gt;Open Heart Protocol&lt;/h3&gt;
-&lt;p&gt;一个简单的 Web 点赞协议，只需要写一个简单的后端，接收这样的 &lt;code&gt;POST&lt;/code&gt; 请求即可：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#d6cbb4;background-color:#252b2e;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;curl -d &lt;span style="color:#b2c98f"&gt;&amp;#39;🥨&amp;#39;&lt;/span&gt; -X POST &lt;span style="color:#b2c98f"&gt;&amp;#39;https://api.oh.dddddddddzzzz.org/github.com/dddddddddzzzz/OpenHeart&amp;#39;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如果换成 &lt;code&gt;GET&lt;/code&gt; 方法，就应该收到这样的响应：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#d6cbb4;background-color:#252b2e;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-json" data-lang="json"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;{&lt;span style="color:#7a8478"&gt;&amp;#34;❤️&amp;#34;&lt;/span&gt;: &lt;span style="color:#d699b6"&gt;14&lt;/span&gt;,&lt;span style="color:#7a8478"&gt;&amp;#34;🫀&amp;#34;&lt;/span&gt;: &lt;span style="color:#d699b6"&gt;12&lt;/span&gt;,&lt;span style="color:#7a8478"&gt;&amp;#34;🥨&amp;#34;&lt;/span&gt;: &lt;span style="color:#d699b6"&gt;22&lt;/span&gt;}
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;由于是基于 POST 请求的，所以不需要 JavaScript 也能用，提交表单就行了：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#d6cbb4;background-color:#252b2e;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-html" data-lang="html"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;lt;&lt;span style="color:#7a8478"&gt;form&lt;/span&gt; &lt;span style="color:#d699b6;font-weight:bold"&gt;action&lt;/span&gt;&lt;span style="color:#7a8478"&gt;=&lt;/span&gt;&lt;span style="color:#b2c98f"&gt;&amp;#34;&amp;lt;your server endpoint&amp;gt;&amp;#34;&lt;/span&gt; &lt;span style="color:#d699b6;font-weight:bold"&gt;method&lt;/span&gt;&lt;span style="color:#7a8478"&gt;=&lt;/span&gt;&lt;span style="color:#b2c98f"&gt;&amp;#34;POST&amp;#34;&lt;/span&gt; &lt;span style="color:#d699b6;font-weight:bold"&gt;enctype&lt;/span&gt;&lt;span style="color:#7a8478"&gt;=&lt;/span&gt;&lt;span style="color:#b2c98f"&gt;&amp;#34;text/plain&amp;#34;&lt;/span&gt;&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &amp;lt;&lt;span style="color:#7a8478"&gt;button&lt;/span&gt; &lt;span style="color:#d699b6;font-weight:bold"&gt;name&lt;/span&gt;&lt;span style="color:#7a8478"&gt;=&lt;/span&gt;&lt;span style="color:#b2c98f"&gt;&amp;#34;🥨&amp;#34;&lt;/span&gt;&amp;gt;🥨&amp;lt;/&lt;span style="color:#7a8478"&gt;button&lt;/span&gt;&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;lt;/&lt;span style="color:#7a8478"&gt;form&lt;/span&gt;&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;整体而言类似于一个简化的 
-
- &lt;a href="https://www.w3.org/TR/webmention/" class="external-link" target="_blank" rel="noopener noreferrer"&gt;Webmention&lt;/a&gt;
-
-，不需要指定发送方和接收方，也不需要做额外的检查。还有一个 
-
- &lt;a href="https://github.com/dddddddddzzzz/api-oh" class="external-link" target="_blank" rel="noopener noreferrer"&gt;Public API&lt;/a&gt;
-
- 开源实现，可以自托管也可以直接用这个公共服务。类似于 
-
- &lt;a href="https://iine.to/" class="external-link" target="_blank" rel="noopener noreferrer"&gt;iine&lt;/a&gt;
-
-，不过 Open Heart Protocol 支持多种表情符号回应。&lt;/p&gt;
-&lt;p&gt;访问：
-
- &lt;a href="https://openheart.fyi/" class="external-link" target="_blank" rel="noopener noreferrer"&gt;Open Heart Protocol&lt;/a&gt;
-
-&lt;/p&gt;
-&lt;hr&gt;
-
-&lt;h2
- id="切片"
- class="text-[1.25em] font-extrabold "&gt;切片&lt;/h2&gt;
-
-&lt;h3
- id="六月二十二日"
- class="text-[1.125em] font-bold "&gt;六月二十二日&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;看到某博客在每篇文章的开头添加了「和 Claude 一起阅读」的链接，受其启发，打算做一个「和朋友一起阅读」按钮，点击之后发送消息给朋友，问他对这篇文章的看法。&lt;/p&gt;
-&lt;p&gt;还没想好怎么设计，电子邮件还好，如果是 Telegram、Matrix、XMPP 和 SimpleX 这些即时通信软件（协议），就很难适配。或许可以做成「和作者一起阅读」，点击之后快速地给我发一封电子邮件。&lt;/p&gt;
-&lt;p&gt;这就显现出真人的&lt;em&gt;劣势&lt;/em&gt;了：很难被包装成软件功能。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;不少大学对本科生貌似有种不切实际的幻想（或许只是我们学校比较神经），觉得学生是堆放在宿舍里随时可以拉出来接受安排的东西，不管是什么安排，即便是前一天晚上临时通知也没关系。&lt;/p&gt;
-&lt;p&gt;在不把学生当作独立个体看的同时，还期望这样的教育能培养出成年人应有的独立人格。我初高中时都有过长时间的抑郁情绪，但都没有我在大学里感受到的那样强烈，那种我想要出去却被我反抗不了的力量拉住，而那股力量一边拉着我一边问我为什么不多出去看看，真像个卑劣的霸凌者。&lt;/p&gt;
-&lt;p&gt;“你为什么打自己？你为什么在打自己？”&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;和父母一起过农历生日，买衣服的时候，我爸一直让我买件 Polo 衫，说我这个年纪应该穿得成熟、精神一点了，说我身上穿的这套衣服全都应该丢掉（那是一件金菊色的、板型很好的衬衫，袖长能遮住上臂，衣长却不至于盖过臀；下装是一件偏鼠尾草绿的宽大工装裤）。我这才反应过来，我爸穿的就跟我学校的&lt;del&gt;老登&lt;/del&gt;领导一样，穿着长得能遮住屁股的 Polo 衫，还有一件和上身颜色一样的黑色短裤。他说腿细的才穿宽的裤子，腿粗就应该穿紧一点的，&lt;em&gt;女人才喜欢&lt;/em&gt;。出门之前他和我同室擦肩而过，之后问我和我一起住的是不是个女的——瞧瞧我，竟然同情起同室来了。&lt;/p&gt;
-&lt;p&gt;我很喜欢衬衫，买对板型并不会很死板；我也喜欢 T 恤，看起来会很随意、休闲，也很适合运动。我不能理解 Polo 衫这种&lt;em&gt;诡异&lt;/em&gt;的发明，很难搭配，看起来既不正经也不随和，倒是很&lt;em&gt;精神&lt;/em&gt;、很直男。&lt;/p&gt;
-&lt;p&gt;我向来只关心自己的公历生日，农历生日只是用来嬉皮笑脸地给父母提供情绪价值的。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;吃饭的时候收到了技术面通过的消息，原来我面对「你有什么问题问我们的吗？」这个问题回答「暂时没有」也是能过的吗？&lt;sup id="fnref:1"&gt;&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref"&gt;1&lt;/a&gt;&lt;/sup&gt;不过技术问题的表现我确实还不错。这么说，我这个 “AI” Hater 就要勇闯 “AI” 初创公司啦？甚者，我这个男同性恋就要勇闯直男大省啦？&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3
- id="六月二十三日"
- class="text-[1.125em] font-bold "&gt;六月二十三日&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;Steam Machine 终于发布了！&lt;/p&gt;
-&lt;p&gt;&lt;del&gt;我买不起！&lt;/del&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;和 HR 面试结束之后心情很好，于是出门跑步，正好在下小雨。虽然雨量不足以跳《雨中曲》，但心境也算是接近了。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;出门的时候闻到了&lt;del&gt;小&lt;/del&gt;氯的味道，发现路边洒满了白色的粉末，应该和游泳池消毒剂是一类东西。这几天重庆总是下雨，让人很是困倦，消毒措施大概和雨季有些关系吧。&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3
- id="六月二十四日"
- class="text-[1.125em] font-bold "&gt;六月二十四日&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;两年内第一次喝奶咖，因为不想喝普通的甜水，也不觉得书店的美式有多好喝，所以点了杯抹茶鸳鸯拿铁，应该是普通的拿铁，但是加上了抹茶，或许是抹茶版本的摩卡——&lt;del&gt;那就叫他抹卡吧。&lt;/del&gt;&lt;/p&gt;
-&lt;div class="gallery"&gt;
- &lt;figure&gt;
- &lt;img
- class="lazy " loading="lazy"
- src="https://img.eltr.ac/geedeapro/weekly/87/matcha-latte-before.jpeg" alt=""
- data-libra
- /&gt;
-&lt;/figure&gt;
-
-&lt;figure&gt;
- &lt;img
- class="lazy " loading="lazy"
- src="https://img.eltr.ac/geedeapro/weekly/87/matcha-latte-after.jpeg" alt=""
- data-libra
- /&gt;
-&lt;/figure&gt;
-&lt;/div&gt;
-
-&lt;p&gt;口感很糟糕，就只是抹茶拿铁&lt;sup id="fnref:2"&gt;&lt;a href="#fn:2" class="footnote-ref" role="doc-noteref"&gt;2&lt;/a&gt;&lt;/sup&gt;上面加了 1 shot 的意式浓缩，用的应该是拼配了不少罗豆的深烘豆。两者完全没有融合，就是只是隐隐约约呈现出焦苦味的含糖饮料而已（所以还是喝到了甜水）。&lt;/p&gt;
-&lt;p&gt;罢了，我付钱买书店的饮料也只是希望它能活下去而已。&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3
- id="六月二十五日"
- class="text-[1.125em] font-bold "&gt;六月二十五日&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;节律又乱掉了…… 十点半才醒，起来也没精神，于是就玩了一下午饥荒，还有一个饥友进来参观，帮我&lt;del&gt;打工&lt;/del&gt;种田。还帮我翻出来两只考拉象&lt;sup id="fnref:3"&gt;&lt;a href="#fn:3" class="footnote-ref" role="doc-noteref"&gt;3&lt;/a&gt;&lt;/sup&gt;，于是造了个圈把它们养起来了。&lt;/p&gt;
-&lt;div class="gallery"&gt;
- &lt;figure&gt;
- &lt;img
- class="lazy " loading="lazy"
- src="https://img.eltr.ac/geedeapro/weekly/87/20260625152456_1%E5%A4%A7.jpeg" alt="饥荒游戏界面，有两只红色的长着考拉耳朵的大象被墙壁圈起来"
- data-libra
- /&gt;
- &lt;figcaption&gt;
- &lt;h4&gt;考拉养考拉象&lt;/h4&gt;
- &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;figure&gt;
- &lt;img
- class="lazy " loading="lazy"
- src="https://img.eltr.ac/geedeapro/weekly/87/20260625153655_1%E5%A4%A7.jpeg" alt="饥荒游戏界面，一块农田，有两个玩家站在田上，其中一个在锄地"
- data-libra
- /&gt;
- &lt;figcaption&gt;
- &lt;h4&gt;围观打工人种田&lt;/h4&gt;
- &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;figure&gt;
- &lt;img
- class="lazy " loading="lazy"
- src="https://image-eltrac.b-cdn.net/geedeapro/weekly/87/20260625155903_1%E5%A4%A7.jpeg" alt="饥荒游戏界面，有一具骷髅在树下，一位玩家蹲下来两眼发光地看着尸体"
- data-libra
- /&gt;
- &lt;figcaption&gt;
- &lt;h4&gt;&lt;del&gt;贴脸嘲讽朋友的尸体&lt;/del&gt;&lt;/h4&gt;
- &lt;/figcaption&gt;
-&lt;/figure&gt;
-&lt;/div&gt;
-
-&lt;p&gt;另外他刚进来的时候撕蝴蝶打出来两块黄油啊，这是什么概率……&lt;/p&gt;
-&lt;figure&gt;
- &lt;img
- class="lazy " loading="lazy"
- src="https://img.eltr.ac/geedeapro/weekly/87/20260625133140_1%E5%A4%A7.jpeg" alt="饥荒游戏界面，一位玩家的面前散落着蝴蝶翅膀和黄油，两个玩家都在聊天界面发问号"
- data-libra
- /&gt;
-&lt;/figure&gt;
-&lt;p&gt;晚上约好了和另一个朋友玩《星露谷物语》，于是上线&lt;del&gt;和谢恩亲亲抱抱&lt;/del&gt;，每天到处摸鱼，时不时酿酒爽赚。玩到一半的时候，下午的饥友发现我还在玩，发消息对我的肝表示震惊。&lt;/p&gt;
-&lt;p&gt;某种程度上…… 我朋友还挺多的？&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3
- id="六月二十六日"
- class="text-[1.125em] font-bold "&gt;六月二十六日&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;早上起来梳理了实习的时间线，在什么时间点收拾东西、打包寄回家、几点出发去机场，把机票和酒店信息也写清楚了。因为入职时间是周四，我打算周末就去看房（虽然算过一笔账之后我觉得在酒店长住好像也不是不能接受）。做完这些&lt;em&gt;非常有大人感&lt;/em&gt;的事情之后我打开微信，收到了我妈发给我的这条消息。&lt;/p&gt;
-&lt;figure&gt;
- &lt;img
- class="lazy " loading="lazy"
- src="https://img.eltr.ac/geedeapro/weekly/87/hilarious-wechat-with-mom.jpg" alt=""
- data-libra
- /&gt;
- &lt;figcaption&gt;
- &lt;h4&gt;视频号标题：“养熟即杀”东南亚专盯中国大学生&lt;/h4&gt;
- &lt;/figcaption&gt;
-&lt;/figure&gt;
-&lt;p&gt;我笑得想死。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Nike 的吊牌上叠了很厚的一层纸，可以很轻易地展开和收起。&lt;/p&gt;
-&lt;div class="gallery"&gt;
- &lt;figure&gt;
- &lt;img
- class="lazy " loading="lazy"
- src="https://img.eltr.ac/geedeapro/weekly/87/nike-instruction-1.jpeg" alt=""
- data-libra
- /&gt;
-&lt;/figure&gt;
-
-&lt;figure&gt;
- &lt;img
- class="lazy " loading="lazy"
- src="https://img.eltr.ac/geedeapro/weekly/87/nike-instruction-2.jpeg" alt=""
- data-libra
- /&gt;
-&lt;/figure&gt;
-&lt;/div&gt;
-
-&lt;p&gt;很适合手帐人学习，可以把一些票据这样叠进页面之间，也算是小机关吧。不过这个吊牌这么厚，仅仅是用好几种语言写了一句话而已。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;想买树老师的新书…… 但是为了搬家已经多抓鱼卖掉了好多看过的和没动力打开看的树…… 要珍藏准备寄回家的书也已经满当当地装了几箱了…… 还有一大堆没读完的书堆放在书桌上……&lt;/p&gt;
-&lt;p&gt;但还是想买树老师的新书！（打滚）&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3
- id="六月二十七日"
- class="text-[1.125em] font-bold "&gt;六月二十七日&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;正在把一些大大小小的家具出二手卖了，果然租房最好还是不要添置太多家具的吧…… 以后卧室的大白墙也不打算装饰了，现在我那一大块毛毡板和上面的咖啡豆袋都不知道怎么处理。&lt;/p&gt;
-&lt;p&gt;卧室的大白墙可以用来投屏，就可用超大屏幕享受饥荒了。&lt;em&gt;不过 Boss 的尺寸可能有真人那么大了吧？&lt;/em&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;某个亲戚近年一直在尝试搞自媒体，似乎想要跟上时代。最近他看一直在朋友圈发明显是 LLM 生成的公众号文章，句式都太标准了。他们真的没有一点意识吗？&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3
- id="六月二十八日"
- class="text-[1.125em] font-bold "&gt;六月二十八日&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;惨剧是这样发生的：我在天体传送门把人物换成了图书管理员薇克巴顿，在月亮风暴里读打雷书刷注能月亮碎片，然后把人物换成威尔逊，用他的资源转化能力制作了大量的纯粹辉煌。&lt;/p&gt;
-&lt;div class="gallery"&gt;
- &lt;figure&gt;
- &lt;img
- class="lazy " loading="lazy"
- src="https://img.eltr.ac/geedeapro/weekly/87/20260628121756_1%E5%A4%A7.jpeg" alt=""
- data-libra
- /&gt;
-&lt;/figure&gt;
-
-&lt;figure&gt;
- &lt;img
- class="lazy " loading="lazy"
- src="https://img.eltr.ac/geedeapro/weekly/87/20260628123442_1%E5%A4%A7.jpeg" alt=""
- data-libra
- /&gt;
-&lt;/figure&gt;
-&lt;/div&gt;
-
-&lt;p&gt;几天后，月亮风暴转移位置，刷新在了我的基地里。前不久 Klei 重做了饥荒的电击攻击，现在所有植物类实体受到电击后会着火…… 而我家里养了很多食人花、球状光虫和一些致命亮茄，而众所周知天体风暴里会刷新月熠，月熠会释放电击…… 总之就是我的家被烧了很多次，我回档了很多次。我开始收集约束静电准备转移月亮风暴，然后在一边递工具一边打变异鸟的同室，时间来到了冬天，月亮风暴是启蒙区域，从河里蹦出来的是会主动攻击玩家的变异企鹅…… 总之场面非常混乱。&lt;/p&gt;
-&lt;figure&gt;
- &lt;img
- class="lazy " loading="lazy"
- src="https://img.eltr.ac/geedeapro/weekly/87/20260628203053_1%E5%A4%A7.jpeg" alt=""
- data-libra
- /&gt;
-&lt;/figure&gt;
-&lt;p&gt;倍受好评的电击更新的最大受害者出现了！&lt;/p&gt;
-&lt;p&gt;不管那么多了，给你看看我的香蕉农场和新的大农田，农田旁边用麻刺节点封印了一只亮茄当作避茄针和吉祥物（亮茄的附近的一部分区域内不会有新的作物被寄生）。&lt;/p&gt;
-&lt;div class="gallery"&gt;
- &lt;figure&gt;
- &lt;img
- class="lazy " loading="lazy"
- src="https://img.eltr.ac/geedeapro/weekly/87/20260628222352_1%E5%A4%A7.jpeg" alt=""
- data-libra
- /&gt;
-&lt;/figure&gt;
-
-&lt;figure&gt;
- &lt;img
- class="lazy " loading="lazy"
- src="https://img.eltr.ac/geedeapro/weekly/87/20260628221344_1%E5%A4%A7.jpeg" alt=""
- data-libra
- /&gt;
-&lt;/figure&gt;
-&lt;/div&gt;
-
-&lt;p&gt;我即将把饥荒玩成另一个种田游戏。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;准备写日记结束这一天的时候突然感到这栋楼都在左右摇晃，震感非常强烈。当时心跳加速，思考要怎么从这么高的楼层跑下去。结果搜索发现是隔壁四川的地震波及了这边，震感只持续了半分钟不到就结束了。&lt;/p&gt;
-&lt;p&gt;出去查看情况的时候还看到同室开门拿外卖，我都怀疑他没感觉到地震。&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="footnotes" role="doc-endnotes"&gt;
-&lt;hr&gt;
-&lt;ol&gt;
-&lt;li id="fn:1"&gt;
-&lt;p&gt;前情回顾：
-
- &lt;a href="https://www.geedea.pro/weekly/86/#%e5%85%ad%e6%9c%88%e5%8d%81%e5%85%ab%e6%97%a5"&gt;第 86 期周刊&lt;/a&gt;
-
-&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink"&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li id="fn:2"&gt;
-&lt;p&gt;拿铁（Latte）在意大利语里的意思是「牛奶」而不是「牛奶咖啡」，这里的「抹茶拿铁」只是抹茶和牛奶的混合物而已。&amp;#160;&lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink"&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li id="fn:3"&gt;
-&lt;p&gt;饥荒的大象是考拉和大象两种生物的组合，原名是 Koalafant。&amp;#160;&lt;a href="#fnref:3" class="footnote-backref" role="doc-backlink"&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;
-&lt;div style="text-align:right;"&gt;&lt;a href="https://www.geedea.pro/weekly/87/#action-menu"&gt;读完啦？来坐坐吧&lt;/a&gt;&lt;/div&gt;</description></item></channel></rss>
+&lt;div style="text-align:right;"&gt;&lt;a href="https://www.geedea.pro/article/all-human-condition/#action-menu"&gt;读完啦？来坐坐吧&lt;/a&gt;&lt;/div&gt;</description></item></channel></rss>
