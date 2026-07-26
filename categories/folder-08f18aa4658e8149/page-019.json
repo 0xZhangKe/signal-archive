@@ -1,6 +1,28 @@
 {
   "items": [
     {
+      "id": "cf33fde452544f3ba2f82f98",
+      "title": "修复因存在多个内核版本导致的 ABB Agent 安装失败",
+      "summary": "Debian 13 的正式发布意味着 12 进入了 old-stable 的维护阶段，加上 NVIDIA 的 CUDA 从 13.0 开始不再为 Pascal 架构的 GPU 提供支持，我想对于我的 GPU 服务器来说，是时候为它保留一份最终的全盘备份了。",
+      "image": null,
+      "publishedAt": "2025-08-20T14:01:43Z",
+      "sourceId": "06aa2ffd92b9d263",
+      "sourceTitle": "糖菓·部落",
+      "link": "https://candinya.com/posts/fix-abb-agent-install-fail-caused-by-multiple-kernels/",
+      "detailPath": "articles/cf33fde452544f3ba2f82f98.json"
+    },
+    {
+      "id": "8c55179c7c243c6db7b5870c",
+      "title": "2025年8月20日中国防火长城GFW对443端口实施无条件封禁的分析",
+      "summary": "1. 引言 2025 年 8 月 20 日北京时间（UTC+8）约 00:34 至 01:48 间，中国国家防火墙（GFW）出现异常行为：对所有指向 TCP 443 端口的连接无条件注入伪造的 TCP RST+ACK 包，导致连接中断。该事件引发了中国与世界其他地区之间的大规模互联网连通性故障（ 来源1 与 来源2 ）。 本报告记录了我们对这一短暂但广泛的封禁事件的测量与分析。主要发现如下： 无条件的 RST+ACK 注入仅发生在 TCP 443 端口，未见于其他常见端口（如 22、80、8443）。 该无条件注入同时扰乱了出入境中国双方向的连接，但触发机制 不对称 ：从中国境内向境外发起的连接，客户端的 SYN 包与服务器的 SYN+ACK 包各自触发三个 RST+ACK 包；从境外向中国境内发起的连接，只…",
+      "image": null,
+      "publishedAt": "2025-08-20T00:00:00Z",
+      "sourceId": "34d02af866ebd5fa",
+      "sourceTitle": "Great Firewall Report",
+      "link": "https://gfw.report/blog/gfw_unconditional_rst_20250820/zh/",
+      "detailPath": "articles/8c55179c7c243c6db7b5870c.json"
+    },
+    {
       "id": "89fda1b1a63bd44f36b845e8",
       "title": "Analysis of the GFW's Unconditional Port 443 Block on August 20, 2025",
       "summary": "1. Introduction Between approximately 00:34 and 01:48 (Beijing Time, UTC+8) on August 20, 2025, the Great Firewall of China (GFW) exhibited anomalous behavior by unconditionally injecting forged TCP RST+ACK packets to disrupt all connections on TCP port 443. This incident caused massive disruption of the Internet connections between China and the rest of th…",
@@ -637,28 +659,6 @@
       "sourceTitle": "三十里海河",
       "link": "https://ihaihe.cn/3285.htm",
       "detailPath": "articles/9844bdb777c0eb7db7397405.json"
-    },
-    {
-      "id": "1107ccc6fea13adb6f6a2650",
-      "title": "金钱无法撬动的杠杆",
-      "summary": "获得自由或许能证明一个人能力出众，却远不能证明其心怀慈悲。你或许渴望向能人学习，但最让你感念的，永远是那些拥有至深爱心之人。 每个人都渴望健康、自由（通过财富或意识形态）、拥有目标感以及被爱。无人能例外于此。 虽然金钱确实无法直接买来强健的体魄，但现实是它能为你提供实现这一目标的资源。若你体态欠佳，可以聘请私人教练督促你共同踏上健康之旅；若需改善饮食，则有能力购买有机食材和各种营养补剂。金钱能放大自律的成效，但若缺乏自律根基，就如同将巨额数字乘以零——终归徒劳。 自主自由是指你能够随心所欲地做自己想做的事，随时与意中人为伴。本质上，这是对注意力的掌控权，以及你如何分配它的自由。若你拥有足够的财富，就无需将精力耗费在追逐金钱上，这意味着你不必违心为他人工作，或是解决自己不愿面对的问题。这正是金钱能够有效撬动的杠…",
-      "image": null,
-      "publishedAt": "2025-06-13T19:29:31Z",
-      "sourceId": "74bd1a0c7196fd9e",
-      "sourceTitle": "Owen的博客",
-      "link": "https://moretothat.com/the-levers-that-money-cant-pull/",
-      "detailPath": "articles/1107ccc6fea13adb6f6a2650.json"
-    },
-    {
-      "id": "a717dd9ff22273094321a955",
-      "title": "嫉妒是灵魂的毒瘤",
-      "summary": "嫉妒正是当今困扰人类的重大难题之一，且情况正日益恶化。科技进步放大了滋养嫉妒的温床，而社会规范却未能与时俱进地适应这一现实。讨论嫉妒理应像谈论焦虑一样被接纳，尤其因为前者常会助长后者。但我们因惧怕评判而保持缄默，任由其经年累月地啃噬内心。 你会嫉妒那些已经达到你所渴望的状态、但与你差距不大的人。那些与你差距过大的人会成为激励的源泉，而非嫉妒的对象。 (1) 你曾与对手有过共同经历，如今对方却遥遥领先于你。 (2) 对手的成功路径看起来极易复制 (3) 竞争对手与你极为相似。你们兴趣相投、观念相近，但结果却天差地别。 首先，交流是异步的，这意味着对话并非实时进行。人们可以花时间精心组织想说的话，也就是说在对话开始前就已经在自我修饰。而一旦获得编辑的能力，就意味着有机会筛选并决定如何呈现自我形象。这导致每个人都展…",
-      "image": null,
-      "publishedAt": "2025-06-13T19:29:31Z",
-      "sourceId": "74bd1a0c7196fd9e",
-      "sourceTitle": "Owen的博客",
-      "link": "https://moretothat.com/envy/?",
-      "detailPath": "articles/a717dd9ff22273094321a955.json"
     }
   ]
 }
