@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://willem.com/</id>
     <title>Willem L. Middelkoop</title>
-    <updated>2026-03-13T23:00:00.000Z</updated>
+    <updated>2026-04-29T22:00:00.000Z</updated>
     <generator>Lemmid Manager</generator>
     <author>
         <name>Willem L. Middelkoop</name>
@@ -14,6 +14,31 @@
     <subtitle>Thoughts about hacking, developing, technology and other things in life</subtitle>
     <logo>https://willem.com/global/icon.png</logo>
     <icon>https://willem.com/global/icon.png</icon>
+    <entry>
+        <title type="html"><![CDATA[Rapid Iteration in Agentic Loops]]></title>
+        <id>https://willem.com/en/2026-04-30_rapid-iteration-in-agentic-loops/</id>
+        <link href="https://willem.com/en/2026-04-30_rapid-iteration-in-agentic-loops/"/>
+        <link rel="enclosure" href="https://willem.com/global/images/928d81ee723b.webp" type="image/webp"/>
+        <updated>2026-04-29T22:00:00.000Z</updated>
+        <summary type="html"><![CDATA[While working with AI-agents to build things I often iterate through versions of the thing I am building. You try, experiment, fail, improve, and again. In the manual days before AI, I checked results by hand. But what if we teach agents to 'see' themselves?]]></summary>
+        <content type="html"><![CDATA[<p><strong>While working with AI-agents to build things I often iterate through versions of the thing I am building. You try, experiment, fail, improve, and again. In the manual days before AI, I checked results by hand. But what if we teach agents to &#x27;see&#x27; themselves?</strong></p>
+<p>Imagine you add a button somewhere. After writing the code you test drive the new program to see how it looks. Does it align well, does it fit on small screens, does it work? You can easily understand that the more complex software becomes, the more time-consuming this process will be.</p>
+<h2>Let agents see</h2>
+<p>To speed things up I gave <a target="_blank" rel="noopener" href="https://willem.com/en/2026-02-20_agentic-coding-on-a-linux-vps/">the AI agent</a> the ability to rapidly see the work it has created, on different screen sizes and to automatically test for alignment, overflow, legibility (a11y) and consistency. I am leveraging headless browsers and local computer vision (OpenCV) models to do this. I trained the setup by analysing beer bottles, having the agent build a 3D model from a photo. This exercise really improves your understanding of the image &gt; data &gt; AI-context &gt; action flow.</p>
+<figure class="post-fig"><img src="https://willem.com/global/images/7f78504358b2.webp" width="1200" height="1600" alt="The training subject: one beer bottle, photographed against the wall" loading="lazy"><figcaption>The training subject: one beer bottle, photographed against the wall</figcaption></figure>
+<figure class="post-fig"><img src="https://willem.com/global/images/92770c736215.webp" width="1064" height="1600" alt="From photo to 3D: the agent built a photo-textured depth mesh (Depth Anything V2), wireframe and auto-rotate included" loading="lazy"><figcaption>From photo to 3D: the agent built a photo-textured depth mesh (Depth Anything V2), wireframe and auto-rotate included</figcaption></figure>
+<figure class="post-fig"><img src="https://willem.com/global/images/dbd388fde125.webp" width="737" height="1600" alt="The bottle as data: a Navier-Stokes particle simulation flows around its silhouette, live on the phone" loading="lazy"><figcaption>The bottle as data: a Navier-Stokes particle simulation flows around its silhouette, live on the phone</figcaption></figure>
+<figure class="post-fig"><img src="https://willem.com/global/images/85cb24322f0b.webp" width="1600" height="900" alt="The seeing loop in production: the agent downloads, analyses and categorises a customer photo archive" loading="lazy"><figcaption>The seeing loop in production: the agent downloads, analyses and categorises a customer photo archive</figcaption></figure>
+<figure class="post-fig"><img src="https://willem.com/global/images/f3c799fb8e03.webp" width="1260" height="1273" alt="Photo curation complete: 42 photos selected from 200, categorised and captioned in English and Dutch" loading="lazy"><figcaption>Photo curation complete: 42 photos selected from 200, categorised and captioned in English and Dutch</figcaption></figure>
+<figure class="post-fig"><img src="https://willem.com/global/images/e52c192037ee.webp" width="737" height="1600" alt="The result lands in the Lemmid Manager: per-photo captions and labels, ready to publish" loading="lazy"><figcaption>The result lands in the Lemmid Manager: per-photo captions and labels, ready to publish</figcaption></figure>
+<h2>Faster 'loop'</h2>
+<p>By automating the checking of iterative versions, I reduced 80% of the friction during development. In addition to visual checks I also feed the agent log output and automated 'smoke tests'. As a fun experiment I once operated the agentic loop while walking (Dutch: 'loop') on a treadmill. The faster the 'loop', the fitter I become, ha!</p>
+<figure class="post-fig"><img src="https://willem.com/global/images/f197a5e635de.webp" width="1200" height="1600" alt="Operating the agentic loop while walking the loop: Vision Pro on, treadmill running" loading="lazy"><figcaption>Operating the agentic loop while walking the loop: Vision Pro on, treadmill running</figcaption></figure>
+<figure class="post-fig"><img src="https://willem.com/global/images/165c28a0547c.webp" width="1600" height="900" alt="The improvised standing desk, seen through the Vision Pro: keyboard, phone and remote on the display cabinet" loading="lazy"><figcaption>The improvised standing desk, seen through the Vision Pro: keyboard, phone and remote on the display cabinet</figcaption></figure>
+<h2>Conclusion</h2>
+<p>Agentic workflows likely are at their worst right now: things will only improve as computers and models will get faster. But you should not wait for this 'mythical day of frictionlessness': tackle your bottlenecks now! Energy not spent on repetitive tasks can be used elsewhere, where humans can make a real difference!</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[It Observes]]></title>
         <id>https://willem.com/en/2026-03-14_it-observes/</id>
