@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "5116cd9f9aebb31a6cba1e20",
+      "title": "从菲尔兹奖谈「包养」",
+      "summary": "美国当地时间2026年7月23日上午，在费城举办的国际数学家大会上，官方正式公布2026年菲尔兹奖完整获奖名单，北大2007级本科校友王虹、邓煜双双上榜。这是自菲尔兹奖设立近九十年以来，首次有中国籍数学家拿下该奖项 然后网上各国各路反思怪就开始表演了，我也未能免俗，对其中有个议题感兴趣，数学强国，是否要允许养十年冷板凳的学科？ 首先，这个「十年」冷板凳的说法有点误导的。Fields Medal 奖励给40岁以下的人，正是因为数学这玩意出成果可以当庭验证，不用等诺贝尔奖那种从理论刷新实验和工业需要几十年。 王虹：Kakeya 猜想（三维情形）开始于2024–2025年前后，与 Zahl 的工作集中攻克，2025年发表突破性证明（127页论文）。 邓煜：Boltzmann方程 到 流体方程（Hilbert第六问题…",
+      "image": null,
+      "publishedAt": "2026-07-27T06:39:00Z",
+      "sourceId": "a864c53722a17b19",
+      "sourceTitle": "est's blog",
+      "link": "https://blog.est.im/2026/stderr-25",
+      "detailPath": "articles/5116cd9f9aebb31a6cba1e20.json"
+    },
+    {
       "id": "14baaddd7402ef3c2b0e6b93",
       "title": "iosevka字体让中文 ASCII diagram 图表对齐",
       "summary": "对齐前： ┌──────────────┐ ┌──────────────┐ │ 用户请求 │────▶ │ 网关服务 │ │ User Req │ │ Gateway │ └──────┬───────┘ └──────┬───────┘ │ │ ▼ ▼ ┌──────────────┐ ┌──────────────┐ │ 认证服务 │ │ 业务逻辑 │ │ Auth Svc │ │ BizLogic │ └──────────────┘ └──────┬───────┘ │ ▼ ┌──────────────┐ │ 数据存储😆 │ │ Database😂 │ └──────────────┘ 对齐后： @font-face { font-family: \"iosevka\"; src: url(\"http…",
@@ -208,17 +219,6 @@
       "sourceTitle": "est's blog",
       "link": "https://blog.est.im/2026/stdout-19",
       "detailPath": "articles/8f4b9bc89ddfbf3988d79c8f.json"
-    },
-    {
-      "id": "e3aaaf24b47d6b1fc2b565ea",
-      "title": "理解LLM的范式——它就是个差分机？",
-      "summary": "作为一个外行，我一直对“AI”的魔力感到惊奇，我一度以为神经网络一层一层传播，可以看成某种有限步骤的图灵机。AI提醒我不要瞎类比，图灵机左移右移是离散，确定的逻辑，神经网络是fp32上连续的概率映射。 后来稍微深入了解了一下，认识到对于一个深度固定的 Transformer 模型（比如 96 层的 GPT-4），它的单次前向传播算是一个深度固定的有向无环图（DAG）。所谓的 predict next token，可以粗糙理解成 next_token = eval(model_weights, history+input) 这里最奇特的算是：自回归（Autoregression）。传统的冯·诺依曼架构中，指令（Code）和数据（Data）是分开的。但在 LLM 中，上下文是动态的指令+数据。输出什么样话，什么时…",
-      "image": null,
-      "publishedAt": "2026-05-25T03:57:00Z",
-      "sourceId": "a864c53722a17b19",
-      "sourceTitle": "est's blog",
-      "link": "https://blog.est.im/2026/stderr-20",
-      "detailPath": "articles/e3aaaf24b47d6b1fc2b565ea.json"
     }
   ]
 }

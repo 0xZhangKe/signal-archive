@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "669feb61def77112fb960f21",
+      "title": "人到中年，加入乐团一周年",
+      "summary": "",
+      "image": null,
+      "publishedAt": "2024-12-03T23:05:21Z",
+      "sourceId": "6e847964818dca55",
+      "sourceTitle": "余晟以为",
+      "link": "https://mp.weixin.qq.com/s/Luzk_DguA7aFLwMyt8r6FQ",
+      "detailPath": "articles/669feb61def77112fb960f21.json"
+    },
+    {
       "id": "8c7327da1d93acdc7e99e438",
       "title": "尹锡悦「紧急谈话」汉谚混写全文",
       "summary": "by 新世界的大门",
@@ -648,17 +659,6 @@
       "sourceTitle": "新世界的大门",
       "link": "https://blog.xinshijiededa.men/weekly/0x08/",
       "detailPath": "articles/8864a2070866737f3e9a33fc.json"
-    },
-    {
-      "id": "1f14ee758141b8c9bc3b8a37",
-      "title": "CKB RBF 设计和实现",
-      "summary": "CKB 相关技术文章第二篇。 Replace by fee 问题 如果一个交易成功发送到交易池，但可能出现因为费用较低而一直得不到处理。之前 CKB 没有其他措施来处理这种情况。 例如 Dotbit 4 位域名注册拥堵 这个事故发生过程中， CKB 的应用方无法使用任何方式来尽快让自己的交易被打包，这就是引入 Replace-by-fee（RBF) 的原因，我们需要一个机制来提高已经在交易池里交易的费用，替换掉旧的交易，让新的交易尽快被打包。 在新的 multi_index_map 重构后，交易在 pending 阶段也会按照交易的 score 来优先处理 (通常费用高的交易 score 也会高)，这会避免高费用的交易被阻塞住，所以理论上述需要手动提高费用的情况会减少，但我们还是需要 RBF 来手动提高交易的…",
-      "image": "http://catcoding.me/images/ob_pasted-image-20241031103004.png",
-      "publishedAt": "2024-11-06T11:55:13Z",
-      "sourceId": "82c4bcb6bba028cf",
-      "sourceTitle": "程序员的喵",
-      "link": "http://catcoding.me/p/ckb-rbf/",
-      "detailPath": "articles/1f14ee758141b8c9bc3b8a37.json"
     }
   ]
 }
