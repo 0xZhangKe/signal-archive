@@ -1,0 +1,11 @@
+{
+  "id": "693a16a4e0f70081eaef3552",
+  "title": "Ubuntu 26.04 安装 rime/中州韵输入法",
+  "summary": "此前写过 ubuntu 24.04 安装rime输入法的教程，使用系统默认的ibus。而 ubuntu 26.04已经全面转向Wayland，进而系统的ibus的可用性也没有fcitx好用，于是...",
+  "content": "<p><a href=\"https://pa.ci/385.html\" target=\"_blank\" rel=\"noopener noreferrer\">此前写过 ubuntu 24.04 安装rime输入法的教程</a>，使用系统默认的ibus。而 ubuntu 26.04已经全面转向Wayland，进而系统的ibus的可用性也没有fcitx好用，于是更新一下。</p><h2>装框架和拼音</h2><p>sudo apt install fcitx5 fcitx5-chinese-addons # 前者是输入法框架，后者是拼音输入和词库；至此已经可以使用中文输入了</p><h2>装Rime引擎</h2><p>sudo apt install fcitx5-rime # 安装rime，使用rime输入法</p><h2>编辑配置文件</h2><p>使用root权限编辑<code>/etc/environment</code>，添加以下内容，以便输入场景都可以调用Fcitx5输入法</p><pre><code>XMODIFIERS=@im=fcitx\nQT_IM_MODULE=fcitx</code></pre><h2>安装扩展管理器和对应的插件</h2><pre><code>sudo apt update\nsudo apt install gnome-shell-extension-manager</code></pre><p>安装完成后打开，搜索<code>Input Method Panel</code>并安装，完成后如图所示：</p><p><img src=\"https://pa.ci/usr/uploads/2026/07/2745422641.png\" alt=\"input-method-panel.png\" title=\"input-method-panel.png\"></p><h2>系统设置</h2><p>在<code>语言支持</code>中，将键盘输入法系统选为fcitx5，实现默认。</p><p><img src=\"https://pa.ci/usr/uploads/2026/07/2828111130.png\" alt=\"fcitx.png\" title=\"fcitx.png\"></p><p>再次开机后将看到图示，如果不存在，可以手动点击选择启用即可。<br><img src=\"https://pa.ci/usr/uploads/2026/07/3111810318.png\" alt=\"input.png\" title=\"input.png\"></p>",
+  "image": "https://pa.ci/usr/uploads/2026/07/2745422641.png",
+  "publishedAt": "2026-07-28T05:37:00Z",
+  "sourceId": "d87239607d14c88c",
+  "sourceTitle": "怕刺",
+  "link": "https://pa.ci/452.html"
+}

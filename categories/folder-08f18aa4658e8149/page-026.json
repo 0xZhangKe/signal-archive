@@ -1,6 +1,39 @@
 {
   "items": [
     {
+      "id": "47e5d4b5f49eb2fd1027c803",
+      "title": "Mangemangeroa Reserve",
+      "summary": "这名字真够长的。我一般简称它为奥克兰东区知名步道。是一段有树荫的步道，夏天走的人很多，因为不晒。",
+      "image": "https://photoghenry.wordpress.com/wp-content/uploads/2024/11/image-106.png",
+      "publishedAt": "2024-11-08T08:42:13Z",
+      "sourceId": "a64fac5b0b6a1cd4",
+      "sourceTitle": "摄影流水账",
+      "link": "https://photoghenry.wordpress.com/2024/11/08/mangemangeroa-reserve/",
+      "detailPath": "articles/47e5d4b5f49eb2fd1027c803.json"
+    },
+    {
+      "id": "c5837f25696110828ca2083f",
+      "title": "CKB new script verification with VM pause",
+      "summary": "CKB 相关技术文章第三篇。 背景 CKB 的每一个交易在提交到交易池之前都会经过一个 script verification 的过程，本质上就是通过 CKB-VM 把交易里的 script 跑一遍，如果失败了则直接 reject，如果通过了才会继续后面的流程。 这里的 script 就是一种可以在链上执行的二进制可执行文件，也可以称之为 CKB 上的合约。它是图灵完备的，我们通常可以通过 C、Rust 来实现这些 script，比如 nervosnetwork/ckb-system-scripts 就是 CKB 上的一些常用的系统合约。用户在发起交易的时候就设置好相关的 script，比如 lock script 是用来作为资产才所有权的鉴定，而 type script 通常用来定义 cell 转换的条件，…",
+      "image": "http://catcoding.me/images/ob_what-is-verification.png",
+      "publishedAt": "2024-11-07T12:03:24Z",
+      "sourceId": "82c4bcb6bba028cf",
+      "sourceTitle": "程序员的喵",
+      "link": "http://catcoding.me/p/ckb-new-verify/",
+      "detailPath": "articles/c5837f25696110828ca2083f.json"
+    },
+    {
+      "id": "d26ca9e2eaf209a6481eef64",
+      "title": "Self-changing Data Type - CVE-2024-40676 漏洞分析",
+      "summary": "今年 10 月份的时候，Android 安全公告用 CVE-2024-40676 的编号公布了一个很奇怪的 patch 。 AccountManagerService checkKeyIntent() 负责检查 account authenticator 传回的 intent，确保它安全再传回给 caller，防止 launch anywhere 漏洞。这个补丁看起来很暴力也很奇怪，直接 ban 了所有带有 content URI 的 intent，似乎完全不考虑兼容性。是什么样的漏洞才要上如此暴力的修复方法？ 注：如下全是我的猜测，由于联系不到漏洞作者本人，无法确认这是否就是原本的问题。",
+      "image": null,
+      "publishedAt": "2024-11-07T02:00:00Z",
+      "sourceId": "511f3e9d589e2612",
+      "sourceTitle": "残页的小博客",
+      "link": "https://blog.canyie.top/2024/11/07/self-changing-data-type/",
+      "detailPath": "articles/d26ca9e2eaf209a6481eef64.json"
+    },
+    {
       "id": "8864a2070866737f3e9a33fc",
       "title": "自新世界 #0x08：明察秋毫",
       "summary": "目光敏锐，可以看见秋天猫猫身上新长的毫毛",
@@ -626,39 +659,6 @@
       "sourceTitle": "余晟以为",
       "link": "https://mp.weixin.qq.com/s/vjYjovKPYLAPopuUxpTwcw",
       "detailPath": "articles/153bc143eb85187f542e4030.json"
-    },
-    {
-      "id": "e59e9872354e13095e04ad11",
-      "title": "一言“蔽”之",
-      "summary": "蔽，‌原意为遮蔽，‌引申为概括。‌这里我想暂时抛开引申义的“概括”，就单单使用遮蔽、蒙蔽之义来解释该词，并由此 […]",
-      "image": "https://i0.wp.com/cyrus19.cc/wp-content/uploads/2024/09/IMG_5195.jpeg?resize=1080%2C1809&ssl=1",
-      "publishedAt": "2024-09-02T08:58:38Z",
-      "sourceId": "3c6ccf75c8f41329",
-      "sourceTitle": "CC的数字花园",
-      "link": "https://cyrus19.cc/archives/1084",
-      "detailPath": "articles/e59e9872354e13095e04ad11.json"
-    },
-    {
-      "id": "00f5d3c2972fa7e7d9324a78",
-      "title": "我目前使用的AI服务",
-      "summary": "",
-      "image": null,
-      "publishedAt": "2024-09-02T07:29:13Z",
-      "sourceId": "f6c280e30d8989ed",
-      "sourceTitle": "可可托海没有海",
-      "link": "https://mp.weixin.qq.com/s/AnhyfbXtiq11rM5XQbQwXQ",
-      "detailPath": "articles/00f5d3c2972fa7e7d9324a78.json"
-    },
-    {
-      "id": "5e9f1bae3ec3792e258955ee",
-      "title": "在家造个数据中心",
-      "summary": "作为一个追求极致的垃圾佬，总有一天会发现设备多到不再能简单地水平堆放，而是需要使用带有垂直空间的排布以控制占地面积。 通常情况下，对于深度不大的设备可以使用类似货架的设施来叠放；而对于大多为面向机架场景的设计而言，准备一个标准尺寸下的机柜就成了一种更为合适的选择。 既然要做，那就努力做到最好。我咨询了几位参与过数据中心建设的朋友，在他们的帮助下共同设计并完成了这次的工程。因而将相关的内容整理如下，方便可能有需要的朋友们的参考。 但需要注意的是，这里描述的仅为 家居环境下 的工程建设（整活），即最终还是以家居的功能为主。如果您有严肃的数据中心建设相关的工程，请咨询相关的专业人士。",
-      "image": null,
-      "publishedAt": "2024-09-01T09:29:30Z",
-      "sourceId": "06aa2ffd92b9d263",
-      "sourceTitle": "糖菓·部落",
-      "link": "https://candinya.com/posts/build-a-datacenter-at-home/",
-      "detailPath": "articles/5e9f1bae3ec3792e258955ee.json"
     }
   ]
 }
