@@ -11,8 +11,25 @@ xmlns:wfw="http://wellformedweb.org/CommentAPI/">
 <atom:link href="https://pa.ci/feed/" rel="self" type="application/rss+xml" />
 <language>zh-CN</language>
 <description>你好，陌生人。</description>
-<lastBuildDate>Wed, 08 Apr 2026 06:43:57 +0000</lastBuildDate>
-<pubDate>Wed, 08 Apr 2026 06:43:57 +0000</pubDate>
+<lastBuildDate>Tue, 28 Jul 2026 05:37:00 +0000</lastBuildDate>
+<pubDate>Tue, 28 Jul 2026 05:37:00 +0000</pubDate>
+<item>
+<title>Ubuntu 26.04 安装 rime/中州韵输入法</title>
+<link>https://pa.ci/452.html</link>
+<guid>https://pa.ci/452.html</guid>
+<pubDate>Tue, 28 Jul 2026 05:37:00 +0000</pubDate>
+<dc:creator>怕刺</dc:creator>
+<category><![CDATA[技术]]></category>
+<description><![CDATA[此前写过 ubuntu 24.04 安装rime输入法的教程，使用系统默认的ibus。而 ubuntu 26.04已经全面转向Wayland，进而系统的ibus的可用性也没有fcitx好用，于是...]]></description>
+<content:encoded xml:lang="zh-CN"><![CDATA[
+<p><a href="https://pa.ci/385.html">此前写过 ubuntu 24.04 安装rime输入法的教程</a>，使用系统默认的ibus。而 ubuntu 26.04已经全面转向Wayland，进而系统的ibus的可用性也没有fcitx好用，于是更新一下。</p><h2>装框架和拼音</h2><p>sudo apt install fcitx5 fcitx5-chinese-addons # 前者是输入法框架，后者是拼音输入和词库；至此已经可以使用中文输入了</p><h2>装Rime引擎</h2><p>sudo apt install fcitx5-rime # 安装rime，使用rime输入法</p><h2>编辑配置文件</h2><p>使用root权限编辑<code>/etc/environment</code>，添加以下内容，以便输入场景都可以调用Fcitx5输入法</p><pre><code>XMODIFIERS=@im=fcitx
+QT_IM_MODULE=fcitx</code></pre><h2>安装扩展管理器和对应的插件</h2><pre><code>sudo apt update
+sudo apt install gnome-shell-extension-manager</code></pre><p>安装完成后打开，搜索<code>Input Method Panel</code>并安装，完成后如图所示：</p><p><img src="https://pa.ci/usr/uploads/2026/07/2745422641.png" alt="input-method-panel.png" title="input-method-panel.png"></p><h2>系统设置</h2><p>在<code>语言支持</code>中，将键盘输入法系统选为fcitx5，实现默认。</p><p><img src="https://pa.ci/usr/uploads/2026/07/2828111130.png" alt="fcitx.png" title="fcitx.png"></p><p>再次开机后将看到图示，如果不存在，可以手动点击选择启用即可。<br><img src="https://pa.ci/usr/uploads/2026/07/3111810318.png" alt="input.png" title="input.png"></p>
+]]></content:encoded>
+<slash:comments>0</slash:comments>
+<comments>https://pa.ci/452.html#comments</comments>
+<wfw:commentRss>https://pa.ci/feed/452.html</wfw:commentRss>
+</item>
 <item>
 <title>OpenWrt代理下split-horizon DNS导致的DNS分流失效</title>
 <link>https://pa.ci/448.html</link>
@@ -363,32 +380,6 @@ DISM /Online /Cleanup-Image /AnalyzeComponentStore</code></pre><hr><p>以下内�
 <slash:comments>0</slash:comments>
 <comments>https://pa.ci/437.html#comments</comments>
 <wfw:commentRss>https://pa.ci/feed/437.html</wfw:commentRss>
-</item>
-<item>
-<title>多GitHub并存在git提交方式</title>
-<link>https://pa.ci/436.html</link>
-<guid>https://pa.ci/436.html</guid>
-<pubDate>Sun, 12 Oct 2025 02:02:00 +0000</pubDate>
-<dc:creator>怕刺</dc:creator>
-<category><![CDATA[技术]]></category>
-<description><![CDATA[日常使用VSCode，并且有多个GitHub账号。希望不在VSCode中用特定GitHub账号登录的情况下正常推送代码。最可靠且稳定的方法是使用 SSH Key（每个账号独立）或 HTTPS+P...]]></description>
-<content:encoded xml:lang="zh-CN"><![CDATA[
-<p>日常使用VSCode，并且有多个GitHub账号。希望不在VSCode中用特定GitHub账号登录的情况下正常推送代码。最可靠且稳定的方法是使用 SSH Key（每个账号独立）或 HTTPS+PAT（个人访问令牌）。推荐使用 SSH Key方式。</p><h3>为每个 GitHub 账号生成独立 SSH Key，并用 SSH Host 别名绑定到仓库</h3><ul><li><p>生成 Key（示例为 work 账号）：</p><pre><code>ssh-keygen -t ed25519 -C &quot;you@work.com&quot; -f ~/.ssh/id_ed25519_work
-eval &quot;$(ssh-agent -s)&quot;
-ssh-add ~/.ssh/id_ed25519_work</code></pre></li><li>把 ~/.ssh/id_ed25519_work.pub 的内容复制到对应 GitHub 账号的 Settings → SSH and GPG keys。</li><li><p>在 ~/.ssh/config 添加 Host 别名：</p><pre><code>Host github-work
-  HostName github.com
-  User git
-  IdentityFile ~/.ssh/id_ed25519_work
-  IdentitiesOnly yes</code></pre></li><li><p>在本地 repo 使用别名作为 remote，注意改成实际的<code>work-username/repo</code>，某些情况下，<code>set-url origin</code>可能需要改成<code>add origin</code></p><pre><code>cd /path/to/program
-git remote add origin git@github-work:work-username.git
-# 或者
-git remote set-url origin git@github-work:work-username/repo.git</code></pre></li><li><p>测试连接：</p><pre><code>ssh -T git@github-work
-git remote -v # 检查远端状态</code></pre></li><li><p>设置本仓库的提交作者（只影响 commit 作者信息）：</p><pre><code>git config user.name &quot;Work Name&quot;
-git config user.email &quot;you@work.com&quot;</code></pre></li></ul><p>此时在 VSCode 中不需要登录对应 GitHub 账户，VSCode 会使用系统的 SSH key 进行 push/pull。</p>
-]]></content:encoded>
-<slash:comments>2</slash:comments>
-<comments>https://pa.ci/436.html#comments</comments>
-<wfw:commentRss>https://pa.ci/feed/436.html</wfw:commentRss>
 </item>
 </channel>
 </rss>
