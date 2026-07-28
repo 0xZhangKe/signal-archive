@@ -1,5 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-07-26T19:30:54+00:00</updated><author><name>Simon Willison</name></author><entry><title>An Inside Look at the Relay Market Powering Token Resellers and Fraud</title><link href="https://simonwillison.net/2026/Jul/26/relay-market/#atom-everything" rel="alternate"/><published>2026-07-26T19:30:54+00:00</published><updated>2026-07-26T19:30:54+00:00</updated><id>https://simonwillison.net/2026/Jul/26/relay-market/#atom-everything</id><summary type="html">
+<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-07-27T23:39:04+00:00</updated><author><name>Simon Willison</name></author><entry><title>moonshotai/Kimi-K3</title><link href="https://simonwillison.net/2026/Jul/27/kimi-k3/#atom-everything" rel="alternate"/><published>2026-07-27T23:39:04+00:00</published><updated>2026-07-27T23:39:04+00:00</updated><id>https://simonwillison.net/2026/Jul/27/kimi-k3/#atom-everything</id><summary type="html">
+    
+&lt;p&gt;&lt;strong&gt;&lt;a href="https://huggingface.co/moonshotai/Kimi-K3"&gt;moonshotai/Kimi-K3&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+As promised &lt;a href="https://simonwillison.net/2026/Jul/16/kimi-k3/"&gt;earlier this month&lt;/a&gt;, Moonshot have released the weights for their excellent 2.8 trillion parameter Kimi K3. They're a hefty 1.56TB on Hugging Face.&lt;/p&gt;
+&lt;p&gt;Kimi introduced their own janky &lt;a href="https://huggingface.co/moonshotai/Kimi-K2-Instruct/blob/main/LICENSE"&gt;modified version of the MIT license&lt;/a&gt; with K2 back in July 2025. That license just added this paragraph requiring attribution beyond a certain size of commercial entity:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Our only modification part is that, if the Software (or any derivative works thereof) is used for any of your commercial products or services that have more than 100 million monthly active users, or more than 20 million US dollars (or equivalent in other currencies) in monthly revenue, you shall prominently display "Kimi K2" on the user interface of such product or service.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The &lt;a href="https://huggingface.co/moonshotai/Kimi-K3/blob/main/LICENSE"&gt;K3 license&lt;/a&gt; no longer calls itself "modified MIT" and goes further, requiring a separate agreement with Moonshot for large "Model as a Service" businesses:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;If the Licensee or any of its affiliates operates a Model as a Service business, and the aggregate revenue of the Licensee and its affiliates exceeds 20 million US dollars (or the equivalent in other currencies) in total over any consecutive 12 months, the Licensee must enter into a separate agreement with Moonshot AI before using the Software or its derivative works for any commercial purpose.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;To Kimi's credit, they make no attempt to describe this as an "open source" license in their own materials, consistently using the term "open weight" in its place.&lt;/p&gt;
+&lt;p&gt;OpenRouter is already offering K3 &lt;a href="https://openrouter.ai/moonshotai/kimi-k3"&gt;from 7 providers&lt;/a&gt;, most of which are at the same $3/million input and $15/million output as Moonshot AI themselves.
+
+
+    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llm-pricing"&gt;llm-pricing&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llm-release"&gt;llm-release&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai-in-china"&gt;ai-in-china&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/moonshot"&gt;moonshot&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/kimi"&gt;kimi&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/janky-licenses"&gt;janky-licenses&lt;/a&gt;&lt;/p&gt;
+
+
+
+</summary><category term="ai"/><category term="generative-ai"/><category term="llms"/><category term="llm-pricing"/><category term="llm-release"/><category term="ai-in-china"/><category term="moonshot"/><category term="kimi"/><category term="janky-licenses"/></entry><entry><title>An opinionated guide to which AI to use to do stuff</title><link href="https://simonwillison.net/2026/Jul/27/an-opinionated-guide-to-which-ai-to-use-to-do-stuff/#atom-everything" rel="alternate"/><published>2026-07-27T21:55:53+00:00</published><updated>2026-07-27T21:55:53+00:00</updated><id>https://simonwillison.net/2026/Jul/27/an-opinionated-guide-to-which-ai-to-use-to-do-stuff/#atom-everything</id><summary type="html">
+    
+&lt;p&gt;&lt;strong&gt;&lt;a href="https://www.oneusefulthing.org/p/an-opinionated-guide-to-which-ai-b22"&gt;An opinionated guide to which AI to use to do stuff&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+It's interesting watching the evolution of Ethan Mollick's guide over time. &lt;/p&gt;
+&lt;p&gt;&lt;a href="https://www.oneusefulthing.org/p/using-ai-right-now-a-quick-guide"&gt;A year ago&lt;/a&gt; it was still all about chat - ChatGPT, Claude, Gemini - with o3, Claude 4 Opus, and Gemini 2.5 Pro as the models and Deep Research as a useful alternative mode.&lt;/p&gt;
+&lt;p&gt;Today it's much more about agentic systems - "where the AI is capable of doing the equivalent of many hours of real human work in one go".&lt;/p&gt;
+&lt;p&gt;Gemini has fallen off Ethan's list, since Google still doesn’t have an established entry in the Codex/ChatGPT Work/Cowork category. &lt;a href="https://gemini.google/overview/agent/spark/"&gt;Gemini Spark&lt;/a&gt; has yet to prove itself!&lt;/p&gt;
+&lt;p&gt;Ethan offers a useful explanation of the ways you can give ChatGPT or Claude a computer to use:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;To use the computers provided by the AI companies, the mode you want is called ChatGPT Work in ChatGPT, and Cowork in Claude (the naming will not get less confusing, I am sorry to say). [...]&lt;/p&gt;
+&lt;p&gt;The most powerful way to use AI is to give it access to your computer. You do that by downloading the ChatGPT or Claude apps and picking a mode to use. ChatGPT's two agent modes are Work and Codex; Claude's are Cowork and Code. The names do not map onto each other in any way that will help you remember them. And yes, these use the same names as the Work and Cowork modes we discussed above, but operate differently, and have more features and capabilities because they can access your computer.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I think the difference between ChatGPT Work on a mobile device and ChatGPT Work inside the desktop app (where it's effectively a less intimidating skin on top of Codex) is spectacularly unintuitive.&lt;/p&gt;
+&lt;p&gt;Short version: if you flip ChatGPT mobile from "Chat" to "Work" mode you get a version where its Code Interpreter container is no longer restricted from accessing the internet!
+
+
+    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ethan-mollick"&gt;ethan-mollick&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/code-interpreter"&gt;code-interpreter&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/general-agents"&gt;general-agents&lt;/a&gt;&lt;/p&gt;
+
+
+
+</summary><category term="ai"/><category term="generative-ai"/><category term="llms"/><category term="ethan-mollick"/><category term="code-interpreter"/><category term="general-agents"/></entry><entry><title>An Inside Look at the Relay Market Powering Token Resellers and Fraud</title><link href="https://simonwillison.net/2026/Jul/26/relay-market/#atom-everything" rel="alternate"/><published>2026-07-26T19:30:54+00:00</published><updated>2026-07-26T19:30:54+00:00</updated><id>https://simonwillison.net/2026/Jul/26/relay-market/#atom-everything</id><summary type="html">
     
 &lt;p&gt;&lt;strong&gt;&lt;a href="https://vectoral.com/blog/token-relay-market"&gt;An Inside Look at the Relay Market Powering Token Resellers and Fraud&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 Fascinating investigation by Matt Lenhard into the market that has grown up around reselling LLM tokens at a discount by pooling API keys from various sources.&lt;/p&gt;
@@ -855,28 +895,4 @@ Mira Murati's Thinking Machines Lab just released their first open-weights model
 
 
 
-</summary><category term="ai"/><category term="generative-ai"/><category term="llms"/><category term="training-data"/><category term="pelican-riding-a-bicycle"/><category term="llm-release"/></entry><entry><title>Mermaid to ASCII art (mermaid-ascii)</title><link href="https://simonwillison.net/2026/Jul/16/mermaid-ascii/#atom-everything" rel="alternate"/><published>2026-07-16T14:57:39+00:00</published><updated>2026-07-16T14:57:39+00:00</updated><id>https://simonwillison.net/2026/Jul/16/mermaid-ascii/#atom-everything</id><summary type="html">
-    
-        &lt;p&gt;&lt;strong&gt;Tool:&lt;/strong&gt; &lt;a href="https://tools.simonwillison.net/mermaid-ascii"&gt;Mermaid to ASCII art (mermaid-ascii)&lt;/a&gt;&lt;/p&gt;
-        &lt;p&gt;After building the &lt;a href="https://simonwillison.net/2026/Jul/16/grok-mermaid/"&gt;Mermaid to ASCII tool based on Grok Build's Rust code&lt;/a&gt; I learned that there's an older, more fully-featured Go library called &lt;a href="https://github.com/AlexanderGrooff/mermaid-ascii"&gt;AlexanderGrooff/mermaid-ascii&lt;/a&gt; that implements a similar pattern, so I had Claude Fable 5 compile that one to WebAssembly as well so I could compare the two.&lt;/p&gt;
-&lt;p&gt;This one includes support for colors!&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Screenshot of a Mermaid diagram editor web app. A row of tab buttons reads: Flowchart, Multiple links, Subgraphs, Multi-line labels, Colors (selected, highlighted blue), Sequence, Alt fragment, Loop + note, Parallel. Below is a text input area containing: &amp;quot;graph LR / Build:::good --&amp;gt; Test:::good / Test --&amp;gt; Deploy:::warn / Deploy --&amp;gt; Rollback:::bad / classDef good color:#3fb950 / classDef warn color:#e3b341 / classDef bad color:#ff7b72&amp;quot;. A control row shows an unchecked &amp;quot;ASCII only&amp;quot; checkbox, &amp;quot;Padding X: 5&amp;quot;, &amp;quot;Padding Y: 5&amp;quot;, &amp;quot;Box padding: 1&amp;quot;, and buttons &amp;quot;Copy as text&amp;quot; and &amp;quot;Copy link to this diagram&amp;quot;. At the bottom on a black background is the rendered left-to-right flowchart with four connected boxes: &amp;quot;Build&amp;quot; (green text), &amp;quot;Test&amp;quot; (green text), &amp;quot;Deploy&amp;quot; (yellow text), &amp;quot;Rollback&amp;quot; (red text), each linked by arrows." src="https://static.simonwillison.net/static/2026/mermaid-ascii.webp" /&gt;&lt;/p&gt;
-    
-    
-        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/go"&gt;go&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/tools"&gt;tools&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/webassembly"&gt;webassembly&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/mermaid"&gt;mermaid&lt;/a&gt;&lt;/p&gt;
-    
-
-</summary><category term="go"/><category term="tools"/><category term="webassembly"/><category term="mermaid"/></entry><entry><title>Quoting Linus Torvalds</title><link href="https://simonwillison.net/2026/Jul/16/linus-torvalds/#atom-everything" rel="alternate"/><published>2026-07-16T13:26:10+00:00</published><updated>2026-07-16T13:26:10+00:00</updated><id>https://simonwillison.net/2026/Jul/16/linus-torvalds/#atom-everything</id><summary type="html">
-    &lt;blockquote cite="https://lore.kernel.org/linux-media/CAHk-=wi4zC+Ze8e+p3tMv8TtG_80KzsZ1syL9anBtmEh5Z40vg@mail.gmail.com/"&gt;&lt;p&gt;I realize that some people really dislike AI, but this is an area where I'm willing to absolutely put my foot down as the top-level maintainer.&lt;/p&gt;
-&lt;p&gt;Linux is not one of those anti-AI projects, and if somebody has issues with that, they can do the open-source thing and fork it.&lt;/p&gt;
-&lt;p&gt;Or just walk away.&lt;/p&gt;
-&lt;p&gt;AI is a tool, just like other tools we use.  And it's clearly a useful one.&lt;/p&gt;
-&lt;p&gt;It may not have been that "clearly" even just a year ago, but it's no longer in question today.&lt;/p&gt;
-&lt;p&gt;There are other questions around AI (like what the economy of it will actually look like in the end), but "is it useful" is no longer one of those questions. Anybody who doubts that clearly hasn't actually used it.&lt;/p&gt;&lt;/blockquote&gt;
-&lt;p class="cite"&gt;&amp;mdash; &lt;a href="https://lore.kernel.org/linux-media/CAHk-=wi4zC+Ze8e+p3tMv8TtG_80KzsZ1syL9anBtmEh5Z40vg@mail.gmail.com/"&gt;Linus Torvalds&lt;/a&gt;, Linux Media Mailing List&lt;/p&gt;
-
-    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/open-source"&gt;open-source&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/linus-torvalds"&gt;linus-torvalds&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/linux"&gt;linux&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;&lt;/p&gt;
-
-
-
-</summary><category term="open-source"/><category term="linus-torvalds"/><category term="linux"/><category term="generative-ai"/><category term="ai"/><category term="llms"/></entry></feed>
+</summary><category term="ai"/><category term="generative-ai"/><category term="llms"/><category term="training-data"/><category term="pelican-riding-a-bicycle"/><category term="llm-release"/></entry></feed>
