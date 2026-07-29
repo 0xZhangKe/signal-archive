@@ -12,7 +12,7 @@
 	<atom:link href="https://blog.jetbrains.com/kotlin/feed/" rel="self" type="application/rss+xml" />
 	<link>https://blog.jetbrains.com</link>
 	<description>Developer Tools for Professionals and Teams</description>
-	<lastBuildDate>Tue, 28 Jul 2026 07:50:44 +0000</lastBuildDate>
+	<lastBuildDate>Wed, 29 Jul 2026 11:28:25 +0000</lastBuildDate>
 	<language>en-US</language>
 	<sy:updatePeriod>
 	hourly	</sy:updatePeriod>
@@ -28,6 +28,655 @@
 	<height>32</height>
 </image> 
 	<item>
+		<title>Secure Your APIs: OAuth2 and JWT for Beginners</title>
+		<link>https://blog.jetbrains.com/kotlin/2026/07/secure-your-apis-oauth2-and-jwt-for-beginners/</link>
+		
+		<dc:creator><![CDATA[Alina Dolgikh]]></dc:creator>
+		<pubDate>Wed, 29 Jul 2026 11:28:21 +0000</pubDate>
+		<featuredImage>https://blog.jetbrains.com/wp-content/uploads/2026/04/KT-social-BlogFeatured-1280x720-1-6.png</featuredImage>		<category><![CDATA[backend]]></category>
+		<category><![CDATA[news]]></category>
+		<category><![CDATA[tutorials]]></category>
+		<category><![CDATA[architecture]]></category>
+		<category><![CDATA[kotlin]]></category>
+		<category><![CDATA[spring]]></category>
+		<category><![CDATA[tutorial]]></category>
+		<guid isPermaLink="false">https://blog.jetbrains.com/?post_type=kotlin&#038;p=721798</guid>
+
+					<description><![CDATA[This tutorial was written by an external contributor. APIs are frequent targets for bad actors since they expose data and functionality. Securing them while maintaining usability is often one of the most challenging and time-consuming parts of API development. OAuth 2.0 and JSON Web Tokens (JWT) help make these processes more manageable and reliable. They [&#8230;]]]></description>
+										<content:encoded><![CDATA[
+<p><em>This tutorial was written by an external contributor.</em></p>
+
+
+    <div class="about-author ">
+        <div class="about-author__box">
+            <div class="row">
+                                                            <div class="about-author__box-img">
+                            <img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/04/Mdu-Sibisi.webp" alt="Mdu Sibisi" loading="lazy">
+                        </div>
+                                        <div class="about-author__box-text">
+                                                    <h4>Mdu Sibisi</h4>
+                                                <p data-start="74" data-end="526">Mdu Sibisi is an Oracle-certified software developer and blogger with over ten years of experience working primarily with object-oriented languages. He has been writing about technology for more than eight years, focusing on making complex topics easier to understand. Mdu is passionate about accessible developer education, clean code, and creating content that helps developers learn and grow.</p>
+<p><a href="https://www.technewstoday.com/author/mduduzi/" target="_blank" rel="noopener">Website</a> | <a href="https://x.com/Old_Recluse" target="_blank" rel="noopener">Twitter</a></p>
+                    </div>
+                            </div>
+        </div>
+    </div>
+
+
+            <div class="newsletter">
+                                                            <article class="newsletter__post">
+                                                                                    <img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" class="newsletter__post-img" src="https://blog.jetbrains.com/wp-content/uploads/2026/04/github-repository.webp" alt="">
+                                                                            <div class="newsletter__post-text">
+                                                            <h3>Repository with the companion code for the tutorial</h3>
+                                                                                                                    <a href="https://kotl.in/6uptzh" class="btn" target="_blank" rel="noopener">Go to GitHub</a>
+                                                    </div>
+                    </article>
+                                    </div>
+    
+
+
+<p>APIs are frequent targets for bad actors since they expose data and functionality. Securing them while maintaining usability is often one of the most challenging and time-consuming parts of API development.<a href="https://oauth.net/2/" target="_blank" rel="noreferrer noopener"> OAuth 2.0</a> and<a href="https://jwt.io/" target="_blank" rel="noreferrer noopener"> JSON Web Tokens</a> (JWT) help make these processes more manageable and reliable. They allow developers to represent and verify identity and manage access by safely transmitting claims and enabling delegated authorization.</p>
+
+
+
+<p>This article discusses these technologies and the most efficient ways you can use them to secure your Spring Boot-built APIs and backends. If you&#8217;re interested in a coroutine‑driven solution, a companion tutorial using <a href="https://ktor.io/" target="_blank" rel="noreferrer noopener">Ktor</a> is also planned and will be published soon.</p>
+
+
+
+<h2 class="wp-block-heading">OAuth2 and JWT Primer</h2>
+
+
+
+<p>OAuth2 and JWT(s) aren&#8217;t competing technologies. They&#8217;re complementary pieces of the puzzle, with one handling the delegation of authorization and the other serving as the compact, verifiable token format that carries secure information.</p>
+
+
+
+<h3 class="wp-block-heading">Authentication vs. Authorization</h3>
+
+
+
+<p>Authentication verifies identity (who you are), usually through credentials like passwords, tokens, or certificates. JWTs can carry identity information and act like a form of ID once issued. Roles and other claims within a JWT are then used for authorization.</p>
+
+
+
+<p>Authorization helps control what a user has access to (what they can do). This includes the scopes or resources that they can &#8220;touch&#8221; and how those permissions are managed. In a system that uses OAuth2 and JWT, the access badge is bundled into your ID card. OAuth2 oversees and manages this process.</p>
+
+
+
+<h3 class="wp-block-heading">The Role of OAuth2</h3>
+
+
+
+<p>OAuth2 is a framework for delegated access. Instead of sharing passwords directly, users grant applications a token that represents their permissions. This means that your backend (acting as a<a href="https://www.oauth.com/oauth2-servers/the-resource-server/" target="_blank" rel="noreferrer noopener"> Resource Server</a>) doesn&#8217;t have to issue tokens. Instead, it trusts and validates the ones coming from the Authorization Server within OAuth2’s framework. This decoupling of duties allows you to simplify your APIs while reducing security risks and ensuring all tokens follow a clear, consistent, centralized policy.</p>
+
+
+
+<p>You don&#8217;t have to worry about implementing user logins or browser redirects within your API. As far as validation and authorization are concerned, your backend or API&#8217;s job is to receive the<a href="https://blog.postman.com/what-is-a-bearer-token/" target="_blank" rel="noreferrer noopener"> Bearer Token</a>, authenticate the signature, check expiration, and enforce scopes/roles.</p>
+
+
+
+<p>Your API just checks badges; it&#8217;s not responsible for printing them. So how do JWTs fit into the equation?</p>
+
+
+
+<h3 class="wp-block-heading">What Is a JWT?</h3>
+
+
+
+<p>A JWT is a small, web-friendly piece of text (string) that securely transports information between systems. Their compactness makes them easy to pass around in<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers" target="_blank" rel="noreferrer noopener"> HTTP headers</a> or URLs. Each token uses<a href="https://nshielddocs.entrust.com/wsop-docs/user-guide/base64url-encoding.html" target="_blank" rel="noreferrer noopener"> Base64URL encoding</a>, making them safe to include in query strings or headers.</p>
+
+
+
+<p>JWTs are signed (and sometimes encrypted), so that recipients can verify that they weren&#8217;t tampered with. They&#8217;re also self-contained, carrying details like user ID, roles, or permissions. These elements (especially self-containment and signing) allow for<a href="https://www.descope.com/learn/post/stateless-authentication" target="_blank" rel="noreferrer noopener"> stateless authentication</a> without<a href="https://dev.to/aneeqakhan/a-developers-guide-to-browser-storage-local-storage-session-storage-and-cookies-4c5f#:~:text=2.%20Session%20Storage%20%E2%8F%B3" target="_blank" rel="noreferrer noopener"> Session Storage</a>. This means that you don&#8217;t need a database or cache to track active sessions. It also encourages fewer lookups and less infrastructure complexity, which reduces your system&#8217;s overhead.</p>
+
+
+
+<p>JWTs have a very simple, standardized structure made up of three parts, separated by dots:</p>
+
+
+
+<ul class="wp-block-list">
+<li><strong>The Header</strong> contains metadata about the token, such as the type (<code>JWT</code>) and the signing algorithm (<code>HS256</code>, <code>RS256</code>).</li>
+
+
+
+<li><strong>The Payload</strong> features the claims, which are statements about the user or system (like user ID, roles, or token expiry).</li>
+
+
+
+<li><strong>The Signature</strong> is a cryptographic signature created using the header, payload, and a secret or private key. This ensures the token has not been tampered with.<br></li>
+</ul>
+
+
+
+<p>The basic structure of a JWT looks like this:</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="kotlin" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">xxxxx.yyyyy.zzzzz</pre>
+
+
+
+<p>A real-world Base64URL-encoded token typically resembles the following:</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="kotlin" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ
+.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c</pre>
+
+
+
+<h3 class="wp-block-heading">When OAuth2 meets JWT</h3>
+
+
+
+<p>There are four key roles in OAuth2&#8217;s implementation:</p>
+
+
+
+<ul class="wp-block-list">
+<li><strong>Resource Owner:</strong> The entity (usually the user) granting access to the protected resources.</li>
+
+
+
+<li><strong>Client:</strong> The application requesting access to the resource on behalf of the resource owner.</li>
+
+
+
+<li><strong>Authorization Server:</strong> The server that authenticates the resource owner and issues access tokens to the client.</li>
+
+
+
+<li><strong>Resource Server:</strong> The server hosting the protected resources, which accepts and validates tokens.<br></li>
+</ul>
+
+
+
+<p>The Resource Owner grants permission (<em>e.g.</em>, you click &#8220;Allow&#8221; when an app requests access), the Client then requests authorization from the Authorization Server, which issues an access token (JWT) if the Resource Owner approves. The Client uses this access token to access data from the Resource Server.</p>
+
+
+                    <div class="alert ">
+            <p><strong>Note:</strong> It&#8217;s important to note that JWTs aren&#8217;t the only token format that OAuth2 can work with; it&#8217;s just the most popular because of its perks. OAuth2 can also work with <a href="https://docs.secureauth.com/ciam/en/opaque-token--concept,-purpose,-way-it-works.html" target="_blank" rel="noopener">Opaque Tokens</a>, <a href="https://learn.microsoft.com/en-us/dotnet/framework/wcf/feature-details/saml-tokens-and-claims" target="_blank" rel="noopener">SAML Tokens</a>, or custom token formats like Microsoft&#8217;s reference tokens or Google&#8217;s access tokens.</p>
+        </div>
+    
+
+
+
+
+
+
+<h2 class="wp-block-heading">How to Implement OAuth2 and JWT</h2>
+
+
+
+<p>Imagine you’re building a simple document management system with a Kotlin and Spring-based backend that exposes a REST API. This implementation lets clients upload documents, list them, view specific ones, etc. Some potential endpoints the API can expose include:</p>
+
+
+
+<ul class="wp-block-list">
+<li><code>GET /documents</code>: Lists all documents.</li>
+
+
+
+<li><code>GET /documents/{id}</code>: View a specific document.</li>
+
+
+
+<li><code>POST /documents</code>: Upload a new document.<br></li>
+</ul>
+
+
+
+<p>You want to restrict access so that only authenticated users can view or upload documents, but you don&#8217;t want to manage passwords in your backend. You also don&#8217;t have to maintain sessions or deal with login forms.</p>
+
+
+
+<h3 class="wp-block-heading">Prerequisites</h3>
+
+
+
+<p>If you want to follow along, you&#8217;ll need:</p>
+
+
+
+<ul class="wp-block-list">
+<li><a href="https://www.jetbrains.com/idea/download/" target="_blank" rel="noreferrer noopener">IntelliJ IDEA</a></li>
+
+
+
+<li><a href="https://jdk.java.net/17/" target="_blank" rel="noreferrer noopener">JDK 17+</a></li>
+
+
+
+<li><a href="https://console.cloud.google.com/welcome/new" target="_blank" rel="noreferrer noopener">Google Cloud Console</a></li>
+
+
+
+<li>A basic understanding of <a href="https://kotlinlang.org/docs/getting-started.html" target="_blank" rel="noreferrer noopener">Kotlin</a>, Spring Boot, and Spring Security<br></li>
+</ul>
+
+
+
+<p>All the code used in this tutorial is available on <a href="https://github.com/OrigamiFolds/doc-manager-kotlin-demo" target="_blank" rel="noreferrer noopener">GitHub repository</a>.</p>
+
+
+
+<h3 class="wp-block-heading">Initial Application Setup</h3>
+
+
+
+<p>To start, run IntelliJ IDEA and create a new project (<strong>File</strong> &gt; <strong>New</strong> &gt; <strong>Project</strong>):</p>
+
+
+
+<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" fetchpriority="high" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/04/HTiRGsQ.png" alt="" class="wp-image-703782"/></figure>
+
+
+
+<p>Select <strong>Spring Boot</strong> under the Generators section on the left panel. Give your project a name (like <code>doc-manager</code>), select <strong>Kotlin</strong> as the Language, <strong>Gradle &#8211; Kotlin</strong> as the Type, <strong>17</strong> as the Java version, <strong>Jar</strong> as the packaging, and <strong>Properties</strong> as the configuration. Leave all other properties in their default state and then click <strong>Next</strong>.</p>
+
+
+
+<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/04/3uVKXW9.png" alt="" class="wp-image-703793"/></figure>
+
+
+
+<p>On the next screen, select dependencies for your project. Make sure you&#8217;re using the latest stable version of Spring Boot (4.0.3 at the time of writing) and then use the search bar to find and add the following dependencies:</p>
+
+
+
+<ul class="wp-block-list">
+<li>Spring Security</li>
+
+
+
+<li>OAuth2 Authorization Server</li>
+
+
+
+<li>OAuth2 Resource Server</li>
+
+
+
+<li>Spring Web<br></li>
+</ul>
+
+
+
+<p>Once that&#8217;s done, click <strong>Create</strong>.</p>
+
+
+
+<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/04/niTrboS.png" alt="" class="wp-image-703815"/></figure>
+
+
+
+<p>After your project&#8217;s done importing and loading, expand your project, scroll down, and find the <code>application.properties</code> file under the resources folder (<strong>src</strong> &gt; <strong>main</strong> &gt; <strong>resources</strong>). Add the following lines to it:</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="kotlin" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">spring.application.name=doc-manager-kotlin-demo
+
+spring.security.oauth2.resourceserver.jwt.public-key-location=classpath:public.pem</pre>
+
+
+
+<p>In most cases, you&#8217;d specify an<a href="https://docs.spring.io/spring-security/reference/servlet/oauth2/resource-server/jwt.html#_specifying_the_authorization_server" target="_blank" rel="noreferrer noopener"> Authorization Server</a> (<code>issuer-uri</code>) here. But to keep things simple, you won&#8217;t be using a real Authorization Server for this part of the implementation (this will come in later). So you need to supply your application with a public key to verify signed tokens. You can generate your own <code>publickey.pem</code> using<a href="https://www.scottbrady.io/openssl/creating-rsa-keys-using-openssl" target="_blank" rel="noreferrer noopener"> OpenSSL</a> or use the ones provided in this project&#8217;s<a href="https://github.com/OrigamiFolds/doc-manager-kotlin-demo/tree/master/src/main/resources" target="_blank" rel="noreferrer noopener"> resources folder</a>. Make sure to save and store the <code>private.pem</code>. You&#8217;ll need it for JWT generation.&nbsp;</p>
+
+
+
+<h3 class="wp-block-heading">Configure Your Resource Server</h3>
+
+
+
+<p>Create a resource controller for your endpoint:</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="kotlin" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// Insert Your Package Name Here + .controller
+
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RestController
+
+@RestController
+@RequestMapping("/api")
+class ResourceController {
+    @GetMapping("/fetchDocuments")
+    fun fetchDocumentsEndpoint(): String {
+        return "Here are your documents"
+    }
+}</pre>
+
+
+
+<p>For now, the <code>ResourceController</code> class contains only one endpoint.</p>
+
+
+
+<p>Next, create a security configuration for your Resource Server:</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="kotlin" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// Insert Your Package Name Here + .config
+
+import org.springframework.context.annotation.Bean
+import org.springframework.context.annotation.Configuration
+import org.springframework.http.HttpMethod
+import org.springframework.security.config.annotation.web.builders.HttpSecurity
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
+import org.springframework.security.config.http.SessionCreationPolicy
+import org.springframework.security.web.SecurityFilterChain
+
+@Configuration
+@EnableWebSecurity
+class OAuth2ResourceServerSecurityConfiguration {
+
+    @Bean
+    @Throws(Exception::class)
+    fun securityFilterChain(http: HttpSecurity): SecurityFilterChain =
+        http
+            .httpBasic { it.disable() }
+            .formLogin { it.disable() } 	// Disables Spring's default form-based login
+            .csrf { it.disable() } 		    
+            .authorizeHttpRequests {
+                it.requestMatchers(HttpMethod.GET, "/api/fetchDocuments").hasAuthority("SCOPE_read:documents") // Verifies that client has read access  
+                it.anyRequest().authenticated()			   	
+            }
+            .oauth2ResourceServer {  // Enables JWT‑based authentication for an OAuth2 Resource Server.
+                it.jwt { }
+            }
+            .sessionManagement { it.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
+            .build()
+}</pre>
+
+
+
+<p>If you’ve worked with Spring Security in Java before, you’ll likely notice how clean the Kotlin DSL looks in comparison. References to <code>OAuth2LoginConfigurer</code>, wrapping lambdas in <code>Customizer</code>, or even annotations like <code>@Throws(Exception::class)</code> aren&#8217;t strictly necessary (unless you&#8217;re working with a mix of Java and Kotlin). Kotlin’s DSL trims that away and lets you express the rules directly.</p>
+
+
+
+<p>Now, generate the JWT using the private key (found in the <code>private.pem</code>). Make sure to encode it using the <code>RS256</code> and that the claims are set and formatted correctly:</p>
+
+
+
+<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/04/3I6kIgA.webp" alt="" class="wp-image-703826"/></figure>
+
+
+
+<p>Run your Spring Boot application and then initiate an authenticated request to the <code>/fetchDocuments</code> API endpoint with your generated JWT as the bearer token:</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="kotlin" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">GET http://localhost:8080/api/fetchDocuments
+Bearer Token &lt;JWT></pre>
+
+
+
+<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/04/N91Ktiq.png" alt="" class="wp-image-703837"/></figure>
+
+
+
+<p>If it works as it should, you should see &#8220;Here are your documents&#8221; as a response. This implementation enables you to simulate a client sending a request with a Bearer token (JWT). Upon receiving the token, your Resource Server (backend) checks the expiry date and signature using the details in your application&#8217;s properties file. It also looks for the <code>read:documents</code> scope before granting access to the <code>fetchDocument</code> endpoint.</p>
+
+
+
+<h2 class="wp-block-heading">Handling Advanced Patterns and Validations</h2>
+
+
+
+<p>In a document management API (and most complex systems), simple scope checks aren&#8217;t enough. They can grant coarse permissions, but they often fail to capture the nuance of real-world access control. To address this, the system must separate token validation (ensuring the JWT is authentic) from business authorization (deciding what actions a user can perform).</p>
+
+
+
+<p>Scopes alone can’t enforce ownership or hierarchical rules, and they don&#8217;t capture organizational roles. That&#8217;s why you need a combination of scope and role-based access, where administrators can access all features, while lower-level users are granted only a few. By layering roles, scopes, and resource checks, the API achieves fine-grained, context-aware authorization that balances security with usability.</p>
+
+
+
+<p>Hardcoding security decisions in such systems should be avoided at all costs. Practices like embedding role checks or scope logic directly into controller methods may seem convenient at first, but it introduces significant risks as your system grows. A developer might forget to update one of these hardcoded checks when business requirements change, leaving certain endpoints exposed or inconsistent. Hardcoding also undermines separations of concerns. Security decisions should be modeled in a dedicated layer, not mixed into business logic.</p>
+
+
+
+<h3 class="wp-block-heading">Using Custom Claim Extraction and Spring Security&#8217;s PreAuthorize</h3>
+
+
+
+<p>Like most token formats, JWTs can carry custom claims in their payloads. A JWT with custom claims for roles and permissions would look something like this: &nbsp;</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="json" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
+  "iss": "https://myapp.com/auth",
+  "sub": "mdu",
+  "iat": 1773754406,
+  "exp": 1773840838,
+  "scope": "read:documents",
+  "roles": ["admin", "editor"],
+  "permissions": ["documents:read:all", "documents:write:own"]
+}</pre>
+
+
+
+<p>Spring handles authority mapping for scopes out of the box and provides a <code>hasRole</code> function. However, roles aren&#8217;t automatically extracted from JWTs because there is no universal standard for how identity providers represent them. Scopes are standardized in OAuth2 and OpenID Connect, so Spring can safely map them into authorities. Roles often appear under custom claims and require a custom converter to translate them into Spring’s expected format before they can be used effectively.</p>
+
+
+
+<p>Let&#8217;s say you want to authenticate and authorize based on roles and scope. Navigate to your security config and add the following function:</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="kotlin" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Bean
+fun jwtAuthenticationConverter(): JwtAuthenticationConverter {
+    val converter = JwtAuthenticationConverter()
+    converter.setJwtGrantedAuthoritiesConverter { jwt ->
+        val authorities = mutableListOf&lt;GrantedAuthority>()
+
+        // Map scopes
+        val scopes = (jwt.claims["scope"] as? String)?.split(" ") ?: emptyList()
+        authorities.addAll(scopes.map { SimpleGrantedAuthority("SCOPE_$it") })
+
+        // Map roles
+        val roles = jwt.claims["roles"] as? Collection&lt;*> ?: emptyList&lt;Any>()
+        authorities.addAll(roles.map { SimpleGrantedAuthority("ROLE_$it") })
+
+        // Map permissions
+        val permissions = jwt.claims["permissions"] as? Collection&lt;*> ?: emptyList&lt;Any>()
+        authorities.addAll(permissions.map { SimpleGrantedAuthority(it.toString()) })
+
+        authorities
+    }
+    return converter
+}</pre>
+
+
+
+<p>This changes the behaviour of the <code>JwtAuthenticationConverter</code> so that it no longer relies solely on Spring Security’s default scope mapping. Instead, it explicitly maps both scopes and roles from the JWT into Spring authorities. If you mapped only roles, then Spring Security would ignore the <code>scope</code> claim entirely.</p>
+
+
+
+<p>Kotlin ensures the safe extraction of custom claims thanks to its null-safety. For instance, take a look at the scope mapping section of the code. The safe call operator (<code>?.</code>) ensures that if <code>jwt.claims["scope"]</code> is <code>null</code>, the chain stops gracefully instead of throwing a <code>NullPointerException</code>. The safe cast operator (<code>as? String</code>) attempts to convert the value returned from the <code>jwt.claims["scope"]</code> operation into a <code>String</code> from an <code>Any?</code> (could be anything or null). If the safe cast operator fails, it returns <code>null</code> instead of throwing a <code>ClassCastException</code>. This allows for type-safe conversions that won’t interrupt or break your code. The Elvis operator (<code>?:</code>) provides a fallback value when the left-hand side is <code>null</code>. So if the role is missing for whatever reason, the function returns an empty list as a default value.</p>
+
+
+
+<p>The tricky part is adding validations for all these claims. If you were checking these claims individually, you could use the <code>hasRole</code> function for roles, and <code>hasAuthority</code> for scopes and permissions. One way to chain these validations together would be to use the<a href="https://docs.spring.io/spring-security/reference/api/java/org/springframework/security/config/annotation/web/configurers/AuthorizeHttpRequestsConfigurer.AuthorizedUrl.html#access(org.springframework.security.authorization.AuthorizationManager)" target="_blank" rel="noreferrer noopener"> access</a> function. Here, you&#8217;ll use [Spring&#8217;s Method Security](<a href="https://www.baeldung.com/spring-enablemethodsecurity" target="_blank" rel="noreferrer noopener">Spring @EnableMethodSecurity Annotation | Baeldung</a>) (<code>@PreAuthorize</code>) because it offers a more fine-grained and cleaner approach.</p>
+
+
+
+<p>Return to your Security Config file and place the <code>@EnableMethodSecurity(prePostEnabled = true)</code> above the class definition:</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="kotlin" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">...
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity
+
+@Configuration
+@EnableWebSecurity
+@EnableMethodSecurity(prePostEnabled = true)
+class OAuth2ResourceServerSecurityConfiguration {
+    class SecurityConfig(
+... </pre>
+
+
+
+<p>You can keep your security filter chain as is for now. Navigate to your resource controller, and add the <code>@PreAuthorize</code> annotation to it:</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="kotlin" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">...
+@GetMapping("/fetchDocuments")
+@PreAuthorize("hasRole('admin') and hasAuthority('documents:read:all')")
+fun fetchDocumentsEndpoint(): String {
+    return "Here are your documents"
+}
+...</pre>
+
+
+                    <div class="alert ">
+            <p><strong>Note:</strong> You&#8217;ll need to import the <a href="https://docs.spring.io/spring-security/site/apidocs/org/springframework/security/access/prepost/PreAuthorize.html" target="_blank" rel="noopener">PreAuthorize</a> annotation for this to work.<br />
+</p>
+        </div>
+    
+
+
+
+
+
+
+<p>This ensures that only admins with read-all permissions can access the <code>fetchDocuments</code> endpoint. You can create more endpoints, like <code>getDocument</code> and <code>deleteDocument</code> to test the combination of your roles and permissions. The <code>@PreAuthorize</code> annotation helps you avoid embedding role checks or scope logic directly inside controller methods (for example, writing <code>if (user.hasRole("admin")) { ... }</code> in the body of a controller). Alternatively, you can perform your role checks in your filter chain and your scope and permission checks on the method level.</p>
+
+
+
+<h3 class="wp-block-heading">Strengthening Token Trust: Issuer and Audience Enforcement</h3>
+
+
+
+<p>Under most normal circumstances, you&#8217;d supply Spring Security with an issuer URI in your application properties file. Then Spring would do the work of finding the <a href="https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfig" target="_blank" rel="noreferrer noopener">Provider Configuration</a> or<a href="https://tools.ietf.org/html/rfc8414#section-3" target="_blank" rel="noreferrer noopener"> Authorization Server Metadata</a> and using them to decode your JWT. But as you learned here, these can be bypassed when you&#8217;re using custom-generated keys.</p>
+
+
+
+<p>Regardless of whether you&#8217;ve configured an issuer URI or not, it&#8217;s important to explicitly verify the issuer (<code>iss</code>) in your code to ensure that every incoming token actually claims the same issuer and prevent token replay across apps. This adds defense in depth and makes your security posture clear in code. Likewise, audience (<code>aud</code>) ensures that the token is meant for your API, not for some other application. When both the issuer and the audience are checked, it prevents tokens from other apps or environments from being accepted by your API.</p>
+
+
+
+<p>To validate these claims, you&#8217;ll need to create a custom <a href="https://docs.spring.io/spring-security/reference/api/java/org/springframework/security/oauth2/jwt/JwtDecoder.html" target="_blank" rel="noreferrer noopener">JwtDecoder</a>. But, because Spring doesn&#8217;t have a dedicated <a href="https://docs.spring.io/spring-security/reference/api/java/org/springframework/security/oauth2/core/OAuth2TokenValidator.html" target="_blank" rel="noreferrer noopener">OAuth2TokenValidator</a> for its audience, you&#8217;ll need to create one. Re-open your Security Configuration file and add the following class (nested):</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="kotlin" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">class AudienceValidator(private val audience: String) : OAuth2TokenValidator&lt;Jwt> {
+    override fun validate(token: Jwt): OAuth2TokenValidatorResult =
+        if (token.audience.contains(audience)) {
+            OAuth2TokenValidatorResult.success()
+        } else {
+            OAuth2TokenValidatorResult.failure(OAuth2Error("invalid_token", "The required audience is missing", null))
+        }
+}</pre>
+
+
+                    <div class="alert alert-warning">
+            <p><strong>Warning:</strong> Don&#8217;t forget to import all necessary classes and interfaces</p>
+        </div>
+    
+
+
+
+
+
+
+<p>Then, add the following method:</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="kotlin" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Bean
+fun jwtDecoder(): JwtDecoder {
+        val issuer = "https://myapp.com/auth"           // Replace with your own official issuer URI
+        val audience = "http://localhost:8080/api/"
+
+        val decoder = JwtDecoders.fromIssuerLocation&lt;NimbusJwtDecoder>(issuer)
+
+        // Add audience validation
+        val audienceValidator = AudienceValidator(audience)
+        val issuerValidator = JwtValidators.createDefaultWithIssuer(issuer)
+
+        val validator = DelegatingOAuth2TokenValidator(listOf(issuerValidator, audienceValidator))
+        (decoder as NimbusJwtDecoder).setJwtValidator(validator)
+
+        return decoder
+}</pre>
+
+
+
+<p>This function builds a custom <code>JwtDecoder</code> that enforces stricter validation on incoming JWTs. It starts by creating a decoder from the configured issuer, then defines two validators: one to ensure the token’s <code>aud</code> claim matches the expected audience, and another to ensure the <code>iss</code> claim matches the trusted issuer. These validators are combined into a <code>DelegatingOAuth2TokenValidator</code> and applied to the decoder, so that only tokens issued by the correct identity provider and intended for your application are accepted.</p>
+
+
+                    <div class="alert ">
+            <p><strong>Note:</strong> If you need an Authorization Server (issuer) to test this flow, you can use a local or mock server like <a href="https://github.com/navikt/mock-oauth2-server?tab=readme-ov-file" target="_blank" rel="noopener">mock-oauth2-server</a>. It also supports custom JWT generation.<br />
+</p>
+        </div>
+    
+
+
+
+
+
+
+<p>Add the validation to your security filter chain:</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="kotlin" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">@Bean
+@Throws(Exception::class)
+fun securityFilterChain(http: HttpSecurity): SecurityFilterChain =
+    http
+        .httpBasic { it.disable() }
+        .formLogin { it.disable() }
+        .csrf { it.disable() }
+        .authorizeHttpRequests {
+            it.requestMatchers("/api/fetchDocuments").hasAuthority("SCOPE_read:documents")
+
+            it.anyRequest().authenticated()
+        }
+        .oauth2ResourceServer {
+            it.jwt { jwt -> 
+                jwt.jwtAuthenticationConverter(jwtAuthenticationConverter())
+                jwt.decoder(jwtDecoder())         // Add custom JwtDecoder                                                              
+            }
+        }          
+        .sessionManagement { it.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
+        .build()</pre>
+
+
+
+<p>This allows the strict enforcement of the rules by the backend, never leaving it up to frontend logic to authorize or validate sensitive information.</p>
+
+
+            <div class="newsletter">
+                                                            <article class="newsletter__post">
+                                                                                    <img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" class="newsletter__post-img" src="https://blog.jetbrains.com/wp-content/uploads/2026/04/github-repository.webp" alt="">
+                                                                            <div class="newsletter__post-text">
+                                                            <h3>Repository with the companion code for the tutorial</h3>
+                                                                                                                    <a href="https://kotl.in/6uptzh" class="btn" target="_blank" rel="noopener">Go to GitHub</a>
+                                                    </div>
+                    </article>
+                                    </div>
+    
+
+
+<h2 class="wp-block-heading">What&#8217;s Next?</h2>
+
+
+
+<p>Strong security requires fine-grained control and layered safeguards beyond basic authentication. Use short-lived tokens with clear refresh and revocation strategies to limit exposure and prevent compromised tokens from persisting. Avoid using JWTs for session storage, as this leads to token bloat, complicates revocation, and increases the risk of exposing sensitive data. Instead, keep JWTs focused on authentication and authorization claims, and enforce validation of issuer, audience, signature, and expiry to ensure tokens are trustworthy and intended for your application.</p>
+
+
+
+<p>Ultimately, securing Spring Boot APIs with OAuth2 and JWT depends on careful design, explicit configuration, and a clear understanding of how tokens, scopes, and identities are validated and enforced. Kotlin complements this by promoting null safety, immutability, and concise configuration, helping reduce misconfigurations and overlooked edge cases.</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
 		<title>KotlinLLM is Going Open Source </title>
 		<link>https://blog.jetbrains.com/research/2026/07/kotlinllm-open-source/</link>
 		
@@ -215,7 +864,7 @@ val issues: List&lt;Issue> = asLlm(response, hint = "Return all beginner-friendl
 
 					<description><![CDATA[🎉 Kotlin turns 15! 🎉 For 15 years, you&#8217;ve helped shape Kotlin into the language it is today. Whether you&#8217;ve built apps, contributed to the ecosystem, taught others, or simply chosen Kotlin for your next project – thank you for being part of the journey. Today, we’re celebrating Kotlin and the people who have made [&#8230;]]]></description>
 										<content:encoded><![CDATA[
-<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" fetchpriority="high" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/07/celebrate-the-kotlin-effect-with-us.png" alt="" class="wp-image-724928" /></figure>
+<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/07/celebrate-the-kotlin-effect-with-us.png" alt="" class="wp-image-724928" /></figure>
 
 
 
@@ -239,7 +888,7 @@ val issues: List&lt;Issue> = asLlm(response, hint = "Return all beginner-friendl
 
 
 
-<figure data-wp-context="{&quot;imageId&quot;:&quot;6a69985686912&quot;}" data-wp-interactive="core/image" class="wp-block-image size-full wp-lightbox-container"><img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" data-wp-class--hide="state.isContentHidden" data-wp-class--show="state.isContentVisible" data-wp-init="callbacks.setButtonStyles" data-wp-on-async--click="actions.showLightbox" data-wp-on-async--load="callbacks.setButtonStyles" data-wp-on-async-window--resize="callbacks.setButtonStyles" src="https://blog.jetbrains.com/wp-content/uploads/2026/07/KT-Twitter_Facebook_LinkedIn-1200x675-1.png" alt="" class="wp-image-722875" /><button
+<figure data-wp-context="{&quot;imageId&quot;:&quot;6a69e80b61e7d&quot;}" data-wp-interactive="core/image" class="wp-block-image size-full wp-lightbox-container"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" data-wp-class--hide="state.isContentHidden" data-wp-class--show="state.isContentVisible" data-wp-init="callbacks.setButtonStyles" data-wp-on-async--click="actions.showLightbox" data-wp-on-async--load="callbacks.setButtonStyles" data-wp-on-async-window--resize="callbacks.setButtonStyles" src="https://blog.jetbrains.com/wp-content/uploads/2026/07/KT-Twitter_Facebook_LinkedIn-1200x675-1.png" alt="" class="wp-image-722875" /><button
 			class="lightbox-trigger"
 			type="button"
 			aria-haspopup="dialog"
@@ -336,7 +985,7 @@ val issues: List&lt;Issue> = asLlm(response, hint = "Return all beginner-friendl
 
 
 
-<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/07/Blog-1-1.png" alt="" class="wp-image-719745"/></figure>
+<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/07/Blog-1-1.png" alt="" class="wp-image-719745"/></figure>
 
 
 
@@ -2441,351 +3090,5 @@ product: linux/app
 		
 		
 			</item>
-		<item>
-		<title>KotlinConf’26 Keynote Highlights: Advances in Language Design, Tooling, AI-Driven Workflows, and Multiplatform Development</title>
-		<link>https://blog.jetbrains.com/kotlin/2026/05/kotlinconf26-keynote-highlights/</link>
-		
-		<dc:creator><![CDATA[Daria Voronina]]></dc:creator>
-		<pubDate>Thu, 21 May 2026 10:19:41 +0000</pubDate>
-		<featuredImage>https://blog.jetbrains.com/wp-content/uploads/2026/05/Blog-Featured-1280x720-1-2.png</featuredImage>		<category><![CDATA[news]]></category>
-		<category><![CDATA[kotlinconf]]></category>
-		<guid isPermaLink="false">https://blog.jetbrains.com/?post_type=kotlin&#038;p=708494</guid>
-
-					<description><![CDATA[Kotlin turns 15 this year, and it really is everywhere. It powers systems behind everyday moments, such as tapping to pay, buying commuter rail tickets, using in-flight entertainment, and even filing tax returns online. As AI continues to reshape how software gets built, Kotlin’s growing real-world impact reflects the importance of languages and tools that [&#8230;]]]></description>
-										<content:encoded><![CDATA[
-<p>Kotlin turns 15 this year, and it really is everywhere. It powers systems behind everyday moments, such as tapping to pay, buying commuter rail tickets, using in-flight entertainment, and even filing tax returns online. As AI continues to reshape how software gets built, Kotlin’s growing real-world impact reflects the importance of languages and tools that help teams manage complexity, express ideas clearly, and build reliable systems with confidence.</p>
-
-
-
-<p>At KotlinConf’26, the JetBrains team and industry partners shared how Kotlin continues to evolve for developers at every scale. The keynote highlighted advances in language design, tooling, AI-driven workflows, and multiplatform development – all aimed at improving the Kotlin development experience for building modern applications everywhere.</p>
-
-
-
-<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
-<iframe loading="lazy" title="Keynote | KotlinConf ’26" src="https://www.youtube.com/embed/MmwBJbzWbV0?feature=oembed" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-</div><figcaption class="wp-element-caption"><br><strong>KotlinConf ’26</strong> | <strong>Opening Keynote</strong></figcaption></figure>
-
-
-
-<h2 class="wp-block-heading">Evolving Kotlin</h2>
-
-
-
-<p>As AI-driven development raises the level of abstraction, trust in the programming language is more important than ever. Kotlin Lead Language Designer Michail Zarečenskij mentioned that with Kotlin, the team aims to provide that trust at every level. Ergonomics and safety are principles that guide the language at its very core.</p>
-
-
-
-<p>Michail previewed <strong>Kotlin 2.4.0</strong> – the next step in Kotlin’s evolution toward safer and more ergonomic code. Among the features being stabilized are <strong>context parameters</strong>, designed to make APIs more expressive and focused on core logic, and <strong>explicit backing fields</strong>, which simplify common backing property patterns while reducing boilerplate and improving safety.</p>
-
-
-
-<p>The presentation also covered several experimental language features, including multi-field value classes for modeling domain-specific data such as money or colors. Key aspects of value classes include:</p>
-
-
-
-<ul class="wp-block-list">
-<li>The compiler automatically generates functions like <code>equals()</code>, <code>hashCode()</code>, and <code>toString()</code>.</li>
-
-
-
-<li>Value classes use safer name-based destructuring by default.</li>
-
-
-
-<li>Value classes have no identity semantics – they are fully defined by their properties.</li>
-</ul>
-
-
-
-<p></p>
-
-
-
-<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/05/Value-classes.png" alt="Kotlin value classes" class="wp-image-708704"/></figure>
-
-
-
-<p>These changes are designed to make working with data safer, more expressive, and more efficient over time.</p>
-
-
-
-<p>The presentation also highlighted future plans, such as locality as a first-class language concept, and rich errors, a new approach to representing and handling recoverable failures.</p>
-
-
-
-<h2 class="wp-block-heading">Kotlin ecosystem</h2>
-
-
-
-<p>Tooling has been part of Kotlin’s story from the beginning. As Kotlin expands into new workflows, including agents and integrations, the ecosystem continues to apply the same core principles of ergonomics and safety. The goal is to ensure a consistent development experience with any editor, build tool, or agentic framework.</p>
-
-
-
-<p>One of the major announcements was the <strong>Kotlin Toolchain</strong> – a unified entry point into the Kotlin ecosystem. Available through a single command, Kotlin Toolchain brings together everything from creating, building, running, and testing applications to formatting code, generating documentation, and integrating with agents.</p>
-
-
-
-<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/05/Kotlin-Toolchain.png" alt="Kotlin Toolchain" class="wp-image-708726"/></figure>
-
-
-
-<p>Starting today, you can already use Kotlin Toolchain in your JVM and multiplatform projects to build, run, and test your apps, with Amper now serving as the core part of the Kotlin Toolchain. In the future, Kotlin Toolchain will expand with LSP integrations, AI skills, native dependency provisioning, and much more. As always, JetBrains is also bringing deep IDE integrations for the best possible out-of-the-box experience.</p>
-
-
-
-<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/05/Toolchain.png" alt="" class="wp-image-708911"/></figure>
-
-
-
-<p>The presentation also introduced the <strong>Kotlin Documentation Model</strong>, a core part of Kotlin that represents machine-readable documentation in the form of a <code>kdoc.jar</code>. This specified, backward-compatible format will be published alongside libraries and consumed by IDEs, web tools like Dokka, and AI agents.</p>
-
-
-
-<p>Another major announcement was the promotion of the <strong>Kotlin Language Server to Alpha</strong>. Backed by the full power of the IntelliJ engine, LSP provides a more consistent experience across diagnostics, code completion, and tooling support. The official Kotlin extension for Visual Studio Code is now also available on the Visual Studio Marketplace.</p>
-
-
-
-<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/05/Kotlin-LSP.png" alt="Kotlin Language Server (Alpha)" class="wp-image-708737"/></figure>
-
-
-
-<p align="center"><a class="ek-link jb-download-button" href="https://blog.jetbrains.com/kotlin/2026/05/official-kotlin-support-for-visual-studio-code-is-now-available-in-alpha/" target="_blank" rel="noopener"><i class="download-icon"></i>Learn more</a></p>
-
-
-
-<p>As part of Kotlin Foundation’s efforts, JetBrains and Meta have started the process of standardizing <code>ktfmt</code> and making it a core part of Kotlin.</p>
-
-
-
-<p>The team also announced ongoing collaboration with the open-source community to bring first-class Kotlin support to official Bazel <code>rules_kotlin</code>, making it easier to use Kotlin in large-scale codebases with thousands of modules.</p>
-
-
-
-<h2 class="wp-block-heading">Kotlin at Google</h2>
-
-
-
-<p>Google has been using Kotlin in production for over a decade, and 92% of professional Android developers now use Kotlin for Android applications.</p>
-
-
-
-<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/05/Developers-at-Google.png" alt="92% of professional Android developers now use Kotlin for Android applications" class="wp-image-708748"/></figure>
-
-
-
-<p>The keynote also highlighted Google’s ongoing collaboration with JetBrains on the K2 compiler. Since launching stable K2 support in Android Studio, the Google team has seen near-universal adoption. In Kotlin Symbol Processing, Kotlin&#8217;s solution to Java annotation processes, which Google built and maintains, a 17% reduction in execution time for complex builds was achieved. In R8, Android’s whole-program optimization tool, the team has been able to add a new optimization to remove reflection use from logs in the coroutines library, and this has shown 50% improvement on Compose performance benchmarks.</p>
-
-
-
-<h2 class="wp-block-heading">AI tooling for Kotlin</h2>
-
-
-
-<p>The keynote also focused on the next generation of AI tools for Kotlin development. We want you to be able to use any agent directly inside JetBrains IDEs. To support these efforts, JetBrains is co-leading the development of an open standard, the <strong>Agent Client Protocol (ACP)</strong>, which specifies how IDEs and coding agents communicate. You can read more about it in our dedicated blog post: <a href="https://blog.jetbrains.com/ai/2026/04/our-2026-direction-ai-and-classic-workflows-in-jetbrains-ides/" target="_blank" rel="noreferrer noopener"><em>Our 2026 Direction: AI and Classic Workflows in JetBrains IDEs</em></a>.</p>
-
-
-
-<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/05/ACP.png" alt="Agent Client Protocol (ACP), which specifies how IDEs and coding agents communicate" class="wp-image-708838"/></figure>
-
-
-
-<h3 class="wp-block-heading">Junie</h3>
-
-
-
-<p><a href="https://www.jetbrains.com/junie/" target="_blank" rel="noreferrer noopener">Junie</a>, JetBrains’ coding agent, is deeply integrated with JetBrains IDEs, and even the Junie CLI version can connect to the IDE to get full project context. Junie also works with different LLM providers, allowing you to choose the best model for a specific task. While Junie already works in Kotlin projects, it now also includes dedicated Android support.&nbsp;</p>
-
-
-
-<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/05/Screenshot-2026-05-21-at-9.01.46-AM.png" alt="Junie, JetBrains’ coding agent, deeply integrated with JetBrains IDEs" class="wp-image-708849"/></figure>
-
-
-
-<h3 class="wp-block-heading">JetBrains Air</h3>
-
-
-
-<p>As developers are becoming more productive with agents, the keynote also explored how to scale agent-based development workflows. <a href="https://air.dev/" target="_blank" rel="noreferrer noopener">JetBrains Air</a> is an agentic development environment for working effectively with multiple agents.</p>
-
-
-
-<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/05/Air.png" alt="JetBrains Air, an agentic development environment for working effectively with multiple agents" class="wp-image-708860"/></figure>
-
-
-
-<p>OpenAI Codex, Claude Agent, Gemini CLI, and Junie can execute independent task loops without conflicting with one another. You can start agents in separate Git worktrees or Docker containers, and to share progress with your entire team, you&#8217;ll soon be able to use cloud agents and even start and guide them directly from the browser.</p>
-
-
-
-<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/05/Air_2.png" alt="JetBrains Air: OpenAI Codex, Claude Agent, Gemini CLI, and Junie can execute independent task loops without conflicting with one another" class="wp-image-708871"/></figure>
-
-
-
-<h3 class="wp-block-heading">Anthropic and JetBrains</h3>
-
-
-
-<p>Christian Ryan, who leads applied AI engineering at Anthropic in Europe, joined the keynote to highlight the growing collaboration between Anthropic and JetBrains across AI tooling, libraries, and developer workflows. When Anthropic built their official JVM SDK, they used Kotlin, which allowed them to create the SDK in an ergonomic, concise, null-safe language. The collaboration also includes the official <a href="https://github.com/modelcontextprotocol/kotlin-sdk" target="_blank" rel="noopener">Kotlin MCP SDK</a>.</p>
-
-
-
-<p>On the tooling side, Claude is now native in IntelliJ IDEA and Android Studio. Claude is also a first-party model in Junie and JetBrains Air. For CLI users, there&#8217;s a plugin for Claude Code that integrates JetBrains’ official Kotlin LSP for deeper project understanding.</p>
-
-
-
-<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/05/Anthropic-1.png" alt="Anthropic and JetBrains: a deep partnership" class="wp-image-709065"/></figure>
-
-
-
-<p>A new Kotlin SWE-bench based on 110 real engineering tasks from Kotlin repositories was introduced during the keynote. Using identical prompts and agent configurations, Claude Code with Opus 4.7 achieved the highest resolution rate at 86.4%.</p>
-
-
-
-<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/05/Anthropic-Benchmarks-1.png" alt="Claude Code: Kotlin SWE-Bench" class="wp-image-709076"/></figure>
-
-
-
-<h3 class="wp-block-heading">Koog 1.0</h3>
-
-
-
-<p>Vadim Briliantov, Technical Lead and author of Koog, continued the keynote with a talk about the Kotlin AI agent framework that allows you to build fault-tolerant, scalable, and enterprise-ready AI agents in fully idiomatic Kotlin. Vadim announced the stable release of Koog 1.0, a major milestone for production-ready agent development in Kotlin across backend, mobile, and multiplatform applications.</p>
-
-
-
-<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/05/Koog-1.0.png" alt="Koog 1.0" class="wp-image-708759"/></figure>
-
-
-
-<p>The presentation focused on Koog’s approach to building reliable AI systems through type-safe workflow DSLs, persistence and recovery for long-running agents, and deep integrations with existing Kotlin ecosystems, including Spring AI, Ktor, and observability tooling. One of the featured case studies came from Mercedes-Benz, whose team uses Koog to build vehicle maintenance support agents with structured workflows and carefully controlled execution logic. <a href="https://www.mercedes-benz.io/blog/2025-11-14-the-guardrails-your-llm-needs-reliable-agent-based-systems" target="_blank" data-type="link" data-id="https://www.mercedes-benz.io/blog/2025-11-14-the-guardrails-your-llm-needs-reliable-agent-based-systems" rel="noreferrer noopener">Read the full case study</a>.</p>
-
-
-
-<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/05/Koog-Case-Study.png" alt="Koog case study: Mercedes-Benz" class="wp-image-708770"/></figure>
-
-
-
-<p>Vadim also showcased multiplatform support and on-device AI capabilities on Android using Google’s Gemma models, reinforcing Kotlin’s growing position as a unified language for building modern AI-powered applications – from backend services to mobile experiences – all in Kotlin.</p>
-
-
-
-<p align="center"><a class="ek-link jb-download-button" href="https://github.com/JetBrains/koog" target="_blank" rel="noopener"><i class="download-icon"></i>View on GitHub</a></p>
-
-
-
-<h2 class="wp-block-heading">Kotlin for backend development</h2>
-
-
-
-<p>The keynote continued with updates on Kotlin for backend development, including new capabilities across Ktor, <code>kotlinx-rpc</code>, and Exposed. The team showcased Koog integration for building AI-powered services with Ktor, experimental first-party gRPC support in <code>kotlinx-rpc</code>, and the stable release of Exposed, which introduces vector types for AI-powered similarity search alongside a new Gradle plugin for simplified migration script generation. A new <a href="https://github.com/JetBrains/Exposed/tree/main/.claude/skills/migrate-to-1.0" target="_blank" rel="noreferrer noopener">agent skill</a> is also available to help developers migrate existing projects to Exposed 1.0.</p>
-
-
-
-<p>Beyond tooling, the presentation focused on Kotlin’s growing adoption in enterprise and compliance-driven environments, where reliability and long-term support are critical.</p>
-
-
-
-<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/05/Backend-Logo.png" alt="Adoption of Kotlin for backend development" class="wp-image-708792"/></figure>
-
-
-
-<p>Starting with Kotlin 2.4, the <strong>Kotlin standard library will include an 18-month security support policy</strong>, with security fixes backported to all release lines within an active support window.</p>
-
-
-
-<p align="center"><a class="ek-link jb-download-button" href="https://blog.jetbrains.com/kotlin/2026/05/security-support-policy-for-the-kotlin-standard-library/" target="_blank" rel="noopener"><i class="download-icon"></i>Explore more</a></p>
-
-
-
-<p>The keynote also highlighted Kotlin’s productivity benefits for backend teams, referencing data <a href="https://blog.jetbrains.com/kotlin/2026/05/built-for-productivity-what-the-data-shows-about-kotlin/" target="_blank" data-type="link" data-id="https://blog.jetbrains.com/kotlin/2026/05/built-for-productivity-what-the-data-shows-about-kotlin/" rel="noreferrer noopener">showing 15–20% faster development cycles</a> as projects grow in complexity.&nbsp;</p>
-
-
-
-<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/05/Productivity.png" alt="Kotlin’s productivity benefits for backend teams: 15–20% faster development cycles" class="wp-image-708781"/></figure>
-
-
-
-<p>The presentation emphasized Kotlin’s deep integration with the JVM ecosystem through ongoing collaboration with Spring, improved Kotlin representation in Spring and JUnit documentation, updates to the <code>kotlin-maven-plugin</code> and Maven onboarding experience, improved coroutine support in Micrometer, and continued stabilization of the Lombok compiler plugin for mixed Kotlin-Java projects.</p>
-
-
-
-<h2 class="wp-block-heading">Kotlin Multiplatform</h2>
-
-
-
-<p>Kotlin Multiplatform continues to see rapid adoption, with the number of top apps using KMP more than doubling over the past year. Companies such as PayPal, Booking.com, Sony, and Duolingo are <a href="https://kotlinlang.org/case-studies/?type=multiplatform" target="_blank" rel="noreferrer noopener">already using it in production</a>, and more teams are adopting Compose Multiplatform to share UI across platforms.&nbsp;</p>
-
-
-
-<p>For example, Sony uses KMP in their Sound Connect app for headphones to work with platform APIs like sensors and background processing while sharing the UI through Compose Multiplatform. Across Kotlin Multiplatform case studies overall, applications built with KMP now serve hundreds of millions of users daily.</p>
-
-
-
-<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/05/KMP-logos.png" alt="Kotlin Multiplatform (KMP) adoption in companies" class="wp-image-708803"/></figure>
-
-
-
-<p>Getting started with KMP is now easier with the <a href="https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform/" target="_blank" rel="noreferrer noopener">KMP IDE plugin</a> available on all operating systems for both IntelliJ IDEA and Android Studio. The plugin offers everything you need to build great KMP apps with convenient run configurations, tools for working with Compose code, integrations with Swift and cross-language features, and AGP 9.0 support.</p>
-
-
-
-<p>You can also create new projects right in the IDE with the KMP project wizard, which now uses our <a href="https://blog.jetbrains.com/kotlin/2026/05/new-kmp-default-structure/" target="_blank" rel="noreferrer noopener">new default structure</a>, where each module has a single clear responsibility.</p>
-
-
-
-<p>We are working to enhance the iOS development experience, notably through <a href="https://kotlinlang.org/docs/native-swift-export.html" target="_blank" rel="noreferrer noopener">Swift Export</a> features that make calling Kotlin from Swift more natural. In Kotlin 2.4, Swift Export is officially moving to Alpha. We also introduced <a href="https://kotlinlang.org/docs/multiplatform/multiplatform-spm-import.html" target="_blank" rel="noreferrer noopener">SPM import,</a> which lets you add dependencies on Objective-C-compatible code using Swift Package Manager and call into those APIs directly from Kotlin code.</p>
-
-
-
-<p>Kotlin/Native has seen significant performance improvements over the last year. Measured on the Google Docs codebase, build times are now 25% faster while using less than half the RAM during builds compared to a year ago.</p>
-
-
-
-<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/05/KotlinNative.png" alt="Kotlin/Native performance from Kotlin 2.2 to 2.4" class="wp-image-708814"/></figure>
-
-
-
-<h3 class="wp-block-heading">Compose Multiplatform</h3>
-
-
-
-<p>Compose Multiplatform is fully stable and production-ready on mobile and desktop. The web platform also reached Beta status in September 2025, marking another major step forward for multiplatform UI development. For all these platforms, the team continues to bring you the latest improvements and APIs from Jetpack Compose. One of the biggest highlights over the past year is the new Navigation 3 library, a flexible, Compose-first solution that gives you full control over your back stack – and it&#8217;s already stable for multiplatform use.</p>
-
-
-
-<p>On iOS, new interop APIs now make it possible to combine native <a href="https://kotlinlang.org/docs/multiplatform/ios-liquid-glass.html" target="_blank" data-type="link" data-id="https://kotlinlang.org/docs/multiplatform/ios-liquid-glass.html" rel="noreferrer noopener">Liquid Glass components with Compose UI</a>, allowing native views to dynamically interact with Compose content underneath.</p>
-
-
-
-<p>Beyond the framework itself, the Kotlin Multiplatform ecosystem continues to expand rapidly. There are now more than 3,500 community libraries listed on <a href="http://klibs.io" target="_blank" rel="noreferrer noopener">klibs.io</a>, giving you a growing set of tools and integrations for building multiplatform applications across mobile, desktop, backend, and web.</p>
-
-
-
-<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/05/Klibs.png" alt="The growing Kotlin Multiplatform (KMP) ecosystem. Libraries indexed by klibs.io" class="wp-image-708825"/></figure>
-
-
-
-<h2 class="wp-block-heading">Conclusion&nbsp;</h2>
-
-
-
-<p>KotlinConf’26 highlighted how Kotlin continues to evolve beyond a programming language into a complete ecosystem for backend, mobile, web, AI, and multiplatform development. From language and tooling improvements to growing industry adoption, the announcements reflected the shared goal of helping developers build modern software with greater clarity, safety, and productivity.</p>
-]]></content:encoded>
-					
-		
-		
-		                    <language>
-                        <code><![CDATA[zh-hans]]></code>
-                        <url>https://blog.jetbrains.com/zh-hans/kotlin/2026/05/kotlinconf26-keynote-highlights/</url>
-                    </language>
-                                    <language>
-                        <code><![CDATA[ja]]></code>
-                        <url>https://blog.jetbrains.com/ja/kotlin/2026/05/kotlinconf26-keynote-highlights/</url>
-                    </language>
-                                    <language>
-                        <code><![CDATA[fr]]></code>
-                        <url>https://blog.jetbrains.com/fr/kotlin/2026/05/kotlinconf26-keynote-highlights/</url>
-                    </language>
-                	</item>
 	</channel>
 </rss>
