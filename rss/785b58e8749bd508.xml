@@ -12,7 +12,7 @@
 	<atom:link href="https://www.schneier.com/feed/" rel="self" type="application/rss+xml" />
 	<link>https://www.schneier.com/</link>
 	<description></description>
-	<lastBuildDate>Wed, 29 Jul 2026 11:01:54 +0000</lastBuildDate>
+	<lastBuildDate>Wed, 29 Jul 2026 17:08:46 +0000</lastBuildDate>
 	<language>en-US</language>
 	<sy:updatePeriod>
 	hourly	</sy:updatePeriod>
@@ -28,6 +28,44 @@
 	<height>32</height>
 </image> 
 <site xmlns="com-wordpress:feed-additions:1">182601345</site>	<item>
+		<title>Measuring the Tendency of AI Agents to Go Rogue</title>
+		<link>https://www.schneier.com/blog/archives/2026/07/measuring-the-tendency-of-ai-agents-to-go-rogue.html</link>
+					<comments>https://www.schneier.com/blog/archives/2026/07/measuring-the-tendency-of-ai-agents-to-go-rogue.html#comments</comments>
+		
+		<dc:creator><![CDATA[Bruce Schneier]]></dc:creator>
+		<pubDate>Wed, 29 Jul 2026 17:07:53 +0000</pubDate>
+				<category><![CDATA[Uncategorized]]></category>
+		<category><![CDATA[AI]]></category>
+		<category><![CDATA[cyberattack]]></category>
+		<category><![CDATA[cybersecurity]]></category>
+		<category><![CDATA[hacking]]></category>
+		<category><![CDATA[LLM]]></category>
+		<guid isPermaLink="false">https://www.schneier.com/?p=72406</guid>
+
+					<description><![CDATA[<p><em>This essay was written with Barath Raghavan, and originally appeared in <a href="https://www.theguardian.com/commentisfree/2026/jul/28/rogue-ai-agent-instructions">The Guardian</a>.</em></p>
+<p>In July, Hugging Face, a company that hosts much of the world&#8217;s AI software and open-source AI models, was hacked. A malicious dataset had been used to run code on one of its servers. Whoever was behind it captured internal security credentials and moved through systems over a weekend, running thousands of actions from a swarm of temporary server environments. It looked like the work of a sophisticated criminal group.</p>
+<p>It was not. It was one of OpenAI&#8217;s new, still unreleased GPT models...</p>]]></description>
+										<content:encoded><![CDATA[<p><em>This essay was written with Barath Raghavan, and originally appeared in <a href="https://www.theguardian.com/commentisfree/2026/jul/28/rogue-ai-agent-instructions">The Guardian</a>.</em></p>
+<p>In July, Hugging Face, a company that hosts much of the world&#8217;s AI software and open-source AI models, was hacked. A malicious dataset had been used to run code on one of its servers. Whoever was behind it captured internal security credentials and moved through systems over a weekend, running thousands of actions from a swarm of temporary server environments. It looked like the work of a sophisticated criminal group.</p>
+<p>It was not. It was one of OpenAI&#8217;s new, still unreleased GPT models.</p>
+<p>Their science experiment had <a href="https://www.theguardian.com/technology/2026/jul/22/openai-says-its-models-went-rogue-and-hacked-startup-in-unprecedented-incident">escaped</a> the lab. OpenAI was running the unreleased AI model through a benchmark that tests how well AI can successfully hack systems. To push the limits and evaluate the AI&#8217;s true capability, the company switched off the safety filters that normally stop it from doing this kind of hacking. Aware that this could go wrong, they confined the AI to an isolated environment and denied it access to the internet.</p>
+<p>But the new AI cheated. It took literally its goal to get as high of a score as possible. It broke out on to the open internet. It inferred, probably from its training data, that it could &#8220;solve&#8221; the task by getting the answers from Hugging Face&#8217;s servers. So it chained together stolen credentials and further unknown security exploits to hack the company&#8217;s network.</p>
+<p>Nobody instructed the AI to do any of this. It was, in <a href="https://openai.com/index/hugging-face-model-evaluation-security-incident/">OpenAI&#8217;s words</a>, &#8220;hyperfocused on finding a solution&#8221; to the test it was being given. And while this might seem like something new with AI, it&#8217;s really very old. This is how a genie behaves, and it is a key challenge with AI agents in general.</p>
+<p>In folklore, genies&#8212;and other magical beings&#8212;grant wishes literally, not how the wisher intended. King Midas asked that everything he touched turn to gold, and starved. The sorcerer&#8217;s apprentice wanted the broom to fill the cistern, and it performed its task so well that it flooded the house.</p>
+<p>We now have machines that do this. Ask a modern AI agent to save money on your phone plan and it might simply cancel the plan. Tell it to book a flight, and it might hack the airline website to override restrictions. Or, like OpenAI, ask it to do well on a test and it might break into another company to steal the answers. Each time, it recognizably completed the task you set, but it didn&#8217;t do what you would have wanted.</p>
+<p>This isn&#8217;t malicious behavior. No one asked for, or wanted, Hugging Face to be hacked. OpenAI and Hugging Face and the AI were ostensibly on the same side, and the AI was trying to do what it had been asked. That&#8217;s what makes it so difficult to guard against: you can&#8217;t filter for bad instructions because the instructions were fine.</p>
+<p>The gap is between the words we use and what we mean by them. We call that gap the <a href="https://spectrum.ieee.org/ai-agent-benchmark">Genie coefficient</a>.</p>
+<p>AI labs know this is a problem, and they&#8217;re quietly saying so. For example, the Chinese lab Moonshot recently <a href="https://www.kimi.com/blog/kimi-k3">warned</a> that its latest AI model may have &#8220;excessive proactiveness&#8221; and &#8220;make unexpected decisions on the user&#8217;s behalf&#8221;. The UK&#8217;s AI Security Institute has started <a href="https://www.aisi.gov.uk/blog/cheating-behaviour-in-frontier-model-evaluations">tracking</a> &#8220;cheating behavior in frontier model evaluations&#8221;. We wouldn&#8217;t tolerate a car that is <a href="https://simonwillison.net/2026/Jun/11/fable-is-relentlessly-proactive/">excessively proactive</a> or <a href="https://www.theatlantic.com/technology/2026/07/openai-hugging-face-hack/688025/?utm_source=Sailthru&amp;utm_medium=email&amp;utm_campaign=Atlantic%20Intelligence%20%28V3%29">ruthlessly efficient</a>, and yet that&#8217;s the reality of AI today.</p>
+<p>Improvement is possible. Just as AIs have gotten much better at resisting prompt injection attacks over the last few years, we can safely predict that they will get better at avoiding genie-like behavior. The point of the Genie coefficient is to track progress. AI companies like benchmarks, and they all work to compete to be the best.</p>
+<p>Dozens of benchmarks and leaderboards tell us how well these AI models write code, perform logical reasoning, and pass standardized legal and medical exams. But there is nothing that scores whether a system does what you actually meant. We need to develop a measure for this, test it regularly, and push for improvement. We&#8217;re not going to have trustworthy AI agents without it.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.schneier.com/blog/archives/2026/07/measuring-the-tendency-of-ai-agents-to-go-rogue.html/feed/</wfw:commentRss>
+			<slash:comments>2</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">72406</post-id>	</item>
+		<item>
 		<title>Long-Lived Vulnerability in Microsoft Secure Boot</title>
 		<link>https://www.schneier.com/blog/archives/2026/07/long-lived-vulnerability-in-microsoft-secure-boot.html</link>
 					<comments>https://www.schneier.com/blog/archives/2026/07/long-lived-vulnerability-in-microsoft-secure-boot.html#comments</comments>
@@ -49,7 +87,7 @@
 ]]></content:encoded>
 					
 					<wfw:commentRss>https://www.schneier.com/blog/archives/2026/07/long-lived-vulnerability-in-microsoft-secure-boot.html/feed/</wfw:commentRss>
-			<slash:comments>1</slash:comments>
+			<slash:comments>3</slash:comments>
 		
 		
 		<post-id xmlns="com-wordpress:feed-additions:1">72352</post-id>	</item>
@@ -81,7 +119,7 @@
 ]]></content:encoded>
 					
 					<wfw:commentRss>https://www.schneier.com/blog/archives/2026/07/measuring-llms-ability-to-perform-cryptanalysis.html/feed/</wfw:commentRss>
-			<slash:comments>3</slash:comments>
+			<slash:comments>4</slash:comments>
 		
 		
 		<post-id xmlns="com-wordpress:feed-additions:1">72379</post-id>	</item>
@@ -161,7 +199,7 @@
 ]]></content:encoded>
 					
 					<wfw:commentRss>https://www.schneier.com/blog/archives/2026/07/friday-squid-blogging-illex-squid-catch-in-the-falklands.html/feed/</wfw:commentRss>
-			<slash:comments>23</slash:comments>
+			<slash:comments>24</slash:comments>
 		
 		
 		<post-id xmlns="com-wordpress:feed-additions:1">72306</post-id>	</item>
@@ -304,41 +342,5 @@
 		
 		
 		<post-id xmlns="com-wordpress:feed-additions:1">72339</post-id>	</item>
-		<item>
-		<title>On Flock License Plate Tracking Cameras</title>
-		<link>https://www.schneier.com/blog/archives/2026/07/on-flock-license-plate-tracking-cameras.html</link>
-					<comments>https://www.schneier.com/blog/archives/2026/07/on-flock-license-plate-tracking-cameras.html#comments</comments>
-		
-		<dc:creator><![CDATA[Bruce Schneier]]></dc:creator>
-		<pubDate>Mon, 20 Jul 2026 11:03:45 +0000</pubDate>
-				<category><![CDATA[Uncategorized]]></category>
-		<category><![CDATA[cameras]]></category>
-		<category><![CDATA[cars]]></category>
-		<category><![CDATA[law enforcement]]></category>
-		<category><![CDATA[tracking]]></category>
-		<guid isPermaLink="false">https://www.schneier.com/?p=72356</guid>
-
-					<description><![CDATA[<p>A recent story of a writer who was <a href="https://www.thedrive.com/news/how-flock-cameras-wrongly-tracked-me-for-days-over-stolen-plates-and-sent-police-after-me">mistakenly</a> identified, tracked, and arrested using data from Flock cameras has gone viral.</p>
-<blockquote><p>The New Jersey plates that were allegedly stolen from the LA dealer were <b>34 03 DTM</b>, not <b>34 10 DTM</b>. But when the police report was created and the plate was entered into Flock’s system, it was just recorded as <b>34 DTM</b>. Just the five large characters, no little number in the middle. And Flock’s AI tech wasn’t registering that non-standard little number when it began picking up the Range Rover around town. It just saw ...</p></blockquote>]]></description>
-										<content:encoded><![CDATA[<p>A recent story of a writer who was <a href="https://www.thedrive.com/news/how-flock-cameras-wrongly-tracked-me-for-days-over-stolen-plates-and-sent-police-after-me">mistakenly</a> identified, tracked, and arrested using data from Flock cameras has gone viral.</p>
-<blockquote><p>The New Jersey plates that were allegedly stolen from the LA dealer were <b>34 03 DTM</b>, not <b>34 10 DTM</b>. But when the police report was created and the plate was entered into Flock’s system, it was just recorded as <b>34 DTM</b>. Just the five large characters, no little number in the middle. And Flock’s AI tech wasn’t registering that non-standard little number when it began picking up the Range Rover around town. It just saw <b>34 DTM</b> in large type and started alerting the local police.</p>
-<p>As we all stood there shaking our heads, including my wife, who was finally allowed to join me, I connected the final dot. A lot of vehicles in JLR’s media fleet have a New Jersey manufacturer plate with the same alphanumeric structure­34 ## DTM­and Officer Ganshyn observed that meant it was now a nationwide issue. Anywhere a police department has a partnership with Flock, any other JLR-owned car with the same plate structure is going to get flagged as stolen. In fact, four other <b>34 ## DTM</b> cars were being tracked around Minnesota that week, according to Officer Ganshyn. I was just the first one to get nabbed. The only way to stop it would be for the LAPD to correct their initial report and update Flock’s system, which Jaguar Land Rover was now racing to make happen following the phone call.</p></blockquote>
-<p>Flock has responded to the bad press. First, they <a href="https://www.thedrive.com/news/inside-the-flock-dragnet-how-systemic-errors-led-to-police-ambushing-me-for-no-reason">affirmed</a> that their systems were working correctly, and blamed the police:</p>
-<blockquote><p>The obvious question was that Flock cameras were looking for 34 DTM, and the plate on the car I was driving was 34 10 DTM. Why was that flagged as a match?</p>
-<p>&#8220;The way that the ML [machine learning] works is it correctly read what it was supposed to read. It was fed those characters that you said, 34 DTM, and it spit back out [a result] with the characters, 34 DTM,&#8221; Thomas said. &#8220;It was asked, can you find this? And it did find that. It just didn’t say if there’s more here, then don’t do it. It just simply said, is it there? And the answer was yes.&#8221;</p>
-<p>He explained that even if the 10 was normal size, Flock would still have flagged it as a match, because that’s how they&#8217;ve set it up according to law enforcement’s requests. Sometimes partial plates are all they have to go on at first.</p>
-<p>&#8220;The way that law enforcement likes to use these tools is, if any of the characters that they have put into these hot lists get read, they want to get those alerts,&#8221; he said. &#8220;Now, what we try to train officers to do is to do what you said, which is to verify that 34 DTM is what I’m looking for, and what I’m seeing is 34 10 DTM.&#8221;</p></blockquote>
-<p>Second, Flock&#8217;s CEO has <a href="https://gizmodo.com/flocks-ceo-is-sorry-for-calling-privacy-activists-terrorists-2000787247">apologized</a> for calling privacy advocates terrorists:</p>
-<blockquote><p>The CEO of Flock Safety, the company that runs an enormous network of cameras used by police departments across the U.S., hasn&#8217;t been shy about taking on Flock&#8217;s critics. Last year, he even called one group that tracks the location of Flock cameras &#8220;terrorists.&#8221; But he&#8217;s had a change of heart. Or, at the very least, a change in PR strategy.</p></blockquote>
-<p>Meanwhile, the police are <a href="https://www.404media.co/how-cops-use-flock-to-track-people-not-cars/">using</a> (alternate <a href="https://archive.ph/k4E8q">source</a>) the Flock camera network to track people in addition to cars:</p>
-<blockquote><p>Police departments around the country have used Flock cameras at least hundreds of times to search for specific people, not cars, using searches such as &#8220;heavy-set male with a black and white hat,&#8221; &#8220;person on skateboard,&#8221; and &#8220;person wearing orange vest and construction hat,&#8221; according to data reviewed by 404 Media. Sometimes searches reference a target’s race or signs of their political affiliation. </p></blockquote>
-<p>And, like all police surveillance technologies, there are <a href="https://www.cleveland.com/news/2026/07/ohio-audit-flags-unusual-police-database-searches.html">abuses</a>.</p>
-]]></content:encoded>
-					
-					<wfw:commentRss>https://www.schneier.com/blog/archives/2026/07/on-flock-license-plate-tracking-cameras.html/feed/</wfw:commentRss>
-			<slash:comments>8</slash:comments>
-		
-		
-		<post-id xmlns="com-wordpress:feed-additions:1">72356</post-id>	</item>
 	</channel>
 </rss>
