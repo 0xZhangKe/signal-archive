@@ -12,7 +12,7 @@
 	<atom:link href="https://www.schneier.com/feed/" rel="self" type="application/rss+xml" />
 	<link>https://www.schneier.com/</link>
 	<description></description>
-	<lastBuildDate>Tue, 28 Jul 2026 11:07:11 +0000</lastBuildDate>
+	<lastBuildDate>Wed, 29 Jul 2026 02:01:43 +0000</lastBuildDate>
 	<language>en-US</language>
 	<sy:updatePeriod>
 	hourly	</sy:updatePeriod>
@@ -28,6 +28,38 @@
 	<height>32</height>
 </image> 
 <site xmlns="com-wordpress:feed-additions:1">182601345</site>	<item>
+		<title>Measuring LLMs’ Ability to Perform Cryptanalysis</title>
+		<link>https://www.schneier.com/blog/archives/2026/07/measuring-llms-ability-to-perform-cryptanalysis.html</link>
+					<comments>https://www.schneier.com/blog/archives/2026/07/measuring-llms-ability-to-perform-cryptanalysis.html#comments</comments>
+		
+		<dc:creator><![CDATA[Bruce Schneier]]></dc:creator>
+		<pubDate>Wed, 29 Jul 2026 01:47:05 +0000</pubDate>
+				<category><![CDATA[Uncategorized]]></category>
+		<category><![CDATA[academic papers]]></category>
+		<category><![CDATA[AI]]></category>
+		<category><![CDATA[cryptanalysis]]></category>
+		<category><![CDATA[cybersecurity]]></category>
+		<category><![CDATA[LLM]]></category>
+		<guid isPermaLink="false">https://www.schneier.com/?p=72379</guid>
+
+					<description><![CDATA[<p>There&#8217;s new benchmark measuring AI&#8217;s ability to perform mathematical cryptanalysis. Anthropic&#8217;s frontier model actually found new attacks.</p>
+<p>The benchmark: &#8220;<a href="https://arxiv.org/pdf/2607.18538">CryptanalysisBench: Can LLMs do Cryptanalysis?</a>&#8221; The idea is to benchmark the ability of LLMs to discover new mathematical cryptanalytic attacks against a series of historical algorithms.</p>
+<blockquote><p><b>Abstract:</b> Cryptanalysis&#8212;the task of finding attacks against cryptographic schemes&#8212;its at the intersection of mathematical reasoning and cybersecurity, two areas where LLMs have advanced fastest. Cryptanalysis represents both a clean testbed for frontier reasoning (as practical attacks can be automatically verified) and a domain with unusually high stakes, since the primitives under study underpin our digital security. In this paper we ask whether LLMs can do cryptanalysis, and find that the answer is increasingly yes. We introduce CryptanalysisBench, 191 tasks across six families of cryptographic primitives (block ciphers, hash functions, etc.) drawn primarily from four NIST standardization competitions. Our benchmark consists of three tiers: (i) primitives with known practical breaks; (ii) primitives with no known practical break, evaluated both at full strength and as scaled-down variants; and (iii) a challenge set of production primitives at the frontier of cryptanalysis. Five frontier models (Claude Opus 4.8, Sonnet 5, Mythos 5, GPT-5.5, and the open-weights GLM-5.2) break 65%­86% of Tier 1 schemes, 6­12 Tier-2 schemes at full strength, and 24­61 across all scaled-down variants. Beyond deriving known results, models produce novel cryptanalysis, such as a key-recovery attack that exploits a design flaw in the SpoC AEAD and an error in KINDI’s published CCA-security proof, both to the best of our knowledge not previously known...</p></blockquote>]]></description>
+										<content:encoded><![CDATA[<p>There&#8217;s new benchmark measuring AI&#8217;s ability to perform mathematical cryptanalysis. Anthropic&#8217;s frontier model actually found new attacks.</p>
+<p>The benchmark: &#8220;<a href="https://arxiv.org/pdf/2607.18538">CryptanalysisBench: Can LLMs do Cryptanalysis?</a>&#8221; The idea is to benchmark the ability of LLMs to discover new mathematical cryptanalytic attacks against a series of historical algorithms.</p>
+<blockquote><p><b>Abstract:</b> Cryptanalysis&#8212;the task of finding attacks against cryptographic schemes&#8212;its at the intersection of mathematical reasoning and cybersecurity, two areas where LLMs have advanced fastest. Cryptanalysis represents both a clean testbed for frontier reasoning (as practical attacks can be automatically verified) and a domain with unusually high stakes, since the primitives under study underpin our digital security. In this paper we ask whether LLMs can do cryptanalysis, and find that the answer is increasingly yes. We introduce CryptanalysisBench, 191 tasks across six families of cryptographic primitives (block ciphers, hash functions, etc.) drawn primarily from four NIST standardization competitions. Our benchmark consists of three tiers: (i) primitives with known practical breaks; (ii) primitives with no known practical break, evaluated both at full strength and as scaled-down variants; and (iii) a challenge set of production primitives at the frontier of cryptanalysis. Five frontier models (Claude Opus 4.8, Sonnet 5, Mythos 5, GPT-5.5, and the open-weights GLM-5.2) break 65%­86% of Tier 1 schemes, 6­12 Tier-2 schemes at full strength, and 24­61 across all scaled-down variants. Beyond deriving known results, models produce novel cryptanalysis, such as a key-recovery attack that exploits a design flaw in the SpoC AEAD and an error in KINDI’s published CCA-security proof, both to the best of our knowledge not previously known.</p>
+<p>We release CryptanalysisBench as a tool to help track if (or when) AI cryptanalysis becomes a serious factor and as a scaffold for stress-testing candidate schemes before deployment. The attacks that the benchmark already surfaces are an early snapshot of a fast-moving frontier that may soon match, and in places exceed, the published state of the art.</p></blockquote>
+<p>Anthropic used the benchmark to test Mythos Preview, and <a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses">found</a> new vulnerabilities in Hawk and reduced-round AES.</p>
+<p>Still early results, but this is definitely something to watch.</p>
+<p>SlashDot <a href="https://it.slashdot.org/story/26/07/28/1911218/anthropic-ai-model-finds-flaws-in-tough-to-crack-encryption-algorithms">thread</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.schneier.com/blog/archives/2026/07/measuring-llms-ability-to-perform-cryptanalysis.html/feed/</wfw:commentRss>
+			<slash:comments>3</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">72379</post-id>	</item>
+		<item>
 		<title>Axon Is Another License Plate Surveillance Company</title>
 		<link>https://www.schneier.com/blog/archives/2026/07/axon-is-another-license-plate-surveillance-company.html</link>
 					<comments>https://www.schneier.com/blog/archives/2026/07/axon-is-another-license-plate-surveillance-company.html#comments</comments>
@@ -52,7 +84,7 @@
 ]]></content:encoded>
 					
 					<wfw:commentRss>https://www.schneier.com/blog/archives/2026/07/axon-is-another-license-plate-surveillance-company.html/feed/</wfw:commentRss>
-			<slash:comments>8</slash:comments>
+			<slash:comments>9</slash:comments>
 		
 		
 		<post-id xmlns="com-wordpress:feed-additions:1">72348</post-id>	</item>
@@ -103,7 +135,7 @@
 ]]></content:encoded>
 					
 					<wfw:commentRss>https://www.schneier.com/blog/archives/2026/07/friday-squid-blogging-illex-squid-catch-in-the-falklands.html/feed/</wfw:commentRss>
-			<slash:comments>20</slash:comments>
+			<slash:comments>22</slash:comments>
 		
 		
 		<post-id xmlns="com-wordpress:feed-additions:1">72306</post-id>	</item>
@@ -307,28 +339,5 @@
 		
 		
 		<post-id xmlns="com-wordpress:feed-additions:1">72302</post-id>	</item>
-		<item>
-		<title>Details of Alan Turing’s Voice Encryption System</title>
-		<link>https://www.schneier.com/blog/archives/2026/07/details-of-alan-turings-voice-encryption-system.html</link>
-					<comments>https://www.schneier.com/blog/archives/2026/07/details-of-alan-turings-voice-encryption-system.html#comments</comments>
-		
-		<dc:creator><![CDATA[Bruce Schneier]]></dc:creator>
-		<pubDate>Fri, 17 Jul 2026 11:02:21 +0000</pubDate>
-				<category><![CDATA[Uncategorized]]></category>
-		<category><![CDATA[encryption]]></category>
-		<category><![CDATA[history of cryptography]]></category>
-		<guid isPermaLink="false">https://www.schneier.com/?p=72333</guid>
-
-					<description><![CDATA[<p>Really interesting piece of cryptographic <a href="https://spectrum.ieee.org/alan-turings-delilah">history</a>:</p>
-<blockquote><p>In November 2023, a large cache of his wartime papers&#8212;nicknamed the &#8220;Bayley papers&#8221;&#8212;was <a href="https://www.bonhams.com/auction/28322/lot/45/turing-alan-the-delilah-project-the-papers-of-alan-turing-and-donald-bayley-relating-to-the-delilah-project/">auctioned</a> in London for almost half a million U.S. dollars. The previously unknown cache contains many sheets in Turing&#8217;s own handwriting, telling of his top-secret &#8220;Delilah&#8221; engineering project from 1943 to 1945. Delilah was Turing&#8217;s portable voice-encryption system, named after the biblical deceiver of men. There is also material written by Bayley, often in the form of notes he took while Turing was speaking. It is thanks to Bayley that the papers survived: He kept them until he died in 2020, 66 years after Turing passed away...</p></blockquote>]]></description>
-										<content:encoded><![CDATA[<p>Really interesting piece of cryptographic <a href="https://spectrum.ieee.org/alan-turings-delilah">history</a>:</p>
-<blockquote><p>In November 2023, a large cache of his wartime papers&#8212;nicknamed the &#8220;Bayley papers&#8221;&#8212;was <a href="https://www.bonhams.com/auction/28322/lot/45/turing-alan-the-delilah-project-the-papers-of-alan-turing-and-donald-bayley-relating-to-the-delilah-project/">auctioned</a> in London for almost half a million U.S. dollars. The previously unknown cache contains many sheets in Turing&#8217;s own handwriting, telling of his top-secret &#8220;Delilah&#8221; engineering project from 1943 to 1945. Delilah was Turing&#8217;s portable voice-encryption system, named after the biblical deceiver of men. There is also material written by Bayley, often in the form of notes he took while Turing was speaking. It is thanks to Bayley that the papers survived: He kept them until he died in 2020, 66 years after Turing passed away.</p></blockquote>
-]]></content:encoded>
-					
-					<wfw:commentRss>https://www.schneier.com/blog/archives/2026/07/details-of-alan-turings-voice-encryption-system.html/feed/</wfw:commentRss>
-			<slash:comments>4</slash:comments>
-		
-		
-		<post-id xmlns="com-wordpress:feed-additions:1">72333</post-id>	</item>
 	</channel>
 </rss>
