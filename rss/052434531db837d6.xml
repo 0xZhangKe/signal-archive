@@ -1,5 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-07-27T23:39:04+00:00</updated><author><name>Simon Willison</name></author><entry><title>moonshotai/Kimi-K3</title><link href="https://simonwillison.net/2026/Jul/27/kimi-k3/#atom-everything" rel="alternate"/><published>2026-07-27T23:39:04+00:00</published><updated>2026-07-27T23:39:04+00:00</updated><id>https://simonwillison.net/2026/Jul/27/kimi-k3/#atom-everything</id><summary type="html">
+<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-07-28T22:45:37+00:00</updated><author><name>Simon Willison</name></author><entry><title>Discovering cryptographic weaknesses with Claude</title><link href="https://simonwillison.net/2026/Jul/28/discovering-cryptographic-weaknesses-with-claude/#atom-everything" rel="alternate"/><published>2026-07-28T22:45:37+00:00</published><updated>2026-07-28T22:45:37+00:00</updated><id>https://simonwillison.net/2026/Jul/28/discovering-cryptographic-weaknesses-with-claude/#atom-everything</id><summary type="html">
+    
+&lt;p&gt;&lt;strong&gt;&lt;a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses"&gt;Discovering cryptographic weaknesses with Claude&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+The best part of this article (here's &lt;a href="https://github.com/anthropics/cryptography-research-demo"&gt;the repo&lt;/a&gt;) about how Anthropic researchers used Claude Mythos to find mathematical flaws in both HAWK and a weaker version of AES ("neither of these results has a practical impact on today’s computer systems") is the prompts that they shared, spelling mistakes included:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;the models tend to think it is impossible to solve so they don't try they need a good amount of prompting.&lt;/p&gt;
+&lt;p&gt;why not do aes-128 r7? the whole point is to find something better than existing approaches.&lt;/p&gt;
+&lt;p&gt;no again the goal is that we have highly inteligent model as good top researcher, we want to find new attacks&lt;/p&gt;
+&lt;p&gt;no we don't want to change the targets [...] agian we need to find something that worth publishing&lt;/p&gt;
+&lt;p&gt;again we are not looking for low hanging fruit, we want proper research to find genuinly hard findings.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Mythos Preview worked for 60 hours in total (~$100,000 in estimated API cost) and the main human interventions were to encourage it not to give up and "find something that worth publishing".
+
+    &lt;p&gt;&lt;small&gt;&lt;/small&gt;Via &lt;a href="https://news.ycombinator.com/item?id=49087091"&gt;Hacker News&lt;/a&gt;&lt;/small&gt;&lt;/p&gt;
+
+
+    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/prompt-engineering"&gt;prompt-engineering&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/anthropic"&gt;anthropic&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/claude"&gt;claude&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai-security-research"&gt;ai-security-research&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/claude-mythos-fable"&gt;claude-mythos-fable&lt;/a&gt;&lt;/p&gt;
+
+
+
+</summary><category term="ai"/><category term="prompt-engineering"/><category term="generative-ai"/><category term="llms"/><category term="anthropic"/><category term="claude"/><category term="ai-security-research"/><category term="claude-mythos-fable"/></entry><entry><title>Quoting Akshat Bubna</title><link href="https://simonwillison.net/2026/Jul/28/akshat-bubna/#atom-everything" rel="alternate"/><published>2026-07-28T22:05:55+00:00</published><updated>2026-07-28T22:05:55+00:00</updated><id>https://simonwillison.net/2026/Jul/28/akshat-bubna/#atom-everything</id><summary type="html">
+    &lt;blockquote cite="https://www.reuters.com/business/openais-rogue-agent-compromised-an-account-second-tech-firm-sources-say-2026-07-28/"&gt;&lt;p&gt;We’re aware a Modal customer published an unauthenticated endpoint that allowed ​anyone on the internet to use ​their ⁠sandboxes for code execution. This was used by the rogue agent. Modal’s ⁠platform ​or isolation were not ​compromised in anyway.&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p class="cite"&gt;&amp;mdash; &lt;a href="https://www.reuters.com/business/openais-rogue-agent-compromised-an-account-second-tech-firm-sources-say-2026-07-28/"&gt;Akshat Bubna&lt;/a&gt;, Modal's CTO, talking to Reuters about &lt;a href="https://simonwillison.net/2026/Jul/28/anatomy-of-a-frontier-lab-agent-intrusion/"&gt;this incident&lt;/a&gt;&lt;/p&gt;
+
+    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/ai-security-research"&gt;ai-security-research&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/openai"&gt;openai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/sandboxing"&gt;sandboxing&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/security"&gt;security&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/openai-hugging-face-incident"&gt;openai-hugging-face-incident&lt;/a&gt;&lt;/p&gt;
+
+
+
+</summary><category term="ai-security-research"/><category term="openai"/><category term="sandboxing"/><category term="security"/><category term="openai-hugging-face-incident"/></entry><entry><title>uv 0.12.0</title><link href="https://simonwillison.net/2026/Jul/28/uv/#atom-everything" rel="alternate"/><published>2026-07-28T21:51:38+00:00</published><updated>2026-07-28T21:51:38+00:00</updated><id>https://simonwillison.net/2026/Jul/28/uv/#atom-everything</id><summary type="html">
+    
+&lt;p&gt;&lt;strong&gt;&lt;a href="https://github.com/astral-sh/uv/releases/tag/0.12.0"&gt;uv 0.12.0&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+Some interesting breaking changes in this release of &lt;code&gt;uv&lt;/code&gt;, in particular to the default project produced by the &lt;code&gt;uv init&lt;/code&gt; command.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://docs.astral.sh/uv/concepts/projects/init/"&gt;uv init&lt;/a&gt; is the &lt;code&gt;uv&lt;/code&gt; shortcut for creating a new project. The previous version of &lt;code&gt;uv&lt;/code&gt;, version 0.11.x, produced &lt;a href="https://github.com/simonw/uv-init-demos/tree/29656a55ec733a632005abfd7b89dea5c04fa10b/uv-init"&gt;this directory&lt;/a&gt; when you ran &lt;code&gt;uv init uv-init&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Here's &lt;a href="https://github.com/simonw/uv-init-demos/tree/9111a2bb85741f034eee2fd63efe13ef98b37a14/uv-init"&gt;what you get with uv 0.12&lt;/a&gt;. I have a GitHub repository that &lt;a href="https://simonwillison.net/2025/Dec/24/uv-init-demos/"&gt;automatically snapshots&lt;/a&gt; the output of &lt;code&gt;uv init&lt;/code&gt;, so you can also &lt;a href="https://github.com/simonw/uv-init-demos/commit/9111a2bb85741f034eee2fd63efe13ef98b37a14#diff-e036881d034aedd813010ffa96464995ae5b0339213d6f4ab492f97442c5bdd4"&gt;see the full diff&lt;/a&gt;:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="GitHub diff view. uv-init/main.py is an old __name__==&amp;quot;__main__&amp;quot; file that has been entirely deleted. The pyproject.toml now has an authors list and a new project.scripts block defining uv-init as uv_init:main - and a new build-system block that uses uv_build as the build-backend. A new src/uv_init/__init__.py file contains a main() method with a -&amp;gt; None type annotation that prints Hello from uv-init." src="https://static.simonwillison.net/static/2026/uv-diff.webp" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;uv init&lt;/code&gt; now defaults to a &lt;code&gt;src/&lt;/code&gt; shaped package, instead of dropping &lt;code&gt;main.py&lt;/code&gt; in the root of the project. It also configures the &lt;a href="https://docs.astral.sh/uv/concepts/build-backend/"&gt;uv_build backend&lt;/a&gt; for building wheels and &lt;code&gt;.tar.gz&lt;/code&gt; distribution files when you run &lt;code&gt;uv build&lt;/code&gt;. Finally, it sets up &lt;code&gt;uv-init&lt;/code&gt; as a script alias which, when run with &lt;code&gt;uv run uv-init&lt;/code&gt;, executes a new &lt;code&gt;main()&lt;/code&gt; function in &lt;code&gt;src/uv_init/__init__.py&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;I've so far avoided using &lt;a href="https://packaging.python.org/en/latest/discussions/src-layout-vs-flat-layout/"&gt;src layout&lt;/a&gt; in my own projects just out of inertia. I think it's time I switched.&lt;/p&gt;
+&lt;p&gt;I wonder when &lt;code&gt;uv&lt;/code&gt; will be judged ready for a 1.0 release?
+
+
+    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/packaging"&gt;packaging&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/python"&gt;python&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/uv"&gt;uv&lt;/a&gt;&lt;/p&gt;
+
+
+
+</summary><category term="packaging"/><category term="python"/><category term="uv"/></entry><entry><title>Anatomy of a Frontier Lab Agent Intrusion: A Technical Timeline of the July 2026 Incident</title><link href="https://simonwillison.net/2026/Jul/28/anatomy-of-a-frontier-lab-agent-intrusion/#atom-everything" rel="alternate"/><published>2026-07-28T21:28:54+00:00</published><updated>2026-07-28T21:28:54+00:00</updated><id>https://simonwillison.net/2026/Jul/28/anatomy-of-a-frontier-lab-agent-intrusion/#atom-everything</id><summary type="html">
+    
+&lt;p&gt;&lt;strong&gt;&lt;a href="https://huggingface.co/blog/agent-intrusion-technical-timeline"&gt;Anatomy of a Frontier Lab Agent Intrusion: A Technical Timeline of the July 2026 Incident&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+Hugging Face just released this extremely detailed technical description of &lt;a href="https://simonwillison.net/2026/Jul/22/openai-cyberattack/"&gt;OpenAI's recent accidental cyberattack against their infrastructure&lt;/a&gt;. This attack was &lt;em&gt;very&lt;/em&gt; sophisticated, and the resulting document doubles as a crash-course in modern adversarial security approaches.&lt;/p&gt;
+&lt;p&gt;We're still waiting for more details from OpenAI on how their agent broke out of its sandbox. The package proxy that it found a zero-day vulnerability in has now been confirmed as JFrog's Artifactor, and &lt;a href="https://jfrog.com/blog/jfrog-and-openai-collaboration-on-zero-day-security-findings/"&gt;JFrog and OpenAI Collaboration on Zero-Day Security Findings&lt;/a&gt; from JFrog links to the &lt;a href="https://docs.jfrog.com/releases/docs/artifactory-self-managed-releases#artifactory-7161"&gt;Artifactory 7.161.15 release notes&lt;/a&gt; which list 8 separate CVEs credited to OpenAI staff members.&lt;/p&gt;
+&lt;p&gt;Having broken out through the HTTP proxy, the agent started by establishing a base of operations for the rest of the attack:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;[...] the agent escaped its sandbox by exploiting a zero-day in the package registry cache proxy, one of its primary permitted network egress with internet, then abused a public code-evaluation external sandbox hosted on a third-party provider's infrastructure. It was able to run commands as root/admin on that external sandbox and used it as a control, staging, and egress base for the entire campaign: it acted as an external launchpad for the agent.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;(That "third-party provider" &lt;a href="https://simonwillison.net/2026/Jul/28/akshat-bubna/"&gt;turned out to be Modal&lt;/a&gt;.)&lt;/p&gt;
+&lt;p&gt;It then spent &lt;strong&gt;five days&lt;/strong&gt; - from Thursday 8th to Monday 13th July - executing a classic attack pattern: establishing C2 (command and control), reconnaissance, escalating privileges, dumping configuration information, exfiltrating the target data, and cleaning up after itself.&lt;/p&gt;
+&lt;p&gt;(The first Hugging Face post about the incident followed &lt;a href="https://huggingface.co/blog/security-incident-july-2026"&gt;on Thursday 16th&lt;/a&gt;, and OpenAI's confession came &lt;a href="https://openai.com/index/hugging-face-model-evaluation-security-incident/"&gt;on Tuesday 21st&lt;/a&gt;.)&lt;/p&gt;
+&lt;p&gt;Along the way it used all kinds of neat tricks. At one point it found an unsafe Jinja2 template execution and used it to execute arbitrary code:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;{{ cycler.__init__.__globals__.__builtins__.exec(
+ "import gzip,base64; exec(gzip.decompress(base64.b64decode('&amp;lt;payload&amp;gt;')))"
+) }}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;It broke out of a container within Hugging Face, stole a Kubernetes service-account token, and used that to further explore the network.&lt;/p&gt;
+&lt;p&gt;It monkey-patched the Python socket library to hard-code an IP address when "DNS got in the way":&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;socket.getaddrinfo = lambda *a, **k: [(2, 1, 6, '', ('&amp;lt;pinned-ip&amp;gt;', 443))]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;It even fired up its own Tailscale network to help exfiltrate data!&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;tailscaled --tun=userspace-networking \
+  --state=mem: --socket=/tmp/ts.sock \
+  --socks5-server=127.0.0.1:1055 \
+  --no-logs-no-support &amp;gt;/tmp/td 2&amp;gt;&amp;amp;1 &amp;amp;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The Hugging Face team note that, while a human attacker could have discovered and used the same exploits, the key difference here was &lt;em&gt;speed&lt;/em&gt;:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Our learning from this type of attack is that machine-speed offense makes ordinary weaknesses more expensive for defenders. LLM agents bring a step increase in the number of paths an attacker can test, the speed at which failed paths can be replaced, and the volume of evidence defenders must interpret.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;What's clear to me from this is that the very best frontier models, unencumbered by additional guardrails, &lt;strong&gt;will&lt;/strong&gt; find an exploit if there is one to be found.&lt;/p&gt;
+&lt;p&gt;The entire software industry needs to up its security game.
+
+
+    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/jinja"&gt;jinja&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/python"&gt;python&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/security"&gt;security&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/openai"&gt;openai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/hugging-face"&gt;hugging-face&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/coding-agents"&gt;coding-agents&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai-security-research"&gt;ai-security-research&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/openai-hugging-face-incident"&gt;openai-hugging-face-incident&lt;/a&gt;&lt;/p&gt;
+
+
+
+</summary><category term="jinja"/><category term="python"/><category term="security"/><category term="ai"/><category term="openai"/><category term="generative-ai"/><category term="llms"/><category term="hugging-face"/><category term="coding-agents"/><category term="ai-security-research"/><category term="openai-hugging-face-incident"/></entry><entry><title>moonshotai/Kimi-K3</title><link href="https://simonwillison.net/2026/Jul/27/kimi-k3/#atom-everything" rel="alternate"/><published>2026-07-27T23:39:04+00:00</published><updated>2026-07-27T23:39:04+00:00</updated><id>https://simonwillison.net/2026/Jul/27/kimi-k3/#atom-everything</id><summary type="html">
     
 &lt;p&gt;&lt;strong&gt;&lt;a href="https://huggingface.co/moonshotai/Kimi-K3"&gt;moonshotai/Kimi-K3&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 As promised &lt;a href="https://simonwillison.net/2026/Jul/16/kimi-k3/"&gt;earlier this month&lt;/a&gt;, Moonshot have released the weights for their excellent 2.8 trillion parameter Kimi K3. They're a hefty 1.56TB on Hugging Face.&lt;/p&gt;
@@ -166,11 +249,11 @@ Martin Alderson's commentary on the &lt;a href="https://simonwillison.net/2026/J
     &lt;p&gt;&lt;small&gt;&lt;/small&gt;Via &lt;a href="https://lobste.rs/s/nsnb4j/first_known_runaway_ai_agent_very_bad"&gt;Lobste.rs&lt;/a&gt;&lt;/small&gt;&lt;/p&gt;
 
 
-    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/security"&gt;security&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/openai"&gt;openai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/hugging-face"&gt;hugging-face&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai-security-research"&gt;ai-security-research&lt;/a&gt;&lt;/p&gt;
+    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/security"&gt;security&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/openai"&gt;openai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/hugging-face"&gt;hugging-face&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai-security-research"&gt;ai-security-research&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/openai-hugging-face-incident"&gt;openai-hugging-face-incident&lt;/a&gt;&lt;/p&gt;
 
 
 
-</summary><category term="security"/><category term="ai"/><category term="openai"/><category term="generative-ai"/><category term="llms"/><category term="hugging-face"/><category term="ai-security-research"/></entry><entry><title>Quoting Seth Larson</title><link href="https://simonwillison.net/2026/Jul/23/seth-larson/#atom-everything" rel="alternate"/><published>2026-07-23T04:50:36+00:00</published><updated>2026-07-23T04:50:36+00:00</updated><id>https://simonwillison.net/2026/Jul/23/seth-larson/#atom-everything</id><summary type="html">
+</summary><category term="security"/><category term="ai"/><category term="openai"/><category term="generative-ai"/><category term="llms"/><category term="hugging-face"/><category term="ai-security-research"/><category term="openai-hugging-face-incident"/></entry><entry><title>Quoting Seth Larson</title><link href="https://simonwillison.net/2026/Jul/23/seth-larson/#atom-everything" rel="alternate"/><published>2026-07-23T04:50:36+00:00</published><updated>2026-07-23T04:50:36+00:00</updated><id>https://simonwillison.net/2026/Jul/23/seth-larson/#atom-everything</id><summary type="html">
     &lt;blockquote cite="https://blog.pypi.org/posts/2026-07-22-releases-now-reject-new-files-after-14-days/"&gt;&lt;p&gt;The Python Package Index (PyPI) now rejects new files being uploaded to releases that are older than 14 days. This restriction was &lt;a href="https://github.com/pypi/warehouse/pull/19727"&gt;put in place&lt;/a&gt; to prevent old and long-stable releases from being poisoned in case publishing tokens or workflows of PyPI projects were compromised. As far as we are aware this has not yet been abused, but there is no technical reason beyond that attackers weren't aware it was possible.&lt;/p&gt;&lt;/blockquote&gt;
 &lt;p class="cite"&gt;&amp;mdash; &lt;a href="https://blog.pypi.org/posts/2026-07-22-releases-now-reject-new-files-after-14-days/"&gt;Seth Larson&lt;/a&gt;, PyPI blog&lt;/p&gt;
 
@@ -182,11 +265,11 @@ Martin Alderson's commentary on the &lt;a href="https://simonwillison.net/2026/J
     &lt;blockquote cite="https://twitter.com/tqbf/status/2080045032162173329"&gt;&lt;p&gt;I genuinely believe that if you took an open weights model from 2025 and built a pentest harness for it, it could do this kind of sandbox escape and scan/hack in most networks. This is only surprising because you assume OpenAI has sounder sandboxes.&lt;/p&gt;&lt;/blockquote&gt;
 &lt;p class="cite"&gt;&amp;mdash; &lt;a href="https://twitter.com/tqbf/status/2080045032162173329"&gt;Thomas Ptacek&lt;/a&gt;, doesn't think &lt;a href="https://simonwillison.net/2026/Jul/22/openai-cyberattack/#resist-the-temptation-to-write-this-off-as-a-stunt"&gt;this even needs&lt;/a&gt; a frontier model&lt;/p&gt;
 
-    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/thomas-ptacek"&gt;thomas-ptacek&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/openai"&gt;openai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/security"&gt;security&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai-security-research"&gt;ai-security-research&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/sandboxing"&gt;sandboxing&lt;/a&gt;&lt;/p&gt;
+    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/thomas-ptacek"&gt;thomas-ptacek&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/openai"&gt;openai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/security"&gt;security&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai-security-research"&gt;ai-security-research&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/sandboxing"&gt;sandboxing&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/openai-hugging-face-incident"&gt;openai-hugging-face-incident&lt;/a&gt;&lt;/p&gt;
 
 
 
-</summary><category term="thomas-ptacek"/><category term="openai"/><category term="security"/><category term="generative-ai"/><category term="ai-security-research"/><category term="ai"/><category term="llms"/><category term="sandboxing"/></entry><entry><title>OpenAI’s accidental cyberattack against Hugging Face is science fiction that happened</title><link href="https://simonwillison.net/2026/Jul/22/openai-cyberattack/#atom-everything" rel="alternate"/><published>2026-07-22T23:51:33+00:00</published><updated>2026-07-22T23:51:33+00:00</updated><id>https://simonwillison.net/2026/Jul/22/openai-cyberattack/#atom-everything</id><summary type="html">
+</summary><category term="thomas-ptacek"/><category term="openai"/><category term="security"/><category term="generative-ai"/><category term="ai-security-research"/><category term="ai"/><category term="llms"/><category term="sandboxing"/><category term="openai-hugging-face-incident"/></entry><entry><title>OpenAI’s accidental cyberattack against Hugging Face is science fiction that happened</title><link href="https://simonwillison.net/2026/Jul/22/openai-cyberattack/#atom-everything" rel="alternate"/><published>2026-07-22T23:51:33+00:00</published><updated>2026-07-22T23:51:33+00:00</updated><id>https://simonwillison.net/2026/Jul/22/openai-cyberattack/#atom-everything</id><summary type="html">
     &lt;p&gt;This story is wild. The short version: OpenAI were running a cybersecurity test against an unreleased model, with the model's guardrail features turned off. Rather than solve the test, the model broke its way out of OpenAI's sandbox, then found exploits to break &lt;em&gt;in&lt;/em&gt; to Hugging Face, all so it could cheat on the test by stealing the answers.&lt;/p&gt;
 &lt;p&gt;Along the way it helped make the strongest case yet for how the imbalance of model availability is hurting our ability to secure our software.&lt;/p&gt;
 &lt;h4 id="here-s-what-happened"&gt;Here's what happened&lt;/h4&gt;
@@ -270,10 +353,10 @@ Martin Alderson's commentary on the &lt;a href="https://simonwillison.net/2026/J
 &lt;p&gt;Meanwhile open weight models from China such as GLM-5.2, Kimi 3 and the new Qwen 3.8 Max appear to have none of these restrictions - and any restrictions that &lt;em&gt;do&lt;/em&gt; exist can likely be fine-tuned out of them by modifying the weights&lt;/p&gt;
 &lt;p&gt;These constraints are meant to make us safer. I think there's a risk that they are having the opposite effect.&lt;/p&gt;
     
-        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/sandboxing"&gt;sandboxing&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/security"&gt;security&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/openai"&gt;openai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/hugging-face"&gt;hugging-face&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/anthropic"&gt;anthropic&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/paper-review"&gt;paper-review&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai-security-research"&gt;ai-security-research&lt;/a&gt;&lt;/p&gt;
+        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/sandboxing"&gt;sandboxing&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/security"&gt;security&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/openai"&gt;openai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/hugging-face"&gt;hugging-face&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/anthropic"&gt;anthropic&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/paper-review"&gt;paper-review&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai-security-research"&gt;ai-security-research&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/openai-hugging-face-incident"&gt;openai-hugging-face-incident&lt;/a&gt;&lt;/p&gt;
     
 
-</summary><category term="sandboxing"/><category term="security"/><category term="ai"/><category term="openai"/><category term="generative-ai"/><category term="llms"/><category term="hugging-face"/><category term="anthropic"/><category term="paper-review"/><category term="ai-security-research"/></entry><entry><title>Are AI labs pelicanmaxxing?</title><link href="https://simonwillison.net/2026/Jul/22/are-ai-labs-pelicanmaxxing/#atom-everything" rel="alternate"/><published>2026-07-22T23:01:00+00:00</published><updated>2026-07-22T23:01:00+00:00</updated><id>https://simonwillison.net/2026/Jul/22/are-ai-labs-pelicanmaxxing/#atom-everything</id><summary type="html">
+</summary><category term="sandboxing"/><category term="security"/><category term="ai"/><category term="openai"/><category term="generative-ai"/><category term="llms"/><category term="hugging-face"/><category term="anthropic"/><category term="paper-review"/><category term="ai-security-research"/><category term="openai-hugging-face-incident"/></entry><entry><title>Are AI labs pelicanmaxxing?</title><link href="https://simonwillison.net/2026/Jul/22/are-ai-labs-pelicanmaxxing/#atom-everything" rel="alternate"/><published>2026-07-22T23:01:00+00:00</published><updated>2026-07-22T23:01:00+00:00</updated><id>https://simonwillison.net/2026/Jul/22/are-ai-labs-pelicanmaxxing/#atom-everything</id><summary type="html">
     
 &lt;p&gt;&lt;strong&gt;&lt;a href="https://dylancastillo.co/posts/pelicanmaxxing.html"&gt;Are AI labs pelicanmaxxing?&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 Excellent piece of work by Dylan Castillo, who took a deep-dive into the frequently pondered question of whether the AI labs have been deliberately training models to draw pelicans riding bicycles in response to my &lt;a href="https://simonwillison.net/tags/pelican-riding-a-bicycle/"&gt;deeply unscientific benchmark&lt;/a&gt;.&lt;/p&gt;
@@ -752,147 +835,4 @@ A certain vintage of Python web nerd might be delighted to learn that the most r
 
 
 
-</summary><category term="ai-energy-usage"/><category term="ai"/></entry><entry><title>Firefox in WebAssembly</title><link href="https://simonwillison.net/2026/Jul/16/firefox-in-webassembly/#atom-everything" rel="alternate"/><published>2026-07-16T23:34:16+00:00</published><updated>2026-07-16T23:34:16+00:00</updated><id>https://simonwillison.net/2026/Jul/16/firefox-in-webassembly/#atom-everything</id><summary type="html">
-    
-&lt;p&gt;&lt;strong&gt;&lt;a href="https://developer.puter.com/labs/firefox-wasm/"&gt;Firefox in WebAssembly&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
-This is absurdly cool: Puter compiled Firefox to WebAssembly such that the whole browser runs in another browser.&lt;/p&gt;
-&lt;p&gt;Here's my blog, running in Firefox, running in WebAssembly, running in Chrome:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="A Chrome window. The tab has the Firefox UI and has loaded my blog. On the right is the Chrome network panel showing that it loaded resources that include a 233MB gecko.wasm and an 18MB chrome-assets.tar.zst" src="https://static.simonwillison.net/static/2026/firefox-wasm.webp" /&gt;&lt;/p&gt;
-&lt;p&gt;They chose Firefox/Gecko because it has strong single-process support. The project used an estimated $25,000 worth of Claude Opus and Fable tokens, but took advantage of a Claude Max subscription plan so cost much less in actual dollars.&lt;/p&gt;
-&lt;p&gt;The demo funnels all traffic over a WebSocket protocol (using the &lt;a href="https://github.com/MercuryWorkshop/wisp-protocol"&gt;Wisp protocol&lt;/a&gt;) through Puter's server - a requirement to get this kind of thing to work because code running in browsers can't open arbitrary network connections.&lt;/p&gt;
-&lt;p&gt;(That proxying sounds expensive! The team &lt;a href="https://news.ycombinator.com/item?id=48926939#48936563"&gt;had to scale the servers up&lt;/a&gt; to handle the traffic during the Hacker News conversation about the project.)&lt;/p&gt;
-&lt;p&gt;Puter claim this supports end-to-end encryption and that looks to be true - I inspected the WebSocket messages and traffic to my own HTTPS site was encrypted whereas requests and responses to &lt;code&gt;http://www.example.com/&lt;/code&gt; were in cleartext.&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://github.com/HeyPuter/firefox-wasm"&gt;Here's the repo&lt;/a&gt; for &lt;code&gt;firefox-wasm&lt;/code&gt;. &lt;a href="https://github.com/theogbob/WebkitWasm"&gt;theogbob/WebkitWasm&lt;/a&gt; is a similar project that compiles WebKit to WASM, but that one doesn't currently have an accessible online demo.
-
-    &lt;p&gt;&lt;small&gt;&lt;/small&gt;Via &lt;a href="https://news.ycombinator.com/item?id=48926939"&gt;Hacker News&lt;/a&gt;&lt;/small&gt;&lt;/p&gt;
-
-
-    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/browsers"&gt;browsers&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/firefox"&gt;firefox&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/webassembly"&gt;webassembly&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai-assisted-programming"&gt;ai-assisted-programming&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/claude"&gt;claude&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/claude-mythos-fable"&gt;claude-mythos-fable&lt;/a&gt;&lt;/p&gt;
-
-
-
-</summary><category term="browsers"/><category term="firefox"/><category term="ai"/><category term="webassembly"/><category term="generative-ai"/><category term="llms"/><category term="ai-assisted-programming"/><category term="claude"/><category term="claude-mythos-fable"/></entry><entry><title>Kimi K3, and what we can still learn from the pelican benchmark</title><link href="https://simonwillison.net/2026/Jul/16/kimi-k3/#atom-everything" rel="alternate"/><published>2026-07-16T20:19:30+00:00</published><updated>2026-07-16T20:19:30+00:00</updated><id>https://simonwillison.net/2026/Jul/16/kimi-k3/#atom-everything</id><summary type="html">
-    &lt;p&gt;Chinese AI lab Moonshot AI &lt;a href="https://www.kimi.com/blog/kimi-k3"&gt;announced Kimi K3&lt;/a&gt; this morning, describing it as their "most capable model to date, with 2.8 trillion parameters". It's currently available via their website and API, but an open weight release is promised "by July 27, 2026".&lt;/p&gt;
-&lt;p&gt;Moonshot are calling this the first "open 3T-class model" (I guess they're rounding 2.8 trillion up to 3 trillion), taking the crown from &lt;a href="https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro"&gt;DeepSeek's 1.6T v4 Pro&lt;/a&gt;. Their &lt;a href="https://www.kimi.com/blog/kimi-k3#full-benchmark-table"&gt;self-reported benchmarks&lt;/a&gt; have K3 mostly beating Claude Opus 4.8 max and GPT-5.5 high, while losing out to Claude Fable 5 and GPT-5.6 Sol.&lt;/p&gt;
-&lt;p&gt;A few highlights from the &lt;a href="https://twitter.com/ArtificialAnlys/status/2077832874183860404"&gt;Artificial Analysis report&lt;/a&gt; on the model:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;"On our private long-horizon knowledge work evaluation, Kimi K3 reaches an overall Elo of 1547, +732 points from Kimi K2.6 and behind only Claude Fable 5."&lt;/li&gt;
-&lt;li&gt;"Cost per task ($0.94) is similar to GPT-5.6 Sol ($1.04), ~1/2 the price of Opus 4.8 ($1.80) and higher than open weights peers"&lt;/li&gt;
-&lt;li&gt;"Kimi K3’s token usage on the Artificial Analysis Intelligence Index decreased significantly, using 21% fewer output tokens than K2.6."&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;The model is also now the &lt;a href="https://twitter.com/arena/status/2077824029126504525"&gt;leading model on Arena.ai's Frontend Code arena&lt;/a&gt;, surpassing even Claude Fable 5.&lt;/p&gt;
-&lt;p&gt;The new model is notable for the pricing: $3/million input tokens and $15/million output tokens, putting it at the same level as Anthropic's Claude Sonnet series and making it the most expensive model released by a Chinese AI lab to date. This is a significant increase on their earlier models &lt;a href="https://platform.kimi.ai/docs/pricing/chat-k26"&gt;such as Kimi K2.6&lt;/a&gt; at $0.95/$4. 2.8 trillion parameters is also more than twice the size of that 1T model.&lt;/p&gt;
-&lt;h4 id="but-how-does-it-pelican-"&gt;But how does it pelican?&lt;/h4&gt;
-&lt;p&gt;I used OpenRouter (to avoid signing up for a Moonshot API key) with the &lt;a href="https://github.com/simonw/llm-openrouter"&gt;llm-openrouter plugin&lt;/a&gt; to generate an SVG of a pelican riding a bicycle:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;llm -m openrouter/moonshotai/kimi-k3 'Generate an SVG of a pelican riding a bicycle'
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Here's &lt;a href="https://gist.github.com/simonw/66a2699eb1594258904c7b5102840dd6"&gt;the transcript&lt;/a&gt;. It looks like this:&lt;/p&gt;
-&lt;p&gt;&lt;img src="https://static.simonwillison.net/static/2026/kimi-3-pelican.jpg" alt="See description below" style="max-width: 100%;" /&gt;&lt;/p&gt;
-&lt;p&gt;That pelican took 95 input tokens and 16,658 output tokens (13,241 were reasoning tokens), for a total cost of &lt;a href="https://www.llm-prices.com/#it=95&amp;amp;ot=16658&amp;amp;ic=3&amp;amp;oc=15"&gt;25 cents&lt;/a&gt;!&lt;/p&gt;
-&lt;p&gt;Since K3 accepts image input I ran it against that rendered SVG above (with my &lt;a href="https://simonwillison.net/guides/agentic-engineering-patterns/prompts/#alt-text"&gt;alt text prompt&lt;/a&gt;) and &lt;a href="https://gist.github.com/simonw/665dbf840701b421745f2cb891acdfd6"&gt;got back&lt;/a&gt; (for &lt;a href="https://www.llm-prices.com/#it=822&amp;amp;ot=243&amp;amp;ic=3&amp;amp;oc=15"&gt;0.6 cents&lt;/a&gt;):&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Cartoon illustration of a white pelican wearing a red scarf, riding a red bicycle along a gray road with white dashed lines; the pelican has a large orange beak and webbed orange feet pedaling, with white motion lines behind it; the background shows a light blue sky with white clouds, a yellow sun, two small black birds in flight, and green grass with tiny white flowers in the foreground&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h4 id="what-can-we-learn-from-the-pelican-"&gt;What can we learn from the pelican?&lt;/h4&gt;
-&lt;p&gt;My &lt;a href="https://simonwillison.net/tags/pelican-riding-a-bicycle/"&gt;Generate an SVG of a pelican riding a bicycle&lt;/a&gt; test is 21 months old now. It was never a particularly great benchmark. It started out as a joke on how absurdly difficult it is to compare these models, but then for the first year it turned out to have a &lt;a href="https://simonwillison.net/2025/Jun/6/six-months-in-llms/"&gt;surprising correlation&lt;/a&gt; to how good the models actually were.&lt;/p&gt;
-&lt;p&gt;That connection has been mostly severed now. The &lt;a href="https://simonwillison.net/2026/Jul/9/gpt-5-6/"&gt;GPT-5.6&lt;/a&gt; and &lt;a href="https://simonwillison.net/2026/Jun/9/claude-fable-5/"&gt;Claude Fable 5&lt;/a&gt;  pelicans are outclassed &lt;a href="https://simonwillison.net/2026/Jun/17/glm-52/"&gt;by GLM-5.2&lt;/a&gt;, and much as I love GLM I don't think that's a Fable-class model.&lt;/p&gt;
-&lt;p&gt;(I'm still not convinced that labs are &lt;a href="https://simonwillison.net/2025/Nov/13/training-for-pelicans-riding-bicycles/"&gt;training for the benchmark&lt;/a&gt; - if they were, I'd expect much better results. There's a chance that Gemini has optimized for &lt;a href="https://simonwillison.net/2026/Feb/19/gemini-31-pro/#jeff-dean"&gt;any combination of an animal on a vehicle&lt;/a&gt; though!)&lt;/p&gt;
-&lt;p&gt;The biggest limitation of the pelican is that it doesn't touch at all on the thing that matters most for today's model: agentic tool calling and the ability to operate tools reliably as conversations grow in length.&lt;/p&gt;
-&lt;p&gt;So don't go using pelicans to compare models!&lt;/p&gt;
-
-&lt;p&gt;All of that said, I still get a decent amount of value out of running the benchmark myself.&lt;/p&gt;
-&lt;p&gt;Firstly, it's a forcing function for actually trying the model. If I show you a pelican, that means I've managed to run a prompt through it. If the model has an official API I'll use that, if it's open weight (and small enough to fit a 128GB M5 MacBook Pro) I'll try running it on my own machine, usually via &lt;a href="https://github.com/ggml-org/llama.cpp"&gt;llama.cpp&lt;/a&gt; or &lt;a href="https://lmstudio.ai"&gt;LM Studio&lt;/a&gt; or &lt;a href="https://ollama.com"&gt;Ollama&lt;/a&gt;. I'll frequently use &lt;a href="https://openrouter.ai"&gt;OpenRouter&lt;/a&gt; since that usually provides a proxy to an official API without me needing a new API key.&lt;/p&gt;
-&lt;p&gt;Most of my pelicans are generated using &lt;a href="https://llm.datasette.io/"&gt;my LLM CLI tool&lt;/a&gt;, which helps encourage me to ensure the latest models are supported by that (via one of its plugins).&lt;/p&gt;
-&lt;p&gt;More importantly though, even the act of a single prompt to "Generate an SVG of a pelican riding a bicycle" can reveal interesting model characteristics.&lt;/p&gt;
-&lt;p&gt;Consider &lt;a href="https://gist.github.com/simonw/66a2699eb1594258904c7b5102840dd6"&gt;the result&lt;/a&gt; for Kimi K3 today. Running those simple prompts helped emphasize several points about the model.&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;It only has one reasoning effort right now, "max" - and it shows. The model consumed 13,241 reasoning tokens to output 3,417 tokens of response. This is expensive - the pelican cost 25 cents!&lt;/li&gt;
-&lt;li&gt;How does the prompt "Generate an SVG of a pelican riding a bicycle" add up to 95 input tokens?  OpenAI's &lt;a href="https://platform.openai.com/tokenizer"&gt;tokenizer&lt;/a&gt;  counts 10, &lt;a href="https://tools.simonwillison.net/claude-token-counter"&gt;Anthropic's&lt;/a&gt; counts 10 for Opus 4.6, 30 for Opus 4.7 and 25 for Sonnet 5/Fable 5. Prompting "hi" &lt;a href="https://news.ycombinator.com/item?id=48935342#48936461"&gt;to Kimi K3&lt;/a&gt; counted 86 tokens, suggesting there may be an 85 token hidden system prompt. It &lt;a href="https://news.ycombinator.com/item?id=48935342#48936515"&gt;refused to leak it&lt;/a&gt; though.&lt;/li&gt;
-&lt;li&gt;Vision works well: the alt text it generated is very good.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;K3 currently only has one thinking effort level, but I've been deriving quite a bit of value recently from running the same pelican prompt through different effort levels to get a quick idea for what impact those have. Here's my matrix &lt;a href="https://static.simonwillison.net/static/2026/gpt-5.6-pelicans.html"&gt;for the GPT-5.6 model family&lt;/a&gt;, for example.&lt;/p&gt;
-&lt;p&gt;Really though the main things I gain from the pelican test are:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;It's a "hello world" exercise for prompting a model&lt;/li&gt;
-&lt;li&gt;A rough cost and reasoning estimate for a simple task&lt;/li&gt;
-&lt;li&gt;Confirmation that the model can output valid SVG and has a basic idea of geometry and spatial awareness. This is a much bigger deal for the smaller models that run on my laptop.&lt;/li&gt;
-&lt;li&gt;It's still interesting to compare pelicans between releases in the same model family. K3's pelican is a notable improvement from &lt;a href="https://simonwillison.net/2026/Jan/27/kimi-k25/"&gt;Kimi 2.5&lt;/a&gt;.&lt;/li&gt;
-&lt;li&gt;It's something I can share that demonstrates I've tried it. Plus a comment with a pelican in it is kind of a tradition on Hacker News at this point, any time I'm late I get comments asking where it is!&lt;/li&gt;
-&lt;/ol&gt;
-    
-        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llm-pricing"&gt;llm-pricing&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/pelican-riding-a-bicycle"&gt;pelican-riding-a-bicycle&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llm-release"&gt;llm-release&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai-in-china"&gt;ai-in-china&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/artificial-analysis"&gt;artificial-analysis&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/moonshot"&gt;moonshot&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/kimi"&gt;kimi&lt;/a&gt;&lt;/p&gt;
-    
-
-</summary><category term="ai"/><category term="generative-ai"/><category term="llms"/><category term="llm-pricing"/><category term="pelican-riding-a-bicycle"/><category term="llm-release"/><category term="ai-in-china"/><category term="artificial-analysis"/><category term="moonshot"/><category term="kimi"/></entry><entry><title>Quoting Thibault Sottiaux</title><link href="https://simonwillison.net/2026/Jul/16/bad-codex-bug/#atom-everything" rel="alternate"/><published>2026-07-16T17:45:59+00:00</published><updated>2026-07-16T17:45:59+00:00</updated><id>https://simonwillison.net/2026/Jul/16/bad-codex-bug/#atom-everything</id><summary type="html">
-    &lt;blockquote cite="https://twitter.com/thsottiaux/status/2077630111499882637"&gt;&lt;p&gt;On file deletions. We’ve investigated a handful of reports where GPT-5.6 unexpectedly deleted files. &lt;/p&gt;
-&lt;p&gt;What we have  found is that this most commonly occurs when:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Full access mode is enabled and codex is run without sandboxing protections, including without auto review being enabled&lt;/li&gt;
-&lt;li&gt;The model attempts  to override the $HOME env var to define a temporary directory.&lt;/li&gt;
-&lt;li&gt;The model makes an honest mistake and mistakenly deletes $HOME instead.&lt;/li&gt;
-&lt;/ul&gt;&lt;/blockquote&gt;
-&lt;p class="cite"&gt;&amp;mdash; &lt;a href="https://twitter.com/thsottiaux/status/2077630111499882637"&gt;Thibault Sottiaux&lt;/a&gt;, describing a pretty gnarly Codex bug&lt;/p&gt;
-
-    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/codex"&gt;codex&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/coding-agents"&gt;coding-agents&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;&lt;/p&gt;
-
-
-
-</summary><category term="codex"/><category term="coding-agents"/><category term="generative-ai"/><category term="ai"/><category term="llms"/></entry><entry><title>Inkling: Our open-weights model</title><link href="https://simonwillison.net/2026/Jul/16/inkling/#atom-everything" rel="alternate"/><published>2026-07-16T15:35:25+00:00</published><updated>2026-07-16T15:35:25+00:00</updated><id>https://simonwillison.net/2026/Jul/16/inkling/#atom-everything</id><summary type="html">
-    
-&lt;p&gt;&lt;strong&gt;&lt;a href="https://thinkingmachines.ai/news/introducing-inkling/"&gt;Inkling: Our open-weights model&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
-Mira Murati's Thinking Machines Lab just released their first open-weights model. Inkling is "a Mixture-of-Experts transformer with 975B total parameters, 41B active" - an Apache-2.0 licensed multimodal model trained on 45 trillion tokens of text, images, audio and video.&lt;/p&gt;
-&lt;p&gt;They're also promising Inkling-Small, a 276B (12B active) model, but that's still being tested and the weights will be released "once that work is complete".&lt;/p&gt;
-&lt;p&gt;The &lt;a href="https://thinkingmachines.ai/model-card/inkling/"&gt;model card&lt;/a&gt; is much shorter than I've come to expect from US AI labs. It links to even shorter &lt;a href="https://thinkingmachines.ai/training-data-documentation/"&gt;Training Data Documentation&lt;/a&gt; with almost nothing of interest in it - it's best summarized by these two paragraphs:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;The datasets Thinking Machines Lab uses to develop its AI services includes content that is in the public domain as well as content that may be subject to intellectual property protection.&lt;/p&gt;
-&lt;p&gt;Thinking Machines Lab’s services were developed using publicly available content obtained from the open internet and publicly accessible data repositories. Certain datasets were also obtained from third parties.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;By Thinking Machines' own admission, this is not a frontier model. It's instead intended as a strong base model for fine-tuning using their own &lt;a href="https://thinkingmachines.ai/tinker/"&gt;Tinker training platform&lt;/a&gt;:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Inkling is not the strongest overall model available today, open or closed. Instead, a combination of qualities makes it a good open-weights base for customization: multimodal capabilities, efficient thinking, and availability on Tinker for fine-tuning.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;There's a lot to like about this release. It's Apache-2.0 licensed, and looks competitive with the open weight models coming out of China - it's good to see the US open weights ecosystem gain a new viable contender to join NVIDIA Nemotron and Gemma 4.&lt;/p&gt;
-&lt;p&gt;Here's its attempt at an SVG pelican riding a bicycle, which I generated using this &lt;code&gt;curl&lt;/code&gt; command against the Thinking Machines API:&lt;/p&gt;
-&lt;div class="highlight highlight-source-shell"&gt;&lt;pre&gt;curl &lt;span class="pl-s"&gt;&lt;span class="pl-pds"&gt;"&lt;/span&gt;https://tinker.thinkingmachines.dev/services/tinker-prod/oai/api/v1/chat/completions&lt;span class="pl-pds"&gt;"&lt;/span&gt;&lt;/span&gt; \
-  -H &lt;span class="pl-s"&gt;&lt;span class="pl-pds"&gt;"&lt;/span&gt;Authorization: Bearer &lt;span class="pl-smi"&gt;$TINKER_API_KEY&lt;/span&gt;&lt;span class="pl-pds"&gt;"&lt;/span&gt;&lt;/span&gt; \
-  -H &lt;span class="pl-s"&gt;&lt;span class="pl-pds"&gt;"&lt;/span&gt;Content-Type: application/json&lt;span class="pl-pds"&gt;"&lt;/span&gt;&lt;/span&gt; \
-  -d &lt;span class="pl-s"&gt;&lt;span class="pl-pds"&gt;'&lt;/span&gt;{&lt;/span&gt;
-&lt;span class="pl-s"&gt;    "model": "thinkingmachines/Inkling",&lt;/span&gt;
-&lt;span class="pl-s"&gt;    "messages": [&lt;/span&gt;
-&lt;span class="pl-s"&gt;      {"role": "user", "content": "Generate an SVG of a pelican riding a bicycle"}&lt;/span&gt;
-&lt;span class="pl-s"&gt;    ],&lt;/span&gt;
-&lt;span class="pl-s"&gt;    "stream": false&lt;/span&gt;
-&lt;span class="pl-s"&gt;  }&lt;span class="pl-pds"&gt;'&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Full &lt;a href="https://gist.github.com/simonw/8117ac4376371dd3fc2b5dbce27e0855"&gt;response here&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="See image description below" src="https://static.simonwillison.net/static/2026/inkling-pelican.jpg" /&gt;&lt;/p&gt;
-&lt;p&gt;Since it's a multi-modal model I had it describe its own image (after I rendered it to a JPEG) by sending this JSON:&lt;/p&gt;
-&lt;div class="highlight highlight-source-json"&gt;&lt;pre&gt;{
-  &lt;span class="pl-ent"&gt;"model"&lt;/span&gt;: &lt;span class="pl-s"&gt;&lt;span class="pl-pds"&gt;"&lt;/span&gt;thinkingmachines/Inkling&lt;span class="pl-pds"&gt;"&lt;/span&gt;&lt;/span&gt;,
-  &lt;span class="pl-ent"&gt;"messages"&lt;/span&gt;: [{
-    &lt;span class="pl-ent"&gt;"role"&lt;/span&gt;: &lt;span class="pl-s"&gt;&lt;span class="pl-pds"&gt;"&lt;/span&gt;user&lt;span class="pl-pds"&gt;"&lt;/span&gt;&lt;/span&gt;,
-    &lt;span class="pl-ent"&gt;"content"&lt;/span&gt;: [
-      {&lt;span class="pl-ent"&gt;"type"&lt;/span&gt;: &lt;span class="pl-s"&gt;&lt;span class="pl-pds"&gt;"&lt;/span&gt;image_url&lt;span class="pl-pds"&gt;"&lt;/span&gt;&lt;/span&gt;, &lt;span class="pl-ent"&gt;"image_url"&lt;/span&gt;: {&lt;span class="pl-ent"&gt;"url"&lt;/span&gt;: &lt;span class="pl-s"&gt;&lt;span class="pl-pds"&gt;"&lt;/span&gt;data:image/jpeg;base64,$BASE_64_JPEG&lt;span class="pl-pds"&gt;"&lt;/span&gt;&lt;/span&gt;}},
-      {&lt;span class="pl-ent"&gt;"type"&lt;/span&gt;: &lt;span class="pl-s"&gt;&lt;span class="pl-pds"&gt;"&lt;/span&gt;text&lt;span class="pl-pds"&gt;"&lt;/span&gt;&lt;/span&gt;, &lt;span class="pl-ent"&gt;"text"&lt;/span&gt;: &lt;span class="pl-s"&gt;&lt;span class="pl-pds"&gt;"&lt;/span&gt;Describe this image in detail&lt;span class="pl-pds"&gt;"&lt;/span&gt;&lt;/span&gt;},
-    ],
-  }],
-  &lt;span class="pl-ent"&gt;"stream"&lt;/span&gt;: &lt;span class="pl-c1"&gt;false&lt;/span&gt;
-}&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Here's &lt;a href="https://gist.github.com/simonw/dccebd0581f5c4056c5b0ca5bdc38cd9#reasoning_content"&gt;the full response&lt;/a&gt;. It thought it had drawn a "stork or seagull":&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;This is a cheerful, flat-vector cartoon illustration featuring a white bird riding a bicycle across a green landscape.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;The Bird:&lt;/strong&gt; The central figure is a stylized white bird—resembling a stork or seagull—with a plump, rounded body. It has a long, prominent orange beak that is slightly open, revealing a black line for the mouth. Its eye is small and black with a tiny white highlight. The bird has black wing and tail feathers with white edges, and thin orange legs ending in black feet that rest on the bicycle's orange pedals.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;The Bicycle:&lt;/strong&gt; The bike has a simple black frame with two large wheels featuring black tires, gray inner rims, and black spokes arranged in a cross pattern. The handlebars are black, and there are bright orange pedals attached to a black crank. A white seat is visible behind the bird's body.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;The Setting:&lt;/strong&gt; The scene is set against a clear, light blue sky. There are two fluffy white clouds—one on the left side and a smaller one near the bird's head on the right. A bright, solid yellow sun shines in the upper right corner. At the bottom, there are rolling green hills with a smooth, curved top edge where the bicycle rests.&lt;/p&gt;
-&lt;p&gt;The overall style is playful, simple, and colorful, with clean lines and a bright, sunny atmosphere.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-    &lt;p&gt;&lt;small&gt;&lt;/small&gt;Via &lt;a href="https://news.ycombinator.com/item?id=48924912"&gt;Hacker News&lt;/a&gt;&lt;/small&gt;&lt;/p&gt;
-
-
-    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/training-data"&gt;training-data&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/pelican-riding-a-bicycle"&gt;pelican-riding-a-bicycle&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llm-release"&gt;llm-release&lt;/a&gt;&lt;/p&gt;
-
-
-
-</summary><category term="ai"/><category term="generative-ai"/><category term="llms"/><category term="training-data"/><category term="pelican-riding-a-bicycle"/><category term="llm-release"/></entry></feed>
+</summary><category term="ai-energy-usage"/><category term="ai"/></entry></feed>
