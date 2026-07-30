@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-07-29T21:15:21+00:00</updated><author><name>Simon Willison</name></author><entry><title>Quoting D. Richard Hipp</title><link href="https://simonwillison.net/2026/Jul/29/d-richard-hipp/#atom-everything" rel="alternate"/><published>2026-07-29T21:15:21+00:00</published><updated>2026-07-29T21:15:21+00:00</updated><id>https://simonwillison.net/2026/Jul/29/d-richard-hipp/#atom-everything</id><summary type="html">
+<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-07-30T18:25:26+00:00</updated><author><name>Simon Willison</name></author><entry><title>Quoting Bruce Schneier</title><link href="https://simonwillison.net/2026/Jul/30/bruce-schneier/#atom-everything" rel="alternate"/><published>2026-07-30T18:25:26+00:00</published><updated>2026-07-30T18:25:26+00:00</updated><id>https://simonwillison.net/2026/Jul/30/bruce-schneier/#atom-everything</id><summary type="html">
+    &lt;blockquote cite="https://www.schneier.com/blog/archives/2026/07/should-you-use-ai-for-a-task-heres-a-simple-way-to-decide.html"&gt;&lt;p&gt;The writing assignments I give my students are gym tasks, not work tasks. I ask them to write policy memos not because the world needs more policy memos. I assign them because the very act of writing, which includes thinking and outlining and drafting and editing, making and criticizing and revising arguments, will help develop the critical thinking skills they will need in their future careers. And without this constant mental exercise, those skills will atrophy. Employers are &lt;a href="https://futurism.com/future-society/college-critical-thinking-ai"&gt;already noticing&lt;/a&gt;.&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p class="cite"&gt;&amp;mdash; &lt;a href="https://www.schneier.com/blog/archives/2026/07/should-you-use-ai-for-a-task-heres-a-simple-way-to-decide.html"&gt;Bruce Schneier&lt;/a&gt;, Should You Use AI for a Task? Here’s a Simple Way to Decide&lt;/p&gt;
+
+    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/ai-ethics"&gt;ai-ethics&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/writing"&gt;writing&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai-misuse"&gt;ai-misuse&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/bruce-schneier"&gt;bruce-schneier&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;&lt;/p&gt;
+
+
+
+</summary><category term="ai-ethics"/><category term="writing"/><category term="ai-misuse"/><category term="generative-ai"/><category term="bruce-schneier"/><category term="ai"/><category term="llms"/></entry><entry><title>Quoting D. Richard Hipp</title><link href="https://simonwillison.net/2026/Jul/29/d-richard-hipp/#atom-everything" rel="alternate"/><published>2026-07-29T21:15:21+00:00</published><updated>2026-07-29T21:15:21+00:00</updated><id>https://simonwillison.net/2026/Jul/29/d-richard-hipp/#atom-everything</id><summary type="html">
     &lt;blockquote cite="https://www.youtube.com/watch?v=R57nUGzo7CA&amp;amp;t=848s"&gt;&lt;p&gt;Years ago, we didn’t have SQL. There were people whose job was to generate software that would query large data sets. Their job title was COBOL programmer.&lt;/p&gt;
 &lt;p&gt;Then SQL comes along—I’m simplifying this only a little bit—and it gives you this convenient way so people could just specify. With a very simple specification, you can generate all of that code that you had to pay the expensive COBOL programmer to do before.&lt;/p&gt;
 &lt;p&gt;That didn’t mean programmers went away. It just meant the job changed a little bit.&lt;/p&gt;&lt;/blockquote&gt;
@@ -816,18 +824,4 @@ BUN_OPTIONS="--preload=/tmp/bun-version.ts" claude --version
 
 
 
-</summary><category term="bun"/><category term="rust"/><category term="anthropic"/><category term="claude-code"/><category term="jarred-sumner"/></entry><entry><title>SQLite Query Explainer</title><link href="https://simonwillison.net/2026/Jul/18/sqlite-query-explainer/#atom-everything" rel="alternate"/><published>2026-07-18T17:19:10+00:00</published><updated>2026-07-18T17:19:10+00:00</updated><id>https://simonwillison.net/2026/Jul/18/sqlite-query-explainer/#atom-everything</id><summary type="html">
-    
-        &lt;p&gt;&lt;strong&gt;Tool:&lt;/strong&gt; &lt;a href="https://tools.simonwillison.net/sqlite-query-explainer"&gt;SQLite Query Explainer&lt;/a&gt;&lt;/p&gt;
-        &lt;p&gt;Julia Evan's, in &lt;a href="https://jvns.ca/blog/2026/07/17/learning-about-running-sqlite/"&gt;Learning a few things about running SQLite&lt;/a&gt;:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Maybe one day I’ll learn to read a query plan.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Big same.... which inspired me to &lt;a href="https://github.com/simonw/tools/pull/299#issue-4919268017"&gt;have Fable build&lt;/a&gt; this interactive explain tool, which runs SQLite in Python in Pyodide in Web Assembly in the browser and adds a layer of explanation to the results of both EXPLAIN and EXPLAIN QUERY PLAN.&lt;/p&gt;
-&lt;p&gt;Approach with caution, since I don't know enough about SQLite query plans to verify the results myself, but it seems cromulent enough to me.&lt;/p&gt;
-    
-    
-        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/sql"&gt;sql&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/sqlite"&gt;sqlite&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/tools"&gt;tools&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/julia-evans"&gt;julia-evans&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/pyodide"&gt;pyodide&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/claude-mythos-fable"&gt;claude-mythos-fable&lt;/a&gt;&lt;/p&gt;
-    
-
-</summary><category term="sql"/><category term="sqlite"/><category term="tools"/><category term="julia-evans"/><category term="pyodide"/><category term="claude-mythos-fable"/></entry></feed>
+</summary><category term="bun"/><category term="rust"/><category term="anthropic"/><category term="claude-code"/><category term="jarred-sumner"/></entry></feed>
