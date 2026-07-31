@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "f76923fc79cc2b6c844e2cfc",
+      "title": "Android 安全 常用技巧合集",
+      "summary": "一些自己写 PoC 的时候的常用技巧。",
+      "image": null,
+      "publishedAt": "2026-06-09T00:00:00Z",
+      "sourceId": "511f3e9d589e2612",
+      "sourceTitle": "残页的小博客",
+      "link": "https://blog.canyie.top/2026/06/09/android-security-tricks/",
+      "detailPath": "articles/f76923fc79cc2b6c844e2cfc.json"
+    },
+    {
       "id": "332d9a3c6686b0c2d21e8a88",
       "title": "望见",
       "summary": "「谋杀。」",
@@ -648,17 +659,6 @@
       "sourceTitle": "网友小宋",
       "link": "https://xyzbz.cn/archives/1543/",
       "detailPath": "articles/47bc5d5524735e8c4e863dde.json"
-    },
-    {
-      "id": "6ef7fc662a19a330e84ab4f4",
-      "title": "不修改nginx接收websocket",
-      "summary": "以前只记得要支持websocket 需要 nginx 改： location /ws-service-a { proxy_pass http://backend_a; proxy_http_version 1.1; proxy_set_header Upgrade $http_upgrade; proxy_set_header Connection $connection_upgrade; } 今天折腾忘记这茬了，一直在调 FastAPI ， @app.websocket() 死活不识别 wscat 的请求 WebSocket 协议的工作方式是： 1.客户端发 GET + Upgrade: websocket 头 2.服务端识别这个特殊 GET，返回 101 Switching Protocols 3.连接升…",
-      "image": null,
-      "publishedAt": "2026-05-28T10:35:00Z",
-      "sourceId": "a864c53722a17b19",
-      "sourceTitle": "est's blog",
-      "link": "https://blog.est.im/2026/stdout-20",
-      "detailPath": "articles/6ef7fc662a19a330e84ab4f4.json"
     }
   ]
 }

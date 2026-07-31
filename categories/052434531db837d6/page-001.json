@@ -1,6 +1,39 @@
 {
   "items": [
     {
+      "id": "ea70c7d057d39bdb0f833c06",
+      "title": "Advancing the price-performance frontier with GPT‑5.6",
+      "summary": "Advancing the price-performance frontier with GPT‑5.6 Huge price drop from OpenAI today: GPT-5.6 Terra got a 20% reduction, and GPT-5.6 Luna got a massive 80% drop. OpenAI credit 5.6 Sol with enabling this: in How GPT‑5.6 fuses frontier intelligence with frontier efficiency they describe using 5.6 Sol to optimize load balancing, and more impressively to opt…",
+      "image": null,
+      "publishedAt": "2026-07-30T23:58:42Z",
+      "sourceId": "052434531db837d6",
+      "sourceTitle": "Simon Willison's Weblog",
+      "link": "https://simonwillison.net/2026/Jul/30/luna-price-drop/#atom-everything",
+      "detailPath": "articles/ea70c7d057d39bdb0f833c06.json"
+    },
+    {
+      "id": "7ea9bd425d825a03a7de77c6",
+      "title": "Investigating three real-world incidents in our cybersecurity evaluations",
+      "summary": "Investigating three real-world incidents in our cybersecurity evaluations It happened again! This is turning into something of a pattern. Last week OpenAI accidentally exploited Hugging Face when one of their frontier models broke out of a sandboxed container and hacked into Hugging Face to try and get the solutions to the cyber benchmark it was executing.…",
+      "image": null,
+      "publishedAt": "2026-07-30T23:41:29Z",
+      "sourceId": "052434531db837d6",
+      "sourceTitle": "Simon Willison's Weblog",
+      "link": "https://simonwillison.net/2026/Jul/30/three-real-world-incidents/#atom-everything",
+      "detailPath": "articles/7ea9bd425d825a03a7de77c6.json"
+    },
+    {
+      "id": "24609e5a597f0d7ea741186a",
+      "title": "llm 0.32rc2",
+      "summary": "Release: llm 0.32rc2 Hot on the heels of RC1 , this fixes a dependency issue and also adds two neat new features: The default model for users who have not set their own default is now GPT-5.6 Luna . It was previously GPT-4o mini . Luna is a much better and more recent model, albeit slightly more expensive - $0.20 per million input tokens and $1.20 per milli…",
+      "image": null,
+      "publishedAt": "2026-07-30T22:52:06Z",
+      "sourceId": "052434531db837d6",
+      "sourceTitle": "Simon Willison's Weblog",
+      "link": "https://simonwillison.net/2026/Jul/30/llm-rc2/#atom-everything",
+      "detailPath": "articles/24609e5a597f0d7ea741186a.json"
+    },
+    {
       "id": "1b010f9b78446bb578c181c5",
       "title": "Quoting Bruce Schneier",
       "summary": "The writing assignments I give my students are gym tasks, not work tasks. I ask them to write policy memos not because the world needs more policy memos. I assign them because the very act of writing, which includes thinking and outlining and drafting and editing, making and criticizing and revising arguments, will help develop the critical thinking skills…",
@@ -10,6 +43,28 @@
       "sourceTitle": "Simon Willison's Weblog",
       "link": "https://simonwillison.net/2026/Jul/30/bruce-schneier/#atom-everything",
       "detailPath": "articles/1b010f9b78446bb578c181c5.json"
+    },
+    {
+      "id": "6006d411d810783eb95ab7cb",
+      "title": "llm-chat-completions-server 0.1a0",
+      "summary": "Release: llm-chat-completions-server 0.1a0 A key goal of the new content-addressable logs in LLM 0.32rc1 was being able to support OpenAI Chat Completion style requests where each incoming message extends the previous conversation, like this: curl http://localhost:8002/v1/chat/completions \\ -H 'Content-Type: application/json' \\ -d '{ \"model\": \"qwen3.5-4b\",…",
+      "image": null,
+      "publishedAt": "2026-07-30T15:43:16Z",
+      "sourceId": "052434531db837d6",
+      "sourceTitle": "Simon Willison's Weblog",
+      "link": "https://simonwillison.net/2026/Jul/30/llm-chat-completions-server/#atom-everything",
+      "detailPath": "articles/6006d411d810783eb95ab7cb.json"
+    },
+    {
+      "id": "ebfbefc8ff065eaab42f82b9",
+      "title": "llm 0.32rc1",
+      "summary": "Release: llm 0.32rc1 This RC for LLM 0.32 finishes the work that started in LLM 0.32a0 - it adds a new schema design that does a much better job of capturing the details of the prompts and responses returned by the latest model families. The most important change is the use of content-addressable hash IDs for stored messages. This allows de-duplication in t…",
+      "image": null,
+      "publishedAt": "2026-07-30T15:30:20Z",
+      "sourceId": "052434531db837d6",
+      "sourceTitle": "Simon Willison's Weblog",
+      "link": "https://simonwillison.net/2026/Jul/30/llm-rc1/#atom-everything",
+      "detailPath": "articles/ebfbefc8ff065eaab42f82b9.json"
     },
     {
       "id": "24d911cf3c7b4daf3e8a42f6",
@@ -274,61 +329,6 @@
       "sourceTitle": "Simon Willison's Weblog",
       "link": "https://simonwillison.net/2026/Jul/21/cat-and-thariq/#atom-everything",
       "detailPath": "articles/f7188e111a0f01a58d0b715e.json"
-    },
-    {
-      "id": "0a5e8b9b8d94757b162d052b",
-      "title": "Reverse-engineering is cheap now",
-      "summary": "I keep hearing anecdotes from people who used coding agents to reverse-engineer and automate devices in their homes. I think this is an interesting illustration of the impact of the reduced cost of writing code. Prior to agents, it was entirely possible to reverse-engineer home devices. The problem was the ROI - was it really worth all of that effort? More…",
-      "image": null,
-      "publishedAt": "2026-07-20T19:24:05Z",
-      "sourceId": "052434531db837d6",
-      "sourceTitle": "Simon Willison's Weblog",
-      "link": "https://simonwillison.net/2026/Jul/20/cheap-reverse-engineering/#atom-everything",
-      "detailPath": "articles/0a5e8b9b8d94757b162d052b.json"
-    },
-    {
-      "id": "8908df016eee9c392166a7b5",
-      "title": "Who’s Afraid of Chinese Models?",
-      "summary": "Who’s Afraid of Chinese Models? Interesting proposal from Ben Thompson that both addresses the hypocrisy of labs outlawing distillation against their models despite training on unlicensed data, and could help US open models compete more effectively with their Chinese counterparts: The U.S. should pass a law that (1) makes explicit that collecting data for t…",
-      "image": "https://static.simonwillison.net/static/2026/qwen-3.8-max-pelican.png",
-      "publishedAt": "2026-07-20T17:09:19Z",
-      "sourceId": "052434531db837d6",
-      "sourceTitle": "Simon Willison's Weblog",
-      "link": "https://simonwillison.net/2026/Jul/20/afraid-of-chinese-models/#atom-everything",
-      "detailPath": "articles/8908df016eee9c392166a7b5.json"
-    },
-    {
-      "id": "c8cb4e7bc7374b18cff03630",
-      "title": "Quoting Sam Altman",
-      "summary": "We have been having extensive discussions around open source strategy. We will discuss it more at our next board meeting, but one thing we’d like to do soon is to create a language model with the approximate capability of GPT-3 that can run locally on consumer hardware and release that. We’d like to do it soon, before Stability or someone else does. In gene…",
-      "image": null,
-      "publishedAt": "2026-07-20T03:47:59Z",
-      "sourceId": "052434531db837d6",
-      "sourceTitle": "Simon Willison's Weblog",
-      "link": "https://simonwillison.net/2026/Jul/20/sam-altman/#atom-everything",
-      "detailPath": "articles/c8cb4e7bc7374b18cff03630.json"
-    },
-    {
-      "id": "028f86affbbf9d86f70895ff",
-      "title": "AI Mania Is Eviscerating Global Decision-Making",
-      "summary": "AI Mania Is Eviscerating Global Decision-Making Here's an entertaining perspective from Nik Suresh on the AI mania that is overwhelming the large companies that he consults with. It's crammed with spicy anecdotes from anonymous sources. In one extreme case, I have seen an executive confess that they had never even used ChatGPT or any AI tool in their life,…",
-      "image": null,
-      "publishedAt": "2026-07-19T05:06:21Z",
-      "sourceId": "052434531db837d6",
-      "sourceTitle": "Simon Willison's Weblog",
-      "link": "https://simonwillison.net/2026/Jul/19/ai-mania/#atom-everything",
-      "detailPath": "articles/028f86affbbf9d86f70895ff.json"
-    },
-    {
-      "id": "00ce27471f5327e9019dec89",
-      "title": "Claude Code uses Bun written in Rust now",
-      "summary": "In Rewriting Bun in Rust Jarred Sumner made the following claim: Claude Code v2.1.181 (released June 17th) and later use the Rust port of Bun. Startup got 10% faster on Linux but otherwise, barely anyone noticed. Boring is good. I decided to have a poke at my own Claude Code installation to see if I could find evidence that it was using Bun written in Rust.…",
-      "image": null,
-      "publishedAt": "2026-07-19T03:54:09Z",
-      "sourceId": "052434531db837d6",
-      "sourceTitle": "Simon Willison's Weblog",
-      "link": "https://simonwillison.net/2026/Jul/19/claude-code-in-bun-in-rust/#atom-everything",
-      "detailPath": "articles/00ce27471f5327e9019dec89.json"
     }
   ]
 }

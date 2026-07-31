@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "6ef7fc662a19a330e84ab4f4",
+      "title": "不修改nginx接收websocket",
+      "summary": "以前只记得要支持websocket 需要 nginx 改： location /ws-service-a { proxy_pass http://backend_a; proxy_http_version 1.1; proxy_set_header Upgrade $http_upgrade; proxy_set_header Connection $connection_upgrade; } 今天折腾忘记这茬了，一直在调 FastAPI ， @app.websocket() 死活不识别 wscat 的请求 WebSocket 协议的工作方式是： 1.客户端发 GET + Upgrade: websocket 头 2.服务端识别这个特殊 GET，返回 101 Switching Protocols 3.连接升…",
+      "image": null,
+      "publishedAt": "2026-05-28T10:35:00Z",
+      "sourceId": "a864c53722a17b19",
+      "sourceTitle": "est's blog",
+      "link": "https://blog.est.im/2026/stdout-20",
+      "detailPath": "articles/6ef7fc662a19a330e84ab4f4.json"
+    },
+    {
       "id": "7ba02838ad933e8132da6f03",
       "title": "无聊是一种很新的病",
       "summary": "不知道你有没有过这样的时刻。 上班忙了一天，回到家里，躺在沙发上，就非常自然的拿起手机，刷起短视频，一条接着一条。吃晚饭的时候，手机也要亮着屏幕，那边屏幕刚暗下去，这边手指就下意识地点亮了屏幕。就这样，玩着手机直到要去睡觉了。把灯一关，手机一放，这时候整个房间突然暗了下来，自己却有一种莫名的心慌。那种慌难以形容，也不像是有什么大事发生导致的心慌，反而更像是一种没有事情填满脑子的空洞感，仿佛有一种让人莫名恐惧的东西，要从心底里冒出来一样。 德国哲学家韩炳哲在《倦怠社会》里，曾有...... READ MORE",
@@ -648,17 +659,6 @@
       "sourceTitle": "Computing Life",
       "link": "https://yage.ai/ai-sleep.html",
       "detailPath": "articles/71d1cf825e4d4826e29821bf.json"
-    },
-    {
-      "id": "34e1e8e76ca3fc31581ebd83",
-      "title": "摘：《生而为熊》",
-      "summary": "「生命是自然的表达。」",
-      "image": null,
-      "publishedAt": "2026-05-11T23:47:46Z",
-      "sourceId": "8e5dc5a8b5023a8e",
-      "sourceTitle": "折腾人生",
-      "link": "https://z.arlmy.me/posts/Note/Note_R%C3%A9myMarion_LoursLautreDelhomme/",
-      "detailPath": "articles/34e1e8e76ca3fc31581ebd83.json"
     }
   ]
 }
