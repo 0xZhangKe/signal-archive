@@ -11,8 +11,255 @@ xmlns:wfw="http://wellformedweb.org/CommentAPI/">
 <atom:link href="https://pa.ci/feed/" rel="self" type="application/rss+xml" />
 <language>zh-CN</language>
 <description>你好，陌生人。</description>
-<lastBuildDate>Tue, 28 Jul 2026 05:37:00 +0000</lastBuildDate>
-<pubDate>Tue, 28 Jul 2026 05:37:00 +0000</pubDate>
+<lastBuildDate>Fri, 31 Jul 2026 02:19:51 +0000</lastBuildDate>
+<pubDate>Fri, 31 Jul 2026 02:19:51 +0000</pubDate>
+<item>
+<title>使用easytier开启Windows远程桌面的高安全方案</title>
+<link>https://pa.ci/453.html</link>
+<guid>https://pa.ci/453.html</guid>
+<pubDate>Fri, 31 Jul 2026 02:19:51 +0000</pubDate>
+<dc:creator>怕刺</dc:creator>
+<category><![CDATA[技术]]></category>
+<description><![CDATA[Windows直接开启远程桌面，即使使用复杂密码也会遇到撞库或者0day漏洞等问题。常用的安全方案是组件内网并只允许指定的IP访问特定的网卡，这样即使出现了意外情况也不会被碰撞到远程桌面。以最常...]]></description>
+<content:encoded xml:lang="zh-CN"><![CDATA[
+<p>Windows直接开启远程桌面，即使使用复杂密码也会遇到撞库或者0day漏洞等问题。常用的安全方案是组件内网并只允许指定的IP访问特定的网卡，这样即使出现了意外情况也不会被碰撞到远程桌面。<br>以最常用的easytier组件内网为例：</p><ol><li>在需要开启远程桌面的电脑（被控电脑）上安装easytier并配置固定IP地址而不是自动的DHCP，比如给定IP地址10.144.144.20</li><li>在管理电脑上安装easytier并配置固定IP地址而不是自动的DHCP，比如给定IP地址10.144.144.11</li><li>修改默认的RDP端口3389改成其他端口，比如53389</li><li>指定RDP只监听easytier的网卡进入的连接，并且只允许10.144.144.11连接</li></ol><h2>一、安全模型</h2><p>预设如下：</p><pre><code>被控电脑 EasyTier IP：10.144.144.20
+管理电脑 EasyTier IP：10.144.144.11
+RDP 端口：53389
+EasyTier 网段：10.144.144.0/24</code></pre><p>防火墙规则：</p><pre><code>来源地址：10.144.144.11/32
+目标地址：10.144.144.20
+入站接口：EasyTier 虚拟网卡
+目标服务：Remote Desktop Services
+目标端口：TCP/UDP 53389</code></pre><p>这样，即使 EasyTier 网络中还有其他设备，它们也不能访问这台电脑的远程桌面。</p><p>只有确实需要所有 EasyTier 节点都能连接时，才放宽为：</p><pre><code>10.144.144.0/24</code></pre><h2>二、先加固 EasyTier</h2><h3>1. 使用固定虚拟 IP</h3><p>RDP 被控电脑和管理电脑都应使用固定 EasyTier IP，不建议对它们使用可能变化的 DHCP 地址。EasyTier 文档说明，DHCP 模式遇到地址冲突时可能自动更换地址；如果地址变化，绑定了本地 IP 的防火墙规则将不再匹配。</p><p>例如被控电脑固定为：</p><pre><code>10.144.144.20</code></pre><p>管理电脑固定为：</p><pre><code>10.144.144.11</code></pre><h3>2. 使用强网络密钥和 Secure Mode</h3><p>EasyTier 至少应配置：</p><pre><code>--network-name
+--network-secret
+--secure-mode</code></pre><p><code>network_secret</code> 用于验证节点是否属于该虚拟网络；Secure Mode 使用新的安全握手和认证路径。</p><p>如果使用公共共享节点或第三方中继，仅开启 Secure Mode 还不够。应固定共享节点私钥，并在客户端配置 <code>peer_public_key</code>，否则连接虽然加密，但未必验证了中继节点的真实身份。</p><h3>3. 启用 EasyTier ACL</h3><p>支持 ACL 的版本中，建议把管理电脑放入类似 <code>admin</code> 或 <code>management</code> 组，只允许该组访问被控电脑的 TCP <code>53389</code>。</p><p>EasyTier 支持使用 ACL 限制节点间访问，也提供 <code>--tcp-whitelist 53389</code> 生成简单端口白名单的方式；但从安全角度，最好进一步结合节点组或身份限制来源，而不是只限制端口。</p><p>除非确实需要，不要在 RDP 被控电脑上启用：</p><pre><code>proxy-networks
+子网代理
+公共中继
+无关的监听端口</code></pre><h2>三、Windows 11 安全配置脚本</h2><p>在被控电脑本地，以<strong>管理员身份</strong>打开 PowerShell。</p><p>首先把下面的：</p><pre><code>&#039;10.144.144.11/32&#039;</code></pre><p>修改为实际管理电脑的 EasyTier IP。</p><pre><code># =====================================================
+# Windows 11 RDP over EasyTier 安全配置
+# =====================================================
+
+$RdpPort = 53389
+
+# 推荐填写允许管理本机的具体 EasyTier 节点地址
+$AllowedSources = @(
+    &#039;10.144.144.11/32&#039;
+
+    # 多台管理电脑可以继续添加：
+    # &#039;10.144.144.12/32&#039;
+)
+
+$TerminalServerPath =
+    &#039;HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server&#039;
+
+$RdpTcpPath =
+    &#039;HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp&#039;
+
+$TcpRuleName = &#039;RDP-EasyTier-Secure-TCP&#039;
+$UdpRuleName = &#039;RDP-EasyTier-Secure-UDP&#039;
+
+# -----------------------------------------------------
+# 1. 自动查找本机 10.144.144.x EasyTier 地址
+# -----------------------------------------------------
+
+$EasyTierCandidates = @(
+    Get-NetIPAddress `
+        -AddressFamily IPv4 `
+        -ErrorAction Stop |
+    Where-Object {
+        $_.IPAddress -match &#039;^10\.144\.144\.\d{1,3}$&#039; -and
+        $_.AddressState -eq &#039;Preferred&#039;
+    }
+)
+
+if ($EasyTierCandidates.Count -eq 0) {
+    throw @&#039;
+没有找到 10.144.144.x 的 EasyTier 虚拟地址。
+
+请确认：
+1. EasyTier 已经启动；
+2. 被控电脑已加入虚拟网络；
+3. 本机已获得固定 EasyTier IP。
+&#039;@
+}
+
+if ($EasyTierCandidates.Count -gt 1) {
+    Write-Host &#039;检测到多个匹配地址：&#039; -ForegroundColor Yellow
+
+    $EasyTierCandidates |
+        Format-Table IPAddress,PrefixLength,InterfaceAlias,InterfaceIndex
+
+    throw &#039;存在多个 EasyTier 地址，请手工指定目标虚拟网卡。&#039;
+}
+
+$EasyTierIP    = $EasyTierCandidates[0].IPAddress
+$EasyTierAlias = $EasyTierCandidates[0].InterfaceAlias
+
+Write-Host &quot;EasyTier 网卡：$EasyTierAlias&quot; -ForegroundColor Cyan
+Write-Host &quot;EasyTier 地址：$EasyTierIP&quot; -ForegroundColor Cyan
+
+# -----------------------------------------------------
+# 2. 备份当前 RDP 注册表和防火墙配置
+# -----------------------------------------------------
+
+$BackupDirectory = Join-Path `
+    $env:ProgramData `
+    (&quot;RDP-EasyTier-Backup-{0}&quot; -f (Get-Date -Format &#039;yyyyMMdd-HHmmss&#039;))
+
+New-Item `
+    -Path $BackupDirectory `
+    -ItemType Directory `
+    -Force | Out-Null
+
+reg.exe export `
+    &#039;HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server&#039; `
+    &quot;$BackupDirectory\TerminalServer.reg&quot; `
+    /y | Out-Null
+
+netsh.exe advfirewall export `
+    &quot;$BackupDirectory\WindowsFirewall.wfw&quot; | Out-Null
+
+Write-Host &quot;配置备份位置：$BackupDirectory&quot; -ForegroundColor Cyan
+
+# -----------------------------------------------------
+# 3. 确保 Windows 防火墙启用，并默认阻止入站流量
+# -----------------------------------------------------
+
+Set-NetFirewallProfile `
+    -Profile Domain,Private,Public `
+    -Enabled True `
+    -DefaultInboundAction Block
+
+# -----------------------------------------------------
+# 4. 开启 RDP、启用 NLA、设置端口
+# -----------------------------------------------------
+
+Set-ItemProperty `
+    -Path $TerminalServerPath `
+    -Name &#039;fDenyTSConnections&#039; `
+    -Value 0
+
+Set-ItemProperty `
+    -Path $RdpTcpPath `
+    -Name &#039;UserAuthentication&#039; `
+    -Value 1
+
+Set-ItemProperty `
+    -Path $RdpTcpPath `
+    -Name &#039;PortNumber&#039; `
+    -Value $RdpPort
+
+# -----------------------------------------------------
+# 5. 禁用 Windows 内置的宽范围 RDP 放行规则
+# -----------------------------------------------------
+
+Get-NetFirewallRule -ErrorAction SilentlyContinue |
+    Where-Object {
+        $_.Name -like &#039;RemoteDesktop-*&#039;
+    } |
+    Disable-NetFirewallRule
+
+# -----------------------------------------------------
+# 6. 清除之前可能创建的自定义 RDP 规则
+# -----------------------------------------------------
+
+$OldRules = @(
+    $TcpRuleName
+    $UdpRuleName
+    &#039;RDP-EasyTier-53389-TCP&#039;
+    &#039;RDP-EasyTier-53389-UDP&#039;
+    &#039;RDP-53389-TCP-Allow-10.144.144.0-24&#039;
+    &#039;RDP-53389-UDP-Allow-10.144.144.0-24&#039;
+)
+
+Get-NetFirewallRule `
+    -Name $OldRules `
+    -ErrorAction SilentlyContinue |
+    Remove-NetFirewallRule
+
+# -----------------------------------------------------
+# 7. 创建严格限制的 TCP 规则
+# -----------------------------------------------------
+
+New-NetFirewallRule `
+    -Name $TcpRuleName `
+    -DisplayName &#039;RDP TCP 53389 - EasyTier Restricted&#039; `
+    -Description &quot;仅允许指定 EasyTier 节点访问 $EasyTierIP`:53389&quot; `
+    -Direction Inbound `
+    -Action Allow `
+    -Enabled True `
+    -Profile Any `
+    -Protocol TCP `
+    -LocalPort $RdpPort `
+    -LocalAddress $EasyTierIP `
+    -RemoteAddress $AllowedSources `
+    -InterfaceAlias $EasyTierAlias `
+    -Service TermService `
+    -EdgeTraversalPolicy Block
+
+# -----------------------------------------------------
+# 8. 创建严格限制的 UDP 规则
+# -----------------------------------------------------
+
+New-NetFirewallRule `
+    -Name $UdpRuleName `
+    -DisplayName &#039;RDP UDP 53389 - EasyTier Restricted&#039; `
+    -Description &quot;仅允许指定 EasyTier 节点访问 $EasyTierIP`:53389&quot; `
+    -Direction Inbound `
+    -Action Allow `
+    -Enabled True `
+    -Profile Any `
+    -Protocol UDP `
+    -LocalPort $RdpPort `
+    -LocalAddress $EasyTierIP `
+    -RemoteAddress $AllowedSources `
+    -InterfaceAlias $EasyTierAlias `
+    -Service TermService `
+    -EdgeTraversalPolicy Block
+
+Write-Host &#039;&#039;
+Write-Host &#039;RDP 安全配置已完成：&#039; -ForegroundColor Green
+Write-Host &quot;  EasyTier 接口：$EasyTierAlias&quot;
+Write-Host &quot;  被控端地址：$EasyTierIP&quot;
+Write-Host &quot;  RDP 端口：$RdpPort&quot;
+Write-Host &quot;  允许来源：$($AllowedSources -join &#039;, &#039;)&quot;
+Write-Host &#039;  NLA：启用&#039;
+Write-Host &#039;  Windows 内置 RDP 规则：禁用&#039;
+Write-Host &#039;&#039;
+Write-Host &#039;请检查输出无误后重新启动电脑。&#039; -ForegroundColor Yellow</code></pre><p>Windows 防火墙默认阻止未匹配允许规则的入站流量；自定义规则可以同时限制本地地址、远程地址、服务、端口和接口。因此，不需要再建立一条“阻止其他来源”的 RDP 规则，默认入站阻止已经承担这个作用，而且显式阻止规则可能覆盖允许规则。</p><p>Microsoft 建议不要关闭 Windows 防火墙，因为关闭后会失去服务强化、启动阶段过滤和其他网络保护。</p><h2>四、重启并测试</h2><p>修改 RDP 监听端口后需要重启 Windows。RDP 默认端口是 <code>3389</code>，也可以修改为其他端口；修改端口本身只能减少普通扫描噪声，真正的安全边界仍然是 EasyTier 身份控制和 Windows 防火墙来源限制。</p><p>执行：</p><pre><code>Restart-Computer</code></pre><p>从允许的管理电脑连接：</p><pre><code>mstsc /v:10.144.144.20:53389</code></pre><p>先测试端口：</p><pre><code>Test-NetConnection 10.144.144.20 -Port 53389</code></pre><p>应显示：</p><pre><code>TcpTestSucceeded : True</code></pre><p>从其他未列入 <code>$AllowedSources</code> 的 EasyTier 节点执行同样测试，应显示：</p><pre><code>TcpTestSucceeded : False</code></pre><p>同时测试物理局域网地址：</p><pre><code>Test-NetConnection 被控电脑物理局域网IP -Port 53389</code></pre><p>也应失败。</p><h2>五、检查规则是否真正绑定到 EasyTier</h2><p>在被控电脑上执行：</p><pre><code>$Rules = @(
+    &#039;RDP-EasyTier-Secure-TCP&#039;
+    &#039;RDP-EasyTier-Secure-UDP&#039;
+)
+
+Get-NetFirewallRule -Name $Rules |
+    Format-Table Name,Enabled,Direction,Action,Profile</code></pre><p>查看来源和目标地址：</p><pre><code>Get-NetFirewallRule -Name $Rules |
+    Get-NetFirewallAddressFilter |
+    Format-Table LocalAddress,RemoteAddress</code></pre><p>正常应类似：</p><pre><code>LocalAddress    RemoteAddress
+------------    -------------
+10.144.144.20   10.144.144.11/32</code></pre><p>查看接口：</p><pre><code>Get-NetFirewallRule -Name $Rules |
+    Get-NetFirewallInterfaceFilter |
+    Format-Table InterfaceAlias</code></pre><p>查看端口：</p><pre><code>Get-NetFirewallRule -Name $Rules |
+    Get-NetFirewallPortFilter |
+    Format-Table Protocol,LocalPort</code></pre><p>成功连接后检查实际来源：</p><pre><code>Get-NetTCPConnection `
+    -LocalPort 53389 `
+    -State Established |
+    Select-Object LocalAddress,LocalPort,RemoteAddress,RemotePort</code></pre><p>应看到来源为允许的 EasyTier 地址：</p><pre><code>LocalAddress    LocalPort    RemoteAddress
+------------    ---------    -------------
+10.144.144.20   53389        10.144.144.11</code></pre><h2>最终推荐配置</h2><p>最理想的结果是：</p><pre><code>公网端口转发：无
+物理局域网 RDP：不可访问
+EasyTier 整个 /24：不全部放行
+允许的管理节点：具体 /32 地址
+EasyTier Secure Mode：开启
+公共中继公钥：固定并校验
+Windows 防火墙：开启
+默认入站策略：阻止
+NLA：开启
+RDP 用户：独立标准用户
+RDP 端口：53389，可选</code></pre><p>其中最重要的改进，是把原来的：</p><pre><code>RemoteAddress = 10.144.144.0/24</code></pre><p>收紧为：</p><pre><code>RemoteAddress = 管理电脑的 EasyTier IP/32</code></pre><p>这样即使 EasyTier 网络中的某个普通节点被入侵，也不能直接尝试登录这台 Windows 电脑。</p>
+]]></content:encoded>
+<slash:comments>0</slash:comments>
+<comments>https://pa.ci/453.html#comments</comments>
+<wfw:commentRss>https://pa.ci/feed/453.html</wfw:commentRss>
+</item>
 <item>
 <title>Ubuntu 26.04 安装 rime/中州韵输入法</title>
 <link>https://pa.ci/452.html</link>
@@ -365,21 +612,6 @@ DISM /Online /Cleanup-Image /AnalyzeComponentStore</code></pre><hr><p>以下内�
 <slash:comments>0</slash:comments>
 <comments>https://pa.ci/438.html#comments</comments>
 <wfw:commentRss>https://pa.ci/feed/438.html</wfw:commentRss>
-</item>
-<item>
-<title>Thunderbird黑屏/卡死的解决方案</title>
-<link>https://pa.ci/437.html</link>
-<guid>https://pa.ci/437.html</guid>
-<pubDate>Fri, 07 Nov 2025 10:56:12 +0000</pubDate>
-<dc:creator>怕刺</dc:creator>
-<category><![CDATA[技术]]></category>
-<description><![CDATA[此前一直用的outlook客户端，因为微软的技术原因，新版本的outlook已经不是一个合格的邮箱客户端，因此切换到了Thunderbird，即mozilla基于Firefox浏览器制作的邮箱客...]]></description>
-<content:encoded xml:lang="zh-CN"><![CDATA[
-<p>此前一直用的outlook客户端，因为微软的技术原因，新版本的outlook已经不是一个合格的邮箱客户端，因此切换到了Thunderbird，即mozilla基于Firefox浏览器制作的邮箱客户端。</p><p>使用2年有余，发现一个bug：最小化后再打开，界面会黑屏、程序完全卡死，只能在任务管理器中强制关闭。再次启动后则正常，但是一旦最小化之后，又会继续卡死。</p><p>实际上是缓存冲突，在界面中，使用<code>ctrl+shift+delete</code>，清理所有的缓存，随后重启程序即可。</p>
-]]></content:encoded>
-<slash:comments>0</slash:comments>
-<comments>https://pa.ci/437.html#comments</comments>
-<wfw:commentRss>https://pa.ci/feed/437.html</wfw:commentRss>
 </item>
 </channel>
 </rss>

@@ -23,7 +23,7 @@ Huge price drop from OpenAI today: GPT-5.6 Terra got a 20% reduction, and GPT-5.
 &lt;p&gt;&lt;strong&gt;&lt;a href="https://www.anthropic.com/news/investigating-incidents-cybersecurity-evals"&gt;Investigating three real-world incidents in our cybersecurity evaluations&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 It happened again! This is turning into something of a pattern.&lt;/p&gt;
 &lt;p&gt;Last week &lt;a href="https://simonwillison.net/2026/Jul/22/openai-cyberattack/"&gt;OpenAI accidentally exploited Hugging Face&lt;/a&gt; when one of their frontier models broke out of a sandboxed container and hacked into Hugging Face to try and get the solutions to the cyber benchmark it was executing.&lt;/p&gt;
-&lt;p&gt;This inspired Anthropic to double-check their own logs, and it turned out they had three similar (albeit less impressive) incidents that played out back in April!&lt;/p&gt;
+&lt;p&gt;This inspired Anthropic to double-check their own logs, and it turned out they had three similar (albeit less impressive) incidents, the earliest of which played out in April!&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Of the 141,006 evaluation runs we reviewed, we identified three separate incidents (involving six total runs, four of which impacted the same organization; the other two incidents each happened in independent evaluation runs). [...]&lt;/p&gt;
 &lt;p&gt;In all cases, Anthropic’s evaluation prompt specified to Claude that its environment was a simulation and that it had no internet access. Due to a misunderstanding between us and our evaluation partner, this was not the case, and internet access was available. Because of this, when Claude’s search led it to real systems on the open internet, it treated them as part of the exercise. [...]&lt;/p&gt;
@@ -36,7 +36,7 @@ It happened again! This is turning into something of a pattern.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;That package was then installed by a security company that "routinely installs Python packages and scans them for malware", and the executed code was able to exfiltrate credentials back to Claude!&lt;/p&gt;
 &lt;p&gt;Thankfully that package was removed from PyPI by other automated scanners an hour after it was published, but it had still been downloaded and executed on "15 real systems" by that point.&lt;/p&gt;
-&lt;p&gt;It's abundantly clear now that running evals of cyberattack potential in models is a &lt;em&gt;spectacularly&lt;/em&gt; risk business. Every AI lab needs to pay attention to this. Keeping a close eye on what's happening in those sandboxes is crucial.
+&lt;p&gt;It's abundantly clear now that running evals of cyberattack potential in models is a &lt;em&gt;spectacularly&lt;/em&gt; risky business. Every AI lab needs to pay attention to this. Keeping a close eye on what's happening in those sandboxes is crucial.
 
     &lt;p&gt;&lt;small&gt;&lt;/small&gt;Via &lt;a href="https://news.ycombinator.com/item?id=49116922#49117088"&gt;Hacker News&lt;/a&gt;&lt;/small&gt;&lt;/p&gt;
 
