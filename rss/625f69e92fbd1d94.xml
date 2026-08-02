@@ -5,8 +5,8 @@
     <description>Blog of independent game and app developer Matt Sephton. Featuring vintage Macintosh, game development, digital artwork, Japanese esoterica, video game reviews, hacks and tips, and much more.</description>
     <link>https://blog.gingerbeardman.com/</link>
     <atom:link href="https://blog.gingerbeardman.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 31 Jul 2026 20:13:07 +0000</pubDate>
-    <lastBuildDate>Fri, 31 Jul 2026 20:13:07 +0000</lastBuildDate>
+    <pubDate>Sun, 02 Aug 2026 11:39:44 +0000</pubDate>
+    <lastBuildDate>Sun, 02 Aug 2026 11:39:44 +0000</lastBuildDate>
     <generator>Jekyll v4.4.1</generator>
 
     
@@ -169,6 +169,8 @@
 
 &lt;p&gt;&lt;strong&gt;Attract mode.&lt;/strong&gt; I checked the original Asteroids: it’s one continuous simulation, rocks drifting under swappable text overlays, no ship while idle, no self-play, high-score table not drawn while empty. Beltrunner adopts that approach. The world never stops.&lt;/p&gt;
 
+&lt;p&gt;&lt;strong&gt;Design system.&lt;/strong&gt; Instances of HUD text with the same intent always appear at the same y-position and in the same size, with three distinct sizes creating additional hierarchy. This allows players to learn meaning and structure without realising it.&lt;/p&gt;
+
 &lt;p&gt;&lt;strong&gt;High scores that know the economy.&lt;/strong&gt; The attract high score table isn’t ten numbers typed in by hand and left to go stale. It derives from what the game can actually pay—retune a gate or a warp bank and the whole table moves with it. Cold ranks still look like clean arcade scores, not arithmetic leftovers. Jinks IDE surfaces theoretical maximum score in its inspector.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Typographic grid system.&lt;/strong&gt; Four sizes, role-based baselines so that text with the same intent appears at the same place on screen, and the player can learn through familiarity. Tables described as a top and a step. Moving the high-score block is one decision, not ten. The BELTRUNNER logo is even hand-kerned (L+T has a gaping hole with the vector monospaced font).&lt;/p&gt;
@@ -225,7 +227,7 @@
       
         <item>
           <title>Hi, Jinks!</title>
-          <description>&lt;p&gt;&lt;img src=&quot;/images/posts/jinks-app-icon.png&quot; alt=&quot;Jinks icon&quot; width=&quot;128&quot; height=&quot;128&quot; style=&quot;display:block;margin:0 auto 1.5rem&quot; /&gt;&lt;/p&gt;
+          <description>&lt;p&gt;&lt;img src=&quot;https://cdn.gingerbeardman.com/images/posts/jinks-app-icon.png&quot; alt=&quot;Jinks icon&quot; width=&quot;128&quot; height=&quot;128&quot; style=&quot;display:block;margin:0 auto 1.5rem&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Jinks&lt;/strong&gt; is a lightweight multi-platform game engine, an interactive development environment, and more besides. I’m building it around one wonderful idea: write the engine core once, then run it everywhere—and have it behave &lt;em&gt;identically&lt;/em&gt; wherever it runs.&lt;/p&gt;
 
@@ -272,7 +274,7 @@
 
 &lt;p&gt;Better still, you can inspect and modify a game &lt;em&gt;while it runs&lt;/em&gt;. Tune a speed. Tweak a property. Have it work out the theoretical maximum score. And since the IDE on macOS can connect to a game running on a nearby device, you can do all of that with one hand to a game being played on the phone in your other hand.&lt;/p&gt;
 
-&lt;picture&gt;&lt;source srcset=&quot;/images/posts/jinks-ide-dark.webp&quot; media=&quot;(prefers-color-scheme: dark)&quot; /&gt;&lt;img src=&quot;/images/posts/jinks-ide-light.webp&quot; alt=&quot;The Jinks IDE on macOS, with BELTRUNNER running beside the inspector&quot; width=&quot;1392&quot; height=&quot;1059&quot; style=&quot;max-width:100%;height:auto;display:block;margin:1.5rem auto&quot; /&gt;&lt;/picture&gt;
+&lt;picture&gt;&lt;source srcset=&quot;https://cdn.gingerbeardman.com/images/posts/jinks-ide-dark.webp&quot; media=&quot;(prefers-color-scheme: dark)&quot; /&gt;&lt;img src=&quot;https://cdn.gingerbeardman.com/images/posts/jinks-ide-light.webp&quot; alt=&quot;The Jinks IDE on macOS, with BELTRUNNER running beside the inspector&quot; width=&quot;1392&quot; height=&quot;1059&quot; style=&quot;max-width:100%;height:auto;display:block;margin:1.5rem auto&quot; /&gt;&lt;/picture&gt;
 
 &lt;hr /&gt;
 
@@ -20782,7 +20784,7 @@ Done
           <title>One-click restore most recent backup of a file from Time Machine</title>
           <description>&lt;p&gt;Often I want to restore the latest version of a file from Time Machine, but using the Time Machine interface to do so is awkward and slow. So I came up with my own solution that can be triggered from the Finder context menu of any file.&lt;/p&gt;
 
-&lt;figure&gt;&lt;img src=&quot;/images/posts/restore-time-machine-context-menu.png&quot; width=&quot;245px&quot; height=&quot;521px&quot; /&gt;&lt;/figure&gt;
+&lt;figure&gt;&lt;img src=&quot;https://cdn.gingerbeardman.com/images/posts/restore-time-machine-context-menu.png&quot; width=&quot;245px&quot; height=&quot;521px&quot; /&gt;&lt;/figure&gt;
 
 &lt;h2 id=&quot;usage&quot;&gt;Usage&lt;/h2&gt;
 
@@ -20821,7 +20823,7 @@ Done
 
 &lt;p&gt;Create a “New Action with Shell Script…” as follows:&lt;/p&gt;
 
-&lt;figure&gt;&lt;img src=&quot;/images/posts/restore-time-machine-context-menu-setup.png&quot; width=&quot;578px&quot; height=&quot;485px&quot; /&gt;&lt;/figure&gt;
+&lt;figure&gt;&lt;img src=&quot;https://cdn.gingerbeardman.com/images/posts/restore-time-machine-context-menu-setup.png&quot; width=&quot;578px&quot; height=&quot;485px&quot; /&gt;&lt;/figure&gt;
 
 &lt;h2 id=&quot;scripts&quot;&gt;Scripts&lt;/h2&gt;
 
@@ -22281,7 +22283,7 @@ Done
       
         <item>
           <title>Tomoya Ikeda - Macintosh Artist</title>
-          <description>&lt;p class=&quot;tofigure&quot;&gt;&lt;img src=&quot;/images/posts/tomoya-ikeda-business-card.jpg&quot; alt=&quot;JPG&quot; title=&quot;Tomoya Ikeda - Macintosh Artist&amp;lt;br&amp;gt;(image:
+          <description>&lt;p class=&quot;tofigure&quot;&gt;&lt;img src=&quot;https://cdn.gingerbeardman.com/images/posts/tomoya-ikeda-business-card.jpg&quot; alt=&quot;JPG&quot; title=&quot;Tomoya Ikeda - Macintosh Artist&amp;lt;br&amp;gt;(image:
 Junichi Matsuda &amp;lt;a href=&amp;quot;https://twitter.com/mactechlab&amp;quot;&amp;gt;@mactechlab&amp;lt;/a&amp;gt;)&quot; /&gt;&lt;/p&gt;
 
 &lt;h1 id=&quot;contents&quot;&gt;Contents&lt;/h1&gt;
