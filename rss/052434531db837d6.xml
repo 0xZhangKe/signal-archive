@@ -1,5 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-08-02T04:16:52+00:00</updated><author><name>Simon Willison</name></author><entry><title>Open letters about AI development</title><link href="https://simonwillison.net/2026/Aug/2/open-letters/#atom-everything" rel="alternate"/><published>2026-08-02T04:16:52+00:00</published><updated>2026-08-02T04:16:52+00:00</updated><id>https://simonwillison.net/2026/Aug/2/open-letters/#atom-everything</id><summary type="html">
+<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-08-02T22:19:59+00:00</updated><author><name>Simon Willison</name></author><entry><title>condense-json 1.0</title><link href="https://simonwillison.net/2026/Aug/2/condense-json/#atom-everything" rel="alternate"/><published>2026-08-02T22:19:59+00:00</published><updated>2026-08-02T22:19:59+00:00</updated><id>https://simonwillison.net/2026/Aug/2/condense-json/#atom-everything</id><summary type="html">
+    
+        &lt;p&gt;&lt;strong&gt;Release:&lt;/strong&gt; &lt;a href="https://github.com/simonw/condense-json/releases/tag/1.0"&gt;condense-json 1.0&lt;/a&gt;&lt;/p&gt;
+        &lt;p&gt;I'm trying to get braver at releasing 1.0 versions. This little library is a year and a half old now - I've applied some sensible and non-disruptive fixes and shipped the big 1.0 for it.&lt;/p&gt;
+&lt;p&gt;Here's an example of what it can do, lifted from the README:&lt;/p&gt;
+&lt;div class="highlight highlight-source-json"&gt;&lt;pre&gt;{
+  &lt;span class="pl-ent"&gt;"foo"&lt;/span&gt;: {
+    &lt;span class="pl-ent"&gt;"bar"&lt;/span&gt;: {
+      &lt;span class="pl-ent"&gt;"string"&lt;/span&gt;: &lt;span class="pl-s"&gt;&lt;span class="pl-pds"&gt;"&lt;/span&gt;This is a string with foxes in it&lt;span class="pl-pds"&gt;"&lt;/span&gt;&lt;/span&gt;,
+      &lt;span class="pl-ent"&gt;"nested"&lt;/span&gt;: {
+        &lt;span class="pl-ent"&gt;"more"&lt;/span&gt;: [&lt;span class="pl-s"&gt;&lt;span class="pl-pds"&gt;"&lt;/span&gt;Here is a string&lt;span class="pl-pds"&gt;"&lt;/span&gt;&lt;/span&gt;, &lt;span class="pl-s"&gt;&lt;span class="pl-pds"&gt;"&lt;/span&gt;another with foxes in it too&lt;span class="pl-pds"&gt;"&lt;/span&gt;&lt;/span&gt;]
+      }
+    }
+  }
+}&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Combine that with a replacements object:&lt;/p&gt;
+&lt;div class="highlight highlight-source-json"&gt;&lt;pre&gt;{&lt;span class="pl-ent"&gt;"1"&lt;/span&gt;: &lt;span class="pl-s"&gt;&lt;span class="pl-pds"&gt;"&lt;/span&gt;with foxes in it&lt;span class="pl-pds"&gt;"&lt;/span&gt;&lt;/span&gt;}&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And &lt;code&gt;condense_json(input_json, replacements)&lt;/code&gt; produces the following:&lt;/p&gt;
+&lt;div class="highlight highlight-source-json"&gt;&lt;pre&gt;{
+  &lt;span class="pl-ent"&gt;"foo"&lt;/span&gt;: {
+    &lt;span class="pl-ent"&gt;"bar"&lt;/span&gt;: {
+      &lt;span class="pl-ent"&gt;"string"&lt;/span&gt;: {&lt;span class="pl-ent"&gt;"$r"&lt;/span&gt;: [&lt;span class="pl-s"&gt;&lt;span class="pl-pds"&gt;"&lt;/span&gt;This is a string &lt;span class="pl-pds"&gt;"&lt;/span&gt;&lt;/span&gt;, {&lt;span class="pl-ent"&gt;"$"&lt;/span&gt;: &lt;span class="pl-s"&gt;&lt;span class="pl-pds"&gt;"&lt;/span&gt;1&lt;span class="pl-pds"&gt;"&lt;/span&gt;&lt;/span&gt;}]},
+      &lt;span class="pl-ent"&gt;"nested"&lt;/span&gt;: {
+        &lt;span class="pl-ent"&gt;"more"&lt;/span&gt;: [&lt;span class="pl-s"&gt;&lt;span class="pl-pds"&gt;"&lt;/span&gt;Here is a string&lt;span class="pl-pds"&gt;"&lt;/span&gt;&lt;/span&gt;, {&lt;span class="pl-ent"&gt;"$r"&lt;/span&gt;: [&lt;span class="pl-s"&gt;&lt;span class="pl-pds"&gt;"&lt;/span&gt;another &lt;span class="pl-pds"&gt;"&lt;/span&gt;&lt;/span&gt;, {&lt;span class="pl-ent"&gt;"$"&lt;/span&gt;: &lt;span class="pl-s"&gt;&lt;span class="pl-pds"&gt;"&lt;/span&gt;1&lt;span class="pl-pds"&gt;"&lt;/span&gt;&lt;/span&gt;}, &lt;span class="pl-s"&gt;&lt;span class="pl-pds"&gt;"&lt;/span&gt; too&lt;span class="pl-pds"&gt;"&lt;/span&gt;&lt;/span&gt;]}]
+      }
+    }
+  }
+}&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;It scans for strings or substrings that are present in that replacements object and replaces those with a special &lt;code&gt;{"$r": ...}&lt;/code&gt; syntax in the output.&lt;/p&gt;
+&lt;p&gt;You can reverse the effect with &lt;code&gt;uncondense_json(condensed, replacements)&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;The idea is to make it easier to store JSON that includes duplicated data from other related structures. I use it to save space in the SQLite logs generated by &lt;a href="https://llm.datasette.io/"&gt;LLM&lt;/a&gt; - see &lt;a href="https://github.com/simonw/llm/pull/1586"&gt;PR #1586&lt;/a&gt; for the latest iteration of that.&lt;/p&gt;
+    
+    
+        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/json"&gt;json&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/projects"&gt;projects&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/python"&gt;python&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llm"&gt;llm&lt;/a&gt;&lt;/p&gt;
+    
+
+</summary><category term="json"/><category term="projects"/><category term="python"/><category term="llm"/></entry><entry><title>Open letters about AI development</title><link href="https://simonwillison.net/2026/Aug/2/open-letters/#atom-everything" rel="alternate"/><published>2026-08-02T04:16:52+00:00</published><updated>2026-08-02T04:16:52+00:00</updated><id>https://simonwillison.net/2026/Aug/2/open-letters/#atom-everything</id><summary type="html">
     &lt;h4&gt;Open letters about AI development&lt;/h4&gt;
 &lt;p&gt;&lt;em&gt;I wrote this summary of the past few weeks of open letters as a section of &lt;a href="https://simonwillison.net/2026/Aug/2/july-newsletter/"&gt;my sponsors-only newsletter&lt;/a&gt; but I've decided to share it here as well.&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;&lt;a href="https://www.microsoft.com/en-us/corporate-responsibility/topics/open-weight/"&gt;Open Weights and American AI Leadership&lt;/a&gt;&lt;/strong&gt; was shepherded by Microsoft, dated July 24th, and signed by 235 AI-adjacent companies including NVIDIA (see Jensen's &lt;a href="https://twitter.com/jensenhuang/status/2080643682408321103"&gt;first ever tweet&lt;/a&gt;), Amazon, Y Combinator, The Linux Foundation, and (a later signer) OpenAI.&lt;/p&gt;
@@ -642,13 +679,4 @@ Fascinating investigation by Matt Lenhard into the market that has grown up arou
 
 
 
-</summary><category term="ai"/><category term="generative-ai"/><category term="llms"/><category term="llm-pricing"/><category term="ai-ethics"/><category term="ai-in-china"/></entry><entry><title>sqlite-utils 3.39.1</title><link href="https://simonwillison.net/2026/Jul/26/sqlite-utils/#atom-everything" rel="alternate"/><published>2026-07-26T04:38:46+00:00</published><updated>2026-07-26T04:38:46+00:00</updated><id>https://simonwillison.net/2026/Jul/26/sqlite-utils/#atom-everything</id><summary type="html">
-    
-        &lt;p&gt;&lt;strong&gt;Release:&lt;/strong&gt; &lt;a href="https://github.com/simonw/sqlite-utils/releases/tag/3.39.1"&gt;sqlite-utils 3.39.1&lt;/a&gt;&lt;/p&gt;
-        &lt;p&gt;I back-ported &lt;a href="https://github.com/simonw/sqlite-utils/issues/815"&gt;a fix&lt;/a&gt; for &lt;code&gt;table.delete_where()&lt;/code&gt; that shipped in version 4.&lt;/p&gt;
-    
-    
-        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/sqlite-utils"&gt;sqlite-utils&lt;/a&gt;&lt;/p&gt;
-    
-
-</summary><category term="sqlite-utils"/></entry></feed>
+</summary><category term="ai"/><category term="generative-ai"/><category term="llms"/><category term="llm-pricing"/><category term="ai-ethics"/><category term="ai-in-china"/></entry></feed>
