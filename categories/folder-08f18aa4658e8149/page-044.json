@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "d71f373d2c160dd636feac6b",
+      "title": "Android:Ubuntu 下执行 Adb 命令找不到设备",
+      "summary": "1.问题概述 最近开发Nokia项目，遇到的问题如下： 插入Nokia x后，电脑没有反应，即不识别，同事的windows也不识别，最后在谷歌上搜索了良久，才找到了解决方案，但是没有记录，后来又要给别人配置的时候，发现忘记怎么配置了。想想这也是一个具有通性的问题，还是记录下来，分享给大家。 2.问题解决方案 首先问题是：执行adb命令提示找不到设备，在做其他操作之前，请先确认已经做了如下操作： 确定已经打开了USB调试选项（设置-开发者选项-USB调试），有的机器没有开发者选项，需要到关于里面点击版本号若干下，或者去百度谷歌。 确定使用sudo命令adb kill-server 和adb start-server后仍然没有用。 如果上述操作都确认了，还是找不到设备，那么继续往下看：",
+      "image": null,
+      "publishedAt": "2014-03-25T03:15:17Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2014/03/25/ubuntu-adb-can-not-find-devices/",
+      "detailPath": "articles/d71f373d2c160dd636feac6b.json"
+    },
+    {
       "id": "506ff04c13ef684ec4ef3661",
       "title": "Android Service：开发自己的通知中心(1):辅助性服务介绍",
       "summary": "1 辅助性服务介绍 辅助性服务是安卓框架的一个特性，它的设计是为了让已经安装在安卓设备上的应用程序能够为用户提供一种导航式(引导式）回应。一个辅助性服务能够传达给 用户关于这个应用程序的利益，例如把文本转换成语音、当用户手指停留屏幕的一个重要区域时的haptic反馈。这一节涵盖了怎样去创建一个辅助性服务，如何处理应用程序的信息接收，还有如何把信息反馈给用户。 创建自己的辅助性服务 本文先把辅助性服务的设计目标和能力边界讲清楚，包括它能拿到的事件类型、能反馈给用户的渠道，以及它和普通 Service、IntentService 的区别。后半部分会动手写一个最小可用的辅助性服务，覆盖继承 AccessibilityService 、在 manifest 里声明、配置 service 元数据，以及响应 Access…",
@@ -155,37 +166,26 @@
       "detailPath": "articles/b01f5901df4a17ab25a288c9.json"
     },
     {
-      "id": "d41144121e72de19f555042d",
-      "title": "嘟嘟小记",
-      "summary": "我在一些笔记软件中记录着一个 #日子 这样的标签，主要是仿照感恩日记，对生活可能被遗忘的美好做一些记录，其中大部分内容回看的时候都能想起一些有趣的瞬间。 试着在这个页面内做一些摘录。 三岁五岁记 鼓励的力量 暑期的时候，想给他找点事儿做，选了个游泳，在我看来，这是和开车一样，必须要点的技能点之一。夏天，玩水他也开心，但和篮球一个毛病，连教练的评价都一样，这小家伙理解能力很强，就是会偷懒，结果就是进步很慢。我一直没有想到什么好办法，因为我自己的意识中，竞技体育是最好的培养这种不偷懒和竞争性的项目。 后来，他的篮球教练课后叫住他，带他看了一下他们今年拿的北京各个校区之间的 U6，U9和U12 的银牌，金牌和铜牌（不得不说，他们校区蛮狠的），教练表示，嘟嘟是一个实战性选手，希望他增加基本功的训练（每次上课，几乎教练…",
-      "image": null,
-      "publishedAt": "2001-01-01T00:00:00Z",
-      "sourceId": "fc41292f8a54624e",
-      "sourceTitle": "Elizen's Blog",
-      "link": "https://elizen.me/kids/",
-      "detailPath": "articles/d41144121e72de19f555042d.json"
-    },
-    {
-      "id": "aec81ffdfd95b1d916995b97",
-      "title": "狂人日记",
+      "id": "5f7de8694b8d78ddf3f37dec",
+      "title": "Fragments",
       "summary": "",
       "image": null,
       "publishedAt": "2001-01-01T00:00:00Z",
       "sourceId": "fc41292f8a54624e",
       "sourceTitle": "Elizen's Blog",
-      "link": "https://elizen.me/bb/",
-      "detailPath": "articles/aec81ffdfd95b1d916995b97.json"
+      "link": "https://elizen.me/notes/",
+      "detailPath": "articles/5f7de8694b8d78ddf3f37dec.json"
     },
     {
-      "id": "bcd81c3d9741a834443f52de",
-      "title": "流言蜚语",
+      "id": "5bd950e817dc7712454e6ccd",
+      "title": "书目",
       "summary": "",
       "image": null,
       "publishedAt": "2001-01-01T00:00:00Z",
       "sourceId": "fc41292f8a54624e",
       "sourceTitle": "Elizen's Blog",
-      "link": "https://elizen.me/liuyan-feiyu/",
-      "detailPath": "articles/bcd81c3d9741a834443f52de.json"
+      "link": "https://elizen.me/booklist/",
+      "detailPath": "articles/5bd950e817dc7712454e6ccd.json"
     },
     {
       "id": "7bcf5e8e61b2ddbbb983d50e",
@@ -199,15 +199,15 @@
       "detailPath": "articles/7bcf5e8e61b2ddbbb983d50e.json"
     },
     {
-      "id": "b606caa37cb4f47d6ad40a9c",
-      "title": "我的观影",
-      "summary": "",
+      "id": "d41144121e72de19f555042d",
+      "title": "嘟嘟小记",
+      "summary": "我在一些笔记软件中记录着一个 #日子 这样的标签，主要是仿照感恩日记，对生活可能被遗忘的美好做一些记录，其中大部分内容回看的时候都能想起一些有趣的瞬间。 试着在这个页面内做一些摘录。 三岁五岁记 鼓励的力量 暑期的时候，想给他找点事儿做，选了个游泳，在我看来，这是和开车一样，必须要点的技能点之一。夏天，玩水他也开心，但和篮球一个毛病，连教练的评价都一样，这小家伙理解能力很强，就是会偷懒，结果就是进步很慢。我一直没有想到什么好办法，因为我自己的意识中，竞技体育是最好的培养这种不偷懒和竞争性的项目。 后来，他的篮球教练课后叫住他，带他看了一下他们今年拿的北京各个校区之间的 U6，U9和U12 的银牌，金牌和铜牌（不得不说，他们校区蛮狠的），教练表示，嘟嘟是一个实战性选手，希望他增加基本功的训练（每次上课，几乎教练…",
       "image": null,
       "publishedAt": "2001-01-01T00:00:00Z",
       "sourceId": "fc41292f8a54624e",
       "sourceTitle": "Elizen's Blog",
-      "link": "https://elizen.me/movies/",
-      "detailPath": "articles/b606caa37cb4f47d6ad40a9c.json"
+      "link": "https://elizen.me/kids/",
+      "detailPath": "articles/d41144121e72de19f555042d.json"
     },
     {
       "id": "d32eecaf8c341ee98ff398a7",
@@ -221,6 +221,17 @@
       "detailPath": "articles/d32eecaf8c341ee98ff398a7.json"
     },
     {
+      "id": "b606caa37cb4f47d6ad40a9c",
+      "title": "我的观影",
+      "summary": "",
+      "image": null,
+      "publishedAt": "2001-01-01T00:00:00Z",
+      "sourceId": "fc41292f8a54624e",
+      "sourceTitle": "Elizen's Blog",
+      "link": "https://elizen.me/movies/",
+      "detailPath": "articles/b606caa37cb4f47d6ad40a9c.json"
+    },
+    {
       "id": "047b0120599e7959db33ac45",
       "title": "我的阅读",
       "summary": "",
@@ -230,6 +241,17 @@
       "sourceTitle": "Elizen's Blog",
       "link": "https://elizen.me/books/",
       "detailPath": "articles/047b0120599e7959db33ac45.json"
+    },
+    {
+      "id": "bcd81c3d9741a834443f52de",
+      "title": "流言蜚语",
+      "summary": "",
+      "image": null,
+      "publishedAt": "2001-01-01T00:00:00Z",
+      "sourceId": "fc41292f8a54624e",
+      "sourceTitle": "Elizen's Blog",
+      "link": "https://elizen.me/liuyan-feiyu/",
+      "detailPath": "articles/bcd81c3d9741a834443f52de.json"
     },
     {
       "id": "9b13a684f879c71d1b53699c",

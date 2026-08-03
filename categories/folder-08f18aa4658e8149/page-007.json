@@ -1,6 +1,39 @@
 {
   "items": [
     {
+      "id": "06f1014dac4af0520bf4fcc7",
+      "title": "入蜀记 day383 被喊两次靓仔",
+      "summary": "「被喊两次靓仔。」",
+      "image": null,
+      "publishedAt": "2026-06-11T04:48:27Z",
+      "sourceId": "8e5dc5a8b5023a8e",
+      "sourceTitle": "折腾人生",
+      "link": "https://z.arlmy.me/posts/BBBPandINSW/INSW-jet/INSW_383/",
+      "detailPath": "articles/06f1014dac4af0520bf4fcc7.json"
+    },
+    {
+      "id": "82f16f45c4ccae02d27ff313",
+      "title": "基于 git 的零拷贝静态web服务器",
+      "summary": "无聊，产生了个crazy的想法。 git 内部用 zlib 压缩文件内容 Content-Encoding: gzip 也是 如果web服务器输出 .git 里的 静态 内容，是不是可以减一个二次解压/压缩步骤？？？ blob sha1 直接当etag？ 跟AI较量了几轮，一开始它说做不到。因为 blob 的格式比较变态。因为 hello world... 在 .git/objects/ab/cdef... 里的东西是这么存的 zlib(blob 1234\\0hello world...) I was like ？？？日他妈真变态啊。这前面是写死了 blob <size>\\0 然后把文件内容放在一起，再压缩的。 .git 这设计脑子有病啊。。。为啥不是原始文件gz而是加个头去gz。。。 此路不通！结束 然后A…",
+      "image": null,
+      "publishedAt": "2026-06-10T15:21:00Z",
+      "sourceId": "a864c53722a17b19",
+      "sourceTitle": "est's blog",
+      "link": "https://blog.est.im/2026/stdout-22",
+      "detailPath": "articles/82f16f45c4ccae02d27ff313.json"
+    },
+    {
+      "id": "27c9f565fa15321d05db0a8e",
+      "title": "服务器高性能网络调优",
+      "summary": "这篇文章写一下服务器的网络方面的调优经验。如果网络的带宽使用在 1GE，其实没有必要做调优，默认的参数基本没有 […] Continue reading...",
+      "image": "https://www.kawabangga.com/wp-content/uploads/2026/06/ingress-tcp-1024x660.png",
+      "publishedAt": "2026-06-10T11:52:00Z",
+      "sourceId": "f6786af950754079",
+      "sourceTitle": "卡瓦邦噶！",
+      "link": "https://www.kawabangga.com/posts/7292",
+      "detailPath": "articles/27c9f565fa15321d05db0a8e.json"
+    },
+    {
       "id": "ac3c5508808a171d6ae41b15",
       "title": "把 Next.js 拆成壳：LobeHub 后端迁移 Hono 实录",
       "summary": "往原址览之： https://innei.in/posts/tech/nextjs-shell-hono-backend-migration",
@@ -626,39 +659,6 @@
       "sourceTitle": "折腾人生",
       "link": "https://z.arlmy.me/posts/BBBPandINSW/INSW-jet/INSW_372/",
       "detailPath": "articles/3fd0b038ce709e121f30b8af.json"
-    },
-    {
-      "id": "aecd25836554a1126e35a86c",
-      "title": "Elon Musk 五步工作法",
-      "summary": "The five-step process: First, make your requirements less dumb . Your requirements are definitely dumb. It does not matter who gave them to you. In fact, it's particularly dangerous if a smart person gave you the requirements, because you might not question them enough. Everyone is wrong some of the time, no matter who you are. So the first step is to make…",
-      "image": null,
-      "publishedAt": "2026-05-31T03:56:00Z",
-      "sourceId": "a864c53722a17b19",
-      "sourceTitle": "est's blog",
-      "link": "https://blog.est.im/2026/stdin-15",
-      "detailPath": "articles/aecd25836554a1126e35a86c.json"
-    },
-    {
-      "id": "9ecae36f795180719b719166",
-      "title": "丽水遂昌｜三个人，自驾五天，花费1800元，总结推荐",
-      "summary": "",
-      "image": null,
-      "publishedAt": "2026-05-30T19:11:39Z",
-      "sourceId": "fa90e95e2850db36",
-      "sourceTitle": "è¿�ç»´å’–å•¡å�§",
-      "link": "https://blog.ops-coffee.com/r/city-china-zhejiang-lishui-suichang-summary.html",
-      "detailPath": "articles/9ecae36f795180719b719166.json"
-    },
-    {
-      "id": "bba97527d3f82970a65f0482",
-      "title": "Playlet：DLNA听歌神器 免安装app播放NAS里的歌",
-      "summary": "家里有个小 NAS 。里面存了一些歌。一半是用 NAS 自带的 app 听，一半是。。。SMB 共享打开听 虽然 NAS 也提供 DLNA ，一直以来找不到趁手 app ，要么收费，要么 bug 多，要么不能多端。 13年前我也想 基于 chrome.socket 做个 Chrome App 弄个类似的。结果这破玩意实现有问题， 多连接会导致 hang 。最后 2020年Chromium决定杀死 Chrome Apps 周六的时候，实在无聊，决定又开始搓轮子。在思考 SSDP/UPnP ，native UI, electron，命令行这些选型的时候，突然想到，DLNA服本来就要提供一个http，自己再造个 http 客户端去通信，岂不是多此一举？只要依托它，解决跨域……等等，用个 bookmarklet 不就…",
-      "image": null,
-      "publishedAt": "2026-05-30T12:03:08Z",
-      "sourceId": "a864c53722a17b19",
-      "sourceTitle": "est's blog",
-      "link": "https://blog.est.im/2026/stdout-21",
-      "detailPath": "articles/bba97527d3f82970a65f0482.json"
     }
   ]
 }

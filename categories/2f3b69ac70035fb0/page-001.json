@@ -1,6 +1,61 @@
 {
   "items": [
     {
+      "id": "b8715c71e6551bb260ea400b",
+      "title": "Cloudflare Workers and Containers now support inbound TCP connections and gRPC",
+      "summary": "Cloudflare Workers now support inbound TCP connections via Spectrum, allowing direct socket forwarding to Durable Objects and Containers. Developers can run full-duplex gRPC applications or leverage automatic gRPC-to-gRPC-web translation directly within Workers.",
+      "image": null,
+      "publishedAt": "2026-08-03T13:00:00Z",
+      "sourceId": "2f3b69ac70035fb0",
+      "sourceTitle": "The Cloudflare Blog",
+      "link": "https://blog.cloudflare.com/grpc-workers/",
+      "detailPath": "articles/b8715c71e6551bb260ea400b.json"
+    },
+    {
+      "id": "f35f445d22c3c8c69bcc2c64",
+      "title": "Introducing the Billable Usage API: programmatic cost visibility for Cloudflare",
+      "summary": "Cloudflare has launched a new Billable Usage API for accounts, giving developers and FinOps teams single-endpoint programmatic visibility into cost and usage across all self-serve products. Built around the FOCUS specification, spend can now be tracked seamlessly alongside the rest of your cloud stack.",
+      "image": null,
+      "publishedAt": "2026-08-03T13:00:00Z",
+      "sourceId": "2f3b69ac70035fb0",
+      "sourceTitle": "The Cloudflare Blog",
+      "link": "https://blog.cloudflare.com/billable-usage-api/",
+      "detailPath": "articles/f35f445d22c3c8c69bcc2c64.json"
+    },
+    {
+      "id": "468e011e3f88f548ca9d05ee",
+      "title": "Smaller, faster, safer: running Kimi and GLM at scale",
+      "summary": "Serving frontier models like Kimi and GLM means fighting for GPU memory. Here's how we quantize KV caches, compress model weights, and add integrity checks to serve them faster, cheaper, and safely.",
+      "image": null,
+      "publishedAt": "2026-08-03T13:00:00Z",
+      "sourceId": "2f3b69ac70035fb0",
+      "sourceTitle": "The Cloudflare Blog",
+      "link": "https://blog.cloudflare.com/smaller-faster-safer-models/",
+      "detailPath": "articles/468e011e3f88f548ca9d05ee.json"
+    },
+    {
+      "id": "4f2553d8ce6e51c7a3afbd83",
+      "title": "Your agent needs a computer, not a container — introducing @cloudflare/computer",
+      "summary": "Agents need more than just a container to scale. We're introducing @cloudflare/computer, an agent runtime that dynamically orchestrates between fast, efficient isolates and full Linux containers to give every agent a computer of its own.",
+      "image": null,
+      "publishedAt": "2026-08-03T13:00:00Z",
+      "sourceId": "2f3b69ac70035fb0",
+      "sourceTitle": "The Cloudflare Blog",
+      "link": "https://blog.cloudflare.com/cloudflare-computer/",
+      "detailPath": "articles/4f2553d8ce6e51c7a3afbd83.json"
+    },
+    {
+      "id": "214652373f61fe14e0e0066b",
+      "title": "Workers RPC now works across Python and JavaScript",
+      "summary": "One coding agent can write a Python Worker and another can write a JavaScript Worker. At runtime, those Workers can exchange references to live objects and call their methods without defining APIs, schemas, or serialization code.",
+      "image": null,
+      "publishedAt": "2026-08-03T13:00:00Z",
+      "sourceId": "2f3b69ac70035fb0",
+      "sourceTitle": "The Cloudflare Blog",
+      "link": "https://blog.cloudflare.com/python-workers-rpc/",
+      "detailPath": "articles/214652373f61fe14e0e0066b.json"
+    },
+    {
       "id": "5c5afc73f3757a8a52d8877a",
       "title": "Welcome to Agents Week",
       "summary": "Agents Week explores how cloud infrastructure must evolve to serve autonomous agents rather than human browsers. Join us as we unpack the storage, execution, and security primitives needed for an agent-native web.",
@@ -164,61 +219,6 @@
       "sourceTitle": "The Cloudflare Blog",
       "link": "https://blog.cloudflare.com/ml-dsa-will-have-to-do/",
       "detailPath": "articles/b01999ebf09e6a400a949d72.json"
-    },
-    {
-      "id": "9ec1c7b23ed015f372f1d45c",
-      "title": "Introducing Meerkat: an experiment in global consensus",
-      "summary": "Cloudflare Research is building a global consensus service called Meerkat that uses a new consensus algorithm called QuePaxa. We plan to use Meerkat to build a strongly consistent, fault-tolerant key-value store, and other applications.",
-      "image": null,
-      "publishedAt": "2026-07-08T12:00:00Z",
-      "sourceId": "2f3b69ac70035fb0",
-      "sourceTitle": "The Cloudflare Blog",
-      "link": "https://blog.cloudflare.com/meerkat-introduction/",
-      "detailPath": "articles/9ec1c7b23ed015f372f1d45c.json"
-    },
-    {
-      "id": "84ff23555d11234063d0fc40",
-      "title": "Cloudflare proudly joins the UK government's Cyber Resilience Pledge",
-      "summary": "The pledge is a voluntary framework inviting organizations to commit to foundational cyber security governance, board-level accountability, and supply chain rigor. For over a decade, Cloudflare has pioneered the core pillars of this framework: democratizing security, leadership accountability, and radical transparency.",
-      "image": null,
-      "publishedAt": "2026-07-07T12:00:00Z",
-      "sourceId": "2f3b69ac70035fb0",
-      "sourceTitle": "The Cloudflare Blog",
-      "link": "https://blog.cloudflare.com/cloudflare-joins-uk-cyber-resilience-pledge/",
-      "detailPath": "articles/84ff23555d11234063d0fc40.json"
-    },
-    {
-      "id": "767f7d1b8e905a637c5aebe3",
-      "title": "Your Worker can now have its own cache in front of it",
-      "summary": "We are launching Workers Cache, a regionally tiered cache that sits directly in front of your Worker entrypoints. Infinitely composable, configured via standard HTTP headers",
-      "image": null,
-      "publishedAt": "2026-07-06T13:00:00Z",
-      "sourceId": "2f3b69ac70035fb0",
-      "sourceTitle": "The Cloudflare Blog",
-      "link": "https://blog.cloudflare.com/workers-cache/",
-      "detailPath": "articles/767f7d1b8e905a637c5aebe3.json"
-    },
-    {
-      "id": "df6da0db76974f27885d0be2",
-      "title": "Making AI search smarter",
-      "summary": "Search is how we find nearly everything on the web — creators, merchants, answers. AI is rewriting the rules, leaving creators caught between staying discoverable in an agentic era and getting paid for their work. Today we're launching two initiatives to help.",
-      "image": null,
-      "publishedAt": "2026-07-01T13:00:00Z",
-      "sourceId": "2f3b69ac70035fb0",
-      "sourceTitle": "The Cloudflare Blog",
-      "link": "https://blog.cloudflare.com/making-ai-search-smarter/",
-      "detailPath": "articles/df6da0db76974f27885d0be2.json"
-    },
-    {
-      "id": "ea6f889ec290cc19dcef6683",
-      "title": "Unmasking the crawls with Attribution Business Insights",
-      "summary": "Cloudflare’s new Attribution Business Insights dashboard helps website owners understand crawler behavior, appetite, and potential value, fueling business-level conversations around crawl compensation.",
-      "image": null,
-      "publishedAt": "2026-07-01T06:00:00Z",
-      "sourceId": "2f3b69ac70035fb0",
-      "sourceTitle": "The Cloudflare Blog",
-      "link": "https://blog.cloudflare.com/attribution-business-insights/",
-      "detailPath": "articles/ea6f889ec290cc19dcef6683.json"
     }
   ]
 }
