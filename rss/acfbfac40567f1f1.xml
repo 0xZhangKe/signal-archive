@@ -12,7 +12,7 @@
 	<atom:link href="https://blog.jetbrains.com/kotlin/feed/" rel="self" type="application/rss+xml" />
 	<link>https://blog.jetbrains.com</link>
 	<description>Developer Tools for Professionals and Teams</description>
-	<lastBuildDate>Fri, 31 Jul 2026 14:53:13 +0000</lastBuildDate>
+	<lastBuildDate>Mon, 03 Aug 2026 09:35:59 +0000</lastBuildDate>
 	<language>en-US</language>
 	<sy:updatePeriod>
 	hourly	</sy:updatePeriod>
@@ -124,6 +124,322 @@
 
 
 <p>Happy shipping!</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>Qodana 2026.2: More Security, Better Coverage, Less Configuration</title>
+		<link>https://blog.jetbrains.com/qodana/2026/07/qodana-2026-2-more-security-better-coverage-less-configuration/</link>
+		
+		<dc:creator><![CDATA[Kerry Beetge]]></dc:creator>
+		<pubDate>Wed, 29 Jul 2026 13:47:03 +0000</pubDate>
+		<featuredImage>https://blog.jetbrains.com/wp-content/uploads/2026/07/Untitled-design-45.png</featuredImage>		<product ><![CDATA[kotlin]]></product>
+		<product ><![CDATA[qodana]]></product>
+		<product ><![CDATA[teamcity]]></product>
+		<category><![CDATA[release]]></category>
+		<guid isPermaLink="false">https://blog.jetbrains.com/?post_type=qodana&#038;p=726686</guid>
+
+					<description><![CDATA[Qodana 2026.2 makes it easier for development teams to act on code quality, security, and compliance findings throughout the development workflow. This release introduces clearer code coverage insights for pull requests, highlights uncovered new lines directly in the IDE, and automatically detects coverage reports in common project locations &#8211; reducing the configuration required to get [&#8230;]]]></description>
+										<content:encoded><![CDATA[
+<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/07/Untitled-design-45-1.png" alt="Qodana 2026.2" class="wp-image-726814"/></figure>
+
+
+
+<p>Qodana 2026.2 makes it easier for development teams to act on code quality, security, and compliance findings throughout the development workflow. This release introduces clearer code coverage insights for pull requests, highlights uncovered new lines directly in the IDE, and automatically detects coverage reports in common project locations &#8211; reducing the configuration required to get started.</p>
+
+
+
+<p>The release also expands Qodana’s security offering with new inspections, support for custom security rules, post-quantum cryptography inspections, and publicly available SAST benchmarks through SABER. Laravel inspections are now enabled by default, while new License Audit quality gates help teams prevent newly introduced dependencies with prohibited or unknown licences from progressing through the pipeline. Let&#8217;s get into the details.</p>
+
+
+
+<p align="center"><a class="jb-download-button" title="Try Qodana" href="https://www.jetbrains.com/qodana/buy/?billing=yearly" rel="noopener noreferrer" data-mce-href="https://www.jetbrains.com/qodana/buy/?billing=yearly" data-mce-selected="inline-boundary" data-mce- target="_blank"><i class="download-icon"></i>Try Qodana</a></p>
+
+
+
+<h2 class="wp-block-heading"> Better Code Coverage UX</h2>
+
+
+
+<h3 class="wp-block-heading">Code Coverage for incremental analysis in the IDE</h3>
+
+
+
+<p>Starting with Qodana 2026.2, pull request analyses can show which changed or added lines are covered by tests and which are not, alongside the total coverage for newly added code, known as fresh coverage.</p>
+
+
+
+<p>After the analysis, developers can open the report in the IDE and browse the files changed in the pull request. They can see which files lack coverage through statistics in the tool window, while new lines are highlighted in the IDE to reveal coverage gaps. Developers can use this information to write targeted tests for functionality that lacks coverage, improving the reliability of their software.</p>
+
+
+
+<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/07/image-35.png" alt="Qodana code coverage fo incremental analysis in the IDE" class="wp-image-726705"/></figure>
+
+
+
+<h3 class="wp-block-heading"><strong>Out-of-the-box code coverage reporting</strong></h3>
+
+
+
+<p>Showing code coverage results in Qodana now requires fewer configuration steps. You no longer need to copy all reports to the <code>.qodana/code-coverage</code> directory, which lets you simplify your build configuration.</p>
+
+
+
+<p>Qodana 2026.2 automatically detects coverage reports in the project:</p>
+
+
+
+<ul class="wp-block-list">
+<li>Qodana for JVM and Qodana for Android: default paths for Jacoco and Kover plugins are supported for both Maven and Gradle</li>
+
+
+
+<li>Qodana for JS: default location <code>coverage/lcov.info</code> is supported, as well as some common community locations like <code>reports</code> or <code>test-coverage</code> directories</li>
+
+
+
+<li>Qodana for PHP: <code>clover.xml</code> and <code>coverage.xml</code> files are supported in common in community locations, such as the project root, <code>build/logs</code>, <code>reports</code> and <code>coverage</code></li>
+
+
+
+<li>Qodana for Python:&nbsp; <code>coverage.xml</code> file is supported in common locations like project root, <code>coverage-reports</code> or <code>reports</code></li>
+
+
+
+<li>Qodana for Go: <code>coverage.out</code> or <code>cover.out</code> files in root directory and other common directories like&nbsp; <code>coverage</code>, <code>reports</code> are supported</li>
+
+
+
+<li>Qodana for .NET: <code>coverage.cobertura</code> and <code>coverage.info</code> files in project root or other common directories like&nbsp; <code>coverage</code> or <code>TestResults</code> are supported<br></li>
+</ul>
+
+
+
+<p>To generate code coverage reports, set up one of the <a href="https://www.jetbrains.com/help/qodana/code-coverage.html" target="_blank" rel="noopener">supported tools</a>, and see your statistics in any run. To disable this behaviour, either selectively copy your reports to the <code>.qodana/code-coverage directory</code>, or specify your custom location using a new <code>codeCoverageLocations</code> parameter in your <code>qodana.yaml</code> file. See <a href="https://www.jetbrains.com/help/qodana/2026.2/code-coverage.html#code-coverage-before-you-start" target="_blank" rel="noopener">the documentation</a> for an example of how to specify a custom directory. To disable coverage reporting, disable the <a href="https://www.jetbrains.com/help/qodana/2026.2/code-coverage.html#How+code+coverage+works" target="_blank" rel="noopener">corresponding inspection</a> in your configuration.</p>
+
+
+
+<p align="center"><a class="jb-download-button" title="View Documentation" href="https://www.jetbrains.com/help/qodana/code-coverage.html" rel="noopener noreferrer" data-mce-href="https://www.jetbrains.com/help/qodana/code-coverage.html" data-mce-selected="inline-boundary" data-mce- target="_blank"><i class="download-icon"></i>View Documentation</a></p>
+
+
+
+<h2 class="wp-block-heading">New security inspections</h2>
+
+
+
+<p><strong>Broader SAST and multi-file taint analysis</strong></p>
+
+
+
+<p>Qodana 2026.2 expands the security analysis available in the Qodana for .NET linter, helping teams detect a broader range of vulnerabilities in C#, JavaScript, and TypeScript code. The new inspections are enabled by default in the recommended profile and appear as standard Qodana findings within existing IDE, CI/CD, and reporting workflows.</p>
+
+
+
+<p>The expanded inspection set combines two forms of analysis. Pattern-matching rules identify insecure coding practices within individual code locations, while taint analysis tracks untrusted data as it moves through an application, including across multiple files. This enables Qodana to detect vulnerabilities such as SQL injection, command injection, cross-site scripting (XSS), and path traversal.</p>
+
+
+
+<p>Teams can also extend this coverage with their own security rules. Qodana for .NET now supports custom and third-party rules written in the OpenGrep format. Place these rules in the .qodana/opengrep directory at the project root, and Qodana will make them available as Qodana inspections.</p>
+
+
+
+<p>The predefined rules are publicly available in the opengrep-sast-rules repository. Behind the scenes, pattern matching uses an open-source JetBrains fork of OpenGrep, while data-flow tracking is handled by Qodana’s own taint analysis engine. This gives teams access to the OpenGrep rule format and ecosystem while retaining Qodana’s multi-file analysis and developer workflows. Support will be extended to additional Qodana linters and languages (Kotlin/Java) in future releases.</p>
+
+
+
+<p>The following example shows how Qodana detects a classic SQL injection vulnerability in the WebGoat.NET project. The taint trace follows untrusted input from Request[&#8220;productNumber&#8221;] to its use in an SQL query located in another file.<br></p>
+
+
+
+<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/07/image-36.png" alt="" class="wp-image-726720"/></figure>
+
+
+
+<p><em>The taint trace begins with the untrusted user input in the Request[&#8220;productNumber&#8221;]</em></p>
+
+
+
+<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/07/image-37.png" alt="" class="wp-image-726731"/><figcaption class="wp-element-caption"><em>Untrusted input is landed in the SQL query in another file</em></figcaption></figure>
+
+
+
+<h2 class="wp-block-heading"><strong>SABER &#8211; Static Analysis Benchmark Evaluation Runner</strong></h2>
+
+
+
+<p>To make the performance of these inspections easier to evaluate, we have introduced SABER, the Static Analysis Benchmark Evaluation Runner. SABER runs Qodana against publicly available security benchmarks and compares its findings with known expected results.</p>
+
+
+
+<p><strong>Transparent SAST benchmarking with SABER</strong></p>
+
+
+
+<p>The current benchmark suite includes:</p>
+
+
+
+<ul class="wp-block-list">
+<li>CodeQL benchmarks for C# and JavaScript, built from CodeQL .expected files</li>
+
+
+
+<li>WebGoat.NET, using publicly available ground-truth data from Sonar</li>
+
+
+
+<li>The Qodana post-quantum cryptography demonstration project</li>
+</ul>
+
+
+
+<p><br>The benchmark configurations, individual runs, and aggregated results are publicly available on the<a href="https://jb.gg/sq26z2" target="_blank" rel="noopener"> SABER TeamCity instance</a>. <br><br>Guest access is enabled, allowing anyone to inspect the results and follow how Qodana’s SAST capabilities develop over time. It is available via <a href="https://jb.gg/sq26z2" target="_blank" rel="noopener">this link</a>. Guest access is enabled, so anyone can open it using the ‘Log in as guest’ option. We have a strong commitment to demonstrating SAST-related capabilities and continually improving them using industry-standard benchmarks. For example, this is the aggregated report for the currently available benchmarks:</p>
+
+
+
+<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/07/image-41.png" alt="" class="wp-image-726875"/><figcaption class="wp-element-caption">SABER in Qodana 2026.2</figcaption></figure>
+
+
+
+<p>Projects ‘CodeQL C#&#8217; and ‘CodeQL JS’  use the <a href="https://github.com/jetbrains-qodana/codeql-benchmark" target="_blank" rel="noopener">jetbrains-qodana/codeql-benchmark</a> project that is built from the <a href="https://github.com/github/codeql" target="_blank" rel="noopener">CodeQL</a> ‘.expected’ files. Project <a href="http://webgoat.net" target="_blank" rel="noopener">WebGoat.NET</a> is a well-known vulnerable C# project (our fork is here: <a href="https://github.com/jetbrains-qodana/WebGoat.NET" target="_blank" rel="noopener">jetbrains-qodana/WebGoat.NET</a>) and uses the publicly available <a href="https://github.com/SonarSource/sonar-benchmarks-scores/blob/master/csharp/security/WebGoat.Net/ground-truth.json" target="_blank" rel="noopener">ground-truth.json</a> as the expected results. The <a href="https://jb.gg/gsngr2" target="_blank" rel="noopener">PQC demo</a> project is a test project that demonstrates the capability to identify post-quantum cryptography issues in your code.</p>
+
+
+
+<h2 class="wp-block-heading"><strong>Post-Quantum Cryptography (PQC) inspections</strong></h2>
+
+
+
+<p>If you have heard about quantum computation, you might know that it will, in the future, easily break many widely used public-key cryptographic algorithms (such as RSA and ECC). Even though quantum computation is not yet widely spread, you should be ready now because of the <a href="https://en.wikipedia.org/wiki/Harvest_now,_decrypt_later" target="_blank" rel="noopener">Harvest Now, Decrypt Later</a> approach, in which future attackers might already harvest and store your encrypted data to decrypt it later.</p>
+
+
+
+<p>Qodana for JVM now includes inspections that help developers identify affected code and guide them toward post-quantum cryptographic alternatives, reducing future security risk and supporting a gradual, manageable migration, helping organizations prepare for quantum-era security risks.</p>
+
+
+
+<p>Our PQC inspections are implemented in accordance with <a href="https://www.nist.gov/pqc" target="_blank" rel="noopener">NIST recommendations</a> and are grouped into several priority levels (called PqcMinLevel1, PqcMinLevel2, and so on to PqcMinLevel5). To enable these inspections, activate one of the corresponding groups that represent NIST-based post-quantum readiness levels:<br></p>
+
+
+
+<ul class="wp-block-list">
+<li>Level 1 &#8211; Flag pre-quantum and legacy cryptographic algorithms. This uncovers the most critical vulnerabilities.</li>
+
+
+
+<li>Level 2 &#8211; Flag baseline post-quantum algorithms.</li>
+
+
+
+<li>Level 3 &#8211; Flag standard-strength post-quantum algorithms.</li>
+
+
+
+<li>Level 4 &#8211; Flag high-strength post-quantum algorithms.</li>
+
+
+
+<li>Level 5 &#8211; Flag all algorithms except those providing maximum security.</li>
+</ul>
+
+
+
+<p>Every level includes all previous levels, so level 5 includes inspections from levels 1-4 as well.</p>
+
+
+
+<p>We also prepared a demo project (<a href="https://github.com/jetbrains-qodana/pqc-demo" target="_blank" rel="noopener">PQC demo</a>) that showcases PQC&#8217;s current capabilities. These inspections are backed by OpenGrep and taint analysis (described in the previous section), which also support excellent pattern matching and multifile taint analysis for Java and Kotlin, as shown in the example below.</p>
+
+
+
+<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/07/image-38.png" alt="" class="wp-image-726742"/></figure>
+
+
+
+<p><em>A non-compliant crypto protocol is found in a string constant</em></p>
+
+
+
+<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/07/image-39.png" alt="" class="wp-image-726754"/><figcaption class="wp-element-caption"><em>That is propagated via another file</em></figcaption></figure>
+
+
+
+<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/07/image-40.png" alt="" class="wp-image-726765"/><figcaption class="wp-element-caption"><em>And landed in real usage, showing a correct detection of the issue</em></figcaption></figure>
+
+
+
+<h2 class="wp-block-heading"><strong>Laravel checks enabled by default</strong></h2>
+
+
+
+<p>Qodana for PHP now includes Laravel code inspections. This reduces the number of false positives in PHP code, and analyses code for Laravel-specific code problems, such as directly assigning values to guarded attributes.</p>
+
+
+
+<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/07/image-42.png" alt="" class="wp-image-726890"/><figcaption class="wp-element-caption">Laravel checks</figcaption></figure>
+
+
+
+<h2 class="wp-block-heading">Quality gates on License Audit</h2>
+
+
+
+<p>Qodana 2026.2 adds support for license audit quality gates, with two new options:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+
+
+
+<ul class="wp-block-list">
+<li><code>failOnProhibited</code> — fails the run if any dependency uses a license prohibited by your configured license rules.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+
+
+
+<li><code>failOnUnknown</code> — fails the run if any dependency has a license that couldn&#8217;t be detected or categorized.</li>
+</ul>
+
+
+
+<p><br>For example, in qodana.yaml, the failureConditions section may now contain a dependencyLicenses block:</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">failureConditions:                                                                                                                                                                                                                     
+  dependencyLicenses:                                                                                                                                                                                                                  
+    failOnProhibited: true
+    failOnUnknown: true
+</pre>
+
+
+
+<p>Qodana evaluates the quality gate against the collected dependency licenses directly, independently of whether License Audit problems are present as inspection results. Only the CheckDependencyLicenses inspection needs to be enabled.</p>
+
+
+
+<p>License audit quality gates also work for incremental analysis, and only fail on new violations. </p>
+
+
+
+<h2 class="wp-block-heading">What to do next:</h2>
+
+
+
+<p>If you’re already using the latest release, you’re ready to start using the improvements in Qodana 2026.2 right away. If not, update to 2026.2.</p>
+
+
+
+<p>For setup details and feature-specific guidance, head over <a href="https://www.jetbrains.com/help/qodana/2026.2/new-in-qodana.html" target="_blank" rel="noopener">to the documentation</a>. If you’d like to see what Qodana can do in your own environment, try it on your project and explore the latest updates on the <a href="https://blog.jetbrains.com/qodana/">Qodana blog</a>.<br><br>Request a demo if you&#8217;d like to learn more from our sales team or want 20% off when switching to Qodana from a comparable, commercial solution.</p>
+
+
+
+<p align="center"><a class="jb-download-button" title="Request Qodana Demo" href="https://www.jetbrains.com/qodana/request-a-demo/" rel="noopener noreferrer" data-mce-href="https://www.jetbrains.com/qodana/request-a-demo/" data-mce-selected="inline-boundary" data-mce- target="_blank"><i class="download-icon"></i>Request Qodana Demo</a></p>
+
+
+
+<p><br><br></p>
+
+
+
+<p></p>
 ]]></content:encoded>
 					
 		
@@ -372,7 +688,7 @@
 
 
 
-<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/04/HTiRGsQ.png" alt="" class="wp-image-703782"/></figure>
+<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/04/HTiRGsQ.png" alt="" class="wp-image-703782"/></figure>
 
 
 
@@ -380,7 +696,7 @@
 
 
 
-<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/04/3uVKXW9.png" alt="" class="wp-image-703793"/></figure>
+<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/04/3uVKXW9.png" alt="" class="wp-image-703793"/></figure>
 
 
 
@@ -990,7 +1306,7 @@ val issues: List&lt;Issue> = asLlm(response, hint = "Return all beginner-friendl
 
 
 
-<figure data-wp-context="{&quot;imageId&quot;:&quot;6a703ae6a09d8&quot;}" data-wp-interactive="core/image" class="wp-block-image size-full wp-lightbox-container"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" data-wp-class--hide="state.isContentHidden" data-wp-class--show="state.isContentVisible" data-wp-init="callbacks.setButtonStyles" data-wp-on-async--click="actions.showLightbox" data-wp-on-async--load="callbacks.setButtonStyles" data-wp-on-async-window--resize="callbacks.setButtonStyles" src="https://blog.jetbrains.com/wp-content/uploads/2026/07/KT-Twitter_Facebook_LinkedIn-1200x675-1.png" alt="" class="wp-image-722875" /><button
+<figure data-wp-context="{&quot;imageId&quot;:&quot;6a7077f269d34&quot;}" data-wp-interactive="core/image" class="wp-block-image size-full wp-lightbox-container"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" data-wp-class--hide="state.isContentHidden" data-wp-class--show="state.isContentVisible" data-wp-init="callbacks.setButtonStyles" data-wp-on-async--click="actions.showLightbox" data-wp-on-async--load="callbacks.setButtonStyles" data-wp-on-async-window--resize="callbacks.setButtonStyles" src="https://blog.jetbrains.com/wp-content/uploads/2026/07/KT-Twitter_Facebook_LinkedIn-1200x675-1.png" alt="" class="wp-image-722875" /><button
 			class="lightbox-trigger"
 			type="button"
 			aria-haspopup="dialog"
@@ -2870,229 +3186,6 @@ product: linux/app
 
 
 <p>The Kotlin Toolchain is still under active development. You can provide feedback about your experience by joining the discussion in the <a href="https://slack-chats.kotlinlang.org/c/kotlin-toolchain" target="_blank" rel="noopener">#kotlin-toolchain Slack channel</a> or by sharing your suggestions and ideas in a <a href="https://youtrack.jetbrains.com/issues/AMPER" target="_blank" rel="noopener">YouTrack issue</a>. Your input and use cases help shape the future of the Kotlin Toolchain!</p>
-]]></content:encoded>
-					
-		
-		
-			</item>
-		<item>
-		<title>Kotlin 2.4.0 Released</title>
-		<link>https://blog.jetbrains.com/kotlin/2026/06/kotlin-2-4-0-released/</link>
-		
-		<dc:creator><![CDATA[Sarah Haggarty]]></dc:creator>
-		<pubDate>Wed, 03 Jun 2026 10:14:55 +0000</pubDate>
-		<featuredImage>https://blog.jetbrains.com/wp-content/uploads/2026/06/KT-releases-BlogSocialShare-1280x720-1.png</featuredImage>		<category><![CDATA[releases]]></category>
-		<guid isPermaLink="false">https://blog.jetbrains.com/?post_type=kotlin&#038;p=711421</guid>
-
-					<description><![CDATA[The Kotlin 2.4.0 release is out! Here are the main highlights: For the complete list of changes, refer to What&#8217;s new in Kotlin 2.4.0 or the release notes on GitHub. How to install Kotlin 2.4.0 The latest version of Kotlin is included in the latest versions of IntelliJ IDEA and Android Studio. To update to [&#8230;]]]></description>
-										<content:encoded><![CDATA[
-<p>The Kotlin 2.4.0 release is out! Here are the main highlights:</p>
-
-
-
-<ul class="wp-block-list">
-<li><strong>Language</strong>: Stable context parameters, explicit backing fields, and multiple features for annotation use-site targets.</li>
-
-
-
-<li><strong>Standard library</strong>: Stabilized support for the UUID API and support for checking sorted order.</li>
-
-
-
-<li><strong>Kotlin/JVM</strong>: Support for Java 26 and annotations in metadata enabled by default.</li>
-
-
-
-<li><strong>Kotlin/Native</strong>: Support for Swift packages as dependencies, updates on Swift export, and the CMS GC enabled by default.</li>
-
-
-
-<li><strong>Kotlin/Wasm</strong>: Incremental compilation enabled by default and support for WebAssembly Component Model.</li>
-
-
-
-<li><strong>Kotlin/JS</strong>: Support for value class export and ES2015 features in JS code inlining.</li>
-
-
-
-<li><strong>Gradle</strong>: Compatibility with Gradle 9.5.0.</li>
-
-
-
-<li><strong>Maven</strong>: Automatic alignment between Java and JVM target versions.</li>
-
-
-
-<li><strong>Kotlin compiler</strong>: More consistent inline function behavior during <code>.klib</code> compilation.</li>
-</ul>
-
-
-
-<p></p>
-
-
-
-<p>For the complete list of changes, refer to <a href="https://kotlinlang.org/docs/whatsnew24.html" data-type="link" data-id="https://kotlinlang.org/docs/whatsnew24.html" target="_blank" rel="noopener">What&#8217;s new in Kotlin 2.4.0</a> or the <a href="https://github.com/JetBrains/kotlin/releases/tag/v2.4.0" target="_blank" rel="noopener">release notes on GitHub.</a></p>
-
-
-
-<h2 class="wp-block-heading">How to install Kotlin 2.4.0</h2>
-
-
-
-<p>The latest version of Kotlin is included in the latest versions of <a href="https://www.jetbrains.com/idea/download/" target="_blank" rel="noopener">IntelliJ IDEA</a> and <a href="https://developer.android.com/studio" target="_blank" rel="noopener">Android Studio</a>.</p>
-
-
-
-<p>To update to the new Kotlin version, <a href="https://kotlinlang.org/docs/releases.html#update-to-a-new-kotlin-version" target="_blank" rel="noopener">change the Kotlin version</a> to 2.4.0 in your build scripts.</p>
-
-
-
-<p>If you need the command-line compiler, download it from the <a href="https://github.com/JetBrains/kotlin/releases/tag/v2.4.0" data-type="link" data-id="https://github.com/JetBrains/kotlin/releases/tag/v2.3.0" target="_blank" rel="noopener">GitHub release page</a>.</p>
-
-
-
-<p><strong>If you run into any problems:</strong></p>
-
-
-
-<ul class="wp-block-list">
-<li>Find help on <a href="https://app.slack.com/client/T09229ZC6" target="_blank" rel="noopener">Slack</a> (<a href="https://surveys.jetbrains.com/s3/kotlin-slack-sign-up" target="_blank" rel="noopener">get an invite</a>).</li>
-
-
-
-<li>Report issues to our issue tracker, <a href="https://youtrack.jetbrains.com/issues/KT" target="_blank" rel="noopener">YouTrack</a>.</li>
-</ul>
-
-
-
-<div style="background-color: #f1f6fe; margin-bottom: 2px; padding: 5px; margin-right: 0%; text-align: left; min-height: px;">
-<p>Stay up to date with the latest Kotlin features! Subscribe to receive Kotlin updates by filling out the form at the bottom of this post. &#x2b07;&#xfe0f;</p>
-</div>
-
-
-
-<h2 class="wp-block-heading">Top issue reporters from YouTrack</h2>
-
-
-
-<p><a href="https://youtrack.jetbrains.com/issues/?q=project:KT,%20KTIJ%20created:%202025-12-16%20..%20*%20created%20by:%20gamalik" target="_blank" rel="noopener">Andreas Malik</a> (21 issues),<a href="https://youtrack.jetbrains.com/issues/?q=project:KT,%20KTIJ%20created:%202025-12-16%20..%20*%20created%20by:%20rnett" target="_blank" rel="noopener"> Ryan Nett</a> (20 issues),<a href="https://youtrack.jetbrains.com/issues/?q=project:KT,%20KTIJ%20created:%202025-12-16%20..%20*%20created%20by:%20dramaix" target="_blank" rel="noopener"> Julien Dramaix</a> (18 issues),<a href="https://youtrack.jetbrains.com/issues/?q=project:KT,%20KTIJ%20created:%202025-12-16%20..%20*%20created%20by:%20kyay10" target="_blank" rel="noopener"> Youssef Shoaib</a> (17 issues),<a href="https://youtrack.jetbrains.com/issues/?q=project:KT,%20KTIJ%20created:%202025-12-16%20..%20*%20created%20by:%20jsjeon" target="_blank" rel="noopener"> Jinseong Jeon</a> (14 issues),<a href="https://youtrack.jetbrains.com/issues/?q=project:KT,%20KTIJ%20created:%202025-12-16%20..%20*%20created%20by:%20ZacSweers" target="_blank" rel="noopener"> Zac Sweers</a> (11 issues),<a href="https://youtrack.jetbrains.com/issues/?q=project:KT,%20KTIJ%20created:%202025-12-16%20..%20*%20created%20by:%20clovisai" target="_blank" rel="noopener"> Ivan Canet</a> (10 issues),<a href="https://youtrack.jetbrains.com/issues/?q=project:KT,%20KTIJ%20created:%202025-12-16%20..%20*%20created%20by:%20joseefort" target="_blank" rel="noopener"> Jose Enrique Estremadoyro Fort</a> (9 issues),<a href="https://youtrack.jetbrains.com/issues/?q=project:KT,%20KTIJ%20created:%202025-12-16%20..%20*%20created%20by:%20l.wasylkowski" target="_blank" rel="noopener"> Łukasz Wasylkowski</a> (8 issues),<a href="https://youtrack.jetbrains.com/issues/?q=project:KT,%20KTIJ%20created:%202025-12-16%20..%20*%20created%20by:%20Caleb_Brandt" target="_blank" rel="noopener"> calebbrandt77</a> (8 issues),<a href="https://youtrack.jetbrains.com/issues/?q=project:KT,%20KTIJ%20created:%202025-12-16%20..%20*%20created%20by:%20lppedd" target="_blank" rel="noopener"> Edoardo Luppi</a> (8 issues),<a href="https://youtrack.jetbrains.com/issues/?q=project:KT,%20KTIJ%20created:%202025-12-16%20..%20*%20created%20by:%20vadim.shabanov" target="_blank" rel="noopener"> Vadim Shabanov</a> (7 issues),<a href="https://youtrack.jetbrains.com/issues/?q=project:KT,%20KTIJ%20created:%202025-12-16%20..%20*%20created%20by:%20azefsw" target="_blank" rel="noopener"> Asapha</a> (6 issues),<a href="https://youtrack.jetbrains.com/issues/?q=project:KT,%20KTIJ%20created:%202025-12-16%20..%20*%20created%20by:%20louis.cad" target="_blank" rel="noopener"> Louis CAD</a> (6 issues),<a href="https://youtrack.jetbrains.com/issues/?q=project:KT,%20KTIJ%20created:%202025-12-16%20..%20*%20created%20by:%20vanniktech" target="_blank" rel="noopener"> Niklas Baudy</a> (6 issues),<a href="https://youtrack.jetbrains.com/issues/?q=project:KT,%20KTIJ%20created:%202025-12-16%20..%20*%20created%20by:%20rickclephas" target="_blank" rel="noopener"> Rick Clephas</a> (6 issues),<a href="https://youtrack.jetbrains.com/issues/?q=project:KT,%20KTIJ%20created:%202025-12-16%20..%20*%20created%20by:%20rlnt" target="_blank" rel="noopener"> rlnt</a> (5 issues),<a href="https://youtrack.jetbrains.com/issues/?q=project:KT,%20KTIJ%20created:%202025-12-16%20..%20*%20created%20by:%20marczeugs" target="_blank" rel="noopener"> marc</a> (5 issues),<a href="https://youtrack.jetbrains.com/issues/?q=project:KT,%20KTIJ%20created:%202025-12-16%20..%20*%20created%20by:%20Turansky" target="_blank" rel="noopener"> Victor Turansky</a> (5 issues), and<a href="https://youtrack.jetbrains.com/issues/?q=project:KT,%20KTIJ%20created:%202025-12-16%20..%20*%20created%20by:%20dlatt" target="_blank" rel="noopener"> Dirk Lattermann</a> (5 issues).</p>
-
-
-
-<h2 class="wp-block-heading">External contributors</h2>
-
-
-
-<p>We&#8217;d like to thank all of our contributors whose pull requests were included in this release:</p>
-
-
-
-<p><a href="https://github.com/AndreyBozhko" target="_blank" rel="noopener">AndreyBozhko</a>, <a href="https://github.com/ArseniySukhanov" target="_blank" rel="noopener">ArseniySukhanov</a>, <a href="https://github.com/bennyhuo" target="_blank" rel="noopener">bennyhuo</a>, <a href="https://github.com/BraisGabin" target="_blank" rel="noopener">BraisGabin</a>, <a href="https://github.com/dmaclach" target="_blank" rel="noopener">dmaclach</a>, <a href="https://github.com/kralliv" target="_blank" rel="noopener">kralliv</a>, <a href="https://github.com/loadkrnis" target="_blank" rel="noopener">loadkrnis</a>, <a href="https://github.com/migmacdev" target="_blank" rel="noopener">migmacdev</a>, <a href="https://github.com/NeonMika" target="_blank" rel="noopener">NeonMika</a>, <a href="https://github.com/nyksans" target="_blank" rel="noopener">nyksans</a>, <a href="https://github.com/oscarArismendi" target="_blank" rel="noopener">oscarArismendi</a>, <a href="https://github.com/rickclephas" target="_blank" rel="noopener">rickclephas</a>, <a href="https://github.com/stefanhaustein" target="_blank" rel="noopener">stefanhaustein</a>, <a href="https://github.com/Stream29" target="_blank" rel="noopener">Stream29</a>, <a href="https://github.com/tcmulcahy" target="_blank" rel="noopener">tcmulcahy</a>, and <a href="https://github.com/ZacSweers" target="_blank" rel="noopener">ZacSweers</a>.</p>
-
-
-
-<h2 class="wp-block-heading">Special thanks to our EAP Champions</h2>
-
-
-
-<ul class="wp-block-list">
-<li><a href="https://x.com/noraltavir">Alexander Nozik</a></li>
-
-
-
-<li><a href="https://x.com/andy_lamax" data-type="link" data-id="https://x.com/andy_lamax">Anderson Lameck</a></li>
-
-
-
-<li><a href="https://github.com/BoD" target="_blank" rel="noopener">Benoit Lubek</a></li>
-
-
-
-<li><a href="https://github.com/JesusMcCloud" target="_blank" rel="noopener">Bernd Prünster</a></li>
-
-
-
-<li><a href="https://github.com/HagamosVideojuegos" target="_blank" rel="noopener">David Lopez</a></li>
-
-
-
-<li><a href="https://github.com/dayanruben" target="_blank" rel="noopener">Dayan Ruben</a></li>
-
-
-
-<li><a href="https://github.com/molikuner" target="_blank" rel="noopener">Florian Schreiber</a></li>
-
-
-
-<li><a href="https://ivan.canet.dev/" target="_blank" rel="noopener">Ivan Canet</a></li>
-
-
-
-<li><a href="https://jakewharton.com/" target="_blank" rel="noopener">Jake Wharton</a></li>
-
-
-
-<li><a href="https://www.linkedin.com/in/johannessvensson/" target="_blank" rel="noopener">Johannes Svensson</a></li>
-
-
-
-<li><a href="https://www.linkedin.com/in/lukasz-wasylkowski/" target="_blank" rel="noopener">Łukasz Wasylkowski</a></li>
-
-
-
-<li><a href="https://github.com/MohamedRejeb" target="_blank" rel="noopener">Mohamed Rejeb</a></li>
-
-
-
-<li><a href="https://github.com/Zordid" target="_blank" rel="noopener">Olaf Gottschalk</a></li>
-
-
-
-<li><a href="https://github.com/rickclephas" target="_blank" rel="noopener">Rick Clephas</a></li>
-
-
-
-<li><a href="https://github.com/msotho" target="_blank" rel="noopener">Sechaba Mofokeng</a></li>
-
-
-
-<li><a href="https://github.com/seregamorph" target="_blank" rel="noopener">Sergey Chernov</a></li>
-
-
-
-<li><a href="https://sterlingalbury.com/" target="_blank" rel="noopener">Sterling Albury</a></li>
-
-
-
-<li><a href="https://github.com/ychescale9" target="_blank" rel="noopener">Yang</a></li>
-
-
-
-<li><a href="https://www.linkedin.com/in/yuri-geronimus/" target="_blank" rel="noopener">Yuri Geronimus</a></li>
-
-
-
-<li><a href="https://bsky.app/profile/zacsweers.dev" target="_blank" rel="noopener">Zac Sweers</a></li>
-</ul>
-
-
-
-<h2 class="wp-block-heading">Further reading</h2>
-
-
-
-<ul class="wp-block-list">
-<li><a href="https://kotlinlang.org/docs/whatsnew24.html" target="_blank" rel="noopener">What&#8217;s new in Kotlin 2.4.0 documentation</a></li>
-
-
-
-<li><a href="https://kotlinlang.org/docs/compatibility-guide-24.html" target="_blank" rel="noopener">Kotlin 2.4.0 compatibility guide</a></li>
-
-
-
-<li><a href="https://blog.jetbrains.com/kotlin/2022/11/eap-champions/">Kotlin EAP Champions</a></li>
-</ul>
 ]]></content:encoded>
 					
 		

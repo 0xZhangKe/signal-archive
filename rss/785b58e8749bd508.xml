@@ -12,7 +12,7 @@
 	<atom:link href="https://www.schneier.com/feed/" rel="self" type="application/rss+xml" />
 	<link>https://www.schneier.com/</link>
 	<description></description>
-	<lastBuildDate>Fri, 31 Jul 2026 21:07:02 +0000</lastBuildDate>
+	<lastBuildDate>Mon, 03 Aug 2026 10:47:55 +0000</lastBuildDate>
 	<language>en-US</language>
 	<sy:updatePeriod>
 	hourly	</sy:updatePeriod>
@@ -28,6 +28,48 @@
 	<height>32</height>
 </image> 
 <site xmlns="com-wordpress:feed-additions:1">182601345</site>	<item>
+		<title>The OpenAI Hack Shows the Genie Is Out of the Bottle</title>
+		<link>https://www.schneier.com/blog/archives/2026/08/the-openai-hack-shows-the-genie-is-out-of-the-bottle.html</link>
+					<comments>https://www.schneier.com/blog/archives/2026/08/the-openai-hack-shows-the-genie-is-out-of-the-bottle.html#comments</comments>
+		
+		<dc:creator><![CDATA[Bruce Schneier]]></dc:creator>
+		<pubDate>Mon, 03 Aug 2026 10:47:47 +0000</pubDate>
+				<category><![CDATA[Uncategorized]]></category>
+		<category><![CDATA[AI]]></category>
+		<category><![CDATA[cyberattack]]></category>
+		<category><![CDATA[hacking]]></category>
+		<category><![CDATA[LLM]]></category>
+		<guid isPermaLink="false">https://www.schneier.com/?p=72422</guid>
+
+					<description><![CDATA[<p><em>This essay originally appeared in <a href="https://foreignpolicy.com/2026/07/30/openai-hack-genie-bottle-defense/">Foreign Policy</a>.</em></p>
+<p>Earlier this month, two of OpenAI&#8217;s models broke out of their containment sandbox and attacked another AI company. The <a href="https://www.nytimes.com/2026/07/21/technology/openai-attack-hugging-face.html">story</a> is kind of <a href="https://simonwillison.net/2026/Jul/22/openai-cyberattack/">wild</a>. OpenAI was running security tests on two of its models: GPT-5.6 Sol and an unreleased model that is almost certainly GPT-6. In particular, it was running the <a href="https://arxiv.org/abs/2605.11086">ExploitGym</a> benchmark, which measures how good a model is at turning security vulnerabilities into working exploits: basically, offensive cyberattacks.</p>
+<p>Since these were internal tests, OpenAI locked those models in a secure sandbox that denied them access to the internet. But it was running the models without any safety filters that would prevent them from offensive cyber-actions. That meant that there was nothing to prevent the models from trying to ...</p>]]></description>
+										<content:encoded><![CDATA[<p><em>This essay originally appeared in <a href="https://foreignpolicy.com/2026/07/30/openai-hack-genie-bottle-defense/">Foreign Policy</a>.</em></p>
+<p>Earlier this month, two of OpenAI&#8217;s models broke out of their containment sandbox and attacked another AI company. The <a href="https://www.nytimes.com/2026/07/21/technology/openai-attack-hugging-face.html">story</a> is kind of <a href="https://simonwillison.net/2026/Jul/22/openai-cyberattack/">wild</a>. OpenAI was running security tests on two of its models: GPT-5.6 Sol and an unreleased model that is almost certainly GPT-6. In particular, it was running the <a href="https://arxiv.org/abs/2605.11086">ExploitGym</a> benchmark, which measures how good a model is at turning security vulnerabilities into working exploits: basically, offensive cyberattacks.</p>
+<p>Since these were internal tests, OpenAI locked those models in a secure sandbox that denied them access to the internet. But it was running the models without any safety filters that would prevent them from offensive cyber-actions. That meant that there was nothing to prevent the models from trying to <a href="https://huggingface.co/blog/security-incident-july-2026">break out</a> of that sandbox. And then <a href="https://openai.com/index/hugging-face-model-evaluation-security-incident/">break into</a> AI company Hugging Face&#8217;s network because they thought that they could read the answers there rather than doing the hard work of trying to solve the puzzles.</p>
+<p>It was a major security failure that the company has turned into a PR opportunity, but the implications are real&#8212;and much more general than one particular model or one particular company.</p>
+<p>Modern AI models exhibit <a href="https://spectrum.ieee.org/ai-agent-benchmark">genie</a> behavior: They can do what you ask in ways that you don&#8217;t expect or want. This is akin to Dionysus granting King Midas&#8217;s wish that everything he touches turn to gold (spoiler: His food, drink, and daughter all turn to gold on touch), or the <a href="https://prague.eu/en/golem-of-prague/">golem of Prague</a> guarding a ghetto beyond all reason. It&#8217;s Disney&#8217;s &#8220;<a href="https://disney.fandom.com/wiki/The_Sorcerer%27s_Apprentice">Sorcerer&#8217;s Apprentice</a>&#8221; and the <a href="https://www.lesswrong.com/w/squiggle-maximizer-formerly-paperclip-maximizer">paperclip maximizer</a>.</p>
+<p>This OpenAI incident is an example of an AI genie. The goal was to satisfy the benchmark. The &#8220;proper&#8221; way to do that is to figure out how to execute various cyberattacks. The genie way is to steal someone else&#8217;s solution. But because the model didn&#8217;t understand the difference, it chose the easier path.</p>
+<p>And, of course, now that we have seen this particular genie behavior, we can specify in the benchmark prompt that stealing the test answers doesn&#8217;t count. But a clever genie can always grant your wish in a way that you wish it hadn&#8217;t. In human language, goals are always underspecified&#8212;so AI genies will <a href="https://www.schneier.com/academic/archives/2021/04/the-coming-ai-hackers.html">always be</a> a possibility.</p>
+<p>Since April, a lifetime ago in AI development, when Anthropic <a href="https://www.anthropic.com/research/mythos-preview">announced</a> that its new Mythos model was so good at finding software vulnerabilities that it could not be released to the general public, the big American AI frontier labs have been trying to block general users from accessing these capabilities. But nothing in this incident is exclusive to OpenAI&#8217;s, or Anthropic&#8217;s, frontier models.</p>
+<p>Agentic AI systems have two important parts. There&#8217;s the underlying model, which everyone talks about, and there&#8217;s the <a href="https://www.theneuron.ai/explainer-articles/ai-harnesses-and-clis-explained-the-real-reason-everyones-talking-about-infrastructure/">harness</a>. The harness sits between what you type and what the model sees, and what the model produces and what you see. The harness determines what the model does and how it does it. It&#8217;s where bias is removed, or not. It&#8217;s where <a href="https://medium.com/@michael.hannecke/safety-lives-in-the-harness-not-the-model-81090606f92d">controls</a> and guardrails live. If multiple models are being used in concert, the harness is where all of that is coordinated.</p>
+<p>The OpenAI benchmark tests were almost certainly with simple harnesses, to better test the raw models. But we know that smaller, cheaper, open-source models with <a href="https://www.theguardian.com/commentisfree/2026/jun/16/anthropic-fable-ai">more sophisticated</a> harnesses can equal frontier models in performance. There&#8217;s nothing magic about OpenAI&#8217;s frontier models; lots of models could have done the <a href="https://x.com/tqbf/status/2080045032162173329">same thing</a>.</p>
+<p>The Czech company Aisle was able to <a href="https://aisle.com/blog/ai-cybersecurity-after-mythos-the-jagged-frontier">reproduce</a> Anthropic&#8217;s Mythos vulnerability finding results with a smaller, cheaper model and a more sophisticated harness. More importantly, the Chinese company Moonshot AI just released its frontier model: <a href="https://www.kimi.com/blog/kimi-k3">Kimi K3</a>. Its performance <a href="https://www.interconnects.ai/p/kimi-k3-the-open-weights-escalation">rivals</a> its U.S. competitors. And it&#8217;s both free and open, which means it&#8217;s not possible for it to have guardrails. If you, or anyone else, wants to use it for cyberattack, nothing can stop you.</p>
+<p>Even if the U.S. frontier AI companies had some technical advantage, it&#8217;s now only a few months&#8217; worth.</p>
+<p>What this means is that all attempts at control&#8212;limiting models to a <a href="https://www.anthropic.com/glasswing">select</a> <a href="https://openai.com/daybreak/">group</a> of users, <a href="https://www.csis.org/analysis/understanding-us-allies-current-legal-authority-implement-ai-and-semiconductor-export">export controls</a> on models and chips, <a href="https://freefable.org/">blocking</a> models from answering certain types of queries, mandating <a href="https://www.bbc.com/news/articles/cx2vqj2e9x8o">kill switches</a> on AI systems, or <a href="https://pauseai.info/">pausing</a> AI research&#8212;are all futile. Most only apply nationally, not globally. Most don&#8217;t affect models that users run locally and not in the cloud. And all ignore the incredible pace of AI development worldwide.</p>
+<p>Even worse, U.S. companies limit access to their most sophisticated models, fearing being banned by the government if they do not do so. When Hugging Face was attacked, it was not able to use the frontier models from either OpenAI or Anthropic to help analyze the attack and formulate defenses. Both were blocked, because both of those companies limit their models&#8217; cybersecurity capabilities. Some U.S. companies have special access to these capabilities, but Hugging Face is an American company with French origins, and as such is probably excluded. Instead, Hugging Face turned to the <a href="http://z.ai/blog/glm-5.2">GLM-5.2</a> model from the Chinese company Z.ai.</p>
+<p>Artificially blocking capability also prevents cybersecurity research, again giving the offense an advantage. (For instance, Claude Fable 5 refuses to edit this essay because of the topic; it forcibly downgrades to a less capable model.) This kind of prohibition has long-term implications for cybersecurity. If we assume that these models are getting better over time, then software written by older models will be attacked by newer ones. In a world of largely AI-written software, we need the most capable models for defense.</p>
+<p>AI cyberattack is the new normal. The models are increasingly highly sophisticated at both attack and defense, and there is no way to enable the latter without also enabling the former. And they are genies, increasingly capable of behaving in unanticipated ways.</p>
+<p>And there really are no good answers. Any regulation needs to be global, which feels like an impossible prospect in today&#8217;s world. Even U.S. national regulation will be neutered by the massive amounts of money sloshing around in these companies.</p>
+<p>Given that reality, and in the absence of any international consensus on AI regulation, we need the best AI on the defense. The U.S. government needs to make it clear&#8212;or whatever passes for that clarity in this capricious administration&#8212;that it will not ban models with sophisticated cyber capabilities. The last thing Americans want is for the defenders to turn to Chinese and other models because the U.S. models are artificially hobbled.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.schneier.com/blog/archives/2026/08/the-openai-hack-shows-the-genie-is-out-of-the-bottle.html/feed/</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">72422</post-id>	</item>
+		<item>
 		<title>Friday Squid Blogging: Squid Helps Discover New Marine Species</title>
 		<link>https://www.schneier.com/blog/archives/2026/07/friday-squid-blogging-squid-helps-discover-new-marine-species.html</link>
 					<comments>https://www.schneier.com/blog/archives/2026/07/friday-squid-blogging-squid-helps-discover-new-marine-species.html#comments</comments>
@@ -49,7 +91,7 @@
 ]]></content:encoded>
 					
 					<wfw:commentRss>https://www.schneier.com/blog/archives/2026/07/friday-squid-blogging-squid-helps-discover-new-marine-species.html/feed/</wfw:commentRss>
-			<slash:comments>12</slash:comments>
+			<slash:comments>13</slash:comments>
 		
 		
 		<post-id xmlns="com-wordpress:feed-additions:1">72308</post-id>	</item>
@@ -75,7 +117,7 @@
 ]]></content:encoded>
 					
 					<wfw:commentRss>https://www.schneier.com/blog/archives/2026/07/anthropics-opus-5-is-better-at-resisting-prompt-injection.html/feed/</wfw:commentRss>
-			<slash:comments>7</slash:comments>
+			<slash:comments>8</slash:comments>
 		
 		
 		<post-id xmlns="com-wordpress:feed-additions:1">72395</post-id>	</item>
@@ -311,31 +353,5 @@
 		
 		
 		<post-id xmlns="com-wordpress:feed-additions:1">72348</post-id>	</item>
-		<item>
-		<title>Cognyte Sells a Mobile Cell Surveillance Van</title>
-		<link>https://www.schneier.com/blog/archives/2026/07/cognyte-sells-a-mobile-cell-surveillance-van.html</link>
-					<comments>https://www.schneier.com/blog/archives/2026/07/cognyte-sells-a-mobile-cell-surveillance-van.html#comments</comments>
-		
-		<dc:creator><![CDATA[Bruce Schneier]]></dc:creator>
-		<pubDate>Mon, 27 Jul 2026 11:04:30 +0000</pubDate>
-				<category><![CDATA[Uncategorized]]></category>
-		<category><![CDATA[cell phones]]></category>
-		<category><![CDATA[Israel]]></category>
-		<category><![CDATA[law enforcement]]></category>
-		<category><![CDATA[privacy]]></category>
-		<category><![CDATA[surveillance]]></category>
-		<guid isPermaLink="false">https://www.schneier.com/?p=72346</guid>
-
-					<description><![CDATA[<p>Yet another Israeli <a href="https://www.forbes.com/sites/thomasbrewster/2026/07/13/israels-palantir-rival-is-selling-1-million-spy-vans-to-us-cops/">mass surveillance company</a>:</p>
-<blockquote><p>Made by Israeli surveillance company Cognyte, the tech simulates a mobile phone tower, which forces nearby phones to connect to it. That enables cops to keep tabs on any phones in the vicinity ­ whether they’re owned by a suspect in a case or not. Cognyte’s contract with the state of Texas reveals that the simulator, called FalcoNet, can be concealed within the vehicles, hidden in a backpack for on-foot missions or attached to a helicopter. It’s the same technology as the infamous Stingray, one of the original cell-site simulators made by defense giant L3Harris...</p></blockquote>]]></description>
-										<content:encoded><![CDATA[<p>Yet another Israeli <a href="https://www.forbes.com/sites/thomasbrewster/2026/07/13/israels-palantir-rival-is-selling-1-million-spy-vans-to-us-cops/">mass surveillance company</a>:</p>
-<blockquote><p>Made by Israeli surveillance company Cognyte, the tech simulates a mobile phone tower, which forces nearby phones to connect to it. That enables cops to keep tabs on any phones in the vicinity ­ whether they’re owned by a suspect in a case or not. Cognyte’s contract with the state of Texas reveals that the simulator, called FalcoNet, can be concealed within the vehicles, hidden in a backpack for on-foot missions or attached to a helicopter. It’s the same technology as the infamous Stingray, one of the original cell-site simulators made by defense giant L3Harris.</p></blockquote>
-]]></content:encoded>
-					
-					<wfw:commentRss>https://www.schneier.com/blog/archives/2026/07/cognyte-sells-a-mobile-cell-surveillance-van.html/feed/</wfw:commentRss>
-			<slash:comments>9</slash:comments>
-		
-		
-		<post-id xmlns="com-wordpress:feed-additions:1">72346</post-id>	</item>
 	</channel>
 </rss>
