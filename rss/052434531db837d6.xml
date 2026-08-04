@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-08-03T16:15:27+00:00</updated><author><name>Simon Willison</name></author><entry><title>Quoting David Crawshaw's prompt</title><link href="https://simonwillison.net/2026/Aug/3/david-crawshaw/#atom-everything" rel="alternate"/><published>2026-08-03T16:15:27+00:00</published><updated>2026-08-03T16:15:27+00:00</updated><id>https://simonwillison.net/2026/Aug/3/david-crawshaw/#atom-everything</id><summary type="html">
+<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-08-03T23:45:04+00:00</updated><author><name>Simon Willison</name></author><entry><title>Don't be a meat proxy</title><link href="https://simonwillison.net/2026/Aug/3/dont-be-a-meat-proxy/#atom-everything" rel="alternate"/><published>2026-08-03T23:45:04+00:00</published><updated>2026-08-03T23:45:04+00:00</updated><id>https://simonwillison.net/2026/Aug/3/dont-be-a-meat-proxy/#atom-everything</id><summary type="html">
+    
+&lt;p&gt;&lt;strong&gt;&lt;a href="https://gruhn.me/blog/2026-08-03/"&gt;Don&amp;#x27;t be a meat proxy&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+Niklas Gruhn coins an excellent new term - &lt;strong&gt;meat proxy&lt;/strong&gt; - for people who blindly copy and paste the output of AI systems to their peers.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;By all means, prompt AI. But don't just relay the output. Read it, understand it, validate it, and then write a response in your own words (a decent certificate that you've done the prior steps). Making that effort is value you can add.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+    &lt;p&gt;&lt;small&gt;&lt;/small&gt;Via &lt;a href="https://lobste.rs/s/hfbqr3/don_t_be_meat_proxy#c_svolls"&gt;Lobste.rs&lt;/a&gt;&lt;/small&gt;&lt;/p&gt;
+
+
+    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/definitions"&gt;definitions&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai-misuse"&gt;ai-misuse&lt;/a&gt;&lt;/p&gt;
+
+
+
+</summary><category term="definitions"/><category term="ai"/><category term="generative-ai"/><category term="llms"/><category term="ai-misuse"/></entry><entry><title>Quoting David Crawshaw's prompt</title><link href="https://simonwillison.net/2026/Aug/3/david-crawshaw/#atom-everything" rel="alternate"/><published>2026-08-03T16:15:27+00:00</published><updated>2026-08-03T16:15:27+00:00</updated><id>https://simonwillison.net/2026/Aug/3/david-crawshaw/#atom-everything</id><summary type="html">
     &lt;blockquote cite="https://blog.exe.dev/devtools-must-be-open-source"&gt;&lt;p&gt;&lt;code&gt;Set up a nightly cron job that executes the prompt: fetch upstream changes to the &amp;lt;software&amp;gt; and rebase all local changes on top of upstream. Check that the software works as intended and replace the current version.&lt;/code&gt;&lt;/p&gt;&lt;/blockquote&gt;
 &lt;p class="cite"&gt;&amp;mdash; &lt;a href="https://blog.exe.dev/devtools-must-be-open-source"&gt;David Crawshaw&amp;#x27;s prompt&lt;/a&gt;, Devtools must be open source&lt;/p&gt;
 
@@ -10,11 +25,11 @@
 </summary><category term="prompt-engineering"/><category term="coding-agents"/><category term="generative-ai"/><category term="ai"/><category term="llms"/><category term="open-source"/></entry><entry><title>Devtools must be open source (exe.dev)</title><link href="https://simonwillison.net/2026/Aug/3/devtools-must-be-open-source-exedev/#atom-everything" rel="alternate"/><published>2026-08-03T15:30:38+00:00</published><updated>2026-08-03T15:30:38+00:00</updated><id>https://simonwillison.net/2026/Aug/3/devtools-must-be-open-source-exedev/#atom-everything</id><summary type="html">
     
         &lt;p&gt;&lt;a href="https://news.ycombinator.com/item?id=49156111#49156719"&gt;My comment&lt;/a&gt; on &lt;a href="https://news.ycombinator.com/item?id=49156111"&gt;Devtools must be open source (exe.dev)&lt;/a&gt; &amp;mdash; Hacker News.&lt;/p&gt;&lt;p&gt;One of the arguments for open source software for end-users has always been the freedom to examine and modify how that software works.&lt;/p&gt;
-&lt;p&gt;The reality for most people - even expert programmers - has been that the freedom is more about being able to lean on other people to do that. Most people can't justify the time commitment needed to read and then modify the code for tools they use very often.&lt;/p&gt;
-&lt;p&gt;I think LLMs have changed that equation in a way that makes the original dream much more feasible.
-Several times a day I'll prompt regular Claude chat to "Clone x/y from GitHub and tell me how Z works".&lt;/p&gt;
+&lt;p&gt;The reality for most people - even expert programmers - has been that the freedom is more about being able to lean on &lt;em&gt;other people&lt;/em&gt; to do that. Most people can't justify the time commitment needed to read and then modify the code for tools they use very often.&lt;/p&gt;
+&lt;p&gt;I think LLMs have changed that equation in a way that makes the original dream much more feasible.&lt;/p&gt;
+&lt;p&gt;Several times a day I'll prompt regular Claude chat to "Clone x/y from GitHub and tell me how Z works".&lt;/p&gt;
 &lt;p&gt;Getting software to compile in order to start hacking on it used to be enough friction that I often wouldn't bother. Now I treat that as a zero time investment challenge: tell Codex or Claude Code to checkout and build X and then come back ten minutes later and see how it got on.&lt;/p&gt;
-&lt;p&gt;I'm not habitually modifying the software I use yet, but I can see a path to that which didn't exist a year or so ago.&lt;/p&gt;
+&lt;p&gt;I'm not habitually &lt;em&gt;modifying&lt;/em&gt; the software I use yet, but I can see a path to that which didn't exist a year or so ago.&lt;/p&gt;
     
     
         &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/hacker-news"&gt;hacker-news&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/open-source"&gt;open-source&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai-assisted-programming"&gt;ai-assisted-programming&lt;/a&gt;&lt;/p&gt;
@@ -642,24 +657,4 @@ Hugging Face just released this extremely detailed technical description of &lt;
 
 
 
-</summary><category term="jinja"/><category term="python"/><category term="security"/><category term="ai"/><category term="openai"/><category term="generative-ai"/><category term="llms"/><category term="hugging-face"/><category term="coding-agents"/><category term="ai-security-research"/><category term="openai-hugging-face-incident"/></entry><entry><title>moonshotai/Kimi-K3</title><link href="https://simonwillison.net/2026/Jul/27/kimi-k3/#atom-everything" rel="alternate"/><published>2026-07-27T23:39:04+00:00</published><updated>2026-07-27T23:39:04+00:00</updated><id>https://simonwillison.net/2026/Jul/27/kimi-k3/#atom-everything</id><summary type="html">
-    
-&lt;p&gt;&lt;strong&gt;&lt;a href="https://huggingface.co/moonshotai/Kimi-K3"&gt;moonshotai/Kimi-K3&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
-As promised &lt;a href="https://simonwillison.net/2026/Jul/16/kimi-k3/"&gt;earlier this month&lt;/a&gt;, Moonshot have released the weights for their excellent 2.8 trillion parameter Kimi K3. They're a hefty 1.56TB on Hugging Face.&lt;/p&gt;
-&lt;p&gt;Kimi introduced their own janky &lt;a href="https://huggingface.co/moonshotai/Kimi-K2-Instruct/blob/main/LICENSE"&gt;modified version of the MIT license&lt;/a&gt; with K2 back in July 2025. That license just added this paragraph requiring attribution beyond a certain size of commercial entity:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Our only modification part is that, if the Software (or any derivative works thereof) is used for any of your commercial products or services that have more than 100 million monthly active users, or more than 20 million US dollars (or equivalent in other currencies) in monthly revenue, you shall prominently display "Kimi K2" on the user interface of such product or service.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;The &lt;a href="https://huggingface.co/moonshotai/Kimi-K3/blob/main/LICENSE"&gt;K3 license&lt;/a&gt; no longer calls itself "modified MIT" and goes further, requiring a separate agreement with Moonshot for large "Model as a Service" businesses:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;If the Licensee or any of its affiliates operates a Model as a Service business, and the aggregate revenue of the Licensee and its affiliates exceeds 20 million US dollars (or the equivalent in other currencies) in total over any consecutive 12 months, the Licensee must enter into a separate agreement with Moonshot AI before using the Software or its derivative works for any commercial purpose.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;To Kimi's credit, they make no attempt to describe this as an "open source" license in their own materials, consistently using the term "open weight" in its place.&lt;/p&gt;
-&lt;p&gt;OpenRouter is already offering K3 &lt;a href="https://openrouter.ai/moonshotai/kimi-k3"&gt;from 7 providers&lt;/a&gt;, most of which are at the same $3/million input and $15/million output as Moonshot AI themselves.
-
-
-    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llm-pricing"&gt;llm-pricing&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llm-release"&gt;llm-release&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai-in-china"&gt;ai-in-china&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/moonshot"&gt;moonshot&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/kimi"&gt;kimi&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/janky-licenses"&gt;janky-licenses&lt;/a&gt;&lt;/p&gt;
-
-
-
-</summary><category term="ai"/><category term="generative-ai"/><category term="llms"/><category term="llm-pricing"/><category term="llm-release"/><category term="ai-in-china"/><category term="moonshot"/><category term="kimi"/><category term="janky-licenses"/></entry></feed>
+</summary><category term="jinja"/><category term="python"/><category term="security"/><category term="ai"/><category term="openai"/><category term="generative-ai"/><category term="llms"/><category term="hugging-face"/><category term="coding-agents"/><category term="ai-security-research"/><category term="openai-hugging-face-incident"/></entry></feed>
