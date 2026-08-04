@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "e1fa5f508d5d0bed50dfb598",
+      "title": "为nginx提供GeoIP2支持",
+      "summary": "最近在处理站点的连接优化问题，需要通过检测访问者的 IP ，来选择是否经由 CloudFlare 代理，还是通过一个优化的直连地址进行体验优化。经过一些资料的比对，最终决定使用 GeoIP2 分辨来访者 IP 归属地，并通过 nginx 设置对应的规则来跳转访问。",
+      "image": null,
+      "publishedAt": "2021-02-20T03:44:55Z",
+      "sourceId": "06aa2ffd92b9d263",
+      "sourceTitle": "糖菓·部落",
+      "link": "https://candinya.com/posts/add-geoip2-support-for-nginx/",
+      "detailPath": "articles/e1fa5f508d5d0bed50dfb598.json"
+    },
+    {
       "id": "a7f1552a854cf0ab645ad069",
       "title": "用Nginx反代实现docker安装WordPress与其他服务并存",
       "summary": "目标：一台服务器，一个IP，使用docker安装多个服务（包括WordPress）共存，使用不同的域名或子域名。多服务共存本身不是难点，障碍是WordPress，即如何让WordPress不占用80（和443）端口。 面向对象要求：懂Unix基础命令，已经购买域名。请确保你的域名DNS设置里，已经将域名指向这台服务器的IP。 我会把我参考的教程列一下，方便不需要这么折腾的人直接用简单的方法装。",
@@ -648,17 +659,6 @@
       "sourceTitle": "DrPika's Blog",
       "link": "https://blog.drpika.com/posts/2020-10-20",
       "detailPath": "articles/e199ae7cd65c451460bb698c.json"
-    },
-    {
-      "id": "05a7c637e6f6d1c0b4b6889b",
-      "title": "零基础使用新版Coding搭建自动化部署的极速访问静态博客",
-      "summary": "Serverless 概念初探，腾云扣钉的差异化转型之路",
-      "image": null,
-      "publishedAt": "2020-10-20T00:00:00Z",
-      "sourceId": "3e335517f4e1112a",
-      "sourceTitle": "Dr.Pika's Blog",
-      "link": "https://blog.drpika.com/posts/2020-10-20",
-      "detailPath": "articles/05a7c637e6f6d1c0b4b6889b.json"
     }
   ]
 }
