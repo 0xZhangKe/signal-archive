@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Koimsurai 手記</title>
+    <link>https://koimsurai.com/blog</link>
+    <description>Koimsurai 的個人部落格 — 技術筆記、生活隨筆、影集心得</description>
+    <language>zh-TW</language>
+    <lastBuildDate>Tue, 04 Aug 2026 15:12:39 GMT</lastBuildDate>
+    <atom:link href="https://koimsurai.com/rss" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>為什麼我開始使用 Zed 編輯器：從 VS Code 搬家,23 個擴充最後剩 8 個</title>
+      <link>https://koimsurai.com/blog/why-i-switched-to-zed</link>
+      <guid isPermaLink="true">https://koimsurai.com/blog/why-i-switched-to-zed</guid>
+      <description>Zed 團隊的上一個作品是 Atom,而 Atom 催生的 Electron 後來成了 VS Code 的地基。這篇記錄作者從 VS Code Remote-SSH 搬到 Zed 的完整過程:本機端 4,067 MB 對 204 MB、伺服器端 7.9 GB 對 107 MB,23 個擴充搬完只剩 8 個。內容涵蓋官方的設定匯入路徑與鍵位差異、有 GUI 的設定視窗與專案層級設定的限制、遠端開發的實測,以及 ACP 怎麼把 AI agent 從編輯器裡拆出來。文末誠實列出 Zed 目前還缺的功能,以及為什麼作者認為那份清單的保鮮期很短。</description>
+      <author>Koimsurai</author>
+      <pubDate>Tue, 04 Aug 2026 09:37:31 GMT</pubDate>
+      <category>位元築夢</category>
+      <category>VS Code</category><category>Zed</category><category>開發環境</category><category>遠端開發</category><category>ACP</category>
+    </item>
+    <item>
+      <title>VS Code Remote-SSH 把我的伺服器燒到 96°C：rust-analyzer 無限重跑 cargo check</title>
+      <link>https://koimsurai.com/blog/vscode-remote-ssh-burned-my-server</link>
+      <guid isPermaLink="true">https://koimsurai.com/blog/vscode-remote-ssh-burned-my-server</guid>
+      <description>一台跑著三十幾個容器、同時被 VS Code Remote-SSH 連進去開發的家用伺服器,溫度釘在 90°C 撐了四十分鐘、load 從 8 衝到 196,最後失去回應。而把它燒掉的不是那些服務,是編輯器。這篇記錄整個追查過程:三條看起來很有說服力但都是錯的線索(SMU 當掉後感測器說謊、重開機就好、CPU 只有 30 到 50%),怎麼用 sysstat 的 sar 和 netdata 的 apps.plugin 回溯一個已經結束的事件,以及最後抓到的三個兇手——rust-analyzer 對一個 GTK 依賴全缺、永遠編不過的 Tauri 專案無限重跑 cargo check、Foam 擴充讓 ripgrep 開出兩百多個行程、還有只是雜訊的 RustDesk 輪詢。文末附上防線設定與事後補的兩道保險。</description>
+      <author>Koimsurai</author>
+      <pubDate>Tue, 04 Aug 2026 07:16:25 GMT</pubDate>
+      <category>位元築夢</category>
+      <category>自架伺服器</category><category>故障排除</category><category>VS Code</category><category>rust-analyzer</category><category>Cargo</category><category>netdata</category>
+    </item>
+    <item>
+      <title>UPS 加 NUT 讓伺服器斷電自動關機：設定全紀錄,和一條被貓咬過的電源線</title>
+      <link>https://koimsurai.com/blog/ups-nut-and-the-cable-the-cat-chewed</link>
+      <guid isPermaLink="true">https://koimsurai.com/blog/ups-nut-and-the-cable-the-cat-chewed</guid>
+      <description>這篇把 UPS 加 NUT 的完整設定寫成一份可照做的教學:UPS 選型的三個條件(PFC 純正弦波、AVR、NUT 支援)、NUT 的 driver / upsd / upsmon 三層架構與五個設定檔各管什麼、upsmon.conf 逐行說明、POWERDOWNFLAG 為什麼不能漏,以及 BIOS 那個選錯就前功盡棄的選項——Restore after AC Power Loss 必須是 On 而不是 Last State,因為 NUT 乾淨關機後機器的狀態就是關機。另外收錄把 UPS 狀態接到 cron log、Discord 通知與自架面板的做法。而這一切的起點是搬家後伺服器每天半夜硬斷電:線鬆、共用迴路、過熱、PSU 全試過,但那些都只是猜測。作者買 UPS 一半是為了保護、一半是把它當量測儀器用,最後靠它的 log 證明問題在 UPS 下游,兇手是一條被貓咬過的電源線。</description>
+      <author>Koimsurai</author>
+      <pubDate>Tue, 04 Aug 2026 06:03:43 GMT</pubDate>
+      <category>位元築夢</category>
+      <category>Linux</category><category>自架伺服器</category><category>NUT</category><category>UPS</category><category>故障排除</category>
+    </item>
+    <item>
+      <title>CrowdSec 取代 fail2ban：六天擋下 1619 次掃描,和我把自己封鎖的三次</title>
+      <link>https://koimsurai.com/blog/crowdsec-replacing-fail2ban</link>
+      <guid isPermaLink="true">https://koimsurai.com/blog/crowdsec-replacing-fail2ban</guid>
+      <description>這篇記錄了作者把伺服器防護從 fail2ban 換成 CrowdSec 的完整過程,並整理成一份可照做的教學。起因不是被入侵而是被吵:掃描器整天敲 /wp-login.php、/.env,把監控通知洗版。當時 fail2ban 已封過 614 個 IP,但作者發現對手一直在換 IP,封 IP 這條路贏不了——後來的數據也證實了這點,攻擊來源前七名幾乎全是 Azure、DigitalOcean、阿里雲這類雲端機房,開一台新 VM 比封一個 IP 便宜得多。文中給出這台機器六天內的真實數字:1619 次攻擊偵測、防火牆同時擋著 25.22k 個 IP,其中社群黑名單提供的數量是自己抓到的三千倍。架設踩到的三個坑是同一條因果鏈(apt 從 ESM 拿到上古版本 → 跨版本升級把 hub 搬家 → symlink 全斷導致解析率只剩 9%),並附上診斷用的 cscli explain 與「metrics 是累計值」這類容易誤判的細節。後半是最 relatable 的部分:作者三次把自己封在門外,其中最精彩的一次是自己設的 nginx 限流回了 429,而 CrowdSec 看到 429 就把他封了,兩個防護措施串起來咬了自己一口。最後是用 Discord bot 解封的架構——容器只能丟請求檔、主機 root watcher 才執行 cscli,而它之所以有用,是因為 bot 是主動連出去的,你的 IP 被擋不影響它收指令。</description>
+      <author>Koimsurai</author>
+      <pubDate>Mon, 03 Aug 2026 01:47:12 GMT</pubDate>
+      <category>位元築夢</category>
+      <category>資安</category><category>nginx</category><category>CrowdSec</category><category>fail2ban</category><category>Discord Bot</category><category>自架伺服器</category>
+    </item>
+    <item>
+      <title>跟另一個站長互相監控：Uptime Kuma 交叉託管,和 Trust Proxy 開了反而更危險</title>
+      <link>https://koimsurai.com/blog/uptime-kuma-cross-monitoring</link>
+      <guid isPermaLink="true">https://koimsurai.com/blog/uptime-kuma-cross-monitoring</guid>
+      <description>這篇記錄了作者跟另一位自架站長交叉監控的完整過程,並整理成一份可照做的教學。起點是自架服務的一個尷尬處境:監控自己的那台機器,自己掛了就沒人通知得了。解法是互相盯,但一開始兩人都卡在同一個錯誤前提上——以為要走 HTTPS 就得交換憑證。真正的答案是不用交換:對方把子網域 A 紀錄指向你的 IP,TLS 就在你這裡終結,Let's Encrypt 的 HTTP-01 驗證會直接打到你的 nginx,所以你自己就能簽那張憑證、還自動續簽;共享 wildcard 反而踩中私鑰暴露與手動續簽兩個雷。文中也整理了反代 Kuma 必備的 WebSocket 設定(少了 Upgrade 標頭,即時圖表會完全不動)、給後端加公開 /health 而非用 401 取巧、用 push 型監控盯 cron 腳本這種沉默故障,以及 v1 升 v2 的資料庫遷移該當作不可逆來處理。最後是全篇最值得記的一個坑:Trust Proxy 這個看起來明顯該開的選項,在 nginx 用 $proxy_add_x_forwarded_for「附加」而非「覆寫」的架構下,開了之後任何人都能偽造 IP(作者實測偽造成功),而真正的風險不是登入爆破(2FA 已擋),是 CrowdSec 會因此去封 Cloudflare 的整段網段。</description>
+      <author>Koimsurai</author>
+      <pubDate>Fri, 31 Jul 2026 06:00:43 GMT</pubDate>
+      <category>位元築夢</category>
+      <category>資安</category><category>Let's Encrypt</category><category>自架</category><category>Uptime Kuma</category><category>監控</category><category>nginx</category>
+    </item>
+    <item>
+      <title>幫朋友架一台幻獸帕魯專用伺服器：Docker 自架,和最容易卡關的 UDP 連線</title>
+      <link>https://koimsurai.com/blog/palworld-dedicated-server-docker</link>
+      <guid isPermaLink="true">https://koimsurai.com/blog/palworld-dedicated-server-docker</guid>
+      <description>這篇記錄了作者幫朋友用 Docker 在自己 24/7 的家用機上架設幻獸帕魯(Palworld)專用伺服器的完整過程,整理成一份能照做的教學。緣起是朋友原本用 Radmin VPN 連線,但那類 P2P 服務穿不過 NAT 就會退回中繼、流量繞經第三方,作者索性用自己的常開主機自架。文章先破除一個迷思:主機商規格頁清一色寫「16GB 起」,但小團隊日常很省,作者實測 3~5 人約 1.2GB;真正要防的是 Palworld 知名的記憶體洩漏,靠容器 mem_limit + 每日重啟壓住即可。接著給出一份去蕪存菁的 docker-compose(port 記得加 /udp、RCON 綁 127.0.0.1),把架好之後最卡人的 UDP 連線三關逐一走通:ufw 放行 udp、路由器 port forwarding(必須 UDP)、DDNS,並拆穿兩個高頻誤區——Cloudflare 一定要用灰雲(橘雲代理不轉 UDP,開了必連不上)、UDP 遊戲封包根本不經過 nginx。後半談世界設定的坑(改 ini 會被環境變數重新生成蓋掉)、朋友「版本不符」進不去怎麼修(比對 buildid、重啟觸發 SteamCMD 更新、更新前先 RCON 廣播存檔),以及別讓 18GB 遊戲本體天天進備份碟。結尾附一份自架檢查清單。</description>
+      <author>Koimsurai</author>
+      <pubDate>Wed, 29 Jul 2026 04:19:24 GMT</pubDate>
+      <category>位元築夢</category>
+      <category>Docker</category><category>伺服器</category><category>Palworld</category><category>自架</category><category>網路</category>
+    </item>
+    <item>
+      <title>Linux 伺服器被植入挖礦程式：從 load average 10.65 揪出整條攻擊鏈</title>
+      <link>https://koimsurai.com/blog/catching-a-cryptominer</link>
+      <guid isPermaLink="true">https://koimsurai.com/blog/catching-a-cryptominer</guid>
+      <description>這篇記錄了作者在一次例行效能健檢中,意外撞見自己家用伺服器被植入挖礦程式的完整抓賊過程,並整理成一份人人可照做的可疑進程自檢清單。起點是一個不該出現的數字:一台 16 執行緒的機器 load average 卻卡在 10.65。作者用 top 與 docker stats 揪出一個吃滿 10 核、隨機大小寫檔名的可疑程序,再靠 Linux 的 /proc 三件套(exe 指向已刪除的 /tmp 檔、cmdline、environ 溯源到某個 Docker 容器)確認它是挖礦程式,並把攻擊鏈拉出來:一個 port 直接綁在 0.0.0.0、繞過 nginx 對外裸露的 Next.js 容器,被 CVE-2025-66478(Next.js 16.0.6 的滿分 RCE、綽號 React2Shell)打穿。文中含清除(kill 不需 sudo、殺父程序回收 zombie)、查持久化(cron/bashrc/tmp)、堵根因(收回 127.0.0.1、升級框架、容器資源上限)的每一步命令,附一份六條的自檢清單。作者的體悟是:被入侵最可怕的不是被吃 CPU,是你根本不知道自己被入侵了。</description>
+      <author>Koimsurai</author>
+      <pubDate>Tue, 28 Jul 2026 16:55:03 GMT</pubDate>
+      <category>位元築夢</category>
+      <category>Docker</category><category>資安</category><category>Linux</category><category>伺服器</category><category>事件響應</category>
+    </item>
+    <item>
+      <title>暫借半年的呼嚕聲: 一隻不屬於我的貓,和牠留在被窩裡的味道</title>
+      <link>https://koimsurai.com/blog/milk-the-cat</link>
+      <guid isPermaLink="true">https://koimsurai.com/blog/milk-the-cat</guid>
+      <description>這篇記錄了作者高三那年與一隻名叫牛奶的賓士貓相處的半年。牠是同學在大雨的夜裡從路邊撿到的,家裡不允許收留,於是託給了從小就想養貓的作者,說好三個月,最後住了半年。文章從家裡的態度寫起:媽媽也愛貓卻始終不養,外婆則說自己討厭貓、理由多得可疑——但作者後來才拼湊出,外婆討厭的其實不是貓,而是「經歷離開」這件事,二十年前那隻叫小黃的家犬是車禍走的。那半年正好是作者最不安的時期:身體不好、對人際敏感、對未來迷茫,又碰上 COVID 把所有人關在家裡。而牛奶第一天就把那裡當自己家,一叫名字就會出現,身上帶著貓草的香味;某個下午作者被另一位同學的電話罵到哭,牠走過來舔了兩下手,就在旁邊靜靜待了半個小時。半年後貓被裝進當初帶牠來的那個小包包接走,門關上的瞬間四周安靜下來,作者沒有哭也沒有笑,只有感慨——因為打從第一天他就知道牠會離開,所以並不覺得失去。全文收在一個翻轉的視角:表面上是他們幫了那隻貓,但作者認為是那隻貓救贖了他們。文末附上牠離開前最後一天在窗台曬太陽的影片。本文參加 ikuka 主持的第 8 期「一期一會」部落格串聯活動。</description>
+      <author>Koimsurai</author>
+      <pubDate>Sun, 26 Jul 2026 16:53:04 GMT</pubDate>
+      <category>歲月留痕</category>
+      <category>一期一會</category><category>貓</category><category>回憶</category><category>部落格串聯</category>
+    </item>
+    <item>
+      <title>部落格文章渲染策略: 從 CSR 空殼、SSG／ISR,到會 eval 的 MDX 與首幀不再閃</title>
+      <link>https://koimsurai.com/blog/blog-post-rendering-strategy</link>
+      <guid isPermaLink="true">https://koimsurai.com/blog/blog-post-rendering-strategy</guid>
+      <description>這篇記錄了作者把 koimsurai.com 的部落格,從一個 100% CSR 的 React SPA(真人只拿到空殼、爬蟲靠 user-agent 硬塞 meta)一路改造成 SSG／ISR 的完整渲染策略與踩坑。從選型談起——為什麼是 SSG hybrid、為什麼評估過 Next 卻選了 TanStack Start(RR7 差點雀屏中選,被一句「我想要 ISR」翻盤);接著是實作:內文烤進 HTML、重互動留 client、MDX 走 server 編譯加 client eval(一條之後想改成 dynamic-import ESM 來拿掉的路);再到 prerender 生了 111 個檔卻一個都沒被送出、於是改走純 ISR,用 Rust middleware 做發文即刷新(還差點被瀏覽計數端點清光全站快取);最後是進場體驗的除錯長征:無樣式閃爍、雙渲染、被捲動平滑握住的捲動,以及一個被自己按住重想才翻出的錯誤診斷。全篇也一併科普了 SSR、SSG、CSR、ISR、hydration 各是什麼。</description>
+      <author>Koimsurai</author>
+      <pubDate>Fri, 24 Jul 2026 19:25:16 GMT</pubDate>
+      <category>位元築夢</category>
+      <category>TanStack Start</category><category>SSG</category><category>ISR</category><category>MDX</category><category>hydration</category>
+    </item>
+    <item>
+      <title>3D 星空背景效能長征：OffscreenCanvas Worker → WebGPU/TSL 重寫</title>
+      <link>https://koimsurai.com/blog/the-3d-starfield-performance-march</link>
+      <guid isPermaLink="true">https://koimsurai.com/blog/the-3d-starfield-performance-march</guid>
+      <description>這篇記錄了作者為個人網站 koimsurai.com 那片 3D 星空背景走過的三階段效能長征。背景最初只是一堆各自為政的 three.js 裝飾特效——黑洞、粒子、星空、土星——東西還少時並不重,是愈疊愈多、真正拿去量之後才逐步走上優化:先把星空搬進 OffscreenCanvas Worker 讓渲染離開主執行緒(桌面 TBT 從 17 秒壓到 30 毫秒),再被朋友一台會白屏的機器逼著補上背景的穩健性,最後用瀏覽器最新的 WebGPU/TSL 把整套從頭重寫成單一 canvas——GPU 從 85–90% 砍到 25%、星星翻到 26,000 顆全在 shader 裡呼吸。文中一併科普 WebGPU 到底是什麼,並記下一個反覆翻案的判斷:「效能優化」和「品質升級」是兩本不同的帳,換掉目標函數,結論就翻。</description>
+      <author>Koimsurai</author>
+      <pubDate>Fri, 24 Jul 2026 02:49:17 GMT</pubDate>
+      <category>位元築夢</category>
+      <category>WebGPU</category><category>Three.js</category><category>TSL</category><category>效能優化</category><category>OffscreenCanvas</category>
+    </item>
+    <item>
+      <title>幫巴哈動畫瘋寫一個沒人寫過的 SDK: 逆向 API、自我掏空的 cookie,與讀不到的 HttpOnly</title>
+      <link>https://koimsurai.com/blog/writing-the-anigamer-sdk-nobody-made</link>
+      <guid isPermaLink="true">https://koimsurai.com/blog/writing-the-anigamer-sdk-nobody-made</guid>
+      <description>為了讓部落格那頁「在看什麼」能顯示我真實的動畫瘋觀看紀錄,我一路從逆向巴哈的 history API,做成一個開源的 npm SDK `anigamer`。這篇記錄整條坑:七顆 cookie 裡哪顆才是關鍵、封面藏在 og:image 的隨機 hash、每部動畫只顯示一集的 nested history bug,以及最精彩的——巴哈用「HTTP 200 藏 401」的軟錯誤加上一顆 `BAHARUNE=deleted` 的假 cookie,把我自己的 rotate 邏輯騙到把帳號掏空、靜默死了三天。後半是為了熱換 cookie 做的一鍵瀏覽器擴充,如何跟讀不到的 HttpOnly cookie 纏鬥、最後用 CDP 偵錯介面破關,再到發上 npm 的 2FA 大冒險與後端遷 Rust 後的 crates.io 版。</description>
+      <author>Koimsurai</author>
+      <pubDate>Thu, 23 Jul 2026 15:41:46 GMT</pubDate>
+      <category>位元築夢</category>
+      <category>Rust</category><category>動畫瘋</category><category>逆向工程</category><category>TypeScript</category><category>瀏覽器擴充</category>
+    </item>
+    <item>
+      <title>打造一頁會自己更新的「在看什麼」：動畫瘋 × Trakt × TMDb 的觀影紀錄整合</title>
+      <link>https://koimsurai.com/blog/building-a-self-updating-what-am-i-watching</link>
+      <guid isPermaLink="true">https://koimsurai.com/blog/building-a-self-updating-what-am-i-watching</guid>
+      <description>這篇文章記錄了作者為個人網站打造一頁「在看什麼」即時觀影展示頁的完整過程,以及沿路的層層踩坑。因為觀看紀錄散在 Netflix、Disney+、HBO、動畫瘋等一堆平台、而多半又用 app 或電視看,作者先花了一輪功夫在選型——評估過 Trakt、Letterboxd、MyAnimeList、AniList、Plex、各家 GDPR 匯出等十來個工具,最後收斂成「動畫走自造 SDK、影視走 Trakt、Netflix CSV 當歷史底、連結全 TMDb」。由於市面上沒有任何 user-facing 的動畫瘋 API client,作者索性逆向巴哈、開源了一個名為 anigamer 的 npm SDK(另有 Rust 版),並做了一個一鍵推送 cookie 的瀏覽器擴充。資料到齊後,真正反覆翻車的卻是「海報」:同一個借錯來源的 fallback 坑先後以兩種面貌出現——靜態列表裡有 tmdb_id 卻沒海報的電影被 enrich 條件漏掉而破圖,即時卡則因 Trakt 只給 id 不給圖、前端 fallback 到上一部動畫瘋番的海報而張冠李戴。文章順著發現順序拆解海報借錯番、抓到縮圖、直式被裁、進度條長度算錯、日期全變 1970、看完不同步等坑,收束到一套「有 id 就即時補圖、拿不到就顯式 null、絕不借別人的圖」的對稱修法。</description>
+      <author>Koimsurai</author>
+      <pubDate>Wed, 22 Jul 2026 15:34:57 GMT</pubDate>
+      <category>位元築夢</category>
+      <category>動畫瘋</category><category>Trakt</category><category>TMDb</category><category>scrobbler</category><category>觀影頁</category>
+    </item>
+    <item>
+      <title>把 NLLB 翻譯接進 Rust,在 Windows 上撞穿整條工具鏈：ct2rs × CTranslate2 的 protobuf 撞名、CRT 之爭、關閉死鎖與 NVIDIA 崩潰</title>
+      <link>https://koimsurai.com/blog/wiring-nllb-translation-into-rust-and-breaking-through</link>
+      <guid isPermaLink="true">https://koimsurai.com/blog/wiring-nllb-translation-into-rust-and-breaking-through</guid>
+      <description>這篇文章記錄了作者把一個離線 NLLB 翻譯功能從 Python 搬進 Rust、透過 ct2rs 接 CTranslate2 時,在 Windows/MSVC 上接連撞到的三面牆與各自的根因與修法。第一面是「連不起來」:sentencepiece 與 sherpa-onnx 各自靜態內嵌一份 protobuf,在 MSVC 下撞出 204 個 LNK2005——最乾淨的解不是 /FORCE:MULTIPLE 或 sidecar,而是直接關掉 sentencepiece feature、改用純 Rust 的 tokenizers,讓那份 protobuf 從依賴圖消失。第二面是 CRT 之爭:ct2rs 把 CTranslate2 編成 /MT、Rust std 卻是 /MD,靠 .cargo/config.toml 的 +crt-static 統一,並釐清這其實是與預編 /MT 的 sherpa 對齊的唯一正確解,不是有風險的回歸。第三面是一個躺了兩年的關閉死鎖——thread_local 的 ruy::Context 在 Windows loader lock 底下、於執行緒結束時去 join Ruy 執行緒池而卡死,最終把銷毀提前到 finalize() 手動進行,一次解掉死鎖與洩漏(RSS 從 4371 壓回 19 MB,CUDA 的 VRAM 洩漏同樣被堵住)。最後還意外抓到一個 NVIDIA 驅動 bug:CUDA 版在沒有可用 GPU 的機器上翻譯後隨機崩潰,根因是 nvdxgdmal64.dll 卸載後遺留的 thread-pool callback 打到已卸載位址,以 12 行純 C 重現證實是驅動問題,並用 PIN 住 DLL 的手法擋下。全篇也反思了驗證假設、以及誠實收回一個查證不足的「已知 bug」宣稱。</description>
+      <author>Koimsurai</author>
+      <pubDate>Tue, 21 Jul 2026 11:19:57 GMT</pubDate>
+      <category>位元築夢</category>
+      <category>CTranslate2</category><category>Rust</category><category>Windows</category><category>死鎖</category><category>ct2rs</category><category>NVIDIA</category>
+    </item>
+    <item>
+      <title>替散落的資料庫,開一扇上了鎖的窗：Outerbase × Mongoku × Authelia,自架 2FA 唯讀資料庫後台</title>
+      <link>https://koimsurai.com/blog/a-locked-window-for-my-scattered-databases</link>
+      <guid isPermaLink="true">https://koimsurai.com/blog/a-locked-window-for-my-scattered-databases</guid>
+      <description>這篇文章記錄了作者如何把散落在 homelab 各處的資料庫——六個分屬部落格、n8n、Uptime Kuma、3x-ui、Jarvis、NAS 的 SQLite,外加一個 MongoDB——整合成一個從任何地方都能存取、且擋著 2FA 的網頁後台。文章先從選型講起:為什麼不為了換而換上 Postgres、如何在 sqlite-web、Adminer、Beekeeper、CloudBeaver 之間繞了一圈才落在 Outerbase Studio,以及對外閘門為何捨 Cloudflare Tunnel 而自架 Authelia。接著逐一拆解建置時的坑:官方 Docker image 讀不了本地檔(只有 npm CLI 能)、ATTACH 看得到資料卻看不到表、WAL 模式無法唯讀掛載(最後靠「主檔唯讀、目錄可寫」兩行解決)、libSQL 與標準 SQLite 併發寫入的實測、容器連不到 host 上的 mongod、以及 Service Worker 把資料庫子網域劫持成部落格的鬼打牆。最後用 Authelia 的 forward-auth 把整批服務罩在同一道 2FA 之後,並反思這些坑沒一個真的難——難的是太早把「容器起來了、回 200」當成「做完了」。</description>
+      <author>Koimsurai</author>
+      <pubDate>Wed, 17 Jun 2026 15:10:23 GMT</pubDate>
+      <category>位元築夢</category>
+      <category>SQLite</category><category>2FA</category><category>Authelia</category><category>MongoDB</category><category>Outerbase</category>
+    </item>
+    <item>
+      <title>想做一個 tool-calling 修復 proxy,結果 benchmark 親手殺死了這個點子</title>
+      <link>https://koimsurai.com/blog/i-wanted-to-build-a-tool-calling-repair</link>
+      <guid isPermaLink="true">https://koimsurai.com/blog/i-wanted-to-build-a-tool-calling-repair</guid>
+      <description>這篇文章記錄了作者在嘗試開發一個「tool-calling 修復 proxy」的過程中，如何透過設計一個 benchmark 測試 22 個地端模型的 tool-calling 能力，最終放棄這個創業點子的經歷。測試結果顯示，新一代模型（如 Qwen3.5）已經原生解決了 tool-calling 的問題，修復層對這些模型反而成為干擾，且模型世代的快速進化使得這類修復工具的市場需求迅速萎縮。文章提供了詳細的測試方法、結果分析以及對各模型的具體觀察，並總結出地端模型選擇的實用建議。最後，作者強調了驗證假設的重要性，認為早期的測試能有效避免浪費時間和資源。</description>
+      <author>Koimsurai</author>
+      <pubDate>Sat, 13 Jun 2026 02:16:14 GMT</pubDate>
+      <category>位元築夢</category>
+      <category>地端模型</category><category>修復層</category><category>模型選擇</category><category>Qwen3.5</category><category>tool-calling</category><category>AI benchmark</category>
+    </item>
+    <item>
+      <title>把 BlockNote 的 AI 接上地端 Gemma：一場跟 Vercel AI SDK tool-calling 格式的硬仗</title>
+      <link>https://koimsurai.com/blog/wiring-blocknotes-ai-to-a-local-gemma</link>
+      <guid isPermaLink="true">https://koimsurai.com/blog/wiring-blocknotes-ai-to-a-local-gemma</guid>
+      <description>這篇文章記錄了作者將 BlockNote 官方 AI 套件整合至地端 Gemma 3 27B 模型的完整踩坑與除錯過程。作者在純離線的開發限制下，面對官方套件高度依賴雲端模型 Tool-calling 能力的阻礙，經歷了資料流撞牆與前端假流式的挫折，最終透過讓後端模擬結構化指令（Operation）並直接對接執行器，成功還原了流暢的就地對比體驗。同時，作者也巧妙利用輕量虛擬環境繞過了公司嚴格的 MAC 端點管控，解決了開發迭代受阻的基礎設施痛點。文章穿插了詳實的 Payload 數據排查與各類邊界條件（Edge Cases）的修補細節，展現了在底層原始碼與硬體限制中尋求突破的工程韌性。整體風格務實且邏輯嚴密，反映了開發者在看透框架隱藏假設與模型能力天花板後，依然能精準給出架構妥協與解法的硬派技術精神。</description>
+      <author>Koimsurai</author>
+      <pubDate>Thu, 28 May 2026 02:53:55 GMT</pubDate>
+      <category>位元築夢</category>
+      <category>AI 工具</category><category>前端開發</category><category>LLM</category><category>踩坑</category>
+    </item>
+    <item>
+      <title>在失重邊緣的建構與日常的留白</title>
+      <link>https://koimsurai.com/blog/building-at-the-edge-of-weightlessness</link>
+      <guid isPermaLink="true">https://koimsurai.com/blog/building-at-the-edge-of-weightlessness</guid>
+      <description>這篇文章記錄了一位實習生在四月的忙碌與反思。作者在高壓的工作環境中，負責多項挑戰性任務，包括一個掛名於 CEO 的專案、GitLab 管線的接手，以及與公司體制的磨合。同時，作者也面對母親健康問題的衝擊，首次感受到親密家人倒下的脆弱。文章穿插了對程式開發的熱愛、遊戲《Satisfactory》的放鬆，以及對未來旅行的憧憬，展現了在壓力與倦怠中尋找平衡的努力。整體風格真誠細膩，反映了作者在日常與未來之間的掙扎與成長。</description>
+      <author>Koimsurai</author>
+      <pubDate>Wed, 06 May 2026 12:58:50 GMT</pubDate>
+      <category>歲月留痕</category>
+      <category>實習經驗</category><category>遊戲</category><category>個人成長</category><category>生活平衡</category><category>程式開發</category><category>工作壓力</category>
+    </item>
+    <item>
+      <title>失控裡的秩序</title>
+      <link>https://koimsurai.com/blog/order-within-the-chaos</link>
+      <guid isPermaLink="true">https://koimsurai.com/blog/order-within-the-chaos</guid>
+      <description>文章記錄了作者三月份的生活點滴，從規律作息中的突發事件，到工作與興趣的交織。作者分享了解決體育學分問題的焦慮過程，以及對客製化機械鍵盤的興趣；同時描述了在公司專案中使用 AI 工具（如 Claude Pro）提升生產力的經歷，並探討了 AI 帶來的效率與壓力悖論。此外，作者提到與 IT Infra 對接的困難，研究 GitHub 上新技術的樂趣，以及遊戲與生活中的趣事。最後，停電的夜晚漫步成為一次深刻的反思與交流，為文章增添了一絲哲思。</description>
+      <author>Koimsurai</author>
+      <pubDate>Sat, 04 Apr 2026 19:06:47 GMT</pubDate>
+      <category>歲月留痕</category>
+      <category>生活記錄</category><category>AI 工具</category><category>遊戲體驗</category><category>IT 基礎設施</category><category>客製化鍵盤</category><category>軟體開發</category>
+    </item>
+    <item>
+      <title>PostHog Data Pipeline 本地部署踩坑記: 在 DinD 加上 Caddy 環境的資料同步挑戰</title>
+      <link>https://koimsurai.com/blog/deploying-a-posthog-data-pipeline-locally</link>
+      <guid isPermaLink="true">https://koimsurai.com/blog/deploying-a-posthog-data-pipeline-locally</guid>
+      <description>這篇文章記錄了作者在本地部署 PostHog Data Pipeline 時的技術挑戰與解決過程。文章詳細描述了在 Docker in Docker (DinD) 和 Caddy 環境下,如何處理 ODBC 驅動憑證問題、微服務間的網路通訊錯誤,以及 Temporal 任務因佇列沒人監聽而卡住的排查過程。作者還分享了如何新增專屬 Worker 處理資料倉儲任務,並用「偽裝」的 AWS 憑證解決 MinIO 相容性問題。整個過程展示了在複雜架構下,從資料同步到資料湖的完整除錯經驗。</description>
+      <author>Koimsurai</author>
+      <pubDate>Tue, 24 Feb 2026 04:44:45 GMT</pubDate>
+      <category>位元築夢</category>
+      <category>PostHog</category><category>微服務</category><category>資料同步</category><category>ODBC</category><category>Temporal</category><category>MinIO</category><category>Docker</category>
+    </item>
+    <item>
+      <title>脫下沉重的鞋帶，化作純粹的風：ヨルシカ《老人と海》帶給我的無盡航程</title>
+      <link>https://koimsurai.com/blog/yorushika-the-old-man-and-the-sea</link>
+      <guid isPermaLink="true">https://koimsurai.com/blog/yorushika-the-old-man-and-the-sea</guid>
+      <description>作者以 ヨルシカ《老人と海》為軸，拆解這首歌如何在輕快的夏日編曲底下，藏著海明威筆下老人「一無所獲仍不肯認輸」的執拗。文章逐段對照歌詞與小說，指出真正壓垮人的往往不是事情本身，而是那個名為想像力的重力；並把第三次副歌前的那聲嘆息，讀成積蓄力量的深呼吸而非放棄。全篇以個人的聆聽經驗貫穿，談音樂如何幫人卸下重量、化為純粹的心。</description>
+      <author>Koimsurai</author>
+      <pubDate>Fri, 20 Feb 2026 16:59:35 GMT</pubDate>
+      <category>聲律拾遺</category>
+      <category>ヨルシカ</category><category>情感療癒</category><category>日文歌</category><category>音樂解析</category><category>老人與海</category>
+    </item>
+    <item>
+      <title>打造一個會自己管理圖片的 Markdown 編輯器: 從 Monaco Editor、背景上傳,到 NAS 圖庫與圖片牆</title>
+      <link>https://koimsurai.com/blog/building-a-markdown-editor-that-manages-its-own</link>
+      <guid isPermaLink="true">https://koimsurai.com/blog/building-a-markdown-editor-that-manages-its-own</guid>
+      <description>從「Monaco 只能放連結、不能直接放圖」這個小需求出發,一路牽出圖片處理的整條坑:Base64 為何會讓編輯器卡頓又撐爆資料庫、貼上就自動上傳到 NAS 的設計,以及最容易忽略的一顆地雷——Docker bind mount 其實是一道「傳送門」,只要 HDD 沒掛載成功,檔案就會靜默寫回系統碟。文章也記錄了把靜態圖片牆重寫成 NAS 動態 API 的規劃,以及照片牆改版時「UI 先行、資料後補」的取捨。</description>
+      <author>Koimsurai</author>
+      <pubDate>Fri, 20 Feb 2026 04:57:13 GMT</pubDate>
+      <category>位元築夢</category>
+      <category>Monaco Editor</category><category>圖片上傳</category><category>Markdown</category><category>NAS</category><category>Nginx</category><category>後端開發</category>
+    </item>
+    <item>
+      <title>二月的片段：生日、團聚與技術探索</title>
+      <link>https://koimsurai.com/blog/february-fragments-birthday-reunion-and-tinkering</link>
+      <guid isPermaLink="true">https://koimsurai.com/blog/february-fragments-birthday-reunion-and-tinkering</guid>
+      <description>2026 年 2 月，作者在生日當天給自己放了一天假，隨興地與好友慶祝。除夕前回到雲林外婆家，全家一年一度的團聚中，他也首次帶著兩隻貓咪出遠門。技術上，他啟動了個人 AI 助理開發計畫，並更新了網站功能，同時還為自己添購了高階設備作為獎勵。在生活與工作間找到平衡之餘，也重新拾起吉他和攝影的興趣，感受過去熱愛的事物帶來的熟悉溫度。</description>
+      <author>Koimsurai</author>
+      <pubDate>Thu, 19 Feb 2026 11:42:11 GMT</pubDate>
+      <category>歲月留痕</category>
+      <category>monthly</category><category>2026-02</category>
+    </item>
+  </channel>
+</rss>
