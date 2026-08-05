@@ -1,4 +1,237 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><?xml-stylesheet type="text/xsl" href="/atom.xsl.xml"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>极客死亡计划 ｜ 極客死亡計劃</title><link>https://www.geedea.pro/</link><description>極客死亡計劃：在「极客死亡计划」分区下的最新内容</description><generator>Hugo</generator><language>zh-CN</language><managingEditor>hi@eltr.ac (Eltrac)</managingEditor><webMaster>hi@eltr.ac (Eltrac)</webMaster><lastBuildDate>Mon, 03 Aug 2026 07:57:43 +0800</lastBuildDate><atom:link href="https://www.geedea.pro/index.xml" rel="self" type="application/rss+xml"/><item><title>大脑充血 Vol.92</title><link>https://www.geedea.pro/weekly/92/</link><pubDate>Mon, 03 Aug 2026 07:57:43 +0800</pubDate><author>hi@eltr.ac (Eltrac)</author><guid>https://www.geedea.pro/weekly/92/</guid><description>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><?xml-stylesheet type="text/xsl" href="/atom.xsl.xml"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>极客死亡计划 ｜ 極客死亡計劃</title><link>https://www.geedea.pro/</link><description>極客死亡計劃：在「极客死亡计划」分区下的最新内容</description><generator>Hugo</generator><language>zh-CN</language><managingEditor>hi@eltr.ac (Eltrac)</managingEditor><webMaster>hi@eltr.ac (Eltrac)</webMaster><lastBuildDate>Wed, 05 Aug 2026 23:11:35 +0800</lastBuildDate><atom:link href="https://www.geedea.pro/index.xml" rel="self" type="application/rss+xml"/><item><title>艾尔特拉克在岣琅</title><link>https://www.geedea.pro/article/banality-of-go-err/</link><pubDate>Wed, 05 Aug 2026 23:11:35 +0800</pubDate><author>hi@eltr.ac (Eltrac)</author><guid>https://www.geedea.pro/article/banality-of-go-err/</guid><description>
+&lt;p&gt;汉娜·阿伦特报道了阿道夫·艾希曼在耶路撒冷因组织屠杀犹太人受审的案件，在法庭上，她发现艾希曼并不是一个冷静且思维缜密的杀手，相反，“说话时间越长，越能感受到他表达力的匮乏与思考能力的缺失，他不会站在别人的立场思考问题，之所以无法同他交流，并不是因为他说谎，而是因为他周围围绕着坚固的壁垒，屏蔽他的言辞和他人的存在，从而帮他一并拒绝着真相。”她震惊于恶的平庸性（Banality of Evil）。&lt;/p&gt;
+&lt;p&gt;艾尔特拉克和蓝色地鼠一起编写健壮的软件，在编辑器面前，他发现 &lt;code&gt;if err != nil&lt;/code&gt; 并不是什么精巧的错误处理机制，相反，编程时间越长，越能感受到地鼠错误处理机制的缺失，他不会帮程序员抛出和拦截错误，之所以无法用条件判断以外的方式处理错误，并不是因为地鼠不想，而是因为已有的简单工具就足够提升程序的健壮性。他震惊于错误的平庸性——错误仅仅是包含 &lt;code&gt;Error()&lt;/code&gt; 的
+
+ &lt;a href="https://www.geedea.pro/article/locally-remotely-unknowingly/"&gt;接口&lt;/a&gt;
+
+而已。&lt;/p&gt;
+
+&lt;h2
+ id="魂断杰威幕"
+ class="text-[1.25em] font-extrabold "&gt;魂断杰威幕&lt;/h2&gt;
+&lt;p&gt;众所周知，嘲讽 Java 是这个博客的传统，所以今天的文章也以这个开始。在 Java 中，处理「错误」的方式是&lt;strong&gt;抛出异常&lt;/strong&gt;。这里的异常（Exception）是指程序中可以预料到的问题，比如用户本应输入整数却输入了非数字字符，而错误（Error）在 Java 中指的是那些几乎无法恢复，会使程序退出的问题。&lt;/p&gt;
+&lt;p&gt;是的，术语开始混乱起来了，详见下表。&lt;/p&gt;
+&lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;&lt;/th&gt;
+ &lt;th&gt;Java&lt;/th&gt;
+ &lt;th&gt;Go&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td&gt;可预期到的、程序应处理的问题&lt;/td&gt;
+ &lt;td&gt;异常（Exception）&lt;/td&gt;
+ &lt;td&gt;错误（Error）&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;没有预料到的、难以恢复的问题&lt;/td&gt;
+ &lt;td&gt;错误（Error）&lt;/td&gt;
+ &lt;td&gt;崩溃（Panic&lt;sup id="fnref:1"&gt;&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref"&gt;1&lt;/a&gt;&lt;/sup&gt;）&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;为了方便讨论，在正式讨论 Go 语言之前，我会避免使用「错误」这个词，统一使用「异常」和「崩溃」两个词。老实说，「崩溃」这个词也不准确，Java 程序如果抛出 &lt;code&gt;Error&lt;/code&gt; 不一定会终止程序，而 Go 程序如果 &lt;code&gt;panic&lt;/code&gt; 也能够恢复，但姑且先这么用着吧。&lt;/p&gt;
+&lt;p&gt;Java 的异常和崩溃共用一套机制，他们甚至共用一个基类 &lt;code&gt;Throwable&lt;/code&gt;（可抛出类）。Java 的异常和崩溃都是被抛出（throw）的，而抛出 &lt;code&gt;Throwable&lt;/code&gt; 的函数的调用者可以接住（catch）被抛出的东西。不过 Oracle 的文档对 &lt;code&gt;Error&lt;/code&gt;（崩溃）和 &lt;code&gt;Exception&lt;/code&gt;（异常）两个子类的描述很有意思。&lt;/p&gt;
+
+
+
+ &lt;blockquote class="quoted p-0 m-0 mx-[1em]"&gt;
+ &lt;p&gt;The class Exception and its subclasses are a form of Throwable that indicates conditions that a reasonable application might want to catch.&lt;/p&gt;
+
+ &lt;/blockquote&gt;
+
+&lt;p style="text-align: right"&gt;——
+
+ &lt;a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Exception.html" class="external-link" target="_blank" rel="noopener noreferrer"&gt;Exception - Java Platform SE 8&lt;/a&gt;&lt;/p&gt;
+
+
+
+
+ &lt;blockquote class="quoted p-0 m-0 mx-[1em]"&gt;
+ &lt;p&gt;An Error is a subclass of Throwable that indicates serious problems that a reasonable application should not try to catch.&lt;/p&gt;
+
+ &lt;/blockquote&gt;
+
+&lt;p style="text-align: right"&gt;——
+
+ &lt;a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Error.html" class="external-link" target="_blank" rel="noopener noreferrer"&gt;Error - Java Platform SE 8&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;简单来说，异常应该被接住，而崩溃不应该被接住。任何 &lt;code&gt;Throwable&lt;/code&gt; 只要没被接住，就会使程序崩溃，提示 &lt;code&gt;Unhandled Exception&lt;/code&gt;（未被处理的异常）——等等，你有没有发现，没有被接住的明明是 &lt;code&gt;Throwable&lt;/code&gt;，为什么提示信息会是 &lt;code&gt;Unhandled Exception&lt;/code&gt;？难道 &lt;code&gt;Error&lt;/code&gt; 不也是 &lt;code&gt;Throwable&lt;/code&gt; 吗？&lt;/p&gt;
+&lt;p&gt;是的是的，我们已经发现 Java 让异常和崩溃共享同一个机制引发的问题了。异常和崩溃都可以被抛出，但区别在于崩溃不该被接住，而异常应该被处理。没有处理的异常会导致 &lt;code&gt;Unhandled Exception&lt;/code&gt;，而本就不应该被处理的错误也会导致 &lt;code&gt;Unhandled Exception&lt;/code&gt;。Java 还有一个 
+
+ &lt;a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Thread.UncaughtExceptionHandler.html" class="external-link" target="_blank" rel="noopener noreferrer"&gt;&lt;code&gt;UncaughtExceptionHandler&lt;/code&gt;&lt;/a&gt;
+
+ 接口，用来处理线程里那些没有被接住的异常，我们来看看接口中包含的方法签名。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#d6cbb4;background-color:#252b2e;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-java" data-lang="java"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e67e80"&gt;interface&lt;/span&gt; UncaughtExceptionHandler {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#dbbc7f"&gt;void&lt;/span&gt; &lt;span style="color:#b2c98f"&gt;uncaughtException&lt;/span&gt;(Thread t, Throwable e);
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;啊，是的，代码里写的是 &lt;code&gt;Throwable&lt;/code&gt;，可名字里明明是 &lt;code&gt;Exception&lt;/code&gt; 呢。显然 &lt;code&gt;Throwable&lt;/code&gt; 作为父类的抽象层次比子类 &lt;code&gt;Exception&lt;/code&gt; 高，而熟悉 OOP 的程序员应该知道，父类不应该知晓子类存在，而一个为父类设计的接口竟然包含子类的名字，尽管没有直接依赖子类，但显然不是好的设计。更何况，我们已经体验到这种做法造成的迷惑和混乱了。&lt;/p&gt;
+&lt;p&gt;&lt;mark&gt;如果崩溃不应该被接住，那它一开始就不应该与需要被接住的异常归属于同一基类&lt;/mark&gt;。如果子类之间的行为不同，就违反了里氏替换原则。&lt;em&gt;Always glad to find design flaws in Java.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;我们一直在谈抛与接，是时候来看看代码里怎么写这两个东西了。「接」想必各位都很熟悉了，&lt;code&gt;try ... catch&lt;/code&gt; 语句在 JavaScript 等语言中也能见到。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#d6cbb4;background-color:#252b2e;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-java" data-lang="java"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e67e80"&gt;try&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; doSomething(); &lt;span style="color:#859289;font-style:italic"&gt;// 这个函数抛出异常&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;} &lt;span style="color:#e67e80"&gt;catch&lt;/span&gt;(IOException e) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#859289;font-style:italic"&gt;// 接住 IOException &lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#859289;font-style:italic"&gt;// 处理这个异常&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;} &lt;span style="color:#e67e80"&gt;catch&lt;/span&gt;(Exception e) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#859289;font-style:italic"&gt;// Exception 是所有异常的基类&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#859289;font-style:italic"&gt;// 处理剩下其他类型的异常&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如果不把 &lt;code&gt;doSomething()&lt;/code&gt; 包裹在 &lt;code&gt;try&lt;/code&gt; 里会怎么样呢？你会得到 &lt;code&gt;Unhandled Exception&lt;/code&gt; 信息。为什么会这样呢？因为 &lt;code&gt;doSomething&lt;/code&gt; 的方法签名声明了异常。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#d6cbb4;background-color:#252b2e;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-java" data-lang="java"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#dbbc7f"&gt;void&lt;/span&gt; &lt;span style="color:#b2c98f"&gt;doSomething&lt;/span&gt;() &lt;span style="color:#e67e80"&gt;throws&lt;/span&gt; Exception;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;throws&lt;/code&gt; 关键词用在方法签名中，表示这个方法会抛出异常，而调用者应该抓住这个异常。如果声明了多种不同类型的异常，那么调用者应该抓住所有类型的异常，或者…… 只写一条 &lt;code&gt;catch(Exception e)&lt;/code&gt;。如果调用了可能会抛出异常的方法却没有放在 &lt;code&gt;try&lt;/code&gt; 里面，就会得到 &lt;code&gt;Unhandled Exception&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;真的吗？如果我就是不想要写 &lt;code&gt;try ... catch&lt;/code&gt; 呢？&lt;/p&gt;
+&lt;p&gt;那就让 Java 教会你踢皮球，把这个错误抛给你的调用者就好了！&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#d6cbb4;background-color:#252b2e;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-java" data-lang="java"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#859289;font-style:italic"&gt;// 这段代码会出错&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;doSomething();
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#859289;font-style:italic"&gt;// 这段代码处理了异常&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e67e80"&gt;try&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; doSomething();
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;} &lt;span style="color:#e67e80"&gt;catch&lt;/span&gt;(Exception e) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#859289;font-style:italic"&gt;// ...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#859289;font-style:italic"&gt;// 这段代码向上抛出了异常&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#dbbc7f"&gt;void&lt;/span&gt; &lt;span style="color:#b2c98f"&gt;faireQuelqueChose&lt;/span&gt;() &lt;span style="color:#e67e80"&gt;throws&lt;/span&gt; Exception {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; doSomething();
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;老实说，我写 Java 程序的时候就这么干过好几次，大不了最后这样写：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#d6cbb4;background-color:#252b2e;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-java" data-lang="java"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e67e80"&gt;public&lt;/span&gt; &lt;span style="color:#e67e80"&gt;static&lt;/span&gt; &lt;span style="color:#dbbc7f"&gt;void&lt;/span&gt; &lt;span style="color:#b2c98f"&gt;main&lt;/span&gt;(String&lt;span style="color:#7a8478"&gt;[]&lt;/span&gt; args) &lt;span style="color:#e67e80"&gt;throws&lt;/span&gt; Exception {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#859289;font-style:italic"&gt;// 想怎么抛怎么抛！&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;不过异常具体是怎么被抛出的？&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#d6cbb4;background-color:#252b2e;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-java" data-lang="java"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#dbbc7f"&gt;void&lt;/span&gt; &lt;span style="color:#b2c98f"&gt;doSomething&lt;/span&gt;() &lt;span style="color:#e67e80"&gt;throws&lt;/span&gt; Exception {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#859289;font-style:italic"&gt;// 有不对劲的事情发生了&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#859289;font-style:italic"&gt;// 赶紧抛出异常告诉调用者&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e67e80"&gt;throw&lt;/span&gt; Exception(&lt;span style="color:#b2c98f"&gt;&amp;#34;Something weird happened!&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;嗯？这是个新的关键词吗？看起来是的，用在方法签名上告知调用者可能抛出的异常类型的关键词是 &lt;code&gt;throws&lt;/code&gt;，而用在方法体内部抛出异常的语句是 &lt;code&gt;throw&lt;/code&gt;。这个语句和一个标记了 &lt;code&gt;throws&lt;/code&gt; 的方法调用在某种程度上是等价的，在方法体里写 &lt;code&gt;throw Exception()&lt;/code&gt; 和可能会抛出异常的 &lt;code&gt;doSomething()&lt;/code&gt;，都需要做异常处理，要么放在 &lt;code&gt;try ... catch&lt;/code&gt; 里，要么往上抛让调用者处理。&lt;/p&gt;
+&lt;p&gt;原来 Java 程序员在一开始就要区分 &lt;code&gt;throw&lt;/code&gt; 和 &lt;code&gt;throws&lt;/code&gt; 这种细微的区别，怪不得我那个半吊子 Python 老师这么喜欢
+
+ &lt;a href="https://www.geedea.pro/article/ready-steady-go/#:~:text=%E8%BF%99%E4%BD%8D%E8%80%81%E5%B8%88%E5%9C%A8%E5%B9%BB%E7%81%AF%E7%89%87%E4%B8%8A%E5%B1%95%E7%A4%BA%E4%BA%86%20Python%20%E7%9A%84%E6%89%80%E6%9C%89%E4%BF%9D%E7%95%99%E5%AD%97%EF%BC%8C%E7%84%B6%E5%90%8E%E6%8F%90%E5%87%BA%E4%BA%86%E4%B8%80%E4%B8%AA%E5%8C%AA%E5%A4%B7%E6%89%80%E6%80%9D%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%9A%E4%B8%8A%E9%9D%A2%E8%BF%99%E4%BA%9B%E4%BF%9D%E7%95%99%E5%AD%97%EF%BC%8C%E5%93%AA%E4%BA%9B%E6%98%AF%20Python%20%E7%8B%AC%E6%9C%89%E7%9A%84%EF%BC%9F%E4%BA%8E%E6%98%AF%E6%8E%A5%E4%B8%8B%E6%9D%A5%E7%9A%84%E5%87%A0%E5%8D%81%E5%88%86%E9%92%9F%EF%BC%8C%E6%88%91%E4%BB%AC%E9%83%BD%E5%9C%A8%E8%A7%A3%E5%86%B3%E8%BF%99%E4%B8%AA%E9%97%AE%E9%A2%98%E3%80%82" class="external-link" target="_blank" rel="noopener noreferrer"&gt;纠结语言保留字&lt;/a&gt;
+
+！&lt;/p&gt;
+&lt;p&gt;与此同时，Lisp 程序员：&lt;em&gt;语法…… 语法太多了…… 看不懂……&lt;/em&gt;。&lt;/p&gt;
+
+&lt;h2
+ id="no-exception"
+ class="text-[1.25em] font-extrabold "&gt;No Exception&lt;/h2&gt;
+&lt;p&gt;让我们总结一下，在 Java 中，异常和崩溃都要被抛出。抛出异常就等于说是要调用者（或者调用者的调用者）接住并处理这个异常，把错误处理的责任向上传递。这其实很符合逻辑，因为有一些错误就是没办法在方法内部解决，比如一个发起 HTTP 请求的方法遇到请求超时就只能上报问题。抛出错误就等于说是要程序因无法处理的错误而终止。&lt;/p&gt;
+&lt;p&gt;抛与接看起来很精巧，许多人都喜欢此类机制。如果机制是必要的，那么机制的存在使得学习和理解的成本上升，使得语言变得臃肿，或者引发机制内部的混淆与问题（比如 &lt;code&gt;Error&lt;/code&gt; 也算 &lt;code&gt;Unhandled Exception&lt;/code&gt;），似乎也还算能接受。可问题是，机制真的是必要的吗？我们真的需要这一层&lt;strong&gt;额外的抽象&lt;/strong&gt;吗？&lt;/p&gt;
+&lt;p&gt;程序中应该被解决的错误被称作异常，抽象为 &lt;code&gt;Exception&lt;/code&gt;；程序中无法解决的错误被称作崩溃，抽象为 &lt;code&gt;Error&lt;/code&gt;。这两个类都是被抛出的，被称作「可抛出类」，所以抽象为 &lt;code&gt;Throwable&lt;/code&gt;。为什么需要最高的这层抽象？这种抽象真的合理吗？它的子类难道不是两个很不同的东西吗？&lt;/p&gt;
+&lt;p&gt;思来想去，让 &lt;code&gt;Error&lt;/code&gt; 和 &lt;code&gt;Exception&lt;/code&gt; 归为一个基类的原因，我只能想到「它们都是被抛出的」这一个。正方形和矩形都是「可求面积的」，那么就可以都归类为 &lt;code&gt;Squarable&lt;/code&gt; 吗？显然不能，正方形不能继承矩形已经是里氏替换原则的一个经典案例，让正方形和矩形都归为一个基类更是荒唐。类比之后可以发现，&lt;code&gt;Error&lt;/code&gt; 和 &lt;code&gt;Exception&lt;/code&gt; 也是如此，&lt;mark&gt;仅仅因为想让它们共用抛出机制就归为一个基类是愚蠢的&lt;/mark&gt;。仔细看的话，&lt;code&gt;Error&lt;/code&gt; 倒像是 &lt;code&gt;Exception&lt;/code&gt; 的一个不需要被接住的例外（exception），而 Oracle 自己对 &lt;code&gt;Exception&lt;/code&gt; 的描述却是「conditions that a reasonable application &lt;strong&gt;might&lt;/strong&gt; want to catch」，所以到底接还是不接呢？好像不接也行，那 &lt;code&gt;Exception&lt;/code&gt; 和 &lt;code&gt;Error&lt;/code&gt; 真的有区分的必要吗？但好像不区分也不行，毕竟确实是两个概念。&lt;/p&gt;
+&lt;p&gt;是时候终止这场混乱了。&lt;/p&gt;
+
+&lt;h2
+ id="errors-are-values"
+ class="text-[1.25em] font-extrabold "&gt;&amp;ldquo;Errors are values.&amp;rdquo;&lt;/h2&gt;
+&lt;p&gt;这句话是 
+
+ &lt;a href="http://farside.link/invidious/watch?v=PAAkCSZUG1c&amp;amp;t=16m13s" class="external-link" target="_blank" rel="noopener noreferrer"&gt;Rob Pike&lt;/a&gt;
+
+ 说的。其实我还想更进一步说：&lt;em&gt;Errors are conditions.&lt;/em&gt; 这里的 &lt;em&gt;condition&lt;/em&gt;，既是状况，也是条件。仔细想的话，如果没有错误处理机制，我们就是会用条件分支语句处理异常情况。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#d6cbb4;background-color:#252b2e;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e67e80"&gt;func&lt;/span&gt; &lt;span style="color:#b2c98f"&gt;addThreeNumbers&lt;/span&gt;(numbers []&lt;span style="color:#dbbc7f"&gt;int&lt;/span&gt;) &lt;span style="color:#dbbc7f"&gt;string&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e67e80"&gt;if&lt;/span&gt; &lt;span style="color:#d699b6"&gt;len&lt;/span&gt;(numbers) &amp;gt; &lt;span style="color:#d699b6"&gt;3&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e67e80"&gt;return&lt;/span&gt; &lt;span style="color:#b2c98f"&gt;&amp;#34;too many numbers&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; } &lt;span style="color:#e67e80"&gt;else&lt;/span&gt; &lt;span style="color:#e67e80"&gt;if&lt;/span&gt; &lt;span style="color:#d699b6"&gt;len&lt;/span&gt;(numbers) &amp;lt; &lt;span style="color:#d699b6"&gt;3&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e67e80"&gt;return&lt;/span&gt; &lt;span style="color:#b2c98f"&gt;&amp;#34;too few numbers&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; } &lt;span style="color:#e67e80"&gt;else&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e67e80"&gt;return&lt;/span&gt; strconv.&lt;span style="color:#b2c98f"&gt;Itoa&lt;/span&gt;(numbers[&lt;span style="color:#d699b6"&gt;0&lt;/span&gt;] &lt;span style="color:#7a8478"&gt;+&lt;/span&gt; numbers[&lt;span style="color:#d699b6"&gt;1&lt;/span&gt;] &lt;span style="color:#7a8478"&gt;+&lt;/span&gt; numbers[&lt;span style="color:#d699b6"&gt;2&lt;/span&gt;])
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;假设这个错误在内部处理不了，需要交给调用者处理。比方说，某个函数仅仅是读取文件，它并不知道读取文件是为了什么，也就不会知道要是文件不存在应该怎么办。假设这个函数的调用者是为了读取配置文件，而它知道，没有文件的时候就写入默认配置。函数的调用者要怎么知道函数没有获取到文件呢？最简单的做法是返回空值。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#d6cbb4;background-color:#252b2e;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e67e80"&gt;func&lt;/span&gt; &lt;span style="color:#b2c98f"&gt;getConfig&lt;/span&gt;() {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; config &lt;span style="color:#7a8478"&gt;:=&lt;/span&gt; &lt;span style="color:#b2c98f"&gt;readConfigFromFile&lt;/span&gt;(CONFIG_PATH)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e67e80"&gt;if&lt;/span&gt; config &lt;span style="color:#7a8478"&gt;==&lt;/span&gt; &lt;span style="color:#b2c98f"&gt;&amp;#34;&amp;#34;&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; config = DEFAULT_CONFIG
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;等等，你的意思是说返回值就能让调用者知道函数内部发生了需要处理的错误，是吗？Hmmmm…… &lt;em&gt;我好奇为什么还会有人发明一整套混乱的机制欸？&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;你可能会说：“这不能强迫开发者解决问题，他们完全可以忽略错误而不做处理，而 Java 强制通过异常抛出机制要求程序员解决所有的异常，无论如何都是要通过 &lt;code&gt;try ... catch&lt;/code&gt; 处理的，或者还有全局的错误拦截。总之 Java 的设计让程序员更容易编写健壮的软件！”&lt;/p&gt;
+&lt;p&gt;Hmmmm…… &lt;em&gt;我好奇这段代码有什么效果欸？&lt;/em&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#d6cbb4;background-color:#252b2e;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-java" data-lang="java"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e67e80"&gt;public&lt;/span&gt; &lt;span style="color:#e67e80"&gt;static&lt;/span&gt; &lt;span style="color:#dbbc7f"&gt;void&lt;/span&gt; &lt;span style="color:#b2c98f"&gt;main&lt;/span&gt;(String&lt;span style="color:#7a8478"&gt;[]&lt;/span&gt; args) &lt;span style="color:#e67e80"&gt;throws&lt;/span&gt; Exception {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#859289;font-style:italic"&gt;// 想怎么抛怎么抛！&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这么做也没有任何后果，可以把错误一直往上抛，直到程序的入口方法。反正 Java 里的方法定义已经要写一堆 &lt;code&gt;public&lt;/code&gt; &lt;code&gt;static&lt;/code&gt; 了，多写几个 &lt;code&gt;throws Exception&lt;/code&gt; 也不会觉得有什么区别吧？&lt;/p&gt;
+&lt;p&gt;你可能还会说：“异常抛出机制为错误处理提供了统一的解决方案，所有异常都基于 &lt;code&gt;Exception&lt;/code&gt; 类，彼此还相互继承，更是通过 OOP 的机制让错误处理变得更灵活！”&lt;/p&gt;
+&lt;p&gt;Hmmmm…… 原来是 OOP 啊。说起来，Go 由于缺少继承，的确不算 OOP 语言，但我们从不少 Java 程序员也喜欢读的四人帮《
+
+ &lt;a href="https://zh.wikipedia.org/wiki/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%8F%AF%E5%A4%8D%E7%94%A8%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%BD%AF%E4%BB%B6%E7%9A%84%E5%9F%BA%E7%A1%80" class="external-link" target="_blank" rel="noopener noreferrer"&gt;设计模式&lt;/a&gt;
+
+》中得知，组合优先于继承，并且应该针对接口编程而不是针对实现编程。好的设计模式中很少见到继承，因为不方便复用，方便复用的是接口。&lt;/p&gt;
+&lt;p&gt;啊对，Go 语言也有统一的错误处理范式，但没有引入任何新机制，因为错误的全部定义只有三行代码：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#d6cbb4;background-color:#252b2e;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e67e80"&gt;type&lt;/span&gt; &lt;span style="color:#dbbc7f"&gt;error&lt;/span&gt; &lt;span style="color:#e67e80"&gt;interface&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#b2c98f"&gt;Error&lt;/span&gt;() &lt;span style="color:#dbbc7f"&gt;string&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;所有实现了 &lt;code&gt;Error()&lt;/code&gt; 函数的结构体都是错误值。于是我们回到 Rob Pike 说的「Errors are values」。如何让调用者明确知道函数内部发生了错误，而不只是恰好返回了空值呢？——再返回一个专门的错误值。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#d6cbb4;background-color:#252b2e;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e67e80"&gt;func&lt;/span&gt; &lt;span style="color:#b2c98f"&gt;getConfig&lt;/span&gt;() {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; config, err &lt;span style="color:#7a8478"&gt;:=&lt;/span&gt; &lt;span style="color:#b2c98f"&gt;readConfigFromFile&lt;/span&gt;(CONFIG_PATH)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e67e80"&gt;if&lt;/span&gt; err &lt;span style="color:#7a8478"&gt;!=&lt;/span&gt; &lt;span style="color:#e67e80"&gt;nil&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; config = DEFAULT_CONFIG
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; fmt.&lt;span style="color:#b2c98f"&gt;Println&lt;/span&gt;(&lt;span style="color:#b2c98f"&gt;&amp;#34;config: using defaults because of error&amp;#34;&lt;/span&gt;, err)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#d6cbb4;background-color:#252b2e;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e67e80"&gt;func&lt;/span&gt; &lt;span style="color:#b2c98f"&gt;readConfigFromFile&lt;/span&gt;(path &lt;span style="color:#dbbc7f"&gt;string&lt;/span&gt;) Config {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e67e80"&gt;if&lt;/span&gt; body, ok &lt;span style="color:#7a8478"&gt;:=&lt;/span&gt; &lt;span style="color:#b2c98f"&gt;readFile&lt;/span&gt;(&lt;span style="color:#dbbc7f"&gt;string&lt;/span&gt;); ok {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e67e80"&gt;if&lt;/span&gt; config, ok &lt;span style="color:#7a8478"&gt;:=&lt;/span&gt; &lt;span style="color:#b2c98f"&gt;parseBody&lt;/span&gt;(body); ok {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e67e80"&gt;return&lt;/span&gt; config, &lt;span style="color:#e67e80"&gt;nil&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; } &lt;span style="color:#e67e80"&gt;else&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e67e80"&gt;return&lt;/span&gt; &lt;span style="color:#e67e80"&gt;nil&lt;/span&gt;, &lt;span style="color:#7a8478"&gt;&amp;amp;&lt;/span&gt;errorString{&lt;span style="color:#b2c98f"&gt;&amp;#34;error parsing config file body&amp;#34;&lt;/span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; } &lt;span style="color:#e67e80"&gt;else&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e67e80"&gt;return&lt;/span&gt; &lt;span style="color:#e67e80"&gt;nil&lt;/span&gt;, &lt;span style="color:#7a8478"&gt;&amp;amp;&lt;/span&gt;errorString{&lt;span style="color:#b2c98f"&gt;&amp;#34;error reading file&amp;#34;&lt;/span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这是通用的解决方案，尤其是用于有多种类型错误的情况。假设一个操作只有成功与否，而我们不关心失败的具体原因，只关心成功没有，那可不可以让错误处理变得更简单呢？当然，返回布尔值就好了，看到上面的 &lt;code&gt;ok&lt;/code&gt; 了吗？它接收到的是函数的第二个返回值，在这个例子里，这第二个返回值不是 &lt;code&gt;error&lt;/code&gt; 类型，而是 &lt;code&gt;bool&lt;/code&gt; 类型。&lt;/p&gt;
+&lt;p&gt;如果没有接收函数的所有返回值，编译器就会报错：&lt;code&gt;assignment mismatch&lt;/code&gt;。如果接受了错误值却没有使用，编译器就会报错：&lt;code&gt;declared and not used&lt;/code&gt;。这两个错误信息都不是为错误处理而生的，而是本来就存在。Go 语言没有发明 &lt;code&gt;unhandled exception&lt;/code&gt; 这种东西来要求程序员处理错误，编译器甚至不知道「错误」这个概念，它只知道有函数返回值没有被赋值给变量，只知道有变量被声明了但没有使用，而这对 Go 语言严格的编译器来说都是不可接受的。当然，和 Java 一样，这也有规避方案，比方说把错误赋值给 &lt;code&gt;_&lt;/code&gt;，编译器就会认为这个变量不需要使用，通过检查。不管有没有专门的错误处理机制，错误都很容易被程序员忽略，不做处理，&lt;mark&gt;这本来就不应该是由编程语言本身强加给程序员的事情&lt;/mark&gt;。就像 Rust 实际上并不是一门安全的语言，无论怎么样，就连 Cloudflare 的高级工程师也会滥用 &lt;code&gt;unwrap()&lt;/code&gt;。Java 把 &lt;code&gt;throw&lt;/code&gt; 做得这么难处理，还用 &lt;code&gt;try ... catch&lt;/code&gt; 把代码的嵌套层次变得越来越深，反而是多此一举。&lt;/p&gt;
+&lt;p&gt;用接口统一错误类型，用函数的多返回值上报错误，用严格的编译器类型检查预防错误不被处理，这整条链路都没有引入任何新的机制。Go 的错误处理范式，竟然如此平庸和无趣。&lt;/p&gt;
+
+&lt;h2
+ id="dont-panic"
+ class="text-[1.25em] font-extrabold "&gt;&amp;ldquo;Don&amp;rsquo;t Panic&amp;rdquo;&lt;/h2&gt;
+
+
+
+ &lt;blockquote class="quoted p-0 m-0 mx-[1em]"&gt;
+ &lt;p&gt;Don’t use panic for normal error handling. Use error and multiple return values.&lt;/p&gt;
+
+ &lt;/blockquote&gt;
+
+&lt;p style="text-align: right"&gt;——
+
+ &lt;a href="https://go.dev/wiki/CodeReviewComments#dont-panic" class="external-link" target="_blank" rel="noopener noreferrer"&gt;Go Wiki: Go Code Review Comments&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Go 官方给出的常见代码审查评论中，有一条是 &lt;em&gt;Don&amp;rsquo;t panic&lt;/em&gt;，意思是说不要用 &lt;code&gt;panic()&lt;/code&gt; 做错误处理。这个内置函数会终止当前函数栈的执行，并且会让当前函数本身也成为一个 &lt;code&gt;panic()&lt;/code&gt;，也终止当前函数的调用者的执行，&lt;code&gt;panic&lt;/code&gt; 就会这样沿着函数调用栈一直往上，直到程序入口函数，最后终止程序，除非中途调用了 &lt;code&gt;recover()&lt;/code&gt; 恢复程序。&lt;/p&gt;
+&lt;p&gt;「沿着函数调用栈往上」，这听起来很像 Java 的抛出机制。Java 的 &lt;code&gt;Throwable&lt;/code&gt; 一旦被抛出，就会一直往上直到被 &lt;code&gt;try ... catch&lt;/code&gt; 接住，如果没有被接住就会使程序终止——和 &lt;code&gt;panic()&lt;/code&gt; 一样。你发现问题了吗？&lt;code&gt;Exception&lt;/code&gt; 也是 &lt;code&gt;Throwable&lt;/code&gt;，倘若异常没有被处理，也会使程序崩溃。这种情况却是 Go 想要避免的，所以 Go 建议程序员使用多返回值和 &lt;code&gt;error&lt;/code&gt; 类型，而不是使用会使程序终止的 &lt;code&gt;panic()&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;这再次印证了「异常情况」和「会使程序崩溃的情况」本来就是两个完全不同的东西，被 Java 硬塞到了 &lt;code&gt;Throwable&lt;/code&gt; 里，就为了让它们共用本就不合理的抛出机制。异常情况仅仅是程序的一个分支条件，这个条件可以用布尔值或者 &lt;code&gt;error&lt;/code&gt; 类型的值表示。如果没有好好处理这种分支条件，那么程序顶多出现意想不到的行为，不应该崩溃。Java 的设计却使得本应该成为分支条件的语句，直接终止了整个程序运行。&lt;/p&gt;
+&lt;p&gt;会使程序终止的情况不应该是可以预料的分支条件，比方说死锁、内存溢出和数组越界。Java 说一个合理的应用程序不应该抓住崩溃（&lt;code&gt;Error&lt;/code&gt;），而 Go 提供了恢复崩溃（&lt;code&gt;panic&lt;/code&gt;）的方法。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#d6cbb4;background-color:#252b2e;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e67e80"&gt;defer&lt;/span&gt; &lt;span style="color:#e67e80"&gt;func&lt;/span&gt;() {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e67e80"&gt;if&lt;/span&gt; r &lt;span style="color:#7a8478"&gt;:=&lt;/span&gt; &lt;span style="color:#d699b6"&gt;recover&lt;/span&gt;(); r &lt;span style="color:#7a8478"&gt;!=&lt;/span&gt; &lt;span style="color:#e67e80"&gt;nil&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; fmt.&lt;span style="color:#b2c98f"&gt;Println&lt;/span&gt;(&lt;span style="color:#b2c98f"&gt;&amp;#34;Recovered &amp;#34;&lt;/span&gt;, r)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#d699b6"&gt;panic&lt;/span&gt;(&lt;span style="color:#b2c98f"&gt;&amp;#34;Panicking!&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;defer&lt;/code&gt; 也不是专门为了处理异常而发明的新语法，它所做的仅仅是推迟代码执行。推迟到当前函数的最后，当然也在 &lt;code&gt;panic()&lt;/code&gt; 之后（不过在 &lt;code&gt;return&lt;/code&gt; 之前）。由于 &lt;code&gt;defer&lt;/code&gt; 语句在 &lt;code&gt;panic()&lt;/code&gt; 之后执行，就可以在 &lt;code&gt;defer&lt;/code&gt; 中执行 &lt;code&gt;recover()&lt;/code&gt;，使得 &lt;code&gt;recover()&lt;/code&gt; 在 &lt;code&gt;panic()&lt;/code&gt; 之后执行，这样就恢复了崩溃。&lt;/p&gt;
+&lt;p&gt;由于 &lt;code&gt;panic()&lt;/code&gt; 会自己沿着函数调用栈往上，所以不需要在相关链路中的每一个函数签名中都写上 &lt;code&gt;throws Exception&lt;/code&gt; 之类的东西，只要在某个环节执行 &lt;code&gt;recover()&lt;/code&gt; 就好了。&lt;/p&gt;
+&lt;p&gt;不过无论怎么说，&lt;code&gt;panic()&lt;/code&gt; 都不如 &lt;code&gt;error&lt;/code&gt; 常用，也不鼓励使用。&lt;/p&gt;
+
+&lt;h2
+ id="最后"
+ class="text-[1.25em] font-extrabold "&gt;最后&lt;/h2&gt;
+&lt;p&gt;质疑 &lt;code&gt;if err != nil&lt;/code&gt;，理解 &lt;code&gt;if err != nil&lt;/code&gt;，成为 &lt;code&gt;if err != nil&lt;/code&gt; 的拥护者，然后狠狠嘲讽 Java。这便是艾尔特拉克魂断杰威幕之后身处岣琅的心路历程，回见了。&lt;/p&gt;
+&lt;div class="footnotes" role="doc-endnotes"&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id="fn:1"&gt;
+&lt;p&gt;Panic: 另译「运行时恐慌」&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink"&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;div style="text-align:right;"&gt;&lt;a href="https://www.geedea.pro/article/banality-of-go-err/#action-menu"&gt;读完啦？来坐坐吧&lt;/a&gt;&lt;/div&gt;</description></item><item><title>大脑充血 Vol.92</title><link>https://www.geedea.pro/weekly/92/</link><pubDate>Mon, 03 Aug 2026 07:57:43 +0800</pubDate><author>hi@eltr.ac (Eltrac)</author><guid>https://www.geedea.pro/weekly/92/</guid><description>
 &lt;p&gt;我发现自己遇到「不测风云」，也就是那些难以预料的烦心事时，已经能够做到表面平静地发疯十分钟，然后该干嘛干嘛。这周济南总是莫名其妙地开始刮大风、下暴雨，虽然讨厌袜子被打湿的感觉，但包里常备着折叠伞，也还算从容不迫。&lt;/p&gt;
 &lt;p&gt;其实还有些家人和工作上的大小事，不过我现在更在乎自己刚刚从 MUJI 买的粘毛刷好不好用，今天有没有吃燕麦喝酸奶，明天早上应该读《第一个人》还是《现象学导论》。印象中不少「重要人物」常常把自己的生活外包给别人，以腾出时间关注那些更具商业价值的事情。而我呢？如果我每天回到家不能亲自用吸尘器把地板拖得一尘不染，听见灶台点燃的热水沸腾的声音，我都不知道自己怎么活下去。&lt;/p&gt;
 &lt;hr&gt;
@@ -2375,29 +2608,4 @@
 &lt;ul&gt;
 &lt;li&gt;打包…… 打包…… 尘螨过敏…… 鼻涕…… 呃啊啊啊啊啊！&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div style="text-align:right;"&gt;&lt;a href="https://www.geedea.pro/weekly/89/#action-menu"&gt;读完啦？来坐坐吧&lt;/a&gt;&lt;/div&gt;</description></item><item><title>It Takes Time</title><link>https://www.geedea.pro/article/it-takes-time/</link><pubDate>Sun, 12 Jul 2026 21:50:29 +0800</pubDate><author>hi@eltr.ac (Eltrac)</author><guid>https://www.geedea.pro/article/it-takes-time/</guid><description>
-&lt;p&gt;这几天重庆的气温，总让人觉得迟早能把人烤熟，自来水管里出来的水都是热的。今天总算是下雨了，温度或许会降下来一些，又或许湿气会让温度更难以忍受，不过我就快要走了，但愿北方不会太闷，蟑螂也不会那么大只。&lt;/p&gt;
-&lt;p&gt;我刚刚撑着伞，把不想打包带走的旧衣服丢进了小区的回收箱里，这是我八九个月里第一次打开那个箱子。是往外拉的，我不知道怎么形容它的结构，大概很像《老友记》里美国公寓楼道里的 &lt;em&gt;Trash Chute&lt;/em&gt;，需要拉开，放入一个与箱门连接的槽里，然后关上门。不得不说，很容易卡住。&lt;em&gt;Chute&lt;/em&gt; 应该是法语词，因为 &lt;em&gt;ch&lt;/em&gt; 的发音是 &lt;code&gt;/ʃ/&lt;/code&gt;，法语里这个词的意思是「坠落」。走之前看到书本也可以回收，早知道那些多抓鱼也卖不掉的旧书就该放到这里的，不过这下全打包好了。打包东西的时候灰尘满天飞，尘螨过敏又犯了，去楼下便利店转了一圈，最后问店员口罩放在哪，她从门口的某个地方掏了一片出来。好吧，我应该进门就问的。我又去了罗森，记得那里有味全的饮料卖。Fedi 友推荐可以用味全的瓶子分装液体，虽然剩下的洗衣液我已经用喜茶的纤体瓶装好了，但或许能用上吧。再说，我挺想喝那个椰子西瓜汁的。&lt;/p&gt;
-&lt;p&gt;去到完全陌生的地方，真的会感到很大不同吗？可留在故乡我也没有什么朋友。之前听人说，阿斯伯格综合征患者&lt;sup id="fnref:1"&gt;&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref"&gt;1&lt;/a&gt;&lt;/sup&gt;能够社交，但社交对他们来说永远是需要翻译的第二语言，无法像其他人一样做到和母语一样熟练（尽管我使用第二语言时不会翻译，可以直接用英语思考，但…… 我为什么要把话题真的扯到语言上？）。我还没能确诊自己是否真的是 ASD，不过从我极度害怕陌生环境和不确定性，甚至因此提不起劲儿去找心理咨询师&lt;sup id="fnref:2"&gt;&lt;a href="#fn:2" class="footnote-ref" role="doc-noteref"&gt;2&lt;/a&gt;&lt;/sup&gt;这点来看，恐怕有很大可能是的。此外，从小就成为计算机 &lt;em&gt;nerd&lt;/em&gt; 的我，真是自闭症也不意外吧。&lt;/p&gt;
-&lt;p&gt;几个小时前我把转椅卖掉了，买家还顺手带走了一些其他的闲置品，其中包括我的那幅猫猫画，画上是一只喝咖啡的猫，上面写着：&lt;em&gt;Before coffee, I hate everyone. After coffee, I feel good about hating everyone&lt;/em&gt;。这几天有好几次这样的面交，我并不觉得害怕，但多少会有自我反刍，也就是把某些琐碎的细节和情绪嚼了又嚼，即便没有很强烈，也不肯放下。买家来之前我把椅子的零部件包好了，我是不是不该这么做？他们刚才盯着包好的零件看了好一会儿，或许几秒钟，或许在心里想了更久，是不是让他们不放心了？交付之后买家发消息问了我一个问题，是因为组装起来之后出了问题吗？会不会有什么纷争，我真的好讨厌和陌生人对峙。好了，好了，什么都没有发生，对方只是需要确认一件事。她人很好，走之前还说了谢谢。面试的时候我跟 HR 提到我的确会内耗，因为性格如此，但我不会把情绪带到工作中来。事实的确如此，即便心里翻江倒海我也会面色平静地把该做的事情干完，和人对接时，对给我增加工作量的&lt;del&gt;蠢货&lt;/del&gt;也依旧语气温和。这好吗？或许吧。只是，只是这真的好累。我好想和一个人拥抱在一起，不必使用令人捉摸不透的、令人痛苦的语言，要是能只用皮肤传达爱意就好了。&lt;/p&gt;
-&lt;p&gt;之前一份兼职的上司有段时间沉迷心理学，大概是想了解她的下属和学生，给我们做了「爱的五种语言」测试。我忘记当时的测试结果了，但如今想来，我偏好的语言应该是「肢体接触」「高质量陪伴」和「服务的行动」，讨厌「赠送礼物」，最讨厌「肯定的言语」（Words of Affirmation）。听 Raye 的《I Hate The Way I Look Today》，其中有句歌词是：&lt;em&gt;Words of Affirmation. Must Repeat ’till I believe it.&lt;/em&gt; 我也不那么喜欢，就连自我鼓励也让我不适，除非是自我吹嘘。「我果然还是太懂……了」比「我可以的！」更好，因为前者虚假得过于明显，反而显得真实。我和语言的关系真是矛盾，我宁愿把自己关起来学习身边人都不说的语言，也惧怕使用真实的语言与具体的人沟通。我在故乡也会刻意使用普通话，因为我发现同样是重庆人的辅导员在说普通话的时候更温和，与陌生人用普通话交流也不会被套近乎。被人当作异乡人看待，使我与他们保持恰到好处的距离。我把人隔得与我很远，因为这样才安全，就像我在上小学时，站在大门口假装有家长来接我，假装看到亲人、与同学道别，最后回到空无一人的家中，等大人回家。&lt;/p&gt;
-&lt;p&gt;本想发微信消息问问同室想不想接手我带不走的一大包抽纸，下滑消息列表的时候，我看到 
-
- &lt;a href="https://www.geedea.pro/tags/M/"&gt;M&lt;/a&gt;
-
- 换了头像。图片里的形象的确像他，是他的女朋友给他挑的吗？或许是男朋友（但拜托…… 不要……），无论如何，大概是一个与我用同样的方式看待他的人吧。也可能是他自己，但真的重要吗？我为什么在意识到自己即将离开这座城市时，突然想念起这个两年没有联系的人？我趴在床上，不想出门。我知道还有垃圾要丢，但可以再等等。我还记得清他的面庞吗？我想他了，我们不必做什么事情，抱在一起就好。或许他可以帮我去丢垃圾，我会看着他的背影出神，就像那天晚上一样，那天晚上的路灯是橘黄色的。我会想象他从楼道里走过，走进电梯，遇到邻居；我会担心，担心他遇到奇怪的人；我会害怕，害怕他永远不回来。&lt;/p&gt;
-&lt;p&gt;我好久没有这样止不住地抽泣了。&lt;/p&gt;
-&lt;p&gt;回家的路上，我遇到一只萨摩耶（不过一般人应该会说，我遇到一个遛狗的人，他正牵着一只萨摩耶）。雪橇犬怕热，所以他的毛被扒掉了，但头上的毛仍然很茂盛，看起来有点滑稽。楼栋外面还有一只小猫，它真的好小一只，被我吓到了之后它钻进了绿化带里。我也不知道为什么，我对那只猫猫的小印象深刻。我希望可以到一个不必在夏天给萨摩耶剃毛的地方养耶树（这是我提前想好的狗狗的名字），比如欧洲的北部，或许我还能时不时去到南部，去见见加缪爱过的地中海。我还会养一只那样小的猫，看着他好奇又害怕地四处探索。我会尽我所能了解他们的习性，去说他们的语言。我们可以抱在一起，我们可以嚎叫和哭泣，我们不必说话。&lt;/p&gt;
-&lt;p&gt;但这都需要时间，我要等待自己的生活稳定下来，等待自己的收入稳定下来，等待自己终于脱离那些束缚我的事情，等待有一天自己不必看所有人的脸色，就因为我必须依附别人生存。我知道，我会遇到比 M 更好的人，但这需要时间，或许是要两三年，或许要十年、二十年。我有时间，对吗？我还年轻，我不能忘记自己还年轻。有不少人羡慕我拥有的时间呢，可我羡慕他们的沉稳和耐心，羡慕他们不会因为处在某种生活当中，感到自我正在渐渐消亡。&lt;/p&gt;
-&lt;div class="footnotes" role="doc-endnotes"&gt;
-&lt;hr&gt;
-&lt;ol&gt;
-&lt;li id="fn:1"&gt;
-&lt;p&gt;一种神经特异类别，貌似是过时的称呼，被批评不够准确或有歧视意味（不少神经多样性之前的用词都有这样的顾忌），但仍有不少人使用或自称阿斯伯格。简单来说，阿斯伯格综合征是自闭症谱系障碍（ASD）的一种。&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink"&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li id="fn:2"&gt;
-&lt;p&gt;台湾用语应该是「咨商师」。&amp;#160;&lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink"&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;
-&lt;div style="text-align:right;"&gt;&lt;a href="https://www.geedea.pro/article/it-takes-time/#action-menu"&gt;读完啦？来坐坐吧&lt;/a&gt;&lt;/div&gt;</description></item></channel></rss>
+&lt;div style="text-align:right;"&gt;&lt;a href="https://www.geedea.pro/weekly/89/#action-menu"&gt;读完啦？来坐坐吧&lt;/a&gt;&lt;/div&gt;</description></item></channel></rss>
