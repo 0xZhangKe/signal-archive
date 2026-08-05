@@ -1,0 +1,11 @@
+{
+  "id": "440179f1c6003dce42968225",
+  "title": "Apple 討厭開源 opus 格式",
+  "summary": "《最佳聲音有損格式》 中提到，檔案壓縮效率 opus > AAC > mp3。 其中 AAC 是 Apple 制定的，這個格式在 Apple 裝置下是暢通無阻。 但如果下載了 opus 會發現 Apple 內建的播放器無法打開（內建播放器只支援能 硬體解碼 的格式），無法丟進 Logic Pro 來做音樂，opus 簡直像是外星生物。 而 Youtube 在近期的新影片中，聲音編碼同時配有 AAC 與 opus，而 Spotify 用 opus，只有 Apple Music 仍舊使用 AAC。 直接指定原始格式要 AAC or opus # 編碼 指令 原生 AAC → .m4a yt-dlp -f 140 <URL> 原生 Opus → .opus/.webM yt-dlp -f 251 <URL> You…",
+  "content": "<p><a href=\"https://eddielv.com/musings/best-lossy-formet/\" target=\"_blank\" rel=\"noopener noreferrer\">《最佳聲音有損格式》</a>中提到，檔案壓縮效率 opus &gt; AAC &gt; mp3。</p>\n<p>其中 AAC 是 Apple 制定的，這個格式在 Apple 裝置下是暢通無阻。</p>\n<p>但如果下載了 opus 會發現 Apple 內建的播放器無法打開（內建播放器只支援能<a href=\"https://eddielv.com/articles/vp9/\" target=\"_blank\" rel=\"noopener noreferrer\">硬體解碼</a>的格式），無法丟進 Logic Pro 來做音樂，opus 簡直像是外星生物。</p>\n<p>而 Youtube 在近期的新影片中，聲音編碼同時配有 AAC 與 opus，而 Spotify 用 opus，只有 Apple Music 仍舊使用 AAC。</p>\n<h2>\n  直接指定原始格式要 AAC or opus\n  <a target=\"_blank\" rel=\"noopener noreferrer\"> #</a>\n</h2>\n\n<table>\n  <thead>\n      <tr>\n          <th>編碼</th>\n          <th>指令</th>\n      </tr>\n  </thead>\n  <tbody>\n      <tr>\n          <td>原生 AAC → .m4a</td>\n          <td><code>yt-dlp -f 140 &lt;URL&gt;</code></td>\n      </tr>\n      <tr>\n          <td>原生 Opus → .opus/.webM</td>\n          <td><code>yt-dlp -f 251 &lt;URL&gt;</code></td>\n      </tr>\n  </tbody>\n</table>\n<p>Youtube 基本上現在一定有 AAC 格式，但 opus 不一定有，之前的 <code>yt-dlp -f bestaudio -x URL</code> 只表示會下載原始音檔，但不指定要 AAC 還是 opus。</p>\n<p>如果純聽音樂，用哪種都沒差，主要是 Eddie 如果要丟到 DAW 就必須得用 m4a。</p>",
+  "image": null,
+  "publishedAt": "2026-01-02T07:42:14Z",
+  "sourceId": "199cdf92fc46bfcd",
+  "sourceTitle": "Eddie Lv",
+  "link": "https://eddielv.com/musings/apple-hate-opus/"
+}

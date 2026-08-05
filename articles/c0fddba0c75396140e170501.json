@@ -1,0 +1,11 @@
+{
+  "id": "c0fddba0c75396140e170501",
+  "title": "我把吉他品牌官網更新了",
+  "summary": "前言 # 原本官網佈局是，wordpress 宣傳頁，同時有購物車系統，而線上學習系統是用 moodle 架設的，這樣的佈局是當時的 GPT 告訴我的，近期再次詢問，發現根本可以整套用 wordpress 就處理掉，不需要分開處理，尤其會員系統的管理非常麻煩。 plug-in # 其實只要安裝 woocommerce 就有購物車系統；安裝 learnpress 就有線上課學習系統；安裝 wpForo 就有論壇系統，都是一件安裝，而且全部都是同個會員系統。 頁面風格 # 比較麻煩的，每種東西都會有各自的外觀，因此在統一上下了一點功夫，尤其還有那種兩排選單列的情況出現，然後 wordpress 又不是說可以直接改 css 就處理掉的，必須在各種樣式調整系統中，找到我要調整的東西。 購物車與課程串聯 # 課程界面也…",
+  "content": "<h2>\n  前言\n  <a target=\"_blank\" rel=\"noopener noreferrer\"> #</a>\n</h2>\n\n<p>原本官網佈局是，wordpress 宣傳頁，同時有購物車系統，而線上學習系統是用 moodle 架設的，這樣的佈局是當時的 GPT 告訴我的，近期再次詢問，發現根本可以整套用 wordpress 就處理掉，不需要分開處理，尤其會員系統的管理非常麻煩。</p>\n<h2>\n  plug-in\n  <a target=\"_blank\" rel=\"noopener noreferrer\"> #</a>\n</h2>\n\n<p>其實只要安裝 woocommerce 就有購物車系統；安裝 learnpress 就有線上課學習系統；安裝 wpForo 就有論壇系統，都是一件安裝，而且全部都是同個會員系統。</p>\n<h2>\n  頁面風格\n  <a target=\"_blank\" rel=\"noopener noreferrer\"> #</a>\n</h2>\n\n<p>比較麻煩的，每種東西都會有各自的外觀，因此在統一上下了一點功夫，尤其還有那種兩排選單列的情況出現，然後 wordpress 又不是說可以直接改 css 就處理掉的，必須在各種樣式調整系統中，找到我要調整的東西。</p>\n<h2>\n  購物車與課程串聯\n  <a target=\"_blank\" rel=\"noopener noreferrer\"> #</a>\n</h2>\n\n<p>課程界面也有自己的購物車系統但是比較陽春，而且只能用在線上課程系統，有侷限性，想要讓直接跟專門的購物車系統合併可以，就是要付費。</p>\n<p>Eddie 從購物車系統下單後，再手動把客戶加入課程權限即可，並不是一個一定要買的東西。</p>\n<h2>\n  影片串流\n  <a target=\"_blank\" rel=\"noopener noreferrer\"> #</a>\n</h2>\n\n<p>這是這次最重大的更新，我購買了 wasabi 網路硬碟空間，來當作我的雲端影片資料庫，讓我可以內嵌到課程系統、還有部落格等等。</p>\n<p>但是 wasabi 其實不允許這樣的用法，但是如果搭配 CDN 的話，他們就會允許，這是爲了確保他們的流量不會爆掉。</p>\n<p>CDN 是把檔案分散下載到世界各地的伺服器，而我是使用 cloudflare 的免費版，單檔案低於 500MB 都是免費版就夠用了。</p>\n<p>因此我開了 cloudflare 帳戶，把 DNS 改由 cloudflare 處理，並且多一個子網域，來指向 wasabi 的位置。</p>\n<p>現在用 linode 當做伺服器主機，用 wasabi 當作硬碟空間，namecheap 負責網域，cloudflare 負責 DNS 與 CDN。</p>",
+  "image": null,
+  "publishedAt": "2025-09-15T04:32:43Z",
+  "sourceId": "199cdf92fc46bfcd",
+  "sourceTitle": "Eddie Lv",
+  "link": "https://eddielv.com/musings/gtisland-update/"
+}

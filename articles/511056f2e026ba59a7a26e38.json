@@ -1,0 +1,11 @@
+{
+  "id": "511056f2e026ba59a7a26e38",
+  "title": "我的 RSS 文章壽命比你多 8 小時",
+  "summary": "Alex Hsu 寫的〈你的 RSS 文章壽命可能只有別人的一半〉最近被好多人引用喔！連在英文圈都有人討論。",
+  "content": "<p>Alex Hsu 寫的〈<a href=\"https://alexhsu.com/publish-date\" target=\"_blank\" rel=\"noopener noreferrer\">你的 RSS 文章壽命可能只有別人的一半</a>〉最近被好多人引用喔！連在英文圈都有人討論。</p>\n<p>這篇文章在講許多人部落格的 RSS 時間問題：</p>\n<ul>\n<li>如果發文的時候只寫日期（例如 <code>2026-04-14</code>）而不寫時間，許多軟體會自作聰明地在 RSS 中幫你標記為 00:00 UTC，也就是台北時間早上 8:00。</li>\n<li>所以，如果你實際上是晚上 11:00 才發文，那麼你的文章在讀者的 RSS 閱讀器「Today」分頁裡只能活 9 小時（因為閱讀器以為你早上 8 點就發了），而不是完整的 24 小時。</li>\n</ul>\n<div><div>什麼是 UTC？</div><div><p>UTC（世界協調時間，Coordinated Universal Time──不要懷疑，英文字的順序跟縮寫不一樣）就是全世界統一的標準時間，台灣是 UTC+8 區。所以 UTC 半夜 0:00 的時候，台灣已經早上 8:00 了。</p></div></div>\n<p>看完之後我立刻去檢查自己的 RSS Feed，發現我的情況完全相反。</p>\n<p>我在發文的時候「會」寫上時間。但這個部落格用的是 Docusaurus，它在解析文章時間時，如果沒有特別註明時區，它會一律當成 UTC。</p>\n<p>所以，當我在文章中寫 <code>2026-04-14T06:40</code> 時（心裡想的其實是台北時間的早上 6:40），Docusaurus 會在 RSS 寫「這篇文章是在 6:40 UTC 發布的」，也就是台北時間的下午 2:40。</p>\n<p>正常來說，這是一個 bug。但因為時間被往後推，我的文章在別人閱讀器的「Today」頁面裡<strong>反而多活了 8 小時</strong>。同樣的 bug，晚上發文的人超虧，早上發文的我反而賺到。</p>\n<p>意識到這個 bug 之後，後來我發文時就乾脆不寫時間了，讓它直接被預設當成 UTC 00:00（台灣早上 8:00），這樣跟我實際的發文時間反而比較接近。</p>\n<p>但時間改對反而比以前虧耶，還是改回去好了？</p>\n<p><em>（要是大家看到 Alex 的文章後，集體把 RSS 出版日期改到 2040 年來搶「Today」版位，那⋯⋯我就改到 2041 年！🤣）</em></p>",
+  "image": null,
+  "publishedAt": "2026-04-14T00:01:00Z",
+  "sourceId": "7f36c3da1e6b5c71",
+  "sourceTitle": "Wiwi.Blog Blog",
+  "link": "https://wiwi.blog/blog/rss-pubdate"
+}

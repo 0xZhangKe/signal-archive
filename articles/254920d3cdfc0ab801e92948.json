@@ -1,0 +1,11 @@
+{
+  "id": "254920d3cdfc0ab801e92948",
+  "title": "Linux 伺服器被植入挖礦程式：從 load average 10.65 揪出整條攻擊鏈",
+  "summary": "這篇記錄了作者在一次例行效能健檢中,意外撞見自己家用伺服器被植入挖礦程式的完整抓賊過程,並整理成一份人人可照做的可疑進程自檢清單。起點是一個不該出現的數字:一台 16 執行緒的機器 load average 卻卡在 10.65。作者用 top 與 docker stats 揪出一個吃滿 10 核、隨機大小寫檔名的可疑程序,再靠 Linux 的 /proc 三件套(exe 指向已刪除的 /tmp 檔、cmdline、environ 溯源到某個 Docker 容器)確認它是挖礦程式,並把攻擊鏈拉出來:一個 port 直接綁在 0.0.0.0、繞過 nginx 對外裸露的 Next.js 容器,被 CVE-2025-66478(Next.js 16.0.6 的滿分 RCE、綽號 React2Shell)打穿。文中含…",
+  "content": "這篇記錄了作者在一次例行效能健檢中,意外撞見自己家用伺服器被植入挖礦程式的完整抓賊過程,並整理成一份人人可照做的可疑進程自檢清單。起點是一個不該出現的數字:一台 16 執行緒的機器 load average 卻卡在 10.65。作者用 top 與 docker stats 揪出一個吃滿 10 核、隨機大小寫檔名的可疑程序,再靠 Linux 的 /proc 三件套(exe 指向已刪除的 /tmp 檔、cmdline、environ 溯源到某個 Docker 容器)確認它是挖礦程式,並把攻擊鏈拉出來:一個 port 直接綁在 0.0.0.0、繞過 nginx 對外裸露的 Next.js 容器,被 CVE-2025-66478(Next.js 16.0.6 的滿分 RCE、綽號 React2Shell)打穿。文中含清除(kill 不需 sudo、殺父程序回收 zombie)、查持久化(cron/bashrc/tmp)、堵根因(收回 127.0.0.1、升級框架、容器資源上限)的每一步命令,附一份六條的自檢清單。作者的體悟是:被入侵最可怕的不是被吃 CPU,是你根本不知道自己被入侵了。",
+  "image": null,
+  "publishedAt": "2026-07-28T16:55:03Z",
+  "sourceId": "bd51496b8ec0ca1d",
+  "sourceTitle": "Koimsurai 手記",
+  "link": "https://koimsurai.com/blog/catching-a-cryptominer"
+}

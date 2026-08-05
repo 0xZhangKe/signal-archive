@@ -1,0 +1,11 @@
+{
+  "id": "9e904423421124e652f69c0d",
+  "title": "幫巴哈動畫瘋寫一個沒人寫過的 SDK: 逆向 API、自我掏空的 cookie,與讀不到的 HttpOnly",
+  "summary": "為了讓部落格那頁「在看什麼」能顯示我真實的動畫瘋觀看紀錄,我一路從逆向巴哈的 history API,做成一個開源的 npm SDK `anigamer`。這篇記錄整條坑:七顆 cookie 裡哪顆才是關鍵、封面藏在 og:image 的隨機 hash、每部動畫只顯示一集的 nested history bug,以及最精彩的——巴哈用「HTTP 200 藏 401」的軟錯誤加上一顆 `BAHARUNE=deleted` 的假 cookie,把我自己的 rotate 邏輯騙到把帳號掏空、靜默死了三天。後半是為了熱換 cookie 做的一鍵瀏覽器擴充,如何跟讀不到的 HttpOnly cookie 纏鬥、最後用 CDP 偵錯介面破關,再到發上 npm 的 2FA 大冒險與後端遷 Rust 後的 crates.io…",
+  "content": "為了讓部落格那頁「在看什麼」能顯示我真實的動畫瘋觀看紀錄,我一路從逆向巴哈的 history API,做成一個開源的 npm SDK `anigamer`。這篇記錄整條坑:七顆 cookie 裡哪顆才是關鍵、封面藏在 og:image 的隨機 hash、每部動畫只顯示一集的 nested history bug,以及最精彩的——巴哈用「HTTP 200 藏 401」的軟錯誤加上一顆 `BAHARUNE=deleted` 的假 cookie,把我自己的 rotate 邏輯騙到把帳號掏空、靜默死了三天。後半是為了熱換 cookie 做的一鍵瀏覽器擴充,如何跟讀不到的 HttpOnly cookie 纏鬥、最後用 CDP 偵錯介面破關,再到發上 npm 的 2FA 大冒險與後端遷 Rust 後的 crates.io 版。",
+  "image": null,
+  "publishedAt": "2026-07-23T15:41:46Z",
+  "sourceId": "bd51496b8ec0ca1d",
+  "sourceTitle": "Koimsurai 手記",
+  "link": "https://koimsurai.com/blog/writing-the-anigamer-sdk-nobody-made"
+}

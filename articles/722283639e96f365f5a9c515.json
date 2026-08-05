@@ -1,0 +1,11 @@
+{
+  "id": "722283639e96f365f5a9c515",
+  "title": "跟另一個站長互相監控：Uptime Kuma 交叉託管,和 Trust Proxy 開了反而更危險",
+  "summary": "這篇記錄了作者跟另一位自架站長交叉監控的完整過程,並整理成一份可照做的教學。起點是自架服務的一個尷尬處境:監控自己的那台機器,自己掛了就沒人通知得了。解法是互相盯,但一開始兩人都卡在同一個錯誤前提上——以為要走 HTTPS 就得交換憑證。真正的答案是不用交換:對方把子網域 A 紀錄指向你的 IP,TLS 就在你這裡終結,Let's Encrypt 的 HTTP-01 驗證會直接打到你的 nginx,所以你自己就能簽那張憑證、還自動續簽;共享 wildcard 反而踩中私鑰暴露與手動續簽兩個雷。文中也整理了反代 Kuma 必備的 WebSocket 設定(少了 Upgrade 標頭,即時圖表會完全不動)、給後端加公開 /health 而非用 401 取巧、用 push 型監控盯 cron 腳本這種沉默故障,以及…",
+  "content": "這篇記錄了作者跟另一位自架站長交叉監控的完整過程,並整理成一份可照做的教學。起點是自架服務的一個尷尬處境:監控自己的那台機器,自己掛了就沒人通知得了。解法是互相盯,但一開始兩人都卡在同一個錯誤前提上——以為要走 HTTPS 就得交換憑證。真正的答案是不用交換:對方把子網域 A 紀錄指向你的 IP,TLS 就在你這裡終結,Let&#x27;s Encrypt 的 HTTP-01 驗證會直接打到你的 nginx,所以你自己就能簽那張憑證、還自動續簽;共享 wildcard 反而踩中私鑰暴露與手動續簽兩個雷。文中也整理了反代 Kuma 必備的 WebSocket 設定(少了 Upgrade 標頭,即時圖表會完全不動)、給後端加公開 /health 而非用 401 取巧、用 push 型監控盯 cron 腳本這種沉默故障,以及 v1 升 v2 的資料庫遷移該當作不可逆來處理。最後是全篇最值得記的一個坑:Trust Proxy 這個看起來明顯該開的選項,在 nginx 用 $proxy_add_x_forwarded_for「附加」而非「覆寫」的架構下,開了之後任何人都能偽造 IP(作者實測偽造成功),而真正的風險不是登入爆破(2FA 已擋),是 CrowdSec 會因此去封 Cloudflare 的整段網段。",
+  "image": null,
+  "publishedAt": "2026-07-31T06:00:43Z",
+  "sourceId": "bd51496b8ec0ca1d",
+  "sourceTitle": "Koimsurai 手記",
+  "link": "https://koimsurai.com/blog/uptime-kuma-cross-monitoring"
+}

@@ -1,0 +1,11 @@
+{
+  "id": "af719e9a878bb22e010d72e0",
+  "title": "3D 星空背景效能長征：OffscreenCanvas Worker → WebGPU/TSL 重寫",
+  "summary": "這篇記錄了作者為個人網站 koimsurai.com 那片 3D 星空背景走過的三階段效能長征。背景最初只是一堆各自為政的 three.js 裝飾特效——黑洞、粒子、星空、土星——東西還少時並不重,是愈疊愈多、真正拿去量之後才逐步走上優化:先把星空搬進 OffscreenCanvas Worker 讓渲染離開主執行緒(桌面 TBT 從 17 秒壓到 30 毫秒),再被朋友一台會白屏的機器逼著補上背景的穩健性,最後用瀏覽器最新的 WebGPU/TSL 把整套從頭重寫成單一 canvas——GPU 從 85–90% 砍到 25%、星星翻到 26,000 顆全在 shader 裡呼吸。文中一併科普 WebGPU 到底是什麼,並記下一個反覆翻案的判斷:「效能優化」和「品質升級」是兩本不同的帳,換掉目標函數,結論就翻。",
+  "content": "這篇記錄了作者為個人網站 koimsurai.com 那片 3D 星空背景走過的三階段效能長征。背景最初只是一堆各自為政的 three.js 裝飾特效——黑洞、粒子、星空、土星——東西還少時並不重,是愈疊愈多、真正拿去量之後才逐步走上優化:先把星空搬進 OffscreenCanvas Worker 讓渲染離開主執行緒(桌面 TBT 從 17 秒壓到 30 毫秒),再被朋友一台會白屏的機器逼著補上背景的穩健性,最後用瀏覽器最新的 WebGPU/TSL 把整套從頭重寫成單一 canvas——GPU 從 85–90% 砍到 25%、星星翻到 26,000 顆全在 shader 裡呼吸。文中一併科普 WebGPU 到底是什麼,並記下一個反覆翻案的判斷:「效能優化」和「品質升級」是兩本不同的帳,換掉目標函數,結論就翻。",
+  "image": null,
+  "publishedAt": "2026-07-24T02:49:17Z",
+  "sourceId": "bd51496b8ec0ca1d",
+  "sourceTitle": "Koimsurai 手記",
+  "link": "https://koimsurai.com/blog/the-3d-starfield-performance-march"
+}

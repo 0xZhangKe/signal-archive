@@ -1,0 +1,11 @@
+{
+  "id": "4b362a305675cdf93bbe6f1b",
+  "title": "1/2+1=45660",
+  "summary": "「1/2」加 1 等於多少？根據各大試算表軟體，答案是「45660」！",
+  "content": "<p>「1/2」加 1 等於多少？根據各大試算表軟體，答案是「45660」！</p>\n<h3>蛤？<a href=\"https://wiwi.blog/blog/45660#%E8%9B%A4\" title=\"蛤？的直接連結\" target=\"_blank\" rel=\"noopener noreferrer\">​</a></h3>\n<p>試試看！打開 Google 試算表（或 Microsoft Excel、<a href=\"https://zh-tw.libreoffice.org/\" target=\"_blank\" rel=\"noopener noreferrer\">LibreOffice</a> Calc、<a href=\"https://en.wikipedia.org/wiki/Gnumeric\" target=\"_blank\" rel=\"noopener noreferrer\">Gnumeric</a> 都可以），在 A1 這一格輸入 <code>=&quot;1/2&quot;</code>（字串「1/2」）。</p>\n<p><img width=\"254\" height=\"81\"></p>\n<p>然後，在 B1 這一格輸入 <code>=A1+1</code>。</p>\n<p><img width=\"250\" height=\"80\"></p>\n<p>結果 B1 這一格出現的答案是「45660」！</p>\n<p><img width=\"250\" height=\"81\"></p>\n<h3>為什麼？<a href=\"https://wiwi.blog/blog/45660#%E7%82%BA%E4%BB%80%E9%BA%BC\" title=\"為什麼？的直接連結\" target=\"_blank\" rel=\"noopener noreferrer\">​</a></h3>\n<p>這個有趣的現象是從這篇 <a href=\"https://www.quadratichq.com/blog/cursed-excel-datetime-math\" target=\"_blank\" rel=\"noopener noreferrer\">Andrew Farkas 的文章</a>看到的，他是 AI 試算表軟體公司 Quadratic 的開發者。</p>\n<p>原來，當試算表看到字串 <code>&quot;1/2&quot;</code> 時，它並不是把它當作分數「二分之一」，而是自作聰明地解讀成「當時年份的 1 月 2 號」。所以當我們在 2025 年時輸入 <code>&quot;1/2&quot;</code>，試算表就把它理解成了「2025 年 1 月 2 號」。</p>\n<p>而試算表儲存日期的方式很直接粗暴：把每一天對應到一個數字。1900 年 1 月 1 號被設定為數字 1，然後每過一天，這個數字就加 1。</p>\n<p>照這樣算的話，「2025 年 1 月 2 號」的對應數字應該是「45658」，再加 1 的話應該要是「45659」，可是為什麼我們得到「45660」呢？</p>\n<p>那是因為古早古早的時候，有一個試算表軟體叫做 Lotus 1-2-3，當時的開發者誤以為西元 1900 年是閏年（但其實不是），所以把西元 1900 年的天數多算了一天。微軟的 Excel 為了保持跟 Lotus 1-2-3 的相容性，保留了這個 bug，然後這個 bug 就一直延續到了現代所有的試算表軟體當中。</p>",
+  "image": null,
+  "publishedAt": "2025-04-13T00:00:00Z",
+  "sourceId": "7f36c3da1e6b5c71",
+  "sourceTitle": "Wiwi.Blog Blog",
+  "link": "https://wiwi.blog/blog/45660"
+}

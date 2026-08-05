@@ -1,0 +1,11 @@
+{
+  "id": "81aab7e76d4a94b62388d17d",
+  "title": "讓你的超連結底線更好看：text-underline-offset",
+  "summary": "預設的情況下底線跟文字很接近，有些設計師不喜歡這種樣式，我自己也覺得沒有很好看。",
+  "content": "<p>大約在 2016 年的時候，如果想在超連結下面加入底線，通常會在 CSS 加上 <code>text-decoration: underline</code> 這個屬性。</p>\n<p>預設的情況下底線跟文字很接近，有些設計師不喜歡這種樣式，我自己也覺得沒有很好看。<code>underline</code> 的位置跟粗細並不能調整，在這種情況下通常會用 <code>background-image</code> 來處理。</p>\n<p>透過 <code>linear-gradient</code>，我們可以在模擬一條類似 underline 的直線，既然他是 <code>background-image</code>，代表我們可以直接用 <code>background-position</code>來調整位置，也可以用 <code>background-size</code> 來調整粗細。</p>\n<p>雖然是解決了底線位置無法調整的問題，但實際使用上難免會覺得有些麻煩，而且感覺也有點偏離 <code>background-image</code> 原來的用法。當然要用也是完全沒有問題的，只是沒那麼直覺。</p>\n<h2><a target=\"_blank\" rel=\"noopener noreferrer\"><span></span></a>text-underline-offset</h2>\n<p>這個 CSS 屬性在很早之前就已經提出，只是當時支援的瀏覽器相當少，導致大家都還是在用 <code>background-image</code> 的方式調整底線位置。</p>\n<p>現在主流瀏覽器都已經支援這個屬性了，用法非常直觀：</p>\n<pre><code><span><span>a</span><span> {</span></span>\n<span><span>  text-decoration</span><span>:</span><span> underline;</span></span>\n<span><span>  text-underline-offset</span><span>:</span><span> 4</span><span>px;</span></span>\n<span><span>}</span></span></code></pre>\n<p>如果想要更精細地控制底線樣式，還可以搭配 <code>text-decoration-thickness</code> 調整粗細：</p>\n<pre><code><span><span>a</span><span> {</span></span>\n<span><span>  text-decoration</span><span>:</span><span> underline;</span></span>\n<span><span>  text-decoration-color</span><span>:</span><span> #</span><span>3b82f6</span><span>;</span></span>\n<span><span>  text-decoration-thickness</span><span>:</span><span> 2</span><span>px;</span></span>\n<span><span>  text-underline-offset</span><span>:</span><span> 3</span><span>px;</span></span>\n<span><span>}</span></span></code></pre>\n<p>比起以前用 <code>background-image</code> 的做法，這種寫法語意更清楚，維護起來也更方便。</p>\n<p>看到很多原本都只是草案的標準一一被各個瀏覽器實作，真的有種時代在進步的實感呢。</p>",
+  "image": null,
+  "publishedAt": "2026-01-25T00:00:00Z",
+  "sourceId": "538caf01ac3ab305",
+  "sourceTitle": "愷開的部落格",
+  "link": "https://blog.kalan.dev/frontend/text-underline-offset/"
+}

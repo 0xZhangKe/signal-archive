@@ -1,0 +1,11 @@
+{
+  "id": "0e4fd47e4d3f209991428712",
+  "title": "替散落的資料庫,開一扇上了鎖的窗：Outerbase × Mongoku × Authelia,自架 2FA 唯讀資料庫後台",
+  "summary": "這篇文章記錄了作者如何把散落在 homelab 各處的資料庫——六個分屬部落格、n8n、Uptime Kuma、3x-ui、Jarvis、NAS 的 SQLite,外加一個 MongoDB——整合成一個從任何地方都能存取、且擋著 2FA 的網頁後台。文章先從選型講起:為什麼不為了換而換上 Postgres、如何在 sqlite-web、Adminer、Beekeeper、CloudBeaver 之間繞了一圈才落在 Outerbase Studio,以及對外閘門為何捨 Cloudflare Tunnel 而自架 Authelia。接著逐一拆解建置時的坑:官方 Docker image 讀不了本地檔(只有 npm CLI 能)、ATTACH 看得到資料卻看不到表、WAL 模式無法唯讀掛載(最後靠「主檔唯讀、目錄可…",
+  "content": "這篇文章記錄了作者如何把散落在 homelab 各處的資料庫——六個分屬部落格、n8n、Uptime Kuma、3x-ui、Jarvis、NAS 的 SQLite,外加一個 MongoDB——整合成一個從任何地方都能存取、且擋著 2FA 的網頁後台。文章先從選型講起:為什麼不為了換而換上 Postgres、如何在 sqlite-web、Adminer、Beekeeper、CloudBeaver 之間繞了一圈才落在 Outerbase Studio,以及對外閘門為何捨 Cloudflare Tunnel 而自架 Authelia。接著逐一拆解建置時的坑:官方 Docker image 讀不了本地檔(只有 npm CLI 能)、ATTACH 看得到資料卻看不到表、WAL 模式無法唯讀掛載(最後靠「主檔唯讀、目錄可寫」兩行解決)、libSQL 與標準 SQLite 併發寫入的實測、容器連不到 host 上的 mongod、以及 Service Worker 把資料庫子網域劫持成部落格的鬼打牆。最後用 Authelia 的 forward-auth 把整批服務罩在同一道 2FA 之後,並反思這些坑沒一個真的難——難的是太早把「容器起來了、回 200」當成「做完了」。",
+  "image": null,
+  "publishedAt": "2026-06-17T15:10:23Z",
+  "sourceId": "bd51496b8ec0ca1d",
+  "sourceTitle": "Koimsurai 手記",
+  "link": "https://koimsurai.com/blog/a-locked-window-for-my-scattered-databases"
+}

@@ -1,0 +1,11 @@
+{
+  "id": "cafadb7b7a2147f0791c1018",
+  "title": "把 NLLB 翻譯接進 Rust,在 Windows 上撞穿整條工具鏈：ct2rs × CTranslate2 的 protobuf 撞名、CRT 之爭、關閉死鎖與 NVIDIA 崩潰",
+  "summary": "這篇文章記錄了作者把一個離線 NLLB 翻譯功能從 Python 搬進 Rust、透過 ct2rs 接 CTranslate2 時,在 Windows/MSVC 上接連撞到的三面牆與各自的根因與修法。第一面是「連不起來」:sentencepiece 與 sherpa-onnx 各自靜態內嵌一份 protobuf,在 MSVC 下撞出 204 個 LNK2005——最乾淨的解不是 /FORCE:MULTIPLE 或 sidecar,而是直接關掉 sentencepiece feature、改用純 Rust 的 tokenizers,讓那份 protobuf 從依賴圖消失。第二面是 CRT 之爭:ct2rs 把 CTranslate2 編成 /MT、Rust std 卻是 /MD,靠 .cargo/config.…",
+  "content": "這篇文章記錄了作者把一個離線 NLLB 翻譯功能從 Python 搬進 Rust、透過 ct2rs 接 CTranslate2 時,在 Windows/MSVC 上接連撞到的三面牆與各自的根因與修法。第一面是「連不起來」:sentencepiece 與 sherpa-onnx 各自靜態內嵌一份 protobuf,在 MSVC 下撞出 204 個 LNK2005——最乾淨的解不是 /FORCE:MULTIPLE 或 sidecar,而是直接關掉 sentencepiece feature、改用純 Rust 的 tokenizers,讓那份 protobuf 從依賴圖消失。第二面是 CRT 之爭:ct2rs 把 CTranslate2 編成 /MT、Rust std 卻是 /MD,靠 .cargo/config.toml 的 +crt-static 統一,並釐清這其實是與預編 /MT 的 sherpa 對齊的唯一正確解,不是有風險的回歸。第三面是一個躺了兩年的關閉死鎖——thread_local 的 ruy::Context 在 Windows loader lock 底下、於執行緒結束時去 join Ruy 執行緒池而卡死,最終把銷毀提前到 finalize() 手動進行,一次解掉死鎖與洩漏(RSS 從 4371 壓回 19 MB,CUDA 的 VRAM 洩漏同樣被堵住)。最後還意外抓到一個 NVIDIA 驅動 bug:CUDA 版在沒有可用 GPU 的機器上翻譯後隨機崩潰,根因是 nvdxgdmal64.dll 卸載後遺留的 thread-pool callback 打到已卸載位址,以 12 行純 C 重現證實是驅動問題,並用 PIN 住 DLL 的手法擋下。全篇也反思了驗證假設、以及誠實收回一個查證不足的「已知 bug」宣稱。",
+  "image": null,
+  "publishedAt": "2026-07-21T11:19:57Z",
+  "sourceId": "bd51496b8ec0ca1d",
+  "sourceTitle": "Koimsurai 手記",
+  "link": "https://koimsurai.com/blog/wiring-nllb-translation-into-rust-and-breaking-through"
+}

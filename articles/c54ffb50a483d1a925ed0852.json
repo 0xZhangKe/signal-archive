@@ -1,0 +1,11 @@
+{
+  "id": "c54ffb50a483d1a925ed0852",
+  "title": "Hugo 的頁面 Type",
+  "summary": "新版的 Hugo 對某些定義變得很嚴格，只要條件不滿足，就不會渲染、生成到 Public 中。 這次更新，除了 code 語法不定義會讓我主題無法渲染 ，而 歷史上的今天 因爲沒定義頁面 type，也造成無法正常渲染。 原始檔案與路徑 # 頁面位置在： content/on-this-day.md title: \"歷史上的今天\" layout: \"on-this-day\" 排版位置在： themes/classic/layouts/page/on-this-day.html 這次問題就就在於，以前的 Hugo 會依序在好幾個地方尋找指定的 layout: \"on-this-day\" ，而且 Eddie 很久之前就是有研究過官方 docs，結論是好幾個地方可以放，所以 Eddie 沒去記憶，就隨便丟，讓 hug…",
+  "content": "<p>新版的 Hugo 對某些定義變得很嚴格，只要條件不滿足，就不會渲染、生成到 Public 中。</p>\n<p>這次更新，除了 <a href=\"https://eddielv.com/musings/hugo-update-sos/\" target=\"_blank\" rel=\"noopener noreferrer\">code 語法不定義會讓我主題無法渲染</a>，而<a href=\"https://blog.gtisland.com/musings/on-this-day/\" target=\"_blank\" rel=\"noopener noreferrer\">歷史上的今天</a>因爲沒定義頁面 type，也造成無法正常渲染。</p>\n<h3>\n  原始檔案與路徑\n  <a target=\"_blank\" rel=\"noopener noreferrer\"> #</a>\n</h3>\n\n<p>頁面位置在：<code>content/on-this-day.md</code></p>\n<div><pre><code><span><span>\n</span></span><span><span>title: &quot;歷史上的今天&quot;\n</span></span><span><span>layout: &quot;on-this-day&quot;\n</span></span></code></pre></div><p>排版位置在：<code>themes/classic/layouts/page/on-this-day.html</code></p>\n<p>這次問題就就在於，以前的 Hugo 會依序在好幾個地方尋找指定的 <code>layout: &quot;on-this-day&quot;</code> ，而且 Eddie 很久之前就是有研究過官方 docs，結論是好幾個地方可以放，所以 Eddie 沒去記憶，就隨便丟，讓 hugo 自己找。</p>\n<h3>\n  現在的 Hugo\n  <a target=\"_blank\" rel=\"noopener noreferrer\"> #</a>\n</h3>\n\n<p>現在的 Hugo 則不能隨便丟了。</p>\n<p>如果頁面是：</p>\n<div><pre><code><span><span>title: &quot;歷史上的今天&quot;\n</span></span><span><span>layout: &quot;on-this-day&quot;\n</span></span></code></pre></div><p>那 layout 位置必須在 <code>themes/classic/layouts/on-this-day/single.html</code></p>\n<p>又或者是，定義 type：</p>\n<div><pre><code><span><span>title: &quot;歷史上的今天&quot;\n</span></span><span><span>layout: &quot;on-this-day&quot;\n</span></span><span><span>type: &quot;page&quot;\n</span></span></code></pre></div><p>那 layout 位置必須在 <code>themes/classic/layouts/page/on-this-day.html</code></p>\n<p>備註：也可以直接放在專案的 layouts 下，hugo 會依序檢查兩個地方。</p>",
+  "image": null,
+  "publishedAt": "2026-01-03T18:26:50Z",
+  "sourceId": "199cdf92fc46bfcd",
+  "sourceTitle": "Eddie Lv",
+  "link": "https://eddielv.com/articles/hugo-type/"
+}

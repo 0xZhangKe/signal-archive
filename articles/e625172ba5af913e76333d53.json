@@ -1,0 +1,11 @@
+{
+  "id": "e625172ba5af913e76333d53",
+  "title": "部落格文章渲染策略: 從 CSR 空殼、SSG／ISR,到會 eval 的 MDX 與首幀不再閃",
+  "summary": "這篇記錄了作者把 koimsurai.com 的部落格,從一個 100% CSR 的 React SPA(真人只拿到空殼、爬蟲靠 user-agent 硬塞 meta)一路改造成 SSG／ISR 的完整渲染策略與踩坑。從選型談起——為什麼是 SSG hybrid、為什麼評估過 Next 卻選了 TanStack Start(RR7 差點雀屏中選,被一句「我想要 ISR」翻盤);接著是實作:內文烤進 HTML、重互動留 client、MDX 走 server 編譯加 client eval(一條之後想改成 dynamic-import ESM 來拿掉的路);再到 prerender 生了 111 個檔卻一個都沒被送出、於是改走純 ISR,用 Rust middleware 做發文即刷新(還差點被瀏覽計數端點清光…",
+  "content": "這篇記錄了作者把 koimsurai.com 的部落格,從一個 100% CSR 的 React SPA(真人只拿到空殼、爬蟲靠 user-agent 硬塞 meta)一路改造成 SSG／ISR 的完整渲染策略與踩坑。從選型談起——為什麼是 SSG hybrid、為什麼評估過 Next 卻選了 TanStack Start(RR7 差點雀屏中選,被一句「我想要 ISR」翻盤);接著是實作:內文烤進 HTML、重互動留 client、MDX 走 server 編譯加 client eval(一條之後想改成 dynamic-import ESM 來拿掉的路);再到 prerender 生了 111 個檔卻一個都沒被送出、於是改走純 ISR,用 Rust middleware 做發文即刷新(還差點被瀏覽計數端點清光全站快取);最後是進場體驗的除錯長征:無樣式閃爍、雙渲染、被捲動平滑握住的捲動,以及一個被自己按住重想才翻出的錯誤診斷。全篇也一併科普了 SSR、SSG、CSR、ISR、hydration 各是什麼。",
+  "image": null,
+  "publishedAt": "2026-07-24T19:25:16Z",
+  "sourceId": "bd51496b8ec0ca1d",
+  "sourceTitle": "Koimsurai 手記",
+  "link": "https://koimsurai.com/blog/blog-post-rendering-strategy"
+}

@@ -1,0 +1,11 @@
+{
+  "id": "ac1585ca1d78aee9c2f857b6",
+  "title": "不囉唆的文字移調器",
+  "summary": "請到 NiceChord.com/transpose 開始使用。",
+  "content": "<div><div>不囉唆，直接開始用！</div><div><p>請到 <a href=\"https://nicechord.com/transpose/\" target=\"_blank\" rel=\"noopener noreferrer\">NiceChord.com/transpose</a> 開始使用。</p></div></div>\n<p>這個工具其實已經發表在<a href=\"https://nicechord.com/\" target=\"_blank\" rel=\"noopener noreferrer\">好和弦官網 NiceChord.com</a> 好一陣子了，但我還沒在這裡提過。</p>\n<p>不曉得有多少人跟我一樣，常常用純文字來記錄音樂想法？比如說，在 <a href=\"https://wiwi.blog/blog/why-use-markdown\" target=\"_blank\" rel=\"noopener noreferrer\">Markdown 檔案</a>裡面直接這樣寫和弦表：</p>\n<div><div><pre><code><div><span>Cmaj7 | Am7 | Fmaj7 | G9sus | C(add2) ||</span><br></div></code></pre></div></div>\n<p>用純文字記和弦，寫的時候真的很方便。但是，如果我想把整份和弦表移調怎麼辦？</p>\n<p>MuseScore 之類的打譜軟體，都有內建的移調功能，但純文字檔就沒有。網路上雖然有一些文字移調工具，但它們都爛爛的，介面囉唆複雜、廣告多、跑得慢，而且同音異名的處理常常錯誤，連該轉成 <code>D#</code> 還是 <code>Eb</code> 的邏輯都沒弄對。</p>\n<p>所以我只好自己寫一個了。</p>\n<p><em>（不囉唆的文字移調器，介面超級簡潔，不囉唆！）</em></p>\n<p><img src=\"https://wiwi.blog/assets/images/trans-a87cc67ddee0eb522c11f25c58ebbdea.png\" width=\"299\" height=\"489\"></p>\n<p>程式的邏輯很簡單：用正規表達式掃描整個文字，找到任何「大寫字母 A-G + 可能的升降記號」的組合，把它移調，然後其他字元完全不動。就這樣。</p>\n<p><strong>但重要的是，這個移調器是受過（我的）<a href=\"https://wiwi.blog/blog/no-theory-needed\" target=\"_blank\" rel=\"noopener noreferrer\">樂理教育</a>的，它在乎所謂「正確」的音名，而不僅僅是琴鍵上的位置</strong>！舉幾個例，你就知道它跟那些<a href=\"https://wiwi.blog/blog/loveless-content\" target=\"_blank\" rel=\"noopener noreferrer\">沒有愛</a>的工具是不一樣的：</p>\n<ul>\n<li>把 <code>C#</code> 移高大三度，會得到 <code>E#</code> 而不是錯誤的 <code>F</code></li>\n<li>把 <code>D#</code> 移高增四度，會得到 <code>G##</code> 而不是錯誤的 <code>A</code></li>\n<li>把 <code>Cmaj7 | Am7 | Fmaj7 | Dbmaj7</code> 移高完全四度，會得到 <code>Fmaj7 | Dm7 | Bbmaj7 | Gbmaj7</code>，注意它不會把 <code>Bb Gb</code> 誤寫成 <code>A# F#</code></li>\n</ul>\n<p>如果你也像我一樣喜歡用純文字寫音名或和弦代號，而且是看到 <code>E#</code> 被寫成 <code>F</code> 就會抓狂的那種人，這個不囉唆的移調器，就是你一直以來在找的東西！</p>\n<p>到 <a href=\"https://nicechord.com/transpose/\" target=\"_blank\" rel=\"noopener noreferrer\">NiceChord.com/transpose</a> 就可以直接使用，歡迎把它加到書籤！</p>",
+  "image": "https://wiwi.blog/assets/images/trans-a87cc67ddee0eb522c11f25c58ebbdea.png",
+  "publishedAt": "2026-01-23T06:00:00Z",
+  "sourceId": "7f36c3da1e6b5c71",
+  "sourceTitle": "Wiwi.Blog Blog",
+  "link": "https://wiwi.blog/blog/text-transposer"
+}

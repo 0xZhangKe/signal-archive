@@ -1,0 +1,11 @@
+{
+  "id": "40e5d01baae95b3feff00181",
+  "title": "VP9 編碼是啥？",
+  "summary": "前言 # 在 假拉琴 一文中，Eddie 上傳了影片，用電腦測試播放沒問題就沒再管那篇文章了，直到樂手跟我要網址，才發現在 iPhone 上是無法播放的。 debug # 尋找原因，macOS、Linux 都可以正常播放，就 iPhone 不行。後來瞭解原因是因爲從 IG 下載的影片編碼會是 VP9，而非 H264、H265 等等，而 iPhone 硬體不支援 VP9，瀏覽器也不支援用軟體解碼，因此無法播放，將影片轉爲 H264 重新上傳就可以從手機端播放了。 電腦爲何可以放？ # m2 mac 是可以硬體解碼 VP9 的，而 2015 macbook 就不支援，是依靠軟體解碼，基本上瀏覽器現在都能正常播放。 編碼到底是什麼？ # H264、H265、VP9、AV1 等等是編碼方式，可以簡單理解成「壓縮影片的…",
+  "content": "<h2>\n  前言\n  <a target=\"_blank\" rel=\"noopener noreferrer\"> #</a>\n</h2>\n\n<p>在 <a href=\"https://eddielv.com/musings/fake-play/\" target=\"_blank\" rel=\"noopener noreferrer\">假拉琴</a>一文中，Eddie 上傳了影片，用電腦測試播放沒問題就沒再管那篇文章了，直到樂手跟我要網址，才發現在 iPhone 上是無法播放的。</p>\n<h2>\n  debug\n  <a target=\"_blank\" rel=\"noopener noreferrer\"> #</a>\n</h2>\n\n<p>尋找原因，macOS、Linux 都可以正常播放，就 iPhone 不行。後來瞭解原因是因爲從 IG 下載的影片編碼會是 VP9，而非 H264、H265 等等，而 iPhone 硬體不支援 VP9，瀏覽器也不支援用軟體解碼，因此無法播放，將影片轉爲 H264 重新上傳就可以從手機端播放了。</p>\n<h2>\n  電腦爲何可以放？\n  <a target=\"_blank\" rel=\"noopener noreferrer\"> #</a>\n</h2>\n\n<p>m2 mac 是可以硬體解碼 VP9 的，而 2015 macbook 就不支援，是依靠軟體解碼，基本上瀏覽器現在都能正常播放。</p>\n<h2>\n  編碼到底是什麼？\n  <a target=\"_blank\" rel=\"noopener noreferrer\"> #</a>\n</h2>\n\n<p>H264、H265、VP9、AV1 等等是編碼方式，可以簡單理解成「壓縮影片的方式」，硬體解碼就是用「GPU」來解碼，軟體解碼就是「CPU」解碼。</p>\n<p>H265 是 H264 的進化版本，檔案變得更小，但對於電腦算力要求也提高，攝影機拍攝的格式就是這兩種。</p>\n<p>AV1 是 VP9 的進化版本。這兩種是 Goole 公司所推出的編碼方式，主要用於串流（Youtube）。</p>\n<p>蘋果公司的 M 系列晶片的 GPU 已經全面支援這四種格式，因此用 Mac 看影片、剪影片是非常省電又快速的；但手機端 iOS 的 Safari 瀏覽器沒支援 VP9/AV1，甚至連軟體解碼都不行。</p>\n<h2>\n  要用哪一種編碼\n  <a target=\"_blank\" rel=\"noopener noreferrer\"> #</a>\n</h2>\n\n<p>對於創作者而言，一定是選擇 H264/H265 才方便管理，因爲相機拍出來就是這兩種，上傳各大平臺後，平臺要轉成 AV1/VP9 就不是我們能控制的了。</p>\n<h3>\n  那要用 H264 還是 H265？\n  <a target=\"_blank\" rel=\"noopener noreferrer\"> #</a>\n</h3>\n\n<p>2017 年以後的設備，幾乎全面支援硬體解碼 H265 了，也就是說用 8 年前的裝置都是綽綽有餘。</p>\n<p>至於軟體解碼，Eddie 使用 2015 mac 播放本地的 1080p 軟體，就已經讓電腦滿載了，偶爾還會有掉幀的情況。</p>\n<p>但如果看 Youtube 等等串流平臺其實不用擔心，因爲平臺會依照設備轉換成適合的編碼模式，串流平臺在創作者上傳影片後，就會開始轉檔各種編碼的檔案了。</p>",
+  "image": null,
+  "publishedAt": "2025-10-10T19:18:39Z",
+  "sourceId": "199cdf92fc46bfcd",
+  "sourceTitle": "Eddie Lv",
+  "link": "https://eddielv.com/articles/vp9/"
+}

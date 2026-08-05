@@ -1,0 +1,246 @@
+{
+  "items": [
+    {
+      "id": "c7d9a63d6131e0fda0c36b78",
+      "title": "為什麼我開始使用 Zed 編輯器：從 VS Code 搬家,23 個擴充最後剩 8 個",
+      "summary": "Zed 團隊的上一個作品是 Atom,而 Atom 催生的 Electron 後來成了 VS Code 的地基。這篇記錄作者從 VS Code Remote-SSH 搬到 Zed 的完整過程:本機端 4,067 MB 對 204 MB、伺服器端 7.9 GB 對 107 MB,23 個擴充搬完只剩 8 個。內容涵蓋官方的設定匯入路徑與鍵位差異、有 GUI 的設定視窗與專案層級設定的限制、遠端開發的實測,以及 ACP 怎麼把 AI agent 從編輯器裡拆出來。文末誠實列出 Zed 目前還缺的功能,以及為什麼作者認為那份清單的保鮮期很短。",
+      "image": null,
+      "publishedAt": "2026-08-04T09:37:31Z",
+      "sourceId": "bd51496b8ec0ca1d",
+      "sourceTitle": "Koimsurai 手記",
+      "link": "https://koimsurai.com/blog/why-i-switched-to-zed",
+      "detailPath": "articles/c7d9a63d6131e0fda0c36b78.json"
+    },
+    {
+      "id": "dfd057d97b089ea3ea4727b8",
+      "title": "VS Code Remote-SSH 把我的伺服器燒到 96°C：rust-analyzer 無限重跑 cargo check",
+      "summary": "一台跑著三十幾個容器、同時被 VS Code Remote-SSH 連進去開發的家用伺服器,溫度釘在 90°C 撐了四十分鐘、load 從 8 衝到 196,最後失去回應。而把它燒掉的不是那些服務,是編輯器。這篇記錄整個追查過程:三條看起來很有說服力但都是錯的線索(SMU 當掉後感測器說謊、重開機就好、CPU 只有 30 到 50%),怎麼用 sysstat 的 sar 和 netdata 的 apps.plugin 回溯一個已經結束的事件,以及最後抓到的三個兇手——rust-analyzer 對一個 GTK 依賴全缺、永遠編不過的 Tauri 專案無限重跑 cargo check、Foam 擴充讓 ripgrep 開出兩百多個行程、還有只是雜訊的 RustDesk 輪詢。文末附上防線設定與事後補的兩道保險。",
+      "image": null,
+      "publishedAt": "2026-08-04T07:16:25Z",
+      "sourceId": "bd51496b8ec0ca1d",
+      "sourceTitle": "Koimsurai 手記",
+      "link": "https://koimsurai.com/blog/vscode-remote-ssh-burned-my-server",
+      "detailPath": "articles/dfd057d97b089ea3ea4727b8.json"
+    },
+    {
+      "id": "e245c20e3b085fa39d59c30e",
+      "title": "UPS 加 NUT 讓伺服器斷電自動關機：設定全紀錄,和一條被貓咬過的電源線",
+      "summary": "這篇把 UPS 加 NUT 的完整設定寫成一份可照做的教學:UPS 選型的三個條件(PFC 純正弦波、AVR、NUT 支援)、NUT 的 driver / upsd / upsmon 三層架構與五個設定檔各管什麼、upsmon.conf 逐行說明、POWERDOWNFLAG 為什麼不能漏,以及 BIOS 那個選錯就前功盡棄的選項——Restore after AC Power Loss 必須是 On 而不是 Last State,因為 NUT 乾淨關機後機器的狀態就是關機。另外收錄把 UPS 狀態接到 cron log、Discord 通知與自架面板的做法。而這一切的起點是搬家後伺服器每天半夜硬斷電:線鬆、共用迴路、過熱、PSU 全試過,但那些都只是猜測。作者買 UPS 一半是為了保護、一半是把它當量測儀器用…",
+      "image": null,
+      "publishedAt": "2026-08-04T06:03:43Z",
+      "sourceId": "bd51496b8ec0ca1d",
+      "sourceTitle": "Koimsurai 手記",
+      "link": "https://koimsurai.com/blog/ups-nut-and-the-cable-the-cat-chewed",
+      "detailPath": "articles/e245c20e3b085fa39d59c30e.json"
+    },
+    {
+      "id": "947a7d7182184272980ae406",
+      "title": "CrowdSec 取代 fail2ban：六天擋下 1619 次掃描,和我把自己封鎖的三次",
+      "summary": "這篇記錄了作者把伺服器防護從 fail2ban 換成 CrowdSec 的完整過程,並整理成一份可照做的教學。起因不是被入侵而是被吵:掃描器整天敲 /wp-login.php、/.env,把監控通知洗版。當時 fail2ban 已封過 614 個 IP,但作者發現對手一直在換 IP,封 IP 這條路贏不了——後來的數據也證實了這點,攻擊來源前七名幾乎全是 Azure、DigitalOcean、阿里雲這類雲端機房,開一台新 VM 比封一個 IP 便宜得多。文中給出這台機器六天內的真實數字:1619 次攻擊偵測、防火牆同時擋著 25.22k 個 IP,其中社群黑名單提供的數量是自己抓到的三千倍。架設踩到的三個坑是同一條因果鏈(apt 從 ESM 拿到上古版本 → 跨版本升級把 hub 搬家 → symlink 全…",
+      "image": null,
+      "publishedAt": "2026-08-03T01:47:12Z",
+      "sourceId": "bd51496b8ec0ca1d",
+      "sourceTitle": "Koimsurai 手記",
+      "link": "https://koimsurai.com/blog/crowdsec-replacing-fail2ban",
+      "detailPath": "articles/947a7d7182184272980ae406.json"
+    },
+    {
+      "id": "722283639e96f365f5a9c515",
+      "title": "跟另一個站長互相監控：Uptime Kuma 交叉託管,和 Trust Proxy 開了反而更危險",
+      "summary": "這篇記錄了作者跟另一位自架站長交叉監控的完整過程,並整理成一份可照做的教學。起點是自架服務的一個尷尬處境:監控自己的那台機器,自己掛了就沒人通知得了。解法是互相盯,但一開始兩人都卡在同一個錯誤前提上——以為要走 HTTPS 就得交換憑證。真正的答案是不用交換:對方把子網域 A 紀錄指向你的 IP,TLS 就在你這裡終結,Let's Encrypt 的 HTTP-01 驗證會直接打到你的 nginx,所以你自己就能簽那張憑證、還自動續簽;共享 wildcard 反而踩中私鑰暴露與手動續簽兩個雷。文中也整理了反代 Kuma 必備的 WebSocket 設定(少了 Upgrade 標頭,即時圖表會完全不動)、給後端加公開 /health 而非用 401 取巧、用 push 型監控盯 cron 腳本這種沉默故障,以及…",
+      "image": null,
+      "publishedAt": "2026-07-31T06:00:43Z",
+      "sourceId": "bd51496b8ec0ca1d",
+      "sourceTitle": "Koimsurai 手記",
+      "link": "https://koimsurai.com/blog/uptime-kuma-cross-monitoring",
+      "detailPath": "articles/722283639e96f365f5a9c515.json"
+    },
+    {
+      "id": "c74361bcb1c533ceb0217fd2",
+      "title": "幫朋友架一台幻獸帕魯專用伺服器：Docker 自架,和最容易卡關的 UDP 連線",
+      "summary": "這篇記錄了作者幫朋友用 Docker 在自己 24/7 的家用機上架設幻獸帕魯(Palworld)專用伺服器的完整過程,整理成一份能照做的教學。緣起是朋友原本用 Radmin VPN 連線,但那類 P2P 服務穿不過 NAT 就會退回中繼、流量繞經第三方,作者索性用自己的常開主機自架。文章先破除一個迷思:主機商規格頁清一色寫「16GB 起」,但小團隊日常很省,作者實測 3~5 人約 1.2GB;真正要防的是 Palworld 知名的記憶體洩漏,靠容器 mem_limit + 每日重啟壓住即可。接著給出一份去蕪存菁的 docker-compose(port 記得加 /udp、RCON 綁 127.0.0.1),把架好之後最卡人的 UDP 連線三關逐一走通:ufw 放行 udp、路由器 port forwardi…",
+      "image": null,
+      "publishedAt": "2026-07-29T04:19:24Z",
+      "sourceId": "bd51496b8ec0ca1d",
+      "sourceTitle": "Koimsurai 手記",
+      "link": "https://koimsurai.com/blog/palworld-dedicated-server-docker",
+      "detailPath": "articles/c74361bcb1c533ceb0217fd2.json"
+    },
+    {
+      "id": "254920d3cdfc0ab801e92948",
+      "title": "Linux 伺服器被植入挖礦程式：從 load average 10.65 揪出整條攻擊鏈",
+      "summary": "這篇記錄了作者在一次例行效能健檢中,意外撞見自己家用伺服器被植入挖礦程式的完整抓賊過程,並整理成一份人人可照做的可疑進程自檢清單。起點是一個不該出現的數字:一台 16 執行緒的機器 load average 卻卡在 10.65。作者用 top 與 docker stats 揪出一個吃滿 10 核、隨機大小寫檔名的可疑程序,再靠 Linux 的 /proc 三件套(exe 指向已刪除的 /tmp 檔、cmdline、environ 溯源到某個 Docker 容器)確認它是挖礦程式,並把攻擊鏈拉出來:一個 port 直接綁在 0.0.0.0、繞過 nginx 對外裸露的 Next.js 容器,被 CVE-2025-66478(Next.js 16.0.6 的滿分 RCE、綽號 React2Shell)打穿。文中含…",
+      "image": null,
+      "publishedAt": "2026-07-28T16:55:03Z",
+      "sourceId": "bd51496b8ec0ca1d",
+      "sourceTitle": "Koimsurai 手記",
+      "link": "https://koimsurai.com/blog/catching-a-cryptominer",
+      "detailPath": "articles/254920d3cdfc0ab801e92948.json"
+    },
+    {
+      "id": "b208be6d392cd0c79e674bb0",
+      "title": "暫借半年的呼嚕聲: 一隻不屬於我的貓,和牠留在被窩裡的味道",
+      "summary": "這篇記錄了作者高三那年與一隻名叫牛奶的賓士貓相處的半年。牠是同學在大雨的夜裡從路邊撿到的,家裡不允許收留,於是託給了從小就想養貓的作者,說好三個月,最後住了半年。文章從家裡的態度寫起:媽媽也愛貓卻始終不養,外婆則說自己討厭貓、理由多得可疑——但作者後來才拼湊出,外婆討厭的其實不是貓,而是「經歷離開」這件事,二十年前那隻叫小黃的家犬是車禍走的。那半年正好是作者最不安的時期:身體不好、對人際敏感、對未來迷茫,又碰上 COVID 把所有人關在家裡。而牛奶第一天就把那裡當自己家,一叫名字就會出現,身上帶著貓草的香味;某個下午作者被另一位同學的電話罵到哭,牠走過來舔了兩下手,就在旁邊靜靜待了半個小時。半年後貓被裝進當初帶牠來的那個小包包接走,門關上的瞬間四周安靜下來,作者沒有哭也沒有笑,只有感慨——因為打從第一天他就知…",
+      "image": null,
+      "publishedAt": "2026-07-26T16:53:04Z",
+      "sourceId": "bd51496b8ec0ca1d",
+      "sourceTitle": "Koimsurai 手記",
+      "link": "https://koimsurai.com/blog/milk-the-cat",
+      "detailPath": "articles/b208be6d392cd0c79e674bb0.json"
+    },
+    {
+      "id": "e625172ba5af913e76333d53",
+      "title": "部落格文章渲染策略: 從 CSR 空殼、SSG／ISR,到會 eval 的 MDX 與首幀不再閃",
+      "summary": "這篇記錄了作者把 koimsurai.com 的部落格,從一個 100% CSR 的 React SPA(真人只拿到空殼、爬蟲靠 user-agent 硬塞 meta)一路改造成 SSG／ISR 的完整渲染策略與踩坑。從選型談起——為什麼是 SSG hybrid、為什麼評估過 Next 卻選了 TanStack Start(RR7 差點雀屏中選,被一句「我想要 ISR」翻盤);接著是實作:內文烤進 HTML、重互動留 client、MDX 走 server 編譯加 client eval(一條之後想改成 dynamic-import ESM 來拿掉的路);再到 prerender 生了 111 個檔卻一個都沒被送出、於是改走純 ISR,用 Rust middleware 做發文即刷新(還差點被瀏覽計數端點清光…",
+      "image": null,
+      "publishedAt": "2026-07-24T19:25:16Z",
+      "sourceId": "bd51496b8ec0ca1d",
+      "sourceTitle": "Koimsurai 手記",
+      "link": "https://koimsurai.com/blog/blog-post-rendering-strategy",
+      "detailPath": "articles/e625172ba5af913e76333d53.json"
+    },
+    {
+      "id": "af719e9a878bb22e010d72e0",
+      "title": "3D 星空背景效能長征：OffscreenCanvas Worker → WebGPU/TSL 重寫",
+      "summary": "這篇記錄了作者為個人網站 koimsurai.com 那片 3D 星空背景走過的三階段效能長征。背景最初只是一堆各自為政的 three.js 裝飾特效——黑洞、粒子、星空、土星——東西還少時並不重,是愈疊愈多、真正拿去量之後才逐步走上優化:先把星空搬進 OffscreenCanvas Worker 讓渲染離開主執行緒(桌面 TBT 從 17 秒壓到 30 毫秒),再被朋友一台會白屏的機器逼著補上背景的穩健性,最後用瀏覽器最新的 WebGPU/TSL 把整套從頭重寫成單一 canvas——GPU 從 85–90% 砍到 25%、星星翻到 26,000 顆全在 shader 裡呼吸。文中一併科普 WebGPU 到底是什麼,並記下一個反覆翻案的判斷:「效能優化」和「品質升級」是兩本不同的帳,換掉目標函數,結論就翻。",
+      "image": null,
+      "publishedAt": "2026-07-24T02:49:17Z",
+      "sourceId": "bd51496b8ec0ca1d",
+      "sourceTitle": "Koimsurai 手記",
+      "link": "https://koimsurai.com/blog/the-3d-starfield-performance-march",
+      "detailPath": "articles/af719e9a878bb22e010d72e0.json"
+    },
+    {
+      "id": "9e904423421124e652f69c0d",
+      "title": "幫巴哈動畫瘋寫一個沒人寫過的 SDK: 逆向 API、自我掏空的 cookie,與讀不到的 HttpOnly",
+      "summary": "為了讓部落格那頁「在看什麼」能顯示我真實的動畫瘋觀看紀錄,我一路從逆向巴哈的 history API,做成一個開源的 npm SDK `anigamer`。這篇記錄整條坑:七顆 cookie 裡哪顆才是關鍵、封面藏在 og:image 的隨機 hash、每部動畫只顯示一集的 nested history bug,以及最精彩的——巴哈用「HTTP 200 藏 401」的軟錯誤加上一顆 `BAHARUNE=deleted` 的假 cookie,把我自己的 rotate 邏輯騙到把帳號掏空、靜默死了三天。後半是為了熱換 cookie 做的一鍵瀏覽器擴充,如何跟讀不到的 HttpOnly cookie 纏鬥、最後用 CDP 偵錯介面破關,再到發上 npm 的 2FA 大冒險與後端遷 Rust 後的 crates.io…",
+      "image": null,
+      "publishedAt": "2026-07-23T15:41:46Z",
+      "sourceId": "bd51496b8ec0ca1d",
+      "sourceTitle": "Koimsurai 手記",
+      "link": "https://koimsurai.com/blog/writing-the-anigamer-sdk-nobody-made",
+      "detailPath": "articles/9e904423421124e652f69c0d.json"
+    },
+    {
+      "id": "b5211448a1a599df6ecff597",
+      "title": "打造一頁會自己更新的「在看什麼」：動畫瘋 × Trakt × TMDb 的觀影紀錄整合",
+      "summary": "這篇文章記錄了作者為個人網站打造一頁「在看什麼」即時觀影展示頁的完整過程,以及沿路的層層踩坑。因為觀看紀錄散在 Netflix、Disney+、HBO、動畫瘋等一堆平台、而多半又用 app 或電視看,作者先花了一輪功夫在選型——評估過 Trakt、Letterboxd、MyAnimeList、AniList、Plex、各家 GDPR 匯出等十來個工具,最後收斂成「動畫走自造 SDK、影視走 Trakt、Netflix CSV 當歷史底、連結全 TMDb」。由於市面上沒有任何 user-facing 的動畫瘋 API client,作者索性逆向巴哈、開源了一個名為 anigamer 的 npm SDK(另有 Rust 版),並做了一個一鍵推送 cookie 的瀏覽器擴充。資料到齊後,真正反覆翻車的卻是「海報」:…",
+      "image": null,
+      "publishedAt": "2026-07-22T15:34:57Z",
+      "sourceId": "bd51496b8ec0ca1d",
+      "sourceTitle": "Koimsurai 手記",
+      "link": "https://koimsurai.com/blog/building-a-self-updating-what-am-i-watching",
+      "detailPath": "articles/b5211448a1a599df6ecff597.json"
+    },
+    {
+      "id": "cafadb7b7a2147f0791c1018",
+      "title": "把 NLLB 翻譯接進 Rust,在 Windows 上撞穿整條工具鏈：ct2rs × CTranslate2 的 protobuf 撞名、CRT 之爭、關閉死鎖與 NVIDIA 崩潰",
+      "summary": "這篇文章記錄了作者把一個離線 NLLB 翻譯功能從 Python 搬進 Rust、透過 ct2rs 接 CTranslate2 時,在 Windows/MSVC 上接連撞到的三面牆與各自的根因與修法。第一面是「連不起來」:sentencepiece 與 sherpa-onnx 各自靜態內嵌一份 protobuf,在 MSVC 下撞出 204 個 LNK2005——最乾淨的解不是 /FORCE:MULTIPLE 或 sidecar,而是直接關掉 sentencepiece feature、改用純 Rust 的 tokenizers,讓那份 protobuf 從依賴圖消失。第二面是 CRT 之爭:ct2rs 把 CTranslate2 編成 /MT、Rust std 卻是 /MD,靠 .cargo/config.…",
+      "image": null,
+      "publishedAt": "2026-07-21T11:19:57Z",
+      "sourceId": "bd51496b8ec0ca1d",
+      "sourceTitle": "Koimsurai 手記",
+      "link": "https://koimsurai.com/blog/wiring-nllb-translation-into-rust-and-breaking-through",
+      "detailPath": "articles/cafadb7b7a2147f0791c1018.json"
+    },
+    {
+      "id": "0e4fd47e4d3f209991428712",
+      "title": "替散落的資料庫,開一扇上了鎖的窗：Outerbase × Mongoku × Authelia,自架 2FA 唯讀資料庫後台",
+      "summary": "這篇文章記錄了作者如何把散落在 homelab 各處的資料庫——六個分屬部落格、n8n、Uptime Kuma、3x-ui、Jarvis、NAS 的 SQLite,外加一個 MongoDB——整合成一個從任何地方都能存取、且擋著 2FA 的網頁後台。文章先從選型講起:為什麼不為了換而換上 Postgres、如何在 sqlite-web、Adminer、Beekeeper、CloudBeaver 之間繞了一圈才落在 Outerbase Studio,以及對外閘門為何捨 Cloudflare Tunnel 而自架 Authelia。接著逐一拆解建置時的坑:官方 Docker image 讀不了本地檔(只有 npm CLI 能)、ATTACH 看得到資料卻看不到表、WAL 模式無法唯讀掛載(最後靠「主檔唯讀、目錄可…",
+      "image": null,
+      "publishedAt": "2026-06-17T15:10:23Z",
+      "sourceId": "bd51496b8ec0ca1d",
+      "sourceTitle": "Koimsurai 手記",
+      "link": "https://koimsurai.com/blog/a-locked-window-for-my-scattered-databases",
+      "detailPath": "articles/0e4fd47e4d3f209991428712.json"
+    },
+    {
+      "id": "05b79728adca5e6a2b858d29",
+      "title": "想做一個 tool-calling 修復 proxy,結果 benchmark 親手殺死了這個點子",
+      "summary": "這篇文章記錄了作者在嘗試開發一個「tool-calling 修復 proxy」的過程中，如何透過設計一個 benchmark 測試 22 個地端模型的 tool-calling 能力，最終放棄這個創業點子的經歷。測試結果顯示，新一代模型（如 Qwen3.5）已經原生解決了 tool-calling 的問題，修復層對這些模型反而成為干擾，且模型世代的快速進化使得這類修復工具的市場需求迅速萎縮。文章提供了詳細的測試方法、結果分析以及對各模型的具體觀察，並總結出地端模型選擇的實用建議。最後，作者強調了驗證假設的重要性，認為早期的測試能有效避免浪費時間和資源。",
+      "image": null,
+      "publishedAt": "2026-06-13T02:16:14Z",
+      "sourceId": "bd51496b8ec0ca1d",
+      "sourceTitle": "Koimsurai 手記",
+      "link": "https://koimsurai.com/blog/i-wanted-to-build-a-tool-calling-repair",
+      "detailPath": "articles/05b79728adca5e6a2b858d29.json"
+    },
+    {
+      "id": "1cf40616a14b70e4a5c033ab",
+      "title": "把 BlockNote 的 AI 接上地端 Gemma：一場跟 Vercel AI SDK tool-calling 格式的硬仗",
+      "summary": "這篇文章記錄了作者將 BlockNote 官方 AI 套件整合至地端 Gemma 3 27B 模型的完整踩坑與除錯過程。作者在純離線的開發限制下，面對官方套件高度依賴雲端模型 Tool-calling 能力的阻礙，經歷了資料流撞牆與前端假流式的挫折，最終透過讓後端模擬結構化指令（Operation）並直接對接執行器，成功還原了流暢的就地對比體驗。同時，作者也巧妙利用輕量虛擬環境繞過了公司嚴格的 MAC 端點管控，解決了開發迭代受阻的基礎設施痛點。文章穿插了詳實的 Payload 數據排查與各類邊界條件（Edge Cases）的修補細節，展現了在底層原始碼與硬體限制中尋求突破的工程韌性。整體風格務實且邏輯嚴密，反映了開發者在看透框架隱藏假設與模型能力天花板後，依然能精準給出架構妥協與解法的硬派技術精神。",
+      "image": null,
+      "publishedAt": "2026-05-28T02:53:55Z",
+      "sourceId": "bd51496b8ec0ca1d",
+      "sourceTitle": "Koimsurai 手記",
+      "link": "https://koimsurai.com/blog/wiring-blocknotes-ai-to-a-local-gemma",
+      "detailPath": "articles/1cf40616a14b70e4a5c033ab.json"
+    },
+    {
+      "id": "accb75f3cacd6ff34ba6c270",
+      "title": "在失重邊緣的建構與日常的留白",
+      "summary": "這篇文章記錄了一位實習生在四月的忙碌與反思。作者在高壓的工作環境中，負責多項挑戰性任務，包括一個掛名於 CEO 的專案、GitLab 管線的接手，以及與公司體制的磨合。同時，作者也面對母親健康問題的衝擊，首次感受到親密家人倒下的脆弱。文章穿插了對程式開發的熱愛、遊戲《Satisfactory》的放鬆，以及對未來旅行的憧憬，展現了在壓力與倦怠中尋找平衡的努力。整體風格真誠細膩，反映了作者在日常與未來之間的掙扎與成長。",
+      "image": null,
+      "publishedAt": "2026-05-06T12:58:50Z",
+      "sourceId": "bd51496b8ec0ca1d",
+      "sourceTitle": "Koimsurai 手記",
+      "link": "https://koimsurai.com/blog/building-at-the-edge-of-weightlessness",
+      "detailPath": "articles/accb75f3cacd6ff34ba6c270.json"
+    },
+    {
+      "id": "d1d62b8583579551519621e7",
+      "title": "失控裡的秩序",
+      "summary": "文章記錄了作者三月份的生活點滴，從規律作息中的突發事件，到工作與興趣的交織。作者分享了解決體育學分問題的焦慮過程，以及對客製化機械鍵盤的興趣；同時描述了在公司專案中使用 AI 工具（如 Claude Pro）提升生產力的經歷，並探討了 AI 帶來的效率與壓力悖論。此外，作者提到與 IT Infra 對接的困難，研究 GitHub 上新技術的樂趣，以及遊戲與生活中的趣事。最後，停電的夜晚漫步成為一次深刻的反思與交流，為文章增添了一絲哲思。",
+      "image": null,
+      "publishedAt": "2026-04-04T19:06:47Z",
+      "sourceId": "bd51496b8ec0ca1d",
+      "sourceTitle": "Koimsurai 手記",
+      "link": "https://koimsurai.com/blog/order-within-the-chaos",
+      "detailPath": "articles/d1d62b8583579551519621e7.json"
+    },
+    {
+      "id": "bdf63e6eed43d9254015c10f",
+      "title": "PostHog Data Pipeline 本地部署踩坑記: 在 DinD 加上 Caddy 環境的資料同步挑戰",
+      "summary": "這篇文章記錄了作者在本地部署 PostHog Data Pipeline 時的技術挑戰與解決過程。文章詳細描述了在 Docker in Docker (DinD) 和 Caddy 環境下,如何處理 ODBC 驅動憑證問題、微服務間的網路通訊錯誤,以及 Temporal 任務因佇列沒人監聽而卡住的排查過程。作者還分享了如何新增專屬 Worker 處理資料倉儲任務,並用「偽裝」的 AWS 憑證解決 MinIO 相容性問題。整個過程展示了在複雜架構下,從資料同步到資料湖的完整除錯經驗。",
+      "image": null,
+      "publishedAt": "2026-02-24T04:44:45Z",
+      "sourceId": "bd51496b8ec0ca1d",
+      "sourceTitle": "Koimsurai 手記",
+      "link": "https://koimsurai.com/blog/deploying-a-posthog-data-pipeline-locally",
+      "detailPath": "articles/bdf63e6eed43d9254015c10f.json"
+    },
+    {
+      "id": "d8ab96bda0a2e4d6e7f6f6ff",
+      "title": "脫下沉重的鞋帶，化作純粹的風：ヨルシカ《老人と海》帶給我的無盡航程",
+      "summary": "作者以 ヨルシカ《老人と海》為軸，拆解這首歌如何在輕快的夏日編曲底下，藏著海明威筆下老人「一無所獲仍不肯認輸」的執拗。文章逐段對照歌詞與小說，指出真正壓垮人的往往不是事情本身，而是那個名為想像力的重力；並把第三次副歌前的那聲嘆息，讀成積蓄力量的深呼吸而非放棄。全篇以個人的聆聽經驗貫穿，談音樂如何幫人卸下重量、化為純粹的心。",
+      "image": null,
+      "publishedAt": "2026-02-20T16:59:35Z",
+      "sourceId": "bd51496b8ec0ca1d",
+      "sourceTitle": "Koimsurai 手記",
+      "link": "https://koimsurai.com/blog/yorushika-the-old-man-and-the-sea",
+      "detailPath": "articles/d8ab96bda0a2e4d6e7f6f6ff.json"
+    },
+    {
+      "id": "3aee34eb9dac6aec9a2c1ef3",
+      "title": "打造一個會自己管理圖片的 Markdown 編輯器: 從 Monaco Editor、背景上傳,到 NAS 圖庫與圖片牆",
+      "summary": "從「Monaco 只能放連結、不能直接放圖」這個小需求出發,一路牽出圖片處理的整條坑:Base64 為何會讓編輯器卡頓又撐爆資料庫、貼上就自動上傳到 NAS 的設計,以及最容易忽略的一顆地雷——Docker bind mount 其實是一道「傳送門」,只要 HDD 沒掛載成功,檔案就會靜默寫回系統碟。文章也記錄了把靜態圖片牆重寫成 NAS 動態 API 的規劃,以及照片牆改版時「UI 先行、資料後補」的取捨。",
+      "image": null,
+      "publishedAt": "2026-02-20T04:57:13Z",
+      "sourceId": "bd51496b8ec0ca1d",
+      "sourceTitle": "Koimsurai 手記",
+      "link": "https://koimsurai.com/blog/building-a-markdown-editor-that-manages-its-own",
+      "detailPath": "articles/3aee34eb9dac6aec9a2c1ef3.json"
+    },
+    {
+      "id": "033c49b9e8b8acb705072fae",
+      "title": "二月的片段：生日、團聚與技術探索",
+      "summary": "2026 年 2 月，作者在生日當天給自己放了一天假，隨興地與好友慶祝。除夕前回到雲林外婆家，全家一年一度的團聚中，他也首次帶著兩隻貓咪出遠門。技術上，他啟動了個人 AI 助理開發計畫，並更新了網站功能，同時還為自己添購了高階設備作為獎勵。在生活與工作間找到平衡之餘，也重新拾起吉他和攝影的興趣，感受過去熱愛的事物帶來的熟悉溫度。",
+      "image": null,
+      "publishedAt": "2026-02-19T11:42:11Z",
+      "sourceId": "bd51496b8ec0ca1d",
+      "sourceTitle": "Koimsurai 手記",
+      "link": "https://koimsurai.com/blog/february-fragments-birthday-reunion-and-tinkering",
+      "detailPath": "articles/033c49b9e8b8acb705072fae.json"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "id": "b5211448a1a599df6ecff597",
+  "title": "打造一頁會自己更新的「在看什麼」：動畫瘋 × Trakt × TMDb 的觀影紀錄整合",
+  "summary": "這篇文章記錄了作者為個人網站打造一頁「在看什麼」即時觀影展示頁的完整過程,以及沿路的層層踩坑。因為觀看紀錄散在 Netflix、Disney+、HBO、動畫瘋等一堆平台、而多半又用 app 或電視看,作者先花了一輪功夫在選型——評估過 Trakt、Letterboxd、MyAnimeList、AniList、Plex、各家 GDPR 匯出等十來個工具,最後收斂成「動畫走自造 SDK、影視走 Trakt、Netflix CSV 當歷史底、連結全 TMDb」。由於市面上沒有任何 user-facing 的動畫瘋 API client,作者索性逆向巴哈、開源了一個名為 anigamer 的 npm SDK(另有 Rust 版),並做了一個一鍵推送 cookie 的瀏覽器擴充。資料到齊後,真正反覆翻車的卻是「海報」:…",
+  "content": "這篇文章記錄了作者為個人網站打造一頁「在看什麼」即時觀影展示頁的完整過程,以及沿路的層層踩坑。因為觀看紀錄散在 Netflix、Disney+、HBO、動畫瘋等一堆平台、而多半又用 app 或電視看,作者先花了一輪功夫在選型——評估過 Trakt、Letterboxd、MyAnimeList、AniList、Plex、各家 GDPR 匯出等十來個工具,最後收斂成「動畫走自造 SDK、影視走 Trakt、Netflix CSV 當歷史底、連結全 TMDb」。由於市面上沒有任何 user-facing 的動畫瘋 API client,作者索性逆向巴哈、開源了一個名為 anigamer 的 npm SDK(另有 Rust 版),並做了一個一鍵推送 cookie 的瀏覽器擴充。資料到齊後,真正反覆翻車的卻是「海報」:同一個借錯來源的 fallback 坑先後以兩種面貌出現——靜態列表裡有 tmdb_id 卻沒海報的電影被 enrich 條件漏掉而破圖,即時卡則因 Trakt 只給 id 不給圖、前端 fallback 到上一部動畫瘋番的海報而張冠李戴。文章順著發現順序拆解海報借錯番、抓到縮圖、直式被裁、進度條長度算錯、日期全變 1970、看完不同步等坑,收束到一套「有 id 就即時補圖、拿不到就顯式 null、絕不借別人的圖」的對稱修法。",
+  "image": null,
+  "publishedAt": "2026-07-22T15:34:57Z",
+  "sourceId": "bd51496b8ec0ca1d",
+  "sourceTitle": "Koimsurai 手記",
+  "link": "https://koimsurai.com/blog/building-a-self-updating-what-am-i-watching"
+}

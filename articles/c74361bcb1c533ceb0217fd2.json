@@ -1,0 +1,11 @@
+{
+  "id": "c74361bcb1c533ceb0217fd2",
+  "title": "幫朋友架一台幻獸帕魯專用伺服器：Docker 自架,和最容易卡關的 UDP 連線",
+  "summary": "這篇記錄了作者幫朋友用 Docker 在自己 24/7 的家用機上架設幻獸帕魯(Palworld)專用伺服器的完整過程,整理成一份能照做的教學。緣起是朋友原本用 Radmin VPN 連線,但那類 P2P 服務穿不過 NAT 就會退回中繼、流量繞經第三方,作者索性用自己的常開主機自架。文章先破除一個迷思:主機商規格頁清一色寫「16GB 起」,但小團隊日常很省,作者實測 3~5 人約 1.2GB;真正要防的是 Palworld 知名的記憶體洩漏,靠容器 mem_limit + 每日重啟壓住即可。接著給出一份去蕪存菁的 docker-compose(port 記得加 /udp、RCON 綁 127.0.0.1),把架好之後最卡人的 UDP 連線三關逐一走通:ufw 放行 udp、路由器 port forwardi…",
+  "content": "這篇記錄了作者幫朋友用 Docker 在自己 24/7 的家用機上架設幻獸帕魯(Palworld)專用伺服器的完整過程,整理成一份能照做的教學。緣起是朋友原本用 Radmin VPN 連線,但那類 P2P 服務穿不過 NAT 就會退回中繼、流量繞經第三方,作者索性用自己的常開主機自架。文章先破除一個迷思:主機商規格頁清一色寫「16GB 起」,但小團隊日常很省,作者實測 3~5 人約 1.2GB;真正要防的是 Palworld 知名的記憶體洩漏,靠容器 mem_limit + 每日重啟壓住即可。接著給出一份去蕪存菁的 docker-compose(port 記得加 /udp、RCON 綁 127.0.0.1),把架好之後最卡人的 UDP 連線三關逐一走通:ufw 放行 udp、路由器 port forwarding(必須 UDP)、DDNS,並拆穿兩個高頻誤區——Cloudflare 一定要用灰雲(橘雲代理不轉 UDP,開了必連不上)、UDP 遊戲封包根本不經過 nginx。後半談世界設定的坑(改 ini 會被環境變數重新生成蓋掉)、朋友「版本不符」進不去怎麼修(比對 buildid、重啟觸發 SteamCMD 更新、更新前先 RCON 廣播存檔),以及別讓 18GB 遊戲本體天天進備份碟。結尾附一份自架檢查清單。",
+  "image": null,
+  "publishedAt": "2026-07-29T04:19:24Z",
+  "sourceId": "bd51496b8ec0ca1d",
+  "sourceTitle": "Koimsurai 手記",
+  "link": "https://koimsurai.com/blog/palworld-dedicated-server-docker"
+}

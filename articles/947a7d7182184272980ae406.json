@@ -1,0 +1,11 @@
+{
+  "id": "947a7d7182184272980ae406",
+  "title": "CrowdSec 取代 fail2ban：六天擋下 1619 次掃描,和我把自己封鎖的三次",
+  "summary": "這篇記錄了作者把伺服器防護從 fail2ban 換成 CrowdSec 的完整過程,並整理成一份可照做的教學。起因不是被入侵而是被吵:掃描器整天敲 /wp-login.php、/.env,把監控通知洗版。當時 fail2ban 已封過 614 個 IP,但作者發現對手一直在換 IP,封 IP 這條路贏不了——後來的數據也證實了這點,攻擊來源前七名幾乎全是 Azure、DigitalOcean、阿里雲這類雲端機房,開一台新 VM 比封一個 IP 便宜得多。文中給出這台機器六天內的真實數字:1619 次攻擊偵測、防火牆同時擋著 25.22k 個 IP,其中社群黑名單提供的數量是自己抓到的三千倍。架設踩到的三個坑是同一條因果鏈(apt 從 ESM 拿到上古版本 → 跨版本升級把 hub 搬家 → symlink 全…",
+  "content": "這篇記錄了作者把伺服器防護從 fail2ban 換成 CrowdSec 的完整過程,並整理成一份可照做的教學。起因不是被入侵而是被吵:掃描器整天敲 /wp-login.php、/.env,把監控通知洗版。當時 fail2ban 已封過 614 個 IP,但作者發現對手一直在換 IP,封 IP 這條路贏不了——後來的數據也證實了這點,攻擊來源前七名幾乎全是 Azure、DigitalOcean、阿里雲這類雲端機房,開一台新 VM 比封一個 IP 便宜得多。文中給出這台機器六天內的真實數字:1619 次攻擊偵測、防火牆同時擋著 25.22k 個 IP,其中社群黑名單提供的數量是自己抓到的三千倍。架設踩到的三個坑是同一條因果鏈(apt 從 ESM 拿到上古版本 → 跨版本升級把 hub 搬家 → symlink 全斷導致解析率只剩 9%),並附上診斷用的 cscli explain 與「metrics 是累計值」這類容易誤判的細節。後半是最 relatable 的部分:作者三次把自己封在門外,其中最精彩的一次是自己設的 nginx 限流回了 429,而 CrowdSec 看到 429 就把他封了,兩個防護措施串起來咬了自己一口。最後是用 Discord bot 解封的架構——容器只能丟請求檔、主機 root watcher 才執行 cscli,而它之所以有用,是因為 bot 是主動連出去的,你的 IP 被擋不影響它收指令。",
+  "image": null,
+  "publishedAt": "2026-08-03T01:47:12Z",
+  "sourceId": "bd51496b8ec0ca1d",
+  "sourceTitle": "Koimsurai 手記",
+  "link": "https://koimsurai.com/blog/crowdsec-replacing-fail2ban"
+}
