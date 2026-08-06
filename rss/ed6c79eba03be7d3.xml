@@ -12,7 +12,7 @@
 	<atom:link href="https://www.raychase.net/feed" rel="self" type="application/rss+xml" />
 	<link>https://www.raychase.net</link>
 	<description>一个纯正程序员的啰嗦</description>
-	<lastBuildDate>Sat, 04 Jul 2026 16:34:36 +0000</lastBuildDate>
+	<lastBuildDate>Thu, 06 Aug 2026 22:16:29 +0000</lastBuildDate>
 	<language>en-US</language>
 	<sy:updatePeriod>
 	hourly	</sy:updatePeriod>
@@ -20,6 +20,242 @@
 	1	</sy:updateFrequency>
 	<generator>https://wordpress.org/?v=6.0.12</generator>
 	<item>
+		<title>Run:ai 学习记录</title>
+		<link>https://www.raychase.net/8295</link>
+					<comments>https://www.raychase.net/8295#respond</comments>
+		
+		<dc:creator><![CDATA[四火]]></dc:creator>
+		<pubDate>Thu, 06 Aug 2026 22:10:11 +0000</pubDate>
+				<category><![CDATA[Machine Learning and Artificial Intelligence]]></category>
+		<category><![CDATA[AI]]></category>
+		<category><![CDATA[Kubernetes]]></category>
+		<category><![CDATA[Run:ai]]></category>
+		<category><![CDATA[Scheduler]]></category>
+		<guid isPermaLink="false">https://www.raychase.net/?p=8295</guid>
+
+					<description><![CDATA[<!-- wp:paragraph -->
+<p>工作上的原因，最近学习了一下Run:ai，也考察了一下它的替代技术。在这里记录一下。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>Run:ai功能特性</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><img src="https://www.raychase.net/wp-content/uploads/2026/08/run-ai-ui-1920x1455-1-1024x775.jpeg" alt="" class="wp-image-8296" style="float:right; width:320px"/> Nvidia当年收购Run:ai，还是很有前瞻性的。并且它并没有阻拦开源版本的继续演进，只不过，商业分支提供了更强大的能力。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Run:ai是一个企业级的AI基础设施编排和管理平台，核心能力就是最大化GPU的资源利用和调度能力，在它的<a rel="noreferrer noopener" href="https://www.nvidia.com/en-us/software/run-ai/#nv-title-3468bb4990" target="_blank">主页</a>上，列出了四大特性：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul><li>AI-Native Workload Orchestration</li><li>Dynamic GPU Allocation</li><li>Policy-Driven Governance</li><li>Open Architecture</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>抛开那些商业宣传和拥抱开源等等方面，我们只讨论技术层面，我觉得拥有核心竞争力的feature主要是：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul><li>Dynamic Quotas and Pooling，因为原生Kubernetes的资源分配是静态的，有一个简单的排队机制。但是Run:ai的scheduling支持一个复杂得多的规则系统，比如可以保证每一个team或者project的基础配合，但是也可以超额借用，而对于资源竞争的情况，还允许定义preemption的方式，把低优先级的任务踢掉。</li><li>Factional GPU and Hard Isolation，单个GPU可以被切分成多个虚拟的GPU，这个非常实用；而底层硬隔离是商业版本的卖点——Kai Scheduler是Run:ai调度逻辑的开源版本，但是它只能做到Kubernetes层面上资源的软隔离，而Run:ai深入到底层virtualization，能够做到物理级别的CUDA调用拦截，无论是GPU还是memory，都可以设置硬quota。</li><li>Advanced AI Scheduling，比如它支持需要多个Pods的任务，同时获得多个Pod，或者等待，避免获取部分Pods是饿死情况出现；它支持Bin Packing的装箱算法和碎片整理，把碎片化的GPU能力拼合成一个大的；还有Topology Awareness，把频繁通信的分布式训练任务放到物理距离更近的GPU上，这也是和硬件层面更紧密的结合。</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2>Run:ai的架构</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><a href="https://run-ai-docs.nvidia.com/saas/getting-started/overview#nvidia-run-ai-system-components">Run:ai的官方文档</a>上这张组件图是最好的overview的材料：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":8297,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://www.raychase.net/wp-content/uploads/2026/08/runai-1024x750.png" alt="" class="wp-image-8297"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>从远处看，Run:ai分成control plane和cluster这样两个部分，一般说来，一个control plane，一个或多个cluster。这让我想起了前段时间学习过的<a rel="noreferrer noopener" href="/7965" target="_blank">Flyte的架构</a>，类似的部署方式。值得一提的是，出于安全等原因的考虑，没有从control plane主动去连接和发送请求到cluster的情况，只有从cluster发起去读取control plane的情况。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul><li>Control Plane是指挥和回应用户的，提供包括resource management，用户侧RBAC，处理工作提交和监控分析cluster的功能；</li><li>Cluster是真正做事的，负责scheduling和cluster内workload的管理。</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>除了官方文档，<a rel="noreferrer noopener" href="https://deepwiki.com/run-ai/docs/2-system-architecture" target="_blank">DeepWiki上面</a>也有很有用的材料可以学习，比如下面这张组件图：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":8298,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://www.raychase.net/wp-content/uploads/2026/08/image-1024x345.png" alt="" class="wp-image-8298"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>在Control Plane，scheduling等metadata是存放在PostgreSQL里面的；而每个cluster则是扩展Kubernetes，数据存放在Etcd。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>部署方式上，其中的Control Plane可以部署在用户自己这里，甚至包括docker registry（Air-Gapped模式），也可以使用Nvidia提供的远程服务（SaaS模式）。很多公司出于安全考虑都是使用本地部署的。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>接着，从和Kubernetes结合的机制上去理解Run:ai：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul><li>当有一个job部署到已经集成Run:ai的Kubernetes cluster上的时候，Mutating Admission Webhook会介入，部署好的MutatingWebhookConfiguration会被触发，强制改写资源的schedulerName为runai-scheduler，从而把它从Kubernetes的默认调度器接管过来。</li><li>如果是factional GPU的任务，Webhook还会往容器配置中挂载特定的系统目录，并注入环境变量，让容器启动的时候，把Run:ai的CUDA拦截动态链接库塞进Python环境中。</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>在运行的时候，我们能够从job资源的labels和annotations上面看到被Run:ai劫持后的标记。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>KAI Scheduler</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Run:ai是收费的，<a rel="noreferrer noopener" href="https://kai-scheduler.dev/" target="_blank">KAI Scheduler</a>是一定程度上Run:ai调度模块的平替，它是Kubernetes原生的调度器。功能实现的层面不太一样，总体来说Run:ai要更强大一些。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul><li>对于Dynamic Quotas and Pooling部分，Run:ai支持多集群的算力池化控制和调度，但是KAI Scheduler自身只支持单一集群内部。</li><li>对于Factional GPU and Hard Isolation部分，GPU切分没问题，但是Hard Isolation只有Run:ai支持。KAI 只能在Kubernetes层面做逻辑控制，尤其对于multi-tenancy的情况，如果某个容器超额占用，会影响到同一张显卡上的其它tenant。</li><li>对于Advanced AI Scheduling部分，Run:ai的功能覆盖面更广，比如任务的全生命周期覆盖等等。</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>说说其中最核心的软隔离和硬隔离的问题。如果使用KAI Scheduler，如果说用户提交一个PyTorch任务，上面申请了一定量的显存，但是如果PyTorch任务的实际代码中，用户申请更大的显存，KAI Scheduler根本不会去阻止。这就会引发Noisy Neighbor的问题。这个问题不只是显存层面，在GPU层面也有，KAI Scheduler的调度逻辑能把任务安排到相应的显卡上，但是没法强制设置某一张显卡部分使用时的百分比上限。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>对此，如果要寻找解决方法：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul><li>如果是新的企业级GPU显卡，可以使用Nvidia的MIG（Multi-Instance GPU）显卡硬件支持的技术，一张显卡可以切割成最多7张小显卡（并非任意分隔单元）；</li><li>或者使用Nvidia的MPS（Multi-Process Service）模式，这是把时间切片改成基于CUDA进程的资源切片，显存和GPU都可以使用这种基于进程的模式。</li><li>再有就是纯软件工程上来缓解这个问题，使用一个Kubernetes Mutating Webhook，给用户的容器外面包一层（比如可以做Python运行库或者C/C++动态链接库级别的拦截），来控制资源获取操作。这种方法存在被恶意绕过的可能。</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>在KAI Scheduler的GitHub页面上，有一个很有帮助的presentation列表和一个<a href="https://github.com/kai-scheduler/KAI-Scheduler#key-features" target="_blank" rel="noreferrer noopener">key features列表</a>。</p>
+<!-- /wp:paragraph -->]]></description>
+										<content:encoded><![CDATA[
+<p>工作上的原因，最近学习了一下 Run:ai，也考察了一下它的替代技术。在这里记录一下。</p>
+
+
+
+<h2>Run:ai 功能特性</h2>
+
+
+
+<p><img width="1024" height="775" src="https://www.raychase.net/wp-content/uploads/2026/08/run-ai-ui-1920x1455-1-1024x775.jpeg" alt="" class="wp-image-8296" style="float:right; width:320px" srcset="https://www.raychase.net/wp-content/uploads/2026/08/run-ai-ui-1920x1455-1-1024x775.jpeg 1024w, https://www.raychase.net/wp-content/uploads/2026/08/run-ai-ui-1920x1455-1-300x227.jpeg 300w, https://www.raychase.net/wp-content/uploads/2026/08/run-ai-ui-1920x1455-1-768x581.jpeg 768w, https://www.raychase.net/wp-content/uploads/2026/08/run-ai-ui-1920x1455-1-850x643.jpeg 850w, https://www.raychase.net/wp-content/uploads/2026/08/run-ai-ui-1920x1455-1.jpeg 1070w" sizes="(max-width: 1024px) 100vw, 1024px" /> Nvidia 当年收购 Run:ai，还是很有前瞻性的。并且它并没有阻拦开源版本的继续演进，只不过，商业分支提供了更强大的能力。</p>
+
+
+
+<p>Run:ai 是一个企业级的 AI 基础设施编排和管理平台，核心能力就是最大化 GPU 的资源利用和调度能力，在它的<a rel="noreferrer noopener" href="https://www.nvidia.com/en-us/software/run-ai/#nv-title-3468bb4990" target="_blank">主页</a>上，列出了四大特性：</p>
+
+
+
+<ul><li>AI-Native Workload Orchestration</li><li>Dynamic GPU Allocation</li><li>Policy-Driven Governance</li><li>Open Architecture</li></ul>
+
+
+
+<p>抛开那些商业宣传和拥抱开源等等方面，我们只讨论技术层面，我觉得拥有核心竞争力的 feature 主要是：</p>
+
+
+
+<ul><li>Dynamic Quotas and Pooling，因为原生 Kubernetes 的资源分配是静态的，有一个简单的排队机制。但是 Run:ai 的 scheduling 支持一个复杂得多的规则系统，比如可以保证每一个 team 或者 project 的基础配合，但是也可以超额借用，而对于资源竞争的情况，还允许定义 preemption 的方式，把低优先级的任务踢掉。</li><li>Factional GPU and Hard Isolation，单个 GPU 可以被切分成多个虚拟的 GPU，这个非常实用；而底层硬隔离是商业版本的卖点——Kai Scheduler 是 Run:ai 调度逻辑的开源版本，但是它只能做到 Kubernetes 层面上资源的软隔离，而 Run:ai 深入到底层 virtualization，能够做到物理级别的 CUDA 调用拦截，无论是 GPU 还是 memory，都可以设置硬 quota。</li><li>Advanced AI Scheduling，比如它支持需要多个 Pods 的任务，同时获得多个 Pod，或者等待，避免获取部分 Pods 是饿死情况出现；它支持 Bin Packing 的装箱算法和碎片整理，把碎片化的 GPU 能力拼合成一个大的；还有 Topology Awareness，把频繁通信的分布式训练任务放到物理距离更近的 GPU 上，这也是和硬件层面更紧密的结合。</li></ul>
+
+
+
+<h2>Run:ai 的架构</h2>
+
+
+
+<p><a href="https://run-ai-docs.nvidia.com/saas/getting-started/overview#nvidia-run-ai-system-components">Run:ai 的官方文档</a>上这张组件图是最好的 overview 的材料：</p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" width="1024" height="750" src="https://www.raychase.net/wp-content/uploads/2026/08/runai-1024x750.png" alt="" class="wp-image-8297" srcset="https://www.raychase.net/wp-content/uploads/2026/08/runai-1024x750.png 1024w, https://www.raychase.net/wp-content/uploads/2026/08/runai-300x220.png 300w, https://www.raychase.net/wp-content/uploads/2026/08/runai-768x562.png 768w, https://www.raychase.net/wp-content/uploads/2026/08/runai-1536x1125.png 1536w, https://www.raychase.net/wp-content/uploads/2026/08/runai-850x622.png 850w, https://www.raychase.net/wp-content/uploads/2026/08/runai.png 1714w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p>从远处看，Run:ai 分成 control plane 和 cluster 这样两个部分，一般说来，一个 control plane，一个或多个 cluster。这让我想起了前段时间学习过的 <a rel="noreferrer noopener" href="/7965" target="_blank">Flyte 的架构</a>，类似的部署方式。值得一提的是，出于安全等原因的考虑，没有从 control plane 主动去连接和发送请求到 cluster 的情况，只有从 cluster 发起去读取 control plane 的情况。</p>
+
+
+
+<ul><li>Control Plane 是指挥和回应用户的，提供包括 resource management，用户侧 RBAC，处理工作提交和监控分析 cluster 的功能；</li><li>Cluster 是真正做事的，负责 scheduling 和 cluster 内 workload 的管理。</li></ul>
+
+
+
+<p>除了官方文档，<a rel="noreferrer noopener" href="https://deepwiki.com/run-ai/docs/2-system-architecture" target="_blank">DeepWiki 上面</a>也有很有用的材料可以学习，比如下面这张组件图：</p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" width="1024" height="345" src="https://www.raychase.net/wp-content/uploads/2026/08/image-1024x345.png" alt="" class="wp-image-8298" srcset="https://www.raychase.net/wp-content/uploads/2026/08/image-1024x345.png 1024w, https://www.raychase.net/wp-content/uploads/2026/08/image-300x101.png 300w, https://www.raychase.net/wp-content/uploads/2026/08/image-768x259.png 768w, https://www.raychase.net/wp-content/uploads/2026/08/image-1536x517.png 1536w, https://www.raychase.net/wp-content/uploads/2026/08/image-850x286.png 850w, https://www.raychase.net/wp-content/uploads/2026/08/image.png 1695w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p>在 Control Plane，scheduling 等 metadata 是存放在 PostgreSQL 里面的；而每个 cluster 则是扩展 Kubernetes，数据存放在 Etcd。</p>
+
+
+
+<p>部署方式上，其中的 Control Plane 可以部署在用户自己这里，甚至包括 docker registry（Air-Gapped 模式），也可以使用 Nvidia 提供的远程服务（SaaS 模式）。很多公司出于安全考虑都是使用本地部署的。</p>
+
+
+
+<p>接着，从和 Kubernetes 结合的机制上去理解 Run:ai：</p>
+
+
+
+<ul><li>当有一个 job 部署到已经集成 Run:ai 的 Kubernetes cluster 上的时候，Mutating Admission Webhook 会介入，部署好的 MutatingWebhookConfiguration 会被触发，强制改写资源的 schedulerName 为 runai-scheduler，从而把它从 Kubernetes 的默认调度器接管过来。</li><li>如果是 factional GPU 的任务，Webhook 还会往容器配置中挂载特定的系统目录，并注入环境变量，让容器启动的时候，把 Run:ai 的 CUDA 拦截动态链接库塞进 Python 环境中。</li></ul>
+
+
+
+<p>在运行的时候，我们能够从 job 资源的 labels 和 annotations 上面看到被 Run:ai 劫持后的标记。</p>
+
+
+
+<h2>KAI Scheduler</h2>
+
+
+
+<p>Run:ai 是收费的，<a rel="noreferrer noopener" href="https://kai-scheduler.dev/" target="_blank">KAI Scheduler</a> 是一定程度上 Run:ai 调度模块的平替，它是 Kubernetes 原生的调度器。功能实现的层面不太一样，总体来说 Run:ai 要更强大一些。</p>
+
+
+
+<ul><li>对于 Dynamic Quotas and Pooling 部分，Run:ai 支持多集群的算力池化控制和调度，但是 KAI Scheduler 自身只支持单一集群内部。</li><li>对于 Factional GPU and Hard Isolation 部分，GPU 切分没问题，但是 Hard Isolation 只有 Run:ai 支持。KAI 只能在 Kubernetes 层面做逻辑控制，尤其对于 multi-tenancy 的情况，如果某个容器超额占用，会影响到同一张显卡上的其它 tenant。</li><li>对于 Advanced AI Scheduling 部分，Run:ai 的功能覆盖面更广，比如任务的全生命周期覆盖等等。</li></ul>
+
+
+
+<p>说说其中最核心的软隔离和硬隔离的问题。如果使用 KAI Scheduler，如果说用户提交一个 PyTorch 任务，上面申请了一定量的显存，但是如果 PyTorch 任务的实际代码中，用户申请更大的显存，KAI Scheduler 根本不会去阻止。这就会引发 Noisy Neighbor 的问题。这个问题不只是显存层面，在 GPU 层面也有，KAI Scheduler 的调度逻辑能把任务安排到相应的显卡上，但是没法强制设置某一张显卡部分使用时的百分比上限。</p>
+
+
+
+<p>对此，如果要寻找解决方法：</p>
+
+
+
+<ul><li>如果是新的企业级 GPU 显卡，可以使用 Nvidia 的 MIG（Multi-Instance GPU）显卡硬件支持的技术，一张显卡可以切割成最多 7 张小显卡（并非任意分隔单元）；</li><li>或者使用 Nvidia 的 MPS（Multi-Process Service）模式，这是把时间切片改成基于 CUDA 进程的资源切片，显存和 GPU 都可以使用这种基于进程的模式。</li><li>再有就是纯软件工程上来缓解这个问题，使用一个 Kubernetes Mutating Webhook，给用户的容器外面包一层（比如可以做 Python 运行库或者 C/C++动态链接库级别的拦截），来控制资源获取操作。这种方法存在被恶意绕过的可能。</li></ul>
+
+
+
+<p>在 KAI Scheduler 的 GitHub 页面上，有一个很有帮助的 presentation 列表和一个 <a href="https://github.com/kai-scheduler/KAI-Scheduler#key-features" target="_blank" rel="noreferrer noopener">key features 列表</a>。</p>
+<p><strong><font color="#ff0000">文章未经特殊标明皆为本人原创，未经许可不得用于任何商业用途，转载请保持完整性并注明来源链接 <a href="https://www.raychase.net/8295">《四火的唠叨》</a></font></strong></p><div class='yarpp yarpp-related yarpp-related-rss yarpp-template-list'>
+<!-- YARPP List -->
+<p>你可能也喜欢看：</p><ol>
+<li><a href="https://www.raychase.net/7724" rel="bookmark" title="本地部署 Minikube + Docker 记录">本地部署 Minikube + Docker 记录</a></li>
+<li><a href="https://www.raychase.net/7965" rel="bookmark" title="初涉 ML Workflow 系统：Kubeflow Pipelines、Flyte 和 Metaflow">初涉 ML Workflow 系统：Kubeflow Pipelines、Flyte 和 Metaflow</a></li>
+<li><a href="https://www.raychase.net/8155" rel="bookmark" title="AI 到底会怎样取代我们的工作">AI 到底会怎样取代我们的工作</a></li>
+<li><a href="https://www.raychase.net/8115" rel="bookmark" title="聊聊商业模式——Atlassian">聊聊商业模式——Atlassian</a></li>
+<li><a href="https://www.raychase.net/8126" rel="bookmark" title="聊聊商业模式——阿里巴巴">聊聊商业模式——阿里巴巴</a></li>
+</ol>
+</div>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.raychase.net/8295/feed</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
 		<title>笔记：在 Mac Mini 本地跑 LLM 大模型</title>
 		<link>https://www.raychase.net/8180</link>
 					<comments>https://www.raychase.net/8180#respond</comments>
@@ -571,7 +807,7 @@ public class LocalLLMClient {
 
 
 
-<figure class="wp-block-image size-full"><img width="1020" height="354" src="/wp-content/uploads/2026/03/Snip20260329_9.png" alt="" class="wp-image-8182" srcset="https://www.raychase.net/wp-content/uploads/2026/03/Snip20260329_9.png 1020w, https://www.raychase.net/wp-content/uploads/2026/03/Snip20260329_9-300x104.png 300w, https://www.raychase.net/wp-content/uploads/2026/03/Snip20260329_9-768x267.png 768w, https://www.raychase.net/wp-content/uploads/2026/03/Snip20260329_9-850x295.png 850w" sizes="(max-width: 1020px) 100vw, 1020px" /></figure>
+<figure class="wp-block-image size-full"><img loading="lazy" width="1020" height="354" src="/wp-content/uploads/2026/03/Snip20260329_9.png" alt="" class="wp-image-8182" srcset="https://www.raychase.net/wp-content/uploads/2026/03/Snip20260329_9.png 1020w, https://www.raychase.net/wp-content/uploads/2026/03/Snip20260329_9-300x104.png 300w, https://www.raychase.net/wp-content/uploads/2026/03/Snip20260329_9-768x267.png 768w, https://www.raychase.net/wp-content/uploads/2026/03/Snip20260329_9-850x295.png 850w" sizes="(max-width: 1020px) 100vw, 1020px" /></figure>
 
 
 
@@ -2739,226 +2975,6 @@ echo '&lt;link rel="canonical" href="https://www.raychase.net' . esc_url( $_SERV
 					
 					<wfw:commentRss>https://www.raychase.net/8063/feed</wfw:commentRss>
 			<slash:comments>3</slash:comments>
-		
-		
-			</item>
-		<item>
-		<title>OAuth2.0 的几种授权流程</title>
-		<link>https://www.raychase.net/8015</link>
-					<comments>https://www.raychase.net/8015#respond</comments>
-		
-		<dc:creator><![CDATA[四火]]></dc:creator>
-		<pubDate>Sun, 27 Jul 2025 02:55:18 +0000</pubDate>
-				<category><![CDATA[Authentication and Authorization]]></category>
-		<category><![CDATA[auth]]></category>
-		<category><![CDATA[OAuth]]></category>
-		<category><![CDATA[Secret]]></category>
-		<category><![CDATA[授权]]></category>
-		<guid isPermaLink="false">https://www.raychase.net/?p=8015</guid>
-
-					<description><![CDATA[<!-- wp:paragraph -->
-<p><img class="wp-image-8026" style="width: 360px; float: right" src="/wp-content/uploads/2025/07/auth.jpg" alt=""/>首先，从高维度看，OAuth是要解决什么问题？</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>OAuth要解决的是客户端在不知道和不使用用户密码的情况下，怎么样安全访问并获取用户所拥有的资源的问题。</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>顺带说一句，经常和OAuth一起谈到的OIDC则是解决了用户信息（profile）获取的问题。简单说，OAuth解决了Authorization的问题，OIDC解决了Authentication的问题。</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>OAuth有几种角色：</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:list -->
-<ul><li>Resource Owner：资源的拥有者，比方说终端用户；</li><li>Resource Server：资源服务器，比如用户想要调用的API；</li><li>Client：就是用户来进行鉴权和资源操作的客户端，比方说浏览器或者CLI；</li><li>Authorization Server：就是专门授权的服务器。</li></ul>
-<!-- /wp:list -->
-
-<!-- wp:paragraph -->
-<p>所以OAuth就是用户想通过某种机制，通过Client和Authorization Server交互来获得能够访问资源的token。</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>对于OAuth2.0的授权流程，可以根据<a href="https://oauth.net/2/grant-types/" data-type="URL" data-id="https://oauth.net/2/grant-types/" target="_blank" rel="noreferrer noopener">grant type</a>来做个归类。下面的图示全部都来自Auth0的<a href="https://auth0.com/docs/get-started/authentication-and-authorization-flow">官方文档</a>。</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p><strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">1. Authorization Code</mark></strong>：用户访问web app，web app的后端请求auth server，于是重定向到登录页面，用户输入登录信息，auth server就给web app一个授权码，这个授权码通过callback URL返回，而这个参数一般放在这个url的参数中，比如：http://.../callback?token=TOKEN。之后web app就可以拿着授权码去取token了。这种方式不需要用户这边存放任何secret，但是需要用户参与consent，并且具备web app的后端，因为和auth server的交互主要都是web app后端完成的。</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:image {"id":8017,"sizeSlug":"large","linkDestination":"none"} -->
-<figure class="wp-block-image size-large"><img src="/wp-content/uploads/2025/07/image-1024x641.png" alt="" class="wp-image-8017"/></figure>
-<!-- /wp:image -->
-
-<!-- wp:paragraph -->
-<p>但是这种方法存在一些concern，比如说，这个code如果在返回途中被截获怎么办，截获者就可以使用这个code来获取token了。</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p><strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">2. PKCE</mark></strong>：对于上述问题，有一个改进的办法，就是使用PKCE（Proof Key for Code Exchange）来给它增强。基本原理是，客户端生成一个随机字符串code verifier，根据一个算法code challenge method来生成它的hash（challenge），获取授权码code的时候需要把这个method和challenge带过去；接着，code正常返回，但之后客户端拿着code去获取token的时候，需要带上这个code verifier，这样auth server就可以根据之前拿到的method和challenge，以及刚得到的code和code verifier，来校验用户是不是可以得到这个token。</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>在这种情况下，如果code被劫持，那么对方拿到了code，却没有code verifier，也就没什么用。</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:image {"id":8020,"sizeSlug":"large","linkDestination":"none"} -->
-<figure class="wp-block-image size-large"><img src="/wp-content/uploads/2025/07/image-3-1024x833.png" alt="" class="wp-image-8020"/></figure>
-<!-- /wp:image -->
-
-<!-- wp:paragraph -->
-<p>这种方法是比较推荐的，对于一些CLI登录使用这种方法的时候，重定向URL可以是一个带有code的指向localhost的地址以被CLI捕获。</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p><strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">3. Device Code</mark></strong>：前面说到的Authorization Code这种方法还有一个变体，就是对于一些需要用户参与，但是又没有浏览器（或者自动打开浏览器）的场景下，这个重定向到浏览器来获取用户consent的过程，被其它方式来取代，这种变体可看做名为Device Authorization的流程：</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:image {"id":8022,"sizeSlug":"large","linkDestination":"none"} -->
-<figure class="wp-block-image size-large"><img src="/wp-content/uploads/2025/07/image-5-995x1024.png" alt="" class="wp-image-8022"/></figure>
-<!-- /wp:image -->
-
-<!-- wp:paragraph -->
-<p>可以看到，上面的浏览器重定向的过程被替换成了返回code和verification url，然后用户使用verification URL加上这个user code来完成consent的过程，在这个过程完成之后，这个device才被授权。在这个过程完成之前，需要app不断去poll检查是不是device已经被授权了。</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p><strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">4. Client Credential</mark></strong>：前面说到的Authorization Code虽然好用，但是需要用户手动登录确认的过程，对于一些没有人参与的M2M（machine-to-machine）系统而言，这是不现实的。因此在client id的基础上，再加上一个client secret，一样可以完成auth的流程。这种场景其实就相当于是client和resource owner是同一个了：</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:image {"id":8021,"sizeSlug":"large","linkDestination":"none"} -->
-<figure class="wp-block-image size-large"><img src="/wp-content/uploads/2025/07/image-4-1024x611.png" alt="" class="wp-image-8021"/></figure>
-<!-- /wp:image -->
-
-<!-- wp:paragraph -->
-<p><strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">5. Implicit</mark></strong>：这种其实就是上面Authorization Code的简化版，去掉了code的环节，直接发code。这种方式在app只有前端的场景下（比如SPA）使用，因为它没法进行后端和Auth Server的通信。但是这种方式因为安全性低，因而不推荐，因为即便是SPA，还是可以用前面说的那种PKCE增强的Authorization Code方式来实现。</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:image {"id":8018,"sizeSlug":"large","linkDestination":"none"} -->
-<figure class="wp-block-image size-large"><img src="/wp-content/uploads/2025/07/image-1-1024x486.png" alt="" class="wp-image-8018"/></figure>
-<!-- /wp:image -->
-
-<!-- wp:paragraph -->
-<p>再来看这个callback的URL，和前面提到的Authorization Code流程不一样的是，它返回的token放在URL的fragment里面，而不是query里面，比如：http://.../callback#token=TOKEN，这样做的好处是这个TOKEN不会在浏览器跳转的时候送到服务器，就不容易泄露。</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p><strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">6. Password</mark></strong>：这种方式其实就是让client获知用户的用户名和密码，属于风险比较大的做法，要求这个app是用户百分百信任的——这也就是说，它没有解决OAuth本身应该解决的问题，因此很少使用。</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:image {"id":8019,"sizeSlug":"large","linkDestination":"none"} -->
-<figure class="wp-block-image size-large"><img src="/wp-content/uploads/2025/07/image-2-1024x610.png" alt="" class="wp-image-8019"/></figure>
-<!-- /wp:image -->]]></description>
-										<content:encoded><![CDATA[
-<p><img loading="lazy" width="612" height="344" class="wp-image-8026" style="width: 360px; float: right" src="/wp-content/uploads/2025/07/auth.jpg" alt="" srcset="https://www.raychase.net/wp-content/uploads/2025/07/auth.jpg 612w, https://www.raychase.net/wp-content/uploads/2025/07/auth-300x169.jpg 300w" sizes="(max-width: 612px) 100vw, 612px" />首先，从高维度看，OAuth 是要解决什么问题？</p>
-
-
-
-<p>OAuth 要解决的是客户端在不知道和不使用用户密码的情况下，怎么样安全访问并获取用户所拥有的资源的问题。</p>
-
-
-
-<p>顺带说一句，经常和 OAuth 一起谈到的 OIDC 则是解决了用户信息（profile）获取的问题。简单说，OAuth 解决了 Authorization 的问题，OIDC 解决了 Authentication 的问题。</p>
-
-
-
-<p>OAuth 有几种角色：</p>
-
-
-
-<ul><li>Resource Owner：资源的拥有者，比方说终端用户；</li><li>Resource Server：资源服务器，比如用户想要调用的 API；</li><li>Client：就是用户来进行鉴权和资源操作的客户端，比方说浏览器或者 CLI；</li><li>Authorization Server：就是专门授权的服务器。</li></ul>
-
-
-
-<p>所以 OAuth 就是用户想通过某种机制，通过 Client 和 Authorization Server 交互来获得能够访问资源的 token。</p>
-
-
-
-<p>对于 OAuth2.0 的授权流程，可以根据 <a href="https://oauth.net/2/grant-types/" data-type="URL" data-id="https://oauth.net/2/grant-types/" target="_blank" rel="noreferrer noopener">grant type</a> 来做个归类。下面的图示全部都来自 Auth0 的<a href="https://auth0.com/docs/get-started/authentication-and-authorization-flow">官方文档</a>。</p>
-
-
-
-<p><strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">1. Authorization Code</mark></strong>：用户访问 web app，web app 的后端请求 auth server，于是重定向到登录页面，用户输入登录信息，auth server 就给 web app 一个授权码，这个授权码通过 callback URL 返回，而这个参数一般放在这个 url 的参数中，比如：http://&#8230;/callback?token=TOKEN。之后 web app 就可以拿着授权码去取 token 了。这种方式不需要用户这边存放任何 secret，但是需要用户参与 consent，并且具备 web app 的后端，因为和 auth server 的交互主要都是 web app 后端完成的。</p>
-
-
-
-<figure class="wp-block-image size-large"><img loading="lazy" width="1024" height="641" src="/wp-content/uploads/2025/07/image-1024x641.png" alt="" class="wp-image-8017" srcset="https://www.raychase.net/wp-content/uploads/2025/07/image-1024x641.png 1024w, https://www.raychase.net/wp-content/uploads/2025/07/image-300x188.png 300w, https://www.raychase.net/wp-content/uploads/2025/07/image-768x481.png 768w, https://www.raychase.net/wp-content/uploads/2025/07/image-850x532.png 850w, https://www.raychase.net/wp-content/uploads/2025/07/image.png 1400w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
-
-
-
-<p>但是这种方法存在一些 concern，比如说，这个 code 如果在返回途中被截获怎么办，截获者就可以使用这个 code 来获取 token 了。</p>
-
-
-
-<p><strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">2. PKCE</mark></strong>：对于上述问题，有一个改进的办法，就是使用 PKCE（Proof Key for Code Exchange）来给它增强。基本原理是，客户端生成一个随机字符串 code verifier，根据一个算法 code challenge method 来生成它的 hash（challenge），获取授权码 code 的时候需要把这个 method 和 challenge 带过去；接着，code 正常返回，但之后客户端拿着 code 去获取 token 的时候，需要带上这个 code verifier，这样 auth server 就可以根据之前拿到的 method 和 challenge，以及刚得到的 code 和 code verifier，来校验用户是不是可以得到这个 token。</p>
-
-
-
-<p>在这种情况下，如果 code 被劫持，那么对方拿到了 code，却没有 code verifier，也就没什么用。</p>
-
-
-
-<figure class="wp-block-image size-large"><img loading="lazy" width="1024" height="833" src="/wp-content/uploads/2025/07/image-3-1024x833.png" alt="" class="wp-image-8020" srcset="https://www.raychase.net/wp-content/uploads/2025/07/image-3-1024x833.png 1024w, https://www.raychase.net/wp-content/uploads/2025/07/image-3-300x244.png 300w, https://www.raychase.net/wp-content/uploads/2025/07/image-3-768x625.png 768w, https://www.raychase.net/wp-content/uploads/2025/07/image-3-850x691.png 850w, https://www.raychase.net/wp-content/uploads/2025/07/image-3.png 1500w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
-
-
-
-<p>这种方法是比较推荐的，对于一些 CLI 登录使用这种方法的时候，重定向 URL 可以是一个带有 code 的指向 localhost 的地址以被 CLI 捕获。</p>
-
-
-
-<p><strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">3. Device Code</mark></strong>：前面说到的 Authorization Code 这种方法还有一个变体，就是对于一些需要用户参与，但是又没有浏览器（或者自动打开浏览器）的场景下，这个重定向到浏览器来获取用户 consent 的过程，被其它方式来取代，这种变体可看做名为 Device Authorization 的流程：</p>
-
-
-
-<figure class="wp-block-image size-large"><img loading="lazy" width="995" height="1024" src="/wp-content/uploads/2025/07/image-5-995x1024.png" alt="" class="wp-image-8022" srcset="https://www.raychase.net/wp-content/uploads/2025/07/image-5-995x1024.png 995w, https://www.raychase.net/wp-content/uploads/2025/07/image-5-292x300.png 292w, https://www.raychase.net/wp-content/uploads/2025/07/image-5-768x790.png 768w, https://www.raychase.net/wp-content/uploads/2025/07/image-5-1493x1536.png 1493w, https://www.raychase.net/wp-content/uploads/2025/07/image-5-300x309.png 300w, https://www.raychase.net/wp-content/uploads/2025/07/image-5-850x874.png 850w, https://www.raychase.net/wp-content/uploads/2025/07/image-5.png 1500w" sizes="(max-width: 995px) 100vw, 995px" /></figure>
-
-
-
-<p>可以看到，上面的浏览器重定向的过程被替换成了返回 code 和 verification url，然后用户使用 verification URL 加上这个 user code 来完成 consent 的过程，在这个过程完成之后，这个 device 才被授权。在这个过程完成之前，需要 app 不断去 poll 检查是不是 device 已经被授权了。</p>
-
-
-
-<p><strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">4. Client Credential</mark></strong>：前面说到的 Authorization Code 虽然好用，但是需要用户手动登录确认的过程，对于一些没有人参与的 M2M（machine-to-machine）系统而言，这是不现实的。因此在 client id 的基础上，再加上一个 client secret，一样可以完成 auth 的流程。这种场景其实就相当于是 client 和 resource owner 是同一个了：</p>
-
-
-
-<figure class="wp-block-image size-large"><img loading="lazy" width="1024" height="611" src="/wp-content/uploads/2025/07/image-4-1024x611.png" alt="" class="wp-image-8021" srcset="https://www.raychase.net/wp-content/uploads/2025/07/image-4-1024x611.png 1024w, https://www.raychase.net/wp-content/uploads/2025/07/image-4-300x180.png 300w, https://www.raychase.net/wp-content/uploads/2025/07/image-4-768x458.png 768w, https://www.raychase.net/wp-content/uploads/2025/07/image-4-850x507.png 850w, https://www.raychase.net/wp-content/uploads/2025/07/image-4.png 1399w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
-
-
-
-<p><strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">5. Implicit</mark></strong>：这种其实就是上面 Authorization Code 的简化版，去掉了 code 的环节，直接发 code。这种方式在 app 只有前端的场景下（比如 SPA）使用，因为它没法进行后端和 Auth Server 的通信。但是这种方式因为安全性低，因而不推荐，因为即便是 SPA，还是可以用前面说的那种 PKCE 增强的 Authorization Code 方式来实现。</p>
-
-
-
-<figure class="wp-block-image size-large"><img loading="lazy" width="1024" height="486" src="/wp-content/uploads/2025/07/image-1-1024x486.png" alt="" class="wp-image-8018" srcset="https://www.raychase.net/wp-content/uploads/2025/07/image-1-1024x486.png 1024w, https://www.raychase.net/wp-content/uploads/2025/07/image-1-300x142.png 300w, https://www.raychase.net/wp-content/uploads/2025/07/image-1-768x365.png 768w, https://www.raychase.net/wp-content/uploads/2025/07/image-1-850x403.png 850w, https://www.raychase.net/wp-content/uploads/2025/07/image-1.png 1500w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
-
-
-
-<p>再来看这个 callback 的 URL，和前面提到的 Authorization Code 流程不一样的是，它返回的 token 放在 URL 的 fragment 里面，而不是 query 里面，比如：http://&#8230;/callback#token=TOKEN，这样做的好处是这个 TOKEN 不会在浏览器跳转的时候送到服务器，就不容易泄露。</p>
-
-
-
-<p><strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">6. Password</mark></strong>：这种方式其实就是让 client 获知用户的用户名和密码，属于风险比较大的做法，要求这个 app 是用户百分百信任的——这也就是说，它没有解决 OAuth 本身应该解决的问题，因此很少使用。</p>
-
-
-
-<figure class="wp-block-image size-large"><img loading="lazy" width="1024" height="610" src="/wp-content/uploads/2025/07/image-2-1024x610.png" alt="" class="wp-image-8019" srcset="https://www.raychase.net/wp-content/uploads/2025/07/image-2-1024x610.png 1024w, https://www.raychase.net/wp-content/uploads/2025/07/image-2-300x180.png 300w, https://www.raychase.net/wp-content/uploads/2025/07/image-2-768x457.png 768w, https://www.raychase.net/wp-content/uploads/2025/07/image-2-1536x914.png 1536w, https://www.raychase.net/wp-content/uploads/2025/07/image-2-2048x1219.png 2048w, https://www.raychase.net/wp-content/uploads/2025/07/image-2-850x506.png 850w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
-<p><strong><font color="#ff0000">文章未经特殊标明皆为本人原创，未经许可不得用于任何商业用途，转载请保持完整性并注明来源链接 <a href="https://www.raychase.net/8015">《四火的唠叨》</a></font></strong></p><div class='yarpp yarpp-related yarpp-related-rss yarpp-template-list'>
-<!-- YARPP List -->
-<p>你可能也喜欢看：</p><ol>
-<li><a href="https://www.raychase.net/1512" rel="bookmark" title="Issue record: &#8220;No thread for socket&#8221; about Memcached">Issue record: &#8220;No thread for socket&#8221; about Memcached</a></li>
-<li><a href="https://www.raychase.net/967" rel="bookmark" title="Study Notes Of Mason">Study Notes Of Mason</a></li>
-<li><a href="https://www.raychase.net/2839" rel="bookmark" title="A page widgetization practice">A page widgetization practice</a></li>
-<li><a href="https://www.raychase.net/6439" rel="bookmark" title="常见分布式应用系统设计图解（十一）：数据监控系统">常见分布式应用系统设计图解（十一）：数据监控系统</a></li>
-<li><a href="https://www.raychase.net/7724" rel="bookmark" title="本地部署 Minikube + Docker 记录">本地部署 Minikube + Docker 记录</a></li>
-</ol>
-</div>
-]]></content:encoded>
-					
-					<wfw:commentRss>https://www.raychase.net/8015/feed</wfw:commentRss>
-			<slash:comments>0</slash:comments>
 		
 		
 			</item>
