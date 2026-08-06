@@ -5,8 +5,18 @@
     <link>https://koimsurai.com/blog</link>
     <description>Koimsurai 的個人部落格 — 技術筆記、生活隨筆、影集心得</description>
     <language>zh-TW</language>
-    <lastBuildDate>Tue, 04 Aug 2026 15:12:39 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 06 Aug 2026 11:29:55 GMT</lastBuildDate>
     <atom:link href="https://koimsurai.com/rss" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>Trakt 刪了我的 API app：把「在看什麼」整條管線遷到 Simkl</title>
+      <link>https://koimsurai.com/blog/trakt-api-cutoff-migrate-to-simkl</link>
+      <guid isPermaLink="true">https://koimsurai.com/blog/trakt-api-cutoff-migrate-to-simkl</guid>
+      <description>2026 年 7 月 30 日,Trakt 在沒有任何公告的情況下把免費帳號建立 API app 的功能改成 VIP 限定,而既有的 app 也一併消失——作者的「在看什麼」頁面因此靜靜地停止更新,後端只留下 `client not found` 這一句話。這篇從查證開始:trakt-web 的 PR #3057 只寫了「擋住建立」、還註明既有清單「仍然可讀」,但真正發生的是刪除;而 trakt-api 那個平常連「時間戳秒數歸零」都會預告的 Announcements 分類,這次一則都沒有。官方在四天後才回應,回應方式是先把 issue 轉移、轉成討論串、上鎖,一分鐘後才留下三句「暫時措施」。後半是完整的遷移過程:Yamtrack、Floppy、沿用 UTS 三個方案怎麼被原始碼查證刷掉,為什麼最後選 Simkl(官方擴充、PIN 流程免 callback、逐集時間戳、原生增量),以及在寫任何一行程式碼之前先把三個未知打掉的做法。附三個踩坑——docker-compose 的 environment 會用空字串蓋掉 env_file、文件寫的端點在實際帳號回 0 筆、以及作者自己把 TMDb 補圖的路堵死導致海報糊掉。最後順手 fork 了 UTS 換成 Simkl 後端,29 支平台擷取器一支未動。文末誠實列出還沒接的部分:「現在正在看」那個即時狀態。</description>
+      <author>Koimsurai</author>
+      <pubDate>Thu, 06 Aug 2026 10:42:16 GMT</pubDate>
+      <category>位元築夢</category>
+      <category>Trakt</category><category>scrobbler</category><category>觀影頁</category><category>瀏覽器擴充</category><category>Simkl</category>
+    </item>
     <item>
       <title>為什麼我開始使用 Zed 編輯器：從 VS Code 搬家,23 個擴充最後剩 8 個</title>
       <link>https://koimsurai.com/blog/why-i-switched-to-zed</link>
