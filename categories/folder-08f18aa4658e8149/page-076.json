@@ -1,6 +1,39 @@
 {
   "items": [
     {
+      "id": "9fc20dd0d410c46aa5dee29b",
+      "title": "Android Systrace 流畅性实战 1 ：了解卡顿原理",
+      "summary": "不同的人对流畅性(卡顿掉帧)有不同的理解，对卡顿阈值也有不同的感知，所以有必要在开始这个系列文章之前，先把涉及到的内容说清楚，防止出现不同的理解，也方便大家带着问题去看这几篇问题，下面是一些基本的说明 对手机用户来说，卡顿包含了很多场景，比如在 滑动列表的时候掉帧 、 应用启动白屏过长 、 点击电源键亮屏慢 、 界面操作没有反应然后闪退 、 点击图标没有响应 、 窗口动画不连贯、滑动不跟手、重启手机进入桌面卡顿 等场景，这些场景跟我们开发人员所理解的卡顿还有点不一样，开发人员会更加细分去分析这些问题，这是开发人员和用户之间的一个认知差异，这一点在处理用户(或者测试人员)的问题反馈的时候尤其需要注意 对开发人员来说，上面的场景包括了 流畅度 （滑动列表的时候掉帧、窗口动画不连贯、重启手机进入桌面卡顿）、 响应速…",
+      "image": null,
+      "publishedAt": "2021-04-24T11:55:02Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2021/04/24/android-systrace-smooth-in-action-1/",
+      "detailPath": "articles/9fc20dd0d410c46aa5dee29b.json"
+    },
+    {
+      "id": "df38399917d934153f79f3ab",
+      "title": "前提",
+      "summary": "提供一个直观的判断标准：我想写 100 个字，针对这 100 个字阅读量应该有 10000 字，吸收、处理、输出，一整套流程在经过训练之后，速度可以很快，甚至感觉像是直觉、不经意或者潜意识里完成了这份工作。 重点是，这 10000 字的阅读，是少不了的。很多时候我们阅读一段文本信息时，经常忽略了「前提」这个重要部分。一段话被随意摘录出来，可以供给给正反两方来用，大家都能找到支持自己观点的角度，问题就在这里，他们会刻意制造某种「前提」，让你从他们规划好的路径出发去思考。 不幸的是，大家很容易上套，奇葩说是一个很好的例子。我经常跟朋友说，看一个人说话，要看他没说什么，而不是说了什么。",
+      "image": null,
+      "publishedAt": "2021-04-22T00:00:00Z",
+      "sourceId": "fc41292f8a54624e",
+      "sourceTitle": "Elizen's Blog",
+      "link": "https://elizen.me/posts/2021/04/qian-ti/",
+      "detailPath": "articles/df38399917d934153f79f3ab.json"
+    },
+    {
+      "id": "477d730c30a81eabea1f5eaa",
+      "title": "谈谈 Kubernetes 的问题和局限性",
+      "summary": "",
+      "image": null,
+      "publishedAt": "2021-04-16T00:00:00Z",
+      "sourceId": "4d49716051922902",
+      "sourceTitle": "面向信仰编程 - Articles",
+      "link": "https://draven.co//kuberentes-limitations",
+      "detailPath": "articles/477d730c30a81eabea1f5eaa.json"
+    },
+    {
       "id": "63d6dfe8c76c57ba9cf45c65",
       "title": "「Maven」IDEA下 Tomcat 10 Servlet 404 问题踩坑",
       "summary": "起因 下午将 Tomcat升级到了 10.0.4 版本，导致原先的 JSP Servlet 全部报了404。 搜寻了互联网，大部分都是配置 web.xml 的 metadata-complete 为 false ，但这样对于我的项目无效。 解决方案 IDEA 建立 Java Enterprise 工程，默认的Servlet API是 javax.servlet-api 的 4.0.1 版本 1 2 3 4 5 6 <dependency> <groupId> javax.servlet </groupId> <artifactId> javax.servlet-api </artifactId> <version> 4.0.1 </version> <scope> provided </scope> </de…",
@@ -626,39 +659,6 @@
       "sourceTitle": "DrPika's Blog",
       "link": "https://blog.drpika.com/posts/2021-02-03",
       "detailPath": "articles/a303d325b8589424b7e023fe.json"
-    },
-    {
-      "id": "60b66c96cd86f1b5d1792dda",
-      "title": "“被浪漫”的那些日子",
-      "summary": "你的动态很久没有提到过宇宙、银河、梦想和文学了。怎么，是不是和我一样去搬砖了？",
-      "image": null,
-      "publishedAt": "2021-02-03T00:00:00Z",
-      "sourceId": "3e335517f4e1112a",
-      "sourceTitle": "Dr.Pika's Blog",
-      "link": "https://blog.drpika.com/posts/2021-02-03",
-      "detailPath": "articles/60b66c96cd86f1b5d1792dda.json"
-    },
-    {
-      "id": "b9da73159de2d3fa6a23de3a",
-      "title": "为什么 OLAP 需要列式存储",
-      "summary": "",
-      "image": null,
-      "publishedAt": "2021-02-02T00:00:00Z",
-      "sourceId": "4d49716051922902",
-      "sourceTitle": "面向信仰编程 - Articles",
-      "link": "https://draven.co//whys-the-design-olap-column-oriented",
-      "detailPath": "articles/b9da73159de2d3fa6a23de3a.json"
-    },
-    {
-      "id": "addc025a586adae109520290",
-      "title": "高颜值网易云播放器",
-      "summary": "同志们， 上车要快，废话少讲。 废话，咱们还是讲两句吧。 我一向自诩是个音乐虫子，听的歌不算正统，也没有多么偏门，基本也就是外国乡村，国内小众，部分硬核摇滚，还有点儿北欧现代。 但是就这么点儿兴趣，已经被互联网给我撕得稀碎。最爱网易云音乐，但是版权少得可怜。听听逼哥吧，得去 Spotify 和 Apple Music 美区，听听郝云啊，大爱的 James Blunt 啊这些主流音乐，都还得再弄个 QQ 音乐。Spotify 倒是算全的，但是可惜了，最近发现逼哥的歌也下架了不少，又不符合我自己的使用习惯。就这么在网易云音乐和其他一切之间来回奔波，实在是奔波不动了。 这不是昨天，有人在 TG 推荐了一个神器，马上搞下来看看，这一看不要紧，我耳机从早上带到现在，就没摘下来，原来那个味儿，它有点儿回来了。（别报希望听…",
-      "image": "https://static.elizen.me/img/2021-02-02-%E6%88%AA%E5%B1%8F2021-02-02%20%E4%B8%8A%E5%8D%8810.06.36.jpg",
-      "publishedAt": "2021-02-02T00:00:00Z",
-      "sourceId": "fc41292f8a54624e",
-      "sourceTitle": "Elizen's Blog",
-      "link": "https://elizen.me/posts/2021/02/yesplaymusic/",
-      "detailPath": "articles/addc025a586adae109520290.json"
     }
   ]
 }

@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "57bafc7c4697cc49f8143dcc",
+      "title": "Run:ai 学习记录",
+      "summary": "工作上的原因，最近学习了一下Run:ai，也考察了一下它的替代技术。在这里记录一下。 Run:ai功能特性 Nvidia当年收购Run:ai，还是很有前瞻性的。并且它并没有阻拦开源版本的继续演进，只不过，商业分支提供了更强大的能力。 Run:ai是一个企业级的AI基础设施编排和管理平台，核心能力就是最大化GPU的资源利用和调度能力，在它的 主页 上，列出了四大特性： AI-Native Workload Orchestration Dynamic GPU Allocation Policy-Driven Governance Open Architecture 抛开那些商业宣传和拥抱开源等等方面，我们只讨论技术层面，我觉得拥有核心竞争力的feature主要是： Dynamic Quotas and Pooli…",
+      "image": "https://www.raychase.net/wp-content/uploads/2026/08/run-ai-ui-1920x1455-1-1024x775.jpeg",
+      "publishedAt": "2026-08-06T22:10:11Z",
+      "sourceId": "ed6c79eba03be7d3",
+      "sourceTitle": "四火的唠叨",
+      "link": "https://www.raychase.net/8295",
+      "detailPath": "articles/57bafc7c4697cc49f8143dcc.json"
+    },
+    {
       "id": "6eb62c0c12b597e87281a646",
       "title": "笔记：在 Mac Mini 本地跑 LLM 大模型",
       "summary": "这些笔记是在自己的Mac Mini上面折腾了一些记录，主要是安装一些重要的大模型工具，把这些工具连接起来，建立自己的私有本地知识库等等，以备查阅。后续不定时更新。 安装OrbStack OrbStack是专门为MacOS设计的快速、轻量级的虚拟化工具，可以作为本地Docker、K8s和Linux VM的超容易替代品。因为它丢掉了跨平台的包袱，直接在系统内核级别支持虚拟机指令，动态分配内存等等做法，让它变得超快。就以Docker为例，它可以把冷启动速度从几十秒优化到一两秒。 我是在Apple M4芯片的Mac mini上面折腾的，首先要保证我的应用全部都是M4芯片直接支持的，而不是通过Rosetta 2兼容性转换过来的。在检查Homebrew的时候，发现brew命令的路径在 /usr/local/bin/bre…",
@@ -98,17 +109,6 @@
       "sourceTitle": "四火的唠叨",
       "link": "https://www.raychase.net/8063",
       "detailPath": "articles/1b58a8729ff9f7418f64e3d5.json"
-    },
-    {
-      "id": "eaf3c8d7109fbcb36fdc0cbc",
-      "title": "OAuth2.0 的几种授权流程",
-      "summary": "首先，从高维度看，OAuth是要解决什么问题？ OAuth要解决的是客户端在不知道和不使用用户密码的情况下，怎么样安全访问并获取用户所拥有的资源的问题。 顺带说一句，经常和OAuth一起谈到的OIDC则是解决了用户信息（profile）获取的问题。简单说，OAuth解决了Authorization的问题，OIDC解决了Authentication的问题。 OAuth有几种角色： Resource Owner：资源的拥有者，比方说终端用户； Resource Server：资源服务器，比如用户想要调用的API； Client：就是用户来进行鉴权和资源操作的客户端，比方说浏览器或者CLI； Authorization Server：就是专门授权的服务器。 所以OAuth就是用户想通过某种机制，通过Client和A…",
-      "image": null,
-      "publishedAt": "2025-07-27T02:55:18Z",
-      "sourceId": "ed6c79eba03be7d3",
-      "sourceTitle": "四火的唠叨",
-      "link": "https://www.raychase.net/8015",
-      "detailPath": "articles/eaf3c8d7109fbcb36fdc0cbc.json"
     }
   ]
 }

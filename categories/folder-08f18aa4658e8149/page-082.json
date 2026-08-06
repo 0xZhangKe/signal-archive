@@ -1,6 +1,39 @@
 {
   "items": [
     {
+      "id": "6d83e18e3ca466584b74c58e",
+      "title": "Android hwui 中 RenderThread 工作流程",
+      "summary": "前言 本篇文章是自己的一个学习笔记，记录了 Android 5.0 中 hwui 中的 RenderThread 的简单工作流程。由于是学习笔记，所以其中一些细节不会太详细，我只是将大概的流程走一遍，将其工作流标注出来，下次遇到问题的时候就可以知道去哪里查。 下图是我用 Systrace 抓取的一个应用启动的时候 RenderThread 的第一次 Draw 的 Trace 图，从这里面的顺序来看 RenderThread 的流程。熟悉应用启动流程的话应该知道，只有当第一次 DrawFrame 完成之后，整个应用的界面才会显示在手机上，在这之前，用户看到的是应用的 StartingWindow 的界面。",
+      "image": null,
+      "publishedAt": "2015-08-12T14:38:01Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2015/08/12/AndroidL-hwui-RenderThread-workflow/",
+      "detailPath": "articles/6d83e18e3ca466584b74c58e.json"
+    },
+    {
+      "id": "8aa553f1cfc0eb914a25afc6",
+      "title": "楊秀桃音樂學院",
+      "summary": "電腦音樂教室，每個人都有一台 iMac + Novation Impulse 49！",
+      "image": "https://wiwi.blog/assets/images/computerroom-be5fbddcd2ad265167a14b12e5f7507c.jpg",
+      "publishedAt": "2015-08-07T00:00:00Z",
+      "sourceId": "7f36c3da1e6b5c71",
+      "sourceTitle": "Wiwi.Blog Blog",
+      "link": "https://wiwi.blog/blog/yst-music-school",
+      "detailPath": "articles/8aa553f1cfc0eb914a25afc6.json"
+    },
+    {
+      "id": "990b427c0a8ee81edec34266",
+      "title": "Java7 HashMap 源码分析",
+      "summary": "链表和数组可以按照人们意愿排列元素的次序，但是，如果想要查看某个指定的元素，却又忘记了它的位置，就需要访问所有的元素，直到找到为止。如果集合中元素很多，将会消耗很多时间。有一种数据结构可以快速查找所需要查找的对象，这个就是哈希表（hash table）. HashMap是基于哈希表的 Map 接口的实现。此实现提供所有可选的映射操作，并允许使用 null 值和 null 键。（除了非同步和允许使用 null 之外，HashMap 类与 Hashtable 大致相同。）此类不保证映射的顺序，特别是它不保证该顺序恒久不变。 本文按源码顺序拆 HashMap：先看数据结构是数组+链表的组合，再看构造函数里 initialCapacity 与 loadFactor 的默认值含义；接着是 put 操作的扩容流程、key…",
+      "image": null,
+      "publishedAt": "2015-08-05T12:27:13Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2015/08/05/HashMap/",
+      "detailPath": "articles/990b427c0a8ee81edec34266.json"
+    },
+    {
       "id": "4f3a9b1717cfe1c3ba70389f",
       "title": "PixiTracker",
       "summary": "之前用 PixiTracker 做的曲子，被科技新聞大站 CNET 報導了～",
@@ -626,39 +659,6 @@
       "sourceTitle": "All posts | 所有貼文 on ttheng's microblog. | 侃侃而隨想極短文。",
       "link": "https://microblog.ttheng.com/bali-uluwatu-temple/",
       "detailPath": "articles/f9f598a4dcaeb19ce43e35fe.json"
-    },
-    {
-      "id": "0dedd954625d1634d64fb963",
-      "title": "巴厘島再見",
-      "summary": "再见了，巴里岛！ 2026 年 1 月 6 日備註： 這是當時的我剛創建 Facebook 帳號不久後，隨手找來於不久前在印尼巴厘島的家庭旅行中拍下的照片並上傳的貼文。",
-      "image": "https://microblog.ttheng.com/blog/img54.jpg",
-      "publishedAt": "2012-08-25T06:09:00Z",
-      "sourceId": "a93d4f2e98fafcbe",
-      "sourceTitle": "All posts | 所有貼文 on ttheng's microblog. | 侃侃而隨想極短文。",
-      "link": "https://microblog.ttheng.com/bali-goodbye/",
-      "detailPath": "articles/0dedd954625d1634d64fb963.json"
-    },
-    {
-      "id": "9e45d37a730ee736fcd3bd47",
-      "title": "巴厘島火山",
-      "summary": "可怕的火山… ( in Bali ) 2026 年 1 月 5 日備註： 這是當時的我剛創建 Facebook 帳號不久後，隨手找來於不久前在印尼巴厘島的家庭旅行中拍下的照片並上傳的貼文。",
-      "image": "https://microblog.ttheng.com/blog/img52.jpg",
-      "publishedAt": "2012-08-22T12:57:00Z",
-      "sourceId": "a93d4f2e98fafcbe",
-      "sourceTitle": "All posts | 所有貼文 on ttheng's microblog. | 侃侃而隨想極短文。",
-      "link": "https://microblog.ttheng.com/bali-volcano/",
-      "detailPath": "articles/9e45d37a730ee736fcd3bd47.json"
-    },
-    {
-      "id": "7a50723afa6ea1c890ebbe01",
-      "title": "巴厘島找海豚",
-      "summary": "海豚竟然在我的眼前！( in Bali Lovina Beach ) 2026 年 1 月 5 日備註： 這是當時的我剛創建 Facebook 帳號不久後，隨手找來於不久前在印尼巴厘島的家庭旅行中拍下的照片並上傳的貼文。 這張照片拍攝於羅威納海灘，是個以追海豚著稱的旅遊景點。",
-      "image": "https://microblog.ttheng.com/blog/img49.jpg",
-      "publishedAt": "2012-08-22T12:55:00Z",
-      "sourceId": "a93d4f2e98fafcbe",
-      "sourceTitle": "All posts | 所有貼文 on ttheng's microblog. | 侃侃而隨想極短文。",
-      "link": "https://microblog.ttheng.com/bali-dolphin/",
-      "detailPath": "articles/7a50723afa6ea1c890ebbe01.json"
     }
   ]
 }

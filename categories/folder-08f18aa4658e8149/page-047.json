@@ -1,6 +1,50 @@
 {
   "items": [
     {
+      "id": "3e75acd77d7057e75212348f",
+      "title": "貝多芬 32 首鋼琴奏鳴曲，要彈幾個音？",
+      "summary": "以下統計數字，是利用 Bunji Hisamori 所製作的 MIDI 檔案分析而成，方法為計算全部樂章中 MIDI Note On 指令的數量。",
+      "image": null,
+      "publishedAt": "2025-08-22T00:00:00Z",
+      "sourceId": "7f36c3da1e6b5c71",
+      "sourceTitle": "Wiwi.Blog Blog",
+      "link": "https://wiwi.blog/blog/beethoven-sonatas-note-count",
+      "detailPath": "articles/3e75acd77d7057e75212348f.json"
+    },
+    {
+      "id": "22c2dfb5c0cdaed090f574de",
+      "title": "2025 形象照",
+      "summary": "上次拍形象照已經是 2018 年的事了，而且還是跟婚紗照一起「順便」拍的。就只有這麼一張照片，我在 NiceChord 實體書的書腰上用它，好和弦的影片開頭也放它。一圖走天下。",
+      "image": "https://wiwi.blog/assets/images/book-6cbd9fe2df86d7358096bd6da358fd60.png",
+      "publishedAt": "2025-08-21T00:00:00Z",
+      "sourceId": "7f36c3da1e6b5c71",
+      "sourceTitle": "Wiwi.Blog Blog",
+      "link": "https://wiwi.blog/blog/new-photos-2025",
+      "detailPath": "articles/22c2dfb5c0cdaed090f574de.json"
+    },
+    {
+      "id": "cf33fde452544f3ba2f82f98",
+      "title": "修复因存在多个内核版本导致的 ABB Agent 安装失败",
+      "summary": "Debian 13 的正式发布意味着 12 进入了 old-stable 的维护阶段，加上 NVIDIA 的 CUDA 从 13.0 开始不再为 Pascal 架构的 GPU 提供支持，我想对于我的 GPU 服务器来说，是时候为它保留一份最终的全盘备份了。",
+      "image": null,
+      "publishedAt": "2025-08-20T14:01:43Z",
+      "sourceId": "06aa2ffd92b9d263",
+      "sourceTitle": "糖菓·部落",
+      "link": "https://candinya.com/posts/fix-abb-agent-install-fail-caused-by-multiple-kernels/",
+      "detailPath": "articles/cf33fde452544f3ba2f82f98.json"
+    },
+    {
+      "id": "afba588efd9aa33ed0f71951",
+      "title": "APT-129 阻抗轉換器？DI？",
+      "summary": "前言 # 滿久以前就知道這個產品，最近決定買來試試看，但一直沒有需求，也怕東西品質不好，所以一直沒買。 功能 # Stander 的 APT-129 外觀就像一個轉接頭，「把 TS 訊號源轉換成 XLR」，但沒有那麼單純，它還有「把高阻抗訊號轉成低阻抗」再輸出的用途，同時也有轉換成「平衡訊號」的功能，算是一種「被動式 DI」了！ 而大小就像是一個轉接頭而已，放在隨身包裡是非常方便的。 先備知識 # 混音器或錄音界面的 Mic in 孔（通常是 XLR 孔），含有麥克風前級、且適合低阻抗輸入。 如果將拾音器類型的訊號源，透過一般的轉接器，直接連接到 Mic in 孔，會導致阻抗不橋接，而根據物理公式算出來的結果，這樣的阻抗不橋接問題，會形成 HPF，也就是 Low Cut，低頻直接不見。 但，把高阻抗訊號源插入…",
+      "image": "https://eddielv.com/articles/apt129/apt129.jpg",
+      "publishedAt": "2025-08-20T04:07:16Z",
+      "sourceId": "199cdf92fc46bfcd",
+      "sourceTitle": "Eddie Lv",
+      "link": "https://eddielv.com/articles/apt129/",
+      "detailPath": "articles/afba588efd9aa33ed0f71951.json"
+    },
+    {
       "id": "8c55179c7c243c6db7b5870c",
       "title": "2025年8月20日中国防火长城GFW对443端口实施无条件封禁的分析",
       "summary": "1. 引言 2025 年 8 月 20 日北京时间（UTC+8）约 00:34 至 01:48 间，中国国家防火墙（GFW）出现异常行为：对所有指向 TCP 443 端口的连接无条件注入伪造的 TCP RST+ACK 包，导致连接中断。该事件引发了中国与世界其他地区之间的大规模互联网连通性故障（ 来源1 与 来源2 ）。 本报告记录了我们对这一短暂但广泛的封禁事件的测量与分析。主要发现如下： 无条件的 RST+ACK 注入仅发生在 TCP 443 端口，未见于其他常见端口（如 22、80、8443）。 该无条件注入同时扰乱了出入境中国双方向的连接，但触发机制 不对称 ：从中国境内向境外发起的连接，客户端的 SYN 包与服务器的 SYN+ACK 包各自触发三个 RST+ACK 包；从境外向中国境内发起的连接，只…",
@@ -615,50 +659,6 @@
       "sourceTitle": "Wiwi.Blog Blog",
       "link": "https://wiwi.blog/blog/pinball",
       "detailPath": "articles/13a998207d36cc8f36bdebcb.json"
-    },
-    {
-      "id": "093751493398b771b39fd0e3",
-      "title": "Exposing and Circumventing SNI-based QUIC Censorship of the Great Firewall of China",
-      "summary": "Exposing and Circumventing SNI-based QUIC Censorship of the Great Firewall of China Ali Zohaib ∗ University of Massachusetts Amherst Qiang Zao ∗ GFW Report Jackson Sippe University of Colorado Boulder Abdulrahman Alaraj University of Colorado Boulder Amir Houmansadr University of Massachusetts Amherst Zakir Durumeric Stanford University Eric Wustrow Univers…",
-      "image": null,
-      "publishedAt": "2025-07-31T00:00:00Z",
-      "sourceId": "34d02af866ebd5fa",
-      "sourceTitle": "Great Firewall Report",
-      "link": "https://gfw.report/publications/usenixsecurity25/en/",
-      "detailPath": "articles/093751493398b771b39fd0e3.json"
-    },
-    {
-      "id": "68ff1bf352f0e9d900ee3d1c",
-      "title": "揭示并绕过中国防火长城基于SNI的QUIC封锁机制",
-      "summary": "揭示并绕过中国防火长城基于SNI的QUIC封锁机制 Ali Zohaib ∗ University of Massachusetts Amherst Qiang Zao ∗ GFW Report Jackson Sippe University of Colorado Boulder Abdulrahman Alaraj University of Colorado Boulder Amir Houmansadr University of Massachusetts Amherst Zakir Durumeric Stanford University Eric Wustrow University of Colorado Boulder * Ali Zohaib 和 Qiang Zao 对本工作贡献相当。…",
-      "image": null,
-      "publishedAt": "2025-07-31T00:00:00Z",
-      "sourceId": "34d02af866ebd5fa",
-      "sourceTitle": "Great Firewall Report",
-      "link": "https://gfw.report/publications/usenixsecurity25/zh/",
-      "detailPath": "articles/68ff1bf352f0e9d900ee3d1c.json"
-    },
-    {
-      "id": "8802ad6fe2479e0a0e88baa3",
-      "title": "選擇文字",
-      "summary": "當你想要用滑鼠選擇一個句子時，會不會常常手殘沒把游標放準，少選到一個字母呢？例如，明明想選「The quick brown fox jumps over the lazy dog」，結果卻選成了「he quick brown fox jumps over the lazy do」。",
-      "image": "https://wiwi.blog/assets/images/select1-bdedb7719f97ef1a7871d8df9aa2e3e4.gif",
-      "publishedAt": "2025-07-31T00:00:00Z",
-      "sourceId": "7f36c3da1e6b5c71",
-      "sourceTitle": "Wiwi.Blog Blog",
-      "link": "https://wiwi.blog/blog/select-text",
-      "detailPath": "articles/8802ad6fe2479e0a0e88baa3.json"
-    },
-    {
-      "id": "75ff4962ed023f77004be35d",
-      "title": "突然變成發牌 Show Boy",
-      "summary": "今日做房地產頒獎活動，負責音響與面光，晚宴有遊戲環節，但由於遊戲道具衆多，我也沒什麼事，就站在舞臺邊緣幫主持人傳遞道具。 長官走過來大概 3 次，要我直接上舞臺，後來主持也乾脆要我上臺。 於是，我穿排汗衫，腰間掛著工作手套，在臺上幫大家發牌的畫面就出現了！（太荒謬了 XD） Show Girl 簡寫成 SG，所以男生應該是 SB 沒錯吧 XD 照片由 亨利攝影 拍攝、提供。",
-      "image": "https://eddielv.com/musings/sb/1.JPG",
-      "publishedAt": "2025-07-30T18:18:12Z",
-      "sourceId": "199cdf92fc46bfcd",
-      "sourceTitle": "Eddie Lv",
-      "link": "https://eddielv.com/musings/sb/",
-      "detailPath": "articles/75ff4962ed023f77004be35d.json"
     }
   ]
 }
