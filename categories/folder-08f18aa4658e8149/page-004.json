@@ -1,6 +1,94 @@
 {
   "items": [
     {
+      "id": "00c821e48b69e793263fbefc",
+      "title": "格友 友格 & 本格對外聲明發布會 #1",
+      "summary": "格友 友格： 我不確定最初是在哪裡，開始看到格友這個稱呼用法的出現，我並不會對這個用詞感到感冒，只是老實說我個人覺得用起來有點彆扭，所以沒記錯的話，我應該還沒有在我的部落格中使用過這個稱呼。彆扭的原因可能是因為那個”友”字吧？ 對我來說，朋友這個稱呼，在我心中可能比較難隨口講出，在可以自然地稱呼別人是我的朋友且不覺得彆扭之前，我覺得比較精確的說法應該是友好關係。但在現實中如果我分那麼細，別人應該會覺得我很有距離感吧，所以其實我也沒什麼在現實的互動中，和別人聊過我對朋友這個概念的想法。 但這裡是我的部落格，我覺得我還是用自己真正感到自在的稱呼用詞好了。因為讀自己的文字，其實是可以清楚地感受到什麼用詞是真正貼合我的感受，我覺得這是我寫文章還蠻重視的點之一。當然，還是會有一些文，現在看會覺得有些失真，可能是因為當時…",
+      "image": null,
+      "publishedAt": "2026-07-29T04:23:07Z",
+      "sourceId": "9bbc7d640e2bc143",
+      "sourceTitle": "RayrrrrrR",
+      "link": "https://rayrrrrrrr.bearblog.dev/1-new-new-new-new-new-new/",
+      "detailPath": "articles/00c821e48b69e793263fbefc.json"
+    },
+    {
+      "id": "c74361bcb1c533ceb0217fd2",
+      "title": "幫朋友架一台幻獸帕魯專用伺服器：Docker 自架,和最容易卡關的 UDP 連線",
+      "summary": "這篇記錄了作者幫朋友用 Docker 在自己 24/7 的家用機上架設幻獸帕魯(Palworld)專用伺服器的完整過程,整理成一份能照做的教學。緣起是朋友原本用 Radmin VPN 連線,但那類 P2P 服務穿不過 NAT 就會退回中繼、流量繞經第三方,作者索性用自己的常開主機自架。文章先破除一個迷思:主機商規格頁清一色寫「16GB 起」,但小團隊日常很省,作者實測 3~5 人約 1.2GB;真正要防的是 Palworld 知名的記憶體洩漏,靠容器 mem_limit + 每日重啟壓住即可。接著給出一份去蕪存菁的 docker-compose(port 記得加 /udp、RCON 綁 127.0.0.1),把架好之後最卡人的 UDP 連線三關逐一走通:ufw 放行 udp、路由器 port forwardi…",
+      "image": null,
+      "publishedAt": "2026-07-29T04:19:24Z",
+      "sourceId": "bd51496b8ec0ca1d",
+      "sourceTitle": "Koimsurai 手記",
+      "link": "https://koimsurai.com/blog/palworld-dedicated-server-docker",
+      "detailPath": "articles/c74361bcb1c533ceb0217fd2.json"
+    },
+    {
+      "id": "d2636a3c5a58b7ac0ee240f2",
+      "title": "无区块编辑器的WordPress——ClassicPress",
+      "summary": "有些博友使用WordPress建站，但手动禁用了区块编辑器，换回经典编辑器。那区块相关代码留着也是浪费。所以可 […]",
+      "image": "https://lhcy.org/wp-content/uploads/2026/07/jie-ping-20260729-shang-wu-10-36-23.png",
+      "publishedAt": "2026-07-29T02:39:37Z",
+      "sourceId": "c8adde5ad4115162",
+      "sourceTitle": "林海草原",
+      "link": "https://lhcy.org/archives/wu-qu-kuai-bian-ji-qi-de-wordpress-classicpress.html",
+      "detailPath": "articles/d2636a3c5a58b7ac0ee240f2.json"
+    },
+    {
+      "id": "74dbe563dc654bd325a1eafd",
+      "title": "博客一定要为读者负责吗？III",
+      "summary": "接着昨天的话题。 博客是否属于“公共空间”？创作者的责任在于…… 这一部分，我在目前依旧没有具体结论，但是可以 […] —— 感谢订阅 莫比乌斯 ，如你有任何疑问、观点交流，请前往 创作者频道 ，或 私信 联系。",
+      "image": null,
+      "publishedAt": "2026-07-29T01:00:00Z",
+      "sourceId": "416bdd1cdb343543",
+      "sourceTitle": "莫比烏斯",
+      "link": "https://mobius.blog/25183.html",
+      "detailPath": "articles/74dbe563dc654bd325a1eafd.json"
+    },
+    {
+      "id": "b386c59fb6acacd5ac105a41",
+      "title": "跨時空價值",
+      "summary": "\"Art produces ugly things which frequently become more beautiful with time. Fashion, on the other hand, produces beautiful things which always become ugly with time.\"",
+      "image": null,
+      "publishedAt": "2026-07-29T00:00:00Z",
+      "sourceId": "7f36c3da1e6b5c71",
+      "sourceTitle": "Wiwi.Blog Blog",
+      "link": "https://wiwi.blog/blog/timeless-value",
+      "detailPath": "articles/b386c59fb6acacd5ac105a41.json"
+    },
+    {
+      "id": "254920d3cdfc0ab801e92948",
+      "title": "Linux 伺服器被植入挖礦程式：從 load average 10.65 揪出整條攻擊鏈",
+      "summary": "這篇記錄了作者在一次例行效能健檢中,意外撞見自己家用伺服器被植入挖礦程式的完整抓賊過程,並整理成一份人人可照做的可疑進程自檢清單。起點是一個不該出現的數字:一台 16 執行緒的機器 load average 卻卡在 10.65。作者用 top 與 docker stats 揪出一個吃滿 10 核、隨機大小寫檔名的可疑程序,再靠 Linux 的 /proc 三件套(exe 指向已刪除的 /tmp 檔、cmdline、environ 溯源到某個 Docker 容器)確認它是挖礦程式,並把攻擊鏈拉出來:一個 port 直接綁在 0.0.0.0、繞過 nginx 對外裸露的 Next.js 容器,被 CVE-2025-66478(Next.js 16.0.6 的滿分 RCE、綽號 React2Shell)打穿。文中含…",
+      "image": null,
+      "publishedAt": "2026-07-28T16:55:03Z",
+      "sourceId": "bd51496b8ec0ca1d",
+      "sourceTitle": "Koimsurai 手記",
+      "link": "https://koimsurai.com/blog/catching-a-cryptominer",
+      "detailPath": "articles/254920d3cdfc0ab801e92948.json"
+    },
+    {
+      "id": "f84f12d746de14e64e8e4935",
+      "title": "前往台北比賽",
+      "summary": "幾個月前我參加了 技能競賽分區賽 ，非常幸運有拿到前五，雖然說我自己已經很滿足了，但當然前五就會被丟到全國賽。 接下來三天要比全國技能競賽，今天提前一天來參加開幕。老實說今天的行程沒說到特別好，而且這也是我少數幾次來台北。 寫這段的時候今天已經過完了，我是在床上寫下的。比賽的會場其實不差，在南港展覽館，只是時間上的安排沒有說到很優。我們一早去等了超級久，因為手冊上是寫十一點半要開始什麼簡報，但是實際上是下午兩點，這是我去問之後才得知的。 另一點就是他們的午餐沒有到很合我胃口，因為我自己滿重視官方給的菜色等等，這個真的讓我有點失望。 我自己是有吃完，但是在廚餘桶可以看到有一堆人丟掉的 完整 便當，真的很好笑。 下午就是簡單看個比賽系統，也沒什麼特別的。之後就是開幕，我自己是沒有特別留在那邊看，我出去走走，反正就…",
+      "image": "https://img.worldofwheat.cc/8548a5ae999a",
+      "publishedAt": "2026-07-28T16:00:00Z",
+      "sourceId": "de9cbd8d045ab396",
+      "sourceTitle": "小麥的異想世界",
+      "link": "https://my-blog.worldofwheat.cc/blog/2026/07/taipei-competition-arrival.html",
+      "detailPath": "articles/f84f12d746de14e64e8e4935.json"
+    },
+    {
+      "id": "693a16a4e0f70081eaef3552",
+      "title": "Ubuntu 26.04 安装 rime/中州韵输入法",
+      "summary": "此前写过 ubuntu 24.04 安装rime输入法的教程，使用系统默认的ibus。而 ubuntu 26.04已经全面转向Wayland，进而系统的ibus的可用性也没有fcitx好用，于是...",
+      "image": "https://pa.ci/usr/uploads/2026/07/2745422641.png",
+      "publishedAt": "2026-07-28T05:37:00Z",
+      "sourceId": "d87239607d14c88c",
+      "sourceTitle": "怕刺",
+      "link": "https://pa.ci/452.html",
+      "detailPath": "articles/693a16a4e0f70081eaef3552.json"
+    },
+    {
       "id": "6c73e9273f1b2fa8b7581541",
       "title": "エゴサ",
       "summary": "エゴサ e go sa ego search 意為在網路上搜尋自己。 不是要講什麼心理上的事情。今天忽然想到，會不會早就有一個什麼有名的角色叫做帥熊啊，就搜了帥熊一下。確實發現了一個有趣的角色。 他的本名似乎叫做「黑熊」Black Bear，但是因為太帥了，所以網友就暱稱他為「 イケベア i ke be a 」，中譯的話就是「帥熊」。看到最多的就是他了。 鹿兒島的吉祥物 ぐりぶー （似乎沒有官方中譯，就叫他「咕力豬」好了）出演了一些節目，比如 ぐりぶーファミリー物語 （咕力豬家族物語）。這隻被稱為「帥熊」的角色就出現在劇情中。 因為太帥了造成了一些話題，所以 採訪了導演 ，導演表示「雖然不能講得太明白，但是確實有參考某個全國人氣熊角色。」沒意外應該就是熊本熊，到底是怎麼參考的。 這個黑熊角色因為太帥了掀起了一…",
@@ -32,17 +120,6 @@
       "sourceTitle": "折腾人生",
       "link": "https://z.arlmy.me/posts/BBBPandINSW/INSW-ko/INSW_430/",
       "detailPath": "articles/043978c7873e0e2cc3bdf9bd.json"
-    },
-    {
-      "id": "b9f7a1b28da407190c42ad87",
-      "title": "博客一定要为读者负责吗？II",
-      "summary": "接着昨天的话题。 在公共空间输出观点时，是否需要避免自我心理分析？ 为了更好的背书，接下来要讨论的内容都有“书 […] —— 感谢订阅 莫比乌斯 ，如你有任何疑问、观点交流，请前往 创作者频道 ，或 私信 联系。",
-      "image": null,
-      "publishedAt": "2026-07-28T01:00:00Z",
-      "sourceId": "416bdd1cdb343543",
-      "sourceTitle": "莫比烏斯",
-      "link": "https://mobius.blog/25179.html",
-      "detailPath": "articles/b9f7a1b28da407190c42ad87.json"
     },
     {
       "id": "75e5d6c7a9ee70acb02a3378",
@@ -197,17 +274,6 @@
       "sourceTitle": "est's blog",
       "link": "https://blog.est.im/2026/stderr-25",
       "detailPath": "articles/5116cd9f9aebb31a6cba1e20.json"
-    },
-    {
-      "id": "6d018fe82cd47d236c773626",
-      "title": "帥熊帶弟弟兜風",
-      "summary": "帥熊是個要他帶 弟弟 去走走就會馬上照做的好哥哥，狗狗是危險動作請勿模仿。 ～本製圖中沒有任何動物受傷～（只有我會比較早老花眼而已）",
-      "image": "https://raw.githubusercontent.com/yangbearblog/images/main/kumasidecar.gif",
-      "publishedAt": "2026-07-27T05:00:42Z",
-      "sourceId": "13e0488e6596de1c",
-      "sourceTitle": "YangBear'Blog ᓚᘏᗢ",
-      "link": "https://yangbear.bearblog.dev/kumasidecar/",
-      "detailPath": "articles/6d018fe82cd47d236c773626.json"
     },
     {
       "id": "dcbdef74dbc9016b647e70fa",
@@ -593,72 +659,6 @@
       "sourceTitle": "Xinsl's Blog",
       "link": "https://blog.xinsl.xin/posts/android-old-app-share/",
       "detailPath": "articles/d1069a2ab01bc66c30785a1b.json"
-    },
-    {
-      "id": "31ccfcf5b070be49818bb452",
-      "title": "对抗系统的桌游",
-      "summary": "最近比较难找到人一起开桌游，所以我玩了不少人对抗系统规则的游戏。 桌游中人和人对抗的比较常见，设计一套规则、让玩家在这套规则下博弈；但需要找到（足够水平的）人一起玩。虽然很多桌游也会设计 solo 模式，但大多是设计一个自动机来模拟对手。这会损失相当的博弈性，要么变成了可预测的系统行为，要么沦为半随机事件。而游戏规则的原始设计中通常都会有相当部分依赖人之间的博弈才有趣。例如，我最喜欢的桌游《银河竞逐》在第一个扩展包中就加入了自动机，允许 solo ，但我觉得远没有和人玩有趣。 也有设计得不错的自动机。例如之前介绍过的《Star Trek : Captain's Chair》在玩家社区中就公认单人模式非常有趣，我也只一个人玩过。还有我前段超喜欢的《deep future》也是一个多人对抗游戏，但很多玩家包括我也…",
-      "image": null,
-      "publishedAt": "2026-07-24T14:03:34Z",
-      "sourceId": "64ba70840e06d623",
-      "sourceTitle": "云风的 BLOG",
-      "link": "https://blog.codingnow.com/2026/07/deckers.html",
-      "detailPath": "articles/31ccfcf5b070be49818bb452.json"
-    },
-    {
-      "id": "f7083b60792f13bbf095cbcb",
-      "title": "寫日記",
-      "summary": "幾天前把一本日記寫完了，是可以一手握住的那種小筆記本。自從在九乘九買了更可愛的狗勾封面的小筆記本後，「趕快寫完舊本子」就變成重要目標之一。恭喜我。 回味整本日記，有篇很喜歡，稍微修改整理如下。 5/15, 2:32 pm 整理考場的關係，今天中午就放學了。本來想說挺好，再上課會死 1 ，若每週都這樣一定很撫慰人心。但現在駁回：熱。天知道平日渾噩的午休時間躲過多少次災難，暈眩，忙亂，刺眼，缺水，難說我不是冷血生物，急忙鑽回水泥的巢穴。 2 團契偏在此時公園野餐，有小隻痛癢的螞蟻，但還是帶著感恩ㄉ心參加了。 突然想起捷運站到家那段 大沙漠 大馬路，不敢挑戰，決定先待在附近的圖書館，於是此刻就著椅子寫日記。人是很多，有些雜音，但還算安穩。對著牆角，冷氣很涼（重點），左邊窗戶斜斜灑下陽光，平時推心置腹的小筆記本如此受…",
-      "image": null,
-      "publishedAt": "2026-07-24T12:49:55Z",
-      "sourceId": "d6867515c49adbbd",
-      "sourceTitle": "Noa's Blog",
-      "link": "https://noa.bearblog.dev/keeping-a-journal/",
-      "detailPath": "articles/f7083b60792f13bbf095cbcb.json"
-    },
-    {
-      "id": "44ff05b81ae2b7035e85c3e9",
-      "title": "荷风送香气，竹露滴清响",
-      "summary": "很久没更了，水一篇吧。 自从十几岁外出上学，回老家就像旅游一样，一年也就那么两三次。 今年暑假回老家过了7、8天，小区门口公园里的湖中荷花竞相开放，虽然整个水面也不过30亩，却也有“接天莲叶无穷碧”的…",
-      "image": null,
-      "publishedAt": "2026-07-24T09:34:01Z",
-      "sourceId": "6f0b51cc3a696694",
-      "sourceTitle": "喂马劈柴",
-      "link": "https://blog.shaoxiao.net/2026/07/24/%e8%8a%b0%e8%8d%b7%e6%98%a0%e8%94%9a/",
-      "detailPath": "articles/44ff05b81ae2b7035e85c3e9.json"
-    },
-    {
-      "id": "adf06a88133a7f585b2b80a1",
-      "title": "注意：StarRocks 3.5.x 滚动升级触发 MV 全量刷新问题",
-      "summary": "",
-      "image": "https://cdn.jsdelivr.net/gh/crossoverJie/images@main/images/images20260724112251196.png",
-      "publishedAt": "2026-07-24T08:00:00Z",
-      "sourceId": "126e6f369677b760",
-      "sourceTitle": "crossoverJie's Blog",
-      "link": "http://crossoverjie.top/2026/07/24/starrocks/StarRocks-rolling-upgrade-MV-force-refresh/",
-      "detailPath": "articles/adf06a88133a7f585b2b80a1.json"
-    },
-    {
-      "id": "1236dae5a1d1ae67ff4618d8",
-      "title": "入蜀记 day426 “重要的不是写什么，而是你的心”",
-      "summary": "「“重要的不是写什么，而是你的心”。」",
-      "image": null,
-      "publishedAt": "2026-07-24T04:48:27Z",
-      "sourceId": "8e5dc5a8b5023a8e",
-      "sourceTitle": "折腾人生",
-      "link": "https://z.arlmy.me/posts/BBBPandINSW/INSW-ko/INSW_426/",
-      "detailPath": "articles/1236dae5a1d1ae67ff4618d8.json"
-    },
-    {
-      "id": "bc95af96f8154e7be1250477",
-      "title": "回答读者stoic提问",
-      "summary": "昨天读者 stoic 留言提问： 「 菜叔您好，我有提升表达能力的需求，网上说看完说理视频和文章后要求自己放下手机或电脑，描述刚才看过的行文逻辑，这些视频或文字内容是怎么把自己说服的，但我做不到，只记得刚刚的标题或主旨让看完的自己很爽。 该如何继续训练，网上还说把文章或视频文案扒下来然后进行极限缩写然后回推原来的文章，但缩写完又觉得自己没能get到文章的内容和逻辑，以至于还原不了原文。 说了一堆，想请教叔，我应该按照上面方法继续训练吗？ 」 当时我回答说：「这个我在留言区说不清楚，可能需要专门写一篇文章回复你。」以下，就是我的专题回复： 我相信，网上给出建议的人是出于好意，但是，有用没用和好意恶意之间从来就没有直接关联。通过复述原文内容大意，复述原文论证过程来学习表达，这个方法本身没有任何问题。问题在于选取的…",
-      "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhnHlecU9iOOVp4ZTAjG7Oqk6B9oqzuHyAMB4D34Dp-8LQQUM6dpV31cBCP5CnZqRc0NxBmEnOeYz3JGQDFIFix1tIeMmjU42FIvlmtUmUUqTjRFpUlbBaNgiur5kaPm49f971y5kR8_W6TWQjiUEID8rvciwXdHn1u7jnaUyFTy5m9qjnhHIQMSM4GUqo/s72-w440-h585-c/0_0%20-%202026-07-24T110851.544-gigapixel-cgi-2x.jpeg",
-      "publishedAt": "2026-07-24T04:36:43Z",
-      "sourceId": "095c6fbac5bbadfd",
-      "sourceTitle": "槽边往事",
-      "link": "https://www.hecaitou.com/2026/07/A-Reply-to-Stoic.html",
-      "detailPath": "articles/bc95af96f8154e7be1250477.json"
     }
   ]
 }
