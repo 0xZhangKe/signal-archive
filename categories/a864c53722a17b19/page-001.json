@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "4ececc79b9947c8d43728147",
+      "title": "邮箱生态调研2026",
+      "summary": "起初一个很简单的想法，把一个app/服务的私人数据，集中存数据库麻烦，不想维护担责，干脆放用户自己邮箱里，所谓\"BYOS（自带存储）\"。反正协议 SMTP/POP3/IMAP 很方便，然后调查了下很快发现，时代变了。 本来寄希望IMAP 这个协议，感觉能缝成一个读写API， - APPEND 写（一封邮件 = 一个对象）， FETCH 读， STORE 改 flag， COPY/MOVE 移动 - \"目录 + KV\"模型，flag（ \\Seen 、 \\Flagged 等）即元数据位 - SEARCH 查询 主题、日期、自定义 header等 - 增量同步： UID + UIDVALIDITY ， IDLE 可做准实时推送（仅单文件夹） 其实古董的 GMailFS / GMail Drive 之类把 Gmail…",
+      "image": null,
+      "publishedAt": "2026-08-07T02:35:00Z",
+      "sourceId": "a864c53722a17b19",
+      "sourceTitle": "est's blog",
+      "link": "https://blog.est.im/2026/stdout-31",
+      "detailPath": "articles/4ececc79b9947c8d43728147.json"
+    },
+    {
       "id": "6d718b2f3b8daa3c810c38a5",
       "title": "“畜牲”",
       "summary": "最近观察到娃学会了一些脱口而出的骂人的话，他骑车遇到看不惯的现象，就会骂一句 “牲口” ！ 我也没太多去干预，毕竟比 “肏” 这类秽语要委婉那么一丢丢。 然后我最近也喜欢一边开 Vibe Coding 一边挂机 Rimworld 种田， 然后就发现一个事儿，我在牧场区域种的 恶蘑菇，一种非食用植物，不会被动物吃掉；如果种玉米 稻米 土豆就会被偷吃，然后基地的粮食就少了一份。 所以突然就得到这么一个莫名其妙的理论： 动物并不会去主动破坏自己吃不了的东西 可能也有反例，狼、狮子会杀死竞争者的幼崽，黑猩猩会打架，一些鸟会破坏别的鸟的蛋；松鼠会偷走自己暂时吃不了的东西；海豚玩弄猎物； 通过这些例子，感觉破坏性和智力正相关，也就是利用预测能力和因果性去糟蹋东西。骂人是动物，仿佛动物低人一等，但是人心有的时候，甚至还不如…",
@@ -208,17 +219,6 @@
       "sourceTitle": "est's blog",
       "link": "https://blog.est.im/2026/stdin-15",
       "detailPath": "articles/aecd25836554a1126e35a86c.json"
-    },
-    {
-      "id": "bba97527d3f82970a65f0482",
-      "title": "Playlet：DLNA听歌神器 免安装app播放NAS里的歌",
-      "summary": "家里有个小 NAS 。里面存了一些歌。一半是用 NAS 自带的 app 听，一半是。。。SMB 共享打开听 虽然 NAS 也提供 DLNA ，一直以来找不到趁手 app ，要么收费，要么 bug 多，要么不能多端。 13年前我也想 基于 chrome.socket 做个 Chrome App 弄个类似的。结果这破玩意实现有问题， 多连接会导致 hang 。最后 2020年Chromium决定杀死 Chrome Apps 周六的时候，实在无聊，决定又开始搓轮子。在思考 SSDP/UPnP ，native UI, electron，命令行这些选型的时候，突然想到，DLNA服本来就要提供一个http，自己再造个 http 客户端去通信，岂不是多此一举？只要依托它，解决跨域……等等，用个 bookmarklet 不就…",
-      "image": null,
-      "publishedAt": "2026-05-30T12:03:08Z",
-      "sourceId": "a864c53722a17b19",
-      "sourceTitle": "est's blog",
-      "link": "https://blog.est.im/2026/stdout-21",
-      "detailPath": "articles/bba97527d3f82970a65f0482.json"
     }
   ]
 }
