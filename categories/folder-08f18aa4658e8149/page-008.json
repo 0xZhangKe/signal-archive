@@ -1,6 +1,28 @@
 {
   "items": [
     {
+      "id": "725c217cc47cecfab69ff3e9",
+      "title": "无名",
+      "summary": "「无名。」",
+      "image": null,
+      "publishedAt": "2026-07-12T09:12:27Z",
+      "sourceId": "8e5dc5a8b5023a8e",
+      "sourceTitle": "折腾人生",
+      "link": "https://z.arlmy.me/posts/Poems/2026/20260708_WuMing/",
+      "detailPath": "articles/725c217cc47cecfab69ff3e9.json"
+    },
+    {
+      "id": "55bc388194740ac3a9e6d54c",
+      "title": "APT 動作的前身",
+      "summary": "最近在網路上 1 亂聽音樂時，發現了這個 MV 畫面： 這首是 2002 年發行的〈 Asereje (The Ketchup Song) 〉，聽到吉他的前幾拍，那個音色加上節奏我瞬間以爲是 Bossanova，結果不是，被騙了。整個歌滿洗腦的，間奏時 Bass 手出來曬太陽也恰到好處、不搶戲。 據說副歌的歌詞，是一個西班牙人唱英文饒舌歌〈 Rapper’s Delight 〉，但因爲不懂英文所以亂唱，最後把那個亂唱的部分變成這首〈Asereje (The Ketchup Song) 〉的副歌歌詞。 在〈 Dances from the 2000s: Grooves That Shaped a Decade 〉文章中的嵌入影片看到的。 ↩︎",
+      "image": null,
+      "publishedAt": "2026-07-12T07:25:35Z",
+      "sourceId": "199cdf92fc46bfcd",
+      "sourceTitle": "Eddie Lv",
+      "link": "https://eddielv.com/musings/apt-dance-predecessor/",
+      "detailPath": "articles/55bc388194740ac3a9e6d54c.json"
+    },
+    {
       "id": "6d6dae74eff4cdf626f23d82",
       "title": "入蜀记 day414 说灵魂",
       "summary": "「说灵魂。」",
@@ -637,28 +659,6 @@
       "sourceTitle": "Feed Me, Haruo",
       "link": "https://haruowang.vercel.app/wealth/dwelling/home.html",
       "detailPath": "articles/d860597f1339c3b275128c4a.json"
-    },
-    {
-      "id": "4fc97f583cd89a1f9d785518",
-      "title": "CVE-2026-0091： An issue in android window management to Arbitrary Code Execution in Launcher process",
-      "summary": "This issue CVE-2026-0091 has been fixed for Android 14+ in June 2026 Android Security Bulletin . Click here to see the patch The following is copied from my repo https://github.com/canyie/TransitionPlayer for backup purposes. For more info such as PoC code, please check the original repo.",
-      "image": null,
-      "publishedAt": "2026-07-08T09:40:00Z",
-      "sourceId": "511f3e9d589e2612",
-      "sourceTitle": "残页的小博客",
-      "link": "https://blog.canyie.top/2026/07/08/CVE-2026-0091/",
-      "detailPath": "articles/4fc97f583cd89a1f9d785518.json"
-    },
-    {
-      "id": "b8e7abb8cfbc6b56f0110902",
-      "title": "[AI] curl -NT. 导致100% CPU原因",
-      "summary": "有AI就是好使，搁以前自己得盯半天也看不明白。。。 问题确认 curl -NT. 在连接一个持续推送数据的 streaming 服务器时，会产生一个 紧密的 pause/unpause 循环 ，导致 100% CPU。 根因分析 -T. （注意是点号，不是减号）将 stdin 设为 非阻塞模式 ，然后依赖 EAGAIN + CURL_READFUNC_PAUSE 机制来避免阻塞。核心循环发生在三个回调之间： 第一步 — 上传尝试失败 （ src/tool_cb_rea.c ）： { rc = read(per->infd, buffer, sz * nmemb); if(rc < 0) { if(errno == EAGAIN) { errno = 0; config->readbusy = TRUE; re…",
-      "image": null,
-      "publishedAt": "2026-07-08T08:05:00Z",
-      "sourceId": "a864c53722a17b19",
-      "sourceTitle": "est's blog",
-      "link": "https://blog.est.im/2026/stdout-25",
-      "detailPath": "articles/b8e7abb8cfbc6b56f0110902.json"
     }
   ]
 }

@@ -1,6 +1,28 @@
 {
   "items": [
     {
+      "id": "75f9f5aa85271568ccd73a59",
+      "title": "「搜尋」功能上線啦！",
+      "summary": "因爲文章越來越多，只靠分類其實也不好找到文章，在「 歷史上的今天 」之後，弄了搜尋功能！以下分享怎麼在 Hugo 中做到。 做出搜尋頁面的基本頁 content/search/_index --- title: \"搜尋\" type: \"search\" draft: false --- header 在導覽列做搜尋框框 themes/classic/layouts/partials/header.html <header> <nav> <ul> {{ $title := lower .Title }} {{ $section := lower .Section }} <li class=\"pull-left {{ if .IsHome }}current{{ end }}\"> <a href=\"{{ .Site…",
+      "image": null,
+      "publishedAt": "2025-12-21T13:57:54Z",
+      "sourceId": "199cdf92fc46bfcd",
+      "sourceTitle": "Eddie Lv",
+      "link": "https://eddielv.com/musings/search/",
+      "detailPath": "articles/75f9f5aa85271568ccd73a59.json"
+    },
+    {
+      "id": "17be7ffcf89d1ef5957cc9d4",
+      "title": "「歷史上的今天」頁面建立",
+      "summary": "文章越來越多的情況下，單純用分類方式還是會很困擾，因爲列表列出之後真的太多了。處理方法可以是增加搜尋，但 Eddie 想試試看用同日期但不同年份的方式來處理，讓一次顯示的文章不要太多、太轟炸，於是「 歷史上的今天 」就建立了！ 技術層面 # 如果爲 365 天都建立一個 list 是不實際的，一個功能佔據這麼多檔案就太瞎了，因此，應該是用一個頁面來包含全部資訊，再用某種機制（判斷是）抓出自己要的文章才是正解。 html # Eddie 習慣都是做在 themes 而不是網站本身，但其實沒差，只是 hugo 優先級順序不同罷了，有確定抓到對的檔案，最終生成在 Public 內的檔案會是一樣的。 themes/classic/layouts/page/on-this-day.html {{ partial \"he…",
+      "image": null,
+      "publishedAt": "2025-12-21T07:18:41Z",
+      "sourceId": "199cdf92fc46bfcd",
+      "sourceTitle": "Eddie Lv",
+      "link": "https://eddielv.com/musings/on-this-day/",
+      "detailPath": "articles/17be7ffcf89d1ef5957cc9d4.json"
+    },
+    {
       "id": "241a5329ae455afbeee8a9bb",
       "title": "如何當預言家（但不說出你的預言）",
       "summary": "const handleInputChange = (e) => {",
@@ -637,28 +659,6 @@
       "sourceTitle": "Eddie Lv",
       "link": "https://eddielv.com/musings/auto-tune-and-ai-singer/",
       "detailPath": "articles/b9662b24d57b4efe7324c113.json"
-    },
-    {
-      "id": "6d478c1dbd7b2cddc9d73c7b",
-      "title": "一夜爆火的小工具 - 给你的头像加上圣诞帽",
-      "summary": "欢迎！ 如果你是从我的「圣诞帽🎄 By TaurusXin」站点过来的，那么非常欢迎你也点进了我的博客，这里是我创作和分享灵感与生活日常的地方，希望你能够喜欢这里！ 如果你不知道，那么可以 点击这里 去看看，这是一个非常有意思的小工具，用于给你的社交媒体头像戴上一顶圣诞帽。 起因 12 月 8 日早上，我收到了十几封来自腾讯云 EdgeOne 与 Cloudflare 的邮件，均提示我的 CDN 流量与请求数量异常高，已经接近我设定的阈值上限而被关停。 开始认为是 PCDN 又在刷流量，后面登上 EdgeOne 的控制台发现都是正常的流量访问，来源是遍布全球的地址。 此时 EdgeOne CDN 已经自动关停，而 Cloudflare 也提示我 Worker 与 Pages 的访问数即将达到阈值 扩容 到公司…",
-      "image": "https://cdn.taurusxin.com/hugo/2025/12/08/edgeone.png",
-      "publishedAt": "2025-12-08T15:51:00Z",
-      "sourceId": "3220115c042340a7",
-      "sourceTitle": "TaurusXin 的独立博客",
-      "link": "https://www.taurusxin.com/christmas-hat/",
-      "detailPath": "articles/6d478c1dbd7b2cddc9d73c7b.json"
-    },
-    {
-      "id": "ce7915e5e91124eec250b151",
-      "title": "超可愛的白板畫",
-      "summary": "兩年前回到家鄉山打根的時候，某天和家人到某間茶餐廳吃東西，偶然看到牆上通常用來寫上菜單或告示的白板，竟然被一位有才華的繪者用不同顏色的 marker 畫上精美繪圖，其中還有漫畫《鬼滅之刃》和 Pokémon 電玩的角色！ 攝於 2023 年 7 月 16 日。高畫質全圖可在 這裡 找。 而且在那些圖中，角色們都是被畫上正在吃粉麵或港式點心的姿態，所以它們也許是該間茶餐廳爲了作宣傳兼吸引客人而畫的吧？不懂是店家委託別人畫的，還是畫家本身也是店主，抑或是某位熱情食客的傑作？ 無論如何，它們真的超～可愛的，我當時在那邊用餐時，眼神都忍不住往它們望去。 我已經不記得這間茶餐廳的確切位置了（好像在 IJM Bandar Utama 裡頭？？？），我也不知道這些白板畫至今還在不在。可惜上個禮拜回去時沒有去到（忘了），希望…",
-      "image": "https://microblog.ttheng.com/blog/img28reduced.jpg",
-      "publishedAt": "2025-12-08T08:19:00Z",
-      "sourceId": "a93d4f2e98fafcbe",
-      "sourceTitle": "All posts | 所有貼文 on ttheng's microblog. | 侃侃而隨想極短文。",
-      "link": "https://microblog.ttheng.com/cute-manga-whiteboard-art/",
-      "detailPath": "articles/ce7915e5e91124eec250b151.json"
     }
   ]
 }

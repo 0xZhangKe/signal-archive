@@ -1,6 +1,28 @@
 {
   "items": [
     {
+      "id": "a2e3c61a91e3c45af6a594e6",
+      "title": "2025觀影小記",
+      "summary": "普通 封神二 很一般，就是神仙打來打去。 頭腦特工隊 研究所組織的觀影活動。 的士速遞 挺有意思的輕鬆小片。 長安的荔枝 適合打發時間的片子，至少不會覺得浪費時間。各種劇情衝突塑造清晰，主旨也很好懂。比如楊國忠一心禮佛，但為了一口荔枝，害得沿途官驛百姓棄家而逃。最神的鏡頭是荔枝呈上來之後，貴妃笑了一下，那一盤荔枝就放在那，鏡頭逐漸拉遠，和其他水果一同擺在桌上。但是大鵬真的好像王寶強。",
+      "image": null,
+      "publishedAt": "2025-12-31T00:00:00Z",
+      "sourceId": "5f3b7bca48a6bd8b",
+      "sourceTitle": "赫赫文王",
+      "link": "https://kqh.me/diary/n139/",
+      "detailPath": "articles/a2e3c61a91e3c45af6a594e6.json"
+    },
+    {
+      "id": "9c708468e57c30b9c2eac017",
+      "title": "2025 年回顧",
+      "summary": "2024 年給自己的願望是，2025 年可以不再回公司工作且有辦法養活自己。這個目標雖然沒有達到，但我自認 2025 年是我得到成長數一數二的一年。",
+      "image": "https://image.kalan.dev/6dfdbf3d-bde6-41a3-746b-6ced5b458500/normal",
+      "publishedAt": "2025-12-31T00:00:00Z",
+      "sourceId": "538caf01ac3ab305",
+      "sourceTitle": "愷開的部落格",
+      "link": "https://blog.kalan.dev/year-in-review/2025-year-in-review/",
+      "detailPath": "articles/9c708468e57c30b9c2eac017.json"
+    },
+    {
       "id": "dbb1c6ccca05609e74b6fcd7",
       "title": "PROEL DIGIPAD8 混音器問世（但我傻眼）",
       "summary": "Eddie 有一臺 Flow8 ，它沒有電動推杆，所以每次翻頁時，推杆都要手動歸位，才能開始使用。 例如：第一個推杆送往主喇叭的推杆位置在 0dB，但是送往監聽喇叭的推杆位置在 -10dB，當從送往主喇叭的頁面換成送往監聽喇叭的頁面時，要先手動把推杆移動到 -10dB，推杆才能開始正常使用。 因此，Eddie 一直嚮往有電動推杆，但這種小尺寸的混音器都沒有，而 DIGIPAD8 問世了！ Eddie 第一次看到覺得超興奮啊！！！ 具有電動馬達推杆的 DIGIPAD8！ # 基本上，DIGIPAD8 明擺著就是要對標 Flow8，受衆完全重疊，功能完全一樣，但就是多了電動推杆。 電動推杆毫無用處 # 仔細研究之後發現，DIGIPAD 根本沒有做 Send on Fader 功能，也就沒有任何翻頁的情境，所以電動…",
@@ -637,28 +659,6 @@
       "sourceTitle": "Eddie Lv",
       "link": "https://eddielv.com/musings/rss-fix/",
       "detailPath": "articles/53b2335bd99c36f55e6efc01.json"
-    },
-    {
-      "id": "75f9f5aa85271568ccd73a59",
-      "title": "「搜尋」功能上線啦！",
-      "summary": "因爲文章越來越多，只靠分類其實也不好找到文章，在「 歷史上的今天 」之後，弄了搜尋功能！以下分享怎麼在 Hugo 中做到。 做出搜尋頁面的基本頁 content/search/_index --- title: \"搜尋\" type: \"search\" draft: false --- header 在導覽列做搜尋框框 themes/classic/layouts/partials/header.html <header> <nav> <ul> {{ $title := lower .Title }} {{ $section := lower .Section }} <li class=\"pull-left {{ if .IsHome }}current{{ end }}\"> <a href=\"{{ .Site…",
-      "image": null,
-      "publishedAt": "2025-12-21T13:57:54Z",
-      "sourceId": "199cdf92fc46bfcd",
-      "sourceTitle": "Eddie Lv",
-      "link": "https://eddielv.com/musings/search/",
-      "detailPath": "articles/75f9f5aa85271568ccd73a59.json"
-    },
-    {
-      "id": "17be7ffcf89d1ef5957cc9d4",
-      "title": "「歷史上的今天」頁面建立",
-      "summary": "文章越來越多的情況下，單純用分類方式還是會很困擾，因爲列表列出之後真的太多了。處理方法可以是增加搜尋，但 Eddie 想試試看用同日期但不同年份的方式來處理，讓一次顯示的文章不要太多、太轟炸，於是「 歷史上的今天 」就建立了！ 技術層面 # 如果爲 365 天都建立一個 list 是不實際的，一個功能佔據這麼多檔案就太瞎了，因此，應該是用一個頁面來包含全部資訊，再用某種機制（判斷是）抓出自己要的文章才是正解。 html # Eddie 習慣都是做在 themes 而不是網站本身，但其實沒差，只是 hugo 優先級順序不同罷了，有確定抓到對的檔案，最終生成在 Public 內的檔案會是一樣的。 themes/classic/layouts/page/on-this-day.html {{ partial \"he…",
-      "image": null,
-      "publishedAt": "2025-12-21T07:18:41Z",
-      "sourceId": "199cdf92fc46bfcd",
-      "sourceTitle": "Eddie Lv",
-      "link": "https://eddielv.com/musings/on-this-day/",
-      "detailPath": "articles/17be7ffcf89d1ef5957cc9d4.json"
     }
   ]
 }
