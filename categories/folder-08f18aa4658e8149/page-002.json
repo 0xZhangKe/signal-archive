@@ -1,6 +1,28 @@
 {
   "items": [
     {
+      "id": "c7d9a63d6131e0fda0c36b78",
+      "title": "為什麼我開始使用 Zed 編輯器：從 VS Code 搬家,23 個擴充最後剩 8 個",
+      "summary": "Zed 團隊的上一個作品是 Atom,而 Atom 催生的 Electron 後來成了 VS Code 的地基。這篇記錄作者從 VS Code Remote-SSH 搬到 Zed 的完整過程:本機端 4,067 MB 對 204 MB、伺服器端 7.9 GB 對 107 MB,23 個擴充搬完只剩 8 個。內容涵蓋官方的設定匯入路徑與鍵位差異、有 GUI 的設定視窗與專案層級設定的限制、遠端開發的實測,以及 ACP 怎麼把 AI agent 從編輯器裡拆出來。文末誠實列出 Zed 目前還缺的功能,以及為什麼作者認為那份清單的保鮮期很短。",
+      "image": null,
+      "publishedAt": "2026-08-04T09:37:31Z",
+      "sourceId": "bd51496b8ec0ca1d",
+      "sourceTitle": "Koimsurai 手記",
+      "link": "https://koimsurai.com/blog/why-i-switched-to-zed",
+      "detailPath": "articles/c7d9a63d6131e0fda0c36b78.json"
+    },
+    {
+      "id": "dfd057d97b089ea3ea4727b8",
+      "title": "VS Code Remote-SSH 把我的伺服器燒到 96°C：rust-analyzer 無限重跑 cargo check",
+      "summary": "一台跑著三十幾個容器、同時被 VS Code Remote-SSH 連進去開發的家用伺服器,溫度釘在 90°C 撐了四十分鐘、load 從 8 衝到 196,最後失去回應。而把它燒掉的不是那些服務,是編輯器。這篇記錄整個追查過程:三條看起來很有說服力但都是錯的線索(SMU 當掉後感測器說謊、重開機就好、CPU 只有 30 到 50%),怎麼用 sysstat 的 sar 和 netdata 的 apps.plugin 回溯一個已經結束的事件,以及最後抓到的三個兇手——rust-analyzer 對一個 GTK 依賴全缺、永遠編不過的 Tauri 專案無限重跑 cargo check、Foam 擴充讓 ripgrep 開出兩百多個行程、還有只是雜訊的 RustDesk 輪詢。文末附上防線設定與事後補的兩道保險。",
+      "image": null,
+      "publishedAt": "2026-08-04T07:16:25Z",
+      "sourceId": "bd51496b8ec0ca1d",
+      "sourceTitle": "Koimsurai 手記",
+      "link": "https://koimsurai.com/blog/vscode-remote-ssh-burned-my-server",
+      "detailPath": "articles/dfd057d97b089ea3ea4727b8.json"
+    },
+    {
       "id": "44b0dedaa29cc4c935d3bee7",
       "title": "縈繞於心的十二道難題",
       "summary": "偶然看到費曼的 12 道難題（Feynman’s 12 Favorite Problems）這東東 […]",
@@ -637,28 +659,6 @@
       "sourceTitle": "All posts | 所有貼文 on ttheng's microblog. | 侃侃而隨想極短文。",
       "link": "https://microblog.ttheng.com/public-piano-ichi-go-ichi-e/",
       "detailPath": "articles/728d5506513852321f87a87f.json"
-    },
-    {
-      "id": "0d74cf1a9901c0fbd1202f93",
-      "title": "会花钱是一种能力？",
-      "summary": "刚才走在路上，突然想起前几天看的一个视频，其中的观点与我之前的想法不谋而合，让我产生了一些新的思考。大概意思是 […]",
-      "image": null,
-      "publishedAt": "2026-08-01T14:20:07Z",
-      "sourceId": "e0d7bbaba7286f4d",
-      "sourceTitle": "Rolen's Blog",
-      "link": "https://rolen.wiki/spending-as-a-skill/",
-      "detailPath": "articles/0d74cf1a9901c0fbd1202f93.json"
-    },
-    {
-      "id": "812aafab9181ae8d33a38580",
-      "title": "那些让人脸红的文字",
-      "summary": "「看到自己当年写的文字，尴尬到脚趾挠穿地板怎么办」，这个问题我听过不下一百回。昨天我回答了这个问题，为了纪念一位我很喜欢的演员、音乐人，我重发了自己很多年前随手写过的一篇短文：《 这是我所能达到的最远的距离 》。 讲道理没有多大作用，采取行动才有真正的说服力。 你说我昨天觉得尴尬么？当然，我毕竟是血肉之躯，拥有人类共同的情感反应，又不是什么天生的反社会变态杀人狂魔。但我还是发了出来，并没有受到尴尬的太多影响，更没有沉浸在这种个人感受里。 为什么我能做到看旧文不说，还能做到悍然发旧文，而许多人多看一眼都觉得臊得不行？肯定有人会立即抢答：因为你脸皮厚，你不要脸呗，人不要脸鬼都怕。肯定也有人会随即展开：啊，这说明一个人的内心如果足够强大，就能达到从心所欲的境界。 想听听我的答案吗？ 对于我而言，最简单，也最容易上价…",
-      "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhUKbdeCxO4o7jo27ilRFRXScDs707vl09bKn2dgWOWzFcEW7SyXF4oiFtjQG-j52dEG62HXV_9XwhWjEg7TFtdevDJfOGQ7tTLdPjHBvxf2v645VwvsBUbZ_PKzQf3fl9HWWu7HyG43dGTWczwjg_j19_eZJdb5e5LA7tHR2XUqjzGmqU0K3SKocab1AM/s72-w413-h549-c/0_1%20(89)-gigapixel-high%20fidelity%20v3-2x.jpeg",
-      "publishedAt": "2026-08-01T13:55:34Z",
-      "sourceId": "095c6fbac5bbadfd",
-      "sourceTitle": "槽边往事",
-      "link": "https://www.hecaitou.com/2026/08/writing-that-makes-me-cringe.html",
-      "detailPath": "articles/812aafab9181ae8d33a38580.json"
     }
   ]
 }
