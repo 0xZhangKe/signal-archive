@@ -1,6 +1,39 @@
 {
   "items": [
     {
+      "id": "82f16f45c4ccae02d27ff313",
+      "title": "基于 git 的零拷贝静态web服务器",
+      "summary": "无聊，产生了个crazy的想法。 git 内部用 zlib 压缩文件内容 Content-Encoding: gzip 也是 如果web服务器输出 .git 里的 静态 内容，是不是可以减一个二次解压/压缩步骤？？？ blob sha1 直接当etag？ 跟AI较量了几轮，一开始它说做不到。因为 blob 的格式比较变态。因为 hello world... 在 .git/objects/ab/cdef... 里的东西是这么存的 zlib(blob 1234\\0hello world...) I was like ？？？日他妈真变态啊。这前面是写死了 blob <size>\\0 然后把文件内容放在一起，再压缩的。 .git 这设计脑子有病啊。。。为啥不是原始文件gz而是加个头去gz。。。 此路不通！结束 然后A…",
+      "image": null,
+      "publishedAt": "2026-06-10T15:21:00Z",
+      "sourceId": "a864c53722a17b19",
+      "sourceTitle": "est's blog",
+      "link": "https://blog.est.im/2026/stdout-22",
+      "detailPath": "articles/82f16f45c4ccae02d27ff313.json"
+    },
+    {
+      "id": "f666d20066d26fb114f48d83",
+      "title": "Percentage is multiplicative",
+      "summary": "‘Hey, look! It’s SASALELE!’ When a discount of 50% is applied on an item, and then you get another 50% discount on top of that, you don’t get the item for free! Instead, you still have to pay a quarter (1/4, or 25%) of the original price, or with a 75% discount 1 . Now that’s more like it! (huh?) (ignore the ‘up to’ for a moment here) ( image source ) Thank…",
+      "image": "https://microblog.ttheng.com/blog/sasalele.jpeg",
+      "publishedAt": "2026-06-10T14:40:00Z",
+      "sourceId": "a93d4f2e98fafcbe",
+      "sourceTitle": "All posts | 所有貼文 on ttheng's microblog. | 侃侃而隨想極短文。",
+      "link": "https://microblog.ttheng.com/percentage-is-multiplicative/",
+      "detailPath": "articles/f666d20066d26fb114f48d83.json"
+    },
+    {
+      "id": "27c9f565fa15321d05db0a8e",
+      "title": "服务器高性能网络调优",
+      "summary": "这篇文章写一下服务器的网络方面的调优经验。如果网络的带宽使用在 1GE，其实没有必要做调优，默认的参数基本没有 […] Continue reading...",
+      "image": "https://www.kawabangga.com/wp-content/uploads/2026/06/ingress-tcp-1024x660.png",
+      "publishedAt": "2026-06-10T11:52:00Z",
+      "sourceId": "f6786af950754079",
+      "sourceTitle": "卡瓦邦噶！",
+      "link": "https://www.kawabangga.com/posts/7292",
+      "detailPath": "articles/27c9f565fa15321d05db0a8e.json"
+    },
+    {
       "id": "c958c2d1599eec100d9a3403",
       "title": "入蜀记 day382 儿童邮局",
       "summary": "「儿童邮局。」",
@@ -626,39 +659,6 @@
       "sourceTitle": "Android Performance",
       "link": "https://androidperformance.com/2026/06/04/SmartPerfetto-Three-Week-Update/",
       "detailPath": "articles/7fab83a07fc78658d828e329.json"
-    },
-    {
-      "id": "f43df52bf5f5ad15322c754a",
-      "title": "道德使我痛苦",
-      "summary": "我想像鸟儿一样振翅高飞，跨越界限，飞到那个至今依然金光的年代",
-      "image": null,
-      "publishedAt": "2026-06-04T00:21:39Z",
-      "sourceId": "b4584dd13588932a",
-      "sourceTitle": "太隐",
-      "link": "https://wangyurui.com/posts/dao-de-shi-wo-tong-ku-928d6e2e",
-      "detailPath": "articles/f43df52bf5f5ad15322c754a.json"
-    },
-    {
-      "id": "3554f712e42f262e2af6e432",
-      "title": "自以為的自己",
-      "summary": "每個人的大腦深處，都偷偷住著一位「自以為的自己」。",
-      "image": null,
-      "publishedAt": "2026-06-04T00:01:00Z",
-      "sourceId": "7f36c3da1e6b5c71",
-      "sourceTitle": "Wiwi.Blog Blog",
-      "link": "https://wiwi.blog/blog/the-imaginary-me",
-      "detailPath": "articles/3554f712e42f262e2af6e432.json"
-    },
-    {
-      "id": "0ff9eeac9ad64940672273e7",
-      "title": "近期發聲狀態（2026 6月）",
-      "summary": "很久沒發練習唱歌的音檔或影片，其實是這陣子進入鬼打牆，甚至有退步的傾向，甚至有些我在 2021 年左右的錄音中能唱的，現在反而做不到。 今天鬼打牆一陣子（大概 7 小時的練習）之後，突然有一點點進入好狀態，於是趁機記錄一下。 這是我唱 A♭4，母音分別是「啊」、「欸」、「哦」、「呃」、「嗚」，唱完音瞬間往下滑音，確保不會有斷層。 音量注意！！！！！！ 你的瀏覽器不支援 audio 元素。請 下載音檔 。 自我解析：全部舌根都有用一點力，也就是代償，但至少高音是有類似真音質地的，也不會太累，是能拿來用在唱歌的。 除了「嗚」以外，有支撐點往上移動的問題、甚至開始有一點掐住脖子的體感，放到歌曲中，「嗚」當母音時肯定是會爆掉。 口腔空間小的母音都很難發紮實的高音，我甚至完全沒辦法在 A♭4 做母音「一」、「因」等等咬…",
-      "image": null,
-      "publishedAt": "2026-06-03T16:14:23Z",
-      "sourceId": "199cdf92fc46bfcd",
-      "sourceTitle": "Eddie Lv",
-      "link": "https://eddielv.com/musings/vocal-status-20260604/",
-      "detailPath": "articles/0ff9eeac9ad64940672273e7.json"
     }
   ]
 }
