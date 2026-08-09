@@ -1,6 +1,50 @@
 {
   "items": [
     {
+      "id": "c28b285b13f6d61a71b25a1f",
+      "title": "Summary on Recently Discovered V2Ray Weaknesses",
+      "summary": "Several weaknesses were discovered in the V2Ray recently, which could be used to identify V2Ray clients or servers that run VMess, TLS or HTTP protocol. Below is our summary and understanding on these weaknesses. In general, these weaknesses fall into three categories: Inappropriate authentications in VMess, making the servers vulnerable to replay attacks.…",
+      "image": null,
+      "publishedAt": "2020-06-16T00:00:00Z",
+      "sourceId": "34d02af866ebd5fa",
+      "sourceTitle": "Great Firewall Report",
+      "link": "https://gfw.report/blog/v2ray_weaknesses/en/",
+      "detailPath": "articles/c28b285b13f6d61a71b25a1f.json"
+    },
+    {
+      "id": "ff684508cd02808c8a1e9d91",
+      "title": "总结近期发现的V2Ray弱点",
+      "summary": "近期数个V2Ray的弱点被发现。这些弱点可以被用来识别使用VMess、TLS或HTTP协议的V2Ray客户端和服务器。 以下是我们对这些弱点的总结和理解。 总体上，这些弱点可分为三类： VMess服务器没有正确验证客户端的请求，使得服务器可受到重放攻击。 客户端硬编码了一套罕见的TLS密码套件，导致客户端发送的TLS ClientHello拥有几乎独一无二的指纹。 伪装成HTTP服务器的企图失败。 针对VMess协议的重放攻击 VMess协议 的请求构造如下： 16 字节 X 字节 余下部分 认证信息 指令部分 数据部分 认证信息 是一个16字节的HMAC，基于 用户 ID 和 UTC 时间辍 . 指令部分 由 AES-128-CFB(iv， key) 算法加密， 其中 iv 是 UTC 时间辍 的md5哈希…",
+      "image": null,
+      "publishedAt": "2020-06-16T00:00:00Z",
+      "sourceId": "34d02af866ebd5fa",
+      "sourceTitle": "Great Firewall Report",
+      "link": "https://gfw.report/blog/v2ray_weaknesses/zh/",
+      "detailPath": "articles/ff684508cd02808c8a1e9d91.json"
+    },
+    {
+      "id": "07377b0e80486fc8adf5ca64",
+      "title": "我家也有儿童节了",
+      "summary": "今天是六一儿童节，祝十一大朋友和嘟嘟小朋友节日快乐。 因为今天是工作日，就选了周末的时候带他去一个很漂亮的庄园野餐，提前过节。天气不错，蓝天白云，还有些晒，预报说傍晚有雨，也就不太担心。一般周末我和十一带他出去玩的时候，都要提前准备很多东西，他的尿不湿、水杯、奶瓶、奶粉、零食，他用的湿巾、纸巾、防晒，如果要开车去远一点的地方，一般还会带着推车、帐篷、餐垫以及我们的食物。 每次早上他吃完饭，解决了个人问题之后带他出门，很少会有早于十点钟的时候。这次选的园子不远，开车半个小时车程，导航躲避拥堵没走环路，穿过望京到红砖美术馆附近，就到了目的地——圣露庄园。来这里玩的几乎都带着小朋友。不过有些大一点的孩子家里，装备很齐全，一个野餐推车方便不少，还有便携的桌椅，都是常出来野餐家庭的必备。 我们在园子里找了比较中心靠河的…",
+      "image": "https://static.elizen.me/img/2020-06-01-IMG_4416.jpg",
+      "publishedAt": "2020-06-01T00:00:00Z",
+      "sourceId": "fc41292f8a54624e",
+      "sourceTitle": "Elizen's Blog",
+      "link": "https://elizen.me/posts/2020/06/%E6%88%91%E5%AE%B6%E4%B9%9F%E6%9C%89%E5%84%BF%E7%AB%A5%E8%8A%82%E4%BA%86/",
+      "detailPath": "articles/07377b0e80486fc8adf5ca64.json"
+    },
+    {
+      "id": "96e8fa32eeffdc9078fd2b06",
+      "title": "深夜发嗤（32）",
+      "summary": "01. 最近做了很多废脑子的工作，才发现想成为真正的脑力劳动者，是非常难的。我说的脑力劳动者是指，目标明确，周期短，信息密度极大，需要进行决策的工作。 这一次尝试，打破了很多固有的思维。也再一次印证了一句话，做完比做好重要得多。我常年混迹于一些和生产力/效率有关的网站，一个千古不变的话题就是如何做好一件事。但少有人从做完一件事的角度去谈。 工具控一个普遍的思路是，建立一个流程模型，按照流程执行，Getting Things Done。问题在于，他们花费极大的力气去建立模型，模型建立之后，就没有了。我想起在《麦肯锡精英高效阅读法》中，作者赤羽雄二有一条建议，买来的书，马上读，因为一旦不读，很可能就不会再读了。从这个角度来说，如果没读，说明它还是不够重要，并不是你真正想要解决的问题，那就要重新回到问题上，到底要解…",
+      "image": "https://static.elizen.me/img/2020-05-28-71241590560412_.pic.jpg",
+      "publishedAt": "2020-05-28T00:00:00Z",
+      "sourceId": "fc41292f8a54624e",
+      "sourceTitle": "Elizen's Blog",
+      "link": "https://elizen.me/posts/2020/05/%E6%B7%B1%E5%A4%9C%E5%8F%91%E5%97%A432/",
+      "detailPath": "articles/96e8fa32eeffdc9078fd2b06.json"
+    },
+    {
       "id": "ee7598ff5287b4f80e97037b",
       "title": "一个「闰」字引发的事故 - 三星系统重启分析",
       "summary": "2020 年 5 月 23 号凌晨 1 点 30 左右, 大量三星手机用户的手机出现死机, 无限重启、进 Recovery 等问题, 并且操作不当会导致数据丢失, 并且上了知乎的热点, 售后点更是人满为患 知乎的部分回答中, 大家更是对三星的家属送上了亲切的问候, 甚至有的人已经将这次事故与 Note7 事件、充电门、绿屏门事件相提并论, 甚至预言三星因此会退出国内市场 ; 有的人因为这个丢了 Offer, 有的人准备了很久的资源丢失, 有的人甚至直接把手机砸了… 作为一个 Android 开发者, 我并不想对三星落井下石, 我只想搞清楚到底是什么原因导致了这场事故, 以及我们能从里面学到什么 . 我认为既然是 Android 系统出了问题, 我们有必要从技术的角度来分析为什么会出现这样的问题",
@@ -615,50 +659,6 @@
       "sourceTitle": "Android Performance",
       "link": "https://androidperformance.com/2019/09/05/Android-Jank-Due-To-App/",
       "detailPath": "articles/e1b67790825b791756a3c6d2.json"
-    },
-    {
-      "id": "e272a254430d0e5bdf564365",
-      "title": "Android 中的卡顿丢帧原因概述 - 系统篇",
-      "summary": "在 Android 中的卡顿丢帧原因概述 - 应用篇 这篇文章中我们列举了应用自身原因导致的手机卡顿问题 ， 这一篇文章我们主要列举一些由 Android 平台自身原因导致的卡顿问题. 各大国内 Android 厂商的产品由于硬件性能有高有低 ， 功能实现各有差异 ， 团队技术能力各有千秋 ， 所以其系统的质量也有高有低 ， 这里我们就来列举一下 ， 由于系统的硬件和软件原因导致的性能问题. Android 手机使用中的卡顿问题 ， 一般来说手机厂商和 App 开发商都会非常重视 ， 所以不管是手机厂商还是 App 开发者 ， 都会对卡顿问题非常重视 ， 内部一般也会有专门的基础组或者优化组来进行优化 . 目前市面上有一些非常棒的第三方性能监控工具 ， 比如腾讯的 Matrix ; 手机厂商一般也会有自己的性…",
-      "image": null,
-      "publishedAt": "2019-09-05T12:35:35Z",
-      "sourceId": "1aa1837ca33d8d55",
-      "sourceTitle": "Android Performance",
-      "link": "https://androidperformance.com/2019/09/05/Android-Jank-Due-To-System/",
-      "detailPath": "articles/e272a254430d0e5bdf564365.json"
-    },
-    {
-      "id": "5f6bef8f677d0a8a9676e149",
-      "title": "Android 中的卡顿丢帧原因概述 - 方法论",
-      "summary": "Android 手机使用中的卡顿问题, 一般来说手机厂商和 App 开发商都会非常重视, 所以不管是手机厂商还是 App 开发者, 都会对卡顿问题非常重视, 内部一般也会有专门的基础组或者优化组来进行优化 . 目前市面上有一些非常棒的第三方性能监控工具, 比如腾讯的 Matrix ; 手机厂商一般也会有自己的性能监控方案, 由于可以修改源码和避免权限问题, 所以手机厂商可以拿到更多的数据, 分析起来也会更方便一些. 说回流畅度, 其实就是操作过程中的丢帧, 本来一秒中画面需要更新 60 帧,但是如果这期间只更新了 55 帧, 那么在用户看来就是丢帧了, 主观感觉就是卡了, 尤其是帧率波动, 用户的感知会更明显. 引起丢帧的原因非常多, 有硬件层面的, 有软件层面的, 也有 App 自身的问题. 所以这一部分我…",
-      "image": null,
-      "publishedAt": "2019-09-05T04:56:42Z",
-      "sourceId": "1aa1837ca33d8d55",
-      "sourceTitle": "Android Performance",
-      "link": "https://androidperformance.com/2019/09/05/Android-Jank-Debug/",
-      "detailPath": "articles/5f6bef8f677d0a8a9676e149.json"
-    },
-    {
-      "id": "c3d9b24273a190ce2a86ea01",
-      "title": "Android 中的 Activity Launch Mode 详解",
-      "summary": "Android 中的 Activity 有几种比较重要的启动模式,Standard\\SingleTop\\SingleTask\\SingleInstance, 每一种启动模式有不同的使用场景, 网上也有许多分析这个的文章, 这里我以 Demo 的模式, 从 Activity 栈的角度来展示不同启动模式下的 Activity 的行为. Activity 栈是一个先进后出的数据结构, 各位可以关注在每一步操作之后, 栈内容那一栏, 可以更好地帮助理解不同的启动模式. Demo 比较简单, 我也放到了 Github 上, https://github.com/Gracker/AndroidLaunchModeTest , 有兴趣的可以自己跑一下, 看看结果, 只需要修改 StandardActivity 里面的跳转…",
-      "image": null,
-      "publishedAt": "2019-09-01T04:37:47Z",
-      "sourceId": "1aa1837ca33d8d55",
-      "sourceTitle": "Android Performance",
-      "link": "https://androidperformance.com/2019/09/01/Android-Activity-Lunch-Mode/",
-      "detailPath": "articles/c3d9b24273a190ce2a86ea01.json"
-    },
-    {
-      "id": "a8741cf57c83ae177cf04538",
-      "title": "Windows 11 下使用 VS2026 源码编译 OpenSSL 4.0.0",
-      "summary": "依赖安装 安装 Strawberry Perl 前往 Strawberry Perl 官网下载并安装 Strawberry Perl 这里选择的是目前最新版本 Strawberry Perl 5.32.1.1 安装过程中务必选择完整安装 安装完成之后会自动添加环境变量，无需手动添加 检查是否已安装 1 perl -v 安装 NASM 前往 NASM 官网下载并安装 NASM 下载源代码 前往 OpenSSL 官网下载 openssl-3.1.3.tar.gz 并解压 编译 VC编译环境 Visual Studio 在安装时必须勾选 Windows C++ 的开发环境，不然没法打开开发人员命令提示符 启动命令行提示工具 【2020年5月25日更新】 使用 VS2022 的开发人员提示工具切换到源码目录，注意选择…",
-      "image": "https://cdn.taurusxin.com/old-cdn/usr/uploads/2020/04/504569709.png",
-      "publishedAt": "2019-08-20T13:00:00Z",
-      "sourceId": "3220115c042340a7",
-      "sourceTitle": "TaurusXin 的独立博客",
-      "link": "https://www.taurusxin.com/openssl_win_build/",
-      "detailPath": "articles/a8741cf57c83ae177cf04538.json"
     }
   ]
 }

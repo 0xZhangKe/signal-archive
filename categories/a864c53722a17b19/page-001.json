@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "486b6a945c57711057cdeec9",
+      "title": "继续搓英汉双解词典v3",
+      "summary": "去年 搓了个词典 ，本来懒得动了，但是看到opencode订阅还没用完，deepseek那么便宜，想着不用白不用，找了个最浪费token的方式，让AI再写一部词典 当年的AI我记得还是 gemini-2，其实很多东西不成熟。我也对AI脾气没摸准，很自然的就：“请输出 JSON”。今年学聪明了，直接上YAML。AI高呼你这想法真离经叛道但又极度合理。 甚至，block scalar（ | ）支持多行文本，不转义！ 一个小技巧是，尽量避免嵌套的，什么 map套entries，每个 entry 再挂一个 senses 列表、每个 sense 再挂一个 examples 列表，别玩这一套。直接拍扁，层级尽可能少，整个 schema 里不允许出现一个方括号！ AI帮我写了个 validator，调教这一块还得是AI卷A…",
+      "image": null,
+      "publishedAt": "2026-08-08T01:53:00Z",
+      "sourceId": "a864c53722a17b19",
+      "sourceTitle": "est's blog",
+      "link": "https://blog.est.im/2026/stdout-32",
+      "detailPath": "articles/486b6a945c57711057cdeec9.json"
+    },
+    {
       "id": "4ececc79b9947c8d43728147",
       "title": "邮箱生态调研2026",
       "summary": "起初一个很简单的想法，把一个app/服务的私人数据，集中存数据库麻烦，不想维护担责，干脆放用户自己邮箱里，所谓\"BYOS（自带存储）\"。反正协议 SMTP/POP3/IMAP 很方便，然后调查了下很快发现，时代变了。 本来寄希望IMAP 这个协议，感觉能缝成一个读写API， - APPEND 写（一封邮件 = 一个对象）， FETCH 读， STORE 改 flag， COPY/MOVE 移动 - \"目录 + KV\"模型，flag（ \\Seen 、 \\Flagged 等）即元数据位 - SEARCH 查询 主题、日期、自定义 header等 - 增量同步： UID + UIDVALIDITY ， IDLE 可做准实时推送（仅单文件夹） 其实古董的 GMailFS / GMail Drive 之类把 Gmail…",
@@ -208,17 +219,6 @@
       "sourceTitle": "est's blog",
       "link": "https://blog.est.im/2026/stdin-16",
       "detailPath": "articles/a52617c396087ca7b4dc58d8.json"
-    },
-    {
-      "id": "aecd25836554a1126e35a86c",
-      "title": "Elon Musk 五步工作法",
-      "summary": "The five-step process: First, make your requirements less dumb . Your requirements are definitely dumb. It does not matter who gave them to you. In fact, it's particularly dangerous if a smart person gave you the requirements, because you might not question them enough. Everyone is wrong some of the time, no matter who you are. So the first step is to make…",
-      "image": null,
-      "publishedAt": "2026-05-31T03:56:00Z",
-      "sourceId": "a864c53722a17b19",
-      "sourceTitle": "est's blog",
-      "link": "https://blog.est.im/2026/stdin-15",
-      "detailPath": "articles/aecd25836554a1126e35a86c.json"
     }
   ]
 }
