@@ -1,6 +1,28 @@
 {
   "items": [
     {
+      "id": "4e8b3b4096a061edd135cb55",
+      "title": "Future 的大小对性能的影响",
+      "summary": "在 Rust 异步编程中，有一种观点认为： Future 的大小显著影响性能 。你是否怀疑过这个说法的真实性？如果是真的，这种性能差异的根源又是什么？今天，我翻阅了一些源码，并编写实验代码来一探究竟。 Future 的大小如何计算？ 为了验证“Future 大小影响性能”这一说法是否成立，我们先从一些简单代码入手。首要任务是弄清楚一个 Future 的大小是如何确定的。毕竟，在编译器眼里，Future 只是一个 trait： pub trait Future { type Output ; fn poll ( self : Pin < & mut Self > , cx : & mut Context < ' _ > ) -> Poll < Self :: Output > ; } 那么，其大小取决于实现这个…",
+      "image": null,
+      "publishedAt": "2025-03-24T10:21:03Z",
+      "sourceId": "82c4bcb6bba028cf",
+      "sourceTitle": "程序员的喵",
+      "link": "http://catcoding.me/p/future-size-perf/",
+      "detailPath": "articles/4e8b3b4096a061edd135cb55.json"
+    },
+    {
+      "id": "480990264d26ddf0f8aae7c2",
+      "title": "我同意",
+      "summary": "安裝完一個新 App、第一次開啟的時候，可能會出現一個視窗問你同不同意他們的隱私政策、使用條款之類的東西。你總是都按「我同意」對不對？我當然也是，畢竟不同意的話就不能用了嘛！",
+      "image": null,
+      "publishedAt": "2025-03-24T00:00:00Z",
+      "sourceId": "7f36c3da1e6b5c71",
+      "sourceTitle": "Wiwi.Blog Blog",
+      "link": "https://wiwi.blog/blog/line-privacy-policy",
+      "detailPath": "articles/480990264d26ddf0f8aae7c2.json"
+    },
+    {
       "id": "a1755cf5fcff57c11751b9aa",
       "title": "你不是一定要有个老板",
       "summary": "什么是为一家大公司工作时最不自然的呢？问题根源是，人类就不适合在一个大集体中工作。 \"根据我阅读的有关狩猎采集社会的内容、关于组织的研究以及我的个人经验，理想的团队大小应该是这样：8人团队可以工作得很好；当达到20人时，团队就变得难以管理；而一个50人的团队就已经十分笨重。\" \"如果你不被允许去实现新想法，你就会逐渐失去新想法。反过来也是，当你可以做任何自己想做的事情时，你就会产生更多与之相关的想法。\"",
@@ -637,28 +659,6 @@
       "sourceTitle": "Eddie Lv",
       "link": "https://eddielv.com/musings/baseball_first/",
       "detailPath": "articles/202d0b32c18865129d15cad6.json"
-    },
-    {
-      "id": "cf15aa0869b82066e92a8248",
-      "title": "沒網路了要怎麼辦？",
-      "summary": "最近有許多台灣網路海纜被破壞的新聞（報導者、路透社、聯合新聞網）。",
-      "image": "https://wiwi.blog/assets/images/dp-macos-2cfa7e84b9d7fb61a7098ae60d97f0a9.jpg",
-      "publishedAt": "2025-03-03T00:00:00Z",
-      "sourceId": "7f36c3da1e6b5c71",
-      "sourceTitle": "Wiwi.Blog Blog",
-      "link": "https://wiwi.blog/blog/digital-prepping",
-      "detailPath": "articles/cf15aa0869b82066e92a8248.json"
-    },
-    {
-      "id": "a17a299ad4cd0ae14e5cff0e",
-      "title": "中年男人的三宝",
-      "summary": "NAS、鱼缸和路由… 好吧，最近没更新，实在不知道写什么，前几日把鱼缸翻缸了，底砂有点脏，感觉最早买的伊罕滤筒流量衰减了，于是乎打开拼多多想换个新的不锈钢滤筒，怎么也得再加个变频水泵和前置过滤才配得上，把旧的挂闲鱼了，啥时卖掉啥时换。 NAS硬盘满了，好像6T还是8T，我也不知道存了啥，就满了，看了看照片才占了400G，下了几T的电影、电视剧，基本上也没心思看，京东下单了个4T的硬盘准备更新下。 小x打游戏说延迟有点高，我感觉还好啊，20ms的无线延时算高吗，他说卡，那就换个吧，还没看好换哪个。",
-      "image": "https://ihaihe.cn/wp-content/uploads/2025/03/6f8b98df392755857af7784269bdef70.webp",
-      "publishedAt": "2025-03-02T05:08:31Z",
-      "sourceId": "8e1a97c92477b087",
-      "sourceTitle": "三十里海河",
-      "link": "https://ihaihe.cn/3087.htm",
-      "detailPath": "articles/a17a299ad4cd0ae14e5cff0e.json"
     }
   ]
 }
