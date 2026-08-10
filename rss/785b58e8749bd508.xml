@@ -12,7 +12,7 @@
 	<atom:link href="https://www.schneier.com/feed/" rel="self" type="application/rss+xml" />
 	<link>https://www.schneier.com/</link>
 	<description></description>
-	<lastBuildDate>Fri, 07 Aug 2026 21:07:09 +0000</lastBuildDate>
+	<lastBuildDate>Mon, 10 Aug 2026 11:02:39 +0000</lastBuildDate>
 	<language>en-US</language>
 	<sy:updatePeriod>
 	hourly	</sy:updatePeriod>
@@ -28,6 +28,34 @@
 	<height>32</height>
 </image> 
 <site xmlns="com-wordpress:feed-additions:1">182601345</site>	<item>
+		<title>Python Now Has a Post-Quantum Encryption Library</title>
+		<link>https://www.schneier.com/blog/archives/2026/08/python-now-has-a-post-quantum-encryption-library.html</link>
+					<comments>https://www.schneier.com/blog/archives/2026/08/python-now-has-a-post-quantum-encryption-library.html#comments</comments>
+		
+		<dc:creator><![CDATA[Bruce Schneier]]></dc:creator>
+		<pubDate>Mon, 10 Aug 2026 11:02:26 +0000</pubDate>
+				<category><![CDATA[Uncategorized]]></category>
+		<category><![CDATA[cryptography]]></category>
+		<category><![CDATA[encryption]]></category>
+		<category><![CDATA[open source]]></category>
+		<category><![CDATA[quantum computing]]></category>
+		<guid isPermaLink="false">https://www.schneier.com/?p=72335</guid>
+
+					<description><![CDATA[<p><a href="https://blog.trailofbits.com/2026/06/30/shipping-post-quantum-cryptography-to-python/">This is good</a>:</p>
+<blockquote><p>Post-quantum cryptography is now one pip-install away for the entire Python ecosystem. With funding from the <a href="https://www.sovereign.tech/">Sovereign Tech Agency</a>, we implemented support for ML-KEM, the NIST-standard key-establishment primitive, and ML-DSA, the NIST-standard digital-signature primitive, in pyca/cryptography.</p></blockquote>
+<p>Remember, the reason to do this now is because there&#8217;s no emergency. And because you will make your systems crypto agile, which is always a good idea.</p>
+]]></description>
+										<content:encoded><![CDATA[<p><a href="https://blog.trailofbits.com/2026/06/30/shipping-post-quantum-cryptography-to-python/">This is good</a>:</p>
+<blockquote><p>Post-quantum cryptography is now one pip-install away for the entire Python ecosystem. With funding from the <a href="https://www.sovereign.tech/">Sovereign Tech Agency</a>, we implemented support for ML-KEM, the NIST-standard key-establishment primitive, and ML-DSA, the NIST-standard digital-signature primitive, in pyca/cryptography.</p></blockquote>
+<p>Remember, the reason to do this now is because there&#8217;s no emergency. And because you will make your systems crypto agile, which is always a good idea.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.schneier.com/blog/archives/2026/08/python-now-has-a-post-quantum-encryption-library.html/feed/</wfw:commentRss>
+			<slash:comments>2</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">72335</post-id>	</item>
+		<item>
 		<title>Friday Squid Blogging: Arctic Bobtail Squid Video</title>
 		<link>https://www.schneier.com/blog/archives/2026/08/friday-squid-blogging-arctic-bobtail-squid-video.html</link>
 					<comments>https://www.schneier.com/blog/archives/2026/08/friday-squid-blogging-arctic-bobtail-squid-video.html#comments</comments>
@@ -296,31 +324,5 @@
 		
 		
 		<post-id xmlns="com-wordpress:feed-additions:1">72308</post-id>	</item>
-		<item>
-		<title>Anthropic’s Opus 5 Is Better at Resisting Prompt Injection</title>
-		<link>https://www.schneier.com/blog/archives/2026/07/anthropics-opus-5-is-better-at-resisting-prompt-injection.html</link>
-					<comments>https://www.schneier.com/blog/archives/2026/07/anthropics-opus-5-is-better-at-resisting-prompt-injection.html#comments</comments>
-		
-		<dc:creator><![CDATA[Bruce Schneier]]></dc:creator>
-		<pubDate>Fri, 31 Jul 2026 17:23:16 +0000</pubDate>
-				<category><![CDATA[Uncategorized]]></category>
-		<category><![CDATA[AI]]></category>
-		<category><![CDATA[cyberattack]]></category>
-		<category><![CDATA[LLM]]></category>
-		<category><![CDATA[reports]]></category>
-		<guid isPermaLink="false">https://www.schneier.com/?p=72395</guid>
-
-					<description><![CDATA[<p>The <a href="https://www-cdn.anthropic.com/c5fbac3f0b1280a933ebd26d3cb8bb9f5bdeaf48/Claude%20Opus%205%20System%20Card.pdf#page=73">chart</a> is interesting.</p>
-<blockquote><p>On the IPI benchmark, Opus 5 improved over Opus 4.8, reducing the probability of an attacker succeeding within 15 attempts from 5.5% to 2.0%, and from 0.5% to 0.2% on 1 attempt. It also improved on Sonnet 5 (5.9% at k=15) and Mythos 5 (2.6%), making it the most robust model evaluated. Opus 5 also outperformed all non-Claude models on this benchmark. The most robust non-Claude model was Muse Spark at 16.5% within 15 attempts&#8212;more than eight times Opus 5’s rate. The most capable GPT 5.6 variant, Sol, was comparable to its predecessor GPT 5.5 (20.0% versus 20.8% within 15 attempts), and was 10 times as likely to be successfully attacked as Claude Opus 5 at 2.0%. The other GPT 5.6 variants are less robust, at 30.4% (Terra) and 43.9% (Luna). A single attempt against GPT 5.6 Sol succeeded 3.1% of the time, higher than the 2.0% an attacker achieved against Opus 5 after fifteen attempts...</p></blockquote>]]></description>
-										<content:encoded><![CDATA[<p>The <a href="https://www-cdn.anthropic.com/c5fbac3f0b1280a933ebd26d3cb8bb9f5bdeaf48/Claude%20Opus%205%20System%20Card.pdf#page=73">chart</a> is interesting.</p>
-<blockquote><p>On the IPI benchmark, Opus 5 improved over Opus 4.8, reducing the probability of an attacker succeeding within 15 attempts from 5.5% to 2.0%, and from 0.5% to 0.2% on 1 attempt. It also improved on Sonnet 5 (5.9% at k=15) and Mythos 5 (2.6%), making it the most robust model evaluated. Opus 5 also outperformed all non-Claude models on this benchmark. The most robust non-Claude model was Muse Spark at 16.5% within 15 attempts&#8212;more than eight times Opus 5’s rate. The most capable GPT 5.6 variant, Sol, was comparable to its predecessor GPT 5.5 (20.0% versus 20.8% within 15 attempts), and was 10 times as likely to be successfully attacked as Claude Opus 5 at 2.0%. The other GPT 5.6 variants are less robust, at 30.4% (Terra) and 43.9% (Luna). A single attempt against GPT 5.6 Sol succeeded 3.1% of the time, higher than the 2.0% an attacker achieved against Opus 5 after fifteen attempts.</p></blockquote>
-<p>We know that preventing prompt injection is <a href="https://llm-attacks.org/">impossible</a> in the general case. But we are getting much better at blocking it in specific cases.</p>
-]]></content:encoded>
-					
-					<wfw:commentRss>https://www.schneier.com/blog/archives/2026/07/anthropics-opus-5-is-better-at-resisting-prompt-injection.html/feed/</wfw:commentRss>
-			<slash:comments>8</slash:comments>
-		
-		
-		<post-id xmlns="com-wordpress:feed-additions:1">72395</post-id>	</item>
 	</channel>
 </rss>
