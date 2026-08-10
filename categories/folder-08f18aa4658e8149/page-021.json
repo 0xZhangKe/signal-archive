@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "045e123ecf8a0ddd85d34a91",
+      "title": "投籃遊戲之一時懷舊",
+      "summary": "Wiwi 最近在他 blog 網站上發佈的那個「 投籃遊戲 」，不禁令我回想起以前中學時期和同學一起跟風在 Facebook Messenger 1 玩 那個作爲隱藏彩蛋的投籃小遊戲 的時光啊～ 那都已經是 十年前 （左右）的事情了，時間真是個稍縱即逝的東西啊⋯⋯ 當時我還有 Facebook 帳號，現在沒有了。 ↩︎",
+      "image": null,
+      "publishedAt": "2026-05-01T07:31:00Z",
+      "sourceId": "a93d4f2e98fafcbe",
+      "sourceTitle": "All posts | 所有貼文 on ttheng's microblog. | 侃侃而隨想極短文。",
+      "link": "https://microblog.ttheng.com/basketball-game-reminiscence/",
+      "detailPath": "articles/045e123ecf8a0ddd85d34a91.json"
+    },
+    {
       "id": "d9060dfbbd86b83bbb78dde4",
       "title": "當 Youtube 不再替你決定看什麼",
       "summary": "前言 # Youtube 上癮，通常不是因為你自制力差，而是它被設計成讓人停不下來。 在〈 再次嘗試完全戒斷 IG、YT 的一週後（2026） 〉提到，我安裝了阻擋演算法的 Plug-in，讓我少掉非常無意識觀影的時間。 這篇文章來分享怎麼做。 瀏覽器要求 # 瀏覽器要是基於 Chromium 開發的，才能使用相關 Plug-in，例如：Chrome、Edge、Brave 。 Eddie 推薦 Brave 瀏覽器，自由軟體，無追蹤，還能擋惡劣廣告。 Chrome 擴充商店 # Chrome 應用程式擴充商店 中，有非常多的 Plug-in 可以免費下載、使用，其中就包含了能夠阻擋 YT 演算法的工具。 YT 演算法阻擋 # DF UTube # 很單純，阻擋一切功能，進入 YouTube 只留下搜尋欄，看影片…",
@@ -648,17 +659,6 @@
       "sourceTitle": "小麥的異想世界",
       "link": "https://my-blog.worldofwheat.cc/blog/2026/04/life-changing-quote.html",
       "detailPath": "articles/46d22386d4d6ededd02a17e0.json"
-    },
-    {
-      "id": "8b46c9c5823da212f22a7a1b",
-      "title": "在網站上放動圖的方式",
-      "summary": "前言 # 在製作 吉他島嶼官網教學內容 的時候，有些內容不需要影片聲音，只需要動畫循環播放即可 ，結果發現轉轉成 GIF 畫質會下降、檔案變大好幾倍，因此才開始尋求解決方案。 原來這是因爲 GIF 只用了 256 種顏色，而且沒有做任何壓縮，因此才會降畫質又檔案肥大。 解決方案 # 把影片轉成無聲的影片檔案，再利用 HTML 設定自動循環播放即可。 ffmpeg # 以下指令的目的，是將原始影片轉換為適合網頁播放的無聲循環動畫影片： ffmpeg -i input.mov -an -c:v libx264 -preset slow -crf 23 -pix_fmt yuv420p -movflags +faststart output.mp4 -i input.mov 指定輸入影片檔案。 -an 移除音訊（A…",
-      "image": null,
-      "publishedAt": "2026-04-24T08:20:10Z",
-      "sourceId": "199cdf92fc46bfcd",
-      "sourceTitle": "Eddie Lv",
-      "link": "https://eddielv.com/articles/motion-images/",
-      "detailPath": "articles/8b46c9c5823da212f22a7a1b.json"
     }
   ]
 }
