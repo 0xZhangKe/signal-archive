@@ -1,6 +1,39 @@
 {
   "items": [
     {
+      "id": "254920d3cdfc0ab801e92948",
+      "title": "Linux 伺服器被植入挖礦程式：從 load average 10.65 揪出整條攻擊鏈",
+      "summary": "這篇記錄了作者在一次例行效能健檢中,意外撞見自己家用伺服器被植入挖礦程式的完整抓賊過程,並整理成一份人人可照做的可疑進程自檢清單。起點是一個不該出現的數字:一台 16 執行緒的機器 load average 卻卡在 10.65。作者用 top 與 docker stats 揪出一個吃滿 10 核、隨機大小寫檔名的可疑程序,再靠 Linux 的 /proc 三件套(exe 指向已刪除的 /tmp 檔、cmdline、environ 溯源到某個 Docker 容器)確認它是挖礦程式,並把攻擊鏈拉出來:一個 port 直接綁在 0.0.0.0、繞過 nginx 對外裸露的 Next.js 容器,被 CVE-2025-66478(Next.js 16.0.6 的滿分 RCE、綽號 React2Shell)打穿。文中含…",
+      "image": null,
+      "publishedAt": "2026-07-28T16:55:03Z",
+      "sourceId": "bd51496b8ec0ca1d",
+      "sourceTitle": "Koimsurai 手記",
+      "link": "https://koimsurai.com/blog/catching-a-cryptominer",
+      "detailPath": "articles/254920d3cdfc0ab801e92948.json"
+    },
+    {
+      "id": "f84f12d746de14e64e8e4935",
+      "title": "前往台北比賽",
+      "summary": "幾個月前我參加了 技能競賽分區賽 ，非常幸運有拿到前五，雖然說我自己已經很滿足了，但當然前五就會被丟到全國賽。 接下來三天要比全國技能競賽，今天提前一天來參加開幕。老實說今天的行程沒說到特別好，而且這也是我少數幾次來台北。 寫這段的時候今天已經過完了，我是在床上寫下的。比賽的會場其實不差，在南港展覽館，只是時間上的安排沒有說到很優。我們一早去等了超級久，因為手冊上是寫十一點半要開始什麼簡報，但是實際上是下午兩點，這是我去問之後才得知的。 另一點就是他們的午餐沒有到很合我胃口，因為我自己滿重視官方給的菜色等等，這個真的讓我有點失望。 我自己是有吃完，但是在廚餘桶可以看到有一堆人丟掉的 完整 便當，真的很好笑。 下午就是簡單看個比賽系統，也沒什麼特別的。之後就是開幕，我自己是沒有特別留在那邊看，我出去走走，反正就…",
+      "image": "https://img.worldofwheat.cc/8548a5ae999a",
+      "publishedAt": "2026-07-28T16:00:00Z",
+      "sourceId": "de9cbd8d045ab396",
+      "sourceTitle": "小麥的異想世界",
+      "link": "https://my-blog.worldofwheat.cc/blog/2026/07/taipei-competition-arrival.html",
+      "detailPath": "articles/f84f12d746de14e64e8e4935.json"
+    },
+    {
+      "id": "693a16a4e0f70081eaef3552",
+      "title": "Ubuntu 26.04 安装 rime/中州韵输入法",
+      "summary": "此前写过 ubuntu 24.04 安装rime输入法的教程，使用系统默认的ibus。而 ubuntu 26.04已经全面转向Wayland，进而系统的ibus的可用性也没有fcitx好用，于是...",
+      "image": "https://pa.ci/usr/uploads/2026/07/2745422641.png",
+      "publishedAt": "2026-07-28T05:37:00Z",
+      "sourceId": "d87239607d14c88c",
+      "sourceTitle": "怕刺",
+      "link": "https://pa.ci/452.html",
+      "detailPath": "articles/693a16a4e0f70081eaef3552.json"
+    },
+    {
       "id": "6a1f70b8ff4b4b3d3e9a5138",
       "title": "自作孽",
       "summary": "昨天我发了一条贴图《 关于舌头套 》，3 个小时阅读量突破 10万，是之前一篇文章的 10 倍。完全不在意是不可能的，我为一篇文章付出的心血多，为一条贴图耗费的心力少，多少会有些不平衡。阴暗的心理一发作，觉得肯定是系统算法在搞我。文章不推荐，搞笑图片狂推。 不过我基本上还算是个谨慎的人，说话要讲证据，否则就是诽谤。于是我等了一夜，去看最终的数据分析： 看完数据之后，我得出了一个结论：一切都是自作孽。 为什么这么说？因为读过这条贴图的 14 万 7 千人，90% 以上都是直接看了公众号消息，系统推荐只占 0.7%---并没有什么算法的左右，事实上算法并不喜欢这条贴图，因为在平常日子里，一般会给文章 5% 的推荐量，昨天系统根本就没有任何推荐的想法。 所以，人从哪里来？从我这十多年累积的读者群而来。对，他们一直都…",
@@ -626,39 +659,6 @@
       "sourceTitle": "Alice Hsu's Blog",
       "link": "https://alicehsu.blog/zh-tw/posts/2026/07/devils-lake-half-day-trip/",
       "detailPath": "articles/1b73302f1e413c954ef93e26.json"
-    },
-    {
-      "id": "af719e9a878bb22e010d72e0",
-      "title": "3D 星空背景效能長征：OffscreenCanvas Worker → WebGPU/TSL 重寫",
-      "summary": "這篇記錄了作者為個人網站 koimsurai.com 那片 3D 星空背景走過的三階段效能長征。背景最初只是一堆各自為政的 three.js 裝飾特效——黑洞、粒子、星空、土星——東西還少時並不重,是愈疊愈多、真正拿去量之後才逐步走上優化:先把星空搬進 OffscreenCanvas Worker 讓渲染離開主執行緒(桌面 TBT 從 17 秒壓到 30 毫秒),再被朋友一台會白屏的機器逼著補上背景的穩健性,最後用瀏覽器最新的 WebGPU/TSL 把整套從頭重寫成單一 canvas——GPU 從 85–90% 砍到 25%、星星翻到 26,000 顆全在 shader 裡呼吸。文中一併科普 WebGPU 到底是什麼,並記下一個反覆翻案的判斷:「效能優化」和「品質升級」是兩本不同的帳,換掉目標函數,結論就翻。",
-      "image": null,
-      "publishedAt": "2026-07-24T02:49:17Z",
-      "sourceId": "bd51496b8ec0ca1d",
-      "sourceTitle": "Koimsurai 手記",
-      "link": "https://koimsurai.com/blog/the-3d-starfield-performance-march",
-      "detailPath": "articles/af719e9a878bb22e010d72e0.json"
-    },
-    {
-      "id": "5c63803ff0fc1ca973b95d23",
-      "title": "《玩具總動員 5》中國票房爲何不濟？",
-      "summary": "和朋友談起《玩具總動員 5》在中國的票房。目前四千多萬美元，僅和日本票房持平。但美國票房依舊良好。僅以此三國而 […]",
-      "image": "https://1.gravatar.com/avatar/19d667891f84a17deee970e145cef9ed58b8dd71869b0b97533a8821fb128616?s=96&d=identicon&r=G",
-      "publishedAt": "2026-07-24T02:14:58Z",
-      "sourceId": "e1dfcc8815d1c9f8",
-      "sourceTitle": "IT 公论",
-      "link": "https://blog.yitianshijie.net/2026/07/24/why-toy-story-5-fails-in-china/",
-      "detailPath": "articles/5c63803ff0fc1ca973b95d23.json"
-    },
-    {
-      "id": "9e08da35863c5603a020265b",
-      "title": "科技爱好者周刊（第 405 期）：资源，社会公平与算力",
-      "summary": "这里记录每周值得分享的科技内容，周五发布。 本杂志 开源 ，欢迎 投稿 。另有 《谁在招人》 服务，发布程序员招聘信息。合作请 邮件联系 （yifeng.ruan@gmail.com）。 封面图 西安大明宫遗址，使用亚克力透明板绘制古代建筑，让游客在原址体验当年的场景。（ via ） 资源，社会公平与算力 分享一个有趣的观点： 资源太多，会造成社会不公平 。我谈不上同意这个观点，就是觉得思路很奇特。 这是奥地利哲学家 伊万·伊里奇 （Ivan Illich）在1973年的著作《能源与公平》（Energy and Equity ）中提出的，他认为用电量与社会公平有关。 \"能源和公平只能在一定程度上同时增长。人均用电量低于某个阈值时，增加用电量能够改善社会公平。高于这个阈值，能源增长就会以牺牲公平为代价。\" 他的…",
-      "image": "https://cdn.beekka.com/blogimg/asset/202607/bg2026072311.webp",
-      "publishedAt": "2026-07-24T00:12:16Z",
-      "sourceId": "50579811ddcd4b8c",
-      "sourceTitle": "阮一峰的网络日志",
-      "link": "http://www.ruanyifeng.com/blog/2026/07/weekly-issue-405.html",
-      "detailPath": "articles/9e08da35863c5603a020265b.json"
     }
   ]
 }

@@ -1,6 +1,28 @@
 {
   "items": [
     {
+      "id": "6fc89603861edc8a4ef5bb18",
+      "title": "更新了網站的單頁文章樣式！（還包含 TOC 目錄）",
+      "summary": "前言 # 原本頁面很單純，就是標題 + 內文，最近一直看大家網站功能都很華麗，於是我也好想換哦！ 原始外觀 # 原始外觀 原本因爲頁面很空，所以左右故意留白許多，這樣文字比較快就會被換行，眼睛在換行時移動距離小，就比較不會跳錯行！（大學四年唸視光系還是有點用的。） 後來外觀 # 2026 全新外觀 左方是 Musings 或 Articles 的列表，這取決於你當下在看哪一種文章，左方也是很單純就用時間排列。 在標題列與文章中間，多放了一個 TOC 文章目錄，之前就有 TOC 功能，只是 樣式沒寫好 所以從來沒用。",
+      "image": "https://eddielv.com/musings/2026-single-page/old-single-page.jpg",
+      "publishedAt": "2026-03-23T08:49:59Z",
+      "sourceId": "199cdf92fc46bfcd",
+      "sourceTitle": "Eddie Lv",
+      "link": "https://eddielv.com/musings/2026-single-page/",
+      "detailPath": "articles/6fc89603861edc8a4ef5bb18.json"
+    },
+    {
+      "id": "4b51636bdebeeb140b8235a5",
+      "title": "修掉萬年 Menu Bar 樣式 BUG",
+      "summary": "前言 # 我的主題一直有個 BUG，當 Menu 字數過多時就會換行，並且超出 Menu 的區域、擠到標題，問題在手機上非常嚴重。 原始 # 黑暗模式 # 黑暗配色下，配色正常，文字被擠到第三行 白天模式 # 我是某天幫公司電腦安裝 yt-dlp 時，打開自己部落格才發現有白天模式的，而且 Bug 多到爆炸因爲我擴充很多功能，完全沒考慮白天模式。 白天模式配色下，連文字都看不到，準確說底色沒有跟這拓展到第三行。 完成品 # 褶疊按鈕 # 黑暗配色下，直接把網站標題以外的變成褶疊按鈕 黑暗配色下，打開褶疊按鈕後 而白天模式底色的問題，也順便解決了。",
+      "image": "https://eddielv.com/musings/new-menu-layout/old-menu-dark.png",
+      "publishedAt": "2026-03-23T07:37:46Z",
+      "sourceId": "199cdf92fc46bfcd",
+      "sourceTitle": "Eddie Lv",
+      "link": "https://eddielv.com/musings/new-menu-layout/",
+      "detailPath": "articles/4b51636bdebeeb140b8235a5.json"
+    },
+    {
       "id": "e37ab93069b9ea7ed949c28e",
       "title": "新的部落格列表樣式！",
       "summary": "前言 # 看了 shoujen.com 的貼文列表 後，覺得先用年份來當作大標題，並且分三個欄位是一種不錯的排版方式，於是決定 抄襲 模仿一下。 Before After # 舊排版 # 舊排版，一次列完全部，不好閱讀 新排版 # 新排版，分年份列出 文章至此結束，以下是語法分享。 # Hugo 語法設定 # list.html # 在 layout 中找到 list.html {{ partial \"header.html\" . }} < div class = \"content-wrapper\" > {{ if not . IsHome }} < h1 >{{ . Title | markdownify }}< / h1 > {{ end }} {{ . Content }} {{ $ pages :=…",
@@ -637,28 +659,6 @@
       "sourceTitle": "Eddie Lv",
       "link": "https://eddielv.com/musings/anjian/",
       "detailPath": "articles/3f838db5c94c46a6218bbc85.json"
-    },
-    {
-      "id": "07b1bc89891fb207cebcd0f8",
-      "title": "歌手的客套",
-      "summary": "一位歌手，每次總是要求非常多，EQ、效果很不容易調到他滿意的結果，不過之前遇到好幾次時，都是另個音控師做聲音，Eddie 則負責跑舞臺。 今天 Eddie 帶隊做兩場，覺得所有環節最麻煩的應該就是那個歌手試音的環節，也的確試音的時候，總感覺還是好像調不到他想要的（觀察表情得到的結論）。 結果第一個演出環節結束後，歌手下臺走過來說：「這個場地很難調，但這是我覺得最好唱的一次！」 依照歌手指示做了各種調整後，我根本不知道臺上聲音長怎樣啊！ 雖然監聽耳機可以 監 動 聽 詞 監聽喇叭的音量平衡、EQ 頻率、效果量等等，但是耳機跟喇叭本身的 EQ 就完全不一樣，舞臺上還有很多從外場打回舞臺的聲音，所以用耳機監聽舞臺情況其實是完全不準的！ 只能說，太客套了啦！一定是還不夠熟才這樣講XD",
-      "image": null,
-      "publishedAt": "2026-02-07T18:22:54Z",
-      "sourceId": "199cdf92fc46bfcd",
-      "sourceTitle": "Eddie Lv",
-      "link": "https://eddielv.com/musings/polite-by-singer/",
-      "detailPath": "articles/07b1bc89891fb207cebcd0f8.json"
-    },
-    {
-      "id": "bbe95676072b5be89a0d81f6",
-      "title": "要 IG 會有種羞恥感",
-      "summary": "前陣子做房仲業頒獎典禮，有 Dancer 跳舞，Eddie 有個房仲國中同學在底下看得很開心，結束後問我那誰，我完全不認識。 Eddie 不會把目光放在 Dancer 上，Eddie 是真的不懂欣賞舞蹈，甚至有次 Dacer 來找我說：「昨天才見，今天又見面了！！」我卻一臉「你是誰啊…」的看著對方。 「很沒用耶」國中同學說。 意思是說我明明很接近 Dancer，結果連人家名字都不知道，然後圍繞這個話題大概 2～3 天了。 又再遇到同個 Dancer 之後，Eddie 上前要了 IG 帳號，當下覺得好羞恥啊！ 因爲對方是在整團演出者群當中，所以這個動作，會讓所有人演出者都盯着自己，然後 Dancer 可能也不認識我，我也不認識她，然後我說是我朋友要。而這聽起來超級像「我就是我朋友」。 表演者們又都穿著有點「厲害…",
-      "image": null,
-      "publishedAt": "2026-02-06T17:59:23Z",
-      "sourceId": "199cdf92fc46bfcd",
-      "sourceTitle": "Eddie Lv",
-      "link": "https://eddielv.com/musings/shame-to-get-ig/",
-      "detailPath": "articles/bbe95676072b5be89a0d81f6.json"
     }
   ]
 }
