@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "1f14ee758141b8c9bc3b8a37",
+      "title": "CKB RBF 设计和实现",
+      "summary": "CKB 相关技术文章第二篇。 Replace by fee 问题 如果一个交易成功发送到交易池，但可能出现因为费用较低而一直得不到处理。之前 CKB 没有其他措施来处理这种情况。 例如 Dotbit 4 位域名注册拥堵 这个事故发生过程中， CKB 的应用方无法使用任何方式来尽快让自己的交易被打包，这就是引入 Replace-by-fee（RBF) 的原因，我们需要一个机制来提高已经在交易池里交易的费用，替换掉旧的交易，让新的交易尽快被打包。 在新的 multi_index_map 重构后，交易在 pending 阶段也会按照交易的 score 来优先处理 (通常费用高的交易 score 也会高)，这会避免高费用的交易被阻塞住，所以理论上述需要手动提高费用的情况会减少，但我们还是需要 RBF 来手动提高交易的…",
+      "image": "http://catcoding.me/images/ob_pasted-image-20241031103004.png",
+      "publishedAt": "2024-11-06T11:55:13Z",
+      "sourceId": "82c4bcb6bba028cf",
+      "sourceTitle": "程序员的喵",
+      "link": "http://catcoding.me/p/ckb-rbf/",
+      "detailPath": "articles/1f14ee758141b8c9bc3b8a37.json"
+    },
+    {
       "id": "550cd72c31b35cca2f06117f",
       "title": "CKB 交易池重构",
       "summary": "在 11.9 号清迈的 CKCON 会议上我会做一个关于 CKB 交易池的演讲，这是我准备的 slides Key Upgrades of the CKB Core 。所以这段时间在整理之前做项目的时候写的一些文档，顺便分享到自己的博客上。既然我们整个项目的源码都是公开的，这些文档其实也是可以分享的。 第一次听说 CKB 的读者可以参考这个文档以了解什么是 CKB 以及如何工作的： How CKB Works | Nervos CKB 。 我加入 Cryptape 之后一年内做的主要工作，涉及到交易池重构、Replace-by-fee 功能、以及 new-verify。这是第一篇关于交易池重构的文章。 什么是交易池 在 bitcoin 中交易池叫作 mempool，比如 mempool - Bitcoin E…",
@@ -648,17 +659,6 @@
       "sourceTitle": "新世界的大门",
       "link": "https://blog.xinshijiededa.men/control/modern/",
       "detailPath": "articles/5a754b471bdae0a8b5885855.json"
-    },
-    {
-      "id": "57ca43077e25fdeb87f6ce91",
-      "title": "《德国小学……死亡威胁》的后续",
-      "summary": "",
-      "image": null,
-      "publishedAt": "2024-10-14T20:30:20Z",
-      "sourceId": "6e847964818dca55",
-      "sourceTitle": "余晟以为",
-      "link": "https://mp.weixin.qq.com/s/8v7zWLA-a2cBwrrAtg8M3Q",
-      "detailPath": "articles/57ca43077e25fdeb87f6ce91.json"
     }
   ]
 }
