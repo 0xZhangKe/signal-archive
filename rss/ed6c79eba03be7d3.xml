@@ -12,7 +12,7 @@
 	<atom:link href="https://www.raychase.net/feed" rel="self" type="application/rss+xml" />
 	<link>https://www.raychase.net</link>
 	<description>一个纯正程序员的啰嗦</description>
-	<lastBuildDate>Thu, 06 Aug 2026 22:16:29 +0000</lastBuildDate>
+	<lastBuildDate>Tue, 11 Aug 2026 05:10:51 +0000</lastBuildDate>
 	<language>en-US</language>
 	<sy:updatePeriod>
 	hourly	</sy:updatePeriod>
@@ -130,11 +130,23 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:list -->
-<ul><li>如果是新的企业级GPU显卡，可以使用Nvidia的MIG（Multi-Instance GPU）显卡硬件支持的技术，一张显卡可以切割成最多7张小显卡（并非任意分隔单元）；</li><li>或者使用Nvidia的MPS（Multi-Process Service）模式，这是把时间切片改成基于CUDA进程的资源切片，显存和GPU都可以使用这种基于进程的模式。</li><li>再有就是纯软件工程上来缓解这个问题，使用一个Kubernetes Mutating Webhook，给用户的容器外面包一层（比如可以做Python运行库或者C/C++动态链接库级别的拦截），来控制资源获取操作。这种方法存在被恶意绕过的可能。</li></ul>
+<ul><li>如果是新的企业级GPU显卡，可以使用Nvidia的MIG（Multi-Instance GPU）显卡硬件支持的技术，一张显卡可以切割成最多7张小显卡（并非任意分隔单元）。</li><li>或者使用Nvidia的MPS（Multi-Process Service）模式，这是把时间切片改成基于CUDA进程的资源切片。</li><li>或者配合HAMi-core，它可以做到显存的指定容量分割，不过它不管GPU。</li><li>再有就是纯软件工程上来缓解这个问题，使用一个Kubernetes Mutating Webhook，给用户的容器外面包一层（比如可以做Python运行库或者C/C++动态链接库级别的拦截），来控制资源获取操作。这种方法存在被恶意绕过的可能。</li></ul>
 <!-- /wp:list -->
 
 <!-- wp:paragraph -->
-<p>在KAI Scheduler的GitHub页面上，有一个很有帮助的presentation列表和一个<a href="https://github.com/kai-scheduler/KAI-Scheduler#key-features" target="_blank" rel="noreferrer noopener">key features列表</a>。</p>
+<p>总之，没有完美的办法，大概这也是Nvidia把Run:ai的商用licence卖那么贵的原因吧。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>此外，除了上面这个软隔离和硬隔离的问题，还有一些其它的差异，比如：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul><li>没有原生的multi-cluster的scheduling和governance，</li><li>也没有Run:ai的memory swap技术可以让数据根据把inactive的数据从GPU memory中交换到host memory，从而减少资源占用。</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>在KAI Scheduler的GitHub页面上，有一个很有帮助的presentation列表和一个<a rel="noreferrer noopener" href="https://github.com/kai-scheduler/KAI-Scheduler#key-features" target="_blank">key features列表</a>。</p>
 <!-- /wp:paragraph -->]]></description>
 										<content:encoded><![CDATA[
 <p>工作上的原因，最近学习了一下 Run:ai，也考察了一下它的替代技术。在这里记录一下。</p>
@@ -233,19 +245,31 @@
 
 
 
-<ul><li>如果是新的企业级 GPU 显卡，可以使用 Nvidia 的 MIG（Multi-Instance GPU）显卡硬件支持的技术，一张显卡可以切割成最多 7 张小显卡（并非任意分隔单元）；</li><li>或者使用 Nvidia 的 MPS（Multi-Process Service）模式，这是把时间切片改成基于 CUDA 进程的资源切片，显存和 GPU 都可以使用这种基于进程的模式。</li><li>再有就是纯软件工程上来缓解这个问题，使用一个 Kubernetes Mutating Webhook，给用户的容器外面包一层（比如可以做 Python 运行库或者 C/C++动态链接库级别的拦截），来控制资源获取操作。这种方法存在被恶意绕过的可能。</li></ul>
+<ul><li>如果是新的企业级 GPU 显卡，可以使用 Nvidia 的 MIG（Multi-Instance GPU）显卡硬件支持的技术，一张显卡可以切割成最多 7 张小显卡（并非任意分隔单元）。</li><li>或者使用 Nvidia 的 MPS（Multi-Process Service）模式，这是把时间切片改成基于 CUDA 进程的资源切片。</li><li>或者配合 HAMi-core，它可以做到显存的指定容量分割，不过它不管 GPU。</li><li>再有就是纯软件工程上来缓解这个问题，使用一个 Kubernetes Mutating Webhook，给用户的容器外面包一层（比如可以做 Python 运行库或者 C/C++动态链接库级别的拦截），来控制资源获取操作。这种方法存在被恶意绕过的可能。</li></ul>
 
 
 
-<p>在 KAI Scheduler 的 GitHub 页面上，有一个很有帮助的 presentation 列表和一个 <a href="https://github.com/kai-scheduler/KAI-Scheduler#key-features" target="_blank" rel="noreferrer noopener">key features 列表</a>。</p>
+<p>总之，没有完美的办法，大概这也是 Nvidia 把 Run:ai 的商用 licence 卖那么贵的原因吧。</p>
+
+
+
+<p>此外，除了上面这个软隔离和硬隔离的问题，还有一些其它的差异，比如：</p>
+
+
+
+<ul><li>没有原生的 multi-cluster 的 scheduling 和 governance，</li><li>也没有 Run:ai 的 memory swap 技术可以让数据根据把 inactive 的数据从 GPU memory 中交换到 host memory，从而减少资源占用。</li></ul>
+
+
+
+<p>在 KAI Scheduler 的 GitHub 页面上，有一个很有帮助的 presentation 列表和一个 <a rel="noreferrer noopener" href="https://github.com/kai-scheduler/KAI-Scheduler#key-features" target="_blank">key features 列表</a>。</p>
 <p><strong><font color="#ff0000">文章未经特殊标明皆为本人原创，未经许可不得用于任何商业用途，转载请保持完整性并注明来源链接 <a href="https://www.raychase.net/8295">《四火的唠叨》</a></font></strong></p><div class='yarpp yarpp-related yarpp-related-rss yarpp-template-list'>
 <!-- YARPP List -->
 <p>你可能也喜欢看：</p><ol>
 <li><a href="https://www.raychase.net/7724" rel="bookmark" title="本地部署 Minikube + Docker 记录">本地部署 Minikube + Docker 记录</a></li>
 <li><a href="https://www.raychase.net/7965" rel="bookmark" title="初涉 ML Workflow 系统：Kubeflow Pipelines、Flyte 和 Metaflow">初涉 ML Workflow 系统：Kubeflow Pipelines、Flyte 和 Metaflow</a></li>
 <li><a href="https://www.raychase.net/8155" rel="bookmark" title="AI 到底会怎样取代我们的工作">AI 到底会怎样取代我们的工作</a></li>
-<li><a href="https://www.raychase.net/8115" rel="bookmark" title="聊聊商业模式——Atlassian">聊聊商业模式——Atlassian</a></li>
-<li><a href="https://www.raychase.net/8126" rel="bookmark" title="聊聊商业模式——阿里巴巴">聊聊商业模式——阿里巴巴</a></li>
+<li><a href="https://www.raychase.net/3681" rel="bookmark" title="Notes: Spark metrics">Notes: Spark metrics</a></li>
+<li><a href="https://www.raychase.net/3546" rel="bookmark" title="Spark 的性能调优">Spark 的性能调优</a></li>
 </ol>
 </div>
 ]]></content:encoded>
