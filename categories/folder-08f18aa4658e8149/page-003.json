@@ -1,6 +1,61 @@
 {
   "items": [
     {
+      "id": "dfd057d97b089ea3ea4727b8",
+      "title": "VS Code Remote-SSH 把我的伺服器燒到 96°C：rust-analyzer 無限重跑 cargo check",
+      "summary": "一台跑著三十幾個容器、同時被 VS Code Remote-SSH 連進去開發的家用伺服器,溫度釘在 90°C 撐了四十分鐘、load 從 8 衝到 196,最後失去回應。而把它燒掉的不是那些服務,是編輯器。這篇記錄整個追查過程:三條看起來很有說服力但都是錯的線索(SMU 當掉後感測器說謊、重開機就好、CPU 只有 30 到 50%),怎麼用 sysstat 的 sar 和 netdata 的 apps.plugin 回溯一個已經結束的事件,以及最後抓到的三個兇手——rust-analyzer 對一個 GTK 依賴全缺、永遠編不過的 Tauri 專案無限重跑 cargo check、Foam 擴充讓 ripgrep 開出兩百多個行程、還有只是雜訊的 RustDesk 輪詢。文末附上防線設定與事後補的兩道保險。",
+      "image": null,
+      "publishedAt": "2026-08-04T07:16:25Z",
+      "sourceId": "bd51496b8ec0ca1d",
+      "sourceTitle": "Koimsurai 手記",
+      "link": "https://koimsurai.com/blog/vscode-remote-ssh-burned-my-server",
+      "detailPath": "articles/dfd057d97b089ea3ea4727b8.json"
+    },
+    {
+      "id": "44b0dedaa29cc4c935d3bee7",
+      "title": "縈繞於心的十二道難題",
+      "summary": "偶然看到費曼的 12 道難題（Feynman’s 12 Favorite Problems）這東東 […]",
+      "image": "https://2.gravatar.com/avatar/2ce149002ca625e3240835cbfaa3481507a538243a4c31c830176f97f9a9f060?s=96&d=identicon&r=G",
+      "publishedAt": "2026-08-04T07:14:57Z",
+      "sourceId": "737dffed2384c922",
+      "sourceTitle": "恐龍化石的網誌",
+      "link": "https://cylikesreading.wordpress.com/2026/08/04/twelve-problems-originated-from-feynman/",
+      "detailPath": "articles/44b0dedaa29cc4c935d3bee7.json"
+    },
+    {
+      "id": "e245c20e3b085fa39d59c30e",
+      "title": "UPS 加 NUT 讓伺服器斷電自動關機：設定全紀錄,和一條被貓咬過的電源線",
+      "summary": "這篇把 UPS 加 NUT 的完整設定寫成一份可照做的教學:UPS 選型的三個條件(PFC 純正弦波、AVR、NUT 支援)、NUT 的 driver / upsd / upsmon 三層架構與五個設定檔各管什麼、upsmon.conf 逐行說明、POWERDOWNFLAG 為什麼不能漏,以及 BIOS 那個選錯就前功盡棄的選項——Restore after AC Power Loss 必須是 On 而不是 Last State,因為 NUT 乾淨關機後機器的狀態就是關機。另外收錄把 UPS 狀態接到 cron log、Discord 通知與自架面板的做法。而這一切的起點是搬家後伺服器每天半夜硬斷電:線鬆、共用迴路、過熱、PSU 全試過,但那些都只是猜測。作者買 UPS 一半是為了保護、一半是把它當量測儀器用…",
+      "image": null,
+      "publishedAt": "2026-08-04T06:03:43Z",
+      "sourceId": "bd51496b8ec0ca1d",
+      "sourceTitle": "Koimsurai 手記",
+      "link": "https://koimsurai.com/blog/ups-nut-and-the-cable-the-cat-chewed",
+      "detailPath": "articles/e245c20e3b085fa39d59c30e.json"
+    },
+    {
+      "id": "ebfa8fbe95af42fac65d51f4",
+      "title": "帥熊牛仔",
+      "summary": "帥熊真的有一套牛仔裝，是蠻小的時候朋友就幫他做的，但是我不記得為何當初要做牛仔裝了。通常是喜歡一個角色的時候朋友會幫他做衣服，比如小時候他也有魯夫裝和香吉士裝。那既然帥熊其實沒有想要當牛仔，那就去 牧場 餵餵小動物就好了。",
+      "image": "https://raw.githubusercontent.com/yangbearblog/images/main/kumacowboy.gif",
+      "publishedAt": "2026-08-04T05:05:01Z",
+      "sourceId": "13e0488e6596de1c",
+      "sourceTitle": "YangBear'Blog ᓚᘏᗢ",
+      "link": "https://yangbear.bearblog.dev/kumacowboy/",
+      "detailPath": "articles/ebfa8fbe95af42fac65d51f4.json"
+    },
+    {
+      "id": "a2587e55772899d7ddff5601",
+      "title": "入蜀记 day436 钟美美",
+      "summary": "「钟美美。」",
+      "image": null,
+      "publishedAt": "2026-08-04T04:48:27Z",
+      "sourceId": "8e5dc5a8b5023a8e",
+      "sourceTitle": "折腾人生",
+      "link": "https://z.arlmy.me/posts/BBBPandINSW/INSW-ko/INSW_436/",
+      "detailPath": "articles/a2587e55772899d7ddff5601.json"
+    },
+    {
       "id": "bbf9a26a1161cb04f3582deb",
       "title": "未来休克并不只是发生在未来",
       "summary": "继续昨天的文章，在标题里还留下了一个极具迷惑性的“概念”——未来休克。 这是阿尔文·托夫勒在 1970 年出版 […] —— 感谢订阅 莫比乌斯 ，如你有任何疑问、观点交流，请前往 创作者频道 ，或 私信 联系。",
@@ -518,17 +573,6 @@
       "detailPath": "articles/75ee129f2513816e05c834c3.json"
     },
     {
-      "id": "44d1813f50f54d83a58c2a20",
-      "title": "≡ 006｜这一周莫比乌斯环转到了哪里？",
-      "summary": "—— 感谢订阅 莫比乌斯 ，如你有任何疑问、观点交流，请前往 创作者频道 ，或 私信 联系。",
-      "image": null,
-      "publishedAt": "2026-08-02T01:00:00Z",
-      "sourceId": "416bdd1cdb343543",
-      "sourceTitle": "莫比烏斯",
-      "link": "https://mobius.blog/2026/08/02/25253/",
-      "detailPath": "articles/44d1813f50f54d83a58c2a20.json"
-    },
-    {
       "id": "8ba2b4b98997d478d0179210",
       "title": "「冷門概念」截稿，名單更新",
       "summary": "七月份的主題「有趣的小知識或冷門概念」收到了 98 篇文章，全部投稿者連結已經放到 /party 頁面囉！",
@@ -615,50 +659,6 @@
       "sourceTitle": "About on 椒盐豆豉",
       "link": "https://blog.douchi.space/spark-joy-digest-2026-7/?utm_source=rss",
       "detailPath": "articles/8e6bdacf965de2e44ff590b9.json"
-    },
-    {
-      "id": "4611eef3c623bd2456420cc7",
-      "title": "不吝嗇展現自己的低品味",
-      "summary": "SO!AZY 的這篇《承认吧，你其实根本不爱看书》真的太有意思了。",
-      "image": null,
-      "publishedAt": "2026-08-01T08:17:16Z",
-      "sourceId": "19b15d378a85c1f7",
-      "sourceTitle": "Shuo-jen Blog",
-      "link": "https://shuojen.com/blog/2026/08/01/taste",
-      "detailPath": "articles/4611eef3c623bd2456420cc7.json"
-    },
-    {
-      "id": "19bd0b715c5ecc5a27f1ee3c",
-      "title": "無線麥克風",
-      "summary": "看到 〈麥克風的 14 個冷知識〉 ： 無線麥克風打開沒聲音，是因為要等 3 秒，與無線接收器連線後才會有聲音。 想到一件事。 國中畢業典禮，我負責走到臺前說「畢業生請起立，立正」，再上臺領畢業證書。一開口發現麥克風沒聲音，頓一下，下意識地「靠腰」，好巧不巧講這句時有聲音了。 靠腰。 謝謝大笑的各位，讓整件事脫離尷尬往幽默靠近了一點點。 你們有在畢業典禮拿無線麥克風罵過靠腰嗎？我有……。",
-      "image": null,
-      "publishedAt": "2026-08-01T07:39:30Z",
-      "sourceId": "d6867515c49adbbd",
-      "sourceTitle": "Noa's Blog",
-      "link": "https://noa.bearblog.dev/wireless-mic/",
-      "detailPath": "articles/19bd0b715c5ecc5a27f1ee3c.json"
-    },
-    {
-      "id": "bb9e3f3b7b9d00ee29b1bd1c",
-      "title": "向云端｜西南自驾05 - 长沙",
-      "summary": "",
-      "image": null,
-      "publishedAt": "2026-08-01T05:41:20Z",
-      "sourceId": "fa90e95e2850db36",
-      "sourceTitle": "è¿�ç»´å’–å•¡å�§",
-      "link": "https://blog.ops-coffee.com/r/2026-southwest-road-trip-05-changsha.html",
-      "detailPath": "articles/bb9e3f3b7b9d00ee29b1bd1c.json"
-    },
-    {
-      "id": "cfddbfe57a6c9d82791789ef",
-      "title": "帥熊顛鍋",
-      "summary": "上次畫了 帥熊顛球 之後，就想畫帥熊顛鍋。畫的過程中因為瓦斯爐的部分是黑色的如果平底鍋也是黑色就會很麻煩，無意間看到一個粉紅色的平底鍋時，馬上決定帥熊這種萌寵果然就應該用粉紅色的平底鍋。 實際上不太會做菜，不過在團體生活中也曾經有要輪流做菜的經驗，就只是弄熟可以吃不會拉肚子還是行的。我與朋友曾經很愛使用萬能胡麻醬，就是如果來不及弄什麼複雜的東西，就把東西弄熟，加上萬能胡麻醬，大概都能成為一道菜，有些東西不用弄熟也能加，實在方便又好吃，只是吃多了可能會胖。至於荷包蛋和煎餅就是如果要弄很多個到後來溫度會太高，火要小一點不然很容易焦了還沒熟。關於做菜大概沒什麼能說的。",
-      "image": "https://raw.githubusercontent.com/yangbearblog/images/main/kumapantoss2.gif",
-      "publishedAt": "2026-08-01T05:04:35Z",
-      "sourceId": "13e0488e6596de1c",
-      "sourceTitle": "YangBear'Blog ᓚᘏᗢ",
-      "link": "https://yangbear.bearblog.dev/kumapantoss/",
-      "detailPath": "articles/cfddbfe57a6c9d82791789ef.json"
     }
   ]
 }
