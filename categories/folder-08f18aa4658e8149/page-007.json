@@ -1,6 +1,160 @@
 {
   "items": [
     {
+      "id": "48dd3449ebb6ea63d0c0e52b",
+      "title": "圖書館檔案歸納法",
+      "summary": "前言 # 從 2023 使用 Nas 後，我開始學習有系統的檔案管理法，我使用的方式，是類似圖書館的分類法。 讓我直接寫一些範例給大家參考。 分類邏輯 # 主分類（第一層、百位數） # 利用 3 碼數字來命名資料夾，百位數字代表主分類資料夾，所有檔案都要能被分在 10 大資料夾底下。 主分類核心重點： 想到某個檔案時，要能很清楚它在 10 個主分類的哪一個底下。 這 10 種主分類要能涵蓋所有的檔案類型。 舉例： 000-inbox 所有暫時未分類、正在工作階段的內容都放這裡。 100-learning 所有自我成長類的都放這裡，包含音樂學習、語言學習，終端機學習等等的電子書、筆記等等，甚至我在 Youtube 上看到水電工在教怎麼配電，我也會把影片下載放在這裡面。 200-working 製作的音樂、影片、…",
+      "image": null,
+      "publishedAt": "2026-07-21T11:27:05Z",
+      "sourceId": "199cdf92fc46bfcd",
+      "sourceTitle": "Eddie Lv",
+      "link": "https://eddielv.com/articles/file-library/",
+      "detailPath": "articles/48dd3449ebb6ea63d0c0e52b.json"
+    },
+    {
+      "id": "824d4c58f7637698b5830d62",
+      "title": "北投一期一會",
+      "summary": "這是我的「 BlogBlog 同樂會 – 2026 年 8 月 」的投稿文章。本月主題是「 一期一會 」，由 ikuka（一苦卡） 主持。如果你有自己的部落格，歡迎一起來參加！ 某次去北投時，進了一家有點昏暗的傳統小吃店，我對面桌坐了一對日本夫婦。 他們餐點等了很久，於是打開 Google 翻譯，在老闆娘經過時，他們按下語音：「我們要取消煎蛋。」 結果老闆娘直接走掉，完全沒聽到，而他們都有點內向，加上語言不通，只能呆坐著。 看到他們面有難色，於是我上前問老闆娘做了沒，才得知原來他們是點蚵仔煎，而且快好了，我接著用很破爛的日文跟他們說已經快好了。 我吃完、先行離開後，開始逛外面的景點，沒想到後來跟他們在幾個不同地點又遇到了兩、三次。 雖然他們很內向，但每次擦身而過時，都看得出表情是很想熱烈跟我打招呼，但最後只敢…",
+      "image": null,
+      "publishedAt": "2026-07-21T11:22:20Z",
+      "sourceId": "199cdf92fc46bfcd",
+      "sourceTitle": "Eddie Lv",
+      "link": "https://eddielv.com/musings/beitou-ichigo-ichie/",
+      "detailPath": "articles/824d4c58f7637698b5830d62.json"
+    },
+    {
+      "id": "cafadb7b7a2147f0791c1018",
+      "title": "把 NLLB 翻譯接進 Rust,在 Windows 上撞穿整條工具鏈：ct2rs × CTranslate2 的 protobuf 撞名、CRT 之爭、關閉死鎖與 NVIDIA 崩潰",
+      "summary": "這篇文章記錄了作者把一個離線 NLLB 翻譯功能從 Python 搬進 Rust、透過 ct2rs 接 CTranslate2 時,在 Windows/MSVC 上接連撞到的三面牆與各自的根因與修法。第一面是「連不起來」:sentencepiece 與 sherpa-onnx 各自靜態內嵌一份 protobuf,在 MSVC 下撞出 204 個 LNK2005——最乾淨的解不是 /FORCE:MULTIPLE 或 sidecar,而是直接關掉 sentencepiece feature、改用純 Rust 的 tokenizers,讓那份 protobuf 從依賴圖消失。第二面是 CRT 之爭:ct2rs 把 CTranslate2 編成 /MT、Rust std 卻是 /MD,靠 .cargo/config.…",
+      "image": null,
+      "publishedAt": "2026-07-21T11:19:57Z",
+      "sourceId": "bd51496b8ec0ca1d",
+      "sourceTitle": "Koimsurai 手記",
+      "link": "https://koimsurai.com/blog/wiring-nllb-translation-into-rust-and-breaking-through",
+      "detailPath": "articles/cafadb7b7a2147f0791c1018.json"
+    },
+    {
+      "id": "587a621258d4b8e969aaeda4",
+      "title": "我以前好喜欢Sammi的",
+      "summary": "但安心事件后，她老是喜欢带老鼠安出来逼粉丝接受她那个出轨老公，这个行为就很恶心。 你家里的破事喜欢怎么处理没人有资格指指点点，但那种毁三观的价值观要全世界人认同和接受就好cheap。作为粉丝，接受你出 Read more",
+      "image": "https://2cat.net/wp-content/uploads/2026/07/IMG_20260721_171654.jpg",
+      "publishedAt": "2026-07-21T09:21:09Z",
+      "sourceId": "bbbd88a209d1c87d",
+      "sourceTitle": "貓魚  –  2Cat.Net",
+      "link": "https://2cat.net/%e6%88%91%e4%bb%a5%e5%89%8d%e5%a5%bd%e5%96%9c%e6%ac%a2sammi%e7%9a%84/",
+      "detailPath": "articles/587a621258d4b8e969aaeda4.json"
+    },
+    {
+      "id": "9e58e417802433d0c7d06a2c",
+      "title": "入蜀记 day423 巴菲特的访谈",
+      "summary": "「巴菲特的访谈。」",
+      "image": null,
+      "publishedAt": "2026-07-21T04:48:27Z",
+      "sourceId": "8e5dc5a8b5023a8e",
+      "sourceTitle": "折腾人生",
+      "link": "https://z.arlmy.me/posts/BBBPandINSW/INSW-ko/INSW_423/",
+      "detailPath": "articles/9e58e417802433d0c7d06a2c.json"
+    },
+    {
+      "id": "2db6c85c9bd8fc26620fa148",
+      "title": "为球星失恋",
+      "summary": "我是真没想到，这一届世界杯的后劲会有那么足，有好几位读者看完决赛之后跑到我这里来留言，说是一整天茶饭不思，无心睡眠，就那么失魂落魄、浑浑噩噩地一个人待着。尤其是提到梅西的时候，我感觉他们的眼泪在屏幕那一头早已经抑制不住地流下来。 失恋，朋友，这就是失恋，为了世界杯失恋，也是为了自己喜欢的球星黯然退场而失恋。 没有什么羞惭的，也没有什么尴尬的，这种情感很正常，每一代人都有自己失恋的足球巨星。回到 2004年5月16日，传奇足球运动员、前锋、人称「九号半」的罗伯特·巴乔（港译：巴治奥），在 圣西罗球场完成最后一场比赛，在第 89 分钟替换下场，泪洒绿茵。 现在，请擦干你脸上为梅西流的眼泪，随便找个搜索引擎，输入关键词「忧郁王子巴乔」，浏览一下返回的结果。你会发现，在 22 年前从媒体到个人都陷入了严重的失恋，泪洒…",
+      "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiuwDcFOJ897AlCmiZkM8_WKLkpXLfN3QgpatfR9g_ep7qv0kLpWuDaarSrDYXymST1BK4G57DvOnUD3mLR5hr8SIDwaPDfJgv2kKm4AsCMWzy7hlWAbUwR8fZeulde_AUwlq9IjcJ5S99ZwRmk9cssoIHn0CkVSN_MYZq0jKJBxolB7xspqIP2GayyjdU/s72-w453-h602-c/0_1%20(80)-gigapixel-cgi-2x.jpeg",
+      "publishedAt": "2026-07-21T03:25:01Z",
+      "sourceId": "095c6fbac5bbadfd",
+      "sourceTitle": "槽边往事",
+      "link": "https://www.hecaitou.com/2026/07/Heartbroken-over-a-Football-Legend.html",
+      "detailPath": "articles/2db6c85c9bd8fc26620fa148.json"
+    },
+    {
+      "id": "86f9d1e3a9b823bc6fba00db",
+      "title": "会后悔吗",
+      "summary": "三个外甥都放假了，最近把老大老三接来家里玩，老二勤工俭学去了，没来。 这俩周带他俩去爬了两座山，看了三个湖，逛了两个水世界一个儿童乐园，这会抖音里还囤了一堆景点门票没用。 下周准备再带他俩去日照住几日，看看海，吹吹海风。 和两个孩子相处几天，能感觉到，二姐家的老大，比大姐家的老三要滑头，独生子女被我二姐惯的不行，吃完饭碗筷一丢就进屋，第二天我给他俩立规矩，刷碗和晒衣服一人一天，接下来几天俩人相处还算融洽，唯一让人生气的就是，俩孩子玩手机没个够，老大成年了，我也不好睡前收他手机了，结果就是俩人天天玩到凌晨两三点，早晨做了早餐都叫不醒他俩，于是这几天我也摆烂了，大家一起睡懒觉好了，罢了，假期不就是睡懒觉的好日子吗。 昨晚俩孩子去外面吃的，我俩傍晚8点多出门散步，上次俩人骑车出来，得是四五年前的事了，电车没电了，两…",
+      "image": "https://ihaihe.cn/wp-content/uploads/2026/07/IMG_6393-scaled.webp",
+      "publishedAt": "2026-07-21T03:02:48Z",
+      "sourceId": "8e1a97c92477b087",
+      "sourceTitle": "三十里海河",
+      "link": "https://ihaihe.cn/3670.htm",
+      "detailPath": "articles/86f9d1e3a9b823bc6fba00db.json"
+    },
+    {
+      "id": "0796d45ad2c7ea5a9eda9e8c",
+      "title": "逼你說出任何話",
+      "summary": "要怎麼逼一個人，說出他不想說的任何話？",
+      "image": "https://wiwi.blog/assets/images/1-014c964871187f40e6d43baa97fe81ae.png",
+      "publishedAt": "2026-07-21T00:00:00Z",
+      "sourceId": "7f36c3da1e6b5c71",
+      "sourceTitle": "Wiwi.Blog Blog",
+      "link": "https://wiwi.blog/blog/say-my-word",
+      "detailPath": "articles/0796d45ad2c7ea5a9eda9e8c.json"
+    },
+    {
+      "id": "9cae6826b1cee7f98d2558be",
+      "title": "門外青山",
+      "summary": "幾個禮拜前在家補看臺灣經典電影，侯孝賢的《悲情城市》，雖然老作品節奏很慢，不是很符合我的喜好，但必須說，吳念真編寫的劇本真的很細膩，楊德昌的作品中，我最喜歡的是《一一》，也出自於吳導之手，小時候看過的很多經典，《兒子的大玩偶》、《魯冰花》也都是很棒的傑作。他的劇本很有臺灣人早期的生活感，對於過去中產階級與低下階層的時代樣態，描寫地非常寫實、動人，輕易的就能直中人心。",
+      "image": null,
+      "publishedAt": "2026-07-21T00:00:00Z",
+      "sourceId": "19b15d378a85c1f7",
+      "sourceTitle": "Shuo-jen Blog",
+      "link": "https://shuojen.com/blog/2026/07/21/article",
+      "detailPath": "articles/9cae6826b1cee7f98d2558be.json"
+    },
+    {
+      "id": "1bea4779f40672c6c9164734",
+      "title": "Waitawa Regional Park",
+      "summary": "日常爬山。 今天拍木纹。",
+      "image": "https://photoghenry.wordpress.com/wp-content/uploads/2026/07/a24b8cf0-d6e1-44cf-bdbf-ffeb4e1b9c21.webp",
+      "publishedAt": "2026-07-20T23:23:59Z",
+      "sourceId": "a64fac5b0b6a1cd4",
+      "sourceTitle": "摄影流水账",
+      "link": "https://photoghenry.wordpress.com/2026/07/21/waitawa-regional-park-4/",
+      "detailPath": "articles/1bea4779f40672c6c9164734.json"
+    },
+    {
+      "id": "9f388a6184eaa73a28e639d4",
+      "title": "Jul 17 2026 航運業的新聞",
+      "summary": "Hyundai robot passes world-first shipboard driving test(現代機器人透過全球首個船上駕駛測試) 說出你的看法 只能說終於讓機器人正式上工了，將打亂傳統產業航運業的枷鎖。機器人打破了以往都要人類來做的事情，例如例行檢查、物料運輸。簡單的機器、船艙保養，可以大幅降低因為人為疏失導致的受傷、跌倒等意外。報導指出，機器人可以\"直線行駛、曲線行駛、低速行駛、高速行駛、路線學習及完全自主駕駛功能均正常\"，他的雙腳應該可以身長長高，直接連接高壓清洗裝置+藥水，直接洗大艙。是否能夠長時間進行作業?進入密閉式空間的危險程度大幅降低。 文章也點出由於空間的限制，機器人的輪子太大了，該如何進入狹窄的空間?上下樓梯皆正常?這項測驗只能知道是否適應環境，拉長時間看，還得再測試，是否…",
+      "image": null,
+      "publishedAt": "2026-07-20T21:55:27Z",
+      "sourceId": "9755b4e021e7e4dc",
+      "sourceTitle": "she monster inside",
+      "link": "https://monsteressinside.bearblog.dev/jul-17-2026/",
+      "detailPath": "articles/9f388a6184eaa73a28e639d4.json"
+    },
+    {
+      "id": "ed30f6f4e8be68c9df2d1e66",
+      "title": "2026-06-13 / 房间里的大嘴",
+      "summary": "by 新世界的大门",
+      "image": "https://remnote-user-data.s3.amazonaws.com/kfGRUSNCs6xUtPsYfcrLnFqHM0r-RKIXFQUqA5F3kmxkUReXfDxZWnDflAtQIXxsNNvrdfshLrKERwLktWU1IOh2qYiYb-BSOFAZFADY8dFO-eSewfBH8j4HQ1gggH65.png",
+      "publishedAt": "2026-07-20T19:49:30Z",
+      "sourceId": "4f3f8eb9d72c3840",
+      "sourceTitle": "新世界的大门",
+      "link": "https://blog.xinshijiededa.men/daily/49/",
+      "detailPath": "articles/ed30f6f4e8be68c9df2d1e66.json"
+    },
+    {
+      "id": "e89535bb348e3bfb00d06631",
+      "title": "无标题文章",
+      "summary": "🇰🇷 설렘 & 누군가를 좋아한다는 것 (넘기지 마세요~ 한국어 버전은 아래에 있어요~ ) 這是我的「BlogBlog 同樂會 – 2026 年 8 月 」的投稿文章。本月主題是「一期一會」，由 ikuka 主持。如果你有自己的部落格，歡迎一起來參加！ 最近發生的一些事情 讓我有時候在思考著 對一個人的心動、對一個人的喜歡 是什麼樣子的感受呢？ 其實對我來說，那樣的感受已經有點模糊了 有那樣心動、愛上一個人的心情大概是12歲的時候發生的（國中一年級班上的男同學） 有時想想…這感覺會不會沒有下次了呢？ 愛上一個人的感覺是不是就只停留在12歲的那段時光？ 然後 未來不會再發生了呢？ 人的一生、僅有一次的相會，這樣的一期一會，對我來說，愛情是不是也是這樣呢？ 努力回想那段期間心動的感覺是什麼 我卻發現跟 幸…",
+      "image": null,
+      "publishedAt": "2026-07-20T13:39:55Z",
+      "sourceId": "51aefe52efef4bf4",
+      "sourceTitle": "一起和 Yoon 聊心事",
+      "link": "https://yoon.club/8252/",
+      "detailPath": "articles/e89535bb348e3bfb00d06631.json"
+    },
+    {
+      "id": "bb8a2a04d610eb7573eb944a",
+      "title": "向云端｜西南自驾02 - 婺源",
+      "summary": "",
+      "image": null,
+      "publishedAt": "2026-07-20T11:35:14Z",
+      "sourceId": "fa90e95e2850db36",
+      "sourceTitle": "è¿�ç»´å’–å•¡å�§",
+      "link": "https://blog.ops-coffee.com/r/2026-southwest-road-trip-02-wuyuan.html",
+      "detailPath": "articles/bb8a2a04d610eb7573eb944a.json"
+    },
+    {
       "id": "0a189edcd63042c483e8ccc8",
       "title": "世界杯瞎话第六季——好球",
       "summary": "决赛是场碾压局。 德拉富恩特是真正的名帅有能。两只球队根本不在一个层面上。 恩佐、帕雷德斯这种继承了阿根廷人渣传统的球员，早该下去了。上半场开始不久阿根廷那个背后铲人就应该出牌。 阿根廷根本扛不住，这种情况下把没用运动能力的梅西放在场上完全没用。我要是斯卡洛尼，就用劳塔罗换梅西，想办法偷一个。 当然，正常人也没这胆量。我对梅西没意见，但是非常反感10保1的打法。但这都不内讧，太不唯物主义了。劳塔罗状态这么好，每场就给那么点时间，最后一场还因为后卫意外受伤被BAN了，这都能忍？ 奇怪的是库库明显的捂嘴又不吹了。难道是考虑双方语言互通？ 跟两年前说的一样，西班牙只差一个好中锋，又可以霸榜10年。 英格兰留给我的刻板印象更加刻板了。那就是打不了硬仗。 明明很有实力，对阿根廷为什么那么龟呢。图赫尔岁数也不是很大，怎么…",
@@ -505,160 +659,6 @@
       "sourceTitle": "折腾人生",
       "link": "https://z.arlmy.me/posts/BBBPandINSW/INSW-ko/INSW_419/",
       "detailPath": "articles/a8f3440309e42ed7f18b7b4a.json"
-    },
-    {
-      "id": "2820b3c69a76f82c265a7818",
-      "title": "空氣品質指標超標，是怎樣的一天？",
-      "summary": "然後，我的鄰居竟然還在曬日光浴，有的還在烤肉，有的還在游泳。我相信他們的肺是鐵打的。",
-      "image": "https://alicehsu.blog/images/Post58home.jpg",
-      "publishedAt": "2026-07-17T02:00:00Z",
-      "sourceId": "a08fec079b5bc196",
-      "sourceTitle": "Alice Hsu's Blog",
-      "link": "https://alicehsu.blog/zh-tw/posts/2026/07/air-quality-alert/",
-      "detailPath": "articles/2820b3c69a76f82c265a7818.json"
-    },
-    {
-      "id": "38cc9c39c5320740ace06882",
-      "title": "這該辯論嗎",
-      "summary": "Bo Seo 是南韓裔的澳洲記者，同時是兩屆世界辯論比賽冠軍。最近讀到了他提出的一個「RISA」框架，決定一個問題該不該辯論。如果你們的「辯論」不能通過 RISA 這四關，那麼你們其實就只是在「吵架」。",
-      "image": null,
-      "publishedAt": "2026-07-17T00:00:00Z",
-      "sourceId": "7f36c3da1e6b5c71",
-      "sourceTitle": "Wiwi.Blog Blog",
-      "link": "https://wiwi.blog/blog/worth-debating",
-      "detailPath": "articles/38cc9c39c5320740ace06882.json"
-    },
-    {
-      "id": "638523e35ae91bdb34fe836d",
-      "title": "科技爱好者周刊（第 404 期）：你需要知道的 AI 内存知识",
-      "summary": "这里记录每周值得分享的科技内容，周五发布。 本杂志 开源 ，欢迎 投稿 。另有 《谁在招人》 服务，发布程序员招聘信息。合作请 邮件联系 （yifeng.ruan@gmail.com）。 封面图 上海某商场正在举办的\"海绵宝宝\"展览。（ via ） 你需要知道的 AI 内存知识 自己在家运行 AI 模型，可以选择两种硬件。 一种是独立显卡，目前最顶级的消费级显卡是英伟达的 RTX 5090，带有 32GB 显存，售价3万元人民币左右。 另一种是采用板载芯片组（CPU + 板载显卡 + 板载内存）的家用电脑，比如采用 AMD 公司 Strix Halo 芯片组（具体型号 Ryzen AI Max+ 395）的迷你电脑，自带 128GB 内存，售价2万元人民币左右。 我问大家，哪种硬件更好？ 大部分人可能不假思索…",
-      "image": "https://cdn.beekka.com/blogimg/asset/202607/bg2026071603.webp",
-      "publishedAt": "2026-07-16T23:51:19Z",
-      "sourceId": "50579811ddcd4b8c",
-      "sourceTitle": "阮一峰的网络日志",
-      "link": "http://www.ruanyifeng.com/blog/2026/07/weekly-issue-404.html",
-      "detailPath": "articles/638523e35ae91bdb34fe836d.json"
-    },
-    {
-      "id": "555c13c628a10367f841113d",
-      "title": "SmartPerfetto 2026.06.04-07.17 六周更新复盘：从 v1.0.28 到 v1.1.1",
-      "summary": "本文复盘 上一篇三周更新 （2026-06-04，v1.0.28）之后，到 2026-07-17（v1.1.1）为止 SmartPerfetto 的全部主要改动。看完这篇文章，可以知道这六周每个功能解决什么问题、边界在哪里，以及当前版本的完整功能全景。项目地址： github.com/Gracker/SmartPerfetto 。",
-      "image": null,
-      "publishedAt": "2026-07-16T16:00:00Z",
-      "sourceId": "1aa1837ca33d8d55",
-      "sourceTitle": "Android Performance",
-      "link": "https://androidperformance.com/2026/07/17/SmartPerfetto-Six-Week-Update/",
-      "detailPath": "articles/555c13c628a10367f841113d.json"
-    },
-    {
-      "id": "8038a5ec51430dd3e382b9ae",
-      "title": "過不去的事，最後都會變成過去式",
-      "summary": "你有煩惱嗎？趕快去睡覺！",
-      "image": "https://images.unsplash.com/photo-1499424180600-8d243b10320a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMDAzMzh8MHwxfHNlYXJjaHwyfHxwYXN0fGVufDB8fHx8MTc4NDA0ODE4Mnww&ixlib=rb-4.1.0&q=80&w=1080",
-      "publishedAt": "2026-07-16T15:34:41Z",
-      "sourceId": "5dbc65766f322457",
-      "sourceTitle": "只贏",
-      "link": "https://www.onlywin.work/p/2b1",
-      "detailPath": "articles/8038a5ec51430dd3e382b9ae.json"
-    },
-    {
-      "id": "6e417fe426ff5350bd124578",
-      "title": "最近够闲的，开发了新网站",
-      "summary": "因为各种原因，最近一个月很闲，每周的工作几乎就是收集一次信息，让 AI 汇总了再转发出去。正好 GPT 5.6 Sol 发布，就用 Sol 开发了新的个人网站系统。在 AI 的加持下，不仅能开发，开发速度还很快。AI 比我强多了。不可否认没有我暂时也不行，我也给 AI 提出了一些意见。但这些意见是按照我的想法做的，是否符合别人的口味，那也不一定。目前这个新系",
-      "image": null,
-      "publishedAt": "2026-07-16T13:04:00Z",
-      "sourceId": "211ed4466033fe3d",
-      "sourceTitle": "一派胡言",
-      "link": "https://yipai.me/post/2539.html",
-      "detailPath": "articles/6e417fe426ff5350bd124578.json"
-    },
-    {
-      "id": "fe6767c83b4d9b99cc221cbb",
-      "title": "Challenging your own stereotypes is hard",
-      "summary": "Challenging your own stereotypes is hard. Identifying your own discriminatory thoughts is hard. Coming to terms with unfamiliar concepts is hard. That’s why many people, who are sometimes too scared to face their own unpleasant sides (or worse: think that those issues do not worth spending their energy on), go for the easy way. They hold tight on their ster…",
-      "image": null,
-      "publishedAt": "2026-07-16T08:37:00Z",
-      "sourceId": "a93d4f2e98fafcbe",
-      "sourceTitle": "All posts | 所有貼文 on ttheng's microblog. | 侃侃而隨想極短文。",
-      "link": "https://microblog.ttheng.com/challenging-your-own-stereotypes-is-hard/",
-      "detailPath": "articles/fe6767c83b4d9b99cc221cbb.json"
-    },
-    {
-      "id": "71fbe96970b59118207e362f",
-      "title": "畫一隻貓",
-      "summary": "〈來畫一隻貓吧！〉 看到格友們的文章（比如 這個 和 那個 ），原來大家都一樣幼稚。（我畫的時候還沒有普通版）。 ▲ 一筆畫挑戰過關 ▲ 貓貓是液體 ▲ 我愛貓貓 ▲ 嗯？ ▲ 欸？ ▲ Noa 之貓",
-      "image": "https://noachen522.github.io/noasblog/draw_a_cat-1.png",
-      "publishedAt": "2026-07-16T07:36:56Z",
-      "sourceId": "d6867515c49adbbd",
-      "sourceTitle": "Noa's Blog",
-      "link": "https://noa.bearblog.dev/draw-a-cat/",
-      "detailPath": "articles/71fbe96970b59118207e362f.json"
-    },
-    {
-      "id": "69f332b0851867977e3d0342",
-      "title": "从湾区到西雅图——时隔两年的美西 road trip 闭环",
-      "summary": "两年前我跑过一次 美西大环线 ，从西雅图出发，一路途径 Boise, 盐湖城，犹他州各大国家公园，穿回加州，再北上开回西雅图。上次机缘巧合从湾区到西雅图中间未作游玩，大环线其实缺了一段。这次恰逢公司在湾区 onsite，又是淡季项目已经交付夏天大家都在放假，于是一拍大腿干脆开着出差租的车从湾区一路玩一整周回西雅图，这回算是 close the loop 引起舒适。加之 Oregon 连续几年 road trip 从 海岸线 到 中线 再到 内陆 都玩过了，Cascadia 基本玩透彻了，是个合格的美西公路旅行爱好者了。 ... 阅读全文 https://blog.douchi.space/bay-to-sea-road-trip/",
-      "image": null,
-      "publishedAt": "2026-07-16T05:58:00Z",
-      "sourceId": "f26cdf4037718a26",
-      "sourceTitle": "About on 椒盐豆豉",
-      "link": "https://blog.douchi.space/bay-to-sea-road-trip/?utm_source=rss",
-      "detailPath": "articles/69f332b0851867977e3d0342.json"
-    },
-    {
-      "id": "56b4668decbbc3dc859ef123",
-      "title": "入蜀记 day418 落雨咯",
-      "summary": "「落雨咯。」",
-      "image": null,
-      "publishedAt": "2026-07-16T04:48:27Z",
-      "sourceId": "8e5dc5a8b5023a8e",
-      "sourceTitle": "折腾人生",
-      "link": "https://z.arlmy.me/posts/BBBPandINSW/INSW-ko/INSW_418/",
-      "detailPath": "articles/56b4668decbbc3dc859ef123.json"
-    },
-    {
-      "id": "d68a574225f9ea920ab7e76f",
-      "title": "当前想置顶的一些内容",
-      "summary": "最近学到了一个概念：Hypomnēma ，这是一种将真理内化为自己品格和行动的方法，具体就是把已经读到、听到的真理材料收集起来，再通过练习来塑造自己。我在这篇文章里整理了目前为止想要践行的真理。",
-      "image": null,
-      "publishedAt": "2026-07-16T02:54:00Z",
-      "sourceId": "74bd1a0c7196fd9e",
-      "sourceTitle": "Owen的博客",
-      "link": "https://www.owenyoung.com/pinned",
-      "detailPath": "articles/d68a574225f9ea920ab7e76f.json"
-    },
-    {
-      "id": "d38120c9390a1307d7d4a39f",
-      "title": "BlogBlog 同樂會：一期一會（2026 年八月）",
-      "summary": "七月份的「有趣的小知識或冷門概念」才進行到月中，八月份的主題文就已經出爐啦！",
-      "image": null,
-      "publishedAt": "2026-07-16T00:00:00Z",
-      "sourceId": "ad9c9cc2127a7a13",
-      "sourceTitle": "BlogBlog.Club 部落部落俱樂部 Blog",
-      "link": "https://blogblog.club/blog/bbp-aug-2026",
-      "detailPath": "articles/d38120c9390a1307d7d4a39f.json"
-    },
-    {
-      "id": "734ef31d7b3dff24527d9837",
-      "title": "AI 的無限迴圈",
-      "summary": "1. 人類發明了 AI，省下了大量工作時間",
-      "image": null,
-      "publishedAt": "2026-07-16T00:00:00Z",
-      "sourceId": "7f36c3da1e6b5c71",
-      "sourceTitle": "Wiwi.Blog Blog",
-      "link": "https://wiwi.blog/blog/ai-infinite-loop",
-      "detailPath": "articles/734ef31d7b3dff24527d9837.json"
-    },
-    {
-      "id": "852001f6fd96fbe95dd48bbf",
-      "title": "Duder Regional Park",
-      "summary": "世界杯赛程到后期还是有时间来散步的。 不过很意外的又来到这座公园。 这次走得比较深，基本走到尽头了。 天气挺好 […]",
-      "image": "https://photoghenry.wordpress.com/wp-content/uploads/2026/07/a23d9155-ac54-4ddd-80fc-529e27807aa6.jpg",
-      "publishedAt": "2026-07-15T21:23:36Z",
-      "sourceId": "a64fac5b0b6a1cd4",
-      "sourceTitle": "摄影流水账",
-      "link": "https://photoghenry.wordpress.com/2026/07/16/duder-regional-park-7/",
-      "detailPath": "articles/852001f6fd96fbe95dd48bbf.json"
     }
   ]
 }
