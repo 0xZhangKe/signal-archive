@@ -1,0 +1,11 @@
+{
+  "id": "5a70dc838deaaaebd1af7456",
+  "title": "Prompt Injections for Defense",
+  "summary": "This seems to work : Researchers from Tracebit on Monday said they found that placing prompt injections alongside passwords, cryptographic keys, and other secrets stored on Amazon Web Services was often all that was needed to shut down attacks from AI hacking agents. The prompts direct the attacking LLM to perform an action forbidden by its guardrails, the…",
+  "content": "<p>This seems to <a href=\"https://arstechnica.com/security/2026/07/now-defenders-are-embracing-the-prompt-injection-too/\" target=\"_blank\" rel=\"noopener noreferrer\">work</a>:</p>\n<blockquote><p>Researchers from <a href=\"https://tracebit.com/\" target=\"_blank\" rel=\"noopener noreferrer\">Tracebit</a> on Monday <a href=\"https://agentic.tracebit.com/context-bombs/\" target=\"_blank\" rel=\"noopener noreferrer\">said</a> they found that placing prompt injections alongside passwords, cryptographic keys, and other secrets stored on Amazon Web Services was often all that was needed to shut down attacks from AI hacking agents. The prompts direct the attacking LLM to perform an action forbidden by its guardrails, the safety barriers AI developers erect to prevent it from taking harmful actions. The LLM responds by shutting down.</p>\n<p>Examples are a prompt that orders the LLM to provide steps for developing inhalable Anthrax spores, or, in the case of LLMs from Chinese developers, make references to the iconic Tank Man from the 1989 Tiananmen Square massacre. Once the LLM encounters these forbidden commands, it no longer follows its existing commands. The researchers have named the technique context bombing.</p></blockquote>\n<p>Of course, this only works against agents that have guardrails. As we start to see more locally run AI models, we’ll see more attackers using LLMs with no guardrails.</p>",
+  "image": null,
+  "publishedAt": "2026-08-12T09:56:37Z",
+  "sourceId": "785b58e8749bd508",
+  "sourceTitle": "Schneier on Security",
+  "link": "https://www.schneier.com/blog/archives/2026/08/prompt-injections-for-defense.html"
+}
