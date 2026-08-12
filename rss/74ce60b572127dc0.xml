@@ -1,4 +1,165 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Mastodon Blog</title><link>https://blog.joinmastodon.org/</link><description>Recent content on Mastodon Blog</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Wed, 05 Aug 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.joinmastodon.org/index.xml" rel="self" type="application/rss+xml"/><item><title>Discovery Week 2026: What we learned, and what we’re doing next</title><link>https://blog.joinmastodon.org/2026/08/discovery-week-2026-what-we-learned-and-what-were-doing-next/</link><pubDate>Wed, 05 Aug 2026 00:00:00 +0000</pubDate><guid>https://blog.joinmastodon.org/2026/08/discovery-week-2026-what-we-learned-and-what-were-doing-next/</guid><description>&lt;p&gt;I joined Mastodon in the summer of 2025 as the first full-time design hire. I have an extensive background in improving software usability, diversity and belonging for online communities, but I was new to Mastodon and the fediverse.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Mastodon Blog</title><link>https://blog.joinmastodon.org/</link><description>Recent content on Mastodon Blog</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Wed, 12 Aug 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.joinmastodon.org/index.xml" rel="self" type="application/rss+xml"/><item><title>Trunk &amp; Tidbits, July 2026</title><link>https://blog.joinmastodon.org/2026/08/trunk-tidbits-july-2026/</link><pubDate>Wed, 12 Aug 2026 00:00:00 +0000</pubDate><guid>https://blog.joinmastodon.org/2026/08/trunk-tidbits-july-2026/</guid><description>&lt;p&gt;Welcome to the 28th edition of Trunks &amp;amp; Tidbits!&lt;/p&gt;
+&lt;p&gt;This is the summer here in Europe, but while some of the team is enjoying some well-earned vacations, the work on Mastodon continues and we made a lot of progress this month.&lt;/p&gt;
+&lt;p&gt;The team is continuing to grow, and we are very pleased to welcome &lt;a href="https://hachyderm.io/@jhbabon"&gt;Juan&lt;/a&gt; as the 4th member of our web backend team. As we have doubled the size of the backend team over the last few months, we are now all set up to start working on the various projects funded by the Sovereign Tech Agency that &lt;a href="https://blog.joinmastodon.org/2026/04/sovereign-tech-agency-funding/"&gt;we announced a few months ago&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;We also published the &lt;a href="https://blog.joinmastodon.org/2026/08/discovery-week-2026-what-we-learned-and-what-were-doing-next/"&gt;results of our first Discovery Week&lt;/a&gt;. Find out what we learned and what will be our next focuses after this week of user surveys and workshops organised by Imani, our Head of Design.&lt;/p&gt;
+&lt;h2 id="releases"&gt;Releases&lt;/h2&gt;
+&lt;p&gt;We recently released Mastodon &lt;a href="https://github.com/mastodon/mastodon/releases/tag/v4.6.3"&gt;4.6.3&lt;/a&gt;, &lt;a href="https://github.com/mastodon/mastodon/releases/tag/v4.6.4"&gt;4.6.4&lt;/a&gt; and &lt;a href="https://github.com/mastodon/mastodon/releases/tag/v4.6.5"&gt;4.6.5&lt;/a&gt;, fixing various bugs and security issues (including one high severity). We recommend all administrators running Mastodon 4.6 to update as soon as possible.&lt;/p&gt;
+&lt;p&gt;We also backported those fixes for our currently supported versions. If you are not (yet) running Mastodon 4.6, we recommend you to update to either Mastodon &lt;a href="https://github.com/mastodon/mastodon/releases/tag/v4.5.15"&gt;4.5.15&lt;/a&gt; or &lt;a href="https://github.com/mastodon/mastodon/releases/tag/v4.4.22"&gt;4.4.22&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Finally, we just released the &lt;a href="https://github.com/mastodon/mastodon/releases/tag/v4.7.0-beta.1"&gt;first beta version for Mastodon 4.7&lt;/a&gt;. It contains very few user-facing changes, but does contain significant reworking of the backend code to improve security and support new protocol features. This requires substantial database migrations that could take a couple of hours on very large servers, but will not cause downtime if the upgrade instructions are followed.&lt;/p&gt;
+&lt;h2 id="backend--web"&gt;Backend &amp;amp; Web&lt;/h2&gt;
+&lt;p&gt;In July 2026 we reviewed and merged 204 Pull Requests (120 with translation and dependency updates removed) from 14 contributors.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Migrated local private keys to a new, on-disk encrypted, database table &lt;span class="not-prose"&gt;
+ —
+ &lt;a class="whitespace-nowrap inline-flex items-baseline underline" href="https://github.com/mastodon/mastodon/pull/39686"&gt;
+ &lt;img src="https://blog.joinmastodon.org/github-logo.svg" alt="Github" class="h-4 inline mr-1 self-center" /&gt;
+ &lt;span&gt;PR #39686&lt;/span&gt;
+ &lt;/a&gt;
+ 
+ &lt;span&gt;(by
+ &lt;a href="https://github.com/ClearlyClaire" class="underline"&gt;ClearlyClaire&lt;/a&gt;)
+ &lt;/span&gt;
+ &lt;/span&gt;
+&lt;/li&gt;
+&lt;li&gt;Added support for storing (not yet using) ML-DSA-44 (post-quantum algorithm) account keys &lt;span class="not-prose"&gt;
+ —
+ &lt;a class="whitespace-nowrap inline-flex items-baseline underline" href="https://github.com/mastodon/mastodon/pull/39747"&gt;
+ &lt;img src="https://blog.joinmastodon.org/github-logo.svg" alt="Github" class="h-4 inline mr-1 self-center" /&gt;
+ &lt;span&gt;PR #39747&lt;/span&gt;
+ &lt;/a&gt;
+ 
+ &lt;span&gt;(by
+ &lt;a href="https://github.com/ClearlyClaire" class="underline"&gt;ClearlyClaire&lt;/a&gt;)
+ &lt;/span&gt;
+ &lt;/span&gt;
+&lt;/li&gt;
+&lt;li&gt;Added support for &lt;code&gt;ML-DSA-44&lt;/code&gt; in Object Integrity Proofs (for servers running a recent OpenSSL version) &lt;span class="not-prose"&gt;
+ —
+ &lt;a class="whitespace-nowrap inline-flex items-baseline underline" href="https://github.com/mastodon/mastodon/pull/39522"&gt;
+ &lt;img src="https://blog.joinmastodon.org/github-logo.svg" alt="Github" class="h-4 inline mr-1 self-center" /&gt;
+ &lt;span&gt;PR #39522&lt;/span&gt;
+ &lt;/a&gt;
+ 
+ &lt;span&gt;(by
+ &lt;a href="https://github.com/ClearlyClaire" class="underline"&gt;ClearlyClaire&lt;/a&gt;)
+ &lt;/span&gt;
+ &lt;/span&gt;
+&lt;/li&gt;
+&lt;li&gt;Added support for FEP-8b32 &lt;span class="not-prose"&gt;
+ —
+ &lt;a class="whitespace-nowrap inline-flex items-baseline underline" href="https://github.com/mastodon/mastodon/pull/39530"&gt;
+ &lt;img src="https://blog.joinmastodon.org/github-logo.svg" alt="Github" class="h-4 inline mr-1 self-center" /&gt;
+ &lt;span&gt;PR #39530&lt;/span&gt;
+ &lt;/a&gt;
+ 
+ &lt;span&gt;(by
+ &lt;a href="https://github.com/ClearlyClaire" class="underline"&gt;ClearlyClaire&lt;/a&gt;)
+ &lt;/span&gt;
+ &lt;/span&gt;
+&lt;/li&gt;
+&lt;li&gt;Added support for sending RFC 9421 HTTP Message signatures. Mastodon will still first send the legacy &lt;code&gt;cavage-12&lt;/code&gt; signatures for now, due to issues in other Fediverse software &lt;span class="not-prose"&gt;
+ —
+ &lt;a class="whitespace-nowrap inline-flex items-baseline underline" href="https://github.com/mastodon/mastodon/pull/39756"&gt;
+ &lt;img src="https://blog.joinmastodon.org/github-logo.svg" alt="Github" class="h-4 inline mr-1 self-center" /&gt;
+ &lt;span&gt;PR #39756&lt;/span&gt;
+ &lt;/a&gt;
+ 
+ &lt;span&gt;(by
+ &lt;a href="https://github.com/ClearlyClaire" class="underline"&gt;ClearlyClaire&lt;/a&gt;)
+ &lt;/span&gt;
+ &lt;/span&gt;
+&lt;/li&gt;
+&lt;li&gt;Added support for &lt;code&gt;Link&lt;/code&gt; objects in &lt;code&gt;attachment&lt;/code&gt; as per &lt;a href="https://w3id.org/fep/8967"&gt;FEP 8967&lt;/a&gt; &lt;span class="not-prose"&gt;
+ —
+ &lt;a class="whitespace-nowrap inline-flex items-baseline underline" href="https://github.com/mastodon/mastodon/pull/36104"&gt;
+ &lt;img src="https://blog.joinmastodon.org/github-logo.svg" alt="Github" class="h-4 inline mr-1 self-center" /&gt;
+ &lt;span&gt;PR #36104&lt;/span&gt;
+ &lt;/a&gt;
+ 
+ &lt;span&gt;(by
+ &lt;a href="https://github.com/Gargron" class="underline"&gt;Gargron&lt;/a&gt;)
+ &lt;/span&gt;
+ &lt;/span&gt;
+&lt;/li&gt;
+&lt;li&gt;Two big database changes have been merged to better differentiate between deleted and suspended accounts, and to ensure that an account’s &lt;code&gt;uri&lt;/code&gt; is unique &lt;span class="not-prose"&gt;
+ —
+ &lt;a class="whitespace-nowrap inline-flex items-baseline underline" href="https://github.com/mastodon/mastodon/pull/23617"&gt;
+ &lt;img src="https://blog.joinmastodon.org/github-logo.svg" alt="Github" class="h-4 inline mr-1 self-center" /&gt;
+ &lt;span&gt;PR #23617&lt;/span&gt;
+ &lt;/a&gt;
+ 
+ &lt;span&gt;(by
+ &lt;a href="https://github.com/ClearlyClaire" class="underline"&gt;ClearlyClaire&lt;/a&gt;)
+ &lt;/span&gt;
+ &lt;/span&gt;
+ &lt;span class="not-prose"&gt;
+ —
+ &lt;a class="whitespace-nowrap inline-flex items-baseline underline" href="https://github.com/mastodon/mastodon/pull/39882"&gt;
+ &lt;img src="https://blog.joinmastodon.org/github-logo.svg" alt="Github" class="h-4 inline mr-1 self-center" /&gt;
+ &lt;span&gt;PR #39882&lt;/span&gt;
+ &lt;/a&gt;
+ 
+ &lt;span&gt;(by
+ &lt;a href="https://github.com/ClearlyClaire" class="underline"&gt;ClearlyClaire&lt;/a&gt;)
+ &lt;/span&gt;
+ &lt;/span&gt;
+&lt;/li&gt;
+&lt;li&gt;Started to refactor the &lt;code&gt;&amp;lt;Status&amp;gt;&lt;/code&gt; component to make future changes easier&lt;/li&gt;
+&lt;li&gt;Added end-of-life date on the “Available Updates” page and notify admins when they run an out-of-support Mastodon version &lt;span class="not-prose"&gt;
+ —
+ &lt;a class="whitespace-nowrap inline-flex items-baseline underline" href="https://github.com/mastodon/mastodon/pull/39732"&gt;
+ &lt;img src="https://blog.joinmastodon.org/github-logo.svg" alt="Github" class="h-4 inline mr-1 self-center" /&gt;
+ &lt;span&gt;PR #39732&lt;/span&gt;
+ &lt;/a&gt;
+ 
+ &lt;span&gt;(by
+ &lt;a href="https://github.com/ClearlyClaire" class="underline"&gt;ClearlyClaire&lt;/a&gt;)
+ &lt;/span&gt;
+ &lt;/span&gt;
+&lt;/li&gt;
+&lt;li&gt;Fixed an issue for the controller handling the web push notification &lt;code&gt;Unsubscribe-URL&lt;/code&gt; endpoint. This is now working correctly, and we advise client developers that process web push notifications asynchronously to support it to reduce the number of failed requests. Our own push relays &lt;a href="https://github.com/mastodon/webpush-apn-relay/pull/8"&gt;have been&lt;/a&gt; &lt;a href="https://github.com/mastodon/webpush-fcm-relay/pull/10"&gt;updated&lt;/a&gt; &lt;span class="not-prose"&gt;
+ —
+ &lt;a class="whitespace-nowrap inline-flex items-baseline underline" href="https://github.com/mastodon/mastodon/pull/39918"&gt;
+ &lt;img src="https://blog.joinmastodon.org/github-logo.svg" alt="Github" class="h-4 inline mr-1 self-center" /&gt;
+ &lt;span&gt;PR #39918&lt;/span&gt;
+ &lt;/a&gt;
+ 
+ &lt;span&gt;(by
+ &lt;a href="https://github.com/ClearlyClaire" class="underline"&gt;ClearlyClaire&lt;/a&gt;)
+ &lt;/span&gt;
+ &lt;/span&gt;
+&lt;/li&gt;
+&lt;li&gt;Improved Emoji search after the recent refactor &lt;span class="not-prose"&gt;
+ —
+ &lt;a class="whitespace-nowrap inline-flex items-baseline underline" href="https://github.com/mastodon/mastodon/pull/39815"&gt;
+ &lt;img src="https://blog.joinmastodon.org/github-logo.svg" alt="Github" class="h-4 inline mr-1 self-center" /&gt;
+ &lt;span&gt;PR #39815&lt;/span&gt;
+ &lt;/a&gt;
+ 
+ &lt;span&gt;(by
+ &lt;a href="https://github.com/chaosexanima" class="underline"&gt;chaosexanima&lt;/a&gt;)
+ &lt;/span&gt;
+ &lt;/span&gt;
+&lt;/li&gt;
+&lt;li&gt;Various front-end components have been updated or created in preparation of future interface changes. More new about this very soon!&lt;/li&gt;
+&lt;li&gt;Work is in progress to get &lt;a href="https://github.com/mastodon/fediscoverer"&gt;Fediscoverer&lt;/a&gt;, our provider software for &lt;a href="https://www.fediscovery.org/"&gt;Fediscovery&lt;/a&gt;, ready to be deployed at scale. Multiple bugs have also been fixed and we are planning to start testing it on heavy traffic servers soon, before making it available for everyone.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="android--ios"&gt;Android &amp;amp; iOS&lt;/h2&gt;
+&lt;p&gt;On Android, version &lt;a href="https://github.com/mastodon/mastodon-android/releases/tag/v2.13.2"&gt;2.13.2&lt;/a&gt; has been released to fix a few bugs and brings the app in compliance with the Google Play target SDK requirement.&lt;/p&gt;
+&lt;p&gt;For the iOS app, while a large rework of the app is in progress, we released &lt;a href="https://github.com/mastodon/mastodon-ios/releases/tag/2026.05"&gt;2026.05&lt;/a&gt; fixing a couple of important bugs with profiles.&lt;/p&gt;
+&lt;h2 id="thanks"&gt;Thanks&lt;/h2&gt;
+&lt;p&gt;Thanks for reading! If you’re excited about what we’re working on, would you consider supporting us with a small, recurring donation?&lt;/p&gt;
+&lt;div class="not-prose rounded-md p-8 flex flex-col items-center mt-8 border border-blurple-500"&gt;
+ &lt;h3 class="text-lg font-bold mb-2 text-center"&gt;Thank you for supporting Mastodon&lt;/h3&gt;
+
+ &lt;p class="text-md mb-8 text-center"&gt;We develop and maintain the free and open source software that powers the social web. There is no capital behind this — we rely entirely on your support.&lt;/p&gt;
+
+ &lt;div class="flex flex-col md:flex-row gap-4"&gt;
+ &lt;a href="https://joinmastodon.org/sponsors#donate" class="flex-0 text-sm items-center justify-center rounded-md border-2 border-blurple-500 bg-blurple-500 py-2 px-4 !font-semibold text-white transition-colors hover:border-blurple-600 hover:bg-blurple-600 flex" data-sa-link-event="donate_button"&gt;Donate to the project&lt;/a&gt;
+ &lt;a href="https://joinmastodon.org/sponsors#supported_by" class="flex-0 text-sm items-center justify-center rounded-md border-2 border-blurple-500 py-2 px-4 !font-semibold text-blurple-500 transition-colors hover:border-blurple-600 hover:text-blurple-600 flex" data-sa-link-event="sponsor_view"&gt;View our sponsors&lt;/a&gt;
+ &lt;/div&gt;
+&lt;/div&gt;
+</description></item><item><title>Discovery Week 2026: What we learned, and what we’re doing next</title><link>https://blog.joinmastodon.org/2026/08/discovery-week-2026-what-we-learned-and-what-were-doing-next/</link><pubDate>Wed, 05 Aug 2026 00:00:00 +0000</pubDate><guid>https://blog.joinmastodon.org/2026/08/discovery-week-2026-what-we-learned-and-what-were-doing-next/</guid><description>&lt;p&gt;I joined Mastodon in the summer of 2025 as the first full-time design hire. I have an extensive background in improving software usability, diversity and belonging for online communities, but I was new to Mastodon and the fediverse.&lt;/p&gt;
 &lt;p&gt;Immediately, I was impressed with the richness of this decentralised space, the passion of the open-source community, and the near-endless capabilities of the software itself. Moreover, I was inspired by the engineering team’s ability to build and maintain such complex and important software – and to do so in a way that supports other softwares (through FEPs and FASPs). The shared commitment to a thriving fediverse was clear.&lt;/p&gt;
 &lt;p&gt;What I also saw, though, is that our team was overwhelmed with the volume of user feedback we receive – through Discord conversations, Github issues, third-party audits and studies, thinkpieces in personal blogs, and of course, Mastodon posts. As I write this, our Github repository has 4.3K open issues and 1,000 open discussions, many of which include ideas and complaints related to the user experience. This is more than any team of our size could reasonably manage. And this overwhelm often manifests in a lack of clarity on how to move forward.&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;&lt;strong&gt;What should we prioritise?&lt;/strong&gt;&lt;/em&gt; As we moved from &lt;a href="https://blog.joinmastodon.org/2025/09/introducing-quote-posts/"&gt;project&lt;/a&gt; to &lt;a href="https://blog.joinmastodon.org/2026/04/designing-collections/"&gt;project&lt;/a&gt;, these four words kept emerging in the least-expected moments. We were beginning to find our way in terms of creating a &lt;a href="https://joinmastodon.org/roadmap"&gt;development roadmap&lt;/a&gt;, but beyond major projects and obvious requirements (based in security, compliance, and grant-based deliverables) it was often unclear which feedback to take action on first.&lt;/p&gt;
@@ -14,9 +175,9 @@
 Head of Design, Mastodon&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Download the full report&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="https://blog.joinmastodon.org/2026/08/discovery-week-2026-what-we-learned-and-what-were-doing-next/Discovery%20Week%202026%20Report.pdf"&gt;Discovery Week 2026 Report Only&lt;/a&gt; – PDF &lt;em&gt;(378 kB)&lt;/em&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://blog.joinmastodon.org/2026/08/discovery-week-2026-what-we-learned-and-what-were-doing-next/Discovery%20Week%202026%20Appendix.pdf"&gt;Discovery Week 2026 Appendix&lt;/a&gt; – PDF &lt;em&gt;(13.9 MB)&lt;/em&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://blog.joinmastodon.org/2026/08/discovery-week-2026-what-we-learned-and-what-were-doing-next/Discovery%20Week%202026%20Report%20&amp;#43;%20Appendix.zip"&gt;Discovery Week 2026 Report + Appendix&lt;/a&gt; – HTML, Zipped &lt;em&gt;(4.8 MB)&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="./Discovery%20Week%202026%20Report.pdf" target="_blank"&gt;Discovery Week 2026 Report Only&lt;/a&gt; – PDF &lt;em&gt;(378 kB)&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="./Discovery%20Week%202026%20Report%20+%20Appendix.pdf" target="_blank"&gt;Discovery Week 2026 Report + Appendix&lt;/a&gt; – PDF &lt;em&gt;(15.6 MB)&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="./Discovery%20Week%202026%20Report%20+%20Appendix.zip"&gt;Discovery Week 2026 Report + Appendix&lt;/a&gt; – HTML, Zipped &lt;em&gt;(4.8 MB)&lt;/em&gt;&lt;/li&gt;
 &lt;/ul&gt;</description></item><item><title>Announcing new Terms of Service for our servers</title><link>https://blog.joinmastodon.org/2026/07/announcing-new-terms-of-service-for-our-servers/</link><pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate><guid>https://blog.joinmastodon.org/2026/07/announcing-new-terms-of-service-for-our-servers/</guid><description>&lt;p&gt;Today, we’re announcing new User Terms of Service (ToS) for the two Mastodon servers we run, mastodon.social and mastodon.online. The new ToS will go into effect on August 31, 2026. Read on to learn what’s changing.&lt;/p&gt;
 &lt;h2 id="what-has-happened-so-far"&gt;What has happened so far?&lt;/h2&gt;
 &lt;p&gt;We &lt;a href="https://mastodon.social/@Gargron/114699805737874224"&gt;launched a first version&lt;/a&gt; of our User Terms of Service (ToS), effective July 01st, 2025. We received strong feedback from the community, especially regarding (i) the User ToS sounding too corporate and anti-consumerist (e.g., regarding forced arbitration clauses) and (ii) confusion whether the User ToS would apply to the whole Mastodon network or only the servers Mastodon GmbH manages, mastodon.social and mastodon.online. We therefore went back to the drawing board and created a completely new ToS with the help of Neil Brown from decoded.legal, who generously supported us with a pro-bono mandate. We have then augmented Neil’s expert legal advice on the specifics of the fediverse with a couple of additions from our legal counsel in Germany. To make the process much more transparent this time, we put the draft terms &lt;a href="https://github.com/mastodon/mastodon/discussions/36368"&gt;for community review in October 2025&lt;/a&gt;. We then collected all the feedback and implemented the comments which we considered both legally correct and useful.&lt;/p&gt;
