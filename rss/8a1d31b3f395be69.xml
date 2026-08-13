@@ -4,7 +4,168 @@
   <link type="text/html" rel="alternate" href="https://github.com/mastodon/mastodon/releases"/>
   <link type="application/atom+xml" rel="self" href="https://github.com/mastodon/mastodon/releases.atom"/>
   <title>Release notes from mastodon</title>
-  <updated>2026-08-10T08:11:29Z</updated>
+  <updated>2026-08-13T16:16:01Z</updated>
+  <entry>
+    <id>tag:github.com,2008:Repository/52281283/v4.6.6</id>
+    <updated>2026-08-13T16:16:34Z</updated>
+    <link rel="alternate" type="text/html" href="https://github.com/mastodon/mastodon/releases/tag/v4.6.6"/>
+    <title>v4.6.6</title>
+    <content type="html">&lt;h1&gt;&lt;themed-picture data-catalyst-inline=&quot;true&quot;&gt;&lt;picture&gt;
+  &lt;source media=&quot;(prefers-color-scheme: dark)&quot; srcset=&quot;/mastodon/mastodon/raw/v4.6.6/lib/assets/wordmark.dark.png?raw=true&quot;&gt;
+  &lt;source media=&quot;(prefers-color-scheme: light)&quot; srcset=&quot;/mastodon/mastodon/raw/v4.6.6/lib/assets/wordmark.light.png?raw=true&quot;&gt;
+  &lt;img alt=&quot;Mastodon&quot; src=&quot;/mastodon/mastodon/raw/v4.6.6/lib/assets/wordmark.light.png?raw=true&quot; height=&quot;34&quot;&gt;
+&lt;/picture&gt;&lt;/themed-picture&gt;&lt;/h1&gt;
+&lt;h2&gt;Upgrade overview&lt;/h2&gt;
+&lt;p&gt;This release contains upgrade notes that deviate from the norm:&lt;/p&gt;
+&lt;p&gt;ℹ️ Requires assets recompilation&lt;/p&gt;
+&lt;p&gt;For more information, view the complete release notes and scroll down to the upgrade instructions section.&lt;/p&gt;
+&lt;h2&gt;Changelog&lt;/h2&gt;
+&lt;h3&gt;Changed&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Change &lt;code&gt;mastodon:setup&lt;/code&gt; task warning about trademark to match &lt;code&gt;masto&lt;/code&gt; but ignore subdomains (&lt;a class=&quot;issue-link js-issue-link&quot; data-error-text=&quot;Failed to load title&quot; data-id=&quot;5139400981&quot; data-permission-text=&quot;Title is private&quot; data-url=&quot;https://github.com/mastodon/mastodon/issues/40143&quot; data-hovercard-type=&quot;pull_request&quot; data-hovercard-url=&quot;/mastodon/mastodon/pull/40143/hovercard&quot; href=&quot;https://github.com/mastodon/mastodon/pull/40143&quot;&gt;#40143&lt;/a&gt; by &lt;a class=&quot;user-mention notranslate&quot; data-hovercard-type=&quot;user&quot; data-hovercard-url=&quot;/users/ClearlyClaire/hovercard&quot; data-octo-click=&quot;hovercard-link-click&quot; data-octo-dimensions=&quot;link_type:self&quot; href=&quot;https://github.com/ClearlyClaire&quot;&gt;@ClearlyClaire&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Fixed&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Fix connection errors when processing &lt;code&gt;fediverse:creator&lt;/code&gt; preventing creation of preview cards (&lt;a class=&quot;issue-link js-issue-link&quot; data-error-text=&quot;Failed to load title&quot; data-id=&quot;5130093616&quot; data-permission-text=&quot;Title is private&quot; data-url=&quot;https://github.com/mastodon/mastodon/issues/40135&quot; data-hovercard-type=&quot;pull_request&quot; data-hovercard-url=&quot;/mastodon/mastodon/pull/40135/hovercard&quot; href=&quot;https://github.com/mastodon/mastodon/pull/40135&quot;&gt;#40135&lt;/a&gt; by &lt;a class=&quot;user-mention notranslate&quot; data-hovercard-type=&quot;user&quot; data-hovercard-url=&quot;/users/ClearlyClaire/hovercard&quot; data-octo-click=&quot;hovercard-link-click&quot; data-octo-dimensions=&quot;link_type:self&quot; href=&quot;https://github.com/ClearlyClaire&quot;&gt;@ClearlyClaire&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Fix Web UI being inaccessible with URLs ending with &lt;code&gt;.zip&lt;/code&gt; (&lt;a class=&quot;issue-link js-issue-link&quot; data-error-text=&quot;Failed to load title&quot; data-id=&quot;5129455315&quot; data-permission-text=&quot;Title is private&quot; data-url=&quot;https://github.com/mastodon/mastodon/issues/40134&quot; data-hovercard-type=&quot;pull_request&quot; data-hovercard-url=&quot;/mastodon/mastodon/pull/40134/hovercard&quot; href=&quot;https://github.com/mastodon/mastodon/pull/40134&quot;&gt;#40134&lt;/a&gt; by &lt;a class=&quot;user-mention notranslate&quot; data-hovercard-type=&quot;user&quot; data-hovercard-url=&quot;/users/ClearlyClaire/hovercard&quot; data-octo-click=&quot;hovercard-link-click&quot; data-octo-dimensions=&quot;link_type:self&quot; href=&quot;https://github.com/ClearlyClaire&quot;&gt;@ClearlyClaire&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Fix semitransparent background of picture-in-picture video player (&lt;a class=&quot;issue-link js-issue-link&quot; data-error-text=&quot;Failed to load title&quot; data-id=&quot;5128917071&quot; data-permission-text=&quot;Title is private&quot; data-url=&quot;https://github.com/mastodon/mastodon/issues/40132&quot; data-hovercard-type=&quot;pull_request&quot; data-hovercard-url=&quot;/mastodon/mastodon/pull/40132/hovercard&quot; href=&quot;https://github.com/mastodon/mastodon/pull/40132&quot;&gt;#40132&lt;/a&gt; by &lt;a class=&quot;user-mention notranslate&quot; data-hovercard-type=&quot;user&quot; data-hovercard-url=&quot;/users/diondiondion/hovercard&quot; data-octo-click=&quot;hovercard-link-click&quot; data-octo-dimensions=&quot;link_type:self&quot; href=&quot;https://github.com/diondiondion&quot;&gt;@diondiondion&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Fix title tooltip appearing for fullscreen videos (&lt;a class=&quot;issue-link js-issue-link&quot; data-error-text=&quot;Failed to load title&quot; data-id=&quot;5121948793&quot; data-permission-text=&quot;Title is private&quot; data-url=&quot;https://github.com/mastodon/mastodon/issues/40127&quot; data-hovercard-type=&quot;pull_request&quot; data-hovercard-url=&quot;/mastodon/mastodon/pull/40127/hovercard&quot; href=&quot;https://github.com/mastodon/mastodon/pull/40127&quot;&gt;#40127&lt;/a&gt; by &lt;a class=&quot;user-mention notranslate&quot; data-hovercard-type=&quot;user&quot; data-hovercard-url=&quot;/users/diondiondion/hovercard&quot; data-octo-click=&quot;hovercard-link-click&quot; data-octo-dimensions=&quot;link_type:self&quot; href=&quot;https://github.com/diondiondion&quot;&gt;@diondiondion&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Fix image preview too dark in alt text editor dialog (&lt;a class=&quot;issue-link js-issue-link&quot; data-error-text=&quot;Failed to load title&quot; data-id=&quot;5121878673&quot; data-permission-text=&quot;Title is private&quot; data-url=&quot;https://github.com/mastodon/mastodon/issues/40126&quot; data-hovercard-type=&quot;pull_request&quot; data-hovercard-url=&quot;/mastodon/mastodon/pull/40126/hovercard&quot; href=&quot;https://github.com/mastodon/mastodon/pull/40126&quot;&gt;#40126&lt;/a&gt; by &lt;a class=&quot;user-mention notranslate&quot; data-hovercard-type=&quot;user&quot; data-hovercard-url=&quot;/users/diondiondion/hovercard&quot; data-octo-click=&quot;hovercard-link-click&quot; data-octo-dimensions=&quot;link_type:self&quot; href=&quot;https://github.com/diondiondion&quot;&gt;@diondiondion&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Fix domain block impact queries being rejected (&lt;a class=&quot;issue-link js-issue-link&quot; data-error-text=&quot;Failed to load title&quot; data-id=&quot;5118365043&quot; data-permission-text=&quot;Title is private&quot; data-url=&quot;https://github.com/mastodon/mastodon/issues/40122&quot; data-hovercard-type=&quot;pull_request&quot; data-hovercard-url=&quot;/mastodon/mastodon/pull/40122/hovercard&quot; href=&quot;https://github.com/mastodon/mastodon/pull/40122&quot;&gt;#40122&lt;/a&gt; by &lt;a class=&quot;user-mention notranslate&quot; data-hovercard-type=&quot;user&quot; data-hovercard-url=&quot;/users/ClearlyClaire/hovercard&quot; data-octo-click=&quot;hovercard-link-click&quot; data-octo-dimensions=&quot;link_type:self&quot; href=&quot;https://github.com/ClearlyClaire&quot;&gt;@ClearlyClaire&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Fix mobile navigation scrolling to top while opening (&lt;a class=&quot;issue-link js-issue-link&quot; data-error-text=&quot;Failed to load title&quot; data-id=&quot;5059969045&quot; data-permission-text=&quot;Title is private&quot; data-url=&quot;https://github.com/mastodon/mastodon/issues/40042&quot; data-hovercard-type=&quot;pull_request&quot; data-hovercard-url=&quot;/mastodon/mastodon/pull/40042/hovercard&quot; href=&quot;https://github.com/mastodon/mastodon/pull/40042&quot;&gt;#40042&lt;/a&gt; by &lt;a class=&quot;user-mention notranslate&quot; data-hovercard-type=&quot;user&quot; data-hovercard-url=&quot;/users/sharlayan/hovercard&quot; data-octo-click=&quot;hovercard-link-click&quot; data-octo-dimensions=&quot;link_type:self&quot; href=&quot;https://github.com/sharlayan&quot;&gt;@sharlayan&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Fix selected account being lost when creating a collection (&lt;a class=&quot;issue-link js-issue-link&quot; data-error-text=&quot;Failed to load title&quot; data-id=&quot;4939982300&quot; data-permission-text=&quot;Title is private&quot; data-url=&quot;https://github.com/mastodon/mastodon/issues/39897&quot; data-hovercard-type=&quot;pull_request&quot; data-hovercard-url=&quot;/mastodon/mastodon/pull/39897/hovercard&quot; href=&quot;https://github.com/mastodon/mastodon/pull/39897&quot;&gt;#39897&lt;/a&gt; and &lt;a class=&quot;issue-link js-issue-link&quot; data-error-text=&quot;Failed to load title&quot; data-id=&quot;5129262101&quot; data-permission-text=&quot;Title is private&quot; data-url=&quot;https://github.com/mastodon/mastodon/issues/40133&quot; data-hovercard-type=&quot;pull_request&quot; data-hovercard-url=&quot;/mastodon/mastodon/pull/40133/hovercard&quot; href=&quot;https://github.com/mastodon/mastodon/pull/40133&quot;&gt;#40133&lt;/a&gt; by &lt;a class=&quot;user-mention notranslate&quot; data-hovercard-type=&quot;user&quot; data-hovercard-url=&quot;/users/diondiondion/hovercard&quot; data-octo-click=&quot;hovercard-link-click&quot; data-octo-dimensions=&quot;link_type:self&quot; href=&quot;https://github.com/diondiondion&quot;&gt;@diondiondion&lt;/a&gt; and &lt;a class=&quot;user-mention notranslate&quot; data-hovercard-type=&quot;user&quot; data-hovercard-url=&quot;/users/sharlayan/hovercard&quot; data-octo-click=&quot;hovercard-link-click&quot; data-octo-dimensions=&quot;link_type:self&quot; href=&quot;https://github.com/sharlayan&quot;&gt;@sharlayan&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Upgrade notes&lt;/h2&gt;
+&lt;p&gt;To get the code for v4.6.6, use &lt;code&gt;git fetch &amp;amp;&amp;amp; git checkout v4.6.6&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&quot;markdown-alert markdown-alert-note&quot;&gt;&lt;p class=&quot;markdown-alert-title&quot;&gt;&lt;svg data-component=&quot;Octicon&quot; class=&quot;octicon octicon-info mr-2&quot; viewBox=&quot;0 0 16 16&quot; version=&quot;1.1&quot; width=&quot;16&quot; height=&quot;16&quot; aria-hidden=&quot;true&quot;&gt;&lt;path d=&quot;M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;Note&lt;/p&gt;&lt;p&gt;As always, make sure you have backups of the database before performing any upgrades. If you are using docker-compose, this is how a backup command might look: &lt;code&gt;docker exec mastodon_db_1 pg_dump -Fc -U postgres postgres &amp;gt; name_of_the_backup.dump&lt;/code&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;h3&gt;Dependencies&lt;/h3&gt;
+&lt;p&gt;External dependencies have not changed since v4.6.0.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Ruby: 3.3 or newer&lt;/li&gt;
+&lt;li&gt;PostgreSQL: 14 or newer&lt;/li&gt;
+&lt;li&gt;Elasticsearch (recommended, for full-text search): 7.x (OpenSearch should also work)&lt;/li&gt;
+&lt;li&gt;LibreTranslate (optional, for translations): 1.3.3 or newer&lt;/li&gt;
+&lt;li&gt;Redis: 7.0 or newer&lt;/li&gt;
+&lt;li&gt;Node: 22 or newer&lt;/li&gt;
+&lt;li&gt;libvips: 8.13 or newer&lt;/li&gt;
+&lt;li&gt;FFMpeg: 5.1 or newer&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Update steps&lt;/h3&gt;
+&lt;p&gt;The following instructions are for updating from 4.6.5.&lt;/p&gt;
+&lt;p&gt;If you are upgrading directly from an earlier release, please carefully read the upgrade notes for the skipped releases as well, as they often require extra steps such as database migrations. In particular, it is very important to read the &lt;a href=&quot;https://github.com/mastodon/mastodon/releases/tag/v4.6.0&quot;&gt;4.6.0 release notes&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;Non-Docker&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;Precompile the assets: &lt;code&gt;RAILS_ENV=production bundle exec rails assets:precompile&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Restart all Mastodon processes.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;When using Docker&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;Restart all Mastodon processes.&lt;/li&gt;
+&lt;/ol&gt;</content>
+    <author>
+      <name>ClearlyClaire</name>
+    </author>
+    <media:thumbnail height="30" width="30" url="https://avatars.githubusercontent.com/u/384364?s=60&amp;v=4"/>
+  </entry>
+  <entry>
+    <id>tag:github.com,2008:Repository/52281283/v4.5.16</id>
+    <updated>2026-08-13T16:16:38Z</updated>
+    <link rel="alternate" type="text/html" href="https://github.com/mastodon/mastodon/releases/tag/v4.5.16"/>
+    <title>v4.5.16</title>
+    <content type="html">&lt;h1&gt;&lt;themed-picture data-catalyst-inline=&quot;true&quot;&gt;&lt;picture&gt;
+  &lt;source media=&quot;(prefers-color-scheme: dark)&quot; srcset=&quot;/mastodon/mastodon/raw/v4.5.16/lib/assets/wordmark.dark.png?raw=true&quot;&gt;
+  &lt;source media=&quot;(prefers-color-scheme: light)&quot; srcset=&quot;/mastodon/mastodon/raw/v4.5.16/lib/assets/wordmark.light.png?raw=true&quot;&gt;
+  &lt;img alt=&quot;Mastodon&quot; src=&quot;/mastodon/mastodon/raw/v4.5.16/lib/assets/wordmark.light.png?raw=true&quot; height=&quot;34&quot;&gt;
+&lt;/picture&gt;&lt;/themed-picture&gt;&lt;/h1&gt;
+&lt;h2&gt;Changelog&lt;/h2&gt;
+&lt;h3&gt;Changed&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Change &lt;code&gt;mastodon:setup&lt;/code&gt; task warning about trademark to match &lt;code&gt;masto&lt;/code&gt; but ignore subdomains (&lt;a class=&quot;issue-link js-issue-link&quot; data-error-text=&quot;Failed to load title&quot; data-id=&quot;5139400981&quot; data-permission-text=&quot;Title is private&quot; data-url=&quot;https://github.com/mastodon/mastodon/issues/40143&quot; data-hovercard-type=&quot;pull_request&quot; data-hovercard-url=&quot;/mastodon/mastodon/pull/40143/hovercard&quot; href=&quot;https://github.com/mastodon/mastodon/pull/40143&quot;&gt;#40143&lt;/a&gt; by &lt;a class=&quot;user-mention notranslate&quot; data-hovercard-type=&quot;user&quot; data-hovercard-url=&quot;/users/ClearlyClaire/hovercard&quot; data-octo-click=&quot;hovercard-link-click&quot; data-octo-dimensions=&quot;link_type:self&quot; href=&quot;https://github.com/ClearlyClaire&quot;&gt;@ClearlyClaire&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Fixed&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Fix connection errors when processing &lt;code&gt;fediverse:creator&lt;/code&gt; preventing creation of preview cards (&lt;a class=&quot;issue-link js-issue-link&quot; data-error-text=&quot;Failed to load title&quot; data-id=&quot;5130093616&quot; data-permission-text=&quot;Title is private&quot; data-url=&quot;https://github.com/mastodon/mastodon/issues/40135&quot; data-hovercard-type=&quot;pull_request&quot; data-hovercard-url=&quot;/mastodon/mastodon/pull/40135/hovercard&quot; href=&quot;https://github.com/mastodon/mastodon/pull/40135&quot;&gt;#40135&lt;/a&gt; by &lt;a class=&quot;user-mention notranslate&quot; data-hovercard-type=&quot;user&quot; data-hovercard-url=&quot;/users/ClearlyClaire/hovercard&quot; data-octo-click=&quot;hovercard-link-click&quot; data-octo-dimensions=&quot;link_type:self&quot; href=&quot;https://github.com/ClearlyClaire&quot;&gt;@ClearlyClaire&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Fix Web UI being inaccessible with URLs ending with &lt;code&gt;.zip&lt;/code&gt; (&lt;a class=&quot;issue-link js-issue-link&quot; data-error-text=&quot;Failed to load title&quot; data-id=&quot;5129455315&quot; data-permission-text=&quot;Title is private&quot; data-url=&quot;https://github.com/mastodon/mastodon/issues/40134&quot; data-hovercard-type=&quot;pull_request&quot; data-hovercard-url=&quot;/mastodon/mastodon/pull/40134/hovercard&quot; href=&quot;https://github.com/mastodon/mastodon/pull/40134&quot;&gt;#40134&lt;/a&gt; by &lt;a class=&quot;user-mention notranslate&quot; data-hovercard-type=&quot;user&quot; data-hovercard-url=&quot;/users/ClearlyClaire/hovercard&quot; data-octo-click=&quot;hovercard-link-click&quot; data-octo-dimensions=&quot;link_type:self&quot; href=&quot;https://github.com/ClearlyClaire&quot;&gt;@ClearlyClaire&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Fix domain block impact queries being rejected (&lt;a class=&quot;issue-link js-issue-link&quot; data-error-text=&quot;Failed to load title&quot; data-id=&quot;5118365043&quot; data-permission-text=&quot;Title is private&quot; data-url=&quot;https://github.com/mastodon/mastodon/issues/40122&quot; data-hovercard-type=&quot;pull_request&quot; data-hovercard-url=&quot;/mastodon/mastodon/pull/40122/hovercard&quot; href=&quot;https://github.com/mastodon/mastodon/pull/40122&quot;&gt;#40122&lt;/a&gt; by &lt;a class=&quot;user-mention notranslate&quot; data-hovercard-type=&quot;user&quot; data-hovercard-url=&quot;/users/ClearlyClaire/hovercard&quot; data-octo-click=&quot;hovercard-link-click&quot; data-octo-dimensions=&quot;link_type:self&quot; href=&quot;https://github.com/ClearlyClaire&quot;&gt;@ClearlyClaire&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Upgrade notes&lt;/h2&gt;
+&lt;p&gt;To get the code for v4.5.16, use &lt;code&gt;git fetch &amp;amp;&amp;amp; git checkout v4.5.16&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&quot;markdown-alert markdown-alert-note&quot;&gt;&lt;p class=&quot;markdown-alert-title&quot;&gt;&lt;svg data-component=&quot;Octicon&quot; class=&quot;octicon octicon-info mr-2&quot; viewBox=&quot;0 0 16 16&quot; version=&quot;1.1&quot; width=&quot;16&quot; height=&quot;16&quot; aria-hidden=&quot;true&quot;&gt;&lt;path d=&quot;M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;Note&lt;/p&gt;&lt;p&gt;As always, make sure you have backups of the database before performing any upgrades. If you are using docker-compose, this is how a backup command might look: &lt;code&gt;docker exec mastodon_db_1 pg_dump -Fc -U postgres postgres &amp;gt; name_of_the_backup.dump&lt;/code&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;h3&gt;Dependencies&lt;/h3&gt;
+&lt;p&gt;External dependencies have not changed since v4.5.0.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Ruby: 3.2 or newer&lt;/li&gt;
+&lt;li&gt;PostgreSQL: 14 or newer&lt;/li&gt;
+&lt;li&gt;Elasticsearch (recommended, for full-text search): 7.x (OpenSearch should also work)&lt;/li&gt;
+&lt;li&gt;LibreTranslate (optional, for translations): 1.3.3 or newer&lt;/li&gt;
+&lt;li&gt;Redis: 7.0 or newer&lt;/li&gt;
+&lt;li&gt;Node: 20.19 or newer&lt;/li&gt;
+&lt;li&gt;libvips (optional, instead of ImageMagick): 8.13 or newer&lt;/li&gt;
+&lt;li&gt;ImageMagick (optional if using libvips): 6.9.7-7 or newer&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Update steps&lt;/h3&gt;
+&lt;p&gt;The following instructions are for updating from 4.5.15.&lt;/p&gt;
+&lt;p&gt;If you are upgrading directly from an earlier release, please carefully read the upgrade notes for the skipped releases as well, as they often require extra steps such as database migrations. In particular, it is very important to read the &lt;a href=&quot;https://github.com/mastodon/mastodon/releases/tag/v4.5.0&quot;&gt;4.5.0 release notes&lt;/a&gt;.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Restart all Mastodon processes.&lt;/li&gt;
+&lt;/ol&gt;</content>
+    <author>
+      <name>ClearlyClaire</name>
+    </author>
+    <media:thumbnail height="30" width="30" url="https://avatars.githubusercontent.com/u/384364?s=60&amp;v=4"/>
+  </entry>
+  <entry>
+    <id>tag:github.com,2008:Repository/52281283/v4.4.23</id>
+    <updated>2026-08-13T16:16:43Z</updated>
+    <link rel="alternate" type="text/html" href="https://github.com/mastodon/mastodon/releases/tag/v4.4.23"/>
+    <title>v4.4.23</title>
+    <content type="html">&lt;h1&gt;&lt;themed-picture data-catalyst-inline=&quot;true&quot;&gt;&lt;picture&gt;
+  &lt;source media=&quot;(prefers-color-scheme: dark)&quot; srcset=&quot;/mastodon/mastodon/raw/v4.4.23/lib/assets/wordmark.dark.png?raw=true&quot;&gt;
+  &lt;source media=&quot;(prefers-color-scheme: light)&quot; srcset=&quot;/mastodon/mastodon/raw/v4.4.23/lib/assets/wordmark.light.png?raw=true&quot;&gt;
+  &lt;img alt=&quot;Mastodon&quot; src=&quot;/mastodon/mastodon/raw/v4.4.23/lib/assets/wordmark.light.png?raw=true&quot; height=&quot;34&quot;&gt;
+&lt;/picture&gt;&lt;/themed-picture&gt;&lt;/h1&gt;
+&lt;div class=&quot;markdown-alert markdown-alert-note&quot;&gt;&lt;p class=&quot;markdown-alert-title&quot;&gt;&lt;svg data-component=&quot;Octicon&quot; class=&quot;octicon octicon-info mr-2&quot; viewBox=&quot;0 0 16 16&quot; version=&quot;1.1&quot; width=&quot;16&quot; height=&quot;16&quot; aria-hidden=&quot;true&quot;&gt;&lt;path d=&quot;M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;Note&lt;/p&gt;&lt;p&gt;While we continue to support Mastodon 4.4 and release patches for it, please note that Mastodon 4.6 is available with new features, changes and fixes. We encourage administrators to update to the latest 4.6 version when they can.&lt;/p&gt;
+&lt;/div&gt;
+&lt;h2&gt;Changelog&lt;/h2&gt;
+&lt;h3&gt;Changed&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Change &lt;code&gt;mastodon:setup&lt;/code&gt; task warning about trademark to match &lt;code&gt;masto&lt;/code&gt; but ignore subdomains (&lt;a class=&quot;issue-link js-issue-link&quot; data-error-text=&quot;Failed to load title&quot; data-id=&quot;5139400981&quot; data-permission-text=&quot;Title is private&quot; data-url=&quot;https://github.com/mastodon/mastodon/issues/40143&quot; data-hovercard-type=&quot;pull_request&quot; data-hovercard-url=&quot;/mastodon/mastodon/pull/40143/hovercard&quot; href=&quot;https://github.com/mastodon/mastodon/pull/40143&quot;&gt;#40143&lt;/a&gt; by &lt;a class=&quot;user-mention notranslate&quot; data-hovercard-type=&quot;user&quot; data-hovercard-url=&quot;/users/ClearlyClaire/hovercard&quot; data-octo-click=&quot;hovercard-link-click&quot; data-octo-dimensions=&quot;link_type:self&quot; href=&quot;https://github.com/ClearlyClaire&quot;&gt;@ClearlyClaire&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Fixed&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Fix connection errors when processing &lt;code&gt;fediverse:creator&lt;/code&gt; preventing creation of preview cards (&lt;a class=&quot;issue-link js-issue-link&quot; data-error-text=&quot;Failed to load title&quot; data-id=&quot;5130093616&quot; data-permission-text=&quot;Title is private&quot; data-url=&quot;https://github.com/mastodon/mastodon/issues/40135&quot; data-hovercard-type=&quot;pull_request&quot; data-hovercard-url=&quot;/mastodon/mastodon/pull/40135/hovercard&quot; href=&quot;https://github.com/mastodon/mastodon/pull/40135&quot;&gt;#40135&lt;/a&gt; by &lt;a class=&quot;user-mention notranslate&quot; data-hovercard-type=&quot;user&quot; data-hovercard-url=&quot;/users/ClearlyClaire/hovercard&quot; data-octo-click=&quot;hovercard-link-click&quot; data-octo-dimensions=&quot;link_type:self&quot; href=&quot;https://github.com/ClearlyClaire&quot;&gt;@ClearlyClaire&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Fix Web UI being inaccessible with URLs ending with &lt;code&gt;.zip&lt;/code&gt; (&lt;a class=&quot;issue-link js-issue-link&quot; data-error-text=&quot;Failed to load title&quot; data-id=&quot;5129455315&quot; data-permission-text=&quot;Title is private&quot; data-url=&quot;https://github.com/mastodon/mastodon/issues/40134&quot; data-hovercard-type=&quot;pull_request&quot; data-hovercard-url=&quot;/mastodon/mastodon/pull/40134/hovercard&quot; href=&quot;https://github.com/mastodon/mastodon/pull/40134&quot;&gt;#40134&lt;/a&gt; by &lt;a class=&quot;user-mention notranslate&quot; data-hovercard-type=&quot;user&quot; data-hovercard-url=&quot;/users/ClearlyClaire/hovercard&quot; data-octo-click=&quot;hovercard-link-click&quot; data-octo-dimensions=&quot;link_type:self&quot; href=&quot;https://github.com/ClearlyClaire&quot;&gt;@ClearlyClaire&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Fix domain block impact queries being rejected (&lt;a class=&quot;issue-link js-issue-link&quot; data-error-text=&quot;Failed to load title&quot; data-id=&quot;5118365043&quot; data-permission-text=&quot;Title is private&quot; data-url=&quot;https://github.com/mastodon/mastodon/issues/40122&quot; data-hovercard-type=&quot;pull_request&quot; data-hovercard-url=&quot;/mastodon/mastodon/pull/40122/hovercard&quot; href=&quot;https://github.com/mastodon/mastodon/pull/40122&quot;&gt;#40122&lt;/a&gt; by &lt;a class=&quot;user-mention notranslate&quot; data-hovercard-type=&quot;user&quot; data-hovercard-url=&quot;/users/ClearlyClaire/hovercard&quot; data-octo-click=&quot;hovercard-link-click&quot; data-octo-dimensions=&quot;link_type:self&quot; href=&quot;https://github.com/ClearlyClaire&quot;&gt;@ClearlyClaire&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Upgrade notes&lt;/h2&gt;
+&lt;p&gt;To get the code for v4.4.23, use &lt;code&gt;git fetch &amp;amp;&amp;amp; git checkout v4.4.23&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&quot;markdown-alert markdown-alert-note&quot;&gt;&lt;p class=&quot;markdown-alert-title&quot;&gt;&lt;svg data-component=&quot;Octicon&quot; class=&quot;octicon octicon-info mr-2&quot; viewBox=&quot;0 0 16 16&quot; version=&quot;1.1&quot; width=&quot;16&quot; height=&quot;16&quot; aria-hidden=&quot;true&quot;&gt;&lt;path d=&quot;M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;Note&lt;/p&gt;&lt;p&gt;As always, make sure you have backups of the database before performing any upgrades. If you are using docker-compose, this is how a backup command might look: &lt;code&gt;docker exec mastodon_db_1 pg_dump -Fc -U postgres postgres &amp;gt; name_of_the_backup.dump&lt;/code&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;h3&gt;Dependencies&lt;/h3&gt;
+&lt;p&gt;External dependencies have not changed since v4.4.1:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Ruby: 3.2 or newer&lt;/li&gt;
+&lt;li&gt;PostgreSQL: 13 or newer&lt;/li&gt;
+&lt;li&gt;Elasticsearch (recommended, for full-text search): 7.x (OpenSearch should also work)&lt;/li&gt;
+&lt;li&gt;LibreTranslate (optional, for translations): 1.3.3 or newer&lt;/li&gt;
+&lt;li&gt;Redis: 6.2 or newer&lt;/li&gt;
+&lt;li&gt;Node: 20 or newer&lt;/li&gt;
+&lt;li&gt;libvips (optional, instead of ImageMagick): 8.13 or newer&lt;/li&gt;
+&lt;li&gt;ImageMagick (optional if using libvips): 6.9.7-7 or newer&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Update steps&lt;/h3&gt;
+&lt;p&gt;The following instructions are for updating from 4.4.22.&lt;/p&gt;
+&lt;p&gt;If you are upgrading directly from an earlier release, please carefully read the upgrade notes for the skipped releases as well, as they often require extra steps such as database migrations. In particular, it is very important to read the &lt;a href=&quot;https://github.com/mastodon/mastodon/releases/tag/v4.4.0&quot;&gt;4.4.0 release notes&lt;/a&gt;.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Restart all Mastodon processes.&lt;/li&gt;
+&lt;/ol&gt;</content>
+    <author>
+      <name>ClearlyClaire</name>
+    </author>
+    <media:thumbnail height="30" width="30" url="https://avatars.githubusercontent.com/u/384364?s=60&amp;v=4"/>
+  </entry>
   <entry>
     <id>tag:github.com,2008:Repository/52281283/v4.7.0-beta.1</id>
     <updated>2026-08-10T08:34:00Z</updated>
@@ -515,171 +676,6 @@ If you run into this issue, try &lt;code&gt;BUNDLE_BUILD__CHARLOCK_HOLMES=&quot;
 &lt;li&gt;Restart all Mastodon processes.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3&gt;When using Docker&lt;/h3&gt;
-&lt;ol&gt;
-&lt;li&gt;Restart all Mastodon processes.&lt;/li&gt;
-&lt;/ol&gt;</content>
-    <author>
-      <name>ClearlyClaire</name>
-    </author>
-    <media:thumbnail height="30" width="30" url="https://avatars.githubusercontent.com/u/384364?s=60&amp;v=4"/>
-  </entry>
-  <entry>
-    <id>tag:github.com,2008:Repository/52281283/v4.6.3</id>
-    <updated>2026-07-03T13:25:39Z</updated>
-    <link rel="alternate" type="text/html" href="https://github.com/mastodon/mastodon/releases/tag/v4.6.3"/>
-    <title>v4.6.3</title>
-    <content type="html">&lt;h1&gt;&lt;themed-picture data-catalyst-inline=&quot;true&quot;&gt;&lt;picture&gt;
-  &lt;source media=&quot;(prefers-color-scheme: dark)&quot; srcset=&quot;/mastodon/mastodon/raw/v4.6.3/lib/assets/wordmark.dark.png?raw=true&quot;&gt;
-  &lt;source media=&quot;(prefers-color-scheme: light)&quot; srcset=&quot;/mastodon/mastodon/raw/v4.6.3/lib/assets/wordmark.light.png?raw=true&quot;&gt;
-  &lt;img alt=&quot;Mastodon&quot; src=&quot;/mastodon/mastodon/raw/v4.6.3/lib/assets/wordmark.light.png?raw=true&quot; height=&quot;34&quot;&gt;
-&lt;/picture&gt;&lt;/themed-picture&gt;&lt;/h1&gt;
-&lt;h2&gt;Upgrade overview&lt;/h2&gt;
-&lt;p&gt;This release contains upgrade notes that deviate from the norm:&lt;/p&gt;
-&lt;p&gt;ℹ️ Requires assets recompilation&lt;/p&gt;
-&lt;p&gt;For more information, view the complete release notes and scroll down to the upgrade instructions section.&lt;/p&gt;
-&lt;h2&gt;Changelog&lt;/h2&gt;
-&lt;h3&gt;Security&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Update dependencies&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;Added&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Add “Update available” navigation item at top of navbar when new Mastodon versions are available (&lt;a class=&quot;issue-link js-issue-link&quot; data-error-text=&quot;Failed to load title&quot; data-id=&quot;4802190570&quot; data-permission-text=&quot;Title is private&quot; data-url=&quot;https://github.com/mastodon/mastodon/issues/39705&quot; data-hovercard-type=&quot;pull_request&quot; data-hovercard-url=&quot;/mastodon/mastodon/pull/39705/hovercard&quot; href=&quot;https://github.com/mastodon/mastodon/pull/39705&quot;&gt;#39705&lt;/a&gt; by &lt;a class=&quot;user-mention notranslate&quot; data-hovercard-type=&quot;user&quot; data-hovercard-url=&quot;/users/ClearlyClaire/hovercard&quot; data-octo-click=&quot;hovercard-link-click&quot; data-octo-dimensions=&quot;link_type:self&quot; href=&quot;https://github.com/ClearlyClaire&quot;&gt;@ClearlyClaire&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;Add rendering of post images in emails (&lt;a class=&quot;issue-link js-issue-link&quot; data-error-text=&quot;Failed to load title&quot; data-id=&quot;4752481908&quot; data-permission-text=&quot;Title is private&quot; data-url=&quot;https://github.com/mastodon/mastodon/issues/39636&quot; data-hovercard-type=&quot;pull_request&quot; data-hovercard-url=&quot;/mastodon/mastodon/pull/39636/hovercard&quot; href=&quot;https://github.com/mastodon/mastodon/pull/39636&quot;&gt;#39636&lt;/a&gt; by &lt;a class=&quot;user-mention notranslate&quot; data-hovercard-type=&quot;user&quot; data-hovercard-url=&quot;/users/diondiondion/hovercard&quot; data-octo-click=&quot;hovercard-link-click&quot; data-octo-dimensions=&quot;link_type:self&quot; href=&quot;https://github.com/diondiondion&quot;&gt;@diondiondion&lt;/a&gt;)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;Fixed&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Fix “view collection” menu item appearing on collection page (&lt;a class=&quot;issue-link js-issue-link&quot; data-error-text=&quot;Failed to load title&quot; data-id=&quot;4789185562&quot; data-permission-text=&quot;Title is private&quot; data-url=&quot;https://github.com/mastodon/mastodon/issues/39694&quot; data-hovercard-type=&quot;pull_request&quot; data-hovercard-url=&quot;/mastodon/mastodon/pull/39694/hovercard&quot; href=&quot;https://github.com/mastodon/mastodon/pull/39694&quot;&gt;#39694&lt;/a&gt; by &lt;a class=&quot;user-mention notranslate&quot; data-hovercard-type=&quot;user&quot; data-hovercard-url=&quot;/users/mkljczk/hovercard&quot; data-octo-click=&quot;hovercard-link-click&quot; data-octo-dimensions=&quot;link_type:self&quot; href=&quot;https://github.com/mkljczk&quot;&gt;@mkljczk&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;Fix incorrect filter cache key sometimes causing incorrect filters to be applied (&lt;a class=&quot;issue-link js-issue-link&quot; data-error-text=&quot;Failed to load title&quot; data-id=&quot;4792403614&quot; data-permission-text=&quot;Title is private&quot; data-url=&quot;https://github.com/mastodon/mastodon/issues/39698&quot; data-hovercard-type=&quot;pull_request&quot; data-hovercard-url=&quot;/mastodon/mastodon/pull/39698/hovercard&quot; href=&quot;https://github.com/mastodon/mastodon/pull/39698&quot;&gt;#39698&lt;/a&gt; by &lt;a class=&quot;user-mention notranslate&quot; data-hovercard-type=&quot;user&quot; data-hovercard-url=&quot;/users/ClearlyClaire/hovercard&quot; data-octo-click=&quot;hovercard-link-click&quot; data-octo-dimensions=&quot;link_type:self&quot; href=&quot;https://github.com/ClearlyClaire&quot;&gt;@ClearlyClaire&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;Fix missing &lt;code&gt;to_json&lt;/code&gt; to publish announcement reaction worker (&lt;a class=&quot;issue-link js-issue-link&quot; data-error-text=&quot;Failed to load title&quot; data-id=&quot;4786622854&quot; data-permission-text=&quot;Title is private&quot; data-url=&quot;https://github.com/mastodon/mastodon/issues/39685&quot; data-hovercard-type=&quot;pull_request&quot; data-hovercard-url=&quot;/mastodon/mastodon/pull/39685/hovercard&quot; href=&quot;https://github.com/mastodon/mastodon/pull/39685&quot;&gt;#39685&lt;/a&gt; by &lt;a class=&quot;user-mention notranslate&quot; data-hovercard-type=&quot;user&quot; data-hovercard-url=&quot;/users/mjankowski/hovercard&quot; data-octo-click=&quot;hovercard-link-click&quot; data-octo-dimensions=&quot;link_type:self&quot; href=&quot;https://github.com/mjankowski&quot;&gt;@mjankowski&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;Fix duplicate &quot;clear&quot; button shown in main search input in Chrome (&lt;a class=&quot;issue-link js-issue-link&quot; data-error-text=&quot;Failed to load title&quot; data-id=&quot;4784333774&quot; data-permission-text=&quot;Title is private&quot; data-url=&quot;https://github.com/mastodon/mastodon/issues/39679&quot; data-hovercard-type=&quot;pull_request&quot; data-hovercard-url=&quot;/mastodon/mastodon/pull/39679/hovercard&quot; href=&quot;https://github.com/mastodon/mastodon/pull/39679&quot;&gt;#39679&lt;/a&gt; by &lt;a class=&quot;user-mention notranslate&quot; data-hovercard-type=&quot;user&quot; data-hovercard-url=&quot;/users/diondiondion/hovercard&quot; data-octo-click=&quot;hovercard-link-click&quot; data-octo-dimensions=&quot;link_type:self&quot; href=&quot;https://github.com/diondiondion&quot;&gt;@diondiondion&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;Fix visual glitch with the spoiler button (&lt;a class=&quot;issue-link js-issue-link&quot; data-error-text=&quot;Failed to load title&quot; data-id=&quot;4784023625&quot; data-permission-text=&quot;Title is private&quot; data-url=&quot;https://github.com/mastodon/mastodon/issues/39677&quot; data-hovercard-type=&quot;pull_request&quot; data-hovercard-url=&quot;/mastodon/mastodon/pull/39677/hovercard&quot; href=&quot;https://github.com/mastodon/mastodon/pull/39677&quot;&gt;#39677&lt;/a&gt; by &lt;a class=&quot;user-mention notranslate&quot; data-hovercard-type=&quot;user&quot; data-hovercard-url=&quot;/users/ChaosExAnima/hovercard&quot; data-octo-click=&quot;hovercard-link-click&quot; data-octo-dimensions=&quot;link_type:self&quot; href=&quot;https://github.com/ChaosExAnima&quot;&gt;@ChaosExAnima&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;Fix invisible username during post highlight animation (&lt;a class=&quot;issue-link js-issue-link&quot; data-error-text=&quot;Failed to load title&quot; data-id=&quot;4768919420&quot; data-permission-text=&quot;Title is private&quot; data-url=&quot;https://github.com/mastodon/mastodon/issues/39659&quot; data-hovercard-type=&quot;pull_request&quot; data-hovercard-url=&quot;/mastodon/mastodon/pull/39659/hovercard&quot; href=&quot;https://github.com/mastodon/mastodon/pull/39659&quot;&gt;#39659&lt;/a&gt; by &lt;a class=&quot;user-mention notranslate&quot; data-hovercard-type=&quot;user&quot; data-hovercard-url=&quot;/users/diondiondion/hovercard&quot; data-octo-click=&quot;hovercard-link-click&quot; data-octo-dimensions=&quot;link_type:self&quot; href=&quot;https://github.com/diondiondion&quot;&gt;@diondiondion&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;Fix follow button floating on profiles when overview landing page is enabled (&lt;a class=&quot;issue-link js-issue-link&quot; data-error-text=&quot;Failed to load title&quot; data-id=&quot;4766385615&quot; data-permission-text=&quot;Title is private&quot; data-url=&quot;https://github.com/mastodon/mastodon/issues/39650&quot; data-hovercard-type=&quot;pull_request&quot; data-hovercard-url=&quot;/mastodon/mastodon/pull/39650/hovercard&quot; href=&quot;https://github.com/mastodon/mastodon/pull/39650&quot;&gt;#39650&lt;/a&gt; by &lt;a class=&quot;user-mention notranslate&quot; data-hovercard-type=&quot;user&quot; data-hovercard-url=&quot;/users/FFederi/hovercard&quot; data-octo-click=&quot;hovercard-link-click&quot; data-octo-dimensions=&quot;link_type:self&quot; href=&quot;https://github.com/FFederi&quot;&gt;@FFederi&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;Fix encryption warning &quot;read more&quot; link (&lt;a class=&quot;issue-link js-issue-link&quot; data-error-text=&quot;Failed to load title&quot; data-id=&quot;4752324165&quot; data-permission-text=&quot;Title is private&quot; data-url=&quot;https://github.com/mastodon/mastodon/issues/39635&quot; data-hovercard-type=&quot;pull_request&quot; data-hovercard-url=&quot;/mastodon/mastodon/pull/39635/hovercard&quot; href=&quot;https://github.com/mastodon/mastodon/pull/39635&quot;&gt;#39635&lt;/a&gt; by &lt;a class=&quot;user-mention notranslate&quot; data-hovercard-type=&quot;user&quot; data-hovercard-url=&quot;/users/thomas-pike/hovercard&quot; data-octo-click=&quot;hovercard-link-click&quot; data-octo-dimensions=&quot;link_type:self&quot; href=&quot;https://github.com/thomas-pike&quot;&gt;@thomas-pike&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;Fix &lt;code&gt;tootctl media lookup&lt;/code&gt; failing on some setups (&lt;a class=&quot;issue-link js-issue-link&quot; data-error-text=&quot;Failed to load title&quot; data-id=&quot;4742981084&quot; data-permission-text=&quot;Title is private&quot; data-url=&quot;https://github.com/mastodon/mastodon/issues/39615&quot; data-hovercard-type=&quot;pull_request&quot; data-hovercard-url=&quot;/mastodon/mastodon/pull/39615/hovercard&quot; href=&quot;https://github.com/mastodon/mastodon/pull/39615&quot;&gt;#39615&lt;/a&gt; by &lt;a class=&quot;user-mention notranslate&quot; data-hovercard-type=&quot;user&quot; data-hovercard-url=&quot;/users/brookmiles/hovercard&quot; data-octo-click=&quot;hovercard-link-click&quot; data-octo-dimensions=&quot;link_type:self&quot; href=&quot;https://github.com/brookmiles&quot;&gt;@brookmiles&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;Fix visible transparent navigation link borders in Windows forced-contrast mode (&lt;a class=&quot;issue-link js-issue-link&quot; data-error-text=&quot;Failed to load title&quot; data-id=&quot;4742629206&quot; data-permission-text=&quot;Title is private&quot; data-url=&quot;https://github.com/mastodon/mastodon/issues/39614&quot; data-hovercard-type=&quot;pull_request&quot; data-hovercard-url=&quot;/mastodon/mastodon/pull/39614/hovercard&quot; href=&quot;https://github.com/mastodon/mastodon/pull/39614&quot;&gt;#39614&lt;/a&gt; by &lt;a class=&quot;user-mention notranslate&quot; data-hovercard-type=&quot;user&quot; data-hovercard-url=&quot;/users/diondiondion/hovercard&quot; data-octo-click=&quot;hovercard-link-click&quot; data-octo-dimensions=&quot;link_type:self&quot; href=&quot;https://github.com/diondiondion&quot;&gt;@diondiondion&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;Fix crash with some browser extensions injecting custom elements in the page (&lt;a class=&quot;issue-link js-issue-link&quot; data-error-text=&quot;Failed to load title&quot; data-id=&quot;4696686874&quot; data-permission-text=&quot;Title is private&quot; data-url=&quot;https://github.com/mastodon/mastodon/issues/39507&quot; data-hovercard-type=&quot;pull_request&quot; data-hovercard-url=&quot;/mastodon/mastodon/pull/39507/hovercard&quot; href=&quot;https://github.com/mastodon/mastodon/pull/39507&quot;&gt;#39507&lt;/a&gt; by &lt;a class=&quot;user-mention notranslate&quot; data-hovercard-type=&quot;user&quot; data-hovercard-url=&quot;/users/OriginalRoOhi/hovercard&quot; data-octo-click=&quot;hovercard-link-click&quot; data-octo-dimensions=&quot;link_type:self&quot; href=&quot;https://github.com/OriginalRoOhi&quot;&gt;@OriginalRoOhi&lt;/a&gt;)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;Upgrade notes&lt;/h2&gt;
-&lt;p&gt;To get the code for v4.6.3, use &lt;code&gt;git fetch &amp;amp;&amp;amp; git checkout v4.6.3&lt;/code&gt;.&lt;/p&gt;
-&lt;div class=&quot;markdown-alert markdown-alert-note&quot;&gt;&lt;p class=&quot;markdown-alert-title&quot;&gt;&lt;svg data-component=&quot;Octicon&quot; class=&quot;octicon octicon-info mr-2&quot; viewBox=&quot;0 0 16 16&quot; version=&quot;1.1&quot; width=&quot;16&quot; height=&quot;16&quot; aria-hidden=&quot;true&quot;&gt;&lt;path d=&quot;M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;Note&lt;/p&gt;&lt;p&gt;As always, make sure you have backups of the database before performing any upgrades. If you are using docker-compose, this is how a backup command might look: &lt;code&gt;docker exec mastodon_db_1 pg_dump -Fc -U postgres postgres &amp;gt; name_of_the_backup.dump&lt;/code&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;h3&gt;Dependencies&lt;/h3&gt;
-&lt;p&gt;External dependencies have not changed since v4.6.0.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Ruby: 3.3 or newer&lt;/li&gt;
-&lt;li&gt;PostgreSQL: 14 or newer&lt;/li&gt;
-&lt;li&gt;Elasticsearch (recommended, for full-text search): 7.x (OpenSearch should also work)&lt;/li&gt;
-&lt;li&gt;LibreTranslate (optional, for translations): 1.3.3 or newer&lt;/li&gt;
-&lt;li&gt;Redis: 7.0 or newer&lt;/li&gt;
-&lt;li&gt;Node: 22 or newer&lt;/li&gt;
-&lt;li&gt;libvips: 8.13 or newer&lt;/li&gt;
-&lt;li&gt;FFMpeg: 5.1 or newer&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;Update steps&lt;/h3&gt;
-&lt;p&gt;The following instructions are for updating from 4.6.2.&lt;/p&gt;
-&lt;p&gt;If you are upgrading directly from an earlier release, please carefully read the upgrade notes for the skipped releases as well, as they often require extra steps such as database migrations. In particular, it is very important to read the &lt;a href=&quot;https://github.com/mastodon/mastodon/releases/tag/v4.6.0&quot;&gt;4.6.0 release notes&lt;/a&gt;.&lt;/p&gt;
-&lt;h3&gt;Non-Docker&lt;/h3&gt;
-&lt;div class=&quot;markdown-alert markdown-alert-tip&quot;&gt;&lt;p class=&quot;markdown-alert-title&quot;&gt;&lt;svg data-component=&quot;Octicon&quot; class=&quot;octicon octicon-light-bulb mr-2&quot; viewBox=&quot;0 0 16 16&quot; version=&quot;1.1&quot; width=&quot;16&quot; height=&quot;16&quot; aria-hidden=&quot;true&quot;&gt;&lt;path d=&quot;M8 1.5c-2.363 0-4 1.69-4 3.75 0 .984.424 1.625.984 2.304l.214.253c.223.264.47.556.673.848.284.411.537.896.621 1.49a.75.75 0 0 1-1.484.211c-.04-.282-.163-.547-.37-.847a8.456 8.456 0 0 0-.542-.68c-.084-.1-.173-.205-.268-.32C3.201 7.75 2.5 6.766 2.5 5.25 2.5 2.31 4.863 0 8 0s5.5 2.31 5.5 5.25c0 1.516-.701 2.5-1.328 3.259-.095.115-.184.22-.268.319-.207.245-.383.453-.541.681-.208.3-.33.565-.37.847a.751.751 0 0 1-1.485-.212c.084-.593.337-1.078.621-1.489.203-.292.45-.584.673-.848.075-.088.147-.173.213-.253.561-.679.985-1.32.985-2.304 0-2.06-1.637-3.75-4-3.75ZM5.75 12h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5ZM6 15.25a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5a.75.75 0 0 1-.75-.75Z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;Tip&lt;/p&gt;&lt;p&gt;The &lt;code&gt;charlock_holmes&lt;/code&gt; gem may fail to build on some systems with recent versions of gcc.&lt;br&gt;
-If you run into this issue, try &lt;code&gt;BUNDLE_BUILD__CHARLOCK_HOLMES=&quot;--with-cxxflags=-std=c++17&quot; bundle install&lt;/code&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;ol&gt;
-&lt;li&gt;Install dependencies with &lt;code&gt;bundle install&lt;/code&gt; and &lt;code&gt;yarn install --immutable&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Precompile the assets: &lt;code&gt;RAILS_ENV=production bundle exec rails assets:precompile&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Restart all Mastodon processes.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3&gt;When using Docker&lt;/h3&gt;
-&lt;ol&gt;
-&lt;li&gt;Restart all Mastodon processes.&lt;/li&gt;
-&lt;/ol&gt;</content>
-    <author>
-      <name>ClearlyClaire</name>
-    </author>
-    <media:thumbnail height="30" width="30" url="https://avatars.githubusercontent.com/u/384364?s=60&amp;v=4"/>
-  </entry>
-  <entry>
-    <id>tag:github.com,2008:Repository/52281283/v4.6.2</id>
-    <updated>2026-06-25T09:21:10Z</updated>
-    <link rel="alternate" type="text/html" href="https://github.com/mastodon/mastodon/releases/tag/v4.6.2"/>
-    <title>v4.6.2</title>
-    <content type="html">&lt;h1&gt;&lt;themed-picture data-catalyst-inline=&quot;true&quot;&gt;&lt;picture&gt;
-  &lt;source media=&quot;(prefers-color-scheme: dark)&quot; srcset=&quot;/mastodon/mastodon/raw/v4.6.2/lib/assets/wordmark.dark.png?raw=true&quot;&gt;
-  &lt;source media=&quot;(prefers-color-scheme: light)&quot; srcset=&quot;/mastodon/mastodon/raw/v4.6.2/lib/assets/wordmark.light.png?raw=true&quot;&gt;
-  &lt;img alt=&quot;Mastodon&quot; src=&quot;/mastodon/mastodon/raw/v4.6.2/lib/assets/wordmark.light.png?raw=true&quot; height=&quot;34&quot;&gt;
-&lt;/picture&gt;&lt;/themed-picture&gt;&lt;/h1&gt;
-&lt;p&gt;This release is made solely to update FFmpeg in our docker container images to fix &lt;a href=&quot;https://github.com/advisories/GHSA-qff7-4q6c-m8h6&quot;&gt;CVE-2026-8461&lt;/a&gt; (critical severity). It is critical to update if you use our docker container images.&lt;/p&gt;
-&lt;p&gt;If you are not using our docker container images, please make sure your system FFmpeg is updated to a fixed version, that is, 8.1.2, 7.1.5, 6.1.6, or 5.1.10.&lt;/p&gt;
-&lt;p&gt;For the recently released v4.6.1, see  &lt;a href=&quot;https://github.com/mastodon/mastodon/releases/tag/v4.6.1&quot;&gt;4.6.1 release notes&lt;/a&gt; for information.&lt;/p&gt;
-&lt;h2&gt;Changelog&lt;/h2&gt;
-&lt;h3&gt;Security&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Update FFMpeg version used in the container image to fix &lt;a href=&quot;https://github.com/advisories/GHSA-qff7-4q6c-m8h6&quot;&gt;CVE-2026-8461&lt;/a&gt; (critical severity)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;Upgrade notes&lt;/h2&gt;
-&lt;p&gt;To get the code for v4.6.2, use &lt;code&gt;git fetch &amp;amp;&amp;amp; git checkout v4.6.2&lt;/code&gt;.&lt;/p&gt;
-&lt;div class=&quot;markdown-alert markdown-alert-note&quot;&gt;&lt;p class=&quot;markdown-alert-title&quot;&gt;&lt;svg data-component=&quot;Octicon&quot; class=&quot;octicon octicon-info mr-2&quot; viewBox=&quot;0 0 16 16&quot; version=&quot;1.1&quot; width=&quot;16&quot; height=&quot;16&quot; aria-hidden=&quot;true&quot;&gt;&lt;path d=&quot;M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;Note&lt;/p&gt;&lt;p&gt;As always, make sure you have backups of the database before performing any upgrades. If you are using docker-compose, this is how a backup command might look: &lt;code&gt;docker exec mastodon_db_1 pg_dump -Fc -U postgres postgres &amp;gt; name_of_the_backup.dump&lt;/code&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;h3&gt;Dependencies&lt;/h3&gt;
-&lt;p&gt;External dependencies have not changed since v4.6.0.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Ruby: 3.3 or newer&lt;/li&gt;
-&lt;li&gt;PostgreSQL: 14 or newer&lt;/li&gt;
-&lt;li&gt;Elasticsearch (recommended, for full-text search): 7.x (OpenSearch should also work)&lt;/li&gt;
-&lt;li&gt;LibreTranslate (optional, for translations): 1.3.3 or newer&lt;/li&gt;
-&lt;li&gt;Redis: 7.0 or newer&lt;/li&gt;
-&lt;li&gt;Node: 22 or newer&lt;/li&gt;
-&lt;li&gt;libvips: 8.13 or newer&lt;/li&gt;
-&lt;li&gt;FFMpeg: 5.1 or newer&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;Update steps&lt;/h3&gt;
-&lt;p&gt;The following instructions are for updating from 4.6.1.&lt;/p&gt;
-&lt;p&gt;If you are upgrading directly from an earlier release, please carefully read the upgrade notes for the skipped releases as well, as they often require extra steps such as database migrations. In particular, it is very important to read the &lt;a href=&quot;https://github.com/mastodon/mastodon/releases/tag/v4.6.0&quot;&gt;4.6.0 release notes&lt;/a&gt;.&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Restart all Mastodon processes.&lt;/li&gt;
-&lt;/ol&gt;</content>
-    <author>
-      <name>ClearlyClaire</name>
-    </author>
-    <media:thumbnail height="30" width="30" url="https://avatars.githubusercontent.com/u/384364?s=60&amp;v=4"/>
-  </entry>
-  <entry>
-    <id>tag:github.com,2008:Repository/52281283/v4.5.13</id>
-    <updated>2026-06-25T09:21:13Z</updated>
-    <link rel="alternate" type="text/html" href="https://github.com/mastodon/mastodon/releases/tag/v4.5.13"/>
-    <title>v4.5.13</title>
-    <content type="html">&lt;h1&gt;&lt;themed-picture data-catalyst-inline=&quot;true&quot;&gt;&lt;picture&gt;
-  &lt;source media=&quot;(prefers-color-scheme: dark)&quot; srcset=&quot;/mastodon/mastodon/raw/v4.5.13/lib/assets/wordmark.dark.png?raw=true&quot;&gt;
-  &lt;source media=&quot;(prefers-color-scheme: light)&quot; srcset=&quot;/mastodon/mastodon/raw/v4.5.13/lib/assets/wordmark.light.png?raw=true&quot;&gt;
-  &lt;img alt=&quot;Mastodon&quot; src=&quot;/mastodon/mastodon/raw/v4.5.13/lib/assets/wordmark.light.png?raw=true&quot; height=&quot;34&quot;&gt;
-&lt;/picture&gt;&lt;/themed-picture&gt;&lt;/h1&gt;
-&lt;p&gt;This release is made solely to update FFmpeg in our docker container images to fix &lt;a href=&quot;https://github.com/advisories/GHSA-qff7-4q6c-m8h6&quot;&gt;CVE-2026-8461&lt;/a&gt; (critical severity). It is critical to update if you use our docker container images.&lt;/p&gt;
-&lt;p&gt;If you are not using our docker container images, please make sure your system FFmpeg is updated to a fixed version, that is, 8.1.2, 7.1.5, 6.1.6, or 5.1.10.&lt;/p&gt;
-&lt;p&gt;For the recently released v4.5.12, see  &lt;a href=&quot;https://github.com/mastodon/mastodon/releases/tag/v4.5.12&quot;&gt;4.5.12 release notes&lt;/a&gt; for information.&lt;/p&gt;
-&lt;h2&gt;Changelog&lt;/h2&gt;
-&lt;h3&gt;Security&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Update FFMpeg version used in the container image to fix &lt;a href=&quot;https://github.com/advisories/GHSA-qff7-4q6c-m8h6&quot;&gt;CVE-2026-8461&lt;/a&gt; (critical severity)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;Upgrade notes&lt;/h2&gt;
-&lt;p&gt;To get the code for v4.5.13, use &lt;code&gt;git fetch &amp;amp;&amp;amp; git checkout v4.5.13&lt;/code&gt;.&lt;/p&gt;
-&lt;div class=&quot;markdown-alert markdown-alert-note&quot;&gt;&lt;p class=&quot;markdown-alert-title&quot;&gt;&lt;svg data-component=&quot;Octicon&quot; class=&quot;octicon octicon-info mr-2&quot; viewBox=&quot;0 0 16 16&quot; version=&quot;1.1&quot; width=&quot;16&quot; height=&quot;16&quot; aria-hidden=&quot;true&quot;&gt;&lt;path d=&quot;M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;Note&lt;/p&gt;&lt;p&gt;As always, make sure you have backups of the database before performing any upgrades. If you are using docker-compose, this is how a backup command might look: &lt;code&gt;docker exec mastodon_db_1 pg_dump -Fc -U postgres postgres &amp;gt; name_of_the_backup.dump&lt;/code&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;h3&gt;Dependencies&lt;/h3&gt;
-&lt;p&gt;External dependencies have not changed since v4.5.0.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Ruby: 3.2 or newer&lt;/li&gt;
-&lt;li&gt;PostgreSQL: 14 or newer&lt;/li&gt;
-&lt;li&gt;Elasticsearch (recommended, for full-text search): 7.x (OpenSearch should also work)&lt;/li&gt;
-&lt;li&gt;LibreTranslate (optional, for translations): 1.3.3 or newer&lt;/li&gt;
-&lt;li&gt;Redis: 7.0 or newer&lt;/li&gt;
-&lt;li&gt;Node: 20.19 or newer&lt;/li&gt;
-&lt;li&gt;libvips (optional, instead of ImageMagick): 8.13 or newer&lt;/li&gt;
-&lt;li&gt;ImageMagick (optional if using libvips): 6.9.7-7 or newer&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;Update steps&lt;/h3&gt;
-&lt;p&gt;The following instructions are for updating from 4.5.12.&lt;/p&gt;
-&lt;p&gt;If you are upgrading directly from an earlier release, please carefully read the upgrade notes for the skipped releases as well, as they often require extra steps such as database migrations. In particular, it is very important to read the &lt;a href=&quot;https://github.com/mastodon/mastodon/releases/tag/v4.5.0&quot;&gt;4.5.0 release notes&lt;/a&gt;.&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Restart all Mastodon processes.&lt;/li&gt;
 &lt;/ol&gt;</content>
