@@ -1,6 +1,28 @@
 {
   "items": [
     {
+      "id": "afba588efd9aa33ed0f71951",
+      "title": "APT-129 阻抗轉換器？DI？",
+      "summary": "前言 # 滿久以前就知道這個產品，最近決定買來試試看，但一直沒有需求，也怕東西品質不好，所以一直沒買。 功能 # Stander 的 APT-129 外觀就像一個轉接頭，「把 TS 訊號源轉換成 XLR」，但沒有那麼單純，它還有「把高阻抗訊號轉成低阻抗」再輸出的用途，同時也有轉換成「平衡訊號」的功能，算是一種「被動式 DI」了！ 而大小就像是一個轉接頭而已，放在隨身包裡是非常方便的。 先備知識 # 混音器或錄音界面的 Mic in 孔（通常是 XLR 孔），含有麥克風前級、且適合低阻抗輸入。 如果將拾音器類型的訊號源，透過一般的轉接器，直接連接到 Mic in 孔，會導致阻抗不橋接，而根據物理公式算出來的結果，這樣的阻抗不橋接問題，會形成 HPF，也就是 Low Cut，低頻直接不見。 但，把高阻抗訊號源插入…",
+      "image": "https://eddielv.com/articles/apt129/apt129.jpg",
+      "publishedAt": "2025-08-20T04:07:16Z",
+      "sourceId": "199cdf92fc46bfcd",
+      "sourceTitle": "Eddie Lv",
+      "link": "https://eddielv.com/articles/apt129/",
+      "detailPath": "articles/afba588efd9aa33ed0f71951.json"
+    },
+    {
+      "id": "8c55179c7c243c6db7b5870c",
+      "title": "2025年8月20日中国防火长城GFW对443端口实施无条件封禁的分析",
+      "summary": "1. 引言 2025 年 8 月 20 日北京时间（UTC+8）约 00:34 至 01:48 间，中国国家防火墙（GFW）出现异常行为：对所有指向 TCP 443 端口的连接无条件注入伪造的 TCP RST+ACK 包，导致连接中断。该事件引发了中国与世界其他地区之间的大规模互联网连通性故障（ 来源1 与 来源2 ）。 本报告记录了我们对这一短暂但广泛的封禁事件的测量与分析。主要发现如下： 无条件的 RST+ACK 注入仅发生在 TCP 443 端口，未见于其他常见端口（如 22、80、8443）。 该无条件注入同时扰乱了出入境中国双方向的连接，但触发机制 不对称 ：从中国境内向境外发起的连接，客户端的 SYN 包与服务器的 SYN+ACK 包各自触发三个 RST+ACK 包；从境外向中国境内发起的连接，只…",
+      "image": null,
+      "publishedAt": "2025-08-20T00:00:00Z",
+      "sourceId": "34d02af866ebd5fa",
+      "sourceTitle": "Great Firewall Report",
+      "link": "https://gfw.report/blog/gfw_unconditional_rst_20250820/zh/",
+      "detailPath": "articles/8c55179c7c243c6db7b5870c.json"
+    },
+    {
       "id": "89fda1b1a63bd44f36b845e8",
       "title": "Analysis of the GFW's Unconditional Port 443 Block on August 20, 2025",
       "summary": "1. Introduction Between approximately 00:34 and 01:48 (Beijing Time, UTC+8) on August 20, 2025, the Great Firewall of China (GFW) exhibited anomalous behavior by unconditionally injecting forged TCP RST+ACK packets to disrupt all connections on TCP port 443. This incident caused massive disruption of the Internet connections between China and the rest of th…",
@@ -637,28 +659,6 @@
       "sourceTitle": "Eddie Lv",
       "link": "https://eddielv.com/musings/sb/",
       "detailPath": "articles/75ff4962ed023f77004be35d.json"
-    },
-    {
-      "id": "b8232ea9a4ef466a55cb165b",
-      "title": "當仙草凍比遊戲還大",
-      "summary": "在這個人人都有手機網路吃到飽、高速光纖網路到府的時代，似乎有一群人真的以為網路頻寬是天上掉下來的免費禮物。沒錯，我說的就是現代的網頁設計師們，他們之中有許多人已經連基本圖片使用、頻寬節省的常識都沒有了。",
-      "image": "https://wiwi.blog/assets/images/taiwan-lotto-9763a09f74aafc1441d41b6282b08bdc.png",
-      "publishedAt": "2025-07-30T00:00:00Z",
-      "sourceId": "7f36c3da1e6b5c71",
-      "sourceTitle": "Wiwi.Blog Blog",
-      "link": "https://wiwi.blog/blog/jelly-bigger-than-games",
-      "detailPath": "articles/b8232ea9a4ef466a55cb165b.json"
-    },
-    {
-      "id": "0fbc6a1023e75489b6d6a523",
-      "title": "Fernhill Escarpment",
-      "summary": "最近收到一份传单，上面有很多推荐的步道。鉴于Regional Parks都去完了，我今天就挑了一个上面的走走。 […]",
-      "image": "https://photoghenry.wordpress.com/wp-content/uploads/2025/07/imgi_1_9f7d6d41-eca0-4ce9-850c-7c5d90e945b4.jpg",
-      "publishedAt": "2025-07-29T22:22:52Z",
-      "sourceId": "a64fac5b0b6a1cd4",
-      "sourceTitle": "摄影流水账",
-      "link": "https://photoghenry.wordpress.com/2025/07/30/fernhill-escarpment/",
-      "detailPath": "articles/0fbc6a1023e75489b6d6a523.json"
     }
   ]
 }

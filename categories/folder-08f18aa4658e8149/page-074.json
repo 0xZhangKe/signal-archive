@@ -1,6 +1,50 @@
 {
   "items": [
     {
+      "id": "91b8703dd9f966531f409493",
+      "title": "如何把生活中零碎的灵感或流水账，建立联系，让他们有价值？",
+      "summary": "前置条件 记录生活(个人、家庭)，目的是用来回忆。 对于自己感兴趣的东西，日常需要积累，定期回顾，输出成文，写的过程就是思考的过程。 阅读，读书要笔记，笔记最好可以很多本书关联，对一件事用狐狸的思维，而不是刺猬的思维。 具体项目，需要积累很多碎片的东西，最后完成一个项目，即可归档。 具体做法 1. 记录生活(个人、家庭)，目的是用来回忆。 由上而下，宏观规划。我有一间自己的虚拟房子，里面放了很多零零碎碎的东西，但是基本原则是遵循一个房子的建造原则，从上倒下做的规划： 这一部分的记录，就是单纯的为了家庭回忆，其实有很多分类方式，比如照片、视频、地点、目的等等。我的基本原则如下： 随手的东西，就随手记录，重要的是每天有所记录，不需要细化，只留下钩子 日常类，以月为单位，简单记录，再根据分类细化 照片、视频等媒体资…",
+      "image": "https://static.elizen.me//img/LkbpUtQg78.png",
+      "publishedAt": "2022-03-23T00:00:00Z",
+      "sourceId": "fc41292f8a54624e",
+      "sourceTitle": "Elizen's Blog",
+      "link": "https://elizen.me/posts/2022/03/how-to-manage-information/",
+      "detailPath": "articles/91b8703dd9f966531f409493.json"
+    },
+    {
+      "id": "688a3dc9218be3435e56209a",
+      "title": "Linux 下 Node Source 安装的 npm 权限问题",
+      "summary": "前言 近期安装了 Linux 系统作为主力机器的第二系统，双启动引导。 系统是 Pop!OS 20.04 LTS ，基于 Ubuntu 20.04 由于前端开发及部署需求，需要安装 node.js，于是使用 node source 提供的 node 发行版。 由于安装完成后，npm 存储包的目录为 /usr ，使用时必须加 sudo ，为了避免这种情况和权限安全问题，需要将 npm 的包存储到用户目录下，并且强烈不建议使用 sudo 来全局安装包到 /usr 目录下 方法 检查当前 npm 安装的包路径前缀 1 npm config get prefix 如果返回 /usr 则执行以下命令 1 2 3 mkdir ~/.npm-global export NPM_CONFIG_PREFIX = ~/.npm-…",
+      "image": null,
+      "publishedAt": "2022-03-20T17:16:02Z",
+      "sourceId": "3220115c042340a7",
+      "sourceTitle": "TaurusXin 的独立博客",
+      "link": "https://www.taurusxin.com/npm-prefix/",
+      "detailPath": "articles/688a3dc9218be3435e56209a.json"
+    },
+    {
+      "id": "5f34ad74b791516d6e6030d1",
+      "title": "Kubernetes、集群联邦和资源分发",
+      "summary": "",
+      "image": null,
+      "publishedAt": "2022-03-19T00:00:00Z",
+      "sourceId": "4d49716051922902",
+      "sourceTitle": "面向信仰编程 - Articles",
+      "link": "https://draven.co//kuberentes-federation",
+      "detailPath": "articles/5f34ad74b791516d6e6030d1.json"
+    },
+    {
+      "id": "aae03b6048973b569e8daa55",
+      "title": "百年未有之大变局，我试着聊点政治",
+      "summary": "自从出国之后跟国内亲人们的交流就少得多了，以前会经常和我爸讨论一些社会经验和时局的话题，现在他们更多的是关心我的新生活是否顺利。说实话，在加拿大的生活比在中国要简单很多，像这样的发达资本主义国家已经发展几百年了，方方面面都已经相当成熟，也有清晰的界限和规则，任何人都可以在一定的前提下享受明确的、不受限的自由。首先我想重申自己的一个观点就是任何人都应该关心政治，此前我提过很多次了。都知道“经济基础决定上层建筑”，也知道任何事物都不是孤立存在的，所以一定有东西能影响甚至决定经济，那就是政治。大部分情况下，经济规律只能在一个平稳的政治环境中才能体现出来，如果政治环境稍有动荡，反映到经济上就是翻天覆地。这次俄乌战争爆发之后，在美国的很多中概股跌得很严重，然后就会在社交媒体上看到很多不明真相的人都在讨论要不要抄底——如…",
+      "image": null,
+      "publishedAt": "2022-03-18T18:03:00Z",
+      "sourceId": "87c2e8631d9fb702",
+      "sourceTitle": "Tom Brew",
+      "link": "https://www.ie9.org/2022/03/my-political-opinions.html",
+      "detailPath": "articles/aae03b6048973b569e8daa55.json"
+    },
+    {
       "id": "d0337ef20eef681ca15c05be",
       "title": "使用 Next.js + Hexo 重构我的博客",
       "summary": "在咕咕了一整年、只发布了三篇文章（其中两篇还是译文）之后，我决定还是稍微花一点时间好好折腾一下自己的博客，以 React 作为抓手，通过 Next.js 和 Hexo 深度共建，对标 Gatsby，打通静态 HTML 与用户交互之间的垂直领域屏障，实现多维矩阵闭环，为个人博客赋能（咳咳咳），然后水出 2022 年第一篇文章（逃） 技术选型：Gatsby vs Next.js 我使用 H...",
@@ -615,50 +659,6 @@
       "sourceTitle": "Sukka's Blog",
       "link": "https://blog.skk.moe/post/keep-web-free-say-no-to-web3/",
       "detailPath": "articles/acf467a92d9cc0f74ee98991.json"
-    },
-    {
-      "id": "9058f82ff1ced4eaaa2348e9",
-      "title": "叁拾一周：No.23",
-      "summary": "这是「叁拾一周」第二十三期，感谢这周新增的邮件订阅读者，目前订阅人数达到了 253 位。我的下一个目标是 311。 上周发现了一个小而美的平台，像微博版的知识星球，有点儿意思，关注几天之后，也申请了一个，“走了后门”，周末就开通了，发了一条，未来还会发很多条。 我把它作为叁拾一周的番外，但也赋予它一些其它的意义和定位。也欢迎大家去关注，文末会放一个访问链接，要注意，订阅得花钱，不多，一年 30 块，一杯咖啡钱。 今天我想顺着这件事，聊一个主题，副产品。 我每年会定一个新年计划，大而空的那种。固定模式是 1 个关键词 + 3 个愿望，比如 2021 年，我的关键词是聚焦，三个愿望是顾家多一点，帮人多一点，反思多一点。 副产品，是 2019 年的关键词，来自郑也夫老师。 他说，文明是副产品，是人类在进化过程中，不…",
-      "image": "https://static.elizen.me/img/xiao-bao-tong.jpg",
-      "publishedAt": "2021-12-08T00:00:00Z",
-      "sourceId": "fc41292f8a54624e",
-      "sourceTitle": "Elizen's Blog",
-      "link": "https://elizen.me/newsletter/2021/12/newsletter-023/",
-      "detailPath": "articles/9058f82ff1ced4eaaa2348e9.json"
-    },
-    {
-      "id": "0600b648108ebd7a4199d2b4",
-      "title": "读《张医生与王医生》",
-      "summary": "读完这 40 万字《张医生与王医生》，好像看了一部 4 个小时的电影，再一次想起书中也提到的《铁西区》。留几句读后感： 1，我对伊险峰是有滤镜的，极好的那种，不论是他做《第一财经周刊》，还是后来的好奇心日报，直到现在的小鸟文学，就像李海鹏说的，他是中国媒体界凤毛麟角的人物。 2，阅读感受不好，一方面是本书有两位作者书写，一个负责采访，一个负责专栏；另一方面，我对书中提到的伴随着工业化和城市化进程诞生的工人阶级的衰落、士绅化的了解有限。 3，当这些阶级概念以「社会」一词包装成改革开放 40 年的东北展现在我眼前时，书中说到三代人的故事，我心领神会甚至对这种熟悉感到窃喜。 4，伊险峰的重点在前言后记都写得很清楚，通过对他两个同学的采访和大量的资料，想了解曾经作为共和国长子的沈阳为何成了城市化进程中掉队的一员，以及…",
-      "image": null,
-      "publishedAt": "2021-12-08T00:00:00Z",
-      "sourceId": "fc41292f8a54624e",
-      "sourceTitle": "Elizen's Blog",
-      "link": "https://elizen.me/posts/2021/12/doctor-zhang-and-doctor-wang/",
-      "detailPath": "articles/0600b648108ebd7a4199d2b4.json"
-    },
-    {
-      "id": "02de9e1f5b57d7dd33a8b124",
-      "title": "2021 年 JavaScript Promise 性能对比",
-      "summary": "我们正生活在一个「Any application that can be written in JavaScript, will eventually be written in JavaScript」的时代。作为一门兼具动态性和简单性的语言，JavaScript 已经占领了客户端、服务端，甚至在机器学习中也占据一席之地；不可避免的，异步执行也逐渐成为这门语言不可缺少的一部分。 TL;...",
-      "image": "https://img.skk.moe/blog/t2021/promise-performance-benchmark.png",
-      "publishedAt": "2021-12-07T08:19:00Z",
-      "sourceId": "5a840ced5a57e7ff",
-      "sourceTitle": "Sukka's Blog",
-      "link": "https://blog.skk.moe/post/promise-performance-benchmark/",
-      "detailPath": "articles/02de9e1f5b57d7dd33a8b124.json"
-    },
-    {
-      "id": "f0165ad5caa601b8e6845c4d",
-      "title": "健身笔记（二）好好吃饭",
-      "summary": "健康和美味，有点像经济学里的价格和购买，往往是一个提高另一个就下降了；但这个关系不是线性的，比如鸡胸肉到鸡腿，只提高了一点点热量，但美味度有大幅提高。 没有必要追求特别极致的没油没糖没这个没那个，balance一下。人吃东西的主要目的是健康和快乐，这不是考试看谁最少油就最高分。",
-      "image": null,
-      "publishedAt": "2021-12-04T16:50:49Z",
-      "sourceId": "88a1fc290dd0b8a7",
-      "sourceTitle": "沉默之沙",
-      "link": "https://yukieyun.net/fitness/notes-2-nutrition/",
-      "detailPath": "articles/f0165ad5caa601b8e6845c4d.json"
     }
   ]
 }

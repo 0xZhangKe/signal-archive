@@ -1,6 +1,28 @@
 {
   "items": [
     {
+      "id": "d860597f1339c3b275128c4a",
+      "title": "居家裝修學習筆記",
+      "summary": "從建材到施工的知識點整理",
+      "image": null,
+      "publishedAt": "2026-07-08T14:38:15Z",
+      "sourceId": "50bce2ced06e6077",
+      "sourceTitle": "Feed Me, Haruo",
+      "link": "https://haruowang.vercel.app/wealth/dwelling/home.html",
+      "detailPath": "articles/d860597f1339c3b275128c4a.json"
+    },
+    {
+      "id": "4fc97f583cd89a1f9d785518",
+      "title": "CVE-2026-0091： An issue in android window management to Arbitrary Code Execution in Launcher process",
+      "summary": "This issue CVE-2026-0091 has been fixed for Android 14+ in June 2026 Android Security Bulletin . Click here to see the patch The following is copied from my repo https://github.com/canyie/TransitionPlayer for backup purposes. For more info such as PoC code, please check the original repo.",
+      "image": null,
+      "publishedAt": "2026-07-08T09:40:00Z",
+      "sourceId": "511f3e9d589e2612",
+      "sourceTitle": "残页的小博客",
+      "link": "https://blog.canyie.top/2026/07/08/CVE-2026-0091/",
+      "detailPath": "articles/4fc97f583cd89a1f9d785518.json"
+    },
+    {
       "id": "b8e7abb8cfbc6b56f0110902",
       "title": "[AI] curl -NT. 导致100% CPU原因",
       "summary": "有AI就是好使，搁以前自己得盯半天也看不明白。。。 问题确认 curl -NT. 在连接一个持续推送数据的 streaming 服务器时，会产生一个 紧密的 pause/unpause 循环 ，导致 100% CPU。 根因分析 -T. （注意是点号，不是减号）将 stdin 设为 非阻塞模式 ，然后依赖 EAGAIN + CURL_READFUNC_PAUSE 机制来避免阻塞。核心循环发生在三个回调之间： 第一步 — 上传尝试失败 （ src/tool_cb_rea.c ）： { rc = read(per->infd, buffer, sz * nmemb); if(rc < 0) { if(errno == EAGAIN) { errno = 0; config->readbusy = TRUE; re…",
@@ -637,28 +659,6 @@
       "sourceTitle": "Shuo-jen Blog",
       "link": "https://shuojen.com/blog/2026/07/03/adult-font",
       "detailPath": "articles/d686ebf2c04ca6c5edd67e5a.json"
-    },
-    {
-      "id": "aed7be68e5eea7fa3fda1c0f",
-      "title": "小香港、福建獅與「河嘻」",
-      "summary": "這是我的「 BlogBlog 同樂會 - 2026 年 7 月 」的投稿文章。本月主題是「 有趣的小知識或冷門概念 」，由 劉昕 主持。如果你有自己的部落格，歡迎一起來參加！ 山打根作爲「以廣東話爲主」的沙巴城鎮 位於馬來西亞沙巴的山打根（Sandakan），除了是我的生長之地與家鄉之外，也是整個沙巴（甚至是整個 東馬 ） 唯一一個 當地華裔以廣東話作爲 首要 溝通語言 1 的城鎮。 馬來西亞各籍貫華裔通用語分佈圖。圖片來源/參考文獻：湯志祥（2019）。試論馬來西亞華語詞彙系統及華語教學。 Global Chinese , 5 (2), 237-253. https://doi.org/10.1515/glochi-2018-0025 ；紅圈爲本文作者自行加筆。 這是受到約 1970 至 1990 年代時，…",
-      "image": "https://microblog.ttheng.com/blog/malaysiachineselanguagedistribution.jpg",
-      "publishedAt": "2026-07-03T06:22:00Z",
-      "sourceId": "a93d4f2e98fafcbe",
-      "sourceTitle": "All posts | 所有貼文 on ttheng's microblog. | 侃侃而隨想極短文。",
-      "link": "https://microblog.ttheng.com/some-trivia-july-2026/",
-      "detailPath": "articles/aed7be68e5eea7fa3fda1c0f.json"
-    },
-    {
-      "id": "024e5a3354bcc255cb5ca052",
-      "title": "入蜀记 day405 “你从一开始就不存在”",
-      "summary": "「“你从一开始就不存在”。」",
-      "image": null,
-      "publishedAt": "2026-07-03T04:48:27Z",
-      "sourceId": "8e5dc5a8b5023a8e",
-      "sourceTitle": "折腾人生",
-      "link": "https://z.arlmy.me/posts/BBBPandINSW/INSW-ko/INSW_405/",
-      "detailPath": "articles/024e5a3354bcc255cb5ca052.json"
     }
   ]
 }
