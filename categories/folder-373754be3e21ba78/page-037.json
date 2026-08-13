@@ -1,6 +1,116 @@
 {
   "items": [
     {
+      "id": "960a70d018b34ad63a5c22de",
+      "title": "Resque 1.25.0 has been released",
+      "summary": "I’ve just released Resque 1.25.0! Resque is the most stable, widely-used job queue for Ruby. It uses Redis as its backing store. This release is thanks to adelcambre , who took the time to get it over the finish line! <3. A total of 19 contributors helped out with this…",
+      "image": null,
+      "publishedAt": "2013-09-16T00:00:00Z",
+      "sourceId": "9a41b0d6fa07d21e",
+      "sourceTitle": "Steve Klabnik",
+      "link": "https://steveklabnik.com/writing/resque-1-25-0-has-been-released/",
+      "detailPath": "articles/960a70d018b34ad63a5c22de.json"
+    },
+    {
+      "id": "e03daef2755e9e79cc0c1c9e",
+      "title": "Just the regularly scheduled apocalypse",
+      "summary": "Every once in a while, I unfollow EVERYONE on Twitter. I did it again last night. Feels good, like a fresh start. Part of the problem is that I feel like I should be following everyone who I know in real life. This causes Twitter to be absolutely unmanageable, as I’m following…",
+      "image": null,
+      "publishedAt": "2013-09-10T00:00:00Z",
+      "sourceId": "9a41b0d6fa07d21e",
+      "sourceTitle": "Steve Klabnik",
+      "link": "https://steveklabnik.com/writing/just-the-regularly-scheduled-apocalypse/",
+      "detailPath": "articles/e03daef2755e9e79cc0c1c9e.json"
+    },
+    {
+      "id": "59e11d90facc0c01bad2c1ff",
+      "title": "More Doom III BFG Documentation",
+      "summary": "id Software developer Jan Paul Van Waveren (a.k.a Mr Elusive) is sharing some more of the knowledge gained while working on Doom 3 BFG. This part focuses highly on the choice of data-structures and how paramount cacheline are to performances.",
+      "image": null,
+      "publishedAt": "2013-09-04T01:08:45Z",
+      "sourceId": "ce9ad60b092e38b0",
+      "sourceTitle": "fabiensanglard.net",
+      "link": "https://fabiensanglard.net/more_doom3_documentation/index.php",
+      "detailPath": "articles/59e11d90facc0c01bad2c1ff.json"
+    },
+    {
+      "id": "e194f96eeccbdca324f3dd49",
+      "title": "Doom III BFG Documentation",
+      "summary": "id Software developer Jan Paul Van Waveren (a.k.a Mr Elusive) send me his technical notes about Doom 3 BFG. I was especially interested in the \"Compute vs. Memory\" section which confirms that CPU are now so fast that it is often better to calculate something than fetch it from RAM. Jan Paul was also kind enough to share a list of all the publications relate…",
+      "image": "https://fabiensanglard.net/doom3_documentation/doom_documentation.png",
+      "publishedAt": "2013-08-31T01:08:45Z",
+      "sourceId": "ce9ad60b092e38b0",
+      "sourceTitle": "fabiensanglard.net",
+      "link": "https://fabiensanglard.net/doom3_documentation/index.php",
+      "detailPath": "articles/e194f96eeccbdca324f3dd49.json"
+    },
+    {
+      "id": "fd706f03a19ec3b60039b308",
+      "title": "Second Reality Code Review",
+      "summary": "On July 23, 2013 the source code of Second Reality was released. Like many, I was eager to look at the internals of a demo that inspired me so much over the last 20 years. I was expecting a monolithic mess of assembly but instead I found a surprisingly elaborated architecture, mixing several languages in an elegant way. The code is something like I had neve…",
+      "image": "https://fabiensanglard.net/second_reality/second_reality.png",
+      "publishedAt": "2013-08-16T01:08:45Z",
+      "sourceId": "ce9ad60b092e38b0",
+      "sourceTitle": "fabiensanglard.net",
+      "link": "https://fabiensanglard.net/second_reality/index.php",
+      "detailPath": "articles/fd706f03a19ec3b60039b308.json"
+    },
+    {
+      "id": "a26bd85506842945aa4dfe71",
+      "title": "Emoji licensing",
+      "summary": "I recently decided to make an emoji gem. Of course, as with any project, I first look into the relevant licensing issues. What I found made me :cry: . Here’s the low-down on emoji and intellectual property law. A history So what are emoji, anyway? The Japanese spelling is 絵文字: 絵…",
+      "image": null,
+      "publishedAt": "2013-08-06T00:00:00Z",
+      "sourceId": "9a41b0d6fa07d21e",
+      "sourceTitle": "Steve Klabnik",
+      "link": "https://steveklabnik.com/writing/emoji-licensing/",
+      "detailPath": "articles/a26bd85506842945aa4dfe71.json"
+    },
+    {
+      "id": "366efefb5e4ba8575ba47989",
+      "title": "redis-namespace 1.3.1 security release",
+      "summary": "TL;DR: if you use redis-namespace and you use send , Kernel#exec may get called. Please upgrade to 1.0.4, 1.1.1, 1.2.2, or 1.3.1 immediately. Link to the fix: https://github.com/resque/redis-namespace/commit/6d839515e8a3fdc17b5fb391500fda3f919689d6 The Problem Redis has an EXEC…",
+      "image": null,
+      "publishedAt": "2013-08-03T00:00:00Z",
+      "sourceId": "9a41b0d6fa07d21e",
+      "sourceTitle": "Steve Klabnik",
+      "link": "https://steveklabnik.com/writing/redis-namespace-1-3-1--security-release/",
+      "detailPath": "articles/366efefb5e4ba8575ba47989.json"
+    },
+    {
+      "id": "278d991dfd078f5d7b2819de",
+      "title": "Beware subclassing Ruby core classes",
+      "summary": "TL;DR: Subclassing core classes in Ruby can lead to unexpected side effects. I suggest composition over inheritance in all these cases. Subclassing Review If you’re familiar with the concept of subclassing, skip down to “The Problem.” In Ruby, you can make your own classes: class…",
+      "image": "http://i.imgur.com/PVwdvyY.png",
+      "publishedAt": "2013-07-24T00:00:00Z",
+      "sourceId": "9a41b0d6fa07d21e",
+      "sourceTitle": "Steve Klabnik",
+      "link": "https://steveklabnik.com/writing/beware-subclassing-ruby-core-classes/",
+      "detailPath": "articles/278d991dfd078f5d7b2819de.json"
+    },
+    {
+      "id": "e64447be186289a7631c1551",
+      "title": "Resque 1.25.0.pre has been released",
+      "summary": "I’ve just released Resque 1.25.0.pre! Resque is the most stable, widely-used job queue for Ruby. It uses Redis as its backing store. This release is thanks to adelcambre , who took the time to get it over the finish line! <3 A total of 19 contributors helped out with this…",
+      "image": null,
+      "publishedAt": "2013-07-23T00:00:00Z",
+      "sourceId": "9a41b0d6fa07d21e",
+      "sourceTitle": "Steve Klabnik",
+      "link": "https://steveklabnik.com/writing/resque-1-25-0-pre-has-been-released/",
+      "detailPath": "articles/e64447be186289a7631c1551.json"
+    },
+    {
+      "id": "8f8e2a1837ca1d93ff53320c",
+      "title": "握着你的手教你画哀女王",
+      "summary": "炎炎夏日来到，去年的Tee不够潮了有木有，定制Tee的话，丝网印数量不够，热转印效果不好，于是决定手绘！ 去万能的淘宝搜一下「纺织颜料」即可，不需要用丙烯，亲测，这种颜料是不会轻易掉色的。 于是我们来画个哀女王。 第0步 设计一下样式，用inkscape画了个。 接下来我们开始画Tee。",
+      "image": "https://bigeagle.me/2013/07/ai_tee/ai_step0.png",
+      "publishedAt": "2013-07-04T23:12:00Z",
+      "sourceId": "1a53726dacd05db7",
+      "sourceTitle": "K.I.S.S",
+      "link": "https://bigeagle.me/2013/07/ai_tee/",
+      "detailPath": "articles/8f8e2a1837ca1d93ff53320c.json"
+    },
+    {
       "id": "569818ec0168264573fe9e7e",
       "title": "R.I.P Google Reader",
       "summary": "大约一个月前转向inoreader了，所以最近30天的阅读量很少。 感谢Google Reader陪我走过的这四年，也就是我完全使用Linux的四年。没记错的话是被 @icaker 同学带入的这个圈子，Linux, Google, Mailing List, Twitter, etc. 嘛，过几天 @icaker 也要去另一个城市鸟。 略伤感了，再见Goole Reader，再见青春。",
@@ -549,116 +659,6 @@
       "sourceTitle": "Steve Klabnik",
       "link": "https://steveklabnik.com/writing/how-to-squash-commits-in-a-github-pull-request/",
       "detailPath": "articles/ab2441720f07b5b53f4324fb.json"
-    },
-    {
-      "id": "b8b3e11f37d876280a17221a",
-      "title": "Theory and practice",
-      "summary": "purity There is always a tension between Theory and Practice. These two separate realms are connected through a process of abstraction and application. To explain this relationship by way of theory, Theory deterritorializes Practice, and Practice reterritorializes Theory: a…",
-      "image": "http://imgs.xkcd.com/comics/purity.png",
-      "publishedAt": "2012-11-06T00:00:00Z",
-      "sourceId": "9a41b0d6fa07d21e",
-      "sourceTitle": "Steve Klabnik",
-      "link": "https://steveklabnik.com/writing/theory-and-practice/",
-      "detailPath": "articles/b8b3e11f37d876280a17221a.json"
-    },
-    {
-      "id": "855efc672385c508a6945502",
-      "title": "I got hit by a car today",
-      "summary": "“Humans are really squishy, messy, complicated, and contradictory. That’s what makes life interesting.” Veggie Grill is damn delicious, but it’s hard to talk and eat at the same time. I’m usually trying to shovel my Santa Fe Chickin’ sandwich into my face as hard as possible.…",
-      "image": "http://upload.wikimedia.org/wikipedia/commons/6/62/Santa_Monica_Boulevard_at_Thayer.jpg",
-      "publishedAt": "2012-10-25T00:00:00Z",
-      "sourceId": "9a41b0d6fa07d21e",
-      "sourceTitle": "Steve Klabnik",
-      "link": "https://steveklabnik.com/writing/i-got-hit-by-a-car-today/",
-      "detailPath": "articles/855efc672385c508a6945502.json"
-    },
-    {
-      "id": "9ce51cc18cd18f4b88103606",
-      "title": "Living with a terrible taste in music",
-      "summary": "Music has always been very important to me. Throughout most of my life, I’ve listened to a lot of music, and it’s played a huge role in defining my personality at the time I listened to it. In many ways, the history of the music I’ve listened to is a history of me. Here’s a look…",
-      "image": null,
-      "publishedAt": "2012-10-12T00:00:00Z",
-      "sourceId": "9a41b0d6fa07d21e",
-      "sourceTitle": "Steve Klabnik",
-      "link": "https://steveklabnik.com/writing/living-with-a-terrible-taste-in-music/",
-      "detailPath": "articles/9ce51cc18cd18f4b88103606.json"
-    },
-    {
-      "id": "c36acd7102e4b1cdeef5429d",
-      "title": "Run Rails with custom patches",
-      "summary": "I often see comments like this in the Rails bugtracker. Generally, someone is running an older version of Rails, and some bug they face has been fixed on edge. But they may be running a version that’s too old to receive fixes, or need a fix that has yet to be included in an…",
-      "image": null,
-      "publishedAt": "2012-10-04T00:00:00Z",
-      "sourceId": "9a41b0d6fa07d21e",
-      "sourceTitle": "Steve Klabnik",
-      "link": "https://steveklabnik.com/writing/run-rails-with-custom-patches/",
-      "detailPath": "articles/c36acd7102e4b1cdeef5429d.json"
-    },
-    {
-      "id": "b8e937460dfef66cdbe7df5f",
-      "title": "Deprecated From Inception",
-      "summary": "Stop using ActionBarSherlock! Well... eventually. If you are writing an application right now with a minSdkVersion lower than 14 you should be using it. I am not saying this just as the developer of the library, but as someone who likes to minimize wasted time. Writing applications is hard and nobody wants to spend time writing boilerplate code. It sucks va…",
-      "image": null,
-      "publishedAt": "2012-10-01T00:00:00Z",
-      "sourceId": "a33fc95b48c6e3ea",
-      "sourceTitle": "Jake Wharton",
-      "link": "https://jakewharton.com/deprecated-from-inception/",
-      "detailPath": "articles/b8e937460dfef66cdbe7df5f.json"
-    },
-    {
-      "id": "3a6dec5a3864968a01c93608",
-      "title": "How do you find the time?",
-      "summary": "I’m often asked the question, “How do you find the time?” Mostly, it’s around open source, sometimes it’s about books, and occasionally, on other things. I’ve generally deflected the question with something like “I don’t know, man, I just do it.” But that answer isn’t very…",
-      "image": "http://2.bp.blogspot.com/_6VPzVlB8N28/SwC5AWnireI/AAAAAAAABgA/O883tYn78As/s1600/DDplayershandbook2000.jpg",
-      "publishedAt": "2012-09-27T00:00:00Z",
-      "sourceId": "9a41b0d6fa07d21e",
-      "sourceTitle": "Steve Klabnik",
-      "link": "https://steveklabnik.com/writing/how-do-you-find-the-time/",
-      "detailPath": "articles/3a6dec5a3864968a01c93608.json"
-    },
-    {
-      "id": "6bbba23753cc7939f1738fd8",
-      "title": "Seriously: numbers: use them!",
-      "summary": "Turbolinks test from Steve Klabnik on Vimeo . If you don’t feel like watching… https://github.com/steveklabnik/turbolinks_test Results with 1000 pages: Blank Rails app: $ rspec user system total real no turbolinks 11.170000 0.980000 12.460000 (138.656728) yes turbolinks 10.800000…",
-      "image": null,
-      "publishedAt": "2012-09-27T00:00:00Z",
-      "sourceId": "9a41b0d6fa07d21e",
-      "sourceTitle": "Steve Klabnik",
-      "link": "https://steveklabnik.com/writing/seriously--numbers--use-them-/",
-      "detailPath": "articles/6bbba23753cc7939f1738fd8.json"
-    },
-    {
-      "id": "13bca766b9d08769169f1af6",
-      "title": "Scala 自定义控制结构",
-      "summary": "写了两年Python了想换换口味，正好在coursera上参加 Functional Programming Principles in Scala 课程，考虑到 Scala 那一大票很诱人的特性就学Scala吧～ //golang 我对不起你… … 话说Scala被定义为 Sca lable La nguage ,其实解释一下不就是可以扩展自己的语法么，作为Pythoner感觉这种事情一点也不算稀奇，然而当我真的看/用到这种特性的时候的确感觉惊叹，这不是静态或动态语言的区别，这是函数式与非函数式语言的区别。 虽然Python支持函数式的风格，但其编程思想终究是指令式为主的，所以有一些函数式特性并不能被真正发挥出来。 在 Programming in Scala 的第14章讲到 断言与测试 ，其中给出一个关于…",
-      "image": null,
-      "publishedAt": "2012-09-24T16:44:00Z",
-      "sourceId": "1a53726dacd05db7",
-      "sourceTitle": "K.I.S.S",
-      "link": "https://bigeagle.me/2012/09/scala-new-control/",
-      "detailPath": "articles/13bca766b9d08769169f1af6.json"
-    },
-    {
-      "id": "383ddcecd080297f3f1111f1",
-      "title": "Resque: let's do this",
-      "summary": "If you’ve ever done background job stuff with Rails, you’ve probably used Resque . Resque is “Yet Another GitHub Project They’ve Open Sourced and Then Abandoned.” But Resque is super awesome: it builds a job queue on top of Redis, which is a totally awesome piece of software.…",
-      "image": null,
-      "publishedAt": "2012-09-22T00:00:00Z",
-      "sourceId": "9a41b0d6fa07d21e",
-      "sourceTitle": "Steve Klabnik",
-      "link": "https://steveklabnik.com/writing/resque--let-s-do-this/",
-      "detailPath": "articles/383ddcecd080297f3f1111f1.json"
-    },
-    {
-      "id": "98f49f634b487f976c680982",
-      "title": "入手Wacom Bamboo CTL470",
-      "summary": "前两天画瘾大发，于是一冲动就入了个Wacom Bamboo CTL470，为什么选这个？ – 因为 便宜 ! 550软妹币搞定。 这一款数位笔是非常非常基础的配置，功能上其实就只是个压感笔，而且感应范围只有 4x6 英寸，不过用起来感觉也还不错。 压感方面体验很自然，很舒服～ 没有橡皮擦这一点略感功能欠缺，不过也不算大碍。 Archlinux下装上 xf86-input-wacom , wacom-udev ， libwacom 即可驱动，KDE下装上 kcm-wacomtablet 还可以在GUI里配置，可以说是开箱即用。 比较令人郁闷的是 krita 对其压感还不支持，这有点让我意外和遗憾，不过幸好我们也还有 MyPaint 可以用，画些简单的画足够用了。 好久不画画手有些生了，用了一个晚上时间画了个学姐…",
-      "image": null,
-      "publishedAt": "2012-09-18T18:17:00Z",
-      "sourceId": "1a53726dacd05db7",
-      "sourceTitle": "K.I.S.S",
-      "link": "https://bigeagle.me/2012/09/new-wacom/",
-      "detailPath": "articles/98f49f634b487f976c680982.json"
     }
   ]
 }
