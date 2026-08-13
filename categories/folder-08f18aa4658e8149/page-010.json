@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "b8e7abb8cfbc6b56f0110902",
+      "title": "[AI] curl -NT. 导致100% CPU原因",
+      "summary": "有AI就是好使，搁以前自己得盯半天也看不明白。。。 问题确认 curl -NT. 在连接一个持续推送数据的 streaming 服务器时，会产生一个 紧密的 pause/unpause 循环 ，导致 100% CPU。 根因分析 -T. （注意是点号，不是减号）将 stdin 设为 非阻塞模式 ，然后依赖 EAGAIN + CURL_READFUNC_PAUSE 机制来避免阻塞。核心循环发生在三个回调之间： 第一步 — 上传尝试失败 （ src/tool_cb_rea.c ）： { rc = read(per->infd, buffer, sz * nmemb); if(rc < 0) { if(errno == EAGAIN) { errno = 0; config->readbusy = TRUE; re…",
+      "image": null,
+      "publishedAt": "2026-07-08T08:05:00Z",
+      "sourceId": "a864c53722a17b19",
+      "sourceTitle": "est's blog",
+      "link": "https://blog.est.im/2026/stdout-25",
+      "detailPath": "articles/b8e7abb8cfbc6b56f0110902.json"
+    },
+    {
       "id": "5a230e874a4d80c944dfe12b",
       "title": "交流電專用電錶 DM55-1",
       "summary": "交流電專用電錶 # 音響工作時，我的腰間一定會掛一個交流電的電錶，因爲要確保電壓正確才不會燒壞器材。 交流電小電錶 之前到夜市幫忙時， 發電機配錯電 成 220v，能夠發現就是因爲在接上電器前確認電壓，是我的標準 SOP。父親看到後問我那個是哪裡買的，他也想要。這顆很小、又好攜帶，還會發光好閱讀，太方便了，而且價格不到 100 元新臺幣。 這個驗電工具拆開之後會發現有一大半都是空的，因此可以在外殼鑽孔來穿鑰匙圈，如此一來就能掛在腰間使用了。我這個是 樂健 的老闆幫我製作的，超感恩！ 套上鑰匙圈的交流電小電錶 鑰匙圈的另外一段是易拉扣 1 ，可以直接伸縮、拉長，不需要從腰部取下來就能使用。 購買連結 # 不知道實體店面哪裡有賣，但 蝦皮購物 跟 淘宝 上都有。 其實我不是很喜歡在 Blog 放上蝦皮連結，因爲電…",
@@ -648,17 +659,6 @@
       "sourceTitle": "折腾人生",
       "link": "https://z.arlmy.me/posts/BBBPandINSW/INSW-ko/INSW_405/",
       "detailPath": "articles/024e5a3354bcc255cb5ca052.json"
-    },
-    {
-      "id": "905dae21b9f8fdd6d47c4578",
-      "title": "[时空] Columbia Gorge",
-      "summary": "Columbia gorge 优点：Accessible 缺点：因为过于 accessible 又赶上长周末所以人巨多车都不好停🤣外加我 road trip 一整周了略微审美疲劳所以没咋走 trail 看了几个瀑布光速撤退。 ... 阅读全文 https://blog.douchi.space/time-capsule/20260703-columbia-gorge/",
-      "image": null,
-      "publishedAt": "2026-07-03T00:00:00Z",
-      "sourceId": "f26cdf4037718a26",
-      "sourceTitle": "About on 椒盐豆豉",
-      "link": "https://blog.douchi.space/time-capsule/20260703-columbia-gorge/?utm_source=rss",
-      "detailPath": "articles/905dae21b9f8fdd6d47c4578.json"
     }
   ]
 }

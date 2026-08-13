@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "47ad96ada0b71a10909c478e",
+      "title": "gitweets改版，复刻微信「朋友圈」",
+      "summary": "去年搓了个 gitweets ，一个 .html 实现了「微博」，拿git历史当feed流～发推 这个周末看着 coding plan 还剩 20% 要到期，没用完，怎么办呢？想来想去，挖大坑干不完，小修小改，就拿这个 gitweets 继续填坑了 首先是让AI把界面改成模仿微信 朋友圈，啪一下，很快啊，结果让人非常印象深刻，很逼真 https://f.est.im/est 现在的AI真厉害。让我去调CSS可能这辈子都搞不出来这个效果了。 后面是我的一些唠叨，不感兴趣的可以关闭页面，或者去上面那个围观一下。 想起来独乐乐不如众乐乐，要不，支持个评论功能？ 项目的初衷是 static page，要实现互动肯定得用一些API了。 最能想到的思路，走传统的 github issue 什么的，和这个 gitweets…",
+      "image": null,
+      "publishedAt": "2026-07-12T09:53:00Z",
+      "sourceId": "a864c53722a17b19",
+      "sourceTitle": "est's blog",
+      "link": "https://blog.est.im/2026/stdout-28",
+      "detailPath": "articles/47ad96ada0b71a10909c478e.json"
+    },
+    {
       "id": "3837cdcbce8447612409a7ec",
       "title": "Toots 427 2026 Jul.5 - Jul.11",
       "summary": "「“物之不齐，物之情也”。」",
@@ -648,17 +659,6 @@
       "sourceTitle": "残页的小博客",
       "link": "https://blog.canyie.top/2026/07/08/CVE-2026-0091/",
       "detailPath": "articles/4fc97f583cd89a1f9d785518.json"
-    },
-    {
-      "id": "b8e7abb8cfbc6b56f0110902",
-      "title": "[AI] curl -NT. 导致100% CPU原因",
-      "summary": "有AI就是好使，搁以前自己得盯半天也看不明白。。。 问题确认 curl -NT. 在连接一个持续推送数据的 streaming 服务器时，会产生一个 紧密的 pause/unpause 循环 ，导致 100% CPU。 根因分析 -T. （注意是点号，不是减号）将 stdin 设为 非阻塞模式 ，然后依赖 EAGAIN + CURL_READFUNC_PAUSE 机制来避免阻塞。核心循环发生在三个回调之间： 第一步 — 上传尝试失败 （ src/tool_cb_rea.c ）： { rc = read(per->infd, buffer, sz * nmemb); if(rc < 0) { if(errno == EAGAIN) { errno = 0; config->readbusy = TRUE; re…",
-      "image": null,
-      "publishedAt": "2026-07-08T08:05:00Z",
-      "sourceId": "a864c53722a17b19",
-      "sourceTitle": "est's blog",
-      "link": "https://blog.est.im/2026/stdout-25",
-      "detailPath": "articles/b8e7abb8cfbc6b56f0110902.json"
     }
   ]
 }

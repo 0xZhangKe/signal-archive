@@ -1,6 +1,39 @@
 {
   "items": [
     {
+      "id": "49317a811b6536edc5d5a77a",
+      "title": "拍照往事",
+      "summary": "昨天聊到 CCD 相机在新生代那里重又走红，有读者贴出来自己的几台旧佳能相机，一下子把我带回了遥远的 2004 年。 2004 年我在丽江外驻，没有归期，任务是照顾好三义机场的两架驻场波音 737 飞机，然后每天监控运行情况，最后是照顾飞行机组在丽江当地过夜期间的一切吃喝拉撒。其中有一年时间，我住在一栋没有电梯的居民楼的第七层，下班就以写博客作为消遣。 从客厅的窗子看出去，刚好可以看到玉龙雪山。位置不是太好，对面也是一栋七层楼，楼顶是太阳能热水器的储水罐，边上竖着两根杆子。于是，在搬家之前的一年多时间，我每天早起拍摄一张玉龙雪山的照片，发在我的博客上，变成了一场著名的网络行为艺术。如果你还能找见当年的照片的话，那些玉龙雪山边上始终有根杆子戳着的，那就是我的手笔。 每天拍摄一张玉龙雪山照片很痛苦，早起只是一方面…",
+      "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjnD99f-aIKYIr6RjAizzHv4J6DBUDKHt4Kvhr7zP4Ucht-4KHKnyvGKDgsHXlLKz8eSeTPZKPfDqb9Fw_o-DOaG0WDl8Lx9xt68QrmvuDYgo9g1GnSfNPPFrQw8fXjaXyuyEhvEHU21ydKG-lf54SQBTXGMvbZKY6Su6utiNZicGLV30Bqd5c8kPCYM0M/s72-w442-h592-c/0_2%20-%202026-08-03T110626.702-gigapixel-high%20fidelity%20v3-1x.jpeg",
+      "publishedAt": "2026-08-03T04:24:03Z",
+      "sourceId": "095c6fbac5bbadfd",
+      "sourceTitle": "槽边往事",
+      "link": "https://www.hecaitou.com/2026/08/Photographic-Memories.html",
+      "detailPath": "articles/49317a811b6536edc5d5a77a.json"
+    },
+    {
+      "id": "41aff6e90dde6e2d3f9d1dc1",
+      "title": "有催人跑的意思 —— 使用 PPPoE 半桥帮助 UniFi 网关突破性能瓶颈",
+      "summary": "UniFi 网关设备（如 UDM Pro/SE/Pro Max）搭载的 CPU 性能出了名的孱弱、还缺乏 PPPoE 和 NAT 硬件加速的支持，在搭配 PPPoE 拨号的宽带时，UniFi 网关的性能更是捉襟见肘。那么，为什么不把 PPPoE 拨号的任务交给一个单独的设备来处理、让 UniFi 网关专注于路由、IDS/IPS 和 NAT 呢？",
+      "image": "https://img.skk.moe/blog/t2026/pppoe-half-bridge.png",
+      "publishedAt": "2026-08-03T03:10:00Z",
+      "sourceId": "5a840ced5a57e7ff",
+      "sourceTitle": "Sukka's Blog",
+      "link": "https://blog.skk.moe/post/pppoe-half-bridge/",
+      "detailPath": "articles/41aff6e90dde6e2d3f9d1dc1.json"
+    },
+    {
+      "id": "947a7d7182184272980ae406",
+      "title": "CrowdSec 取代 fail2ban：六天擋下 1619 次掃描,和我把自己封鎖的三次",
+      "summary": "這篇記錄了作者把伺服器防護從 fail2ban 換成 CrowdSec 的完整過程,並整理成一份可照做的教學。起因不是被入侵而是被吵:掃描器整天敲 /wp-login.php、/.env,把監控通知洗版。當時 fail2ban 已封過 614 個 IP,但作者發現對手一直在換 IP,封 IP 這條路贏不了——後來的數據也證實了這點,攻擊來源前七名幾乎全是 Azure、DigitalOcean、阿里雲這類雲端機房,開一台新 VM 比封一個 IP 便宜得多。文中給出這台機器六天內的真實數字:1619 次攻擊偵測、防火牆同時擋著 25.22k 個 IP,其中社群黑名單提供的數量是自己抓到的三千倍。架設踩到的三個坑是同一條因果鏈(apt 從 ESM 拿到上古版本 → 跨版本升級把 hub 搬家 → symlink 全…",
+      "image": null,
+      "publishedAt": "2026-08-03T01:47:12Z",
+      "sourceId": "bd51496b8ec0ca1d",
+      "sourceTitle": "Koimsurai 手記",
+      "link": "https://koimsurai.com/blog/crowdsec-replacing-fail2ban",
+      "detailPath": "articles/947a7d7182184272980ae406.json"
+    },
+    {
       "id": "ae7327d3189adb843a7ad20c",
       "title": "2026年的比特币有了新的逻辑？",
       "summary": "本文回顾比特币和黄金的基本属性，并从比特币的矿工关机币价、减半周期、美元流动性传导、Strategy风险等方面解构比特币的定价逻辑。作者认为是共识资产因新的叙事、共识、投机与交易创造的新的集体价值。",
@@ -43,17 +76,6 @@
       "sourceTitle": "So!azy",
       "link": "https://blog.solazy.me/20260802/",
       "detailPath": "articles/b541e62de4cd2d621ae4e05d.json"
-    },
-    {
-      "id": "42efb1207b1c80f3aab88cf1",
-      "title": "周末流水账 0801",
-      "summary": "久违的周末出行（其实也没过多久）",
-      "image": "https://bear-images.sfo2.cdn.digitaloceanspaces.com/sol/img_2223.webp",
-      "publishedAt": "2026-08-02T16:27:46Z",
-      "sourceId": "05ada84875558017",
-      "sourceTitle": "So!azy",
-      "link": "https://blog.solazy.me/20260801/",
-      "detailPath": "articles/42efb1207b1c80f3aab88cf1.json"
     },
     {
       "id": "fd02f3845aac05ea6efa6e8c",
@@ -637,28 +659,6 @@
       "sourceTitle": "All posts | 所有貼文 on ttheng's microblog. | 侃侃而隨想極短文。",
       "link": "https://microblog.ttheng.com/webp-is-not-that-bad-actually/",
       "detailPath": "articles/d1d2115a7d540bd039a5aecc.json"
-    },
-    {
-      "id": "3c122877c6e70a4a9e3d9d3e",
-      "title": "暢聊的前提",
-      "summary": "最近發現自己跟某些人能暢聊，跟某些人則容易尬聊，我觀察了自己的心理狀態與想法，發現了一件事： 能夠暢聊的前提，並不是兩個人多會聊天，也不是兩人興趣是否相投。 待在一個人旁邊，即使雙方都不說話，但雙方都不感到有要找話題的壓力、能夠接受長時間的沉默，這就是形成良好的聊天前提。 即使自己做好這樣的心理準備，但對方卻一直努力找話題的話，我也容易變成「要努力接住對方的話題」，這往往會讓互動變得生硬。 我可以接受你沒話題說，也可以接受你講了一句讓我很難接的話，但你要能接受我當面已讀不回，別怕 空氣突然安靜 。 角色互換也是一樣。 所以，現實中會見面的朋友們，大膽地到我身邊，什麼話都不用講沒關係，腦袋浮現出想分享的事情時，再不顧慮地說出口就好；至於網路上的朋友們，寫一封沒有實際意義的 E-mail 給我，我也不會覺得你怪。",
-      "image": null,
-      "publishedAt": "2026-07-31T07:39:39Z",
-      "sourceId": "199cdf92fc46bfcd",
-      "sourceTitle": "Eddie Lv",
-      "link": "https://eddielv.com/musings/chatting-freely/",
-      "detailPath": "articles/3c122877c6e70a4a9e3d9d3e.json"
-    },
-    {
-      "id": "adf4edaed5bdd8d645d33aa2",
-      "title": "女歌手的水",
-      "summary": "拿了寶特瓶，喝了一口： 「完了⋯這是台上那位漂亮女歌手的水，喝錯了⋯，咋辦咋辦咋辦？？？」 演出到一半，歌手走到舞臺側邊向我要水，她喝了一口之後放在舞台邊，也就是我的正前方。 事發當下，正在演最後一首歌，我站起身伸展身體，準備要做活動的收尾工作，順手抓了正前方的寶特瓶來喝。 「我要怎麼辦？」 「應該沒人看到吧？」 「先偷偷放回去好了（放）。」 「這不能怪我啊，寶特瓶的瓶子一樣，又放在我伸手拿得到的地方啊！」 腦中突然出現女歌手喝這瓶的畫面…。 「不行不行，這樣太沒道德了，我得 承認錯誤 ！」 「先藏起來，再決定怎麼辦！」於是我默默又把水從舞臺邊拿下來。 結束之後我問歌手還要喝水嗎？ 「好啊，我帶走！」 「我給妳新的，剛剛不小心喝錯了⋯。」於是我得到了先是驚恐，後是燦笑的回應。 雖然好像沒必要那麼誠實，但說出來…",
-      "image": null,
-      "publishedAt": "2026-07-31T07:22:30Z",
-      "sourceId": "199cdf92fc46bfcd",
-      "sourceTitle": "Eddie Lv",
-      "link": "https://eddielv.com/musings/water-female-singer/",
-      "detailPath": "articles/adf4edaed5bdd8d645d33aa2.json"
     }
   ]
 }
