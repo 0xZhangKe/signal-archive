@@ -1,6 +1,39 @@
 {
   "items": [
     {
+      "id": "d2fc29ad047bbca1d0218a5d",
+      "title": "sqlite-utils 4.2.1",
+      "summary": "Release: sqlite-utils 4.2.1 Fixes a crashing bug in sqlite-utils 4.2 . I'd introduced code that looks like this: from typing_extensions import Self It turned out the typing-extensions package was not listed as a dependency for sqlite-utils - it was installed by one of the other dependencies in the dev dependency group , but when you uvx sqlite-utils directl…",
+      "image": null,
+      "publishedAt": "2026-08-13T23:53:47Z",
+      "sourceId": "052434531db837d6",
+      "sourceTitle": "Simon Willison's Weblog",
+      "link": "https://simonwillison.net/2026/Aug/13/sqlite-utils-2/",
+      "detailPath": "articles/d2fc29ad047bbca1d0218a5d.json"
+    },
+    {
+      "id": "9e6471000f031605172e320c",
+      "title": "sqlite-utils 4.2",
+      "summary": "Release: sqlite-utils 4.2 Lots of improvements in this one relating to the table.transform() feature , which adds support for complex alter table operations by creating a fresh table, copying across the data and then dropping and replacing the old one. transform() now preserves a much larger array of edge-case schema definitions, including check constraints…",
+      "image": null,
+      "publishedAt": "2026-08-13T20:11:29Z",
+      "sourceId": "052434531db837d6",
+      "sourceTitle": "Simon Willison's Weblog",
+      "link": "https://simonwillison.net/2026/Aug/13/sqlite-utils/",
+      "detailPath": "articles/9e6471000f031605172e320c.json"
+    },
+    {
+      "id": "e347a7507fb10456003f535b",
+      "title": "alchemy-utils 0.1a1",
+      "summary": "Release: alchemy-utils 0.1a1 Performance boost for DuckDB exports and CSV imports, see here .",
+      "image": null,
+      "publishedAt": "2026-08-13T03:03:17Z",
+      "sourceId": "052434531db837d6",
+      "sourceTitle": "Simon Willison's Weblog",
+      "link": "https://simonwillison.net/2026/Aug/13/alchemy-utils/",
+      "detailPath": "articles/e347a7507fb10456003f535b.json"
+    },
+    {
       "id": "e9b2e27eeeaeb73f7eb9db43",
       "title": "DeepSeek V4 Pro 0813 (on OpenRouter)",
       "summary": "DeepSeek V4 Pro 0813 (on OpenRouter) The latest DeepSeek Pro model is now available, via API only. I had to link to OpenRouter because DeepSeek don't have any obvious announcement page for their new model. I haven't been able to confirm if they plan to release the open weights, but given the weights are available for both April's deepseek-ai/DeepSeek-V4-Pro…",
@@ -296,39 +329,6 @@
       "sourceTitle": "Simon Willison's Weblog",
       "link": "https://simonwillison.net/2026/Aug/4/new-release-of-llm/",
       "detailPath": "articles/bd2627419cbe96d51eb6a525.json"
-    },
-    {
-      "id": "e83a104c809b0521eeadd21d",
-      "title": "llm-anthropic 0.26",
-      "summary": "Release: llm-anthropic 0.26 Includes new features enabled by LLM 0.32 : New models: claude-fable-5 , claude-sonnet-5 , and claude-opus-5 . #75 , #76 Added server-side tools for WebSearch , WebFetch , CodeExecution , and AnthropicMCP , available through LLM's -T interface or Python tools= . The previous -o web_search* options have been removed in favor of -T…",
-      "image": null,
-      "publishedAt": "2026-08-04T22:00:58Z",
-      "sourceId": "052434531db837d6",
-      "sourceTitle": "Simon Willison's Weblog",
-      "link": "https://simonwillison.net/2026/Aug/4/llm-anthropic/",
-      "detailPath": "articles/e83a104c809b0521eeadd21d.json"
-    },
-    {
-      "id": "ac108c7be1c6c4ba5ec6e4b1",
-      "title": "PipeNetwork/minimax-h3-mlx",
-      "summary": "PipeNetwork/minimax-h3-mlx MiniMax released MiniMax-H3 two days ago - they describe it as a \"a general-purpose, omni-modal generative system\", which in practice means it accepts text, images, audio and video and can use them to generate up to 15 second video clips with audio included. This Python package ports it to MLX for running on Apple Silicon. I got i…",
-      "image": null,
-      "publishedAt": "2026-08-04T19:10:09Z",
-      "sourceId": "052434531db837d6",
-      "sourceTitle": "Simon Willison's Weblog",
-      "link": "https://simonwillison.net/2026/Aug/4/minimax-h3-mlx/",
-      "detailPath": "articles/ac108c7be1c6c4ba5ec6e4b1.json"
-    },
-    {
-      "id": "887fa7e680a8ae0c1133a491",
-      "title": "llm 0.32",
-      "summary": "Release: llm 0.32 See my detailed blog post about this release . Tags: llm",
-      "image": null,
-      "publishedAt": "2026-08-04T17:15:33Z",
-      "sourceId": "052434531db837d6",
-      "sourceTitle": "Simon Willison's Weblog",
-      "link": "https://simonwillison.net/2026/Aug/4/llm/",
-      "detailPath": "articles/887fa7e680a8ae0c1133a491.json"
     }
   ]
 }
