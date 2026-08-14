@@ -1,6 +1,28 @@
 {
   "items": [
     {
+      "id": "5679214d0e4fb6729e1bcfe6",
+      "title": "Worpress 突然登入不了怎麼辦？",
+      "summary": "前言 # 想著很久沒更新官網了，所以來把一些過往文章先複製上去，結果，居然無法登入，一直顯示錯誤！而 Eddie 很確定那組密碼沒問題（應該啦…），但是無奈 SMTP 還沒設定好，所以沒辦法按忘記密碼來重設定。 暴力生成新帳號密碼 # 用 SSH 連線到伺服器之後，在 Wordpress 的資料夾建立臨時檔案 resetpw.php nano /var/www/html/你的worpress資料夾/resetpw.php 內容是 <?php require_once('wp-load.php'); // 載入 WordPress 環境 // 設定帳號資料 $username = 'newadmin'; // 你的帳號 $password = 'StrongPass123'; // 新密碼 $email = '…",
+      "image": null,
+      "publishedAt": "2025-10-21T15:37:40Z",
+      "sourceId": "199cdf92fc46bfcd",
+      "sourceTitle": "Eddie Lv",
+      "link": "https://eddielv.com/articles/wordpress-cant-login/",
+      "detailPath": "articles/5679214d0e4fb6729e1bcfe6.json"
+    },
+    {
+      "id": "1bd9dd358334a3d117f4dac9",
+      "title": "放手寫就對了",
+      "summary": "https://robertbirming.com/write-whatever-whenever/ 隨便逛別人 blog 網站上的 webring 時，偶然讀到這篇文章，令我感到很有共鳴。 的確啊，就像我現在另外架設一個版面比較簡潔的網站，也是爲了讓自己比較能專注在文章內容本身，而不會因爲需要處理網站版面之類的技術問題，以及過於在意文章一定要有個最低限的長度，而搞到自己（和讀者）分心，進而忘記了自架 blog 網站的初衷：作爲自身想法的記錄。 Just write whatever whenever! 放手寫就對了！即使是廢文也沒有關係！即使沒人在乎，至少還可以娛樂到自己 lol。 感謝讀完這篇鼓勵大家即使是廢文也請儘管寫的廢文。",
+      "image": null,
+      "publishedAt": "2025-10-21T11:57:00Z",
+      "sourceId": "a93d4f2e98fafcbe",
+      "sourceTitle": "All posts | 所有貼文 on ttheng's microblog. | 侃侃而隨想極短文。",
+      "link": "https://microblog.ttheng.com/write-whatever-whenever/",
+      "detailPath": "articles/1bd9dd358334a3d117f4dac9.json"
+    },
+    {
       "id": "632c72018e24b9eaa203e876",
       "title": "讓電梯門夾吧",
       "summary": "看到 Noa 寫的這篇《電梯門恐懼症》，她說：",
@@ -637,28 +659,6 @@
       "sourceTitle": "Wiwi.Blog Blog",
       "link": "https://wiwi.blog/blog/leaf-blower",
       "detailPath": "articles/bb2463cc3ca3f059088264cd.json"
-    },
-    {
-      "id": "94aae6cf7f0770049372a17d",
-      "title": "丢失的表达欲",
-      "summary": "很久没有在 blog 里发「文章」了，借口当然很多，但最主要的还是少了表达欲，那种喷涌而出的感觉。每次打开 Obsidian，",
-      "image": "https://images.unsplash.com/photo-1526398977052-654221a252b1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMTc3M3wwfDF8c2VhcmNofDl8fHRhbGt8ZW58MHx8fHwxNzYwMTg5MTYwfDA&ixlib=rb-4.1.0&q=80&w=2000",
-      "publishedAt": "2025-10-12T01:32:09Z",
-      "sourceId": "78a6233ab9c3a513",
-      "sourceTitle": "Domon",
-      "link": "https://www.domon.cn/diu-shi-de-biao-da-yu/",
-      "detailPath": "articles/94aae6cf7f0770049372a17d.json"
-    },
-    {
-      "id": "089d0c8219db370872f5f461",
-      "title": "How I made the homepage here a feed of all posts in full text",
-      "summary": "After installing the hugo-bearblog theme, I overwrote the index.html file in the theme layout by creating a new index.html file in the layouts folder of my main Hugo site directory that contains the following code, which is adapted from single.html from the layouts/_default folder from the original theme repository. {{ define \"main\" }} {{ $posts := where .S…",
-      "image": null,
-      "publishedAt": "2025-10-12T00:00:00Z",
-      "sourceId": "a93d4f2e98fafcbe",
-      "sourceTitle": "All posts | 所有貼文 on ttheng's microblog. | 侃侃而隨想極短文。",
-      "link": "https://microblog.ttheng.com/full-text-feed/",
-      "detailPath": "articles/089d0c8219db370872f5f461.json"
     }
   ]
 }
