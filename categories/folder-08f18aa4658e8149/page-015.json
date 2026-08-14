@@ -1,6 +1,39 @@
 {
   "items": [
     {
+      "id": "63f832a8c5a20f3cd394c8ac",
+      "title": "睡了 20 小時",
+      "summary": "前言 # 6/10 下午兩點睡著，再睜開眼已經是隔天早上十點。 我整整睡了二十個小時。 終於能喘口氣，趁著早上空檔打文章，下午又要一路忙到晚上了。 莫名其妙就過了一週，每天幾乎睡 5 小時以內，用流水帳記錄一下這週 6/5 社團、進場、個人課 # 早上到楊梅高中帶吉他社社團，中午到公園盯園遊會的進場，晚上回到工作室教吉他課。 雖然進場，只是跟客戶以及帳篷、發電機等等廠商溝通、定位，之後就在一旁看著，確認都有正確施工即可，但是狂風暴雨後，又變成大太陽，光是站在外面就已經很耗費體力了。 6/6 園遊會 # 早上六點在公園，開始架設音響，表演的組數非常多，但對我來說腦袋是很輕鬆的，沒有燒腦的部分，完全是因爲在室外，下雨、大太陽、一直翻舞臺的關係，才讓體力耗費很快。 晚上還算有精神，研究了一下 表演者帶來的設備 。…",
+      "image": null,
+      "publishedAt": "2026-06-11T02:58:14Z",
+      "sourceId": "199cdf92fc46bfcd",
+      "sourceTitle": "Eddie Lv",
+      "link": "https://eddielv.com/musings/sleep-20hours/",
+      "detailPath": "articles/63f832a8c5a20f3cd394c8ac.json"
+    },
+    {
+      "id": "cf9252ac4c9ef3d919f9a96d",
+      "title": "不想拿東西",
+      "summary": "我很不喜歡拿著或戴著東西。不覺得身上多一樣東西就多一個煩惱嗎？",
+      "image": null,
+      "publishedAt": "2026-06-11T00:00:00Z",
+      "sourceId": "7f36c3da1e6b5c71",
+      "sourceTitle": "Wiwi.Blog Blog",
+      "link": "https://wiwi.blog/blog/hands-free",
+      "detailPath": "articles/cf9252ac4c9ef3d919f9a96d.json"
+    },
+    {
+      "id": "82f16f45c4ccae02d27ff313",
+      "title": "基于 git 的零拷贝静态web服务器",
+      "summary": "无聊，产生了个crazy的想法。 git 内部用 zlib 压缩文件内容 Content-Encoding: gzip 也是 如果web服务器输出 .git 里的 静态 内容，是不是可以减一个二次解压/压缩步骤？？？ blob sha1 直接当etag？ 跟AI较量了几轮，一开始它说做不到。因为 blob 的格式比较变态。因为 hello world... 在 .git/objects/ab/cdef... 里的东西是这么存的 zlib(blob 1234\\0hello world...) I was like ？？？日他妈真变态啊。这前面是写死了 blob <size>\\0 然后把文件内容放在一起，再压缩的。 .git 这设计脑子有病啊。。。为啥不是原始文件gz而是加个头去gz。。。 此路不通！结束 然后A…",
+      "image": null,
+      "publishedAt": "2026-06-10T15:21:00Z",
+      "sourceId": "a864c53722a17b19",
+      "sourceTitle": "est's blog",
+      "link": "https://blog.est.im/2026/stdout-22",
+      "detailPath": "articles/82f16f45c4ccae02d27ff313.json"
+    },
+    {
       "id": "f666d20066d26fb114f48d83",
       "title": "Percentage is multiplicative",
       "summary": "‘Hey, look! It’s SASALELE!’ When a discount of 50% is applied on an item, and then you get another 50% discount on top of that, you don’t get the item for free! Instead, you still have to pay a quarter (1/4, or 25%) of the original price, or with a 75% discount 1 . Now that’s more like it! (huh?) (ignore the ‘up to’ for a moment here) ( image source ) Thank…",
@@ -626,39 +659,6 @@
       "sourceTitle": "新世界的大门",
       "link": "https://blog.xinshijiededa.men/daily/39/",
       "detailPath": "articles/bac23adc8054c268cf324665.json"
-    },
-    {
-      "id": "4460b09d6b27603bee3271f2",
-      "title": "入蜀记 day376 吊锅",
-      "summary": "「吊锅。」",
-      "image": null,
-      "publishedAt": "2026-06-04T04:48:27Z",
-      "sourceId": "8e5dc5a8b5023a8e",
-      "sourceTitle": "折腾人生",
-      "link": "https://z.arlmy.me/posts/BBBPandINSW/INSW-jet/INSW_376/",
-      "detailPath": "articles/4460b09d6b27603bee3271f2.json"
-    },
-    {
-      "id": "7fab83a07fc78658d828e329",
-      "title": "SmartPerfetto 2026.05.17-06.04 三周更新：Smart 模式、证据规则和四条 Runtime",
-      "summary": "5 月 17 日写上一篇 SmartPerfetto 更新时，重点已经从“Perfetto UI 里的 AI Assistant”转向“可复用的 Trace 分析平台”。到 6 月 4 日，新增内容主要集中在五块：Smart 模式、选区快问、CLI 采集、Power / ANR / Input / IO / Network 证据规则，以及四条 Agent runtime。 本文基于 2026 年 6 月 4 日的 SmartPerfetto 主分支状态，公开发布版本是 v1.0.28 。读者看完应该能知道三件事：5 月 17 日之后新增了什么、现在的运行时和证据来源怎么处理、反馈问题时该给哪些信息。 项目地址： SmartPerfetto 主仓库： https://github.com/Gracker/Sma…",
-      "image": null,
-      "publishedAt": "2026-06-04T04:00:00Z",
-      "sourceId": "1aa1837ca33d8d55",
-      "sourceTitle": "Android Performance",
-      "link": "https://androidperformance.com/2026/06/04/SmartPerfetto-Three-Week-Update/",
-      "detailPath": "articles/7fab83a07fc78658d828e329.json"
-    },
-    {
-      "id": "f43df52bf5f5ad15322c754a",
-      "title": "道德使我痛苦",
-      "summary": "我想像鸟儿一样振翅高飞，跨越界限，飞到那个至今依然金光的年代",
-      "image": null,
-      "publishedAt": "2026-06-04T00:21:39Z",
-      "sourceId": "b4584dd13588932a",
-      "sourceTitle": "太隐",
-      "link": "https://wangyurui.com/posts/dao-de-shi-wo-tong-ku-928d6e2e",
-      "detailPath": "articles/f43df52bf5f5ad15322c754a.json"
     }
   ]
 }
