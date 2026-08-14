@@ -1,9 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-08-12T23:59:23+00:00</updated><author><name>Simon Willison</name></author><entry><title>DeepSeek V4 Pro 0813 (on OpenRouter)</title><link href="https://simonwillison.net/2026/Aug/12/deepseek-v4-pro-0813/" rel="alternate"/><published>2026-08-12T23:59:23+00:00</published><updated>2026-08-12T23:59:23+00:00</updated><id>https://simonwillison.net/2026/Aug/12/deepseek-v4-pro-0813/</id><summary type="html">
+<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-08-13T23:53:47+00:00</updated><author><name>Simon Willison</name></author><entry><title>sqlite-utils 4.2.1</title><link href="https://simonwillison.net/2026/Aug/13/sqlite-utils-2/" rel="alternate"/><published>2026-08-13T23:53:47+00:00</published><updated>2026-08-13T23:53:47+00:00</updated><id>https://simonwillison.net/2026/Aug/13/sqlite-utils-2/</id><summary type="html">
+    
+        &lt;p&gt;&lt;strong&gt;Release:&lt;/strong&gt; &lt;a href="https://github.com/simonw/sqlite-utils/releases/tag/4.2.1"&gt;sqlite-utils 4.2.1&lt;/a&gt;&lt;/p&gt;
+        &lt;p&gt;Fixes a crashing bug in &lt;a href="https://simonwillison.net/2026/Aug/13/sqlite-utils/"&gt;sqlite-utils 4.2&lt;/a&gt;. I'd introduced code that looks like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;from typing_extensions import Self
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;It turned out the &lt;a href="https://pypi.org/project/typing-extensions/"&gt;typing-extensions&lt;/a&gt; package was not listed as a dependency for &lt;code&gt;sqlite-utils&lt;/code&gt; - it was installed by one of the other dependencies in the &lt;a href="https://github.com/simonw/sqlite-utils/blob/56dd09702fdb9e899f577ffd51693c1f2176cb08/pyproject.toml#L34-L55"&gt;dev dependency group&lt;/a&gt;, but when you &lt;code&gt;uvx sqlite-utils&lt;/code&gt; directly you don't get those dependencies.&lt;/p&gt;
+&lt;p&gt;As part of fixing this I figured out how to run a smoke test to ensure the CLI tool still works even without those dev dependencies, which can be run from the project checkout:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;uv run --isolated --no-default-groups sqlite-utils --help
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The &lt;code&gt;--no-default-groups&lt;/code&gt; argument prevents it from installing that default &lt;code&gt;dev&lt;/code&gt; group, and &lt;code&gt;--isolated&lt;/code&gt; means that even if there is a &lt;code&gt;.venv/&lt;/code&gt; folder containing extra dependencies they will be ignored for the duration of that &lt;code&gt;uv run&lt;/code&gt; command.&lt;/p&gt;
+    
+    
+        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/packaging"&gt;packaging&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/python"&gt;python&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/sqlite-utils"&gt;sqlite-utils&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/uv"&gt;uv&lt;/a&gt;&lt;/p&gt;
+    
+
+</summary><category term="packaging"/><category term="python"/><category term="sqlite-utils"/><category term="uv"/></entry><entry><title>sqlite-utils 4.2</title><link href="https://simonwillison.net/2026/Aug/13/sqlite-utils/" rel="alternate"/><published>2026-08-13T20:11:29+00:00</published><updated>2026-08-13T20:11:29+00:00</updated><id>https://simonwillison.net/2026/Aug/13/sqlite-utils/</id><summary type="html">
+    
+        &lt;p&gt;&lt;strong&gt;Release:&lt;/strong&gt; &lt;a href="https://github.com/simonw/sqlite-utils/releases/tag/4.2"&gt;sqlite-utils 4.2&lt;/a&gt;&lt;/p&gt;
+        &lt;p&gt;Lots of improvements in this one relating to the &lt;a href="https://sqlite-utils.datasette.io/en/stable/python-api.html#transforming-a-table"&gt;table.transform() feature&lt;/a&gt;, which adds support for complex alter table operations by creating a fresh table, copying across the data and then dropping and replacing the old one.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;transform()&lt;/code&gt; now preserves a much larger array of edge-case schema definitions, including check constraints, unique constraints and even comments describing the columns.&lt;/p&gt;
+&lt;p&gt;There are also &lt;a href="https://sqlite-utils.datasette.io/en/stable/python-api.html#checks"&gt;new introspection properties&lt;/a&gt; for check constraints, and a whole lot of other smaller changes.&lt;/p&gt;
+&lt;p&gt;Includes contributions from &lt;a href="https://github.com/bunlongheng"&gt;Bunlong Heng&lt;/a&gt;, &lt;a href="https://github.com/ethanhawkes-gif"&gt;ethanhawkes-gif&lt;/a&gt;, &lt;a href="https://github.com/RamiNoodle733"&gt;Rami Abdelrazzaq&lt;/a&gt;, &lt;a href="https://github.com/nyxst4ck"&gt;nyxst4ck&lt;/a&gt;, and &lt;a href="https://github.com/ikatyal2110"&gt;ikatyal2110&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;(It later turned out 4.2 had &lt;a href="https://github.com/simonw/sqlite-utils/issues/842"&gt;a crashing bug&lt;/a&gt;, fixed in &lt;a href="https://sqlite-utils.datasette.io/en/stable/changelog.html#v4-2-1"&gt;4.2.1&lt;/a&gt;.)&lt;/p&gt;
+    
+    
+        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/releases"&gt;releases&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/sqlite"&gt;sqlite&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/sqlite-utils"&gt;sqlite-utils&lt;/a&gt;&lt;/p&gt;
+    
+
+</summary><category term="releases"/><category term="sqlite"/><category term="sqlite-utils"/></entry><entry><title>alchemy-utils 0.1a1</title><link href="https://simonwillison.net/2026/Aug/13/alchemy-utils/" rel="alternate"/><published>2026-08-13T03:03:17+00:00</published><updated>2026-08-13T03:03:17+00:00</updated><id>https://simonwillison.net/2026/Aug/13/alchemy-utils/</id><summary type="html">
+    
+        &lt;p&gt;&lt;strong&gt;Release:&lt;/strong&gt; &lt;a href="https://github.com/simonw/alchemy-utils/releases/tag/0.1a1"&gt;alchemy-utils 0.1a1&lt;/a&gt;&lt;/p&gt;
+        &lt;p&gt;Performance boost for DuckDB exports and CSV imports, &lt;a href="https://simonwillison.net/2026/Aug/12/alchemy-utils/"&gt;see here&lt;/a&gt;.&lt;/p&gt;
+    
+    
+
+</summary></entry><entry><title>DeepSeek V4 Pro 0813 (on OpenRouter)</title><link href="https://simonwillison.net/2026/Aug/12/deepseek-v4-pro-0813/" rel="alternate"/><published>2026-08-12T23:59:23+00:00</published><updated>2026-08-12T23:59:23+00:00</updated><id>https://simonwillison.net/2026/Aug/12/deepseek-v4-pro-0813/</id><summary type="html">
     
 &lt;p&gt;&lt;strong&gt;&lt;a href="https://openrouter.ai/deepseek/deepseek-v4-pro-0813"&gt;DeepSeek V4 Pro 0813 (on OpenRouter)&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 The latest DeepSeek Pro model is now available, via API only. I had to link to OpenRouter because DeepSeek don't have any obvious announcement page for their new model.&lt;/p&gt;
-&lt;p&gt;I haven't been able to confirm if they plan to release the open weights, but given the weights are available for both April's &lt;a href="https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro"&gt;deepseek-ai/DeepSeek-V4-Pro&lt;/a&gt; and July's &lt;a href="https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash-0731"&gt;deepseek-ai/DeepSeek-V4-Flash-0731&lt;/a&gt; it seems likely.&lt;/p&gt;
+&lt;p&gt;I haven't been able to confirm if they plan to release the open weights, but given the weights are available for both April's &lt;a href="https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro"&gt;deepseek-ai/DeepSeek-V4-Pro&lt;/a&gt; and July's &lt;a href="https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash-0731"&gt;deepseek-ai/DeepSeek-V4-Flash-0731&lt;/a&gt; it seems likely. &lt;strong&gt;Update&lt;/strong&gt;: the weights &lt;a href="https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro-0813"&gt;are now available&lt;/a&gt; on Hugging Face, 1.7T parameters, 893 GB.&lt;/p&gt;
 &lt;p&gt;Interestingly I got &lt;a href="https://tools.simonwillison.net/markdown-svg-renderer#url=https%3A%2F%2Fgist.github.com%2Fsimonw%2Fc1108a380593547c2def5863bca63160"&gt;&lt;em&gt;very&lt;/em&gt; different looking pelicans&lt;/a&gt; for the three different reasoning levels of low, medium, and high. I've not noticed this kind of difference from any other model:&lt;/p&gt;
 &lt;p&gt;Low:&lt;/p&gt;
 &lt;p&gt;&lt;img alt="Flat vector illustration of a white pelican with a large orange beak, wearing a straw hat with an orange band, riding a teal road bicycle in profile, set against a pale cream circle with a dashed outline and small motion marks trailing behind." src="https://static.simonwillison.net/static/2026/deepseek-pro-low.png" /&gt;&lt;/p&gt;
@@ -824,74 +860,4 @@ llm chat-completions-server --port 9000
         &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/projects"&gt;projects&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/releases"&gt;releases&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/openai"&gt;openai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llm"&gt;llm&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/anthropic"&gt;anthropic&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llm-tool-use"&gt;llm-tool-use&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llm-reasoning"&gt;llm-reasoning&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/model-context-protocol"&gt;model-context-protocol&lt;/a&gt;&lt;/p&gt;
     
 
-</summary><category term="projects"/><category term="releases"/><category term="ai"/><category term="openai"/><category term="generative-ai"/><category term="llms"/><category term="llm"/><category term="anthropic"/><category term="llm-tool-use"/><category term="llm-reasoning"/><category term="model-context-protocol"/></entry><entry><title>llm-anthropic 0.26</title><link href="https://simonwillison.net/2026/Aug/4/llm-anthropic/" rel="alternate"/><published>2026-08-04T22:00:58+00:00</published><updated>2026-08-04T22:00:58+00:00</updated><id>https://simonwillison.net/2026/Aug/4/llm-anthropic/</id><summary type="html">
-    
-        &lt;p&gt;&lt;strong&gt;Release:&lt;/strong&gt; &lt;a href="https://github.com/simonw/llm-anthropic/releases/tag/0.26"&gt;llm-anthropic 0.26&lt;/a&gt;&lt;/p&gt;
-        &lt;p&gt;Includes new features enabled by &lt;a href="https://simonwillison.net/2026/Aug/4/new-release-of-llm/"&gt;LLM 0.32&lt;/a&gt;:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;New models: &lt;code&gt;claude-fable-5&lt;/code&gt;, &lt;code&gt;claude-sonnet-5&lt;/code&gt;, and &lt;code&gt;claude-opus-5&lt;/code&gt;. &lt;a href="https://github.com/simonw/llm-anthropic/issues/75"&gt;#75&lt;/a&gt;, &lt;a href="https://github.com/simonw/llm-anthropic/issues/76"&gt;#76&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Added server-side tools for &lt;code&gt;WebSearch&lt;/code&gt;, &lt;code&gt;WebFetch&lt;/code&gt;, &lt;code&gt;CodeExecution&lt;/code&gt;, and &lt;code&gt;AnthropicMCP&lt;/code&gt;, available through LLM's &lt;code&gt;-T&lt;/code&gt; interface or Python &lt;code&gt;tools=&lt;/code&gt;. The previous &lt;code&gt;-o web_search*&lt;/code&gt; options have been removed in favor of &lt;code&gt;-T WebSearch&lt;/code&gt;. &lt;a href="https://github.com/simonw/llm-anthropic/issues/79"&gt;#79&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Upgraded to &lt;a href="https://llm.datasette.io/en/stable/changelog.html#v0-32"&gt;llm&amp;gt;=0.32&lt;/a&gt;. Reasoning, tool calls, tool results, and server-side tool results now stream as typed events. Reasoning for &lt;code&gt;llm&lt;/code&gt; CLI prompts now displays to standard error unless you pass &lt;code&gt;--hide-reasoning/-R&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;Simplified extended thinking to &lt;code&gt;thinking&lt;/code&gt; and &lt;code&gt;thinking_effort&lt;/code&gt; (&lt;code&gt;low&lt;/code&gt;, &lt;code&gt;medium&lt;/code&gt;, &lt;code&gt;high&lt;/code&gt;, &lt;code&gt;xhigh&lt;/code&gt;, or &lt;code&gt;max&lt;/code&gt;). Claude 5 models think by default; &lt;code&gt;-o thinking 0&lt;/code&gt; disables thinking for Sonnet 5 and Opus 5, while Fable 5 always thinks. &lt;code&gt;-R/--hide-reasoning&lt;/code&gt; now omits reasoning from responses and logs. The &lt;code&gt;thinking_budget&lt;/code&gt;, &lt;code&gt;thinking_display&lt;/code&gt;, and &lt;code&gt;thinking_adaptive&lt;/code&gt; options have been removed. &lt;a href="https://github.com/simonw/llm-anthropic/issues/80"&gt;#80&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-    
-    
-        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/llm"&gt;llm&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/anthropic"&gt;anthropic&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/claude"&gt;claude&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/model-context-protocol"&gt;model-context-protocol&lt;/a&gt;&lt;/p&gt;
-    
-
-</summary><category term="llm"/><category term="anthropic"/><category term="claude"/><category term="model-context-protocol"/></entry><entry><title>PipeNetwork/minimax-h3-mlx</title><link href="https://simonwillison.net/2026/Aug/4/minimax-h3-mlx/" rel="alternate"/><published>2026-08-04T19:10:09+00:00</published><updated>2026-08-04T19:10:09+00:00</updated><id>https://simonwillison.net/2026/Aug/4/minimax-h3-mlx/</id><summary type="html">
-    
-&lt;p&gt;&lt;strong&gt;&lt;a href="https://github.com/PipeNetwork/minimax-h3-mlx"&gt;PipeNetwork/minimax-h3-mlx&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
-MiniMax released &lt;a href="https://huggingface.co/MiniMaxAI/MiniMax-H3"&gt;MiniMax-H3&lt;/a&gt; two days ago - they describe it as a "a general-purpose, omni-modal generative system", which in practice means it accepts text, images, audio and video and can use them to generate up to 15 second video clips with audio included.&lt;/p&gt;
-&lt;p&gt;This Python package ports it to MLX for running on Apple Silicon.&lt;/p&gt;
-&lt;p&gt;I got it running on my M5 Max MacBook Pro. I cloned the repo and ran the model like this:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;# First download the models
-uvx --from huggingface_hub hf download MiniMaxAI/MiniMax-H3 \
-  --include 'FL2VA/*' --exclude 'FL2VA/transformer/*'
-uvx --from huggingface_hub hf download pipenetwork/MiniMax-H3-MLX-8bit
-
-# Now run the prompt
-uv run --with mlx-vlm \
-  --with-requirements requirements.txt python scripts/generate.py \
-  "a rainbow colored skunk leaps over a mossy log in a supermarket" \
-  -o skunk.mp4 \
-  -c ~/.cache/huggingface/hub/models--MiniMaxAI--MiniMax-H3/snapshots/fa9c8ab1eaa21c8ae25e7e40b83b2e6002f340af/FL2VA \
-  -t ~/.cache/huggingface/hub/models--pipenetwork--MiniMax-H3-MLX-8bit/snapshots/3ac52081470b0488921c3ec3ba84a39097bf2361
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Here's the video I got for the prompt:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;code&gt;a rainbow colored skunk leaps over a mossy log in a supermarket&lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;video
-    controls loop
-    preload="none"
-    poster="https://static.simonwillison.net/static/2026/skunk.jpg"
-    width="1344"
-    height="768"
-    style="display: block; width: 100%; height: auto;"
-  &gt;
-    &lt;source src="https://static.simonwillison.net/static/2026/skunk.web.mp4" type="video/mp4"&gt;
-    Your browser does not support HTML5 video.
-  &lt;/video&gt;
-&lt;/p&gt;
-
-&lt;p&gt;It downloaded ~115 GB of model files, and the video generation took just under 45 minutes.&lt;/p&gt;
-&lt;p&gt;The video is impressive, but the audio is weird speech-like garbage, because I didn't provide any prompt guidance as to what the audio should be. The &lt;a href="https://huggingface.co/MiniMaxAI/MiniMax-H3/blob/main/docs/VIDEO_PROMPT_WRITING_GUIDE_base_en.md"&gt;prompting guide&lt;/a&gt; (which I didn't read prior to this experiment) has a whole bunch of information on how to get this to work.
-
-
-    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/mlx"&gt;mlx&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/text-to-video"&gt;text-to-video&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/minimax"&gt;minimax&lt;/a&gt;&lt;/p&gt;
-
-
-
-</summary><category term="ai"/><category term="generative-ai"/><category term="mlx"/><category term="text-to-video"/><category term="minimax"/></entry><entry><title>llm 0.32</title><link href="https://simonwillison.net/2026/Aug/4/llm/" rel="alternate"/><published>2026-08-04T17:15:33+00:00</published><updated>2026-08-04T17:15:33+00:00</updated><id>https://simonwillison.net/2026/Aug/4/llm/</id><summary type="html">
-    
-        &lt;p&gt;&lt;strong&gt;Release:&lt;/strong&gt; &lt;a href="https://github.com/simonw/llm/releases/tag/0.32"&gt;llm 0.32&lt;/a&gt;&lt;/p&gt;
-        &lt;p&gt;See &lt;a href="https://simonwillison.net/2026/Aug/4/new-release-of-llm/"&gt;my detailed blog post about this release&lt;/a&gt;.&lt;/p&gt;
-    
-    
-        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/llm"&gt;llm&lt;/a&gt;&lt;/p&gt;
-    
-
-</summary><category term="llm"/></entry></feed>
+</summary><category term="projects"/><category term="releases"/><category term="ai"/><category term="openai"/><category term="generative-ai"/><category term="llms"/><category term="llm"/><category term="anthropic"/><category term="llm-tool-use"/><category term="llm-reasoning"/><category term="model-context-protocol"/></entry></feed>
