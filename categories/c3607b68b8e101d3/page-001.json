@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "9b89504edc7a8bc597118aee",
+      "title": "Debian系统在Btrfs文件系统下使用Swapfile配置休眠功能",
+      "summary": "在 上一节的安装 中，我们在Btrfs文件系统下创建了一个swap子卷，并配置了一个swapfile，当swapfile大于电脑物理内存时，可以配置休眠(Hibernate)。休眠是一个可以让电脑把内存写入硬盘（swap分区），电脑断电再重启时可以立即恢复到关机前的状态的功能，话不多说，我们现在开始启用 0.（视情况选做）清除设备上已有swap文件 如果你在之前的安装中已经创建了一个小于你电脑内存大小的swap文件，先关闭swap分区： sudo swapoff -a 之后再把swap文件删除 rm -rf /swap/swapfile 1.创建swap文件 使用下面的命令快速创建swap文件： sudo btrfs filesystem mkswapfile --size 16G /swap/swapfil…",
+      "image": null,
+      "publishedAt": "2026-08-15T06:13:41Z",
+      "sourceId": "c3607b68b8e101d3",
+      "sourceTitle": "Xinsl's Blog",
+      "link": "https://blog.xinsl.xin/posts/debian-swapfile-hibernate/",
+      "detailPath": "articles/9b89504edc7a8bc597118aee.json"
+    },
+    {
       "id": "2709eba119b2975a4d4557bc",
       "title": "Xinsl's Blog已新增“博客卷”板块",
       "summary": "最开始我是想着加个“友链”，不过我又想私自放一些推荐的博客，用友链这个词明显不太好。前几个月我在 BlogBlog同乐会 了解到了 Blogroll 一词，这很符合我的想法。但由于繁中和简中对于 Blog 本身的翻译就不同，繁中译作 部落格 ，而简中译作 博客 ，所以繁中对 Blogroll 的翻译 部落滚 并不适合用在简中的网站里，况且简中网站里还没有人用过Blogroll，我没找到Blogroll对应的简中翻译，因此这问题困扰了我几个月。 昨天一位台湾读者 XJD 给我发了封电子邮件，表示我的博文写得很好，想要与我交换Blogroll，这才让我想到是时候该加个Blogroll了。在给XJD回复后我突然想到，为什么不直接把 部落卷 的 部落 二字改成 博客 呢？这样子读起来就通顺多了。嗯，于是我就新增了 博…",
