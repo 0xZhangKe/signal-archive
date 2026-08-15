@@ -1,6 +1,28 @@
 {
   "items": [
     {
+      "id": "b386c59fb6acacd5ac105a41",
+      "title": "跨時空價值",
+      "summary": "\"Art produces ugly things which frequently become more beautiful with time. Fashion, on the other hand, produces beautiful things which always become ugly with time.\"",
+      "image": null,
+      "publishedAt": "2026-07-29T00:00:00Z",
+      "sourceId": "7f36c3da1e6b5c71",
+      "sourceTitle": "Wiwi.Blog Blog",
+      "link": "https://wiwi.blog/blog/timeless-value",
+      "detailPath": "articles/b386c59fb6acacd5ac105a41.json"
+    },
+    {
+      "id": "254920d3cdfc0ab801e92948",
+      "title": "Linux 伺服器被植入挖礦程式：從 load average 10.65 揪出整條攻擊鏈",
+      "summary": "這篇記錄了作者在一次例行效能健檢中,意外撞見自己家用伺服器被植入挖礦程式的完整抓賊過程,並整理成一份人人可照做的可疑進程自檢清單。起點是一個不該出現的數字:一台 16 執行緒的機器 load average 卻卡在 10.65。作者用 top 與 docker stats 揪出一個吃滿 10 核、隨機大小寫檔名的可疑程序,再靠 Linux 的 /proc 三件套(exe 指向已刪除的 /tmp 檔、cmdline、environ 溯源到某個 Docker 容器)確認它是挖礦程式,並把攻擊鏈拉出來:一個 port 直接綁在 0.0.0.0、繞過 nginx 對外裸露的 Next.js 容器,被 CVE-2025-66478(Next.js 16.0.6 的滿分 RCE、綽號 React2Shell)打穿。文中含…",
+      "image": null,
+      "publishedAt": "2026-07-28T16:55:03Z",
+      "sourceId": "bd51496b8ec0ca1d",
+      "sourceTitle": "Koimsurai 手記",
+      "link": "https://koimsurai.com/blog/catching-a-cryptominer",
+      "detailPath": "articles/254920d3cdfc0ab801e92948.json"
+    },
+    {
       "id": "f84f12d746de14e64e8e4935",
       "title": "前往台北比賽",
       "summary": "幾個月前我參加了 技能競賽分區賽 ，非常幸運有拿到前五，雖然說我自己已經很滿足了，但當然前五就會被丟到全國賽。 接下來三天要比全國技能競賽，今天提前一天來參加開幕。老實說今天的行程沒說到特別好，而且這也是我少數幾次來台北。 寫這段的時候今天已經過完了，我是在床上寫下的。比賽的會場其實不差，在南港展覽館，只是時間上的安排沒有說到很優。我們一早去等了超級久，因為手冊上是寫十一點半要開始什麼簡報，但是實際上是下午兩點，這是我去問之後才得知的。 另一點就是他們的午餐沒有到很合我胃口，因為我自己滿重視官方給的菜色等等，這個真的讓我有點失望。 我自己是有吃完，但是在廚餘桶可以看到有一堆人丟掉的 完整 便當，真的很好笑。 下午就是簡單看個比賽系統，也沒什麼特別的。之後就是開幕，我自己是沒有特別留在那邊看，我出去走走，反正就…",
@@ -637,28 +659,6 @@
       "sourceTitle": "槽边往事",
       "link": "https://www.hecaitou.com/2026/07/A-Reply-to-Stoic.html",
       "detailPath": "articles/bc95af96f8154e7be1250477.json"
-    },
-    {
-      "id": "1b73302f1e413c954ef93e26",
-      "title": "Devil's Lake 半日遊",
-      "summary": "白雲像奶油一樣抹平了湖對岸的山凹處，十分可愛",
-      "image": "https://alicehsu.blog/images/Post/59/5.jpg",
-      "publishedAt": "2026-07-24T03:00:00Z",
-      "sourceId": "a08fec079b5bc196",
-      "sourceTitle": "Alice Hsu's Blog",
-      "link": "https://alicehsu.blog/zh-tw/posts/2026/07/devils-lake-half-day-trip/",
-      "detailPath": "articles/1b73302f1e413c954ef93e26.json"
-    },
-    {
-      "id": "af719e9a878bb22e010d72e0",
-      "title": "3D 星空背景效能長征：OffscreenCanvas Worker → WebGPU/TSL 重寫",
-      "summary": "這篇記錄了作者為個人網站 koimsurai.com 那片 3D 星空背景走過的三階段效能長征。背景最初只是一堆各自為政的 three.js 裝飾特效——黑洞、粒子、星空、土星——東西還少時並不重,是愈疊愈多、真正拿去量之後才逐步走上優化:先把星空搬進 OffscreenCanvas Worker 讓渲染離開主執行緒(桌面 TBT 從 17 秒壓到 30 毫秒),再被朋友一台會白屏的機器逼著補上背景的穩健性,最後用瀏覽器最新的 WebGPU/TSL 把整套從頭重寫成單一 canvas——GPU 從 85–90% 砍到 25%、星星翻到 26,000 顆全在 shader 裡呼吸。文中一併科普 WebGPU 到底是什麼,並記下一個反覆翻案的判斷:「效能優化」和「品質升級」是兩本不同的帳,換掉目標函數,結論就翻。",
-      "image": null,
-      "publishedAt": "2026-07-24T02:49:17Z",
-      "sourceId": "bd51496b8ec0ca1d",
-      "sourceTitle": "Koimsurai 手記",
-      "link": "https://koimsurai.com/blog/the-3d-starfield-performance-march",
-      "detailPath": "articles/af719e9a878bb22e010d72e0.json"
     }
   ]
 }

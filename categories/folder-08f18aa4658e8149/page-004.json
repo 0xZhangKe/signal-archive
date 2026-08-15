@@ -1,6 +1,28 @@
 {
   "items": [
     {
+      "id": "c7d9a63d6131e0fda0c36b78",
+      "title": "為什麼我開始使用 Zed 編輯器：從 VS Code 搬家,23 個擴充最後剩 8 個",
+      "summary": "Zed 團隊的上一個作品是 Atom,而 Atom 催生的 Electron 後來成了 VS Code 的地基。這篇記錄作者從 VS Code Remote-SSH 搬到 Zed 的完整過程:本機端 4,067 MB 對 204 MB、伺服器端 7.9 GB 對 107 MB,23 個擴充搬完只剩 8 個。內容涵蓋官方的設定匯入路徑與鍵位差異、有 GUI 的設定視窗與專案層級設定的限制、遠端開發的實測,以及 ACP 怎麼把 AI agent 從編輯器裡拆出來。文末誠實列出 Zed 目前還缺的功能,以及為什麼作者認為那份清單的保鮮期很短。",
+      "image": null,
+      "publishedAt": "2026-08-04T09:37:31Z",
+      "sourceId": "bd51496b8ec0ca1d",
+      "sourceTitle": "Koimsurai 手記",
+      "link": "https://koimsurai.com/blog/why-i-switched-to-zed",
+      "detailPath": "articles/c7d9a63d6131e0fda0c36b78.json"
+    },
+    {
+      "id": "dfd057d97b089ea3ea4727b8",
+      "title": "VS Code Remote-SSH 把我的伺服器燒到 96°C：rust-analyzer 無限重跑 cargo check",
+      "summary": "一台跑著三十幾個容器、同時被 VS Code Remote-SSH 連進去開發的家用伺服器,溫度釘在 90°C 撐了四十分鐘、load 從 8 衝到 196,最後失去回應。而把它燒掉的不是那些服務,是編輯器。這篇記錄整個追查過程:三條看起來很有說服力但都是錯的線索(SMU 當掉後感測器說謊、重開機就好、CPU 只有 30 到 50%),怎麼用 sysstat 的 sar 和 netdata 的 apps.plugin 回溯一個已經結束的事件,以及最後抓到的三個兇手——rust-analyzer 對一個 GTK 依賴全缺、永遠編不過的 Tauri 專案無限重跑 cargo check、Foam 擴充讓 ripgrep 開出兩百多個行程、還有只是雜訊的 RustDesk 輪詢。文末附上防線設定與事後補的兩道保險。",
+      "image": null,
+      "publishedAt": "2026-08-04T07:16:25Z",
+      "sourceId": "bd51496b8ec0ca1d",
+      "sourceTitle": "Koimsurai 手記",
+      "link": "https://koimsurai.com/blog/vscode-remote-ssh-burned-my-server",
+      "detailPath": "articles/dfd057d97b089ea3ea4727b8.json"
+    },
+    {
       "id": "44b0dedaa29cc4c935d3bee7",
       "title": "縈繞於心的十二道難題",
       "summary": "偶然看到費曼的 12 道難題（Feynman’s 12 Favorite Problems）這東東 […]",
@@ -637,28 +659,6 @@
       "sourceTitle": "Feed Me, Haruo",
       "link": "https://haruowang.vercel.app/about/lifelog/editorial.html",
       "detailPath": "articles/af1278b9b1291c89d3009f6d.json"
-    },
-    {
-      "id": "afd4e12bbb1a56e9c943ad58",
-      "title": "2026的品味",
-      "summary": "2026年，Haruo Wang的音樂、影像、閱讀品味",
-      "image": null,
-      "publishedAt": "2026-07-31T15:30:14Z",
-      "sourceId": "50bce2ced06e6077",
-      "sourceTitle": "Feed Me, Haruo",
-      "link": "https://haruowang.vercel.app/about/taste/2026.html",
-      "detailPath": "articles/afd4e12bbb1a56e9c943ad58.json"
-    },
-    {
-      "id": "257b03eb7d3624a47b056fc1",
-      "title": "Vox英聽筆記",
-      "summary": "觀看Vox專題影片的學習筆記",
-      "image": null,
-      "publishedAt": "2026-07-31T15:30:14Z",
-      "sourceId": "50bce2ced06e6077",
-      "sourceTitle": "Feed Me, Haruo",
-      "link": "https://haruowang.vercel.app/global/english/vox.html",
-      "detailPath": "articles/257b03eb7d3624a47b056fc1.json"
     }
   ]
 }

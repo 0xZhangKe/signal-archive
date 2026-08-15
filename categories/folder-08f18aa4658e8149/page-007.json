@@ -1,6 +1,28 @@
 {
   "items": [
     {
+      "id": "1b73302f1e413c954ef93e26",
+      "title": "Devil's Lake 半日遊",
+      "summary": "白雲像奶油一樣抹平了湖對岸的山凹處，十分可愛",
+      "image": "https://alicehsu.blog/images/Post/59/5.jpg",
+      "publishedAt": "2026-07-24T03:00:00Z",
+      "sourceId": "a08fec079b5bc196",
+      "sourceTitle": "Alice Hsu's Blog",
+      "link": "https://alicehsu.blog/zh-tw/posts/2026/07/devils-lake-half-day-trip/",
+      "detailPath": "articles/1b73302f1e413c954ef93e26.json"
+    },
+    {
+      "id": "af719e9a878bb22e010d72e0",
+      "title": "3D 星空背景效能長征：OffscreenCanvas Worker → WebGPU/TSL 重寫",
+      "summary": "這篇記錄了作者為個人網站 koimsurai.com 那片 3D 星空背景走過的三階段效能長征。背景最初只是一堆各自為政的 three.js 裝飾特效——黑洞、粒子、星空、土星——東西還少時並不重,是愈疊愈多、真正拿去量之後才逐步走上優化:先把星空搬進 OffscreenCanvas Worker 讓渲染離開主執行緒(桌面 TBT 從 17 秒壓到 30 毫秒),再被朋友一台會白屏的機器逼著補上背景的穩健性,最後用瀏覽器最新的 WebGPU/TSL 把整套從頭重寫成單一 canvas——GPU 從 85–90% 砍到 25%、星星翻到 26,000 顆全在 shader 裡呼吸。文中一併科普 WebGPU 到底是什麼,並記下一個反覆翻案的判斷:「效能優化」和「品質升級」是兩本不同的帳,換掉目標函數,結論就翻。",
+      "image": null,
+      "publishedAt": "2026-07-24T02:49:17Z",
+      "sourceId": "bd51496b8ec0ca1d",
+      "sourceTitle": "Koimsurai 手記",
+      "link": "https://koimsurai.com/blog/the-3d-starfield-performance-march",
+      "detailPath": "articles/af719e9a878bb22e010d72e0.json"
+    },
+    {
       "id": "5c63803ff0fc1ca973b95d23",
       "title": "《玩具總動員 5》中國票房爲何不濟？",
       "summary": "和朋友談起《玩具總動員 5》在中國的票房。目前四千多萬美元，僅和日本票房持平。但美國票房依舊良好。僅以此三國而 […]",
@@ -637,28 +659,6 @@
       "sourceTitle": "Alice Hsu's Blog",
       "link": "https://alicehsu.blog/zh-tw/ai-usage-policy/",
       "detailPath": "articles/adcf5a41c0730ca045a882c0.json"
-    },
-    {
-      "id": "d0de087134f96ae1958a7612",
-      "title": "波动的理解",
-      "summary": "「摩擦和阻尼。」",
-      "image": null,
-      "publishedAt": "2026-07-19T15:51:03Z",
-      "sourceId": "8e5dc5a8b5023a8e",
-      "sourceTitle": "折腾人生",
-      "link": "https://z.arlmy.me/posts/ZArlmyMe/Damping_20260719/",
-      "detailPath": "articles/d0de087134f96ae1958a7612.json"
-    },
-    {
-      "id": "65da2925004e9c2b393e2df7",
-      "title": "游牧地活着",
-      "summary": "「最小规模的土地上，最小规模地游牧。」",
-      "image": null,
-      "publishedAt": "2026-07-19T14:41:03Z",
-      "sourceId": "8e5dc5a8b5023a8e",
-      "sourceTitle": "折腾人生",
-      "link": "https://z.arlmy.me/posts/ZArlmyMe/BeHunterGatherer_20260719/",
-      "detailPath": "articles/65da2925004e9c2b393e2df7.json"
     }
   ]
 }

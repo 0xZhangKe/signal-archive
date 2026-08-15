@@ -1,6 +1,28 @@
 {
   "items": [
     {
+      "id": "afd4e12bbb1a56e9c943ad58",
+      "title": "2026的品味",
+      "summary": "2026年，Haruo Wang的音樂、影像、閱讀品味",
+      "image": null,
+      "publishedAt": "2026-07-31T15:30:14Z",
+      "sourceId": "50bce2ced06e6077",
+      "sourceTitle": "Feed Me, Haruo",
+      "link": "https://haruowang.vercel.app/about/taste/2026.html",
+      "detailPath": "articles/afd4e12bbb1a56e9c943ad58.json"
+    },
+    {
+      "id": "257b03eb7d3624a47b056fc1",
+      "title": "Vox英聽筆記",
+      "summary": "觀看Vox專題影片的學習筆記",
+      "image": null,
+      "publishedAt": "2026-07-31T15:30:14Z",
+      "sourceId": "50bce2ced06e6077",
+      "sourceTitle": "Feed Me, Haruo",
+      "link": "https://haruowang.vercel.app/global/english/vox.html",
+      "detailPath": "articles/257b03eb7d3624a47b056fc1.json"
+    },
+    {
       "id": "2efdef58a9de14f2c019e6b4",
       "title": "上伊那酒單，醉姿如百合",
       "summary": "動畫《上伊那牡丹，醉姿如百合》的酒單及雜項整理",
@@ -637,28 +659,6 @@
       "sourceTitle": "林海草原",
       "link": "https://lhcy.org/archives/wu-qu-kuai-bian-ji-qi-de-wordpress-classicpress.html",
       "detailPath": "articles/d2636a3c5a58b7ac0ee240f2.json"
-    },
-    {
-      "id": "b386c59fb6acacd5ac105a41",
-      "title": "跨時空價值",
-      "summary": "\"Art produces ugly things which frequently become more beautiful with time. Fashion, on the other hand, produces beautiful things which always become ugly with time.\"",
-      "image": null,
-      "publishedAt": "2026-07-29T00:00:00Z",
-      "sourceId": "7f36c3da1e6b5c71",
-      "sourceTitle": "Wiwi.Blog Blog",
-      "link": "https://wiwi.blog/blog/timeless-value",
-      "detailPath": "articles/b386c59fb6acacd5ac105a41.json"
-    },
-    {
-      "id": "254920d3cdfc0ab801e92948",
-      "title": "Linux 伺服器被植入挖礦程式：從 load average 10.65 揪出整條攻擊鏈",
-      "summary": "這篇記錄了作者在一次例行效能健檢中,意外撞見自己家用伺服器被植入挖礦程式的完整抓賊過程,並整理成一份人人可照做的可疑進程自檢清單。起點是一個不該出現的數字:一台 16 執行緒的機器 load average 卻卡在 10.65。作者用 top 與 docker stats 揪出一個吃滿 10 核、隨機大小寫檔名的可疑程序,再靠 Linux 的 /proc 三件套(exe 指向已刪除的 /tmp 檔、cmdline、environ 溯源到某個 Docker 容器)確認它是挖礦程式,並把攻擊鏈拉出來:一個 port 直接綁在 0.0.0.0、繞過 nginx 對外裸露的 Next.js 容器,被 CVE-2025-66478(Next.js 16.0.6 的滿分 RCE、綽號 React2Shell)打穿。文中含…",
-      "image": null,
-      "publishedAt": "2026-07-28T16:55:03Z",
-      "sourceId": "bd51496b8ec0ca1d",
-      "sourceTitle": "Koimsurai 手記",
-      "link": "https://koimsurai.com/blog/catching-a-cryptominer",
-      "detailPath": "articles/254920d3cdfc0ab801e92948.json"
     }
   ]
 }
