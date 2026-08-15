@@ -1,6 +1,28 @@
 {
   "items": [
     {
+      "id": "c6d2d46f708bfea015aef350",
+      "title": "从 Warp 换到 cmux：一个更适合 AI Agent 的终端",
+      "summary": "背景 最近将终端从 Warp 切换到了 cmux，用了一段时间后，现在已经基本上满足我的所有需求，所以才有这篇安利的文章。 开始之前先回顾下自己的终端使用历史。刚开始工作那时候使用的是 Windows，用得最多的终端就是 xshell，后面切换到 macOS 之后自然就切换到了 mac 上用的最多的 iTerm2。",
+      "image": "https://cdn.jsdelivr.net/gh/crossoverJie/images@main/images/images20260617113149.png",
+      "publishedAt": "2026-06-17T17:56:51Z",
+      "sourceId": "126e6f369677b760",
+      "sourceTitle": "crossoverJie's Blog",
+      "link": "http://crossoverjie.top/2026/06/17/AI/cmux-introduce/",
+      "detailPath": "articles/c6d2d46f708bfea015aef350.json"
+    },
+    {
+      "id": "0e4fd47e4d3f209991428712",
+      "title": "替散落的資料庫,開一扇上了鎖的窗：Outerbase × Mongoku × Authelia,自架 2FA 唯讀資料庫後台",
+      "summary": "這篇文章記錄了作者如何把散落在 homelab 各處的資料庫——六個分屬部落格、n8n、Uptime Kuma、3x-ui、Jarvis、NAS 的 SQLite,外加一個 MongoDB——整合成一個從任何地方都能存取、且擋著 2FA 的網頁後台。文章先從選型講起:為什麼不為了換而換上 Postgres、如何在 sqlite-web、Adminer、Beekeeper、CloudBeaver 之間繞了一圈才落在 Outerbase Studio,以及對外閘門為何捨 Cloudflare Tunnel 而自架 Authelia。接著逐一拆解建置時的坑:官方 Docker image 讀不了本地檔(只有 npm CLI 能)、ATTACH 看得到資料卻看不到表、WAL 模式無法唯讀掛載(最後靠「主檔唯讀、目錄可…",
+      "image": null,
+      "publishedAt": "2026-06-17T15:10:23Z",
+      "sourceId": "bd51496b8ec0ca1d",
+      "sourceTitle": "Koimsurai 手記",
+      "link": "https://koimsurai.com/blog/a-locked-window-for-my-scattered-databases",
+      "detailPath": "articles/0e4fd47e4d3f209991428712.json"
+    },
+    {
       "id": "099f88c7d53a614b1706012b",
       "title": "2026年5月房地产数据来了",
       "summary": "今天，统计局正式发布了5月份的国民经济宏观数据，当然，也包含房地产行业的指数。 其中我经常看的就这几个数据，固定资产投资，房地产投资，以及70个中城市二手房价格指数。 从这几个数据来看，虽然4 […]",
@@ -637,28 +659,6 @@
       "sourceTitle": "Eddie Lv",
       "link": "https://eddielv.com/musings/2016-rss-list/",
       "detailPath": "articles/4665c24c2b54ab75770eb79c.json"
-    },
-    {
-      "id": "886d506562991fbbfe9b80ae",
-      "title": "AI 問題挑戰",
-      "summary": "此中文版挑戰由 Wiwi 發起，原版由 Rishabh P. Sharma 發起。 你第一次體驗 AI 模型的感受如何？ 你自己會用 AI 嗎，還是完全反對它？ 你會比較偏好哪一種模型嗎（例如 Claude 和 ChatGPT 之間）？如果有，你是怎麼選擇的？ AI 有哪些地方是你喜歡的？哪些是不喜歡的？ 你對 AI 生成圖片的感覺如何？如果有人在部落格文章裡放 AI 圖，你會覺得很煩嗎？ 現在網路上到處都是 AI 垃圾內容（slop），充滿了生成的文字、圖片、聲音和影片。你怎麼把這些東西跟真正的人類創作區分開來？你有什麼過濾策略嗎？ 你對 AI 帶來的未來感到樂觀，還是認為會走向反烏托邦？ 1. 你第一次體驗 AI 模型的感受如何？ # 我第一個知道的 AI 模型，是 2016 年時， AlphaGo 打敗…",
-      "image": null,
-      "publishedAt": "2026-06-12T02:26:24Z",
-      "sourceId": "199cdf92fc46bfcd",
-      "sourceTitle": "Eddie Lv",
-      "link": "https://eddielv.com/musings/ai-questions-challenge/",
-      "detailPath": "articles/886d506562991fbbfe9b80ae.json"
-    },
-    {
-      "id": "912ecb8811b40c83f1b3b66a",
-      "title": "一個動作",
-      "summary": "看 NBA 聽球評一直贅字。",
-      "image": null,
-      "publishedAt": "2026-06-12T00:00:00Z",
-      "sourceId": "7f36c3da1e6b5c71",
-      "sourceTitle": "Wiwi.Blog Blog",
-      "link": "https://wiwi.blog/blog/nba-action",
-      "detailPath": "articles/912ecb8811b40c83f1b3b66a.json"
     }
   ]
 }
