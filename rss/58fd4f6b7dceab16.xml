@@ -1,4 +1,71 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="https://11011110.github.io/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="https://11011110.github.io/blog/" rel="alternate" type="text/html" /><updated>2026-08-03T19:04:32+00:00</updated><id>https://11011110.github.io/blog/feed.xml</id><title type="html">11011110</title><subtitle>Geometry, graphs, algorithms, and more</subtitle><author><name>David Eppstein</name></author><entry><title type="html">Non-coplanar unit distances</title><link href="https://11011110.github.io/blog/2026/08/02/noncoplanar-unit-distances.html" rel="alternate" type="text/html" title="Non-coplanar unit distances" /><published>2026-08-02T18:18:00+00:00</published><updated>2026-08-02T18:18:00+00:00</updated><id>https://11011110.github.io/blog/2026/08/02/noncoplanar-unit-distances</id><content type="html" xml:base="https://11011110.github.io/blog/2026/08/02/noncoplanar-unit-distances.html"><![CDATA[<p>Reports that LLMs have killed the <a href="https://en.wikipedia.org/wiki/Unit_distance_graph#Number_of_edges">Erdős unit distance problem</a> turn out to be greatly exaggerated. There is still plenty not yet understood about the problem.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="https://11011110.github.io/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="https://11011110.github.io/blog/" rel="alternate" type="text/html" /><updated>2026-08-15T10:49:13+00:00</updated><id>https://11011110.github.io/blog/feed.xml</id><title type="html">11011110</title><subtitle>Geometry, graphs, algorithms, and more</subtitle><author><name>David Eppstein</name></author><entry><title type="html">Linkage</title><link href="https://11011110.github.io/blog/2026/08/15/linkage.html" rel="alternate" type="text/html" title="Linkage" /><published>2026-08-15T06:44:00+00:00</published><updated>2026-08-15T06:44:00+00:00</updated><id>https://11011110.github.io/blog/2026/08/15/linkage</id><content type="html" xml:base="https://11011110.github.io/blog/2026/08/15/linkage.html"><![CDATA[<ul>
+  <li>
+    <p><a href="https://
+blog.klipse.tech/aboulafia/2026/07/06/a-13th-century-enumeration-algorithm-ignored-for-700-years.html">A permutation generation algorithm in the work of 13th-century Kabbalist Abraham Abulafia</a> <span style="white-space:nowrap">(<a href="https://mathstodon.xyz/@11011110/117022693425803318">\(\mathbb{M}\)</a>,</span> <a href="https://
+news.ycombinator.com/item?id=48825556">via</a>). The resulting permutation sequence is the one you get by reversing suffixes whose lengths form the sequence \((((2, 3)^2, 2, 4)^3, 2, 5)^4, \dots\) but that’s not the generation rule. Instead the rule is: to generate the permutations of \(1, 2, 3,\dots, n,\) form its \(n\) cyclically rotated permutations (starting with \(1, 2, 3,\dots, n,\)) and for each one in order, recursively generate the permutations of its <span style="white-space:nowrap">length-\((n-1)\)</span> suffix.</p>
+
+    <p>The link claims that this is the first method for systematically listing permutations (long before the discovery of the Steinhaus–Johnson–Trotter algorithm for generating a different ordering, by 17th-century bell ringers). However, I’m not entirely convinced: it’s not the same as an enumeration algorithm, but factorials and lists of permutations were known long before to the Jain mathematicians, to scholars of the Talmudic period, and to medieval Arab grammarians and mathematicians (see <a href="https://
+en.wikipedia.org/wiki/Factorial#History">Wikipedia on the history of the factorial</a>). They may not have described their rules for generating lists of permutations, but they did generate those lists, presumably by following some rule. Priority arguments aside, though, I still think it’s interesting.</p>
+  </li>
+  <li>
+    <p><a href="https://blog.computationalcomplexity.org/2026/07/complexity-class-of-week-l2p.html">Complexity Class of the Week: \(\mathsf{L}_2^P\)</a> <span style="white-space:nowrap">(<a href="https://fediscience.org/@fortnow/116964987410695143">\(\mathbb{M}\)</a>).</span> This is a complexity class characterized by polynomial-time reductions to finding the minimum element of a comparator circuit that computes a total order, or finding a violation of total ordering for the circuit. It has interesting relations both to other complexity classes (e.g. \(\mathsf{NP}\subset\mathsf{P/poly}\) collapses \(\mathsf{PH}\) to \(\mathsf{L}_2^P\)) and to circuit complexity (it requires circuits of size \(\ge n^k\) for all <span style="white-space:nowrap">fixed \(k\)).</span></p>
+  </li>
+  <li>
+    <p>Terry Tao on recent problematic behavior in mathematics research <span style="white-space:nowrap">(<a href="https://mathstodon.xyz/@tao/117035751627601466">\(\mathbb{M}\)</a>):</span> AI companies generate a solution to a well-known problem, take the publicity for their solution, but don’t take the effort to digest and explain the solution in a way that makes sense to human mathematicians.</p>
+  </li>
+  <li>
+    <p>Transliteration of unicode text from one script to another through its <a href="https://www.
+unicode.org/reports/tr35/tr35-general.html#Transforms">Locale Data Markup Language</a> is <a href="https://
+seriot.ch/computation/uts35/">Turing-complete</a> <span style="white-space:nowrap">(<a href="https://mathstodon.xyz/@11011110/117045362394992014">\(\mathbb{M}\)</a>,</span> <a href="https://
+lobste.rs/s/zrvoqb/unicode_s_transliteration_rules_are">via</a>). The proof is via Post tag systems. The widely-used ICU library guards against this by imposing a small limit on the number of times a unit can be rewritten, so there is no  denial-of-service vulnerability in practice, but this limit is not in the spec.</p>
+  </li>
+  <li>
+    <p><a href="https://doi.org/10.1145/1010734.1010737">Leslie Lamport’s dictum “State the problem before describing the solution”</a> <span style="white-space:nowrap">(<a href="https://gts.y.la/@shachaf/statuses/01KX91WPAEAD3CC1ZSB8428YXN">\(\mathbb{M}\)</a>).</span></p>
+  </li>
+  <li>
+    <p>Big spike in monthly submissions to arXiv Combinatorics <span style="white-space:nowrap">(<a href="https://mathstodon.xyz/@sioum/117052634264475088">\(\mathbb{M}\)</a>).</span></p>
+  </li>
+  <li>
+    <p><a href="https://
+geospatialml.com/posts/reviewing-ai-slop/">Q&amp;A from the slop trenches</a> <span style="white-space:nowrap">(<a href="https://mathstodon.xyz/@11011110/117061371410859439">\(\mathbb{M}\)</a>,</span> <a href="https://
+retractionwatch.com/2026/08/08">via</a>). Two human machine-learning researchers on their recent experiences refereeing LLM-generated slop with bad references, and then getting their reject recommendations overridden as accept for oral presentation with an unenforceable request to fix the slop.</p>
+  </li>
+  <li>
+    <p><a href="https://arxiv.org/abs/2608.03965">Asymptotically attaining the Moore bound</a> <span style="white-space:nowrap">(<a href="https://mathstodon.xyz/@WouterCvB/117042881005630351">\(\mathbb{M}\)</a>),</span> Wouter Cames van Batenburg and Samuel Korsky, on the largest graphs with maximum degree \(d\) and diameter \(k\), for fixed \(k\) in the limit as \(d\) grows.</p>
+  </li>
+  <li>
+    <p><a href="https://linebender.org/blog/hyperbezier/">The mathematical beauty of hyperbezier curves</a> <span style="white-space:nowrap">(<a href="https://mastodon.online/@raph/117068146227905659">\(\mathbb{M}\)</a>),</span> on a curve family with the same control points as cubic Bézier curves but with smoother curvature variation and a larger range of parameters for which the curvature is monotonic.</p>
+  </li>
+  <li>
+    <p><a href="https://www.carlsonlab.bio/thoughts/the-only-reason-youll-ever-need-not-to-write-with-ai">The only reason you’ll ever need not to write with AI</a> <span style="white-space:nowrap">(<a href="https://biologists.social/@steveroyle/117075075194885205">\(\mathbb{M}\)</a>):</span> because it could expose you to charges of plagiarism.</p>
+  </li>
+  <li>
+    <p><a href="https://blog.computationalcomplexity.org/2026/08/unexpected-unemployment.html">Illinois Tech lays off roughly 160 tenured faculty members including Lance Fortnow</a> <span style="white-space:nowrap">(<a href="https://fediscience.org/@fortnow/117083306111185962">\(\mathbb{M}\)</a>).</span></p>
+  </li>
+  <li>
+    <p><a href="https://www.
+ams.org/journals/notices/202607/noti3374/noti3374.html">A stroll through the pentagram zoo</a> <span style="white-space:nowrap">(<a href="https://mathstodon.xyz/@11011110/117088701074383860">\(\mathbb{M}\)</a>).</span> Richard Evan Schwartz explains the mathematics behind some of his mathematical artworks, based on the <a href="https://
+en.wikipedia.org/wiki/Pentagram_map">pentagram map</a>, a dynamical system that repeatedly replaces the vertices of a polygon by the crossing points of its diagonals.</p>
+  </li>
+  <li>
+    <p>Slides for my two talks at CCCG’26 are now online <span style="white-space:nowrap">(<a href="https://mathstodon.xyz/@11011110/117090034347062709">\(\mathbb{M}\)</a>):</span></p>
+
+    <ul>
+      <li>
+        <p>“<a href="https://
+ics.uci.edu/~eppstein/pubs/EppHad-CCCG-26.pdf">Minimum-weight Steiner triangulation of convex polygons requires interior Steiner points</a>”</p>
+      </li>
+      <li>
+        <p>“<a href="https://
+ics.uci.edu/~eppstein/pubs/Epp-CCCG-26.pdf">Tangent spheres and integer distances</a>”</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><a href="https://www.
+quantamagazine.org/we-know-simple-fluids-can-flow-turns-out-some-can-fracture-20260710/">Liquids can shatter</a> <span style="white-space:nowrap">(<a href="https://mathstodon.xyz/@11011110/117099009988063059">\(\mathbb{M}\)</a>).</span></p>
+  </li>
+</ul>]]></content><author><name>David Eppstein</name></author><summary type="html"><![CDATA[A permutation generation algorithm in the work of 13th-century Kabbalist Abraham Abulafia (\(\mathbb{M}\), via). The resulting permutation sequence is the one you get by reversing suffixes whose lengths form the sequence \((((2, 3)^2, 2, 4)^3, 2, 5)^4, \dots\) but that’s not the generation rule. Instead the rule is: to generate the permutations of \(1, 2, 3,\dots, n,\) form its \(n\) cyclically rotated permutations (starting with \(1, 2, 3,\dots, n,\)) and for each one in order, recursively generate the permutations of its length-\((n-1)\) suffix.]]></summary></entry><entry><title type="html">Non-coplanar unit distances</title><link href="https://11011110.github.io/blog/2026/08/02/noncoplanar-unit-distances.html" rel="alternate" type="text/html" title="Non-coplanar unit distances" /><published>2026-08-02T18:18:00+00:00</published><updated>2026-08-02T18:18:00+00:00</updated><id>https://11011110.github.io/blog/2026/08/02/noncoplanar-unit-distances</id><content type="html" xml:base="https://11011110.github.io/blog/2026/08/02/noncoplanar-unit-distances.html"><![CDATA[<p>Reports that LLMs have killed the <a href="https://en.wikipedia.org/wiki/Unit_distance_graph#Number_of_edges">Erdős unit distance problem</a> turn out to be greatly exaggerated. There is still plenty not yet understood about the problem.</p>
 
 <p>The problem asks, for \(n\) points in the Euclidean plane, how many pairs can be at unit distance from each other? When <a href="https://www.jstor.org/stable/2305092">Paul Erdős posed the problem in 1946</a>, he observed that the graph of unit distances cannot contain a subgraph of the <span style="white-space:nowrap">form \(K_{2,3}\),</span> a complete bipartite subgraph with two vertices on one side and three on the other. One way to see this is to draw unit circles through the two vertices on one side of a supposed \(K_{2,3}\) subgraph. These cross each other at most twice, and their two crossing points are the only points that can be vertices on the other side of the subgraph. Through reasoning later generalized as the <a href="https://en.wikipedia.org/wiki/Zarankiewicz_problem#Upper_bounds">Kővári–Sós–Turán theorem</a>, Erdős observed that this forbidden subgraph implies an \(O(n^{3/2})\) upper bound on the number of unit distances. More generally, the Kővári–Sós–Turán theorem implies that when \(K_{a,b}\) is forbidden from an <span style="white-space:nowrap">\(n\)-vertex</span> graph, the number of edges in the graph is \(O(n^{2-1/\min(a,b)})\). Subsequent researchers used different reasoning to reduce Erdős’s upper bound <span style="white-space:nowrap">to \(O(n^{4/3})\).</span></p>
 
@@ -344,57 +411,4 @@ A numerical calculation shows that, in fact, the Steiner triangulation is better
 
 <p>In four or more dimensions, the second part of the argument still shows that the <span style="white-space:nowrap">\(d\)-blowup</span> of a <span style="white-space:nowrap">\(k\)-cycle</span> has no realization with sphere centers in each blown-up <span style="white-space:nowrap">\(d\)-tuple</span> of spheres in general position. But the first part, where we use a Möbius transformation to perturb everything into general position, stops working. If one blown-up <span style="white-space:nowrap">\(d\)-tuple</span> of spheres has cocircular centers, like the ball bearing cat toy example in 3d, its two neighboring <span style="white-space:nowrap">\(d\)-tuples</span> can each be placed on lines orthogonal to the circle and through its center, but in four dimensions there is a whole plane orthogonal to a circle and through its center. We can choose two different lines on this plane, and then different circles orthogonal to each of these lines, etc., creating enough flexibility as one progresses around the cycle that a realization might be possible. But my powers of four-dimensional visualization aren’t strong enough for me to be certain that this works, and it might still be possible to prove that other locally independent graphs are unrealizable.</p>
 
-<p>(<a href="https://mathstodon.xyz/@11011110/116768722222413620">Discuss on Mastodon</a>)</p>]]></content><author><name>David Eppstein</name></author><summary type="html"><![CDATA[My latest preprint, “Tangent spheres and integer distances” (arXiv:2606.18569, to appear at CCCG), involves the patterns of external tangencies of circles, spheres or higher-dimensional hyperspheres. You can make a graph whose vertices are a given set of spheres and whose edges are pairs of externally-tangent spheres, and I’d like to understand which graphs are possible. By the circle packing theorem, any planar graph can be represented by interior-disjoint circles in this way, but here I’m not requiring disjointness. So, for instance, you can represent any unit distance graph in the plane (such as the Petersen graph below) by expanding each vertex of the graph into a unit-diameter circle.]]></summary></entry><entry><title type="html">Linkage</title><link href="https://11011110.github.io/blog/2026/06/15/linkage.html" rel="alternate" type="text/html" title="Linkage" /><published>2026-06-15T16:56:00+00:00</published><updated>2026-06-15T16:56:00+00:00</updated><id>https://11011110.github.io/blog/2026/06/15/linkage</id><content type="html" xml:base="https://11011110.github.io/blog/2026/06/15/linkage.html"><![CDATA[<ul>
-  <li>
-    <p><a href="https://www.
-thelancet.com/action/showFullText?pii=S0140673626006033">Biomedical papers with fabricated references blew up by more than a factor of ten from 2023 to 2026</a> <span style="white-space:nowrap">(<a href="https://mathstodon.xyz/@11011110/116678083313610834">\(\mathbb{M}\)</a>,</span> <a href="https://www.
-metafilter.com/213242/Fabricated-citations-an-audit-across-25-million-biomedical-papers">via</a>). Relatedly, <a href="https://www.
-nature.com/articles/d41586-026-01595-5">arXiv has added a new policy banning author of papers with hallucinated citations</a> or other artifacts of unchecked LLM use for a year (and after that permanently requiring publication prior to allowing a preprint, kind of problematic for publication in journals whose submission process depends on having an arXiv preprint. Unfortunately I can’t find a direct reference to this in the actual posted arXiv policies and I’m not going to link to X/twitter where Tom Dietterich posted the only semi-official communication I can find on it.</p>
-  </li>
-  <li>
-    <p><a href="https://mathstodon.xyz/@tpfto/116655048143659970">Fish curve drawn as an epicycle</a>. See also “<a href="https://doi.org/10.1080/0025570X.1996.11996424">Wheels on wheels on wheels</a>” by Frank Farris in <em>Math. Mag.</em> on symmetric doily patterns drawn using epicycles.</p>
-  </li>
-  <li>
-    <p><a href="https://
-en.wikipedia.org/wiki/Fermat's_Last_Theorem#Islamic_mathematics">I recently learned that the cubic and quartic cases of Fermat’s last theorem (the impossibility of integer solution of \(x^3+y^3=z^3\) and \(x^4+y^4=z^4\)) go back farther than Fermat</a> <span style="white-space:nowrap">(<a href="https://mathstodon.xyz/@11011110/116689233903959354">\(\mathbb{M}\)</a>),</span> to medieval Islamic mathematics. Abu-Mahmud Khujandi tried to prove the impossibility of the cubic case (but the proof was faulty) and later Ibn al-Khawwām included both cases in a list of open problems.</p>
-  </li>
-  <li>
-    <p><a href="https://fediscience.org/@fortnow/116688433447500956">The age of an open problem is not a good proxy for its difficulty or importance</a>, notes Lance Fortnow.</p>
-  </li>
-  <li>
-    <p>Another day, another <a href="https://www.
-openlibhums.org/news/943/">journal editorial board mass resignation</a> <span style="white-space:nowrap">(<a href="https://mathstodon.xyz/@11011110/116702037049926326">\(\mathbb{M}\)</a>,</span> <a href="https://
-retractionwatch.com/2026/06/05/natural-language-semantics-journal-editors-resign-launch-new-journal/">via</a>) this time from Springer’s <em>Natural Language Semantics</em>, over publisher demands to increase article publication charge revenue by increasing their number of acceptances. Instead the same editors are launching a new diamond open-access journal, <em>Semantics of Natural Languages</em>, through the Open Library of Humanities.</p>
-  </li>
-  <li>
-    <p><a href="https://
-arstechnica.com/science/2026/06/scientists-ejected-from-diabetes-conference-for-distributing-journal-reprints/">The American Diabetes Association has ejected from its annual meeting the editor-in-chief of its journal <em>Diabetes Care</em>, its former president, and three other scientists</a> <span style="white-space:nowrap">(<a href="https://mathstodon.xyz/@11011110/116705697612560051">\(\mathbb{M}\)</a>),</span> for handing out reprints of <a href="http://
-dx.doi.org/10.2337/dci26-0068">an editorial published in the journal and critical of the US government’s attacks on science</a>.  According to video evidence the ejected scientists “were not disruptive or disorderly in their conduct”. Nevertheless, the ADA claims that this behavior constituted a violation of the association’s code of conduct.</p>
-  </li>
-  <li>
-    <p><a href="https://mathstodon.xyz/@RefurioAnachro/116710443672063924">On circle packing with more than one size of circle</a>.</p>
-  </li>
-  <li>
-    <p>Jeremy Kun (1) enjoys a rambly substack post on software developer bros who don’t even know how to find the center of a triangle, and how this somehow portends the obsolescence of software development (2) excuses the bros from their ignorance on the basis that there are “at least 26 different definitions of a triangle’s center”, (3) discovers that the <a href="https://faculty.evansville.edu/ck6/encyclopedia/ETC.html">Encyclopedia of Triangle Centers</a> has “actually over 71 thousand definitions”, (4) realizes that his own ignorance has made him become the software bro he was enjoying the substack diss of, and (5) <a href="https://mathstodon.xyz/@j2kun/116647564681336614">describes the whole saga, as if waking from a dream</a>.</p>
-  </li>
-  <li>
-    <p><a href="https://terrytao.wordpress.com/2026/06/09/on-the-proposed-rule-changes-to-the-administration-of-federal-grants/">Terry Tao clearly explains why proposed new US funding rules requiring conference travel to be planned years ahead of time as part of grant proposals do not work for the time scales of mathematics research</a> <span style="white-space:nowrap">(<a href="https://mathstodon.xyz/@11011110/116723005580144569">\(\mathbb{M}\)</a>).</span> These rules would be even more disastrous for computer science, where conference publication is essential for making one’s research known and where one cannot know which conferences the research will appear in until the conference acceptance and rejections come in, only a few weeks or months before the conference itself.</p>
-  </li>
-  <li>
-    <p><a href="https://hachyderm.io/@simontatham/116719079752030263">How to wrap a hat tiling around a cylinder</a> such as, say, a coffee mug, if you had a manufacturing process for them that didn’t involve leaving a seam in the design.</p>
-  </li>
-  <li>
-    <p>New preprint: “<a href="https://
-arxiv.org/abs/2606.10102">Existence of a periodic orbit for billiards in polygons</a> <span style="white-space:nowrap">(<a href="https://mathstodon.xyz/@11011110/116729951987362359">\(\mathbb{M}\)</a>),</span> Giovanni Forni. I think the title is self-explanatory; this claims to solve a major open problem in geometric dynamical systems. (I have too little expertise in this topic to evaluate its correctness.)</p>
-  </li>
-  <li>
-    <p>My 2024 paper “Non-crossing Hamiltonian paths and cycles in output-polynomial time](https://ics.uci.edu/~eppstein/pubs/p-noncross.html)” has been given the <a href="https://
-link.springer.com/journal/453/updates/27854606">inaugural 2025 <em>Algorithmica</em> Best Paper Award</a> <span style="white-space:nowrap">(<a href="https://mathstodon.xyz/@11011110/116732318076364902">\(\mathbb{M}\)</a>)</span> as the most impactful paper in the journal <em>Algorithmica</em> from the past three years. The paper shows that one can list all of the traveling salesperson tours through a set of points in the plane in an amount of time polynomial in the number of tours. This number can be exponential, but the harder part of the problem is finding the tours quickly when there are fewer than exponentially many of them.</p>
-  </li>
-  <li>
-    <p><a href="https://smf.emath.fr/actualites-smf/mikhail-verbitsky-arrete">Dissident Russian mathematician Mikhail Verbitsky, traveling from Brazil to an award ceremony in Armenia, was arrested there at the request of the Russian government</a> <span style="white-space:nowrap">(<a href="https://mathstodon.xyz/@antoinechambertloir/116749617400969650">\(\mathbb{M}\)</a>).</span> The linked article, in French, is from the French Mathematical Society, which strongly protests this action. As of posting he is said to be <a href="https://meduza.io/amp/en/news/2026/06/15/russian-math-professor-freed-in-armenia-after-moscow-fails-to-file-proper-arrest-paperwork">freed on a technicality but forbidden from leaving Armenia</a>.</p>
-  </li>
-  <li>
-    <p><a href="https://mathenchant.wordpress.com/2026/06/15/seventeen-camels-and-where-they-can-take-you/">Seventeen camels and where they can take you</a> <span style="white-space:nowrap">(<a href="https://mathstodon.xyz/@JimPropp/116755072990103821">\(\mathbb{M}\)</a>).</span> Jim Propp on how “six seemingly unrelated brain-teasers” including the 17-camel inheritance problem as well as exercises on counting edges in forests can be solved by the same trick for dealing with linear equations with constant offsets.</p>
-  </li>
-</ul>]]></content><author><name>David Eppstein</name></author><summary type="html"><![CDATA[Biomedical papers with fabricated references blew up by more than a factor of ten from 2023 to 2026 (\(\mathbb{M}\), via). Relatedly, arXiv has added a new policy banning author of papers with hallucinated citations or other artifacts of unchecked LLM use for a year (and after that permanently requiring publication prior to allowing a preprint, kind of problematic for publication in journals whose submission process depends on having an arXiv preprint. Unfortunately I can’t find a direct reference to this in the actual posted arXiv policies and I’m not going to link to X/twitter where Tom Dietterich posted the only semi-official communication I can find on it.]]></summary></entry></feed>
+<p>(<a href="https://mathstodon.xyz/@11011110/116768722222413620">Discuss on Mastodon</a>)</p>]]></content><author><name>David Eppstein</name></author><summary type="html"><![CDATA[My latest preprint, “Tangent spheres and integer distances” (arXiv:2606.18569, to appear at CCCG), involves the patterns of external tangencies of circles, spheres or higher-dimensional hyperspheres. You can make a graph whose vertices are a given set of spheres and whose edges are pairs of externally-tangent spheres, and I’d like to understand which graphs are possible. By the circle packing theorem, any planar graph can be represented by interior-disjoint circles in this way, but here I’m not requiring disjointness. So, for instance, you can represent any unit distance graph in the plane (such as the Petersen graph below) by expanding each vertex of the graph into a unit-diameter circle.]]></summary></entry></feed>
