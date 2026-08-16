@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "a9a5d7f6c872d5fd62546ff3",
+      "title": "git fetch 实现断点续传",
+      "summary": "git fetch origin main --depth=1 一次只下一个 pack，包含所有缺失对象，国内这网络你懂的，断开就废了，然后从头下载，往往又出事； 老外不懂国内网络条件这么艰苦，只能自己让AI改造。结果： https://github.com/est/snippets/tree/master/git-fr 步骤： git fetch --filter=blob:none --depth=1 —— 只拉 commit+tree，这个速度很快，只有KB级别的传输 用 rev-list --objects --missing=print 算缺失集合，500 个 blob 一批回填 每轮重算缺失、只补缺的。 踩过的坑 git fetch origin <blobsha> 每次都会打印 fatal: b…",
+      "image": null,
+      "publishedAt": "2026-08-16T06:06:00Z",
+      "sourceId": "a864c53722a17b19",
+      "sourceTitle": "est's blog",
+      "link": "https://blog.est.im/2026/stdout-33",
+      "detailPath": "articles/a9a5d7f6c872d5fd62546ff3.json"
+    },
+    {
       "id": "486b6a945c57711057cdeec9",
       "title": "继续搓英汉双解词典v3",
       "summary": "去年 搓了个词典 ，本来懒得动了，但是看到opencode订阅还没用完，deepseek那么便宜，想着不用白不用，找了个最浪费token的方式，让AI再写一部词典 当年的AI我记得还是 gemini-2，其实很多东西不成熟。我也对AI脾气没摸准，很自然的就：“请输出 JSON”。今年学聪明了，直接上YAML。AI高呼你这想法真离经叛道但又极度合理。 甚至，block scalar（ | ）支持多行文本，不转义！ 一个小技巧是，尽量避免嵌套的，什么 map套entries，每个 entry 再挂一个 senses 列表、每个 sense 再挂一个 examples 列表，别玩这一套。直接拍扁，层级尽可能少，整个 schema 里不允许出现一个方括号！ AI帮我写了个 validator，调教这一块还得是AI卷A…",
@@ -208,17 +219,6 @@
       "sourceTitle": "est's blog",
       "link": "https://blog.est.im/2026/stderr-21",
       "detailPath": "articles/ee0e45dea5a3dc158f64031f.json"
-    },
-    {
-      "id": "a52617c396087ca7b4dc58d8",
-      "title": "Sutton 论 discovery",
-      "summary": "六一儿童节的时候， Richard Sutton锐评AI 各位女士们、先生们，大家好。 很遗憾我今天无法亲临现场，与各位进行面对面的交流讨论。但我仍然很高兴能够通过这段录制的视频，与大家分享一些关于人工智能当前与未来发展的高层次思考，尤其是 AI 与科学、数学之间关系的看法。我理解，这也正是本次会议以及 SAIR Foundation 所关注的核心主题。 我想先讲一个老笑话，相信大家都听过。有位研究人员的工作正在接受评审，评审意见回来后写道：“这项工作既新颖（novel），又优秀（good）。遗憾的是，优秀的部分并不新颖，而新颖的部分并不优秀。” 我关于 AI 的第一个观点是：这个评价恰好适用于今天相当大一部分 AI。并非所有 AI 都如此，但相当大一部分确实如此。我们今天所谓的“生成式 AI”（Genera…",
-      "image": null,
-      "publishedAt": "2026-06-02T14:16:00Z",
-      "sourceId": "a864c53722a17b19",
-      "sourceTitle": "est's blog",
-      "link": "https://blog.est.im/2026/stdin-16",
-      "detailPath": "articles/a52617c396087ca7b4dc58d8.json"
     }
   ]
 }
