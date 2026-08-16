@@ -1,6 +1,28 @@
 {
   "items": [
     {
+      "id": "8b46c9c5823da212f22a7a1b",
+      "title": "在網站上放動圖的方式",
+      "summary": "前言 # 在製作 吉他島嶼官網教學內容 的時候，有些內容不需要影片聲音，只需要動畫循環播放即可 ，結果發現轉轉成 GIF 畫質會下降、檔案變大好幾倍，因此才開始尋求解決方案。 原來這是因爲 GIF 只用了 256 種顏色，而且沒有做任何壓縮，因此才會降畫質又檔案肥大。 解決方案 # 把影片轉成無聲的影片檔案，再利用 HTML 設定自動循環播放即可。 ffmpeg # 以下指令的目的，是將原始影片轉換為適合網頁播放的無聲循環動畫影片： ffmpeg -i input.mov -an -c:v libx264 -preset slow -crf 23 -pix_fmt yuv420p -movflags +faststart output.mp4 -i input.mov 指定輸入影片檔案。 -an 移除音訊（A…",
+      "image": null,
+      "publishedAt": "2026-04-24T08:20:10Z",
+      "sourceId": "199cdf92fc46bfcd",
+      "sourceTitle": "Eddie Lv",
+      "link": "https://eddielv.com/articles/motion-images/",
+      "detailPath": "articles/8b46c9c5823da212f22a7a1b.json"
+    },
+    {
+      "id": "117ec1ec23fa03c0449e6203",
+      "title": "試玩了 Z-Type 這個英打射擊遊戲",
+      "summary": "在 這篇「廢文小天地」發文 的推薦之下，我嘗試去玩了 Z-Type 這個遊戲。 它的遊戲規則直白易懂，我就不贅述了，去試試看玩就知道了！ 不過呢，我覺得這個遊戲具挑戰性的地方呢，就是除了從上方湧來的敵艦會越來越多且速度越來越快，並且需要打的英文字也越來越複雜之外，比這些更關鍵的一點是： 玩家不能中途放棄 ！換句話說，一旦開始輸入某個英文字詞，就必須要將該英文字詞打完，而不能中途換找另一個字詞來打（遊戲會判定爲無效射擊）。 就是這一點，雖然乍聽之下理所當然，但也使整體遊戲難度提升許多，也使遊戲體驗變得更爲刺激。 這是我（第二次）試玩的時候取得的成績： 由於沒有所有玩家歷史成績的相關統計數據，所以我也不知道自己的表現相對而言算好還是壞。不過我主觀認爲我的英打表現應該沒有差到哪裡去啦。 同場加映——我順便去做的英打…",
+      "image": "https://microblog.ttheng.com/blog/img151.jpg",
+      "publishedAt": "2026-04-24T06:44:00Z",
+      "sourceId": "a93d4f2e98fafcbe",
+      "sourceTitle": "All posts | 所有貼文 on ttheng's microblog. | 侃侃而隨想極短文。",
+      "link": "https://microblog.ttheng.com/tried-playing-ztype/",
+      "detailPath": "articles/117ec1ec23fa03c0449e6203.json"
+    },
+    {
       "id": "9ab1ac9840cd5be44207d75d",
       "title": "2026 Q1 生活報告｜Ambiguous",
       "summary": "今年第一篇生活報告拖了好久，主因是三月突然接到一拖拉庫的案子，多到我必須做甘特圖來安撫自己事情做得完。好在事情 […]",
@@ -637,28 +659,6 @@
       "sourceTitle": "Wiwi.Blog Blog",
       "link": "https://wiwi.blog/blog/okinawa-clearfree",
       "detailPath": "articles/0bd98c003d918be17f011fc3.json"
-    },
-    {
-      "id": "581978fed1f99a03b20b0dbb",
-      "title": "It Depends 是我最討厭的一句話",
-      "summary": "很多工程師會說「要看情況」來結束一場討論。但在我看來，能夠促成討論才是最重要的。",
-      "image": "https://image.kalan.dev/13471728-b917-4768-4e08-75eeb4986400/normal",
-      "publishedAt": "2026-04-19T00:00:00Z",
-      "sourceId": "538caf01ac3ab305",
-      "sourceTitle": "愷開的部落格",
-      "link": "https://blog.kalan.dev/random/it-depends/",
-      "detailPath": "articles/581978fed1f99a03b20b0dbb.json"
-    },
-    {
-      "id": "0eaf2cb2caa30aaf29e6d0cf",
-      "title": "最近惦念 20260410",
-      "summary": "「人可以是很多人。」",
-      "image": null,
-      "publishedAt": "2026-04-18T16:50:27Z",
-      "sourceId": "8e5dc5a8b5023a8e",
-      "sourceTitle": "折腾人生",
-      "link": "https://z.arlmy.me/posts/TILs/thoughts/20260410_Recently/",
-      "detailPath": "articles/0eaf2cb2caa30aaf29e6d0cf.json"
     }
   ]
 }
