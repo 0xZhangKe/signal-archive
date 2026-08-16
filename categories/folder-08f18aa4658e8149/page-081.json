@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "700ad0a0fa945f3ba329310b",
+      "title": "GFW Archaeology: gfw-looking-glass.sh",
+      "summary": "I came across a one-liner script by @gfwrev and got seriously impressed by it. Although it does not work anymore, I still would like to have a writeup on it for its beauty and for the author’s creativity. The one-liner named gfw-looking-glass.sh is as follows: while true; do printf \"\\0\\0\\1\\0\\0\\1\\0\\0\\0\\0\\0\\0\\6wux.ru\\300\" | nc -uq1 $SOME_IP 53 | hd -s20; done…",
+      "image": null,
+      "publishedAt": "2020-03-08T00:00:00Z",
+      "sourceId": "34d02af866ebd5fa",
+      "sourceTitle": "Great Firewall Report",
+      "link": "https://gfw.report/blog/gfw_looking_glass/en/",
+      "detailPath": "articles/700ad0a0fa945f3ba329310b.json"
+    },
+    {
       "id": "987d9d34f99476fe0ef4f9e9",
       "title": "GFW考古：gfw-looking-glass.sh",
       "summary": "我近日被 @gfwrev 所写的 一行脚本 深深吸引。尽管它已经失效，但它所流露出来的创意与美感仍值得被记录。 这行名为 gfw-looking-glass.sh 的脚本如下： while true; do printf \"\\0\\0\\1\\0\\0\\1\\0\\0\\0\\0\\0\\0\\6wux.ru\\300\" | nc -uq1 $SOME_IP 53 | hd -s20; done 如下图所示，它可以被用来 打印出GFW内存中的某一部分 。这是怎么做到的呢? nc nc -uq1 $SOME_IP 53 会把在stdin收到的信息以UDP包的形式发送给 $SOME_IP 的53端口。如@gfwrev所 解释 的， $SOME_IP 可以是满足以下两个条件的任何IP地址：1） 不会 回应发送到其53端口的任何信息；2）在…",
@@ -648,17 +659,6 @@
       "sourceTitle": "Android Performance",
       "link": "https://androidperformance.com/2019/05/28/Android-Systrace-About/",
       "detailPath": "articles/afe20b18354229a08e8be909.json"
-    },
-    {
-      "id": "b9a1b4405eb9aa29f7117455",
-      "title": "Archives",
-      "summary": "",
-      "image": null,
-      "publishedAt": "2019-05-28T00:00:00Z",
-      "sourceId": "6e72225640979074",
-      "sourceTitle": "Isommersieisalvati",
-      "link": null,
-      "detailPath": "articles/b9a1b4405eb9aa29f7117455.json"
     }
   ]
 }
