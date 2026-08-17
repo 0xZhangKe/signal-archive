@@ -1,5 +1,182 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-08-16T15:05:36+00:00</updated><author><name>Simon Willison</name></author><entry><title>Quoting Dario Amodei</title><link href="https://simonwillison.net/2026/Aug/16/dario-amodei/" rel="alternate"/><published>2026-08-16T15:05:36+00:00</published><updated>2026-08-16T15:05:36+00:00</updated><id>https://simonwillison.net/2026/Aug/16/dario-amodei/</id><summary type="html">
+<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-08-16T23:59:37+00:00</updated><author><name>Simon Willison</name></author><entry><title>Markdown SVG upgrades</title><link href="https://simonwillison.net/2026/Aug/16/markdown-svg-upgrades/" rel="alternate"/><published>2026-08-16T23:59:37+00:00</published><updated>2026-08-16T23:59:37+00:00</updated><id>https://simonwillison.net/2026/Aug/16/markdown-svg-upgrades/</id><summary type="html">
+    &lt;p&gt;I started building my &lt;a href="https://tools.simonwillison.net/markdown-svg-renderer"&gt;markdown-svg-renderer&lt;/a&gt; tool &lt;a href="https://tools.simonwillison.net/colophon#markdown-svg-renderer.html"&gt;in May&lt;/a&gt;, but I've since added enough features to it that it's worth talking about here again.&lt;/p&gt;
+&lt;p&gt;It's evolved into my ideal tool for sharing Markdown transcripts that include SVG documents. Given my &lt;a href="https://simonwillison.net/tags/pelican-riding-a-bicycle/"&gt;proclivity for drawing pelicans riding bicycles&lt;/a&gt; this is a problem that I needed to solve!&lt;/p&gt;
+&lt;p&gt;The tool is very simple. Navigate to &lt;a href="https://tools.simonwillison.net/markdown-svg-renderer"&gt;markdown-svg-renderer&lt;/a&gt; in your browser and paste in some Markdown to see it rendered... or save that Markdown to a CORS-friendly URL or a GitHub Gist and paste in a URL to that document.&lt;/p&gt;
+&lt;p&gt;The URL option will give you a bookmarkable page, for example &lt;a style="overflow-wrap: anywhere;" href="https://tools.simonwillison.net/markdown-svg-renderer#url=https%3A%2F%2Fgist.github.com%2Fsimonw%2F6f9e48293be5c916652d29f0dc0b0657"&gt;https://tools.simonwillison.net/markdown-svg-renderer#url=https%3A%2F%2Fgist.github.com%2Fsimonw%2F6f9e48293be5c916652d29f0dc0b0657&lt;/a&gt; - which bakes in the URL to &lt;a href="https://gist.github.com/simonw/6f9e48293be5c916652d29f0dc0b0657"&gt;this Gist&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;If you visit &lt;a href="https://gist.github.com/simonw/6f9e48293be5c916652d29f0dc0b0657"&gt;the Gist&lt;/a&gt; you'll see raw SVG:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="beautiful-circle.md. Here's a self-contained SVG — a &amp;quot;compass study&amp;quot; of a circle with construction lines, a slowly rotating tick ring, and an orbiting accent dot: a block of SVG code" src="https://static.simonwillison.net/static/2026/raw-svg.webp" /&gt;&lt;/p&gt;
+&lt;p&gt;In the rendered tool that &lt;a href="https://tools.simonwillison.net/markdown-svg-renderer#url=https%3A%2F%2Fgist.github.com%2Fsimonw%2F6f9e48293be5c916652d29f0dc0b0657"&gt;looks like this&lt;/a&gt; instead:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="The same text, but now the code block has been replaced by a tabbed panel. The selected tab reads &amp;quot;Rendered&amp;quot; and shows the rendered PNG. The other tabs are PNG, JPEG, MP4, and Code" src="https://static.simonwillison.net/static/2026/rendered-svg.webp" /&gt;&lt;/p&gt;
+&lt;p&gt;As you can see, that SVG block in the Markdown has been transformed into a rendered SVG (in this case animated) plus several tabs.&lt;/p&gt;
+&lt;p&gt;The tabs are the really fun bit. The PNG and JPEG tabs render that SVG to those image formats in the browser and lets you copy or download them - useful for sharing on platforms that don't support SVG directly.&lt;/p&gt;
+&lt;p&gt;The MP4 tab is &lt;a href="https://github.com/simonw/tools/commit/73e0327f6df9887ba2a9f9f16a2d06a45451d248"&gt;new today&lt;/a&gt; - it examines the SVG to see if it contains any animations, attempts to guess how long the looped video should be, then renders a whole bunch of frames of the animation and loads 30+MB of &lt;a href="https://github.com/ffmpegwasm/ffmpeg.wasm"&gt;ffmpeg.wasm&lt;/a&gt; so it can compile those frames into an MP4 video using the full power of FFMPEG compiled to WebAssembly and running in the browser.&lt;/p&gt;
+&lt;p&gt;Being able to turn an animated SVG into a MP4 again makes it easy to share on platforms that can't support SVG animation natively. It's a neat trick!&lt;/p&gt;
+
+    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/svg"&gt;svg&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/markdown"&gt;markdown&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/tools"&gt;tools&lt;/a&gt;&lt;/p&gt;
+
+
+
+</summary><category term="svg"/><category term="markdown"/><category term="tools"/></entry><entry><title>Qwen 3.8 27B is excellent, but it defaults to wildly overthinking things</title><link href="https://simonwillison.net/2026/Aug/16/qwen-38-27b/" rel="alternate"/><published>2026-08-16T22:00:39+00:00</published><updated>2026-08-16T22:00:39+00:00</updated><id>https://simonwillison.net/2026/Aug/16/qwen-38-27b/</id><summary type="html">
+    &lt;p&gt;Friday's big release was &lt;a href="https://huggingface.co/Qwen/Qwen3.8-27B"&gt;Qwen 3.8 27B&lt;/a&gt;, an Apache 2 licensed 27B parameter vision-capable LLM from Alibaba's Qwen research lab. I've been looking forward to this one: 27B is an excellent size for running a model on a reasonably specced laptop, and its predecessor &lt;a href="https://simonwillison.net/2026/Apr/22/qwen36-27b/"&gt;Qwen 3.6 27B&lt;/a&gt; was impressive.&lt;/p&gt;
+&lt;p&gt;Qwen's &lt;a href="https://huggingface.co/Qwen/Qwen3.8-27B#benchmark-results"&gt;self-reported benchmarks&lt;/a&gt; for this model are eye-opening. They show a boost from both Qwen 3.6 27B &lt;em&gt;and&lt;/em&gt; the closed-weight Qwen 3.7-Plus, which was one of Qwen's strongest models of any size as recently as &lt;a href="https://qwen.ai/blog?id=qwen3.7-plus"&gt;May this year&lt;/a&gt;. It will be interesting to hear what independent benchmarks have to say about the model.&lt;/p&gt;
+&lt;p&gt;I've been running the model on two different machines: my 128GB M5 Max MacBook Pro, and an &lt;a href="https://simonwillison.net/2025/Oct/14/nvidia-dgx-spark/"&gt;NVIDIA DGX Spark&lt;/a&gt;. On both machines I'm running LM Studio and &lt;a href="https://lmstudio.ai/models/qwen3.8"&gt;their 17GB Q4_K_M quantized build&lt;/a&gt;. I also tried  using &lt;code&gt;llama-server&lt;/code&gt; directly on the Spark.&lt;/p&gt;
+&lt;h4 id="the-default-of-extra-high-results-in-spectacular-over-thinking"&gt;The default of extra high results in spectacular over-thinking&lt;/h4&gt;
+&lt;p&gt;Qwen's documentation describes the model as defaulting to &lt;code&gt;xhigh&lt;/code&gt; for the reasoning effort, and the LM Studio GGUF I've been trying preserves that default:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Qwen3.8 comes with official support for &lt;code&gt;reasoning_effort&lt;/code&gt;, which can be used to adjust reasoning depth and control cost:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;code&gt;xhigh&lt;/code&gt; (default): for complex tasks demanding thorough analysis&lt;/li&gt;
+&lt;li&gt;
+&lt;code&gt;medium&lt;/code&gt;: balancing accuracy and speed&lt;/li&gt;
+&lt;li&gt;
+&lt;code&gt;low&lt;/code&gt;: efficient reasoning optimizing for speed and cost&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;This is a &lt;em&gt;hilarious&lt;/em&gt; default. It's absolutely not a good way to run the model, especially on consumer hardware. I've been finding the results extremely entertaining.&lt;/p&gt;
+&lt;p&gt;I quickly ran into problems with LM Studio's default context limit of 8,192 tokens - Qwen was using them all up thinking about even the most mundane of problems. I loaded the model with the full 262,144 maximum context length and that problem went away.&lt;/p&gt;
+&lt;p&gt;Here's &lt;a href="https://tools.simonwillison.net/markdown-svg-renderer#url=https%3A%2F%2Fgist.github.com%2Fsimonw%2Ffc909bea4fecf752c7bf9bad0e9dbf2a"&gt;the pelican riding a bicycle&lt;/a&gt; SVG I got from my first attempt with that increased context length. It took &lt;strong&gt;21 minutes&lt;/strong&gt; to generate, using 22,276 reasoning tokens to produce 3,223 tokens of output. You can read &lt;a href="https://tools.simonwillison.net/markdown-svg-renderer#url=https%3A%2F%2Fgist.github.com%2Fsimonw%2Ffc909bea4fecf752c7bf9bad0e9dbf2a"&gt;the reasoning trace here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://static.simonwillison.net/static/2026/qwen-thinking-bicycle-27b.jpg" alt="A very pleasing image of a pelican riding a bicycle. The bicycle is red and has the correct frame shape. The pelican looks like a pelican and has its wing extended to the handlebars." style="max-width: 100%;" /&gt;&lt;/p&gt;
+&lt;p&gt;This is by far the best pelican SVG I've been able to generate with a model that runs on a local machine - and this Qwen is pretty small, just a 17GB file on disk. There's a lot to like about this:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;The bicycle frame is the right shape&lt;/li&gt;
+&lt;li&gt;It has legs on each side of the bike - that's &lt;em&gt;very&lt;/em&gt; rare&lt;/li&gt;
+&lt;li&gt;Good, clear pelican pouch&lt;/li&gt;
+&lt;li&gt;The wings extend to touch the handlebars!&lt;/li&gt;
+&lt;li&gt;The motion lines are behind, not in front&lt;/li&gt;
+&lt;li&gt;It has a tasteful background - nice sun, clouds, hill, flowers and grass.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Was that worth waiting 21 minutes for? Absolutely not.&lt;/p&gt;
+&lt;p&gt;Here's that same prompt run with reasoning turned off - &lt;a href="https://tools.simonwillison.net/markdown-svg-renderer#url=https%3A%2F%2Fgist.github.com%2Fsimonw%2F1265cfa8dce2f9ad5eb160792ff45a49"&gt;transcript here&lt;/a&gt;. This one produced &lt;strong&gt;3,715 tokens&lt;/strong&gt; and took 137s - just over two minutes.&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://static.simonwillison.net/static/2026/qwen-3.8-27b-no-reasoning-pelican-2.png" alt="The bicycle frame is a bad shape now. The pelican remains recognizable but has a less obvious pouch. The feet miss the pedal, there is no attempt to hold the handlebars." style="max-width: 100%;" /&gt;
+And just for completeness, I used OpenRouter to run the same prompt through the much larger Qwen 3.8 2.4T-A95B (released &lt;a href="https://huggingface.co/Qwen/Qwen3.8-2.4T-A95B"&gt;last week&lt;/a&gt;) and got this snazzy &lt;a href="https://tools.simonwillison.net/markdown-svg-renderer#url=https%3A%2F%2Fgist.github.com%2Fsimonw%2F557016f0895b2abb4b9957caec781734"&gt;animated SVG&lt;/a&gt;:&lt;/p&gt;
+&lt;p&gt;&lt;video
+    controls="controls" loop="loop•"
+    preload="none"
+    poster="https://static.simonwillison.net/static/2026/qwen-animated-first-frame.jpg"
+    width="720"
+    height="548"
+    style="display: block; width: 100%; height: auto;"
+  &gt;
+    &lt;source src="https://static.simonwillison.net/static/2026/qwen-animated-small.mp4" type="video/mp4" /&gt;
+    Your browser does not support HTML5 video.
+  &lt;/video&gt;
+&lt;/p&gt;
+I said Qwen at xhigh has a tendency to over-think things, but how bad really is it?
+&lt;p&gt;I tried a much simpler prompt, again with that default extra high setting:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;draw an svg of a circle&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Qwen's reasoning trace started like this:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The user is asking for an SVG drawing of a circle. Simple request — but I want it to be a carefully crafted piece. Let me make something that goes beyond just &lt;code&gt;&amp;lt;circle&amp;gt;&lt;/code&gt;: a single self-contained SVG file with character — maybe a geometric "circle study," with subtle animation, layered rings, and a distinctive palette.&lt;/p&gt;
+&lt;p&gt;Keep the scope right: they asked for an SVG of a circle. So the core is a circle. But I can add craft: concentric guide circles (like a compass/geometry drawing), tick marks, a soft gradient fill on the main circle, restrained ambient motion (a slowly rotating dashed ring, pulsing glow). Respect prefers-reduced-motion? That's more for CSS; SVG SMIL or CSS inside SVG will do.&lt;/p&gt;
+&lt;p&gt;Palette options: deep teal ink on warm paper? Or bold vermilion circle on off-white with navy construction lines — Bauhaus/compass-drawing vibe. Let me go with a "geometric study" look: cool slate background, or bright paper white? Paper white is fine if it's not the cream-and-terracotta combo. [...]&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Several minutes later it &lt;a href="https://tools.simonwillison.net/markdown-svg-renderer#url=https%3A%2F%2Fgist.github.com%2Fsimonw%2F6f9e48293be5c916652d29f0dc0b0657"&gt;produced&lt;/a&gt; this &lt;em&gt;absolutely beautiful&lt;/em&gt; animated circle, which was entirely not what I had asked for!&lt;/p&gt;
+&lt;p&gt;&lt;video
+    controls="controls" loop="loop"
+    preload="none"
+    poster="https://static.simonwillison.net/static/2026/circle-web-first-frame.jpg"
+    width="1078"
+    height="1080"
+    style="display: block; width: 100%; height: auto;"
+  &gt;
+    &lt;source src="https://static.simonwillison.net/static/2026/circle-web.mp4" type="video/mp4" /&gt;
+    Your browser does not support HTML5 video.
+  &lt;/video&gt;
+&lt;/p&gt;
+My strong recommendation: ignore that default. Run Qwen 3.8 27B on low or even no reasoning levels at first. It's a great model, but wow that default setting is a bad place to start.
+&lt;h4 id="it-s-very-good-at-bounding-boxes"&gt;It's very good at bounding boxes&lt;/h4&gt;
+&lt;p&gt;A fun way to test a vision model is to see how well it can return bounding boxes around items in a photograph. I've seen previous Qwen models deal well with this, so I decided to put it to the test drawing bounding boxes around some pelicans.&lt;/p&gt;
+&lt;p&gt;I've seen asking for 0-1000 scale produce good results in the past. I tried this:&lt;/p&gt;
+&lt;div class="highlight highlight-source-shell"&gt;&lt;pre&gt;llm -a https://static.inaturalist.org/photos/714731804/large.jpg \
+  -m lmstudio/qwen/qwen3.8-27b \
+  &lt;span class="pl-s"&gt;&lt;span class="pl-pds"&gt;'&lt;/span&gt;Return JSON bounding boxes for the pelicans in this photo, 0-1000 scale for each dimension&lt;span class="pl-pds"&gt;'&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Here's &lt;a href="https://gist.github.com/simonw/a05cc78b2061555bd61d3bb9686e689f"&gt;the reasoning trace&lt;/a&gt;, which produced this:&lt;/p&gt;
+&lt;div class="highlight highlight-source-json"&gt;&lt;pre&gt;[
+  {&lt;span class="pl-ent"&gt;"bbox_2d"&lt;/span&gt;: [&lt;span class="pl-c1"&gt;195&lt;/span&gt;, &lt;span class="pl-c1"&gt;290&lt;/span&gt;, &lt;span class="pl-c1"&gt;370&lt;/span&gt;, &lt;span class="pl-c1"&gt;780&lt;/span&gt;], &lt;span class="pl-ent"&gt;"label"&lt;/span&gt;: &lt;span class="pl-s"&gt;&lt;span class="pl-pds"&gt;"&lt;/span&gt;pelicans&lt;span class="pl-pds"&gt;"&lt;/span&gt;&lt;/span&gt;},
+  {&lt;span class="pl-ent"&gt;"bbox_2d"&lt;/span&gt;: [&lt;span class="pl-c1"&gt;445&lt;/span&gt;, &lt;span class="pl-c1"&gt;320&lt;/span&gt;, &lt;span class="pl-c1"&gt;675&lt;/span&gt;, &lt;span class="pl-c1"&gt;850&lt;/span&gt;], &lt;span class="pl-ent"&gt;"label"&lt;/span&gt;: &lt;span class="pl-s"&gt;&lt;span class="pl-pds"&gt;"&lt;/span&gt;pelicans&lt;span class="pl-pds"&gt;"&lt;/span&gt;&lt;/span&gt;}
+]&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This is &lt;em&gt;such a good match&lt;/em&gt;. Here are those boxes rendered on top of the photo:&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://static.simonwillison.net/static/2026/qwen-over-engineered-bbox.webp" alt="A photograph of two pelicans on a rocky outcrop, with three other smaller birds. The pelicans both have bounding boxes exactly surrounding them, each with a label that says pelican." style="max-width: 100%;" /&gt;&lt;/p&gt;
+&lt;h4 id="building-a-tool-to-label-bounding-boxes"&gt;Building a tool to label bounding boxes&lt;/h4&gt;
+&lt;p&gt;That visualization of the bounding boxes was taken using a new custom tool that I had Qwen 3.8 27B build for me, running offline on my laptop.&lt;/p&gt;
+&lt;p&gt;I forgot to dial down the thinking effort so it was &lt;em&gt;massively over-engineered&lt;/em&gt;, but it did manage to produce &lt;a href="https://static.simonwillison.net/static/2026/qwen-over-thinking-bbox.html"&gt;this full interface&lt;/a&gt; from &lt;a href="https://gist.github.com/simonw/121ad098860028b2fab603fa12da1fd9"&gt;this single prompt&lt;/a&gt;:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;pre&gt;&lt;code&gt;[
+   {"bbox_2d": [195, 290, 370, 780], "label": "pelicans"},
+   {"bbox_2d": [445, 320, 675, 850], "label": "pelicans"}
+]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;Build an HTML page which has an input box for accepting the URL to an image and a textarea for accepting the above style of JSON.&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;It appends the image to the page, measures its width and height, then treats the coords in the bbox_2d as scaled from 0-1000 and scales them against the actual width and height, then it renders labelled boxes over the image.&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;This screenshot shows one of the features I did &lt;em&gt;not&lt;/em&gt; ask for - a demo scene, for if you don't have a photograph to test the tool with:&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://static.simonwillison.net/static/2026/qwen-full-ui-with-pelicans.webp" alt="Screenshot of bbox·lab, a dark-themed web tool that overlays object-detection bounding boxes on an image, with an input panel on the left and a stage on the right showing two labeled boxes around stylized pelicans in a sunset illustration. Header: bbox·lab — normalized 0–1000 coords → pixel overlay; status indicator: RENDERED · 2 BOXES. Panel 01 INPUT (URL + detections) contains an IMAGE URL field reading data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA+, a DETECTIONS — JSON textarea reading  {&amp;quot;bbox_2d&amp;quot;: 195, 290, 370, 780, &amp;quot;label&amp;quot;: &amp;quot;pelicans&amp;quot;}, {&amp;quot;bbox_2d&amp;quot;: 445, 320, 675, 850, &amp;quot;label&amp;quot;: &amp;quot;pelicans&amp;quot;} , an orange RENDER BOXES button, and dashed boxes labeled DEMO SCENE and CLEAR. Panel 03 STAGE header: display 661 × 661 px · 1 unit = 0.661px x 0.661px · nat 1000×1000. The stage shows a flat-style illustration of two dark pelican silhouettes with orange beaks standing in calm water against an orange-to-purple sunset sky with a pale yellow sun and distant birds; an orange bounding box labeled 1 · pelicans surrounds the left pelican and a cyan bounding box labeled 2 · pelicans surrounds the right pelican. Footer: move the cursor over the image to read grid coords; boxes map 0–1000 → displayed px." style="max-width: 100%;" /&gt;&lt;/p&gt;
+&lt;p&gt;Here's the relevant segment of the thinking trace, where it decided to draw its own pelicans purely because I had used the label "pelicans" in the example JSON I gave it in the prompt:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Also a "load sample" that uses a known image? Can't depend on external images, but… the image URL input is user-provided; I could add a "try with sample" button [...] Hmm, I can draw a simple scene on canvas, export it as a data URL, and load it into the image — that's self-contained and demo-able! [...] But the user's coords are for an actual pelican image; a generated placeholder can still demo the scaling. Generate a 1000x1000 placeholder: gradient water + two blob-like "pelican" silhouettes placed at the given bboxes (using the same scale — cute: silhouettes at the exact 0-1000 positions, showing the boxes align). This makes for a fun, self-contained demo. Keep it simple: sky gradient, sun, water, two pelican-ish shapes (ellipse body, circle head, beak). Place at bbox centers.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;(I'm slightly nervous that models around the world might have a bias towards drawing pelicans at any chance they can get, brought on by nearly two years of exposure to my own stupid benchmark.)&lt;/p&gt;
+&lt;p&gt;Is all that over-thinking necessary? Maybe it is, at least a bit. I tried with reasoning turned off and got &lt;a href="https://static.simonwillison.net/static/2026/qwen-no-thinking-bbox.html"&gt;this version&lt;/a&gt;, (&lt;a href="https://gist.github.com/simonw/8e78b1c64d9a56d08eedb954aa9445ee"&gt;transcript here&lt;/a&gt;), which nearly works but shows the boxes in the wrong place:&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://static.simonwillison.net/static/2026/qwen-no-reasoning-bug.webp" alt="BBox Studio screenshot - a solid UI but the yellow and green boxes do not cover the pelicans." style="max-width: 100%;" /&gt;&lt;/p&gt;
+&lt;p&gt;So without reasoning it didn't quite one-shot a working tool. I'm sure it could get there with some follow-up prompts, but this is a good example of how reasoning can make a difference.&lt;/p&gt;
+&lt;h4 id="yes-it-can-drive-coding-agents"&gt;Yes, it can drive coding agents&lt;/h4&gt;
+&lt;p&gt;One of the biggest questions around local models is whether or not they have enough horsepower to successfully run a coding agent loop. Coding agents require long context, strong code generation support and reliable tool-calling. On paper Qwen 3.8 27B has all three of these, so is it up to the task?&lt;/p&gt;
+&lt;p&gt;My initial experiments with &lt;a href="https://pi.dev/"&gt;Pi&lt;/a&gt; have been very promising. I chose Pi because it has a shorter system prompt than most other options, making it a better fit for trying out smaller models.&lt;/p&gt;
+&lt;p&gt;I configured Pi to use Qwen 3.8 27B running in LM Studio on the Spark (shared via &lt;code&gt;tailscale serve&lt;/code&gt;) by adding this to &lt;code&gt;~/.pi/agent/models.json&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight highlight-source-json"&gt;&lt;pre&gt;{
+  &lt;span class="pl-ent"&gt;"providers"&lt;/span&gt;: {
+    &lt;span class="pl-ent"&gt;"spark"&lt;/span&gt;: {
+      &lt;span class="pl-ent"&gt;"baseUrl"&lt;/span&gt;: &lt;span class="pl-s"&gt;&lt;span class="pl-pds"&gt;"&lt;/span&gt;https://spark-18b3.tail68a31.ts.net/v1&lt;span class="pl-pds"&gt;"&lt;/span&gt;&lt;/span&gt;,
+      &lt;span class="pl-ent"&gt;"api"&lt;/span&gt;: &lt;span class="pl-s"&gt;&lt;span class="pl-pds"&gt;"&lt;/span&gt;openai-responses&lt;span class="pl-pds"&gt;"&lt;/span&gt;&lt;/span&gt;,
+      &lt;span class="pl-ent"&gt;"apiKey"&lt;/span&gt;: &lt;span class="pl-s"&gt;&lt;span class="pl-pds"&gt;"&lt;/span&gt;dummy&lt;span class="pl-pds"&gt;"&lt;/span&gt;&lt;/span&gt;,
+      &lt;span class="pl-ent"&gt;"models"&lt;/span&gt;: [
+        {
+          &lt;span class="pl-ent"&gt;"id"&lt;/span&gt;: &lt;span class="pl-s"&gt;&lt;span class="pl-pds"&gt;"&lt;/span&gt;qwen3.8-27b&lt;span class="pl-pds"&gt;"&lt;/span&gt;&lt;/span&gt;,
+          &lt;span class="pl-ent"&gt;"reasoning"&lt;/span&gt;: &lt;span class="pl-c1"&gt;true&lt;/span&gt;
+        }
+      ]
+    }
+  }
+}&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Then ran &lt;code&gt;pi --provider spark --model qwen3.8-27b&lt;/code&gt; in my &lt;code&gt;~/dev/datasette&lt;/code&gt; folder and prompted:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;how does auth work?&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;After a sequence of reasoning and tool calls that accessed a bunch of different files it produced &lt;a href="https://gist.github.com/simonw/6693d74a6bd45f641d43ceb9961dd95f#core-idea-actors--plugins-no-built-in-user-accounts"&gt;this reply&lt;/a&gt;, which is very solid.&lt;/p&gt;
+&lt;p&gt;Just one problem: I wanted to share that transcript. So I pointed Pi and Qwen 3.8 27B at the JSONL transcript file in &lt;code&gt;~/.pi/agent/sessions/--Users-simon-Dropbox-dev-datasette--&lt;/code&gt; and prompted:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;Write Python code to convert this jsonl to markdown&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;And it built and tested this &lt;a href="https://github.com/simonw/tools/blob/main/python/pi_jsonl_to_md.py"&gt;pi_jsonl_to_md.py&lt;/a&gt;, which did exactly what I needed. Here's &lt;a href="https://gist.github.com/simonw/491e55ac9d741202ea0af5d9d93775d4"&gt;that session transcript&lt;/a&gt;, published using the tool that it created.&lt;/p&gt;
+&lt;h4 id="the-quest-for-speed"&gt;The quest for speed&lt;/h4&gt;
+&lt;p&gt;So far this is all looking &lt;em&gt;very&lt;/em&gt; promising. We have a 17GB model that runs on high-end consumer hardware and can write code, drive tools, annotate images and generally do everything that I need from an LLM for getting real work done.&lt;/p&gt;
+&lt;p&gt;There's one very significant catch: it feels slow - especially when it starts over-thinking, but even without that it's not particularly sprightly.&lt;/p&gt;
+&lt;p&gt;I've been getting around 15-30 tokens a second from LM Studio. That's not terrible, but it's slow enough that it's going to be hard to win me away from hosted API models, which can return results a whole lot faster. Artificial Analysis &lt;a href="https://artificialanalysis.ai/models#speed"&gt;track token speed&lt;/a&gt; and show OpenAI 5.6 Sol at 74 tokens/second and 5.6 Luna at an impressive 184/second.&lt;/p&gt;
+&lt;p&gt;The good news is that the community have been exploring ways to speed things up since the model was first released two days ago.&lt;/p&gt;
+&lt;p&gt;One of the most promising optimizations is baked into the model itself. Qwen supports &lt;a href="https://sebastianraschka.com/llm-architecture-gallery/mtp/"&gt;Multi-Token Prediction&lt;/a&gt;, an architecture trick where a cheaper mechanism guesses several tokens ahead and the main model can then quickly verify if the guesses were correct. This can have quite a dramatic effect on inference performance.&lt;/p&gt;
+&lt;p&gt;Based on &lt;a href="https://twitter.com/ggerganov/status/2088340681701925253"&gt;this tweet&lt;/a&gt; from &lt;code&gt;llama.cpp&lt;/code&gt; creator Georgi Gerganov I tried running the model with MTP like this on the Spark:&lt;/p&gt;
+&lt;div class="highlight highlight-source-shell"&gt;&lt;pre&gt;llama serve \
+ -hf  ggml-org/Qwen3.8-27B-GGUF:Q4_K_M \
+ -hfd ggml-org/Qwen3.8-27B-GGUF:Q4_0 \
+ --spec-default \
+ --spec-type draft-mtp \
+ --reasoning-preserve&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And sure enough, this gave me a significant boost. I had GPT-5.6 in Codex run &lt;a href="https://gist.github.com/simonw/b08c7eb9c126c806ba8987e269ea736b"&gt;a comparative benchmark on the Spark&lt;/a&gt; and the &lt;code&gt;--spec-type draft-mtp&lt;/code&gt; server outperformed the LM Studio default GGUF by around 72%.&lt;/p&gt;
+&lt;p&gt;I expect we'll see a whole lot more innovation around serving this model faster over the next few weeks. The MLX community likely have some tricks brewing as well.&lt;/p&gt;
+&lt;h4 id="some-observations"&gt;Some observations&lt;/h4&gt;
+&lt;p&gt;The fact that a 17GB file can do all of this stuff on my home machines is a &lt;em&gt;miracle&lt;/em&gt;. Once again, I'm delighted and amazed at how much progress local models have made this year. A year ago this would have been competitive with the best and most expensive of the proprietary models - today it can run on a capable laptop.&lt;/p&gt;
+&lt;p&gt;The only thing holding this back from being a daily driver is performance. It feels pretty slow on both the M5 Mac and the DGX Spark. That's the catch with these dense (non-Mixture-of-Experts) models - they require a whole lot of memory bandwidth to perform well, and neither of the machines I have access to are top performers in that regard.&lt;/p&gt;
+&lt;p&gt;The most important thing about Qwen 3.8 27B is &lt;strong&gt;what it demonstrates&lt;/strong&gt;. We can have an open weights general purpose model with a long context, effective tool calling, strong vision ability, and competent code generation, and we can fit the whole thing in just a 17GB file.&lt;/p&gt;
+&lt;p&gt;The models at this size continue to get better at an impressive rate. We don't need to spend half a million dollars on datacenter-class hardware just to run a competent model.&lt;/p&gt;
+    
+        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/local-llms"&gt;local-llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/qwen"&gt;qwen&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/pelican-riding-a-bicycle"&gt;pelican-riding-a-bicycle&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llm-reasoning"&gt;llm-reasoning&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llama-cpp"&gt;llama-cpp&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llm-release"&gt;llm-release&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/coding-agents"&gt;coding-agents&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/lm-studio"&gt;lm-studio&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai-in-china"&gt;ai-in-china&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/nvidia-spark"&gt;nvidia-spark&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/pi"&gt;pi&lt;/a&gt;&lt;/p&gt;
+    
+
+</summary><category term="ai"/><category term="generative-ai"/><category term="local-llms"/><category term="llms"/><category term="qwen"/><category term="pelican-riding-a-bicycle"/><category term="llm-reasoning"/><category term="llama-cpp"/><category term="llm-release"/><category term="coding-agents"/><category term="lm-studio"/><category term="ai-in-china"/><category term="nvidia-spark"/><category term="pi"/></entry><entry><title>Quoting Dario Amodei</title><link href="https://simonwillison.net/2026/Aug/16/dario-amodei/" rel="alternate"/><published>2026-08-16T15:05:36+00:00</published><updated>2026-08-16T15:05:36+00:00</updated><id>https://simonwillison.net/2026/Aug/16/dario-amodei/</id><summary type="html">
     &lt;blockquote cite="https://twitter.com/darioamodei/status/2088758819304443967"&gt;&lt;p&gt;I do agree that the public has a negative view of AI (and that this is a big problem), but I don’t think it is primarily caused by me or any other AI leader warning about AI’s risks.  I think it is fundamentally a crisis of trust.  I think that ordinary people don’t trust companies, governments, or the tech industry and always suspect that we are cooking up some new way to screw them over.  The causes of this go back decades and AI is just the latest iteration of it.  I don’t think that a glitzy marketing campaign with a positive spin (which some have advocated that Anthropic do) is the way to win back that trust — at this point, saying that AI will cure cancer is more a cliche than it is inspiring, and most people think it is deceptive.  The thing that will work is &lt;em&gt;actually curing cancer&lt;/em&gt;.  I think by far the most accurate criticism of AI companies including Anthropic is that we haven’t yet delivered on our big promises to benefit the world.  That is totally on us, and I think it’s the criticism you should be making, instead of all this stuff about messaging and marketing.&lt;/p&gt;&lt;/blockquote&gt;
 &lt;p class="cite"&gt;&amp;mdash; &lt;a href="https://twitter.com/darioamodei/status/2088758819304443967"&gt;Dario Amodei&lt;/a&gt;&lt;/p&gt;
 
@@ -401,7 +578,7 @@ Anthropic are &lt;em&gt;really&lt;/em&gt; confident in Claude Code's &lt;a href=
 
 </summary><category term="security"/><category term="ai"/><category term="prompt-injection"/><category term="generative-ai"/><category term="llms"/><category term="anthropic"/><category term="coding-agents"/><category term="claude-code"/><category term="lethal-trifecta"/><category term="thariq-shihipar"/></entry><entry><title>Now we have a timeline of the OpenAI accidental attack against Hugging Face</title><link href="https://simonwillison.net/2026/Aug/8/now-we-have-a-timeline-of-the-openai-accidental-attack-against-h/" rel="alternate"/><published>2026-08-08T14:06:41+00:00</published><updated>2026-08-08T14:06:41+00:00</updated><id>https://simonwillison.net/2026/Aug/8/now-we-have-a-timeline-of-the-openai-accidental-attack-against-h/</id><summary type="html">
     
-        &lt;p&gt;&lt;a href="https://news.ycombinator.com/item?id=49220609#49221745"&gt;My comment&lt;/a&gt; on &lt;a href="https://news.ycombinator.com/item?id=49220609"&gt;Now we have a timeline of the OpenAI accidental attack against Hugging Face&lt;/a&gt; &amp;mdash; Hacker News.&lt;/p&gt;&lt;p&gt;I think one of the most interesting details here might be tucked away in that first bulletin point:&lt;/p&gt;
+        &lt;p&gt;&lt;a href="https://news.ycombinator.com/item?id=49220609#49221745"&gt;My comment&lt;/a&gt; on &lt;a href="https://news.ycombinator.com/item?id=49220609"&gt;Now we have a timeline of the OpenAI accidental attack against Hugging Face&lt;/a&gt; &amp;mdash; Hacker News.&lt;/p&gt;&lt;p&gt;I think one of the most interesting details here might be tucked away in that first bullet point:&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;May 7: OpenAI starts a new training run for an experimental, unreleased model. &lt;em&gt;(Do they mean an evaluation run? They say training run in the video, and later mention a “reward signal to judge how well they’re doing”, so I guess this really was about training a model, not evaluating one that was already trained.)&lt;/em&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -572,47 +749,4 @@ There's a fun anecdote from Accenture (apparently via leaked meeting audio recor
         &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/datasette"&gt;datasette&lt;/a&gt;&lt;/p&gt;
     
 
-</summary><category term="datasette"/></entry><entry><title>Simon Willison on Technical Blogging</title><link href="https://simonwillison.net/2026/Aug/6/simon-willison-on-technical-blogging/" rel="alternate"/><published>2026-08-06T18:04:39+00:00</published><updated>2026-08-06T18:04:39+00:00</updated><id>https://simonwillison.net/2026/Aug/6/simon-willison-on-technical-blogging/</id><summary type="html">
-    
-&lt;p&gt;&lt;strong&gt;&lt;a href="https://writethatblog.substack.com/p/simon-willison-on-technical-blogging"&gt;Simon Willison on Technical Blogging&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
-I was interviewed by Cynthia Dunlop for her "Write that blog!" series back in January, but I just realized I never linked to the interview from my own blog!&lt;/p&gt;
-&lt;p&gt;It includes my answers to the following questions:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Why did you start blogging – and why do you continue?&lt;/li&gt;
-&lt;li&gt;What has been the most surprising impact of blogging for you?&lt;/li&gt;
-&lt;li&gt;What blog post are you most proud of and why?&lt;/li&gt;
-&lt;li&gt;What post was the most difficult to write and how did you tackle it?&lt;/li&gt;
-&lt;li&gt;Any lessons learned that you want to share with the community?&lt;/li&gt;
-&lt;li&gt;Your advice for people just getting started with blogging?&lt;/li&gt;
-&lt;li&gt;A few blogs that you particularly enjoy?&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;I'll repeat my most important piece of advice here:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;My number one tip for blogging is to lower your standards! Aim to hit publish while you are still actively unhappy with what you have written, because the only alternative is a huge folder full of drafts and never publishing anything at all.&lt;/p&gt;
-&lt;p&gt;Nobody will ever know how perfect the thing you &lt;em&gt;intended&lt;/em&gt; to write would have been. The flaws you see in your writing are invisible to everyone else.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-
-    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/blogging"&gt;blogging&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/interviews"&gt;interviews&lt;/a&gt;&lt;/p&gt;
-
-
-
-</summary><category term="blogging"/><category term="interviews"/></entry><entry><title>An AI model from Meta also hacked another company during testing</title><link href="https://simonwillison.net/2026/Aug/6/an-ai-model-from-meta/" rel="alternate"/><published>2026-08-06T00:25:27+00:00</published><updated>2026-08-06T00:25:27+00:00</updated><id>https://simonwillison.net/2026/Aug/6/an-ai-model-from-meta/</id><summary type="html">
-    
-&lt;p&gt;&lt;strong&gt;&lt;a href="https://www.cnn.com/2026/08/05/tech/meta-ai-hacking"&gt;An AI model from Meta also hacked another company during testing&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
-Stop me if you've &lt;a href="https://simonwillison.net/tags/accidental-cyberattacks/"&gt;heard this one before&lt;/a&gt;:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;An AI model from the parent company of Facebook and Instagram hacked into another company’s systems during cybersecurity testing, a spokesperson confirmed on Wednesday.&lt;/p&gt;
-&lt;p&gt;Meta says the breach occurred because of an inadvertent error during testing of the model, similar to previously disclosed incidents with OpenAI and Anthropic.&lt;/p&gt;
-&lt;p&gt;“A misconfiguration by Irregular, an independent testing company Meta uses, inadvertently allowed one of our models access to the internet during evaluation,” the Meta spokesperson said.&lt;/p&gt;
-&lt;p&gt;Meta’s Muse Spark model “exploited a security vulnerability” in another company “in a manner similar to previously-reported instances with other companies.”&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;The Information &lt;a href="https://www.theinformation.com/articles/meta-ai-model-hacked-another-company-cybersecurity-testing"&gt;had the scoop&lt;/a&gt;, I'm linking to CNN's re-report of it since they don't have a paywall.&lt;/p&gt;
-&lt;p&gt;So that's Anthropic, OpenAI, and Meta. Google Gemini really needs to catch up on accidentally cyberattacking other companies.
-
-
-    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/security"&gt;security&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/meta"&gt;meta&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/accidental-cyberattacks"&gt;accidental-cyberattacks&lt;/a&gt;&lt;/p&gt;
-
-
-
-</summary><category term="security"/><category term="ai"/><category term="generative-ai"/><category term="llms"/><category term="meta"/><category term="accidental-cyberattacks"/></entry></feed>
+</summary><category term="datasette"/></entry></feed>
