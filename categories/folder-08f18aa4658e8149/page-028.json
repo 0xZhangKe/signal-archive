@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "d3d373b2793098e9591f6e5d",
+      "title": "从0到0.1的医美经验",
+      "summary": "我讨厌每天涂涂抹抹，就希望来个狠的，让我半年不要操心。和不同的朋友同事聊起我做过的项目，发现完全没有接触过医美的人很容易对这些东西心怀畏惧，或者是有一些围观娱乐圈带来的认识偏差。",
+      "image": null,
+      "publishedAt": "2026-03-20T22:55:21Z",
+      "sourceId": "88a1fc290dd0b8a7",
+      "sourceTitle": "沉默之沙",
+      "link": "https://yukieyun.net/takeaway/my-cosmetic-surgery-01/",
+      "detailPath": "articles/d3d373b2793098e9591f6e5d.json"
+    },
+    {
       "id": "fd5cdf53d61f4d9483c69619",
       "title": "Windows 98 主題",
       "summary": "在 ThinkPad X220 上裝了 GhostBSD 來玩，裡面有個 Windows 98 風格的主題，好喜歡喔！",
@@ -648,17 +659,6 @@
       "sourceTitle": "All posts | 所有貼文 on ttheng's microblog. | 侃侃而隨想極短文。",
       "link": "https://microblog.ttheng.com/japan-high-school-music-textbook-cover/",
       "detailPath": "articles/13a17b76a3147f9525a104db.json"
-    },
-    {
-      "id": "54b82787e3305135c9ade289",
-      "title": "soluna 外挂 C 模块",
-      "summary": "soluna 集成了 lua 虚拟机，但默认构建方式是将 lua 库静态链接到唯一的执行文件中。这将导致无法以动态库的形式外挂 Lua 的 C 扩展。 这是因为，如果独立编译 Lua 的 C 扩展库，通常需要链接 Lua 的 C API 。标准的方法是动态链接 lua 实现，如果静态链接 liblua.a ，会导致进程中有多份 lua 的实现。在 Lua 的历史版本中，这将导致运行期错误。 这是因为，Lua 的实现中有一个静态的“空”对象，所有的 nil 都指向这个对象。如果进程空间中有多份 Lua 实现，就会出现多个空对象。运行时的数据结构中会引用这个空对象，而不同副本的实现将“空”和自身保留的“空”对象引用做比较时，就会出现错误的判断。 在更早期的版本，出现这种链接出现的项目，bug 会隐藏得很深。所以后…",
-      "image": null,
-      "publishedAt": "2026-03-11T06:49:58Z",
-      "sourceId": "64ba70840e06d623",
-      "sourceTitle": "云风的 BLOG",
-      "link": "https://blog.codingnow.com/2026/03/soluna_external_lib.html",
-      "detailPath": "articles/54b82787e3305135c9ade289.json"
     }
   ]
 }
