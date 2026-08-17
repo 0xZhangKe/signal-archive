@@ -1,5 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-08-16T23:59:37+00:00</updated><author><name>Simon Willison</name></author><entry><title>Markdown SVG upgrades</title><link href="https://simonwillison.net/2026/Aug/16/markdown-svg-upgrades/" rel="alternate"/><published>2026-08-16T23:59:37+00:00</published><updated>2026-08-16T23:59:37+00:00</updated><id>https://simonwillison.net/2026/Aug/16/markdown-svg-upgrades/</id><summary type="html">
+<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-08-17T15:21:29+00:00</updated><author><name>Simon Willison</name></author><entry><title>We Tracked a Shipment of Rare Books. It Ended at an Amazon AI Training Facility</title><link href="https://simonwillison.net/2026/Aug/17/we-tracked-a-shipment-of-rare-books-it-ended-at-an-amazon-ai-tra/" rel="alternate"/><published>2026-08-17T15:21:29+00:00</published><updated>2026-08-17T15:21:29+00:00</updated><id>https://simonwillison.net/2026/Aug/17/we-tracked-a-shipment-of-rare-books-it-ended-at-an-amazon-ai-tra/</id><summary type="html">
+    
+&lt;p&gt;&lt;strong&gt;&lt;a href="https://www.404media.co/we-tracked-a-shipment-of-rare-books-it-ended-at-an-amazon-ai-training-facility/"&gt;We Tracked a Shipment of Rare Books. It Ended at an Amazon AI Training Facility&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+Excellent piece of reporting from 404 Media. For a while now there have been stories of book dealers receiving orders for large volumes of books from apparently price-insensitive anonymous customers, widely suspected to be companies looking to scan them for AI training (see &lt;a href="https://simonwillison.net/2025/Jun/24/anthropic-training/"&gt;my previous coverage&lt;/a&gt; of Anthropic's book scanning from June 2025.)&lt;/p&gt;
+&lt;p&gt;404 Media investigated with an AirTag!&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;In July, one bookseller told me they received a very large order of around 1,000 books on Biblio, one of these marketplaces. The seller agreed to put an Apple AirTag provided by 404 Media in one of the books included in this order so we could see where the book was going. And by extension, which company, AI or otherwise, was behind this massive order.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The book ended up delivered to the VGT3 corner of the &lt;a href="https://maps.app.goo.gl/2hMqbHrovTSZxh1U9"&gt;LAS8 Amazon facility&lt;/a&gt; in the north east of Las Vegas, where the entrance carried this on-the-nose logo of a dinosaur with a book!&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Photo of an office entrance. A logo in the window shows a red tyrannosaurus with a book, its claws clearly digging in and with a hint that it is more interested in destruction than reading." src="https://static.simonwillison.net/static/2026-08-17/IMG_7418.jpeg" /&gt;&lt;/p&gt;
+&lt;p style="margin-top: -1em"&gt;&lt;small&gt;Photo credit: 404 Media&lt;/small&gt;&lt;/p&gt;
+
+&lt;p&gt;Online forum discussions between Amazon workers confirmed that VGT3 destructively scans large volumes of books.
+
+
+    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/amazon"&gt;amazon&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/journalism"&gt;journalism&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/training-data"&gt;training-data&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai-ethics"&gt;ai-ethics&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/404-media"&gt;404-media&lt;/a&gt;&lt;/p&gt;
+
+
+
+</summary><category term="amazon"/><category term="journalism"/><category term="ai"/><category term="training-data"/><category term="ai-ethics"/><category term="404-media"/></entry><entry><title>Markdown SVG upgrades</title><link href="https://simonwillison.net/2026/Aug/16/markdown-svg-upgrades/" rel="alternate"/><published>2026-08-16T23:59:37+00:00</published><updated>2026-08-16T23:59:37+00:00</updated><id>https://simonwillison.net/2026/Aug/16/markdown-svg-upgrades/</id><summary type="html">
     &lt;p&gt;I started building my &lt;a href="https://tools.simonwillison.net/markdown-svg-renderer"&gt;markdown-svg-renderer&lt;/a&gt; tool &lt;a href="https://tools.simonwillison.net/colophon#markdown-svg-renderer.html"&gt;in May&lt;/a&gt;, but I've since added enough features to it that it's worth talking about here again.&lt;/p&gt;
 &lt;p&gt;It's evolved into my ideal tool for sharing Markdown transcripts that include SVG documents. Given my &lt;a href="https://simonwillison.net/tags/pelican-riding-a-bicycle/"&gt;proclivity for drawing pelicans riding bicycles&lt;/a&gt; this is a problem that I needed to solve!&lt;/p&gt;
 &lt;p&gt;The tool is very simple. Navigate to &lt;a href="https://tools.simonwillison.net/markdown-svg-renderer"&gt;markdown-svg-renderer&lt;/a&gt; in your browser and paste in some Markdown to see it rendered... or save that Markdown to a CORS-friendly URL or a GitHub Gist and paste in a URL to that document.&lt;/p&gt;
@@ -63,7 +82,7 @@ And just for completeness, I used OpenRouter to run the same prompt through the 
     Your browser does not support HTML5 video.
   &lt;/video&gt;
 &lt;/p&gt;
-I said Qwen at xhigh has a tendency to over-think things, but how bad really is it?
+&lt;p&gt;I said Qwen at xhigh has a tendency to over-think things, but how bad really is it?&lt;/p&gt;
 &lt;p&gt;I tried a much simpler prompt, again with that default extra high setting:&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;code&gt;draw an svg of a circle&lt;/code&gt;&lt;/p&gt;
@@ -713,11 +732,11 @@ There's a fun anecdote from Accenture (apparently via leaked meeting audio recor
     &lt;p&gt;&lt;small&gt;&lt;/small&gt;Via &lt;a href="https://www.tiktok.com/@404.media/video/7654962124053171470"&gt;@404.media on TikTok&lt;/a&gt;&lt;/small&gt;&lt;/p&gt;
 
 
-    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/pdf"&gt;pdf&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/markdown"&gt;markdown&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai-misuse"&gt;ai-misuse&lt;/a&gt;&lt;/p&gt;
+    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/pdf"&gt;pdf&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/markdown"&gt;markdown&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai-misuse"&gt;ai-misuse&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/404-media"&gt;404-media&lt;/a&gt;&lt;/p&gt;
 
 
 
-</summary><category term="pdf"/><category term="markdown"/><category term="ai"/><category term="generative-ai"/><category term="llms"/><category term="ai-misuse"/></entry><entry><title>datasette-auth-tokens 0.4a13</title><link href="https://simonwillison.net/2026/Aug/6/datasette-auth-tokens/" rel="alternate"/><published>2026-08-06T23:07:47+00:00</published><updated>2026-08-06T23:07:47+00:00</updated><id>https://simonwillison.net/2026/Aug/6/datasette-auth-tokens/</id><summary type="html">
+</summary><category term="pdf"/><category term="markdown"/><category term="ai"/><category term="generative-ai"/><category term="llms"/><category term="ai-misuse"/><category term="404-media"/></entry><entry><title>datasette-auth-tokens 0.4a13</title><link href="https://simonwillison.net/2026/Aug/6/datasette-auth-tokens/" rel="alternate"/><published>2026-08-06T23:07:47+00:00</published><updated>2026-08-06T23:07:47+00:00</updated><id>https://simonwillison.net/2026/Aug/6/datasette-auth-tokens/</id><summary type="html">
     
         &lt;p&gt;&lt;strong&gt;Release:&lt;/strong&gt; &lt;a href="https://github.com/simonw/datasette-auth-tokens/releases/tag/0.4a13"&gt;datasette-auth-tokens 0.4a13&lt;/a&gt;&lt;/p&gt;
         &lt;p&gt;Upgraded for compatibility with `sqlite-utils 4.&lt;/p&gt;
@@ -740,13 +759,4 @@ There's a fun anecdote from Accenture (apparently via leaked meeting audio recor
         &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/security"&gt;security&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/sql-injection"&gt;sql-injection&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/datasette"&gt;datasette&lt;/a&gt;&lt;/p&gt;
     
 
-</summary><category term="security"/><category term="sql-injection"/><category term="datasette"/></entry><entry><title>datasette 0.65.3</title><link href="https://simonwillison.net/2026/Aug/6/datasette-2/" rel="alternate"/><published>2026-08-06T18:22:07+00:00</published><updated>2026-08-06T18:22:07+00:00</updated><id>https://simonwillison.net/2026/Aug/6/datasette-2/</id><summary type="html">
-    
-        &lt;p&gt;&lt;strong&gt;Release:&lt;/strong&gt; &lt;a href="https://github.com/simonw/datasette/releases/tag/0.65.3"&gt;datasette 0.65.3&lt;/a&gt;&lt;/p&gt;
-        &lt;p&gt;Back-ported the SQL Injection security fix from &lt;a href="https://simonwillison.net/2026/Aug/6/datasette/"&gt;1.0a38&lt;/a&gt;.&lt;/p&gt;
-    
-    
-        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/datasette"&gt;datasette&lt;/a&gt;&lt;/p&gt;
-    
-
-</summary><category term="datasette"/></entry></feed>
+</summary><category term="security"/><category term="sql-injection"/><category term="datasette"/></entry></feed>
