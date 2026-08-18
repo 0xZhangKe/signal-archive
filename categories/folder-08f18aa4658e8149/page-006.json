@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "722283639e96f365f5a9c515",
+      "title": "跟另一個站長互相監控：Uptime Kuma 交叉託管,和 Trust Proxy 開了反而更危險",
+      "summary": "這篇記錄了作者跟另一位自架站長交叉監控的完整過程,並整理成一份可照做的教學。起點是自架服務的一個尷尬處境:監控自己的那台機器,自己掛了就沒人通知得了。解法是互相盯,但一開始兩人都卡在同一個錯誤前提上——以為要走 HTTPS 就得交換憑證。真正的答案是不用交換:對方把子網域 A 紀錄指向你的 IP,TLS 就在你這裡終結,Let's Encrypt 的 HTTP-01 驗證會直接打到你的 nginx,所以你自己就能簽那張憑證、還自動續簽;共享 wildcard 反而踩中私鑰暴露與手動續簽兩個雷。文中也整理了反代 Kuma 必備的 WebSocket 設定(少了 Upgrade 標頭,即時圖表會完全不動)、給後端加公開 /health 而非用 401 取巧、用 push 型監控盯 cron 腳本這種沉默故障,以及…",
+      "image": null,
+      "publishedAt": "2026-07-31T06:00:43Z",
+      "sourceId": "bd51496b8ec0ca1d",
+      "sourceTitle": "Koimsurai 手記",
+      "link": "https://koimsurai.com/blog/uptime-kuma-cross-monitoring",
+      "detailPath": "articles/722283639e96f365f5a9c515.json"
+    },
+    {
       "id": "2d00af5c56b30c3f8245e544",
       "title": "雨林裡的青蛙",
       "summary": "第一次聊天就聊宇宙的維度、平行宇宙、無數個自我、高我和暗物質的發現。 之後的話題常是哲學、生命探討、佛學等等 […] The post 雨林裡的青蛙 first appeared on susushare.com .",
@@ -648,17 +659,6 @@
       "sourceTitle": "槽边往事",
       "link": "https://www.hecaitou.com/2026/07/Proof-of-Fanhood.html",
       "detailPath": "articles/5eb537189d88590c4852a274.json"
-    },
-    {
-      "id": "11d281f092147978a7b7e3b1",
-      "title": "大脑充血 Vol.91",
-      "summary": "连续九十周坚持在每周一的早晨或下午发表一篇刊物，大概算得上是自律吧，不过写周刊于我并不是苦修，而是温和的自我管理。我每周都会接收大量的信息，我不想让它们光滑地从我的大脑皮层上掠过，至少应该留下点痕迹。 发刊词 里写的周期性总结之类的话，对如今的我早就不成立了（另外，两年前的我竟然把 ChatGPT 聊天记录贴在文章里吗？真是可怕……）。 周刊的格式和写作方式常常改变，这些改变不是精益求精，而是为了适应生活节奏的改变。比方说前段时间我想要和社交媒体保持距离，于是「切片」栏目的内容就多了起来，记录了我原本会发在联邦宇宙上的文字。如今过上了每周上五天班，每天工作七小时的生活，周刊的写作方式大概也需要调整， 毕竟上班摸鱼的时候没办法直接把发现的有意思的东西塞进周刊草稿里 。各方面的压力少了很多，每天除了工作、读书、思…",
-      "image": "https://img.eltr.ac/geedeapro/weekly/76/Paramore_-_All_We_Know_Is_Falling.png",
-      "publishedAt": "2026-07-27T00:10:59Z",
-      "sourceId": "7e27e325b5de8871",
-      "sourceTitle": "極客死亡計劃",
-      "link": "https://www.geedea.pro/weekly/91/",
-      "detailPath": "articles/11d281f092147978a7b7e3b1.json"
     }
   ]
 }
