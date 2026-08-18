@@ -1,4 +1,134 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Mastodon Blog</title><link>https://blog.joinmastodon.org/</link><description>Recent content on Mastodon Blog</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Wed, 12 Aug 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.joinmastodon.org/index.xml" rel="self" type="application/rss+xml"/><item><title>Sharing Guidelines about Mastodon’s Trade Mark Policy</title><link>https://blog.joinmastodon.org/2026/08/sharing-guidelines-about-mastodons-trade-mark-policy/</link><pubDate>Wed, 12 Aug 2026 00:00:00 +0000</pubDate><guid>https://blog.joinmastodon.org/2026/08/sharing-guidelines-about-mastodons-trade-mark-policy/</guid><description>&lt;p&gt;Recently, members of the community informed us that our &lt;a href="https://joinmastodon.org/trademark"&gt;Trade Mark Policy&lt;/a&gt; isn&amp;rsquo;t clear enough when it comes to when, where, and how servers and developers can use our brand name (Mastodon), particularly in the URL of a server. We heard you! Our team has worked to improve our Policy to make sure it is clear and fair to our community of server admins and developers.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Mastodon Blog</title><link>https://blog.joinmastodon.org/</link><description>Recent content on Mastodon Blog</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Tue, 18 Aug 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.joinmastodon.org/index.xml" rel="self" type="application/rss+xml"/><item><title>5.0: Laying the foundation</title><link>https://blog.joinmastodon.org/2026/08/5.0-laying-the-foundation/</link><pubDate>Tue, 18 Aug 2026 00:00:00 +0000</pubDate><guid>https://blog.joinmastodon.org/2026/08/5.0-laying-the-foundation/</guid><description>&lt;p&gt;Two weeks ago, we shared insights from Mastodon’s first Discovery Week and how it’s informing our roadmap. Today, we’re offering a deeper dive on what’s in store for Mastodon 5.0 – not an exhaustive list of changes, but a glimpse into major decisions and the thoughts behind them.&lt;/p&gt;
+&lt;blockquote class="info"&gt;
+Note: This article contains mockups and screenshots of work currently in development – the final experience may be different from what you see here.
+&lt;/blockquote&gt;
+&lt;h1 id="composing-posts-in-50"&gt;Composing posts in 5.0&lt;/h1&gt;
+&lt;p&gt;Discovery Week showed that Mastodon users are generally happy with the composer UI – and the bigger challenges hindering creation are higher-level and often cultural. So, what does it mean to lay a better foundation for composing on Mastodon?&lt;/p&gt;
+&lt;p&gt;We think it starts with fixing what’s obviously broken: The composer has limited real estate, and users are often wildly unclear about their visibility and interaction settings when composing.&lt;/p&gt;
+&lt;h2 id="the-composer-breaks-free"&gt;The composer breaks free.&lt;/h2&gt;
+&lt;p&gt;The composer window has been confined to Mastodon’s sidebar for 10 years – and we’re finally moving it. In 5.0, the composer opens as a overlay: There when you need it, with plenty of space to create – and hidden when you don’t.&lt;/p&gt;
+&lt;figure&gt;
+ &lt;video src="demo_opening_and_minimising_composer.mp4" class="rounded-lg shadow-lg" autoplay loop muted&gt;
+ &lt;/video&gt;&lt;figcaption class="text-sm"&gt;
+ &lt;p&gt;Prototype of the upcoming composer menu. In addition to this menu, users can quick-compose a post from a prominent ‘New post’ action in the redesigned main navigation.&lt;/p&gt;
+ &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h2 id="the-visibility-selector-is-a-dropdown-again"&gt;The visibility selector is a dropdown again.&lt;/h2&gt;
+&lt;p&gt;We briefly introduced a visibility settings &lt;em&gt;modal&lt;/em&gt; in 4.5 alongside the addition of quote posts. At the time, we were trying to offer important context about how quote settings actually worked, how they were impacted by visibility settings, and the various permutations that were possible. And we heard you loud and clear – the modal approach was clunky, and it added friction by forcing both the eye and the cursor to travel farther on the screen.&lt;/p&gt;
+&lt;p&gt;We knew that the overly explanatory modal was a band-aid fix to a deeper problem: Our visibility settings are downright confusing. Discovery Week confirmed that ‘quiet public’ is particularly misunderstood and that the existing UI doesn’t help users understand the ways that mentions impact who can see their post.&lt;/p&gt;
+&lt;h2 id="quiet-public-leaves-the-chat"&gt;‘Quiet public’ leaves the chat.&lt;/h2&gt;
+&lt;p&gt;The setting itself isn’t going anywhere – it’s just now displayed in the UI as a more accurate representation of what it is: A sub-setting applicable to &lt;em&gt;public&lt;/em&gt; posts that hides the post from search and discovery views.&lt;/p&gt;
+&lt;p&gt;In other words, you can configure ‘quiet public’ on a public post by simply disabling the setting “Discoverable in public feeds &amp;amp; search results”.&lt;/p&gt;
+&lt;figure&gt;
+ &lt;img src="./image8.jpg" class="rounded-lg shadow-lg"
+ alt="Quiet public represented in the 5.0 composer"/&gt; &lt;figcaption class="text-sm"&gt;
+ &lt;p&gt;Quiet public represented in the 5.0 composer&lt;/p&gt;
+ &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h2 id="quote-settings-also-have-a-new-look"&gt;Quote settings also have a new look.&lt;/h2&gt;
+&lt;p&gt;To make the dropdown pattern work with all permutations of visibility &amp;amp; quotability, &lt;em&gt;without&lt;/em&gt; over-explaining to the user, we’ve broken down the options into simpler decisions.&lt;/p&gt;
+&lt;p&gt;Quote settings start with a toggle of ‘Allow others to quote.’ On public posts, the user can toggle on this setting, and then choose whether to allow quotes from everyone or from followers only.&lt;/p&gt;
+&lt;figure&gt;
+ &lt;video src="demo_toggling_on_quote_settings.mp4" class="rounded-lg shadow-lg" autoplay loop muted&gt;
+ &lt;/video&gt;&lt;figcaption class="text-sm"&gt;
+ &lt;p&gt;Prototype showing how a user can toggle on quote settings to reveal additional options.&lt;/p&gt;
+ &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Quotes were implemented in a way that when you set your post visibility to followers-only, it means that only you can quote. In the new UI, this is represented by disabling the option ‘Allow others to quote.’&lt;/p&gt;
+&lt;figure&gt;
+ &lt;video src="demo_switching_to_followers_visibility.mp4" class="rounded-lg shadow-lg" autoplay loop muted&gt;
+ &lt;/video&gt;&lt;figcaption class="text-sm"&gt;
+ &lt;p&gt;Prototype showing that when a user selects ‘Followers’ as the post visibility, the options for discovery and quoting are disabled.&lt;/p&gt;
+ &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h3 id="the-visibility-selector-label-also-adapts-to-context"&gt;The visibility selector label also adapts to context.&lt;/h3&gt;
+&lt;p&gt;When you compose a followers-only post and then mention someone who’s not following you, that person still sees your post. Today, this consequence is not obvious in the UI.&lt;/p&gt;
+&lt;p&gt;In 5.0, the visibility selector’s label updates when you’ve mentioned people in a followers-only post. The name of the first mention is prepended to the label, and if there are multiple mentions, a count is added.&lt;/p&gt;
+&lt;p&gt;If you’re replying to someone, the OP themself is listed first – regardless of whether you remove the at-mention text from your composer.&lt;/p&gt;
+&lt;figure&gt;
+ &lt;img src="./image1.jpg" class="rounded-lg shadow-lg"
+ alt="Example of a reply-in-progress, with a visibility label that includes the name of the OP and a count of other mentions (”Sage, Your followers &amp;#43; 1 other”)"/&gt; &lt;figcaption class="text-sm"&gt;
+ &lt;p&gt;Example of a reply-in-progress, with a visibility label that includes the name of the OP and a count of other mentions (”Sage, Your followers + 1 other”)&lt;/p&gt;
+ &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h1 id="messaging-in-50"&gt;Messaging in 5.0&lt;/h1&gt;
+&lt;h2 id="private-mentions-are-now-messages"&gt;Private mentions are now ‘messages’.&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://blog.joinmastodon.org/2026/08/discovery-week-2026-what-we-learned-and-what-were-doing-next/"&gt;Insights from Discovery Week&lt;/a&gt; and &lt;a href="https://github.com/mastodon/mastodon/issues/24837"&gt;previous feedback on Github&lt;/a&gt; confirmed that the term ‘private mention’ creates more confusion than it alleviates. In 5.0, ‘private mention(s)’ will be renamed ‘message(s)’ throughout the UI. The icon has also changed to a more familiar choice: the chat bubble.&lt;/p&gt;
+&lt;figure&gt;
+ &lt;img src="./image2.jpg" class="rounded-lg shadow-lg"
+ alt="The 5.0 desktop web interface, showing the Messages navigation link and corresponding page."/&gt; &lt;figcaption class="text-sm"&gt;
+ &lt;p&gt;The 5.0 desktop web interface, showing the Messages navigation link and corresponding page.&lt;/p&gt;
+ &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h2 id="dms-are-distinguished-from-posts-in-the-composer"&gt;DMs are distinguished from posts in the composer.&lt;/h2&gt;
+&lt;p&gt;Users should never worry that they’re publishing something that’s meant to be private. That’s why in 5.0, direct messaging has its own composer. Access it from the Messages page, from a user’s profile, or from the composer button in the bottom right corner of the browser window.&lt;/p&gt;
+&lt;figure&gt;
+ &lt;img src="./image3.jpg" class="rounded-lg shadow-lg"
+ alt="Messaging composer opened, showing a ‘New message’ header, and a clearer label on who sees the message, and a ‘Send’ instead of ‘Publish’ button."/&gt; &lt;figcaption class="text-sm"&gt;
+ &lt;p&gt;Messaging composer opened, showing a ‘New message’ header, and a clearer label on who sees the message, and a ‘Send’ instead of ‘Publish’ button.&lt;/p&gt;
+ &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h2 id="dms-are-also-removed-from-confusing-places-in-the-ui"&gt;DMs are also removed from confusing places in the UI.&lt;/h2&gt;
+&lt;p&gt;Starting in 5.0, users will no longer see direct messages in their timeline or profile pages. DMs will be accessible from the Messages page, and nothing changes with notifications.&lt;/p&gt;
+&lt;h1 id="changes-to-navigation-in-50"&gt;Changes to navigation in 5.0&lt;/h1&gt;
+&lt;h2 id="navigation-is-now-single-column"&gt;Navigation is now single-column.&lt;/h2&gt;
+&lt;p&gt;Now that the composer has a new home, we’re able to move all of the important actions to the left navigation.&lt;/p&gt;
+&lt;figure&gt;&lt;a href="./image4.jpg" target="_blank"&gt;
+ &lt;img src="./image4.jpg" class="rounded-lg shadow-lg"
+ alt="Example of the Home page on desktop, with the redesigned navigation."/&gt; &lt;/a&gt;&lt;figcaption class="text-sm"&gt;
+ &lt;p&gt;Example of the Home page on desktop, with the redesigned navigation.&lt;/p&gt;
+ &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h2 id="were-de-emphasising-the-mastodon-logo-and-letting-the-fediverse-take-the-spotlight"&gt;We’re de-emphasising the Mastodon logo, and letting the fediverse take the spotlight.&lt;/h2&gt;
+&lt;p&gt;Mastodon is many servers wrapped into one ecosystem – we’re simply providing the infrastructure. In the top left area of the navigation, users on independent servers running on Mastodon 5.0 will see their server’s name (and optional icon) displayed more prominently, with a small ‘Powered by Mastodon’ indicator (shout out to Vivaldi Social for the visual inspiration).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Server admins:&lt;/strong&gt; Add an app icon and a server name under &lt;em&gt;Preferences &amp;gt; Administration &amp;gt; Server Settings &amp;gt; Branding&lt;/em&gt; to make the most of this experience.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Future-gazing:&lt;/strong&gt; We’re looking at ways to enable custom color schemes, both for end users and for server admins.&lt;/p&gt;
+&lt;figure&gt;
+ &lt;img src="./image5.jpg" class="rounded-lg shadow-lg"
+ alt="Example of the navigation on a fake server, ‘somewhere.social’. The server’s icon appears next to the server name and ‘Powered by Mastodon’ badge."/&gt; &lt;figcaption class="text-sm"&gt;
+ &lt;p&gt;Example of the navigation on a fake server, ‘somewhere.social’. The server’s icon appears next to the server name and ‘Powered by Mastodon’ badge.&lt;/p&gt;
+ &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h3 id="custom-feeds-now-have-greater-prominence"&gt;Custom feeds now have greater prominence.&lt;/h3&gt;
+&lt;p&gt;Mastodon users can organise the accounts they follow into custom feeds, using a feature that Mastodon has historically called ‘lists’. It’s a powerful feature for controlling one’s timeline, but Discovery Week revealed that it’s also an under-discovered one.&lt;/p&gt;
+&lt;p&gt;Despite the fact that most Discovery Week participants were overall more orientated to Mastodon than the average person, 1 in 10 was unaware that this functionality existed. We see this lack of awareness in actual feature usage as well: On mastodon.social, 92% of users active in the last year have zero lists.&lt;/p&gt;
+&lt;p&gt;In 5.0, lists are renamed ‘custom feeds’ and are immediately accessible from the side navigation – not hidden behind an accordion.&lt;/p&gt;
+&lt;figure&gt;
+ &lt;img src="./image6.jpg" class="rounded-lg shadow-lg"
+ alt="Zoomed-in example of 6 custom feeds in the main navigation."/&gt; &lt;figcaption class="text-sm"&gt;
+ &lt;p&gt;Zoomed-in example of 6 custom feeds in the main navigation.&lt;/p&gt;
+ &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;&lt;strong&gt;Future-gazing:&lt;/strong&gt; We’d eventually like to allow users to add hashtags and other filter options to these custom feeds, sort or pin custom feeds, and much more.&lt;/p&gt;
+&lt;h2 id="followed-hashtags-have-less-prominence-for-people-not-already-using-them"&gt;Followed hashtags have &lt;em&gt;less&lt;/em&gt; prominence (for people not already using them).&lt;/h2&gt;
+&lt;p&gt;Many users have requested an ability to follow hashtags but exclude them from their main feed.&lt;/p&gt;
+&lt;p&gt;It turns out that this functionality already exists (sort of) – it was just hidden in the advanced web UI as a separate, client side feature that only Mastodon’s earliest power users knew about. In fact, it was &lt;em&gt;so&lt;/em&gt; buried in the interface that most members on our team were unaware it existed or was possible.&lt;/p&gt;
+&lt;p&gt;What exists: In the advanced web UI, you can pin any hashtag without following it, which creates a new column. From there, you can even combine multiple hashtags or exclude hashtags within that column’s feed.&lt;/p&gt;
+&lt;p&gt;This is great news. It means we’re further along than we thought on the path to more powerful hashtag-focused timelines. We envision a future, not so long from now, where users can add hashtags to custom feeds and choose whether to include or exclude from their main feed – just like you can do with ‘lists’ of accounts today. We believe we can get there as soon as Mastodon 5.1 or 5.2. In the meantime, though, we’re de-emphasising followed hashtags to avoid guiding users to a version of the feature that we know we’re likely to sunset soon.&lt;/p&gt;
+&lt;p&gt;What this means practically for 5.0: If you follow any hashtags, you’ll see them in the side navigation. If you don’t, there’s no empty navigational parent item for ‘Followed hashtags’, and no obvious link that page. We’ll also communicate on the ‘Followed hashtags’ page that a better experience is coming soon.&lt;/p&gt;
+&lt;h2 id="page-headings-are-updated-for-clarity-and-consistency"&gt;Page headings are updated for clarity and consistency.&lt;/h2&gt;
+&lt;p&gt;Think header labels, top-level controls, icon choices, etc. These are the little things that add up, and we realized we had at least 12 different headers – many of which used nonstandard icons to communicate what actions are available on the page. In 5.0, we’ve standardised headers to eliminate the guesswork.&lt;/p&gt;
+&lt;p&gt;By the way, the advanced UI isn’t gone in 5.0 – nor are the local and federated feeds (if enabled on your server).&lt;/p&gt;
+&lt;figure&gt;
+ &lt;img src="./image7.jpg" class="rounded-lg shadow-lg"
+ alt="Example of the Advanced Layout."/&gt; &lt;figcaption class="text-sm"&gt;
+ &lt;p&gt;Example of the Advanced Layout.&lt;/p&gt;
+ &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h1 id="whats-next"&gt;What’s next?&lt;/h1&gt;
+&lt;p&gt;We hope that these changes provide a strong foundation for what’s to come — this is only the beginning!&lt;/p&gt;
+&lt;p&gt;We’re looking for a few folks who are willing to test a basic prototype of these changes and provide feedback. If you’d like to participate, please fill out &lt;a href="https://surveys.joinmastodon.org/s/cmsxb01a2000so501w6mdoz5j"&gt;this interest form&lt;/a&gt;.&lt;/p&gt;</description></item><item><title>Sharing Guidelines about Mastodon’s Trade Mark Policy</title><link>https://blog.joinmastodon.org/2026/08/sharing-guidelines-about-mastodons-trade-mark-policy/</link><pubDate>Wed, 12 Aug 2026 00:00:00 +0000</pubDate><guid>https://blog.joinmastodon.org/2026/08/sharing-guidelines-about-mastodons-trade-mark-policy/</guid><description>&lt;p&gt;Recently, members of the community informed us that our &lt;a href="https://joinmastodon.org/trademark"&gt;Trade Mark Policy&lt;/a&gt; isn&amp;rsquo;t clear enough when it comes to when, where, and how servers and developers can use our brand name (Mastodon), particularly in the URL of a server. We heard you! Our team has worked to improve our Policy to make sure it is clear and fair to our community of server admins and developers.&lt;/p&gt;
 &lt;p&gt;We have updated our Policy to reflect these changes, but we also wanted to share them here with you. Please keep in mind that we have to balance our legal requirement to protect our Trade Marks with our desire to permit appropriate community use.&lt;/p&gt;
 &lt;h2 id="new-guidelines-for-trade-mark-usage"&gt;New guidelines for Trade Mark usage&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;This policy grants additional rights, and does not remove any rights that you have in law.&lt;/strong&gt;&lt;/p&gt;
@@ -2335,6 +2465,7 @@ We’ve also worked on improving the accessibility of the Mastodon Web UI. This 
  &lt;p&gt;Hannah, our former team-mate Inga, Felix, and Eugen. Friend-shaped #plushtodon, too!&lt;/p&gt;
  &lt;/figcaption&gt;
 &lt;/figure&gt;
+
 &lt;p&gt;An extended leadership team includes &lt;a href="https://mastodon.social/@gargron"&gt;Eugen Rochko&lt;/a&gt;, &lt;a href="https://macaw.social/@andypiper"&gt;Andy Piper&lt;/a&gt;, and &lt;a href="https://mastodon.social/@philipkristians"&gt;Philip Schröpel&lt;/a&gt;. As Strategy &amp;amp; Product Advisor, Eugen will leverage his deep knowledge about the Fediverse / social media and product expertise to support Mastodon&amp;rsquo;s long-term vision and development. Andy will continue in his role as Head of Communications, and Philip as Chief of Staff.&lt;/p&gt;
 &lt;p&gt;Our next step is to build more ways for the community to get involved with Mastodon at all levels. Our efforts to define community governance are well underway, and we’re looking forward to getting everyone involved in that soon. With that in mind — are you someone who wants to get involved with Mastodon? We’d love to &lt;a href="https://joinmastodon.org/about#contact"&gt;hear from you&lt;/a&gt;!&lt;/p&gt;
 &lt;h2 id="organisational-update"&gt;&lt;strong&gt;Organisational Update&lt;/strong&gt;&lt;/h2&gt;
@@ -2749,23 +2880,28 @@ We’ve also worked on improving the accessibility of the Mastodon Web UI. This 
 &lt;div class="grid grid-cols-3 grid-rows-2 gap-4 not-prose my-8"&gt;
  &lt;div class="col-span-2 row-span-2"&gt;&lt;figure&gt;
  &lt;img src="PA172510.jpg" class="rounded-lg shadow-lg"/&gt; 
-&lt;/figure&gt;&lt;/div&gt;
+&lt;/figure&gt;
+&lt;/div&gt;
  &lt;div class="col-span-1"&gt;&lt;figure&gt;
  &lt;img src="PA172511.jpg" class="rounded-lg shadow-lg"/&gt; 
-&lt;/figure&gt;&lt;/div&gt;
+&lt;/figure&gt;
+&lt;/div&gt;
  &lt;div class="col-span-1"&gt;&lt;figure&gt;
  &lt;img src="PA172514.jpg" class="rounded-lg shadow-lg"/&gt; 
-&lt;/figure&gt;&lt;/div&gt;
+&lt;/figure&gt;
+&lt;/div&gt;
 &lt;/div&gt;
 &lt;p&gt;Our plushies are &lt;strong&gt;made in an ICTI Ethical Toy Program and Intertek WCA certified factory in China&lt;/strong&gt;, are surface-washable, and are &lt;strong&gt;suitable for children 3+&lt;/strong&gt;. The materials are &lt;strong&gt;super soft velboa on the outside, and polyester fiberfill on the inside&lt;/strong&gt;. It is worth noting that due to the challenges associated with tariffs in the US, this time, the #Plushtodon will &lt;strong&gt;only be available in Europe&lt;/strong&gt; (EU, Norway, Switzerland, and the UK). Like before, there will be a &lt;strong&gt;limited number available&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;We expect them to go on sale at the end of November&lt;/strong&gt;. If you would like to be notified ahead of the public, you can join our merch-specific mailing list below. We only send updates about new merch through it, and your membership helps us gauge interest for future products. Of course, you can also expect us to post about the launch on &lt;a href="https://mastodon.social/@Mastodon"&gt;our official Mastodon account&lt;/a&gt;. If you want to ensure that you don’t miss a post from us, click the bell button next to the follow button.&lt;/p&gt;
 &lt;div class="grid grid-cols-2 gap-4 not-prose my-8"&gt;
  &lt;div class="col-span-1"&gt;&lt;figure&gt;
  &lt;img src="Untitled.png" class="rounded-lg shadow-lg"/&gt; 
-&lt;/figure&gt;&lt;/div&gt;
+&lt;/figure&gt;
+&lt;/div&gt;
  &lt;div class="col-span-1"&gt;&lt;figure&gt;
  &lt;img src="Untitled2.png" class="rounded-lg shadow-lg"/&gt; 
-&lt;/figure&gt;&lt;/div&gt;
+&lt;/figure&gt;
+&lt;/div&gt;
 &lt;/div&gt;
 &lt;p&gt;Along with our new line of plushies, you can expect reprints of our winter and summer mugs, along with two brand new seasonal designs for spring and autumn, so keep an eye on our store over the coming months!&lt;/p&gt;
 &lt;form method="post" action="https://newsroom.joinmastodon.org/subscription/form" class="not-prose rounded-md bg-eggplant p-4 py-6 flex flex-col items-center shadow-lg text-white mt-8"&gt;
@@ -5104,6 +5240,7 @@ The media modal behaviour on mobile has been improved, with better gesture suppo
  &lt;p&gt;Talking about Mastodon in Japan&lt;/p&gt;
  &lt;/figcaption&gt;
 &lt;/figure&gt;
+
 &lt;ul&gt;
 &lt;li&gt;During December, the project published the &lt;a href="https://blog.joinmastodon.org/2024/12/annual-report-2023/"&gt;Annual Report for 2023&lt;/a&gt;.&lt;/li&gt;
 &lt;li&gt;We secured a table at &lt;a href="https://fosdem.org"&gt;FOSDEM&lt;/a&gt; 2025: &lt;a href="https://fosdem.org/2025/stands/"&gt;find us at H14&lt;/a&gt;. We will also be part of the &lt;a href="https://fosdem.org/2025/schedule/track/social-web/"&gt;Social Web&lt;/a&gt; track (more on this below), and attend the &lt;a href="https://socialwebfoundation.org/2025/01/04/social-web-after-hours-at-fosdem-2025/"&gt;Social Web After Hours&lt;/a&gt; meetup.&lt;/li&gt;
@@ -5461,6 +5598,7 @@ Add an option to use the system scrollbars &lt;span class="not-prose"&gt;
  &lt;p&gt;A wild #Plushtodon appeared!&lt;/p&gt;
  &lt;/figcaption&gt;
 &lt;/figure&gt;
+
 &lt;h2 id="releases"&gt;Releases&lt;/h2&gt;
 &lt;p&gt;We released &lt;a href="https://github.com/mastodon/mastodon/releases/tag/v4.3.1"&gt;version 4.3.1&lt;/a&gt;, which mostly features a number of smaller fixes and polish to the main 4.3.0 release. Instance administrators are encouraged to upgrade (if you have not already done so).&lt;/p&gt;
 &lt;h2 id="recent-work"&gt;Recent work&lt;/h2&gt;
@@ -6877,13 +7015,16 @@ Free and open source software, as supported by NGI since 2020, is by design the 
 &lt;figure&gt;
  &lt;img src="screenshot-web-story.png" class="rounded-lg shadow-lg"/&gt; 
 &lt;/figure&gt;
+
 &lt;div class="grid grid-cols-2 gap-4 not-prose my-8"&gt;
  &lt;div class="col-span-1"&gt;&lt;figure&gt;
  &lt;img src="screenshot-web-link1.png" class="rounded-lg shadow-lg"/&gt; 
-&lt;/figure&gt;&lt;/div&gt;
+&lt;/figure&gt;
+&lt;/div&gt;
  &lt;div class="col-span-1"&gt;&lt;figure&gt;
  &lt;img src="screenshot-web-link2.png" class="rounded-lg shadow-lg"/&gt; 
-&lt;/figure&gt;&lt;/div&gt;
+&lt;/figure&gt;
+&lt;/div&gt;
 &lt;/div&gt;
 &lt;h3 id="the-technical"&gt;The technical&lt;/h3&gt;
 &lt;p&gt;We’ve decided to create a new kind of OpenGraph tag—the same kind of tags you have on your website to determine which thumbnail image will appear on the preview for the page when shared on Discord, iMessage, or Mastodon. It looks like this: &lt;code&gt;&amp;lt;meta name=&amp;quot;fediverse:creator&amp;quot; content=&amp;quot;@Gargron@mastodon.social&amp;quot; /&amp;gt;&lt;/code&gt;.&lt;/p&gt;
@@ -7346,13 +7487,16 @@ Free and open source software, as supported by NGI since 2020, is by design the 
 &lt;div class="grid grid-cols-3 gap-4 not-prose my-8"&gt;
  &lt;div class="col-span-1"&gt;&lt;figure&gt;
  &lt;img src="photo_2024-04-14_08-02-28%20%282%29.jpg" class="rounded-lg shadow-lg"/&gt; 
-&lt;/figure&gt;&lt;/div&gt;
+&lt;/figure&gt;
+&lt;/div&gt;
  &lt;div class="col-span-1"&gt;&lt;figure&gt;
  &lt;img src="photo_2024-04-14_08-02-30.jpg" class="rounded-lg shadow-lg"/&gt; 
-&lt;/figure&gt;&lt;/div&gt;
+&lt;/figure&gt;
+&lt;/div&gt;
  &lt;div class="col-span-1"&gt;&lt;figure&gt;
  &lt;img src="photo_2024-04-14_08-02-32.jpg" class="rounded-lg shadow-lg"/&gt; 
-&lt;/figure&gt;&lt;/div&gt;
+&lt;/figure&gt;
+&lt;/div&gt;
 &lt;/div&gt;
 &lt;p&gt;We created a stuffed toy of the highest caliber. Deliberately friend-sized and friend-shaped, with a soft surface material and soft, squishy stuffing, the toy measures a height of 35cm. Perfect as a travel companion you can rest your head on, or to fill in for you at business meetings.&lt;/p&gt;
 &lt;figure&gt;
@@ -7361,6 +7505,7 @@ Free and open source software, as supported by NGI since 2020, is by design the 
  &lt;p&gt;Visiting one of our sponsor&amp;rsquo;s office&lt;/p&gt;
  &lt;/figcaption&gt;
 &lt;/figure&gt;
+
 &lt;p&gt;While some people would be more interested in a smaller size that can be put on display, the goal of the toy is to be a friend to those who need it, rather than simply collect dust.&lt;/p&gt;
 &lt;p&gt;The toy does not have a predefined name or gender. My prototype has received the name Mr. Mastodon from a friend, and is sometimes referred to as “The Boy” in the household. But everyone is free to pick for themselves.&lt;/p&gt;
 &lt;figure&gt;
@@ -7369,6 +7514,7 @@ Free and open source software, as supported by NGI since 2020, is by design the 
  &lt;p&gt;Mr. Mastodon (left) and my wife (right)&lt;/p&gt;
  &lt;/figcaption&gt;
 &lt;/figure&gt;
+
 &lt;p&gt;After running a few polls on Mastodon, we’ve settled on manufacturing 1,000 units. After all, it would be better for the toy to be sold out, than for any of the adorable Mastodons to end up without a home.&lt;/p&gt;
 &lt;p&gt;We’ll divide the stock between a warehouse in Europe and a warehouse in the US to provide the cheapest possible shipping to the parts of the world where we believe most of the buyers would be. At this rather small scale, that is the best we can do.&lt;/p&gt;
 &lt;p&gt;We expect the price to be no higher than 30 USD, which is customary for a toy of this size. We do not expect to do meaningful fundraising from the profits as they would be very thin at these quantities. Our goal is to just get the toy to people who want it.&lt;/p&gt;
@@ -7502,13 +7648,16 @@ Free and open source software, as supported by NGI since 2020, is by design the 
 &lt;div class="grid grid-cols-3 gap-4 not-prose my-8"&gt;
  &lt;div class="col-span-1"&gt;&lt;figure&gt;
  &lt;img src="Mastadon%20T%20shirt%207.jpg" class="rounded-lg shadow-lg"/&gt; 
-&lt;/figure&gt;&lt;/div&gt;
+&lt;/figure&gt;
+&lt;/div&gt;
  &lt;div class="col-span-1"&gt;&lt;figure&gt;
  &lt;img src="Mastadon%20Pin%205.jpg" class="rounded-lg shadow-lg"/&gt; 
-&lt;/figure&gt;&lt;/div&gt;
+&lt;/figure&gt;
+&lt;/div&gt;
  &lt;div class="col-span-1"&gt;&lt;figure&gt;
  &lt;img src="Mastadon%20Sticker%202.jpg" class="rounded-lg shadow-lg"/&gt; 
-&lt;/figure&gt;&lt;/div&gt;
+&lt;/figure&gt;
+&lt;/div&gt;
 &lt;/div&gt;
 &lt;p&gt;We&amp;rsquo;ve just completed the photo shoot and we expect the products to be ready for sale in the next few weeks. To be notified when the store launches, you can subscribe to the mailing list below (or keep an eye out on &lt;a href="https://mastodon.social/@Mastodon"&gt;our Mastodon account&lt;/a&gt;&amp;ndash;did you know you can get notified when we post if you click on the bell button after following?).&lt;/p&gt;
 &lt;p&gt;When we initially polled you on Mastodon to see what kind of demand there is for merch, over 6,700 of you said you would buy something. Of course, social media polls can&amp;rsquo;t entirely be trusted, so we went for a far more conservative initial batch. &lt;strong&gt;Only 250 units of each item will be available at launch. So they might sell out quick!&lt;/strong&gt;&lt;/p&gt;
@@ -7595,6 +7744,7 @@ Free and open source software, as supported by NGI since 2020, is by design the 
  &lt;p&gt;Signing up in the Android app&lt;/p&gt;
  &lt;/figcaption&gt;
 &lt;/figure&gt;
+
 &lt;p&gt;One of the challenges of Mastodon adoption is the onboarding process, because it&amp;rsquo;s not enough to capture a person&amp;rsquo;s desired username and e-mail and let them create an account, which is what people are used to from major websites; instead, you need to first choose a Mastodon server where you will make the account (comparable to e.g. choosing an e-mail provider). The implications of choosing the server are primarily in who is the entity responsible for the server, what moderation policies they enforce, what language and jurisdiction they operate in, and which domain name will be part of your username.&lt;/p&gt;
 &lt;p&gt;We approached this problem with a multiple-step sign-up flow that begins with choosing a server, then requires to agree to summarized moderation policies of the server, and finally goes on to the more familiar username, e-mail and password form. We maintain our own directory of servers that people submit to us after agreeing to some basic rules that guarantee data and user safety and quality of service; those are the servers we display on the first step by default. Still more consideration has been given to how to display them.&lt;/p&gt;
 &lt;p&gt;Our user studies have shown that retention drops off dramatically if the user has to wait for moderator approval before being able to log in (exception being experienced Mastodon users who are already invested in the network and know exactly what they are getting into by requesting an account from an invite-only server); people lose interest and never login even after being approved. Therefore we do not show invite-only servers in the app, focusing instead on the ones that allow people to get started immediately.&lt;/p&gt;
@@ -7608,6 +7758,7 @@ Free and open source software, as supported by NGI since 2020, is by design the 
  &lt;p&gt;Explore tab in the Android app&lt;/p&gt;
  &lt;/figcaption&gt;
 &lt;/figure&gt;
+
 &lt;p&gt;While designing the official apps we got an opportunity to reconsider some Mastodon features. The federated timeline, also known as the public timeline, firehose, or &amp;ldquo;whole known network&amp;rdquo;, is a view into a Mastodon server&amp;rsquo;s real-time database of public posts; and the local timeline is that, but filtered by only posts originating from your Mastodon server. While some people came to rely on those tools, there were a few reasons to (at least initially) omit them from the apps.&lt;/p&gt;
 &lt;p&gt;The federated timeline has too low of a signal vs. noise ratio to be effective as a discovery tool. Due to the way Mastodon pulls down content to provide more detailed profiles and conversations, the federated timeline becomes unmanageable on servers of all sizes, even single-user ones. Unsurprisingly, most content is not actually worth looking at, and in some cases, actively undesirable.&lt;/p&gt;
 &lt;p&gt;This real-time view into everything that&amp;rsquo;s published on the server is a platform for all sorts of abuse that can only be stopped after the damage has been done. Normally, if someone posts spam or nudity, it would not be seen by anyone but themselves. Local and federated timelines instantly turn that into an issue affecting everyone. This puts extra strain on moderators.&lt;/p&gt;
@@ -7634,6 +7785,7 @@ Free and open source software, as supported by NGI since 2020, is by design the 
  &lt;p&gt;Mastodon for iOS&lt;/p&gt;
  &lt;/figcaption&gt;
 &lt;/figure&gt;
+
 &lt;p&gt;&lt;strong&gt;P.S.&lt;/strong&gt; We just released a new version of our &lt;a href="https://apps.apple.com/us/app/mastodon-for-iphone/id1571998974"&gt;official iOS app&lt;/a&gt;, adding iPad support and many visual improvements, and just started &lt;a href="https://www.patreon.com/posts/mastodon-for-64413994"&gt;beta-testing our official Android app&lt;/a&gt; with our Patreon supporters.&lt;/p&gt;</description></item><item><title>Official Mastodon for Android app is coming soon</title><link>https://blog.joinmastodon.org/2022/02/official-mastodon-for-android-app-is-coming-soon/</link><pubDate>Wed, 09 Feb 2022 00:00:00 +0000</pubDate><guid>https://blog.joinmastodon.org/2022/02/official-mastodon-for-android-app-is-coming-soon/</guid><description>&lt;p&gt;Following the successful launch of our official iOS app, in January we&amp;rsquo;ve begun the development of an Android version. We continue working with the NYC design agency &lt;a href="https://lickability.com/"&gt;Lickability&lt;/a&gt; and welcome &lt;a href="https://grishka.me/"&gt;Gregory Klyushnikov&lt;/a&gt;, better known as grishka on the fediverse, as the lead Android developer. Gregory is a talented developer with a history of working on social apps like VKontakte and Telegram.&lt;/p&gt;
 &lt;p&gt;Continued development is not limited to Android. Work on the app flows into the main Mastodon software as existing APIs are adjusted and new APIs are added to support new features, and the web app&amp;rsquo;s UI is improved with ideas from the professional UX designers working on the iOS and Android apps.&lt;/p&gt;
 &lt;p&gt;We are excited to bring an app that takes usability, new user onboarding and visual design seriously to one of the largest mobile platforms.&lt;/p&gt;
@@ -7894,6 +8046,7 @@ Free and open source software, as supported by NGI since 2020, is by design the 
  &lt;p&gt;Creating a new IP rule from the admin interface&lt;/p&gt;
  &lt;/figcaption&gt;
 &lt;/figure&gt;
+
 &lt;h3 id="performance-improvements"&gt;Performance improvements&lt;/h3&gt;
 &lt;p&gt;The release includes &lt;strong&gt;multiple performance optimizations&lt;/strong&gt; both on the server-side and on the client-side. On the client-side, lag caused by typing up a new post should be if not completely removed, vastly reduced, and all live updates from the Streaming API now come through a single connection no matter how many different columns you have open, one or thirty. Requests for an account&amp;rsquo;s media tab, your favourites, bookmarks, or hashtags should be much faster. Operations involving deleting an account&amp;rsquo;s data are up to 100x faster, reducing delays in the system, and so on.&lt;/p&gt;
 &lt;h3 id="bell-button"&gt;&amp;ldquo;Bell button&amp;rdquo;&lt;/h3&gt;
@@ -7903,6 +8056,7 @@ Free and open source software, as supported by NGI since 2020, is by design the 
  &lt;p&gt;Bell button on the Ruby developer&amp;rsquo;s profile&lt;/p&gt;
  &lt;/figcaption&gt;
 &lt;/figure&gt;
+
 &lt;p&gt;Are you following an account that only posts once in a blue moon? And it would almost certainly be drowned out in an otherwise active home feed? Perhaps an artist that only posts new artwork, or a bot that posts weather warnings for your area &amp;ndash; &lt;strong&gt;now you can choose to be notified when a person you follow makes a new post by toggling the bell button on their profile&lt;/strong&gt;.&lt;/p&gt;
 &lt;h3 id="pop-out-media-player"&gt;Pop-out media player&lt;/h3&gt;
 &lt;figure&gt;
@@ -7911,6 +8065,7 @@ Free and open source software, as supported by NGI since 2020, is by design the 
  &lt;p&gt;Continue watching or listening as you browse&lt;/p&gt;
  &lt;/figcaption&gt;
 &lt;/figure&gt;
+
 &lt;p&gt;As for media, if you scroll away from an audio or video while it&amp;rsquo;s still playing, &lt;strong&gt;the playback will continue in the corner of your screen with convenient buttons to reply, boost, or favourite the post it&amp;rsquo;s from&lt;/strong&gt;. You can also finally use &lt;strong&gt;familiar hotkeys to control audio and video playback&lt;/strong&gt; &amp;ndash; space to toggle playback, &amp;ldquo;m&amp;rdquo; to mute, &amp;ldquo;j&amp;rdquo; and &amp;ldquo;l&amp;rdquo; to jump backward and forward, and a few others. And finally, &lt;strong&gt;media modals got a facelift&lt;/strong&gt;, now using the average color from the picture for the page overlay and always showing interactive buttons for the post underneath.&lt;/p&gt;
 &lt;h3 id="conclusion"&gt;Conclusion&lt;/h3&gt;
 &lt;p&gt;The 3.3 release consists of &lt;strong&gt;619 commits&lt;/strong&gt; by &lt;strong&gt;21 contributors&lt;/strong&gt; since July 27, 2020. For line-by-line attributions, you can peruse the &lt;a href="https://github.com/tootsuite/mastodon/blob/v3.3.0/CHANGELOG.md"&gt;changelog file&lt;/a&gt;, and for a historically complete list of contributors and translators, you can refer to the &lt;a href="https://github.com/tootsuite/mastodon/blob/v3.3.0/AUTHORS.md"&gt;authors file&lt;/a&gt;, both included in the release.&lt;/p&gt;
@@ -7935,6 +8090,7 @@ Free and open source software, as supported by NGI since 2020, is by design the 
  &lt;p&gt;Mastodon audio showing up on Twitter&lt;/p&gt;
  &lt;/figcaption&gt;
 &lt;/figure&gt;
+
 &lt;p&gt;When you share links to video or audio on Mastodon on other platforms, for example Twitter, your friends will be able to &lt;strong&gt;open Mastodon&amp;rsquo;s video or audio player right on that platform&lt;/strong&gt; (assuming the platform supports the &lt;code&gt;twitter:player&lt;/code&gt; tag).&lt;/p&gt;
 &lt;p&gt;To better protect your accounts when you&amp;rsquo;re not there, there&amp;rsquo;s a &lt;strong&gt;new security mechanism guarding new login attempts&lt;/strong&gt;. When you don&amp;rsquo;t have two-factor authentication setup, have been away for at least two weeks, and someone tries to login to your account from a previously unseen IP address, they will be required to enter a token sent to your e-mail address.&lt;/p&gt;
 &lt;p&gt;It&amp;rsquo;s a feature more meant to guard those who forget to setup two-factor authentication, so if you are reading this, remember that it&amp;rsquo;s good practice to use two-factor authentication (Mastodon&amp;rsquo;s does not require a phone number or a Mastodon app, any TOTP app works), and to use a password manager to generate random and unique passwords for each account you have!&lt;/p&gt;
@@ -7944,6 +8100,7 @@ Free and open source software, as supported by NGI since 2020, is by design the 
  &lt;p&gt;Adding a personal note&lt;/p&gt;
  &lt;/figcaption&gt;
 &lt;/figure&gt;
+
 &lt;p&gt;Have you ever blocked or muted someone but forgot why? Or have you followed someone but then forgot who they are? Now you can add &lt;strong&gt;personal notes&lt;/strong&gt; to other accounts to keep track of who&amp;rsquo;s who. Visible only to you!&lt;/p&gt;
 &lt;h3 id="conclusion"&gt;Conclusion&lt;/h3&gt;
 &lt;p&gt;The 3.2 release consists of &lt;strong&gt;380 commits&lt;/strong&gt; by &lt;strong&gt;27 contributors&lt;/strong&gt; since May 14, 2020. For line-by-line attributions, you can peruse the &lt;a href="https://github.com/tootsuite/mastodon/blob/v3.2.0/CHANGELOG.md"&gt;changelog file&lt;/a&gt;, and for a historically complete list of contributors and translators, you can refer to the &lt;a href="https://github.com/tootsuite/mastodon/blob/v3.2.0/AUTHORS.md"&gt;authors file&lt;/a&gt;, both included in the release.&lt;/p&gt;
@@ -8063,6 +8220,7 @@ Free and open source software, as supported by NGI since 2020, is by design the 
  &lt;p&gt;Moving followers to another account&lt;/p&gt;
  &lt;/figcaption&gt;
 &lt;/figure&gt;
+
 &lt;p&gt;Additionally, your old account will no longer show up in searches and will have limited functionality (that, of course, can be undone by re-activating it). This process is streamlined and straightforward, and we hope that it makes moving between servers even easier than before!&lt;/p&gt;
 &lt;h3 id="a-more-powerful-search"&gt;A more powerful search&lt;/h3&gt;
 &lt;p&gt;Searching is now more flexible and more powerful than before. &lt;strong&gt;You can now search using &amp;ldquo;phrase matching&amp;rdquo; and by excluding words from a search by including a minus sign before a term&lt;/strong&gt;. For example: if you wanted to search for Cute Doggos (I know what you like) but didn&amp;rsquo;t want to include cats, you’d just search for &lt;code&gt;cute doggos -cat&lt;/code&gt; to get to get those puppies.&lt;/p&gt;
@@ -8074,6 +8232,7 @@ Free and open source software, as supported by NGI since 2020, is by design the 
  &lt;p&gt;Custom custom emojis categories&lt;/p&gt;
  &lt;/figcaption&gt;
 &lt;/figure&gt;
+
 &lt;h3 id="goodbye-ostatus-youve-been-deprecated"&gt;Goodbye OStatus; You’ve been deprecated!&lt;/h3&gt;
 &lt;p&gt;&lt;strong&gt;Mastodon will no longer support OStatus&lt;/strong&gt;. For most users this means that there will be no change whatsoever. For the extremely slim margin of people this affects, please refer to the discussion on the bug tracker to see how we got here. We’re a 100% ActivityPub household now!&lt;/p&gt;
 &lt;h3 id="the-hashiest-hashtags"&gt;The hashiest hashtags&lt;/h3&gt;
@@ -8084,6 +8243,7 @@ Free and open source software, as supported by NGI since 2020, is by design the 
  &lt;p&gt;Hashtag auto-suggestions&lt;/p&gt;
  &lt;/figcaption&gt;
 &lt;/figure&gt;
+
 &lt;p&gt;Even better, you can see &lt;strong&gt;trending hashtags&lt;/strong&gt; now, making it easy to follow along with current events and the lightning-fast world of memes on the fediverse. Hashtag trends aren’t blind though; they’re reviewed by your admin to ensure they aren’t being gamed as a vector for abuse. Trust your admin? Use those hashtags!&lt;/p&gt;
 &lt;figure&gt;
  &lt;img src="trends.png" class="rounded-lg shadow-lg"
@@ -8091,6 +8251,7 @@ Free and open source software, as supported by NGI since 2020, is by design the 
  &lt;p&gt;Trending hashtags&lt;/p&gt;
  &lt;/figcaption&gt;
 &lt;/figure&gt;
+
 &lt;h3 id="the-timelines-alive-with-the-sound-of-music"&gt;The timeline&amp;rsquo;s alive, with the sound of music&lt;/h3&gt;
 &lt;p&gt;We thought the old media player was pretty disappointing, so we did something about it! Introducing the &lt;strong&gt;new and improved audio player&lt;/strong&gt; for web UI! Sharing audio on Mastodon is now much more user-friendly, with a vastly improved experience over the old player.&lt;/p&gt;
 &lt;figure&gt;
@@ -8099,6 +8260,7 @@ Free and open source software, as supported by NGI since 2020, is by design the 
  &lt;p&gt;All new audio player for web UI&lt;/p&gt;
  &lt;/figcaption&gt;
 &lt;/figure&gt;
+
 &lt;h3 id="changes-to-the-ui"&gt;Changes to the UI&lt;/h3&gt;
 &lt;p&gt;Single-column mode now supports &lt;strong&gt;scrolling from anywhere on the page&lt;/strong&gt;! This makes viewing the timeline easier than ever and makes mastodon even friendlier to use on laptops and touchscreens.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Slow mode&lt;/strong&gt;! It’s a slower mode! Pop into the preferences pane and toggle this mode to disable livestreaming in the timeline. Instead, you’ll see a manual link to refresh the feed, with a counter letting you know how many new toots there are for you to catch up on. Having a lot of followers doesn’t mean you aren’t able to keep up anymore: stay in the loop with slow mode!&lt;/p&gt;
@@ -8140,6 +8302,7 @@ Free and open source software, as supported by NGI since 2020, is by design the 
  &lt;p&gt;Data export&lt;/p&gt;
  &lt;/figcaption&gt;
 &lt;/figure&gt;
+
 &lt;p&gt;If you are moving to a new instance the first thing you will want to do is to get a backup of all of your data. Thankfully this process is painless with the Data Export tab under the “Import and Export” page. Here you can download your followers list, your muted users list and your blocked users list.&lt;/p&gt;
 &lt;p&gt;Keeping users safe is one of our top priorities and we highly recommend that anyone moving instances backs up their muted and block lists. We’ve made this as straightforward as possible to ensure that moving instances is a seamless experience and free from having to block those accounts that you do not want to see or interact with.&lt;/p&gt;
 &lt;p&gt;On this page you can also download a copy of your archive that can be read by any ActivityPub software. This archive includes all of your posts and media. So even if the instance that you are moving from shuts down, as is the case with KNZK, you will still have a copy of all of your posts!&lt;/p&gt;
@@ -8150,6 +8313,7 @@ Free and open source software, as supported by NGI since 2020, is by design the 
  &lt;p&gt;Data import&lt;/p&gt;
  &lt;/figcaption&gt;
 &lt;/figure&gt;
+
 &lt;p&gt;Once you have backed up the data that you wish to bring over to your new account (we recommend all of it!) it’s easy to import these into your new account under the “Import” tab of the “Import and Export” page!&lt;/p&gt;
 &lt;p&gt;Here you will simply select the type of data that you are importing and then choose the CVS file that you exported earlier before hitting upload! The CVS files are by default clearly labeled with what kind of data they contain to make it easier to know which file to upload. Depending on your new instances size and the size of the lists that you have imported it will take a few minutes for all of the new data to be properly imported. When the data has finished upload your home TL should look like it did before!&lt;/p&gt;
 &lt;h3 id="announcing-the-move"&gt;Announcing the Move&lt;/h3&gt;
@@ -8159,6 +8323,7 @@ Free and open source software, as supported by NGI since 2020, is by design the 
  &lt;p&gt;Setting up profile redirect&lt;/p&gt;
  &lt;/figcaption&gt;
 &lt;/figure&gt;
+
 &lt;p&gt;As a final step in moving your account, something you may want to do is to let people know that you have moved your account to a new instance! Scrolling to the bottom of the “Appearances” tab of the Profile edit page you will find the option to announce that you have moved accounts under the helpfully titled “Move to a different account” header! What this will do is make it so that when people visit your old profile it is grayed out and people are redirected to your new account.&lt;/p&gt;
 &lt;p&gt;Moving instances is painless and straightforward with Mastodon and we’re happy to have developed tools that give users the greatest possible control over their own data while also keeping them safe!&lt;/p&gt;
 &lt;blockquote&gt;
@@ -8176,6 +8341,7 @@ Free and open source software, as supported by NGI since 2020, is by design the 
  &lt;p&gt;Side-by-side comparison of the original picture of Doris (cat) and the generated blurhash, which is the string KJG8_@Dgx]_4V?xuyE%NRj&lt;/p&gt;
  &lt;/figcaption&gt;
 &lt;/figure&gt;
+
 &lt;p&gt;Here comes Blurhash. Developed by &lt;a href="https://mastodon.social/@WAHa_06x36"&gt;Dag Ågren&lt;/a&gt;, who is behind the popular iOS app for Mastodon, &lt;a href="https://itunes.apple.com/app/toot/id1229021451?ls=1&amp;amp;mt=8"&gt;Toot!&lt;/a&gt;, it is an algorithm that compresses a picture into a short string of letters. The string is so small that there is no problem with saving it in the database, instead of as an image file, and conversely, sending it along with API responses. That means that string is available before any image files are loaded by the browser. You can see where this is going&amp;hellip; When you decode the string back into an image, you get a gradient of colors used in the original image.&lt;/p&gt;
 &lt;p&gt;So little information is transmitted through blurhash that is is safe to display even if the underlying content is inappropriate, and the resulting gradient is pleasant to look at. Even more importantly, it&amp;rsquo;s different for each image, making posts with hidden media look different from each other, which should hopefully increases their chances of getting noticed. But that&amp;rsquo;s not all! Even for posts where images and videos are not supposed to be hidden, it provides a pleasant placeholder while the much heavier image files are loaded by the browser.&lt;/p&gt;
 &lt;p&gt;If you would like to use Blurhash in your project, there is a &lt;a href="https://rubygems.org/gems/blurhash"&gt;Ruby port&lt;/a&gt; on RubyGems and a &lt;a href="https://www.npmjs.com/package/blurhash"&gt;JavaScript port&lt;/a&gt; on NPM. More are to be published by &lt;a href="https://mastodon.social/@WAHa_06x36"&gt;Dag Ågren&lt;/a&gt; in the future!&lt;/p&gt;</description></item><item><title>Mastodon 2.8</title><link>https://blog.joinmastodon.org/2019/04/mastodon-2.8/</link><pubDate>Wed, 10 Apr 2019 00:00:00 +0000</pubDate><guid>https://blog.joinmastodon.org/2019/04/mastodon-2.8/</guid><description>&lt;p&gt;In this long-awaited release: Polls, new tools for managing followers, new frontpage design, new admin features, Keybase integration, and more.&lt;/p&gt;
@@ -8185,6 +8351,7 @@ Free and open source software, as supported by NGI since 2020, is by design the 
  &lt;p&gt;A poll&lt;/p&gt;
  &lt;/figcaption&gt;
 &lt;/figure&gt;
+
 &lt;p&gt;Mastodon now has a &lt;strong&gt;poll feature&lt;/strong&gt;. Instead of attaching images or video to your post, you can ask your followers to choose an answer to your question. You can choose how long a poll will remain open for. Polls in private posts are accessible only to your followers.&lt;/p&gt;
 &lt;figure&gt;
  &lt;img src="featured-tags.png" class="rounded-lg shadow-lg"
@@ -8192,6 +8359,7 @@ Free and open source software, as supported by NGI since 2020, is by design the 
  &lt;p&gt;Featured hashtags on an artist&amp;rsquo;s profile&lt;/p&gt;
  &lt;/figcaption&gt;
 &lt;/figure&gt;
+
 &lt;p&gt;You can now choose which &lt;strong&gt;hashtags to feature on your profile&lt;/strong&gt;. They will be displayed on the sidebar and allow visitors to browse your posts specifically under those hashtags.&lt;/p&gt;
 &lt;p&gt;A new server setting will allow communities to grow without worrying about spammers, trolls, or unexpected traffic spikes: Instead of allowing everyone to sign up, or allowing nobody to sign up, a server owner can choose to let people &lt;strong&gt;apply for an invite&lt;/strong&gt; and manually approve sign-ups.&lt;/p&gt;
 &lt;figure&gt;
@@ -8200,6 +8368,7 @@ Free and open source software, as supported by NGI since 2020, is by design the 
  &lt;p&gt;The new landing page&lt;/p&gt;
  &lt;/figcaption&gt;
 &lt;/figure&gt;
+
 &lt;p&gt;The &lt;strong&gt;landing page has been simplified&lt;/strong&gt; to its essence: Sign up form, quick access to a login form for returning users, short and to the point information about the server, and links to ways of exploring the server.&lt;/p&gt;
 &lt;p&gt;The design of profiles within the web app has been changed to match the design of public profiles more closely, making better use of space and showing the header image without obscuring it.&lt;/p&gt;
 &lt;figure&gt;
@@ -8208,6 +8377,7 @@ Free and open source software, as supported by NGI since 2020, is by design the 
  &lt;p&gt;Manage follows and followers&lt;/p&gt;
  &lt;/figcaption&gt;
 &lt;/figure&gt;
+
 &lt;p&gt;There is a new &lt;strong&gt;powerful UI for managing your followers and follows&lt;/strong&gt;. It allows you to filter them by various criteria, such as your mutuals, or who hasn&amp;rsquo;t been active in a long time, and you can unfollow them in batches, as well as remove them from your followers in batches.&lt;/p&gt;
 &lt;p&gt;In a similar vein, the import tool for follows, mutes, and blocks now allows you to choose whether the imported data will merge with what you already had in your account, or replace it.&lt;/p&gt;
 &lt;p&gt;Among other things, Mastodon now supports &lt;strong&gt;Keybase&amp;rsquo;s new proof system&lt;/strong&gt;, allowing you to connect your Keybase account with your Mastodon account to affirm your identity across the web. Keybase is slowly rolling this feature out on their side, and it will eventually be available to all Mastodon servers.&lt;/p&gt;
@@ -8246,6 +8416,7 @@ Free and open source software, as supported by NGI since 2020, is by design the 
  &lt;p&gt;Profile directory on mastodon.social&lt;/p&gt;
  &lt;/figcaption&gt;
 &lt;/figure&gt;
+
 &lt;p&gt;One of the new features is a &lt;strong&gt;profile directory&lt;/strong&gt; that people can opt-in to. The directory allows you to see at a glance active posters on a given Mastodon server and filter them by the hashtags in their profile bio. So you can find people who share your interests without reading through the public timelines, and you can even find out who to follow from a different Mastodon server without needing to sign up and lurk there!&lt;/p&gt;
 &lt;figure&gt;
  &lt;img src="Screenshot_2019-01-19%20Mastodon%20%28Dev%29.png" class="rounded-lg shadow-lg"
@@ -8253,6 +8424,7 @@ Free and open source software, as supported by NGI since 2020, is by design the 
  &lt;p&gt;Tutorial explaining the timelines&lt;/p&gt;
  &lt;/figcaption&gt;
 &lt;/figure&gt;
+
 &lt;p&gt;The &lt;strong&gt;tutorial&lt;/strong&gt; that new people see after signing up has been completely reworked. It has a tighter narrative: Rather than explaining the minutea of the default user interface, it focuses on the main concepts of Mastodon, from which the interface is a derivation. And it is accompanied by colorful illustrations. It also has the benefit of loading a bit faster, since it&amp;rsquo;s not a modal window laid over the interface, but rather it loads &lt;em&gt;before&lt;/em&gt; the interface.&lt;/p&gt;
 &lt;figure&gt;
  &lt;img src="Screenshot_2019-01-19%20catstodon.png" class="rounded-lg shadow-lg"
@@ -8260,6 +8432,7 @@ Free and open source software, as supported by NGI since 2020, is by design the 
  &lt;p&gt;Public hashtag page for #catstodon&lt;/p&gt;
  &lt;/figcaption&gt;
 &lt;/figure&gt;
+
 &lt;p&gt;The &lt;strong&gt;public hashtag page&lt;/strong&gt; now makes better use of screen estate by arranging toots in a masonry grid instead of a narrow column. The public hashtag page is the page outside the columnized web interface that logged in users see and use&amp;ndash;it is a page oriented primarily towards anonymous viewers.&lt;/p&gt;
 &lt;p&gt;2.7 includes a &lt;strong&gt;new moderation warning system&lt;/strong&gt; for Mastodon. Whereas previously people would learn that their account was suspended or disabled only through a generic error page when trying to access their account, now moderators can choose to notify users about any actions taken against them. Even without specific actions, moderators can send official warnings that get delivered over e-mail and are reflected in the moderator interface, allowing other moderators to stay updated. Moderators can write any additional information in those e-mails. Because many moderation cases are similar, there is a system for saving presets, that moderators can very easily choose from instead of typing messages from scratch every time.&lt;/p&gt;
 &lt;p&gt;Of course, because it&amp;rsquo;s hard to generalize, and some trolls and spam bots are best contained when they don&amp;rsquo;t realize they are being contained, that notification system can be overriden on a case by case basis.&lt;/p&gt;
@@ -8269,6 +8442,7 @@ Free and open source software, as supported by NGI since 2020, is by design the 
  &lt;p&gt;Admin interface for a remote account&lt;/p&gt;
  &lt;/figcaption&gt;
 &lt;/figure&gt;
+
 &lt;p&gt;The moderation interfaces for accounts and instances has also been reworked. Accounts now display the most important numbers in an easy to skim grid. Some useless information has been removed, and some useful information has been added, such as when the user signed up, or who sent them an invite. For accounts from other servers, you can now see which local users follow them at a glance.&lt;/p&gt;
 &lt;figure&gt;
  &lt;img src="Screenshot_2019-01-19%20Federation%20-%20Mastodon.png" class="rounded-lg shadow-lg"
@@ -8276,6 +8450,7 @@ Free and open source software, as supported by NGI since 2020, is by design the 
  &lt;p&gt;Administration interface for known servers&lt;/p&gt;
  &lt;/figcaption&gt;
 &lt;/figure&gt;
+
 &lt;p&gt;The administration interfaces for known servers and domain blocks have been unified into a common area. Besides displaying how many accounts are known from a particular server, you can now also see how many accounts are followed from your server, how many of their accounts are following your users, how many have been individually blocked or reported, and how much disk space that server&amp;rsquo;s media attachments are taking up.&lt;/p&gt;
 &lt;p&gt;App developers will be delighted to learn that 2.7 introduces a &lt;strong&gt;registration API&lt;/strong&gt;. By implementing that API, apps will be able to accept new registrations from their users, instead of having to send them to a web browser. When a user signs up through an app, they still receive a confirmation e-mail which they have to open before their account is activated, but the e-mail contains a link that can open the app, and once the account is activated, the app is already authenticated and ready to go.&lt;/p&gt;
 &lt;p&gt;The command-line utility for managing a Mastodon server, &lt;code&gt;tootctl&lt;/code&gt; (pronounced &amp;ldquo;toot control&amp;rdquo;) has received a few new commands. Over the course of Mastodon&amp;rsquo;s existence, some people built websites collecting statistics from known Mastodon servers. However, their numbers always differ a little, and it&amp;rsquo;s difficult to inspect how they function. Now, you can scan the Mastodon network from your own machine to discover servers and aggregate statistics about Mastodon&amp;rsquo;s usage with &lt;code&gt;tootctl domains crawl&lt;/code&gt;.&lt;/p&gt;
@@ -8424,6 +8599,7 @@ Free and open source software, as supported by NGI since 2020, is by design the 
  &lt;p&gt;This account is definitely run by whoever owns joinmastodon.org!&lt;/p&gt;
  &lt;/figcaption&gt;
 &lt;/figure&gt;
+
 &lt;p&gt;The answer is links. If you have a personal website called johndoe.com, and you link from your site to your Mastodon profile, then people know you are the real John Doe &amp;ndash; the link appears verified on your profile. This option is accessible to everyone, not just celebrities. Having a verified link does not confer any special features like it does on Twitter. All safety and convenience features are always available to everyone. Some people don&amp;rsquo;t need or want to have a recognizable and verified identity, and that is valid, too.&lt;/p&gt;
 &lt;p&gt;Of course the caveat is that people have to trust the linked website to be able to infer the identity. It&amp;rsquo;s certainly a more useful feature when you have a recognizable website. However, it does also work with Twitter profiles, so you can at least confirm that you are the same person as you are on Twitter, if that&amp;rsquo;s something you need.&lt;/p&gt;
 &lt;blockquote&gt;
@@ -8616,6 +8792,7 @@ Free and open source software, as supported by NGI since 2020, is by design the 
  &lt;p&gt;Public profile page&lt;/p&gt;
  &lt;/figcaption&gt;
 &lt;/figure&gt;
+
 &lt;p&gt;&lt;strong&gt;The public areas of the web interface have been redesigned&lt;/strong&gt;. The color scheme and design is now more consistent with the logged-in interface. The new profile layout makes better use of space for bio text and increases the value of header images. Prominent follow buttons ensure that even people new to Mastodon understand quickly what they can do on it.&lt;/p&gt;
 &lt;p&gt;But that&amp;rsquo;s not all: The public pages now also display &lt;strong&gt;reply, favourite and boost buttons that open a remote interaction dialog&lt;/strong&gt; that can take you back to your home server where you can actually interact with the toot from your account. That&amp;rsquo;s a lot simpler than having to copy &amp;amp; paste the toot permalink into your server&amp;rsquo;s search bar!&lt;/p&gt;
 &lt;figure&gt;
@@ -8624,6 +8801,7 @@ Free and open source software, as supported by NGI since 2020, is by design the 
  &lt;p&gt;Remote interaction dialog&lt;/p&gt;
  &lt;/figcaption&gt;
 &lt;/figure&gt;
+
 &lt;p&gt;The other thing on the new profiles: You can choose to feature some of the people you follow on your profile, to be displayed in random order as a sort of recommendation to anyone who is visiting it. Your favourite cat owners, important voices or your associates, it&amp;rsquo;s up to you. Like the MySpace Top 8 without the &amp;ldquo;top&amp;rdquo; and the &amp;ldquo;8&amp;rdquo;, or even more like the WordPress blogroll.&lt;/p&gt;
 &lt;p&gt;Some of the smaller changes: The number of replies to toots is now stored and displayed so you can know straight away if a question you see has already been answered or if a lively discussion is happening. Mastodon now accepts MOV videos from iOS, and larger video files in general, and is smarter about resizing images.&lt;/p&gt;
 &lt;h3 id="administration-and-moderation"&gt;Administration and moderation&lt;/h3&gt;
@@ -8634,6 +8812,7 @@ Free and open source software, as supported by NGI since 2020, is by design the 
  &lt;p&gt;Admin dashboard&lt;/p&gt;
  &lt;/figcaption&gt;
 &lt;/figure&gt;
+
 &lt;p&gt;Suspensions in Mastodon are a harsh measure: You no longer have to fear misclicking and suspending the wrong person with a &lt;strong&gt;new confirmation screen&lt;/strong&gt; that tells you how many toots and followers the suspension will affect before asking you to re-type the name of the account to make sure you didn&amp;rsquo;t click on the wrong one.&lt;/p&gt;
 &lt;p&gt;But that&amp;rsquo;s not all: The &lt;strong&gt;temporary account lock-out&lt;/strong&gt; function has been made available to moderators as a softer, and completely reversible alternative to suspensions.&lt;/p&gt;
 &lt;h3 id="deployment-and-scaling"&gt;Deployment and scaling&lt;/h3&gt;
@@ -8715,6 +8894,7 @@ Free and open source software, as supported by NGI since 2020, is by design the 
  &lt;p&gt;A schematic of the default user interface&lt;/p&gt;
  &lt;/figcaption&gt;
 &lt;/figure&gt;
+
 &lt;p&gt;The standard Mastodon interface has multiple columns rather than a single feed. You can move or remove these at your leisure.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Home&lt;/strong&gt; is all the toots in chronological order of the people you&amp;rsquo;re following. It includes the toots of people on your server and on other servers, all that matters is that it&amp;rsquo;s people you follow. Some people like to disable boosts in this column so they just see what their follows themselves say. That option is there if you click the settings button on the top right of the column.&lt;/p&gt;
 &lt;blockquote&gt;
@@ -9169,6 +9349,7 @@ digest: {sha-256 hash of create-hello-world.json}
  &lt;p&gt;Mastodon with lots of columns pinned&lt;/p&gt;
  &lt;/figcaption&gt;
 &lt;/figure&gt;
+
 &lt;p&gt;On the desktop, it allows you to add, remove and rearrange columns. It can even be navigated and controlled using hotkeys!&lt;/p&gt;
 &lt;p&gt;When you get annoyed by notifications for a toot of yours that’s gone viral, or a conversation you’ve been tagged in that you no longer have interest in, you have the ability to simply mute the whole thread. If you keep encountering content you hate and it always comes from a specific domain, but your admins won’t do anything about it (or perhaps it’s annoying, but merely on a personal level), you no longer have to rely on your admin: You can simply hide everything from a particular domain for yourself.&lt;/p&gt;
 &lt;figure&gt;
@@ -9177,6 +9358,7 @@ digest: {sha-256 hash of create-hello-world.json}
  &lt;p&gt;One instance’s preview in Discord&lt;/p&gt;
  &lt;/figcaption&gt;
 &lt;/figure&gt;
+
 &lt;p&gt;A lot of attention has been given to how the user interface presents itself to onlookers. Both in terms of OpenGraph tags, which is to say, how links to Mastodon look when shared on other social networks or apps like Discord, and in terms of the sign-up, about, profile, toot and hashtag pages. The profile pages let you filter someone’s toots, for example to only see ones that include pictures or videos, which is a great addition for all artists and photographers. The sign up and hashtag pages do a better job of showing what’s actually inside in terms of content.&lt;/p&gt;
 &lt;p&gt;Mastodon is a global experience. That means a lot of language diversity. Since most people don’t know most languages, language filters have been added so you can decide which ones to see.&lt;/p&gt;
 &lt;figure&gt;
@@ -9185,6 +9367,7 @@ digest: {sha-256 hash of create-hello-world.json}
  &lt;p&gt;Custom emoji in action&lt;/p&gt;
  &lt;/figcaption&gt;
 &lt;/figure&gt;
+
 &lt;p&gt;Another addition is custom emoji. That is a concept more familiar to Discord and Twitch users, but it’s a first for a social network. Custom emoji add flavours to instances and allow people to express very specific things that could never be conveyed by standardized Unicode characters.&lt;/p&gt;
 &lt;p&gt;There are a lot of other small features and important fixes. Better logos, better icons, ongoing improvements to accessibility such as image descriptions for screen readers; upgrades to the protocol, better APIs… &lt;a href="https://github.com/tootsuite/mastodon/releases/tag/v2.0.0"&gt;You can view the detailed release notes of 2.0 here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;It’s also worth mentioning that the central resource for the Mastodon project is now the &lt;a href="https://joinmastodon.org"&gt;joinMastodon.org&lt;/a&gt; website, which explains the benefits of decentralization, links to all related resources, lists the project’s sponsors, and most importantly, provides an overview of the existing network. If you want to tell someone about Mastodon, you’ve got two options now— invite them over to the instance you’re using, or link them to joinMastodon.org where they’ll pick one on their own.&lt;/p&gt;
@@ -9262,6 +9445,7 @@ digest: {sha-256 hash of create-hello-world.json}
  &lt;p&gt;Pawoo’s elephant friend&lt;/p&gt;
  &lt;/figcaption&gt;
 &lt;/figure&gt;
+
 &lt;p&gt;At the time of writing, the Mastodon network includes more than 486,767 users spread out among more than a 1,212 instances. That’s how far we’ve come. But it’s not just that. A lot more people have learned and become interested in Free and Open Software and decentralization. The GitHub repository has seen an absolute explosion of activity, from bug reports and feature requests (550 at the time of writing) to code and translation contributions from the community. Many people started learning Ruby/Rails and JavaScript/React.js to be able to participate. I feel like there is a lot more documentation on how to deploy a Rails application on the Internet than there was before Mastodon.&lt;/p&gt;
 &lt;p&gt;Success brings challenges. Insane new loads on mastodon.social were reason for multiple optimizations and bug fixes, speeding up performance hotspots by more than two times, as well as exploration of more complicated deployment techniques (e.g. pgBouncer). The hardest challenges are organizational rather than technical. Tending to the bug tracker, support questions, reviewing and merging pull requests is all a huge responsibility and time sink.
 Furthermore, there are other tasks like communicating the roadmap for the near future, community outreach, and coordinating efforts from contributors that I feel myself ridiculously overwhelmed by. My personal philosophy of “announce when it’s done, promise nothing” may be good for positively surprising people after the fact, but pretty bad for managing a project and people’s morale.&lt;/p&gt;
@@ -9335,6 +9519,7 @@ With that out of the way, the new budget allows me more wiggling room in hosting
  &lt;p&gt;Addressing a user from another instance&lt;/p&gt;
  &lt;/figcaption&gt;
 &lt;/figure&gt;
+
 &lt;p&gt;Twitter has put their API behind a paywall, strangled the app ecosystem. Twitter censors tweets on behalf of countries like Turkey, messes with its content delivery algorithms in unknown ways. Remember when Facebook changed its news feed algorithms, and overnight every Facebook page’s posts became virtually invisible and “fans” worthless? Unless you paid up to Facebook, of course. &lt;strong&gt;Being in control of your own megaphone&lt;/strong&gt; rather than relying on a third party letting you use theirs is increasingly important.&lt;/p&gt;
 &lt;p&gt;For example, &lt;a href="https://www.linkedin.com/pulse/big-microsoft-scam-sebastian-l%C3%A4ger"&gt;here is a story of an e-sports personality whose job became impossible because it was 100% dependent on Microsoft, which decided to turn the switch on them&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Your own Mastodon instance means &lt;strong&gt;you decide what content to host&lt;/strong&gt;. You take back control from commercial companies. And without sacrificing reachability — normally if you self-host a website, forum, or blog it means having to bring everyone over from other places, but the federated nature of Mastodon means that people don’t need to leave their own instances to follow yours.&lt;/p&gt;
