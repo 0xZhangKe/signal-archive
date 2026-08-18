@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-08-17T15:21:29+00:00</updated><author><name>Simon Willison</name></author><entry><title>We Tracked a Shipment of Rare Books. It Ended at an Amazon AI Training Facility</title><link href="https://simonwillison.net/2026/Aug/17/we-tracked-a-shipment-of-rare-books-it-ended-at-an-amazon-ai-tra/" rel="alternate"/><published>2026-08-17T15:21:29+00:00</published><updated>2026-08-17T15:21:29+00:00</updated><id>https://simonwillison.net/2026/Aug/17/we-tracked-a-shipment-of-rare-books-it-ended-at-an-amazon-ai-tra/</id><summary type="html">
+<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-08-17T23:58:14+00:00</updated><author><name>Simon Willison</name></author><entry><title>Qwen 3.8 27B scores 52 on the Artificial Analysis Intelligence Index</title><link href="https://simonwillison.net/2026/Aug/17/qwen-38-27b-scores-52/" rel="alternate"/><published>2026-08-17T23:58:14+00:00</published><updated>2026-08-17T23:58:14+00:00</updated><id>https://simonwillison.net/2026/Aug/17/qwen-38-27b-scores-52/</id><summary type="html">
+    
+&lt;p&gt;&lt;strong&gt;&lt;a href="https://artificialanalysis.ai/models/qwen3-8-27b"&gt;Qwen 3.8 27B scores 52 on the Artificial Analysis Intelligence Index&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+That's the same score as GPT-5.6 Luna (max), and just one point behind GLM-5.2 (max) and DeepSeek V4 Pro 0813 (max) - that GLM is 753B and that DeepSeek is 1.6B parameters, and Luna is size unknown but presumably a whole lot bigger than 27B.&lt;/p&gt;
+&lt;p&gt;Qwen 3.8 27B is &lt;a href="https://simonwillison.net/2026/Aug/16/qwen-38-27b/"&gt;a truly astonishing model&lt;/a&gt;.
+
+    &lt;p&gt;&lt;small&gt;&lt;/small&gt;Via &lt;a href="https://news.ycombinator.com/item?id=49334544"&gt;Hacker News&lt;/a&gt;&lt;/small&gt;&lt;/p&gt;
+
+
+    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/qwen"&gt;qwen&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai-in-china"&gt;ai-in-china&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/artificial-analysis"&gt;artificial-analysis&lt;/a&gt;&lt;/p&gt;
+
+
+
+</summary><category term="ai"/><category term="generative-ai"/><category term="llms"/><category term="qwen"/><category term="ai-in-china"/><category term="artificial-analysis"/></entry><entry><title>We Tracked a Shipment of Rare Books. It Ended at an Amazon AI Training Facility</title><link href="https://simonwillison.net/2026/Aug/17/we-tracked-a-shipment-of-rare-books-it-ended-at-an-amazon-ai-tra/" rel="alternate"/><published>2026-08-17T15:21:29+00:00</published><updated>2026-08-17T15:21:29+00:00</updated><id>https://simonwillison.net/2026/Aug/17/we-tracked-a-shipment-of-rare-books-it-ended-at-an-amazon-ai-tra/</id><summary type="html">
     
 &lt;p&gt;&lt;strong&gt;&lt;a href="https://www.404media.co/we-tracked-a-shipment-of-rare-books-it-ended-at-an-amazon-ai-training-facility/"&gt;We Tracked a Shipment of Rare Books. It Ended at an Amazon AI Training Facility&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 Excellent piece of reporting from 404 Media. For a while now there have been stories of book dealers receiving orders for large volumes of books from apparently price-insensitive anonymous customers, widely suspected to be companies looking to scan them for AI training (see &lt;a href="https://simonwillison.net/2025/Jun/24/anthropic-training/"&gt;my previous coverage&lt;/a&gt; of Anthropic's book scanning from June 2025.)&lt;/p&gt;
@@ -745,18 +758,4 @@ There's a fun anecdote from Accenture (apparently via leaked meeting audio recor
         &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/datasette"&gt;datasette&lt;/a&gt;&lt;/p&gt;
     
 
-</summary><category term="datasette"/></entry><entry><title>datasette 1.0a38</title><link href="https://simonwillison.net/2026/Aug/6/datasette/" rel="alternate"/><published>2026-08-06T18:24:34+00:00</published><updated>2026-08-06T18:24:34+00:00</updated><id>https://simonwillison.net/2026/Aug/6/datasette/</id><summary type="html">
-    
-        &lt;p&gt;&lt;strong&gt;Release:&lt;/strong&gt; &lt;a href="https://github.com/simonw/datasette/releases/tag/1.0a38"&gt;datasette 1.0a38&lt;/a&gt;&lt;/p&gt;
-        &lt;blockquote&gt;
-&lt;p&gt;This release fixes a &lt;strong&gt;SQL injection&lt;/strong&gt; security issue that affects Datasette instances that serve a &lt;strong&gt;mixture of public and private tables&lt;/strong&gt; in the same database, with access configured using the &lt;a href="https://docs.datasette.io/en/latest/authentication.html"&gt;Datasette permissions system&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Site administrators who serve private tables in this way are advised to disable the &lt;a href="https://docs.datasette.io/en/latest/authentication.html#execute-sql"&gt;execute-sql permission&lt;/a&gt; &lt;actions_execute_sql&gt;` on that database to prevent users from accessing private tables using raw SQL queries. The bug that has been fixed would have allowed users with access to any public table to execute SQL injection attacks despite that restriction, giving them read-only access to data in private tables in the same database.&lt;/p&gt;
-&lt;p&gt;This fix is also available in &lt;a href="https://simonwillison.net/2026/Aug/6/datasette-2/"&gt;Datasette 0.65.3&lt;/a&gt;.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Thankfully this particular configuration - private tables and public tables exposed for the same database within the same instance - is likely to be rare. I've not encountered an instance like that myself.&lt;/p&gt;
-    
-    
-        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/security"&gt;security&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/sql-injection"&gt;sql-injection&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/datasette"&gt;datasette&lt;/a&gt;&lt;/p&gt;
-    
-
-</summary><category term="security"/><category term="sql-injection"/><category term="datasette"/></entry></feed>
+</summary><category term="datasette"/></entry></feed>
