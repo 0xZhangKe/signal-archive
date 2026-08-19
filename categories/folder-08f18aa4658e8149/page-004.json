@@ -1,6 +1,28 @@
 {
   "items": [
     {
+      "id": "4ececc79b9947c8d43728147",
+      "title": "邮箱生态调研2026",
+      "summary": "起初一个很简单的想法，把一个app/服务的私人数据，集中存数据库麻烦，不想维护担责，干脆放用户自己邮箱里，所谓\"BYOS（自带存储）\"。反正协议 SMTP/POP3/IMAP 很方便，然后调查了下很快发现，时代变了。 本来寄希望IMAP 这个协议，感觉能缝成一个读写API， - APPEND 写（一封邮件 = 一个对象）， FETCH 读， STORE 改 flag， COPY/MOVE 移动 - \"目录 + KV\"模型，flag（ \\Seen 、 \\Flagged 等）即元数据位 - SEARCH 查询 主题、日期、自定义 header等 - 增量同步： UID + UIDVALIDITY ， IDLE 可做准实时推送（仅单文件夹） 其实古董的 GMailFS / GMail Drive 之类把 Gmail…",
+      "image": null,
+      "publishedAt": "2026-08-07T02:35:00Z",
+      "sourceId": "a864c53722a17b19",
+      "sourceTitle": "est's blog",
+      "link": "https://blog.est.im/2026/stdout-31",
+      "detailPath": "articles/4ececc79b9947c8d43728147.json"
+    },
+    {
+      "id": "70068a5f3b443a985b943506",
+      "title": "偶像音樂棒棒糖評測",
+      "summary": "收到來自學生的一個神奇的禮物──K-pop 偶像棒棒糖！",
+      "image": "https://wiwi.blog/assets/images/candy-box-b7024b0c399d528da6254641182d22f2.jpg",
+      "publishedAt": "2026-08-07T01:00:00Z",
+      "sourceId": "7f36c3da1e6b5c71",
+      "sourceTitle": "Wiwi.Blog Blog",
+      "link": "https://wiwi.blog/blog/music-lollipop",
+      "detailPath": "articles/70068a5f3b443a985b943506.json"
+    },
+    {
       "id": "b8d65be7c5d85e2d443d32ae",
       "title": "Keeley 4 Knob Compressor",
       "summary": "前言 # Keeley 的 4 Knob Compressor ，也被我持有的綜合效果器 GP-50 收納、模擬，在 GP-50 中被放在 PRE 的類別中，名稱爲 COMP4。 我覺得有趣的是，竟然有產品名稱直接寫「4 顆旋鈕的壓縮器」，太好笑了，這就有點像是直接把水壺命名爲「600cc 的水壺」一樣。 Keeley 4 Knob Compressor 業界標竿 # 這顆 Compressor 似乎被當作「業界標竿」，因爲同樣的音色往往在機架式設備才有。（每個高品質的效果器好像都會被這樣說？） 而目前所有的 Keeley 4 Knob Compressor 都是美國製造。（這大概就是它貴的原因之一？） 4 顆旋鈕 # 以下是官方的介紹。 Sustain（延音／壓縮度） # 9 點鐘方向：效果很難感知，僅修飾…",
@@ -637,28 +659,6 @@
       "sourceTitle": "Sukka's Blog",
       "link": "https://blog.skk.moe/post/pppoe-half-bridge/",
       "detailPath": "articles/41aff6e90dde6e2d3f9d1dc1.json"
-    },
-    {
-      "id": "947a7d7182184272980ae406",
-      "title": "CrowdSec 取代 fail2ban：六天擋下 1619 次掃描,和我把自己封鎖的三次",
-      "summary": "這篇記錄了作者把伺服器防護從 fail2ban 換成 CrowdSec 的完整過程,並整理成一份可照做的教學。起因不是被入侵而是被吵:掃描器整天敲 /wp-login.php、/.env,把監控通知洗版。當時 fail2ban 已封過 614 個 IP,但作者發現對手一直在換 IP,封 IP 這條路贏不了——後來的數據也證實了這點,攻擊來源前七名幾乎全是 Azure、DigitalOcean、阿里雲這類雲端機房,開一台新 VM 比封一個 IP 便宜得多。文中給出這台機器六天內的真實數字:1619 次攻擊偵測、防火牆同時擋著 25.22k 個 IP,其中社群黑名單提供的數量是自己抓到的三千倍。架設踩到的三個坑是同一條因果鏈(apt 從 ESM 拿到上古版本 → 跨版本升級把 hub 搬家 → symlink 全…",
-      "image": null,
-      "publishedAt": "2026-08-03T01:47:12Z",
-      "sourceId": "bd51496b8ec0ca1d",
-      "sourceTitle": "Koimsurai 手記",
-      "link": "https://koimsurai.com/blog/crowdsec-replacing-fail2ban",
-      "detailPath": "articles/947a7d7182184272980ae406.json"
-    },
-    {
-      "id": "ae7327d3189adb843a7ad20c",
-      "title": "2026年的比特币有了新的逻辑？",
-      "summary": "本文回顾比特币和黄金的基本属性，并从比特币的矿工关机币价、减半周期、美元流动性传导、Strategy风险等方面解构比特币的定价逻辑。作者认为是共识资产因新的叙事、共识、投机与交易创造的新的集体价值。",
-      "image": "https://prologue.dev/static/images/bitcoin_dominance202607.png",
-      "publishedAt": "2026-08-03T00:00:00Z",
-      "sourceId": "757145dcc77dee94",
-      "sourceTitle": "Prologue 序章",
-      "link": "https://prologue.dev/blog/is-there-a-new-logic-behind-bitcoin-in-2026",
-      "detailPath": "articles/ae7327d3189adb843a7ad20c.json"
     }
   ]
 }

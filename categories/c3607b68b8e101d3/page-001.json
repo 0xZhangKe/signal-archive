@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "ed58e5b43fdf7a7fae112ee3",
+      "title": "一加13+crDroid半年使用体验──兼谈一加解bl政策",
+      "summary": "一加13 ，这是我目前在使用的主力机。 从今年（2026）2月购买到现在，已经过去了半年了，我对这台手机可以说是又爱又恨。等一下，为什么我要在2026年买一台2024年10月发布的手机，而不是买它的下一代 一加15 ？请听我娓娓道来 背景 我此前在用的主力机是另一台荣耀80GT，我老早就看这台手机不爽了，没法解bl，恶意限制玩机是最大的缺点。我之前选择这台手机的时候只会看手机的参数，例如处理器性能之类的，还不懂什么刷机root，当时看这台荣耀80GT比较水桶（各类参数比较均衡）就买了。结果买来才三个月我就了解到了玩机圈，才明白解bl对于用户的意义重大。但此时刚买手机没多久，再换一台太浪费了（而且还会被我爸揍），所以被迫用了两年半。 购买原因 直到去年，一加发布了新的 解bl政策 ，虽然没有限制用户解bl，但需…",
+      "image": "https://blog.xinsl.xin/posts/oneplus13-experience/images/2026-08-17-14-13-36-320.jpg",
+      "publishedAt": "2026-08-18T18:09:07Z",
+      "sourceId": "c3607b68b8e101d3",
+      "sourceTitle": "Xinsl's Blog",
+      "link": "https://blog.xinsl.xin/posts/oneplus13-experience/",
+      "detailPath": "articles/ed58e5b43fdf7a7fae112ee3.json"
+    },
+    {
       "id": "9b89504edc7a8bc597118aee",
       "title": "Debian系统在Btrfs文件系统下使用Swapfile配置休眠功能",
       "summary": "在 上一节的安装 中，我们在Btrfs文件系统下创建了一个swap子卷，并配置了一个swapfile，当swapfile大于电脑物理内存时，可以配置休眠(Hibernate)。休眠是一个可以让电脑把内存写入硬盘（swap分区），电脑断电再重启时可以立即恢复到关机前的状态的功能，话不多说，我们现在开始启用 0.（视情况选做）清除设备上已有swap文件 如果你在之前的安装中已经创建了一个小于你电脑内存大小的swap文件，先关闭swap分区： sudo swapoff -a 之后再把swap文件删除 rm -rf /swap/swapfile 1.创建swap文件 使用下面的命令快速创建swap文件： sudo btrfs filesystem mkswapfile --size 16G /swap/swapfil…",

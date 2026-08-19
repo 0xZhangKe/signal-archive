@@ -1,6 +1,28 @@
 {
   "items": [
     {
+      "id": "947a7d7182184272980ae406",
+      "title": "CrowdSec 取代 fail2ban：六天擋下 1619 次掃描,和我把自己封鎖的三次",
+      "summary": "這篇記錄了作者把伺服器防護從 fail2ban 換成 CrowdSec 的完整過程,並整理成一份可照做的教學。起因不是被入侵而是被吵:掃描器整天敲 /wp-login.php、/.env,把監控通知洗版。當時 fail2ban 已封過 614 個 IP,但作者發現對手一直在換 IP,封 IP 這條路贏不了——後來的數據也證實了這點,攻擊來源前七名幾乎全是 Azure、DigitalOcean、阿里雲這類雲端機房,開一台新 VM 比封一個 IP 便宜得多。文中給出這台機器六天內的真實數字:1619 次攻擊偵測、防火牆同時擋著 25.22k 個 IP,其中社群黑名單提供的數量是自己抓到的三千倍。架設踩到的三個坑是同一條因果鏈(apt 從 ESM 拿到上古版本 → 跨版本升級把 hub 搬家 → symlink 全…",
+      "image": null,
+      "publishedAt": "2026-08-03T01:47:12Z",
+      "sourceId": "bd51496b8ec0ca1d",
+      "sourceTitle": "Koimsurai 手記",
+      "link": "https://koimsurai.com/blog/crowdsec-replacing-fail2ban",
+      "detailPath": "articles/947a7d7182184272980ae406.json"
+    },
+    {
+      "id": "ae7327d3189adb843a7ad20c",
+      "title": "2026年的比特币有了新的逻辑？",
+      "summary": "本文回顾比特币和黄金的基本属性，并从比特币的矿工关机币价、减半周期、美元流动性传导、Strategy风险等方面解构比特币的定价逻辑。作者认为是共识资产因新的叙事、共识、投机与交易创造的新的集体价值。",
+      "image": "https://prologue.dev/static/images/bitcoin_dominance202607.png",
+      "publishedAt": "2026-08-03T00:00:00Z",
+      "sourceId": "757145dcc77dee94",
+      "sourceTitle": "Prologue 序章",
+      "link": "https://prologue.dev/blog/is-there-a-new-logic-behind-bitcoin-in-2026",
+      "detailPath": "articles/ae7327d3189adb843a7ad20c.json"
+    },
+    {
       "id": "ff98259ec5ba860e49603477",
       "title": "讓它自己跑",
       "summary": "分享一個小祕訣：遇到需要時間思考的問題，早一點丟到腦中「讓它跑」。",
@@ -637,28 +659,6 @@
       "sourceTitle": "Eddie Lv",
       "link": "https://eddielv.com/musings/water-female-singer/",
       "detailPath": "articles/adf4edaed5bdd8d645d33aa2.json"
-    },
-    {
-      "id": "e79d6a945d8ab30bfbc9a386",
-      "title": "數位才是模擬",
-      "summary": "類比（Analogy）在物理中的意思是：連續的；數位（Digital）則是階梯式、不連續的。 例如：類比的數值 0 到 1 之間，可以無限的去增加小數點後的位數；而數位的世界中，0 的下一個數值就是1，沒有0.5 也沒有 0.000000000000001。 使用純類比電路的器材，就會說是類比設備；使用了電腦（準確說是 DSP）的則會說是數位設備。 而中共国的翻譯，把「類比」翻譯成了「模擬」，每次聽到都覺得不只詞不達意，還會誤導人。 因為，真正在模擬（Simulate）的設備，是數位設備。 例如：數位混音器裡面的 EQ 等化器，其實是用電腦去即時運算，「模擬」真實的 EQ 設備。而數位效果器也是模擬各種真實存在的類比設備啊！ 所以，數位設備才是模擬設備，而類比設備就是類比設備。 用他們的詞語就會變成： 「這台…",
-      "image": null,
-      "publishedAt": "2026-07-31T07:14:25Z",
-      "sourceId": "199cdf92fc46bfcd",
-      "sourceTitle": "Eddie Lv",
-      "link": "https://eddielv.com/musings/digital-is-simulating/",
-      "detailPath": "articles/e79d6a945d8ab30bfbc9a386.json"
-    },
-    {
-      "id": "046ba54cd27c5cd8c3c073c5",
-      "title": "在軍營尿尿",
-      "summary": "前些日子做了軍營的音響活動，同仁去上廁所，問了某個兵怎麼走，沒想到要層層向上報告，詢問能不能讓外面廠商進入建築物來借用廁所。而最後一個層級的人也只是說：「那裡走到底就是。」要同仁自己去，並沒有任何軍營的人盯著，表示似乎也不是真的那麼戒備森嚴。 輪到我想上廁所時，得到了更奇妙的答案。 「我不知道耶，但應該是這個走廊走到底左邊。」 …？ 我免役、沒服過兵役，不知道部隊文化，但在各種對話當中發現，所有人對於「做決定」是感到恐懼與焦慮的，所有行動最好都是上級的命令。 我思考一陣子，認為這並不完全是壞事。 「當敵軍來襲，我現在開炮、開槍的話，對面可是會死人的耶！」 「還好殺人不是我的想法，那是我的上級長官的命令；而上級長官也是聽再上級長官的命令。」 而下令的人，並不會實際扣下扳機，或許也是最不會被情緒影響決策的職位吧？…",
-      "image": null,
-      "publishedAt": "2026-07-31T07:11:33Z",
-      "sourceId": "199cdf92fc46bfcd",
-      "sourceTitle": "Eddie Lv",
-      "link": "https://eddielv.com/musings/peeing-in-military-camp/",
-      "detailPath": "articles/046ba54cd27c5cd8c3c073c5.json"
     }
   ]
 }
