@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "41aff6e90dde6e2d3f9d1dc1",
+      "title": "有催人跑的意思 —— 使用 PPPoE 半桥帮助 UniFi 网关突破性能瓶颈",
+      "summary": "UniFi 网关设备（如 UDM Pro/SE/Pro Max）搭载的 CPU 性能出了名的孱弱、还缺乏 PPPoE 和 NAT 硬件加速的支持，在搭配 PPPoE 拨号的宽带时，UniFi 网关的性能更是捉襟见肘。那么，为什么不把 PPPoE 拨号的任务交给一个单独的设备来处理、让 UniFi 网关专注于路由、IDS/IPS 和 NAT 呢？",
+      "image": "https://img.skk.moe/blog/t2026/pppoe-half-bridge.png",
+      "publishedAt": "2026-08-03T03:10:00Z",
+      "sourceId": "5a840ced5a57e7ff",
+      "sourceTitle": "Sukka's Blog",
+      "link": "https://blog.skk.moe/post/pppoe-half-bridge/",
+      "detailPath": "articles/41aff6e90dde6e2d3f9d1dc1.json"
+    },
+    {
       "id": "947a7d7182184272980ae406",
       "title": "CrowdSec 取代 fail2ban：六天擋下 1619 次掃描,和我把自己封鎖的三次",
       "summary": "這篇記錄了作者把伺服器防護從 fail2ban 換成 CrowdSec 的完整過程,並整理成一份可照做的教學。起因不是被入侵而是被吵:掃描器整天敲 /wp-login.php、/.env,把監控通知洗版。當時 fail2ban 已封過 614 個 IP,但作者發現對手一直在換 IP,封 IP 這條路贏不了——後來的數據也證實了這點,攻擊來源前七名幾乎全是 Azure、DigitalOcean、阿里雲這類雲端機房,開一台新 VM 比封一個 IP 便宜得多。文中給出這台機器六天內的真實數字:1619 次攻擊偵測、防火牆同時擋著 25.22k 個 IP,其中社群黑名單提供的數量是自己抓到的三千倍。架設踩到的三個坑是同一條因果鏈(apt 從 ESM 拿到上古版本 → 跨版本升級把 hub 搬家 → symlink 全…",
@@ -648,17 +659,6 @@
       "sourceTitle": "Eddie Lv",
       "link": "https://eddielv.com/musings/chatting-freely/",
       "detailPath": "articles/3c122877c6e70a4a9e3d9d3e.json"
-    },
-    {
-      "id": "adf4edaed5bdd8d645d33aa2",
-      "title": "女歌手的水",
-      "summary": "拿了寶特瓶，喝了一口： 「完了⋯這是台上那位漂亮女歌手的水，喝錯了⋯，咋辦咋辦咋辦？？？」 演出到一半，歌手走到舞臺側邊向我要水，她喝了一口之後放在舞台邊，也就是我的正前方。 事發當下，正在演最後一首歌，我站起身伸展身體，準備要做活動的收尾工作，順手抓了正前方的寶特瓶來喝。 「我要怎麼辦？」 「應該沒人看到吧？」 「先偷偷放回去好了（放）。」 「這不能怪我啊，寶特瓶的瓶子一樣，又放在我伸手拿得到的地方啊！」 腦中突然出現女歌手喝這瓶的畫面…。 「不行不行，這樣太沒道德了，我得 承認錯誤 ！」 「先藏起來，再決定怎麼辦！」於是我默默又把水從舞臺邊拿下來。 結束之後我問歌手還要喝水嗎？ 「好啊，我帶走！」 「我給妳新的，剛剛不小心喝錯了⋯。」於是我得到了先是驚恐，後是燦笑的回應。 雖然好像沒必要那麼誠實，但說出來…",
-      "image": null,
-      "publishedAt": "2026-07-31T07:22:30Z",
-      "sourceId": "199cdf92fc46bfcd",
-      "sourceTitle": "Eddie Lv",
-      "link": "https://eddielv.com/musings/water-female-singer/",
-      "detailPath": "articles/adf4edaed5bdd8d645d33aa2.json"
     }
   ]
 }
