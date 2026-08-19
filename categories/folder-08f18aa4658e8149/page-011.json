@@ -1,6 +1,39 @@
 {
   "items": [
     {
+      "id": "4fc97f583cd89a1f9d785518",
+      "title": "CVE-2026-0091： An issue in android window management to Arbitrary Code Execution in Launcher process",
+      "summary": "This issue CVE-2026-0091 has been fixed for Android 14+ in June 2026 Android Security Bulletin . Click here to see the patch The following is copied from my repo https://github.com/canyie/TransitionPlayer for backup purposes. For more info such as PoC code, please check the original repo.",
+      "image": null,
+      "publishedAt": "2026-07-08T09:40:00Z",
+      "sourceId": "511f3e9d589e2612",
+      "sourceTitle": "残页的小博客",
+      "link": "https://blog.canyie.top/2026/07/08/CVE-2026-0091/",
+      "detailPath": "articles/4fc97f583cd89a1f9d785518.json"
+    },
+    {
+      "id": "b8e7abb8cfbc6b56f0110902",
+      "title": "[AI] curl -NT. 导致100% CPU原因",
+      "summary": "有AI就是好使，搁以前自己得盯半天也看不明白。。。 问题确认 curl -NT. 在连接一个持续推送数据的 streaming 服务器时，会产生一个 紧密的 pause/unpause 循环 ，导致 100% CPU。 根因分析 -T. （注意是点号，不是减号）将 stdin 设为 非阻塞模式 ，然后依赖 EAGAIN + CURL_READFUNC_PAUSE 机制来避免阻塞。核心循环发生在三个回调之间： 第一步 — 上传尝试失败 （ src/tool_cb_rea.c ）： { rc = read(per->infd, buffer, sz * nmemb); if(rc < 0) { if(errno == EAGAIN) { errno = 0; config->readbusy = TRUE; re…",
+      "image": null,
+      "publishedAt": "2026-07-08T08:05:00Z",
+      "sourceId": "a864c53722a17b19",
+      "sourceTitle": "est's blog",
+      "link": "https://blog.est.im/2026/stdout-25",
+      "detailPath": "articles/b8e7abb8cfbc6b56f0110902.json"
+    },
+    {
+      "id": "5a230e874a4d80c944dfe12b",
+      "title": "交流電專用電錶 DM55-1",
+      "summary": "交流電專用電錶 # 音響工作時，我的腰間一定會掛一個交流電的電錶，因爲要確保電壓正確才不會燒壞器材。 交流電小電錶 之前到夜市幫忙時， 發電機配錯電 成 220v，能夠發現就是因爲在接上電器前確認電壓，是我的標準 SOP。父親看到後問我那個是哪裡買的，他也想要。這顆很小、又好攜帶，還會發光好閱讀，太方便了，而且價格不到 100 元新臺幣。 這個驗電工具拆開之後會發現有一大半都是空的，因此可以在外殼鑽孔來穿鑰匙圈，如此一來就能掛在腰間使用了。我這個是 樂健 的老闆幫我製作的，超感恩！ 套上鑰匙圈的交流電小電錶 鑰匙圈的另外一段是易拉扣 1 ，可以直接伸縮、拉長，不需要從腰部取下來就能使用。 購買連結 # 不知道實體店面哪裡有賣，但 蝦皮購物 跟 淘宝 上都有。 其實我不是很喜歡在 Blog 放上蝦皮連結，因爲電…",
+      "image": null,
+      "publishedAt": "2026-07-08T07:15:43Z",
+      "sourceId": "199cdf92fc46bfcd",
+      "sourceTitle": "Eddie Lv",
+      "link": "https://eddielv.com/musings/ac-meter/",
+      "detailPath": "articles/5a230e874a4d80c944dfe12b.json"
+    },
+    {
       "id": "1afef0b27bc79072004b22c6",
       "title": "大雨",
       "summary": "山东昨天的雨真大，回了趟老家，因为大风把村道的树都吹倒了，走不了，就在老家住了一晚，外面电闪雷鸣，我做了一夜噩梦，梦到我给苗姐贴贴画，结果贴画把她大腿腐蚀了，x问我怎么弄的，我在梦里自责到扇自己耳光，凌晨两点惊醒，醒来默念还好是梦一场… 好了，最近睡眠都不大好，准备重新开始减脂，体重已经从75kg涨到87kg了，必须开始减肥了，下周开始吧，因为买的左旋肉碱和跑鞋还没到。",
@@ -626,39 +659,6 @@
       "sourceTitle": "Wiwi.Blog Blog",
       "link": "https://wiwi.blog/blog/4-useless-music-facts",
       "detailPath": "articles/53fa744f28ea283a5c4ab3dd.json"
-    },
-    {
-      "id": "a8152e4ca624173159499252",
-      "title": "唯物主义「天命」论",
-      "summary": "看到一篇雄文《 明末士大夫为什么毫无气节纷纷变节投降满清？ 》大受启发，想看原文的可以点开链接，下面是精简和摘录: 因为程朱理学在理论存面存在漏洞，被鞑子无意之间利用了，事实上大部分的鞑子统治者在这方面，也都是知其然而不知所以然。 不否认明末也有很多了不起的仁人志士，但如果你对中国历史有些疑惑，觉得似乎宋朝之后中国就有点不一样了，那恭喜你，你的直觉是对的。由于元代留下的遗毒过甚，明朝没能拨乱反正，元明清三代，所有的皇帝和“儒家士大夫”，都是失礼而不自知之人。元明清三代的所谓“礼法”，放在先秦两汉的大学者们面前，诸子百家不管哪家，都一眼就能看出来全是假礼。如果墨子这个儒家最大的反对者看见了，估计更是嘲笑孔子能笑的棺材板都压不住。这些“假礼”，就是元明清三代那些僵化的等级秩序、规规矩矩。出于汉人的直觉，厌恶这些是…",
-      "image": null,
-      "publishedAt": "2026-07-02T08:07:00Z",
-      "sourceId": "a864c53722a17b19",
-      "sourceTitle": "est's blog",
-      "link": "https://blog.est.im/2026/stderr-22",
-      "detailPath": "articles/a8152e4ca624173159499252.json"
-    },
-    {
-      "id": "4973a874f0c7c3129e36f5af",
-      "title": "跑電的",
-      "summary": "在馬來西亞華語中，「依靠⋯⋯運轉」這個短語，在口語上常被講成是「跑⋯⋯的」。例如說，「依靠電力運轉」變成「跑電的」，「依靠汽油運轉」則變成「跑油的」，以此類推。 這是受到廣東話/台山話中「行⋯⋯嘅」（ 例 ）這個講法影響。 更有趣的是，這個講法與英文中的某個 phrasal verb（動詞短語）—— run on 剛好「逐字對應」。 run on electricity—— 跑 電的。 很神奇欸，可不是嗎？",
-      "image": null,
-      "publishedAt": "2026-07-02T05:36:00Z",
-      "sourceId": "a93d4f2e98fafcbe",
-      "sourceTitle": "All posts | 所有貼文 on ttheng's microblog. | 侃侃而隨想極短文。",
-      "link": "https://microblog.ttheng.com/run-on-electricity/",
-      "detailPath": "articles/4973a874f0c7c3129e36f5af.json"
-    },
-    {
-      "id": "918a41677a219da66ae43864",
-      "title": "入蜀记 day404 心会被绑架",
-      "summary": "「心会被绑架。」",
-      "image": null,
-      "publishedAt": "2026-07-02T04:48:27Z",
-      "sourceId": "8e5dc5a8b5023a8e",
-      "sourceTitle": "折腾人生",
-      "link": "https://z.arlmy.me/posts/BBBPandINSW/INSW-ko/INSW_404/",
-      "detailPath": "articles/918a41677a219da66ae43864.json"
     }
   ]
 }
