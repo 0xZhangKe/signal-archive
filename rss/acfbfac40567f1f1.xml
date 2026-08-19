@@ -12,7 +12,7 @@
 	<atom:link href="https://blog.jetbrains.com/kotlin/feed/" rel="self" type="application/rss+xml" />
 	<link>https://blog.jetbrains.com</link>
 	<description>Developer Tools for Professionals and Teams</description>
-	<lastBuildDate>Mon, 17 Aug 2026 21:26:24 +0000</lastBuildDate>
+	<lastBuildDate>Wed, 19 Aug 2026 15:52:10 +0000</lastBuildDate>
 	<language>en-US</language>
 	<sy:updatePeriod>
 	hourly	</sy:updatePeriod>
@@ -28,6 +28,419 @@
 	<height>32</height>
 </image> 
 	<item>
+		<title>Signatures, be true: domain errors and functional handling in Kotlin</title>
+		<link>https://blog.jetbrains.com/kotlin/2026/08/signatures-be-true-domain-errors-and-functional-handling-in-kotlin/</link>
+		
+		<dc:creator><![CDATA[Viliam Sedliak]]></dc:creator>
+		<pubDate>Wed, 19 Aug 2026 15:52:05 +0000</pubDate>
+		<featuredImage>https://blog.jetbrains.com/wp-content/uploads/2026/08/KT-social-BlogFeatured-1280x720-1-1.png</featuredImage>		<category><![CDATA[backend]]></category>
+		<category><![CDATA[kotlin]]></category>
+		<guid isPermaLink="false">https://blog.jetbrains.com/?post_type=kotlin&#038;p=732373</guid>
+
+					<description><![CDATA[Here’s a function that signs a document: In Kotlin, Unit means the function completes without returning a meaningful value – roughly equivalent to void in Java. Got it? Now, tell me what could go wrong. You can’t.&#160; Yet, the code might be invalid. The signing window might have closed. The database might be down. The [&#8230;]]]></description>
+										<content:encoded><![CDATA[
+
+    <div class="about-author ">
+        <div class="about-author__box">
+            <div class="row">
+                                                            <div class="about-author__box-img">
+                            <img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/08/2026-08-18-15.29.34.jpg" alt="Sergey Chernov" loading="lazy">
+                        </div>
+                                        <div class="about-author__box-text">
+                                                    <h4>Sergey Chernov</h4>
+                                                <p>Sergey Chernov is a Lead Software Engineer at Salmon, specializing in functional Kotlin and type-safe system design. At Salmon, a technology-driven financial company building banking and lending products in Southeast Asia, Sergey works on authentication and verification systems: the platform layer responsible for keeping user access secure, reliable, and consistent across products. He has 10+ years of experience designing and building scalable backend systems.</p>
+                    </div>
+                            </div>
+        </div>
+    </div>
+
+
+
+<p>Here’s a function that signs a document:</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="kotlin" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">fun signDocument(
+    documentId: UUID,
+    code: String,
+): Unit</pre>
+
+
+
+<p>In Kotlin, <code>Unit</code> means the function completes without returning a meaningful value – roughly equivalent to <code>void</code> in Java.</p>
+
+
+
+<p>Got it? Now, tell me what could go wrong. <em>You can’t</em>.&nbsp;</p>
+
+
+
+<p>Yet, the code might be invalid. The signing window might have closed. The database might be down. The document might already be signed, or expired, or the request might have arrived out of order from a buggy client.&nbsp;</p>
+
+
+
+<p>Every one of those is a real outcome this function must reckon with. Not one is visible in the line above.</p>
+
+
+
+<p>To discover possible failures and how to handle them, you could open the implementation. Then, the service it calls. Then, the exception handlers, the route mapping, the tests, the OpenAPI spec, and the client code that consumes it.&nbsp;</p>
+
+
+
+<p>You could read everything except the one thing that should have told you in the first place: <strong>the signature</strong>.</p>
+
+
+
+<p>At Salmon, I work on authentication and verification. A mishandled failure is rarely cosmetic and the difference between two error cases can be the difference between letting the right person through and the wrong one. I’ve spent a fair bit of time on this question: <strong>how do you make a function’s expected failures part of what it tells you, instead of something you have to go digging for</strong>?&nbsp;</p>
+
+
+
+<p>This article is my answer. It uses Kotlin, but the concept carries to any language with sealed types.</p>
+
+
+
+<h2 class="wp-block-heading">Have no fear of “functional error handling”</h2>
+
+
+
+<p>“<em>Functional error handling</em>”. That phrase scares people off. They expect monads, category theory, and a lecture. This isn’t the case. The goal is plain: the function signature should be enough to know how to call it and how to handle every expected outcome. Nothing hidden in the body.&nbsp;</p>
+
+
+
+<p>If a failure is part of the business logic, it belongs in the function signature, the API contract, and the client’s handling code, not buried in the implementation.</p>
+
+
+
+<p>Salmon&#8217;s engineering culture runs on a few commitments: real ownership from day one, high standards held in the open, and a refusal to ship things that don&#8217;t actually work. A function that hides its failures is at odds with all three.&nbsp;</p>
+
+
+
+<p>So, in the case of the example above, the signature I actually want should look like this:</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="kotlin" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">fun signDocument(
+    documentId: UUID,
+    code: String,
+): Either&lt;DocumentSignError, Unit></pre>
+
+
+
+<p>We now have the inputs on the left of the function and the expected failure type and the success type on the right.&nbsp;</p>
+
+
+
+<p>Now, before we get to what <code>Either</code> is, we need to agree on what belongs inside <code>DocumentSignError</code> in the first place, because that’s where a lot of the value of this system comes from.</p>
+
+
+
+<h2 class="wp-block-heading"><strong>Three kinds of failure, but only one belongs in the signature</strong></h2>
+
+
+
+<p>Not every bad thing that happens is the same kind of bad thing. I split failures into three groups, and each group gets handled differently.</p>
+
+
+
+<h3 class="wp-block-heading"><strong>01 · API CLIENT ERRORS</strong></h3>
+
+
+
+<p>The caller used the API wrong: this means a malformed JSON, a missing header, an unsupported operation, a request that arrived out of sequence, access that isn’t allowed.&nbsp;</p>
+
+
+
+<p>A healthy client should almost never see these, and there is no designed screen for them, because a working app doesn’t produce them. Thus, you can collapse the whole category into coarse HTTP responses: a 400, a 403, a 404. You do not enumerate them one by one in your domain model<strong>.</strong></p>
+
+
+
+<h3 class="wp-block-heading"><strong>02 · UNEXPECTED EXCEPTIONS</strong></h3>
+
+
+
+<p>The database is unavailable. A dependency timed out. The network dropped. A null slipped through and you have a <code>NullPointerException</code>, or an invariant broke and you’re in an illegal state. These are <em>not</em> business outcomes.&nbsp;</p>
+
+
+
+<p>Nobody designs a user flow for “Postgres fell over.” You do not model these as domain errors. Instead, they become operational signals: a 500 to the client, a full stack trace in the logs, a spike in your error-rate metric, a page to whoever is on call.</p>
+
+
+
+<h3 class="wp-block-heading"><strong>03 · DOMAIN ERRORS</strong></h3>
+
+
+
+<p>Here, the client behaved correctly, yet the operation still can’t succeed.&nbsp;</p>
+
+
+
+<p>The signing code was wrong. The window has closed. The document was already signed. Approval is missing. The policy rejected it. These are the failures a real user hits while doing everything right, and your designers have a specific screen for each one.&nbsp;</p>
+
+
+
+<p>This is the category that has to be visible. If a healthy client needs to handle two outcomes differently, those two outcomes have to be distinguishable in the type. <strong>This is the group that belongs in the contract.</strong></p>
+
+
+
+<p>I often see people mistakenly dragging the second group into the other two. For instance, people add <strong><code>DatabaseUnavailable</code></strong> to their error union as if it were a business failure. It isn’t. Let it throw, let the global handler catch it, and keep your domain model honest. </p>
+
+
+
+<p><code>HTTP 400</code> is not a domain concept. “Signing window closed” is.</p>
+
+
+
+<p>In any case, if you recognize and split these three categories correctly, most of the design work is already done. The rest is choosing a mechanism that keeps the second group visible.</p>
+
+
+
+<h2 class="wp-block-heading">Why exceptions and their relatives keep losing</h2>
+
+
+
+<p>The default in most Java and Kotlin codebases is to validate, then throw:</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="kotlin" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">fun signDocument(documentId: UUID, code: String) {
+    if (signingWindowClosed(documentId)) throw SigningWindowClosedException()
+    if (!codeMatches(documentId, code)) throw SignatureRejectedException()
+    if (alreadySigned(documentId)) throw AlreadySignedException()
+    // ... sign it
+}</pre>
+
+
+
+<p>The signature says “returns nothing, succeeds.” But the implementation tells a different story, and the compiler will not make the caller listen to it. If someone adds a fourth exception next quarter, every call site still compiles, and every call site silently fails to handle the new case. You find out in production, and that’s not great.</p>
+
+
+
+<p>Java tried to fix this with checked exceptions, and the instinct was right: force the caller to handle declared failures or pass them on. But it didn’t scale. And the Stream API doesn’t compose with checked exceptions at all, so you end up doing sneaky throws and wrapping everything back into runtime exceptions.</p>
+
+
+
+<p>As it turns out, the better tool is already in the language itself. A sealed interface tells the compiler the complete set of subtypes, this means that when you handle these errors (using Kotlin’s <code>when</code> expression), the compiler can safely verify you haven&#8217;t missed a single case:</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="kotlin" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">sealed interface DocumentSignError {
+    data object SignatureRejected   : DocumentSignError
+    data object SigningWindowClosed : DocumentSignError
+    data object AlreadySigned       : DocumentSignError
+}</pre>
+
+
+
+<p>Now the caller handles every case, and the compiler enforces it:</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="kotlin" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">when (error) {
+    SignatureRejected   -> showSignatureRejected()
+    SigningWindowClosed -> showSigningWindowClosed()
+    AlreadySigned       -> showAlreadySigned()
+}</pre>
+
+
+
+<p>Add a fourth failure to the sealed interface and this <strong><code>when</code></strong> stops compiling until you handle it. And this is the whole game: the compiler now knows what <em>can</em> fail, and it won’t let you forget.</p>
+
+
+
+<h2 class="wp-block-heading"><strong>You just reinvented Either</strong></h2>
+
+
+
+<p>Once you have a sealed error type, you need a way to say “this function returns either that error or a success.” You can build a wrapper by hand, and people do, for each result type, over and over. That gets verbose fast.</p>
+
+
+
+<p>What you’re reaching for is a generic version of the same shape: a value that is one thing or the other, never both. Left for the failure, right for the success. That is <strong><code>Either</code></strong>, and you don’t need a library to understand it. It’s a sealed type with two cases and a handful of helper methods (<strong><code>map</code></strong>, <strong><code>flatMap</code></strong>, <strong><code>fold</code></strong>, <strong><code>getOrElse</code></strong>). If you’ve used <strong><code>Optional</code></strong> in Java or nullable types in Kotlin, you already know how it feels to work with. An <strong><code>Optional</code></strong> is roughly an <strong><code>Either</code></strong> whose left side carries no information, just <strong><code>Unit</code></strong>.</p>
+
+
+
+<p>The payoff is that the failure set moves into the public type:</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="kotlin" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">fun signDocument(
+    documentId: UUID,
+    code: String,
+): Either&lt;DocumentSignError, Unit></pre>
+
+
+
+<p>Failures are no longer hidden in the function body; they are part of what the function tells you upfront.</p>
+
+
+
+<h2 class="wp-block-heading"><strong>Two unions people get wrong</strong></h2>
+
+
+
+<p>Unfortunately, two anti-patterns show up constantly once teams adopt this, and both undo most of the benefit.</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="kotlin" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">fun signDocument(documentId: UUID, code: String): 
+Either&lt;Throwable, Unit></pre>
+
+
+
+<p>While this looks typed, the type says only “something can fail.” It does not say which expected failures the caller must handle, because <strong><code>Throwable</code></strong> is open, so a <strong><code>when</code></strong> over it always needs an <strong><code>else</code></strong>. You’re back to not knowing.&nbsp;</p>
+
+
+
+<p>This is essentially the same as throwing an error, and it’s why Kotlin’s own <strong><code>Result&lt;T&gt;</code></strong> type didn’t work out and isn’t recommended for domain modeling. If the left side is open, you’ve gained nothing.</p>
+
+
+
+<p>The second is one broad union shared across a whole class, in the name of not repeating yourself:</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="kotlin" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">sealed interface DocumentError {
+    data object SignatureRejected   : DocumentError
+    data object SigningWindowClosed : DocumentError
+    data object AlreadySigned       : DocumentError
+    data object TemplateNotFound    : DocumentError
+    data object ExportFailed        : DocumentError
+}
+ 
+fun signDocument(...)     : Either&lt;DocumentError, Unit>
+fun prepareSigning(...)   : Either&lt;DocumentError, SigningSession>
+fun exportDocument(...)   : Either&lt;DocumentError, ExportFile></pre>
+
+
+
+<p>The compiler is happy, but now every method appears to return every error. <strong><code>signDocument</code></strong> can never produce <strong><code>TemplateNotFound</code></strong>, yet every caller has to account for it anyway. You get exhaustive handling full of impossible branches, which is just catch-all programming wearing a type.</p>
+
+
+
+<p>The fix is to define one narrow union per public method:</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="kotlin" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">sealed interface DocumentSignError { /* the three real failures */ }
+sealed interface PrepareSigningError { /* its own set */ }
+sealed interface ExportError { /* its own set */ }</pre>
+
+
+
+<p>Then each <strong><code>when</code></strong> handles only what its method can actually return. No <strong><code>else</code></strong> or impossible cases:</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="kotlin" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">when (error) {
+    SignatureRejected   -> showSignatureRejected()
+    SigningWindowClosed -> showSigningWindowClosed()
+    AlreadySigned       -> showAlreadySigned()
+}</pre>
+
+
+
+<p>A little more typing up front, but worth it every single time you read one of these signatures later.</p>
+
+
+
+<h2 class="wp-block-heading"><strong>Composition, without drowning in the plumbing</strong></h2>
+
+
+
+<p>Real flows chain steps, and each step can fail. Done naively with <strong><code>flatMap</code></strong>, the lambdas nest deeper with every step and the code gets ugly.&nbsp;</p>
+
+
+
+<p>You have a few ways out. Plain Kotlin handles it with early return:</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="kotlin" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">val document = findDocument(documentId)
+    .getOrElse { return it.left() }</pre>
+
+
+
+<p>Flat, typed, and the pattern itself needs no library: if you hand-roll <strong><code>Either</code></strong>, you write these helpers yourself. The syntax above happens to use <code><strong>Arrow’s</strong> <strong>getOrElse</strong></code> and <strong><code>left</code></strong>, but nothing here depends on the abstraction being fancy.&nbsp;</p>
+
+
+
+<p>If you want it cleaner, <strong><code>Arrow</code></strong> also gives you an <strong><code>either { }</code></strong> block where <strong><code>bind()</code></strong> unwraps a right value and short-circuits on the first left:</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="kotlin" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">either {
+    val document = findDocument(documentId).bind()
+    validateStatus(document).bind()
+    val signature = validateSignature(document, code).bind()
+    markSigned(document, signature).bind()
+}</pre>
+
+
+
+<p>This is the same idea Scala has had in the language for years with for-comprehensions. Use <strong><code>Arrow</code></strong> if the ergonomics help your team; it also brings useful types like non-empty lists. (But the contract idea does not depend on <strong><code>Arrow</code></strong>, and I’d rather you adopt the discipline than the dependency.)</p>
+
+
+
+<h2 class="wp-block-heading"><strong>The contract should survive the whole trip</strong></h2>
+
+
+
+<p>A typed failure is only useful if it stays typed across the stack. Here’s the rule I hold to: services and repositories return domain errors, and you map to HTTP at exactly one place, the route boundary.</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="kotlin" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">service.signDocument(request)
+    .mapLeft { error -> error.toHttpResponse() }</pre>
+
+
+
+<p>Expected domain failures become an <strong><code>Either.Left</code></strong>. API-client misuse collapses to a coarse 4xx. Unexpected infrastructure failures and bugs stay as exceptions and become a 500. The controller is the only layer that knows about HTTP, and the layers beneath it speak in business outcomes.</p>
+
+
+
+<p>There’s also a bonus most teams don’t realize here: If you publish your API client alongside the service, publish the error types with it. If you do this, the client handles failures with the same sealed union the server produces, and the two stay consistent for free.</p>
+
+
+
+<h2 class="wp-block-heading"><strong>How does this impact code review, and AI-generated code?</strong></h2>
+
+
+
+<p>The day-to-day return on all of this shows up in review. When failures live in the signature, a reviewer can start from the contract instead of doing implementation archaeology. Did the error union change? Is this API-client misuse dressed up as a domain error? Does the new failure map to HTTP? You can answer those by reading the interface, before you ever open the body.</p>
+
+
+
+<p>At Salmon and elsewhere, this agility matters more now that a large share of code is drafted by agents.&nbsp;</p>
+
+
+
+<p>When a model writes the implementation, an explicit contract is the cheapest way to check whether it did the right thing: you read the types, not the 200 lines underneath. You can put the rule in an agent instructions file, “<em>return a typed error union, don’t throw for expected failures,</em>” and the model will mostly follow it. But the way you verify is by reading the contract, not by trusting the prose.&nbsp;</p>
+
+
+
+<p>In fact, on our team at Salmon this is less a personal preference than a shared default: the contract is the unit of review, and a generated implementation doesn’t lower that bar. Deciding which failures an operation can actually produce is a judgment call, and the signature is where that judgment gets written down so the next person, or the next agent, has to respect it. Essentially, the signature is where ownership lives.</p>
+
+
+
+<h2 class="wp-block-heading"><strong>The honest tradeoff</strong></h2>
+
+
+
+<p>This costs you something. More types, more mapping code, more verbose signatures. I won’t pretend otherwise.&nbsp;</p>
+
+
+
+<p>But the complexity was already there. The signing window could always close. The code could always be wrong. All this approach does is take that complexity out of the implementation, where it was hiding, and put it in the type, where it’s named, tested, and visible.<br><br>You are simply moving the work to where the compiler can help. It surfaces risk to the next caller instead of hiding it, makes clear what the code really does and stops broken paths from compiling. Making failures part of the signature is how those values show up at the smallest scale: one function telling the truth about what it can do. It is also how we work in practice at Salmon: we share these typed contracts across services and their clients, and in review we read the contract before the implementation.</p>
+
+
+
+<p>A signature that returns <strong><code>Unit</code></strong> and throws in secret is lying to you about what it does. Make your signatures tell the truth!</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
 		<title>Klibs.io Grows to 4,200+ KMP Projects With Smarter Discovery and New AI Integrations</title>
 		<link>https://blog.jetbrains.com/kotlin/2026/08/klibsio-grows-to-4200-kmp-projects-with-smarter-discovery-and-new-ai-integrations/</link>
 		
@@ -2136,7 +2549,7 @@ val issues: List&lt;Issue> = asLlm(response, hint = "Return all beginner-friendl
 
 
 
-<figure data-wp-context="{&quot;imageId&quot;:&quot;6a8597631eaf5&quot;}" data-wp-interactive="core/image" class="wp-block-image size-full wp-lightbox-container"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" data-wp-class--hide="state.isContentHidden" data-wp-class--show="state.isContentVisible" data-wp-init="callbacks.setButtonStyles" data-wp-on-async--click="actions.showLightbox" data-wp-on-async--load="callbacks.setButtonStyles" data-wp-on-async-window--resize="callbacks.setButtonStyles" src="https://blog.jetbrains.com/wp-content/uploads/2026/07/KT-Twitter_Facebook_LinkedIn-1200x675-1.png" alt="" class="wp-image-722875" /><button
+<figure data-wp-context="{&quot;imageId&quot;:&quot;6a85edf1b2e6e&quot;}" data-wp-interactive="core/image" class="wp-block-image size-full wp-lightbox-container"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" data-wp-class--hide="state.isContentHidden" data-wp-class--show="state.isContentVisible" data-wp-init="callbacks.setButtonStyles" data-wp-on-async--click="actions.showLightbox" data-wp-on-async--load="callbacks.setButtonStyles" data-wp-on-async-window--resize="callbacks.setButtonStyles" src="https://blog.jetbrains.com/wp-content/uploads/2026/07/KT-Twitter_Facebook_LinkedIn-1200x675-1.png" alt="" class="wp-image-722875" /><button
 			class="lightbox-trigger"
 			type="button"
 			aria-haspopup="dialog"
@@ -2630,305 +3043,5 @@ val issues: List&lt;Issue> = asLlm(response, hint = "Return all beginner-friendl
                         <url>https://blog.jetbrains.com/fr/kotlin/2026/07/introducing-the-kotlin-benchmark-evaluate-ai-coding-agents-on-real-world-kotlin-tasks/</url>
                     </language>
                 	</item>
-		<item>
-		<title>In Conversation With the Golden Kodee Winners</title>
-		<link>https://blog.jetbrains.com/kotlin/2026/07/in-conversation-with-the-golden-kodee-winners/</link>
-		
-		<dc:creator><![CDATA[Jelena Ilic]]></dc:creator>
-		<pubDate>Fri, 03 Jul 2026 09:57:13 +0000</pubDate>
-		<featuredImage>https://blog.jetbrains.com/wp-content/uploads/2026/07/Blog-Featured-Blog-1280x720-1.png</featuredImage>		<product ><![CDATA[kotlin]]></product>
-		<category><![CDATA[kotlin]]></category>
-		<category><![CDATA[kotlinconf]]></category>
-		<category><![CDATA[golden-kodee]]></category>
-		<category><![CDATA[kotlin-conf-2026]]></category>
-		<guid isPermaLink="false">https://blog.jetbrains.com/?post_type=kotlin&#038;p=717614</guid>
-
-					<description><![CDATA[KotlinConf 2026 marked a milestone for the Kotlin community: the very first Golden Kodee Community Awards. The awards recognize the individuals and communities whose passion and dedication help the Kotlin ecosystem thrive. From creating educational content and building engaging online communities to organizing events, fostering connections, and driving positive societal impact, the Golden Kodee Awards [&#8230;]]]></description>
-										<content:encoded><![CDATA[
-<p>KotlinConf 2026 marked a milestone for the Kotlin community: the very first <a href="https://photos.google.com/share/AF1QipN07OP-BZGGOe6F9IKK1oHMtcNm_5exh73pWZZmrtOf-QIILbIMFR58MZyu4dWDdg?key=QjltWVVHaHdrWGxZcDF1M1MtbjE3WlNnQkM0UGJR" data-type="link" data-id="https://photos.google.com/share/AF1QipN07OP-BZGGOe6F9IKK1oHMtcNm_5exh73pWZZmrtOf-QIILbIMFR58MZyu4dWDdg?key=QjltWVVHaHdrWGxZcDF1M1MtbjE3WlNnQkM0UGJR" target="_blank" rel="noopener">Golden Kodee Community Awards</a>. The awards recognize the individuals and communities whose passion and dedication help the Kotlin ecosystem thrive.</p>
-
-
-
-<p>From creating educational content and building engaging online communities to organizing events, fostering connections, and driving positive societal impact, the Golden Kodee Awards shine a spotlight on the many ways people contribute to Kotlin. Open to active members of the Kotlin community who have made notable contributions over the past two years, the awards honor those who share knowledge, mentor others, and inspire developers around the world.</p>
-
-
-
-<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/06/nik-v.de-1130124.jpg" alt="" class="wp-image-715267"/></figure>
-
-
-
-<h3 class="wp-block-heading">Getting to know the Golden Kodee winners</h3>
-
-
-
-<p>This year’s winners represent the diversity and strength of the Kotlin community: <a href="https://github.com/matheuslf" target="_blank" rel="noopener">Matheus Leandro Ferreira</a> (Education), <a href="https://github.com/skydoves" target="_blank" rel="noopener">Jaewoong Eum</a> (Online Presence), <a href="https://github.com/nicole-terc" target="_blank" rel="noopener">Nicole Terc</a> (Creativity), <a href="https://github.com/eevajonnapanula" target="_blank" rel="noopener">Eeva-Jonna Panula</a> (Positive Societal Impact), and <a href="https://github.com/Liu-Yinlong" target="_blank" rel="noopener">Yinlong Liu</a> (In-Person Presence).</p>
-
-
-
-<p>In the days following KotlinConf, we caught up with each of the winners to learn more about their projects and initiatives.</p>
-
-
-
-<h3 class="wp-block-heading">Which of your projects do you think stood out the most in helping you win a Golden Kodee?</h3>
-
-
-
-<p><strong>Matheus Leandro Ferreira</strong>: Since my category is focused on education, I believe my experience teaching at the university and working with Kotlin over the years may have been an important factor. I’ve been teaching programming and mobile development with Kotlin for quite a long time, while also creating educational content for the developer community outside the classroom.</p>
-
-
-
-<p><strong>Jaewoong Eum</strong>: I&#8217;ve contributed to the open-source community for over nine years, so I believe most of my open-source projects have helped me win this award, such as <a href="https://github.com/skydoves/Balloon" target="_blank" rel="noopener">Balloon</a>, <a href="https://github.com/skydoves/landscapist" target="_blank" rel="noopener">landscapist</a>, and <a href="https://github.com/skydoves/compose-stability-analyzer" target="_blank" rel="noopener">compose-stability-analyzer</a>. But also, I&#8217;ve written lots of technical content on my personal <a href="https://doveletter.dev/articles" target="_blank" rel="noopener">blog</a>, <a href="https://doveletter.dev/" target="_blank" rel="noopener">newsletters</a>, and recently, I&#8217;ve published several <a href="https://doveletter.dev/books" target="_blank" rel="noopener">books</a>, so all these activities and projects helped me to win this award.</p>
-
-
-
-<p><strong>Nicole Terc</strong>: Composable Sheep talks.</p>
-
-
-
-<p><strong>Eeva-Jonna Panula</strong>: I think there might not have been one project that stood out the most; it was probably the whole body of work I’ve done in content creation on accessibility, disability, and inclusion.</p>
-
-
-    <div class="about-author ">
-        <div class="about-author__box">
-            <div class="row">
-                                                            <div class="about-author__box-img">
-                            <img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/06/portrait-Yinlong.jpg" alt="" loading="lazy">
-                        </div>
-                                        <div class="about-author__box-text">
-                                                    <h4>Yinlong Liu</h4>
-                                                <blockquote><p><em><span style="font-weight: 400;">As one of the earliest developers to adopt KMP in China, I established a KMP WeChat community to connect developers, and I have been glad to see an increasing number of companies successfully adopt KMP.</span></em></p></blockquote>
-                    </div>
-                            </div>
-        </div>
-    </div>
-
-
-
-<blockquote class="wp-block-quote is-style-default has-white-background-color has-background is-layout-flow wp-block-quote-is-layout-flow" style="font-style:normal;font-weight:500">
-<blockquote class="wp-block-quote is-layout-flow wp-block-quote-is-layout-flow">
-<p></p>
-</blockquote>
-</blockquote>
-
-
-
-<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/07/Yinlong-win-1.jpg" alt="" class="wp-image-719396"/></figure>
-
-
-
-<h3 class="wp-block-heading">What did winning a Golden Kodee feel like?</h3>
-
-
-
-<p><strong>Matheus</strong>: It meant a lot to me. In many ways, it felt like a validation of my long journey in education. I’ve been working professionally in technology for more than 20 years and teaching for 13 years. It’s honestly very difficult to describe what I felt when I won. It was incredibly gratifying. Without a doubt, it was the biggest award of my career.</p>
-
-
-
-<p><strong>Jaewoong</strong>: I’m truly honored to have received the Golden Kodee Award. I’ve received so much appreciation and encouragement from the community about this win, and it has motivated me. I felt so many positive vibes from everyone throughout the experience. To be honest, even though I’ve been consistently contributing to the community over the years, I don’t often get an opportunity to directly hear words of appreciation from people. But through this award, I was able to feel that gratitude in a very real way, and it genuinely made my heart beat faster. It reminded me again why I love being part of this community and why I want to keep contributing.</p>
-
-
-
-<p><strong>Nicole</strong>: It was really surprising at first, then I felt really humbled and seen. We don&#8217;t get enough awards in the community, so having all the hard work recognized was a welcome change.&nbsp;</p>
-
-
-
-<p><strong>Eeva-Jonna</strong>: Awesome. The reason I do what I do is that I enjoy it and want to share knowledge and help developers create more inclusive apps. In a sense, it’s a niche topic that doesn’t get much attention compared to many other topics, so being recognized with a Golden Kodee truly meant a lot.​</p>
-
-
-
-<p><strong>Yinlong</strong>: It feels truly joyful, honorable, and exciting. Having been a practitioner and advocate of KMP for about six years, I have integrated Kotlin and KMP into my work, life, and even my faith. I have grown my own influence through KMP. I also have a special connection to the color purple: it is not only the theme color of Kotlin but also the color of my favorite NBA team, the LA Lakers.</p>
-
-
-    <div class="about-author ">
-        <div class="about-author__box">
-            <div class="row">
-                                                            <div class="about-author__box-img">
-                            <img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/06/profile-Jaewoong.jpg" alt="" loading="lazy">
-                        </div>
-                                        <div class="about-author__box-text">
-                                                    <h4>Jaewoong Eum</h4>
-                                                <blockquote><p><em><span style="font-weight: 400;">I’ve received so much appreciation and encouragement from the community about this win, and it has motivated me.</span></em></p></blockquote>
-                    </div>
-                            </div>
-        </div>
-    </div>
-
-
-
-<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/06/jaewoong-win.jpg" alt="" class="wp-image-714855"/></figure>
-
-
-
-<h3 class="wp-block-heading">Can you take us back to the beginning: How did you first discover Kotlin? What initially attracted you to it, and what made you stick with it?</h3>
-
-
-
-<p><strong>Matheus</strong>: I started using Kotlin practically from the moment it was introduced for mobile development. At that time, all of my company’s applications were built with Java. Gradually, we migrated all of them to Kotlin, without exception. I also updated the curriculum at the university where I teach, replacing the applications and teaching materials that were previously developed in Java with Kotlin. The language brings a huge range of opportunities. It’s less verbose, constantly evolving, and keeps up with the trends of the professional market. These days, using Kotlin is essential.</p>
-
-
-
-<p><strong>Jaewoong</strong>: The positive cycle of community keeps going around. Back in 2018, I first discovered Kotlin when well-known people in the open-source community began sharing their experiences using it for Android development. I heard great feedback about its impact on developer productivity, which led me to try it for the first time. At the time, I started using Kotlin because of its Java interoperability and various convenient features. But the more I used it, the more I began to see its true value. Today, Kotlin is undoubtedly my top-choice programming language.</p>
-
-
-
-<p><strong>Nicole</strong>: My story is similar to many: I was a Java Android developer and adopted it when it got announced as an official Android language. We had an early adopter on our team at the time, so the transition was not hard at all. I stuck with it because of all the goodies it brought into Android: less verbosity, null safety, no use of semicolons, coroutines, etc.</p>
-
-
-
-<p><strong>Eeva-Jonna</strong>: I was a web developer at a company that didn’t have much web development work in Finland at the time. I was also an accessibility specialist who had just conducted accessibility testing on our Android app, realizing that the situation wasn’t optimal. I spoke with the Android developers and realized no one would have time to fix the issues I found, so I decided to do it myself. This was pretty much what got me started with Kotlin – becoming an Android developer. As mentioned, I come from a JavaScript (okay, okay, TypeScript) background. When I started working on the Android app and Kotlin, I had these constant moments where I realized that a language can actually support so many things, instead of forcing you to build the functions from scratch every single time.</p>
-
-
-
-<p><strong>Yinlong</strong>: We started around 2020 with Kotlin 1.3.72/1.4.0. KMP’s option for shared business logic code is what initially attracted us. We have apps that cover the Android, Windows (Java-based), and iOS platforms, which require high performance and the handling of heavy business logic, all while having a team predominantly made up of Android developers. KMP perfectly matched our requirements for cross-platform technology. As it has become more stable and we’ve gained experience, we have been gradually expanding the scope of our KMP module.</p>
-
-
-    <div class="about-author ">
-        <div class="about-author__box">
-            <div class="row">
-                                                            <div class="about-author__box-img">
-                            <img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/06/portrait-matheus.jpeg" alt="" loading="lazy">
-                        </div>
-                                        <div class="about-author__box-text">
-                                                    <h4>Matheus Leandro Ferreira</h4>
-                                                <blockquote><p><em><span style="font-weight: 400;">The language brings a huge range of opportunities. It’s less verbose, constantly evolving, and keeps up with the trends of the professional market. These days, using Kotlin is essential.</span></em></p></blockquote>
-                    </div>
-                            </div>
-        </div>
-    </div>
-
-
-
-<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/06/matheus-win.jpg" alt="" class="wp-image-714866"/></figure>
-
-
-
-<h3 class="wp-block-heading">What do you love most about working with Kotlin today?</h3>
-
-
-    <div class="about-author ">
-        <div class="about-author__box">
-            <div class="row">
-                                                            <div class="about-author__box-img">
-                            <img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/06/portrait-Eeva.png" alt="" loading="lazy">
-                        </div>
-                                        <div class="about-author__box-text">
-                                                    <h4>Eeva-Jonna Panula</h4>
-                                                <blockquote><p><em><span style="font-weight: 400;">Being able to build once and distribute to different platforms is great, but what I especially enjoy is how KMP handles native implementations. </span></em></p></blockquote>
-                    </div>
-                            </div>
-        </div>
-    </div>
-
-
-
-<p><strong>Matheus</strong>: My passion has always been backend development, so what I enjoy the most today is the combination of Kotlin with Spring Boot. It’s something truly fantastic. At the university, I teach the “Mobile Programming” course, and over time, I’ve also been enjoying working more and more with mobile frontend development.</p>
-
-
-
-<p><strong>Jaewoong</strong>: I first started using Kotlin because it was 100% compatible with the JVM ecosystem. Over time, it became my primary programming language. What I love most is that Kotlin has grown far beyond the JVM and Android. Today, it can be used actively across many multiplatform development scenarios, which makes it even more powerful and practical. Another thing I really appreciate about Kotlin is its ecosystem. The Kotlin Foundation is deeply committed to maintaining and growing the Kotlin ecosystem. Through initiatives like the Kotlin Evolution and Enhancement Process, they actively communicate with the community and listen closely to user feedback to improve the language. I think this is one of the biggest differences that sets Kotlin apart from many other language ecosystems. I’m also fascinated by the fact that Kotlin enables more advanced, low-level work through tools like Kotlin compiler plugins and KSP. These open the door for using the language at a much higher level, and they’re a big part of what makes Kotlin so compelling to me.</p>
-
-
-
-<p><strong>Nicole</strong>: Coroutines. The concurrency handling in Kotlin is pretty good.</p>
-
-
-
-<p>Second place is KMP. I really appreciate the potential of porting Android apps to many other platforms.</p>
-
-
-
-<p><strong>Eeva-Jonna</strong>: From a language perspective, it&#8217;s the APIs and the way you can write code intuitively. Extension functions and collection APIs make my life so much easier, and even after years of happily being away from the JS world, I still appreciate these features every day. I also love working with Kotlin Multiplatform. Being able to build once and distribute to different platforms is great, but what I especially enjoy is how KMP handles native implementations. If there&#8217;s something I can&#8217;t do in Kotlin, I can just drop down to native code to get it done. That flexibility is really powerful.</p>
-
-
-
-<p><strong>Yinlong</strong>: I love ❤️ Kotlin. I just love everything about it.</p>
-
-
-
-<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/06/eeva-win.jpg" alt="" class="wp-image-714877"/></figure>
-
-
-
-<h3 class="wp-block-heading">What are you currently building or experimenting with in Kotlin?</h3>
-
-
-
-<p><strong>Matheus</strong>: Currently, at the company, I’ve been exploring the backend side a lot with Ktor (and also Spring Boot with Kotlin). I’m building a REST API for our BI platform. The idea is to use Kotlin to improve performance, concurrency with Coroutines, and the overall expressiveness of the code compared to our Java legacy systems. The experience with the clean syntax and null safety in a microservices ecosystem has been fantastic. At the university, I’m focused on Kotlin Multiplatform (KMP). I’ve been experimenting with sharing business logic between Android and iOS in a project with my students. It’s amazing to see how much the technology has matured, allowing us to reuse almost the entire data and architecture layers without losing the native experience of each platform. I’m also keeping a close eye on Compose Multiplatform for UI development.</p>
-
-
-
-<p><strong>Jaewoong</strong>: I work on a variety of projects with Kotlin, like <a href="https://github.com/skydoves/compose-stability-analyzer" target="_blank" rel="noopener">Compose Stability Analyzer</a>, but the one I’ve been focusing on most recently is <a href="https://hotswan.dev/" target="_blank" rel="noopener">Compose HotSwan</a>. HotSwan is a Hot Reload system for real Android devices. When you make changes in the editor, it applies those changes to the currently running app in under a second and immediately shows the result. Some parts are implemented at a lower level, including C++, but most of the system is written in Kotlin across multiple layers, including the Kotlin Compiler Plugin, Gradle plugin, and IntelliJ IDE plugin. Building a Hot Reload system itself requires a very complex workflow, but Kotlin’s broad language and tooling support made the process much more approachable. HotSwan is still in the early stages of adoption, and it is one of the first Hot Reload solutions for Android and Jetpack Compose. Looking ahead, I see it becoming a next-generation mobile client development solution, especially when combined with AI to create a much faster UI development feedback loop.</p>
-
-
-
-<p><strong>Nicole</strong>: I&#8217;m officially working with Kotlin as a professional Android engineer. In my personal time, I&#8217;m building a private boardgame-related app and playing with new ideas with my Filament project.</p>
-
-
-
-<p><strong>Eeva-Jonna</strong>: I’m building an app with Kotlin Multiplatform (currently for Android and iOS). It’s a planner app for women and anyone with cycles, combining cycle tracking, calendars, notes, tasks, and more into one app. Currently, we’re collecting waitlisters and have started testing rounds. I’ve enjoyed building the app with Kotlin Multiplatform. Everything is mostly written in Kotlin, but some things have required a native implementation, which has been easy to implement.</p>
-
-
-
-<p><strong>Yinlong</strong>: Nothing at the moment.</p>
-
-
-
-<h3 class="wp-block-heading">What advice would you give to developers who want to become more active in the Kotlin community?</h3>
-
-
-    <div class="about-author ">
-        <div class="about-author__box">
-            <div class="row">
-                                                            <div class="about-author__box-img">
-                            <img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/06/portrait-Nicole.avif" alt="" loading="lazy">
-                        </div>
-                                        <div class="about-author__box-text">
-                                                    <h4>Nicole Terc</h4>
-                                                <blockquote><p><em><span style="font-weight: 400;">In my opinion, the point of participating in a community should be to share and grow together, not to be famous.</span></em></p></blockquote>
-                    </div>
-                            </div>
-        </div>
-    </div>
-
-
-
-<p><strong>Matheus</strong>: The best advice I could give is: learn in public. You don’t need to be an expert in the ecosystem to contribute. If you spent two hours struggling to configure Coroutines or to get a Kotlin Multiplatform (KMP) project running and finally figured it out, document it. Write a short article on Dev.to, make a LinkedIn post, or create a GitHub repository explaining the solution. What may seem simple to you could be a lifesaver for another developer.</p>
-
-
-
-<p><strong>Jaewoong</strong>: The community is always open to everyone, but it can take time to truly understand what “community” means. Contributing to a community is not something you do because you expect something in return. It is more about sharing what you have learned, helping others who are facing similar challenges, and slowly becoming part of a positive cycle where everyone learns from each other. My advice is to start small. You don’t need to be a famous speaker or an experienced open-source maintainer from day one. You can write about something you just learned, answer a question, report an issue, improve documentation, or share a small Kotlin example that helped you. Over time, those small contributions build trust, relationships, and confidence. And most importantly, they remind you that the Kotlin community is not just about the language itself, but about the people who keep learning, building, and helping each other grow.</p>
-
-
-
-<p><strong>Nicole</strong>: Reach out to local meetups. Be proactive with socializing and sharing what you are doing without worrying about the clout. In my opinion, the point of participating in a community should be to share and grow together, not to be famous.</p>
-
-
-
-<p><strong>Eeva-Jonna</strong>: I would say that the most important thing is to start. Whatever it is you want to do, start doing it. If you want to do public speaking, meetups are usually looking for speakers, and many conferences support first-time speakers. If you want to start creating content, just start. You won’t get it perfect the first time anyway, so better start practicing sooner rather than later. Also, find people who can help you. Reach out to others who are doing what you want to do and ask if they can help. Sometimes the answer might be “no” because, e.g. they don&#8217;t have enough time, but many times you get a “yes” and some help.&nbsp;</p>
-
-
-
-<p><strong>Yinlong</strong>: My advice is to use Kotlin to implement your ideas and actively communicate and share your findings with others.</p>
-
-
-
-<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/06/nicole-win.jpg" alt="" class="wp-image-714888"/></figure>
-
-
-
-<h3 class="wp-block-heading">Where are you keeping your Golden Kodee?</h3>
-
-
-
-<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/06/Golden-Kodee-at-home-.jpg" alt="" class="wp-image-714595"/></figure>
-
-
-
-<p>The stories of this year’s Golden Kodee winners show that there are many ways to make a meaningful impact on the Kotlin community. We hope their journeys and advice have inspired you as much as they have inspired us.</p>
-]]></content:encoded>
-					
-		
-		
-			</item>
 	</channel>
 </rss>

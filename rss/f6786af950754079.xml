@@ -12,7 +12,7 @@
 	<atom:link href="https://www.kawabangga.com/feed" rel="self" type="application/rss+xml" />
 	<link>https://www.kawabangga.com</link>
 	<description>无法自制的人得不到自由。</description>
-	<lastBuildDate>Sat, 11 Jul 2026 03:13:58 +0000</lastBuildDate>
+	<lastBuildDate>Wed, 19 Aug 2026 10:35:56 +0000</lastBuildDate>
 	<language>zh-Hans</language>
 	<sy:updatePeriod>
 	hourly	</sy:updatePeriod>
@@ -28,6 +28,320 @@
 	<height>32</height>
 </image> 
 	<item>
+		<title>Traceroute the World</title>
+		<link>https://www.kawabangga.com/posts/7276</link>
+					<comments>https://www.kawabangga.com/posts/7276#comments</comments>
+		
+		<dc:creator><![CDATA[laixintao]]></dc:creator>
+		<pubDate>Wed, 19 Aug 2026 14:27:00 +0000</pubDate>
+				<category><![CDATA[网络]]></category>
+		<category><![CDATA[bpf]]></category>
+		<category><![CDATA[icmp]]></category>
+		<category><![CDATA[traceroute]]></category>
+		<category><![CDATA[XDP]]></category>
+		<guid isPermaLink="false">https://www.kawabangga.com/?p=7276</guid>
+
+					<description><![CDATA[ICMP 一直是我最喜欢的协议，在没有机器/设备的登录权限的时候，ICMP (ping) 可以让我在 debu [&#8230;]<br/><a href="https://www.kawabangga.com/posts/7276" class="more-link" >Continue reading...</a>]]></description>
+										<content:encoded><![CDATA[
+<p class="wp-block-paragraph">ICMP 一直是我最喜欢的协议，在没有机器/设备的登录权限的时候，ICMP (ping) 可以让我在 debug 的时候获得很多关键的信息：网络通不通，延迟多少，有没有环路，经过了哪些设备，等等。其中比较关键的机制，一个是 ping 工具，即 echo/reply 机制；另一个是在 TTL 耗尽的时候发回来 ICMP 错误信息<sup data-fn="19138dcb-21d0-4133-ad22-db3e981ea722" class="fn"><a href="#19138dcb-21d0-4133-ad22-db3e981ea722" id="19138dcb-21d0-4133-ad22-db3e981ea722-link">1</a></sup>，这是 traceroute 工具实现的基础原理。</p>
+
+
+
+<p class="wp-block-paragraph">在网上经常有人贴出来一些奇奇怪怪的 traceroute 结果<sup data-fn="2134c4c9-df34-4771-8d35-583c568f17ed" class="fn"><a href="#2134c4c9-df34-4771-8d35-583c568f17ed" id="2134c4c9-df34-4771-8d35-583c568f17ed-link">2</a></sup>，有人找到很长的 traceroute 会很兴奋。所以…… 我想我们能不能用系统的方法<strong>找到 traceroute 比较长的 IP 呢</strong>？</p>
+
+
+
+<p class="wp-block-paragraph">虽然这个问题没有什么实际的意义，但是本文在探索这个问题的时候会遇到一些常见的技术，还是挺有意思的。</p>
+
+
+
+<p class="wp-block-paragraph">实验 traceroute 的起点，我们设置在新加坡。</p>
+
+
+
+<p class="wp-block-paragraph">新加坡是一个重要的交通枢纽。这是在写这篇文章的时候，新加坡附近起降的飞机（PS，新加坡的樟宜机场是我最喜欢的机场，如果你路过新加坡的话，建议给樟宜机场预留多 2 个小时的时间逛一逛）。</p>
+
+
+<div class="wp-block-image">
+<figure class="aligncenter size-large is-resized"><a href="https://www.kawabangga.com/wp-content/uploads/2026/05/singapore-flight.png"><img fetchpriority="high" decoding="async" width="1024" height="659" src="https://www.kawabangga.com/wp-content/uploads/2026/05/singapore-flight-1024x659.png" alt="" class="wp-image-7279" style="aspect-ratio:1.5538919559499378;width:446px;height:auto" srcset="https://www.kawabangga.com/wp-content/uploads/2026/05/singapore-flight-1024x659.png 1024w, https://www.kawabangga.com/wp-content/uploads/2026/05/singapore-flight-300x193.png 300w, https://www.kawabangga.com/wp-content/uploads/2026/05/singapore-flight-768x495.png 768w, https://www.kawabangga.com/wp-content/uploads/2026/05/singapore-flight-1536x989.png 1536w, https://www.kawabangga.com/wp-content/uploads/2026/05/singapore-flight-2048x1319.png 2048w" sizes="(max-width: 1024px) 100vw, 1024px" /></a><figcaption class="wp-element-caption">新加坡繁忙的空域，来源：<a href="https://planefinder.net/">https://planefinder.net/</a></figcaption></figure>
+</div>
+
+
+<p class="wp-block-paragraph">也是一个重要的海上枢纽。</p>
+
+
+<div class="wp-block-image">
+<figure class="aligncenter size-large is-resized"><a href="https://www.kawabangga.com/wp-content/uploads/2026/05/vessel-singapore.png"><img decoding="async" width="1024" height="614" src="https://www.kawabangga.com/wp-content/uploads/2026/05/vessel-singapore-1024x614.png" alt="" class="wp-image-7280" style="width:382px;height:auto" srcset="https://www.kawabangga.com/wp-content/uploads/2026/05/vessel-singapore-1024x614.png 1024w, https://www.kawabangga.com/wp-content/uploads/2026/05/vessel-singapore-300x180.png 300w, https://www.kawabangga.com/wp-content/uploads/2026/05/vessel-singapore-768x461.png 768w, https://www.kawabangga.com/wp-content/uploads/2026/05/vessel-singapore-1536x921.png 1536w, https://www.kawabangga.com/wp-content/uploads/2026/05/vessel-singapore-2048x1228.png 2048w" sizes="(max-width: 1024px) 100vw, 1024px" /></a><figcaption class="wp-element-caption">新加坡附近的船只。来源 <a href="https://www.vesselfinder.com/">https://www.vesselfinder.com/</a></figcaption></figure>
+</div>
+
+
+<p class="wp-block-paragraph">在网络方面，新加坡也有丰富的海底光缆。</p>
+
+
+<div class="wp-block-image">
+<figure class="aligncenter size-large is-resized"><a href="https://www.kawabangga.com/wp-content/uploads/2026/05/submarine-cable.png"><img decoding="async" width="1024" height="730" src="https://www.kawabangga.com/wp-content/uploads/2026/05/submarine-cable-1024x730.png" alt="" class="wp-image-7283" style="width:405px;height:auto" srcset="https://www.kawabangga.com/wp-content/uploads/2026/05/submarine-cable-1024x730.png 1024w, https://www.kawabangga.com/wp-content/uploads/2026/05/submarine-cable-300x214.png 300w, https://www.kawabangga.com/wp-content/uploads/2026/05/submarine-cable-768x548.png 768w, https://www.kawabangga.com/wp-content/uploads/2026/05/submarine-cable-1536x1096.png 1536w, https://www.kawabangga.com/wp-content/uploads/2026/05/submarine-cable.png 2044w" sizes="(max-width: 1024px) 100vw, 1024px" /></a><figcaption class="wp-element-caption">来源：<a href="https://www.submarinecablemap.com/">https://www.submarinecablemap.com/</a></figcaption></figure>
+</div>
+
+
+<p class="wp-block-paragraph">所以，预期最长的 hop 不会太高，现在世界的互联网越来越扁平了，一般一个互联网 IP 可以在 10-20 个 hop 触达。我用了一台 DigitalOcean 的机器来做这个实验，用它来 traceroute 1.1.1.1 只需要 8 跳，延迟在 1ms 左右。</p>
+
+
+
+<figure class="wp-block-image size-large"><a href="https://www.kawabangga.com/wp-content/uploads/2026/05/traceroute-1.1.1.1.png"><img loading="lazy" decoding="async" width="1024" height="290" src="https://www.kawabangga.com/wp-content/uploads/2026/05/traceroute-1.1.1.1-1024x290.png" alt="" class="wp-image-7284" srcset="https://www.kawabangga.com/wp-content/uploads/2026/05/traceroute-1.1.1.1-1024x290.png 1024w, https://www.kawabangga.com/wp-content/uploads/2026/05/traceroute-1.1.1.1-300x85.png 300w, https://www.kawabangga.com/wp-content/uploads/2026/05/traceroute-1.1.1.1-768x217.png 768w, https://www.kawabangga.com/wp-content/uploads/2026/05/traceroute-1.1.1.1-1536x434.png 1536w, https://www.kawabangga.com/wp-content/uploads/2026/05/traceroute-1.1.1.1.png 1874w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /></a><figcaption class="wp-element-caption">mtr 1.1.1.1 只有 8 跳</figcaption></figure>
+
+
+
+<p class="wp-block-paragraph">回到本文的问题：找到一个 traceroute 最长的 IP，直观的方法就是 traceroute 每一个互联网的 IP。（本文只讨论 IPv4）</p>
+
+
+
+<p class="wp-block-paragraph">traceroute 对每一跳发 3 个包，超时时间 5s，最长 hop 尝试 30 跳。假设平均 15 跳完成，15 跳 × 3 探针 × ~100ms RTT = 5s，如果 IP ping 不通，那么 traceroute 可能要花 2min 以上。即使按照 5s 来算，我们 traceroute 整个互联网也需要：4,294,967,296 × 5 秒 = 21,474,836,480 秒 ≈ 680 年。如果开 1000 个并发，也需要 680 年 ÷ 1000 = 0.68 年 ≈ 248 天，大约8个月的时间。</p>
+
+
+
+<p class="wp-block-paragraph">怎样加快呢？</p>
+
+
+
+<p class="wp-block-paragraph">先来看一下现在的时间花在哪里了。traceroute 的逻辑是：对于目标 IP，发送 TTL=1 的包，等待回复，然后再重复 2 次；接下来换 TTL=2 的包，发送，等待回复，重复 3 次……</p>
+
+
+
+<p class="wp-block-paragraph">这样有两个问题：</p>
+
+
+
+<ol class="wp-block-list">
+<li>时间都在等待回复上了，效率太低；</li>
+
+
+
+<li>一个进程只能 trace 1 个目标 IP，如果开并发的话，会消耗很多 CPU 在 context switch 上，实际发出去的包非常少，CPU 使用率却很高；</li>
+</ol>
+
+
+
+<p class="wp-block-paragraph">对于本文的这个项目，我们是想找出来 traceroute 最长的一个 IP，而并不关心具体的路径。</p>
+
+
+
+<p class="wp-block-paragraph">要求高性能，我们换一个方式：不再使用发送——等待，我们设计两个程序，一个给所有的 IP 一起发送包，另一个监听收到的回应，如果是 ICMP 的 reply 包，就记录此 IP 可以 ping 通，如果收到其他的 ICMP 类型的包，直接丢弃即可。这样就完全没有等待时间了，而且之后两个程序，上下文切换的问题也解决了。</p>
+
+
+
+<p class="wp-block-paragraph">但是这就有了一个新的问题：我们怎么知道收到的包对应的 TTL 是多少呢？仅通过收到的 ICMP Time Exceeded 包是无法知道 TTL 消耗了多少的，怎么找到最长的 TTL 呢？</p>
+
+
+
+<p class="wp-block-paragraph">为了区分出来 TTL，我们分多轮进行扫描，先对所有的 IP 发送 TTL=1 的包，接收程序如果收到了 ICMP reply 的回应，说明这些 IP 在 TTL=1 的时候就能 ping 通，由于我们要找的是 TTL 越长越好，所以这些 IP可以直接淘汰了。接下来我们把 TTL=1 不能 ping 通的包，用 TTL=2 再发送一轮，如果能收到 ICMP reply，那么也可以淘汰了…… 假设我们在 TTL=30 的时候有一些 IP 能 ping 通，但是在 TTL=31 以及之后的时候没有任何 IP 可以 ping 通，那就说明这些 TTL=30 的 IP 就是胜者。</p>
+
+
+
+<p class="wp-block-paragraph">这样需要多久呢？</p>
+
+
+
+<p class="wp-block-paragraph">DigitalOcean 页面解释：All other Droplets have a maximum network throughput limit of 2 Gbps<sup data-fn="219e76f8-9eb6-4bf1-917e-33b5e69b00ee" class="fn"><a href="#219e76f8-9eb6-4bf1-917e-33b5e69b00ee" id="219e76f8-9eb6-4bf1-917e-33b5e69b00ee-link">3</a></sup>. 每一个 ICMP 包的大小是：Ethernet 14 + IP 20 + ICMP 8 + payload 32 = <strong>74 bytes</strong>，所以，理论上我们可以跑到：</p>
+
+
+
+<p class="wp-block-paragraph">2 Gbps ÷ (74 bytes × 8 bits) = 2,000,000,000 ÷ 592 ≈ 3,378,378 pps ≈ <strong>3.4M pps</strong></p>
+
+
+
+<p class="wp-block-paragraph">Ping 一次整个互联网只需要：</p>
+
+
+
+<p class="wp-block-paragraph">4,294,967,296 （2^32，所有的 IPv4 数量） ÷ 3,400,000 ≈ 1263 秒 ≈ <strong>21 分钟</strong></p>
+
+
+
+<p class="wp-block-paragraph">但是为了避免 overload 接受端（大量网段在同一个区域），以及中间设备可能存在的 conntrack，我们把速度限制在 100K pps，这样，只用了全速的 2.7%，ping 一次需要的时间是：</p>
+
+
+
+<p class="wp-block-paragraph">4,294,967,296 ÷ 100,000 ≈ 42,950 秒 ≈ <strong>11.9 小时</strong></p>
+
+
+
+<p class="wp-block-paragraph">对于我们的场景来说，也足够了。</p>
+
+
+
+<h2 class="wp-block-heading">第一个法宝：XDP</h2>
+
+
+
+<p class="wp-block-paragraph">使用我们自己的方式来发送 ping 包并且能跳过不需要的 conntrack 功能，就需要使用 kernel bypass 技术：</p>
+
+
+
+<ul class="wp-block-list">
+<li>egress 使用 AF_XDP 直接发送；</li>
+
+
+
+<li>ingress 使用 XDP，attach BPF 程序到 eth0 网卡上，直接在网络收包的最前方进行处理；</li>
+</ul>
+
+
+
+<p class="wp-block-paragraph">在收包程序上，直接看这个 IP 是不是一个合法的 ICMP reply，如果是，就记录 ping 通，如果不是就放通或丢弃。</p>
+
+
+
+<p class="wp-block-paragraph">但是 XDP 是运行在 kernel 的程序，如何把 ICMP reply 里面的 IP 信息记录到文件中呢？</p>
+
+
+
+<h2 class="wp-block-heading">第二个法宝：ring buffer</h2>
+
+
+
+<p class="wp-block-paragraph">Ring buffer<sup data-fn="96319d74-ec97-4cb3-ab50-f1feb508c63e" class="fn"><a href="#96319d74-ec97-4cb3-ab50-f1feb508c63e" id="96319d74-ec97-4cb3-ab50-f1feb508c63e-link">4</a></sup> 在网络领域是一个非常常用的数据结构，它本质上是一个 buffer，生产方可以往里面写，消费方从里面读，是两个指针。它天然适合网络的原因是，buffer 的 head 和 tail 是相接的，自然而然就可以实现「如果生产方生产的速度太快，丢弃（覆盖）最早到达并且还没有处理的包」。（对于 BPF ring buffer，如果用户态消费得不够快、buffer 没有剩余空间，新的记录会写入失败。）</p>
+
+
+
+<p class="wp-block-paragraph">使用 BPF ring buffer （BPF_MAP_TYPE_RINGBUF），作为 kernel space 和 user space 的桥梁——kernel 往这个 ring buffer 里面不断写入可以 ping 通的 IP，用户态读出来这个 IP 记录到文件中。</p>
+
+
+
+<p class="wp-block-paragraph">接下来我们看用户态的程序。怎么存储这些 IP 呢？</p>
+
+
+
+<p class="wp-block-paragraph">我们可以使用一个 txt 文件不断 append IP，但是这样查找起来的话就是 O(n) 了。（不过我们只需要最后的几个赢家，大部分情况不需要查找，所以……还好啦）。另一个方案是使用一个数据库，比如 sqlite，查找快，不过大量写入的时候就有瓶颈。</p>
+
+
+
+<p class="wp-block-paragraph">看起来用最简单的文本好一些。</p>
+
+
+
+<p class="wp-block-paragraph">如果按照一个 IP 一行的格式，<code>xxx.xxx.xxx.xxx\n</code>，一共是 16 bytes，16 bytes * 2^32 就是 64GiB （最坏的情况）。</p>
+
+
+
+<p class="wp-block-paragraph">ping 一次就需要 64GiB！这也太多了，作为一个 hobby project，我们的目标是使用一个 $5 的 DigitalOcean VPS 来完成这个任务，磁盘只有 25GiB，远远不够。</p>
+
+
+
+<p class="wp-block-paragraph">有哪些字符可以简化呢？乍一看，首先是每一个 IP 的一个点，以及，IP 的每一个段实际有效数据是 0-255，但是可以表示的容量是 0-999，所以有很大一部分空间浪费了。</p>
+
+
+
+<p class="wp-block-paragraph">诶等等，IP 不就是 4 个 bytes 吗？这样的话我们可以把 IP 转化成一个 32位的 int：</p>
+
+
+
+<div class="wp-block-urvanov-syntax-highlighter-code-block"><pre class="urvanov-syntax-highlighter-plain-tag">&gt;&gt;&gt; import ipaddress; int(ipaddress.IPv4Address('192.168.0.1'))
+3232235521</pre></div>
+
+
+
+<p class="wp-block-paragraph">这样的话每 4 bytes 是一个 IP 总共是 16GiB，缩小了 4 倍！而且，4 bytes 里面每一个组合都是一个合法的 IP ，完全没有空间的浪费。</p>
+
+
+
+<p class="wp-block-paragraph">等等，「每一个组合都是一个合法的 IP」——那是不是就意味着，我们从 0 数到 2^32，每一个位置都有一个 IP？这样的话，可以让每一个位置的 bit 位，如果是 1，表示这个 IP 能够 ping 通，如果是 0，表示 ping 不通（默认，文件初始化为 0）。而这个 bit 所在的 index（比如，是文件的第 3232235521 比特位，就表示 <code>192.168.0.1</code> 这个 IP），就表示 IP。</p>
+
+
+
+<h2 class="wp-block-heading">第三个法宝：bitmap</h2>
+
+
+
+<p class="wp-block-paragraph">恭喜我们自己！我们刚刚发明了 bitmap！</p>
+
+
+
+<p class="wp-block-paragraph">但是每次 seek 过去，把要写入的 bit 组合成一个 byte，调用 syscall write，这也太麻烦了！</p>
+
+
+
+<h2 class="wp-block-heading">第四个法宝：mmap</h2>
+
+
+
+<p class="wp-block-paragraph">mmap 可以帮我们把文件映射到内存地址空间，我们只要操作内存就可以了，操作系统会在后台帮我们同步——定期把内存的修改写入到文件中。这可太方便了！</p>
+
+
+
+<p class="wp-block-paragraph">这样，我们 ping 一轮，就有一个 512 MiB（Exactly 512 MiB!） 的文件，里面存储了这一轮 ping 通的 IP。然后我们拿 bit 是 0 的 index 作为 IP，做下一轮的 ping，能通的 IP 会越来越少，直到得到一个冠军。</p>
+
+
+
+<p class="wp-block-paragraph">其实互联网大部分 IP 是 ping 不通的，尤其是我们刚开始使用比较小的 TTL。所以我们的文件的大部分内容都是 0，只有一小部分是 1，而且 1 的部分通常是连续的。因为 IP 是按连续的段分配给不通的组织，一般来说，一个段要么都可以通，要么都不通。</p>
+
+
+
+<p class="wp-block-paragraph">那么我们可以省略中间的 0 的部分吗？这样的话可以节省一大部分磁盘。</p>
+
+
+
+<h2 class="wp-block-heading">第五个法宝：Sparse file</h2>
+
+
+
+<p class="wp-block-paragraph">答案是可以！这叫做 Sparse file，或者叫 file hole。比如我可以创建一个 10PB 的超大文件：</p>
+
+
+
+<div class="wp-block-urvanov-syntax-highlighter-code-block"><pre class="urvanov-syntax-highlighter-plain-tag">$ truncate -s 10240T super.big.file
+$ ls -hl super.big.file
+-rw-r--r-- 1 xintao.lai staff 10P Aug 19 18:17 super.big.file</pre></div>
+
+
+
+<p class="wp-block-paragraph">然后实际占用的空间，使用 du 查看，是 0：</p>
+
+
+
+<div class="wp-block-urvanov-syntax-highlighter-code-block"><pre class="urvanov-syntax-highlighter-plain-tag">$ du -sh super.big.file
+0	super.big.file</pre></div>
+
+
+
+<p class="wp-block-paragraph">使用非常简单，seek 到 EOF 以后的位置，随后再 write，中间没有写过的区域形成 hole （注意，不是 write 0）。</p>
+
+
+
+<p class="wp-block-paragraph">我们可以先用 ftruncate 调用，创建一个 sparse file，然后用 mmap 只修改需要写为 1 的部分，这样，其实只有 1 占用空间了。</p>
+
+
+
+<h2 class="wp-block-heading">将将将！</h2>
+
+
+
+<p class="wp-block-paragraph">实际运行还有很多问题，比如 IP 不稳定，有时候回复 ping 有时候不回复有时候回复；有些 IP 使用另一个 IP 回复 ping；有些 IP 不减 TTL 导致产生无限环路，等等。</p>
+
+
+
+<p class="wp-block-paragraph">最后我找到 34 跳的就放弃了：</p>
+
+
+
+<figure class="wp-block-image size-large"><a href="https://www.kawabangga.com/wp-content/uploads/2026/08/34hops.png"><img loading="lazy" decoding="async" width="1024" height="937" src="https://www.kawabangga.com/wp-content/uploads/2026/08/34hops-1024x937.png" alt="" class="wp-image-7371" srcset="https://www.kawabangga.com/wp-content/uploads/2026/08/34hops-1024x937.png 1024w, https://www.kawabangga.com/wp-content/uploads/2026/08/34hops-300x275.png 300w, https://www.kawabangga.com/wp-content/uploads/2026/08/34hops-768x703.png 768w, https://www.kawabangga.com/wp-content/uploads/2026/08/34hops-1536x1406.png 1536w, https://www.kawabangga.com/wp-content/uploads/2026/08/34hops.png 1704w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /></a><figcaption class="wp-element-caption">长达 34 跳的 ICMP</figcaption></figure>
+
+
+
+<p class="wp-block-paragraph">代码放在这里了：<a href="https://github.com/laixintao/traceroute-the-world">https://github.com/laixintao/traceroute-the-world</a> 有兴趣的读者可以自己跑跑看。</p>
+
+
+
+<p class="wp-block-paragraph">代码是 AI 写的，但是这篇博客是我自己纯手写的。这年头能读的博客不多了，但是可以放心的是，这个博客不会有大批量 AI 生成的文字。<br /></p>
+
+
+<ol class="wp-block-footnotes"><li id="19138dcb-21d0-4133-ad22-db3e981ea722">参考 <a href="https://www.kawabangga.com/posts/4275" data-type="post" data-id="4275">使用 mtr 检查网络问题，以及注意事项</a> <a href="#19138dcb-21d0-4133-ad22-db3e981ea722-link" aria-label="跳转到脚注引用 1"><img src="https://s.w.org/images/core/emoji/17.0.2/72x72/21a9.png" alt="↩" class="wp-smiley" style="height: 1em; max-height: 1em;" />︎</a></li><li id="2134c4c9-df34-4771-8d35-583c568f17ed">比如这里 <a href="https://www.reddit.com/r/ZiplyFiber/comments/15vvs4c/holy_traceroute_batman_this_has_to_be_a_new_record/">https://www.reddit.com/r/ZiplyFiber/comments/15vvs4c/holy_traceroute_batman_this_has_to_be_a_new_record/</a>， 以及这里 <a href="https://www.reddit.com/r/sysadmin/comments/2gxz4e/is_it_possible_to_find_the_worlds_longest_routes/">https://www.reddit.com/r/sysadmin/comments/2gxz4e/is_it_possible_to_find_the_worlds_longest_routes/</a> <a href="#2134c4c9-df34-4771-8d35-583c568f17ed-link" aria-label="跳转到脚注引用 2"><img src="https://s.w.org/images/core/emoji/17.0.2/72x72/21a9.png" alt="↩" class="wp-smiley" style="height: 1em; max-height: 1em;" />︎</a></li><li id="219e76f8-9eb6-4bf1-917e-33b5e69b00ee"><a href="https://docs.digitalocean.com/products/droplets/details/limits/">https://docs.digitalocean.com/products/droplets/details/limits/</a> <a href="#219e76f8-9eb6-4bf1-917e-33b5e69b00ee-link" aria-label="跳转到脚注引用 3"><img src="https://s.w.org/images/core/emoji/17.0.2/72x72/21a9.png" alt="↩" class="wp-smiley" style="height: 1em; max-height: 1em;" />︎</a></li><li id="96319d74-ec97-4cb3-ab50-f1feb508c63e"><a href="https://en.wikipedia.org/wiki/Circular_buffer">https://en.wikipedia.org/wiki/Circular_buffer</a> <a href="#96319d74-ec97-4cb3-ab50-f1feb508c63e-link" aria-label="跳转到脚注引用 4"><img src="https://s.w.org/images/core/emoji/17.0.2/72x72/21a9.png" alt="↩" class="wp-smiley" style="height: 1em; max-height: 1em;" />︎</a></li></ol>]]></content:encoded>
+					
+					<wfw:commentRss>https://www.kawabangga.com/posts/7276/feed</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+			</item>
+		<item>
 		<title>Hello, World!</title>
 		<link>https://www.kawabangga.com/posts/7336</link>
 					<comments>https://www.kawabangga.com/posts/7336#comments</comments>
@@ -39,7 +353,7 @@
 
 					<description><![CDATA[<br/><a href="https://www.kawabangga.com/posts/7336" class="more-link" >Continue reading...</a>]]></description>
 										<content:encoded><![CDATA[
-<figure class="wp-block-image size-large"><a href="https://www.kawabangga.com/wp-content/uploads/2026/07/baby.jpeg"><img fetchpriority="high" decoding="async" width="768" height="1024" src="https://www.kawabangga.com/wp-content/uploads/2026/07/baby-768x1024.jpeg" alt="" class="wp-image-7337" srcset="https://www.kawabangga.com/wp-content/uploads/2026/07/baby-768x1024.jpeg 768w, https://www.kawabangga.com/wp-content/uploads/2026/07/baby-225x300.jpeg 225w, https://www.kawabangga.com/wp-content/uploads/2026/07/baby.jpeg 1086w" sizes="(max-width: 768px) 100vw, 768px" /></a></figure>
+<figure class="wp-block-image size-large"><a href="https://www.kawabangga.com/wp-content/uploads/2026/07/baby.jpeg"><img loading="lazy" decoding="async" width="768" height="1024" src="https://www.kawabangga.com/wp-content/uploads/2026/07/baby-768x1024.jpeg" alt="" class="wp-image-7337" srcset="https://www.kawabangga.com/wp-content/uploads/2026/07/baby-768x1024.jpeg 768w, https://www.kawabangga.com/wp-content/uploads/2026/07/baby-225x300.jpeg 225w, https://www.kawabangga.com/wp-content/uploads/2026/07/baby.jpeg 1086w" sizes="auto, (max-width: 768px) 100vw, 768px" /></a></figure>
 ]]></content:encoded>
 					
 					<wfw:commentRss>https://www.kawabangga.com/posts/7336/feed</wfw:commentRss>
@@ -96,7 +410,7 @@
 
 
 <div class="wp-block-image">
-<figure class="aligncenter size-large is-resized"><a href="https://www.kawabangga.com/wp-content/uploads/2026/06/rickandmortys01e01.png"><img decoding="async" width="1024" height="572" src="https://www.kawabangga.com/wp-content/uploads/2026/06/rickandmortys01e01-1024x572.png" alt="" class="wp-image-7316" style="width:373px;height:auto" srcset="https://www.kawabangga.com/wp-content/uploads/2026/06/rickandmortys01e01-1024x572.png 1024w, https://www.kawabangga.com/wp-content/uploads/2026/06/rickandmortys01e01-300x168.png 300w, https://www.kawabangga.com/wp-content/uploads/2026/06/rickandmortys01e01-768x429.png 768w, https://www.kawabangga.com/wp-content/uploads/2026/06/rickandmortys01e01.png 1514w" sizes="(max-width: 1024px) 100vw, 1024px" /></a></figure>
+<figure class="aligncenter size-large is-resized"><a href="https://www.kawabangga.com/wp-content/uploads/2026/06/rickandmortys01e01.png"><img loading="lazy" decoding="async" width="1024" height="572" src="https://www.kawabangga.com/wp-content/uploads/2026/06/rickandmortys01e01-1024x572.png" alt="" class="wp-image-7316" style="width:373px;height:auto" srcset="https://www.kawabangga.com/wp-content/uploads/2026/06/rickandmortys01e01-1024x572.png 1024w, https://www.kawabangga.com/wp-content/uploads/2026/06/rickandmortys01e01-300x168.png 300w, https://www.kawabangga.com/wp-content/uploads/2026/06/rickandmortys01e01-768x429.png 768w, https://www.kawabangga.com/wp-content/uploads/2026/06/rickandmortys01e01.png 1514w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /></a></figure>
 </div>
 
 
@@ -112,7 +426,7 @@
 
 
 <div class="wp-block-image">
-<figure class="aligncenter size-large is-resized"><a href="https://www.kawabangga.com/wp-content/uploads/2026/06/footpad.jpeg"><img decoding="async" width="1024" height="768" src="https://www.kawabangga.com/wp-content/uploads/2026/06/footpad-1024x768.jpeg" alt="" class="wp-image-7318" style="width:484px;height:auto" srcset="https://www.kawabangga.com/wp-content/uploads/2026/06/footpad-1024x768.jpeg 1024w, https://www.kawabangga.com/wp-content/uploads/2026/06/footpad-300x225.jpeg 300w, https://www.kawabangga.com/wp-content/uploads/2026/06/footpad-768x576.jpeg 768w, https://www.kawabangga.com/wp-content/uploads/2026/06/footpad.jpeg 1280w" sizes="(max-width: 1024px) 100vw, 1024px" /></a></figure>
+<figure class="aligncenter size-large is-resized"><a href="https://www.kawabangga.com/wp-content/uploads/2026/06/footpad.jpeg"><img loading="lazy" decoding="async" width="1024" height="768" src="https://www.kawabangga.com/wp-content/uploads/2026/06/footpad-1024x768.jpeg" alt="" class="wp-image-7318" style="width:484px;height:auto" srcset="https://www.kawabangga.com/wp-content/uploads/2026/06/footpad-1024x768.jpeg 1024w, https://www.kawabangga.com/wp-content/uploads/2026/06/footpad-300x225.jpeg 300w, https://www.kawabangga.com/wp-content/uploads/2026/06/footpad-768x576.jpeg 768w, https://www.kawabangga.com/wp-content/uploads/2026/06/footpad.jpeg 1280w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /></a></figure>
 </div>
 
 
@@ -1941,248 +2255,6 @@ iperf Done.</pre></div>
 					
 					<wfw:commentRss>https://www.kawabangga.com/posts/7219/feed</wfw:commentRss>
 			<slash:comments>8</slash:comments>
-		
-		
-			</item>
-		<item>
-		<title>学习网络的一点经验</title>
-		<link>https://www.kawabangga.com/posts/6131</link>
-					<comments>https://www.kawabangga.com/posts/6131#comments</comments>
-		
-		<dc:creator><![CDATA[laixintao]]></dc:creator>
-		<pubDate>Wed, 04 Mar 2026 15:45:20 +0000</pubDate>
-				<category><![CDATA[网络]]></category>
-		<category><![CDATA[BGP]]></category>
-		<category><![CDATA[DHCP]]></category>
-		<category><![CDATA[RFC阅读]]></category>
-		<category><![CDATA[SOCKS5]]></category>
-		<category><![CDATA[TCP]]></category>
-		<category><![CDATA[tcpdump]]></category>
-		<category><![CDATA[TCP三次握手]]></category>
-		<category><![CDATA[traceroute]]></category>
-		<category><![CDATA[VRRP]]></category>
-		<category><![CDATA[wireshark]]></category>
-		<category><![CDATA[举一反三]]></category>
-		<category><![CDATA[分而治之]]></category>
-		<category><![CDATA[协议字段分析]]></category>
-		<category><![CDATA[协议设计]]></category>
-		<category><![CDATA[技术学习方法]]></category>
-		<category><![CDATA[抓包分析]]></category>
-		<category><![CDATA[网络协议]]></category>
-		<category><![CDATA[网络学习]]></category>
-		<category><![CDATA[网络排错]]></category>
-		<category><![CDATA[网络架构]]></category>
-		<guid isPermaLink="false">https://www.kawabangga.com/?p=6131</guid>
-
-					<description><![CDATA[在网络抓包系列的最后，再来说一下网络学习的一些经验。毕竟，能通过抓包来解决问题的前提是具备网络协议的知识，不然 [&#8230;]<br/><a href="https://www.kawabangga.com/posts/6131" class="more-link" >Continue reading...</a>]]></description>
-										<content:encoded><![CDATA[
-<p class="wp-block-paragraph">在网络抓包系列的最后，再来说一下网络学习的一些经验。毕竟，能通过抓包来解决问题的前提是具备网络协议的知识，不然的话 Wireshark 和 tcpdump 用得再熟练也看不懂抓到的包。</p>
-
-
-
-<p class="wp-block-paragraph">以下是我觉得一些比较好的学习方法，我从中获益良多。</p>
-
-
-
-<h3 class="wp-block-heading">和朋友讨论学到的东西</h3>
-
-
-
-<p class="wp-block-paragraph">学到了一个新的知识点或者新的协议，可以尝试解释给朋友或者同事听。比如在吃饭的时候，「嘿，你知道吗？TCP 三次握手的第三个包实际上是可以携带数据的！」然后他们会想这个问题，问你「要是有些 Server 不能处理带数据的第三个包怎么办？」这样，你就要重新思考你学的知识，看它是否考虑周全。教是最好的学习方法。如果没有朋友的话，可以考虑写一个博客（像我一样？呵呵）。</p>
-
-
-
-<p class="wp-block-paragraph">认识实际的网络，也可以从公司的网络结构开始。平时总结一下自己的问题，多阅读一些内部的文档。在内部 traceroute 跑一下，看看每一个 hop 都是什么。找时间请网络团队的同事吃饭，然后问他们你的问题。</p>
-
-
-
-<h3 class="wp-block-heading">举一反三</h3>
-
-
-
-<p class="wp-block-paragraph">要学会提问。网络协议的目的一部分是传输数据，更重要的，它需要处理各种异常情况，保证即使出现各种意外，也能尽最大努力工作。所以，我们在学习的时候可以经常问题自己：如果这时候出现 xx 会怎么样呢？</p>
-
-
-
-<p class="wp-block-paragraph">问自己问题，然后思考，尝试给自己解答。在思考的过程中，会产生很多解决方案，大部分可能都是有问题的，然后找到其中的问题，推翻自己的方案。比如，网络为什么要分开三层和二层？这个世界上只有 IP 层，没有链路层行不行？或者只有链路层，不要 IP 层了行不行，整个世界都是一个「大二层」，会有什么问题？</p>
-
-
-
-<p class="wp-block-paragraph">网络相关的知识常常是零碎散乱。我的经验是，不要一开始就跳到兔子洞里面去。面对一个新的概念的时候，可以这样来入门。举个例子说，比如 SOCKS5 协议：</p>
-
-
-
-<ul class="wp-block-list">
-<li>第一步是问：「这个东西是来解决什么问题的？」这个问题必须始终记在心里的，如果搞不清楚，后面会有更多的困惑。</li>
-
-
-
-<li>第二步，可以自己想出来一种方案来解决这个问题。方案一开始不必完美，只要解决问题即可。很多方案就是这样设计出来的，现有一个简单的方法，再想想有没有什么缺陷，然后试图优化方案来解决缺陷。</li>
-
-
-
-<li>如果觉得自己的方案应该没有问题了，就可以进行第三步了，去深入理解 SOCKS5 协议。可以直接去读 RFC<sup data-fn="9cab4d09-9af2-43e3-91a6-3fa97620733a" class="fn"><a href="#9cab4d09-9af2-43e3-91a6-3fa97620733a" id="9cab4d09-9af2-43e3-91a6-3fa97620733a-link">1</a></sup>，不要害怕，RFC 读起来没有那么难！阅读 RFC，可以和自己的方案做对比，看看有哪些问题是还没有想到的。</li>
-</ul>
-
-
-
-<p class="wp-block-paragraph"><em>其实我觉得，网络协议的设计在最开始的时候考虑并没有很周全，比如 TCP 的一些问题，HOL Blocking；比如 OSPF 协议的奇怪名字 NSSA 之类的。感觉是设计出来之后，然后发现在现实中会有问题，就会在给原来的东西打上补丁。</em></p>
-
-
-
-<h3 class="wp-block-heading">研究网络协议</h3>
-
-
-
-<p class="wp-block-paragraph">很多网络协议设计的是很美的，我喜欢那些简单又能解决问题的协议。比如 VRRP，只有一种数据格式包。像 TCP，DHCP 这种就复杂许多，它们的魅力在于解决了复杂的问题，适应各种复杂的环境。</p>
-
-
-
-<p class="wp-block-paragraph">了解网络协议除了按照上面的方法自己来挑战设计，还可以格物致知，看协议的每一个字段，搞清楚这些字段都在解决什么问题。一般每一个字段都是为了解决某种问题或需求而存在的。</p>
-
-
-
-<p class="wp-block-paragraph">面对复杂的协议的时候，把它拆成一个一个小的部分，单独攻破。比如 BGP，状态，选路之类的太复杂了。方法就是 break down，一个一个来。</p>
-
-
-
-<p class="wp-block-paragraph">光学习 Wireshark 这种工具是不行的，工具是围绕网络协议设计出来的，网络协议设计出来是为了解决真实的问题的。所以学习网络协议，它们解决问题的方法，才是主要的。另外，只有懂网络协议才能用好工具。比如，精通 ICMP 和 IP 的 TTL 设计，才能精通 traceroute 的使用。</p>
-
-
-
-<h3 class="wp-block-heading">多读书</h3>
-
-
-
-<p class="wp-block-paragraph">像 TCP 的书从协议设计到实现，有数不清的书来介绍。读一本是不够的，因为对于网络协议，不同的作者有不同的理解，有不同的比喻。读书就像和作者聊天一样，和不同的人探讨自己对一个东西的认识，有助于加深理解。</p>
-
-
-
-<p class="wp-block-paragraph">上面通过自己设计协议来理解协议的方式，就是 <em>Computer Networking: A Top-Down Approach</em><sup data-fn="38991729-3716-4318-bd76-5bf9e8d94207" class="fn"><a href="#38991729-3716-4318-bd76-5bf9e8d94207" id="38991729-3716-4318-bd76-5bf9e8d94207-link">2</a></sup> 这本书作者用的，作者用从零开始设计 TCP 的方式来教授为什么 TCP 是今天这个样子的。</p>
-
-
-
-<p class="wp-block-paragraph">同一本书也可以读第二遍，所谓书读百遍，其义自见。</p>
-
-
-
-<h4 class="wp-block-heading">PS：不要看国内的大学讲课视频</h4>
-
-
-
-<p class="wp-block-paragraph">如果一个视频明显是那种中国大学的讲课录屏，基本就没有必要看了。这些视频通常知识和现实脱节，讲的内容很多也在现实中见不到，照本宣科，避重就轻。除了磨灭读者的兴趣，把有趣变成枯燥，就没什么价值了。没有兴趣和热情，就学不好。</p>
-
-
-
-<p class="wp-block-paragraph"></p>
-
-
-
-<hr class="wp-block-separator has-alpha-channel-opacity"/>
-
-
-
-<p class="wp-block-paragraph">说到最后，兴趣是最好的老师，对我来说，根据自己的知识和工具拨开迷雾，解决一个一个的问题，是再有意思不过的了。每个人会在人生的一个时间，发现这个世界不是公平的。但是在计算机的世界里，是很公平的，多花一点时间，多思考一些，就会多一分收获，它与天分无关。技术会过时，自己辛苦习得的技能也可能被 AI 轻而易举取代，但是曾经在学习和进步中体会到的乐趣是真实存在的，那些经验运用到新的技术中也多少是有所帮助的。祝愿读者在自己的领域体会到平静和乐趣。</p>
-
-
-
-<hr class="wp-block-separator has-alpha-channel-opacity"/>
-
-
-
-<h2 class="wp-block-heading has-text-align-center">==抓包破案录==</h2>
-
-
-
-<p class="wp-block-paragraph">这篇文章是抓包破案录系列文章（之前叫做《计算机网络实用技术》，后来改名了）中的一篇，这个系列正在连载中，我计划用这个系列的文章来分享一些网络抓包分析的实用技术。这些文章都是总结了我的工作经历中遇到的问题，经过精心构造和编写，每个文件附带抓包文件，通过实战来学习网络抓包与分析。</p>
-
-
-
-<p class="wp-block-paragraph"><strong>如果本文对您有帮助，欢迎扫博客右侧二维码打赏支持，正是订阅者的支持，让我公开写这个系列成为可能，感谢！</strong></p>
-
-
-
-<p class="wp-block-paragraph">如果您正在阅读的是题目类的文章，这个目录内容正好用来隔离其他读者的评论。读完题目可以稍作暂停，进行思考，<strong>继续向下滑动，可能会被其他的读者剧透答案。</strong></p>
-
-
-
-<p class="wp-block-paragraph"><em>没有链接的目录还没有写完，敬请期待……</em></p>
-
-
-
-<ol class="wp-block-list">
-<li><a href="https://www.kawabangga.com/posts/6097">序章</a></li>
-
-
-
-<li><a href="https://www.kawabangga.com/posts/6950">抓包技术以及技巧</a></li>
-
-
-
-<li><a href="https://www.kawabangga.com/posts/6295">理解网络的分层模型</a></li>
-
-
-
-<li><a href="https://www.kawabangga.com/posts/6919">数据是如何路由的</a></li>
-
-
-
-<li>网络问题排查的思路和技巧</li>
-
-
-
-<li><a href="https://www.kawabangga.com/posts/6178">不可以用路由器？</a>（<a href="https://www.kawabangga.com/posts/6291">答案和解析</a>）</li>
-
-
-
-<li><a href="https://www.kawabangga.com/posts/6286">网工闯了什么祸？</a>（<a href="https://www.kawabangga.com/posts/6291">答案和解析</a>，<a href="https://www.kawabangga.com/posts/7129" data-type="post" data-id="7129">阅读加餐！</a>）</li>
-
-
-
-<li><a href="https://www.kawabangga.com/?p=6383">重新认识 TCP 的握手和挥手</a>（<a href="https://www.kawabangga.com/posts/6467">答案和解析</a>）</li>
-
-
-
-<li><a href="https://www.kawabangga.com/posts/7219">3.5 秒初始延迟问题</a> （<a href="https://www.kawabangga.com/posts/7221">答案和解析</a>）</li>
-
-
-
-<li><a href="https://www.kawabangga.com/posts/7187" data-type="link" data-id="https://www.kawabangga.com/posts/7187">网络断断续续……</a> （<a href="https://www.kawabangga.com/posts/7190" data-type="link" data-id="https://www.kawabangga.com/posts/7190">答案和解析</a>）</li>
-
-
-
-<li><a href="https://www.kawabangga.com/?p=6372">延迟增加了多少？</a>（<a href="https://www.kawabangga.com/posts/6378">答案和解析</a>）</li>
-
-
-
-<li><a href="https://www.kawabangga.com/posts/6910" data-type="post" data-id="6910">压测的时候 QPS 为什么上不去？</a>（<a href="https://www.kawabangga.com/posts/6937">答案和解析</a>）</li>
-
-
-
-<li><a href="https://www.kawabangga.com/posts/6570">TCP 下载速度为什么这么慢？</a>（<a href="https://www.kawabangga.com/posts/6616">答案和解析</a>）</li>
-
-
-
-<li><a href="https://www.kawabangga.com/posts/6965">请求为什么超时了？</a>（<a href="https://www.kawabangga.com/posts/6969">答案和解析</a>）</li>
-
-
-
-<li><a href="https://www.kawabangga.com/posts/7066">0.01% 的概率超时问题</a> （<a href="https://www.kawabangga.com/posts/7076">答案和解析</a>）</li>
-
-
-
-<li><a href="https://www.kawabangga.com/posts/6131" data-type="link" data-id="https://www.kawabangga.com/posts/6131">后记：学习网络的一点经验分享</a></li>
-</ol>
-
-
-
-<pre class="wp-block-preformatted">与本博客的其他页面不同，本页面使用 <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-hans">署名-非商业性使用-禁止演绎 4.0 国际</a> 协议。<br /></pre>
-
-
-<ol class="wp-block-footnotes"><li id="9cab4d09-9af2-43e3-91a6-3fa97620733a">如果你感兴趣的话，socks5 的 RFC 是 <a href="https://datatracker.ietf.org/doc/html/rfc1928">https://datatracker.ietf.org/doc/html/rfc1928</a> <a href="#9cab4d09-9af2-43e3-91a6-3fa97620733a-link" aria-label="跳转到脚注引用 1"><img src="https://s.w.org/images/core/emoji/17.0.2/72x72/21a9.png" alt="↩" class="wp-smiley" style="height: 1em; max-height: 1em;" />︎</a></li><li id="38991729-3716-4318-bd76-5bf9e8d94207"><a href="https://www.amazon.sg/Computer-Networking-Top-Down-James-Kurose/dp/0133594149">https://www.amazon.sg/Computer-Networking-Top-Down-James-Kurose/dp/0133594149</a> <a href="#38991729-3716-4318-bd76-5bf9e8d94207-link" aria-label="跳转到脚注引用 2"><img src="https://s.w.org/images/core/emoji/17.0.2/72x72/21a9.png" alt="↩" class="wp-smiley" style="height: 1em; max-height: 1em;" />︎</a></li></ol>]]></content:encoded>
-					
-					<wfw:commentRss>https://www.kawabangga.com/posts/6131/feed</wfw:commentRss>
-			<slash:comments>5</slash:comments>
 		
 		
 			</item>
