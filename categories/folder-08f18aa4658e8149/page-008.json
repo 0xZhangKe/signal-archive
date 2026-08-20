@@ -1,6 +1,61 @@
 {
   "items": [
     {
+      "id": "1b73302f1e413c954ef93e26",
+      "title": "Devil's Lake 半日遊",
+      "summary": "白雲像奶油一樣抹平了湖對岸的山凹處，十分可愛",
+      "image": "https://alicehsu.blog/images/Post/59/5.jpg",
+      "publishedAt": "2026-07-24T03:00:00Z",
+      "sourceId": "a08fec079b5bc196",
+      "sourceTitle": "Alice Hsu's Blog",
+      "link": "https://alicehsu.blog/zh-tw/posts/2026/07/devils-lake-half-day-trip/",
+      "detailPath": "articles/1b73302f1e413c954ef93e26.json"
+    },
+    {
+      "id": "af719e9a878bb22e010d72e0",
+      "title": "3D 星空背景效能長征：OffscreenCanvas Worker → WebGPU/TSL 重寫",
+      "summary": "這篇記錄了作者為個人網站 koimsurai.com 那片 3D 星空背景走過的三階段效能長征。背景最初只是一堆各自為政的 three.js 裝飾特效——黑洞、粒子、星空、土星——東西還少時並不重,是愈疊愈多、真正拿去量之後才逐步走上優化:先把星空搬進 OffscreenCanvas Worker 讓渲染離開主執行緒(桌面 TBT 從 17 秒壓到 30 毫秒),再被朋友一台會白屏的機器逼著補上背景的穩健性,最後用瀏覽器最新的 WebGPU/TSL 把整套從頭重寫成單一 canvas——GPU 從 85–90% 砍到 25%、星星翻到 26,000 顆全在 shader 裡呼吸。文中一併科普 WebGPU 到底是什麼,並記下一個反覆翻案的判斷:「效能優化」和「品質升級」是兩本不同的帳,換掉目標函數,結論就翻。",
+      "image": null,
+      "publishedAt": "2026-07-24T02:49:17Z",
+      "sourceId": "bd51496b8ec0ca1d",
+      "sourceTitle": "Koimsurai 手記",
+      "link": "https://koimsurai.com/blog/the-3d-starfield-performance-march",
+      "detailPath": "articles/af719e9a878bb22e010d72e0.json"
+    },
+    {
+      "id": "5c63803ff0fc1ca973b95d23",
+      "title": "《玩具總動員 5》中國票房爲何不濟？",
+      "summary": "和朋友談起《玩具總動員 5》在中國的票房。目前四千多萬美元，僅和日本票房持平。但美國票房依舊良好。僅以此三國而 […]",
+      "image": "https://1.gravatar.com/avatar/19d667891f84a17deee970e145cef9ed58b8dd71869b0b97533a8821fb128616?s=96&d=identicon&r=G",
+      "publishedAt": "2026-07-24T02:14:58Z",
+      "sourceId": "e1dfcc8815d1c9f8",
+      "sourceTitle": "IT 公论",
+      "link": "https://blog.yitianshijie.net/2026/07/24/why-toy-story-5-fails-in-china/",
+      "detailPath": "articles/5c63803ff0fc1ca973b95d23.json"
+    },
+    {
+      "id": "9e08da35863c5603a020265b",
+      "title": "科技爱好者周刊（第 405 期）：资源，社会公平与算力",
+      "summary": "这里记录每周值得分享的科技内容，周五发布。 本杂志 开源 ，欢迎 投稿 。另有 《谁在招人》 服务，发布程序员招聘信息。合作请 邮件联系 （yifeng.ruan@gmail.com）。 封面图 西安大明宫遗址，使用亚克力透明板绘制古代建筑，让游客在原址体验当年的场景。（ via ） 资源，社会公平与算力 分享一个有趣的观点： 资源太多，会造成社会不公平 。我谈不上同意这个观点，就是觉得思路很奇特。 这是奥地利哲学家 伊万·伊里奇 （Ivan Illich）在1973年的著作《能源与公平》（Energy and Equity ）中提出的，他认为用电量与社会公平有关。 \"能源和公平只能在一定程度上同时增长。人均用电量低于某个阈值时，增加用电量能够改善社会公平。高于这个阈值，能源增长就会以牺牲公平为代价。\" 他的…",
+      "image": "https://cdn.beekka.com/blogimg/asset/202607/bg2026072311.webp",
+      "publishedAt": "2026-07-24T00:12:16Z",
+      "sourceId": "50579811ddcd4b8c",
+      "sourceTitle": "阮一峰的网络日志",
+      "link": "http://www.ruanyifeng.com/blog/2026/07/weekly-issue-405.html",
+      "detailPath": "articles/9e08da35863c5603a020265b.json"
+    },
+    {
+      "id": "85c08325a4481dc1f468860d",
+      "title": "侵佔財產",
+      "summary": "想像你買了一台微波爐。你把它搬回家、插上插座、把昨天沒吃完的滷肉飯放進去、按下「開始」。",
+      "image": null,
+      "publishedAt": "2026-07-24T00:00:00Z",
+      "sourceId": "7f36c3da1e6b5c71",
+      "sourceTitle": "Wiwi.Blog Blog",
+      "link": "https://wiwi.blog/blog/hijacked-property",
+      "detailPath": "articles/85c08325a4481dc1f468860d.json"
+    },
+    {
       "id": "a1cfacb8e9d7f69384f79ba5",
       "title": "AI 浪潮下的职业焦虑、产品实践与人生选择",
       "summary": "往原址览之： https://innei.in/notes/217",
@@ -408,17 +463,6 @@
       "detailPath": "articles/ed30f6f4e8be68c9df2d1e66.json"
     },
     {
-      "id": "e89535bb348e3bfb00d06631",
-      "title": "无标题文章",
-      "summary": "🇰🇷 설렘 & 누군가를 좋아한다는 것 (넘기지 마세요~ 한국어 버전은 아래에 있어요~ ) 這是我的「BlogBlog 同樂會 – 2026 年 8 月 」的投稿文章。本月主題是「一期一會」，由 ikuka 主持。如果你有自己的部落格，歡迎一起來參加！ 最近發生的一些事情 讓我有時候在思考著 對一個人的心動、對一個人的喜歡 是什麼樣子的感受呢？ 其實對我來說，那樣的感受已經有點模糊了 有那樣心動、愛上一個人的心情大概是12歲的時候發生的（國中一年級班上的男同學） 有時想想…這感覺會不會沒有下次了呢？ 愛上一個人的感覺是不是就只停留在12歲的那段時光？ 然後 未來不會再發生了呢？ 人的一生、僅有一次的相會，這樣的一期一會，對我來說，愛情是不是也是這樣呢？ 努力回想那段期間心動的感覺是什麼 我卻發現跟 幸…",
-      "image": null,
-      "publishedAt": "2026-07-20T13:39:55Z",
-      "sourceId": "51aefe52efef4bf4",
-      "sourceTitle": "一起和 Yoon 聊心事",
-      "link": "https://yoon.club/8252/",
-      "detailPath": "articles/e89535bb348e3bfb00d06631.json"
-    },
-    {
       "id": "bb8a2a04d610eb7573eb944a",
       "title": "向云端｜西南自驾02 - 婺源",
       "summary": "",
@@ -615,50 +659,6 @@
       "sourceTitle": "我的部落格",
       "link": "https://e89295.com/blog/2026-07-19.html",
       "detailPath": "articles/104843863b7d76d3d37fa3d2.json"
-    },
-    {
-      "id": "b08f70e08dd457c02cdbb2a2",
-      "title": "2026-06-12 / 鸿蒙7",
-      "summary": "by 新世界的大门",
-      "image": null,
-      "publishedAt": "2026-07-19T11:07:41Z",
-      "sourceId": "4f3f8eb9d72c3840",
-      "sourceTitle": "新世界的大门",
-      "link": "https://blog.xinshijiededa.men/daily/48/",
-      "detailPath": "articles/b08f70e08dd457c02cdbb2a2.json"
-    },
-    {
-      "id": "73b02fa6e505bc303d0b4610",
-      "title": "IG 壞掉了",
-      "summary": "由於最近會跟學生偶爾用 IG 往來訊息，算是工作所需吧，所以會定期檢查一下訊息；再加上有個朋友傳了 IG 平臺上一個吉他演奏的影片過來，叫我一定要看。 沒想到，電腦網頁版完全打不開 IG 了。 壞掉的 IG 不知道手機版 APP 正常與否，但這也太糟糕了。 不想要因爲社群媒體平臺壞掉，自己的一切心力就一起被消失，還是要擁有一個自己的家（網站、Blog），而社群媒體只純粹擔任電視臺的傳播角色就好。 延伸閱讀：〈 社群平臺不社群了，創作者該如何看待？ 〉",
-      "image": null,
-      "publishedAt": "2026-07-19T08:09:49Z",
-      "sourceId": "199cdf92fc46bfcd",
-      "sourceTitle": "Eddie Lv",
-      "link": "https://eddielv.com/musings/ig-break/",
-      "detailPath": "articles/73b02fa6e505bc303d0b4610.json"
-    },
-    {
-      "id": "3cc11faa27ce821d8c9e002c",
-      "title": "入蜀记 day421 五月脆收官",
-      "summary": "「五月脆收官。」",
-      "image": null,
-      "publishedAt": "2026-07-19T04:48:27Z",
-      "sourceId": "8e5dc5a8b5023a8e",
-      "sourceTitle": "折腾人生",
-      "link": "https://z.arlmy.me/posts/BBBPandINSW/INSW-ko/INSW_421/",
-      "detailPath": "articles/3cc11faa27ce821d8c9e002c.json"
-    },
-    {
-      "id": "5bd859603f4b30a6a7a6a6fe",
-      "title": "Toots 428 2026 Jul.12 - Jul.18",
-      "summary": "「你是自由的。」",
-      "image": null,
-      "publishedAt": "2026-07-19T04:00:27Z",
-      "sourceId": "8e5dc5a8b5023a8e",
-      "sourceTitle": "折腾人生",
-      "link": "https://z.arlmy.me/posts/MastodonArchives/2026/MastodonTootsArchives_20260718/",
-      "detailPath": "articles/5bd859603f4b30a6a7a6a6fe.json"
     }
   ]
 }
