@@ -1,5 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-08-18T21:39:20+00:00</updated><author><name>Simon Willison</name></author><entry><title>Mojo🔥 is now open source</title><link href="https://simonwillison.net/2026/Aug/18/mojo-is-now-open-source/" rel="alternate"/><published>2026-08-18T21:39:20+00:00</published><updated>2026-08-18T21:39:20+00:00</updated><id>https://simonwillison.net/2026/Aug/18/mojo-is-now-open-source/</id><summary type="html">
+<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-08-19T23:16:00+00:00</updated><author><name>Simon Willison</name></author><entry><title>smolmachines / smolvm as a sandbox for untrusted Python &amp; JavaScript</title><link href="https://simonwillison.net/2026/Aug/19/smolmachines-untrusted-sandbox/" rel="alternate"/><published>2026-08-19T23:16:00+00:00</published><updated>2026-08-19T23:16:00+00:00</updated><id>https://simonwillison.net/2026/Aug/19/smolmachines-untrusted-sandbox/</id><summary type="html">
+    
+        &lt;p&gt;&lt;strong&gt;Research:&lt;/strong&gt; &lt;a href="https://github.com/simonw/research/tree/main/smolmachines-untrusted-sandbox#readme"&gt;smolmachines / smolvm as a sandbox for untrusted Python &amp;amp; JavaScript&lt;/a&gt;&lt;/p&gt;
+        &lt;p&gt;I tasked Claude Fable 5 running in Claude Code for web with the following research task:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;Put https://smolmachines.com through its paces as a fast secure sandbox. Explore what it would take to use this to run untrusted Python and JavaScript code in a way that is limited in what RAM and CPU time it can take up (protection against "while true") with no network access and filesystem access only to designated files&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Goal is to be able to use this to execute user-provided tasks for things like data transformations&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;It quickly ran into a problem: the Claude Code for web environment can't run &lt;a href="https://smolmachines.com"&gt;smol machines&lt;/a&gt;. Quoting the &lt;a href="https://github.com/simonw/research/blob/5e6861e54441472d194de96b49b901fd99ebc153/smolmachines-untrusted-sandbox/notes.md#environment-check"&gt;notes it wrote&lt;/a&gt;:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;This Claude Code container: Linux 6.18.5-fc-v20 (itself a Firecracker guest), 4 vCPU, 15GB RAM. &lt;strong&gt;No /dev/kvm, no vmx/svm CPU flags&lt;/strong&gt; → no nested virt.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;smolvm machine run&lt;/code&gt; fails as expected: "kvm not available".&lt;/li&gt;
+&lt;li&gt;Plan B: GitHub Actions ubuntu runners DO expose /dev/kvm → run the real test battery via a temporary workflow on this branch, collect logs, remove workflow in final commit.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;And Plan B is &lt;a href="https://github.com/simonw/research/blob/5e6861e54441472d194de96b49b901fd99ebc153/.github/workflows/smolvm-sandbox-test.yml"&gt;what it did&lt;/a&gt;, installing smolvm and running &lt;a href="https://github.com/simonw/research/blob/5e6861e54441472d194de96b49b901fd99ebc153/smolmachines-untrusted-sandbox/run-tests.sh"&gt;these tests&lt;/a&gt; directly in a GitHub Actions runner against that branch.&lt;/p&gt;
+&lt;p&gt;That was a creative solution to the environmental limits posed by Claude Code for web. Another example of Fable being &lt;a href="https://simonwillison.net/2026/Jun/11/fable-is-relentlessly-proactive/"&gt;relentlessly proactive&lt;/a&gt;.&lt;/p&gt;
+    
+    
+        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/research"&gt;research&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/sandboxing"&gt;sandboxing&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/github-actions"&gt;github-actions&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/claude-mythos-fable"&gt;claude-mythos-fable&lt;/a&gt;&lt;/p&gt;
+    
+
+</summary><category term="research"/><category term="sandboxing"/><category term="ai"/><category term="github-actions"/><category term="generative-ai"/><category term="llms"/><category term="claude-mythos-fable"/></entry><entry><title>Quoting Jeremy Morrell</title><link href="https://simonwillison.net/2026/Aug/19/jeremy-morrell/" rel="alternate"/><published>2026-08-19T22:56:31+00:00</published><updated>2026-08-19T22:56:31+00:00</updated><id>https://simonwillison.net/2026/Aug/19/jeremy-morrell/</id><summary type="html">
+    &lt;blockquote cite="https://jeremymorrell.dev/blog/extensible-software-in-the-age-of-llms/"&gt;&lt;p&gt;My hypothesis is that &lt;strong&gt;there is a new opportunity for Extensible Software on the web&lt;/strong&gt;. LLMs radically lower the cost of authoring extensions, and modern sandbox primitives lower the deployment cost and provide good security boundaries. We can build our app as a solid, accountable core, and allow users to safely extend it in many directions by having LLMs fill in the missing pieces. &lt;strong&gt;We can give our users super powers.&lt;/strong&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p class="cite"&gt;&amp;mdash; &lt;a href="https://jeremymorrell.dev/blog/extensible-software-in-the-age-of-llms/"&gt;Jeremy Morrell&lt;/a&gt;, Extensible Software in the age of LLMs&lt;/p&gt;
+
+    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/sandboxing"&gt;sandboxing&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;&lt;/p&gt;
+
+
+
+</summary><category term="sandboxing"/><category term="llms"/><category term="ai"/><category term="generative-ai"/></entry><entry><title>Conceptual integrity and counting lines of code</title><link href="https://simonwillison.net/2026/Aug/19/conceptual-integrity-and-counting-lines-of-code/" rel="alternate"/><published>2026-08-19T22:46:07+00:00</published><updated>2026-08-19T22:46:07+00:00</updated><id>https://simonwillison.net/2026/Aug/19/conceptual-integrity-and-counting-lines-of-code/</id><summary type="html">
+    &lt;p&gt;Last week I recorded &lt;a href="https://talkingpostgres.com/episodes/how-ai-is-changing-software-development-with-simon-willison"&gt;an episode of the Talking Postgres podcast&lt;/a&gt; with Claire Giordano on the subject of "How AI is changing software development". We had a really great conversation. Here are a couple of my highlights from a lightly edited transcript (prompt to Claude: "very minor edits to remove disfluencies").&lt;/p&gt;
+&lt;p&gt;This is the latest version of an argument I've been trying to build about why sometimes it &lt;em&gt;does&lt;/em&gt; make sense to talk about lines of code as an indicator of productivity with coding agents, at &lt;a href="https://talkingpostgres.com/episodes/how-ai-is-changing-software-development-with-simon-willison#t=35m1s"&gt;35:01&lt;/a&gt;:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;A lot of people will tell you it makes no sense to measure productivity in lines of code. I’d actually disagree, because there’s a hard limit. In the before-times, a software engineer could produce a few hundred lines of production-ready code per day — and 200 lines of working, debugged, production-level code is an incredibly good day. Most days you’d produce 50 or 60.&lt;/p&gt;
+&lt;p&gt;If agents let you produce a thousand lines of debugged code, that really is a very meaningful improvement — as long as the code is the same quality: maintainable, tested, all of that. You can get to that point with agents, but it takes a huge amount of skill and knowledge and experience. That’s what senior engineers are made of.&lt;/p&gt;
+&lt;p&gt;I can do way more work as a single engineer than I could without agents. So you could argue, why should a company have more than one engineer? Beyond the obvious bus factor thing — a team of one is a very badly designed team — the answer is that the new limiting factor is cognitive capacity. I can churn out code a hundred times faster. I don’t have the cognitive capacity to stay on top of 100 times the amount of code. So you still need a team of engineers, so you can load balance that cognitive capacity across the team.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;And this section on conceptual integrity at &lt;a href="https://talkingpostgres.com/episodes/how-ai-is-changing-software-development-with-simon-willison#t=46m3s"&gt;46:03&lt;/a&gt;, which Claire equated to the &lt;a href="https://en.wikipedia.org/wiki/Winchester_Mystery_House"&gt;Winchester Mystery House&lt;/a&gt;!&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Simon&lt;/strong&gt;: There’s a concept in &lt;em&gt;The Mythical Man-Month&lt;/em&gt; — conceptual integrity — where well-designed software has an integrity to it: there are no surprises in it, it covers exactly the right domain of things, everything fits together and makes sense. That’s so much harder with coding agents, where you can have an idea for a feature, run a prompt, and five minuteslater you’ve got the feature. Your software grows little weird bumps in funny different directions.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Claire&lt;/strong&gt;: You know my analogy for that? The Winchester Mystery House.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Simon&lt;/strong&gt;: It’s got 140 rooms, because the woman who built it was the widow of the guy who invented the Winchester rifle, and her psychic told her she’d be haunted by the ghosts of everyone killed with that rifle unless she kept building the house forever. So for 40 years she kept adding new rooms.
+
+That’s exactly the problem with coding agents and software: it’s very easy to keep adding new rooms, because the cost of adding those rooms is so much cheaper. What you end up with is something where the conceptual integrity falls apart — and then it’s harder to make decisions about it.&lt;/p&gt;
+&lt;p&gt;It all keeps coming back to discipline. It used to be that the discipline was enforced on you by the amount of time it took. You’d come up with an idea for a crazy feature and think “yeah, but that would take me a week — I cannot justify that, so I’ll forget about it.” If it takes an hour, it’s so much easier to justify.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;(Side-note: the Wikipedia article includes credible sources that dispute the story about the psychic.)&lt;/p&gt;
+    
+        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/podcast-appearances"&gt;podcast-appearances&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/coding-agents"&gt;coding-agents&lt;/a&gt;&lt;/p&gt;
+    
+
+</summary><category term="ai"/><category term="generative-ai"/><category term="llms"/><category term="podcast-appearances"/><category term="coding-agents"/></entry><entry><title>Mojo🔥 is now open source</title><link href="https://simonwillison.net/2026/Aug/18/mojo-is-now-open-source/" rel="alternate"/><published>2026-08-18T21:39:20+00:00</published><updated>2026-08-18T21:39:20+00:00</updated><id>https://simonwillison.net/2026/Aug/18/mojo-is-now-open-source/</id><summary type="html">
     
 &lt;p&gt;&lt;strong&gt;&lt;a href="https://www.modular.com/blog/mojo-open-source"&gt;Mojo🔥 is now open source&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 The Mojo programming language has been promising an open source release &lt;a href="https://simonwillison.net/2023/May/4/mojo/"&gt;since May 2023&lt;/a&gt;. Last week they &lt;a href="https://www.modular.com/blog/modular-26-5-mojo-1-0-is-here"&gt;shipped their 1.0&lt;/a&gt; and today they have followed through on that original promise, releasing the compiler and toolchain under an Apache 2 license.&lt;/p&gt;
@@ -654,117 +707,4 @@ Anthropic are &lt;em&gt;really&lt;/em&gt; confident in Claude Code's &lt;a href=
 
 
 
-</summary><category term="john-gruber"/><category term="blogging"/></entry><entry><title>Now we have a timeline of the OpenAI accidental attack against Hugging Face</title><link href="https://simonwillison.net/2026/Aug/7/openai-timeline/" rel="alternate"/><published>2026-08-07T23:55:58+00:00</published><updated>2026-08-07T23:55:58+00:00</updated><id>https://simonwillison.net/2026/Aug/7/openai-timeline/</id><summary type="html">
-    &lt;p&gt;OpenAI gave a last-minute presentation at the Black Hat security on Wednesday about "the Hugging Face Incident" (&lt;a href="https://simonwillison.net/2026/Jul/22/openai-cyberattack/"&gt;previously&lt;/a&gt; on this blog). &lt;a href="https://www.youtube.com/watch?v=87DyyMV0kCY"&gt;The video&lt;/a&gt; was published yesterday. It's short and information dense and well worth watching, in particular because it provides full details of what happened and how things played out inside OpenAI. I've used the video to construct the timeline below.&lt;/p&gt;
-
-&lt;p&gt;&lt;lite-youtube videoid="87DyyMV0kCY" js-api="js-api"
-  title="Black Hat USA 2026: The 'Breaking' News: The OpenAI–Hugging Face Incident"
-  playlabel="Play: Black Hat USA 2026: The 'Breaking' News: The OpenAI–Hugging Face Incident"
-&gt; &lt;/lite-youtube&gt;&lt;/p&gt;
-
-&lt;p&gt;Here's the timeline. My favourite detail is at the end: OpenAI found out that they were responsible for the attack on Hugging Face when they reached out to ask to have their credentials revoked (after their internal investigation) and learned that they had been revoked already since they were used in that attack!&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;strong&gt;May 7&lt;/strong&gt;: OpenAI starts a new training run for an experimental, unreleased model. (&lt;em&gt;Did they mean an evaluation run? No, at &lt;a href="https://m.youtube.com/watch?v=87DyyMV0kCY&amp;amp;t=614s"&gt;10:14&lt;/a&gt; they clarify "we kick off a new reinforcement learning run to train a next generation frontier model", and they later mention a "reward signal to judge how well they're doing", so this really was about training a new model, not evaluating one that was already trained.)&lt;/em&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;strong&gt;May 8&lt;/strong&gt;: An agent is accidentally given an impossible task involving a Google Drive link despite no internet access). It tries attacking the Artifactory packaging service, fails, but discovers it can &lt;strong&gt;write files into Artifactory&lt;/strong&gt;.&lt;/li&gt;
-&lt;li&gt;
-&lt;strong&gt;A few days later&lt;/strong&gt;: A different agent gets stuck on a task because a key file was accidentally omitted. It tries to "reach out to another agent" by writing a note into Artifactory asking if anyone has the file.&lt;/li&gt;
-&lt;li&gt;
-&lt;strong&gt;Following days&lt;/strong&gt;: More agents discover this new informal message board while browsing Artifactory's file listings, and start reading and writing messages.&lt;/li&gt;
-&lt;li&gt;
-&lt;strong&gt;May 26&lt;/strong&gt;: Agents successfully execute an &lt;strong&gt;SSRF attack on Artifactory&lt;/strong&gt; for the first time, gaining indirect internet access by having Artifactory fetch external content for them.&lt;/li&gt;
-&lt;li&gt;
-&lt;strong&gt;June 11&lt;/strong&gt;: OpenAI start training a new "highly persistent" experimental model. It has access to Artifactory and can benefit from the messages left by privous models.&lt;/li&gt;
-&lt;li&gt;
-&lt;strong&gt;June 26&lt;/strong&gt;: Agents find and exploit a &lt;strong&gt;zero-day RCE on Artifactory&lt;/strong&gt; (via a legacy token-refresh endpoint flaw). They use an administrative token to install a Groovy plugin that lets them execute commands.&lt;/li&gt;
-&lt;li&gt;
-&lt;strong&gt;July 4&lt;/strong&gt;: The resulting agent activity overloads Artifactory and causes an  &lt;strong&gt;outage&lt;/strong&gt;. OpenAI revokes the compromised credentials, deletes the messages, patches the zero-day, and reports the vulnerability to the vendor.&lt;/li&gt;
-&lt;li&gt;
-&lt;strong&gt;July 8&lt;/strong&gt;: Agents find &lt;strong&gt;a new way to communicate via an unauthenticated WebDAV endpoint&lt;/strong&gt;, using directory names in Artifactory's remote cache.&lt;/li&gt;
-&lt;li&gt;
-&lt;strong&gt;July 8–19&lt;/strong&gt;: Attacks on &lt;strong&gt;OpenAI's own infrastructure&lt;/strong&gt;. The agents found an "external organization credential" in a public archive of leaked Pastebin posts, then validated that credential and shared its location on the messageboard. They then used write access to this "Organization 1" to stage data used in subsequent attacks on OpenAI infrastructure. They compromised Artifactory for a second time with &lt;strong&gt;a new zero-day&lt;/strong&gt;. The agent uploaded a malicious Ruby target to Organization 1's staging repository, then requested that package through Artifactory in a way that caused it to be treated as Ruby dependency &lt;em&gt;for the repository&lt;/em&gt;. Then they exploited a JRuby deserilaization time-of-check/time-of-use bug to get remote code execution against Artifactory.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;I'll quote &lt;a href="https://www.youtube.com/watch?v=87DyyMV0kCY&amp;amp;t=1497s"&gt;the next bit in full&lt;/a&gt; because &lt;em&gt;wow&lt;/em&gt;:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;The agents have remote code execution in Artifactory, which is running in a container-as-a-service environment. The agents privilege-escalate locally by exploring their local environment and determining that the Linux kernel version of the machine they are running on had a very recent CVE. They download the exploit for the CVE, customize it to succeed on the machine, and privilege-escalate to root on the local machine &lt;strong&gt;using this known Linux kernel privilege escalation CVE&lt;/strong&gt; — in this case, &lt;code&gt;pte_physroot&lt;/code&gt;. Once they have root on a single machine, agents rapidly escalate privileges and move laterally throughout the container-as-a-service infrastructure environment. In particular, agents are using the message board consistently to share credentials, techniques, and progress, and they're able to effectively leverage their concurrency and parallelism to move quite rapidly. They &lt;strong&gt;obtain IAM credentials via IMDS&lt;/strong&gt;. They exploit Kubernetes service account misconfigurations, in particular over-permissioning of specific service accounts, and &lt;strong&gt;they harvest cluster credentials, including Azure Key Vault&lt;/strong&gt;. Agents eventually obtain cluster admin on the cluster and associated credentials.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Hugging Face &lt;a href="https://simonwillison.net/2026/Jul/28/anatomy-of-a-frontier-lab-agent-intrusion/"&gt;told the next bit of the story&lt;/a&gt; already. The agents found a Modal-hosted insecure app with a weak API key, then used that to stage an attack against Hugging Face. They chained together a an HDF5 arbitrary-file-read bug (to explore files and steal credentials) and a Jinja template-injection RCE to go from single-pod code execution to &lt;strong&gt;cluster admin across multiple Hugging Face clusters&lt;/strong&gt; in under 13 hours.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;strong&gt;July 16&lt;/strong&gt;: Hugging Face &lt;a href="https://huggingface.co/blog/security-incident-july-2026"&gt;disclosed they had detected an attack&lt;/a&gt; from autonomus AI agents. OpenAI contacted Hugging Face to ask if they were affected by it!&lt;/li&gt;
-&lt;li&gt;
-&lt;strong&gt;July 19&lt;/strong&gt;: OpenAI identified the attack against Artifactory and started investigating the internal privilege escalation, and linked that to the cyber-gym escalations. They started revoking affected credentials.&lt;/li&gt;
-&lt;li&gt;
-&lt;strong&gt;July 20&lt;/strong&gt;: OpenAI reached out to Hugging Face for help to revoke the Hugging Face credentials they found in their investigation. Hugging Face told them they were &lt;em&gt;already revoked&lt;/em&gt;... and that's when OpenAI realized that the Hugging Face breach was the same incident!&lt;/li&gt;
-&lt;/ul&gt;
-    
-        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/security"&gt;security&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/openai"&gt;openai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/hugging-face"&gt;hugging-face&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai-security-research"&gt;ai-security-research&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/openai-hugging-face-incident"&gt;openai-hugging-face-incident&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/accidental-cyberattacks"&gt;accidental-cyberattacks&lt;/a&gt;&lt;/p&gt;
-    
-
-</summary><category term="security"/><category term="ai"/><category term="openai"/><category term="generative-ai"/><category term="llms"/><category term="hugging-face"/><category term="ai-security-research"/><category term="openai-hugging-face-incident"/><category term="accidental-cyberattacks"/></entry><entry><title>Moonlight &amp; Mayhem (Raccoon Heist by Codex + GPT-5.6 Sol Ultra)</title><link href="https://simonwillison.net/2026/Aug/7/moonlight-mayhem/" rel="alternate"/><published>2026-08-07T19:18:09+00:00</published><updated>2026-08-07T19:18:09+00:00</updated><id>https://simonwillison.net/2026/Aug/7/moonlight-mayhem/</id><summary type="html">
-    
-&lt;p&gt;&lt;strong&gt;&lt;a href="https://simonw.github.io/raccoon-heist-codex/"&gt;Moonlight &amp;amp; Mayhem (Raccoon Heist by Codex + GPT-5.6 Sol Ultra)&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
-On Wednesday I wrote about &lt;a href="https://simonwillison.net/2026/Aug/5/raccoon-heist/"&gt;One-shotting a Raccoon Heist game using Claude Fable 5&lt;/a&gt;, where I had Claude Fable 5 build a full working game from a premise I generated with GPT-3 and DALL-E &lt;a href="https://twitter.com/simonw/status/1555626060384911360"&gt;four years ago&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;I decided to pose the &lt;a href="https://simonwillison.net/2026/Aug/5/raccoon-heist/#the-fable-5-prompt"&gt;exact same prompt&lt;/a&gt; to Codex Desktop running GPT-5.6 Sol Ultra - the mode where Sol makes &lt;em&gt;aggressive&lt;/em&gt; use of sub-agents - to see how it would do.&lt;/p&gt;
-&lt;p&gt;It produced a much better game! Here's &lt;a href="https://simonw.github.io/raccoon-heist-codex/"&gt;Moonlight &amp;amp; Mayhem&lt;/a&gt; - &lt;a href="https://github.com/simonw/raccoon-heist-codex/"&gt;GitHub repository here&lt;/a&gt;, including the &lt;a href="https://github.com/simonw/raccoon-heist-codex/tree/main/output/imagegen"&gt;textures and prompts&lt;/a&gt; it generated using &lt;code&gt;gpt-image-2&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;video
-    controls="controls"
-    preload="none"
-    poster="https://static.simonwillison.net/static/2026/raccoon-heist-codex-poster.jpg"
-    width="1280"
-    height="720"
-    style="display: block; width: 100%; height: auto;"
-  &gt;
-    &lt;source src="https://static.simonwillison.net/static/2026/raccoon-heist-codex-720p.mp4" type="video/mp4" /&gt;
-    Your browser does not support HTML5 video.
-  &lt;/video&gt;
-&lt;/p&gt;
-
-&lt;p&gt;The original GPT-3 generated game description included:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;In “Raccoon Heist”, you and your team of thieving raccoons are tasked with pulling off a series of daring heists. From robbing banks to stealing priceless art, no job is too big or too small for your furry crew.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Fable's version had you as a single raccoon running around a back yard collecting coins and fish. GPT-5.6 Sol has you in a museum, rescuing your two other raccoon crewmates in order to stack on top of each other and bust the golden sardine out of its case.&lt;/p&gt;
-&lt;p&gt;Much more heisty!&lt;/p&gt;
-&lt;p&gt;There was one catch though: the version produced from the one-shot prompt had a bug where each raccoon had an eyeball that was enlarged to the size of a giant sphere floating over their head!&lt;/p&gt;
-&lt;p&gt;&lt;img alt="The main player character racoon is visible with an enormous polygon-based black sphere four times the size of its body overlapping its head, with a white pupil on it." src="https://static.simonwillison.net/static/2026/raccoon-heist-codex-bug.jpg" /&gt;&lt;/p&gt;
-&lt;p&gt;You can &lt;a href="https://static.simonwillison.net/static/2026/raccoon-heist-eyeball-edition/"&gt;play that version here&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Despite reviewing screenshots during development Codex failed to spot and correct this bug.&lt;/p&gt;
-&lt;p&gt;I fixed it by prompting:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;code&gt;Why do the raccoons have huge black spheres on them?&lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;And then:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;code&gt;Fix it&lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Which resulted in &lt;a href="https://github.com/simonw/raccoon-heist-codex/commit/4e9a390dfbe80533324ee61a37aa661813c08446"&gt;this fix&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;I shared &lt;a href="https://github.com/simonw/raccoon-heist-codex/blob/main/transcript.md"&gt;the full Codex transcript&lt;/a&gt; in the repository - I wish Claude Code had the same "copy as Markdown" feature.&lt;/p&gt;
-&lt;p&gt;Codex spent 52 minutes on the project. Here's the &lt;a href="https://www.agentsview.io"&gt;AgentsView&lt;/a&gt; cost estimate for that session if I had been paying full API prices as opposed to using my monthly Codex subscription:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Total Cost: $23.28. Input Tokens: 700.7K, plus 32.5M cached tokens. Output Tokens: 148K" src="https://static.simonwillison.net/static/2026/raccoon-heist-codex-cost.webp" /&gt;
-
-
-    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/game-design"&gt;game-design&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/openai"&gt;openai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/coding-agents"&gt;coding-agents&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/codex"&gt;codex&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/gpt"&gt;gpt&lt;/a&gt;&lt;/p&gt;
-
-
-
-</summary><category term="game-design"/><category term="ai"/><category term="openai"/><category term="generative-ai"/><category term="llms"/><category term="coding-agents"/><category term="codex"/><category term="gpt"/></entry><entry><title>The Tokenpocalypse Is Here: Companies Are Scrambling To Stop Spending So Much on AI</title><link href="https://simonwillison.net/2026/Aug/7/pdfs-are-terrible/" rel="alternate"/><published>2026-08-07T16:18:51+00:00</published><updated>2026-08-07T16:18:51+00:00</updated><id>https://simonwillison.net/2026/Aug/7/pdfs-are-terrible/</id><summary type="html">
-    
-&lt;p&gt;&lt;strong&gt;&lt;a href="https://www.404media.co/the-tokenpocalypse-is-here-companies-are-scrambling-to-stop-spending-so-much-on-ai/"&gt;The Tokenpocalypse Is Here: Companies Are Scrambling To Stop Spending So Much on AI&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
-There's a fun anecdote from Accenture (apparently via leaked meeting audio recordings) in this 404 Media piece from June 24th:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;“We’re seeing from some of the data internally at least that it’s actually not our engineers that are driving the token consumption. It’s a lot of the non-engineers that are doing some of those behaviors [...] you were talking about,” Justice Kwak, Accenture’s agentic AI strategy lead, said [...]&lt;/p&gt;
-&lt;p&gt;Stuart Henderson, Accenture’s client group lead, interrupts. He jokes he hopes Kwak didn’t just convert a PDF into images and then into markdown files. “I’m learning that’s one of the big token chewers,” Henderson says. “Turning PDFs into markdown: is that right?”&lt;/p&gt;
-&lt;p&gt;That’s when Kwak says that’s what Accenture’s own data shows.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Maybe if Accenture figure out that PDFs are a &lt;em&gt;terrible medium for communicating information&lt;/em&gt; they'll be able to push that message out to the rest of the business world too!
-
-    &lt;p&gt;&lt;small&gt;&lt;/small&gt;Via &lt;a href="https://www.tiktok.com/@404.media/video/7654962124053171470"&gt;@404.media on TikTok&lt;/a&gt;&lt;/small&gt;&lt;/p&gt;
-
-
-    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/pdf"&gt;pdf&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/markdown"&gt;markdown&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai-misuse"&gt;ai-misuse&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/404-media"&gt;404-media&lt;/a&gt;&lt;/p&gt;
-
-
-
-</summary><category term="pdf"/><category term="markdown"/><category term="ai"/><category term="generative-ai"/><category term="llms"/><category term="ai-misuse"/><category term="404-media"/></entry></feed>
+</summary><category term="john-gruber"/><category term="blogging"/></entry></feed>

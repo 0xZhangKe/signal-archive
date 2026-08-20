@@ -12,8 +12,119 @@
     <generator>Hugo -- 0.165.0</generator>
     <language>en</language>
     <dc:creator>Redowan Delowar</dc:creator>
-    <lastBuildDate>Thu, 30 Jul 2026 01:31:46 +0200</lastBuildDate>
+    <lastBuildDate>Wed, 19 Aug 2026 23:22:36 +0000</lastBuildDate>
     <atom:link href="https://rednafi.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Postgres as an isolation reference model</title>
+      <link>https://rednafi.com/system/pg-isolation-ref/</link>
+      <pubDate>Wed, 19 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>https://rednafi.com/system/pg-isolation-ref/</guid>
+      <dc:creator>Redowan Delowar</dc:creator>
+      <description>Use PostgreSQL&amp;#39;s transaction isolation levels as a reference model for reasoning about the guarantees and tradeoffs of other relational and non-relational databases.</description>
+      <content:encoded>&lt;p&gt;&lt;img src=&#34;https://blob.rednafi.com/system/pg-return-isolation/postgresql-isolation-levels-dafec4753c2c.png&#34; alt=&#34;PostgreSQL transaction isolation levels&#34; width=&#34;2346&#34; height=&#34;1226&#34; referrerpolicy=&#34;no-referrer&#34; loading=&#34;lazy&#34; decoding=&#34;async&#34;&gt;
+&lt;/p&gt;
+&lt;p&gt;Over the years, I&amp;rsquo;ve participated in a few system design interviews. Some went my way and
+others didn&amp;rsquo;t. One thing has stayed consistent: when I&amp;rsquo;m designing an &lt;a href=&#34;https://www.ibm.com/think/topics/oltp&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34; aria-label=&#34;online system (opens in new tab)&#34;&gt;online system&lt;/a&gt;,
+transaction isolation almost always comes up in the discussion.&lt;/p&gt;
+&lt;p&gt;When the requirements call for a &lt;a href=&#34;https://martin.kleppmann.com/2015/05/11/please-stop-calling-databases-cp-or-ap.html&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34; aria-label=&#34;CP system (opens in new tab)&#34;&gt;CP system&lt;/a&gt;, I usually go for a PostgreSQL-compatible
+NewSQL database such as Aurora PostgreSQL, DSQL, or CockroachDB. &lt;a href=&#34;https://www.cs.cmu.edu/~pavlo/papers/pavlo-newsql-sigmodrec2016.pdf&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34; aria-label=&#34;Andy Pavlo and Matthew
+Aslett define NewSQL (opens in new tab)&#34;&gt;Andy Pavlo and Matthew
+Aslett define NewSQL&lt;/a&gt; as relational databases that aim for NoSQL-like scale while keeping
+SQL and ACID transactions.&lt;/p&gt;
+&lt;p&gt;Part of the reason is that I like thinking in Postgres. There&amp;rsquo;s also the usual interview
+move where a system starts at a modest scale and then the interviewer cranks it up by 100x
+for shits and giggles. With shared-nothing Postgres, I may suddenly need manual sharding or
+a different database. Either choice can change the transaction boundary and force a
+substantial redesign. NewSQL lets me keep the relational model and distributed transactions
+across a wider range of scales.&lt;/p&gt;
+&lt;p&gt;That still leaves the isolation question. I use Postgres as the reference model. If MongoDB,
+DynamoDB, Cassandra, or another database fits the problem better, I compare its guarantees
+with Postgres&amp;rsquo;s &lt;em&gt;&lt;a href=&#34;https://www.postgresql.org/docs/current/transaction-iso.html#XACT-READ-COMMITTED&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34; aria-label=&#34;Read Committed (opens in new tab)&#34;&gt;Read Committed&lt;/a&gt;&lt;/em&gt;, &lt;em&gt;&lt;a href=&#34;https://www.postgresql.org/docs/current/transaction-iso.html#XACT-REPEATABLE-READ&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34; aria-label=&#34;Repeatable Read (opens in new tab)&#34;&gt;Repeatable Read&lt;/a&gt;&lt;/em&gt;, and &lt;em&gt;&lt;a href=&#34;https://www.postgresql.org/docs/current/transaction-iso.html#XACT-SERIALIZABLE&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34; aria-label=&#34;Serializable (opens in new tab)&#34;&gt;Serializable&lt;/a&gt;&lt;/em&gt; isolation
+levels. I can then describe the closest Postgres equivalent and explain the differences.&lt;/p&gt;
+&lt;p&gt;I use the same approach outside interviews. When I run into an unfamiliar OLTP or SQL OLAP
+database, I compare its snapshot semantics and conflict handling with Postgres before
+trusting the isolation-level name. This is especially useful for analytical databases that
+offer snapshot reads but don&amp;rsquo;t support a multi-statement transaction. A statement-level
+snapshot is closer to Postgres&amp;rsquo;s &lt;em&gt;Read Committed&lt;/em&gt; behavior than to its &lt;em&gt;Repeatable Read&lt;/em&gt;
+isolation, even if both use MVCC underneath. Think ClickHouse.&lt;/p&gt;
+&lt;p&gt;Postgres gives me a concrete reference model that is pretty close to the SQL standard.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;Read Committed&lt;/em&gt; takes a new snapshot for each statement, so two reads in the same
+transaction can see different committed states.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Repeatable Read&lt;/em&gt; uses one snapshot for the transaction and prevents non-repeatable and
+phantom reads, but serialization anomalies such as write skew can happen.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Serializable&lt;/em&gt; adds dependency tracking through &lt;em&gt;Serializable Snapshot Isolation (SSI)&lt;/em&gt;
+and aborts transactions that can&amp;rsquo;t be ordered serially.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Here is how I stack a few common databases against that model.&lt;/p&gt;
+&lt;table&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;Database&lt;/th&gt;
+					&lt;th&gt;Transaction and isolation model&lt;/th&gt;
+					&lt;th&gt;Closest Postgres reference&lt;/th&gt;
+					&lt;th&gt;Highlights&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;PostgreSQL&lt;/td&gt;
+					&lt;td&gt;Interactive transactions across rows and tables. &lt;em&gt;Read Committed&lt;/em&gt; is the default, &lt;em&gt;Repeatable Read&lt;/em&gt; provides snapshot isolation, and &lt;em&gt;Serializable&lt;/em&gt; uses SSI.&lt;/td&gt;
+					&lt;td&gt;Baseline&lt;/td&gt;
+					&lt;td&gt;&lt;em&gt;Repeatable Read&lt;/em&gt; can allow write skew. &lt;em&gt;Serializable&lt;/em&gt; may return &lt;code&gt;40001&lt;/code&gt;, requiring the application to retry the entire transaction.&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;a href=&#34;https://docs.aws.amazon.com/aurora-dsql/latest/userguide/working-with-concurrency-control.html&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34; aria-label=&#34;Aurora DSQL (opens in new tab)&#34;&gt;Aurora DSQL&lt;/a&gt;&lt;/td&gt;
+					&lt;td&gt;Interactive distributed transactions using &lt;a href=&#34;https://arxiv.org/html/2607.13276v2#S2.SS4&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34; aria-label=&#34;strong snapshot isolation (opens in new tab)&#34;&gt;strong snapshot isolation&lt;/a&gt; and optimistic concurrency control.&lt;/td&gt;
+					&lt;td&gt;&lt;em&gt;Repeatable Read&lt;/em&gt;&lt;/td&gt;
+					&lt;td&gt;DSQL detects write-write conflicts but doesn&amp;rsquo;t validate ordinary read-write dependencies. Write skew can happen. Conflicts return &lt;code&gt;40001&lt;/code&gt;, and &lt;code&gt;SELECT FOR UPDATE&lt;/code&gt; can make the relevant read dependencies participate in conflict detection.&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;a href=&#34;https://www.mongodb.com/docs/manual/core/transactions/&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34; aria-label=&#34;MongoDB (opens in new tab)&#34;&gt;MongoDB&lt;/a&gt;&lt;/td&gt;
+					&lt;td&gt;Single-document operations are atomic. Multi-document transactions can span collections, databases, and shards. &lt;code&gt;snapshot&lt;/code&gt; read concern with majority write concern provides a synchronized snapshot across shards.&lt;/td&gt;
+					&lt;td&gt;&lt;em&gt;Repeatable Read&lt;/em&gt;&lt;/td&gt;
+					&lt;td&gt;MongoDB doesn&amp;rsquo;t have a general &lt;em&gt;Serializable&lt;/em&gt; level. Read concern controls visibility, while write concern controls durability. Write skew can happen in snapshot transactions, and write conflicts require retries.&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;a href=&#34;https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/transaction-apis.html&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34; aria-label=&#34;DynamoDB (opens in new tab)&#34;&gt;DynamoDB&lt;/a&gt;&lt;/td&gt;
+					&lt;td&gt;&lt;code&gt;TransactWriteItems&lt;/code&gt; and &lt;code&gt;TransactGetItems&lt;/code&gt; provide one-shot transactions over at most 100 known items. Transactional operations are &lt;em&gt;Serializable&lt;/em&gt; relative to other transactions and individual item operations.&lt;/td&gt;
+					&lt;td&gt;&lt;em&gt;Serializable&lt;/em&gt; over a bounded item set&lt;/td&gt;
+					&lt;td&gt;The guarantee covers the items named in the request. &lt;code&gt;Query&lt;/code&gt;, &lt;code&gt;Scan&lt;/code&gt;, and &lt;code&gt;BatchGetItem&lt;/code&gt; are &lt;em&gt;Read Committed&lt;/em&gt; as aggregate operations. There&amp;rsquo;s no interactive read-compute-write transaction, and global tables don&amp;rsquo;t preserve transaction atomicity across regions.&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Cassandra is a useful edge case because there isn&amp;rsquo;t an isolation level to line up with
+Postgres. A normal CQL read or write stands on its own. You can&amp;rsquo;t open a &lt;em&gt;Read Committed&lt;/em&gt; or
+&lt;em&gt;Repeatable Read&lt;/em&gt; transaction and run several statements against one snapshot. &lt;a href=&#34;https://cassandra.apache.org/doc/stable/cassandra/developing/cql/dml.html#batch_statement&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34; aria-label=&#34;Batches (opens in new tab)&#34;&gt;Batches&lt;/a&gt;
+group writes, but isolation stops at the partition boundary. &lt;a href=&#34;https://cassandra.apache.org/doc/stable/cassandra/architecture/guarantees.html&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34; aria-label=&#34;Lightweight transactions (opens in new tab)&#34;&gt;Lightweight transactions&lt;/a&gt; use
+Paxos for linearizable compare-and-set, which is the closest match to &lt;em&gt;Serializable&lt;/em&gt;. It
+only covers a conditional change inside one partition. Postgres can keep a wider invariant
+inside a &lt;em&gt;Serializable&lt;/em&gt; transaction. With Cassandra, I have to keep that invariant in one
+partition or coordinate it in the application.&lt;/p&gt;
+&lt;p&gt;I don&amp;rsquo;t need to memorize every database as a separate isolation model. I start with
+Postgres, find the closest level, and spend the rest of the discussion on the differences.
+It&amp;rsquo;s worked well for me so far.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Snapshot isolation is my favorite isolation level in any database that offers it. In
+Postgres, that&amp;rsquo;s &lt;em&gt;Repeatable Read&lt;/em&gt;. It detects write-write conflicts. &lt;em&gt;Serializable&lt;/em&gt; does
+that too, but SSI also tracks the rows and predicates each transaction reads so it can
+detect read-write dependencies. This allows SSI to prevent write skew.&lt;/p&gt;
+&lt;p&gt;That bookkeeping grows with the read set, and broad reads can overlap more writes and cause
+more serialization failures. When an invariant maps to existing rows, &lt;code&gt;SELECT FOR UPDATE&lt;/code&gt;
+can force competing transactions to conflict on those rows and prevent write skew. If the
+invariant depends on missing rows or an arbitrary predicate, there may be nothing to lock,
+so you&amp;rsquo;ll need to use &lt;em&gt;Serializable&lt;/em&gt;. But I tend to avoid that kind of design in practice.&lt;/p&gt;
+&lt;p&gt;Marc Brooker has a &lt;a href=&#34;https://brooker.co.za/blog/2024/01/23/big-deal.html&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34; aria-label=&#34;fantastic post (opens in new tab)&#34;&gt;fantastic post&lt;/a&gt; on why snapshot isolation makes sense for
+high-performance systems.&lt;/p&gt;
+&lt;!-- references --&gt;
+&lt;!-- prettier-ignore-start --&gt;
+&lt;!-- prettier-ignore-end --&gt;
+</content:encoded>
+      <category>Database</category>
+      <category>SQL</category>
+      <category>Distributed Systems</category>
+      <category>Postgres</category>
+    </item>
     <item>
       <title>Accepted proposal: range over all command-line flags</title>
       <link>https://rednafi.com/shards/2026/07/go-flag-all-is-set/</link>
@@ -1938,9 +2049,9 @@ toolchain and the profile flagged each leak at the exact line.&lt;/p&gt;
     </item>
     <item>
       <title>Reading your own writes with WAIT FOR LSN in Postgres 19</title>
-      <link>https://rednafi.com/system/wait-for-lsn/</link>
+      <link>https://rednafi.com/system/pg-wait-for-lsn/</link>
       <pubDate>Sat, 13 Jun 2026 00:00:00 +0000</pubDate>
-      <guid>https://rednafi.com/system/wait-for-lsn/</guid>
+      <guid>https://rednafi.com/system/pg-wait-for-lsn/</guid>
       <dc:creator>Redowan Delowar</dc:creator>
       <description>PostgreSQL 19&amp;#39;s new WAIT FOR LSN command lets a replica block until it has replayed your write. The read-after-write problem it solves, the workarounds it replaces, and what the timeout, status, and mode options are actually for.</description>
       <content:encoded>&lt;p&gt;Postgres 19 finally gives us a clean way to do read-after-write across replicas. Without it,
@@ -3556,211 +3667,6 @@ PR-friendly file per test case.&lt;/li&gt;
       <category>Go</category>
       <category>Testing</category>
       <category>Tooling</category>
-    </item>
-    <item>
-      <title>Type-safe slogging</title>
-      <link>https://rednafi.com/go/typesafe-slogging/</link>
-      <pubDate>Sat, 09 May 2026 00:00:00 +0000</pubDate>
-      <guid>https://rednafi.com/go/typesafe-slogging/</guid>
-      <dc:creator>Redowan Delowar</dc:creator>
-      <description>The default slog API is loose enough that a careless line ships broken JSON to production. Pin it down with Attr constructors, LogAttrs, a context-borne logger, and sloglint.</description>
-      <content:encoded>&lt;p&gt;Typically on a brownfield project I don&amp;rsquo;t care much about logging libraries and just go with
-whatever&amp;rsquo;s already set up. Before slog, I was an avid zap/zerolog user for years. But since
-Go 1.21, I&amp;rsquo;ve dropped third-party logging libraries in favor of slog. I even &lt;a href=&#34;https://old.reddit.com/r/golang/comments/1t2jilv/just_use_slog_itll_be_fine/&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34; aria-label=&#34;recently
-ranted a bit on r/golang (opens in new tab)&#34;&gt;recently
-ranted a bit on r/golang&lt;/a&gt; about people pulling in third-party libs when slog is right there.
-The common complaints against slog are:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;The typical usage pattern isn&amp;rsquo;t type-safe.&lt;/li&gt;
-&lt;li&gt;It allocates a bit more than zap or zerolog.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Working on a fairly large-scale deployment (1000+ k8s pods serving 250rps), I haven&amp;rsquo;t run
-into a case where slog&amp;rsquo;s extra allocations were the reason behind memory pressure or tail
-latency. So going with the stdlib now is a no-brainer to me. The API isn&amp;rsquo;t bad either, once
-a few patterns settle. The rest of the post is the small workflow I default to. It&amp;rsquo;s not a
-slog API tour. The &lt;a href=&#34;https://pkg.go.dev/log/slog&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34; aria-label=&#34;stdlib docs (opens in new tab)&#34;&gt;stdlib docs&lt;/a&gt; do that better than I could, and my &lt;a href=&#34;https://rednafi.com/go/structured-logging-with-slog&#34;&gt;earlier post on slog&lt;/a&gt;
-has the basics.&lt;/p&gt;
-&lt;h2 id=&#34;the-nicest-api-isnt-type-safe&#34;&gt;The nicest API isn&amp;rsquo;t type-safe &lt;a class=&#34;anchor&#34; href=&#34;#the-nicest-api-isnt-type-safe&#34; aria-label=&#34;Permalink to The nicest API isn&amp;rsquo;t type-safe&#34;&gt;&lt;span aria-hidden=&#34;true&#34;&gt;#&lt;/span&gt;&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;Most slog code I see reaches for the level helpers like &lt;code&gt;slog.Info&lt;/code&gt; and &lt;code&gt;slog.Warn&lt;/code&gt;, which
-take &lt;code&gt;(msg string, args ...any)&lt;/code&gt;. The args are meant to alternate between keys and values,
-but the compiler sees &lt;code&gt;any&lt;/code&gt; and won&amp;rsquo;t enforce that. Forget a value and the trailing key
-becomes a &lt;code&gt;!BADKEY&lt;/code&gt;:&lt;/p&gt;
-&lt;div class=&#34;codeblock&#34; translate=&#34;no&#34; data-lang=&#34;go&#34; data-copyable&gt;
-  &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nx&#34;&gt;slog&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;Info&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;placed&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;order_id&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;id&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;amount&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// {&amp;#34;msg&amp;#34;:&amp;#34;placed&amp;#34;,&amp;#34;order_id&amp;#34;:&amp;#34;ord_001&amp;#34;,&amp;#34;!BADKEY&amp;#34;:&amp;#34;amount&amp;#34;}&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;Swap a key and a value and the dashboard indexes records under the value:&lt;/p&gt;
-&lt;div class=&#34;codeblock&#34; translate=&#34;no&#34; data-lang=&#34;go&#34; data-copyable&gt;
-  &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nx&#34;&gt;slog&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;Info&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;placed&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;id&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;order_id&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// {&amp;#34;msg&amp;#34;:&amp;#34;placed&amp;#34;,&amp;#34;ord_001&amp;#34;:&amp;#34;order_id&amp;#34;}&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;Pass the wrong type and the field ships as the wrong JSON type:&lt;/p&gt;
-&lt;div class=&#34;codeblock&#34; translate=&#34;no&#34; data-lang=&#34;go&#34; data-copyable&gt;
-  &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nx&#34;&gt;slog&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;Info&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;placed&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;amount&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;1290&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// {&amp;#34;msg&amp;#34;:&amp;#34;placed&amp;#34;,&amp;#34;amount&amp;#34;:&amp;#34;1290&amp;#34;}    // string, not int&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;Two of the three ship valid JSON that&amp;rsquo;s wrong. Queries filtering on &lt;code&gt;amount&lt;/code&gt; skip records
-where the field arrived as a string. Dashboards keyed on &lt;code&gt;order_id&lt;/code&gt; end up indexed by user
-values. Nothing alerts you.&lt;/p&gt;
-&lt;h2 id=&#34;pass-the-logger-as-a-dependency&#34;&gt;Pass the logger as a dependency &lt;a class=&#34;anchor&#34; href=&#34;#pass-the-logger-as-a-dependency&#34; aria-label=&#34;Permalink to Pass the logger as a dependency&#34;&gt;&lt;span aria-hidden=&#34;true&#34;&gt;#&lt;/span&gt;&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;The package-level &lt;code&gt;slog.Info&lt;/code&gt;, &lt;code&gt;slog.Warn&lt;/code&gt;, and &lt;code&gt;slog.Default()&lt;/code&gt; route through a mutable
-global. Anyone can swap it via &lt;code&gt;slog.SetDefault&lt;/code&gt;, which makes parallel tests racy and leaves
-library code that calls &lt;code&gt;slog.Info&lt;/code&gt; dependent on &lt;code&gt;main&lt;/code&gt; having set the default. Forget the
-setup in some new entry point and you fall back to the plain-text default with no
-compile-time hint.&lt;/p&gt;
-&lt;p&gt;I pass &lt;code&gt;*slog.Logger&lt;/code&gt; in as a constructor argument:&lt;/p&gt;
-&lt;div class=&#34;codeblock&#34; translate=&#34;no&#34; data-lang=&#34;go&#34; data-copyable&gt;
-  &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;type&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Service&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;struct&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;logger&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;slog&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Logger&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;NewService&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;logger&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;slog&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Logger&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Service&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;return&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Service&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;logger&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;logger&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;code&gt;main&lt;/code&gt; builds one logger and threads it through. Tests build their own writing into a
-buffer.&lt;/p&gt;
-&lt;h2 id=&#34;logattrs-over-info&#34;&gt;LogAttrs over Info &lt;a class=&#34;anchor&#34; href=&#34;#logattrs-over-info&#34; aria-label=&#34;Permalink to LogAttrs over Info&#34;&gt;&lt;span aria-hidden=&#34;true&#34;&gt;#&lt;/span&gt;&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;On that logger, use &lt;code&gt;LogAttrs&lt;/code&gt; instead of &lt;code&gt;Info&lt;/code&gt;:&lt;/p&gt;
-&lt;div class=&#34;codeblock&#34; translate=&#34;no&#34; data-lang=&#34;go&#34; data-copyable&gt;
-  &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nx&#34;&gt;logger&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;LogAttrs&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;ctx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;slog&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;LevelInfo&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;placed&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;slog&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;order_id&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;id&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;slog&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;Int64&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;amount&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;amount&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;The constructors pin the value type at the call site, so none of the three failures from the
-kv form compile.&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;LogAttrs&lt;/code&gt; is also cheaper. &lt;code&gt;Info&lt;/code&gt; boxes every arg into an &lt;code&gt;any&lt;/code&gt; (heap-allocating ints and
-small values), walks the slice at runtime to pair keys with values, and type-switches each
-value to build the &lt;code&gt;Attr&lt;/code&gt;. &lt;code&gt;LogAttrs&lt;/code&gt; skips all that. The attrs arrive pre-typed, so the
-&lt;code&gt;int64&lt;/code&gt; sits in a typed field inside &lt;code&gt;Value&lt;/code&gt; and the slice goes straight to the handler.
-Both paths allocate the record, but &lt;code&gt;Info&lt;/code&gt; adds N interface boxes plus a runtime parse loop
-on top.&lt;/p&gt;
-&lt;p&gt;The trade-off is typing. &lt;code&gt;LogAttrs&lt;/code&gt; is the most verbose method, and slog gives you plenty to
-pick from. &lt;code&gt;Info&lt;/code&gt;, &lt;code&gt;Warn&lt;/code&gt;, &lt;code&gt;Error&lt;/code&gt;, and &lt;code&gt;Debug&lt;/code&gt; take kv pairs and no context. They fall back
-to &lt;code&gt;context.Background()&lt;/code&gt; internally. &lt;code&gt;InfoContext&lt;/code&gt; and friends add an explicit context.
-&lt;code&gt;Log&lt;/code&gt; takes a context and an explicit level. &lt;code&gt;LogAttrs&lt;/code&gt; takes the same context and level but
-swaps the kv pairs for typed attrs. Every call site asks you to pick the one that fits.&lt;/p&gt;
-&lt;p&gt;Defaulting to &lt;code&gt;LogAttrs&lt;/code&gt; everywhere trades typing for fewer decisions. No &amp;ldquo;&lt;code&gt;Info&lt;/code&gt; or
-&lt;code&gt;InfoContext&lt;/code&gt;?&amp;rdquo; question, no &amp;ldquo;kv or typed?&amp;rdquo; question. Every call is the same shape:
-&lt;code&gt;logger.LogAttrs(ctx, level, msg, attrs...)&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;When there&amp;rsquo;s no surrounding context, I pass &lt;code&gt;context.TODO()&lt;/code&gt; instead of
-&lt;code&gt;context.Background()&lt;/code&gt;. &lt;code&gt;Background()&lt;/code&gt; is reserved for &lt;code&gt;main&lt;/code&gt; and the composition root, so
-&lt;code&gt;TODO()&lt;/code&gt; further down signals &amp;ldquo;no context plumbed through yet&amp;rdquo;. If I&amp;rsquo;m reaching for &lt;code&gt;TODO()&lt;/code&gt;
-a lot, that&amp;rsquo;s a prompt to ask whether the layer needs a context plumbed in or shouldn&amp;rsquo;t be
-logging at all.&lt;/p&gt;
-&lt;h2 id=&#34;push-attrs-into-helpers&#34;&gt;Push attrs into helpers &lt;a class=&#34;anchor&#34; href=&#34;#push-attrs-into-helpers&#34; aria-label=&#34;Permalink to Push attrs into helpers&#34;&gt;&lt;span aria-hidden=&#34;true&#34;&gt;#&lt;/span&gt;&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;&lt;code&gt;LogAttrs&lt;/code&gt; fixes types at the call site, but &lt;code&gt;slog.String(&amp;quot;order_id&amp;quot;, id)&lt;/code&gt; written inline
-still puts the same key string everywhere an order ID gets logged. Decide tomorrow that you
-want it spelled &lt;code&gt;orderID&lt;/code&gt; and you&amp;rsquo;re grepping. Decide that emails shouldn&amp;rsquo;t ship in logs and
-you&amp;rsquo;re grepping again, hoping you didn&amp;rsquo;t miss a typo.&lt;/p&gt;
-&lt;p&gt;I keep every attribute helper in one file inside an &lt;code&gt;internal/log&lt;/code&gt; package:&lt;/p&gt;
-&lt;div class=&#34;codeblock&#34; translate=&#34;no&#34; data-lang=&#34;go&#34; data-copyable&gt;
-  &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// internal/log/attrs.go&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;package&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;log&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;log/slog&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;OrderID&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;s&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;slog&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Attr&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;return&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;slog&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;order_id&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;s&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;UserID&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;s&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;slog&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Attr&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;     &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;return&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;slog&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;user_id&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;s&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;AmountCents&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;int64&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;slog&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Attr&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;return&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;slog&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;Int64&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;amount_cents&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;Err&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;e&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;error&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;slog&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Attr&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;         &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;return&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;slog&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;err&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;e&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;Error&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;Imported as &lt;code&gt;applog&lt;/code&gt; to dodge the stdlib &lt;code&gt;log&lt;/code&gt; collision. Every call site reads the same
-way:&lt;/p&gt;
-&lt;div class=&#34;codeblock&#34; translate=&#34;no&#34; data-lang=&#34;go&#34; data-copyable&gt;
-  &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nx&#34;&gt;logger&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;LogAttrs&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;ctx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;slog&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;LevelInfo&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;placed order&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;applog&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;OrderID&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;o&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;ID&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;applog&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;UserID&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;o&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;UserID&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;applog&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;AmountCents&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;o&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;AmountCents&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;For fields that always log together, push them into a single helper that returns
-&lt;code&gt;[]slog.Attr&lt;/code&gt;:&lt;/p&gt;
-&lt;div class=&#34;codeblock&#34; translate=&#34;no&#34; data-lang=&#34;go&#34; data-copyable&gt;
-  &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;type&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Order&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;struct&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;ID&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;          &lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;UserID&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;      &lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;AmountCents&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;int64&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// internal/log/attrs.go&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;Order&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;o&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Order&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[]&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;slog&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Attr&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;return&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[]&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;slog&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Attr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;OrderID&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;o&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;ID&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;UserID&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;o&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;UserID&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;AmountCents&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;o&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;AmountCents&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;And spread with &lt;code&gt;...&lt;/code&gt; at the call site:&lt;/p&gt;
-&lt;div class=&#34;codeblock&#34; translate=&#34;no&#34; data-lang=&#34;go&#34; data-copyable&gt;
-  &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nx&#34;&gt;logger&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;LogAttrs&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;ctx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;slog&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;LevelInfo&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;placed order&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;applog&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;Order&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;o&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;...&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;Add a field like &lt;code&gt;currency&lt;/code&gt; to &lt;code&gt;Order()&lt;/code&gt; and every order log picks it up.&lt;/p&gt;
-&lt;p&gt;Renames are one-line edits in &lt;code&gt;attrs.go&lt;/code&gt;. Types live in one place, so &lt;code&gt;AmountCents(int64)&lt;/code&gt;
-won&amp;rsquo;t take an &lt;code&gt;int&lt;/code&gt; from any caller.&lt;/p&gt;
-&lt;p&gt;Spelling mistakes can&amp;rsquo;t drift across files. Inline &lt;code&gt;slog.String(&amp;quot;request_id&amp;quot;, id)&lt;/code&gt; in one
-place and &lt;code&gt;slog.String(&amp;quot;reqwest_id&amp;quot;, id)&lt;/code&gt; somewhere else, and you&amp;rsquo;ll be wondering why half
-the logs don&amp;rsquo;t show up under &lt;code&gt;request_id&lt;/code&gt;. With one helper per attribute, the typo lives in
-one function and either every call site has it or none does.&lt;/p&gt;
-&lt;p&gt;Need to redact &lt;code&gt;Email&lt;/code&gt;? Change &lt;code&gt;Email()&lt;/code&gt; to return &lt;code&gt;slog.String(&amp;quot;email&amp;quot;, &amp;quot;[redacted]&amp;quot;)&lt;/code&gt; and
-every call site updates. LLMs pick up the pattern fast too. Tell an agent to log a new field
-and it adds a helper in &lt;code&gt;attrs.go&lt;/code&gt; and calls it from the right place.&lt;/p&gt;
-&lt;h2 id=&#34;but-what-about-nested-structures&#34;&gt;But what about nested structures? &lt;a class=&#34;anchor&#34; href=&#34;#but-what-about-nested-structures&#34; aria-label=&#34;Permalink to But what about nested structures?&#34;&gt;&lt;span aria-hidden=&#34;true&#34;&gt;#&lt;/span&gt;&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;Same trick. The helper returns a group instead of a single value:&lt;/p&gt;
-&lt;div class=&#34;codeblock&#34; translate=&#34;no&#34; data-lang=&#34;go&#34; data-copyable&gt;
-  &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;type&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;User&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;struct&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;ID&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Name&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Email&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Tier&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// internal/log/attrs.go&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;User&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;u&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;User&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;slog&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Attr&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;return&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;slog&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;Group&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;user&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;slog&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;id&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;u&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;ID&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;slog&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;tier&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;u&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Tier&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;code&gt;Email&lt;/code&gt; doesn&amp;rsquo;t appear inside the group, so no caller can leak it via &lt;code&gt;applog.User(u)&lt;/code&gt;. Used
-the same way as the rest:&lt;/p&gt;
-&lt;div class=&#34;codeblock&#34; translate=&#34;no&#34; data-lang=&#34;go&#34; data-copyable&gt;
-  &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nx&#34;&gt;logger&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;LogAttrs&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;ctx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;slog&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;LevelInfo&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;user signed in&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;applog&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;User&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;u&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;&lt;div class=&#34;codeblock&#34; translate=&#34;no&#34; data-lang=&#34;json&#34; data-copyable&gt;
-  &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;#34;msg&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;user signed in&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;#34;user&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:{&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;#34;id&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;u_42&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;#34;tier&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;gold&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}}&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;in-the-wild&#34;&gt;In the wild &lt;a class=&#34;anchor&#34; href=&#34;#in-the-wild&#34; aria-label=&#34;Permalink to In the wild&#34;&gt;&lt;span aria-hidden=&#34;true&#34;&gt;#&lt;/span&gt;&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;The shape shows up across plenty of production Go codebases. &lt;a href=&#34;https://github.com/syncthing/syncthing/blob/main/internal/slogutil/slogvalues.go&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34; aria-label=&#34;syncthing (opens in new tab)&#34;&gt;syncthing&lt;/a&gt; keeps its slog
-helpers in &lt;code&gt;internal/slogutil/slogvalues.go&lt;/code&gt;. &lt;a href=&#34;https://github.com/SpecterOps/BloodHound/blob/main/packages/go/bhlog/attr/attr.go&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34; aria-label=&#34;BloodHound (opens in new tab)&#34;&gt;BloodHound&lt;/a&gt; has a package literally named
-&lt;code&gt;attr&lt;/code&gt; for them. &lt;a href=&#34;https://github.com/gravitational/teleport/blob/master/lib/join/internal/diagnostic/diagnostic.go&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34; aria-label=&#34;Teleport (opens in new tab)&#34;&gt;Teleport&lt;/a&gt; does the same in &lt;code&gt;lib/join/internal/diagnostic/diagnostic.go&lt;/code&gt;,
-with zero-value suppression baked in. &lt;a href=&#34;https://github.com/FerretDB/FerretDB/blob/main/internal/util/logging/logging.go&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34; aria-label=&#34;FerretDB (opens in new tab)&#34;&gt;FerretDB&lt;/a&gt; exports &lt;code&gt;Error(err) slog.Attr&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;A minimal end-to-end example is on this &lt;a href=&#34;https://go.dev/play/p/25NKrP9xxoJ&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34; aria-label=&#34;Go Playground share (opens in new tab)&#34;&gt;Go Playground share&lt;/a&gt;. It has the helpers in
-&lt;code&gt;internal/log&lt;/code&gt;, a &lt;code&gt;Service&lt;/code&gt; that uses them, and a &lt;code&gt;main&lt;/code&gt; that calls into it.&lt;/p&gt;
-&lt;h2 id=&#34;enforce-it-with-sloglint&#34;&gt;Enforce it with sloglint &lt;a class=&#34;anchor&#34; href=&#34;#enforce-it-with-sloglint&#34; aria-label=&#34;Permalink to Enforce it with sloglint&#34;&gt;&lt;span aria-hidden=&#34;true&#34;&gt;#&lt;/span&gt;&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/go-simpler/sloglint&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34; aria-label=&#34;sloglint (opens in new tab)&#34;&gt;sloglint&lt;/a&gt; enforces the workflow on every PR. The rules I default to:&lt;/p&gt;
-&lt;div class=&#34;codeblock&#34; translate=&#34;no&#34; data-lang=&#34;yaml&#34; data-copyable&gt;
-  &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;linters-settings&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;sloglint&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;attr-only&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;no-global&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;all&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;context&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;all&amp;#34;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;static-msg&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;key-naming-case&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;snake&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;code&gt;attr-only&lt;/code&gt; rejects the kv form. &lt;code&gt;no-global: &amp;quot;all&amp;quot;&lt;/code&gt; blocks &lt;code&gt;slog.Info&lt;/code&gt; and &lt;code&gt;slog.Default()&lt;/code&gt;.
-&lt;code&gt;context: &amp;quot;all&amp;quot;&lt;/code&gt; rejects any call without a context. &lt;code&gt;static-msg&lt;/code&gt; keeps the message a string
-literal. &lt;code&gt;key-naming-case: snake&lt;/code&gt; flags any key that isn&amp;rsquo;t snake_case.&lt;/p&gt;
-&lt;div class=&#34;alert alert-note&#34;&gt;
-  &lt;p class=&#34;alert-title&#34;&gt;Note&lt;/p&gt;
-  &lt;ul&gt;
-&lt;li&gt;Take the logger as a constructor argument. Never reach for &lt;code&gt;slog.Default()&lt;/code&gt; or any
-package-level slog function.&lt;/li&gt;
-&lt;li&gt;Always use &lt;code&gt;logger.LogAttrs(ctx, level, msg, attrs...)&lt;/code&gt;. Not &lt;code&gt;logger.Info&lt;/code&gt;,
-&lt;code&gt;logger.Warn&lt;/code&gt;, or any of the kv-flavored helpers.&lt;/li&gt;
-&lt;li&gt;Every attribute comes from a helper in &lt;code&gt;internal/log/attrs.go&lt;/code&gt;. Write
-&lt;code&gt;applog.OrderID(o.ID)&lt;/code&gt;, never &lt;code&gt;slog.String(&amp;quot;order_id&amp;quot;, o.ID)&lt;/code&gt; inline.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/go-simpler/sloglint&#34; rel=&#34;noopener noreferrer&#34; target=&#34;_blank&#34; aria-label=&#34;sloglint (opens in new tab)&#34;&gt;sloglint&lt;/a&gt; enforces all three on every commit so the workflow doesn&amp;rsquo;t erode.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;&lt;!-- references --&gt;
-&lt;!-- prettier-ignore-start --&gt;
-&lt;!-- prettier-ignore-end --&gt;
-</content:encoded>
-      <category>Go</category>
-      <category>Logging</category>
-      <category>API</category>
     </item>
   </channel>
 </rss>
