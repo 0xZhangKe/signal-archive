@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "c7d9a63d6131e0fda0c36b78",
+      "title": "為什麼我開始使用 Zed 編輯器：從 VS Code 搬家,23 個擴充最後剩 8 個",
+      "summary": "Zed 團隊的上一個作品是 Atom,而 Atom 催生的 Electron 後來成了 VS Code 的地基。這篇記錄作者從 VS Code Remote-SSH 搬到 Zed 的完整過程:本機端 4,067 MB 對 204 MB、伺服器端 7.9 GB 對 107 MB,23 個擴充搬完只剩 8 個。內容涵蓋官方的設定匯入路徑與鍵位差異、有 GUI 的設定視窗與專案層級設定的限制、遠端開發的實測,以及 ACP 怎麼把 AI agent 從編輯器裡拆出來。文末誠實列出 Zed 目前還缺的功能,以及為什麼作者認為那份清單的保鮮期很短。",
+      "image": null,
+      "publishedAt": "2026-08-04T09:37:31Z",
+      "sourceId": "bd51496b8ec0ca1d",
+      "sourceTitle": "Koimsurai 手記",
+      "link": "https://koimsurai.com/blog/why-i-switched-to-zed",
+      "detailPath": "articles/c7d9a63d6131e0fda0c36b78.json"
+    },
+    {
       "id": "dfd057d97b089ea3ea4727b8",
       "title": "VS Code Remote-SSH 把我的伺服器燒到 96°C：rust-analyzer 無限重跑 cargo check",
       "summary": "一台跑著三十幾個容器、同時被 VS Code Remote-SSH 連進去開發的家用伺服器,溫度釘在 90°C 撐了四十分鐘、load 從 8 衝到 196,最後失去回應。而把它燒掉的不是那些服務,是編輯器。這篇記錄整個追查過程:三條看起來很有說服力但都是錯的線索(SMU 當掉後感測器說謊、重開機就好、CPU 只有 30 到 50%),怎麼用 sysstat 的 sar 和 netdata 的 apps.plugin 回溯一個已經結束的事件,以及最後抓到的三個兇手——rust-analyzer 對一個 GTK 依賴全缺、永遠編不過的 Tauri 專案無限重跑 cargo check、Foam 擴充讓 ripgrep 開出兩百多個行程、還有只是雜訊的 RustDesk 輪詢。文末附上防線設定與事後補的兩道保險。",
@@ -45,15 +56,15 @@
       "detailPath": "articles/a2587e55772899d7ddff5601.json"
     },
     {
-      "id": "54b9e1db62af7524ed5eae28",
+      "id": "7fd244ad35f5f95f494d9904",
       "title": "本来无一物，何处惹尘埃？",
-      "summary": "最近有一些关于意识的思考和体悟。 之前看一本管理习惯的书，里面讲了很多关于人的激素作用，利用激素的功能属性去做 […]",
+      "summary": "最近有一些关于意识的思考和体悟。 之前看一本管理习惯的书，里面讲了很多关于人的激素作用，利用激素的功能属性去做 …",
       "image": null,
       "publishedAt": "2026-08-04T04:23:30Z",
       "sourceId": "e0d7bbaba7286f4d",
       "sourceTitle": "Rolen's Blog",
       "link": "https://rolen.wiki/nothing-to-hold/",
-      "detailPath": "articles/54b9e1db62af7524ed5eae28.json"
+      "detailPath": "articles/7fd244ad35f5f95f494d9904.json"
     },
     {
       "id": "8362c531660296832ff5d1a7",
@@ -496,15 +507,15 @@
       "detailPath": "articles/728d5506513852321f87a87f.json"
     },
     {
-      "id": "0d74cf1a9901c0fbd1202f93",
+      "id": "e9a60b6d754af1da146c98b5",
       "title": "会花钱是一种能力？",
-      "summary": "刚才走在路上，突然想起前几天看的一个视频，其中的观点与我之前的想法不谋而合，让我产生了一些新的思考。大概意思是 […]",
+      "summary": "刚才走在路上，突然想起前几天看的一个视频，其中的观点与我之前的想法不谋而合，让我产生了一些新的思考。大概意思是 …",
       "image": null,
       "publishedAt": "2026-08-01T14:20:07Z",
       "sourceId": "e0d7bbaba7286f4d",
       "sourceTitle": "Rolen's Blog",
       "link": "https://rolen.wiki/spending-as-a-skill/",
-      "detailPath": "articles/0d74cf1a9901c0fbd1202f93.json"
+      "detailPath": "articles/e9a60b6d754af1da146c98b5.json"
     },
     {
       "id": "812aafab9181ae8d33a38580",
@@ -648,17 +659,6 @@
       "sourceTitle": "Feed Me, Haruo",
       "link": "https://haruowang.vercel.app/about/lifelog/2026.html",
       "detailPath": "articles/2a127c675ea0d1153a9ec96f.json"
-    },
-    {
-      "id": "af1278b9b1291c89d3009f6d",
-      "title": "編輯手記",
-      "summary": "近期的創作、隨想，與對當下的評論",
-      "image": null,
-      "publishedAt": "2026-07-31T15:30:14Z",
-      "sourceId": "50bce2ced06e6077",
-      "sourceTitle": "Feed Me, Haruo",
-      "link": "https://haruowang.vercel.app/about/lifelog/editorial.html",
-      "detailPath": "articles/af1278b9b1291c89d3009f6d.json"
     }
   ]
 }
