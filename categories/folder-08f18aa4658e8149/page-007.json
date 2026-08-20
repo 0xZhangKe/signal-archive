@@ -1,15 +1,59 @@
 {
   "items": [
     {
-      "id": "6a1f70b8ff4b4b3d3e9a5138",
-      "title": "自作孽",
-      "summary": "昨天我发了一条贴图《 关于舌头套 》，3 个小时阅读量突破 10万，是之前一篇文章的 10 倍。完全不在意是不可能的，我为一篇文章付出的心血多，为一条贴图耗费的心力少，多少会有些不平衡。阴暗的心理一发作，觉得肯定是系统算法在搞我。文章不推荐，搞笑图片狂推。 不过我基本上还算是个谨慎的人，说话要讲证据，否则就是诽谤。于是我等了一夜，去看最终的数据分析： 看完数据之后，我得出了一个结论：一切都是自作孽。 为什么这么说？因为读过这条贴图的 14 万 7 千人，90% 以上都是直接看了公众号消息，系统推荐只占 0.7%---并没有什么算法的左右，事实上算法并不喜欢这条贴图，因为在平常日子里，一般会给文章 5% 的推荐量，昨天系统根本就没有任何推荐的想法。 所以，人从哪里来？从我这十多年累积的读者群而来。对，他们一直都…",
-      "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjWpil37_YBQBVByouY2N51Y_SgN0B97GQV7d1W6UjOhN-6leLiErZUIjNzjflzvv37U4uKUqNvHztWeuSO64btWVXiykjPsH6D7CqYXjTXGeNkHVw408GJWFLdbzuJW9UottszaxaXIhyFciH2-ODDV50MSJLpo4GxHWcqmo52m1XfIUgpJa1hY291xB0/s72-w445-h590-c/0_3%20(94)-gigapixel-cgi-2x.jpeg",
-      "publishedAt": "2026-07-28T04:56:58Z",
-      "sourceId": "095c6fbac5bbadfd",
-      "sourceTitle": "槽边往事",
-      "link": "https://www.hecaitou.com/2026/07/My-Own-Undoing.html",
-      "detailPath": "articles/6a1f70b8ff4b4b3d3e9a5138.json"
+      "id": "b386c59fb6acacd5ac105a41",
+      "title": "跨時空價值",
+      "summary": "\"Art produces ugly things which frequently become more beautiful with time. Fashion, on the other hand, produces beautiful things which always become ugly with time.\"",
+      "image": null,
+      "publishedAt": "2026-07-29T00:00:00Z",
+      "sourceId": "7f36c3da1e6b5c71",
+      "sourceTitle": "Wiwi.Blog Blog",
+      "link": "https://wiwi.blog/blog/timeless-value",
+      "detailPath": "articles/b386c59fb6acacd5ac105a41.json"
+    },
+    {
+      "id": "254920d3cdfc0ab801e92948",
+      "title": "Linux 伺服器被植入挖礦程式：從 load average 10.65 揪出整條攻擊鏈",
+      "summary": "這篇記錄了作者在一次例行效能健檢中,意外撞見自己家用伺服器被植入挖礦程式的完整抓賊過程,並整理成一份人人可照做的可疑進程自檢清單。起點是一個不該出現的數字:一台 16 執行緒的機器 load average 卻卡在 10.65。作者用 top 與 docker stats 揪出一個吃滿 10 核、隨機大小寫檔名的可疑程序,再靠 Linux 的 /proc 三件套(exe 指向已刪除的 /tmp 檔、cmdline、environ 溯源到某個 Docker 容器)確認它是挖礦程式,並把攻擊鏈拉出來:一個 port 直接綁在 0.0.0.0、繞過 nginx 對外裸露的 Next.js 容器,被 CVE-2025-66478(Next.js 16.0.6 的滿分 RCE、綽號 React2Shell)打穿。文中含…",
+      "image": null,
+      "publishedAt": "2026-07-28T16:55:03Z",
+      "sourceId": "bd51496b8ec0ca1d",
+      "sourceTitle": "Koimsurai 手記",
+      "link": "https://koimsurai.com/blog/catching-a-cryptominer",
+      "detailPath": "articles/254920d3cdfc0ab801e92948.json"
+    },
+    {
+      "id": "f84f12d746de14e64e8e4935",
+      "title": "前往台北比賽",
+      "summary": "幾個月前我參加了 技能競賽分區賽 ，非常幸運有拿到前五，雖然說我自己已經很滿足了，但當然前五就會被丟到全國賽。 接下來三天要比全國技能競賽，今天提前一天來參加開幕。老實說今天的行程沒說到特別好，而且這也是我少數幾次來台北。 寫這段的時候今天已經過完了，我是在床上寫下的。比賽的會場其實不差，在南港展覽館，只是時間上的安排沒有說到很優。我們一早去等了超級久，因為手冊上是寫十一點半要開始什麼簡報，但是實際上是下午兩點，這是我去問之後才得知的。 另一點就是他們的午餐沒有到很合我胃口，因為我自己滿重視官方給的菜色等等，這個真的讓我有點失望。 我自己是有吃完，但是在廚餘桶可以看到有一堆人丟掉的 完整 便當，真的很好笑。 下午就是簡單看個比賽系統，也沒什麼特別的。之後就是開幕，我自己是沒有特別留在那邊看，我出去走走，反正就…",
+      "image": "https://img.worldofwheat.cc/8548a5ae999a",
+      "publishedAt": "2026-07-28T16:00:00Z",
+      "sourceId": "de9cbd8d045ab396",
+      "sourceTitle": "小麥的異想世界",
+      "link": "https://my-blog.worldofwheat.cc/blog/2026/07/taipei-competition-arrival.html",
+      "detailPath": "articles/f84f12d746de14e64e8e4935.json"
+    },
+    {
+      "id": "8fdc066257378ccc1c050032",
+      "title": "我的DIY",
+      "summary": "猜猜家产99是什么意思？",
+      "image": null,
+      "publishedAt": "2026-07-28T14:50:11Z",
+      "sourceId": "b6f0cdd7ba01970a",
+      "sourceTitle": "夕时",
+      "link": "https://www.iyuxiyang.com/Moment/i2026/276.html",
+      "detailPath": "articles/8fdc066257378ccc1c050032.json"
+    },
+    {
+      "id": "693a16a4e0f70081eaef3552",
+      "title": "Ubuntu 26.04 安装 rime/中州韵输入法",
+      "summary": "此前写过 ubuntu 24.04 安装rime输入法的教程，使用系统默认的ibus。而 ubuntu 26.04已经全面转向Wayland，进而系统的ibus的可用性也没有fcitx好用，于是...",
+      "image": "https://pa.ci/usr/uploads/2026/07/2745422641.png",
+      "publishedAt": "2026-07-28T05:37:00Z",
+      "sourceId": "d87239607d14c88c",
+      "sourceTitle": "怕刺",
+      "link": "https://pa.ci/452.html",
+      "detailPath": "articles/693a16a4e0f70081eaef3552.json"
     },
     {
       "id": "043978c7873e0e2cc3bdf9bd",
@@ -615,50 +659,6 @@
       "sourceTitle": "静かな森",
       "link": "https://innei.in/notes/217",
       "detailPath": "articles/a1cfacb8e9d7f69384f79ba5.json"
-    },
-    {
-      "id": "3f63036d4e734d6efbc25285",
-      "title": "2026-06-15 / 数据小屏",
-      "summary": "by 新世界的大门",
-      "image": null,
-      "publishedAt": "2026-07-23T17:09:52Z",
-      "sourceId": "4f3f8eb9d72c3840",
-      "sourceTitle": "新世界的大门",
-      "link": "https://blog.xinshijiededa.men/daily/51/",
-      "detailPath": "articles/3f63036d4e734d6efbc25285.json"
-    },
-    {
-      "id": "4f072acbc7ee00e7f50cff59",
-      "title": "2026-06-14 / 創文明城",
-      "summary": "by 新世界的大门",
-      "image": null,
-      "publishedAt": "2026-07-23T17:05:50Z",
-      "sourceId": "4f3f8eb9d72c3840",
-      "sourceTitle": "新世界的大门",
-      "link": "https://blog.xinshijiededa.men/daily/50/",
-      "detailPath": "articles/4f072acbc7ee00e7f50cff59.json"
-    },
-    {
-      "id": "9e904423421124e652f69c0d",
-      "title": "幫巴哈動畫瘋寫一個沒人寫過的 SDK: 逆向 API、自我掏空的 cookie,與讀不到的 HttpOnly",
-      "summary": "為了讓部落格那頁「在看什麼」能顯示我真實的動畫瘋觀看紀錄,我一路從逆向巴哈的 history API,做成一個開源的 npm SDK `anigamer`。這篇記錄整條坑:七顆 cookie 裡哪顆才是關鍵、封面藏在 og:image 的隨機 hash、每部動畫只顯示一集的 nested history bug,以及最精彩的——巴哈用「HTTP 200 藏 401」的軟錯誤加上一顆 `BAHARUNE=deleted` 的假 cookie,把我自己的 rotate 邏輯騙到把帳號掏空、靜默死了三天。後半是為了熱換 cookie 做的一鍵瀏覽器擴充,如何跟讀不到的 HttpOnly cookie 纏鬥、最後用 CDP 偵錯介面破關,再到發上 npm 的 2FA 大冒險與後端遷 Rust 後的 crates.io…",
-      "image": null,
-      "publishedAt": "2026-07-23T15:41:46Z",
-      "sourceId": "bd51496b8ec0ca1d",
-      "sourceTitle": "Koimsurai 手記",
-      "link": "https://koimsurai.com/blog/writing-the-anigamer-sdk-nobody-made",
-      "detailPath": "articles/9e904423421124e652f69c0d.json"
-    },
-    {
-      "id": "d2605c70cf3d0d30b4fa8fa6",
-      "title": "日本小学语文课文（二年级下）",
-      "summary": "（摘要）从二年级下册开始，课文里出现了高级语法（JLPT N1级别），以及方言。",
-      "image": "https://springwood.me/jp-elementary-school-language-2b/cover.svg",
-      "publishedAt": "2026-07-23T15:00:00Z",
-      "sourceId": "85bf8b6cb2e22489",
-      "sourceTitle": "沉舟侧畔 Blog",
-      "link": "https://springwood.me/jp-elementary-school-language-2b/",
-      "detailPath": "articles/d2605c70cf3d0d30b4fa8fa6.json"
     }
   ]
 }
