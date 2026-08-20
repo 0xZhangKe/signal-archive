@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "d26ca9e2eaf209a6481eef64",
+      "title": "Self-changing Data Type - CVE-2024-40676 漏洞分析",
+      "summary": "今年 10 月份的时候，Android 安全公告用 CVE-2024-40676 的编号公布了一个很奇怪的 patch 。 AccountManagerService checkKeyIntent() 负责检查 account authenticator 传回的 intent，确保它安全再传回给 caller，防止 launch anywhere 漏洞。这个补丁看起来很暴力也很奇怪，直接 ban 了所有带有 content URI 的 intent，似乎完全不考虑兼容性。是什么样的漏洞才要上如此暴力的修复方法？ 注：如下全是我的猜测，由于联系不到漏洞作者本人，无法确认这是否就是原本的问题。",
+      "image": null,
+      "publishedAt": "2024-11-07T02:00:00Z",
+      "sourceId": "511f3e9d589e2612",
+      "sourceTitle": "残页的小博客",
+      "link": "https://blog.canyie.top/2024/11/07/self-changing-data-type/",
+      "detailPath": "articles/d26ca9e2eaf209a6481eef64.json"
+    },
+    {
       "id": "8864a2070866737f3e9a33fc",
       "title": "自新世界 #0x08：明察秋毫",
       "summary": "目光敏锐，可以看见秋天猫猫身上新长的毫毛",
@@ -648,17 +659,6 @@
       "sourceTitle": "Wiwi.Blog Blog",
       "link": "https://wiwi.blog/blog/concert-phones",
       "detailPath": "articles/44d4551cf6357df082c9f92e.json"
-    },
-    {
-      "id": "d376ca38875a06dba912ad50",
-      "title": "「𰻞」，這一坨是什麼東西？！",
-      "summary": "𰻞 # 這是什麼字？ 𰻞 發音 # 前陣子不小心使用小鶴雙拼輸入法打錯字時，打到了「bl」。 「b」= 注音「ㄅ」 「l」= 「iang」= 注音「ㄧㄤ」 再加上聲調： 拼音：biáng (biang2) 注音：ㄅㄧㄤˊ 筆順 # 一共有 56 畫 𰻞 釋義 # 詞源不確定，猜測是「狀聲詞」，可能是「吃麵時的咀嚼聲」或者「製作麵條摔麵的聲音」，特別用於陝西關中地區流傳的一種麵食「𰻞𰻞麵」。 （如果是咀嚼聲也太不像了吧？） 𰻞𰻞麵 # 陝西關中民間傳統風味麵食，特指關中麥子磨成的麵粉，通常手工擀成長寬厚的麵條。 麵 資料來源 # 維基詞典 、 漢典",
-      "image": "https://eddielv.com/articles/biang/biang.png",
-      "publishedAt": "2024-10-15T08:11:05Z",
-      "sourceId": "199cdf92fc46bfcd",
-      "sourceTitle": "Eddie Lv",
-      "link": "https://eddielv.com/articles/biang/",
-      "detailPath": "articles/d376ca38875a06dba912ad50.json"
     }
   ]
 }

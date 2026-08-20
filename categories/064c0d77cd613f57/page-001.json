@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "5926f1d9a814962e8fe12925",
+      "title": "Postgres as an isolation reference model",
+      "summary": "Use PostgreSQL's transaction isolation levels as a reference model for reasoning about the guarantees and tradeoffs of other relational and non-relational databases.",
+      "image": "https://blob.rednafi.com/system/pg-return-isolation/postgresql-isolation-levels-dafec4753c2c.png",
+      "publishedAt": "2026-08-19T00:00:00Z",
+      "sourceId": "064c0d77cd613f57",
+      "sourceTitle": "Redowan's Reflections",
+      "link": "https://rednafi.com/system/pg-isolation-ref/",
+      "detailPath": "articles/5926f1d9a814962e8fe12925.json"
+    },
+    {
       "id": "6a5455f8b82267f356453d32",
       "title": "Accepted proposal: range over all command-line flags",
       "summary": "The flag package is getting a range-friendly iterator and a direct way to tell whether a flag was set successfully.",
@@ -89,15 +100,15 @@
       "detailPath": "articles/3466ef3ec951505bdfe75416.json"
     },
     {
-      "id": "a6216a61fa2273b7a1ec428c",
+      "id": "5225abd9a576985cd92c0bd6",
       "title": "Reading your own writes with WAIT FOR LSN in Postgres 19",
       "summary": "PostgreSQL 19's new WAIT FOR LSN command lets a replica block until it has replayed your write. The read-after-write problem it solves, the workarounds it replaces, and what the timeout, status, and mode options are actually for.",
       "image": null,
       "publishedAt": "2026-06-13T00:00:00Z",
       "sourceId": "064c0d77cd613f57",
       "sourceTitle": "Redowan's Reflections",
-      "link": "https://rednafi.com/system/wait-for-lsn/",
-      "detailPath": "articles/a6216a61fa2273b7a1ec428c.json"
+      "link": "https://rednafi.com/system/pg-wait-for-lsn/",
+      "detailPath": "articles/5225abd9a576985cd92c0bd6.json"
     },
     {
       "id": "48c5a3403cfca64b352bdd6a",
@@ -153,17 +164,6 @@
       "sourceTitle": "Redowan's Reflections",
       "link": "https://rednafi.com/go/txtar/",
       "detailPath": "articles/9f678db311f59c6242ba4013.json"
-    },
-    {
-      "id": "6aa46138837581cd3b532948",
-      "title": "Type-safe slogging",
-      "summary": "The default slog API is loose enough that a careless line ships broken JSON to production. Pin it down with Attr constructors, LogAttrs, a context-borne logger, and sloglint.",
-      "image": null,
-      "publishedAt": "2026-05-09T00:00:00Z",
-      "sourceId": "064c0d77cd613f57",
-      "sourceTitle": "Redowan's Reflections",
-      "link": "https://rednafi.com/go/typesafe-slogging/",
-      "detailPath": "articles/6aa46138837581cd3b532948.json"
     }
   ]
 }
