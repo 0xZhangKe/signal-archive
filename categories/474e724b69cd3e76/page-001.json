@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "7c63a69fef786830b65fd0b3",
+      "title": "acme.sh 从Webroot改为 NameSilo DNS 申请通配符证书踩坑记",
+      "summary": "我这边虽然用的是BT面板，但其在某次升级之后自动申请SSL证书功能就不好用了，所以一直用的是crontab + acme.sh自行更新证书。 当时的教程在这里： https://itlanyan.com/use-acme-sh-get-free-cert/ 前情提要 不说清楚我之前干了什么，就说不清楚我改了什么。其实都是照着上面的教程搞的，只不过沿用了宝塔的文件结构，相当简单。 安装 curl https://get.acme.sh | sh acme.sh安装成功后，会自动创建一个cron任务 运行`crontab -l`能够进行查看，`crontab -e`能编辑。 41 0 * * * \"/root/.acme.sh\"/acme.sh --cron --home \"/root/.acme.sh\" > /…",
+      "image": null,
+      "publishedAt": "2026-08-21T04:18:43Z",
+      "sourceId": "474e724b69cd3e76",
+      "sourceTitle": "破襪子",
+      "link": "https://pewae.com/2026/08/migrating-acme-sh-from-webroot-validation-to-namesilo-dns-for-lets-encrypt-wildcard-certificates.html",
+      "detailPath": "articles/7c63a69fef786830b65fd0b3.json"
+    },
+    {
       "id": "d485b873ff7ba3bffc649860",
       "title": "看图不说话20260819",
       "summary": "《 看图不说话20260819 》采用 署名-非商业性使用-禁止演绎 许可协议进行许可。 『 破袜子 』期待与您交流。 相关推荐: 干啥啥不行，喂屎第一名 [53%] 明知道是坑，还是要跳 [22%] 上海日记S3Day31 [22%] 这骗子图啥呢? [22%] 垃圾的垃圾分类（协弃市区） [22%]",
@@ -131,17 +142,6 @@
       "sourceTitle": "破襪子",
       "link": "https://pewae.com/2026/05/why-not-use-a-camera-to-take-a-photo-of-the-password-on-the-tv-screen.html",
       "detailPath": "articles/4405c5a5b312421ae0b05cb6.json"
-    },
-    {
-      "id": "d1fa417d2c8a42feef0cca74",
-      "title": "张屠户必须死",
-      "summary": "对于一个两年看一次球的伪球迷中老登来说，最近的大事件莫过于央视的世界杯的版权谈判陷入僵局了。 我觉得当下的风向有些歪。 讲价没什么错。哭穷更是没什么错。 不过商业谈判就谈判，讲价就讲价，狗咬狗就狗咬狗，别他妈包装成一副“责任都在FIFA”的丑恶嘴脸！ 确实穷。前两天母亲节回家，陪我爸看了场乒乓球女团，连他都在吐槽：“看看五套现在这个熊样，除了锅圈就是锅圈，就找不着别人来打广告了吗？好几年也不换个样儿，岳云鹏这张肥脸真腻歪！” 我甚至可以帮CCAV补充一个FIFA造成的原因：比赛品质下降。 扩军到48队在我看来实在是步臭棋。 就说同样在美国时间，同样没有中国的94世界杯吧，那是什么小组赛？ 德国西班牙的轴心国大战。 荷兰比利时的尼德兰德比。 上届黑马喀麦隆对史上最保守巴西。 中场阴谋家哈吉直接对话金毛狮王巴尔德…",
-      "image": null,
-      "publishedAt": "2026-05-13T03:51:46Z",
-      "sourceId": "474e724b69cd3e76",
-      "sourceTitle": "破襪子",
-      "link": "https://pewae.com/2026/05/many-choises-not-only-cctv.html",
-      "detailPath": "articles/d1fa417d2c8a42feef0cca74.json"
     }
   ]
 }

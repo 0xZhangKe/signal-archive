@@ -1,6 +1,149 @@
 {
   "items": [
     {
+      "id": "0202e44741bd0a3e32ce0200",
+      "title": "Dotr: 一个简单的配置备份工具",
+      "summary": "这周我的 Mac 突然无法开机了，睡午觉之前我没插电让它继续跑程序，回来后就发现已经黑屏，无论如何充电都无法开机。用了 14 年 Mac 第一次出现这种情况，麻烦的是我暑假在湖南老家待着，发现整个地级市都没办法修复 Mac，无奈寄去长沙的苹果售后修理。 但这两天我还有些工作需要处理，所以就在家人的 PC 机上开始重建我的工作流程和工具。这时候才想起，我应该是有份比较新的配置备份。然后直接从 Github 的私有库上拉取下来，交给 AI 帮我恢复配置，一切都方便多了。 完成这个备份的小工具是 dotr ，几个月之前我 vibe coding 的。 那次的契机也是自己一个命令行失误，导致 .zshrc 完全覆盖了。我最早的备份就是一个 Git 仓库，把 .zshrc 、 .gitconfig 、编辑器配置这些文件…",
+      "image": null,
+      "publishedAt": "2026-08-21T12:46:23Z",
+      "sourceId": "82c4bcb6bba028cf",
+      "sourceTitle": "程序员的喵",
+      "link": "http://catcoding.me/p/dotr-intro/",
+      "detailPath": "articles/0202e44741bd0a3e32ce0200.json"
+    },
+    {
+      "id": "a6207ce1d6a1e7079886b6ba",
+      "title": "帥熊郵差",
+      "summary": "帥熊寄出了一封沒有收件人的信，只要你想，就可以是那個收件人，但是信上沒有什麼內容，只有一些無聊的生活點滴。能夠紀錄無聊的事情，表示今天很幸運，所以帥熊想把他傳遞下去。 這是帥熊的職業系列，當一下郵差玩玩。因為只是玩玩所以沒有真的去送信，竟然是去寄信。不過若是以 消防員會去縱火 的邏輯來看，郵差自己去寄信也是很正常的。 除了包裹以外，現在的信件大概都是一些還沒電子化成功的通知信，沒有什麼真的用來溝通的實體信件了。 我最後會收到的有意義的信件，是與幾位朋友大概從大學畢業開始養成的一個習慣，就是出國就要寄明信片給大家，這個習慣還維持了蠻久的，有時候會甚至不知道那個朋友出國就收到了明信片。不過假設那個地方是很常去的，後來也不一定還會寄就是了。 這個明信片可以替代出國的小伴手禮，我覺得有跟「收集 御朱印 就不用一直買御…",
+      "image": "https://raw.githubusercontent.com/yangbearblog/images/main/kumahaitatsu.gif",
+      "publishedAt": "2026-08-21T04:53:45Z",
+      "sourceId": "13e0488e6596de1c",
+      "sourceTitle": "YangBear'Blog ᓚᘏᗢ",
+      "link": "https://yangbear.bearblog.dev/kumahaitatsu/",
+      "detailPath": "articles/a6207ce1d6a1e7079886b6ba.json"
+    },
+    {
+      "id": "b0bf1c77d1d6c5f1979bde6c",
+      "title": "连胜的陷阱",
+      "summary": "今天检讨一下断更这件事儿",
+      "image": "https://bear-images.sfo2.cdn.digitaloceanspaces.com/sol/ire-photocreative-cdq9ckvyreg-unsplash.webp",
+      "publishedAt": "2026-08-21T04:24:55Z",
+      "sourceId": "05ada84875558017",
+      "sourceTitle": "So!azy",
+      "link": "https://blog.solazy.me/20260820/",
+      "detailPath": "articles/b0bf1c77d1d6c5f1979bde6c.json"
+    },
+    {
+      "id": "7c63a69fef786830b65fd0b3",
+      "title": "acme.sh 从Webroot改为 NameSilo DNS 申请通配符证书踩坑记",
+      "summary": "我这边虽然用的是BT面板，但其在某次升级之后自动申请SSL证书功能就不好用了，所以一直用的是crontab + acme.sh自行更新证书。 当时的教程在这里： https://itlanyan.com/use-acme-sh-get-free-cert/ 前情提要 不说清楚我之前干了什么，就说不清楚我改了什么。其实都是照着上面的教程搞的，只不过沿用了宝塔的文件结构，相当简单。 安装 curl https://get.acme.sh | sh acme.sh安装成功后，会自动创建一个cron任务 运行`crontab -l`能够进行查看，`crontab -e`能编辑。 41 0 * * * \"/root/.acme.sh\"/acme.sh --cron --home \"/root/.acme.sh\" > /…",
+      "image": null,
+      "publishedAt": "2026-08-21T04:18:43Z",
+      "sourceId": "474e724b69cd3e76",
+      "sourceTitle": "破襪子",
+      "link": "https://pewae.com/2026/08/migrating-acme-sh-from-webroot-validation-to-namesilo-dns-for-lets-encrypt-wildcard-certificates.html",
+      "detailPath": "articles/7c63a69fef786830b65fd0b3.json"
+    },
+    {
+      "id": "4f7c4b2ecf08c24dfa68ebd0",
+      "title": "SmartPerfetto 2026.07.18-08.21 五周更新复盘：从 v1.2.0 到 v1.7.0",
+      "summary": "上一篇更新停在 2026 年 7 月 17 日的 v1.1.1。当时 SmartPerfetto 已经有双 Trace 工作台、Quick Mode、私有分析上下文、统一 Agent runtime，以及 Camera、Heap、GPU 等专项分析能力。 从 7 月 18 日到 8 月 21 日，仓库又向前走了五周，版本来到 v1.7.0。这一轮继续增加功能，也把更多精力放在知识来源、分发质量、权限隔离、结果完整性和可回滚改进上。 SmartPerfetto 正在从“能完成一次分析”走向“能在更多环境里稳定、可追溯地完成分析”。 本文以公开发布的 v1.7.0 代码为准，回顾 v1.1.1 之后加入的主要能力。 项目与上篇文章： SmartPerfetto： https://github.com/Gracke…",
+      "image": null,
+      "publishedAt": "2026-08-21T04:00:00Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2026/08/21/SmartPerfetto-Five-Week-Update/",
+      "detailPath": "articles/4f7c4b2ecf08c24dfa68ebd0.json"
+    },
+    {
+      "id": "d1d3e151b345b14347f57560",
+      "title": "破圈的风险",
+      "summary": "如今的互联网基本上属于畜牧业，每个 App 圈养一群用户，App 之间切断通路，老死不相往来。于是，微博老登、虎扑直男、小红书群芳、朋友圈之交和直播间职业用爱发电家之间，人群特征差异很大，行为习惯差异很大，每日接触的信息差异也很大，圈圈不同。 以前说一个人在网上「火」了，意思是全平台都火。现在说一个人网上火了，是网红了，那很可能火在一个 App 里，红在一个 App里的一小群用户之间，可以称之为「分众火」。很自然的，在追逐流量的今天，「破圈」就成为了许多人追求的目标，要的就是大火全火阳光普照火。 然后，破圈就成为了翻车前奏。 圈养的结果，是在圈里培养出一批脸谱类似的用户。在一个圈里成功，只能说明适合这个圈里同类用户的口味。一旦破圈，就会进入陌生人群的视野，他们看待同一个人，同一件事，同一句话，可能会有完全不一…",
+      "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhA80o1HG6yxP_2QTudKSHxk7NOvQ8_xNiZjnr8whb0ngoD-8Fx64_MzoDbuhIVF-xeE5B-kIHPca67oGDSi9hxZ7zJYH6j1p0D3OAOGT4LPWqQd-It-Fk1SHxRs6K-t70agtPUdLa5YcALEivx7j7r3frx4BqdYZndaucn6OqEb11cvGYwGKlEbFAogzA/s72-w433-h580-c/0_1%20-%202026-08-21T103313.968-gigapixel-low%20resolution%20v2-1x.jpeg",
+      "publishedAt": "2026-08-21T03:52:35Z",
+      "sourceId": "095c6fbac5bbadfd",
+      "sourceTitle": "槽边往事",
+      "link": "https://www.hecaitou.com/2026/08/perils-breaking-bubble.html",
+      "detailPath": "articles/d1d3e151b345b14347f57560.json"
+    },
+    {
+      "id": "b851954cc5abb50f5f256132",
+      "title": "走音適合街頭演出",
+      "summary": "參加 街頭考試 的隔年，吉他社好友去考街頭藝人，我去看他們，而我自己沒有參加。 當時看到一個樂團，主唱唱的調性跟伴奏距離五度音，簡單講就是抓不到 Key，走音了。 記下他們的考試編號後，待放榜查詢時，發現他們過了。 主旋律跟伴奏不同調性，這種基本能力都沒有的人，要來判斷你有沒有能力上街演出。我們學音樂不是爲了給這些人踐踏的。 當時的台中街頭藝人考試，就是個笑話沒錯。",
+      "image": null,
+      "publishedAt": "2026-08-21T03:19:00Z",
+      "sourceId": "199cdf92fc46bfcd",
+      "sourceTitle": "Eddie Lv",
+      "link": "https://eddielv.com/musings/out-of-tune-with-busket/",
+      "detailPath": "articles/b851954cc5abb50f5f256132.json"
+    },
+    {
+      "id": "b275a7277a97beea6e577adf",
+      "title": "台中街頭藝人考試適切性",
+      "summary": "2017 年我參加了台中街頭藝人考試，當時還去聽了說明會。 總共有三大指標需要達標，其中兩項與演出能力本身有關，其中一項「適切性」則表示這項表演適不適合街頭，例如：火類的表演就不行。 說明會時，直接說了適切性都會過，因為不適合的在報名階段應該就會被「提醒」了。 為何我要大費周章解釋呢？ 因為我當時吉他彈唱適切性沒過。 事後我傳訊息到 FB 粉專粉專確認適切性的定義，100% 就是我上面說的「表演適不適合在街頭演出」，當我問「那為何吉他彈唱適切性會沒過」後，就被已讀了。 後來大法官釋憲，街頭藝人考試制度違反中華民國憲法，所以就廢除了。 當時遭到很多人反對，認為會造成街頭亂象，隨便一個人都可以上街演出，而我卻大力贊同。 在本來的制度下，判斷我有沒有能力上街演出的人，真的有鑑賞能力嗎？當我被不合理原因被刷掉之後，有…",
+      "image": null,
+      "publishedAt": "2026-08-21T03:15:03Z",
+      "sourceId": "199cdf92fc46bfcd",
+      "sourceTitle": "Eddie Lv",
+      "link": "https://eddielv.com/musings/appropriateness-with-busket/",
+      "detailPath": "articles/b275a7277a97beea6e577adf.json"
+    },
+    {
+      "id": "85c677563047c3b28ce0b13e",
+      "title": "你們都那麼安靜嗎？",
+      "summary": "這篇是〈 驢驢與齁嘻 〉的番外篇。 有次，學妹沒帶到鑰匙，問能不能來客廳坐著等待她室友回家開門。 那時我在唱歌，孩子的媽在做啥我沒印象，不過驢驢他們可沒閒下來，邊玩耍邊聊天。 就在學妹進來的一瞬間，所有的小動物都閉上嘴巴，深怕嚇到學妹。 「你們都那麼安靜嗎？」 「剛剛其實很熱鬧的，只是我怕驢驢說話妳會嚇到啦！」這句話當然是沒說出來xD 另一次，我哥說要來我中壢的住處，也是進來後非常寧靜，於是又聽到了經典的問句： 「你們都那麼安靜嗎？」 「如果當時有把驢驢他們介紹給更多朋友，那就好了。」寫完上篇文章後，一直有這樣得想法。",
+      "image": null,
+      "publishedAt": "2026-08-21T03:11:13Z",
+      "sourceId": "199cdf92fc46bfcd",
+      "sourceTitle": "Eddie Lv",
+      "link": "https://eddielv.com/musings/are-you-so-queit/",
+      "detailPath": "articles/85c677563047c3b28ce0b13e.json"
+    },
+    {
+      "id": "64e8914c9a46ded443d21475",
+      "title": "音控師 OPUS 八個月實測",
+      "summary": "前言 # 去年底（2025）發佈了 〈[yt-dlp 最佳聲音格式]（/musings/best-lossy-formet/）〉後，我儲存音樂都是使用 opus了，至於過去的各種 wav、m4a、mp3 我是沒打算轉檔。 至今已經八個月了，像我這種音控工作者，又會用 DAW 錄音的人來說，算是音檔重度使用者吧，來說說體驗。 優點 # 因為要存儲大量音樂，opus 的壓縮能力節省了非常多的空間，對硬碟真的很友善，而且音質並沒有因此下降。 macOS 上的缺點 # 如果用 Mac 電腦，內建的播放器、工作站都沒辦法播放 opus，必須用第三方軟體才能播放。 我常用的練歌用播放軟體 Anytune，似乎是直接用 Apple 內建的播放程式（iTunes 與 Quicktime）去延伸改進，所以我要用 Loop 練歌…",
+      "image": null,
+      "publishedAt": "2026-08-21T03:04:25Z",
+      "sourceId": "199cdf92fc46bfcd",
+      "sourceTitle": "Eddie Lv",
+      "link": "https://eddielv.com/musings/soundman-using-opus-8-month/",
+      "detailPath": "articles/64e8914c9a46ded443d21475.json"
+    },
+    {
+      "id": "38bf1f64ffa950f36e66daad",
+      "title": "在挺胸之前",
+      "summary": "應該不只我這樣，總是在坐累了之後，就變得駝背，整個人從頭到屁股呈現 C 字形。 幾次看物理治療之後，也更多觀察自己的所有動作習慣。 在駝背之前，骨盆通常會先變成後傾，這是因為坐久了，已經累了想放鬆而造成的代償。 骨盆後傾之後，為了平衡就容易變得駝背。為了緩解不舒服，會非常依賴椅背，還會喜歡翹椅子。 我大概是高中時期，養成翹椅子的習慣吧，嚴格說是為了緩解不舒服而養成的，並不是喜歡翹椅子。 所以，如果你也會有坐姿駝背成 C 字型的情況，嘗試看看把骨盆往前傾，回到中立位，會發現上半身很自然地就會跟著回正了。 如果骨盆正了還是很不舒服怎麼辦？ 答案很簡單：站起來。 回正就是正確的姿勢，不舒服就是坐太久了。",
+      "image": null,
+      "publishedAt": "2026-08-21T03:01:30Z",
+      "sourceId": "199cdf92fc46bfcd",
+      "sourceTitle": "Eddie Lv",
+      "link": "https://eddielv.com/musings/before-chest-out/",
+      "detailPath": "articles/38bf1f64ffa950f36e66daad.json"
+    },
+    {
+      "id": "de477bbf55040187338401ee",
+      "title": "切換 Pre—Fader 之前",
+      "summary": "分享很久以前自己還很菜時，犯的音響工程技術錯誤，給音控新手一個警惕，如果是 DAW 初學者也可以思考一下兩種設定的差異。 某次音響工作，在同一個空間中，切割為雙場地單控台，A 地點會有人用麥克風講話，B 地點則是播放輕輕的、小小聲的適合展覽的音樂。 兩邊場地沒有隔開，在 A 場地能聽到 B 場地的喇叭聲，在 B 場地也能聽到 A 場地的。 可能是溝通上的關係，一開始並不知道有兩邊要發出不同聲音的需求，所以音控台並沒有先設置好。 當下是設定 A 場地喇叭為主喇叭，B場地喇叭為 Bus 喇叭。而 B 場地的喇叭為 A 場地主喇叭的 Post-Fader。 簡單說，若要讓 B 場地有聲音，A 場地也必須要送聲音。 然而，若想要完全獨立切開兩路，變成音量能各自調整的話，就必須要切換成 Pre- Fader。 A 場地…",
+      "image": null,
+      "publishedAt": "2026-08-21T02:59:24Z",
+      "sourceId": "199cdf92fc46bfcd",
+      "sourceTitle": "Eddie Lv",
+      "link": "https://eddielv.com/musings/before-switching-pre-fader/",
+      "detailPath": "articles/de477bbf55040187338401ee.json"
+    },
+    {
+      "id": "0fb1d647449c31c5380c2961",
+      "title": "骂人最脏的那句，也是骂自己最狠的那句",
+      "summary": "前两天收到一条没头没尾、也没有办法联系对方的匿名私信： 我一开始很想骂你，写了一半，发现你骂我的都对，我骂你的 […] —— 感谢订阅 莫比乌斯 ，如你有任何疑问、观点交流，请前往 创作者频道 ，或 私信 联系。",
+      "image": null,
+      "publishedAt": "2026-08-21T02:28:14Z",
+      "sourceId": "416bdd1cdb343543",
+      "sourceTitle": "莫比烏斯",
+      "link": "https://mobius.blog/25460.html",
+      "detailPath": "articles/0fb1d647449c31c5380c2961.json"
+    },
+    {
       "id": "c4819c871812edf5e867bbce",
       "title": "2026 08 21 HackerNews",
       "summary": "2026-08-21 Hacker News Top Stories # 一个讽刺性网站倡导不要直接复制粘贴AI回复，而应加入自己的理解，用自然语言回应。 OpenRouter与Stripe合并，保持原有使命和产品，继续为开发者提供400多个AI模型和市场服务。 AliExpress网站通过静默WebAudio指纹识别技术破坏蓝牙多点连接功能，可通过屏蔽特定脚本解决。 Google违反GPLv2，将Android源码Git标签替换为Google Drive压缩包，并故意压缩历史记录，增加获取难度。 Go 1.27发布，带来泛型方法、性能优化、新标准库如encoding/json/v2等多项改进。 作者训练了1.25亿参数Transformer模型，实现设备端实时钢琴自动续写，并集成到免费应用RollTab中。…",
@@ -309,6 +452,50 @@
       "detailPath": "articles/d485b873ff7ba3bffc649860.json"
     },
     {
+      "id": "cdfef15d8880243a0912e676",
+      "title": "大模型语言擅长的是语义理解与表达，所以它可以接住无限的语义与理解。而 Harness…",
+      "summary": "大模型语言擅长的是语义理解与表达，所以它可以接住无限的语义与理解。而 Harness 类似于某个领域内的一个有限框架，这个框架指的是在该领域内会发生的场景，以及一系列的工作流操作。用无限的语义理解能力，加上有限的 highness 框架，会使这个智能体变得更符合这个领域的智能体…",
+      "image": null,
+      "publishedAt": "2026-08-19T14:12:36Z",
+      "sourceId": "e0d7bbaba7286f4d",
+      "sourceTitle": "Rolen's Blog",
+      "link": "https://rolen.wiki/tiny-happiness/35506/",
+      "detailPath": "articles/cdfef15d8880243a0912e676.json"
+    },
+    {
+      "id": "461a3e90ba900fabea7d5271",
+      "title": "今天中午洗了碗，看着碗被洗干净的感觉很好",
+      "summary": "今天中午洗了碗，看着碗被洗干净的感觉很好",
+      "image": null,
+      "publishedAt": "2026-08-19T13:51:44Z",
+      "sourceId": "e0d7bbaba7286f4d",
+      "sourceTitle": "Rolen's Blog",
+      "link": "https://rolen.wiki/tiny-happiness/35504/",
+      "detailPath": "articles/461a3e90ba900fabea7d5271.json"
+    },
+    {
+      "id": "46c35ba4e7a9cf92a42057d2",
+      "title": "早上我想到了对一件小事产生了抱怨的情绪，然后我立马想到了昨天写的那篇文章，然后我一下…",
+      "summary": "早上我想到了对一件小事产生了抱怨的情绪，然后我立马想到了昨天写的那篇文章，然后我一下子就舒服了起来，马上转念，之后也出现了几次这样的小瞬间，感觉有种非常清晰的转念，人一下子轻松起来，也没有陷在那个抱怨的场景里，真好",
+      "image": null,
+      "publishedAt": "2026-08-19T13:47:06Z",
+      "sourceId": "e0d7bbaba7286f4d",
+      "sourceTitle": "Rolen's Blog",
+      "link": "https://rolen.wiki/tiny-happiness/35502/",
+      "detailPath": "articles/46c35ba4e7a9cf92a42057d2.json"
+    },
+    {
+      "id": "64f33a9768527a8310f156c9",
+      "title": "早上驾车行驶在高速路上的时候，经过了一片绿地。那片绿地很像欧洲的乡村草原田野，那种感…",
+      "summary": "早上驾车行驶在高速路上的时候，经过了一片绿地。那片绿地很像欧洲的乡村草原田野，那种感觉一下子让记忆回到了去年 9 月份欧洲的自驾体验中。",
+      "image": null,
+      "publishedAt": "2026-08-19T13:30:49Z",
+      "sourceId": "e0d7bbaba7286f4d",
+      "sourceTitle": "Rolen's Blog",
+      "link": "https://rolen.wiki/tiny-happiness/35500/",
+      "detailPath": "articles/64f33a9768527a8310f156c9.json"
+    },
+    {
       "id": "288265c488b0bb8d00051897",
       "title": "刪 IG 成績會變好嗎？",
       "summary": "前幾天上完課後，學生走之前突然問：「刪 IG 成績會變好嗎？」她知道我的手機沒有 IG App 才問的。 我的回覆很簡單：「如果妳是為了看妳朋友發生什麼，那可以用 IG，但如果是為了看短影音，建議妳早點刪了吧！那會讓妳浪費很多時間的！」 「我只會看五、六個朋友的限動而已！」 成年人都會無法控制自己，無意識地打開 IG 且沒思考地滑動；更別提未成年人的前額葉還沒發育，沒有理性思考與衝動抑制能力。 回到問題，如果不滑短影音的時間，沒有拿來唸書，成績應該還是不會進步，重點是有沒有能力把注意力放到書上。 如果只看五、六個朋友，那把整個朋友小圈圈都拉來寫 Blog 好像也不錯，不一定要用 IG 啊！ 不過，我只是個吉他老師，還是不要說太多好了，不然會變男言之癮，我不希望學生把我想成像是學校或補習班那樣有權威性的老師。",
@@ -472,193 +659,6 @@
       "sourceTitle": "Xinsl's Blog",
       "link": "https://blog.xinsl.xin/posts/oneplus13-experience/",
       "detailPath": "articles/ed58e5b43fdf7a7fae112ee3.json"
-    },
-    {
-      "id": "f8485dc47a8ef185dcdb7823",
-      "title": "追忆：功夫兔与菜包狗（非剧情）",
-      "summary": "那么，时间倒回十几年前，在此之前我还有一段不属于任何时期的孤立记忆，在玩过奥比岛和逃出梦中别墅后不久，我了解到 … 继续阅读 追忆：功夫兔与菜包狗（非剧情） →",
-      "image": "https://img8.cache.hxsd.com/dt/2010/01/05/051K3321355.jpg",
-      "publishedAt": "2026-08-18T16:28:06Z",
-      "sourceId": "d29b4f2186bb32e1",
-      "sourceTitle": "景の域",
-      "link": "https://v1sta.xyz/life/kung-fu-bunny-rewind-memories/",
-      "detailPath": "articles/f8485dc47a8ef185dcdb7823.json"
-    },
-    {
-      "id": "7708eb2448c6054cce8772d8",
-      "title": "有些事情没有答案，只有选择",
-      "summary": "选择，可能未必都需要经过计算",
-      "image": "https://bear-images.sfo2.cdn.digitaloceanspaces.com/sol/img_2725.webp",
-      "publishedAt": "2026-08-18T14:36:15Z",
-      "sourceId": "05ada84875558017",
-      "sourceTitle": "So!azy",
-      "link": "https://blog.solazy.me/20260817/",
-      "detailPath": "articles/7708eb2448c6054cce8772d8.json"
-    },
-    {
-      "id": "954c02675be74b7f7d6baf4d",
-      "title": "不该露怯的人",
-      "summary": "今天想聊聊「露怯」这个词",
-      "image": "https://bear-images.sfo2.cdn.digitaloceanspaces.com/sol/img_2724.webp",
-      "publishedAt": "2026-08-18T14:28:56Z",
-      "sourceId": "05ada84875558017",
-      "sourceTitle": "So!azy",
-      "link": "https://blog.solazy.me/20260818/",
-      "detailPath": "articles/954c02675be74b7f7d6baf4d.json"
-    },
-    {
-      "id": "5f07145651698e4c80da8fdd",
-      "title": "再谈牛来",
-      "summary": "最近真是被牛来的梗刷到满屏，哪怕我这种足不出门的老年人也得甘拜下风了。确实搞笑，仿如有看豌豆笑传的荒诞感。但它 … 继续阅读 再谈牛来 →",
-      "image": "https://v1sta.xyz/wp-content/uploads/2026/03/V1sta-Orb-Output512-2.png",
-      "publishedAt": "2026-08-18T14:12:01Z",
-      "sourceId": "d29b4f2186bb32e1",
-      "sourceTitle": "景の域",
-      "link": "https://v1sta.xyz/think/%e5%86%8d%e8%b0%88%e7%89%9b%e6%9d%a5/",
-      "detailPath": "articles/5f07145651698e4c80da8fdd.json"
-    },
-    {
-      "id": "0eaaeeae6f51db26c687af88",
-      "title": "兔子洞是一个圈",
-      "summary": "兔子洞是一个圈，总能回到某一个根据点。 在寻找热铁盒的文章的时候，发现了一些其他博主的评论。嗯……探索了一下， … 继续阅读 兔子洞是一个圈 →",
-      "image": "https://v1sta.xyz/wp-content/uploads/2026/03/V1sta-Orb-Output512-2.png",
-      "publishedAt": "2026-08-18T13:30:52Z",
-      "sourceId": "d29b4f2186bb32e1",
-      "sourceTitle": "景の域",
-      "link": "https://v1sta.xyz/think/%e5%85%94%e5%ad%90%e6%b4%9e%e6%98%af%e4%b8%80%e4%b8%aa%e5%9c%88/",
-      "detailPath": "articles/0eaaeeae6f51db26c687af88.json"
-    },
-    {
-      "id": "424a2dbb5a11f989ad2c785e",
-      "title": "閱星瞳 x4",
-      "summary": "看了皮皮的閱星瞳 x4 之後，徹底的燒到我了，這完全就是我在尋找的產品呀！我的需求就是完全斷網使用，不下載任何 APP 與連上任何商城，只要最純粹的閱讀。",
-      "image": "https://shuojen.com/assets/images/001-923daf9cc2b9058093fa1918e0d628a2.webp",
-      "publishedAt": "2026-08-18T13:28:15Z",
-      "sourceId": "19b15d378a85c1f7",
-      "sourceTitle": "Shuo-jen Blog",
-      "link": "https://shuojen.com/blog/2026/08/18/x4",
-      "detailPath": "articles/424a2dbb5a11f989ad2c785e.json"
-    },
-    {
-      "id": "89b3ac2b95ffcd835e477c80",
-      "title": "Hugo 的模板系統更新",
-      "summary": "有使用 Hugo 來生成（靜態）網站的人可能有注意到：從版本 0.146.0 開始，Hugo 對他們的 template system（模板系統）進行了 大改動 ，這也連帶影響到了其網頁生成的機制，以及更重要的： 網站專案原始檔案的命名系統與資料夾層次結構 。 有很多出現在 Hugo 官方的主題列表網頁 的主題，由於原始開發人員久未更新其專案，或是沒有注意到這個大改動，所以導致它們的模板系統仍然是使用舊版，進而使得使用最新版本的 Hugo 生成網頁的過程中，出現大大小小的詭異 bug。 不幸的是，我 新改版的音樂作品集網站 所使用的主題恰恰就是沒有更新到模板系統，所以我現在正在與那些奇怪的 bug 搏鬥中⋯⋯ 一小時後的更新：把 bug 修好了，耶～",
-      "image": null,
-      "publishedAt": "2026-08-18T08:38:00Z",
-      "sourceId": "a93d4f2e98fafcbe",
-      "sourceTitle": "All posts | 所有貼文 on ttheng's microblog. | 侃侃而隨想極短文。",
-      "link": "https://microblog.ttheng.com/hugo-template-system-overhaul/",
-      "detailPath": "articles/89b3ac2b95ffcd835e477c80.json"
-    },
-    {
-      "id": "c22af615db9c571d05e4556e",
-      "title": "如何优雅地跳出抱怨的循环",
-      "summary": "中午的时候大概听到了这样一个分享，大意是： 当你在抱怨别人什么的时候，其实你抱怨的那个地方是你的优点。 比如说 …",
-      "image": null,
-      "publishedAt": "2026-08-18T07:48:33Z",
-      "sourceId": "e0d7bbaba7286f4d",
-      "sourceTitle": "Rolen's Blog",
-      "link": "https://rolen.wiki/how-to-gracefully-step-out-of-the-blame-frame/",
-      "detailPath": "articles/c22af615db9c571d05e4556e.json"
-    },
-    {
-      "id": "6f524846f220a57569ca4e35",
-      "title": "像說話的饒舌歌",
-      "summary": "前言： 一般聽到別人形容一首饒舌歌像在說話，我覺得通常有兩種解釋。一種是說這首歌的flow聽起來有點呆板，像在鼠來寶。另一種則是他的flow是有設計過的，就像是在模仿說話的感覺。今天提到的作品我覺得比較偏後者。 免責聲明： 以下列舉的歌曲，我沒有採譜，所以這不是專業的音樂分析。另外我沒附上歌詞片段，是因為我覺得這幾首歌對我來說，除了歌詞外，它們的歌曲結構和flow的藝術價值也是同等重要的，所以比較建議直接去聽歌曲的本身。 正文： 1. 法老-採訪 這首歌三段verse是在模仿三段採訪，呈現三種不同嘻哈聽眾的樣貌，聽完整首歌，就好像看了一部紀錄片。最後結尾的那句真的很有戲。我覺得這首歌的結構很有趣，只可惜這樣的作品比較難面向大眾。 2. 法老-親密愛人 這首歌是在模擬寫信，歌詞的敘事者為一位老爺爺，據說是歌手（…",
-      "image": null,
-      "publishedAt": "2026-08-18T05:20:18Z",
-      "sourceId": "9bbc7d640e2bc143",
-      "sourceTitle": "RayrrrrrR",
-      "link": "https://rayrrrrrrr.bearblog.dev/341/",
-      "detailPath": "articles/6f524846f220a57569ca4e35.json"
-    },
-    {
-      "id": "b28f793866b815fc0f04611e",
-      "title": "帥熊阿席達卡",
-      "summary": "既然昨天提到了魔法公主，帥熊就只好當一下宮崎駿系列曾經的最帥男主角「阿席達卡」。但是很偷懶，只給了他阿席達卡的坐騎，沒給他換裝。 ヤックル（亞克路） 就先聊聊男主角的坐騎好了。是一隻類似羚羊的動物，在一些資料中顯示那是宮崎駿老師虛構的物種，而且我大部分看到都是這樣說的： 「アカシシ」と呼ばれる大カモシカ。アカシシは現代では絶滅したという設定の架空の動物 中文的意思應該是：一種稱之為「アカシシ」的「大カモシカ」。設定上「アカシシ」是在現代已經滅絕了的架空物種。 有關「シシ」與「カモシカ」的翻譯因為一些習慣的翻譯稱呼與分類上的問題，我覺得要解釋起來有點複雜就算了，其實也沒有搞得很懂。去查了一下沒有看到這個物種真實存在然後滅絕了的資料。所以這段是說在那個架空的世界的現今滅絕了，故事發生在那個世界的古代。 覺得這個設…",
-      "image": "https://raw.githubusercontent.com/yangbearblog/images/main/kumaashitaka.gif",
-      "publishedAt": "2026-08-18T05:16:50Z",
-      "sourceId": "13e0488e6596de1c",
-      "sourceTitle": "YangBear'Blog ᓚᘏᗢ",
-      "link": "https://yangbear.bearblog.dev/kumaashitaka/",
-      "detailPath": "articles/b28f793866b815fc0f04611e.json"
-    },
-    {
-      "id": "d541c3eaa4b2a99827a7e350",
-      "title": "改版了我的音樂作品集網站",
-      "summary": "花了一整天的時間，終於完成了我的 音樂作品集網站（英文） 的版面更新。 舊版面 目前新版面 原本我是使用 Hugo Split 主題的，但後來覺得該主題的內文顏色不夠顯眼、最上方的名字以及主要連結文字也有些太小，因此決定改用設計風格類似的 Hugo Story ，並且按照我自身的需求進行（相對大程度）的客製化修改。 由於 Hugo Story 主題本身使用純 HTML 的比例比 Markdown 還高，再加上它原本是作爲 one-page theme（只有一個網頁的「名片式」主題）使用的，但我想要加入其他的網頁，所以我在使用 Hugo（或是說其基底：程式語言 Go）本身的語法作修改的方面下了不少工夫。 除了修改了 自介 以及 作品列表 頁面的一些文字之外，我也將原本嵌入 YouTube 影片的 演奏影片頁面…",
-      "image": "https://microblog.ttheng.com/blog/img213.jpg",
-      "publishedAt": "2026-08-18T03:42:00Z",
-      "sourceId": "a93d4f2e98fafcbe",
-      "sourceTitle": "All posts | 所有貼文 on ttheng's microblog. | 侃侃而隨想極短文。",
-      "link": "https://microblog.ttheng.com/updated-my-music-site/",
-      "detailPath": "articles/d541c3eaa4b2a99827a7e350.json"
-    },
-    {
-      "id": "65cb3a2d7aba0e1c4f794431",
-      "title": "人生第一次：站着干活",
-      "summary": "此时此刻，我的电脑桌面距离地面 1.1 米，而我正站着打下这些字。 这一天我等了很久，但之前始终因缘无法具足。我知道站着打字对肌肉好，对眼睛好，对颈椎好，也知道很容易实现，可以选择升降桌或者桌面升降台。但是事情就是这样的，人对不正确的事情总是争分夺秒，为了那一点点做贼的快意。正确的事情却一拖再拖，随随便便就是几年过去，还在继续说「等一等，再看看」。 那么今天又有什么不同吗？可能是我内心的洁白天使终于赢了赤红恶魔一次，大早上七点半起来，一个念头突然蹦将出来：不行，不等了，就今天，今天就要站着写一回。没有什么道理，人的心念总是飘来荡去，做出种种随机运动，这一次随机到了站着干活而已。 在升起桌子之前，我以为需要有一段时间去适应。没有想到，从坐姿切换到站姿如此平滑顺畅，没有任何需要重新学习的地方。尤其是我长期早起打字…",
-      "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjbVqzuLL7PVXLGMuNoMJbyP6D17JQIVqg2_6HpOKWmgiM_CLVPXNyFIijS6TSnPjGSTEnBegegtNPwsk4pydaQdApC7sJDAJM-ImavOo8EjUobL0zbcTmfRTN5cYrh7bUdhEj2aWaWc_FawuHNytu64H3aIrZfpO8fcXWNZtY3iU1vHi6m9lWQVfjTWJY/s72-w427-h572-c/0_3%20-%202026-08-18T100440.392-gigapixel-high%20fidelity%20v3-1x.jpeg",
-      "publishedAt": "2026-08-18T03:08:44Z",
-      "sourceId": "095c6fbac5bbadfd",
-      "sourceTitle": "槽边往事",
-      "link": "https://www.hecaitou.com/2026/08/first-time-ever-standing-on-the-job.html",
-      "detailPath": "articles/65cb3a2d7aba0e1c4f794431.json"
-    },
-    {
-      "id": "e494fa0a6da459dbe48e5b66",
-      "title": "门缝",
-      "summary": "夏天的咖啡厅，露台门被打开了一条门缝，是因为上一个进入的人并没有完整闭合好玻璃门，于是这个门缝开始往室内涌进大 […] —— 感谢订阅 莫比乌斯 ，如你有任何疑问、观点交流，请前往 创作者频道 ，或 私信 联系。",
-      "image": null,
-      "publishedAt": "2026-08-18T01:30:00Z",
-      "sourceId": "416bdd1cdb343543",
-      "sourceTitle": "莫比烏斯",
-      "link": "https://mobius.blog/25423.html",
-      "detailPath": "articles/e494fa0a6da459dbe48e5b66.json"
-    },
-    {
-      "id": "245ba68a466811d7ef0e2e17",
-      "title": "全部都是錯字",
-      "summary": "如果一篇文章全部都是錯字，還可以看得懂嗎？",
-      "image": null,
-      "publishedAt": "2026-08-18T00:00:00Z",
-      "sourceId": "7f36c3da1e6b5c71",
-      "sourceTitle": "Wiwi.Blog Blog",
-      "link": "https://wiwi.blog/blog/wrong-character",
-      "detailPath": "articles/245ba68a466811d7ef0e2e17.json"
-    },
-    {
-      "id": "b21e85674da327e41292652a",
-      "title": "2026 08 18 HackerNews",
-      "summary": "2026-08-18 Hacker News Top Stories # Anthropic 对 Claude 进行语义水印处理以符合欧盟法规，但作者批评这种技术牺牲文本精确性，且存在隐私泄露风险，通过低概率统计特征嵌入来源标记，但易被小编辑破坏。 Qwen 3.8 27B 模型默认极高推理等级导致简单任务过度消耗资源，降低等级后能力出色，但家用设备运行17GB文件已成可能，凸显消费级硬件进步。 GitHub 在2026年8月17日发生影响API、Actions、Git操作等多项服务的事故，持续约7小时，因组件问题导致间歇性认证失败。 一位第三世界工程师反驳对RISC-V的批评，指出其低成本特性使偏远地区学生和开发者能真正拥有硬件，并证明它能覆盖从极低端到高端的全范围。 DuckDB v2.0 预览版发布，代…",
-      "image": null,
-      "publishedAt": "2026-08-17T23:43:33Z",
-      "sourceId": "2777663b85d87309",
-      "sourceTitle": "Cns on SuperTechFans",
-      "link": "https://supertechfans.com/cn/post/2026-08-18-HackerNews/",
-      "detailPath": "articles/b21e85674da327e41292652a.json"
-    },
-    {
-      "id": "2cd3dfca464c2454b175cc1c",
-      "title": "打工记（六）",
-      "summary": "按照顺序要写 Company E 了，和之前的客户们有比较大的差异，是一家投资机构。到这一家打工时，签订的合同里保密条款太多了，五页纸的合同里只有半页是价钱和付款周期，剩下四页半全是保密条款。概括来说就是这也不能说那也不能说，其实我也很难理解除了具体投资外别的东西到底有什么保密价值，工作内容仍然是平平无奇的码农工作，但合同都这么签了，我也只能描绘一下不能定位到具体公司的一些内容。",
-      "image": null,
-      "publishedAt": "2026-08-17T19:57:02Z",
-      "sourceId": "88a1fc290dd0b8a7",
-      "sourceTitle": "沉默之沙",
-      "link": "https://yukieyun.net/roam/gravedigger-of-capitalism-06/",
-      "detailPath": "articles/2cd3dfca464c2454b175cc1c.json"
-    },
-    {
-      "id": "2f816c0f3f4e1ae85428cadb",
-      "title": "飞牛与热铁盒",
-      "summary": "前脚牛来电影的热度还没过去，忽然发现了一个据说被飞牛视为竞争对手的视频，没点开看以为居然是什么新的NAS系统吗 … 继续阅读 飞牛与热铁盒 →",
-      "image": "https://v1sta.xyz/wp-content/uploads/2026/08/image-3-1024x690.png",
-      "publishedAt": "2026-08-17T19:46:53Z",
-      "sourceId": "d29b4f2186bb32e1",
-      "sourceTitle": "景の域",
-      "link": "https://v1sta.xyz/think/%e9%a3%9e%e7%89%9b%e4%b8%8e%e7%83%ad%e9%93%81%e7%9b%92/",
-      "detailPath": "articles/2f816c0f3f4e1ae85428cadb.json"
     }
   ]
 }

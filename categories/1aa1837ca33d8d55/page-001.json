@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "4f7c4b2ecf08c24dfa68ebd0",
+      "title": "SmartPerfetto 2026.07.18-08.21 五周更新复盘：从 v1.2.0 到 v1.7.0",
+      "summary": "上一篇更新停在 2026 年 7 月 17 日的 v1.1.1。当时 SmartPerfetto 已经有双 Trace 工作台、Quick Mode、私有分析上下文、统一 Agent runtime，以及 Camera、Heap、GPU 等专项分析能力。 从 7 月 18 日到 8 月 21 日，仓库又向前走了五周，版本来到 v1.7.0。这一轮继续增加功能，也把更多精力放在知识来源、分发质量、权限隔离、结果完整性和可回滚改进上。 SmartPerfetto 正在从“能完成一次分析”走向“能在更多环境里稳定、可追溯地完成分析”。 本文以公开发布的 v1.7.0 代码为准，回顾 v1.1.1 之后加入的主要能力。 项目与上篇文章： SmartPerfetto： https://github.com/Gracke…",
+      "image": null,
+      "publishedAt": "2026-08-21T04:00:00Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2026/08/21/SmartPerfetto-Five-Week-Update/",
+      "detailPath": "articles/4f7c4b2ecf08c24dfa68ebd0.json"
+    },
+    {
       "id": "555c13c628a10367f841113d",
       "title": "SmartPerfetto 2026.06.04-07.17 六周更新复盘：从 v1.0.28 到 v1.1.1",
       "summary": "本文复盘 上一篇三周更新 （2026-06-04，v1.0.28）之后，到 2026-07-17（v1.1.1）为止 SmartPerfetto 的全部主要改动。看完这篇文章，可以知道这六周每个功能解决什么问题、边界在哪里，以及当前版本的完整功能全景。项目地址： github.com/Gracker/SmartPerfetto 。",
@@ -648,17 +659,6 @@
       "sourceTitle": "Android Performance",
       "link": "https://androidperformance.com/2019/10/24/Android-Background-Animation/",
       "detailPath": "articles/a7861fad96495ae4c7579601.json"
-    },
-    {
-      "id": "877f8f9be20f0a0e191b69ea",
-      "title": "Android 基于 Choreographer 的渲染机制详解",
-      "summary": "本文介绍了 App 开发者不经常接触到但是在 Android Framework 渲染链路中非常重要的一个类 Choreographer。包括 Choreographer 的引入背景、Choreographer 的简介、部分源码解析、Choreographer 与 MessageQueue、Choreographer 和 APM，以及手机厂商基于 Choreographer 的一些优化思路 Choreographer 的引入，主要是配合 Vsync ，给上层 App 的渲染提供一个稳定的 Message 处理的时机，也就是 Vsync 到来的时候 ，系统通过对 Vsync 信号周期的调整，来控制每一帧绘制操作的时机. 目前大部分手机都是 60Hz 的刷新率，也就是 16.6ms 刷新一次，系统为了配合屏幕的刷…",
-      "image": null,
-      "publishedAt": "2019-10-22T10:55:11Z",
-      "sourceId": "1aa1837ca33d8d55",
-      "sourceTitle": "Android Performance",
-      "link": "https://androidperformance.com/2019/10/22/Android-Choreographer/",
-      "detailPath": "articles/877f8f9be20f0a0e191b69ea.json"
     }
   ]
 }

@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "0202e44741bd0a3e32ce0200",
+      "title": "Dotr: 一个简单的配置备份工具",
+      "summary": "这周我的 Mac 突然无法开机了，睡午觉之前我没插电让它继续跑程序，回来后就发现已经黑屏，无论如何充电都无法开机。用了 14 年 Mac 第一次出现这种情况，麻烦的是我暑假在湖南老家待着，发现整个地级市都没办法修复 Mac，无奈寄去长沙的苹果售后修理。 但这两天我还有些工作需要处理，所以就在家人的 PC 机上开始重建我的工作流程和工具。这时候才想起，我应该是有份比较新的配置备份。然后直接从 Github 的私有库上拉取下来，交给 AI 帮我恢复配置，一切都方便多了。 完成这个备份的小工具是 dotr ，几个月之前我 vibe coding 的。 那次的契机也是自己一个命令行失误，导致 .zshrc 完全覆盖了。我最早的备份就是一个 Git 仓库，把 .zshrc 、 .gitconfig 、编辑器配置这些文件…",
+      "image": null,
+      "publishedAt": "2026-08-21T12:46:23Z",
+      "sourceId": "82c4bcb6bba028cf",
+      "sourceTitle": "程序员的喵",
+      "link": "http://catcoding.me/p/dotr-intro/",
+      "detailPath": "articles/0202e44741bd0a3e32ce0200.json"
+    },
+    {
       "id": "97ed8c0963f2563d6e5e99a2",
       "title": "Obr: a Web UI for My Obsidian Vault",
       "summary": "A few years ago I built a tiny personal tool called Obweb . Its purpose was dead simple: open a browser, type a quick thought, and append it to my Obsidian notes. Then one day the VPS was shutdown for some reasons, I need to redeploy it on another VPS and it involve some extra boring stuff, such as rebind a sub-domain and configing on VPS. I’m too lazy for…",
@@ -208,17 +219,6 @@
       "sourceTitle": "程序员的喵",
       "link": "http://catcoding.me/p/ckb-txpool-refactor/",
       "detailPath": "articles/550cd72c31b35cca2f06117f.json"
-    },
-    {
-      "id": "eb5678950fbd5de86a38333e",
-      "title": "xz-backdoor 观感",
-      "summary": "写写最近一周的大瓜 xz-backdoor，该事件可能成为开源供应链安全的一个分水岭，从技术角度看，这里面的社工和混淆也是精彩。 简单介绍一下背景，xz 是一个开源的无损压缩工具，在出事之前可能很少有人注意到这个压缩库使用如此之广，几乎任何一个 Unix-Like 的操作系统里面都有 xz-utils。在两年多的时间里，一个名为 Jia Tan 的程序员勤奋而高效地给 xz 项目做贡献，最终获得了该项目的直接提交权和维护权。之后他在 libzma 中加入了一个非常隐蔽的后门，该后门可以让攻击者在 SSH 会话开始时发送隐藏命令，使攻击者能够跳过鉴权远程执行命令。 Timeline of the xz open source attack 总结了该事件的主要时间点，这里我挑一些关键节点： 潜伏 2005 ~ 2…",
-      "image": "http://catcoding.me/images/ob_pasted-image-20240403114716.png",
-      "publishedAt": "2024-04-04T18:04:33Z",
-      "sourceId": "82c4bcb6bba028cf",
-      "sourceTitle": "程序员的喵",
-      "link": "http://catcoding.me/p/xz-backdoor/",
-      "detailPath": "articles/eb5678950fbd5de86a38333e.json"
     }
   ]
 }
