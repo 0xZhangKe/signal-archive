@@ -1,6 +1,28 @@
 {
   "items": [
     {
+      "id": "91db7040988e08d91a541e8a",
+      "title": "2025 年初的 AI 發展已經白熱化，應該有很多東西會開始消失了。",
+      "summary": "近日，社群上充斥著 AI 製作的飛天小女警與吉卜力風格的圖片，可以說是全民運動了，連平時沒有在使用 AI 的朋友們都在玩了。 印象中，上一次在網路上造成現象級的全民運動，應該是 Facebook 推出開心農場、開心水族箱的時候了吧！那時候突然連一些長輩都開始接觸，隨後 MSN、即時通、blog 都開始式微，Email 如果沒有註冊各大網站的功能，可能也早已被取代。 而蘋果 M 晶片電腦，如果有記憶體有 24 GB 以上，本地跑一些 7B 左右的模型也不是問題，Eddie 也已經用好一陣子了，但還是網路上的各種 AI 比較快、比較聰明，本地要順跑記憶體可能要至少 32 GB 以上比較保險。 模型的開發、個人電腦的硬體也支援了，2025 很可能會是 AI 真正的「元年」，也許我們正在經歷歷史上某種重大的轉變（就像…",
+      "image": "https://eddielv.com/musings/jipuli/jipuli.jpg",
+      "publishedAt": "2025-03-31T11:02:21Z",
+      "sourceId": "199cdf92fc46bfcd",
+      "sourceTitle": "Eddie Lv",
+      "link": "https://eddielv.com/musings/jipuli/",
+      "detailPath": "articles/91db7040988e08d91a541e8a.json"
+    },
+    {
+      "id": "262023be1691ef37fe5ea630",
+      "title": "Zepro Run 半馬",
+      "summary": "昨天，我跟檸檬卷和好朋友 JR Lee 一起參加了在新北市浮洲橋舉辦的 Zepro Run 半馬。我們三個都是人生第一次參賽就挑戰 21 公里的菜鳥。",
+      "image": "https://wiwi.blog/assets/images/r-before-b6dff044a8b4fd8d4cb5c24d7116314e.jpg",
+      "publishedAt": "2025-03-31T09:00:00Z",
+      "sourceId": "7f36c3da1e6b5c71",
+      "sourceTitle": "Wiwi.Blog Blog",
+      "link": "https://wiwi.blog/blog/zepro-run",
+      "detailPath": "articles/262023be1691ef37fe5ea630.json"
+    },
+    {
       "id": "d06e0d6033d3885ebe84977c",
       "title": "惊鸿一瞥 v5.0.0.135：鸿蒙微信现状",
       "summary": "by 新世界的大门",
@@ -313,7 +335,7 @@
       "title": "Future 的大小对性能的影响",
       "summary": "在 Rust 异步编程中，有一种观点认为： Future 的大小显著影响性能 。你是否怀疑过这个说法的真实性？如果是真的，这种性能差异的根源又是什么？今天，我翻阅了一些源码，并编写实验代码来一探究竟。 Future 的大小如何计算？ 为了验证“Future 大小影响性能”这一说法是否成立，我们先从一些简单代码入手。首要任务是弄清楚一个 Future 的大小是如何确定的。毕竟，在编译器眼里，Future 只是一个 trait： pub trait Future { type Output ; fn poll ( self : Pin < & mut Self > , cx : & mut Context < ' _ > ) -> Poll < Self :: Output > ; } 那么，其大小取决于实现这个…",
       "image": null,
-      "publishedAt": "2025-03-24T10:21:03Z",
+      "publishedAt": "2025-03-24T02:21:03Z",
       "sourceId": "82c4bcb6bba028cf",
       "sourceTitle": "程序员的喵",
       "link": "http://catcoding.me/p/future-size-perf/",
@@ -529,17 +551,6 @@
       "detailPath": "articles/47dd580ed24317bf017ee245.json"
     },
     {
-      "id": "9d6396241040b7f0b55bbcf3",
-      "title": "Fiber Network: 基于 CKB 实现的闪电网络",
-      "summary": "最近一年我在做 Fiber Network 这个新的开源项目，上个月底刚好 主网第一个版本发布 ： 这个项目的挑战还是挺大的，上主网只是一个新的开始。我在开发过程中学到了很多东西，这是我前段时间写的一篇关于 Fiber 的大致介绍。 Fiber 简介 Fiber 是基于 CKB 构建的闪电网络协议，旨在实现快速、安全且高效的链下支付解决方案。借鉴了比特币闪电网络的核心理念，Fiber 针对 CKB 的独特架构进行了深度优化，提供低延迟、高吞吐量的支付通道，适用于微支付和高频交易等场景。与传统的闪电网络不同，Fiber 拥有多项关键特性： 多资产支持 ：不再局限于单一币种，能够处理多种资产交易，为复杂的跨链金融应用铺平道路。 可编程性 ：基于 CKB 的图灵完备智能合约，支持更复杂的条件执行和业务逻辑，拓展了支…",
-      "image": "http://catcoding.me/images/ob_pasted-image-20250316084708.png",
-      "publishedAt": "2025-03-16T08:53:04Z",
-      "sourceId": "82c4bcb6bba028cf",
-      "sourceTitle": "程序员的喵",
-      "link": "http://catcoding.me/p/fiber-network-on-ckb/",
-      "detailPath": "articles/9d6396241040b7f0b55bbcf3.json"
-    },
-    {
       "id": "dd694a31a773746a515b46a5",
       "title": "从NPR到TED，再到启发星球：我的学习系统",
       "summary": "",
@@ -549,6 +560,17 @@
       "sourceTitle": "孙玲在美国",
       "link": "https://mp.weixin.qq.com/s/JdizJHbUd5dmNWTmQ1SYWA",
       "detailPath": "articles/dd694a31a773746a515b46a5.json"
+    },
+    {
+      "id": "9d6396241040b7f0b55bbcf3",
+      "title": "Fiber Network: 基于 CKB 实现的闪电网络",
+      "summary": "最近一年我在做 Fiber Network 这个新的开源项目，上个月底刚好 主网第一个版本发布 ： 这个项目的挑战还是挺大的，上主网只是一个新的开始。我在开发过程中学到了很多东西，这是我前段时间写的一篇关于 Fiber 的大致介绍。 Fiber 简介 Fiber 是基于 CKB 构建的闪电网络协议，旨在实现快速、安全且高效的链下支付解决方案。借鉴了比特币闪电网络的核心理念，Fiber 针对 CKB 的独特架构进行了深度优化，提供低延迟、高吞吐量的支付通道，适用于微支付和高频交易等场景。与传统的闪电网络不同，Fiber 拥有多项关键特性： 多资产支持 ：不再局限于单一币种，能够处理多种资产交易，为复杂的跨链金融应用铺平道路。 可编程性 ：基于 CKB 的图灵完备智能合约，支持更复杂的条件执行和业务逻辑，拓展了支…",
+      "image": "http://catcoding.me/images/ob_pasted-image-20250316084708.png",
+      "publishedAt": "2025-03-16T00:53:04Z",
+      "sourceId": "82c4bcb6bba028cf",
+      "sourceTitle": "程序员的喵",
+      "link": "http://catcoding.me/p/fiber-network-on-ckb/",
+      "detailPath": "articles/9d6396241040b7f0b55bbcf3.json"
     },
     {
       "id": "f46c8b9ae56b8fa855d5342f",
@@ -637,28 +659,6 @@
       "sourceTitle": "Wiwi.Blog Blog",
       "link": "https://wiwi.blog/blog/password-manager",
       "detailPath": "articles/6dbe2868cb92d6fcac40f18a.json"
-    },
-    {
-      "id": "acb80a41bed627b732d9629c",
-      "title": "政治，我，和注意力经济时代",
-      "summary": "在注意力经济和政治的时代，我的精力是我最宝贵的东西，它们可以消耗在阳光雨露大雪微风发呆读书嗑CP健身散步挣钱里，不会消耗在各种哗众取宠和审丑思维的辣鸡里，不会消耗在各种独裁者们放的每一个屁里。",
-      "image": null,
-      "publishedAt": "2025-03-13T00:07:18Z",
-      "sourceId": "88a1fc290dd0b8a7",
-      "sourceTitle": "沉默之沙",
-      "link": "https://yukieyun.net/nonsense/politics-me-and-attention-economy/",
-      "detailPath": "articles/acb80a41bed627b732d9629c.json"
-    },
-    {
-      "id": "65a8b204624c3dfe08b5394f",
-      "title": "去新竹",
-      "summary": "前天心血來潮，跟檸檬卷坐火車去新竹來個快閃遊。",
-      "image": "https://wiwi.blog/assets/images/hs-hippo-2f23c372e4d81b6bfc8077779777e2c1.jpg",
-      "publishedAt": "2025-03-13T00:00:00Z",
-      "sourceId": "7f36c3da1e6b5c71",
-      "sourceTitle": "Wiwi.Blog Blog",
-      "link": "https://wiwi.blog/blog/hsinchu-trip",
-      "detailPath": "articles/65a8b204624c3dfe08b5394f.json"
     }
   ]
 }

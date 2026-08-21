@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "3e91dbb87f03549680cfe502",
+      "title": "離職教會我的事",
+      "summary": "人生沒有後悔藥，每次離職都有很多事情可以學習，也會慢慢理解自己能夠發揮的優勢。但是在離職之前，你真的想清楚了嗎？我會以第一線開發者的身份分享一些血淋淋的案例，為未來的自己當作指南，也希望能夠幫助那些曾經迷惘是否要離職的人。",
+      "image": null,
+      "publishedAt": "2026-02-20T00:00:00Z",
+      "sourceId": "538caf01ac3ab305",
+      "sourceTitle": "愷開的部落格",
+      "link": "https://blog.kalan.dev/random/quit-quit-quit/",
+      "detailPath": "articles/3e91dbb87f03549680cfe502.json"
+    },
+    {
       "id": "2e4f74eacd6a4383791f6cf4",
       "title": "難道只有我將比特幣視為終極資產嗎？",
       "summary": "BlogBlog 同樂會： 只有我這樣嗎？（2026 二月） 免責聲明：文章內容僅為個人心得分享，不得做為投資決策依據。 如果你要擁有一項資產長達10年， 你會選擇什麼資產作為你勞力與時間付出的價值載體？ 一般人直覺想到的會是股票、黃金、土地或是房子。那如果時間延長到50年呢？可能跟剛剛的選項差不多。那如果我問的是100年呢？這聽起來有點不太實際，但是在不遙遠的未來，我們確實將會活到150歲，這時候讓你從年輕持有到老的資產將會是一個複雜的難題。 現在，我將會告訴你一個不朽的貨幣，這個貨幣極為特殊： 它比黃金更加堅硬且抗腐蝕，因為它本身不是一個實體。 它比股票更能證明勞動力的積累，想要獲得多少就只能不斷透過計算來證明。 它的總量是固定的，具有絕對稀缺性，西元2140年後就沒了。 它不屬於任何人、組織、政府、機構…",
@@ -573,17 +584,6 @@
       "detailPath": "articles/7082fb458ec5ce57ee24778e.json"
     },
     {
-      "id": "669c46d04b9c0d7de641d9c9",
-      "title": "macOS 奇怪的安全扫码机制",
-      "summary": "今天跑 Rust 编译器测试的时候又发现非常地慢，CPU 资源根本无法利用起来，我记得几年前碰到过这个问题，当时我写了篇 文章 分享出来，并发现很多人都有同样的困扰。 而我今天碰到的这个问题虽然现象一样，但解决方法又不同了。我不确定是 macOS 系统更新，亦或是我更新了 VS Code 造成的。 问题 复现脚本很简单，循环创建随机命名的 shell 脚本，然后对比首次和再次执行的耗时： # !/bin/bash rm - rf /tmp/speed_test mkdir - p /tmp/speed_test for i in { 1..10 } ; do FILENAME = $ ( openssl rand - hex 10 ) echo $' #!/bin/sh \\n echo Hello ' > \"…",
-      "image": null,
-      "publishedAt": "2026-02-12T16:55:52Z",
-      "sourceId": "82c4bcb6bba028cf",
-      "sourceTitle": "程序员的喵",
-      "link": "http://catcoding.me/p/apple-gatekeeper-scan/",
-      "detailPath": "articles/669c46d04b9c0d7de641d9c9.json"
-    },
-    {
       "id": "c4aa2ad8b980f66d46eb6a01",
       "title": "我不知道什麼是「沒用」",
       "summary": "「沒用」好像已經變成這個部落格的主題了。看看最近的幾篇文章：電腦？ 沒用 。蘋果？ 沒用 。汽車？ 沒用 。這很奇怪吧？畢竟一個看到什麼東西都說「沒用」的人，怎麼會做寫部落格這種完全沒用的事情呢？很明顯地，我應該是一個喜歡沒用的東西的人才對。所以問題應該出在，「沒用」到底是什麼意思？ 一般人說「沒用」，好像有兩種比較常見的狀況。第一種是質疑：「這很有趣，可是能賺錢嗎？」另外一種則是剛好相反：「這能賺錢，可是能讓我快樂嗎？」老實說，我一直覺得有這兩種想法的人都想太遠、要求太高了。大概是因為這樣，所以我才會覺得，按照這樣的標準，世界上根本就沒有什麼有用的東西啊。明明這些人自己喜歡的東西用同樣的標準檢視反而更沒用，他們卻整天想用「沒用」去拆別人的台。這未免太不公平了。 例如以下的經典橋段：老師總是對學生說：「要好好…",
@@ -593,6 +593,17 @@
       "sourceTitle": "我的部落格",
       "link": "https://e89295.com/blog/2026-02-12.html",
       "detailPath": "articles/c4aa2ad8b980f66d46eb6a01.json"
+    },
+    {
+      "id": "669c46d04b9c0d7de641d9c9",
+      "title": "macOS 奇怪的安全扫码机制",
+      "summary": "今天跑 Rust 编译器测试的时候又发现非常地慢，CPU 资源根本无法利用起来，我记得几年前碰到过这个问题，当时我写了篇 文章 分享出来，并发现很多人都有同样的困扰。 而我今天碰到的这个问题虽然现象一样，但解决方法又不同了。我不确定是 macOS 系统更新，亦或是我更新了 VS Code 造成的。 问题 复现脚本很简单，循环创建随机命名的 shell 脚本，然后对比首次和再次执行的耗时： # !/bin/bash rm - rf /tmp/speed_test mkdir - p /tmp/speed_test for i in { 1..10 } ; do FILENAME = $ ( openssl rand - hex 10 ) echo $' #!/bin/sh \\n echo Hello ' > \"…",
+      "image": null,
+      "publishedAt": "2026-02-12T08:55:52Z",
+      "sourceId": "82c4bcb6bba028cf",
+      "sourceTitle": "程序员的喵",
+      "link": "http://catcoding.me/p/apple-gatekeeper-scan/",
+      "detailPath": "articles/669c46d04b9c0d7de641d9c9.json"
     },
     {
       "id": "de0a271847b93e4cb990eeef",
@@ -639,26 +650,15 @@
       "detailPath": "articles/4d1af46646d3dbfc50e4364e.json"
     },
     {
-      "id": "0b31b87b3a01ee20d4ad0f1a",
-      "title": "日常锻炼的一些记录",
-      "summary": "我大概是去年 4 月左右开始跑步的。离上次的记录已过了半年。 最近坚持的还不错，每周可以保证至少 3 次跑步。现在的心肺能力明显好了很多。去年刚跑步时，每跑 5-10 分钟就需要步行几分钟缓缓，不然心率很容易超过 140 （我给自己定的心率上限）。现在差不多可以保持心率在 140 以下连续跑完 4 km 了。大约花费 30 分钟。这差不多是 8km/h 的平均速度，前半程会更快一点，后半程为了保持心率需要降一点速度。 我觉得另一方面的原因是在冬季，跑起来不那么热。现在会挑选中午有太阳的时候跑，晒晒太阳更舒适。跑完后也没特别累的感觉，只是在最后 10 分钟有一点点难受，希望快点结束。但每次还是坚持跑满 30 分钟。...",
+      "id": "40ec9b1c53338daee6b9cd49",
+      "title": "當生態遇上熱力學！沈聖峰團隊開發數學模型，精準估算全球山區暖化死角",
+      "summary": "全球暖化之下，山區生物與等溫線之間的你追我跑 The post 當生態遇上熱力學！沈聖峰團隊開發數學模型，精準估算全球山區暖化死角 appeared first on 研之有物 │ 串聯您與中央研究院的橋梁 .",
       "image": null,
-      "publishedAt": "2026-02-11T09:28:25Z",
-      "sourceId": "64ba70840e06d623",
-      "sourceTitle": "云风的 BLOG",
-      "link": "https://blog.codingnow.com/2026/02/physical_training.html",
-      "detailPath": "articles/0b31b87b3a01ee20d4ad0f1a.json"
-    },
-    {
-      "id": "b2f743218dc148efd6342baf",
-      "title": "99% 的生活",
-      "summary": "打開 Instagram，看見別人生活中的精彩時刻──國外的陽光和海灘、米其林餐廳的擺盤、重大的工作成就、慶生 party 的乾杯瞬間。",
-      "image": null,
-      "publishedAt": "2026-02-11T07:00:00Z",
-      "sourceId": "7f36c3da1e6b5c71",
-      "sourceTitle": "Wiwi.Blog Blog",
-      "link": "https://wiwi.blog/blog/99-percent-life",
-      "detailPath": "articles/b2f743218dc148efd6342baf.json"
+      "publishedAt": "2026-02-11T10:00:22Z",
+      "sourceId": "17d839f81a42816c",
+      "sourceTitle": "研之有物│串聯您與中央研究院的橋梁",
+      "link": "https://research.sinica.edu.tw/climate-velocities-global-mountain-regions-sheng-feng-shen/",
+      "detailPath": "articles/40ec9b1c53338daee6b9cd49.json"
     }
   ]
 }

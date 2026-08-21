@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "46d22386d4d6ededd02a17e0",
+      "title": "改變人生觀的一句話",
+      "summary": "這是我的「 BlogBlog 同樂會 - 2026 年 5 月 」的投稿文章。本月主題是「 改變人生觀的一句話 」，由 Eddie Lv 主持。如果你有自己的部落格，歡迎一起來參加！ 我的人生這一兩年發生了非常大的變化，發生了真的很多事情。去年我第一次看到下面這個句子，我就有種很怪的感覺。一直到十一月十二月那個時候我才突然想通，也終於明白這句話的意思。 人類其實只是在一個充滿水源的大石頭上活蹦亂跳的生物 我自己對這句話有著很深的感觸，我三月深刻的感受到，其實人類本質上看樹和石頭沒有差別。我們以為自己跟這些東西不同，但是其實不然。人類很奇怪，整個世界應該也只有人類會感覺到「我」這個東西的存在，而且很多人甚至無法理解什麼是「我」。 我們不知道為什麼發瘋地想要延長壽命，如果仔細想想，是「我」這個東西不想要消失。有一…",
+      "image": null,
+      "publishedAt": "2026-04-24T16:00:00Z",
+      "sourceId": "de9cbd8d045ab396",
+      "sourceTitle": "小麥的異想世界",
+      "link": "https://my-blog.worldofwheat.cc/blog/2026/04/life-changing-quote.html",
+      "detailPath": "articles/46d22386d4d6ededd02a17e0.json"
+    },
+    {
       "id": "8b46c9c5823da212f22a7a1b",
       "title": "在網站上放動圖的方式",
       "summary": "前言 # 在製作 吉他島嶼官網教學內容 的時候，有些內容不需要影片聲音，只需要動畫循環播放即可 ，結果發現轉轉成 GIF 畫質會下降、檔案變大好幾倍，因此才開始尋求解決方案。 原來這是因爲 GIF 只用了 256 種顏色，而且沒有做任何壓縮，因此才會降畫質又檔案肥大。 解決方案 # 把影片轉成無聲的影片檔案，再利用 HTML 設定自動循環播放即可。 ffmpeg # 以下指令的目的，是將原始影片轉換為適合網頁播放的無聲循環動畫影片： ffmpeg -i input.mov -an -c:v libx264 -preset slow -crf 23 -pix_fmt yuv420p -movflags +faststart output.mp4 -i input.mov 指定輸入影片檔案。 -an 移除音訊（A…",
@@ -89,17 +100,6 @@
       "detailPath": "articles/96c38e767bfdddb6957185c5.json"
     },
     {
-      "id": "408d3ae6d7e991044477ea79",
-      "title": "开发 Runnel 的一些记录",
-      "summary": "最近断断续续 Vibe Coding 写了一个小工具，叫 Runnel 。因为我之前用的两个机场都跪了 (虽然后来又逐渐恢复了)，于是萌生了自己写个工具来翻墙的想法，顺便把一些网络相关的东西重新摸一遍。 Runnel 有“小河流”的意思，我觉得还挺贴切：不是要做一个很宏大的网络基础设施，就是在本机和远端之间挖一条能用、能看、能调试的小通道。 先让 AI 快速撸了一个车 native-http 版本的，然后又加了多路复用的 native-mux 模式。后来又想到一个同事说他一直用自己写的代理工具叫做 daze ，所以立马让 AI 用 Rust 重写了一份跑了起来。 于是它现在支持几种模式： native-http 、 native-mux 、几个 daze 风格的模式，以及后来主要投入精力做的 wg 模式。 前…",
-      "image": null,
-      "publishedAt": "2026-04-23T19:15:24Z",
-      "sourceId": "82c4bcb6bba028cf",
-      "sourceTitle": "程序员的喵",
-      "link": "http://catcoding.me/p/runnel-dev-notes/",
-      "detailPath": "articles/408d3ae6d7e991044477ea79.json"
-    },
-    {
       "id": "7edfa607cc0f8b6e7c546e7d",
       "title": "我為什麼還在寫部落格（部落格問題挑戰）",
       "summary": "這篇是由廢文小天地發起的 部落格問題挑戰 這篇原本只是參加部落格活動的回答。 但寫著寫著，我發現，它其實記錄了我從踏入部落格世界以來，一路搬家、嘗試各種平台，最後決定留下來寫部落格的過程。 如果你是第一次來到這個網站，這篇大概就是最接近「部落格自我介紹」的一篇文章。 你當初為什麼開始寫部落格？ 圖片截圖自《歡迎來到實力至上主義的教室》 寫個部落格表情要這可怕嗎 XD 最早在 2008 年左右建立無名小站帳號吧？（應該是 2008 沒錯） 那時候是看哥哥姐姐都有，就辦了。 你使用什麼平台來管理你的部落格？為什麼選擇它？ 用 Hugo 產生網站，再用 ssh 把檔案傳到 Linode 伺服器。 影片則是上傳到 wasabi 空間，前陣子發現可以直接把 hugo 也上傳到 wasabi，或許就可以省一筆伺服器的費用…",
@@ -120,6 +120,17 @@
       "sourceTitle": "太隐",
       "link": "https://wangyurui.com/posts/jian-ai-de-si-jie-ae300885",
       "detailPath": "articles/0d647d72f1c9022db1ede546.json"
+    },
+    {
+      "id": "408d3ae6d7e991044477ea79",
+      "title": "开发 Runnel 的一些记录",
+      "summary": "最近断断续续 Vibe Coding 写了一个小工具，叫 Runnel 。因为我之前用的两个机场都跪了 (虽然后来又逐渐恢复了)，于是萌生了自己写个工具来翻墙的想法，顺便把一些网络相关的东西重新摸一遍。 Runnel 有“小河流”的意思，我觉得还挺贴切：不是要做一个很宏大的网络基础设施，就是在本机和远端之间挖一条能用、能看、能调试的小通道。 先让 AI 快速撸了一个车 native-http 版本的，然后又加了多路复用的 native-mux 模式。后来又想到一个同事说他一直用自己写的代理工具叫做 daze ，所以立马让 AI 用 Rust 重写了一份跑了起来。 于是它现在支持几种模式： native-http 、 native-mux 、几个 daze 风格的模式，以及后来主要投入精力做的 wg 模式。 前…",
+      "image": null,
+      "publishedAt": "2026-04-23T11:15:24Z",
+      "sourceId": "82c4bcb6bba028cf",
+      "sourceTitle": "程序员的喵",
+      "link": "http://catcoding.me/p/runnel-dev-notes/",
+      "detailPath": "articles/408d3ae6d7e991044477ea79.json"
     },
     {
       "id": "e0080beafbe9346a8980eb38",
@@ -648,17 +659,6 @@
       "sourceTitle": "折腾人生",
       "link": "https://z.arlmy.me/posts/BBBPandINSW/INSW-jet/INSW_330/",
       "detailPath": "articles/043293ba9b004ab9c42fbb1f.json"
-    },
-    {
-      "id": "0bd98c003d918be17f011fc3",
-      "title": "沖繩之獵戶座清晰免費（相簿）",
-      "summary": "Wiwi.Blog 上禮拜照常日更，你們都沒有發現我出國玩了對不對？",
-      "image": "https://wiwi.blog/assets/images/instrument-store-0d90956eb647b46a02e656e82b5268f4.jpg",
-      "publishedAt": "2026-04-19T00:00:00Z",
-      "sourceId": "7f36c3da1e6b5c71",
-      "sourceTitle": "Wiwi.Blog Blog",
-      "link": "https://wiwi.blog/blog/okinawa-clearfree",
-      "detailPath": "articles/0bd98c003d918be17f011fc3.json"
     }
   ]
 }
