@@ -1,6 +1,39 @@
 {
   "items": [
     {
+      "id": "13a17b76a3147f9525a104db",
+      "title": "日本高中音樂課本封面",
+      "summary": "最近偶然在網上得知一位來自日本的插畫家—— 中村佑介 ，在其 X（前稱推特）頁面上發佈其封面由他負責繪製的某新版日本高中音樂課本的相關 宣傳資訊 。這本課本其實是由「教育藝術社」（教育芸術社）出版、使用對象爲高中一年級學生的《高中生的音樂 1》（ 高校生の音楽 1 ）之令和 8 年（西元 2026 年）改訂版。 圖片取自 https://x.com/kazekissa/status/2031271067520741877/ 一看見這個封面，我的第一反應是大寫的難以置信：「你是在跟我講這是 課本 嗎？！不是什麼要價上百令吉的繪本？！」然後，我的內心就只有滿滿的驚豔以及對日本學生的羨慕。光是望着這設計如此精緻雅觀的封面，都已經讓我產生想上學的興致，期待音樂課的到來呢！ 這也讓我不禁感慨：「這就是尊重專業的結果啊……",
+      "image": "https://microblog.ttheng.com/blog/img136.jpg",
+      "publishedAt": "2026-03-11T09:30:00Z",
+      "sourceId": "a93d4f2e98fafcbe",
+      "sourceTitle": "All posts | 所有貼文 on ttheng's microblog. | 侃侃而隨想極短文。",
+      "link": "https://microblog.ttheng.com/japan-high-school-music-textbook-cover/",
+      "detailPath": "articles/13a17b76a3147f9525a104db.json"
+    },
+    {
+      "id": "54b82787e3305135c9ade289",
+      "title": "soluna 外挂 C 模块",
+      "summary": "soluna 集成了 lua 虚拟机，但默认构建方式是将 lua 库静态链接到唯一的执行文件中。这将导致无法以动态库的形式外挂 Lua 的 C 扩展。 这是因为，如果独立编译 Lua 的 C 扩展库，通常需要链接 Lua 的 C API 。标准的方法是动态链接 lua 实现，如果静态链接 liblua.a ，会导致进程中有多份 lua 的实现。在 Lua 的历史版本中，这将导致运行期错误。 这是因为，Lua 的实现中有一个静态的“空”对象，所有的 nil 都指向这个对象。如果进程空间中有多份 Lua 实现，就会出现多个空对象。运行时的数据结构中会引用这个空对象，而不同副本的实现将“空”和自身保留的“空”对象引用做比较时，就会出现错误的判断。 在更早期的版本，出现这种链接出现的项目，bug 会隐藏得很深。所以后…",
+      "image": null,
+      "publishedAt": "2026-03-11T06:49:58Z",
+      "sourceId": "64ba70840e06d623",
+      "sourceTitle": "云风的 BLOG",
+      "link": "https://blog.codingnow.com/2026/03/soluna_external_lib.html",
+      "detailPath": "articles/54b82787e3305135c9ade289.json"
+    },
+    {
+      "id": "ef70ed4bab6068b4b00c2450",
+      "title": "你的心理問題，可能是體力問題",
+      "summary": "想像這樣的場景：你提著兩大袋超市買的重物，爬上四樓已經快虛脫了。剛進家門，伴侶只是隨口問了一句：「等下要吃什麼？」，你卻瞬間感到一陣無名火，當場臭臉回應。",
+      "image": null,
+      "publishedAt": "2026-03-11T06:30:00Z",
+      "sourceId": "7f36c3da1e6b5c71",
+      "sourceTitle": "Wiwi.Blog Blog",
+      "link": "https://wiwi.blog/blog/not-personality-but-stamina",
+      "detailPath": "articles/ef70ed4bab6068b4b00c2450.json"
+    },
+    {
       "id": "5d8768125dbef127eadf5bd7",
       "title": "对学习的一些思考",
       "summary": "在中式的教育体系下，学习似乎一直伴随着我们成长，我们在学校、社会，都无法离开学习这个词，工作上碰到瓶颈了，我们 …",
@@ -626,39 +659,6 @@
       "sourceTitle": "Feed Me, Haruo",
       "link": "https://haruowang.vercel.app/global/english/toeic.html",
       "detailPath": "articles/779e32fcf0a3e5ef9afa2a5c.json"
-    },
-    {
-      "id": "3d984a999d01e81f6e9a02f5",
-      "title": "東京藝文展館指南",
-      "summary": "《美術手帖》2012年5月特集的景點蒐集",
-      "image": null,
-      "publishedAt": "2026-03-03T14:07:39Z",
-      "sourceId": "50bce2ced06e6077",
-      "sourceTitle": "Feed Me, Haruo",
-      "link": "https://haruowang.vercel.app/global/japan/art-guide.html",
-      "detailPath": "articles/3d984a999d01e81f6e9a02f5.json"
-    },
-    {
-      "id": "08e5a9d166bb8416427ec862",
-      "title": "《相機女孩漫遊東京》筆記",
-      "summary": "漫畫《相機女孩漫遊東京》中出現的景點整理",
-      "image": "https://haruowang.vercel.app/japan/sg1.webp",
-      "publishedAt": "2026-03-03T14:07:39Z",
-      "sourceId": "50bce2ced06e6077",
-      "sourceTitle": "Feed Me, Haruo",
-      "link": "https://haruowang.vercel.app/global/japan/shutter-girl.html",
-      "detailPath": "articles/08e5a9d166bb8416427ec862.json"
-    },
-    {
-      "id": "7c5b4716b6e01c18cc2bfc40",
-      "title": "【形塑空響：編織中的開放空間】",
-      "summary": "作為Live Coding學習者，於王道銀行藝廊演出的過程紀錄",
-      "image": "https://haruowang.vercel.app/performance/ob1.webp",
-      "publishedAt": "2026-03-03T14:07:39Z",
-      "sourceId": "50bce2ced06e6077",
-      "sourceTitle": "Feed Me, Haruo",
-      "link": "https://haruowang.vercel.app/live-coding/performance/obank.html",
-      "detailPath": "articles/7c5b4716b6e01c18cc2bfc40.json"
     }
   ]
 }

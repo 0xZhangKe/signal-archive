@@ -1,6 +1,39 @@
 {
   "items": [
     {
+      "id": "cafadb7b7a2147f0791c1018",
+      "title": "把 NLLB 翻譯接進 Rust,在 Windows 上撞穿整條工具鏈：ct2rs × CTranslate2 的 protobuf 撞名、CRT 之爭、關閉死鎖與 NVIDIA 崩潰",
+      "summary": "這篇文章記錄了作者把一個離線 NLLB 翻譯功能從 Python 搬進 Rust、透過 ct2rs 接 CTranslate2 時,在 Windows/MSVC 上接連撞到的三面牆與各自的根因與修法。第一面是「連不起來」:sentencepiece 與 sherpa-onnx 各自靜態內嵌一份 protobuf,在 MSVC 下撞出 204 個 LNK2005——最乾淨的解不是 /FORCE:MULTIPLE 或 sidecar,而是直接關掉 sentencepiece feature、改用純 Rust 的 tokenizers,讓那份 protobuf 從依賴圖消失。第二面是 CRT 之爭:ct2rs 把 CTranslate2 編成 /MT、Rust std 卻是 /MD,靠 .cargo/config.…",
+      "image": null,
+      "publishedAt": "2026-07-21T11:19:57Z",
+      "sourceId": "bd51496b8ec0ca1d",
+      "sourceTitle": "Koimsurai 手記",
+      "link": "https://koimsurai.com/blog/wiring-nllb-translation-into-rust-and-breaking-through",
+      "detailPath": "articles/cafadb7b7a2147f0791c1018.json"
+    },
+    {
+      "id": "587a621258d4b8e969aaeda4",
+      "title": "我以前好喜欢Sammi的",
+      "summary": "但安心事件后，她老是喜欢带老鼠安出来逼粉丝接受她那个出轨老公，这个行为就很恶心。 你家里的破事喜欢怎么处理没人有资格指指点点，但那种毁三观的价值观要全世界人认同和接受就好cheap。作为粉丝，接受你出 Read more",
+      "image": "https://2cat.net/wp-content/uploads/2026/07/IMG_20260721_171654.jpg",
+      "publishedAt": "2026-07-21T09:21:09Z",
+      "sourceId": "bbbd88a209d1c87d",
+      "sourceTitle": "貓魚  –  2Cat.Net",
+      "link": "https://2cat.net/%e6%88%91%e4%bb%a5%e5%89%8d%e5%a5%bd%e5%96%9c%e6%ac%a2sammi%e7%9a%84/",
+      "detailPath": "articles/587a621258d4b8e969aaeda4.json"
+    },
+    {
+      "id": "9e58e417802433d0c7d06a2c",
+      "title": "入蜀记 day423 巴菲特的访谈",
+      "summary": "「巴菲特的访谈。」",
+      "image": null,
+      "publishedAt": "2026-07-21T04:48:27Z",
+      "sourceId": "8e5dc5a8b5023a8e",
+      "sourceTitle": "折腾人生",
+      "link": "https://z.arlmy.me/posts/BBBPandINSW/INSW-ko/INSW_423/",
+      "detailPath": "articles/9e58e417802433d0c7d06a2c.json"
+    },
+    {
       "id": "86f9d1e3a9b823bc6fba00db",
       "title": "会后悔吗",
       "summary": "三个外甥都放假了，最近把老大老三接来家里玩，老二勤工俭学去了，没来。 这俩周带他俩去爬了两座山，看了三个湖，逛了两个水世界一个儿童乐园，这会抖音里还囤了一堆景点门票没用。 下周准备再带他俩去日照住几日，看看海，吹吹海风。 和两个孩子相处几天，能感觉到，二姐家的老大，比大姐家的老三要滑头，独生子女被我二姐惯的不行，吃完饭碗筷一丢就进屋，第二天我给他俩立规矩，刷碗和晒衣服一人一天，接下来几天俩人相处还算融洽，唯一让人生气的就是，俩孩子玩手机没个够，老大成年了，我也不好睡前收他手机了，结果就是俩人天天玩到凌晨两三点，早晨做了早餐都叫不醒他俩，于是这几天我也摆烂了，大家一起睡懒觉好了，罢了，假期不就是睡懒觉的好日子吗。 昨晚俩孩子去外面吃的，我俩傍晚8点多出门散步，上次俩人骑车出来，得是四五年前的事了，电车没电了，两…",
@@ -626,39 +659,6 @@
       "sourceTitle": "Noa's Blog",
       "link": "https://noa.bearblog.dev/draw-a-cat/",
       "detailPath": "articles/71fbe96970b59118207e362f.json"
-    },
-    {
-      "id": "69f332b0851867977e3d0342",
-      "title": "从湾区到西雅图——时隔两年的美西 road trip 闭环",
-      "summary": "两年前我跑过一次 美西大环线 ，从西雅图出发，一路途径 Boise, 盐湖城，犹他州各大国家公园，穿回加州，再北上开回西雅图。上次机缘巧合从湾区到西雅图中间未作游玩，大环线其实缺了一段。这次恰逢公司在湾区 onsite，又是淡季项目已经交付夏天大家都在放假，于是一拍大腿干脆开着出差租的车从湾区一路玩一整周回西雅图，这回算是 close the loop 引起舒适。加之 Oregon 连续几年 road trip 从 海岸线 到 中线 再到 内陆 都玩过了，Cascadia 基本玩透彻了，是个合格的美西公路旅行爱好者了。 ... 阅读全文 https://blog.douchi.space/bay-to-sea-road-trip/",
-      "image": null,
-      "publishedAt": "2026-07-16T05:58:00Z",
-      "sourceId": "f26cdf4037718a26",
-      "sourceTitle": "About on 椒盐豆豉",
-      "link": "https://blog.douchi.space/bay-to-sea-road-trip/?utm_source=rss",
-      "detailPath": "articles/69f332b0851867977e3d0342.json"
-    },
-    {
-      "id": "56b4668decbbc3dc859ef123",
-      "title": "入蜀记 day418 落雨咯",
-      "summary": "「落雨咯。」",
-      "image": null,
-      "publishedAt": "2026-07-16T04:48:27Z",
-      "sourceId": "8e5dc5a8b5023a8e",
-      "sourceTitle": "折腾人生",
-      "link": "https://z.arlmy.me/posts/BBBPandINSW/INSW-ko/INSW_418/",
-      "detailPath": "articles/56b4668decbbc3dc859ef123.json"
-    },
-    {
-      "id": "d68a574225f9ea920ab7e76f",
-      "title": "当前想置顶的一些内容",
-      "summary": "最近学到了一个概念：Hypomnēma ，这是一种将真理内化为自己品格和行动的方法，具体就是把已经读到、听到的真理材料收集起来，再通过练习来塑造自己。我在这篇文章里整理了目前为止想要践行的真理。",
-      "image": null,
-      "publishedAt": "2026-07-16T02:54:00Z",
-      "sourceId": "74bd1a0c7196fd9e",
-      "sourceTitle": "Owen的博客",
-      "link": "https://www.owenyoung.com/pinned",
-      "detailPath": "articles/d68a574225f9ea920ab7e76f.json"
     }
   ]
 }
