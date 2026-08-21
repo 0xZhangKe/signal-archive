@@ -10,7 +10,7 @@
 	<atom:link href="https://pewae.com/feed" rel="self" type="application/rss+xml" />
 	<link>https://pewae.com</link>
 	<description>一个脱离不了低级趣味的人</description>
-	<lastBuildDate>Wed, 19 Aug 2026 16:04:02 +0000</lastBuildDate>
+	<lastBuildDate>Fri, 21 Aug 2026 04:20:14 +0000</lastBuildDate>
 	<language>en-US</language>
 	<sy:updatePeriod>hourly</sy:updatePeriod>
 	<sy:updateFrequency>1</sy:updateFrequency>
@@ -24,6 +24,108 @@
 	<height>32</height>
 </image> 
 	<item>
+		<title>acme.sh 从Webroot改为 NameSilo DNS 申请通配符证书踩坑记</title>
+		<link>https://pewae.com/2026/08/migrating-acme-sh-from-webroot-validation-to-namesilo-dns-for-lets-encrypt-wildcard-certificates.html</link>
+		<comments>https://pewae.com/2026/08/migrating-acme-sh-from-webroot-validation-to-namesilo-dns-for-lets-encrypt-wildcard-certificates.html#comments</comments>
+		<pubDate>Fri, 21 Aug 2026 04:18:43 +0000</pubDate>
+		<dc:creator><![CDATA[大致]]></dc:creator>
+				<category><![CDATA[网站备忘]]></category>
+		<category><![CDATA[acme]]></category>
+		<category><![CDATA[DNS]]></category>
+		<category><![CDATA[HTTPS]]></category>
+		<category><![CDATA[namesilo]]></category>
+		<category><![CDATA[nginx]]></category>
+		<category><![CDATA[SSL]]></category>
+		<category><![CDATA[证书]]></category>
+		<category><![CDATA[配置]]></category>
+
+		<guid isPermaLink="false">https://pewae.com/?p=19200</guid>
+		<description><![CDATA[我这边虽然用的是BT面板，但其在某次升级之后自动申请SSL证书功能就不好用了，所以一直用的是crontab + acme.sh自行更新证书。 当时的教程在这里： https://itlanyan.com/use-acme-sh-get-free-cert/ 前情提要 不说清楚我之前干了什么，就说不清楚我改了什么。其实都是照着上面的教程搞的，只不过沿用了宝塔的文件结构，相当简单。 安装 curl https://get.acme.sh &#124; sh acme.sh安装成功后，会自动创建一个cron任务 运行`crontab -l`能够进行查看，`crontab -e`能编辑。 41 0 * * * "/root/.acme.sh"/acme.sh --cron --home "/root/.acme.sh" > /dev/null 切换CA到letsencrypt ~/.acme.sh/acme.sh --set-default-ca --server letsencrypt 因为我是一切都弄好以后才装的acme.sh，所以是以Webroot 方式申请证书 ~/.acme.sh/acme.sh --issue -d 域名 --webroot web 目录 最后要执行一次&#8211;install-cert。 ~/.acme.sh/acme.sh --install-cert -d 域名 \ --key-file 密钥存放路径（在宝塔nginx配置文件里查找【ssl_certificate_key】） \ --fullchain-file 证书存放路径（在宝塔nginx配置文件里查找【ssl_certificate】） \ --reloadcmd "/etc/init.d/nginx [&#8230;]<div style="max-width: 520px; margin:0 auto; padding:5px 30px;margin: 15px; border-top: 1px solid #CCC;"><span style="margin-left: 2px; display:block;">《<a href="https://pewae.com/2026/08/migrating-acme-sh-from-webroot-validation-to-namesilo-dns-for-lets-encrypt-wildcard-certificates.html">acme.sh 从Webroot改为 NameSilo DNS 申请通配符证书踩坑记</a>》采用<a rel="license" href="//creativecommons.org/licenses/by-nc-nd/3.0/cn/deed.zh">署名-非商业性使用-禁止演绎</a>许可协议进行许可。 『<a href="https://pewae.com">破袜子</a>』期待与您交流。</span><div style="display:table;"><div style="margin: 5px 25px; display:table-cell; max-width:500px; "><h3 style="font-size:16px; font-weight:800;" >相关推荐:</h3><ul class = "apip-ralated-content"><li><a class="related-post" href="https://pewae.com/2023/09/fail2ban-rules-that-i-used.html">我的fail2ban规则解析</a><span class="func-after suffix">[28&#37;]</span></li><li><a class="related-post" href="https://pewae.com/2015/03/how-to-remove-a-cnnic-root-certificates.html">【转载】如何吊销 CNNIC 根证书</a><span class="func-after suffix">[20&#37;]</span></li><li><a class="related-post" href="https://pewae.com/2017/03/ssl-by-accident.html">突如其来的小绿锁</a><span class="func-after suffix">[20&#37;]</span></li><li><a class="related-post" href="https://pewae.com/2017/06/transfer-from-bluehost-virtual-machine-to-linode-vps.html">从Bluehost虚拟主机搬迁到LinodeVPS</a><span class="func-after suffix">[20&#37;]</span></li><li><a class="related-post" href="https://pewae.com/2016/03/diray_538.html">老司机遇险</a><span class="func-after suffix">[14&#37;]</span></li></ul></div></div></div>]]></description>
+				<content:encoded><![CDATA[<p>我这边虽然用的是BT面板，但其在某次升级之后自动申请SSL证书功能就不好用了，所以一直用的是crontab + acme.sh自行更新证书。<br />
+当时的教程在这里：<br />
+<a href="https://pewae.com/gaan/aHR0cHM6Ly9pdGxhbnlhbi5jb20vdXNlLWFjbWUtc2gtZ2V0LWZyZWUtY2VydC8=" target="_blank" rel="noopener" target="_blank">https://itlanyan.com/use-acme-sh-get-free-cert/</a></p>
+<h2>前情提要</h2>
+<p>不说清楚我之前干了什么，就说不清楚我改了什么。其实都是照着上面的教程搞的，只不过沿用了宝塔的文件结构，相当简单。<br />
+安装<br />
+<code class=" prettyprint "><br />
+curl https://get.acme.sh | sh<br />
+</code><br />
+acme.sh安装成功后，会自动创建一个cron任务<br />
+运行`crontab -l`能够进行查看，`crontab -e`能编辑。<br />
+<code class=" prettyprint "><br />
+41 0 * * * "/root/.acme.sh"/acme.sh --cron --home "/root/.acme.sh" > /dev/null<br />
+</code></p>
+<p>切换CA到letsencrypt<br />
+<code class=" prettyprint "><br />
+~/.acme.sh/acme.sh --set-default-ca --server letsencrypt<br />
+</code></p>
+<p>因为我是一切都弄好以后才装的acme.sh，所以是以Webroot 方式申请证书<br />
+<code class=" prettyprint "><br />
+~/.acme.sh/acme.sh --issue -d 域名 --webroot web 目录<br />
+</code></p>
+<p>最后要执行一次&#8211;install-cert。<br />
+<code class=" prettyprint "><br />
+~/.acme.sh/acme.sh --install-cert -d 域名 \<br />
+--key-file       密钥存放路径（在宝塔nginx配置文件里查找【ssl_certificate_key】）  \<br />
+--fullchain-file 证书存放路径（在宝塔nginx配置文件里查找【ssl_certificate】） \<br />
+--reloadcmd "/etc/init.d/nginx reload" （宝塔要改成这个）<br />
+</code></p>
+<p>这样之后，crontab 就会每天去检查证书的有效时间，在到期前自动更新证书并安装到指定位置，具体的参数与上面最后两条命令相同。</p>
+<h2>改为使用namesilo DNS</h2>
+<p>使用Webroot 有个缺点，就是【-d 域名】这里必须列出每一个具体的域名，比如-d examle.com -d chat.examle.com 需要分别添加，不支持*.examle.com。<br />
+偶然看到我的域名服务商namesilo 是可以以DNS API 的方式支持通配符证书更新的。于是按照下面教程的提示，将Webroot 方式改成 namesilo 的DNS API 方式。<br />
+<a href="https://pewae.com/gaan/aHR0cDovL3d3dy5nbWxvYy5tZS81MC5odG1s" target="_blank" rel="noopener" target="_blank">http://www.gmloc.me/50.html</a><br />
+因为acme 是会自动记录配置的，所以其实只要改之前的申请那一步的命令就好。</p>
+<h3>申请一个 namesilo 的 DNS API key</h3>
+<p>登录namesilo，进入API Manager 选项卡。<br />
+右侧页面有两个checkbox 选项：<br />
+<code><br />
+□ Generate key for read-only access<br />
+□ Submitting this form constitutes your acceptance of our API terms of use<br />
+</code><br />
+<strong>坑1：不要勾选“Generate key for read-only access” ！！！</strong><br />
+注意这个API key 只在这一时刻可见，好好保存好，如果再申请就是新key 了。<br />
+（此处可以有截图，但我就是不想放）</p>
+<h3>使用API key</h3>
+<p><code class=" prettyprint "><br />
+export Namesilo_Key="你的APIKEY"<br />
+</code><br />
+想不到吧，我第二个坑踩在这里，而且花了很久才解决。<br />
+是这样的，我想，你光export 不行啊，重启以后不就没了嘛，这不行啊，所以自作主张，加了一句<br />
+echo &#8216;export Namesilo_Key=&#8221;你的APIKEY&#8221;&#8216; >> ~/.bashrc<br />
+第一次不是申请了个只读的key 嘛，放的也是只读的key 。<br />
+后来重新申请了key ，嫌修改麻烦，就想反正是重登录才生效，我等一切理顺了再改。<br />
+问题就出在这里。acme.sh 也怕出事，对于key 的查找逻辑应该是 source ~/.bashrc >> 使用$Namesilo_Key >>如果没有就用自己上一次存的。<br />
+对，<strong>它用我自己存的旧key 把我export 的新key 给覆盖掉了。</strong><br />
+所以这里正确的做法是只做一次 export Namesilo_Key 就好了，放.bashrc里纯画蛇添足，人家acme会自动记录你的配置，不用担心重启问题。</p>
+<h3>申请证书</h3>
+<p><code class=" prettyprint "><br />
+acme.sh --issue \<br />
+--dns dns_namesilo \<br />
+-d 域名 \<br />
+-d '*.域名' \<br />
+--ecc \<br />
+--force<br />
+</code><br />
+执行。<br />
+这里要说一下为什么readonly 不行。acme 申请证书时要先往DNS里增加一条临时的txt记录，申请结束后再给删掉。<br />
+还有个小点，就是acme增加txt记录后，要等这条记录生效。namesilo 这里生效挺慢的，大概要等接近2分钟，所以千万不要以为进程挂了。也可以增加 &#8211;dnssleep 参数限制等待时间。</p>
+<h3>再次配置证书</h3>
+<p>从Webroot 模式切换到 DNS 模式，不是acme 的常规更新方式，所以不会自动执行配置动作。把上面的安装命令再手动执行一次就好。<br />
+<code class=" prettyprint "><br />
+~/.acme.sh/acme.sh --install-cert -d 域名 \<br />
+--key-file       密钥存放路径（在宝塔nginx配置文件里查找【ssl_certificate_key】）  \<br />
+--fullchain-file 证书存放路径（在宝塔nginx配置文件里查找【ssl_certificate】） \<br />
+--reloadcmd "/etc/init.d/nginx reload" （宝塔要改成这个）<br />
+</code></p>
+<h2>更新Nginx配置</h2>
+<p>把主域名配置关于SSL部分粘到子域名相同位置，并且子域名照主域名的样子增加<br />
+listen 443 ssl http2;<br />
+就行了。</p>
+<p>其实本来很简单的事，被export坑惨了。</p>
+<div style="max-width: 520px; margin:0 auto; padding:5px 30px;margin: 15px; border-top: 1px solid #CCC;"><span style="margin-left: 2px; display:block;">《<a href="https://pewae.com/2026/08/migrating-acme-sh-from-webroot-validation-to-namesilo-dns-for-lets-encrypt-wildcard-certificates.html">acme.sh 从Webroot改为 NameSilo DNS 申请通配符证书踩坑记</a>》采用<a rel="license" href="//creativecommons.org/licenses/by-nc-nd/3.0/cn/deed.zh">署名-非商业性使用-禁止演绎</a>许可协议进行许可。 『<a href="https://pewae.com">破袜子</a>』期待与您交流。</span><div style="display:table;"><div style="margin: 5px 25px; display:table-cell; max-width:500px; "><h3 style="font-size:16px; font-weight:800;" >相关推荐:</h3><ul class = "apip-ralated-content"><li><a class="related-post" href="https://pewae.com/2023/09/fail2ban-rules-that-i-used.html">我的fail2ban规则解析</a><span class="func-after suffix">[28&#37;]</span></li><li><a class="related-post" href="https://pewae.com/2015/03/how-to-remove-a-cnnic-root-certificates.html">【转载】如何吊销 CNNIC 根证书</a><span class="func-after suffix">[20&#37;]</span></li><li><a class="related-post" href="https://pewae.com/2017/03/ssl-by-accident.html">突如其来的小绿锁</a><span class="func-after suffix">[20&#37;]</span></li><li><a class="related-post" href="https://pewae.com/2017/06/transfer-from-bluehost-virtual-machine-to-linode-vps.html">从Bluehost虚拟主机搬迁到LinodeVPS</a><span class="func-after suffix">[20&#37;]</span></li><li><a class="related-post" href="https://pewae.com/2016/03/diray_538.html">老司机遇险</a><span class="func-after suffix">[14&#37;]</span></li></ul></div></div></div>]]></content:encoded>
+			</item>
+		<item>
 		<title>看图不说话20260819</title>
 		<link>https://pewae.com/2026/08/picture-without-description-20260819.html</link>
 		<comments>https://pewae.com/2026/08/picture-without-description-20260819.html#comments</comments>
@@ -711,70 +813,6 @@ C罗同样是三次对战荷兰，三次取胜，2场有进球，这就厉害得
 </ul>
 </div>
 <div style="max-width: 520px; margin:0 auto; padding:5px 30px;margin: 15px; border-top: 1px solid #CCC;"><span style="margin-left: 2px; display:block;">《<a href="https://pewae.com/2026/05/why-not-use-a-camera-to-take-a-photo-of-the-password-on-the-tv-screen.html">为什么不用相机把屏幕上的接关密码拍下来？</a>》采用<a rel="license" href="//creativecommons.org/licenses/by-nc-nd/3.0/cn/deed.zh">署名-非商业性使用-禁止演绎</a>许可协议进行许可。 『<a href="https://pewae.com">破袜子</a>』期待与您交流。</span><div style="display:table;"><div style="margin: 5px 25px; display:table-cell; max-width:500px; "><h3 style="font-size:16px; font-weight:800;" >相关推荐:</h3><ul class = "apip-ralated-content"><li><a class="related-post" href="https://pewae.com/2006/05/captain-tsubasa-2.html">天使之翼二</a><span class="func-after suffix">[49&#37;]</span></li><li><a class="related-post" href="https://pewae.com/2005/11/change-root-password-of-rh-linux.html">Redhat系列Root密码的修改</a><span class="func-after suffix">[33&#37;]</span></li><li><a class="related-post" href="https://pewae.com/2021/02/random_kuso_59.html">每夫吐槽（059）</a><span class="func-after suffix">[33&#37;]</span></li><li><a class="related-post" href="https://pewae.com/2007/03/colour-and-broadcasting-systems-by-country.html">电视制式使用地区</a><span class="func-after suffix">[17&#37;]</span></li><li><a class="related-post" href="https://pewae.com/2010/01/like-a-seal.html">象海豹</a><span class="func-after suffix">[17&#37;]</span></li></ul></div></div></div>]]></content:encoded>
-			</item>
-		<item>
-		<title>张屠户必须死</title>
-		<link>https://pewae.com/2026/05/many-choises-not-only-cctv.html</link>
-		<comments>https://pewae.com/2026/05/many-choises-not-only-cctv.html#comments</comments>
-		<pubDate>Wed, 13 May 2026 03:51:46 +0000</pubDate>
-		<dc:creator><![CDATA[大致]]></dc:creator>
-				<category><![CDATA[时事实说]]></category>
-		<category><![CDATA[2026]]></category>
-		<category><![CDATA[CCAV]]></category>
-		<category><![CDATA[FIFA]]></category>
-		<category><![CDATA[世界杯]]></category>
-		<category><![CDATA[岳云鹏]]></category>
-		<category><![CDATA[版权]]></category>
-
-		<guid isPermaLink="false">https://pewae.com/?p=18741</guid>
-		<description><![CDATA[对于一个两年看一次球的伪球迷中老登来说，最近的大事件莫过于央视的世界杯的版权谈判陷入僵局了。 我觉得当下的风向有些歪。 讲价没什么错。哭穷更是没什么错。 不过商业谈判就谈判，讲价就讲价，狗咬狗就狗咬狗，别他妈包装成一副“责任都在FIFA”的丑恶嘴脸！ 确实穷。前两天母亲节回家，陪我爸看了场乒乓球女团，连他都在吐槽：“看看五套现在这个熊样，除了锅圈就是锅圈，就找不着别人来打广告了吗？好几年也不换个样儿，岳云鹏这张肥脸真腻歪！” 我甚至可以帮CCAV补充一个FIFA造成的原因：比赛品质下降。 扩军到48队在我看来实在是步臭棋。 就说同样在美国时间，同样没有中国的94世界杯吧，那是什么小组赛？ 德国西班牙的轴心国大战。 荷兰比利时的尼德兰德比。 上届黑马喀麦隆对史上最保守巴西。 中场阴谋家哈吉直接对话金毛狮王巴尔德拉玛。 想到凌晨有斯托伊奇科夫对巴蒂斯图塔的最佳射手之争，激动得都睡不着觉。 你再看看你今年给我看的是啥？ 库索拉，我一个精神荷兰人看了36年球、打穿十几次大航海时代都没听说过的前荷兰殖民地，人口约等于半个天通苑。 海地，人均月收入还拿不到被诟病的农村200块的地方，放进来不是纯卖球嘛。 伊朗打新西兰，这叫世界杯正赛啊？这不是亚洲区预选赛附加赛吗？ 我要不是带入荷兰队身份，只有荷兰日本、英格兰克罗地亚、法国塞内加尔算“想看”。而“必看”的，一场都没有。 甚至我32年来，第一次没有研究过小组出线以后的对阵形势——纠结那些作甚，今年世界杯不是先打半个多月的热身赛，然后正赛直到6月28号才开始打的吗？ 注水的比赛是卖不出价的。就好比我饿了一天去吃自助，绝不会瞅一眼油炸花生米。 但是！！！ 你不是非要哭。 你买不起，可以换人买啊。你穷，有有钱的啊。爱优腾、B站、咪咕、X音X手XX书……换马桶台也不是不行啊！ 咿咿呀呀这么久，还不是因为傻福规定，重大体育赛事的版权只能由你央妈独家分配吗？ 你还不是转手就卖给咪咕、优酷（俄罗斯）和抖音（卡塔尔）了吗？ 一个中间商哭什么哭，赚的少就是赔是吧？ 也不要摆出一副只有你央妈才能覆盖到全国、给全国人免费看球的嘴脸。 免费的CCAV1才播几场啊。进球消息在新闻里才几分钟啊。 五套是上星频道。每届为了看球我都是实打实要花48块钱的。 我管你几百个频道分这48块钱，我管你五套能从整个央视的收入里分到多少。 我这钱只是为了看球花的。 你的优势也只有信号好屏幕大罢了，48块可是一点儿也不便宜。 无论谁家，只要能解决这两个问题，我一点也不介意去买他们的VIP、VIP中P、P上开花、花花宇宙…… 要是能单场购买更好。 由别人谈下来，CCAV5也可以二次购买啊，阿猫阿狗的还敢跟你央妈狮子大开口不成？那风险多低，是不？ 观众远离电视、广告商远离电视，这是大势所趋。 足协也好，电视台也好，人不行就换人，都干不下去就解散，别搁哪占着茅坑不拉屎。 沉舟侧畔。 放马凡舒去浪姐，我还挺想看的。 (1)：韩乔生语录 (2)：价格只是九十年代中期的大概价格，不准确，而且到世纪之交被数码相机淘汰前，每项价格都在逐年下降。<div style="max-width: 520px; margin:0 auto; padding:5px 30px;margin: 15px; border-top: 1px solid #CCC;"><span style="margin-left: 2px; display:block;">《<a href="https://pewae.com/2026/05/many-choises-not-only-cctv.html">张屠户必须死</a>》采用<a rel="license" href="//creativecommons.org/licenses/by-nc-nd/3.0/cn/deed.zh">署名-非商业性使用-禁止演绎</a>许可协议进行许可。 『<a href="https://pewae.com">破袜子</a>』期待与您交流。</span><div style="display:table;"><div style="margin: 5px 25px; display:table-cell; max-width:500px; "><h3 style="font-size:16px; font-weight:800;" >相关推荐:</h3><ul class = "apip-ralated-content"><li><a class="related-post" href="https://pewae.com/2016/03/tetris_gb.html">俄罗斯方块（GB）</a><span class="func-after suffix">[61&#37;]</span></li><li><a class="related-post" href="https://pewae.com/2016/03/diray_537.html">一丑遮百俊</a><span class="func-after suffix">[61&#37;]</span></li><li><a class="related-post" href="https://pewae.com/2026/06/6th-world-cup-diray-1.html">世界杯瞎话第六季——苟死以利国家生</a><span class="func-after suffix">[28&#37;]</span></li><li><a class="related-post" href="https://pewae.com/2026/06/6th-world-cup-diray-2.html">世界杯瞎话第六季——鸿雁飞啊一双双</a><span class="func-after suffix">[28&#37;]</span></li><li><a class="related-post" href="https://pewae.com/2026/06/6th-world-cup-diray-3.html">世界杯瞎话第六季——滚滚滚滚滚滚长江东逝水</a><span class="func-after suffix">[28&#37;]</span></li></ul></div></div></div>]]></description>
-				<content:encoded><![CDATA[<p>对于一个两年看一次球的伪球迷中老登来说，最近的大事件莫过于央视的世界杯的版权谈判陷入僵局了。</p>
-<p>我觉得当下的风向有些歪。<br />
-讲价没什么错。哭穷更是没什么错。<br />
-不过商业谈判就谈判，讲价就讲价，狗咬狗就狗咬狗，别他妈包装成一副“责任都在FIFA”的丑恶嘴脸！</p>
-<p>确实穷。前两天母亲节回家，陪我爸看了场乒乓球女团，连他都在吐槽：“看看五套现在这个熊样，除了锅圈就是锅圈，就找不着别人来打广告了吗？好几年也不换个样儿，岳云鹏这张肥脸真腻歪！”</p>
-<p>我甚至可以帮CCAV补充一个FIFA造成的原因：比赛品质下降。<br />
-扩军到48队在我看来实在是步臭棋。<br />
-就说同样在美国时间，同样没有中国的94世界杯吧，那是什么小组赛？<br />
-德国西班牙的轴心国大战。<br />
-荷兰比利时的尼德兰德比。<br />
-上届黑马喀麦隆对史上最保守巴西。<br />
-中场阴谋家哈吉直接对话金毛狮王巴尔德拉玛。<br />
-想到凌晨有斯托伊奇科夫对巴蒂斯图塔的最佳射手之争，激动得都睡不着觉。</p>
-<p>你再看看你今年给我看的是啥？<br />
-库索拉，我一个精神荷兰人看了36年球、打穿十几次大航海时代都没听说过的前荷兰殖民地，人口约等于半个天通苑。<br />
-海地，人均月收入还拿不到被诟病的农村200块的地方，放进来不是纯卖球嘛。<br />
-伊朗打新西兰，这叫世界杯正赛啊？这不是亚洲区预选赛附加赛吗？<br />
-我要不是带入荷兰队身份，只有荷兰日本、英格兰克罗地亚、法国塞内加尔算“想看”。而“必看”的，一场都没有。<br />
-甚至我32年来，第一次没有研究过小组出线以后的对阵形势——纠结那些作甚，今年世界杯不是先打半个多月的热身赛，然后正赛直到6月28号才开始打的吗？<br />
-注水的比赛是卖不出价的。就好比我饿了一天去吃自助，绝不会瞅一眼油炸花生米。</p>
-<p>但是！！！<br />
-你不是非要哭。<br />
-你买不起，可以换人买啊。你穷，有有钱的啊。爱优腾、B站、咪咕、X音X手XX书……换马桶台也不是不行啊！<br />
-咿咿呀呀这么久，还不是因为傻福规定，重大体育赛事的版权只能由你央妈独家分配吗？<br />
-你还不是转手就卖给咪咕、优酷（俄罗斯）和抖音（卡塔尔）了吗？<br />
-一个中间商哭什么哭，赚的少就是赔是吧？</p>
-<p>也不要摆出一副只有你央妈才能覆盖到全国、给全国人免费看球的嘴脸。<br />
-免费的CCAV1才播几场啊。进球消息在新闻里才几分钟啊。<br />
-五套是上星频道。每届为了看球我都是实打实要花48块钱的。<br />
-我管你几百个频道分这48块钱，我管你五套能从整个央视的收入里分到多少。<br />
-我这钱只是为了看球花的。</p>
-<p>你的优势也只有信号好屏幕大罢了，48块可是一点儿也不便宜。<br />
-无论谁家，只要能解决这两个问题，我一点也不介意去买他们的VIP、VIP中P、P上开花、花花宇宙……<br />
-要是能单场购买更好。<br />
-由别人谈下来，CCAV5也可以二次购买啊，阿猫阿狗的还敢跟你央妈狮子大开口不成？那风险多低，是不？</p>
-<p>观众远离电视、广告商远离电视，这是大势所趋。<br />
-足协也好，电视台也好，人不行就换人，都干不下去就解散，别搁哪占着茅坑不拉屎。<br />
-沉舟侧畔。<br />
-放马凡舒去浪姐，我还挺想看的。</p>
-<hr class="apip_inner_anchors_begin" />
-<div class="apip_inner_anchors">
-<ul>
-<li><a name = "inner_anchor_1" class="apip_anchor_link" href="#inner_ref_1">(1)</a>：韩乔生语录</li>
-<li><a name = "inner_anchor_2" class="apip_anchor_link" href="#inner_ref_2">(2)</a>：价格只是九十年代中期的大概价格，不准确，而且到世纪之交被数码相机淘汰前，每项价格都在逐年下降。</li>
-</ul>
-</div>
-<div style="max-width: 520px; margin:0 auto; padding:5px 30px;margin: 15px; border-top: 1px solid #CCC;"><span style="margin-left: 2px; display:block;">《<a href="https://pewae.com/2026/05/many-choises-not-only-cctv.html">张屠户必须死</a>》采用<a rel="license" href="//creativecommons.org/licenses/by-nc-nd/3.0/cn/deed.zh">署名-非商业性使用-禁止演绎</a>许可协议进行许可。 『<a href="https://pewae.com">破袜子</a>』期待与您交流。</span><div style="display:table;"><div style="margin: 5px 25px; display:table-cell; max-width:500px; "><h3 style="font-size:16px; font-weight:800;" >相关推荐:</h3><ul class = "apip-ralated-content"><li><a class="related-post" href="https://pewae.com/2016/03/tetris_gb.html">俄罗斯方块（GB）</a><span class="func-after suffix">[61&#37;]</span></li><li><a class="related-post" href="https://pewae.com/2016/03/diray_537.html">一丑遮百俊</a><span class="func-after suffix">[61&#37;]</span></li><li><a class="related-post" href="https://pewae.com/2026/06/6th-world-cup-diray-1.html">世界杯瞎话第六季——苟死以利国家生</a><span class="func-after suffix">[28&#37;]</span></li><li><a class="related-post" href="https://pewae.com/2026/06/6th-world-cup-diray-2.html">世界杯瞎话第六季——鸿雁飞啊一双双</a><span class="func-after suffix">[28&#37;]</span></li><li><a class="related-post" href="https://pewae.com/2026/06/6th-world-cup-diray-3.html">世界杯瞎话第六季——滚滚滚滚滚滚长江东逝水</a><span class="func-after suffix">[28&#37;]</span></li></ul></div></div></div>]]></content:encoded>
 			</item>
 	</channel>
 </rss>
