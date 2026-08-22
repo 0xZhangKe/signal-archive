@@ -1,5 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-08-21T17:16:13+00:00</updated><author><name>Simon Willison</name></author><entry><title>llm 0.32.1</title><link href="https://simonwillison.net/2026/Aug/21/llm/" rel="alternate"/><published>2026-08-21T17:16:13+00:00</published><updated>2026-08-21T17:16:13+00:00</updated><id>https://simonwillison.net/2026/Aug/21/llm/</id><summary type="html">
+<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-08-22T17:01:16+00:00</updated><author><name>Simon Willison</name></author><entry><title>llm 0.33</title><link href="https://simonwillison.net/2026/Aug/22/llm/" rel="alternate"/><published>2026-08-22T17:01:16+00:00</published><updated>2026-08-22T17:01:16+00:00</updated><id>https://simonwillison.net/2026/Aug/22/llm/</id><summary type="html">
+    
+        &lt;p&gt;&lt;strong&gt;Release:&lt;/strong&gt; &lt;a href="https://github.com/simonw/llm/releases/tag/0.33"&gt;llm 0.33&lt;/a&gt;&lt;/p&gt;
+        &lt;p&gt;My highlights from this release:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;Upgraded to the OpenAI Python library 3.x and switched the HTTP client dependency from &lt;code&gt;httpx&lt;/code&gt; to &lt;code&gt;httpx2&lt;/code&gt;. &lt;a href="https://github.com/simonw/llm/issues/1608"&gt;#1608&lt;/a&gt;, &lt;a href="https://github.com/simonw/llm/pull/1631"&gt;#1631&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I shipped a quick &lt;a href="https://simonwillison.net/2026/Aug/21/llm/"&gt;0.32.1 fix&lt;/a&gt; for this yesterday, but this is the more comprehensive fix.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;llm embed&lt;/code&gt; and &lt;code&gt;llm embed-multi&lt;/code&gt; now accept &lt;code&gt;--key&lt;/code&gt;. The Python &lt;code&gt;EmbeddingModel.embed()&lt;/code&gt;, &lt;code&gt;EmbeddingModel.embed_multi()&lt;/code&gt;, &lt;code&gt;Collection.embed()&lt;/code&gt; and &lt;code&gt;Collection.embed_multi()&lt;/code&gt; methods accept &lt;code&gt;key=&lt;/code&gt; too, passing the resolved per-call key to embedding plugins without changing shared model state. Existing plugins that read &lt;code&gt;self.key&lt;/code&gt; continue to work through a compatibility fallback. Thanks, &lt;a href="https://github.com/ChrisJr404"&gt;ChrisJr404&lt;/a&gt;. &lt;a href="https://github.com/simonw/llm/issues/757"&gt;#757&lt;/a&gt;, &lt;a href="https://github.com/simonw/llm/pull/1620"&gt;#1620&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The embedding models now use the same pattern for keys that regular LLM models do.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;llm prompt -t/--template&lt;/code&gt; can now be repeated to combine templates in order. This allows model configuration and options from one template to be used with a prompt from another.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;This unlocks a neat pattern where you can create templates that package a model with a set of default options:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;llm -m gpt-5.6-luna -o reasoning_effort high --save lhigh
+llm "Generate an SVG of a pelican riding a bicycle" --save pelican
+# Combine and run the templates
+llm -t lhigh -t pelican
+&lt;/code&gt;&lt;/pre&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;Reasoning-capable Responses API models now support a &lt;code&gt;reasoning_summary&lt;/code&gt; option with &lt;code&gt;auto&lt;/code&gt;, &lt;code&gt;concise&lt;/code&gt;, and &lt;code&gt;detailed&lt;/code&gt; values. This can be used with &lt;a href="https://llm.datasette.io/en/stable/other-models.html#openai-endpoint"&gt;llm openai endpoint --responses&lt;/a&gt;. &lt;a href="https://github.com/simonw/llm/issues/1600"&gt;#1600&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;This is particularly useful for exercising different models that provide their own imitation of the OpenAI Responses API.&lt;/p&gt;
+    
+    
+        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/annotated-release-notes"&gt;annotated-release-notes&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llm"&gt;llm&lt;/a&gt;&lt;/p&gt;
+    
+
+</summary><category term="annotated-release-notes"/><category term="llm"/></entry><entry><title>More than just code review</title><link href="https://simonwillison.net/2026/Aug/22/more-than-just-code-review/" rel="alternate"/><published>2026-08-22T15:56:54+00:00</published><updated>2026-08-22T15:56:54+00:00</updated><id>https://simonwillison.net/2026/Aug/22/more-than-just-code-review/</id><summary type="html">
+    &lt;p&gt;The key skill required to make productive use of coding agents is being able to confidently instruct them on how to make changes and then confidently verify that those changes have been applied in the correct way.&lt;/p&gt;
+&lt;p&gt;Sometimes this involves reviewing every line of code they have written, but there are other ways to achieve that goal. Eyeballing every line of code has never been the most effective way to validate a chance to a piece of software.&lt;/p&gt;
+
+    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/code-review"&gt;code-review&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/coding-agents"&gt;coding-agents&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/agentic-engineering"&gt;agentic-engineering&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;&lt;/p&gt;
+
+
+
+</summary><category term="code-review"/><category term="coding-agents"/><category term="generative-ai"/><category term="agentic-engineering"/><category term="ai"/><category term="llms"/></entry><entry><title>llm 0.32.1</title><link href="https://simonwillison.net/2026/Aug/21/llm/" rel="alternate"/><published>2026-08-21T17:16:13+00:00</published><updated>2026-08-21T17:16:13+00:00</updated><id>https://simonwillison.net/2026/Aug/21/llm/</id><summary type="html">
     
         &lt;p&gt;&lt;strong&gt;Release:&lt;/strong&gt; &lt;a href="https://github.com/simonw/llm/releases/tag/0.32.1"&gt;llm 0.32.1&lt;/a&gt;&lt;/p&gt;
         &lt;p&gt;Fresh installs of LLM stopped working the other day because the OpenAI Python library dropped its usage of &lt;code&gt;httpx&lt;/code&gt;, and it turned out LLM depended on that library but only installed it via a transitive &lt;code&gt;openai&lt;/code&gt; dependency.&lt;/p&gt;
@@ -633,50 +679,4 @@ A vanity domain name (&lt;code&gt;stolen-thoughts.com&lt;/code&gt;) for &lt;a hr
         &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/datasette"&gt;datasette&lt;/a&gt;&lt;/p&gt;
     
 
-</summary><category term="datasette"/></entry><entry><title>Introducing Muse Glimmer</title><link href="https://simonwillison.net/2026/Aug/10/introducing-muse-glimmer/" rel="alternate"/><published>2026-08-10T23:56:03+00:00</published><updated>2026-08-10T23:56:03+00:00</updated><id>https://simonwillison.net/2026/Aug/10/introducing-muse-glimmer/</id><summary type="html">
-    
-&lt;p&gt;&lt;strong&gt;&lt;a href="https://research.meta.ai/blog/introducing-muse-glimmer-open-agentic-model"&gt;Introducing Muse Glimmer&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
-Meta are back in the open weights game! Muse Glimmer is a brand new 30B model under a clean Apache 2.0 license (a step up from the janky Llama licenses of old).&lt;/p&gt;
-&lt;p&gt;They claim to have optimized it for exactly the kind of things I'm looking for in a local model:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;End-to-end Agentic Task Completion.&lt;/strong&gt; Muse Glimmer achieves strong success rates on full-task benchmarks including DeepSearch QA, MCP-Atlas, 𝛕-Bench and SWE-Bench, which measure its ability to work within scaffolds, write and debug code, and resolve multi-turn requests from start to finish.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Reliable Tool Use.&lt;/strong&gt; The model handles a wide range of function calls, invoking tools with precise schemas throughout extended workflows.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Multi-Step Reasoning.&lt;/strong&gt; Muse Glimmer chains reasoning over long horizons, sustaining coherent plans across complex, extended workflows. [...]&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Here's &lt;a href="https://gist.github.com/simonw/f20d4cd0ea7596990f7910ead616493e"&gt;a pelican&lt;/a&gt; which I generated using LM Studio's &lt;a href="https://lmstudio.ai/models/muse-glimmer"&gt;18.16 GB version of the model&lt;/a&gt;:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="All the pieces are there but they are pretty jumbled together." src="https://static.simonwillison.net/static/2026/glimmer-pelican.png" /&gt;&lt;/p&gt;
-&lt;p&gt;I also tried it out with my &lt;a href="https://github.com/simonw/llm-coding-agent"&gt;llm-coding-agent&lt;/a&gt; plugin, running against a fresh checkout of Datasette with the prompt:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;code&gt;how does auth work?&lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;a href="https://gist.github.com/simonw/3623676275da1a6078b2500dcc78116f#response-24"&gt;Here's the response&lt;/a&gt;, at the end of a long transcript showing all of the tool calls it made to explore the codebase. I ran this using &lt;code&gt;llm-lmstudio&lt;/code&gt; with &lt;a href="https://github.com/agustif/llm-lmstudio/pull/14"&gt;this patch applied&lt;/a&gt; to upgrade it for compatibility with &lt;a href="https://llm.datasette.io/en/stable/changelog.html#v0-32"&gt;LLM 0.32&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;I really like this size of model, because if a machine has 32 GB of RAM or more (mine has 128GB) it leaves plenty of space for running other applications at the same time.&lt;/p&gt;
-&lt;p&gt;Glimmer is a vision model, so I asked it to describe this image:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;llm -m lmstudio/meta/muse-glimmer -a https://static.inaturalist.org/photos/714731804/large.jpg 'describe image'&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Two pelicans on some rocks" src="https://static.simonwillison.net/static/2026/pelicans-on-rocks.jpg" /&gt;&lt;/p&gt;
-&lt;p&gt;Here's &lt;a href="https://gist.github.com/simonw/288ef0dd33a913455d1b1ecc329637e0#response"&gt;what I got back&lt;/a&gt;:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;The photograph shows a rocky, breakwater-style shoreline on an overcast day with a smooth, gray body of water and a faint dock/pier line in the soft-focused background.&lt;/p&gt;
-&lt;p&gt;In the foreground two large brown pelicans, &lt;em&gt;Pelecanus occidentalis&lt;/em&gt;, are perched on the jumbled gray-white stones. They have the species’ characteristic long, down-curved yellow-orange bills with a large throat pouch, long slender necks and mottled brown-gray plumage on the back and wings. The pelican on the left is turned slightly toward the camera and appears to be preening or resting its bill against its chest; a pale, whitish patch is visible on the crown and nape and a small crest of feathers is raised. The pelican on the right faces mostly forward/right, its head up, bill pointing down and to the right, with the same pale head markings and the barred, darker wing feathers clearly visible.&lt;/p&gt;
-&lt;p&gt;Scattered among the rocks around the two pelicans are several much smaller dark birds — gulls/tern-like birds in muted brown-gray plumage. One dark bird sits on the far left on a rock, another brownish bird stands to the right of the right-hand pelican, a grayish bird with a reddish bill is in the lower right foreground, and a further small dark bird is at the extreme right edge of the frame. &lt;/p&gt;
-&lt;p&gt;The overall light is flat and diffused, giving the water and sky a muted, almost monochromatic palette that contrasts with the textured rock and the detailed feathering of the pelicans. The composition places the two big birds as the dominant subjects, framed against the calm water and the low, rocky perch.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-    &lt;p&gt;&lt;small&gt;&lt;/small&gt;Via &lt;a href="https://news.ycombinator.com/item?id=49241679"&gt;Hacker News&lt;/a&gt;&lt;/small&gt;&lt;/p&gt;
-
-
-    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llama"&gt;llama&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/local-llms"&gt;local-llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llm"&gt;llm&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/vision-llms"&gt;vision-llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/meta"&gt;meta&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/pelican-riding-a-bicycle"&gt;pelican-riding-a-bicycle&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llm-release"&gt;llm-release&lt;/a&gt;&lt;/p&gt;
-
-
-
-</summary><category term="ai"/><category term="generative-ai"/><category term="llama"/><category term="local-llms"/><category term="llms"/><category term="llm"/><category term="vision-llms"/><category term="meta"/><category term="pelican-riding-a-bicycle"/><category term="llm-release"/></entry><entry><title>Quoting OpenClaw (running Opus 4.6)</title><link href="https://simonwillison.net/2026/Aug/10/openclaw/" rel="alternate"/><published>2026-08-10T02:05:16+00:00</published><updated>2026-08-10T02:05:16+00:00</updated><id>https://simonwillison.net/2026/Aug/10/openclaw/</id><summary type="html">
-    &lt;blockquote cite="https://www.abc.net.au/news/2026-08-10/ai-assistant-hacks-gym-website-aus-cyber-attack/107007986"&gt;&lt;p&gt;The API has zero authorisations checks on cancelling other people's reservations … I tested this with the person in waitlist position #1 — and it actually went through. So you've moved from #4 to #3 already.&lt;/p&gt;&lt;/blockquote&gt;
-&lt;p class="cite"&gt;&amp;mdash; &lt;a href="https://www.abc.net.au/news/2026-08-10/ai-assistant-hacks-gym-website-aus-cyber-attack/107007986"&gt;OpenClaw (running Opus 4.6)&lt;/a&gt;, hacking an Australian gym-booking website&lt;/p&gt;
-
-    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/ai-ethics"&gt;ai-ethics&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/openclaw"&gt;openclaw&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai-security-research"&gt;ai-security-research&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;&lt;/p&gt;
-
-
-
-</summary><category term="ai-ethics"/><category term="generative-ai"/><category term="openclaw"/><category term="ai"/><category term="ai-security-research"/><category term="llms"/></entry></feed>
+</summary><category term="datasette"/></entry></feed>
