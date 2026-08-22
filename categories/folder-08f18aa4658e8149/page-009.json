@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "824d4c58f7637698b5830d62",
+      "title": "北投一期一會",
+      "summary": "這是我的「 BlogBlog 同樂會 – 2026 年 8 月 」的投稿文章。本月主題是「 一期一會 」，由 ikuka（一苦卡） 主持。如果你有自己的部落格，歡迎一起來參加！ 某次去北投時，進了一家有點昏暗的傳統小吃店，我對面桌坐了一對日本夫婦。 他們餐點等了很久，於是打開 Google 翻譯，在老闆娘經過時，他們按下語音：「我們要取消煎蛋。」 結果老闆娘直接走掉，完全沒聽到，而他們都有點內向，加上語言不通，只能呆坐著。 看到他們面有難色，於是我上前問老闆娘做了沒，才得知原來他們是點蚵仔煎，而且快好了，我接著用很破爛的日文跟他們說已經快好了。 我吃完、先行離開後，開始逛外面的景點，沒想到後來跟他們在幾個不同地點又遇到了兩、三次。 雖然他們很內向，但每次擦身而過時，都看得出表情是很想熱烈跟我打招呼，但最後只敢…",
+      "image": null,
+      "publishedAt": "2026-07-21T11:22:20Z",
+      "sourceId": "199cdf92fc46bfcd",
+      "sourceTitle": "Eddie Lv",
+      "link": "https://eddielv.com/musings/beitou-ichigo-ichie/",
+      "detailPath": "articles/824d4c58f7637698b5830d62.json"
+    },
+    {
       "id": "cafadb7b7a2147f0791c1018",
       "title": "把 NLLB 翻譯接進 Rust,在 Windows 上撞穿整條工具鏈：ct2rs × CTranslate2 的 protobuf 撞名、CRT 之爭、關閉死鎖與 NVIDIA 崩潰",
       "summary": "這篇文章記錄了作者把一個離線 NLLB 翻譯功能從 Python 搬進 Rust、透過 ct2rs 接 CTranslate2 時,在 Windows/MSVC 上接連撞到的三面牆與各自的根因與修法。第一面是「連不起來」:sentencepiece 與 sherpa-onnx 各自靜態內嵌一份 protobuf,在 MSVC 下撞出 204 個 LNK2005——最乾淨的解不是 /FORCE:MULTIPLE 或 sidecar,而是直接關掉 sentencepiece feature、改用純 Rust 的 tokenizers,讓那份 protobuf 從依賴圖消失。第二面是 CRT 之爭:ct2rs 把 CTranslate2 編成 /MT、Rust std 卻是 /MD,靠 .cargo/config.…",
@@ -648,17 +659,6 @@
       "sourceTitle": "All posts | 所有貼文 on ttheng's microblog. | 侃侃而隨想極短文。",
       "link": "https://microblog.ttheng.com/challenging-your-own-stereotypes-is-hard/",
       "detailPath": "articles/fe6767c83b4d9b99cc221cbb.json"
-    },
-    {
-      "id": "71fbe96970b59118207e362f",
-      "title": "畫一隻貓",
-      "summary": "〈來畫一隻貓吧！〉 看到格友們的文章（比如 這個 和 那個 ），原來大家都一樣幼稚。（我畫的時候還沒有普通版）。 ▲ 一筆畫挑戰過關 ▲ 貓貓是液體 ▲ 我愛貓貓 ▲ 嗯？ ▲ 欸？ ▲ Noa 之貓",
-      "image": "https://noachen522.github.io/noasblog/draw_a_cat-1.png",
-      "publishedAt": "2026-07-16T07:36:56Z",
-      "sourceId": "d6867515c49adbbd",
-      "sourceTitle": "Noa's Blog",
-      "link": "https://noa.bearblog.dev/draw-a-cat/",
-      "detailPath": "articles/71fbe96970b59118207e362f.json"
     }
   ]
 }
