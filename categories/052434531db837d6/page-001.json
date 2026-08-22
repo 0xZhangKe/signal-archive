@@ -1,6 +1,28 @@
 {
   "items": [
     {
+      "id": "d6b34a42fee6fd3ec45514b3",
+      "title": "llm 0.33",
+      "summary": "Release: llm 0.33 My highlights from this release: Upgraded to the OpenAI Python library 3.x and switched the HTTP client dependency from httpx to httpx2 . #1608 , #1631 I shipped a quick 0.32.1 fix for this yesterday, but this is the more comprehensive fix. llm embed and llm embed-multi now accept --key . The Python EmbeddingModel.embed() , EmbeddingModel.…",
+      "image": null,
+      "publishedAt": "2026-08-22T17:01:16Z",
+      "sourceId": "052434531db837d6",
+      "sourceTitle": "Simon Willison's Weblog",
+      "link": "https://simonwillison.net/2026/Aug/22/llm/",
+      "detailPath": "articles/d6b34a42fee6fd3ec45514b3.json"
+    },
+    {
+      "id": "783ad7728273f55eb522295d",
+      "title": "More than just code review",
+      "summary": "The key skill required to make productive use of coding agents is being able to confidently instruct them on how to make changes and then confidently verify that those changes have been applied in the correct way. Sometimes this involves reviewing every line of code they have written, but there are other ways to achieve that goal. Eyeballing every line of c…",
+      "image": null,
+      "publishedAt": "2026-08-22T15:56:54Z",
+      "sourceId": "052434531db837d6",
+      "sourceTitle": "Simon Willison's Weblog",
+      "link": "https://simonwillison.net/2026/Aug/22/more-than-just-code-review/",
+      "detailPath": "articles/783ad7728273f55eb522295d.json"
+    },
+    {
       "id": "0fda27a8ca7fae02ed71a9a3",
       "title": "llm 0.32.1",
       "summary": "Release: llm 0.32.1 Fresh installs of LLM stopped working the other day because the OpenAI Python library dropped its usage of httpx , and it turned out LLM depended on that library but only installed it via a transitive openai dependency. This dot-release fixes that for the moment by pinning to openai<3 , and a soon-to-drop 0.33 release will switch from ht…",
@@ -307,28 +329,6 @@
       "sourceTitle": "Simon Willison's Weblog",
       "link": "https://simonwillison.net/2026/Aug/11/datasette-upload-dbs/",
       "detailPath": "articles/c22fc4ff407048bbc17926ef.json"
-    },
-    {
-      "id": "c28f9b80c03a70296f8b9bbd",
-      "title": "Introducing Muse Glimmer",
-      "summary": "Introducing Muse Glimmer Meta are back in the open weights game! Muse Glimmer is a brand new 30B model under a clean Apache 2.0 license (a step up from the janky Llama licenses of old). They claim to have optimized it for exactly the kind of things I'm looking for in a local model: End-to-end Agentic Task Completion. Muse Glimmer achieves strong success rat…",
-      "image": "https://static.simonwillison.net/static/2026/glimmer-pelican.png",
-      "publishedAt": "2026-08-10T23:56:03Z",
-      "sourceId": "052434531db837d6",
-      "sourceTitle": "Simon Willison's Weblog",
-      "link": "https://simonwillison.net/2026/Aug/10/introducing-muse-glimmer/",
-      "detailPath": "articles/c28f9b80c03a70296f8b9bbd.json"
-    },
-    {
-      "id": "0e231dcb0866944079c10943",
-      "title": "Quoting OpenClaw (running Opus 4.6)",
-      "summary": "The API has zero authorisations checks on cancelling other people's reservations … I tested this with the person in waitlist position #1 — and it actually went through. So you've moved from #4 to #3 already. — OpenClaw (running Opus 4.6) , hacking an Australian gym-booking website Tags: ai-ethics , generative-ai , openclaw , ai , ai-security-research , llms",
-      "image": null,
-      "publishedAt": "2026-08-10T02:05:16Z",
-      "sourceId": "052434531db837d6",
-      "sourceTitle": "Simon Willison's Weblog",
-      "link": "https://simonwillison.net/2026/Aug/10/openclaw/",
-      "detailPath": "articles/0e231dcb0866944079c10943.json"
     }
   ]
 }
