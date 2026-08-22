@@ -1,6 +1,28 @@
 {
   "items": [
     {
+      "id": "ae7327d3189adb843a7ad20c",
+      "title": "2026年的比特币有了新的逻辑？",
+      "summary": "本文回顾比特币和黄金的基本属性，并从比特币的矿工关机币价、减半周期、美元流动性传导、Strategy风险等方面解构比特币的定价逻辑。作者认为是共识资产因新的叙事、共识、投机与交易创造的新的集体价值。",
+      "image": "https://prologue.dev/static/images/bitcoin_dominance202607.png",
+      "publishedAt": "2026-08-03T00:00:00Z",
+      "sourceId": "757145dcc77dee94",
+      "sourceTitle": "Prologue 序章",
+      "link": "https://prologue.dev/blog/is-there-a-new-logic-behind-bitcoin-in-2026",
+      "detailPath": "articles/ae7327d3189adb843a7ad20c.json"
+    },
+    {
+      "id": "ff98259ec5ba860e49603477",
+      "title": "讓它自己跑",
+      "summary": "分享一個小祕訣：遇到需要時間思考的問題，早一點丟到腦中「讓它跑」。",
+      "image": null,
+      "publishedAt": "2026-08-03T00:00:00Z",
+      "sourceId": "7f36c3da1e6b5c71",
+      "sourceTitle": "Wiwi.Blog Blog",
+      "link": "https://wiwi.blog/blog/let-it-run",
+      "detailPath": "articles/ff98259ec5ba860e49603477.json"
+    },
+    {
       "id": "543536c4e57edb27ed80d8da",
       "title": "大脑充血 Vol.92",
       "summary": "我发现自己遇到「不测风云」，也就是那些难以预料的烦心事时，已经能够做到表面平静地发疯十分钟，然后该干嘛干嘛。这周济南总是莫名其妙地开始刮大风、下暴雨，虽然讨厌袜子被打湿的感觉，但包里常备着折叠伞，也还算从容不迫。 其实还有些家人和工作上的大小事，不过我现在更在乎自己刚刚从 MUJI 买的粘毛刷好不好用，今天有没有吃燕麦喝酸奶，明天早上应该读《第一个人》还是《现象学导论》。印象中不少「重要人物」常常把自己的生活外包给别人，以腾出时间关注那些更具商业价值的事情。而我呢？如果我每天回到家不能亲自用吸尘器把地板拖得一尘不染，听见灶台点燃的热水沸腾的声音，我都不知道自己怎么活下去。 吾仅悉落 MY SKYSCRAPER 专辑 Nirosta Steel Bandcamp NeoDB 复古，有种…… 既老派又年轻的奇妙听…",
@@ -637,28 +659,6 @@
       "sourceTitle": "Eddie Lv",
       "link": "https://eddielv.com/musings/digital-is-simulating/",
       "detailPath": "articles/e79d6a945d8ab30bfbc9a386.json"
-    },
-    {
-      "id": "046ba54cd27c5cd8c3c073c5",
-      "title": "在軍營尿尿",
-      "summary": "前些日子做了軍營的音響活動，同仁去上廁所，問了某個兵怎麼走，沒想到要層層向上報告，詢問能不能讓外面廠商進入建築物來借用廁所。而最後一個層級的人也只是說：「那裡走到底就是。」要同仁自己去，並沒有任何軍營的人盯著，表示似乎也不是真的那麼戒備森嚴。 輪到我想上廁所時，得到了更奇妙的答案。 「我不知道耶，但應該是這個走廊走到底左邊。」 …？ 我免役、沒服過兵役，不知道部隊文化，但在各種對話當中發現，所有人對於「做決定」是感到恐懼與焦慮的，所有行動最好都是上級的命令。 我思考一陣子，認為這並不完全是壞事。 「當敵軍來襲，我現在開炮、開槍的話，對面可是會死人的耶！」 「還好殺人不是我的想法，那是我的上級長官的命令；而上級長官也是聽再上級長官的命令。」 而下令的人，並不會實際扣下扳機，或許也是最不會被情緒影響決策的職位吧？…",
-      "image": null,
-      "publishedAt": "2026-07-31T07:11:33Z",
-      "sourceId": "199cdf92fc46bfcd",
-      "sourceTitle": "Eddie Lv",
-      "link": "https://eddielv.com/musings/peeing-in-military-camp/",
-      "detailPath": "articles/046ba54cd27c5cd8c3c073c5.json"
-    },
-    {
-      "id": "722283639e96f365f5a9c515",
-      "title": "跟另一個站長互相監控：Uptime Kuma 交叉託管,和 Trust Proxy 開了反而更危險",
-      "summary": "這篇記錄了作者跟另一位自架站長交叉監控的完整過程,並整理成一份可照做的教學。起點是自架服務的一個尷尬處境:監控自己的那台機器,自己掛了就沒人通知得了。解法是互相盯,但一開始兩人都卡在同一個錯誤前提上——以為要走 HTTPS 就得交換憑證。真正的答案是不用交換:對方把子網域 A 紀錄指向你的 IP,TLS 就在你這裡終結,Let's Encrypt 的 HTTP-01 驗證會直接打到你的 nginx,所以你自己就能簽那張憑證、還自動續簽;共享 wildcard 反而踩中私鑰暴露與手動續簽兩個雷。文中也整理了反代 Kuma 必備的 WebSocket 設定(少了 Upgrade 標頭,即時圖表會完全不動)、給後端加公開 /health 而非用 401 取巧、用 push 型監控盯 cron 腳本這種沉默故障,以及…",
-      "image": null,
-      "publishedAt": "2026-07-31T06:00:43Z",
-      "sourceId": "bd51496b8ec0ca1d",
-      "sourceTitle": "Koimsurai 手記",
-      "link": "https://koimsurai.com/blog/uptime-kuma-cross-monitoring",
-      "detailPath": "articles/722283639e96f365f5a9c515.json"
     }
   ]
 }

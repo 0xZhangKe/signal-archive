@@ -1,6 +1,28 @@
 {
   "items": [
     {
+      "id": "046ba54cd27c5cd8c3c073c5",
+      "title": "在軍營尿尿",
+      "summary": "前些日子做了軍營的音響活動，同仁去上廁所，問了某個兵怎麼走，沒想到要層層向上報告，詢問能不能讓外面廠商進入建築物來借用廁所。而最後一個層級的人也只是說：「那裡走到底就是。」要同仁自己去，並沒有任何軍營的人盯著，表示似乎也不是真的那麼戒備森嚴。 輪到我想上廁所時，得到了更奇妙的答案。 「我不知道耶，但應該是這個走廊走到底左邊。」 …？ 我免役、沒服過兵役，不知道部隊文化，但在各種對話當中發現，所有人對於「做決定」是感到恐懼與焦慮的，所有行動最好都是上級的命令。 我思考一陣子，認為這並不完全是壞事。 「當敵軍來襲，我現在開炮、開槍的話，對面可是會死人的耶！」 「還好殺人不是我的想法，那是我的上級長官的命令；而上級長官也是聽再上級長官的命令。」 而下令的人，並不會實際扣下扳機，或許也是最不會被情緒影響決策的職位吧？…",
+      "image": null,
+      "publishedAt": "2026-07-31T07:11:33Z",
+      "sourceId": "199cdf92fc46bfcd",
+      "sourceTitle": "Eddie Lv",
+      "link": "https://eddielv.com/musings/peeing-in-military-camp/",
+      "detailPath": "articles/046ba54cd27c5cd8c3c073c5.json"
+    },
+    {
+      "id": "722283639e96f365f5a9c515",
+      "title": "跟另一個站長互相監控：Uptime Kuma 交叉託管,和 Trust Proxy 開了反而更危險",
+      "summary": "這篇記錄了作者跟另一位自架站長交叉監控的完整過程,並整理成一份可照做的教學。起點是自架服務的一個尷尬處境:監控自己的那台機器,自己掛了就沒人通知得了。解法是互相盯,但一開始兩人都卡在同一個錯誤前提上——以為要走 HTTPS 就得交換憑證。真正的答案是不用交換:對方把子網域 A 紀錄指向你的 IP,TLS 就在你這裡終結,Let's Encrypt 的 HTTP-01 驗證會直接打到你的 nginx,所以你自己就能簽那張憑證、還自動續簽;共享 wildcard 反而踩中私鑰暴露與手動續簽兩個雷。文中也整理了反代 Kuma 必備的 WebSocket 設定(少了 Upgrade 標頭,即時圖表會完全不動)、給後端加公開 /health 而非用 401 取巧、用 push 型監控盯 cron 腳本這種沉默故障,以及…",
+      "image": null,
+      "publishedAt": "2026-07-31T06:00:43Z",
+      "sourceId": "bd51496b8ec0ca1d",
+      "sourceTitle": "Koimsurai 手記",
+      "link": "https://koimsurai.com/blog/uptime-kuma-cross-monitoring",
+      "detailPath": "articles/722283639e96f365f5a9c515.json"
+    },
+    {
       "id": "2d00af5c56b30c3f8245e544",
       "title": "雨林裡的青蛙",
       "summary": "第一次聊天就聊宇宙的維度、平行宇宙、無數個自我、高我和暗物質的發現。 之後的話題常是哲學、生命探討、佛學等等 […] The post 雨林裡的青蛙 first appeared on susushare.com .",
@@ -32,17 +54,6 @@
       "sourceTitle": "è¿�ç»´å’–å•¡å�§",
       "link": "https://blog.ops-coffee.com/r/2026-southwest-road-trip-04-nanchang.html",
       "detailPath": "articles/916d616c491d264b181d1926.json"
-    },
-    {
-      "id": "4b51bde69c6d3c98a1c81d81",
-      "title": "快乐星期五",
-      "summary": "最近一个多月来，周五是我最快乐的日子。因为这天我不用出门，保洁阿姨也不会上门，我可以整天待在家里，无事相扰，无人打搅。理论上来说，我也不需要早起，终于可以睡个懒觉，这意味着我可以在 8 点半之后才起身。 昨天我怀着放松欢喜的心情上床睡觉，整晚睡得很踏实。没有蚊子，没有噩梦，也没有被空调冻醒。然后早上 6 点 30 分，我突然苏醒，从此就再也无法入睡。 这就是为什么我每周五都感觉很快乐的原因。在过去的五个星期五，每一次我都可以睡到八点半，然后每一次我都在七点前苏醒，每一次醒后都无法重新入睡。本来我一直都心存一种担忧，担心会不会有一天我突然从一个梦境滑入另外一个梦境，从一个世界滑入另一个平行世界，因为现实和世界看上去每天都很癫，很破碎，而且还摇摇欲坠。 现在好了，每个周五早上六点多，我坐在床上看看表就可以立即确认…",
-      "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgml6iq7vtcbUDxOVHurGuq-TQaVZ-4JpXZmaP26seJo2r_jx9yeX8-L2Y-Eoy-mvakaj56HvWJccUKQusIKFWrNUs36kNDFrlXcEk-qnYzJbnA_ukAJFq4ihH66G2r793JfPqVM2DWiUaO6h2J_P4FEZkNz9LNBGkeQzoncXvN5tN9b94QsEduuFlMvOs/s72-w452-h599-c/0_0%20-%202026-07-31T111919.090-gigapixel-cgi-2x.jpeg",
-      "publishedAt": "2026-07-31T04:32:57Z",
-      "sourceId": "095c6fbac5bbadfd",
-      "sourceTitle": "槽边往事",
-      "link": "https://www.hecaitou.com/2026/07/Happy-Friday.html",
-      "detailPath": "articles/4b51bde69c6d3c98a1c81d81.json"
     },
     {
       "id": "5e050bfc13d9072f6e71aeeb",
@@ -648,17 +659,6 @@
       "sourceTitle": "夕时",
       "link": "https://www.iyuxiyang.com/Moment/i2026/275.html",
       "detailPath": "articles/a7bc2981ca9ee6c8c241a949.json"
-    },
-    {
-      "id": "1dcba2f4e059eb0dc6d9e87f",
-      "title": "人生好多事不按照我的規劃走",
-      "summary": "🇰🇷 인생은 내 계획대로 흘러가지 않았다 (넘기지 마세요~ 한국어 버전은 아래에 있어요~ ) 回憶過往 在大學準備畢業的時候 我覺得自己想要走銀行，想在銀行工作 甚至非常相信我的人生應該就是這樣子了吧： 在銀行工作，然後工作到65歲退休，這就是我的人生 其實也有點羨慕我當時的自己，腦袋跟感受都很單純 上班族 ！就當上班族呀！有什麼問題嗎？ 不像現在，思考自己到底是誰、喜歡什麼、到底想發展什麼東西、憑什麼我就只能乖乖當上班族任人宰割評估我的表現、命令我該做什麼事情然後...才能賺到錢生活？ 而曾經在銀行算是『被荼毒』的日子 我似乎才更了解自己一些（雖然現在我還是有很多不了解自己的地方😅） 而在銀行工作的經驗，打破了我以為的劇本 也感受到人生的劇本，很多時候都沒照自己的計畫走 嚴格來說這好像也不是我能完…",
-      "image": null,
-      "publishedAt": "2026-07-26T11:30:42Z",
-      "sourceId": "51aefe52efef4bf4",
-      "sourceTitle": "一起和 Yoon 聊心事",
-      "link": "https://yoon.club/ep10/",
-      "detailPath": "articles/1dcba2f4e059eb0dc6d9e87f.json"
     }
   ]
 }
