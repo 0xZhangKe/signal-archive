@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-08-22T17:01:16+00:00</updated><author><name>Simon Willison</name></author><entry><title>llm 0.33</title><link href="https://simonwillison.net/2026/Aug/22/llm/" rel="alternate"/><published>2026-08-22T17:01:16+00:00</published><updated>2026-08-22T17:01:16+00:00</updated><id>https://simonwillison.net/2026/Aug/22/llm/</id><summary type="html">
+<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-08-22T21:04:26+00:00</updated><author><name>Simon Willison</name></author><entry><title>Quoting Linus Torvalds</title><link href="https://simonwillison.net/2026/Aug/22/linus-torvalds/" rel="alternate"/><published>2026-08-22T21:04:26+00:00</published><updated>2026-08-22T21:04:26+00:00</updated><id>https://simonwillison.net/2026/Aug/22/linus-torvalds/</id><summary type="html">
+    &lt;blockquote cite="https://github.com/torvalds/linux/commit/818bebeb63dd6bf5f4e07e145f6cdbace520a34c"&gt;&lt;p&gt;And this was a debug session from hell, enormously helped by an AI doing much of the grunt-work.&lt;/p&gt;
+&lt;p&gt;I'd like to call it my tireless helper, but the AI several times stated flat out that this was impossible and unsolvable and that we should just write a report about it.&lt;/p&gt;
+&lt;p&gt;I suspect those things have been trained by people who may not be quite as stubborn as I am.&lt;/p&gt;
+&lt;p&gt;But while the AI was ready to give up several times, it did keep adding debug code and analyzing it faithfully when I pushed. So credit where credit is due and I let the AI write the commit message above.&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p class="cite"&gt;&amp;mdash; &lt;a href="https://github.com/torvalds/linux/commit/818bebeb63dd6bf5f4e07e145f6cdbace520a34c"&gt;Linus Torvalds&lt;/a&gt;, drm/xe: Don't hand out the flat CCS storage as usable VRAM&lt;/p&gt;
+
+    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/linus-torvalds"&gt;linus-torvalds&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/linux"&gt;linux&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai-assisted-programming"&gt;ai-assisted-programming&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;&lt;/p&gt;
+
+
+
+</summary><category term="linus-torvalds"/><category term="linux"/><category term="generative-ai"/><category term="ai-assisted-programming"/><category term="ai"/><category term="llms"/></entry><entry><title>llm 0.33</title><link href="https://simonwillison.net/2026/Aug/22/llm/" rel="alternate"/><published>2026-08-22T17:01:16+00:00</published><updated>2026-08-22T17:01:16+00:00</updated><id>https://simonwillison.net/2026/Aug/22/llm/</id><summary type="html">
     
         &lt;p&gt;&lt;strong&gt;Release:&lt;/strong&gt; &lt;a href="https://github.com/simonw/llm/releases/tag/0.33"&gt;llm 0.33&lt;/a&gt;&lt;/p&gt;
         &lt;p&gt;My highlights from this release:&lt;/p&gt;
@@ -660,23 +671,4 @@ A vanity domain name (&lt;code&gt;stolen-thoughts.com&lt;/code&gt;) for &lt;a hr
 
 
 
-</summary><category term="jailbreaking"/><category term="ai"/><category term="openai"/><category term="prompt-injection"/><category term="generative-ai"/><category term="llms"/><category term="anthropic"/><category term="gemini"/><category term="llm-reasoning"/><category term="paper-review"/></entry><entry><title>datasette-upload-dbs 0.5a0</title><link href="https://simonwillison.net/2026/Aug/11/datasette-upload-dbs/" rel="alternate"/><published>2026-08-11T20:35:13+00:00</published><updated>2026-08-11T20:35:13+00:00</updated><id>https://simonwillison.net/2026/Aug/11/datasette-upload-dbs/</id><summary type="html">
-    
-        &lt;p&gt;&lt;strong&gt;Release:&lt;/strong&gt; &lt;a href="https://github.com/simonw/datasette-upload-dbs/releases/tag/0.5a0"&gt;datasette-upload-dbs 0.5a0&lt;/a&gt;&lt;/p&gt;
-        &lt;p&gt;This plugin has been around for a while - it lets users upload a brand new SQLite database to a hosted Datasette instance, at which point that database will start being served by that instance.&lt;/p&gt;
-&lt;p&gt;It can also be used to atomically swap a database with a more recent version. The uploaded database is saved to a file, verified, then swapped in so &lt;code&gt;/name&lt;/code&gt; starts serving the new one.&lt;/p&gt;
-&lt;p&gt;The new release adds a formalized API, so you can replace an existing database (or add a new one) like this:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;curl -X POST \
-  -H "Authorization: Bearer $API_TOKEN" \
-  -H "Accept: application/json" \
-  -F "db=@content.db" \
-  -F "db_name=content" \
-  https://your-instance.example.com/-/upload-dbs
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This means you can build fresh databases in an environment such as GitHub Actions and swap them in production as soon as that build has completed.&lt;/p&gt;
-    
-    
-        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/datasette"&gt;datasette&lt;/a&gt;&lt;/p&gt;
-    
-
-</summary><category term="datasette"/></entry></feed>
+</summary><category term="jailbreaking"/><category term="ai"/><category term="openai"/><category term="prompt-injection"/><category term="generative-ai"/><category term="llms"/><category term="anthropic"/><category term="gemini"/><category term="llm-reasoning"/><category term="paper-review"/></entry></feed>
