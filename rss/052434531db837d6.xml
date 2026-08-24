@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-08-23T20:24:52+00:00</updated><author><name>Simon Willison</name></author><entry><title>Anthropic’s best AI model struggles to attract users as cheaper tools thrive</title><link href="https://simonwillison.net/2026/Aug/23/anthropics-best-ai-model-struggles-to-attract-users-as-cheaper-t/" rel="alternate"/><published>2026-08-23T20:24:52+00:00</published><updated>2026-08-23T20:24:52+00:00</updated><id>https://simonwillison.net/2026/Aug/23/anthropics-best-ai-model-struggles-to-attract-users-as-cheaper-t/</id><summary type="html">
+<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-08-24T11:38:15+00:00</updated><author><name>Simon Willison</name></author><entry><title>Your executable is a SQLite database</title><link href="https://simonwillison.net/2026/Aug/24/your-executable-is-a-sqlite-database/" rel="alternate"/><published>2026-08-24T11:38:15+00:00</published><updated>2026-08-24T11:38:15+00:00</updated><id>https://simonwillison.net/2026/Aug/24/your-executable-is-a-sqlite-database/</id><summary type="html">
+    
+&lt;p&gt;&lt;strong&gt;&lt;a href="https://fzakaria.com/2026/08/23/your-executable-is-a-sqlite-database"&gt;Your executable is a SQLite database&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+Farid Zakaria describes a neat Linux pattern for creating a SQLite database file that can be directly used as an executable binary.&lt;/p&gt;
+&lt;p&gt;The trick sets the SQLite file format's 4-byte application ID (68 bytes into the file) to SELF, standing for Structured Executable &amp;amp; Linkable Format.  The various components of the ELF executable format are then arranged into a number of different SQLite tables, using &lt;a href="https://github.com/fzakaria/selfdb/blob/main/schema/self.sql"&gt;this schema&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Their &lt;code&gt;self-exec&lt;/code&gt; interpreter (&lt;a href="https://github.com/fzakaria/selfdb/blob/main/loader/self-exec.c"&gt;C code here&lt;/a&gt;) can then extract and execute the necessary pieces.&lt;/p&gt;
+&lt;p&gt;You can additionally use a Linux mechanism called &lt;a href="https://docs.kernel.org/admin-guide/binfmt-misc.html"&gt;binfmt_misc&lt;/a&gt; to teach the kernel to execute that any time it encounters an executable matching that binary pattern. Farid uses NixOS here, but without NixOS I think registration looks something like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;printf '%s\n' ':self:M:68:SELF::/usr/local/bin/self-exec:' \
+  &amp;gt; /proc/sys/fs/binfmt_misc/register
+&lt;/code&gt;&lt;/pre&gt;
+
+    &lt;p&gt;&lt;small&gt;&lt;/small&gt;Via &lt;a href="https://news.ycombinator.com/item?id=49415271"&gt;Hacker News&lt;/a&gt;&lt;/small&gt;&lt;/p&gt;
+
+
+    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/c"&gt;c&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/linux"&gt;linux&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/sqlite"&gt;sqlite&lt;/a&gt;&lt;/p&gt;
+
+
+
+</summary><category term="c"/><category term="linux"/><category term="sqlite"/></entry><entry><title>Anthropic’s best AI model struggles to attract users as cheaper tools thrive</title><link href="https://simonwillison.net/2026/Aug/23/anthropics-best-ai-model-struggles-to-attract-users-as-cheaper-t/" rel="alternate"/><published>2026-08-23T20:24:52+00:00</published><updated>2026-08-23T20:24:52+00:00</updated><id>https://simonwillison.net/2026/Aug/23/anthropics-best-ai-model-struggles-to-attract-users-as-cheaper-t/</id><summary type="html">
     
 &lt;p&gt;&lt;strong&gt;&lt;a href="https://www.ft.com/content/5ee49718-c258-4f01-aa32-7e5b76ae5245"&gt;Anthropic’s best AI model struggles to attract users as cheaper tools thrive&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 A few interesting numbers in this FT story gathered from "people with knowledge of the matter":&lt;/p&gt;
@@ -629,17 +647,4 @@ The latest DeepSeek Pro model is now available, via API only. I had to link to O
         &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/databases"&gt;databases&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/postgresql"&gt;postgresql&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/projects"&gt;projects&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/python"&gt;python&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/sql"&gt;sql&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/sqlalchemy"&gt;sqlalchemy&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/sqlite"&gt;sqlite&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/sqlite-utils"&gt;sqlite-utils&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/duckdb"&gt;duckdb&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/coding-agents"&gt;coding-agents&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/codex"&gt;codex&lt;/a&gt;&lt;/p&gt;
     
 
-</summary><category term="databases"/><category term="postgresql"/><category term="projects"/><category term="python"/><category term="sql"/><category term="sqlalchemy"/><category term="sqlite"/><category term="sqlite-utils"/><category term="duckdb"/><category term="coding-agents"/><category term="codex"/></entry><entry><title>Quoting Florian Herrengt</title><link href="https://simonwillison.net/2026/Aug/12/florian-herrengt/" rel="alternate"/><published>2026-08-12T15:08:47+00:00</published><updated>2026-08-12T15:08:47+00:00</updated><id>https://simonwillison.net/2026/Aug/12/florian-herrengt/</id><summary type="html">
-    &lt;blockquote cite="https://blog.florianherrengt.com/ai-removing-middle-class-software-engineering.html"&gt;&lt;p&gt;But then users start to report a weird bug. It's the 4th time your team has been trying to fix it. I mean... asking AI to fix it. Unfortunately, it seems like not even Fable can figure it out.&lt;/p&gt;
-&lt;p&gt;You go talk to the person who worked on this feature.&lt;/p&gt;
-&lt;p&gt;"So where does the data come from?"&lt;/p&gt;
-&lt;p&gt;"Hmm... actually I don't know. Let me ask Claude."&lt;/p&gt;
-&lt;p&gt;You sit next to each other watching an endless wall of text appear on the screen. Neither of you has any idea whether any of it is true but Claude seems very confident. [...]&lt;/p&gt;
-&lt;p&gt;This project has become so convoluted, with so many layers and services, that no one on your team could possibly start to understand what's going on.&lt;/p&gt;&lt;/blockquote&gt;
-&lt;p class="cite"&gt;&amp;mdash; &lt;a href="https://blog.florianherrengt.com/ai-removing-middle-class-software-engineering.html"&gt;Florian Herrengt&lt;/a&gt;, AI is removing the middle class of software engineering&lt;/p&gt;
-
-    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/ai-misuse"&gt;ai-misuse&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/cognitive-debt"&gt;cognitive-debt&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai-assisted-programming"&gt;ai-assisted-programming&lt;/a&gt;&lt;/p&gt;
-
-
-
-</summary><category term="ai-misuse"/><category term="cognitive-debt"/><category term="generative-ai"/><category term="ai"/><category term="llms"/><category term="ai-assisted-programming"/></entry></feed>
+</summary><category term="databases"/><category term="postgresql"/><category term="projects"/><category term="python"/><category term="sql"/><category term="sqlalchemy"/><category term="sqlite"/><category term="sqlite-utils"/><category term="duckdb"/><category term="coding-agents"/><category term="codex"/></entry></feed>
