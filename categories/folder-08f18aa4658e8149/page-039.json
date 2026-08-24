@@ -1,6 +1,28 @@
 {
   "items": [
     {
+      "id": "a0d4b2ffb1ce121203dbdafa",
+      "title": "怎麼選擇用什麼工具來做哪件事情？（無論是 Blog、DAW 還是任何物理工具）",
+      "summary": "最近一直在思考，如果有人問我 Blog 該怎麼架設，他如果完全不懂 Terminal，該推薦他 hugo 嗎？還是用 Wordpress 來架設，或有其他方式？ 想了許久，對一般人而言較簡單的方式，或許還是 Wordpress 吧？ 最終，Eddie 得到的結論是： 我用什麼，就推薦什麼；也建議如果大家在踏入完全不懂的領域時，選擇你身邊人使用的工具。 原因很簡單，教的人不用再多研究一個東西，學的人也絕對問得到答案，雙方皆大歡喜。 而這個觀念，Eddie 忘記是哪個編曲老師分享的，他說：「你身邊的人用什麼 DAW，你就用什麼，這樣你才有人能問，甚至你可以直接丟整個專案檔案請人幫你處理問題。」 以下是 Eddie 的各種入坑選擇（跟風）例子： 「我老師用 Logic Pro，我也用這個！」 「同業都用 Wing…",
+      "image": null,
+      "publishedAt": "2026-01-02T16:31:38Z",
+      "sourceId": "199cdf92fc46bfcd",
+      "sourceTitle": "Eddie Lv",
+      "link": "https://eddielv.com/musings/which-tools/",
+      "detailPath": "articles/a0d4b2ffb1ce121203dbdafa.json"
+    },
+    {
+      "id": "fa7668eb0cd7ba9fe404ffff",
+      "title": "隨機文章功能已上線！",
+      "summary": "到首頁點擊「 🎲 隨機文章 」就可以隨機選一篇文章來閱讀！ 這個功能跟「歷史上的今天」一樣，是爲了在文章數越來越多時，可以讓第一次到訪的讀者有一些方向可以看，而不會被文章列表嚇到。 如果你也想做一個 # 新增檔案 content/random.md --- title: \"隨機文章跳轉中...\" layout: \"random\" --- layouts/_default/random.html {{ partial \"header.html\" . }} < div class = \"article-meta\" > < h1 >< span class = \"title\" >{{ .Title }}</ span ></ h1 > </ div > < main > < div style = \"text-al…",
+      "image": null,
+      "publishedAt": "2026-01-02T16:19:00Z",
+      "sourceId": "199cdf92fc46bfcd",
+      "sourceTitle": "Eddie Lv",
+      "link": "https://eddielv.com/articles/random-article/",
+      "detailPath": "articles/fa7668eb0cd7ba9fe404ffff.json"
+    },
+    {
       "id": "440179f1c6003dce42968225",
       "title": "Apple 討厭開源 opus 格式",
       "summary": "《最佳聲音有損格式》 中提到，檔案壓縮效率 opus > AAC > mp3。 其中 AAC 是 Apple 制定的，這個格式在 Apple 裝置下是暢通無阻。 但如果下載了 opus 會發現 Apple 內建的播放器無法打開（內建播放器只支援能 硬體解碼 的格式），無法丟進 Logic Pro 來做音樂，opus 簡直像是外星生物。 而 Youtube 在近期的新影片中，聲音編碼同時配有 AAC 與 opus，而 Spotify 用 opus，只有 Apple Music 仍舊使用 AAC。 直接指定原始格式要 AAC or opus # 編碼 指令 原生 AAC → .m4a yt-dlp -f 140 <URL> 原生 Opus → .opus/.webM yt-dlp -f 251 <URL> You…",
@@ -637,28 +659,6 @@
       "sourceTitle": "Wiwi.Blog Blog",
       "link": "https://wiwi.blog/blog/tech-progress",
       "detailPath": "articles/2368d967589494364af062df.json"
-    },
-    {
-      "id": "772bf6ddbfb6760ba2eca422",
-      "title": "從 macOS 轉 Linux 系統一年多了",
-      "summary": "前言 # 在 2024 年 9 月時，曾經安裝過 Pop!OS ，讓 Macbook Pro 2015 速度起死回生，後來轉到 Mint 使用到現在。 完美替代、稍不完美但可接受替代 # 瀏覽器 # 只要能裝最新的瀏覽器，應該 90% 以上的生活日常都能輕鬆做到，看影片、聽音樂、讀文章等等，這部分我覺得跟 Win 或 macOS 沒有什麼區別，唯一不習慣的是，在 macOS 中，可以直接在觸控板用雙指手勢就把畫面絲滑放大，Linux 只能用 control 加上 + 。 寫部落格 # 用 VS Code 寫 markdown，並 git 到 github 上版本控制，這部分也完全跟 macOS 完全一樣，所以轉 Linux 完全沒有任何影響。 音樂播放器 # 雖然 Eddie 還沒有找到最喜歡的 Linux…",
-      "image": null,
-      "publishedAt": "2025-12-27T02:55:04Z",
-      "sourceId": "199cdf92fc46bfcd",
-      "sourceTitle": "Eddie Lv",
-      "link": "https://eddielv.com/musings/linux-1y/",
-      "detailPath": "articles/772bf6ddbfb6760ba2eca422.json"
-    },
-    {
-      "id": "95097c74a4c6fbbbacf70c05",
-      "title": "是什么，为什么，怎么做 —— 谈谈 DNS 泄漏、CDN 访问优化与 Fake IP",
-      "summary": "2001 年 4 月 IETF 通过的 RFC3089 中所描述的 Fake IP，是四层代理分流场景下 性能相对最佳、体验相对最好、实现相对最简单的「最佳实践」。相比之下，Real IP 模式下为了尽可能接近 Fake IP 的性能、体验，需要大量额外配置、付出更多的代价。",
-      "image": "https://img.skk.moe/blog/t2025/lets-talk-about-dns-cdn-fake-ip.png",
-      "publishedAt": "2025-12-26T18:17:00Z",
-      "sourceId": "5a840ced5a57e7ff",
-      "sourceTitle": "Sukka's Blog",
-      "link": "https://blog.skk.moe/post/lets-talk-about-dns-cdn-fake-ip/",
-      "detailPath": "articles/95097c74a4c6fbbbacf70c05.json"
     }
   ]
 }

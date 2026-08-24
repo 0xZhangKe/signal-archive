@@ -1,6 +1,28 @@
 {
   "items": [
     {
+      "id": "30154ee96a154bacd0a01d96",
+      "title": "无语，这叼毛",
+      "summary": "早上醒的很早，不情愿地翻开手机看了眼时间，意外的在通知界面发现了一条通话记录。 因为是凌晨一点半，所以由小爱同学负责接听。本来平时看到这类AI通话记录早已是习以为常，但这次让我感到非常生气，因为显示的是一句骂人的话。 号码来自广州移动，听了一下通话录音，嘈杂的风声夹杂着独特的广东口音，感觉就像是一个精神小伙大半夜骑着摩托在风里驰骋，这叼毛。 气的我直接电话拨过去，准备好好问候一下他，但是电话打到一半又觉得还是算了，要是就这样跟一个人骂起来让我觉得很丢人。最后给他发了一条询问为何如此的短信，还是以一个心平气和的语气，结果这都一天了，连个屁都没有，这叼毛。 不知道他是怎么把电话打到我手机上的，照这个情况看，我估摸着应该是这个人打错电话了。但听到我在小爱同学里设置的我自己那僵硬无比的音色后，恶趣味泛滥，飙几句下三滥…",
+      "image": null,
+      "publishedAt": "2024-07-10T16:00:00Z",
+      "sourceId": "511a941174e52a33",
+      "sourceTitle": "蒙奇日记",
+      "link": "https://luffy.cc/a/wu-yu-zi",
+      "detailPath": "articles/30154ee96a154bacd0a01d96.json"
+    },
+    {
+      "id": "05c91d017d96b493e2c55cb1",
+      "title": "CloudGoat (☁️🐐)靶场初体验",
+      "summary": "一个开源的云靶场： https://github.com/RhinoSecurityLabs/cloudgoat/ 体验顺便学习一下📖 安装 & 配置 安装前确保机器： Linux or MacOS. Windows is not officially supported. Argument tab-completion requires bash 4.2+ (Linux, or OSX with some difficulty). Python3.6+ is required. Terraform >= 0.14 installed and in your $PATH. The AWS CLI installed and in your $PATH, and an AWS account with suff…",
+      "image": "https://skyblu3519.github.io/post-images/cloudgoat1/1720531972702-e43360e6-83e6-4a6b-b4a6-0b14500a8344.png",
+      "publishedAt": "2024-07-09T15:58:22Z",
+      "sourceId": "4f5bf353ca5bd538",
+      "sourceTitle": "skkyblu3",
+      "link": "https://skyblu3519.github.io/post/cloudgoat-ba-chang-chu-ti-yan/",
+      "detailPath": "articles/05c91d017d96b493e2c55cb1.json"
+    },
+    {
       "id": "89619b6460ee7a606f396449",
       "title": "在AWS上使用诱饵用户捕获攻击者",
       "summary": "思路就是创建一个IAM用户，然后用CloudWatch监控该用户的行为，如果出现了该用户的操作则触发告警，并通过邮件通知。 使用控制台和Terraform两种方法实现 控制台创建 创建诱饵用户 在 IAM 控制台创建一个诱饵用户 honeyUser ，不附加任何权限 为 honeyUser 创建一个访问密钥，这对密钥之后便可以通过一些方法泄露出去，进而捕获可疑的攻击者。 创建CloudTrail并将事件发送至CloudWatch 进入 CloudTrail 控制台创建一个 trail （追踪），创建 CloudTrail 的时候需要选择一个S3来对日志进行存储，如果没有提前准备好则需要在这里新创建一个。 这里不使用加密方便后面数据的检索 配置向 CloudWatch Logs 发送事件，之后可以在 Cloud…",
@@ -637,28 +659,6 @@
       "sourceTitle": "Android Performance",
       "link": "https://androidperformance.com/2024/05/21/Android-Perfetto-03-how-to-analysis-perfetto/",
       "detailPath": "articles/cd3d79ddf09b74d47e83df5c.json"
-    },
-    {
-      "id": "cf7d9716e997a897533d806d",
-      "title": "Android Perfetto 系列 2：Perfetto Trace 抓取",
-      "summary": "上一篇文章 Android Perfetto 系列 1：Perfetto 工具简介 介绍了 Perfetto 是什么，这篇简单介绍一下 Perfetto 的抓取。 随着 Google 宣布 Systrace 工具停更，推出 Perfetto 工具，Perfetto 在我的日常工作中已经基本能取代 Systrace 工具。同时 Oppo、Vivo 等大厂也已经把 Systrace 切换成了 Perfetto，许多新接触 Android 性能优化的小伙伴对于 Perfetto 那眼花缭乱的界面和复杂的功能感觉头疼，希望我能把之前的那些 Systrace 文章使用 Perfetto 来呈现。",
-      "image": null,
-      "publishedAt": "2024-05-20T23:29:41Z",
-      "sourceId": "1aa1837ca33d8d55",
-      "sourceTitle": "Android Performance",
-      "link": "https://androidperformance.com/2024/05/21/Android-Perfetto-02-how-to-get-perfetto/",
-      "detailPath": "articles/cf7d9716e997a897533d806d.json"
-    },
-    {
-      "id": "997fd13c84aa00f414d7f205",
-      "title": "Android Perfetto 系列 1：Perfetto 工具简介",
-      "summary": "本篇是 Perfetto 系列文章的第一篇，主要是简单介绍 Perfetto 工具，包括 Perfetto 的历史、发展，以及 Perfetto 能做什么。 随着 Google 宣布 Systrace 工具停更，推出 Perfetto 工具，Perfetto 在我的日常工作中已经基本能取代 Systrace 工具。同时 Oppo、Vivo 等大厂也已经把 Systrace 切换成了 Perfetto，许多新接触 Android 性能优化的小伙伴对于 Perfetto 那眼花缭乱的界面和复杂的功能感觉头疼，希望我能把之前的那些 Systrace 文章使用 Perfetto 来呈现。",
-      "image": null,
-      "publishedAt": "2024-05-20T23:29:22Z",
-      "sourceId": "1aa1837ca33d8d55",
-      "sourceTitle": "Android Performance",
-      "link": "https://androidperformance.com/2024/05/21/Android-Perfetto-01-What-is-perfetto/",
-      "detailPath": "articles/997fd13c84aa00f414d7f205.json"
     }
   ]
 }
