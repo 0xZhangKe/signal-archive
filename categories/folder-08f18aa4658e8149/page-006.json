@@ -1,6 +1,39 @@
 {
   "items": [
     {
+      "id": "dfd057d97b089ea3ea4727b8",
+      "title": "VS Code Remote-SSH 把我的伺服器燒到 96°C：rust-analyzer 無限重跑 cargo check",
+      "summary": "一台跑著三十幾個容器、同時被 VS Code Remote-SSH 連進去開發的家用伺服器,溫度釘在 90°C 撐了四十分鐘、load 從 8 衝到 196,最後失去回應。而把它燒掉的不是那些服務,是編輯器。這篇記錄整個追查過程:三條看起來很有說服力但都是錯的線索(SMU 當掉後感測器說謊、重開機就好、CPU 只有 30 到 50%),怎麼用 sysstat 的 sar 和 netdata 的 apps.plugin 回溯一個已經結束的事件,以及最後抓到的三個兇手——rust-analyzer 對一個 GTK 依賴全缺、永遠編不過的 Tauri 專案無限重跑 cargo check、Foam 擴充讓 ripgrep 開出兩百多個行程、還有只是雜訊的 RustDesk 輪詢。文末附上防線設定與事後補的兩道保險。",
+      "image": null,
+      "publishedAt": "2026-08-04T07:16:25Z",
+      "sourceId": "bd51496b8ec0ca1d",
+      "sourceTitle": "Koimsurai 手記",
+      "link": "https://koimsurai.com/blog/vscode-remote-ssh-burned-my-server",
+      "detailPath": "articles/dfd057d97b089ea3ea4727b8.json"
+    },
+    {
+      "id": "44b0dedaa29cc4c935d3bee7",
+      "title": "縈繞於心的十二道難題",
+      "summary": "偶然看到費曼的 12 道難題（Feynman’s 12 Favorite Problems）這東東 […]",
+      "image": "https://2.gravatar.com/avatar/2ce149002ca625e3240835cbfaa3481507a538243a4c31c830176f97f9a9f060?s=96&d=identicon&r=G",
+      "publishedAt": "2026-08-04T07:14:57Z",
+      "sourceId": "737dffed2384c922",
+      "sourceTitle": "恐龍化石的網誌",
+      "link": "https://cylikesreading.wordpress.com/2026/08/04/twelve-problems-originated-from-feynman/",
+      "detailPath": "articles/44b0dedaa29cc4c935d3bee7.json"
+    },
+    {
+      "id": "e245c20e3b085fa39d59c30e",
+      "title": "UPS 加 NUT 讓伺服器斷電自動關機：設定全紀錄,和一條被貓咬過的電源線",
+      "summary": "這篇把 UPS 加 NUT 的完整設定寫成一份可照做的教學:UPS 選型的三個條件(PFC 純正弦波、AVR、NUT 支援)、NUT 的 driver / upsd / upsmon 三層架構與五個設定檔各管什麼、upsmon.conf 逐行說明、POWERDOWNFLAG 為什麼不能漏,以及 BIOS 那個選錯就前功盡棄的選項——Restore after AC Power Loss 必須是 On 而不是 Last State,因為 NUT 乾淨關機後機器的狀態就是關機。另外收錄把 UPS 狀態接到 cron log、Discord 通知與自架面板的做法。而這一切的起點是搬家後伺服器每天半夜硬斷電:線鬆、共用迴路、過熱、PSU 全試過,但那些都只是猜測。作者買 UPS 一半是為了保護、一半是把它當量測儀器用…",
+      "image": null,
+      "publishedAt": "2026-08-04T06:03:43Z",
+      "sourceId": "bd51496b8ec0ca1d",
+      "sourceTitle": "Koimsurai 手記",
+      "link": "https://koimsurai.com/blog/ups-nut-and-the-cable-the-cat-chewed",
+      "detailPath": "articles/e245c20e3b085fa39d59c30e.json"
+    },
+    {
       "id": "a2587e55772899d7ddff5601",
       "title": "入蜀记 day436 钟美美",
       "summary": "「钟美美。」",
@@ -230,17 +263,6 @@
       "sourceTitle": "Wiwi.Blog Blog",
       "link": "https://wiwi.blog/blog/let-it-run",
       "detailPath": "articles/ff98259ec5ba860e49603477.json"
-    },
-    {
-      "id": "543536c4e57edb27ed80d8da",
-      "title": "大脑充血 Vol.92",
-      "summary": "我发现自己遇到「不测风云」，也就是那些难以预料的烦心事时，已经能够做到表面平静地发疯十分钟，然后该干嘛干嘛。这周济南总是莫名其妙地开始刮大风、下暴雨，虽然讨厌袜子被打湿的感觉，但包里常备着折叠伞，也还算从容不迫。 其实还有些家人和工作上的大小事，不过我现在更在乎自己刚刚从 MUJI 买的粘毛刷好不好用，今天有没有吃燕麦喝酸奶，明天早上应该读《第一个人》还是《现象学导论》。印象中不少「重要人物」常常把自己的生活外包给别人，以腾出时间关注那些更具商业价值的事情。而我呢？如果我每天回到家不能亲自用吸尘器把地板拖得一尘不染，听见灶台点燃的热水沸腾的声音，我都不知道自己怎么活下去。 吾仅悉落 MY SKYSCRAPER 专辑 Nirosta Steel Bandcamp NeoDB 复古，有种…… 既老派又年轻的奇妙听…",
-      "image": "https://img.eltr.ac/geedeapro/weekly/92/a3995599019_1x1_700.avif",
-      "publishedAt": "2026-08-02T23:57:43Z",
-      "sourceId": "7e27e325b5de8871",
-      "sourceTitle": "極客死亡計劃",
-      "link": "https://www.geedea.pro/weekly/92/",
-      "detailPath": "articles/543536c4e57edb27ed80d8da.json"
     },
     {
       "id": "fd02f3845aac05ea6efa6e8c",
@@ -637,28 +659,6 @@
       "sourceTitle": "Feed Me, Haruo",
       "link": "https://haruowang.vercel.app/global/english/vox.html",
       "detailPath": "articles/257b03eb7d3624a47b056fc1.json"
-    },
-    {
-      "id": "2efdef58a9de14f2c019e6b4",
-      "title": "上伊那酒單，醉姿如百合",
-      "summary": "動畫《上伊那牡丹，醉姿如百合》的酒單及雜項整理",
-      "image": null,
-      "publishedAt": "2026-07-31T15:30:14Z",
-      "sourceId": "50bce2ced06e6077",
-      "sourceTitle": "Feed Me, Haruo",
-      "link": "https://haruowang.vercel.app/global/japan/botan.html",
-      "detailPath": "articles/2efdef58a9de14f2c019e6b4.json"
-    },
-    {
-      "id": "69167ded39955861fa563656",
-      "title": "日本迷你電影院",
-      "summary": "由JFF Theater介紹的影廳整理",
-      "image": null,
-      "publishedAt": "2026-07-31T15:30:14Z",
-      "sourceId": "50bce2ced06e6077",
-      "sourceTitle": "Feed Me, Haruo",
-      "link": "https://haruowang.vercel.app/global/japan/mini-theater.html",
-      "detailPath": "articles/69167ded39955861fa563656.json"
     }
   ]
 }
