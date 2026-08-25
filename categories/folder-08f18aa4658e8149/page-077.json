@@ -1,6 +1,28 @@
 {
   "items": [
     {
+      "id": "688a3dc9218be3435e56209a",
+      "title": "Linux 下 Node Source 安装的 npm 权限问题",
+      "summary": "前言 近期安装了 Linux 系统作为主力机器的第二系统，双启动引导。 系统是 Pop!OS 20.04 LTS ，基于 Ubuntu 20.04 由于前端开发及部署需求，需要安装 node.js，于是使用 node source 提供的 node 发行版。 由于安装完成后，npm 存储包的目录为 /usr ，使用时必须加 sudo ，为了避免这种情况和权限安全问题，需要将 npm 的包存储到用户目录下，并且强烈不建议使用 sudo 来全局安装包到 /usr 目录下 方法 检查当前 npm 安装的包路径前缀 1 npm config get prefix 如果返回 /usr 则执行以下命令 1 2 3 mkdir ~/.npm-global export NPM_CONFIG_PREFIX = ~/.npm-…",
+      "image": null,
+      "publishedAt": "2022-03-20T17:16:02Z",
+      "sourceId": "3220115c042340a7",
+      "sourceTitle": "TaurusXin 的独立博客",
+      "link": "https://www.taurusxin.com/npm-prefix/",
+      "detailPath": "articles/688a3dc9218be3435e56209a.json"
+    },
+    {
+      "id": "5f34ad74b791516d6e6030d1",
+      "title": "Kubernetes、集群联邦和资源分发",
+      "summary": "",
+      "image": null,
+      "publishedAt": "2022-03-19T00:00:00Z",
+      "sourceId": "4d49716051922902",
+      "sourceTitle": "面向信仰编程 - Articles",
+      "link": "https://draven.co//kuberentes-federation",
+      "detailPath": "articles/5f34ad74b791516d6e6030d1.json"
+    },
+    {
       "id": "aae03b6048973b569e8daa55",
       "title": "百年未有之大变局，我试着聊点政治",
       "summary": "自从出国之后跟国内亲人们的交流就少得多了，以前会经常和我爸讨论一些社会经验和时局的话题，现在他们更多的是关心我的新生活是否顺利。说实话，在加拿大的生活比在中国要简单很多，像这样的发达资本主义国家已经发展几百年了，方方面面都已经相当成熟，也有清晰的界限和规则，任何人都可以在一定的前提下享受明确的、不受限的自由。首先我想重申自己的一个观点就是任何人都应该关心政治，此前我提过很多次了。都知道“经济基础决定上层建筑”，也知道任何事物都不是孤立存在的，所以一定有东西能影响甚至决定经济，那就是政治。大部分情况下，经济规律只能在一个平稳的政治环境中才能体现出来，如果政治环境稍有动荡，反映到经济上就是翻天覆地。这次俄乌战争爆发之后，在美国的很多中概股跌得很严重，然后就会在社交媒体上看到很多不明真相的人都在讨论要不要抄底——如…",
@@ -637,28 +659,6 @@
       "sourceTitle": "Elizen's Blog",
       "link": "https://elizen.me/newsletter/2021/12/newsletter-023/",
       "detailPath": "articles/9058f82ff1ced4eaaa2348e9.json"
-    },
-    {
-      "id": "0600b648108ebd7a4199d2b4",
-      "title": "读《张医生与王医生》",
-      "summary": "读完这 40 万字《张医生与王医生》，好像看了一部 4 个小时的电影，再一次想起书中也提到的《铁西区》。留几句读后感： 1，我对伊险峰是有滤镜的，极好的那种，不论是他做《第一财经周刊》，还是后来的好奇心日报，直到现在的小鸟文学，就像李海鹏说的，他是中国媒体界凤毛麟角的人物。 2，阅读感受不好，一方面是本书有两位作者书写，一个负责采访，一个负责专栏；另一方面，我对书中提到的伴随着工业化和城市化进程诞生的工人阶级的衰落、士绅化的了解有限。 3，当这些阶级概念以「社会」一词包装成改革开放 40 年的东北展现在我眼前时，书中说到三代人的故事，我心领神会甚至对这种熟悉感到窃喜。 4，伊险峰的重点在前言后记都写得很清楚，通过对他两个同学的采访和大量的资料，想了解曾经作为共和国长子的沈阳为何成了城市化进程中掉队的一员，以及…",
-      "image": null,
-      "publishedAt": "2021-12-08T00:00:00Z",
-      "sourceId": "fc41292f8a54624e",
-      "sourceTitle": "Elizen's Blog",
-      "link": "https://elizen.me/posts/2021/12/doctor-zhang-and-doctor-wang/",
-      "detailPath": "articles/0600b648108ebd7a4199d2b4.json"
-    },
-    {
-      "id": "02de9e1f5b57d7dd33a8b124",
-      "title": "2021 年 JavaScript Promise 性能对比",
-      "summary": "我们正生活在一个「Any application that can be written in JavaScript, will eventually be written in JavaScript」的时代。作为一门兼具动态性和简单性的语言，JavaScript 已经占领了客户端、服务端，甚至在机器学习中也占据一席之地；不可避免的，异步执行也逐渐成为这门语言不可缺少的一部分。 TL;...",
-      "image": "https://img.skk.moe/blog/t2021/promise-performance-benchmark.png",
-      "publishedAt": "2021-12-07T08:19:00Z",
-      "sourceId": "5a840ced5a57e7ff",
-      "sourceTitle": "Sukka's Blog",
-      "link": "https://blog.skk.moe/post/promise-performance-benchmark/",
-      "detailPath": "articles/02de9e1f5b57d7dd33a8b124.json"
     }
   ]
 }
