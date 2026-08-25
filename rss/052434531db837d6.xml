@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-08-24T11:38:15+00:00</updated><author><name>Simon Willison</name></author><entry><title>Your executable is a SQLite database</title><link href="https://simonwillison.net/2026/Aug/24/your-executable-is-a-sqlite-database/" rel="alternate"/><published>2026-08-24T11:38:15+00:00</published><updated>2026-08-24T11:38:15+00:00</updated><id>https://simonwillison.net/2026/Aug/24/your-executable-is-a-sqlite-database/</id><summary type="html">
+<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-08-24T16:27:04+00:00</updated><author><name>Simon Willison</name></author><entry><title>llm-anthropic 0.27</title><link href="https://simonwillison.net/2026/Aug/24/llm-anthropic/" rel="alternate"/><published>2026-08-24T16:27:04+00:00</published><updated>2026-08-24T16:27:04+00:00</updated><id>https://simonwillison.net/2026/Aug/24/llm-anthropic/</id><summary type="html">
+    
+        &lt;p&gt;&lt;strong&gt;Release:&lt;/strong&gt; &lt;a href="https://github.com/simonw/llm-anthropic/releases/tag/0.27"&gt;llm-anthropic 0.27&lt;/a&gt;&lt;/p&gt;
+        &lt;p&gt;This release of the Anthropic plugin for &lt;a href="https://llm.datasette.io/"&gt;LLM&lt;/a&gt; mainly provides compatibility with the recently released &lt;a href="https://github.com/anthropics/anthropic-sdk-python/releases/tag/v1.0.0"&gt;anthropic v1.0.0&lt;/a&gt; Python library, which switches from &lt;code&gt;httpx&lt;/code&gt; to &lt;a href="https://github.com/pydantic/httpx2"&gt;httpx2&lt;/a&gt;. OpenAI made the same change in their &lt;a href="https://github.com/openai/openai-python/releases/tag/v3.0.0"&gt;v3.0.0 release&lt;/a&gt; two weeks ago.&lt;/p&gt;
+&lt;p&gt;Anthropic provide this &lt;a href="https://github.com/anthropics/anthropic-sdk-python/blob/v1.0.0/MIGRATION.md"&gt;migration guide&lt;/a&gt; for upgrading to 1.0, so I prompted Fable 5 in Claude Code with:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;Upgrade to anthropic&amp;gt;=1 - read https://raw.githubusercontent.com/anthropics/anthropic-sdk-python/refs/heads/main/MIGRATION.md and get the tests passing&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Here's &lt;a href="https://github.com/simonw/llm-anthropic/pull/84"&gt;the resulting PR&lt;/a&gt;.&lt;/p&gt;
+    
+    
+        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/python"&gt;python&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/httpx"&gt;httpx&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llm"&gt;llm&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/anthropic"&gt;anthropic&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/claude"&gt;claude&lt;/a&gt;&lt;/p&gt;
+    
+
+</summary><category term="python"/><category term="httpx"/><category term="llm"/><category term="anthropic"/><category term="claude"/></entry><entry><title>Your executable is a SQLite database</title><link href="https://simonwillison.net/2026/Aug/24/your-executable-is-a-sqlite-database/" rel="alternate"/><published>2026-08-24T11:38:15+00:00</published><updated>2026-08-24T11:38:15+00:00</updated><id>https://simonwillison.net/2026/Aug/24/your-executable-is-a-sqlite-database/</id><summary type="html">
     
 &lt;p&gt;&lt;strong&gt;&lt;a href="https://fzakaria.com/2026/08/23/your-executable-is-a-sqlite-database"&gt;Your executable is a SQLite database&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 Farid Zakaria describes a neat Linux pattern for creating a SQLite database file that can be directly used as an executable binary.&lt;/p&gt;
@@ -609,42 +623,4 @@ The latest DeepSeek Pro model is now available, via API only. I had to link to O
 
 
 
-</summary><category term="ai"/><category term="generative-ai"/><category term="llms"/><category term="pelican-riding-a-bicycle"/><category term="deepseek"/><category term="llm-release"/><category term="ai-in-china"/></entry><entry><title>alchemy-utils 0.1a0</title><link href="https://simonwillison.net/2026/Aug/12/alchemy-utils/" rel="alternate"/><published>2026-08-12T19:51:30+00:00</published><updated>2026-08-12T19:51:30+00:00</updated><id>https://simonwillison.net/2026/Aug/12/alchemy-utils/</id><summary type="html">
-    
-        &lt;p&gt;&lt;strong&gt;Release:&lt;/strong&gt; &lt;a href="https://github.com/simonw/alchemy-utils/releases/tag/0.1a0"&gt;alchemy-utils 0.1a0&lt;/a&gt;&lt;/p&gt;
-        &lt;p&gt;I've long pondered what a database agnostic version of my &lt;a href="https://sqlite-utils.datasette.io/"&gt;sqlite-utils&lt;/a&gt; Python library and CLI utility might look like. This morning (literally a shower project) I tasked Codex and GPT-5.6 Sol Ultra with building a prototype:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;code&gt;Do a research spike to see what it would take to build a library with the same core API as SQLite-utils - in particular the insert and upsert and insert_all and upsert_all and create and update methods, and the table introspection stuff - but backed by SQLalchemy so it works for multiple database engines&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;Test against PostgreSQL and SQLite and duckdb&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;Use ~/dev/sqlite-utils for reference&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;Create a git repo for this and commit and early and often - use uv init to start the project - use red/green TDD and pytest, see ~/dev/django-sql-dashboard for one idea as to how the PostgreSQL tests could work&lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;It took &lt;a href="https://gist.github.com/simonw/bd10e4886688e0fd1b833e4afaabf19e"&gt;very few follow-up prompts&lt;/a&gt; to produce this project in a state good enough to release as an alpha.&lt;/p&gt;
-&lt;p&gt;Here's a one-liner I can use to list the rows in a table in my local PostgreSQL copy of my blog's database:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;uvx --with 'alchemy-utils[postgresql]' alchemy-utils rows 'postgresql+psycopg://simon@localhost:5432/simonwillisonblog'  redirects_redirect&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;The output from that starts like this:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;[
-  {
-    "id": 2328,
-    "domain": "simonwillison.net",
-    "path": "2020/May/21/apple-photos-sqlite/",
-    "target": "/2020/May/21/dogsheep-photos/",
-    "created": "2020-05-21T13:03:46.591692-07:00"
-  },
-  {
-    "id": 3,
-    "domain": "feeds.simonwillison.net",
-    "path": "swn-links",
-    "target": "https://simonwillison.net/atom/links/",
-    "created": "2017-10-01T14:12:54.820729-07:00"
-  }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Or if you'd like a DuckDB database with &lt;a href="https://github.com/simonw/sf-tree-history/blob/main/Street_Tree_List.csv"&gt;every tree in San Francisco&lt;/a&gt;, schema created automatically to match the file:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;curl 'https://raw.githubusercontent.com/simonw/sf-tree-history/refs/heads/main/Street_Tree_List.csv' | uvx --with 'alchemy-utils[duckdb]' alchemy-utils insert 'duckdb:////tmp/trees.db' trees - --csv&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;(That one took nearly an hour the first time I ran it, so I &lt;a href="https://github.com/simonw/alchemy-utils/commit/e3b8d03e040867b256aeff7db322a0b0eb1f8b06"&gt;had Codex optimize it&lt;/a&gt; and got it down to around 35 seconds.)&lt;/p&gt;
-    
-    
-        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/databases"&gt;databases&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/postgresql"&gt;postgresql&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/projects"&gt;projects&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/python"&gt;python&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/sql"&gt;sql&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/sqlalchemy"&gt;sqlalchemy&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/sqlite"&gt;sqlite&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/sqlite-utils"&gt;sqlite-utils&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/duckdb"&gt;duckdb&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/coding-agents"&gt;coding-agents&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/codex"&gt;codex&lt;/a&gt;&lt;/p&gt;
-    
-
-</summary><category term="databases"/><category term="postgresql"/><category term="projects"/><category term="python"/><category term="sql"/><category term="sqlalchemy"/><category term="sqlite"/><category term="sqlite-utils"/><category term="duckdb"/><category term="coding-agents"/><category term="codex"/></entry></feed>
+</summary><category term="ai"/><category term="generative-ai"/><category term="llms"/><category term="pelican-riding-a-bicycle"/><category term="deepseek"/><category term="llm-release"/><category term="ai-in-china"/></entry></feed>
