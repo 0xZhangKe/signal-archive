@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-08-24T16:27:04+00:00</updated><author><name>Simon Willison</name></author><entry><title>llm-anthropic 0.27</title><link href="https://simonwillison.net/2026/Aug/24/llm-anthropic/" rel="alternate"/><published>2026-08-24T16:27:04+00:00</published><updated>2026-08-24T16:27:04+00:00</updated><id>https://simonwillison.net/2026/Aug/24/llm-anthropic/</id><summary type="html">
+<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-08-25T22:59:30+00:00</updated><author><name>Simon Willison</name></author><entry><title>EVE Online: The Move to Python 3 Begins!</title><link href="https://simonwillison.net/2026/Aug/25/eve-online-move-to-python-3/" rel="alternate"/><published>2026-08-25T22:59:30+00:00</published><updated>2026-08-25T22:59:30+00:00</updated><id>https://simonwillison.net/2026/Aug/25/eve-online-move-to-python-3/</id><summary type="html">
+    
+&lt;p&gt;&lt;strong&gt;&lt;a href="https://www.eveonline.com/news/view/the-move-to-python-3-begins"&gt;EVE Online: The Move to Python 3 Begins!&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+EVE Online has been one of the most interesting case studies in Python at scale for over twenty years now.&lt;/p&gt;
+&lt;p&gt;They've been running on &lt;a href="https://github.com/stackless-dev/stackless/wiki/"&gt;Stackless Python&lt;/a&gt; since their launch in 2003, and their last major upgrade was 16 years ago, to Stackless Python 2.7 &lt;a href="https://www.eveonline.com/news/view/stackless-python-2.7"&gt;in 2010&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Their upgrade to Python 3 will start using the &lt;a href="https://python-future.org/futurize.html"&gt;futurize&lt;/a&gt; script against 2.4 million lines of code, followed by careful manual review of the ~20,000 places where Python 2 and 3 behavior differ - for example &lt;code&gt;1 / 2&lt;/code&gt; is &lt;code&gt;0&lt;/code&gt; in Python 2 but is &lt;code&gt;0.5&lt;/code&gt; in Python 3.&lt;/p&gt;
+&lt;p&gt;There's nothing in this announcement about how they plan to replace Stackless, but at their conference last year they presented &lt;a href="https://youtu.be/-x299qHLQs0"&gt;Scheduling in Carbon: Leaving Stackless Python Behind&lt;/a&gt; describing how they replaced Stackless in the Carbon engine for their more recent game EVE Frontier, using their (now open source) &lt;a href="https://github.com/carbonengine/scheduler"&gt;carbonengine/scheduler&lt;/a&gt; library.
+
+    &lt;p&gt;&lt;small&gt;&lt;/small&gt;Via &lt;a href="https://lobste.rs/s/e1oalq/move_python_3_begins"&gt;Lobster.rs&lt;/a&gt;&lt;/small&gt;&lt;/p&gt;
+
+
+    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/eve-online"&gt;eve-online&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/migrations"&gt;migrations&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/python"&gt;python&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/python3"&gt;python3&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/stackless"&gt;stackless&lt;/a&gt;&lt;/p&gt;
+
+
+
+</summary><category term="eve-online"/><category term="migrations"/><category term="python"/><category term="python3"/><category term="stackless"/></entry><entry><title>llm-anthropic 0.27</title><link href="https://simonwillison.net/2026/Aug/24/llm-anthropic/" rel="alternate"/><published>2026-08-24T16:27:04+00:00</published><updated>2026-08-24T16:27:04+00:00</updated><id>https://simonwillison.net/2026/Aug/24/llm-anthropic/</id><summary type="html">
     
         &lt;p&gt;&lt;strong&gt;Release:&lt;/strong&gt; &lt;a href="https://github.com/simonw/llm-anthropic/releases/tag/0.27"&gt;llm-anthropic 0.27&lt;/a&gt;&lt;/p&gt;
         &lt;p&gt;This release of the Anthropic plugin for &lt;a href="https://llm.datasette.io/"&gt;LLM&lt;/a&gt; mainly provides compatibility with the recently released &lt;a href="https://github.com/anthropics/anthropic-sdk-python/releases/tag/v1.0.0"&gt;anthropic v1.0.0&lt;/a&gt; Python library, which switches from &lt;code&gt;httpx&lt;/code&gt; to &lt;a href="https://github.com/pydantic/httpx2"&gt;httpx2&lt;/a&gt;. OpenAI made the same change in their &lt;a href="https://github.com/openai/openai-python/releases/tag/v3.0.0"&gt;v3.0.0 release&lt;/a&gt; two weeks ago.&lt;/p&gt;
@@ -604,23 +619,4 @@ I still have quite a bit of older content on my blog that I never got round to t
     
     
 
-</summary></entry><entry><title>DeepSeek V4 Pro 0813 (on OpenRouter)</title><link href="https://simonwillison.net/2026/Aug/12/deepseek-v4-pro-0813/" rel="alternate"/><published>2026-08-12T23:59:23+00:00</published><updated>2026-08-12T23:59:23+00:00</updated><id>https://simonwillison.net/2026/Aug/12/deepseek-v4-pro-0813/</id><summary type="html">
-    
-&lt;p&gt;&lt;strong&gt;&lt;a href="https://openrouter.ai/deepseek/deepseek-v4-pro-0813"&gt;DeepSeek V4 Pro 0813 (on OpenRouter)&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
-The latest DeepSeek Pro model is now available, via API only. I had to link to OpenRouter because DeepSeek don't have any obvious announcement page for their new model.&lt;/p&gt;
-&lt;p&gt;I haven't been able to confirm if they plan to release the open weights, but given the weights are available for both April's &lt;a href="https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro"&gt;deepseek-ai/DeepSeek-V4-Pro&lt;/a&gt; and July's &lt;a href="https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash-0731"&gt;deepseek-ai/DeepSeek-V4-Flash-0731&lt;/a&gt; it seems likely. &lt;strong&gt;Update&lt;/strong&gt;: the weights &lt;a href="https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro-0813"&gt;are now available&lt;/a&gt; on Hugging Face, 1.7T parameters, 893 GB.&lt;/p&gt;
-&lt;p&gt;Interestingly I got &lt;a href="https://tools.simonwillison.net/markdown-svg-renderer#url=https%3A%2F%2Fgist.github.com%2Fsimonw%2Fc1108a380593547c2def5863bca63160"&gt;&lt;em&gt;very&lt;/em&gt; different looking pelicans&lt;/a&gt; for the three different reasoning levels of low, medium, and high. I've not noticed this kind of difference from any other model:&lt;/p&gt;
-&lt;p&gt;Low:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Flat vector illustration of a white pelican with a large orange beak, wearing a straw hat with an orange band, riding a teal road bicycle in profile, set against a pale cream circle with a dashed outline and small motion marks trailing behind." src="https://static.simonwillison.net/static/2026/deepseek-pro-low.png" /&gt;&lt;/p&gt;
-&lt;p&gt;Medium:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="A similar cartoon pelican cycling, drawn in a looser outlined style: the bird's body is mostly white line art, its orange beak pouch hangs open under a yellow cap, a long red tongue streams backwards towards a yellow sun, and a small blue fish sits on a tray by the handlebars of a green bicycle whose wheels are drawn as broken yellow arcs." src="https://static.simonwillison.net/static/2026/deepseek-pro-medium.png" /&gt;&lt;/p&gt;
-&lt;p&gt;High:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="The pelican again, this time on a red bicycle against a pale blue background, with a bright yellow beak and pouch, a purple pennant flag on the back, a wicker front basket holding a small fish, and black musical notes floating in the top right corner." src="https://static.simonwillison.net/static/2026/deepseek-pro-high.png" /&gt;&lt;/p&gt;
-&lt;p&gt;In terms of benchmarks... as far as I can tell those were released to the Official DeepSeek WeChat Group, then copied and pasted into &lt;a href="https://www.reddit.com/r/LocalLLaMA/comments/1vmi0fg/removed_by_moderator/"&gt;a post on Reddit&lt;/a&gt; which was deleted by the moderators for being "low-effort", then copied into &lt;a href="https://news.ycombinator.com/item?id=49274600#49275180"&gt;this ASCII-art table on Hacker News&lt;/a&gt;.
-
-
-    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/pelican-riding-a-bicycle"&gt;pelican-riding-a-bicycle&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/deepseek"&gt;deepseek&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llm-release"&gt;llm-release&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai-in-china"&gt;ai-in-china&lt;/a&gt;&lt;/p&gt;
-
-
-
-</summary><category term="ai"/><category term="generative-ai"/><category term="llms"/><category term="pelican-riding-a-bicycle"/><category term="deepseek"/><category term="llm-release"/><category term="ai-in-china"/></entry></feed>
+</summary></entry></feed>
