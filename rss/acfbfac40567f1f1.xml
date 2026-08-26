@@ -12,7 +12,7 @@
 	<atom:link href="https://blog.jetbrains.com/kotlin/feed/" rel="self" type="application/rss+xml" />
 	<link>https://blog.jetbrains.com</link>
 	<description>Developer Tools for Professionals and Teams</description>
-	<lastBuildDate>Wed, 19 Aug 2026 15:52:10 +0000</lastBuildDate>
+	<lastBuildDate>Wed, 26 Aug 2026 13:38:32 +0000</lastBuildDate>
 	<language>en-US</language>
 	<sy:updatePeriod>
 	hourly	</sy:updatePeriod>
@@ -28,6 +28,165 @@
 	<height>32</height>
 </image> 
 	<item>
+		<title>Compose Multiplatform 1.12.0 Released</title>
+		<link>https://blog.jetbrains.com/kotlin/2026/08/compose-multiplatform-1-12-0/</link>
+					<comments>https://blog.jetbrains.com/kotlin/2026/08/compose-multiplatform-1-12-0/#respond</comments>
+		
+		<dc:creator><![CDATA[Elvira Mustafina]]></dc:creator>
+		<pubDate>Wed, 26 Aug 2026 13:28:41 +0000</pubDate>
+		<featuredImage>https://blog.jetbrains.com/wp-content/uploads/2026/08/CMP-social-BlogFeatured-1280x720-1.png</featuredImage>		<category><![CDATA[multiplatform]]></category>
+		<category><![CDATA[releases]]></category>
+		<category><![CDATA[compose-for-desktop]]></category>
+		<category><![CDATA[compose-for-web]]></category>
+		<category><![CDATA[compose-hot-reload]]></category>
+		<category><![CDATA[mcp]]></category>
+		<guid isPermaLink="false">https://blog.jetbrains.com/?post_type=kotlin&#038;p=734018</guid>
+
+					<description><![CDATA[Compose Multiplatform 1.12.0 is out! This version brings new tooling for AI assistants, improvements to web resource management, and finer control over desktop window states. Here are the highlights of this release: For a complete overview of the changes, check out What’s new in Compose Multiplatform 1.12.0 or the release notes on GitHub. Get Started [&#8230;]]]></description>
+										<content:encoded><![CDATA[
+<p>Compose Multiplatform 1.12.0 is out! This version brings new tooling for AI assistants, improvements to web resource management, and finer control over desktop window states.</p>
+
+
+
+<p>Here are the highlights of this release:</p>
+
+
+
+<ul class="wp-block-list">
+<li><a href="#mcp-server-for-ai-agents-in-compose-hot-reload">MCP server for AI agents in Compose Hot Reload</a></li>
+
+
+
+<li><a href="#automatic-font-fallback-for-web">Automatic font fallback for web</a></li>
+
+
+
+<li><a href="#window-and-dialog-v2">v2 version of the window and dialog API for desktop</a></li>
+</ul>
+
+
+
+<p>For a complete overview of the changes, check out <a href="https://kotlinlang.org/docs/multiplatform/whats-new-compose-112.html" target="_blank" rel="noopener">What’s new in Compose Multiplatform 1.12.0</a> or the <a href="https://github.com/JetBrains/compose-multiplatform/releases/tag/v1.12.0" target="_blank" rel="noopener">release notes on GitHub</a>.</p>
+
+
+
+<p align="center"><a class="ek-link jb-download-button" href="https://kotlinlang.org/docs/multiplatform/compose-multiplatform.html" target="_blank" rel="noopener"><i class="download-icon"></i>Get Started with Compose Multiplatform</a></p>
+
+
+
+<h2 class="wp-block-heading">MCP server for AI agents in Compose Hot Reload</h2>
+
+
+
+<p>Compose Hot Reload now ships with an experimental Model Context Protocol (MCP) server that connects AI coding agents to your running application.</p>
+
+
+
+<p>Using the MCP server, an agent can trigger reloads, take screenshots, inspect the semantic tree, simulate clicks and text input, and read application logs. In practice, this means the agent can verify the results of its own edits. It can confirm that the reload succeeded, inspect the rendered UI, catch a runtime exception, and iterate – all without you describing what&#8217;s on screen.</p>
+
+
+
+<figure class="wp-block-image size-full"><img fetchpriority="high" decoding="async" style="border-style: solid;border-width: 1px;border-color: lightgray;; width:100% !important; height:auto !important; max-width:100% !important;" src="https://blog.jetbrains.com/wp-content/uploads/2026/08/Screenshot-2026-08-25-at-01.36.40.png" alt="AI agent uses the MCP server" class="wp-image-734052"/></figure>
+
+
+
+<p>For the full list of available tools and instructions on connecting your agent, see the <a href="https://github.com/JetBrains/compose-hot-reload#mcp-server-for-ai-agents" target="_blank" rel="noopener">Compose Hot Reload documentation</a>.</p>
+
+
+
+<p align="center"><a class="ek-link jb-download-button" href="https://kotlinlang.org/docs/multiplatform/compose-hot-reload.html" target="_blank" rel="noopener"><i class="download-icon"></i>Try Compose Hot Reload</a></p>
+
+
+
+<h2 class="wp-block-heading">Automatic font fallback for web</h2>
+
+
+
+<p>Compose Multiplatform for web now handles characters that your application&#8217;s fonts don&#8217;t cover. When it encounters an unresolved character during rendering, it downloads the matching Noto font subset on demand and recomposes the affected text. As a result, Japanese, Arabic, Devanagari, and emoji render correctly without you having to bundle fonts for them.</p>
+
+
+
+<figure class="wp-block-image size-full"><img decoding="async" style="border-style: solid;border-width: 1px;border-color: lightgray;; width:100% !important; height:auto !important; max-width:100% !important;" src="https://blog.jetbrains.com/wp-content/uploads/2026/08/Screenshot-2026-08-25-at-02.12.16.png" alt="Testing fonts" class="wp-image-734063"/></figure>
+
+
+
+<h2 class="wp-block-heading">Window and dialog v2</h2>
+
+
+
+<p>This release introduces an experimental v2 API for <code>WindowState</code> and <code>DialogState</code> in the <code>androidx.compose.ui.window.v2</code> package. It gives you finer control over how windows and dialogs are positioned and sized. You can:</p>
+
+
+
+<ul class="wp-block-list">
+<li>Select the screen a window appears on.</li>
+
+
+
+<li>Provide custom positioning and sizing logic, including logic based on the content&#8217;s intrinsic size.</li>
+
+
+
+<li>Set minimum and maximum window sizes.</li>
+
+
+
+<li>Position dialogs relative to their parent window.</li>
+</ul>
+
+
+
+<p>The v2 API also makes the asynchronous nature of window state changes explicit: It distinguishes the state you request from the state the window currently has.</p>
+
+
+
+<p>For example, to center a window and give it a fixed size, use <code>WindowPositionProvider</code> and <code>WindowSizeProvider</code>:</p>
+
+
+
+<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="kotlin" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">val windowState = rememberWindowState(
+    initialBoundsProvider = WindowBoundsProvider(
+        positionProvider = WindowPositionProvider.CenteredOnScreen,
+        sizeProvider = WindowSizeProvider.Fixed(DpSize(400.dp, 200.dp))
+    )
+)
+</pre>
+
+
+
+<p>With the v2 API, you can also use <code>WindowSizeProvider.Unconstrained</code> to size the window to its content initially, while still letting that content expand with <code>fillMaxSize()</code> when the user enlarges the window:</p>
+
+
+
+<pre class="EnlighterJSRAW EnlighterJSRAW" data-enlighter-language="kotlin" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">WindowBoundsProvider(
+    positionProvider = WindowPositionProvider.CenteredOnScreen,
+    sizeProvider = WindowSizeProvider.Unconstrained
+)
+</pre>
+
+
+
+<p>See the <a href="https://kotlinlang.org/docs/multiplatform/compose-desktop-top-level-windows-management.html#window-and-dialog-api-v2" target="_blank" rel="noopener">Window and dialog v2 documentation</a>&nbsp;for the full details.</p>
+
+
+
+<hr class="wp-block-separator has-alpha-channel-opacity"/>
+
+
+
+<p>Update your dependencies, try out the new APIs, and let us know what you think about Compose Multiplatform 1.12.0.</p>
+
+
+
+<p>For everything that didn&#8217;t make it into this post, check out the <a href="https://github.com/JetBrains/compose-multiplatform/releases/tag/v1.12.0" target="_blank" rel="noopener">full release notes</a> or <a href="https://kotlinlang.org/docs/multiplatform/whats-new-compose-112.html" target="_blank" rel="noopener">What’s new</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://blog.jetbrains.com/kotlin/2026/08/compose-multiplatform-1-12-0/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
 		<title>Signatures, be true: domain errors and functional handling in Kotlin</title>
 		<link>https://blog.jetbrains.com/kotlin/2026/08/signatures-be-true-domain-errors-and-functional-handling-in-kotlin/</link>
 		
@@ -473,7 +632,7 @@ sealed interface ExportError { /* its own set */ }</pre>
 
 
 
-<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" fetchpriority="high" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/08/klibsio-4200-projects-by-tags.png" alt="" class="wp-image-731771"/></figure>
+<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/08/klibsio-4200-projects-by-tags.png" alt="" class="wp-image-731771"/></figure>
 
 
 
@@ -911,7 +1070,7 @@ fun addTodo(
 
 
 
-<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/08/pl_dynamics_2017_2025.png" alt="" class="wp-image-729330" /></figure>
+<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/08/pl_dynamics_2017_2025.png" alt="" class="wp-image-729330" /></figure>
 
 
 
@@ -923,7 +1082,7 @@ fun addTodo(
 
 
 
-<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/08/language_promise_index.png" alt="" class="wp-image-729342" /></figure>
+<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/08/language_promise_index.png" alt="" class="wp-image-729342" /></figure>
 
 
 
@@ -2549,7 +2708,7 @@ val issues: List&lt;Issue> = asLlm(response, hint = "Return all beginner-friendl
 
 
 
-<figure data-wp-context="{&quot;imageId&quot;:&quot;6a8ed64958976&quot;}" data-wp-interactive="core/image" class="wp-block-image size-full wp-lightbox-container"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" data-wp-class--hide="state.isContentHidden" data-wp-class--show="state.isContentVisible" data-wp-init="callbacks.setButtonStyles" data-wp-on-async--click="actions.showLightbox" data-wp-on-async--load="callbacks.setButtonStyles" data-wp-on-async-window--resize="callbacks.setButtonStyles" src="https://blog.jetbrains.com/wp-content/uploads/2026/07/KT-Twitter_Facebook_LinkedIn-1200x675-1.png" alt="" class="wp-image-722875" /><button
+<figure data-wp-context="{&quot;imageId&quot;:&quot;6a8f2b64eefcc&quot;}" data-wp-interactive="core/image" class="wp-block-image size-full wp-lightbox-container"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" data-wp-class--hide="state.isContentHidden" data-wp-class--show="state.isContentVisible" data-wp-init="callbacks.setButtonStyles" data-wp-on-async--click="actions.showLightbox" data-wp-on-async--load="callbacks.setButtonStyles" data-wp-on-async-window--resize="callbacks.setButtonStyles" src="https://blog.jetbrains.com/wp-content/uploads/2026/07/KT-Twitter_Facebook_LinkedIn-1200x675-1.png" alt="" class="wp-image-722875" /><button
 			class="lightbox-trigger"
 			type="button"
 			aria-haspopup="dialog"
@@ -2918,130 +3077,5 @@ val issues: List&lt;Issue> = asLlm(response, hint = "Return all beginner-friendl
 		
 		
 			</item>
-		<item>
-		<title>Introducing the Kotlin Benchmark for AI Coding Agents</title>
-		<link>https://blog.jetbrains.com/kotlin/2026/07/introducing-the-kotlin-benchmark-evaluate-ai-coding-agents-on-real-world-kotlin-tasks/</link>
-		
-		<dc:creator><![CDATA[Alyona Chernyaeva]]></dc:creator>
-		<pubDate>Wed, 08 Jul 2026 07:26:45 +0000</pubDate>
-		<featuredImage>https://blog.jetbrains.com/wp-content/uploads/2026/07/KT-social-BlogFeatured-1280x720-1.png</featuredImage>		<product ><![CDATA[ai]]></product>
-		<product ><![CDATA[kotlin]]></product>
-		<category><![CDATA[ai]]></category>
-		<guid isPermaLink="false">https://blog.jetbrains.com/?post_type=kotlin&#038;p=720155</guid>
-
-					<description><![CDATA[Agentic coding benchmarks are getting closer to real-world software development. For Kotlin teams, the most important question is how reliably AI agents can complete end-to-end Kotlin tasks, from reading an issue to producing a solution that passes validation. We’re taking the first step in addressing that gap by releasing the Kotlin Benchmark, JetBrains’ official benchmark [&#8230;]]]></description>
-										<content:encoded><![CDATA[
-<p>Agentic coding benchmarks are getting closer to real-world software development. For Kotlin teams, the most important question is how reliably AI agents can complete end-to-end Kotlin tasks, from reading an issue to producing a solution that passes validation.</p>
-
-
-
-<p>We’re taking the first step in addressing that gap by releasing the <a href="http://kotlinlang.org/benchmark/" target="_blank" rel="noopener">Kotlin Benchmark</a>, JetBrains’ official benchmark for evaluating AI coding agents on Kotlin software engineering tasks. Our goal is to give developers a credible, public way to assess how different agents perform on Kotlin and compare agent setups using tasks that are closer to day-to-day dev work.</p>
-
-
-
-<p>Alongside the benchmark release, we’re publishing the benchmark assets on GitHub and launching the official leaderboard to track the evaluation results.</p>
-
-
-
-<p><a href="https://github.com/Kotlin/kotlin-swe-bench" target="_blank" rel="noopener">Explore the benchmark on GitHub</a></p>
-
-
-
-<p><a href="http://kotlinlang.org/benchmark/" target="_blank" rel="noopener">See the first results on the leaderboard</a></p>
-
-
-
-<h3 class="wp-block-heading">How the Kotlin Benchmark works</h3>
-
-
-
-<p>The first public iteration of the Kotlin Benchmark is based on the SWE-bench methodology and focuses on repository-level Kotlin software engineering tasks.</p>
-
-
-
-<p>Kotlin already has strong model-focused evaluation assets, including <a href="https://huggingface.co/datasets/JetBrains/Kotlin_HumanEval" target="_blank" rel="noopener">Kotlin_HumanEval</a> and <a href="https://huggingface.co/datasets/JetBrains/Kotlin_QA" target="_blank" rel="noopener">Kotlin_QA</a>, which help measure a model&#8217;s understanding of the language&#8217;s syntax and core concepts. The Kotlin Benchmark looks at a different layer: how well an AI coding agent can complete validated software engineering tasks in existing Kotlin projects.</p>
-
-
-
-<p>The dataset features 105 engineering tasks sourced from active open-source repositories. Each task requires the AI agent to interpret a real issue description, navigate the project&#8217;s context, and generate a functional patch. Solutions are strictly verified in containerized environments, and a task is only marked as resolved when the generated solution passes the required test verification.</p>
-
-
-
-<p>You can read more about our environment setup and data collection on the <a href="https://kotlinlang.org/benchmark/methodology/" target="_blank" rel="noopener">Methodology page</a>.</p>
-
-
-
-<h3 class="wp-block-heading">First results</h3>
-
-
-
-<p>The first evaluations show that leading coding agents can complete a large share of the current Kotlin Benchmark tasks. These results reflect the first public iteration of the benchmark and do not yet include the most recent model releases. We are already working on the second iteration and will update the leaderboard as newer evaluations are added. </p>
-
-
-
-<p>In this run, the top result came from Claude Code with Opus 4.7 xhigh, which resolved 90 of 105 tasks, an 85.71% resolution rate. JetBrains Junie with Opus 4.7 max (81.9%) and Codex with GPT 5.5 xhigh (81.9%) followed closely.</p>
-
-
-
-<p>The full leaderboard is available on <a href="http://kotlinlang.org/benchmark" target="_blank" rel="noopener">kotlinlang.org/benchmark</a>, where you can compare agents and configurations in detail.</p>
-
-
-
-<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/07/SWE-Benchmark-Infographics-1920x1080-1.png" alt="" class="wp-image-720156"/><figcaption class="wp-element-caption">Results shown here reflect the first public iteration of the Kotlin Benchmark. The leaderboard will be updated as newer model evaluations are added.</figcaption></figure>
-
-
-
-<p>For teams evaluating coding agents, the benchmark provides a shared frame of reference for comparing setups on Kotlin tasks instead of relying only on vendor claims. The scores are intended as a signal, not a guarantee for every codebase. Real-world results depend on your architecture, internal APIs, coding standards, tooling, and validation process.</p>
-
-
-
-<h3 class="wp-block-heading">What’s next</h3>
-
-
-
-<p>We value an open approach, which is why we built this benchmark on the open-source Multi-SWE-bench infrastructure and made all datasets and test harnesses publicly available.</p>
-
-
-
-<p>We treat benchmarks as a continuous quality measurement pipeline. Moving forward, we plan to expand the framework in these areas:</p>
-
-
-
-<ul class="wp-block-list">
-<li><strong>Broader Kotlin ecosystem coverage:</strong> We want the task mix to better reflect how Kotlin is used in practice, including areas such as Android and Kotlin Multiplatform, and cover a wider range of task difficulty levels.</li>
-
-
-
-<li><strong>More evaluation metrics: </strong>Passing tests is a useful correctness signal, but it is only one part of agent evaluation. Future iterations will look at  cost, performance, maintainability, and code quality.</li>
-
-
-
-<li><strong>More agents and model setups: </strong>We plan to evaluate more commercial agents, agent-model configurations, and open-weight models, so teams can compare a wider range of setups.</li>
-</ul>
-
-
-
-<p>The benchmark is open, so you can inspect the tasks, compare results, and tell us which Kotlin scenarios we should cover next.</p>
-]]></content:encoded>
-					
-		
-		
-		                    <language>
-                        <code><![CDATA[zh-hans]]></code>
-                        <url>https://blog.jetbrains.com/zh-hans/kotlin/2026/07/introducing-the-kotlin-benchmark-evaluate-ai-coding-agents-on-real-world-kotlin-tasks/</url>
-                    </language>
-                                    <language>
-                        <code><![CDATA[ko]]></code>
-                        <url>https://blog.jetbrains.com/ko/kotlin/2026/07/introducing-the-kotlin-benchmark-evaluate-ai-coding-agents-on-real-world-kotlin-tasks/</url>
-                    </language>
-                                    <language>
-                        <code><![CDATA[ja]]></code>
-                        <url>https://blog.jetbrains.com/ja/kotlin/2026/07/introducing-the-kotlin-benchmark-evaluate-ai-coding-agents-on-real-world-kotlin-tasks/</url>
-                    </language>
-                                    <language>
-                        <code><![CDATA[fr]]></code>
-                        <url>https://blog.jetbrains.com/fr/kotlin/2026/07/introducing-the-kotlin-benchmark-evaluate-ai-coding-agents-on-real-world-kotlin-tasks/</url>
-                    </language>
-                	</item>
 	</channel>
 </rss>
