@@ -1,6 +1,50 @@
 {
   "items": [
     {
+      "id": "c54ffb50a483d1a925ed0852",
+      "title": "Hugo 的頁面 Type",
+      "summary": "新版的 Hugo 對某些定義變得很嚴格，只要條件不滿足，就不會渲染、生成到 Public 中。 這次更新，除了 code 語法不定義會讓我主題無法渲染 ，而 歷史上的今天 因爲沒定義頁面 type，也造成無法正常渲染。 原始檔案與路徑 # 頁面位置在： content/on-this-day.md title: \"歷史上的今天\" layout: \"on-this-day\" 排版位置在： themes/classic/layouts/page/on-this-day.html 這次問題就就在於，以前的 Hugo 會依序在好幾個地方尋找指定的 layout: \"on-this-day\" ，而且 Eddie 很久之前就是有研究過官方 docs，結論是好幾個地方可以放，所以 Eddie 沒去記憶，就隨便丟，讓 hug…",
+      "image": null,
+      "publishedAt": "2026-01-03T18:26:50Z",
+      "sourceId": "199cdf92fc46bfcd",
+      "sourceTitle": "Eddie Lv",
+      "link": "https://eddielv.com/articles/hugo-type/",
+      "detailPath": "articles/c54ffb50a483d1a925ed0852.json"
+    },
+    {
+      "id": "8da6464d37e8c7098493fbff",
+      "title": "Hugo 更新災難 SOS",
+      "summary": "前言 # 架設官網 時，一開始用了一個很複雜的主題，必須要最新的 hugo 版本，裝完之後發現太麻煩了，還要用到 docker，就換了一個簡單一點的的主題。 回頭到部落格發文 # 夭壽，突然發現過往文章 css 格式跑掉了： 查看 git 後發現，原始檔案根本都沒動，而 public 有幾百個檔案有變動。 查看後發現原始文章的 .md 若有用兩組「```」包起來，文字就會變得無法閱讀。 最後聯想到應該是 hugo 版本的問題。 弄了幾小時後… # 一直以爲是渲染失敗的問題，查了很久，最後發現如果有對「```」定義語言 1 ，就能正常渲染成功。 而 Eddie 早期的文章都沒定義，於是就出事了！ 把文章的 ``` 全部加上 text # 也試過在 config 調整設定，還是無法，最後決定把所有文章都加上 te…",
+      "image": null,
+      "publishedAt": "2026-01-03T17:33:51Z",
+      "sourceId": "199cdf92fc46bfcd",
+      "sourceTitle": "Eddie Lv",
+      "link": "https://eddielv.com/musings/hugo-update-sos/",
+      "detailPath": "articles/8da6464d37e8c7098493fbff.json"
+    },
+    {
+      "id": "127bc7114cb2b1decde93b12",
+      "title": "gtisland.studio 網域到期，順便更新官網",
+      "summary": "自從搶到 gtisland.com 後，gtisland.studio 就一直設定爲自動導向到 .com，沒有其他作用了，而這幾天終於到期了，終於跟 studio 說拜拜，也順勢把官網的 wordpress 刷掉，改回 hugo。 那時候換 worpress 最主要是打文章時，排版方便很多，但會那樣覺得也是因爲還不是很會用 Hugo。 以爲自己很會用 Hugo 了，結果換了其他主題後才發現，是 Eddie’s Blog 用的主題邏輯太簡單了，所以重新架設還是忙了很久。 這次改版最大亮點是：網站遊戲化。 把每一篇教學包裝成類似 RPG 遊戲，要對話、接任務、破關。 Eddie 的網頁技術能力實在是很普通，已經竭盡所能了，如果有讀者有空，歡迎到 那邊 看看，給我一些建議。",
+      "image": null,
+      "publishedAt": "2026-01-03T14:55:15Z",
+      "sourceId": "199cdf92fc46bfcd",
+      "sourceTitle": "Eddie Lv",
+      "link": "https://eddielv.com/musings/gtisland-studio-end/",
+      "detailPath": "articles/127bc7114cb2b1decde93b12.json"
+    },
+    {
+      "id": "aa3d0078d448d5a7b1bbd5c9",
+      "title": "2025年12月阅读书摘",
+      "summary": "懂得百点不如改变一点。真正的成长不在于自己懂得了多少道理，而在于自己改变了多少。",
+      "image": "https://images.unsplash.com/photo-1513185041617-8ab03f83d6c5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMTc3M3wwfDF8c2VhcmNofDIwfHxib29rc3xlbnwwfHx8fDE3Njc0MDQwNTF8MA&ixlib=rb-4.1.0&q=80&w=2000",
+      "publishedAt": "2026-01-03T13:12:25Z",
+      "sourceId": "78a6233ab9c3a513",
+      "sourceTitle": "Domon",
+      "link": "https://www.domon.cn/2025-12yue-yue-du-shu-zhai/",
+      "detailPath": "articles/aa3d0078d448d5a7b1bbd5c9.json"
+    },
+    {
       "id": "d3e38c434c93873b8a0df0f0",
       "title": "Alphra Lavender薰衣草园",
       "summary": "民宿旁边有薰衣草花园。顺道来看看。没想到那天天气不太好，一个人都没有。独享了一片薰衣草田。",
@@ -615,50 +659,6 @@
       "sourceTitle": "Eddie Lv",
       "link": "https://eddielv.com/musings/2025review/",
       "detailPath": "articles/4f6489ec79be39bcf3d2cda3.json"
-    },
-    {
-      "id": "5a1baee687761ac1d1ff49b0",
-      "title": "幫「一」個忙好嗎？",
-      "summary": "一場音響活動中，主持人同時是活動負責人，他分身乏術於是來問 Eddie 能不能幫他在某時間按下影片播放鍵好嗎？ 小事情啊，OK！ 過幾分鐘：投影機開關、布幕升降也幫忙一下，請場地方來教你一下！ 再過幾分鐘：場地面光燈也給你處理！（這場沒發我公司燈光，結果我控整場） 「你要不要麥克風還我，我幫你主持好了？」這是此時 Eddie 心中的吶喊！ 而且我已經整理主視覺、影片、相片輪播了，只要用alt 加 tab 就可以快速切換。 結果從主視覺要切到影片時，主持人把主視覺跟相片輪播都關掉，剩下影片，實在是頭很痛，原本想幫你的人也不想幫你了。",
-      "image": null,
-      "publishedAt": "2025-12-28T11:14:11Z",
-      "sourceId": "199cdf92fc46bfcd",
-      "sourceTitle": "Eddie Lv",
-      "link": "https://eddielv.com/musings/help-1thing/",
-      "detailPath": "articles/5a1baee687761ac1d1ff49b0.json"
-    },
-    {
-      "id": "6a30a99e79dc7b0bab6f3b3d",
-      "title": "最近玩的遊戲超短評（2025 年底）",
-      "summary": "這是今年的第二篇遊戲超短評。上一篇請按這裡。",
-      "image": "https://wiwi.blog/assets/images/33-6a180cd9def953e3566694fbc5ff8836.jpg",
-      "publishedAt": "2025-12-28T06:30:00Z",
-      "sourceId": "7f36c3da1e6b5c71",
-      "sourceTitle": "Wiwi.Blog Blog",
-      "link": "https://wiwi.blog/blog/short-game-reviews-2025b",
-      "detailPath": "articles/6a30a99e79dc7b0bab6f3b3d.json"
-    },
-    {
-      "id": "0e1aa39dc502d7d09ecef3ec",
-      "title": "金桔味氣泡飲",
-      "summary": "在位於武吉免登（Bukit Bintang）的唐吉訶德（DON DON DONKI）買了這罐金桔 1 口味的氣泡飲。 這一罐的價格爲 RM2.90，以本地品牌飲品而言算一點點貴。不過，它的罐頭包裝做得滿精緻的，金桔的風味做得也還算到位，不會太膩口，酸甜也適中，是個值得推薦的清爽飲品。 由於已習慣以粵語（讀音：gam1 gat1）讀「金桔」這個詞了，所以「有邊讀邊」，在華語會把「桔」讀作 jí，但沒想到查字典才發現原來正式讀音竟然是 jié？！蛤？？？ ↩︎",
-      "image": "https://microblog.ttheng.com/blog/img38.jpg",
-      "publishedAt": "2025-12-28T04:08:00Z",
-      "sourceId": "a93d4f2e98fafcbe",
-      "sourceTitle": "All posts | 所有貼文 on ttheng's microblog. | 侃侃而隨想極短文。",
-      "link": "https://microblog.ttheng.com/kumquat-sparkle-drink/",
-      "detailPath": "articles/0e1aa39dc502d7d09ecef3ec.json"
-    },
-    {
-      "id": "9bdc260871249d1c41dac6e7",
-      "title": "都幾",
-      "summary": "有時看網上的貼文會看到「都幾 1 」這個在臺灣人之間流行的網路用語。 以前還以為是罵人的用詞，最近才發現原來它是源自日文的「どっち」（docchi），是「哪一個？」的意思啦！ 誤會了這麼多年，現在終於搞懂了！😂 我也看過有人寫成「兜幾」。 ↩︎",
-      "image": null,
-      "publishedAt": "2025-12-28T04:07:00Z",
-      "sourceId": "a93d4f2e98fafcbe",
-      "sourceTitle": "All posts | 所有貼文 on ttheng's microblog. | 侃侃而隨想極短文。",
-      "link": "https://microblog.ttheng.com/which-one/",
-      "detailPath": "articles/9bdc260871249d1c41dac6e7.json"
     }
   ]
 }
