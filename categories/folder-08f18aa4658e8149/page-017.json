@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "82f16f45c4ccae02d27ff313",
+      "title": "基于 git 的零拷贝静态web服务器",
+      "summary": "无聊，产生了个crazy的想法。 git 内部用 zlib 压缩文件内容 Content-Encoding: gzip 也是 如果web服务器输出 .git 里的 静态 内容，是不是可以减一个二次解压/压缩步骤？？？ blob sha1 直接当etag？ 跟AI较量了几轮，一开始它说做不到。因为 blob 的格式比较变态。因为 hello world... 在 .git/objects/ab/cdef... 里的东西是这么存的 zlib(blob 1234\\0hello world...) I was like ？？？日他妈真变态啊。这前面是写死了 blob <size>\\0 然后把文件内容放在一起，再压缩的。 .git 这设计脑子有病啊。。。为啥不是原始文件gz而是加个头去gz。。。 此路不通！结束 然后A…",
+      "image": null,
+      "publishedAt": "2026-06-10T15:21:00Z",
+      "sourceId": "a864c53722a17b19",
+      "sourceTitle": "est's blog",
+      "link": "https://blog.est.im/2026/stdout-22",
+      "detailPath": "articles/82f16f45c4ccae02d27ff313.json"
+    },
+    {
       "id": "f666d20066d26fb114f48d83",
       "title": "Percentage is multiplicative",
       "summary": "‘Hey, look! It’s SASALELE!’ When a discount of 50% is applied on an item, and then you get another 50% discount on top of that, you don’t get the item for free! Instead, you still have to pay a quarter (1/4, or 25%) of the original price, or with a 75% discount 1 . Now that’s more like it! (huh?) (ignore the ‘up to’ for a moment here) ( image source ) Thank…",
@@ -648,17 +659,6 @@
       "sourceTitle": "All posts | 所有貼文 on ttheng's microblog. | 侃侃而隨想極短文。",
       "link": "https://microblog.ttheng.com/google-ai-overview-funny/",
       "detailPath": "articles/d984c2c3f06922ad4c36fa75.json"
-    },
-    {
-      "id": "5f4b7245d4b3fe0084da4043",
-      "title": "嘗試與誤讀",
-      "summary": "雖然前一篇 文章 站在討厭 AI 的一方，照理來說應該反對使用 AI 錯誤地詮釋別人的文章，但是接下來，我反而也想同意 Eddie Lv 說的 ：無論詮釋者是否使用 AI ，作者對已經發表的作品沒有控制權，所以誤讀是無法避免的。說「我同意」，言下之意其實就是有一點想唱反調：對我來說，這與發不發表沒有關係。作者早在自己還正在創作的時候，就已經沒有對作品的控制權了。 如果所謂的創作，是指由個人意志出發、然後無中生有，而詮釋是指從既有的東西出發，那麼創作與詮釋，兩者的性質與它們各自的名目似乎確實有些顛倒。創作不太像是創作，比較像是詮釋。詮釋比較像是創作，不像詮釋。這有點像繞口令。我的意思是：創作的時候，個人意志的成份反而很少。比方說，有的小說家可能會說：「我沒有刻意安排劇情，只是想像出一些角色，然後讓他們自己行動。…",
-      "image": null,
-      "publishedAt": "2026-06-03T09:24:33Z",
-      "sourceId": "7a1943e37d846c5c",
-      "sourceTitle": "我的部落格",
-      "link": "https://e89295.com/blog/2026-06-03.html",
-      "detailPath": "articles/5f4b7245d4b3fe0084da4043.json"
     }
   ]
 }

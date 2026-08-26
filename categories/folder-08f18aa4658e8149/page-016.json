@@ -1,6 +1,28 @@
 {
   "items": [
     {
+      "id": "05fbaf48bf82f954835151b5",
+      "title": "WordPress 的不思進取，與沒骨氣的我",
+      "summary": "3月時看到 Muuu 被無故暫停使用多年的 WP.com site 的遭遇，為之感到很氣憤，參考： https […]",
+      "image": "https://2.gravatar.com/avatar/2ce149002ca625e3240835cbfaa3481507a538243a4c31c830176f97f9a9f060?s=96&d=identicon&r=G",
+      "publishedAt": "2026-06-16T20:48:31Z",
+      "sourceId": "737dffed2384c922",
+      "sourceTitle": "恐龍化石的網誌",
+      "link": "https://cylikesreading.wordpress.com/2026/06/17/wordpress-enshittification/",
+      "detailPath": "articles/05fbaf48bf82f954835151b5.json"
+    },
+    {
+      "id": "c87c5e08aa953212921f6876",
+      "title": "爲什麼我不喜歡用註腳",
+      "summary": "前言 # 雖然一直都知道 markdown 有註腳的語法，但是我一直很不愛用，因爲整個頁面會上下跳來跳去，非常影響閱讀。 因此我自己在寫作時，反而喜歡用很多括弧來備註，但用太多其實也不好閱讀，而且會有一種解釋太多的感覺。 一般常規的註腳 維基百科 # 突然閃過一個畫面：維基百科網站。 Wiki 網站上，不是只要滑鼠指向連結，就會有簡單的解釋嗎？我就是要那個功能啊 1 ！ 模仿維基百科後的註腳 做法 # 可以透過 CDN 2 載入 Littlefoot，也就是其實有別人寫好了，我們 3 只要引入到自己的網站即可。 塞入以下到 footer 4 ： <!-- Littlefoot 註腳優化套件 --> < link rel = \"stylesheet\" href = \"https://unpkg.com/litt…",
+      "image": null,
+      "publishedAt": "2026-06-16T16:15:11Z",
+      "sourceId": "199cdf92fc46bfcd",
+      "sourceTitle": "Eddie Lv",
+      "link": "https://eddielv.com/musings/why-i-dont-like-use-footnote/",
+      "detailPath": "articles/c87c5e08aa953212921f6876.json"
+    },
+    {
       "id": "f26392c74d9870567a640ab2",
       "title": "就很順啊",
       "summary": "中學三年級時，我因爲校排成績還行，所以早早用免試升學的管道就已經有高中可以唸了，不用考基測，距離畢業又還有 4 個月，於是跟母親說我要在學校對面的音樂補習班學吉他。 其實我沒印象那 4 個月老師教了哪些東西，只記得爲了 成果發表 ，我練習得非常勤。 有次，我在某書看到「順階和弦」一詞，但並沒有任何解釋，那一頁附上了在吉他前三格彈 C 大調順階和弦的琶音練習，我問老師那是什麼。 只見老師放下吉他並走到鋼琴旁，快速地彈過 C 大調的七個順階三和弦，說道：「就很順啊。」 當下的我沒有任何樂理知識，也不懂爲何書中要把順階和弦的練習放在最前面，也不懂那個練習的意義是什麼，所以才問了這個問題。 現在回想起來，能夠在 被國小音樂老師罵白癡 後，再加上問題時常得不到答案的音樂教育下，我的音樂能力還能成長成現在這個樣子，簡直是…",
@@ -430,17 +452,6 @@
       "detailPath": "articles/91a40b55ba51b2d7a9c76347.json"
     },
     {
-      "id": "85b8a94f0d472ed23b9e788e",
-      "title": "有趣系列1：部落格",
-      "summary": "很少聽到從別人口中說出：「有趣」，基本上是手指頭數得完的數字，加上我本人是個無聊怪，因此，每當聽到這個詞，我就會眼睛一亮，特別注意並開始好奇為什麼對方會覺得有趣，讓自己可以有個參考。 今天早上吃早餐時習慣性地打開Feedly，開始閱讀之前加入的生活日常類別的R",
-      "image": null,
-      "publishedAt": "2026-06-13T00:11:57Z",
-      "sourceId": "bfce0110f029b1fc",
-      "sourceTitle": "I'm j2hongming",
-      "link": "https://j2hongming.github.io/2026/06/13/interesting-series/",
-      "detailPath": "articles/85b8a94f0d472ed23b9e788e.json"
-    },
-    {
       "id": "c2aad07680b7aeb94c17c51f",
       "title": "我以前",
       "summary": "「我以前」是個超奇怪的人。",
@@ -648,17 +659,6 @@
       "sourceTitle": "Wiwi.Blog Blog",
       "link": "https://wiwi.blog/blog/hands-free",
       "detailPath": "articles/cf9252ac4c9ef3d919f9a96d.json"
-    },
-    {
-      "id": "82f16f45c4ccae02d27ff313",
-      "title": "基于 git 的零拷贝静态web服务器",
-      "summary": "无聊，产生了个crazy的想法。 git 内部用 zlib 压缩文件内容 Content-Encoding: gzip 也是 如果web服务器输出 .git 里的 静态 内容，是不是可以减一个二次解压/压缩步骤？？？ blob sha1 直接当etag？ 跟AI较量了几轮，一开始它说做不到。因为 blob 的格式比较变态。因为 hello world... 在 .git/objects/ab/cdef... 里的东西是这么存的 zlib(blob 1234\\0hello world...) I was like ？？？日他妈真变态啊。这前面是写死了 blob <size>\\0 然后把文件内容放在一起，再压缩的。 .git 这设计脑子有病啊。。。为啥不是原始文件gz而是加个头去gz。。。 此路不通！结束 然后A…",
-      "image": null,
-      "publishedAt": "2026-06-10T15:21:00Z",
-      "sourceId": "a864c53722a17b19",
-      "sourceTitle": "est's blog",
-      "link": "https://blog.est.im/2026/stdout-22",
-      "detailPath": "articles/82f16f45c4ccae02d27ff313.json"
     }
   ]
 }
