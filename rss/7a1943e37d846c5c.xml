@@ -4,10 +4,71 @@
     <title>我的部落格</title>
     <link rel="self" href="https://e89295.com/blog/atom.xml"/>
     <link rel="alternate" href="https://e89295.com/blog/"/>
-    <updated>2026-08-08T13:54:15.300Z</updated>
+    <updated>2026-08-27T15:23:02.710Z</updated>
     <author><name>我</name></author>
     <id>urn:uuid:3c2eeedf-efdd-481e-bfdc-649d90eb88a8</id>
 
+    <entry>
+        <title>有關「開啟 JavaScript」的問題</title>
+        <link rel="alternate" href="https://e89295.com/blog/2026-08-27_1.html"/>
+        <id>urn:uuid:231b17c0-bcf8-4122-a27c-4b1e32f2125f</id>
+        <updated>2026-08-27T15:22:49.851Z</updated>
+        <content type="html">
+
+&lt;p&gt;看到 &lt;span lang="en"&gt;Spike Leung&lt;/span&gt; 上個月的&lt;a href="https://taxodium.ink/google-turn-on-javascript-to-keep-searching.html"&gt;文章&lt;/a&gt;，說如果沒有啟用 &lt;span lang="en"&gt;JavaScript&lt;/span&gt; 的話，有些網頁會無法閱讀，甚至一片空白，「除非我很想看，否則我就關閉頁面了」。&lt;a href="https://trashposts.com/blog/no-js-no-problem/"&gt;廢文小天地&lt;/a&gt;看了文章之後，想起應該讓自己網站的一些功能在關閉 &lt;span lang="en"&gt;JavaScript&lt;/span&gt; 時也能使用，而 &lt;span lang="en"&gt;AngeCI&lt;/span&gt; 則提出了一些&lt;a href="https://angeci.github.io/blog/zh/noscript/"&gt;反駁&lt;/a&gt;。當然，在這個問題上，我完全是&lt;a href="2026-01-19.html"&gt;站在&lt;/a&gt; &lt;span lang="en"&gt;Spike&lt;/span&gt; 這一邊的。事實上，在很多狀況下，不只是 &lt;span lang="en"&gt;JavaScript&lt;/span&gt;，就連 &lt;abbr lang="en"&gt;CSS&lt;/abbr&gt; 都&lt;a href="https://epistalux.com/naked"&gt;不一定會被使用者載入&lt;/a&gt;。
+&lt;/p&gt;
+&lt;p&gt;正如 &lt;span lang="en"&gt;Spike&lt;/span&gt; 在文章中提到的，啟用 &lt;span lang="en"&gt;JavaScript&lt;/span&gt; 對使用者來說有很大的風險。不只白費資源，隱私也蕩然無存，甚至可能讓惡意程式利用瀏覽器的漏洞。如果不是對網站有相當程度的信任，是很難讓人願意做這件事的。&lt;span lang="en"&gt;AngeCI&lt;/span&gt; 提到 &lt;span lang="en"&gt;JavaScript&lt;/span&gt; 現在很常用被來阻擋爬蟲。換句話說，不只使用者需要阻擋惡意的網站，網站也需要阻擋惡意的使用者。網站與使用者間的信任蕩然無存。現在瀏覽網頁就像是要去見黑幫老大嗎？還要先讓小弟毛手毛腳地搜身一番才能進去？如果網站可以叫使用者啟用 &lt;span lang="en"&gt;JavaScript&lt;/span&gt; 來證明自己的誠意，而使用者卻無法叫網站證明它的誠意，未免有點不公平。握手才能建立信任。只有一方舉手，就不是握手，而是投降。
+&lt;/p&gt;&lt;p&gt;就算要投降，也不能不戰而降。其實有很多表面上看起來沒有 &lt;span lang="en"&gt;JavaScript&lt;/span&gt; 就無法載入的網站，並非真的是一片空白，只是內容被隱藏起來。這時我常常會在 &lt;a href="2026-01-28.html" lang="en"&gt;Firefox&lt;/a&gt; 的選單列中選擇 &lt;span lang="en"&gt;View → Page Style → No Style&lt;/span&gt;，停用樣式表。或者，如果是一般的部落格或新聞文章，更快的方式是啟用閱讀模式。再不然就是直接檢視原始碼。有些網站會用一些元素擋在內容前面，可以用右鍵選 &lt;span lang="en"&gt;Inspect&lt;/span&gt; 來移除。最明顯的狀況就是，如果畫面一片空白，但是旁邊卻有捲軸，表示內容只是被遮住而已。某種程度來說，這種明明有內容卻不顯示的情形是最不應該發生的。我知道有些網站選擇這樣做，可能是為了避免內容在載入的過程中發生閃爍、移位。但那也只不過是藉口罷了。
+&lt;/p&gt;&lt;p&gt;檢視原始碼真的還滿有用的。例如有的網站，如果沒有用 &lt;span lang="en"&gt;JavaScript&lt;/span&gt;，雖然看得到文字，但會無法顯示圖片。此時通常可以在原始碼中找到圖片網址。甚至還有一個用處，就是有時想知道文章發布的時間，卻不知道為什麼怎樣都找不到。此時如果在原始碼中搜尋，通常就能找到日期。&lt;a href="https://wiwi.blog/blog/blogblog-party-feb-2026"&gt;只有我這樣嗎&lt;/a&gt;？
+&lt;/p&gt;&lt;p&gt;當然，人活在世界上，也總有不得不低頭的時候。到了那個時候，我總是一邊按下 &lt;span lang="en"&gt;uBlock Origin&lt;/span&gt; 的按鈕，一邊在心裡說：「好吧，我就姑且給你 &lt;a href="https://en.wiktionary.org/wiki/benefit_of_the_doubt" lang="en"&gt;the benefit of the doubt&lt;/a&gt;。」然後發現網頁上根本沒有想看的資訊，而追悔莫及。之前有一次要參加 &lt;span lang="en"&gt;BlogBlog&lt;/span&gt; 同樂會的時候⸺忘了是哪一次。還是不只一次？完了，我的記憶力真的越來越差了⸺主持人的部落格大概是用了 &lt;span lang="en"&gt;Cloudflare&lt;/span&gt;，沒有 &lt;span lang="en"&gt;JavaScript&lt;/span&gt; 就看不到 &lt;span lang="en"&gt;email&lt;/span&gt;。為了將稿投，也只能低頭。結果後來發現 &lt;a href="https://blogblog.club/party/"&gt;&lt;span lang="en"&gt;BlogBlog&lt;/span&gt; 俱樂部的網頁&lt;/a&gt;上不需要 &lt;span lang="en"&gt;JavaScript&lt;/span&gt; 就可以直接看到 &lt;span lang="en"&gt;email&lt;/span&gt; 了⋯⋯。那也沒什麼，比較慘的是有些網站只不過是轉貼其他網站的文章，原網站其實不需要 &lt;span lang="en"&gt;JavaScript&lt;/span&gt; 就能閱讀。那種感覺真是糟透了。
+&lt;/p&gt;&lt;p&gt;難道是我們這些堅持不開啟 &lt;span lang="en"&gt;JavaScript&lt;/span&gt; 的人太誇張、太堅持了嗎？也許這只是一種數位潔癖。又或者，至少以驗證使用者是不是機器人這一點來說，可能反映的比較是 &lt;abbr lang="en"&gt;AI&lt;/abbr&gt; 產業的問題，而不是用不用 &lt;span lang="en"&gt;JavaScript&lt;/span&gt; 的問題。當然，這類措施在現在的 &lt;abbr lang="en"&gt;LLM&lt;/abbr&gt; 狂熱之前就已經存在，但以前通常是註冊登入或發表內容之類的狀況才比較需要驗證。老實說，越來越多網站只不過是基本的瀏覽也需要驗證，真的讓我有一種「&lt;a href="2026-07-09.html#:~:text=好像世界末日"&gt;好像世界末日&lt;/a&gt;！」的感覺。這大概就是現在 &lt;abbr lang="en"&gt;AI&lt;/abbr&gt; 世界末日的&lt;a href="https://en.wikipedia.org/wiki/Four_Horsemen_of_the_Apocalypse"&gt;四騎士&lt;/a&gt;吧：
+&lt;/p&gt;&lt;ol&gt;
+&lt;li&gt;瘟疫。觸目所及的一切，如瘟疫肆虐般，被 &lt;abbr lang="en"&gt;AI&lt;/abbr&gt; 感染，變成可怕的垃圾內容（&lt;span lang="en"&gt;slop&lt;/span&gt;）。也有人說第一個騎士代表的是征服，也可以說是 &lt;abbr lang="en"&gt;AI&lt;/abbr&gt; 內容征服了一切。
+&lt;/li&gt;&lt;li&gt;戰爭。爬蟲與網站之間的戰爭升級，人類在做每件事之前都要先證明自己是人類。
+&lt;/li&gt;&lt;li&gt;饑荒。所有硬體都漲到離譜的價格。
+&lt;/li&gt;&lt;li&gt;死亡。其實我不確定死亡代表什麼。是&lt;a href="https://en.wikipedia.org/wiki/Dead_Internet_theory"&gt;網路之死&lt;/a&gt;嗎？無論是什麼，我都不想再想下去了⋯⋯
+&lt;/li&gt;&lt;/ol&gt;
+</content>
+    </entry>
+    <entry>
+        <title>我不知道意圖使他人發生危害而慫恿其從事高風險活動算不算犯罪</title>
+        <link rel="alternate" href="https://e89295.com/blog/2026-08-27.html"/>
+        <id>urn:uuid:29a090e8-fe23-410f-89fd-637b74506526</id>
+        <updated>2026-08-27T10:16:25.940Z</updated>
+        <content type="html">
+
+&lt;p&gt;說起來感覺有點慚愧，雖然常常會在我的部落格用「有關⋯⋯的問題」為題回應別人寫的文章，但是每次參加 &lt;a href="https://blogblog.club/party/"&gt;&lt;span lang="en"&gt;BlogBlog&lt;/span&gt; 同樂會&lt;/a&gt;的時候，我大概還是屬於那種只顧著寫自己文章的人。其他部落格裡的東西根本就懶得看。畢竟光是寫自己的文章就已經要花不少時間，甚至有時候「&lt;a href="https://jasonjlai.net/zh/3pwriting/stay-up.html"&gt;晚上不睡覺&lt;/a&gt;」（本次同樂會的主題），只是為了寫部落格。
+&lt;/p&gt;
+&lt;p&gt;晚上不睡覺其實是一件滿危險的事吧？最近突然想到，如果你很討厭某個人，所以就故意慫恿他從事高風險活動，例如：推薦他寫部落格。結果他真的熬夜寫部落格，最後因睡眠剝奪而死亡。這樣算是殺人嗎？本來我想說：「在眾多 &lt;span lang="en"&gt;BlogBlog&lt;/span&gt; 同樂會的參加者中，好像沒有看到有律師，沒有人能回答這個問題。」沒想到這次同樂會的主持人 &lt;span lang="en"&gt;Jason Lai&lt;/span&gt; 恰好就是律師。沒錯，這證明了我從來都是顧著寫自己的部落格，完全沒仔細看別人在幹嘛，才會連這都沒發現⋯⋯
+&lt;/p&gt;&lt;p&gt;當然，晚上不睡覺的風險，至少對一般健康的人來說，影響相對算小。如果一個人拿武器傷害別人，受傷、死亡的風險顯然是極大、可以預期的。但是界線在哪？刺別人一刀，向別人開一槍，死亡機率也許十之八九。而慫恿別人熬夜寫部落格，死亡機率可能只是增加萬分之一，甚至搞不好反而降低死亡機率，因為變數太多。但是這不代表殺手不能採用這種方式。就好像有的人賺錢是久久才接一筆大訂單，有的人則選擇薄利多銷。雖然用慫恿別人從事高風險活動的方式殺人成功率較低，但長時間不斷嘗試下，依然可能有不遜於傳統殺人方式的效果，而且更難察覺、更容易脫罪。如果殺手知道目標本身就有風險，例如他有某些疾病或有特定遺傳因子，用慫恿他寫部落格的方式造成傷害的機率、程度就更高了。更何況，就算因為機率太低而失敗，也應該算是未遂犯吧？
+&lt;/p&gt;&lt;p&gt;這聽起來有點像是某種浪漫喜劇的劇情。你知道，就是男主角為了害女主角而慫恿她去做各種危險的事情。但是女主角生性謹慎，&lt;a href="https://wiwi.blog/blog/why-gamble/"&gt;不喜歡冒險&lt;/a&gt;。結果他為了慫恿她，只好自己帶頭，整天到處去跳傘、攀岩、高空彈跳，之類的。不料最後自己竟然愛上了極限運動，也愛上了一起從事這些運動的女主角。雖然我第一直覺想到的結局是最後真的出意外，結果主角都掛了，但是應該不可能這樣演。大概只能編成，例如委託男主角殺女主角的人，或是女主角的其他仇人，決定用傳統的方式殺人，於是男主角一面面對女主角的不諒解，一面設法保護她。總之，一定是很老套的劇情就對了。畢竟我們看戲劇的目的，往往都是為了逃離現實。很多人大概都會幻想把風險拋到腦後、活在當下的感覺，而不敢實際行動。如果戲劇的寓意又只是：「別幻想了。還是乖乖待在家裡，不要涉險比較好。」那未免太令人沮喪。所以一般的劇情是不可能反對極限運動的。
+&lt;/p&gt;&lt;p&gt;反過來說，有的人本來就不想活了。那樣的人，何不多多從事普通人不敢嘗試的極限運動呢？反正也沒什麼損失了。這感覺可以寫成一則寓言故事：從前從前，有一個人失戀了，覺得很沮喪。他靈機一動，心想：「反正我都難過到不想活了，乾脆每天去高空彈跳吧！」於是他每天到處去玩高空彈跳，花光了所有積蓄，最終窮困潦倒而死。這個故事的寓意是：如果你想培養一個嗜好，寫部落格可能是比高空彈跳更好的選擇。⸺畢竟我現在參加的東西叫 &lt;a href="https://blogblog.club/"&gt;&lt;span lang="en"&gt;BlogBlog&lt;/span&gt; 俱樂部&lt;/a&gt;，不是高空彈跳俱樂部，所以當然也只能這樣講。親愛的讀者，我可不是在慫恿你做或不做任何事。
+&lt;/p&gt;&lt;p&gt;但是不睡覺可能不只是因為寫文章要花時間。寫部落格的風險，也不只是晚上不睡覺。也有可能是因為要把自己的想法寫下來，本來就會承受不小的壓力。例如，如果有人在部落格上說：「慫恿別人寫部落格，根本是在殺人！」可能會有人發文嘲笑他：「這種說法太荒謬、太白痴了！」然而又會有人說：「發文嘲笑別人的人，根本是在殺人！」最後這句聽起來似乎就開始有一點點合理了（不然也不會有人想定反霸凌的法律了吧）。可是在這個假設的例子中，寫部落格，不正是他受到言語傷害的間接原因嗎？慫恿他寫部落格的人，完全有可能正是預期到這一點而惡意為之啊！
+&lt;/p&gt;&lt;p&gt;無論在法律上還是哲學上，倫理與因果的概念，是密不可分的。比方說，通常一般人都覺得，因為不作為而導致傷害，比起作為而導致傷害，相對比較沒有那麼邪惡，儘管兩者的結果是相同的。類似的道理，同樣是原因，但是直接與間接的原因，就有程度的區別，儘管若是沒有間接的原因，也不會有直接的原因。類似的情況，如果認真去分析的話，必然是沒有什麼道理可言的。至少我總是這樣想的。雖然哲學家乃至律師的工作就是要在沒有道理中找出道理，但我總覺得他們的工作很荒謬。例如：如果有人天生的基因讓他得了罕見疾病，而活不久，人們會說：「好可憐的孩子啊！」但是如果有人天生的基因讓他個性喜歡冒險，因而經常從事高風險活動，而活不久，人們會說：「活該！」雖然，但我的意思並不是說雙重標準不好。恰恰相反，我想說的是：這種雙重標準是一種常識，沒有什麼反對的必要。如果凡事都要有一致的標準，反而有點太極端了。
+&lt;/p&gt;&lt;p&gt;比方說，但凡社會上有什麼不好的事情，總是會有人跳出來批評：「政府居然放任這樣的事情！根本是政府殺人！」那麼我想問：為什麼我晚上不睡覺的時候，政府沒有派人來強迫我睡覺呢？根本是政府殺人，對吧？居然放任民眾用熬夜的方式慢性自殺，真是豈有此理。居然用放任民眾熬夜的方式來圖利宵夜業者、網路業者，簡直謀財害命。居然⋯⋯但是這甚至不是在反諷，因為大概真的有不少政府會希望強迫你不能熬夜上網⸺&lt;a href="https://en.wikipedia.org/wiki/Think_of_the_children"&gt;如果你是兒童或青少年的話&lt;/a&gt;。所以這又是另一種雙重標準。有的人可能會覺得政府管太多，但我總是想，明明小孩是人，我也是人，為什麼大家都只關心小孩，而不關心我呢？難道只是因為我是成年人，就要為自己負責嗎？這不公平！例如每次只要有什麼嚇人的事情，新聞都會訪問民眾，然後民眾不知道為什麼一定都要說：「這會嚇到小孩跟老人欸！」難道中年人就不會被嚇到嗎？小孩雖然脆弱，但是他們有韌性啊。老人雖然脆弱，但是他們早就見過大風大浪，哪有那麼容易嚇到。這樣說起來中年人被嚇到反而是最虧的吧？但是難道你又要因此說「所以不必特別關心老人與小孩」嗎？那又太極端了。
+&lt;/p&gt;&lt;p&gt;又例如我們常常在新聞上看到，有人會說哪家餐廳、小吃店的食物有什麼問題，然後衛生局就會說他們會去稽查。但是這不公平！為什麼只稽查店家？我平常在家&lt;a href="2026-02-25.html"&gt;自己煮飯&lt;/a&gt;的時候，怎麼就沒人稽查？這不是獨厚外食族，罔顧其他民眾的安全嗎？我根本沒受過專業的廚師訓練，萬一食物中毒怎麼辦？又例如，營業場所的消防法規比一般民宅嚴格。意思是說，我們偶爾去旅遊的時候可以安心，至於平常每天在家就不用在意消防沒關係。是這樣嗎？當然，我也不是說有監管就一定比較好，但是顯然，那些被監管的人，無論他們喜不喜歡，都佔據了很多社會資源，這確實是一種不平等。他們總是一副很委屈的樣子，但是他們何德何能，我們為什麼要為了他們喜歡做的事消耗這麼多成本呢？我喜歡的事，怎麼就沒人補貼呢？
+&lt;/p&gt;&lt;p&gt;這類例子實在太多，數也數不清。像是交通的問題。每種交通工具背後，當然都有其利益團體。但是就算撇開基礎建設之類的投資，只看直接的補貼，那些不使用交通工具、只會走路的人，也已經虧大了吧？政府什麼交通工具都可以補貼，就是沒辦法說：「走路去上班、上學、旅遊的人可以領補助。」世界上的行人們！難道你們只滿足於畫幾個斑馬線、清空幾個騎樓這種卑微的要求嗎？政治是這樣玩的嗎？那些有錢人只不過是搭個私人飛機，就被撻伐。世界上的行人們！你們怎麼不用同樣的力道去撻伐開車的人呢？什麼？你說開車是為了工作、生活不得已？那有錢人坐私人飛機也是為了工作、生活不得已啊！憑什麼只有你的不得已才叫不得已？那只是你的個人偏好吧？
+&lt;/p&gt;&lt;p&gt;有些人似乎覺得「只是個人偏好」等於「沒道理」。這種想法其實沒什麼道理。就算是個人偏好，又怎樣？不只是個人偏好，那又怎樣？哲學家們憑什麼假設，人類必須仰仗一致的普世真理，而非滿足於不一致的個人偏好？事實是，世上從未通行過任何普世的真理，否則哲學家早就消滅自己的工作了。但是世界仍在轉動。如果有人晚上不睡覺，你會批評：「你以為自己不睡覺沒關係嗎？這不是你一個人的問題。你的夜間活動會製造光害、噪音等污染。熬夜不只損害個人健康，也會導致社會整體生產力降低，還會消耗健康照護資源，最終還是社會付出代價。」欸，是喔！可是如果我用同樣的話這樣說，你又會反駁：「不睡覺的情況很多，不一定完全有害，不能一概而論，也不必無限上綱。例如避免在尖峰時段消耗能源，反而對社會有益。要不要睡覺、如何睡覺，是每個人的自由。不同人的習慣不同，不同時代、不同地區的睡眠文化都不一樣，研究也正在探索各種睡眠模式背後的科學。」反正無論怎樣，你都有話可以講吧！好，就你最聰明。你永遠是對的，我永遠是錯的。我只是一個&lt;a href="2026-04-08.html"&gt;白痴&lt;/a&gt;而已。
+&lt;/p&gt;&lt;p&gt;所以這就是我不睡覺的原因吧。因為覺得很煩。這個世界上一切的論理，都讓人厭倦與厭惡。所以我的每一篇文章寫到最後，都在反對一切的道理，因為所有的道理總是相互反對。道理之間的連鎖，一如因果的輪迴，永無止境，燃燒著我的靈魂。或是用一般通俗的說法，應該就是「想太多」。正因為我如此地厭倦思考，所以看到喜歡思考、熱衷思考的人，就更厭惡、更煩了。我說的「思考」，指的是語言、邏輯方面的推理或判斷。這裡的「邏輯」不是「正確」或「健全」之類的意思。雖然錯誤的邏輯嚴格來說應該稱為「不邏輯」，但是在另一種意義上仍然是一種邏輯式的思考。例如「一加一等於三」與「我吃了一顆蘋果」。前者雖然錯誤，仍屬邏輯思考。後者雖然正確，卻沒什麼邏輯可言。世界上有不少人，聽到「一加一等於三」的時候會興奮地反駁謬誤，聽到「一加一等於二」的時候會讚歎完美，然而當你說「我吃了一顆蘋果」，他卻只會問：「然後呢？」彷彿僅僅吃到蘋果的味道而不進一步思考的做法理所當然地有所不足。
+&lt;/p&gt;&lt;p&gt;例如有的人說：「&lt;a href="https://en.wikipedia.org/wiki/Eskimo_words_for_snow"&gt;愛斯基摩人有很多描述雪的詞彙&lt;/a&gt;。」姑且不論這類說法是否為真，我們可以問：到底是詞彙多比較好，還是詞彙少比較好？很多人似乎毫無來由地假設「精準表達」甚至「有邏輯」是用來評斷一門語言的最高標準，所以詞彙越多，通常人們就越自豪。反之，人們總是感嘆：「如果沒有詞語可以描述，該如何思考、乃至與他人溝通某些事物？正如螞蟻無法理解人類的世界，只會簡單語言的人也無法理解複雜語言的世界。」但是也有些人反而追求簡單，刻意去發明像 &lt;a href="https://en.wikipedia.org/wiki/Toki_Pona" lang="en"&gt;Toki Pona&lt;/a&gt; 那樣詞語極少的語言。最近恰好翻到呂思勉《文字學四種》中引用了一則故事，大概也是類似這種不同人對目標的假設不同的例子：
+&lt;/p&gt;&lt;blockquote&gt;&lt;p&gt;一國之文明程度愈進，則其文字愈精深。昔有德人問中國留學生曰：“德文易學乎？法文易學乎？”此留學生習於酬應，以為文字易學美事也，率爾而對曰：“德文易學。”德人大不懌，與力辯其不然。&lt;small&gt;事見多年前之《時報》。&lt;/small&gt;故文字易學非美事，強使難者易，亦勢所不能。&lt;small&gt;昔金世宗嘗問臣下曰：“契丹文字年遠，觀其所撰詩，義理深微，當時何不立契丹進士科舉？今雖立女直字科，慮女直字創製日近，義理未如漢字深奧，恐為後人議論。”丞相守道曰：“漢文字恐初亦未必能如此，由歷代聖賢漸加修舉也。聖主天姿明哲，令譯經教天下，行之久，亦可同漢人文章矣。”事見《金史·選舉志》。&lt;/small&gt;
+&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;推崇文明、文章的人，當然覺得語言越豐富越好。但是誰規定一定要推崇文章？看不起螞蟻的人沒有考慮到的是，既然螞蟻無法理解人類的世界，那人類也無從理解螞蟻的世界。你不是螞蟻，你怎麼知道螞蟻低等的快樂不如人類&lt;a href="2026-04-04.html"&gt;高層次的快樂&lt;/a&gt;呢？你覺得思考很快樂，那很好。但是我不覺得。我對高層次的快樂沒興趣。我不想被你拖下水。我只想睡覺。我不想熬夜寫文章。
+&lt;/p&gt;&lt;p&gt;例如時常有人會問：「如果知道自己明天就會死，你會做什麼？」我想我的答案應該是：好好睡一覺。這讓人想到以前看到的一個〈&lt;a href="https://web.archive.org/web/20050313090748/http://blog.roodo.com/flyfay/archives/11573.html"&gt;預知未來的任性心理測驗&lt;/a&gt;〉：
+&lt;/p&gt;&lt;blockquote&gt;
+&lt;ol style="list-style: decimal"&gt;&lt;li&gt;擁有一只太陽眼鏡&lt;/li&gt;&lt;li&gt;一顆不對稱的椰子&lt;/li&gt;&lt;li&gt;很多很多的紙娃娃&lt;/li&gt;&lt;li&gt;黑金剛造型的大哥大&lt;/li&gt;&lt;li&gt;心上人的照片&lt;/li&gt;&lt;li&gt;夏威夷製造的鳳梨罐頭&lt;/li&gt;&lt;li&gt;百年孤寂&lt;/li&gt;&lt;/ol&gt;
+&lt;p&gt; 「如果有一天，你漂流到孤島上，可以選擇攜帶一樣東西，會選擇以上哪一種。」
+&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;看到這個題目，不知道為什麼直覺就想選「一顆不對稱的椰子」。即使孤島上應該本來就有很多椰子。
+&lt;/p&gt;&lt;p&gt;順道一提，這篇讀起來令人有點愛不釋手的「心理測驗」是出自以前一個叫《左翼青春》的知名&lt;small&gt;（？）&lt;/small&gt;部落格。雖然不知道作者是誰、寫作的背景是什麼，不過以前走這種文藝路線、洋溢著文學氣息的部落客似乎就不是很多了。現在必定更少。&lt;a href="https://noa.bearblog.dev"&gt;&lt;span lang="en"&gt;Noa&lt;/span&gt; 的部落格&lt;/a&gt;也許算得上是一個例外。當然，會這樣覺得，一定只是因為孤陋寡聞而已。不過現在的人提到類似「漂流到孤島上」的問題，很多時候確實是在探討「&lt;a href="https://wiwi.blog/blog/desert-island-laptop/"&gt;如果只能帶一台筆電去荒島，我要在那台筆電裡放什麼？&lt;/a&gt;」之類風格完全不同、一點也不文藝的內容。
+&lt;/p&gt;&lt;p&gt;但是那不是重點。重點是，我不知道意圖使他人發生危害而慫恿其從事高風險活動算不算犯罪。但是那也不是重點。重點是，如同每個人想帶去荒島的東西不同，又如同部落格有很多不同的風格，面對同一個問題，每個人表面上看起來答案不同，其實只不過是對問題的解讀不同，所以根本沒有所謂的「同一個問題」。例如有的人想的是：「如果我哪天也&lt;em&gt;真的&lt;/em&gt;遇到這樣的問題，&lt;em&gt;應該&lt;/em&gt;怎麼做，會比較&lt;em&gt;好&lt;/em&gt;？」有的人想的卻只是：「&lt;a href="2025-02-07.html#:~:text=哈哈哈！好好笑！"&gt;哈哈哈，好好笑！&lt;/a&gt;」但是那也不是重點。重點是，問「應該怎麼做比較好」的人，讓我感到恐懼，而從來不說「哈哈哈，好好笑」的人，讓我感到絕望。 「原來如此。原來這個世界上，&lt;a href="2026-04-04.html#:~:text=原來一棵樹就真的只是一棵樹而已"&gt;沒有任何東西是好笑的&lt;/a&gt;。」原來如此⋯⋯原來，就像很多人&lt;small&gt;（誰？）&lt;/small&gt;說的，比死亡更可怕的是恐懼，而比恐懼更可怕的是絕望。
+&lt;/p&gt;&lt;p&gt;這聽起來有點像某種科幻驚悚劇的劇情。你知道，就是傳說中有某本書或是其他物品，凡是看過的人都感到恐懼或絕望而自殺了，之類的。事實上，無論在虛構或現實世界中，這樣的內容理所當然都會被管制。但是這類管制當然沒有一致的標準可言。例如現在很多人會使用觸發警告（&lt;span lang="en"&gt;trigger warning&lt;/span&gt;）。這些措施，無論是否有用，只能站在公共衛生的立場實行。我說的「公共衛生」，意思是我們不可能消除每個危害，只能盡量降低整體危害。雖然人們總是覺得這些是在為少數人服務，其實凡是有設限的情況，就算很少發生，也必然已經多到了讓人們覺得不得不做些什麼的地步。既是公眾用來降低重大危害的工具，當然不可能解決個人微不足道的問題。法律大概就是如此吧。
+&lt;/p&gt;&lt;p&gt;「正是因為如此，所以個人看似微不足道的問題，反而沒人在意。這反而是更大的問題。」雖然我想這樣說，其實根本就沒道理。因為看似微不足道的問題，實際上真的就是微不足道的。畢竟就連所謂重要的事情，到頭來也沒那麼重要，何況不重要的事情？之所以要把我在 &lt;span lang="en"&gt;Mastodon&lt;/span&gt; 上的每則貼文最後加上「&lt;a href="https://g0v.social/@e89295/116136898746595117"&gt;但是那不重要&lt;/a&gt;」，是為了提醒自己，世界上幾乎沒有任何事情是重要的，尤其是我最在意的那些事情。
+&lt;/p&gt;&lt;p&gt;其實我早就知道了，何必提醒？因為「覺得重要」是會傳染的吧。每次睡不著、心情最糟糕的時候，都是因為想對別人大喊：「拜託！你說的那些根本就不重要好嗎！」明明我的宗旨是一切都不重要，可是為了維持這個宗旨而總是把反駁認為某些事情很重要當成一件很重要的事，反而破壞這個宗旨了。在每則貼文最後加上「但是那不重要」，是因為我多麼希望人們也可以做一樣的事。商人應該說：「無論你買不買我的商品，那都不重要。」政治人物應該說：「無論你支不支持我，那都不重要。」學者應該說：「無論這個學術問題的答案是什麼，那都不重要。」為什麼希望他們這麼說？因為這些是事實吧。但是事實如何，並沒有那麼重要。重要的是，我與他們的利益並不一致。所謂「&lt;a href="2026-07-09.html#:~:text=我話很多，但朋友很少"&gt;朋友很少&lt;/a&gt;」，難道不是這個意思嗎？
+&lt;/p&gt;&lt;p&gt;如果「一切都不重要」聽起來有點像虛無主義，大概是因為它真的就是一種虛無主義。一般想到虛無主義，可能會以為是這樣：「原來一切都沒有意義。這讓我好沮喪。讓我睡不著。」但是難道沒有可能是這樣的嗎？「原來一切都沒有意義。那我就不用沮喪了。可以睡了。」相較之下，應該後者更有可能吧？大概是我孤陋寡聞，只聽過有人因為擔心的事情太多而睡不著，沒有聽過有人因為擔心的事情太少而睡不著的。
+&lt;/p&gt;&lt;p&gt;難道我們不是一直以來被&lt;a href="2026-02-10.html#:~:text=我們以為不運動是因為懶惰，其實剛好相反，是因為太勤勞了。"&gt;太勤勞的人&lt;/a&gt;的話術矇騙了嗎？其實越是想著「睡覺好重要，我要趕快睡覺」，反而就越焦慮，越沒辦法睡覺。這應該是大家都很清楚的常識。可是如果有人抗議：「睡覺那麼重要，你怎麼可以覺得不重要呢？」又有多少人可以接受這樣的解釋：「正是因為睡覺很重要，所以我才要把它看得不重要。」雖然我應該對自己的行為負責，但是既然每個人都喜歡把責任推給別人，為何獨獨我不可以？既然人們可以把所有問題怪罪到「大家不夠重視問題」上，我也可以反過來把問題怪到他們身上：世界上所有問題，都是奉行「重要主義」的人造成的。如果人人都奉行虛無主義的話，早就世界和平了。例如：認為私人財產的觀念很重要的人會說：「如果沒有禁止竊盜，那任何人都可以隨便拿走你的東西。太糟了。」這樣說的人可能沒有把問題想清楚⸺如果沒有財產的觀念，怎麼會有人因為想增加自己的財產，而把別人的東西佔為己有呢？
+&lt;/p&gt;</content>
+    </entry>
     <entry>
         <title>我不知道為什麼我好像沒那麼在意結局</title>
         <link rel="alternate" href="https://e89295.com/blog/2026-08-07.html"/>
@@ -1356,55 +1417,6 @@ Drive to work to pay for this car
 &lt;/p&gt;&lt;p&gt;如果你跟我一樣，也覺得網頁只有一種書寫方向太無聊，或是單純喜歡直排的文藝氣息（？），想嘗試在網頁中使用直書的話，非常簡單，只需要加入一行 &lt;abbr lang="en"&gt;CSS&lt;/abbr&gt;：
 &lt;/p&gt;&lt;pre&gt;&lt;code&gt;:root { &lt;b&gt;writing-mode&lt;/b&gt;: &lt;i&gt;vertical-rl&lt;/i&gt; }&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;這樣整個網頁的主要書寫方向就會變直書了。另外，如果你的版面用了很多「上下左右」的 &lt;abbr lang="en"&gt;CSS&lt;/abbr&gt;，例如原本在某個元素上下加了一些空白，如果變直書以後要改成左右，是不是很麻煩呢？其實可以把使用「上下左右」的地方改成以文字書寫方向為基準的&lt;a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Logical_properties_and_values"&gt;邏輯屬性&lt;/a&gt;。這樣的話，甚至可以隨意&lt;a href="javascript:void (() =&gt; document.documentElement.style.writingMode = getComputedStyle(document.documentElement).writingMode === 'vertical-rl' ? 'horizontal-tb' : 'vertical-rl')()"&gt;切換書寫方向&lt;/a&gt;&lt;small&gt;（這個連結是一個可以切換書寫方向的&lt;a href="https://zh.wikipedia.org/zh-tw/%E5%B0%8F%E4%B9%A6%E7%AD%BE"&gt;小書籤&lt;/a&gt;。如果你不是在瀏覽器裡看這篇文章，有些閱讀器可能不會顯示這個 &lt;span lang="en"&gt;JavaScript&lt;/span&gt; 連結）&lt;/small&gt;，版面也不會亂掉。
-&lt;/p&gt;</content>
-    </entry>
-    <entry>
-        <title>有關破折號該用什麼字元來表示的問題</title>
-        <link rel="alternate" href="https://e89295.com/blog/2026-01-14_1.html"/>
-        <id>urn:uuid:24d71aa1-f119-4eab-8e8f-a537d4685989</id>
-        <updated>2026-01-14T00:20:47.943Z</updated>
-        <content type="html">
-
-&lt;p&gt;看到 &lt;span lang="en"&gt;Wiwi&lt;/span&gt; 的文章〈&lt;a href="https://wiwi.blog/blog/broken-em-dash/"&gt;為什麼你的破折號——會斷掉&lt;/a&gt;〉裡說：
-&lt;/p&gt;&lt;blockquote&gt;&lt;p&gt;於是我跑去 &lt;a href="https://unicode-explorer.com/"&gt;Unicode Explorer&lt;/a&gt; 研究了一下。發現原來我一直以來用的都是 em dash（英文的長破折號，U+2014），但教育部網站用的是 box drawings light horizontal（用來畫表格的細橫線，U+2500）。&lt;/p&gt;&lt;/blockquote&gt;
-&lt;p&gt;聽起來很合理，但真的是這樣嗎？可以用我的部落格響應 &lt;a href="https://blogblog.club/party/"&gt;&lt;span lang="en"&gt;BlogBlog&lt;/span&gt; 同樂會&lt;/a&gt;第一期的兩篇文章來驗證一下我「推坑」的東西有沒有用！
-&lt;/p&gt;
-&lt;p&gt;我的「我覺得……很好」第一篇是〈&lt;a href="2026-01-06.html"&gt;我覺得維基百科很好&lt;/a&gt;〉。我們來看看維基百科「&lt;a href="https://zh.wikipedia.org/w/index.php?title=%E7%A0%B4%E6%8A%98%E5%8F%B7&amp;amp;variant=zh-tw&amp;amp;oldid=90314303#%E9%9B%BB%E8%85%A6%E6%87%89%E7%94%A8"&gt;破折號&lt;/a&gt;」的條目是怎麼說的：
-&lt;/p&gt;&lt;blockquote&gt;&lt;p&gt;&lt;a href="https://zh.wikipedia.org/wiki/W3C"&gt;W3C&lt;/a&gt;《中文排版需求書》規定，破折號可用兩條U+2014 — EM DASH（顯示如「——」）表示，也可用U+2E3A ⸺ TWO-EM DASH表示。&lt;sup&gt;&lt;a href="https://www.w3.org/TR/clreq/#indication_punctuation_marks"&gt;[3]&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;&lt;/blockquote&gt;
-〈我覺得維基百科很好〉裡也提到了可以從維基百科的可靠來源順藤摸瓜。如果點進去維基百科這段文字的來源，可以看到 &lt;abbr lang="en"&gt;W3C&lt;/abbr&gt; 的規格書確切來說是怎麼說的：
-&lt;blockquote&gt;&lt;p&gt;破折號表示語氣或聲音的延續、語意的轉換或行文的補充。呈現上為一條在水平和垂直方向均位於字面正中的直線，占兩個漢字空間。推薦使用占兩個漢字寬度的U+2E3A TWO-EM DASH [⸺]，但通常也使用兩個連續的U+2014 EM DASH [—]來實現。&lt;/p&gt;&lt;/blockquote&gt;
-&lt;p&gt;接下來，我的「我覺得……很好」系列第六篇是〈&lt;a href="2026-01-11.html"&gt;我覺得《萬國碼標準》很好&lt;/a&gt;〉。查閱一下萬國碼標準的規格書，可以發現他在 &lt;a href="https://www.unicode.org/versions/Unicode17.0.0/core-spec/chapter-6/#G6120" lang="en"&gt;6.2.4 Dashes and Hyphens&lt;/a&gt; 這個章節是這樣說的：
-&lt;/p&gt;&lt;blockquote lang="en"&gt;&lt;p&gt;An extra-wide dash in contemporary Chinese typography, referred to as 破折號 (pòzhéhào), is used to indicate an abrupt change of thought, the insertion of new content, or the continuation of tone or sound. That wide dash is often represented with a sequence of two U+2014 — EM DASH characters, but modern practice is transitioning to the use of U+2E3A TWO-EM DASH, instead, which behaves better typographically than the sequence of em dashes.&lt;/p&gt;&lt;/blockquote&gt;
-&lt;p&gt;結論：萬國碼與 &lt;abbr lang="en"&gt;W3C&lt;/abbr&gt; 的指引是一致的：用兩個 &lt;span lang="en"&gt;em dash&lt;/span&gt; 是可以的。也可以用 &lt;span lang="zxx"&gt;U+2E3A&lt;/span&gt; &lt;span lang="en"&gt;two-em dash&lt;/span&gt;，這樣更好，就不會發生中間斷掉的問題。
-&lt;/p&gt;&lt;p&gt;難道教育部的網站錯了嗎？這不是不可能，畢竟⸺這只是我個人感覺⸺教育部應該只管字的長相，編碼大概是歸數位發展部管的。至少就語意上來說，&lt;span lang="en"&gt;two-em dash&lt;/span&gt; 是比較合理的。&lt;small&gt;（稍微查了一下，教育部《重訂標點符號手冊》網頁上的修訂日期是民國九十七年，&lt;span lang="en"&gt;two-em dash&lt;/span&gt; 要等到二〇一二年才編入 &lt;span lang="en"&gt;Unicode&lt;/span&gt;。）&lt;/small&gt;
-&lt;/p&gt;</content>
-    </entry>
-    <entry>
-        <title>我覺得註解很好</title>
-        <link rel="alternate" href="https://e89295.com/blog/2026-01-14.html"/>
-        <id>urn:uuid:45f24f05-87b1-4f78-b5f9-1014c5fa88d3</id>
-        <updated>2026-01-13T20:33:42.337Z</updated>
-        <content type="html">
-
-&lt;p&gt;之前好幾次把自己寫的部落格文章轉貼到&lt;a href="https://g0v.social/@e89295"&gt;社群網站&lt;/a&gt;上，還加上幾句評語，例如「老實說寫得滿爛的」，或是稍微描述一下自己發文背後的想法，例如「想寫短一點的文章，結果越寫越長」之類的&lt;small&gt;（沒錯，這次也寫太長了）&lt;/small&gt;。不過每次都要轉貼，實在太累了，而且好像也沒什麼意義，因為反正想接收文章的人可以自己訂閱部落格的 &lt;span lang="en"&gt;feed&lt;/span&gt;&lt;small&gt;（一般人都說 &lt;abbr lang="en"&gt;RSS&lt;/abbr&gt;，但本站目前&lt;a href="atom.xml"&gt;提供的&lt;/a&gt;是另一種通用的格式，&lt;span lang="en"&gt;Atom&lt;/span&gt;）&lt;/small&gt;就好，想評論的人也可以自己發文並標注通知作者，不必回在作者的貼文下面。
-&lt;/p&gt;
-&lt;p&gt;雖然，不過自己稍微評論、解釋一下自己寫的東西，好像也滿好的。很多人可能會把他當成一種檢討，但那在我看來完全是一種令人尷尬的上進心&lt;small&gt;（順道一題，現在有時候會看到有人把檢討說成「復盤」。除非你指的是下完棋之後的復盤，否則這實在是很讓人感到厭惡的一種比喻。這種用法八成是一種中國用語，但那不是我厭惡他的唯一原因）。&lt;/small&gt;所有的評論，包含對自己的評論，應該是一種戲謔，就像電影的幕後花絮，放的是 NG 鏡頭。那不是為了檢討下次不要再 NG，那&lt;a href="2025-02-07.html"&gt;單純只是好笑而已&lt;/a&gt;。再不然的話，幕後花絮也只是分享一些過程的經歷、想法，應該不會有導演說「我做幕後花絮是為了檢討自己，讓下一部電影拍得更好」吧？至少我希望不會。那會是多麼沒有人性的一種心態？
-&lt;/p&gt;&lt;p&gt;但是很多人顯然對幕後花絮這種東西沒興趣。那種人大概與那些會說「寫文章的時候，不要在註腳裡面塞一堆沒人要看的、與文章主題無關的細節」的人是同一類人吧。我很想說，請你不要隨便代表別人講話好嗎？我就想看與主題無關的細節，那才有趣好嗎？
-&lt;/p&gt;&lt;h2&gt;註解的價值&lt;/h2&gt;
-&lt;p&gt;註腳、註解、評註這些東西還不能完全算是一種失落的藝術，但是大部分人似乎只把評註之類的東西當成某種必要之惡。「因為不想干擾正文，所以把這段廢話放進註腳了」、「因為教授說要把來源放在註腳裡」、「幕後花絮要做成宣傳片、訪問要上雜誌，因為故事行銷最有用」、「古人在寫什麼東西完全看不懂，老師叫我去背註釋」……很多人是這樣感覺的吧？在學術文章、書籍中，註腳的價值可能比較明顯一點，可以給內容給出資料來源、解釋，展現了作者治學的嚴謹，提供給讀者許多重要的線索。有時候這些註腳卻也是像 NG 鏡頭般，純粹是作者開的小玩笑。
-&lt;/p&gt;&lt;p&gt;其實就連對文學、藝術等不是那麼學術的東西來說，作者自己註解、批評自己的作品也是一件很好的事情。有人或許會說，作者最好還是不要把東西解釋得太清楚，那反而會破壞作品的意境、想像空間。有些人也會&lt;a href="https://en.wikipedia.org/wiki/The_Death_of_the_Author"&gt;對作者的想法不屑一顧&lt;/a&gt;，認為每個人可以自由解讀。雖然，不過這搞不好恰恰是為什麼作者自注很好的地方。如果是其他人幫他寫的註解，以其他人對作品的了解，不一定知道畫蛇添足與畫龍點睛的差別，不一定能解釋出什麼有趣的事情。一個作者在創造出任何東西之前，他一定吸取了很多別的東西。甚至他做出來之後，大概也讓他自己聯想到了其他東西。這些難道不讓人好奇嗎？
-&lt;/p&gt;&lt;p&gt;例如：我每次去任何的餐廳、店家的時候，我都想知道：「這張椅子是什麼款式？這個牆壁為什麼漆成這個顏色？桌子為什麼是這個材質？當初做出這些東西的人，他的心裡在想什麼？」搞不好他的過程其實是很隨便的：「因為那個時候剛好看到 &lt;span lang="en"&gt;IKEA&lt;/span&gt; 這張椅子在特價，就買了。」也搞不好他真的是煞費苦心，把餐廳當成一件&lt;a href="https://zh.wikipedia.org/zh-tw/%E6%95%B4%E9%AB%94%E8%97%9D%E8%A1%93"&gt;整體藝術&lt;/a&gt;（&lt;span lang="de"&gt;Gesamtkunstwerk&lt;/span&gt;），配合料理的風格，精心打造每個細節。他當初看過又丟掉了哪些家具店的型錄？他研究了哪個時期其他餐廳的設計？他有過哪些回憶，讓他有了這種獨特品味？他有什麼樣的設計上的考量，甚至巧思？我是認真的⸺如果你剛好是什麼餐廳的老闆，千萬不要覺得沒人會想看你為了挑一張椅子所做的那些筆記。我想告訴你：我很想看！而且不是因為我想開餐廳，不是因為我是 &lt;span lang="en"&gt;IKEA&lt;/span&gt; 的行銷經理，不是因為我想獲得什麼「看我如何挑選椅子的過程，讓你了解如何運用 &lt;abbr lang="en"&gt;AI&lt;/abbr&gt; 工具增加你的生產力」的那種無聊的知識，而是因為我真的很好奇，你到底是怎麼想的？我不需要某個 &lt;abbr lang="en"&gt;AR&lt;/abbr&gt; 眼鏡告訴我哪裡可以買到那款椅子。如果可以的話，我只想點開椅子旁的註腳，看看老闆對他選的這張椅子有什麼解釋。
-&lt;/p&gt;&lt;p&gt;除了自我註解之外，幫別人的作品作註釋，也是一件很好的事。很多人可能以為，所謂的註釋就是幫別人看懂一些難懂的作品。這種想法當然沒錯，但是註釋不只是原作的附屬品，不是只是某種鄙陋、微不足道的東西。比方說酈道元的《&lt;a href="https://zh.wikipedia.org/zh-tw/%E6%B0%B4%E7%BB%8F%E6%B3%A8"&gt;水經注&lt;/a&gt;》，所謂的「註解」比《水經》原文足足多了數十倍的內容。如果你需要比較新的例子的話，最近似乎滿暢銷的《&lt;a href="https://www.suncolor.com.tw/BookPage.aspx?bokno=107010110014"&gt;&lt;span lang="en"&gt;SNOOPY&lt;/span&gt;史努比定心禪智慧&lt;/a&gt;》系列，內容就是日本的禪僧從禪學角度對史努比漫畫作的註解。其實歷史上每個作者在註釋前人的著作的時候，無不是以註解為媒介闡述自己思想的。或者應該說，想要不這樣做幾乎是不可能的。一個人對任何其他人想法的解釋，無可避免地一定會受到自己的想法的影響。對於喜歡追本溯源、了解原意的人來說，這其實很糟糕。但是這些難道不就是文化的本質嗎？如果以為註釋只不過是依附別人的思想、不需要創意、沒有意義，那實在是大錯特錯。如果你也有一些你喜歡的文學、藝術、甚至科學作品，何不用註釋他的方式來探索、詮釋你自己的想法？
-&lt;/p&gt;&lt;h2&gt;註解的形式&lt;/h2&gt;
-&lt;p&gt;註解的形式很多元，尤其是在這篇文章中，我把註解的定義放得很寬，連電影幕後花絮這種東西也算進去了，畢竟註解最核心的意義應該是在於「寫下有關其他文本的文本」，至於這些不同文本之間如何聯繫，那僅僅是形式上的問題。不過說到註解的話，大多數人想到的還是書本裡的腳註（&lt;span lang="en"&gt;footnote&lt;/span&gt;）、尾註（&lt;span lang="en"&gt;endnote&lt;/span&gt;）等等。數位媒介裡沿用的大多也是類似的方式，只是用了可以直接跳轉的超連結，或是改用彈出式視窗（&lt;span lang="en"&gt;popup&lt;/span&gt;），這些在本質上沒有太大差別。
-&lt;/p&gt;&lt;p&gt;也是類似但是比較有意思的是旁註（&lt;span lang="en"&gt;sidenote&lt;/span&gt;）。不知何故，他似乎非常受到有設計背景的人的青睞。可能是因為他的視覺效果滿突出的，而且有不少與設計相關的經典著作也採用了旁註。旁註的好處可能是可以減輕使用腳註的時候讀者的目光需要反覆跳來跳去的情形&lt;small&gt;（像是 &lt;span lang="en"&gt;XKCD&lt;/span&gt; 有一個&lt;a href="https://xkcd.com/1208/"&gt;關於腳註的漫畫&lt;/a&gt;，大概就是在諷刺這一點）&lt;/small&gt;。在網頁的數位排版裡面，也有&lt;a href="https://gwern.net/sidenote"&gt;不少人嘗試旁註&lt;/a&gt;。但老實說，我真的滿討厭旁註的。雖然看起來很有設計感，但是不太實用。在讀正文的時候很容易被干擾，在正文、註解中切換的距離其實也只比腳註短一點點。在空間的利用上也有一些問題，很容易不是造成很多留白，不然就是寫不下太長的註解。
-&lt;/p&gt;&lt;p&gt;另外還有現在似乎很少見的夾注&lt;small&gt;（像這樣，用小字寫在正文後面）&lt;/small&gt;。中文使用這種註解格式應該已經有數千年的歷史。不幸的是，現在在網頁中還沒有簡單的辦法能做到傳統的雙行夾注&lt;small&gt;（日文稱為&lt;a href="https://www.w3.org/TR/jlreq/#inline_cutting_note"&gt;割注&lt;/a&gt;）&lt;/small&gt;，就是小字註解的部份的字大小只有正文的 ½，讓一行正文中間夾雜的註文排版成兩行。這種作法表面上看起來很干擾，但是其實因為註解的字很小，不想讀註解的時候要跳過是非常容易的。而當你想讀註解的時候，註解就直接在後面，與腳註、旁註比起來，完全不必反覆移動視線，非常便利。這種格式應該也滿符合前面說到的，不把註解視為正文的附屬品的精神。
-&lt;/p&gt;&lt;h2&gt;結論&lt;/h2&gt;
-&lt;p&gt;老實說，我不懂為什麼文章要有「結論」這個段落。「結論」其實是一種很荒謬的東西：如果一篇文章需要總結的話，那難道不是表示他廢話太多，結構混亂，讓讀者抓不到重點嗎？另外一方面來說，如果讀者可以只讀結論就好的話，那應該把結論擺在文章的最前面，但那就不叫「結論」了。
-&lt;/p&gt;&lt;p&gt;但是我又離題了。本篇文章的主題不是「我覺得結論不好」，而是「我覺得註解很好」，內容是描述我覺得不要吝於讀、寫註解。本篇也略為提到了書本、網頁上常見的註腳形式作為參考。
-&lt;/p&gt;&lt;p&gt;真是完全沒意義的一段總結。
-&lt;/p&gt;&lt;h2&gt;冷知識&lt;/h2&gt;
-&lt;p&gt;在 1840 年出版的《諾森伯蘭史》（&lt;cite lang="en"&gt;History of Northumberland&lt;/cite&gt;）這本書中，有一個關於哈德良長城的註腳，竟然長達一百六十六頁&lt;small&gt;（來源：&lt;a href="https://diplograph.net/notes/typography/publications/hodgsons-footnote" lang="en"&gt;Diplograph&lt;/a&gt;。原書可以在 &lt;a href="https://archive.org/details/ahistorynorthum01tynegoog/page/156/mode/2up" lang="en"&gt;Internet Archive&lt;/a&gt; 上找到）&lt;/small&gt;。
 &lt;/p&gt;</content>
     </entry>
 </feed>

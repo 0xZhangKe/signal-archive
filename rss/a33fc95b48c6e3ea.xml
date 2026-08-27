@@ -4,11 +4,68 @@
   <title>Jake Wharton</title>
   <link href="https://jakewharton.com/atom.xml" rel="self"/>
   <link href="https://jakewharton.com/"/>
-  <updated>2026-08-25T23:58:26Z</updated>
+  <updated>2026-08-27T19:55:32Z</updated>
   <id>https://jakewharton.com/</id>
   <author>
     <name>Jake Wharton</name>
   </author>
+
+  <entry>
+    <title>Compose &amp; kotlinx.html</title>
+    <link href="https://jakewharton.com/compose-and-kotlinx-html/"/>
+    <updated>2026-08-26T00:00:00Z</updated>
+    <id>https://jakewharton.com/compose-and-kotlinx-html</id>
+    <content type="html">&lt;p&gt;Let&apos;s render a simple page with &lt;a href=&quot;https://ktor.io&quot;&gt;Ktor server&lt;/a&gt; and &lt;a href=&quot;https://github.com/kotlin/kotlinx.html&quot;&gt;kotlinx.html&lt;/a&gt;:&lt;/p&gt;
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/users.html&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;call&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;respondHtml&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nf&quot;&gt;myLayout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;title&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Users&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;nf&quot;&gt;userList&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;users&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;db&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;users&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;A reusable &lt;code&gt;myLayout&lt;/code&gt; provides scaffolding, &lt;code&gt;userList&lt;/code&gt; encapsulates the specific page content, and &lt;code&gt;db.users&lt;/code&gt; is a &lt;code&gt;StateFlow&amp;lt;List&amp;lt;User&amp;gt;&amp;gt;&lt;/code&gt; from the persistence layer.&lt;/p&gt;
+&lt;p&gt;I&apos;ve been doing this over and over to create admin dashboard pages for a project. It works great right up until you leave it open for a minute or two, and its content becomes stale.&lt;/p&gt;
+&lt;p&gt;Client-side frameworks exist within the ecosystem to &amp;quot;solve&amp;quot; this, such as Compose for HTML or Compose UI for Web. If your house has a leaky pipe you can also &amp;quot;solve&amp;quot; that by moving to a new house. I simply will not bring myself to abandoning HTML let alone delivery of static HTML in the response.&lt;/p&gt;
+&lt;p&gt;Efforts are underway &lt;a href=&quot;https://blog.jetbrains.com/kotlin/2026/08/exploring-compose-html-for-server-side-rendering/&quot;&gt;to adapt Compose for HTML&lt;/a&gt; for so-called isomorphic rendering. This would involve performing the initial composition on the server to produce the static HTML for the HTTP response. Then, client side as JS, mounting the same rendering code to reproduce the DOM tree and incrementally update it for future state changes.&lt;/p&gt;
+&lt;h3 id=&quot;tomorrows-compose-today&quot;&gt;Tomorrow&apos;s Compose today&lt;a class=&quot;anchor&quot; href=&quot;#tomorrows-compose-today&quot;&gt;&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Instead of waiting, I brought my own Compose on the JVM from home in the form of &lt;a href=&quot;https://github.com/cashapp/molecule/&quot;&gt;Molecule&lt;/a&gt;. Instead of managing a UI tree over time, Molecule manages a single piece of state over time. We can use that to render an HTML fragment on the server as a string, and then stream that to the client.&lt;/p&gt;
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nf&quot;&gt;webSocket&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/users.ws&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nf&quot;&gt;launchMolecule&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Immediate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;users&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;by&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;db&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;users&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;collectAsState&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+
+    &lt;span class=&quot;nf&quot;&gt;createHTML&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;userList&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;users&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;users&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;collect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;send&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;That&apos;s it. Ktor gives us the &lt;code&gt;webSocket&lt;/code&gt;, Molecule runs the &lt;code&gt;StateFlow&amp;lt;String&amp;gt;&lt;/code&gt; which is piped into it, and kotlinx.html renders the HTML fragment of our existing content function.&lt;/p&gt;
+&lt;p&gt;In the initial HTML payload you need to wire this up somehow. Something like:&lt;/p&gt;
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nf&quot;&gt;script&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nf&quot;&gt;unsafe&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&quot;&quot;
+    |const content = document.getElementById(&quot;content&quot;);
+    |const socket = new WebSocket(&quot;ws://&quot; + location.host + &quot;/users.ws&quot;);
+    |socket.addEventListener(&quot;message&quot;, (event) =&amp;gt; {
+    |  // TODO Something!
+    |});
+    &quot;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;trimMargin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;In the event listener you can send &lt;code&gt;event.data&lt;/code&gt; directly into &lt;code&gt;content.innerHTML&lt;/code&gt;. Browsers are &lt;em&gt;really&lt;/em&gt; good at parsing HTML.&lt;/p&gt;
+&lt;p&gt;My event listeners currently call &lt;code&gt;Idiomorph.morph(content, event.data)&lt;/code&gt; which uses &lt;a href=&quot;https://github.com/bigskysoftware/idiomorph&quot;&gt;Idiomorph&lt;/a&gt; to patch the DOM. This ensures any form fields or interactive elements which have not changed are retained rather than replaced.&lt;/p&gt;
+&lt;h3 id=&quot;productionizing&quot;&gt;Productionizing&lt;a class=&quot;anchor&quot; href=&quot;#productionizing&quot;&gt;&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Once again I want to emphasize that I&apos;m using this for low-traffic admin pages. My pages can make one web socket connection or fifty and it wouldn&apos;t make a difference. On a real site with real users you need to evaluate some tradeoffs, or this might inadvertently denial-of-service your backend.&lt;/p&gt;
+&lt;p&gt;First, we probably only want a single long-lived connection to the server and to multiplex updates to different elements. Payloads need to be framed in an envelope that includes which HTML ID they target. The JS would then dispatch each payload to the appropriate section of the page for update.&lt;/p&gt;
+&lt;p&gt;Next, our payloads are entirely unidirectional, so HTTP server-sent events (SSE) is likely a better fit than a web socket. SSE ensures the connection can be multiplexed with others over a single HTTP/2 TCP connection, and it also provides the necessary framing for the previous problem by separating the event name from its payload.&lt;/p&gt;
+&lt;p&gt;Finally, you need to decide whether the composition runs inside the context of a single connection or is shared outside of it. This mostly depends on the type of data you are rendering and whether it&apos;s tied to a particular connection (such as for an authenticated user) or not.&lt;/p&gt;
+&lt;p&gt;Depending on what you pick with that last choice, writing a helper which encapsulates the static route + dynamic route can reduce duplication. Or don&apos;t. It&apos;s not that much code!&lt;/p&gt;
+</content>
+  </entry>
 
   <entry>
     <title>Live coding with dir stepper</title>
@@ -348,7 +405,7 @@ And finally, thanks to the ~157 contributors&lt;sup class=&quot;footnote-ref&quo
   </entry>
 
   <entry>
-    <title>Let's defuse the Compose BOM</title>
+    <title>Let&apos;s defuse the Compose BOM</title>
     <link href="https://jakewharton.com/defuse-the-compose-bom/"/>
     <updated>2025-12-03T00:00:00Z</updated>
     <id>https://jakewharton.com/defuse-the-compose-bom</id>
@@ -1284,7 +1341,7 @@ Execution failed for task &apos;:sympathyForMrMaven&apos;.
   </entry>
 
   <entry>
-    <title>Kotlin's JDK release compatibility flag</title>
+    <title>Kotlin&apos;s JDK release compatibility flag</title>
     <link href="https://jakewharton.com/kotlins-jdk-release-compatibility-flag/"/>
     <updated>2024-03-13T00:00:00Z</updated>
     <id>https://jakewharton.com/kotlins-jdk-release-compatibility-flag</id>
@@ -4363,7 +4420,7 @@ OatDexFile:
   </entry>
 
   <entry>
-    <title>Litmus-Testing Kotlin's Many Memory Models</title>
+    <title>Litmus-Testing Kotlin&apos;s Many Memory Models</title>
     <link href="https://jakewharton.com/litmus-testing-kotlins-many-memory-models/"/>
     <updated>2020-04-08T00:00:00Z</updated>
     <id>https://jakewharton.com/litmus-testing-kotlins-many-memory-models</id>
@@ -8883,7 +8940,7 @@ $ $ANDROID_HOME/build-tools/28.0.3/dexdump -d classes.dex
   </entry>
 
   <entry>
-    <title>Android's Java 9, 10, 11, and 12 Support</title>
+    <title>Android&apos;s Java 9, 10, 11, and 12 Support</title>
     <link href="https://jakewharton.com/androids-java-9-10-11-and-12-support/"/>
     <updated>2018-11-27T00:00:00Z</updated>
     <id>https://jakewharton.com/androids-java-9-10-11-and-12-support</id>
@@ -9322,7 +9379,7 @@ three: 5
   </entry>
 
   <entry>
-    <title>Android's Java 8 Support</title>
+    <title>Android&apos;s Java 8 Support</title>
     <link href="https://jakewharton.com/androids-java-8-support/"/>
     <updated>2018-11-20T00:00:00Z</updated>
     <id>https://jakewharton.com/androids-java-8-support</id>
@@ -9657,7 +9714,7 @@ $ adb shell dalvikvm -cp /sdcard/classes.dex Java8
   </entry>
 
   <entry>
-    <title>Increased accuracy of aapt2 "keep" rules</title>
+    <title>Increased accuracy of aapt2 &quot;keep&quot; rules</title>
     <link href="https://jakewharton.com/increased-accuracy-of-aapt2-keep-rules/"/>
     <updated>2018-08-07T00:00:00Z</updated>
     <id>https://jakewharton.com/increased-accuracy-of-aapt2-keep-rules</id>
@@ -9779,7 +9836,7 @@ android.support.v7.widget.RecyclerView &amp;lt;init&amp;gt;(Context, AttributeSe
   </entry>
 
   <entry>
-    <title>An Optional's place in Kotlin</title>
+    <title>An Optional&apos;s place in Kotlin</title>
     <link href="https://developer.squareup.com/blog/an-optionals-place-in-kotlin"/>
     <updated>2017-05-14T00:00:00Z</updated>
     <id>https://jakewharton.com/an-optionals-place-in-kotlin</id>
