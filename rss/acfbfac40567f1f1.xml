@@ -12,7 +12,7 @@
 	<atom:link href="https://blog.jetbrains.com/kotlin/feed/" rel="self" type="application/rss+xml" />
 	<link>https://blog.jetbrains.com</link>
 	<description>Developer Tools for Professionals and Teams</description>
-	<lastBuildDate>Wed, 26 Aug 2026 13:38:32 +0000</lastBuildDate>
+	<lastBuildDate>Fri, 28 Aug 2026 13:18:43 +0000</lastBuildDate>
 	<language>en-US</language>
 	<sy:updatePeriod>
 	hourly	</sy:updatePeriod>
@@ -61,7 +61,7 @@
 
 
 
-<li><a href="#window-and-dialog-v2">v2 version of the window and dialog API for desktop</a></li>
+<li><a href="#window-and-dialog-api-v2">v2 version of the window and dialog API for desktop</a></li>
 </ul>
 
 
@@ -110,11 +110,11 @@
 
 
 
-<h2 class="wp-block-heading">Window and dialog v2</h2>
+<h2 class="wp-block-heading">Window and dialog API v2</h2>
 
 
 
-<p>This release introduces an experimental v2 API for <code>WindowState</code> and <code>DialogState</code> in the <code>androidx.compose.ui.window.v2</code> package. It gives you finer control over how windows and dialogs are positioned and sized. You can:</p>
+<p>This release introduces an experimental v2 of the API for <code>WindowState</code> and <code>DialogState</code> in the <code>androidx.compose.ui.window.v2</code> package. It gives you finer control over how windows and dialogs are positioned and sized. You can:</p>
 
 
 
@@ -136,7 +136,7 @@
 
 
 
-<p>The v2 API also makes the asynchronous nature of window state changes explicit: It distinguishes the state you request from the state the window currently has.</p>
+<p>The enhanced API also makes the asynchronous nature of window state changes explicit: It distinguishes the state you request from the state the window currently has.</p>
 
 
 
@@ -154,7 +154,7 @@
 
 
 
-<p>With the v2 API, you can also use <code>WindowSizeProvider.Unconstrained</code> to size the window to its content initially, while still letting that content expand with <code>fillMaxSize()</code> when the user enlarges the window:</p>
+<p>With the API v2, you can also use <code>WindowSizeProvider.Unconstrained</code> to size the window to its content initially, while still letting that content expand with <code>fillMaxSize()</code> when the user enlarges the window:</p>
 
 
 
@@ -166,7 +166,7 @@
 
 
 
-<p>See the <a href="https://kotlinlang.org/docs/multiplatform/compose-desktop-top-level-windows-management.html#window-and-dialog-api-v2" target="_blank" rel="noopener">Window and dialog v2 documentation</a>&nbsp;for the full details.</p>
+<p>See the <a href="https://kotlinlang.org/docs/multiplatform/compose-desktop-top-level-windows-management.html#window-and-dialog-api-v2" target="_blank" rel="noopener">Window and dialog API v2 documentation</a> for the full details.</p>
 
 
 
@@ -2708,7 +2708,7 @@ val issues: List&lt;Issue> = asLlm(response, hint = "Return all beginner-friendl
 
 
 
-<figure data-wp-context="{&quot;imageId&quot;:&quot;6a913fea1aacc&quot;}" data-wp-interactive="core/image" class="wp-block-image size-full wp-lightbox-container"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" data-wp-class--hide="state.isContentHidden" data-wp-class--show="state.isContentVisible" data-wp-init="callbacks.setButtonStyles" data-wp-on-async--click="actions.showLightbox" data-wp-on-async--load="callbacks.setButtonStyles" data-wp-on-async-window--resize="callbacks.setButtonStyles" src="https://blog.jetbrains.com/wp-content/uploads/2026/07/KT-Twitter_Facebook_LinkedIn-1200x675-1.png" alt="" class="wp-image-722875" /><button
+<figure data-wp-context="{&quot;imageId&quot;:&quot;6a91fcf9556dd&quot;}" data-wp-interactive="core/image" class="wp-block-image size-full wp-lightbox-container"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" data-wp-class--hide="state.isContentHidden" data-wp-class--show="state.isContentVisible" data-wp-init="callbacks.setButtonStyles" data-wp-on-async--click="actions.showLightbox" data-wp-on-async--load="callbacks.setButtonStyles" data-wp-on-async-window--resize="callbacks.setButtonStyles" src="https://blog.jetbrains.com/wp-content/uploads/2026/07/KT-Twitter_Facebook_LinkedIn-1200x675-1.png" alt="" class="wp-image-722875" /><button
 			class="lightbox-trigger"
 			type="button"
 			aria-haspopup="dialog"
