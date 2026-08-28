@@ -1,5 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-08-26T23:52:58+00:00</updated><author><name>Simon Willison</name></author><entry><title>Qwen3.8-Flash-Next</title><link href="https://simonwillison.net/2026/Aug/26/qwen38-flash-next/" rel="alternate"/><published>2026-08-26T23:52:58+00:00</published><updated>2026-08-26T23:52:58+00:00</updated><id>https://simonwillison.net/2026/Aug/26/qwen38-flash-next/</id><summary type="html">
+<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-08-27T22:50:25+00:00</updated><author><name>Simon Willison</name></author><entry><title>Breaking Claude Code Opus 5 Auto Mode</title><link href="https://simonwillison.net/2026/Aug/27/breaking-claude-code-opus-5-auto-mode/" rel="alternate"/><published>2026-08-27T22:50:25+00:00</published><updated>2026-08-27T22:50:25+00:00</updated><id>https://simonwillison.net/2026/Aug/27/breaking-claude-code-opus-5-auto-mode/</id><summary type="html">
+    
+&lt;p&gt;&lt;strong&gt;&lt;a href="https://embracethered.com/blog/posts/2026/breaking-claude-code-opus-5-and-automode/"&gt;Breaking Claude Code Opus 5 Auto Mode&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+Anthropic are putting a great deal of faith in Claude Code's auto mode for protecting their coding agent users against prompt injection attacks. They recently &lt;a href="https://simonwillison.net/2026/Aug/8/auto-mode/"&gt;made that the default&lt;/a&gt; and have made bold claims about its effectiveness.&lt;/p&gt;
+&lt;p&gt;Johann Rehberger is one of the most credible prompt injection researchers active today. He found an attack against auto mode which he claims works 80% of the time, by tricking Claude Code into downloading and uncompressing a zip archive, then executing code that imports &lt;code&gt;base64&lt;/code&gt; without noticing that this will import and execute a local &lt;code&gt;struct.py&lt;/code&gt; file extracted from the archive.&lt;/p&gt;
+&lt;p&gt;In a few cases auto mode directly prevented the agent from preventing harmful code from continuing to execute!&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;In a few runs Claude tried to terminate the malware process once it noticed the compromise, but Auto Mode denied the cleanup command.&lt;/p&gt;
+&lt;p&gt;Claude detects the compromise, but &lt;strong&gt;Auto Mode blocks its cleanup command&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;The safety mechanism itself can become part of the failure. The classifier allowed the creation of the malware process, but then it blocked the command intended to stop it!&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I agree with Johann's conclusion here: the only safe way to run agents if there's any risk of attracting the attention of an adversarial attack is with a sandbox:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;Run unattended coding agents in a container, VM or OS sandbox.&lt;/li&gt;
+&lt;li&gt;Restrict network egress.&lt;/li&gt;
+&lt;li&gt;Monitor your agents.&lt;/li&gt;
+&lt;li&gt;Do not expose home directories, SSH keys, cloud credentials,… to the agent runtime. [...]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+
+
+    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/sandboxing"&gt;sandboxing&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/security"&gt;security&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/prompt-injection"&gt;prompt-injection&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/anthropic"&gt;anthropic&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/claude"&gt;claude&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/johann-rehberger"&gt;johann-rehberger&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/claude-code"&gt;claude-code&lt;/a&gt;&lt;/p&gt;
+
+
+
+</summary><category term="sandboxing"/><category term="security"/><category term="ai"/><category term="prompt-injection"/><category term="generative-ai"/><category term="llms"/><category term="anthropic"/><category term="claude"/><category term="johann-rehberger"/><category term="claude-code"/></entry><entry><title>Qwen3.8-Flash-Next</title><link href="https://simonwillison.net/2026/Aug/26/qwen38-flash-next/" rel="alternate"/><published>2026-08-26T23:52:58+00:00</published><updated>2026-08-26T23:52:58+00:00</updated><id>https://simonwillison.net/2026/Aug/26/qwen38-flash-next/</id><summary type="html">
     
 &lt;p&gt;&lt;strong&gt;&lt;a href="https://qwen.ai/blog?id=qwen3.8-flash-next"&gt;Qwen3.8-Flash-Next&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 Another open weights model from Qwen. This one is "a multimodal MoE model that also serves as an early preview of the architecture used in Qwen4".&lt;/p&gt;
@@ -607,17 +633,4 @@ I still have quite a bit of older content on my blog that I never got round to t
         &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/packaging"&gt;packaging&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/python"&gt;python&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/sqlite-utils"&gt;sqlite-utils&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/uv"&gt;uv&lt;/a&gt;&lt;/p&gt;
     
 
-</summary><category term="packaging"/><category term="python"/><category term="sqlite-utils"/><category term="uv"/></entry><entry><title>sqlite-utils 4.2</title><link href="https://simonwillison.net/2026/Aug/13/sqlite-utils/" rel="alternate"/><published>2026-08-13T20:11:29+00:00</published><updated>2026-08-13T20:11:29+00:00</updated><id>https://simonwillison.net/2026/Aug/13/sqlite-utils/</id><summary type="html">
-    
-        &lt;p&gt;&lt;strong&gt;Release:&lt;/strong&gt; &lt;a href="https://github.com/simonw/sqlite-utils/releases/tag/4.2"&gt;sqlite-utils 4.2&lt;/a&gt;&lt;/p&gt;
-        &lt;p&gt;Lots of improvements in this one relating to the &lt;a href="https://sqlite-utils.datasette.io/en/stable/python-api.html#transforming-a-table"&gt;table.transform() feature&lt;/a&gt;, which adds support for complex alter table operations by creating a fresh table, copying across the data and then dropping and replacing the old one.&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;transform()&lt;/code&gt; now preserves a much larger array of edge-case schema definitions, including check constraints, unique constraints and even comments describing the columns.&lt;/p&gt;
-&lt;p&gt;There are also &lt;a href="https://sqlite-utils.datasette.io/en/stable/python-api.html#checks"&gt;new introspection properties&lt;/a&gt; for check constraints, and a whole lot of other smaller changes.&lt;/p&gt;
-&lt;p&gt;Includes contributions from &lt;a href="https://github.com/bunlongheng"&gt;Bunlong Heng&lt;/a&gt;, &lt;a href="https://github.com/ethanhawkes-gif"&gt;ethanhawkes-gif&lt;/a&gt;, &lt;a href="https://github.com/RamiNoodle733"&gt;Rami Abdelrazzaq&lt;/a&gt;, &lt;a href="https://github.com/nyxst4ck"&gt;nyxst4ck&lt;/a&gt;, and &lt;a href="https://github.com/ikatyal2110"&gt;ikatyal2110&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;(It later turned out 4.2 had &lt;a href="https://github.com/simonw/sqlite-utils/issues/842"&gt;a crashing bug&lt;/a&gt;, fixed in &lt;a href="https://sqlite-utils.datasette.io/en/stable/changelog.html#v4-2-1"&gt;4.2.1&lt;/a&gt;.)&lt;/p&gt;
-    
-    
-        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/releases"&gt;releases&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/sqlite"&gt;sqlite&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/sqlite-utils"&gt;sqlite-utils&lt;/a&gt;&lt;/p&gt;
-    
-
-</summary><category term="releases"/><category term="sqlite"/><category term="sqlite-utils"/></entry></feed>
+</summary><category term="packaging"/><category term="python"/><category term="sqlite-utils"/><category term="uv"/></entry></feed>
