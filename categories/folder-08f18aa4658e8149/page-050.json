@@ -1,6 +1,83 @@
 {
   "items": [
     {
+      "id": "afba588efd9aa33ed0f71951",
+      "title": "APT-129 阻抗轉換器？DI？",
+      "summary": "前言 # 滿久以前就知道這個產品，最近決定買來試試看，但一直沒有需求，也怕東西品質不好，所以一直沒買。 功能 # Stander 的 APT-129 外觀就像一個轉接頭，「把 TS 訊號源轉換成 XLR」，但沒有那麼單純，它還有「把高阻抗訊號轉成低阻抗」再輸出的用途，同時也有轉換成「平衡訊號」的功能，算是一種「被動式 DI」了！ 而大小就像是一個轉接頭而已，放在隨身包裡是非常方便的。 先備知識 # 混音器或錄音界面的 Mic in 孔（通常是 XLR 孔），含有麥克風前級、且適合低阻抗輸入。 如果將拾音器類型的訊號源，透過一般的轉接器，直接連接到 Mic in 孔，會導致阻抗不橋接，而根據物理公式算出來的結果，這樣的阻抗不橋接問題，會形成 HPF，也就是 Low Cut，低頻直接不見。 但，把高阻抗訊號源插入…",
+      "image": "https://eddielv.com/articles/apt129/apt129.jpg",
+      "publishedAt": "2025-08-20T04:07:16Z",
+      "sourceId": "199cdf92fc46bfcd",
+      "sourceTitle": "Eddie Lv",
+      "link": "https://eddielv.com/articles/apt129/",
+      "detailPath": "articles/afba588efd9aa33ed0f71951.json"
+    },
+    {
+      "id": "8c55179c7c243c6db7b5870c",
+      "title": "2025年8月20日中国防火长城GFW对443端口实施无条件封禁的分析",
+      "summary": "1. 引言 2025 年 8 月 20 日北京时间（UTC+8）约 00:34 至 01:48 间，中国国家防火墙（GFW）出现异常行为：对所有指向 TCP 443 端口的连接无条件注入伪造的 TCP RST+ACK 包，导致连接中断。该事件引发了中国与世界其他地区之间的大规模互联网连通性故障（ 来源1 与 来源2 ）。 本报告记录了我们对这一短暂但广泛的封禁事件的测量与分析。主要发现如下： 无条件的 RST+ACK 注入仅发生在 TCP 443 端口，未见于其他常见端口（如 22、80、8443）。 该无条件注入同时扰乱了出入境中国双方向的连接，但触发机制 不对称 ：从中国境内向境外发起的连接，客户端的 SYN 包与服务器的 SYN+ACK 包各自触发三个 RST+ACK 包；从境外向中国境内发起的连接，只…",
+      "image": null,
+      "publishedAt": "2025-08-20T00:00:00Z",
+      "sourceId": "34d02af866ebd5fa",
+      "sourceTitle": "Great Firewall Report",
+      "link": "https://gfw.report/blog/gfw_unconditional_rst_20250820/zh/",
+      "detailPath": "articles/8c55179c7c243c6db7b5870c.json"
+    },
+    {
+      "id": "89fda1b1a63bd44f36b845e8",
+      "title": "Analysis of the GFW's Unconditional Port 443 Block on August 20, 2025",
+      "summary": "1. Introduction Between approximately 00:34 and 01:48 (Beijing Time, UTC+8) on August 20, 2025, the Great Firewall of China (GFW) exhibited anomalous behavior by unconditionally injecting forged TCP RST+ACK packets to disrupt all connections on TCP port 443. This incident caused massive disruption of the Internet connections between China and the rest of th…",
+      "image": null,
+      "publishedAt": "2025-08-20T00:00:00Z",
+      "sourceId": "34d02af866ebd5fa",
+      "sourceTitle": "Great Firewall Report",
+      "link": "https://gfw.report/blog/gfw_unconditional_rst_20250820/en/",
+      "detailPath": "articles/89fda1b1a63bd44f36b845e8.json"
+    },
+    {
+      "id": "88cf2427446e5508d37e4304",
+      "title": "早點出門",
+      "summary": "早點出門。準時到。",
+      "image": null,
+      "publishedAt": "2025-08-20T00:00:00Z",
+      "sourceId": "7f36c3da1e6b5c71",
+      "sourceTitle": "Wiwi.Blog Blog",
+      "link": "https://wiwi.blog/blog/be-on-time",
+      "detailPath": "articles/88cf2427446e5508d37e4304.json"
+    },
+    {
+      "id": "146e9983af6d4020b548c76e",
+      "title": "YouTube 想幫我賺錢（但要先把我賣了）",
+      "summary": "今天收到來自 YouTube 的一封有趣的信，說要幫我「創造更多賺錢機會」。信中開頭就興奮地寫：",
+      "image": "https://wiwi.blog/assets/images/mail-7e677eccd36b3032b9560034a534c091.png",
+      "publishedAt": "2025-08-19T07:00:00Z",
+      "sourceId": "7f36c3da1e6b5c71",
+      "sourceTitle": "Wiwi.Blog Blog",
+      "link": "https://wiwi.blog/blog/from-creators-to-products",
+      "detailPath": "articles/146e9983af6d4020b548c76e.json"
+    },
+    {
+      "id": "776605114887312222392cc6",
+      "title": "部落卷",
+      "summary": "今天新增了「部落卷」（blogroll）頁面！你可以在上方選單和頁尾連結找到它，或是直接到 /blogroll 這個網址。",
+      "image": null,
+      "publishedAt": "2025-08-19T00:00:00Z",
+      "sourceId": "7f36c3da1e6b5c71",
+      "sourceTitle": "Wiwi.Blog Blog",
+      "link": "https://wiwi.blog/blog/blogroll",
+      "detailPath": "articles/776605114887312222392cc6.json"
+    },
+    {
+      "id": "95b6dc8f63e2dfed8762de7b",
+      "title": "Dr. Adah Platts-Mills Reserve",
+      "summary": "平平无奇的一个小公园。路很不好走。",
+      "image": "https://photoghenry.wordpress.com/wp-content/uploads/2025/08/imgi_1_9fa73306-f034-42d9-b138-602595ae9c9f.jpg",
+      "publishedAt": "2025-08-18T23:04:48Z",
+      "sourceId": "a64fac5b0b6a1cd4",
+      "sourceTitle": "摄影流水账",
+      "link": "https://photoghenry.wordpress.com/2025/08/19/dr-adah-platts-mills-reserve/",
+      "detailPath": "articles/95b6dc8f63e2dfed8762de7b.json"
+    },
+    {
       "id": "31e20b6967e971977a6e9784",
       "title": "十幾個，就夠了",
       "summary": "有時候，我們會被「規模」迷惑。彷彿只有夠大、夠多、夠主流的東西才有價值。",
@@ -582,83 +659,6 @@
       "sourceTitle": "Wiwi.Blog Blog",
       "link": "https://wiwi.blog/blog/select-text",
       "detailPath": "articles/8802ad6fe2479e0a0e88baa3.json"
-    },
-    {
-      "id": "75ff4962ed023f77004be35d",
-      "title": "突然變成發牌 Show Boy",
-      "summary": "今日做房地產頒獎活動，負責音響與面光，晚宴有遊戲環節，但由於遊戲道具衆多，我也沒什麼事，就站在舞臺邊緣幫主持人傳遞道具。 長官走過來大概 3 次，要我直接上舞臺，後來主持也乾脆要我上臺。 於是，我穿排汗衫，腰間掛著工作手套，在臺上幫大家發牌的畫面就出現了！（太荒謬了 XD） Show Girl 簡寫成 SG，所以男生應該是 SB 沒錯吧 XD 照片由 亨利攝影 拍攝、提供。",
-      "image": "https://eddielv.com/musings/sb/1.JPG",
-      "publishedAt": "2025-07-30T18:18:12Z",
-      "sourceId": "199cdf92fc46bfcd",
-      "sourceTitle": "Eddie Lv",
-      "link": "https://eddielv.com/musings/sb/",
-      "detailPath": "articles/75ff4962ed023f77004be35d.json"
-    },
-    {
-      "id": "b8232ea9a4ef466a55cb165b",
-      "title": "當仙草凍比遊戲還大",
-      "summary": "在這個人人都有手機網路吃到飽、高速光纖網路到府的時代，似乎有一群人真的以為網路頻寬是天上掉下來的免費禮物。沒錯，我說的就是現代的網頁設計師們，他們之中有許多人已經連基本圖片使用、頻寬節省的常識都沒有了。",
-      "image": "https://wiwi.blog/assets/images/taiwan-lotto-9763a09f74aafc1441d41b6282b08bdc.png",
-      "publishedAt": "2025-07-30T00:00:00Z",
-      "sourceId": "7f36c3da1e6b5c71",
-      "sourceTitle": "Wiwi.Blog Blog",
-      "link": "https://wiwi.blog/blog/jelly-bigger-than-games",
-      "detailPath": "articles/b8232ea9a4ef466a55cb165b.json"
-    },
-    {
-      "id": "0fbc6a1023e75489b6d6a523",
-      "title": "Fernhill Escarpment",
-      "summary": "最近收到一份传单，上面有很多推荐的步道。鉴于Regional Parks都去完了，我今天就挑了一个上面的走走。 […]",
-      "image": "https://photoghenry.wordpress.com/wp-content/uploads/2025/07/imgi_1_9f7d6d41-eca0-4ce9-850c-7c5d90e945b4.jpg",
-      "publishedAt": "2025-07-29T22:22:52Z",
-      "sourceId": "a64fac5b0b6a1cd4",
-      "sourceTitle": "摄影流水账",
-      "link": "https://photoghenry.wordpress.com/2025/07/30/fernhill-escarpment/",
-      "detailPath": "articles/0fbc6a1023e75489b6d6a523.json"
-    },
-    {
-      "id": "094e6d2fb53c60568f9f3754",
-      "title": "WiwiStudio 音樂能力測驗",
-      "summary": "const calculateScore = () => {",
-      "image": "https://wiwi.blog/assets/images/musictest-title-f8150ad7acaf3d66cbb02b4e3dc246f2.jpg",
-      "publishedAt": "2025-07-29T06:00:00Z",
-      "sourceId": "7f36c3da1e6b5c71",
-      "sourceTitle": "Wiwi.Blog Blog",
-      "link": "https://wiwi.blog/blog/wiwistudio-musictest",
-      "detailPath": "articles/094e6d2fb53c60568f9f3754.json"
-    },
-    {
-      "id": "145bdc38fe38dce345e2fb4a",
-      "title": "挖出了更多舊貼文",
-      "summary": "舊硬碟考古活動繼續進行中。我又找到了一些很零散的備份，救回了六篇舊 blog 貼文：",
-      "image": null,
-      "publishedAt": "2025-07-29T00:00:00Z",
-      "sourceId": "7f36c3da1e6b5c71",
-      "sourceTitle": "Wiwi.Blog Blog",
-      "link": "https://wiwi.blog/blog/more-old-blog-posts",
-      "detailPath": "articles/145bdc38fe38dce345e2fb4a.json"
-    },
-    {
-      "id": "009a1ca5b77a5909322b4047",
-      "title": "从少林寺与娃哈哈看建立普遍监察系统的必要性",
-      "summary": "少林寺与娃哈哈最近都出事了。 二者都很劲爆。 释永信是个和尚，和尚不仅做生意，还贪财好色，自古以来便是猎奇流量话题。娃哈哈的事更不用说，已经被网友们脑补出了一百集《甄嬛传》。 将某个公共议题过度娱乐化，是一种相当有效的危机公关策略，能够有效转移公众关注，从而掩盖真正致命的议题。 少林寺与娃哈哈的致命议题是一致的，即：集体财产/国有资产/历史文化资产到哪里去了？这些资产的流失，是什么人，通过什么方式进行的？有哪些人应当对此承担何种性质的责任？ 任何一个组织，都需要监管。 中国人很早就意识到这一点。 早在商周时期，就设有“大宰”“小宰”等官职，行使监察职能。经过春秋战国的不断发展，终于在汉武帝时期形成“刺史”官职，专司对行政文官监察之责。 古早时期的中国互联网，普遍流传这样一种论调，认为西方票选制度是所谓“历史的…",
-      "image": null,
-      "publishedAt": "2025-07-28T07:04:47Z",
-      "sourceId": "c7356b172af43f7f",
-      "sourceTitle": "刑辩人在路上",
-      "link": "https://xingbianren.cn/post/313.html",
-      "detailPath": "articles/009a1ca5b77a5909322b4047.json"
-    },
-    {
-      "id": "11ab13c74702f0db871ce887",
-      "title": "不要擋住我",
-      "summary": "現代的許多媒體播放程式，都喜歡把控制介面（播放／停止按鈕、進度條、音量控制等等）直接蓋在影片上。不論是 YouTube 網頁版的播放器、還是 macOS 上的 QuickTime Player 都一樣。",
-      "image": "https://wiwi.blog/assets/images/qtx-384b30e8b11c11efd237a033da2e15d4.jpg",
-      "publishedAt": "2025-07-28T00:00:00Z",
-      "sourceId": "7f36c3da1e6b5c71",
-      "sourceTitle": "Wiwi.Blog Blog",
-      "link": "https://wiwi.blog/blog/dont-block-my-video",
-      "detailPath": "articles/11ab13c74702f0db871ce887.json"
     }
   ]
 }
