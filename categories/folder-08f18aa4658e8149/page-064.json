@@ -1,6 +1,28 @@
 {
   "items": [
     {
+      "id": "8864a2070866737f3e9a33fc",
+      "title": "自新世界 #0x08：明察秋毫",
+      "summary": "目光敏锐，可以看见秋天猫猫身上新长的毫毛",
+      "image": "https://remnote-user-data.s3.amazonaws.com/GKaaeEbVM7qXteh0ePvddeIXTvi7Ca1nLn_ggzf1FuPJgmr2vQPCy-G6QlZEKeXszObkC-oftquVw-ql-6mNrLm2v9ZNseMQql0NIgfmt7D2C0dtFAXtyBh5PC7x--6O.jpeg",
+      "publishedAt": "2024-11-06T13:52:34Z",
+      "sourceId": "4f3f8eb9d72c3840",
+      "sourceTitle": "新世界的大门",
+      "link": "https://blog.xinshijiededa.men/weekly/0x08/",
+      "detailPath": "articles/8864a2070866737f3e9a33fc.json"
+    },
+    {
+      "id": "1f14ee758141b8c9bc3b8a37",
+      "title": "CKB RBF 设计和实现",
+      "summary": "CKB 相关技术文章第二篇。 Replace by fee 问题 如果一个交易成功发送到交易池，但可能出现因为费用较低而一直得不到处理。之前 CKB 没有其他措施来处理这种情况。 例如 Dotbit 4 位域名注册拥堵 这个事故发生过程中， CKB 的应用方无法使用任何方式来尽快让自己的交易被打包，这就是引入 Replace-by-fee（RBF) 的原因，我们需要一个机制来提高已经在交易池里交易的费用，替换掉旧的交易，让新的交易尽快被打包。 在新的 multi_index_map 重构后，交易在 pending 阶段也会按照交易的 score 来优先处理 (通常费用高的交易 score 也会高)，这会避免高费用的交易被阻塞住，所以理论上述需要手动提高费用的情况会减少，但我们还是需要 RBF 来手动提高交易的…",
+      "image": "http://catcoding.me/images/ob_pasted-image-20241031103004.png",
+      "publishedAt": "2024-11-06T03:55:13Z",
+      "sourceId": "82c4bcb6bba028cf",
+      "sourceTitle": "程序员的喵",
+      "link": "http://catcoding.me/p/ckb-rbf/",
+      "detailPath": "articles/1f14ee758141b8c9bc3b8a37.json"
+    },
+    {
       "id": "550cd72c31b35cca2f06117f",
       "title": "CKB 交易池重构",
       "summary": "在 11.9 号清迈的 CKCON 会议上我会做一个关于 CKB 交易池的演讲，这是我准备的 slides Key Upgrades of the CKB Core 。所以这段时间在整理之前做项目的时候写的一些文档，顺便分享到自己的博客上。既然我们整个项目的源码都是公开的，这些文档其实也是可以分享的。 第一次听说 CKB 的读者可以参考这个文档以了解什么是 CKB 以及如何工作的： How CKB Works | Nervos CKB 。 我加入 Cryptape 之后一年内做的主要工作，涉及到交易池重构、Replace-by-fee 功能、以及 new-verify。这是第一篇关于交易池重构的文章。 什么是交易池 在 bitcoin 中交易池叫作 mempool，比如 mempool - Bitcoin E…",
@@ -637,28 +659,6 @@
       "sourceTitle": "刑辩人在路上",
       "link": "https://xingbianren.cn/post/272.html",
       "detailPath": "articles/1f2250172b322b94eb6272a2.json"
-    },
-    {
-      "id": "d315de94b036afc74af7db2b",
-      "title": "困難的事情",
-      "summary": "幾個小秘訣：",
-      "image": null,
-      "publishedAt": "2024-10-17T00:00:00Z",
-      "sourceId": "7f36c3da1e6b5c71",
-      "sourceTitle": "Wiwi.Blog Blog",
-      "link": "https://wiwi.blog/blog/hard-things",
-      "detailPath": "articles/d315de94b036afc74af7db2b.json"
-    },
-    {
-      "id": "843f63745fcbde7314e32e2c",
-      "title": "日不落的「喀什」",
-      "summary": "6小时绿皮火车，我和x来到了喀什，地图上最西的「鸡尾巴」到达时正值饭点，于是俩人到酒店放下行李就外出觅食了，吃的抓饭。 监控看了一眼苗姐正在睡午觉，吃完饭俩人去喀什古城转了一圈，今天偷懒，不想扣字。 这会快7点了，太阳还在天空正当中，走路回酒店被晒得快中暑了，前台说这会大约晚上10点天黑，有种莫名的恍惚感。",
-      "image": "https://ihaihe.cn/wp-content/uploads/2024/10/IMG_2793.webp",
-      "publishedAt": "2024-10-15T10:47:05Z",
-      "sourceId": "8e1a97c92477b087",
-      "sourceTitle": "三十里海河",
-      "link": "https://ihaihe.cn/2625.htm",
-      "detailPath": "articles/843f63745fcbde7314e32e2c.json"
     }
   ]
 }

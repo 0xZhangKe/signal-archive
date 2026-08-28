@@ -1,6 +1,39 @@
 {
   "items": [
     {
+      "id": "be3bba547ecb1f233f5193e5",
+      "title": "我討厭有趣的事實",
+      "summary": "嚴格說，是教育現場說有趣的事實。 明明課程要上不完了，但老師開始講一些有趣的事實，都是考試不會考的，最後上不完再來瘋狂趕課，結果知識都沒教清楚。 付費線上課程，舉個例子：買了一個專門講怎麼用吉他彈片彈奏的課程，結果影片在講各種彈片形狀的歷史，對彈奏本身完全沒幫助。 包裝成知識教學的有趣的事實，尤其是知識型 Youtube 頻道。搜尋想學知識的關鍵字，看到相應的標題點進去，才發現講的東西根本不算「知識」，而且也沒什麼實際上的幫助。影片內容本身沒問題，但別包裝成教學。",
+      "image": null,
+      "publishedAt": "2026-07-21T12:01:26Z",
+      "sourceId": "199cdf92fc46bfcd",
+      "sourceTitle": "Eddie Lv",
+      "link": "https://eddielv.com/musings/hate-fun-fact/",
+      "detailPath": "articles/be3bba547ecb1f233f5193e5.json"
+    },
+    {
+      "id": "48dd3449ebb6ea63d0c0e52b",
+      "title": "圖書館檔案歸納法",
+      "summary": "前言 # 從 2023 使用 Nas 後，我開始學習有系統的檔案管理法，我使用的方式，是類似圖書館的分類法。 讓我直接寫一些範例給大家參考。 分類邏輯 # 主分類（第一層、百位數） # 利用 3 碼數字來命名資料夾，百位數字代表主分類資料夾，所有檔案都要能被分在 10 大資料夾底下。 主分類核心重點： 想到某個檔案時，要能很清楚它在 10 個主分類的哪一個底下。 這 10 種主分類要能涵蓋所有的檔案類型。 舉例： 000-inbox 所有暫時未分類、正在工作階段的內容都放這裡。 100-learning 所有自我成長類的都放這裡，包含音樂學習、語言學習，終端機學習等等的電子書、筆記等等，甚至我在 Youtube 上看到水電工在教怎麼配電，我也會把影片下載放在這裡面。 200-working 製作的音樂、影片、…",
+      "image": null,
+      "publishedAt": "2026-07-21T11:27:05Z",
+      "sourceId": "199cdf92fc46bfcd",
+      "sourceTitle": "Eddie Lv",
+      "link": "https://eddielv.com/articles/file-library/",
+      "detailPath": "articles/48dd3449ebb6ea63d0c0e52b.json"
+    },
+    {
+      "id": "824d4c58f7637698b5830d62",
+      "title": "北投一期一會",
+      "summary": "這是我的「 BlogBlog 同樂會 – 2026 年 8 月 」的投稿文章。本月主題是「 一期一會 」，由 ikuka（一苦卡） 主持。如果你有自己的部落格，歡迎一起來參加！ 某次去北投時，進了一家有點昏暗的傳統小吃店，我對面桌坐了一對日本夫婦。 他們餐點等了很久，於是打開 Google 翻譯，在老闆娘經過時，他們按下語音：「我們要取消煎蛋。」 結果老闆娘直接走掉，完全沒聽到，而他們都有點內向，加上語言不通，只能呆坐著。 看到他們面有難色，於是我上前問老闆娘做了沒，才得知原來他們是點蚵仔煎，而且快好了，我接著用很破爛的日文跟他們說已經快好了。 我吃完、先行離開後，開始逛外面的景點，沒想到後來跟他們在幾個不同地點又遇到了兩、三次。 雖然他們很內向，但每次擦身而過時，都看得出表情是很想熱烈跟我打招呼，但最後只敢…",
+      "image": null,
+      "publishedAt": "2026-07-21T11:22:20Z",
+      "sourceId": "199cdf92fc46bfcd",
+      "sourceTitle": "Eddie Lv",
+      "link": "https://eddielv.com/musings/beitou-ichigo-ichie/",
+      "detailPath": "articles/824d4c58f7637698b5830d62.json"
+    },
+    {
       "id": "cafadb7b7a2147f0791c1018",
       "title": "把 NLLB 翻譯接進 Rust,在 Windows 上撞穿整條工具鏈：ct2rs × CTranslate2 的 protobuf 撞名、CRT 之爭、關閉死鎖與 NVIDIA 崩潰",
       "summary": "這篇文章記錄了作者把一個離線 NLLB 翻譯功能從 Python 搬進 Rust、透過 ct2rs 接 CTranslate2 時,在 Windows/MSVC 上接連撞到的三面牆與各自的根因與修法。第一面是「連不起來」:sentencepiece 與 sherpa-onnx 各自靜態內嵌一份 protobuf,在 MSVC 下撞出 204 個 LNK2005——最乾淨的解不是 /FORCE:MULTIPLE 或 sidecar,而是直接關掉 sentencepiece feature、改用純 Rust 的 tokenizers,讓那份 protobuf 從依賴圖消失。第二面是 CRT 之爭:ct2rs 把 CTranslate2 編成 /MT、Rust std 卻是 /MD,靠 .cargo/config.…",
@@ -584,17 +617,6 @@
       "detailPath": "articles/38cc9c39c5320740ace06882.json"
     },
     {
-      "id": "638523e35ae91bdb34fe836d",
-      "title": "科技爱好者周刊（第 404 期）：你需要知道的 AI 内存知识",
-      "summary": "这里记录每周值得分享的科技内容，周五发布。 本杂志 开源 ，欢迎 投稿 。另有 《谁在招人》 服务，发布程序员招聘信息。合作请 邮件联系 （yifeng.ruan@gmail.com）。 封面图 上海某商场正在举办的\"海绵宝宝\"展览。（ via ） 你需要知道的 AI 内存知识 自己在家运行 AI 模型，可以选择两种硬件。 一种是独立显卡，目前最顶级的消费级显卡是英伟达的 RTX 5090，带有 32GB 显存，售价3万元人民币左右。 另一种是采用板载芯片组（CPU + 板载显卡 + 板载内存）的家用电脑，比如采用 AMD 公司 Strix Halo 芯片组（具体型号 Ryzen AI Max+ 395）的迷你电脑，自带 128GB 内存，售价2万元人民币左右。 我问大家，哪种硬件更好？ 大部分人可能不假思索…",
-      "image": "https://cdn.beekka.com/blogimg/asset/202607/bg2026071603.webp",
-      "publishedAt": "2026-07-16T23:51:19Z",
-      "sourceId": "50579811ddcd4b8c",
-      "sourceTitle": "阮一峰的网络日志",
-      "link": "http://www.ruanyifeng.com/blog/2026/07/weekly-issue-404.html",
-      "detailPath": "articles/638523e35ae91bdb34fe836d.json"
-    },
-    {
       "id": "555c13c628a10367f841113d",
       "title": "SmartPerfetto 2026.06.04-07.17 六周更新复盘：从 v1.0.28 到 v1.1.1",
       "summary": "本文复盘 上一篇三周更新 （2026-06-04，v1.0.28）之后，到 2026-07-17（v1.1.1）为止 SmartPerfetto 的全部主要改动。看完这篇文章，可以知道这六周每个功能解决什么问题、边界在哪里，以及当前版本的完整功能全景。项目地址： github.com/Gracker/SmartPerfetto 。",
@@ -637,28 +659,6 @@
       "sourceTitle": "All posts | 所有貼文 on ttheng's microblog. | 侃侃而隨想極短文。",
       "link": "https://microblog.ttheng.com/challenging-your-own-stereotypes-is-hard/",
       "detailPath": "articles/fe6767c83b4d9b99cc221cbb.json"
-    },
-    {
-      "id": "71fbe96970b59118207e362f",
-      "title": "畫一隻貓",
-      "summary": "〈來畫一隻貓吧！〉 看到格友們的文章（比如 這個 和 那個 ），原來大家都一樣幼稚。（我畫的時候還沒有普通版）。 ▲ 一筆畫挑戰過關 ▲ 貓貓是液體 ▲ 我愛貓貓 ▲ 嗯？ ▲ 欸？ ▲ Noa 之貓",
-      "image": "https://noachen522.github.io/noasblog/draw_a_cat-1.png",
-      "publishedAt": "2026-07-16T07:36:56Z",
-      "sourceId": "d6867515c49adbbd",
-      "sourceTitle": "Noa's Blog",
-      "link": "https://noa.bearblog.dev/draw-a-cat/",
-      "detailPath": "articles/71fbe96970b59118207e362f.json"
-    },
-    {
-      "id": "69f332b0851867977e3d0342",
-      "title": "从湾区到西雅图——时隔两年的美西 road trip 闭环",
-      "summary": "两年前我跑过一次 美西大环线 ，从西雅图出发，一路途径 Boise, 盐湖城，犹他州各大国家公园，穿回加州，再北上开回西雅图。上次机缘巧合从湾区到西雅图中间未作游玩，大环线其实缺了一段。这次恰逢公司在湾区 onsite，又是淡季项目已经交付夏天大家都在放假，于是一拍大腿干脆开着出差租的车从湾区一路玩一整周回西雅图，这回算是 close the loop 引起舒适。加之 Oregon 连续几年 road trip 从 海岸线 到 中线 再到 内陆 都玩过了，Cascadia 基本玩透彻了，是个合格的美西公路旅行爱好者了。 ... 阅读全文 https://blog.douchi.space/bay-to-sea-road-trip/",
-      "image": null,
-      "publishedAt": "2026-07-16T05:58:00Z",
-      "sourceId": "f26cdf4037718a26",
-      "sourceTitle": "About on 椒盐豆豉",
-      "link": "https://blog.douchi.space/bay-to-sea-road-trip/?utm_source=rss",
-      "detailPath": "articles/69f332b0851867977e3d0342.json"
     }
   ]
 }
