@@ -1,6 +1,28 @@
 {
   "items": [
     {
+      "id": "f25102ee58b03a083019c4a8",
+      "title": "笔记：把新域名应用到 Blog 和 Email 上",
+      "summary": "raychase.net 这个域名是好些年前申请的，最近申请了个更适合作为我个人标签的 rayxiong.me ，简单记录下我把新域名应用到blog（新、老域名都可以访问blog），以及创建并使用新域名的邮件地址收发邮件的操作。 Blog 配置 在Squarespace上面配置好DNS的两个A记录： 其中@表示不带任何前缀，它和www前缀这样被视为两条独立的记录。没法再简单了，不过需要等几个钟头生效。 在网站的Nginx配置文件上面添加： server_name www.rayxiong.me rayxiong.me; 以及： if ($host = rayxiong.me) { return 301 https://$host$request_uri; } if ($host = www.rayxiong.…",
+      "image": "https://rayxiong.me/wp-content/uploads/2026/05/image-11.png",
+      "publishedAt": "2026-05-25T00:04:10Z",
+      "sourceId": "ed6c79eba03be7d3",
+      "sourceTitle": "四火的唠叨",
+      "link": "https://www.raychase.net/8205",
+      "detailPath": "articles/f25102ee58b03a083019c4a8.json"
+    },
+    {
+      "id": "fd456b5bce207e4d113488ac",
+      "title": "練琴的刷油漆理論",
+      "summary": "分享一個我常跟鋼琴學生講的練琴策略，先暫時叫它「刷油漆理論」好了。",
+      "image": null,
+      "publishedAt": "2026-05-25T00:01:00Z",
+      "sourceId": "7f36c3da1e6b5c71",
+      "sourceTitle": "Wiwi.Blog Blog",
+      "link": "https://wiwi.blog/blog/paint-theory-of-practice",
+      "detailPath": "articles/fd456b5bce207e4d113488ac.json"
+    },
+    {
       "id": "6e58000a15422dd1842340a9",
       "title": "亂入的鵝",
       "summary": "在路上看到一隻亂入的鵝，呆頭呆腦的樣子好可愛。",
@@ -637,28 +659,6 @@
       "sourceTitle": "折腾人生",
       "link": "https://z.arlmy.me/posts/BBBPandINSW/INSW-jet/INSW_360/",
       "detailPath": "articles/759736f3f754e7683bbecd5d.json"
-    },
-    {
-      "id": "3522cd43ab5abd0d0b7352c2",
-      "title": "反壓縮",
-      "summary": "A 想要通知 B「明早九點要開會」，於是叫 AI 幫它寫了這樣一封 E-mail：",
-      "image": null,
-      "publishedAt": "2026-05-19T00:01:00Z",
-      "sourceId": "7f36c3da1e6b5c71",
-      "sourceTitle": "Wiwi.Blog Blog",
-      "link": "https://wiwi.blog/blog/reverse-compression",
-      "detailPath": "articles/3522cd43ab5abd0d0b7352c2.json"
-    },
-    {
-      "id": "222d61fd027f96dd76583959",
-      "title": "One Tree Hill 一树山",
-      "summary": "周末去爬山，去的有点晚了，太阳有点高。",
-      "image": "https://photoghenry.wordpress.com/wp-content/uploads/2026/05/a1cec694-2722-47d2-b4e2-0dcfb4839f3d.jpg",
-      "publishedAt": "2026-05-18T20:44:09Z",
-      "sourceId": "a64fac5b0b6a1cd4",
-      "sourceTitle": "摄影流水账",
-      "link": "https://photoghenry.wordpress.com/2026/05/19/one-tree-hill-%e4%b8%80%e6%a0%91%e5%b1%b1-2/",
-      "detailPath": "articles/222d61fd027f96dd76583959.json"
     }
   ]
 }
