@@ -12,7 +12,7 @@
 	<atom:link href="https://www.kawabangga.com/feed" rel="self" type="application/rss+xml" />
 	<link>https://www.kawabangga.com</link>
 	<description>无法自制的人得不到自由。</description>
-	<lastBuildDate>Tue, 25 Aug 2026 08:08:17 +0000</lastBuildDate>
+	<lastBuildDate>Sat, 29 Aug 2026 11:53:13 +0000</lastBuildDate>
 	<language>zh-Hans</language>
 	<sy:updatePeriod>
 	hourly	</sy:updatePeriod>
@@ -88,7 +88,7 @@
 
 
 
-<p class="wp-block-paragraph">以下是一个模拟环境，使用 policing 限速在 1Gbps，其 throughput 如下图所示：</p>
+<p class="wp-block-paragraph">以下是一个模拟环境，使用 policing 限速在 1Gbps （为了模拟环境里面用 wireshark 分析速度快一些，这里用 1Gbps 的限速为目标），其 throughput 如下图所示：</p>
 
 
 <div class="wp-block-image">
@@ -296,7 +296,7 @@ tc class add dev ifb0 parent 1:1 classid 1:20 \
 <ol class="wp-block-footnotes"><li id="b6e9aa14-5b43-4bdc-8496-3a004934fede"><a href="https://github.com/torvalds/linux/blob/master/drivers/net/ifb.c#L115">https://github.com/torvalds/linux/blob/master/drivers/net/ifb.c#L115</a> <a href="#b6e9aa14-5b43-4bdc-8496-3a004934fede-link" aria-label="跳转到脚注引用 1"><img src="https://s.w.org/images/core/emoji/17.0.2/72x72/21a9.png" alt="↩" class="wp-smiley" style="height: 1em; max-height: 1em;" />︎</a></li><li id="936bb9a8-2faa-4e4e-aeed-df75d39bd1c1"><code>if (!tcp_is_cwnd_limited(sk)) return;</code> <a href="https://github.com/torvalds/linux/blob/master/net/ipv4/tcp_cubic.c?utm_source=chatgpt.com#L326">https://github.com/torvalds/linux/blob/master/net/ipv4/tcp_cubic.c?utm_source=chatgpt.com#L326</a> <a href="#936bb9a8-2faa-4e4e-aeed-df75d39bd1c1-link" aria-label="跳转到脚注引用 2"><img src="https://s.w.org/images/core/emoji/17.0.2/72x72/21a9.png" alt="↩" class="wp-smiley" style="height: 1em; max-height: 1em;" />︎</a></li><li id="b730e44a-3e65-48f5-80ef-cc7632e8a554">在 Computer Networking: A Top-Down Approach Chapter 3.7 也有介绍 <a href="#b730e44a-3e65-48f5-80ef-cc7632e8a554-link" aria-label="跳转到脚注引用 3"><img src="https://s.w.org/images/core/emoji/17.0.2/72x72/21a9.png" alt="↩" class="wp-smiley" style="height: 1em; max-height: 1em;" />︎</a></li></ol>]]></content:encoded>
 					
 					<wfw:commentRss>https://www.kawabangga.com/posts/7376/feed</wfw:commentRss>
-			<slash:comments>1</slash:comments>
+			<slash:comments>3</slash:comments>
 		
 		
 			</item>
