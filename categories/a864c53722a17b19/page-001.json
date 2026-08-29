@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "cb2439e0a660886e17fad319",
+      "title": "Mimocode/Opencode 的 Responses API 支持",
+      "summary": "当前的 MiMoCodev0.1.13里，Responses API 有两套入口 Vercel SDK 的 responses() 方法 —— 触发条件是 provider id 为 openai / github-copilot / azure 。 provider 为 gitlab 且每个模型加上 \"useResponsesApi\": true 就tmd很神奇。。一眼 vibe coding。我感觉世界上理解 Responses API 意义的人可能比例很少。。。 走 gitlab { \"$schema\": \"https://mimo.xiaomi.com/mimocode/config.json\", \"provider\": { \"gitlab\": { \"name\": \"GitLab\", \"models\"…",
+      "image": null,
+      "publishedAt": "2026-08-29T08:47:00Z",
+      "sourceId": "a864c53722a17b19",
+      "sourceTitle": "est's blog",
+      "link": "https://blog.est.im/2026/stdout-34",
+      "detailPath": "articles/cb2439e0a660886e17fad319.json"
+    },
+    {
       "id": "a9a5d7f6c872d5fd62546ff3",
       "title": "git fetch 实现断点续传",
       "summary": "git fetch origin main --depth=1 一次只下一个 pack，包含所有缺失对象，国内这网络你懂的，断开就废了，然后从头下载，往往又出事； 老外不懂国内网络条件这么艰苦，只能自己让AI改造。结果： https://github.com/est/snippets/tree/master/git-fr 步骤： git fetch --filter=blob:none --depth=1 —— 只拉 commit+tree，这个速度很快，只有KB级别的传输 用 rev-list --objects --missing=print 算缺失集合，500 个 blob 一批回填 每轮重算缺失、只补缺的。 踩过的坑 git fetch origin <blobsha> 每次都会打印 fatal: b…",
@@ -208,17 +219,6 @@
       "sourceTitle": "est's blog",
       "link": "https://blog.est.im/2026/stdout-22",
       "detailPath": "articles/82f16f45c4ccae02d27ff313.json"
-    },
-    {
-      "id": "ee0e45dea5a3dc158f64031f",
-      "title": "AI和柜台费",
-      "summary": "现在这个时间点，观察到两件事： 华为的大模型哑火。国内的AI圈反而没那么多恶臭拉踩舆论 雷不斯天天给MIMO搞新闻。一开始是免费用在Openrouter刷榜；然后在大家都玩按次数的 codng plan它家率先搞 token plan涨价；然后又是 100T 申请免费送；然后跟ds4同款缓存优化降价；然后又是给流失老付费用户免费一个月套餐 MIMO是很用力的去刷榜。why？ 马斯克几百亿买 cursor，一个vscode套壳，why？ 这两个问题，我在过去几周一直琢磨，那就是 AI 行业和 软件 互联网 最大的差别，他是有边际成本的。他的玩法变了 雷不斯刷榜的 Openrouter 和马斯克买的 Cursor，还有遍地开花的 “中转站”，而且据说有大厂买中转站数据去训练和蒸馏。 边际成本不为0 ，中间商，这两…",
-      "image": null,
-      "publishedAt": "2026-06-05T02:24:00Z",
-      "sourceId": "a864c53722a17b19",
-      "sourceTitle": "est's blog",
-      "link": "https://blog.est.im/2026/stderr-21",
-      "detailPath": "articles/ee0e45dea5a3dc158f64031f.json"
     }
   ]
 }
