@@ -1,5 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-08-27T22:50:25+00:00</updated><author><name>Simon Willison</name></author><entry><title>Breaking Claude Code Opus 5 Auto Mode</title><link href="https://simonwillison.net/2026/Aug/27/breaking-claude-code-opus-5-auto-mode/" rel="alternate"/><published>2026-08-27T22:50:25+00:00</published><updated>2026-08-27T22:50:25+00:00</updated><id>https://simonwillison.net/2026/Aug/27/breaking-claude-code-opus-5-auto-mode/</id><summary type="html">
+<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-08-28T22:12:02+00:00</updated><author><name>Simon Willison</name></author><entry><title>Just a rumour of a bug is enough to find a security exploit these days</title><link href="https://simonwillison.net/2026/Aug/28/just-a-rumour-of-a-bug/" rel="alternate"/><published>2026-08-28T22:12:02+00:00</published><updated>2026-08-28T22:12:02+00:00</updated><id>https://simonwillison.net/2026/Aug/28/just-a-rumour-of-a-bug/</id><summary type="html">
+    
+&lt;p&gt;&lt;strong&gt;&lt;a href="https://anil.recoil.org/notes/rumour-is-the-exploit"&gt;Just a rumour of a bug is enough to find a security exploit these days&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+Anil Madhavapeddy is a professor of computer science at Cambridge and a core maintainer of the OCaml compiler. In this somewhat alarming post he reports that security issues in OCaml projects are seeing evidence of attempted exploits within minutes of patches being shared for discussion:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;This normally takes a few days and a release within a week or two is reasonable. Within about ten minutes (!) this website was fielding probes for percent-encoded traversal sequences, indicating that automated watchers are keeping an eye on public repositories.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Modern coding agents have become so effective at finding flaws that the slightest hint at a new bug can be enough information for them to find it, something Anil has been able to demonstrate using his own agents, switching to DeepSeek V4 Pro⁠ when Claude Fable refused the task.&lt;/p&gt;
+&lt;p&gt;Anil points out that this rate of discovery appears incompatible with existing open source embargo practices for new issues. If an issue can become an exploit this fast, we need to figure out new processes for keeping our communities safe.&lt;/p&gt;
+&lt;p&gt;rclone maintainer Nick Craig-Wood &lt;a href="https://news.ycombinator.com/item?id=49480466#49480777"&gt;confirms in the Hacker News comments&lt;/a&gt; that his project is seeing this problem:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;In the first 10 years of the rclone project we received about 20 security disclosures through GitHub. We had to deal with over 40 in the last month! That has taken a huge amount of my time, even using AI tools to triage and come up with fixes for review.&lt;/p&gt;
+&lt;p&gt;The hit rate for those security disclosures is pretty good - about 75% of them have a nugget of something which needs looking at. [...]&lt;/p&gt;
+&lt;p&gt;GitHub assigns CVEs for the advisories. Before the AI apocalypse they took 2-3 days for an assignment but now it they are running at 3-4 weeks so I have to send the point releases out with CVE-PENDING in the changelog which isn't ideal.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+    &lt;p&gt;&lt;small&gt;&lt;/small&gt;Via &lt;a href="https://news.ycombinator.com/item?id=49480466"&gt;Hacker News&lt;/a&gt;&lt;/small&gt;&lt;/p&gt;
+
+
+    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/open-source"&gt;open-source&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/security"&gt;security&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/coding-agents"&gt;coding-agents&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ocaml"&gt;ocaml&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai-security-research"&gt;ai-security-research&lt;/a&gt;&lt;/p&gt;
+
+
+
+</summary><category term="open-source"/><category term="security"/><category term="ai"/><category term="generative-ai"/><category term="llms"/><category term="coding-agents"/><category term="ocaml"/><category term="ai-security-research"/></entry><entry><title>Breaking Claude Code Opus 5 Auto Mode</title><link href="https://simonwillison.net/2026/Aug/27/breaking-claude-code-opus-5-auto-mode/" rel="alternate"/><published>2026-08-27T22:50:25+00:00</published><updated>2026-08-27T22:50:25+00:00</updated><id>https://simonwillison.net/2026/Aug/27/breaking-claude-code-opus-5-auto-mode/</id><summary type="html">
     
 &lt;p&gt;&lt;strong&gt;&lt;a href="https://embracethered.com/blog/posts/2026/breaking-claude-code-opus-5-and-automode/"&gt;Breaking Claude Code Opus 5 Auto Mode&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 Anthropic are putting a great deal of faith in Claude Code's auto mode for protecting their coding agent users against prompt injection attacks. They recently &lt;a href="https://simonwillison.net/2026/Aug/8/auto-mode/"&gt;made that the default&lt;/a&gt; and have made bold claims about its effectiveness.&lt;/p&gt;
@@ -617,20 +640,4 @@ I still have quite a bit of older content on my blog that I never got round to t
 
 
 
-</summary><category term="search"/><category term="ai"/><category term="generative-ai"/><category term="llms"/><category term="embeddings"/><category term="doug-turnbull"/></entry><entry><title>sqlite-utils 4.2.1</title><link href="https://simonwillison.net/2026/Aug/13/sqlite-utils-2/" rel="alternate"/><published>2026-08-13T23:53:47+00:00</published><updated>2026-08-13T23:53:47+00:00</updated><id>https://simonwillison.net/2026/Aug/13/sqlite-utils-2/</id><summary type="html">
-    
-        &lt;p&gt;&lt;strong&gt;Release:&lt;/strong&gt; &lt;a href="https://github.com/simonw/sqlite-utils/releases/tag/4.2.1"&gt;sqlite-utils 4.2.1&lt;/a&gt;&lt;/p&gt;
-        &lt;p&gt;Fixes a crashing bug in &lt;a href="https://simonwillison.net/2026/Aug/13/sqlite-utils/"&gt;sqlite-utils 4.2&lt;/a&gt;. I'd introduced code that looks like this:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;from typing_extensions import Self
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;It turned out the &lt;a href="https://pypi.org/project/typing-extensions/"&gt;typing-extensions&lt;/a&gt; package was not listed as a dependency for &lt;code&gt;sqlite-utils&lt;/code&gt; - it was installed by one of the other dependencies in the &lt;a href="https://github.com/simonw/sqlite-utils/blob/56dd09702fdb9e899f577ffd51693c1f2176cb08/pyproject.toml#L34-L55"&gt;dev dependency group&lt;/a&gt;, but when you &lt;code&gt;uvx sqlite-utils&lt;/code&gt; directly you don't get those dependencies.&lt;/p&gt;
-&lt;p&gt;As part of fixing this I figured out how to run a smoke test to ensure the CLI tool still works even without those dev dependencies, which can be run from the project checkout:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;uv run --isolated --no-default-groups sqlite-utils --help
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The &lt;code&gt;--no-default-groups&lt;/code&gt; argument prevents it from installing that default &lt;code&gt;dev&lt;/code&gt; group, and &lt;code&gt;--isolated&lt;/code&gt; means that even if there is a &lt;code&gt;.venv/&lt;/code&gt; folder containing extra dependencies they will be ignored for the duration of that &lt;code&gt;uv run&lt;/code&gt; command.&lt;/p&gt;
-    
-    
-        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/packaging"&gt;packaging&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/python"&gt;python&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/sqlite-utils"&gt;sqlite-utils&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/uv"&gt;uv&lt;/a&gt;&lt;/p&gt;
-    
-
-</summary><category term="packaging"/><category term="python"/><category term="sqlite-utils"/><category term="uv"/></entry></feed>
+</summary><category term="search"/><category term="ai"/><category term="generative-ai"/><category term="llms"/><category term="embeddings"/><category term="doug-turnbull"/></entry></feed>
