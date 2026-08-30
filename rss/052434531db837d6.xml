@@ -1,5 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-08-28T22:12:02+00:00</updated><author><name>Simon Willison</name></author><entry><title>Just a rumour of a bug is enough to find a security exploit these days</title><link href="https://simonwillison.net/2026/Aug/28/just-a-rumour-of-a-bug/" rel="alternate"/><published>2026-08-28T22:12:02+00:00</published><updated>2026-08-28T22:12:02+00:00</updated><id>https://simonwillison.net/2026/Aug/28/just-a-rumour-of-a-bug/</id><summary type="html">
+<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-08-29T23:53:13+00:00</updated><author><name>Simon Willison</name></author><entry><title>Introducing Hy4 Preview</title><link href="https://simonwillison.net/2026/Aug/29/hy4/" rel="alternate"/><published>2026-08-29T23:53:13+00:00</published><updated>2026-08-29T23:53:13+00:00</updated><id>https://simonwillison.net/2026/Aug/29/hy4/</id><summary type="html">
+    
+&lt;p&gt;&lt;strong&gt;&lt;a href="https://hy.tencent.ai/research/hy4-preview"&gt;Introducing Hy4 Preview&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+New open weight text input (no vision)  LLM from Chinese company Tencent today: 770B total parameters, 49B active parameters, 1M token context window, &lt;a href="https://huggingface.co/tencent/Hy4-preview"&gt;1.56TB on Hugging Face&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;This is a big size increase from their previous &lt;a href="https://huggingface.co/tencent/Hy3"&gt;Hy3&lt;/a&gt; in July, which was 295B, 21B active, 256,000 context, 598GB.&lt;/p&gt;
+&lt;p&gt;I recently started using model chat templates to better understand their capabilities. Here's Hy4's  &lt;a href="https://huggingface.co/tencent/Hy4-preview/blob/main/chat_template.jinja"&gt;chat_template.jinja&lt;/a&gt; on Hugging Face, which includes this section:&lt;/p&gt;
+&lt;div class="highlight highlight-text-html-django"&gt;&lt;pre&gt;&lt;span class="pl-e"&gt;{%&lt;/span&gt;- &lt;span class="pl-k"&gt;if&lt;/span&gt; &lt;span class="pl-k"&gt;not&lt;/span&gt; &lt;span class="pl-s"&gt;reasoning_effort&lt;/span&gt; &lt;span class="pl-s"&gt;is&lt;/span&gt; &lt;span class="pl-s"&gt;defined&lt;/span&gt; &lt;span class="pl-e"&gt;%}&lt;/span&gt;
+    &lt;span class="pl-e"&gt;{%&lt;/span&gt;- &lt;span class="pl-s"&gt;set&lt;/span&gt; &lt;span class="pl-s"&gt;reasoning_effort&lt;/span&gt; = &lt;span class="pl-s"&gt;'high'&lt;/span&gt; &lt;span class="pl-e"&gt;%}&lt;/span&gt;
+&lt;span class="pl-e"&gt;{%&lt;/span&gt;- &lt;span class="pl-s"&gt;elif&lt;/span&gt; &lt;span class="pl-s"&gt;reasoning_effort&lt;/span&gt; &lt;span class="pl-k"&gt;not&lt;/span&gt; &lt;span class="pl-k"&gt;in&lt;/span&gt; [&lt;span class="pl-s"&gt;'high'&lt;/span&gt;, &lt;span class="pl-s"&gt;'no_think'&lt;/span&gt;] &lt;span class="pl-e"&gt;%}&lt;/span&gt;
+    &lt;span class="pl-e"&gt;{%&lt;/span&gt;- &lt;span class="pl-k"&gt;if&lt;/span&gt; &lt;span class="pl-s"&gt;reasoning_effort&lt;/span&gt; &lt;span class="pl-s"&gt;is&lt;/span&gt; &lt;span class="pl-s"&gt;none&lt;/span&gt; &lt;span class="pl-e"&gt;%}&lt;/span&gt;
+        {{- raise_exception('reasoning_effort error : None, should be no_think/high') }}
+    &lt;span class="pl-e"&gt;{%&lt;/span&gt;- &lt;span class="pl-k"&gt;else&lt;/span&gt; &lt;span class="pl-e"&gt;%}&lt;/span&gt;
+        {{- raise_exception('reasoning_effort error : ' + reasoning_effort + ', should be no_think/high') }}
+    &lt;span class="pl-e"&gt;{%&lt;/span&gt;- &lt;span class="pl-k"&gt;endif&lt;/span&gt; &lt;span class="pl-e"&gt;%}&lt;/span&gt;
+&lt;span class="pl-e"&gt;{%&lt;/span&gt;- &lt;span class="pl-k"&gt;endif&lt;/span&gt; &lt;span class="pl-e"&gt;%}&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;So it looks like there are just two reasoning effort levels: "high" (the default) and "no_think" (reason by disabled).&lt;/p&gt;
+&lt;p&gt;I tried my "Generate an SVG of a pelican riding a bicycle" prompt with the default high reasoning &lt;a href="https://openrouter.ai/tencent/hy4-preview#apps"&gt;via OpenRouter&lt;/a&gt; and &lt;a href="https://tools.simonwillison.net/markdown-svg-renderer#url=https%3A%2F%2Fgist.github.com%2Fsimonw%2Fcb69816b3fb940f2782569a82a523af1"&gt;got this&lt;/a&gt;:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Flat vector cartoon illustration of a white pelican with a large orange bill riding a red bicycle to the right along a grey road with a dashed white centre line, its orange webbed feet on the pedals and grey tail feathers fanned out behind, against a pale blue sky with a yellow sun, white clouds and horizontal white motion lines suggesting speed" src="https://static.simonwillison.net/static/2026-08-29/IMG_7725.jpeg" /&gt;&lt;/p&gt;
+&lt;p&gt;Quoting the reasoning trace:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;[...] Let's maybe add a helmet? It could improve riding theme, but may obscure head. Maybe a small cycling cap or helmet? The user didn't ask; can add red helmet? Might be cute. But pelican with big beak; a helmet might obscure. Better maybe no.&lt;/p&gt;
+&lt;p&gt;Maybe add sunglasses? no.&lt;/p&gt;
+&lt;p&gt;Maybe add water? no.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;It's interesting how the reasoning trace uses slightly truncated English, presumably because perfect grammar isn't useful or token efficient for hidden reasoning text.
+
+
+    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/pelican-riding-a-bicycle"&gt;pelican-riding-a-bicycle&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llm-reasoning"&gt;llm-reasoning&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llm-release"&gt;llm-release&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai-in-china"&gt;ai-in-china&lt;/a&gt;&lt;/p&gt;
+
+
+
+</summary><category term="ai"/><category term="generative-ai"/><category term="llms"/><category term="pelican-riding-a-bicycle"/><category term="llm-reasoning"/><category term="llm-release"/><category term="ai-in-china"/></entry><entry><title>Just a rumour of a bug is enough to find a security exploit these days</title><link href="https://simonwillison.net/2026/Aug/28/just-a-rumour-of-a-bug/" rel="alternate"/><published>2026-08-28T22:12:02+00:00</published><updated>2026-08-28T22:12:02+00:00</updated><id>https://simonwillison.net/2026/Aug/28/just-a-rumour-of-a-bug/</id><summary type="html">
     
 &lt;p&gt;&lt;strong&gt;&lt;a href="https://anil.recoil.org/notes/rumour-is-the-exploit"&gt;Just a rumour of a bug is enough to find a security exploit these days&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 Anil Madhavapeddy is a professor of computer science at Cambridge and a core maintainer of the OCaml compiler. In this somewhat alarming post he reports that security issues in OCaml projects are seeing evidence of attempted exploits within minutes of patches being shared for discussion:&lt;/p&gt;
@@ -616,28 +647,4 @@ My strong recommendation: ignore that default. Run Qwen 3.8 27B on low or even n
         &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/photography"&gt;photography&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/wildlife"&gt;wildlife&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/half-moon-bay"&gt;half-moon-bay&lt;/a&gt;&lt;/p&gt;
     
 
-</summary><category term="photography"/><category term="wildlife"/><category term="half-moon-bay"/></entry><entry><title>Don't classify. Hallucinate!</title><link href="https://simonwillison.net/2026/Aug/14/dont-classify-hallucinate/" rel="alternate"/><published>2026-08-14T21:54:35+00:00</published><updated>2026-08-14T21:54:35+00:00</updated><id>https://simonwillison.net/2026/Aug/14/dont-classify-hallucinate/</id><summary type="html">
-    
-&lt;p&gt;&lt;strong&gt;&lt;a href="https://softwaredoug.com/blog/2026/08/10/hypothetical-classifications"&gt;Don&amp;#x27;t classify. Hallucinate!&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
-I still have quite a bit of older content on my blog that I never got round to tagging. My blog has &lt;a href="https://simonwillison.net/"&gt;1,856 tags&lt;/a&gt; - likely too many to feed to an LLM in one go and say "which of these tags match the following content".&lt;/p&gt;
-&lt;p&gt;Doug Turnbull has a neat solution. Tell the model to output tags without any details of the existing vocabulary, then use vector embeddings against the existing corpus to find the concrete tags that are closest to the ones the model imagined might fit!&lt;/p&gt;
-&lt;p&gt;His example prompt suggests including an example of the shape of your tags to help the model make a more useful guess:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;code&gt;Your task is to create novel, never seen before, furniture, home goods, or hardware classification that best fit a search query.&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;Product classifications might look like:&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;Furniture / Living Room Furniture / Coffee Tables &amp;amp; End Tables / Coffee Tables&lt;/code&gt;&lt;br&gt;
-&lt;code&gt;Décor &amp;amp; Pillows / Decorative Pillows &amp;amp; Blankets / Throw Pillows&lt;/code&gt;&lt;br&gt;
-&lt;code&gt;Furniture / Bedroom Furniture / Dressers &amp;amp; Chests&lt;/code&gt;&lt;br&gt;
-&lt;code&gt;Kitchen &amp;amp; Tabletop / Kitchen Organization / Food Storage &amp;amp; Canisters&lt;/code&gt;&lt;br&gt;
-&lt;code&gt;School Furniture and Supplies / School Furniture / School Chairs &amp;amp; Seating / Stackable Chairs&lt;/code&gt;&lt;br&gt;
-&lt;code&gt;Baby &amp;amp; Kids / Toddler &amp;amp; Kids Bedroom Furniture / Kids Beds&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;Here's the query to generate classifications for:&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;brown coffee table&lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-
-    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/search"&gt;search&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/embeddings"&gt;embeddings&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/doug-turnbull"&gt;doug-turnbull&lt;/a&gt;&lt;/p&gt;
-
-
-
-</summary><category term="search"/><category term="ai"/><category term="generative-ai"/><category term="llms"/><category term="embeddings"/><category term="doug-turnbull"/></entry></feed>
+</summary><category term="photography"/><category term="wildlife"/><category term="half-moon-bay"/></entry></feed>
