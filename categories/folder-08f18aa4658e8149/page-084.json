@@ -1,6 +1,28 @@
 {
   "items": [
     {
+      "id": "7be2da7d67e8f26aad75b230",
+      "title": "Android App 链式唤醒分析",
+      "summary": "MIUI 12 的发布, 将之前一直是应用开发者和 Rom 开发者斗争最激烈的部分展示给了普通消费者, 让普通消费者也知道了这场斗争的细节, 正所谓 “魔高一尺道高一丈”, Rom 开发者由于有更高的代码修改权限, 始终占据着上风 ; App 开发者当然也不甘示弱, 各种保活拉起黑科技层出不穷,甚至 Google 都参与到了这部分斗争中, 居中调和, 制定各种规则来规范双方. 当然斗争对双方来说都算是好事, 毕竟任何一方完全的胜利都会导致 “狡兔死走狗烹,飞鸟尽良弓藏” 不过双方斗争的受害者无疑还是使用手机的消费者, App 如果斗争成功, 那么手机上各种后台进程乱跑, 杀不掉, 占用 CPU 和内存, 这不是消费者想看到的 ; 如果 Rom 开发者斗争成功, App 的体验必定会大打折扣, 各位 App 开…",
+      "image": null,
+      "publishedAt": "2020-05-07T15:16:20Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2020/05/07/Android-App-Chain-Wakeup/",
+      "detailPath": "articles/7be2da7d67e8f26aad75b230.json"
+    },
+    {
+      "id": "81b73e8c5497e7c72e7cb10d",
+      "title": "移民加拿大需要多少钱？不富裕人口的移民选择v1.2",
+      "summary": "2022-05-11补充说明：发现这篇博客一直有人进来看，文内提到的移民加拿大的途径大部分仍然存在，但办理难度和门槛则因为申请人数量的增加而有所提高。请只把本文当作一个线索提供，具体信息尽量到政府官网和各省移民局官网阅读。",
+      "image": null,
+      "publishedAt": "2020-05-05T23:52:04Z",
+      "sourceId": "88a1fc290dd0b8a7",
+      "sourceTitle": "沉默之沙",
+      "link": "https://yukieyun.net/takeaway/canada-immigration-cost/",
+      "detailPath": "articles/81b73e8c5497e7c72e7cb10d.json"
+    },
+    {
       "id": "58aaa2517edbfb1cba110a36",
       "title": "家书（2020）",
       "summary": "老爷子： 一切安好？ 今年是要回家看你的，照规矩，三周年是大事。现在又有了变化，能否回去变得不确定，整个世界都在变。 我胸前的坠子刻着「叁拾」，这名字也用了些年头，等熬到了这三十的关口，还真是不太想认。命运就这么把人推搡着往前走，一点儿借口和余地都没有。这两年才看清楚时间，它轻声细语，却把痕迹刻得重重。日子越久，越怕时间太快，是我今年常有的感慨。 嘟嘟长得很好，比同龄孩子要稍高一些，看起来超过我希望很大。吃得饱，也睡得香，之前一直是个睡渣，最近有不少起色，也能让我和十一睡个整觉了。似乎家里最需要关心的就是他，最不用关心的也是他。每天回到家看见我，嘴里就会爸爸爸爸爸爸说个不停，要是做了什么坏事，你一问他谁干的啊，他还是会喊爸爸爸爸推卸责任给我。 这是个古灵精怪的家伙，脑子活络，记忆力也好，马上 15 个月了，会…",
@@ -637,28 +659,6 @@
       "sourceTitle": "Android Performance",
       "link": "https://androidperformance.com/2019/09/05/Android-Jank-Due-To-System/",
       "detailPath": "articles/e272a254430d0e5bdf564365.json"
-    },
-    {
-      "id": "5f6bef8f677d0a8a9676e149",
-      "title": "Android 中的卡顿丢帧原因概述 - 方法论",
-      "summary": "Android 手机使用中的卡顿问题, 一般来说手机厂商和 App 开发商都会非常重视, 所以不管是手机厂商还是 App 开发者, 都会对卡顿问题非常重视, 内部一般也会有专门的基础组或者优化组来进行优化 . 目前市面上有一些非常棒的第三方性能监控工具, 比如腾讯的 Matrix ; 手机厂商一般也会有自己的性能监控方案, 由于可以修改源码和避免权限问题, 所以手机厂商可以拿到更多的数据, 分析起来也会更方便一些. 说回流畅度, 其实就是操作过程中的丢帧, 本来一秒中画面需要更新 60 帧,但是如果这期间只更新了 55 帧, 那么在用户看来就是丢帧了, 主观感觉就是卡了, 尤其是帧率波动, 用户的感知会更明显. 引起丢帧的原因非常多, 有硬件层面的, 有软件层面的, 也有 App 自身的问题. 所以这一部分我…",
-      "image": null,
-      "publishedAt": "2019-09-05T04:56:42Z",
-      "sourceId": "1aa1837ca33d8d55",
-      "sourceTitle": "Android Performance",
-      "link": "https://androidperformance.com/2019/09/05/Android-Jank-Debug/",
-      "detailPath": "articles/5f6bef8f677d0a8a9676e149.json"
-    },
-    {
-      "id": "c3d9b24273a190ce2a86ea01",
-      "title": "Android 中的 Activity Launch Mode 详解",
-      "summary": "Android 中的 Activity 有几种比较重要的启动模式,Standard\\SingleTop\\SingleTask\\SingleInstance, 每一种启动模式有不同的使用场景, 网上也有许多分析这个的文章, 这里我以 Demo 的模式, 从 Activity 栈的角度来展示不同启动模式下的 Activity 的行为. Activity 栈是一个先进后出的数据结构, 各位可以关注在每一步操作之后, 栈内容那一栏, 可以更好地帮助理解不同的启动模式. Demo 比较简单, 我也放到了 Github 上, https://github.com/Gracker/AndroidLaunchModeTest , 有兴趣的可以自己跑一下, 看看结果, 只需要修改 StandardActivity 里面的跳转…",
-      "image": null,
-      "publishedAt": "2019-09-01T04:37:47Z",
-      "sourceId": "1aa1837ca33d8d55",
-      "sourceTitle": "Android Performance",
-      "link": "https://androidperformance.com/2019/09/01/Android-Activity-Lunch-Mode/",
-      "detailPath": "articles/c3d9b24273a190ce2a86ea01.json"
     }
   ]
 }
