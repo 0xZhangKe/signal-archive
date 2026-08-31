@@ -1,5 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-08-29T23:53:13+00:00</updated><author><name>Simon Willison</name></author><entry><title>Introducing Hy4 Preview</title><link href="https://simonwillison.net/2026/Aug/29/hy4/" rel="alternate"/><published>2026-08-29T23:53:13+00:00</published><updated>2026-08-29T23:53:13+00:00</updated><id>https://simonwillison.net/2026/Aug/29/hy4/</id><summary type="html">
+<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-08-30T23:59:47+00:00</updated><author><name>Simon Willison</name></author><entry><title>Understanding ChatGPT Work</title><link href="https://simonwillison.net/2026/Aug/30/understanding-chatgpt-work/" rel="alternate"/><published>2026-08-30T23:59:47+00:00</published><updated>2026-08-30T23:59:47+00:00</updated><id>https://simonwillison.net/2026/Aug/30/understanding-chatgpt-work/</id><summary type="html">
+    &lt;p&gt;OpenAI &lt;a href="https://openai.com/index/chatgpt-for-your-most-ambitious-work/"&gt;announced ChatGPT Work&lt;/a&gt; on July 9th, and have been furiously iterating on it ever since. It is an extraordinarily confusing and very powerful product. Here's what I've figured out about it so far.&lt;/p&gt;
+&lt;h4 id="two-products"&gt;ChatGPT Work is actually two products&lt;/h4&gt;
+&lt;p&gt;The more interesting version of ChatGPT Work is the one that runs in the cloud. This can be accessed via &lt;a href="https://www.chatgpt.com/"&gt;chatgpt.com&lt;/a&gt; or through the ChatGPT mobile apps. Let's call it &lt;strong&gt;Work Cloud&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;If you install the ChatGPT desktop app - the app that used to be called Codex - you gain access to a thing called ChatGPT Work that can access files and run programs directly on your computer. Let's call that one &lt;strong&gt;Work Local&lt;/strong&gt;. This one feels more like regular Codex re-skinned to be less intimidating to non-software-developers.&lt;/p&gt;
+&lt;p&gt;For the rest of this article I'm going to talk exclusively about Work Cloud.&lt;/p&gt;
+&lt;h4 id="work-is-for-paid-subscribers-only"&gt;Work is for paid subscribers only&lt;/h4&gt;
+&lt;p&gt;Right now, ChatGPT Work (in both flavors) is available only to $20/month and up subscribers. Free users and $8/month Go users do not have access.&lt;/p&gt;
+&lt;h4 id="work-has-features-that-aren-t-available-in-chat"&gt;Work has features that aren't available in Chat&lt;/h4&gt;
+&lt;p&gt;The interface for accessing Work is a tab selector, which presents it as an alternative to Chat:&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://static.simonwillison.net/static/2026-08-30/IMG_7741.jpeg" alt="ChatGPT app header with a Chat and a Work tab" style="max-width: 100%;" /&gt;&lt;/p&gt;
+&lt;p&gt;The obvious question is &lt;em&gt;when should I use Chat, and when should I use Work?&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;OpenAI's &lt;a href="https://learn.chatgpt.com/docs/get-started-with-work"&gt;official answer&lt;/a&gt; to that question is:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Use Chat when you want an answer, explanation, brainstorm, or short draft. Use ChatGPT Work when you want ChatGPT to complete a task with a clear outcome, such as a brief, deck, analysis, recurring update, workflow, or file you can review and use.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I find that almost entirely useless, because I've been using regular ChatGPT Chat for all of those task categories for years!&lt;/p&gt;
+&lt;p&gt;The better question then is &lt;em&gt;what features does Work have that are missing from Chat?&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;After extensive experimentation I think I've mostly figured that out:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#model-selection"&gt;Options to use Luna and Terra in place of Sol&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#code-execution-with-internet-access-"&gt;A code execution environment with Internet access&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#a-full-headless-chrome-browser"&gt;A headless Chrome browser&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#a-persistent-shared-filesystem"&gt;A persistent filesystem shared between sessions&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#chatgpt-sites"&gt;The ability to publish ChatGPT Sites&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#sub-agents-with-sol-luna-and-terra"&gt;The ability to run sub-agent sessions with Sol, Luna, and Terra&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#scheduled-prompt-automations"&gt;Scheduled prompt automations&lt;/a&gt; (may be in ChatGPT Chat too)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="model-selection"&gt;Model selection&lt;/h4&gt;
+&lt;p&gt;In Work, you get the option to pick GPT-5.6 Sol, Luna, or Terra, each with Light, Medium, High, Extra High, Max, or Ultra reasoning levels. You can also pick GPT-5.5 at Light, Medium, High, or Extra High.&lt;/p&gt;
+&lt;p&gt;These look to be the same models that are available through the OpenAI API.&lt;/p&gt;
+&lt;p&gt;Chat offers a different selection: 5.6 Instant, Medium, High, Extra High, and Pro (actually Extra High and Pro are only available for $100/month+ subscribers - $20/month subscribers cap out at High). It doesn't explain if those are Luna or Terra or Sol (I'm assuming Sol?). 5.6 Pro appears to be exclusive to Chat, with no equivalent in Work.&lt;/p&gt;
+&lt;p&gt;My current understanding from using Codex is that Ultra is a special mode that more eagerly delegates to sub-agents.&lt;/p&gt;
+&lt;p&gt;I believe ChatGPT Work sessions are billed against your Codex allowance, while ChatGPT Chat Sessions get their own, separate allowance. This may help explain the model availability differences.&lt;/p&gt;
+&lt;h4 id="code-execution-with-internet-access-"&gt;Code execution with Internet access!&lt;/h4&gt;
+&lt;p&gt;As a long-time fan of the &lt;a href="https://simonwillison.net/tags/code-interpreter/"&gt;Code Interpreter pattern&lt;/a&gt; - pioneered by OpenAI in 2023 - this is by far the most exciting feature of ChatGPT Work (Cloud) for me.&lt;/p&gt;
+&lt;p&gt;The code execution environment can now talk to the rest of the internet!&lt;/p&gt;
+&lt;p&gt;ChatGPT Chat can't do this - if you ask it to install additional software packages or interact with websites or APIs that access will be blocked by the container proxy.&lt;/p&gt;
+&lt;p&gt;(Weirdly, back in January it &lt;a href="https://simonwillison.net/2026/Jan/26/chatgpt-containers/"&gt;grew the ability to install packages&lt;/a&gt;, but that doesn't seem to work any more. I wish they had better changelogs!)&lt;/p&gt;
+&lt;p&gt;Claude's equivalent container has allowed restricted internet access since it launched &lt;a href="https://simonwillison.net/2025/Sep/9/claude-code-interpreter/"&gt;last September&lt;/a&gt;. Claude can install packages from PYPI and NPM and clone repositories from GitHub. But that is about it: the allowlist of domains is very short.&lt;/p&gt;
+&lt;p&gt;ChatGPT Work allows a whole lot more than that. It can be configured with a specific list of allowed domains, but the default appears to be open to all.&lt;/p&gt;
+&lt;p&gt;This makes Work an incredibly useful tool. You can have it clone GitHub repositories, install their dependencies, then use them to interact with the rest of the web!&lt;/p&gt;
+&lt;h4 id="a-full-headless-chrome-browser"&gt;A full, headless Chrome browser&lt;/h4&gt;
+&lt;p&gt;Another killer feature of ChatGPT Work is &lt;a href="https://learn.chatgpt.com/docs/browser?surface=web"&gt;the browser tool&lt;/a&gt;. ChatGPT Work can launch a full Chrome instance, load websites, fill out forms, and take screenshots.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://static.simonwillison.net/static/2026/chatgpt-work-card.jpg" alt="Screenshot of a ChatGPT conversation. A user message in a black rounded bubble reads: Visit https://london-pelicans-in-her-piety.simonw.chatgpt.site/ and take a screenshot with you browser. Below it a collapsed status line reads &amp;quot;Worked for 1m 18s &amp;gt;&amp;quot;, followed by the reply &amp;quot;Here's the screenshot of the live site:&amp;quot; and an embedded screenshot of a website." style="max-width: 100%" /&gt;&lt;/p&gt;
+
+&lt;p&gt;If a site requires sign in the browser can prompt you to take over and enter both passwords and 2FA codes, without round-tripping those credentials through the model itself.&lt;/p&gt;
+
+&lt;p&gt;It can even run JavaScript against the DOM of loaded pages. I prompted:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;Load simonwillison.net in your browser and extract the headings using JavaScript&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;ChatGPT Work fired up a browser instance and ran the code:&lt;/p&gt;
+&lt;div class="highlight highlight-source-js"&gt;&lt;pre&gt;&lt;span class="pl-k"&gt;await&lt;/span&gt; &lt;span class="pl-s1"&gt;tab&lt;/span&gt;&lt;span class="pl-kos"&gt;.&lt;/span&gt;&lt;span class="pl-c1"&gt;playwright&lt;/span&gt;&lt;span class="pl-kos"&gt;.&lt;/span&gt;&lt;span class="pl-en"&gt;evaluate&lt;/span&gt;&lt;span class="pl-kos"&gt;(&lt;/span&gt;&lt;span class="pl-kos"&gt;(&lt;/span&gt;&lt;span class="pl-kos"&gt;)&lt;/span&gt; &lt;span class="pl-c1"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="pl-kos"&gt;{&lt;/span&gt;
+  &lt;span class="pl-k"&gt;return&lt;/span&gt; &lt;span class="pl-v"&gt;Array&lt;/span&gt;&lt;span class="pl-kos"&gt;.&lt;/span&gt;&lt;span class="pl-en"&gt;from&lt;/span&gt;&lt;span class="pl-kos"&gt;(&lt;/span&gt;&lt;span class="pl-smi"&gt;document&lt;/span&gt;&lt;span class="pl-kos"&gt;.&lt;/span&gt;&lt;span class="pl-en"&gt;querySelectorAll&lt;/span&gt;&lt;span class="pl-kos"&gt;(&lt;/span&gt;&lt;span class="pl-s"&gt;"h1,h2,h3,h4,h5,h6"&lt;/span&gt;&lt;span class="pl-kos"&gt;)&lt;/span&gt;&lt;span class="pl-kos"&gt;,&lt;/span&gt; &lt;span class="pl-s1"&gt;heading&lt;/span&gt; &lt;span class="pl-c1"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="pl-kos"&gt;(&lt;/span&gt;&lt;span class="pl-kos"&gt;{&lt;/span&gt;
+    &lt;span class="pl-c1"&gt;level&lt;/span&gt;: &lt;span class="pl-s1"&gt;heading&lt;/span&gt;&lt;span class="pl-kos"&gt;.&lt;/span&gt;&lt;span class="pl-c1"&gt;tagName&lt;/span&gt;&lt;span class="pl-kos"&gt;.&lt;/span&gt;&lt;span class="pl-en"&gt;toLowerCase&lt;/span&gt;&lt;span class="pl-kos"&gt;(&lt;/span&gt;&lt;span class="pl-kos"&gt;)&lt;/span&gt;&lt;span class="pl-kos"&gt;,&lt;/span&gt;
+    &lt;span class="pl-c1"&gt;text&lt;/span&gt;: &lt;span class="pl-s1"&gt;heading&lt;/span&gt;&lt;span class="pl-kos"&gt;.&lt;/span&gt;&lt;span class="pl-c1"&gt;innerText&lt;/span&gt;&lt;span class="pl-kos"&gt;.&lt;/span&gt;&lt;span class="pl-en"&gt;trim&lt;/span&gt;&lt;span class="pl-kos"&gt;(&lt;/span&gt;&lt;span class="pl-kos"&gt;)&lt;/span&gt;&lt;span class="pl-kos"&gt;.&lt;/span&gt;&lt;span class="pl-en"&gt;replace&lt;/span&gt;&lt;span class="pl-kos"&gt;(&lt;/span&gt;&lt;span class="pl-pds"&gt;&lt;span class="pl-c1"&gt;/&lt;/span&gt;&lt;span class="pl-cce"&gt;\s&lt;/span&gt;&lt;span class="pl-c1"&gt;+&lt;/span&gt;&lt;span class="pl-c1"&gt;/&lt;/span&gt;g&lt;/span&gt;&lt;span class="pl-kos"&gt;,&lt;/span&gt; &lt;span class="pl-s"&gt;" "&lt;/span&gt;&lt;span class="pl-kos"&gt;)&lt;/span&gt;&lt;span class="pl-kos"&gt;,&lt;/span&gt;
+    &lt;span class="pl-c1"&gt;id&lt;/span&gt;: &lt;span class="pl-s1"&gt;heading&lt;/span&gt;&lt;span class="pl-kos"&gt;.&lt;/span&gt;&lt;span class="pl-c1"&gt;id&lt;/span&gt; &lt;span class="pl-c1"&gt;||&lt;/span&gt; &lt;span class="pl-c1"&gt;null&lt;/span&gt;
+  &lt;span class="pl-kos"&gt;}&lt;/span&gt;&lt;span class="pl-kos"&gt;)&lt;/span&gt;&lt;span class="pl-kos"&gt;)&lt;/span&gt;&lt;span class="pl-kos"&gt;;&lt;/span&gt;
+&lt;span class="pl-kos"&gt;}&lt;/span&gt;&lt;span class="pl-kos"&gt;)&lt;/span&gt;&lt;span class="pl-kos"&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This feels a lot like my &lt;a href="https://shot-scraper.datasette.io/en/stable/javascript.html"&gt;shot-scraper javascript&lt;/a&gt; tool, only now I can access it on my phone!&lt;/p&gt;
+&lt;h4 id="a-persistent-shared-filesystem"&gt;A persistent, shared filesystem&lt;/h4&gt;
+&lt;p&gt;ChatGPT Chat gets a fresh filesystem for each chat session. These cannot be accessed from any other session.&lt;/p&gt;
+&lt;p&gt;In ChatGPT Work each session gets its own scratch folder - named something like &lt;code&gt;/workspace/scratch/e00a0a017944&lt;/code&gt; - but each of those are persisted across sessions, so you can access files from previous chats. I have 171 folders in &lt;code&gt;/workspace/scratch&lt;/code&gt; right now!&lt;/p&gt;
+&lt;p&gt;As far as I can tell that &lt;code&gt;/workspace&lt;/code&gt; volume is mounted to all Work sessions that are currently running - file edits from one can be instantly seen by the others. They don't seem to share the same process space though, and localhost servers running in one can't be accessed from another.&lt;/p&gt;
+&lt;h4 id="chatgpt-sites"&gt;ChatGPT Sites&lt;/h4&gt;
+&lt;p&gt;ChatGPT Work has the ability to build &lt;em&gt;and deploy&lt;/em&gt; entire websites, using Cloudflare Workers. These can have HTML and JavaScript and can run server-side features too, including stateful features on top of Cloudflare D1 and R2.&lt;/p&gt;
+&lt;p&gt;Here's a simple site I built with this feature:&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://london-pelicans-in-her-piety.simonw.chatgpt.site/"&gt;london-pelicans-in-her-piety.simonw.chatgpt.site&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://static.simonwillison.net/static/2026/pelicans-in-her-piety.webp" alt="Screenshot of a website homepage on a cream background. Top navigation bar: a circular logo reading &amp;quot;P/P&amp;quot; on the left, the links &amp;quot;THE CENSUS&amp;quot;, &amp;quot;COLLECTIONS&amp;quot; and &amp;quot;METHOD&amp;quot; in the center, and &amp;quot;JSON ↓&amp;quot; on the right. The left half is a hero section with small red capitals reading &amp;quot;AN ICONOGRAPHIC CENSUS · GREATER LONDON&amp;quot; above a large serif heading &amp;quot;Pelicans in her piety&amp;quot;, with &amp;quot;piety&amp;quot; set in red italics. Below it: &amp;quot;Across London, an impossible bird bleeds for her young—in limewood, marble, mosaic, metal and glass. This is an evidence-backed census of where to find her.&amp;quot; Two buttons follow: a solid black &amp;quot;EXPLORE ALL 28&amp;quot; and an outlined &amp;quot;DOWNLOAD THE DATA&amp;quot;. The right half is a photograph of an ornate dark carved wooden reredos in a church, with gilded urns and a crest on top, Corinthian columns, a gilded pelican with outspread wings at its center above inscribed panels, an altar with a brass cross and red flowers, embroidered banners on either side, and a black-and-white checkerboard floor with red carpet. Vertical text along the photo's right edge reads &amp;quot;ST MARY ABCHURCH&amp;quot; and a caption at its bottom reads &amp;quot;Grinling Gibbons's reredos, St Mary Abchurch. Photograph: Diliff, CC BY-SA 3.0, via SPAB ↗&amp;quot;. A statistics strip along the bottom shows &amp;quot;28 FIXED SITES&amp;quot;, &amp;quot;4 COLLECTIONS&amp;quot;, &amp;quot;3 OPEN LEADS&amp;quot; and &amp;quot;2 KNOWN LOSSES&amp;quot;." style="max-width: 100%;" /&gt;&lt;/p&gt;
+&lt;p&gt;My prompt was:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;Figure out all of the places in London with a pelican in her piety, then turn that into a JSON file and build a ChatGPT sites site about them&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;(A pelican in her piety is a fascinating piece of &lt;a href="https://devonchurchland.co.uk/blog/pelican-in-her-piety/#What-is-a-Pelican-In-Her-Piety"&gt;medieval Christian imagery&lt;/a&gt; - once you know about them you'll find them all over the place.)&lt;/p&gt;
+&lt;p&gt;These sites default to being private to the user that created them, but you can make them public and (on team plans) share them with other specific individuals.&lt;/p&gt;
+&lt;h4 id="sub-agents-with-sol-luna-and-terra"&gt;Sub-agents with Sol, Luna, and Terra&lt;/h4&gt;
+&lt;p&gt;There's not much to say about this one. ChatGPT Chat can't run sub-agents. ChatGPT Work can. This is very much a power-user feature: if you are running a complex project that can benefit from multiple parallel agents working together, Work can do that.&lt;/p&gt;
+&lt;h4 id="scheduled-prompt-automations"&gt;Scheduled prompt automations&lt;/h4&gt;
+&lt;p&gt;Another feature that seems to have migrated from regular ChatGPT to ChatGPT Work at some point. You can prompt ChatGPT Work like this:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;run a search to see if Waymo have announced a launch date for Half Moon Bay every day at 8am&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;This will schedule a prompt to run on that frequency. These prompts can decide that nothing interesting has happened, or they can decide to notify you of some new information.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Update&lt;/strong&gt;: Actually this seems to work in ChatGPT Chat as well.&lt;/p&gt;
+&lt;p&gt;It's still worth noting here though, as it can be used in conjunction with other ChatGPT Work exclusive features. You can set a scheduled task to update a ChatGPT Site on an hourly basis, for example.&lt;/p&gt;
+&lt;h4 id="is-this-safe-"&gt;Is this safe?&lt;/h4&gt;
+&lt;p&gt;An open question for me right now is how &lt;em&gt;safe&lt;/em&gt; all of this stuff is.&lt;/p&gt;
+&lt;p&gt;My &lt;a href="https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/"&gt;lethal trifecta model&lt;/a&gt; warns about the risks inherent in any agent system that combines access to private data with exposure to untrusted content and a way to communicate stolen information back to an attacker.&lt;/p&gt;
+&lt;p&gt;ChatGPT Work combines all three!&lt;/p&gt;
+&lt;p&gt;I'd love to hear more from OpenAI about how they protect ChatGPT Work sessions against prompt injection attacks. I expect their answer is the same &lt;a href="https://learn.chatgpt.com/docs/sandboxing/auto-review"&gt;auto-review mechanism&lt;/a&gt; as Codex.&lt;/p&gt;
+&lt;h4 id="openai-could-make-this-a-lot-less-confusing"&gt;OpenAI could make this a lot less confusing&lt;/h4&gt;
+&lt;p&gt;Figuring this all out took way more work than it should have.&lt;/p&gt;
+&lt;p&gt;I think there are two key problems here:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;OpenAI explain Work in terms of what it's for, not what it actually does&lt;/li&gt;
+&lt;li&gt;OpenAI still insist on hiding their system prompts and tools descriptions&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;If the ChatGPT Work documentation included the exact system prompt and tool descriptions used by the agent I wouldn't have needed to write this post.&lt;/p&gt;
+&lt;h4 id="all-the-tools"&gt;A list of all the tools&lt;/h4&gt;
+&lt;p&gt;Shortly after publishing this article I had an idea. I started a fresh Work session and prompted:&lt;/p&gt;
+&lt;blockquote&gt;&lt;p&gt;&lt;code&gt;Build a site that lists every one of your tools - nearly grouped into categories - and for each one explain what it does. Try to exactly duplicate arguments and tool descriptions where possible. Design aesthetic should be technical docs, minimal flare&lt;/code&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;&lt;a href="https://codex-tool-reference.simonw.chatgpt.site/"&gt;Here's the site it built&lt;/a&gt;, which includes details of 223 registered tools - though 6 of those are from my own personal MCPs served via &lt;a href="https://simonwillison.net/2026/Jul/31/stateless-mcp/#datasette-mcp"&gt;datasette-mcp&lt;/a&gt;.&lt;/p&gt;
+    
+        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/openai"&gt;openai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/chatgpt"&gt;chatgpt&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/code-interpreter"&gt;code-interpreter&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/lethal-trifecta"&gt;lethal-trifecta&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/general-agents"&gt;general-agents&lt;/a&gt;&lt;/p&gt;
+    
+
+</summary><category term="ai"/><category term="openai"/><category term="generative-ai"/><category term="chatgpt"/><category term="llms"/><category term="code-interpreter"/><category term="lethal-trifecta"/><category term="general-agents"/></entry><entry><title>Introducing Hy4 Preview</title><link href="https://simonwillison.net/2026/Aug/29/hy4/" rel="alternate"/><published>2026-08-29T23:53:13+00:00</published><updated>2026-08-29T23:53:13+00:00</updated><id>https://simonwillison.net/2026/Aug/29/hy4/</id><summary type="html">
     
 &lt;p&gt;&lt;strong&gt;&lt;a href="https://hy.tencent.ai/research/hy4-preview"&gt;Introducing Hy4 Preview&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 New open weight text input (no vision)  LLM from Chinese company Tencent today: 770B total parameters, 49B active parameters, 1M token context window, &lt;a href="https://huggingface.co/tencent/Hy4-preview"&gt;1.56TB on Hugging Face&lt;/a&gt;.&lt;/p&gt;
@@ -638,14 +746,4 @@ My strong recommendation: ignore that default. Run Qwen 3.8 27B on low or even n
         &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/svg"&gt;svg&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/cors"&gt;cors&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/openrouter"&gt;openrouter&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/lm-studio"&gt;lm-studio&lt;/a&gt;&lt;/p&gt;
     
 
-</summary><category term="svg"/><category term="ai"/><category term="generative-ai"/><category term="llms"/><category term="cors"/><category term="openrouter"/><category term="lm-studio"/></entry><entry><title>Northern Gannet</title><link href="https://simonwillison.net/2026/Aug/15/sighting-391300422/" rel="alternate"/><published>2026-08-15T03:22:00+00:00</published><updated>2026-08-15T03:22:00+00:00</updated><id>https://simonwillison.net/2026/Aug/15/sighting-391300422/</id><summary type="html">
-    
-        &lt;p&gt;&lt;img src="https://static.inaturalist.org/photos/716984157/large.jpg" alt="Northern Gannet"&gt;&lt;/p&gt;&lt;p&gt;Northern Gannet, in Pillar Point Harbor, CA, US&lt;/p&gt;&lt;p&gt;This is Morris.&lt;/p&gt;
-&lt;p&gt;Morris is a local celebrity: the only known Northern Gannet (&lt;em&gt;Morus bassanus&lt;/em&gt;) in the entire Pacific Ocean.&lt;/p&gt;
-&lt;p&gt;They showed up in the Farallon Islands off the coast of San Francisco &lt;a href="https://baynature.org/magazine/spring2017/atlantic-bird-makes-home-california-maybe-melting-arctic-ice/"&gt;14 years ago&lt;/a&gt;. They have since made Pillar Point harbor their home, where they are quite easy to spot: the only white bird with a yellow head, usually hanging out with the smaller black Brandt’s cormorants near the harbor sign visible from the end of the commercial pier.&lt;/p&gt;
-    
-    
-        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/photography"&gt;photography&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/wildlife"&gt;wildlife&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/half-moon-bay"&gt;half-moon-bay&lt;/a&gt;&lt;/p&gt;
-    
-
-</summary><category term="photography"/><category term="wildlife"/><category term="half-moon-bay"/></entry></feed>
+</summary><category term="svg"/><category term="ai"/><category term="generative-ai"/><category term="llms"/><category term="cors"/><category term="openrouter"/><category term="lm-studio"/></entry></feed>
