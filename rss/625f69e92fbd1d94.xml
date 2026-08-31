@@ -5,10 +5,79 @@
     <description>Blog of independent game and app developer Matt Sephton. Featuring vintage Macintosh, game development, digital artwork, Japanese esoterica, video game reviews, hacks and tips, and much more.</description>
     <link>https://blog.gingerbeardman.com/</link>
     <atom:link href="https://blog.gingerbeardman.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 29 Aug 2026 19:42:52 +0000</pubDate>
-    <lastBuildDate>Sat, 29 Aug 2026 19:42:52 +0000</lastBuildDate>
+    <pubDate>Mon, 31 Aug 2026 21:44:29 +0000</pubDate>
+    <lastBuildDate>Mon, 31 Aug 2026 21:44:29 +0000</lastBuildDate>
     <generator>Jekyll v4.4.1</generator>
 
+    
+      
+        <item>
+          <title>Transcompilation Express</title>
+          <description>&lt;p&gt;I wanted to talk briefly about a surprising new addition to my toolbox: &lt;a href=&quot;https://en.wikipedia.org/wiki/Source-to-source_compiler&quot;&gt;transcompilation&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;I’ve used it twice this year to startling effect.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;lua-on-snes&quot;&gt;Lua on SNES?&lt;/h2&gt;
+
+&lt;p&gt;I wanted to make a Super Nintendo (SNES/SFC) game but didn’t fancy learning a new SDK, so I wondered if I could write a game using the tools I know and somehow get it running on hardware. As with many of my projects, it began with thinking about a solution which is not normally advisable and perhaps even impossible.&lt;/p&gt;
+
+&lt;p&gt;So I wrote a little driving platform game in Lua/Love2D to a point where it was playable on my Mac. I built it to self-imposed SNES-style constraints: 8-bit integer maths (via a small library I wrote), plus aligning all graphics to an 8px grid, and mapping controls to suit the platform. I then transpiled the Lua to C and did a small amount of work to hook it into an existing minimal &lt;a href=&quot;https://github.com/Phillip-May/snes-homebrew&quot;&gt;SNES homebrew&lt;/a&gt; toolkit made by Phillip May, which compiles with llvm-mos. Yes, it’s targetting the 8-bit 6502 but it works for the 16-bit SNES.&lt;/p&gt;
+
+&lt;p&gt;The result turned out great! I’d say my Lua game was about 90% accurate to SNES hardware limitations. After fixing the broken things, reworking a few other small bits, and making sure the levels were not too crowded, the C code hits 60fps with no ASM! This is because modern compilers like llvm-mos are built on the knowledge and improvements we’ve gained since the 1990s. My maths is 8-bit running on the 65816 in 6502 mode and the compiler uses imaginary registers located in the fast zero page to make the CPU more capable than it really is. Developers used this trick back in the day, and now the compiler just does it for you. I don’t think developers would have considered shipping whole SNES games in C back in the day, the tools just weren’t as well optimised, but today it’s absolutely possible. My game is essentially 8-bit internals with 16-bit bounds and graphics.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;swift-on-sega-dreamcast-and-nintendo-wii&quot;&gt;Swift on Sega Dreamcast and Nintendo Wii?&lt;/h2&gt;
+
+&lt;p&gt;Starting a SNES game was a diversion and palate cleanser from my work on &lt;a href=&quot;https://jinks.gg&quot;&gt;Jinks&lt;/a&gt;, which is my new way of making games that comprises a game engine that targets a wide range of platforms, an innovative IDE that allows realtime game manipulation in new ways, and a different kind of language that empowers you to make games more easily, quickly, and with less hassle overall.&lt;/p&gt;
+
+&lt;p&gt;When I came back to Jinks I wondered if I could use the same transcompilation trick to get my Swift code running on more platforms. It was easy to get Swift to work on the web because the Swift ecosystem provides support for that, which is what I used for the web build I submitted to the gamejam. But Swift can’t compile to SH4 for Dreamcast, or PPC for Nintendo Wii, so…what to do?&lt;/p&gt;
+
+&lt;p&gt;After a bit of digging on GitHub I found &lt;a href=&quot;https://github.com/turbolent/w2c2&quot;&gt;w2c2&lt;/a&gt; which transpiles WASM to standard C. The process is obviously bonkers, totally OTT, like cracking a nut with a sledgehammer, as it results in tens of thousands of C files. So compilation takes ages, binary sizes are large, and execution less than optimal. But, surprisingly, the game ran full speed on Wii. Dreamcast only hit 20fps, for a variety of reasons but mostly due to the overhead. The proof is in the pudding!&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;moving-on-up&quot;&gt;Moving on up&lt;/h2&gt;
+
+&lt;p&gt;Today I no longer use the crazy Swift &amp;gt; WASM &amp;gt; C &amp;gt; SH4 or PPC hop-skip-jump, but it proved itself as a great prototyping tool. Rewriting and converting the Jinks engine from Swift to C has seen near instant build times, tiny binary sizes, and much faster execution. It runs at 60fps on Dreamcast with a bunch of headroom.&lt;/p&gt;
+
+&lt;p&gt;But I am absolutely certain I’ll use transcompilation during the prototyping phase of future projects.&lt;/p&gt;
+</description>
+          <author>by Matt Sephton</author>
+          <pubDate>Mon, 31 Aug 2026 21:07:00 +0000</pubDate>
+          <link>https://blog.gingerbeardman.com/2026/08/31/transcompilation-express/</link>
+          <guid isPermaLink="true">https://blog.gingerbeardman.com/2026/08/31/transcompilation-express/</guid>
+        </item>
+      
+    
+      
+        <item>
+          <title>Amiga Guide support for macOS</title>
+          <description>&lt;p&gt;I’ve just released a small app that provides macOS Quick Look and Thumbnails support for AmigaGuide documents.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Viewer: open .guide files directly in the app&lt;/li&gt;
+  &lt;li&gt;Quick Look: preview .guide files without opening them&lt;/li&gt;
+  &lt;li&gt;Thumbnails: see the first page of the guide on its icon&lt;/li&gt;
+  &lt;li&gt;Export: save as HTML or EPUB&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;It’s powered by &lt;a href=&quot;https://www.unsatisfactorysoftware.co.uk/index.php?pg=guideml&quot;&gt;GuideML&lt;/a&gt;, with a few improvements and fixes by me.&lt;/p&gt;
+
+&lt;p&gt;Download: &lt;a href=&quot;https://github.com/gingerbeardman/AmigaGuide/releases&quot;&gt;github.com/gingerbeardman/AmigaGuide&lt;/a&gt; (1.24 MB)&lt;/p&gt;
+
+&lt;p class=&quot;tofigure&quot;&gt;&lt;img src=&quot;https://cdn.gingerbeardman.com/images/posts/amiga-guide.png&quot; alt=&quot;IMG&quot; title=&quot;“Only Amiga Makes It Possible”&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://cdn.gingerbeardman.com/images/posts/amiga-guide-thumbnails.png&quot; alt=&quot;IMG&quot; title=&quot;Finder thumbnails of Directory Opus 4 as EPUB, AmigaGuide, and HTML&quot; /&gt;&lt;/p&gt;
+</description>
+          <author>by Matt Sephton</author>
+          <pubDate>Sun, 30 Aug 2026 19:36:00 +0000</pubDate>
+          <link>https://blog.gingerbeardman.com/2026/08/30/amiga-guide-support-for-macos/</link>
+          <guid isPermaLink="true">https://blog.gingerbeardman.com/2026/08/30/amiga-guide-support-for-macos/</guid>
+        </item>
+      
     
       
         <item>
