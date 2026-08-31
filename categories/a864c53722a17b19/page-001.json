@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "d132ee887a4a2589895480cd",
+      "title": "The httpx 1.0 situation",
+      "summary": "In case you weren't aware, there's quite a debate over httpx v1.0 release, especially maintainer of both openai-python and anthropic-sdk-python showed up and decided to switch to httpx2 , a fork of httpx that maintains v0.28 styles httpx is a Python library that can handle both sync/async http, replacing requests (sync-only) and aiohttp (async-opnly). You c…",
+      "image": null,
+      "publishedAt": "2026-08-31T03:35:00Z",
+      "sourceId": "a864c53722a17b19",
+      "sourceTitle": "est's blog",
+      "link": "https://blog.est.im/2026/stdout-35",
+      "detailPath": "articles/d132ee887a4a2589895480cd.json"
+    },
+    {
       "id": "cb2439e0a660886e17fad319",
       "title": "Mimocode/Opencode 的 Responses API 支持",
       "summary": "当前的 MiMoCodev0.1.13里，Responses API 有两套入口 Vercel SDK 的 responses() 方法 —— 触发条件是 provider id 为 openai / github-copilot / azure 。 provider 为 gitlab 且每个模型加上 \"useResponsesApi\": true 就tmd很神奇。。一眼 vibe coding。我感觉世界上理解 Responses API 意义的人可能比例很少。。。 走 gitlab { \"$schema\": \"https://mimo.xiaomi.com/mimocode/config.json\", \"provider\": { \"gitlab\": { \"name\": \"GitLab\", \"models\"…",
@@ -208,17 +219,6 @@
       "sourceTitle": "est's blog",
       "link": "https://blog.est.im/2026/stdin-17",
       "detailPath": "articles/445c6369b3076432b44f01a8.json"
-    },
-    {
-      "id": "82f16f45c4ccae02d27ff313",
-      "title": "基于 git 的零拷贝静态web服务器",
-      "summary": "无聊，产生了个crazy的想法。 git 内部用 zlib 压缩文件内容 Content-Encoding: gzip 也是 如果web服务器输出 .git 里的 静态 内容，是不是可以减一个二次解压/压缩步骤？？？ blob sha1 直接当etag？ 跟AI较量了几轮，一开始它说做不到。因为 blob 的格式比较变态。因为 hello world... 在 .git/objects/ab/cdef... 里的东西是这么存的 zlib(blob 1234\\0hello world...) I was like ？？？日他妈真变态啊。这前面是写死了 blob <size>\\0 然后把文件内容放在一起，再压缩的。 .git 这设计脑子有病啊。。。为啥不是原始文件gz而是加个头去gz。。。 此路不通！结束 然后A…",
-      "image": null,
-      "publishedAt": "2026-06-10T15:21:00Z",
-      "sourceId": "a864c53722a17b19",
-      "sourceTitle": "est's blog",
-      "link": "https://blog.est.im/2026/stdout-22",
-      "detailPath": "articles/82f16f45c4ccae02d27ff313.json"
     }
   ]
 }
