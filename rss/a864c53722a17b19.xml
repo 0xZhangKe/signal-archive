@@ -1,5 +1,172 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>est の 输入 输出和出入</title><link>https://blog.est.im/</link><description>This blog is rated 🔞, viewer discretion is advised</description><lastBuildDate>Sat, 29 Aug 2026 16:47:00 +0800</lastBuildDate><item><title>Mimocode/Opencode 的 Responses API 支持</title><link>https://blog.est.im/2026/stdout-34</link><description>&lt;p&gt;当前的 MiMoCodev0.1.13里，Responses API 有两套入口&lt;/p&gt;
+<rss version="2.0"><channel><title>est の 输入 输出和出入</title><link>https://blog.est.im/</link><description>This blog is rated 🔞, viewer discretion is advised</description><lastBuildDate>Mon, 31 Aug 2026 11:35:00 +0800</lastBuildDate><item><title>The httpx 1.0 situation</title><link>https://blog.est.im/2026/stdout-35</link><description>&lt;p&gt;In case you weren't aware, there's quite a debate over &lt;code&gt;httpx&lt;/code&gt; v1.0 release, especially maintainer of both &lt;code&gt;openai-python&lt;/code&gt; and &lt;code&gt;anthropic-sdk-python&lt;/code&gt; showed up and decided to switch to &lt;code&gt;httpx2&lt;/code&gt;, a fork of &lt;code&gt;httpx&lt;/code&gt; that maintains v0.28 styles&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;httpx&lt;/code&gt; is a Python library that can handle both sync/async http, replacing &lt;code&gt;requests&lt;/code&gt; (sync-only) and &lt;code&gt;aiohttp&lt;/code&gt; (async-opnly).&lt;/p&gt;
+&lt;p&gt;You can view original discussion starting here &lt;a href="https://github.com/encode/httpx/discussions/3344"&gt;https://github.com/encode/httpx/discussions/3344&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The maintainer &lt;a href="https://github.com/encode/httpx/discussions/3784"&gt;closed discussion and issues&lt;/a&gt; &lt;/p&gt;
+&lt;h3&gt;1. &lt;code&gt;verify=&lt;/code&gt; and &lt;code&gt;cert=&lt;/code&gt; → explicit &lt;code&gt;ssl.SSLContext&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;for version &amp;lt; v1.0&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-python"&gt;# Boolean on/off — still fine, not deprecated
+httpx.Client(verify=True)   # default: verify using certifi's CA bundle
+httpx.Client(verify=False)  # danger: accept any certificate
+
+# String path — NOW DEPRECATED, raises a warning
+httpx.Client(verify=&amp;quot;/path/to/custom-ca-bundle.pem&amp;quot;)
+
+# cert= for a client certificate (mutual TLS) — NOW DEPRECATED
+httpx.Client(cert=(&amp;quot;/path/to/client.pem&amp;quot;, &amp;quot;/path/to/client.key&amp;quot;))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;v1.0&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-python"&gt;import ssl, certifi, httpx
+
+# Equivalent to default verify=True
+ctx = ssl.create_default_context(cafile=certifi.where())
+httpx.Client(verify=ctx)
+
+# Custom CA bundle
+ctx = ssl.create_default_context(cafile=&amp;quot;/path/to/custom-ca-bundle.pem&amp;quot;)
+httpx.Client(verify=ctx)
+
+# Client certificate (mutual TLS) is now loaded onto the context itself
+ctx = ssl.create_default_context(cafile=certifi.where())
+ctx.load_cert_chain(&amp;quot;/path/to/client.pem&amp;quot;, &amp;quot;/path/to/client.key&amp;quot;)
+httpx.Client(verify=ctx)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;2. &lt;code&gt;proxies=&lt;/code&gt; → &lt;code&gt;proxy=&lt;/code&gt; / &lt;code&gt;mounts=&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;Before:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-python"&gt;# Old dict-based per-scheme mapping
+httpx.Client(proxies={&amp;quot;http://&amp;quot;: &amp;quot;http://localhost:8030&amp;quot;, &amp;quot;https://&amp;quot;: &amp;quot;http://localhost:8031&amp;quot;})
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;After:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-python"&gt;# Single proxy for everything
+httpx.Client(proxy=&amp;quot;http://localhost:8030&amp;quot;)
+
+# Per-scheme routing via mounts (a dict of URL-pattern -&amp;gt; Transport)
+httpx.Client(mounts={
+    &amp;quot;http://&amp;quot;: httpx.HTTPTransport(proxy=&amp;quot;http://localhost:8030&amp;quot;),
+    &amp;quot;https://&amp;quot;: httpx.HTTPTransport(proxy=&amp;quot;http://localhost:8031&amp;quot;),
+})
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;3. &lt;code&gt;app=&lt;/code&gt; shortcut → explicit &lt;code&gt;transport=&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;What &lt;code&gt;app=&lt;/code&gt; was for: letting you point a &lt;code&gt;Client&lt;/code&gt; directly at a WSGI or ASGI Python callable instead of a URL, so you could test your web app without spinning up a real server.&lt;/p&gt;
+&lt;p&gt;Before:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-python"&gt;httpx.Client(app=my_asgi_app, base_url=&amp;quot;http://testserver&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;After:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-python"&gt;httpx.Client(transport=httpx.ASGITransport(app=my_asgi_app), base_url=&amp;quot;http://testserver&amp;quot;)
+# or for WSGI:
+httpx.Client(transport=httpx.WSGITransport(app=my_wsgi_app), base_url=&amp;quot;http://testserver&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;4. &lt;code&gt;allow_redirects=&lt;/code&gt; → &lt;code&gt;follow_redirects=&lt;/code&gt;, default flipped to &lt;code&gt;False&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;What changed: in the 0.20 release, redirects stopped being followed automatically by default.&lt;/p&gt;
+&lt;p&gt;Before (pre-0.20 behavior, and the old kwarg name):&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-python"&gt;httpx.get(&amp;quot;http://api.github.com/&amp;quot;)  
+# silently redirects http -&amp;gt; https, meaning every request was actually sent twice
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;After:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-python"&gt;httpx.get(&amp;quot;http://api.github.com/&amp;quot;, follow_redirects=True)  # opt-in explicitly
+# or
+httpx.Client(follow_redirects=True)  # opt-in for the whole client
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The maintainers gave a concrete example — a client configured for &lt;code&gt;http://api.github.com/&lt;/code&gt; was silently sending &lt;em&gt;every single request twice&lt;/em&gt; (once to get redirected, once to the real HTTPS URL), wasting a round-trip nobody asked for. They decided implicit redirect-following causes more surprise bugs (accidentally hitting an endpoint twice, e.g. a payment POST) than it saves typing, so it became opt-in. This was explicitly flagged as "no universally right answer, just a trade-off" in their own release notes.&lt;/p&gt;
+&lt;h3&gt;5. Compact JSON request bodies&lt;/h3&gt;
+&lt;p&gt;Before: &lt;code&gt;json={"a": 1, "b": 2}&lt;/code&gt; serialized with the stdlib default spacing → &lt;code&gt;{"a": 1, "b": 2}&lt;/code&gt; (space after &lt;code&gt;:&lt;/code&gt; and &lt;code&gt;,&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;After: same call now serializes to &lt;code&gt;{"a":1,"b":2}&lt;/code&gt; (no extra spaces).&lt;/p&gt;
+&lt;p&gt;This is a good change!&lt;/p&gt;
+&lt;h3&gt;6. Query-string percent-encoding rules changed&lt;/h3&gt;
+&lt;p&gt;Before: spaces in query params encoded as &lt;code&gt;+&lt;/code&gt;, and &lt;code&gt;/&lt;/code&gt; inside a query value encoded as &lt;code&gt;%2F&lt;/code&gt; (this is the old &lt;code&gt;application/x-www-form-urlencoded&lt;/code&gt;-style behavior, same as &lt;code&gt;requests&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;After: spaces encoded as &lt;code&gt;%20&lt;/code&gt;, and &lt;code&gt;/&lt;/code&gt; left unescaped in the query portion (matches how Chrome/Safari/Firefox actually build URLs, per the WHATWG spec rather than the older RFC 3986 reading).&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-python"&gt;# requests-style / old httpx:
+&amp;quot;?q=hello+world&amp;amp;path=a%2Fb&amp;quot;
+# new httpx:
+&amp;quot;?q=hello%20world&amp;amp;path=a/b&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This is a case where IETF RFC3986 vs. WHATWG's disagree, and real browsers follow WHATWG.&lt;/p&gt;
+&lt;h3&gt;7. Automatic &lt;code&gt;.netrc&lt;/code&gt; handling → explicit &lt;code&gt;httpx.NetRCAuth()&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;Before: if you had a &lt;code&gt;~/.netrc&lt;/code&gt; file, httpx would silently pick up and use those credentials on any matching request.&lt;/p&gt;
+&lt;p&gt;After:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-python"&gt;httpx.get(url, auth=httpx.NetRCAuth())
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Silently reading a credentials file from disk shouldn't be done by default.&lt;/p&gt;
+&lt;h3&gt;8. &lt;code&gt;response.iter_lines()&lt;/code&gt; behavior&lt;/h3&gt;
+&lt;p&gt;Before: yielded lines including trailing newline characters (&lt;code&gt;"line one\n"&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;After: matches Python's own &lt;code&gt;str.splitlines()&lt;/code&gt; / file-iteration convention — newlines stripped (&lt;code&gt;"line one"&lt;/code&gt;), and a related performance bug fixed.&lt;/p&gt;
+&lt;p&gt;Matching stdlib conventions (&lt;code&gt;for line in file:&lt;/code&gt; style) is less surprising than inventing your own line-splitting semantics.&lt;/p&gt;
+&lt;h3&gt;9. &lt;code&gt;QueryParams&lt;/code&gt; became immutable&lt;/h3&gt;
+&lt;p&gt;Before (implied by the old API): &lt;code&gt;client.params.update(...)&lt;/code&gt; mutated in place.&lt;/p&gt;
+&lt;p&gt;After:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-python"&gt;client.params = client.params.merge({&amp;quot;key&amp;quot;: &amp;quot;value&amp;quot;})
+# or the more granular:
+params.set(&amp;quot;key&amp;quot;, &amp;quot;value&amp;quot;)
+params.add(&amp;quot;key&amp;quot;, &amp;quot;value&amp;quot;)     # allow duplicate keys
+params.remove(&amp;quot;key&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Mutable shared state (like a dict) attached to a client is a classic source of bugs&lt;/p&gt;
+&lt;h3&gt;10. Sync and async split into two separate installable packages&lt;/h3&gt;
+&lt;p&gt;Background: today, one package gives you both a blocking (&lt;code&gt;Client&lt;/code&gt;) and non-blocking (&lt;code&gt;AsyncClient&lt;/code&gt;) interface, because under the hood both share the same code via a code-generation trick (&lt;code&gt;unasync&lt;/code&gt;) that turns the async source into the sync version automatically at build time.&lt;/p&gt;
+&lt;p&gt;Before:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-python"&gt;import httpx
+r = httpx.get(&amp;quot;https://example.org&amp;quot;)          # sync
+
+async def main():
+    async with httpx.AsyncClient() as cli:
+        r = await cli.get(&amp;quot;https://example.org&amp;quot;)   # async
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;After (previewed):&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-python"&gt;# pip install httpx
+import httpx
+r = httpx.get(&amp;quot;https://example.org&amp;quot;)           # sync only
+
+# pip install ahttpx   &amp;lt;-- a *different* package
+import ahttpx
+r = await ahttpx.get(&amp;quot;https://example.org&amp;quot;)    # async only
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The maintainers reasoned that if you only ever use the sync client, you're still forced to install &lt;code&gt;anyio&lt;/code&gt; and &lt;code&gt;sniffio&lt;/code&gt; (async-support dependencies) that you never touch. Splitting the packages lets sync-only users have a genuinely smaller dependency tree, and removes the slightly awkward &lt;code&gt;Client&lt;/code&gt;/&lt;code&gt;AsyncClient&lt;/code&gt; naming duplication in favor of one name per package.&lt;/p&gt;
+&lt;p&gt;The controversy (worth knowing about): this is the most contested item in the whole redesign. Simon Willison and several SDK maintainers (including Anthropic's and OpenAI's own Python SDK maintainers, both of which depend on &lt;code&gt;httpx&amp;lt;1&lt;/code&gt;) argued in the public discussion that Python's inability to install two versions of the same package side-by-side means a hard breaking split could fragment the ecosystem for a long transition window, similar to what happened with Pydantic 1→2. Proposed alternatives floated in that thread include shipping the new design under a different name entirely (&lt;code&gt;httpx2&lt;/code&gt;) or keeping both old and new APIs inside one package under a versioned namespace (&lt;code&gt;httpx.v1&lt;/code&gt;). None of this is resolved as of the latest visible discussion activity.&lt;/p&gt;
+&lt;p&gt;My take: The whole reason why ppl chose httpx over aiohttp is because it can handle both.&lt;/p&gt;
+&lt;h3&gt;11. &lt;code&gt;json=&lt;/code&gt;, &lt;code&gt;data=&lt;/code&gt;, &lt;code&gt;files=&lt;/code&gt; shortcuts replaced by typed &lt;code&gt;content=&lt;/code&gt; objects&lt;/h3&gt;
+&lt;p&gt;Background: today httpx (like &lt;code&gt;requests&lt;/code&gt; before it) offers three different keyword arguments depending on what kind of body you're sending, and picks the right &lt;code&gt;Content-Type&lt;/code&gt; header for you based on which one you used.&lt;/p&gt;
+&lt;p&gt;Before:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-python"&gt;client.post(url, json={&amp;quot;key&amp;quot;: &amp;quot;value&amp;quot;})                       # application/json
+client.post(url, data={&amp;quot;key&amp;quot;: &amp;quot;value&amp;quot;})                       # form-urlencoded
+client.post(url, files={&amp;quot;upload&amp;quot;: open(&amp;quot;report.pdf&amp;quot;, &amp;quot;rb&amp;quot;)})  # multipart/form-data
+client.post(url, data={&amp;quot;name&amp;quot;: &amp;quot;a&amp;quot;}, files={&amp;quot;upload&amp;quot;: f})      # mixed form + file
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;After (previewed):&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-python"&gt;client.post(url, content=httpx.JSON({&amp;quot;key&amp;quot;: &amp;quot;value&amp;quot;}))
+client.post(url, content=httpx.Form({&amp;quot;key&amp;quot;: &amp;quot;value&amp;quot;}))
+client.post(url, content=httpx.Files({&amp;quot;upload&amp;quot;: httpx.File(&amp;quot;report.pdf&amp;quot;)}))
+client.post(url, content=httpx.MultiPart(
+    form={&amp;quot;name&amp;quot;: &amp;quot;a&amp;quot;},
+    files={&amp;quot;upload&amp;quot;: httpx.File(&amp;quot;report.pdf&amp;quot;)},
+))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Java boi's fantacy to please the type checker.&lt;/p&gt;
+&lt;h3&gt;12. Stricter typing on flexible parameters (discussed, not fully decided)&lt;/h3&gt;
+&lt;p&gt;Background: currently &lt;code&gt;timeout=&lt;/code&gt; accepts a bare float, a tuple of floats, or a &lt;code&gt;Timeout&lt;/code&gt; instance; &lt;code&gt;proxy=&lt;/code&gt; accepts a string, a &lt;code&gt;URL&lt;/code&gt;, or a &lt;code&gt;Proxy&lt;/code&gt; instance; similar flexibility exists for &lt;code&gt;auth=&lt;/code&gt; and &lt;code&gt;headers=&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;The design-call notes floated constraining these to fewer accepted shapes for clarity, but a maintainer pushed back in the same conversation that "it's not clear tightening the API types is a better user experience and could cause churn" — so this one is explicitly unresolved, not a committed change.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-python"&gt;
+# `proxy=` → `ProxyTypes`
+httpx.Client(proxy=&amp;quot;http://localhost:8030&amp;quot;)                 # plain string
+httpx.Client(proxy=httpx.URL(&amp;quot;http://localhost:8030&amp;quot;))       # URL object
+httpx.Client(proxy=httpx.Proxy(&amp;quot;http://localhost:8030&amp;quot;))     # Proxy object, needed if you
+                                                              # also want proxy auth/headers
+# `timeout=` → `TimeoutTypes`
+httpx.Client(timeout=10.0)                 # single float applied to connect/read/write/pool
+httpx.Client(timeout=None)                 # disable timeouts entirely
+httpx.Client(timeout=httpx.Timeout(connect=5.0, read=30.0, write=10.0, pool=5.0))  # explicit object
+
+# `auth=` → `AuthTypes`
+httpx.get(url, auth=(&amp;quot;username&amp;quot;, &amp;quot;password&amp;quot;))   # 2-tuple -&amp;gt; Basic auth
+httpx.get(url, auth=httpx.DigestAuth(&amp;quot;username&amp;quot;, &amp;quot;password&amp;quot;))  # explicit Auth subclass
+httpx.get(url, auth=my_callable)                 # any callable(request) -&amp;gt; request, via FunctionAuth
+
+# `headers=` → `HeaderTypes`
+httpx.get(url, headers={&amp;quot;User-Agent&amp;quot;: &amp;quot;my-app&amp;quot;})              # plain dict
+httpx.get(url, headers=[(&amp;quot;User-Agent&amp;quot;, &amp;quot;my-app&amp;quot;)])             # list of tuples (allows duplicate keys)
+httpx.get(url, headers=httpx.Headers({&amp;quot;User-Agent&amp;quot;: &amp;quot;my-app&amp;quot;}))  # explicit Headers object
+&lt;/code&gt;&lt;/pre&gt;
+&lt;hr /&gt;
+&lt;p&gt;tl;dr httpx v1.0 is trying to giving type system a handjob like Java&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">est</dc:creator><pubDate>Mon, 31 Aug 2026 11:35:00 +0800</pubDate><guid isPermaLink="false">tag:None,2026-08-31:/2026/stdout-35</guid><category>stdout</category></item><item><title>Mimocode/Opencode 的 Responses API 支持</title><link>https://blog.est.im/2026/stdout-34</link><description>&lt;p&gt;当前的 MiMoCodev0.1.13里，Responses API 有两套入口&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Vercel SDK 的 responses() 方法 —— 触发条件是 provider id 为 &lt;code&gt;openai&lt;/code&gt; / &lt;code&gt;github-copilot&lt;/code&gt; / &lt;code&gt;azure&lt;/code&gt;。&lt;/li&gt;
 &lt;li&gt;provider 为 &lt;code&gt;gitlab&lt;/code&gt; 且每个模型加上 &lt;code&gt;"useResponsesApi": true&lt;/code&gt; &lt;/li&gt;
@@ -2450,74 +2617,4 @@ end run
 &lt;p&gt;生成路径不一样。&lt;/p&gt;
 &lt;p&gt;AI 能写出来必然是大量 RL &lt;/p&gt;
 &lt;p&gt;换到机械臂，比如一个复杂的移动操作，AI如果没学过，没练过，大概率翻车。&lt;/p&gt;
-&lt;p&gt;人类试几下就明白了。。一样的道理&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">est</dc:creator><pubDate>Sun, 14 Jun 2026 00:13:00 +0800</pubDate><guid isPermaLink="false">tag:None,2026-06-14:/2026/stdin-17</guid><category>stdin</category></item><item><title>基于 git 的零拷贝静态web服务器</title><link>https://blog.est.im/2026/stdout-22</link><description>&lt;p&gt;无聊，产生了个crazy的想法。&lt;/p&gt;
-&lt;p&gt;git 内部用 zlib 压缩文件内容&lt;/p&gt;
-&lt;p&gt;Content-Encoding: gzip 也是&lt;/p&gt;
-&lt;p&gt;如果web服务器输出 .git 里的 静态 内容，是不是可以减一个二次解压/压缩步骤？？？&lt;/p&gt;
-&lt;p&gt;blob sha1 直接当etag？&lt;/p&gt;
-&lt;p&gt;跟AI较量了几轮，一开始它说做不到。因为 blob 的格式比较变态。因为&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;hello world...&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;在 .git/objects/ab/cdef... 里的东西是这么存的&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;zlib(blob 1234\0hello world...)&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;I was like&lt;/p&gt;
-&lt;p&gt;？？？日他妈真变态啊。这前面是写死了 &lt;code&gt;blob &amp;lt;size&amp;gt;\0&lt;/code&gt; 然后把文件内容放在一起，再压缩的。&lt;/p&gt;
-&lt;p&gt;.git 这设计脑子有病啊。。。为啥不是原始文件gz而是加个头去gz。。。&lt;/p&gt;
-&lt;p&gt;此路不通！结束&lt;/p&gt;
-&lt;hr /&gt;
-&lt;p&gt;然后AI嘴瓢了，说&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;先别急着吐槽 Linus，这个设计不仅没病，反而是 Git 能成为现代“内容寻址数据库”的精髓所在。&lt;br /&gt;
-当 Git 从磁盘读取一个松散对象时，它是个流（Stream）。Git 只需要解压出最开始的几个字节，读到 blob 4096\0，内核就可以立刻执行 malloc(4096) 分配精准的内存。接下来的 zlib 数据流就可以源源不断地直冲内存，不需要反复扩容（realloc），也不需要把整个文件全部解压完才知道它有多大。&lt;br /&gt;
-况且，这里有一个长久的误解：你吐槽的那个把 blob &lt;size&gt;\0 塞进 zlib 的逻辑，其实只存在于松散对象（Loose Object）中。在真正的 Packfile 里，这个文本格式的头早就被干掉了。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;【松散对象 Loose Object】&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;+-------------------------------------------------------+
-| zlib 压缩包: [ &amp;quot;blob 1024\0&amp;quot; + 原始文件纯数据 ]           |
-+-------------------------------------------------------+
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;【包文件 Packfile 内部的一条记录】&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;+---------------------------------------------------------+
-| [3-bit 类型] + [变长 Varint 表达的 Size] + [纯 zlib 数据流] |
-+---------------------------------------------------------+
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;我去，这么好的东西，你怎么不早点告诉我！&lt;/p&gt;
-&lt;p&gt;然后AI给我泼一盆冷水：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Git Packfile 内部的流是zlib 格式 (RFC 1950)，头部 2 字节 (CMF/FLG)，校验算法 Adler-32 (追求极速快照比对)&lt;/li&gt;
-&lt;li&gt;HTTP Content-Encoding: gzip 期待的流 gzip格式 (RFC 1952)，头部 10 字节 (Magic Number, CM, FLG, Time 等)，校验算法CRC32 (追求网络传输抗干扰)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;不！兼！容！&lt;/p&gt;
-&lt;p&gt;要正确的CRC32你得把文件全部读一遍，那不就等于解压一遍了。白费力气。完结！&lt;/p&gt;
-&lt;hr /&gt;
-&lt;p&gt;嘿，得亏我早年玩 IIS 长大的。我记得有个偏方，&lt;code&gt;Content-Encoding: deflate&lt;/code&gt;，尾部crc32直接丢了&lt;/p&gt;
-&lt;p&gt;AI：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;恭喜你，这是Web 历史上著名的 “Deflate 格式混乱案”&lt;br /&gt;
-RFC 2616 (HTTP/1.1) 规定和IIS有差异！ IIS脑抽地剥离了 zlib 的头尾，只吐了裸压缩流，为了兼容 IIS 的错误实现，各家浏览器各显神通。有的浏览器严格按 RFC 执行，有的浏览器看到 zlib 头会报错，必须看内核的容错机制。&lt;br /&gt;
-真正的zlib 格式 (RFC 1950) 是要求包含 2 字节头 + DEFLATE 压缩流 + 4 字节 Adler-32 尾&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;等等，你说啥？Adler-32？这不就又对上了嘛！！！&lt;/p&gt;
-&lt;p&gt;那么开始 Vibe！！！&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Git Packfile 的终极大 Boss：差分存储（Delta Compression）&lt;br /&gt;
-即便你搞定了上面的所有协议头和校验和，Git 的终极形态——Packfile 还会给你最后一击。你假设的场景是：Git 里的 Blob 都是一个个完整的、独立的压缩包。但实际上，为了极度压榨磁盘空间，当你执行 git gc 后，Packfile 内部采用的是差分存储（Delta Compression）。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;啊这？？我于是问，能在配置里禁用掉吗？&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;# 将比对窗口设为 0，彻底禁用 Delta 差分计算
-git config --global pack.window 0
-
-# 强制打包所有对象，并立刻、无条件地清除所有 Loose 文件（无视 2 周保护期）
-git gc --prune=now --aggressive
-
-# -a 表示把所有对象打包进一个全新的 pack
-# -d 表示打包成功后，立刻删除原本的 loose 对象和旧的 pack 文件
-git repack -a -d
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;哎，你tmd不早说。这不就闭环了嘛！！！&lt;/p&gt;
-&lt;p&gt;你觉得这几个命令难的记？ &lt;code&gt;git clone --depth=1&lt;/code&gt; 就行。这只有一个 depth 必须自动pack。&lt;/p&gt;
-&lt;p&gt;如果你存的是 .jpg 之类的二进制，那么git会直接放弃 delta 。&lt;/p&gt;
-&lt;p&gt;于是最后，通过 OpenCode Zen 免费的 MiMo V2.5 Free &lt;/p&gt;
-&lt;p&gt;&lt;a href="https://github.com/est/git2www-zerocopy"&gt;https://github.com/est/git2www-zerocopy&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;本地自测是OK的&lt;/p&gt;
-&lt;p&gt;我也算是写过 zero-copy 的人了 🤣（assert AI会写 === 我也会写）&lt;/p&gt;
-&lt;p&gt;必须严肃吐槽一下AI这回答一板一眼，不思考完整，拷打一下挤一点。如果不是我知道 IIS 这个坑可能就放弃这个想法了。&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">est</dc:creator><pubDate>Wed, 10 Jun 2026 23:21:00 +0800</pubDate><guid isPermaLink="false">tag:None,2026-06-10:/2026/stdout-22</guid><category>stdout</category></item></channel></rss>
+&lt;p&gt;人类试几下就明白了。。一样的道理&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">est</dc:creator><pubDate>Sun, 14 Jun 2026 00:13:00 +0800</pubDate><guid isPermaLink="false">tag:None,2026-06-14:/2026/stdin-17</guid><category>stdin</category></item></channel></rss>

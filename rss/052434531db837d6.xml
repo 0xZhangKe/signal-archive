@@ -103,11 +103,47 @@
 &lt;p&gt;Shortly after publishing this article I had an idea. I started a fresh Work session and prompted:&lt;/p&gt;
 &lt;blockquote&gt;&lt;p&gt;&lt;code&gt;Build a site that lists every one of your tools - nearly grouped into categories - and for each one explain what it does. Try to exactly duplicate arguments and tool descriptions where possible. Design aesthetic should be technical docs, minimal flare&lt;/code&gt;&lt;/p&gt;&lt;/blockquote&gt;
 &lt;p&gt;&lt;a href="https://codex-tool-reference.simonw.chatgpt.site/"&gt;Here's the site it built&lt;/a&gt;, which includes details of 223 registered tools - though 6 of those are from my own personal MCPs served via &lt;a href="https://simonwillison.net/2026/Jul/31/stateless-mcp/#datasette-mcp"&gt;datasette-mcp&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h4 id="and-a-whole-lot-of-skills"&gt;And a whole lot of Skills&lt;/h4&gt;
+&lt;p&gt;I noticed that the only browser-related tool in the list was &lt;a href="https://codex-tool-reference.simonw.chatgpt.site/#tool-web-run"&gt;web.run&lt;/a&gt;, which has methods for running searches, opening URLs, and clicking links, but didn't look like the full story in regards to headless browser automation.&lt;/p&gt;
+&lt;p&gt;This made me suspicious that something was missing, so I told the ChatGPT Work session that built that tools reference site:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;Add full copies of every skill to the website (separate pages linked to from the homepage)&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;It turns out ChatGPT Work uses &lt;a href="https://codex-tool-reference.simonw.chatgpt.site/#skills"&gt;a lot of skills&lt;/a&gt; - 44 in fact!&lt;/p&gt;
+&lt;p&gt;The &lt;a href="https://codex-tool-reference.simonw.chatgpt.site/skills/control-browser"&gt;control-browser skill&lt;/a&gt; explains how the browser works:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Run browser setup code through the Node REPL &lt;code&gt;js&lt;/code&gt; tool. In this environment the callable tool id typically appears as &lt;code&gt;mcp__node_repl__js&lt;/code&gt;. [...]&lt;/p&gt;
+&lt;p&gt;The ability to interact directly with the browser is exposed through the &lt;code&gt;browser-client&lt;/code&gt; runtime via the &lt;code&gt;agent.browsers.*&lt;/code&gt; API. Before trying to interact with it, you MUST emit and read the complete documentation returned by &lt;code&gt;await browser.documentation()&lt;/code&gt; in one go.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;So I told Work:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Add the full output of await browser.documentation() to the bottom of the /skills/control-browser page&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;And now you can read that &lt;a href="https://codex-tool-reference.simonw.chatgpt.site/skills/control-browser#browser-documentation"&gt;on /skills/control-browser&lt;/a&gt; as well.&lt;/p&gt;
+&lt;p&gt;A few more interesting Skills:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;a href="https://codex-tool-reference.simonw.chatgpt.site/skills/documents"&gt;documents&lt;/a&gt; for creating &lt;code&gt;.docx&lt;/code&gt; files&lt;/li&gt;
+&lt;li&gt;
+&lt;a href="https://codex-tool-reference.simonw.chatgpt.site/skills/imagegen"&gt;imagegen&lt;/a&gt; with tips on creating images with the &lt;code&gt;image_gen&lt;/code&gt; tool&lt;/li&gt;
+&lt;li&gt;
+&lt;a href="https://codex-tool-reference.simonw.chatgpt.site/skills/pdf"&gt;pdf&lt;/a&gt; for both reading and rendering PDFs&lt;/li&gt;
+&lt;li&gt;
+&lt;a href="https://codex-tool-reference.simonw.chatgpt.site/skills/spreadsheets"&gt;Spreadsheets&lt;/a&gt; for manipulating &lt;code&gt;.xlsx&lt;/code&gt;, &lt;code&gt;.xls&lt;/code&gt;, &lt;code&gt;.csv&lt;/code&gt;, &lt;code&gt;.tsv&lt;/code&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;a href="https://codex-tool-reference.simonw.chatgpt.site/skills/sites-sites-building"&gt;sites:sites-building&lt;/a&gt; for creating ChatGPT Sites&lt;/li&gt;
+&lt;li&gt;
+&lt;a href="https://codex-tool-reference.simonw.chatgpt.site/skills/openai-docs"&gt;openai-docs&lt;/a&gt; for answering questions about itself&lt;/li&gt;
+&lt;li&gt;
+&lt;a href="https://codex-tool-reference.simonw.chatgpt.site/skills/data-analytics-build-dashboard"&gt;data-analytics:build-dashboard&lt;/a&gt; for building data dashboards&lt;/li&gt;
+&lt;/ul&gt;
     
-        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/openai"&gt;openai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/chatgpt"&gt;chatgpt&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/code-interpreter"&gt;code-interpreter&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/lethal-trifecta"&gt;lethal-trifecta&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/general-agents"&gt;general-agents&lt;/a&gt;&lt;/p&gt;
+        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/openai"&gt;openai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/chatgpt"&gt;chatgpt&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/code-interpreter"&gt;code-interpreter&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/lethal-trifecta"&gt;lethal-trifecta&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/skills"&gt;skills&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/general-agents"&gt;general-agents&lt;/a&gt;&lt;/p&gt;
     
 
-</summary><category term="ai"/><category term="openai"/><category term="generative-ai"/><category term="chatgpt"/><category term="llms"/><category term="code-interpreter"/><category term="lethal-trifecta"/><category term="general-agents"/></entry><entry><title>Introducing Hy4 Preview</title><link href="https://simonwillison.net/2026/Aug/29/hy4/" rel="alternate"/><published>2026-08-29T23:53:13+00:00</published><updated>2026-08-29T23:53:13+00:00</updated><id>https://simonwillison.net/2026/Aug/29/hy4/</id><summary type="html">
+</summary><category term="ai"/><category term="openai"/><category term="generative-ai"/><category term="chatgpt"/><category term="llms"/><category term="code-interpreter"/><category term="lethal-trifecta"/><category term="skills"/><category term="general-agents"/></entry><entry><title>Introducing Hy4 Preview</title><link href="https://simonwillison.net/2026/Aug/29/hy4/" rel="alternate"/><published>2026-08-29T23:53:13+00:00</published><updated>2026-08-29T23:53:13+00:00</updated><id>https://simonwillison.net/2026/Aug/29/hy4/</id><summary type="html">
     
 &lt;p&gt;&lt;strong&gt;&lt;a href="https://hy.tencent.ai/research/hy4-preview"&gt;Introducing Hy4 Preview&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 New open weight text input (no vision)  LLM from Chinese company Tencent today: 770B total parameters, 49B active parameters, 1M token context window, &lt;a href="https://huggingface.co/tencent/Hy4-preview"&gt;1.56TB on Hugging Face&lt;/a&gt;.&lt;/p&gt;
