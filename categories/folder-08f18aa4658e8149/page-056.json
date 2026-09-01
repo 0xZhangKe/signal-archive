@@ -1,6 +1,28 @@
 {
   "items": [
     {
+      "id": "639aafc2a05b59f4fc9bcfb8",
+      "title": "Rsync 同步工具超快！部署 Hugo 爲範例。",
+      "summary": "前言 # 以往 Eddie 製作部落格（本站）的方式是，在本地端用 Hugo 生成好網站（Public）後，打開圖形界面 App「Filezilla」，填入伺服器的密碼，再把檔案複製到伺服器去，操作就像是 Windows 檔案總管或 macOS 的 Finder 一樣簡單。 拋棄 Filezilla # 最近，網站的檔案數量來到 700 多了，雖然並不是很多，但是透過 Filezilla 上傳網站，也要個 5 分鐘，就有一點太久了！ 擁抱 Rsync # Rsync 是純文字 App，上傳的指令如下： rsync -avz --delete -e \"ssh -p 22\" ./public/ username@your.server.com:/var/www/html/your-site-folder 說明 #…",
+      "image": null,
+      "publishedAt": "2025-04-09T08:49:44Z",
+      "sourceId": "199cdf92fc46bfcd",
+      "sourceTitle": "Eddie Lv",
+      "link": "https://eddielv.com/articles/rsync/",
+      "detailPath": "articles/639aafc2a05b59f4fc9bcfb8.json"
+    },
+    {
+      "id": "2cf0fb4b09a1e66f3676d858",
+      "title": "关税与贸易公平",
+      "summary": "",
+      "image": null,
+      "publishedAt": "2025-04-09T03:40:31Z",
+      "sourceId": "a694ae3a017dd381",
+      "sourceTitle": "科学的历史观",
+      "link": "https://mp.weixin.qq.com/s/cBmD1l7ebo9HTfXtJRw43g",
+      "detailPath": "articles/2cf0fb4b09a1e66f3676d858.json"
+    },
+    {
       "id": "626f7bdb889a4850bf166bef",
       "title": "裝死",
       "summary": "你有沒有這種經驗：買了一支股票後，它立刻開始上漲，讓你開始覺得自己根本是股神，已經「參透市場的脈動」？",
@@ -637,28 +659,6 @@
       "sourceTitle": "百川🌊的博客",
       "link": "https://www.baichuanweb.cn/article/example-86",
       "detailPath": "articles/cdabf0b7e59fb44010b9780a.json"
-    },
-    {
-      "id": "f18b590d6fce4e26ddab1962",
-      "title": "不革命前夜",
-      "summary": "这是一篇我用 AI 生成的小说，整篇小说的生产过程不足 30 分钟，但是灵感酝酿了很久。 使用的模型是 Goo […]",
-      "image": null,
-      "publishedAt": "2025-03-26T15:39:25Z",
-      "sourceId": "02074271ad31198b",
-      "sourceTitle": "最小可读",
-      "link": "https://mvread.blog/archives/559",
-      "detailPath": "articles/f18b590d6fce4e26ddab1962.json"
-    },
-    {
-      "id": "d0c75b5a4e8dcd7078f19f4b",
-      "title": "Android Perfetto 系列 5：Android App 基于 Choreographer 的渲染流程",
-      "summary": "本文介绍了 App 开发者不经常接触到但在 Android Framework 渲染链路中非常重要的一个类 Choreographer，包括 Choreographer 的引入背景、简介、部分源码解析、与 MessageQueue 的交互、在 APM 中的应用，以及手机厂商基于 Choreographer 的一些优化思路。 Choreographer 的引入主要是配合 Vsync，为上层应用的渲染提供稳定的 Message 处理时机。当 Vsync 信号到来时，系统通过对 Vsync 信号周期的调整，控制每一帧绘制操作的时机。目前主流手机的屏幕刷新率已达到 120Hz，即每 8.3ms 刷新一次，系统为配合屏幕刷新频率，相应调整 Vsync 周期。每个 Vsync 周期到来时，Vsync 信号唤醒 Chore…",
-      "image": null,
-      "publishedAt": "2025-03-26T10:55:11Z",
-      "sourceId": "1aa1837ca33d8d55",
-      "sourceTitle": "Android Performance",
-      "link": "https://androidperformance.com/2025/03/26/Android-Perfetto-05-Chorergrapher/",
-      "detailPath": "articles/d0c75b5a4e8dcd7078f19f4b.json"
     }
   ]
 }
