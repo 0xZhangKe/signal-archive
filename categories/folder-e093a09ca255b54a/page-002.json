@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "9992fee154256bb4b4d4ca06",
+      "title": "Don’t Block Suspend Functions",
+      "summary": "Here’s a program that launches 3 jobs. The first runs forever and the other two exchange a value. @Test fun test() = runTest { val channel = Channel<String>() val deferredA = async { while (isActive) { delay(1_000) } } val deferredB = async { channel.send(\"hello\") } val deferredC = async { channel.receive() } deferredB.await(",
+      "image": null,
+      "publishedAt": "2026-01-22T04:32:49Z",
+      "sourceId": "c12f29ba8e9a36cd",
+      "sourceTitle": "Public Object",
+      "link": "https://publicobject.com/2026/01/22/dont-block-suspend-functions/",
+      "detailPath": "articles/9992fee154256bb4b4d4ca06.json"
+    },
+    {
       "id": "766ef352374757d625be8417",
       "title": "Don't Cite Unsold eBay Listing Prices",
       "summary": "Journalists, I beg of you: please stop confusing unsold eBay listings for actual sales. I’m ticked off after seeing this Patch post about NYC MetroCards selling for $5,000 and this WSJ article about Trader Joe’s totes going for $50,000 . Yes, someone listed these items",
@@ -648,17 +659,6 @@
       "sourceTitle": "morling.dev -- Blog",
       "link": "https://www.morling.dev/blog/revisiting-the-outbox-pattern/",
       "detailPath": "articles/6cb5a6f89276803210023206.json"
-    },
-    {
-      "id": "ed74de29a20f2d6e662f1015",
-      "title": "CDC Is a Feature Not a Product",
-      "summary": "During and after my time as the lead of Debezium , a widely used open-source platform for Change Data Capture (CDC) for a variety of database, I got repeatedly asked whether I’d be interested in creating a company around CDC. VCs, including wellknown household names, did and do reach out to me, pitching this idea.",
-      "image": null,
-      "publishedAt": "2024-10-18T13:55:00Z",
-      "sourceId": "d159169f81b06175",
-      "sourceTitle": "morling.dev -- Blog",
-      "link": "https://www.morling.dev/blog/cdc-is-a-feature-not-a-product/",
-      "detailPath": "articles/ed74de29a20f2d6e662f1015.json"
     }
   ]
 }
