@@ -1,6 +1,50 @@
 {
   "items": [
     {
+      "id": "c7d9a63d6131e0fda0c36b78",
+      "title": "為什麼我開始使用 Zed 編輯器：從 VS Code 搬家,23 個擴充最後剩 8 個",
+      "summary": "Zed 團隊的上一個作品是 Atom,而 Atom 催生的 Electron 後來成了 VS Code 的地基。這篇記錄作者從 VS Code Remote-SSH 搬到 Zed 的完整過程:本機端 4,067 MB 對 204 MB、伺服器端 7.9 GB 對 107 MB,23 個擴充搬完只剩 8 個。內容涵蓋官方的設定匯入路徑與鍵位差異、有 GUI 的設定視窗與專案層級設定的限制、遠端開發的實測,以及 ACP 怎麼把 AI agent 從編輯器裡拆出來。文末誠實列出 Zed 目前還缺的功能,以及為什麼作者認為那份清單的保鮮期很短。",
+      "image": null,
+      "publishedAt": "2026-08-04T09:37:31Z",
+      "sourceId": "bd51496b8ec0ca1d",
+      "sourceTitle": "Koimsurai 手記",
+      "link": "https://koimsurai.com/blog/why-i-switched-to-zed",
+      "detailPath": "articles/c7d9a63d6131e0fda0c36b78.json"
+    },
+    {
+      "id": "dfd057d97b089ea3ea4727b8",
+      "title": "VS Code Remote-SSH 把我的伺服器燒到 96°C：rust-analyzer 無限重跑 cargo check",
+      "summary": "一台跑著三十幾個容器、同時被 VS Code Remote-SSH 連進去開發的家用伺服器,溫度釘在 90°C 撐了四十分鐘、load 從 8 衝到 196,最後失去回應。而把它燒掉的不是那些服務,是編輯器。這篇記錄整個追查過程:三條看起來很有說服力但都是錯的線索(SMU 當掉後感測器說謊、重開機就好、CPU 只有 30 到 50%),怎麼用 sysstat 的 sar 和 netdata 的 apps.plugin 回溯一個已經結束的事件,以及最後抓到的三個兇手——rust-analyzer 對一個 GTK 依賴全缺、永遠編不過的 Tauri 專案無限重跑 cargo check、Foam 擴充讓 ripgrep 開出兩百多個行程、還有只是雜訊的 RustDesk 輪詢。文末附上防線設定與事後補的兩道保險。",
+      "image": null,
+      "publishedAt": "2026-08-04T07:16:25Z",
+      "sourceId": "bd51496b8ec0ca1d",
+      "sourceTitle": "Koimsurai 手記",
+      "link": "https://koimsurai.com/blog/vscode-remote-ssh-burned-my-server",
+      "detailPath": "articles/dfd057d97b089ea3ea4727b8.json"
+    },
+    {
+      "id": "44b0dedaa29cc4c935d3bee7",
+      "title": "縈繞於心的十二道難題",
+      "summary": "偶然看到費曼的 12 道難題（Feynman’s 12 Favorite Problems）這東東 […]",
+      "image": "https://2.gravatar.com/avatar/2ce149002ca625e3240835cbfaa3481507a538243a4c31c830176f97f9a9f060?s=96&d=identicon&r=G",
+      "publishedAt": "2026-08-04T07:14:57Z",
+      "sourceId": "737dffed2384c922",
+      "sourceTitle": "恐龍化石的網誌",
+      "link": "https://cylikesreading.wordpress.com/2026/08/04/twelve-problems-originated-from-feynman/",
+      "detailPath": "articles/44b0dedaa29cc4c935d3bee7.json"
+    },
+    {
+      "id": "e245c20e3b085fa39d59c30e",
+      "title": "UPS 加 NUT 讓伺服器斷電自動關機：設定全紀錄,和一條被貓咬過的電源線",
+      "summary": "這篇把 UPS 加 NUT 的完整設定寫成一份可照做的教學:UPS 選型的三個條件(PFC 純正弦波、AVR、NUT 支援)、NUT 的 driver / upsd / upsmon 三層架構與五個設定檔各管什麼、upsmon.conf 逐行說明、POWERDOWNFLAG 為什麼不能漏,以及 BIOS 那個選錯就前功盡棄的選項——Restore after AC Power Loss 必須是 On 而不是 Last State,因為 NUT 乾淨關機後機器的狀態就是關機。另外收錄把 UPS 狀態接到 cron log、Discord 通知與自架面板的做法。而這一切的起點是搬家後伺服器每天半夜硬斷電:線鬆、共用迴路、過熱、PSU 全試過,但那些都只是猜測。作者買 UPS 一半是為了保護、一半是把它當量測儀器用…",
+      "image": null,
+      "publishedAt": "2026-08-04T06:03:43Z",
+      "sourceId": "bd51496b8ec0ca1d",
+      "sourceTitle": "Koimsurai 手記",
+      "link": "https://koimsurai.com/blog/ups-nut-and-the-cable-the-cat-chewed",
+      "detailPath": "articles/e245c20e3b085fa39d59c30e.json"
+    },
+    {
       "id": "a2587e55772899d7ddff5601",
       "title": "入蜀记 day436 钟美美",
       "summary": "「钟美美。」",
@@ -615,50 +659,6 @@
       "sourceTitle": "Eddie Lv",
       "link": "https://eddielv.com/musings/xie/",
       "detailPath": "articles/03a5d67fdfd2e9fcf06b29b3.json"
-    },
-    {
-      "id": "753c7ea8aa2e8614299cdddf",
-      "title": "吉他手的經濟效益",
-      "summary": "大三、大四時，開始擔任高中吉他社老師，那時候聽到的大學同學都覺得很棒，上學的同時還能賺錢，似乎很有經濟效益。 到了大學畢業後，若要以吉他來做全職工作，難度就高非常多了，老同學們聽到收入還會皺眉頭。 這 6 年也不只一次聽到：「彈吉他沒有經濟效益。」 以我現在的能力，主要還是只能靠教學來當作微薄的基礎收入，偶爾接到演出或錄音，就當作是獎金；如果不夠的，還得靠燈光音響的工作來提升收入，可以說是混得很差。 最近錄音工作到一半時突然發覺： 「我跟平常一樣聽著音樂，音樂用吉他重現、錄音下來，但現在竟然有人會給我錢耶！」 很慶幸的是，目前教課、演出、錄音時，幾乎都沒有工作的感覺，偶爾遇到跟自己個性合的學生，對上課還會非常期待！ 如果以資本主義的視角來看，我算不上是成功，但持續做自己喜歡的事情，漸漸能同時拿它來養活自己，應…",
-      "image": null,
-      "publishedAt": "2026-07-31T08:13:53Z",
-      "sourceId": "199cdf92fc46bfcd",
-      "sourceTitle": "Eddie Lv",
-      "link": "https://eddielv.com/musings/economic-benefiits-of-guitarist/",
-      "detailPath": "articles/753c7ea8aa2e8614299cdddf.json"
-    },
-    {
-      "id": "4d76d1569c0b159779929435",
-      "title": "後見之明",
-      "summary": "農曆過年前，錄音師朋友要從國外代購器材，想找人分擔運費，問我要不要買什麼器材，於是我買了 KSM8 麥克風 。結果這陣子遇到錄音案子要錄木吉他就用上了，太有先見之明。 我沒有電吉他演出需求，今年過年後買了 效果器 後，沒多久就接到 電吉他演出案子 ；最近錄音案子也用了這顆效果器，太有先見之明。 真要說的話，2022 年左右，有老師想售出日本廠的復刻 Fender 1958 Strat 型的電吉他，我明明沒有想練電吉他，但還是買下來了。放了幾年都沒彈，當時如果沒買，今年就只能推掉工作，不愧有先見之明。 2023 的 冬天前，買了隔音艙 1 ，原價 40 多萬，只花了 4 萬多得到。也不知道要它幹嘛，但後來用它錄了一些作品，半夜想練習唱歌也行，好有先見之明喔！ 好吧，我想這是因為最近想買合成器（說不定下個作品就用…",
-      "image": null,
-      "publishedAt": "2026-07-31T07:59:04Z",
-      "sourceId": "199cdf92fc46bfcd",
-      "sourceTitle": "Eddie Lv",
-      "link": "https://eddielv.com/musings/hindsight/",
-      "detailPath": "articles/4d76d1569c0b159779929435.json"
-    },
-    {
-      "id": "9f77c3a078aac2dbac146eb8",
-      "title": "今天音樂很好！！！",
-      "summary": "又到了某房地產集團頒獎典禮的時刻，做了這麼多年，最頭痛的就是，無論放什麼歌，都會被說：「能不能放 High 歌？」 爲了這一場活動，我聽了上百首歌曲，英文、韓文、日文、中文，還有少數我不知道是什麼語言的歌曲，前陣子開始嘗試理解 DJ 的曲風分類 方式也是因爲這個。 這次連續三天，一天一個品牌，第一天放完沒說什麼，第二天放到一半衝過來很興奮跟我說： 今天音樂很好！！！！！我明天也要一樣哦！！！！！ 自信心直接上來，放了那麼多次活動，終於抓到這個客戶喜歡的曲風。 直到第三天開始之前，我整個懵了。 今天也要很 High 的歌哦！但是我不要日本風的歌！ 「蛤？我昨天放的有七成左右是日文歌耶？？？？？？」 最終，我還不知道他們到底想聽什麼，他們追求的大概是某種 多巴胺分泌 的感受吧？",
-      "image": null,
-      "publishedAt": "2026-07-31T07:46:31Z",
-      "sourceId": "199cdf92fc46bfcd",
-      "sourceTitle": "Eddie Lv",
-      "link": "https://eddielv.com/musings/good-high-music/",
-      "detailPath": "articles/9f77c3a078aac2dbac146eb8.json"
-    },
-    {
-      "id": "d1d2115a7d540bd039a5aecc",
-      "title": "WebP 真香",
-      "summary": "在網路上下載圖片時，常發現到那些圖片都是以 WebP 格式儲存的。 對此，我其實是有些反感的，因爲 WebP 格式的圖片無法在太舊的作業系統以及某些圖像瀏覽或修圖軟體正常開啟，而且它與 Google 的關係也讓我有點皺眉一下（OK 我知道這一點很廢）。 因此，若是在我不用太在意犧牲圖片畫質的情況下，我通常在 blog 網站放上圖片時都是採用那經典的 JPEG 格式，並且使用 ffmpeg （大幅）縮減其檔案大小，而且解析度也不會太大（維持在 720p 以下）。 不過，最近我決定想爲我的主 blog 網站加上一個「 照片集 」網頁，以放上我之前旅行時拍攝的「 推活 」（ 推し活 / Oshikatsu ）照片。這個時候，我就會想要儘可能地保留原始照片的畫質。 在這個情況下，JPEG 格式的高畫質圖片檔案對我來說…",
-      "image": "https://microblog.ttheng.com/blog/img206.jpg",
-      "publishedAt": "2026-07-31T07:44:00Z",
-      "sourceId": "a93d4f2e98fafcbe",
-      "sourceTitle": "All posts | 所有貼文 on ttheng's microblog. | 侃侃而隨想極短文。",
-      "link": "https://microblog.ttheng.com/webp-is-not-that-bad-actually/",
-      "detailPath": "articles/d1d2115a7d540bd039a5aecc.json"
     }
   ]
 }
