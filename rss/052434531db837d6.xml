@@ -1,5 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-08-30T23:59:47+00:00</updated><author><name>Simon Willison</name></author><entry><title>Understanding ChatGPT Work</title><link href="https://simonwillison.net/2026/Aug/30/understanding-chatgpt-work/" rel="alternate"/><published>2026-08-30T23:59:47+00:00</published><updated>2026-08-30T23:59:47+00:00</updated><id>https://simonwillison.net/2026/Aug/30/understanding-chatgpt-work/</id><summary type="html">
+<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-08-31T23:59:36+00:00</updated><author><name>Simon Willison</name></author><entry><title>Introducing wrapture</title><link href="https://simonwillison.net/2026/Aug/31/introducing-wrapture/" rel="alternate"/><published>2026-08-31T23:59:36+00:00</published><updated>2026-08-31T23:59:36+00:00</updated><id>https://simonwillison.net/2026/Aug/31/introducing-wrapture/</id><summary type="html">
+    
+&lt;p&gt;&lt;strong&gt;&lt;a href="https://grahamdumpleton.me/posts/2026/08/introducing-wrapture/"&gt;Introducing wrapture&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+New from Graham Dumpleton (of &lt;a href="https://pypi.org/project/wrapt/"&gt;wrapt&lt;/a&gt;, mod_wsgi, and New Relic's Python agent fame), who describes Wrapture as taking the monkeypatching ideas from wrapt and extending them to apply to testing and tracing at the same time.&lt;/p&gt;
+&lt;p&gt;Wrapture (&lt;a href="https://wrapture.readthedocs.io/"&gt;full documentation here&lt;/a&gt;) makes it easy to wrap any function or method such that all access can be traced, or can be overridden to return a different value.&lt;/p&gt;
+&lt;p&gt;It acts as both an alternative to &lt;code&gt;unittest.mock&lt;/code&gt; and a way to implement tracing against an existing project:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Attaching observation to code you do not control, recording what flows through it, and doing so without disturbing the program being watched, is a problem I have never really stopped thinking about.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Wrapture includes &lt;a href="https://wrapture.readthedocs.io/en/latest/otel-export.html"&gt;OpenTelemetry support&lt;/a&gt; and even has an entirely configuration-based mechanism for adding tracing to an existing Python project, which looks like this:&lt;/p&gt;
+&lt;div class="highlight highlight-source-toml"&gt;&lt;pre&gt;&lt;span class="pl-smi"&gt;capture&lt;/span&gt; = &lt;span class="pl-s"&gt;&lt;span class="pl-pds"&gt;"&lt;/span&gt;summary&lt;span class="pl-pds"&gt;"&lt;/span&gt;&lt;/span&gt;
+
+[[&lt;span class="pl-en"&gt;observe&lt;/span&gt;]]
+&lt;span class="pl-smi"&gt;target&lt;/span&gt; = &lt;span class="pl-s"&gt;&lt;span class="pl-pds"&gt;"&lt;/span&gt;domain:Calculator&lt;span class="pl-pds"&gt;"&lt;/span&gt;&lt;/span&gt;
+&lt;span class="pl-smi"&gt;name&lt;/span&gt; = [&lt;span class="pl-s"&gt;&lt;span class="pl-pds"&gt;"&lt;/span&gt;outer&lt;span class="pl-pds"&gt;"&lt;/span&gt;&lt;/span&gt;, &lt;span class="pl-s"&gt;&lt;span class="pl-pds"&gt;"&lt;/span&gt;inner&lt;span class="pl-pds"&gt;"&lt;/span&gt;&lt;/span&gt;]
+
+[[&lt;span class="pl-en"&gt;sink&lt;/span&gt;]]
+&lt;span class="pl-smi"&gt;type&lt;/span&gt; = &lt;span class="pl-s"&gt;&lt;span class="pl-pds"&gt;"&lt;/span&gt;jsonlines&lt;span class="pl-pds"&gt;"&lt;/span&gt;&lt;/span&gt;
+&lt;span class="pl-smi"&gt;path&lt;/span&gt; = &lt;span class="pl-s"&gt;&lt;span class="pl-pds"&gt;"&lt;/span&gt;trace.jsonl&lt;span class="pl-pds"&gt;"&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This is still a very young project - just a few weeks old - but it's off to a very promising start.&lt;/p&gt;
+&lt;p&gt;Interestingly, this is also Graham's first attempt at  large entirely agent-driven project:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Every line of code and documentation in wrapture was written by an AI assistant working under my direction. I want to be upfront about that, and equally upfront about what it was not. This was not vibe coding, where a one-shot prompt produces a pile of generated code and the person driving hopes for the best because they lack the knowledge to judge what came back. Vibe coding has earned its bad reputation. I engineered wrapture carefully from the start. I have spent a long time in this particular corner of Python and knew exactly what the result needed to be, and the AI was the means of producing it rather than the source of the design.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;In a follow-up post, &lt;a href="https://grahamdumpleton.me/posts/2026/09/unit-testing-with-wrapture/"&gt;Unit testing with wrapture&lt;/a&gt;, Graham shows the testing patterns supported by the new library:&lt;/p&gt;
+&lt;pre&gt;&lt;span class="pl-k"&gt;def&lt;/span&gt; &lt;span class="pl-en"&gt;test_stub_with_wrapture&lt;/span&gt;():
+    &lt;span class="pl-k"&gt;with&lt;/span&gt; &lt;span class="pl-s1"&gt;wrapture&lt;/span&gt;.&lt;span class="pl-c1"&gt;binding&lt;/span&gt;(
+        &lt;span class="pl-v"&gt;Gateway&lt;/span&gt;, &lt;span class="pl-s"&gt;"charge"&lt;/span&gt;
+    ).&lt;span class="pl-c1"&gt;on_call&lt;/span&gt;.&lt;span class="pl-c1"&gt;returns&lt;/span&gt;({
+        &lt;span class="pl-s"&gt;"id"&lt;/span&gt;: &lt;span class="pl-s"&gt;"stub"&lt;/span&gt;, &lt;span class="pl-s"&gt;"amount"&lt;/span&gt;: &lt;span class="pl-c1"&gt;0&lt;/span&gt;}
+    ):
+        &lt;span class="pl-k"&gt;assert&lt;/span&gt; &lt;span class="pl-en"&gt;OrderService&lt;/span&gt;().&lt;span class="pl-c1"&gt;place&lt;/span&gt;(
+            &lt;span class="pl-c1"&gt;500&lt;/span&gt;
+        )[&lt;span class="pl-s"&gt;"id"&lt;/span&gt;] &lt;span class="pl-c1"&gt;==&lt;/span&gt; &lt;span class="pl-s"&gt;"stub"&lt;/span&gt;&lt;/pre&gt;
+&lt;p&gt;And this neat example of a test that calls and then modifies the return value from the original method:&lt;/p&gt;
+&lt;pre&gt;&lt;span class="pl-k"&gt;def&lt;/span&gt; &lt;span class="pl-en"&gt;test_pinned_result_with_wrapture&lt;/span&gt;():
+    &lt;span class="pl-s1"&gt;charge&lt;/span&gt; &lt;span class="pl-c1"&gt;=&lt;/span&gt; &lt;span class="pl-s1"&gt;wrapture&lt;/span&gt;.&lt;span class="pl-c1"&gt;binding&lt;/span&gt;(
+        &lt;span class="pl-v"&gt;Gateway&lt;/span&gt;, &lt;span class="pl-s"&gt;"charge"&lt;/span&gt;
+    )
+    &lt;span class="pl-s1"&gt;charge&lt;/span&gt;.&lt;span class="pl-c1"&gt;on_call&lt;/span&gt;.&lt;span class="pl-c1"&gt;transforms_result&lt;/span&gt;(
+        &lt;span class="pl-k"&gt;lambda&lt;/span&gt; &lt;span class="pl-s1"&gt;r&lt;/span&gt;: {&lt;span class="pl-c1"&gt;**&lt;/span&gt;&lt;span class="pl-s1"&gt;r&lt;/span&gt;, &lt;span class="pl-s"&gt;"id"&lt;/span&gt;: &lt;span class="pl-s"&gt;"ch_TEST"&lt;/span&gt;}
+    )
+    &lt;span class="pl-k"&gt;with&lt;/span&gt; &lt;span class="pl-s1"&gt;charge&lt;/span&gt;:
+        &lt;span class="pl-k"&gt;assert&lt;/span&gt; &lt;span class="pl-en"&gt;OrderService&lt;/span&gt;().&lt;span class="pl-c1"&gt;place&lt;/span&gt;(
+           &lt;span class="pl-c1"&gt;500&lt;/span&gt;
+        ) &lt;span class="pl-c1"&gt;==&lt;/span&gt; {
+            &lt;span class="pl-s"&gt;"id"&lt;/span&gt;: &lt;span class="pl-s"&gt;"ch_TEST"&lt;/span&gt;, &lt;span class="pl-s"&gt;"amount"&lt;/span&gt;: &lt;span class="pl-c1"&gt;500&lt;/span&gt;
+        }&lt;/pre&gt;
+
+&lt;p&gt;(In both of these examples the &lt;code&gt;OrderService().place(...)&lt;/code&gt; method calls &lt;code&gt;Gateway().charge(...)&lt;/code&gt;.)
+
+
+    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/graham-dumpleton"&gt;graham-dumpleton&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/monkey-patching"&gt;monkey-patching&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/python"&gt;python&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/testing"&gt;testing&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/pytest"&gt;pytest&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/observability"&gt;observability&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai-assisted-programming"&gt;ai-assisted-programming&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/agentic-engineering"&gt;agentic-engineering&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/opentelemetry"&gt;opentelemetry&lt;/a&gt;&lt;/p&gt;
+
+
+
+</summary><category term="graham-dumpleton"/><category term="monkey-patching"/><category term="python"/><category term="testing"/><category term="pytest"/><category term="observability"/><category term="ai-assisted-programming"/><category term="agentic-engineering"/><category term="opentelemetry"/></entry><entry><title>Quoting Andrew Digby</title><link href="https://simonwillison.net/2026/Aug/31/andrew-digby/" rel="alternate"/><published>2026-08-31T22:25:02+00:00</published><updated>2026-08-31T22:25:02+00:00</updated><id>https://simonwillison.net/2026/Aug/31/andrew-digby/</id><summary type="html">
+    &lt;blockquote cite="https://bsky.app/profile/digs.bsky.social/post/3mufrrsfhq22r"&gt;&lt;p&gt;325 #kakapo! The chicks from this year's record breeding season are now juveniles and so have been added to the population. In 1995 there were just 51 kākāpō left. Recovery of critically endangered species &lt;em&gt;is&lt;/em&gt; possible with sustained effort.&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p class="cite"&gt;&amp;mdash; &lt;a href="https://bsky.app/profile/digs.bsky.social/post/3mufrrsfhq22r"&gt;Andrew Digby&lt;/a&gt;, providing the best news of the year&lt;/p&gt;
+
+    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/kakapo"&gt;kakapo&lt;/a&gt;&lt;/p&gt;
+
+
+
+</summary><category term="kakapo"/></entry><entry><title>Understanding ChatGPT Work</title><link href="https://simonwillison.net/2026/Aug/30/understanding-chatgpt-work/" rel="alternate"/><published>2026-08-30T23:59:47+00:00</published><updated>2026-08-30T23:59:47+00:00</updated><id>https://simonwillison.net/2026/Aug/30/understanding-chatgpt-work/</id><summary type="html">
     &lt;p&gt;OpenAI &lt;a href="https://openai.com/index/chatgpt-for-your-most-ambitious-work/"&gt;announced ChatGPT Work&lt;/a&gt; on July 9th, and have been furiously iterating on it ever since. It is an extraordinarily confusing and very powerful product. Here's what I've figured out about it so far.&lt;/p&gt;
 &lt;h4 id="two-products"&gt;ChatGPT Work is actually two products&lt;/h4&gt;
 &lt;p&gt;The more interesting version of ChatGPT Work is the one that runs in the cloud. This can be accessed via &lt;a href="https://www.chatgpt.com/"&gt;chatgpt.com&lt;/a&gt; or through the ChatGPT mobile apps. Let's call it &lt;strong&gt;Work Cloud&lt;/strong&gt;.&lt;/p&gt;
@@ -765,24 +829,4 @@ My strong recommendation: ignore that default. Run Qwen 3.8 27B on low or even n
         &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/local-llms"&gt;local-llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/qwen"&gt;qwen&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/pelican-riding-a-bicycle"&gt;pelican-riding-a-bicycle&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llm-reasoning"&gt;llm-reasoning&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llama-cpp"&gt;llama-cpp&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llm-release"&gt;llm-release&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/coding-agents"&gt;coding-agents&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/lm-studio"&gt;lm-studio&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai-in-china"&gt;ai-in-china&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/nvidia-spark"&gt;nvidia-spark&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/pi"&gt;pi&lt;/a&gt;&lt;/p&gt;
     
 
-</summary><category term="ai"/><category term="generative-ai"/><category term="local-llms"/><category term="llms"/><category term="qwen"/><category term="pelican-riding-a-bicycle"/><category term="llm-reasoning"/><category term="llama-cpp"/><category term="llm-release"/><category term="coding-agents"/><category term="lm-studio"/><category term="ai-in-china"/><category term="nvidia-spark"/><category term="pi"/></entry><entry><title>Quoting Dario Amodei</title><link href="https://simonwillison.net/2026/Aug/16/dario-amodei/" rel="alternate"/><published>2026-08-16T15:05:36+00:00</published><updated>2026-08-16T15:05:36+00:00</updated><id>https://simonwillison.net/2026/Aug/16/dario-amodei/</id><summary type="html">
-    &lt;blockquote cite="https://twitter.com/darioamodei/status/2088758819304443967"&gt;&lt;p&gt;I do agree that the public has a negative view of AI (and that this is a big problem), but I don’t think it is primarily caused by me or any other AI leader warning about AI’s risks.  I think it is fundamentally a crisis of trust.  I think that ordinary people don’t trust companies, governments, or the tech industry and always suspect that we are cooking up some new way to screw them over.  The causes of this go back decades and AI is just the latest iteration of it.  I don’t think that a glitzy marketing campaign with a positive spin (which some have advocated that Anthropic do) is the way to win back that trust — at this point, saying that AI will cure cancer is more a cliche than it is inspiring, and most people think it is deceptive.  The thing that will work is &lt;em&gt;actually curing cancer&lt;/em&gt;.  I think by far the most accurate criticism of AI companies including Anthropic is that we haven’t yet delivered on our big promises to benefit the world.  That is totally on us, and I think it’s the criticism you should be making, instead of all this stuff about messaging and marketing.&lt;/p&gt;&lt;/blockquote&gt;
-&lt;p class="cite"&gt;&amp;mdash; &lt;a href="https://twitter.com/darioamodei/status/2088758819304443967"&gt;Dario Amodei&lt;/a&gt;&lt;/p&gt;
-
-    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/anthropic"&gt;anthropic&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai-backlash"&gt;ai-backlash&lt;/a&gt;&lt;/p&gt;
-
-
-
-</summary><category term="anthropic"/><category term="ai"/><category term="ai-backlash"/></entry><entry><title>CORS Chat</title><link href="https://simonwillison.net/2026/Aug/15/cors-chat/" rel="alternate"/><published>2026-08-15T14:49:54+00:00</published><updated>2026-08-15T14:49:54+00:00</updated><id>https://simonwillison.net/2026/Aug/15/cors-chat/</id><summary type="html">
-    
-        &lt;p&gt;&lt;strong&gt;Tool:&lt;/strong&gt; &lt;a href="https://tools.simonwillison.net/cors-chat"&gt;CORS Chat&lt;/a&gt;&lt;/p&gt;
-        &lt;p&gt;I built this today (&lt;a href="https://gist.github.com/simonw/92a1d97773744b45bf259e003013cf36"&gt;with GPT-5.6-Sol xhigh&lt;/a&gt;) to help test Qwen 3.8 27B running in LM Studio on both my M5 MacBook Pro and an NVIDIA DGX Spark.&lt;/p&gt;
-&lt;p&gt;It provides a web UI for exercising an OpenAI-Responses-compatible chat endpoint. I've tried it against LM Studio with the &lt;code&gt;--cors&lt;/code&gt; option and OpenRouter, and both work fine.&lt;/p&gt;
-&lt;p&gt;Conversations are persisted in the browser and can be exported as copy-pasted JSON. One fun detail is that it notices SVG images that are being generated and progressively renders them in the chat while the tokens are still streaming in.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Alt text generated by Qwen-3.8 27B: Screenshot of the CORS Chat web interface. The left sidebar lists three saved conversations, with &amp;quot;render an svg of five intersecting squares&amp;quot; selected. The main panel shows a chat with the qwen3.8‑27b model: the user asked &amp;quot;render an svg of five intersecting squares. don't overthink this,&amp;quot; followed by the model's reasoning trace describing the design (five semi‑transparent squares rotated around a common center on a dark background). Below is an SVG preview pane displaying five overlapping, semi‑transparent colored squares—pink, blue, green, yellow, and purple—with white outlines, rotated at different angles to form a starburst pattern on a dark navy background. Top controls include endpoint/model selectors and a &amp;quot;New chat&amp;quot; button; the bottom has a message input and a &amp;quot;Send&amp;quot; button." src="https://static.simonwillison.net/static/2026/cors-chat.webp" /&gt;&lt;/p&gt;
-    
-    
-        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/svg"&gt;svg&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/cors"&gt;cors&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/openrouter"&gt;openrouter&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/lm-studio"&gt;lm-studio&lt;/a&gt;&lt;/p&gt;
-    
-
-</summary><category term="svg"/><category term="ai"/><category term="generative-ai"/><category term="llms"/><category term="cors"/><category term="openrouter"/><category term="lm-studio"/></entry></feed>
+</summary><category term="ai"/><category term="generative-ai"/><category term="local-llms"/><category term="llms"/><category term="qwen"/><category term="pelican-riding-a-bicycle"/><category term="llm-reasoning"/><category term="llama-cpp"/><category term="llm-release"/><category term="coding-agents"/><category term="lm-studio"/><category term="ai-in-china"/><category term="nvidia-spark"/><category term="pi"/></entry></feed>
