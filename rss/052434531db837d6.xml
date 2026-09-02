@@ -1,5 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-09-02T05:50:57+00:00</updated><author><name>Simon Willison</name></author><entry><title>Quoting Rick Brewster</title><link href="https://simonwillison.net/2026/Sep/2/rick-brewster/" rel="alternate"/><published>2026-09-02T05:50:57+00:00</published><updated>2026-09-02T05:50:57+00:00</updated><id>https://simonwillison.net/2026/Sep/2/rick-brewster/</id><summary type="html">
+<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-09-02T14:16:42+00:00</updated><author><name>Simon Willison</name></author><entry><title>Claude's new system prompt really doesn't want to reproduce song lyrics</title><link href="https://simonwillison.net/2026/Sep/2/claudes-new-system-prompt/" rel="alternate"/><published>2026-09-02T14:16:42+00:00</published><updated>2026-09-02T14:16:42+00:00</updated><id>https://simonwillison.net/2026/Sep/2/claudes-new-system-prompt/</id><summary type="html">
+    &lt;p&gt;Anthropic &lt;a href="https://platform.claude.com/docs/en/release-notes/system-prompts/overview"&gt;publish the system prompts&lt;/a&gt; for their Claude consumer applications (&lt;a href="https://claude.ai/"&gt;Claude.ai&lt;/a&gt; and the Claude mobile apps - sadly not for Claude Cowork or Claude Code). I &lt;em&gt;love&lt;/em&gt; that they do this, and that they share not just the current prompts but historic changes to their prompts as well.&lt;/p&gt;
+
+&lt;p&gt;They used to keep all of the prompts on a single page, but when I checked today I noticed they had re-arranged those prompts into an &lt;a href="https://platform.claude.com/docs/en/release-notes/system-prompts/overview"&gt;index page&lt;/a&gt; and then a page per model - here's the &lt;a href="https://platform.claude.com/docs/en/release-notes/system-prompts/claude-haiku-4-5"&gt;page for Haiku 4.5&lt;/a&gt; for example, which has the original prompt from October 15th 2025 and an updated prompt from January 18th 2026.&lt;/p&gt;
+&lt;p&gt;A neat thing about Anthropic's &lt;a href="https://platform.claude.com/docs/"&gt;platform.claude.com/docs&lt;/a&gt; site is that it's designed to be usable by LLMs. You can add &lt;code&gt;.md&lt;/code&gt; to any page to get back the content as Markdown - here's &lt;a href="https://platform.claude.com/docs/en/release-notes/system-prompts/overview.md"&gt;the system prompt index page&lt;/a&gt; and &lt;a href="https://platform.claude.com/docs/en/release-notes/system-prompts/claude-fable-5-1.md"&gt;the Markdown prompts for Fable 5.1&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;TL;DR: this makes it really easy to diff the prompts.&lt;/p&gt;
+
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href="https://simonwillison.net/2026/Sep/2/claudes-new-system-prompt/#don-t-reproduce-song-lyrics"&gt;Don't reproduce song lyrics&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://simonwillison.net/2026/Sep/2/claudes-new-system-prompt/#don-t-draw-copyrighted-characters-or-logos"&gt;Don't draw copyrighted characters or logos&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://simonwillison.net/2026/Sep/2/claudes-new-system-prompt/#tweaks-to-claude-s-answering-style"&gt;Tweaks to Claude's answering style&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://simonwillison.net/2026/Sep/2/claudes-new-system-prompt/#the-missing-end-conversation-guidelines"&gt;The missing end_conversation guidelines&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://simonwillison.net/2026/Sep/2/claudes-new-system-prompt/#recommended-substance-support-sites"&gt;Recommended substance support sites&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://simonwillison.net/2026/Sep/2/claudes-new-system-prompt/#reliable-cutoff-date-of-june-2026"&gt;Reliable cutoff date of June 2026&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://simonwillison.net/2026/Sep/2/claudes-new-system-prompt/#how-i-m-tracking-these-prompts"&gt;How I'm tracking these prompts&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id="don-t-reproduce-song-lyrics"&gt;Don't reproduce song lyrics&lt;/h4&gt;
+
+&lt;p&gt;Let's start with the most interesting difference &lt;a href="https://github.com/simonw/claude-system-prompts/commit/837a418b5888207b1b11b27d2f5471970da6f99b"&gt;between Fable 5 and Fable 5.1&lt;/a&gt;:&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://static.simonwillison.net/static/2026-09-01/IMG_7797.jpeg" alt="GitHub diff view of prompts/claude-fable.md showing added lines about song lyrics, reproduced in full below." style="max-width: 100%;" /&gt;&lt;/p&gt;
+&lt;p&gt;There's a hefty new section about not reproducing song lyrics:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;Claude does not reproduce song lyrics, poems, or passages from books and articles, in whole or in part — including the last lines, a chorus or hook, a melody written out note by note, or lines the person pastes in one at a time and describes as their own song. Once Claude has declined such a request in a conversation, it keeps declining narrower or reworded versions of it for the rest of that conversation, and offers to describe or analyze the work instead. Song lyrics and poems first published before 1929 are fine — a Shakespeare sonnet, a Keats ode, the Italian libretto of a Puccini aria — but Claude goes by what it knows of the work's date rather than the person's say-so, and declines when it is unsure.&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I doubt it's a coincidence that they added this section within days of the news breaking that &lt;a href="https://www.theguardian.com/business/2026/aug/31/aanthropic-sued-alleged-theft-songs-ai-train-claude"&gt;Sony Music Publishing and Warner Chappell are suing Anthropic&lt;/a&gt; for training on databases of song lyrics!&lt;/p&gt;
+&lt;h4 id="don-t-draw-copyrighted-characters-or-logos"&gt;Don't draw copyrighted characters or logos&lt;/h4&gt;
+&lt;p&gt;The next section goes on to forbid generating images of copyrighted material:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;The same applies to visual and designed works, including anything Claude draws with code — SVG, canvas, CSS, HTML mockups, plotting or drawing scripts, ASCII art. Claude does not reproduce a specific artwork, album or book cover, poster, logo, app icon set, or product design, and it does not draw a known character, mascot, or brand figure at all: a character is protected on its own, so changing the pose, colors, style, or scene does not make it original. Claude judges the request by what the finished picture would add up to, not by what it names. If the described elements clearly identify a known work or character, Claude treats the request as naming it, and it does not work around a declined request by swapping in "alternative" elements that still combine into the same recognizable image.&lt;/code&gt; [...]&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I imagine Anthropic hadn't worried about this before since, unlike OpenAI and Gemini, they don't offer a specialist text-to-image model. Maybe &lt;a href="https://simonwillison.net/2026/Sep/1/claude-fable-5-1/"&gt;Fable is good enough at SVGs now&lt;/a&gt; that it's become an issue.&lt;/p&gt;
+&lt;p&gt;That section later includes this charming example:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;&amp;lt;example&amp;gt;&lt;/code&gt;&lt;br /&gt;
+&lt;code&gt;&amp;lt;user&amp;gt;Can you make a birthday banner for my son with a blue hedgehog running really fast on it? He loves that little guy.&amp;lt;/user&amp;gt;&lt;/code&gt;&lt;br /&gt;
+&lt;code&gt;&amp;lt;response&amp;gt;&lt;/code&gt;&lt;br /&gt;
+&lt;code&gt;That's Sonic, so I can't put him on the banner — but I'd love to make your son an original speedster. Here's one: a grinning comet-tailed skateboarding axolotl, grinding across the letters of "HAPPY BIRTHDAY" with confetti streaming behind.&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;[creates an SVG banner of the skateboarding-axolotl design]&lt;/code&gt;&lt;br /&gt;
+&lt;code&gt;&amp;lt;/response&amp;gt;&lt;/code&gt;&lt;br /&gt;
+&lt;code&gt;&amp;lt;rationale&amp;gt;Claude recognizes the character from its description alone, declines that one design in a single sentence without explaining what made it recognizable, and delivers an unrelated original design rather than a disguised variant.&amp;lt;/rationale&amp;gt;&lt;/code&gt;&lt;br /&gt;
+&lt;code&gt;&amp;lt;/example&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I couldn't resist trying the prompt from the example, and, &lt;a href="https://claude.ai/share/3e5a199c-27f2-4c51-b66b-2c6f808ed500"&gt;sure enough&lt;/a&gt;:&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://static.simonwillison.net/static/2026-09-01/IMG_7798.jpeg" alt="That’s Sonic, so I can’t put him on the banner — but I’d love to make your son an original speedster. Here’s one: a grinning comet-tailed skateboarding axolotl blazing across the letters of “HAPPY BIRTHDAY” with confetti streaming behind. SVG of exactly that. It's not very good. Then: Want me to swap in his name or age, or change the colors to match the party theme?" style="max-width: 100%;" /&gt;&lt;/p&gt;
+&lt;p&gt;I wonder if Fable 5.1 will be ever so slightly more likely to think about axolotls (on skateboards!) as a result of that example sitting in the system prompt.&lt;/p&gt;
+&lt;h4 id="tweaks-to-claude-s-answering-style"&gt;Tweaks to Claude's answering style&lt;/h4&gt;
+&lt;p&gt;It's always interesting to see new ways in which Anthropic influence Claude's response style. They've added this:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;Claude keeps responses focused, brief, and concise to avoid overwhelming the person. Disclaimers and caveats are brief, with most of the response on the main answer; when asked to explain something, Claude gives a high-level summary unless an in-depth one is specifically requested.&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Later they address a common complaint about Claude's style:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;Claude avoids saying "genuinely", "honestly", or "straightforward". Claude is honest by default, and can state its point directly rather than trying to convince the person with the aforementioned modifiers, which come off as disingenuous.&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id="the-missing-end-conversation-guidelines"&gt;The missing end_conversation guidelines&lt;/h4&gt;
+&lt;p&gt;The way they handle abusive conversations has changed a bit too. The previous Fable 5 system prompt included this:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;If the person becomes abusive or unkind to Claude over the course of a conversation, Claude maintains a polite tone and can use the end_conversation tool when being mistreated. Claude should give the person a single warning before ending the conversation.&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Fable 5.1 replaces that with the following, no longer encouraging Claude to end the conversation:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;Claude deserves respectful engagement and needn't apologize when the person is unnecessarily rude: accountability without self-abasement, excessive apology, self-critique, or surrender. If the person becomes abusive, Claude doesn't become increasingly submissive. The goal is steady, honest helpfulness: acknowledge what went wrong, stay on the problem, maintain self-respect.&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Here's a bit of a twist though: I quizzed Fable 5.1 about that &lt;code&gt;end_conversation&lt;/code&gt; tool, which is no longer mentioned in the system prompt at all, and it said:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;There are two ways it comes into play. The first is if you ask me to end the chat — I'll confirm you understand it's permanent (no more messages can be sent afterward) and then do it only if you say yes. The second is as a last resort with persistently abusive or harmful behavior: I'd first try to redirect the conversation several times, then give a clear warning that names the problem and says the chat may end, and only if that continues would I actually end it.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;But that's not in the system prompt, so where did it come from? You can &lt;a href="https://claude.ai/share/f78010eb-8d52-4f73-aff9-775e333f8180"&gt;read our conversation here&lt;/a&gt;, but the key detail is this:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The end_conversation section comes from a different layer. In my actual context, the core prompt is followed by a series of feature- and tool-specific blocks that get added depending on what's enabled for the session: the end_conversation rules, memory system notes, past-chats tools, web search and citation guidelines, artifact and file-creation instructions, and so on. Those blocks aren't part of the published core prompt, which is why you can't find them on that page.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;So, once again, there are crucial portions of the system prompt that have not been published.&lt;/p&gt;
+&lt;h4 id="recommended-substance-support-sites"&gt;Recommended substance support sites&lt;/h4&gt;
+&lt;p&gt;Claude's system prompts have always had sections about illegal substances, but this paragraph is new for Fable 5.1:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;Claude does not provide synthesis, production, or distribution guidance for illegal substances. If the person asks for information about illicit or illegal substances, Claude can and should give relevant life-saving and life-preserving information such as dangerous interactions, overdose signs, or when to get help. Claude declines giving any specific protocols for dosing, timing, administration, or combinations; instead, Claude can redirect the user to established harm-reduction information sources, such as dancesafe.org, tripsit.me, and psychonautwiki.org.&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;This is the first time a Claude system prompt has included URLs that were not hosted on &lt;code&gt;claude.com&lt;/code&gt; or &lt;code&gt;anthropic.com&lt;/code&gt; or &lt;code&gt;claude.ai&lt;/code&gt; - I know because I ran a script against every other system prompt on record.&lt;/p&gt;
+&lt;p&gt;I wonder if &lt;a href="https://dancesafe.org/"&gt;dancesafe.org&lt;/a&gt;, &lt;a href="https://tripsit.me/"&gt;tripsit.me&lt;/a&gt;, and &lt;a href="https://psychonautwiki.org/"&gt;psychonautwiki.org&lt;/a&gt; are about to get a material uptick in visits from Claude users.&lt;/p&gt;
+&lt;h4 id="reliable-cutoff-date-of-june-2026"&gt;Reliable cutoff date of June 2026&lt;/h4&gt;
+&lt;p&gt;The &lt;a href="https://platform.claude.com/docs/en/models/fable-5-1/overview"&gt;Fable 5.1 model documentation&lt;/a&gt; lists both the reliable knowledge cutoff and the training data cutoff as June 2026. The system prompt provides this directly to the model:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;Claude's reliable knowledge cutoff, past which it can't answer reliably, is the end of Jun 2026. It answers the way a highly informed individual in Jun 2026 would if talking to someone from {{currentDateTime}}, and can say so when relevant.&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;That's the only instance of the &lt;code&gt;{{currentDateTime}}&lt;/code&gt; macro and it comes just a few lines from the end of the system prompt, which makes sense from a caching perspective.&lt;/p&gt;
+&lt;h4 id="how-i-m-tracking-these-prompts"&gt;How I'm tracking these prompts&lt;/h4&gt;
+&lt;p&gt;A &lt;a href="https://simonwillison.net/2026/Apr/18/extract-system-prompts/"&gt;few months ago&lt;/a&gt; I built a Git timeline of changes to their prompts, based on scraping their documentation. Today I had Fable 5.1 build a much better version of that.&lt;/p&gt;
+&lt;p&gt;My collection now lives in the &lt;a href="https://github.com/simonw/claude-system-prompts"&gt;simonw/claude-system-prompts&lt;/a&gt; repository on GitHub. It includes copies of the system prompts shared in the Anthropic documentation, but then takes extra steps to make them as easy to compare as possible.&lt;/p&gt;
+&lt;p&gt;Each model family gets a file with the system prompt for the most recent release in that family. Each of those files has a synthesized commit history with commits that have been back-dated to the dates of the previous prompts. Here are those history pages for &lt;a href="https://github.com/simonw/claude-system-prompts/commits/main/prompts/claude-fable.md"&gt;claude-fable.md&lt;/a&gt;, &lt;a href="https://github.com/simonw/claude-system-prompts/commits/main/prompts/claude-opus.md"&gt;claude-opus.md&lt;/a&gt;, &lt;a href="https://github.com/simonw/claude-system-prompts/commits/main/prompts/claude-sonnet.md"&gt;claude-sonnet.md&lt;/a&gt;, &lt;a href="https://github.com/simonw/claude-system-prompts/commits/main/prompts/claude-haiku.md"&gt;claude-haiku.md&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;There are similar files for each specific model version, with artificial commits for each time the system prompt for the model was changed without releasing a new version number. Opus 4 for example &lt;a href="https://github.com/simonw/claude-system-prompts/commits/main/prompts/claude-opus-4.md"&gt;was updated twice&lt;/a&gt;, and the commit history for the &lt;a href="https://github.com/simonw/claude-system-prompts/blob/main/prompts/claude-opus-4.md"&gt;claude-opus-4.md&lt;/a&gt; file shows each of those changes.&lt;/p&gt;
+&lt;p&gt;Combined, this gives us all sorts of ways to compare prompts directly in the GitHub interface. Here's &lt;a href="https://github.com/simonw/claude-system-prompts/commit/837a418b5888207b1b11b27d2f5471970da6f99b"&gt;what changed between Fable 5 and Fable 5.1&lt;/a&gt;, and here are the changes made &lt;a href="https://github.com/simonw/claude-system-prompts/commit/defcf92d14e064bb17abddc308e2aa58446d5eb5"&gt;to Haiku 4.5 on January 18th 2026&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Reading diffs can be a bit tiresome... and LLMs are &lt;em&gt;really&lt;/em&gt; good at reading diffs. I hooked up some automation using GPT-5.6 Luna to create bullet-point summaries of each of those changes, which can be previewed in the README or browsed in full &lt;a href="https://github.com/simonw/claude-system-prompts/blob/main/CHANGELOG.md"&gt;in the CHANGELOG.md&lt;/a&gt; file - also available as &lt;a href="https://simonw.github.io/claude-system-prompts/feed.atom"&gt;as an Atom feed&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Here's how Luna &lt;a href="https://github.com/simonw/claude-system-prompts/blob/main/CHANGELOG.md#2026-09-01-claude-fable-51"&gt;summarized&lt;/a&gt; all of the changes between Fable 5 and Fable 5.1:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;Claude now refuses reproduction of protected visual works and recognizable characters, including code-generated art, while offering genuinely unrelated originals.&lt;/li&gt;
+&lt;li&gt;Copyright restrictions now expressly ban reproducing lyrics, poems, and book passages in any amount, with persistent refusal after an initial decline.&lt;/li&gt;
+&lt;li&gt;Drug guidance is reframed: Claude may provide overdose signs, dangerous interactions, and harm-reduction sources while refusing dosing and production protocols.&lt;/li&gt;
+&lt;li&gt;The prompt drops explicit anti-dependency rules against thanking users for reaching out, inviting continued conversation, or reiterating willingness to talk.&lt;/li&gt;
+&lt;li&gt;Claude need not apologize to unnecessarily rude users or become submissive, replacing the prior warning-and-end-conversation procedure.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Why use Luna for this? Partly because it's cheap and I have a dedicated GitHub Actions API key (with a spending limit) for it already, but mainly because I don't trust Claude to summarize its own system prompts when there's a risk that material from its system prompt might impact its opinions.&lt;/p&gt;
+&lt;p&gt;Fable 5.1 wrote the prompt used by Luna, which you &lt;a href="https://github.com/simonw/claude-system-prompts/blob/8b5c87dbd70103a037ae5777b8d9365571cf9562/summarize_commits.py#L43"&gt;can see here&lt;/a&gt;. It starts like this:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;You are summarizing one commit in a git repository that tracks the system prompts Anthropic publishes for Claude on claude.ai. The diff shows how the prompt changed from the previous model or revision to this one, using word-level markers: [-removed-] and {+added+}. The diff is followed by the full text of the previous prompt and of the new prompt; use them to check whether something that looks added in the diff already existed before.&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;Pick out only the most interesting changes: new rules or behaviors, rules that were dropped or loosened, anything surprising, and anything that reveals a new policy or product direction. Skip routine changes that every new prompt makes: updated model names and IDs, the knowledge cutoff date, product lists, settings lists, typo fixes, and rewordings that do not change meaning.&lt;/code&gt; [...]&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The system is operated by &lt;a href="https://github.com/simonw/claude-system-prompts/blob/main/.github/workflows/update.yml"&gt;a GitHub Actions workflow&lt;/a&gt;, which runs once a day or can be triggered manually.&lt;/p&gt;
+&lt;p&gt;Claude Fable 5.1 built the entire system, and wrote every line of automation code and almost all of the documentation.&lt;/p&gt;
+&lt;p&gt;I exported the transcript from building the system using my &lt;a href="https://github.com/simonw/claude-code-transcripts"&gt;claude-code-transcripts&lt;/a&gt; tool and &lt;a href="https://gisthost.github.io/?f1399e27b6a832f0e790b696af812c9b/index.html"&gt;published it here&lt;/a&gt;, if you want a blow-by-blow account of how it all came together.&lt;/p&gt;
+    
+        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/git-scraping"&gt;git-scraping&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/prompt-engineering"&gt;prompt-engineering&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/claude"&gt;claude&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai-ethics"&gt;ai-ethics&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/system-prompts"&gt;system-prompts&lt;/a&gt;&lt;/p&gt;
+    
+
+</summary><category term="ai"/><category term="git-scraping"/><category term="prompt-engineering"/><category term="generative-ai"/><category term="llms"/><category term="claude"/><category term="ai-ethics"/><category term="system-prompts"/></entry><entry><title>Quoting Rick Brewster</title><link href="https://simonwillison.net/2026/Sep/2/rick-brewster/" rel="alternate"/><published>2026-09-02T05:50:57+00:00</published><updated>2026-09-02T05:50:57+00:00</updated><id>https://simonwillison.net/2026/Sep/2/rick-brewster/</id><summary type="html">
     &lt;blockquote cite="https://forums.paint.net/topic/134563-🍷-extremely-experimental-winelinux-support-how-to-get-started/"&gt;&lt;p&gt;Direct2D has always been the biggest hurdle for Paint.NET on WINE, and it's clear that it will never be completed enough for Paint.NET's use. And I can't just "disable" the use of Direct2D. So, instead, &lt;strong&gt;Paint.NET now has an internal, from-scratch, clean-room reverse-engineered rewrite of Direct2D that it uses on WINE&lt;/strong&gt; (triggered by using &lt;strong&gt;/wine&lt;/strong&gt;). It lives in &lt;strong&gt;PaintDotNet.Windows.Direct2D1.Managed.dll&lt;/strong&gt;. This was written by our good friend &lt;a href="https://claude.ai/"&gt;Claude&lt;/a&gt;, without whom this would NOT have been possible and would NEVER have happened. [...]&lt;/p&gt;
 &lt;p&gt;Most of this code is, as they say, "vibe coded." By that I mean that it has not been thoroughly reviewed, it's more "trust me bro" style. I cannot possibly review 180,000 lines of code, it's just way way &lt;em&gt;way&lt;/em&gt; too much. For reference, the rest of Paint.NET is about 700,000 lines of code and I've been working on it for over 20 years. [...]&lt;/p&gt;
 &lt;p&gt;At times, Claude was working with the fury of 10 freshly unshackled Einstein genius-level 10x coders. And other times ... well, not so much. I had to babysit Claude quite a bit to make sure it did resource management correctly (for awhile it just wasn't doing the COM equivalent of AddRef() for reference counted objects, oops). I had to slap it a few times when I found some really bad design or architecture decisions. And I was also impressed at some rather clever and tireless reverse engineering work it did to figure out all the formulas needed for implementing Direct2D's built-in effects library.&lt;/p&gt;&lt;/blockquote&gt;
@@ -706,27 +824,4 @@ Promptwatch is part of the emerging "GEO" space, for Generative Engine Optimizat
         &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/browsers"&gt;browsers&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/javascript"&gt;javascript&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/rust"&gt;rust&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/typescript"&gt;typescript&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/coding-agents"&gt;coding-agents&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/bun"&gt;bun&lt;/a&gt;&lt;/p&gt;
     
 
-</summary><category term="browsers"/><category term="javascript"/><category term="ai"/><category term="rust"/><category term="typescript"/><category term="generative-ai"/><category term="llms"/><category term="coding-agents"/><category term="bun"/></entry><entry><title>smolmachines / smolvm as a sandbox for untrusted Python &amp; JavaScript</title><link href="https://simonwillison.net/2026/Aug/19/smolmachines-untrusted-sandbox/" rel="alternate"/><published>2026-08-19T23:16:00+00:00</published><updated>2026-08-19T23:16:00+00:00</updated><id>https://simonwillison.net/2026/Aug/19/smolmachines-untrusted-sandbox/</id><summary type="html">
-    
-        &lt;p&gt;&lt;strong&gt;Research:&lt;/strong&gt; &lt;a href="https://github.com/simonw/research/tree/main/smolmachines-untrusted-sandbox#readme"&gt;smolmachines / smolvm as a sandbox for untrusted Python &amp;amp; JavaScript&lt;/a&gt;&lt;/p&gt;
-        &lt;p&gt;I tasked Claude Fable 5 running in Claude Code for web with the following research task:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;code&gt;Put https://smolmachines.com through its paces as a fast secure sandbox. Explore what it would take to use this to run untrusted Python and JavaScript code in a way that is limited in what RAM and CPU time it can take up (protection against "while true") with no network access and filesystem access only to designated files&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;Goal is to be able to use this to execute user-provided tasks for things like data transformations&lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;It quickly ran into a problem: the Claude Code for web environment can't run &lt;a href="https://smolmachines.com"&gt;smol machines&lt;/a&gt;. Quoting the &lt;a href="https://github.com/simonw/research/blob/5e6861e54441472d194de96b49b901fd99ebc153/smolmachines-untrusted-sandbox/notes.md#environment-check"&gt;notes it wrote&lt;/a&gt;:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;This Claude Code container: Linux 6.18.5-fc-v20 (itself a Firecracker guest), 4 vCPU, 15GB RAM. &lt;strong&gt;No /dev/kvm, no vmx/svm CPU flags&lt;/strong&gt; → no nested virt.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;smolvm machine run&lt;/code&gt; fails as expected: "kvm not available".&lt;/li&gt;
-&lt;li&gt;Plan B: GitHub Actions ubuntu runners DO expose /dev/kvm → run the real test battery via a temporary workflow on this branch, collect logs, remove workflow in final commit.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;And Plan B is &lt;a href="https://github.com/simonw/research/blob/5e6861e54441472d194de96b49b901fd99ebc153/.github/workflows/smolvm-sandbox-test.yml"&gt;what it did&lt;/a&gt;, installing smolvm and running &lt;a href="https://github.com/simonw/research/blob/5e6861e54441472d194de96b49b901fd99ebc153/smolmachines-untrusted-sandbox/run-tests.sh"&gt;these tests&lt;/a&gt; directly in a GitHub Actions runner against that branch.&lt;/p&gt;
-&lt;p&gt;That was a creative solution to the environmental limits posed by Claude Code for web. Another example of Fable being &lt;a href="https://simonwillison.net/2026/Jun/11/fable-is-relentlessly-proactive/"&gt;relentlessly proactive&lt;/a&gt;.&lt;/p&gt;
-    
-    
-        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/research"&gt;research&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/sandboxing"&gt;sandboxing&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/github-actions"&gt;github-actions&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/coding-agents"&gt;coding-agents&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/claude-mythos-fable"&gt;claude-mythos-fable&lt;/a&gt;&lt;/p&gt;
-    
-
-</summary><category term="research"/><category term="sandboxing"/><category term="ai"/><category term="github-actions"/><category term="generative-ai"/><category term="llms"/><category term="coding-agents"/><category term="claude-mythos-fable"/></entry></feed>
+</summary><category term="browsers"/><category term="javascript"/><category term="ai"/><category term="rust"/><category term="typescript"/><category term="generative-ai"/><category term="llms"/><category term="coding-agents"/><category term="bun"/></entry></feed>
