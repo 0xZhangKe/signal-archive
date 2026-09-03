@@ -12,7 +12,7 @@
 	<atom:link href="https://blog.jetbrains.com/kotlin/feed/" rel="self" type="application/rss+xml" />
 	<link>https://blog.jetbrains.com</link>
 	<description>Developer Tools for Professionals and Teams</description>
-	<lastBuildDate>Fri, 28 Aug 2026 13:18:43 +0000</lastBuildDate>
+	<lastBuildDate>Thu, 03 Sep 2026 10:40:11 +0000</lastBuildDate>
 	<language>en-US</language>
 	<sy:updatePeriod>
 	hourly	</sy:updatePeriod>
@@ -28,6 +28,424 @@
 	<height>32</height>
 </image> 
 	<item>
+		<title>Kotlin Toolchain 0.12: Multiplatform Library Publishing, Wasm Apps, and More</title>
+		<link>https://blog.jetbrains.com/kotlin/2026/09/kotlin-toolchain-0-12-multiplatform-library-publishing-wasm-apps-and-more/</link>
+		
+		<dc:creator><![CDATA[Joffrey Bion]]></dc:creator>
+		<pubDate>Thu, 03 Sep 2026 10:40:05 +0000</pubDate>
+		<featuredImage>https://blog.jetbrains.com/wp-content/uploads/2026/09/KT-social-BlogFeatured-1280x720-1.png</featuredImage>		<product ><![CDATA[amper]]></product>
+		<category><![CDATA[kotlin]]></category>
+		<category><![CDATA[multiplatform]]></category>
+		<category><![CDATA[releases]]></category>
+		<category><![CDATA[toolchain]]></category>
+		<category><![CDATA[news]]></category>
+		<category><![CDATA[toolchains]]></category>
+		<guid isPermaLink="false">https://blog.jetbrains.com/?post_type=kotlin&#038;p=736282</guid>
+
+					<description><![CDATA[Kotlin Toolchain 0.12.0 is out. This release brings some long-awaited features: multiplatform libraries publication, a preview of Wasm application support, Compose Hot Reload from the command line, and more.  Read on for the details, and check the release notes for the full list of changes and bug fixes. Additionally, klibs.io now uses the Kotlin Toolchain [&#8230;]]]></description>
+										<content:encoded><![CDATA[
+<p>Kotlin Toolchain 0.12.0 is out. This release brings some long-awaited features: multiplatform libraries publication, a preview of Wasm application support, Compose Hot Reload from the command line, and more. </p>
+
+
+
+<p>Read on for the details, and check the <a href="https://github.com/JetBrains/kotlin-toolchain/releases/tag/v0.12.0" target="_blank" rel="noopener">release notes</a> for the full list of changes and bug fixes.</p>
+
+
+
+<p>Additionally, <a href="http://klibs.io" target="_blank" rel="noopener">klibs.io</a> now uses the Kotlin Toolchain in production. A real backend and not a sample, it’s built on JDK 21, Spring Boot 4 (with Spring AI), PostgreSQL, and OpenSearch. We’ve converted nine convention plugins to Kotlin Toolchain templates, and two Gradle plugins with no built-in equivalent: Jib and Git Properties, which we’ve implemented as local Kotlin Toolchain plugins. Check out the <a href="https://github.com/JetBrains/klibs-io" target="_blank" rel="noopener">sources</a> yourself.</p>
+
+
+
+<p><em>To get support for Kotlin Toolchain’s latest features, use </em><a href="https://www.jetbrains.com/idea/" target="_blank" rel="noopener"><em>IntelliJ IDEA 2026.2.1</em></a><em> (or newer). Make sure the latest version of the </em><a href="https://plugins.jetbrains.com/plugin/31850-kotlin-toolchain" target="_blank" rel="noopener"><em>Kotlin Toolchain plugin</em></a><em> is installed.&nbsp;</em></p>
+
+
+
+<p align="center"><a class="ek-link jb-download-button" href="https://kotl.in/zbd4nw" target="_blank" rel="noopener"><i class="download-icon"></i>Try the Kotlin Toolchain</a></p>
+
+
+
+<h2 class="wp-block-heading">Kotlin Multiplatform libraries publication</h2>
+
+
+
+<p>Library publishing arrived in preview in 0.11, but only for JVM libraries. Starting with 0.12, multiplatform libraries work too, with exactly the same configuration:</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">product:
+  type: lib
+  platforms: [jvm, android, iosArm64, iosSimulatorArm64, wasmJs]
+
+settings:
+  publishing:
+    enabled: true
+    group: org.example
+    version: 1.0.0</pre>
+
+
+
+<p>The Kotlin Toolchain publishes everything your users need to depend on your library from any of its targets: the common API, one artifact per platform, the sources, and the module publication metadata that lets build tools pick the right pieces automatically.</p>
+
+
+
+<p><br>Cinterop bindings are supported as well. They are published both commonized and per platform, so your users get the same C API you compiled against without setting up interop themselves. The result is consumable from Gradle projects like any other multiplatform library.<br></p>
+
+
+
+<p>For more details, see the <a href="https://kotlin-toolchain.org/latest/user-guide/publishing/" target="_blank" rel="noopener">documentation</a>.</p>
+
+
+
+<p>Note: Resources of Compose Multiplatform libraries are not part of the publication yet. Follow <a href="https://youtrack.jetbrains.com/issue/KTC-5698/Support-publication-of-composeResources-as-a-part-of-KMP-library-publication" target="_blank" rel="noopener">KTC-5698</a> for progress.</p>
+
+
+
+<h3 class="wp-block-heading">Better compliance with Maven Central quotas</h3>
+
+
+
+<p>Because of the new quotas on Maven Central publications that <a href="https://central.sonatype.org/publish/maven-central-publishing-limits/" target="_blank" rel="noopener">Sonatype will soon enforce</a>, we made a few notable changes to reduce the number of files published by default:</p>
+
+
+
+<ul class="wp-block-list">
+<li>Checksums of signature files (<code>.asc.sha1</code>) are not necessary and are no longer published.</li>
+
+
+
+<li>Only the <code>.md5</code> and <code>.sha1</code> checksums are published by default now. If you need to continue publishing the <code>.sha256</code> and <code>.sha512</code> checksums, use <code>settings.publishing.checksums: [md5, sha1, sha256, sha512]</code>.</li>
+</ul>
+
+
+
+<h2 class="wp-block-heading">Wasm application support</h2>
+
+
+
+<p><code>wasm-js/app</code> modules can now be built into a ready-to-use web application.</p>
+
+
+
+<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" fetchpriority="high" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/09/Wasm-app.png" alt="" class="wp-image-736383"/></figure>
+
+
+
+<p>Among the supported features are:</p>
+
+
+
+<ul class="wp-block-list">
+<li>Running Wasm apps with the <code>kotlin run</code> command.</li>
+
+
+
+<li>Customizing <code>index.html</code> and other resources.&nbsp;</li>
+
+
+
+<li>Fetching transitive npm dependencies from Kotlin Multiplatform libraries.</li>
+</ul>
+
+
+
+<p>More information on working with Wasm web applications is available in <a href="https://kotlin-toolchain.org/dev/user-guide/product-types/wasm-js-app/" target="_blank" rel="noopener">the documentation</a>.</p>
+
+
+
+<h2 class="wp-block-heading">Terminal UI improvements</h2>
+
+
+
+<p>We are actively working to make the output of the <code>kotlin</code> command less verbose and more user-friendly.&nbsp;</p>
+
+
+
+<h3 class="wp-block-heading">Diagnostics</h3>
+
+
+
+<p>For example, here are some of the recent diagnostics improvements:</p>
+
+
+
+<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/09/Diagnostics-before-and-after-2.png" alt="" class="wp-image-736410"/></figure>
+
+
+
+<h3 class="wp-block-heading">Tests in the status widget</h3>
+
+
+
+<p>Running tests are now visible in the status widget under the respective tasks and their suites. There are also short test execution statistics visible during the run.</p>
+
+
+
+<figure class="wp-block-video"><video autoplay controls loop muted src="https://blog.jetbrains.com/wp-content/uploads/2026/09/Running-tests.mov"></video></figure>
+
+
+
+<p>There are more things to iron out, but we’ll get there.</p>
+
+
+
+<h2 class="wp-block-heading">IDE improvements</h2>
+
+
+
+<h3 class="wp-block-heading">Compose preview support</h3>
+
+
+
+<p>Android modules and <code>kmp/lib</code> modules that have Android as one of their targets now support the Compose preview feature, powered by the <code>androidx.compose.ui.tooling.preview.Preview</code> annotation and the Android plugin.<br></p>
+
+
+
+<figure class="wp-block-video"><video autoplay controls loop muted src="https://blog.jetbrains.com/wp-content/uploads/2026/09/KTC-Android-Compose-Preview.mov"></video></figure>
+
+
+
+<h3 class="wp-block-heading">Better support for Compose resources</h3>
+
+
+
+<p>The IDE now correctly recognizes Compose resources, updates <code>Res</code> classes on the fly, provides navigation, completion, and refactorings that update both XMLs and your code.</p>
+
+
+
+<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/09/Compose-Resources.png" alt="" class="wp-image-736443"/></figure>
+
+
+
+<h3 class="wp-block-heading">Android tooling improvements</h3>
+
+
+
+<p>Adding to the Compose preview support mentioned above, we have also brought support for more of the Android features you are accustomed to, such as:</p>
+
+
+
+<ul class="wp-block-list">
+<li>Android Lint&nbsp;</li>
+
+
+
+<li>Live Edit</li>
+
+
+
+<li>Layout Inspector</li>
+
+
+
+<li>Resources (<code>R</code> class) navigation and completion</li>
+</ul>
+
+
+
+<h3 class="wp-block-heading">iOS improvements</h3>
+
+
+
+<p>Starting with IntelliJ IDEA 2026.2.1, the experience of working with iOS applications should be closer to what you’re used to in Gradle projects.</p>
+
+
+
+<p>The run configuration now lets you pick a device, configure Xcode options, and choose a debug/release configuration mode.</p>
+
+
+
+<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/09/Xcode-configuration.png" alt="" class="wp-image-736454"/></figure>
+
+
+
+<p>We’ve also fixed a few issues with Kotlin/Swift interoperability, which should be more stable now.</p>
+
+
+
+<h3 class="wp-block-heading">Inlay hints with coordinates of catalog dependencies</h3>
+
+
+
+<p>Catalog dependencies in module files and templates now have an inlay hint next to them displaying coordinates that each entry points to.</p>
+
+
+
+<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/09/Catalog-inlays.png" alt="" class="wp-image-736476"/></figure>
+
+
+
+<h2 class="wp-block-heading">Better Compose Hot Reload support</h2>
+
+
+
+<p>We now properly support Compose Hot Reload <strong>from the command line</strong> using the <code>kotlin run --compose-hot-reload-mode</code> command.</p>
+
+
+
+<h3 class="wp-block-heading">General improvements</h3>
+
+
+
+<ul class="wp-block-list">
+<li>The very first reload is now much faster and the build should consume fewer resources.</li>
+
+
+
+<li>The <em>Restart the application</em> action from the <em>DevTools</em> menu is now supported.</li>
+</ul>
+
+
+
+<h3 class="wp-block-heading">Compose Hot Reload MCP</h3>
+
+
+
+<p>We now support an MCP server for agents to interact with applications running with Compose Hot Reload.<br><br>To get started, add the following snippet in your <code>mcp.json</code>:</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="json" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">{
+    "mcpServers": {
+        "Compose Hot Reload": {
+            "command": "./kotlin",
+            "args": [
+                "compose-hot-reload-mcp-server"
+            ]
+        }
+    }
+}</pre>
+
+
+
+<p>With this, agents can interact with, reload, restart, and view window snapshots, and dump the tree of composables. Read more about these capabilities <a href="https://github.com/JetBrains/compose-hot-reload#mcp-server-for-ai-agents" target="_blank" rel="noopener">here</a>.</p>
+
+
+
+<h2 class="wp-block-heading">Other improvements</h2>
+
+
+
+<h3 class="wp-block-heading">New recommended local dependency format using the <code>//</code> prefix</h3>
+
+
+
+<p>Previously, the only way to define local module dependencies was to use relative paths starting with the <code>.</code> (dot) symbol. This approach had several problems. For example, moving a module from one directory level to another required changing all the dependency paths, such as from<code>../../foo</code> to <code>../foo</code>. And having a multitude of <code>../</code> in deeply nested directory structures generally made paths hard to read.</p>
+
+
+
+<p>The new recommended way to define local module dependencies is to use project-root-relative paths starting with the <code>//</code> prefix. You might be familiar with this syntax from tools like Bazel. The <code>//</code> prefix represents the project root directory and can be used not only in the <code>dependencies</code> block but in any place that expects a path as well, for example, <code>apply</code>.</p>
+
+
+
+<p>Before:</p>
+
+
+
+<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/09/Project-root-paths-before.png" alt="" class="wp-image-736489"/></figure>
+
+
+
+<p>After:</p>
+
+
+
+<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/09/Project-root-paths-after.png" alt="" class="wp-image-736500"/></figure>
+
+
+
+<p>The old relative-paths approach still works for now.</p>
+
+
+
+<p>This is a step toward allowing multiple modules with the same directory name.</p>
+
+
+
+<h2 class="wp-block-heading">Raised minimum JDK and Kotlin versions</h2>
+
+
+
+<p>Until now, the minimum JDK version supported by the Kotlin Toolchain was not clearly documented anywhere, and the build would just fail in different places if you used a JDK that was too old. There is now a clear diagnostic and a clear minimum: <strong>only JDK 17 and higher are supported</strong> to compile your code. You can still use <code>settings.jvm.release</code> to set a lower target if your code should be runnable on lower JREs.&nbsp;</p>
+
+
+
+<p>The minimum Kotlin compiler version was raised from 2.1.10 to 2.2.20. This allows simplifying our code, and is in line with the <a href="https://blog.jetbrains.com/kotlin/2026/05/security-support-policy-for-the-kotlin-standard-library/">new security support policy</a> for the Kotlin standard library.&nbsp;</p>
+
+
+
+<h2 class="wp-block-heading">Updated default versions</h2>
+
+
+
+<p>We’ve also updated some of the default versions for built-in toolchains and frameworks:</p>
+
+
+
+<ul class="wp-block-list">
+<li>Kotlin 2.4.10</li>
+
+
+
+<li>JDK 25</li>
+
+
+
+<li>JUnit Platform 6.1.3</li>
+
+
+
+<li>KSP 2.3.11</li>
+
+
+
+<li>Ktor 3.5.2</li>
+
+
+
+<li>Spring Boot 4.1.0</li>
+
+
+
+<li>DataFrame 1.0.0-rc01</li>
+
+
+
+<li>Kotlinx.rpc 0.10.3</li>
+</ul>
+
+
+
+<h2 class="wp-block-heading">Try Kotlin Toolchain 0.12.0</h2>
+
+
+
+<p>To get started with the Kotlin Toolchain, check out our <a href="https://kotl.in/zbd4nw" data-type="link" data-id="https://kotl.in/zbd4nw" target="_blank" rel="noopener"><em>Getting started</em></a> guide. Take a look at some examples, follow the tutorial, or read the comprehensive user guide, depending on your learning style.</p>
+
+
+
+<p align="center"><a class="ek-link jb-download-button" href="https://kotl.in/zbd4nw" target="_blank" rel="noopener"><i class="download-icon"></i>Try the Kotlin Toolchain</a></p>
+
+
+
+<p>To update an existing project, use the <code>kotlin update</code> command.</p>
+
+
+
+<h2 class="wp-block-heading">Share your feedback</h2>
+
+
+
+<p>The Kotlin Toolchain is still in Alpha and under active development. You can provide feedback about your experience by joining the discussion in the <a href="https://slack-chats.kotlinlang.org/c/kotlin-toolchain" target="_blank" rel="noopener">#kotlin-toolchain Slack channel</a> (get invite: <a href="https://kotl.in/slack" target="_blank" rel="noopener">https://kotl.in/slack</a>) or by sharing your suggestions and ideas in a <a href="https://youtrack.jetbrains.com/issues/KTC" target="_blank" rel="noopener">YouTrack issue</a>. Your input and use cases help shape the future of the Kotlin Toolchain!</p>
+
+
+
+<p></p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
 		<title>Compose Multiplatform 1.12.0 Released</title>
 		<link>https://blog.jetbrains.com/kotlin/2026/08/compose-multiplatform-1-12-0/</link>
 					<comments>https://blog.jetbrains.com/kotlin/2026/08/compose-multiplatform-1-12-0/#respond</comments>
@@ -86,7 +504,7 @@
 
 
 
-<figure class="wp-block-image size-full"><img fetchpriority="high" decoding="async" style="border-style: solid;border-width: 1px;border-color: lightgray;; width:100% !important; height:auto !important; max-width:100% !important;" src="https://blog.jetbrains.com/wp-content/uploads/2026/08/Screenshot-2026-08-25-at-01.36.40.png" alt="AI agent uses the MCP server" class="wp-image-734052"/></figure>
+<figure class="wp-block-image size-full"><img loading="lazy" decoding="async" style="border-style: solid;border-width: 1px;border-color: lightgray;; width:100% !important; height:auto !important; max-width:100% !important;" src="https://blog.jetbrains.com/wp-content/uploads/2026/08/Screenshot-2026-08-25-at-01.36.40.png" alt="AI agent uses the MCP server" class="wp-image-734052"/></figure>
 
 
 
@@ -106,7 +524,7 @@
 
 
 
-<figure class="wp-block-image size-full"><img decoding="async" style="border-style: solid;border-width: 1px;border-color: lightgray;; width:100% !important; height:auto !important; max-width:100% !important;" src="https://blog.jetbrains.com/wp-content/uploads/2026/08/Screenshot-2026-08-25-at-02.12.16.png" alt="Testing fonts" class="wp-image-734063"/></figure>
+<figure class="wp-block-image size-full"><img loading="lazy" decoding="async" style="border-style: solid;border-width: 1px;border-color: lightgray;; width:100% !important; height:auto !important; max-width:100% !important;" src="https://blog.jetbrains.com/wp-content/uploads/2026/08/Screenshot-2026-08-25-at-02.12.16.png" alt="Testing fonts" class="wp-image-734063"/></figure>
 
 
 
@@ -632,7 +1050,7 @@ sealed interface ExportError { /* its own set */ }</pre>
 
 
 
-<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/08/klibsio-4200-projects-by-tags.png" alt="" class="wp-image-731771"/></figure>
+<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/08/klibsio-4200-projects-by-tags.png" alt="" class="wp-image-731771"/></figure>
 
 
 
@@ -2708,7 +3126,7 @@ val issues: List&lt;Issue> = asLlm(response, hint = "Return all beginner-friendl
 
 
 
-<figure data-wp-context="{&quot;imageId&quot;:&quot;6a99335e61b6e&quot;}" data-wp-interactive="core/image" class="wp-block-image size-full wp-lightbox-container"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" data-wp-class--hide="state.isContentHidden" data-wp-class--show="state.isContentVisible" data-wp-init="callbacks.setButtonStyles" data-wp-on-async--click="actions.showLightbox" data-wp-on-async--load="callbacks.setButtonStyles" data-wp-on-async-window--resize="callbacks.setButtonStyles" src="https://blog.jetbrains.com/wp-content/uploads/2026/07/KT-Twitter_Facebook_LinkedIn-1200x675-1.png" alt="" class="wp-image-722875" /><button
+<figure data-wp-context="{&quot;imageId&quot;:&quot;6a9993976bc41&quot;}" data-wp-interactive="core/image" class="wp-block-image size-full wp-lightbox-container"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" data-wp-class--hide="state.isContentHidden" data-wp-class--show="state.isContentVisible" data-wp-init="callbacks.setButtonStyles" data-wp-on-async--click="actions.showLightbox" data-wp-on-async--load="callbacks.setButtonStyles" data-wp-on-async-window--resize="callbacks.setButtonStyles" src="https://blog.jetbrains.com/wp-content/uploads/2026/07/KT-Twitter_Facebook_LinkedIn-1200x675-1.png" alt="" class="wp-image-722875" /><button
 			class="lightbox-trigger"
 			type="button"
 			aria-haspopup="dialog"
@@ -2764,314 +3182,6 @@ val issues: List&lt;Issue> = asLlm(response, hint = "Return all beginner-friendl
             <a class="ek-link jb-download-button" title="Celebrate with us" href="https://kotlinlang.org/kotlin-effect/" target="_blank" rel="noopener" data-test="blog-article-cta" data-cl="true">Celebrate with us</a>
          </div>
 </div>
-]]></content:encoded>
-					
-		
-		
-			</item>
-		<item>
-		<title>The History of Kodee, Kotlin’s Mascot</title>
-		<link>https://blog.jetbrains.com/research/2026/07/the-history-of-kodee/</link>
-		
-		<dc:creator><![CDATA[Olga Vorobeva]]></dc:creator>
-		<pubDate>Thu, 09 Jul 2026 14:53:46 +0000</pubDate>
-		<featuredImage>https://blog.jetbrains.com/wp-content/uploads/2026/07/Blog-Featured-1280x720-1.png</featuredImage>		<product ><![CDATA[kotlin]]></product>
-		<product ><![CDATA[research]]></product>
-		<category><![CDATA[kotlin]]></category>
-		<category><![CDATA[research]]></category>
-		<category><![CDATA[design]]></category>
-		<category><![CDATA[cap-kodee]]></category>
-		<guid isPermaLink="false">https://blog.jetbrains.com/?post_type=research&#038;p=719177</guid>
-
-					<description><![CDATA[A few years back, the Kotlin team figured it was time their programming language had a mascot – something fun and friendly to make developers feel more at home. After all, so many other programming languages have their own characters – Gofer, elePHPant, Dart’s Dash, or Rust’s Ferris, for example. Bringing Kodee to life wasn’t [&#8230;]]]></description>
-										<content:encoded><![CDATA[
-<p>A few years back, the Kotlin team figured it was time their programming language had a mascot – something fun and friendly to make developers feel more at home. After all, so many other programming languages have their own characters – <a href="https://go.dev/blog/gopher" target="_blank" rel="noopener">Gofer</a>, <a href="https://www.php.net/elephpant.php" target="_blank" rel="noopener">elePHPant</a>, <a href="https://docs.flutter.dev/dash" target="_blank" rel="noopener">Dart’s Dash</a>, or <a href="https://rustacean.net/" target="_blank" rel="noopener">Rust’s Ferris,</a> for example.</p>
-
-
-
-<p>Bringing Kodee to life wasn’t just a design challenge; it was a deeply collaborative effort by the Kotlin Marketing team, together with the Design and Strategic Research teams at JetBrains. The project’s goal was to create a mascot that truly resonated with the developer community. To do that, Strategic Research team leaned into a structured approach: gathering feedback through surveys, analyzing user sentiment, and facilitating a focus group to uncover the values and traits developers wanted to see.&nbsp;</p>
-
-
-
-<p>What follows is a behind-the-scenes look at how thoughtful research and creative iteration turned a simple idea into a beloved mascot.</p>
-
-
-
-<h2 class="wp-block-heading">First iteration of the Kotlin mascot</h2>
-
-
-
-<p>The mascot project was initiated and driven by the Kotlin Marketing team. The first design concept was the result of a thoughtful and detailed creative process in which Kotlin designers explored everything from the character’s shape and traits to its personality. The initial idea was to introduce a robot companion that subtly echoed the Kotlin logo – one that was helpful and approachable by nature, with a screen for a face. A reliable sidekick, always ready to lend a hand!</p>
-
-
-
-<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/07/Blog-1-1.png" alt="" class="wp-image-719745"/></figure>
-
-
-
-<p><em>Preliminary sketches of the Kotlin mascot</em></p>
-
-
-
-<p>Following <a href="https://blog.jetbrains.com/kotlin/2021/10/introducing-the-kotlin-mascot/">its release</a>, the character received mostly positive feedback. However, a few social media channels and online forums made it clear that the character hadn’t quite clicked with some members of the Kotlin community. This is where the Kotlin Marketing and Strategic Research teams partnered to validate the direction, and the researchers launched a mixed-method project to better understand community sentiment and shape the next iteration. Here, user feedback was indispensable. We started by scouring the internet to get a general idea of how the community felt about the mascot. This allowed us to make a few initial adjustments. At the same time, we realized we needed to dig deeper, so we moved on to the survey phase.</p>
-
-
-
-<h3 class="wp-block-heading">Survey feedback gathering</h3>
-
-
-
-<p>The Strategic Research team organized a feedback round to learn more about developers&#8217; feelings about the character. We wanted to understand not just what people liked or disliked about the mascot, but also the reasons behind their sentiments. And the clock was ticking. With barely more than six months remaining before KotlinConf 2023, starting everything over from scratch (naming, production, etc.) wasn’t an option. Moreover, a lot of Kotlin users had already been vocal about liking the first variant, and it didn’t seem fair to totally replace a mascot that had already won the hearts of so many in the community.</p>
-
-
-
-<p>We kicked things off with a survey. As researchers, we’re used to getting responses that only express broader emotions (“It’s bad”, “I don’t like it”, etc.), so this time we designed the questions to help guide responses toward more specific insights. The survey included a mix of:</p>
-
-
-
-<ul class="wp-block-list">
-<li>Projective questions like “What specific mascots of other brands do you consider ‘good’ or ‘bad’?”&nbsp;</li>
-
-
-
-<li>Associative questions like “What comes to mind when you see this character?”</li>
-
-
-
-<li>Direct prompts like “What specifically don’t you like about this mascot, beyond just ‘I don’t like it’ or ‘It’s just bad’?”&nbsp;</li>
-</ul>
-
-
-
-<h3 class="wp-block-heading">Feedback round 1: Results</h3>
-
-
-
-<p>We went into this knowing that opinions would differ. After all, you can’t please everyone. But our goal was merely to find overarching patterns in the feedback – and in this regard, we succeeded.</p>
-
-
-
-<p>The most frequent concerns participants expressed were that the character:</p>
-
-
-
-<ul class="wp-block-list">
-<li>Didn’t feel charming or cute (which is typically expected from a mascot).&nbsp;</li>
-
-
-
-<li>Came across as too plastic and robotic.&nbsp;</li>
-
-
-
-<li>Lacked expression and personality.&nbsp;</li>
-
-
-
-<li>Had some visual quirks that bothered people (for example, the proportions, the oversized eyes, a missing mouth, and the color palette).</li>
-</ul>
-
-
-
-<h2 class="wp-block-heading">Second iteration of the Kotlin mascot</h2>
-
-
-
-<p>Next, we asked the design team to create three quick concept drafts – no deep detailing, just enough to capture the overall impression while reflecting the feedback we’d gathered.&nbsp;</p>
-
-
-
-<p>Each of the three sketches went in a different direction. One leaned into a more human-like but still robotic style; another took a more animal-like approach; and the third refined the original concept, adjusting its features based on the feedback we’d received.&nbsp;</p>
-
-
-
-<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/07/Blog-2.png" alt="" class="wp-image-719189"/></figure>
-
-
-
-<p><em>The three mascot variants</em></p>
-
-
-
-<p>Each draft gave us a fresh angle to consider, helping us explore what felt most relatable and visually appealing to the community.</p>
-
-
-
-<p>After their changes, three things were clear:&nbsp;</p>
-
-
-
-<ul class="wp-block-list">
-<li>The proportions felt more natural.</li>
-
-
-
-<li>The character’s personality had begun to shine through. It was no longer just a silent silhouette.</li>
-
-
-
-<li>Its emotions had become more expressive.</li>
-</ul>
-
-
-
-<p>The designers also made sure the color palette would work well with a wide range of different backgrounds, making the mascot more versatile. The Kotlin team intended to use the character in a wide variety of ways, so it had to fit naturally into any digital and real-life context and had to align with the general Kotlin brand design guidelines.</p>
-
-
-
-<h3 class="wp-block-heading">Focus group feedback</h3>
-
-
-
-<p>We planned to present the drafts during a guided focus group session, which would give participants the chance to share deeper feedback and help us choose the most promising direction to take things in. The idea for this focus group came from one of the researchers&#8217; backgrounds in urban anthropology and spatial development. A widely adopted approach in this field is participatory design, in which users of a space share their perspectives on how public areas should be shaped and experienced.</p>
-
-
-
-<p>To keep the process productive, we carefully applied the principles of <a href="https://en.wikipedia.org/wiki/Cognitive_interview" target="_blank" rel="noopener">cognitive interviewing</a> to uncover the implicit expectations and mental images of the participants. Some participants actually requested a preview of the drafts in advance, but we had to decline, so as to ensure we were getting a totally “fresh” reaction from every single session participant.</p>
-
-
-
-<p>We kicked the session off by dividing everyone into smaller groups to ensure every voice could be heard. The first task was to define the core values, keywords, and associations the Kotlin mascot should reflect. What key traits did the participants identify? They said it should be friendly and supportive, a little mischievous, and clearly tech-savvy. Participants also emphasized that the character should feel helpful and be something they’d be proud to show off.&nbsp;</p>
-
-
-
-<p>To guide the evaluation process, we set up a Miro board where participants could assess each mascot variant against the criteria they had established earlier in the session. The board was structured to reflect the key traits – like friendliness, tech-savviness, and a touch of playfulness –&nbsp;and allowed each group to visually map how well each character draft aligned with those values.</p>
-
-
-
-<p>This setup worked out as we expected: it made it easy to compare impressions across groups, highlight areas of consensus, and spot where a particular variant might fall short. Moreover, we visualized and mapped all the individual “mental images” of the character and managed to get all the participants to agree on those “personality traits”. This helped us gather structured, actionable feedback about the mascot’s appearance for the design team in a collaborative and engaging way.&nbsp;</p>
-
-
-
-<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/07/Blog-4.png" alt="" class="wp-image-719211"/></figure>
-
-
-
-<p><em>Miro board where participants evaluated mascot variants according to criteria they developed</em></p>
-
-
-
-<p>In the end, the refined version of the original character came out on top. By modifying its features based on community feedback – adding warmth, personality, and visual balance – we managed to strike the right chord with participants. The design stayed true to the initial concept while evolving into a more relatable mascot.</p>
-
-
-
-<p>And the winner is…</p>
-
-
-
-<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/07/Blog-3-1.png" alt="" class="wp-image-719805"/></figure>
-
-
-
-<p><em>Kodee toy specifications</em></p>
-
-
-
-<p>After that, designers spent some time refining the final version and aligning it with the feedback from the session. It took a few rounds to make sure everything was just right – from visual details to brand alignment.&nbsp;Once the design felt solid, Kotlin Marketing led the stakeholder approval process, aligning teams around the refined direction before moving into production.</p>
-
-
-
-<p>Eventually, the mascot was officially approved and ready to meet the world. And then came the final piece of the puzzle: the mascot’s name.&nbsp;</p>
-
-
-
-<h2 class="wp-block-heading">Naming the Kotlin community’s mascot</h2>
-
-
-
-<p>Naming the mascot turned out to be one of the most creative and surprisingly tricky parts of the process. We were looking for a name that felt tech-savvy and in line with Kotlin’s spirit, while also carrying a sense of warmth and approachability. Striking that balance wasn’t easy.</p>
-
-
-
-<p>To generate new ideas, the mascot working group split back up into teams so that each team could have a brainstorming session and work on the problem from their own angle. The Strategic Research team even used ChatGPT (a fairly novel strategy in early 2023!) to refine the list of options and bring it more in line with the focus group feedback we’d collected. Meanwhile, the Kotlin Marketing team also consulted the Twitter community (now X), and the response was incredible: we received hundreds of thoughtful, fun, and clever suggestions.&nbsp;</p>
-
-
-
-<p>After much deliberation, the Kotlin team narrowed it down to a short list of appealing options. To avoid copyright clashes or intercultural confusion, we invited JetBrains Localization team and Copyeditor team to check how each option might be received among people from various cultural and linguistic backgrounds. After this analysis, we landed on three finalists: Kodee, Milo, and Lilo. Picking one was no small feat. Milo was nice, but had no obvious relation to Kotlin. One key reason it edged out Lilo was flexibility. In many languages, “Lilo” would call to mind a shade of purple or violet. But since the mascot’s look was bound to evolve over time, we thought it was best not to use a name that was tied to a physical trait. Ultimately, the Kotlin team landed on Kodee, a playful nod to coding that felt right at home in the Kotlin ecosystem.&nbsp;</p>
-
-
-
-<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/07/Blog-5-1.png" alt="" class="wp-image-719816"/></figure>
-
-
-
-<p><strong>And just like that, Kodee was born – ready to meet the world, be animated in presentations, and featured on pins.</strong></p>
-
-
-
-<h2 class="wp-block-heading">Multiple versions of Kodee</h2>
-
-
-
-<p>The response to the new version of Kodee was overwhelmingly positive. Developers loved the refreshed design and personality, and it quickly became a recognizable part of the Kotlin identity.&nbsp;</p>
-
-
-
-<p>Today, Kodee takes many forms, from expressive emojis and animated stickers to physical merchandise like plush toys. It’s not just a mascot anymore – it’s a friendly face that brings the Kotlin community together across platforms and events.</p>
-
-
-
-<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/07/Blog-6.png" alt="" class="wp-image-719233"/></figure>
-
-
-
-<p><em>Different versions of Kodee, including plush, Lego, and life-sized forms</em></p>
-
-
-
-<p>Recently, Kodee has started resonating beyond the developer community. Earlier this year, the character was presented at Pictoplasma in Berlin, one of the world’s leading conferences dedicated to character design, storytelling, and contemporary visual culture. Introducing Kodee to an audience of designers, illustrators, and character creators demonstrated that the mascot can connect with people not only as a product symbol, but also as an independent character with its own identity and story. For us, this was an exciting milestone in Kodee’s evolution and a reminder that well-crafted characters can build bridges between different creative communities.</p>
-
-
-
-<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/07/Blog-7.png" alt="" class="wp-image-719244"/></figure>
-
-
-
-<p><em>Kodee&#8217;s story at Pictoplasma in Berlin</em>, <em>plush Kodee shown on the screen</em></p>
-
-
-
-<h2 class="wp-block-heading">Conclusion</h2>
-
-
-
-<p>Kodee&#8217;s journey from concept to community icon reflects a cross-functional effort by the Kotlin Marketing team in close collaboration with Design, Strategic Research, many other JetBrains teams, and the Kotlin community. What began as a simple idea for adding warmth and personality to the programming language evolved into a vibrant character shaped by feedback, creativity, and shared values.&nbsp;</p>
-
-
-
-<p>The greatest recognition for our mascot project came from the Kotlin community itself: Kodee was wholeheartedly adopted, creatively reinterpreted, and enthusiastically reproduced in countless ways, from digital artwork to handmade clay figures. It really became a character that Kotlin developers are proud to show off – one of the essential requirements for the mascot, as described by our focus group participants.</p>
-
-
-
-<p>With its expressive design, tech-savvy charm, and playful spirit, Kodee now stands out as more than just a mascot: it’s a symbol of Kotlin’s inclusive and developer-friendly culture, ready to grow alongside the community it represents.</p>
-
-
-
-<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/07/Blog-8.png" alt="" class="wp-image-719266"/></figure>
-
-
-
-<p><em>Kodee and its leading researcher, Olga Vorobeva</em></p>
-
-
-
-<h2 class="wp-block-heading">Many thanks to all teams involved:</h2>
-
-
-
-<p><strong>Researchers:</strong>&nbsp;<br>Leading researcher – Olga Vorobeva<br>Naming – Yanina Ledovaya, Sofia Kulikova<br>Focus group designers and facilitators – Olga Vorobeva, Yanina Ledovaya, Raisa Kanischeva, Evgenia Igolnikova, Sofia Kulikova</p>
-
-
-
-<p><strong>Designers:</strong><br>Main designer / Kodee’s “mother” – Tina Prokhorova<br>Positions and situations of the characters – Arina Kovrizhkina<br>Preliminary 3D version and animation – Kirill Malich<br>Final 3D version – Alexey Salmin<br>Final animation – Alena Sulza, Anastasia Ibragimova</p>
-
-
-
-<p><strong>Kotlin team representatives:</strong><br>VP of Product – Egor Tolstoy<br>Kotlin Marketing Team Lead – Ekaterina Volodko&nbsp;<br>PMM – Maria Krishtal<br>PMM – Ksenia Shneyveys<br>And other Kotlin team members who were always eager to help, brainstorm, and give feedback.</p>
-
-
-
-<p></p>
 ]]></content:encoded>
 					
 		
