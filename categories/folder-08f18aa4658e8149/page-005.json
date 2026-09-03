@@ -1,6 +1,39 @@
 {
   "items": [
     {
+      "id": "bce471a4b7702581d162c2ab",
+      "title": "解决Cloudflare Pages的308自动重定向问题",
+      "summary": "我在使用Cloudflare Pages的时候，发现了一个非常奇怪的问题，就是发布的带有.html后缀的网页，会自动308重定向到一个没有.html的地址，并且，这个行为是Cloudflare Pages底层硬编码，无法通过配置参数关闭。 这个问题我用中文咨询了所有主流AI，都没有得到好的解决，有给方案说，使用.htm代替.html，因为Cloudflare Pages不会重写.htm文件，但这对于老网站的SEO来说显然不行，还有一个方案说是使用 Pages 函数进行拦截，说将一段代码放入functions/[[path]].js 文件中，然后重新发布，然后就会返回 200 + HTML内容，不会再有308重定向的状态码。我按照其方法发布了，也不行。 接着，我使用Google搜索“Cloudflare Pag…",
+      "image": null,
+      "publishedAt": "2026-08-20T10:40:04Z",
+      "sourceId": "790d01957a9e753b",
+      "sourceTitle": "月光博客",
+      "link": "https://www.williamlong.info/archives/7558.html",
+      "detailPath": "articles/bce471a4b7702581d162c2ab.json"
+    },
+    {
+      "id": "7370961301518e5d32bed7c7",
+      "title": "牛来采访视频转发以及一些随想",
+      "summary": "找到了这么一个采访视频（冷知识：大连少儿台还在放送的时候台号是DL-6（笑）） 说起来我之前还在Home As … 继续阅读 牛来采访视频转发以及一些随想 →",
+      "image": "https://v1sta.xyz/wp-content/uploads/2026/08/image-6.png",
+      "publishedAt": "2026-08-20T07:28:37Z",
+      "sourceId": "d29b4f2186bb32e1",
+      "sourceTitle": "景の域",
+      "link": "https://v1sta.xyz/think/%e7%89%9b%e6%9d%a5%e9%87%87%e8%ae%bf%e8%a7%86%e9%a2%91%e8%bd%ac%e5%8f%91%e4%bb%a5%e5%8f%8a%e4%b8%80%e4%ba%9b%e9%9a%8f%e6%83%b3/",
+      "detailPath": "articles/7370961301518e5d32bed7c7.json"
+    },
+    {
+      "id": "fb4576b3a5101f902bb87c8c",
+      "title": "入蜀记 day453 冷雨",
+      "summary": "「冷雨。」",
+      "image": null,
+      "publishedAt": "2026-08-20T06:54:27Z",
+      "sourceId": "8e5dc5a8b5023a8e",
+      "sourceTitle": "折腾人生",
+      "link": "https://z.arlmy.me/posts/BBBPandINSW/INSW-ko/INSW_453/",
+      "detailPath": "articles/fb4576b3a5101f902bb87c8c.json"
+    },
+    {
       "id": "26553c31295ce083dade83cf",
       "title": "过七夕",
       "summary": "今年的七夕我没有感到什么节日气氛，可能是年纪到了，算法精了，知道推送节日促销消息给我是种浪费。一整天下来，只有麦当劳一家还在孜孜不倦地提醒我七夕到了，方法是在外卖袋子上附上了一条长达一米的打印纸条，内容是完整的一幅条漫：七夕了，带女朋友去吃麦乐堡吧。 相较而言，电话营销的精准度就要好很多。在七夕，我收到一个推销养老院的电话，然后收到一个推销墓地的电话，有一种趁着七夕要把我人生后半截一次性全给安排妥了的感觉。不精准的电话也有，一个来自深圳的电话打进来，很娴熟地问我：您孩子上次报的那个编程班马上要开学了，是否确定要来？接完电话有点伤感，感觉突然闯入了自己的平行人生，有个娃不说，我还安排娃学 Python，也就一随大流爹....... 我的七夕另有安排，主要项目是给老旧的中央空调安装上一个蓝牙控制器，然后把空调接入…",
@@ -626,39 +659,6 @@
       "sourceTitle": "一起和 Yoon 聊心事",
       "link": "https://yoon.club/1964/",
       "detailPath": "articles/ecded528d72133563b28f793.json"
-    },
-    {
-      "id": "a9a5d7f6c872d5fd62546ff3",
-      "title": "git fetch 实现断点续传",
-      "summary": "git fetch origin main --depth=1 一次只下一个 pack，包含所有缺失对象，国内这网络你懂的，断开就废了，然后从头下载，往往又出事； 老外不懂国内网络条件这么艰苦，只能自己让AI改造。结果： https://github.com/est/snippets/tree/master/git-fr 步骤： git fetch --filter=blob:none --depth=1 —— 只拉 commit+tree，这个速度很快，只有KB级别的传输 用 rev-list --objects --missing=print 算缺失集合，500 个 blob 一批回填 每轮重算缺失、只补缺的。 踩过的坑 git fetch origin <blobsha> 每次都会打印 fatal: b…",
-      "image": null,
-      "publishedAt": "2026-08-16T06:06:00Z",
-      "sourceId": "a864c53722a17b19",
-      "sourceTitle": "est's blog",
-      "link": "https://blog.est.im/2026/stdout-33",
-      "detailPath": "articles/a9a5d7f6c872d5fd62546ff3.json"
-    },
-    {
-      "id": "d134e1d74dbc2d6e054f27d3",
-      "title": "奥德修斯这个人",
-      "summary": "奥德赛和奥德修斯不是一回事，奥德修斯是人名，奥德赛是书名，意思是奥德修斯的故事，就像是岳飞和《说岳》一样。 无论从哪一个角度来看，奥德修斯都是讨人厌的家伙。诺兰选择马特·达蒙其实并不合适，此人太过正气，太过忠厚，观众因此而激发的怜悯和同情就显得有点便宜。在荷马史诗《奥德赛》的最后，读者对于奥德修斯的感情会很复杂，难以用单一情绪来概括。就是说，你可能依然讨厌这个人，但是你对他又有了一些新的想法。 为什么奥德修斯讨人厌？首先，因为他是个聪明人，人群里聪明人从来都让人讨厌，他们的聪明让人们觉得不安。奥德修斯很聪明，准确地说，应该是个狡诈的人，木马计这种诡诈的想法就出自他的脑袋，毕竟是智慧女神雅典娜所青睐的宠儿。 他狡诈又不安分，喜欢无事生非，平白无故给周围的人带去麻烦。比如说明明可以跟着联军大型舰队返回希腊，他非要…",
-      "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhc6pjuzqwCLZEjcwB3VYTqt_Hl7tFVJtS7OVgR7cbb3zFkruzmSZ4W1_askZhNzRLHxhafMibsZvxpyPzc06f-i7VDNjBI3-rh_5CR-ftyOGk5Ku9t2pm8hrZxFbo86dLiseplU5tpgspqWC7fli1T6yukCxM8lvFEdGymc6jJnWHGHTG77jTHkXceTis/s72-w525-h294-c/0_1%20-%202026-08-16T110722.335-gigapixel-cgi-2x.jpeg",
-      "publishedAt": "2026-08-16T04:59:34Z",
-      "sourceId": "095c6fbac5bbadfd",
-      "sourceTitle": "槽边往事",
-      "link": "https://www.hecaitou.com/2026/08/Odysseus-the-Man.html",
-      "detailPath": "articles/d134e1d74dbc2d6e054f27d3.json"
-    },
-    {
-      "id": "56f32c7d09b0a55875657b1c",
-      "title": "Wiwi.Blog 純文字版",
-      "summary": "網路超級超級慢，卻還是想讀 Wiwi.Blog 怎麼辦？",
-      "image": null,
-      "publishedAt": "2026-08-16T00:01:00Z",
-      "sourceId": "7f36c3da1e6b5c71",
-      "sourceTitle": "Wiwi.Blog Blog",
-      "link": "https://wiwi.blog/blog/wiwi-blog-txt",
-      "detailPath": "articles/56f32c7d09b0a55875657b1c.json"
     }
   ]
 }

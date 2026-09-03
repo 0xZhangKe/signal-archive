@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "cb261b891d615c6df38bd88c",
+      "title": "开始日更",
+      "summary": "王佩老师在白板报的公众号倡导了一个小活动，日更 100 天。 之前加入的一个读书群，每季度也组织类似活动，我比较保守，一直没有参加。一是写作时间少，二是想写的内容也不够丰沛，最重要的原因是，如今写作时不可避免会有一定的自我审查意识在里面。我时常注意到这件事，不喜欢，也没办法。觉得那还不如不写。 倒是最近读的《羊呆住了》一书，让我有些动摇，作者李盆文章造诣极高，文字像是陈酿，不知道在酒桶里泡了多少年，一闻，就舍不得喝，得小口咂摸。我读得很慢，经常读完一个段落就要想上好几天。他的文章很吸引我的地方，正是他成功地避开了自我审查，他选择在另一个赛道，不，是另一个平行宇宙里玩，那个宇宙就是「生活」。 彻底回归生活，一头扎进土里。李盆完成得很好。 他笔下的生活不是人物特稿，不是小镇奇闻，也不是社畜、丧、八卦新闻、科技创新…",
+      "image": null,
+      "publishedAt": "2021-02-22T00:00:00Z",
+      "sourceId": "fc41292f8a54624e",
+      "sourceTitle": "Elizen's Blog",
+      "link": "https://elizen.me/posts/2021/02/daily-000/",
+      "detailPath": "articles/cb261b891d615c6df38bd88c.json"
+    },
+    {
       "id": "e1fa5f508d5d0bed50dfb598",
       "title": "为nginx提供GeoIP2支持",
       "summary": "最近在处理站点的连接优化问题，需要通过检测访问者的 IP ，来选择是否经由 CloudFlare 代理，还是通过一个优化的直连地址进行体验优化。经过一些资料的比对，最终决定使用 GeoIP2 分辨来访者 IP 归属地，并通过 nginx 设置对应的规则来跳转访问。",
@@ -648,17 +659,6 @@
       "sourceTitle": "Elizen's Blog",
       "link": "https://elizen.me/posts/2020/11/%E4%B8%80%E4%B8%AA%E5%A5%BD%E7%94%A8%E7%9A%84%E7%AC%94%E8%AE%B0%E7%B3%BB%E7%BB%9F/",
       "detailPath": "articles/e9dc806d03f2697e4a6212ed.json"
-    },
-    {
-      "id": "226b669e2350207e4f982a7c",
-      "title": "Vue Axios请求数据 + 子组件渲染踩坑实例记录与解决方案",
-      "summary": "今日用 Vue 做前端学习时，踩到了一个大多数人都踩过的坑，特此记录。 代码如下： parent.vue 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 < template > < div > < hello :data = \"message\" ></ hello > </ div > </ template > < script > export default { components : { Hello }, data () { return { message : '' } }, created () { axios . get ( '/static/data.json' ). then (( response ) => { t…",
-      "image": null,
-      "publishedAt": "2020-11-09T09:37:00Z",
-      "sourceId": "3220115c042340a7",
-      "sourceTitle": "TaurusXin 的独立博客",
-      "link": "https://www.taurusxin.com/vue-issue-1/",
-      "detailPath": "articles/226b669e2350207e4f982a7c.json"
     }
   ]
 }
