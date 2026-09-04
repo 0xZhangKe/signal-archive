@@ -1,5 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-09-03T20:18:41+00:00</updated><author><name>Simon Willison</name></author><entry><title>GPT‑6 Astra</title><link href="https://simonwillison.net/2026/Sep/3/gpt6-astra/" rel="alternate"/><published>2026-09-03T20:18:41+00:00</published><updated>2026-09-03T20:18:41+00:00</updated><id>https://simonwillison.net/2026/Sep/3/gpt6-astra/</id><summary type="html">
+<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-09-04T05:54:40+00:00</updated><author><name>Simon Willison</name></author><entry><title>August newsletter is out</title><link href="https://simonwillison.net/2026/Sep/4/august-newsletter/" rel="alternate"/><published>2026-09-04T05:54:40+00:00</published><updated>2026-09-04T05:54:40+00:00</updated><id>https://simonwillison.net/2026/Sep/4/august-newsletter/</id><summary type="html">
+    &lt;p&gt;The August edition of my &lt;a href="https://github.com/sponsors/simonw/"&gt;sponsors-only monthly newsletter&lt;/a&gt; is out. If you are a sponsor (or if you start a sponsorship now) you can &lt;a href="https://github.com/simonw-private/monthly/blob/main/2026-08-august.md"&gt;access it here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;This month:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;We got more details on OpenAl's accidental cyberattacks&lt;/li&gt;
+&lt;li&gt;One-shotting Raccoon Heist games with Fable 5 and Sol 5.6&lt;/li&gt;
+&lt;li&gt;Claude auto mode&lt;/li&gt;
+&lt;li&gt;Understanding ChatGPT Work&lt;/li&gt;
+&lt;li&gt;Model releases&lt;/li&gt;
+&lt;li&gt;Miscellaneous bits and bobs&lt;/li&gt;
+&lt;li&gt;My projects&lt;/li&gt;
+&lt;li&gt;What I'm using at the moment&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Here's &lt;a href="https://github.com/simonw/monthly-newsletter-archive/blob/main/2026-07-july.md"&gt;a copy of the July newsletter&lt;/a&gt; as a preview of what you'll get. Pay $10/month to stay a month ahead of the free copy!&lt;/p&gt;
+
+    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/newsletter"&gt;newsletter&lt;/a&gt;&lt;/p&gt;
+
+
+
+</summary><category term="newsletter"/></entry><entry><title>GPT‑6 Astra</title><link href="https://simonwillison.net/2026/Sep/3/gpt6-astra/" rel="alternate"/><published>2026-09-03T20:18:41+00:00</published><updated>2026-09-03T20:18:41+00:00</updated><id>https://simonwillison.net/2026/Sep/3/gpt6-astra/</id><summary type="html">
     
 &lt;p&gt;&lt;strong&gt;&lt;a href="https://openai.com/index/gpt-6-astra/"&gt;GPT‑6 Astra&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 GPT-6 Astra is "rolling out today to a limited set of organizations and over the coming days will become available to all ChatGPT Plus, Pro, Business, and Enterprise users, as well as through the OpenAI API and AWS" - I've not tried it yet myself, so I don't have a great deal to say about it yet.&lt;/p&gt;
@@ -634,7 +653,7 @@ Anthropic are putting a great deal of faith in Claude Code's auto mode for prote
     
 &lt;p&gt;&lt;strong&gt;&lt;a href="https://qwen.ai/blog?id=qwen3.8-flash-next"&gt;Qwen3.8-Flash-Next&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 Another open weights model from Qwen. This one is "a multimodal MoE model that also serves as an early preview of the architecture used in Qwen4".&lt;/p&gt;
-&lt;p&gt;It's pretty big: 125B tokens, but only 6B active which means it gets a significant performance boost.&lt;/p&gt;
+&lt;p&gt;It's pretty big: 125B parameters but only 6B active which means it gets a significant performance boost.&lt;/p&gt;
 &lt;p&gt;I've been trying it out on a DGX Spark using &lt;a href="https://huggingface.co/unsloth/Qwen3.8-Flash-Next-GGUF"&gt;these Unsloth quantized models&lt;/a&gt;. I'm still exploring the model - so far I've tried the 72.5GB UD-IQ1_S one (producing &lt;a href="https://tools.simonwillison.net/markdown-svg-renderer#url=https%3A%2F%2Fgist.github.com%2Fsimonw%2Ff9c69ebdab90d8a45b8de4742cc7b840"&gt;these pelicans&lt;/a&gt;) and the 78.9GB UD-Q2_K_XL (producing &lt;a href="https://tools.simonwillison.net/markdown-svg-renderer#url=https%3A%2F%2Fgist.github.com%2Fsimonw%2F6ba7cbfc1a9336986703b41f7fccd73a"&gt;these&lt;/a&gt;).&lt;/p&gt;
 &lt;p&gt;My favorite so far was this xhigh reasoning effort one from UD-Q2_K_XL:&lt;/p&gt;
 &lt;p&gt;&lt;img alt="Flat vector illustration: a white pelican with an orange beak and orange legs rides a red bicycle along a sandy path, a wicker basket on the handlebars holding a blue fish, with green rolling hills, a small tree and bushes, white clouds and a bright yellow sun in a blue sky behind it" src="https://static.simonwillison.net/static/2026-08-27/IMG_7667.png" /&gt;
@@ -642,11 +661,11 @@ Another open weights model from Qwen. This one is "a multimodal MoE model that a
     &lt;p&gt;&lt;small&gt;&lt;/small&gt;Via &lt;a href="https://news.ycombinator.com/item?id=49448210"&gt;Hacker News&lt;/a&gt;&lt;/small&gt;&lt;/p&gt;
 
 
-    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/qwen"&gt;qwen&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/pelican-riding-a-bicycle"&gt;pelican-riding-a-bicycle&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai-in-china"&gt;ai-in-china&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/nvidia-spark"&gt;nvidia-spark&lt;/a&gt;&lt;/p&gt;
+    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/qwen"&gt;qwen&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/pelican-riding-a-bicycle"&gt;pelican-riding-a-bicycle&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llm-release"&gt;llm-release&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai-in-china"&gt;ai-in-china&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/nvidia-spark"&gt;nvidia-spark&lt;/a&gt;&lt;/p&gt;
 
 
 
-</summary><category term="ai"/><category term="generative-ai"/><category term="llms"/><category term="qwen"/><category term="pelican-riding-a-bicycle"/><category term="ai-in-china"/><category term="nvidia-spark"/></entry><entry><title>Quoting Paul Dix</title><link href="https://simonwillison.net/2026/Aug/26/paul-dix/" rel="alternate"/><published>2026-08-26T08:07:55+00:00</published><updated>2026-08-26T08:07:55+00:00</updated><id>https://simonwillison.net/2026/Aug/26/paul-dix/</id><summary type="html">
+</summary><category term="ai"/><category term="generative-ai"/><category term="llms"/><category term="qwen"/><category term="pelican-riding-a-bicycle"/><category term="llm-release"/><category term="ai-in-china"/><category term="nvidia-spark"/></entry><entry><title>Quoting Paul Dix</title><link href="https://simonwillison.net/2026/Aug/26/paul-dix/" rel="alternate"/><published>2026-08-26T08:07:55+00:00</published><updated>2026-08-26T08:07:55+00:00</updated><id>https://simonwillison.net/2026/Aug/26/paul-dix/</id><summary type="html">
     &lt;blockquote cite="https://pauldix.com/the-end-of-programming"&gt;&lt;p&gt;The fact that AI wrote 1M LOC and then refined it over the course of the next couple of months to produce a reliable piece of software that is currently running on millions of developer machines is absolutely mind blowing. And you can say, “well it’s not that impressive because they had an oracle to compare against, so it was simple to go from one language to another”, but I think that’s selling this entire thing short. If you can build a verification system and give proper direction, AI can produce a highly complex, highly sophisticated piece of software and it can continue to refine it until it just works.&lt;/p&gt;&lt;/blockquote&gt;
 &lt;p class="cite"&gt;&amp;mdash; &lt;a href="https://pauldix.com/the-end-of-programming"&gt;Paul Dix&lt;/a&gt;, The end of programming&lt;/p&gt;
 
@@ -841,13 +860,4 @@ Thomas Ptacek advocates for building real native user interfaces for even the sm
 
 
 
-</summary><category term="thomas-ptacek"/><category term="ai"/><category term="generative-ai"/><category term="llms"/><category term="vibe-coding"/><category term="coding-agents"/></entry><entry><title>Quoting Matt Webb</title><link href="https://simonwillison.net/2026/Aug/21/matt-webb/" rel="alternate"/><published>2026-08-21T15:06:26+00:00</published><updated>2026-08-21T15:06:26+00:00</updated><id>https://simonwillison.net/2026/Aug/21/matt-webb/</id><summary type="html">
-    &lt;blockquote cite="https://interconnected.org/home/2026/08/21/galactic"&gt;&lt;p&gt;After I released version 1.0, I figured I would have to do the rotations myself. So I sat down with ChatGPT and I didn’t get it to write the code, but I got it to educate me. With a patient, interactive tutor, I was able to finally do what I hadn’t by reading books and asking mathematician friends – I learnt how to use quaternions just enough to make the app work.&lt;/p&gt;
-&lt;p&gt;So learning doesn’t stop just because I outsource a bunch of thinking to AI. It pushes me to learn more. I like that as an outcome.&lt;/p&gt;&lt;/blockquote&gt;
-&lt;p class="cite"&gt;&amp;mdash; &lt;a href="https://interconnected.org/home/2026/08/21/galactic"&gt;Matt Webb&lt;/a&gt;, Galactic Compass 2: now with new augmented reality mode&lt;/p&gt;
-
-    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/matt-webb"&gt;matt-webb&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/chatgpt"&gt;chatgpt&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/education"&gt;education&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;&lt;/p&gt;
-
-
-
-</summary><category term="matt-webb"/><category term="generative-ai"/><category term="chatgpt"/><category term="education"/><category term="ai"/><category term="llms"/></entry></feed>
+</summary><category term="thomas-ptacek"/><category term="ai"/><category term="generative-ai"/><category term="llms"/><category term="vibe-coding"/><category term="coding-agents"/></entry></feed>
