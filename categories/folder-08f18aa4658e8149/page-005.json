@@ -1,6 +1,28 @@
 {
   "items": [
     {
+      "id": "7c63a69fef786830b65fd0b3",
+      "title": "acme.sh 从Webroot改为 NameSilo DNS 申请通配符证书踩坑记",
+      "summary": "我这边虽然用的是BT面板，但其在某次升级之后自动申请SSL证书功能就不好用了，所以一直用的是crontab + acme.sh自行更新证书。 当时的教程在这里： https://itlanyan.com/use-acme-sh-get-free-cert/ 前情提要 不说清楚我之前干了什么，就说不清楚我改了什么。其实都是照着上面的教程搞的，只不过沿用了宝塔的文件结构，相当简单。 安装 curl https://get.acme.sh | sh acme.sh安装成功后，会自动创建一个cron任务 运行`crontab -l`能够进行查看，`crontab -e`能编辑。 41 0 * * * \"/root/.acme.sh\"/acme.sh --cron --home \"/root/.acme.sh\" > /…",
+      "image": null,
+      "publishedAt": "2026-08-21T04:18:43Z",
+      "sourceId": "474e724b69cd3e76",
+      "sourceTitle": "破襪子",
+      "link": "https://pewae.com/2026/08/migrating-acme-sh-from-webroot-validation-to-namesilo-dns-for-lets-encrypt-wildcard-certificates.html",
+      "detailPath": "articles/7c63a69fef786830b65fd0b3.json"
+    },
+    {
+      "id": "4f7c4b2ecf08c24dfa68ebd0",
+      "title": "SmartPerfetto 2026.07.18-08.21 五周更新复盘：从 v1.2.0 到 v1.7.0",
+      "summary": "上一篇更新停在 2026 年 7 月 17 日的 v1.1.1。当时 SmartPerfetto 已经有双 Trace 工作台、Quick Mode、私有分析上下文、统一 Agent runtime，以及 Camera、Heap、GPU 等专项分析能力。 从 7 月 18 日到 8 月 21 日，仓库又向前走了五周，版本来到 v1.7.0。这一轮继续增加功能，也把更多精力放在知识来源、分发质量、权限隔离、结果完整性和可回滚改进上。 SmartPerfetto 正在从“能完成一次分析”走向“能在更多环境里稳定、可追溯地完成分析”。 本文以公开发布的 v1.7.0 代码为准，回顾 v1.1.1 之后加入的主要能力。 项目与上篇文章： SmartPerfetto： https://github.com/Gracke…",
+      "image": null,
+      "publishedAt": "2026-08-21T04:00:00Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2026/08/21/SmartPerfetto-Five-Week-Update/",
+      "detailPath": "articles/4f7c4b2ecf08c24dfa68ebd0.json"
+    },
+    {
       "id": "d1d3e151b345b14347f57560",
       "title": "破圈的风险",
       "summary": "如今的互联网基本上属于畜牧业，每个 App 圈养一群用户，App 之间切断通路，老死不相往来。于是，微博老登、虎扑直男、小红书群芳、朋友圈之交和直播间职业用爱发电家之间，人群特征差异很大，行为习惯差异很大，每日接触的信息差异也很大，圈圈不同。 以前说一个人在网上「火」了，意思是全平台都火。现在说一个人网上火了，是网红了，那很可能火在一个 App 里，红在一个 App里的一小群用户之间，可以称之为「分众火」。很自然的，在追逐流量的今天，「破圈」就成为了许多人追求的目标，要的就是大火全火阳光普照火。 然后，破圈就成为了翻车前奏。 圈养的结果，是在圈里培养出一批脸谱类似的用户。在一个圈里成功，只能说明适合这个圈里同类用户的口味。一旦破圈，就会进入陌生人群的视野，他们看待同一个人，同一件事，同一句话，可能会有完全不一…",
@@ -100,17 +122,6 @@
       "detailPath": "articles/659ecb4f1b905d2f6c044ec7.json"
     },
     {
-      "id": "13d91764ad2fcb585fdea482",
-      "title": "探险活宝OP",
-      "summary": "朋友们，一起来！ 探险活宝 我的最爱 老皮耍酷，阿宝耍呆 在这里 永远 欢乐精彩！",
-      "image": "https://v1sta.xyz/wp-content/uploads/2026/03/V1sta-Orb-Output512-2.png",
-      "publishedAt": "2026-08-20T21:12:05Z",
-      "sourceId": "d29b4f2186bb32e1",
-      "sourceTitle": "景の域",
-      "link": "https://v1sta.xyz/acg/%e6%8e%a2%e9%99%a9%e6%b4%bb%e5%ae%9dop/",
-      "detailPath": "articles/13d91764ad2fcb585fdea482.json"
-    },
-    {
       "id": "219c2b0c3f5e4c209a117864",
       "title": "【仗承】Unadorned Truth",
       "summary": "标题：Unadorned Truth 配对：主仗承 隐dio承 分级：R 说明：《美女与野兽》paro&nbs […]",
@@ -197,17 +208,6 @@
       "sourceTitle": "月光博客",
       "link": "https://www.williamlong.info/archives/7558.html",
       "detailPath": "articles/bce471a4b7702581d162c2ab.json"
-    },
-    {
-      "id": "7370961301518e5d32bed7c7",
-      "title": "牛来采访视频转发以及一些随想",
-      "summary": "找到了这么一个采访视频（冷知识：大连少儿台还在放送的时候台号是DL-6（笑）） 说起来我之前还在Home As … 继续阅读 牛来采访视频转发以及一些随想 →",
-      "image": "https://v1sta.xyz/wp-content/uploads/2026/08/image-6.png",
-      "publishedAt": "2026-08-20T07:28:37Z",
-      "sourceId": "d29b4f2186bb32e1",
-      "sourceTitle": "景の域",
-      "link": "https://v1sta.xyz/think/%e7%89%9b%e6%9d%a5%e9%87%87%e8%ae%bf%e8%a7%86%e9%a2%91%e8%bd%ac%e5%8f%91%e4%bb%a5%e5%8f%8a%e4%b8%80%e4%ba%9b%e9%9a%8f%e6%83%b3/",
-      "detailPath": "articles/7370961301518e5d32bed7c7.json"
     },
     {
       "id": "fb4576b3a5101f902bb87c8c",
