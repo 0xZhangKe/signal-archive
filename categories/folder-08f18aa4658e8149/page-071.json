@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "ff923f9e559d02876a7fda0e",
+      "title": "[Docker容器安全3]Docker文件存储 & 挂载宿主机 procfs 容器逃逸",
+      "summary": "Docker文件存储背景知识 Docker 镜像 Docker 镜像是一个由多个层（layers）组成的只读模板。这些层堆叠在一起，构成了一个完整的文件系统，镜像可以用来创建容器。 层（Layer） 每个层通常对应于 Dockerfile 中的一条指令（如 FROM、COPY、RUN 等）。这些层是只读的，并且通过叠加技术（union file system）组合在一起，形成了镜像的最终内容。 层的堆叠和镜像 只读层：这些层是只读的，并且是镜像的一部分。每个层包含了与前一层的差异部分。这些层共同构成了镜像的文件系统。 可写层：当容器启动时，会在镜像的所有只读层之上添加一个新的可写层，这一层是容器专有的，存储运行容器时的所有变更。 每个容器都有其自己的可写容器层，并且所有更改都存储在该容器层中，所以多个容器可以…",
+      "image": "https://skyblu3519.github.io/post-images/1715441777002.png",
+      "publishedAt": "2024-05-11T15:35:31Z",
+      "sourceId": "4f5bf353ca5bd538",
+      "sourceTitle": "skkyblu3",
+      "link": "https://skyblu3519.github.io/post/docker-rong-qi-an-quan-3docker-wen-jian-cun-chu-and-gua-zai-su-zhu-ji-procfs-rong-qi-tao-yi/",
+      "detailPath": "articles/ff923f9e559d02876a7fda0e.json"
+    },
+    {
       "id": "86fe1769a755d63f27b1e828",
       "title": "人生海海",
       "summary": "调休不想干活，琢磨着看本书来打发时间，于是就看到了这本早就躺在书架上的《人生海海》。 人生海海，山山而川，不过尔尔。 一口气读完，整体非常流畅。前半部分风趣幽默，后半部分则苦难当歌。全书以“我”的方式，向读者娓娓道来着上校曲折的一生，以至于在看完最后一页时，情不自禁的流下了眼泪。不知这些眼泪，到底是因为感动，还是因为解脱。 看这本书的时候让我想到了余华老师的《活着》，都是描述乡土与苦难，但这书总给我一种奇怪的感觉，好像是书中多了些悬疑，好像是上校并没有福贵那般坚韧，又好像是从文中读出了一些鸡汤味。 “人生海海”是一句闽南语，书中也给出了相应的解释，意为人生像大海一样变幻不定、起落浮沉，但总还是要好好地活下去；既然每个人都跑不掉逃不开，那不如去爱上生活；人生海海，敢死不叫勇气，活着才需要勇气；人要学会放下，放下…",
@@ -648,17 +659,6 @@
       "sourceTitle": "Elizen's Blog",
       "link": "https://elizen.me/posts/2024/03/happy-new-year-and-four-cocacola/",
       "detailPath": "articles/0d69b50fd88458e2ae2a9fd2.json"
-    },
-    {
-      "id": "af205122282df3980859d200",
-      "title": "日寄 20240304",
-      "summary": "日寄 | 20240304 · 那种成年累月积累起来的歌单就像是海渊，越往下听越被水压死死裹住，直到一口气完全 […]",
-      "image": null,
-      "publishedAt": "2024-03-04T01:17:55Z",
-      "sourceId": "3c6ccf75c8f41329",
-      "sourceTitle": "CC的数字花园",
-      "link": "https://cyrus19.cc/archives/58",
-      "detailPath": "articles/af205122282df3980859d200.json"
     }
   ]
 }
