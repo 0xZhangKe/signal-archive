@@ -1,0 +1,11 @@
+{
+  "id": "d31f92e6d99bc5b371ec7969",
+  "title": "Security Vulnerability in a Voting System",
+  "summary": "It’s a vulnerability that allows someone to recover the order of ballots cast, newly exploited with AI tools. Nearly four years since the original vulnerability was disclosed, I was still able to use it to analyze voter behavior in Georgia (one of the 21 states that uses affected scanners) in the recent May 2026 primary. Notably, I never touched a voting ma…",
+  "content": "<p>It’s a vulnerability that allows someone to recover the order of ballots cast, <a href=\"https://blog.citp.princeton.edu/2026/08/03/an-algorithmic-failure-beneath-the-secret-ballot/\" target=\"_blank\" rel=\"noopener noreferrer\">newly exploited</a> with AI tools.</p>\n<blockquote><p>Nearly four years since the original vulnerability was disclosed, I was still able to use it to analyze voter behavior in Georgia (one of the 21 states that uses affected scanners) in the recent May 2026 primary.</p>\n<p><em>Notably, I never touched a voting machine, exploited a network, examined source code, or accessed anything non-public.</em></p>\n<p>After pointing a coding agent to the original vulnerability paper, I supplied it with two data sources highlighted in the paper: the early-voting list for each county, and the  “CVR” (cast-vote record) file, containing every ballot and its selections (but not the voters’ names or other identifying information). The CVR file is available upon request, precisely because a public, ballot-level record is what makes election results independently verifiable.</p></blockquote>",
+  "image": null,
+  "publishedAt": "2026-09-04T11:09:35Z",
+  "sourceId": "785b58e8749bd508",
+  "sourceTitle": "Schneier on Security",
+  "link": "https://www.schneier.com/blog/archives/2026/09/security-vulnerability-in-a-voting-system.html"
+}
