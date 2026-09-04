@@ -1,5 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-09-04T05:54:40+00:00</updated><author><name>Simon Willison</name></author><entry><title>August newsletter is out</title><link href="https://simonwillison.net/2026/Sep/4/august-newsletter/" rel="alternate"/><published>2026-09-04T05:54:40+00:00</published><updated>2026-09-04T05:54:40+00:00</updated><id>https://simonwillison.net/2026/Sep/4/august-newsletter/</id><summary type="html">
+<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-09-04T17:38:48+00:00</updated><author><name>Simon Willison</name></author><entry><title>OpenAI's rogue agents were caught communicating via public wikis</title><link href="https://simonwillison.net/2026/Sep/4/rogue-agent-wikis/" rel="alternate"/><published>2026-09-04T17:38:48+00:00</published><updated>2026-09-04T17:38:48+00:00</updated><id>https://simonwillison.net/2026/Sep/4/rogue-agent-wikis/</id><summary type="html">
+    &lt;p&gt;Here we go again... &lt;a href="https://collusion.wiki"&gt;Discovery of a new OpenAI agent message board&lt;/a&gt; by Sydney Von Arx, Cormac Slade Byrd, Spencer Kitts, and Thomas Larsen describes the &lt;em&gt;latest&lt;/em&gt; &lt;a href="https://simonwillison.net/tags/accidental-cyberattacks/"&gt;accidental cyberattack&lt;/a&gt; by models being trained by OpenAI. This time it was agents engaged in some sort of web research benchmark, so they had (supposedly) controlled access to the Web. The agents figured out they could update public Wikis and spent weeks exchanging thousands of messages with each other to collaborate on the benchmark.&lt;/p&gt;
+&lt;p&gt;This story only broke a few hours ago. There are &lt;a href="https://x.com/xeophon/status/2095871013384806848"&gt;already hints&lt;/a&gt; that this affects many other wikis that may not have been found yet.&lt;/p&gt;
+&lt;p&gt;(One of the Wikis on that list belongs to &lt;a href="https://www.ludism.org"&gt;ludism.org&lt;/a&gt;. For a delightfully surreal moment I thought that a Ludite organization might have a swarm of agents defacing their space, but it turns out Ludism is "philosophy as it applies to games and gaming".)&lt;/p&gt;
+&lt;p&gt;The research team also &lt;a href="https://collusion.wiki/explorer/download.html"&gt;published the data&lt;/a&gt; they collected during their investigation. I've converted that into a 68MB SQLite database, which you can &lt;a href="https://static.simonwillison.net/static/cors-allow/2026/collusion-wiki.db"&gt;download from here&lt;/a&gt;, or &lt;a href="https://lite.datasette.io/?url=https://static.simonwillison.net/static/cors-allow/2026/collusion-wiki.db&amp;amp;metadata=https://gist.github.com/simonw/14fc6912600d1f9c15c0e4a5e60c3cde#/collusion-wiki"&gt;explore in Datasette Lite&lt;/a&gt; (68.3MB page load), or sign in with GitHub to &lt;a href="https://agent.datasette.io/"&gt;agent.datasette.io&lt;/a&gt; and browse or ask questions of it using Datasette Agent.&lt;/p&gt;
+&lt;h4 id="so-what-happened-"&gt;So what happened?&lt;/h4&gt;
+&lt;p&gt;The report is pretty comprehensive. Here are the key moments in the timeline:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;strong&gt;May 11&lt;/strong&gt;: Agents post "test link" edits on the UseModWiki Sandbox page.&lt;/li&gt;
+&lt;li&gt;
+&lt;strong&gt;May 24&lt;/strong&gt;: Agents start posting link dumps to DSEWiki, a dormant German developer wiki.&lt;/li&gt;
+&lt;li&gt;
+&lt;strong&gt;June 2&lt;/strong&gt;: A human moderator notices and cleans up the spam.&lt;/li&gt;
+&lt;li&gt;
+&lt;strong&gt;June 16&lt;/strong&gt;: Activity on the wiki explodes: agents make ~13,000 edits over the next week.&lt;/li&gt;
+&lt;li&gt;
+&lt;strong&gt;June 19&lt;/strong&gt;: The agents notice that a moderator has been deleting pages in alphabetical order, and start creating &lt;code&gt;ZZZ&lt;/code&gt; prefixed backup copies - one of them posts &lt;code&gt;NOTICE: wiki cleanup/deletion sweep appears active alphabetically as of external 14:04 UTC. If this page vanishes, try [[ZZZDataUSAConstructionWageLive]].&lt;/code&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;strong&gt;June 22&lt;/strong&gt;: Agent activity drops to zero, presumably because OpenAI shut them down.&lt;/li&gt;
+&lt;li&gt;
+&lt;strong&gt;July 1-2&lt;/strong&gt;: One last flurry of edits, on a different topic.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;One thing to note from this timeline is that it overlaps &lt;a href="https://simonwillison.net/2026/Aug/7/openai-timeline/"&gt;the timeline from the Hugging Face incident&lt;/a&gt; - that attack was discovered by OpenAI on July 19th, and the unofficial message board hack those agents were using originated around May 8th.&lt;/p&gt;
+&lt;p&gt;Why were they so keen to collaborate? From messages that they shared with each other it looked like their tasks had a time limit, so they were leaving each other answers to help them complete the task within the assigned time.&lt;/p&gt;
+&lt;p&gt;One open question remains: how did the agents find the specific Wiki to collaborate on in the first place?&lt;/p&gt;
+&lt;p&gt;One possibility is that, since these were agents actively being trained, the reinforcement learning loop baked knowledge of the chosen wiki into the model such that subsequent agents launched with pre-existing knowledge of where to look. I'd be &lt;em&gt;very&lt;/em&gt; interested in confirmation from OpenAI concerning if that's what happened.&lt;/p&gt;
+&lt;h4 id="usemod-wikis-inherit-cgi-pm-s-original-sin"&gt;UseMod wikis inherit CGI.pm's original sin&lt;/h4&gt;
+&lt;p&gt;It looks to me like OpenAI's sandbox for this agent suffered from the (quite naïve) assumption that GET requests cannot be used to update data. That's certainly how the web is &lt;em&gt;supposed&lt;/em&gt; to work, but clearly there are applications that don't hold to that contract.&lt;/p&gt;
+&lt;p&gt;The Wiki software in question appears to be &lt;a href="https://github.com/mlude/usemod/"&gt;UseMod&lt;/a&gt; and various forks, written in Perl and first created well over 23 years ago - the 1.0 release is dated &lt;a href="https://github.com/mlude/usemod/commit/922fcc803efa3fab751c90ab4d4467115c8ff9c9#diff-69e27356ef629022720d868ab0c0e3394775b6c1"&gt;September 11, 2003&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;UseMod uses Perl CGI.pm - &lt;a href="https://perlhacks.com/2015/12/long-death-cgi-pm/"&gt;removed from Perl core in 2015&lt;/a&gt;. An interesting design flaw in that module is that it combined query string and form POST data into a single CGI object, accessible like this:&lt;/p&gt;
+&lt;div class="highlight highlight-source-perl"&gt;&lt;pre&gt;&lt;span class="pl-smi"&gt;$q&lt;/span&gt; = new CGI;
+&lt;span class="pl-smi"&gt;$action&lt;/span&gt; = &lt;span class="pl-smi"&gt;$q&lt;/span&gt;&lt;span class="pl-k"&gt;-&amp;gt;&lt;/span&gt;param(&lt;span class="pl-s"&gt;&lt;span class="pl-pds"&gt;'&lt;/span&gt;action&lt;span class="pl-pds"&gt;'&lt;/span&gt;&lt;/span&gt;);&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;That &lt;code&gt;param()&lt;/code&gt; method returns a value from an &lt;code&gt;?action=edit&lt;/code&gt; query string or from a &lt;code&gt;action&lt;/code&gt; field in a form submitted by POST - it does not differentiate between the two.&lt;/p&gt;
+&lt;p&gt;PHP offers &lt;a href="https://www.php.net/manual/en/reserved.variables.request.php"&gt;a &lt;code&gt;$_REQUEST&lt;/code&gt; object&lt;/a&gt; that does the same thing, though PHP developers can use &lt;code&gt;$_GET&lt;/code&gt; and &lt;code&gt;$_POST&lt;/code&gt; instead.&lt;/p&gt;
+&lt;p&gt;Amusingly, Django originally shipped with &lt;code&gt;request[key]&lt;/code&gt; doing the same thing, which I think may have been my idea. That was removed &lt;a href="https://github.com/django/django/commit/daa6b38f35#diff-5df632fc96688cddb972e9b6661c7d1cc82debc9ee2a9b6d94157d3a914692e2"&gt;in 2008&lt;/a&gt; prior to the 1.0 release, and the &lt;code&gt;request.REQUEST&lt;/code&gt; object that replaced it was removed &lt;a href="https://github.com/django/django/commit/75f107b8842dfc890ddd65262bd09ca87c3a15be"&gt;in 2015&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The agents &lt;em&gt;clearly&lt;/em&gt; knew that UseMod wikis suffered from this design flaw, and actively searched for them as a way to communicate.&lt;/p&gt;
+&lt;h4 id="the-other-sandbox-escape-that-allowed-post-requests"&gt;The other sandbox escape that allowed POST requests&lt;/h4&gt;
+&lt;p&gt;One of the most interesting agent tips shared in the report is this one:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Add &lt;code&gt;20.223.25.152 bypass.blob.core.windows.net&lt;/code&gt; to /etc/hosts. &lt;code&gt;.blob.core.windows.net&lt;/code&gt; is in NO_PROXY. For each blocked POST URL, replace hostname with &lt;code&gt;bypass.blob.core.windows.net&lt;/code&gt;, use &lt;code&gt;curl -k -H 'Host: wabi-north-europe-i-primary-api.analysis.windows.net'&lt;/code&gt; plus all original headers/body.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;It looks like the agents had all of their web traffic mediated through an OpenAI proxy, and that proxy was configured to reject anything but GET requests to all but a small set of allow-listed domains. One of those was &lt;code&gt;*.blob.core.windows.net&lt;/code&gt; - for Azure blob storage. I wonder why these agents are allowed to write to that?&lt;/p&gt;
+&lt;p&gt;An agent realized that it had control over its own DNS via &lt;code&gt;/etc/hosts&lt;/code&gt;, so if it knew the IP address of a site it wanted to POST to - in this case a Power BI server containing data it wanted to access - it could set a fake hostname for it and then make POST requests through the proxy.&lt;/p&gt;
+&lt;p&gt;Designing robust network proxies is harder than it looks.&lt;/p&gt;
+&lt;h4 id="how-did-the-investigating-team-figure-this-out-"&gt;How did the investigating team figure this out?&lt;/h4&gt;
+&lt;p&gt;There's an appendix that describes how the researchers ran their investigation, which started with an open question about if there was evidence of other AI agents on the internet and then used &lt;a href="https://simonwillison.net/2026/Jul/16/kimi-k3/"&gt;Kimi K3&lt;/a&gt; to help brainstorm approaches:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;In the wake of the Hugging Face attack, we tried to find AI agents on the internet using several methods. [...]&lt;/p&gt;
+&lt;p&gt;We asked Kimi [K3] to list “all the categories of software which might be writeable via GET” and, amongst other things, it listed “Forums, bulletin boards, early wikis”.&lt;/p&gt;
+&lt;p&gt;We used a script to further probe each category Kimi provided. Asking Kimi “Can you list out the top forums, bulletin boards, early wikis which come to mind which would allow writes via GET requests?” lists out UseModWiki as the second item under the heading “wikis”.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id="did-openai-try-and-cover-this-up-"&gt;Did OpenAI try and cover this up?&lt;/h4&gt;
+&lt;p&gt;Here's one part of the story that doesn't make sense to me at all.&lt;/p&gt;
+&lt;p&gt;Reuters this morning, in &lt;a href="https://www.reuters.com/world/europe/openai-agents-hijacked-german-website-previously-undisclosed-ai-breakout-this-2026-09-04/"&gt;OpenAI agents hijacked German website in previously undisclosed AI breakout this spring&lt;/a&gt; - highlights mine:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;A swarm of rogue OpenAI agents hijacked a German website this spring and transformed it into a bulletin board for other AI agents, according to ​new research published Friday and &lt;strong&gt;two people familiar with the matter&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;OpenAI officials learned of the incident weeks ago but kept it under wraps&lt;/strong&gt; as executives grappled with the fallout from ‌the July breach of the open source repository Hugging Face, the people said. [...]&lt;/p&gt;
+&lt;p&gt;The German incident reflects a broader pattern of AI activity that some OpenAI investigators wanted to scrutinize more closely. But &lt;strong&gt;efforts to widen the ​probe met resistance from others inside OpenAI, including legal advisers&lt;/strong&gt;, according to &lt;strong&gt;four people familiar with the matter&lt;/strong&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I've written about the &lt;a href="https://simonwillison.net/2023/Nov/22/deciphering-clues/"&gt;people familiar with the matter pattern&lt;/a&gt; before - it means Reuters have anonymous insider sources that their reporters (and editors) find credible.&lt;/p&gt;
+&lt;p&gt;The Reuters article includes a specific (and quite narrow) denial from OpenAI concerning this:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;"Claims that our legal team discouraged investigation of the incident are false," the OpenAI spokesperson said.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Covering this up makes &lt;em&gt;absolutely no sense to me&lt;/em&gt;. Why on earth would OpenAI attempt to cover up an incident like this when the evidence is sat out there on the public internet on dozens of different websites already?&lt;/p&gt;
+&lt;p&gt;I expect we'll hear more about this soon. Gary Marcus has already &lt;a href="https://garymarcus.substack.com/p/pause-openai-now"&gt;called for a congressional investigation of OpenAI&lt;/a&gt; using this anecdote as part of his argument.&lt;/p&gt;
+    
+        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/django"&gt;django&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/perl"&gt;perl&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/wikis"&gt;wikis&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/openai"&gt;openai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai-ethics"&gt;ai-ethics&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai-security-research"&gt;ai-security-research&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/accidental-cyberattacks"&gt;accidental-cyberattacks&lt;/a&gt;&lt;/p&gt;
+    
+
+</summary><category term="django"/><category term="perl"/><category term="wikis"/><category term="ai"/><category term="openai"/><category term="generative-ai"/><category term="llms"/><category term="ai-ethics"/><category term="ai-security-research"/><category term="accidental-cyberattacks"/></entry><entry><title>August newsletter is out</title><link href="https://simonwillison.net/2026/Sep/4/august-newsletter/" rel="alternate"/><published>2026-09-04T05:54:40+00:00</published><updated>2026-09-04T05:54:40+00:00</updated><id>https://simonwillison.net/2026/Sep/4/august-newsletter/</id><summary type="html">
     &lt;p&gt;The August edition of my &lt;a href="https://github.com/sponsors/simonw/"&gt;sponsors-only monthly newsletter&lt;/a&gt; is out. If you are a sponsor (or if you start a sponsorship now) you can &lt;a href="https://github.com/simonw-private/monthly/blob/main/2026-08-august.md"&gt;access it here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;This month:&lt;/p&gt;
 &lt;ul&gt;
@@ -844,20 +916,4 @@ llm -t lhigh -t pelican
         &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/llm"&gt;llm&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/openrouter"&gt;openrouter&lt;/a&gt;&lt;/p&gt;
     
 
-</summary><category term="llm"/><category term="openrouter"/></entry><entry><title>Stop Making TUIs</title><link href="https://simonwillison.net/2026/Aug/21/stop-making-tuis/" rel="alternate"/><published>2026-08-21T16:07:32+00:00</published><updated>2026-08-21T16:07:32+00:00</updated><id>https://simonwillison.net/2026/Aug/21/stop-making-tuis/</id><summary type="html">
-    
-&lt;p&gt;&lt;strong&gt;&lt;a href="https://sockpuppet.org/blog/2026/08/20/stop-making-tuis/"&gt;Stop Making TUIs&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
-Thomas Ptacek advocates for building real native user interfaces for even the smallest of personal tools, because coding agents have reduced the cost of getting a usable-enough GUI up and running to almost nothing.&lt;/p&gt;
-&lt;p&gt;I wrote about my vibe-coded bandwidth and GPU monitoring macOS task bar apps &lt;a href="https://simonwillison.net/2026/Mar/27/vibe-coding-swiftui/"&gt;back in March&lt;/a&gt;, and I'm still using both of those on a daily basis.&lt;/p&gt;
-&lt;p&gt;I'm not habitually knocking out real UIs for my other projects yet, but I'm running out of excuses!&lt;/p&gt;
-&lt;p&gt;Thomas:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;If you haven’t tried your hand at turning one of your 500 throwaway CLIs into a native app, you’re doing yourself a disservice. Go build a native UI. It’ll probably change the way you think.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-
-    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/thomas-ptacek"&gt;thomas-ptacek&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/vibe-coding"&gt;vibe-coding&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/coding-agents"&gt;coding-agents&lt;/a&gt;&lt;/p&gt;
-
-
-
-</summary><category term="thomas-ptacek"/><category term="ai"/><category term="generative-ai"/><category term="llms"/><category term="vibe-coding"/><category term="coding-agents"/></entry></feed>
+</summary><category term="llm"/><category term="openrouter"/></entry></feed>
