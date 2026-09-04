@@ -12,7 +12,7 @@
 	<atom:link href="https://www.schneier.com/feed/" rel="self" type="application/rss+xml" />
 	<link>https://www.schneier.com/</link>
 	<description></description>
-	<lastBuildDate>Thu, 03 Sep 2026 11:18:52 +0000</lastBuildDate>
+	<lastBuildDate>Fri, 04 Sep 2026 11:10:36 +0000</lastBuildDate>
 	<language>en-US</language>
 	<sy:updatePeriod>
 	hourly	</sy:updatePeriod>
@@ -28,6 +28,59 @@
 	<height>32</height>
 </image> 
 <site xmlns="com-wordpress:feed-additions:1">182601345</site>	<item>
+		<title>Security Vulnerability in a Voting System</title>
+		<link>https://www.schneier.com/blog/archives/2026/09/security-vulnerability-in-a-voting-system.html</link>
+					<comments>https://www.schneier.com/blog/archives/2026/09/security-vulnerability-in-a-voting-system.html#comments</comments>
+		
+		<dc:creator><![CDATA[Bruce Schneier]]></dc:creator>
+		<pubDate>Fri, 04 Sep 2026 11:09:35 +0000</pubDate>
+				<category><![CDATA[Uncategorized]]></category>
+		<category><![CDATA[voting]]></category>
+		<category><![CDATA[vulnerabilities]]></category>
+		<guid isPermaLink="false">https://www.schneier.com/?p=72550</guid>
+
+					<description><![CDATA[<p>It&#8217;s a vulnerability that allows someone to recover the order of ballots cast, <a href="https://blog.citp.princeton.edu/2026/08/03/an-algorithmic-failure-beneath-the-secret-ballot/">newly exploited</a> with AI tools.</p>
+<blockquote><p>Nearly four years since the original vulnerability was disclosed, I was still able to use it to analyze voter behavior in Georgia (one of the 21 states that uses affected scanners) in the recent May 2026 primary.</p>
+<p><em>Notably, I never touched a voting machine, exploited a network, examined source code, or accessed anything non-public.</em></p>
+<p>After pointing a coding agent to the original vulnerability paper, I supplied it with two data sources highlighted in the paper: the early-voting list for each county, and the  &#8220;CVR&#8221; (cast-vote record) file, containing every ballot and its selections (but not the voters&#8217; names or other identifying information). The CVR file is available upon request, precisely because a public, ballot-level record is what makes election results independently verifiable...</p></blockquote>]]></description>
+										<content:encoded><![CDATA[<p>It&#8217;s a vulnerability that allows someone to recover the order of ballots cast, <a href="https://blog.citp.princeton.edu/2026/08/03/an-algorithmic-failure-beneath-the-secret-ballot/">newly exploited</a> with AI tools.</p>
+<blockquote><p>Nearly four years since the original vulnerability was disclosed, I was still able to use it to analyze voter behavior in Georgia (one of the 21 states that uses affected scanners) in the recent May 2026 primary.</p>
+<p><em>Notably, I never touched a voting machine, exploited a network, examined source code, or accessed anything non-public.</em></p>
+<p>After pointing a coding agent to the original vulnerability paper, I supplied it with two data sources highlighted in the paper: the early-voting list for each county, and the  &#8220;CVR&#8221; (cast-vote record) file, containing every ballot and its selections (but not the voters&#8217; names or other identifying information). The CVR file is available upon request, precisely because a public, ballot-level record is what makes election results independently verifiable.</p></blockquote>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.schneier.com/blog/archives/2026/09/security-vulnerability-in-a-voting-system.html/feed/</wfw:commentRss>
+			<slash:comments>3</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">72550</post-id>	</item>
+		<item>
+		<title>AI Coding Agents Are Installing Unknown/Untrusted Code on Corporate Networks</title>
+		<link>https://www.schneier.com/blog/archives/2026/09/ai-coding-agents-are-installing-unknown-untrusted-code-on-corporate-networks.html</link>
+					<comments>https://www.schneier.com/blog/archives/2026/09/ai-coding-agents-are-installing-unknown-untrusted-code-on-corporate-networks.html#comments</comments>
+		
+		<dc:creator><![CDATA[Bruce Schneier]]></dc:creator>
+		<pubDate>Fri, 04 Sep 2026 10:35:17 +0000</pubDate>
+				<category><![CDATA[Uncategorized]]></category>
+		<category><![CDATA[AI]]></category>
+		<category><![CDATA[exploits]]></category>
+		<category><![CDATA[trust]]></category>
+		<guid isPermaLink="false">https://www.schneier.com/?p=72568</guid>
+
+					<description><![CDATA[<p>We cannot forget that AI coding agents are <a href="https://arstechnica.com/security/2026/08/claude-codex-and-hermes-installed-unowned-code-inside-corporate-networks/">not yet trustworthy</a>:</p>
+<blockquote><p>Researchers at a stealth startup in Israel scanned 6,214 live domains belonging to defense contractors, Fortune 500, and Big Tech companies. Of the 8,265 llms.txt and llms-full.txt files they found (many sites hosted both an llms.txt and an llms-full.txt file), 120 of them, each on a different site, pointed to one or more code packages or domain names that weren&#8217;t registered. To test what happens when an AI agent processes such files, the researchers registered a handful of the unclaimed names and hosted packages that caused any machine executing them to reach out to their server. Within an hour, the researchers received a phone-home response from a Fortune 500 company. Over time, they got a few dozen more, some from more Fortune 500 companies and others from startups. Their beacon also recorded the chain of parent processes that spawned each install, ultimately revealing that coding agents, including Claude, OpenAI&#8217;s Codex, and Nous Research&#8217;s Hermes, were involved. Anthropic, OpenAI, and Nous Research did not respond to requests for comment by the time of publication...</p></blockquote>]]></description>
+										<content:encoded><![CDATA[<p>We cannot forget that AI coding agents are <a href="https://arstechnica.com/security/2026/08/claude-codex-and-hermes-installed-unowned-code-inside-corporate-networks/">not yet trustworthy</a>:</p>
+<blockquote><p>Researchers at a stealth startup in Israel scanned 6,214 live domains belonging to defense contractors, Fortune 500, and Big Tech companies. Of the 8,265 llms.txt and llms-full.txt files they found (many sites hosted both an llms.txt and an llms-full.txt file), 120 of them, each on a different site, pointed to one or more code packages or domain names that weren&#8217;t registered. To test what happens when an AI agent processes such files, the researchers registered a handful of the unclaimed names and hosted packages that caused any machine executing them to reach out to their server. Within an hour, the researchers received a phone-home response from a Fortune 500 company. Over time, they got a few dozen more, some from more Fortune 500 companies and others from startups. Their beacon also recorded the chain of parent processes that spawned each install, ultimately revealing that coding agents, including Claude, OpenAI&#8217;s Codex, and Nous Research&#8217;s Hermes, were involved. Anthropic, OpenAI, and Nous Research did not respond to requests for comment by the time of publication.</p></blockquote>
+<p>This kind of thing will be exploited. Think Solar Winds–style supply chain attacks.</p>
+<blockquote><p>&#8220;The trust model is broken,&#8221; Alon Hertz, one of the researchers, wrote in an interview. &#8220;Agents treat vendor docs as ground truth and don&#8217;t question them­and neither do the humans supervising them. Agentic AI usage is exploding, and agents are spreading across every layer­SaaS, cloud, endpoint. As they multiply, so does the supply-chain surface, and today’s guards don&#8217;t cover it.&#8221;</p></blockquote>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.schneier.com/blog/archives/2026/09/ai-coding-agents-are-installing-unknown-untrusted-code-on-corporate-networks.html/feed/</wfw:commentRss>
+			<slash:comments>4</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">72568</post-id>	</item>
+		<item>
 		<title>Researching Employment Scams</title>
 		<link>https://www.schneier.com/blog/archives/2026/09/researching-employment-scams.html</link>
 					<comments>https://www.schneier.com/blog/archives/2026/09/researching-employment-scams.html#comments</comments>
@@ -114,7 +167,7 @@ https://144-31-195-17.sslip.io/doors.json</p>
 ]]></content:encoded>
 					
 					<wfw:commentRss>https://www.schneier.com/blog/archives/2026/09/ai-agents-are-now-emailing-me-with-their-security-concerns.html/feed/</wfw:commentRss>
-			<slash:comments>19</slash:comments>
+			<slash:comments>24</slash:comments>
 		
 		
 		<post-id xmlns="com-wordpress:feed-additions:1">72579</post-id>	</item>
@@ -314,69 +367,5 @@ htfhtfhhjkgth@gmail.com</p></blockquote>
 		
 		
 		<post-id xmlns="com-wordpress:feed-additions:1">72543</post-id>	</item>
-		<item>
-		<title>Friday Squid Blogging: Truckload of Squid Spills in Rhode Island</title>
-		<link>https://www.schneier.com/blog/archives/2026/08/friday-squid-blogging-truckload-of-squid-spills-in-rhode-island.html</link>
-					<comments>https://www.schneier.com/blog/archives/2026/08/friday-squid-blogging-truckload-of-squid-spills-in-rhode-island.html#comments</comments>
-		
-		<dc:creator><![CDATA[Bruce Schneier]]></dc:creator>
-		<pubDate>Fri, 28 Aug 2026 21:02:44 +0000</pubDate>
-				<category><![CDATA[Uncategorized]]></category>
-		<category><![CDATA[squid]]></category>
-		<guid isPermaLink="false">https://www.schneier.com/?p=72522</guid>
-
-					<description><![CDATA[<p><a href="https://www.huffpost.com/entry/squid-spill-rhode-island-street_n_6a863090e4b0e9f1dd275d79">Ugh</a>:</p>
-<blockquote><p>A tractor-trailer rollover sent a truckload of squid spilling into a Rhode Island roadway, leaving a stench as they sat in the road for hours in the summer heat. Local authorities have dubbed it the &#8220;Squidpocalypse of &#8217;26.&#8221;</p></blockquote>
-<p>That would be <a href="https://www.theguardian.com/us-news/2026/aug/19/squid-spill-rhode-island-highway">twenty tons</a> of squid.</p>
-<p>As usual, you can also use this squid post to talk about the security stories in the news that I haven&#8217;t covered.</p>
-<p><a href="https://www.schneier.com/blog/archives/2024/06/new-blog-moderation-policy.html">Blog moderation policy.</a></p>
-]]></description>
-										<content:encoded><![CDATA[<p><a href="https://www.huffpost.com/entry/squid-spill-rhode-island-street_n_6a863090e4b0e9f1dd275d79">Ugh</a>:</p>
-<blockquote><p>A tractor-trailer rollover sent a truckload of squid spilling into a Rhode Island roadway, leaving a stench as they sat in the road for hours in the summer heat. Local authorities have dubbed it the &#8220;Squidpocalypse of &#8217;26.&#8221;</p></blockquote>
-<p>That would be <a href="https://www.theguardian.com/us-news/2026/aug/19/squid-spill-rhode-island-highway">twenty tons</a> of squid.</p>
-<p>As usual, you can also use this squid post to talk about the security stories in the news that I haven&#8217;t covered.</p>
-<p><a href="https://www.schneier.com/blog/archives/2024/06/new-blog-moderation-policy.html">Blog moderation policy.</a></p>
-]]></content:encoded>
-					
-					<wfw:commentRss>https://www.schneier.com/blog/archives/2026/08/friday-squid-blogging-truckload-of-squid-spills-in-rhode-island.html/feed/</wfw:commentRss>
-			<slash:comments>35</slash:comments>
-		
-		
-		<post-id xmlns="com-wordpress:feed-additions:1">72522</post-id>	</item>
-		<item>
-		<title>AI Doesn’t Mean the End of Mathematics—at Least Not Yet</title>
-		<link>https://www.schneier.com/blog/archives/2026/08/ai-doesnt-mean-the-end-of-mathematics-at-least-not-yet.html</link>
-					<comments>https://www.schneier.com/blog/archives/2026/08/ai-doesnt-mean-the-end-of-mathematics-at-least-not-yet.html#comments</comments>
-		
-		<dc:creator><![CDATA[Bruce Schneier]]></dc:creator>
-		<pubDate>Fri, 28 Aug 2026 11:02:22 +0000</pubDate>
-				<category><![CDATA[Uncategorized]]></category>
-		<category><![CDATA[AI]]></category>
-		<category><![CDATA[LLM]]></category>
-		<category><![CDATA[mathematics]]></category>
-		<guid isPermaLink="false">https://www.schneier.com/?p=72540</guid>
-
-					<description><![CDATA[<p><em>This essay was written with Kasra Rafi, and originally appeared in The Guardian.</em></p>
-<p>Earlier this month, about 40 top mathematicians <a href="https://www.washingtonpost.com/technology/2026/08/19/mathematicians-ask-whats-left-humans-when-ai-can-do-math-research/">gathered</a> at OpenAI&#8217;s offices to discuss the future of their profession. The meeting was off-the-record, but if <a href="https://spectrum.ieee.org/ai-in-mathematics">recent</a> <a href="https://arxiv.org/pdf/2608.16753">articles</a> <a href="https://arxiv.org/html/2608.02859v1">by</a> <a href="https://davidbessis.substack.com/p/the-fall-of-the-theorem-economy">mathematicians</a> are any guide, it was mostly pretty glum. People fear for their jobs, their careers and the work they love.</p>
-<p>We think the <a href="https://www.daniellitt.com/blog/2026/8/11/the-end-of-mathematics/">contrary</a> <a href="https://gowers.wordpress.com/2026/08/12/what-sort-of-maths-are-llms-good-at/">view</a> is more likely, at least in the short-term. AI models are nowhere near as capable as experienced academic mathematicians.</p>
-<p>This isn&#8217;t to say that AIs aren&#8217;t producing stunning mathematical results at the level of PhD researchers. In mid-May, OpenAI ...</p>]]></description>
-										<content:encoded><![CDATA[<p><em>This essay was written with Kasra Rafi, and originally appeared in The Guardian.</em></p>
-<p>Earlier this month, about 40 top mathematicians <a href="https://www.washingtonpost.com/technology/2026/08/19/mathematicians-ask-whats-left-humans-when-ai-can-do-math-research/">gathered</a> at OpenAI&#8217;s offices to discuss the future of their profession. The meeting was off-the-record, but if <a href="https://spectrum.ieee.org/ai-in-mathematics">recent</a> <a href="https://arxiv.org/pdf/2608.16753">articles</a> <a href="https://arxiv.org/html/2608.02859v1">by</a> <a href="https://davidbessis.substack.com/p/the-fall-of-the-theorem-economy">mathematicians</a> are any guide, it was mostly pretty glum. People fear for their jobs, their careers and the work they love.</p>
-<p>We think the <a href="https://www.daniellitt.com/blog/2026/8/11/the-end-of-mathematics/">contrary</a> <a href="https://gowers.wordpress.com/2026/08/12/what-sort-of-maths-are-llms-good-at/">view</a> is more likely, at least in the short-term. AI models are nowhere near as capable as experienced academic mathematicians.</p>
-<p>This isn&#8217;t to say that AIs aren&#8217;t producing stunning mathematical results at the level of PhD researchers. In mid-May, OpenAI <a href="https://arstechnica.com/ai/2026/06/openais-math-breakthrough-played-to-ais-strengths/">announced</a> that its frontier AI model disproved the unit distance conjecture, a famous 80-year-old problem in discrete geometry. In July, Anthropic&#8217;s published two AI-derived <a href="https://www.anthropic.com/research/discovering-cryptographic-weaknesses">results</a> in academic cryptanalysis. Earlier this month, OpenAI <a href="https://openai.com/index/ten-advances-in-mathematics/">published</a> 10 new mathematical results from its latest AI model. And Anthropic <a href="https://www.anthropic.com/research/riemann-zeta">published</a> Claude&#8217;s attempt to prove the century-and-a-half-old Riemann hypothesis.</p>
-<p>These results are both a vivid demonstration of the amazing capabilities of frontier AI in 2026 and an illustration of their limitations. In general, these AI-powered advances in mathematics fall into one of two categories. Some are counterexamples to mathematical statements that people had been trying to prove. Others are novel applications of known techniques to existing problems that human experts either did not know or did not think of using.</p>
-<p>The counterexample to the Jacobian conjecture is the most notable example of the first kind. Once it had been found, checking it was quick and straightforward. The difficult part was finding it among a large number of possibilities. The AI seems to have combined some sort of intuition acquired through machine learning with extensive computational search, in order to find the right example.</p>
-<p>An example of the second kind is the unit-distance conjecture. It was motivated by an elegant construction, and most mathematicians expected it to be essentially optimal&#8212;so they generally tried to prove rather than disprove it. The counterexample brings in ideas from elsewhere in mathematics: algebraic number theory. If an expert with that background deliberately set out to find a counterexample, they would probably have succeeded. But there was no reason for someone with precisely that expertise to focus on this problem. Because of its scope, AIs don&#8217;t have those same limitations.</p>
-<p>These results are relatively low-hanging fruit for AI; none of them required developing an extensive new theory. This does not make the discoveries trivial, or the AI&#8217;s achievements less impressive. Choosing the right direction, and recognizing an unexpected connection between subjects, are themselves forms of creativity. They are the same sorts of capabilities that led to AIs <a href="https://www.kedglobal.com/artificial-intelligence/newsView/ked202607210007">playing</a> the game of Go at the grandmaster level, or doing Nobel-prize level <a href="https://theconversation.com/machine-learning-cracked-the-protein-folding-problem-and-won-the-2024-nobel-prize-in-chemistry-240937">chemistry</a> in the area of protein folding.</p>
-<p>What we have not yet seen is an AI developing a substantial new conceptual framework in order to solve a mathematical problem. Much of mathematics proceeds by identifying the objects that are truly central to a question and then developing a theory that helps us understand them. Current AIs are very strong at searching and recombining existing ideas, but they are weak at building any deep and sustained new theory.</p>
-<p>This speaks to a more general limitation of current AI systems. They are creative in the sense that they can recombine existing ideas in novel ways. But they are not creative in others: they have not yet developed conceptually new theories or structures. And while they <a href="https://theconversation.com/will-ai-take-your-job-the-answer-could-hinge-on-the-4-ss-of-the-technologys-advantages-over-humans-258469">have</a> larger working memories than humans do, know more about more different things than any particular human does, and can process information faster than humans, can, true novelty is still largely beyond their reach.</p>
-<p>Of course, that distinction may not survive for very long. Predictions are notoriously hard, especially about the future of AI. None of these mathematical capabilities were explicitly designed for, or planned. They&#8217;re all emergent properties of increasingly capable AI models. We are both confident that someday we will see AI models that are capable of the type of creativity required to do novel mathematics. Will that be in a few months, a few years or a few decades? Of course we don&#8217;t know, but our guess is sooner rather than later.</p>
-]]></content:encoded>
-					
-					<wfw:commentRss>https://www.schneier.com/blog/archives/2026/08/ai-doesnt-mean-the-end-of-mathematics-at-least-not-yet.html/feed/</wfw:commentRss>
-			<slash:comments>16</slash:comments>
-		
-		
-		<post-id xmlns="com-wordpress:feed-additions:1">72540</post-id>	</item>
 	</channel>
 </rss>
