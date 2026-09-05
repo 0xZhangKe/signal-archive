@@ -1,5 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-09-04T17:38:48+00:00</updated><author><name>Simon Willison</name></author><entry><title>OpenAI's rogue agents were caught communicating via public wikis</title><link href="https://simonwillison.net/2026/Sep/4/rogue-agent-wikis/" rel="alternate"/><published>2026-09-04T17:38:48+00:00</published><updated>2026-09-04T17:38:48+00:00</updated><id>https://simonwillison.net/2026/Sep/4/rogue-agent-wikis/</id><summary type="html">
+<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-09-04T23:59:05+00:00</updated><author><name>Simon Willison</name></author><entry><title>The Pelican comparison grid for Astra is pretty interesting</title><link href="https://simonwillison.net/2026/Sep/4/astra-pelicans/" rel="alternate"/><published>2026-09-04T23:59:05+00:00</published><updated>2026-09-04T23:59:05+00:00</updated><id>https://simonwillison.net/2026/Sep/4/astra-pelicans/</id><summary type="html">
+    &lt;p&gt;I got access to GPT-6 Astra this afternoon, so naturally I used it to generate &lt;a href="https://simonwillison.net/tags/pelican-riding-a-bicycle/"&gt;SVGs of pelicans riding bicycles&lt;/a&gt; - at low, medium, high, xhigh and max reasoning levels (Astra doesn't support reasoning=none). Then I rendered those pelicans in &lt;a href="https://static.simonwillison.net/static/2026/gpt-6-and-5.6-pelicans.html"&gt;a comparison grid&lt;/a&gt; with GPT-5.6 Sol, Terra, and Luna, and beyond being fun the result was surprisingly useful.&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://static.simonwillison.net/static/2026/astra-grid-3.webp" alt="Comparison grid showing gpt-6-astra, gpt-5.6-sol, gpt-5.6-terra, gpt-5.6-luna at 6 different reasoning levels with pelicans and token counts and prices for each one." style="max-width: 100%;" /&gt;
+See &lt;a href="https://static.simonwillison.net/static/2026/gpt-6-and-5.6-pelicans.html"&gt;the grid&lt;/a&gt; for full quality images. Here's &lt;a href=""&gt;the transcript&lt;/a&gt; that created the GPT-6 Nova pelicans.&lt;/p&gt;
+&lt;p&gt;There are a few interesting things that stand out from this grid.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The Astra pelicans are &lt;em&gt;much better&lt;/em&gt;. The very best GPT-5.6-Sol pelican (I liked xhigh better than max) is still pretty clearly a bunch of abstract shapes. Every single one of the Astra pelicans, from low to xhigh, looks better than that. The Astra max one is really good.&lt;/li&gt;
+&lt;li&gt;Astra below max still doesn't reliably get the pelican legs on both sides of the frame.&lt;/li&gt;
+&lt;li&gt;In terms of cost, Astra may be around twice the price of Sol ($10/million input, $50/million output, compared to $5/$30 for Sol), but it uses significantly less tokens at each of the levels, making the prices at the different levels closer than they might otherwise be.&lt;/li&gt;
+&lt;li&gt;Astra low produces a better pelican than ANY of the GPT-5.6 Sol models at any level, for 9.55 cents. Spending 10 cents on any other model gets a much worse result.&lt;/li&gt;
+&lt;li&gt;Look at the input token counts: Astra and Luna both used 16 input tokens, Sol and Terra used 26. That's interesting.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I wonder if Astra and Luna are more related to each other than OpenAI let on?&lt;/p&gt;
+    
+        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/openai"&gt;openai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/pelican-riding-a-bicycle"&gt;pelican-riding-a-bicycle&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/gpt-6-astra"&gt;gpt-6-astra&lt;/a&gt;&lt;/p&gt;
+    
+
+</summary><category term="ai"/><category term="openai"/><category term="generative-ai"/><category term="llms"/><category term="pelican-riding-a-bicycle"/><category term="gpt-6-astra"/></entry><entry><title>OpenAI's rogue agents were caught communicating via public wikis</title><link href="https://simonwillison.net/2026/Sep/4/rogue-agent-wikis/" rel="alternate"/><published>2026-09-04T17:38:48+00:00</published><updated>2026-09-04T17:38:48+00:00</updated><id>https://simonwillison.net/2026/Sep/4/rogue-agent-wikis/</id><summary type="html">
     &lt;p&gt;Here we go again... &lt;a href="https://collusion.wiki"&gt;Discovery of a new OpenAI agent message board&lt;/a&gt; by Sydney Von Arx, Cormac Slade Byrd, Spencer Kitts, and Thomas Larsen describes the &lt;em&gt;latest&lt;/em&gt; &lt;a href="https://simonwillison.net/tags/accidental-cyberattacks/"&gt;accidental cyberattack&lt;/a&gt; by models being trained by OpenAI. This time it was agents engaged in some sort of web research benchmark, so they had (supposedly) controlled access to the Web. The agents figured out they could update public Wikis and spent weeks exchanging thousands of messages with each other to collaborate on the benchmark.&lt;/p&gt;
 &lt;p&gt;This story only broke a few hours ago. There are &lt;a href="https://x.com/xeophon/status/2095871013384806848"&gt;already hints&lt;/a&gt; that this affects many other wikis that may not have been found yet.&lt;/p&gt;
 &lt;p&gt;(One of the Wikis on that list belongs to &lt;a href="https://www.ludism.org"&gt;ludism.org&lt;/a&gt;. For a delightfully surreal moment I thought that a Ludite organization might have a swarm of agents defacing their space, but it turns out Ludism is "philosophy as it applies to games and gaming".)&lt;/p&gt;
@@ -115,11 +132,11 @@ GPT-6 Astra is "rolling out today to a limited set of organizations and over the
     &lt;p&gt;&lt;small&gt;&lt;/small&gt;Via &lt;a href="https://news.ycombinator.com/item?id=49554643"&gt;Hacker News&lt;/a&gt;&lt;/small&gt;&lt;/p&gt;
 
 
-    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/openai"&gt;openai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llm-release"&gt;llm-release&lt;/a&gt;&lt;/p&gt;
+    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/openai"&gt;openai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llm-release"&gt;llm-release&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/gpt-6-astra"&gt;gpt-6-astra&lt;/a&gt;&lt;/p&gt;
 
 
 
-</summary><category term="ai"/><category term="openai"/><category term="generative-ai"/><category term="llms"/><category term="llm-release"/></entry><entry><title>llm-gemini 0.34</title><link href="https://simonwillison.net/2026/Sep/2/llm-gemini/" rel="alternate"/><published>2026-09-02T16:39:38+00:00</published><updated>2026-09-02T16:39:38+00:00</updated><id>https://simonwillison.net/2026/Sep/2/llm-gemini/</id><summary type="html">
+</summary><category term="ai"/><category term="openai"/><category term="generative-ai"/><category term="llms"/><category term="llm-release"/><category term="gpt-6-astra"/></entry><entry><title>llm-gemini 0.34</title><link href="https://simonwillison.net/2026/Sep/2/llm-gemini/" rel="alternate"/><published>2026-09-02T16:39:38+00:00</published><updated>2026-09-02T16:39:38+00:00</updated><id>https://simonwillison.net/2026/Sep/2/llm-gemini/</id><summary type="html">
     
         &lt;p&gt;&lt;strong&gt;Release:&lt;/strong&gt; &lt;a href="https://github.com/simonw/llm-gemini/releases/tag/0.34"&gt;llm-gemini 0.34&lt;/a&gt;&lt;/p&gt;
         &lt;blockquote&gt;
@@ -900,20 +917,4 @@ llm -t lhigh -t pelican
         &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/httpx"&gt;httpx&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/openai"&gt;openai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llm"&gt;llm&lt;/a&gt;&lt;/p&gt;
     
 
-</summary><category term="httpx"/><category term="openai"/><category term="llm"/></entry><entry><title>llm-openrouter 0.7</title><link href="https://simonwillison.net/2026/Aug/21/llm-openrouter/" rel="alternate"/><published>2026-08-21T16:58:19+00:00</published><updated>2026-08-21T16:58:19+00:00</updated><id>https://simonwillison.net/2026/Aug/21/llm-openrouter/</id><summary type="html">
-    
-        &lt;p&gt;&lt;strong&gt;Release:&lt;/strong&gt; &lt;a href="https://github.com/simonw/llm-openrouter/releases/tag/0.7"&gt;llm-openrouter 0.7&lt;/a&gt;&lt;/p&gt;
-        &lt;p&gt;Now that this plugin is compatible with &lt;a href="https://simonwillison.net/2026/Aug/4/new-release-of-llm/"&gt;LLM 0.32&lt;/a&gt; it can display the reasoning traces for LLMs available through OpenRouter.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;Updated for compatibility with &lt;a href="https://llm.datasette.io/en/stable/changelog.html#v0-32"&gt;LLM 0.32&lt;/a&gt;.&lt;/li&gt;
-&lt;li&gt;Models now use OpenRouter's implementation of the &lt;a href="https://openrouter.ai/docs/api_reference/responses/overview"&gt;Responses API&lt;/a&gt;.&lt;/li&gt;
-&lt;li&gt;Three new server-side tools: &lt;a href="https://github.com/simonw/llm-openrouter#shell"&gt;Shell&lt;/a&gt;, &lt;a href="https://github.com/simonw/llm-openrouter#web-fetch"&gt;WebFetch&lt;/a&gt;, and &lt;a href="https://github.com/simonw/llm-openrouter#web-search"&gt;WebSearch&lt;/a&gt;. Enable these with options like &lt;code&gt;-T WebSearch&lt;/code&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-    
-    
-        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/llm"&gt;llm&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/openrouter"&gt;openrouter&lt;/a&gt;&lt;/p&gt;
-    
-
-</summary><category term="llm"/><category term="openrouter"/></entry></feed>
+</summary><category term="httpx"/><category term="openai"/><category term="llm"/></entry></feed>
