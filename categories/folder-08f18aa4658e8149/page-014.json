@@ -1,6 +1,39 @@
 {
   "items": [
     {
+      "id": "b8e7abb8cfbc6b56f0110902",
+      "title": "[AI] curl -NT. 导致100% CPU原因",
+      "summary": "有AI就是好使，搁以前自己得盯半天也看不明白。。。 问题确认 curl -NT. 在连接一个持续推送数据的 streaming 服务器时，会产生一个 紧密的 pause/unpause 循环 ，导致 100% CPU。 根因分析 -T. （注意是点号，不是减号）将 stdin 设为 非阻塞模式 ，然后依赖 EAGAIN + CURL_READFUNC_PAUSE 机制来避免阻塞。核心循环发生在三个回调之间： 第一步 — 上传尝试失败 （ src/tool_cb_rea.c ）： { rc = read(per->infd, buffer, sz * nmemb); if(rc < 0) { if(errno == EAGAIN) { errno = 0; config->readbusy = TRUE; re…",
+      "image": null,
+      "publishedAt": "2026-07-08T08:05:00Z",
+      "sourceId": "a864c53722a17b19",
+      "sourceTitle": "est's blog",
+      "link": "https://blog.est.im/2026/stdout-25",
+      "detailPath": "articles/b8e7abb8cfbc6b56f0110902.json"
+    },
+    {
+      "id": "5a230e874a4d80c944dfe12b",
+      "title": "交流電專用電錶 DM55-1",
+      "summary": "交流電專用電錶 # 音響工作時，我的腰間一定會掛一個交流電的電錶，因爲要確保電壓正確才不會燒壞器材。 交流電小電錶 之前到夜市幫忙時， 發電機配錯電 成 220v，能夠發現就是因爲在接上電器前確認電壓，是我的標準 SOP。父親看到後問我那個是哪裡買的，他也想要。這顆很小、又好攜帶，還會發光好閱讀，太方便了，而且價格不到 100 元新臺幣。 這個驗電工具拆開之後會發現有一大半都是空的，因此可以在外殼鑽孔來穿鑰匙圈，如此一來就能掛在腰間使用了。我這個是 樂健 的老闆幫我製作的，超感恩！ 套上鑰匙圈的交流電小電錶 鑰匙圈的另外一段是易拉扣 1 ，可以直接伸縮、拉長，不需要從腰部取下來就能使用。 購買連結 # 不知道實體店面哪裡有賣，但 蝦皮購物 跟 淘宝 上都有。 其實我不是很喜歡在 Blog 放上蝦皮連結，因爲電…",
+      "image": null,
+      "publishedAt": "2026-07-08T07:15:43Z",
+      "sourceId": "199cdf92fc46bfcd",
+      "sourceTitle": "Eddie Lv",
+      "link": "https://eddielv.com/musings/ac-meter/",
+      "detailPath": "articles/5a230e874a4d80c944dfe12b.json"
+    },
+    {
+      "id": "1afef0b27bc79072004b22c6",
+      "title": "大雨",
+      "summary": "山东昨天的雨真大，回了趟老家，因为大风把村道的树都吹倒了，走不了，就在老家住了一晚，外面电闪雷鸣，我做了一夜噩梦，梦到我给苗姐贴贴画，结果贴画把她大腿腐蚀了，x问我怎么弄的，我在梦里自责到扇自己耳光，凌晨两点惊醒，醒来默念还好是梦一场… 好了，最近睡眠都不大好，准备重新开始减脂，体重已经从75kg涨到87kg了，必须开始减肥了，下周开始吧，因为买的左旋肉碱和跑鞋还没到。",
+      "image": null,
+      "publishedAt": "2026-07-08T05:22:39Z",
+      "sourceId": "8e1a97c92477b087",
+      "sourceTitle": "三十里海河",
+      "link": "https://ihaihe.cn/3664.htm",
+      "detailPath": "articles/1afef0b27bc79072004b22c6.json"
+    },
+    {
       "id": "c0892fc8f07652e5b3ba1ba9",
       "title": "入蜀记 day410 风能带走温度",
       "summary": "「风能带走温度。」",
@@ -626,39 +659,6 @@
       "sourceTitle": "Eddie Lv",
       "link": "https://eddielv.com/musings/reward-prediction-error/",
       "detailPath": "articles/bf728388dc81c03d489f40e0.json"
-    },
-    {
-      "id": "3b28d25dded2d5fa0e335139",
-      "title": "夢會告訴你",
-      "summary": "前言 # 在《欲望分子多巴胺》的第四章，有提到從夢境中提取創意的方式，也提到了「孵夢」技術，表示能在夢中解決自己白天的難題，該實驗中，有七成的人認爲夢境確實幫助了他們解決問題。 原理也很單純，負責理智的前額葉在夢中是休息的，同時還有其他一連串的生物機轉 1 ，讓人類更容易注意到平時不會注意到的事情，於是各種創意、解決難題的方式就在夢境中出現了。 而我不自覺中，用了書中所提到的「孵夢」技術。 購物決策中 # 最近又嘗試開始運動，有鑑於之前買了三年健身房會員 2 ，卻沒去超過 30 次，我決定還是找一些不佔空間的器材擺在家，比較實在一點。 而因爲練完一天，全身痠痛，所以我在找能幫助拉筋的工具，找到了這張瑜伽椅子： 瑜伽椅 示範影片中，利用這個椅子做了各種的拉伸動作，讓我覺得很不錯，同時它又能拆掉前面的斜面，讓椅子…",
-      "image": null,
-      "publishedAt": "2026-07-02T02:54:19Z",
-      "sourceId": "199cdf92fc46bfcd",
-      "sourceTitle": "Eddie Lv",
-      "link": "https://eddielv.com/musings/dream-will-tell-you/",
-      "detailPath": "articles/3b28d25dded2d5fa0e335139.json"
-    },
-    {
-      "id": "7b532d3907c80bb0926d3533",
-      "title": "「音樂與記憶」截稿，名單更新",
-      "summary": "六月份的活動收到了 109 篇文章，全部投稿者連結已經放到 /party 頁面囉！",
-      "image": null,
-      "publishedAt": "2026-07-02T00:00:00Z",
-      "sourceId": "ad9c9cc2127a7a13",
-      "sourceTitle": "BlogBlog.Club 部落部落俱樂部 Blog",
-      "link": "https://blogblog.club/blog/jun2026-links-updated",
-      "detailPath": "articles/7b532d3907c80bb0926d3533.json"
-    },
-    {
-      "id": "0ad5fd4754fbe01c4b45737f",
-      "title": "幹嘛賭",
-      "summary": "It is insane to risk what you have and need in order to obtain what you don't need.",
-      "image": null,
-      "publishedAt": "2026-07-02T00:00:00Z",
-      "sourceId": "7f36c3da1e6b5c71",
-      "sourceTitle": "Wiwi.Blog Blog",
-      "link": "https://wiwi.blog/blog/why-gamble",
-      "detailPath": "articles/0ad5fd4754fbe01c4b45737f.json"
     }
   ]
 }
