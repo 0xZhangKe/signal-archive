@@ -1,5 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-09-04T23:59:05+00:00</updated><author><name>Simon Willison</name></author><entry><title>The Pelican comparison grid for Astra is pretty interesting</title><link href="https://simonwillison.net/2026/Sep/4/astra-pelicans/" rel="alternate"/><published>2026-09-04T23:59:05+00:00</published><updated>2026-09-04T23:59:05+00:00</updated><id>https://simonwillison.net/2026/Sep/4/astra-pelicans/</id><summary type="html">
+<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-09-05T15:51:09+00:00</updated><author><name>Simon Willison</name></author><entry><title>Using Blender with coding agents on macOS</title><link href="https://simonwillison.net/2026/Sep/5/blender-coding-agents-macos/" rel="alternate"/><published>2026-09-05T15:51:09+00:00</published><updated>2026-09-05T15:51:09+00:00</updated><id>https://simonwillison.net/2026/Sep/5/blender-coding-agents-macos/</id><summary type="html">
+    
+        &lt;p&gt;&lt;strong&gt;TIL:&lt;/strong&gt; &lt;a href="https://til.simonwillison.net/llms/blender-coding-agents-macos"&gt;Using Blender with coding agents on macOS&lt;/a&gt;&lt;/p&gt;
+        &lt;p&gt;I've been having fun with Blender in ChatGPT Codex on my Mac recently. Getting it to work with coding agents is really easy: install the full Mac application from &lt;a href="https://www.blender.org"&gt;blender.org&lt;/a&gt; and run a prompt like this:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;Use the already install /Applications/Blender to render a scene of a pelican riding a bicycle&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;In this case I followed that up with these two prompts:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;OK add a background and a lot of flair&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Then:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;OK make it a whole lot better&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;And got this image, generated &lt;a href="https://github.com/simonw/gpt-6-astra-blender-pelican-bicycle/blob/main/work/pelican_final.py"&gt;using Blender's Python API&lt;/a&gt;:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="A 3D illustration of a white pelican cycling along a seaside boardwalk at sunset. It wears a cream boater hat and a coral scarf, with wings on the handlebars and long orange legs reaching the pedals of a turquoise bicycle. A wicker front basket holds pink and white flowers, and three balloons float behind. Pastel bunting stretches overhead between palm trees. Striped beach huts stand beside a teal sea with a small sailboat, beneath a large peach-colored sun. The scene has a softly lit, toy-like style." src="https://static.simonwillison.net/static/2026/astra-blender-pelican.jpg" /&gt;&lt;/p&gt;
+    
+    
+        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/blender"&gt;blender&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/pelican-riding-a-bicycle"&gt;pelican-riding-a-bicycle&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/coding-agents"&gt;coding-agents&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/gpt-6-astra"&gt;gpt-6-astra&lt;/a&gt;&lt;/p&gt;
+    
+
+</summary><category term="ai"/><category term="generative-ai"/><category term="llms"/><category term="blender"/><category term="pelican-riding-a-bicycle"/><category term="coding-agents"/><category term="gpt-6-astra"/></entry><entry><title>The Pelican comparison grid for Astra is pretty interesting</title><link href="https://simonwillison.net/2026/Sep/4/astra-pelicans/" rel="alternate"/><published>2026-09-04T23:59:05+00:00</published><updated>2026-09-04T23:59:05+00:00</updated><id>https://simonwillison.net/2026/Sep/4/astra-pelicans/</id><summary type="html">
     &lt;p&gt;I got access to GPT-6 Astra this afternoon, so naturally I used it to generate &lt;a href="https://simonwillison.net/tags/pelican-riding-a-bicycle/"&gt;SVGs of pelicans riding bicycles&lt;/a&gt; - at low, medium, high, xhigh and max reasoning levels (Astra doesn't support reasoning=none). Then I rendered those pelicans in &lt;a href="https://static.simonwillison.net/static/2026/gpt-6-and-5.6-pelicans.html"&gt;a comparison grid&lt;/a&gt; with GPT-5.6 Sol, Terra, and Luna, and beyond being fun the result was surprisingly useful.&lt;/p&gt;
 &lt;p&gt;&lt;img src="https://static.simonwillison.net/static/2026/astra-grid-3.webp" alt="Comparison grid showing gpt-6-astra, gpt-5.6-sol, gpt-5.6-terra, gpt-5.6-luna at 6 different reasoning levels with pelicans and token counts and prices for each one." style="max-width: 100%;" /&gt;
 See &lt;a href="https://static.simonwillison.net/static/2026/gpt-6-and-5.6-pelicans.html"&gt;the grid&lt;/a&gt; for full quality images. Here's &lt;a href=""&gt;the transcript&lt;/a&gt; that created the GPT-6 Nova pelicans.&lt;/p&gt;
@@ -907,14 +929,4 @@ llm -t lhigh -t pelican
 
 
 
-</summary><category term="code-review"/><category term="coding-agents"/><category term="generative-ai"/><category term="agentic-engineering"/><category term="ai"/><category term="llms"/></entry><entry><title>llm 0.32.1</title><link href="https://simonwillison.net/2026/Aug/21/llm/" rel="alternate"/><published>2026-08-21T17:16:13+00:00</published><updated>2026-08-21T17:16:13+00:00</updated><id>https://simonwillison.net/2026/Aug/21/llm/</id><summary type="html">
-    
-        &lt;p&gt;&lt;strong&gt;Release:&lt;/strong&gt; &lt;a href="https://github.com/simonw/llm/releases/tag/0.32.1"&gt;llm 0.32.1&lt;/a&gt;&lt;/p&gt;
-        &lt;p&gt;Fresh installs of LLM stopped working the other day because the OpenAI Python library dropped its usage of &lt;code&gt;httpx&lt;/code&gt;, and it turned out LLM depended on that library but only installed it via a transitive &lt;code&gt;openai&lt;/code&gt; dependency.&lt;/p&gt;
-&lt;p&gt;This dot-release fixes that for the moment by pinning to &lt;code&gt;openai&amp;lt;3&lt;/code&gt;, and a soon-to-drop 0.33 release will switch from &lt;code&gt;httpx&lt;/code&gt; to &lt;a href="https://github.com/pydantic/httpx2"&gt;httpx2&lt;/a&gt;.&lt;/p&gt;
-    
-    
-        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/httpx"&gt;httpx&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/openai"&gt;openai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llm"&gt;llm&lt;/a&gt;&lt;/p&gt;
-    
-
-</summary><category term="httpx"/><category term="openai"/><category term="llm"/></entry></feed>
+</summary><category term="code-review"/><category term="coding-agents"/><category term="generative-ai"/><category term="agentic-engineering"/><category term="ai"/><category term="llms"/></entry></feed>
