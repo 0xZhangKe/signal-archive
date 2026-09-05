@@ -1,6 +1,94 @@
 {
   "items": [
     {
+      "id": "551de4926adf0dca1f9cc317",
+      "title": "Android 性能优化典范 - Understanding VSYNC",
+      "summary": "系列文章目录： Android性能优化典范综述 Android性能优化典范之Render Performance Android性能优化典范之Understanding Overdraw Android性能优化典范之Understanding VSYNC Android性能优化典范之Profile GPU Rendering Unbeknown to most developers, there’s a simple hardware design that defines everything about how fast your application can draw things to the screen. You may have heard the term VSYNC - VSYNC sta…",
+      "image": null,
+      "publishedAt": "2015-04-19T07:47:25Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2015/04/19/Android-Performance-Patterns-3/",
+      "detailPath": "articles/551de4926adf0dca1f9cc317.json"
+    },
+    {
+      "id": "4d37b1be252cff2cc301140c",
+      "title": "Android 性能优化典范之 Understanding Overdraw",
+      "summary": "系列文章目录： Android性能优化典范综述 Android性能优化典范之Render Performance Android性能优化典范之Understanding Overdraw Android性能优化典范之Understanding VSYNC Android性能优化典范之Profile GPU Rendering One of the most problematic performance problems on Android is the easiest to create; thankfully, it’s also easy to fix. OVERDRAW is a term used to describe how many times a pixel has been re-dra…",
+      "image": null,
+      "publishedAt": "2015-04-19T07:38:48Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2015/04/19/Android-Performance-Patterns-2/",
+      "detailPath": "articles/4d37b1be252cff2cc301140c.json"
+    },
+    {
+      "id": "69082cbef86963715a0f5043",
+      "title": "Android 性能优化典范 - Render Performance",
+      "summary": "系列文章目录： Android性能优化典范综述 Android性能优化典范之Render Performance Android性能优化典范之Understanding Overdraw Android性能优化典范之Understanding VSYNC Android性能优化典范之Profile GPU Rendering Rendering performance is all about how fast you can draw your activity, and get it updated on the screen. Success here means your users feeling like your application is smooth and responsive, whi…",
+      "image": null,
+      "publishedAt": "2015-04-19T07:26:47Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2015/04/19/Android-Performance-Patterns-1/",
+      "detailPath": "articles/69082cbef86963715a0f5043.json"
+    },
+    {
+      "id": "2fcc57d2b395fc07005d3643",
+      "title": "Android 性能优化典范综述",
+      "summary": "系列文章目录： Android性能优化典范综述 Android性能优化典范之Render Performance Android性能优化典范之Understanding Overdraw Android性能优化典范之Understanding VSYNC Android性能优化典范之Profile GPU Rendering 2015年1月6日，Google官方发布了一系列关于Android性能优化的小视频，将其命名为Android Performance Patterns，这一些列视频放在 YouTube 上，观看的话需要科学地上网。 现在回看这组视频，需要把“渲染机制”和“工具入口”分开理解。16ms 帧预算、过度绘制、VSYNC、主线程/渲染线程协作这些机制仍然是图形性能的基础；但当年配套使用的 Hie…",
+      "image": null,
+      "publishedAt": "2015-04-19T07:20:35Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2015/04/19/Android-Performance-Patterns/",
+      "detailPath": "articles/2fcc57d2b395fc07005d3643.json"
+    },
+    {
+      "id": "ee71a8ca0b54ab24e711295a",
+      "title": "Android 内存优化之三 - 打开 MAT 中的 Bitmap 原图",
+      "summary": "本文是 MAT 工具使用系列的第二篇，这个系列共三篇，详细介绍了如何使用 MAT 来分析内存问题，既可以是 Java 应用的内存问题，也可以是 Android 应用的内存问题： Android 内存优化之一：MAT 使用入门 Android内存优化之二：MAT使用进阶 Android内存优化之三：打开MAT中的Bitmap原图 本文介绍的是从 MAT 里手工还原 Bitmap 原图的旧排查技巧，适合在离线 heap 里确认“到底是哪张图”被错误持有。现在排查图片内存问题时，第一步通常不是直接打开 MAT，而是先用 Android Studio Memory Profiler 的 heap dump/retained size/reference 视图确认 Bitmap、BitmapDrawable 或图片缓存…",
+      "image": null,
+      "publishedAt": "2015-04-11T10:41:32Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2015/04/11/AndroidMemory-Open-Bitmap-Object-In-MAT/",
+      "detailPath": "articles/ee71a8ca0b54ab24e711295a.json"
+    },
+    {
+      "id": "22a97125dfd6c1a96875f837",
+      "title": "Android 内存优化之二 - MAT使用进阶",
+      "summary": "本文是 MAT 工具使用系列的第二篇，这个系列共三篇，详细介绍了如何使用 MAT 来分析内存问题，既可以是 Java 应用的内存问题，也可以是 Android 应用的内存问题： Android 内存优化之一：MAT 使用入门 Android内存优化之二：MAT使用进阶 Android内存优化之三：打开MAT中的Bitmap原图 本文的 Histogram、Dominator Tree、Thread 信息仍然是 heap 分析的核心方法，但抓取和第一轮分析入口应换成现在的工具链：先用 Android Studio Memory Profiler 捕获 heap dump，必要时在关键点调用 Debug.dumpHprofData() ，再用 Profiler 的 retained size、reference…",
+      "image": null,
+      "publishedAt": "2015-04-11T10:26:36Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2015/04/11/AndroidMemory-Usage-Of-MAT-Pro/",
+      "detailPath": "articles/22a97125dfd6c1a96875f837.json"
+    },
+    {
+      "id": "edcb1d4763935081023653c3",
+      "title": "Android 内存优化(1) - MAT 使用入门",
+      "summary": "本文是 MAT 工具使用系列的第一篇，这个系列共三篇，详细介绍了如何使用 MAT 来分析内存问题，既可以是 Java 应用的内存问题，也可以是 Android 应用的内存问题： Android 内存优化(1) - MAT 使用入门 Android 内存优化(2) - MAT使用进阶 Android 内存优化(3) - 打开MAT中的Bitmap原图 这组文章里的 MAT 技巧仍然适合学习 Java heap、Dominator Tree、Retained Size、引用链这些基础概念，但默认抓取流程已经变了。早期流程是 Eclipse/DDMS 导出 Android HPROF，再用 hprof-conv 转成 MAT 能读的格式；现在应优先在 Android Studio Memory Profiler 里…",
+      "image": null,
+      "publishedAt": "2015-04-11T10:10:29Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2015/04/11/AndroidMemory-Usage-Of-MAT/",
+      "detailPath": "articles/edcb1d4763935081023653c3.json"
+    },
+    {
+      "id": "1795430768818b2a50f9e16b",
+      "title": "Android性能优化后续",
+      "summary": "前言 本文是一篇译文，原文 Android Performance Case Study Follow-up 的作者是大名鼎鼎的 Romain Guy 。本文讲述了Android性能优化的一些技巧、方法和工具。 译文正文 两年前，我发表了一篇名为 Android Performance Case Study 的文章，来帮助Android开发者了解需要使用什么工具和技术手段来确定、追踪和优化性能问题。 那篇文章以一个Twitter客户端 Falcon Pro 为典范，其开发人员为 Joaquim Vergès. Joaquim人不错，他允许我在我的文章中使用它的程序作为例子，并且快速处理了我发现的所有问题。一切都OK，直到Joaquim 从头开始开发Falcon Pro 3，前不久在他准备发布它的新应用的时候，…",
+      "image": null,
+      "publishedAt": "2015-03-31T01:29:00Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2015/03/31/android-performance-case-study-follow-up/",
+      "detailPath": "articles/1795430768818b2a50f9e16b.json"
+    },
+    {
       "id": "5873e54fd2b41a0213778bfd",
       "title": "Android 小技巧 - 5",
       "summary": "本文是一篇译文,这篇是这个系列的第五篇.讲述的是Android开发中遇到的一些好用的小技巧,或者一些实用的API,很多人都知道,但也有人不知道,记录下来,如果能帮助到大家,也是极好的.由于不是严格的博文,所以翻译也不那么严格,有些工具和类我也会经常用,所以我会根据自己的想法去写.有些地方坐在并没有将这个工具的作用讲出来,我会补充上去. 第五篇里 SDK “以为没有其实有”的功能比较多： ViewDragHelper 帮你做自定义拖拽容器、 PopupWindow 实现非 Activity 的临时浮层、 ThumbnailUtils 直接生成图片或视频缩略图、 ActivityOptions 自定义 Activity 跳转动画与 launch display；性能向的有 SparseArray 替代 HashM…",
@@ -571,94 +659,6 @@
       "sourceTitle": "Wiwi.Blog Blog",
       "link": "https://wiwi.blog/blog/font-rendering",
       "detailPath": "articles/16520a4b4e1da76b89fa2e9d.json"
-    },
-    {
-      "id": "9b765bda47ee319993da938b",
-      "title": "老照片（相簿）",
-      "summary": "前幾天被我的鋼琴學生說我的 blog 最近的文章都在混、越來越難看（妳說話還真直接），讓我心裡感到非常的受傷（笑）。所以經過超過一季沒有長篇文章的乾旱期，我今天終於要來一篇了。不過你知道，Blog 這種東西本來就是要等到有感覺的時候才寫的嘛。",
-      "image": "https://wiwi.blog/assets/images/age1-5-238913f0f3c2189c776485749661a013.jpg",
-      "publishedAt": "2009-04-04T19:00:00Z",
-      "sourceId": "7f36c3da1e6b5c71",
-      "sourceTitle": "Wiwi.Blog Blog",
-      "link": "https://wiwi.blog/blog/old-pics",
-      "detailPath": "articles/9b765bda47ee319993da938b.json"
-    },
-    {
-      "id": "e0727d19afcb842a8e482981",
-      "title": "Scrabble Word of the Day",
-      "summary": "大家玩過 Scrabble 嗎？如果你不知道 Scrabble 是什麼，Scrabble 是一個很有名而且歷史悠久的拼字遊戲。",
-      "image": "https://wiwi.blog/assets/images/dildo-f76d8d10eab225524375dfae04a24285.jpg",
-      "publishedAt": "2009-02-25T02:00:00Z",
-      "sourceId": "7f36c3da1e6b5c71",
-      "sourceTitle": "Wiwi.Blog Blog",
-      "link": "https://wiwi.blog/blog/scrabble-word-of-the-day",
-      "detailPath": "articles/e0727d19afcb842a8e482981.json"
-    },
-    {
-      "id": "0672bbfe44426dbcc724d2ac",
-      "title": "好溫馨聖誕火鍋趴（相簿）",
-      "summary": "猜猜看，對於像我這樣的單身男子來說，在寒冷的平安夜，可以發生的最好的事情是什麼？有個女生陪著一起吃火鍋？",
-      "image": "https://wiwi.blog/assets/images/xmas-people02-f507110056ddd18e1cf1459d225f371c.jpg",
-      "publishedAt": "2008-12-24T00:00:00Z",
-      "sourceId": "7f36c3da1e6b5c71",
-      "sourceTitle": "Wiwi.Blog Blog",
-      "link": "https://wiwi.blog/blog/xmas-hotpot",
-      "detailPath": "articles/0672bbfe44426dbcc724d2ac.json"
-    },
-    {
-      "id": "3410fe6aaa249893a11c640e",
-      "title": "59 公斤！",
-      "summary": "好難想像半年前我是 69 公斤的耶，現在即使用跑的過馬路或上樓梯都不會喘了，哈哈很棒！",
-      "image": "https://wiwi.blog/assets/images/59kg-small-9b43e7b1c0497b6ff813ddde34ba0b7a.jpg",
-      "publishedAt": "2008-12-11T00:00:00Z",
-      "sourceId": "7f36c3da1e6b5c71",
-      "sourceTitle": "Wiwi.Blog Blog",
-      "link": "https://wiwi.blog/blog/59-kg",
-      "detailPath": "articles/3410fe6aaa249893a11c640e.json"
-    },
-    {
-      "id": "7470de99878fa055806d4799",
-      "title": "可樂要怎麼喝？",
-      "summary": "下面這一杯不是咖啡，它是可口可樂 Zero，它要加奶球才好喝！",
-      "image": "https://wiwi.blog/assets/images/cokeZero-1a5b15cb9d84b8d791623f58f4dbe7cc.jpg",
-      "publishedAt": "2008-12-09T00:00:00Z",
-      "sourceId": "7f36c3da1e6b5c71",
-      "sourceTitle": "Wiwi.Blog Blog",
-      "link": "https://wiwi.blog/blog/how-to-drink-coke-zero",
-      "detailPath": "articles/7470de99878fa055806d4799.json"
-    },
-    {
-      "id": "c46811630c67e0c48082bb0e",
-      "title": "天空笑了",
-      "summary": "我是在奇異的這一篇 blog 上看到的。在前幾天，12 月 1 號的晚上六點左右，天上的金星、木星和月亮剛好形成一個笑臉：",
-      "image": "https://wiwi.blog/assets/images/moonSmile-a7ba542c34d2aaf907c77921eb518705.jpg",
-      "publishedAt": "2008-12-05T00:00:00Z",
-      "sourceId": "7f36c3da1e6b5c71",
-      "sourceTitle": "Wiwi.Blog Blog",
-      "link": "https://wiwi.blog/blog/the-sky-is-smiling",
-      "detailPath": "articles/c46811630c67e0c48082bb0e.json"
-    },
-    {
-      "id": "9377d946b4ba421b5b82f33e",
-      "title": "生日快樂",
-      "summary": "我編的簡單的生日快樂歌。樂譜歡迎大家隨意取用，朋友生日的時候可以彈給他聽：",
-      "image": "https://wiwi.blog/assets/images/happy-birthday-0185c6fee12059f03eedcb34860f4360.gif",
-      "publishedAt": "2008-12-03T00:00:00Z",
-      "sourceId": "7f36c3da1e6b5c71",
-      "sourceTitle": "Wiwi.Blog Blog",
-      "link": "https://wiwi.blog/blog/happy-birthday-to-me",
-      "detailPath": "articles/9377d946b4ba421b5b82f33e.json"
-    },
-    {
-      "id": "707fb4ca673df771b40ada09",
-      "title": "最近的一些照片",
-      "summary": "前陣子到師大伴奏，遇到我可愛的老同學胖胖。因為她太常講出極度幼稚的話，旁邊的人聽到都會無法自拔地想要打她的頭，所以她每天都戴著安全帽去師大上課（？）。",
-      "image": "https://wiwi.blog/assets/images/pung-86ad60983ad1cb0ff9fc22c34e406f4f.jpg",
-      "publishedAt": "2008-11-20T17:00:00Z",
-      "sourceId": "7f36c3da1e6b5c71",
-      "sourceTitle": "Wiwi.Blog Blog",
-      "link": "https://wiwi.blog/blog/recent-photos",
-      "detailPath": "articles/707fb4ca673df771b40ada09.json"
     }
   ]
 }

@@ -1,6 +1,94 @@
 {
   "items": [
     {
+      "id": "49f3c93178afc236e8f80772",
+      "title": "Web Serial 串口通信注意事项",
+      "summary": "不懂体系结构，但计算机处处是前端",
+      "image": null,
+      "publishedAt": "2024-07-10T17:54:52Z",
+      "sourceId": "4f3f8eb9d72c3840",
+      "sourceTitle": "新世界的大门",
+      "link": "https://blog.xinshijiededa.men/web-serial/",
+      "detailPath": "articles/49f3c93178afc236e8f80772.json"
+    },
+    {
+      "id": "30154ee96a154bacd0a01d96",
+      "title": "无语，这叼毛",
+      "summary": "早上醒的很早，不情愿地翻开手机看了眼时间，意外的在通知界面发现了一条通话记录。 因为是凌晨一点半，所以由小爱同学负责接听。本来平时看到这类AI通话记录早已是习以为常，但这次让我感到非常生气，因为显示的是一句骂人的话。 号码来自广州移动，听了一下通话录音，嘈杂的风声夹杂着独特的广东口音，感觉就像是一个精神小伙大半夜骑着摩托在风里驰骋，这叼毛。 气的我直接电话拨过去，准备好好问候一下他，但是电话打到一半又觉得还是算了，要是就这样跟一个人骂起来让我觉得很丢人。最后给他发了一条询问为何如此的短信，还是以一个心平气和的语气，结果这都一天了，连个屁都没有，这叼毛。 不知道他是怎么把电话打到我手机上的，照这个情况看，我估摸着应该是这个人打错电话了。但听到我在小爱同学里设置的我自己那僵硬无比的音色后，恶趣味泛滥，飙几句下三滥…",
+      "image": null,
+      "publishedAt": "2024-07-10T16:00:00Z",
+      "sourceId": "511a941174e52a33",
+      "sourceTitle": "蒙奇日记",
+      "link": "https://luffy.cc/a/wu-yu-zi",
+      "detailPath": "articles/30154ee96a154bacd0a01d96.json"
+    },
+    {
+      "id": "05c91d017d96b493e2c55cb1",
+      "title": "CloudGoat (☁️🐐)靶场初体验",
+      "summary": "一个开源的云靶场： https://github.com/RhinoSecurityLabs/cloudgoat/ 体验顺便学习一下📖 安装 & 配置 安装前确保机器： Linux or MacOS. Windows is not officially supported. Argument tab-completion requires bash 4.2+ (Linux, or OSX with some difficulty). Python3.6+ is required. Terraform >= 0.14 installed and in your $PATH. The AWS CLI installed and in your $PATH, and an AWS account with suff…",
+      "image": "https://skyblu3519.github.io/post-images/cloudgoat1/1720531972702-e43360e6-83e6-4a6b-b4a6-0b14500a8344.png",
+      "publishedAt": "2024-07-09T15:58:22Z",
+      "sourceId": "4f5bf353ca5bd538",
+      "sourceTitle": "skkyblu3",
+      "link": "https://skyblu3519.github.io/post/cloudgoat-ba-chang-chu-ti-yan/",
+      "detailPath": "articles/05c91d017d96b493e2c55cb1.json"
+    },
+    {
+      "id": "89619b6460ee7a606f396449",
+      "title": "在AWS上使用诱饵用户捕获攻击者",
+      "summary": "思路就是创建一个IAM用户，然后用CloudWatch监控该用户的行为，如果出现了该用户的操作则触发告警，并通过邮件通知。 使用控制台和Terraform两种方法实现 控制台创建 创建诱饵用户 在 IAM 控制台创建一个诱饵用户 honeyUser ，不附加任何权限 为 honeyUser 创建一个访问密钥，这对密钥之后便可以通过一些方法泄露出去，进而捕获可疑的攻击者。 创建CloudTrail并将事件发送至CloudWatch 进入 CloudTrail 控制台创建一个 trail （追踪），创建 CloudTrail 的时候需要选择一个S3来对日志进行存储，如果没有提前准备好则需要在这里新创建一个。 这里不使用加密方便后面数据的检索 配置向 CloudWatch Logs 发送事件，之后可以在 Cloud…",
+      "image": "https://skyblu3519.github.io/post-images/AWSHoneyToken/1720081492814-3e17265e-d254-41d0-a77f-54f84a647378.png",
+      "publishedAt": "2024-07-09T08:57:26Z",
+      "sourceId": "4f5bf353ca5bd538",
+      "sourceTitle": "skkyblu3",
+      "link": "https://skyblu3519.github.io/post/zai-aws-shang-shi-yong-you-er-yong-hu-bu-huo-gong-ji-zhe/",
+      "detailPath": "articles/89619b6460ee7a606f396449.json"
+    },
+    {
+      "id": "1360d6a454714e35ab9c7572",
+      "title": "小美的包包",
+      "summary": "小美有一個陪伴她多年的包包；這個包包跟她一起經歷過大學生活、第一份工作、以及一段重要的感情。雖然用了這麼久，但在這幾年來，小美其實總是對這個包包感到不滿：皮革有點磨損了、外觀不夠時尚、肩帶的長度不對、內袋太小放不下新手機⋯⋯雖然天天都背著，但小美總是認為自己在「忍受」這個包包，心裡總是想著要把它換掉。",
+      "image": null,
+      "publishedAt": "2024-07-09T00:00:00Z",
+      "sourceId": "7f36c3da1e6b5c71",
+      "sourceTitle": "Wiwi.Blog Blog",
+      "link": "https://wiwi.blog/blog/its-gone",
+      "detailPath": "articles/1360d6a454714e35ab9c7572.json"
+    },
+    {
+      "id": "e6cb38d73687b98c1ef01dc8",
+      "title": "记20240708郑州暴雨",
+      "summary": "不知道是因为昨晚临睡前喝了一满杯茉莉花茶的缘故，还是没忍住手痒奋笔疾书码字到凌晨的缘故，抑或是终于躺下后又读小说到一点多的缘故，总之昨晚大脑异常兴奋，一直睁着眼睛躺到凌晨快两点，才昏昏睡去。 猫本来老老实实卧在床头椅子上，我伸手 rua 了他两把，睡眼惺忪的他立时高兴的站起身来，尾巴旗杆一样翘上天，伸个懒腰，又像小时候那样，打着咕噜，硬往我头上脸上拱。我反正睡不着觉，也就从头到肚子再到尾巴把他来来回回抚摸了个遍。小猫终究还是长大了，懂事了，终于困意来袭时，我把他从我肚皮上推下去，盖好毛巾被。他似乎一下子明白了我要开始睡觉，立刻乖乖的蜷缩回床头了。 有默契的关系，才是好关系。无论人与人，还是人与猫，都是如此。 凌晨四五点时，起来上厕所。由于知道猫也经常在这个点儿喵喵叫吵着上厕所，我特地给门留了个小缝，任猫来去自…",
+      "image": null,
+      "publishedAt": "2024-07-08T14:14:21Z",
+      "sourceId": "c7356b172af43f7f",
+      "sourceTitle": "刑辩人在路上",
+      "link": "https://xingbianren.cn/post/235.html",
+      "detailPath": "articles/e6cb38d73687b98c1ef01dc8.json"
+    },
+    {
+      "id": "7f96ceaf78f93afade319aad",
+      "title": "新詩",
+      "summary": "在搖晃的捷運車廂中",
+      "image": null,
+      "publishedAt": "2024-07-07T00:00:00Z",
+      "sourceId": "7f36c3da1e6b5c71",
+      "sourceTitle": "Wiwi.Blog Blog",
+      "link": "https://wiwi.blog/blog/poetry",
+      "detailPath": "articles/7f96ceaf78f93afade319aad.json"
+    },
+    {
+      "id": "8fd7362dc5903c52d44f618c",
+      "title": "為什麼我不用社群媒體了？",
+      "summary": "這篇貼文也被同步到了筆記區。",
+      "image": null,
+      "publishedAt": "2024-07-06T00:00:00Z",
+      "sourceId": "7f36c3da1e6b5c71",
+      "sourceTitle": "Wiwi.Blog Blog",
+      "link": "https://wiwi.blog/blog/why-i-dont-use-social-media",
+      "detailPath": "articles/8fd7362dc5903c52d44f618c.json"
+    },
+    {
       "id": "0cdae4b367677ed87a9e81cd",
       "title": "Gumball 語錄",
       "summary": "阿甘語錄 （英文原版配音）。 幹，在 10 分 35 秒處、出自 The Internet （網路追追追）一集那阿甘不發一語踢鐵桶的一幕？之前我都看不懂，現在我才發現那是個埋得很深的英文成人梗（沒錯其他語言的配音都傳達不了這個精髓），因為「踢桶子」英文叫 kick the bucket， 但它也是短語「死掉」的雙關 ！所以那可以被解讀為一個死亡威脅！我的天啊也太會埋梗了吧。 還有 4 分 01 秒處，“The bigger the bird, the sweeter the curd”（出自第六季 The Cringe「尷尬癌」），乍聽之下是幹話，但想特別歪的話也可以被解讀為一個（很糟糕的色色）成人梗（bird 是小鳥的意思，curd 是凝乳的意思，剩下的自行想像）XD。 結論：《阿甘妙世界》是個很會埋成人梗…",
@@ -571,94 +659,6 @@
       "sourceTitle": "蒙奇日记",
       "link": "https://luffy.cc/a/xian-ni",
       "detailPath": "articles/71117ac7e89baa019b2a2c7b.json"
-    },
-    {
-      "id": "cd3d79ddf09b74d47e83df5c",
-      "title": "Android Perfetto 系列 3：熟悉 Perfetto View",
-      "summary": "本篇是 Perfetto 系列文章的第三篇，前两篇介绍了 Perfetto 是什么以及 Perfetto Trace 怎么抓，本篇主要是在网页端打开 Perfetto Trace 之后，面对复杂的 Perfetto 信息该怎么看。 随着 Google 宣布 Systrace 工具停更，推出 Perfetto 工具，Perfetto 在我的日常工作中已经基本能取代 Systrace 工具。同时 Oppo、Vivo 等大厂也已经把 Systrace 切换成了 Perfetto，许多新接触 Android 性能优化的小伙伴对于 Perfetto 那眼花缭乱的界面和复杂的功能感觉头疼，希望我能把之前的那些 Systrace 文章使用 Perfetto 来呈现。",
-      "image": null,
-      "publishedAt": "2024-05-20T23:30:23Z",
-      "sourceId": "1aa1837ca33d8d55",
-      "sourceTitle": "Android Performance",
-      "link": "https://androidperformance.com/2024/05/21/Android-Perfetto-03-how-to-analysis-perfetto/",
-      "detailPath": "articles/cd3d79ddf09b74d47e83df5c.json"
-    },
-    {
-      "id": "cf7d9716e997a897533d806d",
-      "title": "Android Perfetto 系列 2：Perfetto Trace 抓取",
-      "summary": "上一篇文章 Android Perfetto 系列 1：Perfetto 工具简介 介绍了 Perfetto 是什么，这篇简单介绍一下 Perfetto 的抓取。 随着 Google 宣布 Systrace 工具停更，推出 Perfetto 工具，Perfetto 在我的日常工作中已经基本能取代 Systrace 工具。同时 Oppo、Vivo 等大厂也已经把 Systrace 切换成了 Perfetto，许多新接触 Android 性能优化的小伙伴对于 Perfetto 那眼花缭乱的界面和复杂的功能感觉头疼，希望我能把之前的那些 Systrace 文章使用 Perfetto 来呈现。",
-      "image": null,
-      "publishedAt": "2024-05-20T23:29:41Z",
-      "sourceId": "1aa1837ca33d8d55",
-      "sourceTitle": "Android Performance",
-      "link": "https://androidperformance.com/2024/05/21/Android-Perfetto-02-how-to-get-perfetto/",
-      "detailPath": "articles/cf7d9716e997a897533d806d.json"
-    },
-    {
-      "id": "997fd13c84aa00f414d7f205",
-      "title": "Android Perfetto 系列 1：Perfetto 工具简介",
-      "summary": "本篇是 Perfetto 系列文章的第一篇，主要是简单介绍 Perfetto 工具，包括 Perfetto 的历史、发展，以及 Perfetto 能做什么。 随着 Google 宣布 Systrace 工具停更，推出 Perfetto 工具，Perfetto 在我的日常工作中已经基本能取代 Systrace 工具。同时 Oppo、Vivo 等大厂也已经把 Systrace 切换成了 Perfetto，许多新接触 Android 性能优化的小伙伴对于 Perfetto 那眼花缭乱的界面和复杂的功能感觉头疼，希望我能把之前的那些 Systrace 文章使用 Perfetto 来呈现。",
-      "image": null,
-      "publishedAt": "2024-05-20T23:29:22Z",
-      "sourceId": "1aa1837ca33d8d55",
-      "sourceTitle": "Android Performance",
-      "link": "https://androidperformance.com/2024/05/21/Android-Perfetto-01-What-is-perfetto/",
-      "detailPath": "articles/997fd13c84aa00f414d7f205.json"
-    },
-    {
-      "id": "6cec7f5c9d99d989d620cf79",
-      "title": "刀斩肉身，心斩灵魂",
-      "summary": "本是不愿意玩手游的，奈何情怀作祟，那就凑个热闹吧。 对应以前的60级，那个干什么都很慢的版本。 当年偷偷跑去黑网吧，只为把等级赶紧升到60级。奈何装备太垃圾，师父也不常在线，于是等级一直上不去。 直到我遇到了西西游戏网，那科技的力量，那秒杀的快感，让我心驰神往。 但这世间所有美好的东西，都暗暗标好了价格。手里的武器变成小木棍，六字真言。 还有我那被误封10年的账号。🌿",
-      "image": null,
-      "publishedAt": "2024-05-20T16:00:00Z",
-      "sourceId": "511a941174e52a33",
-      "sourceTitle": "蒙奇日记",
-      "link": "https://luffy.cc/a/dnf-mobile-game",
-      "detailPath": "articles/6cec7f5c9d99d989d620cf79.json"
-    },
-    {
-      "id": "d629aa52408dc08326a0d51f",
-      "title": "游泳记",
-      "summary": "",
-      "image": null,
-      "publishedAt": "2024-05-20T00:00:00Z",
-      "sourceId": "1d642c054c147719",
-      "sourceTitle": "大猫的部落格",
-      "link": "https://damao.ca/posts/%E6%B8%B8%E6%B3%B3%E8%AE%B0/",
-      "detailPath": "articles/d629aa52408dc08326a0d51f.json"
-    },
-    {
-      "id": "2ed0c5f34734000c4b1f57d1",
-      "title": "使用 Terraform 管理 CloudFlare 上的 DNS 解析记录",
-      "summary": "CloudFlare 提供了一个方便的手动 DNS 解析记录管理界面，但当所需的解析规模逐渐增大，或是涉及到需要团队合作的场合时，再使用基于人力的管理方案的话，就更有可能引入一些奇怪的问题。本文以在 GitLab 上托管的仓库与流水线的实现为例，简单叙述使用 Terraform 管理 CloudFlare DNS 的操作流程。",
-      "image": null,
-      "publishedAt": "2024-05-19T09:13:51Z",
-      "sourceId": "06aa2ffd92b9d263",
-      "sourceTitle": "糖菓·部落",
-      "link": "https://candinya.com/posts/manage-cloudflare-dns-with-terraform/",
-      "detailPath": "articles/2ed0c5f34734000c4b1f57d1.json"
-    },
-    {
-      "id": "e712a1361f6d680581169aac",
-      "title": "读《最后的告别》",
-      "summary": "你害怕死亡吗？你害怕讨论死亡吗？ 这本书所讲的内容就如同书名所述的那样，是关于人类衰老死亡的常识。作者通过不同的医学案例，展示了人们在因为疾病或衰老而走向生命的终点时，应当如何正确的照顾临终老人，以及现代医学科学在救治过程中仍旧面临的诸多问题。 我们每个人都难逃一死，每个人的生命都会慢慢消失，就像一朵慢慢枯萎的花，这是生物生长的客观规律。而得益于现代医学科学的发展，这个过程开始变得漫长，使可能戛然而止的生命变得缓慢衰老。 但如果生命已经接近尾声，还是一味地救治反而是对病人的一种折磨和伤害。 对很多生活不能自理的老人而言，他们害怕的不是死亡，反而是因为衰老而带来失智和失能。他们丧失了自己生活的主动权，他们失去了自己，也失去了自己的“家”。 所以让老人在生命的最后时刻能拥有自由生活的权利，完整且自由的走到生命的终…",
-      "image": null,
-      "publishedAt": "2024-05-16T16:00:00Z",
-      "sourceId": "511a941174e52a33",
-      "sourceTitle": "蒙奇日记",
-      "link": "https://luffy.cc/a/being-mortal",
-      "detailPath": "articles/e712a1361f6d680581169aac.json"
-    },
-    {
-      "id": "e8ad7cf6a9e18befab8ff0d0",
-      "title": "试图给强哥指路",
-      "summary": "想我的强哥了，想看看他，于是问他要自拍照。 骗你的，其实那天我根本就不想他。之所以问强哥要自拍照，是因为最近很多人在网络上发自己的自拍照，看是否有网络妖人能给指点一下。若是能像一个名人，那么就可以直接开直播圈钱了。 而我就在这些发自拍的人中看到了一张酷似我强哥的照片，而这个人又酷似罗翔老师。没错，就是那位编写法律的罗翔老师。 给强哥好说歹说，死活不给。没办法只好找了他高中时候的照片，经过仔细比对。 另外一个朋友也表示确实挺像的，然而本人则不认同，并表示自己其实更像发哥…… 可拉倒吧。不过有一说一，即便真的像，那么也不敢随便开直播啊，要真像网上那些人一样，指不定哪天就成被告了。 想到我还在上初中的时候，我妈说过我像萧敬腾。那时候还是在家一起吃饭看电视，我妈指着电视机里的萧敬腾跟我爸说：“你看这个人是不是跟咱娃儿…",
-      "image": null,
-      "publishedAt": "2024-05-13T16:00:00Z",
-      "sourceId": "511a941174e52a33",
-      "sourceTitle": "蒙奇日记",
-      "link": "https://luffy.cc/a/internet-imitators",
-      "detailPath": "articles/e8ad7cf6a9e18befab8ff0d0.json"
     }
   ]
 }
