@@ -12,7 +12,7 @@
 	<atom:link href="https://www.kawabangga.com/feed" rel="self" type="application/rss+xml" />
 	<link>https://www.kawabangga.com</link>
 	<description>无法自制的人得不到自由。</description>
-	<lastBuildDate>Tue, 01 Sep 2026 05:44:57 +0000</lastBuildDate>
+	<lastBuildDate>Sun, 06 Sep 2026 07:01:10 +0000</lastBuildDate>
 	<language>zh-Hans</language>
 	<sy:updatePeriod>
 	hourly	</sy:updatePeriod>
@@ -28,6 +28,184 @@
 	<height>32</height>
 </image> 
 	<item>
+		<title>BPG 连接建立失败问题</title>
+		<link>https://www.kawabangga.com/posts/7397</link>
+					<comments>https://www.kawabangga.com/posts/7397#respond</comments>
+		
+		<dc:creator><![CDATA[laixintao]]></dc:creator>
+		<pubDate>Sun, 06 Sep 2026 07:01:09 +0000</pubDate>
+				<category><![CDATA[网络]]></category>
+		<category><![CDATA[BGP]]></category>
+		<category><![CDATA[抓包分析]]></category>
+		<guid isPermaLink="false">https://www.kawabangga.com/?p=7397</guid>
+
+					<description><![CDATA[好久没有更新「抓包破案」系列了，最近遇到的一个 case 适合拿出来考一考读者，需要一点点的 BGP 前置知识 [&#8230;]<br/><a href="https://www.kawabangga.com/posts/7397" class="more-link" >Continue reading...</a>]]></description>
+										<content:encoded><![CDATA[
+<p class="wp-block-paragraph">好久没有更新「抓包破案」系列了，最近遇到的一个 case 适合拿出来考一考读者，需要一点点的 BGP 前置知识，嘿嘿。</p>
+
+
+
+<p class="wp-block-paragraph">事情是这样：在一次日常升级中，服务器原本可以与一个网络设备建立 BGP 连接，但是升级之后无法建立了。</p>
+
+
+
+<p class="wp-block-paragraph">服务器升级操作执行的内容有：</p>
+
+
+
+<ul class="wp-block-list">
+<li>更新程序；</li>
+
+
+
+<li>重启；</li>
+</ul>
+
+
+
+<p class="wp-block-paragraph">理论上应该可以重新连接对端 IP  的 179 端口，然后恢复服务。但是升级之后一直没有流量进来，排查发现是 BGP 异常。为什么重启之后，原本好好的 BGP 就异常了呢？</p>
+
+
+
+<p class="wp-block-paragraph">我们进行了抓包，文件如下：</p>
+
+
+
+<div class="wp-block-file"><a id="wp-block-file--media-5b4020fa-c553-4c15-80a5-703216d63973" href="https://www.kawabangga.com/wp-content/uploads/2026/08/tcpdump_179_port_on_server.pcap_.zip">tcpdump_179_port_on_server.pcap</a><a href="https://www.kawabangga.com/wp-content/uploads/2026/08/tcpdump_179_port_on_server.pcap_.zip" class="wp-block-file__button wp-element-button" download aria-describedby="wp-block-file--media-5b4020fa-c553-4c15-80a5-703216d63973">下载</a></div>
+
+
+
+<p class="wp-block-paragraph">看了半天也没有看出所以然来，于是在终端启动了一个 AI Agent，让它分析这个文件。</p>
+
+
+
+<p class="wp-block-paragraph">第一轮，agent 也没有分析出来问题。因为调用的工具失败了。</p>
+
+
+
+<p class="wp-block-paragraph">我告诉它不应该用 wireshark 这种 GUI，对你来说最好的工具应该是 tshark。</p>
+
+
+
+<p class="wp-block-paragraph">Agent 开始使用 tshark 分析，不到一分钟，就准确地告诉了我答案，令人震惊！</p>
+
+
+
+<p class="wp-block-paragraph">回到这个问题，我发现即使不使用 AI，也是完全可以破案的，这里就把问题交给读者，看看能否发现异常的本质。</p>
+
+
+
+<div class="wp-block-cover is-light"><img fetchpriority="high" decoding="async" width="1024" height="576" class="wp-block-cover__image-background wp-image-7405 size-large" alt="" src="https://www.kawabangga.com/wp-content/uploads/2024/05/index-background-1024x576.png" style="object-position:38% 56%" data-object-fit="cover" data-object-position="38% 56%" srcset="https://www.kawabangga.com/wp-content/uploads/2024/05/index-background-1024x576.png 1024w, https://www.kawabangga.com/wp-content/uploads/2024/05/index-background-300x169.png 300w, https://www.kawabangga.com/wp-content/uploads/2024/05/index-background-768x432.png 768w, https://www.kawabangga.com/wp-content/uploads/2024/05/index-background-1536x864.png 1536w, https://www.kawabangga.com/wp-content/uploads/2024/05/index-background.png 1672w" sizes="(max-width: 1024px) 100vw, 1024px" /><span aria-hidden="true" class="wp-block-cover__background has-background-dim" style="background-color:#e5e8ec"></span><div class="wp-block-cover__inner-container is-layout-flow wp-block-cover-is-layout-flow">
+<div class="wp-block-group has-black-color has-text-color has-link-color wp-elements-1"><div class="wp-block-group__inner-container is-layout-constrained wp-block-group-is-layout-constrained">
+<h2 class="wp-block-heading has-text-align-center">==抓包破案录==</h2>
+
+
+
+<p class="has-text-align-center wp-block-paragraph"><em><strong>通过真实故障和抓包文件，学习网络分析与故障排查。</strong><br /></em></p>
+
+
+
+<p class="has-custom-css wp-custom-css-e533bf93 wp-block-paragraph">这篇文章是抓包破案录系列文章（之前叫做《计算机网络实用技术》，后来改名了）中的一篇，这个系列正在连载中，我计划用这个系列的文章来分享一些网络抓包分析的实用技术。这些文章都是总结了我的工作经历中遇到的问题，经过精心构造和编写，每个文件附带抓包文件，通过实战来学习网络抓包与分析。</p>
+
+
+
+<p class="wp-block-paragraph"><strong>如果本文对您有帮助，欢迎扫博客右侧二维码打赏支持，正是订阅者的支持，让我公开写这个系列成为可能，感谢！</strong></p>
+
+
+
+<p class="wp-block-paragraph">如果您正在阅读的是题目类的文章，这个目录内容正好用来隔离其他读者的评论。读完题目可以稍作暂停，进行思考，<strong>继续向下滑动，可能会被其他的读者剧透答案。</strong></p>
+
+
+
+<p class="wp-block-paragraph"><em>没有链接的目录还没有写完，敬请期待……</em></p>
+
+
+
+<ol class="wp-block-list">
+<li><a href="https://www.kawabangga.com/posts/6097">序章</a></li>
+
+
+
+<li><a href="https://www.kawabangga.com/posts/6950">抓包技术以及技巧</a></li>
+
+
+
+<li><a href="https://www.kawabangga.com/posts/6295">理解网络的分层模型</a></li>
+
+
+
+<li><a href="https://www.kawabangga.com/posts/6919">数据是如何路由的</a></li>
+
+
+
+<li>网络问题排查的思路和技巧</li>
+
+
+
+<li><a href="https://www.kawabangga.com/posts/6178">不可以用路由器？</a>（<a href="https://www.kawabangga.com/posts/6291">答案和解析</a>）</li>
+
+
+
+<li><a href="https://www.kawabangga.com/posts/6286">网工闯了什么祸？</a>（<a href="https://www.kawabangga.com/posts/6291">答案和解析</a>，<a href="https://www.kawabangga.com/posts/7129" data-type="post" data-id="7129">阅读加餐！</a>）</li>
+
+
+
+<li><a href="https://www.kawabangga.com/?p=7397">BPG 连接建立失败问题</a> （<a href="https://www.kawabangga.com/?p=7413">答案和解析</a>）</li>
+
+
+
+<li><a href="https://www.kawabangga.com/?p=6383">重新认识 TCP 的握手和挥手</a>（<a href="https://www.kawabangga.com/posts/6467">答案和解析</a>）</li>
+
+
+
+<li><a href="https://www.kawabangga.com/posts/7219">3.5 秒初始延迟问题</a> （<a href="https://www.kawabangga.com/posts/7221">答案和解析</a>）</li>
+
+
+
+<li><a href="https://www.kawabangga.com/posts/7187" data-type="link" data-id="https://www.kawabangga.com/posts/7187">网络断断续续……</a> （<a href="https://www.kawabangga.com/posts/7190" data-type="link" data-id="https://www.kawabangga.com/posts/7190">答案和解析</a>）</li>
+
+
+
+<li><a href="https://www.kawabangga.com/?p=6372">延迟增加了多少？</a>（<a href="https://www.kawabangga.com/posts/6378">答案和解析</a>）</li>
+
+
+
+<li><a href="https://www.kawabangga.com/posts/6910" data-type="post" data-id="6910">压测的时候 QPS 为什么上不去？</a>（<a href="https://www.kawabangga.com/posts/6937">答案和解析</a>）</li>
+
+
+
+<li><a href="https://www.kawabangga.com/posts/6570">TCP 下载速度为什么这么慢？</a>（<a href="https://www.kawabangga.com/posts/6616">答案和解析</a>）</li>
+
+
+
+<li><a href="https://www.kawabangga.com/posts/6965">请求为什么超时了？</a>（<a href="https://www.kawabangga.com/posts/6969">答案和解析</a>）</li>
+
+
+
+<li><a href="https://www.kawabangga.com/posts/7066">0.01% 的概率超时问题</a> （<a href="https://www.kawabangga.com/posts/7076">答案和解析</a>）</li>
+
+
+
+<li><a href="https://www.kawabangga.com/posts/6131" data-type="link" data-id="https://www.kawabangga.com/posts/6131">后记：学习网络的一点经验分享</a></li>
+</ol>
+
+
+
+<pre class="wp-block-preformatted">与本博客的其他页面不同，本页面使用 <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-hans">署名-非商业性使用-禁止演绎 4.0 国际</a> 协议。<br /></pre>
+</div></div>
+</div></div>
+
+
+
+<p class="wp-block-paragraph"></p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.kawabangga.com/posts/7397/feed</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
 		<title>Ingress 流量整形</title>
 		<link>https://www.kawabangga.com/posts/7376</link>
 					<comments>https://www.kawabangga.com/posts/7376#comments</comments>
@@ -50,7 +228,7 @@
 
 
 <div class="wp-block-image">
-<figure class="aligncenter size-full"><a href="https://www.kawabangga.com/wp-content/uploads/2026/08/ifb-ingress-case.jpg"><img fetchpriority="high" decoding="async" width="612" height="128" src="https://www.kawabangga.com/wp-content/uploads/2026/08/ifb-ingress-case.jpg" alt="" class="wp-image-7377" srcset="https://www.kawabangga.com/wp-content/uploads/2026/08/ifb-ingress-case.jpg 612w, https://www.kawabangga.com/wp-content/uploads/2026/08/ifb-ingress-case-300x63.jpg 300w" sizes="(max-width: 612px) 100vw, 612px" /></a></figure>
+<figure class="aligncenter size-full"><a href="https://www.kawabangga.com/wp-content/uploads/2026/08/ifb-ingress-case.jpg"><img decoding="async" width="612" height="128" src="https://www.kawabangga.com/wp-content/uploads/2026/08/ifb-ingress-case.jpg" alt="" class="wp-image-7377" srcset="https://www.kawabangga.com/wp-content/uploads/2026/08/ifb-ingress-case.jpg 612w, https://www.kawabangga.com/wp-content/uploads/2026/08/ifb-ingress-case-300x63.jpg 300w" sizes="(max-width: 612px) 100vw, 612px" /></a></figure>
 </div>
 
 
@@ -100,7 +278,7 @@
 
 
 <div class="wp-block-image">
-<figure class="aligncenter size-large"><a href="https://www.kawabangga.com/wp-content/uploads/2026/08/policing-throughput-2.jpg"><img decoding="async" width="1024" height="635" src="https://www.kawabangga.com/wp-content/uploads/2026/08/policing-throughput-2-1024x635.jpg" alt="" class="wp-image-7384" style="aspect-ratio:1.6126226115127336" srcset="https://www.kawabangga.com/wp-content/uploads/2026/08/policing-throughput-2-1024x635.jpg 1024w, https://www.kawabangga.com/wp-content/uploads/2026/08/policing-throughput-2-300x186.jpg 300w, https://www.kawabangga.com/wp-content/uploads/2026/08/policing-throughput-2-767x476.jpg 767w, https://www.kawabangga.com/wp-content/uploads/2026/08/policing-throughput-2-1536x953.jpg 1536w, https://www.kawabangga.com/wp-content/uploads/2026/08/policing-throughput-2.jpg 1662w" sizes="(max-width: 1024px) 100vw, 1024px" /></a><figcaption class="wp-element-caption">可以看到限速在 1Gbps 的时候，实际速度在 850Mbps 左右震荡</figcaption></figure>
+<figure class="aligncenter size-large"><a href="https://www.kawabangga.com/wp-content/uploads/2026/08/policing-throughput-2.jpg"><img loading="lazy" decoding="async" width="1024" height="635" src="https://www.kawabangga.com/wp-content/uploads/2026/08/policing-throughput-2-1024x635.jpg" alt="" class="wp-image-7384" style="aspect-ratio:1.6126226115127336" srcset="https://www.kawabangga.com/wp-content/uploads/2026/08/policing-throughput-2-1024x635.jpg 1024w, https://www.kawabangga.com/wp-content/uploads/2026/08/policing-throughput-2-300x186.jpg 300w, https://www.kawabangga.com/wp-content/uploads/2026/08/policing-throughput-2-767x476.jpg 767w, https://www.kawabangga.com/wp-content/uploads/2026/08/policing-throughput-2-1536x953.jpg 1536w, https://www.kawabangga.com/wp-content/uploads/2026/08/policing-throughput-2.jpg 1662w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /></a><figcaption class="wp-element-caption">可以看到限速在 1Gbps 的时候，实际速度在 850Mbps 左右震荡</figcaption></figure>
 </div>
 
 <div class="wp-block-image">
@@ -2129,254 +2307,6 @@ tx-frames-irq:	n/a</pre></div>
 					
 					<wfw:commentRss>https://www.kawabangga.com/posts/7243/feed</wfw:commentRss>
 			<slash:comments>5</slash:comments>
-		
-		
-			</item>
-		<item>
-		<title>MTU Probe 引起的初始延迟</title>
-		<link>https://www.kawabangga.com/posts/7221</link>
-					<comments>https://www.kawabangga.com/posts/7221#comments</comments>
-		
-		<dc:creator><![CDATA[laixintao]]></dc:creator>
-		<pubDate>Tue, 17 Mar 2026 02:53:03 +0000</pubDate>
-				<category><![CDATA[网络]]></category>
-		<guid isPermaLink="false">https://www.kawabangga.com/?p=7221</guid>
-
-					<description><![CDATA[答案是 MTU 设置错误，链路可以发送的最大 MTU 小于 1500 bytes，但是客户端侧配置的 MTU  [&#8230;]<br/><a href="https://www.kawabangga.com/posts/7221" class="more-link" >Continue reading...</a>]]></description>
-										<content:encoded><![CDATA[
-<p class="wp-block-paragraph">答案是 MTU 设置错误<sup data-fn="b8fb2b23-a5d6-4b74-a1dd-3894da51236f" class="fn"><a href="#b8fb2b23-a5d6-4b74-a1dd-3894da51236f" id="b8fb2b23-a5d6-4b74-a1dd-3894da51236f-link">1</a></sup>，链路可以发送的最大 MTU 小于 1500 bytes，但是客户端侧配置的 MTU 却是 1500 bytes。所以 TCP 连接建立之后的包，无法到达另一端。在等待 3.5s 左右，发送端觉得链路存在问题，尝试降低发出的包的大小，这时候就可以发过去了，链路上才开始数据传输。</p>
-
-
-
-<p class="wp-block-paragraph">要定位这个问题，我们现在抓包文件中，找到传输数据最多的那个 TCP flow，就是传输数据最多的那个。这个连接是我们重点研究的对象。右键选择 Follow &gt; TCP Stream，来只展示这一个会话。（如何追踪某一个 TCP 流，在前面 重新认识 TCP 的握手和挥手<sup data-fn="df79d648-2564-4897-a8af-ccb13585d96e" class="fn"><a href="#df79d648-2564-4897-a8af-ccb13585d96e" id="df79d648-2564-4897-a8af-ccb13585d96e-link">2</a></sup> 中也介绍过）。</p>
-
-
-
-<p class="wp-block-paragraph">TCP connection 建立之后，客户端一下发了 10 个包，大小都为 1500 bytes。但是服务端一个都没有 ACK。</p>
-
-
-
-<figure class="wp-block-image size-large"><a href="https://www.kawabangga.com/wp-content/uploads/2026/03/mtu-no-ack-scaled.png"><img loading="lazy" decoding="async" width="1024" height="328" src="https://www.kawabangga.com/wp-content/uploads/2026/03/mtu-no-ack-1024x328.png" alt="" class="wp-image-7223" srcset="https://www.kawabangga.com/wp-content/uploads/2026/03/mtu-no-ack-1024x328.png 1024w, https://www.kawabangga.com/wp-content/uploads/2026/03/mtu-no-ack-300x96.png 300w, https://www.kawabangga.com/wp-content/uploads/2026/03/mtu-no-ack-768x246.png 768w, https://www.kawabangga.com/wp-content/uploads/2026/03/mtu-no-ack-1536x492.png 1536w, https://www.kawabangga.com/wp-content/uploads/2026/03/mtu-no-ack-2048x656.png 2048w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /></a><figcaption class="wp-element-caption">前10个包都没有得到服务端的 ACK，前两个包也可以看到 TCP 两端协商的 MSS 是 1460 bytes</figcaption></figure>
-
-
-
-<p class="wp-block-paragraph">然后客户端开始重传。</p>
-
-
-
-<p class="wp-block-paragraph">前 3 次重传分别发生在 0.3s, 0.8s, 1.7s，也都没有收到 ACK。</p>
-
-
-
-<p class="wp-block-paragraph">第 4 次重传发生在 3.5s 这个包不再以 1500 bytes 发送了，而是 1076 bytes (TCP 层是 1024 bytes) 发送。这个包得到了服务端的 ACK。</p>
-
-
-
-<figure class="wp-block-image size-large"><a href="https://www.kawabangga.com/wp-content/uploads/2026/03/mtu-analysis-scaled.png"><img loading="lazy" decoding="async" width="1024" height="321" src="https://www.kawabangga.com/wp-content/uploads/2026/03/mtu-analysis-1024x321.png" alt="" class="wp-image-7222" srcset="https://www.kawabangga.com/wp-content/uploads/2026/03/mtu-analysis-1024x321.png 1024w, https://www.kawabangga.com/wp-content/uploads/2026/03/mtu-analysis-300x94.png 300w, https://www.kawabangga.com/wp-content/uploads/2026/03/mtu-analysis-768x241.png 768w, https://www.kawabangga.com/wp-content/uploads/2026/03/mtu-analysis-1536x481.png 1536w, https://www.kawabangga.com/wp-content/uploads/2026/03/mtu-analysis-2048x642.png 2048w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /></a><figcaption class="wp-element-caption">第 4 次重传降低了 MTU，并且收到了 ACK</figcaption></figure>
-
-
-
-<p class="wp-block-paragraph">于是客户端知道，1076 bytes 的包可以被服务端收到，所以后续都用 1076 bytes 作为 MTU 发送。过一段时间之后尝试更大的包，1288 bytes，1394 bytes，发现也没有被 drop，就继续 probe 并且增大 MTU，最后用 1399 bytes，接近链路的真实 MTU （实际链路 MTU 是 1400 bytes）。</p>
-
-
-
-<p class="wp-block-paragraph">这就是每一个连接都会卡 3.5s 的原因。</p>
-
-
-
-<p class="wp-block-paragraph">为什么要重传 3 次才开始降低 MTU 呢？</p>
-
-
-
-<p class="wp-block-paragraph">这是通过 <em><code>tcp_retries1</code></em> 设置的。man 是这么说的：</p>
-
-
-
-<blockquote class="wp-block-quote is-layout-flow wp-block-quote-is-layout-flow">
-<p class="wp-block-paragraph">The number of times TCP will attempt to retransmit a packet on an established connection normally, without the extra effort of getting the network layers involved. Once we exceed this number of retransmits, we first have the network layer update the route if possible before each new retransmit. The default is the RFC specified minimum of 3.</p>
-</blockquote>
-
-
-
-<p class="wp-block-paragraph">即 TCP 会尝试 <code>tcp_retries1</code> 次数的重传，而不涉及 IP (network) layer.</p>
-
-
-
-<p class="wp-block-paragraph">如果超过了  <code>tcp_retries1</code> 还没有重传成功的话，（默认第 4 次）就会认为链路存在异常了，需要 IP 层接入，比如开始 mtu probe 尝试解决问题。</p>
-
-
-
-<p class="wp-block-paragraph">如果设置为 1，那么在卡的时间就会降低到 1s 左右。（当然，最好的解决方式还是设置正确的 MTU）。</p>
-
-
-
-<div class="wp-block-urvanov-syntax-highlighter-code-block"><pre class="urvanov-syntax-highlighter-plain-tag"># sysctl -w  net.ipv4.tcp_retries1=1                                                                                                                                                                                             
-net.ipv4.tcp_retries1 = 1
-
-# iperf3 -c 10.0.2.2 -b 10M
-Connecting to host 10.0.2.2, port 5201
-[  5] local 10.0.1.2 port 54580 connected to 10.0.2.2 port 5201
-[ ID] Interval           Transfer     Bitrate         Retr  Cwnd
-[  5]   0.00-1.00   sec  0.00 Bytes  0.00 bits/sec    2   1.41 KBytes
-[  5]   1.00-2.00   sec   128 KBytes  1.05 Mbits/sec   22   15.7 KBytes
-[  5]   2.00-3.00   sec  3.50 MBytes  29.4 Mbits/sec    2    150 KBytes
-[  5]   3.00-4.00   sec  1.25 MBytes  10.5 Mbits/sec    0    200 KBytes
-[  5]   4.00-5.00   sec  1.12 MBytes  9.44 Mbits/sec    0    200 KBytes
-[  5]   5.00-6.00   sec  1.25 MBytes  10.5 Mbits/sec    0    200 KBytes
-[  5]   6.00-7.00   sec  1.12 MBytes  9.44 Mbits/sec    0    200 KBytes
-[  5]   7.00-8.00   sec  1.25 MBytes  10.5 Mbits/sec    0    200 KBytes
-[  5]   8.00-9.00   sec  1.12 MBytes  9.44 Mbits/sec    0    200 KBytes
-[  5]   9.00-10.00  sec  1.25 MBytes  10.5 Mbits/sec    0    200 KBytes
-- - - - - - - - - - - - - - - - - - - - - - - - -
-[ ID] Interval           Transfer     Bitrate         Retr
-[  5]   0.00-10.00  sec  12.0 MBytes  10.1 Mbits/sec   26             sender
-[  5]   0.00-10.02  sec  12.0 MBytes  10.0 Mbits/sec                  receiver
-
-iperf Done.</pre></div>
-
-
-
-<p class="wp-block-paragraph">而根据 TCP 的重传时间，大概就是在 3.5s 左右了。</p>
-
-
-
-<p class="wp-block-paragraph">前面说，第 4 次重传的包是从 1076 bytes 开始发送，为什么是这个数字呢？</p>
-
-
-
-<p class="wp-block-paragraph">这个是 sysctl 参数 <code>net.ipv4.tcp_base_mss = 1024</code> 控制的。TCP payload 是 1024 bytes，加上 TCP 的 header，就是 1076 bytes 了。</p>
-
-
-
-<p class="wp-block-paragraph">如果读者尝试复现这个例子，会发现在 MTU 设置错误的情况下，会一直卡住。这是因为 MTU 出现问题的时候，默认的工作机制是靠 ICMP 消息 &#8220;Fragmentation Needed&#8221; (Type 3, Code 4 in IPv4) 来提示需要降低 MTU 的。但是现实情况中，这个 ICMP 一般是收不到的（因为各种设备为了所谓的「安全问题」丢弃了 ICMP），这样就会出现 blackhole，一直重试缺卡在这里。默认情况下，MTU 错误的设置地大了，是会一直卡住的。</p>
-
-
-
-<p class="wp-block-paragraph">但是可以通过 sysctl 参数设置 net.ipv4.tcp_mtu_probing，默认是 0，即不用 probe。</p>
-
-
-
-<p class="wp-block-paragraph">如果是 1 的话，在出现 blackhole 的时候就会尝试降低 segment 的大小看能不能通。即本文中的情况。</p>
-
-
-
-<p class="wp-block-paragraph">如果是 2，是一直启用，即 TCP 不管对方说的 MSS，发送的时候总是从一个小的 MSS 开始发，如果没有问题，再逐渐加大。</p>
-
-
-
-<p class="wp-block-paragraph">MTU 常见的原因，以及一些其他的相关讨论，可以参考下面列出来的 <a href="https://www.kawabangga.com/posts/4983" data-type="post" data-id="4983">有关 MTU 和 MSS 的一切</a> 一文。</p>
-
-
-<ol class="wp-block-footnotes"><li id="b8fb2b23-a5d6-4b74-a1dd-3894da51236f">有关 MTU 的详细分析，可以参考之前的文章：<a href="https://www.kawabangga.com/posts/4983" data-type="post" data-id="4983">有关 MTU 和 MSS 的一切</a> <a href="#b8fb2b23-a5d6-4b74-a1dd-3894da51236f-link" aria-label="跳转到脚注引用 1"><img src="https://s.w.org/images/core/emoji/17.0.2/72x72/21a9.png" alt="↩" class="wp-smiley" style="height: 1em; max-height: 1em;" />︎</a></li><li id="df79d648-2564-4897-a8af-ccb13585d96e"><a href="https://www.kawabangga.com/posts/6467">重新认识 TCP 的握手和挥手：答案和解析</a> <a href="#df79d648-2564-4897-a8af-ccb13585d96e-link" aria-label="跳转到脚注引用 2"><img src="https://s.w.org/images/core/emoji/17.0.2/72x72/21a9.png" alt="↩" class="wp-smiley" style="height: 1em; max-height: 1em;" />︎</a></li></ol>
-
-
-<p class="wp-block-paragraph"></p>
-
-
-
-<div class="wp-block-cover is-light"><img loading="lazy" decoding="async" width="1024" height="576" class="wp-block-cover__image-background wp-image-7405 size-large" alt="" src="https://www.kawabangga.com/wp-content/uploads/2024/05/index-background-1024x576.png" style="object-position:38% 56%" data-object-fit="cover" data-object-position="38% 56%" srcset="https://www.kawabangga.com/wp-content/uploads/2024/05/index-background-1024x576.png 1024w, https://www.kawabangga.com/wp-content/uploads/2024/05/index-background-300x169.png 300w, https://www.kawabangga.com/wp-content/uploads/2024/05/index-background-768x432.png 768w, https://www.kawabangga.com/wp-content/uploads/2024/05/index-background-1536x864.png 1536w, https://www.kawabangga.com/wp-content/uploads/2024/05/index-background.png 1672w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /><span aria-hidden="true" class="wp-block-cover__background has-background-dim" style="background-color:#e5e8ec"></span><div class="wp-block-cover__inner-container is-layout-flow wp-block-cover-is-layout-flow">
-<div class="wp-block-group has-black-color has-text-color has-link-color wp-elements-1"><div class="wp-block-group__inner-container is-layout-constrained wp-block-group-is-layout-constrained">
-<h2 class="wp-block-heading has-text-align-center">==抓包破案录==</h2>
-
-
-
-<p class="has-text-align-center wp-block-paragraph"><em><strong>通过真实故障和抓包文件，学习网络分析与故障排查。</strong><br /></em></p>
-
-
-
-<p class="has-custom-css wp-custom-css-e533bf93 wp-block-paragraph">这篇文章是抓包破案录系列文章（之前叫做《计算机网络实用技术》，后来改名了）中的一篇，这个系列正在连载中，我计划用这个系列的文章来分享一些网络抓包分析的实用技术。这些文章都是总结了我的工作经历中遇到的问题，经过精心构造和编写，每个文件附带抓包文件，通过实战来学习网络抓包与分析。</p>
-
-
-
-<p class="wp-block-paragraph"><strong>如果本文对您有帮助，欢迎扫博客右侧二维码打赏支持，正是订阅者的支持，让我公开写这个系列成为可能，感谢！</strong></p>
-
-
-
-<p class="wp-block-paragraph">如果您正在阅读的是题目类的文章，这个目录内容正好用来隔离其他读者的评论。读完题目可以稍作暂停，进行思考，<strong>继续向下滑动，可能会被其他的读者剧透答案。</strong></p>
-
-
-
-<p class="wp-block-paragraph"><em>没有链接的目录还没有写完，敬请期待……</em></p>
-
-
-
-<ol class="wp-block-list">
-<li><a href="https://www.kawabangga.com/posts/6097">序章</a></li>
-
-
-
-<li><a href="https://www.kawabangga.com/posts/6950">抓包技术以及技巧</a></li>
-
-
-
-<li><a href="https://www.kawabangga.com/posts/6295">理解网络的分层模型</a></li>
-
-
-
-<li><a href="https://www.kawabangga.com/posts/6919">数据是如何路由的</a></li>
-
-
-
-<li>网络问题排查的思路和技巧</li>
-
-
-
-<li><a href="https://www.kawabangga.com/posts/6178">不可以用路由器？</a>（<a href="https://www.kawabangga.com/posts/6291">答案和解析</a>）</li>
-
-
-
-<li><a href="https://www.kawabangga.com/posts/6286">网工闯了什么祸？</a>（<a href="https://www.kawabangga.com/posts/6291">答案和解析</a>，<a href="https://www.kawabangga.com/posts/7129" data-type="post" data-id="7129">阅读加餐！</a>）</li>
-
-
-
-<li><a href="https://www.kawabangga.com/?p=7397">BPG 连接建立失败问题</a> （<a href="https://www.kawabangga.com/?p=7413">答案和解析</a>）</li>
-
-
-
-<li><a href="https://www.kawabangga.com/?p=6383">重新认识 TCP 的握手和挥手</a>（<a href="https://www.kawabangga.com/posts/6467">答案和解析</a>）</li>
-
-
-
-<li><a href="https://www.kawabangga.com/posts/7219">3.5 秒初始延迟问题</a> （<a href="https://www.kawabangga.com/posts/7221">答案和解析</a>）</li>
-
-
-
-<li><a href="https://www.kawabangga.com/posts/7187" data-type="link" data-id="https://www.kawabangga.com/posts/7187">网络断断续续……</a> （<a href="https://www.kawabangga.com/posts/7190" data-type="link" data-id="https://www.kawabangga.com/posts/7190">答案和解析</a>）</li>
-
-
-
-<li><a href="https://www.kawabangga.com/?p=6372">延迟增加了多少？</a>（<a href="https://www.kawabangga.com/posts/6378">答案和解析</a>）</li>
-
-
-
-<li><a href="https://www.kawabangga.com/posts/6910" data-type="post" data-id="6910">压测的时候 QPS 为什么上不去？</a>（<a href="https://www.kawabangga.com/posts/6937">答案和解析</a>）</li>
-
-
-
-<li><a href="https://www.kawabangga.com/posts/6570">TCP 下载速度为什么这么慢？</a>（<a href="https://www.kawabangga.com/posts/6616">答案和解析</a>）</li>
-
-
-
-<li><a href="https://www.kawabangga.com/posts/6965">请求为什么超时了？</a>（<a href="https://www.kawabangga.com/posts/6969">答案和解析</a>）</li>
-
-
-
-<li><a href="https://www.kawabangga.com/posts/7066">0.01% 的概率超时问题</a> （<a href="https://www.kawabangga.com/posts/7076">答案和解析</a>）</li>
-
-
-
-<li><a href="https://www.kawabangga.com/posts/6131" data-type="link" data-id="https://www.kawabangga.com/posts/6131">后记：学习网络的一点经验分享</a></li>
-</ol>
-
-
-
-<pre class="wp-block-preformatted">与本博客的其他页面不同，本页面使用 <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-hans">署名-非商业性使用-禁止演绎 4.0 国际</a> 协议。<br /></pre>
-</div></div>
-</div></div>
-]]></content:encoded>
-					
-					<wfw:commentRss>https://www.kawabangga.com/posts/7221/feed</wfw:commentRss>
-			<slash:comments>6</slash:comments>
 		
 		
 			</item>
