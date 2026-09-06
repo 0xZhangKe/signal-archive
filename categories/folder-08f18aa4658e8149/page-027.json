@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "8b46c9c5823da212f22a7a1b",
+      "title": "在網站上放動圖的方式",
+      "summary": "前言 # 在製作 吉他島嶼官網教學內容 的時候，有些內容不需要影片聲音，只需要動畫循環播放即可 ，結果發現轉轉成 GIF 畫質會下降、檔案變大好幾倍，因此才開始尋求解決方案。 原來這是因爲 GIF 只用了 256 種顏色，而且沒有做任何壓縮，因此才會降畫質又檔案肥大。 解決方案 # 把影片轉成無聲的影片檔案，再利用 HTML 設定自動循環播放即可。 ffmpeg # 以下指令的目的，是將原始影片轉換為適合網頁播放的無聲循環動畫影片： ffmpeg -i input.mov -an -c:v libx264 -preset slow -crf 23 -pix_fmt yuv420p -movflags +faststart output.mp4 -i input.mov 指定輸入影片檔案。 -an 移除音訊（A…",
+      "image": null,
+      "publishedAt": "2026-04-24T08:20:10Z",
+      "sourceId": "199cdf92fc46bfcd",
+      "sourceTitle": "Eddie Lv",
+      "link": "https://eddielv.com/articles/motion-images/",
+      "detailPath": "articles/8b46c9c5823da212f22a7a1b.json"
+    },
+    {
       "id": "117ec1ec23fa03c0449e6203",
       "title": "試玩了 Z-Type 這個英打射擊遊戲",
       "summary": "在 這篇「廢文小天地」發文 的推薦之下，我嘗試去玩了 Z-Type 這個遊戲。 它的遊戲規則直白易懂，我就不贅述了，去試試看玩就知道了！ 不過呢，我覺得這個遊戲具挑戰性的地方呢，就是除了從上方湧來的敵艦會越來越多且速度越來越快，並且需要打的英文字也越來越複雜之外，比這些更關鍵的一點是： 玩家不能中途放棄 ！換句話說，一旦開始輸入某個英文字詞，就必須要將該英文字詞打完，而不能中途換找另一個字詞來打（遊戲會判定爲無效射擊）。 就是這一點，雖然乍聽之下理所當然，但也使整體遊戲難度提升許多，也使遊戲體驗變得更爲刺激。 這是我（第二次）試玩的時候取得的成績： 由於沒有所有玩家歷史成績的相關統計數據，所以我也不知道自己的表現相對而言算好還是壞。不過我主觀認爲我的英打表現應該沒有差到哪裡去啦。 同場加映——我順便去做的英打…",
@@ -648,17 +659,6 @@
       "sourceTitle": "Eddie Lv",
       "link": "https://eddielv.com/musings/dont-get-work-log/",
       "detailPath": "articles/fca990d40b8f06243433978a.json"
-    },
-    {
-      "id": "c000f22dd25d7c0ced7293c0",
-      "title": "过度联想",
-      "summary": "菩提本无树，明镜亦非台。本来无一物，何处惹尘埃。",
-      "image": "https://yufan.me/images/og/less-is-more.png",
-      "publishedAt": "2026-04-17T12:31:16Z",
-      "sourceId": "779e0d2f20166524",
-      "sourceTitle": "雨帆",
-      "link": "https://yufan.me/posts/less-is-more",
-      "detailPath": "articles/c000f22dd25d7c0ced7293c0.json"
     }
   ]
 }

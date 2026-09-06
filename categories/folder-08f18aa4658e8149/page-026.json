@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "a179747da3c4fe8928d40738",
+      "title": "入蜀记 day344 枇杷季正式开始",
+      "summary": "「枇杷季正式开始。」",
+      "image": null,
+      "publishedAt": "2026-05-03T04:48:27Z",
+      "sourceId": "8e5dc5a8b5023a8e",
+      "sourceTitle": "折腾人生",
+      "link": "https://z.arlmy.me/posts/BBBPandINSW/INSW-jet/INSW_344/",
+      "detailPath": "articles/a179747da3c4fe8928d40738.json"
+    },
+    {
       "id": "872e82aa668487664af0ed06",
       "title": "只贏！",
       "summary": "兩天前，我在這個 blog 上宣稱〈寫部落格的大人值得認識〉。雖然我講得這麼篤定，但其實我根本就沒有驗證過這個假說。",
@@ -648,17 +659,6 @@
       "sourceTitle": "小麥的異想世界",
       "link": "https://my-blog.worldofwheat.cc/blog/2026/04/blog_questions.html",
       "detailPath": "articles/6750719b5406ea0f8bf8283f.json"
-    },
-    {
-      "id": "8b46c9c5823da212f22a7a1b",
-      "title": "在網站上放動圖的方式",
-      "summary": "前言 # 在製作 吉他島嶼官網教學內容 的時候，有些內容不需要影片聲音，只需要動畫循環播放即可 ，結果發現轉轉成 GIF 畫質會下降、檔案變大好幾倍，因此才開始尋求解決方案。 原來這是因爲 GIF 只用了 256 種顏色，而且沒有做任何壓縮，因此才會降畫質又檔案肥大。 解決方案 # 把影片轉成無聲的影片檔案，再利用 HTML 設定自動循環播放即可。 ffmpeg # 以下指令的目的，是將原始影片轉換為適合網頁播放的無聲循環動畫影片： ffmpeg -i input.mov -an -c:v libx264 -preset slow -crf 23 -pix_fmt yuv420p -movflags +faststart output.mp4 -i input.mov 指定輸入影片檔案。 -an 移除音訊（A…",
-      "image": null,
-      "publishedAt": "2026-04-24T08:20:10Z",
-      "sourceId": "199cdf92fc46bfcd",
-      "sourceTitle": "Eddie Lv",
-      "link": "https://eddielv.com/articles/motion-images/",
-      "detailPath": "articles/8b46c9c5823da212f22a7a1b.json"
     }
   ]
 }
