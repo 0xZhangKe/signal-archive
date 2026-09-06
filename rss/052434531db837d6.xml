@@ -14,7 +14,24 @@ Terence Eden shares some daunting statistics in support of his take that "the Do
 
 
 
-</summary><category term="dns"/><category term="scams"/><category term="terence-eden"/></entry><entry><title>Quoting Zach Kehs</title><link href="https://simonwillison.net/2026/Sep/6/zach-kehs/" rel="alternate"/><published>2026-09-06T08:42:49+00:00</published><updated>2026-09-06T08:42:49+00:00</updated><id>https://simonwillison.net/2026/Sep/6/zach-kehs/</id><summary type="html">
+</summary><category term="dns"/><category term="scams"/><category term="terence-eden"/></entry><entry><title>There's No Limit to How Bad Code Can Get</title><link href="https://simonwillison.net/2026/Sep/6/theres-no-limit-to-how-bad-code-can-get/" rel="alternate"/><published>2026-09-06T09:08:06+00:00</published><updated>2026-09-06T09:08:06+00:00</updated><id>https://simonwillison.net/2026/Sep/6/theres-no-limit-to-how-bad-code-can-get/</id><summary type="html">
+    
+        &lt;p&gt;&lt;a href="https://lobste.rs/s/rfn2mn/there_s_no_limit_how_bad_code_can_get#c_8kdtaw"&gt;My comment&lt;/a&gt; on &lt;a href="https://lobste.rs/s/rfn2mn/there_s_no_limit_how_bad_code_can_get"&gt;There&amp;#x27;s No Limit to How Bad Code Can Get&lt;/a&gt; &amp;mdash; Lobste.rs.&lt;/p&gt;&lt;p&gt;&lt;em&gt;[In reply to a comment about burning it down to start from scratch when technical debt becomes overwhelming]&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;In my experience it's &lt;em&gt;so rare&lt;/em&gt; for that to work.&lt;/p&gt;
+&lt;p&gt;You announce the old thing is irrecoverably drowning in tech debt. You spin up a team to rewrite it from scratch. Work begins.&lt;/p&gt;
+&lt;p&gt;Meanwhile the old thing remains a moving target: it's running the core business, so changes are still necessary. The developers working on it know that it's going to be made obsolete by the new thing soon, so they don't have any incentive to go beyond the smallest effort possible to add the new features. Technical debt continues to mount.&lt;/p&gt;
+&lt;p&gt;Meanwhile, the team working on the new thing are ambitious and probably a little naive. They start out at a great pace - it's greenfield after all - but as time progresses it becomes apparent that nobody fully understands the behavior and scope of the thing they are replacing. If it was well documented and tested it wouldn't &lt;em&gt;need&lt;/em&gt; to be replaced, after all...&lt;/p&gt;
+&lt;p&gt;After months (or even years) without delivering value, the pressure is on to "ship it", so the new system is launched to handle a subset of what the old system handled - or often for some new feature that was too hard to build with the now mostly unmaintained old system.&lt;/p&gt;
+&lt;p&gt;... so now you have TWO systems in production - the janky old system that nobody wants to touch, and a new system which handles just a few production features and is 80% inactive code that is meant to replace the old system, eventually.&lt;/p&gt;
+&lt;p&gt;If you're &lt;em&gt;really lucky&lt;/em&gt; the company won't have lost patience with the new system and will allow that work to continue. The longer this all takes, and the longer the old system stays in production and stubbornly continues to work, the higher the risk that "priorities have changed" and the new system total replacement work is abandoned, leaving you with two systems where you used to have one.&lt;/p&gt;
+&lt;p&gt;The best article I've read about completing this process responsibly is &lt;a href="https://lethain.com/migrations/"&gt;Migrations: the sole scalable fix to tech debt&lt;/a&gt; by Will Larson.&lt;/p&gt;
+&lt;p&gt;If I run into a situation like this in the future, my strong recommendation will be to shore up the old system with as much automated testing as possible and then seeing if targeted refactors can get it to the desired shape. My hunch is that in many cases that will have a much higher chance of success than the siren call of a greenfield replacement.&lt;/p&gt;
+    
+    
+        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/migrations"&gt;migrations&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/technical-debt"&gt;technical-debt&lt;/a&gt;&lt;/p&gt;
+    
+
+</summary><category term="migrations"/><category term="technical-debt"/></entry><entry><title>Quoting Zach Kehs</title><link href="https://simonwillison.net/2026/Sep/6/zach-kehs/" rel="alternate"/><published>2026-09-06T08:42:49+00:00</published><updated>2026-09-06T08:42:49+00:00</updated><id>https://simonwillison.net/2026/Sep/6/zach-kehs/</id><summary type="html">
     &lt;blockquote cite="https://zachkehs.com/blog/theres_no_limit_to_how_bad_code_can_get/#9-ref"&gt;&lt;p&gt;If you continue to add floors and rooms to a building forever, it will collapse. Software faces no such constraint. The code can &lt;em&gt;always&lt;/em&gt; get worse. There can &lt;em&gt;always&lt;/em&gt; be a new layer of indirection or a reduction in performance.&lt;/p&gt;&lt;/blockquote&gt;
 &lt;p class="cite"&gt;&amp;mdash; &lt;a href="https://zachkehs.com/blog/theres_no_limit_to_how_bad_code_can_get/#9-ref"&gt;Zach Kehs&lt;/a&gt;, There's No Limit to How Bad Code Can Get&lt;/p&gt;
 
@@ -56,6 +73,7 @@ Blink and you'll miss it, but there's a familiar creature at &lt;a href="https:/
 &lt;/blockquote&gt;
 &lt;p&gt;And got this image, generated &lt;a href="https://github.com/simonw/gpt-6-astra-blender-pelican-bicycle/blob/main/work/pelican_final.py"&gt;using Blender's Python API&lt;/a&gt;:&lt;/p&gt;
 &lt;p&gt;&lt;img alt="A 3D illustration of a white pelican cycling along a seaside boardwalk at sunset. It wears a cream boater hat and a coral scarf, with wings on the handlebars and long orange legs reaching the pedals of a turquoise bicycle. A wicker front basket holds pink and white flowers, and three balloons float behind. Pastel bunting stretches overhead between palm trees. Striped beach huts stand beside a teal sea with a small sailboat, beneath a large peach-colored sun. The scene has a softly lit, toy-like style." src="https://static.simonwillison.net/static/2026/astra-blender-pelican.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;This was covered by my existing Codex subscription, but according to &lt;a href="https://github.com/kenn-io/agentsview"&gt;AgentsView&lt;/a&gt; it would have cost $4.24 at API prices for &lt;code&gt;gpt-6-astra&lt;/code&gt;.&lt;/p&gt;
     
     
         &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/blender"&gt;blender&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/pelican-riding-a-bicycle"&gt;pelican-riding-a-bicycle&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/coding-agents"&gt;coding-agents&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/gpt-6-astra"&gt;gpt-6-astra&lt;/a&gt;&lt;/p&gt;
@@ -902,14 +920,4 @@ A few interesting numbers in this FT story gathered from "people with knowledge 
 
 
 
-</summary><category term="ai"/><category term="openai"/><category term="generative-ai"/><category term="llms"/><category term="anthropic"/><category term="claude"/><category term="claude-mythos-fable"/></entry><entry><title>Quoting Drew Breunig</title><link href="https://simonwillison.net/2026/Aug/23/drew-breunig/" rel="alternate"/><published>2026-08-23T19:55:30+00:00</published><updated>2026-08-23T19:55:30+00:00</updated><id>https://simonwillison.net/2026/Aug/23/drew-breunig/</id><summary type="html">
-    &lt;blockquote cite="https://www.dbreunig.com/2026/08/23/fable-the-end-of-moore-s-law.html"&gt;&lt;p&gt;Prior to Fable, it felt silly to waste &lt;em&gt;too&lt;/em&gt; much time improving your coding harness or context strategies. A new model would arrive at the same price (or cheaper!) and paper over most of your problems.&lt;/p&gt;
-&lt;p&gt;But then Fable landed. It was (and still is!) &lt;em&gt;incredible&lt;/em&gt;. But the cost was so high and Opus was &lt;em&gt;good enough&lt;/em&gt; (as was 5.6, K3, and even GLM) for &lt;em&gt;most&lt;/em&gt; of the code we needed.&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;So we started to think about what work went where.&lt;/em&gt;&lt;/p&gt;&lt;/blockquote&gt;
-&lt;p class="cite"&gt;&amp;mdash; &lt;a href="https://www.dbreunig.com/2026/08/23/fable-the-end-of-moore-s-law.html"&gt;Drew Breunig&lt;/a&gt;, Fable &amp;amp; The End of the Free Lunch&lt;/p&gt;
-
-    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/drew-breunig"&gt;drew-breunig&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/anthropic"&gt;anthropic&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/claude"&gt;claude&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llm-pricing"&gt;llm-pricing&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/claude-mythos-fable"&gt;claude-mythos-fable&lt;/a&gt;&lt;/p&gt;
-
-
-
-</summary><category term="drew-breunig"/><category term="anthropic"/><category term="claude"/><category term="llm-pricing"/><category term="ai"/><category term="llms"/><category term="generative-ai"/><category term="claude-mythos-fable"/></entry></feed>
+</summary><category term="ai"/><category term="openai"/><category term="generative-ai"/><category term="llms"/><category term="anthropic"/><category term="claude"/><category term="claude-mythos-fable"/></entry></feed>
