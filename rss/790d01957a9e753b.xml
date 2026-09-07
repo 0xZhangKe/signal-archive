@@ -1,5 +1,107 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/" xmlns:wfw="http://wellformedweb.org/CommentAPI/" xmlns:slash="http://purl.org/rss/1.0/modules/slash/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>月光博客</title><link>https://www.williamlong.info/</link><description>关注互联网和搜索引擎的IT科技博客</description><generator>RainbowSoft Studio Z-Blog 2.3 Avengers Build 180518</generator><language>zh-CN</language><pubDate>Sun, 06 Sep 2026 22:54:41 +0800</pubDate><item><title>母亲被配音兼职诈骗</title><author>williamlong.info@gmail.com (williamlong)</author><link>https://www.williamlong.info/archives/7560.html</link><pubDate>Tue, 01 Sep 2026 20:12:02 +0800</pubDate><guid>https://www.williamlong.info/archives/7560.html</guid><description><![CDATA[<p>自从去年我妈被电信诈骗之后，又卷入保健品诈骗，购买了不少高价保健品，今年8月中旬，我查看我妈的银行卡账单时，忽然发现有一笔1480元的交易记录，我赶忙询问我妈，是不是又买了什么保健品，结果却出乎我的意料，这笔钱用来报了一门配音课程。我感觉，一年下来，我仿佛成了家里免费的&ldquo;反诈宣传员&rdquo;，让我感到非常无奈。</p>
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/" xmlns:wfw="http://wellformedweb.org/CommentAPI/" xmlns:slash="http://purl.org/rss/1.0/modules/slash/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>月光博客</title><link>https://www.williamlong.info/</link><description>关注互联网和搜索引擎的IT科技博客</description><generator>RainbowSoft Studio Z-Blog 2.3 Avengers Build 180518</generator><language>zh-CN</language><pubDate>Mon, 07 Sep 2026 22:51:07 +0800</pubDate><item><title>使用VS Code和Github打造免费网站系统</title><author>williamlong.info@gmail.com (williamlong)</author><link>https://www.williamlong.info/archives/7561.html</link><pubDate>Mon, 07 Sep 2026 19:33:14 +0800</pubDate><guid>https://www.williamlong.info/archives/7561.html</guid><description><![CDATA[<p>以前搭建博客或CMS网站，绝大多数人都会选择WordPress、Typecho、Zblog等基于PHP+MySQL的动态CMS系统，这类传统程序虽然功能成熟、后台可视化易用，但对于个人博客场景来说，存在成本高、维护麻烦、性能差、不安全等一系列问题。</p>
+
+<p>这样的系统存在的问题是，需要服务器支持php、mysql数据库等服务，服务器成本较高，php程序漏洞多，很容易被挂马、被注入攻击，而且遇到大流量访问，服务器往往会遇到各种瓶颈，出现卡顿、报错等情况。</p>
+
+<p>因此，很多人尝试使用Hugo等静态网站系统来搭建博客或CMS网站，由于Hugo本身并没有markdown写作界面，因此需要使用第三方的CMS系统来实现写作和管理文章的功能。</p>
+
+<p>很多新手一般会选择用Obsidian来写markdown文章，把仓库建立在Hugo站点目录下，搭配各类发布插件推送到Github，但实际使用后就会发现，相关配置繁琐、坑点极多，各种BUG不断，调试排查全靠自己上网摸索。</p>
+
+<p>实际上，现在AI时代已经到来了，我们完全可以采用另外一个简单易用方案来实现免费CMS网站的功能，经过实测对比，VS Code + Front Matter CMS + Hugo + GitHub 是目前最适合新手、最稳定、零折腾的免费个人博客网站方案。</p>
+
+<p><strong>一、工作原理</strong></p>
+
+<p>整体逻辑并不复杂，在 VS Code 装好 Front Matter CMS 插件，利用插件自动处理文章头部配置，直接写 Markdown 内容；写完把代码提交推送到 GitHub 仓库；仓库收到更新后触发 GitHub Actions，云端自动调用 Hugo 编译生成静态网页；最后由 GitHub Pages 对外提供网站访问。</p>
+
+<p>简单说，我们只需要专注写内容，配置、编译、上线这些步骤都交给工具自动完成。</p>
+
+<p><strong>二、前置环境准备</strong></p>
+
+<p>本地电脑只需要准备三个软件，全部默认安装就可以，不用折腾额外设置。</p>
+
+<p>第一个是 Git，主要用来做版本管理，我们本地写好的文章，靠它提交同步到 GitHub 上面。</p>
+
+<p>第二个就是 VS Code，我们主要就在这个编辑器里面写文章、修改各类配置。除了VS Code，使用其他套壳软件也可以，例如：TRAE、Qoder、CodeBuddy、Antigravity等等。</p>
+
+<p>第三个是 Hugo，记得一定要下载 Extended 扩展版本。平时主要用它新建站点，还有在本地预览博客实际效果。真正网站上线编译，是在 GitHub 服务器上跑的，就算关掉自己电脑也不受影响。</p>
+
+<p><strong>三、初始化Hugo博客项目并绑定GitHub仓库</strong></p>
+
+<p>1. 本地创建Hugo站点</p>
+
+<p>打开电脑终端，一行一行复制执行下面的命令，就能生成完整的 Hugo 博客目录。</p>
+
+<p># 创建博客站点文件夹<br />
+hugo new site my-blog<br />
+# 进入项目目录<br />
+cd my-blog<br />
+# 初始化git仓库<br />
+git init<br />
+# 安装简约主题PaperMod<br />
+git submodule add https://github.com/adityatelange/hugo-PaperMod.git themes/PaperMod</p>
+
+<p>2. 基础配置修改</p>
+
+<p>进到生成好的项目文件夹，找到hugo.toml，把下面内容粘贴进去，记得把网址改成自己 GitHub 账号和仓库名字。</p>
+
+<p>baseURL = &#39;https://你的用户名.github.io/仓库名/&#39;<br />
+locale = &#39;zh-cn&#39;<br />
+title = &#39;个人技术博客&#39;<br />
+theme = &quot;PaperMod&quot;</p>
+
+<p>3. 关联GitHub远程仓库</p>
+
+<p>先打开 GitHub 网页，手动新建一个空仓库，不要勾选 README、许可证这些选项。</p>
+
+<p>回到终端执行下面代码，把本地全部文件推送到刚建好的 GitHub 仓库。</p>
+
+<p>git add .<br />
+git commit -m &quot;初始化hugo博客项目&quot;<br />
+git remote add origin 你的仓库地址<br />
+git push origin main</p>
+
+<p><strong>四、VS Code核心配置：Front Matter CMS插件搭建本地CMS</strong></p>
+
+<p>这一步是这套方案的核心，不用每次手写一大段文章头部配置，借助插件完成文章管理。</p>
+
+<p>1. 插件安装</p>
+
+<p>打开 VS Code 的插件市场，搜索&ldquo;Front Matter CMS&rdquo;。注意选择正式稳定版，不要装 BETA 测试版本，正式版的功能完全够用。</p>
+
+<p>2. 插件初始化（适配Hugo）</p>
+
+<p>用VS Code打开博客项目根目录（必须打开根目录，不可打开子文件夹），左侧点击Front Matter CMS图标，启动初始化向导，框架选择：Hugo，文章目录配置：content/posts。</p>
+
+<p style="text-align:center"><a href="/upload/7561_2.jpg"><img alt="Front Matter CMS" src="/upload/7561_1.jpg" /></a></p>
+
+<p><strong>五、配置 GitHub Actions 实现自动部署</strong></p>
+
+<p>配置完成之后，只要本地把代码推送到 GitHub，就会自动编译并且更新网站，不用手动操作打包。</p>
+
+<p>1. 打开你的 GitHub 仓库页面，进入 Settings &rarr; Pages；</p>
+
+<p>2. Deployment source&nbsp;选项选择 GitHub Actions；</p>
+
+<p>3. 选择浏览工作流模板，搜索 Hugo，选用官方 Hugo 模板，点击 Configure；</p>
+
+<p>4. 保存文件，工作流配置就写入仓库，自动部署正式生效。</p>
+
+<p><strong>六、平时写文章和发布的实际操作</strong></p>
+
+<p>全部环境搭好之后，后续写博客就很简单，一共几步：</p>
+
+<p>1. 打开 Front Matter 面板，点击创建新文章。插件会自动生成 Hugo 需要的头部信息，自动填好标题、时间、标签、草稿标识。</p>
+
+<p>2. 在 VS Code 里面写 Markdown 正文，图片直接拖拽进去，插件会自动保存图片并生成访问链接。</p>
+
+<p>3. 内容写完检查完毕，如果要对外发布，把文章头部的 `draft: true` 修改成 `draft: false`。draft 为 true 代表草稿，Hugo 不会把这篇文章编译到线上网站。</p>
+
+<p>4. 通过 VS Code 的 Git 功能，提交改动并推送到 GitHub 远程仓库。</p>
+
+<p>5. 等待 GitHub Actions 执行构建，一般几十秒到一分钟，线上网站就完成更新。</p>
+
+<p>过程里碰到配置报错、页面渲染异常、部署失败之类的问题，不用到处搜帖子慢慢试。直接复制报错信息丢给 VS Code 内置 AI，让它帮你定位和修改配置，大部分问题很快就能处理完成。</p>
+]]></description><category>网站建设</category><comments>https://www.williamlong.info/archives/7561.html#comment</comments><wfw:commentRss>https://www.williamlong.info/feed.asp?cmt=7561</wfw:commentRss></item><item><title>母亲被配音兼职诈骗</title><author>williamlong.info@gmail.com (williamlong)</author><link>https://www.williamlong.info/archives/7560.html</link><pubDate>Tue, 01 Sep 2026 20:12:02 +0800</pubDate><guid>https://www.williamlong.info/archives/7560.html</guid><description><![CDATA[<p>自从去年我妈被电信诈骗之后，又卷入保健品诈骗，购买了不少高价保健品，今年8月中旬，我查看我妈的银行卡账单时，忽然发现有一笔1480元的交易记录，我赶忙询问我妈，是不是又买了什么保健品，结果却出乎我的意料，这笔钱用来报了一门配音课程。我感觉，一年下来，我仿佛成了家里免费的&ldquo;反诈宣传员&rdquo;，让我感到非常无奈。</p>
 
 <p><strong>一、被骗的整个过程</strong></p>
 
@@ -306,15 +408,4 @@ draft: true<br />
 <p>本次对局将在位于首尔忠正路的韩国经济TV大楼11层尖端演播室中进行直播。解说由李贤旭九段担任，柳承熙担任主持人。节目计划利用虚拟现实（VR）设备和视频墙，在解说演播室中呈现以往围棋转播中从未有过的丰富多元的画面。此外，在17日直播开始前播出的韩经TV《新奇的经济脱口秀 Quick》节目中，申真谞九段将与AI专家一道，回顾2016年AlphaGo震惊世界以来10年间AI的发展轨迹以及人类围棋的进化历程。</p>
 
 <p>17日和19日的对局由韩国经济TV、21日的对局由围棋TV于上午10点起进行直播。</p>
-]]></description><category>软件应用</category><comments>https://www.williamlong.info/archives/7552.html#comment</comments><wfw:commentRss>https://www.williamlong.info/feed.asp?cmt=7552</wfw:commentRss></item><item><title>韩红帮冯小刚新片《抓特务》“走个面”引争议</title><author>williamlong.info@gmail.com (williamlong)</author><link>https://www.williamlong.info/archives/7551.html</link><pubDate>Tue, 30 Jun 2026 22:06:32 +0800</pubDate><guid>https://www.williamlong.info/archives/7551.html</guid><description><![CDATA[<p>2026年6月下旬，歌手韩红作为冯小刚新片《抓特务》的配乐制作人，在首映礼上喊话北京观众&ldquo;走个面儿&rdquo;支持票房，具体表示&ldquo;北京两千多万人口，咱们北京的兄弟姐妹，爷们娘们，能不能走个面儿？走个面儿把第一波票房先带起来，咱就有了！&rdquo;，被质疑道德绑架，引发口碑争议。</p>
-
-<p>6月30日，韩红发布正式致歉声明，承认&ldquo;随口一句&lsquo;走个面&rsquo;，确实过于轻率随意，思虑不周、措辞失当，产生了负面观感&rdquo;。</p>
-
-<p>之后，罗永浩也发文对事件进行评论，罗永浩称，电影市场走下坡，很大程度上是流媒体长视频，短视频，短剧，以及还在增长的游戏产业等等持续分流导致的。以前电影市场年景好的时候，很多烂片也卖得不错，现在很多好片子照样卖得也很差。不想去看电影没问题，对举步维艰的电影人阴阳怪气，没有必要。</p>
-
-<p>我没有看过冯小刚的电影《抓特务》，且不说剧情如何，一看这电影名，我就没有看这电影的兴趣。</p>
-
-<p>电影的具体剧情我也了解了一下，我觉得，即使现在是个全民抓特务的年代，《抓特务》的剧情也难以获得大众的认同，一个老师教书育人四十年，什么坏事也没做，却被基层执法机关搞了四十年，这不是神经病吗？证据不足，也要盯着折腾，几十年如一日去想方设法证明他有问题，普通人看了之后，难免不会去想，为什么被搞的人不会是我。</p>
-
-<p>我做为一个自媒体，也感同身受，当年在新浪微博也有几十万粉丝，但感受就和《抓特务》里的教师冯静波一样，一辈子没做过什么坏事，却穷尽一生历经磨难，说的每句话都被人用放大镜来找茬，鸡蛋里挑骨头，很多不知道哪里冒出来的人，几十年如一日想方设法证明这个人有问题，一个人被这么盯着折腾，想不抑郁都难。</p>
-]]></description><category>互联网络</category><comments>https://www.williamlong.info/archives/7551.html#comment</comments><wfw:commentRss>https://www.williamlong.info/feed.asp?cmt=7551</wfw:commentRss></item></channel></rss>
+]]></description><category>软件应用</category><comments>https://www.williamlong.info/archives/7552.html#comment</comments><wfw:commentRss>https://www.williamlong.info/feed.asp?cmt=7552</wfw:commentRss></item></channel></rss>

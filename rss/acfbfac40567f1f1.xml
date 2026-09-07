@@ -12,7 +12,7 @@
 	<atom:link href="https://blog.jetbrains.com/kotlin/feed/" rel="self" type="application/rss+xml" />
 	<link>https://blog.jetbrains.com</link>
 	<description>Developer Tools for Professionals and Teams</description>
-	<lastBuildDate>Fri, 04 Sep 2026 10:19:27 +0000</lastBuildDate>
+	<lastBuildDate>Mon, 07 Sep 2026 11:31:00 +0000</lastBuildDate>
 	<language>en-US</language>
 	<sy:updatePeriod>
 	hourly	</sy:updatePeriod>
@@ -28,6 +28,205 @@
 	<height>32</height>
 </image> 
 	<item>
+		<title>Kotlin 2.4.20 Released</title>
+		<link>https://blog.jetbrains.com/kotlin/2026/09/kotlin-2-4-20-released/</link>
+		
+		<dc:creator><![CDATA[Daniel Csorba]]></dc:creator>
+		<pubDate>Mon, 07 Sep 2026 11:30:57 +0000</pubDate>
+		<featuredImage>https://blog.jetbrains.com/wp-content/uploads/2026/09/KT-releases-BlogSocialShare-1280x720-1.png</featuredImage>		<category><![CDATA[releases]]></category>
+		<guid isPermaLink="false">https://blog.jetbrains.com/?post_type=kotlin&#038;p=737362</guid>
+
+					<description><![CDATA[The Kotlin 2.4.20 release is out! Here are the main highlights: For the complete list of changes, see What&#8217;s new in Kotlin 2.4.20 or the release notes on GitHub. How to install Kotlin 2.4.20 The latest version of Kotlin is included in the latest versions of IntelliJ IDEA and Android Studio. To update to the [&#8230;]]]></description>
+										<content:encoded><![CDATA[
+<p>The Kotlin 2.4.20 release is out! Here are the main highlights:</p>
+
+
+
+<ul class="wp-block-list">
+<li><strong>Standard library</strong>: Support for coroutine stack trace recovery, new functions for checking equality and uniqueness of collection elements, and new overloads for <code>kotlin.test</code> assertion functions.</li>
+
+
+
+<li><strong>Kotlin/Native</strong>: New Swift export features, improved incremental compilation, and automatically generated <code>Package.swift</code> files for SwiftPM dependencies.</li>
+
+
+
+<li><strong>Kotlin/Wasm</strong>:<strong> </strong>Changes to top-level <code>require()</code> calls in <code>@JsFun</code> declarations, improved companion object initialization order, and support for Wasmtime in the Kotlin Gradle plugin.</li>
+
+
+
+<li><strong>Kotlin/JS</strong>: A new DSL for browser testing, support for exporting suspend lambdas as async functions, and improved exportability of data classes.</li>
+
+
+
+<li><strong>Gradle</strong>: Support for Gradle 9.7.0 and improved reporting in the Problems API.</li>
+
+
+
+<li><strong>Build tools API</strong>: Support for new targets: Kotlin/JS, Kotlin/Wasm, and Kotlin metadata.</li>
+
+
+
+<li><strong>Kotlin compiler</strong>: The `kotlinr` runner command and a separate native image.</li>
+</ul>
+
+
+
+<p></p>
+
+
+
+<p>For the complete list of changes, see <a href="https://kotlinlang.org/docs/whatsnew2420.html" target="_blank" rel="noopener">What&#8217;s new in Kotlin 2.4.20</a> or the <a href="https://github.com/JetBrains/kotlin/releases/tag/v2.4.20" target="_blank" rel="noopener">release notes on GitHub</a>.</p>
+
+
+
+<h2 class="wp-block-heading">How to install Kotlin 2.4.20</h2>
+
+
+
+<p>The latest version of Kotlin is included in the latest versions of <a href="https://www.jetbrains.com/idea/download/" target="_blank" rel="noopener">IntelliJ IDEA</a> and <a href="https://developer.android.com/studio" target="_blank" rel="noopener">Android Studio</a>.</p>
+
+
+
+<p>To update to the new Kotlin version, make sure your IDE is updated to the latest version and <a href="https://kotlinlang.org/docs/releases.html#update-to-a-new-kotlin-version" target="_blank" rel="noopener">change the Kotlin version</a> to 2.4.20 in your build scripts.</p>
+
+
+
+<p>If you need the command-line compiler, download it from the <a href="https://github.com/JetBrains/kotlin/releases/tag/v2.4.20" target="_blank" rel="noopener">GitHub release page</a>.</p>
+
+
+
+<p><strong>If you run into any problems:</strong></p>
+
+
+
+<ul class="wp-block-list">
+<li>Find help on <a href="https://app.slack.com/client/T09229ZC6" target="_blank" rel="noopener">Slack</a> (<a href="https://surveys.jetbrains.com/s3/kotlin-slack-sign-up" target="_blank" rel="noopener">get an invite</a>).</li>
+
+
+
+<li>Report issues to our issue tracker, <a href="https://youtrack.jetbrains.com/issues/KT" target="_blank" rel="noopener">YouTrack</a>.</li>
+</ul>
+
+
+
+<div style="background-color: #f1f6fe; margin-bottom: 2px; padding: 5px; margin-right: 0%; text-align: left; min-height: px;">
+<p>Stay up to date with the latest Kotlin features! Subscribe to receive Kotlin updates by filling out the form at the bottom of this post. ⬇️</p>
+</div>
+
+
+
+<h2 class="wp-block-heading">Special thanks to our EAP Champions</h2>
+
+
+
+<ul class="wp-block-list">
+<li><a href="https://bsky.app/profile/zacsweers.dev" target="_blank" rel="noopener">Zac Sweers</a></li>
+
+
+
+<li><a href="https://x.com/noraltavir">Alexander Nozik</a></li>
+
+
+
+<li><a href="https://github.com/BoD" target="_blank" rel="noopener">Benoit Lubek</a></li>
+
+
+
+<li><a href="https://github.com/ychescale9" target="_blank" rel="noopener">Yang</a></li>
+
+
+
+<li><a href="https://github.com/rickclephas" target="_blank" rel="noopener">Rick Clephas</a></li>
+
+
+
+<li><a href="https://www.linkedin.com/in/johannessvensson/" target="_blank" rel="noopener">Johannes Svensson</a></li>
+
+
+
+<li><a href="https://www.linkedin.com/in/lukasz-wasylkowski/" target="_blank" rel="noopener">Łukasz Wasylkowski</a></li>
+
+
+
+<li><a href="https://sterlingalbury.com/" target="_blank" rel="noopener">Sterling Albury</a></li>
+
+
+
+<li><a href="https://github.com/HagamosVideojuegos" target="_blank" rel="noopener">David Lopez</a></li>
+
+
+
+<li><a href="https://github.com/molikuner" target="_blank" rel="noopener">Florian Schreiber</a></li>
+
+
+
+<li><a href="https://github.com/msotho" target="_blank" rel="noopener">Sechaba Mofokeng</a></li>
+
+
+
+<li><a href="https://github.com/JesusMcCloud" target="_blank" rel="noopener">Bernd Prünster</a></li>
+
+
+
+<li><a href="https://x.com/andy_lamax">Anderson Lameck</a></li>
+
+
+
+<li><a href="https://github.com/dayanruben" target="_blank" rel="noopener">Dayan Ruben</a></li>
+
+
+
+<li><a href="https://kotlinlang.slack.com/team/U03PLFM837A" target="_blank" rel="noopener">Josh Stagg</a></li>
+
+
+
+<li><a href="https://www.linkedin.com/in/yuri-geronimus/" target="_blank" rel="noopener">Yuri Geronimus</a></li>
+
+
+
+<li><a href="https://github.com/seregamorph" target="_blank" rel="noopener">Sergey Chernov</a></li>
+
+
+
+<li><a href="https://ivan.canet.dev/" target="_blank" rel="noopener">Ivan Canet</a></li>
+
+
+
+<li><a href="https://github.com/Zordid" target="_blank" rel="noopener">Olaf Gottschalk</a></li>
+
+
+
+<li><a href="https://github.com/MohamedRejeb" target="_blank" rel="noopener">Mohamed Rejeb</a></li>
+</ul>
+
+
+
+<h1 class="wp-block-heading">Further reading</h1>
+
+
+
+<ul class="wp-block-list">
+<li><a href="https://kotlinlang.org/docs/whatsnew2420.html" target="_blank" rel="noopener">What’s new in Kotlin 2.4.20 documentation</a></li>
+
+
+
+<li><a href="https://kotlinlang.org/docs/compatibility-guide-24.html" target="_blank" rel="noopener">Kotlin 2.4 compatibility guide</a></li>
+
+
+
+<li><a href="https://blog.jetbrains.com/kotlin/2022/11/eap-champions/">Kotlin EAP Champions</a></li>
+</ul>
+
+
+
+<p></p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
 		<title>Kotlin Toolchain 0.12: Multiplatform Library Publishing, Wasm Apps, and More</title>
 		<link>https://blog.jetbrains.com/kotlin/2026/09/kotlin-toolchain-0-12-multiplatform-library-publishing-wasm-apps-and-more/</link>
 		
@@ -3073,103 +3272,6 @@ val issues: List&lt;Issue> = asLlm(response, hint = "Return all beginner-friendl
 
 
 <p>If you find a place where runtime logic delegation fits your code, open an issue. If you build something with it, send a PR.</p>
-]]></content:encoded>
-					
-		
-		
-			</item>
-		<item>
-		<title>Kotlin Turns 15: Celebrate the Kotlin Effect</title>
-		<link>https://blog.jetbrains.com/kotlin/2026/07/kotlin-turns-15-celebrate-the-kotlin-effect/</link>
-		
-		<dc:creator><![CDATA[Kodee]]></dc:creator>
-		<pubDate>Fri, 17 Jul 2026 13:29:40 +0000</pubDate>
-		<featuredImage>https://blog.jetbrains.com/wp-content/uploads/2026/07/Kotlin-Release-X-LinkedIn-FB-Bluesky-1200x675-1-5.png</featuredImage>		<category><![CDATA[kotlin]]></category>
-		<category><![CDATA[news]]></category>
-		<guid isPermaLink="false">https://blog.jetbrains.com/?post_type=kotlin&#038;p=721999</guid>
-
-					<description><![CDATA[🎉 Kotlin turns 15! 🎉 For 15 years, you&#8217;ve helped shape Kotlin into the language it is today. Whether you&#8217;ve built apps, contributed to the ecosystem, taught others, or simply chosen Kotlin for your next project – thank you for being part of the journey. Today, we’re celebrating Kotlin and the people who have made [&#8230;]]]></description>
-										<content:encoded><![CDATA[
-<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/07/celebrate-the-kotlin-effect-with-us.png" alt="" class="wp-image-724928" /></figure>
-
-
-
-<p>🎉 Kotlin turns 15! 🎉</p>
-
-
-
-<p>For 15 years, you&#8217;ve helped shape Kotlin into the language it is today. Whether you&#8217;ve built apps, contributed to the ecosystem, taught others, or simply chosen Kotlin for your next project – thank you for being part of the journey.<br><br>Today, we’re celebrating Kotlin and the people who have made its journey possible. Explore special ways to celebrate Kotlin’s 15th birthday.</p>
-
-
-
-<h2 class="wp-block-heading">Leave a birthday wish for Kotlin</h2>
-
-
-
-<p>Create a <a href="https://kotlinlang.org/kotlin-effect/#celebrate-with-kodee" target="_blank" rel="noopener">digital birthday postcard</a> with a wish or prediction for Kotlin’s next chapter. You can also upload your own photo to personalize the postcard.</p>
-
-
-
-<p>Share your postcard with the Kotlin community and add your message to Kotlin’s 15th birthday celebration.</p>
-
-
-
-<figure data-wp-context="{&quot;imageId&quot;:&quot;6a9e8498082d7&quot;}" data-wp-interactive="core/image" class="wp-block-image size-full wp-lightbox-container"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" data-wp-class--hide="state.isContentHidden" data-wp-class--show="state.isContentVisible" data-wp-init="callbacks.setButtonStyles" data-wp-on-async--click="actions.showLightbox" data-wp-on-async--load="callbacks.setButtonStyles" data-wp-on-async-window--resize="callbacks.setButtonStyles" src="https://blog.jetbrains.com/wp-content/uploads/2026/07/KT-Twitter_Facebook_LinkedIn-1200x675-1.png" alt="" class="wp-image-722875" /><button
-			class="lightbox-trigger"
-			type="button"
-			aria-haspopup="dialog"
-			aria-label="Enlarge image"
-			data-wp-init="callbacks.initTriggerButton"
-			data-wp-on-async--click="actions.showLightbox"
-			data-wp-style--right="state.imageButtonRight"
-			data-wp-style--top="state.imageButtonTop"
-		>
-			<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 12">
-				<path fill="#fff" d="M2 0a2 2 0 0 0-2 2v2h1.5V2a.5.5 0 0 1 .5-.5h2V0H2Zm2 10.5H2a.5.5 0 0 1-.5-.5V8H0v2a2 2 0 0 0 2 2h2v-1.5ZM8 12v-1.5h2a.5.5 0 0 0 .5-.5V8H12v2a2 2 0 0 1-2 2H8Zm2-12a2 2 0 0 1 2 2v2h-1.5V2a.5.5 0 0 0-.5-.5H8V0h2Z" />
-			</svg>
-		</button></figure>
-
-
-
-<h2 class="wp-block-heading">More ways to celebrate</h2>
-
-
-
-<p>Explore the Kotlin Effect beyond the code:</p>
-
-
-
-<ul class="wp-block-list">
-<li><a href="https://kotlinlang.org/kotlin-effect/#kotlin-effect-in-real-life" target="_blank" rel="noreferrer noopener">Watch familiar Kotlin ideas come to life</a>.</li>
-
-
-
-<li><a href="https://kotlinlang.org/kotlin-effect/#kotlin-effect-action" target="_blank" rel="noreferrer noopener">Battle friction in a browser game.</a></li>
-
-
-
-<li>Keep learning with free access to <a href="https://kotlinlang.org/kotlin-effect/#yours-kotlin-effect" target="_blank" rel="noreferrer noopener">select Kotlin courses on Hyperskill</a> until September 9, 2026.</li>
-</ul>
-
-
-
-<h2 class="wp-block-heading"><strong>Thank you for being part of Kotlin’s journey</strong></h2>
-
-
-
-<p>Fifteen years is an incredible milestone – made possible by everyone who has built with Kotlin, contributed to its ecosystem, shared knowledge, and supported one another along the way.</p>
-
-
-
-<p>There are still more ideas to explore, more friction to remove, and many more things to build together.<br><br>Happy 15th birthday, Kotlin! 💜</p>
-
-
-
-<div class="buttons">
-        <div class="buttons__row">
-            <a class="ek-link jb-download-button" title="Celebrate with us" href="https://kotlinlang.org/kotlin-effect/" target="_blank" rel="noopener" data-test="blog-article-cta" data-cl="true">Celebrate with us</a>
-         </div>
-</div>
 ]]></content:encoded>
 					
 		
