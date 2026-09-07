@@ -1,6 +1,83 @@
 {
   "items": [
     {
+      "id": "b044eea8b046489d11c0cccc",
+      "title": "Announcing security_release_practice",
+      "summary": "Security is hard. One of the skills any OSS maintainer needs is how to do releases, and security releases are a special kind of release that needs special git-fu to make it work. I’ve created a repository so that you can practice this particular skill. It’s called…",
+      "image": null,
+      "publishedAt": "2013-03-08T00:00:00Z",
+      "sourceId": "9a41b0d6fa07d21e",
+      "sourceTitle": "Steve Klabnik",
+      "link": "https://steveklabnik.com/writing/announcing-securityreleasepractice/",
+      "detailPath": "articles/b044eea8b046489d11c0cccc.json"
+    },
+    {
+      "id": "735d8b34df79f9c5c9daaf0d",
+      "title": "Going vimgan",
+      "summary": "I’m going vim-gan. Basically, I don’t want to consume any source code which doesn’t come from vim, or products that contain non-vim source code. While I won’t, some people I’ve talked to will also consume code produced in Eclipse, since recent scientific studies show that Eclipse…",
+      "image": null,
+      "publishedAt": "2013-03-06T00:00:00Z",
+      "sourceId": "9a41b0d6fa07d21e",
+      "sourceTitle": "Steve Klabnik",
+      "link": "https://steveklabnik.com/writing/going-vimgan/",
+      "detailPath": "articles/735d8b34df79f9c5c9daaf0d.json"
+    },
+    {
+      "id": "9133c1b8cd322b543a75cfd3",
+      "title": "Using puma on Heroku",
+      "summary": "I’m a big fan of Puma these days. Today, I converted my blog over to use Puma, and I figured I’d share how I did it. This blog uses Sinatra. If you want to look ahead, here is the commit. Gemfile Installing Puma is really easy: just add gem 'puma' to your Gemfile. Done! This…",
+      "image": null,
+      "publishedAt": "2013-02-24T00:00:00Z",
+      "sourceId": "9a41b0d6fa07d21e",
+      "sourceTitle": "Steve Klabnik",
+      "link": "https://steveklabnik.com/writing/using-puma-on-heroku/",
+      "detailPath": "articles/9133c1b8cd322b543a75cfd3.json"
+    },
+    {
+      "id": "52f624c1b6916e6f90ac3259",
+      "title": "I'm writing \"Rails 4 in Action\"!",
+      "summary": "Last night, I took a big step forward in my writing career: I’ll be building upon the work Ryan Bigg was doing to take “Rails 3 in Action” and move it to Rails 4. I signed the contract a few weeks ago, but last night I actually did the first bit of editing, and successfully got…",
+      "image": null,
+      "publishedAt": "2013-02-13T00:00:00Z",
+      "sourceId": "9a41b0d6fa07d21e",
+      "sourceTitle": "Steve Klabnik",
+      "link": "https://steveklabnik.com/writing/i-m-writing--rails-4-in-action--/",
+      "detailPath": "articles/52f624c1b6916e6f90ac3259.json"
+    },
+    {
+      "id": "12ab8232fbf514bfb6ba5c37",
+      "title": "The next iteration of \"Designing Hypermedia APIs\"",
+      "summary": "I sent out an email today to everyone who’d previously purchased Designing Hypermedia APIs . Here’s the text: Hey there, First of all, I want to apologize for sending you an email. I try to keep these to a minimum. But this one is important. I haven't been uploading new content…",
+      "image": null,
+      "publishedAt": "2013-02-12T00:00:00Z",
+      "sourceId": "9a41b0d6fa07d21e",
+      "sourceTitle": "Steve Klabnik",
+      "link": "https://steveklabnik.com/writing/the-next-iteration-of-designing-hypermedia-apis/",
+      "detailPath": "articles/12ab8232fbf514bfb6ba5c37.json"
+    },
+    {
+      "id": "b6ab8dc49275385e6b1906c9",
+      "title": "Ruby on Rails maintenance policy",
+      "summary": "Recently, the Rails team has committed to a specific policy related to release maintenance. Due to the rapid pace of recent releases, it’s good to understand how your apps relate to this policy. The policy was originally posted on Google Groups, here:…",
+      "image": null,
+      "publishedAt": "2013-02-11T00:00:00Z",
+      "sourceId": "9a41b0d6fa07d21e",
+      "sourceTitle": "Steve Klabnik",
+      "link": "https://steveklabnik.com/writing/ruby-on-rails-maintenance-policy/",
+      "detailPath": "articles/b6ab8dc49275385e6b1906c9.json"
+    },
+    {
+      "id": "df65a3eb1fe2e9b18c35ca91",
+      "title": "Ember.js and accessibility",
+      "summary": "Hey everyone! I made a video today about Ember.js and accessibility. I had always been repeating what I’d heard about screen readers: they can’t work with JavaScript. Turns out that’s not exactly true. The video is the best way to show you: VoiceOver, Ember.js, and WAI-ARIA from…",
+      "image": null,
+      "publishedAt": "2013-02-07T00:00:00Z",
+      "sourceId": "9a41b0d6fa07d21e",
+      "sourceTitle": "Steve Klabnik",
+      "link": "https://steveklabnik.com/writing/emberjs-and-accessibility/",
+      "detailPath": "articles/df65a3eb1fe2e9b18c35ca91.json"
+    },
+    {
       "id": "cf5844ffcf1390a0e533723f",
       "title": "How to not rely on rubygems.org for development",
       "summary": "Due to the recent situation with Rubygems.org , a lot of people noticed that they rely on Rubygems.org when deploying. A lot of people advocate “vendor everything” , and while that’s one approach, I actually don’t think it’s necessary. I think a lot of people think they rely on…",
@@ -582,83 +659,6 @@
       "sourceTitle": "fabiensanglard.net",
       "link": "https://fabiensanglard.net/quake3/index.php",
       "detailPath": "articles/66591faac58c2be94a7fc299.json"
-    },
-    {
-      "id": "d79465cc2b3bfc13b8b4a8fc",
-      "title": "Introducing issue2pr",
-      "summary": "Ever had an issue on GitHub, and then you fixed the bug? Opened a brand new pull request, which becomes a new issue, and then you have to remember to link the two via a comment, or manually go back and close the issue as well? Turns out that GitHub has the power to turn Issues…",
-      "image": null,
-      "publishedAt": "2012-06-29T00:00:00Z",
-      "sourceId": "9a41b0d6fa07d21e",
-      "sourceTitle": "Steve Klabnik",
-      "link": "https://steveklabnik.com/writing/introducing-issue2pr/",
-      "detailPath": "articles/d79465cc2b3bfc13b8b4a8fc.json"
-    },
-    {
-      "id": "04adc929fd7e35ab7c4e7688",
-      "title": "Doom3 Source Code Review",
-      "summary": "On November 23, 2011 id Software maintained the tradition and released the source code of their previous engine. This time is was the turn of idTech4 which powered Prey, Quake 4 and of course Doom 3. Within hours the GitHub repository was forked more than 400 times and people started to look at the game internal mechanisms/port the engine on other platforms…",
-      "image": "https://fabiensanglard.net/doom3/icons/doom3_icon_desaturated.png",
-      "publishedAt": "2012-06-08T01:08:45Z",
-      "sourceId": "ce9ad60b092e38b0",
-      "sourceTitle": "fabiensanglard.net",
-      "link": "https://fabiensanglard.net/doom3/index.php",
-      "detailPath": "articles/04adc929fd7e35ab7c4e7688.json"
-    },
-    {
-      "id": "28a5084477d66b6147e1262f",
-      "title": "Show solidarity to all who resist",
-      "summary": "I found this on a flyer in my neighborhood. On may 19th, three people associated with the Occupy movement were arrested in Chicago, just before the anti-NATO protest. Two infiltrators had been working with them for months, trying to persuade them to escalate their tactics – just…",
-      "image": null,
-      "publishedAt": "2012-05-31T00:00:00Z",
-      "sourceId": "9a41b0d6fa07d21e",
-      "sourceTitle": "Steve Klabnik",
-      "link": "https://steveklabnik.com/writing/show-solidarity-to-all-who-resist/",
-      "detailPath": "articles/28a5084477d66b6147e1262f.json"
-    },
-    {
-      "id": "d49a0a93979866b67ec490aa",
-      "title": "Finale",
-      "summary": "This morning, my mother woke up and found that my father had passed away in the night. Thanks for all the love and support you all have shown me over the last two months. It’s been hard, but you all have made it easier. Don’t be worried if you don’t see me around a lot for the…",
-      "image": null,
-      "publishedAt": "2012-05-30T00:00:00Z",
-      "sourceId": "9a41b0d6fa07d21e",
-      "sourceTitle": "Steve Klabnik",
-      "link": "https://steveklabnik.com/writing/finale/",
-      "detailPath": "articles/d49a0a93979866b67ec490aa.json"
-    },
-    {
-      "id": "1a6cd9a9fc1182a14f83f676",
-      "title": "Shoes 4 work is starting: get involved!",
-      "summary": "As you know, I’ve been doing a lot of work over the last few years to keep _why’s Shoes project going. A few other intrepid individuals have been doing a lot as well. We’re starting to work on Shoes 4, and we’d love your help. A little about Shoes If you didn’t know, Shoes is a…",
-      "image": null,
-      "publishedAt": "2012-05-25T00:00:00Z",
-      "sourceId": "9a41b0d6fa07d21e",
-      "sourceTitle": "Steve Klabnik",
-      "link": "https://steveklabnik.com/writing/shoes-4-work-is-starting--get-involved/",
-      "detailPath": "articles/1a6cd9a9fc1182a14f83f676.json"
-    },
-    {
-      "id": "df62e0c4bf6bf52daace8731",
-      "title": "pulseaudio音量问题",
-      "summary": "话说Pulseaudio一直有一个问题困扰着我，好几年了，就是 音量不连续 , 解释一下就是例如音量降到 16% 以下的时候会突然变成零，或者调整一下(下文解释)，那么 2%-16% 这一段虽然有声音但是几乎都是一个音量，然后 2%-0% 突变。 p.s. 我对Linux的音频设备原理实在是一知半解，所以后文有好多 「俗」语，懂行的见到还请轻拍砖。 准确的说这个更应该是我声卡(驱动)的问题，Alsa的主音量将到 16% 之后会突然没有声音，就好像有一个 threshold 一样。不过之前纯用Alsa的时候我可以通过调整 PCM 音量来解决，但是 Pulseaudio 所有都一块儿调整了，只有一个主音量， 所以再开终端调alsamixer什么的实在烦死人。",
-      "image": null,
-      "publishedAt": "2012-05-20T04:07:00Z",
-      "sourceId": "1a53726dacd05db7",
-      "sourceTitle": "K.I.S.S",
-      "link": "https://bigeagle.me/2012/05/pulseaudio-threshold/",
-      "detailPath": "articles/df62e0c4bf6bf52daace8731.json"
-    },
-    {
-      "id": "55f040182dbbef064f1b7d26",
-      "title": "Using ActionBarSherlock As A Base",
-      "summary": "This post was published externally on Square Corner. Read it at https://developer.squareup.com/blog/using-actionbarsherlock-as-a-base .",
-      "image": null,
-      "publishedAt": "2012-05-15T00:00:00Z",
-      "sourceId": "a33fc95b48c6e3ea",
-      "sourceTitle": "Jake Wharton",
-      "link": "https://developer.squareup.com/blog/using-actionbarsherlock-as-a-base",
-      "detailPath": "articles/55f040182dbbef064f1b7d26.json"
     }
   ]
 }
