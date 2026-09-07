@@ -1,6 +1,94 @@
 {
   "items": [
     {
+      "id": "01b991f963e5655aa2d0033e",
+      "title": "袁承志爱温青青，这可爱的小甜饼",
+      "summary": "我当然也喜欢令狐冲这样的，令狐冲是我的武侠幻梦里的终极理想状态；但真正能形成反复心理共鸣的，却是始终努力，也只能勉强自保，最后归隐海岛的袁承志。喜欢袁承志和温青青，大概和袁承志喜欢温青青以及温青青喜欢袁承志那样，恰当的时间被打动了特定的心绪。我对于“逃离世界归隐田园”这个结局毫无抵抗力，如同袁盟主永远拗不过温大姑娘。作品一旦问世，便脱离作者独立存在。在某个平行空间的坡县，赶走了红毛海盗的小袁，不必再担心青弟出走到他找不到的地方。",
+      "image": null,
+      "publishedAt": "2020-08-22T02:01:00Z",
+      "sourceId": "88a1fc290dd0b8a7",
+      "sourceTitle": "沉默之沙",
+      "link": "https://yukieyun.net/reading/yuan-qing-couple-1/",
+      "detailPath": "articles/01b991f963e5655aa2d0033e.json"
+    },
+    {
+      "id": "afd0cd6a94af8421e5952acb",
+      "title": "服务器宕机事件",
+      "summary": "今天兴致勃勃上博客查看，更新后台 发现任何方法都连接不上服务器，SSH 不知道持续了多久，我的怀疑是被D，阿里云自动拉入小黑屋 无奈进入阿里云后台，连接远程一查看直接傻眼了。 直接无法启动实例 截图暂时找不到了有的话一定放出来 大概意思就是未能找到可挂载的系统分区 那我的资料呢？ 好好在运行的服务器，怎么会突然丢分区的 重启之后来到选择引导的系统，发现只有第一个实例无法引导，说白了就是我配置了有多个内核的 centos 若不是这一手，我的数据将永远和我说再见了，各位也就看不到这篇文章了 重新引导之后，问题又来了，没有网络 ping 不通任何网站， ifconfig 查看之后，发现只绑定了本地回环地址 127.0.0.1 我大胆推测已经被阿里拉入小黑屋，并且down掉了我的网络服务 service restar…",
+      "image": null,
+      "publishedAt": "2020-08-20T11:45:00Z",
+      "sourceId": "3220115c042340a7",
+      "sourceTitle": "TaurusXin 的独立博客",
+      "link": "https://www.taurusxin.com/2020-server-down/",
+      "detailPath": "articles/afd0cd6a94af8421e5952acb.json"
+    },
+    {
+      "id": "bc59cf4a905c8e44a1057662",
+      "title": "华为手机刷微博体验更好？技术角度的一些分析和思考",
+      "summary": "技术群里的小伙伴发了一条微博， https://weibo.com/1808884742/IApbpEVQr ， 博主 @王波粒 发现， Mate 30 Pro 有个很特别的现象（建议先去看一下视频） 但是这个视频描述和底下的猜测都不对，我这边总结一下这个现象： 微博这个 App 在华为的手机上，在主页列表上下滑动的情况下依然可以流畅加载图片，而同一个版本的微博客户端，安装到其他手机上，在主页列表上下滑动的情况下，则必须要等到滑动停止之后才会加载图片 下面就针对这个现象,从技术的角度来深入分析产生这种现象的原因,以及我们能从里面学到什么",
+      "image": null,
+      "publishedAt": "2020-08-20T05:17:26Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2020/08/20/weibo-imageload-opt-on-huawei/",
+      "detailPath": "articles/bc59cf4a905c8e44a1057662.json"
+    },
+    {
+      "id": "e75a0cf66a6bef9c722782d7",
+      "title": "《空中浩劫》里的法航447",
+      "summary": "2009年6月1日（UTC时间），法国航空447号班机（机型空中客车A330-203、注册号F-GZCP）在大西洋中部雷达盲区神秘失踪，后被证实坠毁，机上228人（乘客216人、机组成员12人）全数罹难。著名空难文献剧《Air Crash Investigation》（中文一般译为《空中浩劫》，以下简称ACI）在S12E13中收录了此事故，揭露了所谓的“空难真相”，将矛头直指副驾驶皮埃尔-塞德里克·博南（Pierre Cédric Bonin）；同时，由于该片的知名度，让许多航空爱好者乃至真正的航空从业者认为该片所述即为事实。然而，真的是这样吗？",
+      "image": null,
+      "publishedAt": "2020-08-20T03:08:17Z",
+      "sourceId": "511f3e9d589e2612",
+      "sourceTitle": "残页的小博客",
+      "link": "https://blog.canyie.top/2020/08/20/af447-in-aci/",
+      "detailPath": "articles/e75a0cf66a6bef9c722782d7.json"
+    },
+    {
+      "id": "a21504e84d1e6457017cffc1",
+      "title": "通过系统的native bridge实现注入zygote",
+      "summary": "之前研究art的时候发现了native bridge，简单来说这东西是主要作用就是为了能运行不同指令集的so（比如x86的设备运行arm的app），而arm设备上这个东西一般都是关闭的，研究了一下后发现这东西挺适合动手脚的，刚好自己在用的 Riru 被针对了，所以有了这篇博客。把对应的示例代码传到了github： NbInjection ，接下来我们聊一下这个小玩具。",
+      "image": null,
+      "publishedAt": "2020-08-18T12:17:23Z",
+      "sourceId": "511f3e9d589e2612",
+      "sourceTitle": "残页的小博客",
+      "link": "https://blog.canyie.top/2020/08/18/nbinjection/",
+      "detailPath": "articles/a21504e84d1e6457017cffc1.json"
+    },
+    {
+      "id": "adaefee850cddafb37a2158c",
+      "title": "Triplet Censors: Demystifying Great Firewall’s DNS Censorship Behavior",
+      "summary": "Triplet Censors: Demystifying Great Firewall’s DNS Censorship Behavior Anonymous Arian Akhavan Niaki University of Massachusetts Amherst Nguyen Phong Hoang Stony Brook University Phillipa Gill University of Massachusetts Amherst Amir Houmansadr University of Massachusetts Amherst Abstract The Great Firewall of China (GFW) has long used DNS packet injection…",
+      "image": null,
+      "publishedAt": "2020-08-11T00:00:00Z",
+      "sourceId": "34d02af866ebd5fa",
+      "sourceTitle": "Great Firewall Report",
+      "link": "https://gfw.report/publications/foci20_dns/en/",
+      "detailPath": "articles/adaefee850cddafb37a2158c.json"
+    },
+    {
+      "id": "fe084076ca8290ff568873d7",
+      "title": "三重审查：揭秘防火长城的DNS审查行为",
+      "summary": "三重审查：揭秘防火长城的DNS审查行为 Anonymous Arian Akhavan Niaki University of Massachusetts Amherst Nguyen Phong Hoang Stony Brook University Phillipa Gill University of Massachusetts Amherst Amir Houmansadr University of Massachusetts Amherst 摘要 中国的防火长城（GFW）长期以来一直使用DNS数据包注入来审查互联网访问。在这项工作中，我们使用Alexa前100万个域名作为测试列表分析了GFW在九个月内的DNS注入行为。我们首先专注于理解GFW使用的公共可路由IP，并观察到用于过滤特定域名集合的I…",
+      "image": null,
+      "publishedAt": "2020-08-11T00:00:00Z",
+      "sourceId": "34d02af866ebd5fa",
+      "sourceTitle": "Great Firewall Report",
+      "link": "https://gfw.report/publications/foci20_dns/zh/",
+      "detailPath": "articles/fe084076ca8290ff568873d7.json"
+    },
+    {
+      "id": "d3c3724b7c7622d39b56c256",
+      "title": "Exposing and Circumventing China's Censorship of ESNI",
+      "summary": "On 2020-07-30, iyouport reported ( archive ) the apparent blocking of TLS connections with the encrypted SNI (ESNI) extension in China. iyouport says that the first occurrence of blocking was one day earlier, on 2020-07-29. We confirm that the Great Firewall (GFW) of China has recently begun blocking ESNI—one of the foundational features of TLS 1.3 and HTTP…",
+      "image": null,
+      "publishedAt": "2020-08-07T00:00:00Z",
+      "sourceId": "34d02af866ebd5fa",
+      "sourceTitle": "Great Firewall Report",
+      "link": "https://gfw.report/blog/gfw_esni_blocking/en/",
+      "detailPath": "articles/d3c3724b7c7622d39b56c256.json"
+    },
+    {
       "id": "c0fe91bac2c7251f5078dde1",
       "title": "揭示和规避中国对加密SNI（ESNI）的封锁",
       "summary": "iyouport 于2020年7月30日 报告 ( 存档 )中国封锁了带有ESNI扩展的TLS连接。 iyouport称初次封锁见于2020年7月29日。 我们确认中国的防火长城（GFW）已经开始封锁ESNI这一TLS1.3和HTTPS的基础特性。我们在本文中实证性地展示如何触发审查，并研究\"残余审查\"的延续时长。 我们还将展示7种用 Geneva 发现的基于客户端或服务端的绕过审查策略。 什么是加密服务器名称指示（ESNI）？ TLS是网络通讯的安全基础（HTTPS）。TLS提供的认证加密使得用户可以确定他们在与谁通讯， 并确保通讯信息不被中间人看到或篡改。 虽然TLS可以隐藏用户通讯的 内容 ，但其并不能总是隐藏与用户通讯的 对象 。 比如TLS握手可以携带一个叫做加密服务器名称指示（SNI）的扩展, 这…",
@@ -571,94 +659,6 @@
       "sourceTitle": "Android Performance",
       "link": "https://androidperformance.com/2020/02/14/Android-Systrace-SurfaceFlinger/",
       "detailPath": "articles/647202bab052d001b20cb8d0.json"
-    },
-    {
-      "id": "affc7626d32713bc43e9142b",
-      "title": "Android 开发者学习路线(2020 版本)",
-      "summary": "Medium 上 @MindOrks 发布了一篇 2020 年 Android 程序员的学习线路 ，鉴于一部分人无法阅读原文(你懂得原因)，我把这篇文章的内容结合自己的 2020 年的学习计划，一起发出来，给大家一个参考 原文比较简单，并没有介绍为什么要推荐这些，只是单纯地列了一下知识点，我这边针对每个知识点做一些简单的介绍，有些知识点原文并没有提到，我会根据自己的理解加上，仅供参考 这篇文章主要针对 Android 开发者，如果你是新手，那么下面的内容可以帮助你找到学习的线路；如果你是老手，这篇文章列出的内容也可以帮助你查漏补缺。如果各位有什么其他的建议，欢迎留言交流",
-      "image": null,
-      "publishedAt": "2020-02-02T16:06:25Z",
-      "sourceId": "1aa1837ca33d8d55",
-      "sourceTitle": "Android Performance",
-      "link": "https://androidperformance.com/2020/02/03/android-development-learning-path-2020-edition/",
-      "detailPath": "articles/affc7626d32713bc43e9142b.json"
-    },
-    {
-      "id": "4993adf88aa40ceac3c00c55",
-      "title": "我的 2020 年读书单",
-      "summary": "下面记录了我 2020 年的读书单，所记录的，都是已经读完了的，技术书籍由于很难定义读完，所以不在此列。 我比较喜欢读历史相关的书，其中 汴京之围 这本书读起来非常难受，弱国无外交，真的是写实； 坏小孩 书如其名，个人感觉是要比电视剧好很多； 重来 2 和 重来 3 跟工作相关，讲的是远程工作和工作方法，跟 2020 年居家办公的大趋势一致，白领程序员推荐看一下； 我的最后一本减肥书 则比较系统和专业地讲了一下减肥相关的知识，对于在减肥的我来说很有用；最后 镖人 也算是国漫经典了，等出完了之后我一定要买一套实体书典藏（巨人也是） 2020 读书不多，2021 要加大这方面的投入， 读 + 记录 + 总结 ，读书笔记后续都会补上",
-      "image": null,
-      "publishedAt": "2020-01-28T11:06:29Z",
-      "sourceId": "1aa1837ca33d8d55",
-      "sourceTitle": "Android Performance",
-      "link": "https://androidperformance.com/2020/01/28/2020-read/",
-      "detailPath": "articles/4993adf88aa40ceac3c00c55.json"
-    },
-    {
-      "id": "e6c2fe1ce374a590a51c7063",
-      "title": "2019 | 写在年关岁末",
-      "summary": "by 新世界的大门",
-      "image": null,
-      "publishedAt": "2020-01-24T23:44:56Z",
-      "sourceId": "4f3f8eb9d72c3840",
-      "sourceTitle": "新世界的大门",
-      "link": "https://blog.xinshijiededa.men/2019/",
-      "detailPath": "articles/e6c2fe1ce374a590a51c7063.json"
-    },
-    {
-      "id": "e97bb3843fd4220e489b607c",
-      "title": "自創曲：去投票",
-      "summary": "去投票.mp4 早上通勤時突然有了要為這次選舉做一首歌的想法 於是下班後回桃園的車上趕緊寫歌 奉上歌詞 突然間 明天就要 投票 來看看 這些選舉 公報 你是否 也已買好 車票 有個人 做個市長 落跑 你說什麼 你沒有要投票 拜託不要 把民主 當作是 在 開玩笑 無論你是要 投菜或草包 還有那 宋伯伯 雖然他 又遲到 但是他 絕對會到 從早上8點 到下午4點 拿著你 身份證 帶印章 或手指 和 投票通知單",
-      "image": null,
-      "publishedAt": "2020-01-09T18:38:16Z",
-      "sourceId": "199cdf92fc46bfcd",
-      "sourceTitle": "Eddie Lv",
-      "link": "https://eddielv.com/musings/vote-song/",
-      "detailPath": "articles/e97bb3843fd4220e489b607c.json"
-    },
-    {
-      "id": "f2a802fcf2b21171a245552e",
-      "title": "用 Python 爬取作业答案",
-      "summary": "by 新世界的大门",
-      "image": "https://i.loli.net/2019/12/31/B5dGa6IQcK2AqSP.png",
-      "publishedAt": "2020-01-05T22:58:27Z",
-      "sourceId": "4f3f8eb9d72c3840",
-      "sourceTitle": "新世界的大门",
-      "link": "https://blog.xinshijiededa.men/crawl-homework-answers-with-python/",
-      "detailPath": "articles/f2a802fcf2b21171a245552e.json"
-    },
-    {
-      "id": "489a4f23bf0bfe4ac2465497",
-      "title": "2019年终小记",
-      "summary": "关于2019年",
-      "image": null,
-      "publishedAt": "2019-12-31T00:00:00Z",
-      "sourceId": "1d642c054c147719",
-      "sourceTitle": "大猫的部落格",
-      "link": "https://damao.ca/posts/2019%E5%B9%B4%E7%BB%88%E5%B0%8F%E8%AE%B0/",
-      "detailPath": "articles/489a4f23bf0bfe4ac2465497.json"
-    },
-    {
-      "id": "dff720e94eb5a6b98ed7971f",
-      "title": "关于民航总医院恶性伤医事件的一点引申思考",
-      "summary": "当医务人员把患者放在了对立面，医患关系永无宁日。",
-      "image": null,
-      "publishedAt": "2019-12-30T00:00:00Z",
-      "sourceId": "d48d6f28fe78bc92",
-      "sourceTitle": "DrPika's Blog",
-      "link": "https://blog.drpika.com/posts/2019-12-30",
-      "detailPath": "articles/dff720e94eb5a6b98ed7971f.json"
-    },
-    {
-      "id": "840952ebe02db1f8df99a404",
-      "title": "关于民航总医院恶性伤医事件的一点引申思考",
-      "summary": "当医务人员把患者放在了对立面，医患关系永无宁日。",
-      "image": null,
-      "publishedAt": "2019-12-30T00:00:00Z",
-      "sourceId": "3e335517f4e1112a",
-      "sourceTitle": "Dr.Pika's Blog",
-      "link": "https://blog.drpika.com/posts/2019-12-30",
-      "detailPath": "articles/840952ebe02db1f8df99a404.json"
     }
   ]
 }
