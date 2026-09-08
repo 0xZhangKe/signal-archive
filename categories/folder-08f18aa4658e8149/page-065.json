@@ -1,6 +1,28 @@
 {
   "items": [
     {
+      "id": "d26ca9e2eaf209a6481eef64",
+      "title": "Self-changing Data Type - CVE-2024-40676 漏洞分析",
+      "summary": "今年 10 月份的时候，Android 安全公告用 CVE-2024-40676 的编号公布了一个很奇怪的 patch 。 AccountManagerService checkKeyIntent() 负责检查 account authenticator 传回的 intent，确保它安全再传回给 caller，防止 launch anywhere 漏洞。这个补丁看起来很暴力也很奇怪，直接 ban 了所有带有 content URI 的 intent，似乎完全不考虑兼容性。是什么样的漏洞才要上如此暴力的修复方法？ 注：如下全是我的猜测，由于联系不到漏洞作者本人，无法确认这是否就是原本的问题。",
+      "image": null,
+      "publishedAt": "2024-11-07T02:00:00Z",
+      "sourceId": "511f3e9d589e2612",
+      "sourceTitle": "残页的小博客",
+      "link": "https://blog.canyie.top/2024/11/07/self-changing-data-type/",
+      "detailPath": "articles/d26ca9e2eaf209a6481eef64.json"
+    },
+    {
+      "id": "8864a2070866737f3e9a33fc",
+      "title": "自新世界 #0x08：明察秋毫",
+      "summary": "目光敏锐，可以看见秋天猫猫身上新长的毫毛",
+      "image": "https://remnote-user-data.s3.amazonaws.com/GKaaeEbVM7qXteh0ePvddeIXTvi7Ca1nLn_ggzf1FuPJgmr2vQPCy-G6QlZEKeXszObkC-oftquVw-ql-6mNrLm2v9ZNseMQql0NIgfmt7D2C0dtFAXtyBh5PC7x--6O.jpeg",
+      "publishedAt": "2024-11-06T13:52:34Z",
+      "sourceId": "4f3f8eb9d72c3840",
+      "sourceTitle": "新世界的大门",
+      "link": "https://blog.xinshijiededa.men/weekly/0x08/",
+      "detailPath": "articles/8864a2070866737f3e9a33fc.json"
+    },
+    {
       "id": "1f14ee758141b8c9bc3b8a37",
       "title": "CKB RBF 设计和实现",
       "summary": "CKB 相关技术文章第二篇。 Replace by fee 问题 如果一个交易成功发送到交易池，但可能出现因为费用较低而一直得不到处理。之前 CKB 没有其他措施来处理这种情况。 例如 Dotbit 4 位域名注册拥堵 这个事故发生过程中， CKB 的应用方无法使用任何方式来尽快让自己的交易被打包，这就是引入 Replace-by-fee（RBF) 的原因，我们需要一个机制来提高已经在交易池里交易的费用，替换掉旧的交易，让新的交易尽快被打包。 在新的 multi_index_map 重构后，交易在 pending 阶段也会按照交易的 score 来优先处理 (通常费用高的交易 score 也会高)，这会避免高费用的交易被阻塞住，所以理论上述需要手动提高费用的情况会减少，但我们还是需要 RBF 来手动提高交易的…",
@@ -637,28 +659,6 @@
       "sourceTitle": "刑辩人在路上",
       "link": "https://xingbianren.cn/post/273.html",
       "detailPath": "articles/b030943e027f7d83c3fb2515.json"
-    },
-    {
-      "id": "1f2250172b322b94eb6272a2",
-      "title": "数字货币，摆脱奴役",
-      "summary": "着实有些后怕。 国庆节七天假期，除开与老婆吵架的时间外，我基本都在认真的考虑，要不要跟风进股市。 我很清楚，这是一轮假牛市。当前的经济基本面，没有支撑任何牛市的基础。 但我同时也很清楚，当前全球的股市，都已经不再完全靠经济基本面支撑。国际地缘政治、国家货币政策、国际金融博弈，每个因素的影响权重，可能都超过内在价值面本身。 对于大 A 来说，一是站在国庆前后时间点看，兔子获得了空前的国际地缘政治优势，从我一介乡野匹夫的认知来看，鹰酱一时难以破局（但今天来看，鹰酱破了，这是后话），二是国内这两年为提振经济，印制了海量货币，由于实体经济太过萎靡，这些货币始终在金融系统内空转，并未进入实体流通领域，伴随这轮大牛市启动，海量货币将涌入流通领域，使得我等小民手中为数不多的存款进一步缩水。 对于第一点，超出我的控制能力范围…",
-      "image": null,
-      "publishedAt": "2024-10-17T01:27:38Z",
-      "sourceId": "c7356b172af43f7f",
-      "sourceTitle": "刑辩人在路上",
-      "link": "https://xingbianren.cn/post/272.html",
-      "detailPath": "articles/1f2250172b322b94eb6272a2.json"
-    },
-    {
-      "id": "d315de94b036afc74af7db2b",
-      "title": "困難的事情",
-      "summary": "幾個小秘訣：",
-      "image": null,
-      "publishedAt": "2024-10-17T00:00:00Z",
-      "sourceId": "7f36c3da1e6b5c71",
-      "sourceTitle": "Wiwi.Blog Blog",
-      "link": "https://wiwi.blog/blog/hard-things",
-      "detailPath": "articles/d315de94b036afc74af7db2b.json"
     }
   ]
 }

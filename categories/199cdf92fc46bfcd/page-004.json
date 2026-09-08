@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "544d5cd92cce0dd0ddd4dea8",
+      "title": "製作了跑馬燈功能！",
+      "summary": "前言 # 最近開 BlogBlog.Club 的 5 月主題頁面 ，每次都要用搜尋的，覺得有點麻煩，決定加入跑馬燈功能！ 溫馨提醒，本篇程式碼皆由 AI 產生，看了會心悸的讀者，請小心服用。 動圖演示 # Hugo 架構 # 在 partial 資料夾底下建立一個 html，我稱爲 announce.html 。 {{/* 讀取 site config 中的 announcement 參數 例如 config.toml / config.yaml 裡的 params.announcement */}} {{ with .Site.Params.announcement }} {{/* 如果 enable = true 才顯示跑馬燈 */}} {{ if .enable }} <!-- 跑馬燈外層容器 -->…",
+      "image": null,
+      "publishedAt": "2026-05-08T06:24:26Z",
+      "sourceId": "199cdf92fc46bfcd",
+      "sourceTitle": "Eddie Lv",
+      "link": "https://eddielv.com/musings/annouce-function/",
+      "detailPath": "articles/544d5cd92cce0dd0ddd4dea8.json"
+    },
+    {
       "id": "5edb73baad4ca97f8974b6a2",
       "title": "Keyboard 的延音踏板反轉了，怎麼辦？",
       "summary": "前言 # 正常來說，延音踏板踩下後，會啓動延音；抬起後就斷掉。 那天，小提琴老師調音時，想要參考音，我幫他按 Keyboard 的時候就發現：「今天的延音踏板是相反的」了。 但 Keyboard 老師已經彩排完，他沒講什麼，所以我以爲他是故意的。 正式開演後 # 已經演非常多首了，看到 Keyboard 老師突然在重新插延音踏板的線，後來老師說他有備用的踏板，於是我幫忙更換，結果還是一樣。 其實這個狀況，我自己遇過，所以我馬上說： 老師，你要不要重新開機試試看？ 雖然老師臉上寫著「這跟重開機有什麼關係」，但是沒別的方法還是照做了。 結果，馬上修好，老師眼睛瞪得超大XD 原理 # Keyboard 的設計，應該有個狀態判定，例如：0 表示沒延音，1 表示有延音。 如果先踩下踏板，再開機 Keyboard，就會讓…",
@@ -648,17 +659,6 @@
       "sourceTitle": "Eddie Lv",
       "link": "https://eddielv.com/musings/who-sets-your-agenda/",
       "detailPath": "articles/a43833375e7da5fdbbc2082f.json"
-    },
-    {
-      "id": "c215c5ab4945f24e33a55163",
-      "title": "測試英文打字速度（2026）",
-      "summary": "看到 shuojen 測試 中文打字速度 ，才想起來 2024 有測驗過英打 ，覺得可以再來試試看。 2024 的時候，大部分速度都在 45 WPM 左右，拚盡全力才衝到 54 WPM 而這次測，大多都在 55 左右，而某一次特別順手就到 62 WPM 了。（寫完文章後再測要次竟然到 65 了！） 還記得以前國中電腦課測驗時，坐我右邊的同學，每次都衝到 73 左右，鍵盤聲超大，而我才 30 多，現在終於接近他一點點了。 至於中打，我從來沒有試過，但可以猜到應該很慢，因爲每次選字都選很久！尤其我的詞庫很喜歡用傳統字。 例如：「啓動」而非「啟動」，「臺灣」而非「台灣」，「着想」而非「著想」，還有很多，在這種自動選字的前提下測驗，絕對會爆掉！ 所以先放過中打，理論上英打進步了，中打就會進步！（我用漢語拼音）",
-      "image": "https://eddielv.com/musings/typing-speed-2026/wpm.png",
-      "publishedAt": "2026-04-03T16:27:54Z",
-      "sourceId": "199cdf92fc46bfcd",
-      "sourceTitle": "Eddie Lv",
-      "link": "https://eddielv.com/musings/typing-speed-2026/",
-      "detailPath": "articles/c215c5ab4945f24e33a55163.json"
     }
   ]
 }

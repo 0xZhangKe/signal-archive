@@ -1,6 +1,83 @@
 {
   "items": [
     {
+      "id": "066207bf25e29666882abc4a",
+      "title": "The profile link relation and you",
+      "summary": "I was quite pleased when RFC 6906 was finalized. It’s a really useful pattern that people are using to enhance documentation of their APIs. Let’s start with an example. I tweet something like this: “Oh man, the example.com API is super awesome. You should check it out!” -…",
+      "image": null,
+      "publishedAt": "2013-05-06T00:00:00Z",
+      "sourceId": "9a41b0d6fa07d21e",
+      "sourceTitle": "Steve Klabnik",
+      "link": "https://steveklabnik.com/writing/the-profile-link-relation-and-you/",
+      "detailPath": "articles/066207bf25e29666882abc4a.json"
+    },
+    {
+      "id": "a14746d7d4c2402a68f841eb",
+      "title": "Seven Days of Open Source",
+      "summary": "This post was published externally on Square Corner. Read it at https://developer.squareup.com/blog/seven-days-of-open-source .",
+      "image": null,
+      "publishedAt": "2013-05-06T00:00:00Z",
+      "sourceId": "a33fc95b48c6e3ea",
+      "sourceTitle": "Jake Wharton",
+      "link": "https://developer.squareup.com/blog/seven-days-of-open-source",
+      "detailPath": "articles/a14746d7d4c2402a68f841eb.json"
+    },
+    {
+      "id": "adb295e9dbf67a75050e0025",
+      "title": "Closure",
+      "summary": "I spent six weeks of last December/January in my hometown. It was the first Christmas without my father, and it was cheap to stay, so I went back. It was my first time back in Pittsburgh since I’d moved away from the only place I’d ever lived. The trip was incredibly emotional…",
+      "image": "https://svbtleusercontent.com/steveklabnik_24595149844116_small.png",
+      "publishedAt": "2013-04-19T00:00:00Z",
+      "sourceId": "9a41b0d6fa07d21e",
+      "sourceTitle": "Steve Klabnik",
+      "link": "https://steveklabnik.com/writing/closure/",
+      "detailPath": "articles/adb295e9dbf67a75050e0025.json"
+    },
+    {
+      "id": "99078225034ec81893d2cfb3",
+      "title": "Upgrading from Rust 0.5 to 0.6",
+      "summary": "Here are some error messages that I got when updating Rust for Rubyists from Rust 0.5 to the new 0.6, and how to fix those errors. Error: rust.rs:1:4: 1:16 error: unresolved name rust.rs:1 use task::spawn; ^~~~~~~~~~~~ rust.rs:1:4: 1:16 error: failed to resolve import:…",
+      "image": null,
+      "publishedAt": "2013-04-07T00:00:00Z",
+      "sourceId": "9a41b0d6fa07d21e",
+      "sourceTitle": "Steve Klabnik",
+      "link": "https://steveklabnik.com/writing/upgrading-from-rust-0-5-to-0-6/",
+      "detailPath": "articles/99078225034ec81893d2cfb3.json"
+    },
+    {
+      "id": "dd08fb6e8f75ea876ab656ac",
+      "title": "The Resurrection of Testing for Android",
+      "summary": "This post was published externally on Square Corner. Read it at https://developer.squareup.com/blog/the-resurrection-of-testing-for-android .",
+      "image": null,
+      "publishedAt": "2013-04-03T00:00:00Z",
+      "sourceId": "a33fc95b48c6e3ea",
+      "sourceTitle": "Jake Wharton",
+      "link": "https://developer.squareup.com/blog/the-resurrection-of-testing-for-android",
+      "detailPath": "articles/dd08fb6e8f75ea876ab656ac.json"
+    },
+    {
+      "id": "1bd90dc68100d329a1ca6bba",
+      "title": "Deleuze for Developers: will smooth space/open source suffice to save us?",
+      "summary": "Deleuze and Guattari employ the notion of ‘smooth space’ quite a bit in A Thousand Plateaus . I saw this quote about it the other day: never believe that a smooth space will suffice to save us I’ve recently been giving a lot of thought to ‘cultural hegemony’ and its applicability…",
+      "image": null,
+      "publishedAt": "2013-03-14T00:00:00Z",
+      "sourceId": "9a41b0d6fa07d21e",
+      "sourceTitle": "Steve Klabnik",
+      "link": "https://steveklabnik.com/writing/deleuze-for-developers-will-smooth-spaceopen-source-suffice-to-save-us/",
+      "detailPath": "articles/1bd90dc68100d329a1ca6bba.json"
+    },
+    {
+      "id": "e035ec9af0282e386e71df0f",
+      "title": "Travis build matrix for Rails",
+      "summary": "Do you have a gem that needs to test against multiple versions of Rails? Doing it all can be complex, and while I have lots to say about this topic, but here’s one of the pieces: Travis build matrix. Here’s what you want: language : ruby rvm : - 1.8.7 - 1.9.2 - 1.9.3 - 2.0.0 -…",
+      "image": null,
+      "publishedAt": "2013-03-10T00:00:00Z",
+      "sourceId": "9a41b0d6fa07d21e",
+      "sourceTitle": "Steve Klabnik",
+      "link": "https://steveklabnik.com/writing/travis-build-matrix-for-rails/",
+      "detailPath": "articles/e035ec9af0282e386e71df0f.json"
+    },
+    {
       "id": "b044eea8b046489d11c0cccc",
       "title": "Announcing security_release_practice",
       "summary": "Security is hard. One of the skills any OSS maintainer needs is how to do releases, and security releases are a special kind of release that needs special git-fu to make it work. I’ve created a repository so that you can practice this particular skill. It’s called…",
@@ -582,83 +659,6 @@
       "sourceTitle": "K.I.S.S",
       "link": "https://bigeagle.me/2012/07/wish-list/",
       "detailPath": "articles/4b8cddc3b9cd0b34ac767151.json"
-    },
-    {
-      "id": "38d0131ec53f00dc69600eaf",
-      "title": "Why I don't like factory_girl",
-      "summary": "Once upon a time, I was building my First Serious Rails App. I was drawn to Rails in the first place because of automated testing and ActiveRecord; I felt the pain of not using an ORM and spending about a week on every deploy making sure that things were still okay in production.…",
-      "image": null,
-      "publishedAt": "2012-07-14T00:00:00Z",
-      "sourceId": "9a41b0d6fa07d21e",
-      "sourceTitle": "Steve Klabnik",
-      "link": "https://steveklabnik.com/writing/why-i-don-t-like-factory_girl/",
-      "detailPath": "articles/38d0131ec53f00dc69600eaf.json"
-    },
-    {
-      "id": "06c282e291612ceddaa6d4b8",
-      "title": "Writing a jQuery plugin to create scrolling regions in HTML",
-      "summary": "How to make a scrolling pane in HTML/CSS; in particular, how to wrap it all in a jQuery plugin for easy reuse.",
-      "image": null,
-      "publishedAt": "2012-07-10T00:00:00Z",
-      "sourceId": "770187db2708029f",
-      "sourceTitle": "Beej's Bit Bucket",
-      "link": "http://beej.us/blog/data/jquery-plugin-scrollregion/",
-      "detailPath": "articles/06c282e291612ceddaa6d4b8.json"
-    },
-    {
-      "id": "a3a7436282251b3b845445a6",
-      "title": "How Shall We Define Design?",
-      "summary": "I love object-oriented design. It’s like open source software in general; perfect strangers come up with ideas that can save me time and money and then, out of the goodness of their hearts, go to a fair amount of trouble to pass these ideas on. I benefit from their efforts every day. However, you don’t have to go far to find competent, thoughtful, well-inte…",
-      "image": "https://images.squarespace-cdn.com/content/v1/537c0374e4b0f52ed92942e6/fa7a174a-ea99-4713-93bd-41640980cfd0/OODMindMap.png?format=1000w",
-      "publishedAt": "2012-07-05T17:46:00Z",
-      "sourceId": "7807933c3a29515a",
-      "sourceTitle": "Blog - Sandi Metz",
-      "link": "https://sandimetz.com/blog/2012/07/05/how-shall-we-define-design",
-      "detailPath": "articles/a3a7436282251b3b845445a6.json"
-    },
-    {
-      "id": "f6dcae9bd30ac222e2622a4a",
-      "title": "How can I contribute to Ruby on Rails?",
-      "summary": "After RailsConf this year, I joined the Rails Issue Team. This means that I help triage issues that people have filed, try to reproduce errors, and point core team members at ones that are most important. Since doing that, a few people have asked me how to get started, so I…",
-      "image": null,
-      "publishedAt": "2012-07-05T00:00:00Z",
-      "sourceId": "9a41b0d6fa07d21e",
-      "sourceTitle": "Steve Klabnik",
-      "link": "https://steveklabnik.com/writing/how-can-i-contribute-to-ruby-on-rails-/",
-      "detailPath": "articles/f6dcae9bd30ac222e2622a4a.json"
-    },
-    {
-      "id": "98899d76b600ad61e671d069",
-      "title": "Decoupling Android App Communication with Otto",
-      "summary": "This post was published externally on Square Corner. Read it at https://developer.squareup.com/blog/decoupling-android-app-communication-with-otto .",
-      "image": null,
-      "publishedAt": "2012-07-02T00:00:00Z",
-      "sourceId": "a33fc95b48c6e3ea",
-      "sourceTitle": "Jake Wharton",
-      "link": "https://developer.squareup.com/blog/decoupling-android-app-communication-with-otto",
-      "detailPath": "articles/98899d76b600ad61e671d069.json"
-    },
-    {
-      "id": "e6885bd8cdf10e5b90681b1e",
-      "title": "Oculus RIFT development",
-      "summary": "Virtual Reality headsets have been consistently disappointing for several decades. Three reasons come to mind in order to explain this state of things: The hardware is expensive: The latest Sony HMZ-T1 is 799$. The hardware is not good enough: The motion sensor, screen latency and screen limited Field of View are unable to provide a feeling of immersion. Th…",
-      "image": "https://fabiensanglard.net/vr_headset/vr_headset_icon.png",
-      "publishedAt": "2012-06-30T01:08:45Z",
-      "sourceId": "ce9ad60b092e38b0",
-      "sourceTitle": "fabiensanglard.net",
-      "link": "https://fabiensanglard.net/vr_headset/index.php",
-      "detailPath": "articles/e6885bd8cdf10e5b90681b1e.json"
-    },
-    {
-      "id": "66591faac58c2be94a7fc299",
-      "title": "Quake 3Source Code Review",
-      "summary": "Since I had one week before my next contract I decided to finish my \"cycle of id\". After Doom, Doom Iphone, Quake1, Quake2, Wolfenstein iPhone and Doom3 I decided to read the last codebase I did not review yet: idTech3 the 3D engine that powers Quake III and Quake Live. . More...",
-      "image": "https://fabiensanglard.net/quake3/quake3_icon.jpg",
-      "publishedAt": "2012-06-30T01:08:45Z",
-      "sourceId": "ce9ad60b092e38b0",
-      "sourceTitle": "fabiensanglard.net",
-      "link": "https://fabiensanglard.net/quake3/index.php",
-      "detailPath": "articles/66591faac58c2be94a7fc299.json"
     }
   ]
 }
