@@ -12,7 +12,7 @@
 	<atom:link href="https://www.schneier.com/feed/" rel="self" type="application/rss+xml" />
 	<link>https://www.schneier.com/</link>
 	<description></description>
-	<lastBuildDate>Mon, 07 Sep 2026 11:07:17 +0000</lastBuildDate>
+	<lastBuildDate>Tue, 08 Sep 2026 10:21:01 +0000</lastBuildDate>
 	<language>en-US</language>
 	<sy:updatePeriod>
 	hourly	</sy:updatePeriod>
@@ -28,6 +28,30 @@
 	<height>32</height>
 </image> 
 <site xmlns="com-wordpress:feed-additions:1">182601345</site>	<item>
+		<title>Stealing AI Reasoning Traces</title>
+		<link>https://www.schneier.com/blog/archives/2026/09/stealing-ai-reasoning-traces.html</link>
+					<comments>https://www.schneier.com/blog/archives/2026/09/stealing-ai-reasoning-traces.html#respond</comments>
+		
+		<dc:creator><![CDATA[Bruce Schneier]]></dc:creator>
+		<pubDate>Tue, 08 Sep 2026 10:20:04 +0000</pubDate>
+				<category><![CDATA[Uncategorized]]></category>
+		<category><![CDATA[academic papers]]></category>
+		<category><![CDATA[AI]]></category>
+		<category><![CDATA[LLM]]></category>
+		<guid isPermaLink="false">https://www.schneier.com/?p=72555</guid>
+
+					<description><![CDATA[<p>Interesting research: &#8220;<a href="https://arxiv.org/abs/2608.09867">Stealing Reasoning Traces from Proprietary LLM APIs</a>&#8220;:</p>
+<blockquote><p><b>Abstract:</b> Leading large language model providers now conceal their models&#8217; step-by-step reasoning, or chain-of-thought, to protect intellectual property and limit information leakage. Rather than storing these traces server-side, providers return them to the client as blocks of encrypted text, which the client passes back with each subsequent request. Building on prior research, we identify an architectural vulnerability: these encrypted blocks are fully compatible and interchangeable across different sessions, users, and models within a provider&#8217;s ecosystem. We exploit this compatibility to develop a scalable decryption jailbreak. By injecting an encrypted reasoning trace from a given model into a weaker, and less safeguarded model from the same provider, we force it to decode and output the trace verbatim in plaintext, without ever jailbreaking the more capable model directly. This vulnerability enables four distinct attack vectors. First, it circumvents anti-distillation mechanisms, allowing adversaries to extract a proprietary model&#8217;s reasoning, as we demonstrate across Anthropic, OpenAI, and Google. Second, it allows for large-scale private data extraction. Developers frequently share session logs publicly, unaware of contents of the encrypted blocks. By decoding 315,320 reasoning blocks scraped from public repositories, we recovered 367 Personally Identifiable Information (PII) artifacts and 182 credentials. Third, it inadvertently reveals hazardous information hidden within the reasoning process, even in cases where the model&#8217;s final, visible output safely rejects a malicious request. Fourth, attackers can leverage this flaw to execute invisible prompt injections, embedding malicious payloads entirely within encrypted blocks to poison public agentic rollouts. Following responsible disclosure, we propose concrete cryptographic and system-level mitigations to secure client-side reasoning...</p></blockquote>]]></description>
+										<content:encoded><![CDATA[<p>Interesting research: &#8220;<a href="https://arxiv.org/abs/2608.09867">Stealing Reasoning Traces from Proprietary LLM APIs</a>&#8220;:</p>
+<blockquote><p><b>Abstract:</b> Leading large language model providers now conceal their models&#8217; step-by-step reasoning, or chain-of-thought, to protect intellectual property and limit information leakage. Rather than storing these traces server-side, providers return them to the client as blocks of encrypted text, which the client passes back with each subsequent request. Building on prior research, we identify an architectural vulnerability: these encrypted blocks are fully compatible and interchangeable across different sessions, users, and models within a provider&#8217;s ecosystem. We exploit this compatibility to develop a scalable decryption jailbreak. By injecting an encrypted reasoning trace from a given model into a weaker, and less safeguarded model from the same provider, we force it to decode and output the trace verbatim in plaintext, without ever jailbreaking the more capable model directly. This vulnerability enables four distinct attack vectors. First, it circumvents anti-distillation mechanisms, allowing adversaries to extract a proprietary model&#8217;s reasoning, as we demonstrate across Anthropic, OpenAI, and Google. Second, it allows for large-scale private data extraction. Developers frequently share session logs publicly, unaware of contents of the encrypted blocks. By decoding 315,320 reasoning blocks scraped from public repositories, we recovered 367 Personally Identifiable Information (PII) artifacts and 182 credentials. Third, it inadvertently reveals hazardous information hidden within the reasoning process, even in cases where the model&#8217;s final, visible output safely rejects a malicious request. Fourth, attackers can leverage this flaw to execute invisible prompt injections, embedding malicious payloads entirely within encrypted blocks to poison public agentic rollouts. Following responsible disclosure, we propose concrete cryptographic and system-level mitigations to secure client-side reasoning.</p></blockquote>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.schneier.com/blog/archives/2026/09/stealing-ai-reasoning-traces.html/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">72555</post-id>	</item>
+		<item>
 		<title>Automobile Camouflage to Hide from Flock Cameras</title>
 		<link>https://www.schneier.com/blog/archives/2026/09/automobile-camouflage-to-hide-from-flock-cameras.html</link>
 					<comments>https://www.schneier.com/blog/archives/2026/09/automobile-camouflage-to-hide-from-flock-cameras.html#comments</comments>
@@ -47,7 +71,7 @@
 ]]></content:encoded>
 					
 					<wfw:commentRss>https://www.schneier.com/blog/archives/2026/09/automobile-camouflage-to-hide-from-flock-cameras.html/feed/</wfw:commentRss>
-			<slash:comments>23</slash:comments>
+			<slash:comments>22</slash:comments>
 		
 		
 		<post-id xmlns="com-wordpress:feed-additions:1">72548</post-id>	</item>
@@ -72,7 +96,7 @@
 ]]></content:encoded>
 					
 					<wfw:commentRss>https://www.schneier.com/blog/archives/2026/09/friday-squid-blogging-squid-on-a-stick-at-the-new-york-state-fair.html/feed/</wfw:commentRss>
-			<slash:comments>30</slash:comments>
+			<slash:comments>28</slash:comments>
 		
 		
 		<post-id xmlns="com-wordpress:feed-additions:1">72589</post-id>	</item>
@@ -315,45 +339,9 @@ htfhtfhhjkgth@gmail.com</p></blockquote>
 ]]></content:encoded>
 					
 					<wfw:commentRss>https://www.schneier.com/blog/archives/2026/09/whats-the-scam.html/feed/</wfw:commentRss>
-			<slash:comments>35</slash:comments>
+			<slash:comments>34</slash:comments>
 		
 		
 		<post-id xmlns="com-wordpress:feed-additions:1">72576</post-id>	</item>
-		<item>
-		<title>Leaked Russian Cyber-Operations Training Materials</title>
-		<link>https://www.schneier.com/blog/archives/2026/09/leaked-russian-cyber-operations-training-materials.html</link>
-					<comments>https://www.schneier.com/blog/archives/2026/09/leaked-russian-cyber-operations-training-materials.html#comments</comments>
-		
-		<dc:creator><![CDATA[Bruce Schneier]]></dc:creator>
-		<pubDate>Tue, 01 Sep 2026 16:29:10 +0000</pubDate>
-				<category><![CDATA[Uncategorized]]></category>
-		<category><![CDATA[cybersecurity]]></category>
-		<category><![CDATA[leaks]]></category>
-		<category><![CDATA[Russia]]></category>
-		<guid isPermaLink="false">https://www.schneier.com/?p=72564</guid>
-
-					<description><![CDATA[<p><a href="https://gbhackers.com/leaked-university-files/">This</a> is interesting:</p>
-<blockquote><p>The records describe a force-generation mechanism for several General Staff components, including the GRU, Main Operational Directorate, and 8th Directorate, which is associated with protected communications, cryptography, and information security.</p>
-<p>[&#8230;]</p>
-<p>The reporting also linked a 2024 Department No. 4 graduate, Aleksei Kondrashov, to Military Unit 74455, widely known as Sandworm.</p>
-<p>That unit has been associated with destructive cyber activity against Ukraine and other targets, including the 2017 NotPetya attack.</p>
-<p>The reports do not establish that every listed graduate participated in a named operation; assignments should therefore be described as reported unit placements, not proof of individual operational involvement...</p></blockquote>]]></description>
-										<content:encoded><![CDATA[<p><a href="https://gbhackers.com/leaked-university-files/">This</a> is interesting:</p>
-<blockquote><p>The records describe a force-generation mechanism for several General Staff components, including the GRU, Main Operational Directorate, and 8th Directorate, which is associated with protected communications, cryptography, and information security.</p>
-<p>[&#8230;]</p>
-<p>The reporting also linked a 2024 Department No. 4 graduate, Aleksei Kondrashov, to Military Unit 74455, widely known as Sandworm.</p>
-<p>That unit has been associated with destructive cyber activity against Ukraine and other targets, including the 2017 NotPetya attack.</p>
-<p>The reports do not establish that every listed graduate participated in a named operation; assignments should therefore be described as reported unit placements, not proof of individual operational involvement.</p>
-<p>The Bauman material reframes Russia&#8217;s cyber capability as an institutional system, not merely a collection of well-known threat groups.</p>
-<p>It suggests that Moscow has formalized a recurring pathway from university recruitment to military service, where students receive supervised technical and ideological preparation before entering intelligence, cyber, and security roles.</p>
-<p>For defenders, the leak reinforces the need to track Russian operations as a combined threat: espionage, destructive activity, military reconnaissance, technical surveillance, and influence campaigns may draw on related personnel pipelines and overlapping doctrine.</p>
-<p>The exposure of Department No. 4 also provides researchers with a clearer lens for understanding how the GRU sustains cyber capacity beyond the familiar APT28 and Sandworm brand names.</p></blockquote>
-]]></content:encoded>
-					
-					<wfw:commentRss>https://www.schneier.com/blog/archives/2026/09/leaked-russian-cyber-operations-training-materials.html/feed/</wfw:commentRss>
-			<slash:comments>15</slash:comments>
-		
-		
-		<post-id xmlns="com-wordpress:feed-additions:1">72564</post-id>	</item>
 	</channel>
 </rss>
