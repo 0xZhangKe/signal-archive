@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "c5837f25696110828ca2083f",
+      "title": "CKB new script verification with VM pause",
+      "summary": "CKB 相关技术文章第三篇。 背景 CKB 的每一个交易在提交到交易池之前都会经过一个 script verification 的过程，本质上就是通过 CKB-VM 把交易里的 script 跑一遍，如果失败了则直接 reject，如果通过了才会继续后面的流程。 这里的 script 就是一种可以在链上执行的二进制可执行文件，也可以称之为 CKB 上的合约。它是图灵完备的，我们通常可以通过 C、Rust 来实现这些 script，比如 nervosnetwork/ckb-system-scripts 就是 CKB 上的一些常用的系统合约。用户在发起交易的时候就设置好相关的 script，比如 lock script 是用来作为资产才所有权的鉴定，而 type script 通常用来定义 cell 转换的条件，…",
+      "image": "http://catcoding.me/images/ob_what-is-verification.png",
+      "publishedAt": "2024-11-07T04:03:24Z",
+      "sourceId": "82c4bcb6bba028cf",
+      "sourceTitle": "程序员的喵",
+      "link": "http://catcoding.me/p/ckb-new-verify/",
+      "detailPath": "articles/c5837f25696110828ca2083f.json"
+    },
+    {
       "id": "d26ca9e2eaf209a6481eef64",
       "title": "Self-changing Data Type - CVE-2024-40676 漏洞分析",
       "summary": "今年 10 月份的时候，Android 安全公告用 CVE-2024-40676 的编号公布了一个很奇怪的 patch 。 AccountManagerService checkKeyIntent() 负责检查 account authenticator 传回的 intent，确保它安全再传回给 caller，防止 launch anywhere 漏洞。这个补丁看起来很暴力也很奇怪，直接 ban 了所有带有 content URI 的 intent，似乎完全不考虑兼容性。是什么样的漏洞才要上如此暴力的修复方法？ 注：如下全是我的猜测，由于联系不到漏洞作者本人，无法确认这是否就是原本的问题。",
@@ -648,17 +659,6 @@
       "sourceTitle": "三十里海河",
       "link": "https://ihaihe.cn/2642.htm",
       "detailPath": "articles/d068a1275c17d0d3b97bc12f.json"
-    },
-    {
-      "id": "b030943e027f7d83c3fb2515",
-      "title": "硬话软说，成功争取庭审延期",
-      "summary": "刚跟书记员打了个照面，我就察觉到这个案子肃杀的气氛。 书记员站在二楼走廊，居高临下睥视着我。 “是谁委托你们的？”书记员冷冰冰的声音，在空旷的大厅里游荡。 “是张局长的老婆。”我回答。 “叫什么名字？”依旧是冷冰冰的语调。 我环顾四周，想找到一条通往二楼的通道，这样就不用继续以这样一种极度弱势的位置姿态与她对话。倒是发现了通往二楼的步梯，但在一层半步梯拐角的位置，一道防盗门拦住去路，只有办公楼的工作人员刷卡才能打开。 我只能继续扬起脑袋，以一种臣服的姿态，向书记员喊话。我仅仅在三分钟前，与杨萍在法院门口匆匆见了一面，她趴在汽车引擎盖上，为我签了委托书。我本想从档案袋里抽出委托书，确认一下她的名字。但又转念一想，这样恐怕会引起这个满怀敌意的书记员更大的怀疑，仅能凭借模糊的记忆，略带忐忑的脱口而出三个字：“杨萍。…",
-      "image": null,
-      "publishedAt": "2024-10-17T12:40:59Z",
-      "sourceId": "c7356b172af43f7f",
-      "sourceTitle": "刑辩人在路上",
-      "link": "https://xingbianren.cn/post/273.html",
-      "detailPath": "articles/b030943e027f7d83c3fb2515.json"
     }
   ]
 }
