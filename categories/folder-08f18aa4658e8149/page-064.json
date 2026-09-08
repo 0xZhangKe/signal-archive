@@ -1,6 +1,28 @@
 {
   "items": [
     {
+      "id": "53f171d29ea820198971a24a",
+      "title": "Re：從零開始的異世界電話？？？",
+      "summary": "繼上次 機車行 與 便當店 事件後，又發生的怪怪電話事件…。 預約了一家診所，隔日下午三點要看診，於是診所打來提醒。 第一通電話 11:35 # 「呂先生嗎？這裡是 XX 診所，明天下午三點有預約。」 「好」 三分鐘後，11:38 # 用了不同的號碼，但是還是同一個人的聲音： 「呂先生嗎？這裡是 XX 診所，明天下午三點有預約。」 「好..？我知道了…。」 re_call 掛掉電話後，我還探頭看了一下外面，應該沒有攝影機吧？應該不是整人節目吧XD 備註：標題《Re：從零開始的異世界電話？？？》是來自小說《Re：從零開始的異世界生活》，主角一直經歷輪迴的哽。",
+      "image": "https://eddielv.com/musings/re_call/re_call.jpg",
+      "publishedAt": "2024-11-24T04:01:13Z",
+      "sourceId": "199cdf92fc46bfcd",
+      "sourceTitle": "Eddie Lv",
+      "link": "https://eddielv.com/musings/re_call/",
+      "detailPath": "articles/53f171d29ea820198971a24a.json"
+    },
+    {
+      "id": "a0519f5c2d718ebbacbb41b6",
+      "title": "5G 門號在 4G 手機上的表現如何？",
+      "summary": "前言 # 前陣子接到中華電信的 行銷電話 ，問我要不要轉成 5G 方案。 因爲手機還很順，也沒壞，所以暫時不打算換機，所以實測網速如何？ 方案 # 本來是使用 4G（21M）每月 499 吃到飽方案。 現在是 5G（速率不詳）每月 599 容量 44GB（用完後 4G 吃到飽）方案，行銷電話中是說，若使用 4G 手機速度是（100M）。 iPhoneXR（4G 手機）的表現 # 在桃園市中壢區中壢火車站附近測試（訊號滿格）： 5g_speed 訊號滿格，下載速率被打了 6 折這麼多，說好的 100M 剩下 62M。 雖然但是，原始速率只有 21M，每月加 100 元月費，速率提升 3 倍，其實也不錯了啦…。",
+      "image": "https://eddielv.com/musings/5G_on_iPhoneXR/5g_speed.jpg",
+      "publishedAt": "2024-11-24T03:35:20Z",
+      "sourceId": "199cdf92fc46bfcd",
+      "sourceTitle": "Eddie Lv",
+      "link": "https://eddielv.com/musings/5g_on_iphonexr/",
+      "detailPath": "articles/a0519f5c2d718ebbacbb41b6.json"
+    },
+    {
       "id": "4c98429031d4402372b23453",
       "title": "同情心與同理心，以及情緒價值",
       "summary": "同情心（Sympathy）與同理心（Empathy）非常相似，但卻是完全不同的特性。 直接舉個例子： 何不食肉糜 # 當臣子稟報人民沒有飯吃時，晉惠帝卻說「沒飯吃，為何不吃肉呢？」 晉惠帝是有「同情心」的，他明白民眾沒飯吃，於是從「自己」的角度出發： 天災導致農作物收成大減，皇宮內確實也有一樣的情況，但是民衆多煮一點肉來吃就好了阿！ 由於晉惠帝完全不知道外面一般民衆遇到的情況是什麼，如果能從「當事人」的視角出發，就會是同理心了。 從「同情」轉換爲「同理」小練習： # 朋友向你說被詐騙了 100 萬。該怎麼回答？ 同情心 # 「被騙了，你好可憐嗚嗚嗚，這樣要再努力很多年才賺得回來，別再看過去了，錢回不來了，繼續努力賺錢吧。」 跟對方一起掉進情緒漩渦，也不知道能怎麼辦。 同理心 # 「一定很無助吧？現在有什麼我可…",
@@ -637,28 +659,6 @@
       "sourceTitle": "新世界的大门",
       "link": "https://blog.xinshijiededa.men/weekly/0x08/",
       "detailPath": "articles/8864a2070866737f3e9a33fc.json"
-    },
-    {
-      "id": "1f14ee758141b8c9bc3b8a37",
-      "title": "CKB RBF 设计和实现",
-      "summary": "CKB 相关技术文章第二篇。 Replace by fee 问题 如果一个交易成功发送到交易池，但可能出现因为费用较低而一直得不到处理。之前 CKB 没有其他措施来处理这种情况。 例如 Dotbit 4 位域名注册拥堵 这个事故发生过程中， CKB 的应用方无法使用任何方式来尽快让自己的交易被打包，这就是引入 Replace-by-fee（RBF) 的原因，我们需要一个机制来提高已经在交易池里交易的费用，替换掉旧的交易，让新的交易尽快被打包。 在新的 multi_index_map 重构后，交易在 pending 阶段也会按照交易的 score 来优先处理 (通常费用高的交易 score 也会高)，这会避免高费用的交易被阻塞住，所以理论上述需要手动提高费用的情况会减少，但我们还是需要 RBF 来手动提高交易的…",
-      "image": "http://catcoding.me/images/ob_pasted-image-20241031103004.png",
-      "publishedAt": "2024-11-06T03:55:13Z",
-      "sourceId": "82c4bcb6bba028cf",
-      "sourceTitle": "程序员的喵",
-      "link": "http://catcoding.me/p/ckb-rbf/",
-      "detailPath": "articles/1f14ee758141b8c9bc3b8a37.json"
-    },
-    {
-      "id": "550cd72c31b35cca2f06117f",
-      "title": "CKB 交易池重构",
-      "summary": "在 11.9 号清迈的 CKCON 会议上我会做一个关于 CKB 交易池的演讲，这是我准备的 slides Key Upgrades of the CKB Core 。所以这段时间在整理之前做项目的时候写的一些文档，顺便分享到自己的博客上。既然我们整个项目的源码都是公开的，这些文档其实也是可以分享的。 第一次听说 CKB 的读者可以参考这个文档以了解什么是 CKB 以及如何工作的： How CKB Works | Nervos CKB 。 我加入 Cryptape 之后一年内做的主要工作，涉及到交易池重构、Replace-by-fee 功能、以及 new-verify。这是第一篇关于交易池重构的文章。 什么是交易池 在 bitcoin 中交易池叫作 mempool，比如 mempool - Bitcoin E…",
-      "image": "http://catcoding.me/images/ob_pasted-image-20250221102123.png",
-      "publishedAt": "2024-11-06T03:39:21Z",
-      "sourceId": "82c4bcb6bba028cf",
-      "sourceTitle": "程序员的喵",
-      "link": "http://catcoding.me/p/ckb-txpool-refactor/",
-      "detailPath": "articles/550cd72c31b35cca2f06117f.json"
     }
   ]
 }
