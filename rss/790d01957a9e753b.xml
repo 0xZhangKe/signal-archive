@@ -1,5 +1,110 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/" xmlns:wfw="http://wellformedweb.org/CommentAPI/" xmlns:slash="http://purl.org/rss/1.0/modules/slash/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>月光博客</title><link>https://www.williamlong.info/</link><description>关注互联网和搜索引擎的IT科技博客</description><generator>RainbowSoft Studio Z-Blog 2.3 Avengers Build 180518</generator><language>zh-CN</language><pubDate>Mon, 07 Sep 2026 22:51:07 +0800</pubDate><item><title>使用VS Code和Github打造免费网站系统</title><author>williamlong.info@gmail.com (williamlong)</author><link>https://www.williamlong.info/archives/7561.html</link><pubDate>Mon, 07 Sep 2026 19:33:14 +0800</pubDate><guid>https://www.williamlong.info/archives/7561.html</guid><description><![CDATA[<p>以前搭建博客或CMS网站，绝大多数人都会选择WordPress、Typecho、Zblog等基于PHP+MySQL的动态CMS系统，这类传统程序虽然功能成熟、后台可视化易用，但对于个人博客场景来说，存在成本高、维护麻烦、性能差、不安全等一系列问题。</p>
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/" xmlns:wfw="http://wellformedweb.org/CommentAPI/" xmlns:slash="http://purl.org/rss/1.0/modules/slash/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>月光博客</title><link>https://www.williamlong.info/</link><description>关注互联网和搜索引擎的IT科技博客</description><generator>RainbowSoft Studio Z-Blog 2.3 Avengers Build 180518</generator><language>zh-CN</language><pubDate>Tue, 08 Sep 2026 21:42:53 +0800</pubDate><item><title>使用PagesCMS和GitHub打造免费CMS网站</title><author>williamlong.info@gmail.com (williamlong)</author><link>https://www.williamlong.info/archives/7562.html</link><pubDate>Tue, 08 Sep 2026 20:19:18 +0800</pubDate><guid>https://www.williamlong.info/archives/7562.html</guid><description><![CDATA[<p>如何替换WordPress这样的动态CMS网站，上文提到的VS Code + Front Matter CMS + Hugo + GitHub是一个免费方案，但对于普通用户来说，使用VS Code还是有一定难度，无法像WordPress那样全部在网站上操作，因此，这里介绍一个更为简单的和WordPress一样的可视化后台的博客方案：PagesCMS + Hugo + GitHub Pages。</p>
+
+<p>这套方案可以完美替代传统的WordPress系统，具有静态网站高速访问、全自动部署、可视化后台发文的三大特点，没有任何费用，个人用户可以长期零成本使用，个人博客、技术随笔、笔记站点完全够用。</p>
+
+<p><strong>一、架构原理</strong></p>
+
+<p>这套方案使用PagesCMS这个免费服务，技术人员可以搭好系统配置，做完初期的配置设置，之后，没有任何技术基础的客户可以使用Github账号登陆Pages‑CMS，然后通过网站的CMS界面发布和管理文章，保存提交之后，Github Actions自动部署发布，网站自动实时更新。</p>
+
+<p>二、搭建流程</p>
+
+<p>1、创建 GitHub 专属网站仓库</p>
+
+<p>登录 GitHub，新建仓库，仓库名为：你的用户名.github.io，选择 Public 公开仓库，初始化空白仓库。</p>
+
+<p>2、创建 Hugo 网站</p>
+
+<p>本地克隆仓库，新建并初始化一个Hugo站点，同步该仓库。</p>
+
+<p>3、配置 GitHub Actions&nbsp;</p>
+
+<p>访问GitHub仓库，在Settings-Pages-Deployment source 选项选择 GitHub Actions，选择浏览工作流模板，选用Hugo模板，点击 Configure，保存文件，工作流配置就写入仓库，自动部署正式生效。</p>
+
+<p>4、配置 PagesCMS 后台</p>
+
+<p>使用GitHub登陆PagesCMS网站，选定目标仓库，新建并修改一个配置文件，该文件会被保存在仓库根目录的 .pages.config.yml，适配 Hugo 配置的文件内容如下：</p>
+
+<blockquote>
+<p>media:</p>
+
+<p>&nbsp; input: &quot;static/images&quot; &nbsp; # 图片上传存放目录（Hugo static，会被发布到网站根目录）</p>
+
+<p>&nbsp; output: &quot;/images&quot;</p>
+
+<p>content:</p>
+
+<p>&nbsp; - name: &quot;posts&quot;</p>
+
+<p>&nbsp; &nbsp; label: &quot;博客文章&quot;</p>
+
+<p>&nbsp; &nbsp; type: &quot;collection&quot;</p>
+
+<p>&nbsp; &nbsp; path: &quot;content/posts&quot; &nbsp;# Hugo文章md所在文件夹</p>
+
+<p>&nbsp; &nbsp; create: true &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# 允许新建文章</p>
+
+<p>&nbsp; &nbsp; delete: true &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# 允许删除文章</p>
+
+<p>&nbsp; &nbsp; fields:</p>
+
+<p>&nbsp; &nbsp; &nbsp; - name: title</p>
+
+<p>&nbsp; &nbsp; &nbsp; &nbsp; label: 标题</p>
+
+<p>&nbsp; &nbsp; &nbsp; &nbsp; type: string</p>
+
+<p>&nbsp; &nbsp; &nbsp; - name: date</p>
+
+<p>&nbsp; &nbsp; &nbsp; &nbsp; label: 发布日期</p>
+
+<p>&nbsp; &nbsp; &nbsp; &nbsp; type: date</p>
+
+<p>&nbsp; &nbsp; &nbsp; - name: draft</p>
+
+<p>&nbsp; &nbsp; &nbsp; &nbsp; label: 是否草稿</p>
+
+<p>&nbsp; &nbsp; &nbsp; &nbsp; type: boolean</p>
+
+<p>&nbsp; &nbsp; &nbsp; - name: description</p>
+
+<p>&nbsp; &nbsp; &nbsp; &nbsp; label: 摘要</p>
+
+<p>&nbsp; &nbsp; &nbsp; &nbsp; type: string</p>
+
+<p>&nbsp; &nbsp; &nbsp; - name: tags</p>
+
+<p>&nbsp; &nbsp; &nbsp; &nbsp; label: 标签</p>
+
+<p>&nbsp; &nbsp; &nbsp; &nbsp; type: list</p>
+
+<p>&nbsp; &nbsp; &nbsp; - name: body</p>
+
+<p>&nbsp; &nbsp; &nbsp; &nbsp; label: 正文</p>
+
+<p>&nbsp; &nbsp; &nbsp; &nbsp; type: markdown</p>
+</blockquote>
+
+<p>保存好了以后，所有前期的操作配置就完成了。</p>
+
+<p><strong>三、PagesCMS后台日常发文</strong></p>
+
+<p>1. 登录后台</p>
+
+<p>前期配置好了以后，后面就可以全在浏览器上进行操作管理了，客户可以打开PagesCMS官网：https://app.pagescms.org，使用GitHub账号授权登录，即可进入后台进行管理。</p>
+
+<p>2. 新建/编辑文章</p>
+
+<p>登录之后，选择打开CMS网站的仓库，进入管理面板，就可以管理文章、媒体了，点击&ldquo;Add an entry&rdquo;可以发布一篇新文章，旧文章点&ldquo;Edit&rdquo;可以编辑，正文内容并非可见即所得的形式，需要自己写Markdown语法，建议现在记事本里写好内容，转为Markdown语法后再粘贴进去。图片拖拽上传，图片自动存入指定目录下。</p>
+
+<p>3. 自动发布更新</p>
+
+<p>点击保存后，PagesCMS 会自动提交 Markdown 文件到仓库，触发 GitHub Actions 自动编译部署，等待 1-2 分钟，网站即可更新完成。</p>
+
+<p><strong>结语</strong></p>
+
+<p>这套 PagesCMS + Hugo + GitHub Pages 方案，是目前个人免费博客的最优解之一。既解决了传统静态博客&ldquo;无后台、难维护&rdquo;的痛点，又规避了 WordPress&ldquo;付费、卡顿、不安全&rdquo;的缺陷，实现了免费、好看、高速、易用、免维护的完美博客体验。</p>
+]]></description><category>网站建设</category><comments>https://www.williamlong.info/archives/7562.html#comment</comments><wfw:commentRss>https://www.williamlong.info/feed.asp?cmt=7562</wfw:commentRss></item><item><title>使用VS Code和Github打造免费网站系统</title><author>williamlong.info@gmail.com (williamlong)</author><link>https://www.williamlong.info/archives/7561.html</link><pubDate>Mon, 07 Sep 2026 19:33:14 +0800</pubDate><guid>https://www.williamlong.info/archives/7561.html</guid><description><![CDATA[<p>以前搭建博客或CMS网站，绝大多数人都会选择WordPress、Typecho、Zblog等基于PHP+MySQL的动态CMS系统，这类传统程序虽然功能成熟、后台可视化易用，但对于个人博客场景来说，存在成本高、维护麻烦、性能差、不安全等一系列问题。</p>
 
 <p>这样的系统存在的问题是，需要服务器支持php、mysql数据库等服务，服务器成本较高，php程序漏洞多，很容易被挂马、被注入攻击，而且遇到大流量访问，服务器往往会遇到各种瓶颈，出现卡顿、报错等情况。</p>
 
@@ -391,21 +496,4 @@ draft: true<br />
 <p>《办法》针对AI拟人化互动、角色扮演类服务等明确了内容安全、知识产权保护、未成年人防护等监管规则。</p>
 
 <p>上海市委网信办6月26日通报&ldquo;清朗&middot;整治AI应用乱象&rdquo;专项行动第一阶段成果，宣布累计下架违规智能体1万4000余个。</p>
-]]></description><category>业界动态</category><comments>https://www.williamlong.info/archives/7553.html#comment</comments><wfw:commentRss>https://www.williamlong.info/feed.asp?cmt=7553</wfw:commentRss></item><item><title>申真谞九段受让两子挑战KataGo</title><author>user@gmail.com (guest)</author><link>https://www.williamlong.info/archives/7552.html</link><pubDate>Wed, 01 Jul 2026 22:06:58 +0800</pubDate><guid>https://www.williamlong.info/archives/7552.html</guid><description><![CDATA[<p>韩国棋院于7月1日宣布，为庆祝围棋AI&ldquo;AlphaGo&rdquo;诞生十周年，将举行申真谞九段与目前实力最强的围棋人工智能（AI）KataGo的让子三番棋比赛，申真谞受让两子。这是继10年前李世石九段与AlphaGo展开世纪大战之后，再次上演的超大型AI围棋赛事。</p>
-
-<p>&ldquo;人类最强&rdquo;围棋棋手申真谞九段与KataGo对决的赛事名为&ldquo;强数学&middot;韩经棋神战&rdquo;。比赛将于17日、19日和21日连续三天进行。本次赛事由韩经传媒集团主办，韩国棋院承办，GoodBook Shinagosa负责策划与赞助。</p>
-
-<p>将于17日、19日和21日举行的&ldquo;强数学&middot;韩经棋神战&rdquo;，旨在纪念AlphaGo震惊世界10周年，以再次挑战人类极限为宗旨而策划。27岁青年申真谞的登场，预示着一场与10年前截然不同的胜负较量。申真谞九段在深刻理解AI招法的同时，又结合了人类特有的棋感，因此被冠以&ldquo;申工智能&rdquo;的绰号。</p>
-
-<p>考虑到完美无瑕的AI与人类之间客观存在的实力差距，本次比赛采用了申真谞九段先让两子的&ldquo;让子棋&rdquo;赛制。申真谞九段每局可获得5000万韩元的对局费，每赢一局还将获得5000万韩元的胜局奖金。若申真谞九段能取得2场及以上胜利，还将获得现代汽车旗下顶级轿车Genesis G90作为奖励。</p>
-
-<p>申真谞九段拥有5小时的保留时间，之后每手棋有30秒读秒；而KataGo则必须在20秒内落下每一手棋。此举旨在让人类拥有充足的时间与AI一较高下。既然给予了人类代表充分的思考时间，因此即使局势陷入劣势，也不能宣布&ldquo;中盘认输（不计算败局）&rdquo;，必须将棋局进行到底。比赛期间没有中场休息时间。</p>
-
-<p>本次赛事是一个历史性的舞台，旨在衡量人类究竟能多大程度地接近这位拥有绝对实力、堪称&ldquo;围棋之神&rdquo;的AI。在AI出现之前，世界围棋界的超一流高手们常说：&ldquo;如果与围棋之神对弈，会让三子&rdquo;。随着本次对局结果的出炉，人类的能力值有望迎来全新的评估。</p>
-
-<p>围棋人工智能（AI）&ldquo;KataGo&rdquo;被认为是自AlphaGo问世以来，当前实力最强的围棋AI程序。全世界的职业棋手都在使用KataGo进行布局研究、赛后复盘和日常训练。AI不仅超越了人类的竞争对手，更扮演起了人类&ldquo;最高导师&rdquo;的角色。</p>
-
-<p>本次对局将在位于首尔忠正路的韩国经济TV大楼11层尖端演播室中进行直播。解说由李贤旭九段担任，柳承熙担任主持人。节目计划利用虚拟现实（VR）设备和视频墙，在解说演播室中呈现以往围棋转播中从未有过的丰富多元的画面。此外，在17日直播开始前播出的韩经TV《新奇的经济脱口秀 Quick》节目中，申真谞九段将与AI专家一道，回顾2016年AlphaGo震惊世界以来10年间AI的发展轨迹以及人类围棋的进化历程。</p>
-
-<p>17日和19日的对局由韩国经济TV、21日的对局由围棋TV于上午10点起进行直播。</p>
-]]></description><category>软件应用</category><comments>https://www.williamlong.info/archives/7552.html#comment</comments><wfw:commentRss>https://www.williamlong.info/feed.asp?cmt=7552</wfw:commentRss></item></channel></rss>
+]]></description><category>业界动态</category><comments>https://www.williamlong.info/archives/7553.html#comment</comments><wfw:commentRss>https://www.williamlong.info/feed.asp?cmt=7553</wfw:commentRss></item></channel></rss>
