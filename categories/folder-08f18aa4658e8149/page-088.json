@@ -1,6 +1,28 @@
 {
   "items": [
     {
+      "id": "59eb7dcac874135f95121a74",
+      "title": "Android 中如何计算 App 的启动时间？",
+      "summary": "之前有人在知乎提问： “怎么计算apk的启动时间？” : 利用python或者直接用adb命令怎么计算apk的启动时间呢？就是计算从点击图标到apk完全启动所花费的时间。比如，对游戏来说就是点击游戏图标到进入到登录界面的这段时间。 已知的两种方法貌似可以获取，但是感觉结果不准确：一种是，adb shell am start -w packagename/activity,这个可以得到两个值，ThisTime和TotalTime，不知道两个有什么区别，而且与实际启动时间不匹配，两者相加都可能比实际启动时间小（测试游戏的时候差别更大）；另外一种是通过adb logcat的方式，感觉获取的结果也与实际有差别。 我和另外一个同事 郭启发 针对两个方面进行了回答，不过毕竟知乎上看的人会比较少，所以我在征得他的同意之后，…",
+      "image": null,
+      "publishedAt": "2015-12-31T05:52:30Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2015/12/31/How-to-calculation-android-app-lunch-time/",
+      "detailPath": "articles/59eb7dcac874135f95121a74.json"
+    },
+    {
+      "id": "4ab592d6dd42d126c5e9991a",
+      "title": "Android 应用启动优化:一种 DelayLoad 的实现和原理(下篇)",
+      "summary": "上一篇文章 我们使用第三种方法来实现延迟加载。不过上一篇写的比较简单，只是讲解了如何去实现，这一篇就来讲一下为何要这么做，以及这么做后面的原理。 其中会涉及到一些 Android 中的比较重要的类，以及 Activity 生命周期中比较重要的几个函数。 其实这个其中的原理比较简单，不过要弄清楚其实现的过程，还是一件蛮好玩的事情，其中会用到一些工具，自己加调试代码等，一步一步下来，自己对 Activity 的启动的理解又深了一层，希望大家读完之后也会对大家有一定的帮助。",
+      "image": null,
+      "publishedAt": "2015-12-29T08:34:06Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2015/12/29/Android%E5%BA%94%E7%94%A8%E5%90%AF%E5%8A%A8%E4%BC%98%E5%8C%96-%E4%B8%80%E7%A7%8DDelayLoad%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%92%8C%E5%8E%9F%E7%90%86-%E4%B8%8B%E7%AF%87/",
+      "detailPath": "articles/4ab592d6dd42d126c5e9991a.json"
+    },
+    {
       "id": "4e9fcf07ec834360e6eea1d4",
       "title": "2015年终小记",
       "summary": "关于2015年",
@@ -637,28 +659,6 @@
       "sourceTitle": "Wiwi.Blog Blog",
       "link": "https://wiwi.blog/blog/da-bei-zhou",
       "detailPath": "articles/1d77f5534ecf12276dbc35d8.json"
-    },
-    {
-      "id": "ae380cd3845609a942163196",
-      "title": "JS ONE 是什麼？",
-      "summary": "在板橋隨處都可以見到「JS ONE」的貼紙，甚至連店家內的廁所面紙盒都有。",
-      "image": "https://wiwi.blog/assets/images/jsone-73df2943c83eea2056da19d8c7700312.jpg",
-      "publishedAt": "2013-02-21T06:47:00Z",
-      "sourceId": "7f36c3da1e6b5c71",
-      "sourceTitle": "Wiwi.Blog Blog",
-      "link": "https://wiwi.blog/blog/js-one",
-      "detailPath": "articles/ae380cd3845609a942163196.json"
-    },
-    {
-      "id": "32ca7eca5d43cc30174dfc13",
-      "title": "懶得出門買晚餐？你可以舔鋼琴！",
-      "summary": "我的一個鋼琴學生跟我說，她在音樂教室教了一個非常難搞的鋼琴學生，並且給我看了她們上鋼琴課時拍的手機影片。",
-      "image": "https://wiwi.blog/assets/images/smudgedIpad-48a2927690163a0a829b157a626c18a0.jpg",
-      "publishedAt": "2013-02-17T14:13:00Z",
-      "sourceId": "7f36c3da1e6b5c71",
-      "sourceTitle": "Wiwi.Blog Blog",
-      "link": "https://wiwi.blog/blog/lick-the-piano",
-      "detailPath": "articles/32ca7eca5d43cc30174dfc13.json"
     }
   ]
 }
