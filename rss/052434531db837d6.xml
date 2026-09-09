@@ -1,5 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-09-07T23:54:54+00:00</updated><author><name>Simon Willison</name></author><entry><title>llm 0.35</title><link href="https://simonwillison.net/2026/Sep/7/llm/" rel="alternate"/><published>2026-09-07T23:54:54+00:00</published><updated>2026-09-07T23:54:54+00:00</updated><id>https://simonwillison.net/2026/Sep/7/llm/</id><summary type="html">
+<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-09-09T00:20:17+00:00</updated><author><name>Simon Willison</name></author><entry><title>Quoting Terence Tao</title><link href="https://simonwillison.net/2026/Sep/9/terence-tao/" rel="alternate"/><published>2026-09-09T00:20:17+00:00</published><updated>2026-09-09T00:20:17+00:00</updated><id>https://simonwillison.net/2026/Sep/9/terence-tao/</id><summary type="html">
+    &lt;blockquote cite="https://mathstodon.xyz/@tao/117237320796901560"&gt;&lt;p&gt;I wrote recently about how the collection of good, fruitful open problems is now being mined in a non-renewable fashion, leading to the potential scenario of these problems becoming scarce. [...]&lt;/p&gt;
+&lt;p&gt;We have now seen that even the rumor of someone working on a problem can trigger a massive amount of AI-powered effort to flatten it before the original research project has time to reach its full potential.  The incentives may now be pointing in the direction of no longer sharing any promising research directions with the broader community, which would reverse centuries of traditions of open science and do serious long-term damage to the future of the field.&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p class="cite"&gt;&amp;mdash; &lt;a href="https://mathstodon.xyz/@tao/117237320796901560"&gt;Terence Tao&lt;/a&gt;&lt;/p&gt;
+
+    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/ai-ethics"&gt;ai-ethics&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/mathematics"&gt;mathematics&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;&lt;/p&gt;
+
+
+
+</summary><category term="ai-ethics"/><category term="mathematics"/><category term="ai"/></entry><entry><title>On the Navier–Stokes Millennium Prize Problem</title><link href="https://simonwillison.net/2026/Sep/8/on-navier-stokes/" rel="alternate"/><published>2026-09-08T23:55:12+00:00</published><updated>2026-09-08T23:55:12+00:00</updated><id>https://simonwillison.net/2026/Sep/8/on-navier-stokes/</id><summary type="html">
+    
+&lt;p&gt;&lt;strong&gt;&lt;a href="https://openai.com/index/navier-stokes-solution/"&gt;On the Navier–Stokes Millennium Prize Problem&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+Impressive result from OpenAI, who used an unreleased model to produce a resolution to &lt;a href="https://en.wikipedia.org/wiki/Navier–Stokes_existence_and_smoothness"&gt;the Navier–Stokes existence and smoothness problem&lt;/a&gt;, one of the seven &lt;a href="https://en.wikipedia.org/wiki/Millennium_Prize_Problems"&gt;Millennium Prize Problems&lt;/a&gt; that have been subject to a $1,000,000 prize since May 24th, 2000.&lt;/p&gt;
+&lt;p&gt;The discovery is somewhat overshadowed by accusations of skulduggery from Tristan Buckmaster, an NYU mathematics professor who was collaborating on related problems with Levent Alpöge, an accomplished mathematician who currently works for Anthropic.&lt;/p&gt;
+&lt;p&gt;Tristan's complaint accompanied &lt;a href="https://mastodon.social/@tristanbuckmaster/117233413705701198"&gt;a hastily published version&lt;/a&gt; of their own results. &lt;a href="https://cims.nyu.edu/~tristanb/statement.pdf"&gt;Here's the PDF describing what happened&lt;/a&gt;. The &lt;em&gt;very&lt;/em&gt; short version is that Tristan and Levent worked on the problem for almost a year, making extensive use of Claude and Codex (mainly GPT-5.6 Sol), then had a breakthrough on August 15th. The mathematical rumour mill kicked into gear and Tristan and Levent heard that OpenAI had heard that Anthropic had resolved "a major open problem", so they reached out and learned that OpenAI had a team working on a related problem, with a similar approach. Quoting Tristan:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;I asked when the first prompt had been sent by them. This question was not answered directly by OpenAI for some time. Eventually it was agreed that it had been sent in the past few days, after information about our work had reached OpenAI.&lt;/p&gt;
+&lt;p&gt;I asked whether the model had been trained on, or had access to, our sessions in Codex, into which we had been putting all our drafts for the whole of this project. I was told the model did not look up user data. I asked again, about training, and I did not get an answer.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;It gets more complicated from there. The OpenAI team offered to wait for Tristan to publish, or to have him author a paper about their result, but were clear that Levent would &lt;em&gt;not&lt;/em&gt; be invited as a co-author due to OpenAI's competitive relationship with his employer.&lt;/p&gt;
+&lt;p&gt;Here's how OpenAI described their work:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;On Tuesday, September 1, we heard rumors that two Millennium Prize problems had been resolved. Inspired by these rumors and by the step change in performance of our internal model, we launched an effort to evaluate it on all open Millennium Prize problems and a few other high-impact problems. [...]&lt;/p&gt;
+&lt;p&gt;The agents arrived at their resolution on Saturday, September 5, about 88 hours after the first agents were launched. Lean formalization and verification took an additional 17 hours via GPT‑6 Astra.&lt;/p&gt;
+&lt;p&gt;Across all attempted problems, the agents sent 4.9 million messages and used about 300 billion output tokens. In the process of resolving the Navier–Stokes problem, the agents sent 2.7 million messages and used approximately 130 billion output tokens.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;(We don't know the cost structure of the internal model they used, but 300 billion output tokens at public API prices for GPT-6 Astra would cost &lt;a href="https://www.llm-prices.com/#ot=300000000000&amp;amp;sel=gpt-6-astra"&gt;$15,000,000&lt;/a&gt;.)&lt;/p&gt;
+&lt;p&gt;Here's where they provide their perspective on Tristan and Levent's work (emphasis mine):&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Our effort began on September 1st after hearing a rumor which we later realized was related to Levent Alpöge, an Anthropic employee, and Tristan Buckmaster, a math professor at NYU. After the completion of our full project and Lean verification (on September 6th), believing from the rumor they also had a solution of Navier–Stokes, we reached out to them to offer a concurrent release of our result and to recognize their priority in a joint announcement. [...]&lt;/p&gt;
+&lt;p&gt;We (the researchers and the agents) did not see any of their work through any means until they released it publicly — in particular, no specific user data was accessed in order to solve this problem. &lt;strong&gt;While unlikely, we cannot rule out that de-identified data derived from their usage of our products helped &lt;a href="https://openai.com/policies/how-your-data-is-used-to-improve-model-performance/"&gt;improve our models&lt;/a&gt;&lt;/strong&gt;. However, our proofs differ significantly and even the precise results proved are different in the Euler case (forced vs unforced).&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;My interpretation of what happened here is that OpenAI heard that some Millennium Prize problems had been solved using LLMs and saw this as an opportunity to demonstrate the power of their latest model, without thinking too hard about the optics of scooping a team who had been using OpenAI's own models to work on this problem for the best part of a year.&lt;/p&gt;
+&lt;p&gt;This situation appears to mirror what's happening in the world of computer security right now. Anil Madhavapeddy recently pointed out that &lt;a href="https://anil.recoil.org/notes/rumour-is-the-exploit"&gt;Just a rumour of a bug is enough to find a security exploit these days&lt;/a&gt;, because if someone knows that some software has an unpatched vulnerability, they can set their agents the task of finding it. Is the same now true of mathematics? Just knowing that there is an unpublished solution to a problem might trigger millions of dollars in LLM spending to get there first.&lt;/p&gt;
+&lt;p&gt;This also highlights one of my ongoing frustrations about how all of this works. When an AI lab says that my data is "used to improve model performance", &lt;em&gt;what does that actually mean&lt;/em&gt;?&lt;/p&gt;
+&lt;p&gt;My two favourite hypothetical questions regarding this used to be:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;If I'm running Codex and one of my API keys accidentally gets consumed in the context, what are the chances that someone else might ask for an API key in the future and get mine back? (I asked someone at OpenAI once and they called this the "regurgitation" problem and assured me that they take great pains to prevent that... but wouldn't describe how.)&lt;/li&gt;
+&lt;li&gt;If I brainstorm with ChatGPT about potential new directions for my company, what's the chance that information might be exposed to a competitor in six months' time who asks "what might company X plan to do next"?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;My new preferred hypothetical for this is:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;If I use ChatGPT to help me partially solve a Millennium Prize problem, what are the chances that my work will influence training such that a later model helps someone &lt;em&gt;else&lt;/em&gt; solve it first?&lt;/li&gt;
+&lt;/ul&gt;
+
+    &lt;p&gt;&lt;small&gt;&lt;/small&gt;Via &lt;a href="https://news.ycombinator.com/item?id=49613262"&gt;Hacker News&lt;/a&gt;&lt;/small&gt;&lt;/p&gt;
+
+
+    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/mathematics"&gt;mathematics&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/openai"&gt;openai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/training-data"&gt;training-data&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai-ethics"&gt;ai-ethics&lt;/a&gt;&lt;/p&gt;
+
+
+
+</summary><category term="mathematics"/><category term="ai"/><category term="openai"/><category term="generative-ai"/><category term="llms"/><category term="training-data"/><category term="ai-ethics"/></entry><entry><title>Introducing ChatGPT Images 2.5</title><link href="https://simonwillison.net/2026/Sep/8/introducing-chatgpt-images-25/" rel="alternate"/><published>2026-09-08T22:46:33+00:00</published><updated>2026-09-08T22:46:33+00:00</updated><id>https://simonwillison.net/2026/Sep/8/introducing-chatgpt-images-25/</id><summary type="html">
+    
+&lt;p&gt;&lt;strong&gt;&lt;a href="https://openai.com/index/introducing-chatgpt-images-2-5/"&gt;Introducing ChatGPT Images 2.5&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+OpenAI's image generation models are apparently used "more than 3 billion images across ChatGPT Images and the GPT‑Image models in the API". This latest release improves their instruction-following ability across multiple turns, responds faster, and "is better at preserving the subjects in your reference photos".&lt;/p&gt;
+&lt;p&gt;There are two new model IDs in the API: &lt;code&gt;gpt-image-2.5-sunburst&lt;/code&gt; and &lt;code&gt;gpt-image-2.5-flare&lt;/code&gt;. Based &lt;a href="https://developers.openai.com/api/docs/guides/image-generation#overview"&gt;on this&lt;/a&gt; I think Sunburst is the stronger option:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Choose Sunburst for workflows where editing precision matters most, and Flare for fast, high-quality everyday image generation.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I &lt;a href="https://github.com/simonw/tools/pull/333"&gt;upgraded&lt;/a&gt; my &lt;a href="https://tools.simonwillison.net/python/#openai_imagepy"&gt;openai_image.py&lt;/a&gt; CLI tool to support passing in one or more reference images, so now this works:&lt;/p&gt;
+&lt;div class="highlight highlight-source-shell"&gt;&lt;pre&gt;uv run https://tools.simonwillison.net/python/openai_image.py \
+  &lt;span class="pl-s"&gt;&lt;span class="pl-pds"&gt;'&lt;/span&gt;add a raccoon scientist studying the chart thoughtfully&lt;span class="pl-pds"&gt;'&lt;/span&gt;&lt;/span&gt; \
+  -i https://static.simonwillison.net/static/2026/openai-agent-usage.webp \
+  -m gpt-image-2.5-sunburst&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This is the &lt;a href="https://static.simonwillison.net/static/2026/openai-agent-usage.webp"&gt;original image&lt;/a&gt;, and here's what I got back from that prompt to "add a raccoon scientist studying the chart thoughtfully":&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Line chart with cartoon illustration. Title: &amp;quot;Usage of internal coding agents is increasing significantly—Median researcher&amp;quot;. Y-axis labeled &amp;quot;Daily $ / researcher&amp;quot; from 0 to 700; x-axis shows Feb 2026, Apr 2026, Jun 2026, Aug 2026. A blue line stays near zero through April, rises gradually to around 150 by June and July, then climbs steeply to about 600 by late August. In the foreground a cartoon raccoon in glasses and a white lab coat, chin in hand, holds a clipboard at a desk with a mug bearing the OpenAI logo, some printed charts, and a stack of three books titled &amp;quot;AI AGENTS&amp;quot;, &amp;quot;SOFTWARE ENGINEERING&amp;quot;, and &amp;quot;PRODUCTIVITY&amp;quot;. An OpenAI logo appears in the top right corner." src="https://static.simonwillison.net/static/2026/racoon-chart.webp" /&gt;
+
+
+    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/tools"&gt;tools&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/openai"&gt;openai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/uv"&gt;uv&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/text-to-image"&gt;text-to-image&lt;/a&gt;&lt;/p&gt;
+
+
+
+</summary><category term="tools"/><category term="ai"/><category term="openai"/><category term="generative-ai"/><category term="uv"/><category term="text-to-image"/></entry><entry><title>llm 0.35</title><link href="https://simonwillison.net/2026/Sep/7/llm/" rel="alternate"/><published>2026-09-07T23:54:54+00:00</published><updated>2026-09-07T23:54:54+00:00</updated><id>https://simonwillison.net/2026/Sep/7/llm/</id><summary type="html">
     
         &lt;p&gt;&lt;strong&gt;Release:&lt;/strong&gt; &lt;a href="https://github.com/simonw/llm/releases/tag/0.35"&gt;llm 0.35&lt;/a&gt;&lt;/p&gt;
         &lt;blockquote&gt;
@@ -637,215 +711,4 @@ Hugo van Kemenade (release manager for Python 3.14 and 3.15) announces the final
 
 
 
-</summary><category term="open-source"/><category term="python"/><category term="github-actions"/></entry><entry><title>Introducing wrapture</title><link href="https://simonwillison.net/2026/Aug/31/introducing-wrapture/" rel="alternate"/><published>2026-08-31T23:59:36+00:00</published><updated>2026-08-31T23:59:36+00:00</updated><id>https://simonwillison.net/2026/Aug/31/introducing-wrapture/</id><summary type="html">
-    
-&lt;p&gt;&lt;strong&gt;&lt;a href="https://grahamdumpleton.me/posts/2026/08/introducing-wrapture/"&gt;Introducing wrapture&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
-New from Graham Dumpleton (of &lt;a href="https://pypi.org/project/wrapt/"&gt;wrapt&lt;/a&gt;, mod_wsgi, and New Relic's Python agent fame), who describes Wrapture as taking the monkeypatching ideas from wrapt and extending them to apply to testing and tracing at the same time.&lt;/p&gt;
-&lt;p&gt;Wrapture (&lt;a href="https://wrapture.readthedocs.io/"&gt;full documentation here&lt;/a&gt;) makes it easy to wrap any function or method such that all access can be traced, or can be overridden to return a different value.&lt;/p&gt;
-&lt;p&gt;It acts as both an alternative to &lt;code&gt;unittest.mock&lt;/code&gt; and a way to implement tracing against an existing project:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Attaching observation to code you do not control, recording what flows through it, and doing so without disturbing the program being watched, is a problem I have never really stopped thinking about.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Wrapture includes &lt;a href="https://wrapture.readthedocs.io/en/latest/otel-export.html"&gt;OpenTelemetry support&lt;/a&gt; and even has an entirely configuration-based mechanism for adding tracing to an existing Python project, which looks like this:&lt;/p&gt;
-&lt;div class="highlight highlight-source-toml"&gt;&lt;pre&gt;&lt;span class="pl-smi"&gt;capture&lt;/span&gt; = &lt;span class="pl-s"&gt;&lt;span class="pl-pds"&gt;"&lt;/span&gt;summary&lt;span class="pl-pds"&gt;"&lt;/span&gt;&lt;/span&gt;
-
-[[&lt;span class="pl-en"&gt;observe&lt;/span&gt;]]
-&lt;span class="pl-smi"&gt;target&lt;/span&gt; = &lt;span class="pl-s"&gt;&lt;span class="pl-pds"&gt;"&lt;/span&gt;domain:Calculator&lt;span class="pl-pds"&gt;"&lt;/span&gt;&lt;/span&gt;
-&lt;span class="pl-smi"&gt;name&lt;/span&gt; = [&lt;span class="pl-s"&gt;&lt;span class="pl-pds"&gt;"&lt;/span&gt;outer&lt;span class="pl-pds"&gt;"&lt;/span&gt;&lt;/span&gt;, &lt;span class="pl-s"&gt;&lt;span class="pl-pds"&gt;"&lt;/span&gt;inner&lt;span class="pl-pds"&gt;"&lt;/span&gt;&lt;/span&gt;]
-
-[[&lt;span class="pl-en"&gt;sink&lt;/span&gt;]]
-&lt;span class="pl-smi"&gt;type&lt;/span&gt; = &lt;span class="pl-s"&gt;&lt;span class="pl-pds"&gt;"&lt;/span&gt;jsonlines&lt;span class="pl-pds"&gt;"&lt;/span&gt;&lt;/span&gt;
-&lt;span class="pl-smi"&gt;path&lt;/span&gt; = &lt;span class="pl-s"&gt;&lt;span class="pl-pds"&gt;"&lt;/span&gt;trace.jsonl&lt;span class="pl-pds"&gt;"&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;This is still a very young project - just a few weeks old - but it's off to a very promising start.&lt;/p&gt;
-&lt;p&gt;Interestingly, this is also Graham's first attempt at  large entirely agent-driven project:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Every line of code and documentation in wrapture was written by an AI assistant working under my direction. I want to be upfront about that, and equally upfront about what it was not. This was not vibe coding, where a one-shot prompt produces a pile of generated code and the person driving hopes for the best because they lack the knowledge to judge what came back. Vibe coding has earned its bad reputation. I engineered wrapture carefully from the start. I have spent a long time in this particular corner of Python and knew exactly what the result needed to be, and the AI was the means of producing it rather than the source of the design.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;In a follow-up post, &lt;a href="https://grahamdumpleton.me/posts/2026/09/unit-testing-with-wrapture/"&gt;Unit testing with wrapture&lt;/a&gt;, Graham shows the testing patterns supported by the new library:&lt;/p&gt;
-&lt;pre&gt;&lt;span class="pl-k"&gt;def&lt;/span&gt; &lt;span class="pl-en"&gt;test_stub_with_wrapture&lt;/span&gt;():
-    &lt;span class="pl-k"&gt;with&lt;/span&gt; &lt;span class="pl-s1"&gt;wrapture&lt;/span&gt;.&lt;span class="pl-c1"&gt;binding&lt;/span&gt;(
-        &lt;span class="pl-v"&gt;Gateway&lt;/span&gt;, &lt;span class="pl-s"&gt;"charge"&lt;/span&gt;
-    ).&lt;span class="pl-c1"&gt;on_call&lt;/span&gt;.&lt;span class="pl-c1"&gt;returns&lt;/span&gt;({
-        &lt;span class="pl-s"&gt;"id"&lt;/span&gt;: &lt;span class="pl-s"&gt;"stub"&lt;/span&gt;, &lt;span class="pl-s"&gt;"amount"&lt;/span&gt;: &lt;span class="pl-c1"&gt;0&lt;/span&gt;}
-    ):
-        &lt;span class="pl-k"&gt;assert&lt;/span&gt; &lt;span class="pl-en"&gt;OrderService&lt;/span&gt;().&lt;span class="pl-c1"&gt;place&lt;/span&gt;(
-            &lt;span class="pl-c1"&gt;500&lt;/span&gt;
-        )[&lt;span class="pl-s"&gt;"id"&lt;/span&gt;] &lt;span class="pl-c1"&gt;==&lt;/span&gt; &lt;span class="pl-s"&gt;"stub"&lt;/span&gt;&lt;/pre&gt;
-&lt;p&gt;And this neat example of a test that calls and then modifies the return value from the original method:&lt;/p&gt;
-&lt;pre&gt;&lt;span class="pl-k"&gt;def&lt;/span&gt; &lt;span class="pl-en"&gt;test_pinned_result_with_wrapture&lt;/span&gt;():
-    &lt;span class="pl-s1"&gt;charge&lt;/span&gt; &lt;span class="pl-c1"&gt;=&lt;/span&gt; &lt;span class="pl-s1"&gt;wrapture&lt;/span&gt;.&lt;span class="pl-c1"&gt;binding&lt;/span&gt;(
-        &lt;span class="pl-v"&gt;Gateway&lt;/span&gt;, &lt;span class="pl-s"&gt;"charge"&lt;/span&gt;
-    )
-    &lt;span class="pl-s1"&gt;charge&lt;/span&gt;.&lt;span class="pl-c1"&gt;on_call&lt;/span&gt;.&lt;span class="pl-c1"&gt;transforms_result&lt;/span&gt;(
-        &lt;span class="pl-k"&gt;lambda&lt;/span&gt; &lt;span class="pl-s1"&gt;r&lt;/span&gt;: {&lt;span class="pl-c1"&gt;**&lt;/span&gt;&lt;span class="pl-s1"&gt;r&lt;/span&gt;, &lt;span class="pl-s"&gt;"id"&lt;/span&gt;: &lt;span class="pl-s"&gt;"ch_TEST"&lt;/span&gt;}
-    )
-    &lt;span class="pl-k"&gt;with&lt;/span&gt; &lt;span class="pl-s1"&gt;charge&lt;/span&gt;:
-        &lt;span class="pl-k"&gt;assert&lt;/span&gt; &lt;span class="pl-en"&gt;OrderService&lt;/span&gt;().&lt;span class="pl-c1"&gt;place&lt;/span&gt;(
-           &lt;span class="pl-c1"&gt;500&lt;/span&gt;
-        ) &lt;span class="pl-c1"&gt;==&lt;/span&gt; {
-            &lt;span class="pl-s"&gt;"id"&lt;/span&gt;: &lt;span class="pl-s"&gt;"ch_TEST"&lt;/span&gt;, &lt;span class="pl-s"&gt;"amount"&lt;/span&gt;: &lt;span class="pl-c1"&gt;500&lt;/span&gt;
-        }&lt;/pre&gt;
-
-&lt;p&gt;(In both of these examples the &lt;code&gt;OrderService().place(...)&lt;/code&gt; method calls &lt;code&gt;Gateway().charge(...)&lt;/code&gt;.)
-
-
-    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/graham-dumpleton"&gt;graham-dumpleton&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/monkey-patching"&gt;monkey-patching&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/python"&gt;python&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/testing"&gt;testing&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/pytest"&gt;pytest&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/observability"&gt;observability&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai-assisted-programming"&gt;ai-assisted-programming&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/agentic-engineering"&gt;agentic-engineering&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/opentelemetry"&gt;opentelemetry&lt;/a&gt;&lt;/p&gt;
-
-
-
-</summary><category term="graham-dumpleton"/><category term="monkey-patching"/><category term="python"/><category term="testing"/><category term="pytest"/><category term="observability"/><category term="ai-assisted-programming"/><category term="agentic-engineering"/><category term="opentelemetry"/></entry><entry><title>Quoting Andrew Digby</title><link href="https://simonwillison.net/2026/Aug/31/andrew-digby/" rel="alternate"/><published>2026-08-31T22:25:02+00:00</published><updated>2026-08-31T22:25:02+00:00</updated><id>https://simonwillison.net/2026/Aug/31/andrew-digby/</id><summary type="html">
-    &lt;blockquote cite="https://bsky.app/profile/digs.bsky.social/post/3mufrrsfhq22r"&gt;&lt;p&gt;325 #kakapo! The chicks from this year's record breeding season are now juveniles and so have been added to the population. In 1995 there were just 51 kākāpō left. Recovery of critically endangered species &lt;em&gt;is&lt;/em&gt; possible with sustained effort.&lt;/p&gt;&lt;/blockquote&gt;
-&lt;p class="cite"&gt;&amp;mdash; &lt;a href="https://bsky.app/profile/digs.bsky.social/post/3mufrrsfhq22r"&gt;Andrew Digby&lt;/a&gt;, providing the best news of the year&lt;/p&gt;
-
-    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/kakapo"&gt;kakapo&lt;/a&gt;&lt;/p&gt;
-
-
-
-</summary><category term="kakapo"/></entry><entry><title>Understanding ChatGPT Work</title><link href="https://simonwillison.net/2026/Aug/30/understanding-chatgpt-work/" rel="alternate"/><published>2026-08-30T23:59:47+00:00</published><updated>2026-08-30T23:59:47+00:00</updated><id>https://simonwillison.net/2026/Aug/30/understanding-chatgpt-work/</id><summary type="html">
-    &lt;p&gt;OpenAI &lt;a href="https://openai.com/index/chatgpt-for-your-most-ambitious-work/"&gt;announced ChatGPT Work&lt;/a&gt; on July 9th, and have been furiously iterating on it ever since. It is an extraordinarily confusing and very powerful product. Here's what I've figured out about it so far.&lt;/p&gt;
-&lt;h4 id="two-products"&gt;ChatGPT Work is actually two products&lt;/h4&gt;
-&lt;p&gt;The more interesting version of ChatGPT Work is the one that runs in the cloud. This can be accessed via &lt;a href="https://www.chatgpt.com/"&gt;chatgpt.com&lt;/a&gt; or through the ChatGPT mobile apps. Let's call it &lt;strong&gt;Work Cloud&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;If you install the ChatGPT desktop app - the app that used to be called Codex - you gain access to a thing called ChatGPT Work that can access files and run programs directly on your computer. Let's call that one &lt;strong&gt;Work Local&lt;/strong&gt;. This one feels more like regular Codex re-skinned to be less intimidating to non-software-developers.&lt;/p&gt;
-
-&lt;p&gt;(&lt;strong&gt;Update&lt;/strong&gt;: Work Cloud is also available from the ChatGPT desktop app, via a &lt;a href="https://bsky.app/profile/jkwim.bsky.social/post/3mueurvkss52h"&gt;Where should this chat run?&lt;/a&gt; dropdown.)&lt;/p&gt;
-
-&lt;p&gt;For the rest of this article I'm going to talk exclusively about Work Cloud.&lt;/p&gt;
-&lt;h4 id="work-is-for-paid-subscribers-only"&gt;Work is for paid subscribers only&lt;/h4&gt;
-&lt;p&gt;Right now, ChatGPT Work (in both flavors) is available only to $20/month and up subscribers. Free users and $8/month Go users do not have access.&lt;/p&gt;
-&lt;h4 id="work-has-features-that-aren-t-available-in-chat"&gt;Work has features that aren't available in Chat&lt;/h4&gt;
-&lt;p&gt;The interface for accessing Work is a tab selector, which presents it as an alternative to Chat:&lt;/p&gt;
-&lt;p&gt;&lt;img src="https://static.simonwillison.net/static/2026-08-30/IMG_7741.jpeg" alt="ChatGPT app header with a Chat and a Work tab" style="max-width: 100%;" /&gt;&lt;/p&gt;
-&lt;p&gt;The obvious question is &lt;em&gt;when should I use Chat, and when should I use Work?&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;OpenAI's &lt;a href="https://learn.chatgpt.com/docs/get-started-with-work"&gt;official answer&lt;/a&gt; to that question is:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Use Chat when you want an answer, explanation, brainstorm, or short draft. Use ChatGPT Work when you want ChatGPT to complete a task with a clear outcome, such as a brief, deck, analysis, recurring update, workflow, or file you can review and use.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;I find that almost entirely useless, because I've been using regular ChatGPT Chat for all of those task categories for years!&lt;/p&gt;
-&lt;p&gt;The better question then is &lt;em&gt;what features does Work have that are missing from Chat?&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;After extensive experimentation I think I've mostly figured that out:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="#model-selection"&gt;Options to use Luna and Terra in place of Sol&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#code-execution-with-internet-access-"&gt;A code execution environment with Internet access&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#a-full-headless-chrome-browser"&gt;A headless Chrome browser&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#a-persistent-shared-filesystem"&gt;A persistent filesystem shared between sessions&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#chatgpt-sites"&gt;The ability to publish ChatGPT Sites&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#sub-agents-with-sol-luna-and-terra"&gt;The ability to run sub-agent sessions with Sol, Luna, and Terra&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#scheduled-prompt-automations"&gt;Scheduled prompt automations&lt;/a&gt; (may be in ChatGPT Chat too)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id="model-selection"&gt;Model selection&lt;/h4&gt;
-&lt;p&gt;In Work, you get the option to pick GPT-5.6 Sol, Luna, or Terra, each with Light, Medium, High, Extra High, Max, or Ultra reasoning levels. You can also pick GPT-5.5 at Light, Medium, High, or Extra High.&lt;/p&gt;
-&lt;p&gt;These look to be the same models that are available through the OpenAI API.&lt;/p&gt;
-&lt;p&gt;Chat offers a different selection: 5.6 Instant, Medium, High, Extra High, and Pro (actually Extra High and Pro are only available for $100/month+ subscribers - $20/month subscribers cap out at High). It doesn't explain if those are Luna or Terra or Sol (I'm assuming Sol?). 5.6 Pro appears to be exclusive to Chat, with no equivalent in Work.&lt;/p&gt;
-&lt;p&gt;My current understanding from using Codex is that Ultra is a special mode that more eagerly delegates to sub-agents.&lt;/p&gt;
-&lt;p&gt;I believe ChatGPT Work sessions are billed against your Codex allowance, while ChatGPT Chat Sessions get their own, separate allowance. This may help explain the model availability differences.&lt;/p&gt;
-&lt;h4 id="code-execution-with-internet-access-"&gt;Code execution with Internet access!&lt;/h4&gt;
-&lt;p&gt;As a long-time fan of the &lt;a href="https://simonwillison.net/tags/code-interpreter/"&gt;Code Interpreter pattern&lt;/a&gt; - pioneered by OpenAI in 2023 - this is by far the most exciting feature of ChatGPT Work (Cloud) for me.&lt;/p&gt;
-&lt;p&gt;The code execution environment can now talk to the rest of the internet!&lt;/p&gt;
-&lt;p&gt;ChatGPT Chat can't do this - if you ask it to install additional software packages or interact with websites or APIs that access will be blocked by the container proxy.&lt;/p&gt;
-&lt;p&gt;(Weirdly, back in January it &lt;a href="https://simonwillison.net/2026/Jan/26/chatgpt-containers/"&gt;grew the ability to install packages&lt;/a&gt;, but that doesn't seem to work any more. I wish they had better changelogs!)&lt;/p&gt;
-&lt;p&gt;Claude's equivalent container has allowed restricted internet access since it launched &lt;a href="https://simonwillison.net/2025/Sep/9/claude-code-interpreter/"&gt;last September&lt;/a&gt;. Claude can install packages from PYPI and NPM and clone repositories from GitHub. But that is about it: the allowlist of domains is very short.&lt;/p&gt;
-&lt;p&gt;ChatGPT Work allows a whole lot more than that. It can be configured with a specific list of allowed domains, but the default appears to be open to all.&lt;/p&gt;
-&lt;p&gt;This makes Work an incredibly useful tool. You can have it clone GitHub repositories, install their dependencies, then use them to interact with the rest of the web!&lt;/p&gt;
-&lt;h4 id="a-full-headless-chrome-browser"&gt;A full, headless Chrome browser&lt;/h4&gt;
-&lt;p&gt;Another killer feature of ChatGPT Work is &lt;a href="https://learn.chatgpt.com/docs/browser?surface=web"&gt;the browser tool&lt;/a&gt;. ChatGPT Work can launch a full Chrome instance, load websites, fill out forms, and take screenshots.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://static.simonwillison.net/static/2026/chatgpt-work-card.jpg" alt="Screenshot of a ChatGPT conversation. A user message in a black rounded bubble reads: Visit https://london-pelicans-in-her-piety.simonw.chatgpt.site/ and take a screenshot with you browser. Below it a collapsed status line reads &amp;quot;Worked for 1m 18s &amp;gt;&amp;quot;, followed by the reply &amp;quot;Here's the screenshot of the live site:&amp;quot; and an embedded screenshot of a website." style="max-width: 100%" /&gt;&lt;/p&gt;
-
-&lt;p&gt;If a site requires sign in the browser can prompt you to take over and enter both passwords and 2FA codes, without round-tripping those credentials through the model itself.&lt;/p&gt;
-
-&lt;p&gt;It can even run JavaScript against the DOM of loaded pages. I prompted:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;code&gt;Load simonwillison.net in your browser and extract the headings using JavaScript&lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;ChatGPT Work fired up a browser instance and ran the code:&lt;/p&gt;
-&lt;div class="highlight highlight-source-js"&gt;&lt;pre&gt;&lt;span class="pl-k"&gt;await&lt;/span&gt; &lt;span class="pl-s1"&gt;tab&lt;/span&gt;&lt;span class="pl-kos"&gt;.&lt;/span&gt;&lt;span class="pl-c1"&gt;playwright&lt;/span&gt;&lt;span class="pl-kos"&gt;.&lt;/span&gt;&lt;span class="pl-en"&gt;evaluate&lt;/span&gt;&lt;span class="pl-kos"&gt;(&lt;/span&gt;&lt;span class="pl-kos"&gt;(&lt;/span&gt;&lt;span class="pl-kos"&gt;)&lt;/span&gt; &lt;span class="pl-c1"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="pl-kos"&gt;{&lt;/span&gt;
-  &lt;span class="pl-k"&gt;return&lt;/span&gt; &lt;span class="pl-v"&gt;Array&lt;/span&gt;&lt;span class="pl-kos"&gt;.&lt;/span&gt;&lt;span class="pl-en"&gt;from&lt;/span&gt;&lt;span class="pl-kos"&gt;(&lt;/span&gt;&lt;span class="pl-smi"&gt;document&lt;/span&gt;&lt;span class="pl-kos"&gt;.&lt;/span&gt;&lt;span class="pl-en"&gt;querySelectorAll&lt;/span&gt;&lt;span class="pl-kos"&gt;(&lt;/span&gt;&lt;span class="pl-s"&gt;"h1,h2,h3,h4,h5,h6"&lt;/span&gt;&lt;span class="pl-kos"&gt;)&lt;/span&gt;&lt;span class="pl-kos"&gt;,&lt;/span&gt; &lt;span class="pl-s1"&gt;heading&lt;/span&gt; &lt;span class="pl-c1"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="pl-kos"&gt;(&lt;/span&gt;&lt;span class="pl-kos"&gt;{&lt;/span&gt;
-    &lt;span class="pl-c1"&gt;level&lt;/span&gt;: &lt;span class="pl-s1"&gt;heading&lt;/span&gt;&lt;span class="pl-kos"&gt;.&lt;/span&gt;&lt;span class="pl-c1"&gt;tagName&lt;/span&gt;&lt;span class="pl-kos"&gt;.&lt;/span&gt;&lt;span class="pl-en"&gt;toLowerCase&lt;/span&gt;&lt;span class="pl-kos"&gt;(&lt;/span&gt;&lt;span class="pl-kos"&gt;)&lt;/span&gt;&lt;span class="pl-kos"&gt;,&lt;/span&gt;
-    &lt;span class="pl-c1"&gt;text&lt;/span&gt;: &lt;span class="pl-s1"&gt;heading&lt;/span&gt;&lt;span class="pl-kos"&gt;.&lt;/span&gt;&lt;span class="pl-c1"&gt;innerText&lt;/span&gt;&lt;span class="pl-kos"&gt;.&lt;/span&gt;&lt;span class="pl-en"&gt;trim&lt;/span&gt;&lt;span class="pl-kos"&gt;(&lt;/span&gt;&lt;span class="pl-kos"&gt;)&lt;/span&gt;&lt;span class="pl-kos"&gt;.&lt;/span&gt;&lt;span class="pl-en"&gt;replace&lt;/span&gt;&lt;span class="pl-kos"&gt;(&lt;/span&gt;&lt;span class="pl-pds"&gt;&lt;span class="pl-c1"&gt;/&lt;/span&gt;&lt;span class="pl-cce"&gt;\s&lt;/span&gt;&lt;span class="pl-c1"&gt;+&lt;/span&gt;&lt;span class="pl-c1"&gt;/&lt;/span&gt;g&lt;/span&gt;&lt;span class="pl-kos"&gt;,&lt;/span&gt; &lt;span class="pl-s"&gt;" "&lt;/span&gt;&lt;span class="pl-kos"&gt;)&lt;/span&gt;&lt;span class="pl-kos"&gt;,&lt;/span&gt;
-    &lt;span class="pl-c1"&gt;id&lt;/span&gt;: &lt;span class="pl-s1"&gt;heading&lt;/span&gt;&lt;span class="pl-kos"&gt;.&lt;/span&gt;&lt;span class="pl-c1"&gt;id&lt;/span&gt; &lt;span class="pl-c1"&gt;||&lt;/span&gt; &lt;span class="pl-c1"&gt;null&lt;/span&gt;
-  &lt;span class="pl-kos"&gt;}&lt;/span&gt;&lt;span class="pl-kos"&gt;)&lt;/span&gt;&lt;span class="pl-kos"&gt;)&lt;/span&gt;&lt;span class="pl-kos"&gt;;&lt;/span&gt;
-&lt;span class="pl-kos"&gt;}&lt;/span&gt;&lt;span class="pl-kos"&gt;)&lt;/span&gt;&lt;span class="pl-kos"&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;This feels a lot like my &lt;a href="https://shot-scraper.datasette.io/en/stable/javascript.html"&gt;shot-scraper javascript&lt;/a&gt; tool, only now I can access it on my phone!&lt;/p&gt;
-&lt;h4 id="a-persistent-shared-filesystem"&gt;A persistent, shared filesystem&lt;/h4&gt;
-&lt;p&gt;ChatGPT Chat gets a fresh filesystem for each chat session. These cannot be accessed from any other session.&lt;/p&gt;
-&lt;p&gt;In ChatGPT Work each session gets its own scratch folder - named something like &lt;code&gt;/workspace/scratch/e00a0a017944&lt;/code&gt; - but each of those are persisted across sessions, so you can access files from previous chats. I have 171 folders in &lt;code&gt;/workspace/scratch&lt;/code&gt; right now!&lt;/p&gt;
-&lt;p&gt;As far as I can tell that &lt;code&gt;/workspace&lt;/code&gt; volume is mounted to all Work sessions that are currently running - file edits from one can be instantly seen by the others. They don't seem to share the same process space though, and localhost servers running in one can't be accessed from another.&lt;/p&gt;
-&lt;h4 id="chatgpt-sites"&gt;ChatGPT Sites&lt;/h4&gt;
-&lt;p&gt;ChatGPT Work has the ability to build &lt;em&gt;and deploy&lt;/em&gt; entire websites, using Cloudflare Workers. These can have HTML and JavaScript and can run server-side features too, including stateful features on top of Cloudflare D1 and R2.&lt;/p&gt;
-&lt;p&gt;Here's a simple site I built with this feature:&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://london-pelicans-in-her-piety.simonw.chatgpt.site/"&gt;london-pelicans-in-her-piety.simonw.chatgpt.site&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src="https://static.simonwillison.net/static/2026/pelicans-in-her-piety.webp" alt="Screenshot of a website homepage on a cream background. Top navigation bar: a circular logo reading &amp;quot;P/P&amp;quot; on the left, the links &amp;quot;THE CENSUS&amp;quot;, &amp;quot;COLLECTIONS&amp;quot; and &amp;quot;METHOD&amp;quot; in the center, and &amp;quot;JSON ↓&amp;quot; on the right. The left half is a hero section with small red capitals reading &amp;quot;AN ICONOGRAPHIC CENSUS · GREATER LONDON&amp;quot; above a large serif heading &amp;quot;Pelicans in her piety&amp;quot;, with &amp;quot;piety&amp;quot; set in red italics. Below it: &amp;quot;Across London, an impossible bird bleeds for her young—in limewood, marble, mosaic, metal and glass. This is an evidence-backed census of where to find her.&amp;quot; Two buttons follow: a solid black &amp;quot;EXPLORE ALL 28&amp;quot; and an outlined &amp;quot;DOWNLOAD THE DATA&amp;quot;. The right half is a photograph of an ornate dark carved wooden reredos in a church, with gilded urns and a crest on top, Corinthian columns, a gilded pelican with outspread wings at its center above inscribed panels, an altar with a brass cross and red flowers, embroidered banners on either side, and a black-and-white checkerboard floor with red carpet. Vertical text along the photo's right edge reads &amp;quot;ST MARY ABCHURCH&amp;quot; and a caption at its bottom reads &amp;quot;Grinling Gibbons's reredos, St Mary Abchurch. Photograph: Diliff, CC BY-SA 3.0, via SPAB ↗&amp;quot;. A statistics strip along the bottom shows &amp;quot;28 FIXED SITES&amp;quot;, &amp;quot;4 COLLECTIONS&amp;quot;, &amp;quot;3 OPEN LEADS&amp;quot; and &amp;quot;2 KNOWN LOSSES&amp;quot;." style="max-width: 100%;" /&gt;&lt;/p&gt;
-&lt;p&gt;My prompt was:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;code&gt;Figure out all of the places in London with a pelican in her piety, then turn that into a JSON file and build a ChatGPT sites site about them&lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;(A pelican in her piety is a fascinating piece of &lt;a href="https://devonchurchland.co.uk/blog/pelican-in-her-piety/#What-is-a-Pelican-In-Her-Piety"&gt;medieval Christian imagery&lt;/a&gt; - once you know about them you'll find them all over the place.)&lt;/p&gt;
-&lt;p&gt;These sites default to being private to the user that created them, but you can make them public and (on team plans) share them with other specific individuals.&lt;/p&gt;
-&lt;h4 id="sub-agents-with-sol-luna-and-terra"&gt;Sub-agents with Sol, Luna, and Terra&lt;/h4&gt;
-&lt;p&gt;There's not much to say about this one. ChatGPT Chat can't run sub-agents. ChatGPT Work can. This is very much a power-user feature: if you are running a complex project that can benefit from multiple parallel agents working together, Work can do that.&lt;/p&gt;
-&lt;h4 id="scheduled-prompt-automations"&gt;Scheduled prompt automations&lt;/h4&gt;
-&lt;p&gt;Another feature that seems to have migrated from regular ChatGPT to ChatGPT Work at some point. You can prompt ChatGPT Work like this:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;code&gt;run a search to see if Waymo have announced a launch date for Half Moon Bay every day at 8am&lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;This will schedule a prompt to run on that frequency. These prompts can decide that nothing interesting has happened, or they can decide to notify you of some new information.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Update&lt;/strong&gt;: Actually this seems to work in ChatGPT Chat as well.&lt;/p&gt;
-&lt;p&gt;It's still worth noting here though, as it can be used in conjunction with other ChatGPT Work exclusive features. You can set a scheduled task to update a ChatGPT Site on an hourly basis, for example.&lt;/p&gt;
-&lt;h4 id="is-this-safe-"&gt;Is this safe?&lt;/h4&gt;
-&lt;p&gt;An open question for me right now is how &lt;em&gt;safe&lt;/em&gt; all of this stuff is.&lt;/p&gt;
-&lt;p&gt;My &lt;a href="https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/"&gt;lethal trifecta model&lt;/a&gt; warns about the risks inherent in any agent system that combines access to private data with exposure to untrusted content and a way to communicate stolen information back to an attacker.&lt;/p&gt;
-&lt;p&gt;ChatGPT Work combines all three!&lt;/p&gt;
-&lt;p&gt;I'd love to hear more from OpenAI about how they protect ChatGPT Work sessions against prompt injection attacks. I expect their answer is the same &lt;a href="https://learn.chatgpt.com/docs/sandboxing/auto-review"&gt;auto-review mechanism&lt;/a&gt; as Codex.&lt;/p&gt;
-&lt;h4 id="openai-could-make-this-a-lot-less-confusing"&gt;OpenAI could make this a lot less confusing&lt;/h4&gt;
-&lt;p&gt;Figuring this all out took way more work than it should have.&lt;/p&gt;
-&lt;p&gt;I think there are two key problems here:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;OpenAI explain Work in terms of what it's for, not what it actually does&lt;/li&gt;
-&lt;li&gt;OpenAI still insist on hiding their system prompts and tools descriptions&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;If the ChatGPT Work documentation included the exact system prompt and tool descriptions used by the agent I wouldn't have needed to write this post.&lt;/p&gt;
-&lt;h4 id="all-the-tools"&gt;A list of all the tools&lt;/h4&gt;
-&lt;p&gt;Shortly after publishing this article I had an idea. I started a fresh Work session and prompted:&lt;/p&gt;
-&lt;blockquote&gt;&lt;p&gt;&lt;code&gt;Build a site that lists every one of your tools - nearly grouped into categories - and for each one explain what it does. Try to exactly duplicate arguments and tool descriptions where possible. Design aesthetic should be technical docs, minimal flare&lt;/code&gt;&lt;/p&gt;&lt;/blockquote&gt;
-&lt;p&gt;&lt;a href="https://codex-tool-reference.simonw.chatgpt.site/"&gt;Here's the site it built&lt;/a&gt;, which includes details of 223 registered tools - though 6 of those are from my own personal MCPs served via &lt;a href="https://simonwillison.net/2026/Jul/31/stateless-mcp/#datasette-mcp"&gt;datasette-mcp&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h4 id="and-a-whole-lot-of-skills"&gt;And a whole lot of Skills&lt;/h4&gt;
-&lt;p&gt;I noticed that the only browser-related tool in the list was &lt;a href="https://codex-tool-reference.simonw.chatgpt.site/#tool-web-run"&gt;web.run&lt;/a&gt;, which has methods for running searches, opening URLs, and clicking links, but didn't look like the full story in regards to headless browser automation.&lt;/p&gt;
-&lt;p&gt;This made me suspicious that something was missing, so I told the ChatGPT Work session that built that tools reference site:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;code&gt;Add full copies of every skill to the website (separate pages linked to from the homepage)&lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;It turns out ChatGPT Work uses &lt;a href="https://codex-tool-reference.simonw.chatgpt.site/#skills"&gt;a lot of skills&lt;/a&gt; - 44 in fact!&lt;/p&gt;
-&lt;p&gt;The &lt;a href="https://codex-tool-reference.simonw.chatgpt.site/skills/control-browser"&gt;control-browser skill&lt;/a&gt; explains how the browser works:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Run browser setup code through the Node REPL &lt;code&gt;js&lt;/code&gt; tool. In this environment the callable tool id typically appears as &lt;code&gt;mcp__node_repl__js&lt;/code&gt;. [...]&lt;/p&gt;
-&lt;p&gt;The ability to interact directly with the browser is exposed through the &lt;code&gt;browser-client&lt;/code&gt; runtime via the &lt;code&gt;agent.browsers.*&lt;/code&gt; API. Before trying to interact with it, you MUST emit and read the complete documentation returned by &lt;code&gt;await browser.documentation()&lt;/code&gt; in one go.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;So I told Work:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Add the full output of await browser.documentation() to the bottom of the /skills/control-browser page&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;And now you can read that &lt;a href="https://codex-tool-reference.simonw.chatgpt.site/skills/control-browser#browser-documentation"&gt;on /skills/control-browser&lt;/a&gt; as well.&lt;/p&gt;
-&lt;p&gt;A few more interesting Skills:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;a href="https://codex-tool-reference.simonw.chatgpt.site/skills/documents"&gt;documents&lt;/a&gt; for creating &lt;code&gt;.docx&lt;/code&gt; files&lt;/li&gt;
-&lt;li&gt;
-&lt;a href="https://codex-tool-reference.simonw.chatgpt.site/skills/imagegen"&gt;imagegen&lt;/a&gt; with tips on creating images with the &lt;code&gt;image_gen&lt;/code&gt; tool&lt;/li&gt;
-&lt;li&gt;
-&lt;a href="https://codex-tool-reference.simonw.chatgpt.site/skills/pdf"&gt;pdf&lt;/a&gt; for both reading and rendering PDFs&lt;/li&gt;
-&lt;li&gt;
-&lt;a href="https://codex-tool-reference.simonw.chatgpt.site/skills/spreadsheets"&gt;Spreadsheets&lt;/a&gt; for manipulating &lt;code&gt;.xlsx&lt;/code&gt;, &lt;code&gt;.xls&lt;/code&gt;, &lt;code&gt;.csv&lt;/code&gt;, &lt;code&gt;.tsv&lt;/code&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;a href="https://codex-tool-reference.simonw.chatgpt.site/skills/sites-sites-building"&gt;sites:sites-building&lt;/a&gt; for creating ChatGPT Sites&lt;/li&gt;
-&lt;li&gt;
-&lt;a href="https://codex-tool-reference.simonw.chatgpt.site/skills/openai-docs"&gt;openai-docs&lt;/a&gt; for answering questions about itself&lt;/li&gt;
-&lt;li&gt;
-&lt;a href="https://codex-tool-reference.simonw.chatgpt.site/skills/data-analytics-build-dashboard"&gt;data-analytics:build-dashboard&lt;/a&gt; for building data dashboards&lt;/li&gt;
-&lt;/ul&gt;
-    
-        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/openai"&gt;openai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/chatgpt"&gt;chatgpt&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/code-interpreter"&gt;code-interpreter&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/lethal-trifecta"&gt;lethal-trifecta&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/skills"&gt;skills&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/general-agents"&gt;general-agents&lt;/a&gt;&lt;/p&gt;
-    
-
-</summary><category term="ai"/><category term="openai"/><category term="generative-ai"/><category term="chatgpt"/><category term="llms"/><category term="code-interpreter"/><category term="lethal-trifecta"/><category term="skills"/><category term="general-agents"/></entry></feed>
+</summary><category term="open-source"/><category term="python"/><category term="github-actions"/></entry></feed>
