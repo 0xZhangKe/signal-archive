@@ -1,6 +1,50 @@
 {
   "items": [
     {
+      "id": "2d37a0834c72e7bfafac7a2c",
+      "title": "中国大规模地封锁基于TLS的翻墙服务器",
+      "summary": "自北京时间2022年10月3日起，超过一百名用户报告他们至少有一台基于TLS的翻墙服务器被封锁了。被封锁的服务器使用的协议包括了 trojan ， Xray ， V2Ray TLS+Websocket ， VLESS ，以及 gRPC 。我们还未收到任何 naiveproxy 被封锁的消息。 下面是我们总结的关于这次封锁的一些信息，以其我们的一些推测和分析 封锁先是针对翻墙服务的端口。如果用户在端口被封后， 改换了端口 ，那么整个服务器都会被封锁。需要指出，封锁似乎只是基于端口或IP地址，与翻墙服务有关的域名似乎并没有被加入到GFW的DNS或SNI黑名单中。 尽管大多数用户报告443端口被封，一部分使用非443端口的用户也报告了封锁。尽管大多数用户的服务器在流行的VPS提供商那里（ 比如 ），但至少有一位用户…",
+      "image": null,
+      "publishedAt": "2022-10-04T00:00:00Z",
+      "sourceId": "34d02af866ebd5fa",
+      "sourceTitle": "Great Firewall Report",
+      "link": "https://gfw.report/blog/blocking_of_tls_based_circumvention_tools/zh/",
+      "detailPath": "articles/2d37a0834c72e7bfafac7a2c.json"
+    },
+    {
+      "id": "3b1bc26d653f4f2e80ddfa6a",
+      "title": "Large scale blocking of TLS-based censorship circumvention tools in China",
+      "summary": "Starting from October 3, 2022 (Beijing Time), more than 100 users reported that at least one of their TLS-based censorship circumvention servers had been blocked. The TLS-based circumvention protocols that are reportedly blocked include trojan , Xray , V2Ray TLS+Websocket , VLESS , and gRPC . We have not received any report of the blocking of naiveproxy tho…",
+      "image": null,
+      "publishedAt": "2022-10-03T00:00:00Z",
+      "sourceId": "34d02af866ebd5fa",
+      "sourceTitle": "Great Firewall Report",
+      "link": "https://gfw.report/blog/blocking_of_tls_based_circumvention_tools/en/",
+      "detailPath": "articles/3b1bc26d653f4f2e80ddfa6a.json"
+    },
+    {
+      "id": "7abcbf0b153a4ef7db95fa50",
+      "title": "The Great Firewall of China has blocked google.com and all its subdomains",
+      "summary": "",
+      "image": null,
+      "publishedAt": "2022-10-01T00:00:00Z",
+      "sourceId": "34d02af866ebd5fa",
+      "sourceTitle": "Great Firewall Report",
+      "link": "https://gfw.report/blog/blocking_of_google_com/en/",
+      "detailPath": "articles/7abcbf0b153a4ef7db95fa50.json"
+    },
+    {
+      "id": "f2c4157efc2cdf94e38c108a",
+      "title": "中国的防火长城屏蔽了google.com及其所有的子域名",
+      "summary": "我们证实中国的防火长城已经屏蔽了google.com及其所有的子域名。这一封锁策略影响 超过1100个相关域名 以及大量的流行服务。在这篇文章中，我们介绍观察到的审查者的两次大动作。我们同时分享测量网站审查的方法，以鼓励更多人独立地检测并曝光审查行为。 审查者首先在北京时间2022年9月22日星期四，早上6点23分到晚上7点33分之间的某一时刻将 google.com 和 *.google.com 加入到SNI黑名单中。GFW会检查所有TLS ClientHello包，如果其中的SNI与黑名单匹配，GFW就会立即发送伪造的TCP RST包来切断TCP连接。 八天之后，审查者又在北京时间2022年9月30日星期五，下午1点56分到下午2点35分之间的某一刻将 google.com 和 *.google.com…",
+      "image": null,
+      "publishedAt": "2022-10-01T00:00:00Z",
+      "sourceId": "34d02af866ebd5fa",
+      "sourceTitle": "Great Firewall Report",
+      "link": "https://gfw.report/blog/blocking_of_google_com/zh/",
+      "detailPath": "articles/f2c4157efc2cdf94e38c108a.json"
+    },
+    {
       "id": "f8509630c8815eb5b752bbfb",
       "title": "未来的家庭生活",
       "summary": "自从换了工作之后，就没再聊过和工作有关的内容。一来，工作就是一份工作，有压力，无趣，鲜有刺激；但又热爱，偶尔欣喜。再者，上一份工作涉及的不能聊的内容比较多，也养成了三缄其口的习惯。总之，我对工作和生活还是画了一道三八线的。 最近一直在一个比较头疼的项目上打转，也没有好的思路。反而在旁枝末节的地方上有点儿自己的感悟。随手记录一下，我对未来智慧家庭的样貌做的一点判断： 可能会有一个家庭服务机器人或者说家庭管家，也许是实体的人形机器人，也许是虚拟人。 可能会有一种算力强大的边缘计算设备，来处理很多本地数据。 可能有一种新的与物业、社区、政务甚至家外的设备交互的方式。 可能有一种新的家庭空间结构。",
@@ -615,50 +659,6 @@
       "sourceTitle": "All posts | 所有貼文 on ttheng's microblog. | 侃侃而隨想極短文。",
       "link": "https://microblog.ttheng.com/melody-fragment/",
       "detailPath": "articles/3b6ff6eed19036f60abb909f.json"
-    },
-    {
-      "id": "928f02bf268ad42b234cfba0",
-      "title": "流水账：记一位患肝癌的大叔",
-      "summary": "因为疾病而不得不拖累亲人并最终与相爱之人们的分离实在是太令人伤痛的事情。",
-      "image": null,
-      "publishedAt": "2022-05-07T00:00:00Z",
-      "sourceId": "d48d6f28fe78bc92",
-      "sourceTitle": "DrPika's Blog",
-      "link": "https://blog.drpika.com/posts/2022-05-07",
-      "detailPath": "articles/928f02bf268ad42b234cfba0.json"
-    },
-    {
-      "id": "d6a107844c97d44d6fb8f01c",
-      "title": "流水账：记一位患肝癌的大叔",
-      "summary": "因为疾病而不得不拖累亲人并最终与相爱之人们的分离实在是太令人伤痛的事情。",
-      "image": null,
-      "publishedAt": "2022-05-07T00:00:00Z",
-      "sourceId": "3e335517f4e1112a",
-      "sourceTitle": "Dr.Pika's Blog",
-      "link": "https://blog.drpika.com/posts/2022-05-07",
-      "detailPath": "articles/d6a107844c97d44d6fb8f01c.json"
-    },
-    {
-      "id": "20ce03e9c8e20f765cd89d5b",
-      "title": "yesteryear",
-      "summary": "yesterday - 昨天 yesteryear - 去年 昔日 （嗯？！",
-      "image": null,
-      "publishedAt": "2022-05-04T00:00:00Z",
-      "sourceId": "a93d4f2e98fafcbe",
-      "sourceTitle": "All posts | 所有貼文 on ttheng's microblog. | 侃侃而隨想極短文。",
-      "link": "https://microblog.ttheng.com/yesteryear/",
-      "detailPath": "articles/20ce03e9c8e20f765cd89d5b.json"
-    },
-    {
-      "id": "4e4ca7e796c05c0428892b14",
-      "title": "读书看报",
-      "summary": "2022 年观影记录 电影 时间 评分 四海 2022-05-04 ★★★ 人生切割术 第一季 2022-04-20 ★★★★★ 奇迹·笨小孩 2022-04-15 ★★★★ 青春变形记 2022-03-11 ★★★ 狙击手 2022-02-01 ★★★ 这个杀手不太冷静 2022-02-01 ★★★",
-      "image": null,
-      "publishedAt": "2022-05-04T00:00:00Z",
-      "sourceId": "fc41292f8a54624e",
-      "sourceTitle": "Elizen's Blog",
-      "link": "https://elizen.me/posts/2022/05/du-shu-kan-bao/",
-      "detailPath": "articles/4e4ca7e796c05c0428892b14.json"
     }
   ]
 }
