@@ -4,12 +4,37 @@
   <title>Robb Knight • Posts • Atom Feed</title>
   <subtitle>Maker of web things, sticker merchant, viral toot-based business man, blogger, podcaster, and pizzaiolo. Human dad.</subtitle>
   <link href="https://rknight.me/subscribe/posts/atom.xml" rel="self" />
-  <updated>2026-09-04T08:22:00Z</updated>
+  <updated>2026-09-09T13:46:28Z</updated>
   <id>https://rknight.me/subscribe/posts/atom.xml</id>
   <author>
     <name>Robb Knight</name>
     <uri>http://rknight.me</uri>
   </author>
+  <entry>
+    <title type="html">
+      <![CDATA[
+        Greyscale in Doodle Scan
+      ]]>
+    </title>
+    <link href="https://rknight.me/blog/greyscale-in-doodle-scan/"/>
+    <updated>2026-09-09T13:46:28Z</updated>
+    <id>https://rknight.me/blog/greyscale-in-doodle-scan/</id>
+    <content type="html">&lt;p&gt;Last night I was reading &lt;a href=&quot;https://kokorobot.ca/site/processing_analog_artwork.html&quot;&gt;this excellent post&lt;/a&gt; about scanning pencil artwork and the first step the artist mentioned is setting the pallette to greyscale. This made me realise how useful that would be on &lt;a href=&quot;https://doodlescan.rknight.me&quot;&gt;Doodle Scan&lt;/a&gt; — the black and white mode is &lt;em&gt;good&lt;/em&gt; but only in some circumstances where the drawing is just lines, greyscale would be much more useful for illustrations with colour or shading.&lt;/p&gt;
+&lt;p&gt;Like all the other features on Doodle Scan, it wasn&#39;t immediately obvious to me how to do this. After some digging and experimenting with changing RGB values, I realised the &lt;a href=&quot;https://www.w3.org/WAI/GL/wiki/Relative_luminance&quot;&gt;relative luminance&lt;/a&gt; value I use to check for if the colour is light or dark can be rounded with &lt;code&gt;Math.round&lt;/code&gt; to get the value I need. So &lt;code&gt;253.123&lt;/code&gt; becomes &lt;code&gt;253&lt;/code&gt; and I set the RGB value of that pixel to &lt;code&gt;253,253,253&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Below are examples of the three colour modes with default settings from &lt;a href=&quot;https://doodlescan.rknight.me&quot;&gt;Doodle Scan&lt;/a&gt; and if you want a drawing a bit like this or anything you want really you can &lt;a href=&quot;/stjude&quot;&gt;donate to St Jude&lt;/a&gt;.&lt;/p&gt;
+&lt;figure&gt;&lt;img src=&quot;https://cdn.rknight.me/site/2026/doodle-scan-jeff-colour.jpg&quot; alt=&quot;A dinosaur on a skateboard with a red shirt, blue shorts, and a yellow box with 12 in the right corner&quot; /&gt;&lt;figcaption&gt;Colour version&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;figure&gt;&lt;img src=&quot;https://cdn.rknight.me/site/2026/doodle-scan-jeff-greyscale.jpg&quot; alt=&quot;A dinosaur on a skateboard with a grey shirt, grey shorts, and a grey box with 12 in the right corner&quot; /&gt;&lt;figcaption&gt;Greyscale version&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;figure&gt;&lt;img src=&quot;https://cdn.rknight.me/site/2026/doodle-scan-jeff-bw.jpg&quot; alt=&quot;A dinosaur on a skateboard with a shirt and shorts which are both black, and a black box with 12 in the right corner&quot; /&gt;&lt;figcaption&gt;Black and white version&lt;/figcaption&gt;&lt;/figure&gt;
+</content>
+    <summary type="html">
+      <![CDATA[
+        I added a greyscale colour mode to Doodle Scan
+      ]]>
+    </summary>
+    <author>
+      <name>Robb Knight</name>
+    </author>
+  </entry>
   <entry>
     <title type="html">
       <![CDATA[
@@ -754,61 +779,6 @@ It was significantly faster than walking&lt;/p&gt;
     <summary type="html">
       <![CDATA[
         Reposting my interview from Over/Under
-      ]]>
-    </summary>
-    <author>
-      <name>Robb Knight</name>
-    </author>
-  </entry>
-  <entry>
-    <title type="html">
-      <![CDATA[
-        People and Blogs Interview
-      ]]>
-    </title>
-    <link href="https://rknight.me/blog/people-and-blogs-interview/"/>
-    <updated>2026-06-22T09:48:50Z</updated>
-    <id>https://rknight.me/blog/people-and-blogs-interview/</id>
-    <content type="html">&lt;p&gt;&lt;strong&gt;Let&#39;s start from the basics: can you introduce yourself?&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;I&#39;m a developer and dad to two girls living in Portsmouth on the south coast of the UK. By day I work for a SaaS company and in my own time I work on my &lt;a href=&quot;https://rknight.me/projects&quot;&gt;many side projects&lt;/a&gt;. In a previous life I worked at a certain clown&#39;s restaurant which is where I met my wife some 15 years ago.&lt;/p&gt;
-&lt;p&gt;Although developer is what I get paid to do I&#39;m trying to move towards more &lt;em&gt;making&lt;/em&gt;; websites, &lt;a href=&quot;https://rknight.me/blog/stickers-maths-and-postage/&quot;&gt;stickers&lt;/a&gt;, shirts, art, whatever. I have no idea what that looks like yet or how it&#39;s going to pay my bills. I have a whole host of &lt;a href=&quot;https://rknight.me/projects&quot;&gt;side projects&lt;/a&gt; I&#39;ve worked on over the years; they&#39;re not all winners but they all serve, or served, a purpose. If I get lucky, they resonate with other people which is always nice.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;What&#39;s the story behind your blog?&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;I&#39;ve had a lot of blogs over the years, most of which would get a handful of posts before being abandoned. There was a version that ran on Tumblr which I did do for at least a year or two — any interesting posts from that have been saved. The current iteration is by far the longest serving and will be the final version. There&#39;s no chance of me wiping it all and starting again.&lt;/p&gt;
-&lt;p&gt;This current version is part of my main website which is where I put &lt;em&gt;everything&lt;/em&gt;. My toots on Mastodon start life as a &lt;a href=&quot;https://rknight.me/notes&quot;&gt;note post&lt;/a&gt;, I post &lt;a href=&quot;https://rknight.me/links/&quot;&gt;interesting links I find&lt;/a&gt;, and I log all the media I watch/play/whatever (I don&#39;t want to say consume, that&#39;s gross) in &lt;a href=&quot;https://rknight.me/almanac/&quot;&gt;Almanac&lt;/a&gt;, which itself is on the third or fourth iteration.&lt;/p&gt;
-&lt;p&gt;As I said above, I had done a few posts on the Tumblr-powered blog but if I look at my stats for posts, it was around 2022 when Twitter started to fall apart that I started to blog more. I was moving away from posting things directly onto social media sites and getting it onto my own site.&lt;/p&gt;
-&lt;p&gt;I started writing more posts that just had a short idea or helpful tip because I realised not every post has to be some incredible think piece. My analytics show that these posts also tend to be the most popular which probably says more about the state of large, ad-riddled websites than it does about my writing. For example &lt;a href=&quot;https://rknight.me/blog/convert-spotify-facebook-to-email-login/&quot;&gt;this post about disconnecting Facebook from Spotify&lt;/a&gt; is consistently in the top five posts on my site but you&#39;re never going to read that post unless you specifically need it. It&#39;s not a &amp;quot;good&amp;quot; post, it just exists.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;What does your creative process look like when it comes to blogging?&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;To call what I have a process would be a very liberal use of the word &amp;quot;process&amp;quot;. If I have nothing to write about I just won&#39;t write anything, I have no desire to keep to a schedule and write just for the sake of it. Usually, I&#39;ll get prompted by something someone asks like &amp;quot;How did you do X on your website?&amp;quot; or I feel like I have something to say that would be interesting other people.&lt;/p&gt;
-&lt;p&gt;I write my posts in Obsidian, then when they&#39;re ready to go I&#39;ll add them to my site. If I&#39;m on my &lt;s&gt;proper computer&lt;/s&gt; laptop I use &lt;a href=&quot;https://rknight.me/blog/my-blogging-workflow/&quot;&gt;my CLI tool&lt;/a&gt; to add a new post. If I&#39;m on mobile, I use the very &lt;a href=&quot;https://github.com/rknightuk/knightcms&quot;&gt;haphazard CMS&lt;/a&gt; I built.&lt;/p&gt;
-&lt;p&gt;I&#39;ll proof read most things myself before posting and I rarely ask for anyone else&#39;s input but if I do want a second opinion it&#39;s going to be previous &lt;a href=&quot;https://manuelmoreale.com/interview/keenan&quot;&gt;P&amp;amp;B interviewee&lt;/a&gt;, &lt;a href=&quot;https://gkeenan.co&quot;&gt;Keenan&lt;/a&gt;. Usually I&#39;m able to get out what I want to say fairly succinctly without too much editing.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Do you have an ideal creative environment? Also do you believe the physical space influences your creativity?&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;A proper keyboard and ideally a desk to sit at is what I prefer when I&#39;m writing (or coding) but I can live with just the keyboard. My desk setup makes some people&#39;s skin crawl because there&#39;s so much going on but I like having all the trinkets and knick knacks around me.&lt;/p&gt;
-&lt;figure&gt;&lt;img src=&quot;https://cdn.rknight.me/site/desk-2025.jpg&quot; alt=&quot;A desk surrounded by bookshelves and pegboard with various items hanging from them&quot; /&gt;&lt;/figure&gt;
-&lt;p&gt;I deeply dislike using my phone for most things outside of scrolling lists, like social media so I rarely write long posts on it. The small form factor just doesn&#39;t work for me at all but I also kind of need it to exist in the world.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;A question for the techie readers: can you run us through your tech stack?&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;All my domains are registered with &lt;a href=&quot;https://porkbun.com&quot;&gt;Porkbun&lt;/a&gt; and I manage the DNS with &lt;a href=&quot;https://dnscontrol.org/&quot;&gt;DNSControl&lt;/a&gt; - my main domain, &lt;a href=&quot;http://rknight.me&quot;&gt;rknight.me&lt;/a&gt;, has nearly 50 records for subdomains so managing those without DNSControl would not be a fun activity. Speaking of DNS I use &lt;a href=&quot;https://bunny.net&quot;&gt;Bunny&lt;/a&gt; for my DNS management and also use their CDN for images and other files I need to host.&lt;/p&gt;
-&lt;p&gt;The website itself is, as are many of my side projects, built with &lt;a href=&quot;https://www.11ty.dev&quot;&gt;Eleventy&lt;/a&gt;. Eleventy gives me the flexibility to do some interesting things with the posts and other content on my site which would be much harder with some other systems.&lt;/p&gt;
-&lt;p&gt;The site gets built on &lt;a href=&quot;https://forge.laravel.com/&quot;&gt;Forge&lt;/a&gt; to a &lt;a href=&quot;https://www.hetzner.com/&quot;&gt;Hetzner&lt;/a&gt; server whenever I push an update to GitHub either via command line, or through the aforementioned CMS, and is also triggered at various points in the day to pull in my Mastodon posts.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Given your experience, if you were to start a blog today, would you do anything differently?&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Assuming I actually had to the time to do it, I think I would start with the CMS first, before building anything of the actual site. It is a pain to update things when I&#39;m not at my laptop but jamming features into my CMS is equally frustrating.&lt;/p&gt;
-&lt;p&gt;If I wanted something off the shelf and easier to maintain I suspect I would choose &lt;a href=&quot;https://ghost.org/&quot;&gt;Ghost&lt;/a&gt; or &lt;a href=&quot;https://pika.page/&quot;&gt;Pika&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Financial question since the Web is obsessed with money: how much does it cost to run your blog? Is it just a cost, or does it generate some revenue? And what&#39;s your position on people monetising personal blogs?&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Many of these costs are part of my freelancing so are bundled with other sites I run and somewhat hidden but I&#39;ll do my best to outline what I do use.&lt;/p&gt;
-&lt;p&gt;I have a single server on Hetzner that serves my main site as well as another 30 or so side projects so the cost is negligible per-site but it costs about $5 a month. Forge costs $12 a month to deploy my site along with other sites. The domain is $20 a year I think but that&#39;s it.&lt;/p&gt;
-&lt;p&gt;I have a &lt;a href=&quot;https://oneamonth.club/&quot;&gt;One a Month Club&lt;/a&gt; &lt;a href=&quot;https://buymeacoffee.com/rknightuk/membership&quot;&gt;here&lt;/a&gt; and I have a handful of people supporting that way. I also use affiliate links for services I use and like which occasionally pays me a little bit.&lt;/p&gt;
-&lt;p&gt;I think monetising blogs is fine, if it&#39;s done in a tasteful way. Dumping Google ads all over your site is terrible for everyone but hand-picked sponsors or referrals is a good way to find new services. Just keep it classy.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Time for some recommendations: any blog you think is worth checking out? And also, who do you think I should be interviewing next?&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;I want to read sites that are about the person writing them. Photos of things people have done, blog posts about notebooks, wallpaper, food, everything. Things people enjoy.&lt;/p&gt;
-&lt;p&gt;This is the second time I&#39;m going to mention &lt;a href=&quot;https://gkeenan.co/avgb/&quot;&gt;Keenan&lt;/a&gt; here because they write so wonderfully. They also have a podcast with &lt;a href=&quot;https://cygnoir.net/about&quot;&gt;Halsted&lt;/a&gt; called &lt;a href=&quot;https://friendship-material.simplecast.com&quot;&gt;Friendship Material&lt;/a&gt; which is all kinds of lovely and joyful and everyone should listen.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://alexwlchan.net&quot;&gt;Alex&lt;/a&gt; writes some really interesting computing-related posts, like this one about using &lt;a href=&quot;https://alexwlchan.net/2024/static-websites/&quot;&gt;static websites as tiny archives&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://anniemueller.com&quot;&gt;Annie&lt;/a&gt; is so smart and honest in her writing it brings me joy every time I see a new post from her. &lt;a href=&quot;https://anniemueller.com/posts/how-i-a-non-developer-read-the-tutorial-you-a-developer-wrote-for-me-a-beginner&quot;&gt;This post is a masterpiece&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Final question: is there anything you want to share with us?&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;I&#39;d be a terrible business boy if I didn&#39;t at least mention &lt;a href=&quot;https://echofeed.app&quot;&gt;EchoFeed&lt;/a&gt;, an RSS cross posting service I run.&lt;/p&gt;
-&lt;p&gt;I also &lt;a href=&quot;https://ruminatepodcast.com&quot;&gt;have a podcast&lt;/a&gt; that used to be about tech but is now about snacks.&lt;/p&gt;
-</content>
-    <summary type="html">
-      <![CDATA[
-        Reposting my interview from People and Blogs
       ]]>
     </summary>
     <author>
