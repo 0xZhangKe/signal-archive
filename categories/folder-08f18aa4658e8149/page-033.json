@@ -1,6 +1,28 @@
 {
   "items": [
     {
+      "id": "c2e1e2bb131aa5e31990ae4c",
+      "title": "2026年的一些小目标",
+      "summary": "工作方面 运动方面 阅读方面 见自己 见众生、见天地",
+      "image": null,
+      "publishedAt": "2026-03-11T09:53:44Z",
+      "sourceId": "e0d7bbaba7286f4d",
+      "sourceTitle": "Rolen's Blog",
+      "link": "https://rolen.wiki/2026-goals/",
+      "detailPath": "articles/c2e1e2bb131aa5e31990ae4c.json"
+    },
+    {
+      "id": "13a17b76a3147f9525a104db",
+      "title": "日本高中音樂課本封面",
+      "summary": "最近偶然在網上得知一位來自日本的插畫家—— 中村佑介 ，在其 X（前稱推特）頁面上發佈其封面由他負責繪製的某新版日本高中音樂課本的相關 宣傳資訊 。這本課本其實是由「教育藝術社」（教育芸術社）出版、使用對象爲高中一年級學生的《高中生的音樂 1》（ 高校生の音楽 1 ）之令和 8 年（西元 2026 年）改訂版。 圖片取自 https://x.com/kazekissa/status/2031271067520741877/ 一看見這個封面，我的第一反應是大寫的難以置信：「你是在跟我講這是 課本 嗎？！不是什麼要價上百令吉的繪本？！」然後，我的內心就只有滿滿的驚豔以及對日本學生的羨慕。光是望着這設計如此精緻雅觀的封面，都已經讓我產生想上學的興致，期待音樂課的到來呢！ 這也讓我不禁感慨：「這就是尊重專業的結果啊……",
+      "image": "https://microblog.ttheng.com/blog/img136.jpg",
+      "publishedAt": "2026-03-11T09:30:00Z",
+      "sourceId": "a93d4f2e98fafcbe",
+      "sourceTitle": "All posts | 所有貼文 on ttheng's microblog. | 侃侃而隨想極短文。",
+      "link": "https://microblog.ttheng.com/japan-high-school-music-textbook-cover/",
+      "detailPath": "articles/13a17b76a3147f9525a104db.json"
+    },
+    {
       "id": "54b82787e3305135c9ade289",
       "title": "soluna 外挂 C 模块",
       "summary": "soluna 集成了 lua 虚拟机，但默认构建方式是将 lua 库静态链接到唯一的执行文件中。这将导致无法以动态库的形式外挂 Lua 的 C 扩展。 这是因为，如果独立编译 Lua 的 C 扩展库，通常需要链接 Lua 的 C API 。标准的方法是动态链接 lua 实现，如果静态链接 liblua.a ，会导致进程中有多份 lua 的实现。在 Lua 的历史版本中，这将导致运行期错误。 这是因为，Lua 的实现中有一个静态的“空”对象，所有的 nil 都指向这个对象。如果进程空间中有多份 Lua 实现，就会出现多个空对象。运行时的数据结构中会引用这个空对象，而不同副本的实现将“空”和自身保留的“空”对象引用做比较时，就会出现错误的判断。 在更早期的版本，出现这种链接出现的项目，bug 会隐藏得很深。所以后…",
@@ -637,28 +659,6 @@
       "sourceTitle": "Xinsl's Blog",
       "link": "https://blog.xinsl.xin/posts/debootstrap-install/",
       "detailPath": "articles/524bc9c9e99d4d060d1e7739.json"
-    },
-    {
-      "id": "928bd4a44e8ad7d38e895200",
-      "title": "遠方的東西",
-      "summary": "讓我們望向遠方：",
-      "image": null,
-      "publishedAt": "2026-02-27T06:30:00Z",
-      "sourceId": "7f36c3da1e6b5c71",
-      "sourceTitle": "Wiwi.Blog Blog",
-      "link": "https://wiwi.blog/blog/the-grass-is-greener",
-      "detailPath": "articles/928bd4a44e8ad7d38e895200.json"
-    },
-    {
-      "id": "ed7d029dd222be0898e3e4f1",
-      "title": "氣勢高昂的 ♯1 音",
-      "summary": "之前在 Wiwi 的 blog 網站上讀到了《 那油膩的 C♯ 》這篇文章，裡頭提到在華語流行樂會出現的「六級屬七和弦碰上旋律裡的 ♯1 音級」會帶給 Wiwi 無法以三言兩語形容的不適感。 在聽了文章附上的示範樂段後，我也是有同樣的感覺欸！不僅如此，Wiwi 在文中給的形容也很精闢，總之就是很突兀啊！ 但這是否代表「使用 ♯1 音 = 油膩」？當然不是。就如該文章所言： 並不是 100% 用這個和弦的情況都會讓我感到不舒服，在華語抒情以外的風格好像就比較不會。 講到這裡，我倒是聯想到了一個巧妙使用 ♯1 音的招數：「 皮卡第三度 （ Picardy third ）」。 這一招在現代日本音樂（無論是流行樂、遊戲配樂還是純音樂作品）滿常見的，而形式通常都是在那經典的「王道進行（ royal road progr…",
-      "image": "https://microblog.ttheng.com/blog/img130.jpg",
-      "publishedAt": "2026-02-27T03:25:00Z",
-      "sourceId": "a93d4f2e98fafcbe",
-      "sourceTitle": "All posts | 所有貼文 on ttheng's microblog. | 侃侃而隨想極短文。",
-      "link": "https://microblog.ttheng.com/triumphant-sharp-one/",
-      "detailPath": "articles/ed7d029dd222be0898e3e4f1.json"
     }
   ]
 }
