@@ -1,6 +1,50 @@
 {
   "items": [
     {
+      "id": "7c63a69fef786830b65fd0b3",
+      "title": "acme.sh 从Webroot改为 NameSilo DNS 申请通配符证书踩坑记",
+      "summary": "我这边虽然用的是BT面板，但其在某次升级之后自动申请SSL证书功能就不好用了，所以一直用的是crontab + acme.sh自行更新证书。 当时的教程在这里： https://itlanyan.com/use-acme-sh-get-free-cert/ 前情提要 不说清楚我之前干了什么，就说不清楚我改了什么。其实都是照着上面的教程搞的，只不过沿用了宝塔的文件结构，相当简单。 安装 curl https://get.acme.sh | sh acme.sh安装成功后，会自动创建一个cron任务 运行`crontab -l`能够进行查看，`crontab -e`能编辑。 41 0 * * * \"/root/.acme.sh\"/acme.sh --cron --home \"/root/.acme.sh\" > /…",
+      "image": null,
+      "publishedAt": "2026-08-21T04:18:43Z",
+      "sourceId": "474e724b69cd3e76",
+      "sourceTitle": "破襪子",
+      "link": "https://pewae.com/2026/08/migrating-acme-sh-from-webroot-validation-to-namesilo-dns-for-lets-encrypt-wildcard-certificates.html",
+      "detailPath": "articles/7c63a69fef786830b65fd0b3.json"
+    },
+    {
+      "id": "4f7c4b2ecf08c24dfa68ebd0",
+      "title": "SmartPerfetto 2026.07.18-08.21 五周更新复盘：从 v1.2.0 到 v1.7.0",
+      "summary": "上一篇更新停在 2026 年 7 月 17 日的 v1.1.1。当时 SmartPerfetto 已经有双 Trace 工作台、Quick Mode、私有分析上下文、统一 Agent runtime，以及 Camera、Heap、GPU 等专项分析能力。 从 7 月 18 日到 8 月 21 日，仓库又向前走了五周，版本来到 v1.7.0。这一轮继续增加功能，也把更多精力放在知识来源、分发质量、权限隔离、结果完整性和可回滚改进上。 SmartPerfetto 正在从“能完成一次分析”走向“能在更多环境里稳定、可追溯地完成分析”。 本文以公开发布的 v1.7.0 代码为准，回顾 v1.1.1 之后加入的主要能力。 项目与上篇文章： SmartPerfetto： https://github.com/Gracke…",
+      "image": null,
+      "publishedAt": "2026-08-21T04:00:00Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2026/08/21/SmartPerfetto-Five-Week-Update/",
+      "detailPath": "articles/4f7c4b2ecf08c24dfa68ebd0.json"
+    },
+    {
+      "id": "d1d3e151b345b14347f57560",
+      "title": "破圈的风险",
+      "summary": "如今的互联网基本上属于畜牧业，每个 App 圈养一群用户，App 之间切断通路，老死不相往来。于是，微博老登、虎扑直男、小红书群芳、朋友圈之交和直播间职业用爱发电家之间，人群特征差异很大，行为习惯差异很大，每日接触的信息差异也很大，圈圈不同。 以前说一个人在网上「火」了，意思是全平台都火。现在说一个人网上火了，是网红了，那很可能火在一个 App 里，红在一个 App里的一小群用户之间，可以称之为「分众火」。很自然的，在追逐流量的今天，「破圈」就成为了许多人追求的目标，要的就是大火全火阳光普照火。 然后，破圈就成为了翻车前奏。 圈养的结果，是在圈里培养出一批脸谱类似的用户。在一个圈里成功，只能说明适合这个圈里同类用户的口味。一旦破圈，就会进入陌生人群的视野，他们看待同一个人，同一件事，同一句话，可能会有完全不一…",
+      "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhA80o1HG6yxP_2QTudKSHxk7NOvQ8_xNiZjnr8whb0ngoD-8Fx64_MzoDbuhIVF-xeE5B-kIHPca67oGDSi9hxZ7zJYH6j1p0D3OAOGT4LPWqQd-It-Fk1SHxRs6K-t70agtPUdLa5YcALEivx7j7r3frx4BqdYZndaucn6OqEb11cvGYwGKlEbFAogzA/s72-w433-h580-c/0_1%20-%202026-08-21T103313.968-gigapixel-low%20resolution%20v2-1x.jpeg",
+      "publishedAt": "2026-08-21T03:52:35Z",
+      "sourceId": "095c6fbac5bbadfd",
+      "sourceTitle": "槽边往事",
+      "link": "https://www.hecaitou.com/2026/08/perils-breaking-bubble.html",
+      "detailPath": "articles/d1d3e151b345b14347f57560.json"
+    },
+    {
+      "id": "b851954cc5abb50f5f256132",
+      "title": "走音適合街頭演出",
+      "summary": "參加 街頭考試 的隔年，吉他社好友去考街頭藝人，我去看他們，而我自己沒有參加。 當時看到一個樂團，主唱唱的調性跟伴奏距離五度音，簡單講就是抓不到 Key，走音了。 記下他們的考試編號後，待放榜查詢時，發現他們過了。 主旋律跟伴奏不同調性，這種基本能力都沒有的人，要來判斷你有沒有能力上街演出。我們學音樂不是爲了給這些人踐踏的。 當時的台中街頭藝人考試，就是個笑話沒錯。",
+      "image": null,
+      "publishedAt": "2026-08-21T03:19:00Z",
+      "sourceId": "199cdf92fc46bfcd",
+      "sourceTitle": "Eddie Lv",
+      "link": "https://eddielv.com/musings/out-of-tune-with-busket/",
+      "detailPath": "articles/b851954cc5abb50f5f256132.json"
+    },
+    {
       "id": "b275a7277a97beea6e577adf",
       "title": "台中街頭藝人考試適切性",
       "summary": "2017 年我參加了台中街頭藝人考試，當時還去聽了說明會。 總共有三大指標需要達標，其中兩項與演出能力本身有關，其中一項「適切性」則表示這項表演適不適合街頭，例如：火類的表演就不行。 說明會時，直接說了適切性都會過，因為不適合的在報名階段應該就會被「提醒」了。 為何我要大費周章解釋呢？ 因為我當時吉他彈唱適切性沒過。 事後我傳訊息到 FB 粉專粉專確認適切性的定義，100% 就是我上面說的「表演適不適合在街頭演出」，當我問「那為何吉他彈唱適切性會沒過」後，就被已讀了。 後來大法官釋憲，街頭藝人考試制度違反中華民國憲法，所以就廢除了。 當時遭到很多人反對，認為會造成街頭亂象，隨便一個人都可以上街演出，而我卻大力贊同。 在本來的制度下，判斷我有沒有能力上街演出的人，真的有鑑賞能力嗎？當我被不合理原因被刷掉之後，有…",
@@ -615,50 +659,6 @@
       "sourceTitle": "Rolen's Blog",
       "link": "https://rolen.wiki/tiny-happiness/35477/",
       "detailPath": "articles/50180c16979a64c690922abb.json"
-    },
-    {
-      "id": "b00ae24d3608ba9603085403",
-      "title": "驢驢與齁嘻",
-      "summary": "前言 # 每次看到 帥熊 的各種日常，都會讓我想到 驢 ㄌㄩˇ 驢 ㄌㄩˊ 與 ㄩˇ 齁 ㄏㄡˇ 嘻 hee 。 驢驢是誰 # 驢驢是我第一任女友的兒子，在那段感情中是非常重要的角色。 驢驢本驢 驢驢有自己的聲音、有自己的想法，也會參與重要決定。 討論要去哪裡玩時，驢驢總是會在一旁聽著，聽到有想去的地方，他會突然用亢奮的聲音說他要去，也會在不想去的時候極力反駁。 驢驢坐著 不過我們很少帶驢驢出門，怕他出門會流汗或感染疾病，而且驢驢超不愛洗澡。 當我跟驢驢的媽吵架時，驢驢也會擔任調解委員，是個很稱職的和事佬。不過他有點可憐，有時候吵架，會把問題推給驢驢，驢驢默默承擔了一切。 齁嘻是誰 # 驢驢一直以來都是獨一無二的，我們從來沒有看過跟驢驢長得一樣的驢子，直到那天去了二手商店。 逛著逛著，突然發現有雙眼睛可憐巴巴…",
-      "image": null,
-      "publishedAt": "2026-08-17T11:10:16Z",
-      "sourceId": "199cdf92fc46bfcd",
-      "sourceTitle": "Eddie Lv",
-      "link": "https://eddielv.com/musings/donkey-and-hohee/",
-      "detailPath": "articles/b00ae24d3608ba9603085403.json"
-    },
-    {
-      "id": "5f1ce26d078d50f118a346c7",
-      "title": "昨天我走路的时候，突然一只狗很大声地叫了一下，我发现我的心是没有颤的。如果是平常，突…",
-      "summary": "昨天我走路的时候，突然一只狗很大声地叫了一下，我发现我的心是没有颤的。如果是平常，突然随机地听到一声很大的狗叫声，我的心会比较颤的。",
-      "image": null,
-      "publishedAt": "2026-08-17T11:06:10Z",
-      "sourceId": "e0d7bbaba7286f4d",
-      "sourceTitle": "Rolen's Blog",
-      "link": "https://rolen.wiki/tiny-happiness/35475/",
-      "detailPath": "articles/5f1ce26d078d50f118a346c7.json"
-    },
-    {
-      "id": "d84dd6e247d4c23d94e62e75",
-      "title": "昨天我觉察到，当别人向我们询问建议或分享事情时，我们往往下意识地去给建议，或者带着“…",
-      "summary": "昨天我觉察到，当别人向我们询问建议或分享事情时，我们往往下意识地去给建议，或者带着“找问题”的角度去看待对方，觉得对方本身就有问题。但如果对方只是单纯地陈述这件事，并没有明确寻求答案，我们却带着这种“对方有问题”的视角去审视，其实很难让对方接受。 从佛法角度来看，这个人本身没有问…",
-      "image": null,
-      "publishedAt": "2026-08-17T10:44:13Z",
-      "sourceId": "e0d7bbaba7286f4d",
-      "sourceTitle": "Rolen's Blog",
-      "link": "https://rolen.wiki/tiny-happiness/35470/",
-      "detailPath": "articles/d84dd6e247d4c23d94e62e75.json"
-    },
-    {
-      "id": "1c220b6f36fe03fadfde41e7",
-      "title": "哇咔财务管家，正式上架 Apple Store 啦",
-      "summary": "",
-      "image": null,
-      "publishedAt": "2026-08-17T09:38:30Z",
-      "sourceId": "fa90e95e2850db36",
-      "sourceTitle": "è¿�ç»´å’–å•¡å�§",
-      "link": "https://blog.ops-coffee.com/fire/wakaka-finance-app-listed-app-store.html",
-      "detailPath": "articles/1c220b6f36fe03fadfde41e7.json"
     }
   ]
 }
