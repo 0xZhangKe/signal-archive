@@ -12,7 +12,7 @@
 	<atom:link href="https://www.kawabangga.com/feed" rel="self" type="application/rss+xml" />
 	<link>https://www.kawabangga.com</link>
 	<description>无法自制的人得不到自由。</description>
-	<lastBuildDate>Mon, 07 Sep 2026 02:12:04 +0000</lastBuildDate>
+	<lastBuildDate>Wed, 09 Sep 2026 08:39:35 +0000</lastBuildDate>
 	<language>zh-Hans</language>
 	<sy:updatePeriod>
 	hourly	</sy:updatePeriod>
@@ -28,6 +28,188 @@
 	<height>32</height>
 </image> 
 	<item>
+		<title>BPG 连接建立失败问题的答案和解析</title>
+		<link>https://www.kawabangga.com/posts/7413</link>
+					<comments>https://www.kawabangga.com/posts/7413#respond</comments>
+		
+		<dc:creator><![CDATA[laixintao]]></dc:creator>
+		<pubDate>Wed, 09 Sep 2026 08:39:35 +0000</pubDate>
+				<category><![CDATA[网络]]></category>
+		<category><![CDATA[BGP]]></category>
+		<category><![CDATA[抓包分析]]></category>
+		<guid isPermaLink="false">https://www.kawabangga.com/?p=7413</guid>
+
+					<description><![CDATA[本文是 BPG 连接建立失败问题 一文的答案和解析。 抓包文件中有两处可疑的地方。 第一处是 BGP OPEN [&#8230;]<br/><a href="https://www.kawabangga.com/posts/7413" class="more-link" >Continue reading...</a>]]></description>
+										<content:encoded><![CDATA[
+<p class="wp-block-paragraph">本文是 <a href="https://www.kawabangga.com/?p=7397">BPG 连接建立失败问题</a> 一文的答案和解析。</p>
+
+
+
+<p class="wp-block-paragraph">抓包文件中有两处可疑的地方。</p>
+
+
+
+<p class="wp-block-paragraph">第一处是 BGP OPEN 消息建立的过程，我可以直接 follow 这个 tcp stream：</p>
+
+
+
+<figure class="wp-block-image size-large"><a href="https://www.kawabangga.com/wp-content/uploads/2026/09/bgp_open-scaled.jpg"><img fetchpriority="high" decoding="async" width="1024" height="123" src="https://www.kawabangga.com/wp-content/uploads/2026/09/bgp_open-1024x123.jpg" alt="" class="wp-image-7416" srcset="https://www.kawabangga.com/wp-content/uploads/2026/09/bgp_open-1024x123.jpg 1024w, https://www.kawabangga.com/wp-content/uploads/2026/09/bgp_open-764x92.jpg 764w, https://www.kawabangga.com/wp-content/uploads/2026/09/bgp_open-300x36.jpg 300w, https://www.kawabangga.com/wp-content/uploads/2026/09/bgp_open-1536x185.jpg 1536w, https://www.kawabangga.com/wp-content/uploads/2026/09/bgp_open-2048x247.jpg 2048w" sizes="(max-width: 1024px) 100vw, 1024px" /></a><figcaption class="wp-element-caption">Open 消息</figcaption></figure>
+
+
+
+<p class="wp-block-paragraph">可以看出：</p>
+
+
+
+<ul class="wp-block-list">
+<li>Server 是可以正常和对端设备建立 TCP 连接的，所以 4 层以下的网络没有问题；</li>
+
+
+
+<li>在 TCP 连接建立之后，一旦发送 OPEN 消息，直接收到了 TCP RST，意味着对面的设备拒绝和我们建立 BGP 连接；</li>
+
+
+
+<li>我们收到的 RST 包，IP 层的 TTL 是 1，这个也很可疑。</li>
+</ul>
+
+
+
+<p class="wp-block-paragraph">另一处可疑的地方是，对面的设备一直再对我们发送 keepalive 的消息：</p>
+
+
+
+<figure class="wp-block-image size-large"><a href="https://www.kawabangga.com/wp-content/uploads/2026/09/bgp-keepalive-message.jpg"><img decoding="async" width="1024" height="520" src="https://www.kawabangga.com/wp-content/uploads/2026/09/bgp-keepalive-message-1024x520.jpg" alt="" class="wp-image-7417" srcset="https://www.kawabangga.com/wp-content/uploads/2026/09/bgp-keepalive-message-1024x520.jpg 1024w, https://www.kawabangga.com/wp-content/uploads/2026/09/bgp-keepalive-message-300x152.jpg 300w, https://www.kawabangga.com/wp-content/uploads/2026/09/bgp-keepalive-message-767x390.jpg 767w, https://www.kawabangga.com/wp-content/uploads/2026/09/bgp-keepalive-message-1536x781.jpg 1536w, https://www.kawabangga.com/wp-content/uploads/2026/09/bgp-keepalive-message.jpg 1586w" sizes="(max-width: 1024px) 100vw, 1024px" /></a><figcaption class="wp-element-caption">从对面发给我们的 keepalive 消息</figcaption></figure>
+
+
+
+<p class="wp-block-paragraph">综上可以推断：我们的 Server 和对面的设备已经存在一个 BGP 会话了，而且 Server 上建立 BGP 会话使用的 port 是 <code>22709</code>，根据这个 port，我们可以找出来是哪一个进程。</p>
+
+
+
+<p class="wp-block-paragraph">后来我们发现，机器上有一个 bird 进程，使用 EBGP （这也就是为什么发过来的 keepalive 包的 TTL 都是 1 的原因）与对面的设备建立连接。由于连接已经建立好了，所以我们的进程如果使用 IBGP 再尝试建立连接的话就会被直接拒绝。</p>
+
+
+
+<p class="wp-block-paragraph">为什么一次升级会触发这个问题呢？</p>
+
+
+
+<p class="wp-block-paragraph">因为之前我们的 IGBP 会话是正常的，bird 尝试的 EBGP 反而是一直失败的，在我们重启过一次之后，EBGP 会话成功建立了，我们的 IGBP 就一直失败。</p>
+
+
+
+<p class="wp-block-paragraph">（还好只是一个无关紧要的环境，上面部署的东西太乱了。）</p>
+
+
+
+<div class="wp-block-cover is-light"><img decoding="async" width="1024" height="576" class="wp-block-cover__image-background wp-image-7405 size-large" alt="" src="https://www.kawabangga.com/wp-content/uploads/2024/05/index-background-1024x576.png" style="object-position:38% 56%" data-object-fit="cover" data-object-position="38% 56%" srcset="https://www.kawabangga.com/wp-content/uploads/2024/05/index-background-1024x576.png 1024w, https://www.kawabangga.com/wp-content/uploads/2024/05/index-background-300x169.png 300w, https://www.kawabangga.com/wp-content/uploads/2024/05/index-background-768x432.png 768w, https://www.kawabangga.com/wp-content/uploads/2024/05/index-background-1536x864.png 1536w, https://www.kawabangga.com/wp-content/uploads/2024/05/index-background.png 1672w" sizes="(max-width: 1024px) 100vw, 1024px" /><span aria-hidden="true" class="wp-block-cover__background has-background-dim" style="background-color:#e5e8ec"></span><div class="wp-block-cover__inner-container is-layout-flow wp-block-cover-is-layout-flow">
+<div class="wp-block-group has-black-color has-text-color has-link-color wp-elements-1"><div class="wp-block-group__inner-container is-layout-constrained wp-block-group-is-layout-constrained">
+<h2 class="wp-block-heading has-text-align-center">==抓包破案录==</h2>
+
+
+
+<p class="has-text-align-center wp-block-paragraph"><em><strong>通过真实故障和抓包文件，学习网络分析与故障排查。</strong><br /></em></p>
+
+
+
+<p class="has-custom-css wp-custom-css-e533bf93 wp-block-paragraph">这篇文章是抓包破案录系列文章（之前叫做《计算机网络实用技术》，后来改名了）中的一篇，这个系列正在连载中，我计划用这个系列的文章来分享一些网络抓包分析的实用技术。这些文章都是总结了我的工作经历中遇到的问题，经过精心构造和编写，每个文件附带抓包文件，通过实战来学习网络抓包与分析。</p>
+
+
+
+<p class="wp-block-paragraph"><strong>如果本文对您有帮助，欢迎扫博客右侧二维码打赏支持，正是订阅者的支持，让我公开写这个系列成为可能，感谢！</strong></p>
+
+
+
+<p class="wp-block-paragraph">如果您正在阅读的是题目类的文章，这个目录内容正好用来隔离其他读者的评论。读完题目可以稍作暂停，进行思考，<strong>继续向下滑动，可能会被其他的读者剧透答案。</strong></p>
+
+
+
+<p class="wp-block-paragraph"><em>没有链接的目录还没有写完，敬请期待……</em></p>
+
+
+
+<ol class="wp-block-list">
+<li><a href="https://www.kawabangga.com/posts/6097">序章</a></li>
+
+
+
+<li><a href="https://www.kawabangga.com/posts/6950">抓包技术以及技巧</a></li>
+
+
+
+<li><a href="https://www.kawabangga.com/posts/6295">理解网络的分层模型</a></li>
+
+
+
+<li><a href="https://www.kawabangga.com/posts/6919">数据是如何路由的</a></li>
+
+
+
+<li>网络问题排查的思路和技巧</li>
+
+
+
+<li><a href="https://www.kawabangga.com/posts/6178">不可以用路由器？</a>（<a href="https://www.kawabangga.com/posts/6291">答案和解析</a>）</li>
+
+
+
+<li><a href="https://www.kawabangga.com/posts/6286">网工闯了什么祸？</a>（<a href="https://www.kawabangga.com/posts/6291">答案和解析</a>，<a href="https://www.kawabangga.com/posts/7129" data-type="post" data-id="7129">阅读加餐！</a>）</li>
+
+
+
+<li><a href="https://www.kawabangga.com/?p=7397">BPG 连接建立失败问题</a> （<a href="https://www.kawabangga.com/?p=7413">答案和解析</a>）</li>
+
+
+
+<li><a href="https://www.kawabangga.com/?p=6383">重新认识 TCP 的握手和挥手</a>（<a href="https://www.kawabangga.com/posts/6467">答案和解析</a>）</li>
+
+
+
+<li><a href="https://www.kawabangga.com/posts/7219">3.5 秒初始延迟问题</a> （<a href="https://www.kawabangga.com/posts/7221">答案和解析</a>）</li>
+
+
+
+<li><a href="https://www.kawabangga.com/posts/7187" data-type="link" data-id="https://www.kawabangga.com/posts/7187">网络断断续续……</a> （<a href="https://www.kawabangga.com/posts/7190" data-type="link" data-id="https://www.kawabangga.com/posts/7190">答案和解析</a>）</li>
+
+
+
+<li><a href="https://www.kawabangga.com/?p=6372">延迟增加了多少？</a>（<a href="https://www.kawabangga.com/posts/6378">答案和解析</a>）</li>
+
+
+
+<li><a href="https://www.kawabangga.com/posts/6910" data-type="post" data-id="6910">压测的时候 QPS 为什么上不去？</a>（<a href="https://www.kawabangga.com/posts/6937">答案和解析</a>）</li>
+
+
+
+<li><a href="https://www.kawabangga.com/posts/6570">TCP 下载速度为什么这么慢？</a>（<a href="https://www.kawabangga.com/posts/6616">答案和解析</a>）</li>
+
+
+
+<li><a href="https://www.kawabangga.com/posts/6965">请求为什么超时了？</a>（<a href="https://www.kawabangga.com/posts/6969">答案和解析</a>）</li>
+
+
+
+<li><a href="https://www.kawabangga.com/posts/7066">0.01% 的概率超时问题</a> （<a href="https://www.kawabangga.com/posts/7076">答案和解析</a>）</li>
+
+
+
+<li><a href="https://www.kawabangga.com/posts/6131" data-type="link" data-id="https://www.kawabangga.com/posts/6131">后记：学习网络的一点经验分享</a></li>
+</ol>
+
+
+
+<pre class="wp-block-preformatted">与本博客的其他页面不同，本页面使用 <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-hans">署名-非商业性使用-禁止演绎 4.0 国际</a> 协议。<br /></pre>
+</div></div>
+</div></div>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.kawabangga.com/posts/7413/feed</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
 		<title>BGP 连接建立失败问题</title>
 		<link>https://www.kawabangga.com/posts/7397</link>
 					<comments>https://www.kawabangga.com/posts/7397#comments</comments>
@@ -95,8 +277,8 @@
 
 
 
-<div class="wp-block-cover is-light"><img fetchpriority="high" decoding="async" width="1024" height="576" class="wp-block-cover__image-background wp-image-7405 size-large" alt="" src="https://www.kawabangga.com/wp-content/uploads/2024/05/index-background-1024x576.png" style="object-position:38% 56%" data-object-fit="cover" data-object-position="38% 56%" srcset="https://www.kawabangga.com/wp-content/uploads/2024/05/index-background-1024x576.png 1024w, https://www.kawabangga.com/wp-content/uploads/2024/05/index-background-300x169.png 300w, https://www.kawabangga.com/wp-content/uploads/2024/05/index-background-768x432.png 768w, https://www.kawabangga.com/wp-content/uploads/2024/05/index-background-1536x864.png 1536w, https://www.kawabangga.com/wp-content/uploads/2024/05/index-background.png 1672w" sizes="(max-width: 1024px) 100vw, 1024px" /><span aria-hidden="true" class="wp-block-cover__background has-background-dim" style="background-color:#e5e8ec"></span><div class="wp-block-cover__inner-container is-layout-flow wp-block-cover-is-layout-flow">
-<div class="wp-block-group has-black-color has-text-color has-link-color wp-elements-1"><div class="wp-block-group__inner-container is-layout-constrained wp-block-group-is-layout-constrained">
+<div class="wp-block-cover is-light"><img loading="lazy" decoding="async" width="1024" height="576" class="wp-block-cover__image-background wp-image-7405 size-large" alt="" src="https://www.kawabangga.com/wp-content/uploads/2024/05/index-background-1024x576.png" style="object-position:38% 56%" data-object-fit="cover" data-object-position="38% 56%" srcset="https://www.kawabangga.com/wp-content/uploads/2024/05/index-background-1024x576.png 1024w, https://www.kawabangga.com/wp-content/uploads/2024/05/index-background-300x169.png 300w, https://www.kawabangga.com/wp-content/uploads/2024/05/index-background-768x432.png 768w, https://www.kawabangga.com/wp-content/uploads/2024/05/index-background-1536x864.png 1536w, https://www.kawabangga.com/wp-content/uploads/2024/05/index-background.png 1672w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /><span aria-hidden="true" class="wp-block-cover__background has-background-dim" style="background-color:#e5e8ec"></span><div class="wp-block-cover__inner-container is-layout-flow wp-block-cover-is-layout-flow">
+<div class="wp-block-group has-black-color has-text-color has-link-color wp-elements-2"><div class="wp-block-group__inner-container is-layout-constrained wp-block-group-is-layout-constrained">
 <h2 class="wp-block-heading has-text-align-center">==抓包破案录==</h2>
 
 
@@ -228,7 +410,7 @@
 
 
 <div class="wp-block-image">
-<figure class="aligncenter size-full"><a href="https://www.kawabangga.com/wp-content/uploads/2026/08/ifb-ingress-case.jpg"><img decoding="async" width="612" height="128" src="https://www.kawabangga.com/wp-content/uploads/2026/08/ifb-ingress-case.jpg" alt="" class="wp-image-7377" srcset="https://www.kawabangga.com/wp-content/uploads/2026/08/ifb-ingress-case.jpg 612w, https://www.kawabangga.com/wp-content/uploads/2026/08/ifb-ingress-case-300x63.jpg 300w" sizes="(max-width: 612px) 100vw, 612px" /></a></figure>
+<figure class="aligncenter size-full"><a href="https://www.kawabangga.com/wp-content/uploads/2026/08/ifb-ingress-case.jpg"><img loading="lazy" decoding="async" width="612" height="128" src="https://www.kawabangga.com/wp-content/uploads/2026/08/ifb-ingress-case.jpg" alt="" class="wp-image-7377" srcset="https://www.kawabangga.com/wp-content/uploads/2026/08/ifb-ingress-case.jpg 612w, https://www.kawabangga.com/wp-content/uploads/2026/08/ifb-ingress-case-300x63.jpg 300w" sizes="auto, (max-width: 612px) 100vw, 612px" /></a></figure>
 </div>
 
 
@@ -270,7 +452,7 @@
 
 
 <div class="wp-block-image">
-<figure class="aligncenter size-full is-resized"><a href="https://www.kawabangga.com/wp-content/uploads/2026/08/image.png"><img decoding="async" width="645" height="484" src="https://www.kawabangga.com/wp-content/uploads/2026/08/image.png" alt="" class="wp-image-7410" style="width:645px;height:auto" srcset="https://www.kawabangga.com/wp-content/uploads/2026/08/image.png 645w, https://www.kawabangga.com/wp-content/uploads/2026/08/image-300x225.png 300w" sizes="(max-width: 645px) 100vw, 645px" /></a><figcaption class="wp-element-caption">image <strong><a href="https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-policing/19645-policevsshape.html">source</a></strong></figcaption></figure>
+<figure class="aligncenter size-full is-resized"><a href="https://www.kawabangga.com/wp-content/uploads/2026/08/image.png"><img loading="lazy" decoding="async" width="645" height="484" src="https://www.kawabangga.com/wp-content/uploads/2026/08/image.png" alt="" class="wp-image-7410" style="width:645px;height:auto" srcset="https://www.kawabangga.com/wp-content/uploads/2026/08/image.png 645w, https://www.kawabangga.com/wp-content/uploads/2026/08/image-300x225.png 300w" sizes="auto, (max-width: 645px) 100vw, 645px" /></a><figcaption class="wp-element-caption">image <strong><a href="https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-policing/19645-policevsshape.html">source</a></strong></figcaption></figure>
 </div>
 
 
@@ -2263,50 +2445,6 @@ tx-frames-irq:	n/a</pre></div>
 					
 					<wfw:commentRss>https://www.kawabangga.com/posts/7246/feed</wfw:commentRss>
 			<slash:comments>2</slash:comments>
-		
-		
-			</item>
-		<item>
-		<title>雨季又来</title>
-		<link>https://www.kawabangga.com/posts/7243</link>
-					<comments>https://www.kawabangga.com/posts/7243#comments</comments>
-		
-		<dc:creator><![CDATA[laixintao]]></dc:creator>
-		<pubDate>Tue, 21 Apr 2026 04:14:17 +0000</pubDate>
-				<category><![CDATA[新加坡百景]]></category>
-		<guid isPermaLink="false">https://www.kawabangga.com/?p=7243</guid>
-
-					<description><![CDATA[「未来两周受季风交替影响，本地多数日子的下午，预计会出现短暂雷阵雨，有几天的最高气温可能达到35摄氏度。未来两 [&#8230;]<br/><a href="https://www.kawabangga.com/posts/7243" class="more-link" >Continue reading...</a>]]></description>
-										<content:encoded><![CDATA[
-<p class="wp-block-paragraph">「未来两周受季风交替影响，本地多数日子的下午，预计会出现短暂雷阵雨，有几天的最高气温可能达到35摄氏度。未来两周全岛降雨量，预计接近常年平均水平。多数下午，部分地区将出现短暂雷阵雨，有时可能持续至傍晚；也可能有几天降雨不多。」联合早报这么说。最近会下雨已经出现在了新闻上，而不是天气预报上。</p>
-
-
-
-<p class="wp-block-paragraph">春季到了，太阳跑到了赤道的北边。我住的房子朝北，每天起床阳光会射进屋里，晒得玻璃发烫。</p>
-
-
-
-<p class="wp-block-paragraph">高温伴随着雨季，雨水降下来马上又被蒸发，每一天的空气都湿漉漉的。有时候太阳还在天上，没有什么乌云，竟然也下起来雨。</p>
-
-
-
-<p class="wp-block-paragraph">除湿机派上了大用场。每天可以从空气中吸出来两桶水。</p>
-
-
-
-<p class="wp-block-paragraph">说到除湿机，我买的 Novita 牌子，这个公司曾经把自己的产品线全部升级了一遍，从空气净化器到滤水器，所有的型号后面加上了一个 plus——和之前唯一的区别就是必须用他们自己生产的滤芯，售价高昂，而且滤芯到期之后机器会强制停止工作，必须更换。</p>
-
-
-
-<p class="wp-block-paragraph">但是之前非 plus 型号的滤芯还是在售，并且无法在 plus 上使用。用 Shopee 搜出来，非 plus 居然还排在前面，我就上当了，白白浪费了钱，得重新买。</p>
-
-
-
-<p class="wp-block-paragraph">真是气人。</p>
-]]></content:encoded>
-					
-					<wfw:commentRss>https://www.kawabangga.com/posts/7243/feed</wfw:commentRss>
-			<slash:comments>5</slash:comments>
 		
 		
 			</item>
