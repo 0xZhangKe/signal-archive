@@ -1,6 +1,28 @@
 {
   "items": [
     {
+      "id": "c659a4a3255972d648136ed9",
+      "title": "Axios Daily",
+      "summary": "2024年9-10月每日閱讀Axios英文新聞的學習筆記",
+      "image": null,
+      "publishedAt": "2026-07-13T13:47:58Z",
+      "sourceId": "50bce2ced06e6077",
+      "sourceTitle": "Feed Me, Haruo",
+      "link": "https://haruowang.vercel.app/global/english/axios.html",
+      "detailPath": "articles/c659a4a3255972d648136ed9.json"
+    },
+    {
+      "id": "fd2255c58b8770b9550df950",
+      "title": "投資大小事",
+      "summary": "整理投資術語、投資策略及投資規定的筆記",
+      "image": null,
+      "publishedAt": "2026-07-13T13:47:58Z",
+      "sourceId": "50bce2ced06e6077",
+      "sourceTitle": "Feed Me, Haruo",
+      "link": "https://haruowang.vercel.app/wealth/finance/investment.html",
+      "detailPath": "articles/fd2255c58b8770b9550df950.json"
+    },
+    {
       "id": "4f43e731251f7c617f2b179c",
       "title": "Tatsuya Kitani 的 ROUNDABOUT",
       "summary": "第一次收聽一整張 ROUNDABOUT 這個 Tatsuya Kitani 的專輯，好聽！ 原來這張專輯有收錄手機音遊 Project Sekai 的委託歌曲之一—— Moonlight 的作曲者雙人組（Tatsuya Kitani 與 Harumaki Gohan ）本尊獻唱版啊！和我原本就很愛的 Akito（彰人；今井文也配音）獨唱版 不相上下欸！可惡，搞到我都不知道該選哪個作為我的至愛版了⋯⋯ 有趣的是，Tatsuya Kitani 與 Harumaki Gohan 本人演唱的版本特地用上了不同風格/音色的聲線，不懂是不是在致敬 Vivid BAD SQUAD 四人組各有千秋的嗓音特色 XD？",
@@ -637,28 +659,6 @@
       "sourceTitle": "Feed Me, Haruo",
       "link": "https://haruowang.vercel.app/wealth/dwelling/home.html",
       "detailPath": "articles/d860597f1339c3b275128c4a.json"
-    },
-    {
-      "id": "4fc97f583cd89a1f9d785518",
-      "title": "CVE-2026-0091： An issue in android window management to Arbitrary Code Execution in Launcher process",
-      "summary": "This issue CVE-2026-0091 has been fixed for Android 14+ in June 2026 Android Security Bulletin . Click here to see the patch The following is copied from my repo https://github.com/canyie/TransitionPlayer for backup purposes. For more info such as PoC code, please check the original repo.",
-      "image": null,
-      "publishedAt": "2026-07-08T09:40:00Z",
-      "sourceId": "511f3e9d589e2612",
-      "sourceTitle": "残页的小博客",
-      "link": "https://blog.canyie.top/2026/07/08/CVE-2026-0091/",
-      "detailPath": "articles/4fc97f583cd89a1f9d785518.json"
-    },
-    {
-      "id": "b8e7abb8cfbc6b56f0110902",
-      "title": "[AI] curl -NT. 导致100% CPU原因",
-      "summary": "有AI就是好使，搁以前自己得盯半天也看不明白。。。 问题确认 curl -NT. 在连接一个持续推送数据的 streaming 服务器时，会产生一个 紧密的 pause/unpause 循环 ，导致 100% CPU。 根因分析 -T. （注意是点号，不是减号）将 stdin 设为 非阻塞模式 ，然后依赖 EAGAIN + CURL_READFUNC_PAUSE 机制来避免阻塞。核心循环发生在三个回调之间： 第一步 — 上传尝试失败 （ src/tool_cb_rea.c ）： { rc = read(per->infd, buffer, sz * nmemb); if(rc < 0) { if(errno == EAGAIN) { errno = 0; config->readbusy = TRUE; re…",
-      "image": null,
-      "publishedAt": "2026-07-08T08:05:00Z",
-      "sourceId": "a864c53722a17b19",
-      "sourceTitle": "est's blog",
-      "link": "https://blog.est.im/2026/stdout-25",
-      "detailPath": "articles/b8e7abb8cfbc6b56f0110902.json"
     }
   ]
 }

@@ -1,6 +1,50 @@
 {
   "items": [
     {
+      "id": "89cca73d4527404ee80962b8",
+      "title": "R8 Optimization: Value Assumption",
+      "summary": "Note: This post is part of a series on D8 and R8, Android's new dexer and optimizer, respectively. For an intro to D8 read \"Android's Java 8 support\" . For an intro to R8 read \"R8 Optimization: Staticization\" . The previous post ( part 1 , part 2 ) featured R8 performing data-flow analysis of variables in order to determine if they were maybe null, always n…",
+      "image": null,
+      "publishedAt": "2019-01-22T00:00:00Z",
+      "sourceId": "a33fc95b48c6e3ea",
+      "sourceTitle": "Jake Wharton",
+      "link": "https://jakewharton.com/r8-optimization-value-assumption/",
+      "detailPath": "articles/89cca73d4527404ee80962b8.json"
+    },
+    {
+      "id": "a738cdeafe601ae3f2527791",
+      "title": "Door Door redrawn",
+      "summary": "I redrew the box art from Door Door (1985, Famicom). It’s a great game and worthy of your time. Door Door was designed by Koichi Nakamura , known as one of the creators of Dragon Quest . The game was the runner-up in the Enix-sponsored “First Game and Hobby Program Contest” in 1982, winning the “Outstanding Program Award” with a prize of 500,000 yen. Enix w…",
+      "image": "https://cdn.gingerbeardman.com/images/posts/door-door-redrawn-colour.png",
+      "publishedAt": "2019-01-19T00:00:00Z",
+      "sourceId": "625f69e92fbd1d94",
+      "sourceTitle": "⌘I",
+      "link": "https://blog.gingerbeardman.com/2019/01/19/door-door-redrawn/",
+      "detailPath": "articles/a738cdeafe601ae3f2527791.json"
+    },
+    {
+      "id": "e53d1cb873f182601b3f27c0",
+      "title": "R8 Optimization: Null Data Flow Analysis (Part 2)",
+      "summary": "Note: This post is part of a series on D8 and R8, Android's new dexer and optimizer, respectively. For an intro to D8 read \"Android's Java 8 support\" . For an intro to R8 read \"R8 Optimization: Staticization\" . Part 1 of this post demonstrated R8's ability to eliminate null checks after method inlining. This was accomplished by virtue of nullability informa…",
+      "image": null,
+      "publishedAt": "2019-01-15T00:00:00Z",
+      "sourceId": "a33fc95b48c6e3ea",
+      "sourceTitle": "Jake Wharton",
+      "link": "https://jakewharton.com/r8-optimization-null-data-flow-analysis-part-2/",
+      "detailPath": "articles/e53d1cb873f182601b3f27c0.json"
+    },
+    {
+      "id": "013417922b787edb5306aa29",
+      "title": "Inline Classes Make Great Database IDs",
+      "summary": "Kotlin 1.3's experimental inline class feature allows creating type-safe, semantic wrappers around values which are erased at runtime. Database IDs are a perfect use case for this functionality. Combined with SQLDelight which automatically generates model objects and APIs for querying, different table's IDs become different types which prevent erroneous use…",
+      "image": null,
+      "publishedAt": "2019-01-10T00:00:00Z",
+      "sourceId": "a33fc95b48c6e3ea",
+      "sourceTitle": "Jake Wharton",
+      "link": "https://jakewharton.com/inline-classes-make-great-database-ids/",
+      "detailPath": "articles/013417922b787edb5306aa29.json"
+    },
+    {
       "id": "c6797db8f5aa023a190bfb57",
       "title": "Preparing for a Tech Talk, Part 2: What, Why, and How",
       "summary": "We need to go deeper.",
@@ -615,50 +659,6 @@
       "sourceTitle": "lizzie",
       "link": "https://blog.lizzie.io/clickjacking-privacy-badger.html",
       "detailPath": "articles/bf633219d8bc66130def6d12.json"
-    },
-    {
-      "id": "fd89b5930a5e93be534b00f2",
-      "title": "Preventing USB Attacks with Linux-Hardened",
-      "summary": "In December 2016 I wrote a piece about using Grsecurity to prevent new USB devices from being loaded. Grsecurity has, unfortunately, left this world , but the linux-hardened project has taken on some of the patches and updates. I thought it would be worth a minor update to that post now that linux-hardened has ported the deny_new_usb patches , and uses a ma…",
-      "image": null,
-      "publishedAt": "2018-07-13T19:06:00Z",
-      "sourceId": "5e4db476da32a0bc",
-      "sourceTitle": "lizzie",
-      "link": "https://blog.lizzie.io/preventing-usb-attacks-with-linux-hardened.html",
-      "detailPath": "articles/fd89b5930a5e93be534b00f2.json"
-    },
-    {
-      "id": "6d0da627b4d79465f361d8c3",
-      "title": "WebAssembly is more than just the web",
-      "summary": "While WebAssembly was given its name for good reason, I also think it’s quite the misnomer. When you hear about WebAssembly, don’t just think of the web: think bigger. Many programmers know that WebAssembly is a technology that lets you run non-JavaScript code in the browser.…",
-      "image": null,
-      "publishedAt": "2018-07-13T00:00:00Z",
-      "sourceId": "9a41b0d6fa07d21e",
-      "sourceTitle": "Steve Klabnik",
-      "link": "https://steveklabnik.com/writing/webassembly-is-more-than-just-the-web/",
-      "detailPath": "articles/6d0da627b4d79465f361d8c3.json"
-    },
-    {
-      "id": "fdf4d906268c65ae40613117",
-      "title": "Companion object in Kotlin",
-      "summary": "Unlike Java or C#, Kotlin doesn’t have static members or member functions. Kotlin recommends to simply use package-level functions instead.",
-      "image": null,
-      "publishedAt": "2018-07-13T00:00:00Z",
-      "sourceId": "46b0ff3e55cf7fb7",
-      "sourceTitle": "Suneet Agrawal",
-      "link": "https://agrawalsuneet.github.io/blogs/companion-object-in-kotlin/",
-      "detailPath": "articles/fdf4d906268c65ae40613117.json"
-    },
-    {
-      "id": "6186faeb6cd550bd3565a445",
-      "title": "Computed Property in Swift",
-      "summary": "Object creation is a heavy process. When we create a class object, all the public and private properties of that class are initialised inside the constructor. Every variable inside a class initialisation requires a certain amount of time to allocate the memory on the heap and hold its reference on the stack. The more variables, the more time it may take but…",
-      "image": null,
-      "publishedAt": "2018-07-13T00:00:00Z",
-      "sourceId": "46b0ff3e55cf7fb7",
-      "sourceTitle": "Suneet Agrawal",
-      "link": "https://agrawalsuneet.github.io/blogs/computed-property-in-swift/",
-      "detailPath": "articles/6186faeb6cd550bd3565a445.json"
     }
   ]
 }
