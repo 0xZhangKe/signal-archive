@@ -1,5 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-09-10T00:56:41+00:00</updated><author><name>Simon Willison</name></author><entry><title>Quoting Calif Research</title><link href="https://simonwillison.net/2026/Sep/10/calif-research/" rel="alternate"/><published>2026-09-10T00:56:41+00:00</published><updated>2026-09-10T00:56:41+00:00</updated><id>https://simonwillison.net/2026/Sep/10/calif-research/</id><summary type="html">
+<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-09-10T23:44:15+00:00</updated><author><name>Simon Willison</name></author><entry><title>Any Nix package, live in your browser</title><link href="https://simonwillison.net/2026/Sep/10/trynix/" rel="alternate"/><published>2026-09-10T23:44:15+00:00</published><updated>2026-09-10T23:44:15+00:00</updated><id>https://simonwillison.net/2026/Sep/10/trynix/</id><summary type="html">
+    
+&lt;p&gt;&lt;strong&gt;&lt;a href="https://fzakaria.com/2026/09/04/any-nix-package-live-in-your-browser"&gt;Any Nix package, live in your browser&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+Farid Zakaria calls this his "&lt;em&gt;magnum opus&lt;/em&gt; of Nix work", and I can see why.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://trynix.dev"&gt;trynix.dev&lt;/a&gt; provides a &lt;a href="https://github.com/ktock/qemu-wasm"&gt;qemu-wasm&lt;/a&gt; powered x86_64 Linux virtual machine running entirely in your browser through WebAssembly. That VM can then be booted with &lt;em&gt;any Nix package&lt;/em&gt; from the past 13 years. They are URL addressable, so you can navigate to this page:&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://trynix.dev/?pkg=python3%403.6.2"&gt;https://trynix.dev/?pkg=python3%403.6.2&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Then click "Load" and get an interactive shell against a virtual machine running Python 3.6.2 from 2017.&lt;/p&gt;
+&lt;p&gt;Farid is building all sorts of neat things on top of this. One recent example: &lt;a href="https://fzakaria.com/2026/09/09/review-a-pull-request-by-booting-it"&gt;Review a pull request by booting it&lt;/a&gt; introduces &lt;a href="https://github.com/marketplace/actions/trynix-preview"&gt;trynix-preview&lt;/a&gt;, described like this:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;GitHub action that comments a link on a pull request which lets you boot the PR’s build in the browser using &lt;a href="https://trynix.dev/"&gt;https://trynix.dev&lt;/a&gt;. No servers, just browsers.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+    &lt;p&gt;&lt;small&gt;&lt;/small&gt;Via &lt;a href="https://lobste.rs/s/7lii0g/review_pull_request_by_booting_it"&gt;Lobste.rs&lt;/a&gt;&lt;/small&gt;&lt;/p&gt;
+
+
+    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/code-review"&gt;code-review&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/linux"&gt;linux&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/webassembly"&gt;webassembly&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/github-actions"&gt;github-actions&lt;/a&gt;&lt;/p&gt;
+
+
+
+</summary><category term="code-review"/><category term="linux"/><category term="webassembly"/><category term="github-actions"/></entry><entry><title>Native is now the future of mobile at Shopify</title><link href="https://simonwillison.net/2026/Sep/10/shopify-react-native/" rel="alternate"/><published>2026-09-10T21:11:15+00:00</published><updated>2026-09-10T21:11:15+00:00</updated><id>https://simonwillison.net/2026/Sep/10/shopify-react-native/</id><summary type="html">
+    
+&lt;p&gt;&lt;strong&gt;&lt;a href="https://shopify.engineering/back-to-native"&gt;Native is now the future of mobile at Shopify&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+Shopify are moving from React Native back to separate Swift and Kotlin codebases for their native apps, for the exact reason you would expect:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;We decided to switch from native to React Native in 2020 for three reasons:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Stop building the same features twice&lt;/li&gt;
+&lt;li&gt;Allow developers to work across the stack&lt;/li&gt;
+&lt;li&gt;Spend less time chasing feature parity and more time shipping value&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;[...]&lt;/p&gt;
+&lt;p&gt;Native still means building and maintaining software on two platforms, that cost has not disappeared. What changed is that agents can now do enough of the implementation, translation, testing, and review work that it’s no longer the deciding factor it was in 2020.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;It's a well-written post, which gives full credit to React Native as a great platform for the six years they were using it.&lt;/p&gt;
+&lt;p&gt;Shopify are the maintainers of three significant React Native libraries: &lt;a href="https://github.com/Shopify/react-native-skia"&gt;react-native-skia&lt;/a&gt;, &lt;a href="https://github.com/Shopify/flash-list"&gt;flash-list&lt;/a&gt;, and &lt;a href="https://github.com/Shopify/restyle"&gt;restyle&lt;/a&gt;. The first two are finding new homes; the third "has a smaller user base than our other libraries" and will be archived at the end of 2026.
+
+    &lt;p&gt;&lt;small&gt;&lt;/small&gt;Via &lt;a href="https://news.ycombinator.com/item?id=49643982"&gt;Hacker News&lt;/a&gt;&lt;/small&gt;&lt;/p&gt;
+
+
+    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/android"&gt;android&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/mobile"&gt;mobile&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/open-source"&gt;open-source&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ios"&gt;ios&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/react"&gt;react&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai-assisted-search"&gt;ai-assisted-search&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/coding-agents"&gt;coding-agents&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/swift"&gt;swift&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/shopify"&gt;shopify&lt;/a&gt;&lt;/p&gt;
+
+
+
+</summary><category term="android"/><category term="mobile"/><category term="open-source"/><category term="ios"/><category term="ai"/><category term="react"/><category term="generative-ai"/><category term="llms"/><category term="ai-assisted-search"/><category term="coding-agents"/><category term="swift"/><category term="shopify"/></entry><entry><title>Quoting Calif Research</title><link href="https://simonwillison.net/2026/Sep/10/calif-research/" rel="alternate"/><published>2026-09-10T00:56:41+00:00</published><updated>2026-09-10T00:56:41+00:00</updated><id>https://simonwillison.net/2026/Sep/10/calif-research/</id><summary type="html">
     &lt;blockquote cite="https://calif.io/research/weworm"&gt;&lt;p&gt;Today, we're releasing a demo of WeWorm, the first zero-click worm to spread through WeChat calls across iOS and Android. [...]&lt;/p&gt;
 &lt;p&gt;The victim does not need to answer the call, or interact with their phone at all. Even if they do answer, they hear nothing, and the exploit still succeeds. [...]&lt;/p&gt;
 &lt;p&gt;Working with AI, our team found the bug and wrote the first remote code execution (RCE) exploit in about two days. Building the worm took one more week.&lt;/p&gt;
@@ -671,32 +714,4 @@ GPT-6 Astra is "rolling out today to a limited set of organizations and over the
 
 
 
-</summary><category term="codex"/><category term="generative-ai"/><category term="openai"/><category term="ai"/><category term="llms"/><category term="openoffice"/><category term="open-source"/></entry><entry><title>GeoJSON Map Viewer</title><link href="https://simonwillison.net/2026/Sep/1/geojson/" rel="alternate"/><published>2026-09-01T18:05:45+00:00</published><updated>2026-09-01T18:05:45+00:00</updated><id>https://simonwillison.net/2026/Sep/1/geojson/</id><summary type="html">
-    
-        &lt;p&gt;&lt;strong&gt;Tool:&lt;/strong&gt; &lt;a href="https://tools.simonwillison.net/geojson"&gt;GeoJSON Map Viewer&lt;/a&gt;&lt;/p&gt;
-        &lt;p&gt;I was helping Natalie gather some maps of local political boundaries (for the &lt;a href="https://granada.ca.gov"&gt;Granada Community Services District&lt;/a&gt; and the &lt;a href="https://midcoastcommunitycouncil.org"&gt;Midcoast Community Council&lt;/a&gt;) and found a need to display some GeoJSON files on a map and export that as a PNG. I asked GPT-5.6-Sol for suggestions of tools and it proactively built one. After &lt;a href="https://tools.simonwillison.net/colophon#geojson.html"&gt;some iterations&lt;/a&gt; using Claude Code for web and Fable 5.1 we got to this finished tool.&lt;/p&gt;
-&lt;p&gt;As for the GeoJSON.. it turns out if you ask ChatGPT Work to provide boundaries for almost anything it will churn away extracting and combining files from different Government data sources and build exactly what you need.&lt;/p&gt;
-&lt;p&gt;I got &lt;a href="https://gist.github.com/simonw/27d243c9d1cb5d9047fff7360dd49d3c"&gt;this polygon&lt;/a&gt; from:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;code&gt;I want a polygon that represents the exact boundary of the El Granada GCSD&lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;And &lt;a href="https://gist.github.com/simonw/b51f9e0190a13932ac64a0cb407a709d"&gt;this one&lt;/a&gt; from:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;code&gt;Get me a GeoJSON file for the boundary (or boundaries if that makes sense) for the MCC - Midcoast Community Council - that operates near Half Moon Bay CA&lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;a href="https://tools.simonwillison.net/geojson#url=https%3A%2F%2Fgist.github.com%2Fsimonw%2Fb51f9e0190a13932ac64a0cb407a709d&amp;amp;color=%23028FC3&amp;amp;opacity=50&amp;amp;url=https%3A%2F%2Fgist.github.com%2Fsimonw%2F27d243c9d1cb5d9047fff7360dd49d3c&amp;amp;color=%23E4572E&amp;amp;opacity=50&amp;amp;preset=map&amp;amp;resolution=2&amp;amp;lat=37.52640&amp;amp;lng=-122.48297&amp;amp;zoom=13"&gt;Here's a link&lt;/a&gt; that displays both of them at the same time on the new GeoJSON map viewing tool.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Screenshot of a web app with a left sidebar of controls and a large map on the right. Top left: OPENSTREETMAP OVERLAY GeoJSON Map Viewer. Top right: Your GeoJSON stays in this browser. Sidebar Shape 1 panel with blue accent: Shape 1, Remove button, URL https://gist.github.com/simonw/b51f9 with Load button, textarea containing { &amp;quot;type&amp;quot;: &amp;quot;FeatureCollection&amp;quot;, &amp;quot;bbox&amp;quot;: -122.51951044732655, 37.47967619478576, -122.44141365271285, 37.55146379902639, Fill colour #028FC3 with blue swatch, Opacity slider at 50%. Shape 2 panel with red accent: Shape 2, Remove button, URL https://gist.github.com/simonw/27d24 with Load button, textarea containing { &amp;quot;type&amp;quot;: &amp;quot;FeatureCollection&amp;quot;, &amp;quot;name&amp;quot;: &amp;quot;Granada Community Services District boundary&amp;quot;, &amp;quot;bbox&amp;quot;: -122.500791193774, 37.4803905345399, Fill colour #E4572E with red swatch, Opacity slider at 50%. Buttons: Render map, Add shape, Load example, Clear. The map shows the coast around Montara, Moss Beach, El Granada and Half Moon Bay with a large semi-transparent blue polygon covering Montara, Moss Beach and Rancho Corral de Tierra extending into the ocean, and an overlapping red polygon covering El Granada and Quarry Park. Map labels include Cabrillo Highway, San Pedro Mountain 325 m, Peak Mountain 545 m, South Peak, CA 1, Montara, Rancho Corral de Tierra, Golden Gate National Recreation Area, 489 m, Scarper Ridge, 552 m, Moss Beach, Montara State Marine Reserve, Ox Hill 542 m, 512 m, Fitzgerald Marine Reserve, Airport Street, Pillar Point Bluff, Quarry Park, El Granada, Pillar Point State Marine Conservation Area, Ox Mountain Landfill, Half Moon Bay State Beach, plus and minus zoom buttons, and attribution Leaflet | © OpenStreetMap contributors." src="https://static.simonwillison.net/static/2026/geojson-tool.webp" /&gt;&lt;/p&gt;
-    
-    
-        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/geospatial"&gt;geospatial&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/tools"&gt;tools&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/geojson"&gt;geojson&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/chatgpt"&gt;chatgpt&lt;/a&gt;&lt;/p&gt;
-    
-
-</summary><category term="geospatial"/><category term="tools"/><category term="geojson"/><category term="chatgpt"/></entry><entry><title>Quoting Tarn Adams</title><link href="https://simonwillison.net/2026/Sep/1/tarn-adams/" rel="alternate"/><published>2026-09-01T17:01:11+00:00</published><updated>2026-09-01T17:01:11+00:00</updated><id>https://simonwillison.net/2026/Sep/1/tarn-adams/</id><summary type="html">
-    &lt;blockquote cite="https://www.pcgamer.com/gaming-industry/dwarf-fortress-creator-says-the-industrys-in-shambles-over-ai-and-layoff-happy-ceos-everyone-i-know-their-bosses-are-slowly-getting-psychosis/"&gt;&lt;p&gt;They took the letters from me! I have to talk about &lt;em&gt;dwarf behavior&lt;/em&gt; now. I can't even talk about dwarf AI. It doesn't exist. It's &lt;em&gt;dwarf behavior&lt;/em&gt;, and they misbehave sometimes&lt;/p&gt;&lt;/blockquote&gt;
-&lt;p class="cite"&gt;&amp;mdash; &lt;a href="https://www.pcgamer.com/gaming-industry/dwarf-fortress-creator-says-the-industrys-in-shambles-over-ai-and-layoff-happy-ceos-everyone-i-know-their-bosses-are-slowly-getting-psychosis/"&gt;Tarn Adams&lt;/a&gt;, co-creator of Dwarf Fortress&lt;/p&gt;
-
-    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/game-design"&gt;game-design&lt;/a&gt;&lt;/p&gt;
-
-
-
-</summary><category term="ai"/><category term="game-design"/></entry></feed>
+</summary><category term="codex"/><category term="generative-ai"/><category term="openai"/><category term="ai"/><category term="llms"/><category term="openoffice"/><category term="open-source"/></entry></feed>
