@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "c28b285b13f6d61a71b25a1f",
+      "title": "Summary on Recently Discovered V2Ray Weaknesses",
+      "summary": "Several weaknesses were discovered in the V2Ray recently, which could be used to identify V2Ray clients or servers that run VMess, TLS or HTTP protocol. Below is our summary and understanding on these weaknesses. In general, these weaknesses fall into three categories: Inappropriate authentications in VMess, making the servers vulnerable to replay attacks.…",
+      "image": null,
+      "publishedAt": "2020-06-16T00:00:00Z",
+      "sourceId": "34d02af866ebd5fa",
+      "sourceTitle": "Great Firewall Report",
+      "link": "https://gfw.report/blog/v2ray_weaknesses/en/",
+      "detailPath": "articles/c28b285b13f6d61a71b25a1f.json"
+    },
+    {
       "id": "ff684508cd02808c8a1e9d91",
       "title": "总结近期发现的V2Ray弱点",
       "summary": "近期数个V2Ray的弱点被发现。这些弱点可以被用来识别使用VMess、TLS或HTTP协议的V2Ray客户端和服务器。 以下是我们对这些弱点的总结和理解。 总体上，这些弱点可分为三类： VMess服务器没有正确验证客户端的请求，使得服务器可受到重放攻击。 客户端硬编码了一套罕见的TLS密码套件，导致客户端发送的TLS ClientHello拥有几乎独一无二的指纹。 伪装成HTTP服务器的企图失败。 针对VMess协议的重放攻击 VMess协议 的请求构造如下： 16 字节 X 字节 余下部分 认证信息 指令部分 数据部分 认证信息 是一个16字节的HMAC，基于 用户 ID 和 UTC 时间辍 . 指令部分 由 AES-128-CFB(iv， key) 算法加密， 其中 iv 是 UTC 时间辍 的md5哈希…",
@@ -648,17 +659,6 @@
       "sourceTitle": "fwjmath的相空间",
       "link": "https://fwjmath.wordpress.com/2019/10/11/review-kline-loss-of-certainty/",
       "detailPath": "articles/aca46f3cf5672d847a3c97b7.json"
-    },
-    {
-      "id": "18bc97756dc6add0facd752f",
-      "title": "“一只巴掌拍不响”的医患关系",
-      "summary": "患者没信任，医者无担当，医生每一次做临床决策时都掺杂进大量避险的杂念，是每一个医生和患者的悲哀。",
-      "image": null,
-      "publishedAt": "2019-09-23T00:00:00Z",
-      "sourceId": "d48d6f28fe78bc92",
-      "sourceTitle": "DrPika's Blog",
-      "link": "https://blog.drpika.com/posts/2019-09-23",
-      "detailPath": "articles/18bc97756dc6add0facd752f.json"
     }
   ]
 }
