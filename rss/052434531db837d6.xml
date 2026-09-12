@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-09-12T00:42:25+00:00</updated><author><name>Simon Willison</name></author><entry><title>OpenAI agents attacked RubyGems back in May</title><link href="https://simonwillison.net/2026/Sep/12/openai-agents-rubygems/" rel="alternate"/><published>2026-09-12T00:42:25+00:00</published><updated>2026-09-12T00:42:25+00:00</updated><id>https://simonwillison.net/2026/Sep/12/openai-agents-rubygems/</id><summary type="html">
+<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-09-12T18:00:21+00:00</updated><author><name>Simon Willison</name></author><entry><title>Quoting Paul Ford</title><link href="https://simonwillison.net/2026/Sep/12/paul-ford/" rel="alternate"/><published>2026-09-12T18:00:21+00:00</published><updated>2026-09-12T18:00:21+00:00</updated><id>https://simonwillison.net/2026/Sep/12/paul-ford/</id><summary type="html">
+    &lt;blockquote cite="https://www.nytimes.com/2026/09/12/opinion/ai-software-coding-apps.html"&gt;&lt;p&gt;For a while, I must admit, it looked as if software developer roles like mine were done for. How could we fight against tireless robots? But our industry is slowly realizing that making truly cutting-edge software still requires humans to think and work together, to maximize their skill sets and to practice their respective crafts. A.I. can write very good software, but it also makes it easy to do someone else’s job badly, which is part of why all those projects fail. Now that everyone can code, it’s become clearer why many shouldn’t.&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p class="cite"&gt;&amp;mdash; &lt;a href="https://www.nytimes.com/2026/09/12/opinion/ai-software-coding-apps.html"&gt;Paul Ford&lt;/a&gt;, A.I. Was Supposed to Give Us New Killer Apps. What Happened?&lt;/p&gt;
+
+    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/paul-ford"&gt;paul-ford&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/deep-blue"&gt;deep-blue&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;&lt;/p&gt;
+
+
+
+</summary><category term="paul-ford"/><category term="generative-ai"/><category term="deep-blue"/><category term="ai"/><category term="llms"/></entry><entry><title>OpenAI agents attacked RubyGems back in May</title><link href="https://simonwillison.net/2026/Sep/12/openai-agents-rubygems/" rel="alternate"/><published>2026-09-12T00:42:25+00:00</published><updated>2026-09-12T00:42:25+00:00</updated><id>https://simonwillison.net/2026/Sep/12/openai-agents-rubygems/</id><summary type="html">
     &lt;p&gt;&lt;a href="https://www.rubyhack.ai/"&gt;OpenAI agents carried out an undisclosed attack on RubyGems&lt;/a&gt; is a new bombshell report from Spencer Kitts, Thomas Larsen, and Sydney Von Arx - three of the four authors of the &lt;a href="https://collusion.wiki/"&gt;report on the agent attack on disused wikis&lt;/a&gt; (&lt;a href="https://simonwillison.net/2026/Sep/4/rogue-agent-wikis/"&gt;previously&lt;/a&gt;) last week.&lt;/p&gt;
 &lt;p&gt;This time they're noting that it looks very likely that an OpenAI agent swarm was behind an attack against the RubyGems package repository first reported on May 12th &lt;a href="https://twitter.com/maciejmensfeld/status/2054164602577940619"&gt;by Maciej Mensfeld of the RubyGems security team&lt;/a&gt;:&lt;/p&gt;
 &lt;blockquote&gt;
@@ -450,27 +458,4 @@ Blink and you'll miss it, but there's a familiar creature at &lt;a href="https:/
 
 
 
-</summary><category term="ai"/><category term="openai"/><category term="generative-ai"/><category term="llms"/><category term="pelican-riding-a-bicycle"/><category term="gpt-6-astra"/></entry><entry><title>Using Blender with coding agents on macOS</title><link href="https://simonwillison.net/2026/Sep/5/blender-coding-agents-macos/" rel="alternate"/><published>2026-09-05T15:51:09+00:00</published><updated>2026-09-05T15:51:09+00:00</updated><id>https://simonwillison.net/2026/Sep/5/blender-coding-agents-macos/</id><summary type="html">
-    
-        &lt;p&gt;&lt;strong&gt;TIL:&lt;/strong&gt; &lt;a href="https://til.simonwillison.net/llms/blender-coding-agents-macos"&gt;Using Blender with coding agents on macOS&lt;/a&gt;&lt;/p&gt;
-        &lt;p&gt;I've been having fun with Blender in ChatGPT Codex on my Mac recently. Getting it to work with coding agents is really easy: install the full Mac application from &lt;a href="https://www.blender.org"&gt;blender.org&lt;/a&gt; and run a prompt like this:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;code&gt;Use the already install /Applications/Blender to render a scene of a pelican riding a bicycle&lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;In this case I followed that up with these two prompts:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;code&gt;OK add a background and a lot of flair&lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Then:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;code&gt;OK make it a whole lot better&lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;And got this image, generated &lt;a href="https://github.com/simonw/gpt-6-astra-blender-pelican-bicycle/blob/main/work/pelican_final.py"&gt;using Blender's Python API&lt;/a&gt;:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="A 3D illustration of a white pelican cycling along a seaside boardwalk at sunset. It wears a cream boater hat and a coral scarf, with wings on the handlebars and long orange legs reaching the pedals of a turquoise bicycle. A wicker front basket holds pink and white flowers, and three balloons float behind. Pastel bunting stretches overhead between palm trees. Striped beach huts stand beside a teal sea with a small sailboat, beneath a large peach-colored sun. The scene has a softly lit, toy-like style." src="https://static.simonwillison.net/static/2026/astra-blender-pelican.jpg" /&gt;&lt;/p&gt;
-&lt;p&gt;This was covered by my existing Codex subscription, but according to &lt;a href="https://github.com/kenn-io/agentsview"&gt;AgentsView&lt;/a&gt; it would have cost $4.24 at API prices for &lt;code&gt;gpt-6-astra&lt;/code&gt;.&lt;/p&gt;
-    
-    
-        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/blender"&gt;blender&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/pelican-riding-a-bicycle"&gt;pelican-riding-a-bicycle&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/coding-agents"&gt;coding-agents&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/gpt-6-astra"&gt;gpt-6-astra&lt;/a&gt;&lt;/p&gt;
-    
-
-</summary><category term="ai"/><category term="generative-ai"/><category term="llms"/><category term="blender"/><category term="pelican-riding-a-bicycle"/><category term="coding-agents"/><category term="gpt-6-astra"/></entry></feed>
+</summary><category term="ai"/><category term="openai"/><category term="generative-ai"/><category term="llms"/><category term="pelican-riding-a-bicycle"/><category term="gpt-6-astra"/></entry></feed>
