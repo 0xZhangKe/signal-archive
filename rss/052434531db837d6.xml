@@ -1,5 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-09-11T22:49:18+00:00</updated><author><name>Simon Willison</name></author><entry><title>So you want to use OpenRouter?</title><link href="https://simonwillison.net/2026/Sep/11/so-you-want-to-use-openrouter/" rel="alternate"/><published>2026-09-11T22:49:18+00:00</published><updated>2026-09-11T22:49:18+00:00</updated><id>https://simonwillison.net/2026/Sep/11/so-you-want-to-use-openrouter/</id><summary type="html">
+<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-09-12T00:42:25+00:00</updated><author><name>Simon Willison</name></author><entry><title>OpenAI agents attacked RubyGems back in May</title><link href="https://simonwillison.net/2026/Sep/12/openai-agents-rubygems/" rel="alternate"/><published>2026-09-12T00:42:25+00:00</published><updated>2026-09-12T00:42:25+00:00</updated><id>https://simonwillison.net/2026/Sep/12/openai-agents-rubygems/</id><summary type="html">
+    &lt;p&gt;&lt;a href="https://www.rubyhack.ai/"&gt;OpenAI agents carried out an undisclosed attack on RubyGems&lt;/a&gt; is a new bombshell report from Spencer Kitts, Thomas Larsen, and Sydney Von Arx - three of the four authors of the &lt;a href="https://collusion.wiki/"&gt;report on the agent attack on disused wikis&lt;/a&gt; (&lt;a href="https://simonwillison.net/2026/Sep/4/rogue-agent-wikis/"&gt;previously&lt;/a&gt;) last week.&lt;/p&gt;
+&lt;p&gt;This time they're noting that it looks very likely that an OpenAI agent swarm was behind an attack against the RubyGems package repository first reported on May 12th &lt;a href="https://twitter.com/maciejmensfeld/status/2054164602577940619"&gt;by Maciej Mensfeld of the RubyGems security team&lt;/a&gt;:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;We're dealing with a major malicious attack on @rubygems right now. Signups are paused for the time being.&lt;/p&gt;
+&lt;p&gt;Hundreds of packages involved - mostly targeting us, but some carrying exploits. The team has been on this for hours. More details to follow once we're through it.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Those packages turned out to carry some very suspicious patterns:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Many of them included "oai" in their name, or the author field, or the fake email address they provided.&lt;/li&gt;
+&lt;li&gt;The files they were accessing were similar in character to the files retrieved by the wiki agents, using similar tricks (r.jina.ai) - and OpenAI have confirmed the wiki agents were theirs.&lt;/li&gt;
+&lt;li&gt;The code in the packages appeared to be LLM-authored.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;I find point 2 the most convincing, given what we learned from the wiki attack when it was analyzed in September.&lt;/p&gt;
+&lt;p&gt;Many of the packages were exploiting the &lt;a href="https://rubydoc.info/"&gt;RubyDoc.info&lt;/a&gt; documentation build process to exfiltrate (public) data from UK government websites, presumably as part of an information gathering task similar to the research tasks processed by the wiki-exploiting agents. We know this because one agent helpfully left a comment:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;# malicious crawler/exfil for Southwark Jan 2026 docs via rubydoc.info worker&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;They also attempted to steal API keys via an exploit that &lt;a href="https://blog.rubygems.org/2026/07/22/security-advisory-legacy-api-key-leak.html"&gt;was patched over two months later&lt;/a&gt; - it's not clear if those attempts were successful.&lt;/p&gt;
+&lt;p&gt;The thing that bothers me most about this incident is that the authors report that OpenAI had not disclosed to RubyGems that they were responsible for the attack prior to now. If that's true there are two options:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;After the Hugging Face and Wiki attacks OpenAI were still unable to review their previous logs and determine that they had previously attacked RubyGems.&lt;/li&gt;
+&lt;li&gt;They knew about the attack on RubyGems and made the decision &lt;em&gt;not&lt;/em&gt; to reach out to the RubyGems team about it.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Both of these are bad!&lt;/p&gt;
+&lt;p&gt;Given this incident, the &lt;a href="https://simonwillison.net/2026/Jul/22/openai-cyberattack/"&gt;Hugging Face situation&lt;/a&gt;, and the Wiki attack, the obvious question right now is &lt;em&gt;how many more incidents&lt;/em&gt; like this are out there waiting to be discovered?&lt;/p&gt;
+    
+        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/ruby"&gt;ruby&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/security"&gt;security&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/openai"&gt;openai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/supply-chain"&gt;supply-chain&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai-ethics"&gt;ai-ethics&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/accidental-cyberattacks"&gt;accidental-cyberattacks&lt;/a&gt;&lt;/p&gt;
+    
+
+</summary><category term="ruby"/><category term="security"/><category term="ai"/><category term="openai"/><category term="generative-ai"/><category term="llms"/><category term="supply-chain"/><category term="ai-ethics"/><category term="accidental-cyberattacks"/></entry><entry><title>So you want to use OpenRouter?</title><link href="https://simonwillison.net/2026/Sep/11/so-you-want-to-use-openrouter/" rel="alternate"/><published>2026-09-11T22:49:18+00:00</published><updated>2026-09-11T22:49:18+00:00</updated><id>https://simonwillison.net/2026/Sep/11/so-you-want-to-use-openrouter/</id><summary type="html">
     
 &lt;p&gt;&lt;strong&gt;&lt;a href="https://mmoustafa.com/blog/so-you-want-to-use-openrouter/"&gt;So you want to use OpenRouter?&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 One of OpenRouter's selling points is that it "handles fallbacks automatically and picks the most cost-effective option for each request", so you can call a single API endpoint for a model and get routed to the best available backend provider.&lt;/p&gt;
@@ -445,21 +473,4 @@ Blink and you'll miss it, but there's a familiar creature at &lt;a href="https:/
         &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/blender"&gt;blender&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/pelican-riding-a-bicycle"&gt;pelican-riding-a-bicycle&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/coding-agents"&gt;coding-agents&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/gpt-6-astra"&gt;gpt-6-astra&lt;/a&gt;&lt;/p&gt;
     
 
-</summary><category term="ai"/><category term="generative-ai"/><category term="llms"/><category term="blender"/><category term="pelican-riding-a-bicycle"/><category term="coding-agents"/><category term="gpt-6-astra"/></entry><entry><title>The Pelican comparison grid for Astra is pretty interesting</title><link href="https://simonwillison.net/2026/Sep/4/astra-pelicans/" rel="alternate"/><published>2026-09-04T23:59:05+00:00</published><updated>2026-09-04T23:59:05+00:00</updated><id>https://simonwillison.net/2026/Sep/4/astra-pelicans/</id><summary type="html">
-    &lt;p&gt;I got access to GPT-6 Astra this afternoon, so naturally I used it to generate &lt;a href="https://simonwillison.net/tags/pelican-riding-a-bicycle/"&gt;SVGs of pelicans riding bicycles&lt;/a&gt; - at low, medium, high, xhigh and max reasoning levels (Astra doesn't support reasoning=none). Then I rendered those pelicans in &lt;a href="https://static.simonwillison.net/static/2026/gpt-6-and-5.6-pelicans.html"&gt;a comparison grid&lt;/a&gt; with GPT-5.6 Sol, Terra, and Luna, and beyond being fun the result was surprisingly useful.&lt;/p&gt;
-&lt;p&gt;&lt;img src="https://static.simonwillison.net/static/2026/astra-grid-3.webp" alt="Comparison grid showing gpt-6-astra, gpt-5.6-sol, gpt-5.6-terra, gpt-5.6-luna at 6 different reasoning levels with pelicans and token counts and prices for each one." style="max-width: 100%;" /&gt;
-See &lt;a href="https://static.simonwillison.net/static/2026/gpt-6-and-5.6-pelicans.html"&gt;the grid&lt;/a&gt; for full quality images. Here's &lt;a href="https://tools.simonwillison.net/markdown-svg-renderer?url=https%3A%2F%2Fgist.github.com%2Fsimonw%2Ff789d2784fc6c5b870cc80f0b7cd9d01"&gt;the transcript&lt;/a&gt; that created the GPT-6 Nova pelicans.&lt;/p&gt;
-&lt;p&gt;There are a few interesting things that stand out from this grid.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;The Astra pelicans are &lt;em&gt;much better&lt;/em&gt;. The very best GPT-5.6-Sol pelican (I liked xhigh better than max) is still pretty clearly a bunch of abstract shapes. Every single one of the Astra pelicans, from low to xhigh, looks better than that. The Astra max one is really good.&lt;/li&gt;
-&lt;li&gt;Astra below max still doesn't reliably get the pelican legs on both sides of the frame.&lt;/li&gt;
-&lt;li&gt;In terms of cost, Astra may be around twice the price of Sol ($10/million input, $50/million output, compared to $5/$30 for Sol), but it uses significantly less tokens at each of the levels, making the prices at the different levels closer than they might otherwise be.&lt;/li&gt;
-&lt;li&gt;Astra low produces a better pelican than ANY of the GPT-5.6 Sol models at any level, for 9.55 cents. Spending 10 cents on any other model gets a much worse result.&lt;/li&gt;
-&lt;li&gt;Look at the input token counts: Astra and Luna both used 16 input tokens, Sol and Terra used 26. That's interesting.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;I wonder if Astra and Luna are more related to each other than OpenAI let on?&lt;/p&gt;
-    
-        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/openai"&gt;openai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/pelican-riding-a-bicycle"&gt;pelican-riding-a-bicycle&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/gpt-6-astra"&gt;gpt-6-astra&lt;/a&gt;&lt;/p&gt;
-    
-
-</summary><category term="ai"/><category term="openai"/><category term="generative-ai"/><category term="llms"/><category term="pelican-riding-a-bicycle"/><category term="gpt-6-astra"/></entry></feed>
+</summary><category term="ai"/><category term="generative-ai"/><category term="llms"/><category term="blender"/><category term="pelican-riding-a-bicycle"/><category term="coding-agents"/><category term="gpt-6-astra"/></entry></feed>
