@@ -1,4 +1,67 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="https://commonsware.com/blog/atom.xml" rel="self" type="application/atom+xml" /><link href="https://commonsware.com/" rel="alternate" type="text/html" /><updated>2026-09-09T16:33:34-04:00</updated><id>https://commonsware.com/blog/atom.xml</id><title type="html">CommonsWare</title><subtitle>CommonsWare is your home for Android app development support, offering books, training, consulting, and other resources.</subtitle><author><name>CommonsWare</name><uri>https://commonsware.com</uri></author><entry><title type="html">9 September 2026 Artifact Wave</title><link href="https://commonsware.com/blog/2026/09/09/jetpack-artifact-wave.html" rel="alternate" type="text/html" title="9 September 2026 Artifact Wave" /><published>2026-09-09T16:32:28-04:00</published><updated>2026-09-09T16:32:28-04:00</updated><id>https://commonsware.com/blog/2026/09/09/jetpack-artifact-wave</id><content type="html" xml:base="https://commonsware.com/blog/2026/09/09/jetpack-artifact-wave.html"><![CDATA[<p>Jetpack Ink Rendering now supports iOS:</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="https://commonsware.com/blog/atom.xml" rel="self" type="application/atom+xml" /><link href="https://commonsware.com/" rel="alternate" type="text/html" /><updated>2026-09-11T18:55:35-04:00</updated><id>https://commonsware.com/blog/atom.xml</id><title type="html">CommonsWare</title><subtitle>CommonsWare is your home for Android app development support, offering books, training, consulting, and other resources.</subtitle><author><name>CommonsWare</name><uri>https://commonsware.com</uri></author><entry><title type="html">Documentation… In an AI World</title><link href="https://commonsware.com/blog/2026/09/11/documentation-ai-world.html" rel="alternate" type="text/html" title="Documentation… In an AI World" /><published>2026-09-11T18:55:25-04:00</published><updated>2026-09-11T18:55:25-04:00</updated><id>https://commonsware.com/blog/2026/09/11/documentation-ai-world</id><content type="html" xml:base="https://commonsware.com/blog/2026/09/11/documentation-ai-world.html"><![CDATA[<p>As I wrote about <a href="https://commonsware.com/blog/2026/08/22/sdks-ai-world.html">a few weeks ago</a>, I expect that AI-powered software development is here to stay. While I sincerely hope it will be able to move to local models, one way or another, LLMs are going to contribute to the work done by many, many developers… but not all developers.</p>
+
+<p>If you are making SDKs or other types of libraries, you will need to consider how natural and artificial developers will work with those libraries. A key aspect of that is documentation. So, what should documentation look like in an AI world?</p>
+
+<h3 id="your-documentation-is-markdown">Your Documentation Is… Markdown</h3>
+
+<p>One way or another, LLMs can process a lot of different types of input. I have been vibe-coding <a href="https://commonsware.com/blog/2026/08/08/from-wear-to-pebble.html">some Pebble Time 2 apps</a>, and LLMs’ ability to read the contents of screenshots is genuinely impressive.</p>
+
+<p>That said, especially if you want to help developers use local models or other less-intensive AI agents, format matters.</p>
+
+<ul>
+  <li>
+    <p>It will take more tokens for an LLM to process HTML generated from Markdown than the original Markdown, simply because that HTML will be more verbose</p>
+  </li>
+  <li>
+    <p>It will take many more tokens for an LLM to process a PDF, a Word document, or other complex binary formats… assuming that the LLM does not invoke some tool to convert those formats into something more text-based</p>
+  </li>
+  <li>
+    <p>Don’t get me started on having agents read stuff out of PowerPoint slides, videos, etc.</p>
+  </li>
+</ul>
+
+<p>You still can have videos, PDFs, and the like. However, that should be for human consumption, with agents having access to the same material in text-based formats.</p>
+
+<h3 id="your-documentation-is-bite-size">Your Documentation Is… Bite-Size</h3>
+
+<p>LLMs can wade through long documents. Among the many non-programming uses of LLMs is summarizing long documents, extracting data baked into long documents, and so on.</p>
+
+<p>But, again, if you want <em>efficient</em> use by LLMs, to reduce token usage and therefore make local models more realistic, forcing agents to read long documents is the wrong answer. Ideally, documentation is in smaller chunks, focused on specific topics, and readily identifiable (e.g., by a well-constructed table of contents, by cross-document links).</p>
+
+<p>This is not necessarily a bad structure for humans. But people are in better position to deal with longer works when that’s the most convenient distribution mechanism.</p>
+
+<p>To put it another way, <a href="https://commonsware.com/Android/">a 4,000+ page PDF</a> is a <em>dreadful</em> choice for LLMs. 200+ Markdown files (1 per chapter) would be much better. A few thousand Markdown files (1 per section) would better yet.</p>
+
+<h3 id="your-documentation-is-well-indexed">Your Documentation Is… Well-Indexed</h3>
+
+<p>Best is a few thousand Markdown files that can be searched.</p>
+
+<p>Right now, there is a cottage industry for tools to help LLMs navigate large projects, and much of that focuses on building up suitable searchable indices for project artifacts like source code.</p>
+
+<p>Rather than expect consumers of your library to wrangle your stuff into those sorts of tools, make sure that you offer some means of agents being able to search the documentation for topics of relevance. That might come “for free” from the CMS or however you publish your documentation. Perhaps you use third-party search services like <a href="https://www.algolia.com/">Algolia</a>, which powers
+<a href="https://jetc.dev/search">the search for my Jetpack Compose newsletter archives</a>. Perhaps you add a search plugin to your static site generator. There are tons of options, free and paid, for offering search. Pick one!</p>
+
+<p>The good news is that this can benefit ordinary developers, not just agents.</p>
+
+<h3 id="your-documentation-is-llm-shaped">Your Documentation Is… LLM-Shaped</h3>
+
+<p>That said, you are going to want to consider having some options that are specifically aimed at agents.</p>
+
+<p>For modest-sized documentation, consider offering it packaged as <a href="https://agentskills.io/specification">a downloadable skill</a> that can be plugged into most major coding agent harnesses. That just requires a top-level <code class="language-plaintext highlighter-rouge">SKILL.md</code> file, plus optional supplemental material, in a directory. Outside of some YAML front-matter for that <code class="language-plaintext highlighter-rouge">SKILL.md</code> file, the content is free-form and up to you to decide. Dealing with versioning is a bit of a challenge nowadays, often requiring plugins, but for documentation that does not change much, skills are still reasonable options.</p>
+
+<p>Or, consider offering <a href="https://en.wikipedia.org/wiki/Model_Context_Protocol">an MCP server</a>. The Model Context Protocol (MCP) is mostly thought of in terms of making it easier for agent harnesses to be extended with new tools. However, those tools can be ways of delivering documentation. For example, Alex Styl’s Composables UI library <a href="https://composables.com/ui/docs/mcp">packages documentation in MCP form</a>, with the CLI also serving double-duty as <a href="https://composables.com/ui/docs/cli">a way to bootstrap projects to use those libraries</a>. Since MCP servers can be hosted, you could create a simple MCP front-end to your searchable documentation and have it hosted in the same place that your documentation itself is. For example, I need to make a note to see if <a href="https://www.algolia.com/doc/guides/model-context-protocol/public-mcp">Algolia Public MCP</a> is something that I can use with those newsletter archives. 🤔</p>
+
+<h3 id="your-documentation-is-more-than-just-your-documentation">Your Documentation Is… More Than Just Your Documentation</h3>
+
+<p>What you and I might consider to be “documentation” is a subset of what agents might consider to be documentation.</p>
+
+<p>For example, consider <a href="https://kotlinlang.org/docs/gradle-binary-compatibility-validation.html">Kotlin’s binary compatibility validation</a>. You might use those ABI dumps to determine where you make backwards-incompatible changes. Agents can use those ABI dumps to rapidly absorb the shape of your API.</p>
+
+<p>Review your project artifacts and see which among them might be useful inputs for agents, even if they are not really something that ordinary developers might use as documentation directly, or even indirectly.</p>
+
+<hr />
+
+<p>Documentation is not an “either-or” proposition, where you can support people or agents but not both. A lot of making documentation agent-ready is in packaging, leveraging the same content that you create for human consumption but making it easier for agents to use cheaply.</p>]]></content><author><name>CommonsWare</name><uri>https://commonsware.com</uri></author><category term="blog" /><category term="sdk" /><summary type="html"><![CDATA[Let's continue to explore how we can succeed with libraries and SDKs at a time when coding agents will be consuming what we create, as will ordinary developers]]></summary></entry><entry><title type="html">9 September 2026 Artifact Wave</title><link href="https://commonsware.com/blog/2026/09/09/jetpack-artifact-wave.html" rel="alternate" type="text/html" title="9 September 2026 Artifact Wave" /><published>2026-09-09T16:32:28-04:00</published><updated>2026-09-09T16:32:28-04:00</updated><id>https://commonsware.com/blog/2026/09/09/jetpack-artifact-wave</id><content type="html" xml:base="https://commonsware.com/blog/2026/09/09/jetpack-artifact-wave.html"><![CDATA[<p>Jetpack Ink Rendering now supports iOS:</p>
 
 <ul>
   <li><code class="language-plaintext highlighter-rouge">androidx.ink:ink-rendering-iosarm64</code></li>
@@ -180,43 +243,4 @@ this wave, including stable <code class="language-plaintext highlighter-rouge">1
   <li><code class="language-plaintext highlighter-rouge">androidx.work:work-analytics</code></li>
 </ul>
 
-<p>However, otherwise, it was a fairly quiet release, with <a href="/androidx/2026-07-15">just shy of 200 artifact updates</a>. It must be summer! (Northern Hemisphere edition)</p>]]></content><author><name>CommonsWare</name><uri>https://commonsware.com</uri></author><category term="blog" /><category term="sdk" /><summary type="html"><![CDATA[Here is what we got as new Jetpack artifacts this week!]]></summary></entry><entry><title type="html">8 July 2026 Artifact Wave</title><link href="https://commonsware.com/blog/2026/07/08/jetpack-artifact-wave.html" rel="alternate" type="text/html" title="8 July 2026 Artifact Wave" /><published>2026-07-08T15:31:06-04:00</published><updated>2026-07-08T15:31:06-04:00</updated><id>https://commonsware.com/blog/2026/07/08/jetpack-artifact-wave</id><content type="html" xml:base="https://commonsware.com/blog/2026/07/08/jetpack-artifact-wave.html"><![CDATA[<p>Media3 is up to <code class="language-plaintext highlighter-rouge">1.11.0-beta01</code>:</p>
-
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">androidx.gradle:gradle-version-catalog:2026.07.00</code></li>
-  <li><code class="language-plaintext highlighter-rouge">androidx.gradle:gradle-version-catalog-alpha:2026.07.00</code></li>
-  <li><code class="language-plaintext highlighter-rouge">androidx.gradle:gradle-version-catalog-beta:2026.07.00</code></li>
-  <li><code class="language-plaintext highlighter-rouge">androidx.media3:media3-cast:1.11.0-beta01</code></li>
-  <li><code class="language-plaintext highlighter-rouge">androidx.media3:media3-common:1.11.0-beta01</code></li>
-  <li><code class="language-plaintext highlighter-rouge">androidx.media3:media3-common-ktx:1.11.0-beta01</code></li>
-  <li><code class="language-plaintext highlighter-rouge">androidx.media3:media3-container:1.11.0-beta01</code></li>
-  <li><code class="language-plaintext highlighter-rouge">androidx.media3:media3-database:1.11.0-beta01</code></li>
-  <li><code class="language-plaintext highlighter-rouge">androidx.media3:media3-datasource:1.11.0-beta01</code></li>
-  <li><code class="language-plaintext highlighter-rouge">androidx.media3:media3-datasource-cronet:1.11.0-beta01</code></li>
-  <li><code class="language-plaintext highlighter-rouge">androidx.media3:media3-datasource-ktor:1.11.0-beta01</code></li>
-  <li><code class="language-plaintext highlighter-rouge">androidx.media3:media3-datasource-okhttp:1.11.0-beta01</code></li>
-  <li><code class="language-plaintext highlighter-rouge">androidx.media3:media3-datasource-rtmp:1.11.0-beta01</code></li>
-  <li><code class="language-plaintext highlighter-rouge">androidx.media3:media3-decoder:1.11.0-beta01</code></li>
-  <li><code class="language-plaintext highlighter-rouge">androidx.media3:media3-effect:1.11.0-beta01</code></li>
-  <li><code class="language-plaintext highlighter-rouge">androidx.media3:media3-effect-lottie:1.11.0-beta01</code></li>
-  <li><code class="language-plaintext highlighter-rouge">androidx.media3:media3-exoplayer:1.11.0-beta01</code></li>
-  <li><code class="language-plaintext highlighter-rouge">androidx.media3:media3-exoplayer-dash:1.11.0-beta01</code></li>
-  <li><code class="language-plaintext highlighter-rouge">androidx.media3:media3-exoplayer-hls:1.11.0-beta01</code></li>
-  <li><code class="language-plaintext highlighter-rouge">androidx.media3:media3-exoplayer-ima:1.11.0-beta01</code></li>
-  <li><code class="language-plaintext highlighter-rouge">androidx.media3:media3-exoplayer-midi:1.11.0-beta01</code></li>
-  <li><code class="language-plaintext highlighter-rouge">androidx.media3:media3-exoplayer-rtsp:1.11.0-beta01</code></li>
-  <li><code class="language-plaintext highlighter-rouge">androidx.media3:media3-exoplayer-smoothstreaming:1.11.0-beta01</code></li>
-  <li><code class="language-plaintext highlighter-rouge">androidx.media3:media3-exoplayer-workmanager:1.11.0-beta01</code></li>
-  <li><code class="language-plaintext highlighter-rouge">androidx.media3:media3-extractor:1.11.0-beta01</code></li>
-  <li><code class="language-plaintext highlighter-rouge">androidx.media3:media3-inspector:1.11.0-beta01</code></li>
-  <li><code class="language-plaintext highlighter-rouge">androidx.media3:media3-inspector-frame:1.11.0-beta01</code></li>
-  <li><code class="language-plaintext highlighter-rouge">androidx.media3:media3-muxer:1.11.0-beta01</code></li>
-  <li><code class="language-plaintext highlighter-rouge">androidx.media3:media3-session:1.11.0-beta01</code></li>
-  <li><code class="language-plaintext highlighter-rouge">androidx.media3:media3-test-utils:1.11.0-beta01</code></li>
-  <li><code class="language-plaintext highlighter-rouge">androidx.media3:media3-test-utils-robolectric:1.11.0-beta01</code></li>
-  <li><code class="language-plaintext highlighter-rouge">androidx.media3:media3-transformer:1.11.0-beta01</code></li>
-  <li><code class="language-plaintext highlighter-rouge">androidx.media3:media3-ui:1.11.0-beta01</code></li>
-  <li><code class="language-plaintext highlighter-rouge">androidx.media3:media3-ui-compose:1.11.0-beta01</code></li>
-  <li><code class="language-plaintext highlighter-rouge">androidx.media3:media3-ui-compose-material3:1.11.0-beta01</code></li>
-  <li><code class="language-plaintext highlighter-rouge">androidx.media3:media3-ui-leanback:1.11.0-beta01</code></li>
-</ul>]]></content><author><name>CommonsWare</name><uri>https://commonsware.com</uri></author><category term="blog" /><category term="sdk" /><summary type="html"><![CDATA[Here is what we got as new Jetpack artifacts this week!]]></summary></entry></feed>
+<p>However, otherwise, it was a fairly quiet release, with <a href="/androidx/2026-07-15">just shy of 200 artifact updates</a>. It must be summer! (Northern Hemisphere edition)</p>]]></content><author><name>CommonsWare</name><uri>https://commonsware.com</uri></author><category term="blog" /><category term="sdk" /><summary type="html"><![CDATA[Here is what we got as new Jetpack artifacts this week!]]></summary></entry></feed>
