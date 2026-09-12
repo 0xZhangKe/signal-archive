@@ -1,0 +1,11 @@
+{
+  "id": "6d354d4acf0cf26f4f3da8cb",
+  "title": "在網頁內嵌 PDF 檔案",
+  "summary": "與其下載安裝那些肥大的第三方套件，不如善用現今各大瀏覽器內建的 PDF 檔案瀏覽功能，直接使用簡單的幾行 HTML 程式碼就搞定啦！ 以下程式碼修改自 這個發佈於 Stack Overflow 問答網站上的回答 。 1 < object data = \"myfile.pdf\" type = \"application/pdf\" width = \"100%\" height = \"100%\" > 2 < p >< a href = \"myfile.pdf\" >PDF file link</ a ></ p > 3 </ object > 將 myfile.pdf 改成你要內嵌的 PDF 檔的 絕對或相對路徑 。 可自行調整內嵌的 width （寬度）與 height （高度）數值設定。建議將 width 維持在 1…",
+  "content": "<p>與其下載安裝那些肥大的第三方套件，不如善用現今各大瀏覽器內建的 PDF 檔案瀏覽功能，直接使用簡單的幾行 HTML 程式碼就搞定啦！</p>\n<p>以下程式碼修改自<a href=\"https://stackoverflow.com/a/14081168\" target=\"_blank\" rel=\"noopener noreferrer\">這個發佈於 Stack Overflow 問答網站上的回答</a>。</p>\n<div><pre><code><span><span>1</span><span>&lt;<span>object</span> <span>data</span><span>=</span><span>&quot;myfile.pdf&quot;</span> <span>type</span><span>=</span><span>&quot;application/pdf&quot;</span> <span>width</span><span>=</span><span>&quot;100%&quot;</span> <span>height</span><span>=</span><span>&quot;100%&quot;</span>&gt;\n</span></span><span><span>2</span><span>  &lt;<span>p</span>&gt;&lt;<span>a</span> <span>href</span><span>=</span><span>&quot;myfile.pdf&quot;</span>&gt;PDF file link&lt;/<span>a</span>&gt;&lt;/<span>p</span>&gt;\n</span></span><span><span>3</span><span>&lt;/<span>object</span>&gt;\n</span></span></code></pre></div><ul>\n<li>將 <code>myfile.pdf</code> 改成你要內嵌的 PDF 檔的<a href=\"https://hackmd.io/@gvN1gyIaRJGGKTlSt_GV8g/Sy2VNKxOw\" target=\"_blank\" rel=\"noopener noreferrer\">絕對或相對路徑</a>。</li>\n<li>可自行調整內嵌的 <code>width</code>（寬度）與 <code>height</code>（高度）數值設定。建議將 <code>width</code> 維持在 <code>100%</code>，而 <code>height</code> 改成自己想要的 pixel 值（例如 <code>500px</code>）。</li>\n</ul>\n<p>關於 <code>&lt;object&gt;</code> 這個 HTML 元素，請見這個<a href=\"https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/object\" target=\"_blank\" rel=\"noopener noreferrer\">發佈於 MDN Web Docs 的說明文件</a>。</p>\n<p>至於以上 HTML 程式碼的最終呈現效果，請見<a href=\"https://microblog.ttheng.com/yamaha-piano-sheet-converter-beta/\" target=\"_blank\" rel=\"noopener noreferrer\">此文章</a>。</p>",
+  "image": null,
+  "publishedAt": "2026-09-12T11:47:00Z",
+  "sourceId": "a93d4f2e98fafcbe",
+  "sourceTitle": "All posts | 所有貼文 on ttheng's microblog. | 侃侃而隨想極短文。",
+  "link": "https://microblog.ttheng.com/embedding-pdfs-in-webpages/"
+}

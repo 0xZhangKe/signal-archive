@@ -1,6 +1,28 @@
 {
   "items": [
     {
+      "id": "7c63a69fef786830b65fd0b3",
+      "title": "acme.sh 从Webroot改为 NameSilo DNS 申请通配符证书踩坑记",
+      "summary": "我这边虽然用的是BT面板，但其在某次升级之后自动申请SSL证书功能就不好用了，所以一直用的是crontab + acme.sh自行更新证书。 当时的教程在这里： https://itlanyan.com/use-acme-sh-get-free-cert/ 前情提要 不说清楚我之前干了什么，就说不清楚我改了什么。其实都是照着上面的教程搞的，只不过沿用了宝塔的文件结构，相当简单。 安装 curl https://get.acme.sh | sh acme.sh安装成功后，会自动创建一个cron任务 运行`crontab -l`能够进行查看，`crontab -e`能编辑。 41 0 * * * \"/root/.acme.sh\"/acme.sh --cron --home \"/root/.acme.sh\" > /…",
+      "image": null,
+      "publishedAt": "2026-08-21T04:18:43Z",
+      "sourceId": "474e724b69cd3e76",
+      "sourceTitle": "破襪子",
+      "link": "https://pewae.com/2026/08/migrating-acme-sh-from-webroot-validation-to-namesilo-dns-for-lets-encrypt-wildcard-certificates.html",
+      "detailPath": "articles/7c63a69fef786830b65fd0b3.json"
+    },
+    {
+      "id": "4f7c4b2ecf08c24dfa68ebd0",
+      "title": "SmartPerfetto 2026.07.18-08.21 五周更新复盘：从 v1.2.0 到 v1.7.0",
+      "summary": "上一篇更新停在 2026 年 7 月 17 日的 v1.1.1。当时 SmartPerfetto 已经有双 Trace 工作台、Quick Mode、私有分析上下文、统一 Agent runtime，以及 Camera、Heap、GPU 等专项分析能力。 从 7 月 18 日到 8 月 21 日，仓库又向前走了五周，版本来到 v1.7.0。这一轮继续增加功能，也把更多精力放在知识来源、分发质量、权限隔离、结果完整性和可回滚改进上。 SmartPerfetto 正在从“能完成一次分析”走向“能在更多环境里稳定、可追溯地完成分析”。 本文以公开发布的 v1.7.0 代码为准，回顾 v1.1.1 之后加入的主要能力。 项目与上篇文章： SmartPerfetto： https://github.com/Gracke…",
+      "image": null,
+      "publishedAt": "2026-08-21T04:00:00Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2026/08/21/SmartPerfetto-Five-Week-Update/",
+      "detailPath": "articles/4f7c4b2ecf08c24dfa68ebd0.json"
+    },
+    {
       "id": "d1d3e151b345b14347f57560",
       "title": "破圈的风险",
       "summary": "如今的互联网基本上属于畜牧业，每个 App 圈养一群用户，App 之间切断通路，老死不相往来。于是，微博老登、虎扑直男、小红书群芳、朋友圈之交和直播间职业用爱发电家之间，人群特征差异很大，行为习惯差异很大，每日接触的信息差异也很大，圈圈不同。 以前说一个人在网上「火」了，意思是全平台都火。现在说一个人网上火了，是网红了，那很可能火在一个 App 里，红在一个 App里的一小群用户之间，可以称之为「分众火」。很自然的，在追逐流量的今天，「破圈」就成为了许多人追求的目标，要的就是大火全火阳光普照火。 然后，破圈就成为了翻车前奏。 圈养的结果，是在圈里培养出一批脸谱类似的用户。在一个圈里成功，只能说明适合这个圈里同类用户的口味。一旦破圈，就会进入陌生人群的视野，他们看待同一个人，同一件事，同一句话，可能会有完全不一…",
@@ -637,28 +659,6 @@
       "sourceTitle": "折腾人生",
       "link": "https://z.arlmy.me/posts/BBBPandINSW/INSW-ko/INSW_449/",
       "detailPath": "articles/3bbbd03e166ced3207ee1fe7.json"
-    },
-    {
-      "id": "ecded528d72133563b28f793",
-      "title": "愛情也有現實面",
-      "summary": "🇰🇷 사랑에도 현실적인 면이 있다 (넘기지 마세요~ 한국어 버전은 아래에 있어요~ ) 前幾天我在聽 DAY6的놓아 놓아 놓아 ，看著歌詞就想起很久很久以前的我 大概是學生時代吧？ 每次聽到那種兩個人明明很相愛、卻只能分手、然後彼此都很心痛的歌詞 我其實都覺得好奇怪，無法理解，明明兩個人都還很相愛，那幹嘛還分手？弄得那麼悲傷幹嘛？ 我當時的腦袋思考極限大概就到這裡 可是長大後也許是看到 電影 、 韓劇 、甚至是別人的故事 才明白原來彼此的愛情再怎麼深，有時候仍敵不過一些現實層面的事情 也許是父母反對 (我想起了 周杰倫聽爸爸的話 這首歌的MV劇情） 也許是在某些價值觀真的彼此無法讓步 (比如說一個人想生小孩、一個人不要） 可以舉例的情況有很多 太多現實層面的東西 就算相愛，也已經走不下去了 不過很多…",
-      "image": null,
-      "publishedAt": "2026-08-16T08:43:00Z",
-      "sourceId": "51aefe52efef4bf4",
-      "sourceTitle": "一起和 Yoon 聊心事",
-      "link": "https://yoon.club/1964/",
-      "detailPath": "articles/ecded528d72133563b28f793.json"
-    },
-    {
-      "id": "a9a5d7f6c872d5fd62546ff3",
-      "title": "git fetch 实现断点续传",
-      "summary": "git fetch origin main --depth=1 一次只下一个 pack，包含所有缺失对象，国内这网络你懂的，断开就废了，然后从头下载，往往又出事； 老外不懂国内网络条件这么艰苦，只能自己让AI改造。结果： https://github.com/est/snippets/tree/master/git-fr 步骤： git fetch --filter=blob:none --depth=1 —— 只拉 commit+tree，这个速度很快，只有KB级别的传输 用 rev-list --objects --missing=print 算缺失集合，500 个 blob 一批回填 每轮重算缺失、只补缺的。 踩过的坑 git fetch origin <blobsha> 每次都会打印 fatal: b…",
-      "image": null,
-      "publishedAt": "2026-08-16T06:06:00Z",
-      "sourceId": "a864c53722a17b19",
-      "sourceTitle": "est's blog",
-      "link": "https://blog.est.im/2026/stdout-33",
-      "detailPath": "articles/a9a5d7f6c872d5fd62546ff3.json"
     }
   ]
 }

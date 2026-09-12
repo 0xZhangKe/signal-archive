@@ -1,6 +1,28 @@
 {
   "items": [
     {
+      "id": "475d66f86b557aa1d5f6f98b",
+      "title": "Android Systrace 基础知识 - Input 解读",
+      "summary": "本文是 Systrace 系列文章的第六篇，主要是对 Systrace 中的 Input 进行简单介绍，介绍其 Input 的流程； Systrace 中 Input 信息的体现 ，以及如何结合 Input 信息，分析与 Input 相关的问题 本系列的目的是通过 Systrace 这个工具，从另外一个角度来看待 Android 系统整体的运行，同时也从另外一个角度来对 Framework 进行学习。也许你看了很多讲 Framework 的文章，但是总是记不住代码，或者不清楚其运行的流程，也许从 Systrace 这个图形化的角度，你可以理解的更深入一些。",
+      "image": null,
+      "publishedAt": "2019-11-04T01:38:29Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2019/11/04/Android-Systrace-Input/",
+      "detailPath": "articles/475d66f86b557aa1d5f6f98b.json"
+    },
+    {
+      "id": "6712b95c4d80078246fb7769",
+      "title": "开源节流（1）：消费返现的Apps",
+      "summary": "消费返现还有一种方式是通过网站或者手机app来实现。其本质是将你的消费和这些应用关联起来。天下沒有白吃的午餐。我认为提供消费返现的目的主要有两方面：一是可以促进用户在特定商家进行消费（因为有返现）；另一个是可以收集用户的消费习惯进而进行市场调研和分析。因此它们对于用户的隐私或多或少都会有涉及。大家根据自身的情况来选择使用。 如果你搜索一下“返现”或者“rewards apps”，可以发现这样的应用非常之多。有些已经倒闭，有些则依然蒸蒸日上。我选取了一些主流的应用进行尝试。 收据扫描 # 收集数据最方便的方式就是让用户自己提交。而报酬就是所提供的消费返现。这类应用会让用户通过给消费收据拍照来提交消费记录。因此大家要记得保留好消费收据。这也是用户能最主动控制隐私暴露的方式——你可以完全选择提交或不提交哪些收据。…",
+      "image": null,
+      "publishedAt": "2019-10-29T00:00:00Z",
+      "sourceId": "dc53cf887984ae1c",
+      "sourceTitle": "四喜丸子",
+      "link": "https://fourhappylions.com/posts/money-rewards-apps/",
+      "detailPath": "articles/6712b95c4d80078246fb7769.json"
+    },
+    {
       "id": "a7861fad96495ae4c7579601",
       "title": "Android 中的“后台无效动画“行为分析",
       "summary": "当一个 Android App 退到后台之后，只要他没有被杀死，那么他做什么事情大家都不要奇怪，因为这就是 Android。但是当用户知道一个你一个 App 退到后台之后还在持续做无效的动画，而这个动画完全是无意义的，而且用户还不知道他在做动画，消耗用户那可怜的电量的时候，轻则被多任务杀掉，禁止后台运行，重则直接卸载。 一般的开发者很难发现这个问题，但是如果你经常使用 Systrace ，多开几十个应用然后退回到桌面，左右滑动抓取 Systrace ，就可以很容易发现，总有那么几个后台的应用，还在频繁地做无效的动画。 这里说的后台做动画，指的是由于某种原因，应用在退到后台之后，用户看不到任何这个 App 界面的时候，他仍然在后台不断地更新，耗费 CPU。引起这个问题的原因可能有好多个，毕竟 往 Choreog…",
@@ -637,28 +659,6 @@
       "sourceTitle": "Android Performance",
       "link": "https://androidperformance.com/2018/11/01/android-system-develop-0/",
       "detailPath": "articles/49f3b1ff95ba6c2746c82b2f.json"
-    },
-    {
-      "id": "7eeec04db6f387b982b4722e",
-      "title": "陆奇：除了好代码，工程师怎样才算优秀？",
-      "summary": "转自：百度Family，内容为陆奇 2017 年 7 月 的百度内部分享，非常值得技术人员学习和思考 个人非常崇拜",
-      "image": null,
-      "publishedAt": "2018-10-25T02:37:34Z",
-      "sourceId": "1aa1837ca33d8d55",
-      "sourceTitle": "Android Performance",
-      "link": "https://androidperformance.com/2018/10/25/How-do-engineers-count-well/",
-      "detailPath": "articles/7eeec04db6f387b982b4722e.json"
-    },
-    {
-      "id": "dad4a95ef5c95499b0fa6ff0",
-      "title": "週年紀念日",
-      "summary": "大學術科考試的樂理考卷，每年都考一樣喔！",
-      "image": "https://wiwi.blog/assets/images/anniversary-e081793eaf4196ee44c1d2d434b5fc47.jpg",
-      "publishedAt": "2018-10-13T00:00:00Z",
-      "sourceId": "7f36c3da1e6b5c71",
-      "sourceTitle": "Wiwi.Blog Blog",
-      "link": "https://wiwi.blog/blog/anniversary-exam",
-      "detailPath": "articles/dad4a95ef5c95499b0fa6ff0.json"
     }
   ]
 }
