@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "12309a0311ef7d2dccb9d139",
+      "title": "I'll shake your hand: what happens after DNS poisoning",
+      "summary": "A typical DNS poisoning event consists of three steps: A client sends a DNS query to a DNS server, asking for the IP address of a sensitive domain; the GFW observes the query and injects a forged DNS response, telling the client a wrong IP address; the client receives the forged response, and attempts to connect to the wrong IP address. But what will happen…",
+      "image": null,
+      "publishedAt": "2020-11-13T00:00:00Z",
+      "sourceId": "34d02af866ebd5fa",
+      "sourceTitle": "Great Firewall Report",
+      "link": "https://gfw.report/blog/injected_ips/en/",
+      "detailPath": "articles/12309a0311ef7d2dccb9d139.json"
+    },
+    {
       "id": "ef0f3314944bd5f67292fd30",
       "title": "握手吧：DNS 污染之后会发生什么",
       "summary": "一次典型的 DNS 污染事件包含三个步骤： 客户端向 DNS 服务器发送 DNS 查询，请求某个敏感域名的 IP 地址； GFW 观察到该查询并注入伪造的 DNS 响应，向客户端提供一个错误的 IP 地址； 客户端收到伪造的响应，并尝试连接这个错误的 IP 地址。 但在第三步之后会发生什么？ 人们通常认为，发往这些错误 IP 地址的数据包会被丢弃或经由空路由处理； 而在本报告中，我们记录了一个有趣的现象： GFW 会冒充部分被注入的 IP 地址， 接受（或拒绝）来自客户端的 TCP 握手。 这种行为会诱使受审查的客户端发送数据； 如果握手未被接受，这些数据原本绝不会被发送。 审查者由此可以进一步了解其审查措施的效果以及客户端的意图。 我们刻画了这一行为，并对审查设备进行了指纹分析。 我们的发现表明，该审查设备…",
@@ -648,17 +659,6 @@
       "sourceTitle": "TaurusXin 的独立博客",
       "link": "https://www.taurusxin.com/blockchain-01/",
       "detailPath": "articles/be3a6d783d9faf6f3288a7a4.json"
-    },
-    {
-      "id": "4ebc786dae6d7950f5e10dcc",
-      "title": "apt upgrade acdemic",
-      "summary": "似乎很久没有更新博客了，最近学业真是的太忙了，忙着申请学校，忙着去找老师写介绍信，忙着开始新的生活。 很久没更新的原因，大概是脑子里的想法太多，一拍即合的点子很少，总觉得自己有学不完的技术栈，看不完的从入门到入土教程书。 昨天更新了一条朋友圈。 最近发生了很多 表妹高考的结束，即是人生新一步的起点，我们约好一起出发旅行，在上大学之前放松一次 Rhyland Tech 也逐渐步入正轨，开始规划公司的未来 还有最好朋友的生日，已经欠了2次了 最重要的就是，我即将进行雅思首考，在9月5号，杭州 … 除此之外，还有不少的任务 Node.js 全栈开发 Leetcode 新家装修 … 大概就是这样。 英国 说一下将来一年的学业规划。 考雅思是为了出国学习研究生课程，综合目前的形势来说，排除COVID-19的影响，明年出…",
-      "image": "https://cdn.taurusxin.com/old-cdn/usr/uploads/2020/07/3181345122.png",
-      "publishedAt": "2020-07-11T20:34:00Z",
-      "sourceId": "3220115c042340a7",
-      "sourceTitle": "TaurusXin 的独立博客",
-      "link": "https://www.taurusxin.com/acdemic-upgrade/",
-      "detailPath": "articles/4ebc786dae6d7950f5e10dcc.json"
     }
   ]
 }
