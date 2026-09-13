@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "b28a686623f61364ac060d1a",
+      "title": "读《乡土中国》",
+      "summary": "有段时间没读书了，趁晚上闲暇之余，便打开了这本盛名已久的《乡土中国》。 至于为何选择这本书，作为一个从小在农村长大，又喜欢在土里打滚的“野孩子”，那自然是对“乡土”这两个字有种天然的感情和兴趣。 这本书出版于上世纪四十年代，通过中西方对比，深度剖析了当时中国乡土社会的结构及其特征。 乡土社会的一个特点是生活安定，靠泥土谋生的人不能经常移动。人在一个地方出生，就要在这个地方生长下去，守着自己的一亩三分地，直至死去。 在乡土社会中，一个村就是一个社群，社群内的人们互帮互助，信奉孔孟之礼，并通过礼治来管理群体，讨厌一切具有冲突和不确定的因素。 作为农业大国，中国经历了漫长的农耕文明。现代的每个人往前推三代基本都经历过乡土社会。所以即便现在国家经历了几十年的高速发展，人们的思想、意识、价值观也发生了巨大变化，但一些扎…",
+      "image": null,
+      "publishedAt": "2024-07-03T16:00:00Z",
+      "sourceId": "511a941174e52a33",
+      "sourceTitle": "蒙奇日记",
+      "link": "https://luffy.cc/a/xiang-tu-zhong-guo",
+      "detailPath": "articles/b28a686623f61364ac060d1a.json"
+    },
+    {
       "id": "3e82e5e7fef201bea7d7f700",
       "title": "Gumball 現場舞台劇",
       "summary": "https://thehoneycombers.com/singapore/event/amazing-world-gumball-takeover-live-show/ 《阿甘妙世界》曾經在新加坡舉辦過 現場舞台劇 ？！我之前都沒聽說過。",
@@ -648,17 +659,6 @@
       "sourceTitle": "蒙奇日记",
       "link": "https://luffy.cc/a/my-mom",
       "detailPath": "articles/6a55af98761f203826801ce5.json"
-    },
-    {
-      "id": "ff923f9e559d02876a7fda0e",
-      "title": "[Docker容器安全3]Docker文件存储 & 挂载宿主机 procfs 容器逃逸",
-      "summary": "Docker文件存储背景知识 Docker 镜像 Docker 镜像是一个由多个层（layers）组成的只读模板。这些层堆叠在一起，构成了一个完整的文件系统，镜像可以用来创建容器。 层（Layer） 每个层通常对应于 Dockerfile 中的一条指令（如 FROM、COPY、RUN 等）。这些层是只读的，并且通过叠加技术（union file system）组合在一起，形成了镜像的最终内容。 层的堆叠和镜像 只读层：这些层是只读的，并且是镜像的一部分。每个层包含了与前一层的差异部分。这些层共同构成了镜像的文件系统。 可写层：当容器启动时，会在镜像的所有只读层之上添加一个新的可写层，这一层是容器专有的，存储运行容器时的所有变更。 每个容器都有其自己的可写容器层，并且所有更改都存储在该容器层中，所以多个容器可以…",
-      "image": "https://skyblu3519.github.io/post-images/1715441777002.png",
-      "publishedAt": "2024-05-11T15:35:31Z",
-      "sourceId": "4f5bf353ca5bd538",
-      "sourceTitle": "skkyblu3",
-      "link": "https://skyblu3519.github.io/post/docker-rong-qi-an-quan-3docker-wen-jian-cun-chu-and-gua-zai-su-zhu-ji-procfs-rong-qi-tao-yi/",
-      "detailPath": "articles/ff923f9e559d02876a7fda0e.json"
     }
   ]
 }
