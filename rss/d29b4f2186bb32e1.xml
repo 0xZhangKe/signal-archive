@@ -12,7 +12,7 @@
 	<atom:link href="https://v1sta.xyz/feed/" rel="self" type="application/rss+xml" />
 	<link>https://v1sta.xyz</link>
 	<description>远景的幻想空间</description>
-	<lastBuildDate>Sun, 13 Sep 2026 16:52:40 +0000</lastBuildDate>
+	<lastBuildDate>Tue, 15 Sep 2026 11:26:30 +0000</lastBuildDate>
 	<language>zh-Hans</language>
 	<sy:updatePeriod>
 	hourly	</sy:updatePeriod>
@@ -32,6 +32,196 @@
 <atom:link rel="hub" href="https://websubhub.com/hub"/>
 <atom:link rel="self" href="https://v1sta.xyz/feed/"/>
 	<item>
+		<title>随想：基于USB启动盘启动SD卡上的LINUX系统</title>
+		<link>https://v1sta.xyz/tech/%e9%9a%8f%e6%83%b3%ef%bc%9a%e5%9f%ba%e4%ba%8eusb%e5%90%af%e5%8a%a8%e7%9b%98%e5%90%af%e5%8a%a8sd%e5%8d%a1%e4%b8%8a%e7%9a%84linux%e7%b3%bb%e7%bb%9f/</link>
+					<comments>https://v1sta.xyz/tech/%e9%9a%8f%e6%83%b3%ef%bc%9a%e5%9f%ba%e4%ba%8eusb%e5%90%af%e5%8a%a8%e7%9b%98%e5%90%af%e5%8a%a8sd%e5%8d%a1%e4%b8%8a%e7%9a%84linux%e7%b3%bb%e7%bb%9f/#respond</comments>
+		
+		<dc:creator><![CDATA[域主 V1STA]]></dc:creator>
+		<pubDate>Tue, 15 Sep 2026 11:07:45 +0000</pubDate>
+				<category><![CDATA[技术]]></category>
+		<category><![CDATA[随想]]></category>
+		<category><![CDATA[Linux]]></category>
+		<guid isPermaLink="false">https://v1sta.xyz/?p=7895</guid>
+
+					<description><![CDATA[在笔记本电脑上如果不想动内置硬盘还要用本机Linux系统，那么除了直接安装到USB存储设备（U盘、移动固态）之 &#8230; <a href="https://v1sta.xyz/tech/%e9%9a%8f%e6%83%b3%ef%bc%9a%e5%9f%ba%e4%ba%8eusb%e5%90%af%e5%8a%a8%e7%9b%98%e5%90%af%e5%8a%a8sd%e5%8d%a1%e4%b8%8a%e7%9a%84linux%e7%b3%bb%e7%bb%9f/" class="more-link">继续阅读<span class="screen-reader-text">随想：基于USB启动盘启动SD卡上的LINUX系统</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[
+<p class="wp-block-paragraph">在笔记本电脑上如果不想动内置硬盘还要用本机Linux系统，那么除了直接安装到USB存储设备（U盘、移动固态）之外，SD卡槽（包括MicroSD/TF）同样是一个不错的选择。但是除了像戴尔或一些山寨机会用USB协议的读卡器，绝大多数的笔记本SD读卡器使用的是Realtek的PCIe协议，或者即便是USB也没有提供启动项。<br>但大多数还是PCIe的读卡器，不给提供引导启动。尤其是新式ThinkPad和惠普的笔记本。一些平板仅有一个Type C的接口，也不方便随时挂移动硬盘。</p>
+
+
+
+<p class="wp-block-paragraph">以前折腾黑苹果（即Hackintosh）的时候用过Clover和OpenCore引导盘，当然还有rEFInd用来美化。这些三方引导器除了装黑苹果之外，也可以给古早老电脑注入NVMe启动的方式。黑群晖（Xpenlogy）的引导盘也是类似的原理，无论是黑群晖还是黑苹果。引导盘在启动之后基本上就可以拔下来，早期不愿意折腾内置硬盘EFI分区或者容易被Windows Update搞炸的玩家、以及想方便备份管理kext环境的，也有很多用U盘当启动盘的实际需求。这其实很合理。</p>
+
+
+
+<p class="wp-block-paragraph">某种程度上可以理解为假面骑士W的那个地球驱动器，插入不同的记忆体（Cyclone的系统盘+Joker的启动盘）就可以改变配置文件。但按照这个逻辑……其实更像Fang+Joker啊。<br>（其实DOS时期的Windows多配置也是这么干的，只是存在内置硬盘里）</p>
+
+
+
+<p class="wp-block-paragraph">那么按照这个思路可以用酷豆那种做一个启动钥匙，随时挂在钥匙串上。虽然这比喻跟安全启动或其他加密技术无关，不过似乎的确可以搭配YUBICO那样的安全密钥使用。</p>
+
+
+
+<p class="wp-block-paragraph">如果再进一步，还可以运行在RAMDISK里，也就是相当于WinPE或游戏机的逻辑：系统盘是不可变的固件，本质上是游戏卡带；再再进一步，甚至可以把系统盘分离出来，直接装在像Ventoy这样的镜像里，就像光驱的游戏机读盘。而/home等数据区存储在SD卡里。就像早年的PDA一样。<br>似乎有些企业级移动瘦客户机也是这样的架构，没有真正意义上的内置硬盘。<br>理论上内置硬盘直接换成傲腾M10 16G给SD卡做缓存，但对于精简置备的Linux发行版没有实际意义，只是徒增功耗。</p>
+
+
+
+<p class="wp-block-paragraph">用常识想想傲腾M10装笔记本里当缓存只能是整活。我觉得这个前提可能是忽然脑袋一冲买了个准系统的ThinkPad但是买不起硬盘才这么干……或者是像我一样，一台16GB内存的i7级Latitude拆了PM981，然后塞一块傲腾当内存充数，实际荒诞！</p>
+
+<p><a href="https://v1sta.xyz/tech/%e9%9a%8f%e6%83%b3%ef%bc%9a%e5%9f%ba%e4%ba%8eusb%e5%90%af%e5%8a%a8%e7%9b%98%e5%90%af%e5%8a%a8sd%e5%8d%a1%e4%b8%8a%e7%9a%84linux%e7%b3%bb%e7%bb%9f/" rel="nofollow">来源</a></p>]]></content:encoded>
+					
+					<wfw:commentRss>https://v1sta.xyz/tech/%e9%9a%8f%e6%83%b3%ef%bc%9a%e5%9f%ba%e4%ba%8eusb%e5%90%af%e5%8a%a8%e7%9b%98%e5%90%af%e5%8a%a8sd%e5%8d%a1%e4%b8%8a%e7%9a%84linux%e7%b3%bb%e7%bb%9f/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+		<enclosure url="https://v1sta.xyz/wp-content/uploads/2026/03/V1sta-Orb-Output512-2.png" length="199214" type="image/png"/><media:content url="https://v1sta.xyz/wp-content/uploads/2026/03/V1sta-Orb-Output512-2.png" width="512" height="512" medium="image" type="image/png"/>	</item>
+		<item>
+		<title>随想 2026年9月15日</title>
+		<link>https://v1sta.xyz/think/%e9%9a%8f%e6%83%b3-2026%e5%b9%b49%e6%9c%8815%e6%97%a5/</link>
+					<comments>https://v1sta.xyz/think/%e9%9a%8f%e6%83%b3-2026%e5%b9%b49%e6%9c%8815%e6%97%a5/#respond</comments>
+		
+		<dc:creator><![CDATA[域主 V1STA]]></dc:creator>
+		<pubDate>Tue, 15 Sep 2026 08:23:27 +0000</pubDate>
+				<category><![CDATA[随想]]></category>
+		<guid isPermaLink="false">https://v1sta.xyz/?p=7889</guid>
+
+					<description><![CDATA[最近头脑风暴的意识增加了很多，我开始借助Obsidian和Google的AI来思考各种事情。不过我还是有一些原 &#8230; <a href="https://v1sta.xyz/think/%e9%9a%8f%e6%83%b3-2026%e5%b9%b49%e6%9c%8815%e6%97%a5/" class="more-link">继续阅读<span class="screen-reader-text">随想 2026年9月15日</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[
+<p class="wp-block-paragraph">最近头脑风暴的意识增加了很多，我开始借助Obsidian和Google的AI来思考各种事情。<br>不过我还是有一些原则的，很大程度上也只是唱双簧，而且AI目前还是有很多勘误。<br>但是在模仿忍杀的ability已经超乎mortal的意料之外了！</p>
+
+
+
+<p class="wp-block-paragraph">我知道这可能会让一些绘圈的老师感到恐慌……Aieeeee，但她们真的会看我的blog吗？我不想搞什么此地无银三百两。不过我的底层基建可以证明我不是AI绘图派，毕竟……带不动。我还想试试Krita AI呢，结果发现Krita本体也根本打不开，笑死。<br>简而言之AI技术只是唱双簧的程度是可控的，不过也浪费了一些时间、并且让硬盘涨价变得更有合理性，我有罪。</p>
+
+
+
+<p class="wp-block-paragraph">现在写博客也不像以前那样当成一种避风港了，随着拓宽了读者群，受到的关注也增加了。这倒不是说有五千followers那样，而更像是一句谚语：林子大了什么鸟都有。哪怕鸟的总数不多，但是生态也会发生变化。</p>
+
+
+
+<p class="wp-block-paragraph">回顾这一大半年似乎只是对那些知识分子进行媚俗的模仿，一定程度上也是照顾那些中文博主和IndieWeb生态的读者。<br>但是我自己还是找不到那么高效的方案，所以我不可能是高知。或者说，本域的诞生本就建立在那种放荡的前提下。要是让它真的学术化了，反而才是变味！但是独立博客本身又确实与学术圈有很大关联（即便是野鸡技术宅，也可以视作为一种技术圈。而不是老日剧里各种偶像和演员的个人主页），面对形形色色的人们我却没有这种抗压能力。<br>但是我还是在想怎么用各种新型技术辅助我的思考能力。</p>
+
+
+
+<p class="wp-block-paragraph">反而我最喜欢的Frutiger Aero和OC绘画的读者来访其实不是很重要，不过这本身是因为创作体制不需要求同存异和迎合，这不像技术圈那样需要让每个人的思维保持对齐，所以压力小很多。</p>
+
+
+
+<span id="more-7889"></span>
+
+
+
+<hr class="wp-block-separator has-alpha-channel-opacity"/>
+
+
+
+<p class="wp-block-paragraph">各种技术论坛，chiphell，小绿书、贴吧和什么值得买，是有非常多来自垃圾佬的“干货”可以参考，<br>可是在那些用Mastodon的海外数字游民人们看来，犹如猪肉对穆斯林一样令人产生厌恶。<br>但穆斯林不吃猪肉的根本，实则是因为猪肉要处理比牛羊肉棘手的多。国内的这些高戾袋社媒平台也是同理，不亚于在垃圾堆里大海捞针。即便那些政治狂人的话把整个国内贬低成文化洼地，这些平台也依然是鄙视链最低端的。当然现在还可以加上小红书。这还是没考虑到后期政策打压、以及垃圾软文业配泛滥的情况。乃至于港台社媒和Web1.5时期的新闻站也有类似的趋势。<br>少数派呢？我还是去看untag吧。但我接触到的资源群反而对少数派和untag这种知识付费的体系相当厌恶。</p>
+
+
+
+<p class="wp-block-paragraph">那我怎么办呢……当然是共存吧。</p>
+
+
+
+<p class="wp-block-paragraph">对于打压培训班政策叫好的孩子们，也不知道这其实是变相焚书坑儒啊。<br>正解难道不是应该提高非知识工作者的待遇吗？但是他们已经深陷泥潭，能呼吸已经是最难得的。<br>所以Wacom数位板现在才这么便宜。</p>
+
+
+
+<p class="wp-block-paragraph">有段时间我在考古ZUN早年的《蓬莱人形》，其中也提到了当时有很多日本人离开本土、游向海外。<br>要润是日本演员，这是客观事实。但这种契机和中国国内的情况在根源上还是有一些不同，但反映到一般民众却是相似的。巴西也好、北美也罢、包括再早一点历史书上的大连。</p>
+
+
+
+<p class="wp-block-paragraph">所以这就是为什么本域2014的主题原作者是一位日裔设计师吗？</p>
+
+
+
+<p class="wp-block-paragraph">其实中国国内也是类似的，领导画个圈，北漂南漂。</p>
+
+
+
+<hr class="wp-block-separator has-alpha-channel-opacity"/>
+
+
+
+<p class="wp-block-paragraph">那么写这篇随笔的另一个原因是，我一直感觉我需要换一个博客软件了。其实2024年的时候就有谈及过。<br>现有的WordPress已经不再应付得了Obsidian的存储结构。WordPress这套从2003年构建的活化石一定程度上也不适应现在的信息流了。而且这个问题在各种大模型生成式AI技术诞生之前就已经产生了瓶颈。</p>
+
+
+
+<p class="wp-block-paragraph">当年2023年搭建景の域也不过是为了用上一个古早的LiveSino主题（然而真的太老了，才退而求次选择Win8世代的Twenty Fourteen2014主题），而且对比现在的各种意识流随想，当时也只有玩家干货和服务器公告。<br>想和Matt聊一聊但也没有什么机会。本身这就是一个怀旧博客，但是怀旧的弊端也很明显。我虽然熟悉WordPress，但我始终不是商业建制的开发者，意识到很长时间吾辈只算得是一介个人势的创作者。</p>
+
+
+
+<p class="wp-block-paragraph">为了求职，我去看过那些WordPress的开发者群，但是无一例外都是电商老登在用那种AI生成粗制滥造的SEO填充内容，没有几个真正写博客的活人，甚至还有在零售平台放议价商品这种国内特有的销售思路，试图挑战交易平台规则下限。虽然大部分商人的思维确实冷酷无情，但就算抛开道德下限，这也太不计后果。吃枣药丸。<br>那帮电商老登，不知道睿能宝Ravpower是怎么死的吗？</p>
+
+
+
+<p class="wp-block-paragraph">所以我其实也想摆脱这种生态标签。但是各种原因我一直没有找到合适的替代品。<br>有时间试试ClassicPress吗？我都不好说独立博客还能活多久。<br>这种创作思维的悖论已经在我的人生中斗争了十多年。<br>即使绘画可以消遣时间，但如果生计所迫还是要回到工业化糖精的思维上。啊……办不到就是办不到啊。</p>
+
+
+
+<hr class="wp-block-separator has-alpha-channel-opacity"/>
+
+
+
+<p class="wp-block-paragraph">用Obsidian的时间越来越多了，但是却没有好好记载Obsidian的各种插件。<br>去年折腾MPD、Mopidy和Snapcast的音响系统文章也没写完，今年差点都把音响都搬走了然后换AptX接收器的硬件天空声道……那DietPi音响系统的研究不就没意义了吗？！</p>
+
+
+
+<p class="wp-block-paragraph">我发现博客的体系也已经不再适合记载这些插件。<br>其实放眼过去，这种知识体系也是做成像WINHELP格式的攻略更容易传播和查阅。当年推ToHeart2的时候澄空就附上了汉化补丁附属的攻略，而且做得很精心。</p>
+
+
+
+<p class="wp-block-paragraph">简而言之，网络上的独立博客不过是妥协的产物。这也是如今那些数字花园和思维体系式的笔记生态会流行的原因吧。就是对于当年买付费软件的人可能会感到诧异和质疑，这是否真的有可持续，何况现在的政治局势很动荡，已经不是当年买软件玩大头贴光驱的时代了。</p>
+
+
+
+<p class="wp-block-paragraph">我到如今也不太喜欢Linux的软件包而是容器化（卡带化），就是因为环境依赖经过许多年就会变得不可用，而Windows和Mac有固定的打包系统。</p>
+
+
+
+<hr class="wp-block-separator has-alpha-channel-opacity"/>
+
+
+
+<p class="wp-block-paragraph">求快则慢，求慢则快。所以我最近需要放空一下大脑。<br>听说1937年的中国人在日军来袭之前……全在打扑克！我能怎么办，那还是打扑克吧。哪怕用伪证也罢。（4代成步堂笑）<br>但战争这种事情还是开不起玩笑。<br>但我觉得相较于地震那样的天灾，战争却是能靠人避免的……错觉吧？<br>如果这么想，那么润出去反而是避免天灾的人为可控解决方案。<br>人们避不开人造的战争，却能用移居规避天灾。这实在是一个反常识的现实。</p>
+
+
+
+<p class="wp-block-paragraph">从通风报信的朋友听说了，本域被腾讯系风控拦截封杀的一个原因，可能就是今年放了蛤蟆画猜和大连市长的原因。<br>但是我就是很讨厌一刀切，哪怕我自己有时候不得不用一刀切的粗暴方式，这是被逼的。所以哪怕我不会真的发布那种恶语相向的键盘政治，但是我不会撤掉隐喻。</p>
+
+
+
+<blockquote class="wp-block-quote is-layout-flow wp-block-quote-is-layout-flow">
+<p class="wp-block-paragraph">你的身体变成这样是我的责任……但是我不会道歉</p>
+</blockquote>
+
+
+
+<p class="wp-block-paragraph">OMO：你不是会好好写剧本吗？！</p>
+
+
+
+<p class="wp-block-paragraph">但是与其说会不会被内置浏览器拦截，不如说以后的人们还有没有互联网的意识。而在这层披着社会主义的皮的资本主义社会下，互联网被冷落那么经营网站的代价也会变得居高不下，这是我更担心的情况。</p>
+
+
+
+<p class="wp-block-paragraph">还有就是像忍杀那样，真的变成一个外界无法知晓的生态。<br>其实日本是有&#8221;墙&#8221;的，地域限制的发展已经不像Web1.0那样只是单纯的浏览器了。正好最近看了科搜研的金鱼网站，那应该算是最早的自媒体吧？</p>
+
+
+
+<p class="wp-block-paragraph">我真是战地记者啊。</p>
+
+
+
+<p class="wp-block-paragraph">说了这么多其实也没有什么特别的意义，如果一定要总结的话，大概就是发现，这套体系已经到瓶颈了。<br>至于路线错误的修正主义和大清洗……放着不管……因为我嫌麻烦！<br>他一口气就吃了三个！是BIO·寿司！</p>
+
+<p><a href="https://v1sta.xyz/think/%e9%9a%8f%e6%83%b3-2026%e5%b9%b49%e6%9c%8815%e6%97%a5/" rel="nofollow">来源</a></p>]]></content:encoded>
+					
+					<wfw:commentRss>https://v1sta.xyz/think/%e9%9a%8f%e6%83%b3-2026%e5%b9%b49%e6%9c%8815%e6%97%a5/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+		<enclosure url="https://v1sta.xyz/wp-content/uploads/2026/03/V1sta-Orb-Output512-2.png" length="199214" type="image/png"/><media:content url="https://v1sta.xyz/wp-content/uploads/2026/03/V1sta-Orb-Output512-2.png" width="512" height="512" medium="image" type="image/png"/>	</item>
+		<item>
 		<title>马达加斯加的Linux</title>
 		<link>https://v1sta.xyz/acg/%e9%a9%ac%e8%be%be%e5%8a%a0%e6%96%af%e5%8a%a0%e7%9a%84linux/</link>
 					<comments>https://v1sta.xyz/acg/%e9%a9%ac%e8%be%be%e5%8a%a0%e6%96%af%e5%8a%a0%e7%9a%84linux/#respond</comments>
@@ -1012,252 +1202,6 @@
 					
 					<wfw:commentRss>https://v1sta.xyz/music/%e4%ba%8c%e6%ac%a1%e5%85%83%e8%a7%86%e9%a2%91%e4%b8%ad%e6%b5%81%e4%bc%a0%e7%9a%84queen%e4%b9%90%e9%98%9f/feed/</wfw:commentRss>
 			<slash:comments>0</slash:comments>
-		
-		
-		<enclosure url="https://v1sta.xyz/wp-content/uploads/2026/03/V1sta-Orb-Output512-2.png" length="199214" type="image/png"/><media:content url="https://v1sta.xyz/wp-content/uploads/2026/03/V1sta-Orb-Output512-2.png" width="512" height="512" medium="image" type="image/png"/>	</item>
-		<item>
-		<title>奇怪的逆转音效</title>
-		<link>https://v1sta.xyz/acg/%e5%a5%87%e6%80%aa%e7%9a%84%e9%80%86%e8%bd%ac%e9%9f%b3%e6%95%88/</link>
-					<comments>https://v1sta.xyz/acg/%e5%a5%87%e6%80%aa%e7%9a%84%e9%80%86%e8%bd%ac%e9%9f%b3%e6%95%88/#respond</comments>
-		
-		<dc:creator><![CDATA[域主 V1STA]]></dc:creator>
-		<pubDate>Thu, 03 Sep 2026 10:26:48 +0000</pubDate>
-				<category><![CDATA[ACG]]></category>
-		<category><![CDATA[日常]]></category>
-		<category><![CDATA[特摄]]></category>
-		<category><![CDATA[飞天小女警Z]]></category>
-		<guid isPermaLink="false">https://v1sta.xyz/?p=7837</guid>
-
-					<description><![CDATA[飞天小女警Z 第四话 06:18 https://www.bilibili.com/video/BV18y41 &#8230; <a href="https://v1sta.xyz/acg/%e5%a5%87%e6%80%aa%e7%9a%84%e9%80%86%e8%bd%ac%e9%9f%b3%e6%95%88/" class="more-link">继续阅读<span class="screen-reader-text">奇怪的逆转音效</span> <span class="meta-nav">&#8594;</span></a>]]></description>
-										<content:encoded><![CDATA[
-<p class="wp-block-paragraph">飞天小女警Z 第四话 06:18 <br><a href="https://www.bilibili.com/video/BV18y41187TL?t=374.1&amp;p=7">https://www.bilibili.com/video/BV18y41187TL?t=374.1&amp;p=7</a></p>
-
-
-
-<p class="wp-block-paragraph">包括后续仍有出现逆转裁判的音效</p>
-
-
-
-<p class="wp-block-paragraph">令我想到了噔噔咚/デデドン</p>
-
-
-
-<p class="wp-block-paragraph">(万 恶 之 源)假面骑士响鬼的噔噔咚合集 <br><a href="https://www.bilibili.com/video/BV1bb411r7Ci">https://www.bilibili.com/video/BV1bb411r7Ci</a></p>
-
-
-
-<p class="wp-block-paragraph">【怪谈丨惊悚】学校怪谈 SP丨学校の怪談 SP丨全3 <br><a href="https://www.bilibili.com/video/av15311870">https://www.bilibili.com/video/av15311870</a></p>
-
-
-
-<p class="wp-block-paragraph"><a href="https://www.bilibili.com/video/BV1cW411973r/?t=586.8"><s>中岛神似电棍的all in</s></a> <br><a href="https://www.bilibili.com/video/BV1cW411973r/?t=586.8">https://www.bilibili.com/video/BV1cW411973r/?t=586.8</a></p>
-
-<p><a href="https://v1sta.xyz/acg/%e5%a5%87%e6%80%aa%e7%9a%84%e9%80%86%e8%bd%ac%e9%9f%b3%e6%95%88/" rel="nofollow">来源</a></p>]]></content:encoded>
-					
-					<wfw:commentRss>https://v1sta.xyz/acg/%e5%a5%87%e6%80%aa%e7%9a%84%e9%80%86%e8%bd%ac%e9%9f%b3%e6%95%88/feed/</wfw:commentRss>
-			<slash:comments>0</slash:comments>
-		
-		
-		<enclosure url="https://v1sta.xyz/wp-content/uploads/2026/03/V1sta-Orb-Output512-2.png" length="199214" type="image/png"/><media:content url="https://v1sta.xyz/wp-content/uploads/2026/03/V1sta-Orb-Output512-2.png" width="512" height="512" medium="image" type="image/png"/>	</item>
-		<item>
-		<title>生草意识流 想到什么发什么</title>
-		<link>https://v1sta.xyz/acg/%e7%94%9f%e8%8d%89%e6%84%8f%e8%af%86%e6%b5%81-%e6%83%b3%e5%88%b0%e4%bb%80%e4%b9%88%e5%8f%91%e4%bb%80%e4%b9%88/</link>
-					<comments>https://v1sta.xyz/acg/%e7%94%9f%e8%8d%89%e6%84%8f%e8%af%86%e6%b5%81-%e6%83%b3%e5%88%b0%e4%bb%80%e4%b9%88%e5%8f%91%e4%bb%80%e4%b9%88/#comments</comments>
-		
-		<dc:creator><![CDATA[域主 V1STA]]></dc:creator>
-		<pubDate>Tue, 01 Sep 2026 07:21:56 +0000</pubDate>
-				<category><![CDATA[ACG]]></category>
-		<category><![CDATA[日常]]></category>
-		<guid isPermaLink="false">https://v1sta.xyz/?p=7832</guid>
-
-					<description><![CDATA[<p>露露卡可以喝吗？ 露露卡不能喝，莉格露也不可以喝。但是，有莉格露露与宇佐见莲子八宝粥这样的产物，说明露露卡是可 &#8230; <a href="https://v1sta.xyz/acg/%e7%94%9f%e8%8d%89%e6%84%8f%e8%af%86%e6%b5%81-%e6%83%b3%e5%88%b0%e4%bb%80%e4%b9%88%e5%8f%91%e4%bb%80%e4%b9%88/" class="more-link">继续阅读<span class="screen-reader-text">生草意识流 想到什么发什么</span> <span class="meta-nav">&#8594;</span></a></p>]]></description>
-										<content:encoded><![CDATA[
-<p class="wp-block-paragraph">露露卡可以喝吗？</p>
-
-
-
-<p class="wp-block-paragraph">露露卡不能喝，莉格露也不可以喝。但是，有莉格露露与宇佐见莲子八宝粥这样的产物，说明露露卡是可以喝的。</p>
-
-
-
-<p class="wp-block-paragraph">（更新：追MaxHeart，本来就有露露啊（））</p>
-
-
-
-<p class="wp-block-paragraph">森亚露露卡会遇见露·露卡吗<br />两个露露卡。<br />一个是普力Q娃、一个是高达机师，请问这要怎么比呢……</p>
-
-
-
-<p class="wp-block-paragraph">就算是夏亚，也很难选吧。</p>
-
-
-
-<hr class="wp-block-separator has-alpha-channel-opacity"/>
-
-
-
-<p class="wp-block-paragraph">古河渚是美墨渚吗？</p>
-
-
-
-<p class="wp-block-paragraph">如果古河渚是美墨渚，那么小早川美幸就是星空美幸了，宝月茜是日野茜；如果小早川美幸是星空美幸，那么葵双叶就是佐仓双叶，那么辻本夏实就是大泽木夏实，那么御剑怜侍是御剑冥夜，绫里真宵就是礼濑真宵。二阶堂赖子的后代难道是二阶堂美树吗？而一条美云实际上是一条薰的后代！</p>
-
-
-
-<p class="wp-block-paragraph"><a href="https://redlib.catsarch.com/r/precure/comments/1q9xx3j/akechi_anna_huh/">那么明智安娜便是明智吾郎。</a></p>
-
-
-
-<p class="wp-block-paragraph">那不就是论证剑崎真琴和剑崎一真的关系吗。</p>
-
-
-
-<p class="wp-block-paragraph">此时喜多川海梦拿出一张绘制着鹦鹉的小百合真迹。</p>
-
-
-
-<p class="wp-block-paragraph">信息量好大</p>
-
-
-
-<hr class="wp-block-separator has-alpha-channel-opacity"/>
-
-
-
-<p class="wp-block-paragraph">为什么小茜会变身为光之美少女、会说关西话、会做章鱼烧、会做铁板烧、会成为偶像、会释放空手道，并且响也迷路了、会改写世界底层、并且响也是她创造的、以及严格来说不算但是为什么会讲落语？</p>
-
-
-
-<p class="wp-block-paragraph">你说的……是一个小茜吗。</p>
-
-
-
-<p class="wp-block-paragraph">那么响良牙和天道茜算响茜吗？<br />那么响裕太和新条茜也算响茜吧。<br />这是什么奇怪的搭配。</p>
-
-
-
-<p class="wp-block-paragraph">小茜好可爱好耶！！Yeeeeart！！Zakenna Kora！（Gomenna / 爆发四散）</p>
-
-
-
-<hr class="wp-block-separator has-alpha-channel-opacity"/>
-
-
-
-<p class="wp-block-paragraph">PreCure! Smile Charge!</p>
-
-
-
-<p class="wp-block-paragraph">已知屏幕上有两位成步堂+黑色大机器人、两位王泥喜+橙色大机器人、五位响和七位Sunny，请问哪位是真正的小茜。</p>
-
-
-
-<p class="wp-block-paragraph">响：很简单啊，就像给乱马浇水一样不就好了吗！<br />事务所的查理都快泡烂了。</p>
-
-
-
-<p class="wp-block-paragraph">……</p>
-
-
-
-<p class="wp-block-paragraph">茜：为什么我变成March了！！！！！</p>
-
-
-
-<hr class="wp-block-separator has-alpha-channel-opacity"/>
-
-
-
-<p class="wp-block-paragraph">鸣海庄吉事务所收购成步堂万能事务所的通知……</p>
-
-
-
-<p class="wp-block-paragraph">这是什么奇怪的消息啊koraaaa</p>
-
-
-
-<p class="wp-block-paragraph">真宵和亚树子实际所长。</p>
-
-
-
-<hr class="wp-block-separator has-alpha-channel-opacity"/>
-
-
-
-<p class="wp-block-paragraph">王泥喜：茜姐你的道具是从哪进的</p>
-
-
-
-<p class="wp-block-paragraph">茜：啊，据说是东京某处茶屋的一家小诊所，有非常强力的药和试剂。还可以让花林糖变得美味。</p>
-
-
-
-<p class="wp-block-paragraph">王泥喜：嗯？东京某处？</p>
-
-
-
-<p class="wp-block-paragraph">茜：（拿出手机）是这个</p>
-
-
-
-<p class="wp-block-paragraph">「武见内科诊所」</p>
-
-
-
-<p class="wp-block-paragraph">王泥喜：那么这个长生不老的药……</p>
-
-
-
-<p class="wp-block-paragraph">……</p>
-
-
-
-<p class="wp-block-paragraph">《关于警视厅科学搜查一课9系与武见内科诊所以及永远亭制药的利益输送报告》</p>
-
-
-
-<p class="wp-block-paragraph">茜：这是什么啊！（惊讶）</p>
-
-
-
-<hr class="wp-block-separator has-alpha-channel-opacity"/>
-
-
-
-<p class="wp-block-paragraph">其实摩尔加纳是鲁邦一世。你是说亚森·鲁邦吗？</p>
-
-
-
-<p class="wp-block-paragraph">不对，可是猫车是猫丸啊。也就是说，mona实际忍者！</p>
-
-
-
-<p class="wp-block-paragraph">但佐仓惣治郎是次元大介吧。你看他的胡子。</p>
-
-
-
-<p class="wp-block-paragraph">可是喜多川裕介是石川五右卫门啊。</p>
-
-
-
-<p class="wp-block-paragraph">那么谁是峰不二子呢。</p>
-
-
-
-<hr class="wp-block-separator has-alpha-channel-opacity"/>
-
-
-
-<p class="wp-block-paragraph">未完待续……</p>
-
-
-
-<p class="wp-block-paragraph">我要去看EXAID版的名侦探Q娃了</p>
-
-<p><a href="https://v1sta.xyz/acg/%e7%94%9f%e8%8d%89%e6%84%8f%e8%af%86%e6%b5%81-%e6%83%b3%e5%88%b0%e4%bb%80%e4%b9%88%e5%8f%91%e4%bb%80%e4%b9%88/" rel="nofollow">来源</a></p>]]></content:encoded>
-					
-					<wfw:commentRss>https://v1sta.xyz/acg/%e7%94%9f%e8%8d%89%e6%84%8f%e8%af%86%e6%b5%81-%e6%83%b3%e5%88%b0%e4%bb%80%e4%b9%88%e5%8f%91%e4%bb%80%e4%b9%88/feed/</wfw:commentRss>
-			<slash:comments>2</slash:comments>
 		
 		
 		<enclosure url="https://v1sta.xyz/wp-content/uploads/2026/03/V1sta-Orb-Output512-2.png" length="199214" type="image/png"/><media:content url="https://v1sta.xyz/wp-content/uploads/2026/03/V1sta-Orb-Output512-2.png" width="512" height="512" medium="image" type="image/png"/>	</item>
