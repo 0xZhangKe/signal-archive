@@ -1,0 +1,11 @@
+{
+  "id": "7435df71c4bfbb0a906cd24a",
+  "title": "随想：基于USB启动盘启动SD卡上的LINUX系统",
+  "summary": "在笔记本电脑上如果不想动内置硬盘还要用本机Linux系统，那么除了直接安装到USB存储设备（U盘、移动固态）之 … 继续阅读 随想：基于USB启动盘启动SD卡上的LINUX系统 →",
+  "content": "<p>在笔记本电脑上如果不想动内置硬盘还要用本机Linux系统，那么除了直接安装到USB存储设备（U盘、移动固态）之外，SD卡槽（包括MicroSD/TF）同样是一个不错的选择。但是除了像戴尔或一些山寨机会用USB协议的读卡器，绝大多数的笔记本SD读卡器使用的是Realtek的PCIe协议，或者即便是USB也没有提供启动项。<br>但大多数还是PCIe的读卡器，不给提供引导启动。尤其是新式ThinkPad和惠普的笔记本。一些平板仅有一个Type C的接口，也不方便随时挂移动硬盘。</p>\n\n\n\n<p>以前折腾黑苹果（即Hackintosh）的时候用过Clover和OpenCore引导盘，当然还有rEFInd用来美化。这些三方引导器除了装黑苹果之外，也可以给古早老电脑注入NVMe启动的方式。黑群晖（Xpenlogy）的引导盘也是类似的原理，无论是黑群晖还是黑苹果。引导盘在启动之后基本上就可以拔下来，早期不愿意折腾内置硬盘EFI分区或者容易被Windows Update搞炸的玩家、以及想方便备份管理kext环境的，也有很多用U盘当启动盘的实际需求。这其实很合理。</p>\n\n\n\n<p>某种程度上可以理解为假面骑士W的那个地球驱动器，插入不同的记忆体（Cyclone的系统盘+Joker的启动盘）就可以改变配置文件。但按照这个逻辑……其实更像Fang+Joker啊。<br>（其实DOS时期的Windows多配置也是这么干的，只是存在内置硬盘里）</p>\n\n\n\n<p>那么按照这个思路可以用酷豆那种做一个启动钥匙，随时挂在钥匙串上。虽然这比喻跟安全启动或其他加密技术无关，不过似乎的确可以搭配YUBICO那样的安全密钥使用。</p>\n\n\n\n<p>如果再进一步，还可以运行在RAMDISK里，也就是相当于WinPE或游戏机的逻辑：系统盘是不可变的固件，本质上是游戏卡带；再再进一步，甚至可以把系统盘分离出来，直接装在像Ventoy这样的镜像里，就像光驱的游戏机读盘。而/home等数据区存储在SD卡里。就像早年的PDA一样。<br>似乎有些企业级移动瘦客户机也是这样的架构，没有真正意义上的内置硬盘。<br>理论上内置硬盘直接换成傲腾M10 16G给SD卡做缓存，但对于精简置备的Linux发行版没有实际意义，只是徒增功耗。</p>\n\n\n\n<p>用常识想想傲腾M10装笔记本里当缓存只能是整活。我觉得这个前提可能是忽然脑袋一冲买了个准系统的ThinkPad但是买不起硬盘才这么干……或者是像我一样，一台16GB内存的i7级Latitude拆了PM981，然后塞一块傲腾当内存充数，实际荒诞！</p>\n\n<p><a href=\"https://v1sta.xyz/tech/%e9%9a%8f%e6%83%b3%ef%bc%9a%e5%9f%ba%e4%ba%8eusb%e5%90%af%e5%8a%a8%e7%9b%98%e5%90%af%e5%8a%a8sd%e5%8d%a1%e4%b8%8a%e7%9a%84linux%e7%b3%bb%e7%bb%9f/\" target=\"_blank\" rel=\"noopener noreferrer\">来源</a></p>",
+  "image": "https://v1sta.xyz/wp-content/uploads/2026/03/V1sta-Orb-Output512-2.png",
+  "publishedAt": "2026-09-15T11:07:45Z",
+  "sourceId": "d29b4f2186bb32e1",
+  "sourceTitle": "景の域",
+  "link": "https://v1sta.xyz/tech/%e9%9a%8f%e6%83%b3%ef%bc%9a%e5%9f%ba%e4%ba%8eusb%e5%90%af%e5%8a%a8%e7%9b%98%e5%90%af%e5%8a%a8sd%e5%8d%a1%e4%b8%8a%e7%9a%84linux%e7%b3%bb%e7%bb%9f/"
+}

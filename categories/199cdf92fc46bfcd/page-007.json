@@ -1,6 +1,39 @@
 {
   "items": [
     {
+      "id": "635becdc4a3938b2a767b54b",
+      "title": "被動 DI-Box 可以反方向送",
+      "summary": "關於 DI-Box 的應用，可以看 這裡 ，本篇要說的是「非正規的運用」。 理論上，被動式 DI-box 就是單純的變壓器，所以方向不是問題，但對於 Eddie 來說，那一直都是理論。 某場活動，臨時多了一堆東西，導致 XLR 輸入孔不夠，必須得用 6.3 Aux 輔助輸入孔。 而 DJ 控制器只有 XLR out，因此當時想到把 DI 給反送！ DJ 控制器的輸出端是 公頭 XLR ，因爲要反送，所以要接入 DI 的 Output 端，也是 公頭 XLR ，因此需要母對母的 XLR 接頭。 再來就是使用 6.3-6.3 TS 導線，從 DI 的 Input 端連接到 Mixer 的 6.3 輸入孔即可。 一接上去發現有很大的底噪，想說：「完了，該不會不能反著接吧？ 理論 上可以啊」 最後，把接地按鈕從 GN…",
+      "image": null,
+      "publishedAt": "2026-01-18T03:56:50Z",
+      "sourceId": "199cdf92fc46bfcd",
+      "sourceTitle": "Eddie Lv",
+      "link": "https://eddielv.com/articles/di-reverse/",
+      "detailPath": "articles/635becdc4a3938b2a767b54b.json"
+    },
+    {
+      "id": "8a1997166963a7c58c1f0e1e",
+      "title": "萬元燈箱",
+      "summary": "場地燈超級暗看不到流程表，如果打燈又會太亮，那怎麼辦呢？ 試試看 iPad 燈箱吧！ 只要搜尋純白色圖片，下載到照片 app 後，打開來就看得到了！ （成本真高）",
+      "image": null,
+      "publishedAt": "2026-01-17T16:35:13Z",
+      "sourceId": "199cdf92fc46bfcd",
+      "sourceTitle": "Eddie Lv",
+      "link": "https://eddielv.com/musings/expensive-light-box/",
+      "detailPath": "articles/8a1997166963a7c58c1f0e1e.json"
+    },
+    {
+      "id": "daf741c165df40122c407d37",
+      "title": "跨平臺無線傳輸檔案：Localsend",
+      "summary": "前言 # iPhone 既然能 airplay 到 linux 上，那檔案應該也可以吧？這個想法讓 Eddie 找到了 Localsend 。 下載體驗好 # 下載簡單，到官網選擇自己的作業系統，下載安裝即可。 Linux、Windows、macOS、iOS、Android 全平臺都能用！ 使用體驗比 Airdrop 更好 # 傳輸的前提只有一個：兩部裝置同區網（同 WiFi），如果沒有 WiFi，就把其中一臺開熱點，讓另一部裝置連線（事實上這樣速度更快）。 兩端裝置都開好 Localsend 之後，要接收檔案的裝置選「Receive」，發送端才看得到接收端的這部裝置；要發送檔案的裝置則選「Send」，就會看到接收端的裝置了，點擊後即可發送。 左邊爲 iPhoneXR 透過 Uxplay 投影到 MintBo…",
+      "image": null,
+      "publishedAt": "2026-01-17T05:04:35Z",
+      "sourceId": "199cdf92fc46bfcd",
+      "sourceTitle": "Eddie Lv",
+      "link": "https://eddielv.com/articles/localsend/",
+      "detailPath": "articles/daf741c165df40122c407d37.json"
+    },
+    {
       "id": "62575f5a9509bed114e84c6d",
       "title": "把 Linux 電腦當作 Airplay 接收器",
       "summary": "如果 iPhone/iPad 搭配 mac，是可以直接把畫面或聲音透過 Airplay 投到 mac 的。 這樣做有什麼好處？ 想對手機畫面螢幕錄影，並且不想消耗手機的 RAM 電腦端接著喇叭，無法移動，但拿著 iPhone 可以到處走，隨時切換曲目 Airplay 是透過 Wi-Fi，因此比藍牙穩定 1000 萬倍 所以，Linux 要怎麼做？使用 UXPLAY！ Linux 指令 # 用 apt 或其他方式安裝 uxplay # sudo apt install uxplay 開啓防火牆 # sudo ufw allow 5353 sudo ufw allow 7100 sudo ufw allow 7000 sudo ufw allow 7001 sudo ufw allow 6000 sudo ufw…",
@@ -626,39 +659,6 @@
       "sourceTitle": "Eddie Lv",
       "link": "https://eddielv.com/musings/rss-fix/",
       "detailPath": "articles/53b2335bd99c36f55e6efc01.json"
-    },
-    {
-      "id": "75f9f5aa85271568ccd73a59",
-      "title": "「搜尋」功能上線啦！",
-      "summary": "因爲文章越來越多，只靠分類其實也不好找到文章，在「 歷史上的今天 」之後，弄了搜尋功能！以下分享怎麼在 Hugo 中做到。 做出搜尋頁面的基本頁 content/search/_index --- title: \"搜尋\" type: \"search\" draft: false --- header 在導覽列做搜尋框框 themes/classic/layouts/partials/header.html <header> <nav> <ul> {{ $title := lower .Title }} {{ $section := lower .Section }} <li class=\"pull-left {{ if .IsHome }}current{{ end }}\"> <a href=\"{{ .Site…",
-      "image": null,
-      "publishedAt": "2025-12-21T13:57:54Z",
-      "sourceId": "199cdf92fc46bfcd",
-      "sourceTitle": "Eddie Lv",
-      "link": "https://eddielv.com/musings/search/",
-      "detailPath": "articles/75f9f5aa85271568ccd73a59.json"
-    },
-    {
-      "id": "17be7ffcf89d1ef5957cc9d4",
-      "title": "「歷史上的今天」頁面建立",
-      "summary": "文章越來越多的情況下，單純用分類方式還是會很困擾，因爲列表列出之後真的太多了。處理方法可以是增加搜尋，但 Eddie 想試試看用同日期但不同年份的方式來處理，讓一次顯示的文章不要太多、太轟炸，於是「 歷史上的今天 」就建立了！ 技術層面 # 如果爲 365 天都建立一個 list 是不實際的，一個功能佔據這麼多檔案就太瞎了，因此，應該是用一個頁面來包含全部資訊，再用某種機制（判斷是）抓出自己要的文章才是正解。 html # Eddie 習慣都是做在 themes 而不是網站本身，但其實沒差，只是 hugo 優先級順序不同罷了，有確定抓到對的檔案，最終生成在 Public 內的檔案會是一樣的。 themes/classic/layouts/page/on-this-day.html {{ partial \"he…",
-      "image": null,
-      "publishedAt": "2025-12-21T07:18:41Z",
-      "sourceId": "199cdf92fc46bfcd",
-      "sourceTitle": "Eddie Lv",
-      "link": "https://eddielv.com/musings/on-this-day/",
-      "detailPath": "articles/17be7ffcf89d1ef5957cc9d4.json"
-    },
-    {
-      "id": "906090f4d2a40fd84cf71d82",
-      "title": "爲什麼演藝人員知道瘦身針傷身，卻還是要打？",
-      "summary": "聽聞常遇到的表演者打了瘦身針，而她本來已經非常瘦了，很多人很不解，也覺得太瘦看起來不健康，Eddie 猜測看看可能的原因，強調一下：都只是個人的「猜測」。 知道有部分粉絲是來自外貌、身材 表演內容是厲害的，但是又沒有厲害到可以超級紅、工作接不完、價格超級高，當技能升級卡住之後，可能就會想讓自己身材變得更精緻。 對於變胖的恐懼 其實沒有變胖，但是心理一直覺得自己在變胖，或是恐懼自己會變胖，而變胖會讓那些因爲自己身材而變成粉絲的人們離開。 害怕工作變少 其實她演出接得很多，是不會到接不到表演，除了演出也還有別的收入來源，但害怕身材走樣就會失去工作 圈子的人都這樣做 Eddie 其實對她不熟，也不知道她的朋友圈情況，但如果同個工作圈子的同事（或者說競爭對手）都這麼做時，自己就會想要用一樣的方式來贏過對方。 以上都只…",
-      "image": null,
-      "publishedAt": "2025-12-21T04:59:46Z",
-      "sourceId": "199cdf92fc46bfcd",
-      "sourceTitle": "Eddie Lv",
-      "link": "https://eddielv.com/musings/glp-1/",
-      "detailPath": "articles/906090f4d2a40fd84cf71d82.json"
     }
   ]
 }
