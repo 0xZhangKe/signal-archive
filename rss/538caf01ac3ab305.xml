@@ -4,11 +4,86 @@
         <title>愷開的部落格</title>
         <link>https://blog.kalan.dev</link>
         <description>好的技術文章不只傳遞知識，也傳遞觀點。這裡是我思考與書寫的地方。</description>
-        <lastBuildDate>Tue, 15 Sep 2026 10:01:13 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 15 Sep 2026 15:56:26 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>zh</language>
         <copyright>© 2026 Kalan</copyright>
+        <item>
+            <title><![CDATA[用 Three.js 呈現我的房間]]></title>
+            <link>https://blog.kalan.dev/frontend/threejs-room-portfolio/</link>
+            <guid isPermaLink="false">https://blog.kalan.dev/frontend/threejs-room-portfolio/</guid>
+            <pubDate>Fri, 11 Sep 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[我用 React Three Fiber 把自己真實的房間搬進瀏覽器，讓實體物件成為目錄，用空間記憶講述這幾年的生活與工作。]]></description>
+            <content:encoded><![CDATA[<p><a href="https://openai.com/index/gpt-6-astra/" rel="noreferrer noopener" target="_blank">GPT-6 Astra</a> 發佈了。還記得是 09/05 的早上，我半夜起來上廁所，隨手瞄了一些手機的時間與通知，發現 GPT-6  發佈了，官方還特別展示了它操作 Blender 的能力，於是我上完廁所馬上到電腦前嘗試做了 Demo，實現了之前一直很想做的專案—用自己的房間做自我介紹互動。</p>
+<p>透過 Blender 作渲染以及 baked，房間的場景圖跟互動大約花了兩個小時有了初版。老實說這讓我相當吃驚，因為以往模型雖然支援多模態，但是要完整復現距離可以用來展示的水平還有很大落差，但現在是 One Shot 就有很不錯的效果了。接下來就是調整跟修改文案。</p>
+<p>GPT-6 復現程度很高，對 3D 場景有很好的理解，咖啡的煙、matrix 動畫跟皺摺的 shader 都是我描述想要的效果後它幫我實現出來的。</p>
+<p><img src="https://image.kalan.dev/07eef63d-40a8-41da-0bbb-c1f5a153c300/normal" alt="room.kalan.dev 的房間全景，可點擊的物件旁標著 1 到 8 的編號提示" width="1201" height="1080"></p>
+<p>另外一個嘗試是使用 TSL。<a href="https://threejs.org/docs/#TSL" rel="noreferrer noopener" target="_blank">TSL</a> 是 Three.js 用來兼容 WebGPU 跟 WebGL 的語法，寫法上也比 Shader 跟 WebGPU 友善很多。TSL 會自行判斷瀏覽器是否支援 WebGPU 並 fallback 到 WebGL。他們的語法有類似的地方，所以對語言模型來說很好遷移。</p>
+<p>這篇來寫一下我的作法，整體的架構大致上是：</p>
+<ul>
+<li>將房間用 Blender 建模並事先烘焙光源、陰影到貼圖材質上</li>
+<li>透過 Three.js 做視角切換、渲染模型、互動</li>
+<li>搭配一些巧思，將場景裡面的物件設計可點擊</li>
+</ul>
+<h2 id="1-拍照"><a aria-hidden="true" tabindex="-1" href="#1-拍照"><span class="icon icon-link"></span></a>1. 拍照</h2>
+<p>第一步先拍照，我把我自己的房間拍下來，叫 codex 直接呼叫 Blender MCP，將我的房間建模。第一個版本長這樣：</p>
+<p><img src="https://image.kalan.dev/e2123b09-e029-48ef-aeea-cfeae6457b00/normal" alt="我房間層架的實拍照，上面有牛皮紙袋、章魚頭人偶與《一人称》相框" width="1440" height="1080"></p>
+<p><img src="https://image.kalan.dev/09dd75a8-9466-4db7-3739-414500522500/normal" alt="去背後的章魚頭人偶公仔" width="433" height="577"></p>
+<p><img src="https://image.kalan.dev/1a634acf-06e2-4bdb-73ef-86da54298200/normal" alt="去背後的吉他音箱" width="433" height="577"></p>
+<p><img src="https://image.kalan.dev/9845c807-292b-44b7-ea05-03324760a900/normal" alt="Blender 裡還沒上色的房間灰模，右側 Outliner 列出 AirCon、AmpCabinet 等已命名的物件" width="958" height="1080"></p>
+<p>整個房間的雛形有模有樣，而且 Scene 裡面的 Layer 也都做了完整的命名！所以人類要介入修改也很簡單。</p>
+<p>再來是上色（Shading），一樣是透過 Blender MCP 達成，GPT-6 Astra 可以理解照片裡的顏色，我在根據自己的想法加了一些東西，像是書架上放了三個正方體，用來放社群媒體網站。</p>
+<p><img src="https://image.kalan.dev/0d1fa367-2aa4-4814-c521-7ba7b34a4f00/normal" alt="Blender 裡上色後的房間，牆上層架多了三個代表社群網站的方塊" width="924" height="1080"></p>
+<h2 id="2-uv-unwrapping-與烘焙光源"><a aria-hidden="true" tabindex="-1" href="#2-uv-unwrapping-與烘焙光源"><span class="icon icon-link"></span></a>2. UV Unwrapping 與烘焙光源</h2>
+<p>場景建好後，為了要在網頁上渲染，還需要幾個步驟：</p>
+<h3 id="uv-unwrapping"><a aria-hidden="true" tabindex="-1" href="#uv-unwrapping"><span class="icon icon-link"></span></a>UV Unwrapping</h3>
+<p>在電腦上渲染 3D 物體，可以想像成把 2D 的材質（Texture）依照指定的方式貼到 3D 物體上，這個過程就叫 UV Wrapping。</p>
+<p>像是把立體的正方體紙盒沿著邊緣剪開攤平成十字形平面，這個攤平的過程就是 <strong>Unwrapping</strong>；而把包裝紙包回紙盒上的對應關係，就是 <strong>Mapping / Wrapping</strong>。</p>
+<p>舉例來說，這是我吉他的 UV Unwrapping。我的理解是，UV Unwrapping 是建模裡面很枯燥的步驟之一，但是搭配 AI 可以大幅簡化這件事。</p>
+<p>不過在這邊也出現了我不懂的事，我無法判斷這樣的 UV Unwrapping 到底是好還是不好，我只知道最後呈現出來的效果還不錯。</p>
+<p><img src="https://image.kalan.dev/49501d34-4660-4157-6166-1d024626f300/normal" alt="電吉他的 UV 展開圖，琴身、琴頸與護板被攤平在同一張貼圖上" width="646" height="649"></p>
+<h3 id="烘焙光源"><a aria-hidden="true" tabindex="-1" href="#烘焙光源"><span class="icon icon-link"></span></a>烘焙光源</h3>
+<p>Three.js 有很多光源 API 可以動態計算光影，然而光影計算通常比較耗費效能，因此我在剛開始就有指示 AI 直接使用烘焙，而不要使用 Three.js 的動態光源。烘焙指的是將耗費效能的光影運算預先計算好，並直接畫在模型的材質貼圖（Texture）上的技術。</p>
+<p>因為是事先計算好的，所以反而可以保留渲染軟體中比較真實的光照、反射與陰影。代價是由於光源、陰影是事先計算好的，沒辦法跟著物件一起移動。</p>
+<h2 id="3-互動"><a aria-hidden="true" tabindex="-1" href="#3-互動"><span class="icon icon-link"></span></a>3. 互動</h2>
+<p>接下來是如何與物件互動。要讓物件可以跟真實 I/O 互動，可以透過 Raycast，將滑鼠座標轉換後判定是否有觸碰到物件，所以房間裡面的物件我都有另外建立 Mesh。偵測本身的邏輯也是由 AI 撰寫的，我只有叫它要使用 Three.js 的 API 做偵測。</p>
+<p>接下來是我自己加入的細節，像是：</p>
+<ul>
+<li>Hover 時物件有位移，點擊時有音效</li>
+<li>電腦螢幕的 Matrix animation 效果，裡面是日文唷！</li>
+<li>咖啡杯的煙霧效果</li>
+<li>稿紙的皺摺效果</li>
+<li>點擊每個物件時的視角轉移</li>
+<li>每個操作都可以透過鍵盤、索引引導完成</li>
+<li>支援中、英、日三個語言</li>
+<li>在切換視角的途中按下 ESC 時，動畫會從當前的進度做過渡而不是直接切回</li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@media/prefers-reduced-motion" rel="noreferrer noopener" target="_blank">reduced motion</a>：當開啟時煙霧、螢幕的動畫效果會自動停止
+<ul>
+<li>在電腦或手機當中，有些人會開啟此設定以減少動畫帶來的刺激</li>
+</ul>
+</li>
+<li>手機版的互動與 UI 有特別調整過</li>
+<li>吉他上有個 Fender 字樣</li>
+</ul>
+<p>在加入這些細節時，我也發現雖然精緻度已經大幅提升，但小細節往往需要你自己補齊，不能只有一句「Make it better」。而這些細節要怎麼注意到呢？只能靠經驗累積來培養對細節的關注。</p>
+<p>就像對 Blender 與 3D 建模一無所知的我，可能也漏掉了很多專業人士眼裡理所當然的小細節。</p>
+<h2 id="4-成果"><a aria-hidden="true" tabindex="-1" href="#4-成果"><span class="icon icon-link"></span></a>4. 成果</h2>
+<p>雖然 GPT-6 完成了大部分的工作，但打磨這些細節讓我仍然花了將近兩天才完成。包含裡面的文案，GPT 生成的文案真的是慘不忍睹。</p>
+<p>以下擷取幾個段落：</p>
+<p><img src="https://image.kalan.dev/c6478d49-48c1-4ec0-e108-4513807d8300/normal" alt="點擊吉他後跳出的「音樂」說明卡片" width="1368" height="1080"></p>
+<p><img src="https://image.kalan.dev/5330a7c9-a7ba-4434-a350-ca8538d6ab00/normal" alt="點擊馬克杯後跳出的「咖啡」說明卡片" width="1385" height="1080"></p>
+<p><img src="https://image.kalan.dev/716979f7-1357-4138-28e9-ff915186e400/normal" alt="點擊浮世繪掛畫後跳出的「日本與我」說明卡片，桌上螢幕跑著日文的 matrix 動畫" width="1504" height="1080"></p>
+<p><img src="https://image.kalan.dev/e019f5e3-2f6f-4a78-5d58-80eccc673a00/normal" alt="點擊層架上的人偶後跳出的 ヨルシカ〈火星人〉說明卡片" width="1168" height="1080"></p>
+<p><img src="https://image.kalan.dev/6c158a23-dabf-42c3-54a4-1af5bffede00/normal" alt="點擊稿紙後的全螢幕檢視，紙面帶有皺摺效果，下方可以翻頁" width="1159" height="1080"></p>
+<p>做這類互動型作品集，最容易陷入的盲點是沈迷於視覺效果，而沒有做好傳遞資訊這件事。我最剛開始的初衷是想要分享自己的房間，並透過探索房間的物件，逐漸了解我是個怎樣的人，被什麼事物所吸引。</p>
+<h2 id="感想"><a aria-hidden="true" tabindex="-1" href="#感想"><span class="icon icon-link"></span></a>感想</h2>
+<p>這是我構思很久，卻一直沒有動手的專案。或許 Fable5.1 就已經有足夠能力做到，但我之前一直沒想過，直到 GPT-6 發布我才赫然想起，對耶！可以來實作這個專案了。</p>
+<p>從 2024 年起，軟體開發產生很大變化，尤其在去年 2025 年六月左右，幾乎每次模型更新都會推翻之前的做事方法。</p>
+<p>在這個 AI 演變如此迅速的時代，我曾經想過逃離，但現在想通了。即使不是身在 Frontier AI Labs 的開發者，能親身參與這波 AI 浪潮，見證、摸索，也在其中做出些什麼，這可是千載難逢的機會，輕易下船豈不可惜。</p>
+<p>歡迎到 <a href="https://room.kalan.dev" rel="noreferrer noopener" target="_blank">room.kalan.dev</a> 來參觀我的房間唷！</p>]]></content:encoded>
+            <author>Kalan</author>
+        </item>
         <item>
             <title><![CDATA[好好記錄生活吧]]></title>
             <link>https://blog.kalan.dev/life/record-your-life/</link>
@@ -4366,27 +4441,6 @@ AI 讓產出 code 變得太容易了，所以反過來說，你更需要主動�
 <p><img src="https://image.kalan.dev/cb527832-ab20-453d-029e-df65037b9100/normal" alt="R0002133.JPG_compressed" width="1620" height="1080"></p>
 <p>這是我離職（裸辭）後，想說放鬆一下而規劃的小旅行。現金流吃緊的時候出去玩反而會讓自己綁手綁腳，還是有工作的時候休假比較輕鬆。</p>
 <p>這同時也是我第一次去到日本以外的國家旅遊唷。雖然我在 2019 年有去過韓國，不過那次是出差，都待在公司指定的訓練中心居多，沒什麼玩到，這次終於可以好好玩一次了。</p>]]></content:encoded>
-            <author>Kalan</author>
-        </item>
-        <item>
-            <title><![CDATA[相島]]></title>
-            <link>https://blog.kalan.dev/journal/ainoshima/</link>
-            <guid isPermaLink="false">https://blog.kalan.dev/journal/ainoshima/</guid>
-            <pubDate>Sat, 22 Feb 2025 00:00:00 GMT</pubDate>
-            <description><![CDATA[這裡很多貓]]></description>
-            <content:encoded><![CDATA[<p>福岡縣的相島（あいのしま）是從新宮港搭船約17分鐘的地方，是一個以貓聞名的小島。據說有 200 隻貓在這座島上生活，因此也被稱為「貓之島」。</p>
-<p>而 2/22 因為發音與貓叫聲很像（にゃにゃにゃ），所以也稱作貓之日[^1]</p>
-<p><img src="https://image.kalan.dev/12352449-8d08-4555-4975-c96675866100/normal" alt="R0000927.JPG_compressed" width="720" height="1080"></p>
-<p>那天剛好風很大，船非常晃，我馬上就暈船了。我小時候就算是很容易暈的體質，不管是遊樂園的雲霄飛車、海盜船，對我來說都不是刺激而是痛苦。唯一能玩的只有碰碰車。</p>
-<p><img src="https://image.kalan.dev/08cb7393-b21d-460e-16fa-a8880e391500/normal" alt="IMG_7431" width="810" height="1080"></p>
-<p><img src="https://image.kalan.dev/cf1f6104-f9e4-472f-1a75-cb66c7a36f00/normal" alt="R0001016.JPG_compressed" width="720" height="1080"></p>
-<p>相島的貓非常親人，會在港口等待遊客下船。見到想伸手摸的遊客就衝過去討摸，等到遊客沒興趣了再默默尋找下一個人討摸。</p>
-<p><img src="https://image.kalan.dev/05c82884-5bb1-4a46-508d-07067dd04600/normal" alt="DSC01837.JPG_compressed" width="1440" height="1080"></p>
-<p>有些貓初次見面就直接跳上來腿上睡覺了。</p>
-<p>這裡很適合春天來，冬天的話海風很強所以很冷，夏天的話太陽太大。整個島蠻小的，大概 1 小時就能逛完。剩下的地方沒有車比較難到達。</p>
-<p>如果來相島，記得要來食堂吃個定食🍽️。這裡的魚非常新鮮，而且價格也相對便宜。為了吃新鮮的魚而來這座島也不為過。</p>
-<p>坐在港口邊的長椅上，貓咪會陪著你看夕陽。我不知道怎麼形容這種感覺，在 AI 變化如此激烈的時代下，與世無爭釣釣魚跟旁邊的貓玩耍，好像挺不錯的。</p>
-<p><img src="https://image.kalan.dev/20b1a3c8-d867-4c4a-b949-c593ff967e00/normal" alt="DSC01853.JPG_compressed" width="809" height="1080"></p>]]></content:encoded>
             <author>Kalan</author>
         </item>
     </channel>
