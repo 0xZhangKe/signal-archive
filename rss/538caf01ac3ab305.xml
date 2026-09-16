@@ -4,11 +4,95 @@
         <title>愷開的部落格</title>
         <link>https://blog.kalan.dev</link>
         <description>好的技術文章不只傳遞知識，也傳遞觀點。這裡是我思考與書寫的地方。</description>
-        <lastBuildDate>Tue, 15 Sep 2026 15:56:26 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 16 Sep 2026 05:30:10 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>zh</language>
         <copyright>© 2026 Kalan</copyright>
+        <item>
+            <title><![CDATA[如何準備工程師的面試]]></title>
+            <link>https://blog.kalan.dev/random/whiteboard-interview/</link>
+            <guid isPermaLink="false">https://blog.kalan.dev/random/whiteboard-interview/</guid>
+            <pubDate>Wed, 16 Sep 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[準備科技業的面試一直是件很困難的事，面試最讓人沮喪的一點，在於權力關係往往極度單向。作為應徵者，你很難摸清對方真正的標準，面試結束後也很容易陷入自我懷疑，我們來談談吧]]></description>
+            <content:encoded><![CDATA[<p>在我的職涯裡有無數次面試官與面試者的經驗。科技業的面試流程，大家都知道存在很多缺陷。這篇整理是希望能提供一些實戰的思考角度，盡可能提高你的勝率。</p>
+<p>我以前也寫過各種面試心得，現在由於 AI 的出現已經有不少變化，像是不少公司會在面試時觀察面試者如何透過 AI 解決問題，而我也相信這會逐漸改變科技業面試的方向。</p>
+<h2 id="面試表現不等於你的能力"><a aria-hidden="true" tabindex="-1" href="#面試表現不等於你的能力"><span class="icon icon-link"></span></a>面試表現不等於你的能力</h2>
+<p>面試最讓人沮喪的一點，在於權力關係往往極度單向。作為應徵者，你很難摸清對方真正的標準，面試結束後也很容易陷入自我懷疑。面試不順利，絕不代表你是個差勁的軟體工程師。我曾經在寫完面試題之後發現一個小地方需要修正，還立刻回信通知 HR 自己的思路哪邊不對，還因為害怕因此錯失面試機會。</p>
+<p>我在《<a href="/random/interview-guide/">雇用與面試</a>》裡提過，面試本質上跟抽籤非常像。</p>
+<p>在資源有限的情況下，公司為了避免錄取不適任員工帶來的巨大管理與離職成本，策略往往是提高 Precision、寧可犧牲 Recall。換句話說，公司寧願承受 False Negative（不小心刷掉實力優秀的人），也極力避免 False Positive（招進不合適的人）</p>
+<p>在理解遊戲規則之後，你應該能發現面試是一個充滿雜訊的流程，在一個充滿雜訊的流程上定義自己的價值，往往是面試的內耗來源之一。</p>
+<p>在《<a href="/career-retrospect/imposter-syndrome/">冒牌者症候群</a>》中我也聊過，學會把自我價值和面試結果脫鉤，對心理健康至關重要。如果說面試最重要的事情是什麼，那大概就是心態調適了吧。</p>
+<h2 id="科技業的面試"><a aria-hidden="true" tabindex="-1" href="#科技業的面試"><span class="icon icon-link"></span></a>科技業的面試</h2>
+<p>我在《<a href="/devnote/when-a-measure-becomes-a-target/">當測量變成目標：從窗戶稅到 Pull Request 數</a>》裡談過 Goodhart’s Law：<strong>當一個測量指標變成目標時，它就不再是一個好的測量指標。</strong></p>
+<p>現代科技面試正是古德哈特定律最典型的受害者。</p>
+<p>三十年前，微軟和 Google 引入演算法與智力題，原本只是希望藉由非制式的問題，當作評估候選人基礎計算思維與即時拆解問題能力的指標。然而，這個代理指標被固定成招聘的標準，整個系統就迅速被玩壞了。</p>
+<p>Ruby on Rails 的創作者 DHH 也曾在 <a href="https://x.com/dhh/status/834146806594433025" rel="noreferrer noopener" target="_blank">2017 年的一則推文</a>中坦言，自己在白板上寫 bubble sort 也會失敗，平常經常上網查程式碼，也不做謎題。連打造出廣泛使用的框架的人，都不見得擅長面試裡的考題。</p>
+<p>能不能在白板上即時寫出一個演算法，與能不能做好軟體開發，終究不能直接畫上等號。</p>
+<p>當背誦冷門演算法成了通往高薪職位的門票，它不可避免地帶來了三個系統性扭曲：</p>
+<ol>
+<li><strong>催生了高價的應試產業鏈</strong>：候選人花費數千美元與幾百小時，學習一套人為設計的文化儀式與解題套路，這些記憶在通過面試進公司後，幾乎在一週內就會被大腦垃圾回收</li>
+<li><strong>高隨機性與高雜訊</strong>：匿名面試平台 Interviewing.io 的創辦人 Aline Lerner 在<a href="https://medium.com/free-code-camp/you-cant-fix-diversity-in-tech-without-fixing-the-technical-interview-here-s-the-data-93130f977da2" rel="noreferrer noopener" target="_blank">分析平台上數千場技術面試的數據後指出</a>，技術面試的結果往往具有高度不確定性，即使平均表現優秀的人，不同場次的表現也可能有很大落差</li>
+</ol>
+<p>一個天天查 Google 的工程師可能每週交付穩定可靠的架構；而一個能在白板上倒背紅黑樹的人，進團隊後可能連最基本的 Git conflict 都要解半天。</p>
+<h2 id="面試官在看什麼"><a aria-hidden="true" tabindex="-1" href="#面試官在看什麼"><span class="icon icon-link"></span></a>面試官在看什麼</h2>
+<p>別把面試當成一場單向的考試，它更像是一場互動式的技術對話。面試官通常帶著幾個核心問題在觀察你，我的話通常會有一些事先寫好的指標，在面試過程中逐漸挖掘，舉例像是：</p>
+<ul>
+<li>基礎能力：基本功有沒有到位？如果有些細節不熟，能不能靠動手能力與邏輯迅速補足。面對面試者不熟的問題，我甚至會鼓勵面試者直接展示他如何與 AI 對話</li>
+<li>文化契合度：通常公司會有一些文化標準，闡述他們對工作的期待與標準是什麼。我建議在應徵公司時，如果有這個頁面就先把閱讀一遍</li>
+<li>協作並主動對齊：團隊通常會期待能夠協作、主動溝通並對齊認知的人才。這與公司當下正在招募的人才有關，但工作中通常免不了協作</li>
+<li>解決問題的能力：面對一個未知且不確定的問題，是否能夠主動釐清需求，並將問題拆解成可以驗證的範圍</li>
+</ul>
+<p>再來就是設計問題了，一個常見的面試問題大概會是：「跟我說說你遇過印象最深刻、最難的專案」，然後再從其中展開：</p>
+<ul>
+<li>你在專案中扮演的角色是什麼？當時的需求是什麼？遇到了什麼效能瓶頸？為什麼傳統做法行不通？</li>
+<li>清楚討論取捨：工程世界裡沒有銀彈。選 A 還是選 B？你在效能、可讀性、開發速度之間做了什麼妥協？如果重新回到當時的時空背景，你會做出什麼不同的決定？</li>
+</ul>
+<p>這個問題之所以有效，是因為如果你只是掛名的話，你很難回答出所有細節；但如果你是真的有實際解決問題，你應該會對細節瞭若指掌。面試官也可以從對答中掌握你的水平、經驗大概到哪裡，是否有達到公司需要的標準。</p>
+<h2 id="如何在面試中證明自己"><a aria-hidden="true" tabindex="-1" href="#如何在面試中證明自己"><span class="icon icon-link"></span></a>如何在面試中證明自己？</h2>
+<p>在面試中，你應該把你自己想像成營銷的角色，這不是要你誇大自己，在面試中最大的目標就是證明自己有能力勝任此份工作。驗證你是否有能力勝任是公司端的事，你的目標應該是展示你的能力，以及判斷這家公司是否適合你。</p>
+<p>當面試官給你提示時，別把它當成指責。絕大多數面試官不是為了把你問倒，他們只是疲憊的上班族，也希望能找到聊得來的同事。這也是一個觀察公司是否適合自己的好方法。</p>
+<p>以下是一些可以採取的策略：</p>
+<h4 id="獲取資訊"><a aria-hidden="true" tabindex="-1" href="#獲取資訊"><span class="icon icon-link"></span></a>獲取資訊</h4>
+<p>在早期的獵頭或招聘經理訪談中，你也可以直接詢問：「能勝任這個職位的人，通常需要具備哪些特質？」拿到這些線索後，就能在後續的面試中更有針對性地展現優勢。像是公司比較看重 Infra 相關的人才，你就可以在簡歷當中多著墨關於 Infra 改善，甚至是 Hand-on 的經驗。</p>
+<h4 id="從專案經驗出發"><a aria-hidden="true" tabindex="-1" href="#從專案經驗出發"><span class="icon icon-link"></span></a>從專案經驗出發</h4>
+<p>先用最直觀、最簡單的方法把基本功能跑通，再隨著追問去優化複雜度。</p>
+<p>如果是聊專案經驗，先從 High-level 的脈絡與挑戰切入，再深入技術細節：當時的需求是什麼？遇到了什麼效能瓶頸？為什麼傳統做法行不通？</p>
+<h4 id="主動對齊認知"><a aria-hidden="true" tabindex="-1" href="#主動對齊認知"><span class="icon icon-link"></span></a>主動對齊認知</h4>
+<p>很多溝通問題本質上只是資訊與認知落差。</p>
+<p>主動向面試官確認細節：「你們希望深入到哪種程度的架構討論？」、「資料量大概是什麼規模？」這能幫你掌握方向，減少無謂的盲猜。</p>
+<h4 id="討論取捨"><a aria-hidden="true" tabindex="-1" href="#討論取捨"><span class="icon icon-link"></span></a>討論取捨</h4>
+<p>工程世界裡沒有銀彈。選 A 還是選 B？你在效能、可讀性、開發速度之間做了什麼妥協？如果重新回到當時的時空背景，你會做出什麼不同的決定？</p>
+<h4 id="誠實面對未知"><a aria-hidden="true" tabindex="-1" href="#誠實面對未知"><span class="icon icon-link"></span></a>誠實面對未知</h4>
+<p>不懂就老實承認，千萬不要不懂裝懂。資深工程師一眼就能看出破綻。承認不熟悉某個工具，接著說明你會如何查證、如何推導，反而展現了 Humble 與解決問題的底氣。</p>
+<h4 id="找機會-showoff"><a aria-hidden="true" tabindex="-1" href="#找機會-showoff"><span class="icon icon-link"></span></a>找機會 Showoff</h4>
+<p>面試官不一定會剛好問到你最擅長的事情。如果問題與你的經驗有關，可以在回答之後主動補一句：「這跟我之前處理過的一個問題很像，需要我展開說明嗎？」讓對方有機會深入，也確認這是不是他想了解的方向。</p>
+<p>或者提到你在過往專案中如何定位效能瓶頸、降低基礎設施成本，或讓原本容易出錯的部署流程變得可靠。不要只列出你用了哪些技術，而是說清楚你發現了什麼、做了什麼，以及怎麼確認問題真的改善了。</p>
+<p>有數據就交代改善前後的差異與測量條件；沒有數據，也可以說明具體改變。團隊一起完成的成果，則要讓面試官知道其中哪些判斷與工作是由你負責。</p>
+<h2 id="面試是雙向的"><a aria-hidden="true" tabindex="-1" href="#面試是雙向的"><span class="icon icon-link"></span></a>面試是雙向的</h2>
+<p>在《<a href="/random/frontend-interview/">2017 年前端面試心得</a>》我就體會過，面試從來不是單方面的考驗。面試官的態度、對時間的尊重程度、問題的深度，往往直接反映了團隊內部的日常，你在挑選每天要花八小時相處的夥伴。</p>
+<p>我會建議在面試尾聲提問幾個環節，我把他稱作 Smell Test：</p>
+<ul>
+<li><strong>升遷機制</strong>：「團隊最近一次有人獲得升遷，主要是因為完成了什麼樣的事情？」</li>
+<li><strong>容忍底線</strong>：「團隊成員被認為不適任或被請離開，通常是因為遇到了什麼狀況？」</li>
+<li><strong>決策分歧</strong>：「當團隊在重大技術選型或架構上有嚴重分歧時，你們通常如何定案？能否做到 <em>disagree and commit</em>？」</li>
+<li><strong>日常開發</strong>：「目前團隊從寫完程式碼到發布到正式環境，需要經過哪些步驟？有自動化測試與部署嗎？」</li>
+<li><strong>公司文化</strong>：「最近有發生過高層直接干涉產品開發的情形嗎？」</li>
+</ul>
+<p>如果對方的回答閃爍其詞、語帶防衛，或者面試官自始至終用高高在上的態度試圖電人，那麼就算拿到 Offer，你也該認真想想這是不是你想待的環境。</p>
+<h2 id="日本的面試"><a aria-hidden="true" tabindex="-1" href="#日本的面試"><span class="icon icon-link"></span></a>日本的面試</h2>
+<p>從以上的原則出發，我想要聊一下日本面試。在日本講求禮儀、年功序列制的職場環境下，你可能需要透過「表演」來通過面試。</p>
+<p>公司的面試流程體現了這家公司的文化，如果一個公司重視的是禮儀、標準的尊敬語與謙讓語、能否長時間加班，代表加入公司後也會遇到類似的職場文化。每個人的選擇不同，但這類型的公司容易導致的問題有：</p>
+<ul>
+<li>無法清楚說明標準：在工作上主管可能會以「你就應該做到啊！」「とりあえず根性だろう（總之就是靠意志力啊！）」來要求你</li>
+<li>以保護自己的權力為優先：如果察覺到你的表現可能影響主管、同事的地位、權力，可能會優先選擇抵抗而非配合</li>
+<li>重視形式上的禮儀：這可能體現在公司的例行朝會、精神喊話，進辦公室時要大喊おはようございます</li>
+</ul>
+<p>我在挑選工作時，更希望加入以技術、解決問題為核心的公司，因此我通常會忽略這類型的公司，我也相當推薦面試時先列出一些自己無法妥協的條件與工作環境，幫助自己篩選。</p>
+<p>可以看看我在 2019 年撰寫的<a href="/random/japan-interview">日本軟體工程師求職心得</a>。</p>
+<p>最後，祝大家面試順利！面試確實不輕鬆，但它依然是一件可以透過準備來提高勝率的事情。不需要因為人為設計的儀式來否定你的全部。也歡迎寫信跟我分享你在面試中遇到的困難！</p>]]></content:encoded>
+            <author>Kalan</author>
+        </item>
         <item>
             <title><![CDATA[用 Three.js 呈現我的房間]]></title>
             <link>https://blog.kalan.dev/frontend/threejs-room-portfolio/</link>
@@ -4391,56 +4475,6 @@ AI 讓產出 code 變得太容易了，所以反過來說，你更需要主動�
 <p>Huli: 從網路上大概知道彼此變成一起合作的夥伴，感謝接受邀約，也謝謝聆聽我各種有的沒的想法與煩惱。</p>
 <p>總是支持我，照顧我不遺餘力的 Haru。</p>
 <p>我人生的前 20 多年幾乎都是別人的幫助下度過，現在回想起來這或許就是種運氣吧。雖然不像 Elon Musk 那樣隨隨便便就能呼風喚雨，但我也終於有點能力可以幫助別人了。</p>]]></content:encoded>
-            <author>Kalan</author>
-        </item>
-        <item>
-            <title><![CDATA[釜山之旅]]></title>
-            <link>https://blog.kalan.dev/journal/busan/</link>
-            <guid isPermaLink="false">https://blog.kalan.dev/journal/busan/</guid>
-            <pubDate>Fri, 21 Mar 2025 00:00:00 GMT</pubDate>
-            <description><![CDATA[釜山旅行的照片與筆記：咖啡、韓國烤肉、豬肉湯飯、甘川洞文化村和膠囊列車，以及對旅行倦怠的反思。]]></description>
-            <content:encoded><![CDATA[<p><img src="https://image.kalan.dev/0ed22d7f-cd7d-41a1-ae20-e62185244a00/normal" alt="R0002165.JPG_compressed" width="720" height="1080"></p>
-<h2 id="前言"><a aria-hidden="true" tabindex="-1" href="#前言"><span class="icon icon-link"></span></a>前言</h2>
-<p>這次去釜山玩，讓我逐漸感受到旅行倦怠。倒不是不喜歡出國玩，而是我認為出國玩已經變得像是資本遊戲。花錢買體驗，花得錢越多體驗越好。</p>
-<p>而不知道為什麼，我也覺得出國玩越來越公式化了，而且不知道為什麼，我覺得很消耗我的能量。以前從沒有出現過。</p>
-<ul>
-<li>訂機票與飯店：比價、找便宜機票與飯店，看評價跟房型。太雷的話會影響心情</li>
-<li>搭飛機：準備護照、資料、行李、到機場的交通、入境出境、等待、等待、等待</li>
-<li>下飛機：找旅館、研究交通票卡、趕車、確認行程</li>
-<li>Check-in：放行李、休息</li>
-<li>跑行程：不外乎 Shopping、看觀光景點、吃飯、喝咖啡</li>
-</ul>
-<p>這一連串的行為彷彿公式化了。對我來說每個行為都讓我備感壓力，深怕一個不小心就毀了這趟旅行的體驗，在家裡反而更自在。</p>
-<p>話是這麼說，如果住在福岡蠻推薦到釜山玩玩的，距離近機票又便宜。</p>
-<p>不知道哪些的咖啡廳裡面的草莓鮮奶油蛋糕跟咖啡。釜山的咖啡，或者說韓國的咖啡普遍都挺好喝的，聽說他們的美式咖啡比較淡。</p>
-<p><img src="https://image.kalan.dev/8389bd4e-b7bf-4c8f-ee3c-c1c09656b400/normal" alt="4F35833E-CC83-4C45-919F-9AF18B8C1603.jpg_compressed" width="607" height="1080"></p>
-<h3 id="83獬豸"><a aria-hidden="true" tabindex="-1" href="#83獬豸"><span class="icon icon-link"></span></a>83獬豸</h3>
-<p>晚餐是吃這個非常有人氣的韓國烤肉。他的人氣程度超高，儘管可以預約，我們還是在現場等了三個多小時才進去。</p>
-<p><img src="https://image.kalan.dev/088105a2-41fc-4864-8e6c-5df264f09000/normal" alt="Caches764340768.574658.jpg_compressed" width="809" height="1080"></p>
-<p>這家烤肉店的賣點是全程店員會幫你桌邊服務烤肉。</p>
-<p>甘川洞文化村。我們在這邊的觀光商店街買了襪子跟一個甜點，不是很好吃。我嘴饞買了一支冰淇淋，也不好吃😂。</p>
-<p><img src="https://image.kalan.dev/727a48d4-a2a4-472a-bce1-f331aad01200/normal" alt="Caches764386354.778953.jpg_compressed" width="1440" height="1080"></p>
-<p><img src="https://image.kalan.dev/d35cc419-ea95-4cdd-129b-f8be39614100/normal" alt="Caches764386601.243994.jpg_compressed" width="1440" height="1080"></p>
-<p>我最喜歡的韓國料理有幾個：</p>
-<ul>
-<li>人蔘雞湯</li>
-<li>辣炒年糕</li>
-<li>菜包飯</li>
-</ul>
-<p>人蔘雞湯的湯頭超讚的，我們點半雞，肉已經燉到入口即化，湯也有點膠質化，喝起來非常濃郁。</p>
-<p><img src="https://image.kalan.dev/024b1efd-8fb7-42ce-b0c3-04e96b417100/normal" alt="Caches764416545.543659.jpg_compressed" width="809" height="1080"></p>
-<p>我很喜歡豬肉湯飯配粉紅蝦醬，我第一次吃的時候還覺得夭壽，這個東西也太鹹了吧要怎麼吃。嘗試了一下才知道，他的鹹可以把豬五花的香氣都帶出來，吃起來非常過癮。</p>
-<p>我更喜歡這種平民美食。</p>
-<p><img src="https://image.kalan.dev/845a6acb-6a1f-4ee4-e1c3-402eba14dc00/normal" alt="R0002007.JPG_compressed" width="720" height="1080"></p>
-<p>又是一間咖啡廳。</p>
-<p><img src="https://image.kalan.dev/b507fc34-3ae5-4952-ef2b-efd583f2da00/normal" alt="Caches764568230.211847.jpg_compressed" width="809" height="1080"></p>
-<p>發現韓國街上很多健身的廣告都是這種形象。</p>
-<p><img src="https://image.kalan.dev/372d17ed-43c3-4301-a5e5-1f0633c8d300/normal" alt="DSC01915.ARW_compressed" width="1440" height="1080"></p>
-<p>接下來就是去搭知名的釜山膠囊列車。</p>
-<p><img src="https://image.kalan.dev/f35394e0-0f34-4b5e-d331-a1b9e3e98600/normal" alt="R0002064.JPG_compressed" width="720" height="1080"></p>
-<p><img src="https://image.kalan.dev/cb527832-ab20-453d-029e-df65037b9100/normal" alt="R0002133.JPG_compressed" width="1620" height="1080"></p>
-<p>這是我離職（裸辭）後，想說放鬆一下而規劃的小旅行。現金流吃緊的時候出去玩反而會讓自己綁手綁腳，還是有工作的時候休假比較輕鬆。</p>
-<p>這同時也是我第一次去到日本以外的國家旅遊唷。雖然我在 2019 年有去過韓國，不過那次是出差，都待在公司指定的訓練中心居多，沒什麼玩到，這次終於可以好好玩一次了。</p>]]></content:encoded>
             <author>Kalan</author>
         </item>
     </channel>
