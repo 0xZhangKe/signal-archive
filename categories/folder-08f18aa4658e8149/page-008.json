@@ -1,6 +1,28 @@
 {
   "items": [
     {
+      "id": "bce471a4b7702581d162c2ab",
+      "title": "解决Cloudflare Pages的308自动重定向问题",
+      "summary": "我在使用Cloudflare Pages的时候，发现了一个非常奇怪的问题，就是发布的带有.html后缀的网页，会自动308重定向到一个没有.html的地址，并且，这个行为是Cloudflare Pages底层硬编码，无法通过配置参数关闭。 这个问题我用中文咨询了所有主流AI，都没有得到好的解决，有给方案说，使用.htm代替.html，因为Cloudflare Pages不会重写.htm文件，但这对于老网站的SEO来说显然不行，还有一个方案说是使用 Pages 函数进行拦截，说将一段代码放入functions/[[path]].js 文件中，然后重新发布，然后就会返回 200 + HTML内容，不会再有308重定向的状态码。我按照其方法发布了，也不行。 接着，我使用Google搜索“Cloudflare Pag…",
+      "image": null,
+      "publishedAt": "2026-08-20T10:40:04Z",
+      "sourceId": "790d01957a9e753b",
+      "sourceTitle": "月光博客",
+      "link": "https://www.williamlong.info/archives/7558.html",
+      "detailPath": "articles/bce471a4b7702581d162c2ab.json"
+    },
+    {
+      "id": "fb4576b3a5101f902bb87c8c",
+      "title": "入蜀记 day453 冷雨",
+      "summary": "「冷雨。」",
+      "image": null,
+      "publishedAt": "2026-08-20T06:54:27Z",
+      "sourceId": "8e5dc5a8b5023a8e",
+      "sourceTitle": "折腾人生",
+      "link": "https://z.arlmy.me/posts/BBBPandINSW/INSW-ko/INSW_453/",
+      "detailPath": "articles/fb4576b3a5101f902bb87c8c.json"
+    },
+    {
       "id": "649a966a77078d0c8b68eb19",
       "title": "无标题文章",
       "summary": "快速入睡技巧：仰卧在床上，做 10 组“4-7-8 呼吸法”（吸气 4 秒，屏息 7 秒，呼气 8 秒）。 然后从 300 开始，以 3 为单位倒数。呼吸能减缓心率，而倒数则能防止思绪纷飞。这种方法效果极佳，简直就像服用了安必恩一样。 — Michael Breus 4-7-8 呼吸法，我感觉有点难做到。Apple Watch 上正念冥想 App 里有这个呼吸的工具，对我来说没什么用。 但是头脑中默念倒数对助眠非常有用，我最近一周都在用这个方法，直接倒序 600，597，594… 这个助眠方法比我以前用的任何方法都管用。 因为我的睡不着，主要原因就是思绪乱飞，强制自己倒数的话，思绪有时也会乱飞，但重点是你会意识到乱飞，然后继续回到倒数中，直到睡着。 推荐有睡眠问题的朋友试一下。",
@@ -637,28 +659,6 @@
       "sourceTitle": "Domon",
       "link": "https://www.domon.cn/2026-7yue-yue-du-shu-zhai/",
       "detailPath": "articles/93bd5a10810a7d25afe27f7b.json"
-    },
-    {
-      "id": "ca1fade36ca392bcc59f48d9",
-      "title": "來自統治者的暴力言語",
-      "summary": "https://news.cntv.cn/2014/04/26/ARTI1398511118055635.sh […]",
-      "image": "https://2.gravatar.com/avatar/2ce149002ca625e3240835cbfaa3481507a538243a4c31c830176f97f9a9f060?s=96&d=identicon&r=G",
-      "publishedAt": "2026-08-14T03:20:21Z",
-      "sourceId": "737dffed2384c922",
-      "sourceTitle": "恐龍化石的網誌",
-      "link": "https://cylikesreading.wordpress.com/2026/08/14/violent-speech-from-gov-of-china-and-hk/",
-      "detailPath": "articles/ca1fade36ca392bcc59f48d9.json"
-    },
-    {
-      "id": "323c14d77cddcd2a81bc63bc",
-      "title": "I use Debian, btw.",
-      "summary": "感觉这句话很熟悉？你经常能在关于Archlinux的讨论里看到\"I use Arch,btw\"的评论。我以前也用过Archlinux作为主力操作系统，但没两个月我就换成了Debian，而且还是Debian Stable，至今已使用快一年了。 为什么会这样呢？要知道这两个发行版对于软件包的更新理念可是完全相反的，我的电脑甚至还是华硕天选6pro这种比较新的硬件（相对于Debian13软件包冻结的时间来说），怎么看使用Debian都不太适合。不过我想应该先说说为什么我不使用Archlinux 为什么不使用Archlinux？ 主要就是下面这三点 滚动更新的不稳定 Archlinux是滚动更新的操作系统，软件一发布新版本就可以更新。但这样的缺点就是，很容易产生依赖问题，运气不好会导致系统崩溃，俗称“滚挂”。有人肯定…",
-      "image": null,
-      "publishedAt": "2026-08-14T02:44:00Z",
-      "sourceId": "c3607b68b8e101d3",
-      "sourceTitle": "Xinsl's Blog",
-      "link": "https://blog.xinsl.xin/posts/i-use-debian-btw/",
-      "detailPath": "articles/323c14d77cddcd2a81bc63bc.json"
     }
   ]
 }
