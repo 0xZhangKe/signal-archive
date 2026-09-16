@@ -1,4 +1,114 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Mastodon Blog</title><link>https://blog.joinmastodon.org/</link><description>Recent content on Mastodon Blog</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Thu, 20 Aug 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.joinmastodon.org/index.xml" rel="self" type="application/rss+xml"/><item><title>Mastodon 4.7</title><link>https://blog.joinmastodon.org/2026/08/mastodon-4.7/</link><pubDate>Thu, 20 Aug 2026 00:00:00 +0000</pubDate><guid>https://blog.joinmastodon.org/2026/08/mastodon-4.7/</guid><description>&lt;p&gt;This release of Mastodon focuses entirely on technical improvements that are not necessarily visible on the user side, ahead of the ambitiously user-focused Mastodon 5.0 release later this year. Our goal is to improve compatibility with other fediverse platforms, improve performance, and fix various bugs that we’ve found. So this post will be &lt;em&gt;very&lt;/em&gt; technical. If you’re into that, read on.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Mastodon Blog</title><link>https://blog.joinmastodon.org/</link><description>Recent content on Mastodon Blog</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Tue, 15 Sep 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.joinmastodon.org/index.xml" rel="self" type="application/rss+xml"/><item><title>Trunk &amp; Tidbits, August 2026</title><link>https://blog.joinmastodon.org/2026/09/trunk-tidbits-august-2026/</link><pubDate>Tue, 15 Sep 2026 00:00:00 +0000</pubDate><guid>https://blog.joinmastodon.org/2026/09/trunk-tidbits-august-2026/</guid><description>&lt;p&gt;Welcome to the 29th edition of Trunks &amp;amp; Tidbits!&lt;/p&gt;
+&lt;h2 id="releases"&gt;Releases&lt;/h2&gt;
+&lt;p&gt;In August, we released Mastodon 4.7, which focuses entirely on technical improvements that are not visible by users. If you are a Fediverse implementer, our &lt;a href="https://blog.joinmastodon.org/2026/08/mastodon-4.7/"&gt;release blog post&lt;/a&gt; will likely be useful to you to understand the new features we implemented on the ActivityPub side.&lt;/p&gt;
+&lt;p&gt;As of this publication date, our latest supported releases are 4.7.1, 4.6.7, 4.5.17 and 4.4.24. Those releases contain security fixes and we advise all admins to update to them.&lt;/p&gt;
+&lt;p&gt;Mastodon 5.0, our next version, is shaping up quickly. We published a &lt;a href="https://blog.joinmastodon.org/2026/08/5.0-laying-the-foundation/"&gt;first blog post&lt;/a&gt; explaining the big interface changes that it will contain, and you can expect more news about it soon!&lt;/p&gt;
+&lt;h2 id="backend--web"&gt;Backend &amp;amp; Web&lt;/h2&gt;
+&lt;p&gt;In August 2026 we reviewed and merged 197 Pull Requests (132 with translation and dependency updates removed) from 11 contributors.&lt;/p&gt;
+&lt;p&gt;While some of the team were enjoying their summer break, others were working hard on preparing our next release.&lt;/p&gt;
+&lt;p&gt;Our front end team is focused on implementing the new Mastodon 5.0 interface changes. Those are not yet visible (even when running the nightly releases) as they are still being worked on, but they should start to appear on your screens in a few weeks.&lt;/p&gt;
+&lt;p&gt;Work is continuing in stabilising &lt;a href="https://github.com/mastodon/fediscoverer/tree/main"&gt;Fediscoverer&lt;/a&gt; to make it production-ready and allow admins to start benefitting from &lt;a href="https://fediscovery.org"&gt;Fediscovery&lt;/a&gt;.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;This started a few months ago, but we finally finished rolling our our custom Rails / Vite integration, which is simpler and uses less resources &lt;span class="not-prose"&gt;
+ —
+ &lt;a class="whitespace-nowrap inline-flex items-baseline underline" href="https://github.com/mastodon/mastodon/pull/40004"&gt;
+ &lt;img src="https://blog.joinmastodon.org/github-logo.svg" alt="Github" class="h-4 inline mr-1 self-center" /&gt;
+ &lt;span&gt;PR #40004&lt;/span&gt;
+ &lt;/a&gt;
+ 
+ &lt;span&gt;(by
+ &lt;a href="https://github.com/jhbabon" class="underline"&gt;jhbabon&lt;/a&gt;)
+ &lt;/span&gt;
+ &lt;/span&gt;
+&lt;/li&gt;
+&lt;li&gt;As part of other work, there can now be rare cases where remote account handles might become invalid after a rename. Those accounts are now indicated as such &lt;a href="https://docs.joinmastodon.org/entities/Account/#invalid_handle"&gt;in the REST API&lt;/a&gt; and in the web interface. &lt;span class="not-prose"&gt;
+ —
+ &lt;a class="whitespace-nowrap inline-flex items-baseline underline" href="https://github.com/mastodon/mastodon/pull/40045"&gt;
+ &lt;img src="https://blog.joinmastodon.org/github-logo.svg" alt="Github" class="h-4 inline mr-1 self-center" /&gt;
+ &lt;span&gt;PR #40045&lt;/span&gt;
+ &lt;/a&gt;
+ 
+ &lt;span&gt;(by
+ &lt;a href="https://github.com/ClearlyClaire" class="underline"&gt;ClearlyClaire&lt;/a&gt;)
+ &lt;/span&gt;
+ &lt;/span&gt;
+&lt;/li&gt;
+&lt;li&gt;Search queries that are very wide and might return far too many results are now blocked in order to not cause unbounded load on ElasticSearch &lt;span class="not-prose"&gt;
+ —
+ &lt;a class="whitespace-nowrap inline-flex items-baseline underline" href="https://github.com/mastodon/mastodon/pull/40196"&gt;
+ &lt;img src="https://blog.joinmastodon.org/github-logo.svg" alt="Github" class="h-4 inline mr-1 self-center" /&gt;
+ &lt;span&gt;PR #40196&lt;/span&gt;
+ &lt;/a&gt;
+ 
+ &lt;span&gt;(by
+ &lt;a href="https://github.com/Gargron" class="underline"&gt;Gargron&lt;/a&gt;)
+ &lt;/span&gt;
+ &lt;/span&gt;
+&lt;/li&gt;
+&lt;li&gt;To help us understand better which features in Mastodon are popular or effective, we now count—anonymously, of course—which feature led to a user following another user, e.g. how many times users click “Follow” from the search results or from collections &lt;span class="not-prose"&gt;
+ —
+ &lt;a class="whitespace-nowrap inline-flex items-baseline underline" href="https://github.com/mastodon/mastodon/pull/40226"&gt;
+ &lt;img src="https://blog.joinmastodon.org/github-logo.svg" alt="Github" class="h-4 inline mr-1 self-center" /&gt;
+ &lt;span&gt;PR #40226&lt;/span&gt;
+ &lt;/a&gt;
+ 
+ &lt;span&gt;(by
+ &lt;a href="https://github.com/Gargron" class="underline"&gt;Gargron&lt;/a&gt;)
+ &lt;/span&gt;
+ &lt;/span&gt;
+ &lt;span class="not-prose"&gt;
+ —
+ &lt;a class="whitespace-nowrap inline-flex items-baseline underline" href="https://github.com/mastodon/mastodon/pull/40258"&gt;
+ &lt;img src="https://blog.joinmastodon.org/github-logo.svg" alt="Github" class="h-4 inline mr-1 self-center" /&gt;
+ &lt;span&gt;PR #40258&lt;/span&gt;
+ &lt;/a&gt;
+ 
+ &lt;span&gt;(by
+ &lt;a href="https://github.com/Gargron" class="underline"&gt;Gargron&lt;/a&gt;)
+ &lt;/span&gt;
+ &lt;/span&gt;
+ &lt;span class="not-prose"&gt;
+ —
+ &lt;a class="whitespace-nowrap inline-flex items-baseline underline" href="https://github.com/mastodon/mastodon/pull/40340"&gt;
+ &lt;img src="https://blog.joinmastodon.org/github-logo.svg" alt="Github" class="h-4 inline mr-1 self-center" /&gt;
+ &lt;span&gt;PR #40340&lt;/span&gt;
+ &lt;/a&gt;
+ 
+ &lt;span&gt;(by
+ &lt;a href="https://github.com/Gargron" class="underline"&gt;Gargron&lt;/a&gt;)
+ &lt;/span&gt;
+ &lt;/span&gt;
+&lt;/li&gt;
+&lt;li&gt;We started an experiment to change how account deletion is federated, by keeping track of (an over-approximation of) which servers have seen each local account. This information is stored in a bloom filter, and used on account deletion to send deletion notices only to servers that already know of the account (plus a few others, as this is an approximation), greatly limiting the generated workload and network traffic. &lt;span class="not-prose"&gt;
+ —
+ &lt;a class="whitespace-nowrap inline-flex items-baseline underline" href="https://github.com/mastodon/mastodon/pull/40283"&gt;
+ &lt;img src="https://blog.joinmastodon.org/github-logo.svg" alt="Github" class="h-4 inline mr-1 self-center" /&gt;
+ &lt;span&gt;PR #40283&lt;/span&gt;
+ &lt;/a&gt;
+ 
+ &lt;span&gt;(by
+ &lt;a href="https://github.com/ClearlyClaire" class="underline"&gt;ClearlyClaire&lt;/a&gt;)
+ &lt;/span&gt;
+ &lt;/span&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="android--ios"&gt;Android &amp;amp; iOS&lt;/h2&gt;
+&lt;p&gt;On iOS, we released 2026.07 to fix a security issue when using the &amp;ldquo;Open in Mastodon&amp;rdquo; feature on links that are not Mastodon URLs.&lt;/p&gt;
+&lt;p&gt;Version 2.13.3 of our Mastodon for Android app has been released, with a few bug fixes.&lt;/p&gt;
+&lt;p&gt;Work is in progress to update both apps to our upcoming designs and we expect to be able to share more about this soon!&lt;/p&gt;
+&lt;h2 id="thanks"&gt;Thanks&lt;/h2&gt;
+&lt;p&gt;Thanks for reading! If you’re excited about what we’re working on, would you consider supporting us with a small, recurring donation?&lt;/p&gt;
+&lt;div class="not-prose rounded-md p-8 flex flex-col items-center mt-8 border border-blurple-500"&gt;
+ &lt;h3 class="text-lg font-bold mb-2 text-center"&gt;Thank you for supporting Mastodon&lt;/h3&gt;
+
+ &lt;p class="text-md mb-8 text-center"&gt;We develop and maintain the free and open source software that powers the social web. There is no capital behind this — we rely entirely on your support.&lt;/p&gt;
+
+ &lt;div class="flex flex-col md:flex-row gap-4"&gt;
+ &lt;a href="https://joinmastodon.org/sponsors#donate" class="flex-0 text-sm items-center justify-center rounded-md border-2 border-blurple-500 bg-blurple-500 py-2 px-4 !font-semibold text-white transition-colors hover:border-blurple-600 hover:bg-blurple-600 flex" data-sa-link-event="donate_button"&gt;Donate to the project&lt;/a&gt;
+ &lt;a href="https://joinmastodon.org/sponsors#supported_by" class="flex-0 text-sm items-center justify-center rounded-md border-2 border-blurple-500 py-2 px-4 !font-semibold text-blurple-500 transition-colors hover:border-blurple-600 hover:text-blurple-600 flex" data-sa-link-event="sponsor_view"&gt;View our sponsors&lt;/a&gt;
+ &lt;/div&gt;
+&lt;/div&gt;
+</description><atom:summary>The latest updates on engineering work from the Mastodon team</atom:summary><atom:link rel="enclosure" href="https://blog.joinmastodon.org/2026/09/trunk-tidbits-august-2026/hero.png" type="image/png"/></item><item><title>Mastodon 4.7</title><link>https://blog.joinmastodon.org/2026/08/mastodon-4.7/</link><pubDate>Thu, 20 Aug 2026 00:00:00 +0000</pubDate><guid>https://blog.joinmastodon.org/2026/08/mastodon-4.7/</guid><description>&lt;p&gt;This release of Mastodon focuses entirely on technical improvements that are not necessarily visible on the user side, ahead of the ambitiously user-focused Mastodon 5.0 release later this year. Our goal is to improve compatibility with other fediverse platforms, improve performance, and fix various bugs that we’ve found. So this post will be &lt;em&gt;very&lt;/em&gt; technical. If you’re into that, read on.&lt;/p&gt;
 &lt;p&gt;This release features multiple long-running database migrations, as we tackled several long-standing issues in our database structure that made some features difficult or even impossible to implement, and made some migrations unnecessarily complicated. Zero-downtime migration from Mastodon 4.6 to 4.7 is supported, as will be zero-downtime migration from 4.7 to the next version. However, Mastodon 4.7 will be a required stop for zero-downtime migrations.&lt;/p&gt;
 &lt;p&gt;Private keys of local users used for ActivityPub authentication are now encrypted in the database to reduce the risk of leaks, for example from backup files or external database providers. They are also stored in a way that will allow us to seamlessly use different signature algorithms and properly rotate keys in the future.&lt;/p&gt;
 &lt;p&gt;We now have better support for account handle changes for accounts hosted elsewhere on the fediverse. You can’t change your Mastodon handle for now, but this is a necessary step towards being able to do so in the future.&lt;/p&gt;
