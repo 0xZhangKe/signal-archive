@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "53b2335bd99c36f55e6efc01",
+      "title": "修正 RSS 排版",
+      "summary": "自從換到現在的 classic Hugo 主題之後，RSS 就沒排版了，在閱讀器中無法直接閱讀，Hugo 在沒有 rss.xml 的情況下，還是會輸出 index.xml，只是就沒有排版。 而 JN 在 10 月底特地來信告知，並且寫了一篇教學文章，只是 Eddie 太懶的拖到現在才處理。 （超級感謝，這是部落格才可能出現的事情，如果今天是社群平臺就被留言嗆爆了） 加入 layouts/_default/rss.xml # 原先的主題有 rss，但是在 theme 的 layouts 裡面，被我換主題之後，就直接一併被移除了，這次直接做在專案 的 layouts 裡面，就不用怕主題換了 rss 就不見。 這段程式碼與官方內建的幾乎一樣，但將關鍵的 .Summary 改成了 .Content： .Summary…",
+      "image": null,
+      "publishedAt": "2025-12-21T14:46:05Z",
+      "sourceId": "199cdf92fc46bfcd",
+      "sourceTitle": "Eddie Lv",
+      "link": "https://eddielv.com/musings/rss-fix/",
+      "detailPath": "articles/53b2335bd99c36f55e6efc01.json"
+    },
+    {
       "id": "75f9f5aa85271568ccd73a59",
       "title": "「搜尋」功能上線啦！",
       "summary": "因爲文章越來越多，只靠分類其實也不好找到文章，在「 歷史上的今天 」之後，弄了搜尋功能！以下分享怎麼在 Hugo 中做到。 做出搜尋頁面的基本頁 content/search/_index --- title: \"搜尋\" type: \"search\" draft: false --- header 在導覽列做搜尋框框 themes/classic/layouts/partials/header.html <header> <nav> <ul> {{ $title := lower .Title }} {{ $section := lower .Section }} <li class=\"pull-left {{ if .IsHome }}current{{ end }}\"> <a href=\"{{ .Site…",
@@ -648,17 +659,6 @@
       "sourceTitle": "Eddie Lv",
       "link": "https://eddielv.com/musings/soundman-lottery/",
       "detailPath": "articles/154247a4d04184c18a27581d.json"
-    },
-    {
-      "id": "fd6f086acc415c56c7269b5a",
-      "title": "Youtube Music 廣告，你別鬧了！",
-      "summary": "最近想用自己 YT Music 帳號建立播放清單，因此把帳號切換成自己的免費帳戶（Eddie 有公司的付費帳號），結果發現廣告有很多大問題。 廣告比音樂大聲超多 不用多說了吧，一有廣告，直接被嚇到。 廣告是以視覺爲主 每次聽廣告，都像是在聽一堆雜音，常常整個放完都不知道在廣告什麼，而 Spotify 就沒這問題，廣告內容就像是廣播的廣告一樣。 測試你在不在 如果你在的話，常常都是給你短的廣告，例如 30 秒左右的廣告，即時使用者等 5 秒馬上關掉，也就看了 5/30 = 16%，至少給廣告主看的數字不會太爛。 一旦發現你有幾次沒按略過廣告之後，就會開始給你超長廣告，因爲 YT 知道你現在不在，或是情況不允許按掉廣告。 好幾次洗澡時播放都是這樣，前面 1~2 首都很快就開始播，永遠都聽不到第 3 首，因爲廣告真…",
-      "image": null,
-      "publishedAt": "2025-11-07T17:42:53Z",
-      "sourceId": "199cdf92fc46bfcd",
-      "sourceTitle": "Eddie Lv",
-      "link": "https://eddielv.com/musings/ytm-ads/",
-      "detailPath": "articles/fd6f086acc415c56c7269b5a.json"
     }
   ]
 }

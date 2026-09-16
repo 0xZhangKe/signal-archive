@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "2048a0bb6e3f5e338d679070",
+      "title": "燈控台用 Windows",
+      "summary": "一直以來我司的燈控臺，都是用大陸華用，因爲老闆喜愛中文界面，而系統好像是完全獨立開發的系統，用起來也沒有什麼太大問題。 某場很大場的尾牙活動，我司專注做音響，把燈光外包出去，然而他們使用在臺灣市佔率最高的 MA 系統，這也是 Eddie 第一次這麼靠近看到操作過程。 燈光師在場中央寫燈寫了好幾個小時，存檔關機後、把控臺移到正式演出時的控臺位置時，檔案不見！燈控師說他確定有存檔，關機後再打開，檔案就沒了。 後來 Eddie 看到，那臺燈控臺是自帶電腦的，底下竟然是 Windows7 的開始列，突然覺得好像合理了。原來 MA 的運作原理是，安裝 Windows 後，再安裝 MA 軟體，而不是直接製作一個 MA 燈光作業系統。 以這個例子來說，倒不如買純粹的燈光控制器，再外接到筆記型電腦就好！（只要確保驅動抓得到即…",
+      "image": "https://12460841.s21i.faiusr.com/4/ABUIABAEGAAggoKNmAYorIbZ6AYwpwc4iwU.png",
+      "publishedAt": "2026-01-20T10:58:48Z",
+      "sourceId": "199cdf92fc46bfcd",
+      "sourceTitle": "Eddie Lv",
+      "link": "https://eddielv.com/musings/windows-light-control/",
+      "detailPath": "articles/2048a0bb6e3f5e338d679070.json"
+    },
+    {
       "id": "635becdc4a3938b2a767b54b",
       "title": "被動 DI-Box 可以反方向送",
       "summary": "關於 DI-Box 的應用，可以看 這裡 ，本篇要說的是「非正規的運用」。 理論上，被動式 DI-box 就是單純的變壓器，所以方向不是問題，但對於 Eddie 來說，那一直都是理論。 某場活動，臨時多了一堆東西，導致 XLR 輸入孔不夠，必須得用 6.3 Aux 輔助輸入孔。 而 DJ 控制器只有 XLR out，因此當時想到把 DI 給反送！ DJ 控制器的輸出端是 公頭 XLR ，因爲要反送，所以要接入 DI 的 Output 端，也是 公頭 XLR ，因此需要母對母的 XLR 接頭。 再來就是使用 6.3-6.3 TS 導線，從 DI 的 Input 端連接到 Mixer 的 6.3 輸入孔即可。 一接上去發現有很大的底噪，想說：「完了，該不會不能反著接吧？ 理論 上可以啊」 最後，把接地按鈕從 GN…",
@@ -648,17 +659,6 @@
       "sourceTitle": "Eddie Lv",
       "link": "https://eddielv.com/musings/before2012/",
       "detailPath": "articles/f38d54a432d017bb7c23a5c5.json"
-    },
-    {
-      "id": "53b2335bd99c36f55e6efc01",
-      "title": "修正 RSS 排版",
-      "summary": "自從換到現在的 classic Hugo 主題之後，RSS 就沒排版了，在閱讀器中無法直接閱讀，Hugo 在沒有 rss.xml 的情況下，還是會輸出 index.xml，只是就沒有排版。 而 JN 在 10 月底特地來信告知，並且寫了一篇教學文章，只是 Eddie 太懶的拖到現在才處理。 （超級感謝，這是部落格才可能出現的事情，如果今天是社群平臺就被留言嗆爆了） 加入 layouts/_default/rss.xml # 原先的主題有 rss，但是在 theme 的 layouts 裡面，被我換主題之後，就直接一併被移除了，這次直接做在專案 的 layouts 裡面，就不用怕主題換了 rss 就不見。 這段程式碼與官方內建的幾乎一樣，但將關鍵的 .Summary 改成了 .Content： .Summary…",
-      "image": null,
-      "publishedAt": "2025-12-21T14:46:05Z",
-      "sourceId": "199cdf92fc46bfcd",
-      "sourceTitle": "Eddie Lv",
-      "link": "https://eddielv.com/musings/rss-fix/",
-      "detailPath": "articles/53b2335bd99c36f55e6efc01.json"
     }
   ]
 }
