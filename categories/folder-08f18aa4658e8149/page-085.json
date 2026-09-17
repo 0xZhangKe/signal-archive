@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "afd0cd6a94af8421e5952acb",
+      "title": "服务器宕机事件",
+      "summary": "今天兴致勃勃上博客查看，更新后台 发现任何方法都连接不上服务器，SSH 不知道持续了多久，我的怀疑是被D，阿里云自动拉入小黑屋 无奈进入阿里云后台，连接远程一查看直接傻眼了。 直接无法启动实例 截图暂时找不到了有的话一定放出来 大概意思就是未能找到可挂载的系统分区 那我的资料呢？ 好好在运行的服务器，怎么会突然丢分区的 重启之后来到选择引导的系统，发现只有第一个实例无法引导，说白了就是我配置了有多个内核的 centos 若不是这一手，我的数据将永远和我说再见了，各位也就看不到这篇文章了 重新引导之后，问题又来了，没有网络 ping 不通任何网站， ifconfig 查看之后，发现只绑定了本地回环地址 127.0.0.1 我大胆推测已经被阿里拉入小黑屋，并且down掉了我的网络服务 service restar…",
+      "image": null,
+      "publishedAt": "2020-08-20T11:45:00Z",
+      "sourceId": "3220115c042340a7",
+      "sourceTitle": "TaurusXin 的独立博客",
+      "link": "https://www.taurusxin.com/2020-server-down/",
+      "detailPath": "articles/afd0cd6a94af8421e5952acb.json"
+    },
+    {
       "id": "bc59cf4a905c8e44a1057662",
       "title": "华为手机刷微博体验更好？技术角度的一些分析和思考",
       "summary": "技术群里的小伙伴发了一条微博， https://weibo.com/1808884742/IApbpEVQr ， 博主 @王波粒 发现， Mate 30 Pro 有个很特别的现象（建议先去看一下视频） 但是这个视频描述和底下的猜测都不对，我这边总结一下这个现象： 微博这个 App 在华为的手机上，在主页列表上下滑动的情况下依然可以流畅加载图片，而同一个版本的微博客户端，安装到其他手机上，在主页列表上下滑动的情况下，则必须要等到滑动停止之后才会加载图片 下面就针对这个现象,从技术的角度来深入分析产生这种现象的原因,以及我们能从里面学到什么",
@@ -648,17 +659,6 @@
       "sourceTitle": "Android Performance",
       "link": "https://androidperformance.com/2020/01/28/2020-read/",
       "detailPath": "articles/4993adf88aa40ceac3c00c55.json"
-    },
-    {
-      "id": "e6c2fe1ce374a590a51c7063",
-      "title": "2019 | 写在年关岁末",
-      "summary": "by 新世界的大门",
-      "image": null,
-      "publishedAt": "2020-01-24T23:44:56Z",
-      "sourceId": "4f3f8eb9d72c3840",
-      "sourceTitle": "新世界的大门",
-      "link": "https://blog.xinshijiededa.men/2019/",
-      "detailPath": "articles/e6c2fe1ce374a590a51c7063.json"
     }
   ]
 }
