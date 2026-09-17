@@ -1,5 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-09-16T18:09:49+00:00</updated><author><name>Simon Willison</name></author><entry><title>Claude Cowork and chat are now one Claude</title><link href="https://simonwillison.net/2026/Sep/16/one-claude/" rel="alternate"/><published>2026-09-16T18:09:49+00:00</published><updated>2026-09-16T18:09:49+00:00</updated><id>https://simonwillison.net/2026/Sep/16/one-claude/</id><summary type="html">
+<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-09-16T23:51:43+00:00</updated><author><name>Simon Willison</name></author><entry><title>datasette 1.0a40</title><link href="https://simonwillison.net/2026/Sep/16/datasette/" rel="alternate"/><published>2026-09-16T23:51:43+00:00</published><updated>2026-09-16T23:51:43+00:00</updated><id>https://simonwillison.net/2026/Sep/16/datasette/</id><summary type="html">
+    
+        &lt;p&gt;&lt;strong&gt;Release:&lt;/strong&gt; &lt;a href="https://github.com/simonw/datasette/releases/tag/1.0a40"&gt;datasette 1.0a40&lt;/a&gt;&lt;/p&gt;
+        &lt;p&gt;Same security fix as &lt;a href="https://simonwillison.net/2026/Sep/16/datasette-2/"&gt;0.65.5&lt;/a&gt;, plus some neat new features and bug fixes:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Plugins can now launch and manage &lt;strong&gt;background tasks&lt;/strong&gt; using the new &lt;a href="https://docs.datasette.io/en/latest/internals.html#datasette-add-background-task"&gt;datasette.add_background_task()&lt;/a&gt; method. Thanks, &lt;a href="https://alexgarcia.xyz/"&gt;Alex Garcia&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;I've migrated Datasette to &lt;a href="https://github.com/pydantic/httpx2"&gt;httpx2&lt;/a&gt; for features like the internal &lt;code&gt;datasette.client.get()&lt;/code&gt; method.&lt;/li&gt;
+&lt;li&gt;A whole lot of &lt;a href="https://docs.datasette.io/en/latest/changelog.html#a40-2026-09-16"&gt;bug fixes&lt;/a&gt;, many of them stemming from a recent effort to triage issues for a 1.0 stable release.&lt;/li&gt;
+&lt;/ul&gt;
+    
+    
+        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/security"&gt;security&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/datasette"&gt;datasette&lt;/a&gt;&lt;/p&gt;
+    
+
+</summary><category term="security"/><category term="datasette"/></entry><entry><title>datasette 0.65.5</title><link href="https://simonwillison.net/2026/Sep/16/datasette-2/" rel="alternate"/><published>2026-09-16T23:51:08+00:00</published><updated>2026-09-16T23:51:08+00:00</updated><id>https://simonwillison.net/2026/Sep/16/datasette-2/</id><summary type="html">
+    
+        &lt;p&gt;&lt;strong&gt;Release:&lt;/strong&gt; &lt;a href="https://github.com/simonw/datasette/releases/tag/0.65.5"&gt;datasette 0.65.5&lt;/a&gt;&lt;/p&gt;
+        &lt;p&gt;Security fix for an issue where a trailing newline in a requested table name could bypass table permissions and expose private rows, reported by &lt;a href="https://github.com/dpfkdlemtp"&gt;dpfkdlemtp&lt;/a&gt; in &lt;a href="https://github.com/simonw/datasette/security/advisories/GHSA-h547-rmjf-5m2m"&gt;GHSA-h547-rmjf-5m2m&lt;/a&gt;.&lt;/p&gt;
+    
+    
+        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/security"&gt;security&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/datasette"&gt;datasette&lt;/a&gt;&lt;/p&gt;
+    
+
+</summary><category term="security"/><category term="datasette"/></entry><entry><title>Claude Cowork and chat are now one Claude</title><link href="https://simonwillison.net/2026/Sep/16/one-claude/" rel="alternate"/><published>2026-09-16T18:09:49+00:00</published><updated>2026-09-16T18:09:49+00:00</updated><id>https://simonwillison.net/2026/Sep/16/one-claude/</id><summary type="html">
     
 &lt;p&gt;&lt;strong&gt;&lt;a href="https://claude.com/blog/cowork-is-now-claude"&gt;Claude Cowork and chat are now one Claude&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 In hopefully good news for anyone who, like me, was increasingly confused at Cowork v.s. Claude v.s. Claude Code:&lt;/p&gt;
@@ -435,64 +458,4 @@ Shopify are moving from React Native back to separate Swift and Kotlin codebases
 
 
 
-</summary><category term="ai-ethics"/><category term="mathematics"/><category term="ai"/></entry><entry><title>Some thoughts on the Navier–Stokes Millennium Prize Problem</title><link href="https://simonwillison.net/2026/Sep/8/on-navier-stokes/" rel="alternate"/><published>2026-09-08T23:55:12+00:00</published><updated>2026-09-08T23:55:12+00:00</updated><id>https://simonwillison.net/2026/Sep/8/on-navier-stokes/</id><summary type="html">
-    &lt;p&gt;&lt;a href="https://openai.com/index/navier-stokes-solution/"&gt;On the Navier–Stokes Millennium Prize Problem&lt;/a&gt; introduces an impressive result from OpenAI, who used an unreleased model to produce a resolution to &lt;a href="https://en.wikipedia.org/wiki/Navier–Stokes_existence_and_smoothness"&gt;the Navier–Stokes existence and smoothness problem&lt;/a&gt;, one of the seven &lt;a href="https://en.wikipedia.org/wiki/Millennium_Prize_Problems"&gt;Millennium Prize Problems&lt;/a&gt; that have been subject to a $1,000,000 prize since May 24th, 2000.&lt;/p&gt;
-&lt;p&gt;The discovery is somewhat overshadowed by accusations of skulduggery from Tristan Buckmaster, an NYU mathematics professor who was collaborating on related problems with Levent Alpöge, an accomplished mathematician who currently works for Anthropic.&lt;/p&gt;
-&lt;p&gt;Tristan's complaint accompanied &lt;a href="https://mastodon.social/@tristanbuckmaster/117233413705701198"&gt;a hastily published version&lt;/a&gt; of their own results. &lt;a href="https://cims.nyu.edu/~tristanb/statement.pdf"&gt;Here's the PDF describing what happened&lt;/a&gt;. The &lt;em&gt;very&lt;/em&gt; short version is that Tristan and Levent worked on the problem for almost a year, making extensive use of Claude and Codex (mainly GPT-5.6 Sol), then had a breakthrough on August 15th. The mathematical rumour mill kicked into gear and Tristan and Levent heard that OpenAI had heard that Anthropic had resolved "a major open problem", so they reached out and learned that OpenAI had a team working on a related problem, with a similar approach. Quoting Tristan:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;I asked when the first prompt had been sent by them. This question was not answered directly by OpenAI for some time. Eventually it was agreed that it had been sent in the past few days, after information about our work had reached OpenAI.&lt;/p&gt;
-&lt;p&gt;I asked whether the model had been trained on, or had access to, our sessions in Codex, into which we had been putting all our drafts for the whole of this project. I was told the model did not look up user data. I asked again, about training, and I did not get an answer.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;It gets more complicated from there. The OpenAI team offered to wait for Tristan to publish, or to have him author a paper about their result, but were clear that Levent would &lt;em&gt;not&lt;/em&gt; be invited as a co-author due to OpenAI's competitive relationship with his employer.&lt;/p&gt;
-&lt;p&gt;Here's how OpenAI described their work:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;On Tuesday, September 1, we heard rumors that two Millennium Prize problems had been resolved. Inspired by these rumors and by the step change in performance of our internal model, we launched an effort to evaluate it on all open Millennium Prize problems and a few other high-impact problems. [...]&lt;/p&gt;
-&lt;p&gt;The agents arrived at their resolution on Saturday, September 5, about 88 hours after the first agents were launched. Lean formalization and verification took an additional 17 hours via GPT‑6 Astra.&lt;/p&gt;
-&lt;p&gt;Across all attempted problems, the agents sent 4.9 million messages and used about 300 billion output tokens. In the process of resolving the Navier–Stokes problem, the agents sent 2.7 million messages and used approximately 130 billion output tokens.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;(We don't know the cost structure of the internal model they used, but 300 billion output tokens at public API prices for GPT-6 Astra would cost &lt;a href="https://www.llm-prices.com/#ot=300000000000&amp;amp;sel=gpt-6-astra"&gt;$15,000,000&lt;/a&gt;.)&lt;/p&gt;
-&lt;p&gt;Here's where they provide their perspective on Tristan and Levent's work (emphasis mine):&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Our effort began on September 1st after hearing a rumor which we later realized was related to Levent Alpöge, an Anthropic employee, and Tristan Buckmaster, a math professor at NYU. After the completion of our full project and Lean verification (on September 6th), believing from the rumor they also had a solution of Navier–Stokes, we reached out to them to offer a concurrent release of our result and to recognize their priority in a joint announcement. [...]&lt;/p&gt;
-&lt;p&gt;We (the researchers and the agents) did not see any of their work through any means until they released it publicly — in particular, no specific user data was accessed in order to solve this problem. &lt;strong&gt;While unlikely, we cannot rule out that de-identified data derived from their usage of our products helped &lt;a href="https://openai.com/policies/how-your-data-is-used-to-improve-model-performance/"&gt;improve our models&lt;/a&gt;&lt;/strong&gt;. However, our proofs differ significantly and even the precise results proved are different in the Euler case (forced vs unforced).&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;My interpretation of what happened here is that OpenAI heard that some Millennium Prize problems had been solved using LLMs and saw this as an opportunity to demonstrate the power of their latest model, without thinking too hard about the optics of scooping a team who had been using OpenAI's own models to work on this problem for the best part of a year.&lt;/p&gt;
-&lt;p&gt;This situation appears to mirror what's happening in the world of computer security right now. Anil Madhavapeddy recently pointed out that &lt;a href="https://anil.recoil.org/notes/rumour-is-the-exploit"&gt;Just a rumour of a bug is enough to find a security exploit these days&lt;/a&gt;, because if someone knows that some software has an unpatched vulnerability, they can set their agents the task of finding it. Is the same now true of mathematics? Just knowing that there is an unpublished solution to a problem might trigger millions of dollars in LLM spending to get there first.&lt;/p&gt;
-&lt;p&gt;This also highlights one of my ongoing frustrations about how all of this works. When an AI lab says that my data is "used to improve model performance", &lt;em&gt;what does that actually mean&lt;/em&gt;?&lt;/p&gt;
-&lt;p&gt;My two favourite hypothetical questions regarding this used to be:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;If I'm running Codex and one of my API keys accidentally gets consumed in the context, what are the chances that someone else might ask for an API key in the future and get mine back? (I asked someone at OpenAI once and they called this the "regurgitation" problem and assured me that they take great pains to prevent that... but wouldn't describe how.)&lt;/li&gt;
-&lt;li&gt;If I brainstorm with ChatGPT about potential new directions for my company, what's the chance that information might be exposed to a competitor in six months' time who asks "what might company X plan to do next"?&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;My new preferred hypothetical for this is:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;If I use ChatGPT to help me partially solve a Millennium Prize problem, what are the chances that my work will influence training such that a later model helps someone &lt;em&gt;else&lt;/em&gt; solve it first?&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Via &lt;a href="https://news.ycombinator.com/item?id=49613262"&gt;Hacker News&lt;/a&gt;.&lt;/p&gt;
-    
-        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/mathematics"&gt;mathematics&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/openai"&gt;openai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/training-data"&gt;training-data&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai-ethics"&gt;ai-ethics&lt;/a&gt;&lt;/p&gt;
-    
-
-</summary><category term="mathematics"/><category term="ai"/><category term="openai"/><category term="generative-ai"/><category term="llms"/><category term="training-data"/><category term="ai-ethics"/></entry><entry><title>Introducing ChatGPT Images 2.5</title><link href="https://simonwillison.net/2026/Sep/8/introducing-chatgpt-images-25/" rel="alternate"/><published>2026-09-08T22:46:33+00:00</published><updated>2026-09-08T22:46:33+00:00</updated><id>https://simonwillison.net/2026/Sep/8/introducing-chatgpt-images-25/</id><summary type="html">
-    
-&lt;p&gt;&lt;strong&gt;&lt;a href="https://openai.com/index/introducing-chatgpt-images-2-5/"&gt;Introducing ChatGPT Images 2.5&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
-OpenAI's image generation models are apparently used "more than 3 billion images across ChatGPT Images and the GPT‑Image models in the API". This latest release improves their instruction-following ability across multiple turns, responds faster, and "is better at preserving the subjects in your reference photos".&lt;/p&gt;
-&lt;p&gt;There are two new model IDs in the API: &lt;code&gt;gpt-image-2.5-sunburst&lt;/code&gt; and &lt;code&gt;gpt-image-2.5-flare&lt;/code&gt;. Based &lt;a href="https://developers.openai.com/api/docs/guides/image-generation#overview"&gt;on this&lt;/a&gt; I think Sunburst is the stronger option:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Choose Sunburst for workflows where editing precision matters most, and Flare for fast, high-quality everyday image generation.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;I &lt;a href="https://github.com/simonw/tools/pull/333"&gt;upgraded&lt;/a&gt; my &lt;a href="https://tools.simonwillison.net/python/#openai_imagepy"&gt;openai_image.py&lt;/a&gt; CLI tool to support passing in one or more reference images, so now this works:&lt;/p&gt;
-&lt;div class="highlight highlight-source-shell"&gt;&lt;pre&gt;uv run https://tools.simonwillison.net/python/openai_image.py \
-  &lt;span class="pl-s"&gt;&lt;span class="pl-pds"&gt;'&lt;/span&gt;add a raccoon scientist studying the chart thoughtfully&lt;span class="pl-pds"&gt;'&lt;/span&gt;&lt;/span&gt; \
-  -i https://static.simonwillison.net/static/2026/openai-agent-usage.webp \
-  -m gpt-image-2.5-sunburst&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;This is the &lt;a href="https://static.simonwillison.net/static/2026/openai-agent-usage.webp"&gt;original image&lt;/a&gt;, and here's what I got back from that prompt to "add a raccoon scientist studying the chart thoughtfully":&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Line chart with cartoon illustration. Title: &amp;quot;Usage of internal coding agents is increasing significantly—Median researcher&amp;quot;. Y-axis labeled &amp;quot;Daily $ / researcher&amp;quot; from 0 to 700; x-axis shows Feb 2026, Apr 2026, Jun 2026, Aug 2026. A blue line stays near zero through April, rises gradually to around 150 by June and July, then climbs steeply to about 600 by late August. In the foreground a cartoon raccoon in glasses and a white lab coat, chin in hand, holds a clipboard at a desk with a mug bearing the OpenAI logo, some printed charts, and a stack of three books titled &amp;quot;AI AGENTS&amp;quot;, &amp;quot;SOFTWARE ENGINEERING&amp;quot;, and &amp;quot;PRODUCTIVITY&amp;quot;. An OpenAI logo appears in the top right corner." src="https://static.simonwillison.net/static/2026/racoon-chart.webp" /&gt;
-
-
-    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/tools"&gt;tools&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/openai"&gt;openai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/uv"&gt;uv&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/text-to-image"&gt;text-to-image&lt;/a&gt;&lt;/p&gt;
-
-
-
-</summary><category term="tools"/><category term="ai"/><category term="openai"/><category term="generative-ai"/><category term="uv"/><category term="text-to-image"/></entry></feed>
+</summary><category term="ai-ethics"/><category term="mathematics"/><category term="ai"/></entry></feed>
