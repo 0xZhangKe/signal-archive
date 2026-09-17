@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "9b89504edc7a8bc597118aee",
+      "title": "Debian系统在Btrfs文件系统下使用Swapfile配置休眠功能",
+      "summary": "在 上一节的安装 中，我们在Btrfs文件系统下创建了一个swap子卷，并配置了一个swapfile，当swapfile大于电脑物理内存时，可以配置休眠(Hibernate)。休眠是一个可以让电脑把内存写入硬盘（swap分区），电脑断电再重启时可以立即恢复到关机前的状态的功能，话不多说，我们现在开始启用 0.（视情况选做）清除设备上已有swap文件 如果你在之前的安装中已经创建了一个小于你电脑内存大小的swap文件，先关闭swap分区： sudo swapoff -a 之后再把swap文件删除 rm -rf /swap/swapfile 1.创建swap文件 使用下面的命令快速创建swap文件： sudo btrfs filesystem mkswapfile --size 16G /swap/swapfil…",
+      "image": null,
+      "publishedAt": "2026-08-15T06:13:41Z",
+      "sourceId": "c3607b68b8e101d3",
+      "sourceTitle": "Xinsl's Blog",
+      "link": "https://blog.xinsl.xin/posts/debian-swapfile-hibernate/",
+      "detailPath": "articles/9b89504edc7a8bc597118aee.json"
+    },
+    {
       "id": "450ed09522c89c46a0a83a4f",
       "title": "向云端｜西南自驾10 - 下司",
       "summary": "",
@@ -648,17 +659,6 @@
       "sourceTitle": "云风的 BLOG",
       "link": "https://blog.codingnow.com/2026/08/improved_a_star_heuristics.html",
       "detailPath": "articles/60e299daea52a311be5c42b8.json"
-    },
-    {
-      "id": "586e5aef383314feef73954e",
-      "title": "关于搬家目的地可能性的调查",
-      "summary": "上一篇文章的最后我 提到自己考虑搬到美国以外的国家住一阵 。最近一段时间又继续调查了一下其中的可能性和可行性，现在粗略写个小报告来分享一下我目前为止所看到的——也就是2026年的现在，世界上什么样的移民项目是适合四喜丸子家的。 动机与筛选条件 # 话不多说，我想要搬家的第一动力其实并不是前篇博客中（长篇累牍地）抱怨过的“医疗保险费用太高”。医疗保险的价格我完全不能控制，能做的也不过是通过控制收入而提高补贴的额度罢了。而且最近了解到别的友邻的经历，医疗保险万万不能买太便宜的，一定要看 network coverage，否则真正用到的时候就会被踢皮球。事实上我家这个还算说得过去的所谓良心系保险已经受到不少限制了——打电话到诊所的时候，前台一听是某保险公司 ACA 的某某 plan，一下就变了脸说“我们不收这个”（…",
-      "image": "https://fourhappylions.com/posts/where-to-move/taxes_hu_174cc399e20f6e70.jpeg",
-      "publishedAt": "2026-08-09T00:00:00Z",
-      "sourceId": "dc53cf887984ae1c",
-      "sourceTitle": "四喜丸子",
-      "link": "https://fourhappylions.com/posts/where-to-move/",
-      "detailPath": "articles/586e5aef383314feef73954e.json"
     }
   ]
 }

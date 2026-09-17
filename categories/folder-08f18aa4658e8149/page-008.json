@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "38bf1f64ffa950f36e66daad",
+      "title": "在挺胸之前",
+      "summary": "應該不只我這樣，總是在坐累了之後，就變得駝背，整個人從頭到屁股呈現 C 字形。 幾次看物理治療之後，也更多觀察自己的所有動作習慣。 在駝背之前，骨盆通常會先變成後傾，這是因為坐久了，已經累了想放鬆而造成的代償。 骨盆後傾之後，為了平衡就容易變得駝背。為了緩解不舒服，會非常依賴椅背，還會喜歡翹椅子。 我大概是高中時期，養成翹椅子的習慣吧，嚴格說是為了緩解不舒服而養成的，並不是喜歡翹椅子。 所以，如果你也會有坐姿駝背成 C 字型的情況，嘗試看看把骨盆往前傾，回到中立位，會發現上半身很自然地就會跟著回正了。 如果骨盆正了還是很不舒服怎麼辦？ 答案很簡單：站起來。 回正就是正確的姿勢，不舒服就是坐太久了。",
+      "image": null,
+      "publishedAt": "2026-08-21T03:01:30Z",
+      "sourceId": "199cdf92fc46bfcd",
+      "sourceTitle": "Eddie Lv",
+      "link": "https://eddielv.com/musings/before-chest-out/",
+      "detailPath": "articles/38bf1f64ffa950f36e66daad.json"
+    },
+    {
       "id": "de477bbf55040187338401ee",
       "title": "切換 Pre—Fader 之前",
       "summary": "分享很久以前自己還很菜時，犯的音響工程技術錯誤，給音控新手一個警惕，如果是 DAW 初學者也可以思考一下兩種設定的差異。 某次音響工作，在同一個空間中，切割為雙場地單控台，A 地點會有人用麥克風講話，B 地點則是播放輕輕的、小小聲的適合展覽的音樂。 兩邊場地沒有隔開，在 A 場地能聽到 B 場地的喇叭聲，在 B 場地也能聽到 A 場地的。 可能是溝通上的關係，一開始並不知道有兩邊要發出不同聲音的需求，所以音控台並沒有先設置好。 當下是設定 A 場地喇叭為主喇叭，B場地喇叭為 Bus 喇叭。而 B 場地的喇叭為 A 場地主喇叭的 Post-Fader。 簡單說，若要讓 B 場地有聲音，A 場地也必須要送聲音。 然而，若想要完全獨立切開兩路，變成音量能各自調整的話，就必須要切換成 Pre- Fader。 A 場地…",
@@ -648,17 +659,6 @@
       "sourceTitle": "Noa's Blog",
       "link": "https://noa.bearblog.dev/a-senior-reads-zhuangzi/",
       "detailPath": "articles/9332882dad69fc3ef6e6697b.json"
-    },
-    {
-      "id": "9b89504edc7a8bc597118aee",
-      "title": "Debian系统在Btrfs文件系统下使用Swapfile配置休眠功能",
-      "summary": "在 上一节的安装 中，我们在Btrfs文件系统下创建了一个swap子卷，并配置了一个swapfile，当swapfile大于电脑物理内存时，可以配置休眠(Hibernate)。休眠是一个可以让电脑把内存写入硬盘（swap分区），电脑断电再重启时可以立即恢复到关机前的状态的功能，话不多说，我们现在开始启用 0.（视情况选做）清除设备上已有swap文件 如果你在之前的安装中已经创建了一个小于你电脑内存大小的swap文件，先关闭swap分区： sudo swapoff -a 之后再把swap文件删除 rm -rf /swap/swapfile 1.创建swap文件 使用下面的命令快速创建swap文件： sudo btrfs filesystem mkswapfile --size 16G /swap/swapfil…",
-      "image": null,
-      "publishedAt": "2026-08-15T06:13:41Z",
-      "sourceId": "c3607b68b8e101d3",
-      "sourceTitle": "Xinsl's Blog",
-      "link": "https://blog.xinsl.xin/posts/debian-swapfile-hibernate/",
-      "detailPath": "articles/9b89504edc7a8bc597118aee.json"
     }
   ]
 }
