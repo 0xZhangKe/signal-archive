@@ -4,11 +4,56 @@
         <title>愷開的部落格</title>
         <link>https://blog.kalan.dev</link>
         <description>好的技術文章不只傳遞知識，也傳遞觀點。這裡是我思考與書寫的地方。</description>
-        <lastBuildDate>Wed, 16 Sep 2026 09:26:28 GMT</lastBuildDate>
+        <lastBuildDate>Fri, 18 Sep 2026 14:35:35 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>zh</language>
         <copyright>© 2026 Kalan</copyright>
+        <item>
+            <title><![CDATA[Breaking Changes]]></title>
+            <link>https://blog.kalan.dev/life/breaking-changes/</link>
+            <guid isPermaLink="false">https://blog.kalan.dev/life/breaking-changes/</guid>
+            <pubDate>Fri, 18 Sep 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[在軟體開發裡，我們把改變既有行為的重大變更叫做破壞性變更。這幾年我對自己的人生做了好幾次破壞性變更，帳面上都升級了，但有些原本運作得好好的東西，也因此被弄壞了。]]></description>
+            <content:encoded><![CDATA[<p>讀到 Lauren Tan 以前寫的一篇短文《<a href="https://medium.com/@sugarpirate/warning-breaking-changes-afeb2544d0f5" rel="noreferrer noopener" target="_blank">Warning — Breaking Changes</a>》，裡面有一句話打中了我：</p>
+<blockquote>
+<p>Upgrading software that contains breaking changes involves fixing something that already works. Depending on the degree to which you relied on it, upgrading can sometimes be a painful process.</p>
+</blockquote>
+<p>在軟體開發的世界裡，我們對 breaking change 很熟悉。</p>
+<p>每當套件發布 Major release，改了 API 簽名、拿掉 deprecated 的函數，甚至是換了一套底層依賴，升級時 <code>npm install</code> 跑下去，等待你的往往是一整排紅字。</p>
+<p>Legacy Code 其實在 production 跑得好好的，但為了往前走，還是必須親手把原本能動的東西拆開重構。</p>
+<p>版本升級不只是修改程式碼而已，為了確保資源，有時還得說服上層為什麼要重構，這會帶來哪些影響。</p>
+<p>這幾年回頭看自己的職涯，不管是當初決定深耕軟體開發、換工作，還是後來收拾行李搬到日本，每一次外人看來的升級，本質上都是一次 breaking change。</p>
+<h2 id="看似光鮮的-major-release"><a aria-hidden="true" tabindex="-1" href="#看似光鮮的-major-release"><span class="icon icon-link"></span></a>看似光鮮的 Major Release</h2>
+<p>剛到海外工作的第一年，在社群平台或是跟台灣的朋友聊天時，大家最常有的反應多半是：「哇，去日本工作很棒耶」、「生活感覺很充實」、「大公司資源很多吧」。</p>
+<p>從外在指標來看，拿到簽證、有了不錯的薪水、住進空間比較大的房子、廚房設備齊全，到後來買房，工作上也接觸到以前碰不到的架構，認識來自各國的開發者。</p>
+<p>國中的我討厭唸書，成績屬於吊車尾。國三時受到環境影響，以及認知到要靠讀書翻身，後來成功考到國立高職電子科。</p>
+<p>我很幸運，能進 CS 領域一部分是誤打誤撞，單純是因為分數不夠念到電機系。</p>
+<p>這個誤打誤撞，對我之後的職涯造成極大影響。</p>
+<p>市場對軟體開發的需求極大，幾乎不怕找不到工作，IT 產業相比於其他產業，更容易拿到工作簽證，永住權的門檻也相對較低。</p>
+<p>AI 的出現或許會改寫軟體開發，但我仍然認為學 CS 的價值極高。</p>
+<p>它不僅僅只是教你寫程式而已，計算機原理、作業系統、資料結構與演算法、統計、線性代數，這些知識都對如何系統性解決問題有極大用處。</p>
+<p>然而版本升級的背後，往往很少人看得到 migration guide 裡沒寫出來的代價。</p>
+<p>搬到異鄉意味著抽離了原本二十幾年習慣的家鄉。</p>
+<p>熟悉的朋友隔著海，語言和文化的不同像是一層看不見的牆，日常最微小的互動都多了些磨擦力，久而久之大家也都漸行漸遠了。</p>
+<p>強烈的孤獨感常在毫無預警的時候湧上來。甚至當你把煩惱吐出來，很多人第一反應是不理解。</p>
+<p>「你明明就是比較高薪的族群，為什麼那麼不知足」</p>
+<p>卡在喉頭的無奈又更難傾訴了。</p>
+<p>這段期間，我很感謝老婆 Haruhi 在我身邊，讓我可以全心投入在工作與提升自己。</p>
+<h2 id="沒有-rollback-的重構"><a aria-hidden="true" tabindex="-1" href="#沒有-rollback-的重構"><span class="icon icon-link"></span></a>沒有 Rollback 的重構</h2>
+<p>現實生活沒有 rollback 機制。</p>
+<p>既然選擇了往前跨一步，就只能接受舊的依賴已經不相容的事實。那些生活中的不適應、焦慮、跟異地文化碰撞時的挫折，就像是 compiler 不斷噴出的 error log。有時候修好了一個 bug，另一個地方又破了洞。</p>
+<p>以前我總覺得，只要技術變好、職涯繼續往上爬、拿到更好的 offer，很多焦慮就會迎刃而解。</p>
+<p>後來慢慢體會到，人的內心容量其實就那麼大，每一次生活環境的重大躍遷，本質上都是取捨。</p>
+<p>我得到了一些視野和成長，相應的就是得交出原本習慣的安逸與陪伴。或許這就是重構的成本吧。</p>
+<h2 id="你最近好嗎"><a aria-hidden="true" tabindex="-1" href="#你最近好嗎"><span class="icon icon-link"></span></a>「你最近好嗎？」</h2>
+<p>Lauren Tan 在文章最後提到，很多人即便表面上把生活和工作打理得有條不紊，內心深處可能正獨自對抗著極大的空虛與孤獨。</p>
+<p>在工程師圈子裡，大家很習慣談架構、談技術突破、談薪資與職涯規劃，但很少人會停下來聊聊生活調適上的狼狽。越是看起來獨當一面、把事情處理得很好的人，往往越擅長把這些情緒藏在心底。</p>
+<p>如果有機會，不妨問問身邊那些最近剛換環境、剛接下新挑戰，或是很久沒見的朋友一句：</p>
+<p>「你最近好嗎？」</p>
+<p>在人生遇到重大 breaking changes 的時刻，一句溫暖的問候，有時候就是支撐那個人把程式碼一行一行修回來的最大鼓勵。</p>]]></content:encoded>
+            <author>Kalan</author>
+        </item>
         <item>
             <title><![CDATA[如何準備工程師的面試]]></title>
             <link>https://blog.kalan.dev/random/whiteboard-interview/</link>
@@ -4459,26 +4504,6 @@ AI 讓產出 code 變得太容易了，所以反過來說，你更需要主動�
 <p>如果身旁都是與自己水平落差極大的人，那麼也很有可能無法促成想法上的交流。</p>
 <p>就像在故事中，如果對方既不要菜籃也不要長矛，而是提案重蓋一座塔，我可能真的無法理解。大概是這種感覺。</p>
 <p>身處在這樣的環境，建議離職。</p>]]></content:encoded>
-            <author>Kalan</author>
-        </item>
-        <item>
-            <title><![CDATA[15. 充滿感謝的人生]]></title>
-            <link>https://blog.kalan.dev/career-retrospect/15-grateful-life/</link>
-            <guid isPermaLink="false">https://blog.kalan.dev/career-retrospect/15-grateful-life/</guid>
-            <pubDate>Sat, 02 Aug 2025 00:00:00 GMT</pubDate>
-            <description><![CDATA[小時候家境不算好，在生活上過得並不順遂，沒有經濟支援的情況下，選擇就會變得相當狹隘。然而在這樣的環境下，我仍然 …]]></description>
-            <content:encoded><![CDATA[<p>小時候家境不算好，在生活上過得並不順遂，沒有經濟支援的情況下，選擇就會變得相當狹隘。然而在這樣的環境下，我仍然沒有走歪，在成長的路上甚至可以說是相當順利，儘管比那些資源豐裕的中產階級家庭過得還要辛苦許多。</p>
-<p>我的父母為了把我們家養好養大，幾乎是拼了命地在工作，並不富裕但已經足夠我念完大學。</p>
-<p>從國中開始，不管是班導林老師的幫助，讓我有學費上的減免，也很謝謝國中時期許多同學帶來的幫助，這些事對我影響很大。</p>
-<p>高中時期幫助我減免補習費的十元；知道我家庭狀況給我支持的班導黃老師。</p>
-<p>大學時期系上的照顧：系主任周教授偷偷塞錢給我救急，知道我的家境為我奔波與校友會爭取資源的學長姐，Winston、查教授的幫助、David 教授語重心長叫我不要輕易休學。包含室友願意支助，大學的我有許多不成熟。系辦小姐為了我的畢業學分幫助我跑行政與跟其他系溝通。</p>
-<p>加入 Sudo 實習：謝謝創辦人 Eric/Yvette/Andy/陳楷願意給當時是完全白紙的我機會，以及核心開發 team，帶給我很多視野與做事方法。還有早期一起合作的同事，對當時不諳世事的我帶來很多啟發與刺激。</p>
-<p>17 時的夥伴：Eason 以及開發團隊，那是我成長最快也是工作最開心的一段時光，到其他地方工作後才知道能有一群如此契合的同事們是多麽難能可貴的事。</p>
-<p>LINE：包含內推我進去的 Denny，當我在日本被陌生人敲門嚇得報警時關心我的主管，帶我開車去 Costco 的主管、幫助在心態上轉變許多的主管，一起共事的同事們。讓我認識 Ben Eater 的神同事，一起研究 IoT 還試圖自幹一個 Software UART。</p>
-<p>推友：曾經有一段低潮期在推特，推文發出去之後有許多素未蒙面的陌生推友傳私訊鼓勵我，真的很謝謝你們。</p>
-<p>Huli: 從網路上大概知道彼此變成一起合作的夥伴，感謝接受邀約，也謝謝聆聽我各種有的沒的想法與煩惱。</p>
-<p>總是支持我，照顧我不遺餘力的 Haru。</p>
-<p>我人生的前 20 多年幾乎都是別人的幫助下度過，現在回想起來這或許就是種運氣吧。雖然不像 Elon Musk 那樣隨隨便便就能呼風喚雨，但我也終於有點能力可以幫助別人了。</p>]]></content:encoded>
             <author>Kalan</author>
         </item>
     </channel>

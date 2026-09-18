@@ -4,11 +4,70 @@
         <title>Shuo-jen Blog</title>
         <link>https://shuojen.com/blog</link>
         <description>我專屬的人生博物館與編年史</description>
-        <lastBuildDate>Wed, 16 Sep 2026 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Fri, 18 Sep 2026 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>zh-TW</language>
         <copyright>Copyright © 2026 Shuo-jen Huang</copyright>
+        <item>
+            <title><![CDATA[Gboard-patches 使用指南]]></title>
+            <link>https://shuojen.com/blog/2026/09/18/gboard</link>
+            <guid>https://shuojen.com/blog/2026/09/18/gboard</guid>
+            <pubDate>Fri, 18 Sep 2026 13:54:31 GMT</pubDate>
+            <description><![CDATA[由 jasonwu1994 大大開源的「Gboard-patches」是我最近發現的好用 android 輸入法。]]></description>
+            <content:encoded><![CDATA[<p>由 jasonwu1994 大大開源的<a href="https://github.com/jasonwu1994/Gboard-patches" target="_blank" rel="noopener noreferrer" class="">「Gboard-patches」</a>是我最近發現<sup><a href="https://shuojen.com/blog/2026/09/18/gboard#user-content-fn-1-601c99" id="user-content-fnref-1-601c99" data-footnote-ref="true" aria-describedby="footnote-label" class="anchorTargetStickyNavbar_Vzrq">1</a></sup>的好用 android 輸入法。</p>
+<p>以往我都是使用下面這款，早已沒在更新的舊版注音輸入法，只為了注音上下滑動輸入英文的功能，直到我發現了這個專案，保留了過去好用的滑動輸入，並且有了更多新功能，它的安裝使用是基於 Morphe（類似 ReVanced 的應用修補框架）所開發的一組官方 Gboard 增強補丁。</p>
+<img src="https://shuojen.com/assets/images/apk-0a1dff6d58cd4bb361059fc3b4e06489.png" width="50" alt="img">
+<p>▲舊版注音輸入法</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="先介紹我最愛的幾個功能">先介紹我最愛的幾個功能<a href="https://shuojen.com/blog/2026/09/18/gboard#%E5%85%88%E4%BB%8B%E7%B4%B9%E6%88%91%E6%9C%80%E6%84%9B%E7%9A%84%E5%B9%BE%E5%80%8B%E5%8A%9F%E8%83%BD" class="hash-link" aria-label="先介紹我最愛的幾個功能的直接連結" title="先介紹我最愛的幾個功能的直接連結" translate="no">​</a></h2>
+<ol>
+<li class="">上下滑動輸入英文</li>
+</ol>
+<video controls="" width="320"><source src="https://media.shuojen.com/video/english.mp4" type="video/mp4"><p>抱歉，您的瀏覽器不支援內嵌影片。</p></video>
+<ol start="2">
+<li class="">「ㄥ」往上滑簡繁轉換</li>
+</ol>
+<video controls="" width="320"><source src="https://media.shuojen.com/video/chinese.mp4" type="video/mp4"><p>抱歉，您的瀏覽器不支援內嵌影片。</p></video>
+<ol start="3">
+<li class="">即時打字翻譯</li>
+</ol>
+<video controls="" width="320"><source src="https://media.shuojen.com/video/translate.mp4" type="video/mp4"><p>抱歉，您的瀏覽器不支援內嵌影片。</p></video>
+<ol start="4">
+<li class="">語音輸入自動判斷標點</li>
+</ol>
+<video controls="" width="320"><source src="https://media.shuojen.com/video/voice.mp4" type="video/mp4"><p>抱歉，您的瀏覽器不支援內嵌影片。</p></video>
+<ol start="5">
+<li class="">海量 emoji 與 GIF</li>
+</ol>
+<img src="https://shuojen.com/assets/images/001-f4f72383e6b1deb651ad5af9f7e24598.webp" width="320" alt="img">
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="簡易安裝流程">簡易安裝流程<a href="https://shuojen.com/blog/2026/09/18/gboard#%E7%B0%A1%E6%98%93%E5%AE%89%E8%A3%9D%E6%B5%81%E7%A8%8B" class="hash-link" aria-label="簡易安裝流程的直接連結" title="簡易安裝流程的直接連結" translate="no">​</a></h2>
+<p>這個專案遵循 GPL-3.0 開源協議，完全免費且代碼透明</p>
+<ol>
+<li class="">
+<p>首先準備好<a href="https://morphe.software/" target="_blank" rel="noopener noreferrer" class=""> Morphe 修補工具</a>，這個工具的使用邏輯是安裝官方的 APK 程式，再以作者寫好的補丁新增各種新功能。</p>
+</li>
+<li class="">
+<p>下載官方 Gboard APK，為了使用語音輸入功能，我下載的版本是這個 <a href="https://www.apkmirror.com/apk/google-inc/gboard/gboard-the-google-keyboard-18-0-3-954559732-release/gboard-the-google-keyboard-18-0-3-954559732-release-arm64-v8a-2-android-apk-download/" target="_blank" rel="noopener noreferrer" class="">Gboard</a>，語音需要下載標記為 bundle 的 APKM，下載後先不要安裝。</p>
+</li>
+<li class="">
+<p>打開 jasonwu 大大的<a href="https://github.com/jasonwu1994/Gboard-patches" target="_blank" rel="noopener noreferrer" class=""> github 專案 </a>，點 README 裡的<a href="https://morphe.software/add-source?github=jasonwu1994/Gboard-patches" target="_blank" rel="noopener noreferrer" class=""> Open in Morphe</a>。</p>
+</li>
+<li class="">
+<p>選擇剛才下載的 Gboard 開始修補</p>
+</li>
+</ol>
+<p>修補完就可以使用了，關於語音功能的設定，可以詳見註腳的第二篇文章，照原作者的說明操作，雖然我沒有成功，進階功能一樣是反灰的狀態，但是其實使用起來已經有標點符號了。</p>
+<p>不過我很少用語音，總覺得思考太慢跟不上語音，打字的節奏比較剛好。</p>
+<!-- -->
+<section data-footnotes="true" class="footnotes"><h2 class="anchor anchorTargetStickyNavbar_Vzrq sr-only" id="footnote-label">Footnotes<a href="https://shuojen.com/blog/2026/09/18/gboard#footnote-label" class="hash-link" aria-label="Footnotes的直接連結" title="Footnotes的直接連結" translate="no">​</a></h2>
+<ol>
+<li class="anchorTargetStickyNavbar_Vzrq" id="user-content-fn-1-601c99">
+<p>感謝 jasonwu 大大在 ptt 上的推廣，<a href="https://www.ptt.cc/bbs/MobileComm/M.1775598237.A.888.html" target="_blank" rel="noopener noreferrer" class="">這篇</a>還有<a href="https://www.ptt.cc/bbs/MobileComm/M.1785803475.A.292.html" target="_blank" rel="noopener noreferrer" class="">這篇</a>幫助很大。 <a href="https://shuojen.com/blog/2026/09/18/gboard#user-content-fnref-1-601c99" data-footnote-backref="" aria-label="Back to reference 1" class="data-footnote-backref">↩</a></p>
+</li>
+</ol>
+</section>]]></content:encoded>
+            <category>tool</category>
+        </item>
         <item>
             <title><![CDATA[自己做生日蛋糕]]></title>
             <link>https://shuojen.com/blog/2026/09/16/birthday</link>
@@ -577,39 +636,6 @@
 </ol>
 </section>]]></content:encoded>
             <category>fun</category>
-        </item>
-        <item>
-            <title><![CDATA[GBA 遊戲]]></title>
-            <link>https://shuojen.com/blog/2026/08/02/gba</link>
-            <guid>https://shuojen.com/blog/2026/08/02/gba</guid>
-            <pubDate>Sun, 02 Aug 2026 07:49:58 GMT</pubDate>
-            <description><![CDATA[這兩天週末窩在家用手機玩 GBA 遊戲，小時候沒有玩過這款節奏天國，真的很有趣，有點像幾年前玩的節奏醫生，不過我想肯定是節奏醫生參考節奏天國的吧，都是很優秀的作品，非常值得玩。]]></description>
-            <content:encoded><![CDATA[<p>這兩天週末窩在家用手機玩 GBA 遊戲，小時候沒有玩過這款節奏天國<sup><a href="https://shuojen.com/blog/2026/08/02/gba#user-content-fn-1-376c7e" id="user-content-fnref-1-376c7e" data-footnote-ref="true" aria-describedby="footnote-label" class="anchorTargetStickyNavbar_Vzrq">1</a></sup>，真的很有趣，有點像幾年前玩的<a href="https://store.steampowered.com/app/774181/Rhythm_Doctor/?l=tchinese" target="_blank" rel="noopener noreferrer" class="">節奏醫生</a>，不過我想肯定是節奏醫生參考節奏天國的吧，都是很優秀的作品，非常值得玩。</p>
-<img src="https://shuojen.com/assets/images/001-f6e9f55302c6a4d5ad51f588b83cee9a.jpg" width="300" alt="img">
-<p>▲終於把前五個小遊戲還有綜合 1 都拿到獎牌了，繼續再接再厲！</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="gb--gba-回憶">GB &amp; GBA 回憶<a href="https://shuojen.com/blog/2026/08/02/gba#gb--gba-%E5%9B%9E%E6%86%B6" class="hash-link" aria-label="GB &amp; GBA 回憶的直接連結" title="GB &amp; GBA 回憶的直接連結" translate="no">​</a></h2>
-<p>懷念小時候最喜歡玩的這幾款遊戲</p>
-<img src="https://shuojen.com/assets/images/002-795a186a1401f1eb5de4cd6db8b0576b.jpg" width="300" alt="img">
-<p>▲牧場物語-礦石村的夥伴</p>
-<img src="https://shuojen.com/assets/images/003-541491d061c59e51cc4ae92afc70a753.jpg" width="300" alt="img">
-<p>▲卡比之星-鏡之大迷宮</p>
-<img src="https://shuojen.com/assets/images/004-e6d982698359f8cdb0749769dad4f072.jpg" width="300" alt="img">
-<p>▲神奇寶貝-綠寶石版</p>
-<img src="https://shuojen.com/assets/images/005-5dccbf5ba60fb0ebc8891f5d7ead7872.jpg" width="300" alt="img">
-<p>▲瑪利歐賽車</p>
-<img src="https://shuojen.com/assets/images/006-0388a4029fe1eb0f9df579cee8c9d5d2.jpg" width="300" alt="img">
-<p>▲壞利歐世界</p>
-<img src="https://shuojen.com/assets/images/007-9b11605f80ed9972e16ad32b7eee6ff9.jpg" width="300" alt="img">
-<p>▲神奇寶貝-銀版</p>
-<!-- -->
-<section data-footnotes="true" class="footnotes"><h2 class="anchor anchorTargetStickyNavbar_Vzrq sr-only" id="footnote-label">Footnotes<a href="https://shuojen.com/blog/2026/08/02/gba#footnote-label" class="hash-link" aria-label="Footnotes的直接連結" title="Footnotes的直接連結" translate="no">​</a></h2>
-<ol>
-<li class="anchorTargetStickyNavbar_Vzrq" id="user-content-fn-1-376c7e">
-<p>Wiwi 推薦文章：<a href="https://wiwi.blog/blog/short-game-reviews-mid-2026" target="_blank" rel="noopener noreferrer" class="">最近玩的遊戲超短評（2026 年中）</a> <a href="https://shuojen.com/blog/2026/08/02/gba#user-content-fnref-1-376c7e" data-footnote-backref="" aria-label="Back to reference 1" class="data-footnote-backref">↩</a></p>
-</li>
-</ol>
-</section>]]></content:encoded>
-            <category>game</category>
         </item>
     </channel>
 </rss>
