@@ -1,8 +1,30 @@
 {
   "items": [
     {
+      "id": "79c66aa0a8717a6df292164b",
+      "title": "SmartPerfetto v1.12.0 更新说明",
+      "summary": "上一篇更新 写到 2026 年 8 月 21 日的 v1.7.0。从 8 月 21 日的 v1.7.0 到 9 月 17 日的 v1.12.0，这 28 个日历日内，SmartPerfetto 发布了 9 个新版本，仓库合入 141 个非 merge 提交。 这段时间增加了任意双 Trace 工作台、无需预建索引的源码分析、Auto/Fast/Full 显式模式、跨会话调查检查点，以及贯穿 Web、CLI、报告和快照的结论核验。变化很多，但方向很集中：让一次分析从「模型给出答案」变成「请求、工具执行、证据、断言和最终交付都能核对」。 项目地址： github.com/Gracker/SmartPerfetto 。",
+      "image": null,
+      "publishedAt": "2026-09-19T04:00:00Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2026/09/19/SmartPerfetto-v1.12.0-Release-Notes/",
+      "detailPath": "articles/79c66aa0a8717a6df292164b.json"
+    },
+    {
+      "id": "c82ba76f440d4c268fe1f596",
+      "title": "耗时大半年，开源一本 Android 电子书《Android 技术内幕：系统机制、性能优化与工具实战》",
+      "summary": "Android 内部机制的资料，网上不缺。AOSP、官方文档、博客、论文、trace 讨论，想找都找得到。麻烦的是各说各的版本：这篇是 Android 12 的结论，那篇没写版本，再一篇是某台机器上的现象。 AIW 想补的就是这个缺口。全称 Android Internal Wiki，中文书名是《Android 技术内幕：系统机制、性能优化与工具实战》，五部分二十六章，正文钉在 Android 17。仓库准备开源： https://github.com/Gracker/android-internals-wiki 打开仓库能拿到的是二十六章正文、一份完整目录，和每周编一次的 EPUB。 这二十六章现在到了可以拿出来给人读的程度。读到哪一段和源码对不上，欢迎提 issue 或者 PR。",
+      "image": null,
+      "publishedAt": "2026-09-18T16:00:00Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2026/09/19/AIW-Open-Source-Android-Internals-Wiki/",
+      "detailPath": "articles/c82ba76f440d4c268fe1f596.json"
+    },
+    {
       "id": "4f7c4b2ecf08c24dfa68ebd0",
-      "title": "SmartPerfetto 2026.07.18-08.21 五周更新复盘：从 v1.2.0 到 v1.7.0",
+      "title": "SmartPerfetto v1.7.0 更新说明",
       "summary": "上一篇更新停在 2026 年 7 月 17 日的 v1.1.1。当时 SmartPerfetto 已经有双 Trace 工作台、Quick Mode、私有分析上下文、统一 Agent runtime，以及 Camera、Heap、GPU 等专项分析能力。 从 7 月 18 日到 8 月 21 日，仓库又向前走了五周，版本来到 v1.7.0。这一轮继续增加功能，也把更多精力放在知识来源、分发质量、权限隔离、结果完整性和可回滚改进上。 SmartPerfetto 正在从“能完成一次分析”走向“能在更多环境里稳定、可追溯地完成分析”。 本文以公开发布的 v1.7.0 代码为准，回顾 v1.1.1 之后加入的主要能力。 项目与上篇文章： SmartPerfetto： https://github.com/Gracke…",
       "image": null,
       "publishedAt": "2026-08-21T04:00:00Z",
@@ -13,7 +35,7 @@
     },
     {
       "id": "555c13c628a10367f841113d",
-      "title": "SmartPerfetto 2026.06.04-07.17 六周更新复盘：从 v1.0.28 到 v1.1.1",
+      "title": "SmartPerfetto v1.1.1 更新说明",
       "summary": "本文复盘 上一篇三周更新 （2026-06-04，v1.0.28）之后，到 2026-07-17（v1.1.1）为止 SmartPerfetto 的全部主要改动。看完这篇文章，可以知道这六周每个功能解决什么问题、边界在哪里，以及当前版本的完整功能全景。项目地址： github.com/Gracker/SmartPerfetto 。",
       "image": null,
       "publishedAt": "2026-07-16T16:00:00Z",
@@ -24,7 +46,7 @@
     },
     {
       "id": "7fab83a07fc78658d828e329",
-      "title": "SmartPerfetto 2026.05.17-06.04 三周更新：Smart 模式、证据规则和四条 Runtime",
+      "title": "SmartPerfetto v1.0.28 更新说明",
       "summary": "5 月 17 日写上一篇 SmartPerfetto 更新时，重点已经从“Perfetto UI 里的 AI Assistant”转向“可复用的 Trace 分析平台”。到 6 月 4 日，新增内容主要集中在五块：Smart 模式、选区快问、CLI 采集、Power / ANR / Input / IO / Network 证据规则，以及四条 Agent runtime。 本文基于 2026 年 6 月 4 日的 SmartPerfetto 主分支状态，公开发布版本是 v1.0.28 。读者看完应该能知道三件事：5 月 17 日之后新增了什么、现在的运行时和证据来源怎么处理、反馈问题时该给哪些信息。 项目地址： SmartPerfetto 主仓库： https://github.com/Gracker/Sma…",
       "image": null,
       "publishedAt": "2026-06-04T04:00:00Z",
@@ -35,7 +57,7 @@
     },
     {
       "id": "a3e8d0d9851d13e03158a780",
-      "title": "SmartPerfetto 2026.04.29-05.17 两周更新：从 Perfetto AI Assistant 到可复用的 Trace 分析平台",
+      "title": "SmartPerfetto v1.0.7 更新说明",
       "summary": "4 月 29 日写 SmartPerfetto 开源介绍时，重点还是“在 Perfetto UI 里放一个能查 SQL、跑 Skill、生成报告的 AI Assistant”。两周后的仓库状态已经变了不少：功能从单条 trace 的问答，扩到了分析结果复用、多 trace 横向比较、Claude/OpenAI 双 runtime、SQL guardrail、证据来源索引、免安装包、渲染管线教学和更完整的 Provider 诊断。 本文基于 2026 年 5 月 17 日的 SmartPerfetto 当前仓库状态，补一篇新的功能说明。读者看完应该能知道三件事：这两周新增了什么、现在完整功能边界在哪里、报 bug 时该提供哪些信息。 项目地址： SmartPerfetto 主仓库： https://github…",
       "image": null,
       "publishedAt": "2026-05-17T04:00:00Z",
@@ -46,14 +68,102 @@
     },
     {
       "id": "952fae079fe2cf7acbc01d3f",
-      "title": "「置顶」我做了什么",
-      "summary": "这篇置顶页只做一件事：把我长期维护、正在推进、已经公开和暂未公开的项目集中到一个地方。范围包括 Android 性能分析、Perfetto 工具、AI 自动化、iOS App、Android Demo、测试套件、博客系列、社群和各个平台账号。 第一次来到这个博客，可以按需求直接跳转：学 Android 性能分析，看 Perfetto / Systrace 系列；找工具项目，看 SmartPerfetto、TraceFix、Android App Memory Analysis；了解 AI 如何参与知识管理和日常工作，看 OpenClaw 与 AI Field Notes；联系我或查看其它平台账号，看文末。 项目按四条线划：性能分析方向有 SmartPerfetto、Android App Memory Ana…",
+      "title": "我做了什么",
+      "summary": "这篇文章只做一件事：把我长期维护、正在推进、已经公开和暂未公开的项目集中到一个地方。范围包括 Android 性能分析、Perfetto 工具、AI 自动化、iOS App、Android Demo、测试套件、博客系列、社群和各个平台账号。 第一次来到这个博客，可以按需求直接跳转：学 Android 性能分析，看 Perfetto / Systrace 系列；找工具项目，看 SmartPerfetto、TraceFix、Android App Memory Analysis；了解 AI 如何参与知识管理和日常工作，看 OpenClaw 与 AI Field Notes；联系我或查看其它平台账号，看文末。 项目按四条线划：性能分析方向有 SmartPerfetto、Android App Memory Anal…",
       "image": null,
       "publishedAt": "2026-05-05T04:13:28Z",
       "sourceId": "1aa1837ca33d8d55",
       "sourceTitle": "Android Performance",
       "link": "https://androidperformance.com/2026/05/05/What-I-Am-Building/",
       "detailPath": "articles/952fae079fe2cf7acbc01d3f.json"
+    },
+    {
+      "id": "50a0b01a14fe8f8e929e6288",
+      "title": "Android Perfetto 系列 18：响应速度实战，从输入事件到首帧反馈",
+      "summary": "这篇补一个很容易被启动速度和流畅度盖住的话题：交互首帧响应。它关心用户刚操作完之后，屏幕多久给出第一帧反馈；页面完整加载和动画后半段稳定性要用其他指标衡量。 点一个按钮，多久出现按压态；点微信会话，多久看到会话页第一帧开始动；手指滑动列表，多久看到内容跟着手指移动。这些问题和启动慢有关，也和掉帧有关，但分析口径要单独拎出来。 本文用 Perfetto 拆这段时间：从 InputReader read_time 起算，到 App 收到事件，再到第一帧 present。主指标叫 input_to_present_ms ，只度量 input read 到关联帧 present；它不覆盖触控 IC、驱动上报前延迟、显示扫描和面板响应。读完之后，你应该能给一个点击或滑动场景定义起点、终点、采集配置、SQL 指标和 Ap…",
+      "image": null,
+      "publishedAt": "2026-05-04T02:18:00Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2026/05/04/Android-Perfetto-18-Input-Response-Latency/",
+      "detailPath": "articles/50a0b01a14fe8f8e929e6288.json"
+    },
+    {
+      "id": "3afaa0c88296f04717797952",
+      "title": "Android Perfetto 系列 17：专项场景自动化、问题清单与平台体系",
+      "summary": "Camera open 慢、Audio underrun、WebView 首屏卡住、Flutter/游戏掉帧，这类问题的证据会散在 App、 system_server 、 cameraserver / audioserver 、HAL、SurfaceFlinger 和调度轨道里。只在 UI 里多看几条轨道，很容易漏掉关键时间点。 这一篇用 Camera 和 Audio 举例，讲一套可复用的专项分析方法：先抓对数据，再识别对象，再算阶段和阻塞，报告里保留能跳回 UI 复查的时间点。Camera/Audio 是例子，核心是领域 schema 和平台 tracing 协作。读完之后，至少能把 Camera open 慢拆成可复查阶段，把 Audio underrun 拆成周期异常，而不是只交一个 Top slic…",
+      "image": null,
+      "publishedAt": "2026-05-04T02:17:00Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2026/05/04/Android-Perfetto-17-Engineering-Domain-And-Platform-Tracing/",
+      "detailPath": "articles/3afaa0c88296f04717797952.json"
+    },
+    {
+      "id": "081dae40631f5b064a37150a",
+      "title": "Android Perfetto 系列 16：GPU、Power Counters 与硬件瓶颈分析",
+      "summary": "FrameTimeline 标出一帧晚了，主线程、RenderThread、SurfaceFlinger 看起来都没有明显越界，这时很容易写出一句“可能是 GPU 瓶颈”。这句话风险很高：GPU 频率、GPU 计数器、电池电流、电源轨都不是 App 单帧归因工具。 第 07、08 篇已经讲了 App 到 SurfaceFlinger 的渲染路径，第 06、09 篇已经讲了刷新率和 CPU 调度/频率。这一篇不重复这些内容，只补一个经常被跳过的环节：当问题看起来已经压到硬件资源层时，GPU、devfreq、battery counter（电池计数器）、power rail（电源轨）这些数据该怎么进入同一段 trace 分析。 这类 counter 的麻烦在于：不是每台设备都有，不同 GPU 厂商的 counte…",
+      "image": null,
+      "publishedAt": "2026-05-04T02:16:00Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2026/05/04/Android-Perfetto-16-GPU-Power-Counters/",
+      "detailPath": "articles/081dae40631f5b064a37150a.json"
+    },
+    {
+      "id": "1a3b16f394c9aa967643014c",
+      "title": "Android Perfetto 系列 15：Boot Trace、长时间现场 Trace 与偶发问题抓取",
+      "summary": "很多性能问题不是点一下就能复现的。开机慢、偶发卡顿、亮灭屏后异常、几小时后音频断续、车机周期性抖动、温升后的性能下降，都不适合靠 10 秒手工 trace 解决。 这一篇讲现场长 Trace：怎么提前定义窗口，怎么用 trigger 封存问题现场，怎么让文件安全写完，怎么拿回来之后判断数据是否可信。Boot Trace 放在后面作为特殊窗口处理。基础的交互式抓取方式（命令行、官方脚本、开发者选项、网页端）第 02 篇已经讲过，本文只讨论现场和长时间运行带来的差异。",
+      "image": null,
+      "publishedAt": "2026-05-04T02:15:00Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2026/05/04/Android-Perfetto-15-Boot-And-Long-Running-Field-Tracing/",
+      "detailPath": "articles/1a3b16f394c9aa967643014c.json"
+    },
+    {
+      "id": "3dd9b1ff15b3fbad9583a262",
+      "title": "Android Perfetto 系列 14：heapprofd 与内存 Profiling",
+      "summary": "内存问题最麻烦的地方在于：数字涨了，不代表马上能知道谁在涨。 dumpsys meminfo 能告诉你 RSS/PSS，Java heap dump 能告诉你对象保留关系，但 JNI/C++、Skia/Bitmap 的 CPU 侧分配、播放器里的 native wrapper 这些问题，经常还需要知道“哪个调用栈发起了 malloc/new”。 这一篇讲 heapprofd。它的价值是把 native allocation、free 和调用栈放进 Perfetto Trace，再和业务事件、线程调度、Binder 放到同一个时间轴里看。 heapprofd 适合放在趋势确认之后。先用 RSS/PSS、meminfo 或线上监控确认趋势，再用 heapprofd 找 malloc/new 调用栈；这篇不解决 J…",
+      "image": null,
+      "publishedAt": "2026-05-04T02:14:00Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2026/05/04/Android-Perfetto-14-Native-Heap-Heapprofd/",
+      "detailPath": "articles/3dd9b1ff15b3fbad9583a262.json"
+    },
+    {
+      "id": "7efd1da8c1de0933fa643668",
+      "title": "Android Perfetto 系列 13：Perfetto SDK、Track Event 与 App 现场 Trace",
+      "summary": "系统 Trace 能告诉你线程什么时候运行、CPU 跑在哪个核、FrameTimeline 哪一帧超时；在启用 Binder/ftrace/sched 证据时，也能还原 Binder 调用和等待线索。但它不知道播放器正在解哪一个 frame id，也不知道游戏引擎正在加载哪个 scene，更不知道一个业务任务在队列里排了多久。 这一篇只回答一个问题：业务语义怎么进入 Trace。系统能告诉你主线程慢了，Track Event 负责告诉你当时在 decode 哪一帧、哪个队列堵住、哪个请求跨线程流转。两边合在一起，才能把“主线程慢了 18ms”缩小到 frame 1082 附近的纹理上传候选区间，再结合 RenderThread/HWUI、GPU 和 FrameTimeline 继续验证。 文章按接入的实际顺序…",
+      "image": null,
+      "publishedAt": "2026-05-04T02:13:00Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2026/05/04/Android-Perfetto-13-Track-Event-SDK/",
+      "detailPath": "articles/7efd1da8c1de0933fa643668.json"
+    },
+    {
+      "id": "680345d5a59550c7fdf8d2ce",
+      "title": "Android Perfetto 系列 12：Trace 数据流与丢失排查",
+      "summary": "打开一份 Trace 后，最麻烦的情况是：文件里看起来有数据，但中间丢过。UI 里还能看到轨道，SQL 也能查出一些行，可线程状态少了一段、进程名对不上、某些 Track Event 消失了。继续分析下去，结论会越来越像猜。 SQL 只能分析 Trace 里还存在的证据。这个问题不处理好，后面的查询写得再漂亮，也只是把一份缺证据的 Trace 包装成表格。 第 02 篇已经讲过怎么抓，第 11 篇已经讲过怎么查 SQL；这一篇盯住一个问题：Trace 在哪里丢过数据、影响哪些结论、下一次抓取该怎么改配置。 文章顺着数据从内核走到 Trace 文件的链路，逐段定位丢点：ftrace、producer 共享内存、central buffer、增量状态、flush。每一段的丢法不一样，补救方式也不一样。最后给一个在…",
+      "image": null,
+      "publishedAt": "2026-05-04T02:12:00Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2026/05/04/Android-Perfetto-12-Trace-Dataflow-And-Loss/",
+      "detailPath": "articles/680345d5a59550c7fdf8d2ce.json"
+    },
+    {
+      "id": "6a4ce8db6e8415767444c6d9",
+      "title": "Android Perfetto 系列 11：PerfettoSQL、Trace Processor 与回归检测",
+      "summary": "拿到一份卡顿 Trace，大部分人的第一反应（包括早些年的我）是打开 Perfetto UI，框一段时间，看主线程、RenderThread、CPU 状态，再截几张图写结论。这个办法处理眼前问题没什么毛病，但很难回答后面的追问：换一份 Trace 是不是同样结论？换一台设备是不是同样结论？下个版本修完后，怎么确认问题没有回来？ 第 11 篇讲 PerfettoSQL 与 Trace Processor。目标很朴素：把 UI 里的判断改成能复查的查询，再用 Python 批量跑多份 Trace。读者不需要先变成 SQL 专家，只需要把 Trace 当成一组带时间戳的表，再把“看图得出的判断”翻译成一段能反复执行的查询就够了。 整篇文章就沿一条路走：认识 Trace Processor，把判断写成窗口化的查询，放…",
+      "image": null,
+      "publishedAt": "2026-05-04T02:11:00Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2026/05/04/Android-Perfetto-11-PerfettoSQL-TraceProcessor-Automation/",
+      "detailPath": "articles/6a4ce8db6e8415767444c6d9.json"
     },
     {
       "id": "ca4df6bdd3a32c124f2e37e0",
@@ -287,17 +397,6 @@
       "detailPath": "articles/3ba24d6ef7aa6d3ef8633284.json"
     },
     {
-      "id": "1a11717b8c61757dcebbd70a",
-      "title": "关于 The Android Performance 知识星球介绍",
-      "summary": "目前星球为付费模式，星球收入主要是是赚个博客的服务器费用以及给家里的豆子（猫）买个猫粮，同时也是我更新博客的动力。如果觉得内容还不错，就加入星球支持一波吧～ 非常感谢～ 知识星球名为 The Performance ，一个分享 Android 开发领域性能优化相关的圈子，主理人是博主自己，国内一线手机厂商性能优化方面的一线开发者，有多年性能相关领域的知识积累和案例分析经验，可以提供性能、功耗分析知识的一站式服务，涵盖了基础、方法论、工具使用和最宝贵的案例分析。",
-      "image": null,
-      "publishedAt": "2023-12-30T00:59:18Z",
-      "sourceId": "1aa1837ca33d8d55",
-      "sourceTitle": "Android Performance",
-      "link": "https://androidperformance.com/2023/12/30/the-performance/",
-      "detailPath": "articles/1a11717b8c61757dcebbd70a.json"
-    },
-    {
       "id": "9b81ab815d3aa862ac8fa69b",
       "title": "The Performance Design Of OS",
       "summary": "1 Origin I am embarking on a new series of articles addressing various considerations in OS architecture design. Indeed, these considerations are not limited to OS but are applicable to the design of any large-scale software. I am limited by my capabilities and knowledge and bring a highly subjective view, and there are undoubtedly inadequacies. I am eager…",
@@ -375,17 +474,6 @@
       "detailPath": "articles/29d39b0b11b9c3411b8fc5f5.json"
     },
     {
-      "id": "82d6d1dfdca732acc840e6e5",
-      "title": "Techniques, Philosophy, and Tools for Android Performance Optimization",
-      "summary": "In his book Hackers & Painters , Paul Graham asserted, “The disparity in the efficiency of languages is becoming more pronounced, hence the rising importance of profilers. Currently, performance analysis isn’t given the attention it deserves. Many still seem to hold onto the belief that the key to accelerating program execution lies in developing compilers…",
-      "image": null,
-      "publishedAt": "2022-01-06T16:42:03Z",
-      "sourceId": "1aa1837ca33d8d55",
-      "sourceTitle": "Android Performance",
-      "link": "https://androidperformance.com/2022/01/07/Techniques-Philosophy-and-Tools-for-Android-Performance-Optimization/",
-      "detailPath": "articles/82d6d1dfdca732acc840e6e5.json"
-    },
-    {
       "id": "b7faedda04c09d783ead5826",
       "title": "Android 性能优化的术、道、器",
       "summary": "Paul Graham 在其著作 <黑客与画家> 中断言：“不同语言的执行效率差距正变得越来越大，所以性能分析器（profiler）将变得越来越重要。目前，性能分析并没有受到重视。许多人好像仍然相信，程序运行速度提升的关键在于开发出能够生成更快速代码的编译器。代码效率与机器性能的差距正在不断加大，我们将会越来越清楚地看到，应用软件运行速度提升的关键在于有一个好的性能分析器帮助指导程序开发。” by Paul Graham 黑客与画家 谷歌搜索 「Android 优化工具」，你会找到很多与此相关的内容。他们的问题在于要么是内容高度重复、要么是直接讲使用方法，很少会给你介绍整体性的架构，一不小心就会让人会种「一个工具搞定一切」的错误认知。以笔者团队的多年经验来看，在性能分析领域这种银弹级别的工具是不存在的。工具在…",
@@ -395,6 +483,17 @@
       "sourceTitle": "Android Performance",
       "link": "https://androidperformance.com/2022/01/07/The-Performace-1-Performance-Tools/",
       "detailPath": "articles/b7faedda04c09d783ead5826.json"
+    },
+    {
+      "id": "82d6d1dfdca732acc840e6e5",
+      "title": "Techniques, Philosophy, and Tools for Android Performance Optimization",
+      "summary": "In his book Hackers & Painters , Paul Graham asserted, “The disparity in the efficiency of languages is becoming more pronounced, hence the rising importance of profilers. Currently, performance analysis isn’t given the attention it deserves. Many still seem to hold onto the belief that the key to accelerating program execution lies in developing compilers…",
+      "image": null,
+      "publishedAt": "2022-01-06T16:42:03Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2022/01/07/Techniques-Philosophy-and-Tools-for-Android-Performance-Optimization/",
+      "detailPath": "articles/82d6d1dfdca732acc840e6e5.json"
     },
     {
       "id": "207e8d59d1e15738d883284d",
@@ -560,105 +659,6 @@
       "sourceTitle": "Android Performance",
       "link": "https://androidperformance.com/2020/01/28/2020-read/",
       "detailPath": "articles/4993adf88aa40ceac3c00c55.json"
-    },
-    {
-      "id": "7a32361b9935b65a2a1be070",
-      "title": "Android Systrace 基础知识 - CPU Info 解读",
-      "summary": "本文是 Systrace 系列文章的第十二篇，主要是对 Systrace 中的 CPU 信息区域(Kernel)进行简单介绍，简单介绍了如何在 Systrace 中查看 Kernel 模块输出的 CPU 相关的信息，了解 CPU 频率、调度、锁频、锁核相关的信息 本系列的目的是通过 Systrace 这个工具，从另外一个角度来看待 Android 系统整体的运行，同时也从另外一个角度来对 Framework 进行学习。也许你看了很多讲 Framework 的文章，但是总是记不住代码，或者不清楚其运行的流程，也许从 Systrace 这个图形化的角度，你可以理解的更深入一些。",
-      "image": null,
-      "publishedAt": "2019-12-21T07:16:26Z",
-      "sourceId": "1aa1837ca33d8d55",
-      "sourceTitle": "Android Performance",
-      "link": "https://androidperformance.com/2019/12/21/Android-Systrace-CPU/",
-      "detailPath": "articles/7a32361b9935b65a2a1be070.json"
-    },
-    {
-      "id": "84bfef6dfc44b97584d2b2aa",
-      "title": "Android Systrace 基础知识 - Triple Buffer 解读",
-      "summary": "本文是 Systrace 系列文章的第十一篇，主要是对 Systrace 中的 Triple Buffer 进行简单介绍，简单介绍了如何在 Systrace 中判断卡顿情况的发生，进行初步的定位和分析，以及介绍 Triple Buffer 的引入对性能的影响 本系列的目的是通过 Systrace 这个工具，从另外一个角度来看待 Android 系统整体的运行，同时也从另外一个角度来对 Framework 进行学习。也许你看了很多讲 Framework 的文章，但是总是记不住代码，或者不清楚其运行的流程，也许从 Systrace 这个图形化的角度，你可以理解的更深入一些。",
-      "image": null,
-      "publishedAt": "2019-12-15T15:31:20Z",
-      "sourceId": "1aa1837ca33d8d55",
-      "sourceTitle": "Android Performance",
-      "link": "https://androidperformance.com/2019/12/15/Android-Systrace-Triple-Buffer/",
-      "detailPath": "articles/84bfef6dfc44b97584d2b2aa.json"
-    },
-    {
-      "id": "61f2d684ed3869a35414a096",
-      "title": "Android Systrace 基础知识 - Binder 和锁竞争解读",
-      "summary": "本文是 Systrace 系列文章的第十篇，主要是对 Systrace 中的 Binder 和锁信息进行简单介绍，简单介绍了 Binder 的情况，介绍了 Systrace 中 Binder 通信的表现形式，以及 Binder 信息查看，SystemServer 锁竞争分析等 本系列的目的是通过 Systrace 这个工具，从另外一个角度来看待 Android 系统整体的运行，同时也从另外一个角度来对 Framework 进行学习。也许你看了很多讲 Framework 的文章，但是总是记不住代码，或者不清楚其运行的流程，也许从 Systrace 这个图形化的角度，你可以理解的更深入一些。",
-      "image": null,
-      "publishedAt": "2019-12-06T11:12:34Z",
-      "sourceId": "1aa1837ca33d8d55",
-      "sourceTitle": "Android Performance",
-      "link": "https://androidperformance.com/2019/12/06/Android-Systrace-Binder/",
-      "detailPath": "articles/61f2d684ed3869a35414a096.json"
-    },
-    {
-      "id": "8b78d3ad7f3e0a56d6094a8b",
-      "title": "「置顶」博客文章目录",
-      "summary": "本博客内容主要集中在 Android 开发和优化相关的话题，包括一些性能工具的使用、Android App 优化知识、Android Framework 知识讲解，性能理论知识讲解等，这里整理了一份目录供大家参考，大家可以挑感兴趣的部分来看。这里不仅仅包含博客中的内容，一些我在 知乎 或者 知识星球 - The Performance 的回答也会放到这里，不过这个目录里面放的都是我原创的博客，另外还收集了一些优秀文章，我也会不定期更新 Android 性能优化必知必会 。",
-      "image": null,
-      "publishedAt": "2019-11-30T23:38:21Z",
-      "sourceId": "1aa1837ca33d8d55",
-      "sourceTitle": "Android Performance",
-      "link": "https://androidperformance.com/2019/12/01/BlogMap/",
-      "detailPath": "articles/8b78d3ad7f3e0a56d6094a8b.json"
-    },
-    {
-      "id": "73b823fc333fc6dadeab5dbb",
-      "title": "Android Systrace 基础知识 - Vsync 解读",
-      "summary": "本文是 Systrace 系列文章的第七篇，主要是是介绍 Android 中的 Vsync 机制。文章会从 Systrace 的角度来看 Android 系统如何基于 Vsync 每一帧的展示。Vsync 是 Systrace 中一个非常关键的机制，虽然我们在操作手机的时候看不见，摸不着，但是在 Systrace 中我们可以看到，Android 系统在 Vsync 信号的指引下，有条不紊地进行者每一帧的渲染、合成操作，使我们可以享受稳定帧率的画面。 本系列的目的是通过 Systrace 这个工具，从另外一个角度来看待 Android 系统整体的运行，同时也从另外一个角度来对 Framework 进行学习。也许你看了很多讲 Framework 的文章，但是总是记不住代码，或者不清楚其运行的流程，也许从 Syst…",
-      "image": null,
-      "publishedAt": "2019-11-30T22:38:21Z",
-      "sourceId": "1aa1837ca33d8d55",
-      "sourceTitle": "Android Performance",
-      "link": "https://androidperformance.com/2019/12/01/Android-Systrace-Vsync/",
-      "detailPath": "articles/73b823fc333fc6dadeab5dbb.json"
-    },
-    {
-      "id": "1d608e4c69a004565828aa70",
-      "title": "Android App 启动优化全记录",
-      "summary": "本文参考了目前大部分 Android 应用启动优化的方案，将大家的方案做一个汇总，如果你有这方面的需求，只需要对照这篇文章，看看其他人的方案，查漏补缺。很多方案是要根据具体的业务去做优化的，所以这里也没有对每一种方案进行详细的介绍，要用到哪一个方案的时候，可以具体去网上查找对应方案的具体实现方法，这里只是做一个汇总 另外我还加上了部分系统厂商所做的启动相关的优化，不过只写了一些我知道的，还有一些厂商有黑科技，就不在这里的讨论范围了。知道厂商做的事情，可能也会帮助到你，比如联系厂商做白名单、接入厂商 SDK 等",
-      "image": null,
-      "publishedAt": "2019-11-18T15:02:46Z",
-      "sourceId": "1aa1837ca33d8d55",
-      "sourceTitle": "Android Performance",
-      "link": "https://androidperformance.com/2019/11/18/Android-App-Lunch-Optimize/",
-      "detailPath": "articles/1d608e4c69a004565828aa70.json"
-    },
-    {
-      "id": "8bf9a2e4e81710a1979ef1dc",
-      "title": "Android Systrace 基础知识 - MainThread 和 RenderThread 解读",
-      "summary": "本文是 Systrace 系列文章的第九篇，主要是是介绍 Android App 中的 MainThread 和 RenderThread，也就是大家熟悉的 主线程 和 渲染线程 。文章会从 Systrace 的角度来看 MainThread 和 RenderThread 的工作流程，以及涉及到的相关知识：卡顿、软件渲染、掉帧计算等 本系列的目的是通过 Systrace 这个工具，从另外一个角度来看待 Android 系统整体的运行，同时也从另外一个角度来对 Framework 进行学习。也许你看了很多讲 Framework 的文章，但是总是记不住代码，或者不清楚其运行的流程，也许从 Systrace 这个图形化的角度，你可以理解的更深入一些",
-      "image": null,
-      "publishedAt": "2019-11-06T09:11:45Z",
-      "sourceId": "1aa1837ca33d8d55",
-      "sourceTitle": "Android Performance",
-      "link": "https://androidperformance.com/2019/11/06/Android-Systrace-MainThread-And-RenderThread/",
-      "detailPath": "articles/8bf9a2e4e81710a1979ef1dc.json"
-    },
-    {
-      "id": "475d66f86b557aa1d5f6f98b",
-      "title": "Android Systrace 基础知识 - Input 解读",
-      "summary": "本文是 Systrace 系列文章的第六篇，主要是对 Systrace 中的 Input 进行简单介绍，介绍其 Input 的流程； Systrace 中 Input 信息的体现 ，以及如何结合 Input 信息，分析与 Input 相关的问题 本系列的目的是通过 Systrace 这个工具，从另外一个角度来看待 Android 系统整体的运行，同时也从另外一个角度来对 Framework 进行学习。也许你看了很多讲 Framework 的文章，但是总是记不住代码，或者不清楚其运行的流程，也许从 Systrace 这个图形化的角度，你可以理解的更深入一些。",
-      "image": null,
-      "publishedAt": "2019-11-04T01:38:29Z",
-      "sourceId": "1aa1837ca33d8d55",
-      "sourceTitle": "Android Performance",
-      "link": "https://androidperformance.com/2019/11/04/Android-Systrace-Input/",
-      "detailPath": "articles/475d66f86b557aa1d5f6f98b.json"
-    },
-    {
-      "id": "a7861fad96495ae4c7579601",
-      "title": "Android 中的“后台无效动画“行为分析",
-      "summary": "当一个 Android App 退到后台之后，只要他没有被杀死，那么他做什么事情大家都不要奇怪，因为这就是 Android。但是当用户知道一个你一个 App 退到后台之后还在持续做无效的动画，而这个动画完全是无意义的，而且用户还不知道他在做动画，消耗用户那可怜的电量的时候，轻则被多任务杀掉，禁止后台运行，重则直接卸载。 一般的开发者很难发现这个问题，但是如果你经常使用 Systrace ，多开几十个应用然后退回到桌面，左右滑动抓取 Systrace ，就可以很容易发现，总有那么几个后台的应用，还在频繁地做无效的动画。 这里说的后台做动画，指的是由于某种原因，应用在退到后台之后，用户看不到任何这个 App 界面的时候，他仍然在后台不断地更新，耗费 CPU。引起这个问题的原因可能有好多个，毕竟 往 Choreog…",
-      "image": null,
-      "publishedAt": "2019-10-24T00:27:34Z",
-      "sourceId": "1aa1837ca33d8d55",
-      "sourceTitle": "Android Performance",
-      "link": "https://androidperformance.com/2019/10/24/Android-Background-Animation/",
-      "detailPath": "articles/a7861fad96495ae4c7579601.json"
     }
   ]
 }

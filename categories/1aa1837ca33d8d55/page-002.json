@@ -1,6 +1,105 @@
 {
   "items": [
     {
+      "id": "7a32361b9935b65a2a1be070",
+      "title": "Android Systrace 基础知识 - CPU Info 解读",
+      "summary": "本文是 Systrace 系列文章的第十二篇，主要是对 Systrace 中的 CPU 信息区域(Kernel)进行简单介绍，简单介绍了如何在 Systrace 中查看 Kernel 模块输出的 CPU 相关的信息，了解 CPU 频率、调度、锁频、锁核相关的信息 本系列的目的是通过 Systrace 这个工具，从另外一个角度来看待 Android 系统整体的运行，同时也从另外一个角度来对 Framework 进行学习。也许你看了很多讲 Framework 的文章，但是总是记不住代码，或者不清楚其运行的流程，也许从 Systrace 这个图形化的角度，你可以理解的更深入一些。",
+      "image": null,
+      "publishedAt": "2019-12-21T07:16:26Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2019/12/21/Android-Systrace-CPU/",
+      "detailPath": "articles/7a32361b9935b65a2a1be070.json"
+    },
+    {
+      "id": "84bfef6dfc44b97584d2b2aa",
+      "title": "Android Systrace 基础知识 - Triple Buffer 解读",
+      "summary": "本文是 Systrace 系列文章的第十一篇，主要是对 Systrace 中的 Triple Buffer 进行简单介绍，简单介绍了如何在 Systrace 中判断卡顿情况的发生，进行初步的定位和分析，以及介绍 Triple Buffer 的引入对性能的影响 本系列的目的是通过 Systrace 这个工具，从另外一个角度来看待 Android 系统整体的运行，同时也从另外一个角度来对 Framework 进行学习。也许你看了很多讲 Framework 的文章，但是总是记不住代码，或者不清楚其运行的流程，也许从 Systrace 这个图形化的角度，你可以理解的更深入一些。",
+      "image": null,
+      "publishedAt": "2019-12-15T15:31:20Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2019/12/15/Android-Systrace-Triple-Buffer/",
+      "detailPath": "articles/84bfef6dfc44b97584d2b2aa.json"
+    },
+    {
+      "id": "61f2d684ed3869a35414a096",
+      "title": "Android Systrace 基础知识 - Binder 和锁竞争解读",
+      "summary": "本文是 Systrace 系列文章的第十篇，主要是对 Systrace 中的 Binder 和锁信息进行简单介绍，简单介绍了 Binder 的情况，介绍了 Systrace 中 Binder 通信的表现形式，以及 Binder 信息查看，SystemServer 锁竞争分析等 本系列的目的是通过 Systrace 这个工具，从另外一个角度来看待 Android 系统整体的运行，同时也从另外一个角度来对 Framework 进行学习。也许你看了很多讲 Framework 的文章，但是总是记不住代码，或者不清楚其运行的流程，也许从 Systrace 这个图形化的角度，你可以理解的更深入一些。",
+      "image": null,
+      "publishedAt": "2019-12-06T11:12:34Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2019/12/06/Android-Systrace-Binder/",
+      "detailPath": "articles/61f2d684ed3869a35414a096.json"
+    },
+    {
+      "id": "8b78d3ad7f3e0a56d6094a8b",
+      "title": "「置顶」博客文章目录 + 个人项目",
+      "summary": "本博客内容主要集中在 Android 开发和优化相关的话题，包括一些性能工具的使用、Android App 优化知识、Android Framework 知识讲解，性能理论知识讲解等，这里整理了一份目录供大家参考，大家可以挑感兴趣的部分来看。这里不仅仅包含博客中的内容，一些我在 知乎 或者 知识星球 - The Performance 的回答也会放到这里，不过这个目录里面放的都是我原创的博客，另外还收集了一些优秀文章，我也会不定期更新 Android 性能优化必知必会 。 文章索引在前，工具、App 和内容项目集中在后面的 个人项目 。新增： AIW 开源介绍 · AIW GitHub 仓库 。",
+      "image": null,
+      "publishedAt": "2019-11-30T23:38:21Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2019/12/01/BlogMap/",
+      "detailPath": "articles/8b78d3ad7f3e0a56d6094a8b.json"
+    },
+    {
+      "id": "73b823fc333fc6dadeab5dbb",
+      "title": "Android Systrace 基础知识 - Vsync 解读",
+      "summary": "本文是 Systrace 系列文章的第七篇，主要是是介绍 Android 中的 Vsync 机制。文章会从 Systrace 的角度来看 Android 系统如何基于 Vsync 每一帧的展示。Vsync 是 Systrace 中一个非常关键的机制，虽然我们在操作手机的时候看不见，摸不着，但是在 Systrace 中我们可以看到，Android 系统在 Vsync 信号的指引下，有条不紊地进行者每一帧的渲染、合成操作，使我们可以享受稳定帧率的画面。 本系列的目的是通过 Systrace 这个工具，从另外一个角度来看待 Android 系统整体的运行，同时也从另外一个角度来对 Framework 进行学习。也许你看了很多讲 Framework 的文章，但是总是记不住代码，或者不清楚其运行的流程，也许从 Syst…",
+      "image": null,
+      "publishedAt": "2019-11-30T22:38:21Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2019/12/01/Android-Systrace-Vsync/",
+      "detailPath": "articles/73b823fc333fc6dadeab5dbb.json"
+    },
+    {
+      "id": "1d608e4c69a004565828aa70",
+      "title": "Android App 启动优化全记录",
+      "summary": "本文参考了目前大部分 Android 应用启动优化的方案，将大家的方案做一个汇总，如果你有这方面的需求，只需要对照这篇文章，看看其他人的方案，查漏补缺。很多方案是要根据具体的业务去做优化的，所以这里也没有对每一种方案进行详细的介绍，要用到哪一个方案的时候，可以具体去网上查找对应方案的具体实现方法，这里只是做一个汇总 另外我还加上了部分系统厂商所做的启动相关的优化，不过只写了一些我知道的，还有一些厂商有黑科技，就不在这里的讨论范围了。知道厂商做的事情，可能也会帮助到你，比如联系厂商做白名单、接入厂商 SDK 等",
+      "image": null,
+      "publishedAt": "2019-11-18T15:02:46Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2019/11/18/Android-App-Lunch-Optimize/",
+      "detailPath": "articles/1d608e4c69a004565828aa70.json"
+    },
+    {
+      "id": "8bf9a2e4e81710a1979ef1dc",
+      "title": "Android Systrace 基础知识 - MainThread 和 RenderThread 解读",
+      "summary": "本文是 Systrace 系列文章的第九篇，主要是是介绍 Android App 中的 MainThread 和 RenderThread，也就是大家熟悉的 主线程 和 渲染线程 。文章会从 Systrace 的角度来看 MainThread 和 RenderThread 的工作流程，以及涉及到的相关知识：卡顿、软件渲染、掉帧计算等 本系列的目的是通过 Systrace 这个工具，从另外一个角度来看待 Android 系统整体的运行，同时也从另外一个角度来对 Framework 进行学习。也许你看了很多讲 Framework 的文章，但是总是记不住代码，或者不清楚其运行的流程，也许从 Systrace 这个图形化的角度，你可以理解的更深入一些",
+      "image": null,
+      "publishedAt": "2019-11-06T09:11:45Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2019/11/06/Android-Systrace-MainThread-And-RenderThread/",
+      "detailPath": "articles/8bf9a2e4e81710a1979ef1dc.json"
+    },
+    {
+      "id": "475d66f86b557aa1d5f6f98b",
+      "title": "Android Systrace 基础知识 - Input 解读",
+      "summary": "本文是 Systrace 系列文章的第六篇，主要是对 Systrace 中的 Input 进行简单介绍，介绍其 Input 的流程； Systrace 中 Input 信息的体现 ，以及如何结合 Input 信息，分析与 Input 相关的问题 本系列的目的是通过 Systrace 这个工具，从另外一个角度来看待 Android 系统整体的运行，同时也从另外一个角度来对 Framework 进行学习。也许你看了很多讲 Framework 的文章，但是总是记不住代码，或者不清楚其运行的流程，也许从 Systrace 这个图形化的角度，你可以理解的更深入一些。",
+      "image": null,
+      "publishedAt": "2019-11-04T01:38:29Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2019/11/04/Android-Systrace-Input/",
+      "detailPath": "articles/475d66f86b557aa1d5f6f98b.json"
+    },
+    {
+      "id": "a7861fad96495ae4c7579601",
+      "title": "Android 中的“后台无效动画“行为分析",
+      "summary": "当一个 Android App 退到后台之后，只要他没有被杀死，那么他做什么事情大家都不要奇怪，因为这就是 Android。但是当用户知道一个你一个 App 退到后台之后还在持续做无效的动画，而这个动画完全是无意义的，而且用户还不知道他在做动画，消耗用户那可怜的电量的时候，轻则被多任务杀掉，禁止后台运行，重则直接卸载。 一般的开发者很难发现这个问题，但是如果你经常使用 Systrace ，多开几十个应用然后退回到桌面，左右滑动抓取 Systrace ，就可以很容易发现，总有那么几个后台的应用，还在频繁地做无效的动画。 这里说的后台做动画，指的是由于某种原因，应用在退到后台之后，用户看不到任何这个 App 界面的时候，他仍然在后台不断地更新，耗费 CPU。引起这个问题的原因可能有好多个，毕竟 往 Choreog…",
+      "image": null,
+      "publishedAt": "2019-10-24T00:27:34Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2019/10/24/Android-Background-Animation/",
+      "detailPath": "articles/a7861fad96495ae4c7579601.json"
+    },
+    {
       "id": "877f8f9be20f0a0e191b69ea",
       "title": "Android 基于 Choreographer 的渲染机制详解",
       "summary": "本文介绍了 App 开发者不经常接触到但是在 Android Framework 渲染链路中非常重要的一个类 Choreographer。包括 Choreographer 的引入背景、Choreographer 的简介、部分源码解析、Choreographer 与 MessageQueue、Choreographer 和 APM，以及手机厂商基于 Choreographer 的一些优化思路 Choreographer 的引入，主要是配合 Vsync ，给上层 App 的渲染提供一个稳定的 Message 处理的时机，也就是 Vsync 到来的时候 ，系统通过对 Vsync 信号周期的调整，来控制每一帧绘制操作的时机. 目前大部分手机都是 60Hz 的刷新率，也就是 16.6ms 刷新一次，系统为了配合屏幕的刷…",
@@ -560,105 +659,6 @@
       "sourceTitle": "Android Performance",
       "link": "https://androidperformance.com/2015/04/19/Android-Performance-Patterns/",
       "detailPath": "articles/2fcc57d2b395fc07005d3643.json"
-    },
-    {
-      "id": "ee71a8ca0b54ab24e711295a",
-      "title": "Android 内存优化之三 - 打开 MAT 中的 Bitmap 原图",
-      "summary": "本文是 MAT 工具使用系列的第二篇，这个系列共三篇，详细介绍了如何使用 MAT 来分析内存问题，既可以是 Java 应用的内存问题，也可以是 Android 应用的内存问题： Android 内存优化之一：MAT 使用入门 Android内存优化之二：MAT使用进阶 Android内存优化之三：打开MAT中的Bitmap原图 本文介绍的是从 MAT 里手工还原 Bitmap 原图的旧排查技巧，适合在离线 heap 里确认“到底是哪张图”被错误持有。现在排查图片内存问题时，第一步通常不是直接打开 MAT，而是先用 Android Studio Memory Profiler 的 heap dump/retained size/reference 视图确认 Bitmap、BitmapDrawable 或图片缓存…",
-      "image": null,
-      "publishedAt": "2015-04-11T10:41:32Z",
-      "sourceId": "1aa1837ca33d8d55",
-      "sourceTitle": "Android Performance",
-      "link": "https://androidperformance.com/2015/04/11/AndroidMemory-Open-Bitmap-Object-In-MAT/",
-      "detailPath": "articles/ee71a8ca0b54ab24e711295a.json"
-    },
-    {
-      "id": "22a97125dfd6c1a96875f837",
-      "title": "Android 内存优化之二 - MAT使用进阶",
-      "summary": "本文是 MAT 工具使用系列的第二篇，这个系列共三篇，详细介绍了如何使用 MAT 来分析内存问题，既可以是 Java 应用的内存问题，也可以是 Android 应用的内存问题： Android 内存优化之一：MAT 使用入门 Android内存优化之二：MAT使用进阶 Android内存优化之三：打开MAT中的Bitmap原图 本文的 Histogram、Dominator Tree、Thread 信息仍然是 heap 分析的核心方法，但抓取和第一轮分析入口应换成现在的工具链：先用 Android Studio Memory Profiler 捕获 heap dump，必要时在关键点调用 Debug.dumpHprofData() ，再用 Profiler 的 retained size、reference…",
-      "image": null,
-      "publishedAt": "2015-04-11T10:26:36Z",
-      "sourceId": "1aa1837ca33d8d55",
-      "sourceTitle": "Android Performance",
-      "link": "https://androidperformance.com/2015/04/11/AndroidMemory-Usage-Of-MAT-Pro/",
-      "detailPath": "articles/22a97125dfd6c1a96875f837.json"
-    },
-    {
-      "id": "edcb1d4763935081023653c3",
-      "title": "Android 内存优化(1) - MAT 使用入门",
-      "summary": "本文是 MAT 工具使用系列的第一篇，这个系列共三篇，详细介绍了如何使用 MAT 来分析内存问题，既可以是 Java 应用的内存问题，也可以是 Android 应用的内存问题： Android 内存优化(1) - MAT 使用入门 Android 内存优化(2) - MAT使用进阶 Android 内存优化(3) - 打开MAT中的Bitmap原图 这组文章里的 MAT 技巧仍然适合学习 Java heap、Dominator Tree、Retained Size、引用链这些基础概念，但默认抓取流程已经变了。早期流程是 Eclipse/DDMS 导出 Android HPROF，再用 hprof-conv 转成 MAT 能读的格式；现在应优先在 Android Studio Memory Profiler 里…",
-      "image": null,
-      "publishedAt": "2015-04-11T10:10:29Z",
-      "sourceId": "1aa1837ca33d8d55",
-      "sourceTitle": "Android Performance",
-      "link": "https://androidperformance.com/2015/04/11/AndroidMemory-Usage-Of-MAT/",
-      "detailPath": "articles/edcb1d4763935081023653c3.json"
-    },
-    {
-      "id": "1795430768818b2a50f9e16b",
-      "title": "Android性能优化后续",
-      "summary": "前言 本文是一篇译文，原文 Android Performance Case Study Follow-up 的作者是大名鼎鼎的 Romain Guy 。本文讲述了Android性能优化的一些技巧、方法和工具。 译文正文 两年前，我发表了一篇名为 Android Performance Case Study 的文章，来帮助Android开发者了解需要使用什么工具和技术手段来确定、追踪和优化性能问题。 那篇文章以一个Twitter客户端 Falcon Pro 为典范，其开发人员为 Joaquim Vergès. Joaquim人不错，他允许我在我的文章中使用它的程序作为例子，并且快速处理了我发现的所有问题。一切都OK，直到Joaquim 从头开始开发Falcon Pro 3，前不久在他准备发布它的新应用的时候，…",
-      "image": null,
-      "publishedAt": "2015-03-31T01:29:00Z",
-      "sourceId": "1aa1837ca33d8d55",
-      "sourceTitle": "Android Performance",
-      "link": "https://androidperformance.com/2015/03/31/android-performance-case-study-follow-up/",
-      "detailPath": "articles/1795430768818b2a50f9e16b.json"
-    },
-    {
-      "id": "5873e54fd2b41a0213778bfd",
-      "title": "Android 小技巧 - 5",
-      "summary": "本文是一篇译文,这篇是这个系列的第五篇.讲述的是Android开发中遇到的一些好用的小技巧,或者一些实用的API,很多人都知道,但也有人不知道,记录下来,如果能帮助到大家,也是极好的.由于不是严格的博文,所以翻译也不那么严格,有些工具和类我也会经常用,所以我会根据自己的想法去写.有些地方坐在并没有将这个工具的作用讲出来,我会补充上去. 第五篇里 SDK “以为没有其实有”的功能比较多： ViewDragHelper 帮你做自定义拖拽容器、 PopupWindow 实现非 Activity 的临时浮层、 ThumbnailUtils 直接生成图片或视频缩略图、 ActivityOptions 自定义 Activity 跳转动画与 launch display；性能向的有 SparseArray 替代 HashM…",
-      "image": null,
-      "publishedAt": "2015-03-14T16:32:11Z",
-      "sourceId": "1aa1837ca33d8d55",
-      "sourceTitle": "Android Performance",
-      "link": "https://androidperformance.com/2015/03/15/android-tips-round-up-5/",
-      "detailPath": "articles/5873e54fd2b41a0213778bfd.json"
-    },
-    {
-      "id": "9cb020a7aea7b0bb84b559e2",
-      "title": "Android 小技巧 - 4",
-      "summary": "本文是一篇译文,这篇是这个系列的第四篇.讲述的是Android开发中遇到的一些好用的小技巧,或者一些实用的API,很多人都知道,但也有人不知道,记录下来,如果能帮助到大家,也是极好的.由于不是严格的博文,所以翻译也不那么严格,有些工具和类我也会经常用,所以我会根据自己的想法去写.有些地方坐在并没有将这个工具的作用讲出来,我会补充上去. 第四篇集中讲两类东西：一类是被 XML 属性藏起来的特性， android:weightSum 、 android:duplicateParentState 、 android:clipChildren 、 android:fillViewport 、 android:tileMode 、 android:scaleType 这些点一上手就能直接省一段自定义 View 的代码；…",
-      "image": null,
-      "publishedAt": "2015-03-14T16:31:02Z",
-      "sourceId": "1aa1837ca33d8d55",
-      "sourceTitle": "Android Performance",
-      "link": "https://androidperformance.com/2015/03/15/android-tips-round-up-4/",
-      "detailPath": "articles/9cb020a7aea7b0bb84b559e2.json"
-    },
-    {
-      "id": "f01711a110aa2f1e8b02e55d",
-      "title": "Android 小技巧 -3",
-      "summary": "本文是一篇译文,这篇是这个系列的第三篇.讲述的是Android开发中遇到的一些好用的小技巧,或者一些实用的API,很多人都知道,但也有人不知道,记录下来,如果能帮助到大家,也是极好的.由于不是严格的博文,所以翻译也不那么严格,有些工具和类我也会经常用,所以我会根据自己的想法去写.有些地方坐在并没有将这个工具的作用讲出来,我会补充上去. 第三篇的关键词是”原本写过却懒得查文档的事情”： UrlQuerySanitizer 替你解析 query 参数、 PhoneNumberUtils.formatNumber 帮你按区域格式化电话号码、 LocalBroadcastManager 让进程内广播省去权限和跨进程开销；Fragment 相关有 setArguments 与 DialogFragment.setSho…",
-      "image": null,
-      "publishedAt": "2015-03-14T16:29:57Z",
-      "sourceId": "1aa1837ca33d8d55",
-      "sourceTitle": "Android Performance",
-      "link": "https://androidperformance.com/2015/03/15/android-tips-round-up-3/",
-      "detailPath": "articles/f01711a110aa2f1e8b02e55d.json"
-    },
-    {
-      "id": "d1272f1472b8ca6b898f91b5",
-      "title": "为 Nexus5 编译 AndroidL 固件",
-      "summary": "接前一篇文章 使用Android Studio查看Android Lollipop源码 , 我们知道,仅仅看代码,提高是比较有限的,而且理解起来也比较肤浅,往往过目就忘. 而自己写过的代码,往往会印象比较深刻,在写的时候也会比较容易理解流程. 所以我们在看代码的同时, 如果能修改代码, 在手机上跑起来并看到修改的效果,这无疑会加快看代码的效率和积极性. 所以这篇文章,就讲解一下如何自己编译AndroidL的源码,并且在Nexus5上跑起来. 至于为何需要自己编译固件,而不是直接安装Google给出的工厂固件?原因是Google给出的工厂固件是User版本,是没法随心所欲Push东西进去的. 所以我们需要编译自己的Userdebug版本. 本文假设你已经下载了AndroidL的源码,并且有一台Nexus5手机(…",
-      "image": null,
-      "publishedAt": "2015-02-04T12:51:19Z",
-      "sourceId": "1aa1837ca33d8d55",
-      "sourceTitle": "Android Performance",
-      "link": "https://androidperformance.com/2015/02/04/build-rom-for-nexus5/",
-      "detailPath": "articles/d1272f1472b8ca6b898f91b5.json"
-    },
-    {
-      "id": "7786ff6380e4bf5d0d6b1a00",
-      "title": "Android 性能优化之 Systrace 工具介绍(一)",
-      "summary": "这篇是 2015 年的 Systrace 工具介绍，里面提到的 Eclipse、Device Monitor、 sdk/tools/systrace 、User 版本不能抓 Trace 等流程，已经不适合作为今天的默认操作路径。旧文章保留的是 Systrace 的基本概念：它为什么能把 SurfaceFlinger、WindowManager、View、CPU 调度等系统行为放到一张时间线上。今天真正抓取和分析 Trace，应优先看 Android Perfetto 系列目录 。 现在的工具流程可以直接按下面理解： 旧流程 新流程 Eclipse / Android Studio Device Monitor 里点 Systrace 开发者选项里打开 System Tracing，或使用 adb shell…",
-      "image": null,
-      "publishedAt": "2015-01-30T12:24:31Z",
-      "sourceId": "1aa1837ca33d8d55",
-      "sourceTitle": "Android Performance",
-      "link": "https://androidperformance.com/2015/01/30/android-performance-tools-systrace-1/",
-      "detailPath": "articles/7786ff6380e4bf5d0d6b1a00.json"
     }
   ]
 }

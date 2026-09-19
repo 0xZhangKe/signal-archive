@@ -1,6 +1,39 @@
 {
   "items": [
     {
+      "id": "8e31455783b23ac7cfb6494e",
+      "title": "【當夏椿不再失色：《平家物語》】",
+      "summary": "「我想真誠地描繪關於切實地活著的人們的重要故事」——她試圖傳達給觀者的是，平家稍縱即逝，但切實「存有」過",
+      "image": "https://haruowang.vercel.app/thinking/he1.webp",
+      "publishedAt": "2026-05-06T14:03:06Z",
+      "sourceId": "50bce2ced06e6077",
+      "sourceTitle": "Feed Me, Haruo",
+      "link": "https://haruowang.vercel.app/pov/thinking/heike.html",
+      "detailPath": "articles/8e31455783b23ac7cfb6494e.json"
+    },
+    {
+      "id": "372f072af029c3df4da1f83f",
+      "title": "千賀健史《自殺潮》淺介",
+      "summary": "化用當代攝影師南戈丁的知名作品《I’ll be your mirror》來形容，筆者認為這一代正適合千賀健史來為東瀛映照出痛苦、但必須直面的真實",
+      "image": null,
+      "publishedAt": "2026-05-06T14:03:06Z",
+      "sourceId": "50bce2ced06e6077",
+      "sourceTitle": "Feed Me, Haruo",
+      "link": "https://haruowang.vercel.app/pov/thinking/kenji.html",
+      "detailPath": "articles/372f072af029c3df4da1f83f.json"
+    },
+    {
+      "id": "739f272dcf3fb8c7eab34054",
+      "title": "【為了不要忘記：《明室》心得】",
+      "summary": "究竟一張代表我的影像，是否真的能掌握我的靈魂？羅蘭巴特向讀者拋出疑問。動人的是，巴特在那張聞名的「溫室冬園」裡找到了答案",
+      "image": null,
+      "publishedAt": "2026-05-06T14:03:06Z",
+      "sourceId": "50bce2ced06e6077",
+      "sourceTitle": "Feed Me, Haruo",
+      "link": "https://haruowang.vercel.app/pov/thinking/lucida.html",
+      "detailPath": "articles/739f272dcf3fb8c7eab34054.json"
+    },
+    {
       "id": "46880a6acb122315de050ceb",
       "title": "從後現代角度看《駭客任務》",
       "summary": "如果說電子時代發生的內爆（Implosion）使萬物之功能界限開始消失，所有的資訊都能被集體共享，那麼我們又該如何判定正在接收的是否為假新聞呢",
@@ -255,8 +288,8 @@
     },
     {
       "id": "952fae079fe2cf7acbc01d3f",
-      "title": "「置顶」我做了什么",
-      "summary": "这篇置顶页只做一件事：把我长期维护、正在推进、已经公开和暂未公开的项目集中到一个地方。范围包括 Android 性能分析、Perfetto 工具、AI 自动化、iOS App、Android Demo、测试套件、博客系列、社群和各个平台账号。 第一次来到这个博客，可以按需求直接跳转：学 Android 性能分析，看 Perfetto / Systrace 系列；找工具项目，看 SmartPerfetto、TraceFix、Android App Memory Analysis；了解 AI 如何参与知识管理和日常工作，看 OpenClaw 与 AI Field Notes；联系我或查看其它平台账号，看文末。 项目按四条线划：性能分析方向有 SmartPerfetto、Android App Memory Ana…",
+      "title": "我做了什么",
+      "summary": "这篇文章只做一件事：把我长期维护、正在推进、已经公开和暂未公开的项目集中到一个地方。范围包括 Android 性能分析、Perfetto 工具、AI 自动化、iOS App、Android Demo、测试套件、博客系列、社群和各个平台账号。 第一次来到这个博客，可以按需求直接跳转：学 Android 性能分析，看 Perfetto / Systrace 系列；找工具项目，看 SmartPerfetto、TraceFix、Android App Memory Analysis；了解 AI 如何参与知识管理和日常工作，看 OpenClaw 与 AI Field Notes；联系我或查看其它平台账号，看文末。 项目按四条线划：性能分析方向有 SmartPerfetto、Android App Memory Anal…",
       "image": null,
       "publishedAt": "2026-05-05T04:13:28Z",
       "sourceId": "1aa1837ca33d8d55",
@@ -373,6 +406,94 @@
       "sourceTitle": "Wiwi.Blog Blog",
       "link": "https://wiwi.blog/blog/nownownow-world-champion",
       "detailPath": "articles/eec31fe1d9e16d70b3309592.json"
+    },
+    {
+      "id": "50a0b01a14fe8f8e929e6288",
+      "title": "Android Perfetto 系列 18：响应速度实战，从输入事件到首帧反馈",
+      "summary": "这篇补一个很容易被启动速度和流畅度盖住的话题：交互首帧响应。它关心用户刚操作完之后，屏幕多久给出第一帧反馈；页面完整加载和动画后半段稳定性要用其他指标衡量。 点一个按钮，多久出现按压态；点微信会话，多久看到会话页第一帧开始动；手指滑动列表，多久看到内容跟着手指移动。这些问题和启动慢有关，也和掉帧有关，但分析口径要单独拎出来。 本文用 Perfetto 拆这段时间：从 InputReader read_time 起算，到 App 收到事件，再到第一帧 present。主指标叫 input_to_present_ms ，只度量 input read 到关联帧 present；它不覆盖触控 IC、驱动上报前延迟、显示扫描和面板响应。读完之后，你应该能给一个点击或滑动场景定义起点、终点、采集配置、SQL 指标和 Ap…",
+      "image": null,
+      "publishedAt": "2026-05-04T02:18:00Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2026/05/04/Android-Perfetto-18-Input-Response-Latency/",
+      "detailPath": "articles/50a0b01a14fe8f8e929e6288.json"
+    },
+    {
+      "id": "3afaa0c88296f04717797952",
+      "title": "Android Perfetto 系列 17：专项场景自动化、问题清单与平台体系",
+      "summary": "Camera open 慢、Audio underrun、WebView 首屏卡住、Flutter/游戏掉帧，这类问题的证据会散在 App、 system_server 、 cameraserver / audioserver 、HAL、SurfaceFlinger 和调度轨道里。只在 UI 里多看几条轨道，很容易漏掉关键时间点。 这一篇用 Camera 和 Audio 举例，讲一套可复用的专项分析方法：先抓对数据，再识别对象，再算阶段和阻塞，报告里保留能跳回 UI 复查的时间点。Camera/Audio 是例子，核心是领域 schema 和平台 tracing 协作。读完之后，至少能把 Camera open 慢拆成可复查阶段，把 Audio underrun 拆成周期异常，而不是只交一个 Top slic…",
+      "image": null,
+      "publishedAt": "2026-05-04T02:17:00Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2026/05/04/Android-Perfetto-17-Engineering-Domain-And-Platform-Tracing/",
+      "detailPath": "articles/3afaa0c88296f04717797952.json"
+    },
+    {
+      "id": "081dae40631f5b064a37150a",
+      "title": "Android Perfetto 系列 16：GPU、Power Counters 与硬件瓶颈分析",
+      "summary": "FrameTimeline 标出一帧晚了，主线程、RenderThread、SurfaceFlinger 看起来都没有明显越界，这时很容易写出一句“可能是 GPU 瓶颈”。这句话风险很高：GPU 频率、GPU 计数器、电池电流、电源轨都不是 App 单帧归因工具。 第 07、08 篇已经讲了 App 到 SurfaceFlinger 的渲染路径，第 06、09 篇已经讲了刷新率和 CPU 调度/频率。这一篇不重复这些内容，只补一个经常被跳过的环节：当问题看起来已经压到硬件资源层时，GPU、devfreq、battery counter（电池计数器）、power rail（电源轨）这些数据该怎么进入同一段 trace 分析。 这类 counter 的麻烦在于：不是每台设备都有，不同 GPU 厂商的 counte…",
+      "image": null,
+      "publishedAt": "2026-05-04T02:16:00Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2026/05/04/Android-Perfetto-16-GPU-Power-Counters/",
+      "detailPath": "articles/081dae40631f5b064a37150a.json"
+    },
+    {
+      "id": "1a3b16f394c9aa967643014c",
+      "title": "Android Perfetto 系列 15：Boot Trace、长时间现场 Trace 与偶发问题抓取",
+      "summary": "很多性能问题不是点一下就能复现的。开机慢、偶发卡顿、亮灭屏后异常、几小时后音频断续、车机周期性抖动、温升后的性能下降，都不适合靠 10 秒手工 trace 解决。 这一篇讲现场长 Trace：怎么提前定义窗口，怎么用 trigger 封存问题现场，怎么让文件安全写完，怎么拿回来之后判断数据是否可信。Boot Trace 放在后面作为特殊窗口处理。基础的交互式抓取方式（命令行、官方脚本、开发者选项、网页端）第 02 篇已经讲过，本文只讨论现场和长时间运行带来的差异。",
+      "image": null,
+      "publishedAt": "2026-05-04T02:15:00Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2026/05/04/Android-Perfetto-15-Boot-And-Long-Running-Field-Tracing/",
+      "detailPath": "articles/1a3b16f394c9aa967643014c.json"
+    },
+    {
+      "id": "3dd9b1ff15b3fbad9583a262",
+      "title": "Android Perfetto 系列 14：heapprofd 与内存 Profiling",
+      "summary": "内存问题最麻烦的地方在于：数字涨了，不代表马上能知道谁在涨。 dumpsys meminfo 能告诉你 RSS/PSS，Java heap dump 能告诉你对象保留关系，但 JNI/C++、Skia/Bitmap 的 CPU 侧分配、播放器里的 native wrapper 这些问题，经常还需要知道“哪个调用栈发起了 malloc/new”。 这一篇讲 heapprofd。它的价值是把 native allocation、free 和调用栈放进 Perfetto Trace，再和业务事件、线程调度、Binder 放到同一个时间轴里看。 heapprofd 适合放在趋势确认之后。先用 RSS/PSS、meminfo 或线上监控确认趋势，再用 heapprofd 找 malloc/new 调用栈；这篇不解决 J…",
+      "image": null,
+      "publishedAt": "2026-05-04T02:14:00Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2026/05/04/Android-Perfetto-14-Native-Heap-Heapprofd/",
+      "detailPath": "articles/3dd9b1ff15b3fbad9583a262.json"
+    },
+    {
+      "id": "7efd1da8c1de0933fa643668",
+      "title": "Android Perfetto 系列 13：Perfetto SDK、Track Event 与 App 现场 Trace",
+      "summary": "系统 Trace 能告诉你线程什么时候运行、CPU 跑在哪个核、FrameTimeline 哪一帧超时；在启用 Binder/ftrace/sched 证据时，也能还原 Binder 调用和等待线索。但它不知道播放器正在解哪一个 frame id，也不知道游戏引擎正在加载哪个 scene，更不知道一个业务任务在队列里排了多久。 这一篇只回答一个问题：业务语义怎么进入 Trace。系统能告诉你主线程慢了，Track Event 负责告诉你当时在 decode 哪一帧、哪个队列堵住、哪个请求跨线程流转。两边合在一起，才能把“主线程慢了 18ms”缩小到 frame 1082 附近的纹理上传候选区间，再结合 RenderThread/HWUI、GPU 和 FrameTimeline 继续验证。 文章按接入的实际顺序…",
+      "image": null,
+      "publishedAt": "2026-05-04T02:13:00Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2026/05/04/Android-Perfetto-13-Track-Event-SDK/",
+      "detailPath": "articles/7efd1da8c1de0933fa643668.json"
+    },
+    {
+      "id": "680345d5a59550c7fdf8d2ce",
+      "title": "Android Perfetto 系列 12：Trace 数据流与丢失排查",
+      "summary": "打开一份 Trace 后，最麻烦的情况是：文件里看起来有数据，但中间丢过。UI 里还能看到轨道，SQL 也能查出一些行，可线程状态少了一段、进程名对不上、某些 Track Event 消失了。继续分析下去，结论会越来越像猜。 SQL 只能分析 Trace 里还存在的证据。这个问题不处理好，后面的查询写得再漂亮，也只是把一份缺证据的 Trace 包装成表格。 第 02 篇已经讲过怎么抓，第 11 篇已经讲过怎么查 SQL；这一篇盯住一个问题：Trace 在哪里丢过数据、影响哪些结论、下一次抓取该怎么改配置。 文章顺着数据从内核走到 Trace 文件的链路，逐段定位丢点：ftrace、producer 共享内存、central buffer、增量状态、flush。每一段的丢法不一样，补救方式也不一样。最后给一个在…",
+      "image": null,
+      "publishedAt": "2026-05-04T02:12:00Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2026/05/04/Android-Perfetto-12-Trace-Dataflow-And-Loss/",
+      "detailPath": "articles/680345d5a59550c7fdf8d2ce.json"
+    },
+    {
+      "id": "6a4ce8db6e8415767444c6d9",
+      "title": "Android Perfetto 系列 11：PerfettoSQL、Trace Processor 与回归检测",
+      "summary": "拿到一份卡顿 Trace，大部分人的第一反应（包括早些年的我）是打开 Perfetto UI，框一段时间，看主线程、RenderThread、CPU 状态，再截几张图写结论。这个办法处理眼前问题没什么毛病，但很难回答后面的追问：换一份 Trace 是不是同样结论？换一台设备是不是同样结论？下个版本修完后，怎么确认问题没有回来？ 第 11 篇讲 PerfettoSQL 与 Trace Processor。目标很朴素：把 UI 里的判断改成能复查的查询，再用 Python 批量跑多份 Trace。读者不需要先变成 SQL 专家，只需要把 Trace 当成一组带时间戳的表，再把“看图得出的判断”翻译成一段能反复执行的查询就够了。 整篇文章就沿一条路走：认识 Trace Processor，把判断写成窗口化的查询，放…",
+      "image": null,
+      "publishedAt": "2026-05-04T02:11:00Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2026/05/04/Android-Perfetto-11-PerfettoSQL-TraceProcessor-Automation/",
+      "detailPath": "articles/6a4ce8db6e8415767444c6d9.json"
     },
     {
       "id": "27a309aeed434c7e4a780067",
@@ -538,127 +659,6 @@
       "sourceTitle": "Chang,Shih-Ting",
       "link": "https://chang-shih-ting.com/Bitcoin-Cryptography-Explained-How-Is-Bitcoin-Encrypted/",
       "detailPath": "articles/2469c3a4fe6931f4f88cbd7d.json"
-    },
-    {
-      "id": "e7419971b1661beace0fc4cf",
-      "title": "歧视不需要恶意",
-      "summary": "在中文互联网上有一个现象，每当某个领域发生了令人振奋的事，评论区里一定会涌出一种声音，“这就是我们中国”，语气里带着骄傲。但如果换成国内某个地方出了丑闻，同样的评论区里腔调就变了，“河南人就这样””、“东北人啊，那就不奇怪了”，言下之意就是这种丢人的事跟我无关，那是“他们”的事情。 这就很有意思，同一批人，在面对好事就用“我们”，但面对坏事就用“你们”，切换之快，很是丝滑自然，以至于我们长时间生活在这种语境下，好像没人觉得有什么不对劲。这种现象也不止中文互联网才有，比如大家都...... READ MORE",
-      "image": null,
-      "publishedAt": "2026-05-01T13:51:11Z",
-      "sourceId": "b4584dd13588932a",
-      "sourceTitle": "太隐",
-      "link": "https://wangyurui.com/posts/qi-shi-bu-xu-yao-e-yi-fc2cb16c",
-      "detailPath": "articles/e7419971b1661beace0fc4cf.json"
-    },
-    {
-      "id": "8cf6dda50a45f7d7f8cc1491",
-      "title": "2026年4月阅读书摘",
-      "summary": "亲爱的威廉，对于人们心中那种想要自我扩张，想要发现新鲜事物，想要四处走走、见见世面的欲望，我曾经考虑得很多很多；后来，对于他们的逆来顺受，循规蹈矩，对周围任何事情都漠不关心的本能，我又作了种种思索。",
-      "image": "https://images.unsplash.com/photo-1600818797017-d6e5027210bb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMTc3M3wwfDF8c2VhcmNofDUyfHxib29rc3xlbnwwfHx8fDE3Nzc5NzU2ODR8MA&ixlib=rb-4.1.0&q=80&w=2000",
-      "publishedAt": "2026-05-01T10:07:00Z",
-      "sourceId": "78a6233ab9c3a513",
-      "sourceTitle": "Domon",
-      "link": "https://www.domon.cn/2026-4yue-yue-du-shu-zhai/",
-      "detailPath": "articles/8cf6dda50a45f7d7f8cc1491.json"
-    },
-    {
-      "id": "045e123ecf8a0ddd85d34a91",
-      "title": "投籃遊戲之一時懷舊",
-      "summary": "Wiwi 最近在他 blog 網站上發佈的那個「 投籃遊戲 」，不禁令我回想起以前中學時期和同學一起跟風在 Facebook Messenger 1 玩 那個作爲隱藏彩蛋的投籃小遊戲 的時光啊～ 那都已經是 十年前 （左右）的事情了，時間真是個稍縱即逝的東西啊⋯⋯ 當時我還有 Facebook 帳號，現在沒有了。 ↩︎",
-      "image": null,
-      "publishedAt": "2026-05-01T07:31:00Z",
-      "sourceId": "a93d4f2e98fafcbe",
-      "sourceTitle": "All posts | 所有貼文 on ttheng's microblog. | 侃侃而隨想極短文。",
-      "link": "https://microblog.ttheng.com/basketball-game-reminiscence/",
-      "detailPath": "articles/045e123ecf8a0ddd85d34a91.json"
-    },
-    {
-      "id": "d9060dfbbd86b83bbb78dde4",
-      "title": "當 Youtube 不再替你決定看什麼",
-      "summary": "前言 # Youtube 上癮，通常不是因為你自制力差，而是它被設計成讓人停不下來。 在〈 再次嘗試完全戒斷 IG、YT 的一週後（2026） 〉提到，我安裝了阻擋演算法的 Plug-in，讓我少掉非常無意識觀影的時間。 這篇文章來分享怎麼做。 瀏覽器要求 # 瀏覽器要是基於 Chromium 開發的，才能使用相關 Plug-in，例如：Chrome、Edge、Brave 。 Eddie 推薦 Brave 瀏覽器，自由軟體，無追蹤，還能擋惡劣廣告。 Chrome 擴充商店 # Chrome 應用程式擴充商店 中，有非常多的 Plug-in 可以免費下載、使用，其中就包含了能夠阻擋 YT 演算法的工具。 YT 演算法阻擋 # DF UTube # 很單純，阻擋一切功能，進入 YouTube 只留下搜尋欄，看影片…",
-      "image": null,
-      "publishedAt": "2026-05-01T07:26:26Z",
-      "sourceId": "199cdf92fc46bfcd",
-      "sourceTitle": "Eddie Lv",
-      "link": "https://eddielv.com/articles/youtube-never-decide-you-watch/",
-      "detailPath": "articles/d9060dfbbd86b83bbb78dde4.json"
-    },
-    {
-      "id": "c1facc0cf9a9366a2ea8ea0c",
-      "title": "我被音控老師教育發聲動作",
-      "summary": "做音響工作，在路上，偶爾另個音控老師會問我唱歌的問題。 在我分享了一些概念之後，我發現他漸漸進步了。 「哇靠，他雖然代償還在，但是已經穩定發聲」，他的發聲動作裡面有我應該要有，但卻沒有的動作成份。 「那是怎麼做的？我要如何往那樣的發聲動作靠近？」 經過長時間的思考與練習實踐，我也終於漸漸抓到感覺。 「你每次跟我講完一些內容，我回去就有調整，現在高音穩定很多。不像以前，都是靠運氣，有時候唱會破、有時候又可以。」另個音控老師說。 「其實我發現很久了，而且我現在，就是以你的新的發聲邏輯來調整自己，我才進步成現在的樣子。」 我教的是理解，而他把動作練出來了。 後記 # 這篇文章其實寫超過一週了，因爲嘗試在控制自己不要一天發太多篇。 但我發現，放在備忘錄內的那些文章，大概只要放超過三天，我就會突然覺得「算了這不要發好了…",
-      "image": null,
-      "publishedAt": "2026-05-01T07:10:24Z",
-      "sourceId": "199cdf92fc46bfcd",
-      "sourceTitle": "Eddie Lv",
-      "link": "https://eddielv.com/musings/soundman-teach-singing/",
-      "detailPath": "articles/c1facc0cf9a9366a2ea8ea0c.json"
-    },
-    {
-      "id": "93e51e5999d3860e6b6ab3ee",
-      "title": "GitHeron：把网页标注写到 GitHub",
-      "summary": "最近写了一个 Chrome 插件，叫 GitHeron 。它想解决的问题很简单： Web highlights and clippings, synced to GitHub as Markdown. 我一直使用 Hypothesis 来同步冲浪记录，然后使用一个 Obsidian 插件 来同步到我的知识库。但 hypothesis 的浏览器插件体验不佳，时不时需要登录，选中文字打算做备注时又偶尔无法激活，我就想自己写个插件来解决这个问题。 GitHeron 的思路是直接使用 Github token 访问私有 repo，通过 API 把数据写入仓库。GitHub 当然不是传统意义上的数据库。但对个人工具来说，它已经提供了很多“数据库”才有的能力：同步、历史、权限、备份、API、跨设备访问。更重要的是，这些都…",
-      "image": "http://catcoding.me/images/ob_pasted-image-20260428224559.png",
-      "publishedAt": "2026-05-01T05:08:26Z",
-      "sourceId": "82c4bcb6bba028cf",
-      "sourceTitle": "程序员的喵",
-      "link": "http://catcoding.me/p/githeron/",
-      "detailPath": "articles/93e51e5999d3860e6b6ab3ee.json"
-    },
-    {
-      "id": "57dff7a0cc5469619dd3b25b",
-      "title": "今天發的夢",
-      "summary": "這次的夢比較碎片化，所以事件進程順序可能不連貫或不準確。 我似乎走在某個位於大馬路的美食街上，物色着想要買回家吃的零食。後來，我買了兩包口味各異的 keropok 1 回家，一包是比較清爽的芒果荔枝口味，一包是比較油膩的芝士口味。 在回家的路上，我遇到了兩位調皮的孩童。他們跑到我的面前，擋着我的去路，並且說了些擾人的話語（像「有種就趕我走啊（吐舌）」之類的）。正當我不知如何是好的時候，有個年輕（二十來歲？）男生走來將那些孩童引走，成功替我解圍。 就在我想感謝該年輕人之際，數個類似「 寶路（Polo）薄荷糖 」的巨大圓環狀「傳送門」突然從天而降，將剛才那班孩童「吞噬」（或是應該說被強制傳送到另一個次元去了？）。看着此情此景的我嚇得一時不知所措，便趕緊以最快的速度衝回家去了。 回到家後，發現原來自己竟然住在一個宛…",
-      "image": null,
-      "publishedAt": "2026-05-01T04:57:00Z",
-      "sourceId": "a93d4f2e98fafcbe",
-      "sourceTitle": "All posts | 所有貼文 on ttheng's microblog. | 侃侃而隨想極短文。",
-      "link": "https://microblog.ttheng.com/dream-20260501/",
-      "detailPath": "articles/57dff7a0cc5469619dd3b25b.json"
-    },
-    {
-      "id": "a447a5e767f8d2adbe03d482",
-      "title": "「生產力」截稿，名單更新",
-      "summary": "BlogBlog 同樂會的四月主題「生產力」已經截止收件囉！",
-      "image": null,
-      "publishedAt": "2026-05-01T02:00:00Z",
-      "sourceId": "ad9c9cc2127a7a13",
-      "sourceTitle": "BlogBlog.Club 部落部落俱樂部 Blog",
-      "link": "https://blogblog.club/blog/apr2026-links-updated",
-      "detailPath": "articles/a447a5e767f8d2adbe03d482.json"
-    },
-    {
-      "id": "1b2011cc9d865e31f1fc9b21",
-      "title": "寫部落格的大人值得認識",
-      "summary": "「學音樂的小孩不會變壞」──你一定聽過這句千古流傳的話。",
-      "image": null,
-      "publishedAt": "2026-05-01T00:00:00Z",
-      "sourceId": "7f36c3da1e6b5c71",
-      "sourceTitle": "Wiwi.Blog Blog",
-      "link": "https://wiwi.blog/blog/people-with-blogs",
-      "detailPath": "articles/1b2011cc9d865e31f1fc9b21.json"
-    },
-    {
-      "id": "fdecf9069ed021a609f1cb10",
-      "title": "比特幣的基本知識：它解決了什麼問題",
-      "summary": "免責聲明：文章內容僅為個人心得分享，不得做為投資決策依據。 一、開場：聽過比特幣，但仍然一無所知 你可能在幾年前就聽過比特幣，也可能知道它波動性很大、有點像是虛擬點數。但如果問：「比特幣到底是什麼？」其實多數人回答不出來。用最簡單的方式說：「 比特幣是一套不依賴銀行或政府中央帳本的數位貨幣系統 」。它最早由署名為中本聰（Satoshi Nakamoto）的人或團體，在 2008 年發表白皮書《Bitcoin: A Peer-to-Peer Electronic Cash System》，核心目標是讓兩個人可以在網路上直接交易，而不必透過金融機構作為中介。 你可能會接著疑惑：「兩個人可以直接交易，不必透過中介，有很重要嗎？」，實則上要回答這個問題，其背後其實有一個更古老的問題：人類為什麼需要貨幣？我們為什麼相信…",
-      "image": null,
-      "publishedAt": "2026-05-01T00:00:00Z",
-      "sourceId": "68a194be012e90d9",
-      "sourceTitle": "Chang,Shih-Ting",
-      "link": "https://chang-shih-ting.com/Bitcoin-Basics-What-Problem-Does-It-Solve/",
-      "detailPath": "articles/fdecf9069ed021a609f1cb10.json"
-    },
-    {
-      "id": "7bc216f80daa9b7c41e5db57",
-      "title": "动物朋友",
-      "summary": "萌宠乐园～ 和动物朋友亲密接触。 By 徕卡 D-LUX8",
-      "image": "https://yayu.net/wp-content/uploads/2026/04/2026043014102546.webp",
-      "publishedAt": "2026-04-30T14:13:22Z",
-      "sourceId": "d97698cb61c165ac",
-      "sourceTitle": "雅余  ·  茶余饭后，闲情雅致",
-      "link": "https://yayu.net/6218.html",
-      "detailPath": "articles/7bc216f80daa9b7c41e5db57.json"
     }
   ]
 }

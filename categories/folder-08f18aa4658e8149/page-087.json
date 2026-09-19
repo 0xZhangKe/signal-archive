@@ -1,6 +1,116 @@
 {
   "items": [
     {
+      "id": "877f8f9be20f0a0e191b69ea",
+      "title": "Android 基于 Choreographer 的渲染机制详解",
+      "summary": "本文介绍了 App 开发者不经常接触到但是在 Android Framework 渲染链路中非常重要的一个类 Choreographer。包括 Choreographer 的引入背景、Choreographer 的简介、部分源码解析、Choreographer 与 MessageQueue、Choreographer 和 APM，以及手机厂商基于 Choreographer 的一些优化思路 Choreographer 的引入，主要是配合 Vsync ，给上层 App 的渲染提供一个稳定的 Message 处理的时机，也就是 Vsync 到来的时候 ，系统通过对 Vsync 信号周期的调整，来控制每一帧绘制操作的时机. 目前大部分手机都是 60Hz 的刷新率，也就是 16.6ms 刷新一次，系统为了配合屏幕的刷…",
+      "image": null,
+      "publishedAt": "2019-10-22T10:55:11Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2019/10/22/Android-Choreographer/",
+      "detailPath": "articles/877f8f9be20f0a0e191b69ea.json"
+    },
+    {
+      "id": "2ef30c014cf3e9d8e6cb436b",
+      "title": "Baby 5个月大了",
+      "summary": "从100天到5个月之中生活发生的几件变化：自己的一次生病、返回工作、baby作息的变化，还有其他一些一些。 自己生病了 # 我以为产后因为身体自动适应baby的需求所以不会生病（毕竟之前三个月经历了无数缺觉的夜晚都没生病，照平常的话早病了无数次了），然而生病竟然在三个半月的时候发生了。来得比产前要厉害一些，喉咙痛1天，流鼻涕发烧2天，之后流鼻涕数天。大概难受了有一个多星期。发烧的第一天是个星期五，和baby单独在家感觉自己还是有点可怜，因为有了baby的自己就算病了也照样要function。总之该喂还是喂，该玩的时候如果自己太累了，就到沙发上自己盖个毯子休息，把baby放自己边上的沙发让TA趴一会儿躺一会儿。好在之后到目前为止没有生过病。在儿科医生的建议下我们两个大人双双打了流感疫苗，希望这个冬天能过得轻松点…",
+      "image": null,
+      "publishedAt": "2019-10-13T00:00:00Z",
+      "sourceId": "dc53cf887984ae1c",
+      "sourceTitle": "四喜丸子",
+      "link": "https://fourhappylions.com/posts/baby-now-5-months-old/",
+      "detailPath": "articles/2ef30c014cf3e9d8e6cb436b.json"
+    },
+    {
+      "id": "aca46f3cf5672d847a3c97b7",
+      "title": "挣脱确定性的枷锁，数学获得了自由",
+      "summary": "本文首发于微信公众号“赛先生”，遵守首页的CC版权声明：署名-非商业性使用-禁止演绎，请自觉遵守，非授权请勿转 […]",
+      "image": "https://0.gravatar.com/avatar/9b9252f394ef79626a2b9243f7d6fbe23214eecce69b8ec94959863487e8bfd8?s=96&d=identicon&r=G",
+      "publishedAt": "2019-10-10T19:29:20Z",
+      "sourceId": "f18f137548f6d7e8",
+      "sourceTitle": "fwjmath的相空间",
+      "link": "https://fwjmath.wordpress.com/2019/10/11/review-kline-loss-of-certainty/",
+      "detailPath": "articles/aca46f3cf5672d847a3c97b7.json"
+    },
+    {
+      "id": "18bc97756dc6add0facd752f",
+      "title": "“一只巴掌拍不响”的医患关系",
+      "summary": "患者没信任，医者无担当，医生每一次做临床决策时都掺杂进大量避险的杂念，是每一个医生和患者的悲哀。",
+      "image": null,
+      "publishedAt": "2019-09-23T00:00:00Z",
+      "sourceId": "d48d6f28fe78bc92",
+      "sourceTitle": "DrPika's Blog",
+      "link": "https://blog.drpika.com/posts/2019-09-23",
+      "detailPath": "articles/18bc97756dc6add0facd752f.json"
+    },
+    {
+      "id": "e04e7e6777fe90bdf2d058c2",
+      "title": "“一只巴掌拍不响”的医患关系",
+      "summary": "患者没信任，医者无担当，医生每一次做临床决策时都掺杂进大量避险的杂念，是每一个医生和患者的悲哀。",
+      "image": null,
+      "publishedAt": "2019-09-23T00:00:00Z",
+      "sourceId": "3e335517f4e1112a",
+      "sourceTitle": "Dr.Pika's Blog",
+      "link": "https://blog.drpika.com/posts/2019-09-23",
+      "detailPath": "articles/e04e7e6777fe90bdf2d058c2.json"
+    },
+    {
+      "id": "491d59e8ef36029f9dba98b8",
+      "title": "Android 中的卡顿丢帧原因概述 - 低内存篇",
+      "summary": "在 Android 中的卡顿丢帧原因概述 - 系统篇 这篇文章中, 实际案例这里我们有列举一些由于系统低内存导致的卡顿, 由于 Android 低内存对整机性能影响比较大, 所以单独写一篇文章, 来概述系统低内存对整机性能的影响 . 随着 Android 系统版本的更迭, 以及 App 的代码膨胀, Android 系统对内存的需求越来越大, 但是目前市面上还存在着大量的 4G 内存以下的机器, 这部分用户就很容易遇到整机低内存的情况, 尤其是在系统大版本更新和 App 越装越多的情况下 . Android 低内存会导致性能问题, 具体表现就是响应慢和卡顿 . 比如启动一个应用要花比平时更长的时间 ; 滑动列表会掉更多帧 ; 后台的进程减少导致冷启动变多 ; 手机很容易发热发烫等, 下面我会概述发生这些性能问…",
+      "image": null,
+      "publishedAt": "2019-09-18T15:21:26Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2019/09/18/Android-Jank-Due-To-Low-Memory/",
+      "detailPath": "articles/491d59e8ef36029f9dba98b8.json"
+    },
+    {
+      "id": "8352564c911807e33464e49e",
+      "title": "Android 桌面被杀问题分析案例",
+      "summary": "写这篇文章的契机是因为一个实际遇到的问题, 这个问题其实不难, 不过在分析了这个问题然后写日记的时候, 我突然觉得这个问题分析的过程有必要记录一下, 分享给大家 . 分析过程中有用到一些工具, 一些方法, 也从另外一个聪明的小伙伴梅明那里学到了一些分析技巧和工具的使用技巧 . 这篇文章中分析过程包括我之前在 Android 中的卡顿丢帧原因概述 - 方法论 里面提到的一些工具, 包括 : 复现视频 \\ Event Log \\ Android Studio 源码和 App Debug \\ Android Studio Profile \\ Systrace \\ Dumpsys \\ PS 等 . 大多数工具大家都在开发过程中使用过, 这次分析正是使用了这些工具相互配合, 最终找到的问题的原因. 大家看下来可能会觉得…",
+      "image": null,
+      "publishedAt": "2019-09-17T10:58:11Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2019/09/17/Android-Kill-Background-App-Debug/",
+      "detailPath": "articles/8352564c911807e33464e49e.json"
+    },
+    {
+      "id": "e8482329f5ab70ce47f75a49",
+      "title": "快！",
+      "summary": "最近在做网站优化，自己是杭州电信1Gbps下行的网络环境，载入本站的速度可以感受一下 各位小伙伴也可以试一下用其它网络环境打开本站（移动、联通、铁通、教育网等） 直接看图片最下方，完成整个载入18.6MB的资源过程耗时1.06s。 原因总结一下 阿里云轻量香港去程NTT，回程CN2，去程不影响，回程是真的厉害，阿里云牛逼！ TLS 1.3优化了握手速度，HTTPS更快载入 资源放在了阿里云OSS上，再说一次阿里云牛逼！ 未来可能会做的事情 海外用户单独开辟一个服务器，例如美国，然后反向代理到阿里云轻量香港上。 服务器升级为 openresty，这样可以用lua引擎去自动压缩图片!",
+      "image": "https://cdn.taurusxin.com/old-cdn/usr/uploads/2019/09/2084489867.png#mirages-width=654&mirages-height=588&mirages-cdn-type=4",
+      "publishedAt": "2019-09-14T15:55:00Z",
+      "sourceId": "3220115c042340a7",
+      "sourceTitle": "TaurusXin 的独立博客",
+      "link": "https://www.taurusxin.com/fast_load/",
+      "detailPath": "articles/e8482329f5ab70ce47f75a49.json"
+    },
+    {
+      "id": "779fbb9876eb61642d0cfcf6",
+      "title": "2019年9月初——已经完成的工作",
+      "summary": "动态资源 先说一下服务器的大致配置 所有的动态资源（Typecho、php、博客插件）都存在我的阿里云香港轻量应用服务器上 服务器配置是这样的 1核心CPU 1GB运行内存 25G SSD存储 CentOS 7 30M 峰值带宽 软件采用的是lnmp架构，全都是源码编译安装 nginx 1.16.0 (HTTP2, HTTPS TLSv1.3, HSTS Support) PHP 5.6.40 Mysql 5.5.62 博客系统是 Typecho 1.1 (17.10.30) 似乎作者已经快2年没更新了 这样的配置支撑整个网站的内容应该就是没有太大问题了 静态资源 静态资源就是一些图片等资源，因为服务器在香港，域名才没有备案，才得以访问到，而根据我最近一段时间的测试结果得出，阿里云香港的轻量应用服务器的线路对…",
+      "image": null,
+      "publishedAt": "2019-09-07T13:25:00Z",
+      "sourceId": "3220115c042340a7",
+      "sourceTitle": "TaurusXin 的独立博客",
+      "link": "https://www.taurusxin.com/work_done_in_2019-09/",
+      "detailPath": "articles/779fbb9876eb61642d0cfcf6.json"
+    },
+    {
+      "id": "e1b67790825b791756a3c6d2",
+      "title": "Android 中的卡顿丢帧原因概述 - 应用篇",
+      "summary": "在 Android 中的卡顿丢帧原因概述 - 系统篇 这篇文章中我们列举了系统自身原因导致的手机卡顿问题, 这一篇文章我们主要列举一些由于 App 自身原因导致的卡顿问题. 各位用户在使用 App 的时候, 如果遇见卡顿现象, 先别第一时间骂手机厂商优化烂, 先想想是不是这个 App 自己的问题. Android 手机使用中的卡顿问题, 一般来说手机厂商和 App 开发商都会非常重视, 所以不管是手机厂商还是 App 开发者, 都会对卡顿问题非常重视, 内部一般也会有专门的基础组或者优化组来进行优化 . 目前市面上有一些非常棒的第三方性能监控工具, 比如腾讯的 Matrix ; 手机厂商一般也会有自己的性能监控方案, 由于可以修改源码和避免权限问题, 所以手机厂商可以拿到更多的数据, 分析起来也会更方便一些.…",
+      "image": null,
+      "publishedAt": "2019-09-05T12:35:42Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2019/09/05/Android-Jank-Due-To-App/",
+      "detailPath": "articles/e1b67790825b791756a3c6d2.json"
+    },
+    {
       "id": "e272a254430d0e5bdf564365",
       "title": "Android 中的卡顿丢帧原因概述 - 系统篇",
       "summary": "在 Android 中的卡顿丢帧原因概述 - 应用篇 这篇文章中我们列举了应用自身原因导致的手机卡顿问题 ， 这一篇文章我们主要列举一些由 Android 平台自身原因导致的卡顿问题. 各大国内 Android 厂商的产品由于硬件性能有高有低 ， 功能实现各有差异 ， 团队技术能力各有千秋 ， 所以其系统的质量也有高有低 ， 这里我们就来列举一下 ， 由于系统的硬件和软件原因导致的性能问题. Android 手机使用中的卡顿问题 ， 一般来说手机厂商和 App 开发商都会非常重视 ， 所以不管是手机厂商还是 App 开发者 ， 都会对卡顿问题非常重视 ， 内部一般也会有专门的基础组或者优化组来进行优化 . 目前市面上有一些非常棒的第三方性能监控工具 ， 比如腾讯的 Matrix ; 手机厂商一般也会有自己的性…",
@@ -549,116 +659,6 @@
       "sourceTitle": "Elizen's Blog",
       "link": "https://elizen.me/posts/2018/10/%E6%AF%94%E4%BB%BB%E4%BD%95%E6%97%B6%E5%80%99%E9%83%BD%E5%AE%B3%E6%80%95%E8%A1%B0%E8%80%81/",
       "detailPath": "articles/f498dc0e5cf9fff2a9e7c1af.json"
-    },
-    {
-      "id": "aaabaf23c4d3f13d8b94a73d",
-      "title": "程序员的修炼-08-阅读之美",
-      "summary": "本文是 <程序员的修炼-从优秀到卓越> 的读书笔记的第八篇，这本书的作者是 Jeff Atwood，StackOverflow 的创始人之一，Jeff 的文章涉及面很广，他是一个经验老道的程序员、管理者、创业者，这本书谈到了编程之外的很多东西，不管你是初级工程师",
-      "image": null,
-      "publishedAt": "2018-10-01T06:34:15Z",
-      "sourceId": "1aa1837ca33d8d55",
-      "sourceTitle": "Android Performance",
-      "link": "https://androidperformance.com/2018/10/01/how-to-stop-sucking-and-be-awesome-instead-8/",
-      "detailPath": "articles/aaabaf23c4d3f13d8b94a73d.json"
-    },
-    {
-      "id": "fd931056a328c974a4786e80",
-      "title": "程序员的修炼-07-游戏与编程",
-      "summary": "本文是 <程序员的修炼-从优秀到卓越> 的读书笔记的第七篇，这本书的作者是 Jeff Atwood，StackOverflow 的创始人之一，Jeff 的文章涉及面很广，他是一个经验老道的程序员、管理者、创业者，这本书谈到了编程之外的很多东西，不管你是初级工程师",
-      "image": null,
-      "publishedAt": "2018-09-30T06:34:15Z",
-      "sourceId": "1aa1837ca33d8d55",
-      "sourceTitle": "Android Performance",
-      "link": "https://androidperformance.com/2018/09/30/how-to-stop-sucking-and-be-awesome-instead-7/",
-      "detailPath": "articles/fd931056a328c974a4786e80.json"
-    },
-    {
-      "id": "571626971d1015e6086372f1",
-      "title": "程序员的修炼-06-互联网那些事",
-      "summary": "本文是 <程序员的修炼-从优秀到卓越> 的读书笔记的第六篇，这本书的作者是 Jeff Atwood，StackOverflow 的创始人之一，Jeff 的文章涉及面很广，他是一个经验老道的程序员、管理者、创业者，这本书谈到了编程之外的很多东西，不管你是初级工程师",
-      "image": null,
-      "publishedAt": "2018-09-29T06:34:15Z",
-      "sourceId": "1aa1837ca33d8d55",
-      "sourceTitle": "Android Performance",
-      "link": "https://androidperformance.com/2018/09/29/how-to-stop-sucking-and-be-awesome-instead-6/",
-      "detailPath": "articles/571626971d1015e6086372f1.json"
-    },
-    {
-      "id": "255452787bf5514d0ad38b06",
-      "title": "程序员的修炼-05-了解你的用户",
-      "summary": "本文是 <程序员的修炼-从优秀到卓越> 的读书笔记的第五篇，这本书的作者是 Jeff Atwood，StackOverflow 的创始人之一，Jeff 的文章涉及面很广，他是一个经验老道的程序员、管理者、创业者，这本书谈到了编程之外的很多东西，不管你是初级工程师",
-      "image": null,
-      "publishedAt": "2018-09-28T03:57:02Z",
-      "sourceId": "1aa1837ca33d8d55",
-      "sourceTitle": "Android Performance",
-      "link": "https://androidperformance.com/2018/09/28/how-to-stop-sucking-and-be-awesome-instead-5/",
-      "detailPath": "articles/255452787bf5514d0ad38b06.json"
-    },
-    {
-      "id": "18bb8d25f0265f9d4259ea8d",
-      "title": "程序员的修炼-04-关于测试的一些思考",
-      "summary": "本文是 <程序员的修炼-从优秀到卓越> 的读书笔记的第四篇，这本书的作者是 Jeff Atwood，StackOverflow 的创始人之一，Jeff 的文章涉及面很广，他是一个经验老道的程序员、管理者、创业者，这本书谈到了编程之外的很多东西，不管你是初级工程师",
-      "image": null,
-      "publishedAt": "2018-09-27T00:50:32Z",
-      "sourceId": "1aa1837ca33d8d55",
-      "sourceTitle": "Android Performance",
-      "link": "https://androidperformance.com/2018/09/27/how-to-stop-sucking-and-be-awesome-instead-4/",
-      "detailPath": "articles/18bb8d25f0265f9d4259ea8d.json"
-    },
-    {
-      "id": "66938f15093d39deb998d435",
-      "title": "程序员的修炼-03-Web 设计原则",
-      "summary": "本文是 <程序员的修炼-从优秀到卓越> 的读书笔记的第三篇，这本书的作者是 Jeff Atwood，StackOverflow 的创始人之一，Jeff 的文章涉及面很广，他是一个经验老道的程序员、管理者、创业者，这本书谈到了编程之外的很多东西，不管你是初级工程师",
-      "image": null,
-      "publishedAt": "2018-09-26T07:39:25Z",
-      "sourceId": "1aa1837ca33d8d55",
-      "sourceTitle": "Android Performance",
-      "link": "https://androidperformance.com/2018/09/26/how-to-stop-sucking-and-be-awesome-instead-3/",
-      "detailPath": "articles/66938f15093d39deb998d435.json"
-    },
-    {
-      "id": "35d9368bd0ab60854d47f920",
-      "title": "老年人的“坏”习惯",
-      "summary": "一直觉得，对于老人们种种让人看不惯的“坏”习惯，最好宽容但别纵容。… Continue reading 老年人的“坏”习惯 →",
-      "image": "https://wentommy.wordpress.com/wp-content/uploads/2018/09/35f6da0e97f575cc7437c1784b7e62e2-600x400.jpg",
-      "publishedAt": "2018-09-21T12:08:07Z",
-      "sourceId": "3953acd1dfa15f46",
-      "sourceTitle": "文三娃",
-      "link": "https://wentommy.wordpress.com/2018/09/21/%e8%80%81%e5%b9%b4%e4%ba%ba%e7%9a%84%e5%9d%8f%e4%b9%a0%e6%83%af/",
-      "detailPath": "articles/35d9368bd0ab60854d47f920.json"
-    },
-    {
-      "id": "d4d20c04c78e7fdcc3a22671",
-      "title": "程序员的修炼-02-编程之道",
-      "summary": "本文是 <程序员的修炼-从优秀到卓越> 的读书笔记的第二篇，这本书的作者是 Jeff Atwood，StackOverflow 的创始人之一，Jeff 的文章涉及面很广，他是一个经验老道的程序员、管理者、创业者，这本书谈到了编程之外的很多东西，不管你是初级工程师",
-      "image": null,
-      "publishedAt": "2018-09-20T06:09:01Z",
-      "sourceId": "1aa1837ca33d8d55",
-      "sourceTitle": "Android Performance",
-      "link": "https://androidperformance.com/2018/09/20/how-to-stop-sucking-and-be-awesome-instead-2/",
-      "detailPath": "articles/d4d20c04c78e7fdcc3a22671.json"
-    },
-    {
-      "id": "48ad235522b8f55d21989476",
-      "title": "程序员的修炼-01-绝地反击之术",
-      "summary": "本文是 <程序员的修炼-从优秀到卓越> 的读书笔记的第一篇，这本书的作者是 Jeff Atwood，StackOverflow 的创始人之一，Jeff 的文章涉及面很广，他是一个经验老道的程序员、管理者、创业者，这本书谈到了编程之外的很多东西，不管你是初级工程师",
-      "image": null,
-      "publishedAt": "2018-09-19T11:03:55Z",
-      "sourceId": "1aa1837ca33d8d55",
-      "sourceTitle": "Android Performance",
-      "link": "https://androidperformance.com/2018/09/19/how-to-stop-sucking-and-be-awesome-instead-1/",
-      "detailPath": "articles/48ad235522b8f55d21989476.json"
-    },
-    {
-      "id": "26d4770956b648024a5c2dc9",
-      "title": "Android 系统不释放内存吗？",
-      "summary": "除了 CPU，很多用户在选购手机的时候通常也会考虑内存大小，不同版本内存的手机价格也不一样，买多大内存的合适呢？Android 系统是怎么管理内存的呢？普通用户对 Android 手机的内存使用总是一头雾水，这个应用到底占了多少内存？系统到底占了多少内存？内存对我手机的使用",
-      "image": null,
-      "publishedAt": "2018-09-13T13:27:57Z",
-      "sourceId": "1aa1837ca33d8d55",
-      "sourceTitle": "Android Performance",
-      "link": "https://androidperformance.com/2018/09/13/android-memory/",
-      "detailPath": "articles/26d4770956b648024a5c2dc9.json"
     }
   ]
 }

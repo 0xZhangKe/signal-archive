@@ -1,6 +1,105 @@
 {
   "items": [
     {
+      "id": "ee71a8ca0b54ab24e711295a",
+      "title": "Android 内存优化之三 - 打开 MAT 中的 Bitmap 原图",
+      "summary": "本文是 MAT 工具使用系列的第二篇，这个系列共三篇，详细介绍了如何使用 MAT 来分析内存问题，既可以是 Java 应用的内存问题，也可以是 Android 应用的内存问题： Android 内存优化之一：MAT 使用入门 Android内存优化之二：MAT使用进阶 Android内存优化之三：打开MAT中的Bitmap原图 本文介绍的是从 MAT 里手工还原 Bitmap 原图的旧排查技巧，适合在离线 heap 里确认“到底是哪张图”被错误持有。现在排查图片内存问题时，第一步通常不是直接打开 MAT，而是先用 Android Studio Memory Profiler 的 heap dump/retained size/reference 视图确认 Bitmap、BitmapDrawable 或图片缓存…",
+      "image": null,
+      "publishedAt": "2015-04-11T10:41:32Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2015/04/11/AndroidMemory-Open-Bitmap-Object-In-MAT/",
+      "detailPath": "articles/ee71a8ca0b54ab24e711295a.json"
+    },
+    {
+      "id": "22a97125dfd6c1a96875f837",
+      "title": "Android 内存优化之二 - MAT使用进阶",
+      "summary": "本文是 MAT 工具使用系列的第二篇，这个系列共三篇，详细介绍了如何使用 MAT 来分析内存问题，既可以是 Java 应用的内存问题，也可以是 Android 应用的内存问题： Android 内存优化之一：MAT 使用入门 Android内存优化之二：MAT使用进阶 Android内存优化之三：打开MAT中的Bitmap原图 本文的 Histogram、Dominator Tree、Thread 信息仍然是 heap 分析的核心方法，但抓取和第一轮分析入口应换成现在的工具链：先用 Android Studio Memory Profiler 捕获 heap dump，必要时在关键点调用 Debug.dumpHprofData() ，再用 Profiler 的 retained size、reference…",
+      "image": null,
+      "publishedAt": "2015-04-11T10:26:36Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2015/04/11/AndroidMemory-Usage-Of-MAT-Pro/",
+      "detailPath": "articles/22a97125dfd6c1a96875f837.json"
+    },
+    {
+      "id": "edcb1d4763935081023653c3",
+      "title": "Android 内存优化(1) - MAT 使用入门",
+      "summary": "本文是 MAT 工具使用系列的第一篇，这个系列共三篇，详细介绍了如何使用 MAT 来分析内存问题，既可以是 Java 应用的内存问题，也可以是 Android 应用的内存问题： Android 内存优化(1) - MAT 使用入门 Android 内存优化(2) - MAT使用进阶 Android 内存优化(3) - 打开MAT中的Bitmap原图 这组文章里的 MAT 技巧仍然适合学习 Java heap、Dominator Tree、Retained Size、引用链这些基础概念，但默认抓取流程已经变了。早期流程是 Eclipse/DDMS 导出 Android HPROF，再用 hprof-conv 转成 MAT 能读的格式；现在应优先在 Android Studio Memory Profiler 里…",
+      "image": null,
+      "publishedAt": "2015-04-11T10:10:29Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2015/04/11/AndroidMemory-Usage-Of-MAT/",
+      "detailPath": "articles/edcb1d4763935081023653c3.json"
+    },
+    {
+      "id": "1795430768818b2a50f9e16b",
+      "title": "Android性能优化后续",
+      "summary": "前言 本文是一篇译文，原文 Android Performance Case Study Follow-up 的作者是大名鼎鼎的 Romain Guy 。本文讲述了Android性能优化的一些技巧、方法和工具。 译文正文 两年前，我发表了一篇名为 Android Performance Case Study 的文章，来帮助Android开发者了解需要使用什么工具和技术手段来确定、追踪和优化性能问题。 那篇文章以一个Twitter客户端 Falcon Pro 为典范，其开发人员为 Joaquim Vergès. Joaquim人不错，他允许我在我的文章中使用它的程序作为例子，并且快速处理了我发现的所有问题。一切都OK，直到Joaquim 从头开始开发Falcon Pro 3，前不久在他准备发布它的新应用的时候，…",
+      "image": null,
+      "publishedAt": "2015-03-31T01:29:00Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2015/03/31/android-performance-case-study-follow-up/",
+      "detailPath": "articles/1795430768818b2a50f9e16b.json"
+    },
+    {
+      "id": "5873e54fd2b41a0213778bfd",
+      "title": "Android 小技巧 - 5",
+      "summary": "本文是一篇译文,这篇是这个系列的第五篇.讲述的是Android开发中遇到的一些好用的小技巧,或者一些实用的API,很多人都知道,但也有人不知道,记录下来,如果能帮助到大家,也是极好的.由于不是严格的博文,所以翻译也不那么严格,有些工具和类我也会经常用,所以我会根据自己的想法去写.有些地方坐在并没有将这个工具的作用讲出来,我会补充上去. 第五篇里 SDK “以为没有其实有”的功能比较多： ViewDragHelper 帮你做自定义拖拽容器、 PopupWindow 实现非 Activity 的临时浮层、 ThumbnailUtils 直接生成图片或视频缩略图、 ActivityOptions 自定义 Activity 跳转动画与 launch display；性能向的有 SparseArray 替代 HashM…",
+      "image": null,
+      "publishedAt": "2015-03-14T16:32:11Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2015/03/15/android-tips-round-up-5/",
+      "detailPath": "articles/5873e54fd2b41a0213778bfd.json"
+    },
+    {
+      "id": "9cb020a7aea7b0bb84b559e2",
+      "title": "Android 小技巧 - 4",
+      "summary": "本文是一篇译文,这篇是这个系列的第四篇.讲述的是Android开发中遇到的一些好用的小技巧,或者一些实用的API,很多人都知道,但也有人不知道,记录下来,如果能帮助到大家,也是极好的.由于不是严格的博文,所以翻译也不那么严格,有些工具和类我也会经常用,所以我会根据自己的想法去写.有些地方坐在并没有将这个工具的作用讲出来,我会补充上去. 第四篇集中讲两类东西：一类是被 XML 属性藏起来的特性， android:weightSum 、 android:duplicateParentState 、 android:clipChildren 、 android:fillViewport 、 android:tileMode 、 android:scaleType 这些点一上手就能直接省一段自定义 View 的代码；…",
+      "image": null,
+      "publishedAt": "2015-03-14T16:31:02Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2015/03/15/android-tips-round-up-4/",
+      "detailPath": "articles/9cb020a7aea7b0bb84b559e2.json"
+    },
+    {
+      "id": "f01711a110aa2f1e8b02e55d",
+      "title": "Android 小技巧 -3",
+      "summary": "本文是一篇译文,这篇是这个系列的第三篇.讲述的是Android开发中遇到的一些好用的小技巧,或者一些实用的API,很多人都知道,但也有人不知道,记录下来,如果能帮助到大家,也是极好的.由于不是严格的博文,所以翻译也不那么严格,有些工具和类我也会经常用,所以我会根据自己的想法去写.有些地方坐在并没有将这个工具的作用讲出来,我会补充上去. 第三篇的关键词是”原本写过却懒得查文档的事情”： UrlQuerySanitizer 替你解析 query 参数、 PhoneNumberUtils.formatNumber 帮你按区域格式化电话号码、 LocalBroadcastManager 让进程内广播省去权限和跨进程开销；Fragment 相关有 setArguments 与 DialogFragment.setSho…",
+      "image": null,
+      "publishedAt": "2015-03-14T16:29:57Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2015/03/15/android-tips-round-up-3/",
+      "detailPath": "articles/f01711a110aa2f1e8b02e55d.json"
+    },
+    {
+      "id": "d1272f1472b8ca6b898f91b5",
+      "title": "为 Nexus5 编译 AndroidL 固件",
+      "summary": "接前一篇文章 使用Android Studio查看Android Lollipop源码 , 我们知道,仅仅看代码,提高是比较有限的,而且理解起来也比较肤浅,往往过目就忘. 而自己写过的代码,往往会印象比较深刻,在写的时候也会比较容易理解流程. 所以我们在看代码的同时, 如果能修改代码, 在手机上跑起来并看到修改的效果,这无疑会加快看代码的效率和积极性. 所以这篇文章,就讲解一下如何自己编译AndroidL的源码,并且在Nexus5上跑起来. 至于为何需要自己编译固件,而不是直接安装Google给出的工厂固件?原因是Google给出的工厂固件是User版本,是没法随心所欲Push东西进去的. 所以我们需要编译自己的Userdebug版本. 本文假设你已经下载了AndroidL的源码,并且有一台Nexus5手机(…",
+      "image": null,
+      "publishedAt": "2015-02-04T12:51:19Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2015/02/04/build-rom-for-nexus5/",
+      "detailPath": "articles/d1272f1472b8ca6b898f91b5.json"
+    },
+    {
+      "id": "7786ff6380e4bf5d0d6b1a00",
+      "title": "Android 性能优化之 Systrace 工具介绍(一)",
+      "summary": "这篇是 2015 年的 Systrace 工具介绍，里面提到的 Eclipse、Device Monitor、 sdk/tools/systrace 、User 版本不能抓 Trace 等流程，已经不适合作为今天的默认操作路径。旧文章保留的是 Systrace 的基本概念：它为什么能把 SurfaceFlinger、WindowManager、View、CPU 调度等系统行为放到一张时间线上。今天真正抓取和分析 Trace，应优先看 Android Perfetto 系列目录 。 现在的工具流程可以直接按下面理解： 旧流程 新流程 Eclipse / Android Studio Device Monitor 里点 Systrace 开发者选项里打开 System Tracing，或使用 adb shell…",
+      "image": null,
+      "publishedAt": "2015-01-30T12:24:31Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2015/01/30/android-performance-tools-systrace-1/",
+      "detailPath": "articles/7786ff6380e4bf5d0d6b1a00.json"
+    },
+    {
       "id": "90fd86fe0cea02e37d6191e9",
       "title": "使用 Android Studio 查看 Android Lollipop 源码",
       "summary": "Android Studio 作为Google的亲儿子,Nexus手机系列所收到的待遇大家有目共睹.Android5.0出来之后,Nexus5第一时间就升级到了最新的系统.那么作为Google亲儿子的Android Studio同样备受Google的重视,我也是第一时间从Eclipse转投到了Android Studio的怀抱中,从最初的测试版本一路升级到现在的1.0正式版本(今天发布了1.1,果断已经升级了).",
