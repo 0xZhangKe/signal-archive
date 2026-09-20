@@ -1,0 +1,11 @@
+{
+  "id": "958a2d3106e60b1df36808be",
+  "title": "datasette-auth-github 1.0",
+  "summary": "Release: datasette-auth-github 1.0 I run this GitHub login plugin on the agent.datasette.io demo site and I noticed that my authenticated sessions weren't lasting very long. It turned out that the plugin was setting cookies without a Max-Age parameter, so they were expiring at the end of a browser session (which in Mobile Safari seems to happen pretty often…",
+  "content": "<p><strong>Release:</strong> <a href=\"https://github.com/simonw/datasette-auth-github/releases/tag/1.0\" target=\"_blank\" rel=\"noopener noreferrer\">datasette-auth-github 1.0</a></p>\n        <p>I run this GitHub login plugin on the <a href=\"https://agent.datasette.io/\" target=\"_blank\" rel=\"noopener noreferrer\">agent.datasette.io</a> demo site and I noticed that my authenticated sessions weren&#x27;t lasting very long. It turned out that the plugin was setting cookies without a <code>Max-Age</code> parameter, so they were expiring at the end of a browser session (which in Mobile Safari seems to happen pretty often, independently of how you are using the app.)</p>\n<p>I fixed that in <a href=\"https://github.com/simonw/datasette-auth-github/issues/80\" target=\"_blank\" rel=\"noopener noreferrer\">#80</a> and, since this plugin has been around for quite a while and is tested against both Datasette 0.65.x and Datasette 1.0ax, I decided to bump it up to a 1.0 release. I&#x27;m trying to get better at promoting stable plugins to 1.0.</p>\n    \n    \n        <p>Tags: <a href=\"https://simonwillison.net/tags/github\" target=\"_blank\" rel=\"noopener noreferrer\">github</a>, <a href=\"https://simonwillison.net/tags/plugins\" target=\"_blank\" rel=\"noopener noreferrer\">plugins</a>, <a href=\"https://simonwillison.net/tags/datasette\" target=\"_blank\" rel=\"noopener noreferrer\">datasette</a></p>",
+  "image": null,
+  "publishedAt": "2026-09-19T19:52:02Z",
+  "sourceId": "052434531db837d6",
+  "sourceTitle": "Simon Willison's Weblog",
+  "link": "https://simonwillison.net/2026/Sep/19/datasette-auth-github/"
+}
