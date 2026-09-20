@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-09-19T17:10:08+00:00</updated><author><name>Simon Willison</name></author><entry><title>California Sea Lion, Brandt's Cormorant</title><link href="https://simonwillison.net/2026/Sep/19/sighting-401567341/" rel="alternate"/><published>2026-09-19T17:10:08+00:00</published><updated>2026-09-19T17:10:08+00:00</updated><id>https://simonwillison.net/2026/Sep/19/sighting-401567341/</id><summary type="html">
+<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-09-19T19:52:02+00:00</updated><author><name>Simon Willison</name></author><entry><title>datasette-auth-github 1.0</title><link href="https://simonwillison.net/2026/Sep/19/datasette-auth-github/" rel="alternate"/><published>2026-09-19T19:52:02+00:00</published><updated>2026-09-19T19:52:02+00:00</updated><id>https://simonwillison.net/2026/Sep/19/datasette-auth-github/</id><summary type="html">
+    
+        &lt;p&gt;&lt;strong&gt;Release:&lt;/strong&gt; &lt;a href="https://github.com/simonw/datasette-auth-github/releases/tag/1.0"&gt;datasette-auth-github 1.0&lt;/a&gt;&lt;/p&gt;
+        &lt;p&gt;I run this GitHub login plugin on the &lt;a href="https://agent.datasette.io/"&gt;agent.datasette.io&lt;/a&gt; demo site and I noticed that my authenticated sessions weren't lasting very long. It turned out that the plugin was setting cookies without a &lt;code&gt;Max-Age&lt;/code&gt; parameter, so they were expiring at the end of a browser session (which in Mobile Safari seems to happen pretty often, independently of how you are using the app.)&lt;/p&gt;
+&lt;p&gt;I fixed that in &lt;a href="https://github.com/simonw/datasette-auth-github/issues/80"&gt;#80&lt;/a&gt; and, since this plugin has been around for quite a while and is tested against both Datasette 0.65.x and Datasette 1.0ax, I decided to bump it up to a 1.0 release. I'm trying to get better at promoting stable plugins to 1.0.&lt;/p&gt;
+    
+    
+        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/github"&gt;github&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/plugins"&gt;plugins&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/datasette"&gt;datasette&lt;/a&gt;&lt;/p&gt;
+    
+
+</summary><category term="github"/><category term="plugins"/><category term="datasette"/></entry><entry><title>California Sea Lion, Brandt's Cormorant</title><link href="https://simonwillison.net/2026/Sep/19/sighting-401567341/" rel="alternate"/><published>2026-09-19T17:10:08+00:00</published><updated>2026-09-19T17:10:08+00:00</updated><id>https://simonwillison.net/2026/Sep/19/sighting-401567341/</id><summary type="html">
     
         &lt;p&gt;&lt;img src="https://static.inaturalist.org/photos/737061413/large.jpg" alt="California Sea Lion"&gt;&lt;/p&gt;&lt;p&gt;&lt;img src="https://static.inaturalist.org/photos/737061040/large.jpg" alt="Brandt&amp;#x27;s Cormorant"&gt;&lt;/p&gt;&lt;p&gt;California Sea Lion, Brandt&amp;#x27;s Cormorant, in Pillar Point Harbor, CA, US&lt;/p&gt;&lt;p&gt;I only noticed this after I had taken the photo: Morris &lt;a href="https://simonwillison.net/2026/Aug/15/sighting-391300422/"&gt;the Northern Gannet&lt;/a&gt; is peeking out from behind the base of the sign.&lt;/p&gt;
     
@@ -51,7 +61,7 @@ Gemini finally caught up on &lt;a href="https://www.felonybench.com/"&gt;Felony 
 &lt;p&gt;&lt;strong&gt;&lt;a href="https://blog.cypressf.com/post/828067789747208192/the-creative-spirit-of-who-framed-roger-rabbit"&gt;The Creative Spirit of Who Framed Roger Rabbit&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 I love &lt;a href="https://en.wikipedia.org/wiki/Who_Framed_Roger_Rabbit"&gt;Who Framed Roger Rabbit&lt;/a&gt;, the 1988 movie by Robert Zemeckis. I haven't watched it in quite a few years, and Cypress Frankenfeld just pointed out this sequence from early in the movie:&lt;/p&gt;
 &lt;p&gt;&lt;video
-  src="https://static.simonwillison.net/static/2026-09-18/776f726b73706163652f796f75725f66696c65732f70656c6963616e2d62696379636c652d33732e6d7034.mp4"
+  src="https://static.simonwillison.net/static/2026/pelican-bicicle-roger-rabbit.mp4"
   poster="https://static.simonwillison.net/static/2026-09-18/IMG_8118.jpeg"
   preload="none"
   loop controls
@@ -459,19 +469,4 @@ Today we're releasing two new security patch versions of Datasette: &lt;a href="
 
 
 
-</summary><category term="releases"/><category term="security"/><category term="ai"/><category term="datasette"/><category term="generative-ai"/><category term="llms"/><category term="agentic-engineering"/><category term="ai-security-research"/></entry><entry><title>datasette-publish-fly 1.4</title><link href="https://simonwillison.net/2026/Sep/11/datasette-publish-fly/" rel="alternate"/><published>2026-09-11T02:58:52+00:00</published><updated>2026-09-11T02:58:52+00:00</updated><id>https://simonwillison.net/2026/Sep/11/datasette-publish-fly/</id><summary type="html">
-    
-        &lt;p&gt;&lt;strong&gt;Release:&lt;/strong&gt; &lt;a href="https://github.com/simonw/datasette-publish-fly/releases/tag/1.4"&gt;datasette-publish-fly 1.4&lt;/a&gt;&lt;/p&gt;
-        &lt;blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;Sets &lt;code&gt;force_https=true&lt;/code&gt; in &lt;code&gt;fly.toml&lt;/code&gt;. &lt;a href="https://github.com/simonw/datasette-publish-fly/issues/31"&gt;#31&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Fix for Volume could not be found bug. &lt;a href="https://github.com/simonw/datasette-publish-fly/issues/32"&gt;#32&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Compatible with app-scoped deploy tokens. &lt;a href="https://github.com/simonw/datasette-publish-fly/issues/34"&gt;#34&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-    
-    
-        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/datasette"&gt;datasette&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/fly"&gt;fly&lt;/a&gt;&lt;/p&gt;
-    
-
-</summary><category term="datasette"/><category term="fly"/></entry></feed>
+</summary><category term="releases"/><category term="security"/><category term="ai"/><category term="datasette"/><category term="generative-ai"/><category term="llms"/><category term="agentic-engineering"/><category term="ai-security-research"/></entry></feed>
