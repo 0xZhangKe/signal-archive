@@ -1,6 +1,28 @@
 {
   "items": [
     {
+      "id": "7efd1da8c1de0933fa643668",
+      "title": "Android Perfetto 系列 13：Perfetto SDK、Track Event 与 App 现场 Trace",
+      "summary": "系统 Trace 能告诉你线程什么时候运行、CPU 跑在哪个核、FrameTimeline 哪一帧超时；在启用 Binder/ftrace/sched 证据时，也能还原 Binder 调用和等待线索。但它不知道播放器正在解哪一个 frame id，也不知道游戏引擎正在加载哪个 scene，更不知道一个业务任务在队列里排了多久。 这一篇只回答一个问题：业务语义怎么进入 Trace。系统能告诉你主线程慢了，Track Event 负责告诉你当时在 decode 哪一帧、哪个队列堵住、哪个请求跨线程流转。两边合在一起，才能把“主线程慢了 18ms”缩小到 frame 1082 附近的纹理上传候选区间，再结合 RenderThread/HWUI、GPU 和 FrameTimeline 继续验证。 文章按接入的实际顺序…",
+      "image": null,
+      "publishedAt": "2026-05-04T02:13:00Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2026/05/04/Android-Perfetto-13-Track-Event-SDK/",
+      "detailPath": "articles/7efd1da8c1de0933fa643668.json"
+    },
+    {
+      "id": "680345d5a59550c7fdf8d2ce",
+      "title": "Android Perfetto 系列 12：Trace 数据流与丢失排查",
+      "summary": "打开一份 Trace 后，最麻烦的情况是：文件里看起来有数据，但中间丢过。UI 里还能看到轨道，SQL 也能查出一些行，可线程状态少了一段、进程名对不上、某些 Track Event 消失了。继续分析下去，结论会越来越像猜。 SQL 只能分析 Trace 里还存在的证据。这个问题不处理好，后面的查询写得再漂亮，也只是把一份缺证据的 Trace 包装成表格。 第 02 篇已经讲过怎么抓，第 11 篇已经讲过怎么查 SQL；这一篇盯住一个问题：Trace 在哪里丢过数据、影响哪些结论、下一次抓取该怎么改配置。 文章顺着数据从内核走到 Trace 文件的链路，逐段定位丢点：ftrace、producer 共享内存、central buffer、增量状态、flush。每一段的丢法不一样，补救方式也不一样。最后给一个在…",
+      "image": null,
+      "publishedAt": "2026-05-04T02:12:00Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2026/05/04/Android-Perfetto-12-Trace-Dataflow-And-Loss/",
+      "detailPath": "articles/680345d5a59550c7fdf8d2ce.json"
+    },
+    {
       "id": "6a4ce8db6e8415767444c6d9",
       "title": "Android Perfetto 系列 11：PerfettoSQL、Trace Processor 与回归检测",
       "summary": "拿到一份卡顿 Trace，大部分人的第一反应（包括早些年的我）是打开 Perfetto UI，框一段时间，看主线程、RenderThread、CPU 状态，再截几张图写结论。这个办法处理眼前问题没什么毛病，但很难回答后面的追问：换一份 Trace 是不是同样结论？换一台设备是不是同样结论？下个版本修完后，怎么确认问题没有回来？ 第 11 篇讲 PerfettoSQL 与 Trace Processor。目标很朴素：把 UI 里的判断改成能复查的查询，再用 Python 批量跑多份 Trace。读者不需要先变成 SQL 专家，只需要把 Trace 当成一组带时间戳的表，再把“看图得出的判断”翻译成一段能反复执行的查询就够了。 整篇文章就沿一条路走：认识 Trace Processor，把判断写成窗口化的查询，放…",
@@ -637,28 +659,6 @@
       "sourceTitle": "Wiwi.Blog Blog",
       "link": "https://wiwi.blog/blog/small-containers",
       "detailPath": "articles/964c738756c50f54ca3cbcbb.json"
-    },
-    {
-      "id": "4b9f8684dccb068eacd24912",
-      "title": "所有你對比特幣的質疑都在這裡：你在害怕什麼？",
-      "summary": "免責聲明：文章內容僅為個人心得分享，不得做為投資決策依據。 比特幣比龐氏騙局還不如 在 《瘋狂、恐慌與崩盤》 這本書中，描述龐氏騙局的核心在於「虛假承諾」與「缺乏透明度」，由發起人控制資金並分配。而比特幣比龐氏騙局更不如的原因在於，龐氏騙局仰賴後續購買者的資金來提供利息，至少仍有少部份人可以賺取資金，即便龐氏騙局未來被戳破，這些被扣留的資金仍然可以部份補償受騙者。而比特幣的運作建立在挖礦的持續能源損耗。換句話說，那些受騙者最後連補償都沒有，完全是一場「負合遊戲」。 我的回答是，比特幣是開源協議與 程式碼 ，所有人都可以參與比特幣，沒有中心化組織，所有交易透明且可驗證，它不對任何人做出承諾、同時也不保證任何獲利。換句話說，在這場交易中沒有所謂的「欺騙者」與「受騙者」。它不是一個騙局，而是一個去中心化的貨幣協議。…",
-      "image": null,
-      "publishedAt": "2026-04-26T00:00:00Z",
-      "sourceId": "68a194be012e90d9",
-      "sourceTitle": "Chang,Shih-Ting",
-      "link": "https://chang-shih-ting.com/All-Your-Doubts-About-Bitcoin-Are-Here-What-Are-You-Afraid-Of/",
-      "detailPath": "articles/4b9f8684dccb068eacd24912.json"
-    },
-    {
-      "id": "10869c14b209479263698575",
-      "title": "腳麻了一晚上，以及這次物理治療的經歷",
-      "summary": "前言 # 前陣子因爲練吉他久坐，整個髖關節都非常不舒服。 演出 結束後，我依然把練習的強度維持住，最近很認真練習。 昨晚睡覺，事情突然升級。 無論躺、爬、坐，腳都是麻的，做了各種拉伸都沒有用。 緊急預約 # 隔天早上還是照樣去做燈光音響。 彷彿就像是一邊幫小朋友放著運動會音樂，一邊做電療一樣（超麻）。 於是我立刻預約了以前去過的物理治療所。 但我以前看的治療師，必須要等超過一個月，但是我腳麻不能等啊！於是我問了能不能換其他治療師。 櫃檯一邊幫我安排當天的治療，同時也先預約了原本治療師的回診。 先救命，再談制度。 五分鐘就找到問題 # 大概用五分鐘問診、各種動作測試後，就判斷完是腰大肌／髂腰肌的問題，放鬆之後，麻感退去很多。 「好險不是椎間盤突出。」治療師放鬆地吐了一口氣說。 我也終於放心了。 90-90 呼吸…",
-      "image": null,
-      "publishedAt": "2026-04-25T09:34:52Z",
-      "sourceId": "199cdf92fc46bfcd",
-      "sourceTitle": "Eddie Lv",
-      "link": "https://eddielv.com/musings/physio-exp/",
-      "detailPath": "articles/10869c14b209479263698575.json"
     }
   ]
 }
