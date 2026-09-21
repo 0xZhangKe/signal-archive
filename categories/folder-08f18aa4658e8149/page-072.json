@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "89619b6460ee7a606f396449",
+      "title": "在AWS上使用诱饵用户捕获攻击者",
+      "summary": "思路就是创建一个IAM用户，然后用CloudWatch监控该用户的行为，如果出现了该用户的操作则触发告警，并通过邮件通知。 使用控制台和Terraform两种方法实现 控制台创建 创建诱饵用户 在 IAM 控制台创建一个诱饵用户 honeyUser ，不附加任何权限 为 honeyUser 创建一个访问密钥，这对密钥之后便可以通过一些方法泄露出去，进而捕获可疑的攻击者。 创建CloudTrail并将事件发送至CloudWatch 进入 CloudTrail 控制台创建一个 trail （追踪），创建 CloudTrail 的时候需要选择一个S3来对日志进行存储，如果没有提前准备好则需要在这里新创建一个。 这里不使用加密方便后面数据的检索 配置向 CloudWatch Logs 发送事件，之后可以在 Cloud…",
+      "image": "https://skyblu3519.github.io/post-images/AWSHoneyToken/1720081492814-3e17265e-d254-41d0-a77f-54f84a647378.png",
+      "publishedAt": "2024-07-09T08:57:26Z",
+      "sourceId": "4f5bf353ca5bd538",
+      "sourceTitle": "skkyblu3",
+      "link": "https://skyblu3519.github.io/post/zai-aws-shang-shi-yong-you-er-yong-hu-bu-huo-gong-ji-zhe/",
+      "detailPath": "articles/89619b6460ee7a606f396449.json"
+    },
+    {
       "id": "1360d6a454714e35ab9c7572",
       "title": "小美的包包",
       "summary": "小美有一個陪伴她多年的包包；這個包包跟她一起經歷過大學生活、第一份工作、以及一段重要的感情。雖然用了這麼久，但在這幾年來，小美其實總是對這個包包感到不滿：皮革有點磨損了、外觀不夠時尚、肩帶的長度不對、內袋太小放不下新手機⋯⋯雖然天天都背著，但小美總是認為自己在「忍受」這個包包，心裡總是想著要把它換掉。",
@@ -648,17 +659,6 @@
       "sourceTitle": "Android Performance",
       "link": "https://androidperformance.com/2024/05/21/Android-Perfetto-01-What-is-perfetto/",
       "detailPath": "articles/997fd13c84aa00f414d7f205.json"
-    },
-    {
-      "id": "6cec7f5c9d99d989d620cf79",
-      "title": "刀斩肉身，心斩灵魂",
-      "summary": "本是不愿意玩手游的，奈何情怀作祟，那就凑个热闹吧。 对应以前的60级，那个干什么都很慢的版本。 当年偷偷跑去黑网吧，只为把等级赶紧升到60级。奈何装备太垃圾，师父也不常在线，于是等级一直上不去。 直到我遇到了西西游戏网，那科技的力量，那秒杀的快感，让我心驰神往。 但这世间所有美好的东西，都暗暗标好了价格。手里的武器变成小木棍，六字真言。 还有我那被误封10年的账号。🌿",
-      "image": null,
-      "publishedAt": "2024-05-20T16:00:00Z",
-      "sourceId": "511a941174e52a33",
-      "sourceTitle": "蒙奇日记",
-      "link": "https://luffy.cc/a/dnf-mobile-game",
-      "detailPath": "articles/6cec7f5c9d99d989d620cf79.json"
     }
   ]
 }
