@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "720d0c368fc54ac968000774",
+      "title": "Winlane：我的 Mac 工具箱，按需自制",
+      "summary": "我在 macOS 上日常用得最多的软件是 contexts ，这是一个窗口 switcher，但这个软件似乎好几年都没更新了。我之前还发邮件去问过作者，他回复说一切都工作得很好，也没有什么新功能想法，所以就一直没更新。 然后某天我看到有的人用 Rust 实现了跨平台的输入法，于是我就起了个新坑，尝试用 AI 来帮我重新实现类似 Contexts 的工具，整个过程比较顺利，项目代码在 Winlane 。 Contexts 有很多配置项，但我只用它最核心的窗口切换功能。而做完这些基础功能之后我又忍不住继续把我日常依赖的一些小工具都重新实现成了 Winlane 里面的命令。主要有： Raycast : 这几乎是大部分人的选择，但我只用其中的部分核心功能，而 Raycast 的新版本越来越臃肿。我在 Winlane…",
+      "image": "http://catcoding.me/images/ob_pasted-image-20260922214505.png",
+      "publishedAt": "2026-09-22T16:05:39Z",
+      "sourceId": "82c4bcb6bba028cf",
+      "sourceTitle": "程序员的喵",
+      "link": "http://catcoding.me/p/winlane/",
+      "detailPath": "articles/720d0c368fc54ac968000774.json"
+    },
+    {
       "id": "0202e44741bd0a3e32ce0200",
       "title": "Dotr: 一个简单的配置备份工具",
       "summary": "这周我的 Mac 突然无法开机了，睡午觉之前我没插电让它继续跑程序，回来后就发现已经黑屏，无论如何充电都无法开机。用了 14 年 Mac 第一次出现这种情况，麻烦的是我暑假在湖南老家待着，发现整个地级市都没办法修复 Mac，无奈寄去长沙的苹果售后修理。 但这两天我还有些工作需要处理，所以就在家人的 PC 机上开始重建我的工作流程和工具。这时候才想起，我应该是有份比较新的配置备份。然后直接从 GitHub 的私有库上拉取下来，交给 AI 帮我恢复配置，一切都方便多了。 完成这次备份的小工具是 dotr ，几个月之前我 vibe coding 的。 那次的契机也是自己一个命令行失误，导致 .zshrc 完全覆盖了。我最早的备份就是一个 Git 仓库，把 .zshrc 、 .gitconfig 、编辑器配置这些文件…",
@@ -208,17 +219,6 @@
       "sourceTitle": "程序员的喵",
       "link": "http://catcoding.me/p/ckb-rbf/",
       "detailPath": "articles/1f14ee758141b8c9bc3b8a37.json"
-    },
-    {
-      "id": "550cd72c31b35cca2f06117f",
-      "title": "CKB 交易池重构",
-      "summary": "在 11.9 号清迈的 CKCON 会议上我会做一个关于 CKB 交易池的演讲，这是我准备的 slides Key Upgrades of the CKB Core 。所以这段时间在整理之前做项目的时候写的一些文档，顺便分享到自己的博客上。既然我们整个项目的源码都是公开的，这些文档其实也是可以分享的。 第一次听说 CKB 的读者可以参考这个文档以了解什么是 CKB 以及如何工作的： How CKB Works | Nervos CKB 。 我加入 Cryptape 之后一年内做的主要工作，涉及到交易池重构、Replace-by-fee 功能、以及 new-verify。这是第一篇关于交易池重构的文章。 什么是交易池 在 bitcoin 中交易池叫作 mempool，比如 mempool - Bitcoin E…",
-      "image": "http://catcoding.me/images/ob_pasted-image-20250221102123.png",
-      "publishedAt": "2024-11-06T03:39:21Z",
-      "sourceId": "82c4bcb6bba028cf",
-      "sourceTitle": "程序员的喵",
-      "link": "http://catcoding.me/p/ckb-txpool-refactor/",
-      "detailPath": "articles/550cd72c31b35cca2f06117f.json"
     }
   ]
 }
