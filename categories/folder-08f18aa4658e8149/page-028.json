@@ -1,6 +1,28 @@
 {
   "items": [
     {
+      "id": "eec31fe1d9e16d70b3309592",
+      "title": "NowNowNow 世界冠軍",
+      "summary": "Derek Sivers 有一個 NowNowNow.com 網站，專門收集個人部落格的「近況 /now」頁面。",
+      "image": "https://wiwi.blog/assets/images/now2-683199f79697edfd68982a4182618908.jpg",
+      "publishedAt": "2026-05-04T03:30:00Z",
+      "sourceId": "7f36c3da1e6b5c71",
+      "sourceTitle": "Wiwi.Blog Blog",
+      "link": "https://wiwi.blog/blog/nownownow-world-champion",
+      "detailPath": "articles/eec31fe1d9e16d70b3309592.json"
+    },
+    {
+      "id": "50a0b01a14fe8f8e929e6288",
+      "title": "Android Perfetto 系列 18：响应速度实战，从输入事件到首帧反馈",
+      "summary": "这篇补一个很容易被启动速度和流畅度盖住的话题：交互首帧响应。它关心用户刚操作完之后，屏幕多久给出第一帧反馈；页面完整加载和动画后半段稳定性要用其他指标衡量。 点一个按钮，多久出现按压态；点微信会话，多久看到会话页第一帧开始动；手指滑动列表，多久看到内容跟着手指移动。这些问题和启动慢有关，也和掉帧有关，但分析口径要单独拎出来。 本文用 Perfetto 拆这段时间：从 InputReader read_time 起算，到 App 收到事件，再到第一帧 present。主指标叫 input_to_present_ms ，只度量 input read 到关联帧 present；它不覆盖触控 IC、驱动上报前延迟、显示扫描和面板响应。读完之后，你应该能给一个点击或滑动场景定义起点、终点、采集配置、SQL 指标和 Ap…",
+      "image": null,
+      "publishedAt": "2026-05-04T02:18:00Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2026/05/04/Android-Perfetto-18-Input-Response-Latency/",
+      "detailPath": "articles/50a0b01a14fe8f8e929e6288.json"
+    },
+    {
       "id": "3afaa0c88296f04717797952",
       "title": "Android Perfetto 系列 17：专项场景自动化、问题清单与平台体系",
       "summary": "Camera open 慢、Audio underrun、WebView 首屏卡住、Flutter/游戏掉帧，这类问题的证据会散在 App、 system_server 、 cameraserver / audioserver 、HAL、SurfaceFlinger 和调度轨道里。只在 UI 里多看几条轨道，很容易漏掉关键时间点。 这一篇用 Camera 和 Audio 举例，讲一套可复用的专项分析方法：先抓对数据，再识别对象，再算阶段和阻塞，报告里保留能跳回 UI 复查的时间点。Camera/Audio 是例子，核心是领域 schema 和平台 tracing 协作。读完之后，至少能把 Camera open 慢拆成可复查阶段，把 Audio underrun 拆成周期异常，而不是只交一个 Top slic…",
@@ -637,28 +659,6 @@
       "sourceTitle": "Eddie Lv",
       "link": "https://eddielv.com/musings/mc-teach-media/",
       "detailPath": "articles/35a5d08cd019fd9e52b68790.json"
-    },
-    {
-      "id": "fa710160dadad670607fcefe",
-      "title": "預設值",
-      "summary": "大部分的人，對大部分的事情，其實沒什麼主見。",
-      "image": null,
-      "publishedAt": "2026-04-27T00:05:00Z",
-      "sourceId": "7f36c3da1e6b5c71",
-      "sourceTitle": "Wiwi.Blog Blog",
-      "link": "https://wiwi.blog/blog/be-the-default",
-      "detailPath": "articles/fa710160dadad670607fcefe.json"
-    },
-    {
-      "id": "5661c5c2d8414aa0eaa11e87",
-      "title": "預設值與品味",
-      "summary": "從 Wiwi 的〈預設值〉延伸的隨筆——聊福岡手扶梯的潛規則、AI 內容如何佔據 SEO 排名，以及伏爾泰對品味的定義。",
-      "image": "https://image.kalan.dev/2ac2e25a-34ea-424c-77e1-adfd1da3b600/normal",
-      "publishedAt": "2026-04-27T00:00:00Z",
-      "sourceId": "538caf01ac3ab305",
-      "sourceTitle": "愷開的部落格",
-      "link": "https://blog.kalan.dev/random/defaults-and-taste/",
-      "detailPath": "articles/5661c5c2d8414aa0eaa11e87.json"
     }
   ]
 }

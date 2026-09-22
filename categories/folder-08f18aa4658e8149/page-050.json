@@ -1,6 +1,28 @@
 {
   "items": [
     {
+      "id": "ffbf39e64e0280f2261e20c7",
+      "title": "爲何 Eddie 常常同一天一次發一堆部落格文章？",
+      "summary": "前言 # 如果有用 RSS 訂閱 Eddie 的部落格，應該會發現 Eddie 更新一次都是一天好幾篇，這一切的原因都是因爲「無法用手機更新」。 發佈步驟 # Eddie 是使用 Hugo 來製作 Blog，每次打新文章都得開終端機打 hugo new ，好了之後還得用 rsync 同步本機的網站檔案到伺服器。 工作流程 # 因此在外都得用手機打文章到備忘錄，回到家再複製到電腦，靈活性就非常低，常常累計好幾篇才一次發。 手機能用？ # 目前是有查到一些方法，例如透過 Netlify CMS 搭配 github，讓手機能夠有瀏覽器登入後臺界面來新增文章，並且自動幫我執行 hugo 來渲染最終的網站檔案。 流程大概是： 從Netlify CMS 寫文章，同步到 GitHub，netlify 發現 GitHub 有…",
+      "image": null,
+      "publishedAt": "2025-10-10T19:52:20Z",
+      "sourceId": "199cdf92fc46bfcd",
+      "sourceTitle": "Eddie Lv",
+      "link": "https://eddielv.com/musings/many-article-once/",
+      "detailPath": "articles/ffbf39e64e0280f2261e20c7.json"
+    },
+    {
+      "id": "40e5d01baae95b3feff00181",
+      "title": "VP9 編碼是啥？",
+      "summary": "前言 # 在 假拉琴 一文中，Eddie 上傳了影片，用電腦測試播放沒問題就沒再管那篇文章了，直到樂手跟我要網址，才發現在 iPhone 上是無法播放的。 debug # 尋找原因，macOS、Linux 都可以正常播放，就 iPhone 不行。後來瞭解原因是因爲從 IG 下載的影片編碼會是 VP9，而非 H264、H265 等等，而 iPhone 硬體不支援 VP9，瀏覽器也不支援用軟體解碼，因此無法播放，將影片轉爲 H264 重新上傳就可以從手機端播放了。 電腦爲何可以放？ # m2 mac 是可以硬體解碼 VP9 的，而 2015 macbook 就不支援，是依靠軟體解碼，基本上瀏覽器現在都能正常播放。 編碼到底是什麼？ # H264、H265、VP9、AV1 等等是編碼方式，可以簡單理解成「壓縮影片的…",
+      "image": null,
+      "publishedAt": "2025-10-10T19:18:39Z",
+      "sourceId": "199cdf92fc46bfcd",
+      "sourceTitle": "Eddie Lv",
+      "link": "https://eddielv.com/articles/vp9/",
+      "detailPath": "articles/40e5d01baae95b3feff00181.json"
+    },
+    {
       "id": "b08840ad8d52beaa6d9dbda9",
       "title": "Apt129 壞了？來看看被動式 DI 長怎樣吧！",
       "summary": "還記得這個被動 DI 嗎？他是 APT-129 。 我在某次拔除導線的時候，把 6.3 母座與 XLR 分離了，也連帶把線扯斷了，嘗試塞是可以裝回去的，但是稍微用力一樣會被拔開，表示這個結構有些不穩定，等有空的時候重新焊接，裝回去再用三秒膠黏起來，應該就能修好了。 也趁這次機會，來看看變壓器的線圈構造吧！ 線圈上有三條線通往 XLR 端，綠、白、紅分別對應 XLR 的「1 地」、「2 正」、「3 負」 pin 腳；剩下的黃線則是通往 6.3 TS 的 T 端，S 的接地則沒有做任何焊接，這種設計通常是直接利用金屬外殼來做接地，因此就沒有焊 S 端了，整個構造其實非常簡單。 其實看不太出來整體構造長怎樣，也感覺跟我認知中國中理化課本的變壓器不太一樣，最主要是我看不出來怎麼從 「+」、「G」轉成「+」、「-」、「…",
@@ -637,28 +659,6 @@
       "sourceTitle": "Eddie Lv",
       "link": "https://eddielv.com/articles/dotcom-secrets-3-2/",
       "detailPath": "articles/7c4dc862b555ec815fc9422a.json"
-    },
-    {
-      "id": "3f4ce44907d9809ec1dc51bd",
-      "title": "《網路行銷究極攻略》重點整理 Part2-2：開始寫信吧！",
-      "summary": "Email 信件分爲訂閱者訂閱之後自動寄送的信件，以及後續人工寄送的信件。 訂閱後的信件（作者稱：肥皂劇模式） # 訂閱者訂閱後，要最快速寄信給訂閱者，時間隔越久，開信率就會大幅降低 寫 5 篇連載劇情，分 5 天發送，讀者有開信隔天才會寄下一封信 每一封信要想連續劇一樣，讓人迫不及待想看到下一集（刺激讀者分泌多巴胺啦！） 每封信件寫什麼？ # 第一封：佈景 # 感謝讀者訂閱 Email，並介紹自己的「 角色設定 」，結尾說明天的信件會送讀者某某免費資源，是最棒的產品之一！ 第二封：先講有高潮的劇情吸引觀衆，再講幕後故事 # 先從最美好的劇情開始講，再講述「 幕後故事 」，告訴讀者自己過去在卡住時，是怎麼解決的！這個撞牆期要是讀者目前的處境，而這個問題的解答，將在下一封信件告訴讀者！最後，要記得要附上第一封信…",
-      "image": null,
-      "publishedAt": "2025-09-24T07:07:17Z",
-      "sourceId": "199cdf92fc46bfcd",
-      "sourceTitle": "Eddie Lv",
-      "link": "https://eddielv.com/articles/dotcom-secrets-2-2/",
-      "detailPath": "articles/3f4ce44907d9809ec1dc51bd.json"
-    },
-    {
-      "id": "2c44c7527a8e31c60e456119",
-      "title": "HDMI 成功輸出，卻沒畫面？可能是 EDID 問題！",
-      "summary": "昨日在 有問題的 hub 文章中，提到使用某品牌的 hub 會輸出黑畫面，後來查到原因在 EDID 了！ EDID 簡單說就是「設備的自我介紹」！ 正常的路徑 # 買一條 USB-C to HDMI 的線，把電腦與顯示器（或導播機、切換器）連接： 顯示器：我叫做 XX 顯示器，我支援 XX 解析度！ 電腦：我收到你的 EDID 名片了，我會傳送 XX 的解析度給你！ 跟講好的不一樣，那就黑畫面吧！ # 如果出現了兩邊自我介紹時，資訊跟 EDID 不一樣的情況，就會黑畫面！ 通常在有經過切換器、導播機時，專業的視訊人員會把所有設備的 EDID 解析度對齊。 爲何 hub 的 EDID 會出問題？ # 顯示器：我叫做 XX 顯示器，我支援 XX 解析度！ hub：蛤？你們在說什麼？要傳畫面哦？好啊！ 電腦：我好像…",
-      "image": null,
-      "publishedAt": "2025-09-24T06:38:20Z",
-      "sourceId": "199cdf92fc46bfcd",
-      "sourceTitle": "Eddie Lv",
-      "link": "https://eddielv.com/articles/edid/",
-      "detailPath": "articles/2c44c7527a8e31c60e456119.json"
     }
   ]
 }
