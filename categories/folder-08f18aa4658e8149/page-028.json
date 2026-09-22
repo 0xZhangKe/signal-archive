@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "3afaa0c88296f04717797952",
+      "title": "Android Perfetto 系列 17：专项场景自动化、问题清单与平台体系",
+      "summary": "Camera open 慢、Audio underrun、WebView 首屏卡住、Flutter/游戏掉帧，这类问题的证据会散在 App、 system_server 、 cameraserver / audioserver 、HAL、SurfaceFlinger 和调度轨道里。只在 UI 里多看几条轨道，很容易漏掉关键时间点。 这一篇用 Camera 和 Audio 举例，讲一套可复用的专项分析方法：先抓对数据，再识别对象，再算阶段和阻塞，报告里保留能跳回 UI 复查的时间点。Camera/Audio 是例子，核心是领域 schema 和平台 tracing 协作。读完之后，至少能把 Camera open 慢拆成可复查阶段，把 Audio underrun 拆成周期异常，而不是只交一个 Top slic…",
+      "image": null,
+      "publishedAt": "2026-05-04T02:17:00Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2026/05/04/Android-Perfetto-17-Engineering-Domain-And-Platform-Tracing/",
+      "detailPath": "articles/3afaa0c88296f04717797952.json"
+    },
+    {
       "id": "081dae40631f5b064a37150a",
       "title": "Android Perfetto 系列 16：GPU、Power Counters 与硬件瓶颈分析",
       "summary": "FrameTimeline 标出一帧晚了，主线程、RenderThread、SurfaceFlinger 看起来都没有明显越界，这时很容易写出一句“可能是 GPU 瓶颈”。这句话风险很高：GPU 频率、GPU 计数器、电池电流、电源轨都不是 App 单帧归因工具。 第 07、08 篇已经讲了 App 到 SurfaceFlinger 的渲染路径，第 06、09 篇已经讲了刷新率和 CPU 调度/频率。这一篇不重复这些内容，只补一个经常被跳过的环节：当问题看起来已经压到硬件资源层时，GPU、devfreq、battery counter（电池计数器）、power rail（电源轨）这些数据该怎么进入同一段 trace 分析。 这类 counter 的麻烦在于：不是每台设备都有，不同 GPU 厂商的 counte…",
@@ -648,17 +659,6 @@
       "sourceTitle": "愷開的部落格",
       "link": "https://blog.kalan.dev/random/defaults-and-taste/",
       "detailPath": "articles/5661c5c2d8414aa0eaa11e87.json"
-    },
-    {
-      "id": "7b3fd43269d43c0869275a7b",
-      "title": "你電腦不行",
-      "summary": "「裡面有一首xxx！」表演者遞上隨身碟要交音樂。 「裡面有好幾首，沒有你講的那首。」找了一輪真沒看到。 「怎麼可能？上一場用就有啊！（怒）」 「你電腦不行啦」 「…？」",
-      "image": null,
-      "publishedAt": "2026-04-26T10:09:48Z",
-      "sourceId": "199cdf92fc46bfcd",
-      "sourceTitle": "Eddie Lv",
-      "link": "https://eddielv.com/musings/bad-computer/",
-      "detailPath": "articles/7b3fd43269d43c0869275a7b.json"
     }
   ]
 }
