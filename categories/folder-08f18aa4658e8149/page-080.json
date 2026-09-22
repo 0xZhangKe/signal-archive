@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "688a3dc9218be3435e56209a",
+      "title": "Linux 下 Node Source 安装的 npm 权限问题",
+      "summary": "前言 近期安装了 Linux 系统作为主力机器的第二系统，双启动引导。 系统是 Pop!OS 20.04 LTS ，基于 Ubuntu 20.04 由于前端开发及部署需求，需要安装 node.js，于是使用 node source 提供的 node 发行版。 由于安装完成后，npm 存储包的目录为 /usr ，使用时必须加 sudo ，为了避免这种情况和权限安全问题，需要将 npm 的包存储到用户目录下，并且强烈不建议使用 sudo 来全局安装包到 /usr 目录下 方法 检查当前 npm 安装的包路径前缀 1 npm config get prefix 如果返回 /usr 则执行以下命令 1 2 3 mkdir ~/.npm-global export NPM_CONFIG_PREFIX = ~/.npm-…",
+      "image": null,
+      "publishedAt": "2022-03-20T17:16:02Z",
+      "sourceId": "3220115c042340a7",
+      "sourceTitle": "TaurusXin 的独立博客",
+      "link": "https://www.taurusxin.com/npm-prefix/",
+      "detailPath": "articles/688a3dc9218be3435e56209a.json"
+    },
+    {
       "id": "5f34ad74b791516d6e6030d1",
       "title": "Kubernetes、集群联邦和资源分发",
       "summary": "",
@@ -648,17 +659,6 @@
       "sourceTitle": "Elizen's Blog",
       "link": "https://elizen.me/newsletter/2021/12/newsletter-023/",
       "detailPath": "articles/9058f82ff1ced4eaaa2348e9.json"
-    },
-    {
-      "id": "0600b648108ebd7a4199d2b4",
-      "title": "读《张医生与王医生》",
-      "summary": "读完这 40 万字《张医生与王医生》，好像看了一部 4 个小时的电影，再一次想起书中也提到的《铁西区》。留几句读后感： 1，我对伊险峰是有滤镜的，极好的那种，不论是他做《第一财经周刊》，还是后来的好奇心日报，直到现在的小鸟文学，就像李海鹏说的，他是中国媒体界凤毛麟角的人物。 2，阅读感受不好，一方面是本书有两位作者书写，一个负责采访，一个负责专栏；另一方面，我对书中提到的伴随着工业化和城市化进程诞生的工人阶级的衰落、士绅化的了解有限。 3，当这些阶级概念以「社会」一词包装成改革开放 40 年的东北展现在我眼前时，书中说到三代人的故事，我心领神会甚至对这种熟悉感到窃喜。 4，伊险峰的重点在前言后记都写得很清楚，通过对他两个同学的采访和大量的资料，想了解曾经作为共和国长子的沈阳为何成了城市化进程中掉队的一员，以及…",
-      "image": null,
-      "publishedAt": "2021-12-08T00:00:00Z",
-      "sourceId": "fc41292f8a54624e",
-      "sourceTitle": "Elizen's Blog",
-      "link": "https://elizen.me/posts/2021/12/doctor-zhang-and-doctor-wang/",
-      "detailPath": "articles/0600b648108ebd7a4199d2b4.json"
     }
   ]
 }

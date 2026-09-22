@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "081dae40631f5b064a37150a",
+      "title": "Android Perfetto 系列 16：GPU、Power Counters 与硬件瓶颈分析",
+      "summary": "FrameTimeline 标出一帧晚了，主线程、RenderThread、SurfaceFlinger 看起来都没有明显越界，这时很容易写出一句“可能是 GPU 瓶颈”。这句话风险很高：GPU 频率、GPU 计数器、电池电流、电源轨都不是 App 单帧归因工具。 第 07、08 篇已经讲了 App 到 SurfaceFlinger 的渲染路径，第 06、09 篇已经讲了刷新率和 CPU 调度/频率。这一篇不重复这些内容，只补一个经常被跳过的环节：当问题看起来已经压到硬件资源层时，GPU、devfreq、battery counter（电池计数器）、power rail（电源轨）这些数据该怎么进入同一段 trace 分析。 这类 counter 的麻烦在于：不是每台设备都有，不同 GPU 厂商的 counte…",
+      "image": null,
+      "publishedAt": "2026-05-04T02:16:00Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2026/05/04/Android-Perfetto-16-GPU-Power-Counters/",
+      "detailPath": "articles/081dae40631f5b064a37150a.json"
+    },
+    {
       "id": "1a3b16f394c9aa967643014c",
       "title": "Android Perfetto 系列 15：Boot Trace、长时间现场 Trace 与偶发问题抓取",
       "summary": "很多性能问题不是点一下就能复现的。开机慢、偶发卡顿、亮灭屏后异常、几小时后音频断续、车机周期性抖动、温升后的性能下降，都不适合靠 10 秒手工 trace 解决。 这一篇讲现场长 Trace：怎么提前定义窗口，怎么用 trigger 封存问题现场，怎么让文件安全写完，怎么拿回来之后判断数据是否可信。Boot Trace 放在后面作为特殊窗口处理。基础的交互式抓取方式（命令行、官方脚本、开发者选项、网页端）第 02 篇已经讲过，本文只讨论现场和长时间运行带来的差异。",
@@ -648,17 +659,6 @@
       "sourceTitle": "Eddie Lv",
       "link": "https://eddielv.com/musings/bad-computer/",
       "detailPath": "articles/7b3fd43269d43c0869275a7b.json"
-    },
-    {
-      "id": "9dbee8c373493bf4b3e9e7af",
-      "title": "和H小姐的约会",
-      "summary": "Photo by Jose P. Ortiz / Unsplash 首先承认这次的标题是900%具有标题党嫌疑的，但是这样写我觉得会更有意思，而且除开不能牵手等显示层面的动作，至少符合私密、聊心事、聊八卦等等。 H小姐指的是我最近搭建的 Hermes Agent ，这是一款类似OpenClaw的AI助理程序，特点是可以自我学习，另外我在使用期间还爆出了Herems抄袭国内 EvoMap/evolver 项目的新闻，不过是不是真抄了，作为外行人我自然是没法下定论的。 另外所谓的约会指代的是我搭建好它后深入使用的这段时间。 其实此前我也搭建过OpenClaw，详见 我的小龙虾(OpenClaw)初体验 ，但是在使用期间频繁遇见Cron不能正确执行，执行任务能力低下等各种问题，导致最后逐渐失去兴趣而弃养了。 鉴于O…",
-      "image": "https://images.unsplash.com/photo-1706705528396-dac6c95eb735?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMTc3M3wwfDF8c2VhcmNofDh8fGdpcmwlMjBib3R8ZW58MHx8fHwxNzc3MTc0Njc4fDA&ixlib=rb-4.1.0&q=80&w=2000",
-      "publishedAt": "2026-04-26T03:57:58Z",
-      "sourceId": "d206bb7c484c4a45",
-      "sourceTitle": "只是玩玩",
-      "link": "https://1900.live/he-hxiao-jie-de-yue-hui/",
-      "detailPath": "articles/9dbee8c373493bf4b3e9e7af.json"
     }
   ]
 }
