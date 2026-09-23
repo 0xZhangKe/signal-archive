@@ -1,5 +1,131 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-09-22T18:03:21+00:00</updated><author><name>Simon Willison</name></author><entry><title>Quoting @therealcornpop</title><link href="https://simonwillison.net/2026/Sep/22/therealcornpop/" rel="alternate"/><published>2026-09-22T18:03:21+00:00</published><updated>2026-09-22T18:03:21+00:00</updated><id>https://simonwillison.net/2026/Sep/22/therealcornpop/</id><summary type="html">
+<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-09-22T23:46:41+00:00</updated><author><name>Simon Willison</name></author><entry><title>Claude Opus 5.5, GPT-6 Sol, GPT-6 Luna, and a new price war</title><link href="https://simonwillison.net/2026/Sep/22/opus-and-sol-and-luna/" rel="alternate"/><published>2026-09-22T23:46:41+00:00</published><updated>2026-09-22T23:46:41+00:00</updated><id>https://simonwillison.net/2026/Sep/22/opus-and-sol-and-luna/</id><summary type="html">
+    &lt;p&gt;Yesterday was &lt;a href="https://x.ai/news/grok-4-7"&gt;Grok 4.7&lt;/a&gt; (&lt;a href="https://news.ycombinator.com/item?id=49788838#49790209"&gt;pelicans&lt;/a&gt;) and &lt;a href="https://mimo.xiaomi.com/mimo-v2-6"&gt;MiMo v2.6 Flash/Pro&lt;/a&gt; (&lt;a href="https://news.ycombinator.com/item?id=49792730#49793480"&gt;more pelicans&lt;/a&gt;). Today Anthropic &lt;a href="https://www.anthropic.com/claude-opus-5-5"&gt;released Claude Opus 5.5&lt;/a&gt;, and around an hour later OpenAI &lt;a href="https://openai.com/index/introducing-gpt-6-sol-and-luna/"&gt;released GPT-6 Sol and GPT-6 Luna&lt;/a&gt;. It's going to take a while to get a good read on all of these new models, but here are my impressions so far.&lt;/p&gt;
+&lt;h4 id="gpt-6-sol-and-luna-are-half-the-price-of-their-gpt-5-6-equivalents"&gt;GPT-6 Sol and Luna are half the price of their GPT-5.6 equivalents&lt;/h4&gt;
+&lt;p&gt;GPT-5.6 Luna was already my favorite model for building applications against, because it combined excellent performance with being &lt;em&gt;really cheap&lt;/em&gt;. Somehow GPT-6 Luna is half the price of that again - and GPT-6 Sol had a similar reduction compared to GPT-5.6 Sol.&lt;/p&gt;
+&lt;p&gt;Here's what the pricing landscape looks like today:&lt;/p&gt;
+&lt;center&gt;&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Model&lt;/th&gt;
+      &lt;th&gt;Input&lt;/th&gt;
+      &lt;th&gt;Cached input&lt;/th&gt;
+      &lt;th&gt;Output&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;GPT-6 Luna&lt;/td&gt;
+      &lt;td&gt;$0.10/M&lt;/td&gt;
+      &lt;td&gt;$0.01/M&lt;/td&gt;
+      &lt;td&gt;$0.50/M&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;GPT-5.6 Luna&lt;/td&gt;
+      &lt;td&gt;$0.20/M&lt;/td&gt;
+      &lt;td&gt;$0.02/M&lt;/td&gt;
+      &lt;td&gt;$1.20/M&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Grok 4.7&lt;/td&gt;
+      &lt;td&gt;$2/M&lt;/td&gt;
+      &lt;td&gt;$0.50/M&lt;/td&gt;
+      &lt;td&gt;$6/M&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;GPT-6 Sol&lt;/td&gt;
+      &lt;td&gt;$2/M&lt;/td&gt;
+      &lt;td&gt;$0.20/M&lt;/td&gt;
+      &lt;td&gt;$10/M&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;GPT-5.6 Terra&lt;/td&gt;
+      &lt;td&gt;$2/M&lt;/td&gt;
+      &lt;td&gt;$0.20/M&lt;/td&gt;
+      &lt;td&gt;$12/M&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Claude Opus 5.5&lt;/td&gt;
+      &lt;td&gt;$4/M&lt;/td&gt;
+      &lt;td&gt;$0.20/M&lt;/td&gt;
+      &lt;td&gt;$20/M&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;GPT-5.6 Sol&lt;/td&gt;
+      &lt;td&gt;$4/M&lt;/td&gt;
+      &lt;td&gt;$0.40/M&lt;/td&gt;
+      &lt;td&gt;$20/M&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Claude Fable 5.1&lt;/td&gt;
+      &lt;td&gt;$10/M&lt;/td&gt;
+      &lt;td&gt;$0.25/M&lt;/td&gt;
+      &lt;td&gt;$50/M&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;GPT-6 Astra&lt;/td&gt;
+      &lt;td&gt;$10/M&lt;/td&gt;
+      &lt;td&gt;$1/M&lt;/td&gt;
+      &lt;td&gt;$50/M&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;&lt;/center&gt;
+&lt;p&gt;Note that GPT-5.6 has a scheduled 25% price increase for November, so GPT-6 is half the price of the &lt;em&gt;promotional&lt;/em&gt; pricing for those models.&lt;/p&gt;
+&lt;p&gt;(With GPT-5.6 Terra priced the same as GPT-6 Sol, any remaining reasons to use Terra just evaporated.)&lt;/p&gt;
+&lt;p&gt;It's hard to overstate how competitive this pricing is. Grok 4.7 priced itself at $2/$6, less than half the price of GPT-5.6 Sol, but is now equally priced to GPT-6 Sol on input and closer on output.&lt;/p&gt;&lt;p&gt;At $0.10/$0.50 GPT-6 Luna is one of the cheapest models OpenAI have ever released, beaten only by the far weaker GPT-4.1 Nano ($0.10/$0.40, April 2025) and GPT-5 Nano ($0.05/$0.40, August 2025).&lt;/p&gt;
+&lt;p&gt;I rendered &lt;a href="https://tools.simonwillison.net/markdown-svg-renderer?url=https%3A%2F%2Fgist.github.com%2Fsimonw%2F40d129fc140faca378b9c9f4f16c6ec2"&gt;pelicans for GPT-6 Luna&lt;/a&gt; and &lt;a href="https://tools.simonwillison.net/markdown-svg-renderer?url=https%3A%2F%2Fgist.github.com%2Fsimonw%2Fbe7ae25af2634b68bc34b7b7aaf02cb2"&gt;for GPT-6 Sol&lt;/a&gt;, then I combined them all together in &lt;a href="https://static.simonwillison.net/static/2026/gpt-pelicans-grid.html"&gt;this comparison grid&lt;/a&gt; along with the GPT-5.6 pelicans. I like how you can instantly see that the 5.6 family chose bolder, brighter colors, while the 6 family is a lot more muted. I still think GPT-6 Astra on max produced the best pelican.&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://static.simonwillison.net/static/2026/gpt-pelicans-grid.webp" alt="A grid of pelicans for six GPT models at different thinking efforts." style="max-width: 100%;" /&gt;&lt;/p&gt;
+&lt;h4 id="claude-opus-5-5-got-a-price-cut-too"&gt;Claude Opus 5.5 got a price cut too&lt;/h4&gt;
+&lt;p&gt;Opus 5.5 looks like it addresses the biggest complaints people had about Opus in terms of its communication style. &lt;a href="https://twitter.com/trq212/status/2102437686967738431"&gt;Thariq Shihipar&lt;/a&gt;:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Opus 5.5 is the result of your feedback.&lt;/p&gt;
+&lt;p&gt;It communicates clearly, it's cheaper per token than Opus 5.0 with the intelligence of Fable 5.1 it's very token efficient and works across every effort level.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;It's also meant to be &lt;a href="https://twitter.com/alexalbert__/status/2102466523164274839"&gt;better at Blender&lt;/a&gt;. I'm looking forward to putting it through its paces there.&lt;/p&gt;
+&lt;p&gt;Opus 4.5, 4.6, 4.7, 4.8, and 5 all shared the same price: $5/million tokens for input and $25/million for output. 5.5 is a 20% reduction - $4/million and $20/million.&lt;/p&gt;
+&lt;p&gt;The price for cache reads fell 60%. That's significant for longer agentic conversations, where 90%+ of input tokens are processed at cached token prices.&lt;/p&gt;
+&lt;p&gt;The new price for Opus 5.5 is the same as the price for GPT-5.6 Sol, but that was &lt;em&gt;before&lt;/em&gt; OpenAI dropped their Sol prices by half.&lt;/p&gt;
+&lt;p&gt;GPT-6 Astra and Claude Fable 5.1 are both priced at $10/million input and $50/million output. The price war currently affects the next tier of models below that.&lt;/p&gt;
+&lt;p&gt;Anthropic say that Sonnet 5.5 and Haiku 5.5 are coming soon. It's going to be interesting to see if Haiku can regain its price competitiveness at the lower end, given current Haiku 4.5 is $1/$5 while the latest GPT-6 Luna is &lt;em&gt;one tenth&lt;/em&gt; of that price at $0.10/$0.50.&lt;/p&gt;
+&lt;h4 id="claude-opus-5-5-max-over-thinks-to-the-point-of-breaking"&gt;Claude Opus 5.5 max over-thinks to the point of breaking&lt;/h4&gt;
+&lt;p&gt;In a first for my "&lt;a href="https://simonwillison.net/tags/pelican-riding-a-bicycle/"&gt;Generate an SVG of a pelican riding a bicycle&lt;/a&gt;" test, Claude Opus 5.5 at "max" thinking level failed to return a response!&lt;/p&gt;
+&lt;p&gt;It started by calling this "a classic test request", and then thought really, &lt;em&gt;really&lt;/em&gt; hard about what it was doing:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;This is a classic test request, so I want to plan out a well-composed pelican with its distinctive beak and pouch riding a bicycle with proper wheels, frame, and pedals, set against a simple sky and ground backdrop. [...]&lt;/p&gt;
+&lt;p&gt;Verifying the shin length checks out at roughly 95.2, close enough. Now I'm working out the near leg path from hip to knee to ankle, then sketching the foot shape resting on the pedal — outlining the heel, toe tips, and sole contour with a path using lines and curves to sit naturally on the pedal surface around y=478-494. [...]&lt;/p&gt;
+&lt;p&gt;I like the fish sticking prominently out of the basket with the pelican eyeing it as a fun detail worth keeping. I'm also confirming the eye placement near the bill base matches typical pelican anatomy, and considering giving it a slightly happier expression. [...]&lt;/p&gt;
+&lt;p&gt;The far leg reads correctly as passing behind the frame, so I'm moving on to check the chainring teeth and confirm layer ordering—the far crank arm should be mostly hidden by the seat tube and chainring. I'm settling on the final SVG's width and height attributes alongside the viewBox to ensure proper scaling, noting there's no text so no font-family is needed. [...]&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I was so excited to see this pelican... but then it &lt;a href="https://tools.simonwillison.net/markdown-svg-renderer?url=https%3A%2F%2Fgist.github.com%2Fsimonw%2F61fd7c3683fffce9a3ab7c43d1180024#response-4"&gt;stopped&lt;/a&gt;. Opus 5.5 has a 128,000 maximum output token limit (as do the other Claude models), and it hit that while it was still reasoning about the SVG!&lt;/p&gt;
+&lt;p&gt;I tried a second time and got the same result. This makes me suspect that "max" is effectively useless - if it over-thinks to breaking point on a stupid SVG prompt I don't trust it not to do the same for more interesting work.&lt;/p&gt;
+&lt;p&gt;(Those two failures each cost me &lt;a href="https://www.llm-prices.com/#it=27&amp;amp;ot=128000&amp;amp;sel=claude-opus-5-5"&gt;$2.56&lt;/a&gt; and took nearly 20 minutes.)&lt;/p&gt;
+&lt;p&gt;Fable 5.1 on "max" didn't over-think and did give me &lt;a href="https://simonwillison.net/2026/Sep/1/claude-fable-5-1/#max"&gt;the best pelican I've seen&lt;/a&gt; from any Anthropic model.&lt;/p&gt;
+&lt;p&gt;Here are &lt;a href="https://tools.simonwillison.net/markdown-svg-renderer?url=https%3A%2F%2Fgist.github.com%2Fsimonw%2F61fd7c3683fffce9a3ab7c43d1180024"&gt;the Opus 5.5 pelicans&lt;/a&gt;, excluding 5.5 max.&lt;/p&gt;
+&lt;p&gt;I also built &lt;a href="https://static.simonwillison.net/static/2026/claude-pelicans-grid.html"&gt;this comparison grid&lt;/a&gt; comparing them with pelicans by Opus 5, Fable 5.1, and Sonnet 5:&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://static.simonwillison.net/static/2026/claude-pelicans-grid.webp" alt="A grid of pelicans for four Claude models at different thinking efforts." style="max-width: 100%;" /&gt;&lt;/p&gt;
+&lt;p&gt;Comparing different model vendors by how well they draw a pelican riding a bicycle may not make much sense now (if it ever did), but I'm still finding value in using them for comparisons of the same model families at different reasoning levels.&lt;/p&gt;
+&lt;p&gt;I'm now using GPT-6 Sol and Claude Opus 5.5 as my default models in Codex and Claude Code. I've upgraded the Datasette Agent demo at &lt;a href="https://agent.datasette.io/"&gt;agent.datasette.io&lt;/a&gt; to use GPT-6 Luna, and it seems to be fast and competent at both SQL queries and building HTML and JavaScript for &lt;a href="https://simonwillison.net/2026/Jun/18/datasette-apps/"&gt;Datasette Apps&lt;/a&gt;.&lt;/p&gt;
+    
+        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/openai"&gt;openai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/anthropic"&gt;anthropic&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/claude"&gt;claude&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llm-pricing"&gt;llm-pricing&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/pelican-riding-a-bicycle"&gt;pelican-riding-a-bicycle&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/gpt"&gt;gpt&lt;/a&gt;&lt;/p&gt;
+    
+
+</summary><category term="ai"/><category term="openai"/><category term="generative-ai"/><category term="llms"/><category term="anthropic"/><category term="claude"/><category term="llm-pricing"/><category term="pelican-riding-a-bicycle"/><category term="gpt"/></entry><entry><title>llm 0.36</title><link href="https://simonwillison.net/2026/Sep/22/llm/" rel="alternate"/><published>2026-09-22T18:48:37+00:00</published><updated>2026-09-22T18:48:37+00:00</updated><id>https://simonwillison.net/2026/Sep/22/llm/</id><summary type="html">
+    
+        &lt;p&gt;&lt;strong&gt;Release:&lt;/strong&gt; &lt;a href="https://github.com/simonw/llm/releases/tag/0.36"&gt;llm 0.36&lt;/a&gt;&lt;/p&gt;
+        &lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;New OpenAI models: &lt;code&gt;gpt-6-sol&lt;/code&gt; for &lt;a href="https://developers.openai.com/api/docs/models/gpt-6-sol"&gt;GPT-6 Sol&lt;/a&gt; and &lt;code&gt;gpt-6-luna&lt;/code&gt; for &lt;a href="https://developers.openai.com/api/docs/models/gpt-6-luna"&gt;GPT-6 Luna&lt;/a&gt;. &lt;a href="https://github.com/simonw/llm/issues/1702"&gt;#1702&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Model plugins can now declare &lt;code&gt;supports_conversation = False&lt;/code&gt; for models that only accept single-turn prompts. LLM raises &lt;code&gt;llm.ConversationNotSupported&lt;/code&gt; when these models receive assistant or tool history, and &lt;code&gt;llm chat&lt;/code&gt; rejects them before starting a session. See &lt;a href="https://llm.datasette.io/en/stable/plugins/advanced-model-plugins.html#advanced-model-plugins-conversations"&gt;Models that do not support conversations&lt;/a&gt;. The first plugin to use this is &lt;a href="https://github.com/simonw/llm-typesafe"&gt;llm-typesafe&lt;/a&gt;. &lt;a href="https://github.com/simonw/llm/issues/1692"&gt;#1692&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Reasoning traces in the Markdown output of &lt;code&gt;llm logs&lt;/code&gt; are now wrapped in &lt;code&gt;&amp;lt;details&amp;gt;&amp;lt;summary&amp;gt;&lt;/code&gt; tags. &lt;a href="https://github.com/simonw/llm/issues/1701"&gt;#1701&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Plus &lt;a href="https://llm.datasette.io/en/stable/changelog.html#v0-36"&gt;bug fixes from five new contributors&lt;/a&gt;.&lt;/p&gt;
+    
+    
+        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/openai"&gt;openai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llm"&gt;llm&lt;/a&gt;&lt;/p&gt;
+    
+
+</summary><category term="openai"/><category term="llm"/></entry><entry><title>Quoting @therealcornpop</title><link href="https://simonwillison.net/2026/Sep/22/therealcornpop/" rel="alternate"/><published>2026-09-22T18:03:21+00:00</published><updated>2026-09-22T18:03:21+00:00</updated><id>https://simonwillison.net/2026/Sep/22/therealcornpop/</id><summary type="html">
     &lt;blockquote cite="https://www.tiktok.com/@therealcornpop/video/7687243097801051422"&gt;&lt;p&gt;Hey, you know it's like super obvious if you're using AI to write your scripts for TikTok and YouTube, right? [...] It's not just the general AI-isms of "it's not X, it's Y", or the rule of three, or the really weird broken staccato-like way of writing where you just say a lot of things with all these punctuation marks. and it sounds really deep, but it's not.&lt;/p&gt;
 &lt;p&gt;It's the lack of &lt;em&gt;anything&lt;/em&gt;. It's the lack of a definitive sort of spear of your voice. It's the fact I can tell you don't have opinions about the thing that you're talking about.&lt;/p&gt;&lt;/blockquote&gt;
 &lt;p class="cite"&gt;&amp;mdash; &lt;a href="https://www.tiktok.com/@therealcornpop/video/7687243097801051422"&gt;@therealcornpop&lt;/a&gt;, on TikTok&lt;/p&gt;
@@ -8,7 +134,18 @@
 
 
 
-</summary><category term="tiktok"/><category term="ai"/><category term="ai-misuse"/></entry><entry><title>llm-typesafe 0.1a0</title><link href="https://simonwillison.net/2026/Sep/22/llm-typesafe/" rel="alternate"/><published>2026-09-22T15:54:16+00:00</published><updated>2026-09-22T15:54:16+00:00</updated><id>https://simonwillison.net/2026/Sep/22/llm-typesafe/</id><summary type="html">
+</summary><category term="tiktok"/><category term="ai"/><category term="ai-misuse"/></entry><entry><title>llm-anthropic 0.29</title><link href="https://simonwillison.net/2026/Sep/22/llm-anthropic/" rel="alternate"/><published>2026-09-22T17:14:55+00:00</published><updated>2026-09-22T17:14:55+00:00</updated><id>https://simonwillison.net/2026/Sep/22/llm-anthropic/</id><summary type="html">
+    
+        &lt;p&gt;&lt;strong&gt;Release:&lt;/strong&gt; &lt;a href="https://github.com/simonw/llm-anthropic/releases/tag/0.29"&gt;llm-anthropic 0.29&lt;/a&gt;&lt;/p&gt;
+        &lt;p&gt;Adds support for &lt;a href="https://www.anthropic.com/claude-opus-5-5"&gt;Claude Opus 5.5&lt;/a&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;llm -m claude-opus-5.5 "prompt goes here"
+&lt;/code&gt;&lt;/pre&gt;
+    
+    
+        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/llm"&gt;llm&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/anthropic"&gt;anthropic&lt;/a&gt;&lt;/p&gt;
+    
+
+</summary><category term="llm"/><category term="anthropic"/></entry><entry><title>llm-typesafe 0.1a0</title><link href="https://simonwillison.net/2026/Sep/22/llm-typesafe/" rel="alternate"/><published>2026-09-22T15:54:16+00:00</published><updated>2026-09-22T15:54:16+00:00</updated><id>https://simonwillison.net/2026/Sep/22/llm-typesafe/</id><summary type="html">
     
         &lt;p&gt;&lt;strong&gt;Release:&lt;/strong&gt; &lt;a href="https://github.com/simonw/llm-typesafe/releases/tag/0.1a0"&gt;llm-typesafe 0.1a0&lt;/a&gt;&lt;/p&gt;
         &lt;p&gt;I built this new plugin for &lt;a href="https://llm.datasette.io/"&gt;LLM&lt;/a&gt; to add support for &lt;a href="https://simonwillison.net/2026/Sep/21/jev/"&gt;TypeSafe AI's new Jev model&lt;/a&gt;. Install it like this:&lt;/p&gt;
@@ -87,6 +224,12 @@
 &lt;h4 id="open-weight-recreations"&gt;Open weight recreations&lt;/h4&gt;
 &lt;p&gt;There's also been a flurry of projects attempting to create a model like Jev using on top of open weight models. &lt;a href="https://github.com/jaredpalmer/kev"&gt;Kev&lt;/a&gt; is one interesting example, using Qwen 3.5 to produce 0.8B, 4B, and 9B models. Here's the &lt;a href="https://news.ycombinator.com/item?id=49783999"&gt;accompanying Hacker News thread&lt;/a&gt;, where someone linked to a &lt;a href="https://benchmarkheaven.com/jev-models"&gt;JevBench&lt;/a&gt; benchmark that has already cropped up to compare "Jev-class decision models".&lt;/p&gt;
 &lt;p&gt;Given Jev was released just under a week ago, the amount of activity around it is extremely impressive.&lt;/p&gt;
+
+&lt;h4 id="using-jev-from-llm"&gt;Using Jev from LLM&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;Update 22nd September 2026&lt;/strong&gt;: I released &lt;a href="https://github.com/simonw/llm-typesafe"&gt;llm-typesafe&lt;/a&gt;, a plugin that adds support for Jev to my &lt;a href="https://llm.datasette.io/"&gt;LLM&lt;/a&gt; CLI tool and Python library. Basic usage looks like this:&lt;/p&gt;
+&lt;div class="highlight highlight-source-shell"&gt;&lt;pre&gt;llm -m jev &lt;span class="pl-s"&gt;&lt;span class="pl-pds"&gt;'&lt;/span&gt;Please refund my last payment.&lt;span class="pl-pds"&gt;'&lt;/span&gt;&lt;/span&gt; \
+  -s &lt;span class="pl-s"&gt;&lt;span class="pl-pds"&gt;'&lt;/span&gt;Does this message explicitly request a refund?&lt;span class="pl-pds"&gt;'&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;See &lt;a href="https://github.com/simonw/llm-typesafe/blob/main/README.md"&gt;the README&lt;/a&gt; for examples of other query types.&lt;/p&gt;
     
         &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/evals"&gt;evals&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai-bias"&gt;ai-bias&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/jev"&gt;jev&lt;/a&gt;&lt;/p&gt;
     
@@ -450,64 +593,4 @@ Bryan Cantrill responds to the &lt;a href="https://x.com/hilbertspaess/status/20
         &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/playwright"&gt;playwright&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/shot-scraper"&gt;shot-scraper&lt;/a&gt;&lt;/p&gt;
     
 
-</summary><category term="playwright"/><category term="shot-scraper"/></entry><entry><title>Generating running routes with GPT-6 Astra and ChatGPT Work</title><link href="https://simonwillison.net/2026/Sep/12/astra-running-routes/" rel="alternate"/><published>2026-09-12T23:56:42+00:00</published><updated>2026-09-12T23:56:42+00:00</updated><id>https://simonwillison.net/2026/Sep/12/astra-running-routes/</id><summary type="html">
-    &lt;p&gt;Here's a neat thing I had &lt;a href="https://simonwillison.net/2026/Aug/30/understanding-chatgpt-work/"&gt;ChatGPT Work&lt;/a&gt; with GPT-6 Astra (Max) do this morning:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;code&gt;I live at &amp;lt;my address&amp;gt;. Figure out 5K and 10K running routes from me that loop from my house. Use OSM data.&lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;It worked for 27 minutes and produced exactly what I'd asked for, as both an embedded visualization and downloadable GPX file and GeoJSON files. Here's that 5K route:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Map screenshot showing a blue route line over a light grey street map. Text: El Granada harbor loop 5.1 km. N ↑ (top right). Street labels along the route: Carmel Avenue, Paloma Avenue, San Carlos Avenue, Avenue Granada, Capistrano Road, Francisco Street, Coastal Trail. The loop runs from the harbor at the bottom left, north along Avenue Granada and Paloma Avenue to a northern point near Carmel Avenue, then east along San Carlos Avenue and south down Francisco Street to the far right, before returning west along the Coastal Trail beside the coastline. Footer: Map data © OpenStreetMap contributors. Give feedback." src="https://static.simonwillison.net/static/2026/5k-route.webp" /&gt;&lt;/p&gt;
-&lt;p&gt;When I asked it how it had created the route, it replied:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;I used &lt;strong&gt;Nominatim to locate the address&lt;/strong&gt; and &lt;strong&gt;Overpass to download local OpenStreetMap roads and trails&lt;/strong&gt;, then calculated the loops locally.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Frustratingly, the actual code it ran and exact details of what it did weren't visible to me in the ChatGPT UI. I see this lack of transparency is an anti-feature.&lt;/p&gt;
-&lt;p&gt;By the time I thought to ask for a copy of the Python code it had used, ChatGPT was unable to provide it. This appears to be because the thread had been compacted. I think any LLM system that uses compaction needs to both preserve the pre-compacted text and make that text available via agent tool calls, to protect against this kind of problem.&lt;/p&gt;
-&lt;p&gt;As for displaying the map to me, that used the &lt;a href="https://codex-tool-reference.simonw.chatgpt.site/skills/visualize"&gt;visualize skill&lt;/a&gt;. It created a file called &lt;code&gt;/workspace/el-granada-5k-share.html&lt;/code&gt; to embed directly into the ChatGPT UI.&lt;/p&gt;
-&lt;p&gt;Here's &lt;a href="https://gist.github.com/simonw/ea652573c8ff5378b218cb10c8c5a480"&gt;a copy of that HTML&lt;/a&gt;, which starts like this:&lt;/p&gt;
-&lt;div class="highlight highlight-text-html-basic"&gt;&lt;pre&gt;&lt;span class="pl-kos"&gt;&amp;lt;&lt;/span&gt;&lt;span class="pl-ent"&gt;div&lt;/span&gt; &lt;span class="pl-c1"&gt;id&lt;/span&gt;="&lt;span class="pl-s"&gt;eg-share-loop&lt;/span&gt;"&lt;span class="pl-kos"&gt;&amp;gt;&lt;/span&gt;
-  &lt;span class="pl-kos"&gt;&amp;lt;&lt;/span&gt;&lt;span class="pl-ent"&gt;div&lt;/span&gt; &lt;span class="pl-c1"&gt;class&lt;/span&gt;="&lt;span class="pl-s"&gt;viz-row&lt;/span&gt;"&lt;span class="pl-kos"&gt;&amp;gt;&lt;/span&gt;&lt;span class="pl-kos"&gt;&amp;lt;&lt;/span&gt;&lt;span class="pl-ent"&gt;h3&lt;/span&gt;&lt;span class="pl-kos"&gt;&amp;gt;&lt;/span&gt;El Granada harbor loop&lt;span class="pl-kos"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="pl-ent"&gt;h3&lt;/span&gt;&lt;span class="pl-kos"&gt;&amp;gt;&lt;/span&gt;&lt;span class="pl-kos"&gt;&amp;lt;&lt;/span&gt;&lt;span class="pl-ent"&gt;span&lt;/span&gt; &lt;span class="pl-c1"&gt;class&lt;/span&gt;="&lt;span class="pl-s"&gt;text-small&lt;/span&gt;"&lt;span class="pl-kos"&gt;&amp;gt;&lt;/span&gt;5.1 km&lt;span class="pl-kos"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="pl-ent"&gt;span&lt;/span&gt;&lt;span class="pl-kos"&gt;&amp;gt;&lt;/span&gt;&lt;span class="pl-kos"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="pl-ent"&gt;div&lt;/span&gt;&lt;span class="pl-kos"&gt;&amp;gt;&lt;/span&gt;
-  &lt;span class="pl-kos"&gt;&amp;lt;&lt;/span&gt;&lt;span class="pl-ent"&gt;div&lt;/span&gt; &lt;span class="pl-c1"&gt;id&lt;/span&gt;="&lt;span class="pl-s"&gt;eg-share-stage&lt;/span&gt;"&lt;span class="pl-kos"&gt;&amp;gt;&lt;/span&gt;&lt;span class="pl-kos"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="pl-ent"&gt;div&lt;/span&gt;&lt;span class="pl-kos"&gt;&amp;gt;&lt;/span&gt;
-  &lt;span class="pl-kos"&gt;&amp;lt;&lt;/span&gt;&lt;span class="pl-ent"&gt;div&lt;/span&gt; &lt;span class="pl-c1"&gt;class&lt;/span&gt;="&lt;span class="pl-s"&gt;text-small text-muted&lt;/span&gt;"&lt;span class="pl-kos"&gt;&amp;gt;&lt;/span&gt;Map data © &lt;span class="pl-kos"&gt;&amp;lt;&lt;/span&gt;&lt;span class="pl-ent"&gt;a&lt;/span&gt; &lt;span class="pl-c1"&gt;href&lt;/span&gt;="&lt;span class="pl-s"&gt;https://www.openstreetmap.org/copyright&lt;/span&gt;" &lt;span class="pl-c1"&gt;target&lt;/span&gt;="&lt;span class="pl-s"&gt;_blank&lt;/span&gt;" &lt;span class="pl-c1"&gt;rel&lt;/span&gt;="&lt;span class="pl-s"&gt;noopener&lt;/span&gt;"&lt;span class="pl-kos"&gt;&amp;gt;&lt;/span&gt;OpenStreetMap contributors&lt;span class="pl-kos"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="pl-ent"&gt;a&lt;/span&gt;&lt;span class="pl-kos"&gt;&amp;gt;&lt;/span&gt;&lt;span class="pl-kos"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="pl-ent"&gt;div&lt;/span&gt;&lt;span class="pl-kos"&gt;&amp;gt;&lt;/span&gt;
-  &lt;span class="pl-kos"&gt;&amp;lt;&lt;/span&gt;&lt;span class="pl-ent"&gt;style&lt;/span&gt;&lt;span class="pl-kos"&gt;&amp;gt;&lt;/span&gt;
-    &lt;span class="pl-kos"&gt;#&lt;/span&gt;&lt;span class="pl-c1"&gt;eg-share-loop&lt;/span&gt; { &lt;span class="pl-c1"&gt;width&lt;/span&gt;&lt;span class="pl-kos"&gt;:&lt;/span&gt;&lt;span class="pl-c1"&gt;100&lt;span class="pl-smi"&gt;%&lt;/span&gt;&lt;/span&gt;; }
-    &lt;span class="pl-kos"&gt;#&lt;/span&gt;&lt;span class="pl-c1"&gt;eg-share-loop&lt;/span&gt; &lt;span class="pl-kos"&gt;#&lt;/span&gt;&lt;span class="pl-c1"&gt;eg-share-stage&lt;/span&gt; { &lt;span class="pl-c1"&gt;width&lt;/span&gt;&lt;span class="pl-kos"&gt;:&lt;/span&gt;&lt;span class="pl-c1"&gt;100&lt;span class="pl-smi"&gt;%&lt;/span&gt;&lt;/span&gt;; &lt;span class="pl-c1"&gt;margin&lt;/span&gt;&lt;span class="pl-kos"&gt;:&lt;/span&gt;&lt;span class="pl-c1"&gt;8&lt;span class="pl-smi"&gt;px&lt;/span&gt;&lt;/span&gt; &lt;span class="pl-c1"&gt;0&lt;/span&gt;; }
-    &lt;span class="pl-kos"&gt;#&lt;/span&gt;&lt;span class="pl-c1"&gt;eg-share-loop&lt;/span&gt; .&lt;span class="pl-c1"&gt;eg-share-map&lt;/span&gt; { &lt;span class="pl-c1"&gt;display&lt;/span&gt;&lt;span class="pl-kos"&gt;:&lt;/span&gt;block; &lt;span class="pl-c1"&gt;width&lt;/span&gt;&lt;span class="pl-kos"&gt;:&lt;/span&gt;&lt;span class="pl-c1"&gt;100&lt;span class="pl-smi"&gt;%&lt;/span&gt;&lt;/span&gt;; &lt;span class="pl-c1"&gt;touch-action&lt;/span&gt;&lt;span class="pl-kos"&gt;:&lt;/span&gt;none; }
-    &lt;span class="pl-kos"&gt;#&lt;/span&gt;&lt;span class="pl-c1"&gt;eg-share-loop&lt;/span&gt; .&lt;span class="pl-c1"&gt;eg-share-map&lt;/span&gt; &lt;span class="pl-ent"&gt;text&lt;/span&gt; { &lt;span class="pl-c1"&gt;fill&lt;/span&gt;&lt;span class="pl-kos"&gt;:&lt;/span&gt;&lt;span class="pl-en"&gt;var&lt;/span&gt;(&lt;span class="pl-s1"&gt;--foreground&lt;/span&gt;); &lt;span class="pl-c1"&gt;font-size&lt;/span&gt;&lt;span class="pl-kos"&gt;:&lt;/span&gt;&lt;span class="pl-c1"&gt;12&lt;span class="pl-smi"&gt;px&lt;/span&gt;&lt;/span&gt;; &lt;span class="pl-c1"&gt;font-weight&lt;/span&gt;&lt;span class="pl-kos"&gt;:&lt;/span&gt;&lt;span class="pl-c1"&gt;400&lt;/span&gt;; }
-    &lt;span class="pl-kos"&gt;#&lt;/span&gt;&lt;span class="pl-c1"&gt;eg-share-loop&lt;/span&gt; .&lt;span class="pl-c1"&gt;eg-share-label&lt;/span&gt; { &lt;span class="pl-c1"&gt;paint-order&lt;/span&gt;&lt;span class="pl-kos"&gt;:&lt;/span&gt;stroke; &lt;span class="pl-c1"&gt;stroke&lt;/span&gt;&lt;span class="pl-kos"&gt;:&lt;/span&gt;&lt;span class="pl-en"&gt;var&lt;/span&gt;(&lt;span class="pl-s1"&gt;--background&lt;/span&gt;); &lt;span class="pl-c1"&gt;stroke-width&lt;/span&gt;&lt;span class="pl-kos"&gt;:&lt;/span&gt;&lt;span class="pl-c1"&gt;3&lt;span class="pl-smi"&gt;px&lt;/span&gt;&lt;/span&gt;; &lt;span class="pl-c1"&gt;stroke-linejoin&lt;/span&gt;&lt;span class="pl-kos"&gt;:&lt;/span&gt;round; }
-  &lt;span class="pl-kos"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="pl-ent"&gt;style&lt;/span&gt;&lt;span class="pl-kos"&gt;&amp;gt;&lt;/span&gt;
-  &lt;span class="pl-kos"&gt;&amp;lt;&lt;/span&gt;&lt;span class="pl-ent"&gt;script&lt;/span&gt; &lt;span class="pl-c1"&gt;type&lt;/span&gt;="&lt;span class="pl-s"&gt;application/json&lt;/span&gt;" &lt;span class="pl-c1"&gt;id&lt;/span&gt;="&lt;span class="pl-s"&gt;eg-share-data&lt;/span&gt;"&lt;span class="pl-kos"&gt;&amp;gt;&lt;/span&gt;&lt;span class="pl-kos"&gt;{&lt;/span&gt;&lt;span class="pl-s"&gt;"route"&lt;/span&gt;:&lt;span class="pl-kos"&gt;{&lt;/span&gt;&lt;span class="pl-s"&gt;"type"&lt;/span&gt;:&lt;span class="pl-s"&gt;"LineString"&lt;/span&gt;&lt;span class="pl-kos"&gt;,&lt;/span&gt;&lt;span class="pl-s"&gt;"coordinates"&lt;/span&gt;:&lt;span class="pl-kos"&gt;[&lt;/span&gt;&lt;span class="pl-kos"&gt;[&lt;/span&gt;&lt;span class="pl-c1"&gt;-&lt;/span&gt;&lt;span class="pl-c1"&gt;122.467425&lt;/span&gt;&lt;span class="pl-kos"&gt;,&lt;/span&gt;&lt;span class="pl-c1"&gt;37.4997753&lt;/span&gt;&lt;span class="pl-kos"&gt;]&lt;/span&gt; &lt;span class="pl-kos"&gt;.&lt;/span&gt;&lt;span class="pl-kos"&gt;.&lt;/span&gt;&lt;span class="pl-kos"&gt;.&lt;/span&gt;&lt;span class="pl-kos"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="pl-ent"&gt;script&lt;/span&gt;&lt;span class="pl-kos"&gt;&amp;gt;&lt;/span&gt;
-  &lt;span class="pl-kos"&gt;&amp;lt;&lt;/span&gt;&lt;span class="pl-ent"&gt;script&lt;/span&gt; &lt;span class="pl-c1"&gt;src&lt;/span&gt;="&lt;span class="pl-s"&gt;https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js&lt;/span&gt;"&lt;span class="pl-kos"&gt;&amp;gt;&lt;/span&gt;&lt;span class="pl-kos"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="pl-ent"&gt;script&lt;/span&gt;&lt;span class="pl-kos"&gt;&amp;gt;&lt;/span&gt;
-  &lt;span class="pl-kos"&gt;&amp;lt;&lt;/span&gt;&lt;span class="pl-ent"&gt;script&lt;/span&gt;&lt;span class="pl-kos"&gt;&amp;gt;&lt;/span&gt;
-  (() =&amp;gt; {
-    const root=document.getElementById('eg-share-loop');&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;The &lt;code&gt;&amp;lt;script type="application/json"&amp;gt;&lt;/code&gt; element contains the full geometry needed to render both the running route and the map itself, using D3, which is loaded from an allow-listed CDN location described in this section of &lt;a href="https://codex-tool-reference.simonw.chatgpt.site/skills/visualize"&gt;the visualize skill&lt;/a&gt;:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;h3 id="external-resources"&gt;External resources&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;The CSP allows only &lt;code&gt;cdnjs.cloudflare.com&lt;/code&gt;, &lt;code&gt;esm.sh&lt;/code&gt;, &lt;code&gt;cdn.jsdelivr.net&lt;/code&gt;, &lt;code&gt;unpkg.com&lt;/code&gt;, &lt;code&gt;fonts.googleapis.com&lt;/code&gt;, &lt;code&gt;fonts.gstatic.com&lt;/code&gt;, and &lt;code&gt;fonts.bunny.net&lt;/code&gt;. Other origins are blocked and fail silently.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-    
-        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/geospatial"&gt;geospatial&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/d3"&gt;d3&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/openai"&gt;openai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/chatgpt"&gt;chatgpt&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/skills"&gt;skills&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/gpt-6-astra"&gt;gpt-6-astra&lt;/a&gt;&lt;/p&gt;
-    
-
-</summary><category term="geospatial"/><category term="ai"/><category term="d3"/><category term="openai"/><category term="generative-ai"/><category term="chatgpt"/><category term="llms"/><category term="skills"/><category term="gpt-6-astra"/></entry><entry><title>California Brown Pelican</title><link href="https://simonwillison.net/2026/Sep/12/sighting-399708714/" rel="alternate"/><published>2026-09-12T21:16:09+00:00</published><updated>2026-09-12T21:16:09+00:00</updated><id>https://simonwillison.net/2026/Sep/12/sighting-399708714/</id><summary type="html">
-    
-        &lt;p&gt;&lt;img src="https://static.inaturalist.org/photos/733368932/large.jpg" alt="California Brown Pelican"&gt;&lt;/p&gt;&lt;p&gt;&lt;img src="https://static.inaturalist.org/photos/733368989/large.jpg" alt="California Brown Pelican"&gt;&lt;/p&gt;&lt;p&gt;California Brown Pelican, in San Mateo County, CA, US&lt;/p&gt;&lt;p&gt;The &lt;a href="https://en.wikipedia.org/wiki/Pacifica_Pier"&gt;Pacifica Pier&lt;/a&gt; shut down at the start of June after a crack in the concrete walkway made access to the pier unsafe.&lt;/p&gt;
-&lt;p&gt;It has since been entirely taken over by pelicans!&lt;/p&gt;
-    
-    
-        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/wildlife"&gt;wildlife&lt;/a&gt;&lt;/p&gt;
-    
-
-</summary><category term="wildlife"/></entry><entry><title>Quoting Paul Ford</title><link href="https://simonwillison.net/2026/Sep/12/paul-ford/" rel="alternate"/><published>2026-09-12T18:00:21+00:00</published><updated>2026-09-12T18:00:21+00:00</updated><id>https://simonwillison.net/2026/Sep/12/paul-ford/</id><summary type="html">
-    &lt;blockquote cite="https://www.nytimes.com/2026/09/12/opinion/ai-software-coding-apps.html"&gt;&lt;p&gt;For a while, I must admit, it looked as if software developer roles like mine were done for. How could we fight against tireless robots? But our industry is slowly realizing that making truly cutting-edge software still requires humans to think and work together, to maximize their skill sets and to practice their respective crafts. A.I. can write very good software, but it also makes it easy to do someone else’s job badly, which is part of why all those projects fail. Now that everyone can code, it’s become clearer why many shouldn’t.&lt;/p&gt;&lt;/blockquote&gt;
-&lt;p class="cite"&gt;&amp;mdash; &lt;a href="https://www.nytimes.com/2026/09/12/opinion/ai-software-coding-apps.html"&gt;Paul Ford&lt;/a&gt;, A.I. Was Supposed to Give Us New Killer Apps. What Happened?&lt;/p&gt;
-
-    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/paul-ford"&gt;paul-ford&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/deep-blue"&gt;deep-blue&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;&lt;/p&gt;
-
-
-
-</summary><category term="paul-ford"/><category term="generative-ai"/><category term="deep-blue"/><category term="ai"/><category term="llms"/></entry></feed>
+</summary><category term="playwright"/><category term="shot-scraper"/></entry></feed>
