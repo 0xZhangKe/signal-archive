@@ -1,6 +1,28 @@
 {
   "items": [
     {
+      "id": "a9fcb83dde9f3684afe406c9",
+      "title": "Register Token以及对变形金刚AI的四大批判",
+      "summary": "前几天 Yann LeCun 对 变形金刚(transformers) AI 进行了深刻的 批判 First, the reasoning abilities of current AI systems are based non-auto-regressive search (which is what I have always advocated for). But AFAICT, they do it in token space, which is limited and inefficient. I have claimed that human-like reasoning must be a search in continuous representation space. It looks…",
+      "image": null,
+      "publishedAt": "2026-09-23T12:21:00Z",
+      "sourceId": "a864c53722a17b19",
+      "sourceTitle": "est's blog",
+      "link": "https://blog.est.im/2026/stdin-19",
+      "detailPath": "articles/a9fcb83dde9f3684afe406c9.json"
+    },
+    {
+      "id": "c4da6bbf480b492ea97ba4ec",
+      "title": "聪明 Agent 四套路 和 人肉学习",
+      "summary": "nVIDIA 联合 NTU，MIT 联合研究了一项关于 Agent harness 自我提升的 研究 ，项目叫 SoL-Pi ， Scaling Auto-Research Loops for Efficient Agent Harnesses 让 Research Agent 自动发现 Harness 里的 Token 浪费，再通过大规模实验筛掉无效改法。把结论再放进大量环境中反复测试。整个探索一共 152 个候选方向，分成 context、progress、tools、delegation、prompt/policy、improvement/evaluation 六类，然后把这些想法扔进大量相互隔离的 research lineage 里，让 agent 自己观察 trajectory、提出机制、实现、r…",
+      "image": "https://pbs.twimg.com/media/HSo5DbvaYAAuVtR?format=jpg&name=medium",
+      "publishedAt": "2026-09-23T12:21:00Z",
+      "sourceId": "a864c53722a17b19",
+      "sourceTitle": "est's blog",
+      "link": "https://blog.est.im/2026/stdin-18",
+      "detailPath": "articles/c4da6bbf480b492ea97ba4ec.json"
+    },
+    {
       "id": "b6574966f7597daeb1c16cdb",
       "title": "Doherty 多尔蒂阈值",
       "summary": "前几天鼠标坏了。随手换了个新的，双飞燕。没想到这垃圾鼠标居然在 macbook 下有间歇性卡顿 失联问题，表现是光标不动 怀疑是 系统问题，驱动问题，鼠标本身，商家卖假货问题。最后想明白了，这几十元破玩意就tmd不值得去折腾心态。直接扔。 回想了一下，这玩意其实对工作影响比意料中的大得多。平时操作触摸板 键盘都是下意识的，根本不会去多想； 光标在显示器上一旦当场卡住，你大脑瞬间被吸引过去，从软件到硬件到购买决策，到损失厌恶，全部过一遍，恶心死了 生活中我们习惯了太多「常见」的事，是工业和质量体系支撑着这一切的「正常」。我想到骑车可以走神，开车可以走神，走路也可以走神，有的时候经过一个路口，你都完全不知道道路上发生了什么，怎么过的红绿灯，有没有危险，浑然不知；自己反正在操心着别的事儿，身体就不由自主的「自动驾驶…",
@@ -197,28 +219,6 @@
       "sourceTitle": "est's blog",
       "link": "https://blog.est.im/2026/stderr-23",
       "detailPath": "articles/05e6df2e457d7bc95be24935.json"
-    },
-    {
-      "id": "a8152e4ca624173159499252",
-      "title": "唯物主义「天命」论",
-      "summary": "看到一篇雄文《 明末士大夫为什么毫无气节纷纷变节投降满清？ 》大受启发，想看原文的可以点开链接，下面是精简和摘录: 因为程朱理学在理论存面存在漏洞，被鞑子无意之间利用了，事实上大部分的鞑子统治者在这方面，也都是知其然而不知所以然。 不否认明末也有很多了不起的仁人志士，但如果你对中国历史有些疑惑，觉得似乎宋朝之后中国就有点不一样了，那恭喜你，你的直觉是对的。由于元代留下的遗毒过甚，明朝没能拨乱反正，元明清三代，所有的皇帝和“儒家士大夫”，都是失礼而不自知之人。元明清三代的所谓“礼法”，放在先秦两汉的大学者们面前，诸子百家不管哪家，都一眼就能看出来全是假礼。如果墨子这个儒家最大的反对者看见了，估计更是嘲笑孔子能笑的棺材板都压不住。这些“假礼”，就是元明清三代那些僵化的等级秩序、规规矩矩。出于汉人的直觉，厌恶这些是…",
-      "image": null,
-      "publishedAt": "2026-07-02T08:07:00Z",
-      "sourceId": "a864c53722a17b19",
-      "sourceTitle": "est's blog",
-      "link": "https://blog.est.im/2026/stderr-22",
-      "detailPath": "articles/a8152e4ca624173159499252.json"
-    },
-    {
-      "id": "025b44104cfb68cb66913101",
-      "title": "我的 Vibe Coding 最佳实践——ADR文档",
-      "summary": "工作和业余也用AI写代码，大大小小项目都经历了。从 rules, skills, spec, agent 到 harness 都玩过了 从AI嘴里发现一条比较稳的套路——ADR文档 rule, skills, spec 这些东西最大的问题就是瞎jb指挥。ADR 的好处是记录why，以及决策演变历史。 贴一段 我整理的 ADR 文档 就明白了： --- title: 如何使用 ADR id: ADR-001 date: 2026-06-26 09:01:21 status: accepted --- ADR ADR（Architecture Decision Record，架构决策记录）的核心目标很简单： 记录为什么做出了某个重要技术决策，而不是记录系统长什么样。 目前比较常见的是 MADR、Nygard AD…",
-      "image": null,
-      "publishedAt": "2026-06-26T01:40:00Z",
-      "sourceId": "a864c53722a17b19",
-      "sourceTitle": "est's blog",
-      "link": "https://blog.est.im/2026/stdout-24",
-      "detailPath": "articles/025b44104cfb68cb66913101.json"
     }
   ]
 }
