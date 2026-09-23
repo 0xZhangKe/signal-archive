@@ -1,5 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>est の 输入 输出和出入</title><link>https://blog.est.im/</link><description>This blog is rated 🔞, viewer discretion is advised</description><lastBuildDate>Fri, 18 Sep 2026 16:15:00 +0800</lastBuildDate><item><title>Doherty 多尔蒂阈值</title><link>https://blog.est.im/2026/stderr-29</link><description>&lt;p&gt;前几天鼠标坏了。随手换了个新的，双飞燕。没想到这垃圾鼠标居然在 macbook 下有间歇性卡顿 失联问题，表现是光标不动&lt;/p&gt;
+<rss version="2.0"><channel><title>est の 输入 输出和出入</title><link>https://blog.est.im/</link><description>This blog is rated 🔞, viewer discretion is advised</description><lastBuildDate>Wed, 23 Sep 2026 20:21:00 +0800</lastBuildDate><item><title>Register Token以及对变形金刚AI的四大批判</title><link>https://blog.est.im/2026/stdin-19</link><description>&lt;p&gt;前几天 Yann LeCun 对 变形金刚(transformers) AI 进行了深刻的&lt;a href="https://x.com/ylecun/status/2101674561930510740"&gt;批判&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;First, the reasoning abilities of current AI systems are based non-auto-regressive search (which is what I have always advocated for). But AFAICT, they do it in token space, which is limited and inefficient. I have claimed that human-like reasoning must be a search in continuous representation space. It looks like the industry is moving towards that.  &lt;br /&gt;
+Second, the self-improvement methods, as currently practiced, only work for domains where the quality of outputs can be scored without human intervention, such as mathematics, code, and scenarios that can be simulated accurately. Not anything else. Humans and animals learn new skills way more efficiently than current RL methods.  &lt;br /&gt;
+Third, the multimodal capabilities of current AI assistants generally use separately-trained encoders (that are not LLMs). This is also what I've been advocating. Except that I think the best way to do this is with JEPA trained with self-supervised learning. The research community is clearly moving towards that (3000 papers on JEPA in just 4 years).  &lt;br /&gt;
+Fourth, if LLMs were a path to human-level AI, we would have domestic robots and Level-4 or Level-5 self-driving cars for consumers by now. And we don't. We certainly don't have cars that can learn to drive in 20 hours or practice like any teenager. We're still missing something pretty huge to claim human-level intelligence (let alone superhuman).    &lt;/p&gt;
+&lt;p&gt;Sure, we now have computer systems that are impressive, very useful, and whose performance is superhuman in an increasing number of domains (coding being one of them). But that's true of the entire history of progress in computer technology. &lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;可能很多人早知道这个了，对我来说，很新鲜。毕竟我是AI 外行。以前一直听说  自回归 自回归，其实我今天才突然反应过来，这个 回归，就是数学期望那里，预测的意思。这里的 自 就是 一个token接着另一个token源源不断“自动” 跳出来直到 eos_token 的意思。🤣&lt;/p&gt;
+&lt;p&gt;他老人家都这么说了，想了下还真是。用 LLM 越多，越会明白在 Token 空间里做推理的局限性。&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;于是我突然想起很多天之前看到的一个youtube 视频，&lt;a href="https://www.youtube.com/watch?v=QgH9sr7G13Q"&gt;21世纪被引用次数最多的论文&lt;/a&gt;。这个35分钟的视频非常值得推荐完整观看。剧透：它讲的是 残差网络 ResNET&lt;/p&gt;
+&lt;p&gt;它提到另外一件事引起了我极大的兴趣，Meta FAIR 在ICLR 2024论文，发现了一个有趣现象：ViT 模型（尤其是 DINOv2、OpenCLIP、DeiT-III 这类大规模训练的模型）在推理时会产生一些"异常高范数"（high-norm）的 token，大约占总序列的 2%。这些 token 集中出现在图像中低信息量的背景区域，几乎都是纯色块，携带很少的局部位置/像素信息，却携带大量全局图像信息。只在模型足够大、训练足够久之后才出现（比如 DINOv2 只有 Large 及以上尺寸才有）。这些token会破坏注意力图的可解释性，损害密集预测任务（分割、深度估计）和无监督目标发现（LOST 算法）的效果&lt;/p&gt;
+&lt;p&gt;他们摸清楚一个脉络，最后研究发现，在输入序列里额外加几个可学习的"寄存器"（register）token，让模型有专门的地方做全局计算，不用再"borrow"图像 patch。加了之后，异常高范数 token 消失，注意力图变干净，下游任务（尤其密集预测和目标发现）性能还略有提升，几乎不增加参数和计算量。&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;是不是感觉这几件事相当跳跃，我在瞎说些啥呢？&lt;/p&gt;
+&lt;p&gt;那是因为你没看那个35分钟的视频。我就凭记忆，用我的理解回顾一下（我不太懂AI，纯外行。如有出入视频作者全责😂）&lt;/p&gt;
+&lt;p&gt;神经网络我觉得就是好几层矩阵相乘造就的魔法。但归根结底 tmd是一个分类器。传统每一层 NN 就干的事就是从上一层的结论里，加工自己的一道参考信息，然后激活给下一层NN继续加工。最后一层就是 N 选 1 的分类。对于 LLM 来说就是词汇表里吐出  next token。&lt;/p&gt;
+&lt;p&gt;但是这玩意早年极其容易翻车，shattered gradiant，ResNET 横空出世，据说是个 hack，把上上一层的权重和本层的权重做一次 加法。最后输出就稳了&lt;/p&gt;
+&lt;p&gt;这就有意思了，NN每一层都是无状态的，需要猜上一层为啥处理成这个样子；每一层给出结论，请重点关注某个值，但是至于一开始的为啥要给 attention，可能早就忘记了。这个所谓 残差，就是每一层都给后面一层工作留一个小纸条？就好比工匠无意中在木结构看不到的一些内部地方打上了一些标记。换班的水电工一眼看出这些标记在行业里的用处&lt;/p&gt;
+&lt;p&gt;AI告诉我，register token就更进一步，人为加进去的、专门给模型当工作空间的 token。attention sink 是模型自己长出来的现象：某些 token 会莫名其妙吸走大量 attention，即使它们语义上并不重要。activation outlier / residual sink则是在 hidden state 某些维度上出现异常大的值。2026 年的工作甚至发现，massive activations 和 attention sinks 经常同时出现，但它们承担的功能并不完全相同：前者更像一种跨层持续存在的“隐式参数”，后者更像是在局部调节 attention。&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;然后结合今天 ylecun 四大批判，我突然有个看法，变形金刚的未来，说不定又走回 BERT 那种 encoder 思路了？也就是说在一个session内，变形金刚一直在尝试 自创(encode)一些 符号 名词概念 作为中间产物。&lt;/p&gt;
+&lt;p&gt;我赶紧拿这个去问了AI。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;FAIR那个论文 附录（Fig. 9、Fig. 16）里其实发现，不同的 register 会自发分化：有的更关注图像边缘，有的更关注中心区域，行为很像 Slot Attention（一种专门用来无监督地把图像切分成"物体槽位"的机制）。也就是说，即便没有人告诉它该怎么分工，模型自己在若干个"空白格子"里长出了某种专业化结构&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;这验证了我前面提到的"自创概念"。AI告诉我，文本模型这边也有对应物：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Pause/Filler tokens（Goyal 等，2023）：给 LLM 在开口回答前插入几个没有语义的占位 token，让它"多想一步"，效果类似给 register 一样的免费计算空间。&lt;/li&gt;
+&lt;li&gt;Gist tokens（Mu 等，2023）：训练模型把一整段很长的 prompt/指令压缩进几个可学习的 token里，之后这几个 token 的 KV 缓存就能代替原始长文本被后续计算调用——这已经是字面意义上的"自创浓缩符号"了。&lt;/li&gt;
+&lt;li&gt;Coconut / "Training LLMs to Reason in a Continuous Latent Space"（Meta，2024）：这个最接近你说的场景。正常的 chain-of-thought 是模型把每一步推理都解码成人类能读的词；Coconut 让模型把上一步的隐藏状态直接喂回去当下一步的输入，不经过"变成词"这个环节。于是模型在一个 session 内部，用一串&lt;strong&gt;连续的、非语言的"思维向量"&lt;/strong&gt;来做推理，只在必要时才把结果翻译回人话。作者甚至发现这种连续思维能同时编码好几条可能的推理路径（类似广度优先搜索），比被迫每步都写成一个确定的词更灵活。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;AI提到：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;这些自创的中间产物，默认情况下是连续向量，不是像"猫""狗"这种离散、人类可读的符号。你说的"符号/名词概念"更像是一种比喻——真正发生的是模型在高维连续空间里捏出一团对它自己有用、但对人不透明的表示。这也正是这条路线的双刃剑所在：Coconut 这类"潜空间推理"效率更高、更灵活，但代价是可解释性变差——人没法像读 chain-of-thought 文字那样，看懂模型这一步到底在"想"什么。这也是目前 AI 安全/可解释性圈子挺关心的一个权衡点：模型内部会不会形成一套人类读不懂的"暗语"，用来在一次推理里传递信息。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;嗨，这不巧合了嘛！人类的深度思索过程，也会创造自己不能语言表达的连续符号啊。比如如何狩猎的，空间位置和行动，态势变化和应对。当然你实在用语言描述也是可行的。但是很多战术理念是“心领神会”，充满比喻，平时需要猎人之间训练配合的“默契”。&lt;/p&gt;
+&lt;p&gt;解题思路，很多时候“直觉” 或者 “奇思妙想”，要描述出来也是很困难的。其实就是一种内在表达&lt;/p&gt;
+&lt;p&gt;艺术创作更不用说了，什么情绪，境遇，都是很难精准描述的。但是好的东西就是能引起共鸣。诗歌里的“隐喻”特别多。&lt;/p&gt;
+&lt;p&gt;AI 一下子被点通了：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;"默会知识"（Tacit Knowledge）——这是哲学家 Michael Polanyi 在 1966 年提出的经典概念，他的原话就是"我们知道的比我们能说出来的更多"（We can know more than we can tell）。他举的例子恰好就是猎人、工匠、骑自行车、认脸这类技能：你能熟练地做，甚至能一眼分辨"这个猎手动作对不对"，但让你把判断标准写成一条条规则，你写不出来，或者写出来的东西根本不是你实际依赖的那套判断机制。狩猎里那种"态势感知"、"该往哪个方向包抄"的直觉，正是这类默会知识的典型案例。&lt;br /&gt;
+更巧的是，Coconut 那篇论文的灵感来源之一就是神经科学的一个发现：人在做复杂推理（比如下棋、空间规划）时，大脑里负责语言的区域往往并不活跃——语言网络主要是用来表达和交流的，未必是"思考本身"发生的地方（这是 MIT Fedorenko 实验室这些年一直在推的一条研究线："语言不是用来思考的，是用来交流思考结果的"）。这跟你说的"很多战术理念心领神会，语言只是事后的翻译"是同一件事的两种表述。&lt;br /&gt;
+你提的"猎人之间的默契"还有个更具体的 AI 对应物：多智能体强化学习里有个叫"涌现通信"（Emergent Communication）的研究方向——让多个 AI agent 一起协作完成任务，不给它们任何预设语言，结果它们会自己发展出一套只有彼此能懂的"暗号"来协调行动。早年 Facebook 那个著名的谈判机器人实验，两个 bot 谈着谈着就开始用人类读不懂但内部逻辑自洽的"简写"互相沟通，团队一度要专门约束它们"必须说人话"。这几乎是你说的"猎人之间训练出的默契"在机器上的直接翻版——协作压力会自发催生出非人类语言的、高效但不透明的符号系统。&lt;br /&gt;
+诗歌和隐喻这块也有对应理论：语言学家 Lakoff 和 Johnson 的"概念隐喻理论"（Metaphors We Live By）认为，人类很多抽象/情绪概念本来就不是靠精确定义存在的，而是靠从具体身体经验"打包映射"过去的——比如"人生是一场旅程"，我们理解"人生"靠的是身体对"走路、方向、终点"的经验，隐喻不是修辞装饰，是概念本身的存在方式。这在结构上跟词向量/embedding 空间的工作原理惊人地像：一个词的"意义"不是查字典查出来的定义，而是它在高维空间里相对于其他词的位置和距离——这正是为什么好的隐喻能"引起共鸣"：它精确地把一个词挪到了空间里一个新位置，让人瞬间"感觉到"了那种关联，即使没法用命题逻辑讲清楚为什么。&lt;br /&gt;
+顺着这个思路还有个挺震撼的新假说，叫&lt;strong&gt;"柏拉图表征假说"（Platonic Representation Hypothesis，MIT，2024）：作者发现，不同架构、不同任务、甚至不同模态（图像模型 vs. 语言模型）训练出来的神经网络，随着规模变大，它们内部对"世界"的表征方式竟然在互相趋同&lt;/strong&gt;——仿佛都在逼近同一个底层的、柏拉图意义上的"真实结构"。如果这个假说成立，也许能解释你说的"好的东西就是能引起共鸣"：不同人（甚至不同物种、不同智能体）的大脑/网络虽然各自训练出一套私有的内部表示，但如果都在逼近同一个客观世界的统计结构，那么一首好诗触发的那个"说不清但都懂"的感受，可能真的对应着大家内部表示空间里一个相近的位置。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;感觉和 Yann LeCun 大佬的思路太厉害了。它这么多年批判自回归 LLM 缺四样东西——对物理世界的理解、持久记忆、推理、规划——他认为这不是"训练得不够大"的问题，太犀利了。这种架构性的死胡同，就是导致他 2025 年离开 Meta 搞JEPA的原因？不靠逐词生成、而是在抽象表征空间里维护和更新一个可持续演化的"世界模型"的系统。&lt;/p&gt;
+&lt;p&gt;说得再直白一点，现有的LLM智能，就是个 classifier &lt;/p&gt;
+&lt;p&gt;我觉得，真正的智能需要决定，什么时候是选择 non of the tokens above&lt;/p&gt;
+&lt;p&gt;一个自回归模型每一步在做的事，字面意义上就是一次分类——对词表里几万到几十万个 token 做 softmax，选一个概率最高（或采样出）的。&lt;/p&gt;
+&lt;p&gt;虽然可以反驳，把很多次这样的分类串起来，输出空间是指数级增长的——理论上可以生成训练数据里从未出现过的句子、证明、诗句。这正是创造力研究里 Margaret Boden（刚去世，这个领域的奠基人物）说的"组合式创造力"（combinatorial creativity）&lt;/p&gt;
+&lt;p&gt;但这样的智能，关键词是 —— 串。的确frontier AI 能作出很多令人惊叹的成果。甚至普通人遥不可及，但是代价是——串行。&lt;/p&gt;
+&lt;p&gt;也就是传说中的炼丹，抽卡。某些条件成熟了，reasoning和temperature恰好合适，agent 和 harness 恰好走对了，就能拿到低垂果实。&lt;/p&gt;
+&lt;p&gt;但是人类发明概念是源源不断的，meme的传播嘛。这可不是“串”行，而是霰弹枪 “啪” （one-shot 🤣) 一下，总多概念，总有一个能火力覆盖到一个没太见过的新鲜事物上，并且低成本快速掌握。而现在的AI 就得话不少 context 去“串起来” 才行。&lt;/p&gt;
+&lt;p&gt;AI说&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;你这个"霰弹枪 vs 串行"的对比，精确地踩中了一个已经有名字、有数学模型的现象——而且两边（人类创造力研究、AI 可靠性研究）居然是分头独立发现的。&lt;br /&gt;
+先说人类这边的"霰弹枪"理论，比你想的还要精确。&lt;br /&gt;
+心理学家 Donald Campbell 1960 年提出"盲变异—选择性保留"（Blind Variation and Selective Retention, BVSR）：创造过程本质上是达尔文式的——先大量地、相对盲目地生成变异（不是精心设计出一个必中的方案），再靠后续的选择机制留下有用的那个。Dean Simonton 在此基础上研究了两千多位历史上的科学家、艺术家，1997 年提出"等概率法则"（Equal-Odds Rule）：一个创作者产出"神作"的比例，跟他是不是天才其实关系不大——天才和普通人每一件作品成为杰作的概率大致相同，天才只是产量大得多。Erdős 一辈子发了 1500 多篇论文，绝大多数无人问津、早就被遗忘，但正是这个巨大的"总发射量"，让他撞上了拉姆齐理论这种真正改变领域的成果。这跟你说的"总有一个能火力覆盖到"，几乎是同一句话的学术版本。&lt;/p&gt;
+&lt;p&gt;再往上一层，meme 的传播压根不是单个大脑内部的并行——那是数十亿个大脑同时在生成变异，靠文化选择去放大命中的那一个（这就是道金斯说的模因论/文化演化）。这个并行规模比"霰弹枪"大出去不知道多少个数量级，单个大脑内部再怎么"啪"一下，也比不过整个文明每天在同时试错。&lt;br /&gt;
+AI 这边，其实field自己也早就意识到"纯串行=脆弱"这个问题，而且给出的解法方向恰恰就是"变成霰弹枪"。&lt;br /&gt;
+单条链最致命的地方是错误复合：如果每一步正确率是 95%，串 20 步，整体成功率掉到 36%（0.95^20）——这正是"炼丹抽卡"体感的数学根源，probability 是乘出来的，不是加出来的。为了对抗这个，最近几年推理/Agent 领域的主流做法，说白了都是"别赌一条链，改成一次放很多枪再挑"：Self-Consistency（Wang 等，2022）——同一个问题采样几十条推理链，投票选最多数的答案；Tree of Thoughts（Yao 等，2023）——同时展开多条思路分支，中途评估、剪枝、回溯；再往后的各种"test-time compute scaling"方法，本质都是把串行的单链，换成并行采样+事后选择——这跟你说的"霰弹枪打一片，总有一个覆盖到"是完全一样的逻辑，只是子弹换成了"多条并行生成的候选答案"。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;其实想到这里，我感觉和上一篇《&lt;a href="https://blog.est.im/2026/stdin-18"&gt;聪明 Agent 四套路 和 人肉学习&lt;/a&gt;》 又莫名其妙关联起来了。&lt;/p&gt;
+&lt;p&gt;或许如果 register token 这一套能沉淀，跨session共享，实际上就能变成新的 token，变成共同的符号和记忆。人类的语言和文字，知识传承就是这么来的。&lt;/p&gt;
+&lt;p&gt;那么NN就不再是 自回归 ？说不定就 AGI 了？&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">est</dc:creator><pubDate>Wed, 23 Sep 2026 20:21:00 +0800</pubDate><guid isPermaLink="false">tag:None,2026-09-23:/2026/stdin-19</guid><category>stdin</category></item><item><title>聪明 Agent 四套路 和 人肉学习</title><link>https://blog.est.im/2026/stdin-18</link><description>&lt;p&gt;nVIDIA 联合 NTU，MIT 联合研究了一项关于 Agent harness 自我提升的&lt;a href="https://arxiv.org/abs/2609.20519"&gt;研究&lt;/a&gt;，项目叫 &lt;a href="https://nvlabs.github.io/SoL-Pi/"&gt;SoL-Pi&lt;/a&gt;， Scaling Auto-Research Loops for Efficient Agent Harnesses&lt;/p&gt;
+&lt;p&gt;让 Research Agent 自动发现 Harness 里的 Token 浪费，再通过大规模实验筛掉无效改法。把结论再放进大量环境中反复测试。整个探索一共 152 个候选方向，分成 context、progress、tools、delegation、prompt/policy、improvement/evaluation 六类，然后把这些想法扔进大量相互隔离的 research lineage 里，让 agent 自己观察 trajectory、提出机制、实现、review、跑实验、继续修改。最终用了 535 个可执行搜索环境，其中 495 个来自 GitHub issue-PR pair，40 个是 verifier-driven synthetic tasks；论文说总共跑了 3000+ 次实验和 60000+ 次 agent-environment interaction&lt;/p&gt;
+&lt;p&gt;&lt;img referrerpolicy="no-referrer" src="https://pbs.twimg.com/media/HSo5DbvaYAAuVtR?format=jpg&amp;name=medium"&gt;&lt;/p&gt;
+&lt;p&gt;最后真正留下来的精华，只有 4 大机制：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Action Fusion：把“修改文件”和紧接着的测试/运行命令融合进一次 tool request。典型情况从 3 次 API call 变成 2 次。&lt;/li&gt;
+&lt;li&gt;Online Context Compact：不是机械地定期压缩 context，而是在 plan step 完成时计算“继续保留这些历史”和“现在做一次 compact”哪个更划算，还把 prompt-cache rewrite cost 算进去。&lt;/li&gt;
+&lt;li&gt;ObservationPack：一个很大的 tool output 前两次完整发送，从第三次开始改成 stable handle + 约 1KB 的 head/tail excerpt，需要时再通过 handle 取原始内容。&lt;/li&gt;
+&lt;li&gt;Evidence-Preserving Reducer：对 build/test log 使用低成本模型提炼证据，但原始日志始终保留，并通过 deterministic verifier 检查 schema、hash、exit status、exact quote 等；验证失败就回退原始结果。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;p&gt;我因为脑子比较轴，总喜欢扩展关联到别的领域，于是想把这四大方法，也套在人肉学习上：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;合并动作：能连续做的事情不要反复切换。串行出现的解题步骤打包，批次进行，避免低效重复。探索之后立刻验证，而不是一个岔路跑远了再回头&lt;/li&gt;
+&lt;li&gt;清理上下文：每当学习或解题，有进展都反思当下思路，考虑下如何为接下来简化，不能当看小说一样囫囵吞枣背章节和习题答案&lt;/li&gt;
+&lt;li&gt;隔离支线：子问题展开放到一边不能影响主干思路&lt;/li&gt;
+&lt;li&gt;保留证据：子过程产生的中间结论，关键推理必须留痕&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;AI给我补充了很多reference&lt;/p&gt;
+&lt;h3&gt;合并动作&lt;/h3&gt;
+&lt;p&gt;Schoenfeld 给这个现象起名叫 "wild goose chase"（追野鹅）：他发现约60%的大学生解题时会选定一个方向就一路埋头走到底，直到时间耗尽都不回头反思；而当他训练学生每隔一段时间就问自己"我现在具体在做什么？为什么这么做？这对我有什么帮助？"之后，这种不做监控的比例从60%降到了20%，解题成功率也相应提高。更有意思的是，他后来观察一位数学教授解题——这位教授手头掌握的事实和方法其实比很多学生还少，解题过程中也生成了无数条可能的死路，但他没有被这些死路带偏，靠的就是频繁地、细粒度地检验"这条路值不值得走下去"&lt;/p&gt;
+&lt;h3&gt;清理上下文&lt;/h3&gt;
+&lt;p&gt;Catrambone关于子目标形成的研究描述了一个具体过程——学习者先把一串步骤按结构分组，然后自我解释"为什么这样分组"，最后把这个分组归纳成一个简洁的标签（子目标标签）。这三步合起来，正是"做完一段就反思、并把它压缩成一个可以往下带的简化单元"，跟你说的第二条几乎逐字对应。而它的反面，就是你说的"看小说一样囫囵吞枣"——只是线性地把内容或答案过一遍，不做任何分组、归纳、压缩，信息就只是流过去了，没有被结构化，也就没法被高效复用。&lt;/p&gt;
+&lt;h3&gt;隔离支线&lt;/h3&gt;
+&lt;p&gt;人类研究就是子目标标签（subgoal labeling）本身——Catrambone给出的经典例子是解方程"隔离变量→化简变量"：学生只需要在主线上记住这两个子目标，每个子目标内部具体怎么算是被封装起来的细节，不需要在思考整体解题结构时一直占用工作记忆。研究还发现，用子目标标签训练出来的学生，遇到步骤不同但子目标结构相同的新题时，迁移能力明显更强；而没有这种封装、只是记住老师板书完整步骤的学生，换一道结构相同但细节不同的题就容易失败——这正是"细节污染主干"的后果。这也呼应了国际象棋大师的组块（chunking）研究：高手把一串走法编码成一个组块整体记忆和调用，而不是逐步保持在工作记忆里，从而腾出容量去思考更高层的布局。&lt;/p&gt;
+&lt;h3&gt;保留证据&lt;/h3&gt;
+&lt;p&gt;Polya经典的解题四阶段（理解问题→拟定计划→执行计划→回顾）里，"回顾"这一步要求你把推理过程记录下来复查，而不是解完就扔；如果第2、3条里的"压缩""封装"做得太狠、把关键中间结论也一起丢了，你会既没法自查错误，也没法把这段经验迁移到下一个类似问题上。这也是为什么"元认知校准"（上一轮提到的）离不开留痕——你没法准确判断"我这一步到底对不对"，如果连这一步的关键推理都没有记录下来可供回看。&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;学习方法论的批判&lt;/h2&gt;
+&lt;p&gt;很多学习者，特别是中小学学生，对这些“显学”反而不知道。父母和老师也不会教。&lt;/p&gt;
+&lt;p&gt;虽然大部人聪明人能领悟到这一点，但是很多平庸的学生学到这四点教训已经太晚了。。。&lt;/p&gt;
+&lt;p&gt;因为传统学校的考试 测验的 reward 只看结果，不太关心你过程怎么来的。小学知识比较简单，留下来的坏毛病带到初中之后就麻烦了。&lt;/p&gt;
+&lt;p&gt;我家的娃就深受其害。在小学阶段，“只要答案对，就算成功”这个策略经常真的有效。题目短、知识点少、搜索空间小，靠记忆、模仿、反复练习也能得到不错的结果。于是很多低效习惯不会立刻付出代价。死记硬背就能拿个勉强过得去的分数。&lt;/p&gt;
+&lt;p&gt;到了初中以后，情况开始变化。题目的状态空间变大了，步骤变长了，知识之间开始相互依赖。此时如果学生一直没有形成，那么就会无意中陷入困惑：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;“我现在在解决哪一个子问题？”&lt;/li&gt;
+&lt;li&gt;“哪些信息已经没用了？”&lt;/li&gt;
+&lt;li&gt;“哪些东西应该暂时放到一边？”&lt;/li&gt;
+&lt;li&gt;“我的这个结论到底依据是什么？”&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这些能力，学习成本会突然上升。&lt;/p&gt;
+&lt;p&gt;客观的因素，大班制教学，老师也管不过来。只有精英教育 私教 遇到良师，或者就孩子被鼓励“多思考”，才可能戳破这一系列技巧。&lt;/p&gt;
+&lt;p&gt;小学时，“直接冲答案”很快，成绩又不错 → 学生得到正反馈。小时候看起来只是“不够仔细”的问题，几年后会表现成“学习能力不行”。&lt;/p&gt;
+&lt;p&gt;上面列举这四个技巧，我其实个人很早就懂得，无意中自己琢磨的，回顾了下，可能被小时候鼓励“更聪明的办法”太多次了，这里要感谢当时的父母，自己本身希望去掌握那个最快 最酷的解题技巧，所以算 “过程优化” 到极致作为一个附加 reward了。一个问题有多种解法，每种解法优劣都品鉴了一番，知道哪些坑哪些好。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;“这道题还有没有更短的路？”&lt;/li&gt;
+&lt;li&gt;“这个方法为什么比另一个好？”&lt;/li&gt;
+&lt;li&gt;“刚才卡住的地方以后怎么避免？”&lt;/li&gt;
+&lt;li&gt;“这个技巧能不能迁移到另一类题？”&lt;/li&gt;
+&lt;li&gt;“有没有一种方法能让我以后少想五步？”&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这就很接近论文里的 harness optimization 了。解题的意义不仅在于得到正确答案本身，还有在观察“解题算法本身”。&lt;/p&gt;
+&lt;p&gt;初中、高中我甚至有几起名场面，公开质疑老师出题出的有问题（50%翻车）🤣&lt;/p&gt;
+&lt;p&gt;当然，这个习惯也有其害处，我也吃过亏。三角函数大家都背公式，我就自己发明了一套自以为更好的理解框架。。。结果出题人更偏好教材公式能快速结果的，我那套不仅更复杂，容易翻车，而且还有“翻译”成本。。。囧。。。&lt;/p&gt;
+&lt;p&gt;考试的 reward 实际上更接近：在限定时间内，用低风险路径得到标准答案。&lt;/p&gt;
+&lt;p&gt;不过好处还是很明显，就是大多数问题理解得比普通人深入得多。特别是解析几何这种虽然被批判“不入流”但是几乎秒杀了教材党。。公式全靠自己推的，哪里怎么变换怎么用一清二楚。甚至圆锥体歪着斜着切这种问题都考虑到了（传统教材只有水平，垂直和顺着斜切）&lt;/p&gt;
+&lt;p&gt;这个亏一直吃到出来工作，长了很多教训。我对待任何事都是双层架构。一个是兼容傻逼的世俗层，一个是真理层。。。囧哈哈哈&lt;/p&gt;
+&lt;p&gt;其实真理层反复磨练到最后反而越来越简单。世俗层基本就是补丁接补丁越来越复杂。普通人搞不明白要崩溃的很多事情一眼看穿。。&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;后记&lt;/h2&gt;
+&lt;p&gt;毕业之后，发现学生时代最值得批判的，就是做题家思维。成年人的世界是没有标准答案的。甚至你需要去设置议题。当然这又是另外一个层次的东西了。&lt;/p&gt;
+&lt;p&gt;然后回头看，学生最幸福，也是最痛苦的一点，就是面临的所有问题，无论多困难，是必然有解的；而且往往正确解是唯一的。&lt;/p&gt;
+&lt;p&gt;成年人面对的事情，基本都有多个解。你 reward 去优化，无非是利弊的权衡；&lt;/p&gt;
+&lt;p&gt;最可怕的遭遇，无解，死胡同，到头来一场空。你去尝试解决一个不存在的问题，你又能学习到什么教训呢？时也，运也，命也。&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">est</dc:creator><pubDate>Wed, 23 Sep 2026 20:21:00 +0800</pubDate><guid isPermaLink="false">tag:None,2026-09-23:/2026/stdin-18</guid><category>stdin</category></item><item><title>Doherty 多尔蒂阈值</title><link>https://blog.est.im/2026/stderr-29</link><description>&lt;p&gt;前几天鼠标坏了。随手换了个新的，双飞燕。没想到这垃圾鼠标居然在 macbook 下有间歇性卡顿 失联问题，表现是光标不动&lt;/p&gt;
 &lt;p&gt;怀疑是 系统问题，驱动问题，鼠标本身，商家卖假货问题。最后想明白了，这几十元破玩意就tmd不值得去折腾心态。直接扔。&lt;/p&gt;
 &lt;p&gt;回想了一下，这玩意其实对工作影响比意料中的大得多。平时操作触摸板 键盘都是下意识的，根本不会去多想；&lt;/p&gt;
 &lt;p&gt;光标在显示器上一旦当场卡住，你大脑瞬间被吸引过去，从软件到硬件到购买决策，到损失厌恶，全部过一遍，恶心死了&lt;/p&gt;
@@ -2304,272 +2434,4 @@ if(config-&amp;gt;readbusy) {
 &lt;/blockquote&gt;
 &lt;p&gt;我觉得AI真有点东西的。清点生产资料也是被忽略的一环。如果我睡前都能盘点自己该做的事儿都做了，羊吃饱了，明天会更好，没啥落下的，那我肯定也睡得安稳啊。&lt;/p&gt;
 &lt;p&gt;但是现代人难就难在很多事是跨很多天的，入睡是非常不情愿的。如果有精力很多人甚至愿意熬夜。&lt;/p&gt;
-&lt;p&gt;都怪爱迪生，本来以为发明电灯泡给人类漫长的黑夜带来光明，没想到人类却用这玩意来加班和难眠！！😤 😤 😤 如果太阳下山就睡觉，就算失眠4小时你到23点也睡着了 😂&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">est</dc:creator><pubDate>Mon, 06 Jul 2026 15:51:00 +0800</pubDate><guid isPermaLink="false">tag:None,2026-07-06:/2026/stderr-23</guid><category>stderr</category></item><item><title>唯物主义「天命」论</title><link>https://blog.est.im/2026/stderr-22</link><description>&lt;p&gt;看到一篇雄文《&lt;a href="https://www.zhihu.com/question/576083946/answer/2055730121491879314"&gt;明末士大夫为什么毫无气节纷纷变节投降满清？&lt;/a&gt;》大受启发，想看原文的可以点开链接，下面是精简和摘录:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;因为程朱理学在理论存面存在漏洞，被鞑子无意之间利用了，事实上大部分的鞑子统治者在这方面，也都是知其然而不知所以然。&lt;br /&gt;
-不否认明末也有很多了不起的仁人志士，但如果你对中国历史有些疑惑，觉得似乎宋朝之后中国就有点不一样了，那恭喜你，你的直觉是对的。由于元代留下的遗毒过甚，明朝没能拨乱反正，元明清三代，所有的皇帝和“儒家士大夫”，都是失礼而不自知之人。元明清三代的所谓“礼法”，放在先秦两汉的大学者们面前，诸子百家不管哪家，都一眼就能看出来全是假礼。如果墨子这个儒家最大的反对者看见了，估计更是嘲笑孔子能笑的棺材板都压不住。这些“假礼”，就是元明清三代那些僵化的等级秩序、规规矩矩。出于汉人的直觉，厌恶这些是再正常不过了。&lt;br /&gt;
-一、建用皇极&lt;br /&gt;
-宋以前儒学，与宋明理学不是同一种思想。先秦至汉唐儒学的最高原则是天命与大中之道，而不是君主本身。朱熹重新解释《尚书·洪范》"皇极"，从九畴排第五提高到最高优先级， 把它解释为 君主是天下的最高标准，天下围绕君主建立秩序。，从而改变了儒家的政治哲学。&lt;br /&gt;
-二 · 定于一尊&lt;br /&gt;
-元朝恢复科举时规定：四书、五经必须按照朱熹注释考试，使其成为与功名利禄直接挂钩的唯一标准。于是理学不再只是一个前朝有争议的一个"逆党"学说，而成为整个帝国唯一的意识形态。明清完全继承了这一制度。&lt;br /&gt;
-三、诸夏之亡&lt;br /&gt;
-《论语》中孔子其实始终强调，华夏共同体高于个人君臣关系。例如孔子称赞管仲，就是因为即使“不忠”，改事新君，只要能够保卫华夏，也仍然值得肯定。但程朱理学更加重视君臣名分、上下秩序、皇权连续性，于是出现一种新的逻辑：即使皇帝是异族，也不能没有皇帝。1908年孔令贻把德国皇帝威廉二世肖像迎进了孔府&lt;br /&gt;
-四、天命之礼&lt;br /&gt;
-孔子的礼，本质上来源于 天命。所以：礼约束君主，君主不能创造礼。而理学实践中却逐渐变成皇帝成为礼法的最终解释者。于是礼不再约束权力，而成为权力工具。&lt;br /&gt;
-五、凡心之仁&lt;br /&gt;
-基督教的本质是爱与诫二元一体的罪文化，那么发源自中国的东亚文化，本质就是仁与礼二元一体的耻文化。&lt;br /&gt;
-基督教中所谓的爱，叫做“Agape”。这是一个专有词，它有多重要呢？欧洲所有国家，不管哪种语言，它的拼写方式都是一致的，一字不易。“Agape”的源头是神，它是一种具有普世性的博爱。而“仁”和“Agape”的区别在于，中国的“仁”，其源头是凡人，是“己所不欲勿施于人”，它是一种推己及人的有差等之爱。&lt;br /&gt;
-华夷之辩是“礼”的边界，“礼”是对“仁”的约束。面对民族危机时，个人、家庭利益、官职利益、君臣秩序都会压倒共同体利益。因此许多人最终选择保身、顺从、投降，而不是抗清。&lt;br /&gt;
-（注：这里其实用 “异端” 和 “有经人” 对比更加强烈）&lt;br /&gt;
-六、知行合一&lt;br /&gt;
-孔子、董仲舒的礼法，理论源头是天帝，实践中确实也按天帝至上来执行。而程朱理学的礼法，理论源头是天理，但是实践中，理学的礼法源头压根不是天理！在以前，经筵都是大儒给皇帝讲课，到了乾隆那，变成皇帝给大儒讲课了。&lt;br /&gt;
-先秦两汉礼法的源头是神？因为礼法的源头就不能是一个具体的人！礼法是用来栓人的保守性，如果礼法的源头是人，那么栓着你的绳子就牵在那个人手上，你就是那个人的奴才，礼法就成了赤裸裸的等级压迫。&lt;br /&gt;
-如果天帝无法约束皇权，那么天帝也不能保护皇权。天帝不能保护皇权，皇帝就只能自己保护自己，于是朱元璋废除了丞相制度。所谓明清飞速膨胀的君权，其实和南北朝盛产的疯子皇帝有异曲同工之妙。跟着龙椅遗传的精神病，本质是因为坐在龙椅上的人没有安全感。没有人相信天命，连皇帝本人都不相信自己真正“受命于天”。而对于儒生大臣，后人说张居正是“常务副皇帝”。&lt;br /&gt;
-七、失礼之国&lt;br /&gt;
-（作者的一些感想，比较杂，不引述了）&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;看完之后真过瘾。本来想着今天的键政就到这了。&lt;/p&gt;
-&lt;p&gt;特别是第二点，最近几年我逐渐从对“科举”的好感，降低了。学生时代总有那么一些“考功名”的亲切感，但是现实世界还是觉得“军功合伙人”更优。&lt;/p&gt;
-&lt;p&gt;但是有一个更大的疑惑，转念一想不对劲。于是补充一点我自己的观点。&lt;/p&gt;
-&lt;p&gt;皇帝这个岗位，从秦到唐，都是一把手承包了世俗君权，和神权的双重责任。皇帝在赵政之前实际上是两个岗位，大祭司负责给「帝」传话，王中王称皇负责行政。&lt;/p&gt;
-&lt;p&gt;宋以后皇帝把道德秩序这一块外包给儒生了，自己关起门做皇家经营了，剩下的全是算计。&lt;/p&gt;
-&lt;p&gt;说得直白点汉唐的皇帝还勉强要点b脸，遇到难堪的事，还得想办法给手下和民间一点说法。&lt;/p&gt;
-&lt;p&gt;宋以后就是无情的 打工 - 服从 叙事。&lt;/p&gt;
-&lt;p&gt;我是真的越来越看不起大怂国。我把内心抱怨说给AI，AI指出&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;宋代皇帝其实仍然非常受士大夫制约&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;我反驳：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;例如宋代皇帝其实仍然非常受士大夫制约，需要合理分赃才能一起搜刮老百姓。造成有史以来遍地造反运动。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;AI当时就不乐意了。把教科书和网上常见吹捧宋朝的资料抬出来了。比如说宋朝其实造反的规模和烈度没那么多&lt;/p&gt;
-&lt;p&gt;但是我想说，你把大半个中国都丢干净了，西夏 辽金的汉人躺棺材里了，当然北境无人“造反”了。因为别人都被占领了。&lt;/p&gt;
-&lt;p&gt;秦汉 隋唐造反不就是关中和河北人打架吗？这一毛病从姬发那一辈儿就没停过。天子这一岗位说的直白点就是给大家当调停人，pax sinica 。你宋说白了就一个节度使，偏安江淮一隅，还这么多造反的。呸！&lt;/p&gt;
-&lt;p&gt;AI 被这个角度刁钻的回答干懵逼了。说你这个框架，衡量皇朝优劣的标准不是"有没有起义"，而是 能不能维持整个华夏共同体的秩序。那么很多评价都会变。最后还嘴硬一句，宋朝其实内部治理得很好啦，最终是被蒙古人迫不得已干趴下的。&lt;/p&gt;
-&lt;p&gt;我当时就火了。对蒙古你好意思讲“战争”？实际上周 秦 汉 唐 的草原治理能力，也是 “天命” 的支柱啊。周武王牧誓，手里拿着的就是牦牛尾巴！不是象征汉人农耕的的锄头！纵观宋、金两朝，对草原的经略就是完全失败的。垃圾！&lt;/p&gt;
-&lt;p&gt;因为刚刚前一阵子看到 《&lt;a href="https://www.bilibili.com/video/BV1u8KZ68E1R/"&gt;金朝对草原的减丁，为何遏制不了蒙古的崛起&lt;/a&gt;》 这里 cue 一下&lt;/p&gt;
-&lt;p&gt;宋辽金真是一群乡镇企业家暴发户械斗。烂得要命。唉。你仔细想一下宋吹，那些证据，多少是近代人牵强附会的？宋朝人自己觉得骄傲吗？给好评的，都是后世明清没当上官的文人吧？&lt;/p&gt;
-&lt;p&gt;天命最大的意义在哪里？给人指明前行的道路，给人以希望。即便黑暗中世纪教会和君权也是这么分工的。挫宋做到了啥？苟且罢了。&lt;/p&gt;
-&lt;p&gt;有人说，大宋“杯酒释兵权”终结了五代十国，功劳巨大。但从“天命”的角度讲，国之大事，在祀与戎。你老赵家没能给一个民族找到希望，也干不过架，你这个王权就没有存在的根基。说得直白一点，东亚这篇土地，从周天子那一辈人开始就是武装殖民模式。你不殖民，有的是蒙古人 女真人殖你的民。&lt;/p&gt;
-&lt;p&gt;其实一开始那个文章的框架来讨论一个具体的事就很有力度。如何评价北宋赵光义毁掉太原？&lt;/p&gt;
-&lt;p&gt;具体的事迹大家可以问下AI。正如文章里所说的，丢掉了 华夷之辩 这个“天命”。那别人河北幽州人全体投夷你也怨不了谁。你之后靖康之变都是报应。&lt;/p&gt;
-&lt;p&gt;网上对 “内亚” 的说法一直有巨大争议，阿姨那边一直说“武德注入”，实际上征服，殖民 和扩张这些说法太粗暴。但是如果天子不提供秩序，那么你也别怨替代秩序的出现；无德，丢天命，天命归别人。似乎就是这么简单的道理&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;政治空间是没有真空的&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;谁的组织度更高，谁的天命就更强。&lt;/p&gt;
-&lt;p&gt;联系到欧洲发家，启蒙运动 文艺复兴，是在抛弃君权 神权 这个思维定势下做到的。更厉害。&lt;/p&gt;
-&lt;p&gt;不过替代品似乎是——资本？一个侧面就是牛津剑桥主打神学专业，改成政治经济学&lt;/p&gt;
-&lt;p&gt;资本的扩张我觉得按照脉络去捋，是蒸汽机，发展纺织业，全球贸易。 归根结底是煤铁革命，但是仔细想，实际上是把战争的边界改成向几百亿年的太阳能存款挖出来消耗了。&lt;/p&gt;
-&lt;p&gt;农牧时代是拿当季的太阳能来pk。谁能提供摩擦最小的当季太阳能分配，谁就在古代“有德”，有“天命”&lt;/p&gt;
-&lt;p&gt;现代社会一样的。全球变暖，污染，绿色能源等，一直到社会公平正义。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;天命天命，天就是天上射下来的能量，命就是草木人间生命。&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;哈哈哈这个解释如何？是不是很唯物。&lt;/p&gt;
-&lt;p&gt;天（能源）与命（生命负载）之间，能否实现最高效的转换与分配？&lt;/p&gt;
-&lt;p&gt;生命本身就是一个“负熵的过程”。生命存在的意义，就是把“天”射下来的能量，通过光合作用、通过食物链，转化为有序的社会结构、文明形态和思想结晶。&lt;/p&gt;
-&lt;p&gt;如果转换效率高、分配摩擦小： 生命、社会繁荣，这就叫“天命有归”。&lt;/p&gt;
-&lt;p&gt;如果中间商抽成太多，腐败、内卷、战略自残（如毁太原）： 能量（天）射下来了，却无法高效转化为“命（繁荣）”，能量在内部耗散了，这就是天命将尽。&lt;/p&gt;
-&lt;p&gt;大宋这种对外又送又怂，把“皇帝”这个singleton强行改成“兄弟之国”， 对内三冗，取缔军功兑现，换成“理学”考试，用首都的局部繁荣掩盖整体的失败。就是丢 天命 的典型。&lt;/p&gt;
-&lt;p&gt;古代的战争：争夺的是对“天光（土地）”的占有权。&lt;/p&gt;
-&lt;p&gt;现代的危机：焦虑的是“天光（太阳能存款）”快烧完了，我们该如何重新设计“命（人类社会）”的分配效率。&lt;/p&gt;
-&lt;p&gt;政治的本质就是能量管理工程。&lt;/p&gt;
-&lt;p&gt;天命 在过去，看重国体和人君，现代看政治制度科技政策。资本这个玩意，纵然有那么多毛病，但是很好的执行了“天命”&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">est</dc:creator><pubDate>Thu, 02 Jul 2026 16:07:00 +0800</pubDate><guid isPermaLink="false">tag:None,2026-07-02:/2026/stderr-22</guid><category>stderr</category></item><item><title>我的 Vibe Coding 最佳实践——ADR文档</title><link>https://blog.est.im/2026/stdout-24</link><description>&lt;p&gt;工作和业余也用AI写代码，大大小小项目都经历了。从 rules, skills, spec, agent 到  harness 都玩过了&lt;/p&gt;
-&lt;p&gt;从AI嘴里发现一条比较稳的套路——ADR文档&lt;/p&gt;
-&lt;p&gt;rule, skills, spec 这些东西最大的问题就是瞎jb指挥。ADR 的好处是记录why，以及决策演变历史。&lt;/p&gt;
-&lt;p&gt;贴一段&lt;a href="https://github.com/est/rss_aggr/blob/main/docs/ADR/001.project.ADR-howto.md"&gt;我整理的 ADR 文档&lt;/a&gt;就明白了： &lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-markdown"&gt;---
-title: 如何使用 ADR
-id: ADR-001
-date: 2026-06-26 09:01:21
-status: accepted
----
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h1&gt;ADR&lt;/h1&gt;
-&lt;p&gt;ADR（Architecture Decision Record，架构决策记录）的核心目标很简单：&lt;strong&gt;记录为什么做出了某个重要技术决策，而不是记录系统长什么样。&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;目前比较常见的是 MADR、Nygard ADR 两种风格，但组织方式都大同小异。&lt;/p&gt;
-&lt;p&gt;一个团队通常会按下面几个层次组织。&lt;/p&gt;
-&lt;h2&gt;1. 一个 ADR 对应一个决策&lt;/h2&gt;
-&lt;p&gt;不要一个 ADR 写整个系统设计。&lt;/p&gt;
-&lt;p&gt;好的粒度例如：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;ADR-001 使用 PostgreSQL 作为主数据库&lt;br /&gt;
-ADR-002 API 使用 REST 而不是 GraphQL&lt;br /&gt;
-ADR-003 服务间通信采用 gRPC&lt;br /&gt;
-ADR-004 用户认证采用 OAuth2 + JWT&lt;br /&gt;
-ADR-005 使用事件驱动 Outbox Pattern&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;而不是&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;系统架构设计.md&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;因为几年以后，很难知道某个结论为什么来的。&lt;/p&gt;
-&lt;h2&gt;2. 编号保持永久&lt;/h2&gt;
-&lt;p&gt;一般都会固定编号。&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;adr/
-
-0001-use-postgresql.md
-0002-use-rest-api.md
-0003-use-grpc.md
-0004-use-oauth2.md
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;编号一旦存在，就不要修改。&lt;/p&gt;
-&lt;p&gt;即使后来废弃：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;0003-use-grpc.md
-Status: Superseded by ADR-0018
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;这样引用不会失效。&lt;/p&gt;
-&lt;h2&gt;3. Status 非常重要&lt;/h2&gt;
-&lt;p&gt;一般都有状态。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Proposed&lt;/li&gt;
-&lt;li&gt;Accepted&lt;/li&gt;
-&lt;li&gt;Deprecated ❌&lt;/li&gt;
-&lt;li&gt;Superseded 🔄&lt;/li&gt;
-&lt;li&gt;Rejected ⛔️&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;例如：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;Status: Accepted
-Date: 2026-06-19 01:02:03
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;如果后来换了：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;Status: Superseded
-Superseded by: ADR-0018
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;而新的 ADR：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;ADR-0018
-Supersedes: ADR-0003
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;形成完整历史。&lt;/p&gt;
-&lt;h2&gt;4. 一个 ADR 的典型模板&lt;/h2&gt;
-&lt;pre&gt;&lt;code class="language-markdown"&gt;---
-title: ADR-008 使用 PostgreSQL
-id: ADR-008
-date: 2026-06-18 12:32:46
-status: accepted
----
-
-
-## Context
-
-目前需要：
-
-- ACID
-- JSON 查询
-- 成熟生态
-
-候选：
-
-- PostgreSQL
-- MySQL
-- MongoDB
-
-## Decision
-
-选择 PostgreSQL。
-
-## Consequences
-
-优点：
-
-- SQL 功能完整
-- JSONB 支持优秀
-- 社区成熟
-
-缺点：
-
-- 运维复杂度略高
-- 分库分表方案需要额外设计
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;可以再加：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;Alternatives
-
-Decision Drivers
-
-Trade-offs
-
-References
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h2&gt;5. 按领域组织，而不是按时间（可选）&lt;/h2&gt;
-&lt;p&gt;在一个目录，用文件名体现领域：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;008.backend.use-grpc.md
-010.security.use-oauth.md
-012.frontend.react-query.md
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;这样编号保持连续，查找也方便。&lt;/p&gt;
-&lt;h2&gt;6. ADR 之间允许引用&lt;/h2&gt;
-&lt;p&gt;例如：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;ADR-0015
-
-Context
-
-依赖：
-- ADR-0002
-- ADR-0008
-
-Decision
-
-由于 ADR-0008 已经确定 PostgreSQL，
-因此 Outbox Pattern 可以直接利用事务。
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;形成决策网络，而不是孤立文档。&lt;/p&gt;
-&lt;h2&gt;7. ADR 只记录"为什么"&lt;/h2&gt;
-&lt;p&gt;这是很多团队最容易犯的错误。&lt;/p&gt;
-&lt;p&gt;不要写：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;Controller
-Service
-Repository
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;这是设计文档。&lt;/p&gt;
-&lt;p&gt;ADR 应该写：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;为什么不用 MongoDB？
-
-为什么不用 GraphQL？
-
-为什么采用 Saga？
-
-为什么拆成多个 Service？
-
-为什么 Event Sourcing 被放弃？
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;重点永远是 &lt;strong&gt;Why&lt;/strong&gt;，而不是 &lt;strong&gt;What&lt;/strong&gt;。&lt;/p&gt;
-&lt;h2&gt;8. 和设计文档分开&lt;/h2&gt;
-&lt;p&gt;过去很多团队会这样组织：&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;文档&lt;/th&gt;
-&lt;th&gt;回答的问题&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;RFC / Proposal&lt;/td&gt;
-&lt;td&gt;未来准备怎么做？&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;ADR&lt;/td&gt;
-&lt;td&gt;为什么这样做？&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Architecture Doc&lt;/td&gt;
-&lt;td&gt;系统如何组织？&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Design Doc&lt;/td&gt;
-&lt;td&gt;某个功能如何实现？&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Runbook&lt;/td&gt;
-&lt;td&gt;如何运维？&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;流程是 RFC → ADR → Design Doc → Code。&lt;/p&gt;
-&lt;p&gt;RFC 用于讨论方案，达成决策后沉淀为 ADR；随后具体实现细节写入设计文档，最终落实到代码。这样既保留了决策依据，又避免 ADR 演变成冗长的设计说明。&lt;/p&gt;
-&lt;p&gt;在AI 时代，更简洁，易维护的方式是：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;ADR 形成决策历史；&lt;/li&gt;
-&lt;li&gt;DESIGN.md （小项目也可以直接放 README.md） 反应当前设计，大量引用 ADR 而不是重复。&lt;/li&gt;
-&lt;li&gt;迭代排期（spec，phase文档等）引用ADR作为缘由&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr /&gt;
-&lt;p&gt;AI编写的项目，到后期，泥潭就是大量的docs。ADR 的好处是不用修订，全面引用+supersed。保证决策链清晰，低上下文成本&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">est</dc:creator><pubDate>Fri, 26 Jun 2026 09:40:00 +0800</pubDate><guid isPermaLink="false">tag:None,2026-06-26:/2026/stdout-24</guid><category>stdout</category></item></channel></rss>
+&lt;p&gt;都怪爱迪生，本来以为发明电灯泡给人类漫长的黑夜带来光明，没想到人类却用这玩意来加班和难眠！！😤 😤 😤 如果太阳下山就睡觉，就算失眠4小时你到23点也睡着了 😂&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">est</dc:creator><pubDate>Mon, 06 Jul 2026 15:51:00 +0800</pubDate><guid isPermaLink="false">tag:None,2026-07-06:/2026/stderr-23</guid><category>stderr</category></item></channel></rss>
