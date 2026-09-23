@@ -12,7 +12,7 @@
 	<atom:link href="https://v1sta.xyz/feed/" rel="self" type="application/rss+xml" />
 	<link>https://v1sta.xyz</link>
 	<description>远景的幻想空间</description>
-	<lastBuildDate>Tue, 22 Sep 2026 21:26:18 +0000</lastBuildDate>
+	<lastBuildDate>Wed, 23 Sep 2026 08:20:44 +0000</lastBuildDate>
 	<language>zh-Hans</language>
 	<sy:updatePeriod>
 	hourly	</sy:updatePeriod>
@@ -32,6 +32,110 @@
 <atom:link rel="hub" href="https://websubhub.com/hub"/>
 <atom:link rel="self" href="https://v1sta.xyz/feed/"/>
 	<item>
+		<title>随想：有电就能用的NAS个人服务器</title>
+		<link>https://v1sta.xyz/think/%e9%9a%8f%e6%83%b3%ef%bc%9a%e6%9c%89%e7%94%b5%e5%b0%b1%e8%83%bd%e7%94%a8%e7%9a%84nas%e4%b8%aa%e4%ba%ba%e6%9c%8d%e5%8a%a1%e5%99%a8/</link>
+					<comments>https://v1sta.xyz/think/%e9%9a%8f%e6%83%b3%ef%bc%9a%e6%9c%89%e7%94%b5%e5%b0%b1%e8%83%bd%e7%94%a8%e7%9a%84nas%e4%b8%aa%e4%ba%ba%e6%9c%8d%e5%8a%a1%e5%99%a8/#respond</comments>
+		
+		<dc:creator><![CDATA[域主 V1STA]]></dc:creator>
+		<pubDate>Wed, 23 Sep 2026 08:20:41 +0000</pubDate>
+				<category><![CDATA[技术]]></category>
+		<category><![CDATA[随想]]></category>
+		<guid isPermaLink="false">https://v1sta.xyz/?p=7938</guid>
+
+					<description><![CDATA[在正在开发的混乱不堪的土地上建立数字帝国是一件极其挑战的事情。正如同工地上的帐篷，我需要一种临时提供服务的解决 &#8230; <a href="https://v1sta.xyz/think/%e9%9a%8f%e6%83%b3%ef%bc%9a%e6%9c%89%e7%94%b5%e5%b0%b1%e8%83%bd%e7%94%a8%e7%9a%84nas%e4%b8%aa%e4%ba%ba%e6%9c%8d%e5%8a%a1%e5%99%a8/" class="more-link">继续阅读<span class="screen-reader-text">随想：有电就能用的NAS个人服务器</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[
+<p class="wp-block-paragraph">在正在开发的混乱不堪的土地上建立数字帝国是一件极其挑战的事情。<br>正如同工地上的帐篷，我需要一种临时提供服务的解决方案……我看向了那个性能恐怖但体验欠佳的Latitude（i7-8650U 4C8T 16GB，这已经是全村的希望了），在构想一种流动式NAS服务器。</p>
+
+
+
+<p class="wp-block-paragraph">但是PVE也好、TrueNAS、群晖、OMV、飞牛也罢，这些本质上都是Server级别的基建系统。但是全都没有真正意义上地支持笔记本电脑，调度和电池系统都变得不可用。换句话说，纵观整个PC机的历史，パソコン与鲭虽然同源，却因为某种人为的商业策略产生了生殖隔离（一大程度是Windows系的影响，另一说是SLA合同为了降低奇怪硬件的排查效率干扰和培训成本分流）致使市面上极其难见基于笔记本平台构建的服务器产品。即便是在XP MCE和Vista世代，微软有能把ThinkPad T42玩出花的解决方案展示——将笔记本作为Media Center的媒体库。但是这依然算不上真正的Server，并且也不推荐你在上面安装WHS2007（也就是最低阶的WinServer 2003）不过那个年代，家用对Server的依赖程度不高，即便是别墅。</p>
+
+
+
+<p class="wp-block-paragraph">所以消费级别的Windows显然足以大多数家用场合使用了。<br>去年这个时候我开始研究MPD和DietPi这样的单片机系统作为数字音频播放器，也就是数播/网播。本质上来说，是解耦「提供服务」与「服务器」的关系：究竟什么时候真的要用上类似小型机架构的基建服务器，还是像Windows 3.11 for Workgroups一样虽然有网络但人人平权的简单制度。</p>
+
+
+
+<p class="wp-block-paragraph">虽然在技术层面上，dnsmasq、SSO等中心制度的服务器管理技术与独立网卡的硬件系统仍旧有用，但是对于小型的场景来说，我希望它们简单化，不必像基建式小型机一样依赖各种服务器技术和硬件。<br>至少先从干掉RJ45开始。<br>结合实际上的应用场景，在拖地大扫除的时候，在我的区位规划中，落地电视和床头柜是唯二几乎稳定不动且不受集权管制的区域（类似于藩属）；或者像房车、出门在外这种场景无法也不打算部署整套Homelab。这些需求很特殊并且经济效益是不如中央服务器搭建内网穿透。但我开始<strong>恐慌哇塞秘境</strong>的存在。<br>事实上，大概几年前我就曾用一台Windows平板作为下载机，因为寨板的键盘实际难用，它也一定程度上承担了流动式服务器的功用。随用随关，没电了也没关系。</p>
+
+
+
+<p class="wp-block-paragraph">总而言之，我研究出来各种应用需求对网线与在线状态的依赖程度，以及如何解耦：</p>
+
+
+
+<ul class="wp-block-list">
+<li>固定：Home Assistant自动化系统是基建性质，必须部署在固定设备保持24小时开机。除非使用Zigbee2MQTT网关将控制与管理解耦。</li>
+
+
+
+<li>流动：简单的文件共享、媒体库不一定需要使用真正的阵列和存储池系统，是否固定24小时开启取决于对接的应用需求。</li>
+
+
+
+<li>固定：但iSCSI、VHD以及NVR存储后端还是应该24小时开机。</li>
+
+
+
+<li>流动：音频播放器本身是可以轻易地移植的系统，不听了随时可以关闭。</li>
+
+
+
+<li>固定：BitTorrent下载需要稳定的存储池和宽带网络接入支撑，也尽可能24小时开启。</li>
+
+
+
+<li>流动：RSS订阅器对固定设施的依赖程度很低，随缘。</li>
+
+
+
+<li>固定：邮件服务器，即便是内网的通知系统依然是同理的，必须24小时开机。</li>
+
+
+
+<li>流动：Minecraft Server服务器只要不是满人大服，或者只是分担主力机性能，那么也不是一个需要长期开机的需求。</li>
+
+
+
+<li>流动：Web Server LNMP，实际上依然是取决于需求，但本地WordPress开发也并不是那么需求长期开机。</li>
+
+
+
+<li>固定：虚拟桌面VDI，考虑到调度问题，尽可能使用真正的虚拟化平台。</li>
+</ul>
+
+
+
+<p class="wp-block-paragraph">笔记本的电池也是一个不错的UPS，虽然很多人说电池也有失效风险。</p>
+
+
+
+<p class="wp-block-paragraph">但我个人觉得健康的电池带来的优势作为有头服务器依然非常明显，我此时还想到一个用ThinkPad X230T/富士通T726搭建Drawpile电子画板的方案。还可以运行简单的WebView Kiosk浏览器来操作Home Assistant与Mopidy的Web UI。这个灵感源于Unraid也提供了一种有头启动打开本机管理器的引导选项。<br>上述的想法也正是考虑到「如果服务器没电了怎么办」的情况。这实际上已经脱离当今随Xeon推出抗衡小型机基建架构的服务器思维，转而类似90年代的网络平权的运行模式。</p>
+
+
+
+<p class="wp-block-paragraph">操作系统也变得不重要。我之前有看到过一篇文章是基于Fedora Core OS构建的简易NAS系统。当然还有<a href="https://perfectmediaserver.com/" target="_blank" rel="noopener">Perfect Media Server</a>这样的教程书体系。我自己也在尝试过将DietPi装进SD卡中运行，上到Latitude的8650U、下到Venue 8 Pro的Z8550，如果它能运行在Ventoy上那么可移植性会进一步增加。</p>
+
+
+
+<p class="wp-block-paragraph">虽然我不用Mac，但是根据这种应用式解耦，在一台Mac Mini或Macbook上运行也并不是难点。</p>
+
+
+
+<p class="wp-block-paragraph">选择何种的文件系统与存储池管理方式，也是一个具有争议的问题。</p>
+
+
+
+<p class="wp-block-paragraph">事已至此，先用D525或NTFS硬盘柜顶着吧，大多数人应该会这样想。</p>
+
+<p><a href="https://v1sta.xyz/think/%e9%9a%8f%e6%83%b3%ef%bc%9a%e6%9c%89%e7%94%b5%e5%b0%b1%e8%83%bd%e7%94%a8%e7%9a%84nas%e4%b8%aa%e4%ba%ba%e6%9c%8d%e5%8a%a1%e5%99%a8/" rel="nofollow">来源</a></p>]]></content:encoded>
+					
+					<wfw:commentRss>https://v1sta.xyz/think/%e9%9a%8f%e6%83%b3%ef%bc%9a%e6%9c%89%e7%94%b5%e5%b0%b1%e8%83%bd%e7%94%a8%e7%9a%84nas%e4%b8%aa%e4%ba%ba%e6%9c%8d%e5%8a%a1%e5%99%a8/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+		<enclosure url="https://v1sta.xyz/wp-content/uploads/2026/03/V1sta-Orb-Output512-2.png" length="199214" type="image/png"/><media:content url="https://v1sta.xyz/wp-content/uploads/2026/03/V1sta-Orb-Output512-2.png" width="512" height="512" medium="image" type="image/png"/>	</item>
+		<item>
 		<title>少女动画发现与感想</title>
 		<link>https://v1sta.xyz/acg/%e5%b0%91%e5%a5%b3%e5%8a%a8%e7%94%bb%e5%8f%91%e7%8e%b0%e4%b8%8e%e6%84%9f%e6%83%b3/</link>
 					<comments>https://v1sta.xyz/acg/%e5%b0%91%e5%a5%b3%e5%8a%a8%e7%94%bb%e5%8f%91%e7%8e%b0%e4%b8%8e%e6%84%9f%e6%83%b3/#respond</comments>
@@ -699,126 +803,6 @@
 <p><a href="https://v1sta.xyz/acg/%e7%94%9f%e8%8d%89%e6%84%8f%e8%af%86%e6%b5%81%ef%bc%9a%e7%94%9f%e5%8c%96%e5%8d%b1%e6%9c%ba%ef%bc%88%e5%ad%97%e9%9d%a2%e6%84%8f%e6%80%9d%ef%bc%89/" rel="nofollow">来源</a></p>]]></content:encoded>
 					
 					<wfw:commentRss>https://v1sta.xyz/acg/%e7%94%9f%e8%8d%89%e6%84%8f%e8%af%86%e6%b5%81%ef%bc%9a%e7%94%9f%e5%8c%96%e5%8d%b1%e6%9c%ba%ef%bc%88%e5%ad%97%e9%9d%a2%e6%84%8f%e6%80%9d%ef%bc%89/feed/</wfw:commentRss>
-			<slash:comments>0</slash:comments>
-		
-		
-		<enclosure url="https://v1sta.xyz/wp-content/uploads/2026/03/V1sta-Orb-Output512-2.png" length="199214" type="image/png"/><media:content url="https://v1sta.xyz/wp-content/uploads/2026/03/V1sta-Orb-Output512-2.png" width="512" height="512" medium="image" type="image/png"/>	</item>
-		<item>
-		<title>OpenTabletDriver开源驱动拯救新帝数位屏尸体</title>
-		<link>https://v1sta.xyz/life/opentabletdriver-cintiq/</link>
-					<comments>https://v1sta.xyz/life/opentabletdriver-cintiq/#respond</comments>
-		
-		<dc:creator><![CDATA[域主 V1STA]]></dc:creator>
-		<pubDate>Sun, 13 Sep 2026 09:16:08 +0000</pubDate>
-				<category><![CDATA[ACG]]></category>
-		<category><![CDATA[技术]]></category>
-		<category><![CDATA[日常]]></category>
-		<category><![CDATA[随想]]></category>
-		<category><![CDATA[Wacom]]></category>
-		<category><![CDATA[数位屏]]></category>
-		<category><![CDATA[数位板]]></category>
-		<category><![CDATA[绘画]]></category>
-		<guid isPermaLink="false">https://v1sta.xyz/?p=7876</guid>
-
-					<description><![CDATA[前段时间不是搞了一台新帝DTK-2100也就是21UX Gen2嘛，可惜液晶部分是坏的。不过好在笔触的数位板功 &#8230; <a href="https://v1sta.xyz/life/opentabletdriver-cintiq/" class="more-link">继续阅读<span class="screen-reader-text">OpenTabletDriver开源驱动拯救新帝数位屏尸体</span> <span class="meta-nav">&#8594;</span></a>]]></description>
-										<content:encoded><![CDATA[
-<p class="wp-block-paragraph">前段时间不是搞了一台新帝DTK-2100也就是21UX Gen2嘛，可惜液晶部分是坏的。<br>不过好在笔触的数位板功能没有坏，理论上就是一台超大号数位板。<br>本质上来说，官方的驱动也是可以把整个数位屏当成数位板使用的，只是不支持调节输入区域（为了和影拓数位板作出区分）。另外DTK-2100的驱动真的是太老了，虽然并不是不能用。</p>
-
-
-
-<p class="wp-block-paragraph">然后隔了两个月弄了一台IPS的方屏打算做kiosk用，想着怎么把这个数位屏当作Home Assistant的控制板（形态极其科幻且巨大，请脑补）。我将其放在一台打印机置物架上，然后用VESA支撑IPS显示器。<br>因为实际上遮挡了一部分空间，存在顶部的盲区。我设想它应该运行一个专门的界面，可以用Rainmeter做，这个盲区就用来显示类似侧边栏的工具，但是在顶部。可以参考Windows Longhorn的一些概念图。如果用原装驱动的话，就是这样了。</p>
-
-
-
-<p class="wp-block-paragraph">后来发现了OpenTabletDriver这个用来使用国产数位板的开源驱动，<br>这个驱动本身在音游玩家和Linux社区的流行度就很高，有丰富的插件生态和高机能支持。因为是直接和数位板硬件通信，所以延迟可以做得很低。<br>除了国产/台湾系的数位板厂商（在数位板界两岸一家亲，本质同源，以下统称国产），也支持Wacom本家的数位板和屏，包括这台上古的21UX。不过OTD似乎不能和其他数位板驱动同时使用（存疑），建议卸载所有的数位板驱动后再去使用。</p>
-
-
-
-<p class="wp-block-paragraph">OTD驱动最大的特点是可以调节数位屏的输入区域，这样就可以把这个超大号数位板缩小起来用，也可以搭配带鱼屏或者三屏的区域。（说起来超大号数位板PTK-1240占地面积比DTK-2100其实更大）</p>
-
-
-
-<p class="wp-block-paragraph">OTD本身除了相对/绝对鼠标的光标模式外（没有手势也不能滚动，类似于WindowsXP），还可以实现Windows Ink的协议，<br>但一些Windows Ink协议的实现是需要安装额外驱动的，国产数位板似乎也需要WinUSB（但我已经不用国产数位板了）有一个Windows Pointer是不需要安装驱动也可以用的，类似于各种笔触电脑的默认免驱效果。<br>试着用自带UWP截屏软件画Q娃，压感也是勉强可用的。</p>
-
-
-
-<span id="more-7876"></span>
-
-
-
-<p class="wp-block-paragraph">OTD也可以映射数位板的实体按键，但背部的触控条暂时并不能用。<br>所以21UX正面的那个圆形切换键就真的变成了一个快捷键。<br>本来21UX有左右2组长方形的ExpressKeys，每组8个键，总计16个；<br>因为圆形切换键的加入，变成了每组9个，共计18个键。<br>但OTD的驱动功能非常简单，我也没找到真正按应用适配的方式，所以只是像客制化游戏键盘那样设置宏键。所以我给映射到了媒体控制键。总之没什么实用性。</p>
-
-
-
-<p class="wp-block-paragraph">实际使用的体验还是差强人意的，<br>首先手眼分离的数位板，从形态上就做不到像数位屏那样直接在屏幕上雕刻的直观感受，一开始我真的想过用一个落地VESA架像在画室一样挥笔；<br>21UX巨大的机身甚至超过了我的桌面，所以我只是把它放在打印机架来用，纵深已经达到了600mm，堪比一台商用19英寸机柜。</p>
-
-
-
-<p class="wp-block-paragraph">其次，不知道是算法缺失还是21UX本身的技术缺陷，会有光标偏移和压感不均的问题。虽然将输入区域缩小到1/4后，规避了这个问题。</p>
-
-
-
-<p class="wp-block-paragraph">总体来说，算是一定程度上救活了这个数位屏。<br>但我缺乏实际需要超大号数位屏的使用环境。新帝这么厚也不适合直接放在桌面上。<br>我虽然确实在考虑弄一台PTH851当桌垫接三屏。</p>
-
-
-
-<p class="wp-block-paragraph">那怎么办呢？嗯……我看了那台40英寸的小米电视。。</p>
-
-
-
-<p class="wp-block-paragraph">在炕上用的新帝茶几（笑）</p>
-
-
-
-<p class="wp-block-paragraph">如果这小米电视是4K 100%缩放的话，那倒是真的适合用这种超大号数位板。不过单绘画用途来说，太大的挥臂空间也不太合适。21UX在当今本质上和27英寸大屏显示器是差不多的。</p>
-
-
-
-<p class="wp-block-paragraph">如果我有音乐工作室的话，我或许可以把它专门分配一个显示器，然后当作XY Pad Controller来用。可以参考一些EQ软件或VB-Cable Voicemeeter的IntelliPan触控板，调节音色和混响。或者是简单的Pad或电子鼓。但压感有限，不大可能有什么实际的效用。</p>
-
-
-
-<p class="wp-block-paragraph">那还是不如一套送走换个正常的数位屏。</p>
-
-
-
-<h6 class="wp-block-heading">【番外】影拓3 12&#215;12 正方形超大型数位板</h6>
-
-
-
-<p class="wp-block-paragraph">我顺带还思考了一下影拓3 12&#215;12（PTZ-1230）的用途，对应的显示设备。<br>这个超大号数位板的纵横比是1:1的，原本是用来描摹工程制图（例如汽车发动机）或者手绘赛璐璐原画的扫描仪，而不是真的主要作为消费级鼠标的替代品。虽然确实有一个叫Lens Cursor的配件，用来绘制精细CAD制图用。</p>
-
-
-
-<p class="wp-block-paragraph">记得之前在海鲜市场上看过大连空管中心采购招标的巴可的航空显示器，分辨率为2048&#215;2048，刚好是1:1的比例。而航管局似乎也的确有用来制图的需求。</p>
-
-
-
-<p class="wp-block-paragraph">LG的16:18的显示器也勉强可以算上吧，最大程度上减少了空间浪费。<br>不过影拓3世代好像更流行四块SXGA或UXGA拼在一起。</p>
-
-
-
-<p class="wp-block-paragraph">黑莓Passport和Unihertz Titan以及一众智能家居的86盒中控屏，还有Android WearOS的手表，也是这个屏幕比例。理论上使用Moonlight的串流方式也可以百分百使用吧？当然这是整蛊。没有实际意义。<br>宝马MINI Cooper的中控屏也是类似。</p>
-
-
-
-<p class="wp-block-paragraph">音游街机舞萌（以及舞立方）的洗衣机虽然看起来是圆形的，但底层并不是真正的圆屏。</p>
-
-
-
-<h6 class="wp-block-heading">【番外2】ExpressKeys Remote替代品</h6>
-
-
-
-<p class="wp-block-paragraph">ExpressKeys Remote好用，但不适合外出携带，也不适配RDP。<br>虽然有PCoIP或者重定向USB的方式，但依旧不是最优解。</p>
-
-
-
-<p class="wp-block-paragraph">ZMK和QMK是一种办法。以前去过zFrontier，虽然感觉那里的小资氛围比小绿书和Chiphell还要夸张，但不得不承认那里也是少数适合交流客制化硬件的专门社区。</p>
-
-<p><a href="https://v1sta.xyz/life/opentabletdriver-cintiq/" rel="nofollow">来源</a></p>]]></content:encoded>
-					
-					<wfw:commentRss>https://v1sta.xyz/life/opentabletdriver-cintiq/feed/</wfw:commentRss>
 			<slash:comments>0</slash:comments>
 		
 		
