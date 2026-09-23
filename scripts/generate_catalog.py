@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate Fread's catalog.json from an OPML subscription list."""
+"""Generate catalog.json from OPML and AI subscription configuration."""
 
 from __future__ import annotations
 
@@ -11,6 +11,11 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 from typing import Any
 from urllib.parse import urlsplit, urlunsplit
+
+if __package__:
+    from .ai_sources import load_ai_sources
+else:
+    from ai_sources import load_ai_sources
 
 
 TIMESTAMP_FIELDS = ("lastSuccessfulFetchAt", "lastContentChangedAt")
@@ -125,7 +130,11 @@ def load_existing_catalog(path: Path | None) -> dict[str, Any]:
     return value
 
 
-def generate_catalog(opml_path: Path, existing_path: Path | None = None) -> dict[str, Any]:
+def generate_catalog(
+    opml_path: Path,
+    existing_path: Path | None = None,
+    ai_sources_path: Path | None = None,
+) -> dict[str, Any]:
     try:
         root = ET.parse(opml_path).getroot()
     except (OSError, ET.ParseError) as error:
@@ -142,9 +151,34 @@ def generate_catalog(opml_path: Path, existing_path: Path | None = None) -> dict
         raise ValueError("OPML body does not contain any outlines")
 
     old_timestamps = collect_timestamps(load_existing_catalog(existing_path))
-    return {
-        "children": [parse_outline(outline, old_timestamps) for outline in outlines]
-    }
+    rss_nodes = [parse_outline(outline, old_timestamps) for outline in outlines]
+    ai_nodes = []
+    ai_sources = load_ai_sources(ai_sources_path) if ai_sources_path is not None else []
+    for source in ai_sources:
+        previous = old_timestamps.get(source.feed_path, {})
+        ai_nodes.append({
+            "type": "ai",
+            "title": source.title,
+            "feedPath": source.feed_path,
+            **{field: previous.get(field) if isinstance(previous.get(field), str) else None
+               for field in TIMESTAMP_FIELDS},
+        })
+    identifiers: dict[str, str] = {}
+
+    def check_ids(nodes: list[dict[str, Any]]) -> None:
+        for node in nodes:
+            if node["type"] == "category":
+                check_ids(node["children"])
+                continue
+            path = node["feedPath"]
+            identifier = Path(path).stem
+            if identifier in identifiers and identifiers[identifier] != path:
+                raise ValueError(f"source ID collision: {identifier}")
+            identifiers[identifier] = path
+
+    children = ai_nodes + rss_nodes
+    check_ids(children)
+    return {"children": children}
 
 
 def write_catalog(catalog: dict[str, Any], output_path: Path) -> None:
@@ -157,6 +191,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--input", type=Path, required=True, help="source OPML file")
     parser.add_argument("--output", type=Path, required=True, help="catalog JSON file")
+    parser.add_argument("--ai-sources", type=Path, default=Path("ai_sources.json"))
     parser.add_argument(
         "--existing",
         type=Path,
@@ -165,9 +200,9 @@ def main() -> int:
     args = parser.parse_args()
 
     try:
-        catalog = generate_catalog(args.input, args.existing)
+        catalog = generate_catalog(args.input, args.existing, args.ai_sources)
         write_catalog(catalog, args.output)
-    except ValueError as error:
+    except (OSError, ValueError) as error:
         print(f"error: {error}", file=sys.stderr)
         return 1
     return 0

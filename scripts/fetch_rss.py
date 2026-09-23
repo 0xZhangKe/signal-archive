@@ -216,6 +216,7 @@ def update_source_state(
     duration_seconds: int,
     failed: list[str],
     retention_days: int = 15,
+    source_types: list[str] | None = None,
 ) -> list[dict[str, Any]]:
     records: list[Any] = []
     if path.exists():
@@ -234,12 +235,15 @@ def update_source_state(
         if parse_timestamp(record["finishedAt"]) >= cutoff:
             retained.append(record)
 
-    retained.append({
+    record = {
         "startedAt": started_at,
         "finishedAt": finished_at,
         "durationSeconds": max(0, int(duration_seconds)),
         "failed": sorted(set(failed)),
-    })
+    }
+    if source_types is not None:
+        record["sourceTypes"] = sorted(set(source_types))
+    retained.append(record)
     rendered = (json.dumps(retained, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
     atomic_write(path, rendered)
     return retained

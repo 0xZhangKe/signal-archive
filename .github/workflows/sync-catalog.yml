@@ -6,9 +6,16 @@ on:
       - main
     paths:
       - opml.xml
+      - ai_sources.json
+      - prompts/**
+      - scripts/ai_sources.py
+      - scripts/ai_agent.py
+      - scripts/fetch_ai.py
+      - scripts/fetch_sources.py
       - scripts/generate_catalog.py
       - tests/test_generate_catalog.py
       - .github/workflows/sync-catalog.yml
+      - .github/workflows/fetch-rss.yml
   workflow_dispatch:
 
 permissions:
@@ -17,6 +24,7 @@ permissions:
 concurrency:
   group: signal-archive-writer
   cancel-in-progress: false
+  queue: max
 
 jobs:
   sync:
@@ -25,6 +33,7 @@ jobs:
       - name: Check out main
         uses: actions/checkout@v6
         with:
+          ref: main
           fetch-depth: 0
 
       - name: Test catalog generator
@@ -47,6 +56,7 @@ jobs:
         run: |
           python3 scripts/generate_catalog.py \
             --input opml.xml \
+            --ai-sources ai_sources.json \
             --existing archive-worktree/catalog.json \
             --output archive-worktree/catalog.json
 
@@ -68,8 +78,8 @@ jobs:
           git -C archive-worktree push origin HEAD:archive
           echo "changed=true" >> "$GITHUB_OUTPUT"
 
-      - name: Trigger RSS fetch
-        if: steps.commit.outputs.changed == 'true'
+      # Prompt-only changes do not alter catalog.json but still need a new collection.
+      - name: Trigger source fetch
         env:
           GH_TOKEN: ${{ github.token }}
         run: |

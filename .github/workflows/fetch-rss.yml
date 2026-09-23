@@ -1,4 +1,4 @@
-name: Fetch RSS
+name: Fetch sources
 
 on:
   repository_dispatch:
@@ -15,6 +15,7 @@ permissions:
 concurrency:
   group: signal-archive-writer
   cancel-in-progress: false
+  queue: max
 
 jobs:
   fetch:
@@ -23,21 +24,41 @@ jobs:
       - name: Check out main
         uses: actions/checkout@v6
         with:
+          ref: main
           fetch-depth: 0
 
-      - name: Test RSS fetcher
+      - name: Test collectors
         run: python3 -m unittest discover -s tests -v
 
-      - name: Check out archive
+      - name: Prepare archive worktree
+        shell: bash
         run: |
           set -euo pipefail
-          git fetch origin archive
-          git worktree add archive-worktree origin/archive
+          if git ls-remote --exit-code --heads origin archive >/dev/null 2>&1; then
+            git fetch origin archive
+            git worktree add archive-worktree origin/archive
+          else
+            git worktree add --detach archive-worktree
+            git -C archive-worktree switch --orphan archive
+            git -C archive-worktree rm -rf --ignore-unmatch .
+          fi
 
-      - name: Fetch RSS documents
+      - name: Refresh catalog from current configuration
         run: |
-          python3 scripts/fetch_rss.py \
-            --catalog archive-worktree/catalog.json \
+          python3 scripts/generate_catalog.py \
+            --input opml.xml \
+            --ai-sources ai_sources.json \
+            --existing archive-worktree/catalog.json \
+            --output archive-worktree/catalog.json
+
+      - name: Fetch RSS and AI documents
+        env:
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
+          OPENROUTER_MODEL: ${{ vars.OPENROUTER_MODEL || 'deepseek/deepseek-v3.2' }}
+        run: |
+          python3 scripts/fetch_sources.py \
+            --ai-sources ai_sources.json \
             --archive-root archive-worktree
 
       - name: Commit fetched documents when changed
@@ -49,15 +70,18 @@ jobs:
           if [[ -d archive-worktree/rss ]]; then
             git -C archive-worktree add rss/
           fi
+          if [[ -d archive-worktree/ai ]]; then
+            git -C archive-worktree add ai/
+          fi
           if git -C archive-worktree diff --cached --quiet; then
-            echo "RSS documents and fetch timestamps are already up to date."
+            echo "Feed documents and fetch timestamps are already up to date."
             echo "changed=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
 
           git -C archive-worktree config user.name "github-actions[bot]"
           git -C archive-worktree config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git -C archive-worktree commit -m "archive: fetch RSS feeds"
+          git -C archive-worktree commit -m "archive: fetch RSS and AI feeds"
           git -C archive-worktree push origin HEAD:archive
           echo "changed=true" >> "$GITHUB_OUTPUT"
 

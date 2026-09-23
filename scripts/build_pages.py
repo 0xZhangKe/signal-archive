@@ -150,7 +150,7 @@ def build_rendered(
             "title": node_title(source),
             "type": source_type,
         }
-        if source_type == "rss":
+        if source_type in {"rss", "ai"}:
             view["state"] = source_success_rates.get(identifier, 1.0)
         return view
 
@@ -186,8 +186,13 @@ def source_state_metrics(
     records: list[Any],
     source_identifiers: Iterable[str],
     folders: dict[str, list[str]],
+    source_types: dict[str, str] | None = None,
 ) -> tuple[dict[str, float], dict[str, int], dict[str, Any] | None]:
+    identifiers = list(source_identifiers)
+    source_types = source_types or {}
+    run_counts: dict[str, int] = {}
     failed_counts: dict[str, int] = {}
+    latest_results: dict[str, tuple[str, bool]] = {}
     latest_record: dict[str, Any] | None = None
     latest_finished_at = ""
 
@@ -208,22 +213,33 @@ def source_state_metrics(
             raise ValueError("source_state.json contains an invalid record")
         if not all(isinstance(identifier, str) for identifier in failed):
             raise ValueError("source_state.json failed entries must be strings")
-        for identifier in set(failed):
-            failed_counts[identifier] = failed_counts.get(identifier, 0) + 1
+        # Records written before AI support (and the standalone RSS CLI) only cover RSS.
+        covered_types = record.get("sourceTypes", ["rss"])
+        if not isinstance(covered_types, list) or not all(
+            isinstance(value, str) and value in {"rss", "ai"} for value in covered_types
+        ):
+            raise ValueError("source_state.json contains invalid sourceTypes")
+        failed_set = set(failed)
+        for identifier in identifiers:
+            if source_types.get(identifier, "rss") not in covered_types:
+                continue
+            run_counts[identifier] = run_counts.get(identifier, 0) + 1
+            failed_counts[identifier] = failed_counts.get(identifier, 0) + int(identifier in failed_set)
+            if identifier not in latest_results or finished_at >= latest_results[identifier][0]:
+                latest_results[identifier] = (finished_at, identifier in failed_set)
         if latest_record is None or finished_at >= latest_finished_at:
             latest_record = record
             latest_finished_at = finished_at
 
-    total_runs = len(records)
     success_rates = {
         identifier: (
-            round((total_runs - failed_counts.get(identifier, 0)) / total_runs, 6)
-            if total_runs
+            round(1 - failed_counts.get(identifier, 0) / run_counts[identifier], 6)
+            if run_counts.get(identifier)
             else 1.0
         )
-        for identifier in source_identifiers
+        for identifier in identifiers
     }
-    latest_failed = set(latest_record["failed"]) if latest_record else set()
+    latest_failed = {identifier for identifier, (_, failed) in latest_results.items() if failed}
     folder_failed_counts = {
         folder_identifier: len({
             source_id(feed_path)
@@ -425,6 +441,9 @@ def parse_feed(path: Path, source: dict[str, Any]) -> list[dict[str, Any]]:
         guid = first_text(item, {"id", "guid"})
         date_value = first_text(item, {"published", "updated", "pubdate", "date"})
         published_at, sort_time = normalize_date(date_value)
+        if source.get("type") == "ai" and not date_value:
+            # Unknown publication dates stay null; retrieval time only determines order.
+            _, sort_time = normalize_date(first_text(item, {"collectedat"}))
 
         content = first_text(item, CONTENT_TAGS)
         summary_html = first_text(item, SUMMARY_TAGS)
@@ -540,6 +559,7 @@ def build_pages(catalog_path: Path, archive_root: Path, site_root: Path, output:
         source_state,
         (source_id(feed_path) for feed_path in sources),
         folders,
+        {source_id(path): source.get("type", "rss") for path, source in sources.items()},
     )
     articles_by_source: dict[str, list[dict[str, Any]]] = {}
     failures: list[dict[str, str]] = []

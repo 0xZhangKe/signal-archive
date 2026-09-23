@@ -144,7 +144,7 @@ function setNavigationContent(button, title, sourceState = null) {
 }
 
 function setSourceNavigationContent(button, source) {
-  if (source.type !== "rss" || !Number.isFinite(source.state)) {
+  if (!["rss", "ai"].includes(source.type) || !Number.isFinite(source.state)) {
     setNavigationContent(button, source.title);
     button.title = source.title;
     return;
@@ -343,7 +343,7 @@ function articleCountLabel(itemCount) {
   if (node?.type === "category") {
     const failedCount = Number.isInteger(node.failed_count) ? node.failed_count : 0;
     status = `${failedCount} FAILED`;
-  } else if (node?.type === "rss" && Number.isFinite(node.state)) {
+  } else if (["rss", "ai"].includes(node?.type) && Number.isFinite(node.state)) {
     status = `${formatSuccessRate(node.state)} SUCCESS`;
   }
   return `${status ? `${status} · ` : ""}${itemCount} ITEMS`;
