@@ -1,6 +1,28 @@
 {
   "items": [
     {
+      "id": "e245c20e3b085fa39d59c30e",
+      "title": "UPS 加 NUT 讓伺服器斷電自動關機：設定全紀錄,和一條被貓咬過的電源線",
+      "summary": "這篇把 UPS 加 NUT 的完整設定寫成一份可照做的教學:UPS 選型的三個條件(PFC 純正弦波、AVR、NUT 支援)、NUT 的 driver / upsd / upsmon 三層架構與五個設定檔各管什麼、upsmon.conf 逐行說明、POWERDOWNFLAG 為什麼不能漏,以及 BIOS 那個選錯就前功盡棄的選項——Restore after AC Power Loss 必須是 On 而不是 Last State,因為 NUT 乾淨關機後機器的狀態就是關機。另外收錄把 UPS 狀態接到 cron log、Discord 通知與自架面板的做法。而這一切的起點是搬家後伺服器每天半夜硬斷電:線鬆、共用迴路、過熱、PSU 全試過,但那些都只是猜測。作者買 UPS 一半是為了保護、一半是把它當量測儀器用…",
+      "image": null,
+      "publishedAt": "2026-08-04T06:03:43Z",
+      "sourceId": "bd51496b8ec0ca1d",
+      "sourceTitle": "Koimsurai 手記",
+      "link": "https://koimsurai.com/blog/ups-nut-and-the-cable-the-cat-chewed",
+      "detailPath": "articles/e245c20e3b085fa39d59c30e.json"
+    },
+    {
+      "id": "a2587e55772899d7ddff5601",
+      "title": "入蜀记 day436 钟美美",
+      "summary": "「钟美美。」",
+      "image": null,
+      "publishedAt": "2026-08-04T04:48:27Z",
+      "sourceId": "8e5dc5a8b5023a8e",
+      "sourceTitle": "折腾人生",
+      "link": "https://z.arlmy.me/posts/BBBPandINSW/INSW-ko/INSW_436/",
+      "detailPath": "articles/a2587e55772899d7ddff5601.json"
+    },
+    {
       "id": "7fd244ad35f5f95f494d9904",
       "title": "本来无一物，何处惹尘埃？",
       "summary": "最近有一些关于意识的思考和体悟。 之前看一本管理习惯的书，里面讲了很多关于人的激素作用，利用激素的功能属性去做 …",
@@ -637,28 +659,6 @@
       "sourceTitle": "Eddie Lv",
       "link": "https://eddielv.com/musings/digital-is-simulating/",
       "detailPath": "articles/e79d6a945d8ab30bfbc9a386.json"
-    },
-    {
-      "id": "046ba54cd27c5cd8c3c073c5",
-      "title": "在軍營尿尿",
-      "summary": "前些日子做了軍營的音響活動，同仁去上廁所，問了某個兵怎麼走，沒想到要層層向上報告，詢問能不能讓外面廠商進入建築物來借用廁所。而最後一個層級的人也只是說：「那裡走到底就是。」要同仁自己去，並沒有任何軍營的人盯著，表示似乎也不是真的那麼戒備森嚴。 輪到我想上廁所時，得到了更奇妙的答案。 「我不知道耶，但應該是這個走廊走到底左邊。」 …？ 我免役、沒服過兵役，不知道部隊文化，但在各種對話當中發現，所有人對於「做決定」是感到恐懼與焦慮的，所有行動最好都是上級的命令。 我思考一陣子，認為這並不完全是壞事。 「當敵軍來襲，我現在開炮、開槍的話，對面可是會死人的耶！」 「還好殺人不是我的想法，那是我的上級長官的命令；而上級長官也是聽再上級長官的命令。」 而下令的人，並不會實際扣下扳機，或許也是最不會被情緒影響決策的職位吧？…",
-      "image": null,
-      "publishedAt": "2026-07-31T07:11:33Z",
-      "sourceId": "199cdf92fc46bfcd",
-      "sourceTitle": "Eddie Lv",
-      "link": "https://eddielv.com/musings/peeing-in-military-camp/",
-      "detailPath": "articles/046ba54cd27c5cd8c3c073c5.json"
-    },
-    {
-      "id": "722283639e96f365f5a9c515",
-      "title": "跟另一個站長互相監控：Uptime Kuma 交叉託管,和 Trust Proxy 開了反而更危險",
-      "summary": "這篇記錄了作者跟另一位自架站長交叉監控的完整過程,並整理成一份可照做的教學。起點是自架服務的一個尷尬處境:監控自己的那台機器,自己掛了就沒人通知得了。解法是互相盯,但一開始兩人都卡在同一個錯誤前提上——以為要走 HTTPS 就得交換憑證。真正的答案是不用交換:對方把子網域 A 紀錄指向你的 IP,TLS 就在你這裡終結,Let's Encrypt 的 HTTP-01 驗證會直接打到你的 nginx,所以你自己就能簽那張憑證、還自動續簽;共享 wildcard 反而踩中私鑰暴露與手動續簽兩個雷。文中也整理了反代 Kuma 必備的 WebSocket 設定(少了 Upgrade 標頭,即時圖表會完全不動)、給後端加公開 /health 而非用 401 取巧、用 push 型監控盯 cron 腳本這種沉默故障,以及…",
-      "image": null,
-      "publishedAt": "2026-07-31T06:00:43Z",
-      "sourceId": "bd51496b8ec0ca1d",
-      "sourceTitle": "Koimsurai 手記",
-      "link": "https://koimsurai.com/blog/uptime-kuma-cross-monitoring",
-      "detailPath": "articles/722283639e96f365f5a9c515.json"
     }
   ]
 }
