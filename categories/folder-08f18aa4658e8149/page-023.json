@@ -1,6 +1,193 @@
 {
   "items": [
     {
+      "id": "6eb62c0c12b597e87281a646",
+      "title": "笔记：在 Mac Mini 本地跑 LLM 大模型",
+      "summary": "这些笔记是在自己的Mac Mini上面折腾了一些记录，主要是安装一些重要的大模型工具，把这些工具连接起来，建立自己的私有本地知识库等等，以备查阅。后续不定时更新。 安装OrbStack OrbStack是专门为MacOS设计的快速、轻量级的虚拟化工具，可以作为本地Docker、K8s和Linux VM的超容易替代品。因为它丢掉了跨平台的包袱，直接在系统内核级别支持虚拟机指令，动态分配内存等等做法，让它变得超快。就以Docker为例，它可以把冷启动速度从几十秒优化到一两秒。 我是在Apple M4芯片的Mac mini上面折腾的，首先要保证我的应用全部都是M4芯片直接支持的，而不是通过Rosetta 2兼容性转换过来的。在检查Homebrew的时候，发现brew命令的路径在 /usr/local/bin/bre…",
+      "image": "https://www.raychase.net/wp-content/uploads/2026/05/image-12.png",
+      "publishedAt": "2026-06-01T04:03:31Z",
+      "sourceId": "ed6c79eba03be7d3",
+      "sourceTitle": "四火的唠叨",
+      "link": "https://www.raychase.net/8180",
+      "detailPath": "articles/6eb62c0c12b597e87281a646.json"
+    },
+    {
+      "id": "eef17573cbd9252267944d57",
+      "title": "把對的人嚇跑",
+      "summary": "女生只喜歡有錢男生？",
+      "image": null,
+      "publishedAt": "2026-06-01T00:01:00Z",
+      "sourceId": "7f36c3da1e6b5c71",
+      "sourceTitle": "Wiwi.Blog Blog",
+      "link": "https://wiwi.blog/blog/scare-the-right-one-away",
+      "detailPath": "articles/eef17573cbd9252267944d57.json"
+    },
+    {
+      "id": "d3c35dc613dbd3544814ecf6",
+      "title": "优化日志：给自建图床 PicImpact 做一次大范围性能优化",
+      "summary": "和 Debug 日志、SRE 日志一个系列，优化日志用来复盘一些可以公开的折腾经历。 这一篇的主角是 PicImpact——我自己在用的那个开源图床，跑在 photos.manjusaka.me 上，托管着我这几年拍的猫猫狗狗。去年年终总结里我写过一句「把自建图床项目的代码拾掇了很多」，这篇就算是那句话的注脚。前后断断续续修了一轮，修复点其实都不大，但中间冒出来的几个回归是真的有意思，尤其是最后那个 WebGL 的坑，我愿称之为本年度最佳。",
+      "image": null,
+      "publishedAt": "2026-05-31T16:30:00Z",
+      "sourceId": "a6add2003c9627a9",
+      "sourceTitle": "Manjusaka",
+      "link": "https://www.manjusaka.blog/posts/2026/05/31/optimize-picimpact-self-hosted-gallery/",
+      "detailPath": "articles/d3c35dc613dbd3544814ecf6.json"
+    },
+    {
+      "id": "ee1953ab69a870622566e23d",
+      "title": "松声｜廿六年·五月末·麦黄收",
+      "summary": "麦收又到了一年一度麦收季节，今年的初期的天气不是很好，互联网上乱七八糟的声音，什么割四赔五，虽然有一些老鼠屎，但是大部分人还是非常好的。说起收麦，我家有几分地，在角落里面，还他么得拿镰刀割，那叫...",
+      "image": "https://img.xyzbz.cn/i/2026/05/31/6a1bd2ca309d1.jpg",
+      "publishedAt": "2026-05-31T15:59:00Z",
+      "sourceId": "309d11f5508ab72f",
+      "sourceTitle": "网友小宋",
+      "link": "https://xyzbz.cn/archives/1549/",
+      "detailPath": "articles/ee1953ab69a870622566e23d.json"
+    },
+    {
+      "id": "61e9b22267694ed9fe3c9fcf",
+      "title": "日常漫步 Vol.24 之漫步前山河",
+      "summary": "曾多次提及前山河（1、2），日常两点一线的路途恰好傍河而行，时常泊车漫步河边。顺境欢欣、逆境怅然，所有心绪都能 […]",
+      "image": "https://yayu.net/wp-content/uploads/2026/05/2026053113503445.webp",
+      "publishedAt": "2026-05-31T14:00:54Z",
+      "sourceId": "d97698cb61c165ac",
+      "sourceTitle": "雅余  ·  茶余饭后，闲情雅致",
+      "link": "https://yayu.net/6229.html",
+      "detailPath": "articles/61e9b22267694ed9fe3c9fcf.json"
+    },
+    {
+      "id": "7cac8e0e934010b066ce8c76",
+      "title": "PSA：Hugo Stack 主題已更新至 v4",
+      "summary": "我的主 blog 網站所使用的 Hugo 主題，也是最常被使用的 Hugo 主題之一—— Stack ，在一個多月前 已被正式更新至 4.0.0 版 1 。 該次更新可以算是個重大更新，不僅加入了更多新功能（例如 Docusaurus 上有的「 告示區塊 」功能），也對設定文件格式之類的技術細節作了不少大改動。 如果是想要更新至 4.x 版的人，可能會有許多技術工要做 2 。 我自己是覺得之前在用的 3.31.0 版本已經夠我用了，而且我也不想再處理那些程式碼架構大改所衍生出來的一堆技術問題了，再加上我先前出於自身需求而有對主題程式碼作一些自訂的修改（雖說沒有到很重大），所以我是決定 不會 將該網站主題升級至最新版本了。 這也算是給有使用 Hugo Stack 主題的站主們的一個「 PSA 3 」（溫馨提醒）…",
+      "image": null,
+      "publishedAt": "2026-05-31T13:57:00Z",
+      "sourceId": "a93d4f2e98fafcbe",
+      "sourceTitle": "All posts | 所有貼文 on ttheng's microblog. | 侃侃而隨想極短文。",
+      "link": "https://microblog.ttheng.com/hugo-stack-theme-v4-upgrade/",
+      "detailPath": "articles/7cac8e0e934010b066ce8c76.json"
+    },
+    {
+      "id": "82ce1f88ba07e6bf4b43e329",
+      "title": "安宁",
+      "summary": "「安宁。」",
+      "image": null,
+      "publishedAt": "2026-05-31T13:53:27Z",
+      "sourceId": "8e5dc5a8b5023a8e",
+      "sourceTitle": "折腾人生",
+      "link": "https://z.arlmy.me/posts/Poems/2026/20260525_AnNing/",
+      "detailPath": "articles/82ce1f88ba07e6bf4b43e329.json"
+    },
+    {
+      "id": "40e667d8ead455aa2f0758ac",
+      "title": "Toots 421 2026 May.24 - May.30",
+      "summary": "「远山暗影。」",
+      "image": null,
+      "publishedAt": "2026-05-31T13:22:27Z",
+      "sourceId": "8e5dc5a8b5023a8e",
+      "sourceTitle": "折腾人生",
+      "link": "https://z.arlmy.me/posts/MastodonArchives/2026/MastodonTootsArchives_20260530/",
+      "detailPath": "articles/40e667d8ead455aa2f0758ac.json"
+    },
+    {
+      "id": "97e11a59fd1e3ae9fa75c5db",
+      "title": "“人可以穷困，但不可以潦倒” ｜ 隐说 NO.25",
+      "summary": "本栏目《隐说》由原《棱镜通讯》分离而来，是我私人的阅读札记。近来所读之书、所阅之文、所订之栏，以及闲时偶想，皆汇于此。或摘其精要，或评其得失，或由一点生发开去，不求系统，但求真诚，乃一人独坐灯下的絮语。 1、人可以穷困，但不可以潦倒 最近看到一句话，说得很好，“人可以穷困，但不可以潦倒。” 我之前会把“穷困”和“潦倒”混为一谈，其实仔细想想，还是有些差别的。 “穷困”指的是外部条件的匮乏，比如钱不够花、资源不够用、机会不够多等等，这些处境多数时候，我们个人是无法掌控的。就像你...... READ MORE",
+      "image": null,
+      "publishedAt": "2026-05-31T12:31:44Z",
+      "sourceId": "b4584dd13588932a",
+      "sourceTitle": "太隐",
+      "link": "https://wangyurui.com/posts/yin-shuo-no-25-cb6fccf5",
+      "detailPath": "articles/97e11a59fd1e3ae9fa75c5db.json"
+    },
+    {
+      "id": "3c6c0880685b2adfb81d12ee",
+      "title": "那里",
+      "summary": "「那里。」",
+      "image": null,
+      "publishedAt": "2026-05-31T11:26:27Z",
+      "sourceId": "8e5dc5a8b5023a8e",
+      "sourceTitle": "折腾人生",
+      "link": "https://z.arlmy.me/posts/Poems/2026/20260517_NaLi/",
+      "detailPath": "articles/3c6c0880685b2adfb81d12ee.json"
+    },
+    {
+      "id": "1023f8d691fe482c25f8d43d",
+      "title": "2026-05 书影音总结",
+      "summary": "书籍 天色已晚 So Late in the Day - [爱尔兰]克莱尔·吉根 译者： 马爱农 《天色已晚》里总共收录了三篇短篇小说，分别讲述隐藏的厌女症、小说家的独特“复仇”方式以及一趟惊险的出轨冒险。 天色已晚（★★★★）：吉根对于某种典型人格刻画非常准确 —— 对于爱情和婚姻充满片面的想象，认为爱情和婚姻不过是”有人陪伴，被人照顾“，如同美好幸福的童话故事一般。我印象最深刻的细节是在卡赫尔向萨比娜求婚后，萨比娜搬来同住的那天，带来大量的物件令男人不满 ——“似乎这房子现在也属于她了”。 “她说，也许现在情况正在发生变化，但是你这个年纪的男人，有一大半都只是希望我们闭嘴，把你们想要的东西给你们。你们都被宠坏了，一旦事情不顺你们的心意，你们就会变得非常可恶。​” 他想否认，但这似乎很接近一个他从未考虑过的…",
+      "image": "https://bear-images.sfo2.cdn.digitaloceanspaces.com/javis/202605.webp",
+      "publishedAt": "2026-05-31T10:32:09Z",
+      "sourceId": "f02bca756da09183",
+      "sourceTitle": "查令十字街84号",
+      "link": "https://www.javis.me/2026-05/",
+      "detailPath": "articles/1023f8d691fe482c25f8d43d.json"
+    },
+    {
+      "id": "34a88f426702f7167ab8f191",
+      "title": "「改變人生觀的一句話」──2026 年 5 月 BlogBlog 同樂會回顧",
+      "summary": "六月初有些忙碌，可能會沒有心力處理回顧文，因此在截稿前 6 小時提早發佈回顧文，在 6 月 1 號 0 點 0 分前都還是能投稿哦！ 這是 2026 年 5 月份所舉辦的 BlogBlog 同樂會 回顧文章，這個月的主題是「改變人生觀的一句話」。 有人來信說：「感謝 Eddie 選擇了這麼棒的主題，閱讀了其他人的投稿文章，覺得自己彷彿真的深刻地認識了那些人！」這也確實達到我選擇這項主題的目的！ 一句話，可以是入口（契機），也可能是陪伴，也可能是答案，以各種不同面向影響著我們的想法、情緒、決策。 以下是回顧文章，爲了切合主題，Eddie 選擇用「一句話」說出文章是與什麼相關的（這對我是很大的挑戰），只會知道跟什麼有關，並 不代表是那篇文章完整想表達的 ，也儘量不破哽，若有誤讀請來信告知，感恩！ 我僅遵照 Blo…",
+      "image": null,
+      "publishedAt": "2026-05-31T10:00:00Z",
+      "sourceId": "199cdf92fc46bfcd",
+      "sourceTitle": "Eddie Lv",
+      "link": "https://eddielv.com/articles/blogblog-party-recap-may-2026/",
+      "detailPath": "articles/34a88f426702f7167ab8f191.json"
+    },
+    {
+      "id": "3fd0b038ce709e121f30b8af",
+      "title": "入蜀记 day372 双年展，黄稚荃，李琼久",
+      "summary": "「双年展，黄稚荃，李琼久。」",
+      "image": null,
+      "publishedAt": "2026-05-31T04:48:27Z",
+      "sourceId": "8e5dc5a8b5023a8e",
+      "sourceTitle": "折腾人生",
+      "link": "https://z.arlmy.me/posts/BBBPandINSW/INSW-jet/INSW_372/",
+      "detailPath": "articles/3fd0b038ce709e121f30b8af.json"
+    },
+    {
+      "id": "f01ba643ae96487408aa0b3a",
+      "title": "單眼相機",
+      "summary": "最近心血來潮，把放在書架上積灰塵、不知道被遺忘多久的 Canon 60D 拿出來用。",
+      "image": "https://wiwi.blog/assets/images/dslr-575659f1544eda10df32a1046947749a.jpg",
+      "publishedAt": "2026-05-31T00:01:00Z",
+      "sourceId": "7f36c3da1e6b5c71",
+      "sourceTitle": "Wiwi.Blog Blog",
+      "link": "https://wiwi.blog/blog/dslr",
+      "detailPath": "articles/f01ba643ae96487408aa0b3a.json"
+    },
+    {
+      "id": "2fffdbb0f20931fdbad7c285",
+      "title": "改變人生觀的一句話",
+      "summary": "費曼、卓別林與電影百米，從自卑少年到有能力幫助他人，分享影響我最深的思考與人生態度。",
+      "image": "https://cdn.kalan.dev/images/uVYbsUcXxGUkjsCGMXUDqw.jpg",
+      "publishedAt": "2026-05-31T00:00:00Z",
+      "sourceId": "538caf01ac3ab305",
+      "sourceTitle": "愷開的部落格",
+      "link": "https://blog.kalan.dev/random/a-quote-that-changed-my-view/",
+      "detailPath": "articles/2fffdbb0f20931fdbad7c285.json"
+    },
+    {
+      "id": "9ecae36f795180719b719166",
+      "title": "丽水遂昌｜三个人，自驾五天，花费1800元，总结推荐",
+      "summary": "",
+      "image": null,
+      "publishedAt": "2026-05-30T19:11:39Z",
+      "sourceId": "fa90e95e2850db36",
+      "sourceTitle": "è¿�ç»´å’–å•¡å�§",
+      "link": "https://blog.ops-coffee.com/r/city-china-zhejiang-lishui-suichang-summary.html",
+      "detailPath": "articles/9ecae36f795180719b719166.json"
+    },
+    {
+      "id": "9b859872361676aba2594158",
+      "title": "Markdown 語法精選",
+      "summary": "前言 # 這陣子推坑了一些好友、學生來寫 Blog，發現有必要寫一篇 Markdown 語法教學。 網路上其實有非常多的文章了，這篇我列出我最常用的，畢竟一次看網路上的 markdown 語法大全，對於新手來說資訊量可能太大。 標題 # 用「#」符號，加一個空格，就可以把那行字設定爲標題，每篇文章排版、分段必用。 # 一級標題 ## 二級標題 ### 三級標題 #### 四級標題 ##### 五級標題 一級標題 # 二級標題 # 三級標題 # 四級標題 # 五級標題 # 引言 # 雖然是引言，但 Eddie 很喜歡沒來由的就用它，通常會在較長的段落中，多插入一些 > ，讓視覺上不要有一大坨文字。 > 「在非洲，每過 60 秒就會有一分鐘過去。」—— 佚名 「在非洲，每過 60 秒就會有一分鐘過去。」—— 佚名…",
+      "image": "https://eddielv.com/images/apple-touch-icon.png",
+      "publishedAt": "2026-05-30T17:37:24Z",
+      "sourceId": "199cdf92fc46bfcd",
+      "sourceTitle": "Eddie Lv",
+      "link": "https://eddielv.com/articles/markdown/",
+      "detailPath": "articles/9b859872361676aba2594158.json"
+    },
+    {
       "id": "fd7454849f59d726bb2d120e",
       "title": "入蜀记 day371 “互联网是另一种天下的结构”",
       "summary": "「互联网是另一种天下的结构。」",
@@ -472,193 +659,6 @@
       "sourceTitle": "我的部落格",
       "link": "https://e89295.com/blog/2026-05-26.html",
       "detailPath": "articles/123db29d84172c19582bbdbc.json"
-    },
-    {
-      "id": "5e7cd9c7a5e356daee13e8cb",
-      "title": "入蜀记 day367 指压板",
-      "summary": "「指压板。」",
-      "image": null,
-      "publishedAt": "2026-05-26T04:48:27Z",
-      "sourceId": "8e5dc5a8b5023a8e",
-      "sourceTitle": "折腾人生",
-      "link": "https://z.arlmy.me/posts/BBBPandINSW/INSW-jet/INSW_367/",
-      "detailPath": "articles/5e7cd9c7a5e356daee13e8cb.json"
-    },
-    {
-      "id": "e729c302fe4529a031c35c48",
-      "title": "Don't think, feel.",
-      "summary": "去年 10 月禅修回来后，我越发坚定了一件事情，即意识思维是有边界的，或者说现实世界中有很多我们看不到、看不清 …",
-      "image": null,
-      "publishedAt": "2026-05-26T02:11:25Z",
-      "sourceId": "e0d7bbaba7286f4d",
-      "sourceTitle": "Rolen's Blog",
-      "link": "https://rolen.wiki/dont-think-feel/",
-      "detailPath": "articles/e729c302fe4529a031c35c48.json"
-    },
-    {
-      "id": "54e9ae32f0c9431e1a7fe085",
-      "title": "道德線的形狀",
-      "summary": "每個人心中都有自己的「道德線」。",
-      "image": null,
-      "publishedAt": "2026-05-26T00:01:00Z",
-      "sourceId": "7f36c3da1e6b5c71",
-      "sourceTitle": "Wiwi.Blog Blog",
-      "link": "https://wiwi.blog/blog/shape-of-moral-line",
-      "detailPath": "articles/54e9ae32f0c9431e1a7fe085.json"
-    },
-    {
-      "id": "f924f4a32f1b37d48fe1ee30",
-      "title": "奥克兰 Auckland CBD",
-      "summary": "周末坐公交去城里逛逛。",
-      "image": "https://photoghenry.wordpress.com/wp-content/uploads/2026/05/a1daec59-6b54-4245-b3e2-c8f37280fecf.jpg",
-      "publishedAt": "2026-05-25T23:14:56Z",
-      "sourceId": "a64fac5b0b6a1cd4",
-      "sourceTitle": "摄影流水账",
-      "link": "https://photoghenry.wordpress.com/2026/05/26/%e5%a5%a5%e5%85%8b%e5%85%b0-auckland-cbd/",
-      "detailPath": "articles/f924f4a32f1b37d48fe1ee30.json"
-    },
-    {
-      "id": "b6d23ee8bdc8c7f6dfd122aa",
-      "title": "我常跟音樂學生說的一句話",
-      "summary": "這「不是」我的「 BlogBlog 同樂會 - 2026 年 5 月 」的投稿文章。本月主題是「 改變人生觀的一句話 」。 對於樂器的定義 # 這句話，是我從 2018 開始教吉他以來，爲了讓學生認知到「接音響練習的重要性」，而想出來的。 我常常跟學生說： 「你的樂器，加上拾音器或麥克風，並透過音響系統播放出來之後，才是你完整的樂器。」 就以音量來說，原聲時，假設小聲跟大聲兩個力度的音量比例是 1:2，但是透過音響出來之後，體感可能會是 1:3，隨著喇叭總音量的推大，這個比例還會變大。 所以，在情況允許的情況下，平時請接著音響，或者用錄音界面接耳機練習。 例子 # 今日做了管樂團 + 劇團的演出，剛好有一個很棒例子。 當時，導演覺得小鼓聲音很悶，問有沒有別顆鼓，換了之後試打，我跟鼓手都皺眉頭，因爲有個怪怪的聲…",
-      "image": null,
-      "publishedAt": "2026-05-25T14:00:01Z",
-      "sourceId": "199cdf92fc46bfcd",
-      "sourceTitle": "Eddie Lv",
-      "link": "https://eddielv.com/musings/a-sentence-i-talk-to-musicians/",
-      "detailPath": "articles/b6d23ee8bdc8c7f6dfd122aa.json"
-    },
-    {
-      "id": "6e1d48b73de5fa64bf04751e",
-      "title": "剛好捕捉到雙彩虹啊啊啊",
-      "summary": "今天下午下了一場大雨，而就在剛才——也就是雨停後一段時間，並且夕陽逐漸西下、晚霞開始浮現——的某一瞬間，我在極爲不經意的情況下往住處外頭望了一眼，結果被我發現到天空掛着一對巨大的 雙 彩虹啊啊啊！！！ 這個可遇不可求的美景，我當然是第一時間用我手上有的攝影器材（也就是我的平價手機⋯⋯）將它拍下來作爲紀錄！不過因爲該手機相機本身的品質不怎麼樣，所以還是無法忠實捕捉到我肉眼當時看到的畫面，所以我只能花多一點的時間用肉眼欣賞這片景色。 也還好我發現得及時，因爲這對雙彩虹，僅僅在幾分鐘的時間內，就逐漸消失無蹤了，先是 霓 （也就是「副虹」，即「附屬」的第二道彩虹）消失，然後就是主虹。與之搭配的背景晚霞也一樣，那唯美、宛如仙境的橙紫配色只維持了五分鐘左右，然後天色就逐漸暗下來，變成一片漆黑，只剩高樓大廈的燈光點綴。 簡…",
-      "image": "https://microblog.ttheng.com/blog/img174.jpg",
-      "publishedAt": "2026-05-25T11:23:00Z",
-      "sourceId": "a93d4f2e98fafcbe",
-      "sourceTitle": "All posts | 所有貼文 on ttheng's microblog. | 侃侃而隨想極短文。",
-      "link": "https://microblog.ttheng.com/double-rainbow-capture/",
-      "detailPath": "articles/6e1d48b73de5fa64bf04751e.json"
-    },
-    {
-      "id": "20fa79f7f6f4514406deb60f",
-      "title": "入蜀记 day366 远山",
-      "summary": "「远山。」",
-      "image": null,
-      "publishedAt": "2026-05-25T04:48:27Z",
-      "sourceId": "8e5dc5a8b5023a8e",
-      "sourceTitle": "折腾人生",
-      "link": "https://z.arlmy.me/posts/BBBPandINSW/INSW-jet/INSW_366/",
-      "detailPath": "articles/20fa79f7f6f4514406deb60f.json"
-    },
-    {
-      "id": "f25102ee58b03a083019c4a8",
-      "title": "笔记：把新域名应用到 Blog 和 Email 上",
-      "summary": "raychase.net 这个域名是好些年前申请的，最近申请了个更适合作为我个人标签的 rayxiong.me ，简单记录下我把新域名应用到blog（新、老域名都可以访问blog），以及创建并使用新域名的邮件地址收发邮件的操作。 Blog 配置 在Squarespace上面配置好DNS的两个A记录： 其中@表示不带任何前缀，它和www前缀这样被视为两条独立的记录。没法再简单了，不过需要等几个钟头生效。 在网站的Nginx配置文件上面添加： server_name www.rayxiong.me rayxiong.me; 以及： if ($host = rayxiong.me) { return 301 https://$host$request_uri; } if ($host = www.rayxiong.…",
-      "image": "https://rayxiong.me/wp-content/uploads/2026/05/image-11.png",
-      "publishedAt": "2026-05-25T00:04:10Z",
-      "sourceId": "ed6c79eba03be7d3",
-      "sourceTitle": "四火的唠叨",
-      "link": "https://www.raychase.net/8205",
-      "detailPath": "articles/f25102ee58b03a083019c4a8.json"
-    },
-    {
-      "id": "fd456b5bce207e4d113488ac",
-      "title": "練琴的刷油漆理論",
-      "summary": "分享一個我常跟鋼琴學生講的練琴策略，先暫時叫它「刷油漆理論」好了。",
-      "image": null,
-      "publishedAt": "2026-05-25T00:01:00Z",
-      "sourceId": "7f36c3da1e6b5c71",
-      "sourceTitle": "Wiwi.Blog Blog",
-      "link": "https://wiwi.blog/blog/paint-theory-of-practice",
-      "detailPath": "articles/fd456b5bce207e4d113488ac.json"
-    },
-    {
-      "id": "6e58000a15422dd1842340a9",
-      "title": "亂入的鵝",
-      "summary": "在路上看到一隻亂入的鵝，呆頭呆腦的樣子好可愛。",
-      "image": "https://alicehsu.blog/images/Post/51/1.jpg",
-      "publishedAt": "2026-05-25T00:00:05Z",
-      "sourceId": "a08fec079b5bc196",
-      "sourceTitle": "Alice Hsu's Blog",
-      "link": "https://alicehsu.blog/zh-tw/posts/2026/05/cranes-and-goose/",
-      "detailPath": "articles/6e58000a15422dd1842340a9.json"
-    },
-    {
-      "id": "ab3b351cc5831a252ab4da2a",
-      "title": "Toots 420 2026 May.17 - May.23",
-      "summary": "「被内在拉长。」",
-      "image": null,
-      "publishedAt": "2026-05-24T15:48:27Z",
-      "sourceId": "8e5dc5a8b5023a8e",
-      "sourceTitle": "折腾人生",
-      "link": "https://z.arlmy.me/posts/MastodonArchives/2026/MastodonTootsArchives_20260523/",
-      "detailPath": "articles/ab3b351cc5831a252ab4da2a.json"
-    },
-    {
-      "id": "1039a911f892f80c30a261cc",
-      "title": "爱你老体",
-      "summary": "「如果一开始就是错的，我们到底什么时候才会醒悟？」",
-      "image": null,
-      "publishedAt": "2026-05-24T15:44:03Z",
-      "sourceId": "8e5dc5a8b5023a8e",
-      "sourceTitle": "折腾人生",
-      "link": "https://z.arlmy.me/posts/ZArlmyMe/ToMyBody_20260524/",
-      "detailPath": "articles/1039a911f892f80c30a261cc.json"
-    },
-    {
-      "id": "002690531061c625af141288",
-      "title": "盲盒音樂礦工",
-      "summary": "在 Alex Hsu 的個人網站首頁上看到了他的自介上寫著「盲盒音樂礦工」六字，並連結至他的 Spotify 頁面，上面展示著他使用 Suno AI 生成的 lo-fi 風格音樂。 看著這六個字，我的內心充滿着⋯⋯唉，無力感。 會有如此的無力感是因爲我又再次看着能夠以不費吹灰之力被大量生產的 AI 音樂於像 Spotify 之類的已經是僧多粥少的串流平台市場中以與人類音樂相比極爲不對等的優勢分一杯羹，使得小規模的人類音樂家越來越難從中求取生計。這個問題已經有許多文章與影片做了比我更好的解釋 1 ，我就不在此贅述了。 另一個原因則是一個當下的現實：即使一位「盲盒音樂礦工」誠實地揭露自己的 AI 使用，普羅大眾仍然會將之與「音樂家」劃上等號，即使這兩者 本質上 是截然不同的東西。更不用提願意誠實揭露的甚至還是少數…",
-      "image": null,
-      "publishedAt": "2026-05-24T14:32:00Z",
-      "sourceId": "a93d4f2e98fafcbe",
-      "sourceTitle": "All posts | 所有貼文 on ttheng's microblog. | 侃侃而隨想極短文。",
-      "link": "https://microblog.ttheng.com/blind-box-music-miner/",
-      "detailPath": "articles/002690531061c625af141288.json"
-    },
-    {
-      "id": "8ab700b8d6e094bf29a021bd",
-      "title": "靡菲斯特时刻",
-      "summary": "不知道是否还有其他人系统地描述过这样的感受，“幸福到来时，比起喜悦来得更快的是恐惧。”“即使感到快乐，也不敢大声地表达些什么，只害怕幸福如同语言一般，一说出口就会消失在空气中。” 无论如何也无法",
-      "image": null,
-      "publishedAt": "2026-05-24T12:30:00Z",
-      "sourceId": "1b094a3ee9e11672",
-      "sourceTitle": "塔塔",
-      "link": "https://blog.himikouchuu.com/feed/21",
-      "detailPath": "articles/8ab700b8d6e094bf29a021bd.json"
-    },
-    {
-      "id": "4b44d662f022ed92487dda44",
-      "title": "忽然",
-      "summary": "「忽然可以共情古人。」",
-      "image": null,
-      "publishedAt": "2026-05-24T11:26:27Z",
-      "sourceId": "8e5dc5a8b5023a8e",
-      "sourceTitle": "折腾人生",
-      "link": "https://z.arlmy.me/posts/Poems/2026/20260525_HuRan/",
-      "detailPath": "articles/4b44d662f022ed92487dda44.json"
-    },
-    {
-      "id": "995380d167ee314004fe2c93",
-      "title": "周末",
-      "summary": "在js的房子租好了，这个月中签的合同，直到昨天才搬过来，主要是老家住的挺舒服，人一上岁数，就喜欢住院子里了，夏天在石桌上吃饭，苗姐喜欢在胡同里捉猫逗狗，我也可以种种菜啥的。 最近在给苗姐戒纸尿裤，因为她还有半年就要上幼儿园了，不会自己上厕所肯定不行，趁着这个夏天，给她戒了。 搬家太累了，租房子、租车位、装充电桩、收拾乱七八糟的杂物过来，这几天还失眠，因为到了新家，睡不惯，估计得几天才能适应。 他俩睡午觉呢，等会醒了去逛超市买下周的食材，还得去趟银行租保险柜，有些东西忘老家，估计明后天还得专门再去一趟。 周末愉快。",
-      "image": "https://ihaihe.cn/wp-content/uploads/2026/05/IMG_5133-scaled.webp",
-      "publishedAt": "2026-05-24T06:11:20Z",
-      "sourceId": "8e1a97c92477b087",
-      "sourceTitle": "三十里海河",
-      "link": "https://ihaihe.cn/3652.htm",
-      "detailPath": "articles/995380d167ee314004fe2c93.json"
-    },
-    {
-      "id": "1a63849d28ff01f3102e1870",
-      "title": "入蜀记 day365 死水微澜澜又静",
-      "summary": "「死水微澜澜又静。」",
-      "image": null,
-      "publishedAt": "2026-05-24T04:48:27Z",
-      "sourceId": "8e5dc5a8b5023a8e",
-      "sourceTitle": "折腾人生",
-      "link": "https://z.arlmy.me/posts/BBBPandINSW/INSW-jet/INSW_365/",
-      "detailPath": "articles/1a63849d28ff01f3102e1870.json"
     }
   ]
 }
