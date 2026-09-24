@@ -1,0 +1,11 @@
+{
+  "id": "93b9cce3fdb2cb0c160b0af6",
+  "title": "小米MiMo发布HySparse2架构论文，大幅优化Agent推理效率和成本",
+  "summary": "小米MiMo大模型团队负责人罗福莉发布新论文，公布了即将发布的MiMo-V3模型将采用的HySparse2架构。该架构针对Agent场景中“简短动作、长观察结果”的独特推理负载进行了优化，通过两级KV共享等技术，能让预填充节点只运行一半模型权重。据论文数据，在百万Token上下文下，预填充算力可降低至原方案的1/5，KV缓存缩小4.5倍，同时提升了长上下文检索能力。这一进展为AI开发者提供了关于如何从模型架构层面根本性降低Agent推理成本的重要工程思路。",
+  "content": "<p>小米MiMo大模型团队负责人罗福莉发布新论文，公布了即将发布的MiMo-V3模型将采用的HySparse2架构。该架构针对Agent场景中“简短动作、长观察结果”的独特推理负载进行了优化，通过两级KV共享等技术，能让预填充节点只运行一半模型权重。据论文数据，在百万Token上下文下，预填充算力可降低至原方案的1/5，KV缓存缩小4.5倍，同时提升了长上下文检索能力。这一进展为AI开发者提供了关于如何从模型架构层面根本性降低Agent推理成本的重要工程思路。</p><ul><li>小米MiMo团队于9月23日发布新论文，公开了其即将推出的MiMo-V3将采用的全新HySparse2架构。</li><li>HySparse2专为长周期、多轮的Agentic推理工作负载设计，核心是“两级KV共享”机制。</li><li>新架构使得在100万Token规模下，预填充节点的算力需求降低至1/5，KV缓存减小4.5倍。</li><li>预填充节点仅需部署一半的模型权重，显著降低了推理部署的显存和计算成本。</li><li>该技术旨在解决Agent场景中prefill成本高、KV缓存大和长上下文检索难的实际工程挑战。</li></ul><h3>来源 / Sources</h3><ul><li><a href=\"https://hao.cnyes.com/post/269578\" target=\"_blank\" rel=\"noopener noreferrer\">小米羅福莉發表新論文：MiMo V3模型採用新架構，推理預填充算力砍到1/5。</a></li></ul>",
+  "image": null,
+  "publishedAt": null,
+  "sourceId": "ai-engineering",
+  "sourceTitle": "AI 工程动态",
+  "link": "https://hao.cnyes.com/post/269578"
+}
