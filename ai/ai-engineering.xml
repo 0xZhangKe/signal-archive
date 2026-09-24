@@ -5,6 +5,30 @@
     <link>https://0xzhangke.github.io/signal-archive/</link>
     <description>AI 整理的公开网络内容，附原始来源。</description>
     <item>
+      <title>阿里千问AI平台全面升级：上线Agent Studio，优化面向Agent的模型服务</title>
+      <link>https://www.qbitai.com/2026/09/496301.html</link>
+      <guid isPermaLink="false">urn:signal-archive:ai:f0e29c0051fb7f610a0ca6f2b4888c36</guid>
+      <archive:collectedAt>2026-09-24T12:13:41Z</archive:collectedAt>
+      <description>在2026年9月22日的云栖大会上，阿里巴巴宣布千问AI平台全面升级，核心从提供模型API转向交付可运行的智能体。平台针对Agent负载优化了模型启动、调度、推理和缓存效率，并新增了低延迟的API优速模式。同时，正式上线了企业级Agent服务平台Agent Studio，提供从开发、托管到进化的全栈能力。平台还推出了面向车载和手机场景的行业解决方案。本次升级表明平台正致力于承接企业构建Agent的底层工程复杂度，让开发者更聚焦业务逻辑。</description>
+      <content:encoded>&lt;p&gt;在2026年9月22日的云栖大会上，阿里巴巴宣布千问AI平台全面升级，核心从提供模型API转向交付可运行的智能体。平台针对Agent负载优化了模型启动、调度、推理和缓存效率，并新增了低延迟的API优速模式。同时，正式上线了企业级Agent服务平台Agent Studio，提供从开发、托管到进化的全栈能力。平台还推出了面向车载和手机场景的行业解决方案。本次升级表明平台正致力于承接企业构建Agent的底层工程复杂度，让开发者更聚焦业务逻辑。&lt;/p&gt;&lt;ul&gt;&lt;li&gt;阿里云千问AI平台在2026云栖大会上宣布全面升级，核心是推动Agent进入生产。&lt;/li&gt;&lt;li&gt;新增API优速模式Prime，可将Token生成速度提升1.5-2倍，通过切换模型ID即可使用。&lt;/li&gt;&lt;li&gt;发布企业级全栈Agent服务平台Agent Studio，提供生产级托管、AtomAPI和即将发布的Agent API。&lt;/li&gt;&lt;li&gt;围绕Agent负载优化推理效率：模型弹起时间从1200秒缩短至70秒，首Token延迟降低38%，Prompt Caching最高节省95%成本。&lt;/li&gt;&lt;li&gt;推出千问AI座舱与Qwen Intelligence两大行业解决方案，已与比亚迪、荣耀等合作落地。&lt;/li&gt;&lt;/ul&gt;&lt;h3&gt;来源 / Sources&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;&lt;a href="https://www.163.com/dy/article/L7HQ1NLH0511D3QS.html"&gt;2026 年的云栖，阿里给 AI 行业递了一把新尺子&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://www.qbitai.com/2026/09/496301.html"&gt;阿里千问AI平台全面升级模型服务、Agent服务、AI应用&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</content:encoded>
+    </item>
+    <item>
+      <title>小米MiMo发布HySparse2架构论文，大幅优化Agent推理效率和成本</title>
+      <link>https://hao.cnyes.com/post/269578</link>
+      <guid isPermaLink="false">urn:signal-archive:ai:8b49b9bd31d8e26525ddda722c862939</guid>
+      <archive:collectedAt>2026-09-24T12:13:41Z</archive:collectedAt>
+      <description>小米MiMo大模型团队负责人罗福莉发布新论文，公布了即将发布的MiMo-V3模型将采用的HySparse2架构。该架构针对Agent场景中“简短动作、长观察结果”的独特推理负载进行了优化，通过两级KV共享等技术，能让预填充节点只运行一半模型权重。据论文数据，在百万Token上下文下，预填充算力可降低至原方案的1/5，KV缓存缩小4.5倍，同时提升了长上下文检索能力。这一进展为AI开发者提供了关于如何从模型架构层面根本性降低Agent推理成本的重要工程思路。</description>
+      <content:encoded>&lt;p&gt;小米MiMo大模型团队负责人罗福莉发布新论文，公布了即将发布的MiMo-V3模型将采用的HySparse2架构。该架构针对Agent场景中“简短动作、长观察结果”的独特推理负载进行了优化，通过两级KV共享等技术，能让预填充节点只运行一半模型权重。据论文数据，在百万Token上下文下，预填充算力可降低至原方案的1/5，KV缓存缩小4.5倍，同时提升了长上下文检索能力。这一进展为AI开发者提供了关于如何从模型架构层面根本性降低Agent推理成本的重要工程思路。&lt;/p&gt;&lt;ul&gt;&lt;li&gt;小米MiMo团队于9月23日发布新论文，公开了其即将推出的MiMo-V3将采用的全新HySparse2架构。&lt;/li&gt;&lt;li&gt;HySparse2专为长周期、多轮的Agentic推理工作负载设计，核心是“两级KV共享”机制。&lt;/li&gt;&lt;li&gt;新架构使得在100万Token规模下，预填充节点的算力需求降低至1/5，KV缓存减小4.5倍。&lt;/li&gt;&lt;li&gt;预填充节点仅需部署一半的模型权重，显著降低了推理部署的显存和计算成本。&lt;/li&gt;&lt;li&gt;该技术旨在解决Agent场景中prefill成本高、KV缓存大和长上下文检索难的实际工程挑战。&lt;/li&gt;&lt;/ul&gt;&lt;h3&gt;来源 / Sources&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;&lt;a href="https://hao.cnyes.com/post/269578"&gt;小米羅福莉發表新論文：MiMo V3模型採用新架構，推理預填充算力砍到1/5。&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</content:encoded>
+    </item>
+    <item>
+      <title>OpenAI与Anthropic同日发布新模型，大模型竞争进入性价比阶段</title>
+      <link>https://www.datacamp.com/zh/blog/gpt-6-sol-vs-claude-opus-5-5</link>
+      <guid isPermaLink="false">urn:signal-archive:ai:12dcbf5d97e92644ba211696a4a42ab1</guid>
+      <archive:collectedAt>2026-09-24T12:13:41Z</archive:collectedAt>
+      <description>OpenAI和Anthropic于2026年9月22日相继发布GPT-6 Sol/Luna和Claude Opus 5.5模型，共同特点是大幅降价和强调提升性价比。OpenAI将其中端模型价格永久下调50%，Anthropic的新模型则降价20%并宣称在多项编码基准上超越自家顶级模型。行业分析认为，这反映出大模型竞争已进入“拼性价比”阶段，模型厂商需通过降低推理成本和提升效率来吸引和保留企业用户。开发者可以更低成本获得与前代高端模型接近的能力。</description>
+      <content:encoded>&lt;p&gt;OpenAI和Anthropic于2026年9月22日相继发布GPT-6 Sol/Luna和Claude Opus 5.5模型，共同特点是大幅降价和强调提升性价比。OpenAI将其中端模型价格永久下调50%，Anthropic的新模型则降价20%并宣称在多项编码基准上超越自家顶级模型。行业分析认为，这反映出大模型竞争已进入“拼性价比”阶段，模型厂商需通过降低推理成本和提升效率来吸引和保留企业用户。开发者可以更低成本获得与前代高端模型接近的能力。&lt;/p&gt;&lt;ul&gt;&lt;li&gt;GPT-6 Sol和GPT-6 Luna于2026年9月22日随OpenAI发布，继承了旗舰GPT-6 Astra的一些能力。&lt;/li&gt;&lt;li&gt;API价格相比GPT-5.6系列对应型号永久性下降50%，例如GPT-6 Sol输入$2/百万Token，输出$10/百万Token。&lt;/li&gt;&lt;li&gt;Claude Opus 5.5由Anthropic同日发布，输入/输出价格较Opus 5降低20%。&lt;/li&gt;&lt;li&gt;Opus 5.5在多项代理式编码基准（如Terminal-Bench 4.0）上宣称超过自家顶级模型Fable 5.1。&lt;/li&gt;&lt;li&gt;此次更新标志着竞争重点从单纯追求模型能力上限，转向降低实际任务成本、提升性价比和规模化部署效率。&lt;/li&gt;&lt;/ul&gt;&lt;h3&gt;来源 / Sources&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;&lt;a href="https://www.datacamp.com/zh/blog/gpt-6-sol-vs-claude-opus-5-5"&gt;GPT-6 Sol 与Claude Opus 5.5：基准测试、价格与实测&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://finance.sina.com.cn/stock/t/2026-09-23/doc-inisvumv5252888.shtml"&gt;美国大模型开打价格战&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://m.sohu.com/a/1080131058_122014422?scm=10001.325_13-325_13.0.0-0-0-0-0.5_1334"&gt;A社O社，坐不住了&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</content:encoded>
+    </item>
+    <item>
       <title>阿里云大模型服务平台百炼发布多项功能更新</title>
       <link>https://help.aliyun.com/zh/model-studio/application-release-notes</link>
       <guid isPermaLink="false">urn:signal-archive:ai:f01d6efff3406ab10a08c54f9a672bf6</guid>

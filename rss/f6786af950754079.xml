@@ -12,7 +12,7 @@
 	<atom:link href="https://www.kawabangga.com/feed" rel="self" type="application/rss+xml" />
 	<link>https://www.kawabangga.com</link>
 	<description>无法自制的人得不到自由。</description>
-	<lastBuildDate>Wed, 09 Sep 2026 08:39:35 +0000</lastBuildDate>
+	<lastBuildDate>Thu, 24 Sep 2026 06:09:24 +0000</lastBuildDate>
 	<language>zh-Hans</language>
 	<sy:updatePeriod>
 	hourly	</sy:updatePeriod>
@@ -28,6 +28,180 @@
 	<height>32</height>
 </image> 
 	<item>
+		<title>一次内存引起的网络丢包问题排查</title>
+		<link>https://www.kawabangga.com/posts/7422</link>
+					<comments>https://www.kawabangga.com/posts/7422#respond</comments>
+		
+		<dc:creator><![CDATA[laixintao]]></dc:creator>
+		<pubDate>Thu, 24 Sep 2026 06:09:24 +0000</pubDate>
+				<category><![CDATA[网络]]></category>
+		<category><![CDATA[DMA]]></category>
+		<category><![CDATA[linux]]></category>
+		<guid isPermaLink="false">https://www.kawabangga.com/?p=7422</guid>
+
+					<description><![CDATA[记录一下最近排查的一个问题：某台机器一上线就有丢包，同 Rack 同规格的其他机器都没有问题，由于负载都是一样 [&#8230;]<br/><a href="https://www.kawabangga.com/posts/7422" class="more-link" >Continue reading...</a>]]></description>
+										<content:encoded><![CDATA[
+<p class="wp-block-paragraph">记录一下最近排查的一个问题：某台机器一上线就有丢包，同 Rack 同规格的其他机器都没有问题，由于负载都是一样的，所以问题集中到这台机器本身的问题。已经可以 100% 复现，只要一接流量，网卡就开始时不时的丢包。</p>
+
+
+
+<figure class="wp-block-image size-large"><a href="https://www.kawabangga.com/wp-content/uploads/2026/09/image.png"><img fetchpriority="high" decoding="async" width="1024" height="304" src="https://www.kawabangga.com/wp-content/uploads/2026/09/image-1024x304.png" alt="" class="wp-image-7423" srcset="https://www.kawabangga.com/wp-content/uploads/2026/09/image-1024x304.png 1024w, https://www.kawabangga.com/wp-content/uploads/2026/09/image-300x89.png 300w, https://www.kawabangga.com/wp-content/uploads/2026/09/image-766x227.png 766w, https://www.kawabangga.com/wp-content/uploads/2026/09/image-1536x455.png 1536w, https://www.kawabangga.com/wp-content/uploads/2026/09/image.png 1848w" sizes="(max-width: 1024px) 100vw, 1024px" /></a><figcaption class="wp-element-caption">网卡使用率对应丢包，左边蓝色的线是有问题的机器，0% 是下线状态，可见，只要一上线就会丢包</figcaption></figure>
+
+
+
+<p class="wp-block-paragraph">初步检查：网卡的 CRC 正常，光模块正常。（这些一般是丢包的常见问题）</p>
+
+
+
+<p class="wp-block-paragraph">仔细检查网卡的计数器，发现丢包发生在 <code>rx_prio0_buf_discard: 397172</code>。</p>
+
+
+
+<p class="wp-block-paragraph">中间经历了很多错误的排查思路，比如这个 metric 是每一个 NIC 都有一个，但是 driver 的实现应该是用了同一个 metric，因为 2 个 NIC 的数字总是相同的。</p>
+
+
+
+<p class="wp-block-paragraph">以为是 DCB 的 buffer 不够，尝试了调大 DCB 的 buffer。</p>
+
+
+
+<div class="wp-block-urvanov-syntax-highlighter-code-block"><pre class="urvanov-syntax-highlighter-plain-tag">$ dcb buffer show dev enp94s0f1np1
+prio-buffer 0:0 1:0 2:0 3:0 4:0 5:0 6:0 7:0
+buffer-size 0:20016b 1:0b 2:0b 3:0b 4:0b 5:0b 6:0b 7:0b
+total-size 216288b</pre></div>
+
+
+
+<p class="wp-block-paragraph">发现 buffer 大了丢包反而更严重了一些，buffer 调小也是有丢包。应该是和 buffer 无关。</p>
+
+
+
+<p class="wp-block-paragraph">由于是 rx 的丢包，应该是 ingress 的处理能力不足，接下来的排查包括了：</p>
+
+
+
+<ul class="wp-block-list">
+<li>查看 PCIe 的带宽，状态；</li>
+
+
+
+<li>调整 Interrupt coalescing，让它处理更快；</li>
+</ul>
+
+
+
+<p class="wp-block-paragraph">……都没有效果。</p>
+
+
+
+<p class="wp-block-paragraph">中间经历了一次大促，容量足够，就暂停排查了，这周又开始继续。</p>
+
+
+
+<p class="wp-block-paragraph">好像和网卡有关的东西检查都是正常的，同事建议换一张网卡试试。换之前我使出了最后的一招：server diff.</p>
+
+
+
+<p class="wp-block-paragraph">server diff 是我排查问题作为没有思路之后的一个手段，可以简化成一段 skill：</p>
+
+
+
+<blockquote class="wp-block-quote is-layout-flow wp-block-quote-is-layout-flow">
+<p class="wp-block-paragraph">这是一个正常的机器，这是一个异常的机器。你对比一下两个机器之间的 sysctl 参数，kernel 参数，硬件规格，看下两台机器有什么不一样的部分。</p>
+</blockquote>
+
+
+
+<p class="wp-block-paragraph">AI 发现的问题如下：</p>
+
+
+
+<blockquote class="wp-block-quote is-layout-flow wp-block-quote-is-layout-flow">
+<p class="wp-block-paragraph">能找到的差异点（按怀疑程度排）</p>
+
+
+
+<ol class="wp-block-list">
+<li>硬件/内存健康 IPMI SEL：08/31 16:46 和 16:49 两次 Uncorrectable ECC DIMMB5；mcelog 有 08/31 15:39 一条 Memory read corrected error；随后 08/31、09/02、09/03 连续多次重启。DIMM 全是 Micron 36ASF4G72PZ-3G2J3（.144 是 Samsung M393A4K40DB3-CWE），B5 序列号 2E313345，看不出被换过。 本次启动（09-03）以来 EDAC ce/ue 都是 0，但 Dell 在 UE/CE 后可能进入 ADDDC/lockstep 降级模式， 会拉低内存带宽/延迟。 保留意见：网卡在 NUMA node0（CPU1/A 组），B5 属于 CPU2（B 组），RX ring 页也在 node0， 理论上不直接受影响；但这台机器的内存子系统整体存疑。</li>
+
+
+
+<li>&#8230;</li>
+</ol>
+</blockquote>
+
+
+
+<p class="wp-block-paragraph">这是非常可疑的一个点，Linux 的收包链路上，NIC DMA 到内存<sup data-fn="54537219-898f-4185-8ce0-cdb3f60ccbe8" class="fn"><a href="#54537219-898f-4185-8ce0-cdb3f60ccbe8" id="54537219-898f-4185-8ce0-cdb3f60ccbe8-link">1</a></sup>，路线是：</p>
+
+
+
+<p class="wp-block-paragraph"><code>PCIe NIC → PCIe Root Port/Root Complex → IOMMU → CPU Mesh/Interconnect → LLC(L3) / Memory Controller → DRAM</code></p>
+
+
+
+<p class="wp-block-paragraph">内存子系统异常会显著降低 host RX path 的处理和 buffer 回收能力，可能进一步造成 NIC ingress buffer 无法及时 drain，最终表现为 <code>rx_prio0_buf_discard</code>。</p>
+
+
+
+<p class="wp-block-paragraph">于是我下线机器之后测试内存的带宽，我们使用的服务器有 2 个 CPU，2 个 NUMA node，于是分别测试。</p>
+
+
+
+<p class="wp-block-paragraph">测试使用 <code>stream.c</code> <sup data-fn="1c25d1ea-384e-4f4d-8107-b313d3f7da0b" class="fn"><a href="#1c25d1ea-384e-4f4d-8107-b313d3f7da0b" id="1c25d1ea-384e-4f4d-8107-b313d3f7da0b-link">2</a></sup>结果如下：</p>
+
+
+
+<div class="wp-block-urvanov-syntax-highlighter-code-block"><pre class="urvanov-syntax-highlighter-plain-tag">$  numactl -C 2 -m 0 ./stream
+Copy:           10419.3     0.015583     0.015356     0.016709
+Scale:          11657.5     0.013985     0.013725     0.014751
+Add:            13445.3     0.018228     0.017850     0.018540
+Triad:          13297.1     0.018250     0.018049     0.018966
+$  numactl -C 2 -m 1 ./stream
+Copy:             648.4     0.251102     0.246778     0.258519
+Scale:            619.4     0.277245     0.258311     0.338792
+Add:              668.6     0.382864     0.358960     0.420878
+Triad:            665.1     0.378978     0.360838     0.429338
+$  numactl -C 3 -m 0 ./stream
+Copy:           13936.3     0.011795     0.011481     0.012645
+Scale:           8038.1     0.020416     0.019905     0.021659
+Add:             9287.6     0.028779     0.025841     0.049315
+Triad:           9252.8     0.026599     0.025938     0.027369
+$  numactl -C 3 -m 1 ./stream
+Copy:            1626.5     0.103622     0.098372     0.116646
+Scale:            652.1     0.258530     0.245347     0.309194
+Add:              710.6     0.346138     0.337722     0.377382
+Triad:            711.2     0.344051     0.337455     0.349108</pre></div>
+
+
+
+<p class="wp-block-paragraph">（CPU 2 和 3 分别在 NUMA node 0 和 1）</p>
+
+
+
+<p class="wp-block-paragraph">可以看到，node 1 的内存，无论是同 NUMA node local 读写还是跨 NUMA remote 读写，速度只有区区 700MB，性能只有 node 0 的 1/17，确定 node 1 的内存有问题了。</p>
+
+
+
+<p class="wp-block-paragraph">进一步验证，由于我们使用的 NIC 是双网口 bond，port 1 的中断绑定到 node 0 的 CPU，port 2 的中断都绑定到 node 1 的 CPU，（这样提高 CPU 的利用率，又提供稳定的转发延迟）。所以可以通过关闭 port 2 来关闭 node 1 的使用，验证只有 node 1 的内存有问题。</p>
+
+
+
+<p class="wp-block-paragraph">关闭一个网卡之后上线，再也没有发现有丢包。</p>
+
+
+
+<figure class="wp-block-image size-large"><a href="https://www.kawabangga.com/wp-content/uploads/2026/09/image-1.png"><img decoding="async" width="1024" height="378" src="https://www.kawabangga.com/wp-content/uploads/2026/09/image-1-1024x378.png" alt="" class="wp-image-7425" srcset="https://www.kawabangga.com/wp-content/uploads/2026/09/image-1-1024x378.png 1024w, https://www.kawabangga.com/wp-content/uploads/2026/09/image-1-300x111.png 300w, https://www.kawabangga.com/wp-content/uploads/2026/09/image-1-767x283.png 767w, https://www.kawabangga.com/wp-content/uploads/2026/09/image-1.png 1480w" sizes="(max-width: 1024px) 100vw, 1024px" /></a><figcaption class="wp-element-caption">由于是单卡模式上线，机器分到的流量不变，所以这台机器的网卡使用率是其他机器的2倍，但是丢包是0.</figcaption></figure>
+
+
+<ol class="wp-block-footnotes"><li id="54537219-898f-4185-8ce0-cdb3f60ccbe8">见<a href="https://www.kawabangga.com/posts/7292" data-type="post" data-id="7292">服务器高性能网络调优</a> <a href="#54537219-898f-4185-8ce0-cdb3f60ccbe8-link" aria-label="跳转到脚注引用 1"><img src="https://s.w.org/images/core/emoji/17.0.2/72x72/21a9.png" alt="↩" class="wp-smiley" style="height: 1em; max-height: 1em;" />︎</a></li><li id="1c25d1ea-384e-4f4d-8107-b313d3f7da0b">source code: <a href="https://www.cs.virginia.edu/stream/FTP/Code/stream.c">https://www.cs.virginia.edu/stream/FTP/Code/stream.c</a> <a href="#1c25d1ea-384e-4f4d-8107-b313d3f7da0b-link" aria-label="跳转到脚注引用 2"><img src="https://s.w.org/images/core/emoji/17.0.2/72x72/21a9.png" alt="↩" class="wp-smiley" style="height: 1em; max-height: 1em;" />︎</a></li></ol>]]></content:encoded>
+					
+					<wfw:commentRss>https://www.kawabangga.com/posts/7422/feed</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
 		<title>BPG 连接建立失败问题的答案和解析</title>
 		<link>https://www.kawabangga.com/posts/7413</link>
 					<comments>https://www.kawabangga.com/posts/7413#respond</comments>
@@ -53,7 +227,7 @@
 
 
 
-<figure class="wp-block-image size-large"><a href="https://www.kawabangga.com/wp-content/uploads/2026/09/bgp_open-scaled.jpg"><img fetchpriority="high" decoding="async" width="1024" height="123" src="https://www.kawabangga.com/wp-content/uploads/2026/09/bgp_open-1024x123.jpg" alt="" class="wp-image-7416" srcset="https://www.kawabangga.com/wp-content/uploads/2026/09/bgp_open-1024x123.jpg 1024w, https://www.kawabangga.com/wp-content/uploads/2026/09/bgp_open-764x92.jpg 764w, https://www.kawabangga.com/wp-content/uploads/2026/09/bgp_open-300x36.jpg 300w, https://www.kawabangga.com/wp-content/uploads/2026/09/bgp_open-1536x185.jpg 1536w, https://www.kawabangga.com/wp-content/uploads/2026/09/bgp_open-2048x247.jpg 2048w" sizes="(max-width: 1024px) 100vw, 1024px" /></a><figcaption class="wp-element-caption">Open 消息</figcaption></figure>
+<figure class="wp-block-image size-large"><a href="https://www.kawabangga.com/wp-content/uploads/2026/09/bgp_open-scaled.jpg"><img decoding="async" width="1024" height="123" src="https://www.kawabangga.com/wp-content/uploads/2026/09/bgp_open-1024x123.jpg" alt="" class="wp-image-7416" srcset="https://www.kawabangga.com/wp-content/uploads/2026/09/bgp_open-1024x123.jpg 1024w, https://www.kawabangga.com/wp-content/uploads/2026/09/bgp_open-764x92.jpg 764w, https://www.kawabangga.com/wp-content/uploads/2026/09/bgp_open-300x36.jpg 300w, https://www.kawabangga.com/wp-content/uploads/2026/09/bgp_open-1536x185.jpg 1536w, https://www.kawabangga.com/wp-content/uploads/2026/09/bgp_open-2048x247.jpg 2048w" sizes="(max-width: 1024px) 100vw, 1024px" /></a><figcaption class="wp-element-caption">Open 消息</figcaption></figure>
 
 
 
@@ -79,7 +253,7 @@
 
 
 
-<figure class="wp-block-image size-large"><a href="https://www.kawabangga.com/wp-content/uploads/2026/09/bgp-keepalive-message.jpg"><img decoding="async" width="1024" height="520" src="https://www.kawabangga.com/wp-content/uploads/2026/09/bgp-keepalive-message-1024x520.jpg" alt="" class="wp-image-7417" srcset="https://www.kawabangga.com/wp-content/uploads/2026/09/bgp-keepalive-message-1024x520.jpg 1024w, https://www.kawabangga.com/wp-content/uploads/2026/09/bgp-keepalive-message-300x152.jpg 300w, https://www.kawabangga.com/wp-content/uploads/2026/09/bgp-keepalive-message-767x390.jpg 767w, https://www.kawabangga.com/wp-content/uploads/2026/09/bgp-keepalive-message-1536x781.jpg 1536w, https://www.kawabangga.com/wp-content/uploads/2026/09/bgp-keepalive-message.jpg 1586w" sizes="(max-width: 1024px) 100vw, 1024px" /></a><figcaption class="wp-element-caption">从对面发给我们的 keepalive 消息</figcaption></figure>
+<figure class="wp-block-image size-large"><a href="https://www.kawabangga.com/wp-content/uploads/2026/09/bgp-keepalive-message.jpg"><img loading="lazy" decoding="async" width="1024" height="520" src="https://www.kawabangga.com/wp-content/uploads/2026/09/bgp-keepalive-message-1024x520.jpg" alt="" class="wp-image-7417" srcset="https://www.kawabangga.com/wp-content/uploads/2026/09/bgp-keepalive-message-1024x520.jpg 1024w, https://www.kawabangga.com/wp-content/uploads/2026/09/bgp-keepalive-message-300x152.jpg 300w, https://www.kawabangga.com/wp-content/uploads/2026/09/bgp-keepalive-message-767x390.jpg 767w, https://www.kawabangga.com/wp-content/uploads/2026/09/bgp-keepalive-message-1536x781.jpg 1536w, https://www.kawabangga.com/wp-content/uploads/2026/09/bgp-keepalive-message.jpg 1586w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /></a><figcaption class="wp-element-caption">从对面发给我们的 keepalive 消息</figcaption></figure>
 
 
 
@@ -103,7 +277,7 @@
 
 
 
-<div class="wp-block-cover is-light"><img decoding="async" width="1024" height="576" class="wp-block-cover__image-background wp-image-7405 size-large" alt="" src="https://www.kawabangga.com/wp-content/uploads/2024/05/index-background-1024x576.png" style="object-position:38% 56%" data-object-fit="cover" data-object-position="38% 56%" srcset="https://www.kawabangga.com/wp-content/uploads/2024/05/index-background-1024x576.png 1024w, https://www.kawabangga.com/wp-content/uploads/2024/05/index-background-300x169.png 300w, https://www.kawabangga.com/wp-content/uploads/2024/05/index-background-768x432.png 768w, https://www.kawabangga.com/wp-content/uploads/2024/05/index-background-1536x864.png 1536w, https://www.kawabangga.com/wp-content/uploads/2024/05/index-background.png 1672w" sizes="(max-width: 1024px) 100vw, 1024px" /><span aria-hidden="true" class="wp-block-cover__background has-background-dim" style="background-color:#e5e8ec"></span><div class="wp-block-cover__inner-container is-layout-flow wp-block-cover-is-layout-flow">
+<div class="wp-block-cover is-light"><img loading="lazy" decoding="async" width="1024" height="576" class="wp-block-cover__image-background wp-image-7405 size-large" alt="" src="https://www.kawabangga.com/wp-content/uploads/2024/05/index-background-1024x576.png" style="object-position:38% 56%" data-object-fit="cover" data-object-position="38% 56%" srcset="https://www.kawabangga.com/wp-content/uploads/2024/05/index-background-1024x576.png 1024w, https://www.kawabangga.com/wp-content/uploads/2024/05/index-background-300x169.png 300w, https://www.kawabangga.com/wp-content/uploads/2024/05/index-background-768x432.png 768w, https://www.kawabangga.com/wp-content/uploads/2024/05/index-background-1536x864.png 1536w, https://www.kawabangga.com/wp-content/uploads/2024/05/index-background.png 1672w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /><span aria-hidden="true" class="wp-block-cover__background has-background-dim" style="background-color:#e5e8ec"></span><div class="wp-block-cover__inner-container is-layout-flow wp-block-cover-is-layout-flow">
 <div class="wp-block-group has-black-color has-text-color has-link-color wp-elements-1"><div class="wp-block-group__inner-container is-layout-constrained wp-block-group-is-layout-constrained">
 <h2 class="wp-block-heading has-text-align-center">==抓包破案录==</h2>
 
@@ -2154,297 +2328,6 @@ tx-frames-irq:	n/a</pre></div>
 					
 					<wfw:commentRss>https://www.kawabangga.com/posts/7288/feed</wfw:commentRss>
 			<slash:comments>11</slash:comments>
-		
-		
-			</item>
-		<item>
-		<title>读《金阁寺》</title>
-		<link>https://www.kawabangga.com/posts/7246</link>
-					<comments>https://www.kawabangga.com/posts/7246#comments</comments>
-		
-		<dc:creator><![CDATA[laixintao]]></dc:creator>
-		<pubDate>Mon, 04 May 2026 17:34:37 +0000</pubDate>
-				<category><![CDATA[读书有感]]></category>
-		<category><![CDATA[三岛由纪夫]]></category>
-		<category><![CDATA[日本文学]]></category>
-		<category><![CDATA[读书]]></category>
-		<guid isPermaLink="false">https://www.kawabangga.com/?p=7246</guid>
-
-					<description><![CDATA[读其他的书知道了《金阁寺》这本书，就找来读了。读完合上最后一页，心里久久不能平静。说这本书是「惊世骇俗」一点也 [&#8230;]<br/><a href="https://www.kawabangga.com/posts/7246" class="more-link" >Continue reading...</a>]]></description>
-										<content:encoded><![CDATA[
-<p class="wp-block-paragraph">读其他的书知道了《金阁寺》这本书，就找来读了。读完合上最后一页，心里久久不能平静。说这本书是「惊世骇俗」一点也不为过。</p>
-
-
-
-<p class="wp-block-paragraph">书讲述的日本战后年代，一位有口吃的贫穷青年，被患有绝症的父亲送入鹿苑寺成为建系僧人，母亲最大的愿望，就是看到「我」成为住持。书中的「我」痴迷于金阁寺的美。因为在寺里发生的种种违背于「美」的事情（抑或许「我」本身就是这样的一个人？），给「我」带来煎熬的思想斗争。心理的内耗由于无法了解，「我」的老师对此也不做评论，导致「我」越陷越深，沉迷于自己的世界中。想要承认错误却又因为懦弱而无法行动，导致最终的行为是通过犯下更大的错误来祈求得到老师正面的批评，越陷越深，加上母亲对自己的寄托沉重地无法背负，最终犯下被世人唾弃的滔天大罪。</p>
-
-
-
-<p class="wp-block-paragraph">因为年轻与贫穷，能力受限制，无法掌控自己的生活，我对这种处境很有共鸣。我想起来初中的住校生活，一个月有25天都住在学校里，8 个学生生活在15平米的宿舍里面，老师会随意进出宿舍，翻看学生的物品，没有隐私可言。每一个人都被贴上了无法摘掉的标签：来自农村，如果你学习好，那就是人穷志不穷，是大家学习的榜样，如果学习不好，那就是家境贫寒还不知道努力，是耻辱中的耻辱；家里有钱，如果学习好，就是家里有钱但是还要强，如果学习不好，那就是纨绔子弟；长得漂亮，学习好，那就是天生财貌双全，学习不好，那就是心思都用在了打扮上面。总之，老师无法将事情分开单独看待，无法接受一个学习不好只是不努力，学习好是努力，和家境，长相无关。</p>
-
-
-
-<p class="wp-block-paragraph">虽然这是和本书不想关的东西，但是我想，就是处在这种环境中，没有能力做出改变，才愈发想要尽一切可能打破这一切。对于虚伪之人，「我」能做的，就是做出不符合他们预期的事情，不让他们的预期得逞。书中的「我」其实非常软弱，尝试出走，只是遇到警察就被遣送回寺了，花学费去嫖娼也会受到妓女的教育，没有人看得起。最后火烧金阁寺的时候，也是被一连串的事件推动进行的，中间几次打了退堂鼓，如果不是这些机缘巧合，可能最后不会有这样惊天之举，也许就是一事无成的落魄僧人，被寺里赶出来，落得一个流落街头，最终被人遗忘的命运。</p>
-
-
-
-<p class="wp-block-paragraph">生活在自己没有能力掌控生活的环境中，能做的，就只有顺从掌权者的想法，必须要小心翼翼。这和掌权者没有关系，即使权力的座位上是一个好人，迫于权力的不对称，也会带来极大的心理压力。三岛由纪夫把这种压迫感描写的淋漓尽致。如果一步走错，会陷入深深的怀疑中，想要打破这一切，放弃一切。甚至希望事情朝着糟糕的方向发展，因为这样的话，也就不必再抱有希望，可以心安理得地迎接最坏的结果了。</p>
-
-
-
-<p class="wp-block-paragraph">三岛由纪夫的文笔非常好，摘录书中的几段：</p>
-
-
-
-<p class="wp-block-paragraph">在描写口吃的时候，写道：</p>
-
-
-
-<blockquote class="wp-block-quote is-layout-flow wp-block-quote-is-layout-flow">
-<p class="wp-block-paragraph">显而易见，口吃的毛病成了我与外界交流的一道巨大障碍。每当我想说话时，第一个音总是发不准，这第一个音成了我打开外部世界之门的一把钥匙。遗憾的是，这把钥匙从没打开过门上的锁。其他人都可以通过语言自由自在地打开自己与外界之间的这扇大门，而我无论如何努力也做不到。我的钥匙生锈了。</p>
-
-
-
-<p class="wp-block-paragraph">对口吃的人来说，最难受的就是如何发出第一个音，这让人备受煎熬，就如内心有一只小鸟想飞出去，但浑身沾满了黏稠物，只能慌乱无用地扑扇翅膀。好不容易挣脱出来时，已经赶不上对话节奏了。</p>
-
-
-
-<p class="wp-block-paragraph">在我挣扎着扑扇翅膀的时候，门外的世界偶尔会暂停脚步等我赶上，但在我赶上的时候，那个世界已不再是我尽力要赶上的现实世界了。当我费尽全力挣脱并到达外部世界时，才发现这个世界已经瞬间发生改变，完全背离了我的期待……</p>
-</blockquote>
-
-
-
-<p class="wp-block-paragraph">描写看热闹的人：</p>
-
-
-
-<blockquote class="wp-block-quote is-layout-flow wp-block-quote-is-layout-flow">
-<p class="wp-block-paragraph">看热闹的人在一田之隔观望，后来人越来越多，大家肩挨着肩沉默观看，连头上的月亮好像都被挤小了。</p>
-</blockquote>
-
-
-
-<blockquote class="wp-block-quote is-layout-flow wp-block-quote-is-layout-flow">
-<p class="wp-block-paragraph">真是一张不可思议的脸，这样的表情在刚被砍倒的树桩上也能看到。尽管色泽还鲜艳，但成长已不再可能，被迫沐浴在本不该沐浴到的阳光和秋风里，暴露在本不该属于自己的世界里。有为子的脸如同那有着美丽木纹的木桩，想拒绝这个世界，却被拖拽到这个世界上，呈现出不可思议的美……</p>
-</blockquote>
-
-
-
-<p class="wp-block-paragraph">描述金阁寺顶的金铜合金的凤凰：</p>
-
-
-
-<blockquote class="wp-block-quote is-layout-flow wp-block-quote-is-layout-flow">
-<p class="wp-block-paragraph">我还想起屋顶上那只金铜合金的凤凰，这只历经几百年风吹雨打的神秘的金色大鸟，既不报时，也不飞翔，似乎完全忘了自己是鸟儿。但是，如果认为它不在飞，那就错了。别的鸟儿都在空中飞，而它却展开闪亮的翅膀，永远在时间里翱翔。时间如风，掠过它的双翅向后流逝。金凤凰以亘古不变的姿势，双翼高振，怒目含威，尾翼伸展，双腿稳稳站立，翱翔在时间的长河中。</p>
-</blockquote>
-
-
-
-<p class="wp-block-paragraph">&#8230;</p>
-
-
-
-<blockquote class="wp-block-quote is-layout-flow wp-block-quote-is-layout-flow">
-<p class="wp-block-paragraph">临近闭园时好像来了一个旅游团，从金阁方向传来了阵阵喧闹声。围墙外的脚步声和人声虽然吵闹嘈杂，但经春日的夕暮吸收后，并未有尖锐刺耳的感觉，反而显得柔和且饱满。没过一会儿，脚步声如潮水般远远退去，犹如这片土地上来来往往的芸芸众生的足音。我抬头凝视着金阁顶上的金凤凰，此刻，它正沐浴在落日余晖的残红里。</p>
-</blockquote>
-
-
-
-<p class="wp-block-paragraph">描述自己梯度之后的头：</p>
-
-
-
-<blockquote class="wp-block-quote is-layout-flow wp-block-quote-is-layout-flow">
-<p class="wp-block-paragraph">我刚落发的头上泛着青光，与空气完美贴合。感觉自己脑中所想之事，与外界仅隔了一层薄薄的、敏感且易破的头皮而已，这是一种奇妙且危险的感觉。我仰起光溜溜的头颅凝望金阁，感觉它不仅进入了我的视界，还通过这颗光头渗进了我的体内，与我融为一体，跟我的头一样，在骄阳暴晒下感受到热，而在夕阳西下时又会凉下来。</p>
-</blockquote>
-
-
-
-<blockquote class="wp-block-quote is-layout-flow wp-block-quote-is-layout-flow">
-<p class="wp-block-paragraph">我在绝望中等待，因为我相信，这澄清的早春晴空就像闪亮的玻璃窗一样，虽然我们看不见，但其背后一定隐藏着强大的火力和毁灭一切的力量。如前所述，我这个人不擅表达对人的关爱，父亲的死及母亲的困窘都没有在我的心里激起一片涟漪。我幻想着某天天空中突然出现一台巨大的碾压机，能将一切灾祸、世界末日和人间惨剧，无论是人还是物，无论是美还是丑，无差别地统统碾碎。那个早春异常灿烂的晴空，似一把可覆盖整个大地的巨大利斧，闪着寒光。我期待那把斧尽快砍下，不给任何人思考的余地。</p>
-</blockquote>
-
-
-
-<p class="wp-block-paragraph">对于友情的描述：</p>
-
-
-
-<blockquote class="wp-block-quote is-layout-flow wp-block-quote-is-layout-flow">
-<p class="wp-block-paragraph">是的，有时候我甚至觉得，鹤川是一位炼金术大师，他善于从铅里炼出黄金。如果我是照片的底片，鹤川就是照片的正片。我惊讶地发现，很多时候，一旦经他的过滤，我的浑浊不堪的心情不仅瞬间消失殆尽，还会转变成纯净透明、光彩熠熠的感情。当我结结巴巴、踌躇无措时，鹤川就会伸出援手，将我的感情翻转过来展示给外界看。一次次的惊愕让我明白，如果仅停留在感情层面，那么这世上最善和最恶的感情其实并非截然不同的东西，其效果也是相同的。而且，从表面上看，杀意和慈悲心也没什么不同。我想，关于这些，无论我如何费尽口舌地向鹤川说明，他也不会相信吧，但对我来说，这却是一个非常可怕的发现。因为鹤川的存在，让我不再惧怕伪善，但对我来说，伪善只不过是一种相对的罪恶而已。</p>
-</blockquote>
-
-
-
-<p class="wp-block-paragraph">&#8230;</p>
-
-
-
-<p class="wp-block-paragraph">瞥见那一抹青痕时，我顿感不安。眼前的这位少年和我不同，他的生命将在纯洁的末端燃烧，在燃烧之前，未来隐藏不见。未来的灯芯浸在冰冷透明的油里。如果留给未来的只有纯洁和无瑕的话，谁还有必要预测自己的纯洁和无瑕呢？</p>
-
-
-
-<p class="wp-block-paragraph">描写下雪：</p>
-
-
-
-<blockquote class="wp-block-quote is-layout-flow wp-block-quote-is-layout-flow">
-<p class="wp-block-paragraph">究竟顶的大门今天依旧对着天空敞开。仰望它时，我的心却随着雪花飞舞：飘进敞开的大门，在空无一物的究竟顶狭小的空间里飞舞，接着落在墙壁一片生锈的金箔上，失去活力，停止呼吸，最后变成一颗透着金色的露珠。</p>
-</blockquote>
-
-
-
-<p class="wp-block-paragraph">希望破灭之后的绝望感：</p>
-
-
-
-<blockquote class="wp-block-quote is-layout-flow wp-block-quote-is-layout-flow">
-<p class="wp-block-paragraph">这时，我心里产生了异样的冲动，如同有满腹话语想要表达，却因口吃妨碍而欲说不能，话语一直卡在喉咙里燃烧一样。我想寻求解脱。眼下，不仅是母亲曾经暗示过的继承老师衣钵的希望已然渺茫，就连上大学的希望也已荡然无存。我想从这无声地桎梏着我、重重地挤压着我的窒息感中解脱出来。</p>
-</blockquote>
-
-
-
-<p class="wp-block-paragraph">&#8230;</p>
-
-
-
-<blockquote class="wp-block-quote is-layout-flow wp-block-quote-is-layout-flow">
-<p class="wp-block-paragraph">一种可怕的不满让我们这样的人和这个世界处于对立状态，我们和世界必须有一方肯妥协并做出改变，这种不满才有可能得到治愈。但我讨厌渴望改变的梦想，也讨厌毫无意义的白日梦。但是，我又喜欢在“世界若变化，我就不复存在；我若变化，世界也将烟消云散”这样的问题上刨根问底。这样的确信，反过来倒像我与这个世界的某种和解、某种融合。像我这样肢体有残障的人是不会被世人所爱的，因为我有这样的想法才能得以和这个世界共存。但是，残障人士最容易陷入的陷阱，不是和外部世界的对立状态得以消除，而是全盘接受自己与世界对立的状态。于是，残疾就成了让你和这个世界格格不入的不可调和的存在……</p>
-</blockquote>
-
-
-
-<blockquote class="wp-block-quote is-layout-flow wp-block-quote-is-layout-flow">
-<p class="wp-block-paragraph">在这个逃课的午后，和煦的春光和阵阵和风就像新做的衬衣，轻柔地触碰着肌肤。</p>
-</blockquote>
-
-
-
-<blockquote class="wp-block-quote is-layout-flow wp-block-quote-is-layout-flow">
-<p class="wp-block-paragraph"></p>
-</blockquote>
-
-
-
-<blockquote class="wp-block-quote is-layout-flow wp-block-quote-is-layout-flow">
-<p class="wp-block-paragraph">这是因为美可以委身于任何人，但又不专属于任何人。该怎么跟你解释才好呢？对了，美这种东西就像虫牙，它通过与舌头触碰、牵连舌头、引发痛感等宣示自己的存在。最后，人们会因为无法忍受疼痛而请医生将之拔掉。当人们将刚被拔掉的血淋淋的、脏兮兮的、茶垢色的虫牙放在手掌上，一定会说：就是它呀！让我痛苦的就是这小小的东西吗？是它不断对我宣示存在感，让我寝食难安吗？像这样在我身体里顽固存在的东西难道就是这种死掉的物质吗？这个和那个真的是同一种东西吗？这个本应是我身体外部的东西是因何缘由与我的身体内部结合，成了令我痛苦的根源呢？这东西存在的依据是什么呢？而这依据本就存在于我的身体内部吗？或者就是依据它自身呢？不管怎么说，刚从我身上拔下来的这东西绝对不是我身体的一部分，也断然不是那个东西。</p>
-</blockquote>
-
-
-
-<blockquote class="wp-block-quote is-layout-flow wp-block-quote-is-layout-flow">
-<p class="wp-block-paragraph">总的来说，我的体验中仿佛有一种神秘的巧合在悄然运作，宛如一条挂满镜子的长廊，一个影像无限地延伸到深处。新遇见的事物，清晰地映射出过去所见之物的影子。人最容易被这种相似性所牵引，不知不觉就走到走廊尽头，迈向那深不见底的幽暗深处。命运并非突如其来，它如同一个潜伏的影子，悄无声息地渗透进生活的每个角落。比如，那个日后被判死刑的男人，平日里经过路旁的电线杆或铁道口时，意识中或许时常浮现绞刑架的幻影，甚至对它怀有一种莫名的亲近感。</p>
-
-
-
-<p class="wp-block-paragraph">因此，我的体验中没有堆积物。没有层层堆积的地层，也没有足以堆砌成山峦的厚重积淀。除了金阁，我对世间万物都毫无亲近之感，甚至对自己的体验也未曾有过特别的眷恋。但我深知，在这些体验中，仍有一些尚未被时间之海的黑暗完全吞噬的碎片，以及还没陷入毫无意义的无限重复的部分，这些小部分正在悄然聚拢，逐渐形成卑鄙而不祥的图画。</p>
-
-
-
-<p class="wp-block-paragraph">我经常思索，这些细小的部分又是什么呢？这些闪烁的碎片，甚至比路旁丢弃的啤酒瓶碎片更没有意义，更加杂乱无章。</p>
-
-
-
-<p class="wp-block-paragraph">尽管我如此说，却也不能就此断定这些片段就是那些曾经被塑造成美丽而完整的形态所丢失的碎片。它们因毫无存在意义、缺乏规律而被世人当作丑陋的东西，惨遭抛弃，却仍在各自默默憧憬着未来。以卑微的碎片之身，无所畏惧地、诡异地、静谧地……憧憬着未来！憧憬着那个绝无可能痊愈的、无法企及的、闻所未闻的未来！</p>
-</blockquote>
-
-
-
-<p class="wp-block-paragraph">&#8230;</p>
-
-
-
-<blockquote class="wp-block-quote is-layout-flow wp-block-quote-is-layout-flow">
-<p class="wp-block-paragraph">我非蜜蜂，故不受夏菊诱惑；我非夏菊，故亦不会招来蜜蜂。所有的形态和生之间的融洽已然消逝，世界再度坠入相对性之中，唯有时间永恒流淌。</p>
-</blockquote>
-
-
-
-<p class="wp-block-paragraph">细节的描写：</p>
-
-
-
-<blockquote class="wp-block-quote is-layout-flow wp-block-quote-is-layout-flow">
-<p class="wp-block-paragraph">这时，背后有人影闪现。阴沉的天空渗出一丝微光，摆放在玄关的鞋柜上的木纹瞬间鲜亮起来。</p>
-</blockquote>
-
-
-
-<p class="wp-block-paragraph">&#8230;</p>
-
-
-
-<blockquote class="wp-block-quote is-layout-flow wp-block-quote-is-layout-flow">
-<p class="wp-block-paragraph">看到了永生的幻象；而具有永恒不灭之美的金阁，却让我感受到一股死亡的气息。为什么鲜有人意识到，其实人类这种寿命有限的生物是无法根绝的，但金阁这样具有不灭之躯的东西却很容易被消灭。</p>
-</blockquote>
-
-
-
-<p class="wp-block-paragraph">&#8230;</p>
-
-
-
-<blockquote class="wp-block-quote is-layout-flow wp-block-quote-is-layout-flow">
-<p class="wp-block-paragraph">那天晚上她留在金刚院里的血，仅像早起开窗时，被惊飞的蝴蝶留在窗框上的磷粉而已。</p>
-</blockquote>
-
-
-
-<p class="wp-block-paragraph">书中对细节的描写，真实地不像虚构小说，于是读完之后我去查了金阁寺的维基百科：1950年7月2日凌晨（与书中描写的时间相同），京都市消防队收到火警，称鹿苑寺起火。等到消防队到了鹿苑寺的时候舍利殿（俗称金阁）已经燃起熊熊大火，消防队员无法靠近。这起纵火事件中并没有人员伤亡，但是舍利殿被全部烧毁，创建者室町幕府的第三代将军足利义满的木像，观音菩萨像和如来佛祖像以及众多古本佛经被焚毁。</p>
-
-
-
-<p class="wp-block-paragraph">经过事后调查，发现鹿苑寺的见习僧人林承贤在纵火事件后失踪。后来警方在寺院后面的左大文字山发现林承贤已经切腹，蹲坐在地上。经过抢救，林承贤捡回一条性命。但是被判处7年的惩役（坐牢加罚役），最后病死狱中。</p>
-
-
-
-<p class="wp-block-paragraph">在现实生活中同样对他期望很高的妈妈，经警察传唤返家时，从行驶中的山阴本线列车跳下保津峡自杀。</p>
-
-
-<div class="wp-block-image">
-<figure class="alignleft is-resized"><img loading="lazy" decoding="async" width="630" height="767" src="https://www.kawabangga.com/wp-content/uploads/2026/05/Yukio_Mishima_1955_cropped.jpg" alt="" class="wp-image-7261" style="aspect-ratio:0.8213903743315508;width:175px;height:auto" srcset="https://www.kawabangga.com/wp-content/uploads/2026/05/Yukio_Mishima_1955_cropped.jpg 630w, https://www.kawabangga.com/wp-content/uploads/2026/05/Yukio_Mishima_1955_cropped-246x300.jpg 246w" sizes="auto, (max-width: 630px) 100vw, 630px" /><figcaption class="wp-element-caption">三岛由纪夫 （作者 <a href="https://unregardoblique.com/2018/02/04/ken-domon-yukio-mishima-1955/">土门拳</a>）</figcaption></figure>
-</div>
-
-
-<p class="wp-block-paragraph">金阁寺在 1955 年开始重建，今日文明世界的鹿苑寺舍利殿，是根据在明治时代翻修时留下的图纸重建的。比重建之前的还要豪华。</p>
-
-
-
-<p class="wp-block-paragraph">《金阁寺》以第一人称书写，其实和作者本人，三岛由纪夫有很多相似的地方。三岛由纪夫也是体弱多病，不过后来为了不被身体的自卑困扰，开始健身，变成了一个肌肉男。</p>
-
-
-
-<p class="wp-block-paragraph">三岛由纪夫其实是一个变态。</p>
-
-
-
-<p class="wp-block-paragraph">三岛对日本传统的武士道精神和严厉的爱国主义深为赞赏，对日本第二次世界大战战败后社会的西化和日本主权受制于美国非常不满。经过长时间的准备，和盾会（也是他创立的）成员，跑到日本陆军基地，绑架了一个中将，发表演说，企图发动政变。</p>
-
-
-
-<blockquote class="wp-block-quote is-layout-flow wp-block-quote-is-layout-flow">
-<p class="wp-block-paragraph">各位好好听一听。静一静，请安静，请听我讲。一个男人正在赌上生命和你们讲话。好吗？这个，现在，各位日本人，如果在这里不站起来的话，自卫队如果不在这里站起来的话，宪法是不可能改变的。各位只会永远的成为区区美国的军队而已啊……。<br />我已经等了四年了，（等著）自卫队站起来的日子……已经等了四年了，……我再等……最后的三十分钟。各位是武士吧？如果是武士的话，为何要保护“将自己否定”的宪法呢？为何要为了“将各位否定”的宪法，向着“将各位否定”的宪法低头呢？只要这（宪法）还在，各位是永远无法得到救赎的啊！</p>
-<cite>——三岛由纪夫，于总监部阳台（译）</cite></blockquote>
-
-
-
-<p class="wp-block-paragraph">然而，没有人回应他，甚至嘲笑三岛是一个疯子。</p>
-
-
-
-<p class="wp-block-paragraph">三岛随后从阳台退入室内，按照日本传统仪式切腹自杀。</p>
-
-
-
-<p class="wp-block-paragraph">1999年，在富士山旁边建立了一个三岛由纪夫文学馆，来纪念他。</p>
-
-
-
-<figure class="wp-block-image size-full is-resized"><a href="https://www.kawabangga.com/wp-content/uploads/2026/05/170505_Mishima_Yukio_Literary_Museum_Yamanakako_Japan01n.jpg"><img loading="lazy" decoding="async" width="500" height="333" src="https://www.kawabangga.com/wp-content/uploads/2026/05/170505_Mishima_Yukio_Literary_Museum_Yamanakako_Japan01n.jpg" alt="" class="wp-image-7260" style="width:371px;height:auto" srcset="https://www.kawabangga.com/wp-content/uploads/2026/05/170505_Mishima_Yukio_Literary_Museum_Yamanakako_Japan01n.jpg 500w, https://www.kawabangga.com/wp-content/uploads/2026/05/170505_Mishima_Yukio_Literary_Museum_Yamanakako_Japan01n-300x200.jpg 300w" sizes="auto, (max-width: 500px) 100vw, 500px" /></a></figure>
-]]></content:encoded>
-					
-					<wfw:commentRss>https://www.kawabangga.com/posts/7246/feed</wfw:commentRss>
-			<slash:comments>2</slash:comments>
 		
 		
 			</item>
