@@ -1,4 +1,27 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="https://commonsware.com/blog/atom.xml" rel="self" type="application/atom+xml" /><link href="https://commonsware.com/" rel="alternate" type="text/html" /><updated>2026-09-16T15:33:48-04:00</updated><id>https://commonsware.com/blog/atom.xml</id><title type="html">CommonsWare</title><subtitle>CommonsWare is your home for Android app development support, offering books, training, consulting, and other resources.</subtitle><author><name>CommonsWare</name><uri>https://commonsware.com</uri></author><entry><title type="html">16 September 2026 Artifact Wave</title><link href="https://commonsware.com/blog/2026/09/16/jetpack-artifact-wave.html" rel="alternate" type="text/html" title="16 September 2026 Artifact Wave" /><published>2026-09-16T15:33:36-04:00</published><updated>2026-09-16T15:33:36-04:00</updated><id>https://commonsware.com/blog/2026/09/16/jetpack-artifact-wave</id><content type="html" xml:base="https://commonsware.com/blog/2026/09/16/jetpack-artifact-wave.html"><![CDATA[<p>Media3 is up to <code class="language-plaintext highlighter-rouge">1.11.1</code>:</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="https://commonsware.com/blog/atom.xml" rel="self" type="application/atom+xml" /><link href="https://commonsware.com/" rel="alternate" type="text/html" /><updated>2026-09-23T16:01:12-04:00</updated><id>https://commonsware.com/blog/atom.xml</id><title type="html">CommonsWare</title><subtitle>CommonsWare is your home for Android app development support, offering books, training, consulting, and other resources.</subtitle><author><name>CommonsWare</name><uri>https://commonsware.com</uri></author><entry><title type="html">23 September 2026 Artifact Wave</title><link href="https://commonsware.com/blog/2026/09/23/jetpack-artifact-wave.html" rel="alternate" type="text/html" title="23 September 2026 Artifact Wave" /><published>2026-09-23T16:01:08-04:00</published><updated>2026-09-23T16:01:08-04:00</updated><id>https://commonsware.com/blog/2026/09/23/jetpack-artifact-wave</id><content type="html" xml:base="https://commonsware.com/blog/2026/09/23/jetpack-artifact-wave.html"><![CDATA[<p>We have a two new artifact groups, <code class="language-plaintext highlighter-rouge">androidx.a2ui</code> and <code class="language-plaintext highlighter-rouge">androidx.a2ui.compose</code>, which contain Google’s first official implementation of <a href="https://a2ui.org/">A2UI</a> for Compose. There are a handful of artifacts in those groups:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">androidx.a2ui:a2ui-engine:1.0.0-alpha01</code></li>
+  <li><code class="language-plaintext highlighter-rouge">androidx.a2ui:a2ui-model:1.0.0-alpha01</code></li>
+  <li><code class="language-plaintext highlighter-rouge">androidx.a2ui.compose:compose-runtime:1.0.0-alpha01</code></li>
+  <li><code class="language-plaintext highlighter-rouge">androidx.a2ui.compose:compose-ui:1.0.0-alpha01</code></li>
+  <li><code class="language-plaintext highlighter-rouge">androidx.a2ui.compose:compose-ui-testing:1.0.0-alpha01</code></li>
+</ul>
+
+<p>Also, <code class="language-plaintext highlighter-rouge">androidx.compose.material3:material3-a2ui</code> is a new artifact, also presumably tied to A2UI.</p>
+
+<p>(FWIW, I wrote a bit about A2UI for Compose over on <a href="https://pac.commonsware.com/archive/and-now-a2ui/">my Pedal Assist Coding newsletter</a>)</p>
+
+<p>There is also a new <code class="language-plaintext highlighter-rouge">androidx.test.backup</code> group with two artifacts:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">androidx.test.backup:backup:1.0.0-alpha01</code></li>
+  <li><code class="language-plaintext highlighter-rouge">androidx.test.backup:backup-host:1.0.0-alpha01</code></li>
+</ul>
+
+<p>Soon, there should be a <code class="language-plaintext highlighter-rouge">androidx.transition:transition-ktx:1.7.2</code> artifact release. That release seems to have been incomplete, as the POM file is missing.</p>
+
+<p>In addition, we got <a href="/androidx/2026-09-23">over 500 new artifact versions</a> this wave!</p>]]></content><author><name>CommonsWare</name><uri>https://commonsware.com</uri></author><category term="blog" /><category term="sdk" /><summary type="html"><![CDATA[Here is what we got as new Jetpack artifacts this week!]]></summary></entry><entry><title type="html">16 September 2026 Artifact Wave</title><link href="https://commonsware.com/blog/2026/09/16/jetpack-artifact-wave.html" rel="alternate" type="text/html" title="16 September 2026 Artifact Wave" /><published>2026-09-16T15:33:36-04:00</published><updated>2026-09-16T15:33:36-04:00</updated><id>https://commonsware.com/blog/2026/09/16/jetpack-artifact-wave</id><content type="html" xml:base="https://commonsware.com/blog/2026/09/16/jetpack-artifact-wave.html"><![CDATA[<p>Media3 is up to <code class="language-plaintext highlighter-rouge">1.11.1</code>:</p>
 
 <ul>
   <li><code class="language-plaintext highlighter-rouge">androidx.gradle:gradle-version-catalog:2026.09.00</code></li>
@@ -240,36 +263,4 @@ this wave, including stable <code class="language-plaintext highlighter-rouge">1
   <li><code class="language-plaintext highlighter-rouge">androidx.media3:media3-ui-compose:1.11.0-rc01</code></li>
   <li><code class="language-plaintext highlighter-rouge">androidx.media3:media3-ui-compose-material3:1.11.0-rc01</code></li>
   <li><code class="language-plaintext highlighter-rouge">androidx.media3:media3-ui-leanback:1.11.0-rc01</code></li>
-</ul>]]></content><author><name>CommonsWare</name><uri>https://commonsware.com</uri></author><category term="blog" /><category term="sdk" /><summary type="html"><![CDATA[Here is what we got as new Jetpack artifacts this week!]]></summary></entry><entry><title type="html">Goodbye, cw-json! Hello, kPointer!</title><link href="https://commonsware.com/blog/2026/07/22/goodbye-cwjson-hello-kpointer.html" rel="alternate" type="text/html" title="Goodbye, cw-json! Hello, kPointer!" /><published>2026-07-22T08:27:15-04:00</published><updated>2026-07-22T08:27:15-04:00</updated><id>https://commonsware.com/blog/2026/07/22/goodbye-cwjson-hello-kpointer</id><content type="html" xml:base="https://commonsware.com/blog/2026/07/22/goodbye-cwjson-hello-kpointer.html"><![CDATA[<p>I have supplanted <a href="https://codeberg.org/commonsguy/cw-json">cw-json</a>, replacing it with a new library, <a href="https://codeberg.org/commonsguy/kPointer">kPointer</a>. The concept is the same, and porting from cw-json to kPointer is fairly straightforward. However, I realized that I made a key mistake when I started cw-json: thinking that I was only dealing with JSON.</p>
-
-<p>(naming things is hard)</p>
-
-<h3 id="more-object-types">More Object Types</h3>
-
-<p>kPointer not only supports extracting values from <a href="https://kpointer.commonsware.com/usage/json/">JSON</a> by means of JSON Pointer paths, as cw-json did. kPointer also supports <a href="https://kpointer.commonsware.com/usage/yaml/">YAML</a> (by way of yamlkt) and <a href="https://kpointer.commonsware.com/usage/xml-html/">HTML/XML</a> (by way of Ksoup).</p>
-
-<p>All get wrapped by an adapter-style abstraction layer, and you can <a href="https://kpointer.commonsware.com/usage/custom-adapters/">make custom adapters</a> to support other object tree structures. Part of the reason for supporting YAML, HTML, and XML was to exercise the abstraction layer. I am a firm believer in the “rule of 3” when it comes to APIs, frameworks, and abstraction layers: you need at least 3 separate implementations to feel comfortable that what you have will be able to handle more beyond those 3.</p>
-
-<p>If you happen to want to adapt other structures, there is <a href="https://kpointer.commonsware.com/usage/conformance-testing-adapters/">a conformance test suite</a> that you can leverage as the basis for your own tests to see if your implementation covers all the cases. Personally, I am anticipating adding support for other data structures in the not-too-distant future.</p>
-
-<h3 id="a-better-dot-notation-option">A Better “Dot Notation” Option</h3>
-
-<p>The final release of cw-json, <code class="language-plaintext highlighter-rouge">0.4.0</code>, introduced support for an ad-hoc sort of “dot notation” syntax, alongside JSON Pointer and its kin (relative JSON Pointer, JSON Pointer fragment syntax). “Dot notation” was aiming at the syntax that you see in template languages like Handlebars or Mustache, such as <code class="language-plaintext highlighter-rouge">foo.bar.goo</code>, to navigate into an object graph.</p>
-
-<p>kPointer replaces that ad-hoc dot notation with… well, OK, a better ad-hoc dot notation, what I’m calling <a href="https://kpointer.commonsware.com/usage/pointers/#javascript-access-path">JavaScript access path notation</a>. This is pretty much a clean superset of the original dot notation, but also supports bracket syntax (e.g., <code class="language-plaintext highlighter-rouge">foo['bar']</code> or <code class="language-plaintext highlighter-rouge">foo[0]</code>).</p>
-
-<h3 id="porting-support">Porting Support</h3>
-
-<p>Since I am anticipating porting kPointer to other languages in the future, I have a fairly extensive <a href="https://kpointer.commonsware.com/porting/">conformance suite</a>, as part of broader support for porting kPointer.</p>
-
-<p>kPointer comes with <a href="https://kpointer.commonsware.com/cli/">a CLI</a> designed for running the conformance suite, and ports could create their own workalike CLI to assist in testing.</p>
-
-<h3 id="a-dedicated-site">A Dedicated Site</h3>
-
-<p>Whereas cw-json had a long <code class="language-plaintext highlighter-rouge">README</code> and not much more, kPointer has <a href="https://kpointer.commonsware.com/">a dedicated site</a>, with lots of information on <a href="https://kpointer.commonsware.com/usage/">using the libraries</a> and more.</p>
-
-<h3 id="whats-next">What’s Next?</h3>
-
-<p>As I mentioned earlier, I expect to be adding support for more data format parsers, covering more data formats. For example, I expect to be adding support for CSV and similar delimited file formats.</p>
-
-<p>It’s possible that I will add more pointer syntaxes besides the flavors of JSON Pointer and JavaScript access paths. I do not have any current plans in that area, but, hey, plans change.</p>]]></content><author><name>CommonsWare</name><uri>https://commonsware.com</uri></author><category term="blog" /><category term="sdk" /><summary type="html"><![CDATA[The cw-json project has been replaced by kPointer -- learn what kPointer offers!]]></summary></entry></feed>
+</ul>]]></content><author><name>CommonsWare</name><uri>https://commonsware.com</uri></author><category term="blog" /><category term="sdk" /><summary type="html"><![CDATA[Here is what we got as new Jetpack artifacts this week!]]></summary></entry></feed>

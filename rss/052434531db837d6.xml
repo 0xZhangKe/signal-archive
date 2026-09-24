@@ -1,5 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-09-23T02:53:19+00:00</updated><author><name>Simon Willison</name></author><entry><title>SF October 14th: A Birds of a Feather Session on Agentic Engineering</title><link href="https://simonwillison.net/2026/Sep/23/bof-agentic-engineering/" rel="alternate"/><published>2026-09-23T02:53:19+00:00</published><updated>2026-09-23T02:53:19+00:00</updated><id>https://simonwillison.net/2026/Sep/23/bof-agentic-engineering/</id><summary type="html">
+<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-09-23T17:12:27+00:00</updated><author><name>Simon Willison</name></author><entry><title>Gemini 3.8 TTS Playground</title><link href="https://simonwillison.net/2026/Sep/23/gemini-tts-playground/" rel="alternate"/><published>2026-09-23T17:12:27+00:00</published><updated>2026-09-23T17:12:27+00:00</updated><id>https://simonwillison.net/2026/Sep/23/gemini-tts-playground/</id><summary type="html">
+    
+        &lt;p&gt;&lt;strong&gt;Tool:&lt;/strong&gt; &lt;a href="https://tools.simonwillison.net/gemini-tts-playground"&gt;Gemini 3.8 TTS Playground&lt;/a&gt;&lt;/p&gt;
+        &lt;p&gt;Google &lt;a href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-8-text-to-speech/"&gt;released two new Gemini text-to-speech models&lt;/a&gt; today - &lt;code&gt;gemini-3.8-flash-tts&lt;/code&gt; and &lt;code&gt;gemini-3.8-flash-lite-tts&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;They come with a library of over 2,000 voices, plus the ability to create a custom voice with "just a 30-second audio sample of your voice or a voice you have the rights to use".&lt;/p&gt;
+&lt;p&gt;I &lt;a href="https://tools.simonwillison.net/markdown-svg-renderer?url=https%3A%2F%2Fgist.github.com%2Fsimonw%2Fa82f3aef2677c623d1776092d6b21224"&gt;vibe coded&lt;/a&gt; this bring-your-own-key playground interface with GPT-6 Astra, taking advantage of the open CORS policy of the underlying Gemini API.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Screenshot of a web app for composing multi-speaker text-to-speech conversations, with a Compose panel on the left and Connection and Under the hood panels on the right. Left panel: &amp;quot;01 Compose&amp;quot; with a &amp;quot;Load example&amp;quot; button. &amp;quot;Compose settings are saved in the URL for bookmarking or sharing. Your API key is excluded.&amp;quot; Toggle with &amp;quot;Single voice&amp;quot; and &amp;quot;Conversation&amp;quot; (Conversation selected). &amp;quot;Cast&amp;quot; section with &amp;quot;+ Add speaker&amp;quot; button. Speaker &amp;quot;Gus&amp;quot;, Voice &amp;quot;Puck&amp;quot;, with a remove × button. Speaker &amp;quot;Pearl&amp;quot;, Voice &amp;quot;Kore&amp;quot;, with a remove × button. &amp;quot;Give each speaker a unique name and a voice. Type to search the loaded catalog by voice ID, name, or language.&amp;quot; &amp;quot;Dialogue&amp;quot; section with &amp;quot;+ Add line&amp;quot; button. &amp;quot;LINE 01&amp;quot; with up, down and × buttons; Speaker dropdown &amp;quot;Gus&amp;quot;; Delivery style &amp;quot;excited and gossipy&amp;quot;; text &amp;quot;Pearl, have you heard? Half the flock just packed up and moved to the Pacifica pier!&amp;quot; &amp;quot;LINE 02&amp;quot; with up, down and × buttons; Speaker dropdown &amp;quot;Pearl&amp;quot;; Delivery style &amp;quot;calm and unimpressed&amp;quot;; text &amp;quot;I heard. Honestly, Gus, I don't see the appeal. We've got everything we need right here at Pillar Point Harbor.&amp;quot; Right panel: &amp;quot;Connection&amp;quot; with a &amp;quot;DIRECT API&amp;quot; badge. &amp;quot;Gemini API key&amp;quot; field showing masked dots with a &amp;quot;Show&amp;quot; button. &amp;quot;2,089 voices loaded. Type in any Voice field to search.&amp;quot; &amp;quot;Your key stays in this page's memory and is sent directly to Google. It is never saved to browser storage.&amp;quot; &amp;quot;Model&amp;quot; dropdown &amp;quot;gemini-3.8-flash-tts&amp;quot;. &amp;quot;Uses your Gemini API account and quota.&amp;quot; &amp;quot;Under the hood&amp;quot; panel with an expanded &amp;quot;▼ Request JSON&amp;quot; section showing a JSON code excerpt, a &amp;quot;Copy JSON&amp;quot; button, and an expanded &amp;quot;▼ Response details&amp;quot; section showing a JSON code excerpt." src="https://static.simonwillison.net/static/2026/tts-playground.webp" /&gt;&lt;/p&gt;
+&lt;p&gt;A notable feature of the API is that it makes it easy to define a full conversation between multiple characters, each with different voices and voice style instructions.&lt;/p&gt;
+&lt;p&gt;Here's a short demo clip of a conversation between two pelicans debating if they should move to &lt;a href="https://simonwillison.net/2026/Sep/12/sighting-399708714/"&gt;the Pacifica Pier&lt;/a&gt;. I had Claude 4.5 Opus &lt;a href="https://claude.ai/share/3597fc77-9323-4583-aeb9-b0e4c3f654a3"&gt;write the script&lt;/a&gt; and generate &lt;a href="https://simonwillison.net/u/vj"&gt;a URL to render it using the tool&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;audio controls style="width: 100%"&gt;
+  &lt;source src="https://static.simonwillison.net/static/2026/pelicans-pacifica-pier.wav" type="audio/wav"&gt;
+  Your browser does not support the audio element.
+&lt;/audio&gt;&lt;/p&gt;
+&lt;p&gt;It took ~20 seconds to generate 1m 18s of audio using Gemini 3.8 Flash TTS (not the cheaper Flash-Lite), at a cost of 2.74 cents.&lt;/p&gt;
+    
+    
+        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/text-to-speech"&gt;text-to-speech&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/gemini"&gt;gemini&lt;/a&gt;&lt;/p&gt;
+    
+
+</summary><category term="text-to-speech"/><category term="gemini"/></entry><entry><title>Shadow roots, explained with live examples</title><link href="https://simonwillison.net/2026/Sep/23/shadow-roots/" rel="alternate"/><published>2026-09-23T16:37:18+00:00</published><updated>2026-09-23T16:37:18+00:00</updated><id>https://simonwillison.net/2026/Sep/23/shadow-roots/</id><summary type="html">
+    
+        &lt;p&gt;&lt;strong&gt;Tool:&lt;/strong&gt; &lt;a href="https://tools.simonwillison.net/shadow-roots"&gt;Shadow roots, explained with live examples&lt;/a&gt;&lt;/p&gt;
+        &lt;p&gt;Prompt to Fable 5.1 Medium:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;Build an artifact to explain shadow roots in CSS with interactive examples&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    
+        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/css"&gt;css&lt;/a&gt;&lt;/p&gt;
+    
+
+</summary><category term="css"/></entry><entry><title>SF October 14th: A Birds of a Feather Session on Agentic Engineering</title><link href="https://simonwillison.net/2026/Sep/23/bof-agentic-engineering/" rel="alternate"/><published>2026-09-23T02:53:19+00:00</published><updated>2026-09-23T02:53:19+00:00</updated><id>https://simonwillison.net/2026/Sep/23/bof-agentic-engineering/</id><summary type="html">
     
 &lt;p&gt;&lt;strong&gt;&lt;a href="https://luma.com/vxuiuyvg"&gt;SF October 14th: A Birds of a Feather Session on Agentic Engineering&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 I'm hosting an evening event with Jesse Vincent in San Francisco on Wednesday 14th October for people who are building weird and interesting things with and on top of coding agents.&lt;/p&gt;
@@ -572,27 +603,4 @@ Bryan Cantrill responds to the &lt;a href="https://x.com/hilbertspaess/status/20
         &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/joel-spolsky"&gt;joel-spolsky&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/software-engineering"&gt;software-engineering&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/will-larson"&gt;will-larson&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/charity-majors"&gt;charity-majors&lt;/a&gt;&lt;/p&gt;
     
 
-</summary><category term="joel-spolsky"/><category term="software-engineering"/><category term="will-larson"/><category term="charity-majors"/></entry><entry><title>Quoting Laurie Voss</title><link href="https://simonwillison.net/2026/Sep/14/laurie-voss/" rel="alternate"/><published>2026-09-14T14:34:29+00:00</published><updated>2026-09-14T14:34:29+00:00</updated><id>https://simonwillison.net/2026/Sep/14/laurie-voss/</id><summary type="html">
-    &lt;blockquote cite="https://seldo.com/posts/we-are-all-product-engineers-now/"&gt;&lt;p&gt;The cost of writing code collapsed, and the cost of reviewing, fixing and operating it is following, and I'm assuming it gets there. What's left of making software is finding out what people actually want, defining it precisely, and making it pleasant to use. That cost is per piece of software and doesn't transfer, so as the amount of software goes to infinity, which it will because there's no ceiling on demand, that cost becomes the whole job.&lt;/p&gt;&lt;/blockquote&gt;
-&lt;p class="cite"&gt;&amp;mdash; &lt;a href="https://seldo.com/posts/we-are-all-product-engineers-now/"&gt;Laurie Voss&lt;/a&gt;, We are all Product Engineers now&lt;/p&gt;
-
-    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/laurie-voss"&gt;laurie-voss&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/agentic-engineering"&gt;agentic-engineering&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/deep-blue"&gt;deep-blue&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/careers"&gt;careers&lt;/a&gt;&lt;/p&gt;
-
-
-
-</summary><category term="laurie-voss"/><category term="generative-ai"/><category term="agentic-engineering"/><category term="ai"/><category term="llms"/><category term="deep-blue"/><category term="careers"/></entry><entry><title>commit-rewriter 0.1</title><link href="https://simonwillison.net/2026/Sep/14/commit-rewriter/" rel="alternate"/><published>2026-09-14T00:28:10+00:00</published><updated>2026-09-14T00:28:10+00:00</updated><id>https://simonwillison.net/2026/Sep/14/commit-rewriter/</id><summary type="html">
-    
-        &lt;p&gt;&lt;strong&gt;Release:&lt;/strong&gt; &lt;a href="https://github.com/simonw/commit-rewriter/releases/tag/0.1"&gt;commit-rewriter 0.1&lt;/a&gt;&lt;/p&gt;
-        &lt;p&gt;I built this little web app the other day to help edit the commit messages for the &lt;a href="https://datasette.io/blog/2026/september-security-releases/"&gt;Datasette security releases&lt;/a&gt;. The initial commits were full of coding agent cruft and references to issue IDs from our private repository, so they weren't fit for publication.&lt;/p&gt;
-&lt;p&gt;If you want to edit the commit messages for a repository you can run it like this:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;uvx commit-rewriter path/to/repo
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Omit the path if you are already in the directory for that repo.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Screenshot of the commit-rewriter web interface. A heading reads commit-rewriter above the repository path and current branch and commit hash, with a short description of the tool. A toolbar shows a pending edits count with Discard drafts and Rewrite commit messages buttons, followed by a search box for message, author, or hash and an Edited only checkbox. A left sidebar titled Navigate commits lists recent commit messages with their short hashes. The main panel shows a card for each commit with its hash, author and timestamp, an editable text area containing the commit message, and a View full formatted diff toggle." src="https://static.simonwillison.net/static/2026/commit-rewriter.webp" /&gt;&lt;/p&gt;
-&lt;p&gt;When you submit your edits the tool creates a timestamped branch of your current repo state - to allow you to revert if you need to - and then rewrites every commit from the first one you edited to the most recent.&lt;/p&gt;
-    
-    
-        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/git"&gt;git&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/projects"&gt;projects&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/python"&gt;python&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai-assisted-programming"&gt;ai-assisted-programming&lt;/a&gt;&lt;/p&gt;
-    
-
-</summary><category term="git"/><category term="projects"/><category term="python"/><category term="ai-assisted-programming"/></entry></feed>
+</summary><category term="joel-spolsky"/><category term="software-engineering"/><category term="will-larson"/><category term="charity-majors"/></entry></feed>
