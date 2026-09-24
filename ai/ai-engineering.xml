@@ -5,6 +5,14 @@
     <link>https://0xzhangke.github.io/signal-archive/</link>
     <description>AI 整理的公开网络内容，附原始来源。</description>
     <item>
+      <title>开源决策模型 Laya 提供本地与AWS SageMaker部署方案</title>
+      <link>https://aws.amazon.com/cn/blogs/china/laya-service-validation-amazon-sagemaker</link>
+      <guid isPermaLink="false">urn:signal-archive:ai:767da3e43fa47a5b54be6c11bc676849</guid>
+      <archive:collectedAt>2026-09-24T18:12:34Z</archive:collectedAt>
+      <description>Laya是一款开源的typed-decision决策模型，与Jev类似但提供Apache 2.0开放权重。它通过choice、score、noul三类结构化问题返回决策结果，避免了大模型生成文本再解析的流程，减少延迟和格式错误。该模型可以在本地环境（如Apple Silicon Mac）或AWS SageMaker上部署，适用于Agent编排中的工具选择、客服分流、内容风控等需要快速结构化决策的场景。对开发者而言，这为解决</description>
+      <content:encoded>&lt;p&gt;Laya是一款开源的typed-decision决策模型，与Jev类似但提供Apache 2.0开放权重。它通过choice、score、noul三类结构化问题返回决策结果，避免了大模型生成文本再解析的流程，减少延迟和格式错误。该模型可以在本地环境（如Apple Silicon Mac）或AWS SageMaker上部署，适用于Agent编排中的工具选择、客服分流、内容风控等需要快速结构化决策的场景。对开发者而言，这为解决&lt;/p&gt;&lt;ul&gt;&lt;li&gt;开源的非自回归决策模型，提供Apache 2.0许可证&lt;/li&gt;&lt;li&gt;通过结构化类型问题直接返回决策结果，无需生成文本&lt;/li&gt;&lt;li&gt;支持本地环境部署，可在Mac或AWS SageMaker上运行&lt;/li&gt;&lt;li&gt;适用于Agent编排、路由决策、内容过滤等场景&lt;/li&gt;&lt;li&gt;与Jev同属类型决策模型，但提供开放权重版本&lt;/li&gt;&lt;/ul&gt;&lt;h3&gt;来源 / Sources&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;&lt;a href="https://aws.amazon.com/cn/blogs/china/laya-service-validation-amazon-sagemaker"&gt;Laya 非自回归决策服务部署实践&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</content:encoded>
+    </item>
+    <item>
       <title>阿里千问AI平台全面升级：上线Agent Studio，优化面向Agent的模型服务</title>
       <link>https://www.qbitai.com/2026/09/496301.html</link>
       <guid isPermaLink="false">urn:signal-archive:ai:f0e29c0051fb7f610a0ca6f2b4888c36</guid>
@@ -68,6 +76,15 @@
       <archive:collectedAt>2026-09-24T00:22:35Z</archive:collectedAt>
       <description>在2026云栖大会上，阿里巴巴宣布千问AI平台全面升级，核心转向支持Agent进入生产应用。平台在原有模型服务基础上，新增了对Agent服务、行业AI解决方案的支持，并推出了API优速模式（Prime）、Agent Studio等新功能。开发者可通过更细粒度的资源选项（如吞吐预留）和可视化工具，降低构建和部署生产级AI代理的工程门槛。</description>
       <content:encoded>&lt;p&gt;在2026云栖大会上，阿里巴巴宣布千问AI平台全面升级，核心转向支持Agent进入生产应用。平台在原有模型服务基础上，新增了对Agent服务、行业AI解决方案的支持，并推出了API优速模式（Prime）、Agent Studio等新功能。开发者可通过更细粒度的资源选项（如吞吐预留）和可视化工具，降低构建和部署生产级AI代理的工程门槛。&lt;/p&gt;&lt;ul&gt;&lt;li&gt;全面升级：以推动Agent进入生产力核心为目标，新增Agent服务和行业解决方案&lt;/li&gt;&lt;li&gt;API优速模式：提供Token生成速度提升1.5-2倍的“Prime”模式，针对延迟敏感调用&lt;/li&gt;&lt;li&gt;Agent Studio：已上线的可视化Agent开发与配置工具&lt;/li&gt;&lt;li&gt;资源选项：提供从免费额度、按量付费到吞吐预留（PTU/DTU）的多层资源选择&lt;/li&gt;&lt;li&gt;开发者影响：为不同规模的开发团队和企业提供了更全面的Agent开发、部署与运维支持&lt;/li&gt;&lt;/ul&gt;&lt;h3&gt;来源 / Sources&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;&lt;a href="https://www.163.com/dy/article/L7GNLIVS0550WHYR.html"&gt;千问AI平台文征：面向Agent全面升级模型服务、Agent服务、AI应用|调用|编程|模型能力|agent|千问ai平台_网易订阅&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</content:encoded>
+    </item>
+    <item>
+      <title>Anthropic发布Claude Opus 5.5：成本降低40%，性能对标Fable 5.1</title>
+      <link>https://www.anthropic.com/claude-opus-5-5</link>
+      <guid isPermaLink="false">urn:signal-archive:ai:1cda93e04f846e75196874e2a33ea4cc</guid>
+      <pubDate>Tue, 22 Sep 2026 00:00:00 +0000</pubDate>
+      <archive:collectedAt>2026-09-24T18:12:34Z</archive:collectedAt>
+      <description>Anthropic发布了Claude Opus 5.5，这是Claude 5.5家族的首个模型。该模型在多数任务上与Fable 5.1性能相当，但成本比前代Opus 5降低40%，输出速度快30%。定价上输入Token每百万$4，输出Token每百万$20，分别比Opus 5低20%，缓存读取价格更是降低了60%。模型启用了保留思考机制防止蒸馏攻击，并已在主要云平台上线。对开发者而言，这意味着以更低成本获得与前沿模型接近的能力，尤其适合成本敏感的Agentic工作负载。</description>
+      <content:encoded>&lt;p&gt;Anthropic发布了Claude Opus 5.5，这是Claude 5.5家族的首个模型。该模型在多数任务上与Fable 5.1性能相当，但成本比前代Opus 5降低40%，输出速度快30%。定价上输入Token每百万$4，输出Token每百万$20，分别比Opus 5低20%，缓存读取价格更是降低了60%。模型启用了保留思考机制防止蒸馏攻击，并已在主要云平台上线。对开发者而言，这意味着以更低成本获得与前沿模型接近的能力，尤其适合成本敏感的Agentic工作负载。&lt;/p&gt;&lt;ul&gt;&lt;li&gt;首次发布Claude 5.5系列模型，在多数任务上表现与Fable 5.1相当&lt;/li&gt;&lt;li&gt;典型任务成本比Opus 5降低40%，输出速度提升30%以上&lt;/li&gt;&lt;li&gt;输入/输出Token定价分别降至$4/$20每百万，缓存读取价格降60%&lt;/li&gt;&lt;li&gt;新增保留思考机制用于防止蒸馏攻击，适用于2026年8月31日后创建的API账户&lt;/li&gt;&lt;li&gt;已上线AWS、Google Cloud、Microsoft Azure平台&lt;/li&gt;&lt;/ul&gt;&lt;h3&gt;来源 / Sources&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;&lt;a href="https://www.anthropic.com/claude-opus-5-5"&gt;Introducing Claude Opus 5.5&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://m.36kr.com/p/3995193642324096"&gt;Claude Opus 5.5 相关报道&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</content:encoded>
     </item>
     <item>
       <title>Anthropic发布Claude Opus 5.5模型，API价格降低20%，任务成本下降40%</title>
