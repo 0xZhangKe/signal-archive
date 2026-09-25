@@ -5,6 +5,31 @@
     <link>https://0xzhangke.github.io/signal-archive/</link>
     <description>AI 整理的公开网络内容，附原始来源。</description>
     <item>
+      <title>Anthropic 推出 Claude Fable 5.1 与 Mythos 5.1，优化成本与数据隐私控制</title>
+      <link>https://www.anthropic.com/claude-fable-and-mythos-5-1</link>
+      <guid isPermaLink="false">urn:signal-archive:ai:eb2d97d8829d4a6ba404d70fa00377cc</guid>
+      <archive:collectedAt>2026-09-25T18:11:50Z</archive:collectedAt>
+      <description>Anthropic 在其官方网站上发布了 Claude Fable 5.1 和 Claude Mythos 5.1。官方声明它们基于同一模型，区别在于安全保障水平（Mythos 只通过可信访问计划开放）。Fable 5.1 降低了缓存读取（cache reads）的定价，使得典型工作负载的成本预计比 Fable 5 低约25%，对于高代理性的工作，节约可达约45%。同时发布了一个新的数据保留方案“企业前沿安全框架”（EFS），能让企业客户在自有云设施中完全控制数据。在官方展示的基准测试中，Fable 5.1 在 Terminal-Bench、CursorBench 等涉及编码和代理任务的测试中表现优于前代和竞品。这对需要顶级模型能力，尤其关注成本和数据隐私的开发者而言是一个重要的迭代。</description>
+      <content:encoded>&lt;p&gt;Anthropic 在其官方网站上发布了 Claude Fable 5.1 和 Claude Mythos 5.1。官方声明它们基于同一模型，区别在于安全保障水平（Mythos 只通过可信访问计划开放）。Fable 5.1 降低了缓存读取（cache reads）的定价，使得典型工作负载的成本预计比 Fable 5 低约25%，对于高代理性的工作，节约可达约45%。同时发布了一个新的数据保留方案“企业前沿安全框架”（EFS），能让企业客户在自有云设施中完全控制数据。在官方展示的基准测试中，Fable 5.1 在 Terminal-Bench、CursorBench 等涉及编码和代理任务的测试中表现优于前代和竞品。这对需要顶级模型能力，尤其关注成本和数据隐私的开发者而言是一个重要的迭代。&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Fable 5.1 与 Mythos 5.1 属于同一模型，安全级别不同&lt;/li&gt;&lt;li&gt;典型工作负载下成本较 Fable 5 降低约 25%&lt;/li&gt;&lt;li&gt;引入了企业级前沿安全框架（EFS），支持客户完全控制数据&lt;/li&gt;&lt;li&gt;在代理式编码与科学研究基准上表现突出&lt;/li&gt;&lt;/ul&gt;&lt;h3&gt;来源 / Sources&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;&lt;a href="https://www.anthropic.com/claude-fable-and-mythos-5-1"&gt;Introducing Claude Fable 5.1 and Claude Mythos 5.1 - Anthropic&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</content:encoded>
+    </item>
+    <item>
+      <title>Anthropic 发布 Claude Opus 5.5，显著提升性价比并调整 API 控制逻辑</title>
+      <link>https://m.36kr.com/p/3995270486873986</link>
+      <guid isPermaLink="false">urn:signal-archive:ai:e9079d563b336af9339c2098aad85ab9</guid>
+      <archive:collectedAt>2026-09-25T18:11:50Z</archive:collectedAt>
+      <description>据媒体报道，Anthropic 已正式发布 Claude Opus 5.5 模型。其 API 价格（输入4美元/百万token，输出20美元/百万token）较 Opus 5 降低约20%，性价比大幅提升，任务成本估算比 Opus 5 低约40%。在多项基准测试中，其性能追平甚至超越了更贵的 Claude Fable 5.1 和 OpenAI 的 GPT-6 Astra。API 行为发生重要变化：开发者不能再通过 API 参数（tool_choice）强制模型调用指定工具，也不能手动关闭“自适应思考”；模型将默认使用自适应思考，用户只能调整其思考强度（effort）。这意味着模型在工具调用和推理过程中获得了更多自主权，开发者需要调整对模型的控制方式，更多依赖提示工程来导向行为。</description>
+      <content:encoded>&lt;p&gt;据媒体报道，Anthropic 已正式发布 Claude Opus 5.5 模型。其 API 价格（输入4美元/百万token，输出20美元/百万token）较 Opus 5 降低约20%，性价比大幅提升，任务成本估算比 Opus 5 低约40%。在多项基准测试中，其性能追平甚至超越了更贵的 Claude Fable 5.1 和 OpenAI 的 GPT-6 Astra。API 行为发生重要变化：开发者不能再通过 API 参数（tool_choice）强制模型调用指定工具，也不能手动关闭“自适应思考”；模型将默认使用自适应思考，用户只能调整其思考强度（effort）。这意味着模型在工具调用和推理过程中获得了更多自主权，开发者需要调整对模型的控制方式，更多依赖提示工程来导向行为。&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Claude Opus 5.5 性能对标 OpenAI GPT-6 Astra 与自家中高端模型&lt;/li&gt;&lt;li&gt;API 价格较 Opus 5 降低约 20%&lt;/li&gt;&lt;li&gt;取消了手动关闭自适应思考（Adaptive Thinking）和强制工具调用（tool_choice）的选项&lt;/li&gt;&lt;li&gt;默认安全机制提升至更严格层级&lt;/li&gt;&lt;/ul&gt;&lt;h3&gt;来源 / Sources&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;&lt;a href="https://m.36kr.com/p/3995270486873986"&gt;Opus 5.5来了，性能赶超Fable，成本低至40% - 36氪&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</content:encoded>
+    </item>
+    <item>
+      <title>微软 Copilot 重大更新：推出 Code 与 Autopilot，拆分计费模式并提供托管运行时</title>
+      <link>https://news.microsoft.com/source/asia/2026/09/25/introducing-the-new-copilot-with-home-code-and-autopilot?lang=zh-hant</link>
+      <guid isPermaLink="false">urn:signal-archive:ai:9d31036c31e93f4dd4fbc0e114e68e36</guid>
+      <pubDate>Fri, 25 Sep 2026 00:00:00 +0000</pubDate>
+      <archive:collectedAt>2026-09-25T18:11:50Z</archive:collectedAt>
+      <description>微软于2026年9月25日正式推出新版 Copilot，整合了 AI 应用构建与自动化能力。核心变化包括：1) &amp;quot;Home&amp;quot; 整合 Chat 与 Cowork，成为统一工作起点；2) &amp;quot;Code&amp;quot; 允许非工程师通过自然语言生成应用，并可在沙箱或企业租户内托管；3) &amp;quot;Autopilot&amp;quot; 作为常驻的 AI 助手，可自主监控与执行任务。计费模式拆分为固定订阅（用于日常对话）和按请求用量计费（用于 Code, Autopilot, CoWork 及 Astra/Fable 等前沿模型）。同时推出 Copilot Managed Runtime，为企业提供安全的应用托管环境，并提供开放的 SDK/CLI。这些更新旨在为开发者提供更完整的从构建到运营的 AI 应用平台，并赋予企业对成本与治理的精细控制。</description>
+      <content:encoded>&lt;p&gt;微软于2026年9月25日正式推出新版 Copilot，整合了 AI 应用构建与自动化能力。核心变化包括：1) &amp;quot;Home&amp;quot; 整合 Chat 与 Cowork，成为统一工作起点；2) &amp;quot;Code&amp;quot; 允许非工程师通过自然语言生成应用，并可在沙箱或企业租户内托管；3) &amp;quot;Autopilot&amp;quot; 作为常驻的 AI 助手，可自主监控与执行任务。计费模式拆分为固定订阅（用于日常对话）和按请求用量计费（用于 Code, Autopilot, CoWork 及 Astra/Fable 等前沿模型）。同时推出 Copilot Managed Runtime，为企业提供安全的应用托管环境，并提供开放的 SDK/CLI。这些更新旨在为开发者提供更完整的从构建到运营的 AI 应用平台，并赋予企业对成本与治理的精细控制。&lt;/p&gt;&lt;ul&gt;&lt;li&gt;新增 Home、Code、Autopilot 三大功能模块&lt;/li&gt;&lt;li&gt;拆分固定订阅与按用量计费（UBB）模式&lt;/li&gt;&lt;li&gt;提供 Copilot Managed Runtime 开发与托管环境&lt;/li&gt;&lt;li&gt;增强 IT 成本控制与治理工具&lt;/li&gt;&lt;/ul&gt;&lt;h3&gt;来源 / Sources&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;&lt;a href="https://www.inside.com.tw/article/42479-microsoft-copilot-home-code-autopilot-usage-based-billing"&gt;微軟 Copilot 推出 Home、Code 與數位同事 Autopilot，有自己的信箱與電腦、你睡覺它照常上工&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://news.microsoft.com/source/asia/2026/09/25/introducing-the-new-copilot-with-home-code-and-autopilot?lang=zh-hant"&gt;Introducing the new Copilot with Home, Code and Autopilot&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</content:encoded>
+    </item>
+    <item>
       <title>开源决策模型 Laya 提供本地与AWS SageMaker部署方案</title>
       <link>https://aws.amazon.com/cn/blogs/china/laya-service-validation-amazon-sagemaker</link>
       <guid isPermaLink="false">urn:signal-archive:ai:767da3e43fa47a5b54be6c11bc676849</guid>
