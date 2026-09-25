@@ -4,11 +4,50 @@
         <title>Wiwi.Blog Blog</title>
         <link>https://wiwi.blog/blog</link>
         <description>Wiwi.Blog Blog</description>
-        <lastBuildDate>Thu, 24 Sep 2026 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Fri, 25 Sep 2026 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>zh-Hant</language>
         <copyright>Copyright © 2026 Wiwi Kuan (官大為)</copyright>
+        <item>
+            <title><![CDATA[觀看次數]]></title>
+            <link>https://wiwi.blog/blog/youtube-view-count</link>
+            <guid>https://wiwi.blog/blog/youtube-view-count</guid>
+            <pubDate>Fri, 25 Sep 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[還記得古時候，YouTube 影片的觀看數會常常會卡在 301 不動很久嗎？]]></description>
+            <content:encoded><![CDATA[<p>還記得古時候，YouTube 影片的觀看數會常常會卡在 301 不動很久嗎？</p>
+<p>那是因為，一旦超過 300 次觀看，後續的觀看就會被集中到一個中央伺服器驗證，確認<a class="" href="https://wiwi.blog/blog/im-not-a-robot">不是機器人</a>灌水的。而因為程式碼寫的是「小於或等於（<code>&lt;=</code>）」300 就不用驗證，所以第 301 次觀看時才會觸發，數字就卡在 301 上。<sup><a href="https://wiwi.blog/blog/youtube-view-count#user-content-fn-1-c17df5" id="user-content-fnref-1-c17df5" data-footnote-ref="true" aria-describedby="footnote-label" class="anchorTargetStickyNavbar_Vzrq">1</a></sup></p>
+<p>2014 年，<em>Gangnam Style</em> 差點把 YouTube 的觀看次數上限撐爆。當時 YouTube 還在使用 32 位元（有正負號的）整數來儲存觀看次數，上限是 2,147,483,647 次。就是因為這部影片，逼得 YouTube 改成用 64 位元整數。<sup><a href="https://wiwi.blog/blog/youtube-view-count#user-content-fn-2-c17df5" id="user-content-fnref-2-c17df5" data-footnote-ref="true" aria-describedby="footnote-label" class="anchorTargetStickyNavbar_Vzrq">2</a></sup></p>
+<p>長影片的觀看次數要怎麼樣才算一次，官方從來都沒有講明。但「民間」的共識大概是要有真人看大約 30 秒才算。</p>
+<p>但從 2025 年 3 月 31 號開始<sup><a href="https://wiwi.blog/blog/youtube-view-count#user-content-fn-3-c17df5" id="user-content-fnref-3-c17df5" data-footnote-ref="true" aria-describedby="footnote-label" class="anchorTargetStickyNavbar_Vzrq">3</a></sup>，YouTube 把短影片觀看的算法改得非常寬鬆──只要「開始播放」或「重播」就算一次觀看，並且沒有最低觀看時間限制──就算只滑過 0.1 秒，也算是「一次觀看」；如果不小心滑超過了，再滑回來，又多算一次。2026 年 8 月 24 號開始<sup><a href="https://wiwi.blog/blog/youtube-view-count#user-content-fn-4-c17df5" id="user-content-fnref-4-c17df5" data-footnote-ref="true" aria-describedby="footnote-label" class="anchorTargetStickyNavbar_Vzrq">4</a></sup>，長影片也改成了同樣<a class="" href="https://wiwi.blog/blog/you-are-popular">寬鬆的算法</a>。</p>
+<p>以前的觀看數字，會因為誠實而停下來；現在的觀看數字，則會為了面子而衝起來。</p>
+<p>為什麼要改成這樣呢？在我看來最合理的解釋當然是，平台正在走下坡，只好把數字灌大，騙大家（也騙自己）平台的榮景還在。觀眾流失有什麼關係呢？只要<a class="" href="https://wiwi.blog/blog/printing-money">把數字灌大</a>，平台就彷彿又回到<a class="" href="https://wiwi.blog/blog/the-golden-twenty-years">黃金時代</a>啦！</p>
+<p>當然，數字灌水不是 YouTube 的專利，它也只是模仿其他平台而已。我想，也許不用一兩年，我們就會看到更荒謬的計算方法：</p>
+<ul>
+<li class="">🖼️ <strong>標題和縮圖出現就算一次觀看</strong>：畢竟它們也是影片的一部分嘛，而且大家現在也都<a class="" href="https://wiwi.blog/blog/youtube-title">把影片內容全部塞進標題</a>啦！</li>
+<li class="">📜 <strong>只要被任何 AI 系統讀過字幕，也算一次觀看</strong>：反正現在大部分的影片本來都是 AI 在看，人類都<a class="" href="https://wiwi.blog/blog/cpdown">只看摘要</a>吧？</li>
+<li class="">🎞️ <strong>影片的每一格畫面，都算一次觀看</strong>：為什麼要用「次」這種粗糙的單位？影片的每一格都很重要呀，當然每一格就要算一次觀看！一支十分鐘、每秒 30 格的影片總共有 18,000 格，只要有一個人看完，數字就有 18,000 囉！想要數字提高兩倍的創作者，請改用每秒 60 格發片！</li>
+<li class="">♾️ <strong>最後一步</strong>：YouTube 會用 AI 推算這部影片在所有平行宇宙中的總觀看次數，然後全部算進來。在這個宇宙沒紅沒關係，在別的宇宙紅了，觀看數字一樣算你的！</li>
+</ul>
+<p>反正只要數字大就好了，實際上<a class="" href="https://wiwi.blog/blog/illusion-of-being-seen">有沒有人在看</a>不重要啦！唯一的問題是，64 位元的計數器大概很快又要不夠用了。</p>
+<!-- -->
+<section data-footnotes="true" class="footnotes"><h2 class="anchor anchorTargetStickyNavbar_Vzrq sr-only" id="footnote-label">Footnotes<a href="https://wiwi.blog/blog/youtube-view-count#footnote-label" class="hash-link" aria-label="Footnotes的直接連結" title="Footnotes的直接連結" translate="no">​</a></h2>
+<ol>
+<li class="anchorTargetStickyNavbar_Vzrq" id="user-content-fn-1-c17df5">
+<p><a href="https://www.digitaltrends.com/web/mystery-solved-why-youtube-videos-freeze-at-301-views/" target="_blank" rel="noopener noreferrer" class="">https://www.digitaltrends.com/web/mystery-solved-why-youtube-videos-freeze-at-301-views/</a> <a href="https://wiwi.blog/blog/youtube-view-count#user-content-fnref-1-c17df5" data-footnote-backref="" aria-label="Back to reference 1" class="data-footnote-backref">↩</a></p>
+</li>
+<li class="anchorTargetStickyNavbar_Vzrq" id="user-content-fn-2-c17df5">
+<p><a href="https://www.engadget.com/2014-12-04-op-op-op-op.html" target="_blank" rel="noopener noreferrer" class="">https://www.engadget.com/2014-12-04-op-op-op-op.html</a> <a href="https://wiwi.blog/blog/youtube-view-count#user-content-fnref-2-c17df5" data-footnote-backref="" aria-label="Back to reference 2" class="data-footnote-backref">↩</a></p>
+</li>
+<li class="anchorTargetStickyNavbar_Vzrq" id="user-content-fn-3-c17df5">
+<p><a href="https://support.google.com/youtube/thread/333869549/a-change-to-how-we-count-views-on-shorts?hl=en&amp;ref=ppc.land" target="_blank" rel="noopener noreferrer" class="">https://support.google.com/youtube/thread/333869549/a-change-to-how-we-count-views-on-shorts?hl=en&amp;ref=ppc.land</a> <a href="https://wiwi.blog/blog/youtube-view-count#user-content-fnref-3-c17df5" data-footnote-backref="" aria-label="Back to reference 3" class="data-footnote-backref">↩</a></p>
+</li>
+<li class="anchorTargetStickyNavbar_Vzrq" id="user-content-fn-4-c17df5">
+<p><a href="https://support.google.com/youtube/thread/433409976?hl=en" target="_blank" rel="noopener noreferrer" class="">https://support.google.com/youtube/thread/433409976?hl=en</a> <a href="https://wiwi.blog/blog/youtube-view-count#user-content-fnref-4-c17df5" data-footnote-backref="" aria-label="Back to reference 4" class="data-footnote-backref">↩</a></p>
+</li>
+</ol>
+</section>]]></content:encoded>
+        </item>
         <item>
             <title><![CDATA[寵兒或傻瓜]]></title>
             <link>https://wiwi.blog/blog/favorite-or-fool</link>
@@ -72,7 +111,7 @@
             <description><![CDATA[昨天在我的 Facebook 備份裡面考古，挖出了許多 2010 年代的有趣東西：]]></description>
             <content:encoded><![CDATA[<p>昨天在我的 Facebook 備份裡面考古，挖出了許多 2010 年代的有趣東西：</p>
 <ul>
-<li class="">🎲 <strong>很隨機的</strong>：古時候的 <a class="" href="https://wiwi.blog/blog/hello-kitty-badges">7-11 Hello Kitty 徽章</a>、我被 FB <a class="" href="https://wiwi.blog/blog/fb-too-controlling">禁止按讚</a>兩天、LG 螢幕<a class="" href="https://wiwi.blog/blog/broken-lg-monitor">整個斷掉</a>、<a class="" href="https://wiwi.blog/blog/cat-eats-shrimp">吃蝦不吐殼</a>的貓（有影片）、把蚊子<a class="" href="https://wiwi.blog/blog/killing-mosquito">電爆</a>（也有影片）。</li>
+<li class="">🎲 <strong>很隨機的</strong>：古時候的 <a class="" href="https://wiwi.blog/blog/hello-kitty-badges">7-11 Hello Kitty 徽章</a>、我被 FB <a class="" href="https://wiwi.blog/blog/fb-too-controlling">禁止按讚</a>兩天、LG 螢幕<a class="" href="https://wiwi.blog/blog/broken-lg-monitor">整個斷掉</a>、機車<a class="" href="https://wiwi.blog/blog/my-little-blue-and-red">小藍</a>的照片、<a class="" href="https://wiwi.blog/blog/cat-eats-shrimp">吃蝦不吐殼</a>的貓（有影片）、把蚊子<a class="" href="https://wiwi.blog/blog/killing-mosquito">電爆</a>（也有影片）。</li>
 <li class="">💙 <strong>以前很喜歡的大耳狗</strong>：<a class="" href="https://wiwi.blog/blog/nanoblock-cinnamoroll">迷你積木</a>、<a class="" href="https://wiwi.blog/blog/cinnamoroll-luggage">行李箱</a>、<a class="" href="https://wiwi.blog/blog/cinnamoroll-2017">三麗鷗角色大賞</a>。</li>
 <li class="">🌱 <strong>成長記錄</strong>：2007 年<a class="" href="https://wiwi.blog/blog/2007-practice-recording">在家練琴</a>的錄音、好和弦頻道<a class="" href="https://wiwi.blog/blog/project-nicechord">開張當天</a>、好和弦<a class="" href="https://wiwi.blog/blog/nicechord-10000-subs">破一萬訂閱</a>、林宥嘉〈兜圈〉<a class="" href="https://wiwi.blog/blog/yogalin-detour">上線那天</a>、<a class="" href="https://wiwi.blog/blog/musictest-1m-plays">一百萬人次</a>完成音樂能力測驗。</li>
 <li class="">🗡️ <strong>離婚冒險遊戲</strong>：<a class="" href="https://wiwi.blog/blog/not-a-rant">負面文</a>、煩到<a class="" href="https://wiwi.blog/blog/ugh">找 Siri 討拍</a>、另一篇<a class="" href="https://wiwi.blog/blog/trash-can">負面文</a>，以及成功離婚<a class="" href="https://wiwi.blog/blog/taipei-2017-universiade">破關那天</a>的記錄。</li>
@@ -195,7 +234,7 @@
 <p><del><em>（想知道 Eddie 會放幾 GB 的謎片到他的<a class="" href="https://wiwi.blog/blog/desert-island-laptop">荒島筆電</a>上）</em></del></p>
 <p>對於這個，我非常有同感！我是說，不是謎片的部份，是「<strong><a class="" href="https://wiwi.blog/blog/desert-island-laptop-2">下載回來看</a></strong>」的部份啦！</p>
 <p>你可能會疑惑：「下載回來看，跟線上看有什麼不一樣？」我跟你說，真的就是很不一樣！</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="沒有盤子的-buffet">沒有盤子的 Buffet<a href="https://wiwi.blog/blog/eat-at-seat#%E6%B2%92%E6%9C%89%E7%9B%A4%E5%AD%90%E7%9A%84-buffet" class="hash-link" aria-label="沒有盤子的 Buffet的直接連結" title="沒有盤子的 Buffet的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="沒有盤子的-buffet">沒有盤子的 Buffet<a href="https://wiwi.blog/blog/eat-at-seat#%EF%BF%BD%E6%B2%92%E6%9C%89%E7%9B%A4%E5%AD%90%E7%9A%84-buffet" class="hash-link" aria-label="沒有盤子的 Buffet的直接連結" title="沒有盤子的 Buffet的直接連結" translate="no">​</a></h3>
 <p>想像你走進一家 Buffet，但這家店有個規定：不提供盤子。你必須站在取餐檯前面直接吃掉。</p>
 <p>會發生什麼事？你會走來走去，這邊夾一口、那邊咬一塊，心浮氣躁，沒有一樣東西真正被品嚐到。邊走邊吃，根本不記得自己到底吃了多少，直到肚子撐爆才回過神：我剛才到底吃了什麼？</p>
 <p>反之，正常的 buffet 會給每人一個大盤子。你可以悠閒地逛一圈，把最想吃的東西一次拿好，整齊排在盤子裡；當<a class="" href="https://wiwi.blog/blog/dont-fill-it-up">盤子滿了</a>你就只好停手，回到座位上好好品嚐。等現在這一盤吃完，再想下一輪要拿什麼。</p>
@@ -344,7 +383,7 @@
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="距離">距離<a href="https://wiwi.blog/blog/10x#%E8%B7%9D%E9%9B%A2" class="hash-link" aria-label="距離的直接連結" title="距離的直接連結" translate="no">​</a></h3>
 <p>1 公里和 10 公里的距離差你超有感──前者走十分鐘就到了，後者大概要搭計程車過去。</p>
 <p>但面對 1 光年和 10 光年時，我們大概只會覺得：「反正都是超遠吧？」。甚至我懷疑，大部分人心中的 1 光年和 10,000 光年感覺其實也是一樣的──反正都是要坐很久的太空船，而我們對「<a class="" href="https://wiwi.blog/blog/illusion-of-time">很久</a>」也沒有刻度。</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="金錢">金錢<a href="https://wiwi.blog/blog/10x#%E9%87%91%E9%8C%A2" class="hash-link" aria-label="金錢的直接連結" title="��金錢的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="金錢">金錢<a href="https://wiwi.blog/blog/10x#%E9%87%91%E9%8C%A2" class="hash-link" aria-label="金錢的直接連結" title="金錢的直接連結" translate="no">​</a></h3>
 <p>我們都知道 100 元和 1,000 元的差別，你馬上可以列出一長串「只有 100 元不能做，但有 1,000 元可以做」的事情。</p>
 <p>那，一千億台幣和一兆台幣呢？</p>
 <p>你可以想到什麼事情，是此時此刻「有一千億做不到，但有一兆就能做到」的事嗎？對於我們這種<a class="" href="https://wiwi.blog/blog/being-poor-is-expensive">不是很有錢的人</a>來說，這個十倍差距基本上是無感的──反正都是<a class="" href="https://wiwi.blog/blog/how-much-money-is-considered-rich">很有錢</a>。<sup><a href="https://wiwi.blog/blog/10x#user-content-fn-3-f58bbe" id="user-content-fnref-3-f58bbe" data-footnote-ref="true" aria-describedby="footnote-label" class="anchorTargetStickyNavbar_Vzrq">2</a></sup></p>
@@ -1168,7 +1207,7 @@
 <p>我們常說社群媒體很 performative（表演性），但這件事本身更是極致的 performative：你<a class="" href="https://wiwi.blog/blog/performing-performing-music">努力表演</a>，想被演算法看見；平台也努力表演，讓你覺得你被演算法看見了；但從頭到尾，根本不需要任何東西被任何人看見。</p>
 <p>然後就會有一批「創作者」，製造一堆垃圾然後把觀看次數刷到百萬，並真心覺得自己紅了。媒體或不懂這行的人，也會開始引用這些灌水數據：「哇這支影片有一百萬觀看耶！」於是一個根本沒人在乎的話題，看起來就好像全民都在討論一樣。</p>
 <p>對平台來說更划算。每個人都覺得<a class="" href="https://wiwi.blog/blog/printing-money">自己的頻道在成長</a>，每個人都覺得再撐一下就會爆紅，於是每個人都願意繼續免費幫平台<a class="" href="https://wiwi.blog/blog/18-dollar-job">打工</a>。這樣一來，任何一個創作者對於平台的「可替換性」就變更高了──你不想把數字刷大？後面還有一群人排隊等著刷呢！</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="數大便是美">數大便是美<sup><a href="https://wiwi.blog/blog/you-are-popular#user-content-fn-1-f3f396" id="user-content-fnref-1-f3f396" data-footnote-ref="true" aria-describedby="footnote-label" class="anchorTargetStickyNavbar_Vzrq">1</a></sup><a href="https://wiwi.blog/blog/you-are-popular#%EF%BF%BD%E6%95%B8%E5%A4%A7%E4%BE%BF%E6%98%AF%E7%BE%8E" class="hash-link" aria-label="數大便是美的直接連結" title="數大便是美的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="數大便是美">數大便是美<sup><a href="https://wiwi.blog/blog/you-are-popular#user-content-fn-1-f3f396" id="user-content-fnref-1-f3f396" data-footnote-ref="true" aria-describedby="footnote-label" class="anchorTargetStickyNavbar_Vzrq">1</a></sup><a href="https://wiwi.blog/blog/you-are-popular#%E6%95%B8%E5%A4%A7%E4%BE%BF%E6%98%AF%E7%BE%8E" class="hash-link" aria-label="數大便是美的直接連結" title="數大便是美的直接連結" translate="no">​</a></h3>
 <p>雖然這真的很蠢，但就是有用。人類就是喜歡大數字，大數字就是爽。明知道數字跟<a class="" href="https://wiwi.blog/blog/business-models">收益</a>無關，明知道它不代表作品<a class="" href="https://wiwi.blog/blog/illusion-of-being-seen">被看見</a>，但當它從 3,183 變成 184,325 的時候，你的心情還是會好一點。</p>
 <p>平台非常清楚這一點：想要大家往哪裡走，就在那裡放個大數字就好啦！下一次更新，也許改成只要縮圖出現在螢幕上，就算一次觀看；再下次更新，所有觀看數字顯示時，會自動加上一個 100000 到 999999 之間的隨機數字。</p>
 <p>如果你的目標是做「真的對自己有益的事情」，那麼在這個時代，「<a class="" href="https://wiwi.blog/blog/chasing-numbers">不被數字控制</a>」大概就是最該練起來的生存技能了。</p>
@@ -1828,7 +1867,7 @@
 </blockquote>
 <p>大概得到了<a class="" href="https://wiwi.blog/blog/best-age">某個年紀</a>，才會開始思考自己作品的「跨時空價值」。</p>
 <p>一個二十歲的創作者，可能很難想像「二十年後自己會怎麼看現在的作品」。但我已經四十歲了，這對我來說根本不用想像──只要打開硬碟就有一大堆二十年前的作品啦！</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="怎樣可以有跨時空價值">怎樣可以有「跨時空價值」？<a href="https://wiwi.blog/blog/timeless-value#%E6%80%8E%E6%A8%A3%E5%8F%AF%E4%BB%A5%E6%9C%89%E8%B7%A8%E6%99%82%E7%A9%BA%E5%83%B9%E5%80%BC" class="hash-link" aria-label="怎樣可以有「跨時空價值」？的直接連結" title="怎樣可以有「跨時空價值」？的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="怎樣可以有跨時空價值">怎樣可以有「跨時空價值」？<a href="https://wiwi.blog/blog/timeless-value#%E6%80%8E%E6%A8%A3%E5%8F%AF%E4%BB%A5%E6%9C%89%E8%B7%A8%E6%99%82%E7%A9%BA%E5%83%B9%E5%80%BC" class="hash-link" aria-label="怎樣可以有��「跨時空價值」？的直接連結" title="怎樣可以有「跨時空價值」？的直接連結" translate="no">​</a></h3>
 <p>為什麼有些作品多年後成為了「經典」，有些卻成了廢物？可以預測嗎？</p>
 <p>是因為當下的技術嗎？好像不是。1990 年代的許多遊戲，在畫質、音質、流暢性等等已經落後現在太多，但一點都不影響它們的價值，許多<a class="" href="https://wiwi.blog/blog/best-remake">二、三十年前的遊戲</a>在今天玩起來一樣好玩。</p>
 <p>那是內容的重要性嗎？好像也不是。我在 2008、2009 年寫的<a class="" href="https://wiwi.blog/blog/posts-from-2008">舊部落格文章</a>，內容多半是無關緊要的生活記事，但現在回頭看反而會慶幸「還好有留下來」。不只是讓自己回憶，我相信就算是陌生人看到也能覺得有趣：「喔，原來 2008 年的世界是這樣的感覺呀！」有一種時光機的功能。</p>
@@ -3491,7 +3530,7 @@
 <p>其實對我來說，AI 沒有什麼好「不喜歡」的，它們就只是工具而已。</p>
 <p>我不喜歡的，是那些既不了解工具原理，品味又很差，然後產生一大堆<a class="" href="https://wiwi.blog/blog/secondhand-ai-content">垃圾內容</a>丟到網路上、只想要「套利」的人類。</p>
 <p>而我「更」受不了的，是那些每天吃著上述垃圾，然後還覺得很好吃、想吃更多的人類。喔我的天啊！</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="5-你對-ai-生成圖片的感覺如何如果有人在部落格�文章裡放-ai-圖你會覺得很煩嗎">5. 你對 AI 生成圖片的感覺如何？如果有人在部落格文章裡放 AI 圖，你會覺得很煩嗎？<a href="https://wiwi.blog/blog/ai-questions-challenge#5-%E4%BD%A0%E5%B0%8D-ai-%E7%94%9F%E6%88%90%E5%9C%96%E7%89%87%E7%9A%84%E6%84%9F%E8%A6%BA%E5%A6%82%E4%BD%95%E5%A6%82%E6%9E%9C%E6%9C%89%E4%BA%BA%E5%9C%A8%E9%83%A8%E8%90%BD%E6%A0%BC%E6%96%87%E7%AB%A0%E8%A3%A1%E6%94%BE-ai-%E5%9C%96%E4%BD%A0%E6%9C%83%E8%A6%BA%E5%BE%97%E5%BE%88%E7%85%A9%E5%97%8E" class="hash-link" aria-label="5. 你對 AI 生成圖片的感覺如何？如果有人在部落格文章裡放 AI 圖，你會覺得很煩嗎？的直接連結" title="5. 你對 AI 生成圖片的感覺如何？如果有人在部落格文章裡放 AI 圖，你會覺得很煩嗎？的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="5-你對-ai-生成圖片的感覺如何如果有人在部落格文章裡放-ai-圖你會覺得很煩嗎">5. 你對 AI 生成圖片的感覺如何？如果有人在部落格文章裡放 AI 圖，你會覺得很煩嗎？<a href="https://wiwi.blog/blog/ai-questions-challenge#5-%E4%BD%A0%E5%B0%8D-ai-%E7%94%9F%E6%88%90%E5%9C%96%E7%89%87%E7%9A%84%E6%84%9F%E8%A6%BA%E5%A6%82%E4%BD%95%E5%A6%82%E6%9E%9C%E6%9C%89%E4%BA%BA%E5%9C%A8%E9%83%A8%E8%90%BD%E6%A0%BC%E6%96%87%E7%AB%A0%E8%A3%A1%E6%94%BE-ai-%E5%9C%96%E4%BD%A0%E6%9C%83%E8%A6%BA%E5%BE%97%E5%BE%88%E7%85%A9%E5%97%8E" class="hash-link" aria-label="5. 你對 AI 生成圖片的感覺如何？如果有人在部落格文章裡放 AI 圖，你會覺得很煩嗎？的直接連結" title="5. 你對 AI 生成圖片的感覺如何？如果有人在部落格文章裡放 AI 圖，你會覺得很煩嗎？的直接連結" translate="no">​</a></h3>
 <p>我不討厭 AI 生成圖片本身，我覺得它就像是一個更方便、更自動化的 GIMP/Krita/Photoshop。以前要花超多時間在影像處理軟體做的去背、合成等等事情，現在 AI 全部可以瞬間完成，我覺得超棒的呀！</p>
 <p>例如，<a class="" href="https://wiwi.blog/blog/onlywin">只贏來我們家玩</a>的時候，送了我們飛天小女警的公仔。我們一起把它們組起來，放在椅子上拍了張照。</p>
 <p><em>（原始照片）</em></p>
@@ -3507,7 +3546,7 @@
 </ul>
 <p><em>（這就是我最討厭的那種「AI 資訊圖卡」。）</em></p>
 <p><img decoding="async" loading="lazy" src="https://wiwi.blog/assets/images/info2-9276dc9b7126f56a41e19e961c00484c.jpg" width="1088" height="608" class="img_ev3q"></p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="6-現在網路上到處都是-ai-垃圾內容slop充滿了生成的文字圖片聲音和影片你怎麼把這些東西跟真正的人類創作區分開來你有什麼過濾策略嗎">6. 現在網路上到處都是 AI 垃圾內容（slop），充滿了生成的文字、圖片、聲音和影片。你怎麼把這些東西跟真正的人類創作區分開來？你有什麼過濾策略嗎？<a href="https://wiwi.blog/blog/ai-questions-challenge#6-%E7%8F%BE%E5%9C%A8%E7%B6%B2%E8%B7%AF%E4%B8%8A%E5%88%B0%E8%99%95%E9%83%BD%E6%98%AF-ai-%E5%9E%83%E5%9C%BE%E5%85%A7%E5%AE%B9slop%E5%85%85%E6%BB%BF%E4%BA%86%E7%94%9F%E6%88%90%E7%9A%84%E6%96%87%E5%AD%97%E5%9C%96%E7%89%87%E8%81%B2%E9%9F%B3%E5%92%8C%E5%BD%B1%E7%89%87%E4%BD%A0%E6%80%8E%E9%BA%BC%E6%8A%8A%E9%80%99%E4%BA%9B%E6%9D%B1%E8%A5%BF%E8%B7%9F%E7%9C%9F%E6%AD%A3%E7%9A%84%E4%BA%BA%E9%A1%9E%E5%89%B5%E4%BD%9C%E5%8D%80%E5%88%86%E9%96%8B%E4%BE%86%E4%BD%A0%E6%9C%89%E4%BB%80%E9%BA%BC%E9%81%8E%E6%BF%BE%E7%AD%96%E7%95%A5%E5%97%8E" class="hash-link" aria-label="6. 現在網路上到處都是 AI 垃圾內容（slop），充滿了生成的文字、圖片、聲音和影片。你怎麼把這些東西跟真正的人類創作區分開來？你有什麼過濾策略嗎？的直接連結" title="6. 現在網路上到處都是 AI 垃圾內容（slop），充滿了生成的文字、圖片、聲音和影片。你怎麼把這些東西跟真正的人類創作區分開來？你有什麼過濾策略嗎？的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="6-現在網路上到處都是-ai-垃圾內容slop充滿了生成的文字圖片聲音和影片你怎麼把這些東西跟真正的人類創作區分開來你有什麼過濾策略嗎">6. 現在網路上到處都是 AI 垃圾內容（slop），充滿了生成的文字、圖片、聲音和影片。你怎麼把這些東西跟真正的人類創作區分開來？你有什麼過濾策略嗎？<a href="https://wiwi.blog/blog/ai-questions-challenge#6-%E7%8F%BE%E5%9C%A8%E7%B6%B2%E8%B7%AF%E4%B8%8A%E5%88%B0%E8%99%95%E9%83%BD%E6%98%AF-ai-%E5%9E%83%E5%9C%BE%E5%85%A7%E5%AE%B9slop%E5%85%85%E6%BB%BF%E4%BA%86%E7%94%9F%E6%88%90%E7%9A%84%E6%96%87%E5%AD%97%E5%9C%96%E7%89%87%E8%81%B2%E9%9F%B3%E5%92%8C%E5%BD%B1%E7%89%87%E4%BD%A0%E6%80%8E%E9%BA%BC%E6%8A%8A%E9%80%99%E4%BA%9B%E6%9D%B1%E8%A5%BF%E8%B7%9F%E7%9C%9F%E6%AD%A3%E7%9A%84%E4%BA%BA%E9%A1%9E%E5%89%B5%E4%BD%9C%E5%8D%80%E5%88%86%E9%96%8B%E4%BE%86%E4%BD%A0%E6%9C%89%E4%BB%80%E9%BA%BC%E9%81%8E%E6%BF%BE%E7%AD%96%E7%95%A5%E5%97%8E" class="hash-link" aria-label="6. 現在網路上到處都是 AI 垃圾內容（slop），充滿了生成的文字、圖片、聲音和影片。你怎麼把這些東西跟真正的人類創作區分開來？你有什麼過濾策略嗎？的直接連結" title="6. 現在網路上到處都是 AI 垃圾內容（slop），充滿了生成的文字、圖片、聲音和影片。你怎麼�把這些東西跟真正的人類創作區分開來？你有什麼過濾策略嗎？的直接連結" translate="no">​</a></h3>
 <p>這個簡單，只要三個字母就可以解決── <strong><span style="display:inline-block;background:linear-gradient(45deg, #e85d72, #e89150, #d4c247, #5fae66, #4a93cf, #8a72c4, #be6ba8);background-size:200% 200%;color:transparent;-webkit-background-clip:text;background-clip:text;font-weight:bold;font-size:1.5rem;filter:drop-shadow(0.5px 0.5px 0px rgba(128,128,128,0.4));animation:rssRainbow 3s ease-in-out infinite, rssBounce 0.6s ease-in-out infinite">🆁🆂🆂！</span></strong></p>
 <style>@keyframes rssRainbow{0%,to{background-position:0%}50%{background-position:100%}}@keyframes rssBounce{0%,to{transform:translateY(0)}50%{transform:translateY(-6px)}}</style>
 <p>用 RSS 訂閱你信任的高品質來源，就可以確保看到的都是優質內容啦！如果某個來源開始受到 AI 垃圾的污染，就取消訂閱就好了。</p>
@@ -3689,7 +3728,7 @@
 <p>關於音樂的記憶，其實我已經寫過兩篇了：一篇是從五歲開始回顧人生代表和弦的〈<a class="" href="https://wiwi.blog/blog/my-favorite-chords">我最喜歡的和弦</a>〉，另一篇則是關於小時候在電腦上無限循環播放的〈<a class="" href="https://wiwi.blog/blog/favorite-midi-files">我最愛的三個 MIDI 檔案</a>〉。</p>
 <p>雖然 BlogBlog 同樂會允許投稿舊文（對，規則是我訂的），但身為創辦人，如果直接拿舊文來交差，就太沒有參與感了。所以讓我來再寫一篇關於小時候的「遊戲音樂記憶」吧！（然後三篇一起投稿）</p>
 <div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb">備註</div><div class="admonitionContent_BuS1"><p>為了不要侵害版權，我只會在部落格上放短片段，但你在 YouTube 上都可以聽到全部的完整曲子！（翻譯：侵害版權這種事，還是讓別人代勞吧！🤣）</p></div></div>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="雜貨店門口的遊戲實況">雜貨店門口的遊戲實況<a href="https://wiwi.blog/blog/game-music-memories#%E9%9B%9C%E8%B2%A8%E5%BA%97%E9%96%80%E5%8F%A3%E7%9A%84%E9%81%8A%E6%88%B2%E5%AF%A6%E6%B3%81" class="hash-link" aria-label="雜貨店門口的遊戲實況的直接連結" title="雜貨店門口的遊戲實況的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="雜貨店門口的遊戲實況">雜貨店門口的遊戲實況<a href="https://wiwi.blog/blog/game-music-memories#%E9%9B%9C%E8%B2%A8%E5%BA%97%E9%96%80%E5%8F%A3%E7%9A%84%E9%81%8A%E6%88%B2%E5%AF%A6%E6%B3%81" class="hash-link" aria-label="雜貨店門口的遊戲實況的直接連結" title="雜貨店門口的遊戲實況�的直接連結" translate="no">​</a></h3>
 <p>小時候，家樓下的雜貨店門口擺著兩台大型電玩。當時我爸媽不准我花錢去玩，所以我最常做的事就是站在旁邊「看」別人玩。當你不能控制畫面的時候，反而更能好好欣賞遊戲配樂。</p>
 <p>其中一台是 Sega 的俄羅斯方塊。這個遊戲的配樂 Loop 超級短，A 段重複兩次接到 B 段，全部還不到一分鐘。曲子甚至稱不上好聽，但洗腦力驚人；聽幾分鐘之後，走在路上就會不自覺地哼出那個低音旋律。</p>
 <audio controls=""><source src="/assets/medias/tetris-b943554c06d08962cf1cb6c174f00fab.mp3"></audio>
@@ -3814,7 +3853,7 @@
 <p>他聽到旁人說：「現在女生都只喜歡有錢的男生啦！」於是就開始裝有錢──貸款買名車、吹噓頭銜、約會只去高級餐廳、送超貴的禮物。</p>
 <p>結果，女生是吸引到了，但來的全是拜金女；她們榨乾他的血之後，轉身就奔向下一個更有錢的男人。而他夢寐以求的優質女孩（像<a class="" href="https://wiwi.blog/blog/drama-free-queen">檸檬卷</a>這種的），早就被那些<a class="" href="https://wiwi.blog/blog/money-splash">揮霍行徑</a>給嚇跑了。</p>
 <p>並不是所有的女生只愛錢，是他的行為讓自己只得遇到這種女生。</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="觀眾注意力只有三秒">觀眾注意力只有三秒？<a href="https://wiwi.blog/blog/scare-the-right-one-away#%E8%A7%80%E7%9C%BE%E6%B3%A8%E6%84%8F%E5%8A%9B%E5%8F%AA%E6%9C%89%E4%B8%89%E7%A7%92" class="hash-link" aria-label="觀眾注意力只有三��秒？的直接連結" title="觀眾注意力只有三秒？的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="觀眾注意力只有三秒">觀眾注意力只有三秒？<a href="https://wiwi.blog/blog/scare-the-right-one-away#%E8%A7%80%E7%9C%BE%E6%B3%A8%E6%84%8F%E5%8A%9B%E5%8F%AA%E6%9C%89%E4%B8%89%E7%A7%92" class="hash-link" aria-label="觀眾注意力只有三秒？的直接連結" title="觀眾注意力只有三秒？的直接連結" translate="no">​</a></h3>
 <p><a class="" href="https://wiwi.blog/blog/content-creator">創作者</a>們，現在也正陷入同樣的悲劇。</p>
 <p><a class="" href="https://wiwi.blog/blog/if-everyone">大家都</a>認為：「現代人的注意力比金魚還差，內容不夠快、不夠刺激就沒人要看！」於是開始瘋狂產出三十秒的直式短片、塞滿字卡、加更多 B-roll、更多綜藝音效、剪輯步調更快、語氣更誇張、表情更扭曲。還不夠！還要更有娛樂性！前三秒就要抓住觀眾的眼球！不要讓他們滑走！</p>
 <p>結果，觀看數是高起來了，但來的全是那些注意力只有三秒、才讀兩行文字就會偏頭痛的人。而真正重要的、那些願意<a class="" href="https://wiwi.blog/blog/counting-treasures">花時間欣賞作品</a>、甚至掏錢購買產品的<a class="" href="https://wiwi.blog/blog/audience-weight">優質客戶</a>，早就在看到第三支充滿爆破音效和驚嚇表情的短片時，默默地取消訂閱了。</p>
@@ -4656,7 +4695,7 @@
 <p>「這些新的影片體驗，背後都是靠著 FFmpeg⋯⋯Meta 每天執行 <code>ffmpeg</code>（主程式）和 <code>ffprobe</code>（取得檔案資訊的工具）數百億次。」</p>
 <p>──<a href="https://engineering.fb.com/2026/03/02/video-engineering/ffmpeg-at-meta-media-processing-at-scale/" target="_blank" rel="noopener noreferrer" class="">Engineering at Meta</a></p>
 </blockquote>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="地球上真正最重要的軟體們">地球上「真正最重要」的軟體們<a href="https://wiwi.blog/blog/most-important-software#%E5%9C%B0%E7%90%83%E4%B8%8A%E7%9C%9F%E6%AD%A3%E6%9C%80%E9%87%8D%E8%A6%81%E7%9A%84%E8%BB%9F%E9%AB%94%E5%80%91" class="hash-link" aria-label="地球上「真正最重要」的軟體們的直接連結" title="地球上「真正最重要」的軟體們的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="地球上真正最重要的軟體們">地球上「真正最重要」的軟體們<a href="https://wiwi.blog/blog/most-important-software#%E5%9C%B0%E7%90%83%E4%B8%8A%E7%9C%9F%E6%AD%A3%E6%9C%80%E9%87%8D%E8%A6%81%E7%9A%84%E8%BB%9F%E9%AB%94%E5%80%91" class="hash-link" aria-label="地球上「真正最重要」的軟體�們的直接連結" title="地球上「真正最重要」的軟體們的直接連結" translate="no">​</a></h3>
 <p>好可惜，像是 FFmpeg 這些「真正最重要」的軟體，行事都太低調了，完全沒有得到大眾應有的重視。</p>
 <p>除了 FFmpeg 以外，我馬上想得到的還有像是：</p>
 <ul>
@@ -4900,7 +4939,7 @@
 </ol>
 <p><strong>在追求初期，除了這三件事之外，男生「千萬不要」做其他多餘的事</strong>，直到女生主動跟你確認關係為止。</p>
 <p>我必須說，這個思想非常有用──我當年就是這樣追到<a class="" href="https://wiwi.blog/blog/comparing-spouses">檸檬卷</a>的。</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-別被程式控制">❹ 別被程式控制<a href="https://wiwi.blog/blog/five-quotes#-%E5%88%A5%E8%A2%AB%E7%A8%8B%E5%BC%8F%E6%8E%A7%E5%88%B6" class="hash-link" aria-label="��❹ 別被程式控制的直接連結" title="❹ 別被程式控制的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-別被程式控制">❹ 別被程式控制<a href="https://wiwi.blog/blog/five-quotes#-%E5%88%A5%E8%A2%AB%E7%A8%8B%E5%BC%8F%E6%8E%A7%E5%88%B6" class="hash-link" aria-label="❹ 別被程式控制的直接連結" title="❹ 別被程式控制的直接連結" translate="no">​</a></h3>
 <blockquote>
 <p>"If the users don't control the program, the program controls the users."</p>
 <p>（如果使用者不能控制程式，那就是程式在控制使用者。）</p>
@@ -5379,7 +5418,7 @@
             <content:encoded><![CDATA[<p>在英文部落格圈子裡，這個「部落格問題挑戰」已經流傳很久了。</p>
 <p>我相信最近這波是從 Ava 的 <a href="https://blog.avas.space/bear-blog-challenge/" target="_blank" rel="noopener noreferrer" class=""><em>Bear Blog Challenge</em></a> 開始的，後來這個問題集被 Kev Quirk 改成了<a href="https://kevquirk.com/blog-questions-challenge" target="_blank" rel="noopener noreferrer" class="">適用於所有部落格的版本</a>。當然，更早以前一定還有更古老的版本，畢竟這種連鎖信遊戲的存在，早就不是一兩天的事情了。</p>
 <p>台灣這邊，<a href="https://trashposts.com/blog/blog-questions-challenge/" target="_blank" rel="noopener noreferrer" class="">廢文小天地</a>、<a href="https://blog.ikukaroom.com/blog-questions-challenge/" target="_blank" rel="noopener noreferrer" class="">Ikuka</a> 和 <a href="https://shuyulin1127.com/bearblog-100-memorial/" target="_blank" rel="noopener noreferrer" class="">Shuyu</a> 都寫了，所以今天我也來跟風一下吧！</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="問題清單">問題清單<a href="https://wiwi.blog/blog/blog-questions-challenge#%E5%95%8F%E9%A1%8C%E6%B8%85%E5%96%AE" class="hash-link" aria-label="問題清單的直接連結" title="問題清��單的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="問題清單">問題清單<a href="https://wiwi.blog/blog/blog-questions-challenge#%E5%95%8F%E9%A1%8C%E6%B8%85%E5%96%AE" class="hash-link" aria-label="問題清單的直接連結" title="問題清單的直接連結" translate="no">​</a></h3>
 <table><thead><tr><th>#</th><th style="text-align:left">問題</th></tr></thead><tbody><tr><td>1</td><td style="text-align:left">你當初為什麼開始寫部落格？</td></tr><tr><td>2</td><td style="text-align:left">你使用什麼平台來管理你的部落格？為什麼選擇它？</td></tr><tr><td>3</td><td style="text-align:left">你之前有在其他平台上寫過部落格文章嗎？</td></tr><tr><td>4</td><td style="text-align:left">你如何撰寫文章？例如，使用本地編輯工具，還是在部落格的後台／控制面板中編寫？</td></tr><tr><td>5</td><td style="text-align:left">你什麼時候最有寫作靈感？</td></tr><tr><td>6</td><td style="text-align:left">你會在寫完後立即發布，還是會先存成草稿醞釀一下？</td></tr><tr><td>7</td><td style="text-align:left">你部落格上最喜歡的文章是哪一篇？</td></tr><tr><td>8</td><td style="text-align:left">你對部落格有什麼未來計畫嗎？例如重新設計、搬到另一個平台，或是加入新功能？</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="你當初為什麼開始寫部落格">你當初為什麼開始寫部落格？<a href="https://wiwi.blog/blog/blog-questions-challenge#%E4%BD%A0%E7%95%B6%E5%88%9D%E7%82%BA%E4%BB%80%E9%BA%BC%E9%96%8B%E5%A7%8B%E5%AF%AB%E9%83%A8%E8%90%BD%E6%A0%BC" class="hash-link" aria-label="你當初為什麼開始寫部落格？的直接連結" title="你當初為什麼開始寫部落格？的直接連結" translate="no">​</a></h3>
 <p>大概 1998、1999 年，我就開始在免費網頁空間上架班站；2004 年架了 WiwiStudio.com，用來宣傳自己的鋼琴課和其他音樂服務；個人部落格的話，是到 2008 年才開始寫的，當年的網址是 WiwiKuan.com。</p>
@@ -5404,7 +5443,7 @@
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="你會在寫完後立即發布還是會先存成草稿醞釀一下">你會在寫完後立即發布，還是會先存成草稿醞釀一下？<a href="https://wiwi.blog/blog/blog-questions-challenge#%E4%BD%A0%E6%9C%83%E5%9C%A8%E5%AF%AB%E5%AE%8C%E5%BE%8C%E7%AB%8B%E5%8D%B3%E7%99%BC%E5%B8%83%E9%82%84%E6%98%AF%E6%9C%83%E5%85%88%E5%AD%98%E6%88%90%E8%8D%89%E7%A8%BF%E9%86%9E%E9%87%80%E4%B8%80%E4%B8%8B" class="hash-link" aria-label="你會在寫完後立即發布，還是會先存成草稿醞釀一下？的直接連結" title="你會在寫完後立即發布，還是會先存成草稿醞釀一下？的直接連結" translate="no">​</a></h3>
 <p>我現在是固定早上發文，所以寫完後最快也要隔天早上才會發布。</p>
 <p>如果有時間的話，我會先多寫幾篇囤起來慢慢發；通常發文的當天，我還是會看過一遍文章，也許做點最後小修改。</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="你部落格上最喜歡的文章是哪一篇">你部落格上最喜歡的文章是哪一篇？<a href="https://wiwi.blog/blog/blog-questions-challenge#%E4%BD%A0%E9%83%A8%E8%90%BD%E6%A0%BC%E4%B8%8A%E6%9C%80%E5%96%9C%E6%AD%A1%E7%9A%84%E6%96%87%E7%AB%A0%E6%98%AF%E5%93%AA%E4%B8%80%E7%AF%87" class="hash-link" aria-label="你部落格上最喜歡的文章是哪一篇？的直接連結" title="你部落格上最喜歡的文章是哪一篇？的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="你部落格上最喜歡的文章是哪一�篇">你部落格上最喜歡的文章是哪一篇？<a href="https://wiwi.blog/blog/blog-questions-challenge#%E4%BD%A0%E9%83%A8%E8%90%BD%E6%A0%BC%E4%B8%8A%E6%9C%80%E5%96%9C%E6%AD%A1%E7%9A%84%E6%96%87%E7%AB%A0%E6%98%AF%E5%93%AA%E4%B8%80%E7%AF%87" class="hash-link" aria-label="你部落格上最喜歡的文章是哪一篇？的直接連結" title="你部落格上最喜歡的文章是哪一篇？的直接連結" translate="no">​</a></h3>
 <p>這很難耶，就好像你養了七百多隻貓，硬要逼你選出<a class="" href="https://wiwi.blog/crepe">最喜歡的那隻</a>一樣。</p>
 <p>那我就選〈<a class="" href="https://wiwi.blog/blog/9v-battery">親子蓋飯和九伏特電池</a>〉這篇吧！不是因為寫得特別好，純粹因為它是這個部落格的起點。</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="你對部落格有什麼未來計畫嗎例如重新設計搬到另一個平台或是加入新功能">你對部落格有什麼未來計畫嗎？例如重新設計、搬到另一個平台，或是加入新功能？<a href="https://wiwi.blog/blog/blog-questions-challenge#%E4%BD%A0%E5%B0%8D%E9%83%A8%E8%90%BD%E6%A0%BC%E6%9C%89%E4%BB%80%E9%BA%BC%E6%9C%AA%E4%BE%86%E8%A8%88%E7%95%AB%E5%97%8E%E4%BE%8B%E5%A6%82%E9%87%8D%E6%96%B0%E8%A8%AD%E8%A8%88%E6%90%AC%E5%88%B0%E5%8F%A6%E4%B8%80%E5%80%8B%E5%B9%B3%E5%8F%B0%E6%88%96%E6%98%AF%E5%8A%A0%E5%85%A5%E6%96%B0%E5%8A%9F%E8%83%BD" class="hash-link" aria-label="你對部落格有什麼未來計畫嗎？例如重新設計、搬到另一個平台，或是加入新功能？的直接連結" title="你對部落格有什麼未來計畫嗎？例如重新設計、搬到另一個平台，或是加入新功能？的直接連結" translate="no">​</a></h3>
@@ -5623,7 +5662,7 @@
 <p><img decoding="async" loading="lazy" src="https://wiwi.blog/assets/images/yakiniku-bottle-7b5ad902055d5131208d482aa7d05558.jpg" width="602" height="800" class="img_ev3q"></p>
 <p>Orion 啤酒根本就是「沖繩之光」的存在。你走到哪都看得到它的週邊商品──T 恤、貼紙、包包、枕頭、拖鞋、杯子⋯⋯你想得到的東西都可以印上 Orion 的商標。不管是本地人還是觀光客，街上一堆人身上都穿著 Orion。</p>
 <p>沖繩人看 Orion，大概就跟我們台灣人對珍珠奶茶的驕傲感是一樣的吧。可是台灣人並不會自己買一件珍珠奶茶的 T 恤來穿，會不會是我們其實不夠愛珍珠奶茶？</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-blue-seal-冰淇淋">🍦 Blue Seal 冰淇淋<a href="https://wiwi.blog/blog/okinawa-clearfree#-blue-seal-%E5%86%B0%E6%B7%87%E6%B7%8B" class="hash-link" aria-label="🍦 Blue Seal 冰淇淋的直接連結" title="🍦 Blue Seal 冰淇淋的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-blue-seal-冰淇淋">🍦 Blue Seal 冰淇淋<a href="https://wiwi.blog/blog/okinawa-clearfree#-blue-seal-%E5%86%B0%E6%B7%87%E6%B7%8B" class="hash-link" aria-label="🍦 Blue Seal 冰淇淋的直接連結" title="🍦 Blue Seal 冰淇淋��的直接連結" translate="no">​</a></h3>
 <p>除了 Orion 啤酒之外，沖繩人的另一個驕傲是 Blue Seal（藍色標章）<sup><a href="https://wiwi.blog/blog/okinawa-clearfree#user-content-fn-1-35a3ca" id="user-content-fnref-1-35a3ca" data-footnote-ref="true" aria-describedby="footnote-label" class="anchorTargetStickyNavbar_Vzrq">2</a></sup>冰淇淋。</p>
 <p><em>（Blue Seal 的店面）</em></p>
 <p><img decoding="async" loading="lazy" src="https://wiwi.blog/assets/images/blue-seal-storefront-2fdb07b9ed0c95c8b7d1edd42c439ec9.jpg" width="800" height="602" class="img_ev3q"></p>
@@ -6069,7 +6108,7 @@
 <p><strong>再說</strong>，就算你真的嫌「幾百觀看」很少，它也絕不是輕鬆就能達到的數字。如果你現在從零開始經營 YouTube 頻道，試試看讓每部影片穩定獲得 500 觀看，你會發現<a class="" href="https://wiwi.blog/blog/escape-from-youtube">比想像中難得多</a>。</p>
 <p><strong>而且</strong>，部落格生態圈裡的「幾百觀看」，那觀眾品質絕對不是「YouTube 上被演算法不小心推到的幾百人觀看」能比擬的，<a class="" href="https://wiwi.blog/blog/audience-weight">差得遠呢</a>！</p>
 <p>別跟我說「可是我發短片隨便都幾萬觀看耶」──拜託，那個不叫觀看好不好，那個叫做「你的影片在某個路人的手機螢幕上出現了 0.1 秒」，然後他拇指一撥，就跳去下面那部貓咪影片了。</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="喪屍末日��的地下購物中心">喪屍末日的地下購物中心<a href="https://wiwi.blog/blog/blog-ecosystem#%E5%96%AA%E5%B1%8D%E6%9C%AB%E6%97%A5%E7%9A%84%E5%9C%B0%E4%B8%8B%E8%B3%BC%E7%89%A9%E4%B8%AD%E5%BF%83" class="hash-link" aria-label="喪屍末日的地下購物中心的直接連結" title="喪屍末日的地下購物中心的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="喪屍末日的地下購物中心">喪屍末日的地下購物中心<a href="https://wiwi.blog/blog/blog-ecosystem#%E5%96%AA%E5%B1%8D%E6%9C%AB%E6%97%A5%E7%9A%84%E5%9C%B0%E4%B8%8B%E8%B3%BC%E7%89%A9%E4%B8%AD%E5%BF%83" class="hash-link" aria-label="喪屍末日的地下購物中心的直接連結" title="喪屍末日的地下購物中心的直接連結" translate="no">​</a></h3>
 <p>想像末日電影的畫面：地表被炸得亂七八糟、喪屍橫行、到處是屍體，天上還下著劇毒酸雨。但鏡頭往下一轉，在地底深兩公里處，竟然有一座完好的購物中心，裡面燈火通明，有超市、有餐廳、有小農場、還有自己獨立的<a class="" href="https://wiwi.blog/blog/blogs-run-on-love">發電系統</a>。外面的世界儘管崩壞，倖存的人類在這裡依然快樂地生活。</p>
 <p>我們的 blog 生態圈，就是那座地下購物中心。</p>
 <p>你看看外面的網路世界，不就正如同喪屍末日般崩壞嗎──搜尋引擎被 <a class="" href="https://wiwi.blog/blog/secondhand-ai-content">AI 垃圾</a>塞滿、社群媒體和 YouTube 持續<a class="" href="https://wiwi.blog/blog/enshittificator">大便化</a>、到處都是廣告、內容品質低落、所有人都<a class="" href="https://wiwi.blog/blog/content-creator">被捏成演算法的形狀</a>。但在我們的小生態圈，有真人寫的好文章、不斷循環的創作靈感、深度的社交連結，甚是還有足夠的內部流量能支持小規模的商業行為。</p>
@@ -6199,7 +6238,7 @@
 <p>看到這種，我通常都想<a class="" href="https://wiwi.blog/blog/i-asked-chatgpt">直接逃離</a>耶！</p>
 <p>這絕對不是因為我「不喜歡讀 AI 生成內容」，正好相反，<strong>我每天最常讀的就是 AI 生成內容</strong>！我每天都把各種東西貼到 LLM 裡，叫它翻譯、整重點、跟它討論等等，我根本就是 <a class="" href="https://wiwi.blog/blog/offline-ai-2026">AI 的重度使用者</a>，所以這篇文章絕對不是從「反 AI」的觀點出發的。</p>
 <p>但我就在想，我這個每天讀 AI 輸出的人，為什麼不想讀「別人貼出來的 AI 輸出」呢？問題在哪裡？</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="沒人想吸你的二手-ai-內容">沒人想吸你的「二手 AI 內容」<a href="https://wiwi.blog/blog/secondhand-ai-content#%E6%B2%92%E4%BA%BA%E6%83%B3%E5%90%B8%E4%BD%A0%E7%9A%84%E4%BA%8C%E6%89%8B-ai-%E5%85%A7%E5%AE%B9" class="hash-link" aria-label="沒人想吸你的「二手 AI 內容」的直接連結" title="沒人想吸�你的「二手 AI 內容」的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="沒人想吸你的二手-ai-內容">沒人想吸你的「二手 AI 內容」<a href="https://wiwi.blog/blog/secondhand-ai-content#%E6%B2%92%E4%BA%BA%E6%83%B3%E5%90%B8%E4%BD%A0%E7%9A%84%E4%BA%8C%E6%89%8B-ai-%E5%85%A7%E5%AE%B9" class="hash-link" aria-label="沒人想吸你的「二手 AI 內容」的直接連結" title="沒人想吸你的「二手 AI 內容」的直接連結" translate="no">​</a></h3>
 <p>我幫這種現象取了個直白的名字──就叫做「<strong>二手 AI 內容</strong>」。搜尋了一下，網路上似乎還沒人在用這個詞？歡迎把這個名詞發揚光大（記得連回這篇文章，說是在 Wiwi.Blog 首先看到的）！</p>
 <p>二手 AI 內容不受歡迎的原因，大概就跟二手菸一樣。就算你喜歡<a class="" href="https://wiwi.blog/blog/virus">抽菸</a>，大概也不會喜歡吸二手菸；你會想要自己買菸，自己點火，自己吸。誰要吸別人吐出來的煙啊！</p>
 <p>想像你看到一篇超級長的外文文章，<a class="" href="https://wiwi.blog/blog/cpdown">實在懶得看</a>，於是你貼到 AI 工具，叫它翻譯成中文。你看著這篇 AI 輸出的翻譯文章，會覺得反感嗎？當然不會！因為這是你親手複製原文、送到自己信任的 AI 工具、用你自己的 prompt 產生的結果。如果擔心翻譯不精準，你也隨時可以翻閱原文對照。</p>
@@ -6352,14 +6391,14 @@
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="-3-我不用-to-do-list我只有行事曆">📅 3. 我不用 To-do List，我只有行事曆<a href="https://wiwi.blog/blog/productivity-to-uselessness#-3-%E6%88%91%E4%B8%8D%E7%94%A8-to-do-list%E6%88%91%E5%8F%AA%E6%9C%89%E8%A1%8C%E4%BA%8B%E6%9B%86" class="hash-link" aria-label="📅 3. 我不用 To-do List，我只有行事曆的直接連結" title="📅 3. 我不用 To-do List，我只有行事曆的直接連結" translate="no">​</a></h4>
 <p>所有「一定要做的事」，我就會寫在行事曆上，給它們一個特定的日期和時間。沒寫在行事曆上的，就不算是「一定要做的事」。</p>
 <p>其實，大部份的 To-do List 都是「To-寫著好看但放在那邊不做 List」對吧？如果真的想做，就給它一個名份呀！</p>
-<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="-4-�不要讓自己過載">🪫 4. 不要讓自己過載<a href="https://wiwi.blog/blog/productivity-to-uselessness#-4-%E4%B8%8D%E8%A6%81%E8%AE%93%E8%87%AA%E5%B7%B1%E9%81%8E%E8%BC%89" class="hash-link" aria-label="🪫 4. 不要讓自己過載的直接連結" title="🪫 4. 不要讓自己過載的直接連結" translate="no">​</a></h4>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="-4-不要讓自己過載">🪫 4. 不要讓自己過載<a href="https://wiwi.blog/blog/productivity-to-uselessness#-4-%E4%B8%8D%E8%A6%81%E8%AE%93%E8%87%AA%E5%B7%B1%E9%81%8E%E8%BC%89" class="hash-link" aria-label="🪫 4. 不要讓自己過載的直接連結" title="🪫 4. 不要讓自己過載的直接連結" translate="no">​</a></h4>
 <p>就像前面說過的，我非常不喜歡「衝衝衝」的思維。如果可以的話，平常最好只用 20% 的體力就好！</p>
 <p>想像你是一顆手機電池。理想中你平時的電量儲備應該保持在 80% 到 100% 之間<sup><a href="https://wiwi.blog/blog/productivity-to-uselessness#user-content-fn-2-6824a4" id="user-content-fnref-2-6824a4" data-footnote-ref="true" aria-describedby="footnote-label" class="anchorTargetStickyNavbar_Vzrq">2</a></sup>，留有超多的餘裕！只有在關鍵時刻、當你真的決定某件事需要「火力全開」時，才啟動「Performance Mode」來揮霍電量。但這不可以是常態。</p>
 <p>這樣才是可以走得遠的方法。如果每天都把電池榨乾，代表你事情太多或預算控管有問題。</p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-5-用電腦把他-m-的手機放下來">🖥️ 5. 用電腦！把<del>他 M 的</del>手機放下來！<a href="https://wiwi.blog/blog/productivity-to-uselessness#%EF%B8%8F-5-%E7%94%A8%E9%9B%BB%E8%85%A6%E6%8A%8A%E4%BB%96-m-%E7%9A%84%E6%89%8B%E6%A9%9F%E6%94%BE%E4%B8%8B%E4%BE%86" class="hash-link" aria-label="️-5-用電腦把他-m-的手機放下來的直接連結" title="️-5-用電腦把他-m-的手機放下來的直接連結" translate="no">​</a></h4>
 <p><a class="" href="https://wiwi.blog/blog/use-a-computer-already">用電腦</a>、鍵盤和「大人的作業系統」做事情，不要<a class="" href="https://wiwi.blog/blog/i-only-have-a-phone">一直滑手機</a>！</p>
 <p>低效率的觸控介面、瘋狂彈出的通知、殘廢的檔案系統──手機根本不是為了讓你「好好做事」而設計的。你確定要穿<a class="" href="https://wiwi.blog/blog/real-smartphone-features">夾腳拖</a>去跑馬拉松？</p>
-<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="-6-熟悉你的軟體">🧰 6. 熟悉你的軟體<a href="https://wiwi.blog/blog/productivity-to-uselessness#-6-%E7%86%9F%E6%82%89%E4%BD%A0%E7%9A%84%E8%BB%9F%E9%AB%94" class="hash-link" aria-label="🧰 6. 熟悉你的軟體的直接連結" title="🧰 6. ��熟悉你的軟體的直接連結" translate="no">​</a></h4>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="-6-熟悉你的軟體">🧰 6. 熟悉你的軟體<a href="https://wiwi.blog/blog/productivity-to-uselessness#-6-%E7%86%9F%E6%82%89%E4%BD%A0%E7%9A%84%E8%BB%9F%E9%AB%94" class="hash-link" aria-label="🧰 6. 熟悉你的軟體的直接連結" title="🧰 6. 熟悉你的軟體的直接連結" translate="no">​</a></h4>
 <p>如果你一天花三小時處理文字，卻連按住 <kbd>Shift</kbd> + 方向鍵可以選取文字都不知道，而是每次都慢慢<a class="" href="https://wiwi.blog/blog/select-text">用滑鼠圈選</a>，那工作效率慢真的只能怪自己。</p>
 <p>了解軟體的運作原理、把常用的<a class="" href="https://wiwi.blog/blog/keyboard-shortcuts">快速鍵</a>學會！</p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="-7-學會用終端機">⬛ 7. 學會用終端機<a href="https://wiwi.blog/blog/productivity-to-uselessness#-7-%E5%AD%B8%E6%9C%83%E7%94%A8%E7%B5%82%E7%AB%AF%E6%A9%9F" class="hash-link" aria-label="⬛ 7. 學會用終端機的直接連結" title="⬛ 7. 學會用終端機的直接連結" translate="no">​</a></h4>
@@ -6640,7 +6679,7 @@
 <p>（對了，媽媽們，如果你家的小寶貝不肯好好喝牛奶，試試看：把七喜和牛奶一比一混合，輕～輕地把七喜倒進牛奶裡就好囉！營養又健康──而且超管用的！讓七喜成為全家人的飲料吧。你愛它⋯⋯它也愛你喔！）</p>
 </blockquote>
 <p>對呀！讓嬰兒在還沒學會走路之前，就搶先佈局未來的糖尿病風險，真是超管用的！</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="吃飯配石棉營養又耐熱">吃飯配石棉，營養又耐熱！<a href="https://wiwi.blog/blog/morphine-syrup#%E5%90%83%E9%A3%AF%E9%85%8D%E7%9F%B3%E6%A3%89%E7%87%9F%E9%A4%8A%E5%8F%88%E8%80%90%EF%BF%BD%E7%86%B1" class="hash-link" aria-label="吃飯配石棉，營養又耐熱！的直接連結" title="吃飯配石棉，營養又耐熱！的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="吃飯配石棉營養又耐熱">吃飯配石棉，營養又耐熱！<a href="https://wiwi.blog/blog/morphine-syrup#%E5%90%83%E9%A3%AF%E9%85%8D%E7%9F%B3%E6%A3%89%E7%87%9F%E9%A4%8A%E5%8F%88%E8%80%90%E7%86%B1" class="hash-link" aria-label="吃飯配石棉，營養又耐熱！的直接連結" title="吃飯配石棉，營養又耐熱！的直接連結" translate="no">​</a></h3>
 <p>石棉是一種纖維狀結晶礦物，吸入人體的話會造成塵肺病、石棉肺、肺癌等肺部疾病。現代 WHO 已經將石棉列為一級致癌物，台灣目前也幾乎全面禁用。</p>
 <p>但在以前大家不知道，還把石綿當成一種「魔法材料」，因為它耐熱、防火又耐腐蝕，所以被做成了各種東西，像是桌墊、消防衣、水管、香菸濾嘴等等。</p>
 <p><em>（1909 年的石棉餐桌墊廣告──The best Pad manufactured.）</em><sup><a href="https://wiwi.blog/blog/morphine-syrup#user-content-fn-3-8e3022" id="user-content-fnref-3-8e3022" data-footnote-ref="true" aria-describedby="footnote-label" class="anchorTargetStickyNavbar_Vzrq">5</a></sup></p>
@@ -6927,7 +6966,7 @@
 <blockquote>
 <p>「使用一水檸檬酸溶液來清除水垢是不專業的，應該使用包裝上寫明瞭『水垢清潔劑』的清潔產品，才<strong>顯得專業</strong>。」</p>
 </blockquote>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="專業工具的行銷套路">「專業」工具的行銷套路<a href="https://wiwi.blog/blog/looking-unprofessional#%E5%B0%88%E6%A5%AD%E5%B7%A5%E5%85%B7%E7%9A%84%E8%A1%8C%E9%8A%B7%E5%A5%97%E8%B7%AF" class="hash-link" aria-label="「專業」工具的行銷套路的直接連結" title="「專業」工具的行銷套路的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="專業工具的行銷套路">「專業」工具的行銷套路<a href="https://wiwi.blog/blog/looking-unprofessional#%E5%B0%88%E6%A5%AD%E5%B7%A5%E5%85%B7%E7%9A%84%E8%A1%8C%E9%8A%B7%E5%A5%97%E8%B7%AF" class="hash-link" aria-label="「專業�」工具的行銷套路的直接連結" title="「專業」工具的行銷套路的直接連結" translate="no">​</a></h3>
 <p>我超級有同感！</p>
 <p>而且，為什麼使用「昂貴、包裝精緻、重度行銷」的工具是比較專業呢？我覺得應該正好相反啊！</p>
 <p>這些高度商業化工具最擅長的事情，就是把底層複雜的運作邏輯藏起來，套上漂亮的外皮，然後標上看起來「超專業」的價格。它們的<a class="" href="https://wiwi.blog/blog/dos-game-marketing-lesson">行銷</a>套路，就是先向大眾定義「專業」的標準，然後說自己就是那個標準的中心，暗示消費者「如果不用我的產品，你就是不專業」。</p>
@@ -7092,7 +7131,7 @@
 <p>小時候我曾經對這個詞感到困惑──是要用鋼琴說服誰？但長大就懂了。這並不是在指演奏者裝得一副很有自信、表情扭曲、身體搖得很用力的樣子。外表再怎麼<a class="" href="https://wiwi.blog/blog/performing-performing-music">裝模作樣</a>都是沒用的。</p>
 <p>所謂的「說服力」，是指讓聽眾感受到：「這個人完全知道譜上寫了什麼，知道作曲家有這個意圖──而且沒錯，他知道譜上沒有這樣寫、大家也不是這樣彈的──但他就是決定要這樣詮釋。」是懂了之後做出的決定，不是蒙在鼓裡的憑感覺彈。</p>
 <p>Vibe Playing 的相反，就是「說服力」。</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="沒人能搞懂任何事">沒人能搞懂任何事<a href="https://wiwi.blog/blog/vibe-playing#%E6%B2%92%E4%BA%BA%E8%83%BD%E6%90%9E%E6%87%82%E4%BB%BB%E4%BD%95%E4%BA%8B" class="hash-link" aria-label="沒人能搞懂任何事的直接連結" title="沒人能搞懂任何事的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="沒人�能搞懂任何事">沒人能搞懂任何事<a href="https://wiwi.blog/blog/vibe-playing#%E6%B2%92%E4%BA%BA%E8%83%BD%E6%90%9E%E6%87%82%E4%BB%BB%E4%BD%95%E4%BA%8B" class="hash-link" aria-label="沒人能搞懂任何事的直接連結" title="沒人能搞懂任何事的直接連結" translate="no">​</a></h3>
 <p>不過話說回來，一個非鋼琴專業聽眾，八成聽不出來彈奏者是不是在 Vibe Playing。我身為一個非資訊專業者，在使用一個程式時，其實也不 care 開發者到底懂不懂裡面的每一行程式碼，能用就好了。</p>
 <p><strong>會不會有一天，工具變得太方便，導致世界上沒有人能搞懂任何事呢</strong>？每個人都只是<a class="" href="https://wiwi.blog/blog/dont-stop-typing">複製貼上 AI 的話</a>、執行自己看不懂的程式碼、演奏著自己不理解的音符。一切只要憑感覺就可以運作良好了──直到 <a class="" href="https://wiwi.blog/blog/digital-prepping">Wi-fi 斷線的那一天</a>。</p>
 <p>請問你是 Wi-fi 嗎？因為少了你，我才發現我什麼都不懂。</p>]]></content:encoded>
@@ -7322,7 +7361,7 @@
 <li class="">連手機號碼我們也習慣三個三個數字唸：0912-345-678</li>
 </ul>
 <p>在這篇文章中，這法則排在第三個，而且它後面還有三個。好巧唷！</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-80-20-法則抓重點就對了">⚖️ 80-20 法則：抓重點就對了<a href="https://wiwi.blog/blog/number-rules#%EF%B8%8F-80-20-%E6%B3%95%E5%89%87%E6%8A%93%E9%87%8D%E9%BB%9E%EF%BF%BD%EF%BF%BD%E5%B0%B1%E5%B0%8D%E4%BA%86" class="hash-link" aria-label="⚖️ 80-20 法則：抓重點就對了的直接連結" title="⚖️ 80-20 法則：抓重點就對了的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-80-20-法則抓重點就對了">⚖️ 80-20 法則：抓重點就對了<a href="https://wiwi.blog/blog/number-rules#%EF%B8%8F-80-20-%E6%B3%95%E5%89%87%E6%8A%93%E9%87%8D%E9%BB%9E%E5%B0%B1%E5%B0%8D%E4%BA%86" class="hash-link" aria-label="⚖️ 80-20 法則：抓重點就對了的直接連結" title="⚖️ 80-20 法則：抓重點就對了的直接連結" translate="no">​</a></h3>
 <p>又稱「帕雷托法則」（Pareto principle）<sup><a href="https://wiwi.blog/blog/number-rules#user-content-fn-4-d34d5a" id="user-content-fnref-4-d34d5a" data-footnote-ref="true" aria-describedby="footnote-label" class="anchorTargetStickyNavbar_Vzrq">4</a></sup>──大部分（80%）的結果，都是源自於少數（20%）的關鍵因素；不論怎麼定義「結果」，都依然有這樣的現象。</p>
 <p>大部分（80%）快樂的時光，來自少數（20%）的朋友；大部分（80%）麻煩的事情，來自少數（20%）難搞的人；大部分（80%）的考試題目，都是少數（20%）基本概念的延伸。</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-100-法則商人的小心機">🛒 100 法則：商人的小心機<a href="https://wiwi.blog/blog/number-rules#-100-%E6%B3%95%E5%89%87%E5%95%86%E4%BA%BA%E7%9A%84%E5%B0%8F%E5%BF%83%E6%A9%9F" class="hash-link" aria-label="🛒 100 法則：商人的小心機的直接連結" title="🛒 100 法則：商人的小心機的直接連結" translate="no">​</a></h3>
@@ -7443,7 +7482,7 @@
 <li class=""><a href="https://nicechord.com/post/harmonic-series-once-and-for-all/" target="_blank" rel="noopener noreferrer" class="">到底什麼是「泛音列」？</a></li>
 <li class=""><a href="https://nicechord.com/post/synthesizer-basics/" target="_blank" rel="noopener noreferrer" class="">合成器（Synthesizer）到底是什麼？</a></li>
 </ul></div></div>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="頌缽療法">頌缽療法<a href="https://wiwi.blog/blog/singing-bowl-experience#%E9%A0%8C%E7%BC%BD%E7%99%82%E6%B3%95" class="hash-link" aria-label="頌缽療法的直接連結" title="頌缽療法的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="頌缽療法">頌缽療法<a href="https://wiwi.blog/blog/singing-bowl-experience#%E9%A0%8C%E7%BC%BD%E7%99%82%E6%B3%95" class="hash-link" aria-label="頌缽療法的直接連結" title="頌缽療�法的直接連結" translate="no">​</a></h3>
 <p>接著我躺在地上，體驗了一段簡短版的頌缽療法。基本上就是 Kenny 用各種不同音高的頌缽圍繞我的頭部，或直接放在我身上，然後敲擊或摩擦它們。</p>
 <p>頭部周圍的缽，因為每個頻率不一樣，會互相干涉、產生<a href="https://nicechord.com/post/piano-tuning-and-beating/" target="_blank" rel="noopener noreferrer" class="">拍頻</a>（beating）──就是那種聲音一陣一陣、忽強忽弱的效果──你的頭會感到一波一波的震動，習慣了之後會有一種奇妙的放鬆感。</p>
 <p>至於放在身上的大缽，敲下去振動直接傳到身體（聽起來大概在 115 Hz 左右），所以就有點類似震動按摩器的概念。（題外話：之前<a href="https://nicechord.com/post/100hz-reduces-motion-sickness/" target="_blank" rel="noopener noreferrer" class="">有研究發現</a>，在坐車前，先聽一分鐘的 100 Hz 聲音，可以減輕暈車症狀！）</p>
@@ -7492,7 +7531,7 @@
 <li class="">🏷️ <strong>驗證藍勾勾</strong>：你的<a class="" href="https://wiwi.blog/blog/get-your-own-domain">網域名稱</a>就是最終極的身份驗證。出現在自己網站上的東西，就是你本人授權發布的東西！為什麼要付錢給科技巨頭來證明自己是自己？</li>
 <li class="">🚫 <strong>封鎖某人</strong>：不要點進他的網站。就這樣，就不會看到了喔！沒想到吧！</li>
 </ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="退出那些社交障礙媒體">退出那些「社交障礙媒體」<a href="https://wiwi.blog/blog/real-social-media#%E9%80%80%E5%87%BA%E9%82%A3%E4%BA%9B%E7%A4%BE%E4%BA%A4%E9%9A%9C%E7%A4%99%E5%AA%92%E9%AB%94" class="hash-link" aria-label="退出那些「社交障礙媒體」的直接連結" title="退出那些「�社交障礙媒體」的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="退出那些社交障礙媒體">退出那些「社交障礙媒體」<a href="https://wiwi.blog/blog/real-social-media#%E9%80%80%E5%87%BA%E9%82%A3%E4%BA%9B%E7%A4%BE%E4%BA%A4%E9%9A%9C%E7%A4%99%E5%AA%92%EF%BF%BD%EF%BF%BD%E9%AB%94" class="hash-link" aria-label="退出那些「社交障礙媒體」的直接連結" title="退出那些「社交障礙媒體」的直接連結" translate="no">​</a></h3>
 <p>那些自稱是「社群媒體」的平台，只不過是把早就存在於<a class="" href="https://wiwi.blog/blog/364m-websites">開放網路</a>上的功能，塞進一個圍牆花園裡。它們奪走你的控制權、塞滿廣告、將垃圾灌入你的大腦、再用黑箱演算法決定誰有資格被看見。然後告訴你，這叫做「連結全世界」。</p>
 <p>退出那些只想榨乾你的「<ruby>社交障礙媒體<rt>FB/IG/Threads</rt></ruby>」吧！<strong>用屬於全體人類的「媒體」──E-mail、HTTP、RSS──建立由真正的人類組成的「社群」，才是「社群媒體」這四個字該有的意思。</strong></p>
 <p><em>（如果你想按這篇文章「讚」，你知道該怎麼做──<a href="mailto:b@wiwikuan.com" target="_blank" rel="noopener noreferrer" class="">b@wiwikuan.com</a>）</em></p>
@@ -7519,12 +7558,12 @@
 </blockquote>
 <p>「作品」跟「人」可以脫鉤嗎？好問題欸。</p>
 <p>這讓我想到，我自己在讀別人的部落格文章時，頭腦裡多多少少會想像那個作者的樣子和說話語氣耶！看各種其他形式的作品時（尤其是作者還在世的），也會很想知道作品背後的人是怎麼樣的。</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="我腦中的自訂角色產生器">我腦中的自訂角色產生器<a href="https://wiwi.blog/blog/if-chopin-were-a-hentai#%E6%88%91%E8%85%A6%E4%B8%AD%E7%9A%84%E8%87%AA%E8%A8%82%E8%A7%92%EF%BF%BD%E8%89%B2%E7%94%A2%E7%94%9F%E5%99%A8" class="hash-link" aria-label="我腦中的自訂角色產生器的直接連結" title="我腦中的自訂角色產生器的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="我腦中的自訂角色產生器">我腦中的自訂角色產生器<a href="https://wiwi.blog/blog/if-chopin-were-a-hentai#%E6%88%91%E8%85%A6%E4%B8%AD%E7%9A%84%E8%87%AA%E8%A8%82%E8%A7%92%E8%89%B2%E7%94%A2%E7%94%9F%E5%99%A8" class="hash-link" aria-label="我腦中的自訂角色產生器的直接連結" title="我腦中的自訂角色產生器的直接連結" translate="no">​</a></h3>
 <p>如果作者有提供關於他個人的資訊──性別、年齡、職業、照片，甚至只是模糊的大頭貼──就會比較容易想像作者把文章說出來的樣子。<sup><a href="https://wiwi.blog/blog/if-chopin-were-a-hentai#user-content-fn-1-5f039f" id="user-content-fnref-1-5f039f" data-footnote-ref="true" aria-describedby="footnote-label" class="anchorTargetStickyNavbar_Vzrq">2</a></sup></p>
 <p>拿我自己當例子好了。因為我在網路上有大量公開的影片和 Podcast，身為讀者的你，要想像這個 blog 上的內容由「我本人」講出來的畫面，應該不難吧？（事實上，我還真的做了<a href="https://wiwi.video/w/cwi5kkQevo9qXP675pQTu2" target="_blank" rel="noopener noreferrer" class="">把文章講出來的影片</a>，所以你甚至不用想像。）</p>
 <p>但那些沒有提供太多資訊的作者呢？我還是會<a class="" href="https://wiwi.blog/blog/osint-exercises">根據線索推敲</a>，在腦中大約模擬一個角色。就像是在遊戲中創造自訂角色一樣，不過可能不會有太詳盡的五官細節。頂多就是「她是一個瘦小的小妹妹」或「他是個健身大叔」這樣粗略的基礎設定。<sup><a href="https://wiwi.blog/blog/if-chopin-were-a-hentai#user-content-fn-4-5f039f" id="user-content-fnref-4-5f039f" data-footnote-ref="true" aria-describedby="footnote-label" class="anchorTargetStickyNavbar_Vzrq">3</a></sup></p>
 <p>想像中的那個角色可能跟現實差很多，但也沒關係呀！反正以後得到更多資訊時，再慢慢更新人設就好了。</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="怎麼可以沒有大頭貼">怎麼可以沒有大頭貼<a href="https://wiwi.blog/blog/if-chopin-were-a-hentai#%E6%80%8E%E9%BA%BC%E5%8F%AF%E4%BB%A5%E6%B2%92%E6%9C%89%E5%A4%A7%E9%A0%AD%E8%B2%BC" class="hash-link" aria-label="怎麼可以沒有大頭貼的直接連結" title="怎麼可以沒有大頭貼的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="怎麼可以沒有大頭貼">怎麼可以沒有大頭貼<a href="https://wiwi.blog/blog/if-chopin-were-a-hentai#%E6%80%8E%E9%BA%BC%E5%8F%AF%E4%BB%A5%E6%B2%92%E6%9C%89%E5%A4%A7%E9%A0%AD%E8%B2%BC" class="hash-link" aria-label="怎麼可以沒有大頭貼的直接連結" title="怎麼可以沒有大頭貼的直接連��結" translate="no">​</a></h3>
 <p>因為對話框旁邊，就是一定要有大頭貼啊！</p>
 <p>想像你在玩 RPG 遊戲。對話框如果只是出現一行冷冰冰的字幕，而沒有角色的半身立繪<sup><a href="https://wiwi.blog/blog/if-chopin-were-a-hentai#user-content-fn-2-5f039f" id="user-content-fnref-2-5f039f" data-footnote-ref="true" aria-describedby="footnote-label" class="anchorTargetStickyNavbar_Vzrq">4</a></sup>，那玩起來有多空虛呀！哪怕只是放一張 32x32 的 pixel art 靜態小圖，代入感就完全不一樣了。</p>
 <p>如果文章背後感覺不到一個「人」，就會有點文章是從<a class="" href="https://wiwi.blog/blog/p-holes">黑洞</a>冒出來的感覺。技術文章的話可能還好，但如果是<a class="" href="https://wiwi.blog/blog/noticing-things">日常文章</a>，如果感受不到角色的話，我的共鳴感就會大大降低耶。</p>
@@ -8175,7 +8214,7 @@
             <content:encoded><![CDATA[<p>你一定聽過那個著名的<ruby><a href="https://en.wikipedia.org/wiki/Stanford_marshmallow_experiment" target="_blank" rel="noopener noreferrer" class="">棉花糖實驗</a><rt>虐童遊戲</rt></ruby>──1970 年代，史丹佛大學的心理學家們把小孩關進房間，給他們一顆棉花糖，然後說：「你現在可以吃掉，或者等 15 分鐘就可以得到第二顆。」</p>
 <p>後續研究聲稱，那些能忍住不吃、<a class="" href="https://wiwi.blog/blog/wait-calculation">延遲享樂</a>的小孩長大後比較「成功」；於是這個實驗就變成了談論「自制力與成功」的經典案例。<sup><a href="https://wiwi.blog/blog/marshmallow-experiment#user-content-fn-1-7d78a7" id="user-content-fnref-1-7d78a7" data-footnote-ref="true" aria-describedby="footnote-label" class="anchorTargetStickyNavbar_Vzrq">1</a></sup></p>
 <p>但只要多想一下，就會發現這實驗怪怪的。以下只是一些關於棉花糖實驗的雜亂想法。</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="如果我只想吃一顆">如果我只想吃一顆？<a href="https://wiwi.blog/blog/marshmallow-experiment#%E5%A6%82%E6%9E%9C%E6%88%91%E5%8F%AA%E6%83%B3%E5%90%83%E4%B8%80%E9%A1%86" class="hash-link" aria-label="如果我只想吃一顆？的直接連結" title="如果我只想吃一顆？的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="如果我只想吃一顆">如果我只想吃一顆？<a href="https://wiwi.blog/blog/marshmallow-experiment#%E5%A6%82%E6%9E%9C%E6%88%91%E5%8F%AA%E6%83%B3%E5%90%83%E4%B8%80%E9%A1%86" class="hash-link" aria-label="如果我只想吃一顆？的直接�連結" title="如果我只想吃一顆？的直接連結" translate="no">​</a></h3>
 <p>不覺得這個實驗的設計很功利主義嗎？它已經先預設了立場：你想要更多棉花糖。</p>
 <p>社會總是預期你「應該想要」更多棉花糖──賺更多錢、更有名、更高的流量數據。但是誰說一定要這樣？如果我覺得<a class="" href="https://wiwi.blog/blog/satisficers">現在這樣就好</a>了呢？如果我覺得棉花糖吃一顆剛剛好，第二顆反而會膩呢？這樣是很<a class="" href="https://wiwi.blog/blog/universe-knows-better">不上進</a>的心態嗎？</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="時薪四顆棉花糖">時薪四顆棉花糖<a href="https://wiwi.blog/blog/marshmallow-experiment#%E6%99%82%E8%96%AA%E5%9B%9B%E9%A1%86%E6%A3%89%E8%8A%B1%E7%B3%96" class="hash-link" aria-label="時薪四顆棉花糖的直接連結" title="時薪四顆棉花糖的直接連結" translate="no">​</a></h3>
@@ -8380,7 +8419,7 @@
 <p>每當你想試用新的雲端服務、參加線上抽獎、網站要你填 Email 才能下載免費 PDF，或是某個論壇要註冊才能看到<a class="" href="https://wiwi.blog/blog/comment-below">留言</a>等等，就產生一個新的遮罩信箱給對方。哪天這個網站開始寄垃圾信，你不用「取消訂閱」，也不用打電話教育對方，<strong>只要直接把這個遮罩信箱位址砍掉，以後那些垃圾信就會全部掉進黑洞裡。</strong></p>
 <p>額外的好處是，給每個網站不同的遮罩信箱，等於設了一個「洩漏偵測器」。如果你給 A 網站的 Email 開始收到來自 B 公司的廣告，你就知道是 A 把你的資料賣掉了。</p>
 <p>有提供遮罩信箱的 <a class="" href="https://wiwi.blog/blog/delete-emails-save-water">Email</a> 服務商應該很多（但 Gmail 沒有<sup><a href="https://wiwi.blog/blog/masked-email#user-content-fn-1-16106b" id="user-content-fnref-1-16106b" data-footnote-ref="true" aria-describedby="footnote-label" class="anchorTargetStickyNavbar_Vzrq">1</a></sup>），我自己用的是 Fastmail，它可以讓你建立最多 1,000 個遮罩信箱位址，還滿好用的唷！（不是業配）</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="考慮脫離-gmail">考慮脫離 Gmail<a href="https://wiwi.blog/blog/masked-email#%E8%80%83%E6%85%AE%E8%84%AB%E9%9B%A2-gmail" class="hash-link" aria-label="考慮脫離 Gmail�的直接連結" title="考慮脫離 Gmail的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="考慮��脫離-gmail">考慮脫離 Gmail<a href="https://wiwi.blog/blog/masked-email#%E8%80%83%E6%85%AE%E8%84%AB%E9%9B%A2-gmail" class="hash-link" aria-label="考慮脫離 Gmail的直接連結" title="考慮脫離 Gmail的直接連結" translate="no">​</a></h3>
 <p>以下是題外話。</p>
 <p>說到 Email，我知道許多人都因為方便用 Gmail，但我覺得把 Email 分離出來，搬到 <a class="" href="https://wiwi.blog/blog/degoogled-phone">Google 生態系</a>之外，是很值得考慮的分散風險策略。</p>
 <p>畢竟 Google 帳號跟太多東西綁在一起了。在網路上常常都會聽到這種鬼故事：在 YouTube 上留言說錯話，或是在 Google Photos 裡放了被判定為違反條款的照片，然後整個 Google 帳號就被凍結了、申訴無方。<sup><a href="https://wiwi.blog/blog/masked-email#user-content-fn-2-16106b" id="user-content-fnref-2-16106b" data-footnote-ref="true" aria-describedby="footnote-label" class="anchorTargetStickyNavbar_Vzrq">2</a></sup> <sup><a href="https://wiwi.blog/blog/masked-email#user-content-fn-3-16106b" id="user-content-fnref-3-16106b" data-footnote-ref="true" aria-describedby="footnote-label" class="anchorTargetStickyNavbar_Vzrq">3</a></sup></p>
@@ -9004,7 +9043,7 @@
 </blockquote>
 <p><strong>恐龍化石</strong>要我們「<a href="https://cylikesreading.wordpress.com/2026/01/15/blogblog-party-latte-art/" target="_blank" rel="noopener noreferrer" class="">學吧！咖啡拉花</a>」。他推薦我們所有人（不管喝不喝咖啡），都應該去上個短期課程學拉花。文章講了許多我從來都不知道的拉花知識，也許你也會受到影響決定開始拉花！</p>
 <p><strong>Timo</strong> 的「<a href="https://timoblog.com/post/welcome-to-mathology/" target="_blank" rel="noopener noreferrer" class="">歡迎加入 Mathology</a>」是要推坑我們進入數學的世界，讓我們知道數學其實沒那麼可怕，不要一聽到數學就想到學校考試，光是欣賞那些精妙的數學定理就很美！</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-五花八門">🎉 五花八門<a href="https://wiwi.blog/blog/blogblog-party-recap-jan-2026#-%E4%BA%94%E8%8A%B1%E5%85%AB%E9%96%80" class="hash-link" aria-label="🎉 五花八門的直接連��結" title="🎉 五花八門的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-五花八門">🎉 五花八門<a href="https://wiwi.blog/blog/blogblog-party-recap-jan-2026#-%E4%BA%94%E8%8A%B1%E5%85%AB%E9%96%80" class="hash-link" aria-label="🎉 五花八門的直接連結" title="🎉 五花八門的直接連結" translate="no">​</a></h3>
 <p><strong>Noa</strong> 的「<a href="https://noa.bearblog.dev/3222/" target="_blank" rel="noopener noreferrer" class="">推坑</a>」從國小低年級就開始了，她第一次體驗到「推坑成功的爽感」是說服同學吃下了某樣食物，文章還有她被推坑和想推坑別人的其他事物。我不要暴雷，點進去看就知道啦！Noa 的文章總是既輕鬆又溫暖，連標點符號裡彷彿都藏著讓人心情變好的魔法，我超級愛她的部落格，也超級欣賞 Noa，強烈推薦給你們！</p>
 <blockquote>
 <p>「啊？我變成被推坑然後帶給別人開心的那個人了嗎。」</p>
@@ -9027,7 +9066,7 @@
 <p><strong>HwH</strong> 在「<a href="https://hwhblog.bearblog.dev/push/" target="_blank" rel="noopener noreferrer" class="">我多想有個誰來幫我決定要推什麼？</a>」裡說，寫這個推坑文一開始的時候很掙扎，因為想不到要推坑什麼。他發現自己寫文章時太在意別人的反應，像在社群媒體上發文一樣綁手綁腳。後來決定不管了，就寫自己真心想推薦的東西。所以到底是什麼？去看文章就知道了。</p>
 <p>最後，是 <strong>Wiwi</strong> 寫的「<a class="" href="https://wiwi.blog/blog/get-your-own-domain/">最重要的『帳號』</a>」推坑你擁有一個自己的網址；「<a class="" href="https://wiwi.blog/blog/no-one-promotes">都沒人推</a>」是在推「都沒人推」的東西；「<a class="" href="https://wiwi.blog/blog/noticing-things">『注意到』的感動</a>」則是推坑我最愛的兩個「日常系」部落格。希望你們也可以去看看囉！</p>
 <hr>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="下個月主題只有我這樣嗎">下個月主題：「只有我這樣嗎？」<a href="https://wiwi.blog/blog/blogblog-party-recap-jan-2026#%E4%B8%8B%E5%80%8B%E6%9C%88%E4%B8%BB%E9%A1%8C%E5%8F%AA%E6%9C%89%E6%88%91%E9%80%99%E6%A8%A3%E5%97%8E" class="hash-link" aria-label="下個月主題：「只有我這樣嗎？」的直接連結" title="下個月主題：「只有我這樣嗎？」的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="下個月主題只有我這樣嗎">下個月主題：「只有我這樣嗎？」<a href="https://wiwi.blog/blog/blogblog-party-recap-jan-2026#%E4%B8%8B%E5%80%8B%E6%9C%88%E4%B8%BB%E9%A1%8C%E5%8F%AA%E6%9C%89%E6%88%91%E9%80%99%E6%A8%A3%E5%97%8E" class="hash-link" aria-label="下個月主題：「只有我這樣嗎��？」的直接連結" title="下個月主題：「只有我這樣嗎？」的直接連結" translate="no">​</a></h3>
 <p>以上，就是 2026 年 1 月份超熱鬧的「<a href="https://blogblog.club/party" target="_blank" rel="noopener noreferrer" class="">BlogBlog 同樂會</a>」。再次感謝每一個參與活動的人，看這些文章我覺得很過癮，希望你也是！</p>
 <p>所有參與者的文章連結，也會被放在 <a href="https://blogblog.club/party" target="_blank" rel="noopener noreferrer" class="">BlogBlog.Club 的活動頁面</a>，永遠證明大家是第一屆的<a class="" href="https://wiwi.blog/blog/pioneer">元老</a>！以後如果 BlogBlog 同樂會變成什麼了不起的活動（雖然機率不高），你們就可以驕傲地說：「我可是第一屆就參加了喔。」</p>
 <p>在這篇文章發表的同時，2026 年 2 月的 BlogBlog 同樂會也已經開跑啦！二月的主持人還是我，這次的主題「<a class="" href="https://wiwi.blog/blog/blogblog-party-feb-2026">只有我這樣嗎？</a>」就是要鼓勵你寫出那些讓你懷疑「我是不是很奇怪」的事情，歡迎大家一起來分享你怪異的一面！<strong>請不要停下來，繼續寫下去，用力投稿！</strong></p>
@@ -9143,7 +9182,7 @@
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="千萬別當youtuber">千萬別當「YouTuber」<a href="https://wiwi.blog/blog/ab-test#%E5%8D%83%E8%90%AC%E5%88%A5%E7%95%B6youtuber" class="hash-link" aria-label="千萬別當「YouTuber」的直接連結" title="千萬別當「YouTuber」的直接連結" translate="no">​</a></h3>
 <p>如果你有重要的話想對全世界說，不要急著把它丟到一個只關心「有多少人看到」的平台。試著以一種「有愛」的方式，在自己的網站上發表吧！</p>
 <p>當然你還是可以把影片放到 YouTube 上，但千萬別當一個只為了演算法服務的「YouTuber」。這是一個在 YouTube 上有 57 萬訂閱的「YouTuber」──儘管我超不喜歡這個稱號──的真心建議。</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="我的-ab-測試">我的 A/B 測試<a href="https://wiwi.blog/blog/ab-test#%E6%88%91%E7%9A%84-ab-%E6%B8%AC%E8%A9%A6" class="hash-link" aria-label="我的 A/B 測試的直接連結" title="我的 A/B 測�試的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="我的-ab-測試">我的 A/B 測試<a href="https://wiwi.blog/blog/ab-test#%E6%88%91%E7%9A%84-ab-%E6%B8%AC%E8%A9%A6" class="hash-link" aria-label="我的 A/B 測試的直接連結" title="我的 A/B 測試的直接連結" translate="no">​</a></h3>
 <p>不過話說回來，身為一個矛盾的人類，我還是忍不住在我的最新影片（<a href="https://www.youtube.com/watch?v=F1fEr9E9eEU" target="_blank" rel="noopener noreferrer" class="">YouTube 連結</a>）做了 A/B 測試，結果如何？到底哪一個標題表現最好呢？</p>
 <p><img decoding="async" loading="lazy" src="https://wiwi.blog/assets/images/abtest-96583bee2ba5c385508f500386ce423f.png" width="800" height="478" class="img_ev3q"></p>
 <ul>
@@ -9440,7 +9479,7 @@
 <p>就像我在<a class="" href="https://wiwi.blog/blog/notebooklm-enshittification">之前文章</a>說的，商業平台的「大便化」（Enshittification）是必然的，只是時間早晚的問題而已。</p>
 <p>一開始先對創作者好，把他們綁架住；然後對付費用戶好，把他們也綁架住；接下來兩邊一起壓榨，讓平台獲得最大價值──我們即將要在 Substack 上再看到一次這個循環。</p>
 <p>如果五年後，Substack 突然發公告說：「唉呀，你看時代不一樣囉，現在沒人在看 E-mail 了啦！為了環保，我們決定關閉 E-mail 電子報功能。請叫你的讀者<a class="" href="https://wiwi.blog/blog/i-hate-your-app">下載 App</a> 並開啟通知，這樣以後他們才能看到你的文章唷！」我一點都不會意外。</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="那要怎麼辦">那要怎麼辦？<a href="https://wiwi.blog/blog/substack-enshittification#%E9%82%A3%E8%A6%81%E6%80%8E%E9%BA%BC%E8%BE%A6" class="hash-link" aria-label="那要怎麼辦？的直接連結" title="那要怎麼辦��？的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="那要怎麼辦">那要怎麼辦？<a href="https://wiwi.blog/blog/substack-enshittification#%E9%82%A3%E8%A6%81%E6%80%8E%E9%BA%BC%E8%BE%A6" class="hash-link" aria-label="那要怎麼辦？的直接連結" title="那要怎麼辦？的直接連結" translate="no">​</a></h3>
 <p>只有兩件事是真的：「到我自己的網址看我」和「用 RSS 訂閱我」。其他那些「在 XXX 平台追蹤我」都是假的。</p>
 <p>創作者們，希望你們趕快<a class="" href="https://wiwi.blog/blog/get-your-own-domain">買個網址當作自己的家</a>，並且用力教育你的觀眾<a class="" href="https://wiwi.blog/blog/you-should-use-rss">使用 RSS</a> 啊！不然下次你又要被迫搬家時，又會發現自己什麼都帶不走──除了被前任平台傷害的<a class="" href="https://wiwi.blog/blog/little-story">痕跡</a>之外。</p>]]></content:encoded>
         </item>
@@ -9604,7 +9643,7 @@
 <p>最近超級喜歡的兩個 blog，對我來說也有同樣的魔力。</p>
 <p><a href="https://noa.bearblog.dev/blog/" target="_blank" rel="noopener noreferrer" class=""><strong>Noa</strong></a> 寫過她<a href="https://noa.bearblog.dev/4876/" target="_blank" rel="noopener noreferrer" class="">怕被電梯門夾到</a>，一定要等門關上後重新按鈕才願意進去；在颱風天看到吃湯麵的客人在<a href="https://noa.bearblog.dev/9147/" target="_blank" rel="noopener noreferrer" class="">吸青江菜</a>，青江菜隨風亂飛，在現場拼命忍笑之後，回家後把它畫下來；用左手龜速寫完<a href="https://noa.bearblog.dev/writing_with_left_hand/" target="_blank" rel="noopener noreferrer" class="">整整三張稿紙的部落格文章</a>，右手中途還亂入稱讚左手字很美（？）。每次看 Noa 寫這些生活點滴，我都會忍不住想：「天啊這人的生活也過得<del>太閒</del>太可愛、太浪漫了吧！」</p>
 <p><a href="https://onlywin.substack.com/" target="_blank" rel="noopener noreferrer" class=""><strong>只贏</strong></a>寫她傳簡訊給即將要跑半馬的伴侶：「<a href="https://onlywin.substack.com/p/af3" target="_blank" rel="noopener noreferrer" class="">接下來的路，就靠自己了喔。</a>」然後自己被自己傳出去的話感動到不行。這種幽默又帶點自戀的瞬間，如果沒有被細心「注意到」並捕捉下來，絕對不到三秒就隨著馬拉松的汗水蒸發掉了。</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="別只是默默滑過">別只是默默滑過<a href="https://wiwi.blog/blog/noticing-things#%E5%88%A5%E5%8F%AA%E6%98%AF%E9%BB%98%E9%BB%98%E6%BB%91%E9%81%8E" class="hash-link" aria-label="別只是默默滑過的直接連結" title="別只是默默滑過的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="��別只是默默滑過">別只是默默滑過<a href="https://wiwi.blog/blog/noticing-things#%E5%88%A5%E5%8F%AA%E6%98%AF%E9%BB%98%E9%BB%98%E6%BB%91%E9%81%8E" class="hash-link" aria-label="別只是默默滑過的直接連結" title="別只是默默滑過的直接連結" translate="no">​</a></h3>
 <p>就像只贏說的「<a href="https://onlywin.substack.com/p/b36" target="_blank" rel="noopener noreferrer" class="">說出喜歡，就是一場溫暖的革命</a>」──<strong>當你被某個作品打動，千萬不要只是默默滑過、按個愛心，而是該毫不吝嗇地讓作者知道「我看見你了」</strong>。所以我決定要在這裡當個瘋狂粉絲，把對這兩個 blog 的愛說出來！不然萬一哪天她們突然覺得沒人在看就不寫了，該怎麼辦？</p>
 <p>其實寫到這裡我也不太確定這篇的重點是什麼，但「沒有重點」不正是「注意到小事」的精隨嗎？不然的話，你們就把這篇當作 <a href="https://noa.bearblog.dev/" target="_blank" rel="noopener noreferrer" class="">Noa's Blog</a> 和<a href="https://onlywin.substack.com/" target="_blank" rel="noopener noreferrer" class="">只贏</a>的推坑文好了！快把它們加入你的 RSS 訂閱清單！</p>
 <p><em>（註：我在現實生活中並不認識 Noa <del>和只贏</del>。如果認識的話，可能就會因為太尷尬而寫不出這麼肉麻的話了。）</em></p>
@@ -9644,7 +9683,7 @@
 <li class="">Any use of AI tools to impersonate other artists or styles is strictly prohibited in accordance with our existing policies prohibiting impersonation and intellectual property infringement.（用 AI 工具去模仿其他藝人或風格，是違反我們的反冒充和侵權政策的，一律禁止。）</li>
 </ul>
 </blockquote>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="ai-音樂為什麼難以編輯">AI 音樂為什麼難以編輯？<a href="https://wiwi.blog/blog/keeping-bandcamp-human#ai-%E9%9F%B3%E6%A8%82%E7%82%BA%E4%BB%80%E9%BA%BC%E9%9B%A3%E4%BB%A5%E7%B7%A8%E8%BC%AF" class="hash-link" aria-label="AI 音樂為什麼難以編輯？的直接連結" title="AI 音樂為什麼難以編輯？的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="ai-音樂為什麼難以編輯">AI 音樂為什麼難以編輯？<a href="https://wiwi.blog/blog/keeping-bandcamp-human#ai-%E9%9F%B3%E6%A8%82%E7%82%BA%E4%BB%80%E9%BA%BC%E9%9B%A3%E4%BB%A5%E7%B7%A8%E8%BC%AF" class="hash-link" aria-label="AI 音樂為什麼難以編輯？的直�接連結" title="AI 音樂為什麼難以編輯？的直接連結" translate="no">​</a></h3>
 <p>Bandcamp 之所以能畫出這條「AI╱非 AI」的線，甚至覺得自己有辦法執行這個政策，是因為目前 <strong>AI 產生的音樂都是音訊（Audio）檔案，而不是音符資訊（像是 MIDI 或樂譜）。</strong></p>
 <p>想像目前的 AI 生成音樂，就像是早餐店給你一個<a class="" href="https://wiwi.blog/blog/process-economy">已經做好的蛋餅</a>（音訊檔案），而不是給你雞蛋、餅皮和蔥花（MIDI╱樂譜）。你如果覺得這蛋餅太鹹，也沒辦法把鹽巴挑出來，只能退貨叫廚房（AI）再重做一個，然後祈禱下一個蛋餅會更好。</p>
 <p>一般人能用 ChatGPT 幫忙寫文章，是因為看得懂文字，而且可以輕易修改它的輸出；AI 生成的圖片，大家也都看得懂，稍微會用影像處理軟體也能做簡單的修改。</p>
@@ -9933,7 +9972,7 @@
 <h1>衛生紙囤貨指南</h1>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="為什麼要囤">為什麼要囤？<a href="https://wiwi.blog/blog/format-as-rhetoric#%E7%82%BA%E4%BB%80%E9%BA%BC%E8%A6%81%E5%9B%A4" class="hash-link" aria-label="為什麼要囤？的直接連結" title="為什麼要囤？的直接連結" translate="no">​</a></h2>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="因為會漲價">因為會漲價<a href="https://wiwi.blog/blog/format-as-rhetoric#%E5%9B%A0%E7%82%BA%E6%9C%83%E6%BC%B2%E5%83%B9" class="hash-link" aria-label="因為會漲價的直接連結" title="因為會漲價的直接連結" translate="no">​</a></h3>
-<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="雖然也不一定會漲">雖然也不一定會漲<a href="https://wiwi.blog/blog/format-as-rhetoric#%E9%9B%96%E7%84%B6%E4%B9%9F%E4%B8%8D%E4%B8%80%E5%AE%9A%E6%9C%83%E6%BC%B2" class="hash-link" aria-label="雖然也不一定會漲的直接連結" title="雖然也不一定會漲的直接連結" translate="no">​</a></h4>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="雖然也��不一定會漲">雖然也不一定會漲<a href="https://wiwi.blog/blog/format-as-rhetoric#%E9%9B%96%E7%84%B6%E4%B9%9F%E4%B8%8D%E4%B8%80%E5%AE%9A%E6%9C%83%E6%BC%B2" class="hash-link" aria-label="雖然也不一定會漲的直接連結" title="雖然也不一定會漲的直接連結" translate="no">​</a></h4>
 <h5 class="anchor anchorTargetStickyNavbar_Vzrq" id="但囤了就是很開心">但囤了就是很開心<a href="https://wiwi.blog/blog/format-as-rhetoric#%E4%BD%86%E5%9B%A4%E4%BA%86%E5%B0%B1%E6%98%AF%E5%BE%88%E9%96%8B%E5%BF%83" class="hash-link" aria-label="但囤了就是很開心的直接連結" title="但囤了就是很開心的直接連結" translate="no">​</a></h5>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="螢光筆">螢光筆<a href="https://wiwi.blog/blog/format-as-rhetoric#%E8%9E%A2%E5%85%89%E7%AD%86" class="hash-link" aria-label="螢光筆的直接連結" title="螢光筆的直接連結" translate="no">​</a></h3>
 <p>因為你覺得粗體還不夠。</p>
@@ -10256,7 +10295,7 @@
 </blockquote>
 <p>Timo 認為，那些表面看似友善的行為，背後可能隱藏著「女性很弱、需要被照顧」的預設立場。所以，身為女性應該強大起來，別讓男人太容易透過這種小恩小惠就討到女生歡心，這樣想追女生的男生們才會去提升自己。</p>
 <p>我覺得 Timo 的觀點很有趣，我有點<a class="" href="https://wiwi.blog/blog/line-privacy-policy">同意</a>又有點不同意。所以想寫篇文，以身為直男的觀點討論一下。</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="為什麼我要幫女生擋門">為什麼我要幫女生擋門？<a href="https://wiwi.blog/blog/why-i-hold-doors#%E7%82%BA%E4%BB%80%E9%BA%BC%E6%88%91%E8%A6%81%E5%B9%AB%E5%A5%B3%E7%94%9F%E6%93%8B%E9%96%80" class="hash-link" aria-label="為什麼我要幫女生擋門？��的直接連結" title="為什麼我要幫女生擋門？的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="為什麼我要幫女生擋門">為什麼我要幫女生擋門？<a href="https://wiwi.blog/blog/why-i-hold-doors#%E7%82%BA%E4%BB%80%E9%BA%BC%E6%88%91%E8%A6%81%E5%B9%AB%E5%A5%B3%E7%94%9F%E6%93%8B%E9%96%80" class="hash-link" aria-label="為什麼我要幫女生擋門？的直接連結" title="為什麼我要幫女生擋門？的直接連結" translate="no">​</a></h3>
 <p>先來回答一開始的問題：</p>
 <ul>
 <li class="">我會幫後面緊跟著的女性擋門嗎？非常高機率會。</li>
@@ -10975,7 +11014,7 @@
 <p>他想要在閒暇時間背一些日文單字，於是打開 App Store 搜尋「日文單字 App」，試了半天都找不到滿意的。</p>
 <p><strong>最後，他發現最好用的「App」是一個 29 頁的 PDF 檔案</strong><sup><a href="https://wiwi.blog/blog/files-over-apps#user-content-fn-2-32571e" id="user-content-fnref-2-32571e" data-footnote-ref="true" aria-describedby="footnote-label" class="anchorTargetStickyNavbar_Vzrq">1</a></sup>：裡面整理了他想要背的 N5 日文單字，檔案超小、開啟快速、沒有廣告、不用登入、在<a class="" href="https://wiwi.blog/blog/digital-prepping">飛航模式</a>下照樣能用，還可以列印！</p>
 <p>當你拿著槌子，所有問題看起來都像釘子；當你拿著手機，所有問題看起來都該下載一個 App。</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="檔案萬歲">檔案萬歲<a href="https://wiwi.blog/blog/files-over-apps#%E6%AA%94%E6%A1%88%E8%90%AC%E6%AD%B2" class="hash-link" aria-label="檔案萬歲的直接連結" title="檔案萬歲的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="檔案萬歲">檔案萬歲<a href="https://wiwi.blog/blog/files-over-apps#%E6%AA%94%E6%A1%88%E8%90%AC%E6%AD%B2" class="hash-link" aria-label="檔案萬歲的直接連結" title="檔��案萬歲的直接連結" translate="no">​</a></h3>
 <p>但其實，許多問題根本不需要 App，用檔案就能搞定，而且往往更方便：</p>
 <ul>
 <li class="">📑 <strong>筆記</strong>：根本不用訂閱什麼 Notion、Evernote，只要一個<a class="" href="https://wiwi.blog/blog/new-folder">資料夾</a>和一堆 <a class="" href="https://wiwi.blog/blog/why-use-markdown">Markdown 檔案</a>就好啦！</li>
@@ -11449,7 +11488,7 @@
 <li class="">社群媒體（真的看得到朋友動態的那種；還記得以前在 Facebook 上你可以「戳」朋友嗎？）</li>
 <li class="">線上商店、線上刷卡</li>
 </ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="第三階段世界開始違反自然法則2020-">第三階段：世界開始違反自然法則（2020-）<a href="https://wiwi.blog/blog/three-tech-views#%E7%AC%AC%E4%B8%89%E9%9A%8E%E6%AE%B5%E4%B8%96%E7%95%8C%E9%96%8B%E5%A7%8B%E9%81%95%E5%8F%8D%E8%87%AA%E7%84%B6%E6%B3%95%E5%89%872020-" class="hash-link" aria-label="第三階段：世界開始違反自然法則（2020-）的直接連結" title="第三階段：世界開始違反自然法則（2020-）的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="第三階段世界開始違反自然法則2020-">第三階段：世界開始違反自然法則（2020-）<a href="https://wiwi.blog/blog/three-tech-views#%E7%AC%AC%E4%B8%89%E9%9A%8E%E6%AE%B5%E4%B8%96%E7%95%8C%E9%96%8B%E5%A7%8B%E9%81%95%E5%8F%8D%E8%87%AA%E7%84%B6%E6%B3%95%E5%89%872020-" class="hash-link" aria-label="第三階段：世界��開始違反自然法則（2020-）的直接連結" title="第三階段：世界開始違反自然法則（2020-）的直接連結" translate="no">​</a></h3>
 <p>35 歲以後，世界開始朝向荒謬的方向狂奔：</p>
 <ul>
 <li class="">短影片</li>
@@ -11619,7 +11658,7 @@
 <p>所以我開始研究 <a href="https://openrouter.ai/" target="_blank" rel="noopener noreferrer" class="">OpenRouter</a>。</p>
 <p>OpenRouter 就像是 LLM 界的 <a class="" href="https://wiwi.blog/blog/bye-uber-eats">Uber Eats</a>，讓我們不用跟每家餐廳各別簽約，只要透過單一平台就能點到所有餐廳的菜。主流的 Claude、ChatGPT、Gemini、Grok 當然都有，而且還有一大堆從來沒聽過的模型任你選。</p>
 <p>更重要的一點是：OpenRouter 不是訂閱制，而是儲值制，按用量計費。</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="以量計費的心態">以量計費的心態<a href="https://wiwi.blog/blog/openrouter#%E4%BB%A5%E9%87%8F%E8%A8%88%E8%B2%BB%E7%9A%84%E5%BF%83%EF%BF%BD%EF%BF%BD%E6%85%8B" class="hash-link" aria-label="以量計費的心態的直接連結" title="以量計費的心態的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="以量計費的心態">以量計費的心態<a href="https://wiwi.blog/blog/openrouter#%E4%BB%A5%E9%87%8F%E8%A8%88%E8%B2%BB%E7%9A%84%E5%BF%83%E6%85%8B" class="hash-link" aria-label="以量計費的心態的直接連結" title="以量計費的心態的直接連結" translate="no">​</a></h3>
 <p>「付月費」和「用多少算多少」的用法真的會很不一樣。</p>
 <p>用 Claude 訂閱制的時候，因為每個月的 20 美金已經付出去了，所以當然要用爆！各種不重要的小事──「幫我看看這篇文章的重點」、「幫我翻成繁體中文」、「聊聊這個奇怪的想法」、「今天晚餐吃什麼」、「給我笑翻的 emoji」（對，我寧願用 Claude 也懶得自己選表情符號）──管他的全部都往裡面丟就對了。</p>
 <p>但用 OpenRouter 時就完全不一樣了。因為是以 token 數量計費（想成以字數計費就行了），讓我瞬間變成斤斤計較守財奴模式。問每個問題之前會先想：「這問題真的需要問 AI 嗎？」、「我得一次就把問題敘述清楚，別浪費 token 來回對話」。</p>
@@ -11954,7 +11993,7 @@
 <p>社群媒體正在削弱使用者的競爭優勢。</p>
 <p>為什麼我得關心「<a class="" href="https://wiwi.blog/blog/trending-discussion">大家都在關心</a>的事」？某個網紅跟某個網紅吵架、某個藝人離婚了、某個啦啦隊員失言了⋯⋯這些跟我的人生有什麼關係？</p>
 <p>「競爭優勢」來自知道別人不知道的事、想到別人沒想到的點、看到別人沒看到的角度。如果總是看「大家都在看」的內容，就是在主動放棄自己的競爭優勢，成為被演算法牽著鼻子走的吃瓜群眾。</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="現在你有-10-個理由了">現在你有 10 個理由了<a href="https://wiwi.blog/blog/five-more-reasons#%E7%8F%BE%E5%9C%A8%E4%BD%A0%E6%9C%89-10-%E5%80%8B%E7%90%86%E7%94%B1%E4%BA%86" class="hash-link" aria-label="現在你有 10 個理由了的直接連結" title="現在你有 10 個理由了的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="現在你有-10-��個理由了">現在你有 10 個理由了<a href="https://wiwi.blog/blog/five-more-reasons#%E7%8F%BE%E5%9C%A8%E4%BD%A0%E6%9C%89-10-%E5%80%8B%E7%90%86%E7%94%B1%E4%BA%86" class="hash-link" aria-label="現在你有 10 個理由了的直接連結" title="現在你有 10 個理由了的直接連結" translate="no">​</a></h3>
 <p>以上五點，再加上<a class="" href="https://wiwi.blog/blog/why-i-dont-use-social-media">前一篇文章</a>的五點，現在你有十個討厭社群媒體的理由了！</p>
 <p>如果你覺得這篇在胡說八道，歡迎把文章連結貼到 Threads 上反駁我。系統應該會很樂意幫你配對一個「完全沒看懂你在說什麼但很想吵架」的人，祝你吵架愉快！</p>]]></content:encoded>
         </item>
@@ -12713,7 +12752,7 @@
 </blockquote>
 <p>在 YouTube 上面打滾這麼久，我經歷過各種觀看數字的起伏：有那種一天就破百萬觀看的爽感，更常有<a class="" href="https://wiwi.blog/blog/escape-from-youtube">一個禮拜後還破不了 5,000</a> 的尷尬。</p>
 <p>好和弦的 YouTube 頻道從 2014 年創立至今，累積了超過五千五百萬次觀看。聽起來好像很值得吹噓嗎？但老實說，現在回頭看，這個數字的大小對我的職業生涯來說，一點都不重要。</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="每個人都是-1">每個人都是 +1<a href="https://wiwi.blog/blog/audience-weight#%E6%AF%8F%E5%80%8B%EF%BF%BD%EF%BF%BD%E4%BA%BA%E9%83%BD%E6%98%AF-1" class="hash-link" aria-label="每個人都是 +1的直接連結" title="每個人都是 +1的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="每個人都是-1">每個人都是 +1<a href="https://wiwi.blog/blog/audience-weight#%E6%AF%8F%E5%80%8B%E4%BA%BA%E9%83%BD%E6%98%AF-1" class="hash-link" aria-label="每個人都是 +1的直接連結" title="每個人都是 +1的直接連結" translate="no">​</a></h3>
 <p><strong>觀看數字的問題在於，它把每一個人都當作「+1」：</strong></p>
 <ul>
 <li class="">點開影片看三秒就關掉的路人是 +1；認真看完並且照著練習的學習者也是 +1</li>
@@ -12769,7 +12808,7 @@
 </ul>
 <p>而且遊戲不需要在這裡結束。當 Discovery Mode 成為常態，Spotify 完全可以繼續推出「超級 Discovery Mode」──只要放棄 50% 的版稅，你就能排在那些只放棄 30% 的音樂家前面，多划算呀！</p>
 <p>而當「超級 Discovery Mode」變成常態的時候？就可以推出「盤子 Mode」：音樂家們得先付錢給 Spotify，才能讓歌曲顯示在畫面上。到時候大家都會感動得痛哭流涕：「太好了！感謝 Spotify 讓我有這個機會被<a class="" href="https://wiwi.blog/blog/stop-being-scammed">剝削</a>！」</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="平台必定會剝削你">平台必定會剝削你<a href="https://wiwi.blog/blog/discovery-mode#%E5%B9%B3%E5%8F%B0%E5%BF%85%E5%AE%9A%E6%9C%83%E5%89%9D%E5%89%8A%E4%BD%A0" class="hash-link" aria-label="平台必定會剝削你的直��接連結" title="平台必定會剝削你的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="平台必定會剝削你">平台必定會剝削你<a href="https://wiwi.blog/blog/discovery-mode#%E5%B9%B3%E5%8F%B0%E5%BF%85%E5%AE%9A%E6%9C%83%E5%89%9D%E5%89%8A%E4%BD%A0" class="hash-link" aria-label="平台必定會剝削你的直接連結" title="平台必定會剝削你的直接連結" translate="no">​</a></h3>
 <p>其實其他平台也在這樣玩：</p>
 <ul>
 <li class="">Facebook 調降觸及率，要你付錢「推廣」；當所有人都「推廣」之後，觸及率又降回原點（但付了更多錢）。</li>
@@ -12885,7 +12924,7 @@
 <p><img decoding="async" loading="lazy" src="https://wiwi.blog/assets/images/rinku-fc1-9aa1c86ab34af038407f1fd810d56cfd.jpg" width="700" height="527" class="img_ev3q">
 <img decoding="async" loading="lazy" src="https://wiwi.blog/assets/images/rinku-fc2-5d0834c5b4e5077a3f4fb7697a69ac8d.jpg" width="700" height="527" class="img_ev3q">
 <img decoding="async" loading="lazy" src="https://wiwi.blog/assets/images/rinku-fc3-31f8ab68e65fa26720f39ecdab4dbc5a.jpg" width="700" height="527" class="img_ev3q"></p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="第-2-天1014熊野古道中邊路">第 2 天（10/14）：熊野古道中邊路<a href="https://wiwi.blog/blog/kumano-kodo#%E7%AC%AC-2-%E5%A4%A91014%E7%86%8A%E9%87%8E%E5%8F%A4%E9%81%93%E4%B8%AD%E9%82%8A%E8%B7%AF" class="hash-link" aria-label="第 2 天（10/14）：熊野古道中邊路的直接連結" title="第 2 天（10/14）：熊野古道中邊路的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="第-2-天1014熊野古道中邊路">第 2 天（10/14）：熊野古道中邊路<a href="https://wiwi.blog/blog/kumano-kodo#%E7%AC%AC-2-%E5%A4%A91014%E7%86%8A%E9%87%8E%E5%8F%A4%E9%81%93%E4%B8%AD%E9%82%8A%E8%B7%AF" class="hash-link" aria-label="第 2 天（10/14）：熊野古道中邊路的直接連結" title="第 2 天（10/14）：熊野古道中邊路的直接連��結" translate="no">​</a></h3>
 <p>在飯店起床第一件事就是 <code>ssh</code> 回家裡的電腦更新 blog。</p>
 <p><img decoding="async" loading="lazy" src="https://wiwi.blog/assets/images/office-1014-a42de0d38f4ae603ae311947c7092f0a.jpg" width="527" height="700" class="img_ev3q"></p>
 <p>今天要走的是熊野古道的「中邊路」，據說是以前皇族和貴族們走的參拜路線，但其實就是一條在森林裡面爬上爬下的山路。</p>
@@ -13943,7 +13982,7 @@
 <li class="">玩家 A 出 <code>K♠️</code>，玩家 B 出 <code>8♣️</code> → 雙方同時受到攻擊，玩家 A 受到 8 點傷害，玩家 B 受到 13 點傷害</li>
 <li class="">玩家 A 出 <code>8♥️</code>，玩家 B 出 <code>5♦️</code> → 玩家 A 回復 8 點生命值，玩家 B 的牌無效（對方沒有攻擊）</li>
 </ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="跟電腦玩玩看">跟電腦玩玩看！<a href="https://wiwi.blog/blog/simple-card-battle-game#%E8%B7%9F%E9%9B%BB%E8%85%A6%E7%8E%A9%E7%8E%A9%E7%9C%8B" class="hash-link" aria-label="跟電腦玩玩看！的直接連結" title="跟電腦玩玩看！的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="跟電腦玩玩看">跟電腦玩玩看！<a href="https://wiwi.blog/blog/simple-card-battle-game#%E8%B7%9F%E9%9B%BB%E8%85%A6%E7%8E%A9%E7%8E%A9%E7%9C%8B" class="hash-link" aria-label="��跟電腦玩玩看！的直接連結" title="跟電腦玩玩看！的直接連結" translate="no">​</a></h3>
 <p>試試看以下的小小程式，跟電腦玩玩看！</p>
 <p>電腦只是隨機出牌而已，完全沒有策略，但即使這樣，好像也沒有辦法場場都贏。</p>
 <div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb">提示</div><div class="admonitionContent_BuS1"><p>覺得以下的電腦太弱？試試看另一個有<a class="" href="https://wiwi.blog/blog/card-game-ai">簡易出牌 AI</a> 的版本。</p></div></div>
@@ -14121,7 +14160,7 @@
 <p>哇，到底什麼是「對的價格」呢？對誰來說是「對」的？是司機、使用者，還是 Uber 的股東呢？</p>
 <p>根據另外一篇 NPR.org 的報導<sup><a href="https://wiwi.blog/blog/surveillance-pricing#user-content-fn-2-035bde" id="user-content-fnref-2-035bde" data-footnote-ref="true" aria-describedby="footnote-label" class="anchorTargetStickyNavbar_Vzrq">2</a></sup>，加州大學法律教授 Veena Dubal 的研究發現，Uber 和 Lyft 都使用了所謂的「演算法薪資歧視」。先收集司機的個人資訊，再用演算法分析司機願意接受的最低價格、工作模式等資訊，對相同工作給予不同報酬。整個演算法是黑箱作業，司機完全不知道自己的薪資是怎麼算出來的。</p>
 <p>簡單地說，就是如果系統覺得你的行為越「絕望」、越「依賴這份收入」──例如總是秒接單、深夜還在開車、從來不挑客戶──它就很可能判定你是個「別無選擇」的韭菜司機，而把你的薪資「最佳化」（Optimize，這才是道地的台灣講法，不是「優化」）到你勉強能接受的最低點。因為演算法知道，你只能摸摸鼻子接受。</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="這跟我沒關係我又不是-uber-司機">這跟我沒關係，我又不是 Uber 司機<a href="https://wiwi.blog/blog/surveillance-pricing#%E9%80%99%E8%B7%9F%E6%88%91%E6%B2%92%E9%97%9C%E4%BF%82%E6%88%91%E5%8F%88%E4%B8%8D%E6%98%AF-uber-%E5%8F%B8%E6%A9%9F" class="hash-link" aria-label="這跟我沒關係，我又不是 Uber 司機的直接連結" title="這跟我沒關係，我又不是 Uber 司機的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="這跟我沒關係我又不是-uber-司��機">這跟我沒關係，我又不是 Uber 司機<a href="https://wiwi.blog/blog/surveillance-pricing#%E9%80%99%E8%B7%9F%E6%88%91%E6%B2%92%E9%97%9C%E4%BF%82%E6%88%91%E5%8F%88%E4%B8%8D%E6%98%AF-uber-%E5%8F%B8%E6%A9%9F" class="hash-link" aria-label="這跟我沒關係，我又不是 Uber 司機的直接連結" title="這跟我沒關係，我又不是 Uber 司機的直接連結" translate="no">​</a></h3>
 <p>別以為這只會發生在 Uber 司機身上。以下的情境，可能已經正在發生：</p>
 <ul>
 <li class=""><strong>急著搭<a class="" href="https://wiwi.blog/blog/stuck-ipad">飛機</a></strong>：深夜兩點在訂機票網站瘋狂重整頁面，手機位置洩漏了你正在機場附近？恭喜你，演算法發現了你是個急需搭機的韭菜，票價瞬間上漲 30%！這個價格只為你「量身打造」。</li>
@@ -14581,7 +14620,7 @@
 <p>那部蕭邦影片說穿了就是<a class="" href="https://wiwi.blog/blog/ignore-your-neighbors">任何音樂 YouTuber</a> 都做得出來的新聞快報，而這份樂譜影片可是精心設計的、只有我能做出來的原創作品啊！</p>
 <p><strong>我不得不相信 YouTube 的演算法正在試圖「教育」我</strong>：「孩子啊，可是你的樂譜影片沒辦法讓觀眾多看幾支廣告啊！不要再做這種東西了！你就不能乖一點嗎？趕快變得像大家一樣，追時事、搞笑、浮誇一點、放滿整螢幕的綜藝字卡吧！」</p>
 <p>我只想回 YouTube：「更！老子想要上傳什麼就他 M 的上傳什麼！別想用流量<a class="" href="https://wiwi.blog/blog/pua">威脅</a>我！」</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="逃離計畫五年前就開始了">逃離計畫：五年前就開始了<a href="https://wiwi.blog/blog/escape-from-youtube#%E9%80%83%E9%9B%A2%E8%A8%88%E7%95%AB%E4%BA%94%E5%B9%B4%E5%89%8D%E5%B0%B1%E9%96%8B%E5%A7%8B%E4%BA%86" class="hash-link" aria-label="逃離計畫：五年前就開始了的直接連結" title="逃離計畫：五年前就開�始了的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="逃離計畫五年前就開始了">逃離計畫：五年前就開始了<a href="https://wiwi.blog/blog/escape-from-youtube#%E9%80%83%E9%9B%A2%E8%A8%88%E7%95%AB%E4%BA%94%E5%B9%B4%E5%89%8D%E5%B0%B1%E9%96%8B%E5%A7%8B%E4%BA%86" class="hash-link" aria-label="逃離計畫：五年前就開始了的直接連結" title="逃離計畫：五年前就開始了的直接連結" translate="no">​</a></h3>
 <p>幸好，從五年前我就開始有計畫地把工作重心移出 YouTube。我積極建立<a class="" href="https://wiwi.blog/blog/internet-peasant">自己的網站</a>，在 YouTube 以外的地方賣自己的<a href="https://nicechord.com/pianoclinic/" target="_blank" rel="noopener noreferrer" class="">產品</a>、服務、經營會員，我也沒停止自己的<a class="" href="https://wiwi.blog/blog/healthy-teaching-hours">鋼琴教學工作</a>。</p>
 <p>要是我沒這樣做，反而還傻傻地去當什麼「全職 YouTuber」，我現在應該已經把影片標題改成「<strong>你絕對猜不到這首台灣民謠竟然⋯⋯（結局超展開！）</strong>」，縮圖還得擺出一臉被電到的表情。光想像就覺得毛骨悚然。</p>
 <div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb">自首</div><div class="admonitionContent_BuS1"><p>好吧我承認，雖然嘴上叛逆，但我還是稍微向現實低頭了。為了在 YouTube 生存，我還是乖乖地把縮圖做成了「更 YouTube」的樣子。</p><p>以下是同一部影片，我在自己網站和 YouTube 放的縮圖對照：</p><p><img decoding="async" loading="lazy" src="https://wiwi.blog/assets/images/wv-b755e9b6a3ef7034b750793d4823ab6b.png" width="250" height="224" class="img_ev3q">
@@ -14614,7 +14653,7 @@
 <p>我在<a class="" href="https://wiwi.blog/blog/ai-is-my-youtube-viewer">半年前的貼文</a>提到過，我寫了一個自動化程式，利用 <code>yt-dlp</code> 下載影片的字幕檔，如果沒有字幕檔的話就改下載音訊，然後用 <code>whisper</code> 轉成文字檔，再把文字檔貼到大型語言模型，讓它幫我整理重點，所以我就不用看影片了。</p>
 <p>後來，我找到了一個更優雅、更舒服的工具：<a href="https://chromewebstore.google.com/detail/cpdown/knnaflplggjdedobhbidojmmnocfbopf" target="_blank" rel="noopener noreferrer" class="">cpdown</a>。</p>
 <p>cpdown 是一個瀏覽器外掛（支援 Chrome、Brave、Firefox 等等）。只要按一下圖示，它就會把當下頁面的內容輸出成「大型語言模型友善」的 <a class="" href="https://wiwi.blog/blog/why-use-markdown">Markdown 檔案</a>，並自動複製到剪貼簿中。<strong>重點是，它在 YouTube 上也可以用！</strong></p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="一分鐘之內看完長影片">一分鐘之內看完長影片<a href="https://wiwi.blog/blog/cpdown#%E4%B8%80%E5%88%86%E9%90%98%E4%B9%8B%E5%85%A7%E7%9C%8B%E5%AE%8C%E9%95%B7%E5%BD%B1%E7%89%87" class="hash-link" aria-label="一分�鐘之內看完長影片的直接連結" title="一分鐘之內看完長影片的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="一分鐘之內看完長��影片">一分鐘之內看完長影片<a href="https://wiwi.blog/blog/cpdown#%E4%B8%80%E5%88%86%E9%90%98%E4%B9%8B%E5%85%A7%E7%9C%8B%E5%AE%8C%E9%95%B7%E5%BD%B1%E7%89%87" class="hash-link" aria-label="一分鐘之內看完長影片的直接連結" title="一分鐘之內看完長影片的直接連結" translate="no">​</a></h3>
 <p>⋯⋯或者至少，知道它值不值得你花時間看。</p>
 <p>想像一下，你看到一部標題寫著「10 個改變人生的習慣」的一小時 Podcast 訪談影片，心裡想這是不是又在講那些「多喝水、<a class="" href="https://wiwi.blog/blog/no-alcohol">早睡早起</a>」之類的廢話呢？以前的你，必須付出一小時的青春才能得到答案，現在呢？</p>
 <ol>
@@ -14895,7 +14934,7 @@
 <p>這種想法很有可能是被主流媒體影響的結果，畢竟每天在社群媒體看到的韓團 MV 都是大媒體公司砸錢的華麗製作，久而久之自然會被植入「要成功就得看起來像這樣」的想法。</p>
 <p>現實是，花 450 萬拍的 MV 不見得會比在家裡花 450 塊拍的影片表現更好，不論以觀眾的喜好度或 <a class="" href="https://wiwi.blog/blog/the-youtube-trap">YouTube 流量</a>而言。</p>
 <p><em>（如果你手上真的有 450 萬現金，我建議拿 5 萬去拍十支 YouTube 影片就好，把剩下的 445 萬拿去投資<a class="" href="https://wiwi.blog/blog/best-investors-are-dead">全市場指數 ETF</a>，未來的你一定會超感謝自己做了這樣的選擇！）</em></p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="先活下來活下來才能追夢">先活下來，活下來才能追夢<a href="https://wiwi.blog/blog/dream-with-budget#%E5%85%88%E6%B4%BB%E4%B8%8B%E4%BE%86%E6%B4%BB%E4%B8%8B%E4%BE%86%E6%89%8D%E8%83%BD%E8%BF%BD%E5%A4%A2" class="hash-link" aria-label="先活下來，活下來才能追夢的直接連結" title="先活下來，活下來才能追夢的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="先活下來活下來才能追夢">先活下來，活下來才能追夢<a href="https://wiwi.blog/blog/dream-with-budget#%E5%85%88%E6%B4%BB%E4%B8%8B%E4%BE%86%E6%B4%BB%E4%B8%8B%E4%BE%86%E6%89%8D%E8%83%BD%E8%BF%BD%E5%A4%A2" class="hash-link" aria-label="先活下來，活下來才能追夢的直接連結" title="先活�下來，活下來才能追夢的直接連結" translate="no">​</a></h3>
 <p>如果要追夢，還是要像個企業經營者一樣思考，而不是一次 all in 然後祈禱幸運之神降臨。</p>
 <p>你絕對不會在公司還沒賺錢時就花大錢裝潢辦公室，也不會在產品根本還沒經過市場驗證時就投入巨資（除非你是 <a class="" href="https://wiwi.blog/blog/google-search">Google</a> 或 <a class="" href="https://wiwi.blog/blog/new-folder">Apple</a>）。</p>
 <p>「一定要在<a class="" href="https://wiwi.blog/blog/abnormal-think">主流</a>市場大規模成功，才算成功」的想法是很脆弱的。更好的做法是，用最小的成本測試市場反應，<strong>確保不管失敗多少次都還是能活下去</strong>，然後繼續嘗試下一次。</p>
@@ -15277,7 +15316,7 @@
 <p>一整天總共要拍七組照片：我只有一組（除了西裝我也沒別的裝扮可換了），檸檬卷和朋友各三組（要換三套不同服裝、場景、燈光設定等等）。每一組拍攝要花 10-15 分鐘設定背景、燈光等等的，然後實際拍攝大概 30-40 分鐘。</p>
 <p>別覺得「被拍照」是什麼輕鬆愜意的事情。要一直盯著鏡頭做各種動作或表情，其實是一項需要高度專注力的工作。</p>
 <p><img decoding="async" loading="lazy" src="https://wiwi.blog/assets/images/shooting-3fa57c53d1b890641a5621e31b2d4f6b.jpg" width="450" height="800" class="img_ev3q"></p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="情緒價值">情緒價值<a href="https://wiwi.blog/blog/new-photos-2025#%E6%83%85%E7%B7%92%E5%83%B9%E5%80%BC" class="hash-link" aria-label="情緒價值的直接連結" title="情緒價值的直接連��結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="情緒價值">情緒價值<a href="https://wiwi.blog/blog/new-photos-2025#%E6%83%85%E7%B7%92%E5%83%B9%E5%80%BC" class="hash-link" aria-label="情緒價值的直接連結" title="情緒價值的直接連結" translate="no">​</a></h3>
 <p>兩個攝影師助理各司其職：其中一個人要即時調整燈光角度、準備道具、幫我整理服裝等等；另一個人會在電腦上監看（<a class="" href="https://wiwi.blog/blog/coolpix2000">相機</a>是直接連線到 <a class="" href="https://wiwi.blog/blog/my-laptops">MacBook</a> 上，每拍一張他就能即時看到），檢查相片的品質。</p>
 <p>攝影師每按一次快門，那位在電腦上監看的助理常常會大喊：「可以喔！」、「很好喔！」、「這張很棒喔！」。我不曉得這是不是某種心理戰術，故意喊給我聽的？但這招還真的有用，聽到他這樣給我情緒價值，我的表情和姿勢好像真的會變得更有自信一點。難怪大家還是這麼需要在社群媒體上<a class="" href="https://wiwi.blog/blog/seeking-approval">被按愛心</a>。</p>
 <p>有兩張照片看起來像是我坐在辦公桌後面，一副專業股票分析師的樣子。但真相是，那根本不是桌子，只是兩個人幫我扶住一張黑色紙板而已。<em><strong>Magic！</strong></em></p>
@@ -15699,7 +15738,7 @@
 <p>雖然台灣這邊還沒引進年齡驗證，但你可以搶先體驗被當成小孩的感覺！到 YouTube 首頁按右上角的「三個點」圖示，啟用「嚴格篩選模式」，享受 YouTube 對小孩們的「貼心保護」！</p>
 <p>不能<a class="" href="https://wiwi.blog/blog/social-media-feedback">留言</a>也看不到留言（欸？這好像是優點？），許多創作者的影片看不了，但依然還是可以看到大規模槍殺案的新聞影片喔！小孩們感到好安全！</p>
 <p><img decoding="async" loading="lazy" src="https://wiwi.blog/assets/images/youtube-restricted-5e4d6a716201ff259bddba4c5d1f20ac.png" width="888" height="553" class="img_ev3q"></p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="你不想保護兒童嗎">你不想保護兒童嗎？<a href="https://wiwi.blog/blog/youtube-age-verification#%E4%BD%A0%E4%B8%8D%E6%83%B3%E4%BF%9D%E8%AD%B7%E5%85%92%E7%AB%A5%E5%97%8E" class="hash-link" aria-label="你不想保護兒童嗎？的直接連結" title="你不想保護兒童嗎？的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="你不想保護兒童嗎">你不想保護兒童嗎？<a href="https://wiwi.blog/blog/youtube-age-verification#%E4%BD%A0%E4%B8%8D%E6%83%B3%E4%BF%9D%E8%AD%B7%E5%85%92%E7%AB%A5%E5%97%8E" class="hash-link" aria-label="你不想保護兒童嗎？的直接連結" title="你不想保護兒童嗎？的�直接連結" translate="no">​</a></h3>
 <p>打著「保護兒童」的旗號，YouTube 現在可以藉由年齡驗證收集更多個人資料（證件、信用卡、手機號碼），更方便地推銷 YouTube Premium（驗證更快速！），還能為廣告商提供「保證成年人觀看」的更高價的廣告版位。</p>
 <p>如果你批評這個政策，那你一定是個「反對兒童安全」的壞人。多麼完美的<a class="" href="https://wiwi.blog/blog/pua">情勒</a>教科書範例！</p>
 <div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb">延伸閱讀</div><div class="admonitionContent_BuS1"><p><a href="https://www.ftc.gov/news-events/news/press-releases/2019/09/google-youtube-will-pay-record-170-million-alleged-violations-childrens-privacy-law" target="_blank" rel="noopener noreferrer" class="">Google 和 YouTube 因涉嫌違反兒童隱私法，將支付創紀錄的 1.7 億美元罰款</a><sup><a href="https://wiwi.blog/blog/youtube-age-verification#user-content-fn-1-8115db" id="user-content-fnref-1-8115db" data-footnote-ref="true" aria-describedby="footnote-label" class="anchorTargetStickyNavbar_Vzrq">1</a></sup>（FTC.gov，美國聯邦貿易委員會）</p></div></div>
@@ -15918,7 +15957,7 @@
 <li class="">💕 <strong>談戀愛</strong>：現在談戀愛真的不好玩！你需要曖昧、要找話題聊天、要花錢約會，晚上還要<a class="" href="https://wiwi.blog/blog/together-censored">一起進行床上運動</a>⋯⋯麻煩死了！大部分人其實不享受戀愛的過程，我們應該讓 AI 直接安排你們<a class="" href="https://wiwi.blog/blog/comparing-spouses">結婚</a>生子，這樣每個人都能體驗「愛情的美好」。</li>
 </ul>
 <p>這就是我們的 Suno AI CEO，Mikey Shulman 對音樂創作的想法，他覺得全世界花時間練琴、寫歌、做音樂的人都是受虐狂。</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="魔術方塊與籃球的哲學">魔術方塊與籃球的哲學<a href="https://wiwi.blog/blog/people-dont-enjoy-making-music#%E9%AD%94%E8%A1%93%E6%96%B9%E5%A1%8A%E8%88%87%E7%B1%83%E7%90%83%E7%9A%84%E5%93%B2%E5%AD%B8" class="hash-link" aria-label="魔術方塊與籃球的哲學的直接連結" title="魔術方塊與籃球的哲學的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="魔術方塊與籃球��的哲學">魔術方塊與籃球的哲學<a href="https://wiwi.blog/blog/people-dont-enjoy-making-music#%E9%AD%94%E8%A1%93%E6%96%B9%E5%A1%8A%E8%88%87%E7%B1%83%E7%90%83%E7%9A%84%E5%93%B2%E5%AD%B8" class="hash-link" aria-label="魔術方塊與籃球的哲學的直接連結" title="魔術方塊與籃球的哲學的直接連結" translate="no">​</a></h3>
 <p>在前陣子<a class="" href="https://wiwi.blog/blog/posts-from-2008">整理 blog 舊文</a>的時候，發現我曾經學會解過魔術方塊（可惜現在早就忘了）。那時候我看著 YouTube 教學影片，學習了幾種公式轉法，第一次把六面解出來真的覺得超有成就感（於是寫了<a class="" href="https://wiwi.blog/blog/rubiks-cube">這篇 blog</a>）。</p>
 <p>如果當時 Mikey Shulman 突然出現，直接塞給我一個已經完成的魔術方塊，我大概會滿頭問號地說：「然後呢？」</p>
 <p>打籃球也是一樣的道理呀！就算現在有一個<a class="" href="https://wiwi.blog/blog/useful-words">投籃命中率</a>是 100% 的機器人，我也不會想要買它來代替我去公園投籃。即使我的三分球命中率慘不忍睹（還是無人防守的情況下），我還是想要親自體驗球從手中投出去的感覺（當然，出手的瞬間還要喊一聲「Curry！」才算是完整的體驗）。</p>
@@ -16301,7 +16340,7 @@
 <p>但是，最近我就在我的硬碟裡<a class="" href="https://wiwi.blog/blog/more-old-blog-posts">考古</a>嘛，看到這些原始碼和素材，讓它們一直躺在我的硬碟裡發霉也沒意思。所以我今天把它以部落格貼文的形式重新放出來，現在你可以重新完整體驗所有題目和音樂了！</p>
 <p>原始版本的規則是每一題只能播放兩次。但這邊我只是直接貼上音樂檔，<strong>你要照規則玩還是<a class="" href="https://wiwi.blog/blog/cheating">作弊</a>無限次播放都隨你</strong>！畢竟都 2025 年了，誰在乎 17 年前的遊戲規則呢？</p>
 <p>我在文末<strong>移植了原汁原味的算分系統</strong>到這個網頁上喔！只要輸入你的答案，它就會用當年<del>那套比星座更不科學</del>的演算法給你「音感、<a class="" href="https://wiwi.blog/blog/rhythm-sense">節奏感</a>、音樂記憶力、專注力、整體音樂天份」的五項分析數據！當然，原始的排行榜功能就沒有了，資料庫早就不見啦！</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="開始玩吧">開始玩吧！<a href="https://wiwi.blog/blog/wiwistudio-musictest#%E9%96%8B%E5%A7%8B%E7%8E%A9%E5%90%A7" class="hash-link" aria-label="開始玩吧！的直接連結" title="開始玩吧！的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="開始玩吧">開始玩吧！<a href="https://wiwi.blog/blog/wiwistudio-musictest#%E9%96%8B%E5%A7%8B%E7%8E%A9%E5%90%A7" class="hash-link" aria-label="開�始玩吧！的直接連結" title="開始玩吧！的直接連結" translate="no">​</a></h3>
 <p>準備好測試你的音樂能力了嗎？拿出一張紙寫下你的答案吧！有 26 題，應該大約 20 分鐘可完成，記得用你最好的耳機或喇叭玩。</p>
 <p>不過再次提醒一下，這是 2008 年的作品，我那時候還很菜，不要期待太高的品質。</p>
 <hr>
@@ -16669,7 +16708,7 @@
 <p>──Felix Krause</p>
 </blockquote>
 <p><strong>解決方法</strong>：盡量複製網址到正常的瀏覽器開啟。</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-短網址">🔗 短網址<a href="https://wiwi.blog/blog/url-safety-tips#-%E7%9F%AD%EF%BF%BD%E7%B6%B2%E5%9D%80" class="hash-link" aria-label="🔗 短網址的直接連結" title="🔗 短網址的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-短網址">🔗 短網址<a href="https://wiwi.blog/blog/url-safety-tips#-%E7%9F%AD%E7%B6%B2%E5%9D%80" class="hash-link" aria-label="🔗 短網址的直接連結" title="🔗 短網址的直接連結" translate="no">​</a></h3>
 <p>看到短網址服務（像是 bit.ly、tinyurl.com）的連結也要小心，因為你看不到實際的目標網址，很容易被引導到怪怪的網站。</p>
 <p>而且短網址服務商的後台也會記錄一堆資訊，包括你的 IP、裝置資訊、什麼時候點了連結等等。雖然大部分只是做統計分析用，但如果你不想被記錄下來，就不要直接點這個連結。</p>
 <p>如果想要事先確認短網址的目標，可以搜尋「URL expander」、「unshorten URL」等關鍵字，使用線上工具來展開短網址。</p>
@@ -16766,7 +16805,7 @@ pre-order now.</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-3-讚與愛心機制">👍 3. 讚與愛心機制<a href="https://wiwi.blog/blog/social-vs-blog-content#-3-%E8%AE%9A%E8%88%87%E6%84%9B%E5%BF%83%E6%A9%9F%E5%88%B6" class="hash-link" aria-label="👍 3. 讚與愛心機制的直接連結" title="👍 3. 讚與愛心機制的直接連結" translate="no">​</a></h3>
 <p>在 FB/IG 上，路過的人經常會順手按個讚或愛心（就算他們沒仔細看你寫了什麼），這會讓作者錯誤地認為自己的內容「很有價值、造成了很多討論」。</p>
 <p>但在個人 blog 上沒有這麼即時的反饋，作者就是唯一的品質把關者，必須誠實面對「這文章到底有沒有內容」的靈魂拷問。</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-4-注意力競爭環境">👀 4. 注意力競爭環境<a href="https://wiwi.blog/blog/social-vs-blog-content#-4-%E6%B3%A8%E6%84%8F%E5%8A%9B%E7%AB%B6%E7%88%AD%E7%92%B0%E5%A2%83" class="hash-link" aria-label="👀 4. 注意力競爭�環境的直接連結" title="👀 4. 注意力競爭環境的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-4-注意力競爭環境">👀 4. 注意力競爭環境<a href="https://wiwi.blog/blog/social-vs-blog-content#-4-%E6%B3%A8%E6%84%8F%E5%8A%9B%E7%AB%B6%E7%88%AD%E7%92%B0%E5%A2%83" class="hash-link" aria-label="👀 4. 注意力競爭環境的直接連結" title="👀 4. 注意力競爭環境的直接連結" translate="no">​</a></h3>
 <p>社群媒體貼文需要與無數其他內容爭奪<a class="" href="https://wiwi.blog/blog/printing-money">注意力</a>，「引起注意、脫穎而出」成為了主要目標。</p>
 <p>但在個人 blog 上沒有其他貼文的競爭，內容品質成為唯一標準，這讓之前在社群媒體上看似「成功」的淺薄內容顯得無比空虛。</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-5-手機打字快速發文介面">📱 5. 手機打字、快速發文介面<a href="https://wiwi.blog/blog/social-vs-blog-content#-5-%E6%89%8B%E6%A9%9F%E6%89%93%E5%AD%97%E5%BF%AB%E9%80%9F%E7%99%BC%E6%96%87%E4%BB%8B%E9%9D%A2" class="hash-link" aria-label="📱 5. 手機打字、快速發文介面的直接連結" title="📱 5. 手機打字、快速發文介面的直接連結" translate="no">​</a></h3>
@@ -16860,7 +16899,7 @@ pre-order now.</p>
 <li class="">🎲 <strong>過度依賴<a class="" href="https://wiwi.blog/blog/boring-tube">演算法</a>推薦</strong>：在 YouTube、Facebook、Instagram 還是其他平台都一樣，一旦演算法調整（不用說也知道會往哪個方向調整），觸及率就可能瞬間暴跌，平時賴以維生的廣告收入斷線。</li>
 <li class="">☁️ <strong>過度依賴專有<a class="" href="https://wiwi.blog/blog/convivial-tools">工具</a>或<a class="" href="https://wiwi.blog/blog/digital-prepping">雲端服務</a></strong>：當關鍵工具漲價或停止服務時，整個工作流程就癱瘓。就像以上的苦主 Cursor 一樣，本來好好的商業模式，因為上游供應商的政策改變，瞬間就要重新大調整。</li>
 </ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="沒有白吃的午餐">沒有白吃的午餐<a href="https://wiwi.blog/blog/upstream#%E6%B2%92%E6%9C%89%E7%99%BD%E5%90%83%E7%9A%84%E5%8D%88%E9%A4%90" class="hash-link" aria-label="沒�有白吃的午餐的直接連結" title="沒有白吃的午餐的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="沒有白吃的午餐">沒有白吃的午餐<a href="https://wiwi.blog/blog/upstream#%E6%B2%92%E6%9C%89%E7%99%BD%E5%90%83%E7%9A%84%E5%8D%88%E9%A4%90" class="hash-link" aria-label="沒有白吃的午餐的直接連結" title="沒有白吃的午餐的直接連結" translate="no">​</a></h3>
 <p>雖然依附在一個自帶流量、自帶技術、自帶用戶的平台上感覺很方便，感覺可以讓人少奮鬥幾年，但同時你也要付出被上游<a class="" href="https://wiwi.blog/blog/instagram-trap">綁架</a>的代價。</p>
 <p>天下沒有<a class="" href="https://wiwi.blog/blog/life-tax">白吃的午餐</a>；如果有，那你大概就是午餐。</p>]]></content:encoded>
         </item>
@@ -16938,7 +16977,7 @@ pre-order now.</p>
 <li class="">最後我們訓練出更多<strong>沒有 Wi-fi 就會恐慌症發作、寫字像毛毛蟲亂爬、看到紙本書會過敏、無法進行超過三分鐘的面對面對話、<a class="" href="https://wiwi.blog/blog/horse-to-motorcycle">只會使用專有作業系統</a>、生活被科技公司的雲端綁住</strong>的低頭族下一代。</li>
 </ul>
 <p>恭喜你，成功地把教育現場變成了大型的產品試用會！Apple、Google 和 Microsoft 的高階主管們見到這場景，正在喝香檳笑著呢！</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="真正的數位教育">真正的「數位教育」<a href="https://wiwi.blog/blog/tablet-education#%E7%9C%9F%E6%AD%A3%E7%9A%84%E6%95%B8%E4%BD%8D%E6%95%99%E8%82%B2" class="hash-link" aria-label="真正的「數位教育」的直接連結" title="真正的「數位教育」的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="真正的��數位教育">真正的「數位教育」<a href="https://wiwi.blog/blog/tablet-education#%E7%9C%9F%E6%AD%A3%E7%9A%84%E6%95%B8%E4%BD%8D%E6%95%99%E8%82%B2" class="hash-link" aria-label="真正的「數位教育」的直接連結" title="真正的「數位教育」的直接連結" translate="no">​</a></h3>
 <p><strong>「數位教育」不應該是訓練學生成為消費者</strong>──掃 QR Code、登入 Google 帳號、滑 iPad──而是要訓練獨立自主和解決問題的能力：使用自由軟體、了解軟硬體運作原理、修改自己使用的程式、挑戰權威、擺脫控制。</p>
 <p>這些才是我們想要下一代具備的能力不是嗎？而不是免費幫科技巨頭訓練更多忠實用戶。</p>
 <p>如果你就是那個被強迫拿著 iPad 掃 QR Code 的學生，把這篇文章分享給你的老師看吧！如果他不知道怎麼用瀏覽器輸入網址的話，以下是這篇文章的網址 QR Code。🤣</p>
@@ -16969,7 +17008,7 @@ pre-order now.</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="初你個大頭咧">「初」你個大「頭」咧<a href="https://wiwi.blog/blog/chu-tou#%E5%88%9D%E4%BD%A0%E5%80%8B%E5%A4%A7%E9%A0%AD%E5%92%A7" class="hash-link" aria-label="「初」你個大「頭」咧的直接連結" title="「初」你個大「頭」咧的直接連結" translate="no">​</a></h3>
 <p><strong>以上兩個句子是錯的</strong>！</p>
 <p>更糟的是，還會有人把「頭」也省略，變成她才「二十初」，我賺「五萬初」，就是錯上加錯了！這個錯誤讓人煩躁的程度，大約只略遜於已經無可救藥的「在╱再」和「的╱得」不分。（多虧那些總是不選字的 YouTuber 們，讓這個錯誤<a class="" href="https://wiwi.blog/blog/influencer-pizza">快速地蔓延</a>）</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="初頭怎麼用">「初頭」怎麼用？<a href="https://wiwi.blog/blog/chu-tou#%E5%88%9D%E9%A0%AD%E6%80%8E%E9%BA%BC%E7%94%A8" class="hash-link" aria-label="「初頭」怎麼用？的直接連結" title="「初頭」怎麼用？的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="初頭怎麼用">「初頭」怎麼用？<a href="https://wiwi.blog/blog/chu-tou#%E5%88%9D%E9%A0%AD%E6%80%8E%E9%BA%BC%E7%94%A8" class="hash-link" aria-label="「初頭」怎麼用？的直接連��結" title="「初頭」怎麼用？的直接連結" translate="no">​</a></h3>
 <p>「初頭」，根據教育部《<a href="https://dict.revised.moe.edu.tw/dictView.jsp?ID=125074&amp;la=0&amp;powerMode=0" target="_blank" rel="noopener noreferrer" class="">重編國語辭典修訂本</a>》的定義，是「每月的頭幾天」的意思，它給的例句是：</p>
 <blockquote>
 <p>「他生辰是六月十五日，如今卻是五月初頭，尚有四五十日。」</p>
@@ -16996,7 +17035,7 @@ pre-order now.</p>
 <p>── Inside<sup><a href="https://wiwi.blog/blog/veo-3#user-content-fn-1-be24b9" id="user-content-fnref-1-be24b9" data-footnote-ref="true" aria-describedby="footnote-label" class="anchorTargetStickyNavbar_Vzrq">1</a></sup></p>
 </blockquote>
 <p>你以為導入 AI 生成影片工具的目的，真的是像 Google 告訴媒體的那樣，是為了「讓更多創作者得以更快速做出理想中的影片」？別天真了。</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="偽裝成工具的毒品">偽裝成工具的毒品<a href="https://wiwi.blog/blog/veo-3#%E5%81%BD%E8%A3%9D%E6%88%90%E5%B7%A5%E5%85%B7%E7%9A%84%E6%AF%92%E5%93%81" class="hash-link" aria-label="偽裝成工具��的毒品的直接連結" title="偽裝成工具的毒品的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="偽裝成工具的毒品">偽裝成工具的毒品<a href="https://wiwi.blog/blog/veo-3#%E5%81%BD%E8%A3%9D%E6%88%90%E5%B7%A5%E5%85%B7%E7%9A%84%E6%AF%92%E5%93%81" class="hash-link" aria-label="偽裝成工具的毒品的直接連結" title="偽裝成工具的毒品的直接連結" translate="no">​</a></h3>
 <p><strong>將 AI 影音生成工具導入 YouTube 的最終目標：不是讓你成為更好的創作者，而是讓平台不再需要創作者</strong>。就像健身房推出「24 小時 AI 教練」服務，聽起來是為了讓你更方便健身，實際上是為了幾年後解僱所有教練。</p>
 <p>一開始，它只是偽裝成「<a class="" href="https://wiwi.blog/blog/convivial-tools">工具</a>」讓你用，表面上可以讓你製作更多影片、得到更多流量。但實際上，它是在悄悄訓練觀眾習慣 AI 內容的「調調」。</p>
 <p>想想看，現在的演算法只能推薦<a class="" href="https://wiwi.blog/blog/five-ages-of-humanity">人類</a>製作的影片，但之後呢？平台已經掌握了你太多資訊，知道你喜歡看什麼、看到什麼會停不下來。一旦影音生成的成本下降到一定程度，平台就可以直接為每個人客製化生成源源不斷的內容，比任何人類創作者更能讓你上癮，讓你一直看下去，黏在平台上。</p>
@@ -18125,7 +18164,7 @@ pre-order now.</p>
 <p>最狡猾的地方是：<strong>因為是手機「自己傳資料給自己」，所以繞過了一般的安全檢查</strong>。防得了外賊，防不了內鬼呀！</p>
 <p>另外，Meta 還用了一種叫做「SDP Munging」的技術。簡單來說就是假裝要進行 WebRTC 視訊通話，然後在建立連線的準備階段，偷偷摸摸把追蹤資訊塞進原本應該放身份驗證碼的地方。這樣一來追蹤資料就偽裝成了「我想跟你視訊通話」的正常訊息，騙過瀏覽器的安全檢查，連用 Chrome 開發者工具都觀察不到資料正在傳輸。</p>
 <p>當然，什麼開無痕模式、清除 cookie 等等民間偏方，都是無法對付以上招數的。</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="你一直都被看著">你一直都被看著<a href="https://wiwi.blog/blog/meta-caught-spying#%E4%BD%A0%E4%B8%80%E7%9B%B4%E9%83%BD%E8%A2%AB%E7%9C%8B%E8%91%97" class="hash-link" aria-label="你一直都被看著的直接連結" title="你一直都被看著的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="你一直都被看著">你一直都被看著<a href="https://wiwi.blog/blog/meta-caught-spying#%E4%BD%A0%E4%B8%80%E7%9B%B4%E9%83%BD%E8%A2%AB%E7%9C%8B%E8%91%97" class="hash-link" aria-label="你一直都被看著的直接連結" title="你一直都被看著的�直接連結" translate="no">​</a></h3>
 <p>研究發現，Meta 從 2024 年 9 月就開始用這招了。更厲害的是，研究也提到俄羅斯的搜尋引擎 Yandex 早在 2017 年就已經開始這樣搞，而且沒人發現！</p>
 <p>Google 在接受 Sky News 採訪時<sup><a href="https://wiwi.blog/blog/meta-caught-spying#user-content-fn-1-6b2c3b" id="user-content-fnref-1-6b2c3b-2" data-footnote-ref="true" aria-describedby="footnote-label" class="anchorTargetStickyNavbar_Vzrq">1</a></sup>也說 Meta 和 Yandex「明目張膽地違反了我們的安全和隱私原則」（blatantly violate our security and privacy principles）。</p>
 <p><em>（因為 Google 的原則是「只有我可以當間諜，別人不行」😂）</em></p>
@@ -18395,7 +18434,7 @@ pre-order now.</p>
 <p>所以從很實際的角度來看，所有的「串流」都是「下載」！緩衝區就是目前已經下載到你電腦上的那部分串流。差別是：接下來會發生什麼事？</p>
 </blockquote>
 <p>這對我這個<a class="" href="https://wiwi.blog/blog/fake-vs-real-tech-nerd">真．宅男</a>來說，這當然是常識。但看到文章我才意識到，這對於一般人來說可能沒那麼顯而易見。</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="想下載請買-premium">想「下載」？請買 Premium<a href="https://wiwi.blog/blog/just-download-it#%E6%83%B3%E4%B8%8B%E8%BC%89%E8%AB%8B%E8%B2%B7-premium" class="hash-link" aria-label="想「下載」？請買 Premium的直接連結" title="想「下載」？請買 Premium的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="想下載請買-premium">想「下載」？請買 Premium<a href="https://wiwi.blog/blog/just-download-it#%E6%83%B3%E4%B8%8B%E8%BC%89%E8%AB%8B%E8%B2%B7-premium" class="hash-link" aria-label="想��「下載」？請買 Premium的直接連結" title="想「下載」？請買 Premium的直接連結" translate="no">​</a></h3>
 <p>就拿 YouTube 當例子吧，他們的手機 App 讓一般用戶只能「串流」而不可以「<a class="" href="https://wiwi.blog/blog/the-download-button">下載</a>」，如果想要「下載」就得付錢買 Premium。但這邏輯根本不通：當你在「串流」影片的時候，影片資料其實早就已經「下載」到裝置上了。你在播放器中看到的灰色進度條，就是已經下載到裝置上的部份。</p>
 <p>YouTube 只是在行銷上把「串流」和「下載」包裝成兩個不同的概念。但事實上並不是這樣：你早就已經下載了，只是他們把 App 寫成不讓你播放已經下載到裝置上的資訊而已。</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="串流書局">串流書局<a href="https://wiwi.blog/blog/just-download-it#%E4%B8%B2%E6%B5%81%E6%9B%B8%E5%B1%80" class="hash-link" aria-label="串流書局的直接連結" title="串流書局的直接連結" translate="no">​</a></h3>
@@ -18473,7 +18512,7 @@ pre-order now.</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="什麼是-pico-8">什麼是 PICO-8？<a href="https://wiwi.blog/blog/pico-8#%E4%BB%80%E9%BA%BC%E6%98%AF-pico-8" class="hash-link" aria-label="什麼是 PICO-8？的直接連結" title="什麼是 PICO-8？的直接連結" translate="no">​</a></h3>
 <p>2014 年推出的 <a href="https://www.lexaloffle.com/pico-8.php" target="_blank" rel="noopener noreferrer" class="">PICO-8</a> 是一個「幻想遊戲機」。它不是真的遊戲機硬體，而是一個「假裝自己是一台 1980 年代遊戲機」的軟體。</p>
 <p>在 PICO-8 的環境裡，你可以寫程式（用簡單易學的 Lua 語言）、畫像素圖、做 8-bit 音樂，當然也可以玩遊戲。它就像是把 1980 年代的整個遊戲開發體驗，濃縮成一個 13 MB 不到的軟體包，比你手機裡隨便一個 App 都還要小。</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="不會寫程式也能玩">不會寫程式也能玩<a href="https://wiwi.blog/blog/pico-8#%E4%B8%8D%E6%9C%83%E5%AF%AB%E7%A8%8B%E5%BC%8F%E4%B9%9F%E8%83%BD%E7%8E%A9" class="hash-link" aria-label="不會寫程式也能玩的直接連結" title="不會寫程式也能玩的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="不會寫程式也能玩">不會寫程式也能玩<a href="https://wiwi.blog/blog/pico-8#%E4%B8%8D%E6%9C%83%E5%AF%AB%E7%A8%8B%E5%BC%8F%E4%B9%9F%E8%83%BD%E7%8E%A9" class="hash-link" aria-label="不會��寫程式也能玩的直接連結" title="不會寫程式也能玩的直接連結" translate="no">​</a></h3>
 <p>就算自己不會寫程式也沒有關係。PICO-8 的社群非常活躍，網路上已經有上千個別人寫好的遊戲，可以直接從 PICO-8 環境中下載來玩。</p>
 <p>而且因為 PICO-8 的設計理念，所有遊戲都是以原始程式碼形式發布的；這表示你不只可以玩遊戲，還可以完全看到每一個遊戲是怎麼運作的，甚至可以修改別人遊戲裡的程式碼、美術、關卡、音樂、音效。</p>
 <p>更酷的是，因為 PICO-8 設計上刻意的限制（128 x 128 畫素的螢幕、16 色色盤、4 軌音樂加音效、32 KB 的程式碼限制），導致它的硬體需求非常低。就算是超級老的<a class="" href="https://wiwi.blog/blog/my-laptops">筆電</a>、低耗電的 Raspberry Pi，甚至是 <a class="" href="https://wiwi.blog/blog/pianist-using-linux">Linux</a> 掌上遊戲機，都可以流暢執行 PICO-8。</p>
@@ -18723,7 +18762,7 @@ pre-order now.</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="追根究柢">追根究柢<a href="https://wiwi.blog/blog/second-hand-info#%E8%BF%BD%E6%A0%B9%E7%A9%B6%E6%9F%A2" class="hash-link" aria-label="追根究柢的直接連結" title="追根究柢的直接連結" translate="no">​</a></h3>
 <p>當然，我是覺得要每一件事都有「first-hand experience」是滿困難的。比方說，我相信<a class="" href="https://wiwi.blog/docs/travel/better-dont-go">去某些國家旅遊</a>是有一定的安全風險的，但我本人並沒有在國外被拘留的經驗；如果我得先有「第一手經驗」才能形成這個信念，那可能就太遲了。</p>
 <p>但至少我們可以做到：當聽到別人說一件事情的時候，不要直接當作它是真的。可以多追問一下<a class="" href="https://wiwi.blog/blog/info-weapon">資訊</a>是從哪裡來的，然後親自去讀那個來源資訊；如果該資訊又引用了別的來源，那麼就再往上追朔更源頭的資訊，並且利用多個管道檢查該資訊的可信度。</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="社會壓力">社會壓力<a href="https://wiwi.blog/blog/second-hand-info#%E7%A4%BE%E6%9C%83%E5%A3%93%E5%8A%9B" class="hash-link" aria-label="社會壓力的直接連結" title="社�會壓力的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="社��會壓力">社會壓力<a href="https://wiwi.blog/blog/second-hand-info#%E7%A4%BE%E6%9C%83%E5%A3%93%E5%8A%9B" class="hash-link" aria-label="社會壓力的直接連結" title="社會壓力的直接連結" translate="no">​</a></h3>
 <p>有時候，我們接受二手資訊並不是因為懶得查證，而是因為社會壓力。</p>
 <p>前幾天我跟髮型設計師聊天，她說她如果買了冰的飲料，都會在外面偷偷喝完，因為拿回家的話，家人看到了會唸「女生喝冰的不好」。</p>
 <p>可是等一下，喝冰的飲料到底哪裡不好？是如何不好？男人喝就不會不好嗎？運作機轉是什麼？有研究論文可以證明嗎？但是要反駁太麻煩了，與其去跟傳統觀念爭論，不如就（至少假裝）接受對方想要強加在我們身上的觀念吧。</p>
@@ -18742,7 +18781,7 @@ pre-order now.</p>
 <p>那若是以追求工作與生活平衡，還能保持學習或備課等的，以長期做打算的話，真想聽看老師的意見分享。</p>
 <p>說真的，在問這道問題，我會想到每位老師所處的國家，老師自身的經歷或收費都不一樣。也不知道還有什麼是我沒想到的，希望老師能在部落格回覆。先謝謝官老師囉！</p>
 </blockquote>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="從爆肝到品質優先">從爆肝到品質優先<a href="https://wiwi.blog/blog/healthy-teaching-hours#%E5%BE%9E%E7%88%86%E8%82%9D%E5%88%B0%E5%93%81%E8%B3%AA%E5%84%AA%E5%85%88" class="hash-link" aria-label="從爆肝到品質優先的直接連結" title="從爆肝到品質優先的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="從爆肝到品質優先">從爆肝到品質優先<a href="https://wiwi.blog/blog/healthy-teaching-hours#%E5%BE%9E%E7%88%86%E8%82%9D%E5%88%B0%E5%93%81%E8%B3%AA%E5%84%AA%E5%85%88" class="hash-link" aria-label="從爆肝到品��質優先的直接連結" title="從爆肝到品質優先的直接連結" translate="no">​</a></h3>
 <p>回想我鋼琴教學生涯的初期（大概 2014 年以前），多的話一天我是可以排 5-7 堂課的。當時我是覺得這樣已經很多了，但我的同業中一天能排到 10 堂以上的也是大有人在，看到他們這樣我只能甘拜下風，我的身心真的無法承受這種爆肝模式。</p>
 <p>隨著時間推移，我的課逐漸越排越少。在我開始經營好和弦 <a class="" href="https://wiwi.blog/blog/the-youtube-trap">YouTube 頻道</a>後（2014 年底），大概一天最多已經不會排超過四個學生了。</p>
 <p>而且我在排課上是比較龜毛的，我不喜歡把私人學生剛好間隔一個小時排，我都堅持<strong>間隔至少一個半小時</strong>。這表示如果我當天有四個學生，我的行事曆就被佔據至少六個小時的時間（1.5 x 4）。</p>
@@ -18835,7 +18874,7 @@ pre-order now.</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="use愛用品"><code>/use</code>：愛用品<a href="https://wiwi.blog/blog/slash-pages#use%E6%84%9B%E7%94%A8%E5%93%81" class="hash-link" aria-label="use愛用品的直接連結" title="use愛用品的直接連結" translate="no">​</a></h3>
 <p>另一個我常在別人的 blog 看到，我也很有興趣看的是 <code>/use</code> 或 <code>/uses</code> 頁面。這個頁面是用來列出網站主人喜歡用的各種東西，可以是<a class="" href="https://wiwi.blog/blog/use-a-computer-already">電腦</a>軟硬體、網路服務、各種<a class="" href="https://wiwi.blog/blog/convivial-tools">工具</a>或生活小物。我有時會在這些頁面中發現以前不知道的好東西。</p>
 <p>我之前已經在「筆記」區寫過我使用的軟體清單（這篇似乎是點閱率比較高的文章之一），現在我打算把這一篇筆記搬到網站的根目錄 <code>/use</code>，讓它成為一個我會定期更新的頁面。</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="其他斜線頁面">其他斜線頁面<a href="https://wiwi.blog/blog/slash-pages#%E5%85%B6%E4%BB%96%E6%96%9C%E7%B7%9A%E9%A0%81%E9%9D%A2" class="hash-link" aria-label="其他斜線頁面的直接連結" title="其他斜線頁��面的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="其他斜線頁面">其他斜線頁面<a href="https://wiwi.blog/blog/slash-pages#%E5%85%B6%E4%BB%96%E6%96%9C%E7%B7%9A%E9%A0%81%E9%9D%A2" class="hash-link" aria-label="其他斜線頁面的直接連結" title="其他斜線頁面的直接連結" translate="no">​</a></h3>
 <p>除了前面提到的，還有許多其他可能的 slash pages：</p>
 <ul>
 <li class="">列出喜歡的部落格的 <code>/blogroll</code></li>
@@ -18875,7 +18914,7 @@ pre-order now.</p>
 <p>「<a href="https://oeis.org/A000217" target="_blank" rel="noopener noreferrer" class="">三角形數列</a>」（The Triangular Numbers Sequence）是可以排成完美三角形的物體數量。</p>
 <p>從零開始，第一層放一個、第二層放兩個、第三層放三個⋯⋯物件的總數數列就這樣發展：0, 1, 3, 6, 10, 15, 21...</p>
 <p>有趣的是，這個數列剛好就是「懶惰廚師數列」每一項減 1。原來切蛋糕跟排三角形是暗藏著聯繫的啊！</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="想看更多">想看更多？<a href="https://wiwi.blog/blog/number-sequences#%E6%83%B3%E7%9C%8B%E6%9B%B4%E5%A4%9A" class="hash-link" aria-label="想看更多？的直接連結" title="想看更多？的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="想�看更多">想看更多？<a href="https://wiwi.blog/blog/number-sequences#%E6%83%B3%E7%9C%8B%E6%9B%B4%E5%A4%9A" class="hash-link" aria-label="想看更多？的直接連結" title="想看更多？的直接連結" translate="no">​</a></h3>
 <p>去「<a href="https://oeis.org/?language=chinese" target="_blank" rel="noopener noreferrer" class="">整數數列線上大全</a>」這個網站，學習更多關於數列的沒用知識吧！</p>]]></content:encoded>
         </item>
         <item>
@@ -18974,7 +19013,7 @@ pre-order now.</p>
 <p>這表示在不同情況中，我們對於「作弊」的定義不一樣。</p>
 <p>例如，在重視「樂手間相互對話」的爵士音樂，即興演奏是神聖不可侵犯的核心價值；如果你提前把自己的獨奏寫好背下來（而不是當場即興創作），會被認為背叛了爵士精神。但在幾乎其他所有的音樂類型，把自己要演奏的東西事先準備好、練好，根本就是理所當然的，沒人會認為這是「作弊」。</p>
 <p>每個圈子都有自己的道德標準，這些標準並不一定是基於客觀事實，而更多是建立在那個圈子重視的核心價值上。</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="作弊是絕佳的競爭優勢">「作弊」是絕佳的競爭優勢<a href="https://wiwi.blog/blog/cheating#%E4%BD%9C%E5%BC%8A%E6%98%AF%E7%B5%95%E4%BD%B3%E7%9A%84%E7%AB%B6%E7%88%AD%EF%BF%BD%E5%84%AA%E5%8B%A2" class="hash-link" aria-label="「作弊」是絕佳的競爭優勢的直接連結" title="「作弊」是絕佳的競爭優勢的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="作弊是絕佳的競爭優勢">「作弊」是絕佳的競爭優勢<a href="https://wiwi.blog/blog/cheating#%E4%BD%9C%E5%BC%8A%E6%98%AF%E7%B5%95%E4%BD%B3%E7%9A%84%E7%AB%B6%E7%88%AD%E5%84%AA%E5%8B%A2" class="hash-link" aria-label="「作弊」是絕佳的競爭優勢的直接連結" title="「作弊」是絕佳的競爭優勢的直接連結" translate="no">​</a></h3>
 <p>這讓我想到，「作弊」其實是一個非常好的競爭優勢，就像我以前在<a class="" href="https://wiwi.blog/blog/cheap-tactics">《爛招》這篇貼文</a>寫的一樣。</p>
 <p>在一個特定小圈子中被認為是「不 OK」的行為，在更廣大的世界裡有可能是完全被接受的。這表示，只要你不 care 這個小圈子的認同，你就能做這個圈子的人限制自己不做的事，進而取得競爭優勢！</p>
 <p>就像前面提到的爵士樂例子：</p>
@@ -19295,7 +19334,7 @@ pre-order now.</p>
 <li class=""><code>-vf "scale=1920:1080:force_original_aspect_ratio=decrease,pad=1920:1080:(ow-iw)/2:(oh-ih)/2"</code>：把解析度調成 1080p、保持圖片長寬比、置中、並且在周圍填上黑色</li>
 <li class=""><code>"$(date +%Y-%m-%d)_screenshots.mp4"</code>：以「年-月-日_screenshots.mp4」格式命名輸出檔案（例如 2025-04-29_screenshots.mp4）</li>
 </ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="cron讓電腦在你睡覺時自動工作">Cron：讓電腦在你睡覺時自動工作<a href="https://wiwi.blog/blog/ffmpeg#cron%E8%AE%93%E9%9B%BB%E8%85%A6%E5%9C%A8%E4%BD%A0%E7%9D%A1%E8%A6%BA%E6%99%82%E8%87%AA%E5%8B%95%E5%B7%A5%E4%BD%9C" class="hash-link" aria-label="Cron：讓電腦在你睡覺時自動工作的直接連結" title="Cron：讓電腦在你睡覺時自動工作的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="cron讓電腦在你睡覺時自動工作">Cron：讓電腦在你睡覺時自動工作<a href="https://wiwi.blog/blog/ffmpeg#cron%E8%AE%93%E9%9B%BB%E8%85%A6%E5%9C%A8%E4%BD%A0%E7%9D%A1%E8%A6%BA%E6%99%82%E8%87%AA%E5%8B%95%E5%B7%A5%E4%BD%9C" class="hash-link" aria-label="Cron：讓電腦在你睡覺時自動工作的直接連結" title="Cron�：讓電腦在你睡覺時自動工作的直接連結" translate="no">​</a></h3>
 <p>有了把截圖變成影片的方法，接下來只要讓電腦自動在每天晚上 11:55 執行就可以了。這時候你可以用 Linux 和 macOS 都有內建的自動排程工具 <code>crontab</code>。</p>
 <p>只要在終端機裡輸入 <code>crontab -e</code>，它就會打開一個文字編輯器，在裡面加入以下內容並存檔即可：</p>
 <div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#393A34"><span class="token plain">55 23 * * * cd /截圖資料夾/路徑 &amp;&amp; ffmpeg -framerate 1 -pattern_type glob -i "*.jpg" -c:v libx264 -pix_fmt yuv420p -vf "scale=1920:1080:force_original_aspect_ratio=decrease,pad=1920:1080:(ow-iw)/2:(oh-ih)/2" "$(date +%Y-%m-%d)_screenshots.mp4"</span><br></div></code></pre></div></div>
@@ -19437,7 +19476,7 @@ pre-order now.</p>
 <li class="">🎵 <strong>做音樂時</strong>：我們也依賴別人發明的樂器、音色庫、<a class="" href="https://wiwi.blog/blog/no-sheet-music-required">記譜法</a>、<a class="" href="https://wiwi.blog/blog/no-theory-needed">樂理</a>、調律系統和編曲軟體。</li>
 </ul>
 <p>寫程式時也是一樣。幾乎沒有人會想要從零開始自己寫所有功能，所以我們會匯入別人已經寫好的函式庫。但問題是，當有太多外部依賴時，程式會變得很肥，還會<a class="" href="https://wiwi.blog/blog/convivial-tools">受制於他人</a>；更糟的是，我們可能會漸漸失去對自己程式<a class="" href="https://wiwi.blog/blog/transferable-skills">運作原理</a>的理解。</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="不囉唆的節拍器">不囉唆的節拍器<a href="https://wiwi.blog/blog/dependencies#%E4%B8%8D%E5%9B%89%E5%94%86%E7%9A%84%E7%AF%80%E6%8B%8D%E5%99%A8" class="hash-link" aria-label="不囉唆�的節拍器的直接連結" title="不囉唆的節拍器的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="��不囉唆的節拍器">不囉唆的節拍器<a href="https://wiwi.blog/blog/dependencies#%E4%B8%8D%E5%9B%89%E5%94%86%E7%9A%84%E7%AF%80%E6%8B%8D%E5%99%A8" class="hash-link" aria-label="不囉唆的節拍器的直接連結" title="不囉唆的節拍器的直接連結" translate="no">​</a></h3>
 <p>好幾年前，在好和弦的官網 NiceChord.com 上面，我寫了一個「不囉唆的節拍器」程式。</p>
 <p>之前的版本是用 tone.js 這個函式庫做的<sup><a href="https://wiwi.blog/blog/dependencies#user-content-fn-1-84a2d1" id="user-content-fnref-1-84a2d1" data-footnote-ref="true" aria-describedby="footnote-label" class="anchorTargetStickyNavbar_Vzrq">1</a></sup>，最後完成的程式檔案大小大約 362 KB，看起來已經很小了對吧？但前幾天我<a href="https://nicechord.com/post/mini-metronome/" target="_blank" rel="noopener noreferrer" class="">用單純的 JavaScript 重做</a>，完全不依賴外部函式庫，結果檔案大小驚人地縮減到只有 2.1 KB──原本的 172 分之一！</p>
 <p>現在這個節拍器程式，已經小到可以被放在一個 <a class="" href="https://wiwi.blog/blog/qr-code-contrast">QR Code</a> 裡面！以下的 QR Code 不是下載連結喔，而是「整個程式」本身！只要掃描它，把內容文字存成 .html 檔就可以直接使用。</p>
@@ -19954,7 +19993,7 @@ pre-order now.</p>
 <p>當然，在剛開始教鋼琴時，因為經驗不足，難免會遇到學生提出一些我無法馬上解答的問題；那時候的確會有一些不舒服的感覺，甚至會冒出「我是不是在騙人？明明自己就不夠厲害還出來教別人？」的念頭。但我的解決方法就是遇到<a class="" href="https://wiwi.blog/blog/solving-problems">問題</a>就多去研究，過了幾年之後這樣的感覺就越來越少了。</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="為什麼找工作會怪怪的">為什麼找工作會「怪怪的」？<a href="https://wiwi.blog/blog/career-uncertainty#%E7%82%BA%E4%BB%80%E9%BA%BC%E6%89%BE%E5%B7%A5%E4%BD%9C%E6%9C%83%E6%80%AA%E6%80%AA%E7%9A%84" class="hash-link" aria-label="為什麼找工作會「怪怪的」？的直接連結" title="為什麼找工作會「怪怪的」？的直接連結" translate="no">​</a></h3>
 <p>我嘗試分析一下你為什麼會有這種感覺：</p>
-<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="專業安全感不足">專業安全感不足？<a href="https://wiwi.blog/blog/career-uncertainty#%E5%B0%88%E6%A5%AD%E5%AE%89%E5%85%A8%E6%84%9F%E4%B8%8D%E8%B6%B3" class="hash-link" aria-label="專業安��全感不足？的直接連結" title="專業安全感不足？的直接連結" translate="no">​</a></h4>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="專�業安全感不足">專業安全感不足？<a href="https://wiwi.blog/blog/career-uncertainty#%E5%B0%88%E6%A5%AD%E5%AE%89%E5%85%A8%E6%84%9F%E4%B8%8D%E8%B6%B3" class="hash-link" aria-label="專業安全感不足？的直接連結" title="專業安全感不足？的直接連結" translate="no">​</a></h4>
 <p>也許是對於「販賣自己的專業」這件事缺乏安全感？</p>
 <p>你說你教過日語，也覺得有收入很好玩。這可能是因為日語不是你的本科，所以你不會過度要求自己要「完美、專業地」教日語；就像我不會要求自己要寫出完美的 <a href="https://nicechord.com/tools/" target="_blank" rel="noopener noreferrer" class="">JavaScript 小工具</a>一樣。</p>
 <p>但要把自己辛苦攻讀多年的社科專業拿出來「賣」，心理壓力就完全不同了。因為如果做不好，自己可能會很沒有面子，會有自己多年的專業投入被否定的感覺。</p>
@@ -20340,7 +20379,7 @@ pre-order now.</p>
 </blockquote>
 <p><strong>白話翻譯</strong>：我們在 LINE 裡面嵌入了其他公司的程式碼，他們可能會收集你的資料，會怎麼使用我們也不知道，但這不是我們的責任喔！反正你已經說同意了！</p>
 <p>這就很像是你簽了一份合約，但合約第 37 頁的小字寫著：「簽署此合約，表示你也同意另外 20 份合約。」，但又不跟你說另外那 20 份合約內容是什麼。</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="我們不是使用者而是產品">我們不是使用者，而是產品<a href="https://wiwi.blog/blog/line-privacy-policy#%E6%88%91%E5%80%91%E4%B8%8D%E6%98%AF%E4%BD%BF%E7%94%A8%E8%80%85%E8%80%8C%E6%98%AF%E7%94%A2%E5%93%81" class="hash-link" aria-label="我們不是使用者，而是產品的直接連結" title="我們不是使用者，而是產品的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="我們不是使用者而是產品">我們不是使用者，而是產品<a href="https://wiwi.blog/blog/line-privacy-policy#%E6%88%91%E5%80%91%EF%BF%BD%EF%BF%BD%E4%B8%8D%E6%98%AF%E4%BD%BF%E7%94%A8%E8%80%85%E8%80%8C%E6%98%AF%E7%94%A2%E5%93%81" class="hash-link" aria-label="我們不是使用者，而是產品的直接連結" title="我們不是使用者，而是產品的直接連結" translate="no">​</a></h3>
 <p>雖然在台灣，你大概一定會被強迫使用 LINE，但千萬不要忘記這個事實：<strong>我們並不是 LINE 的使用者，是 <a class="" href="https://wiwi.blog/blog/line-clickbait">LINE 在使用我們</a>；我們只是被 LINE 當作「貨品」賣出的<a class="" href="https://wiwi.blog/blog/five-ages-of-humanity">礦物</a>。</strong></p>
 <p>用 LINE 傳送任何東西時，提醒自己這會被永久記錄、可能被監控，並且將來有可能外洩。我強烈建議：任何你不希望在十年後被挖出來的東西，都不要透過 LINE 傳送。</p>
 <p>使用 LINE 就像進入了一場非玩不可，但又永遠贏不了的遊戲；更荒謬的是，就算你決定退出，他們還是可以保留你之前的遊戲記錄「一段時間」。</p>
@@ -20675,7 +20714,7 @@ pre-order now.</p>
 <li class="">「我是否在網路上<a class="" href="https://wiwi.blog/blog/unobserved-life">公開了太多</a>沒有必要的私人資訊？」</li>
 <li class="">「當使用條款出現時，我是否總是想都不想就按『同意』？」</li>
 </ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-關於社群媒體問自己">👍 關於社群媒體，問自己：<a href="https://wiwi.blog/blog/self-defense-checklist#-%E9%97%9C%E6%96%BC%E7%A4%BE%E7%BE%A4%E5%AA%92%E9%AB%94%E5%95%8F%E8%87%AA%E5%B7%B1" class="hash-link" aria-label="👍 關於社群媒體，問自己：的直接連結" title="👍 關於社群媒體，問自己：的�直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-關於社群媒體問自己">👍 關於社群媒體，問自己：<a href="https://wiwi.blog/blog/self-defense-checklist#-%E9%97%9C%E6%96%BC%E7%A4%BE%E7%BE%A4%E5%AA%92%E9%AB%94%E5%95%8F%E8%87%AA%E5%B7%B1" class="hash-link" aria-label="👍 關於社群媒體，問自己：的直接連結" title="👍 關於社群媒體，問自己：的直接連結" translate="no">​</a></h3>
 <ul>
 <li class="">「如果把滑社群的時間用在其他事情上，我的生活會有什麼不同？」</li>
 <li class="">「那些讚和留言對我的<a class="" href="https://wiwi.blog/blog/real-life-to-social-media">現實生活</a>有什麼實質意義？」</li>
@@ -20848,7 +20887,7 @@ pre-order now.</p>
 <p>"Copies of <em>Spider-Man: No Way Home</em> were downloaded tens of millions of times, with an estimated loss to the copyright owner of tens of millions of dollars."</p>
 <p>（《蜘蛛人：無家日》的檔案被下載了數千萬次，估計造成版權擁有者數千萬美元的損失。）</p>
 </blockquote>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="虛幻的鉅額損失">虛幻的「鉅額損失」<a href="https://wiwi.blog/blog/piracy-loss#%E8%99%9B%E5%B9%BB%E7%9A%84%E9%89%85%E9%A1%8D%E6%90%8D%E5%A4%B1" class="hash-link" aria-label="虛幻的「鉅額損失」的直接連結" title="虛幻的「鉅額損失」的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="虛幻的鉅額損失">虛幻的「鉅額損失」<a href="https://wiwi.blog/blog/piracy-loss#%E8%99%9B%E5%B9%BB%E7%9A%84%E9%89%85%E9%A1%8D%E6%90%8D%E5%A4%B1" class="hash-link" aria-label="虛幻的「鉅額損失」�的直接連結" title="虛幻的「鉅額損失」的直接連結" translate="no">​</a></h3>
 <p>每次我看到這種說法，都忍不住想要吐槽；如果下載次數等於損失金額，那我早該在台北買下好幾棟豪宅了。</p>
 <p><strong>這種「盜版造成了鉅額損失」的計算方式，只不過是那些電影、唱片、軟體公司一廂情願的幻想</strong>。彷彿那些下載盜版的人，如果沒有盜版，就會乖乖掏出錢包進電影院或是訂閱你的<a class="" href="https://wiwi.blog/blog/why-streaming">串流服務</a>。認清現實吧，那些使用盜版的人，從來就不是你的客戶！</p>
 <p><strong>好和弦的付費課程──像是《<a href="https://nicechord.com/improv101/" target="_blank" rel="noopener noreferrer" class="">即興幼幼班</a>》和《<a href="https://nicechord.com/pianoclinic/" target="_blank" rel="noopener noreferrer" class="">鋼琴技巧急診室</a>》──在中國各影音平台、論壇或甚至拍賣網站，早就被盜版了至少數萬次到數十萬次</strong>；如果要把所有未經授權被搬運的 YouTube 影片一起算進去，這個數字就更大了。按照電影公司的邏輯，我也可以說這些盜版造成了我「數億台幣的損失」，但這樣說只是在騙自己而已。</p>
@@ -21002,7 +21041,7 @@ pre-order now.</p>
 <p>...we have a neutrality mindset, which means we don't celebrate high highs, but we also don't fall down on low lows. We're always in the middle.</p>
 <p>（⋯⋯我們有一種「中性心態」，意思是說我們不會因為成功就過度慶祝，我們也不會因為失敗心情就跌入谷底。我們總是在中間。）</p>
 </blockquote>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="不-high-的自我懷疑">不 high 的自我懷疑<a href="https://wiwi.blog/blog/not-high-and-proud#%E4%B8%8D-high-%E7%9A%84%E8%87%AA%E6%88%91%E6%87%B7%E7%96%91" class="hash-link" aria-label="不 high 的自我懷疑的直接連結" title="不 high 的自我�懷疑的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="不-high-的自我懷疑">不 high 的自我懷疑<a href="https://wiwi.blog/blog/not-high-and-proud#%E4%B8%8D-high-%E7%9A%84%E8%87%AA%E6%88%91%E6%87%B7%E7%96%91" class="hash-link" aria-label="不 high 的自我懷疑的直接連結" title="不 high 的自我懷疑的直接連結" translate="no">​</a></h3>
 <p>這不就是我一直以來生活的方式嗎？</p>
 <p>我在 blog 上也寫過，之前在<a class="" href="https://wiwi.blog/blog/jr-lee-radio">朋友 JR</a> 的推坑下做了一個「<a class="" href="https://wiwi.blog/blog/learned-optimism">樂觀測驗</a>」，結果顯示我傾向在「好事發生時悲觀、壞事發生時樂觀」。那時候我還在反省自己：「我是不是應該學習樂觀一點啊？」</p>
 <p>應該會有不少人覺得我的個性超「不 high」、很無聊、對事情都沒什麼反應，甚至有點冷漠。年紀比較小的時候，我甚至會因為這樣「不 high」的特質而有點沒自信，會避免置身於很 high 的環境（例如迎新晚會或社團活動）或跟很 high 的人相處，好讓我自己不要看起來像個<a class="" href="https://wiwi.blog/blog/my-vomiting-condition">自閉兒</a>。（還好，現在的我比較不會有這種顧慮了）</p>
@@ -21359,7 +21398,7 @@ If it weren't for..., I would have been eating danbing all along.</p>
 <p>"There's some bad news for Windows users who want to use <em>all</em> of the built-in features of the operating system and its integrated apps. Going forward, Microsoft is restricting features in two iconic apps, which you’ll need to unlock with a paid subscription."</p>
 <p>（對想使用 Windows 系統以及「所有」內建功能的使用者來說，有些壞消息。接下來，微軟將限制兩款經典應用程式的某些功能，你需要付費訂閱才能解鎖這些功能。）</p>
 </blockquote>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="付費解鎖的藝術">付費解鎖的藝術<a href="https://wiwi.blog/blog/notepad-paywall#%E4%BB%98%E8%B2%BB%E8%A7%A3%E9%8E%96%E7%9A%84%E8%97%9D%E8%A1%93" class="hash-link" aria-label="付費解鎖的藝術的直接連結" title="付費解鎖的藝術的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="付費解鎖的藝術">付費解鎖的藝術<a href="https://wiwi.blog/blog/notepad-paywall#%E4%BB%98%E8%B2%BB%E8%A7%A3%E9%8E%96%E7%9A%84%E8%97%9D%E8%A1%93" class="hash-link" aria-label="�付費解鎖的藝術的直接連結" title="付費解鎖的藝術的直接連結" translate="no">​</a></h3>
 <p>在記事本和小畫家中，想使用以下功能，將需要每個月 10 美元（或年付 100 美元）的 Microsoft 365 訂閱：</p>
 <ul>
 <li class="">用 AI 重寫選取的文字</li>
@@ -21453,7 +21492,7 @@ If it weren't for..., I would have been eating danbing all along.</p>
 <p><em>（安裝 <code>yt-dlp</code> 後，只要打一行字，就可以把整個 YouTube 頻道一次下載下來）</em></p>
 <p><img decoding="async" loading="lazy" src="https://wiwi.blog/assets/images/yt-dlp2-6643da2a780a002e0786a2addb46d16e.png" width="811" height="153" class="img_ev3q"></p>
 <p>以上只是眾多終端機工具的其中一些而已，別不用說現代最新的各種 AI 工具了；許多強大的<a class="" href="https://wiwi.blog/blog/offline-ai">最新 AI 工具</a>，像是 <code>ollama</code>、Open WebUI 等等，都需要使用終端機才能安裝。<strong>要享受最新科技，先學會終端機絕對不會錯！</strong></p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="理由-5擺脫別人幫你設計好的功能">理由 5：擺脫「別人幫你設計好的功能」<a href="https://wiwi.blog/blog/why-use-terminal#%E7%90%86%E7%94%B1-5%E6%93%BA%E8%84%AB%E5%88%A5%E4%BA%BA%E5%B9%AB%E4%BD%A0%E8%A8%AD%E8%A8%88%E5%A5%BD%E7%9A%84%E5%8A%9F%E8%83%BD" class="hash-link" aria-label="理由 5：擺脫「別人幫��你設計好的功能」的直接連結" title="理由 5：擺脫「別人幫你設計好的功能」的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="理由-5擺脫別人幫你設計好的功能">理由 5：擺脫「別人幫你設計好的功能」<a href="https://wiwi.blog/blog/why-use-terminal#%E7%90%86%E7%94%B1-5%E6%93%BA%E8%84%AB%E5%88%A5%E4%BA%BA%E5%B9%AB%E4%BD%A0%E8%A8%AD%E8%A8%88%E5%A5%BD%E7%9A%84%E5%8A%9F%E8%83%BD" class="hash-link" aria-label="理由 5：擺脫「別人幫你設計好的功能」的直接連結" title="理由 5：擺脫「別人幫你設計好的功能」的直接連結" translate="no">​</a></h3>
 <p>用圖形介面軟體，你只能使用「別人幫你設計好的功能」；畢竟，你要能用滑鼠按一個按鈕，就必須仰賴開發者願意在某處放一個按鈕給你按。</p>
 <p>但使用終端機，你可以直接跟電腦溝通、直接對它下指令，因此擁有更多自由：</p>
 <ul>
@@ -21498,7 +21537,7 @@ If it weren't for..., I would have been eating danbing all along.</p>
 <p>Markdown 是一種用簡單符號來標記文字格式的方法。例如你想要標題，就在前面加個 <code>#</code>；想要粗體，就用兩個星號 <code>**</code> 包起來；想要列表，就在前面加個減號 <code>-</code>；想要連結，就用 <code>[文字](網址)</code> 的格式。大概長得像這樣：</p>
 <div class="language-markdown codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-markdown codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#393A34"><span class="token title important punctuation" style="color:#393A34">#</span><span class="token title important"> 大家好</span><span class="token plain"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">哈囉！我是</span><span class="token bold punctuation" style="color:#393A34">**</span><span class="token bold content">Wiwi 官大為</span><span class="token bold punctuation" style="color:#393A34">**</span><span class="token plain">，我有三個東西：</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token list punctuation" style="color:#393A34">-</span><span class="token plain"> 煎餅</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token list punctuation" style="color:#393A34">-</span><span class="token plain"> 蛋餅</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token list punctuation" style="color:#393A34">-</span><span class="token plain"> 可麗餅</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">有空可以去</span><span class="token url" style="color:#36acaa">[</span><span class="token url content" style="color:#36acaa">我的網站</span><span class="token url" style="color:#36acaa">](</span><span class="token url" style="color:#36acaa">https://nicechord.com</span><span class="token url" style="color:#36acaa">)</span><span class="token plain">逛逛喔！</span><br></div></code></pre></div></div>
 <p>雖然寫的時候是看起來有一些怪怪符號的純文字（我覺得其實還好吧），但是最終顯示的時候就會自動變成漂亮的格式。它就像是用很簡單的「暗號」來告訴電腦「這些字要粗一點」、「那些字要變成連結」；這樣我們就能專注在寫作上，不用一直去用滑鼠點格式工具列。</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="傳統文書處理軟體的優點">傳統文書處理軟體的優點<a href="https://wiwi.blog/blog/why-use-markdown#%E5%82%B3%E7%B5%B1%E6%96%87%E6%9B%B8%E8%99%95%E7%90%86%E8%BB%9F%E9%AB%94%E7%9A%84%E5%84%AA%E9%BB%9E" class="hash-link" aria-label="傳統文書處理軟體的優點的�直接連結" title="傳統文書處理軟體的優點的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="傳統文書處理軟體的優點">傳統文書處理軟體的優點<a href="https://wiwi.blog/blog/why-use-markdown#%E5%82%B3%E7%B5%B1%E6%96%87%E6%9B%B8%E8%99%95%E7%90%86%E8%BB%9F%E9%AB%94%E7%9A%84%E5%84%AA%E9%BB%9E" class="hash-link" aria-label="傳統文書處理軟體的優點的直接連結" title="傳統文書處理軟體的優點的直接連結" translate="no">​</a></h3>
 <p>當然，像是 Pages 這樣子的傳統文書處理軟體，還是有它的優點。例如說，Pages 很適合：</p>
 <ul>
 <li class="">做精美的文件，尤其是要印出來的文件</li>
@@ -22135,7 +22174,7 @@ If it weren't for..., I would have been eating danbing all along.</p>
 <li class=""><strong>Ollama + Open WebUI（我更偏好的方式）</strong>：如果你不會害怕終端機，那麼我強烈建議你用 <a href="https://ollama.com/" target="_blank" rel="noopener noreferrer" class="">Ollama</a> 和 <a href="https://openwebui.com/" target="_blank" rel="noopener noreferrer" class="">Open WebUI</a> 的組合！Ollama 是一個單機 AI 運行引擎，需要用簡單的終端機使用安裝和設定；而 Open WebUI 則是提供漂亮友善、幾乎長得跟 ChatGPT 一模一樣的網頁介面，讓你可以打開瀏覽器跟 Ollama 互動。</li>
 </ol>
 <p><em>（網路上有大量 Ollama + Open WebUI 的安裝教學，從文章到 YouTube 影片都有，我就不在這邊寫了。）</em></p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="選擇合適的模型大小">選擇合適的模型大小<a href="https://wiwi.blog/blog/offline-deepseek#%E9%81%B8%E6%93%87%E5%90%88%E9%81%A9%E7%9A%84%E6%A8%A1%E5%9E%8B%E5%A4%A7%E5%B0%8F" class="hash-link" aria-label="選擇合適的模型大小的直接連結" title="選擇合適的模型�大小的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="選擇合適的模型大小">選擇合適的模型大小<a href="https://wiwi.blog/blog/offline-deepseek#%E9%81%B8%E6%93%87%E5%90%88%E9%81%A9%E7%9A%84%EF%BF%BD%EF%BF%BD%E6%A8%A1%E5%9E%8B%E5%A4%A7%E5%B0%8F" class="hash-link" aria-label="選擇合適的模型大小的直接連結" title="選擇合適的模型大小的直接連結" translate="no">​</a></h3>
 <p>你可以根據自己的電腦配備來選擇合適大小的模型。</p>
 <ul>
 <li class="">以我為例，我用 <a class="" href="https://wiwi.blog/blog/your-computer-is-not-yours">Linux 作業系統</a>，有兩張 <a class="" href="https://wiwi.blog/blog/two-rtx-4000s">RTX 4000 顯示卡</a>，可以很順暢地執行 <a href="https://ollama.com/library/deepseek-r1:32b" target="_blank" rel="noopener noreferrer" class="">DeepSeek R1 32B</a> 的模型。</li>
@@ -22325,7 +22364,7 @@ If it weren't for..., I would have been eating danbing all along.</p>
 <p><em>（以下是 Open WebUI 螢幕截圖，文字請看 footnote<sup><a href="https://wiwi.blog/blog/deepseek#user-content-fn-1-d9cc13" id="user-content-fnref-1-d9cc13" data-footnote-ref="true" aria-describedby="footnote-label" class="anchorTargetStickyNavbar_Vzrq">1</a></sup>）</em></p>
 <p><img decoding="async" loading="lazy" src="https://wiwi.blog/assets/images/deepseek-3a271d6b819eed317f776b72208a8f99.png" width="458" height="806" class="img_ev3q"></p>
 <p>不管你怎麼問，它都能堅持同樣的答案，絕對不正面回答會招惹自己麻煩的問題，不愧是史上最強的 AI 啊！</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="好啦這篇的標題是騙你的">好啦，這篇的標題是騙你的<a href="https://wiwi.blog/blog/deepseek#%E5%A5%BD%E5%95%A6%E9%80%99%E7%AF%87%E7%9A%84%E6%A8%99%E9%A1%8C%E6%98%AF%E9%A8%99%E4%BD%A0%E7%9A%84" class="hash-link" aria-label="好啦，這篇的標題是騙你的的直接連結" title="好啦，這篇的標題是騙你的的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="好啦這��篇的標題是騙你的">好啦，這篇的標題是騙你的<a href="https://wiwi.blog/blog/deepseek#%E5%A5%BD%E5%95%A6%E9%80%99%E7%AF%87%E7%9A%84%E6%A8%99%E9%A1%8C%E6%98%AF%E9%A8%99%E4%BD%A0%E7%9A%84" class="hash-link" aria-label="好啦，這篇的標題是騙你的的直接連結" title="好啦，這篇的標題是騙你的的直接連結" translate="no">​</a></h3>
 <p>在測試無數個離線語言模型之後，截至目前（2025 年 1 月底）為止我覺得最好用的其實是 Cohere 出品的 <a href="https://cohere.com/blog/aya-expanse-connecting-our-world" target="_blank" rel="noopener noreferrer" class="">Aya Expanse</a>。Aya 很聰明、檔案也不大（只要 20 GB 不到的 VRAM 就可以跑了），而且可以寫出非常流利的台灣繁體中文（不會寫一寫就突然變成簡體字）。</p>
 <p>如果你有<a class="" href="https://wiwi.blog/blog/two-rtx-4000s">還不錯的 GPU</a>，非常推薦你安裝 <a href="https://ollama.com/" target="_blank" rel="noopener noreferrer" class="">ollama</a>、<a href="https://openwebui.com/" target="_blank" rel="noopener noreferrer" class="">OpenWebUI</a> 以及 <a href="https://ollama.com/library/aya-expanse:32b" target="_blank" rel="noopener noreferrer" class="">Aya Expanse 32B</a> 模型，享受自己擁有<a class="" href="https://wiwi.blog/blog/offline-ai">離線 AI 的爽感</a>！</p>
 <p><img decoding="async" loading="lazy" src="https://wiwi.blog/assets/images/aya-4fdcc608140d78737a6fd715de5d9dda.png" width="467" height="584" class="img_ev3q"></p>
@@ -22632,7 +22671,7 @@ If it weren't for..., I would have been eating danbing all along.</p>
 <p>根據 DataReportal 在 2024 年 10 月的《<a href="https://datareportal.com/social-media-users" target="_blank" rel="noopener noreferrer" class="">全球社群媒體統計報告</a>》，全球社群媒體使用者<strong>平均每天花 2 小時 19 分鐘</strong>在社群媒體上！跟以上抽 10 根菸的例子不相上下，都是在揮霍醒著時間的 14% ！</p>
 <p>如果你現在 20 歲，每天滑 2 小時 19 分鐘的社群媒體（我覺得很多人遠遠不止這個數字），到 80 歲時，你也損失了同樣的 8.4 年可用壽命。</p>
 <p>差別只是，滑社群媒體時不會產生二手菸──這是 21 世紀特有的、更文明的自我毀滅方式。</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="人生已經很短不要再讓它更短了">人生已經很短，不要再讓它更短了<a href="https://wiwi.blog/blog/live-longer#%E4%BA%BA%E7%94%9F%E5%B7%B2%E7%B6%93%E5%BE%88%E7%9F%AD%E4%B8%8D%E8%A6%81%E5%86%8D%E8%AE%93%E5%AE%83%E6%9B%B4%E7%9F%AD%E4%BA%86" class="hash-link" aria-label="人生已經很短，不要再讓它更短了的直接連結" title="人生已經很短，不要再讓它更短了的直接連�結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="人生已經很短不要再讓它更短了">人生已經很短，不要再讓它更短了<a href="https://wiwi.blog/blog/live-longer#%E4%BA%BA%E7%94%9F%E5%B7%B2%E7%B6%93%E5%BE%88%E7%9F%AD%E4%B8%8D%E8%A6%81%E5%86%8D%E8%AE%93%E5%AE%83%E6%9B%B4%E7%9F%AD%E4%BA%86" class="hash-link" aria-label="人生已經很短，不要再讓它更短了的直接連結" title="人生已經很短，不要再讓它更短了的直接連結" translate="no">​</a></h3>
 <p>抽菸不是個很酷的事情，使用社群媒體也不是。</p>
 <p>沒有人在臨死前的遺言會是「我好後悔沒能在 <a class="" href="https://wiwi.blog/blog/instagram-trap">Instagram</a> 上多拿一些愛心」；如果你珍惜自己的生命，除了戒菸，也戒除<a class="" href="https://wiwi.blog/blog/life-wasting-app">浪費生命的 apps</a> 吧！</p>
 <!-- -->
@@ -22930,7 +22969,7 @@ If it weren't for..., I would have been eating danbing all along.</p>
 <p>「<code>少</code> 即是 <code>多</code>，或多或少啦。」</p>
 </blockquote>
 <p>在生活中也是，有時候 <code>less</code> 比 <code>more</code> 更好。</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="東西一直出問題">東西一直出問題！<a href="https://wiwi.blog/blog/less-is-more#%E6%9D%B1%E8%A5%BF%E4%B8%80%E7%9B%B4%E5%87%BA%E5%95%8F%E9%A1%8C" class="hash-link" aria-label="東西一直出問題！的直接連結" title="東西一直出問題！的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="東西一直出問題">東西一直出問題！<a href="https://wiwi.blog/blog/less-is-more#%E6%9D%B1%E8%A5%BF%E4%B8%80%E7%9B%B4%E5%87%BA%E5%95%8F%E9%A1%8C" class="hash-link" aria-label="東西一直出問題！的直�接連結" title="東西一直出問題！的直接連結" translate="no">​</a></h3>
 <p>這讓我想到我自己的工作環境。身為一個靠電腦吃飯的人，光是接在主要電腦的週邊設備就超多：</p>
 <ul>
 <li class="">三個螢幕（只有兩個多沒效率啊）</li>
@@ -23001,7 +23040,7 @@ If it weren't for..., I would have been eating danbing all along.</p>
 <p>我倒不是完全反對這樣做（甚至相反，我超愛對我老婆這樣做，但我老婆不是小孩），但換位思考一下，假設我是一個能聽得懂正常中文、大約 5~7 歲的小孩好了，我會希望大人這樣跟我說話嗎？</p>
 <p>以我自身的回憶而言，我自己是不太喜歡大人因為我是小孩，就用一種過度簡化或可愛的方式跟我溝通，或者是一直提醒我現在應該做什麼。</p>
 <p>身為小孩時的我常覺得，我明明就能理解這些事物，我並沒有像你們（大人）想像得那麼笨，我也知道我應該做的事情是什麼；其實你們不需要一直為我簡化或提醒，這樣好像顯得我很沒用一樣。</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="鋼琴老師的小孩語">鋼琴老師的「小孩語」<a href="https://wiwi.blog/blog/simple-not-dumb#%E9%8B%BC%E7%90%B4%E8%80%81%E5%B8%AB%E7%9A%84%E5%B0%8F%E5%AD%A9%E8%AA%9E" class="hash-link" aria-label="鋼琴老師的「小孩語」的直接連結" title="鋼琴老師的「小孩語」的直�接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="鋼琴老師的小孩語">鋼琴老師的「小孩語」<a href="https://wiwi.blog/blog/simple-not-dumb#%E9%8B%BC%E7%90%B4%E8%80%81%E5%B8%AB%E7%9A%84%E5%B0%8F%E5%AD%A9%E8%AA%9E" class="hash-link" aria-label="鋼琴老師的「小孩語」的直接連結" title="鋼琴老師的「小孩語」的直接連結" translate="no">​</a></h3>
 <p>這讓我想到身為鋼琴老師的我們，是不是有時也會在「為學生著想」的情況下，做出類似的事呢？例如：</p>
 <ul>
 <li class="">選擇編曲簡單，但其實寫得有點糟的樂譜給學生彈（因為覺得好聽的譜他們練不起來）</li>
@@ -23371,7 +23410,7 @@ If it weren't for..., I would have been eating danbing all along.</p>
 <li class="">🗣️ <strong>溝通困難</strong>：如果現在就覺得溝通有困難，婚後需要一起做的大大小小的決定會讓你更抓狂。</li>
 <li class="">😨 <strong>總是擔心對方生氣</strong>：你想要找一個能夠充滿正能量、讓家庭氣氛快樂、能夠輕鬆相處的人，而不是每天在家中玩<a href="https://nicechord.com/mine/" target="_blank" rel="noopener noreferrer" class="">踩地雷</a>遊戲。</li>
 </ol>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="不要亂結婚">不要亂結婚！<a href="https://wiwi.blog/blog/cold-feet#%E4%B8%8D%E8%A6%81%E4%BA%82%E7%B5%90%E5%A9%9A" class="hash-link" aria-label="不要亂結婚！的直接連結" title="不要亂結婚！的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="不要亂結婚">不要亂結婚！<a href="https://wiwi.blog/blog/cold-feet#%E4%B8%8D%E8%A6%81%E4%BA%82%E7%B5%90%E5%A9%9A" class="hash-link" aria-label="不要亂結婚！的直接連結" title="不要亂結婚！的直接連��結" translate="no">​</a></h3>
 <p>婚前的「冷腳」都還是有救的，但如果不管它、直接亂結婚的話，這隻腳可能就會凍到必須截肢了。</p>
 <p>三思而後行，不要犯跟我一樣的錯！</p>]]></content:encoded>
         </item>
@@ -23392,7 +23431,7 @@ If it weren't for..., I would have been eating danbing all along.</p>
 <li class="">今天要採取的第一步（What can you do to today to take that first step now that you have a set of directions?）</li>
 </ol>
 <p>她說她做這件事已經超過 20 年了，對她的人生很有幫助，所以我也來嘗試回答看看這些問題好了。</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="1-過去一年的亮點">1. 過去一年的亮點<a href="https://wiwi.blog/blog/seven-questions#1-%E9%81%8E%E5%8E%BB%E4%B8%80%E5%B9%B4%E7%9A%84%E4%BA%AE%E9%BB%9E" class="hash-link" aria-label="1. �過去一年的亮點的直接連結" title="1. 過去一年的亮點的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="1-�過去一年的亮點">1. 過去一年的亮點<a href="https://wiwi.blog/blog/seven-questions#1-%E9%81%8E%E5%8E%BB%E4%B8%80%E5%B9%B4%E7%9A%84%E4%BA%AE%E9%BB%9E" class="hash-link" aria-label="1. 過去一年的亮點的直接連結" title="1. 過去一年的亮點的直接連結" translate="no">​</a></h3>
 <p>Seth Godin 說過一個巧妙的比喻：人的成就就像冰箱裡的果醬一樣，一旦被遺忘，就等同於不存在了。回想一下一年的亮點，包含成功的事和開心的事，有助於提醒自己其實過得還滿精彩的，提升一點自信心。</p>
 <p>讓我想想，我的 2024 年亮點有什麼呢：</p>
 <ul>
@@ -23666,7 +23705,7 @@ If it weren't for..., I would have been eating danbing all along.</p>
 </blockquote>
 <p>這就是書中說的「順從測試」（Compliance Test）。她要看的是你會不會為了討好她而放棄自己的原則；身為男生，正確的作法是堅持立場，但用溫柔的方式說明拒絕的原因。</p>
 <p><em>（當然，如果你認為以上對你而言是「合理要求」的話，就依照第一點的方式處理囉！）</em></p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="3-態度差合理要求--一致性測試">3. 態度差、合理要求 = 一致性測試<a href="https://wiwi.blog/blog/womens-tests#3-%E6%85%8B%E5%BA%A6%E5%B7%AE%E5%90%88%E7%90%86%E8%A6%81%E6%B1%82--%E4%B8%80%E8%87%B4%E6%80%A7%E6%B8%AC%E8%A9%A6" class="hash-link" aria-label="3. 態度差、合理要求 = 一致性測試的直接連結" title="3. 態度差、合理要求 = 一致性測試的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="3-態度差合理要求--一致性測試">3. 態度差、合理要求 = 一致性測試<a href="https://wiwi.blog/blog/womens-tests#3-%E6%85%8B%E5%BA%A6%E5%B7%AE%E5%90%88%E7%90%86%E8%A6%81%E6%B1%82--%E4%B8%80%E8%87%B4%E6%80%A7%E6%B8%AC%E8%A9%A6" class="hash-link" aria-label="3. 態度差、合理要求 = 一致性測試的直接連結" title="3. 態度差、合理要求 = 一致性測試的直接連��結" translate="no">​</a></h3>
 <p>有時候，她會用態度非常不好的語氣，提出合理的要求。例如：</p>
 <blockquote>
 <p>（超兇）「喂，你為什麼都沒問我？每次都是你自己決定！你是覺得你最厲害是不是？」</p>
@@ -23713,7 +23752,7 @@ If it weren't for..., I would have been eating danbing all along.</p>
 <p>「我就是錄完交上去，然後也不知道後面會怎樣，」他告訴我。</p>
 </blockquote>
 <p>然後這些音樂以低價被買斷，透過虛構的藝人名義上架，聽眾不會知道真正在背後演奏的音樂家是誰。<strong>就算這些歌曲累積了數百萬甚至上千萬的播放次數，音樂家們也拿不到額外的收益。</strong></p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="邪惡機器的陷阱">邪惡機器的陷阱<a href="https://wiwi.blog/blog/spotify-ghostwriters#%E9%82%AA%E6%83%A1%E6%A9%9F%E5%99%A8%E7%9A%84%E9%99%B7%E9%98%B1" class="hash-link" aria-label="邪惡機器的陷阱的直接連結" title="邪惡機器的陷阱的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="邪惡機器的陷阱">邪惡機器的陷阱<a href="https://wiwi.blog/blog/spotify-ghostwriters#%E9%82%AA%E6%83%A1%E6%A9%9F%E5%99%A8%E7%9A%84%E9%99%B7%E9%98%B1" class="hash-link" aria-label="邪惡機器的陷阱的直接�連結" title="邪惡機器的陷阱的直接連結" translate="no">​</a></h3>
 <p>你可能已經猜到我接下來要說什麼了；那就是這個現象並不只是發生在 Spotify 而已。<strong>其他的內容平台，不論是 YouTube、TikTok、<a class="" href="https://wiwi.blog/blog/instagram-trap">Instagram</a> 等等，也都在設計類似的陷阱：</strong></p>
 <ul>
 <li class="">藉由以「推薦算法」為主的瀏覽方式，盡可能減低「<a class="" href="https://wiwi.blog/blog/death-of-the-follower">訂閱和追蹤</a>」的重要性。</li>
@@ -23809,7 +23848,7 @@ If it weren't for..., I would have been eating danbing all along.</p>
 <p>"We are on a mission to create a true AI companion, and to me, an AI companion is one that can hear what you hear and see what you see, and live life essentially alongside you. Your AI companion will be able to remember everything that you've talked about session to session, understand the content of the web pages that you browse, and be able to talk to you just like I'm talking to you now."</p>
 <p>「我們的使命是要打造一個真正的 AI 伴侶。對我來說，AI 伴侶就是能聽見你所聽見的、看到你所看到的，基本上就是與你一起生活的夥伴。你的 AI 伴侶能夠記住你們之間的每一次對話，理解你瀏覽的網頁內容，並且能像我現在這樣和你聊天。」</p>
 </blockquote>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="ai-伴侶的真正含意">「AI 伴侶」的真正含意<a href="https://wiwi.blog/blog/ai-companion#ai-%E4%BC%B4%E4%BE%B6%E7%9A%84%E7%9C%9F%E6%AD%A3%E5%90%AB%E6%84%8F" class="hash-link" aria-label="「AI ��伴侶」的真正含意的直接連結" title="「AI 伴侶」的真正含意的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="ai-伴侶的真正含意">「AI 伴侶」的真正含意<a href="https://wiwi.blog/blog/ai-companion#ai-%E4%BC%B4%E4%BE%B6%E7%9A%84%E7%9C%9F%E6%AD%A3%E5%90%AB%E6%84%8F" class="hash-link" aria-label="「AI 伴侶」的真正含意的直接連結" title="「AI 伴侶」的真正含意的直接連結" translate="no">​</a></h3>
 <p>覺得以上的「AI 伴侶」看起來很無害嗎？讓我幫你解讀<strong>這段話真正的意義</strong>：</p>
 <blockquote>
 <p><em>「好啦，不演了！我們的目的就是在你的裝置裡裝一個 24 小時運作的跟蹤狂。</em></p>
@@ -25339,7 +25378,7 @@ If it weren't for..., I would have been eating danbing all along.</p>
 <blockquote>
 <p><em>「其實沒有特別的邏輯；但是這樣<strong>才有閱讀節奏的改變</strong>，讀者會更容易看得下去。」</em></p>
 </blockquote>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="排版的節奏">排版的節奏<a href="https://wiwi.blog/blog/rhythm-of-layout#%E6%8E%92%E7%89%88%E7%9A%84%E7%AF%80%E5%A5%8F" class="hash-link" aria-label="排版的節奏的直接連結" title="排版的節奏的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="排版的節奏">排版的節奏<a href="https://wiwi.blog/blog/rhythm-of-layout#%E6%8E%92%E7%89%88%E7%9A%84%E7%AF%80%E5%A5%8F" class="hash-link" aria-label="排版的節奏的直接連結" title="排�版的節奏的直接連結" translate="no">​</a></h3>
 <p>這個秘訣真的讓我茅塞頓開！原本我一直以為，轉換排版必須有一個邏輯：內文就是內文，補充資訊就是補充資訊，遇到樂譜範例時再換一種排版。</p>
 <p>但是我現在了解了，其實沒必要這麼死板。我可以純粹因為<strong>視覺感受</strong>或<strong>閱讀節奏</strong>的關係來調整排版；原本寫成連續文字的內容，也可以轉化成其他呈現方式。當一篇文章在排版上有適當的變化，不但能緩解讀者面對密密麻麻文字時的壓力，也能幫助他們更快地吸收內容。</p>
 <p><em>（如果你覺得這個 blog 和<a href="https://nicechord.com/" target="_blank" rel="noopener noreferrer" class="">好和弦官網 NiceChord.com</a> 上的文章讀起來還算舒服，那都是商周曉玲姊的功勞。另外，推薦這篇「<a href="https://github.com/sparanoid/chinese-copywriting-guidelines" target="_blank" rel="noopener noreferrer" class="">中文文案排版指北</a>」，想讓文章更有氣質的人一定要去讀！）</em></p>]]></content:encoded>
@@ -25398,7 +25437,7 @@ If it weren't for..., I would have been eating danbing all along.</p>
 <p>長期來說，我會想對我而言有沒有什麼「罕見的組合」，是可以作為「不公平的競爭優勢」的。</p>
 <p>對我來說，我的罕見組合就是「專業的古典鋼琴訓練 + 熟悉當代音樂理論 + 能把複雜概念用簡單語言解釋 + 跟電腦非常熟的<a class="" href="https://wiwi.blog/blog/fake-vs-real-tech-nerd">科技宅</a>」；這個組合是別的音樂人很難複製的，所以我可以以這個為基底，找到一塊位在「古典和流行、技術和藝術交界處」的、其他人比較難切入的市場定位。</p>
 <p>對這位讀者而言，「物理系畢業 + 半導體工程經驗 + 良好的音樂能力」就是一個別人很難複製的罕見組合。<strong>想想看有什麼有用的事情，是只有擁有這個罕見組合的你才能做的。</strong></p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="其實問我也不準">其實問我也不準<a href="https://wiwi.blog/blog/music-career#%E5%85%B6%E5%AF%A6%E5%95%8F%E6%88%91%E4%B9%9F%E4%B8%8D%E6%BA%96" class="hash-link" aria-label="其實問我也不準的直接連結" title="其實問我也不準的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="其實問我也不準">其實問我也不準<a href="https://wiwi.blog/blog/music-career#%E5%85%B6%E5%AF%A6%E5%95%8F%E6%88%91%E4%B9%9F%E4%B8%8D%E6%BA%96" class="hash-link" aria-label="其實問我也不準的直接連結" title="其實問我也不�準的直接連結" translate="no">​</a></h3>
 <p>以上，就是我這個沒賺很多錢、也不是很有知名度的音樂人的建議啦！如果這篇文章的建議讓你賺大錢了，我的匯款帳號是⋯⋯（喂）</p>]]></content:encoded>
         </item>
         <item>
@@ -25419,7 +25458,7 @@ If it weren't for..., I would have been eating danbing all along.</p>
 </blockquote>
 <p><em>（Zac！我跟你很熟啊！你忘了嗎？）</em></p>
 <p><img decoding="async" loading="lazy" src="https://wiwi.blog/assets/images/zac-a0bf94c6f1c0b6ee96fddeebc15c57b4.jpg" width="600" height="343" class="img_ev3q"></p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="我知道�因為我讀過了">我知道，因為我讀過了<a href="https://wiwi.blog/blog/apple-lies#%E6%88%91%E7%9F%A5%E9%81%93%E5%9B%A0%E7%82%BA%E6%88%91%E8%AE%80%E9%81%8E%E4%BA%86" class="hash-link" aria-label="我知道，因為我讀過了的直接連結" title="我知道，因為我讀過了的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="我知道因為我讀過了">我知道，因為我讀過了<a href="https://wiwi.blog/blog/apple-lies#%E6%88%91%E7%9F%A5%E9%81%93%E5%9B%A0%E7%82%BA%E6%88%91%E8%AE%80%E9%81%8E%E4%BA%86" class="hash-link" aria-label="我知道，因為我讀過了的直接連結" title="我知道，因為我讀過了的直接連結" translate="no">​</a></h3>
 <p>另一關於 E-mail <a href="https://www.youtube.com/watch?v=_eJy6QyHaFM" target="_blank" rel="noopener noreferrer" class="">重點整理</a>功能的廣告：</p>
 <blockquote>
 <p>經紀人：那麼，你覺得我寄給你的提案如何？</p>
@@ -25959,7 +25998,7 @@ If it weren't for..., I would have been eating danbing all along.</p>
 <p>想像這個情境：此時此刻你看到報導，全台北各處突然出現了致死率超高的傳染性病毒，在有進一步消息前，出門會超級危險。沒有 7-11、Uber Eats，也沒有任何商店營運、沒人敢出門時，你在家裡可以撐多久？</p>
 <p>YouTube 上有些超誇張的 Prepper，甚至準備到可以吃 8 年的食物（雖然我覺得連續吃 8 年的罐頭可能比病毒還可怕就是了）；不過，我覺得<strong>所有人至少都應該做到 72 小時的準備</strong>。也就是說，不管在任何時候，因為任何原因你不能出門了，家中應該都要有足夠所有人生活 72 小時的物資。</p>
 <p>然後慢慢地，你可以嘗試把準備的時間拉長到 1~2 週。如果家中永遠都有兩週的食物跟水，在絕大部分的情況下，應該都足夠讓你撐到救援來到，而不會淪落到得要吃「奇妙的東西」充飢的地步。</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="開始-prep-吧">開始 Prep 吧！<a href="https://wiwi.blog/blog/water-outage#%E9%96%8B%E5%A7%8B-prep-%E5%90%A7" class="hash-link" aria-label="開始 Prep 吧！的直接連結" title="開始 Prep 吧！的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="開��始-prep-吧">開始 Prep 吧！<a href="https://wiwi.blog/blog/water-outage#%E9%96%8B%E5%A7%8B-prep-%E5%90%A7" class="hash-link" aria-label="開始 Prep 吧！的直接連結" title="開始 Prep 吧！的直接連結" translate="no">​</a></h3>
 <p>總之，只需要一點點的準備，就可以讓你在緊急情況下更從容。</p>
 <p>說不定下次停水時，你就用你的儲水桶，即時解救了鄰居正妹頭上的泡泡危機。一年後，當你們在婚禮上交換誓言時，她會說：「我愛上的不只是你的儲水桶，更是你為未來著想的心！」</p>]]></content:encoded>
         </item>
@@ -26228,7 +26267,7 @@ If it weren't for..., I would have been eating danbing all along.</p>
 <p>不過 YouTube 似乎忘記了一件重要的事：<strong>網路上大家最有興趣的就是被禁止的東西</strong>。在影片被下架後，Linus Tech Tips 用另外一部影片宣布不會對重新上傳備份的人提出版權申訴。結果一大堆熱心的用戶幫忙備份、重新上傳影片，讓影片更在網路上流竄，使得更多原本不會看到這部影片的人，開始了解到了逃離 Google 的重要性。</p>
 <p>YouTube 示範了一次「<a href="https://zh.wikipedia.org/zh-tw/%E5%8F%B2%E7%BF%A0%E7%8F%8A%E6%95%88%E5%BA%94" target="_blank" rel="noopener noreferrer" class="">史翠珊效應</a>」的厲害：你越不想讓我看，我越是要看！</p>
 <p><em>（想看的人：請在各處搜尋「Linus Tech Tips De-google part 2」）</em></p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="linus-是真�宅男">Linus 是「真．宅男」<a href="https://wiwi.blog/blog/harmful-content#linus-%E6%98%AF%E7%9C%9F%E5%AE%85%E7%94%B7" class="hash-link" aria-label="Linus 是「真．宅男」的直接連結" title="Linus 是「真．宅男」的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="linus-是真宅男">Linus 是「真．宅男」<a href="https://wiwi.blog/blog/harmful-content#linus-%E6%98%AF%E7%9C%9F%E5%AE%85%E7%94%B7" class="hash-link" aria-label="Linus 是「真．宅男」的直接連結" title="Linus 是「真．宅男」的直接連結" translate="no">​</a></h3>
 <p>我真的要為 Linus 跟他的團隊鼓掌，恭喜你得到了我的「<a class="" href="https://wiwi.blog/blog/fake-vs-real-tech-nerd">真．宅男</a>」認證。</p>
 <p>他明知做這種內容後遭到 YouTube 懲罰的機率很高，而且他還是有一百個員工、整個事業幾乎都建立在 YouTube 上的人；推廣這些自由軟體也沒有人會付他錢，他卻還是願意冒著頻道被停權的風險發布這樣的內容。這就是頭腦清醒、真正為觀眾著想的 YouTuber 啊！</p>
 <p>Linus 在 <a href="https://youtu.be/apdZ7xmytiQ" target="_blank" rel="noopener noreferrer" class=""><em>Why Our Video Got Taken Down</em> 這部影片</a>表達了對 YouTube 漸漸的不信任，說這就是為什麼他正在努力經營自己的影音平台 <a href="https://www.floatplane.com/" target="_blank" rel="noopener noreferrer" class="">Floatplane</a>，盡量減少對 YouTube 的依賴：</p>
@@ -26374,7 +26413,7 @@ If it weren't for..., I would have been eating danbing all along.</p>
 <li class=""><strong>我的頻道不是你的免費演講廳</strong>：這是我辛苦建立的頻道，憑什麼我要讓你這個隨便路過的人來主導討論方向？你要講去自己的頻道講啊！</li>
 <li class=""><strong>沒有義務滿足所有人</strong>：你不可能讓每個人都喜歡你。嘗試去討好所有人只會讓你的作品失去個性，變得毫無特色。</li>
 </ol>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="欸你的包容心呢">欸，你的包容心呢？<a href="https://wiwi.blog/blog/ban-ban-ban#%E6%AC%B8%E4%BD%A0%E7%9A%84%E5%8C%85%E5%AE%B9%E5%BF%83%E5%91%A2" class="hash-link" aria-label="欸，你的包容心呢？的直接連結" title="欸，你的包容心呢？的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="欸你的包容心呢">欸，你的包容心呢？<a href="https://wiwi.blog/blog/ban-ban-ban#%E6%AC%B8%E4%BD%A0%E7%9A%84%E5%8C%85%E5%AE%B9%E5%BF%83%E5%91%A2" class="hash-link" aria-label="欸，你的包容心�呢？的直接連結" title="欸，你的包容心呢？的直接連結" translate="no">​</a></h3>
 <p>剛開始在網路上創作的新手，可能會有所顧慮：「我們不是應該要開放、包容，要接受不同的聲音嗎？這樣 Ban 人不是很傲慢的行為嗎？」</p>
 <p>當然，如果有人指出了影片或文章的事實錯誤，例如說數據算錯了或者引用了錯誤的資訊，你絕對應該感謝他們的留言並且做修正。</p>
 <p>但是，當涉及到個人價值觀、生活哲學的差異時，情況就不一樣了。這些事情常常都沒有對錯之分，只有不同的觀點和立場。你的頻道存在的意義，就是為了分享和推廣你的獨特觀點。</p>
@@ -26509,7 +26548,7 @@ If it weren't for..., I would have been eating danbing all along.</p>
 </blockquote>
 <p>聽起來就覺得很可怕，LG 的廣告「創新」實驗室想要「突破界限」，讓智慧電視的廣告達到「下一個境界」！所以接下來會怎麼樣？像是 Persona 4 一樣讓你掉到電視裡面嗎？</p>
 <p><img decoding="async" loading="lazy" src="https://wiwi.blog/assets/images/persona4-70818e53d5fe30899e520607f3199287.jpg" width="600" height="338" class="img_ev3q"></p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="你以為你在看電視是電視在看你">你以為你在看電視？是電視在看你！<a href="https://wiwi.blog/blog/smart-tv#%E4%BD%A0%E4%BB%A5%E7%82%BA%E4%BD%A0%E5%9C%A8%E7%9C%8B%E9%9B%BB%E8%A6%96%E6%98%AF%E9%9B%BB%E8%A6%96%E5%9C%A8%E7%9C%8B%E4%BD%A0" class="hash-link" aria-label="你以為你在看電視？是電視在看你！的直接連結" title="你以為你在看電視？是電視在看你！的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="你以為你在看電視是電視在看你">你以為你在看電視？是電視在看你！<a href="https://wiwi.blog/blog/smart-tv#%E4%BD%A0%E4%BB%A5%E7%82%BA%E4%BD%A0%EF%BF%BD%EF%BF%BD%E5%9C%A8%E7%9C%8B%E9%9B%BB%E8%A6%96%E6%98%AF%E9%9B%BB%E8%A6%96%E5%9C%A8%E7%9C%8B%E4%BD%A0" class="hash-link" aria-label="你以為你在看電視？是電視在看你！的直接連結" title="你以為你在看電視？是電視在看你！的直接連結" translate="no">​</a></h3>
 <p><a href="https://arxiv.org/html/2409.06203v1" target="_blank" rel="noopener noreferrer" class="">這篇文章</a>，是在講智慧電視裡的 ACR（Automatic Content Recognition，自動內容辨識）技術，簡單地說，就是電視可以知道你正在看什麼的意思。</p>
 <p>文章中的研究發現，在看電視的過程中，LG 和 Samsung 的電視都會偷偷回傳資訊。LG 的話是傳給「eu-acrX.alphonso.tv」這個網址（其中 X 是一個定期變化的任意數字）；Samsung 則是傳給「acr-eu-prd.samsungcloud.tv、acr0.samsungcloudsolution.com、log-config.samsungacr.com、log-ingestion-eu.samsungacr.com」。</p>
 <p>文章還提到，Samsung 的官方文件說他們的 ACR 每 0.5 秒就會捕捉畫面一次。<strong>而且不管你是正在用電視內建的 App，還是用 HDMI 外接訊號播放都一樣，你的電視都在看著你！</strong></p>
@@ -26576,7 +26615,7 @@ If it weren't for..., I would have been eating danbing all along.</p>
 <p><img decoding="async" loading="lazy" src="https://wiwi.blog/assets/images/nara-park-f2b9ebc21e6bdf684501d0d1133114fc.jpg" width="452" height="600" class="img_ev3q"></p>
 <p>我們還有去春日大社，也去了另一個區域是可以看年幼小鹿的。整體來說是一個超級適合走路散心的地方，雖然說觀光客也滿多的，但是地方非常廣大所以不會算很擠。</p>
 <p>推薦指數：5/5</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="4-伏見稻荷大社">4. 伏見稻荷大社<a href="https://wiwi.blog/blog/japan-trip-2023#4-%E4%BC%8F%E8%A6%8B%E7%A8%BB%E8%8D%B7%E5%A4%A7%E7%A4%BE" class="hash-link" aria-label="4. 伏見稻荷大社的直接連結" title="4. 伏見稻荷大社的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="4-伏見稻荷大社">4. 伏見稻荷大社<a href="https://wiwi.blog/blog/japan-trip-2023#4-%E4%BC%8F%E8%A6%8B%E7%A8%BB%E8%8D%B7%E5%A4%A7%E7%A4%BE" class="hash-link" aria-label="4. 伏見稻荷�大社的直接連結" title="4. 伏見稻荷大社的直接連結" translate="no">​</a></h3>
 <p>是位於京都市伏見區內的神社，是遍及日本全國各地大約三萬所的稻荷神社的總本社。</p>
 <p>「稻荷神」是日本神話中穀物、食物之神的總稱，而稻荷神的象徵之一是狐狸。所以在稻荷神社中，你通常會看到許多狐狸的雕像；在日本民間傳說中，狐狸被認為是稻荷神的信使，有時甚至被認為是神的化身。</p>
 <p><img decoding="async" loading="lazy" src="https://wiwi.blog/assets/images/fox-031dae1c66f5c58df3f7d126dea6a9b2.jpg" width="427" height="600" class="img_ev3q"></p>
@@ -26591,7 +26630,7 @@ If it weren't for..., I would have been eating danbing all along.</p>
 <li class="">因為現場都是人塞爆的狀態，所以沒有你在旅遊節目看到的那麼美。</li>
 <li class="">去朝聖一次我覺得還 OK，但如果再去玩的話，這個不會被排到我的行程裡。</li>
 </ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="5-神戶動物王國">5. 神戶動物王國<a href="https://wiwi.blog/blog/japan-trip-2023#5-%E7%A5%9E%E6%88%B6%E5%8B%95%E7%89%A9%E7%8E%8B%E5%9C%8B" class="hash-link" aria-label="5. 神戶動物王國的直接連結" title="5. 神戶動物王國的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="5-神戶動物王國">5. 神戶動物王國<a href="https://wiwi.blog/blog/japan-trip-2023#5-%E7%A5%9E%E6%88%B6%E5%8B%95%E7%89%A9%E7%8E%8B%E5%9C%8B" class="hash-link" aria-label="5. 神戶動物王國的直接連結" title="5. 神�戶動物王國的直接連結" translate="no">​</a></h3>
 <p>位在港灣人工島上的動植物園。有很多動物區都沒有圍欄，可以直接跟動物近距離接觸；可以摸兔子、貓、鹿、袋鼠；可以買飼料餵鳥、餵鴨子；每天定時有鳥的表演和狗的表演；還有很多活動是要排號碼牌的，我們就沒去了。</p>
 <p><img decoding="async" loading="lazy" src="https://wiwi.blog/assets/images/zoo-9ab151cdd4c50a01e49870af2712086b.jpg" width="452" height="600" class="img_ev3q"></p>
 <p>它大概有一半區域都是室內的動物園，所以即使天氣熱，走起來還是很舒服。區域不會到太廣（不像有些動物園會讓你走路走到很痠），但是內容還是很充實、很好玩的。</p>
@@ -26973,7 +27012,7 @@ If it weren't for..., I would have been eating danbing all along.</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="demucs音樂分軌">Demucs：音樂分軌<a href="https://wiwi.blog/blog/offline-ai#demucs%E9%9F%B3%E6%A8%82%E5%88%86%E8%BB%8C" class="hash-link" aria-label="Demucs：音樂分軌的直接連結" title="Demucs：音樂分軌的直接連結" translate="no">​</a></h3>
 <p><a href="https://github.com/facebookresearch/demucs" target="_blank" rel="noopener noreferrer" class="">Demucs</a> 是一個超厲害的聲音分軌工具。輸入一個音樂檔案，它就能自動把它拆成 Vocal、Bass、Drums 和 Others 這四個分軌。分軌的品質很好，而且速度很快！</p>
 <p>不管是想要研究音樂、取樣，或者製作伴奏帶給學生，這個都是不可或缺的工具！</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="krita--stable-diffusionai-輔助繪圖修圖">Krita + Stable Diffusion：AI 輔助繪圖、修圖<a href="https://wiwi.blog/blog/offline-ai#krita--stable-diffusionai-%E8%BC%94%E5%8A%A9%E7%B9%AA%E5%9C%96%E4%BF%AE%E5%9C%96" class="hash-link" aria-label="Krita + Stable Diffusion：AI 輔助繪圖、修圖的直接連結" title="Krita + Stable Diffusion：AI 輔助繪圖、修圖的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="krita--stable-diffusionai-輔助繪圖修圖">Krita + Stable Diffusion：AI 輔助繪圖、修圖<a href="https://wiwi.blog/blog/offline-ai#krita--stable-diffusionai-%E8%BC%94%E5%8A%A9%E7%B9%AA%E5%9C%96%E4%BF%AE%E5%9C%96" class="hash-link" aria-label="Krita + Stable Diffusion：AI 輔助繪圖、修圖的直接連結" title="Krita + Stable Diffusion：AI 輔助繪圖、修圖的直接連�結" translate="no">​</a></h3>
 <p><a href="https://krita.org/zh-tw/" target="_blank" rel="noopener noreferrer" class="">Krita</a> 是一個自由的繪圖軟體，它可以安裝 <a href="https://github.com/Acly/krita-ai-diffusion" target="_blank" rel="noopener noreferrer" class="">Stable Diffusion 外掛程式</a>來輔助繪圖、修圖、美顏、移除物品等等。</p>
 <p>這個組合比很多昂貴的專有軟體都還要強大，真的很神奇、很好用！你一定要試試看！</p>
 <p><em>（Krita + Stable Diffusion Plug-in 可以把我的幼稚園繪圖，變成真實的照片！）</em></p>
@@ -27051,7 +27090,7 @@ If it weren't for..., I would have been eating danbing all along.</p>
 <p>你事前已經調查過，女友的爸爸雖然不討厭日式料理，但他極少去稍微高價位的餐廳，更別說是無菜單料理了。所以<strong>到了這個場所他會比較不習慣、不自在，這正是你想要的！</strong></p>
 <p>到了壽司店之後，從推薦清酒到解釋菜色，你親切地招待對方家人，並且展現了豐富的知識、品味和自信。岳父大人原本緊繃的臉，也逐漸放鬆露出了笑容。不用說，這餐當然是由你請客，結束之後岳父岳母對你的印象超級好！</p>
 <p><strong>在自己的主場打球，就是這麼順暢好打！</strong></p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="尋找自己的主場">尋找自己的主場<a href="https://wiwi.blog/blog/home-court#%E5%B0%8B%E6%89%BE%E8%87%AA%E5%B7%B1%E7%9A%84%E4%B8%BB%E5%A0%B4" class="hash-link" aria-label="尋找自己的主場的直接連結" title="尋找自己的主場的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="尋找自己的主場">尋找自己的主場<a href="https://wiwi.blog/blog/home-court#%E5%B0%8B%E6%89%BE%E8%87%AA%E5%B7%B1%E7%9A%84%E4%B8%BB%E5%A0%B4" class="hash-link" aria-label="尋�找自己的主場的直接連結" title="尋找自己的主場的直接連結" translate="no">​</a></h3>
 <p>除了以上跟未來岳父見面的例子之外，生活中的其他面向，例如工作、社交、商業談判、約會⋯⋯等等，都可以想想看如何尋找自己的「主場優勢」。</p>
 <ul>
 <li class=""><strong>工作</strong>：選擇自己效率最高、發揮最好的工作環境。</li>
@@ -27190,7 +27229,7 @@ If it weren't for..., I would have been eating danbing all along.</p>
             <description><![CDATA[這篇貼文也被整理到了筆記區。]]></description>
             <content:encoded><![CDATA[<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb">資訊</div><div class="admonitionContent_BuS1"><p>這篇貼文也被整理到了<a class="" href="https://wiwi.blog/docs/business/ads-dont-work">筆記</a>區。</p></div></div>
 <p>這篇貼文是《<a href="https://thecorrespondent.com/100/the-new-dot-com-bubble-is-here-its-called-online-advertising" target="_blank" rel="noopener noreferrer" class="">The new dot com bubble is here: it's called online advertising</a>》這篇文章的閱讀筆記和一些分享，有興趣的話可以去看看原文！</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="你在哪裡發傳單">你在哪裡發傳單？<a href="https://wiwi.blog/blog/ads-dont-work#%E4%BD%A0%E5%9C%A8%E5%93%AA%E8%A3%A1%E7%99%BC%E5%82%B3%E5%96%AE" class="hash-link" aria-label="你在哪裡發傳單？的直接連結" title="你在哪裡發傳單？的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="你在哪裡發傳單">你在哪裡發傳單？<a href="https://wiwi.blog/blog/ads-dont-work#%E4%BD%A0%E5%9C%A8%E5%93%AA%E8%A3%A1%E7%99%BC%E5%82%B3%E5%96%AE" class="hash-link" aria-label="你在哪裡發傳單？的直接連結" title="你在哪裡發傳單？的直接連�結" translate="no">​</a></h3>
 <p>你有沒有想過，你買一個東西時，是<strong>因為看到廣告才買的，還是本來就想買？</strong></p>
 <p>在文章中，作者提到了一家假想的披薩店：</p>
 <ul>
@@ -27517,7 +27556,7 @@ If it weren't for..., I would have been eating danbing all along.</p>
 </blockquote>
 <p>這種邏輯就像反同婚人士說：「如果我們允許同性戀結婚，那麼接下來是什麼？是不是還要允許多人一起結婚、與動物結婚、或者與家族成員結婚？以後小孩要怎麼知道要叫爸爸還是媽媽？」一樣荒謬。</p>
 <p>這完全是假設「允許同性結婚」會導致社會在其他更極端的方面放鬆規範，但是並沒有證據支持這種連鎖反應。</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="�訴諸情感">訴諸情感<a href="https://wiwi.blog/blog/deceptive-arguments#%E8%A8%B4%E8%AB%B8%E6%83%85%E6%84%9F" class="hash-link" aria-label="訴諸情感的直接連結" title="訴諸情感的直接連結" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="訴諸情感">訴諸情感<a href="https://wiwi.blog/blog/deceptive-arguments#%E8%A8%B4%E8%AB%B8%E6%83%85%E6%84%9F" class="hash-link" aria-label="訴諸情感的直接連結" title="訴諸情感的直接連結" translate="no">​</a></h2>
 <p>利用操縱對方的情感反應來辯論，而不是提供實際證據。</p>
 <blockquote>
 <p>「什麼？你居然會去買 Wiwi 的課程？我對你太失望了！」</p>
@@ -27538,7 +27577,7 @@ If it weren't for..., I would have been eating danbing all along.</p>
 <blockquote>
 <p>「Wiwi 的課程在網路上只有幾百個評價而已，一定不怎麼樣。」</p>
 </blockquote>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="訴諸無知">訴諸無知<a href="https://wiwi.blog/blog/deceptive-arguments#%E8%A8%B4%E8%AB%B8%E7%84%A1%E7%9F%A5" class="hash-link" aria-label="訴諸無知的直接連結" title="訴諸無知的直接連結" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="�訴諸無知">訴諸無知<a href="https://wiwi.blog/blog/deceptive-arguments#%E8%A8%B4%E8%AB%B8%E7%84%A1%E7%9F%A5" class="hash-link" aria-label="訴諸無知的直接連結" title="訴諸無知的直接連結" translate="no">​</a></h2>
 <p>還沒有證據證明它是錯的，所以它一定是對的。</p>
 <blockquote>
 <p>「我從來沒聽說過 Wiwi 的課程很好，所以它一定不怎麼樣。」</p>
@@ -27771,7 +27810,7 @@ If it weren't for..., I would have been eating danbing all along.</p>
 <p>你有沒有注意到，真正厲害的人往往都只需要很少、很簡單的工具，就可以搞定一堆事情；反觀那些不厲害的人，卻總是沈迷在購買工具、升級工具上面。</p>
 <p>例如一個厲害的大廚，他可能只要用簡單的一把刀、鍋子、瓦斯爐，就可以完成超好吃的整桌大餐；而我這個做菜技術很低的人，雖然擁有電鍋、烤箱、電磁爐等多種廚房電器，卻還是只能做出勉強能吃的東西。</p>
 <p>祕密就在於：<strong>高手們掌握的是底層邏輯，而不只是工具。</strong></p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="選對工具學習帶得走的�技術">選對工具，學習「帶得走的技術」<a href="https://wiwi.blog/blog/transferable-skills#%E9%81%B8%E5%B0%8D%E5%B7%A5%E5%85%B7%E5%AD%B8%E7%BF%92%E5%B8%B6%E5%BE%97%E8%B5%B0%E7%9A%84%E6%8A%80%E8%A1%93" class="hash-link" aria-label="選對工具，學習「帶得走的技術」的直接連結" title="選對工具，學習「帶得走的技術」的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="選對工具學習帶得走的技術">選對工具，學習「帶得走的技術」<a href="https://wiwi.blog/blog/transferable-skills#%E9%81%B8%E5%B0%8D%E5%B7%A5%E5%85%B7%E5%AD%B8%E7%BF%92%E5%B8%B6%E5%BE%97%E8%B5%B0%E7%9A%84%E6%8A%80%E8%A1%93" class="hash-link" aria-label="選對工具，學習「帶得走的技術」的直接連結" title="選對工具，學習「帶得走的技術」的直接連結" translate="no">​</a></h3>
 <p>學習一個新的工具需要花時間，時間是超級寶貴的資源，所以選對工具超級重要。我們希望學到的是高轉移性的、「帶得走的技術」；而不是被綁在特定工具上、隨時可能過時的「脆弱技巧」。</p>
 <p>我來舉一些例子。所謂「帶得走的技術」有像是：</p>
 <ul>
@@ -27837,7 +27876,7 @@ If it weren't for..., I would have been eating danbing all along.</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="為什麼我會這樣想">為什麼我會這樣想？<a href="https://wiwi.blog/blog/best-outcome#%E7%82%BA%E4%BB%80%E9%BA%BC%E6%88%91%E6%9C%83%E9%80%99%E6%A8%A3%E6%83%B3" class="hash-link" aria-label="為什麼我會這樣想？的直接連結" title="為什麼我會這樣想？的直接連結" translate="no">​</a></h3>
 <p>這個想法的邏輯很簡單：如果一件事情已經發生了，你就不可能知道「如果這件事沒有發生的話」會怎麼樣。因此，現在的狀態只有可能有一種狀態，就是「現在這樣子」；所以「現在這樣子」就是最好的結果。</p>
 <p>我覺得就是這個想法，讓我的運氣一直以來都還不錯。</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="失敗的婚姻與突發性耳聾">失敗的婚姻與突發性耳聾<a href="https://wiwi.blog/blog/best-outcome#%E5%A4%B1%E6%95%97%E7%9A%84%E5%A9%9A%E5%A7%BB%E8%88%87%E7%AA%81%E7%99%BC%E6%80%A7%E8%80%B3%E8%81%BE" class="hash-link" aria-label="失敗的婚姻與突發性耳聾的直接連結" title="失敗的婚姻與突發性耳聾的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="失敗的婚姻與突發性耳聾">失敗的婚姻與突發性耳聾<a href="https://wiwi.blog/blog/best-outcome#%E5%A4%B1%E6%95%97%E7%9A%84%E5%A9%9A%E5%A7%BB%E8%88%87%E7%AA%81%E7%99%BC%E6%80%A7%E8%80%B3%E8%81%BE" class="hash-link" aria-label="失敗的婚姻與突發性耳聾的直接連結" title="失敗的婚姻與突發性�耳聾的直接連結" translate="no">​</a></h3>
 <p>舉兩個我自己的例子：</p>
 <ol>
 <li class="">
@@ -27972,7 +28011,7 @@ If it weren't for..., I would have been eating danbing all along.</p>
 </li>
 </ul>
 <p>封閉檔案格式、難以匯出資訊、強迫升級、突然改變服務條款⋯⋯這些都是「不友善工具」常常對使用者做的事，但是身陷其中的人，常常還是難以自拔。</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="一起來用友善工具吧">一起來用友善工具吧！<a href="https://wiwi.blog/blog/convivial-tools#%E4%B8%80%E8%B5%B7%E4%BE%86%E7%94%A8%E5%8F%8B%E5%96%84%E5%B7%A5%E5%85%B7%E5%90%A7" class="hash-link" aria-label="一起來用友善工具吧！的直接連結" title="一起來用友善工具吧！的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="一起來用友善工具吧">一起來用友善工具吧！<a href="https://wiwi.blog/blog/convivial-tools#%E4%B8%80%E8%B5%B7%E4%BE%86%E7%94%A8%E5%8F%8B%E5%96%84%E5%B7%A5%E5%85%B7%E5%90%A7" class="hash-link" aria-label="一起來用友善工具吧！的直接連結" title="一起來用友善工具吧！的直接連�結" translate="no">​</a></h3>
 <p>想要汰換手邊的不友善工具的人，可以先從尋求自由軟體的解決方案開始；一開始轉換也許會有點不習慣，但相信我，開始使用友善工具絕對是超級值得的投資！</p>
 <p>也可以參考一下我的<a class="" href="https://wiwi.blog/docs/tech/software-i-use">軟體推薦列表</a>，以及<a class="" href="https://wiwi.blog/blog/fake-vs-real-tech-nerd">真．宅男</a>的數位生活哲學。祝你使用工具愉快！</p>
 <!-- -->
@@ -28403,7 +28442,7 @@ If it weren't for..., I would have been eating danbing all along.</p>
 <p>先從大方向開始講，鍊金工房是很標準的日式角色扮演（JRPG）遊戲，也就是說它有一個從頭到尾的劇情。</p>
 <p>鍊金工房系列中每一個作品都可以算是一個獨立的故事，每部作品名稱都叫做《XX 的鍊金工房》（XX 就是女主角的名字）。雖然有一些作品當中的角色和世界觀有些會有點連貫，但不管你從哪一個作品開始玩，也不太會有看不懂劇情的問題。</p>
 <p>每個故事的共通之處，就是主角是一個少女鍊金術士（只有少數例外），然後主角跟她的朋友會一起經歷一個奇幻冒險：有些是你需要調查一些遺跡，有些是你要拯救一個村莊，有些是你不小心進到了異世界⋯⋯等等的。在冒險過程當中，你就會需要運用「鍊金術」來解決各種問題。</p>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="鍊金工房吸引我的點">《鍊金工房》吸引我的點<a href="https://wiwi.blog/blog/atelier-series#%E9%8D%8A%E9%87%91%E5%B7%A5%E6%88%BF%E5%90%B8%E5%BC%95%E6%88%91%E7%9A%84%E9%BB%9E" class="hash-link" aria-label="《鍊金工房》吸引我的點的直接連結" title="《鍊金工房》吸引我的點的直接連結" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="鍊金工房吸引我的點">《鍊金工房》吸引我的點<a href="https://wiwi.blog/blog/atelier-series#%E9%8D%8A%E9%87%91%E5%B7%A5%E6%88%BF%E5%90%B8%E5%BC%95%E6%88%91%E7%9A%84%E9%BB%9E" class="hash-link" aria-label="《鍊金工房》吸引我�的點的直接連結" title="《鍊金工房》吸引我的點的直接連結" translate="no">​</a></h3>
 <p>以上劇情聽起來好像很一般般對不對？還真的是很一般般。</p>
 <p>但是《鍊金工房》最吸引我的點，並不是它的遊戲設計有多好玩、劇本有多神，而是它整個遊戲的「氛圍」。如果要只用兩個字來形容《鍊金工房》的氛圍的話，就是「<strong>快樂</strong>」。</p>
 <p><strong>鍊金工房裡面的一切都很快樂、很正面、很療癒</strong>。這並不是說它的劇情很爛或沒有轉折喔。它裡面還是有反派，主角們也會遇到危險或挫折之類的；但是裡面的角色總是都可以抱持著很正面的想法去解決問題。在冒險之外，《鍊金工房》當中也有非常大量的日常劇情，角色之間的互動也都很有愛。</p>
@@ -29581,7 +29620,7 @@ If it weren't for..., I would have been eating danbing all along.</p>
 <p><img decoding="async" loading="lazy" alt="我跟印尼家的狗（1991）" src="https://wiwi.blog/assets/images/indo3-0b3d08024393e40b83f80ffd9f9e5044.jpg" width="565" height="777" class="img_ev3q"></p>
 <p>印尼家也有電子琴可以玩，不過其實我那時候根本就還沒開始學鋼琴：</p>
 <p><em>（1991：其實我完全不會彈）</em></p>
-<p><img decoding="async" loading="lazy" alt="其實我完全不會彈（1991）" src="https://wiwi.blog/assets/images/indo2-133f23b3b7915538576aeff6fd9bb35f.jpg" width="800" height="604" class="img_ev3q"></p>
+<p><img decoding="async" loading="lazy" alt="其實我完全��不會彈（1991）" src="https://wiwi.blog/assets/images/indo2-133f23b3b7915538576aeff6fd9bb35f.jpg" width="800" height="604" class="img_ev3q"></p>
 <p>接下來，可能是影響我這一輩子最大的一件事，就是我媽去菜市場（沒錯，真的是菜市場）買了一台 Casio 的電子琴。那一台電子琴有附一個教學錄影帶，然後我看了之後就會彈了：</p>
 <p><em>（1991：這台琴現在還擺在我家，它還可以用）</em></p>
 <p><img decoding="async" loading="lazy" alt="這台琴現在還擺在我家，它還可以用（1991）" src="https://wiwi.blog/assets/images/age5-acd539be60b2b27cca4646318757b56b.jpg" width="469" height="711" class="img_ev3q"></p>
@@ -29607,7 +29646,7 @@ If it weren't for..., I would have been eating danbing all along.</p>
 <p><img decoding="async" loading="lazy" alt="我同學都很可愛（1997）" src="https://wiwi.blog/assets/images/houpu-a37970f8242e851369ce57ab4c835f0d.jpg" width="835" height="575" class="img_ev3q"></p>
 <p>寫完剛好半夜三點了，明天要出門彈伴奏，該睡了，謝謝大家收看。</p>
 <!-- -->
-<section data-footnotes="true" class="footnotes"><h2 class="anchor anchorTargetStickyNavbar_Vzrq sr-only" id="footnote-label">Footnotes<a href="https://wiwi.blog/blog/old-pics#footnote-label" class="hash-link" aria-label="Footnotes的直接連結" title="Footnotes的直接連結" translate="no">​</a></h2>
+<section data-footnotes="true" class="footnotes"><h2 class="anchor anchorTargetStickyNavbar_Vzrq sr-only" id="footnote-label">Footnotes<a href="https://wiwi.blog/blog/old-pics#footnote-label" class="hash-link" aria-label="Footnotes的直接連結" title="Footnotes��的直接連結" translate="no">​</a></h2>
 <ol>
 <li class="anchorTargetStickyNavbar_Vzrq" id="user-content-fn-1-f876e6">
 <p>原文連到 <a href="http://www.wretch.cc/blog/fish7822/" target="_blank" rel="noopener noreferrer" class="">http://www.wretch.cc/blog/fish7822/</a> ，連結已遺失。 <a href="https://wiwi.blog/blog/old-pics#user-content-fnref-1-f876e6" data-footnote-backref="" aria-label="Back to reference 1" class="data-footnote-backref">↩</a></p>
