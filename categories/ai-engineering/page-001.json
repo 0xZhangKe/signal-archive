@@ -1,6 +1,39 @@
 {
   "items": [
     {
+      "id": "60e5b3ec4f245ccc7a877e0f",
+      "title": "Anthropic 推出 Claude Fable 5.1 与 Mythos 5.1，优化成本与数据隐私控制",
+      "summary": "Anthropic 在其官方网站上发布了 Claude Fable 5.1 和 Claude Mythos 5.1。官方声明它们基于同一模型，区别在于安全保障水平（Mythos 只通过可信访问计划开放）。Fable 5.1 降低了缓存读取（cache reads）的定价，使得典型工作负载的成本预计比 Fable 5 低约25%，对于高代理性的工作，节约可达约45%。同时发布了一个新的数据保留方案“企业前沿安全框架”（EFS），能让企业客户在自有云设施中完全控制数据。在官方展示的基准测试中，Fable 5.1 在 Terminal-Bench、CursorBench 等涉及编码和代理任务的测试中表现优于前代和竞品。这对需要顶级模型能力，尤其关注成本和数据隐私的开发者而言是一个重要的迭代。",
+      "image": null,
+      "publishedAt": null,
+      "sourceId": "ai-engineering",
+      "sourceTitle": "AI 工程动态",
+      "link": "https://www.anthropic.com/claude-fable-and-mythos-5-1",
+      "detailPath": "articles/60e5b3ec4f245ccc7a877e0f.json"
+    },
+    {
+      "id": "dfd696d96e2090d00652b37d",
+      "title": "Anthropic 发布 Claude Opus 5.5，显著提升性价比并调整 API 控制逻辑",
+      "summary": "据媒体报道，Anthropic 已正式发布 Claude Opus 5.5 模型。其 API 价格（输入4美元/百万token，输出20美元/百万token）较 Opus 5 降低约20%，性价比大幅提升，任务成本估算比 Opus 5 低约40%。在多项基准测试中，其性能追平甚至超越了更贵的 Claude Fable 5.1 和 OpenAI 的 GPT-6 Astra。API 行为发生重要变化：开发者不能再通过 API 参数（tool_choice）强制模型调用指定工具，也不能手动关闭“自适应思考”；模型将默认使用自适应思考，用户只能调整其思考强度（effort）。这意味着模型在工具调用和推理过程中获得了更多自主权，开发者需要调整对模型的控制方式，更多依赖提示工程来导向行为。",
+      "image": null,
+      "publishedAt": null,
+      "sourceId": "ai-engineering",
+      "sourceTitle": "AI 工程动态",
+      "link": "https://m.36kr.com/p/3995270486873986",
+      "detailPath": "articles/dfd696d96e2090d00652b37d.json"
+    },
+    {
+      "id": "39451c4384b71cffb3f400a0",
+      "title": "微软 Copilot 重大更新：推出 Code 与 Autopilot，拆分计费模式并提供托管运行时",
+      "summary": "微软于2026年9月25日正式推出新版 Copilot，整合了 AI 应用构建与自动化能力。核心变化包括：1) \"Home\" 整合 Chat 与 Cowork，成为统一工作起点；2) \"Code\" 允许非工程师通过自然语言生成应用，并可在沙箱或企业租户内托管；3) \"Autopilot\" 作为常驻的 AI 助手，可自主监控与执行任务。计费模式拆分为固定订阅（用于日常对话）和按请求用量计费（用于 Code, Autopilot, CoWork 及 Astra/Fable 等前沿模型）。同时推出 Copilot Managed Runtime，为企业提供安全的应用托管环境，并提供开放的 SDK/CLI。这些更新旨在为开发者提供更完整的从构建到运营的 AI 应用平台，并赋予企业对成本与治理的精细控制。",
+      "image": null,
+      "publishedAt": "2026-09-25T00:00:00Z",
+      "sourceId": "ai-engineering",
+      "sourceTitle": "AI 工程动态",
+      "link": "https://news.microsoft.com/source/asia/2026/09/25/introducing-the-new-copilot-with-home-code-and-autopilot?lang=zh-hant",
+      "detailPath": "articles/39451c4384b71cffb3f400a0.json"
+    },
+    {
       "id": "bf4be19aec91326cb6a75d57",
       "title": "开源决策模型 Laya 提供本地与AWS SageMaker部署方案",
       "summary": "Laya是一款开源的typed-decision决策模型，与Jev类似但提供Apache 2.0开放权重。它通过choice、score、noul三类结构化问题返回决策结果，避免了大模型生成文本再解析的流程，减少延迟和格式错误。该模型可以在本地环境（如Apple Silicon Mac）或AWS SageMaker上部署，适用于Agent编排中的工具选择、客服分流、内容风控等需要快速结构化决策的场景。对开发者而言，这为解决",
