@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "76cb6ec5e46efedf3b7e89ef",
+      "title": "Coffee Break Clojure, Vol.3",
+      "summary": "上一篇 我们讨论了不同类型的形式，了解了函数、Lambda、宏和特殊形式的皮毛，也学会了用一些基本的运算符、 let 和 if 等等。今天的文章要讨论集合数据类型。不过在此之前，我们还是先看看普通的数据类型有哪些。 今天的文章有点长，所以读的时候，呃…… 准备一杯大号的咖啡？ 你已经知道和你可能不知道的 和大部分编程语言一样，Clojure 支持数字、浮点数、字符串和布尔值。 由于 Clojure 是运行在 JVM 上的，所以这些数据类型都对应一个 Java 类。数字是 Long 不是 Int ，前者能表示的最大数是 2 的 63 次方减 1，也就是有 64 位，第一位是符号位，后者是 32 位。 和 Java 一样，Clojure 没有无符号数（unsigned int）。 Clojure 还能在这些类型上…",
+      "image": "https://img.eltr.ac/geedeapro/article/common-lisp-start/Cons-cells.svg.png",
+      "publishedAt": "2026-09-26T10:20:05Z",
+      "sourceId": "7e27e325b5de8871",
+      "sourceTitle": "極客死亡計劃",
+      "link": "https://www.geedea.pro/article/clj3/",
+      "detailPath": "articles/76cb6ec5e46efedf3b7e89ef.json"
+    },
+    {
       "id": "73a0c3dfdfe730e00846497f",
       "title": "Coffee Break Clojure, Vol.2",
       "summary": "上一篇 我们配置好了 REPL，可以随时开始编写 Clojure 代码并执行。 第零篇 提到，被求值（Eval）的列表叫作形式（form），形式的第一个元素是操作符，剩余的是参数。根据操作符的不同，形式被分为函数形式、Lambda 形式、宏形式和特殊形式。今天的文章就来介绍这几种形式。 函数形式 不难理解，函数形式就是操作符为函数的形式，比如这个 println 形式： ( println \"Hello World\" ) 我们知道 \"Hello World\" 是字符串，那 println 是什么类型？在其他语言里我们可能很少考虑函数名本身的类型，但别忘了 Lisp 的「代码即数据」本质。要把待求值的形式当作数据而非形式处理，只需要把它 quote 起来。 这里要引入 Clojure 的 type 函数，它返回…",
@@ -98,17 +109,6 @@
       "sourceTitle": "極客死亡計劃",
       "link": "https://www.geedea.pro/article/token-translation/",
       "detailPath": "articles/94d436f7859ca19c6507cdfd.json"
-    },
-    {
-      "id": "7c9fc60a68b279d367d2531c",
-      "title": "大脑充血 Vol.97",
-      "summary": "宣布 周刊改月刊 已经有两周了，我怎么还在周更……？ 这篇是九月的正刊，正刊在每月的第一个周一发布。上周发布的是一篇 小报 ，小报可能会随机出现在非正刊发布日的周一，也可能没有。简而言之，这篇之后，九月就没有正刊了。国庆再见！ 吾仅悉落 London Calling The Clash NeoDB Lucida 起因是在 YouTube（Invidious）上看到了这个《Hazbin Hotel》第二季歌曲的 反应视频 （至于我为什么看这个类别的视频，是因为我意外发现然后被这个男人迷住了， 他长得太帅了声音又好听 ，然后就看完了）。视频里他评价 Abel 的配音演员有朋克的嗓音（punk voice），我便想起来自己有段时间没听新的朋克专辑了。所以，比起 停下来分析我的 Daddy issue ，我找到了 T…",
-      "image": "https://img.eltr.ac/geedeapro/weekly/97/TheClashLondonCallingalbumcover.jpg",
-      "publishedAt": "2026-09-07T00:08:57Z",
-      "sourceId": "7e27e325b5de8871",
-      "sourceTitle": "極客死亡計劃",
-      "link": "https://www.geedea.pro/weekly/97/",
-      "detailPath": "articles/7c9fc60a68b279d367d2531c.json"
     }
   ]
 }
