@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "73a0c3dfdfe730e00846497f",
+      "title": "Coffee Break Clojure, Vol.2",
+      "summary": "上一篇 我们配置好了 REPL，可以随时开始编写 Clojure 代码并执行。 第零篇 提到，被求值（Eval）的列表叫作形式（form），形式的第一个元素是操作符，剩余的是参数。根据操作符的不同，形式被分为函数形式、Lambda 形式、宏形式和特殊形式。今天的文章就来介绍这几种形式。 函数形式 不难理解，函数形式就是操作符为函数的形式，比如这个 println 形式： ( println \"Hello World\" ) 我们知道 \"Hello World\" 是字符串，那 println 是什么类型？在其他语言里我们可能很少考虑函数名本身的类型，但别忘了 Lisp 的「代码即数据」本质。要把待求值的形式当作数据而非形式处理，只需要把它 quote 起来。 这里要引入 Clojure 的 type 函数，它返回…",
+      "image": null,
+      "publishedAt": "2026-09-26T02:06:41Z",
+      "sourceId": "7e27e325b5de8871",
+      "sourceTitle": "極客死亡計劃",
+      "link": "https://www.geedea.pro/article/clj2/",
+      "detailPath": "articles/73a0c3dfdfe730e00846497f.json"
+    },
+    {
       "id": "c38f973502225acfa08bcef6",
       "title": "怯犬",
       "summary": "一 今晚没有月亮，窗户外面其他人家的灯火也灭了，屋子里很黑，杉松迷迷糊糊地醒了。耳塞不能阻断嗅觉，好几个晚上，他都被香水、汗液和石楠花的味道弄醒，醒来时，他还紧紧地抱着一只玩偶，脸埋在沙发的靠背上。他感到背后有风，一阵远远的响动，随后皮革的气味取代了那些扰人心智的东西。他翻了个身，刚好碰到男友的手臂。 几秒的沉默过后，铭锐开口了：“你要进屋睡吗？”“她走了？”“嗯。”杉松裹着毯子，从沙发上爬起来，怀里还揣着玩偶。他刚才就已经失去了睡意，但还是半眯着眼睛，装成半梦不醒的样子往卧室走去。两个人都很有默契地没开灯，杉松已经适应了黑暗，他转头看见月光洒在家具上，映出冷白色的轮廓。他回过头，那轮廓也出现在了铭锐身上。他一直觉得感受是有形状的，他现在的感受就像是一个卡在胸腔的、半固体半液体的球，薄壁和内脏接触的表面渗出酸…",
@@ -23,26 +34,26 @@
       "detailPath": "articles/f543aba93edff344f81857a9.json"
     },
     {
-      "id": "625aec1f0ea28b96fcaba19f",
+      "id": "f71d7365e0f51ec7dee4b420",
       "title": "Coffee Break Clojure, Vol.1",
       "summary": "上一篇 我们了解了 Lisp 中「代码即数据」的本质，知道了不求值（Eval）的列表就是数据，被求值的列表就是代码，而代码可以像数据一样经过任意的变换之后再求值。我们还捋了捋列表、形式、对象和原子的概念，可以说，读者已经掌握 Lisp 语法的精髓了。这里除了括号和待求值的一堆括号，别无他物。 了解了语法，在深入 Clojure 的语义（semantics）之前，先来准备些趁手工具。 读取-求值-打印-循环 正式开始之前，你需要先安装 Java 和 Clojure （因为 Clojure 运行在 JVM 之上），之后就可以在终端输入 clojure ，按下回车之后便会看到新的命令提示符： Clojure 1.12.6 user=> 在 Lisp 的世界里，这一般被称作 REPL，全称是：Read-Eval-Pr…",
       "image": "https://img.eltr.ac/geedeapro/article/tutorial-clj-1/lein-repl-conjure.jpeg",
       "publishedAt": "2026-09-18T17:45:49Z",
       "sourceId": "7e27e325b5de8871",
       "sourceTitle": "極客死亡計劃",
-      "link": "https://www.geedea.pro/article/tutorial-clj-1/",
-      "detailPath": "articles/625aec1f0ea28b96fcaba19f.json"
+      "link": "https://www.geedea.pro/article/clj1/",
+      "detailPath": "articles/f71d7365e0f51ec7dee4b420.json"
     },
     {
-      "id": "337da93a0d44dbda54a8c97b",
+      "id": "7ba298449a5d00e789fe4e82",
       "title": "Coffee Break Clojure, Vol.0",
       "summary": "如果有人问我最喜欢的编程语言是什么，我可能会在 Clojure 和 Go 之间纠结一番，但无疑我更 享受 手写 Clojure 的体验。可就像大部分 Lisp 一样，Clojure 的讨论度并不高，中文内容更是少得可怜。所以我为什么不能贡献一些内容呢？ 我前段时间听过一档名为《Coffee Break French》的播客，内容是可以在午休时喝着咖啡听完的法语对话。学习一门编程语言怎么不可以这样轻松呢？我最近也有在帮忙翻译《 A Scheme Primer 》，这篇教程的语言相当通俗。受其启发，再加上我一直想要练习节制地写作，而不是滔滔不绝地写上好几千字，所以我决定开启新的博客系列：《Coffee Break Clojure》。 希望我不会事无巨细、毫无保留地把某个概念讲得十分彻底，最后写成令人望而生畏的长文…",
       "image": null,
       "publishedAt": "2026-09-15T14:58:43Z",
       "sourceId": "7e27e325b5de8871",
       "sourceTitle": "極客死亡計劃",
-      "link": "https://www.geedea.pro/article/tutorial-clj-0/",
-      "detailPath": "articles/337da93a0d44dbda54a8c97b.json"
+      "link": "https://www.geedea.pro/article/clj0/",
+      "detailPath": "articles/7ba298449a5d00e789fe4e82.json"
     },
     {
       "id": "f3184be9f5d6a2aaff088cbc",
@@ -98,17 +109,6 @@
       "sourceTitle": "極客死亡計劃",
       "link": "https://www.geedea.pro/weekly/97/",
       "detailPath": "articles/7c9fc60a68b279d367d2531c.json"
-    },
-    {
-      "id": "dbca523366c16b580c633120",
-      "title": "少年承载了太多年长者的恶臭投射",
-      "summary": "我在《 为什么尝试理解年轻人的年长者都略显笨拙？ 》中提到，有很多自以为懂得年轻人的年长者仅仅是把年轻人当成行为一致的整体来看，而不关注具体的人。他们教其他年长者如何与年轻人对话，就像是给城里人 介绍家畜的习性 一样，仿佛每个年轻人都长着一样的脑袋。最近我观察到了另一种年长者，我对他们与我对话的方式感到不适，仿佛他们不是想要认识我，而是想要把他们年轻时的模样投射到我身上，或者把自己 宝贵的人生经验教授给我 。 我没有谈女性，不是说没有年长的女性会把自己投射到年轻的女性上。相反，我认为这种事情时有发生，我已经不止一次听过女性表达她们的中学班主任因为自己长得年轻漂亮而不喜欢她们了，相当一部分义务教育系统里的教师也不是圣人（我还见过摸女生屁股的体育老师，我现在对教师这个职业也很难产生好感）。我跑题了，我想说的是，我…",
-      "image": null,
-      "publishedAt": "2026-09-06T08:15:54Z",
-      "sourceId": "7e27e325b5de8871",
-      "sourceTitle": "極客死亡計劃",
-      "link": "https://www.geedea.pro/article/projections-on-the-young/",
-      "detailPath": "articles/dbca523366c16b580c633120.json"
     }
   ]
 }
