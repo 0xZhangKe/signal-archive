@@ -1,15 +1,15 @@
 {
   "items": [
     {
-      "id": "a9fcb83dde9f3684afe406c9",
-      "title": "Register Token以及对变形金刚AI的四大批判",
-      "summary": "前几天 Yann LeCun 对 变形金刚(transformers) AI 进行了深刻的 批判 First, the reasoning abilities of current AI systems are based non-auto-regressive search (which is what I have always advocated for). But AFAICT, they do it in token space, which is limited and inefficient. I have claimed that human-like reasoning must be a search in continuous representation space. It looks…",
+      "id": "fc9b056e55f8e537274e0cf5",
+      "title": "Node.js、浏览器和 Cloudflare Workers 的wasm引入问题",
+      "summary": "最近在鼓捣 WebAssembly，这玩意没啥神秘的，可以看出一坨二进制的 .js 库文件 它本身的export和调用方式是统一的，但如今天我才知道，在不同 JavaScript 运行环境加载 .wasm 方式并不完全一样。 例如 Cloudflare Workers 可以直接： import wasm from \"./simple.wasm\"; const { instance } = await WebAssembly.instantiate(wasm, imports); Cloudflare 会把 .wasm 模块作为 WebAssembly.Module 提供给代码。 浏览器通常则是通过 fetch() 获取 Wasm，再使用 WebAssembly.instantiateStreaming() ：…",
       "image": null,
-      "publishedAt": "2026-09-23T12:21:00Z",
+      "publishedAt": "2026-09-26T14:51:00Z",
       "sourceId": "a864c53722a17b19",
       "sourceTitle": "est's blog",
-      "link": "https://blog.est.im/2026/stdin-19",
-      "detailPath": "articles/a9fcb83dde9f3684afe406c9.json"
+      "link": "https://blog.est.im/2026/stdout-36",
+      "detailPath": "articles/fc9b056e55f8e537274e0cf5.json"
     },
     {
       "id": "c4da6bbf480b492ea97ba4ec",
@@ -21,6 +21,17 @@
       "sourceTitle": "est's blog",
       "link": "https://blog.est.im/2026/stdin-18",
       "detailPath": "articles/c4da6bbf480b492ea97ba4ec.json"
+    },
+    {
+      "id": "a9fcb83dde9f3684afe406c9",
+      "title": "Register Token以及对变形金刚AI的四大批判",
+      "summary": "前几天 Yann LeCun 对 变形金刚(transformers) AI 进行了深刻的 批判 First, the reasoning abilities of current AI systems are based non-auto-regressive search (which is what I have always advocated for). But AFAICT, they do it in token space, which is limited and inefficient. I have claimed that human-like reasoning must be a search in continuous representation space. It looks…",
+      "image": null,
+      "publishedAt": "2026-09-23T12:21:00Z",
+      "sourceId": "a864c53722a17b19",
+      "sourceTitle": "est's blog",
+      "link": "https://blog.est.im/2026/stdin-19",
+      "detailPath": "articles/a9fcb83dde9f3684afe406c9.json"
     },
     {
       "id": "b6574966f7597daeb1c16cdb",
@@ -208,17 +219,6 @@
       "sourceTitle": "est's blog",
       "link": "https://blog.est.im/2026/stdout-25",
       "detailPath": "articles/b8e7abb8cfbc6b56f0110902.json"
-    },
-    {
-      "id": "05e6df2e457d7bc95be24935",
-      "title": "或许「数羊」真是个有效的入睡法",
-      "summary": "无聊刷博客，《 AI如何导致和修复了我的失眠问题 》 这老哥真猛，通过统计规律发现自己 失眠 的罪魁祸首。（不剧透。感兴趣点开阅读） 我自己也写过 快速入睡的技巧和原理 以及 强行入睡方法 v2.0 其实我都忘记这个 2.0 方法了。都不知道自己当时怎么想到这个办法的，原来自己写的东西也能常看常新（老登健忘症😂），所以还是要多写，多记录 本文章的讨论都是基于这个 2.0方法的，接着看之前请务必点开 2.0 那个链接，不长，一会儿就看完。 然后我就无聊让AI 评价一下这个 2.0 方法是不是真的，然后AI说真有学者在搞类似的，关键词 ： 睡前“认知打断 / imagery distraction cognitive shuffle serial diverse imagining (SDI) 然后我去搜了下 T…",
-      "image": null,
-      "publishedAt": "2026-07-06T07:51:00Z",
-      "sourceId": "a864c53722a17b19",
-      "sourceTitle": "est's blog",
-      "link": "https://blog.est.im/2026/stderr-23",
-      "detailPath": "articles/05e6df2e457d7bc95be24935.json"
     }
   ]
 }
