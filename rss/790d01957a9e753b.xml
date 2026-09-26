@@ -1,5 +1,423 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/" xmlns:wfw="http://wellformedweb.org/CommentAPI/" xmlns:slash="http://purl.org/rss/1.0/modules/slash/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>月光博客</title><link>https://www.williamlong.info/</link><description>关注互联网和搜索引擎的IT科技博客</description><generator>RainbowSoft Studio Z-Blog 2.3 Avengers Build 180518</generator><language>zh-CN</language><pubDate>Fri, 25 Sep 2026 11:32:46 +0800</pubDate><item><title>使用PagesCMS和GitHub打造免费CMS网站</title><author>williamlong.info@gmail.com (williamlong)</author><link>https://www.williamlong.info/archives/7562.html</link><pubDate>Sun, 20 Sep 2026 20:19:18 +0800</pubDate><guid>https://www.williamlong.info/archives/7562.html</guid><description><![CDATA[<p>如何替换WordPress这样的动态CMS网站，上文提到的VS Code + Front Matter CMS + Hugo + GitHub是一个免费方案，但对于普通用户来说，使用VS Code还是有一定难度，无法像WordPress那样全部在网站上操作，因此，这里介绍一个更为简单的和WordPress一样的可视化后台的博客方案：PagesCMS + Hugo + GitHub Pages。</p>
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/" xmlns:wfw="http://wellformedweb.org/CommentAPI/" xmlns:slash="http://purl.org/rss/1.0/modules/slash/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>月光博客</title><link>https://www.williamlong.info/</link><description>关注互联网和搜索引擎的IT科技博客</description><generator>RainbowSoft Studio Z-Blog 2.3 Avengers Build 180518</generator><language>zh-CN</language><pubDate>Sat, 26 Sep 2026 12:23:39 +0800</pubDate><item><title>《纽约时报》：21世纪最佳电影100部</title><author>williamlong.info@gmail.com (williamlong)</author><link>https://www.williamlong.info/archives/7564.html</link><pubDate>Sat, 26 Sep 2026 11:44:06 +0800</pubDate><guid>https://www.williamlong.info/archives/7564.html</guid><description><![CDATA[<p>2025年6月27日，《纽约时报》数据新闻部门发布&ldquo;21世纪最佳电影100部&rdquo;（The 100 Best Movies of the 21st Century）榜单，评选范围涵盖2000年1月1日以来全球发行的电影作品。该榜单通过邀请奉俊昊、阿莫多瓦、李沧东等导演，米奇&middot;麦迪逊、卡莉&middot;史派妮等演员及影评人共计超过500位从业者，以每人提名10部影片的方式汇总生成。</p>
+
+<p>评选人包括导演阿莫多瓦、奉俊昊、李沧东、王子逸、索菲娅&middot;科波拉、席琳&middot;宋、肖恩&middot;贝克、约阿希姆&middot;提尔、卢卡&middot;瓜达尼诺、埃德加&middot;赖特、穆罕默德&middot;拉索罗夫等大咖，还有米奇&middot;麦迪逊、卡莉&middot;史派妮、卡西&middot;阿弗莱克在内的演员，以及制片人艾米&middot;帕斯卡、作家史蒂芬&middot;金等各领域的人物。</p>
+
+<p>投票方式是，每位投票者选出自己心中10部2000年1月1日之后上映的影片，使用两两对决的算法统计加权得分生成排名，不限国家、语言、类型，剧情片、动画、纪录片都纳入评选。</p>
+
+<p>榜单前五名依次为奉俊昊执导的《寄生虫》、大卫&middot;林奇的《穆赫兰道》、保罗&middot;托马斯&middot;安德森的《血色将至》、王家卫的《花样年华》以及巴里&middot;詹金斯的《月光男孩》。入选作品覆盖韩国、美国、中国、法国等国家地区，包含剧情片《逃出绝命镇》、动画片《千与千寻》等多种类型。李安执导的《卧虎藏龙》（第15名）与杨德昌的《一一》（第40名）等华语影片亦入围榜单。</p>
+
+<p>详细的榜单排名如下：</p>
+
+<p>01. 《寄生虫》(2019)，奉俊昊 执导</p>
+
+<p>02. 《穆赫兰道》(2001)，大卫&middot;林奇 执导</p>
+
+<p>03. 《血色将至》(2007)，保罗&middot;托马斯&middot;安德森 执导</p>
+
+<p>04. 《花样年华》(2000)，王家卫 执导</p>
+
+<p>05. 《月光男孩》(2016)，巴里&middot;詹金斯 执导</p>
+
+<p>06. 《老无所依》(2007)，伊桑&middot;科恩 &amp; 乔尔&middot;科恩 执导</p>
+
+<p>07. 《暖暖内含光》(2004)，米歇尔&middot;贡德里 执导</p>
+
+<p>08. 《逃出绝命镇》(2017)，乔丹&middot;皮尔 执导</p>
+
+<p>09. 《千与千寻》(2001)，宫崎骏 执导</p>
+
+<p>10. 《社交网络》(2010)，大卫&middot;芬奇 执导</p>
+
+<p>11. 《疯狂的麦克斯：狂暴之路》(2015)，乔治&middot;米勒 执导</p>
+
+<p>12. 《利益区域》(2023)，乔纳森&middot;格雷泽 执导</p>
+
+<p>13. 《人类之子》(2006)，阿方索&middot;卡隆 执导</p>
+
+<p>14. 《无耻混蛋》(2009)，昆汀&middot;塔伦蒂诺 执导</p>
+
+<p>15. 《上帝之城》(2002)，费尔南多&middot;梅里尔斯 &amp; 卡迪亚&middot;兰德 执导</p>
+
+<p>16. 《卧虎藏龙》(2000)，李安 执导</p>
+
+<p>17. 《断背山》(2005)，李安 执导</p>
+
+<p>18. 《你妈妈也一样》(2001)，阿方索&middot;卡隆 执导</p>
+
+<p>19. 《十二宫》(2007)，大卫&middot;芬奇 执导</p>
+
+<p>20. 《华尔街之狼》(2013)，马丁&middot;斯科塞斯 执导</p>
+
+<p>21. 《天才一族》(2001)，韦斯&middot;安德森 执导</p>
+
+<p>22. 《布达佩斯大饭店》(2014)，韦斯&middot;安德森 执导</p>
+
+<p>23. 《少年时代》(2014)，理查德&middot;林克莱特 执导</p>
+
+<p>24. 《她》(2013)，斯派克&middot;琼斯 执导</p>
+
+<p>25. 《魅影缝匠》(2017)，保罗&middot;托马斯&middot;安德森 执导</p>
+
+<p>26. 《坠落的审判》(2023)，茹斯汀&middot;特里耶 执导</p>
+
+<p>27. 《改编剧本》(2002)，斯派克&middot;琼斯 执导</p>
+
+<p>28. 《黑暗骑士》(2008)，克里斯托弗&middot;诺兰 执导</p>
+
+<p>29. 《降临》(2016)，丹尼斯&middot;维伦纽瓦 执导</p>
+
+<p>30. 《迷失东京》(2003)，索菲娅&middot;科波拉 执导</p>
+
+<p>31. 《无间道风云》(2006)，马丁&middot;斯科塞斯 执导</p>
+
+<p>32. 《伴娘》(2011)，保罗&middot;费格 执导</p>
+
+<p>33. 《一次别离》(2011)，阿斯加&middot;法哈蒂 执导</p>
+
+<p>34. 《机器人总动员》(2008)，安德鲁&middot;斯坦顿 执导</p>
+
+<p>35. 《预言者》(2009)，雅克&middot;欧迪亚 执导</p>
+
+<p>36. 《严肃的男人》(2009)，伊桑&middot;科恩 &amp; 乔尔&middot;科恩 执导</p>
+
+<p>37. 《请以你的名字呼唤我》(2017)，卢卡&middot;瓜达尼诺 执导</p>
+
+<p>38. 《燃烧女子的肖像》(2019)，瑟琳&middot;席安玛 执导</p>
+
+<p>39. 《伯德小姐》(2017)，格蕾塔&middot;葛韦格 执导</p>
+
+<p>40. 《一一》(2000)，杨德昌 执导</p>
+
+<p>41. 《天使爱美丽》(2001)，让-皮埃尔&middot;热内 执导</p>
+
+<p>42. 《大师》(2012)，保罗&middot;托马斯&middot;安德森 执导</p>
+
+<p>43. 《老男孩》(2003)，朴赞郁 执导</p>
+
+<p>44. 《好莱坞往事》(2019)，昆汀&middot;塔伦蒂诺 执导</p>
+
+<p>45. 《点球成金》(2011)，贝尼特&middot;米勒 执导</p>
+
+<p>46. 《罗马》(2018)，阿方索&middot;卡隆 执导</p>
+
+<p>47. 《几近成名》(2000)，卡梅伦&middot;克罗 执导</p>
+
+<p>48. 《窃听风暴》(2006)，弗洛里安&middot;亨克尔&middot;冯&middot;多纳斯马尔克 执导</p>
+
+<p>49. 《爱在日落黄昏时》(2004)，理查德&middot;林克莱特 执导</p>
+
+<p>50. 《飞屋环游记》(2009)，彼特&middot;道格特 &amp; 鲍勃&middot;彼德森 执导</p>
+
+<p>51. 《为奴十二年》(2013)，史蒂夫&middot;麦奎因 执导</p>
+
+<p>52. 《宠儿》(2018)，欧格斯&middot;兰斯莫斯 执导</p>
+
+<p>53. 《波拉特》(2006)，拉里&middot;查尔斯 执导</p>
+
+<p>54. 《潘神的迷宫》(2006)，吉尔莫&middot;德尔&middot;托罗 执导</p>
+
+<p>55. 《盗梦空间》(2010)，克里斯托弗&middot;诺兰 执导</p>
+
+<p>56. 《私恋失调》(2002)，保罗&middot;托马斯&middot;安德森 执导</p>
+
+<p>57. 《人狗对对碰》(2000)，克里斯托弗&middot;格斯特 执导</p>
+
+<p>58. 《原钻》(2019)，本&middot;萨弗迪 &amp; 约书亚&middot;萨弗迪 执导</p>
+
+<p>59. 《托尼&middot;厄德曼》(2016)，玛伦&middot;阿德 执导</p>
+
+<p>60. 《爆裂鼓手》(2014)，达米恩&middot;查泽雷 执导</p>
+
+<p>61. 《杀死比尔》(2004)，昆汀&middot;塔伦蒂诺 执导</p>
+
+<p>62. 《记忆碎片》(2000)，克里斯托弗&middot;诺兰 执导</p>
+
+<p>63. 《阳光小美女》(2006)，乔纳森&middot;戴顿 &amp; 维莱莉&middot;法瑞斯 执导</p>
+
+<p>64. 《消失的爱人》(2014)，大卫&middot;芬奇 执导</p>
+
+<p>65. 《奥本海默》(2023)，克里斯托弗&middot;诺兰 执导</p>
+
+<p>66. 《聚焦》(2015)，汤姆&middot;麦卡锡 执导</p>
+
+<p>67. 《塔尔》(2022)，托德&middot;菲尔德 执导</p>
+
+<p>68. 《拆弹部队》(2008)，凯瑟琳&middot;毕格罗 执导</p>
+
+<p>69. 《皮囊之下》(2013)，乔纳森&middot;格雷泽 执导</p>
+
+<p>70. 《生人勿进》(2008)，托马斯&middot;阿尔弗莱德森</p>
+
+<p>71. 《十一罗汉》(2001)，史蒂文&middot;索德伯格 执导</p>
+
+<p>72. 《卡罗尔》(2015)，托德&middot;海因斯 执导</p>
+
+<p>73. 《美食总动员》(2007)，布拉德&middot;伯德 &amp; 简&middot;皮克瓦 执导</p>
+
+<p>74. 《佛罗里达乐园》(2017)，肖恩&middot;贝克 执导</p>
+
+<p>75. 《爱》(2012)，迈克尔&middot;哈内克 执导</p>
+
+<p>76. 《逃狱三王》(2000)，乔尔&middot;科恩 &amp; 伊桑&middot;科恩 执导</p>
+
+<p>77. 《瞬息全宇宙》(2022)，关家永 &amp; 丹尼尔&middot;施纳特 执导</p>
+
+<p>78. 《晒后假日》(2022)，夏洛特&middot;威尔斯 执导</p>
+
+<p>79. 《生命之树》(2011)，泰伦斯&middot;马力克 执导</p>
+
+<p>80. 《回归》(2006)，佩德罗&middot;阿莫多瓦 执导</p>
+
+<p>81. 《黑天鹅》(2011)，达伦&middot;阿伦诺夫斯基 执导</p>
+
+<p>82. 《杀戮演绎》(2011)，约书亚&middot;奥本海默 执导</p>
+
+<p>83. 《醉乡民谣》(2013)，乔尔&middot;科恩 &amp; 伊桑&middot;科恩 执导</p>
+
+<p>84. 《忧郁症》(2011)，拉斯&middot;冯&middot;提尔 执导</p>
+
+<p>85. 《王牌播音员》(2004)，亚当&middot;麦凯 执导</p>
+
+<p>86. 《过往人生》(2023)，席琳&middot;宋 执导</p>
+
+<p>87. 《指环王：护戒使者》(2001)，彼得&middot;杰克逊 执导</p>
+
+<p>88. 《拾穗者》(2000)，阿涅斯&middot;瓦尔达 执导</p>
+
+<p>89. 《星际穿越》(2014)，克里斯托弗&middot;诺兰 执导</p>
+
+<p>90. 《弗兰西丝&middot;哈》(2012)，诺亚&middot;鲍姆巴赫 执导</p>
+
+<p>91. 《鱼缸》(2009)，安德里亚&middot;阿诺德 执导</p>
+
+<p>92. 《角斗士》(2000)，雷德利&middot;斯科特 执导</p>
+
+<p>93. 《迈克尔&middot;克莱顿》(2007)，托尼&middot;吉尔罗伊 执导</p>
+
+<p>94. 《少数派报告》(2002)，史蒂文&middot;斯皮尔伯格 执导</p>
+
+<p>95. 《世界上最糟糕的人》(2021)，约阿希姆&middot;提尔 执导</p>
+
+<p>96. 《黑豹》(2018)，瑞恩&middot;库格勒 执导</p>
+
+<p>97. 《地心引力》(2013)，阿方索&middot;卡隆 执导</p>
+
+<p>98. 《灰熊人》(2005)，沃纳&middot;赫尔佐格 执导</p>
+
+<p>99. 《杀人回忆》(2003)，奉俊昊 执导</p>
+
+<p>100. 《太坏了》(2007)，格雷格&middot;莫托拉 执导</p>
+]]></description><category>生活感悟</category><comments>https://www.williamlong.info/archives/7564.html#comment</comments><wfw:commentRss>https://www.williamlong.info/feed.asp?cmt=7564</wfw:commentRss></item><item><title>《纽约时报》：21世纪最佳电视剧100部</title><author>williamlong.info@gmail.com (williamlong)</author><link>https://www.williamlong.info/archives/7563.html</link><pubDate>Sat, 26 Sep 2026 11:23:54 +0800</pubDate><guid>https://www.williamlong.info/archives/7563.html</guid><description><![CDATA[<p>2026年9月25日，《纽约时报》发布&ldquo;21世纪最佳100部电视剧&rdquo;（The 100 Best TV Shows of the 21st Century）榜单，评选范围涵盖2000年1月1日至今播出的所有电视剧集。该榜单由500多名明星演员、剧集运作人及其他电视从业者共同投票产生，排名有先后之分。</p>
+
+<p>在超过500名参与投票的人中，既有伊丽莎白&middot;莫斯、亚当&middot;斯科特、布莱恩&middot;科兰斯顿、萝丝&middot;拜恩、科尔曼&middot;多明戈和杰森&middot;贝特曼等演员，也有达蒙&middot;林德洛夫、莉娜&middot;邓纳姆、莉娜&middot;韦瑟和诺亚&middot;霍利等剧集主创。</p>
+
+<p>投票规则是，每位投票人最多选出 10 部符合时间门槛的剧集；还使用剧集两两对决的对比投票方式，综合计算最终排名。</p>
+
+<p>榜单显示，《绝命毒师》位居榜首，《火线》和《广告狂人》分列第二、三位。《继承之战》与《伦敦生活》跻身前五。《权力的游戏》《副总统》《我为喜剧狂》《抑制热情》《亚特兰大》进入前十名。</p>
+
+<p>详细的榜单排名如下：</p>
+
+<p>1. 《绝命毒师》 Breaking Bad (2008-2013)</p>
+
+<p>2. 《火线》 The Wire (2002-2008)</p>
+
+<p>3. 《广告狂人》 Mad Men (2007-2015)</p>
+
+<p>4. 《继承之战》 Succession (2018-2023)</p>
+
+<p>5. 《伦敦生活》 Fleabag (2016-2019)</p>
+
+<p>6. 《权力的游戏》 Game of Thrones (2011-2019)</p>
+
+<p>7. 《副总统》 Veep (2012-2019)</p>
+
+<p>8. 《我为喜剧狂》 30 Rock (2006-2013)</p>
+
+<p>9. 《抑制热情》 Curb Your Enthusiasm (2000-2024)</p>
+
+<p>10. 《亚特兰大》 Atlanta (2016-2022)</p>
+
+<p>11. 《办公室（美版）》 The Office (U.S.) (2005-2013)</p>
+
+<p>12. 《发展受阻》 Arrested Development (2003-2019)</p>
+
+<p>13. 《都市女孩》 Girls (2012-2017)</p>
+
+<p>14. 《胜利之光》 Friday Night Lights (2006-2011)</p>
+
+<p>15. 《六尺之下》 Six Feet Under (2001-2005)</p>
+
+<p>16. 《办公室（英版）》 The Office (U.K.) (2001-2003)</p>
+
+<p>17. 《美国谍梦》 The Americans (2013-2018)</p>
+
+<p>18. 《我可以毁掉你》 I May Destroy You (2020)</p>
+
+<p>19. 《切尔诺贝利》 Chernobyl (2019)</p>
+
+<p>20. 《王冠》 The Crown (2016-2023)</p>
+
+<p>21. 《白莲花度假村》 The White Lotus (2021-)</p>
+
+<p>22. 《迷失》 Lost (2004-2010)</p>
+
+<p>23. 《归来记》 The Comeback (2005-2026)</p>
+
+<p>24. 《朽木》 Deadwood (2004-2006)</p>
+
+<p>25. 《守望尘世》 The Leftovers (2014-2017)</p>
+
+<p>26. 《黑镜》 Black Mirror (2011-)</p>
+
+<p>27. 《风骚律师》 Better Call Saul (2015-2022)</p>
+
+<p>28. 《兄弟连》 Band of Brothers (2001)</p>
+
+<p>29. 《基和皮尔》 Key &amp; Peele (2012-2015)</p>
+
+<p>30. 《人生切割术》 Severance (2022-)</p>
+
+<p>31. 《幸存者》 Survivor (2000-)</p>
+
+<p>32. 《安多》 Andor (2022-2025)</p>
+
+<p>33. 《醍醐灌顶》 Enlightened (2011-2013)</p>
+
+<p>34. 《富家穷路》 Schitt&#39;s Creek (2015-2020)</p>
+
+<p>35. 《真探（第一季）》 True Detective (Season 1) (2014)</p>
+
+<p>36. 《匹兹堡》 The Pitt (2025-)</p>
+
+<p>37. 《太空堡垒卡拉狄加》 Battlestar Galactica (2004-2009)</p>
+
+<p>38. 《国土安全》 Homeland (2011-2020)</p>
+
+<p>39. 《守望者》 Watchmen (2019)</p>
+
+<p>40. 《青春期》 Adolescence (2025)</p>
+
+<p>41. 《路易不容易》 Louie (2010-2015)</p>
+
+<p>42. 《绝望写手》 Hacks (2021-2026)</p>
+
+<p>43. 《浴血黑帮》 Peaky Blinders (2013-2022)</p>
+
+<p>44. 《马男波杰克》 BoJack Horseman (2014-2020)</p>
+
+<p>45. 《幸福谷》 Happy Valley (2014-2023)</p>
+
+<p>46. 《大城小妞》 Broad City (2014-2019)</p>
+
+<p>47. 《双峰：回归》 Twin Peaks: The Return (2017)</p>
+
+<p>48. 《纸牌屋》 House of Cards (2013-2018)</p>
+
+<p>49. 《正常人》 Normal People (2020)</p>
+
+<p>50. 《公园与游憩》 Parks and Recreation (2009-2015)</p>
+
+<p>51. 《善地》 The Good Place (2016-2020)</p>
+
+<p>52. 《唐顿庄园》 Downton Abbey (2010-2015)</p>
+
+<p>53. 《怪奇物语》 Stranger Things (2016-2025)</p>
+
+<p>54. 《传奇办公室》 The Bureau (2015-2020)</p>
+
+<p>55. 《不安感》 Insecure (2016-2021)</p>
+
+<p>56. 《救援高手》 Nathan for You (2013-2017)</p>
+
+<p>57. 《我觉得你应该离开》 I Think You Should Leave (2019-)</p>
+
+<p>58. 《查普尔秀》 Chappelle&#39;s Show (2003-2006)</p>
+
+<p>59. 《笔写青春》 PEN15 (2019-2021)</p>
+
+<p>60. 《窥视秀》 Peep Show (2003-2015)</p>
+
+<p>61. 《鲁保罗变装皇后秀》 RuPaul&#39;s Drag Race (2009-)</p>
+
+<p>62. 《慢马》 Slow Horses (2022-)</p>
+
+<p>63. 《幕后危机》 The Thick of It (2005-2012)</p>
+
+<p>64. 《安东尼&middot;波登：未知之旅》 Anthony Bourdain: Parts Unknown (2013-2018)</p>
+
+<p>65. 《东镇女巫》 Mare of Easttown (2021)</p>
+
+<p>66. 《彩排》 The Rehearsal (2022-)</p>
+
+<p>67. 《使女的故事》 The Handmaid&#39;s Tale (2017-2025)</p>
+
+<p>68. 《黑钱胜地》 Ozark (2017-2022)</p>
+
+<p>69. 《安东尼&middot;波登：无国界》 Anthony Bourdain: No Reservations (2005-2012)</p>
+
+<p>70. 《盾牌》 The Shield (2002-2008)</p>
+
+<p>71. 《怒呛人生（第一季）》 Beef (Season 1) (2023)</p>
+
+<p>72. 《鱿鱼游戏》 Squid Game (2021-2025)</p>
+
+<p>73. 《巴瑞》 Barry (2018-2023)</p>
+
+<p>74. 《熊家餐馆》 The Bear (2022-2026)</p>
+
+<p>75. 《足球教练》 Ted Lasso (2020-)</p>
+
+<p>76. 《某人某地》 Somebody Somewhere (2022-2024)</p>
+
+<p>77. 《摩登家庭》 Modern Family (2009-2020)</p>
+
+<p>78. 《费城永远阳光灿烂》 It&#39;s Always Sunny in Philadelphia (2005-)</p>
+
+<p>79. 《傲骨贤妻》 The Good Wife (2009-2016)</p>
+
+<p>80. 《约翰&middot;威尔逊的十万个怎么做》 How To With John Wilson (2020-2023)</p>
+
+<p>81. 《后翼弃兵》 The Queen&#39;s Gambit (2020)</p>
+
+<p>82. 《更美好的事》 Better Things (2016-2022)</p>
+
+<p>83. 《火线警探》 Justified (2010-2015)</p>
+
+<p>84. 《地球脉动》 Planet Earth (2006)</p>
+
+<p>85. 《英国烘焙大赛》 The Great British Baking Show (2010-)</p>
+
+<p>86. 《幕府将军》 Shogun (2024-)</p>
+
+<p>87. 《保留地之犬》 Reservation Dogs (2021-2023)</p>
+
+<p>88. 《嗜血法医》 Dexter (2006-2013)</p>
+
+<p>89. 《驯鹿宝贝》 Baby Reindeer (2024)</p>
+
+<p>90. 《体育老师笑传》 Eastbound &amp; Down (2009-2013)</p>
+
+<p>91. 《大祸临头》 Catastrophe (2015-2019)</p>
+
+<p>92. 《罪夜之奔》 The Night Of (2016)</p>
+
+<p>93. 《第11号站》 Station Eleven (2021-2022)</p>
+
+<p>94. 《头号外交官》 The Diplomat (2023-)</p>
+
+<p>95. 《豪斯医生》 House (2004-2012)</p>
+
+<p>96. 《奔腾年代》 Halt and Catch Fire (2014-2017)</p>
+
+<p>97. 《废柴联盟》 Community (2009-2015)</p>
+
+<p>98. 《先见之明》 The OA (2016-2019)</p>
+
+<p>99. 《吉尔莫女孩》 Gilmore Girls (2000-2007)</p>
+
+<p>100. 《丑闻》 Scandal (2012-2018)</p>
+]]></description><category>生活感悟</category><comments>https://www.williamlong.info/archives/7563.html#comment</comments><wfw:commentRss>https://www.williamlong.info/feed.asp?cmt=7563</wfw:commentRss></item><item><title>使用PagesCMS和GitHub打造免费CMS网站</title><author>williamlong.info@gmail.com (williamlong)</author><link>https://www.williamlong.info/archives/7562.html</link><pubDate>Sun, 20 Sep 2026 20:19:18 +0800</pubDate><guid>https://www.williamlong.info/archives/7562.html</guid><description><![CDATA[<p>如何替换WordPress这样的动态CMS网站，上文提到的VS Code + Front Matter CMS + Hugo + GitHub是一个免费方案，但对于普通用户来说，使用VS Code还是有一定难度，无法像WordPress那样全部在网站上操作，因此，这里介绍一个更为简单的和WordPress一样的可视化后台的博客方案：PagesCMS + Hugo + GitHub Pages。</p>
 
 <p>这套方案可以完美替代传统的WordPress系统，具有静态网站高速访问、全自动部署、可视化后台发文的三大特点，没有任何费用，个人用户可以长期零成本使用，个人博客、技术随笔、笔记站点完全够用。</p>
 
@@ -458,42 +876,4 @@ draft: true<br />
 <p>杰森教授表示，他这么做并不是想嘲讽学生。发现他们作弊后，他给了这些学生申诉机会。最后 30 人选择认栽，但仍有 2 人试图为自己的行为辩解。</p>
 
 <p>来源：IT之家</p>
-]]></description><category>业界动态</category><comments>https://www.williamlong.info/archives/7555.html#comment</comments><wfw:commentRss>https://www.williamlong.info/feed.asp?cmt=7555</wfw:commentRss></item><item><title>申真谞九段让子棋战胜KataGo</title><author>williamlong.info@gmail.com (williamlong)</author><link>https://www.williamlong.info/archives/7554.html</link><pubDate>Mon, 20 Jul 2026 15:17:24 +0800</pubDate><guid>https://www.williamlong.info/archives/7554.html</guid><description><![CDATA[<p>7月17日，位于韩国的首尔经济电视台演播厅，一场围棋人机大战三番棋对决，正徐徐拉开帷幕。本次比赛采用了韩国申真谞九段受让两子的&ldquo;让子棋&rdquo;赛制，申真谞&mdash;&mdash;这位被称为&ldquo;申工智能&rdquo;的现役世界第一，执黑先行，挑战顶尖开源人工智能KataGo。在首局比赛中，申真谞执黑中盘败北，申真谞在先失一局的不利局面下，连扳两局，以2比1的总比分取胜。</p>
-
-<p>第一局的较量中，由四张英伟达RTX3090显卡并联构建起的KataGo，开局就下出了少见的着法，而申真谞小心翼翼地应对，尽量避免战斗。虽然在开局阶段没有犯错，但他的优势在被慢慢蚕食。</p>
-
-<p>到了中盘第90手，他的一步冲仅仅是稍有失误，立刻就被KataGo无情地抓住，棋局瞬间就进入了黑棋不得不强杀中腹白棋的局面&mdash;&mdash;而&ldquo;治孤&rdquo;活棋，正是AI最拿手的。现场解说的韩国国家围棋队总教练洪旼杓当时就断言：&ldquo;获胜几乎不可能了！&rdquo;</p>
-
-<p>第二局中，申真谞调整战术，放弃布局阶段的复杂博弈，借助&ldquo;芈式飞刀&rdquo;定式快速简化局面，压缩棋盘的周旋空间，并将优势牢牢掌控，最终以4目半获胜。决胜局中，他延续这一思路，尽量减少复杂变化，依靠黑棋厚势稳步推进，避免给KataGo制造反扑机会，最终以11目半的优势锁定胜局。</p>
-
-<p>但申真谞的获胜，并未在围棋界引发轰动效应，争议却随之而来。有分析指出，此次对弈所用的KataGo并非性能最优版本，是由四张英伟达RTX3090显卡并联构建起的KataGo，其参数配置未达最大化，算力或未得到充分释放。同时，赛制除了规定KataGo让两子外，用时规则为：申真谞每方基本时限5小时，随后进入30秒读秒；KataGo则无基本时限，但每手棋须在20秒内落子，且在申真谞思考期间暂停运算，不得提前推演后续变化。</p>
-
-<p>在此约束下，AI是否能在每步棋之间获取足够的计算资源存在疑问。决胜局中，KataGo的招法趋于简化，在劣势局面下未能展现出AI标志性的敏锐判断与强攻手段，进一步放大了规则对其效能影响的不确定性。</p>
-
-<p>此外，有围棋爱好者进行过测试，第一盘与30k算力（差不多符合4卡3090，20s一步的效果）的katago一选吻合度超过95％，第二盘与轻微负激进度（pda），2k算力的katago一选吻合度超过了98％，但是与30k算力的一选吻合度不到80％。第三盘与超强的负激进度（pda）-0.8的2k katago一选吻合率超过了98％，同样与30k算力的一选吻合度不足80％。</p>
-
-<p>激进度（pda）可以理解成数值越大下法越激进，越小下法越保守。因此有网友推测，第一盘对阵30k算力的KataGo，申真谞输了之后，第二、三盘KataGo被调低为2k算力，激进度降成负的。</p>
-
-<p>一场跌宕的人机逆转，最终留给世人的并非胜负答案，而是无尽的思考与争议，但恰恰是这些争议，让这场胜利超越了单纯的胜负本身。申真谞赢下的不仅是一盘棋，更是一个关乎人类智慧价值的拷问：当算力被刻意压制、当规则被人为设限，这场&ldquo;人机大战&rdquo;究竟还剩下多少参照意义？围棋的魅力从不在于绝对的强弱碾压，而在于未知的博弈与突破，在首尔经济电视台的演播厅里，人类棋手以&ldquo;不完美&rdquo;的方式，战胜了一个&ldquo;被限制&rdquo;的对手，这本身就是对人工智能时代人类处境的最生动的回应。</p>
-
-<p>附录：三局的棋谱如下</p>
-
-<p style="text-align:center"><a href="https://static.williamlong.info/upload/7554_1b.jpg"><img alt="申真谞九段让子棋战胜KataGo" src="https://static.williamlong.info/upload/7554_1.jpg" /></a></p>
-
-<p style="text-align:center"><a href="https://static.williamlong.info/upload/7554_2b.jpg"><img alt="申真谞九段让子棋战胜KataGo" src="https://static.williamlong.info/upload/7554_2.jpg" /></a></p>
-
-<p style="text-align:center"><a href="https://static.williamlong.info/upload/7554_3b.jpg"><img alt="申真谞九段让子棋战胜KataGo" src="https://static.williamlong.info/upload/7554_3.jpg" /></a></p>
-]]></description><category>软件应用</category><comments>https://www.williamlong.info/archives/7554.html#comment</comments><wfw:commentRss>https://www.williamlong.info/feed.asp?cmt=7554</wfw:commentRss></item><item><title>豆包千问宣布下线智能体功能</title><author>user@gmail.com (guest)</author><link>https://www.williamlong.info/archives/7553.html</link><pubDate>Fri, 10 Jul 2026 10:57:39 +0800</pubDate><guid>https://www.williamlong.info/archives/7553.html</guid><description><![CDATA[<p>中国两大科企阿里巴巴旗下人工智能（AI）应用通义千问和字节跳动旗下的AI应有豆包星期六（7月4日）宣布，将于7月15日下线智能体功能。此举恰逢中国官方公布的《人工智能拟人化互动服务管理暂行办法》施行之日。</p>
-
-<p>综合华尔街见闻和中国经济网报道，豆包发布《豆包智能体功能下线通知》，确认智能体功能将于7月15日下线，并将用户引流至字节跳动旗下猫箱App承接相关需求。</p>
-
-<p>豆包称，智能体功能下线后，用户仍可在一段时间内查看并自行保存智能体信息及历史对话数据。10月15日后，豆包将根据《隐私政策》对智能体相关数据进行处理，后续将无法在豆包内查看或恢复。如有重要内容，建议通过截图或分享导出文本的方式提前完成备份。</p>
-
-<p>通义千问则向用户推送下线提醒，指千问智能体功能与服务7月15日彻底下线后，用户将无法访问相关智能体配置及历史对话记录。用户可以在下线前通过复制、截图、导出对话等方式保存智能体配置信息及重要对话记录。</p>
-
-<p>中国国家网信办、国家发展改革委、工业和信息化部、公安部、市场监管总局4月10日联合公布《人工智能拟人化互动服务管理暂行办法》，自7月15日起施行。</p>
-
-<p>《办法》针对AI拟人化互动、角色扮演类服务等明确了内容安全、知识产权保护、未成年人防护等监管规则。</p>
-
-<p>上海市委网信办6月26日通报&ldquo;清朗&middot;整治AI应用乱象&rdquo;专项行动第一阶段成果，宣布累计下架违规智能体1万4000余个。</p>
-]]></description><category>业界动态</category><comments>https://www.williamlong.info/archives/7553.html#comment</comments><wfw:commentRss>https://www.williamlong.info/feed.asp?cmt=7553</wfw:commentRss></item></channel></rss>
+]]></description><category>业界动态</category><comments>https://www.williamlong.info/archives/7555.html#comment</comments><wfw:commentRss>https://www.williamlong.info/feed.asp?cmt=7555</wfw:commentRss></item></channel></rss>
