@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "c54ffb50a483d1a925ed0852",
+      "title": "Hugo 的頁面 Type",
+      "summary": "新版的 Hugo 對某些定義變得很嚴格，只要條件不滿足，就不會渲染、生成到 Public 中。 這次更新，除了 code 語法不定義會讓我主題無法渲染 ，而 歷史上的今天 因爲沒定義頁面 type，也造成無法正常渲染。 原始檔案與路徑 # 頁面位置在： content/on-this-day.md title: \"歷史上的今天\" layout: \"on-this-day\" 排版位置在： themes/classic/layouts/page/on-this-day.html 這次問題就就在於，以前的 Hugo 會依序在好幾個地方尋找指定的 layout: \"on-this-day\" ，而且 Eddie 很久之前就是有研究過官方 docs，結論是好幾個地方可以放，所以 Eddie 沒去記憶，就隨便丟，讓 hug…",
+      "image": null,
+      "publishedAt": "2026-01-03T18:26:50Z",
+      "sourceId": "199cdf92fc46bfcd",
+      "sourceTitle": "Eddie Lv",
+      "link": "https://eddielv.com/articles/hugo-type/",
+      "detailPath": "articles/c54ffb50a483d1a925ed0852.json"
+    },
+    {
       "id": "8da6464d37e8c7098493fbff",
       "title": "Hugo 更新災難 SOS",
       "summary": "前言 # 架設官網 時，一開始用了一個很複雜的主題，必須要最新的 hugo 版本，裝完之後發現太麻煩了，還要用到 docker，就換了一個簡單一點的的主題。 回頭到部落格發文 # 夭壽，突然發現過往文章 css 格式跑掉了： 查看 git 後發現，原始檔案根本都沒動，而 public 有幾百個檔案有變動。 查看後發現原始文章的 .md 若有用兩組「```」包起來，文字就會變得無法閱讀。 最後聯想到應該是 hugo 版本的問題。 弄了幾小時後… # 一直以爲是渲染失敗的問題，查了很久，最後發現如果有對「```」定義語言 1 ，就能正常渲染成功。 而 Eddie 早期的文章都沒定義，於是就出事了！ 把文章的 ``` 全部加上 text # 也試過在 config 調整設定，還是無法，最後決定把所有文章都加上 te…",
@@ -648,17 +659,6 @@
       "sourceTitle": "Eddie Lv",
       "link": "https://eddielv.com/musings/bad-anime/",
       "detailPath": "articles/eda0ba17b5b564a7391947f2.json"
-    },
-    {
-      "id": "4f6489ec79be39bcf3d2cda3",
-      "title": "回顧 2025",
-      "summary": "2025回顧 # 1 月 # 忙碌於尾牙季音響工作 第一次到姊姊的夜市攤位打工幫忙 第一次出租樂器（電木吉他） 2 月 # 把電 bass 出租了，後來對方時間到沒還，最終貼錢買走了 第一次去打擊中心打棒球，超喜歡，之後都沒去了，每天上下班經過都很想找時間去玩 接著又忙於春酒季音響工作 3 月 # 一樣忙碌於音響工作 下台中找大學友人吃飯 寫了一本《腦內節拍器訓練手冊》，並親自送給吉他恩師小昀老師 4 月 # 找了幼稚園兼高中同學吃飯 vibe coding ，每日寫一個 web app 做活動音響時，一直跟一個 SG（show girl）對到眼，後來活動結束被搭訕了開心好 幾天（被正妹搭訕必須寫進年度回顧吧？） 5 月 # 接到 web app 委託，但我並沒有收費 開始想練習唱歌 開始 ig 日更一個月挑…",
-      "image": null,
-      "publishedAt": "2025-12-28T11:17:47Z",
-      "sourceId": "199cdf92fc46bfcd",
-      "sourceTitle": "Eddie Lv",
-      "link": "https://eddielv.com/musings/2025review/",
-      "detailPath": "articles/4f6489ec79be39bcf3d2cda3.json"
     }
   ]
 }
