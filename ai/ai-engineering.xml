@@ -5,6 +5,22 @@
     <link>https://0xzhangke.github.io/signal-archive/</link>
     <description>AI 整理的公开网络内容，附原始来源。</description>
     <item>
+      <title>Google Cloud Agent Search 增强 RAG 文档解析与智能分块能力</title>
+      <link>https://docs.cloud.google.com/generative-ai-app-builder/docs/parse-chunk-documents?hl=zh-cn</link>
+      <guid isPermaLink="false">urn:signal-archive:ai:9098a07cbfa8062a643ce3e3b4743a36</guid>
+      <archive:collectedAt>2026-09-27T18:12:17Z</archive:collectedAt>
+      <description>Google Cloud 更新了其 Agent Search（原 Enterprise Search）服务的文档，重点介绍了为 RAG 优化的文档解析与分块功能。开发者现在可以在创建数据存储区时启用文档分块，并利用布局解析器插件（包括新增的 Gemini 布局解析预览）进行内容感知分块，以更好地处理图片、表格等复杂文档结构。这有助于提升后续检索结果的相关性和 LLM 生成答案的质量。对于使用 Google Cloud 构建企业知识库和 RAG 应用的开发者，这是一个提升数据预处理效果的新工具选项。</description>
+      <content:encoded>&lt;p&gt;Google Cloud 更新了其 Agent Search（原 Enterprise Search）服务的文档，重点介绍了为 RAG 优化的文档解析与分块功能。开发者现在可以在创建数据存储区时启用文档分块，并利用布局解析器插件（包括新增的 Gemini 布局解析预览）进行内容感知分块，以更好地处理图片、表格等复杂文档结构。这有助于提升后续检索结果的相关性和 LLM 生成答案的质量。对于使用 Google Cloud 构建企业知识库和 RAG 应用的开发者，这是一个提升数据预处理效果的新工具选项。&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Google Cloud 为 Agent Search 服务更新了针对 RAG 优化的文档解析与分块功能。&lt;/li&gt;&lt;li&gt;支持布局解析器（如图片注解、表格注解、Gemini 布局解析），实现内容感知分块。&lt;/li&gt;&lt;li&gt;优化后的分块能提高 LLM 回答的相关性并减少计算负荷。&lt;/li&gt;&lt;/ul&gt;&lt;h3&gt;来源 / Sources&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;&lt;a href="https://docs.cloud.google.com/generative-ai-app-builder/docs/parse-chunk-documents?hl=zh-cn"&gt;Google Cloud: Agent Search - 解析文档并分块&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</content:encoded>
+    </item>
+    <item>
+      <title>开源 AI Agent 电子书详解上下文工程与 API 交互协议</title>
+      <link>https://github.com/bojieli/ai-agent-book/blob/main/book/chapter2.md</link>
+      <guid isPermaLink="false">urn:signal-archive:ai:6b5458259e403bf467552decd98579a9</guid>
+      <archive:collectedAt>2026-09-27T18:12:17Z</archive:collectedAt>
+      <description>一本在 GitHub 上开源的 AI Agent 电子书发布了关于“上下文工程”的章节。该章节对开发者构建 Agent 至关重要，它系统性地阐述了如何设计和管理 Agent 的上下文，并深入解析了 Agent 框架与大型语言模型 API（如 OpenAI）交互的完整技术细节，包括四种消息角色、工具调用的实现、以及 ReAct 循环的代码级拆解。对于中高级开发者，这是深入理解 Agent 底层工作机制、优化上下文设计和提升 Agent 稳定性的高质量实用资料。</description>
+      <content:encoded>&lt;p&gt;一本在 GitHub 上开源的 AI Agent 电子书发布了关于“上下文工程”的章节。该章节对开发者构建 Agent 至关重要，它系统性地阐述了如何设计和管理 Agent 的上下文，并深入解析了 Agent 框架与大型语言模型 API（如 OpenAI）交互的完整技术细节，包括四种消息角色、工具调用的实现、以及 ReAct 循环的代码级拆解。对于中高级开发者，这是深入理解 Agent 底层工作机制、优化上下文设计和提升 Agent 稳定性的高质量实用资料。&lt;/p&gt;&lt;ul&gt;&lt;li&gt;开源电子书深入剖析了构建 AI Agent 的核心技术——上下文工程。&lt;/li&gt;&lt;li&gt;详细解释了 Agent 与模型 API（如 OpenAI Chat Completions）交互的完整协议与循环。&lt;/li&gt;&lt;li&gt;提供了从消息角色、工具调用到实现核心 ReAct 循环的代码级详解。&lt;/li&gt;&lt;li&gt;强调上下文质量是决定 Agent 能力上限的关键，而不仅是模型规模。&lt;/li&gt;&lt;/ul&gt;&lt;h3&gt;来源 / Sources&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;&lt;a href="https://github.com/bojieli/ai-agent-book/blob/main/book/chapter2.md"&gt;GitHub: AI Agent Book - 上下文工程 (Chapter 2)&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</content:encoded>
+    </item>
+    <item>
       <title>Anthropic 推出 Claude Fable 5.1 与 Mythos 5.1，优化成本与数据隐私控制</title>
       <link>https://www.anthropic.com/claude-fable-and-mythos-5-1</link>
       <guid isPermaLink="false">urn:signal-archive:ai:eb2d97d8829d4a6ba404d70fa00377cc</guid>
@@ -94,6 +110,15 @@
       <content:encoded>&lt;p&gt;字节跳动的豆包与火山引擎联合发布了面向汽车场景的“豆包座舱助手”。该AI原生车载助手深度集成于车辆系统，能够感知大量车辆信号并调用广泛的汽车原子能力，展示了AI在复杂物理设备和多模态场景下实时交互与任务执行的应用潜力，为车机AI开发提供了范例。&lt;/p&gt;&lt;ul&gt;&lt;li&gt;深度车控集成：助手深度参与车辆“感知—决策—执行”全链路，可感知数百种车辆信号。&lt;/li&gt;&lt;li&gt;原子能力调用：能联动车控、导航、辅助驾驶和车载娱乐等数千个整车原子能力。&lt;/li&gt;&lt;li&gt;核心AI功能：支持多音区精准识别与长期记忆，提升车内多乘客交互体验和个性化服务能力。&lt;/li&gt;&lt;li&gt;商业化落地：首款搭载车型荣威家越07已开启预售，上汽奥迪的相关车型也计划在年内推出。&lt;/li&gt;&lt;li&gt;体现了AI Agent技术（尤其是车载场景下的工具调用与多任务执行）的成熟及应用落地。&lt;/li&gt;&lt;/ul&gt;&lt;h3&gt;来源 / Sources&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;&lt;a href="https://www.jiemian.com/article/15118939.html"&gt;AI应用周度观察（2026.09.14-2026.09.20） - 界面新闻&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</content:encoded>
     </item>
     <item>
+      <title>企业级 Agent 落地实践：玉山银行 GENIE 3.0 打造统一 AI 代理入口</title>
+      <link>https://www.ithome.com.tw/news/179148</link>
+      <guid isPermaLink="false">urn:signal-archive:ai:8467f14a0d4f2b58e2700710a5bb3283</guid>
+      <pubDate>Wed, 23 Sep 2026 00:00:00 +0000</pubDate>
+      <archive:collectedAt>2026-09-27T18:12:17Z</archive:collectedAt>
+      <description>玉山银行分享了其向 Agentic Banking 转型的实践，即将上线新一代企业级生成式 AI 平台 GENIE 3.0。该平台的核心是作为统一的 Agent 入口，用户只需提出需求，Root Agent 会理解意图并调度相应的内部 Agent、知识库（RAG）和工具（通过 MCP 网关）来完成任务。报道详细阐述了如何将领域专家（如法遵、授信）的隐性工作经验转化为可被 AI 调用的 Skill 这一关键工程挑战。对于开发者，这是一个大型金融机构如何从平台架构、知识工程、人机协作等角度系统落地 Agentic AI 的宝贵实战参考。</description>
+      <content:encoded>&lt;p&gt;玉山银行分享了其向 Agentic Banking 转型的实践，即将上线新一代企业级生成式 AI 平台 GENIE 3.0。该平台的核心是作为统一的 Agent 入口，用户只需提出需求，Root Agent 会理解意图并调度相应的内部 Agent、知识库（RAG）和工具（通过 MCP 网关）来完成任务。报道详细阐述了如何将领域专家（如法遵、授信）的隐性工作经验转化为可被 AI 调用的 Skill 这一关键工程挑战。对于开发者，这是一个大型金融机构如何从平台架构、知识工程、人机协作等角度系统落地 Agentic AI 的宝贵实战参考。&lt;/p&gt;&lt;ul&gt;&lt;li&gt;玉山银行将其内部生成式 AI 平台 GENIE 升级至 3.0 版，定位为统一的 Agent 入口。&lt;/li&gt;&lt;li&gt;平台采用 Root Agent 理解用户意图，并调度内部工具、知识库和 Skill 完成任务。&lt;/li&gt;&lt;li&gt;核心挑战与解决方案在于将法遵、授信等领域专家的隐性知识转化为 AI 可调用的 Skill。&lt;/li&gt;&lt;li&gt;提供了一套从 AI 基础设施到领域型 AI 的完整企业级 Agent 应用蓝图。&lt;/li&gt;&lt;/ul&gt;&lt;h3&gt;来源 / Sources&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;&lt;a href="https://www.ithome.com.tw/news/179148"&gt;iThome: 玉山AI转型瞄准Agentic Banking，全面改造新一代AI代理平台&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</content:encoded>
+    </item>
+    <item>
       <title>阿里云千问AI平台全面升级，发布API优速模式与Agent Studio</title>
       <link>https://www.163.com/dy/article/L7GNLIVS0550WHYR.html</link>
       <guid isPermaLink="false">urn:signal-archive:ai:00cd4a7a0d6c45a8b50cbbb1e882a59c</guid>
@@ -101,6 +126,33 @@
       <archive:collectedAt>2026-09-24T00:22:35Z</archive:collectedAt>
       <description>在2026云栖大会上，阿里巴巴宣布千问AI平台全面升级，核心转向支持Agent进入生产应用。平台在原有模型服务基础上，新增了对Agent服务、行业AI解决方案的支持，并推出了API优速模式（Prime）、Agent Studio等新功能。开发者可通过更细粒度的资源选项（如吞吐预留）和可视化工具，降低构建和部署生产级AI代理的工程门槛。</description>
       <content:encoded>&lt;p&gt;在2026云栖大会上，阿里巴巴宣布千问AI平台全面升级，核心转向支持Agent进入生产应用。平台在原有模型服务基础上，新增了对Agent服务、行业AI解决方案的支持，并推出了API优速模式（Prime）、Agent Studio等新功能。开发者可通过更细粒度的资源选项（如吞吐预留）和可视化工具，降低构建和部署生产级AI代理的工程门槛。&lt;/p&gt;&lt;ul&gt;&lt;li&gt;全面升级：以推动Agent进入生产力核心为目标，新增Agent服务和行业解决方案&lt;/li&gt;&lt;li&gt;API优速模式：提供Token生成速度提升1.5-2倍的“Prime”模式，针对延迟敏感调用&lt;/li&gt;&lt;li&gt;Agent Studio：已上线的可视化Agent开发与配置工具&lt;/li&gt;&lt;li&gt;资源选项：提供从免费额度、按量付费到吞吐预留（PTU/DTU）的多层资源选择&lt;/li&gt;&lt;li&gt;开发者影响：为不同规模的开发团队和企业提供了更全面的Agent开发、部署与运维支持&lt;/li&gt;&lt;/ul&gt;&lt;h3&gt;来源 / Sources&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;&lt;a href="https://www.163.com/dy/article/L7GNLIVS0550WHYR.html"&gt;千问AI平台文征：面向Agent全面升级模型服务、Agent服务、AI应用|调用|编程|模型能力|agent|千问ai平台_网易订阅&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</content:encoded>
+    </item>
+    <item>
+      <title>GPT-6 Astra 实战案例：将研究型 Agent 的任务时间和成本减半</title>
+      <link>https://openai.com/zh-Hant/index/parallel-cuts-time-and-cost-with-astra</link>
+      <guid isPermaLink="false">urn:signal-archive:ai:f06f4ea505cc1361ac47da3519f74d8a</guid>
+      <pubDate>Tue, 22 Sep 2026 00:00:00 +0000</pubDate>
+      <archive:collectedAt>2026-09-27T18:12:17Z</archive:collectedAt>
+      <description>OpenAI 发布了一个客户案例，显示 AI 智能体开发公司 Parallel 在使用 GPT-6 Astra 后，其研究型智能体在整合劳动市场数据等复杂任务上，将完成所需时间和代码成本都减少了一半。这主要得益于 Astra 更精准的搜索查询能力和更高效的多步推理，能以更少的步骤获得高质量答案。对于开发者而言，这提供了 GPT-6 系列模型在复杂、多步骤 Agent 工作流中提升效率与降低成本的实证参考，特别是涉及网络搜索和信息整合的场景。</description>
+      <content:encoded>&lt;p&gt;OpenAI 发布了一个客户案例，显示 AI 智能体开发公司 Parallel 在使用 GPT-6 Astra 后，其研究型智能体在整合劳动市场数据等复杂任务上，将完成所需时间和代码成本都减少了一半。这主要得益于 Astra 更精准的搜索查询能力和更高效的多步推理，能以更少的步骤获得高质量答案。对于开发者而言，这提供了 GPT-6 系列模型在复杂、多步骤 Agent 工作流中提升效率与降低成本的实证参考，特别是涉及网络搜索和信息整合的场景。&lt;/p&gt;&lt;ul&gt;&lt;li&gt;案例展示了 GPT-6 Astra 在复杂研究型 Agent 任务中，将任务完成时间和代码成本均降低 50%。&lt;/li&gt;&lt;li&gt;模型能发出更精准的搜索查询，并以更少的步骤获得高质量答案，提升了 Agent 的推理效率。&lt;/li&gt;&lt;li&gt;支持将研究任务委派给子智能体并行执行，优化了多 Agent 协作流程。&lt;/li&gt;&lt;/ul&gt;&lt;h3&gt;来源 / Sources&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;&lt;a href="https://openai.com/zh-Hant/index/parallel-cuts-time-and-cost-with-astra"&gt;OpenAI 客户案例: Parallel 以 GPT‑6 Astra 将研究时间与成本减半&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</content:encoded>
+    </item>
+    <item>
+      <title>Anthropic 发布 Claude Opus 5.5，优化 Agent 任务成本与控制性</title>
+      <link>https://www.datacamp.com/ja/blog/gpt-6-sol-vs-claude-opus-5-5</link>
+      <guid isPermaLink="false">urn:signal-archive:ai:6e7485e8306d0d8a8a7899d7ed3030cb</guid>
+      <pubDate>Tue, 22 Sep 2026 00:00:00 +0000</pubDate>
+      <archive:collectedAt>2026-09-27T18:12:17Z</archive:collectedAt>
+      <description>Anthropic 发布了 Claude 5.5 家族的首个模型 Claude Opus 5.5。该模型针对长时间运行的 AI Agent 和知识型工作流进行了优化，宣称在多数任务上能达到顶级模型 Fable 5.1 的性能水平，同时将典型工作负载的执行成本相比 Opus 5 降低了 40%。API 价格也相应下调了 20%。对于开发者，这意味着在构建需要长上下文、可靠执行的 Agent 时，有了一个在性价比和控制性上更具吸引力的选项，但需注意其 API 在工具强制使用、特定领域访问等方面设置了更严格的约束。</description>
+      <content:encoded>&lt;p&gt;Anthropic 发布了 Claude 5.5 家族的首个模型 Claude Opus 5.5。该模型针对长时间运行的 AI Agent 和知识型工作流进行了优化，宣称在多数任务上能达到顶级模型 Fable 5.1 的性能水平，同时将典型工作负载的执行成本相比 Opus 5 降低了 40%。API 价格也相应下调了 20%。对于开发者，这意味着在构建需要长上下文、可靠执行的 Agent 时，有了一个在性价比和控制性上更具吸引力的选项，但需注意其 API 在工具强制使用、特定领域访问等方面设置了更严格的约束。&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Opus 5.5 作为 Claude 5.5 家族首款模型发布，针对长时间运行的 Agent 和知识工作优化。&lt;/li&gt;&lt;li&gt;在多数任务上性能对标顶级模型 Fable 5.1，但通常工作负载的运行时成本比 Opus 5 低 40%。&lt;/li&gt;&lt;li&gt;API 价格较 Opus 5 降低 20%（输入$4/百万 tokens，输出$20/百万 tokens）。&lt;/li&gt;&lt;li&gt;加强了 API 控制逻辑和安全性，对未经验证账户的敏感操作有更严格限制。&lt;/li&gt;&lt;/ul&gt;&lt;h3&gt;来源 / Sources&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;&lt;a href="https://www.datacamp.com/ja/blog/gpt-6-sol-vs-claude-opus-5-5"&gt;DataCamp: GPT-6 Sol 与 Claude Opus 5.5 比较&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://www.itmedia.co.jp/pcuser/amp/2609/27/news007.html"&gt;ITmedia: Anthropic 发布 Claude Opus 5.5&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</content:encoded>
+    </item>
+    <item>
+      <title>OpenAI 发布 GPT-6 Sol 与 GPT-6 Luna，API 价格永久降低 50%</title>
+      <link>https://releasebot.io/updates/openai</link>
+      <guid isPermaLink="false">urn:signal-archive:ai:6940dcfabe9bca4c5501ec4e1227cd29</guid>
+      <pubDate>Tue, 22 Sep 2026 00:00:00 +0000</pubDate>
+      <archive:collectedAt>2026-09-27T18:12:17Z</archive:collectedAt>
+      <description>OpenAI 正式发布了 GPT-6 系列的两款新模型：GPT-6 Sol（面向复杂任务与编码）和 GPT-6 Luna（面向低成本高吞吐量任务）。它们基于旗舰模型 GPT-6 Astra 的技术构建，但在 API 价格上相比前代 GPT-5.6 系列实现了永久性 50% 的降低。对开发者而言，这意味着在获得接近顶级模型能力的同时，推理成本大幅下降，有利于大规模 Agent 工作流和日常开发任务的成本控制。新模型已通过 OpenAI API、Azure Foundry 等平台提供。</description>
+      <content:encoded>&lt;p&gt;OpenAI 正式发布了 GPT-6 系列的两款新模型：GPT-6 Sol（面向复杂任务与编码）和 GPT-6 Luna（面向低成本高吞吐量任务）。它们基于旗舰模型 GPT-6 Astra 的技术构建，但在 API 价格上相比前代 GPT-5.6 系列实现了永久性 50% 的降低。对开发者而言，这意味着在获得接近顶级模型能力的同时，推理成本大幅下降，有利于大规模 Agent 工作流和日常开发任务的成本控制。新模型已通过 OpenAI API、Azure Foundry 等平台提供。&lt;/p&gt;&lt;ul&gt;&lt;li&gt;GPT-6 Sol/Luna 将顶级 Astra 的技术下放，性能对标或逼近前代顶级模型。&lt;/li&gt;&lt;li&gt;API 价格相比 GPT-5.6 系列永久性降低 50%，极大降低了开发成本。&lt;/li&gt;&lt;li&gt;改善了提示缓存和推理效率，上下文窗口高达 105 万 tokens。&lt;/li&gt;&lt;li&gt;通过 Azure Foundry 等主要云平台同步提供，集成便利。&lt;/li&gt;&lt;/ul&gt;&lt;h3&gt;来源 / Sources&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;&lt;a href="https://releasebot.io/updates/openai"&gt;OpenAI Launches GPT‑6 Sol and Luna&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://ascii.jp/elem/000/004/436/4436644"&gt;ASCII.jp: OpenAI “GPT-6 Sol/Luna” 发表&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://learn.microsoft.com/zh-cn/azure/foundry/foundry-models/concepts/models-sold-directly-by-azure"&gt;Azure 销售的铸造模型文档 (含 GPT-6 系列)&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</content:encoded>
     </item>
     <item>
       <title>Anthropic发布Claude Opus 5.5：成本降低40%，性能对标Fable 5.1</title>
