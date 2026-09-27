@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "26b19dc9962749e1b63484ee",
+      "title": "Hugo 網站年齡驗證",
+      "summary": "點擊進來的時候，有沒有發現有年齡驗證啊？請放心這篇是全年齡的網站技術文章XD 在 Hugo 網站增加年齡驗證？ # 這套機制的基本流程是： 在文章 front matter 加上 adult: true 來標記成人文章 Hugo 渲染時根據 .Params.adult 判斷是否嵌入 JavaScript JS 檢查 localStorage 是否已有「成年標記」 如果沒有，就顯示彈窗，讓使用者選「是」或「否」 如果選「是」→ 儲存狀態到 localStorage，下次不再詢問 如果選「否」→ 轉跳離開 製作「重設年齡驗證」按鈕在成人文章的 Footer，清除 localStorage 重新觸發彈窗（基本上是給開發人員用） 文章標記 # title: \"文章標題\" adult: true 只要在文章最前面的語法…",
+      "image": null,
+      "publishedAt": "2025-08-07T04:08:34Z",
+      "sourceId": "199cdf92fc46bfcd",
+      "sourceTitle": "Eddie Lv",
+      "link": "https://eddielv.com/articles/hugo-adult/",
+      "detailPath": "articles/26b19dc9962749e1b63484ee.json"
+    },
+    {
       "id": "c183f8b231785000426cd924",
       "title": "吉他導線 TS-TS 焊接",
       "summary": "前言 # 最近裝了新拾音器，是另外多走一路，所以導線就少了一條，找各種品牌後，最後決定自己焊接。 導線線材知識 # 被動拾音器屬於 Hi-Z 高阻抗輸出，須要搭配低電容（C）的導線。 電容值可以想成是「線材本身的阻力」，當線材越長，阻力也會隨長度變化等比例放大。當電容值過大時，在物理上就直接形成了「Low Pass Filter」，也就是高音會被消減。 Eddie 選定線材 # 品牌 型號 電容（pF/m） Canare GT-6 160 Mogami 3368 70 第一時間，想到音響行業標杆「Canare」，最著名的是它們的「L-2T2S」訊號線，所以想試試看該品牌的樂器專用低電容線材（GT-6）。 也想找超低電容，最後找到了 Mogami 3368，電容值只有 70 pF/m，而且屏蔽層（隔絕雜訊用）超…",
@@ -648,17 +659,6 @@
       "sourceTitle": "Eddie Lv",
       "link": "https://eddielv.com/musings/linux_update/",
       "detailPath": "articles/f9039454d378a1b5aa37403b.json"
-    },
-    {
-      "id": "ed7a859e8161e3335d8da2f4",
-      "title": "如何開一個有效且心情好的檢討會？",
-      "summary": "前言 # 開檢討會，表示有人爲疏漏或意外發生，所以需要研討下次該如何改進，是容易讓人不舒服的會議。 簡單的句子改變，就能讓嚴肅的話題得到緩解。 不舒服的檢討 # 「你今天怎麼回事？好像沒有在狀況內？精神不好？」 「爲什麼這個東西會這樣做？不是講過很多次了？」 「如果你先想好這些情況，意外就不會發生了吧？」 這些句子，會讓人專心在「過去」，看向過去的失誤，並且接受龐大的壓力與職責，會感到非常不舒服，氣氛也會弄得很糟。 舒服的檢討 # 「下次記得要睡飽哦，不然小心又會慌神了，這樣會影響到大家。」 「下次做這件事情時，一定要記得這些注意事項，不然會有各種不可挽回的大問題出現！」 「下次做這件事情時，可以預判一下事情可能會有哪些不好的走向，先對那些事情做出預防，才不會手忙腳亂！」 目的一樣，但是句子全部改成看向「未來…",
-      "image": null,
-      "publishedAt": "2025-01-06T15:40:47Z",
-      "sourceId": "199cdf92fc46bfcd",
-      "sourceTitle": "Eddie Lv",
-      "link": "https://eddielv.com/articles/good_post-mortem/",
-      "detailPath": "articles/ed7a859e8161e3335d8da2f4.json"
     }
   ]
 }

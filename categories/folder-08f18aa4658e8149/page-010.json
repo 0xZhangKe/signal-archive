@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "bce471a4b7702581d162c2ab",
+      "title": "解决Cloudflare Pages的308自动重定向问题",
+      "summary": "我在使用Cloudflare Pages的时候，发现了一个非常奇怪的问题，就是发布的带有.html后缀的网页，会自动308重定向到一个没有.html的地址，并且，这个行为是Cloudflare Pages底层硬编码，无法通过配置参数关闭。 这个问题我用中文咨询了所有主流AI，都没有得到好的解决，有给方案说，使用.htm代替.html，因为Cloudflare Pages不会重写.htm文件，但这对于老网站的SEO来说显然不行，还有一个方案说是使用 Pages 函数进行拦截，说将一段代码放入functions/[[path]].js 文件中，然后重新发布，然后就会返回 200 + HTML内容，不会再有308重定向的状态码。我按照其方法发布了，也不行。 接着，我使用Google搜索“Cloudflare Pag…",
+      "image": null,
+      "publishedAt": "2026-08-20T10:40:04Z",
+      "sourceId": "790d01957a9e753b",
+      "sourceTitle": "月光博客",
+      "link": "https://www.williamlong.info/archives/7558.html",
+      "detailPath": "articles/bce471a4b7702581d162c2ab.json"
+    },
+    {
       "id": "fb4576b3a5101f902bb87c8c",
       "title": "入蜀记 day453 冷雨",
       "summary": "「冷雨。」",
@@ -648,17 +659,6 @@
       "sourceTitle": "Shuo-jen Blog",
       "link": "https://shuojen.com/blog/2026/08/14/chess_titan",
       "detailPath": "articles/4623621cf196cd57b84eec1e.json"
-    },
-    {
-      "id": "7e6fe0e5503ea5674b4191d4",
-      "title": "入蜀记 day447 辽宁大厦",
-      "summary": "「辽宁大厦。」",
-      "image": null,
-      "publishedAt": "2026-08-14T09:18:27Z",
-      "sourceId": "8e5dc5a8b5023a8e",
-      "sourceTitle": "折腾人生",
-      "link": "https://z.arlmy.me/posts/BBBPandINSW/INSW-ko/INSW_447/",
-      "detailPath": "articles/7e6fe0e5503ea5674b4191d4.json"
     }
   ]
 }
