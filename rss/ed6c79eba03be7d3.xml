@@ -12,7 +12,7 @@
 	<atom:link href="https://www.raychase.net/feed" rel="self" type="application/rss+xml" />
 	<link>https://www.raychase.net</link>
 	<description>一个纯正程序员的啰嗦</description>
-	<lastBuildDate>Mon, 14 Sep 2026 05:39:54 +0000</lastBuildDate>
+	<lastBuildDate>Mon, 28 Sep 2026 04:45:35 +0000</lastBuildDate>
 	<language>en-US</language>
 	<sy:updatePeriod>
 	hourly	</sy:updatePeriod>
@@ -20,6 +20,185 @@
 	1	</sy:updateFrequency>
 	<generator>https://wordpress.org/?v=6.0.16</generator>
 	<item>
+		<title>软件工程，还有未来吗？</title>
+		<link>https://www.raychase.net/8347</link>
+					<comments>https://www.raychase.net/8347#respond</comments>
+		
+		<dc:creator><![CDATA[四火]]></dc:creator>
+		<pubDate>Mon, 28 Sep 2026 04:29:56 +0000</pubDate>
+				<category><![CDATA[Critical Thinking]]></category>
+		<category><![CDATA[AI]]></category>
+		<category><![CDATA[抽象]]></category>
+		<category><![CDATA[软件工程]]></category>
+		<guid isPermaLink="false">https://www.raychase.net/?p=8347</guid>
+
+					<description><![CDATA[<!-- wp:paragraph -->
+<p><img class="wp-image-8351" style="float:right; width:360px" src="https://www.raychase.net/wp-content/uploads/2026/09/Softwear-Engineering-1024x600.png" alt=""/>我是08年毕业的，到现在，已经过去了超过18年。但是，我开始学软件的时间，要早得多，并且是从VB开始的，正儿八经接触的第一门编程语言是C，毕业使用的是Groovy on Grails做的网站（可远不如现在的毕业生们使用的高大上技术了），在<a rel="noreferrer noopener" href="/648" target="_blank">这篇文字</a>里面有所介绍。如今在AI火遍全世界的年代，我会想起当时我是怎样学写软件的，更感慨的是，对于选择软件工程师作为职业的我来说，真的幸运地赶上了好时代。这个时代的激动人心，是前无古人的。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>跳出琐碎的具体事件，如果我们站到非常高的视角，想想整个世界软件工程的演进，可以分成这么几个阶段：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>首先是五六十年代的<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">手工业时代</mark></strong>，硬件是催化剂，随着硬件性能提升，极易崩溃的软件称为了瓶颈，这才有了把工程化从传统产业搬到软件上的第一个阶段。在这个阶段末，北约会议中提出了“软件工程”的概念。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>接着是<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">结构化编程时代</mark></strong>，相当于是七八十年代，标志性的事件是C语言和Unix OS的诞生，Dijkstra（就是那个最短路径算法的作者）提出了goto语句的害处。从此大家都认可软件应该自顶向下、模块化编写。这段时间很多的观点也是我大学里面逐步接触到的。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>接着九十年代到2010年代中期，<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">互联网行业爆发</mark></strong>，软件工程飞速发展，跨平台的Java语言诞生，敏捷的概念开始兴起。这段时间最浓墨重彩的两个词是OO（面向对象）和Web，我觉得从我的技术背景和积累来看，主要的知识内容就是那个年代产生的。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>第四个阶段就是2010代中到2020年代初，大致可以归纳为<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">云计算和云原生时代</mark></strong>。这也算是记忆犹新，不过我自身的这方面的技术更新并不快。其中标志性的事件，我认为就是Docker和Kubernetes的开源。职业路线上，慢慢专注于platform和infra以后，我已经较少开发纯web的项目或者软件了，技术方面涉及云原生的可以说越来越频繁。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>第五个阶段，处于刚兴起的一个大阶段，就是<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">AI驱动的时代</mark></strong>，这可以说是说算是从2022年的ChatGPT爆发开始算起，依然非常早期。华尔街和资本把它炒的火热的程度，兴许可以说仅次于当年的互联网泡沫。自然语言开始成为编程语言，开发效率爆发，编程语言的“语言”特性本身，逐渐变得廉价，代码生成成本越来越低。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>如果把这几个阶段的技术摆出来，再从一个随着时间演进的高屋建瓴的角度看，还能发现一些变化的规律：</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>第一个是<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">抽象层级越来越高</mark></strong>。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>比如一开始是硬件机器语言、汇编语言；然后结构化编程阶段的C和Unix，屏蔽了许多硬件指令的复杂性；接着就是互联网阶段的JVM，做到一次编写，到处运行这样跨平台；而云平台的Kubenetes+Docker则是让运行环境和资源一并打包；到了AI则是让人类语言翻译成传统编程语言这一步都省了，基本上的最高的抽象层级了，也是最接近人类思维模式的形式。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>第二个是<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">软件复杂程度的爆炸</mark></strong>。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>从最早的直接接触硬件的操作，到逐步引入高级编程语言、面向对象等等对抗软件复杂度，再到治理方面使用Kubernetes等编排技术整合各种各样的微服务，最后是AI时代使用大模型来接管人类大脑对于软件整体体系的认知。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>在AI的这个阶段，软件工程师的价值在哪里，这个行业的未来会怎样，和很多这行的人一样，我也在反复思考这个问题，比如<a rel="noreferrer noopener" href="/8155" target="_blank">这篇</a>。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>关于这个问题，如果尝试站得高一点，拨开那些具体技术和实践的迷雾，只是从软件工程和软件工程师的本质去思考问题，那么软件工程这一个行业，很很多工程行业一样，其实并没有什么特别的——技能会被替代，行业反而会持续进步。每一类具备普遍性的问题，每一种能够得到大规模使用的技术，都会关联到一种职业。<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">所以，如果思考软件工程师这个职业是否会被淘汰掉，不如思考软件工程这个技术领域是否会被淘汰掉？进而再思考，软件领域所解决的问题是否会被淘汰掉？</mark></strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>显然，是否定的。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>我来尝试解释一下。来想想看，软件工程诞生的动机是什么？一个词来概括，就是复杂性。人类的需求是社会进步的动力，这是无止境的。而正是因为需求不断进展，软件不可避免地变得越来越复杂，人类就迫切需要一个可以重复和实践的办法，来保证软件交付的时间和质量，这才有了软件工程。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>再来思考未来，未来的软件是怎样的暂且不论，可以确定的是，<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">未来需要软件解决的问题依然在变得更为复杂，那么未来软件的本身也自然需要更为复杂，于是，为了保质保量交付，为了社会化大规模实践和推广最佳的方法，软件工程就需要持续存在，并且也将更为复杂，专业门槛只会更高</mark></strong>。这就是最本质的软件工程和软件工程师不被淘汰的逻辑。只不过，那时的技术未必是现在的技术，那时对于工程师的要求未必是现在对于工程师的要求。这一点结论，其实和AI本身没有关系，也可以是其他技术手段，只不过AI恰好成为了这个时代扣动扳机的那个角色。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>再把视角缩回到AI。我们时常听到AI替代论和AI自我进化论。在某些领域，AI确实会不断替代当前软件工程师在软件工程中所扮演的许多角色，很多技术问题也能够通过AI完成解决，而“人”只需要很低程度的参与；不过，也有很多领域，广泛存在确定的逻辑壁垒，让AI自我迭代和强化变得非常困难。具体说，AI自己来生成代码，并且使用它来进行训练，不断强化，它就会缺乏人类真实的应用场景，本质上也无法产生针对真实的改进和创新。<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">这种模式，一定程度上可以视作封闭系统的自我更新，极易放大微小的误差，最终结果天差地别，形成不可思议的谬误</mark></strong>。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>把时间维度放到未来几年到十几年来看，我觉得AI还是更适合作为一个辅助者的身份，软件工程师来做抽象，做统筹，做高屋建瓴的规划性工作，让AI成为一个辅助者、好帮手，帮助完善内容，作为智囊团提供建议和实施者搞定经过人类审核分派的具体任务。社会依然需要软件工程师这样的角色，甚至需要更多，只不过他们的技能树可能会发生大幅变化。<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">软件工程师对于问题的简化能力、抽象能力、规划能力，将得到前所未有的重视</mark></strong>。</p>
+<!-- /wp:paragraph -->]]></description>
+										<content:encoded><![CDATA[
+<p><img width="1024" height="600" class="wp-image-8351" style="float:right; width:360px" src="https://www.raychase.net/wp-content/uploads/2026/09/Softwear-Engineering-1024x600.png" alt="" srcset="https://www.raychase.net/wp-content/uploads/2026/09/Softwear-Engineering-1024x600.png 1024w, https://www.raychase.net/wp-content/uploads/2026/09/Softwear-Engineering-300x176.png 300w, https://www.raychase.net/wp-content/uploads/2026/09/Softwear-Engineering-768x450.png 768w, https://www.raychase.net/wp-content/uploads/2026/09/Softwear-Engineering-850x498.png 850w, https://www.raychase.net/wp-content/uploads/2026/09/Softwear-Engineering.png 1320w" sizes="(max-width: 1024px) 100vw, 1024px" />我是 08 年毕业的，到现在，已经过去了超过 18 年。但是，我开始学软件的时间，要早得多，并且是从 VB 开始的，正儿八经接触的第一门编程语言是 C，毕业使用的是 Groovy on Grails 做的网站（可远不如现在的毕业生们使用的高大上技术了），在<a rel="noreferrer noopener" href="/648" target="_blank">这篇文字</a>里面有所介绍。如今在 AI 火遍全世界的年代，我会想起当时我是怎样学写软件的，更感慨的是，对于选择软件工程师作为职业的我来说，真的幸运地赶上了好时代。这个时代的激动人心，是前无古人的。</p>
+
+
+
+<p>跳出琐碎的具体事件，如果我们站到非常高的视角，想想整个世界软件工程的演进，可以分成这么几个阶段：</p>
+
+
+
+<p>首先是五六十年代的<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">手工业时代</mark></strong>，硬件是催化剂，随着硬件性能提升，极易崩溃的软件称为了瓶颈，这才有了把工程化从传统产业搬到软件上的第一个阶段。在这个阶段末，北约会议中提出了 “软件工程” 的概念。</p>
+
+
+
+<p>接着是<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">结构化编程时代</mark></strong>，相当于是七八十年代，标志性的事件是 C 语言和 Unix OS 的诞生，Dijkstra（就是那个最短路径算法的作者）提出了 goto 语句的害处。从此大家都认可软件应该自顶向下、模块化编写。这段时间很多的观点也是我大学里面逐步接触到的。</p>
+
+
+
+<p>接着九十年代到 2010 年代中期，<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">互联网行业爆发</mark></strong>，软件工程飞速发展，跨平台的 Java 语言诞生，敏捷的概念开始兴起。这段时间最浓墨重彩的两个词是 OO（面向对象）和 Web，我觉得从我的技术背景和积累来看，主要的知识内容就是那个年代产生的。</p>
+
+
+
+<p>第四个阶段就是 2010 代中到 2020 年代初，大致可以归纳为<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">云计算和云原生时代</mark></strong>。这也算是记忆犹新，不过我自身的这方面的技术更新并不快。其中标志性的事件，我认为就是 Docker 和 Kubernetes 的开源。职业路线上，慢慢专注于 platform 和 infra 以后，我已经较少开发纯 web 的项目或者软件了，技术方面涉及云原生的可以说越来越频繁。</p>
+
+
+
+<p>第五个阶段，处于刚兴起的一个大阶段，就是<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">AI 驱动的时代</mark></strong>，这可以说是说算是从 2022 年的 ChatGPT 爆发开始算起，依然非常早期。华尔街和资本把它炒的火热的程度，兴许可以说仅次于当年的互联网泡沫。自然语言开始成为编程语言，开发效率爆发，编程语言的 “语言” 特性本身，逐渐变得廉价，代码生成成本越来越低。</p>
+
+
+
+<p>如果把这几个阶段的技术摆出来，再从一个随着时间演进的高屋建瓴的角度看，还能发现一些变化的规律：</p>
+
+
+
+<p>第一个是<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">抽象层级越来越高</mark></strong>。</p>
+
+
+
+<p>比如一开始是硬件机器语言、汇编语言；然后结构化编程阶段的 C 和 Unix，屏蔽了许多硬件指令的复杂性；接着就是互联网阶段的 JVM，做到一次编写，到处运行这样跨平台；而云平台的 Kubenetes+Docker 则是让运行环境和资源一并打包；到了 AI 则是让人类语言翻译成传统编程语言这一步都省了，基本上的最高的抽象层级了，也是最接近人类思维模式的形式。</p>
+
+
+
+<p>第二个是<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">软件复杂程度的爆炸</mark></strong>。</p>
+
+
+
+<p>从最早的直接接触硬件的操作，到逐步引入高级编程语言、面向对象等等对抗软件复杂度，再到治理方面使用 Kubernetes 等编排技术整合各种各样的微服务，最后是 AI 时代使用大模型来接管人类大脑对于软件整体体系的认知。</p>
+
+
+
+<p>在 AI 的这个阶段，软件工程师的价值在哪里，这个行业的未来会怎样，和很多这行的人一样，我也在反复思考这个问题，比如<a rel="noreferrer noopener" href="/8155" target="_blank">这篇</a>。</p>
+
+
+
+<p>关于这个问题，如果尝试站得高一点，拨开那些具体技术和实践的迷雾，只是从软件工程和软件工程师的本质去思考问题，那么软件工程这一个行业，很很多工程行业一样，其实并没有什么特别的——技能会被替代，行业反而会持续进步。每一类具备普遍性的问题，每一种能够得到大规模使用的技术，都会关联到一种职业。<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">所以，如果思考软件工程师这个职业是否会被淘汰掉，不如思考软件工程这个技术领域是否会被淘汰掉？进而再思考，软件领域所解决的问题是否会被淘汰掉？</mark></strong></p>
+
+
+
+<p>显然，是否定的。</p>
+
+
+
+<p>我来尝试解释一下。来想想看，软件工程诞生的动机是什么？一个词来概括，就是复杂性。人类的需求是社会进步的动力，这是无止境的。而正是因为需求不断进展，软件不可避免地变得越来越复杂，人类就迫切需要一个可以重复和实践的办法，来保证软件交付的时间和质量，这才有了软件工程。</p>
+
+
+
+<p>再来思考未来，未来的软件是怎样的暂且不论，可以确定的是，<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">未来需要软件解决的问题依然在变得更为复杂，那么未来软件的本身也自然需要更为复杂，于是，为了保质保量交付，为了社会化大规模实践和推广最佳的方法，软件工程就需要持续存在，并且也将更为复杂，专业门槛只会更高</mark></strong>。这就是最本质的软件工程和软件工程师不被淘汰的逻辑。只不过，那时的技术未必是现在的技术，那时对于工程师的要求未必是现在对于工程师的要求。这一点结论，其实和 AI 本身没有关系，也可以是其他技术手段，只不过 AI 恰好成为了这个时代扣动扳机的那个角色。</p>
+
+
+
+<p>再把视角缩回到 AI。我们时常听到 AI 替代论和 AI 自我进化论。在某些领域，AI 确实会不断替代当前软件工程师在软件工程中所扮演的许多角色，很多技术问题也能够通过 AI 完成解决，而 “人” 只需要很低程度的参与；不过，也有很多领域，广泛存在确定的逻辑壁垒，让 AI 自我迭代和强化变得非常困难。具体说，AI 自己来生成代码，并且使用它来进行训练，不断强化，它就会缺乏人类真实的应用场景，本质上也无法产生针对真实的改进和创新。<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">这种模式，一定程度上可以视作封闭系统的自我更新，极易放大微小的误差，最终结果天差地别，形成不可思议的谬误</mark></strong>。</p>
+
+
+
+<p>把时间维度放到未来几年到十几年来看，我觉得 AI 还是更适合作为一个辅助者的身份，软件工程师来做抽象，做统筹，做高屋建瓴的规划性工作，让 AI 成为一个辅助者、好帮手，帮助完善内容，作为智囊团提供建议和实施者搞定经过人类审核分派的具体任务。社会依然需要软件工程师这样的角色，甚至需要更多，只不过他们的技能树可能会发生大幅变化。<strong><mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-vivid-red-color">软件工程师对于问题的简化能力、抽象能力、规划能力，将得到前所未有的重视</mark></strong>。</p>
+<p><strong><font color="#ff0000">文章未经特殊标明皆为本人原创，未经许可不得用于任何商业用途，转载请保持完整性并注明来源链接 <a href="https://www.raychase.net/8347">《四火的唠叨》</a></font></strong></p><div class='yarpp yarpp-related yarpp-related-rss yarpp-template-list'>
+<!-- YARPP List -->
+<p>你可能也喜欢看：</p><ol>
+<li><a href="https://www.raychase.net/7724" rel="bookmark" title="本地部署 Minikube + Docker 记录">本地部署 Minikube + Docker 记录</a></li>
+<li><a href="https://www.raychase.net/7928" rel="bookmark" title="关于近期求职的近况和思考">关于近期求职的近况和思考</a></li>
+<li><a href="https://www.raychase.net/8115" rel="bookmark" title="聊聊商业模式——Atlassian">聊聊商业模式——Atlassian</a></li>
+<li><a href="https://www.raychase.net/8126" rel="bookmark" title="聊聊商业模式——阿里巴巴">聊聊商业模式——阿里巴巴</a></li>
+<li><a href="https://www.raychase.net/8295" rel="bookmark" title="Run:ai 学习记录">Run:ai 学习记录</a></li>
+</ol>
+</div>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.raychase.net/8347/feed</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
 		<title>为什么我不买大盘，只坚持投资个股</title>
 		<link>https://www.raychase.net/8305</link>
 					<comments>https://www.raychase.net/8305#respond</comments>
@@ -2882,211 +3061,6 @@ echo '&lt;link rel="canonical" href="https://www.raychase.net' . esc_url( $_SERV
 ]]></content:encoded>
 					
 					<wfw:commentRss>https://www.raychase.net/8115/feed</wfw:commentRss>
-			<slash:comments>2</slash:comments>
-		
-		
-			</item>
-		<item>
-		<title>回国感悟</title>
-		<link>https://www.raychase.net/8072</link>
-					<comments>https://www.raychase.net/8072#comments</comments>
-		
-		<dc:creator><![CDATA[四火]]></dc:creator>
-		<pubDate>Tue, 06 Jan 2026 04:20:44 +0000</pubDate>
-				<category><![CDATA[Life Experience and Thoughts]]></category>
-		<category><![CDATA[出行]]></category>
-		<category><![CDATA[回国]]></category>
-		<category><![CDATA[投资]]></category>
-		<category><![CDATA[环境]]></category>
-		<category><![CDATA[美食]]></category>
-		<guid isPermaLink="false">https://www.raychase.net/?p=8072</guid>
-
-					<description><![CDATA[<!-- wp:paragraph -->
-<p><img class="wp-image-8075" style="width: 320px; float: right" src="/wp-content/uploads/2026/01/arrival.png" alt=""/>自我上次2018年回国已经过去超过7年了，这次回国呆了超过两周，感触还是很丰富的，整理得不够系统，简单把它们罗列下来。我虽然长期不生活在国内，但是我始终是中国人，也始终用简单的“国内”两字替代“中国国内”，我非常热切地想了解中国国内的变化。当然，时间关系，我的观察不会很深刻，因此我的观点未必都是正确的。</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:heading -->
-<h2>关于出行</h2>
-<!-- /wp:heading -->
-
-<!-- wp:paragraph -->
-<p>中国的基建搞得真的很棒，要说出行恐怕中国是最便捷的国家了。期间坐了公交、高铁、卧铺、游轮、出租、网约车，或者是干脆步行……都很方便。我想，这应该是得益于中国超强的基建能力。这是让我无比自豪的一点，虽说以前在国内待着的时候并没有深刻体会。</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>关于网约车，我的记忆还停留在那个滴滴和快滴烧钱拉客的年代。后来我知道的是，滴滴独打天下了。如今我看到的是，滴滴也似乎未必能玩得过竞争对手了。因为它的竞争对手早就变了，已经是高德地图这样的流量入口。当年阿里下错了很多步棋，但是阿里没有下错高德地图这步棋，这是少有的流量入口应用。我拿高德地图搜网约车，就会显示一堆可选项，来自不同的网约车公司，接着直接对接支付宝，这个平台把端到端做得真是不错。说起高德地图，想起那时候百度地图是通配，再想想百度的其它业务，顺便叹息一下它的没落——真是拿了一手好牌，打得稀烂（比如搜索和地图）；好容易盼走了对手（Google），却输给了时代（比如移动互联网）；起了个大早，赶了个晚集（比如AI）。</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>关于中国的铁路客运，效率依旧是没得说。从浙江的一个小城到广西桂林旅游，去程高铁，回城动车软卧，前者要快四成。两种不同的体验，但是共同点一句话说就是很快速、舒适。小时候绿皮火车的记忆慢慢淡忘，那时候车厢里挤满的人群，无比酸爽的味道，还有在铁路上行驶咯噔咯噔的响声，以及卫生间不可描述的卫生状况……而现在，整个过程都很舒适。</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:heading -->
-<h2>关于消费</h2>
-<!-- /wp:heading -->
-
-<!-- wp:paragraph -->
-<p>中国经济的三驾马车投资、消费和出口里面，回国后我最先感觉到的是，消费力普遍不足。不只是大宗商品，比如我家乡海边大量的空置房屋，甚至烂尾楼，就说一些普通的步行街，没有什么人气，当然，大城市的情况会好一些。消费这个东西是和经济密切相关的，而经济又是和信心密切相关的。</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>我问了问家人都使用什么电商平台，得到的答案各异。我是使用京东的，主要还是因为货品普遍靠得住，并且配送比较迅速，大部分两三天内就能收到，还有不少当日达，这在美国还是比较难做到的。现在成本的因素还是占据大头，但我相信如果中国的经济能慢慢地稳住回升，老百姓手里有钱的话，京东的配送优势就能更好地发挥出来了。</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>这个时代已经变成了一个普遍忧虑的时代，但是忧虑的主线还是老的三座大山：住房、教育和医疗。住房是如今这其中最大的问题，我想上一辈人借着改革开放、人口爆炸以及居民加杠杆的多重优势，获得了相当大的收益，但是这种收益我认为有很大一部分是时代的红利，而非个人能力。如今这个接力棒传不下去了，八零九零后就被迫成为了最后一棒的接盘侠。住房的问题每个人都在说，而教育方面，除去反内卷，我能看到的是一些幼儿园也开始公费化，这是整个社会的进步；医疗方面，我留意到药品价格被打下来了，但是没有医疗保险足够的覆盖，很多人还是因为一病返贫的忧虑而不敢花钱。一些思维开化一些的年轻人，在挣扎无效之后选择躺平，这些都是时代特有的烙印，我觉得舆论媒体需要包容，而非打压这样想法的人，毕竟从长远看，都是社会的进步。</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:heading -->
-<h2>关于投资</h2>
-<!-- /wp:heading -->
-
-<!-- wp:paragraph -->
-<p>我一直看好中国的发展，趁这次回来，想用人民币买一点基金。但是这个过程挺坎坷，折腾了我不少时间。这个恰好是和前面说的出行和基建完全相反。</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>银行就像一头大象，似乎笨重得难以跟上这个时代。举个例子，我想在国内买一点基金，通过工商银行的渠道，有无数的限制和烦人的手续。我连着跑了两趟银行也没有彻底搞定。这期间我的感觉就是，我的钱根本就不是我的钱——我取不出来，转不出去，买不了东西，做不了投资，全都有很烦人的上限，而且这个上限还很不容易改，做什么改动还要看流水，还要解释原因……</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>投资经理笑呵呵地服务，但是申购费居然要1.2%，而互联网平台（我用的财付通）只有它的1/10，一开始我得知这个还觉得是不是搞错了，差那么多钱，那银行还搞个屁？果断选择后者，果然整个流程非常顺利。当然，我因为不想开股票账户，就直接买基金，这个申购基金的流程要麻烦得多，连购入价都要等两天才能看到。</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>从长期投资的角度看，国内我置信程度最高的互联网公司就是腾讯，这次更坚定了我的想法。我经常说的一句话是，在港股市场如果有一笔闲置的钱，而且不知道买哪家公司，那就买腾讯。腾讯已经深入人们的生活，它的护城河可以说看不到边。阿里作为第二梯队，要差一些，尤其是在流量入口方面；当然，电商业务我觉得它是很难打赢拼多多的。除去它们，作为第三梯队，我觉得我能看得懂一些的还有携程。</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:heading -->
-<h2>关于医疗</h2>
-<!-- /wp:heading -->
-
-<!-- wp:paragraph -->
-<p>我本身有克罗恩病，这次因为肠梗阻被迫住了几天医院，有这么几个感受：一个是整体费用比较低，特别是药价，前面已经谈到了；第二个是医生上来就给用了大杀器的药物，比如针对中到重度感染的联合抗生素等等，对于我的轻度感染有杀鸡用牛刀的感觉。当然，我毕竟不是医生，但是我了解到大家都是谨慎为上，目标就是最快速度缓解症状、治疗疾病，这和我过往所理解的在医疗上权衡利弊的理念有所区别。</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>再有一些病房里的规定，让我觉得不太舒服。比如对于我这样一个血糖正常的年轻人，一天查六次血糖，每四小时一次，结果就是我睡觉也睡不好，我觉得也是似乎有点过度医疗了。</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:heading -->
-<h2>关于环境</h2>
-<!-- /wp:heading -->
-
-<!-- wp:paragraph -->
-<p>可能很多人已经忘记了当年雾霾的天空，PM2.5仿佛已经是一个遥远的回忆。这次回国，从下飞机开始空气质量就让人惊艳。能源结构的大换血和产业升级的效果有目共睹。除此以外，马路上的垃圾和随地吐痰等等情况也少了很多。不过来到郊区野外，还是能见到不少垃圾。</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>我是在小红书上面找的桂林本地旅行中介，没有任何购物环节，纯是跟车景点一个一个地玩，我们包车游览了完整的五个白天。桂林山水甲天下，我的桂林之行的过程也很顺利，感受非常好。和导游聊了聊，这两年内地和香港游客增加，但外国游客减少。希望国家之间的关系能够更健康和平稳，这样中国的旅游资源能够在世界范围内受到更多的欢迎。</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:heading -->
-<h2>关于美食</h2>
-<!-- /wp:heading -->
-
-<!-- wp:paragraph -->
-<p>中国文化的一个根基就是美食，我相信无论出国多少年，无论接受多少各个国家的食物，我始终是那个要归家的少年，而我的胃始终是中国胃。踏上中国的土地，敞开吃的第一顿不是大鱼大肉、山珍海味，而是油条、小笼包、稀饭和茶叶蛋。在美国也能吃到口味各异的中餐，但时隔七年能够吃到家乡的味道，仿佛旅程的仆仆风尘和满身疲惫都被瞬间治愈了。</p>
-<!-- /wp:paragraph -->]]></description>
-										<content:encoded><![CDATA[
-<p><img loading="lazy" width="800" height="450" class="wp-image-8075" style="width: 320px; float: right" src="/wp-content/uploads/2026/01/arrival.png" alt="" srcset="https://www.raychase.net/wp-content/uploads/2026/01/arrival.png 800w, https://www.raychase.net/wp-content/uploads/2026/01/arrival-300x169.png 300w, https://www.raychase.net/wp-content/uploads/2026/01/arrival-768x432.png 768w" sizes="(max-width: 800px) 100vw, 800px" />自我上次 2018 年回国已经过去超过 7 年了，这次回国呆了超过两周，感触还是很丰富的，整理得不够系统，简单把它们罗列下来。我虽然长期不生活在国内，但是我始终是中国人，也始终用简单的 “国内” 两字替代 “中国国内”，我非常热切地想了解中国国内的变化。当然，时间关系，我的观察不会很深刻，因此我的观点未必都是正确的。</p>
-
-
-
-<h2>关于出行</h2>
-
-
-
-<p>中国的基建搞得真的很棒，要说出行恐怕中国是最便捷的国家了。期间坐了公交、高铁、卧铺、游轮、出租、网约车，或者是干脆步行……都很方便。我想，这应该是得益于中国超强的基建能力。这是让我无比自豪的一点，虽说以前在国内待着的时候并没有深刻体会。</p>
-
-
-
-<p>关于网约车，我的记忆还停留在那个滴滴和快滴烧钱拉客的年代。后来我知道的是，滴滴独打天下了。如今我看到的是，滴滴也似乎未必能玩得过竞争对手了。因为它的竞争对手早就变了，已经是高德地图这样的流量入口。当年阿里下错了很多步棋，但是阿里没有下错高德地图这步棋，这是少有的流量入口应用。我拿高德地图搜网约车，就会显示一堆可选项，来自不同的网约车公司，接着直接对接支付宝，这个平台把端到端做得真是不错。说起高德地图，想起那时候百度地图是通配，再想想百度的其它业务，顺便叹息一下它的没落——真是拿了一手好牌，打得稀烂（比如搜索和地图）；好容易盼走了对手（Google），却输给了时代（比如移动互联网）；起了个大早，赶了个晚集（比如 AI）。</p>
-
-
-
-<p>关于中国的铁路客运，效率依旧是没得说。从浙江的一个小城到广西桂林旅游，去程高铁，回城动车软卧，前者要快四成。两种不同的体验，但是共同点一句话说就是很快速、舒适。小时候绿皮火车的记忆慢慢淡忘，那时候车厢里挤满的人群，无比酸爽的味道，还有在铁路上行驶咯噔咯噔的响声，以及卫生间不可描述的卫生状况……而现在，整个过程都很舒适。</p>
-
-
-
-<h2>关于消费</h2>
-
-
-
-<p>中国经济的三驾马车投资、消费和出口里面，回国后我最先感觉到的是，消费力普遍不足。不只是大宗商品，比如我家乡海边大量的空置房屋，甚至烂尾楼，就说一些普通的步行街，没有什么人气，当然，大城市的情况会好一些。消费这个东西是和经济密切相关的，而经济又是和信心密切相关的。</p>
-
-
-
-<p>我问了问家人都使用什么电商平台，得到的答案各异。我是使用京东的，主要还是因为货品普遍靠得住，并且配送比较迅速，大部分两三天内就能收到，还有不少当日达，这在美国还是比较难做到的。现在成本的因素还是占据大头，但我相信如果中国的经济能慢慢地稳住回升，老百姓手里有钱的话，京东的配送优势就能更好地发挥出来了。</p>
-
-
-
-<p>这个时代已经变成了一个普遍忧虑的时代，但是忧虑的主线还是老的三座大山：住房、教育和医疗。住房是如今这其中最大的问题，我想上一辈人借着改革开放、人口爆炸以及居民加杠杆的多重优势，获得了相当大的收益，但是这种收益我认为有很大一部分是时代的红利，而非个人能力。如今这个接力棒传不下去了，八零九零后就被迫成为了最后一棒的接盘侠。住房的问题每个人都在说，而教育方面，除去反内卷，我能看到的是一些幼儿园也开始公费化，这是整个社会的进步；医疗方面，我留意到药品价格被打下来了，但是没有医疗保险足够的覆盖，很多人还是因为一病返贫的忧虑而不敢花钱。一些思维开化一些的年轻人，在挣扎无效之后选择躺平，这些都是时代特有的烙印，我觉得舆论媒体需要包容，而非打压这样想法的人，毕竟从长远看，都是社会的进步。</p>
-
-
-
-<h2>关于投资</h2>
-
-
-
-<p>我一直看好中国的发展，趁这次回来，想用人民币买一点基金。但是这个过程挺坎坷，折腾了我不少时间。这个恰好是和前面说的出行和基建完全相反。</p>
-
-
-
-<p>银行就像一头大象，似乎笨重得难以跟上这个时代。举个例子，我想在国内买一点基金，通过工商银行的渠道，有无数的限制和烦人的手续。我连着跑了两趟银行也没有彻底搞定。这期间我的感觉就是，我的钱根本就不是我的钱——我取不出来，转不出去，买不了东西，做不了投资，全都有很烦人的上限，而且这个上限还很不容易改，做什么改动还要看流水，还要解释原因……</p>
-
-
-
-<p>投资经理笑呵呵地服务，但是申购费居然要 1.2%，而互联网平台（我用的财付通）只有它的 1/10，一开始我得知这个还觉得是不是搞错了，差那么多钱，那银行还搞个屁？果断选择后者，果然整个流程非常顺利。当然，我因为不想开股票账户，就直接买基金，这个申购基金的流程要麻烦得多，连购入价都要等两天才能看到。</p>
-
-
-
-<p>从长期投资的角度看，国内我置信程度最高的互联网公司就是腾讯，这次更坚定了我的想法。我经常说的一句话是，在港股市场如果有一笔闲置的钱，而且不知道买哪家公司，那就买腾讯。腾讯已经深入人们的生活，它的护城河可以说看不到边。阿里作为第二梯队，要差一些，尤其是在流量入口方面；当然，电商业务我觉得它是很难打赢拼多多的。除去它们，作为第三梯队，我觉得我能看得懂一些的还有携程。</p>
-
-
-
-<h2>关于医疗</h2>
-
-
-
-<p>我本身有克罗恩病，这次因为肠梗阻被迫住了几天医院，有这么几个感受：一个是整体费用比较低，特别是药价，前面已经谈到了；第二个是医生上来就给用了大杀器的药物，比如针对中到重度感染的联合抗生素等等，对于我的轻度感染有杀鸡用牛刀的感觉。当然，我毕竟不是医生，但是我了解到大家都是谨慎为上，目标就是最快速度缓解症状、治疗疾病，这和我过往所理解的在医疗上权衡利弊的理念有所区别。</p>
-
-
-
-<p>再有一些病房里的规定，让我觉得不太舒服。比如对于我这样一个血糖正常的年轻人，一天查六次血糖，每四小时一次，结果就是我睡觉也睡不好，我觉得也是似乎有点过度医疗了。</p>
-
-
-
-<h2>关于环境</h2>
-
-
-
-<p>可能很多人已经忘记了当年雾霾的天空，PM2.5 仿佛已经是一个遥远的回忆。这次回国，从下飞机开始空气质量就让人惊艳。能源结构的大换血和产业升级的效果有目共睹。除此以外，马路上的垃圾和随地吐痰等等情况也少了很多。不过来到郊区野外，还是能见到不少垃圾。</p>
-
-
-
-<p>我是在小红书上面找的桂林本地旅行中介，没有任何购物环节，纯是跟车景点一个一个地玩，我们包车游览了完整的五个白天。桂林山水甲天下，我的桂林之行的过程也很顺利，感受非常好。和导游聊了聊，这两年内地和香港游客增加，但外国游客减少。希望国家之间的关系能够更健康和平稳，这样中国的旅游资源能够在世界范围内受到更多的欢迎。</p>
-
-
-
-<h2>关于美食</h2>
-
-
-
-<p>中国文化的一个根基就是美食，我相信无论出国多少年，无论接受多少各个国家的食物，我始终是那个要归家的少年，而我的胃始终是中国胃。踏上中国的土地，敞开吃的第一顿不是大鱼大肉、山珍海味，而是油条、小笼包、稀饭和茶叶蛋。在美国也能吃到口味各异的中餐，但时隔七年能够吃到家乡的味道，仿佛旅程的仆仆风尘和满身疲惫都被瞬间治愈了。</p>
-<p><strong><font color="#ff0000">文章未经特殊标明皆为本人原创，未经许可不得用于任何商业用途，转载请保持完整性并注明来源链接 <a href="https://www.raychase.net/8072">《四火的唠叨》</a></font></strong></p><div class='yarpp yarpp-related yarpp-related-rss yarpp-template-list'>
-<!-- YARPP List -->
-<p>你可能也喜欢看：</p><ol>
-<li><a href="https://www.raychase.net/6470" rel="bookmark" title="美股市场上学到的道理">美股市场上学到的道理</a></li>
-<li><a href="https://www.raychase.net/6846" rel="bookmark" title="我的美股投资原则">我的美股投资原则</a></li>
-<li><a href="https://www.raychase.net/7365" rel="bookmark" title="闲聊投资：亲自体验和护城河">闲聊投资：亲自体验和护城河</a></li>
-<li><a href="https://www.raychase.net/195" rel="bookmark" title="Good Surrounding For Programmers">Good Surrounding For Programmers</a></li>
-<li><a href="https://www.raychase.net/6827" rel="bookmark" title="2021 年旅行的简单回顾">2021 年旅行的简单回顾</a></li>
-</ol>
-</div>
-]]></content:encoded>
-					
-					<wfw:commentRss>https://www.raychase.net/8072/feed</wfw:commentRss>
 			<slash:comments>2</slash:comments>
 		
 		
