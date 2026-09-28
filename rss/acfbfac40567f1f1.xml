@@ -12,7 +12,7 @@
 	<atom:link href="https://blog.jetbrains.com/kotlin/feed/" rel="self" type="application/rss+xml" />
 	<link>https://blog.jetbrains.com</link>
 	<description>Developer Tools for Professionals and Teams</description>
-	<lastBuildDate>Mon, 14 Sep 2026 13:16:26 +0000</lastBuildDate>
+	<lastBuildDate>Mon, 28 Sep 2026 09:38:30 +0000</lastBuildDate>
 	<language>en-US</language>
 	<sy:updatePeriod>
 	hourly	</sy:updatePeriod>
@@ -28,6 +28,341 @@
 	<height>32</height>
 </image> 
 	<item>
+		<title>A More Reliable Compilation Scheme for Kotlin Multiplatform Modules</title>
+		<link>https://blog.jetbrains.com/kotlin/2026/09/a-more-reliable-compilation-scheme-for-kotlin-multiplatform-modules/</link>
+		
+		<dc:creator><![CDATA[Aleksey Zamulla]]></dc:creator>
+		<pubDate>Mon, 28 Sep 2026 09:38:26 +0000</pubDate>
+				<category><![CDATA[compiler]]></category>
+		<category><![CDATA[experimental-features]]></category>
+		<category><![CDATA[kotlin-multiplatform]]></category>
+		<guid isPermaLink="false">https://blog.jetbrains.com/?post_type=kotlin&#038;p=742576</guid>
+
+					<description><![CDATA[The current compilation approach to Kotlin Multiplatform projects works, but sometimes can lead to unexpected or hard-to-predict behavior. For example: With Kotlin 2.5.0-Beta1, we introduced an optional &#8220;separate compilation&#8221; approach to KMP that solves both problems: make the compilation results consistent with IDE analysis, and point more consistently to problematic calls of library code from [&#8230;]]]></description>
+										<content:encoded><![CDATA[
+<p>The current compilation approach to Kotlin Multiplatform projects works, but sometimes can lead to unexpected or hard-to-predict behavior. For example:</p>
+
+
+
+<ul class="wp-block-list">
+<li>The IDE analysis disagrees with the compiler on an overload, type inference, or whether the code should compile at all – with the IDE being <strong>stricter</strong> than the compiler.</li>
+
+
+
+<li>Your <code>commonTest</code> code can unexpectedly call something from a platform source set, breaking your assumptions.</li>
+</ul>
+
+
+
+<p>With Kotlin 2.5.0-Beta1, we introduced an optional &#8220;separate compilation&#8221; approach to KMP that solves both problems: make the compilation results consistent with IDE analysis, and point more consistently to problematic calls of library code from common source sets. As a bonus, this approach enables us to implement <a href="https://kotlinlang.org/docs/gradle-compilation-and-caches.html#incremental-compilation" target="_blank" rel="noopener">incremental compilation</a> for common source sets.</p>
+
+
+
+<p>The separate compilation feature is <a href="https://kotlinlang.org/docs/components-stability.html#stability-levels-explained" target="_blank" rel="noopener">Experimental</a> and disabled by default. To opt in, add the following compiler option to your <code>gradle.properties</code> file (note the <a href="#known-issues">known issues</a>):</p>
+
+
+
+<pre class="EnlighterJSRAW">kotlin.kmp.separateCompilation=true</pre>
+
+
+
+<p>Let&#8217;s look closer at the problem and the solution.</p>
+
+
+
+<h2 class="wp-block-heading">How multiplatform declarations are resolved within a module</h2>
+
+
+
+<p>Within a module, multiplatform code performs predictably:</p>
+
+
+
+<pre class="EnlighterJSRAW">// jvmMain
+fun foo() {}
+
+// commonMain
+fun test() {
+    foo() // Unresolved reference in IDE and during compilation
+}</pre>
+
+
+
+<p>The compiler and the IDE agree: The code in <code>commonMain</code> is also compiled to other platforms, for example, to Kotlin/JS, and there might not be a <code>fun foo()</code> declaration in <code>jsMain</code>. <a href="https://kotlinlang.org/docs/multiplatform/multiplatform-expect-actual.html" target="_blank" rel="noopener">Expect/actual declarations</a> exist precisely to solve this problem: explicitly tie platform-specific declarations to common ones.</p>
+
+
+
+<p>You would expect that the reference is also flagged as unresolved when the <code>foo()</code> function is declared in a dependency (a module in the same project or a binary artifact like Kotlin standard library or <code>kotlinx-coroutines</code>). Unfortunately, with the current compilation scheme that&#8217;s where the IDE and the compiler disagree.</p>
+
+
+
+<h2 class="wp-block-heading">How multiplatform declarations are resolved between modules</h2>
+
+
+
+<p>To understand where the problems stem from, let&#8217;s look closer at the current compilation setup.</p>
+
+
+
+<h3 class="wp-block-heading">Kotlin Multiplatform compilation setup</h3>
+
+
+
+<p>In a KMP project, a module with common code usually consists of several source sets: in the example above it&#8217;s a shared source set (<code>commonMain</code>) and a platform source set for a declared target (<code>jvmMain</code> for Kotlin/JVM).</p>
+
+
+
+<p>With that setup, the compiler can produce the following artifacts:</p>
+
+
+
+<ul class="wp-block-list">
+<li>A platform artifact for each platform source set like <code>jvmMain</code> – <code>*.jar</code> on JVM, <code>*.klib</code> on other platforms.</li>
+
+
+
+<li>A metadata KLIB for each common or intermediate source set (like <code>commonMain</code> or <code>nativeMain</code>). A metadata KLIB contains all declarations from the compiled source set without bodies.</li>
+</ul>
+
+
+
+<p>So where do the problems start?</p>
+
+
+
+<h3 class="wp-block-heading">Common code is compiled against platform artifacts; IDE disagrees</h3>
+
+
+
+<p>During compilation of a platform source set, both the code inside it (<code>jvmMain</code>) <strong>and</strong> the code in all relevant shared source sets (<code>commonMain</code> and other <a href="https://kotlinlang.org/docs/multiplatform/multiplatform-hierarchy.html#default-hierarchy-template" target="_blank" rel="noopener">intermediate source sets</a>) is compiled against the platform artifacts of its dependencies. Here code from <code>commonMain</code> has a chance to implicitly resolve to a <code>jvmMain</code> declaration.</p>
+
+
+
+<p>If you expect this to happen, you&#8217;re probably fine. It would be more transparent and predictable, however, if <code>commonMain</code> could only call declarations from the dependency&#8217;s <code>commonMain</code> (as listed in the dependency&#8217;s metadata KLIB).</p>
+
+
+
+<p>This is exactly what the code analysis in IntelliJ IDEA already assumes. As <code>jvmMain</code> declarations are not included in the KLIB metadata, IntelliJ IDEA reports the unresolved reference error when <code>commonMain</code> refers to something not declared in common code explicitly:</p>
+
+
+
+<pre class="EnlighterJSRAW">// lib/jvmMain
+class Foo
+
+// app/commonMain
+fun main() {
+    Foo() // Unresolved reference in the IDE, no error during compilation
+}</pre>
+
+
+
+<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" fetchpriority="high" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/09/Current-compilation-with-IDEA-1.jpg" alt="" class="wp-image-742856"/></figure>
+
+
+
+<p>The same mechanism is also in play with <code>commonTest</code> source sets, because tests also &#8220;depend&#8221; on main code: <code>commonTest</code> compiled against <code>jvmMain</code> can successfully call a declaration from platform code, instead of being restricted to declarations in <code>commonMain</code>. IDE reports the same unresolved reference problem:</p>
+
+
+
+<pre class="EnlighterJSRAW">// app/jvmMain
+class Foo
+
+// app/commonTest
+fun main() {
+    Foo() // &quot;Unresolved reference&quot; in the IDE, no error during compilation
+}</pre>
+
+
+
+<p>Let&#8217;s see how separate compilation solves these problems.</p>
+
+
+
+<h2 class="wp-block-heading">How separate compilation solves the problem</h2>
+
+
+
+<p>KMP separate compilation makes the compiler behave stricter (aligning with the IDE expectation) when compiling common source sets of KMP projects. This makes the overall experience more predictable, although you may need to adjust your old code for stricter compile-time checks.</p>
+
+
+
+<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/09/Separate-compilation-1.jpg" alt="" class="wp-image-742867"/></figure>
+
+
+
+<p>Let&#8217;s look at specific code examples and what happens to them with the switch between compilation schemes.</p>
+
+
+
+<h3 class="wp-block-heading">Red code in IDE, no error during compilation</h3>
+
+
+
+<p>When you turn on separate compilation, this code stops compiling, because compiler now resolves common code calls strictly using metadata KLIB declarations:</p>
+
+
+
+<pre class="EnlighterJSRAW">// lib/jvmMain
+class Foo
+
+// app/commonMain
+fun main() {
+    Foo() // Unresolved reference in IDE, now also a compilation error
+}</pre>
+
+
+
+<p>The fix is to show an explicit connection: declare an <code>expect class</code> in <code>lib/commonMain</code> and make the platform <code>Foo</code> class an <code>actual class</code>:</p>
+
+
+
+<pre class="EnlighterJSRAW">// lib/commonMain
+expect class Foo()
+
+// lib/jvmMain
+actual class Foo
+
+// app/commonMain
+fun main() {
+    Foo() // ok
+}</pre>
+
+
+
+<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/09/Fixed-version-if-your-code-is-broken-by-separate-compilation.jpg" alt="" class="wp-image-742878"/></figure>
+
+
+
+<p>Same for <code>commonTest</code>: with separate compilation, the test code won&#8217;t resolve to a platform call in <code>jvmMain</code>. If that&#8217;s what you want to test, declare the corresponding <code>expect</code> in <code>commonMain</code>:</p>
+
+
+
+<pre class="EnlighterJSRAW">// app/jvmMain
+actual class Foo
+
+// app/commonMain
+expect class Foo
+
+// app/commonTest
+fun main() {
+    Foo() // Ok, calls Foo from jvmMain
+}</pre>
+
+
+
+<h3 class="wp-block-heading">IDE and compiler don&#8217;t agree on selected overload</h3>
+
+
+
+<p>When several overloads are declared in <code>lib/commonMain</code> and <code>lib/jvmMain</code>, the IDE currently interprets the call from <code>app/commonMain</code> differently from the compiler:</p>
+
+
+
+<pre class="EnlighterJSRAW">// lib/commonMain
+fun foo(x: Any) = &quot;common&quot;
+
+// lib/jvmMain
+fun foo(x: String) = &quot;platform&quot;
+
+// app/commonMain
+fun main() {
+    // &quot;Go to declaration&quot; on foo() jumps to lib/commonMain,
+    // but at runtime &quot;platform&quot; is printed
+    println(foo(&quot;&quot;))
+}</pre>
+
+
+
+<p>The IDE resolves the <code>foo("")</code> call to the declaration <code>fun foo(x: Any)</code> in <code>lib/commonMain</code>, as it assumes that common code can only depend on common declarations. But during the actual compilation <code>app/commonMain</code> currently sees both declarations and chooses the more specific overload <code>fun foo(x: String)</code>. At runtime, &#8220;platform&#8221; is printed.</p>
+
+
+
+<p>With the new compilation scheme, the call is resolved to <code>fun foo(x: Any)</code> in <code>lib/commonMain</code> and at runtime, and &#8220;common&#8221; is printed.</p>
+
+
+
+<h3 class="wp-block-heading">Unexpected type inference</h3>
+
+
+
+<p>A trickier problem can occur when the error is triggered not at the <code>app/commonMain</code> call site, but in platform code. In the following example the IDE actually sees no problem, but the JVM compilation fails.</p>
+
+
+
+<p><code>actual</code> classes are allowed to have different supertypes than their <code>expect</code> counterparts, so you can reasonably arrive at the following code structure:</p>
+
+
+
+<pre class="EnlighterJSRAW">// eventsLib/commonMain
+interface Event { val name: String }
+
+expect class ClickEvent(target: String) : Event { override val name: String }
+expect class ScrollEvent(offset: Int) : Event { override val name: String }
+
+// eventsLib/jvmMain — serialized events get queued or stored in a session
+actual class ClickEvent actual constructor(target: String) : Event, Serializable { /* ... */ }
+actual class ScrollEvent actual constructor(offset: Int) : Event, Serializable { /* ... */ }
+
+// app/commonMain
+fun currentEvent() = if (clicked()) ClickEvent(&quot;buy&quot;) else ScrollEvent(120)
+
+fun report() = currentEvent().name // e: Unresolved reference &#039;name&#039; only on the JVM</pre>
+
+
+
+<p>The IDE only matches <code>commonMain</code> declarations, which allows it to (correctly) infer the return type of <code>currentEvent()</code> as <code>Event</code> and resolve the <code>.name</code> reference.</p>
+
+
+
+<p>On JVM, however, the library declares an additional supertype for each <code>actual</code> class. When compiling <code>app</code> for the JVM, the compiler currently resolves common code against the <code>eventsLib</code> JAR which has the <code>eventsLib/jvmMain</code> version of the classes. With the two supertypes, the return type inference for the <code>currentEvent()</code> call arrives at <code>Any</code>, which doesn&#8217;t have a <code>.name</code>, and the JVM compilation fails.</p>
+
+
+
+<p>With the separate compilation enabled, <code>app/commonMain</code> code is resolved only against <code>eventsLib/commonMain</code> declarations. So when compiling the JVM target of <code>app</code>, the compiler already has the resolved common code and has inferred the <code>Event</code> return type for the <code>currentEvent()</code> function. The JVM compilation runs separately, doesn&#8217;t have to infer anything, and finishes successfully.</p>
+
+
+
+<h2 class="wp-block-heading">How to enable separate compilation</h2>
+
+
+
+<p>The separate compilation feature is <a href="https://kotlinlang.org/docs/components-stability.html#stability-levels-explained" target="_blank" rel="noopener">Experimental</a> and disabled by default. To opt in, add the following compiler option to your <code>gradle.properties</code> file (note the known issues below):</p>
+
+
+
+<pre class="EnlighterJSRAW">kotlin.kmp.separateCompilation=true</pre>
+
+
+
+<h2 class="wp-block-heading" id="known-issues">Known issues</h2>
+
+
+
+<p>For separate compilation to work correctly in KMP projects, it is important that authors of multiplatform libraries publish the metadata KLIBs. This is the default behavior for publishing tasks of the KMP Gradle plugin, but the new compilation scheme makes metadata KLIBs essential.</p>
+
+
+
+<p>There are some known issues with KMP separate compilation that are still being fixed:</p>
+
+
+
+<ul class="wp-block-list">
+<li>Some problems with commonization of cinterops (like <a href="https://youtrack.jetbrains.com/issue/KT-88178" target="_blank" rel="noopener">KT-88178</a> or <a href="https://youtrack.jetbrains.com/issue/KT-41509" target="_blank" rel="noopener">KT-41509</a>). These are unlikely to affect an average KMP project, but enable the separate compilation mode with caution if you use <a href="https://kotlinlang.org/docs/native-c-interop.html" target="_blank" rel="noopener">C interoperability</a>.</li>
+
+
+
+<li>KMP modules with common source sets and a single declared target are <strong>not</strong> affected by separate compilation for now.</li>
+
+
+
+<li>Various smaller issues such as <a href="https://youtrack.jetbrains.com/issue/KT-88148" target="_blank" rel="noopener">KT-88148</a>.</li>
+</ul>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
 		<title>Kotlin 2.4.20 Released</title>
 		<link>https://blog.jetbrains.com/kotlin/2026/09/kotlin-2-4-20-released/</link>
 		
@@ -81,7 +416,7 @@
 
 
 <figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
-<iframe title="What&#039;s New in Kotlin 2.4.20" src="https://www.youtube.com/embed/UhRfN7fx5rs?feature=oembed" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe loading="lazy" title="What&#039;s New in Kotlin 2.4.20" src="https://www.youtube.com/embed/UhRfN7fx5rs?feature=oembed" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div></figure>
 
 
@@ -335,7 +670,7 @@ settings:
 
 
 
-<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" fetchpriority="high" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/09/Wasm-app.png" alt="" class="wp-image-736383" /></figure>
+<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/09/Wasm-app.png" alt="" class="wp-image-736383" /></figure>
 
 
 
@@ -377,7 +712,7 @@ settings:
 
 
 
-<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/09/Diagnostics-before-and-after-2.png" alt="" class="wp-image-736410" /></figure>
+<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/09/Diagnostics-before-and-after-2.png" alt="" class="wp-image-736410" /></figure>
 
 
 
@@ -3111,181 +3446,6 @@ fun securityFilterChain(http: HttpSecurity): SecurityFilterChain =
 
 
 <p>Ultimately, securing Spring Boot APIs with OAuth2 and JWT depends on careful design, explicit configuration, and a clear understanding of how tokens, scopes, and identities are validated and enforced. Kotlin complements this by promoting null safety, immutability, and concise configuration, helping reduce misconfigurations and overlooked edge cases.</p>
-]]></content:encoded>
-					
-		
-		
-			</item>
-		<item>
-		<title>KotlinLLM is Going Open Source </title>
-		<link>https://blog.jetbrains.com/research/2026/07/kotlinllm-open-source/</link>
-		
-		<dc:creator><![CDATA[Anastasia Birillo]]></dc:creator>
-		<pubDate>Tue, 28 Jul 2026 07:50:41 +0000</pubDate>
-		<featuredImage>https://blog.jetbrains.com/wp-content/uploads/2026/07/JB-social-BlogFeatured-1280x720-1-8.png</featuredImage>		<product ><![CDATA[kotlin]]></product>
-		<category><![CDATA[kotlin]]></category>
-		<category><![CDATA[research]]></category>
-		<category><![CDATA[kotlinllm]]></category>
-		<category><![CDATA[research-prototype]]></category>
-		<guid isPermaLink="false">https://blog.jetbrains.com/?post_type=research&#038;p=724665</guid>
-
-					<description><![CDATA[TL;DR KotlinLLM is now public. It&#8217;s a research prototype for delegating runtime logic to an LLM from Kotlin code. Instead of calling an LLM on every request or running a separate agent, you can write an explicit Kotlin call. Its body is generated Kotlin source code, and that code is updated as your application hits [&#8230;]]]></description>
-										<content:encoded><![CDATA[
-<h2 class="wp-block-heading">TL;DR</h2>
-
-
-
-<p><strong>KotlinLLM is now public</strong>. It&#8217;s a <strong>research prototype</strong> for delegating runtime logic to an LLM from Kotlin code. Instead of calling an LLM on every request or running a separate agent, you can write an explicit Kotlin call. Its body is <strong>generated Kotlin source code</strong>, and that code is updated as your application hits new runtime scenarios.</p>
-
-
-
-<p>👉 <a style="color:#6B57FF;" href="https://github.com/JetBrains-Research/kotlinllm-plugin" target="_blank" rel="noreferrer noopener"><strong>Check it out</strong></a>&nbsp;</p>
-
-
-
-<p>👉 <strong>KotlinConf 2026 <a style="color:#6B57FF;" href="https://kotlinconf.com/talks/1085233/" target="_blank" rel="noopener">talk</a></strong></p>
-
-
-
-<h2 class="wp-block-heading">What is KotlinLLM?</h2>
-
-
-
-<p>KotlinLLM is an <strong>IntelliJ IDEA plugin</strong> for Kotlin/JVM projects. It adds a language feature we call <strong>Smart macros</strong>. A Smart macro is a regular Kotlin function call whose body is generated Kotlin code. The public API has the following two Smart macros:</p>
-
-
-
-<ul class="wp-block-list">
-<li><strong><code>asLlm&lt;F, T&gt;(from, hint)</code></strong> converts an input of type F into a typed value T (data class, enum, list, or primitive). Use it to parse unstructured or semi-structured data into typed Kotlin values at runtime.</li>
-
-
-
-<li><strong><code>mockLlm&lt;T&gt;()</code></strong> generates a stateful implementation of an interface T. Its behavior depends on which methods are called on it, so it works as a test double that you don&#8217;t have to write by hand.</li>
-</ul>
-
-
-
-<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="enlighter" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// One level of abstraction higher: describe intent, let KotlinLLM fill in the logic.
-val issuesApiUrl: String = asLlm(repoInput, hint = "GitHub API URL: get all issues, including closed")
-val issues: List&lt;Issue> = asLlm(response, hint = "Return all beginner-friendly issues for this repository")</pre>
-
-
-
-<p>The behavior comes from actual runtime usage rather than being fully specified before the program runs. The call site stays compact and explicit: a clear, keyword-like API over generated code.</p>
-
-
-
-<h2 class="wp-block-heading">The problem it solves</h2>
-
-
-
-<p>In software engineering, LLMs are used during <strong>development</strong>, for code completion, code generation, and program comprehension. Using an LLM at the <strong>runtime</strong> of a compiled application is less common, and the existing options have clear trade-offs:</p>
-
-
-
-<ul class="wp-block-list">
-<li><strong>Direct runtime delegation</strong> (calling the model on every invocation) is slow, non-deterministic, and costly. It also makes the application depend on an LLM service at runtime.</li>
-
-
-
-<li><strong>External agent workflows </strong>keep the generated logic outside the codebase, where it&#8217;s harder to review, test, and ship.</li>
-
-
-
-<li>Most prior work (e.g. <a href="https://arxiv.org/abs/2405.08965" target="_blank" rel="noopener">byLLM</a>, <a href="https://openreview.net/forum?id=E7ZZRnBQU7" target="_blank" rel="noopener">nightjar</a>, <a href="https://arxiv.org/abs/2408.01055" target="_blank" rel="noopener">Healer</a>) targets <strong>interpreted languages</strong> like Python, not a compiled, statically typed language like Kotlin.</li>
-</ul>
-
-
-
-<p>KotlinLLM is built around three properties:</p>
-
-
-
-<ul class="wp-block-list">
-<li><strong>Explicit</strong> – the call site shows that a feature is LLM-backed, so it&#8217;s visible in code review.</li>
-
-
-
-<li><strong>Persistent</strong> – generated behavior is saved as an ordinary Kotlin source, not kept only in the runtime session. It can be committed, reviewed, tested, and distributed like any other code.</li>
-
-
-
-<li><strong>Portable</strong> – once generated, the code runs as plain Kotlin without the plugin. For scenarios that are already covered, there&#8217;s no further LLM call, so no added latency or cost, and the result is reproducible.</li>
-</ul>
-
-
-
-<h2 class="wp-block-heading">Does it actually work?</h2>
-
-
-
-<p>We tested the approach on two Kotlin/JVM projects:</p>
-
-
-
-<ul class="wp-block-list">
-<li><strong>An adapted Spring Petclinic Kotlin</strong> – 18 <code>asLlm</code> call sites, <strong>24/24</strong> application scenarios completed after Smart macro evolution, with a <strong>100% hot-reload success rate</strong> and compilation/redefinition adding ~1% of total runtime overhead.</li>
-
-
-
-<li><strong>A synthetic &#8220;GitHub Beginner Issue Radar&#8221;</strong> – parsing real GitHub issue data across 20 repositories (30k+ issues), reaching <strong>~0.89 recall</strong> on ground-truth beginner labels.</li>
-</ul>
-
-
-
-<p>These results show that persistent runtime evolution for compiled Kotlin is feasible. The evaluation also documents the current limits.</p>
-
-
-
-<h2 class="wp-block-heading">We&#8217;re making it public&nbsp;</h2>
-
-
-
-<p>KotlinLLM is <strong>open source</strong> under the <strong>Apache License 2.0</strong>. The repository contains:</p>
-
-
-
-<ul class="wp-block-list">
-<li>The IntelliJ plugin prototype and the stable Smart macro API.</li>
-
-
-
-<li>Runnable <strong>example projects</strong> (GitHub Issue Radar, an adapted Petclinic), including <em>committed generated sources,</em> so you can inspect what the LLM produced and run it as ordinary Kotlin.</li>
-
-
-
-<li>The <strong>KotlinConf2026 talk <a style="color:#6B57FF;" href="https://www.youtube.com/watch?v=tmPZajBUsKg" target="_blank" rel="noopener">recording </a></strong> and the <strong>theoretical <a style="color:#6B57FF;" href="https://github.com/JetBrains-Research/kotlinllm-plugin/blob/main/thesis.pdf" target="_blank" rel="noopener">write-up</a> </strong> with the full design rationale and evaluation.</li>
-</ul>
-
-
-
-<h2 class="wp-block-heading">Try it and tell us what you think&nbsp;</h2>
-
-
-
-<p>KotlinLLM is a <strong>research prototype</strong>, so feedback is useful at this stage. A few ways to help:</p>
-
-
-
-<ul class="wp-block-list">
-<li><strong>Start and <a style="color:#6B57FF;" href="https://github.com/JetBrains-Research/kotlinllm-plugin" target="_blank" rel="noopener">explore the repo</a></strong></li>
-
-
-
-<li><strong>Try it on your own Kotlin/JVM project</strong>. Add the <code>KotlinLLM.kt</code> API file, launch with the <em>Run with KotlinLLM</em> executor, and let the Smart macros evolve. Setup steps are in the README.&nbsp;</li>
-
-
-
-<li><strong>Open issues</strong> for anything you run into: rough edges, unexpected LLM behavior, missing cases, or behavior you&#8217;d expect to be different.</li>
-
-
-
-<li><strong>Send PRs with use cases.</strong> Real scenarios where <code>asLlm/mockLlm</code> work well – or break – are the most useful. New examples, target types, and agent tools are all welcome.</li>
-</ul>
-
-
-
-<p>If you find a place where runtime logic delegation fits your code, open an issue. If you build something with it, send a PR.</p>
 ]]></content:encoded>
 					
 		

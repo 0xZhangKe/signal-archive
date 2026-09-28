@@ -12,7 +12,7 @@
 	<atom:link href="https://www.schneier.com/feed/" rel="self" type="application/rss+xml" />
 	<link>https://www.schneier.com/</link>
 	<description></description>
-	<lastBuildDate>Fri, 25 Sep 2026 21:08:35 +0000</lastBuildDate>
+	<lastBuildDate>Mon, 28 Sep 2026 11:03:31 +0000</lastBuildDate>
 	<language>en-US</language>
 	<sy:updatePeriod>
 	hourly	</sy:updatePeriod>
@@ -28,6 +28,39 @@
 	<height>32</height>
 </image> 
 <site xmlns="com-wordpress:feed-additions:1">182601345</site>	<item>
+		<title>New Attack Against RSA</title>
+		<link>https://www.schneier.com/blog/archives/2026/09/new-attack-against-rsa.html</link>
+					<comments>https://www.schneier.com/blog/archives/2026/09/new-attack-against-rsa.html#comments</comments>
+		
+		<dc:creator><![CDATA[Bruce Schneier]]></dc:creator>
+		<pubDate>Mon, 28 Sep 2026 11:02:58 +0000</pubDate>
+				<category><![CDATA[Uncategorized]]></category>
+		<category><![CDATA[academic papers]]></category>
+		<category><![CDATA[cryptography]]></category>
+		<category><![CDATA[forgery]]></category>
+		<category><![CDATA[RSA]]></category>
+		<guid isPermaLink="false">https://www.schneier.com/?p=72687</guid>
+
+					<description><![CDATA[<p>ArsTechnica is <a href="https://arstechnica.com/security/2026/09/theres-a-new-way-to-break-rsa-thats-faster-than-anything-weve-seen-before/">reporting</a> on a &#8220;new&#8221; attack against RSA, one that bypasses factoring.</p>
+<p>First, this attack isn&#8217;t new. The original research is from <a href="https://eprint.iacr.org/2007/424">2007</a>. What is new is the implementation.</p>
+<p>Second, it is a forgery attack. It allows an attacker to forge digital signatures. It does not recover the private key from the public key.</p>
+<p>Third, the attack only works against pure signatures. That is, signatures without any formatting or padding. This is not generally how we use RSA in practice.</p>
+<p>Fourth, speed is all relative. This is not a polynomial-time algorithm; it&#8217;s a subexponential-time algorithm. But it is somewhat faster than factoring. The authors were able to forge messages for 1024-bit RSA with 1380 CPU core-years (over five real-world months)...</p>]]></description>
+										<content:encoded><![CDATA[<p>ArsTechnica is <a href="https://arstechnica.com/security/2026/09/theres-a-new-way-to-break-rsa-thats-faster-than-anything-weve-seen-before/">reporting</a> on a &#8220;new&#8221; attack against RSA, one that bypasses factoring.</p>
+<p>First, this attack isn&#8217;t new. The original research is from <a href="https://eprint.iacr.org/2007/424">2007</a>. What is new is the implementation.</p>
+<p>Second, it is a forgery attack. It allows an attacker to forge digital signatures. It does not recover the private key from the public key.</p>
+<p>Third, the attack only works against pure signatures. That is, signatures without any formatting or padding. This is not generally how we use RSA in practice.</p>
+<p>Fourth, speed is all relative. This is not a polynomial-time algorithm; it&#8217;s a subexponential-time algorithm. But it is somewhat faster than factoring. The authors were able to forge messages for 1024-bit RSA with 1380 CPU core-years (over five real-world months).</p>
+<p>The authors have a <a href="https://github.com/ucsd-hacc/NSNFSSSFSFN">webpage</a> that explains the context much better than the article. And here&#8217;s the <a href="https://eprint.iacr.org/2026/2131.pdf">paper</a>.</p>
+<p>EDITED TO ADD: Slashdot <a href="https://it.slashdot.org/story/26/09/24/1652228/theres-a-new-way-to-break-rsa-encryption">thread</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.schneier.com/blog/archives/2026/09/new-attack-against-rsa.html/feed/</wfw:commentRss>
+			<slash:comments>3</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">72687</post-id>	</item>
+		<item>
 		<title>Friday Squid Blogging: Participatory Squid Dissection in October in Tennessee</title>
 		<link>https://www.schneier.com/blog/archives/2026/09/friday-squid-blogging-participatory-squid-dissection-in-october-in-tennessee.html</link>
 					<comments>https://www.schneier.com/blog/archives/2026/09/friday-squid-blogging-participatory-squid-dissection-in-october-in-tennessee.html#comments</comments>
@@ -52,7 +85,7 @@
 ]]></content:encoded>
 					
 					<wfw:commentRss>https://www.schneier.com/blog/archives/2026/09/friday-squid-blogging-participatory-squid-dissection-in-october-in-tennessee.html/feed/</wfw:commentRss>
-			<slash:comments>27</slash:comments>
+			<slash:comments>30</slash:comments>
 		
 		
 		<post-id xmlns="com-wordpress:feed-additions:1">72684</post-id>	</item>
@@ -282,27 +315,5 @@
 		
 		
 		<post-id xmlns="com-wordpress:feed-additions:1">72654</post-id>	</item>
-		<item>
-		<title>Fake CAPTCHA Scams</title>
-		<link>https://www.schneier.com/blog/archives/2026/09/fake-captcha-scams.html</link>
-					<comments>https://www.schneier.com/blog/archives/2026/09/fake-captcha-scams.html#comments</comments>
-		
-		<dc:creator><![CDATA[Bruce Schneier]]></dc:creator>
-		<pubDate>Wed, 16 Sep 2026 11:25:26 +0000</pubDate>
-				<category><![CDATA[Uncategorized]]></category>
-		<category><![CDATA[captchas]]></category>
-		<category><![CDATA[scams]]></category>
-		<guid isPermaLink="false">https://www.schneier.com/?p=72561</guid>
-
-					<description><![CDATA[<p>New <a href="https://www.malwarebytes.com/cybersecurity/basics/fake-captcha-scams">variant</a> of an old scam: Use the framing of a CAPTCHA to get an unsuspecting user to download and run a malicious program.</p>
-]]></description>
-										<content:encoded><![CDATA[<p>New <a href="https://www.malwarebytes.com/cybersecurity/basics/fake-captcha-scams">variant</a> of an old scam: Use the framing of a CAPTCHA to get an unsuspecting user to download and run a malicious program.</p>
-]]></content:encoded>
-					
-					<wfw:commentRss>https://www.schneier.com/blog/archives/2026/09/fake-captcha-scams.html/feed/</wfw:commentRss>
-			<slash:comments>11</slash:comments>
-		
-		
-		<post-id xmlns="com-wordpress:feed-additions:1">72561</post-id>	</item>
 	</channel>
 </rss>
