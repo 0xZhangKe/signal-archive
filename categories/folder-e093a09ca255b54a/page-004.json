@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "4a8d30838241d2b37db97a06",
+      "title": "Finding Java Thread Leaks With JDK Flight Recorder and a Bit Of SQL",
+      "summary": "The other day at work, we had a situation where we suspected a thread leak in one particular service, i.e. code which continuously starts new threads, without taking care of ever stopping them again. Each thread requires a bit of memory for its stack space, so starting an unbounded number of threads can be considered as a form of memory leak, causing your a…",
+      "image": null,
+      "publishedAt": "2023-02-28T21:16:10Z",
+      "sourceId": "d159169f81b06175",
+      "sourceTitle": "morling.dev -- Blog",
+      "link": "https://www.morling.dev/blog/finding-java-thread-leaks-with-jdk-flight-recorder-and-bit-of-sql/",
+      "detailPath": "articles/4a8d30838241d2b37db97a06.json"
+    },
+    {
       "id": "e1381918bb99a0e43cc5477a",
       "title": "Will training data matter anymore for self-driving cars?",
       "summary": "The coolest thing about these new LLM’s is their ability to handle few-shot learning. Give it a few examples, and GPT-3 will extrapolate that out to whatever else you throw its way. There’s no need for hundreds of thousands of pieces of training data",
@@ -648,17 +659,6 @@
       "sourceTitle": "Weishu's Notes",
       "link": "http://weishu.me/2021/09/13/what-is-root/",
       "detailPath": "articles/8b96460f8013af0cf6990b99.json"
-    },
-    {
-      "id": "2e3ae10790e5339a7067a8d1",
-      "title": "Resource Bundle Look-ups in Modular Java Applications",
-      "summary": "Table of Contents The ResourceBundleProvider Interface Resource Bundle Providers Running on the Classpath Discussion and Wrap-Up The ResourceBundle class is Java’s workhorse for managing and retrieving locale specific resources, such as error messages of internationalized applications. With the advent of the module system in Java 9, specifics around discove…",
-      "image": null,
-      "publishedAt": "2021-08-29T16:30:00Z",
-      "sourceId": "d159169f81b06175",
-      "sourceTitle": "morling.dev -- Blog",
-      "link": "https://www.morling.dev/blog/resource-bundle-lookups-in-modular-java-applications/",
-      "detailPath": "articles/2e3ae10790e5339a7067a8d1.json"
     }
   ]
 }

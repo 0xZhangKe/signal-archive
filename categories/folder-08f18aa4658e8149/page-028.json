@@ -1,6 +1,50 @@
 {
   "items": [
     {
+      "id": "0136eb2eae1877cb82a3d3f0",
+      "title": "吳清友的生命之旅",
+      "summary": "輩分較小的吳清友並沒有因為生長於貧困環境，而從小就決心要力爭上游",
+      "image": null,
+      "publishedAt": "2026-05-06T14:03:06Z",
+      "sourceId": "50bce2ced06e6077",
+      "sourceTitle": "Feed Me, Haruo",
+      "link": "https://haruowang.vercel.app/pov/other/eslite.html",
+      "detailPath": "articles/0136eb2eae1877cb82a3d3f0.json"
+    },
+    {
+      "id": "52fe5ee6ae0d1797675e6ddb",
+      "title": "你不能不知道的台藝圖文系友",
+      "summary": "陳敦化｜呂秀蘭｜黨宜心｜陳俊良｜陳青琳｜許哲寧｜趙琍｜張軒豪｜林花｜謝捲子｜呂柏勳｜張家瑋",
+      "image": null,
+      "publishedAt": "2026-05-06T14:03:06Z",
+      "sourceId": "50bce2ced06e6077",
+      "sourceTitle": "Feed Me, Haruo",
+      "link": "https://haruowang.vercel.app/pov/other/gca.html",
+      "detailPath": "articles/52fe5ee6ae0d1797675e6ddb.json"
+    },
+    {
+      "id": "74d2ed0771d0fe39815a829a",
+      "title": "菊地信義的《裝幀人生》",
+      "summary": "「說要引退，然後全部都丟給其他人；或是因為生病，突然就離開人世的話，其實這樣也蠻輕鬆的。但實際上並不會這樣。」",
+      "image": null,
+      "publishedAt": "2026-05-06T14:03:06Z",
+      "sourceId": "50bce2ced06e6077",
+      "sourceTitle": "Feed Me, Haruo",
+      "link": "https://haruowang.vercel.app/pov/other/kikuchi.html",
+      "detailPath": "articles/74d2ed0771d0fe39815a829a.json"
+    },
+    {
+      "id": "d67e574001b299aa47869fad",
+      "title": "moom bookshop參訪心得",
+      "summary": "如果你追求品味或特立獨行，如果你熱愛攝影藝術，如果你單純想過上一個不同於以往的週末，moom bookshop都將是一個適合走訪的去處",
+      "image": "https://haruowang.vercel.app/other/mo1.webp",
+      "publishedAt": "2026-05-06T14:03:06Z",
+      "sourceId": "50bce2ced06e6077",
+      "sourceTitle": "Feed Me, Haruo",
+      "link": "https://haruowang.vercel.app/pov/other/moom.html",
+      "detailPath": "articles/d67e574001b299aa47869fad.json"
+    },
+    {
       "id": "e83e0d417b555e2cd9eff2c5",
       "title": "《重寫臺灣百年新詩史》筆記",
       "summary": "相較《台灣新詩史》的「文本主義」，《台灣現代詩史》的「文本至上」更注重文本自身，被本文作者所認同，並收錄了沒那麼主流，曾是夫妻檔的張健和蘇白宇之作品。而洛夫則同時受到兩本詩史之肯定",
@@ -615,50 +659,6 @@
       "sourceTitle": "Android Performance",
       "link": "https://androidperformance.com/2026/05/04/Android-Perfetto-15-Boot-And-Long-Running-Field-Tracing/",
       "detailPath": "articles/1a3b16f394c9aa967643014c.json"
-    },
-    {
-      "id": "3dd9b1ff15b3fbad9583a262",
-      "title": "Android Perfetto 系列 14：heapprofd 与内存 Profiling",
-      "summary": "内存问题最麻烦的地方在于：数字涨了，不代表马上能知道谁在涨。 dumpsys meminfo 能告诉你 RSS/PSS，Java heap dump 能告诉你对象保留关系，但 JNI/C++、Skia/Bitmap 的 CPU 侧分配、播放器里的 native wrapper 这些问题，经常还需要知道“哪个调用栈发起了 malloc/new”。 这一篇讲 heapprofd。它的价值是把 native allocation、free 和调用栈放进 Perfetto Trace，再和业务事件、线程调度、Binder 放到同一个时间轴里看。 heapprofd 适合放在趋势确认之后。先用 RSS/PSS、meminfo 或线上监控确认趋势，再用 heapprofd 找 malloc/new 调用栈；这篇不解决 J…",
-      "image": null,
-      "publishedAt": "2026-05-04T02:14:00Z",
-      "sourceId": "1aa1837ca33d8d55",
-      "sourceTitle": "Android Performance",
-      "link": "https://androidperformance.com/2026/05/04/Android-Perfetto-14-Native-Heap-Heapprofd/",
-      "detailPath": "articles/3dd9b1ff15b3fbad9583a262.json"
-    },
-    {
-      "id": "7efd1da8c1de0933fa643668",
-      "title": "Android Perfetto 系列 13：Perfetto SDK、Track Event 与 App 现场 Trace",
-      "summary": "系统 Trace 能告诉你线程什么时候运行、CPU 跑在哪个核、FrameTimeline 哪一帧超时；在启用 Binder/ftrace/sched 证据时，也能还原 Binder 调用和等待线索。但它不知道播放器正在解哪一个 frame id，也不知道游戏引擎正在加载哪个 scene，更不知道一个业务任务在队列里排了多久。 这一篇只回答一个问题：业务语义怎么进入 Trace。系统能告诉你主线程慢了，Track Event 负责告诉你当时在 decode 哪一帧、哪个队列堵住、哪个请求跨线程流转。两边合在一起，才能把“主线程慢了 18ms”缩小到 frame 1082 附近的纹理上传候选区间，再结合 RenderThread/HWUI、GPU 和 FrameTimeline 继续验证。 文章按接入的实际顺序…",
-      "image": null,
-      "publishedAt": "2026-05-04T02:13:00Z",
-      "sourceId": "1aa1837ca33d8d55",
-      "sourceTitle": "Android Performance",
-      "link": "https://androidperformance.com/2026/05/04/Android-Perfetto-13-Track-Event-SDK/",
-      "detailPath": "articles/7efd1da8c1de0933fa643668.json"
-    },
-    {
-      "id": "680345d5a59550c7fdf8d2ce",
-      "title": "Android Perfetto 系列 12：Trace 数据流与丢失排查",
-      "summary": "打开一份 Trace 后，最麻烦的情况是：文件里看起来有数据，但中间丢过。UI 里还能看到轨道，SQL 也能查出一些行，可线程状态少了一段、进程名对不上、某些 Track Event 消失了。继续分析下去，结论会越来越像猜。 SQL 只能分析 Trace 里还存在的证据。这个问题不处理好，后面的查询写得再漂亮，也只是把一份缺证据的 Trace 包装成表格。 第 02 篇已经讲过怎么抓，第 11 篇已经讲过怎么查 SQL；这一篇盯住一个问题：Trace 在哪里丢过数据、影响哪些结论、下一次抓取该怎么改配置。 文章顺着数据从内核走到 Trace 文件的链路，逐段定位丢点：ftrace、producer 共享内存、central buffer、增量状态、flush。每一段的丢法不一样，补救方式也不一样。最后给一个在…",
-      "image": null,
-      "publishedAt": "2026-05-04T02:12:00Z",
-      "sourceId": "1aa1837ca33d8d55",
-      "sourceTitle": "Android Performance",
-      "link": "https://androidperformance.com/2026/05/04/Android-Perfetto-12-Trace-Dataflow-And-Loss/",
-      "detailPath": "articles/680345d5a59550c7fdf8d2ce.json"
-    },
-    {
-      "id": "6a4ce8db6e8415767444c6d9",
-      "title": "Android Perfetto 系列 11：PerfettoSQL、Trace Processor 与回归检测",
-      "summary": "拿到一份卡顿 Trace，大部分人的第一反应（包括早些年的我）是打开 Perfetto UI，框一段时间，看主线程、RenderThread、CPU 状态，再截几张图写结论。这个办法处理眼前问题没什么毛病，但很难回答后面的追问：换一份 Trace 是不是同样结论？换一台设备是不是同样结论？下个版本修完后，怎么确认问题没有回来？ 第 11 篇讲 PerfettoSQL 与 Trace Processor。目标很朴素：把 UI 里的判断改成能复查的查询，再用 Python 批量跑多份 Trace。读者不需要先变成 SQL 专家，只需要把 Trace 当成一组带时间戳的表，再把“看图得出的判断”翻译成一段能反复执行的查询就够了。 整篇文章就沿一条路走：认识 Trace Processor，把判断写成窗口化的查询，放…",
-      "image": null,
-      "publishedAt": "2026-05-04T02:11:00Z",
-      "sourceId": "1aa1837ca33d8d55",
-      "sourceTitle": "Android Performance",
-      "link": "https://androidperformance.com/2026/05/04/Android-Perfetto-11-PerfettoSQL-TraceProcessor-Automation/",
-      "detailPath": "articles/6a4ce8db6e8415767444c6d9.json"
     }
   ]
 }
