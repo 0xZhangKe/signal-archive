@@ -1,0 +1,11 @@
+{
+  "id": "0b1c4f06e97af624803d4d5b",
+  "title": "We just shipped support for the ugliest part of HTTP: Vary",
+  "summary": "My comment on We just shipped support for the ugliest part of HTTP: Vary — Hacker News. I've been wanting this from Cloudflare for years . The classic problem here is if you do that thing where user agents that send \"accept: text/html\" get HTML, while user agents that don't get JSON or some other format. This used to be impossible to deploy behind Cloudflar…",
+  "content": "<p><a href=\"https://news.ycombinator.com/item?id=49823195#49823961\" target=\"_blank\" rel=\"noopener noreferrer\">My comment</a> on <a href=\"https://news.ycombinator.com/item?id=49823195\" target=\"_blank\" rel=\"noopener noreferrer\">We just shipped support for the ugliest part of HTTP: Vary</a> — Hacker News.</p><p>I&#x27;ve been wanting this from Cloudflare <em>for years</em>.</p>\n<p>The classic problem here is if you do that thing where user agents that send &quot;accept: text/html&quot; get HTML, while user agents that don&#x27;t get JSON or some other format.</p>\n<p>This used to be impossible to deploy behind Cloudflare caching, because they ignored the Vary header on anything other than images - so you risked caching the JSON version and then serving it up to someone who was expecting HTML.</p>\n<p>(Independent of the Cloudflare feature I ended up deciding never to use that pattern, because I prefer having URL that predictably returns HTML or JSON - I add a .json suffix to my apps to serve JSON instead.)</p>\n    \n    \n        <p>Tags: <a href=\"https://simonwillison.net/tags/http\" target=\"_blank\" rel=\"noopener noreferrer\">http</a>, <a href=\"https://simonwillison.net/tags/cloudflare\" target=\"_blank\" rel=\"noopener noreferrer\">cloudflare</a></p>",
+  "image": null,
+  "publishedAt": "2026-09-23T23:14:57Z",
+  "sourceId": "052434531db837d6",
+  "sourceTitle": "Simon Willison's Weblog",
+  "link": "https://simonwillison.net/2026/Sep/23/hn-49823961/"
+}
