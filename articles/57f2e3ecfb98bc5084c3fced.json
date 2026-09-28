@@ -1,0 +1,11 @@
+{
+  "id": "57f2e3ecfb98bc5084c3fced",
+  "title": "New Attack Against RSA",
+  "summary": "ArsTechnica is reporting on a “new” attack against RSA, one that bypasses factoring. First, this attack isn’t new. The original research is from 2007 . What is new is the implementation. Second, it is a forgery attack. It allows an attacker to forge digital signatures. It does not recover the private key from the public key. Third, the attack only works aga…",
+  "content": "<p>ArsTechnica is <a href=\"https://arstechnica.com/security/2026/09/theres-a-new-way-to-break-rsa-thats-faster-than-anything-weve-seen-before/\" target=\"_blank\" rel=\"noopener noreferrer\">reporting</a> on a “new” attack against RSA, one that bypasses factoring.</p>\n<p>First, this attack isn’t new. The original research is from <a href=\"https://eprint.iacr.org/2007/424\" target=\"_blank\" rel=\"noopener noreferrer\">2007</a>. What is new is the implementation.</p>\n<p>Second, it is a forgery attack. It allows an attacker to forge digital signatures. It does not recover the private key from the public key.</p>\n<p>Third, the attack only works against pure signatures. That is, signatures without any formatting or padding. This is not generally how we use RSA in practice.</p>\n<p>Fourth, speed is all relative. This is not a polynomial-time algorithm; it’s a subexponential-time algorithm. But it is somewhat faster than factoring. The authors were able to forge messages for 1024-bit RSA with 1380 CPU core-years (over five real-world months).</p>\n<p>The authors have a <a href=\"https://github.com/ucsd-hacc/NSNFSSSFSFN\" target=\"_blank\" rel=\"noopener noreferrer\">webpage</a> that explains the context much better than the article. And here’s the <a href=\"https://eprint.iacr.org/2026/2131.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">paper</a>.</p>\n<p>EDITED TO ADD: Slashdot <a href=\"https://it.slashdot.org/story/26/09/24/1652228/theres-a-new-way-to-break-rsa-encryption\" target=\"_blank\" rel=\"noopener noreferrer\">thread</a>.</p>",
+  "image": null,
+  "publishedAt": "2026-09-28T11:02:58Z",
+  "sourceId": "785b58e8749bd508",
+  "sourceTitle": "Schneier on Security",
+  "link": "https://www.schneier.com/blog/archives/2026/09/new-attack-against-rsa.html"
+}
