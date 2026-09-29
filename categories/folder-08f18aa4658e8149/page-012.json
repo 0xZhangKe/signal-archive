@@ -1,6 +1,39 @@
 {
   "items": [
     {
+      "id": "dc981e34c50bbcfb44d9402c",
+      "title": "Toots 431 2026 Aug.2 - Aug.8",
+      "summary": "「呼吸真的可以到三十秒。」",
+      "image": null,
+      "publishedAt": "2026-08-09T13:00:27Z",
+      "sourceId": "8e5dc5a8b5023a8e",
+      "sourceTitle": "折腾人生",
+      "link": "https://z.arlmy.me/posts/MastodonArchives/2026/MastodonTootsArchives_20260808/",
+      "detailPath": "articles/dc981e34c50bbcfb44d9402c.json"
+    },
+    {
+      "id": "5c3173d04a5c18ec6b2a11b8",
+      "title": "2026-06-26 / 风月同天",
+      "summary": "by 新世界的大门",
+      "image": null,
+      "publishedAt": "2026-08-09T08:08:13Z",
+      "sourceId": "4f3f8eb9d72c3840",
+      "sourceTitle": "新世界的大门",
+      "link": "https://blog.xinshijiededa.men/daily/61/",
+      "detailPath": "articles/5c3173d04a5c18ec6b2a11b8.json"
+    },
+    {
+      "id": "90ffd22d1f2d35f1793a3d9a",
+      "title": "2026-06-24 / 落荒而逃",
+      "summary": "by 新世界的大门",
+      "image": null,
+      "publishedAt": "2026-08-09T08:06:27Z",
+      "sourceId": "4f3f8eb9d72c3840",
+      "sourceTitle": "新世界的大门",
+      "link": "https://blog.xinshijiededa.men/daily/60/",
+      "detailPath": "articles/90ffd22d1f2d35f1793a3d9a.json"
+    },
+    {
       "id": "bec504631ca93f7ca42860a4",
       "title": "2026-06-23 / 梦核大楼",
       "summary": "by 新世界的大门",
@@ -626,39 +659,6 @@
       "sourceTitle": "Koimsurai 手記",
       "link": "https://koimsurai.com/blog/why-i-switched-to-zed",
       "detailPath": "articles/c7d9a63d6131e0fda0c36b78.json"
-    },
-    {
-      "id": "dfd057d97b089ea3ea4727b8",
-      "title": "VS Code Remote-SSH 把我的伺服器燒到 96°C：rust-analyzer 無限重跑 cargo check",
-      "summary": "一台跑著三十幾個容器、同時被 VS Code Remote-SSH 連進去開發的家用伺服器,溫度釘在 90°C 撐了四十分鐘、load 從 8 衝到 196,最後失去回應。而把它燒掉的不是那些服務,是編輯器。這篇記錄整個追查過程:三條看起來很有說服力但都是錯的線索(SMU 當掉後感測器說謊、重開機就好、CPU 只有 30 到 50%),怎麼用 sysstat 的 sar 和 netdata 的 apps.plugin 回溯一個已經結束的事件,以及最後抓到的三個兇手——rust-analyzer 對一個 GTK 依賴全缺、永遠編不過的 Tauri 專案無限重跑 cargo check、Foam 擴充讓 ripgrep 開出兩百多個行程、還有只是雜訊的 RustDesk 輪詢。文末附上防線設定與事後補的兩道保險。",
-      "image": null,
-      "publishedAt": "2026-08-04T07:16:25Z",
-      "sourceId": "bd51496b8ec0ca1d",
-      "sourceTitle": "Koimsurai 手記",
-      "link": "https://koimsurai.com/blog/vscode-remote-ssh-burned-my-server",
-      "detailPath": "articles/dfd057d97b089ea3ea4727b8.json"
-    },
-    {
-      "id": "44b0dedaa29cc4c935d3bee7",
-      "title": "縈繞於心的十二道難題",
-      "summary": "偶然看到費曼的 12 道難題（Feynman’s 12 Favorite Problems）這東東 […]",
-      "image": "https://2.gravatar.com/avatar/2ce149002ca625e3240835cbfaa3481507a538243a4c31c830176f97f9a9f060?s=96&d=identicon&r=G",
-      "publishedAt": "2026-08-04T07:14:57Z",
-      "sourceId": "737dffed2384c922",
-      "sourceTitle": "恐龍化石的網誌",
-      "link": "https://cylikesreading.wordpress.com/2026/08/04/twelve-problems-originated-from-feynman/",
-      "detailPath": "articles/44b0dedaa29cc4c935d3bee7.json"
-    },
-    {
-      "id": "e245c20e3b085fa39d59c30e",
-      "title": "UPS 加 NUT 讓伺服器斷電自動關機：設定全紀錄,和一條被貓咬過的電源線",
-      "summary": "這篇把 UPS 加 NUT 的完整設定寫成一份可照做的教學:UPS 選型的三個條件(PFC 純正弦波、AVR、NUT 支援)、NUT 的 driver / upsd / upsmon 三層架構與五個設定檔各管什麼、upsmon.conf 逐行說明、POWERDOWNFLAG 為什麼不能漏,以及 BIOS 那個選錯就前功盡棄的選項——Restore after AC Power Loss 必須是 On 而不是 Last State,因為 NUT 乾淨關機後機器的狀態就是關機。另外收錄把 UPS 狀態接到 cron log、Discord 通知與自架面板的做法。而這一切的起點是搬家後伺服器每天半夜硬斷電:線鬆、共用迴路、過熱、PSU 全試過,但那些都只是猜測。作者買 UPS 一半是為了保護、一半是把它當量測儀器用…",
-      "image": null,
-      "publishedAt": "2026-08-04T06:03:43Z",
-      "sourceId": "bd51496b8ec0ca1d",
-      "sourceTitle": "Koimsurai 手記",
-      "link": "https://koimsurai.com/blog/ups-nut-and-the-cable-the-cat-chewed",
-      "detailPath": "articles/e245c20e3b085fa39d59c30e.json"
     }
   ]
 }

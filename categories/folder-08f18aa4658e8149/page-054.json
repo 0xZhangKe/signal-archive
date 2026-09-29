@@ -1,6 +1,39 @@
 {
   "items": [
     {
+      "id": "89fda1b1a63bd44f36b845e8",
+      "title": "Analysis of the GFW's Unconditional Port 443 Block on August 20, 2025",
+      "summary": "1. Introduction Between approximately 00:34 and 01:48 (Beijing Time, UTC+8) on August 20, 2025, the Great Firewall of China (GFW) exhibited anomalous behavior by unconditionally injecting forged TCP RST+ACK packets to disrupt all connections on TCP port 443. This incident caused massive disruption of the Internet connections between China and the rest of th…",
+      "image": null,
+      "publishedAt": "2025-08-20T00:00:00Z",
+      "sourceId": "34d02af866ebd5fa",
+      "sourceTitle": "Great Firewall Report",
+      "link": "https://gfw.report/blog/gfw_unconditional_rst_20250820/en/",
+      "detailPath": "articles/89fda1b1a63bd44f36b845e8.json"
+    },
+    {
+      "id": "88cf2427446e5508d37e4304",
+      "title": "早點出門",
+      "summary": "早點出門。準時到。",
+      "image": null,
+      "publishedAt": "2025-08-20T00:00:00Z",
+      "sourceId": "7f36c3da1e6b5c71",
+      "sourceTitle": "Wiwi.Blog Blog",
+      "link": "https://wiwi.blog/blog/be-on-time",
+      "detailPath": "articles/88cf2427446e5508d37e4304.json"
+    },
+    {
+      "id": "146e9983af6d4020b548c76e",
+      "title": "YouTube 想幫我賺錢（但要先把我賣了）",
+      "summary": "今天收到來自 YouTube 的一封有趣的信，說要幫我「創造更多賺錢機會」。信中開頭就興奮地寫：",
+      "image": "https://wiwi.blog/assets/images/mail-7e677eccd36b3032b9560034a534c091.png",
+      "publishedAt": "2025-08-19T07:00:00Z",
+      "sourceId": "7f36c3da1e6b5c71",
+      "sourceTitle": "Wiwi.Blog Blog",
+      "link": "https://wiwi.blog/blog/from-creators-to-products",
+      "detailPath": "articles/146e9983af6d4020b548c76e.json"
+    },
+    {
       "id": "776605114887312222392cc6",
       "title": "部落卷",
       "summary": "今天新增了「部落卷」（blogroll）頁面！你可以在上方選單和頁尾連結找到它，或是直接到 /blogroll 這個網址。",
@@ -421,7 +454,7 @@
     {
       "id": "c8359335b03b5b402a5309ca",
       "title": "Android Perfetto 系列 8：深入理解 Vsync 机制与性能分析",
-      "summary": "本篇是 Perfetto 系列文章的第八篇，主要深入介绍 Android 中的 Vsync 机制及其在 Perfetto 中的表现形式。文章将从 Perfetto 的角度来分析 Android 系统如何基于 Vsync 信号进行帧渲染和合成，涵盖 Vsync、Vsync-app、Vsync-sf、VsyncWorkDuration 等核心概念。 随着高刷新率屏幕的普及，理解 Vsync 机制变得更加重要。本文将以 120Hz 刷新率为主要叙事线，帮助开发者理解现代 Android 设备中 Vsync 的工作原理，以及如何在 Perfetto 中观察和分析 Vsync 相关的性能问题。 注：本文内容基于 Android 13~16 的公开实现与演进；文中代码以 AOSP main 的“签名对齐精简摘录”为主，少…",
+      "summary": "在 Perfetto 里看到 vsync-app 、 vsync-sf 和 App 的 doFrame ，很容易把三条轨道当成同一个时刻。这篇沿一次帧请求看 VSync 怎样从 SurfaceFlinger 的调度进入 App，接着怎样和 RenderThread、Buffer、FrameTimeline 对齐。 示例以 120 Hz 设备为主。相位配置、是否启用硬件 VSync，以及 App 是否请求下一帧都会改变轨道形态；本文先分清每个信号代表什么，再谈延迟。 注：本文以 Android 17（API 37）为当前技术参照，涉及 Android 13 的地方用于说明关键机制的引入；文中代码以 AOSP main 的“签名对齐精简摘录”为主，少量位置使用 ... 省略非主线逻辑，不能当成 Android 1…",
       "image": null,
       "publishedAt": "2025-08-05T02:15:30Z",
       "sourceId": "1aa1837ca33d8d55",
@@ -531,7 +564,7 @@
     {
       "id": "701ebff6c5de5ad3e088ee0b",
       "title": "Android Perfetto 系列 7：MainThread 和 RenderThread 解读",
-      "summary": "本篇是 Perfetto 系列文章的第七篇，主要介绍 Android App 中的 MainThread 和 RenderThread，也就是大家熟悉的 主线程 和 渲染线程 。文章会从 Perfetto 的角度来看 MainThread 和 RenderThread 的工作流程，涉及卡顿、软件渲染、掉帧计算等相关知识。 随着 Google 正式推出 Perfetto 工具替代 Systrace，Perfetto 在性能分析领域已经成为主流选择。本文将结合 Perfetto 的具体 trace 信息，帮助读者理解 MainThread 和 RenderThread 的完整工作流程，让你在使用 Perfetto 分析性能问题时能够： 准确识别关键 trace tag ：知道 UI Thread、RenderTh…",
+      "summary": "一次滑动卡顿，主线程可能在处理布局，也可能早已把绘制命令交给 RenderThread。这篇用同一份 Perfetto Trace 对照两条线程、Buffer 提交和 SurfaceFlinger，找出等待发生在哪一步。 先沿截图读一帧，再看 ActivityThread、RenderThread 和 BLASTBufferQueue 的职责。Trace 能缩小调查范围；帧最终是否上屏，还要核对 FrameTimeline 与合成侧记录。",
       "image": null,
       "publishedAt": "2025-08-02T02:11:45Z",
       "sourceId": "1aa1837ca33d8d55",
@@ -626,39 +659,6 @@
       "sourceTitle": "摄影流水账",
       "link": "https://photoghenry.wordpress.com/2025/07/30/fernhill-escarpment/",
       "detailPath": "articles/0fbc6a1023e75489b6d6a523.json"
-    },
-    {
-      "id": "094e6d2fb53c60568f9f3754",
-      "title": "WiwiStudio 音樂能力測驗",
-      "summary": "const calculateScore = () => {",
-      "image": "https://wiwi.blog/assets/images/musictest-title-f8150ad7acaf3d66cbb02b4e3dc246f2.jpg",
-      "publishedAt": "2025-07-29T06:00:00Z",
-      "sourceId": "7f36c3da1e6b5c71",
-      "sourceTitle": "Wiwi.Blog Blog",
-      "link": "https://wiwi.blog/blog/wiwistudio-musictest",
-      "detailPath": "articles/094e6d2fb53c60568f9f3754.json"
-    },
-    {
-      "id": "145bdc38fe38dce345e2fb4a",
-      "title": "挖出了更多舊貼文",
-      "summary": "舊硬碟考古活動繼續進行中。我又找到了一些很零散的備份，救回了六篇舊 blog 貼文：",
-      "image": null,
-      "publishedAt": "2025-07-29T00:00:00Z",
-      "sourceId": "7f36c3da1e6b5c71",
-      "sourceTitle": "Wiwi.Blog Blog",
-      "link": "https://wiwi.blog/blog/more-old-blog-posts",
-      "detailPath": "articles/145bdc38fe38dce345e2fb4a.json"
-    },
-    {
-      "id": "009a1ca5b77a5909322b4047",
-      "title": "从少林寺与娃哈哈看建立普遍监察系统的必要性",
-      "summary": "少林寺与娃哈哈最近都出事了。 二者都很劲爆。 释永信是个和尚，和尚不仅做生意，还贪财好色，自古以来便是猎奇流量话题。娃哈哈的事更不用说，已经被网友们脑补出了一百集《甄嬛传》。 将某个公共议题过度娱乐化，是一种相当有效的危机公关策略，能够有效转移公众关注，从而掩盖真正致命的议题。 少林寺与娃哈哈的致命议题是一致的，即：集体财产/国有资产/历史文化资产到哪里去了？这些资产的流失，是什么人，通过什么方式进行的？有哪些人应当对此承担何种性质的责任？ 任何一个组织，都需要监管。 中国人很早就意识到这一点。 早在商周时期，就设有“大宰”“小宰”等官职，行使监察职能。经过春秋战国的不断发展，终于在汉武帝时期形成“刺史”官职，专司对行政文官监察之责。 古早时期的中国互联网，普遍流传这样一种论调，认为西方票选制度是所谓“历史的…",
-      "image": null,
-      "publishedAt": "2025-07-28T07:04:47Z",
-      "sourceId": "c7356b172af43f7f",
-      "sourceTitle": "刑辩人在路上",
-      "link": "https://xingbianren.cn/post/313.html",
-      "detailPath": "articles/009a1ca5b77a5909322b4047.json"
     }
   ]
 }

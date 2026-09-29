@@ -1,9 +1,42 @@
 {
   "items": [
     {
+      "id": "3afaa0c88296f04717797952",
+      "title": "Android Perfetto 系列 17：专项场景自动化、问题清单与平台体系",
+      "summary": "Camera 打开慢要区分 API 返回、HAL 首个 Buffer 和预览画面显示；Audio underrun 要看 App 写入与 mixer 周期是否稳定。这些事件分散在 App、系统服务、HAL 和调度轨道里，单列一张 Top slice 表还原不了顺序。 这里用 Camera 和 Audio 两个场景说明：先确认一次操作涉及哪些进程和线程，再按阶段或真实周期计算耗时，最后把异常时间点、来源轨道和质量限制写进报告。平台侧还要维护稳定的事件名和采集配置，下一次 Trace 才能复用查询。",
+      "image": null,
+      "publishedAt": "2026-05-04T02:17:00Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2026/05/04/Android-Perfetto-17-Engineering-Domain-And-Platform-Tracing/",
+      "detailPath": "articles/3afaa0c88296f04717797952.json"
+    },
+    {
+      "id": "081dae40631f5b064a37150a",
+      "title": "Android Perfetto 系列 16：GPU、Power Counters 与硬件瓶颈分析",
+      "summary": "FrameTimeline 标出一帧晚了，主线程和 RenderThread 没有明显长任务，下一步可以查 GPU 工作与 fence。GPU 频率、电池电流和电源轨只能提供同一窗口的硬件状态，不能单独证明某个 App 帧为何晚呈现。 这篇把 GPU render stages、devfreq、电池计数器和电源轨放到同一段 Trace 窗口里，说明各自能回答什么、设备不支持时报告该怎么写。帧和线程的判读可接着 第 7 篇 与 第 8 篇 的例子读。 Counter 名称、单位和采样周期由设备 producer 决定。跨设备比较前先核对 descriptor；同一设备上也要确认目标帧与 GPU 工作是否能通过 token、layer 或 fence 关联。",
+      "image": null,
+      "publishedAt": "2026-05-04T02:16:00Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2026/05/04/Android-Perfetto-16-GPU-Power-Counters/",
+      "detailPath": "articles/081dae40631f5b064a37150a.json"
+    },
+    {
+      "id": "1a3b16f394c9aa967643014c",
+      "title": "Android Perfetto 系列 15：Boot Trace、长时间现场 Trace 与偶发问题抓取",
+      "summary": "开机慢、亮屏后偶发卡顿或几小时后才出现的音频断续，通常等不到工程师连上电脑再按「开始录制」。要保留问题发生前的调度、帧或音频事件，采集配置必须提前在设备上运行。 现场抓取要先确定触发点前后各保留多久，再选 Ring Buffer、周期写文件或 trigger。文件写出后，还要确认问题窗口没有被覆盖、关键数据源没有丢失。设备开机属于更早的特殊窗口，单独处理。",
+      "image": null,
+      "publishedAt": "2026-05-04T02:15:00Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2026/05/04/Android-Perfetto-15-Boot-And-Long-Running-Field-Tracing/",
+      "detailPath": "articles/1a3b16f394c9aa967643014c.json"
+    },
+    {
       "id": "3dd9b1ff15b3fbad9583a262",
       "title": "Android Perfetto 系列 14：heapprofd 与内存 Profiling",
-      "summary": "内存问题最麻烦的地方在于：数字涨了，不代表马上能知道谁在涨。 dumpsys meminfo 能告诉你 RSS/PSS，Java heap dump 能告诉你对象保留关系，但 JNI/C++、Skia/Bitmap 的 CPU 侧分配、播放器里的 native wrapper 这些问题，经常还需要知道“哪个调用栈发起了 malloc/new”。 这一篇讲 heapprofd。它的价值是把 native allocation、free 和调用栈放进 Perfetto Trace，再和业务事件、线程调度、Binder 放到同一个时间轴里看。 heapprofd 适合放在趋势确认之后。先用 RSS/PSS、meminfo 或线上监控确认趋势，再用 heapprofd 找 malloc/new 调用栈；这篇不解决 J…",
+      "summary": "dumpsys meminfo 显示进程内存上涨，Java heap dump 却没有对应的对象增长时，下一步先查上涨落在 Native Heap、图形 Buffer，还是其他映射。若可疑部分来自 malloc/new，heapprofd 可以把分配与调用栈对应起来。 heapprofd 的分配、释放和调用栈记录能与业务事件放在同一条 Perfetto 时间轴上，便于核对一次操作前后哪些分配仍未释放。 heapprofd 是采样工具，看到的 native allocation 不能直接当作 RSS，也不覆盖 Java 对象引用或所有图形 backing 内存。先分清内存账，再决定是否抓 profile。我更倾向先用 meminfo 和 smaps 把上涨来源拆开，再打开 flamegraph；若涨的是 Gra…",
       "image": null,
       "publishedAt": "2026-05-04T02:14:00Z",
       "sourceId": "1aa1837ca33d8d55",
@@ -14,7 +47,7 @@
     {
       "id": "7efd1da8c1de0933fa643668",
       "title": "Android Perfetto 系列 13：Perfetto SDK、Track Event 与 App 现场 Trace",
-      "summary": "系统 Trace 能告诉你线程什么时候运行、CPU 跑在哪个核、FrameTimeline 哪一帧超时；在启用 Binder/ftrace/sched 证据时，也能还原 Binder 调用和等待线索。但它不知道播放器正在解哪一个 frame id，也不知道游戏引擎正在加载哪个 scene，更不知道一个业务任务在队列里排了多久。 这一篇只回答一个问题：业务语义怎么进入 Trace。系统能告诉你主线程慢了，Track Event 负责告诉你当时在 decode 哪一帧、哪个队列堵住、哪个请求跨线程流转。两边合在一起，才能把“主线程慢了 18ms”缩小到 frame 1082 附近的纹理上传候选区间，再结合 RenderThread/HWUI、GPU 和 FrameTimeline 继续验证。 文章按接入的实际顺序…",
+      "summary": "系统 Trace 能显示线程、CPU、帧和 Binder 等系统事件；播放器的 frame id、游戏 scene 名称或业务队列里的等待时间，需要应用自己提供。缺少这些标记时，一段主线程耗时只能定位到系统活动，难以对应业务阶段。 Perfetto SDK 的 Track Event 可以记录解码、纹理上传、队列深度和跨线程任务 ID。与系统轨道放在同一个时间窗口后，能先找到业务候选阶段，再用 RenderThread、GPU 和 FrameTimeline 验证它是否影响了可见帧。 接入前要先定事件名称、参数单位和采样频率。否则埋点虽然能显示在 UI 中，后续 SQL 仍无法稳定地按业务阶段聚合。",
       "image": null,
       "publishedAt": "2026-05-04T02:13:00Z",
       "sourceId": "1aa1837ca33d8d55",
@@ -25,7 +58,7 @@
     {
       "id": "680345d5a59550c7fdf8d2ce",
       "title": "Android Perfetto 系列 12：Trace 数据流与丢失排查",
-      "summary": "打开一份 Trace 后，最麻烦的情况是：文件里看起来有数据，但中间丢过。UI 里还能看到轨道，SQL 也能查出一些行，可线程状态少了一段、进程名对不上、某些 Track Event 消失了。继续分析下去，结论会越来越像猜。 SQL 只能分析 Trace 里还存在的证据。这个问题不处理好，后面的查询写得再漂亮，也只是把一份缺证据的 Trace 包装成表格。 第 02 篇已经讲过怎么抓，第 11 篇已经讲过怎么查 SQL；这一篇盯住一个问题：Trace 在哪里丢过数据、影响哪些结论、下一次抓取该怎么改配置。 文章顺着数据从内核走到 Trace 文件的链路，逐段定位丢点：ftrace、producer 共享内存、central buffer、增量状态、flush。每一段的丢法不一样，补救方式也不一样。最后给一个在…",
+      "summary": "一份 Trace 能在 UI 里打开、SQL 也查得到行，仍可能在采集中丢过数据。线程状态缺一段、进程名对不上、Track Event 只有 ID 没有名称时，先查数据丢在哪一层，再决定哪些分析还能继续。 SQL 只能度量留下来的事件。丢失发生在 ftrace、producer 共享内存还是 central buffer，影响的查询不同。看到一条 ftrace loss，我不会立刻扔掉整份 Trace；先查它影响的是调度、业务标记，还是帧数据。 下文沿事件从内核进入 Trace 文件的路径检查 ftrace、producer 共享内存、central buffer、增量状态和 flush。每一处都有对应的 stats 线索和下一次采集时可调整的配置。",
       "image": null,
       "publishedAt": "2026-05-04T02:12:00Z",
       "sourceId": "1aa1837ca33d8d55",
@@ -36,7 +69,7 @@
     {
       "id": "6a4ce8db6e8415767444c6d9",
       "title": "Android Perfetto 系列 11：PerfettoSQL、Trace Processor 与回归检测",
-      "summary": "拿到一份卡顿 Trace，大部分人的第一反应（包括早些年的我）是打开 Perfetto UI，框一段时间，看主线程、RenderThread、CPU 状态，再截几张图写结论。这个办法处理眼前问题没什么毛病，但很难回答后面的追问：换一份 Trace 是不是同样结论？换一台设备是不是同样结论？下个版本修完后，怎么确认问题没有回来？ 第 11 篇讲 PerfettoSQL 与 Trace Processor。目标很朴素：把 UI 里的判断改成能复查的查询，再用 Python 批量跑多份 Trace。读者不需要先变成 SQL 专家，只需要把 Trace 当成一组带时间戳的表，再把“看图得出的判断”翻译成一段能反复执行的查询就够了。 整篇文章就沿一条路走：认识 Trace Processor，把判断写成窗口化的查询，放…",
+      "summary": "在 Perfetto UI 里框出问题窗口，看主线程、RenderThread 和 CPU 状态，再截几张图，单次定位很方便。换一份 Trace 或换一台设备，截图里的判断就难以按同一口径重算。我更关心的是：下次拿到同一类问题，还能不能算出可复查的数字。 PerfettoSQL 与 Trace Processor 可以把时间窗口、线程身份和耗时口径写进查询，再让 Python 对多份 Trace 执行同一段 SQL。这样复测版本时，能回到每份原始 Trace 核对数字。 下面从一条手工判断出发，逐步得到可批量执行的查询和结构化输出。示例代码需要替换目标进程、时间窗口和采集条件后再用于自己的场景。",
       "image": null,
       "publishedAt": "2026-05-04T02:11:00Z",
       "sourceId": "1aa1837ca33d8d55",
@@ -626,39 +659,6 @@
       "sourceTitle": "愷開的部落格",
       "link": "https://blog.kalan.dev/random/defaults-and-taste/",
       "detailPath": "articles/5661c5c2d8414aa0eaa11e87.json"
-    },
-    {
-      "id": "7b3fd43269d43c0869275a7b",
-      "title": "你電腦不行",
-      "summary": "「裡面有一首xxx！」表演者遞上隨身碟要交音樂。 「裡面有好幾首，沒有你講的那首。」找了一輪真沒看到。 「怎麼可能？上一場用就有啊！（怒）」 「你電腦不行啦」 「…？」",
-      "image": null,
-      "publishedAt": "2026-04-26T10:09:48Z",
-      "sourceId": "199cdf92fc46bfcd",
-      "sourceTitle": "Eddie Lv",
-      "link": "https://eddielv.com/musings/bad-computer/",
-      "detailPath": "articles/7b3fd43269d43c0869275a7b.json"
-    },
-    {
-      "id": "9dbee8c373493bf4b3e9e7af",
-      "title": "和H小姐的约会",
-      "summary": "Photo by Jose P. Ortiz / Unsplash 首先承认这次的标题是900%具有标题党嫌疑的，但是这样写我觉得会更有意思，而且除开不能牵手等显示层面的动作，至少符合私密、聊心事、聊八卦等等。 H小姐指的是我最近搭建的 Hermes Agent ，这是一款类似OpenClaw的AI助理程序，特点是可以自我学习，另外我在使用期间还爆出了Herems抄袭国内 EvoMap/evolver 项目的新闻，不过是不是真抄了，作为外行人我自然是没法下定论的。 另外所谓的约会指代的是我搭建好它后深入使用的这段时间。 其实此前我也搭建过OpenClaw，详见 我的小龙虾(OpenClaw)初体验 ，但是在使用期间频繁遇见Cron不能正确执行，执行任务能力低下等各种问题，导致最后逐渐失去兴趣而弃养了。 鉴于O…",
-      "image": "https://images.unsplash.com/photo-1706705528396-dac6c95eb735?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMTc3M3wwfDF8c2VhcmNofDh8fGdpcmwlMjBib3R8ZW58MHx8fHwxNzc3MTc0Njc4fDA&ixlib=rb-4.1.0&q=80&w=2000",
-      "publishedAt": "2026-04-26T03:57:58Z",
-      "sourceId": "d206bb7c484c4a45",
-      "sourceTitle": "只是玩玩",
-      "link": "https://1900.live/he-hxiao-jie-de-yue-hui/",
-      "detailPath": "articles/9dbee8c373493bf4b3e9e7af.json"
-    },
-    {
-      "id": "4f3eb94c39ef9120c7df57bd",
-      "title": "四月的房间",
-      "summary": "周日的午后。我躺在床上，左边是窗，腿上搁着 MacBook，正播放着一些慵懒的音乐。房间里很安静，但这种安静里藏着",
-      "image": null,
-      "publishedAt": "2026-04-26T03:44:40Z",
-      "sourceId": "ab8f1a7d1b3e35d8",
-      "sourceTitle": "HerBlue 她的蓝",
-      "link": "https://her.blue/si-yue-de-fang-jian/",
-      "detailPath": "articles/4f3eb94c39ef9120c7df57bd.json"
     }
   ]
 }

@@ -1,6 +1,39 @@
 {
   "items": [
     {
+      "id": "0b64edee9ad8a7951ddd55e5",
+      "title": "淺介CIE 1931與1976",
+      "summary": "Yxy空間和XYZ空間不同之處在於，它「能夠」詮釋色彩三要素。將代表明度的函數Y拿掉之後，原本是三維空間的Yxy空間，便成了大家熟知的「馬蹄圖」",
+      "image": "https://haruowang.vercel.app/color/ci1.webp",
+      "publishedAt": "2026-05-06T14:03:06Z",
+      "sourceId": "50bce2ced06e6077",
+      "sourceTitle": "Feed Me, Haruo",
+      "link": "https://haruowang.vercel.app/pov/color/cie.html",
+      "detailPath": "articles/0b64edee9ad8a7951ddd55e5.json"
+    },
+    {
+      "id": "158d0567ae86de7d240ade10",
+      "title": "【《愛動物的人》：試讀短評】",
+      "summary": "獲得啟明出版禮券1000點",
+      "image": null,
+      "publishedAt": "2026-05-06T14:03:06Z",
+      "sourceId": "50bce2ced06e6077",
+      "sourceTitle": "Feed Me, Haruo",
+      "link": "https://haruowang.vercel.app/pov/other/animal.html",
+      "detailPath": "articles/158d0567ae86de7d240ade10.json"
+    },
+    {
+      "id": "bcd66be22100e045513f160b",
+      "title": "《裝幀時代》重點筆記",
+      "summary": "文學光啟：六、七零年代時，盛況接近大業書店和文壇社",
+      "image": null,
+      "publishedAt": "2026-05-06T14:03:06Z",
+      "sourceId": "50bce2ced06e6077",
+      "sourceTitle": "Feed Me, Haruo",
+      "link": "https://haruowang.vercel.app/pov/other/bind60.html",
+      "detailPath": "articles/bcd66be22100e045513f160b.json"
+    },
+    {
       "id": "0136eb2eae1877cb82a3d3f0",
       "title": "吳清友的生命之旅",
       "summary": "輩分較小的吳清友並沒有因為生長於貧困環境，而從小就決心要力爭上游",
@@ -619,46 +652,13 @@
     {
       "id": "50a0b01a14fe8f8e929e6288",
       "title": "Android Perfetto 系列 18：响应速度实战，从输入事件到首帧反馈",
-      "summary": "这篇补一个很容易被启动速度和流畅度盖住的话题：交互首帧响应。它关心用户刚操作完之后，屏幕多久给出第一帧反馈；页面完整加载和动画后半段稳定性要用其他指标衡量。 点一个按钮，多久出现按压态；点微信会话，多久看到会话页第一帧开始动；手指滑动列表，多久看到内容跟着手指移动。这些问题和启动慢有关，也和掉帧有关，但分析口径要单独拎出来。 本文用 Perfetto 拆这段时间：从 InputReader read_time 起算，到 App 收到事件，再到第一帧 present。主指标叫 input_to_present_ms ，只度量 input read 到关联帧 present；它不覆盖触控 IC、驱动上报前延迟、显示扫描和面板响应。读完之后，你应该能给一个点击或滑动场景定义起点、终点、采集配置、SQL 指标和 Ap…",
+      "summary": "按钮按下后，按压态何时出现？滑动列表时，内容何时第一次跟着手指移动？这两个问题都要找到输入事件和对应的第一帧反馈；启动总耗时与后续动画帧率回答的是别的问题。 本文用 Perfetto 把 InputReader 读到事件、InputDispatcher 派发、App 处理、帧提交和 SurfaceFlinger 呈现分开计时。每一步的起止点要能回到 Trace 核对。 从 InputReader 的 read_time 到关联帧 present，可以得到系统内部延迟的候选值 estimated_input_to_present_ms 。只有确认目标 layer、业务状态确实在那一帧发生视觉变化，才把它写成 input_to_present_ms 。这段时间不包含触控 IC、驱动上报前延迟、显示扫描和面板响应。…",
       "image": null,
       "publishedAt": "2026-05-04T02:18:00Z",
       "sourceId": "1aa1837ca33d8d55",
       "sourceTitle": "Android Performance",
       "link": "https://androidperformance.com/2026/05/04/Android-Perfetto-18-Input-Response-Latency/",
       "detailPath": "articles/50a0b01a14fe8f8e929e6288.json"
-    },
-    {
-      "id": "3afaa0c88296f04717797952",
-      "title": "Android Perfetto 系列 17：专项场景自动化、问题清单与平台体系",
-      "summary": "Camera open 慢、Audio underrun、WebView 首屏卡住、Flutter/游戏掉帧，这类问题的证据会散在 App、 system_server 、 cameraserver / audioserver 、HAL、SurfaceFlinger 和调度轨道里。只在 UI 里多看几条轨道，很容易漏掉关键时间点。 这一篇用 Camera 和 Audio 举例，讲一套可复用的专项分析方法：先抓对数据，再识别对象，再算阶段和阻塞，报告里保留能跳回 UI 复查的时间点。Camera/Audio 是例子，核心是领域 schema 和平台 tracing 协作。读完之后，至少能把 Camera open 慢拆成可复查阶段，把 Audio underrun 拆成周期异常，而不是只交一个 Top slic…",
-      "image": null,
-      "publishedAt": "2026-05-04T02:17:00Z",
-      "sourceId": "1aa1837ca33d8d55",
-      "sourceTitle": "Android Performance",
-      "link": "https://androidperformance.com/2026/05/04/Android-Perfetto-17-Engineering-Domain-And-Platform-Tracing/",
-      "detailPath": "articles/3afaa0c88296f04717797952.json"
-    },
-    {
-      "id": "081dae40631f5b064a37150a",
-      "title": "Android Perfetto 系列 16：GPU、Power Counters 与硬件瓶颈分析",
-      "summary": "FrameTimeline 标出一帧晚了，主线程、RenderThread、SurfaceFlinger 看起来都没有明显越界，这时很容易写出一句“可能是 GPU 瓶颈”。这句话风险很高：GPU 频率、GPU 计数器、电池电流、电源轨都不是 App 单帧归因工具。 第 07、08 篇已经讲了 App 到 SurfaceFlinger 的渲染路径，第 06、09 篇已经讲了刷新率和 CPU 调度/频率。这一篇不重复这些内容，只补一个经常被跳过的环节：当问题看起来已经压到硬件资源层时，GPU、devfreq、battery counter（电池计数器）、power rail（电源轨）这些数据该怎么进入同一段 trace 分析。 这类 counter 的麻烦在于：不是每台设备都有，不同 GPU 厂商的 counte…",
-      "image": null,
-      "publishedAt": "2026-05-04T02:16:00Z",
-      "sourceId": "1aa1837ca33d8d55",
-      "sourceTitle": "Android Performance",
-      "link": "https://androidperformance.com/2026/05/04/Android-Perfetto-16-GPU-Power-Counters/",
-      "detailPath": "articles/081dae40631f5b064a37150a.json"
-    },
-    {
-      "id": "1a3b16f394c9aa967643014c",
-      "title": "Android Perfetto 系列 15：Boot Trace、长时间现场 Trace 与偶发问题抓取",
-      "summary": "很多性能问题不是点一下就能复现的。开机慢、偶发卡顿、亮灭屏后异常、几小时后音频断续、车机周期性抖动、温升后的性能下降，都不适合靠 10 秒手工 trace 解决。 这一篇讲现场长 Trace：怎么提前定义窗口，怎么用 trigger 封存问题现场，怎么让文件安全写完，怎么拿回来之后判断数据是否可信。Boot Trace 放在后面作为特殊窗口处理。基础的交互式抓取方式（命令行、官方脚本、开发者选项、网页端）第 02 篇已经讲过，本文只讨论现场和长时间运行带来的差异。",
-      "image": null,
-      "publishedAt": "2026-05-04T02:15:00Z",
-      "sourceId": "1aa1837ca33d8d55",
-      "sourceTitle": "Android Performance",
-      "link": "https://androidperformance.com/2026/05/04/Android-Perfetto-15-Boot-And-Long-Running-Field-Tracing/",
-      "detailPath": "articles/1a3b16f394c9aa967643014c.json"
     }
   ]
 }
