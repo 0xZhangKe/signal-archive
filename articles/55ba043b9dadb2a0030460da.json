@@ -1,0 +1,11 @@
+{
+  "id": "55ba043b9dadb2a0030460da",
+  "title": "OpenToonz设置Angle图形引擎启动程序",
+  "summary": "最近在研究制作动画，了解到吉卜力工作室使用的OpenToonz动画软件。但是我的Windows电脑不知为何打不 … 继续阅读 OpenToonz设置Angle图形引擎启动程序 →",
+  "content": "<p>最近在研究制作动画，了解到吉卜力工作室使用的OpenToonz动画软件。但是我的Windows电脑不知为何打不开，可能是显卡驱动的问题（因为Krita也打不开）。总之看到Crash日志发现是N卡的OpenGL渲染器不支持？<br>所以去任务管理器禁用掉N卡的驱动后反而能打开了、在另一台机器的RDP也可以打开。<br>而且在日志下方除了OpenGL渲染器还有一项Angle渲染器，抛砖引玉，试着寻找有没有什么变通的办法能调用Angle。后来也在GitHub的issue上，我发现了来自贡献者的方案详解：<br><a href=\"https://github.com/opentoonz/opentoonz/issues/6630#issuecomment-3922104018\" target=\"_blank\" rel=\"noopener noreferrer\">https://github.com/opentoonz/opentoonz/issues/6630#issuecomment-3922104018</a></p>\n\n\n\n<ol>\n<li>右键单击桌面上的 OpenToonz 快捷方式，然后选择“属性”。</li>\n\n\n\n<li>在“快捷方式”选项卡中，找到“目标”字段。它应该显示：<br><code>&quot;C:\\Program Files\\OpenToonz\\OpenToonz.exe&quot;</code></li>\n\n\n\n<li>将该文本替换为以下命令（请完全复制并粘贴）：<br><code>cmd.exe /c &quot;set QT_OPENGL=angle &amp;&amp; start &quot;&quot; &quot;C:\\Program Files\\OpenToonz\\OpenToonz.exe&quot;&quot;</code></li>\n\n\n\n<li>在同一窗口中，找到“运行”下拉菜单，并将其从“普通窗口”更改为“最小化”。（这样可以确保启动应用程序时黑色命令窗口保持隐藏状态）。</li>\n\n\n\n<li>点击“应用”和“确定”。</li>\n</ol>\n\n<p><a href=\"https://v1sta.xyz/artworks/opentoonz%e8%ae%be%e7%bd%aeangle%e5%9b%be%e5%bd%a2%e5%bc%95%e6%93%8e%e5%90%af%e5%8a%a8%e7%a8%8b%e5%ba%8f/\" target=\"_blank\" rel=\"noopener noreferrer\">来源</a></p>",
+  "image": "https://v1sta.xyz/wp-content/uploads/2026/03/V1sta-Orb-Output512-2.png",
+  "publishedAt": "2026-09-29T07:46:51Z",
+  "sourceId": "d29b4f2186bb32e1",
+  "sourceTitle": "景の域",
+  "link": "https://v1sta.xyz/artworks/opentoonz%e8%ae%be%e7%bd%aeangle%e5%9b%be%e5%bd%a2%e5%bc%95%e6%93%8e%e5%90%af%e5%8a%a8%e7%a8%8b%e5%ba%8f/"
+}
