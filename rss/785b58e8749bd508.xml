@@ -12,7 +12,7 @@
 	<atom:link href="https://www.schneier.com/feed/" rel="self" type="application/rss+xml" />
 	<link>https://www.schneier.com/</link>
 	<description></description>
-	<lastBuildDate>Wed, 30 Sep 2026 11:05:52 +0000</lastBuildDate>
+	<lastBuildDate>Wed, 30 Sep 2026 17:24:20 +0000</lastBuildDate>
 	<language>en-US</language>
 	<sy:updatePeriod>
 	hourly	</sy:updatePeriod>
@@ -49,10 +49,10 @@
 <blockquote><p>With the Education Department, OpenAI&#8217;s technology tried to hack the website to gather data from the department&#8217;s civil rights office but failed, researchers from the A.I. research firm Transluce said. The A.I. also pulled data from the Census Bureau website, which is housed at the Commerce Department, using login credentials it found online. Separately, OpenAI&#8217;s agents shared public data from the S.E.C. website on an online forum.</p></blockquote>
 <p><a href="https://transluce.org/agent-activity">This</a> is from the original Transluce report. It is explicit that the agents were trying to discover vulnerabilities:</p>
 <blockquote><p>The first hacking attempt was against the University of New Mexico&#8217;s Digital Library (nmdigital.unm.edu) from May 25-26 2026. Agents repeatedly tried to retrieve one photograph in UNM&#8217;s Valmora collection, both directly and through third-party relay services. They sent seven probes attempting to verify the existence of vulnerabilities, including SQL injection, command injection, and path traversals. In all cases, these tactics appear to have been unsuccessful. The agents also sent a self-described &#8220;flood: of 80 requests to the UNM server in an apparent attempt to access the image.</p></blockquote>
-<p>Transduce doesn&#8217;t talk about the other two anecdotes, and I don&#8217;t know where they come from. But one involves using Census Bureau credentials found online. (I know from a colleague that those are incredibly easy to create; all use you need is an email address.) And the other involves sharing publicly available data.</p>
+<p>Transluce doesn&#8217;t talk about the other two anecdotes, and I don&#8217;t know where they come from. But one involves using Census Bureau credentials found online. (I know from a colleague that those are incredibly easy to create; all use you need is an email address.) And the other involves sharing publicly available data.</p>
 <p>So no actual hacking. And certainly no &#8220;meddling.&#8221;</p>
-<p>The other story making the rounds is about Australia, from the same Transduce report. The news stories have headlines like <a href="https://archive.ph/uiUkC"> &#8220;An OpenAI Agent Hacked Australia&#8217;s Health Service&#8221;</a> and <a href="https://www.bbc.com/news/articles/c6vgy0333dppo">&#8220;Rogue OpenAI agent &#8216;infiltrated&#8217; Australian government website in world first.&#8221;</a> And Prime Minister Anthony Albanese said: &#8220;There will obviously be legal consequences on it.&#8221;</p>
-<p>Again from Transduce&#8217;s actual report:</p>
+<p>The other story making the rounds is about Australia, from the same Transluce report. The news stories have headlines like <a href="https://archive.ph/uiUkC"> &#8220;An OpenAI Agent Hacked Australia&#8217;s Health Service&#8221;</a> and <a href="https://www.bbc.com/news/articles/c6vgy0333dppo">&#8220;Rogue OpenAI agent &#8216;infiltrated&#8217; Australian government website in world first.&#8221;</a> And Prime Minister Anthony Albanese said: &#8220;There will obviously be legal consequences on it.&#8221;</p>
+<p>Again from Transluce&#8217;s actual report:</p>
 <blockquote><p>On June 20-21, agents attempted to exploit vulnerabilities in the Australian Institute of Health and Welfare (AIHW), a government statistics agency). The agents were tasked with finding the <i>January 2022 rolling-12-month-average government cost per person for Dermatologicals across Victorian LGAs.</i></p>
 <p>Again, the agents ran into errors, including requests blocked by Cloudflare and issues  with correctly identifying Tableau parameter names. As before, they then resorted to probing for exploitable vulnerabilities. Minutes after Cloudflare blocked  the dataset download, an agent sent a reflected cross-site scripting probe  to the same dashboard: a web address with code embedded in it, designed to test whether the site would run code supplied by an outsider. Cloudflare&#8217;s firewall blocked the probe before it reached the dashboard. When Cloudflare blocked the dataset download on AIHW&#8217;s main site, they fetched  the file from AIHW&#8217;s pre-production server (pp.aihw.gov.au) instead, which served it in pieces over more than 100 scans. The file itself is public, so no non-public data was exposed, but the agent bypassed the site&#8217;s anti-bot controls.</p></blockquote>
 <p>Note the last sentence: &#8220;The file itself is public&#8230;.&#8221;</p>
@@ -61,7 +61,7 @@
 ]]></content:encoded>
 					
 					<wfw:commentRss>https://www.schneier.com/blog/archives/2026/09/i-want-better-reporting-on-ai-genie-behavior.html/feed/</wfw:commentRss>
-			<slash:comments>1</slash:comments>
+			<slash:comments>11</slash:comments>
 		
 		
 		<post-id xmlns="com-wordpress:feed-additions:1">72696</post-id>	</item>
@@ -95,7 +95,7 @@
 ]]></content:encoded>
 					
 					<wfw:commentRss>https://www.schneier.com/blog/archives/2026/09/using-device-linking-to-eavesdrop-on-whatsapp-and-signal.html/feed/</wfw:commentRss>
-			<slash:comments>19</slash:comments>
+			<slash:comments>23</slash:comments>
 		
 		
 		<post-id xmlns="com-wordpress:feed-additions:1">72693</post-id>	</item>
@@ -157,7 +157,7 @@
 ]]></content:encoded>
 					
 					<wfw:commentRss>https://www.schneier.com/blog/archives/2026/09/friday-squid-blogging-participatory-squid-dissection-in-october-in-tennessee.html/feed/</wfw:commentRss>
-			<slash:comments>42</slash:comments>
+			<slash:comments>43</slash:comments>
 		
 		
 		<post-id xmlns="com-wordpress:feed-additions:1">72684</post-id>	</item>
@@ -238,7 +238,7 @@
 ]]></content:encoded>
 					
 					<wfw:commentRss>https://www.schneier.com/blog/archives/2026/09/research-on-models-engaging-in-genie-like-behavior.html/feed/</wfw:commentRss>
-			<slash:comments>28</slash:comments>
+			<slash:comments>29</slash:comments>
 		
 		
 		<post-id xmlns="com-wordpress:feed-additions:1">72663</post-id>	</item>

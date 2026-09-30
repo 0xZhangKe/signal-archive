@@ -12,7 +12,7 @@
 	<atom:link href="https://blog.jetbrains.com/kotlin/feed/" rel="self" type="application/rss+xml" />
 	<link>https://blog.jetbrains.com</link>
 	<description>Developer Tools for Professionals and Teams</description>
-	<lastBuildDate>Tue, 29 Sep 2026 14:01:33 +0000</lastBuildDate>
+	<lastBuildDate>Wed, 30 Sep 2026 12:18:56 +0000</lastBuildDate>
 	<language>en-US</language>
 	<sy:updatePeriod>
 	hourly	</sy:updatePeriod>
@@ -28,6 +28,114 @@
 	<height>32</height>
 </image> 
 	<item>
+		<title>The Companions to Come</title>
+		<link>https://blog.jetbrains.com/kotlin/2026/09/the-companions-to-come/</link>
+		
+		<dc:creator><![CDATA[Alejandro Serrano Mena]]></dc:creator>
+		<pubDate>Wed, 30 Sep 2026 10:33:03 +0000</pubDate>
+		<featuredImage>https://blog.jetbrains.com/wp-content/uploads/2026/09/KT-social-BlogFeatured-1280x720-1-2.png</featuredImage>		<category><![CDATA[kotlin]]></category>
+		<category><![CDATA[news]]></category>
+		<guid isPermaLink="false">https://blog.jetbrains.com/?post_type=kotlin&#038;p=743559</guid>
+
+					<description><![CDATA[We are working on extensions to our companions mechanism to unlock new code patterns and improve interoperability across different platforms. This post outlines these new features and provides preliminary guidance on migration. Companion blocks and extensions Many programming languages provide a notion of class or type members – functionality that does not belong to each [&#8230;]]]></description>
+										<content:encoded><![CDATA[
+<p>We are working on extensions to our companions mechanism to unlock new code patterns and improve interoperability across different platforms. This post outlines these new features and provides preliminary guidance on migration.</p>
+
+
+
+<h2 class="wp-block-heading">Companion blocks and extensions</h2>
+
+
+
+<p>Many programming languages provide a notion of class or type members – functionality that does not belong to each particular value of a class, but to the class itself. Constants, utilities, and factory methods are often in this group.<br></p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="kotlin" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">val v1 = Vector(1.0, 2.0)             // a regular vector
+val v2 = Vector.ZERO                  // the constant zero vector
+val v3 = Vector.unit(angle = PI / 2)  // unit vector with an angle </pre>
+
+
+
+<p>Previously, <a href="https://kotlinlang.org/docs/object-declarations.html#companion-objects" target="_blank" rel="noopener">companion objects</a> were used to define these members. From Kotlin 2.5.0 on, you can also use an experimental companion block, which is very close syntactically, but with profound changes in compilation.<br></p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="kotlin" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">data class Vector(val x: Double, val y: Double) {
+  companion {
+    val ZERO = Vector(0.0, 0.0)
+  }
+}</pre>
+
+
+
+<p>In fact, these members may not be defined directly on the class itself. You can also use an experimental companion extension to declare new class members in a type, even if you don&#8217;t control them.</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="kotlin" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">companion fun Vector.unit(angle: Double) = Vector(cos(angle), sin(angle))</pre>
+
+
+
+<p>The design of companion blocks and extensions overcomes the limitations imposed by companion objects. First of all, you can define companion extensions for any class or interface – whether you control it or not, whether it originally comes from Kotlin or from Java, or whether it has a companion object or not. <br><br>Second, the compilation strategy resembles that of static members in other platforms. For example, on the JVM, companion blocks are compiled as static members. This has additional implications for Kotlin Multiplatform: you can now define expected companion block members and actualize them using a Java class that contains static members.</p>
+
+
+
+<p><em>If you want to know more about this upcoming language feature, the corresponding </em><a href="https://github.com/Kotlin/KEEP/blob/main/proposals/KEEP-0449-companions-block-extension.md" target="_blank" rel="noopener"><em>KEEP proposal</em></a><em> contains all the information.</em></p>
+
+
+
+<h2 class="wp-block-heading">Using experimental companions</h2>
+
+
+
+<p>Companion blocks and extensions are experimental features in Kotlin 2.5.0. That means that you need to pass an additional compiler flag to use the feature:</p>
+
+
+
+<ul class="wp-block-list">
+<li><code>-Xcompanion-blocks</code> to allow companion blocks.</li>
+
+
+
+<li><code>-Xcompanion-blocks-and-extensions</code> to allow both companion blocks and extensions.<br></li>
+</ul>
+
+
+
+<p>Using the second feature causes the compiler to produce pre-release binaries, which means libraries using companion extensions may not be consumed as dependencies until the feature becomes stable. This restriction does not apply to exposing companion blocks, although consumers of such blocks still need to enable the companion blocks feature.</p>
+
+
+
+<h2 class="wp-block-heading">What about my companion objects?&nbsp;</h2>
+
+
+
+<p>This leads to a natural question: What is the role of companion objects in a language with companion blocks and extensions? There are two answers to this question:</p>
+
+
+
+<ul class="wp-block-list">
+<li>On the one hand, most usages of companion objects would be better served by companion blocks, so new code may prefer the latter to the former.</li>
+
+
+
+<li>On the other hand, there are a few use cases that are only served by companion objects. For example, if your companion needs to implement a particular interface, companion objects are the only possibility, since they compile to a full-fledged class.<br></li>
+</ul>
+
+
+
+<p>There&#8217;s no need to migrate, though. Companion objects are an integral part of Kotlin, and support for them is fully guaranteed.&nbsp;</p>
+
+
+
+<p>If you prefer to move to companion blocks, removing the <code>object</code> keyword should be enough in most cases – but note that the project and any code depending on it need to be recompiled. Other tooling in the ecosystem may not be ready for companion blocks, although we’re trying to ensure major players provide this support as soon as possible.</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
 		<title>The State of Kotlin in 2026 Report</title>
 		<link>https://blog.jetbrains.com/kotlin/2026/09/state-of-kotlin-2026-report/</link>
 		
@@ -2551,322 +2659,6 @@ fun addTodo(
 
 
 <p>Happy shipping!</p>
-]]></content:encoded>
-					
-		
-		
-			</item>
-		<item>
-		<title>Qodana 2026.2: More Security, Better Coverage, Less Configuration</title>
-		<link>https://blog.jetbrains.com/qodana/2026/07/qodana-2026-2-more-security-better-coverage-less-configuration/</link>
-		
-		<dc:creator><![CDATA[Kerry Beetge]]></dc:creator>
-		<pubDate>Wed, 29 Jul 2026 13:47:03 +0000</pubDate>
-		<featuredImage>https://blog.jetbrains.com/wp-content/uploads/2026/07/Untitled-design-45.png</featuredImage>		<product ><![CDATA[kotlin]]></product>
-		<product ><![CDATA[qodana]]></product>
-		<product ><![CDATA[teamcity]]></product>
-		<category><![CDATA[release]]></category>
-		<guid isPermaLink="false">https://blog.jetbrains.com/?post_type=qodana&#038;p=726686</guid>
-
-					<description><![CDATA[Qodana 2026.2 makes it easier for development teams to act on code quality, security, and compliance findings throughout the development workflow. This release introduces clearer code coverage insights for pull requests, highlights uncovered new lines directly in the IDE, and automatically detects coverage reports in common project locations &#8211; reducing the configuration required to get [&#8230;]]]></description>
-										<content:encoded><![CDATA[
-<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/07/Untitled-design-45-1.png" alt="Qodana 2026.2" class="wp-image-726814"/></figure>
-
-
-
-<p>Qodana 2026.2 makes it easier for development teams to act on code quality, security, and compliance findings throughout the development workflow. This release introduces clearer code coverage insights for pull requests, highlights uncovered new lines directly in the IDE, and automatically detects coverage reports in common project locations &#8211; reducing the configuration required to get started.</p>
-
-
-
-<p>The release also expands Qodana’s security offering with new inspections, support for custom security rules, post-quantum cryptography inspections, and publicly available SAST benchmarks through SABER. Laravel inspections are now enabled by default, while new License Audit quality gates help teams prevent newly introduced dependencies with prohibited or unknown licences from progressing through the pipeline. Let&#8217;s get into the details.</p>
-
-
-
-<p align="center"><a class="jb-download-button" title="Try Qodana" href="https://www.jetbrains.com/qodana/buy/?billing=yearly" rel="noopener noreferrer" data-mce-href="https://www.jetbrains.com/qodana/buy/?billing=yearly" data-mce-selected="inline-boundary" data-mce- target="_blank"><i class="download-icon"></i>Try Qodana</a></p>
-
-
-
-<h2 class="wp-block-heading"> Better Code Coverage UX</h2>
-
-
-
-<h3 class="wp-block-heading">Code Coverage for incremental analysis in the IDE</h3>
-
-
-
-<p>Starting with Qodana 2026.2, pull request analyses can show which changed or added lines are covered by tests and which are not, alongside the total coverage for newly added code, known as fresh coverage.</p>
-
-
-
-<p>After the analysis, developers can open the report in the IDE and browse the files changed in the pull request. They can see which files lack coverage through statistics in the tool window, while new lines are highlighted in the IDE to reveal coverage gaps. Developers can use this information to write targeted tests for functionality that lacks coverage, improving the reliability of their software.</p>
-
-
-
-<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/07/image-35.png" alt="Qodana code coverage fo incremental analysis in the IDE" class="wp-image-726705"/></figure>
-
-
-
-<h3 class="wp-block-heading"><strong>Out-of-the-box code coverage reporting</strong></h3>
-
-
-
-<p>Showing code coverage results in Qodana now requires fewer configuration steps. You no longer need to copy all reports to the <code>.qodana/code-coverage</code> directory, which lets you simplify your build configuration.</p>
-
-
-
-<p>Qodana 2026.2 automatically detects coverage reports in the project:</p>
-
-
-
-<ul class="wp-block-list">
-<li>Qodana for JVM and Qodana for Android: default paths for Jacoco and Kover plugins are supported for both Maven and Gradle</li>
-
-
-
-<li>Qodana for JS: default location <code>coverage/lcov.info</code> is supported, as well as some common community locations like <code>reports</code> or <code>test-coverage</code> directories</li>
-
-
-
-<li>Qodana for PHP: <code>clover.xml</code> and <code>coverage.xml</code> files are supported in common in community locations, such as the project root, <code>build/logs</code>, <code>reports</code> and <code>coverage</code></li>
-
-
-
-<li>Qodana for Python:&nbsp; <code>coverage.xml</code> file is supported in common locations like project root, <code>coverage-reports</code> or <code>reports</code></li>
-
-
-
-<li>Qodana for Go: <code>coverage.out</code> or <code>cover.out</code> files in root directory and other common directories like&nbsp; <code>coverage</code>, <code>reports</code> are supported</li>
-
-
-
-<li>Qodana for .NET: <code>coverage.cobertura</code> and <code>coverage.info</code> files in project root or other common directories like&nbsp; <code>coverage</code> or <code>TestResults</code> are supported<br></li>
-</ul>
-
-
-
-<p>To generate code coverage reports, set up one of the <a href="https://www.jetbrains.com/help/qodana/code-coverage.html" target="_blank" rel="noopener">supported tools</a>, and see your statistics in any run. To disable this behaviour, either selectively copy your reports to the <code>.qodana/code-coverage directory</code>, or specify your custom location using a new <code>codeCoverageLocations</code> parameter in your <code>qodana.yaml</code> file. See <a href="https://www.jetbrains.com/help/qodana/2026.2/code-coverage.html#code-coverage-before-you-start" target="_blank" rel="noopener">the documentation</a> for an example of how to specify a custom directory. To disable coverage reporting, disable the <a href="https://www.jetbrains.com/help/qodana/2026.2/code-coverage.html#How+code+coverage+works" target="_blank" rel="noopener">corresponding inspection</a> in your configuration.</p>
-
-
-
-<p align="center"><a class="jb-download-button" title="View Documentation" href="https://www.jetbrains.com/help/qodana/code-coverage.html" rel="noopener noreferrer" data-mce-href="https://www.jetbrains.com/help/qodana/code-coverage.html" data-mce-selected="inline-boundary" data-mce- target="_blank"><i class="download-icon"></i>View Documentation</a></p>
-
-
-
-<h2 class="wp-block-heading">New security inspections</h2>
-
-
-
-<p><strong>Broader SAST and multi-file taint analysis</strong></p>
-
-
-
-<p>Qodana 2026.2 expands the security analysis available in the Qodana for .NET linter, helping teams detect a broader range of vulnerabilities in C#, JavaScript, and TypeScript code. The new inspections are enabled by default in the recommended profile and appear as standard Qodana findings within existing IDE, CI/CD, and reporting workflows.</p>
-
-
-
-<p>The expanded inspection set combines two forms of analysis. Pattern-matching rules identify insecure coding practices within individual code locations, while taint analysis tracks untrusted data as it moves through an application, including across multiple files. This enables Qodana to detect vulnerabilities such as SQL injection, command injection, cross-site scripting (XSS), and path traversal.</p>
-
-
-
-<p>Teams can also extend this coverage with their own security rules. Qodana for .NET now supports custom and third-party rules written in the OpenGrep format. Place these rules in the .qodana/opengrep directory at the project root, and Qodana will make them available as Qodana inspections.</p>
-
-
-
-<p>The predefined rules are publicly available in the opengrep-sast-rules repository. Behind the scenes, pattern matching uses an open-source JetBrains fork of OpenGrep, while data-flow tracking is handled by Qodana’s own taint analysis engine. This gives teams access to the OpenGrep rule format and ecosystem while retaining Qodana’s multi-file analysis and developer workflows. Support will be extended to additional Qodana linters and languages (Kotlin/Java) in future releases.</p>
-
-
-
-<p>The following example shows how Qodana detects a classic SQL injection vulnerability in the WebGoat.NET project. The taint trace follows untrusted input from Request[&#8220;productNumber&#8221;] to its use in an SQL query located in another file.<br></p>
-
-
-
-<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/07/image-36.png" alt="" class="wp-image-726720"/></figure>
-
-
-
-<p><em>The taint trace begins with the untrusted user input in the Request[&#8220;productNumber&#8221;]</em></p>
-
-
-
-<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/07/image-37.png" alt="" class="wp-image-726731"/><figcaption class="wp-element-caption"><em>Untrusted input is landed in the SQL query in another file</em></figcaption></figure>
-
-
-
-<h2 class="wp-block-heading"><strong>SABER &#8211; Static Analysis Benchmark Evaluation Runner</strong></h2>
-
-
-
-<p>To make the performance of these inspections easier to evaluate, we have introduced SABER, the Static Analysis Benchmark Evaluation Runner. SABER runs Qodana against publicly available security benchmarks and compares its findings with known expected results.</p>
-
-
-
-<p><strong>Transparent SAST benchmarking with SABER</strong></p>
-
-
-
-<p>The current benchmark suite includes:</p>
-
-
-
-<ul class="wp-block-list">
-<li>CodeQL benchmarks for C# and JavaScript, built from CodeQL .expected files</li>
-
-
-
-<li>WebGoat.NET, using publicly available ground-truth data from Sonar</li>
-
-
-
-<li>The Qodana post-quantum cryptography demonstration project</li>
-</ul>
-
-
-
-<p><br>The benchmark configurations, individual runs, and aggregated results are publicly available on the<a href="https://jb.gg/sq26z2" target="_blank" rel="noopener"> SABER TeamCity instance</a>. <br><br>Guest access is enabled, allowing anyone to inspect the results and follow how Qodana’s SAST capabilities develop over time. It is available via <a href="https://jb.gg/sq26z2" target="_blank" rel="noopener">this link</a>. Guest access is enabled, so anyone can open it using the ‘Log in as guest’ option. We have a strong commitment to demonstrating SAST-related capabilities and continually improving them using industry-standard benchmarks. For example, this is the aggregated report for the currently available benchmarks:</p>
-
-
-
-<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/07/image-41.png" alt="" class="wp-image-726875"/><figcaption class="wp-element-caption">SABER in Qodana 2026.2</figcaption></figure>
-
-
-
-<p>Projects ‘CodeQL C#&#8217; and ‘CodeQL JS’  use the <a href="https://github.com/jetbrains-qodana/codeql-benchmark" target="_blank" rel="noopener">jetbrains-qodana/codeql-benchmark</a> project that is built from the <a href="https://github.com/github/codeql" target="_blank" rel="noopener">CodeQL</a> ‘.expected’ files. Project <a href="http://webgoat.net" target="_blank" rel="noopener">WebGoat.NET</a> is a well-known vulnerable C# project (our fork is here: <a href="https://github.com/jetbrains-qodana/WebGoat.NET" target="_blank" rel="noopener">jetbrains-qodana/WebGoat.NET</a>) and uses the publicly available <a href="https://github.com/SonarSource/sonar-benchmarks-scores/blob/master/csharp/security/WebGoat.Net/ground-truth.json" target="_blank" rel="noopener">ground-truth.json</a> as the expected results. The <a href="https://jb.gg/gsngr2" target="_blank" rel="noopener">PQC demo</a> project is a test project that demonstrates the capability to identify post-quantum cryptography issues in your code.</p>
-
-
-
-<h2 class="wp-block-heading"><strong>Post-Quantum Cryptography (PQC) inspections</strong></h2>
-
-
-
-<p>If you have heard about quantum computation, you might know that it will, in the future, easily break many widely used public-key cryptographic algorithms (such as RSA and ECC). Even though quantum computation is not yet widely spread, you should be ready now because of the <a href="https://en.wikipedia.org/wiki/Harvest_now,_decrypt_later" target="_blank" rel="noopener">Harvest Now, Decrypt Later</a> approach, in which future attackers might already harvest and store your encrypted data to decrypt it later.</p>
-
-
-
-<p>Qodana for JVM now includes inspections that help developers identify affected code and guide them toward post-quantum cryptographic alternatives, reducing future security risk and supporting a gradual, manageable migration, helping organizations prepare for quantum-era security risks.</p>
-
-
-
-<p>Our PQC inspections are implemented in accordance with <a href="https://www.nist.gov/pqc" target="_blank" rel="noopener">NIST recommendations</a> and are grouped into several priority levels (called PqcMinLevel1, PqcMinLevel2, and so on to PqcMinLevel5). To enable these inspections, activate one of the corresponding groups that represent NIST-based post-quantum readiness levels:<br></p>
-
-
-
-<ul class="wp-block-list">
-<li>Level 1 &#8211; Flag pre-quantum and legacy cryptographic algorithms. This uncovers the most critical vulnerabilities.</li>
-
-
-
-<li>Level 2 &#8211; Flag baseline post-quantum algorithms.</li>
-
-
-
-<li>Level 3 &#8211; Flag standard-strength post-quantum algorithms.</li>
-
-
-
-<li>Level 4 &#8211; Flag high-strength post-quantum algorithms.</li>
-
-
-
-<li>Level 5 &#8211; Flag all algorithms except those providing maximum security.</li>
-</ul>
-
-
-
-<p>Every level includes all previous levels, so level 5 includes inspections from levels 1-4 as well.</p>
-
-
-
-<p>We also prepared a demo project (<a href="https://github.com/jetbrains-qodana/pqc-demo" target="_blank" rel="noopener">PQC demo</a>) that showcases PQC&#8217;s current capabilities. These inspections are backed by OpenGrep and taint analysis (described in the previous section), which also support excellent pattern matching and multifile taint analysis for Java and Kotlin, as shown in the example below.</p>
-
-
-
-<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/07/image-38.png" alt="" class="wp-image-726742"/></figure>
-
-
-
-<p><em>A non-compliant crypto protocol is found in a string constant</em></p>
-
-
-
-<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/07/image-39.png" alt="" class="wp-image-726754"/><figcaption class="wp-element-caption"><em>That is propagated via another file</em></figcaption></figure>
-
-
-
-<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/07/image-40.png" alt="" class="wp-image-726765"/><figcaption class="wp-element-caption"><em>And landed in real usage, showing a correct detection of the issue</em></figcaption></figure>
-
-
-
-<h2 class="wp-block-heading"><strong>Laravel checks enabled by default</strong></h2>
-
-
-
-<p>Qodana for PHP now includes Laravel code inspections. This reduces the number of false positives in PHP code, and analyses code for Laravel-specific code problems, such as directly assigning values to guarded attributes.</p>
-
-
-
-<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/07/image-42.png" alt="" class="wp-image-726890"/><figcaption class="wp-element-caption">Laravel checks</figcaption></figure>
-
-
-
-<h2 class="wp-block-heading">Quality gates on License Audit</h2>
-
-
-
-<p>Qodana 2026.2 adds support for license audit quality gates, with two new options:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-
-
-
-<ul class="wp-block-list">
-<li><code>failOnProhibited</code> — fails the run if any dependency uses a license prohibited by your configured license rules.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
-
-
-
-<li><code>failOnUnknown</code> — fails the run if any dependency has a license that couldn&#8217;t be detected or categorized.</li>
-</ul>
-
-
-
-<p><br>For example, in qodana.yaml, the failureConditions section may now contain a dependencyLicenses block:</p>
-
-
-
-<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">failureConditions:                                                                                                                                                                                                                     
-  dependencyLicenses:                                                                                                                                                                                                                  
-    failOnProhibited: true
-    failOnUnknown: true
-</pre>
-
-
-
-<p>Qodana evaluates the quality gate against the collected dependency licenses directly, independently of whether License Audit problems are present as inspection results. Only the CheckDependencyLicenses inspection needs to be enabled.</p>
-
-
-
-<p>License audit quality gates also work for incremental analysis, and only fail on new violations. </p>
-
-
-
-<h2 class="wp-block-heading">What to do next:</h2>
-
-
-
-<p>If you’re already using the latest release, you’re ready to start using the improvements in Qodana 2026.2 right away. If not, update to 2026.2.</p>
-
-
-
-<p>For setup details and feature-specific guidance, head over <a href="https://www.jetbrains.com/help/qodana/2026.2/new-in-qodana.html" target="_blank" rel="noopener">to the documentation</a>. If you’d like to see what Qodana can do in your own environment, try it on your project and explore the latest updates on the <a href="https://blog.jetbrains.com/qodana/">Qodana blog</a>.<br><br>Request a demo if you&#8217;d like to learn more from our sales team or want 20% off when switching to Qodana from a comparable, commercial solution.</p>
-
-
-
-<p align="center"><a class="jb-download-button" title="Request Qodana Demo" href="https://www.jetbrains.com/qodana/request-a-demo/" rel="noopener noreferrer" data-mce-href="https://www.jetbrains.com/qodana/request-a-demo/" data-mce-selected="inline-boundary" data-mce- target="_blank"><i class="download-icon"></i>Request Qodana Demo</a></p>
-
-
-
-<p><br><br></p>
-
-
-
-<p></p>
 ]]></content:encoded>
 					
 		

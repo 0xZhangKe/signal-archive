@@ -17,7 +17,17 @@
         &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/openai"&gt;openai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/pelican-riding-a-bicycle"&gt;pelican-riding-a-bicycle&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/gpt"&gt;gpt&lt;/a&gt;&lt;/p&gt;
     
 
-</summary><category term="ai"/><category term="openai"/><category term="generative-ai"/><category term="llms"/><category term="pelican-riding-a-bicycle"/><category term="gpt"/></entry><entry><title>OpenAI DevDay 2026 live blog</title><link href="https://simonwillison.net/2026/Sep/29/openai-devday-2026-live-blog/" rel="alternate"/><published>2026-09-29T15:55:13+00:00</published><updated>2026-09-29T15:55:13+00:00</updated><id>https://simonwillison.net/2026/Sep/29/openai-devday-2026-live-blog/</id><summary type="html">
+</summary><category term="ai"/><category term="openai"/><category term="generative-ai"/><category term="llms"/><category term="pelican-riding-a-bicycle"/><category term="gpt"/></entry><entry><title>Photo Scrubber — local face blur &amp; metadata removal</title><link href="https://simonwillison.net/2026/Sep/29/photo-scrubber/" rel="alternate"/><published>2026-09-29T16:45:27+00:00</published><updated>2026-09-29T16:45:27+00:00</updated><id>https://simonwillison.net/2026/Sep/29/photo-scrubber/</id><summary type="html">
+    
+        &lt;p&gt;&lt;strong&gt;Tool:&lt;/strong&gt; &lt;a href="https://tools.simonwillison.net/photo-scrubber"&gt;Photo Scrubber — local face blur &amp;amp; metadata removal&lt;/a&gt;&lt;/p&gt;
+        &lt;p&gt;I took a photograph of some protesters, then thought about how I don't like sharing photographs of strangers with identifiable faces. I &lt;a href="https://github.com/simonw/tools/commit/aa733ecc3458d5703e3b40c84507ae362f5fb294"&gt;had GPT-6 Astra build&lt;/a&gt; this experimental tool that would identify faces and automatically blur them out.&lt;/p&gt;
+&lt;p&gt;It uses Google's &lt;a href="https://developers.google.com/edge/mediapipe/solutions/guide"&gt;MediaPipe&lt;/a&gt; C++ library, compiled to WebAssembly via &lt;a href="https://www.npmjs.com/package/@mediapipe/tasks-vision"&gt;@mediapipe/tasks-vision&lt;/a&gt;, plus the &lt;a href="https://sites.google.com/view/perception-cv4arvr/blazeface"&gt;BlazeFace&lt;/a&gt; face detection model.&lt;/p&gt;
+    
+    
+        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/photography"&gt;photography&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/tools"&gt;tools&lt;/a&gt;&lt;/p&gt;
+    
+
+</summary><category term="photography"/><category term="tools"/></entry><entry><title>OpenAI DevDay 2026 live blog</title><link href="https://simonwillison.net/2026/Sep/29/openai-devday-2026-live-blog/" rel="alternate"/><published>2026-09-29T15:55:13+00:00</published><updated>2026-09-29T15:55:13+00:00</updated><id>https://simonwillison.net/2026/Sep/29/openai-devday-2026-live-blog/</id><summary type="html">
     &lt;p&gt;I'm at &lt;a href="https://devday.openai.com/"&gt;OpenAI DevDay&lt;/a&gt; today, in Fort Mason, San Francisco. Same as &lt;a href="https://simonwillison.net/2025/Oct/6/openai-devday-live-blog/"&gt;last year&lt;/a&gt; I'll be live blogging the keynote and some other notes during the day.&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;OpenAI gave me a free ticket and a seat in the "creator" area for the keynote.&lt;/em&gt;&lt;/p&gt;
@@ -1407,18 +1417,4 @@ After a two year preview, Cloudflare's support for running Python code in their 
         &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/llm"&gt;llm&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/coding-agents"&gt;coding-agents&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/codex"&gt;codex&lt;/a&gt;&lt;/p&gt;
     
 
-</summary><category term="llm"/><category term="coding-agents"/><category term="codex"/></entry><entry><title>datasette-explain 0.2.2</title><link href="https://simonwillison.net/2026/Sep/20/datasette-explain/" rel="alternate"/><published>2026-09-20T00:22:04+00:00</published><updated>2026-09-20T00:22:04+00:00</updated><id>https://simonwillison.net/2026/Sep/20/datasette-explain/</id><summary type="html">
-    
-        &lt;p&gt;&lt;strong&gt;Release:&lt;/strong&gt; &lt;a href="https://github.com/simonw/datasette-explain/releases/tag/0.2.2"&gt;datasette-explain 0.2.2&lt;/a&gt;&lt;/p&gt;
-        &lt;blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;Explain plans now work on read-only stored-query pages.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;I upgraded &lt;a href="https://datasette.simonwillison.net"&gt;datasette.simonwillison.net&lt;/a&gt; to Datasette 1.0a40, which inspired me to ship a new version of this explain plugin.&lt;/p&gt;
-    
-    
-        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/sqlite"&gt;sqlite&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/datasette"&gt;datasette&lt;/a&gt;&lt;/p&gt;
-    
-
-</summary><category term="sqlite"/><category term="datasette"/></entry></feed>
+</summary><category term="llm"/><category term="coding-agents"/><category term="codex"/></entry></feed>
