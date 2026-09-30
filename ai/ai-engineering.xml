@@ -5,6 +5,30 @@
     <link>https://0xzhangke.github.io/signal-archive/</link>
     <description>AI 整理的公开网络内容，附原始来源。</description>
     <item>
+      <title>Anthropic发布Claude Sonnet 5.5：速度提升超30%，任务成本最多降低30%</title>
+      <link>https://applealmond.com/posts/327263</link>
+      <guid isPermaLink="false">urn:signal-archive:ai:de8608275564686566a40aecbd104263</guid>
+      <archive:collectedAt>2026-09-30T06:17:42Z</archive:collectedAt>
+      <description>Anthropic于2026年9月28日推出Claude Sonnet 5.5，接替今年6月发布的Sonnet 5。新模型生成输出速度比Sonnet 5快超过30%，完成相同工作通常也需要更少的token。虽然API单价维持不变（每百万输入/输出token为2/10美元），但实际任务成本最多可降低30%。这是继9月22日推出Opus 5.5后，Anthropic对中端模型的更新，专为范围明确的日常任务优化。</description>
+      <content:encoded>&lt;p&gt;Anthropic于2026年9月28日推出Claude Sonnet 5.5，接替今年6月发布的Sonnet 5。新模型生成输出速度比Sonnet 5快超过30%，完成相同工作通常也需要更少的token。虽然API单价维持不变（每百万输入/输出token为2/10美元），但实际任务成本最多可降低30%。这是继9月22日推出Opus 5.5后，Anthropic对中端模型的更新，专为范围明确的日常任务优化。&lt;/p&gt;&lt;ul&gt;&lt;li&gt;输出生成速度提升超30%，是目前最快的Sonnet模型&lt;/li&gt;&lt;li&gt;任务成本最多降低30%，主要得益于更少的token用量而非单价下降&lt;/li&gt;&lt;li&gt;适合修正程序错误、制作文件、简报和电子表格等明确的日常工作&lt;/li&gt;&lt;li&gt;采用与Opus 5相当的高阶资安防护与回退机制，针对高风险的资安任务会自动回退至Sonnet 5&lt;/li&gt;&lt;li&gt;已推出并可在Claude Code与Claude Platform等服务使用，开发者API调用使用`claude-sonnet-5-5`标识&lt;/li&gt;&lt;/ul&gt;&lt;h3&gt;来源 / Sources&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;&lt;a href="https://applealmond.com/posts/327263"&gt;Claude Sonnet 5.5 推出！速度提升逾 30%，API 单价维持不变&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</content:encoded>
+    </item>
+    <item>
+      <title>OpenAI推出Decisions API：150毫秒快速决策，直接竞争TypeSafe Jev</title>
+      <link>https://pasqualepillitteri.it/zh/news/19378/openai-tuichu-decisions-api-jev</link>
+      <guid isPermaLink="false">urn:signal-archive:ai:774255ed4c5e26f08a4db8828adb768a</guid>
+      <archive:collectedAt>2026-09-30T06:17:42Z</archive:collectedAt>
+      <description>OpenAI在DevDay 2026上发布了Decisions API，这是基于GPT-6 Luna专用版本的决策系统，可在150毫秒内返回分类结果，而标准Luna调用需要1.6秒。开发者可定义一组有限的可选答案（如内容分类、请求分流、智能体动作选择），模型返回概率分数而非自由文本。这是对TypeSafe此前发布的Jev决策模型（号称比Claude快193.6倍）的直接回应，标志着决策模型正成为独立的基础设施层。</description>
+      <content:encoded>&lt;p&gt;OpenAI在DevDay 2026上发布了Decisions API，这是基于GPT-6 Luna专用版本的决策系统，可在150毫秒内返回分类结果，而标准Luna调用需要1.6秒。开发者可定义一组有限的可选答案（如内容分类、请求分流、智能体动作选择），模型返回概率分数而非自由文本。这是对TypeSafe此前发布的Jev决策模型（号称比Claude快193.6倍）的直接回应，标志着决策模型正成为独立的基础设施层。&lt;/p&gt;&lt;ul&gt;&lt;li&gt;基于GPT-6 Luna专用版本优化，响应时间150毫秒，比标准调用快10倍以上&lt;/li&gt;&lt;li&gt;不接受自由文本，只返回预定义答案中的选择，适合路由、分类等确定性任务&lt;/li&gt;&lt;li&gt;与Jev的关键区别：置信度分数未经RLCD校准，仅是模型自报估计值&lt;/li&gt;&lt;li&gt;当前处在有限预览阶段，未来几天将扩大发布范围，价格尚未公布&lt;/li&gt;&lt;li&gt;支持文本和图像输入，而Jev仅支持文本状态对象&lt;/li&gt;&lt;/ul&gt;&lt;h3&gt;来源 / Sources&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;&lt;a href="https://pasqualepillitteri.it/zh/news/19378/openai-tuichu-decisions-api-jev"&gt;OpenAI推出Decisions API迎战Jev&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</content:encoded>
+    </item>
+    <item>
+      <title>OpenAI DevDay 2026 发布会：推出决策API、常驻智能体dots与GPT-6.1 Sol等多达20项更新</title>
+      <link>https://openai.com/zh-Hans-CN/index/devday-2026-recap</link>
+      <guid isPermaLink="false">urn:signal-archive:ai:17dbac2f61f4f81e10221a5f2ca12dc1</guid>
+      <archive:collectedAt>2026-09-30T06:17:42Z</archive:collectedAt>
+      <description>OpenAI在2026年9月29日举办了DevDay开发者大会，发布了超过20项重大产品更新。核心包括：常驻智能体dots（由GPT-6 Astra驱动，拥有独立云端电脑和浏览器，可连接4000多个应用）、GPT-6.1 Sol模型（在智能体编程、电脑操作能力和专业工作上接近Astra水平，价格仅五分之一）、Ultrafast加速档位和每月500美元的Pro套餐，以及将Codex全面云端化。此次发布标志着OpenAI正将ChatGPT从聊天工具转变为完整的AI工作操作系统。</description>
+      <content:encoded>&lt;p&gt;OpenAI在2026年9月29日举办了DevDay开发者大会，发布了超过20项重大产品更新。核心包括：常驻智能体dots（由GPT-6 Astra驱动，拥有独立云端电脑和浏览器，可连接4000多个应用）、GPT-6.1 Sol模型（在智能体编程、电脑操作能力和专业工作上接近Astra水平，价格仅五分之一）、Ultrafast加速档位和每月500美元的Pro套餐，以及将Codex全面云端化。此次发布标志着OpenAI正将ChatGPT从聊天工具转变为完整的AI工作操作系统。&lt;/p&gt;&lt;ul&gt;&lt;li&gt;dots智能体能持续跟进复杂任务，拥有独立云端计算环境，支持Slack、Teams等多渠道交互&lt;/li&gt;&lt;li&gt;GPT-6.1 Sol在DeepSWE v1.1软件工程评测中达到Astra水平，输入/输出Token价格分别为2美元和10美元每百万&lt;/li&gt;&lt;li&gt;Codex全面云端化，用户可从手机发起任务，计算机端接续，即使关闭设备智能体仍可在云端工作&lt;/li&gt;&lt;li&gt;新增每月500美元的Pro套餐，提供更高额度和Ultrafast访问权限&lt;/li&gt;&lt;li&gt;OpenAI宣布ChatGPT每周用户数已达12亿，同时向全球用户提供额度重置机会&lt;/li&gt;&lt;/ul&gt;&lt;h3&gt;来源 / Sources&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;&lt;a href="https://openai.com/zh-Hans-CN/index/devday-2026-recap"&gt;DevDay 2026 回顾 | OpenAI&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://www.thepaper.cn/newsDetail_forward_34175433"&gt;智能体、新模型、500美元套餐齐亮相，Codex全面上云，奥特曼谈AI“新文艺复兴”&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</content:encoded>
+    </item>
+    <item>
       <title>OpenAI推出Ultrafast速度层级，API和Codex生成速度大幅提升</title>
       <link>https://finance.sina.com.cn/stock/usstock/c/2026-09-30/doc-initppix2811377.shtml</link>
       <guid isPermaLink="false">urn:signal-archive:ai:f0891283b3442bcaf82281763ab7d327</guid>
