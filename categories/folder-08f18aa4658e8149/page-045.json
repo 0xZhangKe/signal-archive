@@ -1,6 +1,28 @@
 {
   "items": [
     {
+      "id": "53b2335bd99c36f55e6efc01",
+      "title": "修正 RSS 排版",
+      "summary": "自從換到現在的 classic Hugo 主題之後，RSS 就沒排版了，在閱讀器中無法直接閱讀，Hugo 在沒有 rss.xml 的情況下，還是會輸出 index.xml，只是就沒有排版。 而 JN 在 10 月底特地來信告知，並且寫了一篇教學文章，只是 Eddie 太懶的拖到現在才處理。 （超級感謝，這是部落格才可能出現的事情，如果今天是社群平臺就被留言嗆爆了） 加入 layouts/_default/rss.xml # 原先的主題有 rss，但是在 theme 的 layouts 裡面，被我換主題之後，就直接一併被移除了，這次直接做在專案 的 layouts 裡面，就不用怕主題換了 rss 就不見。 這段程式碼與官方內建的幾乎一樣，但將關鍵的 .Summary 改成了 .Content： .Summary…",
+      "image": null,
+      "publishedAt": "2025-12-21T14:46:05Z",
+      "sourceId": "199cdf92fc46bfcd",
+      "sourceTitle": "Eddie Lv",
+      "link": "https://eddielv.com/musings/rss-fix/",
+      "detailPath": "articles/53b2335bd99c36f55e6efc01.json"
+    },
+    {
+      "id": "75f9f5aa85271568ccd73a59",
+      "title": "「搜尋」功能上線啦！",
+      "summary": "因爲文章越來越多，只靠分類其實也不好找到文章，在「 歷史上的今天 」之後，弄了搜尋功能！以下分享怎麼在 Hugo 中做到。 做出搜尋頁面的基本頁 content/search/_index --- title: \"搜尋\" type: \"search\" draft: false --- header 在導覽列做搜尋框框 themes/classic/layouts/partials/header.html <header> <nav> <ul> {{ $title := lower .Title }} {{ $section := lower .Section }} <li class=\"pull-left {{ if .IsHome }}current{{ end }}\"> <a href=\"{{ .Site…",
+      "image": null,
+      "publishedAt": "2025-12-21T13:57:54Z",
+      "sourceId": "199cdf92fc46bfcd",
+      "sourceTitle": "Eddie Lv",
+      "link": "https://eddielv.com/musings/search/",
+      "detailPath": "articles/75f9f5aa85271568ccd73a59.json"
+    },
+    {
       "id": "17be7ffcf89d1ef5957cc9d4",
       "title": "「歷史上的今天」頁面建立",
       "summary": "文章越來越多的情況下，單純用分類方式還是會很困擾，因爲列表列出之後真的太多了。處理方法可以是增加搜尋，但 Eddie 想試試看用同日期但不同年份的方式來處理，讓一次顯示的文章不要太多、太轟炸，於是「 歷史上的今天 」就建立了！ 技術層面 # 如果爲 365 天都建立一個 list 是不實際的，一個功能佔據這麼多檔案就太瞎了，因此，應該是用一個頁面來包含全部資訊，再用某種機制（判斷是）抓出自己要的文章才是正解。 html # Eddie 習慣都是做在 themes 而不是網站本身，但其實沒差，只是 hugo 優先級順序不同罷了，有確定抓到對的檔案，最終生成在 Public 內的檔案會是一樣的。 themes/classic/layouts/page/on-this-day.html {{ partial \"he…",
@@ -637,28 +659,6 @@
       "sourceTitle": "Wiwi.Blog Blog",
       "link": "https://wiwi.blog/blog/cant-zoom",
       "detailPath": "articles/f48c6e3735eb4df6685b8edd.json"
-    },
-    {
-      "id": "b9662b24d57b4efe7324c113",
-      "title": "即時修音軟體加速了聽衆接受 AI 歌手",
-      "summary": "這兩週的 AI 界歌唱界的大新聞是，AI 歌手「大頭針」翻唱了許茹芸的《淚海》，而且大多數人覺得非常像人類。 Eddie 認爲，如果 1997 年沒有發明出 Auto Tune（即時修音準軟體），並且到 2025 年的這期間的現場演出都是原始聲音，聽衆們聽到 AI 歌手大頭針的音色，絕對會覺得「這非人類」，因爲音高轉換時有太多類似修音準的痕跡了。 印象中，從 2012 《中國好聲音》比賽開始，節目都會修音準，後續的《我是歌手》等等知名節目也都有修，這讓華語流行音樂的聽衆漸漸習慣有修音的音色，也漸漸以爲那是「正常唱歌會發出的音色」。 有時候滿懷念「星光大道」、「超級偶像」那個完全不修音準的年代，評審也會針對音準來評分，但到了現代節目，你幾乎不會在歌唱比賽節目裡面聽到評審講選手音準不準。 這或許是現場已經過了即時…",
-      "image": null,
-      "publishedAt": "2025-12-08T16:59:46Z",
-      "sourceId": "199cdf92fc46bfcd",
-      "sourceTitle": "Eddie Lv",
-      "link": "https://eddielv.com/musings/auto-tune-and-ai-singer/",
-      "detailPath": "articles/b9662b24d57b4efe7324c113.json"
-    },
-    {
-      "id": "6d478c1dbd7b2cddc9d73c7b",
-      "title": "一夜爆火的小工具 - 给你的头像加上圣诞帽",
-      "summary": "欢迎！ 如果你是从我的「圣诞帽🎄 By TaurusXin」站点过来的，那么非常欢迎你也点进了我的博客，这里是我创作和分享灵感与生活日常的地方，希望你能够喜欢这里！ 如果你不知道，那么可以 点击这里 去看看，这是一个非常有意思的小工具，用于给你的社交媒体头像戴上一顶圣诞帽。 起因 12 月 8 日早上，我收到了十几封来自腾讯云 EdgeOne 与 Cloudflare 的邮件，均提示我的 CDN 流量与请求数量异常高，已经接近我设定的阈值上限而被关停。 开始认为是 PCDN 又在刷流量，后面登上 EdgeOne 的控制台发现都是正常的流量访问，来源是遍布全球的地址。 此时 EdgeOne CDN 已经自动关停，而 Cloudflare 也提示我 Worker 与 Pages 的访问数即将达到阈值 扩容 到公司…",
-      "image": "https://cdn.taurusxin.com/hugo/2025/12/08/edgeone.png",
-      "publishedAt": "2025-12-08T15:51:00Z",
-      "sourceId": "3220115c042340a7",
-      "sourceTitle": "TaurusXin 的独立博客",
-      "link": "https://www.taurusxin.com/christmas-hat/",
-      "detailPath": "articles/6d478c1dbd7b2cddc9d73c7b.json"
     }
   ]
 }
