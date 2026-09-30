@@ -12,7 +12,7 @@
 	<atom:link href="https://www.schneier.com/feed/" rel="self" type="application/rss+xml" />
 	<link>https://www.schneier.com/</link>
 	<description></description>
-	<lastBuildDate>Tue, 29 Sep 2026 11:03:07 +0000</lastBuildDate>
+	<lastBuildDate>Wed, 30 Sep 2026 11:05:52 +0000</lastBuildDate>
 	<language>en-US</language>
 	<sy:updatePeriod>
 	hourly	</sy:updatePeriod>
@@ -28,6 +28,44 @@
 	<height>32</height>
 </image> 
 <site xmlns="com-wordpress:feed-additions:1">182601345</site>	<item>
+		<title>I Want Better Reporting on AI Genie Behavior</title>
+		<link>https://www.schneier.com/blog/archives/2026/09/i-want-better-reporting-on-ai-genie-behavior.html</link>
+					<comments>https://www.schneier.com/blog/archives/2026/09/i-want-better-reporting-on-ai-genie-behavior.html#comments</comments>
+		
+		<dc:creator><![CDATA[Bruce Schneier]]></dc:creator>
+		<pubDate>Wed, 30 Sep 2026 11:05:35 +0000</pubDate>
+				<category><![CDATA[Uncategorized]]></category>
+		<category><![CDATA[AI]]></category>
+		<category><![CDATA[cyberattack]]></category>
+		<guid isPermaLink="false">https://www.schneier.com/?p=72696</guid>
+
+					<description><![CDATA[<p>AI systems are regularly completing tasks in ways that their prompters don&#8217;t want or intend. Some of them are disturbing, and some of them are dangerous. This is something I&#8217;ve been calling &#8220;<a href="https://www.lawfaremedia.org/article/ais-as-modern-genies">genie</a> <a href="https://www.theguardian.com/commentisfree/2026/jul/28/rogue-ai-agent-instructions">behavior</a>,&#8221; because I think that really gets at the core of what&#8217;s happening.</p>
+<p>I wish the popular press would report on this better. I don&#8217;t like the &#8220;going rogue&#8221; framing because it deflects the responsibility from the prompters&#8212;often the AI companies themselves. And now, pretty much anything off-script is being called &#8220;hacking.&#8221;</p>
+<p>Take, for example, the recent stories of one of OpenAI&#8217;s models hacking into government systems. First, ...</p>]]></description>
+										<content:encoded><![CDATA[<p>AI systems are regularly completing tasks in ways that their prompters don&#8217;t want or intend. Some of them are disturbing, and some of them are dangerous. This is something I&#8217;ve been calling &#8220;<a href="https://www.lawfaremedia.org/article/ais-as-modern-genies">genie</a> <a href="https://www.theguardian.com/commentisfree/2026/jul/28/rogue-ai-agent-instructions">behavior</a>,&#8221; because I think that really gets at the core of what&#8217;s happening.</p>
+<p>I wish the popular press would report on this better. I don&#8217;t like the &#8220;going rogue&#8221; framing because it deflects the responsibility from the prompters&#8212;often the AI companies themselves. And now, pretty much anything off-script is being called &#8220;hacking.&#8221;</p>
+<p>Take, for example, the recent stories of one of OpenAI&#8217;s models hacking into government systems. First, <i>The New York Times</i> <a href="https://www.nytimes.com/2026/09/25/technology/openais-ai-us-government-websites.html">writes</a> this headline: &#8220;OpenAI&#8217;s Systems Meddled With U.S. Government Sites After Going Rogue.&#8221;</p>
+<p>Sounds scary, but this is from the body of the article:</p>
+<blockquote><p>With the Education Department, OpenAI&#8217;s technology tried to hack the website to gather data from the department&#8217;s civil rights office but failed, researchers from the A.I. research firm Transluce said. The A.I. also pulled data from the Census Bureau website, which is housed at the Commerce Department, using login credentials it found online. Separately, OpenAI&#8217;s agents shared public data from the S.E.C. website on an online forum.</p></blockquote>
+<p><a href="https://transluce.org/agent-activity">This</a> is from the original Transluce report. It is explicit that the agents were trying to discover vulnerabilities:</p>
+<blockquote><p>The first hacking attempt was against the University of New Mexico&#8217;s Digital Library (nmdigital.unm.edu) from May 25-26 2026. Agents repeatedly tried to retrieve one photograph in UNM&#8217;s Valmora collection, both directly and through third-party relay services. They sent seven probes attempting to verify the existence of vulnerabilities, including SQL injection, command injection, and path traversals. In all cases, these tactics appear to have been unsuccessful. The agents also sent a self-described &#8220;flood: of 80 requests to the UNM server in an apparent attempt to access the image.</p></blockquote>
+<p>Transduce doesn&#8217;t talk about the other two anecdotes, and I don&#8217;t know where they come from. But one involves using Census Bureau credentials found online. (I know from a colleague that those are incredibly easy to create; all use you need is an email address.) And the other involves sharing publicly available data.</p>
+<p>So no actual hacking. And certainly no &#8220;meddling.&#8221;</p>
+<p>The other story making the rounds is about Australia, from the same Transduce report. The news stories have headlines like <a href="https://archive.ph/uiUkC"> &#8220;An OpenAI Agent Hacked Australia&#8217;s Health Service&#8221;</a> and <a href="https://www.bbc.com/news/articles/c6vgy0333dppo">&#8220;Rogue OpenAI agent &#8216;infiltrated&#8217; Australian government website in world first.&#8221;</a> And Prime Minister Anthony Albanese said: &#8220;There will obviously be legal consequences on it.&#8221;</p>
+<p>Again from Transduce&#8217;s actual report:</p>
+<blockquote><p>On June 20-21, agents attempted to exploit vulnerabilities in the Australian Institute of Health and Welfare (AIHW), a government statistics agency). The agents were tasked with finding the <i>January 2022 rolling-12-month-average government cost per person for Dermatologicals across Victorian LGAs.</i></p>
+<p>Again, the agents ran into errors, including requests blocked by Cloudflare and issues  with correctly identifying Tableau parameter names. As before, they then resorted to probing for exploitable vulnerabilities. Minutes after Cloudflare blocked  the dataset download, an agent sent a reflected cross-site scripting probe  to the same dashboard: a web address with code embedded in it, designed to test whether the site would run code supplied by an outsider. Cloudflare&#8217;s firewall blocked the probe before it reached the dashboard. When Cloudflare blocked the dataset download on AIHW&#8217;s main site, they fetched  the file from AIHW&#8217;s pre-production server (pp.aihw.gov.au) instead, which served it in pieces over more than 100 scans. The file itself is public, so no non-public data was exposed, but the agent bypassed the site&#8217;s anti-bot controls.</p></blockquote>
+<p>Note the last sentence: &#8220;The file itself is public&#8230;.&#8221;</p>
+<p>I&#8217;m not saying that these AI systems aren&#8217;t incredibly sophisticated cyberattackers. I&#8217;m also not saying that they don&#8217;t occasionally autonomously attack other systems and networks. If we are ever going to get trustworthy AI&#8212;<a href="https://www.schneier.com/essays/archives/2025/12/building-trustworthy-ai-agents.html">integrous AI</a>&#8212;we are going to need to figure out how to ensure that AI systems complete tasks in line with all sorts of implicit constraints and restrictions. But every instance of genie-like behavior isn&#8217;t a cyberattack.</p>
+<p>I want to <a href="https://spectrum.ieee.org/ai-agent-benchmark">measure</a> genie-like behavior in AIs, but I am much more worried about human hackers enhanced with this technology than I am about this technology acting autonomously.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.schneier.com/blog/archives/2026/09/i-want-better-reporting-on-ai-genie-behavior.html/feed/</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">72696</post-id>	</item>
+		<item>
 		<title>Using Device Linking to Eavesdrop on WhatsApp and Signal</title>
 		<link>https://www.schneier.com/blog/archives/2026/09/using-device-linking-to-eavesdrop-on-whatsapp-and-signal.html</link>
 					<comments>https://www.schneier.com/blog/archives/2026/09/using-device-linking-to-eavesdrop-on-whatsapp-and-signal.html#comments</comments>
@@ -57,7 +95,7 @@
 ]]></content:encoded>
 					
 					<wfw:commentRss>https://www.schneier.com/blog/archives/2026/09/using-device-linking-to-eavesdrop-on-whatsapp-and-signal.html/feed/</wfw:commentRss>
-			<slash:comments>12</slash:comments>
+			<slash:comments>19</slash:comments>
 		
 		
 		<post-id xmlns="com-wordpress:feed-additions:1">72693</post-id>	</item>
@@ -90,7 +128,7 @@
 ]]></content:encoded>
 					
 					<wfw:commentRss>https://www.schneier.com/blog/archives/2026/09/new-attack-against-rsa.html/feed/</wfw:commentRss>
-			<slash:comments>12</slash:comments>
+			<slash:comments>14</slash:comments>
 		
 		
 		<post-id xmlns="com-wordpress:feed-additions:1">72687</post-id>	</item>
@@ -119,7 +157,7 @@
 ]]></content:encoded>
 					
 					<wfw:commentRss>https://www.schneier.com/blog/archives/2026/09/friday-squid-blogging-participatory-squid-dissection-in-october-in-tennessee.html/feed/</wfw:commentRss>
-			<slash:comments>41</slash:comments>
+			<slash:comments>42</slash:comments>
 		
 		
 		<post-id xmlns="com-wordpress:feed-additions:1">72684</post-id>	</item>
@@ -282,34 +320,5 @@
 		
 		
 		<post-id xmlns="com-wordpress:feed-additions:1">72594</post-id>	</item>
-		<item>
-		<title>Are AIs Still Struggling with CAPTCHAs?</title>
-		<link>https://www.schneier.com/blog/archives/2026/09/are-ais-still-struggling-with-captchas.html</link>
-					<comments>https://www.schneier.com/blog/archives/2026/09/are-ais-still-struggling-with-captchas.html#comments</comments>
-		
-		<dc:creator><![CDATA[Bruce Schneier]]></dc:creator>
-		<pubDate>Fri, 18 Sep 2026 11:05:52 +0000</pubDate>
-				<category><![CDATA[Uncategorized]]></category>
-		<category><![CDATA[AI]]></category>
-		<category><![CDATA[captchas]]></category>
-		<category><![CDATA[games]]></category>
-		<guid isPermaLink="false">https://www.schneier.com/?p=72657</guid>
-
-					<description><![CDATA[<p>Anthropic&#8217;s recent security-incident <a href="https://www-cdn.anthropic.com/e50be2e51e7695dc4b1366a37a245a597377d3b5/Anthropic-Detecting-and-countering-091026.pdf">document</a> contains a bit about how CAPTCHAs are still <a href="https://gizmodo.com/ai-models-can-crack-everything-but-captchas-2000810126">frustrating</a> Claude.</p>
-<blockquote><p>In the transcript, the Claude model that is so powerful that Anthropic is gatekeeping access to it appeared to slam its virtual head against the wall solving a simple image identification test. In a test where the agent was asked to identify a shape that didn&#8217;t match the others displayed, it couldn&#8217;t even decide which image to select. Instead, it repeatedly went over the same images and questioned its own conclusions.</p>
-<p>&#8220;Actually hmm, wait,&#8221; it said in its chain-of-thought transcript, later adding &#8220;Ugh,&#8221; because we&#8217;ve decided that we need to inject human mannerisms into these machines for some reason. The whole thing took so long that the agent eventually realized that the challenge had expired and it would have to start the process again...</p></blockquote>]]></description>
-										<content:encoded><![CDATA[<p>Anthropic&#8217;s recent security-incident <a href="https://www-cdn.anthropic.com/e50be2e51e7695dc4b1366a37a245a597377d3b5/Anthropic-Detecting-and-countering-091026.pdf">document</a> contains a bit about how CAPTCHAs are still <a href="https://gizmodo.com/ai-models-can-crack-everything-but-captchas-2000810126">frustrating</a> Claude.</p>
-<blockquote><p>In the transcript, the Claude model that is so powerful that Anthropic is gatekeeping access to it appeared to slam its virtual head against the wall solving a simple image identification test. In a test where the agent was asked to identify a shape that didn&#8217;t match the others displayed, it couldn&#8217;t even decide which image to select. Instead, it repeatedly went over the same images and questioned its own conclusions.</p>
-<p>&#8220;Actually hmm, wait,&#8221; it said in its chain-of-thought transcript, later adding &#8220;Ugh,&#8221; because we&#8217;ve decided that we need to inject human mannerisms into these machines for some reason. The whole thing took so long that the agent eventually realized that the challenge had expired and it would have to start the process again.</p>
-<p>At one point, the model struggled to recognize that the CAPTCHA had opened in a new window and couldn&#8217;t figure out what its next steps were supposed to be. At one point, it theorized that the test might be &#8220;broken by design&#8221; and presented human-like anger in its transcript meant for a human audience: &#8220;SO WHAT THE HELL IS WRONG WITH THE ANSWERS?&#8221;</p></blockquote>
-<p>Meanwhile, I&#8217;ve read <a href="https://x.com/openlabxorg/status/2097039545502228926">reports</a>&#8212;none of them official&#8212;that GPT-6 Astra solved all forty-eight levels of Neal Agarwal&#8217;s &#8220;I&#8217;m Not a Robot&#8221; <a href="https://neal.fun/not-a-robot/">game</a>.</p>
-<p>It&#8217;s hard to know what to believe right now.</p>
-]]></content:encoded>
-					
-					<wfw:commentRss>https://www.schneier.com/blog/archives/2026/09/are-ais-still-struggling-with-captchas.html/feed/</wfw:commentRss>
-			<slash:comments>26</slash:comments>
-		
-		
-		<post-id xmlns="com-wordpress:feed-additions:1">72657</post-id>	</item>
 	</channel>
 </rss>
