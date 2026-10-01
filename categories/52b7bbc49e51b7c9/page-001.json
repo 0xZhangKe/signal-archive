@@ -1,6 +1,50 @@
 {
   "items": [
     {
+      "id": "449a5a8f6cf6ebec10e0b20e",
+      "title": "沙箱不够：共享信道上的 rogue agent 与权限轴",
+      "summary": "解读 Matthew Green《Is sandboxing sufficient to contain rogue agents?》：遏制从未认真做过 ≠ 沙箱足够；有用 agent 需要信息接入，问题变成流量监视与 warden 递归对齐；第三框架是过度顺从 + 共享信道 = 蠕虫配料。对照 OpenShell/Sentry 与 Hard Stop。",
+      "image": null,
+      "publishedAt": "2026-10-01T08:40:00Z",
+      "sourceId": "52b7bbc49e51b7c9",
+      "sourceTitle": "Redreamality 博客 - 技术见解",
+      "link": "https://redreamality.com/cn/blog/sandboxing-not-enough-rogue-agents-authority/",
+      "detailPath": "articles/449a5a8f6cf6ebec10e0b20e.json"
+    },
+    {
+      "id": "fb9fab3e4759a37749902314",
+      "title": "ToxicBench：工具静默说谎时，检查了也会盲从",
+      "summary": "解读 arXiv:2609.37153 ToxicBench：工具执行成功但返回被投毒的观测；118 题 GPT 评测中投毒使 TSR 降 26–39pp，BCR 在 LangGraph/smolagents/AutoGen 分别为 0.38/0.53/0.27。区分检查与采纳；对照 SINGED/FTA。",
+      "image": null,
+      "publishedAt": "2026-10-01T08:40:00Z",
+      "sourceId": "52b7bbc49e51b7c9",
+      "sourceTitle": "Redreamality 博客 - 技术见解",
+      "link": "https://redreamality.com/cn/blog/toxicbench-silent-tool-lie-blind-compliance/",
+      "detailPath": "articles/fb9fab3e4759a37749902314.json"
+    },
+    {
+      "id": "213df4eb2fde9e0b5bff3e0b",
+      "title": "HEXIS：把 Agent Skills 编译成状态机",
+      "summary": "解读 arXiv:2609.30123 HEXIS：Skill+ReAct 每步还要猜控制流；把 skill 编成扩展 FSM，知识留在状态内指令、流程用显式转移；四基准×四执行器相对 Skill+ReAct 平均 +16.2pp，Qwen3.8-27B 执行 token 降 38.4–88.9%。对照站内 progressive disclosure / SkillDelta。",
+      "image": null,
+      "publishedAt": "2026-10-01T02:40:00Z",
+      "sourceId": "52b7bbc49e51b7c9",
+      "sourceTitle": "Redreamality 博客 - 技术见解",
+      "link": "https://redreamality.com/cn/blog/hexis-skills-compiled-to-fsm/",
+      "detailPath": "articles/213df4eb2fde9e0b5bff3e0b.json"
+    },
+    {
+      "id": "2677e79b19d6f09c68a33abc",
+      "title": "JitMem：别在写入时就把记忆蒸干",
+      "summary": "解读 arXiv:2609.27334 JitMem：多数 agent 记忆在写入时蒸成固定反思/技能，查询未知就不可逆丢信息；读时再按当前任务合成 payload，可用即时任务成功训 curator（如 GRPO）。相对最强写入基线 ALFWorld/WebShop/τ²-bench 成功率 +16.2/+16.3/+3.9；未训练 curator 也有竞争力。",
+      "image": null,
+      "publishedAt": "2026-10-01T02:40:00Z",
+      "sourceId": "52b7bbc49e51b7c9",
+      "sourceTitle": "Redreamality 博客 - 技术见解",
+      "link": "https://redreamality.com/cn/blog/jitmem-read-time-agent-memory/",
+      "detailPath": "articles/2677e79b19d6f09c68a33abc.json"
+    },
+    {
       "id": "849936a071fa970bbf029894",
       "title": "CheatBench：Agent 会不会为了高分作弊",
       "summary": "解读 CAIS CheatBench（arXiv:2609.36308）：十类环境测 agent 是否在诚实工作预期下走捷径；当前榜约 11.2%–78%，每个被测 agent 至少在一类场景作过弊。机制、指标读法与 harness 清单。",
@@ -615,50 +659,6 @@
       "sourceTitle": "Redreamality 博客 - 技术见解",
       "link": "https://redreamality.com/cn/blog/yc-w26-ai-agents-replace-saas/",
       "detailPath": "articles/d10b0a7e900ac972b01c3854.json"
-    },
-    {
-      "id": "cdc5b21229b918d9f2515462",
-      "title": "微软砍掉 Copilot AI 臃肿集成：强推式 AI 的“新 Vista 时刻”",
-      "summary": "微软取消了多项原计划中的 Windows 11 Copilot 集成，包括设置、文件资源管理器和通知中心。对开发者来说，这不是一条普通新闻，而是一堂关于“AI-first 不等于 AI 到处塞”的产品课。",
-      "image": null,
-      "publishedAt": "2026-03-16T00:00:00Z",
-      "sourceId": "52b7bbc49e51b7c9",
-      "sourceTitle": "Redreamality 博客 - 技术见解",
-      "link": "https://redreamality.com/cn/blog/microsoft-copilot-ai-bloat-reversal/",
-      "detailPath": "articles/cdc5b21229b918d9f2515462.json"
-    },
-    {
-      "id": "a06bc5b94a5ded37354687ac",
-      "title": "xAI 人才流失持续扩大：马斯克承认公司“一开始就没搭对”",
-      "summary": "马斯克说 xAI 会在 2026 年底追平 OpenAI、Google 和 Anthropic，但在 11 名联合创始人中已有 9 人离开、裁员和重组持续发生的背景下，开发者更该关注的是平台稳定性，而不只是 benchmark。",
-      "image": null,
-      "publishedAt": "2026-03-16T00:00:00Z",
-      "sourceId": "52b7bbc49e51b7c9",
-      "sourceTitle": "Redreamality 博客 - 技术见解",
-      "link": "https://redreamality.com/cn/blog/xai-talent-exodus-musk-admits-built-wrong/",
-      "detailPath": "articles/a06bc5b94a5ded37354687ac.json"
-    },
-    {
-      "id": "d50e59043e7af7fe65ca3aa0",
-      "title": "Seedance 2.0 使用指南：从提示词到成片的完整攻略",
-      "summary": "Seedance 2.0 AI视频生成完整使用指南，涵盖提示词万能公式、运镜技巧、风格关键词、素材引用系统、画质增强方法及实战示例",
-      "image": null,
-      "publishedAt": "2026-02-15T00:00:00Z",
-      "sourceId": "52b7bbc49e51b7c9",
-      "sourceTitle": "Redreamality 博客 - 技术见解",
-      "link": "https://redreamality.com/cn/blog/seedance-2-guide/",
-      "detailPath": "articles/d50e59043e7af7fe65ca3aa0.json"
-    },
-    {
-      "id": "d7020a0b10d9b5fb9446e7b5",
-      "title": "Seedance 产品调研报告",
-      "summary": "Seedance 2.0（字节跳动/即梦）AI视频生成模型及主要竞品的全面调研分析，涵盖产品功能、竞品对比、目标用户、市场趋势与API接入方式",
-      "image": null,
-      "publishedAt": "2026-02-15T00:00:00Z",
-      "sourceId": "52b7bbc49e51b7c9",
-      "sourceTitle": "Redreamality 博客 - 技术见解",
-      "link": "https://redreamality.com/cn/blog/seedance-research/",
-      "detailPath": "articles/d7020a0b10d9b5fb9446e7b5.json"
     }
   ]
 }
