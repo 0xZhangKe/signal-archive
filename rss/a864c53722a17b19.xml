@@ -1,5 +1,355 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>est の 输入 输出和出入</title><link>https://blog.est.im/</link><description>This blog is rated 🔞, viewer discretion is advised</description><lastBuildDate>Sat, 26 Sep 2026 22:51:00 +0800</lastBuildDate><item><title>Node.js、浏览器和 Cloudflare Workers 的wasm引入问题</title><link>https://blog.est.im/2026/stdout-36</link><description>&lt;p&gt;最近在鼓捣 WebAssembly，这玩意没啥神秘的，可以看出一坨二进制的 .js 库文件&lt;/p&gt;
+<rss version="2.0"><channel><title>est の 输入 输出和出入</title><link>https://blog.est.im/</link><description>This blog is rated 🔞, viewer discretion is advised</description><lastBuildDate>Thu, 01 Oct 2026 20:33:00 +0800</lastBuildDate><item><title>preconnect 走 http3</title><link>https://blog.est.im/2026/stdout-38</link><description>&lt;p&gt;想让 &lt;code&gt;&amp;lt;link rel="preconnect"&amp;gt;&lt;/code&gt; 强制走 HTTP/3，能做到吗？&lt;/p&gt;
+&lt;h3&gt;preconnect 是什么&lt;/h3&gt;
+&lt;pre&gt;&lt;code class="language-html"&gt;&amp;lt;link rel=&amp;quot;preconnect&amp;quot; href=&amp;quot;https://example.com&amp;quot;&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;浏览器看到这个标签，会立刻去做这几件事：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;解析 &lt;code&gt;example.com&lt;/code&gt; 域名&lt;/li&gt;
+&lt;li&gt;建立一个连接&lt;/li&gt;
+&lt;li&gt;完成 TLS 握手（如必要）&lt;/li&gt;
+&lt;li&gt;保持连接并等着，不发送任何请求正文&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;等真正要请求资源时，这个连接已经热好了。这就是 提前连接 preconnect&lt;/p&gt;
+&lt;p&gt;HTTP/3 跑在 UDP 上（QUIC 协议），HTTP/1.1 和 HTTP/2 跑在 TCP 上。&lt;/p&gt;
+&lt;p&gt;HTML 层面没有任何办法声明"这个 preconnect 要走 h3"。&lt;/p&gt;
+&lt;p&gt;这个连接最终用什么协议，HTTP/1.1、HTTP/2、HTTP/3，浏览器有一系列决定流程&lt;/p&gt;
+&lt;h3&gt;触发 h3 preconnect 的三个条件&lt;/h3&gt;
+&lt;p&gt;网络层有两条实现路径（Chromium 正在迁移，两条并存）&lt;/p&gt;
+&lt;h4&gt;条件 ①：浏览器缓存了这个站点的 Alt-Svc&lt;/h4&gt;
+&lt;p&gt;服务端某次响应头带上：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Alt-Svc: h3=&amp;quot;:443&amp;quot;; ma=86400
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;浏览器把它记下来（存进 profile 磁盘缓存），之后所有对该站点的 preconnect 都会走 QUIC。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;传统路径：&lt;code&gt;http_stream_factory_job_controller.cc:915-919, 950-968&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;新路径（HttpStreamPool）：&lt;code&gt;http_stream_pool_job_controller.cc:283-288&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class="language-cpp"&gt;// If the preconnect explicitly requests QUIC, start preconnecting before
+// checking existing SpdySession and idle streams.
+if (origin_quic_version_.IsKnown()) {
+  preconnect_callback_ = std::move(callback);
+  StartAltSvcQuicPreconnect();
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4&gt;条件 ②：DNS 的 HTTPS 记录（RFC 9460 SVCB）里 ALPN 含 h3&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;example.com.  IN HTTPS 1 . alpn=&amp;quot;h3,h3-29,h2,h1&amp;quot; port=443
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;浏览器判定逻辑：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;传统路径：&lt;code&gt;http_stream_factory_job_controller.cc:925-932&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;新路径：&lt;code&gt;http_stream_pool_attempt_manager.cc:1333-1361&lt;/code&gt; → &lt;code&gt;quic_session_pool.cc:1687&lt;/code&gt; &lt;code&gt;SelectQuicVersion()&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;关键规则：&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-cpp"&gt;// net/quic/quic_session_pool.cc:1691
+if (metadata.supported_protocol_alpns.empty()) {
+  // 纯 A/AAAA 记录 → 除非已知 QUIC 版本，否则这个 endpoint 不合格
+  return svcb_optional ? known_quic_version : Unsupported();
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;DNS 只有 A/AAAA 记录时，浏览器根本不会尝试 QUIC，必须 DNS 里明确写 &lt;code&gt;h3&lt;/code&gt;。&lt;/p&gt;
+&lt;h4&gt;条件 ③：&lt;code&gt;force_quic_everywhere&lt;/code&gt;（理论上行，Chrome 里做不到）&lt;/h4&gt;
+&lt;p&gt;&lt;code&gt;net/quic/quic_context.h:131-133&lt;/code&gt; 的 &lt;code&gt;QuicParams&lt;/code&gt; 确实能全局强制 QUIC，代码路径也支持：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;http_stream_factory_job.cc:145-177&lt;/code&gt;（&lt;code&gt;using_quic_&lt;/code&gt; 含 &lt;code&gt;ShouldForceQuic&lt;/code&gt;）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;http_stream_pool_job.cc:43-47&lt;/code&gt;（&lt;code&gt;group-&amp;gt;force_quic()&lt;/code&gt; 时只允许 QUIC）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;但我把 &lt;code&gt;net/base/switches.h&lt;/code&gt;、&lt;code&gt;content_switches.h&lt;/code&gt;、&lt;code&gt;chrome_switches.h&lt;/code&gt; 都翻了一遍，Chrome 没有任何命令行开关能设置它（老版本的 &lt;code&gt;--force-quic-everywhere&lt;/code&gt; 已移除）。只有 Cronet 或自己编译的 embedder 直接构造 &lt;code&gt;QuicContext&lt;/code&gt; 才能用。&lt;/p&gt;
+&lt;p&gt;→ 实际可用方案只有 ① 和 ②。&lt;/p&gt;
+&lt;h3&gt;实施细节&lt;/h3&gt;
+&lt;p&gt;不考虑 &lt;code&gt;Alt-Svc&lt;/code&gt;，细说冷连接直接 h3&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;example.com.  IN HTTPS 1 . alpn=&amp;quot;h3,h3-29,h2,h1&amp;quot; port=443
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;必要条件，缺一不可：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;必须开启 Secure DNS(DoH) —— 这是最容易踩的坑。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Chromium 里 &lt;code&gt;NetworkService&lt;/code&gt; 用默认配置创建 DNS 解析器：&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-cpp"&gt;// services/network/network_service.cc:483
+host_resolver_manager_ = std::make_unique&amp;lt;net::HostResolverManager&amp;gt;(
+    net::HostResolver::ManagerOptions(), ...);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;默认 &lt;code&gt;insecure_dns_mode = kDisabled&lt;/code&gt;（&lt;code&gt;net/dns/host_resolver.h:354&lt;/code&gt;），意思是不走 Chromium 内置的明文 DNS 客户端，只走系统 resolver(getaddrinfo)。而系统 resolver 无法查询 type 65。&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-cpp"&gt;// net/dns/host_resolver_dns_task.cc:378
+if (types.Has(DnsQueryType::HTTPS)) {
+  if (!secure() &amp;amp;&amp;amp; !client_-&amp;gt;CanQueryAdditionalTypesViaInsecureDns(ech_mode_)) {
+    https_disabled_ = true;         // 直接把 HTTPS 查询删掉
+    types.Remove(DnsQueryType::HTTPS);
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;所以要去 &lt;code&gt;chrome://settings/security&lt;/code&gt; → 使用安全 DNS，或用企业策略 &lt;code&gt;SecureDnsMode&lt;/code&gt; 配自定义 DoH。你用的 DoH 服务器必须支持 type 65（Cloudflare / Google / Quad9 都支持）。&lt;/p&gt;
+&lt;ol start="2"&gt;
+&lt;li&gt;
+&lt;p&gt;QUIC 不能被关：&lt;code&gt;chrome://flags/#enable-quic&lt;/code&gt; 保持默认（Default = 开）。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;origin 未被标记 QUIC broken。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;不能走代理。源码两处都要求直连：&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code class="language-cpp"&gt;session_-&amp;gt;IsQuicEnabled() &amp;amp;&amp;amp; proxy_info_.is_direct()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;（&lt;code&gt;http_stream_factory_job_controller.cc:925-932&lt;/code&gt;）。代理下 preconnect 只会走 TCP。&lt;/p&gt;
+&lt;ol start="5"&gt;
+&lt;li&gt;必须是 https：HTTP/3 只用于加密连接。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4&gt;type 65 的两个时序问题&lt;/h4&gt;
+&lt;p&gt;查询顺序上 type 65 排第一（&lt;code&gt;kPrioritizeHttpsResourceRecord&lt;/code&gt; 默认开），然后才是 AAAA、A。但实际上 DoH 下三个查询是并发发出的（&lt;code&gt;host_resolver_manager_job.cc:864&lt;/code&gt;）：&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-cpp"&gt;// DoH queries can bypass the dispatcher and start all of their transactions immediately.
+if (secure) {
+  while (dns_task_-&amp;gt;num_additional_transactions_needed() &amp;gt;= 1) {
+    dns_task_-&amp;gt;StartNextTransaction();
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;所以理论上不存在 HTTPS 单独慢的问题。&lt;/p&gt;
+&lt;p&gt;type 65 来迟了怎么办？ 只有 20% × 50ms 的窗口：&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-cpp"&gt;// host_resolver_dns_task.cc:1165
+timeout = total_time_for_other_transactions * extra_time_percent / 100;  // 20%
+timeout = std::min(timeout, timeout_max);   // 50ms
+timeout = std::max(timeout, timeout_min);   // 5ms
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;举例：A/AAAA 用了 30ms，type 65 只多等 6ms。超时就按"没这条记录"处理。&lt;/p&gt;
+&lt;p&gt;为什么不等更久？因为三个查询并发在飞，type 65 只要不比 A/AAAA 慢太多就来得及。&lt;/p&gt;
+&lt;h4&gt;降级是静默的&lt;/h4&gt;
+&lt;p&gt;如果 DNS 里没返回 h3 ALPN，QUIC 侧会返回 &lt;code&gt;ERR_DNS_NO_MATCHING_SUPPORTED_ALPN&lt;/code&gt;，然后自动回落到 TCP preconnect：&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-cpp"&gt;// http_stream_factory_job_controller.cc:586
+if (result == ERR_DNS_NO_MATCHING_SUPPORTED_ALPN &amp;amp;&amp;amp; preconnect_backup_job_) {
+  main_job_ = std::move(preconnect_backup_job_);
+  main_job_-&amp;gt;Preconnect(num_streams_);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;所以配错不会报错，只会静默降级成 TCP。 只能靠 netlog 确认。&lt;/p&gt;
+&lt;p&gt;同样的降级也发生在 type 65 查询超时、SERVFAIL、REFUSED 时 —— &lt;code&gt;IsFatalTransactionFailure()&lt;/code&gt; 对 HTTPS 查询永远返回 false，失败时合成一个空的合法响应，效果等同"这条记录不存在"。preconnect 照样成功，只是走 TCP。&lt;/p&gt;
+&lt;p&gt;唯一的例外是 DoH + &lt;code&gt;UseDnsHttpsSvcbEnforceSecureResponse=true&lt;/code&gt;（默认 false），或 ECH 严格模式，此时失败是致命的 —— 因为必须拿到 SVCB 信息才能继续。普通用户碰不到。&lt;/p&gt;
+&lt;h4&gt;DNS 侧的四个额外坑&lt;/h4&gt;
+&lt;p&gt;非 443 端口不支持。 源码里直接写了注释：&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-cpp"&gt;// http_stream_factory_job_controller.cc:113
+// Note: Chrome does not yet support different port DNS alpn.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;所以 h3 preconnect 实际上只对 443 有效。&lt;/p&gt;
+&lt;p&gt;ALPN 写了 &lt;code&gt;h2&lt;/code&gt; 但没写 &lt;code&gt;h3&lt;/code&gt; 反而会堵死 h3。 &lt;code&gt;SelectQuicVersion&lt;/code&gt; 一旦看到 SVCB 记录就只认列表里的 h3，找不到直接返回 &lt;code&gt;Unsupported&lt;/code&gt;，不会退回"忽略 SVCB 走 QUIC"。也就是说只要发了 HTTPS 记录，就必须在里面写 h3。&lt;/p&gt;
+&lt;p&gt;HTTPS 记录的 TTL 会拉低整个域名的缓存寿命。 &lt;code&gt;TtlFromInternalResults&lt;/code&gt; 取所有查询结果里最短的 TTL（&lt;code&gt;host_cache.cc:729&lt;/code&gt;），而 HTTPS metadata 也在这份结果里。别把 HTTPS TTL 单独调小于 A/AAAA，建议保持一致。&lt;/p&gt;
+&lt;p&gt;ipv4hint/ipv6hint 在稳定版不生效。 代码支持，但受 &lt;code&gt;kUseDnsHttpsSvcbAddressHints&lt;/code&gt; 控制，默认关闭（&lt;code&gt;net_base_features.cc:85&lt;/code&gt;）。好消息是它不是必需的，A/AAAA 会正常返回 IP。&lt;/p&gt;
+&lt;h4&gt;一个容易误判的点&lt;/h4&gt;
+&lt;p&gt;源码里有"流式返回中间 DNS 结果"的机制（&lt;code&gt;DnsTaskResultsManager&lt;/code&gt;），但它的三个开关默认全是关的：&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-cpp"&gt;// host_resolver_manager_job.cc:856
+if (kEnableIntermediateDnsResults ||     // 默认关
+    kAsyncDnsQuicJob ||                  // 默认关
+    resolver_-&amp;gt;IsHappyEyeballsV3Enabled()) {   // 默认关
+  dns_task_results_manager_ = ...;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;所以当前稳定版 Chrome 实际是"要么全等到齐、要么超时降级"，没有真正的流式中间结果。 容易误以为存在该机制。&lt;/p&gt;
+&lt;h3&gt;局限性&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;坑&lt;/th&gt;
+&lt;th&gt;说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;粒度只能是 origin 级&lt;/td&gt;
+&lt;td&gt;Alt-Svc 和 SVCB 都是站点级信息。一旦生效，后续真实请求也会一起走 h3；没法只让 preconnect 走 h3 而普通请求走 h2。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;UDP 443 被封&lt;/td&gt;
+&lt;td&gt;QUIC 握手失败 → 标记 QUIC broken → 之后连 Alt-Svc 都不看，直接退 TCP，还多等一个握手超时。表现为首帧变慢而不是报错。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;代理环境下基本失效&lt;/td&gt;
+&lt;td&gt;方案 B 完全失效（要求直连）；方案 A 需要 alt-svc + QUIC 代理同时具备。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;第一次 preconnect 不生效&lt;/td&gt;
+&lt;td&gt;方案 A 必须先有一次真实响应。方案 B 没有这个问题（DNS 直接可查）。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;非 https 目标&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;http://&lt;/code&gt; 永远不会走 h3（&lt;code&gt;GURL::SchemeIsCryptographic&lt;/code&gt; 判定）。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;crossorigin&lt;/code&gt; 属性无用&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;&amp;lt;link rel=preconnect crossorigin&amp;gt;&lt;/code&gt; 只影响 credentials mode 和连接分组键，不影响协议选择。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;连接数会被合并/限流&lt;/td&gt;
+&lt;td&gt;同一 origin 的多个 preconnect 合并到同一个连接池，受上限约束（&lt;code&gt;kDefaultMaxStreamSocketsPerGroup = 6&lt;/code&gt;，&lt;code&gt;http_stream_pool.h:110&lt;/code&gt;）。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;QUIC 只能开 1 条&lt;/td&gt;
+&lt;td&gt;h3 preconnect 只建 1 个 QUIC session。TCP 侧在服务端支持优先级时也会把预连接数压到 1（&lt;code&gt;http_stream_factory_job.cc:255-270&lt;/code&gt;）。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;QUIC 被禁后不可恢复&lt;/td&gt;
+&lt;td&gt;profile 偏好 &lt;code&gt;kQuicAllowed&lt;/code&gt; 一旦被企业策略置 false，代码里明确注释 "re-enabling QUIC is not supported"，只能重启浏览器或换 profile。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3&gt;检查清单&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;抓 netlog（最权威）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code class="language-bash"&gt;# macOS
+&amp;quot;/Applications/Google Chrome.app/Contents/MacOS/Google Chrome&amp;quot; \
+  --log-net-log --net-log-file=/tmp/netlog.json \
+  --net-log-capture-mode=IncludeSensitive
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;打开 &lt;a href="https://netlog-viewer.appspot.com/"&gt;https://netlog-viewer.appspot.com/&lt;/a&gt; 拖进去，搜：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;HTTP_STREAM_JOB&lt;/code&gt; 且 type = &lt;code&gt;preconnect_dns_alpn_h3&lt;/code&gt; → 方案 B 生效&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;HTTP_STREAM_POOL_JOB_ALIVE&lt;/code&gt; 里 &lt;code&gt;allowed_alpns&lt;/code&gt; 含 &lt;code&gt;h3&lt;/code&gt; → 方案 A 或 B 生效&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;QUIC_SESSION&lt;/code&gt; / &lt;code&gt;QUIC_VERSION_NEGOTIATION&lt;/code&gt; → 确认真的握手了&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;HOST_RESOLVER_DNS_TASK&lt;/code&gt; 的 &lt;code&gt;transactions_needed&lt;/code&gt; 里有没有 &lt;code&gt;HTTPS&lt;/code&gt; 类型 → 没有就说明压根没发这个查询&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start="2"&gt;
+&lt;li&gt;确认 QUIC 没被关&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;chrome://version&lt;/code&gt; → 命令行里没有 &lt;code&gt;--disable-quic&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;chrome://policy&lt;/code&gt; → 没有禁用 QUIC 的企业策略&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start="3"&gt;
+&lt;li&gt;确认 DNS 记录正确&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code class="language-bash"&gt;# 直接问你的 DoH（推荐，能验证真实链路）
+dig @your-doh-host example.com HTTPS
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;看 ANSWER 里 &lt;code&gt;alpn=&lt;/code&gt; 是否含 &lt;code&gt;h3&lt;/code&gt;。注意直接 &lt;code&gt;dig HTTPS example.com&lt;/code&gt; 走的是系统 resolver，即使能查到也不代表 Chrome 会用。&lt;/p&gt;
+&lt;ol start="4"&gt;
+&lt;li&gt;按顺序排查&lt;/li&gt;
+&lt;/ol&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;#&lt;/th&gt;
+&lt;th&gt;检查项&lt;/th&gt;
+&lt;th&gt;怎么查&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;DoH 开了吗&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;chrome://settings/security&lt;/code&gt; → "使用安全 DNS" 非"关闭"&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;DoH 服务器支持 type 65 吗&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;dig @doh-host example.com HTTPS&lt;/code&gt; 要有 ANSWER&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;td&gt;Secure DNS 模式&lt;/td&gt;
+&lt;td&gt;必须"自动"或"安全"。"关闭" = 完全不发 type 65&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;4&lt;/td&gt;
+&lt;td&gt;端口是 443 吗&lt;/td&gt;
+&lt;td&gt;非 443 不支持&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;5&lt;/td&gt;
+&lt;td&gt;ALPN 串里有 h3 吗&lt;/td&gt;
+&lt;td&gt;注意是 &lt;code&gt;h3&lt;/code&gt; 不是 &lt;code&gt;h3-30&lt;/code&gt;，建议 &lt;code&gt;h3,h3-29,h2,h1&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;6&lt;/td&gt;
+&lt;td&gt;是直连吗&lt;/td&gt;
+&lt;td&gt;走代理时 DNS-ALPN-h3 被禁用&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;7&lt;/td&gt;
+&lt;td&gt;QUIC 没被关吗&lt;/td&gt;
+&lt;td&gt;flags 默认 + policy 无禁用&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;8&lt;/td&gt;
+&lt;td&gt;TTL 合理吗&lt;/td&gt;
+&lt;td&gt;HTTPS TTL 别短于 A/AAAA&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;9&lt;/td&gt;
+&lt;td&gt;origin 没被标 QUIC broken&lt;/td&gt;
+&lt;td&gt;之前握手失败过会被标记，之后退 TCP 直到重启&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3&gt;源码文件参考&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;文件&lt;/th&gt;
+&lt;th&gt;作用&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;third_party/blink/renderer/core/loader/preload_helper.cc&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Blink 侧：把 &lt;code&gt;&amp;lt;link rel=preconnect&amp;gt;&lt;/code&gt; 变成 preconnect 指令&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;services/network/network_context.cc&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;转发给 &lt;code&gt;HttpStreamFactory::PreconnectStreams&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;net/http/http_stream_factory.cc&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;传统路径入口，创建 JobController&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;net/http/http_stream_factory_job_controller.cc&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;核心判定：何时走 DNS-ALPN-H3 / Alt-Svc，失败如何回落 TCP&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;net/http/http_stream_factory_job.cc&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;单个连接任务，&lt;code&gt;using_quic_&lt;/code&gt; 判定&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;net/http/http_stream_pool_job_controller.cc&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;新路径（HEv3）preconnect 逻辑&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;net/http/http_stream_pool_attempt_manager.cc&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;新路径：QUIC/TCP 连接尝试、竞速&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;net/quic/quic_session_pool.cc&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;SelectQuicVersion()&lt;/code&gt;：SVCB ALPN 匹配逻辑&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;net/http/http_network_session.cc&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;ShouldForceQuic()&lt;/code&gt; / &lt;code&gt;IsQuicEnabled()&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;net/quic/quic_context.h&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;force_quic_everywhere&lt;/code&gt; 等参数定义&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;net/dns/host_resolver.h&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;ManagerOptions.insecure_dns_mode&lt;/code&gt;（为什么必须 DoH）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;net/dns/host_resolver_dns_task.cc&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;HTTPS RR 查询条件、查询顺序、等待超时预算&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;net/dns/host_resolver_manager_job.cc&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;DoH 下多查询并发发起&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;net/dns/host_cache.cc&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;TtlFromInternalResults()&lt;/code&gt;：缓存 TTL 取各结果最小值&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;net/dns/public/util.cc&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;GetNameForHttpsQuery()&lt;/code&gt;：非 443 端口的查询域名格式&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">est</dc:creator><pubDate>Thu, 01 Oct 2026 20:33:00 +0800</pubDate><guid isPermaLink="false">tag:None,2026-10-01:/2026/stdout-38</guid><category>stdout</category></item><item><title>Node.js、浏览器和 Cloudflare Workers 的wasm引入问题</title><link>https://blog.est.im/2026/stdout-36</link><description>&lt;p&gt;最近在鼓捣 WebAssembly，这玩意没啥神秘的，可以看出一坨二进制的 .js 库文件&lt;/p&gt;
 &lt;p&gt;它本身的export和调用方式是统一的，但如今天我才知道，在不同 JavaScript 运行环境加载 &lt;code&gt;.wasm&lt;/code&gt; 方式并不完全一样。&lt;/p&gt;
 &lt;p&gt;例如 &lt;a href="https://developers.cloudflare.com/workers/runtime-apis/webassembly/javascript/#use-from-javascript"&gt;Cloudflare Workers&lt;/a&gt; 可以直接：&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-js"&gt;import wasm from &amp;quot;./simple.wasm&amp;quot;;
@@ -39,70 +389,7 @@ const foo = await init(wasm);
 &lt;pre&gt;&lt;code class="language-js"&gt;import { init } from &amp;quot;./foo.mjs&amp;quot;;
 
 const foo = await init(&amp;quot;./simple.wasm&amp;quot;);
-&lt;/code&gt;&lt;/pre&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">est</dc:creator><pubDate>Sat, 26 Sep 2026 22:51:00 +0800</pubDate><guid isPermaLink="false">tag:None,2026-09-26:/2026/stdout-36</guid><category>stdout</category></item><item><title>聪明 Agent 四套路 和 人肉学习</title><link>https://blog.est.im/2026/stdin-18</link><description>&lt;p&gt;nVIDIA 联合 NTU，MIT 联合研究了一项关于 Agent harness 自我提升的&lt;a href="https://arxiv.org/abs/2609.20519"&gt;研究&lt;/a&gt;，项目叫 &lt;a href="https://nvlabs.github.io/SoL-Pi/"&gt;SoL-Pi&lt;/a&gt;， Scaling Auto-Research Loops for Efficient Agent Harnesses&lt;/p&gt;
-&lt;p&gt;让 Research Agent 自动发现 Harness 里的 Token 浪费，再通过大规模实验筛掉无效改法。把结论再放进大量环境中反复测试。整个探索一共 152 个候选方向，分成 context、progress、tools、delegation、prompt/policy、improvement/evaluation 六类，然后把这些想法扔进大量相互隔离的 research lineage 里，让 agent 自己观察 trajectory、提出机制、实现、review、跑实验、继续修改。最终用了 535 个可执行搜索环境，其中 495 个来自 GitHub issue-PR pair，40 个是 verifier-driven synthetic tasks；论文说总共跑了 3000+ 次实验和 60000+ 次 agent-environment interaction&lt;/p&gt;
-&lt;p&gt;&lt;img referrerpolicy="no-referrer" src="https://pbs.twimg.com/media/HSo5DbvaYAAuVtR?format=jpg&amp;name=medium"&gt;&lt;/p&gt;
-&lt;p&gt;最后真正留下来的精华，只有 4 大机制：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Action Fusion：把“修改文件”和紧接着的测试/运行命令融合进一次 tool request。典型情况从 3 次 API call 变成 2 次。&lt;/li&gt;
-&lt;li&gt;Online Context Compact：不是机械地定期压缩 context，而是在 plan step 完成时计算“继续保留这些历史”和“现在做一次 compact”哪个更划算，还把 prompt-cache rewrite cost 算进去。&lt;/li&gt;
-&lt;li&gt;ObservationPack：一个很大的 tool output 前两次完整发送，从第三次开始改成 stable handle + 约 1KB 的 head/tail excerpt，需要时再通过 handle 取原始内容。&lt;/li&gt;
-&lt;li&gt;Evidence-Preserving Reducer：对 build/test log 使用低成本模型提炼证据，但原始日志始终保留，并通过 deterministic verifier 检查 schema、hash、exit status、exact quote 等；验证失败就回退原始结果。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr /&gt;
-&lt;p&gt;我因为脑子比较轴，总喜欢扩展关联到别的领域，于是想把这四大方法，也套在人肉学习上：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;合并动作：能连续做的事情不要反复切换。串行出现的解题步骤打包，批次进行，避免低效重复。探索之后立刻验证，而不是一个岔路跑远了再回头&lt;/li&gt;
-&lt;li&gt;清理上下文：每当学习或解题，有进展都反思当下思路，考虑下如何为接下来简化，不能当看小说一样囫囵吞枣背章节和习题答案&lt;/li&gt;
-&lt;li&gt;隔离支线：子问题展开放到一边不能影响主干思路&lt;/li&gt;
-&lt;li&gt;保留证据：子过程产生的中间结论，关键推理必须留痕&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;AI给我补充了很多reference&lt;/p&gt;
-&lt;h3&gt;合并动作&lt;/h3&gt;
-&lt;p&gt;Schoenfeld 给这个现象起名叫 "wild goose chase"（追野鹅）：他发现约60%的大学生解题时会选定一个方向就一路埋头走到底，直到时间耗尽都不回头反思；而当他训练学生每隔一段时间就问自己"我现在具体在做什么？为什么这么做？这对我有什么帮助？"之后，这种不做监控的比例从60%降到了20%，解题成功率也相应提高。更有意思的是，他后来观察一位数学教授解题——这位教授手头掌握的事实和方法其实比很多学生还少，解题过程中也生成了无数条可能的死路，但他没有被这些死路带偏，靠的就是频繁地、细粒度地检验"这条路值不值得走下去"&lt;/p&gt;
-&lt;h3&gt;清理上下文&lt;/h3&gt;
-&lt;p&gt;Catrambone关于子目标形成的研究描述了一个具体过程——学习者先把一串步骤按结构分组，然后自我解释"为什么这样分组"，最后把这个分组归纳成一个简洁的标签（子目标标签）。这三步合起来，正是"做完一段就反思、并把它压缩成一个可以往下带的简化单元"，跟你说的第二条几乎逐字对应。而它的反面，就是你说的"看小说一样囫囵吞枣"——只是线性地把内容或答案过一遍，不做任何分组、归纳、压缩，信息就只是流过去了，没有被结构化，也就没法被高效复用。&lt;/p&gt;
-&lt;h3&gt;隔离支线&lt;/h3&gt;
-&lt;p&gt;人类研究就是子目标标签（subgoal labeling）本身——Catrambone给出的经典例子是解方程"隔离变量→化简变量"：学生只需要在主线上记住这两个子目标，每个子目标内部具体怎么算是被封装起来的细节，不需要在思考整体解题结构时一直占用工作记忆。研究还发现，用子目标标签训练出来的学生，遇到步骤不同但子目标结构相同的新题时，迁移能力明显更强；而没有这种封装、只是记住老师板书完整步骤的学生，换一道结构相同但细节不同的题就容易失败——这正是"细节污染主干"的后果。这也呼应了国际象棋大师的组块（chunking）研究：高手把一串走法编码成一个组块整体记忆和调用，而不是逐步保持在工作记忆里，从而腾出容量去思考更高层的布局。&lt;/p&gt;
-&lt;h3&gt;保留证据&lt;/h3&gt;
-&lt;p&gt;Polya经典的解题四阶段（理解问题→拟定计划→执行计划→回顾）里，"回顾"这一步要求你把推理过程记录下来复查，而不是解完就扔；如果第2、3条里的"压缩""封装"做得太狠、把关键中间结论也一起丢了，你会既没法自查错误，也没法把这段经验迁移到下一个类似问题上。这也是为什么"元认知校准"（上一轮提到的）离不开留痕——你没法准确判断"我这一步到底对不对"，如果连这一步的关键推理都没有记录下来可供回看。&lt;/p&gt;
-&lt;hr /&gt;
-&lt;h2&gt;学习方法论的批判&lt;/h2&gt;
-&lt;p&gt;很多学习者，特别是中小学学生，对这些“显学”反而不知道。父母和老师也不会教。&lt;/p&gt;
-&lt;p&gt;虽然大部人聪明人能领悟到这一点，但是很多平庸的学生学到这四点教训已经太晚了。。。&lt;/p&gt;
-&lt;p&gt;因为传统学校的考试 测验的 reward 只看结果，不太关心你过程怎么来的。小学知识比较简单，留下来的坏毛病带到初中之后就麻烦了。&lt;/p&gt;
-&lt;p&gt;我家的娃就深受其害。在小学阶段，“只要答案对，就算成功”这个策略经常真的有效。题目短、知识点少、搜索空间小，靠记忆、模仿、反复练习也能得到不错的结果。于是很多低效习惯不会立刻付出代价。死记硬背就能拿个勉强过得去的分数。&lt;/p&gt;
-&lt;p&gt;到了初中以后，情况开始变化。题目的状态空间变大了，步骤变长了，知识之间开始相互依赖。此时如果学生一直没有形成，那么就会无意中陷入困惑：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;“我现在在解决哪一个子问题？”&lt;/li&gt;
-&lt;li&gt;“哪些信息已经没用了？”&lt;/li&gt;
-&lt;li&gt;“哪些东西应该暂时放到一边？”&lt;/li&gt;
-&lt;li&gt;“我的这个结论到底依据是什么？”&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;这些能力，学习成本会突然上升。&lt;/p&gt;
-&lt;p&gt;客观的因素，大班制教学，老师也管不过来。只有精英教育 私教 遇到良师，或者就孩子被鼓励“多思考”，才可能戳破这一系列技巧。&lt;/p&gt;
-&lt;p&gt;小学时，“直接冲答案”很快，成绩又不错 → 学生得到正反馈。小时候看起来只是“不够仔细”的问题，几年后会表现成“学习能力不行”。&lt;/p&gt;
-&lt;p&gt;上面列举这四个技巧，我其实个人很早就懂得，无意中自己琢磨的，回顾了下，可能被小时候鼓励“更聪明的办法”太多次了，这里要感谢当时的父母，自己本身希望去掌握那个最快 最酷的解题技巧，所以算 “过程优化” 到极致作为一个附加 reward了。一个问题有多种解法，每种解法优劣都品鉴了一番，知道哪些坑哪些好。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;“这道题还有没有更短的路？”&lt;/li&gt;
-&lt;li&gt;“这个方法为什么比另一个好？”&lt;/li&gt;
-&lt;li&gt;“刚才卡住的地方以后怎么避免？”&lt;/li&gt;
-&lt;li&gt;“这个技巧能不能迁移到另一类题？”&lt;/li&gt;
-&lt;li&gt;“有没有一种方法能让我以后少想五步？”&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;这就很接近论文里的 harness optimization 了。解题的意义不仅在于得到正确答案本身，还有在观察“解题算法本身”。&lt;/p&gt;
-&lt;p&gt;初中、高中我甚至有几起名场面，公开质疑老师出题出的有问题（50%翻车）🤣&lt;/p&gt;
-&lt;p&gt;当然，这个习惯也有其害处，我也吃过亏。三角函数大家都背公式，我就自己发明了一套自以为更好的理解框架。。。结果出题人更偏好教材公式能快速结果的，我那套不仅更复杂，容易翻车，而且还有“翻译”成本。。。囧。。。&lt;/p&gt;
-&lt;p&gt;考试的 reward 实际上更接近：在限定时间内，用低风险路径得到标准答案。&lt;/p&gt;
-&lt;p&gt;不过好处还是很明显，就是大多数问题理解得比普通人深入得多。特别是解析几何这种虽然被批判“不入流”但是几乎秒杀了教材党。。公式全靠自己推的，哪里怎么变换怎么用一清二楚。甚至圆锥体歪着斜着切这种问题都考虑到了（传统教材只有水平，垂直和顺着斜切）&lt;/p&gt;
-&lt;p&gt;这个亏一直吃到出来工作，长了很多教训。我对待任何事都是双层架构。一个是兼容傻逼的世俗层，一个是真理层。。。囧哈哈哈&lt;/p&gt;
-&lt;p&gt;其实真理层反复磨练到最后反而越来越简单。世俗层基本就是补丁接补丁越来越复杂。普通人搞不明白要崩溃的很多事情一眼看穿。。&lt;/p&gt;
-&lt;hr /&gt;
-&lt;h2&gt;后记&lt;/h2&gt;
-&lt;p&gt;毕业之后，发现学生时代最值得批判的，就是做题家思维。成年人的世界是没有标准答案的。甚至你需要去设置议题。当然这又是另外一个层次的东西了。&lt;/p&gt;
-&lt;p&gt;然后回头看，学生最幸福，也是最痛苦的一点，就是面临的所有问题，无论多困难，是必然有解的；而且往往正确解是唯一的。&lt;/p&gt;
-&lt;p&gt;成年人面对的事情，基本都有多个解。你 reward 去优化，无非是利弊的权衡；&lt;/p&gt;
-&lt;p&gt;最可怕的遭遇，无解，死胡同，到头来一场空。你去尝试解决一个不存在的问题，你又能学习到什么教训呢？时也，运也，命也。&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">est</dc:creator><pubDate>Wed, 23 Sep 2026 20:21:00 +0800</pubDate><guid isPermaLink="false">tag:None,2026-09-23:/2026/stdin-18</guid><category>stdin</category></item><item><title>Register Token以及对变形金刚AI的四大批判</title><link>https://blog.est.im/2026/stdin-19</link><description>&lt;p&gt;前几天 Yann LeCun 对 变形金刚(transformers) AI 进行了深刻的&lt;a href="https://x.com/ylecun/status/2101674561930510740"&gt;批判&lt;/a&gt;&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">est</dc:creator><pubDate>Sat, 26 Sep 2026 22:51:00 +0800</pubDate><guid isPermaLink="false">tag:None,2026-09-26:/2026/stdout-36</guid><category>stdout</category></item><item><title>Register Token以及对变形金刚AI的四大批判</title><link>https://blog.est.im/2026/stdin-19</link><description>&lt;p&gt;前几天 Yann LeCun 对 变形金刚(transformers) AI 进行了深刻的&lt;a href="https://x.com/ylecun/status/2101674561930510740"&gt;批判&lt;/a&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;First, the reasoning abilities of current AI systems are based non-auto-regressive search (which is what I have always advocated for). But AFAICT, they do it in token space, which is limited and inefficient. I have claimed that human-like reasoning must be a search in continuous representation space. It looks like the industry is moving towards that.  &lt;br /&gt;
 Second, the self-improvement methods, as currently practiced, only work for domains where the quality of outputs can be scored without human intervention, such as mathematics, code, and scenarios that can be simulated accurately. Not anything else. Humans and animals learn new skills way more efficiently than current RL methods.  &lt;br /&gt;
@@ -169,7 +456,70 @@ AI 这边，其实field自己也早就意识到"纯串行=脆弱"这个问题，
 &lt;/blockquote&gt;
 &lt;p&gt;其实想到这里，我感觉和上一篇《&lt;a href="https://blog.est.im/2026/stdin-18"&gt;聪明 Agent 四套路 和 人肉学习&lt;/a&gt;》 又莫名其妙关联起来了。&lt;/p&gt;
 &lt;p&gt;或许如果 register token 这一套能沉淀，跨session共享，实际上就能变成新的 token，变成共同的符号和记忆。人类的语言和文字，知识传承就是这么来的。&lt;/p&gt;
-&lt;p&gt;那么NN就不再是 自回归 ？说不定就 AGI 了？&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">est</dc:creator><pubDate>Wed, 23 Sep 2026 20:21:00 +0800</pubDate><guid isPermaLink="false">tag:None,2026-09-23:/2026/stdin-19</guid><category>stdin</category></item><item><title>Doherty 多尔蒂阈值</title><link>https://blog.est.im/2026/stderr-29</link><description>&lt;p&gt;前几天鼠标坏了。随手换了个新的，双飞燕。没想到这垃圾鼠标居然在 macbook 下有间歇性卡顿 失联问题，表现是光标不动&lt;/p&gt;
+&lt;p&gt;那么NN就不再是 自回归 ？说不定就 AGI 了？&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">est</dc:creator><pubDate>Wed, 23 Sep 2026 20:21:00 +0800</pubDate><guid isPermaLink="false">tag:None,2026-09-23:/2026/stdin-19</guid><category>stdin</category></item><item><title>聪明 Agent 四套路 和 人肉学习</title><link>https://blog.est.im/2026/stdin-18</link><description>&lt;p&gt;nVIDIA 联合 NTU，MIT 联合研究了一项关于 Agent harness 自我提升的&lt;a href="https://arxiv.org/abs/2609.20519"&gt;研究&lt;/a&gt;，项目叫 &lt;a href="https://nvlabs.github.io/SoL-Pi/"&gt;SoL-Pi&lt;/a&gt;， Scaling Auto-Research Loops for Efficient Agent Harnesses&lt;/p&gt;
+&lt;p&gt;让 Research Agent 自动发现 Harness 里的 Token 浪费，再通过大规模实验筛掉无效改法。把结论再放进大量环境中反复测试。整个探索一共 152 个候选方向，分成 context、progress、tools、delegation、prompt/policy、improvement/evaluation 六类，然后把这些想法扔进大量相互隔离的 research lineage 里，让 agent 自己观察 trajectory、提出机制、实现、review、跑实验、继续修改。最终用了 535 个可执行搜索环境，其中 495 个来自 GitHub issue-PR pair，40 个是 verifier-driven synthetic tasks；论文说总共跑了 3000+ 次实验和 60000+ 次 agent-environment interaction&lt;/p&gt;
+&lt;p&gt;&lt;img referrerpolicy="no-referrer" src="https://pbs.twimg.com/media/HSo5DbvaYAAuVtR?format=jpg&amp;name=medium"&gt;&lt;/p&gt;
+&lt;p&gt;最后真正留下来的精华，只有 4 大机制：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Action Fusion：把“修改文件”和紧接着的测试/运行命令融合进一次 tool request。典型情况从 3 次 API call 变成 2 次。&lt;/li&gt;
+&lt;li&gt;Online Context Compact：不是机械地定期压缩 context，而是在 plan step 完成时计算“继续保留这些历史”和“现在做一次 compact”哪个更划算，还把 prompt-cache rewrite cost 算进去。&lt;/li&gt;
+&lt;li&gt;ObservationPack：一个很大的 tool output 前两次完整发送，从第三次开始改成 stable handle + 约 1KB 的 head/tail excerpt，需要时再通过 handle 取原始内容。&lt;/li&gt;
+&lt;li&gt;Evidence-Preserving Reducer：对 build/test log 使用低成本模型提炼证据，但原始日志始终保留，并通过 deterministic verifier 检查 schema、hash、exit status、exact quote 等；验证失败就回退原始结果。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;p&gt;我因为脑子比较轴，总喜欢扩展关联到别的领域，于是想把这四大方法，也套在人肉学习上：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;合并动作：能连续做的事情不要反复切换。串行出现的解题步骤打包，批次进行，避免低效重复。探索之后立刻验证，而不是一个岔路跑远了再回头&lt;/li&gt;
+&lt;li&gt;清理上下文：每当学习或解题，有进展都反思当下思路，考虑下如何为接下来简化，不能当看小说一样囫囵吞枣背章节和习题答案&lt;/li&gt;
+&lt;li&gt;隔离支线：子问题展开放到一边不能影响主干思路&lt;/li&gt;
+&lt;li&gt;保留证据：子过程产生的中间结论，关键推理必须留痕&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;AI给我补充了很多reference&lt;/p&gt;
+&lt;h3&gt;合并动作&lt;/h3&gt;
+&lt;p&gt;Schoenfeld 给这个现象起名叫 "wild goose chase"（追野鹅）：他发现约60%的大学生解题时会选定一个方向就一路埋头走到底，直到时间耗尽都不回头反思；而当他训练学生每隔一段时间就问自己"我现在具体在做什么？为什么这么做？这对我有什么帮助？"之后，这种不做监控的比例从60%降到了20%，解题成功率也相应提高。更有意思的是，他后来观察一位数学教授解题——这位教授手头掌握的事实和方法其实比很多学生还少，解题过程中也生成了无数条可能的死路，但他没有被这些死路带偏，靠的就是频繁地、细粒度地检验"这条路值不值得走下去"&lt;/p&gt;
+&lt;h3&gt;清理上下文&lt;/h3&gt;
+&lt;p&gt;Catrambone关于子目标形成的研究描述了一个具体过程——学习者先把一串步骤按结构分组，然后自我解释"为什么这样分组"，最后把这个分组归纳成一个简洁的标签（子目标标签）。这三步合起来，正是"做完一段就反思、并把它压缩成一个可以往下带的简化单元"，跟你说的第二条几乎逐字对应。而它的反面，就是你说的"看小说一样囫囵吞枣"——只是线性地把内容或答案过一遍，不做任何分组、归纳、压缩，信息就只是流过去了，没有被结构化，也就没法被高效复用。&lt;/p&gt;
+&lt;h3&gt;隔离支线&lt;/h3&gt;
+&lt;p&gt;人类研究就是子目标标签（subgoal labeling）本身——Catrambone给出的经典例子是解方程"隔离变量→化简变量"：学生只需要在主线上记住这两个子目标，每个子目标内部具体怎么算是被封装起来的细节，不需要在思考整体解题结构时一直占用工作记忆。研究还发现，用子目标标签训练出来的学生，遇到步骤不同但子目标结构相同的新题时，迁移能力明显更强；而没有这种封装、只是记住老师板书完整步骤的学生，换一道结构相同但细节不同的题就容易失败——这正是"细节污染主干"的后果。这也呼应了国际象棋大师的组块（chunking）研究：高手把一串走法编码成一个组块整体记忆和调用，而不是逐步保持在工作记忆里，从而腾出容量去思考更高层的布局。&lt;/p&gt;
+&lt;h3&gt;保留证据&lt;/h3&gt;
+&lt;p&gt;Polya经典的解题四阶段（理解问题→拟定计划→执行计划→回顾）里，"回顾"这一步要求你把推理过程记录下来复查，而不是解完就扔；如果第2、3条里的"压缩""封装"做得太狠、把关键中间结论也一起丢了，你会既没法自查错误，也没法把这段经验迁移到下一个类似问题上。这也是为什么"元认知校准"（上一轮提到的）离不开留痕——你没法准确判断"我这一步到底对不对"，如果连这一步的关键推理都没有记录下来可供回看。&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;学习方法论的批判&lt;/h2&gt;
+&lt;p&gt;很多学习者，特别是中小学学生，对这些“显学”反而不知道。父母和老师也不会教。&lt;/p&gt;
+&lt;p&gt;虽然大部人聪明人能领悟到这一点，但是很多平庸的学生学到这四点教训已经太晚了。。。&lt;/p&gt;
+&lt;p&gt;因为传统学校的考试 测验的 reward 只看结果，不太关心你过程怎么来的。小学知识比较简单，留下来的坏毛病带到初中之后就麻烦了。&lt;/p&gt;
+&lt;p&gt;我家的娃就深受其害。在小学阶段，“只要答案对，就算成功”这个策略经常真的有效。题目短、知识点少、搜索空间小，靠记忆、模仿、反复练习也能得到不错的结果。于是很多低效习惯不会立刻付出代价。死记硬背就能拿个勉强过得去的分数。&lt;/p&gt;
+&lt;p&gt;到了初中以后，情况开始变化。题目的状态空间变大了，步骤变长了，知识之间开始相互依赖。此时如果学生一直没有形成，那么就会无意中陷入困惑：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;“我现在在解决哪一个子问题？”&lt;/li&gt;
+&lt;li&gt;“哪些信息已经没用了？”&lt;/li&gt;
+&lt;li&gt;“哪些东西应该暂时放到一边？”&lt;/li&gt;
+&lt;li&gt;“我的这个结论到底依据是什么？”&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这些能力，学习成本会突然上升。&lt;/p&gt;
+&lt;p&gt;客观的因素，大班制教学，老师也管不过来。只有精英教育 私教 遇到良师，或者就孩子被鼓励“多思考”，才可能戳破这一系列技巧。&lt;/p&gt;
+&lt;p&gt;小学时，“直接冲答案”很快，成绩又不错 → 学生得到正反馈。小时候看起来只是“不够仔细”的问题，几年后会表现成“学习能力不行”。&lt;/p&gt;
+&lt;p&gt;上面列举这四个技巧，我其实个人很早就懂得，无意中自己琢磨的，回顾了下，可能被小时候鼓励“更聪明的办法”太多次了，这里要感谢当时的父母，自己本身希望去掌握那个最快 最酷的解题技巧，所以算 “过程优化” 到极致作为一个附加 reward了。一个问题有多种解法，每种解法优劣都品鉴了一番，知道哪些坑哪些好。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;“这道题还有没有更短的路？”&lt;/li&gt;
+&lt;li&gt;“这个方法为什么比另一个好？”&lt;/li&gt;
+&lt;li&gt;“刚才卡住的地方以后怎么避免？”&lt;/li&gt;
+&lt;li&gt;“这个技巧能不能迁移到另一类题？”&lt;/li&gt;
+&lt;li&gt;“有没有一种方法能让我以后少想五步？”&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这就很接近论文里的 harness optimization 了。解题的意义不仅在于得到正确答案本身，还有在观察“解题算法本身”。&lt;/p&gt;
+&lt;p&gt;初中、高中我甚至有几起名场面，公开质疑老师出题出的有问题（50%翻车）🤣&lt;/p&gt;
+&lt;p&gt;当然，这个习惯也有其害处，我也吃过亏。三角函数大家都背公式，我就自己发明了一套自以为更好的理解框架。。。结果出题人更偏好教材公式能快速结果的，我那套不仅更复杂，容易翻车，而且还有“翻译”成本。。。囧。。。&lt;/p&gt;
+&lt;p&gt;考试的 reward 实际上更接近：在限定时间内，用低风险路径得到标准答案。&lt;/p&gt;
+&lt;p&gt;不过好处还是很明显，就是大多数问题理解得比普通人深入得多。特别是解析几何这种虽然被批判“不入流”但是几乎秒杀了教材党。。公式全靠自己推的，哪里怎么变换怎么用一清二楚。甚至圆锥体歪着斜着切这种问题都考虑到了（传统教材只有水平，垂直和顺着斜切）&lt;/p&gt;
+&lt;p&gt;这个亏一直吃到出来工作，长了很多教训。我对待任何事都是双层架构。一个是兼容傻逼的世俗层，一个是真理层。。。囧哈哈哈&lt;/p&gt;
+&lt;p&gt;其实真理层反复磨练到最后反而越来越简单。世俗层基本就是补丁接补丁越来越复杂。普通人搞不明白要崩溃的很多事情一眼看穿。。&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;后记&lt;/h2&gt;
+&lt;p&gt;毕业之后，发现学生时代最值得批判的，就是做题家思维。成年人的世界是没有标准答案的。甚至你需要去设置议题。当然这又是另外一个层次的东西了。&lt;/p&gt;
+&lt;p&gt;然后回头看，学生最幸福，也是最痛苦的一点，就是面临的所有问题，无论多困难，是必然有解的；而且往往正确解是唯一的。&lt;/p&gt;
+&lt;p&gt;成年人面对的事情，基本都有多个解。你 reward 去优化，无非是利弊的权衡；&lt;/p&gt;
+&lt;p&gt;最可怕的遭遇，无解，死胡同，到头来一场空。你去尝试解决一个不存在的问题，你又能学习到什么教训呢？时也，运也，命也。&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">est</dc:creator><pubDate>Wed, 23 Sep 2026 20:21:00 +0800</pubDate><guid isPermaLink="false">tag:None,2026-09-23:/2026/stdin-18</guid><category>stdin</category></item><item><title>Doherty 多尔蒂阈值</title><link>https://blog.est.im/2026/stderr-29</link><description>&lt;p&gt;前几天鼠标坏了。随手换了个新的，双飞燕。没想到这垃圾鼠标居然在 macbook 下有间歇性卡顿 失联问题，表现是光标不动&lt;/p&gt;
 &lt;p&gt;怀疑是 系统问题，驱动问题，鼠标本身，商家卖假货问题。最后想明白了，这几十元破玩意就tmd不值得去折腾心态。直接扔。&lt;/p&gt;
 &lt;p&gt;回想了一下，这玩意其实对工作影响比意料中的大得多。平时操作触摸板 键盘都是下意识的，根本不会去多想；&lt;/p&gt;
 &lt;p&gt;光标在显示器上一旦当场卡住，你大脑瞬间被吸引过去，从软件到硬件到购买决策，到损失厌恶，全部过一遍，恶心死了&lt;/p&gt;
@@ -2341,111 +2691,4 @@ python3 benchmark_v2.py 500000  # 扩展测试 (DuckDB/Polars/mmap/...)
 &lt;p&gt;源码放在 &lt;a href="https://github.com/est/snippets/tree/master/grep_vs_sqlite"&gt;https://github.com/est/snippets/tree/master/grep_vs_sqlite&lt;/a&gt; 。&lt;/p&gt;
 &lt;p&gt;模拟聊天记录有500,000行 一个 50MB 的 .tsv 太大了。自己让AI根据文章和最上面表结构生成一份吧。&lt;/p&gt;
 &lt;h3&gt;后记&lt;/h3&gt;
-&lt;p&gt;被Polars的性能震惊了。说实话如果换我肯定不会选sqlite。聊天记录又不会改。ACID的 OLTP 明显浪费&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">est</dc:creator><pubDate>Thu, 09 Jul 2026 11:02:00 +0800</pubDate><guid isPermaLink="false">tag:None,2026-07-09:/2026/stdout-26</guid><category>stdout</category></item><item><title>[AI] curl -NT. 导致100% CPU原因</title><link>https://blog.est.im/2026/stdout-25</link><description>&lt;p&gt;有AI就是好使，搁以前自己得盯半天也看不明白。。。&lt;/p&gt;
-&lt;h3&gt;问题确认&lt;/h3&gt;
-&lt;p&gt;&lt;code&gt;curl -NT.&lt;/code&gt; 在连接一个持续推送数据的 streaming 服务器时，会产生一个 &lt;strong&gt;紧密的 pause/unpause 循环&lt;/strong&gt;，导致 100% CPU。&lt;/p&gt;
-&lt;h3&gt;根因分析&lt;/h3&gt;
-&lt;p&gt;&lt;code&gt;-T.&lt;/code&gt;（注意是点号，不是减号）将 stdin 设为&lt;strong&gt;非阻塞模式&lt;/strong&gt;，然后依赖 &lt;code&gt;EAGAIN&lt;/code&gt; + &lt;code&gt;CURL_READFUNC_PAUSE&lt;/code&gt; 机制来避免阻塞。核心循环发生在三个回调之间：&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;第一步 — 上传尝试失败&lt;/strong&gt;（&lt;code&gt;src/tool_cb_rea.c&lt;/code&gt;）：&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-c"&gt;  {
-    rc = read(per-&amp;gt;infd, buffer, sz * nmemb);
-    if(rc &amp;lt; 0) {
-      if(errno == EAGAIN) {
-        errno = 0;
-        config-&amp;gt;readbusy = TRUE;
-        return CURL_READFUNC_PAUSE;
-      }
-      /* since size_t is unsigned we cannot return negative values fine */
-      rc = 0;
-    }
-  }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;stdin 没数据 → &lt;code&gt;read()&lt;/code&gt; 返回 &lt;code&gt;EAGAIN&lt;/code&gt; → 设 &lt;code&gt;readbusy=TRUE&lt;/code&gt; → 暂停上传。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;第二步 — 下载数据到达立刻解除暂停&lt;/strong&gt;（&lt;code&gt;src/tool_cb_wrt.c&lt;/code&gt;）：&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-c"&gt;  if(config-&amp;gt;readbusy) {
-    config-&amp;gt;readbusy = FALSE;
-    curl_easy_pause(per-&amp;gt;curl, CURLPAUSE_CONT);
-  }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;streaming 服务器持续发送数据 → &lt;code&gt;tool_write_cb&lt;/code&gt; 被不断调用 → 每次都&lt;strong&gt;无等待地立刻解除上传暂停&lt;/strong&gt;。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;第三步 — 进度回调只有 1ms 退避&lt;/strong&gt;（&lt;code&gt;src/tool_cb_rea.c&lt;/code&gt;）：&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-c"&gt;  if(config-&amp;gt;readbusy) {
-    if(ulprev == ulnow) {
-#ifndef _WIN32
-      waitfd(1, per-&amp;gt;infd);
-#else
-      /* sleep */
-      curlx_wait_ms(1);
-#endif
-    }
-
-    config-&amp;gt;readbusy = FALSE;
-    curl_easy_pause(per-&amp;gt;curl, CURLPAUSE_CONT);
-  }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;code&gt;tool_readbusy_cb&lt;/code&gt; 有 1ms 的 &lt;code&gt;waitfd&lt;/code&gt; 退避，但被 &lt;code&gt;tool_write_cb&lt;/code&gt; 的无等待解除抢先了。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;完整的死循环（每次 &lt;code&gt;curl_multi_perform&lt;/code&gt; 内）&lt;/strong&gt;：&lt;/p&gt;
-&lt;p&gt;在 &lt;code&gt;lib/transfer.c&lt;/code&gt; 的 &lt;code&gt;Curl_sendrecv&lt;/code&gt; 中，处理顺序是&lt;strong&gt;先下载后上传&lt;/strong&gt;：&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-c"&gt;  if(k-&amp;gt;keepon &amp;amp; KEEP_RECV) {
-    result = sendrecv_dl(data, k);
-    if(result || data-&amp;gt;req.done)
-      goto out;
-  }
-
-  /* If we still have writing to do, we check if we have a writable socket. */
-  if(Curl_req_want_send(data)) {
-    result = sendrecv_ul(data);
-    if(result)
-      goto out;
-  }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;所以单次迭代内：&lt;br /&gt;
-1. &lt;code&gt;sendrecv_dl&lt;/code&gt; → 读到 streaming 数据 → &lt;code&gt;tool_write_cb&lt;/code&gt; → 看到 &lt;code&gt;readbusy=TRUE&lt;/code&gt; → &lt;strong&gt;立刻解除暂停&lt;/strong&gt;（零等待）&lt;br /&gt;
-2. &lt;code&gt;sendrecv_ul&lt;/code&gt; → &lt;code&gt;tool_read_cb&lt;/code&gt; → stdin &lt;code&gt;EAGAIN&lt;/code&gt; → &lt;strong&gt;又暂停&lt;/strong&gt;，&lt;code&gt;readbusy=TRUE&lt;/code&gt;&lt;br /&gt;
-3. 回到 &lt;code&gt;curl_multi_poll&lt;/code&gt; → 下载 socket 有数据 → &lt;strong&gt;立刻返回&lt;/strong&gt;（不会 sleep）&lt;br /&gt;
-4. 重复 1-3&lt;/p&gt;
-&lt;p&gt;而 &lt;code&gt;lib/easy.c&lt;/code&gt; 的主循环：&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-c"&gt;  while(!done &amp;amp;&amp;amp; !mresult) {
-    int still_running = 0;
-
-    mresult = curl_multi_poll(multi, NULL, 0, 1000, NULL);
-
-    if(!mresult)
-      mresult = curl_multi_perform(multi, &amp;amp;still_running);
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;code&gt;curl_multi_poll&lt;/code&gt; 的 1000ms 超时形同虚设——因为下载 socket 始终可读，&lt;code&gt;poll()&lt;/code&gt; 立刻返回。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;结果&lt;/strong&gt;：每秒跑上千次这个循环，每次包含多个系统调用（&lt;code&gt;poll&lt;/code&gt;、&lt;code&gt;read&lt;/code&gt;、&lt;code&gt;write&lt;/code&gt;），CPU 直接打满。&lt;/p&gt;
-&lt;h3&gt;问题本质&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;stdin 没有被加入 &lt;code&gt;curl_multi_poll&lt;/code&gt; 的 pollset&lt;/strong&gt;。只有网络 socket 参与了 poll。所以 curl 无法高效地"同时等待 stdin 和网络数据"，只能靠 &lt;code&gt;tool_write_cb&lt;/code&gt; 里的盲目 unpause 来弥补，在 streaming 场景下退化成忙等。&lt;/p&gt;
-&lt;h3&gt;用户侧解决方案&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;如果你不需要从 stdin 上传数据&lt;/strong&gt;（只是想看 streaming 响应），不要用 &lt;code&gt;-T.&lt;/code&gt;：&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-bash"&gt;# 正确的方式：只看 streaming 输出
-curl -N https://streaming-server/events
-
-# 或者重定向 stdin 为空
-curl -NT. https://streaming-server/events &amp;lt; /dev/null
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;code&gt;&amp;lt; /dev/null&lt;/code&gt; 会让 &lt;code&gt;read()&lt;/code&gt; 返回 0（EOF）而不是 EAGAIN，不会进入 pause/unpause 循环。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;如果确实需要双向 streaming&lt;/strong&gt;（边上传 stdin 边接收），目前没有完美的用户侧 workaround。可以考虑：&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-bash"&gt;# 用管道加一层缓冲，减轻空转（效果有限）
-cat | curl -NT. https://streaming-server/events
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h3&gt;源码级修复思路&lt;/h3&gt;
-&lt;p&gt;如果要在源码层面修复，最直接的方案是&lt;strong&gt;在 &lt;code&gt;tool_write_cb&lt;/code&gt; 中去掉盲目 unpause&lt;/strong&gt;，改为只在 &lt;code&gt;tool_readbusy_cb&lt;/code&gt; 中带退避地 unpause，并增大退避时间：&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-c"&gt;// tool_cb_wrt.c — 去掉这段，或加条件限制
-// 不再从 write callback 无脑解除上传暂停
-if(config-&amp;gt;readbusy) {
-    config-&amp;gt;readbusy = FALSE;
-    curl_easy_pause(per-&amp;gt;curl, CURLPAUSE_CONT);  // 删除或改为有条件触发
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code class="language-c"&gt;// tool_cb_rea.c — 增大退避时间
-if(config-&amp;gt;readbusy) {
-    if(ulprev == ulnow) {
-        waitfd(100, per-&amp;gt;infd);  // 从 1ms 提高到 100ms
-    }
-    config-&amp;gt;readbusy = FALSE;
-    curl_easy_pause(per-&amp;gt;curl, CURLPAUSE_CONT);
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;更彻底的方案是把 stdin fd 加入 &lt;code&gt;curl_multi_poll&lt;/code&gt; 的 extra fds，但这需要改 &lt;code&gt;curl_multi_poll&lt;/code&gt; 的调用方式，涉及面更大。&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">est</dc:creator><pubDate>Wed, 08 Jul 2026 16:05:00 +0800</pubDate><guid isPermaLink="false">tag:None,2026-07-08:/2026/stdout-25</guid><category>stdout</category></item></channel></rss>
+&lt;p&gt;被Polars的性能震惊了。说实话如果换我肯定不会选sqlite。聊天记录又不会改。ACID的 OLTP 明显浪费&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">est</dc:creator><pubDate>Thu, 09 Jul 2026 11:02:00 +0800</pubDate><guid isPermaLink="false">tag:None,2026-07-09:/2026/stdout-26</guid><category>stdout</category></item></channel></rss>
