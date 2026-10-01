@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "8656c2b1303c24af3dd01440",
+      "title": "preconnect 走 http3",
+      "summary": "想让 <link rel=\"preconnect\"> 强制走 HTTP/3，能做到吗？ preconnect 是什么 <link rel=\"preconnect\" href=\"https://example.com\"> 浏览器看到这个标签，会立刻去做这几件事： 解析 example.com 域名 建立一个连接 完成 TLS 握手（如必要） 保持连接并等着，不发送任何请求正文 等真正要请求资源时，这个连接已经热好了。这就是 提前连接 preconnect HTTP/3 跑在 UDP 上（QUIC 协议），HTTP/1.1 和 HTTP/2 跑在 TCP 上。 HTML 层面没有任何办法声明\"这个 preconnect 要走 h3\"。 这个连接最终用什么协议，HTTP/1.1、HTTP/2、HTTP/3，浏览器有…",
+      "image": null,
+      "publishedAt": "2026-10-01T12:33:00Z",
+      "sourceId": "a864c53722a17b19",
+      "sourceTitle": "est's blog",
+      "link": "https://blog.est.im/2026/stdout-38",
+      "detailPath": "articles/8656c2b1303c24af3dd01440.json"
+    },
+    {
       "id": "fc9b056e55f8e537274e0cf5",
       "title": "Node.js、浏览器和 Cloudflare Workers 的wasm引入问题",
       "summary": "最近在鼓捣 WebAssembly，这玩意没啥神秘的，可以看出一坨二进制的 .js 库文件 它本身的export和调用方式是统一的，但如今天我才知道，在不同 JavaScript 运行环境加载 .wasm 方式并不完全一样。 例如 Cloudflare Workers 可以直接： import wasm from \"./simple.wasm\"; const { instance } = await WebAssembly.instantiate(wasm, imports); Cloudflare 会把 .wasm 模块作为 WebAssembly.Module 提供给代码。 浏览器通常则是通过 fetch() 获取 Wasm，再使用 WebAssembly.instantiateStreaming() ：…",
@@ -12,17 +23,6 @@
       "detailPath": "articles/fc9b056e55f8e537274e0cf5.json"
     },
     {
-      "id": "c4da6bbf480b492ea97ba4ec",
-      "title": "聪明 Agent 四套路 和 人肉学习",
-      "summary": "nVIDIA 联合 NTU，MIT 联合研究了一项关于 Agent harness 自我提升的 研究 ，项目叫 SoL-Pi ， Scaling Auto-Research Loops for Efficient Agent Harnesses 让 Research Agent 自动发现 Harness 里的 Token 浪费，再通过大规模实验筛掉无效改法。把结论再放进大量环境中反复测试。整个探索一共 152 个候选方向，分成 context、progress、tools、delegation、prompt/policy、improvement/evaluation 六类，然后把这些想法扔进大量相互隔离的 research lineage 里，让 agent 自己观察 trajectory、提出机制、实现、r…",
-      "image": "https://pbs.twimg.com/media/HSo5DbvaYAAuVtR?format=jpg&name=medium",
-      "publishedAt": "2026-09-23T12:21:00Z",
-      "sourceId": "a864c53722a17b19",
-      "sourceTitle": "est's blog",
-      "link": "https://blog.est.im/2026/stdin-18",
-      "detailPath": "articles/c4da6bbf480b492ea97ba4ec.json"
-    },
-    {
       "id": "a9fcb83dde9f3684afe406c9",
       "title": "Register Token以及对变形金刚AI的四大批判",
       "summary": "前几天 Yann LeCun 对 变形金刚(transformers) AI 进行了深刻的 批判 First, the reasoning abilities of current AI systems are based non-auto-regressive search (which is what I have always advocated for). But AFAICT, they do it in token space, which is limited and inefficient. I have claimed that human-like reasoning must be a search in continuous representation space. It looks…",
@@ -32,6 +32,17 @@
       "sourceTitle": "est's blog",
       "link": "https://blog.est.im/2026/stdin-19",
       "detailPath": "articles/a9fcb83dde9f3684afe406c9.json"
+    },
+    {
+      "id": "c4da6bbf480b492ea97ba4ec",
+      "title": "聪明 Agent 四套路 和 人肉学习",
+      "summary": "nVIDIA 联合 NTU，MIT 联合研究了一项关于 Agent harness 自我提升的 研究 ，项目叫 SoL-Pi ， Scaling Auto-Research Loops for Efficient Agent Harnesses 让 Research Agent 自动发现 Harness 里的 Token 浪费，再通过大规模实验筛掉无效改法。把结论再放进大量环境中反复测试。整个探索一共 152 个候选方向，分成 context、progress、tools、delegation、prompt/policy、improvement/evaluation 六类，然后把这些想法扔进大量相互隔离的 research lineage 里，让 agent 自己观察 trajectory、提出机制、实现、r…",
+      "image": "https://pbs.twimg.com/media/HSo5DbvaYAAuVtR?format=jpg&name=medium",
+      "publishedAt": "2026-09-23T12:21:00Z",
+      "sourceId": "a864c53722a17b19",
+      "sourceTitle": "est's blog",
+      "link": "https://blog.est.im/2026/stdin-18",
+      "detailPath": "articles/c4da6bbf480b492ea97ba4ec.json"
     },
     {
       "id": "b6574966f7597daeb1c16cdb",
@@ -208,17 +219,6 @@
       "sourceTitle": "est's blog",
       "link": "https://blog.est.im/2026/stdout-26",
       "detailPath": "articles/1619b3f79a0420091b591e86.json"
-    },
-    {
-      "id": "b8e7abb8cfbc6b56f0110902",
-      "title": "[AI] curl -NT. 导致100% CPU原因",
-      "summary": "有AI就是好使，搁以前自己得盯半天也看不明白。。。 问题确认 curl -NT. 在连接一个持续推送数据的 streaming 服务器时，会产生一个 紧密的 pause/unpause 循环 ，导致 100% CPU。 根因分析 -T. （注意是点号，不是减号）将 stdin 设为 非阻塞模式 ，然后依赖 EAGAIN + CURL_READFUNC_PAUSE 机制来避免阻塞。核心循环发生在三个回调之间： 第一步 — 上传尝试失败 （ src/tool_cb_rea.c ）： { rc = read(per->infd, buffer, sz * nmemb); if(rc < 0) { if(errno == EAGAIN) { errno = 0; config->readbusy = TRUE; re…",
-      "image": null,
-      "publishedAt": "2026-07-08T08:05:00Z",
-      "sourceId": "a864c53722a17b19",
-      "sourceTitle": "est's blog",
-      "link": "https://blog.est.im/2026/stdout-25",
-      "detailPath": "articles/b8e7abb8cfbc6b56f0110902.json"
     }
   ]
 }

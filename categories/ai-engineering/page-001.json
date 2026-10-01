@@ -1,6 +1,50 @@
 {
   "items": [
     {
+      "id": "f3df5b2731557f28c460d4f4",
+      "title": "Claude Code v2.1.286发布，包含多项破坏性变更",
+      "summary": "Anthropic于9月30日（UTC）发布了Claude Code v2.1.286版本，包含88项变更，其中7项为破坏性变更。最重要的是`--bare`参数的行为变更：现在仅连接命令行指定的MCP服务器，不发送系统提醒且不启动后台任务。同时，插件安装现在拒绝git仓库和文件夹的npm来源，仅允许注册表包。此外，修复了模型被拒收时所有轮次均失败的问题，现在会在相同级别的上一模型重试一次。",
+      "image": null,
+      "publishedAt": null,
+      "sourceId": "ai-engineering",
+      "sourceTitle": "AI 工程动态",
+      "link": "https://dev.classmethod.jp/articles/20261001-cc-updates-v2-1-286",
+      "detailPath": "articles/f3df5b2731557f28c460d4f4.json"
+    },
+    {
+      "id": "46152da6f440cc9a8f8a0bff",
+      "title": "Anthropic研究报告：智谱GLM-5.3为迄今最具网络安全能力的开源模型",
+      "summary": "Anthropic于10月1日发布研究报告称，智谱AI新发布的GLM-5.3是迄今为止最具网络安全能力的开源权重模型。研究人员发现GLM-5.3在ExploitBench基准测试的410个尝试中成功开发了50个端到端利用程序，二进制定向攻击成功率达到4%，与Claude Mythos Preview相当。研究还揭示该模型能有效绕过内置保护机制，并被用于串联未知JavaScript引擎漏洞以构建有效的浏览器利用程序。",
+      "image": null,
+      "publishedAt": null,
+      "sourceId": "ai-engineering",
+      "sourceTitle": "AI 工程动态",
+      "link": "https://aiweekly.co/ai-news-today",
+      "detailPath": "articles/46152da6f440cc9a8f8a0bff.json"
+    },
+    {
+      "id": "6bf36da4ccfbc524dd0dcfe7",
+      "title": "Cloudflare发布AI智能体驱动的统一CLI工具cf",
+      "summary": "Cloudflare于10月1日发布统一CLI工具cf，这是面向整个Cloudflare API的智能体驱动命令行工具。该工具的开发基于对AI智能体使用模式的观察：智能体对Wrangler的使用量已达48%，每天使用的不同命令数量几乎翻倍，使用六个或更多命令的可能性几乎是四倍。cf整合了Cloudflare提供的数千个操作（相比Wrangler的280个），旨在让AI智能体能够更自然地与Cloudflare平台交互，执行复杂的多步骤云资源管理任务。",
+      "image": null,
+      "publishedAt": null,
+      "sourceId": "ai-engineering",
+      "sourceTitle": "AI 工程动态",
+      "link": "https://blog.cloudflare.com/zh-cn/cloudflare-cf-cli-launch",
+      "detailPath": "articles/6bf36da4ccfbc524dd0dcfe7.json"
+    },
+    {
+      "id": "1b74534ccbab463dac8191e7",
+      "title": "Anthropic正式推出Claude for Government政府版服务",
+      "summary": "Anthropic宣布Claude for Government于9月30日结束公开测试，转为正式提供。该服务为美国联邦和州政府机构提供FedRAMP High认证环境，允许在受控环境中使用Claude的编码和智能体功能。采用固定使用量付费模式而非席位费，管理员可以按部门设置使用限制和模型限制。同时，Claude Code CLI和Claude for Microsoft 365也在相同环境中开始早期访问。",
+      "image": null,
+      "publishedAt": null,
+      "sourceId": "ai-engineering",
+      "sourceTitle": "AI 工程动态",
+      "link": "https://himanekoblog.hatenablog.com/entry/2026/10/01/103324",
+      "detailPath": "articles/1b74534ccbab463dac8191e7.json"
+    },
+    {
       "id": "c3c27eda3d3f123fcd3124f6",
       "title": "OpenAI发布常驻智能体 dots，开启7×24小时持续在线Agent时代",
       "summary": "在DevDay 2026上，OpenAI推出了名为“dots”的常驻个人智能体产品。每个dot拥有独立的云端计算环境和浏览器，可以7×24小时替用户执行任务，并能跨超过4000个应用工作，还接入了Slack、Teams等工作场景。这标志着AI产品形态从“用户发起一次任务”向“持续在线、主动寻找并完成任务”演进，第一个dot包含在Pro和Business Premium订阅方案中。",
@@ -10,6 +54,17 @@
       "sourceTitle": "AI 工程动态",
       "link": "https://www.youtube.com/watch?v=YxEX-eF-4Jo",
       "detailPath": "articles/c3c27eda3d3f123fcd3124f6.json"
+    },
+    {
+      "id": "8777ae32a9424371a516ec40",
+      "title": "谷歌发布Gemini 4 Argon前沿模型，输出上限100万token",
+      "summary": "谷歌于10月1日正式发布新一代前沿模型Gemini 4 Argon，这是自Gemini 3以来的首款新型前沿模型，定位对标GPT-6 Astra和Claude Opus 5.5。该模型输出token上限提升至业内领先的100万token，在DeepSWE v1.1真实软件工程评测中获得77.9%的得分，在CWE-bench漏洞修补测试中以68%并列第一。Argon以优惠价推出：输入token每百万2美元，输出token每百万10美元；优惠期结束后将恢复标准计费（输入$4/M，输出$20/M）。",
+      "image": null,
+      "publishedAt": "2026-10-01T00:00:00Z",
+      "sourceId": "ai-engineering",
+      "sourceTitle": "AI 工程动态",
+      "link": "https://blog.google/intl/zh-tw/products/explore-get-answers/gemini-4-argon",
+      "detailPath": "articles/8777ae32a9424371a516ec40.json"
     },
     {
       "id": "de1817abd866ed48a7d663fb",
