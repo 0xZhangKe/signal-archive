@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-09-30T21:54:19+00:00</updated><author><name>Simon Willison</name></author><entry><title>He Built This City</title><link href="https://simonwillison.net/2026/Sep/30/he-built-this-city/" rel="alternate"/><published>2026-09-30T21:54:19+00:00</published><updated>2026-09-30T21:54:19+00:00</updated><id>https://simonwillison.net/2026/Sep/30/he-built-this-city/</id><summary type="html">
+<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-10-01T06:29:01+00:00</updated><author><name>Simon Willison</name></author><entry><title>Quoting Matthew Green</title><link href="https://simonwillison.net/2026/Oct/1/matthew-green/" rel="alternate"/><published>2026-10-01T06:29:01+00:00</published><updated>2026-10-01T06:29:01+00:00</updated><id>https://simonwillison.net/2026/Oct/1/matthew-green/</id><summary type="html">
+    &lt;blockquote cite="https://blog.cryptographyengineering.com/2026/09/30/is-sandboxing-sufficient-to-contain-rogue-agents/"&gt;&lt;p&gt;[...] Put these pieces together and you have the two halves of a worm: a payload that hijacks the agent, and an agent that will carry the payload to the next agent. Agents in separately-isolated sandboxes discovered that they could leave instructions for each other in a shared package cache, and those instructions changed what the recipients did. Replace the package cache with email, Slack and shared documents or WhatsApp, and replace independently-sandboxed training runs with independently-deployed personal agents like Muse, and you have exactly the ingredients that a worm needs.&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p class="cite"&gt;&amp;mdash; &lt;a href="https://blog.cryptographyengineering.com/2026/09/30/is-sandboxing-sufficient-to-contain-rogue-agents/"&gt;Matthew Green&lt;/a&gt;, Is sandboxing sufficient to contain rogue agents?&lt;/p&gt;
+
+    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/accidental-cyberattacks"&gt;accidental-cyberattacks&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai-misuse"&gt;ai-misuse&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai-security-research"&gt;ai-security-research&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/sandboxing"&gt;sandboxing&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;&lt;/p&gt;
+
+
+
+</summary><category term="accidental-cyberattacks"/><category term="ai-misuse"/><category term="generative-ai"/><category term="ai-security-research"/><category term="sandboxing"/><category term="ai"/><category term="llms"/></entry><entry><title>He Built This City</title><link href="https://simonwillison.net/2026/Sep/30/he-built-this-city/" rel="alternate"/><published>2026-09-30T21:54:19+00:00</published><updated>2026-09-30T21:54:19+00:00</updated><id>https://simonwillison.net/2026/Sep/30/he-built-this-city/</id><summary type="html">
     &lt;p&gt;I visited the Museum of the City of New York today and got to see &lt;a href="https://www.mcny.org/exhibition/he-built-city"&gt;He Built This City: Joe Macken’s Model&lt;/a&gt;, the 50 x27 feet model of the city built over a 21 year period from balsa wood and cardboard.&lt;/p&gt;
 &lt;p&gt;It exceeded my already high expectations. The exhibition closes on 12th October so you should absolutely make a priority to see it if you get the chance.&lt;/p&gt;
 &lt;p&gt;&lt;img alt="A wide shot of the model of the island of Manhattan, plus the edge of Brooklyn. It looks so great!" src="https://static.simonwillison.net/static/2026-09-30/image_crop_4853x3640_w2427_q0.3.jpg" /&gt;&lt;/p&gt;
@@ -1379,22 +1387,4 @@ After a two year preview, Cloudflare's support for running Python code in their 
 
 
 
-</summary><category term="ai-misuse"/><category term="llms"/><category term="ai"/><category term="generative-ai"/></entry><entry><title>MCP was always a bad idea?</title><link href="https://simonwillison.net/2026/Sep/20/hn-49779718/" rel="alternate"/><published>2026-09-20T20:24:41+00:00</published><updated>2026-09-20T20:24:41+00:00</updated><id>https://simonwillison.net/2026/Sep/20/hn-49779718/</id><summary type="html">
-    
-        &lt;p&gt;&lt;a href="https://news.ycombinator.com/item?id=49779329#49779718"&gt;My comment&lt;/a&gt; on &lt;a href="https://news.ycombinator.com/item?id=49779329"&gt;MCP was always a bad idea?&lt;/a&gt; &amp;mdash; Hacker News.&lt;/p&gt;&lt;p&gt;This article entirely misses the value that MCP brings today.&lt;/p&gt;
-&lt;p&gt;Sure, there's almost no reason to use MCPs if you are running a full-blown terminal agent (Claude Code, Codex, Meta Muse, OpenClaw etc) with unfettered internet access - just let it call APIs directly.&lt;/p&gt;
-&lt;p&gt;If you want to operate something that's less YOLO than that, you'll find yourself wanting:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Control over exactly which external services it can access&lt;/li&gt;
-&lt;li&gt;A way to handle authentication that doesn't allow the agent to directly access API keys&lt;/li&gt;
-&lt;li&gt;A sensible UI to allow users to connect and authenticate further services&lt;/li&gt;
-&lt;li&gt;Strong audit logging for what's going on&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;MCP makes all of that so much easier to provide.&lt;/p&gt;
-&lt;p&gt;Thinking MCP is obsolete because full coding agents don't need it misses out on all of the other things we might want to build.&lt;/p&gt;
-    
-    
-        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/hacker-news"&gt;hacker-news&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/model-context-protocol"&gt;model-context-protocol&lt;/a&gt;&lt;/p&gt;
-    
-
-</summary><category term="hacker-news"/><category term="model-context-protocol"/></entry></feed>
+</summary><category term="ai-misuse"/><category term="llms"/><category term="ai"/><category term="generative-ai"/></entry></feed>

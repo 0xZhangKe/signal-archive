@@ -12,7 +12,7 @@
 	<atom:link href="https://blog.jetbrains.com/kotlin/feed/" rel="self" type="application/rss+xml" />
 	<link>https://blog.jetbrains.com</link>
 	<description>Developer Tools for Professionals and Teams</description>
-	<lastBuildDate>Wed, 30 Sep 2026 12:18:56 +0000</lastBuildDate>
+	<lastBuildDate>Thu, 01 Oct 2026 08:57:43 +0000</lastBuildDate>
 	<language>en-US</language>
 	<sy:updatePeriod>
 	hourly	</sy:updatePeriod>
@@ -77,7 +77,7 @@ val v3 = Vector.unit(angle = PI / 2)  // unit vector with an angle </pre>
 
 
 
-<p>The design of companion blocks and extensions overcomes the limitations imposed by companion objects. First of all, you can define companion extensions for any class or interface – whether you control it or not, whether it originally comes from Kotlin or from Java, or whether it has a companion object or not. <br><br>Second, the compilation strategy resembles that of static members in other platforms. For example, on the JVM, companion blocks are compiled as static members. This has additional implications for Kotlin Multiplatform: you can now define expected companion block members and actualize them using a Java class that contains static members.</p>
+<p>The design of companion blocks and extensions overcomes the limitations imposed by companion objects. First of all, you can define companion extensions for any class or interface – whether you control it or not, whether it originally comes from Kotlin or from Java, or whether it has a companion object or not.&nbsp;<br><br>Second, the compilation strategy resembles that of static members in other platforms. For example, on the JVM, companion blocks are compiled as static members. This has additional implications for Kotlin Multiplatform: you can now define expected companion block members and actualize them using a Java class that contains static members.</p>
 
 
 
@@ -89,7 +89,7 @@ val v3 = Vector.unit(angle = PI / 2)  // unit vector with an angle </pre>
 
 
 
-<p>Companion blocks and extensions are experimental features in Kotlin 2.5.0. That means that you need to pass an additional compiler flag to use the feature:</p>
+<p>Companion blocks and extensions are experimental features <strong>available starting Kotlin 2.5.0-Beta1</strong>. That means that you need to pass an additional compiler flag to use the feature:</p>
 
 
 
