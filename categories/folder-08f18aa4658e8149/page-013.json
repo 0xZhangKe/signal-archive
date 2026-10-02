@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "4ececc79b9947c8d43728147",
+      "title": "邮箱生态调研2026",
+      "summary": "起初一个很简单的想法，把一个app/服务的私人数据，集中存数据库麻烦，不想维护担责，干脆放用户自己邮箱里，所谓\"BYOS（自带存储）\"。反正协议 SMTP/POP3/IMAP 很方便，然后调查了下很快发现，时代变了。 本来寄希望IMAP 这个协议，感觉能缝成一个读写API， - APPEND 写（一封邮件 = 一个对象）， FETCH 读， STORE 改 flag， COPY/MOVE 移动 - \"目录 + KV\"模型，flag（ \\Seen 、 \\Flagged 等）即元数据位 - SEARCH 查询 主题、日期、自定义 header等 - 增量同步： UID + UIDVALIDITY ， IDLE 可做准实时推送（仅单文件夹） 其实古董的 GMailFS / GMail Drive 之类把 Gmail…",
+      "image": null,
+      "publishedAt": "2026-08-07T02:35:00Z",
+      "sourceId": "a864c53722a17b19",
+      "sourceTitle": "est's blog",
+      "link": "https://blog.est.im/2026/stdout-31",
+      "detailPath": "articles/4ececc79b9947c8d43728147.json"
+    },
+    {
       "id": "70068a5f3b443a985b943506",
       "title": "偶像音樂棒棒糖評測",
       "summary": "收到來自學生的一個神奇的禮物──K-pop 偶像棒棒糖！",
@@ -648,17 +659,6 @@
       "sourceTitle": "张可",
       "link": "https://zhangke.space/%e4%bf%9d%e6%8c%81%e8%b0%a6%e9%80%8a%ef%bc%8c%e6%89%bf%e8%ae%a4%e8%87%aa%e5%b7%b1%e7%9a%84%e6%97%a0%e8%83%bd/?utm_source=rss&utm_medium=rss&utm_campaign=%25e4%25bf%259d%25e6%258c%2581%25e8%25b0%25a6%25e9%2580%258a%25ef%25bc%258c%25e6%2589%25bf%25e8%25ae%25a4%25e8%2587%25aa%25e5%25b7%25b1%25e7%259a%2584%25e6%2597%25a0%25e8%2583%25bd",
       "detailPath": "articles/bb7d0ac145535af8af278267.json"
-    },
-    {
-      "id": "49fa352793b4307929c9fd61",
-      "title": "10小时攻关，半小时Dev Time：在指甲盖大小的单片机上跑神经网络识别车库门",
-      "summary": "为了解决车库门忘关的问题，我用拇指大小的ESP32-CAM单片机与AI协作做了一个端侧神经网络传感器。本文记录了如何通过打通全自动串口研发闭环、解决数据极度不对称与QAT量化衰减，在10小时内跑通嵌入式AI的完整过程。",
-      "image": null,
-      "publishedAt": "2026-08-02T06:00:00Z",
-      "sourceId": "1b0b2f31653640e7",
-      "sourceTitle": "Computing Life",
-      "link": "https://yage.ai/esp32-garage-door-ai.html",
-      "detailPath": "articles/49fa352793b4307929c9fd61.json"
     }
   ]
 }
