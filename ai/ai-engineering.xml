@@ -5,6 +5,22 @@
     <link>https://0xzhangke.github.io/signal-archive/</link>
     <description>AI 整理的公开网络内容，附原始来源。</description>
     <item>
+      <title>Cloudflare开源决策模型Clef与Clef-flash，实现快速选项评分</title>
+      <link>https://www.threads.com/@oneday0013/post/DeBsEy2itqn/cloudflare-%E9%96%8B%E6%BA%90%E4%BA%86%E4%B8%80%E7%B5%84%E6%B1%BA%E7%AD%96%E6%A8%A1%E5%9E%8B-clef1-%E5%BA%95%E5%B1%A4%E6%98%AF-qwen-%E6%8A%8A%E6%89%80%E6%9C%89%E9%81%B8%E9%A0%85%E5%B9%B3%E8%A1%8C%E6%89%93%E5%88%86%E6%95%B8-%E4%B8%8D%E7%94%A8%E4%B8%80%E5%80%8B%E5%AD%97%E4%B8%80%E5%80%8B%E5%AD%97%E7%94%9F%E6%88%902-%E5%85%A9%E5%80%8B%E7%89%88%E6%9C%AC%E4%B8%AD%E4%BD%8D%E6%95%B8%E5%BB%B6%E9%81%B2-clef-flash-</link>
+      <guid isPermaLink="false">urn:signal-archive:ai:8307c559662bfe556e6da5ef78c5fd35</guid>
+      <archive:collectedAt>2026-10-03T15:42:02Z</archive:collectedAt>
+      <description>Cloudflare发布了基于Qwen的Apache 2.0开源决策模型Clef和Clef-flash。模型不生成文本，而是对预设选项进行并行概率评分，专门用于AI智能体的快速决策。Clef-flash中位延迟38.8ms，比TypeSafe Jev的524.1ms快约13倍，已在Workers AI平台和Hugging Face上发布。</description>
+      <content:encoded>&lt;p&gt;Cloudflare发布了基于Qwen的Apache 2.0开源决策模型Clef和Clef-flash。模型不生成文本，而是对预设选项进行并行概率评分，专门用于AI智能体的快速决策。Clef-flash中位延迟38.8ms，比TypeSafe Jev的524.1ms快约13倍，已在Workers AI平台和Hugging Face上发布。&lt;/p&gt;&lt;ul&gt;&lt;li&gt;底層基於Qwen模型，對所有選項進行平行打分而非逐字生成&lt;/li&gt;&lt;li&gt;Clef-flash中位延迟38.8ms，Clef为209.3ms，Jev为524.1ms&lt;/li&gt;&lt;li&gt;BANKING77準確度94.2%，CLINC150準確度97.43%&lt;/li&gt;&lt;li&gt;支持64k上下文，具备图像理解能力&lt;/li&gt;&lt;li&gt;4個工作流程測試中贏了Jev 3個(發票處理、客服、資安事件)&lt;/li&gt;&lt;/ul&gt;&lt;h3&gt;来源 / Sources&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;&lt;a href="https://www.threads.com/@oneday0013/post/DeBsEy2itqn/cloudflare-%E9%96%8B%E6%BA%90%E4%BA%86%E4%B8%80%E7%B5%84%E6%B1%BA%E7%AD%96%E6%A8%A1%E5%9E%8B-clef1-%E5%BA%95%E5%B1%A4%E6%98%AF-qwen-%E6%8A%8A%E6%89%80%E6%9C%89%E9%81%B8%E9%A0%85%E5%B9%B3%E8%A1%8C%E6%89%93%E5%88%86%E6%95%B8-%E4%B8%8D%E7%94%A8%E4%B8%80%E5%80%8B%E5%AD%97%E4%B8%80%E5%80%8B%E5%AD%97%E7%94%9F%E6%88%902-%E5%85%A9%E5%80%8B%E7%89%88%E6%9C%AC%E4%B8%AD%E4%BD%8D%E6%95%B8%E5%BB%B6%E9%81%B2-clef-flash-"&gt;Cloudflare 開源了一組決策模型 Clef&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://post.smzdm.com/p/awwonp34"&gt;Cloudflare开源AI判断工具Clef：不聊天只打分，速度比Jev快13倍&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</content:encoded>
+    </item>
+    <item>
+      <title>OpenAI正式推出常驻智能体Dots，实现7×24小时持续运行</title>
+      <link>https://zicode.com/blog/openai-dots</link>
+      <guid isPermaLink="false">urn:signal-archive:ai:6191b24a0d40917755b521700779f780</guid>
+      <archive:collectedAt>2026-10-03T15:42:02Z</archive:collectedAt>
+      <description>OpenAI发布了名为Dots的常驻AI智能体，面向Pro和Business用户推出。每个Dot配备独立云主机、浏览器和持久记忆，可跨ChatGPT、Slack、Microsoft Teams等渠道运行，实现目标导向的自主任务执行而无需用户实时监控。Dots仅在需要人工决策时才中断用户，将交互单位从</description>
+      <content:encoded>&lt;p&gt;OpenAI发布了名为Dots的常驻AI智能体，面向Pro和Business用户推出。每个Dot配备独立云主机、浏览器和持久记忆，可跨ChatGPT、Slack、Microsoft Teams等渠道运行，实现目标导向的自主任务执行而无需用户实时监控。Dots仅在需要人工决策时才中断用户，将交互单位从&lt;/p&gt;&lt;ul&gt;&lt;li&gt;每个Dot是独立云主机+浏览器+授权应用+持久记忆的执行体&lt;/li&gt;&lt;li&gt;支持4000多个应用插件，入口包括ChatGPT、Slack、Teams等&lt;/li&gt;&lt;li&gt;通过Auto-review、Custom Rules和三分支审批流进行安全治理&lt;/li&gt;&lt;li&gt;当任务链从5步延长到10步时，边界问题比例从8.6%升至19.7%&lt;/li&gt;&lt;li&gt;面向Pro(100美元/月)和Business Premium用户，EEA、瑞士、英国暂不可用&lt;/li&gt;&lt;/ul&gt;&lt;h3&gt;来源 / Sources&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;&lt;a href="https://zicode.com/blog/openai-dots"&gt;技术热点透视20261003：OpenAI Dots上线，聊天框变成常驻Agent&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</content:encoded>
+    </item>
+    <item>
       <title>OpenAI正式发布GPT-6 Sol与GPT-6 Luna模型，API价格降低50%</title>
       <link>https://openai.com/zh-Hans-CN/index/introducing-gpt-6-sol-and-luna</link>
       <guid isPermaLink="false">urn:signal-archive:ai:7d58623d4fef97a484db9e383a2f57d7</guid>
