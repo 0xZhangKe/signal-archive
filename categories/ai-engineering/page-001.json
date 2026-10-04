@@ -1,6 +1,39 @@
 {
   "items": [
     {
+      "id": "ea94ed0b2cb7359db2982406",
+      "title": "开源决策模型生态系统持续扩张，轻量级模型涌现",
+      "summary": "近期开源决策模型领域迎来多项重要发布，包括Cloudflare的Clef系列快速决策模型、PostHog的Jeeves思维链决策分类器、firelex的Jeff毫秒级决策模型等。这些模型专为智能体高频微决策场景优化，延迟降至毫秒级，显著降低了大模型在简单决策任务上的调用成本。同时，本地推理引擎如ds4和Magnitude也发布了重要更新，针对端侧硬件进行自动内核调优，提升本地部署效率。",
+      "image": null,
+      "publishedAt": null,
+      "sourceId": "ai-engineering",
+      "sourceTitle": "AI 工程动态",
+      "link": "https://s.dun.im/space/latest/post/agili-de-aigc-zhou-kan-y26w39",
+      "detailPath": "articles/ea94ed0b2cb7359db2982406.json"
+    },
+    {
+      "id": "dd826459370c4f6f3a8d3bb5",
+      "title": "OpenAI DevDay 2026 完整总结：dots常驻代理、GPT-6.1 Sol 与新型合作生态",
+      "summary": "OpenAI在9月29日DevDay大会上发布了多项重要更新，最核心的是推出了由GPT-6 Astra驱动的常驻个人AI代理'dots'，它能持续代表用户处理跨应用复杂任务。同时发布的GPT-6.1 Sol以旗舰模型五分之一的价格提供接近GPT-6 Astra的性能，专为编程和复杂工程优化。此次发布还引入了Ultrafast极速模式、Decisions API、Agents API的Computer Use能力，以及'使用ChatGPT登入'的新型生态合作模式，允许用户在合作工具中直接使用ChatGPT订阅额度。",
+      "image": null,
+      "publishedAt": null,
+      "sourceId": "ai-engineering",
+      "sourceTitle": "AI 工程动态",
+      "link": "https://vocus.cc/article/6ac1c886fd8978000198ed2a",
+      "detailPath": "articles/dd826459370c4f6f3a8d3bb5.json"
+    },
+    {
+      "id": "35509716210b8ce21e180ea8",
+      "title": "Google Cloud发布vLLM深度优化版本，增强Llama 3.1/3.2部署效能",
+      "summary": "Google Cloud在其Gemini Enterprise Agent Platform中发布了vLLM的自定义优化版本，针对Llama 3.1和3.2模型部署进行了专门优化。更新包括从Cloud Storage并行下载、动态LoRA增强缓存、Llama 3.1/3.2函数调用解析优化等功能。该版本与Gemini Enterprise Agent Platform生态系统深度集成，支持预训练和多模态模型的GPU高效推理，并提供完善的错误处理和服务器稳定性机制。",
+      "image": null,
+      "publishedAt": null,
+      "sourceId": "ai-engineering",
+      "sourceTitle": "AI 工程动态",
+      "link": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/open-models/vllm/use-vllm?hl=zh-tw",
+      "detailPath": "articles/35509716210b8ce21e180ea8.json"
+    },
+    {
       "id": "30867facc7e49e02cd21b517",
       "title": "技嘉发布AI TOP ATOM 64GB版本，为本地AI开发提供新硬件选项",
       "summary": "技嘉于2026年10月2日发布了AI TOP ATOM系列64GB统一内存版本。该设备基于英伟达DGX Spark平台，采用CPU与GPU统一内存架构，为个人开发者和研究团队提供了灵活且具备性价比的本地AI开发与推理硬件选择。新增的64GB版本，结合原有的128GB版本，旨在覆盖从轻量化原型测试到大规模模型运行的不同场景。该平台深度整合CUDA AI生态及技嘉自研工具，支持主流开源模型运行和RAG应用搭建。",
@@ -626,39 +659,6 @@
       "sourceTitle": "AI 工程动态",
       "link": "https://www.qbitai.com/2026/09/496301.html",
       "detailPath": "articles/6de66ff16e893a197f7770a1.json"
-    },
-    {
-      "id": "93b9cce3fdb2cb0c160b0af6",
-      "title": "小米MiMo发布HySparse2架构论文，大幅优化Agent推理效率和成本",
-      "summary": "小米MiMo大模型团队负责人罗福莉发布新论文，公布了即将发布的MiMo-V3模型将采用的HySparse2架构。该架构针对Agent场景中“简短动作、长观察结果”的独特推理负载进行了优化，通过两级KV共享等技术，能让预填充节点只运行一半模型权重。据论文数据，在百万Token上下文下，预填充算力可降低至原方案的1/5，KV缓存缩小4.5倍，同时提升了长上下文检索能力。这一进展为AI开发者提供了关于如何从模型架构层面根本性降低Agent推理成本的重要工程思路。",
-      "image": null,
-      "publishedAt": null,
-      "sourceId": "ai-engineering",
-      "sourceTitle": "AI 工程动态",
-      "link": "https://hao.cnyes.com/post/269578",
-      "detailPath": "articles/93b9cce3fdb2cb0c160b0af6.json"
-    },
-    {
-      "id": "89b144a137eea5182a3b5e51",
-      "title": "OpenAI与Anthropic同日发布新模型，大模型竞争进入性价比阶段",
-      "summary": "OpenAI和Anthropic于2026年9月22日相继发布GPT-6 Sol/Luna和Claude Opus 5.5模型，共同特点是大幅降价和强调提升性价比。OpenAI将其中端模型价格永久下调50%，Anthropic的新模型则降价20%并宣称在多项编码基准上超越自家顶级模型。行业分析认为，这反映出大模型竞争已进入“拼性价比”阶段，模型厂商需通过降低推理成本和提升效率来吸引和保留企业用户。开发者可以更低成本获得与前代高端模型接近的能力。",
-      "image": null,
-      "publishedAt": null,
-      "sourceId": "ai-engineering",
-      "sourceTitle": "AI 工程动态",
-      "link": "https://www.datacamp.com/zh/blog/gpt-6-sol-vs-claude-opus-5-5",
-      "detailPath": "articles/89b144a137eea5182a3b5e51.json"
-    },
-    {
-      "id": "7aa28478bad1dbfcd51e8d97",
-      "title": "阿里云大模型服务平台百炼发布多项功能更新",
-      "summary": "阿里云在其大模型服务平台百炼（Model Studio）上发布了多项新功能。更新主要集中在提升开发效率、工作流迁移便捷性和Agent应用的稳健性上，包括支持从Dify一键导入工作流，文件问答功能升级，以及智能体应用的模型自动降级机制。此外，推出了全新的“高代码应用”类型，旨在简化企业级AI服务的部署与运维。",
-      "image": null,
-      "publishedAt": null,
-      "sourceId": "ai-engineering",
-      "sourceTitle": "AI 工程动态",
-      "link": "https://help.aliyun.com/zh/model-studio/application-release-notes",
-      "detailPath": "articles/7aa28478bad1dbfcd51e8d97.json"
     }
   ]
 }

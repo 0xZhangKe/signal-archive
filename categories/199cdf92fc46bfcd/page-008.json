@@ -1,10 +1,32 @@
 {
   "items": [
     {
+      "id": "51d4f92d9f8d062092a5ecef",
+      "title": "多少錢能買你的尊嚴？",
+      "summary": "做了一場私人小包廂聚會活動，突然就出現了「給你一千你們兩個上臺接吻」的環節，而且時間要超過一分鐘，結果每個被拉上臺的都說「我再加碼一千機會給別人」。 接吻的對象是沒限，兩個人都說可以就好，而且在場的其實大多夫妻彼此都在場，只要跟伴侶接吻即可。 加碼到六千時，一直沒人要接吻。 「還是你們兩個來啦！」客人跑到控臺區問我跟正職的前輩。 此刻 Eddie 確定自己的性向 100% 是喜歡女性，想到畫面就不舒服。 「你們等加碼超過一萬再親啦！」另一個客人過來說。 結束之後，我們收器材，飯店的人也在收餐桌，問： 「一萬很多了啊，那要多少才可以？」 一萬不行，那十萬呢？一百萬？一千萬？一億？",
+      "image": null,
+      "publishedAt": "2026-01-06T01:16:21Z",
+      "sourceId": "199cdf92fc46bfcd",
+      "sourceTitle": "Eddie Lv",
+      "link": "https://eddielv.com/musings/dignity-value/",
+      "detailPath": "articles/51d4f92d9f8d062092a5ecef.json"
+    },
+    {
+      "id": "83fcd8d0e3156d0ddbf84253",
+      "title": "其實 Hugo 架站對一般人門檻滿高（？）的。",
+      "summary": "最近又重新把 Hugo 的邏輯重新複習了一遍，發現要會的東西其實很多，也把新手可能會遇到的狀況列出來 對，只是列出來，但 Hugo 部分會附上解決 Link。有閒、有興致或許會寫教學文，但真的卡關可以問 AI，真的再不行，你寄信來問我，我幫你問 AI！ 終端機 Terminal # Hugo 使用 純文字終端機介面 ，沒用過的人就先嚇死了吧！ 但撇除掉 架設時用到的指令 hugo new site [網站資料夾名稱] ，事後只有新增文章會用到 hugo new 、測試文章用 hugo server 、生成網站用 hugo （就這些，你學完了）。 部署 1 到伺服器的步驟則有圖形界面 Filezilla 可以使用，等流程都熟了再換成用終端機部署就好（不換也可）。 事實上，從生成網站的 hugo 到，到 git…",
+      "image": null,
+      "publishedAt": "2026-01-06T01:10:08Z",
+      "sourceId": "199cdf92fc46bfcd",
+      "sourceTitle": "Eddie Lv",
+      "link": "https://eddielv.com/articles/hugo-difficult/",
+      "detailPath": "articles/83fcd8d0e3156d0ddbf84253.json"
+    },
+    {
       "id": "0620f223d2dae21e9e928f60",
       "title": "決定把首頁改得更極簡一點...",
       "summary": "前言 # 一直在思考「怎麼讓使用者舒服待在我的網站」，因爲以往的首頁，非常地「資訊轟炸」，光是解釋 Eddie 怎麼分類就用了很多文字。 2025 年的舊版本首頁 # 是不是一進來，就會覺得東西很多，Link 很多，不知道該從哪裡開始？如果是意外進來的網友，可能直接右轉走人了，因爲原本沒有要閱讀文字的打算。 這也是爲何做了 歷史上的今天 、 隨機文章 、 搜尋功能 的原因：提供更多進入網站的方式。 改版想法 # 刪除內文中所有不必要元素 # 其實「關於 Eddie」根本不需要一直出現在內文第一行吧！總之最後把內文的許多 Link 都移到 header（上面那行）跟 footer（最下面那行）。 搜尋欄 # 把搜尋欄改到最中間，就像 Google 首頁一樣！ 至於把搜尋功能作爲主視覺是因爲：網友在乎什麼，就搜尋…",
-      "image": null,
+      "image": "https://eddielv.com/musings/2026-homepage/2025-homepage.png",
       "publishedAt": "2026-01-04T21:39:52Z",
       "sourceId": "199cdf92fc46bfcd",
       "sourceTitle": "Eddie Lv",
@@ -37,7 +59,7 @@
       "id": "8da6464d37e8c7098493fbff",
       "title": "Hugo 更新災難 SOS",
       "summary": "前言 # 架設官網 時，一開始用了一個很複雜的主題，必須要最新的 hugo 版本，裝完之後發現太麻煩了，還要用到 docker，就換了一個簡單一點的的主題。 回頭到部落格發文 # 夭壽，突然發現過往文章 css 格式跑掉了： 查看 git 後發現，原始檔案根本都沒動，而 public 有幾百個檔案有變動。 查看後發現原始文章的 .md 若有用兩組「```」包起來，文字就會變得無法閱讀。 最後聯想到應該是 hugo 版本的問題。 弄了幾小時後… # 一直以爲是渲染失敗的問題，查了很久，最後發現如果有對「```」定義語言 1 ，就能正常渲染成功。 而 Eddie 早期的文章都沒定義，於是就出事了！ 把文章的 ``` 全部加上 text # 也試過在 config 調整設定，還是無法，最後決定把所有文章都加上 te…",
-      "image": null,
+      "image": "https://eddielv.com/musings/hugo-update-sos/weird-format.png",
       "publishedAt": "2026-01-03T17:33:51Z",
       "sourceId": "199cdf92fc46bfcd",
       "sourceTitle": "Eddie Lv",
@@ -637,28 +659,6 @@
       "sourceTitle": "Eddie Lv",
       "link": "https://eddielv.com/musings/ai-content/",
       "detailPath": "articles/081060c404e05923b389526e.json"
-    },
-    {
-      "id": "2fdc2ccb445c07ddbfe94310",
-      "title": "發聲技術進步的跡象：唱得更低了！",
-      "summary": "Eddie 特別沒有練習低音，因爲流行歌也不會唱到那麼低。 原來 E2 左右就會非常壓喉嚨，最近測試則發現漸漸可以到 B1 了！ 雖然一直練高音，但只要發聲越來越有效率，低音也自然會越來越鬆！ 你的瀏覽器不支援 audio 元素。",
-      "image": null,
-      "publishedAt": "2025-12-05T03:47:13Z",
-      "sourceId": "199cdf92fc46bfcd",
-      "sourceTitle": "Eddie Lv",
-      "link": "https://eddielv.com/musings/sing-lower/",
-      "detailPath": "articles/2fdc2ccb445c07ddbfe94310.json"
-    },
-    {
-      "id": "8d3399acee1738258f981d0c",
-      "title": "同時存在相對音感與絕對音感？",
-      "summary": "最近與一個爵士 KB 手聊天，對方問我覺得相對音感與絕對音感能同時存在嗎？ 相對音感養成 # Eddie 從國中開始就自學會抓歌採譜，用的就是相對音感。在只有直笛這項工具可以用的時期，Eddie 甚至可以放一首不是 C 大調的音樂，在腦中用相對音感抓完後，再用直笛改吹成 C 大調（因爲 Eddie 只會吹 C 大調）。 後來接觸吉他之後，更加強了相對音感的能力，因爲吉他是以圖形記憶的樂器，同一種圖形代表一種 Mode，在同圖形的情況下，改從不同位置開始彈，則表示不同 Key。 絕對音感養成 # 而最近開始學習 唱歌 ，常常睡醒之後，就開始邊盥洗邊唱歌，已經非常多次，到鋼琴面前確認 Key，結果一彈發現就是原 Key！ 但只要隨著越來越清醒，或者練習樂器、發聲時，有在各個調性中移動後，漸漸地絕對音感會消失，變回…",
-      "image": null,
-      "publishedAt": "2025-12-04T17:30:34Z",
-      "sourceId": "199cdf92fc46bfcd",
-      "sourceTitle": "Eddie Lv",
-      "link": "https://eddielv.com/musings/relative-absolute-pitch/",
-      "detailPath": "articles/8d3399acee1738258f981d0c.json"
     }
   ]
 }
