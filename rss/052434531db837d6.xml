@@ -1,5 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-10-02T22:57:38+00:00</updated><author><name>Simon Willison</name></author><entry><title>Rex's Dino Store</title><link href="https://simonwillison.net/2026/Oct/2/rex-s-dino-store/" rel="alternate"/><published>2026-10-02T22:57:38+00:00</published><updated>2026-10-02T22:57:38+00:00</updated><id>https://simonwillison.net/2026/Oct/2/rex-s-dino-store/</id><summary type="html">
+<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-10-03T23:34:02+00:00</updated><author><name>Simon Willison</name></author><entry><title>We're going to need default hard budget caps on pretty much everything</title><link href="https://simonwillison.net/2026/Oct/3/default-hard-budget-caps/" rel="alternate"/><published>2026-10-03T23:34:02+00:00</published><updated>2026-10-03T23:34:02+00:00</updated><id>https://simonwillison.net/2026/Oct/3/default-hard-budget-caps/</id><summary type="html">
+    &lt;p&gt;Here's a product feature which the world is going to need a whole lot more of over the coming months and years: &lt;strong&gt;default hard budget caps&lt;/strong&gt;. I'm talking about the feature of pay-by-usage services and APIs that lets you say "after $X/month, cut this thing off and return errors". These need to be &lt;strong&gt;hard&lt;/strong&gt; limits. Soft caps, "after $X/month, send me a warning email", will not cut it.&lt;/p&gt;
+&lt;p&gt;Coding agents, and personal agents (coding agents wrapped in a less threatening UI), greatly reduce the friction of spinning up code that can do useful things. Sometimes those things cost money - calls to paid APIs, or hosted web applications, or systems that can bill for additional storage and compute.&lt;/p&gt;
+&lt;p&gt;Nobody wants to wake up to an email sent at midnight warning about a budget limit and find that, while they slept, their rogue service had consumed several hundred (or several thousand) more dollars of usage.&lt;/p&gt;
+&lt;p&gt;An argument against this is that businesses don't want their hosted applications to start throwing errors because some budget was exceeded. I expect that most businesses and individuals would prefer errors to a surprise $10,000+ bill.&lt;/p&gt;
+&lt;p&gt;I think hard budget caps need to be the default. If someone wants to live dangerously they should be able to do that, but it needs to be on an opt-in basis. Have a nice, clear checkbox somewhere prominent:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;input type="checkbox" disabled="disabled" /&gt; Remove the budget cap. My application will not be shut down if I exceed the configured budget limit, and I will be responsible for subsequent charges.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The service I most want to see this from is AWS. I've heard plenty of stories from people who refuse to use AWS for personal projects out of (justified) fear that a runaway service might bankrupt them. I've also heard stories from people who &lt;em&gt;didn't&lt;/em&gt; anticipate this and ended up seriously burned.&lt;/p&gt;
+&lt;p&gt;... and it turns out AWS finally launched spending limits a few weeks ago! From their announcement &lt;a href="https://aws.amazon.com/about-aws/whats-new/2026/09/New-AWS-Builder-Experience/"&gt;New AWS experience helps builders get started and ship faster&lt;/a&gt; on 16th September:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;When you're ready to upgrade to a paid plan, you can set a monthly spend limit for your project based on your usage patterns so that you stay within your budget. If a project's usage reaches its spend limit, your project is paused for that month.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;See also &lt;a href="https://docs.aws.amazon.com/accounts/latest/reference/create-spend-limit.html"&gt;Create a spend limit in AWS Settings&lt;/a&gt;, though that page warns that "We're currently releasing our new experience to a limited number of customers." Here's hoping that hits general availability for existing accounts soon.&lt;/p&gt;
+&lt;p&gt;Google Cloud &lt;a href="https://cloud.google.com/blog/topics/cost-management/new-early-anomalies-and-spend-caps-on-google-cloud-budgets"&gt;launched a similar feature&lt;/a&gt; in July, called Spend Caps, which lets you "set a monthly financial cap on specific services within a project". Looks like this is becoming a trend!&lt;/p&gt;
+&lt;p&gt;In an ideal world, our agents could help with this. It would be great if agents started biasing towards recommending providers with hard budget caps, and warning new and inexperienced builders against deploying applications using uncapped services that might get them into trouble.&lt;/p&gt;
+    
+        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/amazon-web-services"&gt;amazon-web-services&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/coding-agents"&gt;coding-agents&lt;/a&gt;&lt;/p&gt;
+    
+
+</summary><category term="amazon-web-services"/><category term="ai"/><category term="coding-agents"/></entry><entry><title>September sponsors-only newsletter</title><link href="https://simonwillison.net/2026/Oct/3/newsletter/" rel="alternate"/><published>2026-10-03T22:00:31+00:00</published><updated>2026-10-03T22:00:31+00:00</updated><id>https://simonwillison.net/2026/Oct/3/newsletter/</id><summary type="html">
+    &lt;p&gt;I just sent the September edition of my &lt;a href="https://github.com/sponsors/simonw/"&gt;sponsors-only monthly newsletter&lt;/a&gt;. If you are a sponsor (or start a sponsorship now) you can &lt;a href="https://github.com/simonw-private/monthly/blob/main/2026-09-september.md"&gt;access it here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;This month:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;More Fable class models&lt;/li&gt;
+&lt;li&gt;A pricing war&lt;/li&gt;
+&lt;li&gt;3D graphics, Blender, and pixel art&lt;/li&gt;
+&lt;li&gt;LLMs come for mathematics&lt;/li&gt;
+&lt;li&gt;So many more accidental cyberattacks&lt;/li&gt;
+&lt;li&gt;The vulnapocalypse comes for Datasette&lt;/li&gt;
+&lt;li&gt;What I'm using right now&lt;/li&gt;
+&lt;li&gt;My software releases this month&lt;/li&gt;
+&lt;li&gt;2026 in LLMs (so far)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Here's &lt;a href="https://github.com/simonw/monthly-newsletter-archive/blob/main/2026-08-august.md"&gt;a copy of the August newsletter&lt;/a&gt; as a preview of what you'll get. Pay $10/month to stay a month ahead of the free copy!&lt;/p&gt;
+
+    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/newsletter"&gt;newsletter&lt;/a&gt;&lt;/p&gt;
+
+
+
+</summary><category term="newsletter"/></entry><entry><title>Rex's Dino Store</title><link href="https://simonwillison.net/2026/Oct/2/rex-s-dino-store/" rel="alternate"/><published>2026-10-02T22:57:38+00:00</published><updated>2026-10-02T22:57:38+00:00</updated><id>https://simonwillison.net/2026/Oct/2/rex-s-dino-store/</id><summary type="html">
     
         &lt;p&gt;&lt;strong&gt;Museum:&lt;/strong&gt; &lt;a href="https://www.niche-museums.com/119"&gt;Rex&amp;#x27;s Dino Store&lt;/a&gt;&lt;/p&gt;
         &lt;p&gt;Located just before the turnstiles in the Grand Army Plaza subway station at the north end of Brooklyn's Prospect Park is this former newsstand which is now operated by a dinosaur.&lt;/p&gt;
@@ -1335,68 +1376,4 @@ I'm hosting an evening event with Jesse Vincent in San Francisco on Wednesday 14
         &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/projects"&gt;projects&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llm"&gt;llm&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/jev"&gt;jev&lt;/a&gt;&lt;/p&gt;
     
 
-</summary><category term="projects"/><category term="llm"/><category term="jev"/></entry><entry><title>Jev introduces a new shape of LLM - System One, aka Decision Models</title><link href="https://simonwillison.net/2026/Sep/21/jev/" rel="alternate"/><published>2026-09-21T23:09:20+00:00</published><updated>2026-09-21T23:09:20+00:00</updated><id>https://simonwillison.net/2026/Sep/21/jev/</id><summary type="html">
-    &lt;p&gt;Last week &lt;a href="https://typesafe.ai/"&gt;TypeSafe AI&lt;/a&gt; unveiled &lt;a href="https://typesafe.ai/blog/introducing-system-one-models-and-jev"&gt;Jev&lt;/a&gt;, their first example of a new category of model that they are calling "System One models" (I'm with Maggie Appleton, I think "decision models" is &lt;a href="https://twitter.com/Mappletons/status/2101560333441610133"&gt;a better name&lt;/a&gt; for these). Jev is an interesting variant on the usual LLM format: it still accepts text inputs, but instead of text output it returns floating point numbers corresponding to categories, yes/no questions, ratings, and associated confidence scores.&lt;/p&gt;
-&lt;p&gt;TypeSafe describe Jev like this:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Think of Jev as a frontier-intelligence function call: unstructured state in, typed probabilistic decisions out.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;It's also very fast, and &lt;em&gt;really cheap&lt;/em&gt;. Regular LLMs &lt;a href="https://www.llm-prices.com"&gt;are priced&lt;/a&gt; in terms of input and output tokens, with output generally charged at significantly higher rates. Jev charges only for input - output is free - and the input price of their first model is $0.042 per million tokens - cheaper even than OpenAI's &lt;a href="https://developers.openai.com/api/docs/models/gpt-5-nano"&gt;GPT-5 Nano&lt;/a&gt; ($0.05/million).&lt;/p&gt;
-&lt;p&gt;Jev lets you ask questions about text or semi-structured data. You compose a "state" object containing a string, array of strings, or set of name-value pairs - this might describe an article, or a customer, or any other kind of record. You then send that to their API with one or more questions, and get a reply back for each.&lt;/p&gt;
-&lt;p&gt;You can ask three kinds of questions:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Yes/No questions, which Jev calls "Noul" questions - their CEO &lt;a href="https://news.ycombinator.com/item?id=49717558#49718407"&gt;confirmed on Hacker News&lt;/a&gt; that this is short for Bernoulli, from the &lt;a href="https://en.wikipedia.org/wiki/Bernoulli_distribution"&gt;Bernoulli distribution&lt;/a&gt;. You pose a statement and get back a floating point number between 0 and 1 for how confident the model is that the statement is true.&lt;/li&gt;
-&lt;li&gt;Choice questions, where the model picks one from a set of provided options - actually a confidence score plus a probability distribution across all of the options.&lt;/li&gt;
-&lt;li&gt;Score questions, where you provide sequence of numeric levels with descriptions and it provides a floating point score somewhere along that range.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;The Jev API can accept a single document ("state") and as many questions as you can cram into the context window. Questions are evaluated in parallel, so sending many questions should take a similar time to sending just one.&lt;/p&gt;
-&lt;p&gt;The &lt;a href="https://docs.typesafe.ai/model-jaggedness/jev-1.13"&gt;Jev 1.13 jaggedness&lt;/a&gt; documentation offers useful guidance as to Jev's strengths and weaknesses. It's currently not great with numbers, dates, or "adversarial content".&lt;/p&gt;
-&lt;p&gt;I think the &lt;strong&gt;decision model&lt;/strong&gt; framing is useful for understanding where to use Jev. It's great for anything that can be expressed as a classification task - think spam detection, suggesting labels, prioritization and ranking.&lt;/p&gt;
-&lt;p&gt;I've also been experimenting with it for search reranking, where you fetch 100 likely matches using an inexpensive algorithm like BM25, then have Jev score those 100 candidates for relevance against the original query.&lt;/p&gt;
-&lt;h4 id="black-boxes-are-back-in-fashion"&gt;Black boxes are back in fashion&lt;/h4&gt;
-&lt;p&gt;Something I've found a little uncomfortable about Jev is how it very much represents a regression even further towards black box machine learning systems.&lt;/p&gt;
-&lt;p&gt;LLMs are black boxes already - you can ask them to justify their decisions, but you can't guarantee that what they say is useful or accurate.&lt;/p&gt;
-&lt;p&gt;Jev doesn't even give you that: put in all the text you want, the only thing you're going to get back is a floating point number. If Jev marks something as spam, which content signals tipped it off?&lt;/p&gt;
-&lt;p&gt;This also means that concerns about bias should be front and center. I really hope nobody uses Jev to rank job applicants - that floating point number could conceal all manner of unseen bias baked into the models, and experimentally picking that bias apart is going to be a tricky business.&lt;/p&gt;
-&lt;p&gt;(I tried one experiment where I had Jev score every city in the San Francisco Bay Area on a yes/no answer to whether they were a "Good city?" - it rated &lt;a href="https://en.wikipedia.org/wiki/Cupertino,_California"&gt;Cupertino&lt;/a&gt; top and &lt;a href="https://en.wikipedia.org/wiki/East_Palo_Alto,_California"&gt;East Palo Alto&lt;/a&gt; bottom. Huh.)&lt;/p&gt;
-&lt;p&gt;In practice, this all means that evals and structured experiments are even more important than they are for regular LLM projects. Thankfully, Jev is so cheap that running hundreds or even thousands of experimental prompts through it costs just a few cents.&lt;/p&gt;
-&lt;h4 id="unconventional-uses-for-jev"&gt;Unconventional uses for Jev&lt;/h4&gt;
-&lt;p&gt;It's been really fun watching the wider community come up with potential use-cases for Jev over the past few days. Here are some creative ones that caught my eye:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;a href="https://github.com/kyle-pena-nlp/jevchat/"&gt;jevchat&lt;/a&gt; by Kyle Pena turns Jev into a (terrible) chat model. "At every step it asks Jev one question: Given the user's question and the reply written so far, which symbol comes next?". &lt;a href="https://news.ycombinator.com/item?id=49778162#49778423"&gt;ericpruitt on Hacker News&lt;/a&gt;: "It's the digital equivalent of Morty speaking with the death crystal".&lt;/li&gt;
-&lt;li&gt;
-&lt;a href="https://github.com/f/jev-leftpad"&gt;jev-leftpad&lt;/a&gt; by Fatih Kadir Akın implements &lt;a href="https://www.npmjs.com/package/left-pad"&gt;left-pad&lt;/a&gt; with the prompt "How many spaces are needed before value to reach targetLength?" and &lt;a href="https://github.com/f/jev-leftpad/blob/4f405354de756cc372826d19aa8dfbee2b675778/src/index.js#L9-L30"&gt;a choice query&lt;/a&gt; allowing options from "0 spaces are needed" to "10 spaces are needed".&lt;/li&gt;
-&lt;li&gt;
-&lt;a href="https://gist.github.com/cablehead/bdf9ad946ceb26d9008976e49c9bfbbb"&gt;jev-2048&lt;/a&gt; by Andy Gayton uses Jev to play &lt;a href="https://simple-jev.featherless.ai/cool-demo/2048/"&gt;the 2048 sliding puzzle game&lt;/a&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id="open-weight-recreations"&gt;Open weight recreations&lt;/h4&gt;
-&lt;p&gt;There's also been a flurry of projects attempting to create a model like Jev using on top of open weight models. &lt;a href="https://github.com/jaredpalmer/kev"&gt;Kev&lt;/a&gt; is one interesting example, using Qwen 3.5 to produce 0.8B, 4B, and 9B models. Here's the &lt;a href="https://news.ycombinator.com/item?id=49783999"&gt;accompanying Hacker News thread&lt;/a&gt;, where someone linked to a &lt;a href="https://benchmarkheaven.com/jev-models"&gt;JevBench&lt;/a&gt; benchmark that has already cropped up to compare "Jev-class decision models".&lt;/p&gt;
-&lt;p&gt;Given Jev was released just under a week ago, the amount of activity around it is extremely impressive.&lt;/p&gt;
-
-&lt;h4 id="using-jev-from-llm"&gt;Using Jev from LLM&lt;/h4&gt;
-&lt;p&gt;&lt;strong&gt;Update 22nd September 2026&lt;/strong&gt;: I released &lt;a href="https://github.com/simonw/llm-typesafe"&gt;llm-typesafe&lt;/a&gt;, a plugin that adds support for Jev to my &lt;a href="https://llm.datasette.io/"&gt;LLM&lt;/a&gt; CLI tool and Python library. Basic usage looks like this:&lt;/p&gt;
-&lt;div class="highlight highlight-source-shell"&gt;&lt;pre&gt;llm -m jev &lt;span class="pl-s"&gt;&lt;span class="pl-pds"&gt;'&lt;/span&gt;Please refund my last payment.&lt;span class="pl-pds"&gt;'&lt;/span&gt;&lt;/span&gt; \
-  -s &lt;span class="pl-s"&gt;&lt;span class="pl-pds"&gt;'&lt;/span&gt;Does this message explicitly request a refund?&lt;span class="pl-pds"&gt;'&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;See &lt;a href="https://github.com/simonw/llm-typesafe/blob/main/README.md"&gt;the README&lt;/a&gt; for examples of other query types.&lt;/p&gt;
-    
-        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/evals"&gt;evals&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai-bias"&gt;ai-bias&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/jev"&gt;jev&lt;/a&gt;&lt;/p&gt;
-    
-
-</summary><category term="ai"/><category term="generative-ai"/><category term="llms"/><category term="evals"/><category term="ai-bias"/><category term="jev"/></entry><entry><title>Cloudflare Python Workers are now generally available</title><link href="https://simonwillison.net/2026/Sep/21/cloudflare-python-worker/" rel="alternate"/><published>2026-09-21T22:25:44+00:00</published><updated>2026-09-21T22:25:44+00:00</updated><id>https://simonwillison.net/2026/Sep/21/cloudflare-python-worker/</id><summary type="html">
-    
-&lt;p&gt;&lt;strong&gt;&lt;a href="https://blog.cloudflare.com/python-workers-ga/"&gt;Cloudflare Python Workers are now generally available&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
-After a two year preview, Cloudflare's support for running Python code in their server-side Workers platform is now stable: "Python is now a first-class, fully supported language on the Cloudflare Developer Platform".&lt;/p&gt;
-&lt;p&gt;A neat thing about this is how it works. Cloudflare are running Python compiled to WebAssembly via Pyodide in their V8-based &lt;a href="https://github.com/cloudflare/workerd"&gt;workerd&lt;/a&gt; runtime.&lt;/p&gt;
-&lt;p&gt;This comes with some limitations, &lt;a href="https://developers.cloudflare.com/workers/languages/python/stdlib/"&gt;documented here&lt;/a&gt; - most notably both &lt;code&gt;multiprocessing&lt;/code&gt; and &lt;code&gt;threading&lt;/code&gt; are non-functional in the WebAssembly VM.&lt;/p&gt;
-&lt;p&gt;One particularly interesting detail of this is the local development environment story - their &lt;a href="https://developers.cloudflare.com/workers/languages/python/#the-pywrangler-cli-tool"&gt;pywrangler&lt;/a&gt; development tool (confusingly packaged as &lt;a href="https://pypi.org/project/workers-py/"&gt;workers-py&lt;/a&gt; on PyPI) runs a full local simulation of their stack, including executing code with Pyodide in WebAssembly in V8 in a 123MB &lt;code&gt;workerd&lt;/code&gt; binary, which for me ended up in &lt;code&gt;node_modules/@cloudflare/workerd-darwin-arm64/bin/workerd&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;Python Workers represent a significant investment in the wider Python ecosystem by Cloudflare. The release announcement is credited to Gyeongjae Choi, Dominik Picheta, and Hood Chatham - Gyeongjae and Hood are both Pyodide core maintainers.
-
-    &lt;p&gt;&lt;small&gt;&lt;/small&gt;Via &lt;a href="https://news.ycombinator.com/item?id=49787142"&gt;Hacker News&lt;/a&gt;&lt;/small&gt;&lt;/p&gt;
-
-
-    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/python"&gt;python&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/cloudflare"&gt;cloudflare&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/webassembly"&gt;webassembly&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/pyodide"&gt;pyodide&lt;/a&gt;&lt;/p&gt;
-
-
-
-</summary><category term="python"/><category term="cloudflare"/><category term="webassembly"/><category term="pyodide"/></entry></feed>
+</summary><category term="projects"/><category term="llm"/><category term="jev"/></entry></feed>
