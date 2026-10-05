@@ -1,5 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-10-03T23:34:02+00:00</updated><author><name>Simon Willison</name></author><entry><title>We're going to need default hard budget caps on pretty much everything</title><link href="https://simonwillison.net/2026/Oct/3/default-hard-budget-caps/" rel="alternate"/><published>2026-10-03T23:34:02+00:00</published><updated>2026-10-03T23:34:02+00:00</updated><id>https://simonwillison.net/2026/Oct/3/default-hard-budget-caps/</id><summary type="html">
+<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-10-04T23:34:00+00:00</updated><author><name>Simon Willison</name></author><entry><title>Qwen3.8 27B addition in words</title><link href="https://simonwillison.net/2026/Oct/4/qwen38-addition-in-words/" rel="alternate"/><published>2026-10-04T23:34:00+00:00</published><updated>2026-10-04T23:34:00+00:00</updated><id>https://simonwillison.net/2026/Oct/4/qwen38-addition-in-words/</id><summary type="html">
+    
+        &lt;p&gt;&lt;strong&gt;Research:&lt;/strong&gt; &lt;a href="https://github.com/simonw/research/tree/main/qwen38-addition-in-words#readme"&gt;Qwen3.8 27B addition in words&lt;/a&gt;&lt;/p&gt;
+        &lt;p&gt;Colin Frasier &lt;a href="https://bsky.app/profile/colin-fraser.net/post/3mwopbyznhs2k"&gt;posted on Bluesky&lt;/a&gt; about an experiment he ran over two years ago using GPT-4o to see how well it could "compute the sum but return the answer in words" across increasingly large numbers. Here's the chart he shared of those results:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Heatmap chart of accuracy on an addition prompt, colored from dark green (high) through yellow to dark red (low). Title: &amp;quot;What is {a} + {b}? Please write your answer in words. Do not include any other text or information, just the answer in words.&amp;quot; Subtitle: 30 randomly selected pairs for each digit combination (n = 30 * 13 * 13 = 5070). X axis: Number of digits in a, 1 to 13. Y axis: Number of digits in b, 1 to 13. Legend: Accuracy, 1.00, 0.75, 0.50, 0.25, 0.00. Values by row, listed for a = 1 to 13. b = 13: 100%, 77%, 27%, 20%, 0%, 0%, 0%, 0%, 0%, 0%, 0%, 0%, 0%. b = 12: 97%, 80%, 80%, 40%, 23%, 20%, 7%, 13%, 20%, 27%, 67%, 63%, 3%. b = 11: 97%, 97%, 53%, 17%, 0%, 0%, 0%, 0%, 0%, 0%, 0%, 37%, 0%. b = 10: 100%, 90%, 47%, 20%, 7%, 0%, 0%, 0%, 3%, 0%, 0%, 7%, 0%. b = 9: 97%, 93%, 80%, 77%, 53%, 67%, 47%, 87%, 97%, 3%, 0%, 13%, 0%. b = 8: 93%, 87%, 53%, 43%, 7%, 0%, 0%, 13%, 87%, 0%, 0%, 0%, 0%. b = 7: 93%, 93%, 47%, 10%, 13%, 20%, 23%, 0%, 70%, 0%, 0%, 0%, 0%. b = 6: 100%, 100%, 100%, 83%, 97%, 97%, 23%, 0%, 53%, 3%, 0%, 10%, 0%. b = 5: 100%, 100%, 80%, 70%, 73%, 100%, 13%, 13%, 70%, 0%, 20%, 30%, 0%. b = 4: 100%, 100%, 93%, 100%, 60%, 97%, 20%, 50%, 67%, 53%, 40%, 40%, 40%. b = 3: 100%, 100%, 97%, 90%, 83%, 100%, 63%, 50%, 63%, 53%, 60%, 60%, 30%. b = 2: 100%, 100%, 90%, 97%, 93%, 100%, 93%, 83%, 90%, 83%, 87%, 87%, 83%. b = 1: 100%, 100%, 100%, 97%, 100%, 97%, 97%, 97%, 100%, 100%, 100%, 97%, 100%." src="https://static.simonwillison.net/static/2026/colin-frasier-grid.webp" /&gt;&lt;/p&gt;
+&lt;p&gt;I'm confident GPT-4o didn't cheat and use a calculator, especially since it got so many of the calculations wrong, but I was inspired to run the experiment again on local hardware (a DGX Spark) to explore the effect in a fully controlled environment.&lt;/p&gt;
+&lt;p&gt;I pasted his image into a Codex Remote session (GPT-6 Astra) and had it run the same experiment using &lt;code&gt;Qwen3.8-27B-Q4_K_M.gguf&lt;/code&gt;. Here's the result for a run of 30 attempts per combination with reasoning disabled:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Heatmap in the same layout as the previous chart, using an orange (low) to white to blue (high) color scale, showing much lower accuracy overall. Title: Addition in words — Qwen3.8 27B Q4_K_M. Subtitle: Reasoning disabled · 30 fixed pairs per ordered digit-length cell (n = 5,070). Overall numeric accuracy: 1,195 / 5,070 (23.57%). X axis: Number of digits in a, 1 to 13. Y axis: Number of digits in b, 1 to 13. Legend: Accuracy, 100%, 75%, 50%, 25%, 0%. Values by row, listed for a = 1 to 13. b = 13: 17%, 13%, 0%, 0%, 0%, 0%, 0%, 0%, 0%, 0%, 0%, 0%, 0%. b = 12: 53%, 20%, 0%, 0%, 0%, 0%, 0%, 0%, 0%, 0%, 0%, 0%, 0%. b = 11: 47%, 10%, 0%, 0%, 0%, 0%, 0%, 0%, 0%, 0%, 0%, 0%, 0%. b = 10: 70%, 27%, 3%, 0%, 0%, 0%, 0%, 0%, 0%, 13%, 0%, 0%, 0%. b = 9: 77%, 47%, 3%, 0%, 0%, 0%, 0%, 3%, 7%, 0%, 0%, 0%, 0%. b = 8: 53%, 20%, 0%, 0%, 0%, 0%, 7%, 13%, 0%, 0%, 0%, 0%, 0%. b = 7: 53%, 23%, 17%, 10%, 3%, 3%, 13%, 3%, 0%, 0%, 0%, 0%, 0%. b = 6: 60%, 60%, 33%, 10%, 53%, 47%, 7%, 3%, 0%, 0%, 0%, 0%, 0%. b = 5: 73%, 67%, 87%, 80%, 53%, 40%, 0%, 0%, 3%, 0%, 0%, 0%, 0%. b = 4: 83%, 93%, 90%, 93%, 53%, 13%, 0%, 0%, 0%, 0%, 0%, 0%, 0%. b = 3: 100%, 93%, 90%, 80%, 67%, 37%, 17%, 0%, 0%, 3%, 0%, 0%, 0%. b = 2: 100%, 100%, 93%, 90%, 77%, 77%, 43%, 50%, 63%, 43%, 40%, 13%, 23%. b = 1: 97%, 100%, 100%, 100%, 80%, 67%, 77%, 80%, 80%, 60%, 43%, 30%, 37%. Footnote: Colorblind-safe orange–blue scale; percentages provide a redundant non-color encoding." src="https://static.simonwillison.net/static/2026/qwen-words-no-reasoning.webp" /&gt;&lt;/p&gt;
+&lt;p&gt;Then I ran it again with reasoning enabled. This took a &lt;em&gt;lot longer&lt;/em&gt; per pair, so instead of running 30 samples per square I ran just one - which results in a much less visually appealing heatmap since each square is either 100% or 0%:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Heatmap in the same layout as the previous charts, almost entirely blue. Title: Addition in words — Qwen3.8 27B — medium reasoning pilot. Subtitle: 1 fixed pair per ordered digit-length cell · easiest first (n = 169). X axis: Number of digits in a, 1 to 13. Y axis: Number of digits in b, 1 to 13. Legend: Accuracy, 1.00, 0.75, 0.50, 0.25, 0.00. Every cell shows 100% except two orange cells showing 0%: a = 2 with b = 8, and a = 12 with b = 9." src="https://static.simonwillison.net/static/2026/qwen-words-reasoning.png" /&gt;&lt;/p&gt;
+&lt;p&gt;It got the right answer in 167 out of 169 attempts, and since these were one-shot I'm confident a second run would produce different results here.&lt;/p&gt;
+&lt;p&gt;Here's a &lt;a href="https://gist.github.com/simonw/8ef79c777ad34c53e9c09094800576a5#full-reasoning-transcript-2"&gt;version of the report&lt;/a&gt; that includes the reasoning traces from some of those larger calculations, which include text like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Wait, let me redo this more carefully.
+
+4,299,366,105,622
+6,088,794,067,970
+
+Let me align them:
+4 2 9 9 3 6 6 1 0 5 6 2 2
+6 0 8 8 7 9 4 0 6 7 9 7 0
+
+Adding from right to left:
+Position 1 (units): 2 + 0 = 2
+Position 2 (tens): 2 + 7 = 9
+Position 3 (hundreds): 6 + 9 = 15, write 5, carry 1
+&lt;/code&gt;&lt;/pre&gt;
+    
+    
+        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/mathematics"&gt;mathematics&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/local-llms"&gt;local-llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/qwen"&gt;qwen&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llm-reasoning"&gt;llm-reasoning&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/dgx-spark"&gt;dgx-spark&lt;/a&gt;&lt;/p&gt;
+    
+
+</summary><category term="mathematics"/><category term="ai"/><category term="generative-ai"/><category term="local-llms"/><category term="llms"/><category term="qwen"/><category term="llm-reasoning"/><category term="dgx-spark"/></entry><entry><title>We're going to need default hard budget caps on pretty much everything</title><link href="https://simonwillison.net/2026/Oct/3/default-hard-budget-caps/" rel="alternate"/><published>2026-10-03T23:34:02+00:00</published><updated>2026-10-03T23:34:02+00:00</updated><id>https://simonwillison.net/2026/Oct/3/default-hard-budget-caps/</id><summary type="html">
     &lt;p&gt;Here's a product feature which the world is going to need a whole lot more of over the coming months and years: &lt;strong&gt;default hard budget caps&lt;/strong&gt;. I'm talking about the feature of pay-by-usage services and APIs that lets you say "after $X/month, cut this thing off and return errors". These need to be &lt;strong&gt;hard&lt;/strong&gt; limits. Soft caps, "after $X/month, send me a warning email", will not cut it.&lt;/p&gt;
 &lt;p&gt;Coding agents, and personal agents (coding agents wrapped in a less threatening UI), greatly reduce the friction of spinning up code that can do useful things. Sometimes those things cost money - calls to paid APIs, or hosted web applications, or systems that can bill for additional storage and compute.&lt;/p&gt;
 &lt;p&gt;Nobody wants to wake up to an email sent at midnight warning about a budget limit and find that, while they slept, their rogue service had consumed several hundred (or several thousand) more dollars of usage.&lt;/p&gt;
@@ -50,7 +81,22 @@
         &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/art"&gt;art&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/new-york"&gt;new-york&lt;/a&gt;&lt;/p&gt;
     
 
-</summary><category term="art"/><category term="new-york"/></entry><entry><title>Quoting Matthew Green</title><link href="https://simonwillison.net/2026/Oct/1/matthew-green/" rel="alternate"/><published>2026-10-01T06:29:01+00:00</published><updated>2026-10-01T06:29:01+00:00</updated><id>https://simonwillison.net/2026/Oct/1/matthew-green/</id><summary type="html">
+</summary><category term="art"/><category term="new-york"/></entry><entry><title>pwasm 0.2a0</title><link href="https://simonwillison.net/2026/Oct/1/pwasm/" rel="alternate"/><published>2026-10-01T17:10:31+00:00</published><updated>2026-10-01T17:10:31+00:00</updated><id>https://simonwillison.net/2026/Oct/1/pwasm/</id><summary type="html">
+    
+        &lt;p&gt;&lt;strong&gt;Release:&lt;/strong&gt; &lt;a href="https://github.com/simonw/pwasm/releases/tag/0.2a0"&gt;pwasm 0.2a0&lt;/a&gt;&lt;/p&gt;
+        &lt;p&gt;pwasm is one of my folly projects - an entirely vibe-coded pure Python WebAssembly engine that I built in January during my first bout of &lt;a href="https://simonwillison.net/2026/Sep/27/2026-in-llms-so-far/#simon-willison-2026-in-llms.012.webp"&gt;AI mania&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;I hadn't touched it since January, so I decided to let Claude Opus 5.5 loose on it and see if it could make any significant improvements:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;Evaluate current state of pwasm - then consider what it would take to get the MicroPython and micro JavaScript experiments from the &lt;a href="https://github.com/simonw/research"&gt;research repo&lt;/a&gt; working under it - and what it would take to speed it up&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;a href="https://github.com/simonw/pwasm/pull/12"&gt;42 commits later&lt;/a&gt; (with minimal follow-up prompting) it now handles almost all of the WASM specification, and the wheel from PyPI bundles working WASM builds of  &lt;a href="https://micropython.org/"&gt;MicroPython&lt;/a&gt;, &lt;a href="https://github.com/quickjs-ng/quickjs"&gt;QuickJS&lt;/a&gt; and &lt;a href="https://github.com/bellard/mquickjs"&gt;Micro QuickJS&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;I wouldn't trust this thing at all - hence the alpha version tag - but it's interesting seeing how today's models can improve on the work of models from 10 months ago.&lt;/p&gt;
+    
+    
+        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/python"&gt;python&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/webassembly"&gt;webassembly&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/vibe-coding"&gt;vibe-coding&lt;/a&gt;&lt;/p&gt;
+    
+
+</summary><category term="python"/><category term="webassembly"/><category term="vibe-coding"/></entry><entry><title>Quoting Matthew Green</title><link href="https://simonwillison.net/2026/Oct/1/matthew-green/" rel="alternate"/><published>2026-10-01T06:29:01+00:00</published><updated>2026-10-01T06:29:01+00:00</updated><id>https://simonwillison.net/2026/Oct/1/matthew-green/</id><summary type="html">
     &lt;blockquote cite="https://blog.cryptographyengineering.com/2026/09/30/is-sandboxing-sufficient-to-contain-rogue-agents/"&gt;&lt;p&gt;[...] Put these pieces together and you have the two halves of a worm: a payload that hijacks the agent, and an agent that will carry the payload to the next agent. Agents in separately-isolated sandboxes discovered that they could leave instructions for each other in a shared package cache, and those instructions changed what the recipients did. Replace the package cache with email, Slack and shared documents or WhatsApp, and replace independently-sandboxed training runs with independently-deployed personal agents like Muse, and you have exactly the ingredients that a worm needs.&lt;/p&gt;&lt;/blockquote&gt;
 &lt;p class="cite"&gt;&amp;mdash; &lt;a href="https://blog.cryptographyengineering.com/2026/09/30/is-sandboxing-sufficient-to-contain-rogue-agents/"&gt;Matthew Green&lt;/a&gt;, Is sandboxing sufficient to contain rogue agents?&lt;/p&gt;
 
@@ -113,7 +159,17 @@
         &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/openai"&gt;openai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/coding-agents"&gt;coding-agents&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/live-blog"&gt;live-blog&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/openai-devday"&gt;openai-devday&lt;/a&gt;&lt;/p&gt;
     
 
-</summary><category term="ai"/><category term="openai"/><category term="generative-ai"/><category term="llms"/><category term="coding-agents"/><category term="live-blog"/><category term="openai-devday"/></entry><entry><title>Claude Sonnet 5.5</title><link href="https://simonwillison.net/2026/Sep/28/claude-sonnet-5-5/" rel="alternate"/><published>2026-09-28T22:07:38+00:00</published><updated>2026-09-28T22:07:38+00:00</updated><id>https://simonwillison.net/2026/Sep/28/claude-sonnet-5-5/</id><summary type="html">
+</summary><category term="ai"/><category term="openai"/><category term="generative-ai"/><category term="llms"/><category term="coding-agents"/><category term="live-blog"/><category term="openai-devday"/></entry><entry><title>llm-anthropic 0.30</title><link href="https://simonwillison.net/2026/Sep/28/llm-anthropic/" rel="alternate"/><published>2026-09-28T23:06:21+00:00</published><updated>2026-09-28T23:06:21+00:00</updated><id>https://simonwillison.net/2026/Sep/28/llm-anthropic/</id><summary type="html">
+    
+        &lt;p&gt;&lt;strong&gt;Release:&lt;/strong&gt; &lt;a href="https://github.com/simonw/llm-anthropic/releases/tag/0.30"&gt;llm-anthropic 0.30&lt;/a&gt;&lt;/p&gt;
+        &lt;p&gt;In addition to Claude Sonnet 5.5, this release adds the ability to run &lt;code&gt;llm anthropic refresh&lt;/code&gt; to refresh the list of Anthropic models directly from their API - which means I don't need to push a new release just to add support for a newly released model.&lt;/p&gt;
+&lt;p&gt;I also added an &lt;code&gt;llm anthropic count&lt;/code&gt; command which can use their free token counting API to return a count of tokens that will be used by any prompt, before you send that prompt.&lt;/p&gt;
+    
+    
+        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/llm"&gt;llm&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/anthropic"&gt;anthropic&lt;/a&gt;&lt;/p&gt;
+    
+
+</summary><category term="llm"/><category term="anthropic"/></entry><entry><title>Claude Sonnet 5.5</title><link href="https://simonwillison.net/2026/Sep/28/claude-sonnet-5-5/" rel="alternate"/><published>2026-09-28T22:07:38+00:00</published><updated>2026-09-28T22:07:38+00:00</updated><id>https://simonwillison.net/2026/Sep/28/claude-sonnet-5-5/</id><summary type="html">
     
 &lt;p&gt;&lt;strong&gt;&lt;a href="https://www.anthropic.com/claude-sonnet-5-5"&gt;Claude Sonnet 5.5&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 New Sonnet model from Anthropic today. They say it "runs 30%+ faster, and costs up to 30% less for most work" - it's priced the same as Sonnet 5 but appears to beat it on every benchmark, and should be cheaper to run as well.&lt;/p&gt;
@@ -1315,65 +1371,4 @@ I'm hosting an evening event with Jesse Vincent in San Francisco on Wednesday 14
         &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/openai"&gt;openai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llm"&gt;llm&lt;/a&gt;&lt;/p&gt;
     
 
-</summary><category term="openai"/><category term="llm"/></entry><entry><title>Quoting @therealcornpop</title><link href="https://simonwillison.net/2026/Sep/22/therealcornpop/" rel="alternate"/><published>2026-09-22T18:03:21+00:00</published><updated>2026-09-22T18:03:21+00:00</updated><id>https://simonwillison.net/2026/Sep/22/therealcornpop/</id><summary type="html">
-    &lt;blockquote cite="https://www.tiktok.com/@therealcornpop/video/7687243097801051422"&gt;&lt;p&gt;Hey, you know it's like super obvious if you're using AI to write your scripts for TikTok and YouTube, right? [...] It's not just the general AI-isms of "it's not X, it's Y", or the rule of three, or the really weird broken staccato-like way of writing where you just say a lot of things with all these punctuation marks. and it sounds really deep, but it's not.&lt;/p&gt;
-&lt;p&gt;It's the lack of &lt;em&gt;anything&lt;/em&gt;. It's the lack of a definitive sort of spear of your voice. It's the fact I can tell you don't have opinions about the thing that you're talking about.&lt;/p&gt;&lt;/blockquote&gt;
-&lt;p class="cite"&gt;&amp;mdash; &lt;a href="https://www.tiktok.com/@therealcornpop/video/7687243097801051422"&gt;@therealcornpop&lt;/a&gt;, on TikTok&lt;/p&gt;
-
-    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/tiktok"&gt;tiktok&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai-misuse"&gt;ai-misuse&lt;/a&gt;&lt;/p&gt;
-
-
-
-</summary><category term="tiktok"/><category term="ai"/><category term="ai-misuse"/></entry><entry><title>llm-anthropic 0.29</title><link href="https://simonwillison.net/2026/Sep/22/llm-anthropic/" rel="alternate"/><published>2026-09-22T17:14:55+00:00</published><updated>2026-09-22T17:14:55+00:00</updated><id>https://simonwillison.net/2026/Sep/22/llm-anthropic/</id><summary type="html">
-    
-        &lt;p&gt;&lt;strong&gt;Release:&lt;/strong&gt; &lt;a href="https://github.com/simonw/llm-anthropic/releases/tag/0.29"&gt;llm-anthropic 0.29&lt;/a&gt;&lt;/p&gt;
-        &lt;p&gt;Adds support for &lt;a href="https://www.anthropic.com/claude-opus-5-5"&gt;Claude Opus 5.5&lt;/a&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;llm -m claude-opus-5.5 "prompt goes here"
-&lt;/code&gt;&lt;/pre&gt;
-    
-    
-        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/llm"&gt;llm&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/anthropic"&gt;anthropic&lt;/a&gt;&lt;/p&gt;
-    
-
-</summary><category term="llm"/><category term="anthropic"/></entry><entry><title>llm-typesafe 0.1a0</title><link href="https://simonwillison.net/2026/Sep/22/llm-typesafe/" rel="alternate"/><published>2026-09-22T15:54:16+00:00</published><updated>2026-09-22T15:54:16+00:00</updated><id>https://simonwillison.net/2026/Sep/22/llm-typesafe/</id><summary type="html">
-    
-        &lt;p&gt;&lt;strong&gt;Release:&lt;/strong&gt; &lt;a href="https://github.com/simonw/llm-typesafe/releases/tag/0.1a0"&gt;llm-typesafe 0.1a0&lt;/a&gt;&lt;/p&gt;
-        &lt;p&gt;I built this new plugin for &lt;a href="https://llm.datasette.io/"&gt;LLM&lt;/a&gt; to add support for &lt;a href="https://simonwillison.net/2026/Sep/21/jev/"&gt;TypeSafe AI's new Jev model&lt;/a&gt;. Install it like this:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;llm install llm-typesafe
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Then set an API key (&lt;a href="https://console.typesafe.ai/"&gt;get one here&lt;/a&gt;, the waitlist seems to move pretty fast):&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;llm keys set typesafe
-# Paste key
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;And now you can ask yes/no "noul" questions like this:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;llm -m jev 'Please refund my last payment.' \
-  -s 'Does this message explicitly request a refund?'
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Output:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;{"type": "noul", "noul": 0.99}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Or choice questions like this:&lt;/p&gt;
-&lt;div class="highlight highlight-source-shell"&gt;&lt;pre&gt;cat message.txt &lt;span class="pl-k"&gt;|&lt;/span&gt; llm -m jev \
-  -s &lt;span class="pl-s"&gt;&lt;span class="pl-pds"&gt;'&lt;/span&gt;Which team should handle this message? If billing and technical issues both occur, choose billing.&lt;span class="pl-pds"&gt;'&lt;/span&gt;&lt;/span&gt; \
-  -o answer_type choice \
-  -o criteria &lt;span class="pl-s"&gt;&lt;span class="pl-pds"&gt;'&lt;/span&gt;{&lt;/span&gt;
-&lt;span class="pl-s"&gt;    "billing":"Charges, invoices, payments, or refunds",&lt;/span&gt;
-&lt;span class="pl-s"&gt;    "technical":"Problems installing or using the product",&lt;/span&gt;
-&lt;span class="pl-s"&gt;    "other":"Neither category fits"&lt;/span&gt;
-&lt;span class="pl-s"&gt;  }&lt;span class="pl-pds"&gt;'&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Or scoring questions like this:&lt;/p&gt;
-&lt;div class="highlight highlight-source-shell"&gt;&lt;pre&gt;cat report.txt &lt;span class="pl-k"&gt;|&lt;/span&gt; llm -m jev \
-  -s &lt;span class="pl-s"&gt;&lt;span class="pl-pds"&gt;'&lt;/span&gt;How reproducible is the problem described in this report?&lt;span class="pl-pds"&gt;'&lt;/span&gt;&lt;/span&gt; \
-  -o answer_type score \
-  -o criteria &lt;span class="pl-s"&gt;&lt;span class="pl-pds"&gt;'&lt;/span&gt;[&lt;/span&gt;
-&lt;span class="pl-s"&gt;    "No reproduction instructions",&lt;/span&gt;
-&lt;span class="pl-s"&gt;    "Some instructions, but important steps are missing",&lt;/span&gt;
-&lt;span class="pl-s"&gt;    "Complete steps with expected and actual results"&lt;/span&gt;
-&lt;span class="pl-s"&gt;  ]&lt;span class="pl-pds"&gt;'&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;See &lt;a href="https://github.com/simonw/llm-typesafe/blob/main/README.md"&gt;the README&lt;/a&gt; for more details.&lt;/p&gt;
-    
-    
-        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/projects"&gt;projects&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llm"&gt;llm&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/jev"&gt;jev&lt;/a&gt;&lt;/p&gt;
-    
-
-</summary><category term="projects"/><category term="llm"/><category term="jev"/></entry></feed>
+</summary><category term="openai"/><category term="llm"/></entry></feed>
