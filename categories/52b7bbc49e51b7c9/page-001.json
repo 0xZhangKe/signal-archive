@@ -1,6 +1,39 @@
 {
   "items": [
     {
+      "id": "8e5768c624127ef742e22d0c",
+      "title": "信任够了才谈得上并行：Lauren Tan 这场演讲在讲的机制",
+      "summary": "Lauren Tan 在直播里主张，吞吐量来自信任而不是多开 agent。本文按她给出的五层纠错、验证 skill 和代码库约束写清机制与边界，并标明哪些数字只是她自己的说法。",
+      "image": null,
+      "publishedAt": "2026-10-05T11:30:00Z",
+      "sourceId": "52b7bbc49e51b7c9",
+      "sourceTitle": "Redreamality 博客 - 技术见解",
+      "link": "https://redreamality.com/cn/blog/lauren-tan-poteto-trust-before-parallel/",
+      "detailPath": "articles/8e5768c624127ef742e22d0c.json"
+    },
+    {
+      "id": "7c51d9ec3b835aad30ec4b15",
+      "title": "Gemini 4 Argon：1M 输出、DeepSWE 77.9% 与「防守方先用」，coding agent 该怎么读、怎么选",
+      "summary": "Google 于 2026-09-30 发布 Gemini 4 Argon：输出上限从 64K 提到 1M、DeepSWE v1.1 77.9%、先经 Fairwind 计划交给受信网络防守方。本文拆三件事：1M 输出对 agent loop 改变了什么、DeepSWE 一类数字该怎么读、分阶段放行作为遏制机制和 Anthropic / OpenAI 有何不同，最后给 coding agent 团队一份选型与评测清单。",
+      "image": null,
+      "publishedAt": "2026-10-05T08:40:00Z",
+      "sourceId": "52b7bbc49e51b7c9",
+      "sourceTitle": "Redreamality 博客 - 技术见解",
+      "link": "https://redreamality.com/cn/blog/gemini-4-argon-1m-output-fairwind-coding-agents/",
+      "detailPath": "articles/7c51d9ec3b835aad30ec4b15.json"
+    },
+    {
+      "id": "5363d850a2dd152dc560c871",
+      "title": "AI 记忆改了不生效：新值就在上下文里，模型偏偏选旧值",
+      "summary": "解读 UC Berkeley arXiv:2609.38866（CICM 基准）：偏好改了、新值也在上下文里，模型仍常答同一变量的旧值，作者称之为 stale binding。探针显示新值读得出，是选错而不是忘了；注意力漂移与单层推导解释旧值为何能合力胜出。GPT-5.6 Sol 在 2,048 步日志上 9/40、给快照 40/40——附 AI 记忆与 agent 状态管理清单。",
+      "image": null,
+      "publishedAt": "2026-10-05T08:40:00Z",
+      "sourceId": "52b7bbc49e51b7c9",
+      "sourceTitle": "Redreamality 博客 - 技术见解",
+      "link": "https://redreamality.com/cn/blog/stale-binding-context-updates-ignored/",
+      "detailPath": "articles/5363d850a2dd152dc560c871.json"
+    },
+    {
       "id": "3ccd32560f4490beb0a484cf",
       "title": "Global Coherence：局部都对，团队仍错",
       "summary": "解读 Xin Heng / Tote AI arXiv:2610.02036：local validity ⇏ global coherence。Observation-Aliasing 说明缺区分时再多推理/角色/投票也救不回；共享预算与静默回滚证明不变式要有主人。模型提案，harness 拥有区分与 commit 检查——附建造者清单。",
@@ -626,39 +659,6 @@
       "sourceTitle": "Redreamality 博客 - 技术见解",
       "link": "https://redreamality.com/cn/garden/meditations/why-meditations/",
       "detailPath": "articles/f49313a04b86c2c6e640d00d.json"
-    },
-    {
-      "id": "f0d72c21f98b7776daa52827",
-      "title": "垄断 + 成瘾：拆解林园的投资体系（中国最\"轴\"的价值投资人）",
-      "summary": "深度拆解被称为\"中国巴菲特\"的林园，及其\"行业方向 + 垄断 + 成瘾\"三支柱选股框架背后，那个十年年化 23.73% 的私募冠军是怎样炼成的。",
-      "image": null,
-      "publishedAt": "2026-05-28T00:00:00Z",
-      "sourceId": "52b7bbc49e51b7c9",
-      "sourceTitle": "Redreamality 博客 - 技术见解",
-      "link": "https://redreamality.com/cn/blog/lin-yuan-monopoly-addiction-framework/",
-      "detailPath": "articles/f0d72c21f98b7776daa52827.json"
-    },
-    {
-      "id": "4f3dfbc5f3308aff8d297de7",
-      "title": "从忙碌海狸到现代CPU：一个 1936 年的抽象如何变成你手里的硅片",
-      "summary": "一篇从忙碌海狸函数出发，穿过冯·诺依曼体系，最终落在 CPU 指令周期上的导览。讲清楚图灵机的四个原语——纸带、读写头、状态、转移——是如何被工程化为现代计算机的内存层级、地址总线、控制单元和指令集的。",
-      "image": null,
-      "publishedAt": "2026-05-12T00:00:00Z",
-      "sourceId": "52b7bbc49e51b7c9",
-      "sourceTitle": "Redreamality 博客 - 技术见解",
-      "link": "https://redreamality.com/cn/blog/from-busy-beaver-to-modern-cpu/",
-      "detailPath": "articles/4f3dfbc5f3308aff8d297de7.json"
-    },
-    {
-      "id": "78d563281e3955ce59d80f99",
-      "title": "当人类不再需要工作：四维推演与红利地图",
-      "summary": "一次多智能体的思想实验——从经济、心理、社会结构、文明四个维度推演\"后工作社会\"的真实形态，并回答两个实操问题：过渡期的红利在哪里？token 会成为通货吗？",
-      "image": null,
-      "publishedAt": "2026-05-11T00:00:00Z",
-      "sourceId": "52b7bbc49e51b7c9",
-      "sourceTitle": "Redreamality 博客 - 技术见解",
-      "link": "https://redreamality.com/cn/blog/what-if-humans-dont-need-to-work/",
-      "detailPath": "articles/78d563281e3955ce59d80f99.json"
     }
   ]
 }
