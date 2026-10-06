@@ -1,6 +1,39 @@
 {
   "items": [
     {
+      "id": "c1733839ab9682ddc658b657",
+      "title": "躺平两周后，我靠「数字员工」重新上路",
+      "summary": "本文是付费文章系列「破局之路」的第 38 篇正式文章，主要讲述以下内容——",
+      "image": null,
+      "publishedAt": "2026-05-10T10:55:32Z",
+      "sourceId": "6143fbd12b60beb7",
+      "sourceTitle": "欧雷流",
+      "link": "https://ourai.ws/posts/digital-employee-team-revitalized-me/",
+      "detailPath": "articles/c1733839ab9682ddc658b657.json"
+    },
+    {
+      "id": "4fcf81f5c8526d5dee0f452a",
+      "title": "波希米亞人",
+      "summary": "幫檸檬卷推一下這部影片。",
+      "image": null,
+      "publishedAt": "2026-05-10T10:00:00Z",
+      "sourceId": "7f36c3da1e6b5c71",
+      "sourceTitle": "Wiwi.Blog Blog",
+      "link": "https://wiwi.blog/blog/la-boheme",
+      "detailPath": "articles/4fcf81f5c8526d5dee0f452a.json"
+    },
+    {
+      "id": "94438e8b27b02b0d6d89dd8d",
+      "title": "地球上「真正最重要」的軟體",
+      "summary": "才剛寫完一篇用 FFmpeg 製作 WebP 動畫的文章，然後 Lex Fridman 就出了一集超過四小時（！）的 Podcast，訪問了 FFmpeg 的貢獻者 Kieran Kunhya 和 VLC 的核心人物 Jean-Baptiste Kempf。（YouTube 連結）",
+      "image": "https://wiwi.blog/assets/images/nasa-3fd539c5dd1f5b491bc51f218b9442c1.jpg",
+      "publishedAt": "2026-05-10T00:01:00Z",
+      "sourceId": "7f36c3da1e6b5c71",
+      "sourceTitle": "Wiwi.Blog Blog",
+      "link": "https://wiwi.blog/blog/most-important-software",
+      "detailPath": "articles/94438e8b27b02b0d6d89dd8d.json"
+    },
+    {
       "id": "f33d419a2ea844f58665680f",
       "title": "鬼灭详细吐槽/vol1",
       "summary": "继国骨到底为什么是双胞胎，双胞胎差异化见托尔金。双胞胎相比于普通兄弟，至少应该有不同/相同的对比，但除了长得一样（甚至长得一样也是一个没用上的设定，大正时间线没有人同时认识这俩人），这个双胞胎有任何作用吗，至少可以在【虽然成长环境没有任何相似之处，但nurture造成的不同没有完全覆盖nature造成的同】这点上做做文章，而托尔金是反过来的，成长环境完全相同的双胞胎做出完全不同的选择（成为精灵永生&不称王&总体是平和智慧的形象，和，成为人类&伟大的人类君主） 为了鬼的塑造加入了回忆杀，他们的悲惨过去etc，但忽略了这部分对【鬼杀队杀鬼】合法性的削弱。如果成为鬼是迫不得已，吃人是鬼为了生存而为，那是否还能认为杀鬼的正当性是完全不容置疑的？这部分的疑问是无法靠炭治郎怜悯鬼解决的。不强求少年漫作者多么深刻地描绘社会…",
@@ -626,39 +659,6 @@
       "sourceTitle": "Android Performance",
       "link": "https://androidperformance.com/2026/05/04/Android-Perfetto-16-GPU-Power-Counters/",
       "detailPath": "articles/081dae40631f5b064a37150a.json"
-    },
-    {
-      "id": "1a3b16f394c9aa967643014c",
-      "title": "Android Perfetto 系列 15：Boot Trace、长时间现场 Trace 与偶发问题抓取",
-      "summary": "开机慢、亮屏后偶发卡顿或几小时后才出现的音频断续，通常等不到工程师连上电脑再按「开始录制」。要保留问题发生前的调度、帧或音频事件，采集配置必须提前在设备上运行。 现场抓取要先确定触发点前后各保留多久，再选 Ring Buffer、周期写文件或 trigger。文件写出后，还要确认问题窗口没有被覆盖、关键数据源没有丢失。设备开机属于更早的特殊窗口，单独处理。",
-      "image": null,
-      "publishedAt": "2026-05-04T02:15:00Z",
-      "sourceId": "1aa1837ca33d8d55",
-      "sourceTitle": "Android Performance",
-      "link": "https://androidperformance.com/2026/05/04/Android-Perfetto-15-Boot-And-Long-Running-Field-Tracing/",
-      "detailPath": "articles/1a3b16f394c9aa967643014c.json"
-    },
-    {
-      "id": "3dd9b1ff15b3fbad9583a262",
-      "title": "Android Perfetto 系列 14：heapprofd 与内存 Profiling",
-      "summary": "dumpsys meminfo 显示进程内存上涨，Java heap dump 却没有对应的对象增长时，下一步先查上涨落在 Native Heap、图形 Buffer，还是其他映射。若可疑部分来自 malloc/new，heapprofd 可以把分配与调用栈对应起来。 heapprofd 的分配、释放和调用栈记录能与业务事件放在同一条 Perfetto 时间轴上，便于核对一次操作前后哪些分配仍未释放。 heapprofd 是采样工具，看到的 native allocation 不能直接当作 RSS，也不覆盖 Java 对象引用或所有图形 backing 内存。先分清内存账，再决定是否抓 profile。我更倾向先用 meminfo 和 smaps 把上涨来源拆开，再打开 flamegraph；若涨的是 Gra…",
-      "image": null,
-      "publishedAt": "2026-05-04T02:14:00Z",
-      "sourceId": "1aa1837ca33d8d55",
-      "sourceTitle": "Android Performance",
-      "link": "https://androidperformance.com/2026/05/04/Android-Perfetto-14-Native-Heap-Heapprofd/",
-      "detailPath": "articles/3dd9b1ff15b3fbad9583a262.json"
-    },
-    {
-      "id": "7efd1da8c1de0933fa643668",
-      "title": "Android Perfetto 系列 13：Perfetto SDK、Track Event 与 App 现场 Trace",
-      "summary": "系统 Trace 能显示线程、CPU、帧和 Binder 等系统事件；播放器的 frame id、游戏 scene 名称或业务队列里的等待时间，需要应用自己提供。缺少这些标记时，一段主线程耗时只能定位到系统活动，难以对应业务阶段。 Perfetto SDK 的 Track Event 可以记录解码、纹理上传、队列深度和跨线程任务 ID。与系统轨道放在同一个时间窗口后，能先找到业务候选阶段，再用 RenderThread、GPU 和 FrameTimeline 验证它是否影响了可见帧。 接入前要先定事件名称、参数单位和采样频率。否则埋点虽然能显示在 UI 中，后续 SQL 仍无法稳定地按业务阶段聚合。",
-      "image": null,
-      "publishedAt": "2026-05-04T02:13:00Z",
-      "sourceId": "1aa1837ca33d8d55",
-      "sourceTitle": "Android Performance",
-      "link": "https://androidperformance.com/2026/05/04/Android-Perfetto-13-Track-Event-SDK/",
-      "detailPath": "articles/7efd1da8c1de0933fa643668.json"
     }
   ]
 }

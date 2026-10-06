@@ -1,6 +1,39 @@
 {
   "items": [
     {
+      "id": "f25102ee58b03a083019c4a8",
+      "title": "笔记：把新域名应用到 Blog 和 Email 上",
+      "summary": "raychase.net 这个域名是好些年前申请的，最近申请了个更适合作为我个人标签的 rayxiong.me ，简单记录下我把新域名应用到blog（新、老域名都可以访问blog），以及创建并使用新域名的邮件地址收发邮件的操作。 Blog 配置 在Squarespace上面配置好DNS的两个A记录： 其中@表示不带任何前缀，它和www前缀这样被视为两条独立的记录。没法再简单了，不过需要等几个钟头生效。 在网站的Nginx配置文件上面添加： server_name www.rayxiong.me rayxiong.me; 以及： if ($host = rayxiong.me) { return 301 https://$host$request_uri; } if ($host = www.rayxiong.…",
+      "image": "https://rayxiong.me/wp-content/uploads/2026/05/image-11.png",
+      "publishedAt": "2026-05-25T00:04:10Z",
+      "sourceId": "ed6c79eba03be7d3",
+      "sourceTitle": "四火的唠叨",
+      "link": "https://www.raychase.net/8205",
+      "detailPath": "articles/f25102ee58b03a083019c4a8.json"
+    },
+    {
+      "id": "fd456b5bce207e4d113488ac",
+      "title": "練琴的刷油漆理論",
+      "summary": "分享一個我常跟鋼琴學生講的練琴策略，先暫時叫它「刷油漆理論」好了。",
+      "image": null,
+      "publishedAt": "2026-05-25T00:01:00Z",
+      "sourceId": "7f36c3da1e6b5c71",
+      "sourceTitle": "Wiwi.Blog Blog",
+      "link": "https://wiwi.blog/blog/paint-theory-of-practice",
+      "detailPath": "articles/fd456b5bce207e4d113488ac.json"
+    },
+    {
+      "id": "6e58000a15422dd1842340a9",
+      "title": "亂入的鵝",
+      "summary": "在路上看到一隻亂入的鵝，呆頭呆腦的樣子好可愛。",
+      "image": "https://alicehsu.blog/images/Post/51/1.jpg",
+      "publishedAt": "2026-05-25T00:00:05Z",
+      "sourceId": "a08fec079b5bc196",
+      "sourceTitle": "Alice Hsu's Blog",
+      "link": "https://alicehsu.blog/zh-tw/posts/2026/05/cranes-and-goose/",
+      "detailPath": "articles/6e58000a15422dd1842340a9.json"
+    },
+    {
       "id": "002690531061c625af141288",
       "title": "盲盒音樂礦工",
       "summary": "在 Alex Hsu 的個人網站首頁上看到了他的自介上寫著「盲盒音樂礦工」六字，並連結至他的 Spotify 頁面，上面展示著他使用 Suno AI 生成的 lo-fi 風格音樂。 看著這六個字，我的內心充滿着⋯⋯唉，無力感。 會有如此的無力感是因爲我又再次看着能夠以不費吹灰之力被大量生產的 AI 音樂於像 Spotify 之類的已經是僧多粥少的串流平台市場中以與人類音樂相比極爲不對等的優勢分一杯羹，使得小規模的人類音樂家越來越難從中求取生計。這個問題已經有許多文章與影片做了比我更好的解釋 1 ，我就不在此贅述了。 另一個原因則是一個當下的現實：即使一位「盲盒音樂礦工」誠實地揭露自己的 AI 使用，普羅大眾仍然會將之與「音樂家」劃上等號，即使這兩者 本質上 是截然不同的東西。更不用提願意誠實揭露的甚至還是少數…",
@@ -626,39 +659,6 @@
       "sourceTitle": "All posts | 所有貼文 on ttheng's microblog. | 侃侃而隨想極短文。",
       "link": "https://microblog.ttheng.com/project-sekai-first-master-31-fc/",
       "detailPath": "articles/e277fbafcd032ba0c1b2ce2c.json"
-    },
-    {
-      "id": "0dcff070258b396a2c3fe684",
-      "title": "BlogBlog 同樂會的 AI 立場",
-      "summary": "對於 AI 寫作，每個人都有自己的立場和道德標準。有人覺得用 AI 潤稿很正常，有人覺得連用 AI 改個標點符號都是在褻瀆文字。大家在同一個活動裡相遇，難免會有一些因為預期不同而產生的摩擦。",
-      "image": null,
-      "publishedAt": "2026-05-18T00:02:00Z",
-      "sourceId": "ad9c9cc2127a7a13",
-      "sourceTitle": "BlogBlog.Club 部落部落俱樂部 Blog",
-      "link": "https://blogblog.club/blog/ai-stance",
-      "detailPath": "articles/0dcff070258b396a2c3fe684.json"
-    },
-    {
-      "id": "d5f5ce98a2e181ad1f5aa73b",
-      "title": "最後一個備份（就是你）",
-      "summary": "前陣子有一天檸檬卷問我，她去跑寵物馬拉松那天到底有多熱？",
-      "image": null,
-      "publishedAt": "2026-05-18T00:01:00Z",
-      "sourceId": "7f36c3da1e6b5c71",
-      "sourceTitle": "Wiwi.Blog Blog",
-      "link": "https://wiwi.blog/blog/the-last-backup",
-      "detailPath": "articles/d5f5ce98a2e181ad1f5aa73b.json"
-    },
-    {
-      "id": "f84449e72e16971319aa207e",
-      "title": "手搓一个 Agent 驱动的项目 Wiki 生成方案",
-      "summary": "背景 最近我一直在折腾项目文档生成的事情。之前写过两篇关于 deepwiki 的文章：",
-      "image": "https://cdn.jsdelivr.net/gh/crossoverJie/images@main/images/images20260518180243.png",
-      "publishedAt": "2026-05-18T00:00:00Z",
-      "sourceId": "126e6f369677b760",
-      "sourceTitle": "crossoverJie's Blog",
-      "link": "http://crossoverjie.top/2026/05/18/AI/cc-generate-wiki/",
-      "detailPath": "articles/f84449e72e16971319aa207e.json"
     }
   ]
 }

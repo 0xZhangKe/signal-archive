@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "5979f118d968e500240cae02",
+      "title": "SmartPerfetto v1.15.1 更新说明",
+      "summary": "SmartPerfetto v1.15.1 是 v1.15 的修复版本，补充了原生 SQLite 安装诊断、测试数据隔离和 npm 消费项目的安装验证。v1.15 引入的逐轮源码与文档选择、答案交付和核验流程继续保留。 从 v1.14 升级时，还会获得进程实例隔离、呈现节奏、堆转储增长和 CPU 簇负载修复。旧的内置 Android Internals Wiki Pack 和几组停用 API 已移除，已有调用需要检查迁移说明。 项目地址： Gracker/SmartPerfetto 。",
+      "image": null,
+      "publishedAt": "2026-10-06T04:00:00Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2026/10/06/SmartPerfetto-v1.15.1-Release-Notes/",
+      "detailPath": "articles/5979f118d968e500240cae02.json"
+    },
+    {
       "id": "79c66aa0a8717a6df292164b",
       "title": "SmartPerfetto v1.12.0 更新说明",
       "summary": "上一篇更新 写到 2026 年 8 月 21 日的 v1.7.0。从 8 月 21 日的 v1.7.0 到 9 月 17 日的 v1.12.0，这 28 个日历日内，SmartPerfetto 发布了 9 个新版本，仓库合入 141 个非 merge 提交。 这段时间增加了任意双 Trace 工作台、无需预建索引的源码分析、Auto/Fast/Full 显式模式、跨会话调查检查点，以及贯穿 Web、CLI、报告和快照的结论核验。变化很多，但方向很集中：让一次分析从「模型给出答案」变成「请求、工具执行、证据、断言和最终交付都能核对」。 项目地址： github.com/Gracker/SmartPerfetto 。",
@@ -474,17 +485,6 @@
       "detailPath": "articles/29d39b0b11b9c3411b8fc5f5.json"
     },
     {
-      "id": "b7faedda04c09d783ead5826",
-      "title": "Android 性能优化的术、道、器",
-      "summary": "Paul Graham 在其著作 <黑客与画家> 中断言：“不同语言的执行效率差距正变得越来越大，所以性能分析器（profiler）将变得越来越重要。目前，性能分析并没有受到重视。许多人好像仍然相信，程序运行速度提升的关键在于开发出能够生成更快速代码的编译器。代码效率与机器性能的差距正在不断加大，我们将会越来越清楚地看到，应用软件运行速度提升的关键在于有一个好的性能分析器帮助指导程序开发。” by Paul Graham 黑客与画家 谷歌搜索 「Android 优化工具」，你会找到很多与此相关的内容。他们的问题在于要么是内容高度重复、要么是直接讲使用方法，很少会给你介绍整体性的架构，一不小心就会让人会种「一个工具搞定一切」的错误认知。以笔者团队的多年经验来看，在性能分析领域这种银弹级别的工具是不存在的。工具在…",
-      "image": null,
-      "publishedAt": "2022-01-06T16:42:03Z",
-      "sourceId": "1aa1837ca33d8d55",
-      "sourceTitle": "Android Performance",
-      "link": "https://androidperformance.com/2022/01/07/The-Performace-1-Performance-Tools/",
-      "detailPath": "articles/b7faedda04c09d783ead5826.json"
-    },
-    {
       "id": "82d6d1dfdca732acc840e6e5",
       "title": "Techniques, Philosophy, and Tools for Android Performance Optimization",
       "summary": "In his book Hackers & Painters , Paul Graham asserted, “The disparity in the efficiency of languages is becoming more pronounced, hence the rising importance of profilers. Currently, performance analysis isn’t given the attention it deserves. Many still seem to hold onto the belief that the key to accelerating program execution lies in developing compilers…",
@@ -494,6 +494,17 @@
       "sourceTitle": "Android Performance",
       "link": "https://androidperformance.com/2022/01/07/Techniques-Philosophy-and-Tools-for-Android-Performance-Optimization/",
       "detailPath": "articles/82d6d1dfdca732acc840e6e5.json"
+    },
+    {
+      "id": "b7faedda04c09d783ead5826",
+      "title": "Android 性能优化的术、道、器",
+      "summary": "Paul Graham 在其著作 <黑客与画家> 中断言：“不同语言的执行效率差距正变得越来越大，所以性能分析器（profiler）将变得越来越重要。目前，性能分析并没有受到重视。许多人好像仍然相信，程序运行速度提升的关键在于开发出能够生成更快速代码的编译器。代码效率与机器性能的差距正在不断加大，我们将会越来越清楚地看到，应用软件运行速度提升的关键在于有一个好的性能分析器帮助指导程序开发。” by Paul Graham 黑客与画家 谷歌搜索 「Android 优化工具」，你会找到很多与此相关的内容。他们的问题在于要么是内容高度重复、要么是直接讲使用方法，很少会给你介绍整体性的架构，一不小心就会让人会种「一个工具搞定一切」的错误认知。以笔者团队的多年经验来看，在性能分析领域这种银弹级别的工具是不存在的。工具在…",
+      "image": null,
+      "publishedAt": "2022-01-06T16:42:03Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2022/01/07/The-Performace-1-Performance-Tools/",
+      "detailPath": "articles/b7faedda04c09d783ead5826.json"
     },
     {
       "id": "207e8d59d1e15738d883284d",
@@ -648,17 +659,6 @@
       "sourceTitle": "Android Performance",
       "link": "https://androidperformance.com/2020/02/03/android-development-learning-path-2020-edition/",
       "detailPath": "articles/affc7626d32713bc43e9142b.json"
-    },
-    {
-      "id": "4993adf88aa40ceac3c00c55",
-      "title": "我的 2020 年读书单",
-      "summary": "下面记录了我 2020 年的读书单，所记录的，都是已经读完了的，技术书籍由于很难定义读完，所以不在此列。 我比较喜欢读历史相关的书，其中 汴京之围 这本书读起来非常难受，弱国无外交，真的是写实； 坏小孩 书如其名，个人感觉是要比电视剧好很多； 重来 2 和 重来 3 跟工作相关，讲的是远程工作和工作方法，跟 2020 年居家办公的大趋势一致，白领程序员推荐看一下； 我的最后一本减肥书 则比较系统和专业地讲了一下减肥相关的知识，对于在减肥的我来说很有用；最后 镖人 也算是国漫经典了，等出完了之后我一定要买一套实体书典藏（巨人也是） 2020 读书不多，2021 要加大这方面的投入， 读 + 记录 + 总结 ，读书笔记后续都会补上",
-      "image": null,
-      "publishedAt": "2020-01-28T11:06:29Z",
-      "sourceId": "1aa1837ca33d8d55",
-      "sourceTitle": "Android Performance",
-      "link": "https://androidperformance.com/2020/01/28/2020-read/",
-      "detailPath": "articles/4993adf88aa40ceac3c00c55.json"
     }
   ]
 }
