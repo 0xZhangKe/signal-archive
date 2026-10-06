@@ -1,6 +1,72 @@
 {
   "items": [
     {
+      "id": "b5d446bb993ef3c968f71334",
+      "title": "中秋限定貨幣",
+      "summary": "中秋節到了，我個人是沒有烤肉，畢竟做一堆中秋晚會活動，已經夠嗆了，實在沒興趣再自己燻自己。 除了烤肉，不知道是誰規定一定要送禮盒的，前幾天才分享我收到了 竹塹餅 ，後來發現有效期限只有兩天，於是那兩天我「只」吃了竹塹餅，差點原地罹患糖尿病。 後來又收到了兩份禮盒，是蛋黃酥之類的，我吃了一盒，明顯感覺比竹塹餅更健康一點（也沒健康到哪裡去好嗎xD）！ 王師傅 至於另外一盒則送我樓上鄰居，因爲再吃我應該要去醫院報道了。結果，她馬上進屋拿一盒巧克力蛋卷回禮給我…。 說到鄰居，結果 花盆 不是她弄破的，是外送員，還好我當時沒有一口咬定是她，而外送員事後有說願意賠償（但我拒絕了）。 濃情巧克力蛋卷 這個蛋卷是 8 字形的，我還是第一次看到，我把蛋卷給唸小學跟幼兒園的外甥們吃了。 8 字形的蛋卷 中秋節實在沒有必要這樣送來…",
+      "image": "https://eddielv.com/musings/mid-autumn-currency/wang.jpg",
+      "publishedAt": "2026-09-26T15:27:36Z",
+      "sourceId": "199cdf92fc46bfcd",
+      "sourceTitle": "Eddie Lv",
+      "link": "https://eddielv.com/musings/mid-autumn-currency/",
+      "detailPath": "articles/b5d446bb993ef3c968f71334.json"
+    },
+    {
+      "id": "9c0271358375e12cd226eff5",
+      "title": "赌博、自我实现与想象未来",
+      "summary": "我们的故事很普通，从我们在一起到分开也没有非常大的波折起伏，21的夏天我们开始交往，一开始他负担了大部分恋爱的支出，后来我大学毕业找到了工作，想到他和朋友合租，而我住在家里没有房租也不需要担心饭钱，所",
+      "image": null,
+      "publishedAt": "2026-09-26T15:26:16Z",
+      "sourceId": "1b094a3ee9e11672",
+      "sourceTitle": "塔塔",
+      "link": "https://blog.himikouchuu.com/feed/37",
+      "detailPath": "articles/9c0271358375e12cd226eff5.json"
+    },
+    {
+      "id": "fc9b056e55f8e537274e0cf5",
+      "title": "Node.js、浏览器和 Cloudflare Workers 的wasm引入问题",
+      "summary": "最近在鼓捣 WebAssembly，这玩意没啥神秘的，可以看出一坨二进制的 .js 库文件 它本身的export和调用方式是统一的，但如今天我才知道，在不同 JavaScript 运行环境加载 .wasm 方式并不完全一样。 例如 Cloudflare Workers 可以直接： import wasm from \"./simple.wasm\"; const { instance } = await WebAssembly.instantiate(wasm, imports); Cloudflare 会把 .wasm 模块作为 WebAssembly.Module 提供给代码。 浏览器通常则是通过 fetch() 获取 Wasm，再使用 WebAssembly.instantiateStreaming() ：…",
+      "image": null,
+      "publishedAt": "2026-09-26T14:51:00Z",
+      "sourceId": "a864c53722a17b19",
+      "sourceTitle": "est's blog",
+      "link": "https://blog.est.im/2026/stdout-36",
+      "detailPath": "articles/fc9b056e55f8e537274e0cf5.json"
+    },
+    {
+      "id": "34315f4bbdb8bebb6ae41716",
+      "title": "重温老片《烈火金钢》",
+      "summary": "这是两部印象很深的包场电影。首先它制作精良，离谱程度适度，令没见过什么大场面的90年代小学生大受震撼。其次它分成上下集两次看完，中间隔了两个多月，是包场片中唯二的存在（另一部是大决战）。第三它有原著加成。第四嘛，我写的观后感被老师批评了—— “咱班不少同学看完电影都没记住片名是什么，给我写变形金刚的刚……” 原著并不是说小屁孩看过小说，而是我们都听过评书。《肖飞买药》可是袁阔成先生的代表作之一。大约1990年左右辽宁台的18：00的评书栏目也曾经连载播讲过全篇的《烈火金钢》。还有一次区文化馆到学校演出，有个号称刘兰芳徒弟的家伙表演过“肖飞买药”。 因为是建党70周年的献礼片，所以大腕云集。 当时在小朋友间名气最大的是钻山豹，也是上部的核心人物。申军谊自从演钻山豹成名之后，演了太多的类似角色，无论是正是邪，都是…",
+      "image": null,
+      "publishedAt": "2026-09-26T11:18:51Z",
+      "sourceId": "474e724b69cd3e76",
+      "sourceTitle": "破襪子",
+      "link": "https://pewae.com/2026/09/review-steel-meets-fire.html",
+      "detailPath": "articles/34315f4bbdb8bebb6ae41716.json"
+    },
+    {
+      "id": "76cb6ec5e46efedf3b7e89ef",
+      "title": "Coffee Break Clojure, Vol.3",
+      "summary": "上一篇 我们讨论了不同类型的形式，了解了函数、Lambda、宏和特殊形式的皮毛，也学会了用一些基本的运算符、 let 和 if 等等。今天的文章要讨论集合数据类型。不过在此之前，我们还是先看看普通的数据类型有哪些。 今天的文章有点长，所以读的时候，呃…… 准备一杯大号的咖啡？ 你已经知道和你可能不知道的 和大部分编程语言一样，Clojure 支持数字、浮点数、字符串和布尔值。 由于 Clojure 是运行在 JVM 上的，所以这些数据类型都对应一个 Java 类。数字是 Long 不是 Int ，前者能表示的最大数是 2 的 63 次方减 1，也就是有 64 位，第一位是符号位，后者是 32 位。 和 Java 一样，Clojure 没有无符号数（unsigned int）。 Clojure 还能在这些类型上…",
+      "image": "https://img.eltr.ac/geedeapro/article/common-lisp-start/Cons-cells.svg.png",
+      "publishedAt": "2026-09-26T10:20:05Z",
+      "sourceId": "7e27e325b5de8871",
+      "sourceTitle": "極客死亡計劃",
+      "link": "https://www.geedea.pro/article/clj3/",
+      "detailPath": "articles/76cb6ec5e46efedf3b7e89ef.json"
+    },
+    {
+      "id": "82b58dd3613ea6731266235c",
+      "title": "RestlessOS──GrapheneOS的通用系统镜像分支简单体验",
+      "summary": "上周把 手表搞坏 后，我打算换一个手表系统，顺便把安卓版本从11升级到12L。由于我手表刷的都是GSI (Generic System Image, 通用系统镜像) ，于是我打算给手表找一个Android12的GSI，于是我打开了 这个页面 寻找合适的系统。 不过我在Unofficial Android 17那一栏发现了一个 RestlessOS ，怎么这么快就有第三方系统适配了Android17，并且还发了GSI镜像？抱着好奇的心态，我下载了RestlessOS的GSI镜像侧载到了我的 一加13 上，然后开机一看，我立刻就傻眼了。 这不就是GrapheneOS？ 于是我赶紧查看了下项目地址的README.md，原来这是这专门把GrapheneOS打包成GSI的项目，以便其它手机使用。这个项目名叫Restle…",
+      "image": "https://blog.xinsl.xin/posts/restlessos-experience/images/screenshots.png",
+      "publishedAt": "2026-09-26T07:46:18Z",
+      "sourceId": "c3607b68b8e101d3",
+      "sourceTitle": "Xinsl's Blog",
+      "link": "https://blog.xinsl.xin/posts/restlessos-experience/",
+      "detailPath": "articles/82b58dd3613ea6731266235c.json"
+    },
+    {
       "id": "eae1e2bbae95b03aea4377ea",
       "title": "老家失火",
       "summary": "前言 # 中秋節回家看看父母親，遠遠就看到一臺貨車燒得稀巴爛，那是我姐夫的貨車。 老家是兩層樓的透天，獨門獨戶左右都是稻田，有圍牆與庭院，貨車停最外面，往內是轎車，再來才是房子。 事發經過 # 火災當時父母都不在家，我姐跟姐夫都入睡了，一名駕駛路人狂敲我家的大鐵門，我姐才醒來。依據相對位置，路人應該是真的用生命敲，我姐的房間是最深的，應該很難聽到。 於是趕緊把轎車移開，事後再看，發現火已經燒到轎車的棚子了，如果姐姐沒醒來，轎車也燃燒，那肯定會再蔓延到房子這裡來。 火災過後 現場看是真的恐怖，圍牆的水泥也被燒掉、剝落，讓紅磚露了出來，而原本貨車是有棚子的，車上也堆滿了做生意用的貨物，據說當時路上煙霧瀰漫到會看不到路的程度。 導火線 # 起火原因是什麼？ 貨車上主要是攤車、食物原料（包含食用油）等等，但這些東西不…",
@@ -133,17 +199,6 @@
       "detailPath": "articles/8240d2a04453e37cf985026c.json"
     },
     {
-      "id": "99711222292fd88c35e25b82",
-      "title": "他说的不一定对",
-      "summary": "今天浅谈个生活中的小事儿引发的思考",
-      "image": "https://bear-images.sfo2.cdn.digitaloceanspaces.com/sol/gc-libraries-creative-tech-lab-wioevpvrfw4-unsplash.webp",
-      "publishedAt": "2026-09-25T15:49:33Z",
-      "sourceId": "05ada84875558017",
-      "sourceTitle": "So!azy",
-      "link": "https://blog.solazy.me/202609/",
-      "detailPath": "articles/99711222292fd88c35e25b82.json"
-    },
-    {
       "id": "d0677fe0b814fc1bb6453849",
       "title": "中秋快乐",
       "summary": "中秋节过得越来越平静了",
@@ -197,17 +252,6 @@
       "sourceTitle": "Eddie Lv",
       "link": "https://eddielv.com/musings/music-theory-for-fight/",
       "detailPath": "articles/b439683107647aaa79646657.json"
-    },
-    {
-      "id": "722af4925619df23a80ee828",
-      "title": "开水",
-      "summary": "这个标题来自于坐在我旁边的陌生人，正起身去咖啡厅吧台要求工作人员，往自己的茶杯里接了一杯开水。 她想让工作人员 […] —— 感谢订阅 莫比乌斯 ，如你有任何疑问、观点交流，请前往 创作者频道 ，或 私信 联系。",
-      "image": null,
-      "publishedAt": "2026-09-25T01:30:00Z",
-      "sourceId": "416bdd1cdb343543",
-      "sourceTitle": "莫比烏斯",
-      "link": "https://mobius.blog/25780.html",
-      "detailPath": "articles/722af4925619df23a80ee828.json"
     },
     {
       "id": "6fb84e57c5b75a518c225a65",
@@ -353,17 +397,6 @@
       "detailPath": "articles/30477690cb89122def736ed2.json"
     },
     {
-      "id": "114885695e026b5262d421d4",
-      "title": "我如何看待充值这件事儿",
-      "summary": "今天聊聊充值这件事",
-      "image": "https://bear-images.sfo2.cdn.digitaloceanspaces.com/sol/patrick-tomasso-nwvwbv0sv04-unsplash.webp",
-      "publishedAt": "2026-09-23T13:45:44Z",
-      "sourceId": "05ada84875558017",
-      "sourceTitle": "So!azy",
-      "link": "https://blog.solazy.me/20260923/",
-      "detailPath": "articles/114885695e026b5262d421d4.json"
-    },
-    {
       "id": "ac6f60666ef0ac1ef8fc4659",
       "title": "入蜀记 day487 多、小、控、熵、逆",
       "summary": "「多、小、控、熵、逆。」",
@@ -507,17 +540,6 @@
       "detailPath": "articles/6545ba9bf51a35725a8c6211.json"
     },
     {
-      "id": "8ac461d3ecda21cbfe0784fd",
-      "title": "今天同样四点下班，然后出门打球，打完球天已经黑了，浑身湿透，换了件衣服，开车驾驶在田…",
-      "summary": "今天同样四点下班，然后出门打球，打完球天已经黑了，浑身湿透，换了件衣服，开车驾驶在田野里，一股清爽的风袭来，耳边传来悦耳的歌曲，一种自在的感觉袭遍全身",
-      "image": null,
-      "publishedAt": "2026-09-22T19:11:20Z",
-      "sourceId": "e0d7bbaba7286f4d",
-      "sourceTitle": "Rolen's Blog",
-      "link": "https://rolen.wiki/tiny-happiness/getnote-1922078910993070208/",
-      "detailPath": "articles/8ac461d3ecda21cbfe0784fd.json"
-    },
-    {
       "id": "9b9e68f58718338c0269ec0d",
       "title": "老本不夠吃",
       "summary": "（本篇內容可能會讓人拳頭硬，請先深呼吸，鬆開拳頭後繼續看下去。）",
@@ -571,17 +593,6 @@
       "sourceTitle": "All posts | 所有貼文 on ttheng's microblog. | 侃侃而隨想極短文。",
       "link": "https://microblog.ttheng.com/stumbled-upon-an-article-about-metaphors/",
       "detailPath": "articles/0aefe87dfad8bd898c8b08eb.json"
-    },
-    {
-      "id": "5c06245303b51402affccf2b",
-      "title": "一个人拥有平等心、不攀缘的心，那就很厉害了，昨天有了这样的体悟",
-      "summary": "一个人拥有平等心、不攀缘的心，那就很厉害了，昨天有了这样的体悟",
-      "image": null,
-      "publishedAt": "2026-09-22T08:24:43Z",
-      "sourceId": "e0d7bbaba7286f4d",
-      "sourceTitle": "Rolen's Blog",
-      "link": "https://rolen.wiki/tiny-happiness/getnote-1922037253032048768/",
-      "detailPath": "articles/5c06245303b51402affccf2b.json"
     },
     {
       "id": "fd1fefd80fc4983e0aa463a8",
@@ -648,17 +659,6 @@
       "sourceTitle": "Eddie Lv",
       "link": "https://eddielv.com/musings/stay-up/",
       "detailPath": "articles/09e7195f30b3fe6f8c362220.json"
-    },
-    {
-      "id": "b873f2422f1c7390271b7bc9",
-      "title": "无标题文章",
-      "summary": "時不時會想起令我覺得「#如果不懂中文多好」的詞，應該記錄一下。今天想到的是：按鬧分配。",
-      "image": "https://1.gravatar.com/avatar/19d667891f84a17deee970e145cef9ed58b8dd71869b0b97533a8821fb128616?s=96&d=identicon&r=G",
-      "publishedAt": "2026-09-22T00:58:15Z",
-      "sourceId": "e1dfcc8815d1c9f8",
-      "sourceTitle": "IT 公论",
-      "link": "https://blog.yitianshijie.net/2026/09/22/6096/",
-      "detailPath": "articles/b873f2422f1c7390271b7bc9.json"
     }
   ]
 }
