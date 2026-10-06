@@ -1,5 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-10-05T23:56:47+00:00</updated><author><name>Simon Willison</name></author><entry><title>Quoting Felix Rieseberg</title><link href="https://simonwillison.net/2026/Oct/5/felix-rieseberg/" rel="alternate"/><published>2026-10-05T23:56:47+00:00</published><updated>2026-10-05T23:56:47+00:00</updated><id>https://simonwillison.net/2026/Oct/5/felix-rieseberg/</id><summary type="html">
+<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-10-06T21:32:34+00:00</updated><author><name>Simon Willison</name></author><entry><title>llm-mistral 0.16</title><link href="https://simonwillison.net/2026/Oct/6/llm-mistral/" rel="alternate"/><published>2026-10-06T21:32:34+00:00</published><updated>2026-10-06T21:32:34+00:00</updated><id>https://simonwillison.net/2026/Oct/6/llm-mistral/</id><summary type="html">
+    
+        &lt;p&gt;&lt;strong&gt;Release:&lt;/strong&gt; &lt;a href="https://github.com/simonw/llm-mistral/releases/tag/0.16"&gt;llm-mistral 0.16&lt;/a&gt;&lt;/p&gt;
+        &lt;p&gt;Adds support for reasoning models, such as the newly released &lt;a href="https://simonwillison.net/2026/Oct/6/le-chonk/"&gt;Mistral Large 4&lt;/a&gt;.&lt;/p&gt;
+    
+    
+        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/llm"&gt;llm&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/mistral"&gt;mistral&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llm-reasoning"&gt;llm-reasoning&lt;/a&gt;&lt;/p&gt;
+    
+
+</summary><category term="llm"/><category term="mistral"/><category term="llm-reasoning"/></entry><entry><title>EmbeddingGemma 2</title><link href="https://simonwillison.net/2026/Oct/6/hn-49983751/" rel="alternate"/><published>2026-10-06T20:37:53+00:00</published><updated>2026-10-06T20:37:53+00:00</updated><id>https://simonwillison.net/2026/Oct/6/hn-49983751/</id><summary type="html">
+    
+        &lt;p&gt;&lt;a href="https://news.ycombinator.com/item?id=49980487#49983751"&gt;My comment&lt;/a&gt; on &lt;a href="https://news.ycombinator.com/item?id=49980487"&gt;EmbeddingGemma 2&lt;/a&gt; &amp;mdash; Hacker News.&lt;/p&gt;&lt;p&gt;I really appreciate that &lt;a href="https://blog.google/innovation-and-ai/technology/developers-tools/embeddinggemma-2/"&gt;EmbeddingGemma 2&lt;/a&gt; is under the Apache 2.0 license.&lt;/p&gt;
+&lt;p&gt;For embedding models in particular, I don't think it makes sense to use a closed, proprietary, hosted-only model.&lt;/p&gt;
+&lt;p&gt;Most applications of embedding models involve calculating thousands or even millions of embedding vectors and storing them for later comparison.&lt;/p&gt;
+&lt;p&gt;If your model is proprietary, the vendor is likely someday going to decide to stop offering that model. They'll have a better model to replace it, but you still need to pay to re-calculate those millions of stored existing vectors.&lt;/p&gt;
+&lt;p&gt;(In April 2024 OpenAI offered to "cover the financial cost of users re-embedding content with these new models" - &lt;a href="https://openai.com/index/gpt-4-api-general-availability/"&gt;https://openai.com/index/gpt-4-api-general-availability/&lt;/a&gt; - but I don't think that's something we can rely on from every provider.)&lt;/p&gt;
+&lt;p&gt;Notably, I &lt;em&gt;don't want to host the model myself&lt;/em&gt;. I'd much rather pay a provider for a hosted model while knowing that if they ever stop hosting it I can run the open weights version myself - or find another vendor who can do that for me.&lt;/p&gt;
+    
+    
+        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/google"&gt;google&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/embeddings"&gt;embeddings&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/gemma"&gt;gemma&lt;/a&gt;&lt;/p&gt;
+    
+
+</summary><category term="google"/><category term="ai"/><category term="generative-ai"/><category term="embeddings"/><category term="gemma"/></entry><entry><title>Introducing Mistral Large 4: Le chonk</title><link href="https://simonwillison.net/2026/Oct/6/le-chonk/" rel="alternate"/><published>2026-10-06T20:18:19+00:00</published><updated>2026-10-06T20:18:19+00:00</updated><id>https://simonwillison.net/2026/Oct/6/le-chonk/</id><summary type="html">
+    
+&lt;p&gt;&lt;strong&gt;&lt;a href="https://mistral.ai/news/mistral-large-4/"&gt;Introducing Mistral Large 4: Le chonk&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+Mistral are back in the game. Today they're releasing a preview of Mistral Large 4, a 1 trillion parameter, 49 billion active parameter model trained on their own cluster of 3,800 NVIDIA Grace Blackwell GPUs.&lt;/p&gt;
+&lt;p&gt;The preview is available via their API. They promise to release the open weights model at the "end of this month".&lt;/p&gt;
+&lt;p&gt;The model only supports two reasoning levels - "none" and "high" - via the Mistral API. Here are &lt;a href="https://tools.simonwillison.net/markdown-svg-renderer?url=https%3A%2F%2Fgist.github.com%2Fsimonw%2F0db8b8196e57711b352f6c5857cf5b35"&gt;both pelicans&lt;/a&gt; - the "high" one looks better, though surprisingly it only used 2,717 output tokens compared to "none" which used 3,275:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="It's good. The pouch is great, the bicycle frame is the right size, it has feet on pedals. Both pedals appear in front of the frame though. Nice gradients." src="https://static.simonwillison.net/static/2026-10-06/mistral-large-4-pelican.webp" /&gt;&lt;/p&gt;
+&lt;p&gt;On Artificial Analysis &lt;a href="https://artificialanalysis.ai/models/mistral-large-4"&gt;it scores 38&lt;/a&gt;, just behind DeepSeek 4.1 Flash, which is a 552B model. It's a &lt;em&gt;huge&lt;/em&gt; improvement on last December's Mistral Large 3, which drew &lt;a href="https://tools.simonwillison.net/markdown-svg-renderer?url=https%3A%2F%2Fgist.github.com%2Fsimonw%2F0df5e656291d5a7a1bf012fabc9edc3f#response-1"&gt;this terrible pelican&lt;/a&gt; and &lt;a href="https://artificialanalysis.ai/models/mistral-large-3"&gt;scored 9 on AA&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;It's certainly not a Fable-class model, but it's great to see Mistral put out a model that's back to being maybe about 6 months behind the frontier.
+
+    &lt;p&gt;&lt;small&gt;&lt;/small&gt;Via &lt;a href="https://news.ycombinator.com/item?id=49977979"&gt;Hacker News&lt;/a&gt;&lt;/small&gt;&lt;/p&gt;
+
+
+    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/mistral"&gt;mistral&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/pelican-riding-a-bicycle"&gt;pelican-riding-a-bicycle&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llm-release"&gt;llm-release&lt;/a&gt;&lt;/p&gt;
+
+
+
+</summary><category term="ai"/><category term="generative-ai"/><category term="llms"/><category term="mistral"/><category term="pelican-riding-a-bicycle"/><category term="llm-release"/></entry><entry><title>Using Parseable with Datasette for OpenTelemetry traces</title><link href="https://simonwillison.net/2026/Oct/6/datasette-parseable-opentelemetry/" rel="alternate"/><published>2026-10-06T19:07:31+00:00</published><updated>2026-10-06T19:07:31+00:00</updated><id>https://simonwillison.net/2026/Oct/6/datasette-parseable-opentelemetry/</id><summary type="html">
+    
+        &lt;p&gt;&lt;strong&gt;TIL:&lt;/strong&gt; &lt;a href="https://til.simonwillison.net/datasette/datasette-parseable-opentelemetry"&gt;Using Parseable with Datasette for OpenTelemetry traces&lt;/a&gt;&lt;/p&gt;
+        &lt;p&gt;I &lt;a href="https://news.ycombinator.com/item?id=49978171"&gt;saw Parseable in a Show HN&lt;/a&gt; today - it's a new observability platform with both an &lt;a href="https://github.com/parseablehq/parseable"&gt;open source (AGPL)&lt;/a&gt; Rust implementation (a single ~180MB binary), an "Enterprise" version with extra features and a cloud hosted option.&lt;/p&gt;
+&lt;p&gt;Since &lt;a href="https://docs.datasette.io/en/latest/changelog.html#a41-2026-09-24"&gt;Datasette 1.0a41 added OpenTelemetry support&lt;/a&gt; (thanks, Alex Garcia), I decided to fire up Codex and have it figure out how to run Parseable and feed it traces from Datasette.&lt;/p&gt;
+&lt;p&gt;Here's my (human-written) TIL showing the patterns that worked, and here's a screenshot of a Datasette trace displayed within the Parseable localhost web application:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Screenshot of a trace detail view in an observability web app, with a span waterfall overlaid on a dimmed navigation sidebar and filter column. Dimmed sidebar: breadcrumb &amp;quot;Community &amp;gt; Traces &amp;gt; datas&amp;quot; (cut off), search box &amp;quot;Search... ⌘K&amp;quot;, nav items &amp;quot;Home&amp;quot;, &amp;quot;Ingest telemetry&amp;quot;, section &amp;quot;ANALYZE&amp;quot;: &amp;quot;Keystone&amp;quot;, &amp;quot;Dashboards&amp;quot;, &amp;quot;SQL Editor&amp;quot;, section &amp;quot;OBSERVE&amp;quot;: &amp;quot;Logs&amp;quot;, &amp;quot;Metrics&amp;quot;, &amp;quot;Traces&amp;quot; (selected), &amp;quot;APM&amp;quot;, &amp;quot;Agents&amp;quot;, section &amp;quot;MONITOR&amp;quot;: &amp;quot;Alerts&amp;quot;, &amp;quot;Errors&amp;quot;, section &amp;quot;DATA&amp;quot;: &amp;quot;Datasets&amp;quot;, and at the bottom &amp;quot;Settings&amp;quot;, &amp;quot;Book a call&amp;quot;, &amp;quot;Support&amp;quot;. Dimmed filter column, cut off at the right edge: &amp;quot;Search fi&amp;quot;, &amp;quot;Core&amp;quot;, &amp;quot;Log format&amp;quot;, &amp;quot;User agent&amp;quot;, &amp;quot;Source IPs&amp;quot;, &amp;quot;Error&amp;quot;, &amp;quot;Service&amp;quot;, &amp;quot;service.ins&amp;quot;, &amp;quot;service.na&amp;quot;, &amp;quot;datasett&amp;quot; (checked), &amp;quot;Span&amp;quot;, &amp;quot;Database&amp;quot;, &amp;quot;HTTP&amp;quot;, &amp;quot;http.reque&amp;quot;, &amp;quot;NULL&amp;quot; (unchecked), &amp;quot;GET&amp;quot; (checked), &amp;quot;http.respo&amp;quot;, &amp;quot;http.route&amp;quot;, &amp;quot;Server&amp;quot;, &amp;quot;server.add&amp;quot;, &amp;quot;Telemetry&amp;quot;, &amp;quot;URL&amp;quot;, &amp;quot;All fields&amp;quot;. Trace panel header: &amp;quot;Trace detail &amp;gt; 6f819a2170bcd1e91c6ea3ae236ec60b&amp;quot; with a copy icon, a &amp;quot;Related logs&amp;quot; button and a close X. Summary: &amp;quot;Start time 6:56 PM, Oct 6, 2026 UTC&amp;quot;, &amp;quot;Duration 40.9 ms&amp;quot;, &amp;quot;Spans 247&amp;quot;. A minimap with axis &amp;quot;0ns 10.2ms 20.5ms 30.7ms 40.9ms&amp;quot; shows many short span bars cascading diagonally from top left toward the lower middle, with a few longer bars. Below is a span table with a &amp;quot;Span name&amp;quot; header, a &amp;quot;Search spans...&amp;quot; box, collapse and expand buttons, and a timeline axis &amp;quot;0ns 10.2ms 20.5ms 30.7ms 40.9ms&amp;quot;. Rows (name, service, duration): root span with collapse toggle &amp;quot;123&amp;quot;, &amp;quot;GET /...&amp;quot; &amp;quot;datasette...&amp;quot; 40.9ms spanning the full timeline; then alternating rows where each &amp;quot;db.query&amp;quot; has a collapse toggle &amp;quot;1&amp;quot;: db.query datasette-local 679µs, db.query.execute datasette-local 278µs, db.query datasette-local 341µs, db.query.execute datasette-local 55µs, db.query datasette-local 357µs, db.query.execute datasette-local 197µs, db.query datasette-local 330µs, db.query.execute datasette-local 73µs, db.query datasette-local 2.26ms, db.query.execute datasette-local 2.02ms, db.query datasette-local 232µs, db.query.execute datasette-local 64µs, db.query datasette-local 207µs, db.query.execute datasette-local 71µs, db.query datasette-local 6.11ms. The child span bars start progressively later across the early part of the timeline." src="https://raw.githubusercontent.com/simonw/til/refs/heads/main/datasette/datasette-parsable.webp" /&gt;&lt;/p&gt;
+    
+    
+        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/datasette"&gt;datasette&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/observability"&gt;observability&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/alex-garcia"&gt;alex-garcia&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/opentelemetry"&gt;opentelemetry&lt;/a&gt;&lt;/p&gt;
+    
+
+</summary><category term="datasette"/><category term="observability"/><category term="alex-garcia"/><category term="opentelemetry"/></entry><entry><title>Mistral Large 4</title><link href="https://simonwillison.net/2026/Oct/6/hn-49982139/" rel="alternate"/><published>2026-10-06T18:20:58+00:00</published><updated>2026-10-06T18:20:58+00:00</updated><id>https://simonwillison.net/2026/Oct/6/hn-49982139/</id><summary type="html">
+    
+        &lt;p&gt;&lt;a href="https://news.ycombinator.com/item?id=49977979#49982139"&gt;My comment&lt;/a&gt; on &lt;a href="https://news.ycombinator.com/item?id=49977979"&gt;Mistral Large 4&lt;/a&gt; &amp;mdash; Hacker News.&lt;/p&gt;&lt;blockquote&gt;
+&lt;p&gt;&lt;a href="https://news.ycombinator.com/item?id=49977979#49979658"&gt;wren6991&lt;/a&gt;: The benchmark is saturated. Frontier models are tested with an armadillo in fishnet tights jaywalking on Mars.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;OK well I couldn't resist this one:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;llm -m claude-opus-5.5 'Generate an SVG of an armadillo in fishnet tights jaywalking on Mars'
+llm -m gpt-6.1-sol 'Generate an SVG of an armadillo in fishnet tights jaywalking on Mars'
+llm -m gemini-3.8-flash 'Generate an SVG of an armadillo in fishnet tights jaywalking on Mars'
+llm -m mistral/mistral-large-4 'Generate an SVG of an armadillo in fishnet tights jaywalking on Mars'
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Default reasoning levels for each: &lt;a href="https://tools.simonwillison.net/markdown-svg-renderer?url=https%3A%2F%2Fgist.github.com%2Fsimonw%2F18c9f7fc3b3705cf88514cb9170ec246"&gt;https://tools.simonwillison.net/markdown-svg-renderer?url=ht...&lt;/a&gt;&lt;/p&gt;
+    
+    
+
+</summary></entry><entry><title>datasette-atom 0.11a0</title><link href="https://simonwillison.net/2026/Oct/6/datasette-atom/" rel="alternate"/><published>2026-10-06T17:35:39+00:00</published><updated>2026-10-06T17:35:39+00:00</updated><id>https://simonwillison.net/2026/Oct/6/datasette-atom/</id><summary type="html">
+    
+        &lt;p&gt;&lt;strong&gt;Release:&lt;/strong&gt; &lt;a href="https://github.com/simonw/datasette-atom/releases/tag/0.11a0"&gt;datasette-atom 0.11a0&lt;/a&gt;&lt;/p&gt;
+        &lt;p&gt;A minor fix for compatibility with the latest Datasette alphas. This meant we could upgrade the &lt;a href="https://datasette.io/"&gt;datasette.io&lt;/a&gt; site to Datasette 1.0a41.&lt;/p&gt;
+    
+    
+        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/atom"&gt;atom&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/datasette"&gt;datasette&lt;/a&gt;&lt;/p&gt;
+    
+
+</summary><category term="atom"/><category term="datasette"/></entry><entry><title>Scrimshaw Jukebox</title><link href="https://simonwillison.net/2026/Oct/6/scrimshaw-jukebox/" rel="alternate"/><published>2026-10-06T15:17:39+00:00</published><updated>2026-10-06T15:17:39+00:00</updated><id>https://simonwillison.net/2026/Oct/6/scrimshaw-jukebox/</id><summary type="html">
+    
+        &lt;p&gt;&lt;strong&gt;Tool:&lt;/strong&gt; &lt;a href="https://tools.simonwillison.net/scrimshaw-jukebox"&gt;Scrimshaw Jukebox&lt;/a&gt;&lt;/p&gt;
+        &lt;p&gt;I wanted to see if Claude Opus 5.5 could compose music, so &lt;a href="https://claude.ai/share/1f721c20-2499-4d23-b368-3ab57146d956"&gt;I tried this&lt;/a&gt;:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;I want you to write some computer game music for me. First design simple text based format for the music and build an artifact that can play it out loud - include some example tracks in that artifact&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;I am looking for music of the quality of the original secret of Monkey Island&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;It leaned a lot harder into the Monkey Island theme than I had intended, but the results are surprisingly good.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://tools.simonwillison.net/scrimshaw-jukebox"&gt;&lt;img alt="Screenshot of a retro pixel-art web music player. Header in blackletter type reads &amp;quot;Scrimshaw Jukebox&amp;quot;, with the text &amp;quot;Six original adventure-game tracks, written as plain text and played by a synthesizer running in your browser. Pick a tune, press Play, then open the score and change it.&amp;quot; A large pixel-art scene shows a harbor at night under a purple starry sky: a full moon at top right reflecting on the water, an island silhouette on the left with palm trees and a hut with two lit windows, and a sailing ship moored at a wooden pier. Overlaid on the scene: &amp;quot;Moonlit Harbor&amp;quot; and &amp;quot;Press Play&amp;quot;. Below it a bar reads &amp;quot;Play Moonlit Harbor&amp;quot;. A control panel has buttons &amp;quot;Play&amp;quot;, &amp;quot;Stop&amp;quot;, &amp;quot;Restart&amp;quot;, &amp;quot;Loop: on&amp;quot;, &amp;quot;Edit score&amp;quot;, &amp;quot;Read guide&amp;quot; and a &amp;quot;Volume&amp;quot; slider set to about three quarters. A track list of six cards, the first highlighted: &amp;quot;Moonlit Harbor 100 bpm · 4/4 · 16 voices · 1:26&amp;quot;, &amp;quot;The Rusty Anchor 112 bpm · 6/8 · 8 voices · 0:56&amp;quot;, &amp;quot;The Ghost Galleon 66 bpm · 4/4 · 9 voices · 2:11&amp;quot;, &amp;quot;The Jungle Path 92 bpm · 4/4 · 12 voices · 1:29&amp;quot;, &amp;quot;Duel on the Docks 152 bpm · 4/4 · 12 voices · 1:13&amp;quot;, &amp;quot;Lantern Waltz 96 bpm · 3/4 · 8 voices · 1:38&amp;quot;. A section titled &amp;quot;Score view&amp;quot; with the caption &amp;quot;1:26 · 4/4 at 100 bpm · Main theme. A calypso for a harbour town after dark.&amp;quot; shows a piano-roll visualization of colored horizontal note bars and percussion ticks on a dark background, with a section marker &amp;quot;A&amp;quot; and a yellow vertical playhead line. A color-coded legend of voices reads: &amp;quot;pan steeldrum&amp;quot;, &amp;quot;flute flute&amp;quot;, &amp;quot;marimba marimba&amp;quot;, &amp;quot;skank organ&amp;quot;, &amp;quot;strings strings&amp;quot;, &amp;quot;harp harp&amp;quot;, &amp;quot;bass fretless&amp;quot;, &amp;quot;timp timpani&amp;quot;, &amp;quot;kick kick&amp;quot;, &amp;quot;rim rim&amp;quot;, &amp;quot;shaker shaker&amp;quot;, &amp;quot;conga conga&amp;quot;, &amp;quot;tumba tumba&amp;quot;, &amp;quot;bongo bongo&amp;quot;, &amp;quot;crash crash&amp;quot;, &amp;quot;surf surf&amp;quot;. Footer text: &amp;quot;Click a voice to mute it. Space bar plays and stops.&amp;quot;" src="https://static.simonwillison.net/static/2026/scrimshaw.webp" /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I wonder if the ability to compose competent music is similar to the 3D graphics thing - a new capability for text models that emerged in the past few months?&lt;/p&gt;
+&lt;p&gt;Would need some careful experiments with other recent and not-so-recent models to confirm if this is new or if they've been able to do this for a while.&lt;/p&gt;
+    
+    
+        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/claude"&gt;claude&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/vibe-coding"&gt;vibe-coding&lt;/a&gt;&lt;/p&gt;
+    
+
+</summary><category term="ai"/><category term="generative-ai"/><category term="llms"/><category term="claude"/><category term="vibe-coding"/></entry><entry><title>Quoting Felix Rieseberg</title><link href="https://simonwillison.net/2026/Oct/5/felix-rieseberg/" rel="alternate"/><published>2026-10-05T23:56:47+00:00</published><updated>2026-10-05T23:56:47+00:00</updated><id>https://simonwillison.net/2026/Oct/5/felix-rieseberg/</id><summary type="html">
     &lt;blockquote cite="https://twitter.com/felixrieseberg/status/2107206431376334975"&gt;&lt;p&gt;The "old" version of Cowork runs model inference in the cloud, executing tool calls in an Anthropic-provided VM we shipped to your computer. We added the VM for capability, safety, and security reasons - mapping in just the data you explicitly added to your session. People loved what they were able to do with Claude but didn't love the disk, battery, and performance cost of running the VM locally. Also, people didn't love that closing your laptop means the work stops.&lt;/p&gt;
 &lt;p&gt;The "new" version of Cowork runs model inference and the VM in the cloud. Each session gets its own sandbox, not sharing state with other sessions. When the VM needs something on the users' device (like a file), the desktop app is responsible for that file access tool call. [...]&lt;/p&gt;
 &lt;p&gt;We think this solves a lot of problems we've heard about  (like using Cowork from a phone, keeping work running, or getting all the same power without losing battery to the VM)&lt;/p&gt;&lt;/blockquote&gt;
@@ -1176,193 +1268,4 @@ reached a recovery-era high of 325 birds.
 
 
 
-</summary><category term="coding-agents"/><category term="ai"/><category term="llms"/></entry><entry><title>commit-rewriter 0.2</title><link href="https://simonwillison.net/2026/Sep/24/commit-rewriter/" rel="alternate"/><published>2026-09-24T20:06:53+00:00</published><updated>2026-09-24T20:06:53+00:00</updated><id>https://simonwillison.net/2026/Sep/24/commit-rewriter/</id><summary type="html">
-    
-        &lt;p&gt;&lt;strong&gt;Release:&lt;/strong&gt; &lt;a href="https://github.com/simonw/commit-rewriter/releases/tag/0.2"&gt;commit-rewriter 0.2&lt;/a&gt;&lt;/p&gt;
-        &lt;blockquote&gt;
-&lt;p&gt;Support for branches other than the default branch. Use &lt;code&gt;uvx commit-rewriter --branch other&lt;/code&gt; to run against another branch. &lt;a href="https://github.com/simonw/commit-rewriter/issues/3"&gt;#3&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    
-        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/git"&gt;git&lt;/a&gt;&lt;/p&gt;
-    
-
-</summary><category term="git"/></entry><entry><title>datasette 1.0a41</title><link href="https://simonwillison.net/2026/Sep/24/datasette/" rel="alternate"/><published>2026-09-24T19:15:23+00:00</published><updated>2026-09-24T19:15:23+00:00</updated><id>https://simonwillison.net/2026/Sep/24/datasette/</id><summary type="html">
-    
-        &lt;p&gt;&lt;strong&gt;Release:&lt;/strong&gt; &lt;a href="https://github.com/simonw/datasette/releases/tag/1.0a41"&gt;datasette 1.0a41&lt;/a&gt;&lt;/p&gt;
-        &lt;p&gt;Alec Garcia added &lt;a href="https://docs.datasette.io/en/latest/internals.html#internals-telemetry"&gt;support for OpenTelemetry&lt;/a&gt; to Datasette in this release.&lt;/p&gt;
-&lt;p&gt;I've also refactored all of Datasette's modal dialogs to a single Web Component, which is now &lt;a href="https://docs.datasette.io/en/latest/javascript_plugins.html#javascript-plugins-modals"&gt;documented for other plugins to use&lt;/a&gt;.&lt;/p&gt;
-    
-    
-        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/javascript"&gt;javascript&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/datasette"&gt;datasette&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/web-components"&gt;web-components&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/alex-garcia"&gt;alex-garcia&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/opentelemetry"&gt;opentelemetry&lt;/a&gt;&lt;/p&gt;
-    
-
-</summary><category term="javascript"/><category term="datasette"/><category term="web-components"/><category term="alex-garcia"/><category term="opentelemetry"/></entry><entry><title>We just shipped support for the ugliest part of HTTP: Vary</title><link href="https://simonwillison.net/2026/Sep/23/hn-49823961/" rel="alternate"/><published>2026-09-23T23:14:57+00:00</published><updated>2026-09-23T23:14:57+00:00</updated><id>https://simonwillison.net/2026/Sep/23/hn-49823961/</id><summary type="html">
-    
-        &lt;p&gt;&lt;a href="https://news.ycombinator.com/item?id=49823195#49823961"&gt;My comment&lt;/a&gt; on &lt;a href="https://news.ycombinator.com/item?id=49823195"&gt;We just shipped support for the ugliest part of HTTP: Vary&lt;/a&gt; &amp;mdash; Hacker News.&lt;/p&gt;&lt;p&gt;I've been wanting this from Cloudflare &lt;em&gt;for years&lt;/em&gt;.&lt;/p&gt;
-&lt;p&gt;The classic problem here is if you do that thing where user agents that send "accept: text/html" get HTML, while user agents that don't get JSON or some other format.&lt;/p&gt;
-&lt;p&gt;This used to be impossible to deploy behind Cloudflare caching, because they ignored the Vary header on anything other than images - so you risked caching the JSON version and then serving it up to someone who was expecting HTML.&lt;/p&gt;
-&lt;p&gt;(Independent of the Cloudflare feature I ended up deciding never to use that pattern, because I prefer having URL that predictably returns HTML or JSON - I add a .json suffix to my apps to serve JSON instead.)&lt;/p&gt;
-    
-    
-        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/http"&gt;http&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/cloudflare"&gt;cloudflare&lt;/a&gt;&lt;/p&gt;
-    
-
-</summary><category term="http"/><category term="cloudflare"/></entry><entry><title>Gemini 3.8 TTS Playground</title><link href="https://simonwillison.net/2026/Sep/23/gemini-tts-playground/" rel="alternate"/><published>2026-09-23T17:12:27+00:00</published><updated>2026-09-23T17:12:27+00:00</updated><id>https://simonwillison.net/2026/Sep/23/gemini-tts-playground/</id><summary type="html">
-    
-        &lt;p&gt;&lt;strong&gt;Tool:&lt;/strong&gt; &lt;a href="https://tools.simonwillison.net/gemini-tts-playground"&gt;Gemini 3.8 TTS Playground&lt;/a&gt;&lt;/p&gt;
-        &lt;p&gt;Google &lt;a href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-8-text-to-speech/"&gt;released two new Gemini text-to-speech models&lt;/a&gt; today - &lt;code&gt;gemini-3.8-flash-tts&lt;/code&gt; and &lt;code&gt;gemini-3.8-flash-lite-tts&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;They come with a library of over 2,000 voices, plus the ability to create a custom voice with "just a 30-second audio sample of your voice or a voice you have the rights to use".&lt;/p&gt;
-&lt;p&gt;I &lt;a href="https://tools.simonwillison.net/markdown-svg-renderer?url=https%3A%2F%2Fgist.github.com%2Fsimonw%2Fa82f3aef2677c623d1776092d6b21224"&gt;vibe coded&lt;/a&gt; this bring-your-own-key playground interface with GPT-6 Astra, taking advantage of the open CORS policy of the underlying Gemini API.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Screenshot of a web app for composing multi-speaker text-to-speech conversations, with a Compose panel on the left and Connection and Under the hood panels on the right. Left panel: &amp;quot;01 Compose&amp;quot; with a &amp;quot;Load example&amp;quot; button. &amp;quot;Compose settings are saved in the URL for bookmarking or sharing. Your API key is excluded.&amp;quot; Toggle with &amp;quot;Single voice&amp;quot; and &amp;quot;Conversation&amp;quot; (Conversation selected). &amp;quot;Cast&amp;quot; section with &amp;quot;+ Add speaker&amp;quot; button. Speaker &amp;quot;Gus&amp;quot;, Voice &amp;quot;Puck&amp;quot;, with a remove × button. Speaker &amp;quot;Pearl&amp;quot;, Voice &amp;quot;Kore&amp;quot;, with a remove × button. &amp;quot;Give each speaker a unique name and a voice. Type to search the loaded catalog by voice ID, name, or language.&amp;quot; &amp;quot;Dialogue&amp;quot; section with &amp;quot;+ Add line&amp;quot; button. &amp;quot;LINE 01&amp;quot; with up, down and × buttons; Speaker dropdown &amp;quot;Gus&amp;quot;; Delivery style &amp;quot;excited and gossipy&amp;quot;; text &amp;quot;Pearl, have you heard? Half the flock just packed up and moved to the Pacifica pier!&amp;quot; &amp;quot;LINE 02&amp;quot; with up, down and × buttons; Speaker dropdown &amp;quot;Pearl&amp;quot;; Delivery style &amp;quot;calm and unimpressed&amp;quot;; text &amp;quot;I heard. Honestly, Gus, I don't see the appeal. We've got everything we need right here at Pillar Point Harbor.&amp;quot; Right panel: &amp;quot;Connection&amp;quot; with a &amp;quot;DIRECT API&amp;quot; badge. &amp;quot;Gemini API key&amp;quot; field showing masked dots with a &amp;quot;Show&amp;quot; button. &amp;quot;2,089 voices loaded. Type in any Voice field to search.&amp;quot; &amp;quot;Your key stays in this page's memory and is sent directly to Google. It is never saved to browser storage.&amp;quot; &amp;quot;Model&amp;quot; dropdown &amp;quot;gemini-3.8-flash-tts&amp;quot;. &amp;quot;Uses your Gemini API account and quota.&amp;quot; &amp;quot;Under the hood&amp;quot; panel with an expanded &amp;quot;▼ Request JSON&amp;quot; section showing a JSON code excerpt, a &amp;quot;Copy JSON&amp;quot; button, and an expanded &amp;quot;▼ Response details&amp;quot; section showing a JSON code excerpt." src="https://static.simonwillison.net/static/2026/tts-playground.webp" /&gt;&lt;/p&gt;
-&lt;p&gt;A notable feature of the API is that it makes it easy to define a full conversation between multiple characters, each with different voices and voice style instructions.&lt;/p&gt;
-&lt;p&gt;Here's a short demo clip of a conversation between two pelicans debating if they should move to &lt;a href="https://simonwillison.net/2026/Sep/12/sighting-399708714/"&gt;the Pacifica Pier&lt;/a&gt;. I had Claude 4.5 Opus &lt;a href="https://claude.ai/share/3597fc77-9323-4583-aeb9-b0e4c3f654a3"&gt;write the script&lt;/a&gt; and generate &lt;a href="https://simonwillison.net/u/vj"&gt;a URL to render it using the tool&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;audio controls style="width: 100%"&gt;
-  &lt;source src="https://static.simonwillison.net/static/2026/pelicans-pacifica-pier.wav" type="audio/wav"&gt;
-  Your browser does not support the audio element.
-&lt;/audio&gt;&lt;/p&gt;
-&lt;p&gt;It took ~20 seconds to generate 1m 18s of audio using Gemini 3.8 Flash TTS (not the cheaper Flash-Lite), at a cost of 2.74 cents.&lt;/p&gt;
-    
-    
-        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/text-to-speech"&gt;text-to-speech&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/gemini"&gt;gemini&lt;/a&gt;&lt;/p&gt;
-    
-
-</summary><category term="text-to-speech"/><category term="gemini"/></entry><entry><title>Shadow roots, explained with live examples</title><link href="https://simonwillison.net/2026/Sep/23/shadow-roots/" rel="alternate"/><published>2026-09-23T16:37:18+00:00</published><updated>2026-09-23T16:37:18+00:00</updated><id>https://simonwillison.net/2026/Sep/23/shadow-roots/</id><summary type="html">
-    
-        &lt;p&gt;&lt;strong&gt;Tool:&lt;/strong&gt; &lt;a href="https://tools.simonwillison.net/shadow-roots"&gt;Shadow roots, explained with live examples&lt;/a&gt;&lt;/p&gt;
-        &lt;p&gt;Prompt to Fable 5.1 Medium:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;code&gt;Build an artifact to explain shadow roots in CSS with interactive examples&lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    
-        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/css"&gt;css&lt;/a&gt;&lt;/p&gt;
-    
-
-</summary><category term="css"/></entry><entry><title>SF October 14th: A Birds of a Feather Session on Agentic Engineering</title><link href="https://simonwillison.net/2026/Sep/23/bof-agentic-engineering/" rel="alternate"/><published>2026-09-23T02:53:19+00:00</published><updated>2026-09-23T02:53:19+00:00</updated><id>https://simonwillison.net/2026/Sep/23/bof-agentic-engineering/</id><summary type="html">
-    
-&lt;p&gt;&lt;strong&gt;&lt;a href="https://luma.com/vxuiuyvg"&gt;SF October 14th: A Birds of a Feather Session on Agentic Engineering&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
-I'm hosting an evening event with Jesse Vincent in San Francisco on Wednesday 14th October for people who are building weird and interesting things with and on top of coding agents.&lt;/p&gt;
-&lt;p&gt;Think of it as an agentic show-and-tell:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;​Compare notes with other builders and experimenters on things you’re trying, what you're learning, and what you haven’t figured out yet. We’re especially interested in work you haven’t discussed publicly, odd experiments, or unfinished projects that don’t have an obvious market.&lt;/p&gt;
-&lt;p&gt;​Expect one flowing conversation with an informal show-and-tell. Sharing something you’re working on is encouraged but no presentation is required.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;This isn't about product pitches, it's about much earlier explorations than that. This agentic AI stuff is weird! Let's celebrate and lean into that weirdness.
-
-
-    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/events"&gt;events&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/coding-agents"&gt;coding-agents&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/jesse-vincent"&gt;jesse-vincent&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/agentic-engineering"&gt;agentic-engineering&lt;/a&gt;&lt;/p&gt;
-
-
-
-</summary><category term="events"/><category term="ai"/><category term="generative-ai"/><category term="llms"/><category term="coding-agents"/><category term="jesse-vincent"/><category term="agentic-engineering"/></entry><entry><title>Claude Opus 5.5, GPT-6 Sol, GPT-6 Luna, and a new price war</title><link href="https://simonwillison.net/2026/Sep/22/opus-and-sol-and-luna/" rel="alternate"/><published>2026-09-22T23:46:41+00:00</published><updated>2026-09-22T23:46:41+00:00</updated><id>https://simonwillison.net/2026/Sep/22/opus-and-sol-and-luna/</id><summary type="html">
-    &lt;p&gt;Yesterday was &lt;a href="https://x.ai/news/grok-4-7"&gt;Grok 4.7&lt;/a&gt; (&lt;a href="https://news.ycombinator.com/item?id=49788838#49790209"&gt;pelicans&lt;/a&gt;) and &lt;a href="https://mimo.xiaomi.com/mimo-v2-6"&gt;MiMo v2.6 Flash/Pro&lt;/a&gt; (&lt;a href="https://news.ycombinator.com/item?id=49792730#49793480"&gt;more pelicans&lt;/a&gt;). Today Anthropic &lt;a href="https://www.anthropic.com/claude-opus-5-5"&gt;released Claude Opus 5.5&lt;/a&gt;, and around an hour later OpenAI &lt;a href="https://openai.com/index/introducing-gpt-6-sol-and-luna/"&gt;released GPT-6 Sol and GPT-6 Luna&lt;/a&gt;. It's going to take a while to get a good read on all of these new models, but here are my impressions so far.&lt;/p&gt;
-&lt;h4 id="gpt-6-sol-and-luna-are-half-the-price-of-their-gpt-5-6-equivalents"&gt;GPT-6 Sol and Luna are half the price of their GPT-5.6 equivalents&lt;/h4&gt;
-&lt;p&gt;GPT-5.6 Luna was already my favorite model for building applications against, because it combined excellent performance with being &lt;em&gt;really cheap&lt;/em&gt;. Somehow GPT-6 Luna is half the price of that again - and GPT-6 Sol had a similar reduction compared to GPT-5.6 Sol.&lt;/p&gt;
-&lt;p&gt;Here's what the pricing landscape looks like today:&lt;/p&gt;
-&lt;center&gt;&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Model&lt;/th&gt;
-      &lt;th&gt;Input&lt;/th&gt;
-      &lt;th&gt;Cached input&lt;/th&gt;
-      &lt;th&gt;Output&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;GPT-6 Luna&lt;/td&gt;
-      &lt;td&gt;$0.10/M&lt;/td&gt;
-      &lt;td&gt;$0.01/M&lt;/td&gt;
-      &lt;td&gt;$0.50/M&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;GPT-5.6 Luna&lt;/td&gt;
-      &lt;td&gt;$0.20/M&lt;/td&gt;
-      &lt;td&gt;$0.02/M&lt;/td&gt;
-      &lt;td&gt;$1.20/M&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Grok 4.7&lt;/td&gt;
-      &lt;td&gt;$2/M&lt;/td&gt;
-      &lt;td&gt;$0.50/M&lt;/td&gt;
-      &lt;td&gt;$6/M&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;GPT-6 Sol&lt;/td&gt;
-      &lt;td&gt;$2/M&lt;/td&gt;
-      &lt;td&gt;$0.20/M&lt;/td&gt;
-      &lt;td&gt;$10/M&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;GPT-5.6 Terra&lt;/td&gt;
-      &lt;td&gt;$2/M&lt;/td&gt;
-      &lt;td&gt;$0.20/M&lt;/td&gt;
-      &lt;td&gt;$12/M&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Claude Opus 5.5&lt;/td&gt;
-      &lt;td&gt;$4/M&lt;/td&gt;
-      &lt;td&gt;$0.20/M&lt;/td&gt;
-      &lt;td&gt;$20/M&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;GPT-5.6 Sol&lt;/td&gt;
-      &lt;td&gt;$4/M&lt;/td&gt;
-      &lt;td&gt;$0.40/M&lt;/td&gt;
-      &lt;td&gt;$20/M&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Claude Fable 5.1&lt;/td&gt;
-      &lt;td&gt;$10/M&lt;/td&gt;
-      &lt;td&gt;$0.25/M&lt;/td&gt;
-      &lt;td&gt;$50/M&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;GPT-6 Astra&lt;/td&gt;
-      &lt;td&gt;$10/M&lt;/td&gt;
-      &lt;td&gt;$1/M&lt;/td&gt;
-      &lt;td&gt;$50/M&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;&lt;/center&gt;
-&lt;p&gt;Note that GPT-5.6 has a scheduled 25% price increase for November, so GPT-6 is half the price of the &lt;em&gt;promotional&lt;/em&gt; pricing for those models.&lt;/p&gt;
-&lt;p&gt;(With GPT-5.6 Terra priced the same as GPT-6 Sol, any remaining reasons to use Terra just evaporated.)&lt;/p&gt;
-&lt;p&gt;It's hard to overstate how competitive this pricing is. Grok 4.7 priced itself at $2/$6, less than half the price of GPT-5.6 Sol, but is now equally priced to GPT-6 Sol on input and closer on output.&lt;/p&gt;&lt;p&gt;At $0.10/$0.50 GPT-6 Luna is one of the cheapest models OpenAI have ever released, beaten only by the far weaker GPT-4.1 Nano ($0.10/$0.40, April 2025) and GPT-5 Nano ($0.05/$0.40, August 2025).&lt;/p&gt;
-&lt;p&gt;I rendered &lt;a href="https://tools.simonwillison.net/markdown-svg-renderer?url=https%3A%2F%2Fgist.github.com%2Fsimonw%2F40d129fc140faca378b9c9f4f16c6ec2"&gt;pelicans for GPT-6 Luna&lt;/a&gt; and &lt;a href="https://tools.simonwillison.net/markdown-svg-renderer?url=https%3A%2F%2Fgist.github.com%2Fsimonw%2Fbe7ae25af2634b68bc34b7b7aaf02cb2"&gt;for GPT-6 Sol&lt;/a&gt;, then I combined them all together in &lt;a href="https://static.simonwillison.net/static/2026/gpt-pelicans-grid.html"&gt;this comparison grid&lt;/a&gt; along with the GPT-5.6 pelicans. I like how you can instantly see that the 5.6 family chose bolder, brighter colors, while the 6 family is a lot more muted. I still think GPT-6 Astra on max produced the best pelican.&lt;/p&gt;
-&lt;p&gt;&lt;img src="https://static.simonwillison.net/static/2026/gpt-pelicans-grid.webp" alt="A grid of pelicans for six GPT models at different thinking efforts." style="max-width: 100%;" /&gt;&lt;/p&gt;
-&lt;h4 id="claude-opus-5-5-got-a-price-cut-too"&gt;Claude Opus 5.5 got a price cut too&lt;/h4&gt;
-&lt;p&gt;Opus 5.5 looks like it addresses the biggest complaints people had about Opus in terms of its communication style. &lt;a href="https://twitter.com/trq212/status/2102437686967738431"&gt;Thariq Shihipar&lt;/a&gt;:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Opus 5.5 is the result of your feedback.&lt;/p&gt;
-&lt;p&gt;It communicates clearly, it's cheaper per token than Opus 5.0 with the intelligence of Fable 5.1 it's very token efficient and works across every effort level.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;It's also meant to be &lt;a href="https://twitter.com/alexalbert__/status/2102466523164274839"&gt;better at Blender&lt;/a&gt;. I'm looking forward to putting it through its paces there.&lt;/p&gt;
-&lt;p&gt;Opus 4.5, 4.6, 4.7, 4.8, and 5 all shared the same price: $5/million tokens for input and $25/million for output. 5.5 is a 20% reduction - $4/million and $20/million.&lt;/p&gt;
-&lt;p&gt;The price for cache reads fell 60%. That's significant for longer agentic conversations, where 90%+ of input tokens are processed at cached token prices.&lt;/p&gt;
-&lt;p&gt;The new price for Opus 5.5 is the same as the price for GPT-5.6 Sol, but that was &lt;em&gt;before&lt;/em&gt; OpenAI dropped their Sol prices by half.&lt;/p&gt;
-&lt;p&gt;GPT-6 Astra and Claude Fable 5.1 are both priced at $10/million input and $50/million output. The price war currently affects the next tier of models below that.&lt;/p&gt;
-&lt;p&gt;Anthropic say that Sonnet 5.5 and Haiku 5.5 are coming soon. It's going to be interesting to see if Haiku can regain its price competitiveness at the lower end, given current Haiku 4.5 is $1/$5 while the latest GPT-6 Luna is &lt;em&gt;one tenth&lt;/em&gt; of that price at $0.10/$0.50.&lt;/p&gt;
-&lt;h4 id="claude-opus-5-5-max-over-thinks-to-the-point-of-breaking"&gt;Claude Opus 5.5 max over-thinks to the point of breaking&lt;/h4&gt;
-&lt;p&gt;In a first for my "&lt;a href="https://simonwillison.net/tags/pelican-riding-a-bicycle/"&gt;Generate an SVG of a pelican riding a bicycle&lt;/a&gt;" test, Claude Opus 5.5 at "max" thinking level failed to return a response!&lt;/p&gt;
-&lt;p&gt;It started by calling this "a classic test request", and then thought really, &lt;em&gt;really&lt;/em&gt; hard about what it was doing:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;This is a classic test request, so I want to plan out a well-composed pelican with its distinctive beak and pouch riding a bicycle with proper wheels, frame, and pedals, set against a simple sky and ground backdrop. [...]&lt;/p&gt;
-&lt;p&gt;Verifying the shin length checks out at roughly 95.2, close enough. Now I'm working out the near leg path from hip to knee to ankle, then sketching the foot shape resting on the pedal — outlining the heel, toe tips, and sole contour with a path using lines and curves to sit naturally on the pedal surface around y=478-494. [...]&lt;/p&gt;
-&lt;p&gt;I like the fish sticking prominently out of the basket with the pelican eyeing it as a fun detail worth keeping. I'm also confirming the eye placement near the bill base matches typical pelican anatomy, and considering giving it a slightly happier expression. [...]&lt;/p&gt;
-&lt;p&gt;The far leg reads correctly as passing behind the frame, so I'm moving on to check the chainring teeth and confirm layer ordering—the far crank arm should be mostly hidden by the seat tube and chainring. I'm settling on the final SVG's width and height attributes alongside the viewBox to ensure proper scaling, noting there's no text so no font-family is needed. [...]&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;I was so excited to see this pelican... but then it &lt;a href="https://tools.simonwillison.net/markdown-svg-renderer?url=https%3A%2F%2Fgist.github.com%2Fsimonw%2F61fd7c3683fffce9a3ab7c43d1180024#response-4"&gt;stopped&lt;/a&gt;. Opus 5.5 has a 128,000 maximum output token limit (as do the other Claude models), and it hit that while it was still reasoning about the SVG!&lt;/p&gt;
-&lt;p&gt;I tried a second time and got the same result. This makes me suspect that "max" is effectively useless - if it over-thinks to breaking point on a stupid SVG prompt I don't trust it not to do the same for more interesting work.&lt;/p&gt;
-&lt;p&gt;(Those two failures each cost me &lt;a href="https://www.llm-prices.com/#it=27&amp;amp;ot=128000&amp;amp;sel=claude-opus-5-5"&gt;$2.56&lt;/a&gt; and took nearly 20 minutes.)&lt;/p&gt;
-&lt;p&gt;Fable 5.1 on "max" didn't over-think and did give me &lt;a href="https://simonwillison.net/2026/Sep/1/claude-fable-5-1/#max"&gt;the best pelican I've seen&lt;/a&gt; from any Anthropic model.&lt;/p&gt;
-&lt;p&gt;Here are &lt;a href="https://tools.simonwillison.net/markdown-svg-renderer?url=https%3A%2F%2Fgist.github.com%2Fsimonw%2F61fd7c3683fffce9a3ab7c43d1180024"&gt;the Opus 5.5 pelicans&lt;/a&gt;, excluding 5.5 max.&lt;/p&gt;
-&lt;p&gt;I also built &lt;a href="https://static.simonwillison.net/static/2026/claude-pelicans-grid.html"&gt;this comparison grid&lt;/a&gt; comparing them with pelicans by Opus 5, Fable 5.1, and Sonnet 5:&lt;/p&gt;
-&lt;p&gt;&lt;img src="https://static.simonwillison.net/static/2026/claude-pelicans-grid.webp" alt="A grid of pelicans for four Claude models at different thinking efforts." style="max-width: 100%;" /&gt;&lt;/p&gt;
-&lt;p&gt;Comparing different model vendors by how well they draw a pelican riding a bicycle may not make much sense now (if it ever did), but I'm still finding value in using them for comparisons of the same model families at different reasoning levels.&lt;/p&gt;
-&lt;p&gt;I'm now using GPT-6 Sol and Claude Opus 5.5 as my default models in Codex and Claude Code. I've upgraded the Datasette Agent demo at &lt;a href="https://agent.datasette.io/"&gt;agent.datasette.io&lt;/a&gt; to use GPT-6 Luna, and it seems to be fast and competent at both SQL queries and building HTML and JavaScript for &lt;a href="https://simonwillison.net/2026/Jun/18/datasette-apps/"&gt;Datasette Apps&lt;/a&gt;.&lt;/p&gt;
-    
-        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/openai"&gt;openai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/anthropic"&gt;anthropic&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/claude"&gt;claude&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llm-pricing"&gt;llm-pricing&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/pelican-riding-a-bicycle"&gt;pelican-riding-a-bicycle&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llm-release"&gt;llm-release&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/gpt"&gt;gpt&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/gpt-6-astra"&gt;gpt-6-astra&lt;/a&gt;&lt;/p&gt;
-    
-
-</summary><category term="ai"/><category term="openai"/><category term="generative-ai"/><category term="llms"/><category term="anthropic"/><category term="claude"/><category term="llm-pricing"/><category term="pelican-riding-a-bicycle"/><category term="llm-release"/><category term="gpt"/><category term="gpt-6-astra"/></entry></feed>
+</summary><category term="coding-agents"/><category term="ai"/><category term="llms"/></entry></feed>
