@@ -6,7 +6,271 @@
     <description>Recent content in HackerNews每日摘要 on SuperTechFans</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>cn</language>
-    <lastBuildDate>Mon, 05 Oct 2026 07:35:29 +0800</lastBuildDate><atom:link href="https://supertechfans.com/cn/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 06 Oct 2026 08:16:04 +0800</lastBuildDate><atom:link href="https://supertechfans.com/cn/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>2026-10-06 Hacker News Top Stories</title>
+      <link>https://supertechfans.com/cn/post/2026-10-06-HackerNews/</link>
+      <pubDate>Tue, 06 Oct 2026 08:16:04 +0800</pubDate>
+      
+      <guid>https://supertechfans.com/cn/post/2026-10-06-HackerNews/</guid>
+      <description>&lt;h1 id=&#34;2026-10-06-hacker-news-top-stories&#34;&gt;
+  2026-10-06 Hacker News Top Stories
+  &lt;a class=&#34;anchor&#34; href=&#34;#2026-10-06-hacker-news-top-stories&#34;&gt;#&lt;/a&gt;
+&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;开源工具 RemoveMacAI 可关闭 Apple Silicon Mac 上的 macOS 27 AI 功能并清理模型，作者称无需关闭 SIP，回收空间取决于已下载的模型。&lt;/li&gt;
+&lt;li&gt;申报 PDF 的涂黑失误泄露 Google 在内布拉斯加州 Lincoln 数据中心的资源数据：峰值电力需求为 52.65 MW，年度用水约 1,329.9 万美制加仑。&lt;/li&gt;
+&lt;li&gt;据报道，Anthropic 将一名佛罗里达女子在 Claude“日记”中写下的涉嫌暴力威胁，经人工审核后报告警方，该女子现面临二级重罪指控。&lt;/li&gt;
+&lt;li&gt;Cloudflare 推出 Web Search API 测试版，接入 Ceramic.ai、Exa 和 Linkup，但公告所称的三家零留存与供应商文档对 Exa 的标注存在差异。&lt;/li&gt;
+&lt;li&gt;丹麦一家企业的 CPR 查询权限被滥用，约 880 万名登记人员资料遭未授权访问，涉及记录包含已故及迁出者，不能等同于现有人口。&lt;/li&gt;
+&lt;li&gt;GrapheneOS 暂不承诺支持 Pixel 11：官方更新确认硬件具备 MTE 能力，但固件与系统尚未正式启用，仍未达到项目的安全要求。&lt;/li&gt;
+&lt;li&gt;VB6 Studio Web 将经典 Visual Basic 窗体设计与编译运行搬进浏览器，支持 37 类控件及 HTML 导出，但未完整实现原生 COM／OCX 和 Windows DLL API。&lt;/li&gt;
+&lt;li&gt;德国工业机器人公司 RobCo 经员工股份二级交易及新增投资后估值超过 10 亿美元，Alfie 新能力计划于 2027 年 3 月商业推出。&lt;/li&gt;
+&lt;li&gt;俄罗斯伊尔库茨克一名抗鼠疫机构人员死亡后，至少 197 名可能接触者接受观察，官方确认死亡与鼠疫有关，但具体类型和媒体所述破管事故仍未确认。&lt;/li&gt;
+&lt;li&gt;F1 湿地编队圈中多辆赛车因软件异常无法正常加速，FIA 在红旗期间向全部 11 支车队提供修正，起跑延迟约 50 分钟。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;1-关闭-macos-27-的-apple-intelligence-并回收模型空间-turn-off-apple-intelligence-on-macos-27-and-get-its-disk-space-back&#34;&gt;
+  1. 关闭 macOS 27 的 Apple Intelligence 并回收模型空间 (Turn off Apple Intelligence on macOS 27 and get its disk space back)
+  &lt;a class=&#34;anchor&#34; href=&#34;#1-%e5%85%b3%e9%97%ad-macos-27-%e7%9a%84-apple-intelligence-%e5%b9%b6%e5%9b%9e%e6%94%b6%e6%a8%a1%e5%9e%8b%e7%a9%ba%e9%97%b4-turn-off-apple-intelligence-on-macos-27-and-get-its-disk-space-back&#34;&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;p&gt;
+  &lt;a href=&#34;https://github.com/omlahore/RemoveMacAI&#34;&gt;https://github.com/omlahore/RemoveMacAI&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;作者指出，macOS 27 缺少统一关闭 Apple Intelligence 的开关，停用功能也未必会删除已经下载的模型；RemoveMacAI 因而把配置限制与模型清理整合起来。它面向 Apple Silicon Mac，通过需要用户批准的系统配置描述文件禁用相关功能，再调用苹果的资源管理服务移除基础模型、图像生成和部分应用模型，作者称无需关闭 SIP 或直接修改系统目录。&lt;/p&gt;
+&lt;p&gt;工具会影响 Siri、写作工具、ChatGPT 扩展以及依赖这些模型的应用功能，也支持保留指定功能；独立的听写功能不在同一范围。恢复操作会移除配置并允许模型按需重新下载，删除后的空间统计可能延迟更新，实际回收量取决于设备上已有的模型。README 标注已测试 macOS 27.0，27.0.1 需要工具 0.2.3 或更新版本，不支持 macOS 26 及更早系统；这些兼容性与效果说明来自项目作者，不能视为苹果官方保证。&lt;/p&gt;
+&lt;h3 id=&#34;hn-热度-755-points--评论-520-comments--投稿者privacyisntdead--发布时间2026-10-05-034225-0800&#34;&gt;
+  HN 热度 755 points | 评论 520 comments | 投稿者：privacyisntdead | 发布时间：2026-10-05 03:42:25 +08:00
+  &lt;a class=&#34;anchor&#34; href=&#34;#hn-%e7%83%ad%e5%ba%a6-755-points--%e8%af%84%e8%ae%ba-520-comments--%e6%8a%95%e7%a8%bf%e8%80%85privacyisntdead--%e5%8f%91%e5%b8%83%e6%97%b6%e9%97%b42026-10-05-034225-0800&#34;&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;
+  &lt;a href=&#34;https://news.ycombinator.com/item?id=49957116&#34;&gt;https://news.ycombinator.com/item?id=49957116&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;启用 AI 功能前应先明确询问用户，让用户自行决定是否接受。&lt;/li&gt;
+&lt;li&gt;有用户报告关闭功能后模型仍占空间或随后重新出现，单纯关闭界面开关并不解决存储问题。&lt;/li&gt;
+&lt;li&gt;支持本地模型的一方看重离线处理和减少云端依赖，认为删除模型也会失去实际有用的能力。&lt;/li&gt;
+&lt;li&gt;开源代码和发行证明有助于检查来源，但下载后直接执行安装脚本仍需要额外审查。&lt;/li&gt;
+&lt;li&gt;发行证明不能自动覆盖可变的安装脚本及其下载内容，也不能替代用户实际验证。&lt;/li&gt;
+&lt;li&gt;包管理器同样存在供应链信任问题，安装方式的便利性不等于代码已经安全。&lt;/li&gt;
+&lt;li&gt;小容量 SSD 和昂贵的存储升级放大了模型占用带来的不满，问题也涉及硬件定价。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;2-涂黑失误泄露-google-数据中心用水与峰值用电数据-improper-redaction-reveals-google-data-center-water-and-electricity-usage&#34;&gt;
+  2. 涂黑失误泄露 Google 数据中心用水与峰值用电数据 (Improper redaction reveals Google Data Center water and electricity usage)
+  &lt;a class=&#34;anchor&#34; href=&#34;#2-%e6%b6%82%e9%bb%91%e5%a4%b1%e8%af%af%e6%b3%84%e9%9c%b2-google-%e6%95%b0%e6%8d%ae%e4%b8%ad%e5%bf%83%e7%94%a8%e6%b0%b4%e4%b8%8e%e5%b3%b0%e5%80%bc%e7%94%a8%e7%94%b5%e6%95%b0%e6%8d%ae-improper-redaction-reveals-google-data-center-water-and-electricity-usage&#34;&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;p&gt;
+  &lt;a href=&#34;https://www.1011now.com/2026/09/30/more-questions-than-answers-about-lincolns-google-data-center-water-electricity-usage/&#34;&gt;https://www.1011now.com/2026/09/30/more-questions-than-answers-about-lincolns-google-data-center-water-electricity-usage/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;内布拉斯加州地方媒体 KOLN 报道，数据中心向州环境部门提交年度资料时，以商业秘密为由遮盖水电数据，但部分 PDF 的黑色遮盖并未真正删除底层文字，复制后仍可读出。Lincoln 的 Google 关联公司 Agate LLC 申报峰值电力需求为 52.65 MW，年度用水为 1,329.9 万美制加仑；前者是功率，并非全年耗电量。报道把后者与 Lincoln 单日用水比较，称不到该市 9 月 29 日一天的一半。&lt;/p&gt;
+&lt;p&gt;单个地点与整体规模必须区分：六个申报数据中心合计年度用水约 7.65 亿加仑，Papillion 的 Google 关联公司 Fireball 在 2025 年用了约 5.4788 亿加仑。资料还列出 Agate、Fireball 和 Omaha 的 Westwood 在 2025 年预计获得约 5,582 万、3,917 万和 2,256 万美元税收返还；“预计”不等于款项已经支付。报道依据企业申报资料揭示透明度问题，没有提供足以独立比较各站点运行效率的统一计量数据。&lt;/p&gt;
+&lt;h3 id=&#34;hn-热度-515-points--评论-670-comments--投稿者sensanaty--发布时间2026-10-05-033705-0800&#34;&gt;
+  HN 热度 515 points | 评论 670 comments | 投稿者：sensanaty | 发布时间：2026-10-05 03:37:05 +08:00
+  &lt;a class=&#34;anchor&#34; href=&#34;#hn-%e7%83%ad%e5%ba%a6-515-points--%e8%af%84%e8%ae%ba-670-comments--%e6%8a%95%e7%a8%bf%e8%80%85sensanaty--%e5%8f%91%e5%b8%83%e6%97%b6%e9%97%b42026-10-05-033705-0800&#34;&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;
+  &lt;a href=&#34;https://news.ycombinator.com/item?id=49957068&#34;&gt;https://news.ycombinator.com/item?id=49957068&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Lincoln 单个站点的年用水与城市一天用水相比并不突出，评价规模需要明确比较基准。&lt;/li&gt;
+&lt;li&gt;较小站点不能代表整个数据中心群，Papillion 和全州合计数字会改变对总影响的判断。&lt;/li&gt;
+&lt;li&gt;公共部门应掌握实际资源消耗，商业秘密主张不应让基础设施影响无法接受公众检验。&lt;/li&gt;
+&lt;li&gt;申请许可的上限、峰值需求和实际年度消耗属于不同指标，混用会夸大或淡化问题。&lt;/li&gt;
+&lt;li&gt;水冷和用电之间可能存在取舍，单看用水总量不足以判断设计是否合理。&lt;/li&gt;
+&lt;li&gt;水会进入自然循环并不消除地方水源和补给速度的约束，区域影响仍需单独衡量。&lt;/li&gt;
+&lt;li&gt;税收优惠是否与地方承担的资源成本相称，是比单个用水数字更广的公共政策问题。&lt;/li&gt;
+&lt;li&gt;泳池换算不一定有助于理解规模，家庭或城市用水等更熟悉的参照可能更直观。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;3-claude-日记内容被报告给警方佛罗里达女子面临重罪指控-anthropic-reported-diary-entry-to-police-woman-faces-felony-charge&#34;&gt;
+  3. Claude 日记内容被报告给警方，佛罗里达女子面临重罪指控 (Anthropic reported diary entry to police, woman faces felony charge)
+  &lt;a class=&#34;anchor&#34; href=&#34;#3-claude-%e6%97%a5%e8%ae%b0%e5%86%85%e5%ae%b9%e8%a2%ab%e6%8a%a5%e5%91%8a%e7%bb%99%e8%ad%a6%e6%96%b9%e4%bd%9b%e7%bd%97%e9%87%8c%e8%be%be%e5%a5%b3%e5%ad%90%e9%9d%a2%e4%b8%b4%e9%87%8d%e7%bd%aa%e6%8c%87%e6%8e%a7-anthropic-reported-diary-entry-to-police-woman-faces-felony-charge&#34;&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;p&gt;
+  &lt;a href=&#34;https://www.techspot.com/news/114091-florida-woman-used-claude-diary-anthropic-reported-shoot.html&#34;&gt;https://www.techspot.com/news/114091-florida-woman-used-claude-diary-anthropic-reported-shoot.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;TechSpot 报道，佛罗里达州 Bonita Springs 的 Carli Michelle Heller 把 Claude 当作日记使用，涉嫌在 9 月 26 日的对话中写下向警长办公室开枪的计划。报道描述的流程并非模型直接报警：内容先被系统标记，再由人工审核人员判断为可信威胁，随后向警方报告；警员前往住所将她拘留，现场没有发生暴力事件。&lt;/p&gt;
+&lt;p&gt;她面临佛罗里达州有关书面暴力威胁的二级重罪指控，但报道没有给出定罪结果，也没有刊出足以独立判断意图的完整对话。Anthropic 表示，在为防止死亡或严重人身伤害等有限紧急情况下，可能向当局披露信息。事件把对话式 AI 的亲密体验与云服务的内容审核、紧急披露机制之间的距离具体化：称其为“日记”并不能证明内容受到日记式保密，而存在刑事指控也不能替代法院对具体文字和意图的判断。&lt;/p&gt;
+&lt;h3 id=&#34;hn-热度-497-points--评论-434-comments--投稿者emptybits--发布时间2026-10-05-133740-0800&#34;&gt;
+  HN 热度 497 points | 评论 434 comments | 投稿者：emptybits | 发布时间：2026-10-05 13:37:40 +08:00
+  &lt;a class=&#34;anchor&#34; href=&#34;#hn-%e7%83%ad%e5%ba%a6-497-points--%e8%af%84%e8%ae%ba-434-comments--%e6%8a%95%e7%a8%bf%e8%80%85emptybits--%e5%8f%91%e5%b8%83%e6%97%b6%e9%97%b42026-10-05-133740-0800&#34;&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;
+  &lt;a href=&#34;https://news.ycombinator.com/item?id=49961057&#34;&gt;https://news.ycombinator.com/item?id=49961057&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;平台面对可信威胁时，报告与不报告都可能造成严重后果，不能把决策描述成毫无代价的选择。&lt;/li&gt;
+&lt;li&gt;日记式表达、角色扮演和真实行动计划可能使用相似文字，审核者需要足够上下文判断。&lt;/li&gt;
+&lt;li&gt;没有完整对话就难以判断这是明确计划还是情绪宣泄，标题不足以支持确定的法律结论。&lt;/li&gt;
+&lt;li&gt;产品应在互动过程中清楚提醒隐私与披露边界，不能只依赖用户自行阅读冗长条款。&lt;/li&gt;
+&lt;li&gt;对部分危机场景引入心理健康或社会工作支持，可能比直接进入警务流程更合适。&lt;/li&gt;
+&lt;li&gt;把聊天内容当作可以随意转交的材料，会引出与通信隐私和程序保障有关的争议。&lt;/li&gt;
+&lt;li&gt;能读取本地文件的 AI 代理进一步扩大了信息暴露范围，隐私边界不能只围绕主动输入的聊天内容设计。&lt;/li&gt;
+&lt;li&gt;书面威胁与私人记录的界线存在争论，面临指控并不意味着意图或罪责已经确定。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;4-cloudflare-推出面向-ai-代理的-web-search-api-web-search-api&#34;&gt;
+  4. Cloudflare 推出面向 AI 代理的 Web Search API (Web Search API)
+  &lt;a class=&#34;anchor&#34; href=&#34;#4-cloudflare-%e6%8e%a8%e5%87%ba%e9%9d%a2%e5%90%91-ai-%e4%bb%a3%e7%90%86%e7%9a%84-web-search-api-web-search-api&#34;&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;p&gt;
+  &lt;a href=&#34;https://developers.cloudflare.com/changelog/post/2026-10-02-introducing-web-search-api/&#34;&gt;https://developers.cloudflare.com/changelog/post/2026-10-02-introducing-web-search-api/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Cloudflare 在 10 月 2 日推出 Web Search API 测试版，让 AI 代理查询实时网页资料以支撑回答，首批接入 Ceramic.ai、Exa 和 Linkup。开发者可通过 REST 或 Workers AI binding 调用，搜索请求进入 AI Gateway 的日志与计费体系，按供应商公开价格使用 AI Gateway credits 结算，Cloudflare 称不加价，也允许使用自己的供应商 API key。&lt;/p&gt;
+&lt;p&gt;公告强调供应商承诺使用经过验证的机器人抓取，并称三家对经 Cloudflare 发出的请求均实行零数据留存。不过，同站供应商文档将 Ceramic.ai 与 Linkup 的 Zero Data Retention 标为 Yes，却将 Exa 标为 No；两处说明并不一致，不能据公告笼统承诺整条请求链不留数据。该文档还列出每千次请求约 0.25、7 和 5 美元的不同价格，所用搜索模式和返回摘要也不同。统一入口解决的是接入与管理问题，公告没有提供证明三家检索质量等价的对比实验。&lt;/p&gt;
+&lt;h3 id=&#34;hn-热度-476-points--评论-218-comments--投稿者tosh--发布时间2026-10-05-184706-0800&#34;&gt;
+  HN 热度 476 points | 评论 218 comments | 投稿者：tosh | 发布时间：2026-10-05 18:47:06 +08:00
+  &lt;a class=&#34;anchor&#34; href=&#34;#hn-%e7%83%ad%e5%ba%a6-476-points--%e8%af%84%e8%ae%ba-218-comments--%e6%8a%95%e7%a8%bf%e8%80%85tosh--%e5%8f%91%e5%b8%83%e6%97%b6%e9%97%b42026-10-05-184706-0800&#34;&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;
+  &lt;a href=&#34;https://news.ycombinator.com/item?id=49963171&#34;&gt;https://news.ycombinator.com/item?id=49963171&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;统一日志和计费对已有 Cloudflare 工作流有价值，但独立开发者未必需要多加一层代理。&lt;/li&gt;
+&lt;li&gt;供应商不留存与网关自身是否保存查询是两个问题，隐私承诺应明确覆盖哪些环节。&lt;/li&gt;
+&lt;li&gt;公告与 Exa 的供应商文档存在零留存差异，敏感查询不能只依据一句宣传判断。&lt;/li&gt;
+&lt;li&gt;有试用者报告 Ceramic.ai 在两次具体查询中不如传统搜索，价格优势不能代替检索质量验证。&lt;/li&gt;
+&lt;li&gt;供应商定价差距很大，实际选择还需要考虑结果质量、摘要形式和任务成本。&lt;/li&gt;
+&lt;li&gt;返回结果的保存和再分发条款可能影响代理历史记录与缓存设计，接口可用不等于内容可任意复用。&lt;/li&gt;
+&lt;li&gt;计费用量可以与查询正文分开记录，运营需要不必自动等同于保存全部敏感内容。&lt;/li&gt;
+&lt;li&gt;代理还需要规划查询和判断何时停止搜索，提供搜索结果只是完整检索流程的一环。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;5-丹麦-cpr-数据遭未授权访问涉及-880-万登记人员-denmark-data-breach-exposes-88m-peoples-personal-data&#34;&gt;
+  5. 丹麦 CPR 数据遭未授权访问，涉及 880 万登记人员 (Denmark data breach exposes 8.8M people&amp;rsquo;s personal data)
+  &lt;a class=&#34;anchor&#34; href=&#34;#5-%e4%b8%b9%e9%ba%a6-cpr-%e6%95%b0%e6%8d%ae%e9%81%ad%e6%9c%aa%e6%8e%88%e6%9d%83%e8%ae%bf%e9%97%ae%e6%b6%89%e5%8f%8a-880-%e4%b8%87%e7%99%bb%e8%ae%b0%e4%ba%ba%e5%91%98-denmark-data-breach-exposes-88m-peoples-personal-data&#34;&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;p&gt;
+  &lt;a href=&#34;https://www.cpr.dk/cpr-nyt/nyhedsarkiv/2026/okt/omfattende-uautoriseret-adgang-til-borgeres-cpr-oplysninger&#34;&gt;https://www.cpr.dk/cpr-nyt/nyhedsarkiv/2026/okt/omfattende-uautoriseret-adgang-til-borgeres-cpr-oplysninger&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;丹麦 CPR 官方公告称，一家原本获准查询人口登记资料的私人企业，其访问权限被用于未授权访问，涉及约 880 万名登记人员的姓名、地址、CPR 号码等资料。企业权限已经撤销，事件已报数据保护机关，并由警方调查。公告明确排除受保护的姓名和地址，但并未表示这些人员的所有其他资料都未受影响。&lt;/p&gt;
+&lt;p&gt;部长补充说明，登记库总共约有 1,100 万条人员记录，包含在世、已故及迁出者，因此 880 万不能直接等同于丹麦目前人口。9 月的异常访问在 10 月 2 日晚间被发现，周末进一步确认；调查仍处早期，具体情况可能修正。合法企业通常是按业务需要查询事先识别的有限人员群体，而非拥有任意抓取全库的授权。官方同时提醒，即使来电者能报出姓名、地址或 CPR 号码，也不要据此交出密码或其他机密信息；当前声明没有确认攻击者身份或后续实际诈骗规模。&lt;/p&gt;
+&lt;h3 id=&#34;hn-热度-463-points--评论-327-comments--投稿者clan--发布时间2026-10-05-160936-0800&#34;&gt;
+  HN 热度 463 points | 评论 327 comments | 投稿者：clan | 发布时间：2026-10-05 16:09:36 +08:00
+  &lt;a class=&#34;anchor&#34; href=&#34;#hn-%e7%83%ad%e5%ba%a6-463-points--%e8%af%84%e8%ae%ba-327-comments--%e6%8a%95%e7%a8%bf%e8%80%85clan--%e5%8f%91%e5%b8%83%e6%97%b6%e9%97%b42026-10-05-160936-0800&#34;&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;
+  &lt;a href=&#34;https://news.ycombinator.com/item?id=49962012&#34;&gt;https://news.ycombinator.com/item?id=49962012&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;私人企业查询人口资料的权限应严格限定范围，并对异常的大规模访问及时报警。&lt;/li&gt;
+&lt;li&gt;减少不必要的资料访问和保存，比事后期待所有持有者都妥善保护数据更可靠。&lt;/li&gt;
+&lt;li&gt;长期维护公共信息系统的投入不足，会让看似稳定的基础设施持续累积安全债务。&lt;/li&gt;
+&lt;li&gt;880 万涉及人数高于丹麦现有人口并非自动说明报道错误，登记库还包括其他历史人员记录。&lt;/li&gt;
+&lt;li&gt;数据保护责任需要清晰的经济与组织后果，否则便利的数据访问容易被置于风险控制之前。&lt;/li&gt;
+&lt;li&gt;泄露字段应按已确认的姓名、CPR 号码和地址解读，不能把其他资料也一并当作泄露事实。&lt;/li&gt;
+&lt;li&gt;CPR 号码属于识别符而非秘密口令，身份认证不应依赖仅仅知道这个号码。&lt;/li&gt;
+&lt;li&gt;姓名、地址和识别号码即使不足以直接登录账户，也能让冒充和定向诈骗更有说服力。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;6-pixel-11-尚未达到-grapheneos-安全要求支持计划仍未定-pixel-11-doesnt-yet-meet-the-grapheneos-security-standards-and-may-be-skipped&#34;&gt;
+  6. Pixel 11 尚未达到 GrapheneOS 安全要求，支持计划仍未定 (Pixel 11 doesn&amp;rsquo;t yet meet the GrapheneOS security standards and may be skipped)
+  &lt;a class=&#34;anchor&#34; href=&#34;#6-pixel-11-%e5%b0%9a%e6%9c%aa%e8%be%be%e5%88%b0-grapheneos-%e5%ae%89%e5%85%a8%e8%a6%81%e6%b1%82%e6%94%af%e6%8c%81%e8%ae%a1%e5%88%92%e4%bb%8d%e6%9c%aa%e5%ae%9a-pixel-11-doesnt-yet-meet-the-grapheneos-security-standards-and-may-be-skipped&#34;&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;p&gt;
+  &lt;a href=&#34;https://discuss.grapheneos.org/d/41564-pixel-11-doesnt-yet-meet-the-grapheneos-security-standards-and-may-be-skipped&#34;&gt;https://discuss.grapheneos.org/d/41564-pixel-11-doesnt-yet-meet-the-grapheneos-security-standards-and-may-be-skipped&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;GrapheneOS 在初始帖子中表示，移植 Pixel 11 时无法启用 MTE，因此该系列尚未满足其安全要求，可能跳过；MTE 是项目用于加强内核、系统进程和应用内存安全的重要机制。早期帖子仍在调查究竟缺少软件、固件还是硬件支持，不能把其中的推测当作最终硬件结论。&lt;/p&gt;
+&lt;p&gt;同一讨论中的官方后续更新明确说，Pixel 11 硬件支持 MTE，但出厂固件没有提供支持；Android 17 QPR2 Beta 后来加入初步固件支持，操作系统侧仍完全禁用，连开发者选项也不能启用。团队尚不清楚是否存在需要绕开的硬件实现问题，并表示在 MTE 支持正式到来之前不会承诺支持该系列。原帖也认可新设备的 Titan M3、验证启动等其他安全进步，但认为它们不能直接替代 MTE 带来的防护。结论是支持状态仍未确定，而不是已经证实硬件永久缺失 MTE，或已经最终宣布全面放弃 Pixel。&lt;/p&gt;
+&lt;h3 id=&#34;hn-热度-392-points--评论-248-comments--投稿者finnlab--发布时间2026-10-05-210225-0800&#34;&gt;
+  HN 热度 392 points | 评论 248 comments | 投稿者：finnlab | 发布时间：2026-10-05 21:02:25 +08:00
+  &lt;a class=&#34;anchor&#34; href=&#34;#hn-%e7%83%ad%e5%ba%a6-392-points--%e8%af%84%e8%ae%ba-248-comments--%e6%8a%95%e7%a8%bf%e8%80%85finnlab--%e5%8f%91%e5%b8%83%e6%97%b6%e9%97%b42026-10-05-210225-0800&#34;&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;
+  &lt;a href=&#34;https://news.ycombinator.com/item?id=49964303&#34;&gt;https://news.ycombinator.com/item?id=49964303&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;这不是全新的单次声明，判断支持状态时应把原帖与后续官方更新一起阅读。&lt;/li&gt;
+&lt;li&gt;后续说明已修正硬件不支持 MTE 的早期判断，把旧标题直接当作当前结论会误导读者。&lt;/li&gt;
+&lt;li&gt;将缺少功能归因于降低成本缺乏足够证据，技术问题与厂商动机应分开讨论。&lt;/li&gt;
+&lt;li&gt;购买决定不应只建立在未来可能实现的安全功能上，当前可验证的支持状态更重要。&lt;/li&gt;
+&lt;li&gt;仍在受支持的旧款 Pixel 对部分用户已足够，新机并不自动意味着更适合 GrapheneOS。&lt;/li&gt;
+&lt;li&gt;依赖少数硬件厂商会让安全系统的路线受制于外部决策，增加可用平台有现实价值。&lt;/li&gt;
+&lt;li&gt;严格坚持安全门槛能保护项目定位，但也有人担心要求过高会减少现实可用的设备。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;7-浏览器里的经典-visual-basic-6-开发环境-a-browser-native-classic-visual-basic-vb6-ide&#34;&gt;
+  7. 浏览器里的经典 Visual Basic 6 开发环境 (A browser-native classic Visual Basic VB6 IDE)
+  &lt;a class=&#34;anchor&#34; href=&#34;#7-%e6%b5%8f%e8%a7%88%e5%99%a8%e9%87%8c%e7%9a%84%e7%bb%8f%e5%85%b8-visual-basic-6-%e5%bc%80%e5%8f%91%e7%8e%af%e5%a2%83-a-browser-native-classic-visual-basic-vb6-ide&#34;&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;p&gt;
+  &lt;a href=&#34;https://wieslawsoltes.github.io/VB6/&#34;&gt;https://wieslawsoltes.github.io/VB6/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;这个开源项目把经典 Visual Basic 的窗体设计器、属性面板、编辑器与运行环境搬进浏览器。相关 README 将其称为 VB6 Studio Web 0.6.0：界面以 HTML、CSS 和 JavaScript 构建，绘制优先使用 WebGPU 并回退到 Canvas2；用户代码经项目自己的编译器和虚拟机运行，而非直接作为 JavaScript eval 执行。它支持 37 类浏览器控件、可编辑项目文件和独立 HTML 导出，也列出断点、单步、监视及 IntelliSense 等开发功能。&lt;/p&gt;
+&lt;p&gt;项目提供 SQLite、REST、OData、GraphQL 等数据接入能力，但这些不等于完整复制原生 VB6 的 ADO／DAO 与 Windows 生态。README 明确指出，原生 COM／OCX、Windows DLL API 和任意插件并未完整实现，外观也不是原系统的逐像素复刻；老项目是否能运行取决于所用语言和控件范围。浏览器存储属于尽力保存，需要自行下载项目备份。它是独立的 MIT 开源实现，适合了解其支持范围后试用，不能仅凭熟悉的界面认定任意历史工程都能直接迁移。&lt;/p&gt;
+&lt;h3 id=&#34;hn-热度-392-points--评论-129-comments--投稿者wiso--发布时间2026-10-05-024917-0800&#34;&gt;
+  HN 热度 392 points | 评论 129 comments | 投稿者：wiso | 发布时间：2026-10-05 02:49:17 +08:00
+  &lt;a class=&#34;anchor&#34; href=&#34;#hn-%e7%83%ad%e5%ba%a6-392-points--%e8%af%84%e8%ae%ba-129-comments--%e6%8a%95%e7%a8%bf%e8%80%85wiso--%e5%8f%91%e5%b8%83%e6%97%b6%e9%97%b42026-10-05-024917-0800&#34;&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;
+  &lt;a href=&#34;https://news.ycombinator.com/item?id=49956681&#34;&gt;https://news.ycombinator.com/item?id=49956681&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;直接在浏览器启动熟悉的开发界面，降低了重访旧程序和尝试项目的门槛。&lt;/li&gt;
+&lt;li&gt;有用户导入旧地图编辑器后遇到 BitBlt 依赖问题，Win32 API 范围决定了真实兼容程度。&lt;/li&gt;
+&lt;li&gt;快速启动的轻量环境让人重新比较现代 IDE 的启动成本和资源消耗。&lt;/li&gt;
+&lt;li&gt;属性表格对可视化控件编辑仍然有效，这类成熟交互并没有因年代久远而失去价值。&lt;/li&gt;
+&lt;li&gt;经典 VB 的上下文帮助能减少查文档时的切换成本，开发工具仍可借鉴这种体验。&lt;/li&gt;
+&lt;li&gt;熟悉的配色和布局不等于逐像素还原，怀旧体验与原生界面的忠实度应分别评价。&lt;/li&gt;
+&lt;li&gt;有试用者报告调试与智能补全体验不符合预期，功能列表仍需通过实际工程检验。&lt;/li&gt;
+&lt;li&gt;面向网页的可视化窗体设计若能与完整语言工具链结合，可能具有超出怀旧展示的用途。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;8-德国-robco-估值突破-10-亿美元-germanys-robco-hits-1b-valuation&#34;&gt;
+  8. 德国 RobCo 估值突破 10 亿美元 (Germany’s RobCo hits $1B valuation)
+  &lt;a class=&#34;anchor&#34; href=&#34;#8-%e5%be%b7%e5%9b%bd-robco-%e4%bc%b0%e5%80%bc%e7%aa%81%e7%a0%b4-10-%e4%ba%bf%e7%be%8e%e5%85%83-germanys-robco-hits-1b-valuation&#34;&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;p&gt;
+  &lt;a href=&#34;https://techfundingnews.com/europes-new-robotics-unicorn-germanys-robco-hits-1b-valuation/&#34;&gt;https://techfundingnews.com/europes-new-robotics-unicorn-germanys-robco-hits-1b-valuation/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Tech Funding News 报道，德国工业机器人公司 RobCo 在员工股份的二级交易及新增投资后，估值超过 10 亿美元，约为九个月前的两倍；这个数字是公司估值，不是此次融资额或营业收入。公司 2020 年在慕尼黑创立，2026 年 1 月完成了 1 亿美元 C 轮融资，本次投资者包括既有机构与新加入的 Cherry Ventures 等。&lt;/p&gt;
+&lt;p&gt;RobCo 以机器人即服务降低制造企业的前期投入，并在美国十多个州开展业务，布局 Austin 的制造装配和旧金山的实验室。报道重点介绍名为 Alfie 的感知、推理与执行能力，目标是适应变化较多、结构不固定的工业任务；公司计划在 2027 年 3 月 4 日的 RobCoN 活动商业推出，这仍是未来计划，不能写成已经在工厂验证的普遍能力。报道把传统工业自动化与新的 AI 路线连接起来，但没有给出独立的故障率、维护成本或复杂任务可靠性测试，估值与投资者支持也不能代替这些运行指标。&lt;/p&gt;
+&lt;h3 id=&#34;hn-热度-326-points--评论-337-comments--投稿者dachworker--发布时间2026-10-05-191351-0800&#34;&gt;
+  HN 热度 326 points | 评论 337 comments | 投稿者：dachworker | 发布时间：2026-10-05 19:13:51 +08:00
+  &lt;a class=&#34;anchor&#34; href=&#34;#hn-%e7%83%ad%e5%ba%a6-326-points--%e8%af%84%e8%ae%ba-337-comments--%e6%8a%95%e7%a8%bf%e8%80%85dachworker--%e5%8f%91%e5%b8%83%e6%97%b6%e9%97%b42026-10-05-191351-0800&#34;&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;
+  &lt;a href=&#34;https://news.ycombinator.com/item?id=49963366&#34;&gt;https://news.ycombinator.com/item?id=49963366&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;围绕现实工业任务的机器人，比以人形外观吸引注意的展示更容易对应明确需求。&lt;/li&gt;
+&lt;li&gt;机器人即服务是否能形成可持续业务仍值得怀疑，订阅形式本身不会消除部署与维护成本。&lt;/li&gt;
+&lt;li&gt;复杂硬件的租赁与服务模式有合理性，客户可以把维护负担和部分前期支出交给供应商。&lt;/li&gt;
+&lt;li&gt;非公开公司的估值受交易结构和投资者预期影响，不能直接当作已经实现的经营成绩。&lt;/li&gt;
+&lt;li&gt;工厂更关心停机时间、服务保障和故障恢复，估值故事无法回答这些采购问题。&lt;/li&gt;
+&lt;li&gt;机器人研究演示与稳定的工业部署之间存在很大距离，高成功率仍可能不足以支撑连续生产。&lt;/li&gt;
+&lt;li&gt;既有工业机器人能力与新的 AI 品牌叙事应分开评价，关键仍是客户现场能够完成什么。&lt;/li&gt;
+&lt;li&gt;讨论科技公司时不应只关注美国融资，欧洲工业技术同样值得根据实际产品评价。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;9-伊尔库茨克实验室人员死亡近-200-人接受观察-nearly-200-people-under-observation-after-irkutsk-lab-worker-dies-from-plague&#34;&gt;
+  9. 伊尔库茨克实验室人员死亡，近 200 人接受观察 (Nearly 200 people under observation after Irkutsk lab worker dies from plague)
+  &lt;a class=&#34;anchor&#34; href=&#34;#9-%e4%bc%8a%e5%b0%94%e5%ba%93%e8%8c%a8%e5%85%8b%e5%ae%9e%e9%aa%8c%e5%ae%a4%e4%ba%ba%e5%91%98%e6%ad%bb%e4%ba%a1%e8%bf%91-200-%e4%ba%ba%e6%8e%a5%e5%8f%97%e8%a7%82%e5%af%9f-nearly-200-people-under-observation-after-irkutsk-lab-worker-dies-from-plague&#34;&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;p&gt;
+  &lt;a href=&#34;https://www.themoscowtimes.com/2026/10/02/nearly-200-people-under-observation-after-irkutsk-lab-worker-dies-from-plague-a93857&#34;&gt;https://www.themoscowtimes.com/2026/10/02/nearly-200-people-under-observation-after-irkutsk-lab-worker-dies-from-plague-a93857&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The Moscow Times 报道，一名在伊尔库茨克抗鼠疫研究机构工作的女性死亡后，近 200 名可能接触者被隔离或接受医学观察。布里亚特地区负责人确认死亡与鼠疫有关，但没有说明具体类型；此前当地官方只称“危险感染”。媒体称死者在周二因严重肺炎入院，周四死亡，并引述她曾向医护人员提及打破装有活菌的试管；这一事故经过并非报道中已经完成调查确认的结论。&lt;/p&gt;
+&lt;p&gt;报道所列至少 197 人是可能接触者，不是 197 名确诊感染者，其中超过 100 人来自医院病区。医院实施隔离并成立调查委员会，相关地区取消部分公共活动；当地负责人在周五称，已找到的接触者没有症状，检测呈阴性。这是当时的阶段性结果，不能延伸为长期没有传播风险的保证。报道还提到对可能违反卫生安全规则的刑事调查，尚未给出最终死因、完整暴露链条或事故责任结论；媒体对肺鼠疫的怀疑也必须与官方未说明类型的状态区分。&lt;/p&gt;
+&lt;h3 id=&#34;hn-热度-294-points--评论-304-comments--投稿者ericmay--发布时间2026-10-05-103145-0800&#34;&gt;
+  HN 热度 294 points | 评论 304 comments | 投稿者：ericmay | 发布时间：2026-10-05 10:31:45 +08:00
+  &lt;a class=&#34;anchor&#34; href=&#34;#hn-%e7%83%ad%e5%ba%a6-294-points--%e8%af%84%e8%ae%ba-304-comments--%e6%8a%95%e7%a8%bf%e8%80%85ericmay--%e5%8f%91%e5%b8%83%e6%97%b6%e9%97%b42026-10-05-103145-0800&#34;&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;
+  &lt;a href=&#34;https://news.ycombinator.com/item?id=49960084&#34;&gt;https://news.ycombinator.com/item?id=49960084&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;事件需要解释从潜在暴露到就医、报告和隔离的时间线，才能判断应急流程哪里出现问题。&lt;/li&gt;
+&lt;li&gt;如果工作人员已知自己可能接触危险样本，机构是否及时识别并处理风险是重要调查问题。&lt;/li&gt;
+&lt;li&gt;破管说法缺少足够证据时不应被当作确定原因，事故叙事必须接受独立调查。&lt;/li&gt;
+&lt;li&gt;笼统要求公众保持冷静不能替代透明说明，接触追踪和检测结果应有具体信息。&lt;/li&gt;
+&lt;li&gt;危险病原研究的收益与事故风险需要公开讨论，低概率但后果严重的事件也应计入评估。&lt;/li&gt;
+&lt;li&gt;支持研究的一方强调自然疫源监测和防治需求，不能因为一次事故就否定这类工作的必要性。&lt;/li&gt;
+&lt;li&gt;样本容器及其外层保护是否适合相关风险值得追问，防护设计不能只依赖操作者永不失误。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;10-f1-湿地起跑软件故障令车手无法正常加速-powerless-f1-drivers-frustrated-by-bahrain-f1-software-glitch&#34;&gt;
+  10. F1 湿地起跑软件故障令车手无法正常加速 (Powerless F1 drivers frustrated by Bahrain F1 software glitch)
+  &lt;a class=&#34;anchor&#34; href=&#34;#10-f1-%e6%b9%bf%e5%9c%b0%e8%b5%b7%e8%b7%91%e8%bd%af%e4%bb%b6%e6%95%85%e9%9a%9c%e4%bb%a4%e8%bd%a6%e6%89%8b%e6%97%a0%e6%b3%95%e6%ad%a3%e5%b8%b8%e5%8a%a0%e9%80%9f-powerless-f1-drivers-frustrated-by-bahrain-f1-software-glitch&#34;&gt;#&lt;/a&gt;
+&lt;/h2&gt;
+&lt;p&gt;
+  &lt;a href=&#34;https://www.motorsport.com/f1/news/horrible-totally-unacceptable-powerless-f1-drivers-frustrated-by-bahrain-f1-software-glitch/10861968/&#34;&gt;https://www.motorsport.com/f1/news/horrible-totally-unacceptable-powerless-f1-drivers-frustrated-by-bahrain-f1-software-glitch/10861968/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Motorsport 报道，一场湿地比赛的编队圈中，多名 F1 车手踩下油门却得不到正常动力响应，甚至几乎停住。正文将现场描述为马来西亚 Sepang，尽管原始英文标题写的是 Bahrain；这处地名差异不应靠猜测消除。报道把问题与 2026 年赛车首次湿地比赛中的动力控制模式联系起来：低速编队圈触发了异常的怠速循环，使赛车无法按车手预期加速。&lt;/p&gt;
+&lt;p&gt;比赛在红旗期间处理问题，FIA 向全部 11 支车队提供修正，并取消通常适用于湿地的部分动力削减区域，起跑因此延迟约 50 分钟。Norris、Piastri、Perez 和 Bearman 等人的描述强调突然失去动力响应的危险与不可接受，也有人希望在了解原因后再作结论。报道呈现了车手对复杂混合动力规则和软件依赖的不满，却没有提供修正代码、完整根因报告或其测试流程；因此不能把短时间内修正写成已经证实的现场重写程序，更不能把评论中的 AI 编程玩笑当作事故原因。&lt;/p&gt;
+&lt;h3 id=&#34;hn-热度-282-points--评论-246-comments--投稿者llm_nerd--发布时间2026-10-05-095408-0800&#34;&gt;
+  HN 热度 282 points | 评论 246 comments | 投稿者：llm_nerd | 发布时间：2026-10-05 09:54:08 +08:00
+  &lt;a class=&#34;anchor&#34; href=&#34;#hn-%e7%83%ad%e5%ba%a6-282-points--%e8%af%84%e8%ae%ba-246-comments--%e6%8a%95%e7%a8%bf%e8%80%85llm_nerd--%e5%8f%91%e5%b8%83%e6%97%b6%e9%97%b42026-10-05-095408-0800&#34;&gt;#&lt;/a&gt;
+&lt;/h3&gt;
+&lt;p&gt;
+  &lt;a href=&#34;https://news.ycombinator.com/item?id=49959869&#34;&gt;https://news.ycombinator.com/item?id=49959869&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;多支车队同时受影响让人追问共用控制部件和强制软件的范围，而非只看单队的调校。&lt;/li&gt;
+&lt;li&gt;共同的控制平台与车队自己的参数设置可以并存，统一硬件不意味着所有赛车逻辑完全相同。&lt;/li&gt;
+&lt;li&gt;安全关键系统在很短时间内修正，仍需要说明验证方式与部署风险。&lt;/li&gt;
+&lt;li&gt;快速修正可能只是改配置或关闭触发条件，不能仅凭耗时推断现场重新编写了完整程序。&lt;/li&gt;
+&lt;li&gt;偏好更简单动力系统的观众希望赛车减少复杂控制逻辑，并恢复更直接的驾驶和声音体验。&lt;/li&gt;
+&lt;li&gt;能源限制和规则设计塑造了技术复杂度，问题不只在车队工程师如何实现控制软件。&lt;/li&gt;
+&lt;li&gt;工程技术始终是赛车竞争的一部分，批评具体规则并不需要否定所有技术创新。&lt;/li&gt;
+&lt;li&gt;用于车辆控制的软件不能照搬普通网页的快速迭代习惯，异常场景和失效行为必须被认真验证。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>2026-10-05 Hacker News Top Stories</title>
       <link>https://supertechfans.com/cn/post/2026-10-05-HackerNews/</link>
@@ -1514,614 +1778,6 @@ BetterTouchTool有一个很棒的MCP，它可以创建原生的SwiftUI视图，�
 &lt;p&gt;&lt;font size=&#39;1&#39;&gt;treetalker&lt;/font&gt;&lt;/p&gt;
 &lt;p&gt;不知道其他人怎么想，但当我第一次打开页面时，我看到背景图是一个穿着溜冰鞋的孩子脸朝下摔在结冰的池塘上——而在“美国能为你做什么？”这个问题下方，搜索框里预填的文字写着“试试‘我该如何投资孩子的未来？’”。&lt;/p&gt;
 &lt;p&gt;要是我说这没概括过去10到12年的状况，那才怪了。&lt;/p&gt;
-&lt;hr&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>2026 10 01 HackerNews</title>
-      <link>https://supertechfans.com/cn/post/2026-10-01-HackerNews/</link>
-      <pubDate>Thu, 01 Oct 2026 09:18:31 +0800</pubDate>
-      
-      <guid>https://supertechfans.com/cn/post/2026-10-01-HackerNews/</guid>
-      <description>&lt;h1 id=&#34;2026-10-01-hacker-news-top-stories&#34;&gt;
-  2026-10-01 Hacker News Top Stories
-  &lt;a class=&#34;anchor&#34; href=&#34;#2026-10-01-hacker-news-top-stories&#34;&gt;#&lt;/a&gt;
-&lt;/h1&gt;
-&lt;ol&gt;
-&lt;li&gt;OpenAI发布GPT-6.1 Sol，性能接近GPT-6 Astra但价格仅为后者的五分之一，在编码、专业工作等基准测试中表现优异，事实性错误率降低约32%。&lt;/li&gt;
-&lt;li&gt;livenerf是一个长期运行的基准测试项目，通过冻结提示词、固定CLI版本和永久保留原始日志来检测前沿模型发布后是否悄悄变差，目前正在跟踪Claude Opus 5.5的表现。&lt;/li&gt;
-&lt;li&gt;OpenAI 发布了名为“dots”的智能体产品，定位为始终在线、能力强大的 AI 代理，由 GPT-6 Astra 驱动。&lt;/li&gt;
-&lt;li&gt;Pi平台最初不支持MCP，但发现其核心需求与MCP相似后将其纳入核心功能，并介绍了Codemode机制以在更可信的环境中协调工具调用。&lt;/li&gt;
-&lt;li&gt;一位波兰作者以本国视角描绘2026年9月的全球多重危机：美以对伊朗开战后霍尔木兹海峡被封锁，布伦特原油升至每桶108美元，燃料、食品、供暖三条路径传导冲击，全球饥饿人口或新增4500万。&lt;/li&gt;
-&lt;li&gt;一个实时太空追踪与可视化网页展示地球轨道及太阳系内约19,890颗在轨卫星和837个太阳系天体的实时位置与轨道信息，支持拖拽旋转、滚轮缩放和点击查看天体信息。&lt;/li&gt;
-&lt;li&gt;美国佛蒙特州通过推广家用电池系统构建&amp;quot;虚拟电厂&amp;quot;，已有超过5500户参与，聚合形成约110兆瓦的容量，相当于一座小型天然气发电厂，已成为该州最大电力来源。&lt;/li&gt;
-&lt;li&gt;中国AI实验室在推理优化方面的突破（如DeepSeek的MLA架构压缩KV缓存约15倍）被西方公司采用，Anthropic和OpenAI低调发布采用这些优化的新模型，缓存读取价格大幅下降60%-80%。&lt;/li&gt;
-&lt;li&gt;Tcl/Tk 9.1.0发布，新增unicode命令、timer命令、lfilter命令等，支持无障碍屏幕阅读器、双向文本/RTL，新增ttk::toggleswitch小部件和tk attribtable命令。&lt;/li&gt;
-&lt;li&gt;美国邮政检查局联合联邦机构关闭了销售假邮资标签的网站 LabelsBank.com，并起诉其运营者。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&#34;1--gpt-61-sol以五分之一的价格提供接近-astra-的智能水平gpt-61-sol-near-astra-intelligence-for-a-fifth-of-the-price&#34;&gt;
-  1.  GPT 6.1 Sol：以五分之一的价格提供接近 Astra 的智能水平(GPT 6.1 Sol: Near-Astra intelligence for a fifth of the price)
-  &lt;a class=&#34;anchor&#34; href=&#34;#1--gpt-61-sol%e4%bb%a5%e4%ba%94%e5%88%86%e4%b9%8b%e4%b8%80%e7%9a%84%e4%bb%b7%e6%a0%bc%e6%8f%90%e4%be%9b%e6%8e%a5%e8%bf%91-astra-%e7%9a%84%e6%99%ba%e8%83%bd%e6%b0%b4%e5%b9%b3gpt-61-sol-near-astra-intelligence-for-a-fifth-of-the-price&#34;&gt;#&lt;/a&gt;
-&lt;/h2&gt;
-&lt;p&gt;
-  &lt;a href=&#34;https://openai.com/index/introducing-gpt-6-1-sol/&#34;&gt;https://openai.com/index/introducing-gpt-6-1-sol/&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;OpenAI 发布了 GPT-6.1 Sol，这是 GPT-6 Sol 的升级版，在编码、专业工作、计算机使用、科学研究和事实性等方面均有显著提升，性能接近 GPT-6 Astra，但价格仅为后者的五分之一。&lt;/p&gt;
-&lt;p&gt;在多项基准测试中，GPT-6.1 Sol 表现优异：在 DeepSWE v1.1 编码测试中追平 Astra，成本约为其五分之一；在 GDP.pdf 专业文档问答中超过 Opus 5.5；在 AutomationBench 多步骤工作流测试中得分高于 Opus 5.5；在 OSWorld 2.0 计算机使用测试中比 GPT-6 Sol 提升 7 个百分点；在 Terminal-Bench Science 0.1 科学研究测试中得分翻倍以上。此外，其事实性错误率在低推理强度下比 GPT-6 Sol 降低约 32%。&lt;/p&gt;
-&lt;p&gt;安全方面，GPT-6.1 Sol 在透明度、遵循用户意图和安全约束方面均有改进，失败率更低。该模型即日起在 ChatGPT Work 和 Codex 中可用，开发者可通过 API（gpt-6.1-sol）访问，标准定价为输入每百万 token 2 美元、缓存输入 0.10 美元、输出 10 美元。未来几天还将推出生成速度提升 8 倍的 Ultrafast 版本。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;hn-热度-1049-points--评论-930-comments--作者crorella--1-day-ago&#34;&gt;
-  HN 热度 1049 points | 评论 930 comments | 作者：crorella | 1 day ago
-  &lt;a class=&#34;anchor&#34; href=&#34;#hn-%e7%83%ad%e5%ba%a6-1049-points--%e8%af%84%e8%ae%ba-930-comments--%e4%bd%9c%e8%80%85crorella--1-day-ago&#34;&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;p&gt;
-  &lt;a href=&#34;https://news.ycombinator.com/item?id=49896586&#34;&gt;https://news.ycombinator.com/item?id=49896586&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;6.1-Sol 和 Astra 在编码评估中优于 Opus 5.5，且 API 价格更便宜，6.1-Sol 比 Sonnet 5.5 便宜且更聪明&lt;/li&gt;
-&lt;li&gt;GPT-6 模型&amp;quot;低主动性&amp;quot;是优点，不会过度发挥超出提示要求&lt;/li&gt;
-&lt;li&gt;GPT 在研究中表现懒惰，经常遗漏明显信息，需要多次要求重新检查&lt;/li&gt;
-&lt;li&gt;缓存输入成本降至每百万 token 0.10 美元，比标准输入便宜 95%，比 GPT-6 Sol 便宜 50%，是重大卖点&lt;/li&gt;
-&lt;li&gt;Codex 中 token 消耗极快，频繁压缩上下文，$100 订阅很快用完&lt;/li&gt;
-&lt;li&gt;Astra 比 6.1 Sol 消耗快约 7 倍，Sol 几乎无限使用而 Astra 一天就用完&lt;/li&gt;
-&lt;li&gt;使用量重置机制有问题：使用银行重置后每周额度减少约 80%，且重置日期不变&lt;/li&gt;
-&lt;li&gt;有人反驳&amp;quot;使用方式不对&amp;quot;的指责，认为付费用户有权利抱怨产品问题&lt;/li&gt;
-&lt;li&gt;上下文窗口 275k 太小，Claude 可支持到 700k，但 GPT 的 256k 上下文利用效率高于 Claude 的 1M&lt;/li&gt;
-&lt;li&gt;提示词和任务定义是影响 LLM 性能的主要变量，不会用 LLM 的人容易浪费 token&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;2-livenerfopus-55-是否已被削弱-livenerf-has-opus-55-been-nerfed-yet&#34;&gt;
-  2. Livenerf：Opus 5.5 是否已被削弱？ (Livenerf: Has Opus 5.5 been nerfed yet?)
-  &lt;a class=&#34;anchor&#34; href=&#34;#2-livenerfopus-55-%e6%98%af%e5%90%a6%e5%b7%b2%e8%a2%ab%e5%89%8a%e5%bc%b1-livenerf-has-opus-55-been-nerfed-yet&#34;&gt;#&lt;/a&gt;
-&lt;/h2&gt;
-&lt;p&gt;
-  &lt;a href=&#34;https://github.com/ninjahawk/livenerf&#34;&gt;https://github.com/ninjahawk/livenerf&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;livenerf 是一个长期运行的、尽可能确定性的基准测试项目，用于检测前沿模型在发布后是否悄悄变差。项目背景是：有传言称 Anthropic 会在模型发布数天或数周后“削弱”模型，但此前没有干净的 day-0 基线可供验证。Claude Opus 5.5 于 2026-09-22 发布，项目从发布当天开始计时并持续运行。当前 v0 版本通过无 API 密钥的 headless Claude Code（claude -p）在 Claude Max 订阅上运行。由于无法使模型完全确定性（采样参数不可用、思考无法关闭），项目通过冻结提示词、固定 CLI 版本、精确评分器和永久保留原始日志来保证其他环节的确定性，并基于 Inspect 框架和 Anthropic 的误差棒统计方法，对数千个样本进行统计漂移检测。&lt;/p&gt;
-&lt;p&gt;状态：系列正在运行中。第 1 天为 2026-09-24 22:10 UTC，即发布后约 2.5 天。每天运行一次，共 30 天：第 1-10 天为基线期，之后有两个 10 天窗口，首次可能判定时间约为 2026-10-24。第 20 天后出现第一行结果。面板已按预注册协议（v2）选择、确认、锁定并验证。截至 2026-09-30，已收集 7/30 天数据（基线 7/10），无遗漏，全部 7 天均在相同 harness 哈希和固定 CLI 版本下运行完整 90 个样本。第 5 天有一次预算保护被覆盖的情况（见偏差日志）。&lt;/p&gt;
-&lt;p&gt;面板构成：从 GPQA Diamond、MMLU-Pro、competition-math 和 AIME 2025-26 中筛选了 2,336 道题，每道题采样 4 次。Opus 5.5 首次尝试正确率约 93%，97% 的题目要么全对要么全错，78 道“有时对”的题目组成了最终面板。选择偏差已被测量：因“有时对”而被选中的题目在新鲜样本上的通过率从 54.7% 上升到 62.0%，功效计算使用了新鲜样本比率。&lt;/p&gt;
-&lt;p&gt;检测能力：每天运行一次完整面板，可检测每 10 天窗口约 7.5 个百分点的准确率变化，约占每周计划的 3.6%。验证（docs/VALIDATION.md）通过了预注册标准。降低推理努力在 token 数上比准确率更明显：低努力模式输出 token 减少 62%，准确率下降 8.3 ± 4.5 点；中等努力模式 token 减少 26%，准确率下降 4.2 ± 3.9 点。局限性：在 99% 置信度下，将 Opus 5 替换为 Opus 5.5 无法被区分（-3.8 ± 6.3 点，token 减少 23%）。该工具无法在验证样本量内检测同系列模型替换。10 天窗口的样本量约为其 2.5 倍，但尚未证明足够。&lt;/p&gt;
-&lt;p&gt;问题质量：对 78 道题（加上后来排除的 2 道）进行仅报告审计，发现 8 个答案键疑似错误，30 道题存在歧义。这符合强模型“有时对”的题目预期，未删除任何题目。预注册的敏感性分析会在不包含这些题目的情况下重新运行结果。服务路径：安全分类器有时会用 Opus 5 回答或拒绝生物和部分数学问题，这些样本会被拒绝并计数，相关问题会被排除。&lt;/p&gt;
-&lt;p&gt;结果：该仓库主要维护一个运行中的 10 天表格，展示 Opus 5.5 在面板上的表现。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;hn-热度-879-points--评论-374-comments--作者bryan0--1-day-ago&#34;&gt;
-  HN 热度 879 points | 评论 374 comments | 作者：bryan0 | 1 day ago
-  &lt;a class=&#34;anchor&#34; href=&#34;#hn-%e7%83%ad%e5%ba%a6-879-points--%e8%af%84%e8%ae%ba-374-comments--%e4%bd%9c%e8%80%85bryan0--1-day-ago&#34;&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;p&gt;
-  &lt;a href=&#34;https://news.ycombinator.com/item?id=49901736&#34;&gt;https://news.ycombinator.com/item?id=49901736&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;有专门的 Nerf Bench 在发布日测试模型，偏差超 10% 视为削弱，曾检测出 Opus 4.6 退化，目前跟踪 Opus 5.5 和 GPT-6 Astra。&lt;/li&gt;
-&lt;li&gt;用户感知到的削弱往往多于实际发生，可能源于蜜月效应或期望不断提高；即使堆栈完全不变，用户仍会抱怨模型被削弱。&lt;/li&gt;
-&lt;li&gt;用跑鞋类比：每年新款都被抱怨不如旧款，但实际只是少数不满用户发声，沉默多数满意；新鞋感觉更软是因为旧鞋泡沫老化。&lt;/li&gt;
-&lt;li&gt;产品质量缩水是普遍现象（如缩水式通胀、skimpflation），公司可能逐步降低质量，用户对小幅下降不敏感，但大幅下降会被察觉；有观点认为公司不削减成本/质量会面临股东诉讼压力，但此类诉讼是否常见存疑。&lt;/li&gt;
-&lt;li&gt;游戏行业也存在类似的质量下降问题。&lt;/li&gt;
-&lt;li&gt;有用户对 Claude 整体满意，但&amp;quot;Claudish&amp;quot;风格曾让其想转向 OpenAI，5.5 版本留住了他。&lt;/li&gt;
-&lt;li&gt;具体产品案例：ASICS Cumulus 系列曾发生重大设计变化，宜家 Billy 书柜后期用料变差，Amazon Basics 光纤曾直接发 Corning 原厂货，其镍氢电池曾与 Eneloop 相当但后来质量下降。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;3-dots-始终在线的智能体-dots-always-on-agents&#34;&gt;
-  3. Dots: 始终在线的智能体 (Dots: Always-on agents)
-  &lt;a class=&#34;anchor&#34; href=&#34;#3-dots-%e5%a7%8b%e7%bb%88%e5%9c%a8%e7%ba%bf%e7%9a%84%e6%99%ba%e8%83%bd%e4%bd%93-dots-always-on-agents&#34;&gt;#&lt;/a&gt;
-&lt;/h2&gt;
-&lt;p&gt;
-  &lt;a href=&#34;https://openai.com/index/introducing-dots/&#34;&gt;https://openai.com/index/introducing-dots/&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;OpenAI 发布了名为“dots”的智能体产品，定位为始终在线、能力强大的 AI 代理，由 GPT-6 Astra 驱动。每个 dot 拥有独立的云计算机，可连接超过 4000 个应用，并能通过 ChatGPT、Slack、Teams 等渠道与用户交互。&lt;/p&gt;
-&lt;p&gt;dots 可以独立完成复杂任务，自动学习用户的偏好、思维方式和质量标准，主动处理工作并在需要时请求批准。用户可通过活动视图监督其工作，并设置访问权限、自定义规则和内置安全防护。dots 支持连接用户自己的电脑，也可调用其他设备。&lt;/p&gt;
-&lt;p&gt;实际应用场景包括：开发者让 dot 监控反馈、修复 bug 并提交完整 PR；产品负责人让 dot 根据范围变化调整发布材料；科学家让 dot 更新数据分析；销售负责人让 dot 跟进合同与测试；内容创作者让 dot 剪辑片段、撰写帖子。&lt;/p&gt;
-&lt;p&gt;目前 dots 已开始向 Pro、Business Premium 和 Enterprise 用户逐步推出，并计划推出面向企业内部的专业版 dots，支持身份管理、深层系统集成和 IT 配置。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;hn-热度-748-points--评论-629-comments--作者alvis--1-day-ago&#34;&gt;
-  HN 热度 748 points | 评论 629 comments | 作者：alvis | 1 day ago
-  &lt;a class=&#34;anchor&#34; href=&#34;#hn-%e7%83%ad%e5%ba%a6-748-points--%e8%af%84%e8%ae%ba-629-comments--%e4%bd%9c%e8%80%85alvis--1-day-ago&#34;&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;p&gt;
-  &lt;a href=&#34;https://news.ycombinator.com/item?id=49896604&#34;&gt;https://news.ycombinator.com/item?id=49896604&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;始终在线的智能体协作很有价值，能实现领域专家分工且不超载上下文窗口&lt;/li&gt;
-&lt;li&gt;领域专属智能体能建立良好信任边界，避免个人与业务信息混杂&lt;/li&gt;
-&lt;li&gt;结合云端智能体对开发很强大，解决了多工作流并行问题，但端到端速度较慢且推理开销增加 2-3 倍&lt;/li&gt;
-&lt;li&gt;有人自建了类似系统：两个&amp;quot;AI 员工&amp;quot;常驻运行，负责客服工单、缺陷分类、编码调试、服务器监控和发布流程&lt;/li&gt;
-&lt;li&gt;无法相信没有人工严格监督就信任 AI 做任何事&lt;/li&gt;
-&lt;li&gt;两年前 AI 需要 99.8% 的监督，但人类同样需要监督，AI 的监督成本正接近甚至低于人类员工&lt;/li&gt;
-&lt;li&gt;把 AI 当作需要管理的员工而非确定性软件，能得到更好效果——AI 和人类一样会分心犯错&lt;/li&gt;
-&lt;li&gt;可以用两个不同模型互相验证或批评来提升可信度，但越狱问题仍令人担忧&lt;/li&gt;
-&lt;li&gt;即使人在监督，使用 AI 输出本身就是在被 AI 引导，AI 实际上已在指导人类行动&lt;/li&gt;
-&lt;li&gt;信任是逐步挣来的：从最小权限开始，反复检查无误后再逐步放手，AI 并不比人类员工更容易出错&lt;/li&gt;
-&lt;li&gt;可以轻松指示智能体只做调查和方案提议，交由人类审查后执行&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;4-你说没有-mcp-you-said-no-mcp&#34;&gt;
-  4. 你说没有 MCP (You said no MCP)
-  &lt;a class=&#34;anchor&#34; href=&#34;#4-%e4%bd%a0%e8%af%b4%e6%b2%a1%e6%9c%89-mcp-you-said-no-mcp&#34;&gt;#&lt;/a&gt;
-&lt;/h2&gt;
-&lt;p&gt;
-  &lt;a href=&#34;https://earendil.com/posts/you-said-no-mcp/&#34;&gt;https://earendil.com/posts/you-said-no-mcp/&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;这篇文章讨论了 Pi 平台现在支持 MCP（多种计算工具协议）的原因，以及这一改变背后的思考过程和技术细节。&lt;/p&gt;
-&lt;p&gt;首先，文章指出过去 Pi 明确表示不支持 MCP，但随着时间的推移，MCP 发生了变化，Pi 团队也开始重新考虑这个决策。虽然 MCP 的某些方面仍存在问题，例如组合性差，但团队认为其核心需求与 Pi 的需求相似，都是需要一个可以进行操作的沙箱环境，因此决定将 MCP 纳入核心功能。&lt;/p&gt;
-&lt;p&gt;接下来，文章分析了 MCP 的变化，不仅是 MCP 本身的改进，还包括 Pi 为支持 MCP 所做的调整。Pi 的扩展生态系统使得 MCP 本可以作为一个扩展功能存在，但最终选择将其集成到核心功能中，是因为这样能够促进对工具的更好管理和使用。&lt;/p&gt;
-&lt;p&gt;文章还提到，MCP 的核心问题在于许多 MCP 服务器仍然依赖于低效的工具返回格式，缺乏结构化的数据返回和文档描述的智能发现。Pi 团队希望通过将 MCP 与现代大语言模型（LLM）结合，来解决这些问题。&lt;/p&gt;
-&lt;p&gt;接下来，文章介绍了 Codemode 的概念。Codemode 是一种机制，能够在更可信的环境中协调和执行工具调用。与传统的 MCP 扩展不同，Codemode 运行在 “工具执行环境” 中，允许使用 JavaScript 来组合工具调用并灵活控制执行顺序。这种方式不仅提高了工具调用的效率，还能够保持会话状态。&lt;/p&gt;
-&lt;p&gt;最后，文章通过一个例子展示了 Codemode 的应用场景，例如在使用某个提供商的 “Jev” 功能时，可以在 Pi 中执行复杂的分析任务，从而优化工具的使用。文章总结道，Pi 团队将继续关注 MCP 和 Codemode 的未来发展，以适应不断变化的技术。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;hn-热度-606-points--评论-336-comments--作者yarapavan--15-hours-ago&#34;&gt;
-  HN 热度 606 points | 评论 336 comments | 作者：yarapavan | 15 hours ago
-  &lt;a class=&#34;anchor&#34; href=&#34;#hn-%e7%83%ad%e5%ba%a6-606-points--%e8%af%84%e8%ae%ba-336-comments--%e4%bd%9c%e8%80%85yarapavan--15-hours-ago&#34;&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;p&gt;
-  &lt;a href=&#34;https://news.ycombinator.com/item?id=49906637&#34;&gt;https://news.ycombinator.com/item?id=49906637&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;MCP 在 macOS 应用中可用自然语言配置，比从零编码更可靠&lt;/li&gt;
-&lt;li&gt;给 Claude API key 即可控制 Home Assistant，无需 MCP&lt;/li&gt;
-&lt;li&gt;MCP 能节省 token，因为可以精确修改而非发送整个 YAML&lt;/li&gt;
-&lt;li&gt;MCP 主要价值在于安全，避免 agent 直接接触 API key&lt;/li&gt;
-&lt;li&gt;安全优势可通过 API 层或代理实现，MCP 并非必需&lt;/li&gt;
-&lt;li&gt;将 API key 放在 MCP 服务器并最小权限，用 Tailscale 保护&lt;/li&gt;
-&lt;li&gt;agent 不直接认证，由 harness 处理&lt;/li&gt;
-&lt;li&gt;用不同 key，MCP 服务器限于本地网络&lt;/li&gt;
-&lt;li&gt;给 key 即可，否则给另一个 MCP&lt;/li&gt;
-&lt;li&gt;Claude 让 HA 配置更简单，无需学习&lt;/li&gt;
-&lt;li&gt;MCP 不需要强大模型，本地 Qwen 即可，但复杂任务需要 Claude&lt;/li&gt;
-&lt;li&gt;MCP 是否有用取决于模型能力提升？&lt;/li&gt;
-&lt;li&gt;提供 API key 和文档，用户用文本交互，llm.txt 包含指令&lt;/li&gt;
-&lt;li&gt;想重新用 HA，agent 可减少复杂性&lt;/li&gt;
-&lt;li&gt;Claude 开发 HA 很好，能自然语言改配置&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;5-2026-年-9-月一个波兰人眼中的今日世界-september-2026-the-world-today-as-seen-by-one-polish-guy&#34;&gt;
-  5. 2026 年 9 月：一个波兰人眼中的今日世界 (September 2026: The world today, as seen by one Polish guy)
-  &lt;a class=&#34;anchor&#34; href=&#34;#5-2026-%e5%b9%b4-9-%e6%9c%88%e4%b8%80%e4%b8%aa%e6%b3%a2%e5%85%b0%e4%ba%ba%e7%9c%bc%e4%b8%ad%e7%9a%84%e4%bb%8a%e6%97%a5%e4%b8%96%e7%95%8c-september-2026-the-world-today-as-seen-by-one-polish-guy&#34;&gt;#&lt;/a&gt;
-&lt;/h2&gt;
-&lt;p&gt;
-  &lt;a href=&#34;https://tomwojcik.com/posts/2026-09-21/september-2026-the-world-today/&#34;&gt;https://tomwojcik.com/posts/2026-09-21/september-2026-the-world-today/&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;2026 年 9 月，一位波兰作者以本国视角撰文，描绘了全球多重危机相互交织的图景。文章核心是：自 2026 年 2 月底美以对伊朗开战后，伊朗于 3 月起封锁霍尔木兹海峡，导致全球石油供应遭遇史上最大中断，布伦特原油在 9 月 24 日触及每桶 108 美元。这一事件通过燃料、食品和供暖三条路径传导至全球。&lt;/p&gt;
-&lt;p&gt;文章指出，俄乌冲突中乌克兰无人机频繁袭击俄炼油厂，推高美国柴油价格；法国因价格上限机制失效，约 15% 的加油站断供；化肥短缺将导致 2026 至 2027 年粮食减产，全球饥饿人口可能新增 4500 万。欧洲马铃薯因种植面积减少和干旱歉收 25%，比利时加工用马铃薯价格从每吨 10 欧元飙升至 150 欧元。&lt;/p&gt;
-&lt;p&gt;作者强调，世界并非走向终结，但过去三十年各国用依赖替代缓冲——用供应商替代储备、用保证替代军队——当多个依赖同时失效时，危机便叠加爆发。文章以“一个波兰人眼中的世界”为视角，串联起从波斯湾到欧洲农田、从油轮运费暴涨 2300% 到本国冬季供暖的完整因果链，揭示地缘政治、能源、粮食与金融市场的深度互联。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;hn-热度-486-points--评论-362-comments--作者marjancek--17-hours-ago&#34;&gt;
-  HN 热度 486 points | 评论 362 comments | 作者：marjancek | 17 hours ago
-  &lt;a class=&#34;anchor&#34; href=&#34;#hn-%e7%83%ad%e5%ba%a6-486-points--%e8%af%84%e8%ae%ba-362-comments--%e4%bd%9c%e8%80%85marjancek--17-hours-ago&#34;&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;p&gt;
-  &lt;a href=&#34;https://news.ycombinator.com/item?id=49905487&#34;&gt;https://news.ycombinator.com/item?id=49905487&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;许多波兰人认为当前是波兰“黄金时代”：经济繁荣、安全、基础设施改善，远超历史任何时期。&lt;/li&gt;
-&lt;li&gt;有人批评文章过度悲观，乌克兰战争证明俄罗斯虚弱，能源冲击加速可再生能源转型。&lt;/li&gt;
-&lt;li&gt;讨论伊朗与霍尔木兹海峡冲突：有人认为美国卷入是战略失误，伊朗控制海峡对全球能源造成持续压力。&lt;/li&gt;
-&lt;li&gt;美国石油公司短期获利巨大，但长期可能加速全球摆脱石油依赖。&lt;/li&gt;
-&lt;li&gt;有人指出波兰公共部门（法院、军队）仍显过时与腐败，与私营部门的现代化形成鲜明对比。&lt;/li&gt;
-&lt;li&gt;历史创伤（苏联时期短缺、战争）让东欧人更易悲观，而西方人有强烈正常化偏见。&lt;/li&gt;
-&lt;li&gt;部分人担忧俄罗斯无人机已进入东欧，美国放松制裁，暗示风险仍在上升。&lt;/li&gt;
-&lt;li&gt;整体上，帖子引发乐观与悲观的对立：本地生活改善 vs 全球地缘政治动荡，多数人承认风险真实但不必恐慌。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;6-展示-hn实时太阳系包含-526-万颗小行星及所有追踪到的卫星-show-hn-real-time-solar-system-with-526k-asteroids-and-all-tracked-satellites&#34;&gt;
-  6. 展示 HN：实时太阳系——包含 52.6 万颗小行星及所有追踪到的卫星 (Show HN: Real-time Solar System with 526k asteroids and all tracked satellites)
-  &lt;a class=&#34;anchor&#34; href=&#34;#6-%e5%b1%95%e7%a4%ba-hn%e5%ae%9e%e6%97%b6%e5%a4%aa%e9%98%b3%e7%b3%bb%e5%8c%85%e5%90%ab-526-%e4%b8%87%e9%a2%97%e5%b0%8f%e8%a1%8c%e6%98%9f%e5%8f%8a%e6%89%80%e6%9c%89%e8%bf%bd%e8%b8%aa%e5%88%b0%e7%9a%84%e5%8d%ab%e6%98%9f-show-hn-real-time-solar-system-with-526k-asteroids-and-all-tracked-satellites&#34;&gt;#&lt;/a&gt;
-&lt;/h2&gt;
-&lt;p&gt;
-  &lt;a href=&#34;https://space.bl2.net/&#34;&gt;https://space.bl2.net/&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;这是一个实时太空追踪与可视化网页，展示地球轨道及太阳系内各类天体的实时位置与轨道信息。&lt;/p&gt;
-&lt;p&gt;页面核心内容：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;实时追踪约 19,890 颗在轨卫星，以及 837 个太阳系天体&lt;/li&gt;
-&lt;li&gt;数据来源包括 CelesTrak 和 SatNOGS 数据库，更新于 2026 年 9 月 30 日&lt;/li&gt;
-&lt;li&gt;可视化范围涵盖地球、太阳系行星及其卫星、矮行星、小行星、彗星、柯伊伯带、奥尔特云等&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;主要分类：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;行星与卫星：包括地球、火星、木星、土星、天王星、海王星等及其卫星&lt;/li&gt;
-&lt;li&gt;小行星与彗星：已知小行星（如阿波菲斯、贝努）、605 颗彗星、星际访客（奥陌陌、鲍里索夫等）&lt;/li&gt;
-&lt;li&gt;卫星与航天器：包括星链（11,127 颗）、OneWeb、千帆星座、GPS/北斗等导航卫星、地球静止轨道卫星、气象卫星等&lt;/li&gt;
-&lt;li&gt;空间碎片：包括风云一号 C 碎片、宇宙 2251 与铱星 33 碰撞碎片等&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;交互功能：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;拖拽旋转、滚轮缩放、点击查看天体信息与轨道&lt;/li&gt;
-&lt;li&gt;WASD 飞行、R/F 升降、Q/E 转向，Shift 加速&lt;/li&gt;
-&lt;li&gt;可切换时间流速（1 秒/秒），支持实时或自定义时间&lt;/li&gt;
-&lt;li&gt;图层管理：按组显示/隐藏轨道，点击组名高亮&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;页面还显示小行星数据加载进度（20.8/29.5 MB，70%），以及当前 UTC 时间（2026-10-01 00:38:50）。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;hn-热度-377-points--评论-104-comments--作者wanick--1-day-ago&#34;&gt;
-  HN 热度 377 points | 评论 104 comments | 作者：wanick | 1 day ago
-  &lt;a class=&#34;anchor&#34; href=&#34;#hn-%e7%83%ad%e5%ba%a6-377-points--%e8%af%84%e8%ae%ba-104-comments--%e4%bd%9c%e8%80%85wanick--1-day-ago&#34;&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;p&gt;
-  &lt;a href=&#34;https://news.ycombinator.com/item?id=49898778&#34;&gt;https://news.ycombinator.com/item?id=49898778&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;渲染用 WebGL2，轨道推算在 web workers 中运行，性能出色，普通笔记本也能流畅处理数十万对象。&lt;/li&gt;
-&lt;li&gt;用户赞叹小行星带真实密度可视化、地球周围卫星密度（尤其 Starlink 占比极高），以及时间滑块前后回溯功能。&lt;/li&gt;
-&lt;li&gt;有人指出卫星点并非真实尺寸（否则几乎看不见），作者已澄清距离成比例、点大小不成比例。&lt;/li&gt;
-&lt;li&gt;讨论近地小行星监测进展：NEO Surveyor、DART 任务、Vera C. Rubin 天文台等将提升预警能力。&lt;/li&gt;
-&lt;li&gt;有人对比 Celestia 等旧软件，但肯定本项目在浏览器端实时、卫星覆盖上的独特价值。&lt;/li&gt;
-&lt;li&gt;用户建议增加 VR 支持、更快缩放、移动端优化、环境音效模式，作者已响应部分改进。&lt;/li&gt;
-&lt;li&gt;有人感叹空间越来越拥挤，Starlink 占活跃卫星约 2/3 到 3/4，并讨论 Kessler 综合征风险（低轨因大气阻力风险较低）。&lt;/li&gt;
-&lt;li&gt;整体评价极高：可视化精美、性能惊人、教育意义强，适合探索轨道力学与太空现状。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;7-佛蒙特州用家用电池替代发电厂-vermont-replacing-power-plants-with-home-batteries&#34;&gt;
-  7. 佛蒙特州用家用电池替代发电厂 (Vermont replacing power plants with home batteries)
-  &lt;a class=&#34;anchor&#34; href=&#34;#7-%e4%bd%9b%e8%92%99%e7%89%b9%e5%b7%9e%e7%94%a8%e5%ae%b6%e7%94%a8%e7%94%b5%e6%b1%a0%e6%9b%bf%e4%bb%a3%e5%8f%91%e7%94%b5%e5%8e%82-vermont-replacing-power-plants-with-home-batteries&#34;&gt;#&lt;/a&gt;
-&lt;/h2&gt;
-&lt;p&gt;
-  &lt;a href=&#34;https://www.bbc.com/future/article/20260928-a-virtual-power-plant-hidden-in-vermont-homes-is-keeping-the-lights-on-during-storms&#34;&gt;https://www.bbc.com/future/article/20260928-a-virtual-power-plant-hidden-in-vermont-homes-is-keeping-the-lights-on-during-storms&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;美国佛蒙特州正通过推广家用电池系统构建“虚拟电厂”，以替代传统发电厂。该州最大电力公司 Green Mountain Power（GMP）推出项目，为居民安装家用电池，每月支付 55 美元、租期 10 年。已有超过 5500 户参与，这些电池聚合起来形成约 110 兆瓦的虚拟电厂，相当于一座小型天然气发电厂，已成为该州最大电力来源。&lt;/p&gt;
-&lt;p&gt;文章讲述了居民 Pollyanna Bladyka 的经历。她因频繁遭遇风暴导致的停电，原本打算购买 1.2 万美元的燃气发电机，后来选择租赁电池系统，自安装后再未停电。另一居民 Megan Browning 也安装了太阳能和两块电池，在附近邻居停电时她家毫无影响。&lt;/p&gt;
-&lt;p&gt;虚拟电厂将千家万户的电池、太阳能、智能恒温器等设备聚合调度，既保障家庭供电，又减少对化石燃料电厂的需求。美国目前虚拟电厂容量已超 40 吉瓦，预计 2030 年可达 160 吉瓦。佛蒙特州因极端天气增多、停电加剧，GMP 计划到 2030 年消除所有停电，甚至考虑为部分农村客户免费安装电池。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;hn-热度-374-points--评论-275-comments--作者devonnull--1-day-ago&#34;&gt;
-  HN 热度 374 points | 评论 275 comments | 作者：devonnull | 1 day ago
-  &lt;a class=&#34;anchor&#34; href=&#34;#hn-%e7%83%ad%e5%ba%a6-374-points--%e8%af%84%e8%ae%ba-275-comments--%e4%bd%9c%e8%80%85devonnull--1-day-ago&#34;&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;p&gt;
-  &lt;a href=&#34;https://news.ycombinator.com/item?id=49897993&#34;&gt;https://news.ycombinator.com/item?id=49897993&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;美国北卡州公用事业公司推出虚拟发电厂计划，每月支付约 50 美元/电池，每年最多 36 次在用电高峰时段远程控制电池放电，与太阳能配合经济上很划算&lt;/li&gt;
-&lt;li&gt;理想状态下电池电量应保持在 50%-80% 之间，36 次/年的控制权限仅用于主要峰值事件，希望未来家庭电池足够多，让可再生能源能数月不用化石燃料&lt;/li&gt;
-&lt;li&gt;电池可设置最低电量（如 20%）来应对短期停电，也可选择退出有限次数的虚拟发电厂活动&lt;/li&gt;
-&lt;li&gt;有峰值电价的地区，可配置电池在非峰值时段充电（如中午充到 90%），峰值时段（下午 1-7 点）完全不用电网电力，有天气预警时充满到 100%&lt;/li&gt;
-&lt;li&gt;电池不能完全替代发电机，但结合屋顶太阳能可覆盖大多数停电场景；发电机适合长时间停电，而电池加太阳能相当于免费燃料&lt;/li&gt;
-&lt;li&gt;如果必须二选一，优先选电池，因为电池覆盖多数停电且提供其他收益；两者兼有最佳&lt;/li&gt;
-&lt;li&gt;电池能否替代发电机取决于储能容量和停电时长，若太阳能不足或需防御多日停电，化石发电机仍是必要补充&lt;/li&gt;
-&lt;li&gt;不装太阳能也可行，电池可仅用于时间转移：低价时段充电、高峰时段放电，降低电费&lt;/li&gt;
-&lt;li&gt;有社区太阳能项目可考虑，如佛蒙特州已立法允许阳台太阳能&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;8-ai-竞赛刚刚变得尴尬-the-ai-race-just-got-awkward&#34;&gt;
-  8. AI 竞赛刚刚变得尴尬 (The AI Race Just Got Awkward)
-  &lt;a class=&#34;anchor&#34; href=&#34;#8-ai-%e7%ab%9e%e8%b5%9b%e5%88%9a%e5%88%9a%e5%8f%98%e5%be%97%e5%b0%b4%e5%b0%ac-the-ai-race-just-got-awkward&#34;&gt;#&lt;/a&gt;
-&lt;/h2&gt;
-&lt;p&gt;
-  &lt;a href=&#34;https://insufferable.dev/posts/the-ai-race-just-got-awkward/&#34;&gt;https://insufferable.dev/posts/the-ai-race-just-got-awkward/&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;这篇文章讨论了中国 AI 实验室在推理优化方面的突破如何被西方公司采用。核心内容包括：&lt;/p&gt;
-&lt;p&gt;DeepSeek 率先发布了 MLA 架构，将 KV 缓存压缩约 15 倍，随后又推出压缩稀疏注意力（CSA）和重度压缩注意力（HCA）。最新版本 DeepSeek-V4.1-Flash 通过 CSA2、跨层缓存复用、因果编码器-解码器架构和 FP4 缓存，将全局 KV 缓存降至每 token 890 字节。&lt;/p&gt;
-&lt;p&gt;这一突破意义重大，因为长上下文模型推理的最大成本之一就是 GPU 显存中保存缓存的开销。由于先进 GPU 获取受限，中国实验室被迫将性能优化作为首要目标，成果显著。&lt;/p&gt;
-&lt;p&gt;西方 AI 公司因此获得了极高的推理利润率。Anthropic 和 OpenAI 都发布了采用这些优化的顶级模型：Claude Opus 5.5 和 GPT-6.1 Sol，但都选择低调发布，似乎对&amp;quot;借鉴&amp;quot;感到尴尬。缓存读取价格大幅下降——Opus 5.5 比 Opus 5 降低 60%，GPT-6.1 Sol 比 GPT-5.6 Sol 降低 80%。&lt;/p&gt;
-&lt;p&gt;作者感叹中国实验室免费分享这些突破，为西方亏损的实验室提供了救命稻草，却不解其动机。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;hn-热度-373-points--评论-405-comments--作者allisdust--9-hours-ago&#34;&gt;
-  HN 热度 373 points | 评论 405 comments | 作者：allisdust | 9 hours ago
-  &lt;a class=&#34;anchor&#34; href=&#34;#hn-%e7%83%ad%e5%ba%a6-373-points--%e8%af%84%e8%ae%ba-405-comments--%e4%bd%9c%e8%80%85allisdust--9-hours-ago&#34;&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;p&gt;
-  &lt;a href=&#34;https://news.ycombinator.com/item?id=49910553&#34;&gt;https://news.ycombinator.com/item?id=49910553&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;许多人批评 Anthropic 虚伪：自己靠大规模抓取人类作品训练模型，却抱怨他人蒸馏自己的模型。&lt;/li&gt;
-&lt;li&gt;有人认为蒸馏只是“最后 5% 的工作”，真正大量资源投入在预训练，但反对者指出原始内容创作才是真正的重活。&lt;/li&gt;
-&lt;li&gt;中国开放权重模型被赞扬免费惠及全球，而西方闭源模型却试图建立护城河，形成对比。&lt;/li&gt;
-&lt;li&gt;蒸馏被看作对资本主义“围墙花园”的打击，模型价值难以被永久锁定。&lt;/li&gt;
-&lt;li&gt;讨论延伸到知识本身是人类共同成果，任何公司都无权独占或抱怨被“抄袭”。&lt;/li&gt;
-&lt;li&gt;有人指出西方实验室（如 DeepMind、xAI）也互相蒸馏。&lt;/li&gt;
-&lt;li&gt;整体情绪偏向嘲讽 Anthropic 的双标，支持开放模型加速进步，并质疑闭源商业模式的可持续性。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;9-tcltk-91-发布公告-tcltk-91&#34;&gt;
-  9. Tcl/Tk 9.1 发布公告 (Tcl/Tk 9.1)
-  &lt;a class=&#34;anchor&#34; href=&#34;#9-tcltk-91-%e5%8f%91%e5%b8%83%e5%85%ac%e5%91%8a-tcltk-91&#34;&gt;#&lt;/a&gt;
-&lt;/h2&gt;
-&lt;p&gt;
-  &lt;a href=&#34;https://www.tcl-lang.org/software/tcltk/9.1.html&#34;&gt;https://www.tcl-lang.org/software/tcltk/9.1.html&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;这个网页是 Tcl/Tk 9.1 版本的官方发布说明页面。Tcl/Tk 9.1.0 是当前开发版本，计划于 2026 年 9 月发布稳定版，页面提供了源代码下载链接，并重点介绍了 Tcl 9.1 和 Tk 9.1 的新增功能。&lt;/p&gt;
-&lt;p&gt;Tcl 9.1 的主要新特性包括：新增 unicode 命令支持 Unicode 规范化；新增 C 例程 Tcl_UtfToNormalized*；新增 timer 命令提供单调时钟和微秒级分辨率；新增 lfilter 命令用于列表筛选；新增 interp set 命令访问子解释器变量；subst 命令新增-backslashes、-commands、-variables 选项；switch 命令新增-integer 选项；大量 C99 数学函数可作为 expr 函数使用；应用程序需调用初始化例程；新增多个 C 例程如 Tcl_IsEmpty、Tcl_GetEncodingNameForUser 等；改进列表内部机制以提升大列表内存效率；扩展 64 位大小支持；macOS 上支持不区分大小写的文件系统路径；Windows 上改进了 auto_execok 和 exec 搜索；改进了脚本库和编码的搜索方式。&lt;/p&gt;
-&lt;p&gt;Tk 9.1 的主要新特性包括：无障碍屏幕阅读器支持；初步支持双向文本/RTL 语言；新增 ttk::toggleswitch 小部件；新增 tk attribtable 命令；改进了 Aqua 上的 send 命令；处理负屏幕距离；扩展 ttk::treeview 和 ttk::notebook 的状态；改进 Tk_CanvasTextInfo；支持标签旋转文本；将消息框和对话框限制在物理屏幕宽度内；改进列表框选择颜色；移除了对 Windows XP 外观的过时支持。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;hn-热度-296-points--评论-141-comments--作者dmux--1-day-ago&#34;&gt;
-  HN 热度 296 points | 评论 141 comments | 作者：dmux | 1 day ago
-  &lt;a class=&#34;anchor&#34; href=&#34;#hn-%e7%83%ad%e5%ba%a6-296-points--%e8%af%84%e8%ae%ba-141-comments--%e4%bd%9c%e8%80%85dmux--1-day-ago&#34;&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;p&gt;
-  &lt;a href=&#34;https://news.ycombinator.com/item?id=49896712&#34;&gt;https://news.ycombinator.com/item?id=49896712&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;对 Tcl 有特殊喜爱，因其古怪和动态字符串特性，适合玩耍但职业使用需谨慎。&lt;/li&gt;
-&lt;li&gt;Tcl/Tk 开创了脚本语言作为库的先河，线程处理正确，支持多个独立解释器，无 GIL，无需序列化。&lt;/li&gt;
-&lt;li&gt;硅谷 CAD 自动化大量使用 Tcl，Tcl 是原始扩展语言，在电子 CAD 领域有很长的尾巴。&lt;/li&gt;
-&lt;li&gt;存在另一个时间线，Ousterhout 的梦想实现，Tcl 填补了 JavaScript 的角色，从技术角度看更好。&lt;/li&gt;
-&lt;li&gt;COBOL 已有 ISO 2023，有 OOP 特性，可做微服务，有现代 IDE，不应抱怨其冗长。&lt;/li&gt;
-&lt;li&gt;不敢想象 LLM 生成 COBOL 会输出什么。&lt;/li&gt;
-&lt;li&gt;很多 HN 用户在硅谷 CAD 中遇到 Tcl，留下糟糕体验。&lt;/li&gt;
-&lt;li&gt;Tcl 子解释器最初是作为可控沙箱运行不可信代码，而 JS 却允许不可信代码访问 USB 设备；Python 子解释器与 Tcl 相比是笑话。&lt;/li&gt;
-&lt;li&gt;Tcl 比 JavaScript 早近十年，即使没有子解释器也可以创建多个解释器实例。&lt;/li&gt;
-&lt;li&gt;安全解释器设计于 1993 年，用于安全运行邮件接收的代码。&lt;/li&gt;
-&lt;li&gt;ActiveX 时代，ActiveState 为 IE 提供了 Tcl、Perl 和 Python 的脚本引擎。&lt;/li&gt;
-&lt;li&gt;Tcl 中少数真正全局实体是当前工作目录和环境变量，因为底层概念泄漏到 C 代码和子进程。&lt;/li&gt;
-&lt;li&gt;Tcl 在跨平台异步 I/O 方面非常容易，在 Windows 上尤其重要。&lt;/li&gt;
-&lt;li&gt;&amp;ldquo;soft corner&amp;rdquo; 是印度英语，相当于 &amp;ldquo;soft spot&amp;rdquo;。&lt;/li&gt;
-&lt;li&gt;作者不知道 &amp;ldquo;soft corner&amp;rdquo; 是印度用法，还喜欢 &amp;ldquo;prepone&amp;rdquo; 这个词。&lt;/li&gt;
-&lt;li&gt;有人的叔叔认为印度人比英国人更好地使用英语，&amp;ldquo;prepone&amp;rdquo; 是例子，印度英语语速快，信息密度高，但需要双方都懂印度英语。&lt;/li&gt;
-&lt;li&gt;有人用 Tcl/Tk 写了内部工具 UI，日志控件比 C# forms 好，不会 CPU 100% 和 OOM，但代码现在像玛雅象形文字。&lt;/li&gt;
-&lt;li&gt;Python 已移除 GIL，但序列化数据安全仍然相关，不确定是否该用 pickle。&lt;/li&gt;
-&lt;li&gt;Pickle 在创建数据时可能仍然方便，但不要用于用户提供的文件。&lt;/li&gt;
-&lt;li&gt;有人记得 Zope，认为它做了所有错误选择，静默消亡。&lt;/li&gt;
-&lt;li&gt;Zope 可能仍然存在，但很久没用。&lt;/li&gt;
-&lt;li&gt;有人永远不会从调试 ZODB（Oracle 备份）中恢复，认为 pickle-based、内存、单进程、几乎事务的数据库很疯狂。&lt;/li&gt;
-&lt;li&gt;有人用过 Plone CMS，发现它慢且资源密集，但仍在发布；还提到 Open Market 的 Java 产品，XML 模板语言，渲染错误页面。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;10-美国邮政检查员关闭销售假邮资标签的网站-us-postal-inspectors-shut-down-website-selling-counterfeit-postage-labels&#34;&gt;
-  10. 美国邮政检查员关闭销售假邮资标签的网站 (U.S. postal inspectors shut down website selling counterfeit postage labels)
-  &lt;a class=&#34;anchor&#34; href=&#34;#10-%e7%be%8e%e5%9b%bd%e9%82%ae%e6%94%bf%e6%a3%80%e6%9f%a5%e5%91%98%e5%85%b3%e9%97%ad%e9%94%80%e5%94%ae%e5%81%87%e9%82%ae%e8%b5%84%e6%a0%87%e7%ad%be%e7%9a%84%e7%bd%91%e7%ab%99-us-postal-inspectors-shut-down-website-selling-counterfeit-postage-labels&#34;&gt;#&lt;/a&gt;
-&lt;/h2&gt;
-&lt;p&gt;
-  &lt;a href=&#34;https://postalemployeenetwork.com/news/2026/09/26/u-s-postal-inspectors-shut-down-website-selling-millions-of-counterfeit-postage-labels/&#34;&gt;https://postalemployeenetwork.com/news/2026/09/26/u-s-postal-inspectors-shut-down-website-selling-millions-of-counterfeit-postage-labels/&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;美国邮政检查局联合联邦机构关闭了销售假邮资标签的网站 LabelsBank.com，并起诉其运营者、33 岁的巴基斯坦籍男子 Faheem Akram。该网站以每张 2 美元的固定价格出售超过 510 万张伪造的 USPS 邮资标签，造成超过 1.26 亿美元损失。嫌疑人被控一项共谋欺诈美国罪、五项伪造邮票标签罪和四项电信欺诈罪。邮政检查局表示，无论嫌疑人身在何处，都将追查并绳之以法。目前网站域名已被查封，案件正在审理中。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;hn-热度-276-points--评论-166-comments--作者ilamont--1-day-ago&#34;&gt;
-  HN 热度 276 points | 评论 166 comments | 作者：ilamont | 1 day ago
-  &lt;a class=&#34;anchor&#34; href=&#34;#hn-%e7%83%ad%e5%ba%a6-276-points--%e8%af%84%e8%ae%ba-166-comments--%e4%bd%9c%e8%80%85ilamont--1-day-ago&#34;&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;p&gt;
-  &lt;a href=&#34;https://news.ycombinator.com/item?id=49899090&#34;&gt;https://news.ycombinator.com/item?id=49899090&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;有买家怀疑 eBay 卖家使用伪造 USPS 邮资发货以增加利润，被查获后才重新发货，好评率高但存在慢邮、丢失等模式。&lt;/li&gt;
-&lt;li&gt;有用户收到随商品附赠的可疑 USPS 邮票，卖家以好评换取更多邮票，认为这是伪造行为。&lt;/li&gt;
-&lt;li&gt;邮票价格暴涨使伪造邮票利润丰厚，且防伪措施不足，Forever 邮票无法更新，执法不力，形成完美风暴。&lt;/li&gt;
-&lt;li&gt;英国已采用二维码邮票，旧非二维码邮票可免费更换，重复使用会被要求支付罚款；日常邮票有二维码，纪念邮票没有。&lt;/li&gt;
-&lt;li&gt;有人建议美国可仿效英国用 ID 交换邮票，但二维码方案更公平；也有讨论指出要求 ID 可能影响无 ID 人群，并引发与选举安全要求的类比。&lt;/li&gt;
-&lt;li&gt;有提到旧式固定面值邮票在邮资上涨时需要补贴，有时会收到硬币。&lt;/li&gt;
-&lt;li&gt;有提到美国信件超重价格复杂，最大重量信件需两张邮票加 5 美分，也可购买额外盎司邮票。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;hacker-news-精彩评论及翻译&#34;&gt;
-  Hacker News 精彩评论及翻译
-  &lt;a class=&#34;anchor&#34; href=&#34;#hacker-news-%e7%b2%be%e5%bd%a9%e8%af%84%e8%ae%ba%e5%8f%8a%e7%bf%bb%e8%af%91&#34;&gt;#&lt;/a&gt;
-&lt;/h2&gt;
-&lt;h3 id=&#34;livenerf-has-opus-55-been-nerfed-yet&#34;&gt;
-  Livenerf: Has Opus 5.5 been nerfed yet?
-  &lt;a class=&#34;anchor&#34; href=&#34;#livenerf-has-opus-55-been-nerfed-yet&#34;&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;p&gt;&lt;font size=&#39;1&#39;&gt;
-  &lt;a href=&#34;https://news.ycombinator.com/item?id=49902317&#34;&gt;https://news.ycombinator.com/item?id=49902317&lt;/a&gt;&lt;/font&gt;&lt;/p&gt;
-&lt;p&gt;We also have Nerf Bench:&lt;/p&gt;
-&lt;p&gt;
-  &lt;a href=&#34;https://www.bridgebench.ai/nerf-bench&#34;&gt;https://www.bridgebench.ai/nerf-bench&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;They test it on launch day, then benchmark it against that. A deviation of above 10% is considered a change. They&amp;rsquo;re currently tracking Opus 5.5 and GPT-6 Astra.&lt;/p&gt;
-&lt;p&gt;This bench famously detected a degradation of Opus 4.6 which Anthropic later blogged about. I personally think people sense nerfs more often than they happen and that it&amp;rsquo;s often about honeymoon effects.&lt;/p&gt;
-&lt;p&gt;&lt;font size=&#39;1&#39;&gt;jug&lt;/font&gt;&lt;/p&gt;
-&lt;p&gt;我们也有Nerf Bench：&lt;/p&gt;
-&lt;p&gt;
-  &lt;a href=&#34;https://www.bridgebench.ai/nerf-bench&#34;&gt;https://www.bridgebench.ai/nerf-bench&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;他们在发布当天进行测试，然后以此为基准进行对比。偏差超过10%即视为变化。目前他们正在追踪Opus 5.5和GPT-6 Astra。&lt;/p&gt;
-&lt;p&gt;这个基准测试曾因检测出Opus 4.6的性能下降而闻名，Anthropic后来在博客中提到了这一点。我个人认为，人们感知到的“削弱”往往比实际发生的更多，而且这通常与蜜月效应有关。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;gemini-4-argon&#34;&gt;
-  Gemini 4 Argon
-  &lt;a class=&#34;anchor&#34; href=&#34;#gemini-4-argon&#34;&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;p&gt;&lt;font size=&#39;1&#39;&gt;
-  &lt;a href=&#34;https://news.ycombinator.com/item?id=49913755&#34;&gt;https://news.ycombinator.com/item?id=49913755&lt;/a&gt;&lt;/font&gt;&lt;/p&gt;
-&lt;p&gt;Ten days ago I had an experience with Gemini 3.8 flash that made me wonder if I was being routed to a different model under test. I was trying to use rocm with llama.cpp on my 128gb Strix Halo but could only get it to run Vulkan. I pasted the error message into agy and it proceeded to attach GDB to my GPU driver, reverse-engineer the kernel queue ioctl interface, and author an LD_PRELOAD C shim to get ROCm llama.cpp working on my Strix Halo. My jaw was hanging open the whole time.&lt;/p&gt;
-&lt;p&gt;Edit to add the fix: 
-  &lt;a href=&#34;https://gist.github.com/birep/6f2c8d490c7a29820997d57bd654c351&#34;&gt;https://gist.github.com/birep/6f2c8d490c7a29820997d57bd654c351&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;font size=&#39;1&#39;&gt;taylorfinley&lt;/font&gt;&lt;/p&gt;
-&lt;p&gt;十天前，我在使用Gemini 3.8 flash时遇到了一次经历，让我怀疑自己是不是被路由到了某个正在测试的不同模型。我当时试图在128GB的Strix Halo上配合llama.cpp使用ROCm，但只能让它跑Vulkan。我把错误信息粘贴到agy里，结果它居然对我的GPU驱动附加了GDB，逆向工程了内核队列的ioctl接口，并编写了一个LD_PRELOAD的C语言垫片，让ROCm版的llama.cpp成功跑在了我的Strix Halo上。整个过程我的下巴一直合不拢。&lt;/p&gt;
-&lt;p&gt;编辑补充修复方案：https://gist.github.com/birep/6f2c8d490c7a29820997d57bd654c351&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;the-ai-race-just-got-awkward&#34;&gt;
-  The AI Race Just Got Awkward
-  &lt;a class=&#34;anchor&#34; href=&#34;#the-ai-race-just-got-awkward&#34;&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;p&gt;&lt;font size=&#39;1&#39;&gt;
-  &lt;a href=&#34;https://news.ycombinator.com/item?id=49910947&#34;&gt;https://news.ycombinator.com/item?id=49910947&lt;/a&gt;&lt;/font&gt;&lt;/p&gt;
-&lt;p&gt;Why is it a problem that the Chinese labs are just distilling down Anthropic’s models? Aren’t Anthropic’s models not just distilling down other people’s work?&lt;/p&gt;
-&lt;p&gt;Feels like Anthropic crying do as I say not as I do.&lt;/p&gt;
-&lt;p&gt;&lt;font size=&#39;1&#39;&gt;cmiles8&lt;/font&gt;&lt;/p&gt;
-&lt;p&gt;中国实验室只是在蒸馏Anthropic的模型，这有什么问题？难道Anthropic的模型不也是在蒸馏别人的成果吗？&lt;/p&gt;
-&lt;p&gt;感觉Anthropic就像在喊“照我说的做，别学我做的”。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;gemini-4-argon-1&#34;&gt;
-  Gemini 4 Argon
-  &lt;a class=&#34;anchor&#34; href=&#34;#gemini-4-argon-1&#34;&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;p&gt;&lt;font size=&#39;1&#39;&gt;
-  &lt;a href=&#34;https://news.ycombinator.com/item?id=49913802&#34;&gt;https://news.ycombinator.com/item?id=49913802&lt;/a&gt;&lt;/font&gt;&lt;/p&gt;
-&lt;p&gt;The important take away here: the leapfrogging we’ve seen this year doesn’t seem to be a temporary thing. The famous theory of Dario Amodei was that AI was this winner-takes-all field where the first team to get a head start would never cede ground back. The term he liked to use was, “concentrating”. This is yet another datapoint that he was wrong about that. AI seems more distributed amongst neoclouds and traditional hyperscalers, FAANG and startups, GPUs and ASICs than it did this time a year ago.&lt;/p&gt;
-&lt;p&gt;Nobody has a moat.&lt;/p&gt;
-&lt;p&gt;&lt;font size=&#39;1&#39;&gt;nickysielicki&lt;/font&gt;&lt;/p&gt;
-&lt;p&gt;这里的重要启示是：我们今年看到的跨越式发展似乎不是暂时现象。Dario Amodei的那个著名理论是，AI是一个赢家通吃的领域，率先取得领先的团队永远不会把地盘让回去。他喜欢用的词是“集中化”。而这是又一个证明他错了的数据点。相比一年前，AI似乎更加分散地分布在新型云厂商和传统超大规模云厂商、FAANG和初创公司、GPU和ASIC之间。&lt;/p&gt;
-&lt;p&gt;没有人拥有护城河。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;the-ai-race-just-got-awkward-1&#34;&gt;
-  The AI Race Just Got Awkward
-  &lt;a class=&#34;anchor&#34; href=&#34;#the-ai-race-just-got-awkward-1&#34;&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;p&gt;&lt;font size=&#39;1&#39;&gt;
-  &lt;a href=&#34;https://news.ycombinator.com/item?id=49911174&#34;&gt;https://news.ycombinator.com/item?id=49911174&lt;/a&gt;&lt;/font&gt;&lt;/p&gt;
-&lt;p&gt;But the analogy still holds.&lt;/p&gt;
-&lt;p&gt;The original authors of all the text, creators of the media and developers of the software did far more work than Anthropic.&lt;/p&gt;
-&lt;p&gt;&lt;font size=&#39;1&#39;&gt;JackFr&lt;/font&gt;&lt;/p&gt;
-&lt;p&gt;但这个类比依然成立。所有文本的原始作者、媒体创作者和软件开发者所做的工作远多于Anthropic。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;burning-man-death-rates--a-short-lesson-in-statis&#34;&gt;
-  Burning Man death rates – A short lesson in statis&amp;hellip;
-  &lt;a class=&#34;anchor&#34; href=&#34;#burning-man-death-rates--a-short-lesson-in-statis&#34;&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;p&gt;&lt;font size=&#39;1&#39;&gt;
-  &lt;a href=&#34;https://news.ycombinator.com/item?id=49912204&#34;&gt;https://news.ycombinator.com/item?id=49912204&lt;/a&gt;&lt;/font&gt;&lt;/p&gt;
-&lt;p&gt;Some of this is selection bias, but lots of this is active work by the organizers.&lt;/p&gt;
-&lt;p&gt;Burning Man has slowly re-created the regulatory state in response to the standard pressures of civilization. To their credit, this has often been in response to near-misses, but sometimes in response to fatalities. It started with sanitation (potties), and banning guns/explosives. You can have 100 people shooting guns at a party in the desert without sanitation and muddle through. At 10k, you are building a cholera-mad-max experiment. A car running over a sleeping person prompted a designated road network. And then they adopted zoning, with hush-ville and the large sound installation ends. All supported by the ranger team preventing injury every day. Civilization is work.&lt;/p&gt;
-&lt;p&gt;&lt;font size=&#39;1&#39;&gt;michael1999&lt;/font&gt;&lt;/p&gt;
-&lt;p&gt;这部分有些是选择偏差，但很多是组织者积极作为的结果。&lt;/p&gt;
-&lt;p&gt;火人节在应对文明的标准压力时，慢慢地重新打造出一套监管体系。值得称赞的是，这往往是针对未遂事故的回应，但有时也是针对死亡事件的回应。它始于卫生设施（移动厕所）和禁止枪支/爆炸物。你可以让100个人在没有卫生设施的沙漠派对上开枪，也能勉强应付过去。但到一万人时，你就是在搞一个霍乱版《疯狂的麦克斯》实验。一辆车碾过熟睡者的事件，催生了指定的道路网络。接着他们采用了分区制，划出了安静区和大型音响设施的边界。所有这一切都有护林员团队的支持，他们每天都在防止伤害发生。文明是需要付出努力的。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;gemini-4-argon-2&#34;&gt;
-  Gemini 4 Argon
-  &lt;a class=&#34;anchor&#34; href=&#34;#gemini-4-argon-2&#34;&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;p&gt;&lt;font size=&#39;1&#39;&gt;
-  &lt;a href=&#34;https://news.ycombinator.com/item?id=49913640&#34;&gt;https://news.ycombinator.com/item?id=49913640&lt;/a&gt;&lt;/font&gt;&lt;/p&gt;
-&lt;p&gt;My girlfriend, you wouldn&amp;rsquo;t have met her, she lives in Canada, has seen it and she thinks Gemini 4 Argon is amazing.&lt;/p&gt;
-&lt;p&gt;&lt;font size=&#39;1&#39;&gt;SwellJoe&lt;/font&gt;&lt;/p&gt;
-&lt;p&gt;我女朋友，你没见过她，她住在加拿大，她见过这玩意儿，她觉得Gemini 4 Argon棒极了。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;gpt-61-sol-near-astra-intelligence-for-a-fifth-o&#34;&gt;
-  GPT 6.1 Sol: Near-Astra intelligence for a fifth o&amp;hellip;
-  &lt;a class=&#34;anchor&#34; href=&#34;#gpt-61-sol-near-astra-intelligence-for-a-fifth-o&#34;&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;p&gt;&lt;font size=&#39;1&#39;&gt;
-  &lt;a href=&#34;https://news.ycombinator.com/item?id=49898356&#34;&gt;https://news.ycombinator.com/item?id=49898356&lt;/a&gt;&lt;/font&gt;&lt;/p&gt;
-&lt;p&gt;I am yet to spend $200 on deepseek this year. Not sure what kind of usage can justify $200/month of either openai or anthropic, i&amp;rsquo;m not even talking about $500. Deepseek is faster, IMO intelligence difference is negligible and it so much cheaper that i no longer care about how much i use it. I never hit any daily/weekly quota or anything like that while working or tinkering. At this point i am OK with being 6 months behind the &amp;ldquo;frontier&amp;rdquo;, purely on bang-for-buck basis and who cares which shadowy government gets my data.&lt;/p&gt;
-&lt;p&gt;&lt;font size=&#39;1&#39;&gt;proxysna&lt;/font&gt;&lt;/p&gt;
-&lt;p&gt;我今年还没在DeepSeek上花过200美元。不知道什么样的使用量才能证明OpenAI或Anthropic每月200美元的开销是合理的，更不用说500美元了。DeepSeek更快，在我看来智能上的差异可以忽略不计，而且便宜太多了，以至于我根本不在乎用多少。我工作或折腾的时候从来没遇到过任何每日/每周配额限制之类的东西。到目前为止，我完全不介意落后“前沿”6个月，纯粹从性价比来看，而且谁在乎哪个神秘政府拿到我的数据呢。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;everybodys-home-no-ones-coming-over&#34;&gt;
-  Everybody’s home. No one’s coming over
-  &lt;a class=&#34;anchor&#34; href=&#34;#everybodys-home-no-ones-coming-over&#34;&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;p&gt;&lt;font size=&#39;1&#39;&gt;
-  &lt;a href=&#34;https://news.ycombinator.com/item?id=49892091&#34;&gt;https://news.ycombinator.com/item?id=49892091&lt;/a&gt;&lt;/font&gt;&lt;/p&gt;
-&lt;p&gt;As others have mentioned, the decline started long before social media and the Internet. When I was a child, in the 70s, my parents often had other families and couples over for dinner, and we often attended small dinner parties, too.&lt;/p&gt;
-&lt;p&gt;As an introvert, I absolutely loathed these gatherings and was frustrated by how powerless I was in avoiding them.&lt;/p&gt;
-&lt;p&gt;Recently, I have been reading over my mother&amp;rsquo;s old letters she wrote to her parents at that time, in which she described the effort and social anxiety that went with this tradition. It was not something my parents enjoyed, but rather an obligation they felt they had to uphold. Someone invites you over, then that goes into an unspoken balance sheet, and you are required to reciprocate. She often spoke of &amp;ldquo;owing&amp;rdquo; dinner to people. I don&amp;rsquo;t think she enjoyed it at all, though there were a few couples I can remember who were good friends of theirs, and those meetups were always a pleasure to listen in on. The rest were simply a drag.&lt;/p&gt;
-&lt;p&gt;I should note that their life in the 70s (in a middle-class college town) was not some idyllic paradise without the Internet, either. Everyone was constantly falling ill with colds or flu, and days were spent running dreary errands to shop for boring things that we now can get with a click. The rotary-dial telephone that hung in the kitchen was the heartbeat of the house, since replaced by Facebook and smartphones. My parents were always busy and exhausted.&lt;/p&gt;
-&lt;p&gt;&lt;font size=&#39;1&#39;&gt;vertnerd&lt;/font&gt;&lt;/p&gt;
-&lt;p&gt;正如其他人所说，这种衰退早在社交媒体和互联网出现之前就开始了。我小的时候，也就是七十年代，父母经常邀请其他家庭和夫妇来家里吃饭，我们也经常参加小型晚宴。&lt;/p&gt;
-&lt;p&gt;作为一个内向的人，我非常讨厌这些聚会，也为自己无力逃避它们而感到沮丧。&lt;/p&gt;
-&lt;p&gt;最近，我一直在翻看母亲当时写给她父母的一些旧信，信中描述了这种传统带来的精力和社交焦虑。这不是我父母享受的事情，而是他们觉得必须履行的义务。有人邀请了你，那就记在了一笔无形的账上，你必须回请。她经常说“欠”别人一顿饭。我觉得她根本不喜欢这样，不过我记得有几对夫妇是他们的好朋友，那些聚会听起来总是令人愉快的。其余的都是纯粹的负担。&lt;/p&gt;
-&lt;p&gt;我还得说明，他们在七十年代（在一个中产大学城）的生活也不是什么没有互联网的田园牧歌。每个人都经常感冒或得流感，白天则花在无聊的跑腿采购上，买那些现在一键就能搞定的无聊东西。厨房里挂着的旋转拨号电话是房子的心脏，后来被Facebook和智能手机取代了。我父母总是忙忙碌碌、精疲力竭。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;how-delhi-cut-electricity-loss-from-50-to-5-percen&#34;&gt;
-  How Delhi cut electricity loss from 50 to 5 percen&amp;hellip;
-  &lt;a class=&#34;anchor&#34; href=&#34;#how-delhi-cut-electricity-loss-from-50-to-5-percen&#34;&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;p&gt;&lt;font size=&#39;1&#39;&gt;
-  &lt;a href=&#34;https://news.ycombinator.com/item?id=49892638&#34;&gt;https://news.ycombinator.com/item?id=49892638&lt;/a&gt;&lt;/font&gt;&lt;/p&gt;
-&lt;p&gt;I wonder how many HNers recall life in Delhi even 20 years ago? Cutting electricity loss is one thing, but getting rid of &amp;ldquo;load shedding&amp;rdquo; (unplanned power cuts) is the really revolutionary part. It was not uncommon for the power to go out several times a day and you had to rush to unplug expensive appliances (TV, laptop), because when the power came back it was often accompanied by a surge. My office was wired with two sets of electrical sockets, one connected to grid mains and the other connected to the UPS (for important equipment only).&lt;/p&gt;
-&lt;p&gt;&lt;font size=&#39;1&#39;&gt;motionlessveloc&lt;/font&gt;&lt;/p&gt;
-&lt;p&gt;不知道有多少HN用户还记得甚至20年前德里的生活？减少电力损耗是一回事，但消除“拉闸限电”（计划外停电）才是真正具有革命性的部分。那时一天停电几次并不罕见，你必须赶紧拔掉昂贵电器（电视、笔记本电脑）的插头，因为电力恢复时往往伴随着电压浪涌。我的办公室装了两套电源插座，一套连接电网主电源，另一套连接UPS（仅用于重要设备）。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;gemini-4-argon-3&#34;&gt;
-  Gemini 4 Argon
-  &lt;a class=&#34;anchor&#34; href=&#34;#gemini-4-argon-3&#34;&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;p&gt;&lt;font size=&#39;1&#39;&gt;
-  &lt;a href=&#34;https://news.ycombinator.com/item?id=49913608&#34;&gt;https://news.ycombinator.com/item?id=49913608&lt;/a&gt;&lt;/font&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;We’ll continue to gather feedback from early testers as we iterate on guardrails before making Argon available to developers, enterprises, and consumers as soon as possible.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Gemini not beating the &amp;ldquo;can&amp;rsquo;t release a model&amp;rdquo; allegations&lt;/p&gt;
-&lt;p&gt;&lt;font size=&#39;1&#39;&gt;babelfish&lt;/font&gt;&lt;/p&gt;
-&lt;p&gt;&amp;ldquo;我们将继续收集早期测试者的反馈，并在尽快向开发者、企业和消费者推出Argon之前，不断迭代护栏。&lt;/p&gt;
-&lt;p&gt;Gemini并未驳倒‘无法发布模型’的指控。&amp;rdquo;&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;gpt-61-sol-near-astra-intelligence-for-a-fifth-o-1&#34;&gt;
-  GPT 6.1 Sol: Near-Astra intelligence for a fifth o&amp;hellip;
-  &lt;a class=&#34;anchor&#34; href=&#34;#gpt-61-sol-near-astra-intelligence-for-a-fifth-o-1&#34;&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;p&gt;&lt;font size=&#39;1&#39;&gt;
-  &lt;a href=&#34;https://news.ycombinator.com/item?id=49896762&#34;&gt;https://news.ycombinator.com/item?id=49896762&lt;/a&gt;&lt;/font&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Cached input costs just $0.10 per million tokens—95% less than standard input pricing and 50% less than GPT‑6 Sol’s cached input pricing&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;This is the actual big announcement. 50% cheaper cache than GPT-6 Sol will get you far more mileage on Codex.&lt;/p&gt;
-&lt;p&gt;&lt;font size=&#39;1&#39;&gt;minimaxir&lt;/font&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;缓存输入成本仅为每百万token 0.10美元——比标准输入定价低95%，比GPT-6 Sol的缓存输入定价低50%。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;这才是真正的大消息。缓存比GPT-6 Sol便宜50%，会让Codex的可用性大幅提升。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;dots-always-on-agents&#34;&gt;
-  Dots: Always-on agents
-  &lt;a class=&#34;anchor&#34; href=&#34;#dots-always-on-agents&#34;&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;p&gt;&lt;font size=&#39;1&#39;&gt;
-  &lt;a href=&#34;https://news.ycombinator.com/item?id=49898996&#34;&gt;https://news.ycombinator.com/item?id=49898996&lt;/a&gt;&lt;/font&gt;&lt;/p&gt;
-&lt;p&gt;im crying and throwing up everywhere. everything i use must be brutalist.&lt;/p&gt;
-&lt;p&gt;even seeing the linux penguin makes me want to punch my monitor and commit sudoku&lt;/p&gt;
-&lt;p&gt;&lt;font size=&#39;1&#39;&gt;john_strinlai&lt;/font&gt;&lt;/p&gt;
-&lt;p&gt;我在哭泣，到处呕吐。我用的每样东西都必须是粗野主义风格的。&lt;/p&gt;
-&lt;p&gt;就连看到Linux的企鹅都让我想猛击显示器，然后玩个数独。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;a-staff-engineers-guide-to-inventing-work&#34;&gt;
-  A Staff Engineer&amp;rsquo;s Guide to Inventing Work
-  &lt;a class=&#34;anchor&#34; href=&#34;#a-staff-engineers-guide-to-inventing-work&#34;&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;p&gt;&lt;font size=&#39;1&#39;&gt;
-  &lt;a href=&#34;https://news.ycombinator.com/item?id=49898093&#34;&gt;https://news.ycombinator.com/item?id=49898093&lt;/a&gt;&lt;/font&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Platform teams are engineering-led rather than product-led. There is almost never a product manager handing you a roadmap, no revenue line to follow, and no market to lose.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;It&amp;rsquo;s precisely because of this framing and mentality that platform teams don&amp;rsquo;t actually serve people well and are usually highly dysfunctional towers of people inventing work.&lt;/p&gt;
-&lt;p&gt;The fix for having no market is to act like the teams you serve could leave. This whole article lists signals, and none of them is that. Being captive does not mean the users or internal teams don&amp;rsquo;t have other options and don&amp;rsquo;t notice. Being product-led means caring about your users. A platform teams should be product-led, not engineering-led in that very narrow meaning. Otherwise you invent work as this article so wonderfully exposes.&lt;/p&gt;
-&lt;p&gt;&lt;font size=&#39;1&#39;&gt;dabedee&lt;/font&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;平台团队是工程主导，而非产品主导。几乎从来没有产品经理给你一份路线图，没有收入指标可循，也没有市场可失去。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;正是由于这种框架和心态，平台团队实际上并不能很好地服务他人，而且通常是高度 dysfunctional 的一群人在自造工作。&lt;/p&gt;
-&lt;p&gt;解决没有市场这一问题的办法，是把你所服务的团队当作随时可能离开的客户。这篇文章列了一堆信号，但没有一条是这一点。被绑定（captive）并不意味着用户或内部团队没有其他选择，也不意味着他们察觉不到。产品主导意味着关心你的用户。平台团队应该以产品为主导，而不是那种狭隘意义上的工程主导。否则，你就会像这篇文章精彩揭露的那样，自造工作。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;september-2026-the-world-today-as-seen-by-one-po&#34;&gt;
-  September 2026: The world today, as seen by one Po&amp;hellip;
-  &lt;a class=&#34;anchor&#34; href=&#34;#september-2026-the-world-today-as-seen-by-one-po&#34;&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;p&gt;&lt;font size=&#39;1&#39;&gt;
-  &lt;a href=&#34;https://news.ycombinator.com/item?id=49906503&#34;&gt;https://news.ycombinator.com/item?id=49906503&lt;/a&gt;&lt;/font&gt;&lt;/p&gt;
-&lt;p&gt;I&amp;rsquo;m Polish, but this is such a pessimistic, overdramatic take. The visualisations are impressive, but you&amp;rsquo;re living in Poland&amp;rsquo;s golden age. See this Hacker News story with 1,000+ upvotes: 
-  &lt;a href=&#34;https://news.ycombinator.com/item?id=48062117&#34;&gt;https://news.ycombinator.com/item?id=48062117&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;The war in Ukraine is a tragedy, but it has proved that Russia is weak. The price shock will speed up the transition to renewables, and Iran is losing its grip on Hormuz. So many of the other issues are solvable.&lt;/p&gt;
-&lt;p&gt;It&amp;rsquo;s easy to be a pessimist, but there&amp;rsquo;s a bright future ahead of us.&lt;/p&gt;
-&lt;p&gt;&lt;font size=&#39;1&#39;&gt;jakozaur&lt;/font&gt;&lt;/p&gt;
-&lt;p&gt;我是波兰人，但这是一个如此悲观、过度戏剧化的观点。可视化做得令人印象深刻，但你正生活在波兰的黄金时代。看看这个有1000多个赞的Hacker News帖子：https://news.ycombinator.com/item?id=48062117&lt;/p&gt;
-&lt;p&gt;乌克兰战争是一场悲剧，但它证明了俄罗斯很虚弱。价格冲击将加速向可再生能源的转型，而伊朗正在失去对霍尔木兹海峡的控制。其他许多问题都是可以解决的。&lt;/p&gt;
-&lt;p&gt;做悲观主义者很容易，但我们的前方是光明的未来。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;gpt-61-sol-near-astra-intelligence-for-a-fifth-o-2&#34;&gt;
-  GPT 6.1 Sol: Near-Astra intelligence for a fifth o&amp;hellip;
-  &lt;a class=&#34;anchor&#34; href=&#34;#gpt-61-sol-near-astra-intelligence-for-a-fifth-o-2&#34;&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;p&gt;&lt;font size=&#39;1&#39;&gt;
-  &lt;a href=&#34;https://news.ycombinator.com/item?id=49897983&#34;&gt;https://news.ycombinator.com/item?id=49897983&lt;/a&gt;&lt;/font&gt;&lt;/p&gt;
-&lt;p&gt;There was a model called Astra-Minor, found in the files a few days ago. I assume Sol 6.1 is this, as a last minute panic rename due to Sol 6 being underwhelming while Opus 5.5 turned out really strong. I can&amp;rsquo;t really explain releasing Sol 6 in any other way, especially mere days ago.
-&lt;font size=&#39;1&#39;&gt;revolvingthrow&lt;/font&gt;&lt;/p&gt;
-&lt;p&gt;几天前在文件里发现了一个叫 Astra-Minor 的模型。我猜 Sol 6.1 就是它，因为 Sol 6 表现平平，而 Opus 5.5 却非常强，所以临时慌忙改了个名。否则我实在无法解释为什么会在仅仅几天前发布 Sol 6。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;backblaze-drive-stats-for-q2-2026&#34;&gt;
-  Backblaze drive stats for Q2 2026
-  &lt;a class=&#34;anchor&#34; href=&#34;#backblaze-drive-stats-for-q2-2026&#34;&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;p&gt;&lt;font size=&#39;1&#39;&gt;
-  &lt;a href=&#34;https://news.ycombinator.com/item?id=49904089&#34;&gt;https://news.ycombinator.com/item?id=49904089&lt;/a&gt;&lt;/font&gt;&lt;/p&gt;
-&lt;p&gt;In 2013 Backblaze saw ~14% avg failure rate at 3 years 3 months. Drive useful life: 4 years, roughly.&lt;/p&gt;
-&lt;p&gt;In 2021, Backblaze saw ~14% failure rate at 7 years 9 months. Drive useful life: about 6 years.&lt;/p&gt;
-&lt;p&gt;That gave us what was a stable-seeming, old &amp;ldquo;replace drives at 5 years, or you&amp;rsquo;re getting risky&amp;rdquo; rule of thumb (unless you prefer to replace on failure, of course).&lt;/p&gt;
-&lt;p&gt;In 2025, Backblaze saw ~5% failure rate at 10 years 3 months. Drive useful life: ~10 years, roughly!&lt;/p&gt;
-&lt;p&gt;Thanks for all the HDD improvements, industry!&lt;/p&gt;
-&lt;p&gt;&lt;font size=&#39;1&#39;&gt;realityfactchex&lt;/font&gt;&lt;/p&gt;
-&lt;p&gt;2013年，Backblaze观察到硬盘在3年3个月时的平均故障率约为14%。硬盘有效寿命约为4年。&lt;/p&gt;
-&lt;p&gt;2021年，Backblaze观察到硬盘在7年9个月时的故障率约为14%。硬盘有效寿命约为6年。&lt;/p&gt;
-&lt;p&gt;这给了我们一条看似稳定的旧经验法则：“硬盘用满5年就该更换，否则风险会上升”（当然，除非你更倾向于坏了再换）。&lt;/p&gt;
-&lt;p&gt;2025年，Backblaze观察到硬盘在10年3个月时的故障率约为5%。硬盘有效寿命大约为10年！&lt;/p&gt;
-&lt;p&gt;感谢整个行业在硬盘技术上取得的所有进步！&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;nicholas-polson-has-authored-258-academic-papers-i&#34;&gt;
-  Nicholas Polson has authored 258 academic papers i&amp;hellip;
-  &lt;a class=&#34;anchor&#34; href=&#34;#nicholas-polson-has-authored-258-academic-papers-i&#34;&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;p&gt;&lt;font size=&#39;1&#39;&gt;
-  &lt;a href=&#34;https://news.ycombinator.com/item?id=49899294&#34;&gt;https://news.ycombinator.com/item?id=49899294&lt;/a&gt;&lt;/font&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;“An Interdisciplinary Synthesis Across Economics, Psychology, Biology, Philosophy, Game Theory, and Spiritual Tradition.”&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;If one were inclined, they could shorten the title to &amp;ldquo;AI Synthesis Across Economics, Psychology, Biology, Philosophy, Game Theory, and Spiritual Tradition.&amp;rdquo; Maybe that&amp;rsquo;s an Easter egg.&lt;/p&gt;
-&lt;p&gt;AI submissions, soon AI reviewers, and shortly after only AI readers.&lt;/p&gt;
-&lt;p&gt;The guy&amp;rsquo;s name is &amp;ldquo;nosloP&amp;rdquo; spelled backwards. Maybe spelled normally it&amp;rsquo;s supposed to signify the opposite.&lt;/p&gt;
-&lt;p&gt;&lt;font size=&#39;1&#39;&gt;buran77&lt;/font&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;“跨越经济学、心理学、生物学、哲学、博弈论与精神传统的跨学科综合。”&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;如果愿意的话，可以把标题缩短为“跨越经济学、心理学、生物学、哲学、博弈论与精神传统的AI综合”。也许那是个彩蛋。&lt;/p&gt;
-&lt;p&gt;很快是AI投稿，接着是AI审稿，再不久就只剩下AI读者了。&lt;/p&gt;
-&lt;p&gt;那家伙的名字倒着拼是“nosloP”。也许正着拼写本该表示相反的意思。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;the-ai-race-just-got-awkward-2&#34;&gt;
-  The AI Race Just Got Awkward
-  &lt;a class=&#34;anchor&#34; href=&#34;#the-ai-race-just-got-awkward-2&#34;&gt;#&lt;/a&gt;
-&lt;/h3&gt;
-&lt;p&gt;&lt;font size=&#39;1&#39;&gt;
-  &lt;a href=&#34;https://news.ycombinator.com/item?id=49910863&#34;&gt;https://news.ycombinator.com/item?id=49910863&lt;/a&gt;&lt;/font&gt;&lt;/p&gt;
-&lt;p&gt;I&amp;rsquo;m also grateful to the Chinese labs for providing workarounds for the walled gardens that the US based AI companies are attempting to create.&lt;/p&gt;
-&lt;p&gt;Does anyone know if there are any distillation datasets available? I&amp;rsquo;d love to see these distributed on BitTorrent. I think it&amp;rsquo;s critical that AI be democratized and not isolated in the hands of a few private companies.&lt;/p&gt;
-&lt;p&gt;&lt;font size=&#39;1&#39;&gt;slowin&lt;/font&gt;&lt;/p&gt;
-&lt;p&gt;我也很感激中国的实验室为美国AI公司试图建立的围墙花园提供了变通方法。有没有人知道是否有可用的蒸馏数据集？我很乐意看到这些通过BitTorrent分发。我认为AI的民主化至关重要，而不是被少数私营公司垄断。&lt;/p&gt;
 &lt;hr&gt;
 </description>
     </item>
