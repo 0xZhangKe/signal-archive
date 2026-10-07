@@ -1,5 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-10-07T04:47:55+00:00</updated><author><name>Simon Willison</name></author><entry><title>Quoting Jake Boggan</title><link href="https://simonwillison.net/2026/Oct/7/jake-boggan/" rel="alternate"/><published>2026-10-07T04:47:55+00:00</published><updated>2026-10-07T04:47:55+00:00</updated><id>https://simonwillison.net/2026/Oct/7/jake-boggan/</id><summary type="html">
+<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-10-07T20:56:21+00:00</updated><author><name>Simon Willison</name></author><entry><title>Claude Haiku 5.5</title><link href="https://simonwillison.net/2026/Oct/7/claude-haiku-5-5/" rel="alternate"/><published>2026-10-07T20:56:21+00:00</published><updated>2026-10-07T20:56:21+00:00</updated><id>https://simonwillison.net/2026/Oct/7/claude-haiku-5-5/</id><summary type="html">
+    &lt;p&gt;As previously &lt;a href="https://simonwillison.net/2026/Sep/28/claude-sonnet-5-5/"&gt;promised&lt;/a&gt;, here's Anthropic's new fast, low cost model: &lt;a href="https://www.anthropic.com/claude-haiku-5-5"&gt;Introducing Claude Haiku 5.5&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The previous Haiku, 4.5, was very much showing its age. It came out &lt;a href="https://simonwillison.net/2025/Oct/15/claude-haiku-45/"&gt;almost a year ago&lt;/a&gt;, and was priced at $1/million input and $5/million output - relatively expensive even back then, and a full 10x the price of OpenAI's &lt;a href="https://simonwillison.net/2026/Sep/22/opus-and-sol-and-luna/#gpt-6-sol-and-luna-are-half-the-price-of-their-gpt-5-6-equivalents"&gt;GPT-6 Luna&lt;/a&gt;, released last month.&lt;/p&gt;
+
+&lt;p&gt;The new Haiku exactly matches the price of GPT-6 Luna - $0.10/$0.50 - up to 100,000 tokens. Beyond 100,000 tokens the price increases 5x to $0.50/$2.50. Luna itself has a price increase at 272,000 tokens but only to $0.20/$0.75.&lt;/p&gt;
+&lt;p&gt;Haiku 5.5 also uses a new, less generous tokenizer. My &lt;a href="https://tools.simonwillison.net/claude-token-counter"&gt;Claude Token Counter&lt;/a&gt; tool shows that the same long prompt uses around 1.25x as many tokens with Haiku 5.5 compared to Haiku 4.5, so there's a hidden price increase there.&lt;/p&gt;
+&lt;p&gt;If your workloads fit in 100,000 tokens, Haiku is the same price as Luna and reports higher benchmark scores. Above 100,000 tokens, Luna looks like a much better deal.&lt;/p&gt;
+&lt;p&gt;The &lt;a href="https://github.com/simonw/llm-anthropic/releases/tag/0.30"&gt;most recent release of llm-anthropic&lt;/a&gt; finally fixed it so I don't need to ship a new version of that plugin for every new model. I tested the new model like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;llm install -U llm-anthropic
+llm anthropic refresh
+llm -m claude-haiku-5.5 "Generate an SVG of a pelican riding a bicycle" -o thinking_effort low
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id="pelicans"&gt;Pelicans&lt;/h4&gt;
+&lt;p&gt;Here are &lt;a href="https://tools.simonwillison.net/markdown-svg-renderer?url=https%3A%2F%2Fgist.github.com%2Fsimonw%2F485dfa24b4efa1267ee2d0911594fb81"&gt;pelicans for low, medium, high, xhigh, and max&lt;/a&gt;. The new Haiku doesn't let you disable reasoning, and defaults to &lt;code&gt;medium&lt;/code&gt;. I got a good bicycle frame for everything beyond &lt;code&gt;low&lt;/code&gt;. The &lt;a href="https://tools.simonwillison.net/markdown-svg-renderer?url=https%3A%2F%2Fgist.github.com%2Fsimonw%2F485dfa24b4efa1267ee2d0911594fb81#response"&gt;low effort pelican&lt;/a&gt; cost 0.0936 cents and took 7 seconds.&lt;/p&gt;&lt;p&gt;This &lt;code&gt;max&lt;/code&gt; effort pelican took 5 minutes 9 seconds to generate, but still only cost me &lt;a href="https://www.llm-prices.com/#it=27&amp;amp;ot=67647&amp;amp;sel=claude-haiku-5.5"&gt;3.3826 cents&lt;/a&gt;:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Flat vector illustration: a white pelican wearing a red cap rides a dark grey bicycle from left to right across a green grassy strip, its long orange legs reaching down to the orange pedals, a grey wing stretched forward to grip the curved handlebars, and its large yellow-orange beak with a bulging orange throat pouch pointing ahead; behind it, white speed lines show motion, and above, a yellow sun with a pale halo and two white clouds sit in a gradient blue sky." src="https://static.simonwillison.net/static/2026-10-07/haiku-5.5-max.webp" /&gt;&lt;/p&gt;
+
+&lt;p&gt;For comparison, here's the pelican I got &lt;a href="https://simonwillison.net/2025/Oct/15/claude-haiku-45/"&gt;a year ago&lt;/a&gt; from Haiku 4.5 (for &lt;a href="https://www.llm-prices.com/#it=18&amp;amp;ot=1513&amp;amp;ic=1&amp;amp;oc=5"&gt;0.7583 cents&lt;/a&gt; - Haiku 4.5 did not support reasoning levels). It &lt;em&gt;sucked&lt;/em&gt; at drawing pelicans:&lt;/p&gt;
+
+&lt;img src="https://static.simonwillison.net/static/2025/claude-haiku-4.5-pelican.jpg" alt="Described by Haiku 4.5: A whimsical illustration of a bird with a round tan body, pink beak, and orange legs riding a bicycle against a blue sky and green grass background." style="width: 60%; margin: 1em auto; display: block;" /&gt;
+
+&lt;h4 id="api-credits"&gt;And a generous API credit scheme for subscribers&lt;/h4&gt;
+
+&lt;p&gt;In addition to Haiku 5.5, Anthropic announced today that they are halving the price of cache reads for Sonnet 5.5. They've also added API credits to subscription plans:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Second, this week, we’ll roll out &lt;strong&gt;a new monthly API credit to all Max and Team subscribers for use on the Claude Platform&lt;/strong&gt;. Max 5x users will get $100 in credits per month, Max 20x users will get $200, and Team subscribers will receive up to $500, pooled across their users.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Claiming this is pleasantly easy: navigate to &lt;a href="https://claude.ai/new#settings/billing"&gt;Settings -&amp;gt; Billing&lt;/a&gt; and select the API organization that should benefit from the credits every month:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Screenshot of a Settings dialog with a close X button at top right and a row of tabs reading &amp;quot;General&amp;quot;, &amp;quot;Account&amp;quot;, &amp;quot;Privacy&amp;quot;, &amp;quot;Billing&amp;quot; (selected), &amp;quot;Usage&amp;quot;, &amp;quot;Capabilities&amp;quot;, &amp;quot;Memory&amp;quot; and &amp;quot;Design sys&amp;quot; (cut off at the edge). Beside a line-drawn icon of a branching plant with circular buds, the panel reads &amp;quot;Max plan&amp;quot;, &amp;quot;20x more usage than Pro&amp;quot; and &amp;quot;Your subscription will auto renew on Nov 2, 2026.&amp;quot; with an &amp;quot;Adjust plan&amp;quot; button on the right. Below is a section headed &amp;quot;API credits&amp;quot; with a blue &amp;quot;New&amp;quot; badge, reading &amp;quot;Your Max 20x plan includes $200 USD in API credits each month.&amp;quot; followed by grey text &amp;quot;Link an API organization to start receiving credits.&amp;quot; with a &amp;quot;Link organization&amp;quot; button on the right." src="https://static.simonwillison.net/static/2026-10-07/claude-credits.webp" /&gt;&lt;/p&gt;
+
+&lt;p&gt;The API credits exactly match the cost of the subscription itself. This is really generous - it makes it much easier for subscribers to use the API. Anthropic also let you disable auto-reload for the API, with the consequence that "API requests will stop when your balance runs out" - exactly what you want if you're planning to burn through those API credits without &lt;a href="https://simonwillison.net/2026/Oct/3/default-hard-budget-caps/"&gt;risk of a nasty billing surprise&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Note that the monthly credits &lt;a href="https://support.claude.com/en/articles/17154008-monthly-api-credits-for-max-and-team-plans#h_dfc1659cee"&gt;do not roll over&lt;/a&gt; - use them or lose them.&lt;/p&gt;
+
+&lt;p&gt;OpenAI still allow you to use your Codex subscription for personal API use, which works out as a better deal for heavy API users. This new credit scheme goes at least some way to overcoming that difference.&lt;/p&gt;
+    
+        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/anthropic"&gt;anthropic&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/claude"&gt;claude&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llm-pricing"&gt;llm-pricing&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/pelican-riding-a-bicycle"&gt;pelican-riding-a-bicycle&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llm-release"&gt;llm-release&lt;/a&gt;&lt;/p&gt;
+    
+
+</summary><category term="ai"/><category term="generative-ai"/><category term="llms"/><category term="anthropic"/><category term="claude"/><category term="llm-pricing"/><category term="pelican-riding-a-bicycle"/><category term="llm-release"/></entry><entry><title>Anti-Patterns in Software Blogging</title><link href="https://simonwillison.net/2026/Oct/7/anti-patterns-in-software-blogging/" rel="alternate"/><published>2026-10-07T14:53:51+00:00</published><updated>2026-10-07T14:53:51+00:00</updated><id>https://simonwillison.net/2026/Oct/7/anti-patterns-in-software-blogging/</id><summary type="html">
+    
+&lt;p&gt;&lt;strong&gt;&lt;a href="https://refactoringenglish.com/blog/anti-patterns-software-blogging/#summary"&gt;Anti-Patterns in Software Blogging&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+Some excellent writing advice from Michael Lynch. Michael warns against "meandering intros", misjudging your reader's existing knowledge, assuming they'll read your previous posts, and excessive formality.&lt;/p&gt;
+&lt;p&gt;He also warns against &lt;a href="https://refactoringenglish.com/blog/anti-patterns-software-blogging/#overreliance-on-links"&gt;overreliance on links&lt;/a&gt; as an excuse not to explain terminology. This one hurt! I do this all the time, but I have a nagging suspicion that almost nobody ever clicks on them.&lt;/p&gt;
+&lt;p&gt;(In &lt;a href="https://lobste.rs/s/rwdufq/anti_patterns_software_blogging#c_qdhhsd"&gt;a Lobste.rs comment&lt;/a&gt; Michael clarifies that "My rule of thumb is that my article should still make sense to the reader even if they don't click any links". That works for me.)&lt;/p&gt;
+&lt;p&gt;This point about using your own voice is crucial:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Beginner software bloggers suffer from a mass delusion that you have to write in a stiff, overly formal way for people to take you seriously [...]&lt;/p&gt;
+&lt;p&gt;Just write the way you talk.&lt;/p&gt;
+&lt;p&gt;With so many developers delegating their writing to AI, software blogging is becoming bland and homogenous. Readers are hungry for writing with personality.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+    &lt;p&gt;&lt;small&gt;&lt;/small&gt;Via &lt;a href="https://lobste.rs/s/rwdufq/anti_patterns_software_blogging"&gt;Lobste.rs&lt;/a&gt;&lt;/small&gt;&lt;/p&gt;
+
+
+    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/blogging"&gt;blogging&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/writing"&gt;writing&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/michael-lynch"&gt;michael-lynch&lt;/a&gt;&lt;/p&gt;
+
+
+
+</summary><category term="blogging"/><category term="writing"/><category term="michael-lynch"/></entry><entry><title>Quoting Jake Boggan</title><link href="https://simonwillison.net/2026/Oct/7/jake-boggan/" rel="alternate"/><published>2026-10-07T04:47:55+00:00</published><updated>2026-10-07T04:47:55+00:00</updated><id>https://simonwillison.net/2026/Oct/7/jake-boggan/</id><summary type="html">
     &lt;blockquote cite="https://news.ycombinator.com/item?id=49984923#49987367"&gt;&lt;p&gt;I was a graph theory junkie long ago and even moved to Budapest for awhile to study among the greats. While I was there I started working on Barnette's Conjecture which came to occupy my thoughts over the next 24 years of my life, on and off as I worked in many different fields. Last summer I even thought for a few days that I had actually solved it.&lt;/p&gt;
 &lt;p&gt;But it's supposedly proven here - &lt;a href="https://github.com/openai/math/blob/main/lean/docs/180.md"&gt;problem 180&lt;/a&gt;. I don't know what to think exactly. I spent thousands of hours on that problem. I really enjoyed it. Hearing that it is solved somehow makes me sad in a far-off way, like hearing an ex-girlfriend died suddenly in a car crash. I don't know, there's probably a lot of people feeling odd emotions tonight.&lt;/p&gt;&lt;/blockquote&gt;
 &lt;p class="cite"&gt;&amp;mdash; &lt;a href="https://news.ycombinator.com/item?id=49984923#49987367"&gt;Jake Boggan&lt;/a&gt;, Hacker News comment on &lt;a href="https://github.com/openai/math"&gt;openai/math&lt;/a&gt;&lt;/p&gt;
@@ -1203,35 +1261,4 @@ reached a recovery-era high of 325 birds.
         &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/annotated-talks"&gt;annotated-talks&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai-security-research"&gt;ai-security-research&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/openai-hugging-face-incident"&gt;openai-hugging-face-incident&lt;/a&gt;&lt;/p&gt;
     
 
-</summary><category term="ai"/><category term="generative-ai"/><category term="llms"/><category term="annotated-talks"/><category term="ai-security-research"/><category term="openai-hugging-face-incident"/></entry><entry><title>S3 Is the Future, S3 Is the Past</title><link href="https://simonwillison.net/2026/Sep/27/hn-49871741/" rel="alternate"/><published>2026-09-27T23:09:19+00:00</published><updated>2026-09-27T23:09:19+00:00</updated><id>https://simonwillison.net/2026/Sep/27/hn-49871741/</id><summary type="html">
-    
-        &lt;p&gt;&lt;a href="https://news.ycombinator.com/item?id=49851693#49871741"&gt;My comment&lt;/a&gt; on &lt;a href="https://news.ycombinator.com/item?id=49851693"&gt;S3 Is the Future, S3 Is the Past&lt;/a&gt; &amp;mdash; Hacker News.&lt;/p&gt;&lt;p&gt;One thing I find notable about S3 today is that, while it used to drop in price reasonably often, there hasn't been a price drop in &lt;em&gt;a full decade&lt;/em&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;2006-03-14  $0.150/GB-month
-2010-11-01  $0.140/GB-month
-2012-02-01  $0.125/GB-month
-2012-12-01  $0.095/GB-month
-2014-02-01  $0.085/GB-month
-2014-04-01  $0.030/GB-month
-2016-12-01  $0.023/GB-month
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Today it's still $0.023/GB-month.&lt;/p&gt;
-    
-    
-        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/amazon-web-services"&gt;amazon-web-services&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/s3"&gt;s3&lt;/a&gt;&lt;/p&gt;
-    
-
-</summary><category term="amazon-web-services"/><category term="s3"/></entry><entry><title>Bluesky reply bot checker</title><link href="https://simonwillison.net/2026/Sep/27/bluesky-bot-check/" rel="alternate"/><published>2026-09-27T18:41:44+00:00</published><updated>2026-09-27T18:41:44+00:00</updated><id>https://simonwillison.net/2026/Sep/27/bluesky-bot-check/</id><summary type="html">
-    
-        &lt;p&gt;&lt;strong&gt;Tool:&lt;/strong&gt; &lt;a href="https://tools.simonwillison.net/bluesky-bot-check"&gt;Bluesky reply bot checker&lt;/a&gt;&lt;/p&gt;
-        &lt;p&gt;Automated reply bots on Twitter are a &lt;em&gt;scourge&lt;/em&gt; - as someone with a decent number of followers I attract a swarm of these, such that anything I post there attracts dozens of mindless automated replies.&lt;/p&gt;
-&lt;p&gt;They've started manifesting on Bluesky as well.&lt;/p&gt;
-&lt;p&gt;Unlike Twitter, Bluesky still has a freely available and useful API. The lack of such a thing doesn't slow down the bots, but it does make investigating them a lot more frustrating.&lt;/p&gt;
-&lt;p&gt;So I had Opus 5.5 &lt;a href="https://github.com/simonw/tools/pull/348"&gt;vibe code this tool&lt;/a&gt;, which examines any Bluesky profile for evidence of a likely reply bot.&lt;/p&gt;
-&lt;p&gt;It looks for signals like replies posted within seconds of other posts from the same account, or accounts that never post their own content (or images or links) but instead consistently reply to messages from other, higher-follower users.&lt;/p&gt;
-&lt;p&gt;It also looks for question marks, because I'm &lt;em&gt;extra&lt;/em&gt; infuriated by reply bots that trick me into wasting my time answering a question that no human ever posed.&lt;/p&gt;
-    
-    
-        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/twitter"&gt;twitter&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/bluesky"&gt;bluesky&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/vibe-coding"&gt;vibe-coding&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai-misuse"&gt;ai-misuse&lt;/a&gt;&lt;/p&gt;
-    
-
-</summary><category term="twitter"/><category term="bluesky"/><category term="vibe-coding"/><category term="ai-misuse"/></entry></feed>
+</summary><category term="ai"/><category term="generative-ai"/><category term="llms"/><category term="annotated-talks"/><category term="ai-security-research"/><category term="openai-hugging-face-incident"/></entry></feed>
