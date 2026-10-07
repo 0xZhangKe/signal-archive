@@ -1,6 +1,28 @@
 {
   "items": [
     {
+      "id": "315c9fc01c12c736c181c95d",
+      "title": "Claude Code 会把什么发出你的电脑：四条出站通道与密钥管控清单",
+      "summary": "Claude Code 在本地跑，但每一轮都要把上下文发给模型，还有遥测、报错、WebFetch、MCP 和 Bash 的出网。本文按官方文档把四条出站通道逐条拆开：各自带走什么、默认开没开、能用哪些开关管住；顺带核实「关遥测就不读 AGENTS.md」事件的修复状态，拆解本地脱敏网关 Tokenhush 的做法与边界，最后给一份可照抄的检查清单。",
+      "image": null,
+      "publishedAt": "2026-10-07T08:45:00Z",
+      "sourceId": "52b7bbc49e51b7c9",
+      "sourceTitle": "Redreamality 博客 - 技术见解",
+      "link": "https://redreamality.com/cn/blog/claude-code-data-egress-secrets-control/",
+      "detailPath": "articles/315c9fc01c12c736c181c95d.json"
+    },
+    {
+      "id": "b8ae9cb79332e3a7346741de",
+      "title": "MCP server 接多了，agent 反而选不准工具：从 tool search、Code Mode 到 ToolSearcher",
+      "summary": "MCP server 一多，光工具 schema 就占掉几万 token，选错工具、重名冲突和投毒风险也跟着来。本文以 arXiv ToolSearcher（类别约束判别、事件级搜索奖励、轨迹对齐分配）为锚，对照 Anthropic 与 OpenAI 的 tool search / defer_loading、Claude Code、Spring AI、VS Code 虚拟工具、MCP 2026-07-28 规范、Cloudflare Code Mode 和 Docker MCP Gateway，梳理五类修法，并附一份 N 个 MCP server 的运维清单。",
+      "image": null,
+      "publishedAt": "2026-10-07T08:40:00Z",
+      "sourceId": "52b7bbc49e51b7c9",
+      "sourceTitle": "Redreamality 博客 - 技术见解",
+      "link": "https://redreamality.com/cn/blog/mcp-server-sprawl-tool-selection-at-scale/",
+      "detailPath": "articles/b8ae9cb79332e3a7346741de.json"
+    },
+    {
       "id": "b0c0cef31df8706d617329f3",
       "title": "Claude Code 扩展全景：从 CLAUDE.md 到 Mods，团队定制该先加什么",
       "summary": "Claude Code 到 2026 年秋已是一套可组合的 harness：CLAUDE.md、Skills、MCP、Subagents、Hooks、Plugins，加上新发布的 Mods、Projects 和 Claude Tag。本文按 agent loop 逐环拆解各扩展管什么、怎么组合、哪里踩坑，结合 Thariq 访谈做判断，并给出团队定制的先后顺序和选型表。",
@@ -637,28 +659,6 @@
       "sourceTitle": "Redreamality 博客 - 技术见解",
       "link": "https://redreamality.com/cn/blog/grow-the-harness-not-the-context/",
       "detailPath": "articles/b37ba81153bbefa52825d3cc.json"
-    },
-    {
-      "id": "f9b341fec9b3f92a110f7a34",
-      "title": "Jev × Claude Code：别当聊天模型用，先搞清四条落地路径和 25 行最小实现",
-      "summary": "YouTube 爆款把 Jev 绑上 Claude Code，但 Jev 不能当 CLI 背后的聊天模型。本文整理官方 skill、边界钩子、MCP、按轮路由四条路径，对照 NobodyWho 的 25 行最小实现，并讨论 OpenAI 跟进压力。",
-      "image": null,
-      "publishedAt": "2026-09-23T14:40:00Z",
-      "sourceId": "52b7bbc49e51b7c9",
-      "sourceTitle": "Redreamality 博客 - 技术见解",
-      "link": "https://redreamality.com/cn/blog/jev-claude-code-10x-and-25-lines/",
-      "detailPath": "articles/f9b341fec9b3f92a110f7a34.json"
-    },
-    {
-      "id": "00dfa46d3853ba023ed22ba8",
-      "title": "小米 MiMo-v2.6 强化学习看板指标全面解析与 Notification 运维归因",
-      "summary": "深入剖析小米 MiMo-v2.6 大模型强化学习训练看板（https://mimo.xiaomi.com/rl/）中的 2000+ 指标体系，全面覆盖 Actor、Critic、DynSam、Timing 等 13 个子维度，并对 Notification 运维事件做指标因果与数据证据溯源。",
-      "image": null,
-      "publishedAt": "2026-09-21T01:30:00Z",
-      "sourceId": "52b7bbc49e51b7c9",
-      "sourceTitle": "Redreamality 博客 - 技术见解",
-      "link": "https://redreamality.com/cn/blog/mimo-v2-6-rl-metrics-and-incident-analysis/",
-      "detailPath": "articles/00dfa46d3853ba023ed22ba8.json"
     }
   ]
 }
