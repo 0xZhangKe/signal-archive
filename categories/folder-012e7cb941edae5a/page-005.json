@@ -1,6 +1,61 @@
 {
   "items": [
     {
+      "id": "30252fece0e3fb466e9e7fa7",
+      "title": "Separate Operations From Data - Data-Oriented Programming v1.1",
+      "summary": "Data-oriented programming guides us towards a separation of data and operations. Operations should be implemented in dedicated subsystems, using pattern matching over sealed interfaces to pick execution branches and deconstructing records to implement domain logic.",
+      "image": null,
+      "publishedAt": "2024-06-05T00:00:00Z",
+      "sourceId": "c31f4842c93c4e8e",
+      "sourceTitle": "nipafx",
+      "link": "https://nipafx.dev/dop-v1-1-separate-operations",
+      "detailPath": "articles/30252fece0e3fb466e9e7fa7.json"
+    },
+    {
+      "id": "9ad24068bef82097eaa8de5d",
+      "title": "Make Illegal States Unrepresentable - Data-Oriented Programming v1.1",
+      "summary": "Data-oriented programming focuses on modeling data as closely as possible and a guiding principle for achieving that is to ensure that the software can not represent illegal states. That can be achieved with good type design or with constructor checks (plus tests).",
+      "image": null,
+      "publishedAt": "2024-06-03T00:00:00Z",
+      "sourceId": "c31f4842c93c4e8e",
+      "sourceTitle": "nipafx",
+      "link": "https://nipafx.dev/dop-v1-1-illegal-states",
+      "detailPath": "articles/9ad24068bef82097eaa8de5d.json"
+    },
+    {
+      "id": "9e505ae789f963a746bc90f2",
+      "title": "Mutable objects or properties?",
+      "summary": "Time to answer the question: var/readonly vs val/mutable. Which one should you use?",
+      "image": "https://marcinmoskala.com/kt-academy-articles/images/var_vs_mutable_cover.png",
+      "publishedAt": "2024-06-03T00:00:00Z",
+      "sourceId": "fe21eb529a9f3052",
+      "sourceTitle": "Kt. Academy",
+      "link": "https://kt.academy/article/var_readonly_vs_val_mutable",
+      "detailPath": "articles/9e505ae789f963a746bc90f2.json"
+    },
+    {
+      "id": "c323037e622a5f740862cc13",
+      "title": "Paged Out! #4",
+      "summary": "Paged Out! Issue #4 is available for download - enjoy!",
+      "image": null,
+      "publishedAt": "2024-06-01T14:29:00Z",
+      "sourceId": "de36ec3d8281810c",
+      "sourceTitle": "Paged Out! Magazine",
+      "link": "https://pagedout.institute/download/PagedOut_004_beta1.pdf",
+      "detailPath": "articles/c323037e622a5f740862cc13.json"
+    },
+    {
+      "id": "f99555cf97c03a616587a41a",
+      "title": "Model Data, the Whole Data, and Nothing but the Data - Data-Oriented Programming v1.1",
+      "summary": "Data-oriented programming (DOP) centers around modeling data as closely as possible and so a core principle of DOP is to 'model the data, the whole data, and nothing but the data'. This goal is best achieved with a mix of records and sealed types as well as some programming practices that may seem odd to the object-oriented developer - all of which is explo…",
+      "image": null,
+      "publishedAt": "2024-05-29T00:00:00Z",
+      "sourceId": "c31f4842c93c4e8e",
+      "sourceTitle": "nipafx",
+      "link": "https://nipafx.dev/dop-v1-1-model-data",
+      "detailPath": "articles/f99555cf97c03a616587a41a.json"
+    },
+    {
       "id": "6a0f5748e117ff7e7ed5c448",
       "title": "Model Data Immutably and Transparently - Data-Oriented Programming v1.1",
       "summary": "To model data immutably and transparently is one of the four principles of data-oriented programming. In this article, we explore why immutability and transparency are important when modeling data and how to use Java's features, particularly records, to achieve that.",
@@ -604,61 +659,6 @@
       "sourceTitle": "Kt. Academy",
       "link": "https://kt.academy/article/kotlin-books-for-universities-and-conferences",
       "detailPath": "articles/b6ca6b2169a201c1aebcceba.json"
-    },
-    {
-      "id": "f9e0a252277097541ef98009",
-      "title": "Kotlin Reflection: Method and property references",
-      "summary": "The general hierarchy of Kotlin reference classes, and details about method and property references.",
-      "image": "https://marcinmoskala.com/advanced-kotlin-book/promotion/09_reflection_1.jpg",
-      "publishedAt": "2023-10-16T00:15:00Z",
-      "sourceId": "fe21eb529a9f3052",
-      "sourceTitle": "Kt. Academy",
-      "link": "https://kt.academy/article/ak-reflection",
-      "detailPath": "articles/f9e0a252277097541ef98009.json"
-    },
-    {
-      "id": "a27cde9aeeda8e52307c064d",
-      "title": "Kotlin for developers' series is finally ready!",
-      "summary": "We are happy to announce that Kotlin for developers series is finally complete.",
-      "image": "https://marcinmoskala.com/kt-academy-articles/promotion/books-kotlin-for-developers-ready.png",
-      "publishedAt": "2023-10-12T00:01:00Z",
-      "sourceId": "fe21eb529a9f3052",
-      "sourceTitle": "Kt. Academy",
-      "link": "https://kt.academy/article/books-kotlin-for-developers-ready",
-      "detailPath": "articles/a27cde9aeeda8e52307c064d.json"
-    },
-    {
-      "id": "1c41833f9418911d917239d4",
-      "title": "Extensions in Kotlin",
-      "summary": "What are extensions in Kotlin and how do we use them.",
-      "image": "https://marcinmoskala.com/kotlin_essentials_book/promotion/extensions.jpg",
-      "publishedAt": "2023-10-09T00:01:00Z",
-      "sourceId": "fe21eb529a9f3052",
-      "sourceTitle": "Kt. Academy",
-      "link": "https://kt.academy/article/kfde-extensions",
-      "detailPath": "articles/1c41833f9418911d917239d4.json"
-    },
-    {
-      "id": "a7638dea43fbb769c62b3996",
-      "title": "New Class-File API Will Make Java Updates Easier - Inside Java Newscast #56",
-      "summary": "How the new class-file API that Brian Goetz presented at JVMLS will greatly improve the situation around Java updates",
-      "image": "https://nipafx.dev/static/b433047c5f6d3c31ab9ad2d0adbaf77c/060c7/class-file-api-bytecode.png",
-      "publishedAt": "2023-10-05T00:00:00Z",
-      "sourceId": "c31f4842c93c4e8e",
-      "sourceTitle": "nipafx",
-      "link": "https://nipafx.dev/inside-java-newscast-56",
-      "detailPath": "articles/a7638dea43fbb769c62b3996.json"
-    },
-    {
-      "id": "11f7b3be3b0e2bc458c6cec4",
-      "title": "Effective Kotlin Item 35: Consider using dependency injection",
-      "summary": "What is dependency injection, why it is so important, and how to use it in Kotlin.",
-      "image": "https://marcinmoskala.com/EffectiveKotlin-Book/promotion/dependency_injection.jpg",
-      "publishedAt": "2023-10-02T00:00:00Z",
-      "sourceId": "fe21eb529a9f3052",
-      "sourceTitle": "Kt. Academy",
-      "link": "https://kt.academy/article/ek-dependency-injection",
-      "detailPath": "articles/11f7b3be3b0e2bc458c6cec4.json"
     }
   ]
 }
