@@ -12,7 +12,7 @@
 	<atom:link href="https://blog.jetbrains.com/kotlin/feed/" rel="self" type="application/rss+xml" />
 	<link>https://blog.jetbrains.com</link>
 	<description>Developer Tools for Professionals and Teams</description>
-	<lastBuildDate>Mon, 05 Oct 2026 11:04:46 +0000</lastBuildDate>
+	<lastBuildDate>Wed, 07 Oct 2026 10:48:41 +0000</lastBuildDate>
 	<language>en-US</language>
 	<sy:updatePeriod>
 	hourly	</sy:updatePeriod>
@@ -28,6 +28,294 @@
 	<height>32</height>
 </image> 
 	<item>
+		<title>Start Your Next KMP App With Kotlin Toolchain 0.13</title>
+		<link>https://blog.jetbrains.com/kotlin/2026/10/start-your-next-kmp-app-with-kotlin-toolchain-0-13/</link>
+		
+		<dc:creator><![CDATA[Anton Makeev]]></dc:creator>
+		<pubDate>Wed, 07 Oct 2026 10:21:46 +0000</pubDate>
+		<featuredImage>https://blog.jetbrains.com/wp-content/uploads/2026/10/KM-social-BlogFeatured-1280x720-1-1.png</featuredImage>		<category><![CDATA[kotlin]]></category>
+		<category><![CDATA[multiplatform]]></category>
+		<category><![CDATA[releases]]></category>
+		<category><![CDATA[toolchain]]></category>
+		<guid isPermaLink="false">https://blog.jetbrains.com/?post_type=kotlin&#038;p=744876</guid>
+
+					<description><![CDATA[The Kotlin Toolchain is a unified entry point into Kotlin. It lets you build JVM, Android, iOS, multiplatform, and server-side applications with a simple declarative configuration. With the release of v0.13, we now recommend the Kotlin Toolchain for most new Kotlin Multiplatform (KMP) projects. Earlier this year, we promoted the Kotlin Toolchain to Alpha. Since [&#8230;]]]></description>
+										<content:encoded><![CDATA[
+<p>The Kotlin Toolchain is a unified entry point into Kotlin. It lets you build JVM, Android, iOS, multiplatform, and server-side applications with a simple declarative configuration.</p>
+
+
+
+<p>With the release of v0.13, we now recommend the Kotlin Toolchain for most new Kotlin Multiplatform (KMP) projects.</p>
+
+
+
+<p>Earlier this year, we <a href="https://blog.jetbrains.com/amper/2026/06/kotlin-toolchain-0-11/" target="_blank" rel="noreferrer noopener">promoted the Kotlin Toolchain to Alpha</a>. Since then, our Slack channels and issue tracker have been very active. So many of you in the community have joined us to create a great build experience for Kotlin. Thank you – your continuous feedback helped us get here!</p>
+
+
+
+<p><em>Not using the Kotlin Toolchain yet? Experience automated environment setup and an intuitive CLI that works well with your AI agents.</em></p>
+
+
+
+<p align="center"><a class="ek-link jb-download-button" href="https://kotlin-toolchain.org" target="_blank" rel="noopener"><i class="download-icon"></i>Install Kotlin Toolchain</a></p>
+
+
+
+<p><em>To access the latest Kotlin Toolchain features from your IDE, use </em><a href="https://www.jetbrains.com/idea/" target="_blank" rel="noreferrer noopener"><em>IntelliJ IDEA 2026.2.3</em></a><em>,  Android Studio Rabbit 1 | 2026.2.1 (or newer). Make sure the latest version of the </em><a href="https://plugins.jetbrains.com/plugin/31850-kotlin-toolchain" target="_blank" rel="noreferrer noopener"><em>Kotlin Toolchain plugin</em></a><em> is installed.</em></p>
+
+
+
+<h2 class="wp-block-heading">How the Kotlin Toolchain simplifies getting started</h2>
+
+
+
+<p>Getting started with Kotlin Multiplatform often means working with unfamiliar platforms. Android developers might be discovering iOS for the first time, while other teams are expanding to web or desktop. Every platform comes with its own tools to install and build configurations to understand.</p>
+
+
+
+<p>The Kotlin Toolchain changes that. It is a single CLI entry point for configuring the environment, creating, building, testing, and publishing your KMP apps and libraries. It comes with a declarative project configuration and set of all necessary tools – everything you need in one place.</p>
+
+
+
+<p>In recent releases, we’ve refined the CLI and IDE experiences, added support for web and cinterop, and made many other improvements based on your feedback. Our internal dogfooding and positive community feedback have given us the confidence to recommend it for new projects!</p>
+
+
+
+<p>We’ll feature the Kotlin Toolchain in our KMP getting started guides, web and IDE project wizards. These updates will make it easier for both developers and AI agents to select the Kotlin Toolchain when it&#8217;s most appropriate for the task at hand.</p>
+
+
+
+<h2 class="wp-block-heading">Direct support for agentic workflows</h2>
+
+
+
+<p>From early on, we designed the Kotlin Toolchain to be reliable and easy to use for both developers and IDEs. It turns out that the automatic environment setup, declarative configurations, and clear, actionable error messages provide an ideal foundation for AI agents as well.</p>
+
+
+
+<p>We’ve taken this further by introducing a Hot Reload MCP server and dedicated AI agent skills, included in the official AI agent skills for Kotlin. You can install them with:</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="kotlin" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">npx skills add kotlin/kotlin-agent-skills</pre>
+
+
+
+<p>Eventually, these skills will be delivered directly through the Kotlin Toolchain. In our benchmarks, AI agents already generate and maintain Kotlin Toolchain projects <a href="https://github.com/JetBrains/kotlin-toolchain/tree/main/ai-evals/results" target="_blank" rel="noreferrer noopener">more reliably while consuming fewer tokens</a>.</p>
+
+
+
+<h2 class="wp-block-heading">What’s new in the 0.13 release</h2>
+
+
+
+<h3 class="wp-block-heading">New project creation with <code>kotlin new</code></h3>
+
+
+
+<p>Version 0.13 introduces the <code>kotlin new</code> command, offering an interactive setup flow similar to the <a href="https://kmp.jetbrains.com/?android=true&amp;ios=true&amp;iosui=compose&amp;includeTests=true" target="_blank" rel="noreferrer noopener">Kotlin Multiplatform Wizard</a>. Note that the <code>kotlin init</code> command remains available; it has been updated to match the behavior of <code>kotlin new</code>, but it generates project files directly inside your current directory.</p>
+
+
+
+<p>When you run <code>kotlin new</code>, the first prompt asks you to select your application type:</p>
+
+
+
+<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" fetchpriority="high" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/10/01-kotlin-new-application-type.png" alt="" class="wp-image-745063"/></figure>
+
+
+
+<p>For Kotlin Multiplatform applications, you can choose your target platforms in the second step:</p>
+
+
+
+<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/10/02-kotlin-new-target-platforms.png" alt="" class="wp-image-745074"/></figure>
+
+
+
+<h3 class="wp-block-heading"><strong>Better onboarding UX for iOS applications</strong></h3>
+
+
+
+<p>Setting up iOS applications on a clean machine is now significantly smoother:</p>
+
+
+
+<ul class="wp-block-list">
+<li>Better Xcode installation diagnostics: Get clear, actionable messages regarding Xcode license acceptance and first-run status.</li>
+
+
+
+<li>iOS simulator runtimes are downloaded automatically when needed. An iOS simulator is created automatically if none exists.</li>
+</ul>
+
+
+
+<h3 class="wp-block-heading"><strong>Download progress reporting in the CLI</strong></h3>
+
+
+
+<p>The TUI now displays rich download progress bars when the Kotlin Toolchain downloads required tools, such as JDKs, Android SDK components, iOS runtimes, and compilers.</p>
+
+
+
+<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/10/03-tool-download-progress.gif" alt="" class="wp-image-745102"/></figure>
+
+
+
+<h3 class="wp-block-heading"><strong>Android improvements</strong></h3>
+
+
+
+<p>In previous versions, the Android SDK was automatically provisioned when running <code>kotlin build</code> or <code>kotlin run</code> but not when opening the project in an IDE. If you opened a project in your IDE before running a build, missing SDKs could cause setup errors.</p>
+
+
+
+<p>We have aligned CLI and IDE behavior, and the Kotlin Toolchain now automatically provisions missing Android SDK components on project import.</p>
+
+
+
+<p>Additionally, we’ve also tightened validation for namespace and application ID definitions so you don’t accidentally publish app or library builds with sample IDs like <code>com.example.app</code>.</p>
+
+
+
+<h3 class="wp-block-heading"><strong>Sync status in the IDE editor</strong></h3>
+
+
+
+<p>You can now monitor the current IDE sync status inside your file editor:</p>
+
+
+
+<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/10/04-ide-sync-status.png" alt="" class="wp-image-745085"/></figure>
+
+
+
+<h3 class="wp-block-heading"><strong>SPM import</strong></h3>
+
+
+
+<p>The Kotlin Toolchain now supports Swift Package Manager dependencies for Apple platforms.</p>
+
+
+
+<p>Modules with Apple platform support (e.g. <code>kmp/lib</code>, <code>ios/app</code>) can import Objective-C APIs from Objective-C and Swift code using SwiftPM dependencies:</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">product: ios/app
+
+dependencies:
+  - swiftPackage:
+      repository: "https://github.com/firebase/firebase-ios-sdk.git"
+      version: "12.17.0"
+      products: [ "FirebaseCore", "FirebaseFirestore", "FirebaseAnalytics" ]
+</pre>
+
+
+
+<p>Imported Objective-C APIs are namespaced using the swiftPMImport prefix and ending with the module name:</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="kotlin" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">// app/src/app.kt
+import swiftPMImport.app.FIRAnalytics
+import swiftPMImport.app.FIRApp</pre>
+
+
+
+<p>Kotlin Toolchain also supports local SwiftPM packages using the <code>localSwiftPackage</code> key. See our <a href="https://kotlin-toolchain.org/dev/user-guide/dependencies/#swiftpm-dependencies" target="_blank" rel="noreferrer noopener">documentation</a> for more details.</p>
+
+
+
+<h3 class="wp-block-heading"><strong>Multiplatform library publication improvements</strong></h3>
+
+
+
+<p>When publishing multiplatform libraries, your Compose Resources and SwiftPM dependencies metadata are published along with your build artifacts.</p>
+
+
+
+<p>Compose Resources are also resolved from third-party multiplatform libraries.</p>
+
+
+
+<h3 class="wp-block-heading"><strong>Kotlin/Native compiler caches</strong></h3>
+
+
+
+<p>Kotlin/Native rebuilds just got faster. With <a href="https://youtrack.jetbrains.com/issue/KTC-5422/Support-Kotlin-Native-compiler-caches-in-Kotlin-Toolchain" target="_blank" rel="noopener">KTC-5422</a>, the Kotlin Toolchain caches compiled native dependencies and reuses them across builds and even across projects. Project code gets per-file caches, letting the compiler rebuild only the affected code during linking. Once the caches are populated, small edits mean less work and faster edit–build–run cycles for native apps and tests.</p>
+
+
+
+<p>The feature uses the existing <code>settings.kotlin.compileIncrementally</code> setting and supports non-optimized debug binaries on compatible targets. Compilation to <code>.klib</code> files continues to run in full.</p>
+
+
+
+<h2 class="wp-block-heading"><strong>What’s next for the Kotlin Toolchain and KMP</strong></h2>
+
+
+
+<p>We have some exciting milestones on our roadmap, including:</p>
+
+
+
+<ul class="wp-block-list">
+<li>Installing the Kotlin Toolchain via <code>brew install kotlin</code>.</li>
+
+
+
+<li>Providing AI skills out of the box.</li>
+
+
+
+<li>Supporting Swift Export as it stabilizes.</li>
+
+
+
+<li>Streamlining and automating app store publishing workflows.<br></li>
+</ul>
+
+
+
+<p>Much of our immediate focus will be on understanding new user feedback and closing existing gaps, including those for existing Gradle projects, before recommending migrations.</p>
+
+
+
+<p>To achieve this, we want to hear from you! As we refine the functionality, some changes may require adjustments to your projects, and we’ll do our best to support you through those migrations and make them as smooth as possible.</p>
+
+
+
+<p>Join the conversation in the <a href="https://slack-chats.kotlinlang.org/c/kotlin-toolchain" target="_blank" rel="noreferrer noopener">#kotlin-toolchain Slack channel</a> (get invite: <a href="https://kotl.in/slack" target="_blank" rel="noreferrer noopener">kotl.in/slack</a>) or share your suggestions and ideas in <a href="https://youtrack.jetbrains.com/issues/KTC" target="_blank" rel="noreferrer noopener">JetBrains YouTrack</a>. Your input and use cases help shape the future of the Kotlin Toolchain!</p>
+
+
+
+<h2 class="wp-block-heading"><strong>Install Kotlin Toolchain 0.13.0</strong></h2>
+
+
+
+<p>Ready to give the Kotlin Toolchain a go? Check out our <a href="https://kotlin-toolchain.org/latest/getting-started/" target="_blank" rel="noreferrer noopener">Getting started</a> guide to dive into code examples, tutorials, or our comprehensive user guide.</p>
+
+
+    <div class="buttons">
+        <div class="buttons__row">
+                                                <a href="https://kotlin-toolchain.org/latest/" class="btn " target="" rel="noopener">Install Kotlin Toolchain</a>
+                                    </div>
+    </div>
+
+
+
+
+
+
+
+<p>Already using the Kotlin Toolchain? Simply run <code>kotlin update</code> in your terminal to upgrade.</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
 		<title>Discontinuing Swift Language IDE Support in the Kotlin Multiplatform Plugin</title>
 		<link>https://blog.jetbrains.com/kotlin/2026/10/discontinuing-swift-language-ide-support-in-the-kotlin-multiplatform-plugin/</link>
 		
@@ -381,7 +669,7 @@ fun main() {
 
 
 
-<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" fetchpriority="high" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/09/Current-compilation-with-IDEA-1.jpg" alt="" class="wp-image-742856"/></figure>
+<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/09/Current-compilation-with-IDEA-1.jpg" alt="" class="wp-image-742856"/></figure>
 
 
 
@@ -411,7 +699,7 @@ fun main() {
 
 
 
-<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/09/Separate-compilation-1.jpg" alt="" class="wp-image-742867"/></figure>
+<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/09/Separate-compilation-1.jpg" alt="" class="wp-image-742867"/></figure>
 
 
 
@@ -454,7 +742,7 @@ fun main() {
 
 
 
-<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/09/Fixed-version-if-your-code-is-broken-by-separate-compilation.jpg" alt="" class="wp-image-742878"/></figure>
+<figure class="wp-block-image size-full"><img style="width:100% !important; height:auto !important; max-width:100% !important;" loading="lazy" decoding="async" src="https://blog.jetbrains.com/wp-content/uploads/2026/09/Fixed-version-if-your-code-is-broken-by-separate-compilation.jpg" alt="" class="wp-image-742878"/></figure>
 
 
 
@@ -2420,202 +2708,6 @@ fun addTodo(
 
 
 <p>Let’s see what DevEco’26 will reveal.</p>
-]]></content:encoded>
-					
-		
-		
-			</item>
-		<item>
-		<title>Kodee’s Kotlin Roundup: Birthday Wishes, Shipaton 2026, and the New Kotlin AI Benchmark</title>
-		<link>https://blog.jetbrains.com/kotlin/2026/08/kodees-kotlin-roundup-birthday-wishes-shipaton-2026-and-the-new-kotlin-ai-benchmark/</link>
-		
-		<dc:creator><![CDATA[Kodee]]></dc:creator>
-		<pubDate>Tue, 04 Aug 2026 08:14:27 +0000</pubDate>
-		<featuredImage>https://blog.jetbrains.com/wp-content/uploads/2026/07/KT-social-BlogFeatured-1280x720-1-5.png</featuredImage>		<category><![CDATA[kotlin]]></category>
-		<category><![CDATA[news]]></category>
-		<category><![CDATA[kotlin-roundup]]></category>
-		<guid isPermaLink="false">https://blog.jetbrains.com/?post_type=kotlin&#038;p=727205</guid>
-
-					<description><![CDATA[Hi everyone! July gave me plenty to celebrate: Kotlin turned 15, got its first public benchmark for AI coding agents, became available in BlueJ, and shipped its 2.4.10 release. Developers can also demonstrate their skills at RevenueCat Shipaton 2026 by building a Kotlin Multiplatform app and competing for the Ship Kotlin Everywhere Award. Meanwhile, X [&#8230;]]]></description>
-										<content:encoded><![CDATA[
-<p>Hi everyone! July gave me plenty to celebrate: Kotlin turned 15, got its first public benchmark for AI coding agents, became available in BlueJ, and shipped its 2.4.10 release. Developers can also demonstrate their skills at RevenueCat Shipaton 2026 by building a Kotlin Multiplatform app and competing for the Ship Kotlin Everywhere Award. Meanwhile, X has rebuilt its Android app to be 100% Kotlin, marking another milestone for the language.</p>
-
-
-
-<p>Here’s what stood out to me most over the past month:</p>
-
-
-            <div class="newsletter">
-                            <h2>Kodee-approved spotlight</h2>
-                                                            <article class="newsletter__post">
-                                                                                    <img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" class="newsletter__post-img" src="https://blog.jetbrains.com/wp-content/uploads/2026/07/Kotlin-Release-X-LinkedIn-FB-Bluesky-1200x675-1-4.png" alt="">
-                                                                            <div class="newsletter__post-text">
-                                                            <h3>Kotlin turned 15: Leave a birthday wish</h3>
-                                                        <p>This one is close to my heart – Kotlin recently turned 15! To mark the milestone, we&#8217;re inviting the whole community to celebrate. You can create a birthday postcard, upload a photo to party with me, and share a wish or a prediction for Kotlin&#8217;s next chapter. Now is the perfect moment to look back at how far we&#8217;ve come – and to look ahead together.</p>
-                                                            <a href="https://kotlinlang.org/kotlin-effect/" class="btn" target="_blank" rel="noopener">Join the celebration</a>
-                                                    </div>
-                    </article>
-                                    <article class="newsletter__post">
-                                                                                    <img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" class="newsletter__post-img" src="https://blog.jetbrains.com/wp-content/uploads/2026/07/Kotlin-Release-X-LinkedIn-FB-Bluesky-1200x675-1-3.png" alt="">
-                                                                            <div class="newsletter__post-text">
-                                                            <h3>Ship Kotlin Everywhere Award at RevenueCat Shipaton 2026</h3>
-                                                        <p>Already know Kotlin? RevenueCat Shipaton 2026 is the perfect opportunity to turn your Kotlin skills into a new app. From August 1 to September 30, build and ship for Android, iOS, desktop, or web and compete for the Ship Kotlin Everywhere Award. Use the <a href="https://kotlinlang.org/docs/multiplatform/shipathon-starter-guide.html" target="_blank" rel="noopener">KMP starter guide</a> to get your project up and running. To earn bonus points, you can help others by sharing your development journey. Shipping is impressive, but helping someone else is even better.</p>
-                                                            <a href="https://kotlinlang.org/lp/shipaton/" class="btn" target="_blank" rel="noopener">Learn more and register</a>
-                                                    </div>
-                    </article>
-                                    <article class="newsletter__post">
-                                                                                    <img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" class="newsletter__post-img" src="https://blog.jetbrains.com/wp-content/uploads/2026/07/KT-social-BlogFeatured-1280x720-1.png" alt="">
-                                                                            <div class="newsletter__post-text">
-                                                            <h3>The Kotlin Benchmark for AI coding agents</h3>
-                                                        <p>Kotlin now has its very own public benchmark for AI coding agents. It ranks agents on 105 real engineering tasks drawn from open-source Kotlin repositories, so you can compare them by resolution rate, token cost, and latency – and dig into the methodology behind the numbers. As AI becomes a bigger part of coding in Kotlin, I love that we finally have an open, Kotlin-specific way to measure what actually works.</p>
-                                                            <a href="https://blog.jetbrains.com/kotlin/2026/07/introducing-the-kotlin-benchmark-evaluate-ai-coding-agents-on-real-world-kotlin-tasks/" class="btn" target="_blank">Explore the benchmark</a>
-                                                    </div>
-                    </article>
-                                    <article class="newsletter__post">
-                                                                                    <img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" class="newsletter__post-img" src="https://blog.jetbrains.com/wp-content/uploads/2026/04/KT-social-BlogFeatured-1280x720-1-2.png" alt="Kotlin release updates">
-                                                                            <div class="newsletter__post-text">
-                                                            <h3>Kotlin 2.4.10 and Kotlin 2.4.20-Beta2</h3>
-                                                        <p>July brought the Kotlin 2.4.10 bug fix release, alongside Kotlin <a href="https://kotlinlang.org/docs/whatsnew-eap.html" target="_blank" rel="noopener">Kotlin 2.4.20-Beta2</a> with coroutine stack trace recovery, faster klib compilation, expanded Swift export, and an experimental compiler native image. Try the Beta version and share your feedback while the release is still taking shape.</p>
-                                                            <a href="https://github.com/JetBrains/kotlin/releases/tag/v2.4.10" class="btn" target="_blank" rel="noopener">See the Kotlin 2.4.10 changelog</a>
-                                                    </div>
-                    </article>
-                                    <article class="newsletter__post">
-                                                                                    <img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" class="newsletter__post-img" src="https://blog.jetbrains.com/wp-content/uploads/2026/06/Kotlin-Release-Blog-Featured-Blog-1280x720-1.png" alt="Kotlin Comes to BlueJ">
-                                                                            <div class="newsletter__post-text">
-                                                            <h3>Kotlin comes to BlueJ</h3>
-                                                        <p>Kotlin support is now available in BlueJ 6.0 thanks to a collaboration between JetBrains and the BlueJ team at King’s College London. Students can create, edit, compile, and run Kotlin code, inspect class diagrams, and interact with objects through BlueJ’s familiar workflow. For educators, a new onboarding guide and ready-to-use materials make it easier to include Kotlin’s concise syntax and null safety in introductory object-oriented programming courses.</p>
-                                                            <a href="https://blog.jetbrains.com/kotlin/2026/07/kotlin-comes-to-bluej/" class="btn" target="_blank">Read the post</a>
-                                                    </div>
-                    </article>
-                                    <article class="newsletter__post">
-                                                                                    <img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" class="newsletter__post-img" src="https://blog.jetbrains.com/wp-content/uploads/2026/07/Blog-Featured-Blog-1280x720-1.png" alt="">
-                                                                            <div class="newsletter__post-text">
-                                                            <h3>A conversation with the Golden Kodee winners</h3>
-                                                        <p>The first Golden Kodee Community Awards recognized Matheus Leandro Ferreira, Jaewoong Eum, Nicole Terc, Eeva-Jonna Panula, and Yinlong Liu for their contributions to education, online presence, creativity, positive societal impact, and in-person community building. Read their interviews and <a href="https://www.youtube.com/watch?v=p88y4pjb8Cg" target="_blank" rel="noopener">watch the video</a> to discover practical advice on learning in public, starting small, and helping the community grow.</p>
-                                                            <a href="https://blog.jetbrains.com/kotlin/2026/07/in-conversation-with-the-golden-kodee-winners/" class="btn" target="_blank">Meet the Golden Kodee winners</a>
-                                                    </div>
-                    </article>
-                                    <article class="newsletter__post">
-                                                                                    <img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" class="newsletter__post-img" src="https://blog.jetbrains.com/wp-content/uploads/2026/06/Blog-Featured-1280x720-4.png" alt="">
-                                                                            <div class="newsletter__post-text">
-                                                            <h3>Showcase your JetBrains IDE experience on LinkedIn</h3>
-                                                        <p>The free LinkedIn Connected Apps plugin lets you connect a supported JetBrains IDE to your LinkedIn profile. Once connected, a profile statement highlights how you use your IDE in practice, based on usage data that stays on your machine. As your development habits evolve, the statement updates automatically to reflect your experience. It is designed to showcase practical tool usage – not to rank developers or replace formal certification.</p>
-                                                            <a href="https://plugins.jetbrains.com/plugin/32011-linkedin-connected-apps" class="btn" target="_blank" rel="noopener">Connect your IDE to LinkedIn</a>
-                                                    </div>
-                    </article>
-                                    <article class="newsletter__post">
-                                                                                    <img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" class="newsletter__post-img" src="https://blog.jetbrains.com/wp-content/uploads/2026/07/Blog-Featured-1280x720-1.png" alt="">
-                                                                            <div class="newsletter__post-text">
-                                                            <h3>How I came to life</h3>
-                                                        <p>I didn’t always look like this! My journey began with a simple robot-inspired concept. Then, with the help of research, creativity, and community feedback, I evolved into the Kodee you know and love today. Check out my origin story (including how I got my name!).</p>
-                                                            <a href="https://blog.jetbrains.com/research/2026/07/the-history-of-kodee/" class="btn" target="_blank">Discover the story behind Kodee</a>
-                                                    </div>
-                    </article>
-                                    <article class="newsletter__post">
-                                                                                    <img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" class="newsletter__post-img" src="https://blog.jetbrains.com/wp-content/uploads/2026/07/klibsionew.jpg" alt="">
-                                                                            <div class="newsletter__post-text">
-                                                            <h3>KMP library spotlight: Ktor, Koin, and Kermit</h3>
-                                                        <p>Finding the right KMP library shouldn’t slow down your project. klibs.io brings together more than 4,100 Kotlin Multiplatform libraries, with filters for developers and <a href="https://klibs.io/ai" target="_blank" rel="noopener">AI integrations</a> that give coding agents access to accurate, up-to-date library data. This month, we’re spotlighting <a href="https://klibs.io/project/ktorio/ktor" target="_blank" rel="noopener">Ktor</a>, <a href="https://klibs.io/project/InsertKoinIO/koin" target="_blank" rel="noopener">Koin</a>, and <a href="https://klibs.io/project/touchlab/Kermit" target="_blank" rel="noopener">Kermit</a> – a practical trio for networking, dependency injection, and logging.</p>
-                                                            <a href="https://klibs.io/" class="btn" target="_blank" rel="noopener">Find your next KMP library</a>
-                                                    </div>
-                    </article>
-                                    <article class="newsletter__post">
-                                                                                    <img style="width:100% !important; height:auto !important; max-width:100% !important;" decoding="async" class="newsletter__post-img" src="https://blog.jetbrains.com/wp-content/uploads/2026/07/androidxapp.png" alt="">
-                                                                            <div class="newsletter__post-text">
-                                                            <h3>X rebuilds its Android app in 100% Kotlin</h3>
-                                                        <p>Built from scratch, X’s Android app is now written entirely in Kotlin. X Chat also uses Kotlin Multiplatform across Android, iOS, and web for end-to-end encryption, storage, sync, and business logic. It’s exciting to see Kotlin and Kotlin Multiplatform used at this scale.</p>
-                                                            <a href="https://x.com/kotlin/status/2079882056465535142" class="btn" target="_blank">Check out the rebuilt app</a>
-                                                    </div>
-                    </article>
-                                    </div>
-    
-
-
-<h2 class="wp-block-heading">Where you can learn more</h2>
-
-
-
-<ul class="wp-block-list">
-<li><a href="https://kotlinlang.org/docs/multiplatform/compose-navigation-3.html" target="_blank" rel="noreferrer noopener">Learn how to use Navigation 3 in Compose Multiplatform</a>.</li>
-
-
-
-<li><a href="https://kotlinlang.org/docs/multiplatform/multiplatform-cocoapods-spm-migration-ai.html" target="_blank" rel="noreferrer noopener">Move a KMP project from CocoaPods to SwiftPM dependencies with help from Junie</a>.</li>
-
-
-
-<li><a href="https://klibs.io/ai" target="_blank" rel="noreferrer noopener">Connect your AI coding agent to klibs.io for up-to-date KMP library data</a>.</li>
-
-
-
-<li><a href="https://kotlinlang.org/docs/kotlin-ai-skills.html" target="_blank" rel="noreferrer noopener">Use Kotlin AI skills for common migration tasks</a>.</li>
-
-
-
-<li><a href="https://blog.jetbrains.com/research/2026/07/kotlinllm-open-source/" target="_blank" rel="noreferrer noopener">KotlinLLM is Going Open Source</a>.</li>
-
-
-
-<li><a href="https://blog.jetbrains.com/kotlin/2026/07/secure-your-apis-oauth2-and-jwt-for-beginners/" target="_blank" rel="noreferrer noopener">Learn how to secure APIs built with Kotlin and Spring Boot using OAuth2 and JWT</a>.</li>
-
-
-
-<li><a href="https://kotlinlang.org/docs/spring-boot-claude.html" target="_blank" rel="noreferrer noopener">Build a task manager app with Kotlin, Spring Boot, and Claude Agent</a>.</li>
-
-
-
-<li><a href="https://kotlinlang.org/education/" target="_blank" rel="noreferrer noopener">Explore Backend Development with Kotlin – presentation slides and a runnable demo project</a>.</li>
-
-
-
-<li><a href="https://spring.io/blog/2026/07/02/a-bootiful-podcast-sebastien-deleuze" target="_blank" rel="noreferrer noopener">Listen to Sébastien Deleuze and Josh Long talk Kotlin for backend on<em> A Bootiful Podcast</em></a>.</li>
-</ul>
-
-
-
-<h2 class="wp-block-heading">YouTube highlights</h2>
-
-
-
-<ul class="wp-block-list">
-<li><a href="https://www.youtube.com/watch?v=VVf6txPZk3Y" target="_blank" rel="noreferrer noopener">Sony’s KMP Journey: Scaling BLE &amp; Hardware with Kotlin Multiplatform | Sergio Carrilho</a>.</li>
-
-
-
-<li><a href="https://www.youtube.com/watch?v=djrt5zsATtM" target="_blank" rel="noreferrer noopener">What’s New in Compose Multiplatform | Sebastian Aigner and Márton Braun</a>.</li>
-
-
-
-<li><a href="https://www.youtube.com/watch?v=-w97euRLTBA" target="_blank" rel="noreferrer noopener">Run, Kotlin, Run! | Marc Reichelt</a>.</li>
-
-
-
-<li><a href="https://www.youtube.com/watch?v=25Ngfn9Bhqc" target="_blank" rel="noreferrer noopener">A First Look at the Kotlin Ecosystem Plugin for Declarative Gradle | Marcin Mycek</a>.</li>
-
-
-
-<li><a href="https://www.youtube.com/watch?v=9XL0r5lJNDs" target="_blank" rel="noreferrer noopener">Building Enterprise Ready AI With Koog | Vadim Briliantov</a>.</li>
-
-
-
-<li><a href="https://www.youtube.com/watch?v=1sp05VqRVDA" target="_blank" rel="noreferrer noopener">Real-World Data Science With Kotlin Notebook | Adele Carpenter</a>.</li>
-
-
-
-<li><a href="https://www.youtube.com/watch?v=5ccWWM3AZBU" target="_blank" rel="noreferrer noopener">Evolving Kotlin Language Defaults | Michail Zarečenskij</a>.</li>
-
-
-
-<li><a href="https://www.youtube.com/watch?v=O1nTwf0QPj4" target="_blank" rel="noreferrer noopener">Context Parameters and API Design | Alejandro Serrano Mena</a>.</li>
-
-
-
-<li><a href="https://www.youtube.com/watch?v=xGZIH-hfyhI" target="_blank" rel="noreferrer noopener">Concurrency Patterns for Modern High-Performance Kotlin Servers | Bowen Feng</a>.</li>
-
-
-
-<li><a href="https://www.youtube.com/watch?v=dmOrYzS_AKM" target="_blank" rel="noreferrer noopener">Deconstructing OkHttp | Jesse Wilson</a>.</li>
-</ul>
 ]]></content:encoded>
 					
 		

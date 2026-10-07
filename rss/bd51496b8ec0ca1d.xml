@@ -5,8 +5,18 @@
     <link>https://koimsurai.com/blog</link>
     <description>Koimsurai 的個人部落格 — 技術筆記、生活隨筆、影集心得</description>
     <language>zh-TW</language>
-    <lastBuildDate>Mon, 05 Oct 2026 07:04:10 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 07 Oct 2026 05:13:53 GMT</lastBuildDate>
     <atom:link href="https://koimsurai.com/rss" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>Home Assistant 接 Google Home 語音控制：用 Matter 免雲端,和兩個都叫「找不到裝置」的坑</title>
+      <link>https://koimsurai.com/blog/home-assistant-google-home-matter-hub</link>
+      <guid isPermaLink="true">https://koimsurai.com/blog/home-assistant-google-home-matter-hub</guid>
+      <description>作者想用語音控制 Home Assistant 裡的燈,選了不走雲端的路:用 home-assistant-matter-hub 把 HA 實體包成 Matter 橋接器,由客廳的 Google TV Streamer 4K 當中樞。配對時 Google Home 兩次顯示「找不到裝置」,原因卻完全不同:第一次是橋接器使用 Matter 測試廠商碼 0xFFF1,必須先在 Google Home Developer Console 建立 VID/PID 一致的 integration;第二次是伺服器的 ufw 只有 IPv4 的區網規則,ICMPv6 被預設放行所以 ping6 正常,真正走 IPv6 的 UDP 5540 卻被丟掉,而且配對後的連線走 link-local,fe80::/10 也必須放行。文中附上每一關的確認方法與修正指令,並記錄配對後的實際使用狀況:燈要改成「燈」類型並指定房間,而且語音必須講出房間;冷氣的溫度死區設定讓整個橋接器崩潰,換到 RiDDiX 維護的 fork 後解決;冷氣只能指定絕對溫度。</description>
+      <author>Koimsurai</author>
+      <pubDate>Mon, 05 Oct 2026 07:16:45 GMT</pubDate>
+      <category>位元築夢</category>
+      <category>Home Assistant</category><category>Matter</category><category>Google Home</category><category>ufw</category><category>IPv6</category>
+    </item>
     <item>
       <title>用 NT$220 讓自發電開關接上 Home Assistant：RM4 Pro 錄不到的 433MHz 訊號,和一組完美的假碼</title>
       <link>https://koimsurai.com/blog/kinetic-switch-cc1101-home-assistant</link>

@@ -12,7 +12,7 @@
 	<atom:link href="https://www.schneier.com/feed/" rel="self" type="application/rss+xml" />
 	<link>https://www.schneier.com/</link>
 	<description></description>
-	<lastBuildDate>Tue, 06 Oct 2026 11:07:20 +0000</lastBuildDate>
+	<lastBuildDate>Wed, 07 Oct 2026 11:07:37 +0000</lastBuildDate>
 	<language>en-US</language>
 	<sy:updatePeriod>
 	hourly	</sy:updatePeriod>
@@ -28,6 +28,33 @@
 	<height>32</height>
 </image> 
 <site xmlns="com-wordpress:feed-additions:1">182601345</site>	<item>
+		<title>Apple’s Verified Photography System</title>
+		<link>https://www.schneier.com/blog/archives/2026/10/apples-verified-photography-system.html</link>
+					<comments>https://www.schneier.com/blog/archives/2026/10/apples-verified-photography-system.html#comments</comments>
+		
+		<dc:creator><![CDATA[Bruce Schneier]]></dc:creator>
+		<pubDate>Wed, 07 Oct 2026 11:07:36 +0000</pubDate>
+				<category><![CDATA[Uncategorized]]></category>
+		<category><![CDATA[Apple]]></category>
+		<category><![CDATA[authentication]]></category>
+		<category><![CDATA[cameras]]></category>
+		<category><![CDATA[reports]]></category>
+		<guid isPermaLink="false">https://www.schneier.com/?p=72741</guid>
+
+					<description><![CDATA[<p>Apple just <a href="https://security.apple.com/blog/apple-reference-image/">released</a> a system called &#8220;Reference Image.&#8221; It can verify the image is exactly as taken by an iPhone&#8212;new models only&#8212;without tying it to a specific iPhone or photographer. It can also verify that multiple images came from the same iPhone.</p>
+<blockquote><p>Other industry solutions require a photographer or institution to vouch for an image using their own credentials. We are concerned this puts some photographers, such as those operating in conflict zones, in a difficult position; it should not be necessary to forgo anonymity in order to prove image authenticity. We built Apple Reference Image to avoid using an explicit, public credential for photographers, and to avoid even implicit public association between different photos taken by the same sensor. The final reference image is instead signed by Apple’s signing service, after validation by PCC. That signature is backed by Apple’s strongest technical guarantees...</p></blockquote>]]></description>
+										<content:encoded><![CDATA[<p>Apple just <a href="https://security.apple.com/blog/apple-reference-image/">released</a> a system called &#8220;Reference Image.&#8221; It can verify the image is exactly as taken by an iPhone&#8212;new models only&#8212;without tying it to a specific iPhone or photographer. It can also verify that multiple images came from the same iPhone.</p>
+<blockquote><p>Other industry solutions require a photographer or institution to vouch for an image using their own credentials. We are concerned this puts some photographers, such as those operating in conflict zones, in a difficult position; it should not be necessary to forgo anonymity in order to prove image authenticity. We built Apple Reference Image to avoid using an explicit, public credential for photographers, and to avoid even implicit public association between different photos taken by the same sensor. The final reference image is instead signed by Apple’s signing service, after validation by PCC. That signature is backed by Apple’s strongest technical guarantees.</p>
+<p>Our implementation also protects the confidentiality of the image itself, including from Apple. Merely capturing a reference image should never expose the actual pixels to Apple or anyone else. We achieve this through the exceptional privacy properties of PCC ­ the nodes themselves are architected so that not even Apple can access image data, just as Apple cannot see the information processed for Apple Intelligence in PCC. While the revocation service must maintain a private record of photo GUIDs and associated sensors to allow for revocation, it never has access to the image data, and does not allow for public access to this record. And as final revocation checks occur using on-device lists, a device never reveals to anyone which photo it’s looking at in order to find out whether it’s still valid.</p></blockquote>
+<p>The report makes for good reading; the details are interesting.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://www.schneier.com/blog/archives/2026/10/apples-verified-photography-system.html/feed/</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">72741</post-id>	</item>
+		<item>
 		<title>Possible Vulnerability in Apple’s Automatic Reboot</title>
 		<link>https://www.schneier.com/blog/archives/2026/10/possible-vulnerability-in-apples-automatic-reboot.html</link>
 					<comments>https://www.schneier.com/blog/archives/2026/10/possible-vulnerability-in-apples-automatic-reboot.html#comments</comments>
@@ -51,7 +78,7 @@
 ]]></content:encoded>
 					
 					<wfw:commentRss>https://www.schneier.com/blog/archives/2026/10/possible-vulnerability-in-apples-automatic-reboot.html/feed/</wfw:commentRss>
-			<slash:comments>13</slash:comments>
+			<slash:comments>12</slash:comments>
 		
 		
 		<post-id xmlns="com-wordpress:feed-additions:1">72739</post-id>	</item>
@@ -99,7 +126,7 @@
 ]]></content:encoded>
 					
 					<wfw:commentRss>https://www.schneier.com/blog/archives/2026/10/friday-squid-blogging-eu-is-trying-to-fight-unregulated-squid-fishing.html/feed/</wfw:commentRss>
-			<slash:comments>32</slash:comments>
+			<slash:comments>34</slash:comments>
 		
 		
 		<post-id xmlns="com-wordpress:feed-additions:1">72711</post-id>	</item>
@@ -307,34 +334,5 @@
 		
 		
 		<post-id xmlns="com-wordpress:feed-additions:1">72687</post-id>	</item>
-		<item>
-		<title>Friday Squid Blogging: Participatory Squid Dissection in October in Tennessee</title>
-		<link>https://www.schneier.com/blog/archives/2026/09/friday-squid-blogging-participatory-squid-dissection-in-october-in-tennessee.html</link>
-					<comments>https://www.schneier.com/blog/archives/2026/09/friday-squid-blogging-participatory-squid-dissection-in-october-in-tennessee.html#comments</comments>
-		
-		<dc:creator><![CDATA[Bruce Schneier]]></dc:creator>
-		<pubDate>Fri, 25 Sep 2026 21:08:14 +0000</pubDate>
-				<category><![CDATA[Uncategorized]]></category>
-		<category><![CDATA[squid]]></category>
-		<guid isPermaLink="false">https://www.schneier.com/?p=72684</guid>
-
-					<description><![CDATA[<p>I feel like someone who reads this blog will want to go to <a href="https://www.tullahomanews.com/living/2026/09/23/get-hands-on-with-marine-biology-with-family-squid-dissection-saturday/">this</a>:</p>
-<blockquote><p>Families are invited to dive into the fascinating world of marine biology during an exciting, hands-on Family Squid Dissection at the Hands-On Science Center. Designed for curious learners of all ages, this unique experience combines an interactive lesson with the opportunity to explore the anatomy and adaptations of real ocean life.</p>
-<p>[&#8230;]</p>
-<p>During the guided squid dissection, each family will work together to examine a squid up close, exploring its organs, structures, and specialized features. The experience provides a memorable opportunity for children and adults to see firsthand how the anatomy of a squid helps it survive in its underwater environment...</p></blockquote>]]></description>
-										<content:encoded><![CDATA[<p>I feel like someone who reads this blog will want to go to <a href="https://www.tullahomanews.com/living/2026/09/23/get-hands-on-with-marine-biology-with-family-squid-dissection-saturday/">this</a>:</p>
-<blockquote><p>Families are invited to dive into the fascinating world of marine biology during an exciting, hands-on Family Squid Dissection at the Hands-On Science Center. Designed for curious learners of all ages, this unique experience combines an interactive lesson with the opportunity to explore the anatomy and adaptations of real ocean life.</p>
-<p>[&#8230;]</p>
-<p>During the guided squid dissection, each family will work together to examine a squid up close, exploring its organs, structures, and specialized features. The experience provides a memorable opportunity for children and adults to see firsthand how the anatomy of a squid helps it survive in its underwater environment.</p></blockquote>
-<p>If you go, take pictures.</p>
-<p>As usual, you can also use this squid post to talk about the security stories in the news that I haven&#8217;t covered.</p>
-<p><a href="https://www.schneier.com/blog/archives/2024/06/new-blog-moderation-policy.html">Blog moderation policy.</a></p>
-]]></content:encoded>
-					
-					<wfw:commentRss>https://www.schneier.com/blog/archives/2026/09/friday-squid-blogging-participatory-squid-dissection-in-october-in-tennessee.html/feed/</wfw:commentRss>
-			<slash:comments>55</slash:comments>
-		
-		
-		<post-id xmlns="com-wordpress:feed-additions:1">72684</post-id>	</item>
 	</channel>
 </rss>
