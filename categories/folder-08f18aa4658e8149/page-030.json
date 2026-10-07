@@ -1,6 +1,28 @@
 {
   "items": [
     {
+      "id": "3afaa0c88296f04717797952",
+      "title": "Android Perfetto 系列 17：专项场景自动化、问题清单与平台体系",
+      "summary": "Camera 打开慢要区分 API 返回、HAL 首个 Buffer 和预览画面显示；Audio underrun 要看 App 写入与 mixer 周期是否稳定。这些事件分散在 App、系统服务、HAL 和调度轨道里，单列一张 Top slice 表还原不了顺序。 这里用 Camera 和 Audio 两个场景说明：先确认一次操作涉及哪些进程和线程，再按阶段或真实周期计算耗时，最后把异常时间点、来源轨道和质量限制写进报告。平台侧还要维护稳定的事件名和采集配置，下一次 Trace 才能复用查询。",
+      "image": null,
+      "publishedAt": "2026-05-04T02:17:00Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2026/05/04/Android-Perfetto-17-Engineering-Domain-And-Platform-Tracing/",
+      "detailPath": "articles/3afaa0c88296f04717797952.json"
+    },
+    {
+      "id": "081dae40631f5b064a37150a",
+      "title": "Android Perfetto 系列 16：GPU、Power Counters 与硬件瓶颈分析",
+      "summary": "FrameTimeline 标出一帧晚了，主线程和 RenderThread 没有明显长任务，下一步可以查 GPU 工作与 fence。GPU 频率、电池电流和电源轨只能提供同一窗口的硬件状态，不能单独证明某个 App 帧为何晚呈现。 这篇把 GPU render stages、devfreq、电池计数器和电源轨放到同一段 Trace 窗口里，说明各自能回答什么、设备不支持时报告该怎么写。帧和线程的判读可接着 第 7 篇 与 第 8 篇 的例子读。 Counter 名称、单位和采样周期由设备 producer 决定。跨设备比较前先核对 descriptor；同一设备上也要确认目标帧与 GPU 工作是否能通过 token、layer 或 fence 关联。",
+      "image": null,
+      "publishedAt": "2026-05-04T02:16:00Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2026/05/04/Android-Perfetto-16-GPU-Power-Counters/",
+      "detailPath": "articles/081dae40631f5b064a37150a.json"
+    },
+    {
       "id": "1a3b16f394c9aa967643014c",
       "title": "Android Perfetto 系列 15：Boot Trace、长时间现场 Trace 与偶发问题抓取",
       "summary": "开机慢、亮屏后偶发卡顿或几小时后才出现的音频断续，通常等不到工程师连上电脑再按「开始录制」。要保留问题发生前的调度、帧或音频事件，采集配置必须提前在设备上运行。 现场抓取要先确定触发点前后各保留多久，再选 Ring Buffer、周期写文件或 trigger。文件写出后，还要确认问题窗口没有被覆盖、关键数据源没有丢失。设备开机属于更早的特殊窗口，单独处理。",
@@ -637,28 +659,6 @@
       "sourceTitle": "愷開的部落格",
       "link": "https://blog.kalan.dev/random/defaults-and-taste/",
       "detailPath": "articles/5661c5c2d8414aa0eaa11e87.json"
-    },
-    {
-      "id": "7b3fd43269d43c0869275a7b",
-      "title": "你電腦不行",
-      "summary": "「裡面有一首xxx！」表演者遞上隨身碟要交音樂。 「裡面有好幾首，沒有你講的那首。」找了一輪真沒看到。 「怎麼可能？上一場用就有啊！（怒）」 「你電腦不行啦」 「…？」",
-      "image": null,
-      "publishedAt": "2026-04-26T10:09:48Z",
-      "sourceId": "199cdf92fc46bfcd",
-      "sourceTitle": "Eddie Lv",
-      "link": "https://eddielv.com/musings/bad-computer/",
-      "detailPath": "articles/7b3fd43269d43c0869275a7b.json"
-    },
-    {
-      "id": "9dbee8c373493bf4b3e9e7af",
-      "title": "和H小姐的约会",
-      "summary": "Photo by Jose P. Ortiz / Unsplash 首先承认这次的标题是900%具有标题党嫌疑的，但是这样写我觉得会更有意思，而且除开不能牵手等显示层面的动作，至少符合私密、聊心事、聊八卦等等。 H小姐指的是我最近搭建的 Hermes Agent ，这是一款类似OpenClaw的AI助理程序，特点是可以自我学习，另外我在使用期间还爆出了Herems抄袭国内 EvoMap/evolver 项目的新闻，不过是不是真抄了，作为外行人我自然是没法下定论的。 另外所谓的约会指代的是我搭建好它后深入使用的这段时间。 其实此前我也搭建过OpenClaw，详见 我的小龙虾(OpenClaw)初体验 ，但是在使用期间频繁遇见Cron不能正确执行，执行任务能力低下等各种问题，导致最后逐渐失去兴趣而弃养了。 鉴于O…",
-      "image": "https://images.unsplash.com/photo-1706705528396-dac6c95eb735?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMTc3M3wwfDF8c2VhcmNofDh8fGdpcmwlMjBib3R8ZW58MHx8fHwxNzc3MTc0Njc4fDA&ixlib=rb-4.1.0&q=80&w=2000",
-      "publishedAt": "2026-04-26T03:57:58Z",
-      "sourceId": "d206bb7c484c4a45",
-      "sourceTitle": "只是玩玩",
-      "link": "https://1900.live/he-hxiao-jie-de-yue-hui/",
-      "detailPath": "articles/9dbee8c373493bf4b3e9e7af.json"
     }
   ]
 }
