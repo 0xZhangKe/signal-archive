@@ -1,6 +1,94 @@
 {
   "items": [
     {
+      "id": "ee71a8ca0b54ab24e711295a",
+      "title": "Android 内存优化之三 - 打开 MAT 中的 Bitmap 原图",
+      "summary": "本文是 MAT 工具使用系列的第二篇，这个系列共三篇，详细介绍了如何使用 MAT 来分析内存问题，既可以是 Java 应用的内存问题，也可以是 Android 应用的内存问题： Android 内存优化之一：MAT 使用入门 Android内存优化之二：MAT使用进阶 Android内存优化之三：打开MAT中的Bitmap原图 本文介绍的是从 MAT 里手工还原 Bitmap 原图的旧排查技巧，适合在离线 heap 里确认“到底是哪张图”被错误持有。现在排查图片内存问题时，第一步通常不是直接打开 MAT，而是先用 Android Studio Memory Profiler 的 heap dump/retained size/reference 视图确认 Bitmap、BitmapDrawable 或图片缓存…",
+      "image": null,
+      "publishedAt": "2015-04-11T10:41:32Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2015/04/11/AndroidMemory-Open-Bitmap-Object-In-MAT/",
+      "detailPath": "articles/ee71a8ca0b54ab24e711295a.json"
+    },
+    {
+      "id": "22a97125dfd6c1a96875f837",
+      "title": "Android 内存优化之二 - MAT使用进阶",
+      "summary": "本文是 MAT 工具使用系列的第二篇，这个系列共三篇，详细介绍了如何使用 MAT 来分析内存问题，既可以是 Java 应用的内存问题，也可以是 Android 应用的内存问题： Android 内存优化之一：MAT 使用入门 Android内存优化之二：MAT使用进阶 Android内存优化之三：打开MAT中的Bitmap原图 本文的 Histogram、Dominator Tree、Thread 信息仍然是 heap 分析的核心方法，但抓取和第一轮分析入口应换成现在的工具链：先用 Android Studio Memory Profiler 捕获 heap dump，必要时在关键点调用 Debug.dumpHprofData() ，再用 Profiler 的 retained size、reference…",
+      "image": null,
+      "publishedAt": "2015-04-11T10:26:36Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2015/04/11/AndroidMemory-Usage-Of-MAT-Pro/",
+      "detailPath": "articles/22a97125dfd6c1a96875f837.json"
+    },
+    {
+      "id": "edcb1d4763935081023653c3",
+      "title": "Android 内存优化(1) - MAT 使用入门",
+      "summary": "本文是 MAT 工具使用系列的第一篇，这个系列共三篇，详细介绍了如何使用 MAT 来分析内存问题，既可以是 Java 应用的内存问题，也可以是 Android 应用的内存问题： Android 内存优化(1) - MAT 使用入门 Android 内存优化(2) - MAT使用进阶 Android 内存优化(3) - 打开MAT中的Bitmap原图 这组文章里的 MAT 技巧仍然适合学习 Java heap、Dominator Tree、Retained Size、引用链这些基础概念，但默认抓取流程已经变了。早期流程是 Eclipse/DDMS 导出 Android HPROF，再用 hprof-conv 转成 MAT 能读的格式；现在应优先在 Android Studio Memory Profiler 里…",
+      "image": null,
+      "publishedAt": "2015-04-11T10:10:29Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2015/04/11/AndroidMemory-Usage-Of-MAT/",
+      "detailPath": "articles/edcb1d4763935081023653c3.json"
+    },
+    {
+      "id": "1795430768818b2a50f9e16b",
+      "title": "Android性能优化后续",
+      "summary": "前言 本文是一篇译文，原文 Android Performance Case Study Follow-up 的作者是大名鼎鼎的 Romain Guy 。本文讲述了Android性能优化的一些技巧、方法和工具。 译文正文 两年前，我发表了一篇名为 Android Performance Case Study 的文章，来帮助Android开发者了解需要使用什么工具和技术手段来确定、追踪和优化性能问题。 那篇文章以一个Twitter客户端 Falcon Pro 为典范，其开发人员为 Joaquim Vergès. Joaquim人不错，他允许我在我的文章中使用它的程序作为例子，并且快速处理了我发现的所有问题。一切都OK，直到Joaquim 从头开始开发Falcon Pro 3，前不久在他准备发布它的新应用的时候，…",
+      "image": null,
+      "publishedAt": "2015-03-31T01:29:00Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2015/03/31/android-performance-case-study-follow-up/",
+      "detailPath": "articles/1795430768818b2a50f9e16b.json"
+    },
+    {
+      "id": "5873e54fd2b41a0213778bfd",
+      "title": "Android 小技巧 - 5",
+      "summary": "本文是一篇译文,这篇是这个系列的第五篇.讲述的是Android开发中遇到的一些好用的小技巧,或者一些实用的API,很多人都知道,但也有人不知道,记录下来,如果能帮助到大家,也是极好的.由于不是严格的博文,所以翻译也不那么严格,有些工具和类我也会经常用,所以我会根据自己的想法去写.有些地方坐在并没有将这个工具的作用讲出来,我会补充上去. 第五篇里 SDK “以为没有其实有”的功能比较多： ViewDragHelper 帮你做自定义拖拽容器、 PopupWindow 实现非 Activity 的临时浮层、 ThumbnailUtils 直接生成图片或视频缩略图、 ActivityOptions 自定义 Activity 跳转动画与 launch display；性能向的有 SparseArray 替代 HashM…",
+      "image": null,
+      "publishedAt": "2015-03-14T16:32:11Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2015/03/15/android-tips-round-up-5/",
+      "detailPath": "articles/5873e54fd2b41a0213778bfd.json"
+    },
+    {
+      "id": "9cb020a7aea7b0bb84b559e2",
+      "title": "Android 小技巧 - 4",
+      "summary": "本文是一篇译文,这篇是这个系列的第四篇.讲述的是Android开发中遇到的一些好用的小技巧,或者一些实用的API,很多人都知道,但也有人不知道,记录下来,如果能帮助到大家,也是极好的.由于不是严格的博文,所以翻译也不那么严格,有些工具和类我也会经常用,所以我会根据自己的想法去写.有些地方坐在并没有将这个工具的作用讲出来,我会补充上去. 第四篇集中讲两类东西：一类是被 XML 属性藏起来的特性， android:weightSum 、 android:duplicateParentState 、 android:clipChildren 、 android:fillViewport 、 android:tileMode 、 android:scaleType 这些点一上手就能直接省一段自定义 View 的代码；…",
+      "image": null,
+      "publishedAt": "2015-03-14T16:31:02Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2015/03/15/android-tips-round-up-4/",
+      "detailPath": "articles/9cb020a7aea7b0bb84b559e2.json"
+    },
+    {
+      "id": "f01711a110aa2f1e8b02e55d",
+      "title": "Android 小技巧 -3",
+      "summary": "本文是一篇译文,这篇是这个系列的第三篇.讲述的是Android开发中遇到的一些好用的小技巧,或者一些实用的API,很多人都知道,但也有人不知道,记录下来,如果能帮助到大家,也是极好的.由于不是严格的博文,所以翻译也不那么严格,有些工具和类我也会经常用,所以我会根据自己的想法去写.有些地方坐在并没有将这个工具的作用讲出来,我会补充上去. 第三篇的关键词是”原本写过却懒得查文档的事情”： UrlQuerySanitizer 替你解析 query 参数、 PhoneNumberUtils.formatNumber 帮你按区域格式化电话号码、 LocalBroadcastManager 让进程内广播省去权限和跨进程开销；Fragment 相关有 setArguments 与 DialogFragment.setSho…",
+      "image": null,
+      "publishedAt": "2015-03-14T16:29:57Z",
+      "sourceId": "1aa1837ca33d8d55",
+      "sourceTitle": "Android Performance",
+      "link": "https://androidperformance.com/2015/03/15/android-tips-round-up-3/",
+      "detailPath": "articles/f01711a110aa2f1e8b02e55d.json"
+    },
+    {
+      "id": "8fc39c32887d9dcffddeb721",
+      "title": "保證用到壞",
+      "summary": "這是什麼保證？ @ 鹿港老街",
+      "image": "https://wiwi.blog/assets/images/broken-43ca6459184cfeb362d0784f92a4e4aa.jpg",
+      "publishedAt": "2015-02-23T00:00:00Z",
+      "sourceId": "7f36c3da1e6b5c71",
+      "sourceTitle": "Wiwi.Blog Blog",
+      "link": "https://wiwi.blog/blog/until-it-breaks",
+      "detailPath": "articles/8fc39c32887d9dcffddeb721.json"
+    },
+    {
       "id": "a509749250c847499107b924",
       "title": "小白",
       "summary": "小白是黑的。",
@@ -571,94 +659,6 @@
       "sourceTitle": "Wiwi.Blog Blog",
       "link": "https://wiwi.blog/blog/help-xxx",
       "detailPath": "articles/15aca4995bd630424788259a.json"
-    },
-    {
-      "id": "5b1d0a22ce44395e272ba27d",
-      "title": "休假",
-      "summary": "前天在部隊看莒光園地，裡面有一個教英文的單元，是賴世雄主持的：",
-      "image": null,
-      "publishedAt": "2010-09-25T00:00:00Z",
-      "sourceId": "7f36c3da1e6b5c71",
-      "sourceTitle": "Wiwi.Blog Blog",
-      "link": "https://wiwi.blog/blog/on-leave",
-      "detailPath": "articles/5b1d0a22ce44395e272ba27d.json"
-    },
-    {
-      "id": "23ab75d7b7705e3abc952cfe",
-      "title": "音樂會邀請卡、節目單",
-      "summary": "cards",
-      "image": "https://wiwi.blog/assets/images/cards-15584d704ccc88a1b5bd78b90aabf1b6.jpg",
-      "publishedAt": "2010-05-20T00:00:00Z",
-      "sourceId": "7f36c3da1e6b5c71",
-      "sourceTitle": "Wiwi.Blog Blog",
-      "link": "https://wiwi.blog/blog/recital-cards",
-      "detailPath": "articles/23ab75d7b7705e3abc952cfe.json"
-    },
-    {
-      "id": "7ea6cc70dfbf5f8022b9c35f",
-      "title": "我進來幹嘛",
-      "summary": "走進廁所、把漱口杯裝滿水、擠了牙膏；才發覺自己原本進廁所的目的是要刮鬍子⋯⋯",
-      "image": null,
-      "publishedAt": "2010-04-25T00:00:00Z",
-      "sourceId": "7f36c3da1e6b5c71",
-      "sourceTitle": "Wiwi.Blog Blog",
-      "link": "https://wiwi.blog/blog/what-did-i-go-in-for",
-      "detailPath": "articles/7ea6cc70dfbf5f8022b9c35f.json"
-    },
-    {
-      "id": "16520a4b4e1da76b89fa2e9d",
-      "title": "誰家的字最漂亮？",
-      "summary": "我想現在正在看這篇文章的大部分的人，用的應該都是 Windows 作業系統。你可能已經很習慣它長這個樣子了，不過用 Mac 或是 Linux 的人一定都會跟你說 Windows 的字很醜。是呀，你都不知道用 Mac 和 Linux 的人有多幸福，來看看同一個網頁、使用同一個字體（華康儷中黑）在 Windows、Linux 和 Mac 上面的差別。",
-      "image": "https://wiwi.blog/assets/images/cleartype-92940990071351812f50cea066fcf9cd.png",
-      "publishedAt": "2009-10-31T14:20:00Z",
-      "sourceId": "7f36c3da1e6b5c71",
-      "sourceTitle": "Wiwi.Blog Blog",
-      "link": "https://wiwi.blog/blog/font-rendering",
-      "detailPath": "articles/16520a4b4e1da76b89fa2e9d.json"
-    },
-    {
-      "id": "9b765bda47ee319993da938b",
-      "title": "老照片（相簿）",
-      "summary": "前幾天被我的鋼琴學生說我的 blog 最近的文章都在混、越來越難看（妳說話還真直接），讓我心裡感到非常的受傷（笑）。所以經過超過一季沒有長篇文章的乾旱期，我今天終於要來一篇了。不過你知道，Blog 這種東西本來就是要等到有感覺的時候才寫的嘛。",
-      "image": "https://wiwi.blog/assets/images/age1-5-238913f0f3c2189c776485749661a013.jpg",
-      "publishedAt": "2009-04-04T19:00:00Z",
-      "sourceId": "7f36c3da1e6b5c71",
-      "sourceTitle": "Wiwi.Blog Blog",
-      "link": "https://wiwi.blog/blog/old-pics",
-      "detailPath": "articles/9b765bda47ee319993da938b.json"
-    },
-    {
-      "id": "e0727d19afcb842a8e482981",
-      "title": "Scrabble Word of the Day",
-      "summary": "大家玩過 Scrabble 嗎？如果你不知道 Scrabble 是什麼，Scrabble 是一個很有名而且歷史悠久的拼字遊戲。",
-      "image": "https://wiwi.blog/assets/images/dildo-f76d8d10eab225524375dfae04a24285.jpg",
-      "publishedAt": "2009-02-25T02:00:00Z",
-      "sourceId": "7f36c3da1e6b5c71",
-      "sourceTitle": "Wiwi.Blog Blog",
-      "link": "https://wiwi.blog/blog/scrabble-word-of-the-day",
-      "detailPath": "articles/e0727d19afcb842a8e482981.json"
-    },
-    {
-      "id": "0672bbfe44426dbcc724d2ac",
-      "title": "好溫馨聖誕火鍋趴（相簿）",
-      "summary": "猜猜看，對於像我這樣的單身男子來說，在寒冷的平安夜，可以發生的最好的事情是什麼？有個女生陪著一起吃火鍋？",
-      "image": "https://wiwi.blog/assets/images/xmas-people02-f507110056ddd18e1cf1459d225f371c.jpg",
-      "publishedAt": "2008-12-24T00:00:00Z",
-      "sourceId": "7f36c3da1e6b5c71",
-      "sourceTitle": "Wiwi.Blog Blog",
-      "link": "https://wiwi.blog/blog/xmas-hotpot",
-      "detailPath": "articles/0672bbfe44426dbcc724d2ac.json"
-    },
-    {
-      "id": "3410fe6aaa249893a11c640e",
-      "title": "59 公斤！",
-      "summary": "好難想像半年前我是 69 公斤的耶，現在即使用跑的過馬路或上樓梯都不會喘了，哈哈很棒！",
-      "image": "https://wiwi.blog/assets/images/59kg-small-9b43e7b1c0497b6ff813ddde34ba0b7a.jpg",
-      "publishedAt": "2008-12-11T00:00:00Z",
-      "sourceId": "7f36c3da1e6b5c71",
-      "sourceTitle": "Wiwi.Blog Blog",
-      "link": "https://wiwi.blog/blog/59-kg",
-      "detailPath": "articles/3410fe6aaa249893a11c640e.json"
     }
   ]
 }
