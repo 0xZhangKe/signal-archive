@@ -1,6 +1,28 @@
 {
   "items": [
     {
+      "id": "89fd220b8b7a4c6d36b47bb9",
+      "title": "ChatGPT 开始用可点的界面回答：拆开 GPT-6 Intelligent UI 与生成式 UI 的四条路线",
+      "summary": "GPT-6 进入 ChatGPT，默认答案从纯文本变成可点、可改的界面。本文不讲发版，讲机制：组件库加编译器、Claude Artifacts 式代码沙箱、MCP Apps / Apps SDK 的服务方 UI、Vercel AI SDK 的工具驱动组件，各自谁写 UI、信任边界在哪、状态归谁、怎么评测，以及按钮、表单、外链带来的注入与外泄面，最后给一份开发者清单。",
+      "image": null,
+      "publishedAt": "2026-10-08T02:40:00Z",
+      "sourceId": "52b7bbc49e51b7c9",
+      "sourceTitle": "Redreamality 博客 - 技术见解",
+      "link": "https://redreamality.com/cn/blog/gpt-6-intelligent-ui-generative-ui-survey/",
+      "detailPath": "articles/89fd220b8b7a4c6d36b47bb9.json"
+    },
+    {
+      "id": "4f1526b231d66d45551ceae0",
+      "title": "Prompt injection 2026 综述：注入学会了自我复制，agent 防线该怎么改",
+      "summary": "Prompt injection 已经从「让模型说错话」演化到能借邮件、文件、记忆和代码注释自我复制。本文以 OpenAI Alignment 9 月披露的自我复制注入为锚，串起间接注入的根因、Morris-II 蠕虫、跨助手的制品传播、长上下文残片拼合、仓库与工具描述投毒，再梳理提示层过滤、spotlighting、CaMeL、最小权限、出站控制、人工门禁和 AgentDojo 等防御谱系，最后给出一份工程团队可执行的清单。",
+      "image": null,
+      "publishedAt": "2026-10-08T02:40:00Z",
+      "sourceId": "52b7bbc49e51b7c9",
+      "sourceTitle": "Redreamality 博客 - 技术见解",
+      "link": "https://redreamality.com/cn/blog/prompt-injection-2026-survey-self-replicating/",
+      "detailPath": "articles/4f1526b231d66d45551ceae0.json"
+    },
+    {
       "id": "315c9fc01c12c736c181c95d",
       "title": "Claude Code 会把什么发出你的电脑：四条出站通道与密钥管控清单",
       "summary": "Claude Code 在本地跑，但每一轮都要把上下文发给模型，还有遥测、报错、WebFetch、MCP 和 Bash 的出网。本文按官方文档把四条出站通道逐条拆开：各自带走什么、默认开没开、能用哪些开关管住；顺带核实「关遥测就不读 AGENTS.md」事件的修复状态，拆解本地脱敏网关 Tokenhush 的做法与边界，最后给一份可照抄的检查清单。",
@@ -637,28 +659,6 @@
       "sourceTitle": "Redreamality 博客 - 技术见解",
       "link": "https://redreamality.com/cn/blog/cloudflare-security-audit-skill-for-coding-agents/",
       "detailPath": "articles/01bb07f93ebc6ea98f6eadd4.json"
-    },
-    {
-      "id": "fd12e4a3b966328aa39ed7bd",
-      "title": "ECC：给 Claude Code / Codex / Cursor 加一层可核验的 Harness 优化",
-      "summary": "拆解 affaan-m/ECC：它如何用 Skills、Hooks、Instincts、Memory Vault 与 AgentShield 做性能/记忆/安全优化；哪些适配 Claude Code、Codex、Cursor；企业可抄什么、哪里仍是路线图与宣传。",
-      "image": null,
-      "publishedAt": "2026-09-23T16:00:00Z",
-      "sourceId": "52b7bbc49e51b7c9",
-      "sourceTitle": "Redreamality 博客 - 技术见解",
-      "link": "https://redreamality.com/cn/blog/ecc-agent-harness-optimization/",
-      "detailPath": "articles/fd12e4a3b966328aa39ed7bd.json"
-    },
-    {
-      "id": "b37ba81153bbefa52825d3cc",
-      "title": "扩张 Harness，而不是堆上下文：从无策略脚手架到可复用专家 Agent",
-      "summary": "解读 arXiv:2609.26760 Growing Harness：用任务反馈把反复出现的控制决策长成可执行代码，对照「只管塞上下文」与站内 harness / Skills / 确定性流水线叙事，讨论何时该增长程序、何时该留给模型。",
-      "image": null,
-      "publishedAt": "2026-09-23T16:00:00Z",
-      "sourceId": "52b7bbc49e51b7c9",
-      "sourceTitle": "Redreamality 博客 - 技术见解",
-      "link": "https://redreamality.com/cn/blog/grow-the-harness-not-the-context/",
-      "detailPath": "articles/b37ba81153bbefa52825d3cc.json"
     }
   ]
 }

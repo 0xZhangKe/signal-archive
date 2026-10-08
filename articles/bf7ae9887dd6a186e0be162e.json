@@ -1,0 +1,11 @@
+{
+  "id": "bf7ae9887dd6a186e0be162e",
+  "title": "AWS 发布 Ambient Agents 参考架构，实现事件驱动式 AI 代理",
+  "summary": "AWS 于 2026 年 10 月 1 日发布了一套基于 Amazon Bedrock AgentCore 的 Ambient Agents 参考架构，实现了无需用户主动提问的事件驱动式 AI 代理。该架构将 S3 文件上传、EventBridge 定时任务等事件转换为可追踪的作业 (Jobs)，由 AI 代理自动处理或暂停等待人工审核。其核心思想是 \"事件本身就是提示\"，通过统一的结构化作业记录，为构建可扩展、带人工干预机制的长时运行 Agent 提供了工程蓝图。",
+  "content": "<p>AWS 于 2026 年 10 月 1 日发布了一套基于 Amazon Bedrock AgentCore 的 Ambient Agents 参考架构，实现了无需用户主动提问的事件驱动式 AI 代理。该架构将 S3 文件上传、EventBridge 定时任务等事件转换为可追踪的作业 (Jobs)，由 AI 代理自动处理或暂停等待人工审核。其核心思想是 &quot;事件本身就是提示&quot;，通过统一的结构化作业记录，为构建可扩展、带人工干预机制的长时运行 Agent 提供了工程蓝图。</p><ul><li>事件驱动的 AI 代理架构</li><li>自动响应 S3 上传、定时任务等事件</li><li>提供人工审核（中断-恢复）机制</li><li>参考使用 AWS SQS，Lambda，DynamoDB 等组件</li><li>可转换为可追踪的 &quot;Job&quot; 进行管理</li></ul><h3>来源 / Sources</h3><ul><li><a href=\"https://aws.amazon.com/blogs/machine-learning/building-ambient-agents-with-amazon-bedrock-agentcore-from-event-driven-signals-to-human-in-the-loop-workflows\" target=\"_blank\" rel=\"noopener noreferrer\">Building ambient agents with Amazon Bedrock AgentCore: From event-driven signals to human-in-the-loop workflows</a></li></ul>",
+  "image": null,
+  "publishedAt": "2026-10-01T00:00:00Z",
+  "sourceId": "ai-engineering",
+  "sourceTitle": "AI 工程动态",
+  "link": "https://aws.amazon.com/blogs/machine-learning/building-ambient-agents-with-amazon-bedrock-agentcore-from-event-driven-signals-to-human-in-the-loop-workflows"
+}
