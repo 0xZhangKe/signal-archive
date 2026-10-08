@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "id": "17643a079b90291b9356857d",
+      "title": "CVE-2016-6321 notes: \"pointyfeather\", a logic bug in GNU tar.",
+      "summary": "I read this document but had a little trouble understanding it at first: \"Vulnerability: POINTYFEATHER aka Tar extract pathname bypass\" : Tar will happily extract files & directories into an arbitrary location when supplied with a suitably crafted archive file. If a target system is extracting an attacker supplied file, the vulnerability can be exploited to…",
+      "image": null,
+      "publishedAt": "2016-11-04T04:09:00Z",
+      "sourceId": "5e4db476da32a0bc",
+      "sourceTitle": "lizzie",
+      "link": "https://blog.lizzie.io/cve-2016-6321-notes.html",
+      "detailPath": "articles/17643a079b90291b9356857d.json"
+    },
+    {
       "id": "22ff31ff66e9750bf8a1c720",
       "title": "Using userfaultfd: sample code!",
       "summary": "userfaultfd is being used in kernel exploits to temporarily stop kernel execution . I had trouble finding out how to use it, so I wrote a little program. Some notes: If you don't include O_NONBLOCK in the userfaultfd flags argument, poll will always return a POLLERR . The API is complicated by a backwards-compatibility mechanism. You're supposed to issue so…",
@@ -648,17 +659,6 @@
       "sourceTitle": "Steve Klabnik",
       "link": "https://steveklabnik.com/writing/hope/",
       "detailPath": "articles/7bb7043855e5f2ed082b3d67.json"
-    },
-    {
-      "id": "2d2d40328dfa421426227ab4",
-      "title": "Libinput 与 Udev",
-      "summary": "Update 2017.11.10 Linput 1.9 总算搞定了这个问题，选择采用硬件内建的加速方案，libinput 仅提供简单的线性映射。 如果需要自己调速度，除了设置 xinput set-float-prop id=X 'libinput Accel Speed' $speed 之外，更底层的方式是给 libinput 提供一个 LIBINPUT_ATTR_TRACKPOINT_RANGE 属性。",
-      "image": null,
-      "publishedAt": "2015-04-27T00:21:13Z",
-      "sourceId": "1a53726dacd05db7",
-      "sourceTitle": "K.I.S.S",
-      "link": "https://bigeagle.me/2015/04/libinput-usage/",
-      "detailPath": "articles/2d2d40328dfa421426227ab4.json"
     }
   ]
 }
