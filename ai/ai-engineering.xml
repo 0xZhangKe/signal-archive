@@ -30,6 +30,33 @@
       <content:encoded>&lt;p&gt;作为其 &amp;quot;28 天更新承诺&amp;quot; 的一部分，OpenAI 在第二天（据信为2026年10月7日）宣布了四项改进：1) 将付费 API Usage Tier 从五档简化为三档（Build, Launch, Grow），最高档累计门槛从 $1000 降至 $500，便于开发者扩容；2) Auto-review（即 &amp;quot;Approve for me&amp;quot;）功能对所有 ChatGPT 登录用户免费；3) 会议记录插件 Meetings 向 Pro / Business 用户 Beta 开放；4) 决策 API (Decisions API) 从 Limited Preview 进入 Public Beta。这些更新旨在优化 Agent 在生产环境中的工作流和体验。&lt;/p&gt;&lt;ul&gt;&lt;li&gt;API 用量等级简化（5档变3档）&lt;/li&gt;&lt;li&gt;最高等级累计付费门槛降低 50% ($1000 降至 $500)&lt;/li&gt;&lt;li&gt;Auto-review功能对所有用户免费&lt;/li&gt;&lt;li&gt;Meetings 插件 Beta 测试&lt;/li&gt;&lt;li&gt;Decisions API 进入公共测试&lt;/li&gt;&lt;/ul&gt;&lt;h3&gt;来源 / Sources&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;&lt;a href="https://finance.sina.com.cn/stock/t/2026-10-07/doc-iniukxhc4913751.shtml"&gt;OpenAI四连更！API最高档付费砍半，Auto-review全面免费&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</content:encoded>
     </item>
     <item>
+      <title>企业级实践：通过精细化模型选择与预算管理将 AI 开发成本降低65%</title>
+      <link>https://openai.com/zh-Hans-CN/index/legalon-halves-codex-costs</link>
+      <guid isPermaLink="false">urn:signal-archive:ai:24eaf6d8330e554b3f540c4dabca1298</guid>
+      <pubDate>Thu, 08 Oct 2026 00:00:00 +0000</pubDate>
+      <archive:collectedAt>2026-10-09T04:15:14Z</archive:collectedAt>
+      <description>OpenAI 分享了一个企业客户 LegalOn Technologies 的成本优化实践。该公司通过建立细致的模型选择策略（根据任务在 Luna、Sol、Astra 之间切换）、实施预算管控和设立专门的AI治理团队，在保持开发速度的同时，将日均AI预估成本降低了约65%。此案例为开发者提供了一个可操作的企业级AI成本管控框架，强调了通过混合使用不同档位的模型来实现成本效益最大化的工程实践。</description>
+      <content:encoded>&lt;p&gt;OpenAI 分享了一个企业客户 LegalOn Technologies 的成本优化实践。该公司通过建立细致的模型选择策略（根据任务在 Luna、Sol、Astra 之间切换）、实施预算管控和设立专门的AI治理团队，在保持开发速度的同时，将日均AI预估成本降低了约65%。此案例为开发者提供了一个可操作的企业级AI成本管控框架，强调了通过混合使用不同档位的模型来实现成本效益最大化的工程实践。&lt;/p&gt;&lt;ul&gt;&lt;li&gt;OpenAI 发布的客户案例，展示了法律科技公司 LegalOn 如何通过精细化模型选择和预算管理，将 Codex 的使用成本降低65%&lt;/li&gt;&lt;li&gt;实践将任务按复杂度匹配不同模型：简单代码实现用 GPT-6 Luna，常规设计与文档用 GPT-6.1 Sol，复杂架构与编排用 GPT-6 Astra&lt;/li&gt;&lt;li&gt;公司建立了“AI驱动开发卓越中心”（AID CoE）来制定模型选择指南和用量监控&lt;/li&gt;&lt;li&gt;为成熟业务设置成本优化目标，为成长型新业务提供充足AI预算以追求速度&lt;/li&gt;&lt;li&gt;该公司正在构建衡量指标，试图将AI成本与“功能发布带来的客户价值”直接关联&lt;/li&gt;&lt;/ul&gt;&lt;h3&gt;来源 / Sources&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;&lt;a href="https://openai.com/zh-Hans-CN/index/legalon-halves-codex-costs"&gt;OpenAI: LegalOn 将 Codex 成本减半，开发速度不减&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</content:encoded>
+    </item>
+    <item>
+      <title>深度分析：OpenAI 多智能体产品的技术本质与对开发者的启示</title>
+      <link>https://www.infoq.cn/article/3MSU3CcJuh0XjHDyjhXj</link>
+      <guid isPermaLink="false">urn:signal-archive:ai:1b827fcca4a3e8fec6ac61f0401ee8a9</guid>
+      <pubDate>Thu, 08 Oct 2026 00:00:00 +0000</pubDate>
+      <archive:collectedAt>2026-10-09T04:15:14Z</archive:collectedAt>
+      <description>一篇发表于InfoQ的深度技术分析文章，探讨了OpenAI多智能体系统（Dots， Agents API）产品化背后的技术本质。文章引述OpenAI研究员Noam Brown的观点，强调近期突破的核心驱动力是基础模型能力的跃升以及通过多智能体实现的“测试时计算”并行化，而非智能体的规模效应本身。这对开发者的实际指导意义在于：构建AI系统时应优先投资于高质量的基座模型和高效的推理架构，而不是盲目追求智能体数量。</description>
+      <content:encoded>&lt;p&gt;一篇发表于InfoQ的深度技术分析文章，探讨了OpenAI多智能体系统（Dots， Agents API）产品化背后的技术本质。文章引述OpenAI研究员Noam Brown的观点，强调近期突破的核心驱动力是基础模型能力的跃升以及通过多智能体实现的“测试时计算”并行化，而非智能体的规模效应本身。这对开发者的实际指导意义在于：构建AI系统时应优先投资于高质量的基座模型和高效的推理架构，而不是盲目追求智能体数量。&lt;/p&gt;&lt;ul&gt;&lt;li&gt;InfoQ深度文章分析了OpenAI DevDay 2026发布的多智能体产品（如 Dots 和 Agents API）及其背后的技术原理&lt;/li&gt;&lt;li&gt;OpenAI研究员Noam Brown指出，解决千禧年难题的核心突破主要归功于强大的基础模型和并行推理计算，而非单纯的多智能体数量&lt;/li&gt;&lt;li&gt;文章详细阐述了多智能体系统作为“测试时计算”并行扩展方式的优缺点和高效协作机制&lt;/li&gt;&lt;li&gt;强调了在当前阶段，基础模型的质量和长时运行能力比智能体数量更为关键&lt;/li&gt;&lt;/ul&gt;&lt;h3&gt;来源 / Sources&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;&lt;a href="https://www.infoq.cn/article/3MSU3CcJuh0XjHDyjhXj"&gt;InfoQ: OpenAI刚把多Agent做成产品，o1奠基人却说：1万个Agent解出世界级难题，多Agent贡献不到10%&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</content:encoded>
+    </item>
+    <item>
+      <title>Anthropic 发布 Claude Haiku 5.5：成本大幅降低且代理能力显著提升</title>
+      <link>https://www.datacamp.com/zh/blog/claude-haiku-5-5</link>
+      <guid isPermaLink="false">urn:signal-archive:ai:c537e534749d310dfcfff72015d34c14</guid>
+      <pubDate>Wed, 07 Oct 2026 00:00:00 +0000</pubDate>
+      <archive:collectedAt>2026-10-09T04:15:14Z</archive:collectedAt>
+      <description>Anthropic 于2026年10月7日发布了 Claude 5.5 系列中最小的模型 Claude Haiku 5.5。该模型在保持高速度的同时，价格显著降低，并大幅提升了在电脑操作、终端编程等代理任务上的能力。它引入了家族模型的自适应思考（effort）控制，使其更适合作为高吞吐、低成本任务（如分类、检索、压缩）或大型代理系统的子代理来使用。此次发布也伴随着 Sonnet 5.5 缓存读取价格的减半。</description>
+      <content:encoded>&lt;p&gt;Anthropic 于2026年10月7日发布了 Claude 5.5 系列中最小的模型 Claude Haiku 5.5。该模型在保持高速度的同时，价格显著降低，并大幅提升了在电脑操作、终端编程等代理任务上的能力。它引入了家族模型的自适应思考（effort）控制，使其更适合作为高吞吐、低成本任务（如分类、检索、压缩）或大型代理系统的子代理来使用。此次发布也伴随着 Sonnet 5.5 缓存读取价格的减半。&lt;/p&gt;&lt;ul&gt;&lt;li&gt;发布 Claude Haiku 5.5 模型，定位为速度最快、成本最低的小型模型&lt;/li&gt;&lt;li&gt;针对10万 token 以内的提示，价格比 Haiku 4.5 便宜90%（输入 $0.10/百万，输出 $0.50/百万）&lt;/li&gt;&lt;li&gt;新增自适应思考机制和 effort 强度调节参数（Low 到 Max），支持100万 token 上下文&lt;/li&gt;&lt;li&gt;代理任务（Agentic）能力大幅提升，OSWorld 2.1得分从4.5的15.7%跃升至72.4%&lt;/li&gt;&lt;li&gt;适用于摘要、分类、查询、文本压缩以及作为更强大模型（Sonnet/Opus）的子代理&lt;/li&gt;&lt;li&gt;同时宣布将 Claude Sonnet 5.5 的缓存读取价格降低50%&lt;/li&gt;&lt;/ul&gt;&lt;h3&gt;来源 / Sources&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;&lt;a href="https://www.datacamp.com/zh/blog/claude-haiku-5-5"&gt;DataCamp: Claude Haiku 5.5：功能、定价与上手测试&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://free.com.tw/claude-haiku-5-5"&gt;免费资源网：Claude Haiku 5.5 登场！价格比 Haiku 4.5 便宜约 75%&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</content:encoded>
+    </item>
+    <item>
       <title>Claude Haiku 5.5在AWS平台正式上线</title>
       <link>https://aws.amazon.com/about-aws/whats-new/2026/10/claude-haiku-5-5-aws</link>
       <guid isPermaLink="false">urn:signal-archive:ai:aeaadb4766cdd05ee6fe6475215c9e23</guid>
@@ -64,6 +91,15 @@
       <archive:collectedAt>2026-10-08T22:47:25Z</archive:collectedAt>
       <description>Anthropic于10月7日正式发布了Claude Haiku 5.5，这是Claude 5.5家族中的小型模型，以极低的价格和显著提升的性能定位高吞吐量、成本敏感的任务。新模型API价格大幅降低，平均成本比Haiku 4.5降低约75%，在多领域基准测试中表现优秀，并首次在Haiku模型中引入了力度调节功能。对开发者而言，这为需要大规模部署实时应用（如客服支持、应用内助手）和副代理架构提供了经济高效的模型选择。</description>
       <content:encoded>&lt;p&gt;Anthropic于10月7日正式发布了Claude Haiku 5.5，这是Claude 5.5家族中的小型模型，以极低的价格和显著提升的性能定位高吞吐量、成本敏感的任务。新模型API价格大幅降低，平均成本比Haiku 4.5降低约75%，在多领域基准测试中表现优秀，并首次在Haiku模型中引入了力度调节功能。对开发者而言，这为需要大规模部署实时应用（如客服支持、应用内助手）和副代理架构提供了经济高效的模型选择。&lt;/p&gt;&lt;ul&gt;&lt;li&gt;API价格大幅下降：输入token价格降至每百万0.1美元，输出0.5美元，比Haiku 4.5降低90%。&lt;/li&gt;&lt;li&gt;超过10万token的请求价格会阶梯上涨，但平均成本仍降低约75%。&lt;/li&gt;&lt;li&gt;这是首款支持力度调节（effort controls）的Haiku模型，可以平衡成本与智能。&lt;/li&gt;&lt;li&gt;在多个基准测试中超越GPT-6 Luna和上一代Haiku 4.5。&lt;/li&gt;&lt;li&gt;可作为Opus 5.5和Sonnet 5.5的副代理(subagent)，适用于高吞吐量任务。&lt;/li&gt;&lt;/ul&gt;&lt;h3&gt;来源 / Sources&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;&lt;a href="https://www.anthropic.com/claude-haiku-5-5"&gt;Introducing Claude Haiku 5.5&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</content:encoded>
+    </item>
+    <item>
+      <title>OpenAI 向所有 ChatGPT 用户推出 GPT-6 和 Intelligent UI智能交互界面</title>
+      <link>https://openai.com/news/company-announcements</link>
+      <guid isPermaLink="false">urn:signal-archive:ai:0d8ca78e85b6d4b8466763bea5b865b0</guid>
+      <pubDate>Wed, 07 Oct 2026 00:00:00 +0000</pubDate>
+      <archive:collectedAt>2026-10-09T04:15:14Z</archive:collectedAt>
+      <description>OpenAI 于2026年10月7日正式宣布，为所有 ChatGPT 用户全面上线 GPT-6 模型和全新的 Intelligent UI（智能交互界面）。付费用户获得 GPT-6 Sol，免费和 Go 用户获得 GPT-6 Luna。新界面允许模型根据问题类型自动生成包含图表、按钮、表单和可交互组件的混合响应，而不仅仅是文本。同时，模型支持“边思考边回答”的渐进式输出，显著改善了交互体验。开发者需注意，该功能主要适用于模型的 Instant 至 Extra High 推理档位。</description>
+      <content:encoded>&lt;p&gt;OpenAI 于2026年10月7日正式宣布，为所有 ChatGPT 用户全面上线 GPT-6 模型和全新的 Intelligent UI（智能交互界面）。付费用户获得 GPT-6 Sol，免费和 Go 用户获得 GPT-6 Luna。新界面允许模型根据问题类型自动生成包含图表、按钮、表单和可交互组件的混合响应，而不仅仅是文本。同时，模型支持“边思考边回答”的渐进式输出，显著改善了交互体验。开发者需注意，该功能主要适用于模型的 Instant 至 Extra High 推理档位。&lt;/p&gt;&lt;ul&gt;&lt;li&gt;为 ChatGPT 主对话界面引入 GPT-6 模型（付费用户用 Sol，免费用户用 Luna），并新增智能交互界面能力。&lt;/li&gt;&lt;li&gt;智能界面允许 GPT-6 直接生成混合图表、可切换视图、可拖拽参数、可交互组件（如计算器、分账器）的响应&lt;/li&gt;&lt;li&gt;支持渐进式回答（流式思考），联网搜索任务的初始响应延迟相比 GPT-5.6 Instant 减少44%&lt;/li&gt;&lt;li&gt;从 2026年10月7日（付费）和10月8日（免费/Go）开始逐步向全球用户推出&lt;/li&gt;&lt;/ul&gt;&lt;h3&gt;来源 / Sources&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;&lt;a href="https://openai.com/news/company-announcements"&gt;OpenAI Newsroom: GPT-6 and Intelligent UI for everyone&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://finance.sina.com.cn/roll/2026-10-08/doc-iniunvxm3820053.shtml"&gt;新浪财经报道：ChatGPT全员免费上线GPT-6&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://www.163.com/dy/article/L8NIN2JO0511D3QS.html"&gt;网易报道：ChatGPT全员免费上线GPT-6&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</content:encoded>
     </item>
     <item>
       <title>Mistral发布万亿参数开源模型Mistral Large 4 (Le Chonk)，开放API预览并承诺月底开源权重</title>

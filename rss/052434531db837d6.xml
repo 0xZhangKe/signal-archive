@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-10-08T21:05:44+00:00</updated><author><name>Simon Willison</name></author><entry><title>Quoting Carson Gross</title><link href="https://simonwillison.net/2026/Oct/8/carson-gross/" rel="alternate"/><published>2026-10-08T21:05:44+00:00</published><updated>2026-10-08T21:05:44+00:00</updated><id>https://simonwillison.net/2026/Oct/8/carson-gross/</id><summary type="html">
+<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-10-08T23:34:28+00:00</updated><author><name>Simon Willison</name></author><entry><title>ttok 0.4</title><link href="https://simonwillison.net/2026/Oct/8/ttok/" rel="alternate"/><published>2026-10-08T23:34:28+00:00</published><updated>2026-10-08T23:34:28+00:00</updated><id>https://simonwillison.net/2026/Oct/8/ttok/</id><summary type="html">
+    
+        &lt;p&gt;&lt;strong&gt;Release:&lt;/strong&gt; &lt;a href="https://github.com/simonw/ttok/releases/tag/0.4"&gt;ttok 0.4&lt;/a&gt;&lt;/p&gt;
+        &lt;p&gt;&lt;code&gt;ttok&lt;/code&gt; is my CLI tool for counting tokens, using OpenAI's open source &lt;a href="https://github.com/openai/tiktoken"&gt;tiktoken&lt;/a&gt; library.&lt;/p&gt;
+&lt;p&gt;It hasn't been in updated in a couple of years, but I finally fixed a Click warning, updated CI, and added a &lt;code&gt;--list-models&lt;/code&gt; command to list available models.&lt;/p&gt;
+&lt;p&gt;It works with &lt;code&gt;uvx&lt;/code&gt;, so you can count tokens in anything like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;cat file.txt | uvx ttok
+&lt;/code&gt;&lt;/pre&gt;
+    
+    
+        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/projects"&gt;projects&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/openai"&gt;openai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/tokenization"&gt;tokenization&lt;/a&gt;&lt;/p&gt;
+    
+
+</summary><category term="projects"/><category term="ai"/><category term="openai"/><category term="generative-ai"/><category term="llms"/><category term="tokenization"/></entry><entry><title>Quoting Carson Gross</title><link href="https://simonwillison.net/2026/Oct/8/carson-gross/" rel="alternate"/><published>2026-10-08T21:05:44+00:00</published><updated>2026-10-08T21:05:44+00:00</updated><id>https://simonwillison.net/2026/Oct/8/carson-gross/</id><summary type="html">
     &lt;blockquote cite="https://htmx.org/essays/yes-and/"&gt;&lt;p&gt;Computer programming is, fundamentally, about two things:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Problem-solving using computers&lt;/li&gt;
@@ -430,13 +443,4 @@ New Sonnet model from Anthropic today. They say it "runs 30%+ faster, and costs 
 
 
 
-</summary><category term="ai"/><category term="generative-ai"/><category term="llms"/><category term="anthropic"/><category term="claude"/><category term="pelican-riding-a-bicycle"/><category term="llm-release"/></entry><entry><title>Quoting @joedaroo</title><link href="https://simonwillison.net/2026/Sep/28/joedaroo/" rel="alternate"/><published>2026-09-28T19:11:42+00:00</published><updated>2026-09-28T19:11:42+00:00</updated><id>https://simonwillison.net/2026/Sep/28/joedaroo/</id><summary type="html">
-    &lt;blockquote cite="https://twitter.com/joedaroo/status/2104335929293127851"&gt;&lt;p&gt;To say that we were surprised at the jump and suddenness of the capabilities of our models when it came to “cyber” or “swarming” or “message boards” or anything else related to the incidents is an understatement. Security posture takes time to develop. It’s not just about hardening the systems at play; you have to ingrain it in the culture of the company. The literal people themselves in your organization have to change and evolve with it. These jumps in capabilities were so fast and so sudden that they created an extremely difficult problem. [...]&lt;/p&gt;
-&lt;p&gt;So today my hope is that everyone around the world can look at their own organization and say: how can I deal with a surprise or a sudden jump in AI capability? Are my people, my systems, or my processes resilient to surprises? Do my teams know what to do when something goes wrong? Do I have the right incident response? The right comms and messaging? Do I have the right people ready to go when capabilities jump?&lt;/p&gt;&lt;/blockquote&gt;
-&lt;p class="cite"&gt;&amp;mdash; &lt;a href="https://twitter.com/joedaroo/status/2104335929293127851"&gt;@joedaroo&lt;/a&gt;, Agent Security at OpenAI, &lt;a href="https://twitter.com/rocketalignment/status/2104646956551422036"&gt;identity confirmed&lt;/a&gt; by The Information's Rocket Drew&lt;/p&gt;
-
-    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai-security-research"&gt;ai-security-research&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/openai"&gt;openai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;&lt;/p&gt;
-
-
-
-</summary><category term="generative-ai"/><category term="ai-security-research"/><category term="openai"/><category term="ai"/><category term="llms"/></entry></feed>
+</summary><category term="ai"/><category term="generative-ai"/><category term="llms"/><category term="anthropic"/><category term="claude"/><category term="pelican-riding-a-bicycle"/><category term="llm-release"/></entry></feed>
