@@ -34,6 +34,39 @@
       "detailPath": "articles/7432a70bfaa598ec82c06837.json"
     },
     {
+      "id": "4a1ee66033134dd1d127b6b0",
+      "title": "企业级实践：通过精细化模型选择与预算管理将 AI 开发成本降低65%",
+      "summary": "OpenAI 分享了一个企业客户 LegalOn Technologies 的成本优化实践。该公司通过建立细致的模型选择策略（根据任务在 Luna、Sol、Astra 之间切换）、实施预算管控和设立专门的AI治理团队，在保持开发速度的同时，将日均AI预估成本降低了约65%。此案例为开发者提供了一个可操作的企业级AI成本管控框架，强调了通过混合使用不同档位的模型来实现成本效益最大化的工程实践。",
+      "image": null,
+      "publishedAt": "2026-10-08T00:00:00Z",
+      "sourceId": "ai-engineering",
+      "sourceTitle": "AI 工程动态",
+      "link": "https://openai.com/zh-Hans-CN/index/legalon-halves-codex-costs",
+      "detailPath": "articles/4a1ee66033134dd1d127b6b0.json"
+    },
+    {
+      "id": "12b796c04ca1ba9dbc2ea33f",
+      "title": "深度分析：OpenAI 多智能体产品的技术本质与对开发者的启示",
+      "summary": "一篇发表于InfoQ的深度技术分析文章，探讨了OpenAI多智能体系统（Dots， Agents API）产品化背后的技术本质。文章引述OpenAI研究员Noam Brown的观点，强调近期突破的核心驱动力是基础模型能力的跃升以及通过多智能体实现的“测试时计算”并行化，而非智能体的规模效应本身。这对开发者的实际指导意义在于：构建AI系统时应优先投资于高质量的基座模型和高效的推理架构，而不是盲目追求智能体数量。",
+      "image": null,
+      "publishedAt": "2026-10-08T00:00:00Z",
+      "sourceId": "ai-engineering",
+      "sourceTitle": "AI 工程动态",
+      "link": "https://www.infoq.cn/article/3MSU3CcJuh0XjHDyjhXj",
+      "detailPath": "articles/12b796c04ca1ba9dbc2ea33f.json"
+    },
+    {
+      "id": "00b2ed144e41a65b5bfb3bae",
+      "title": "Anthropic 发布 Claude Haiku 5.5：成本大幅降低且代理能力显著提升",
+      "summary": "Anthropic 于2026年10月7日发布了 Claude 5.5 系列中最小的模型 Claude Haiku 5.5。该模型在保持高速度的同时，价格显著降低，并大幅提升了在电脑操作、终端编程等代理任务上的能力。它引入了家族模型的自适应思考（effort）控制，使其更适合作为高吞吐、低成本任务（如分类、检索、压缩）或大型代理系统的子代理来使用。此次发布也伴随着 Sonnet 5.5 缓存读取价格的减半。",
+      "image": null,
+      "publishedAt": "2026-10-07T00:00:00Z",
+      "sourceId": "ai-engineering",
+      "sourceTitle": "AI 工程动态",
+      "link": "https://www.datacamp.com/zh/blog/claude-haiku-5-5",
+      "detailPath": "articles/00b2ed144e41a65b5bfb3bae.json"
+    },
+    {
       "id": "69014946bfc6abf11c0932f9",
       "title": "Claude Haiku 5.5在AWS平台正式上线",
       "summary": "AWS宣布Claude Haiku 5.5已在其平台上正式可用，标志着该模型的广泛部署。开发者可以通过Amazon Bedrock获得AWS托管的数据驻留和治理功能，或通过Claude Platform on AWS获得Anthropic原生API体验。这使得企业用户能够更容易地将成本优化的AI模型集成到现有云基础设施和工作流中，特别是在需要大规模、低延迟处理的场景下。",
@@ -76,6 +109,17 @@
       "sourceTitle": "AI 工程动态",
       "link": "https://www.anthropic.com/claude-haiku-5-5",
       "detailPath": "articles/7962272402bf62432ca7c23e.json"
+    },
+    {
+      "id": "13d9424236a9b32592d93f3e",
+      "title": "OpenAI 向所有 ChatGPT 用户推出 GPT-6 和 Intelligent UI智能交互界面",
+      "summary": "OpenAI 于2026年10月7日正式宣布，为所有 ChatGPT 用户全面上线 GPT-6 模型和全新的 Intelligent UI（智能交互界面）。付费用户获得 GPT-6 Sol，免费和 Go 用户获得 GPT-6 Luna。新界面允许模型根据问题类型自动生成包含图表、按钮、表单和可交互组件的混合响应，而不仅仅是文本。同时，模型支持“边思考边回答”的渐进式输出，显著改善了交互体验。开发者需注意，该功能主要适用于模型的 Instant 至 Extra High 推理档位。",
+      "image": null,
+      "publishedAt": "2026-10-07T00:00:00Z",
+      "sourceId": "ai-engineering",
+      "sourceTitle": "AI 工程动态",
+      "link": "https://openai.com/news/company-announcements",
+      "detailPath": "articles/13d9424236a9b32592d93f3e.json"
     },
     {
       "id": "69645bcc43e32daa61a84ca3",
@@ -615,50 +659,6 @@
       "sourceTitle": "AI 工程动态",
       "link": "https://github.blog/changelog/2026-09-29-gpt-6-1-sol-in-github-copilot",
       "detailPath": "articles/c76c4ec6500a3d30d1e730b3.json"
-    },
-    {
-      "id": "b47854ed2d996fc5377685bc",
-      "title": "DeepSeek V3.2-Exp发布：长文本能力突破且API价格降低超50%",
-      "summary": "DeepSeek于2026年9月28日正式推出实验性模型DeepSeek-V3.2-Exp，引入革命性的DeepSeek Sparse Attention(DSA)技术，显著提升长文本处理效率，同时将API价格大幅下调超过50%。",
-      "image": null,
-      "publishedAt": "2026-09-28T20:59:00Z",
-      "sourceId": "ai-engineering",
-      "sourceTitle": "AI 工程动态",
-      "link": "https://news.qq.com/rain/a/20260928A0BRBC00?ptag=ima",
-      "detailPath": "articles/b47854ed2d996fc5377685bc.json"
-    },
-    {
-      "id": "13bc0e462e00845b59048fb0",
-      "title": "开源决策模型生态系统快速扩张，GitHub涌现大量集成工具",
-      "summary": "围绕Jev/Laya决策模型的生态系统在GitHub上快速成长，大量开源项目出现。这些项目提供多种语言SDK和工具集成，让开发者能够快速将决策能力集成到现有系统，减少对大模型的依赖，优化成本和延迟。",
-      "image": null,
-      "publishedAt": null,
-      "sourceId": "ai-engineering",
-      "sourceTitle": "AI 工程动态",
-      "link": "https://github.com/heyjunpenn/awesome-jev/blob/main/README.zh-Hans.md",
-      "detailPath": "articles/13bc0e462e00845b59048fb0.json"
-    },
-    {
-      "id": "5b0c6778778768b5b7e14f23",
-      "title": "Meta发布企业AI平台，提供完整Agent产品矩阵",
-      "summary": "Meta宣布启动企业AI平台Meta Enterprise Platform，提供完整的AI智能体和模型服务矩阵。该平台整合了Meta的AI技术栈，为企业开发者提供新的AI平台选择，预示着企业AI市场竞争加剧。",
-      "image": null,
-      "publishedAt": null,
-      "sourceId": "ai-engineering",
-      "sourceTitle": "AI 工程动态",
-      "link": "https://k.sina.com.cn/article_7857201856_1d45362c001908p4us.html?from=tech",
-      "detailPath": "articles/5b0c6778778768b5b7e14f23.json"
-    },
-    {
-      "id": "440f057032428672c2e34f9f",
-      "title": "阿里云百炼Token Plan升级，MCP服务新增三项能力",
-      "summary": "阿里云百炼本周更新包括Token Plan优化和MCP服务扩展。Token Plan新增权益并优化限额管理，MCP生态扩展增强Agent工具调用能力，为开发者提供更灵活的AI模型订阅方案和工具集成选择。",
-      "image": null,
-      "publishedAt": null,
-      "sourceId": "ai-engineering",
-      "sourceTitle": "AI 工程动态",
-      "link": "https://developer.aliyun.com/modelstudio",
-      "detailPath": "articles/440f057032428672c2e34f9f.json"
     }
   ]
 }
