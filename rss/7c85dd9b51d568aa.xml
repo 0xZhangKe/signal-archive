@@ -12,7 +12,7 @@
 	<atom:link href="https://www.cnx-software.com/feed/" rel="self" type="application/rss+xml" />
 	<link>https://www.cnx-software.com/</link>
 	<description>Reviews, tutorials and the latest news about embedded systems, IoT, open-source hardware, SBC&#039;s, microcontrollers, processors, and more</description>
-	<lastBuildDate>Fri, 09 Oct 2026 01:04:24 +0000</lastBuildDate>
+	<lastBuildDate>Fri, 09 Oct 2026 11:56:24 +0000</lastBuildDate>
 	<language>en-US</language>
 	<sy:updatePeriod>
 	hourly	</sy:updatePeriod>
@@ -28,6 +28,33 @@
 	<height>32</height>
 </image> 
 	<item>
+		<title>Open-source ESP32-C3 DNS ad blocker supports up to over 500,000 domains without PSRAM</title>
+		<link>https://www.cnx-software.com/2026/10/09/open-source-esp32-c3-dns-ad-blocker-supports-up-to-over-500000-domains-without-psram/</link>
+					<comments>https://www.cnx-software.com/2026/10/09/open-source-esp32-c3-dns-ad-blocker-supports-up-to-over-500000-domains-without-psram/#respond</comments>
+		
+		<dc:creator><![CDATA[Debashis Das]]></dc:creator>
+		<pubDate>Fri, 09 Oct 2026 12:00:44 +0000</pubDate>
+				<category><![CDATA[Espressif]]></category>
+		<category><![CDATA[Hardware]]></category>
+		<category><![CDATA[Arduino]]></category>
+		<category><![CDATA[esp32]]></category>
+		<category><![CDATA[IoT]]></category>
+		<category><![CDATA[open source]]></category>
+		<category><![CDATA[security]]></category>
+		<category><![CDATA[server]]></category>
+		<guid isPermaLink="false">https://www.cnx-software.com/?p=178083</guid>
+
+					<description><![CDATA[<div><img width="720" height="480" src="https://www.cnx-software.com/wp-content/uploads/2026/10/ESP32-C3-SuperMini-DNS-ad-blocker-in-a-3D-printed-enclosure-with-a-USB-A-adapter-for-direct-connection-to-a-router-720x480.jpg" class="attachment-medium size-medium wp-post-image" alt="ESP32 C3 SuperMini DNS ad blocker in a 3D printed enclosure with a USB A adapter for direct connection to a router" style="margin-bottom: 10px;" decoding="async" fetchpriority="high" srcset="https://www.cnx-software.com/wp-content/uploads/2026/10/ESP32-C3-SuperMini-DNS-ad-blocker-in-a-3D-printed-enclosure-with-a-USB-A-adapter-for-direct-connection-to-a-router-720x480.jpg 720w, https://www.cnx-software.com/wp-content/uploads/2026/10/ESP32-C3-SuperMini-DNS-ad-blocker-in-a-3D-printed-enclosure-with-a-USB-A-adapter-for-direct-connection-to-a-router-300x200.jpg 300w, https://www.cnx-software.com/wp-content/uploads/2026/10/ESP32-C3-SuperMini-DNS-ad-blocker-in-a-3D-printed-enclosure-with-a-USB-A-adapter-for-direct-connection-to-a-router-768x512.jpg 768w, https://www.cnx-software.com/wp-content/uploads/2026/10/ESP32-C3-SuperMini-DNS-ad-blocker-in-a-3D-printed-enclosure-with-a-USB-A-adapter-for-direct-connection-to-a-router.jpg 1200w" sizes="100vw" /></div>
+<p>Developed by Zed (M-Abozaid), the esp32-c3-adblock is an open-source, Pi-hole-style DNS ad blocker that runs on a $2 ESP32-C3 microcontroller board/module without requiring PSRAM. It blocks ads and tracking domains across devices on a home or small office network by filtering DNS requests. Instead of storing domain strings in RAM, the project stores them as sorted 40-bit FNV-1a hashes in flash memory and uses binary search to check DNS requests. When a UDP DNS query comes in, the C++ firmware extracts the domain, hashes it (including parent suffixes), and performs a binary search against the flash hash table. If the domain is on the blocklist, the ESP32-C3 returns 0.0.0.0 to block the request. Otherwise, it forwards the query to an upstream DNS server and returns the response to the client. This method fits over 140,000 domains into ~0.7 MB of flash memory while using only ~50 KB of RAM. A [...]</p>
+<p>The post <a href="https://www.cnx-software.com/2026/10/09/open-source-esp32-c3-dns-ad-blocker-supports-up-to-over-500000-domains-without-psram/">Open-source ESP32-C3 DNS ad blocker supports up to over 500,000 domains without PSRAM</a> appeared first on <a href="https://www.cnx-software.com">CNX Software - Embedded Systems News</a>.</p>
+]]></description>
+		
+					<wfw:commentRss>https://www.cnx-software.com/2026/10/09/open-source-esp32-c3-dns-ad-blocker-supports-up-to-over-500000-domains-without-psram/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
 		<title>Sipeed SLogic32U3 &#8211; A high-speed 10 Gbps USB 3.2 logic analyzer (Crowdfunding)</title>
 		<link>https://www.cnx-software.com/2026/10/09/sipeed-slogic32u3-high-speed-10-gbps-usb-3-2-logic-analyzer/</link>
 					<comments>https://www.cnx-software.com/2026/10/09/sipeed-slogic32u3-high-speed-10-gbps-usb-3-2-logic-analyzer/#comments</comments>
@@ -44,7 +71,7 @@
 		<category><![CDATA[sipeed]]></category>
 		<guid isPermaLink="false">https://www.cnx-software.com/?p=177367</guid>
 
-					<description><![CDATA[<div><img width="720" height="470" src="https://www.cnx-software.com/wp-content/uploads/2026/10/Sipeed-SLogic32U3-720x470.jpg" class="attachment-medium size-medium wp-post-image" alt="Sipeed SLogic32U3" style="margin-bottom: 10px;" decoding="async" fetchpriority="high" srcset="https://www.cnx-software.com/wp-content/uploads/2026/10/Sipeed-SLogic32U3-720x470.jpg 720w, https://www.cnx-software.com/wp-content/uploads/2026/10/Sipeed-SLogic32U3-1200x783.jpg 1200w, https://www.cnx-software.com/wp-content/uploads/2026/10/Sipeed-SLogic32U3-300x196.jpg 300w, https://www.cnx-software.com/wp-content/uploads/2026/10/Sipeed-SLogic32U3-768x501.jpg 768w, https://www.cnx-software.com/wp-content/uploads/2026/10/Sipeed-SLogic32U3.jpg 1207w" sizes="100vw" /></div>
+					<description><![CDATA[<div><img width="720" height="470" src="https://www.cnx-software.com/wp-content/uploads/2026/10/Sipeed-SLogic32U3-720x470.jpg" class="attachment-medium size-medium wp-post-image" alt="Sipeed SLogic32U3" style="margin-bottom: 10px;" decoding="async" srcset="https://www.cnx-software.com/wp-content/uploads/2026/10/Sipeed-SLogic32U3-720x470.jpg 720w, https://www.cnx-software.com/wp-content/uploads/2026/10/Sipeed-SLogic32U3-1200x783.jpg 1200w, https://www.cnx-software.com/wp-content/uploads/2026/10/Sipeed-SLogic32U3-300x196.jpg 300w, https://www.cnx-software.com/wp-content/uploads/2026/10/Sipeed-SLogic32U3-768x501.jpg 768w, https://www.cnx-software.com/wp-content/uploads/2026/10/Sipeed-SLogic32U3.jpg 1207w" sizes="100vw" /></div>
 <p>Sipeed has just launched what they claim is the world&#8217;s first 10 Gbps USB 3.2 logic analyzer. The SLogic32U3 is the successor to the SLogic16U3 3.2 Gbps logic analyzer launched in 2025. The SLogic32U3 USB-C logic analyzer supports up to 32 channels via four mini HDMI connectors, 350 MHz signal bandwidth, up to 1400 MS/s per channel with four channels, or 200 MS/s per channel with 32 channels, and is offered with an optional ADC module. SLogic32U3 specifications: FPGA – Not mentioned (potentially from GOWIN) Input channels – 32 digital channels via 4x mini HDMI ports, each with 8 channels Sample rates 1400MS/s @ 4 channels 800MS/s @ 8 channels 400MS/s @ 16 channels 200MS/s @ 32 channels Digital signal bandwidth – 350 MHz Stream FIFO buffer &#8211; 2 Gbit DDR3 Capture mode &#8211; Stream (real-time readback); depth limited by PC memory/disk Signal input voltage – 0–10 V Adjustable threshold [...]</p>
 <p>The post <a href="https://www.cnx-software.com/2026/10/09/sipeed-slogic32u3-high-speed-10-gbps-usb-3-2-logic-analyzer/">Sipeed SLogic32U3 &#8211; A high-speed 10 Gbps USB 3.2 logic analyzer (Crowdfunding)</a> appeared first on <a href="https://www.cnx-software.com">CNX Software - Embedded Systems News</a>.</p>
 ]]></description>
@@ -104,7 +131,7 @@
 ]]></description>
 		
 					<wfw:commentRss>https://www.cnx-software.com/2026/10/08/efinix-sapphire-rv64-soc-configurable-risc-v-soft-cores-with-ddr3-lpddr4x-and-hyperram-for-efinix-fpgas/feed/</wfw:commentRss>
-			<slash:comments>2</slash:comments>
+			<slash:comments>3</slash:comments>
 		
 		
 			</item>
@@ -926,35 +953,6 @@
 		
 					<wfw:commentRss>https://www.cnx-software.com/2026/09/23/soulart-station-a-markerless-full-body-motion-tracker-for-vr-and-vtubers/feed/</wfw:commentRss>
 			<slash:comments>2</slash:comments>
-		
-		
-			</item>
-		<item>
-		<title>Gearotons M17 &#8211; A low-cost NEMA-17 4-in-1 servomotor with driver, motion controller, and encoder</title>
-		<link>https://www.cnx-software.com/2026/09/22/gearotons-m17-a-low-cost-nema-17-4-in-1-servomotor-with-driver-motion-controller-and-encoder/</link>
-					<comments>https://www.cnx-software.com/2026/09/22/gearotons-m17-a-low-cost-nema-17-4-in-1-servomotor-with-driver-motion-controller-and-encoder/#comments</comments>
-		
-		<dc:creator><![CDATA[Jean-Luc Aufranc (CNXSoft)]]></dc:creator>
-		<pubDate>Tue, 22 Sep 2026 09:00:19 +0000</pubDate>
-				<category><![CDATA[Hardware]]></category>
-		<category><![CDATA[STMicro STM32]]></category>
-		<category><![CDATA[Video]]></category>
-		<category><![CDATA[Arduino]]></category>
-		<category><![CDATA[artificial intelligence (AI)]]></category>
-		<category><![CDATA[motor control]]></category>
-		<category><![CDATA[python]]></category>
-		<category><![CDATA[rs485]]></category>
-		<category><![CDATA[servo]]></category>
-		<category><![CDATA[stm32]]></category>
-		<guid isPermaLink="false">https://www.cnx-software.com/?p=177183</guid>
-
-					<description><![CDATA[<div><img width="720" height="684" src="https://www.cnx-software.com/wp-content/uploads/2026/09/Gearotons-M17-720x684.jpg" class="attachment-medium size-medium wp-post-image" alt="Gearotons M17" style="margin-bottom: 10px;" decoding="async" srcset="https://www.cnx-software.com/wp-content/uploads/2026/09/Gearotons-M17-720x684.jpg 720w, https://www.cnx-software.com/wp-content/uploads/2026/09/Gearotons-M17-1200x1140.jpg 1200w, https://www.cnx-software.com/wp-content/uploads/2026/09/Gearotons-M17-263x250.jpg 263w, https://www.cnx-software.com/wp-content/uploads/2026/09/Gearotons-M17-768x730.jpg 768w, https://www.cnx-software.com/wp-content/uploads/2026/09/Gearotons-M17.jpg 1500w" sizes="100vw" /></div>
-<p>Gearotons M17 open-source hardware servomotor integrates the four parts of a motion axis into one standard NEMA-17 body with no protrusions: the motor, the driver, the motion controller, and the encoder. This level of integration enables it to be low-cost ($20 and up) and easier to use. The user has nothing to source and match, nothing to wire between boards, and nothing to configure. Just connect power and one data cable, and you&#8217;re good to go. Gearotons M17 specifications: MCU &#8211; ST STM32G0 Arm Cortex-M0+ microcontroller Single device with motor, motor driver, motion control system, and encoder Motor control highlights High-precision closed-loop control with built-in encoder and PID control loop that runs at 32 kHz Higher power efficiency in closed-loop control vs. conventional stepper Up to 560 RPM Torque-to-weight ratio is the same as an equivalent stepper motor 64-bit unique ID and a one-byte alias per motor Four models M17‑60 [...]</p>
-<p>The post <a href="https://www.cnx-software.com/2026/09/22/gearotons-m17-a-low-cost-nema-17-4-in-1-servomotor-with-driver-motion-controller-and-encoder/">Gearotons M17 &#8211; A low-cost NEMA-17 4-in-1 servomotor with driver, motion controller, and encoder</a> appeared first on <a href="https://www.cnx-software.com">CNX Software - Embedded Systems News</a>.</p>
-]]></description>
-		
-					<wfw:commentRss>https://www.cnx-software.com/2026/09/22/gearotons-m17-a-low-cost-nema-17-4-in-1-servomotor-with-driver-motion-controller-and-encoder/feed/</wfw:commentRss>
-			<slash:comments>1</slash:comments>
 		
 		
 			</item>

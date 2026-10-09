@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-10-08T23:34:28+00:00</updated><author><name>Simon Willison</name></author><entry><title>ttok 0.4</title><link href="https://simonwillison.net/2026/Oct/8/ttok/" rel="alternate"/><published>2026-10-08T23:34:28+00:00</published><updated>2026-10-08T23:34:28+00:00</updated><id>https://simonwillison.net/2026/Oct/8/ttok/</id><summary type="html">
+<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-10-09T00:34:43+00:00</updated><author><name>Simon Willison</name></author><entry><title>ttok 1.0</title><link href="https://simonwillison.net/2026/Oct/9/ttok/" rel="alternate"/><published>2026-10-09T00:34:43+00:00</published><updated>2026-10-09T00:34:43+00:00</updated><id>https://simonwillison.net/2026/Oct/9/ttok/</id><summary type="html">
+    
+        &lt;p&gt;&lt;strong&gt;Release:&lt;/strong&gt; &lt;a href="https://github.com/simonw/ttok/releases/tag/1.0"&gt;ttok 1.0&lt;/a&gt;&lt;/p&gt;
+        &lt;p&gt;I released &lt;a href="https://simonwillison.net/2026/Oct/8/ttok/"&gt;ttok 0.4&lt;/a&gt;, ran &lt;code&gt;uv tool upgrade ttok&lt;/code&gt;, piped a file into the new version... and realized that it was defaulting to the GPT-4 tokenizer when it should very clearly default to GPT-5/GPT-6 instead!&lt;/p&gt;
+&lt;p&gt;I figured switching the default was a reasonable excuse to finally ship a 1.0.&lt;/p&gt;
+&lt;p&gt;OpenAI haven't actually confirmed that GPT-6 uses the same tokenizer as the GPT-5 family yet - there's an &lt;a href="https://github.com/openai/tiktoken/issues/608"&gt;angry issue about it&lt;/a&gt; - but I found &lt;a href="https://github.com/williamliu-ai/token-count-compare/commit/8d8a2178538bb37beb548fc37378135e4ff4b0c8"&gt;this commit&lt;/a&gt; by William Liu which reports on an experiment he ran confirming that the tokenizers are likely the same:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;All seven GPT models (5.5, 5.6 Sol/Terra/Luna, 6 Astra/Sol/Luna) report 44,794 tokens and match each other on every one of the 31 fixtures. GPT-6 introduces no input-count change on this corpus.&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    
+        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/projects"&gt;projects&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/openai"&gt;openai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/tokenization"&gt;tokenization&lt;/a&gt;&lt;/p&gt;
+    
+
+</summary><category term="projects"/><category term="ai"/><category term="openai"/><category term="generative-ai"/><category term="llms"/><category term="tokenization"/></entry><entry><title>ttok 0.4</title><link href="https://simonwillison.net/2026/Oct/8/ttok/" rel="alternate"/><published>2026-10-08T23:34:28+00:00</published><updated>2026-10-08T23:34:28+00:00</updated><id>https://simonwillison.net/2026/Oct/8/ttok/</id><summary type="html">
     
         &lt;p&gt;&lt;strong&gt;Release:&lt;/strong&gt; &lt;a href="https://github.com/simonw/ttok/releases/tag/0.4"&gt;ttok 0.4&lt;/a&gt;&lt;/p&gt;
         &lt;p&gt;&lt;code&gt;ttok&lt;/code&gt; is my CLI tool for counting tokens, using OpenAI's open source &lt;a href="https://github.com/openai/tiktoken"&gt;tiktoken&lt;/a&gt; library.&lt;/p&gt;
@@ -422,25 +436,4 @@ Position 3 (hundreds): 6 + 9 = 15, write 5, carry 1
         &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/llm"&gt;llm&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/anthropic"&gt;anthropic&lt;/a&gt;&lt;/p&gt;
     
 
-</summary><category term="llm"/><category term="anthropic"/></entry><entry><title>Claude Sonnet 5.5</title><link href="https://simonwillison.net/2026/Sep/28/claude-sonnet-5-5/" rel="alternate"/><published>2026-09-28T22:07:38+00:00</published><updated>2026-09-28T22:07:38+00:00</updated><id>https://simonwillison.net/2026/Sep/28/claude-sonnet-5-5/</id><summary type="html">
-    
-&lt;p&gt;&lt;strong&gt;&lt;a href="https://www.anthropic.com/claude-sonnet-5-5"&gt;Claude Sonnet 5.5&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
-New Sonnet model from Anthropic today. They say it "runs 30%+ faster, and costs up to 30% less for most work" - it's priced the same as Sonnet 5 but appears to beat it on every benchmark, and should be cheaper to run as well.&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://tools.simonwillison.net/markdown-svg-renderer?url=https%3A%2F%2Fgist.github.com%2Fsimonw%2F1d85a9be7f3ecce26e7f1569161a0d01"&gt;Here are some pelicans riding bicycles&lt;/a&gt;. Sonnet 5.5 suffered from &lt;a href="https://simonwillison.net/2026/Sep/22/opus-and-sol-and-luna/#claude-opus-5-5-max-over-thinks-to-the-point-of-breaking"&gt;the same bug as Opus 5.5&lt;/a&gt;: the "max" thinking effort pelican thought for 128,000 tokens (at a cost of $1.28) before running out of tokens and failing to produce an SVG.&lt;/p&gt;
-&lt;p&gt;Here's the pelican it gave me for thinking effort "xhigh", at a cost of 5.74 cents and taking 41 seconds:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="It's good- correct bicycle frame, legs either side of the frame, feet touching the pedals, chain in the right place, it is wearing a misshapen blue bicycle helmet though." src="https://static.simonwillison.net/static/2026/claude-sonnet-5.5-pelican-xhigh.webp" /&gt;&lt;/p&gt;
-&lt;p&gt;Sonnet 5.5 appears to be almost as good as Opus 5.5 on some coding tasks, including various &lt;a href="https://x.com/claudeai/status/2104674987164782598"&gt;viral 3D animation tricks&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;The most interesting thing about Sonnet 5.5 is that it's now the model used for the free tier on &lt;a href="https://claude.ai/"&gt;claude.ai&lt;/a&gt;. OpenAI's ChatGPT free tier uses Luna 5.6, which means Anthropic currently have a much more capable free offering.&lt;/p&gt;
-&lt;p&gt;I ran this prompt against that free tier:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;code&gt;build me an HTML page that renders a three-dimensional pelican riding a bicycle using WebGL&lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;And got back &lt;a href="https://static.simonwillison.net/static/2026/claude-sonnet-5.5-free-3d-pelican.html"&gt;this page&lt;/a&gt;, which is a solid effort.&lt;/p&gt;
-&lt;p&gt;Anthropic's announcement reiterates that Haiku 5.5 will be available "in the coming weeks". I really hope that one is price-competitive with GPT-6 Luna!
-
-
-    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/anthropic"&gt;anthropic&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/claude"&gt;claude&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/pelican-riding-a-bicycle"&gt;pelican-riding-a-bicycle&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llm-release"&gt;llm-release&lt;/a&gt;&lt;/p&gt;
-
-
-
-</summary><category term="ai"/><category term="generative-ai"/><category term="llms"/><category term="anthropic"/><category term="claude"/><category term="pelican-riding-a-bicycle"/><category term="llm-release"/></entry></feed>
+</summary><category term="llm"/><category term="anthropic"/></entry></feed>
