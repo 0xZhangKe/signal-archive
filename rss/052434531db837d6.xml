@@ -1,5 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-10-09T15:02:29+00:00</updated><author><name>Simon Willison</name></author><entry><title>Quoting Matthew Green</title><link href="https://simonwillison.net/2026/Oct/9/matthew-green/" rel="alternate"/><published>2026-10-09T15:02:29+00:00</published><updated>2026-10-09T15:02:29+00:00</updated><id>https://simonwillison.net/2026/Oct/9/matthew-green/</id><summary type="html">
+<feed xml:lang="en-us" xmlns="http://www.w3.org/2005/Atom"><title>Simon Willison's Weblog</title><link href="http://simonwillison.net/" rel="alternate"/><link href="http://simonwillison.net/atom/everything/" rel="self"/><id>http://simonwillison.net/</id><updated>2026-10-09T22:48:37+00:00</updated><author><name>Simon Willison</name></author><entry><title>Deno is joining Cloudflare</title><link href="https://simonwillison.net/2026/Oct/9/deno-is-joining-cloudflare/" rel="alternate"/><published>2026-10-09T22:48:37+00:00</published><updated>2026-10-09T22:48:37+00:00</updated><id>https://simonwillison.net/2026/Oct/9/deno-is-joining-cloudflare/</id><summary type="html">
+    
+&lt;p&gt;&lt;strong&gt;&lt;a href="https://deno.com/blog/cloudflare"&gt;Deno is joining Cloudflare&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+The Deno team released the first version of &lt;a href="https://github.com/denoland/celld"&gt;celld&lt;/a&gt; back in August - their open source implementation of the Durable Objects pattern from Cloudflare Workers.&lt;/p&gt;
+&lt;p&gt;Today, Cloudflare are acquiring Deno outright, with the goal of building on &lt;code&gt;celld&lt;/code&gt; to "make workerd self-hosting a first-class supported way to build and run apps using the Workers programming model" (see &lt;a href="https://blog.cloudflare.com/deno-joins-cloudflare/"&gt;the Cloudflare blog&lt;/a&gt;.)&lt;/p&gt;
+&lt;p&gt;The bad news is that Deno itself will not be maintained by Cloudflare beyond the next year:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;We will support the &lt;a href="https://github.com/denoland/deno"&gt;Deno runtime&lt;/a&gt; for another year with monthly releases containing bug fixes and security updates. After that year we will end our development of the Deno runtime. Deno will remain open source, and we welcome others who want to continue its development.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Deno (and Node.js) creator Ryan Dahl explained that decision in &lt;a href="https://news.ycombinator.com/item?id=50019911#50023277"&gt;a comment&lt;/a&gt; on Hacker News:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;It's a joint decision and I agree with it. I'm most invested in its success and have put the most work into it - and I no longer think it's where I can do the most important work. There are some good ideas in Deno and it's well engineered - but it ultimately is not solving big problems. It has been sucked into the gravity well of node compatibility, which forces it to behave exactly as Node does. Why reimplement Node? It works. Marginal performance or UX or security benefits are not enough.&lt;/p&gt;
+&lt;p&gt;I'm interested in building powerful new abstractions. celld has been working remarkably well, depending only on object storage for coordination and persistence. It is not just a slightly different API to interact with the file system or network - it's an entirely new model for server development.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;My favorite feature of Deno has long been the permissions system, where you can run a Deno script and specify exactly which files and folders it can read and write to, and which network hosts it can access.&lt;/p&gt;
+&lt;p&gt;Node.js &lt;a href="https://nodejs.org/api/permissions.html"&gt;has a similar permissions model&lt;/a&gt; these days, added &lt;a href="https://nodejs.org/en/blog/release/v20.0.0"&gt;in Node v20.0.0&lt;/a&gt; in April 2023 and declared stable &lt;a href="https://nodejs.org/en/blog/release/v22.13.0"&gt;in Node v22.13.0&lt;/a&gt; in January 2025. They don't yet support allow-listing specific network hosts though - networking is either on or off.
+
+    &lt;p&gt;&lt;small&gt;&lt;/small&gt;Via &lt;a href="https://news.ycombinator.com/item?id=50019911"&gt;Hacker News&lt;/a&gt;&lt;/small&gt;&lt;/p&gt;
+
+
+    &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/cloudfront"&gt;cloudfront&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/javascript"&gt;javascript&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/nodejs"&gt;nodejs&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/ryan-dahl"&gt;ryan-dahl&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/sandboxing"&gt;sandboxing&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/deno"&gt;deno&lt;/a&gt;&lt;/p&gt;
+
+
+
+</summary><category term="cloudfront"/><category term="javascript"/><category term="nodejs"/><category term="ryan-dahl"/><category term="sandboxing"/><category term="deno"/></entry><entry><title>Quoting Matthew Green</title><link href="https://simonwillison.net/2026/Oct/9/matthew-green/" rel="alternate"/><published>2026-10-09T15:02:29+00:00</published><updated>2026-10-09T15:02:29+00:00</updated><id>https://simonwillison.net/2026/Oct/9/matthew-green/</id><summary type="html">
     &lt;blockquote cite="https://twitter.com/matthew_d_green/status/2108552414978564418"&gt;&lt;p&gt;Everyone is very concerned about being respectable, so I’m going to be the goofball who raises worst-case possibilities. I think there is a 1% chance we live in Minicrypt, and a 15% chance we functionally lose confidence in our existing public-key encryption algorithms. [...]&lt;/p&gt;
 &lt;p&gt;The problem here is that the speed of AI producing surprises, and the speed of human beings replacing standards (even with the very best AI assistance) are just orders of magnitude different. You only recover from a surprise like this if you do the preparation in advance.&lt;/p&gt;&lt;/blockquote&gt;
 &lt;p class="cite"&gt;&amp;mdash; &lt;a href="https://twitter.com/matthew_d_green/status/2108552414978564418"&gt;Matthew Green&lt;/a&gt;, on Twitter. I looked it up and Minicrypt is Russell Impagliazzo’s &lt;a href="https://www.quantamagazine.org/which-computational-universe-do-we-live-in-20220418/"&gt;hypothetical world&lt;/a&gt; in which public-key encryption is impossible.&lt;/p&gt;
@@ -474,14 +498,4 @@ Position 3 (hundreds): 6 + 9 = 15, write 5, carry 1
         &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/ai"&gt;ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/openai"&gt;openai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/generative-ai"&gt;generative-ai&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/llms"&gt;llms&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/pelican-riding-a-bicycle"&gt;pelican-riding-a-bicycle&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/gpt"&gt;gpt&lt;/a&gt;&lt;/p&gt;
     
 
-</summary><category term="ai"/><category term="openai"/><category term="generative-ai"/><category term="llms"/><category term="pelican-riding-a-bicycle"/><category term="gpt"/></entry><entry><title>Photo Scrubber — local face blur &amp; metadata removal</title><link href="https://simonwillison.net/2026/Sep/29/photo-scrubber/" rel="alternate"/><published>2026-09-29T16:45:27+00:00</published><updated>2026-09-29T16:45:27+00:00</updated><id>https://simonwillison.net/2026/Sep/29/photo-scrubber/</id><summary type="html">
-    
-        &lt;p&gt;&lt;strong&gt;Tool:&lt;/strong&gt; &lt;a href="https://tools.simonwillison.net/photo-scrubber"&gt;Photo Scrubber — local face blur &amp;amp; metadata removal&lt;/a&gt;&lt;/p&gt;
-        &lt;p&gt;I took a photograph of some protesters, then thought about how I don't like sharing photographs of strangers with identifiable faces. I &lt;a href="https://github.com/simonw/tools/commit/aa733ecc3458d5703e3b40c84507ae362f5fb294"&gt;had GPT-6 Astra build&lt;/a&gt; this experimental tool that would identify faces and automatically blur them out.&lt;/p&gt;
-&lt;p&gt;It uses Google's &lt;a href="https://developers.google.com/edge/mediapipe/solutions/guide"&gt;MediaPipe&lt;/a&gt; C++ library, compiled to WebAssembly via &lt;a href="https://www.npmjs.com/package/@mediapipe/tasks-vision"&gt;@mediapipe/tasks-vision&lt;/a&gt;, plus the &lt;a href="https://sites.google.com/view/perception-cv4arvr/blazeface"&gt;BlazeFace&lt;/a&gt; face detection model.&lt;/p&gt;
-    
-    
-        &lt;p&gt;Tags: &lt;a href="https://simonwillison.net/tags/photography"&gt;photography&lt;/a&gt;, &lt;a href="https://simonwillison.net/tags/tools"&gt;tools&lt;/a&gt;&lt;/p&gt;
-    
-
-</summary><category term="photography"/><category term="tools"/></entry></feed>
+</summary><category term="ai"/><category term="openai"/><category term="generative-ai"/><category term="llms"/><category term="pelican-riding-a-bicycle"/><category term="gpt"/></entry></feed>
