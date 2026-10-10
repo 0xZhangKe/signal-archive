@@ -1,6 +1,28 @@
 {
   "items": [
     {
+      "id": "722283639e96f365f5a9c515",
+      "title": "跟另一個站長互相監控：Uptime Kuma 交叉託管,和 Trust Proxy 開了反而更危險",
+      "summary": "這篇記錄了作者跟另一位自架站長交叉監控的完整過程,並整理成一份可照做的教學。起點是自架服務的一個尷尬處境:監控自己的那台機器,自己掛了就沒人通知得了。解法是互相盯,但一開始兩人都卡在同一個錯誤前提上——以為要走 HTTPS 就得交換憑證。真正的答案是不用交換:對方把子網域 A 紀錄指向你的 IP,TLS 就在你這裡終結,Let's Encrypt 的 HTTP-01 驗證會直接打到你的 nginx,所以你自己就能簽那張憑證、還自動續簽;共享 wildcard 反而踩中私鑰暴露與手動續簽兩個雷。文中也整理了反代 Kuma 必備的 WebSocket 設定(少了 Upgrade 標頭,即時圖表會完全不動)、給後端加公開 /health 而非用 401 取巧、用 push 型監控盯 cron 腳本這種沉默故障,以及…",
+      "image": null,
+      "publishedAt": "2026-07-31T06:00:43Z",
+      "sourceId": "bd51496b8ec0ca1d",
+      "sourceTitle": "Koimsurai 手記",
+      "link": "https://koimsurai.com/blog/uptime-kuma-cross-monitoring",
+      "detailPath": "articles/722283639e96f365f5a9c515.json"
+    },
+    {
+      "id": "5f3c4368b741d2341c4a1097",
+      "title": "入蜀记 day433 大彩虹",
+      "summary": "「大彩虹。」",
+      "image": null,
+      "publishedAt": "2026-07-31T04:48:27Z",
+      "sourceId": "8e5dc5a8b5023a8e",
+      "sourceTitle": "折腾人生",
+      "link": "https://z.arlmy.me/posts/BBBPandINSW/INSW-ko/INSW_433/",
+      "detailPath": "articles/5f3c4368b741d2341c4a1097.json"
+    },
+    {
       "id": "916d616c491d264b181d1926",
       "title": "向云端｜西南自驾04 - 南昌",
       "summary": "",
@@ -637,28 +659,6 @@
       "sourceTitle": "折腾人生",
       "link": "https://z.arlmy.me/posts/MastodonArchives/2026/MastodonTootsArchives_20260725/",
       "detailPath": "articles/2f7f699ac0e8ddc0effb8a03.json"
-    },
-    {
-      "id": "4b3120ab8b5931cca0a17759",
-      "title": "幫大家畫地圖",
-      "summary": "我曾經在這個 blog 上呼籲過大家不要再貢獻資料給 Google 地圖，主要基於兩個原因：",
-      "image": "https://wiwi.blog/assets/images/quiz-837197c5ff73f425065aa86ee4dbdd29.png",
-      "publishedAt": "2026-07-26T00:00:00Z",
-      "sourceId": "7f36c3da1e6b5c71",
-      "sourceTitle": "Wiwi.Blog Blog",
-      "link": "https://wiwi.blog/blog/openstreetmap",
-      "detailPath": "articles/4b3120ab8b5931cca0a17759.json"
-    },
-    {
-      "id": "dd41162a9a444e32794d4ffa",
-      "title": "陪练琴",
-      "summary": "大约 四个月前 ，把阿瓜送到楼下的音乐教育机构开始学钢琴。三四十年前学钢琴是一种潮流，是刚刚走向小康的城市中产，从样板戏中走出、急需填补精神空白的一种方式。一栋楼里总有一两家每天传出叮叮当当的琴声——比起小提琴初学者的邻居，已经幸运多了。而现在学钢琴，和学游泳、学棒球、学轮滑一样，是一种兴趣的培养。当前物质生活相对富余，不必为吃饭发愁，各式各样的业余活动极大丰富。因而学钢琴不再是一种标志，而真真切切地落为个人艺术情操的培养罢了。 四个月学下来，虽然过程略有艰辛，更让阿瓜有所收获。音乐机构就在小区隔壁的商场里，下楼五分钟就可以走到。老师是一位刚生完宝宝的女性，和我年纪相仿。由于机构的学生几乎都是孩子，老师面对孩子除了弹琴技巧的指导外，还有一套成熟的沟通方法。阿瓜在家里鲤鱼打挺、泥鳅钻洞逃避练琴中的困难，在老师的…",
-      "image": null,
-      "publishedAt": "2026-07-26T00:00:00Z",
-      "sourceId": "fb2f05bc1af2b1bc",
-      "sourceTitle": "一盘家常菜",
-      "link": "http://life.wellwellsleep.com/post/life/2026-07-26-piano-tutor",
-      "detailPath": "articles/dd41162a9a444e32794d4ffa.json"
     }
   ]
 }
